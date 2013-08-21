@@ -1,5 +1,5 @@
 Package.describe({
-    summary: "A Javascript MVW Framework"
+    summary: "AngularJs for Meteor"
 });
 
 Package.on_use( function(api) {
