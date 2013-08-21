@@ -1,0 +1,9 @@
+{
+	"name": "ngMeteor",
+	"description": "AngularJs for Meteor",
+	"homepage": "https://github.com/loneleeandroo/ngMeteor",
+	"author": "loneleeandroo",
+	"git": "https://github.com/loneleeandroo/ngMeteor.git",
+	"version": "0.1.0",
+	"packages": {}
+}
