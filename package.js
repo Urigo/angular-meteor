@@ -1,9 +1,7 @@
 Package.describe({
-    summary: "AngularJs for Meteor"
+	summary: "AngularJs for Meteor"
 });
 
-Package.on_use( function(api) {
-    api.use('deps');
-
-    api.add_files(['angular.min.js','ngMeteor.js'], 'client');
+Package.on_use(function (api) {
+	api.add_files(['angular.min.js','ngMeteor.js'], 'client');
 });
