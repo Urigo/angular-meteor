@@ -83,11 +83,10 @@ myapp/
     application.js          # <- subscriptions, basic Meteor.startup code.
     index.html              # <- toplevel html
     index.js                # <- and its JS
-  lib/                      # <- any common code for client/server.
+  lib/                      # <- any common code for client/server. Note: files in lib folders are loaded first.
     environment.js          # <- general configuration
     methods.js              # <- Meteor.method definitions
     external/               # <- common code from someone else
-  ## Note that js files in lib folders are loaded before other js files.
   private/                  # <- static files, such as images, that are served directly.
   public/                   # <- static files, such as images, that are served directly.
   server/
