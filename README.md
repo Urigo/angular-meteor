@@ -62,7 +62,7 @@ For example:
     });
     
 ## Where should i put my files?
-There is no special structure required for ngMeteor besides the rules specified in the [Official Meteor Documentation](http://docs.meteor.com/#structuringyourapp). This is just an example structure to show you generally where files should go, so feel free to change the layout however you want:
+There is no special structure required for ngMeteor besides the rules specified in the [Official Meteor Documentation](http://docs.meteor.com/#structuringyourapp). This is just an example structure to show you where files should generally go, so feel free to change the layout however you want:
 
 ```bash
 myapp/  
