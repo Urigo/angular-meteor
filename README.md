@@ -1,20 +1,97 @@
 ngMeteor
 ========
+> The simplest way to use AngularJS with Meteor.
 
-### Usage
-To prevent conflicts with Handlebars, AngularJS data-bindings should look like this:
+## Quick start
+1. Install [Meteor](http://docs.meteor.com/#quickstart)
+<pre><code>curl https://install.meteor.com | /bin/sh</code></pre>
+2. Install [Meteorite](https://github.com/oortcloud/meteorite#installing-meteorite)
+<pre><code>npm install -g meteorite</code></pre>
+3. Install ngMeteor (Not ready yet, i haven't added the package to Atmosphere)
+<pre><code>mrt add ngMeteor</code></pre>
 
-    [[some data]]
-    
-instead of this:
+## New Data-Binding to avoid conflict
+To prevent conflicts with Handlebars, ngMeteor has changed the default AngularJS data bindings from <code>{{foo}}</code> to <code>[[foo]]</code>. For example:
 
-    {{some data}}
-    
+    <h2>Todo</h2>
+    <div ng-controller="TodoCtrl">
+      <span>[[remaining()]] of [[todos.length]] remaining</span>
+      [ <a href="" ng-click="archive()">archive</a> ]
+      <ul class="unstyled">
+        <li ng-repeat="todo in todos">
+          <input type="checkbox" ng-model="todo.done">
+          <span class="done-[[todo.done]]">[[todo.text]]</span>
+        </li>
+      </ul>
+      <form ng-submit="addTodo()">
+        <input type="text" ng-model="todoText"  size="30"
+               placeholder="add new todo here">
+        <input class="btn-primary" type="submit" value="add">
+      </form>
+    </div>
+
+## Adding controllers, directives, filters and services
+Do not use global scopes. Always use the main application module <code>ngMeteor</code>.
 For example:
 
-    <div>
-      <label>Name:</label>
-      <input type="text" ng-model="yourName" placeholder="Enter a name here">
-      <hr>
-      <h1>Hello [[yourName]]!</h1>
-    </div>
+    angular.module("ngMeteor").controller('TodoCtrl', function($scope) {
+      $scope.todos = [
+        {text:'learn angular', done:true},
+        {text:'build an angular app', done:false}];
+     
+      $scope.addTodo = function() {
+        $scope.todos.push({text:$scope.todoText, done:false});
+        $scope.todoText = '';
+      };
+     
+      $scope.remaining = function() {
+        var count = 0;
+        angular.forEach($scope.todos, function(todo) {
+          count += todo.done ? 0 : 1;
+        });
+        return count;
+      };
+     
+      $scope.archive = function() {
+        var oldTodos = $scope.todos;
+        $scope.todos = [];
+        angular.forEach(oldTodos, function(todo) {
+          if (!todo.done) $scope.todos.push(todo);
+        });
+      };
+    });
+    
+## Where should i put my files?
+There is no special structure required for ngMeteor besides the rules specified in the [Official Meteor Documentation](http://docs.meteor.com/#structuringyourapp). This is just an example structure to show you generally where files should go, so feel free to change the layout however you want:
+
+```bash
+myapp/  
+  collections/              # <- definitions of collections and methods on them (could be models/)
+  client/
+    controllers/
+    directives/
+    filters/
+    lib/                    # <- client specific libraries (also loaded first)
+      environment.js        # <- configuration of any client side packages
+      helpers/              # <- any helpers (handlebars or otherwise) that are used often in view files
+    services/
+    stylesheets/            # <- css / styl / less files
+    views/
+      partials/
+      <page>.html           # <- the templates specific to a single page
+      <page>.js             # <- and the JS to hook it up
+    application.js          # <- subscriptions, basic Meteor.startup code.
+    index.html              # <- toplevel html
+    index.js                # <- and its JS
+  lib/                      # <- any common code for client/server.
+    environment.js          # <- general configuration
+    methods.js              # <- Meteor.method definitions
+    external/               # <- common code from someone else
+  ## Note that js files in lib folders are loaded before other js files.
+  private/                  # <- static files, such as images, that are served directly.
+  public/                   # <- static files, such as images, that are served directly.
+  server/
+    publications.js         # <- Meteor.publish definitions
+    environment.js          # <- configuration of server side packages
+  tests/                    # <- unit test files (won't be loaded on client or server)
+```
