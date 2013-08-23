@@ -10,7 +10,8 @@ ngMeteor
 3. Install ngMeteor (Not ready yet, i haven't added the package to Atmosphere)
 <pre><code>mrt add ngMeteor</code></pre>
 
-## New Data-Binding to avoid conflict
+## Usage
+### New Data-Binding to avoid conflict
 To prevent conflicts with Handlebars, ngMeteor has changed the default AngularJS data bindings from <code>{{foo}}</code> to <code>[[foo]]</code>. For example:
 
     <h2>Todo</h2>
@@ -30,7 +31,7 @@ To prevent conflicts with Handlebars, ngMeteor has changed the default AngularJS
       </form>
     </div>
 
-## Adding controllers, directives, filters and services
+### Adding controllers, directives, filters and services
 Always use the exported package scope <code>ngMeteor</code> as your angular module.
 For example:
 
@@ -61,7 +62,7 @@ For example:
       };
     });
     
-## Where should i put my files?
+### Where should i put my files?
 There is no special structure required for ngMeteor besides the rules specified in the [Official Meteor Documentation](http://docs.meteor.com/#structuringyourapp). This is just an example structure to show you where files should generally go, so feel free to change the layout however you want:
 
 ```bash
