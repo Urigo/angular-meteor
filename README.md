@@ -31,10 +31,10 @@ To prevent conflicts with Handlebars, ngMeteor has changed the default AngularJS
     </div>
 
 ## Adding controllers, directives, filters and services
-Do not use global scopes. Always use the main application module <code>ngMeteor</code>.
+Always use the exported package scope <code>ngMeteor</code> as your angular module.
 For example:
 
-    angular.module("ngMeteor").controller('TodoCtrl', function($scope) {
+    ngMeteor.controller('TodoCtrl', function($scope) {
       $scope.todos = [
         {text:'learn angular', done:true},
         {text:'build an angular app', done:false}];
