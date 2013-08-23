@@ -32,7 +32,7 @@ To prevent conflicts with Handlebars, ngMeteor has changed the default AngularJS
     </div>
 
 ### Adding controllers, directives, filters and services
-Always use the exported package scope <code>ngMeteor</code> as your angular module.
+Use the exported package scope <code>ngMeteor</code> as your angular module.
 For example:
 
     ngMeteor.controller('TodoCtrl', function($scope) {
