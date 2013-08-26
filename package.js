@@ -7,5 +7,5 @@ Package.on_use(function (api) {
 	api.export('ngMeteor', 'client');
 	
 	// Load files for client
-	api.add_files(['bower-angular/angular.min.js','ngMeteor.js'], 'client');
+	api.add_files(['angular.js','ngMeteor.js'], 'client');
 });
