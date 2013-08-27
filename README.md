@@ -33,7 +33,7 @@ A template is defined using the template tags (this could be in a standalone .ht
 
 To invoke the template, you can use either AngularJS (must use single quotations within the double quotations):
     
-    <div ng-include="'partial.html'"></div>
+    <div ng-include=" 'partial' "></div>
 
 Or Handlebars:
 
