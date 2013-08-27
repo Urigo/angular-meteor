@@ -25,19 +25,25 @@ ngMeteor
 
 ## Usage
 ### Partial templates
-A template is defined using the template tags (this could be in a standalone .html or included in another .html)
+A template is defined using the template tags (this could be in a standalone .html or included in another .html).
 
-    <template name="partial">
+    <template name="myTemplate">
       <h1>Hello, World!</h1>
     </template>
 
-To invoke the template, you can use either AngularJS (must use single quotations within the double quotations):
+To invoke the template, you can use either an AngularJS directive:
     
-    <div ng-include=" 'partial' "></div>
+    <myTemplate></myTemplate>
+
+Or AngularJS ng-include (must use single quotations within the double quotations):
+
+    <div ng-include=" 'myTemplate' "></div>
 
 Or Handlebars:
 
-    {{> partial}}
+    {{> myTemplate}}
+
+Please note that the name of the template is case insensitive which means the name "myTemplate" and "mytemplate" will be treated the same.
 
 ### New Data-Binding to avoid conflict
 To prevent conflicts with Handlebars, ngMeteor has changed the default AngularJS data bindings from <code>{{foo}}</code> to <code>[[foo]]</code>. For example:
