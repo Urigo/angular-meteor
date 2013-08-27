@@ -98,6 +98,33 @@ Usage, currently as attribute only:
 You can change the default settings for the instance by adding a second attribute with options:
 
     ng-touch-options="{drag: false, transform: false}"
+
+This is a list of all the supported touch events:
+
+    hold
+    tap
+    doubletap
+    drag
+    dragstart
+    dragend
+    dragup
+    dragdown
+    dragleft
+    dragright
+    swipe
+    swipeup
+    swipedown
+    swipeleft
+    swiperight
+    transform
+    transformstart
+    transformend
+    rotate
+    pinch
+    pinchin
+    pinchout
+    touch
+    release
     
 ### Where should i put my files?
 There is no special structure required for ngMeteor besides the rules specified in the [Official Meteor Documentation](http://docs.meteor.com/#structuringyourapp). This is just an example structure to show you where files should generally go, so feel free to change the layout however you want:
