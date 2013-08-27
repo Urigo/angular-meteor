@@ -1,6 +1,6 @@
 ngMeteor
 ========
-> The simplest way to use AngularJS with Meteor.
+> The simplest no-conflict way to use AngularJS with Meteor.
 
 ## Quick start
 1. Install [Meteor](http://docs.meteor.com/#quickstart)
