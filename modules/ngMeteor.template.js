@@ -1,7 +1,7 @@
 var ngMeteorTemplate = angular.module('ngMeteor.template', []);
 
-ngMeteorTemplate.run(['$templateCache', '$rootScope', '$compile', 
-	function($templateCache, $rootScope, $compile) {
+ngMeteorTemplate.run(['$templateCache', 
+	function($templateCache) {
 		for(key in Template){
 			render = Template[key];
 			$templateCache.put(key + ".html", render() );
