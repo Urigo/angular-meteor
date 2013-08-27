@@ -128,9 +128,8 @@ myapp/
       partials/
       <page>.html           # <- the templates specific to a single page
       <page>.js             # <- and the JS to hook it up
-    application.js          # <- subscriptions, basic Meteor.startup code.
+    main.js                 # <- subscriptions, basic Meteor.startup code.
     index.html              # <- toplevel html
-    index.js                # <- and its JS
   lib/                      # <- any common code for client/server. Note: files in lib folders are loaded first.
     environment.js          # <- general configuration
     methods.js              # <- Meteor.method definitions
