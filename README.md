@@ -29,6 +29,29 @@ Although <code>ngMeteor</code> has no dependencies, here is a list of recommende
 
 
 ## Usage
+### Partial templates
+Use Meteor's templating function:
+
+  <head>
+    <title>ngMeteor</title>
+  </head>
+
+  <body>
+    {{> partial}}
+  </body>
+
+  <template name="partial">...</template>
+
+instead og ng-include:
+  
+  <head>
+    <title>ngMeteor</title>
+  </head>
+
+  <body>
+    <div ng-include="partial.html"></div>
+  </body>
+
 ### New Data-Binding to avoid conflict
 To prevent conflicts with Handlebars, ngMeteor has changed the default AngularJS data bindings from <code>{{foo}}</code> to <code>[[foo]]</code>. For example:
 
@@ -43,8 +66,7 @@ To prevent conflicts with Handlebars, ngMeteor has changed the default AngularJS
         </li>
       </ul>
       <form ng-submit="addTodo()">
-        <input type="text" ng-model="todoText"  size="30"
-               placeholder="add new todo here">
+        <input type="text" ng-model="todoText" size="30" placeholder="add new todo here">
         <input class="btn-primary" type="submit" value="add">
       </form>
     </div>
