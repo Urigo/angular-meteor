@@ -11,7 +11,7 @@ ngMeteor
 <pre><code>mrt add ngMeteor</code></pre>
 
 ## Recommended Packages
-Although ngMeteor has no dependencies, here is a list of recommended packages that work well with ngMeteor:
+Although <code>ngMeteor</code> has no dependencies, here is a list of recommended packages that work well with ngMeteor:
 * Coffeescript <pre><code>meteor add coffeescript</code></pre>
 * [Jade-Handlebars](https://github.com/SimonDegraeve/meteor-jade-handlebars) <pre><code>mrt add jade-handlebars</code></pre>
 * Stylus <pre><code>meteor add stylus</code></pre>
