@@ -10,6 +10,13 @@ ngMeteor
 3. Install ngMeteor (Not ready yet, i haven't added the package to Atmosphere)
 <pre><code>mrt add ngMeteor</code></pre>
 
+## Recommended Packages
+Although ngMeteor has no dependencies, here is a list of recommended packages that work well with ngMeteor:
+* Coffeescript <pre><code>meteor add coffeescript</code></pre>
+* [Jade-Handlebars](https://github.com/SimonDegraeve/meteor-jade-handlebars) <pre><code>mrt add jade-handlebars</code></pre>
+* Stylus <pre><code>meteor add stylus</code></pre>
+
+
 ## Usage
 ### New Data-Binding to avoid conflict
 To prevent conflicts with Handlebars, ngMeteor has changed the default AngularJS data bindings from <code>{{foo}}</code> to <code>[[foo]]</code>. For example:
