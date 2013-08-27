@@ -32,25 +32,22 @@ Although <code>ngMeteor</code> has no dependencies, here is a list of recommende
 ### Partial templates
 Use Meteor's templating function:
 
-  <head>
-    <title>ngMeteor</title>
-  </head>
-
-  <body>
-    {{> partial}}
-  </body>
-
-  <template name="partial">...</template>
+    <head>
+      <title>ngMeteor</title>
+    </head>
+    <body>
+      {{> partial}}
+    </body>
+    <template name="partial">...</template>
 
 instead og ng-include:
   
-  <head>
-    <title>ngMeteor</title>
-  </head>
-
-  <body>
-    <div ng-include="partial.html"></div>
-  </body>
+    <head>
+      <title>ngMeteor</title>
+    </head>
+    <body>
+      <div ng-include="partial.html"></div>
+    </body>
 
 ### New Data-Binding to avoid conflict
 To prevent conflicts with Handlebars, ngMeteor has changed the default AngularJS data bindings from <code>{{foo}}</code> to <code>[[foo]]</code>. For example:
