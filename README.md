@@ -89,7 +89,7 @@ For example:
       };
     });
     
-### Touch events via Hammerjs
+### Touch events via [Hammer.js](https://github.com/EightMedia/hammer.js/)
 Within an Angular.js application, allows you to specify custom behaviour on Hammer.js touch events.
 Usage, currently as attribute only:
 
@@ -125,6 +125,9 @@ This is a list of all the supported touch events:
     pinchout
     touch
     release
+
+### Nested views and routing via [ui-router](https://github.com/angular-ui/ui-router)
+
     
 ### Where should i put my files?
 There is no special structure required for ngMeteor besides the rules specified in the [Official Meteor Documentation](http://docs.meteor.com/#structuringyourapp). This is just an example structure to show you where files should generally go, so feel free to change the layout however you want:

@@ -11,5 +11,3 @@ ngMeteor.config(['$interpolateProvider', function ($interpolateProvider) {
 angular.element(document).ready(function() {
 	angular.bootstrap(document, ['ngMeteor']);
 });
-
-
