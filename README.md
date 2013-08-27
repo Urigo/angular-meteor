@@ -88,6 +88,9 @@ For example:
         });
       };
     });
+
+### Nested views and routing via [UI-Router](https://github.com/angular-ui/ui-router)
+To evolve the concept of an angularjs route into a more general concept of a state for managing complex application UI states.
     
 ### Touch events via [Hammer.js](https://github.com/EightMedia/hammer.js/)
 Within an Angular.js application, allows you to specify custom behaviour on Hammer.js touch events.
@@ -125,9 +128,6 @@ This is a list of all the supported touch events:
     pinchout
     touch
     release
-
-### Nested views and routing via [UI-Router](https://github.com/angular-ui/ui-router)
-To evolve the concept of an angularjs route into a more general concept of a state for managing complex application UI states.
     
 ### Where should i put my files?
 There is no special structure required for ngMeteor besides the rules specified in the [Official Meteor Documentation](http://docs.meteor.com/#structuringyourapp). This is just an example structure to show you where files should generally go, so feel free to change the layout however you want:
