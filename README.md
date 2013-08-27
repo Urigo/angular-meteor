@@ -40,7 +40,7 @@ Use Meteor's templating function:
     </body>
     <template name="partial">...</template>
 
-instead og ng-include:
+instead of ng-include:
   
     <head>
       <title>ngMeteor</title>
