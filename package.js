@@ -7,5 +7,10 @@ Package.on_use(function (api) {
 	api.export('ngMeteor', 'client');
 	
 	// Load files for client
-	api.add_files(['angular.js', 'hammer.js', 'angular-hammer.js','ngMeteor.js'], 'client');
+	api.add_files([
+		'lib/angular.js', 
+		'lib/hammer.js', 
+		'ngMeteor.touch.js',
+		'ngMeteor.js'
+	], 'client');
 });
