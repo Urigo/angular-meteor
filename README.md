@@ -90,7 +90,7 @@ For example:
     });
 
 ### Nested views and routing via [UI-Router](https://github.com/angular-ui/ui-router)
-To evolve the concept of an angularjs route into a more general concept of a state for managing complex application UI states.
+To evolve the concept of an AngularJS ngRoute into a more general concept of a State for managing complex application UI states.
     
 ### Touch events via [Hammer.js](https://github.com/EightMedia/hammer.js/)
 Within an Angular.js application, allows you to specify custom behaviour on Hammer.js touch events.
