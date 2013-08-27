@@ -11,7 +11,7 @@ ngMeteor
 <pre><code>mrt add ngMeteor</code></pre>
 
 ## Recommended Packages
-Although <code>ngMeteor</code> has no dependencies, here is a list of recommended packages that work well with ngMeteor:
+<code>ngMeteor</code> has no dependencies, however here is a list of recommended packages that work well with it:
 #### Coffeescript: 
 > Javascript dialect with fewer braces and semicolons 
 
