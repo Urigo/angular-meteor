@@ -13,11 +13,19 @@ ngMeteor
 ## Recommended Packages
 Although <code>ngMeteor</code> has no dependencies, here is a list of recommended packages that work well with ngMeteor:
 #### Coffeescript: 
-> Javascript dialect with fewer braces and semicolons <pre><code>meteor add coffeescript</code></pre>
+> Javascript dialect with fewer braces and semicolons 
+
+<pre><code>meteor add coffeescript</code></pre>
+
 #### [Jade-Handlebars](https://github.com/SimonDegraeve/meteor-jade-handlebars): 
-> rite your templates using Handlebars and Jade instead of HTML and Handlebars. <pre><code>mrt add jade-handlebars</code></pre>
+> Write your templates using Handlebars and Jade instead of HTML and Handlebars. 
+
+<pre><code>mrt add jade-handlebars</code></pre>
+
 #### Stylus: 
-> Expressive, dynamic, robust CSS. <pre><code>meteor add stylus</code></pre>
+> Expressive, dynamic, robust CSS. 
+
+<pre><code>meteor add stylus</code></pre>
 
 
 ## Usage
