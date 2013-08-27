@@ -9,8 +9,9 @@ Package.on_use(function (api) {
 	// Load files for client
 	api.add_files([
 		'lib/angular.js', 
-		'lib/hammer.js', 
-		'ngMeteor.touch.js',
+		'lib/hammer.js',
+		'modules/ngMeteor.template.js', 
+		'modules/ngMeteor.touch.js',
 		'ngMeteor.js'
 	], 'client');
 });
