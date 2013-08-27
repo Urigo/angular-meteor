@@ -126,8 +126,8 @@ This is a list of all the supported touch events:
     touch
     release
 
-### Nested views and routing via [ui-router](https://github.com/angular-ui/ui-router)
-
+### Nested views and routing via [UI-Router](https://github.com/angular-ui/ui-router)
+To evolve the concept of an angularjs route into a more general concept of a state for managing complex application UI states.
     
 ### Where should i put my files?
 There is no special structure required for ngMeteor besides the rules specified in the [Official Meteor Documentation](http://docs.meteor.com/#structuringyourapp). This is just an example structure to show you where files should generally go, so feel free to change the layout however you want:
