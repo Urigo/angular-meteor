@@ -25,17 +25,17 @@ Although <code>ngMeteor</code> has no dependencies, here is a list of recommende
 
 ## Usage
 ### Partial templates
-A template is defined using the template tags (this could be in a standalone .html or be a part of a .html)
+A template is defined using the template tags (this could be in a standalone .html or included in another .html)
 
     <template name="partial">
       <h1>Hello, World!</h1>
     </template>
 
-To invoke the template, you can use either AngularJS (You must use single quotations within the double quotations):
+To invoke the template, you can use either AngularJS (must use single quotations within the double quotations):
     
     <div ng-include="'partial.html'"></div>
 
-Or Handlebars
+Or Handlebars:
 
     {{> partial}}
 
