@@ -17,11 +17,6 @@ Although <code>ngMeteor</code> has no dependencies, here is a list of recommende
 
 <pre><code>meteor add coffeescript</code></pre>
 
-#### [Jade-Handlebars](https://github.com/SimonDegraeve/meteor-jade-handlebars): 
-> Write your templates using Handlebars and Jade instead of HTML and Handlebars. 
-
-<pre><code>mrt add jade-handlebars</code></pre>
-
 #### Stylus: 
 > Expressive, dynamic, robust CSS. 
 
@@ -30,24 +25,19 @@ Although <code>ngMeteor</code> has no dependencies, here is a list of recommende
 
 ## Usage
 ### Partial templates
-Use Meteor's templating function:
+A template is defined using the template tags (this could be in a standalone .html or be a part of a .html)
 
-    <head>
-      <title>ngMeteor</title>
-    </head>
-    <body>
-      {{> partial}}
-    </body>
-    <template name="partial">...</template>
+    <template name="partial">
+      <h1>Hello, World!</h1>
+    </template>
 
-instead of ng-include:
-  
-    <head>
-      <title>ngMeteor</title>
-    </head>
-    <body>
-      <div ng-include="partial.html"></div>
-    </body>
+To invoke the template, you can use either AngularJS (You must use single quotations within the double quotations):
+    
+    <div ng-include="'partial.html'"></div>
+
+Or Handlebars
+
+    {{> partial}}
 
 ### New Data-Binding to avoid conflict
 To prevent conflicts with Handlebars, ngMeteor has changed the default AngularJS data bindings from <code>{{foo}}</code> to <code>[[foo]]</code>. For example:
