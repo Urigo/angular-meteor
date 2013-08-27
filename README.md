@@ -1,6 +1,6 @@
 ngMeteor
 ========
-> The simplest no-conflict way to use AngularJS with Meteor and Meteorite Smart Packages.
+> The simplest no-conflict way to use AngularJS with Meteor, Meteorite and Atmosphere Smart Packages.
 
 ## Quick start
 1. Install [Meteor](http://docs.meteor.com/#quickstart)
