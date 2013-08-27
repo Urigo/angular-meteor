@@ -1,4 +1,5 @@
-var ngGestures = ['ngHold:hold',
+var ngMeteorTouch = angular.module('ngMeteor.touch', []),
+    ngGestures = ['ngHold:hold',
                   'ngTap:tap',
                   'ngDoubletap:doubletap',
                   'ngDrag:drag',
@@ -27,7 +28,7 @@ angular.forEach(ngGestures, function(name){
   var directive = name.split(':'),
   directiveName = directive[0],
   eventName = directive[1];
-  angular.module('ngMeteor.touch', []).directive(directiveName, ["$parse", function($parse) {
+  ngMeteorTouch.directive(directiveName, ["$parse", function($parse) {
     return {
       scope: true,
       link: function(scope, element, attr) {
