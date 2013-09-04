@@ -21,22 +21,24 @@ ngMeteorRouter.config(['$provide', '$routeProvider', '$locationProvider',
 
 		// Creates the index route. Loads the index view and loads the index controller if it exists.
 		var indexName = "index";
-		if($filter('filter')(controllers, indexName, true).length < 1){
-			$routeProvider.when('/', {templateUrl: indexName});
-		}else{
+		if($filter('filter')(controllers, indexName, true).length === 1){
 			$routeProvider.when('/', {templateUrl: indexName, controller: indexName});
+		}else{
+			$routeProvider.when('/', {templateUrl: indexName});
 		}
 
 		// Gets a list of all templates in Templates. Creates a route for all templates based on its name. 
 		// Loads the template view and the template controller if it exists based on its name.
-		for(name in Template){
-			var path = "/" + name.replace(/\./g, "/").replace(/\_/g,"/:");
-			if($filter('filter')(controllers, name, true).length < 1){
-				$routeProvider.when(path, {templateUrl: name});
-			}else{
-				$routeProvider.when(path, {templateUrl: name, controller: name});
+		angular.forEach(Template, function(render, name){
+			if(name !== "__define__"){
+				var path = "/" + name.replace(/\./g, "/").replace(/\_/g,"/:");
+				if($filter('filter')(controllers, name, true).length === 1){
+					$routeProvider.when(path, {templateUrl: name, controller: name});
+				}else{
+					$routeProvider.when(path, {templateUrl: name});
+				}
 			}
-		}
+		});
 
 		// Redirects to index if there were no matching routes.
 		$routeProvider.otherwise({ redirectTo: '/' });

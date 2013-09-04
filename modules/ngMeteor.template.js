@@ -2,9 +2,10 @@ var ngMeteorTemplate = angular.module('ngMeteor.template', []);
 
 ngMeteorTemplate.run(['$templateCache', 
 	function($templateCache) {
-		for(name in Template){
-			render = Template[name];
-			$templateCache.put( name, render() );
-		}
+		angular.forEach(Template, function(render, name){
+			if(name !== "__define__"){
+				$templateCache.put(name, render);
+			}
+		});
 	}
 ]);
