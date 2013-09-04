@@ -1,11 +1,13 @@
 // ngMeteor - Package Scope Variable
-ngMeteor = angular.module('ngMeteor', ['ngMeteor.touch','ngMeteor.template']);
+ngMeteor = angular.module('ngMeteor', ['ngMeteor.touch','ngMeteor.template','ngMeteor.router']);
 
 // Change the data-bindings from {{foo}} to [[foo]]
-ngMeteor.config(['$interpolateProvider', function ($interpolateProvider) {
-	$interpolateProvider.startSymbol('[[');
-	$interpolateProvider.endSymbol(']]');
-}]);
+ngMeteor.config(['$interpolateProvider', 
+	function ($interpolateProvider) {
+		$interpolateProvider.startSymbol('[[');
+		$interpolateProvider.endSymbol(']]');
+	}
+]);
 
 // Manual initilisation of the ngMeteor module
 angular.element(document).ready(function() {
