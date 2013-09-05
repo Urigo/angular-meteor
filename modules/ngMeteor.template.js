@@ -9,3 +9,19 @@ ngMeteorTemplate.run(['$templateCache',
 		});
 	}
 ]);
+
+ngMeteorTemplate.directive('ngTemplate', ['$http', '$templateCache', '$compile',
+	function($http, $templateCache, $compile) {
+		return {
+			restrict: 'A',
+			scope: true,
+			link: function(scope, element, attributes) {
+	            $http.get(attributes.ngTemplate, {cache: $templateCache})
+					.success(function(template){
+						element.html(template);
+						element.replaceWith($compile(element.html())(scope));
+					});
+	        }
+		};
+	}
+]);
