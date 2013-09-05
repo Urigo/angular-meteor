@@ -101,7 +101,7 @@ Routes will automaticlly be created based on a template's name. The route will l
 | /page/post/:edit/:user            | page.post_edit_user            | edit, user   |
 | /page/post/:edit/:user/attachment | page.post_edit_user.attachment | edit, user   |
 
-For example, if I wanted a template to show when a user goes to <code>/post/:postId/edit</code>, then my html would look like this:
+For example, if I wanted a template to show when a user goes to <code>/post/:postId/edit</code>, then my HTML would look like this:
 
     <head>
       <title>ngMeteor</title>
@@ -116,7 +116,7 @@ For example, if I wanted a template to show when a user goes to <code>/post/:pos
       <h1>Your post id is [[postId]]</h1>
     </template>
 
-and controller would look like this:
+and my controller would look like this:
 
     ngMeteor.controller('post_postId.edit', function($scope, $routeParams) {
       $scope.postId = $routeParams.postId;
