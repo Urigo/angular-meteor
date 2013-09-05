@@ -73,7 +73,7 @@ It is best practice to not use globally defined controllers like they do in the 
       };
     });
 
-### Creating template views
+### Creating and inserting template views
 A template is defined using the template tags (this could be in a standalone file or included in another file).
 
     <template name="foo">
