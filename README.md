@@ -88,7 +88,7 @@ You can also add in a controller to load as well:
 
     <div ng-template="foo" ng-controller="fooCtrl"></div>
 
-Alternatively, you can use either AngularJS ng-include (must use single quotations within the double quotations):
+Alternatively, you could also use either ng-include (must use single quotations within the double quotations):
 
     <div ng-include=" 'foo' "></div>
 
