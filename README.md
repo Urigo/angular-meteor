@@ -24,21 +24,6 @@ ngMeteor
 
 
 ## Usage
-### Partial templates
-A template is defined using the template tags (this could be in a standalone .html or included in another .html).
-
-    <template name="foo">
-      <h1>Hello, World!</h1>
-    </template>
-
-To invoke the template, you can use either AngularJS ng-include (must use single quotations within the double quotations):
-
-    <div ng-include=" 'foo' "></div>
-
-Or Handlebars:
-
-    {{> foo}}
-
 ### New Data-Binding to avoid conflict
 To prevent conflicts with Handlebars, ngMeteor has changed the default AngularJS data bindings from <code>{{foo}}</code> to <code>[[foo]]</code>. For example:
 
@@ -89,8 +74,56 @@ For example:
       };
     });
 
-### Nested views and routing via [UI-Router](https://github.com/angular-ui/ui-router)
-To evolve the concept of an AngularJS ngRoute into a more general concept of a State for managing complex application UI states.
+### Templates
+A template is defined using the template tags (this could be in a standalone .html or included in another .html).
+
+    <template name="foo">
+      <h1>Hello, World!</h1>
+    </template>
+
+To invoke the template, you can use either AngularJS ng-include (must use single quotations within the double quotations):
+
+    <div ng-include=" 'foo' "></div>
+
+Or Handlebars:
+
+    {{> foo}}
+
+### Dynamic routing
+Routes will automaticlly be created based on a template's name. The route will load that template and also a controller with the same name. Based on the URL, this is how you should name your templates:
+
+| URL                               | Template/Controller name       | $routeParams |
+| --------------------------------- | ------------------------------ | ------------ |
+| /                                 | index                          |              |
+| /page                             | page                           |              |
+| /page/post                        | page.post                      |              |
+| /page/post/:edit                  | page.post_edit                 | edit         |
+| /page/post/:edit/:user            | page.post_edit_user            | edit, user   |
+| /page/post/:edit/:user/attachment | page.post_edit_user.attachment | edit, user   |
+
+For example, if I wanted a template to show when a a user goes to http://mydomain.com/post/:postId/edit, then I would do this:
+
+    <head>
+      <title>ngMeteor</title>
+    </head>
+
+    <body>
+      <div ng-view></div>
+    </body>
+
+    <!--This could be in a separate file. The file name can be anything.-->
+    <template name="post_postId.edit">
+      <h1>Your post id is [[postId]]</h1>
+    </template>
+
+My controller would be this:
+
+    ngMeteor.controller('post_postId.edit', function($scope, $routeParams) {
+      $scope.postId = $routeParams.postId;
+    });
+
+### Nested Views
+Currently in progress. I am considering using ui-router or angular-segment.
     
 ### Touch events via [Hammer.js](https://github.com/EightMedia/hammer.js/)
 Within an Angular.js application, allows you to specify custom behaviour on Hammer.js touch events.

@@ -9,8 +9,8 @@ ngMeteorRouter.config(['$provide', '$routeProvider', '$locationProvider',
 	    // Enables html5 push state
 	    $locationProvider.html5Mode(true);
 	}
-]).run(['$routeProvider', '$templateCache', '$filter',
-	function($routeProvider, $templateCache, $filter){
+]).run(['$routeProvider', '$filter', '$templateCache',
+	function($routeProvider, $filter, $templateCache){
 		// Gets a list of all controllers registered under $controllerProvider in the ngMeteor module.
 		var controllers = [];
 		angular.forEach(ngMeteor._invokeQueue, function(value, key){
