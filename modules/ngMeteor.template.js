@@ -20,6 +20,8 @@ ngMeteorTemplate.directive('ngTemplate', ['$templateCache', '$compile',
 				if(angular.isDefined(template)){
 					element.html(template);
 					element.replaceWith($compile(element.html())(scope));
+				} else{
+					console.error("ngMeteor: There is no template with the name '" + attributes.ngTemplate + "'");
 				}
 	        }
 		};
