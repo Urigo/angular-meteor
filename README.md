@@ -44,8 +44,7 @@ To prevent conflicts with Handlebars, ngMeteor has changed the default AngularJS
     </div>
 
 ### Adding controllers, directives, filters and services
-Use the exported package scope <code>ngMeteor</code> as your angular module.
-For example:
+Use the exported package scope <code>ngMeteor</code> as your angular module. For example:
 
     ngMeteor.controller('TodoCtrl', function($scope) {
       $scope.todos = [
@@ -73,6 +72,8 @@ For example:
         });
       };
     });
+
+It is best practice to not use globally defined controllers like they do in the AngularJS demos. 
 
 ### Templates
 A template is defined using the template tags (this could be in a standalone file or included in another file).
