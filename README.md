@@ -90,7 +90,7 @@ Or Handlebars:
     {{> foo}}
 
 ### Dynamic routing
-Routes will automaticlly be created based on a template's name. The route will load that template and also a controller with the same name if it exists. Based on the URL, this is how you should name your templates:
+Routes will automaticlly be created based on a template's name. The route will load that template and conditionally load a controller with the same name if it exists. Based on the URL, this is how you should name your templates:
 
 | URL                               | Template / Controller name     | $routeParams |
 | :-------------------------------- | :----------------------------- | :----------- |
