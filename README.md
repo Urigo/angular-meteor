@@ -75,7 +75,7 @@ For example:
     });
 
 ### Templates
-A template is defined using the template tags (this could be in a standalone .html or included in another .html).
+A template is defined using the template tags (this could be in a standalone file or included in another file).
 
     <template name="foo">
       <h1>Hello, World!</h1>
@@ -90,10 +90,10 @@ Or Handlebars:
     {{> foo}}
 
 ### Dynamic routing
-Routes will automaticlly be created based on a template's name. The route will load that template and also a controller with the same name. Based on the URL, this is how you should name your templates:
+Routes will automaticlly be created based on a template's name. The route will load that template and also a controller with the same name if it exists. Based on the URL, this is how you should name your templates:
 
-| URL                               | Template/Controller name       | $routeParams |
-| --------------------------------- | ------------------------------ | ------------ |
+| URL                               | Template / Controller name     | $routeParams |
+| :-------------------------------- | :----------------------------- | :----------- |
 | /                                 | index                          |              |
 | /page                             | page                           |              |
 | /page/post                        | page.post                      |              |
@@ -101,7 +101,7 @@ Routes will automaticlly be created based on a template's name. The route will l
 | /page/post/:edit/:user            | page.post_edit_user            | edit, user   |
 | /page/post/:edit/:user/attachment | page.post_edit_user.attachment | edit, user   |
 
-For example, if I wanted a template to show when a a user goes to http://mydomain.com/post/:postId/edit, then I would do this:
+For example, if I wanted a template to show when a user goes to <code>/post/:postId/edit</code>, then my html would look like this:
 
     <head>
       <title>ngMeteor</title>
@@ -116,7 +116,7 @@ For example, if I wanted a template to show when a a user goes to http://mydomai
       <h1>Your post id is [[postId]]</h1>
     </template>
 
-My controller would be this:
+and controller would look like this:
 
     ngMeteor.controller('post_postId.edit', function($scope, $routeParams) {
       $scope.postId = $routeParams.postId;
