@@ -13,10 +13,11 @@ ngMeteorTemplate.run(['$templateCache',
 ngMeteorTemplate.directive('ngTemplate', ['$templateCache', '$compile',
 	function($templateCache, $compile) {
 		return {
-			restrict: 'A',
+			restrict: 'AE',
 			scope: true,
 			link: function(scope, element, attributes) {
-				template = $templateCache.get(attributes.ngTemplate);
+				var	name = attributes.ngTemplate || attributes.name,
+					template = $templateCache.get(name);
 				if(angular.isDefined(template)){
 					element.html(template);
 					element.replaceWith($compile(element.html())(scope));

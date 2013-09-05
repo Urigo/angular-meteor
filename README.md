@@ -80,17 +80,23 @@ A template is defined using the template tags (this could be in a standalone fil
       <h1>Hello, World!</h1>
     </template>
 
-A template created this way will be added to the $templateCache of the <code>ngmeteor</code> angular module. To invoke the template, you can use ng-template:
+A template created this way will be added to the $templateCache of the <code>ngmeteor</code> angular module. To invoke the template, you can use ng-template. This is the recommended way to use ng-template for browser compatability: 
 
-    <div ng-template="foo"></div>
+    <ANY ng-template="foo"></ANY>
 
-You can also add in a controller to load as well:
+    <!--Add the ng-controller attribute if you want to load a controller at the same time.-->    
+    <ANY ng-template="foo" ng-controller="fooCtrl"></ANY>
 
-    <div ng-template="foo" ng-controller="fooCtrl"></div>
+It is also possible to use ng-template like this but you will need to be aware of [IE compatability](http://docs.angularjs.org/guide/ie):
+
+    <ng-template name="foo"></ng-template>
+
+    <!--Add the ng-controller attribute if you want to load a controller at the same time.-->    
+    <ng-template name="foo" ng-controller="fooCtrl"></ng-template>
 
 Alternatively, you could also use either ng-include (must use single quotations within the double quotations):
 
-    <div ng-include=" 'foo' "></div>
+    <ANY ng-include=" 'foo' "></ANY>
 
 Or Handlebars:
 
