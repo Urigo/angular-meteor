@@ -12,6 +12,7 @@ Package.on_use(function (api) {
 		'lib/angular-route.js', 
 		'lib/hammer.js',
 		'modules/ngMeteor.touch.js',
+		'modules/ngMeteor.collections.js',
 		'modules/ngMeteor.template.js', 
 		'modules/ngMeteor.router.js',
 		'ngMeteor.js'
