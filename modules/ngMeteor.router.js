@@ -1,7 +1,7 @@
 var ngMeteorRouter = angular.module('ngMeteor.router', ['ngRoute']);
 
 ngMeteorRouter.config(['$provide', '$routeProvider', '$locationProvider',
-	function($provide, $routeProvider, $locationProvider, $controllerProvider) {
+	function($provide, $routeProvider, $locationProvider) {
 		// Make the $routeProvider available at run.
 	    $provide.factory('$routeProvider', function () {
 	        return $routeProvider;
