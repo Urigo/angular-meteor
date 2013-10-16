@@ -20,7 +20,7 @@ ngMeteorCollections.factory('$collection', function($window, $rootScope){
 						if(!data._id){
 							collection.insert(data);
 						}else{
-							collection.update(data._id);
+							collection.update(data._id, data);
 						}
 					}
 					Deps.flush();
