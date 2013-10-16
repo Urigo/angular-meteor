@@ -240,7 +240,7 @@ myapp/
       <page>.js         # <- and the JS to hook it up
     main.js             # <- subscriptions, basic Meteor.startup code.
     index.html          # <- toplevel html
-  lib/                  # <- any common code for client/server. Files in lib folders are loaded first.
+  lib/                  # <- any common code for client/server. These files are loaded first.
     environment.js      # <- general configuration
     methods.js          # <- Meteor.method definitions
     external/           # <- common code from someone else
