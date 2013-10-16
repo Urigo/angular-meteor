@@ -17,7 +17,11 @@ ngMeteorCollections.factory('$collection', function($window, $rootScope){
 					if(!data){
 						console.error("Cannot add null");
 					} else{
-						collection.insert(data);
+						if(!data._id){
+							collection.insert(data);
+						}else{
+							collection.update(data._id);
+						}
 					}
 					Deps.flush();
 				},
