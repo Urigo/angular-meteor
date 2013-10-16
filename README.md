@@ -224,30 +224,30 @@ There is no special structure required for ngMeteor besides the rules specified 
 
 ```bash
 myapp/  
-  collections/              # <- definitions of collections and methods on them (could be models/)
+  collections/          # <- definitions of collections and methods on them (could be models/)
   client/
     controllers/
     directives/
     filters/
-    lib/                    # <- client specific libraries (also loaded first)
-      environment.js        # <- configuration of any client side packages
-      helpers/              # <- any helpers (handlebars or otherwise) that are used often in view files
+    lib/                # <- client specific libraries (also loaded first)
+      environment.js    # <- configuration of any client side packages
+      helpers/          # <- any helpers (handlebars or otherwise) that are used often in view files
     services/
-    stylesheets/            # <- css / styl / less files
+    stylesheets/        # <- css / styl / less files
     views/
       partials/
-      <page>.html           # <- the templates specific to a single page
-      <page>.js             # <- and the JS to hook it up
-    main.js                 # <- subscriptions, basic Meteor.startup code.
-    index.html              # <- toplevel html
-  lib/                      # <- any common code for client/server. Note: files in lib folders are loaded first.
-    environment.js          # <- general configuration
-    methods.js              # <- Meteor.method definitions
-    external/               # <- common code from someone else
-  private/                  # <- static files, such as images, that are served directly.
-  public/                   # <- static files, such as images, that are served directly.
+      <page>.html       # <- the templates specific to a single page
+      <page>.js         # <- and the JS to hook it up
+    main.js             # <- subscriptions, basic Meteor.startup code.
+    index.html          # <- toplevel html
+  lib/                  # <- any common code for client/server. Note: files in lib folders are loaded first.
+    environment.js      # <- general configuration
+    methods.js          # <- Meteor.method definitions
+    external/           # <- common code from someone else
+  private/              # <- static files, such as images, that are served directly.
+  public/               # <- static files, such as images, that are served directly.
   server/
-    publications.js         # <- Meteor.publish definitions
-    environment.js          # <- configuration of server side packages
-  tests/                    # <- unit test files (won't be loaded on client or server)
+    publications.js     # <- Meteor.publish definitions
+    environment.js      # <- configuration of server side packages
+  tests/                # <- unit test files (won't be loaded on client or server)
 ```
