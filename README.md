@@ -94,7 +94,6 @@ Remember that you must first publish the collection from the server to the clien
 It is best practice to not use globally defined controllers like they do in the AngularJS demos. Alternatively, always use the exported package scope <code>ngMeteor</code> as your angular module to register your controller with $controllerProvider. For example:
 
     ngMeteor.controller('TodoCtrl', function($scope, $collection) {
-
       $collection("todos", $scope);
      
       $scope.addTodo = function() {
