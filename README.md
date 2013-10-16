@@ -73,6 +73,10 @@ and it would also work for things like ng-repeat:
       </li>
     </ul>
 
+If you want a model to be accessible across controllers, so that changes made to the model in one controller are reflected immediately in a different controller, you could use the $rootScope:
+
+    $collection("todos", $rootScope)
+
 Furthermore, AngularJS models defined using the <code>$collection</code> service will have access to all the methods available to a native AngularJS model with the addition of the following methods, which allows you to persist changes you have made in the AngularJS model to the Meteor collection:
 
     $scope.todos.add(data)
