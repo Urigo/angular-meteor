@@ -14,13 +14,23 @@ ngMeteorCollections.factory('$collection', function($window, $rootScope){
 			});
 			angular.extend(scope[name].__proto__, {
 				add: function(data){
+					data = angular.copy(data);
+					upsert = function(item){
+						if(!item._id){
+							collection.insert(item);
+						}else{
+							collection.update(item._id, item);
+						}
+					}
 					if(!data){
 						console.error("Cannot add null");
 					} else{
-						if(!data._id){
-							collection.insert(data);
+						if(angular.isArray(data)){
+							angular.forEach(data, function(value, key){
+								upsert(value);
+							});
 						}else{
-							collection.update(data._id, data);
+							upsert(data);
 						}
 					}
 					Deps.flush();
@@ -29,7 +39,17 @@ ngMeteorCollections.factory('$collection', function($window, $rootScope){
 					if(!data){
 						console.error("Cannot delete null");
 					} else{
-						collection.remove(data._id);
+						if(!data._id){
+							console.error("Cannot delete an object without an _id")
+						} else{
+							if(angular.isArray(data)){
+								angular.forEach(data, function(item, key){
+									collection.remove(item._id);
+								});
+							}else{
+								collection.remove(data._id);
+							}
+						}
 					}
 					Deps.flush();
 				}
