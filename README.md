@@ -43,16 +43,58 @@ To prevent conflicts with Handlebars, ngMeteor has changed the default AngularJS
       </form>
     </div>
 
+### Using Meteor Collections
+When adding Meteor collections to a $scope, you can preserve the reactivity of the collection by using the <code>$collection</code> service like this:
+
+    $collection(name, scope, selector, options)
+
+Where the <code>name</code> argument refers to the name of the Meteor Collection, <code>scope</code> refers to the $scope you would like to add the collection to, and the arguments <code>selector</code> and <code>options</code> are the same as they are for [Meteor.Collection.find](http://docs.meteor.com/#find). For example, if I have a Meteor collection called "todos", which I want to add into the scope of my controller, $scope, then I would do this:
+
+    $collection("todos", $scope)
+
+which would create a model called "todos" in $scope, and I would refer to it in my controller using:
+
+    $scope.todos
+
+I would also be able to refer to it in my html using:
+
+    [[todos]]
+
+and use it as if it was an ordinary AngularJS model:
+
+    [[todos.length]]
+
+and it would also work for things like ng-repeat:
+
+    <ul class="unstyled">
+      <li ng-repeat="todo in todos">
+        <input type="checkbox" ng-model="todo.done">
+        <span class="done-[[todo.done]]">[[todo.text]]</span>
+      </li>
+    </ul>
+
+Furthermore, AngularJS models defined using the <code>$collection</code> service will have access to all the methods available to a native AngularJS model with the addition of the following methods, which allows you to persist changes you have made in the AngularJS model to the Meteor collection:
+
+    $scope.todos.add(data)
+    $scope.todos.delete(data)
+
+Where the <code>add</code> method is a replacement for both [Meteor.Collection.insert](http://docs.meteor.com/#insert) and [Meteor.Collection.update](http://docs.meteor.com/#update), which is also considered the persistent version of the AngularJS push method, and the <code>delete</code> method is a replacement for [Meteor.Collection.remove](http://docs.meteor.com/#remove). All changes made will be based on the _id property.
+
+Remember that you must first publish the collection from the server to the client, using the following code on the server, before you can access it on the client if you have removed the autopublish package:
+
+    Meteor.publish("todos", function () {
+      return todos.find({});
+    });
+
 ### Adding controllers, directives, filters and services
 It is best practice to not use globally defined controllers like they do in the AngularJS demos. Alternatively, always use the exported package scope <code>ngMeteor</code> as your angular module to register your controller with $controllerProvider. For example:
 
-    ngMeteor.controller('TodoCtrl', function($scope) {
-      $scope.todos = [
-        {text:'learn angular', done:true},
-        {text:'build an angular app', done:false}];
+    ngMeteor.controller('TodoCtrl', function($scope, $collection) {
+
+      $collection("todos", $scope);
      
       $scope.addTodo = function() {
-        $scope.todos.push({text:$scope.todoText, done:false});
+        $scope.todos.add({text:$scope.todoText, done:false});
         $scope.todoText = '';
       };
      
@@ -66,9 +108,8 @@ It is best practice to not use globally defined controllers like they do in the 
      
       $scope.archive = function() {
         var oldTodos = $scope.todos;
-        $scope.todos = [];
         angular.forEach(oldTodos, function(todo) {
-          if (!todo.done) $scope.todos.push(todo);
+          if (!todo.done) $scope.todos.delete(todo);
         });
       };
     });
@@ -103,7 +144,7 @@ Or Handlebars:
     {{> foo}}
 
 ### Dynamic routing
-Routes will automaticlly be created based on a template's name. The route will load that template and conditionally load a controller with the same name if it exists. Based on the URL, this is how you should name your templates:
+Routes will automaticlly be created based on a template's name, however, you can override the dynamic routes by manually assigning a route using $routeProvider. The route will load that template and conditionally load a controller with the same name if it exists. Based on the URL, this is how you should name your templates:
 
 | URL                               | Template / Controller name     | $routeParams |
 | :-------------------------------- | :----------------------------- | :----------- |
