@@ -30,17 +30,17 @@ To prevent conflicts with Handlebars, ngMeteor has changed the default AngularJS
 
     <h2>Todo</h2>
     <div ng-controller="TodoCtrl">
-      <span>[[remaining()]] of [[todos.length]] remaining</span>
+      <span>[[remaining()]] of [[Todos.length]] remaining</span>
       [ <a href="" ng-click="archive()">archive</a> ]
       <ul class="unstyled">
-        <li ng-repeat="todo in todos">
-          <input type="checkbox" ng-model="todo.done">
+        <li ng-repeat="todo in Todos | filter:todoText">
+          <input type="checkbox" ng-model="todo.done" ng-change="saveTodo()">
           <span class="done-[[todo.done]]">[[todo.text]]</span>
         </li>
       </ul>
       <form ng-submit="addTodo()">
-        <input type="text" ng-model="todoText" size="30" placeholder="add new todo here">
-        <input class="btn-primary" type="submit" value="add">
+        <input type="search" ng-model="todoText" size="30" placeholder="search/add new todo here">
+        <input class="btn btn-primary" type="submit" value="add">
       </form>
     </div>
 
@@ -91,8 +91,6 @@ Remember that you must first publish the collection from the server to the clien
       return todos.find({});
     });
 
-Currently looking at delaying the loading of a $scope until the subscription to a collection has been established.
-
 ### Adding controllers, directives, filters and services
 It is best practice to not use globally defined controllers like they do in the AngularJS demos. Always use the exported package scope <code>ngMeteor</code> as your angular module to register your controller with $controllerProvider. Furthermore, to prevent errors when minifying and obfuscating the controllers, directives, filters or services, you need to use [Dependency Injection](http://docs.angularjs.org/guide/di). For example:
 
@@ -104,6 +102,10 @@ It is best practice to not use globally defined controllers like they do in the 
           $scope.todos.add({text:$scope.todoText, done:false});
           $scope.todoText = '';
         };
+
+        $scope.saveTodo = function(){
+          $scope.Todos.add($scope.Todos);
+        }
        
         $scope.remaining = function() {
           var count = 0;
