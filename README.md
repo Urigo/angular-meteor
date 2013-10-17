@@ -180,8 +180,13 @@ and my controller would look like this:
       $scope.postId = $routeParams.postId;
     });
 
+Currently looking at authentication when routing.
+
 ### Nested Views
-Currently in progress. I am considering using ui-router or angular-segment.
+Currently in progress. I am considering using [ui-router](https://github.com/angular-ui/ui-router) or [angular-segment](https://github.com/artch/angular-route-segment).
+
+### Drag and Drog
+Currently in progress. I am considering using [angular-dragdrop](https://github.com/codef0rmer/angular-dragdrop)
     
 ### Touch events via [Hammer.js](https://github.com/EightMedia/hammer.js/)
 Within an Angular.js application, allows you to specify custom behaviour on Hammer.js touch events.
