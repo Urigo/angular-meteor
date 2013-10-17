@@ -91,30 +91,32 @@ Remember that you must first publish the collection from the server to the clien
     });
 
 ### Adding controllers, directives, filters and services
-It is best practice to not use globally defined controllers like they do in the AngularJS demos. Alternatively, always use the exported package scope <code>ngMeteor</code> as your angular module to register your controller with $controllerProvider. For example:
+It is best practice to not use globally defined controllers like they do in the AngularJS demos. Always use the exported package scope <code>ngMeteor</code> as your angular module to register your controller with $controllerProvider. Furthermore, to prevent errors when minifying and obfuscating the controllers, directives, filters or services, you need to use [Dependency Injection](http://docs.angularjs.org/guide/di). For example:
 
-    ngMeteor.controller('TodoCtrl', function($scope, $collection) {
-      $collection("todos", $scope);
-     
-      $scope.addTodo = function() {
-        $scope.todos.add({text:$scope.todoText, done:false});
-        $scope.todoText = '';
-      };
-     
-      $scope.remaining = function() {
-        var count = 0;
-        angular.forEach($scope.todos, function(todo) {
-          count += todo.done ? 0 : 1;
-        });
-        return count;
-      };
-     
-      $scope.archive = function() {
-        angular.forEach($scope.todos, function(todo) {
-          if (!todo.done) $scope.todos.delete(todo);
-        });
-      };
-    });
+    ngMeteor.controller('TodoCtrl', ['$scope', '$collection',
+      function($scope, $collection) {
+        $collection("todos", $scope);
+       
+        $scope.addTodo = function() {
+          $scope.todos.add({text:$scope.todoText, done:false});
+          $scope.todoText = '';
+        };
+       
+        $scope.remaining = function() {
+          var count = 0;
+          angular.forEach($scope.todos, function(todo) {
+            count += todo.done ? 0 : 1;
+          });
+          return count;
+        };
+       
+        $scope.archive = function() {
+          angular.forEach($scope.todos, function(todo) {
+            if (!todo.done) $scope.todos.delete(todo);
+          });
+        };
+      }
+    ]);
 
 ### Creating and inserting template views
 A template is defined using the template tags (this could be in a standalone file or included in another file).
