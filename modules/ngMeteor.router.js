@@ -21,7 +21,7 @@ ngMeteorRouter.config(['$provide', '$routeProvider', '$locationProvider',
 
 		// Creates the index route. Loads the index view and loads the index controller if it exists.
 		var indexName = "index";
-		if($filter('filter')(controllers, indexController, true).length === 1){
+		if($filter('filter')(controllers, name, true).length === 1){
 			$routeProvider.when('/', {templateUrl: indexName, controller: name});
 		}else{
 			$routeProvider.when('/', {templateUrl: indexName});
@@ -32,7 +32,7 @@ ngMeteorRouter.config(['$provide', '$routeProvider', '$locationProvider',
 		angular.forEach(Template, function(render, name){
 			if(name.substring(0,1) !== "_"){
 				var path = "/" + name.replace(/\./g, "/").replace(/\_/g,"/:");
-				if($filter('filter')(controllers, controller , true).length === 1){
+				if($filter('filter')(controllers, name , true).length === 1){
 					$routeProvider.when(path, {templateUrl: name, controller: name });
 				}else{
 					$routeProvider.when(path, {templateUrl: name});
