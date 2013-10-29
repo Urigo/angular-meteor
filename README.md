@@ -181,9 +181,11 @@ For example, if I wanted a template to show when a user goes to <code>/post/:pos
 
 and my controller would look like this:
 
-    ngMeteor.controller('post_postId.edit', function($scope, $routeParams) {
-      $scope.postId = $routeParams.postId;
-    });
+    ngMeteor.controller('post_postId.edit', ['$scope', '$routeParams',
+      function($scope, $routeParams) {
+        $scope.postId = $routeParams.postId;
+      }
+    ]);
 
 Currently looking at authentication when routing.
 

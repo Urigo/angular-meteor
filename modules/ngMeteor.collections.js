@@ -57,7 +57,7 @@ ngMeteorCollections.factory('$collection', ['$window', '$rootScope',
 				});
 				return scope[name];
 			} else{
-				console.error('There is no Meteor Collection called"' + name + '"')
+				console.error('There is no Meteor Collection called "' + name + '"')
 			}
 		}
 	}
