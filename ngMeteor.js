@@ -1,5 +1,5 @@
 // ngMeteor - Package Scope Variable
-ngMeteor = angular.module('ngMeteor', ['ngMeteor.touch', 'ngMeteor.collections', 'ngMeteor.template','ngMeteor.router']
+ngMeteor = angular.module('ngMeteor', ['ngMeteor.touch', 'ngMeteor.collections', 'ngMeteor.template','ngMeteor.router', 'ui.select2']
 );
 
 // Change the data-bindings from {{foo}} to [[foo]]
