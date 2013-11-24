@@ -6,25 +6,28 @@ Package.on_use(function (api) {
 	// Exports the ngMeteor package scope
 	api.export('ngMeteor', 'client');
 
-	var path = Npm.require('path');
-	var lib_path = path.join('lib');
-	var module_path = path.join('modules');
+	// Files to load in Client only.
+	api.add_files([
+		// AngularJS Files
+		'lib/angular/angular.js',
+		'lib/angular/angular-route.js',
+		// HammerJS Files
+		'lib/hammer/hammer.js',
+		// Select2 Files
+		'lib/select2/select2.js',
+		'lib/select2/ui-select2.js',
+		'lib/select2/select2.css',
+		'lib/select2/select2-bootstrap.css',
+		'lib/select2/select2.png',
+		'lib/select2/select2x2.png',
+		'lib/select2/select2-spinner.gif',
+		// Module Files
+		'modules/ngMeteor.touch.js',
+		'modules/ngMeteor.collections.js',
+		'modules/ngMeteor.template.js',
+		'modules/ngMeteor.router.js',
+		// Finally load ngMeteor File
+		'ngMeteor.js'
+	], 'client');
 
-	api.add_files(path.join(lib_path, 'angular.js'), 'client');
-	api.add_files(path.join(lib_path, 'angular-route.js'), 'client');
-	api.add_files(path.join(lib_path, 'hammer.js'), 'client');
-	api.add_files(path.join(lib_path, 'select2.js'), 'client');
-	api.add_files(path.join(lib_path, 'ui-select2.js'), 'client');
-	api.add_files(path.join(lib_path, 'select2.css'), 'client');
-	api.add_files(path.join(lib_path, 'select2-bootstrap.css'), 'client');
-	api.add_files(path.join(lib_path, 'select2.png'), 'client');
-	api.add_files(path.join(lib_path, 'select2x2.png'), 'client');
-	api.add_files(path.join(lib_path, 'select2-spinner.gif'), 'client');
-
-	api.add_files(path.join(module_path, 'ngMeteor.touch.js'), 'client');
-	api.add_files(path.join(module_path, 'ngMeteor.collections.js'), 'client');
-	api.add_files(path.join(module_path, 'ngMeteor.template.js'), 'client');
-	api.add_files(path.join(module_path, 'ngMeteor.router.js'), 'client');
-
-	api.add_files(path.join('ngMeteor.js'), 'client');
 });
