@@ -141,7 +141,7 @@ Or Handlebars:
     {{> foo}}
 
 ### Dynamic routing
-Routes will automaticlly be created based on a template's name, however, you can override the dynamic routes by manually assigning a route using $routeProvider. The route will load that template and conditionally load a controller with the same name if it exists. You can prevent a template from creating a route by adding a "_" infront of the template name. You Based on the URL, this is how you should name your templates:
+Routes will automaticlly be created based on a template's name, however, you can override the dynamic routes by manually assigning a route using $routeProvider. The route will load that template and conditionally load a controller with the same name if it exists. You can prevent a template from creating a route by adding a "_" infront of the template name. Based on the URL, this is how you should name your templates:
 
 | URL                               | Template / Controller name     | $routeParams |
 | :-------------------------------- | :----------------------------- | :----------- |
