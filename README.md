@@ -183,21 +183,6 @@ Currently in progress. I am considering using [ui-router](https://github.com/ang
 
 ### Drag and Drog
 Currently in progress. I am considering using [angular-dragdrop](https://github.com/codef0rmer/angular-dragdrop)
-
-### Included Angular Modules
-<code>ngMeteor</code> includes these Angular modules in the Angular application module, which means that it is ready to use out of the box:
-#### [ui-select2](https://github.com/angular-ui/ui-select2)
-> This directive allows you to enhance your select elements with behaviour from the select2 library.
-
-This is a basic example of how you would use the module:
-
-    <select ui-select2 ng-model="select2" data-placeholder="Pick a number">
-        <option value=""></option>
-        <option value="one">First</option>
-        <option value="two">Second</option>
-        <option value="three">Third</option>
-    </select>
-
     
 ### Touch events via [Hammer.js](https://github.com/EightMedia/hammer.js/)
 Within an Angular.js application, allows you to specify custom behaviour on Hammer.js touch events.
@@ -235,6 +220,20 @@ This is a list of all the supported touch events:
     pinchout
     touch
     release
+
+### Other Included Angular Modules
+<code>ngMeteor</code> includes these Angular modules in the Angular application module, which means that it is ready to use out of the box:
+#### [ui-select2](https://github.com/angular-ui/ui-select2)
+> This directive allows you to enhance your select elements with behaviour from the select2 library.
+
+This is a basic example of how you would use the module:
+
+    <select ui-select2 ng-model="select2" data-placeholder="Pick a number">
+        <option value=""></option>
+        <option value="one">First</option>
+        <option value="two">Second</option>
+        <option value="three">Third</option>
+    </select>
     
 ### Where should i put my files?
 There is no special structure required for ngMeteor besides the rules specified in the [Official Meteor Documentation](http://docs.meteor.com/#structuringyourapp). This is just an example structure to show you where files should generally go, so feel free to change the layout however you want:
