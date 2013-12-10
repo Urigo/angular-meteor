@@ -186,10 +186,10 @@ Currently in progress. I am considering using [angular-dragdrop](https://github.
 
 ### Included Angular Modules
 <code>ngMeteor</code> includes these Angular modules in the Angular application module, which means that it is ready to use out of the box:
-#### [ui-select2](https://github.com/angular-ui/ui-select2):
+#### [ui-select2](https://github.com/angular-ui/ui-select2)
 > This directive allows you to enhance your select elements with behaviour from the select2 library.
 
-##### Quick start
+This is a basic example of how you would use the module:
 
     <select ui-select2 ng-model="select2" data-placeholder="Pick a number">
         <option value=""></option>
