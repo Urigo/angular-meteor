@@ -11,18 +11,6 @@ ngMeteor
 3. Install ngMeteor (Not ready yet, i haven't added the package to Atmosphere)
 <pre><code>mrt add ngMeteor</code></pre>
 
-## Recommended Packages
-<code>ngMeteor</code> has no dependencies, however here is a list of recommended packages that work well with it:
-#### Coffeescript: 
-> Javascript dialect with fewer braces and semicolons 
-
-<pre><code>meteor add coffeescript</code></pre>
-
-#### Stylus: 
-> Expressive, dynamic, robust CSS. 
-
-<pre><code>meteor add stylus</code></pre>
-
 
 ## Usage
 ### New Data-Binding to avoid conflict
@@ -153,7 +141,7 @@ Or Handlebars:
     {{> foo}}
 
 ### Dynamic routing
-Routes will automaticlly be created based on a template's name, however, you can override the dynamic routes by manually assigning a route using $routeProvider. The route will load that template and conditionally load a controller with the same name if it exists. Based on the URL, this is how you should name your templates:
+Routes will automaticlly be created based on a template's name, however, you can override the dynamic routes by manually assigning a route using $routeProvider. The route will load that template and conditionally load a controller with the same name if it exists. You can prevent a template from creating a route by adding a "_" infront of the template name. You Based on the URL, this is how you should name your templates:
 
 | URL                               | Template / Controller name     | $routeParams |
 | :-------------------------------- | :----------------------------- | :----------- |
@@ -163,6 +151,7 @@ Routes will automaticlly be created based on a template's name, however, you can
 | /page/post/:edit                  | page.post_edit                 | edit         |
 | /page/post/:edit/:user            | page.post_edit_user            | edit, user   |
 | /page/post/:edit/:user/attachment | page.post_edit_user.attachment | edit, user   |
+| No route!                         | _anyName                       |              |
 
 For example, if I wanted a template to show when a user goes to <code>/post/:postId/edit</code>, then my HTML would look like this:
 
@@ -194,6 +183,21 @@ Currently in progress. I am considering using [ui-router](https://github.com/ang
 
 ### Drag and Drog
 Currently in progress. I am considering using [angular-dragdrop](https://github.com/codef0rmer/angular-dragdrop)
+
+### Included Angular Modules
+<code>ngMeteor</code> includes these Angular modules in the Angular application module, which means that it is ready to use out of the box:
+#### [ui-select2](https://github.com/angular-ui/ui-select2):
+> This directive allows you to enhance your select elements with behaviour from the select2 library.
+
+##### Quick start
+
+    <select ui-select2 ng-model="select2" data-placeholder="Pick a number">
+        <option value=""></option>
+        <option value="one">First</option>
+        <option value="two">Second</option>
+        <option value="three">Third</option>
+    </select>
+
     
 ### Touch events via [Hammer.js](https://github.com/EightMedia/hammer.js/)
 Within an Angular.js application, allows you to specify custom behaviour on Hammer.js touch events.
