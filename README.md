@@ -254,8 +254,7 @@ myapp/
     views/
       partials/
       <page>.html       # <- the templates specific to a single page
-      <page>.js         # <- and the JS to hook it up
-    main.js             # <- subscriptions, basic Meteor.startup code.
+    main.js             # <- basic Meteor.startup code.
     index.html          # <- toplevel html
   lib/                  # <- any common code for client/server. These files are loaded first.
     environment.js      # <- general configuration
