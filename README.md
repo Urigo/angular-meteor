@@ -140,6 +140,8 @@ Or Handlebars:
 
     {{> foo}}
 
+If you prefer to use [Meteor's default template APIs](http://docs.meteor.com/#templates_api) rather than AngularJS's controllers, directives, filters and services, then you will need to render the template using Handlebars.
+
 ### Dynamic routing
 Routes will automaticlly be created based on a template's name, however, you can override the dynamic routes by manually assigning a route using $routeProvider. The route will load that template and conditionally load a controller with the same name if it exists. You can prevent a template from creating a route by adding a "_" infront of the template name. Based on the URL, this is how you should name your templates:
 
