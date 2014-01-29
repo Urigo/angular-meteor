@@ -11,6 +11,12 @@ Package.on_use(function (api) {
 		// AngularJS Files
 		'lib/angular/angular.js',
 		'lib/angular/angular-route.js',
+		'lib/angular/angular-animate.js',
+		'lib/angular/angular-cookies.js',
+		'lib/angular/angular-resource.js',
+		'lib/angular/angular-sanitize.js',
+		'lib/angular/angular-csp.css',
+		//'lib/angular/angular-touch.js', This has been omitted in favour of the hammer.js library.
 		// HammerJS Files
 		'lib/hammer/hammer.js',
 		// Select2 Files
