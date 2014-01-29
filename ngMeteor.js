@@ -13,7 +13,7 @@ ngMeteor = angular.module('ngMeteor', [
 	'ngAnimate',
 	'ngCookies',
 	'ngResource',
-	'ngSanitze'
+	'ngSanitize'
 ]);
 
 // Change the data-bindings from {{foo}} to [[foo]]
