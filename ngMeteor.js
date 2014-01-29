@@ -5,11 +5,11 @@ ngMeteor = angular.module('ngMeteor', [
 	'ngMeteor.template',
 	//Optional packages. Will separate these out into separate smart packages later.
 	'ngMeteor.router',
-	'ngMeteor.touch', 
+	//'ngMeteor.touch', 
 	'ui.select2',
 	//Angular optional packages. Testing modules such as mock and scenario have been omitted.
 	//'ngRoute', This is already included in ngMeteor.router
-	//'ngTouch', This has been omitted in favour of the ngMeteor.touch module.
+	'ngTouch',
 	'ngAnimate',
 	'ngCookies',
 	'ngResource',
