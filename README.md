@@ -142,6 +142,18 @@ Or Handlebars:
 
 If you prefer to use [Meteor's default template APIs](http://docs.meteor.com/#templates_api) rather than AngularJS's controllers, directives, filters and services, then you will need to render the template using Handlebars.
 
+### Routing
+The [ngRoute](http://docs.angularjs.org/api/ngRoute) module developed by the AngularJS team is included in ngMeteor, which will satisfy those with simple routing needs, however, for larger applications with more complexed routes, it would be wise to consider using the [meteor-angular-ui-router](https://github.com/ccll/meteor-angular-ui-router) smart package for ngMeteor developed by [Cai Lei](https://github.com/ccll), which exposes the popular [ui-router](https://github.com/angular-ui/ui-router) module to ngMeteor. For those of you that have grown accustomed to the Meteor methods of routing, ngMeteor is ready to use with [Iron Router](https://github.com/EventedMind/iron-router). 
+
+### ngMeteor Modules
+Additionally functionality has been provided to ngMeteor in the form of separate atmosphere smart packages that expose and inject angular modules into ngMeteor. There packages have been developed by either the ngMeteor Team and/or by third parties. The following is a non-exhaustive list of these packages:
+
+[meteor-angular-ui-router](https://github.com/ccll/meteor-angular-ui-router) empowers ngMeteor with the [ui-router](https://github.com/angular-ui/ui-router) module.
+[meteor-angular-bootstrap](https://github.com/ccll/meteor-angular-bootstrap) empowers ngMeteor with the [ui-bootstrap](http://angular-ui.github.io/bootstrap/) module.
+[meteor-ionic](https://github.com/cramrov/meteor-ionic) empowers ngMeteor with the [Ionic Framework](http://ionicframework.com/).
+
+
+<!---
 ### Dynamic routing
 Routes will automaticlly be created based on a template's name, however, you can override the dynamic routes by manually assigning a route using $routeProvider. The route will load that template and conditionally load a controller with the same name if it exists. You can prevent a template from creating a route by adding a "_" infront of the template name. Based on the URL, this is how you should name your templates:
 
@@ -165,7 +177,6 @@ For example, if I wanted a template to show when a user goes to <code>/post/:pos
       <div ng-view></div>
     </body>
 
-    <!--This could be in a separate file. The file name can be anything.-->
     <template name="post_postId.edit">
       <h1>Your post id is [[postId]]</h1>
     </template>
@@ -236,7 +247,8 @@ This is a basic example of how you would use the module:
         <option value="two">Second</option>
         <option value="three">Third</option>
     </select>
-    
+
+
 ### Where should i put my files?
 There is no special structure required for ngMeteor besides the rules specified in the [Official Meteor Documentation](http://docs.meteor.com/#structuringyourapp). This is just an example structure to show you where files should generally go, so feel free to change the layout however you want:
 
@@ -268,3 +280,4 @@ myapp/
     environment.js      # <- configuration of server side packages
   tests/                # <- unit test files (won't be loaded on client or server)
 ```
+-->
