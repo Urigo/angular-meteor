@@ -148,9 +148,9 @@ The [ngRoute](http://docs.angularjs.org/api/ngRoute) module developed by the Ang
 ### ngMeteor Modules
 Additionally functionality has been provided to ngMeteor in the form of separate atmosphere smart packages that expose and inject angular modules into ngMeteor. There packages have been developed by either the ngMeteor Team and/or by third parties. The following is a non-exhaustive list of these packages:
 
-*[meteor-angular-ui-router](https://github.com/ccll/meteor-angular-ui-router) empowers ngMeteor with the [ui-router](https://github.com/angular-ui/ui-router) module.
-*[meteor-angular-bootstrap](https://github.com/ccll/meteor-angular-bootstrap) empowers ngMeteor with the [ui-bootstrap](http://angular-ui.github.io/bootstrap/) module.
-*[meteor-ionic](https://github.com/cramrov/meteor-ionic) empowers ngMeteor with the [Ionic Framework](http://ionicframework.com/).
+-[meteor-angular-ui-router](https://github.com/ccll/meteor-angular-ui-router) empowers ngMeteor with the [ui-router](https://github.com/angular-ui/ui-router) module.
+-[meteor-angular-bootstrap](https://github.com/ccll/meteor-angular-bootstrap) empowers ngMeteor with the [ui-bootstrap](http://angular-ui.github.io/bootstrap/) module.
+-[meteor-ionic](https://github.com/cramrov/meteor-ionic) empowers ngMeteor with the [Ionic Framework](http://ionicframework.com/).
 
 
 <!---
