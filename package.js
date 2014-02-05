@@ -17,6 +17,7 @@ Package.on_use(function (api) {
 		'lib/angular/angular-sanitize.js',
 		'lib/angular/angular-csp.css',
 		'lib/angular/angular-touch.js',
+		'lib/angular/angular-hash-key-copier.js',
 		// HammerJS Files
 		'lib/hammer/hammer.js',
 		// Select2 Files

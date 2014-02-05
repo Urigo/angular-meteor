@@ -3,6 +3,7 @@ ngMeteor = angular.module('ngMeteor', [
 	//ngMeteor core packages.
 	'ngMeteor.collections', 
 	'ngMeteor.template',
+	'hashKeyCopier',
 	//Optional packages. Will separate these out into separate smart packages later.
 	//'ngMeteor.router',
 	//'ngMeteor.touch', 
@@ -13,7 +14,7 @@ ngMeteor = angular.module('ngMeteor', [
 	'ngAnimate',
 	'ngCookies',
 	'ngResource',
-	'ngSanitize'
+	'ngSanitize',
 ]);
 
 // Change the data-bindings from {{foo}} to [[foo]]
