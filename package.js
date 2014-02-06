@@ -10,12 +10,14 @@ Package.on_use(function (api) {
 	api.add_files([
 		// Lib Files
 		'lib/angular.js',
-		'lib/angular-route.js',
+		'lib/angular-csp.css',
 		'lib/angular-animate.js',
 		'lib/angular-cookies.js',
+		'lib/angular-mocks.js',
 		'lib/angular-resource.js',
+		'lib/angular-route.js',
+		'lib/angular-scenario.js',
 		'lib/angular-sanitize.js',
-		'lib/angular-csp.css',
 		'lib/angular-touch.js',
 		'lib/angular-hash-key-copier.js',
 		// Module Files
