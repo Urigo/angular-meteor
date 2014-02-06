@@ -19,8 +19,8 @@ Package.on_use(function (api) {
 		'lib/angular-touch.js',
 		'lib/angular-hash-key-copier.js',
 		// Module Files
-		'modules/ngMeteor.collections.js',
-		'modules/ngMeteor.template.js',
+		'modules/ngMeteor-collections.js',
+		'modules/ngMeteor-template.js',
 		// Finally load ngMeteor File
 		'ngMeteor.js'
 	], 'client');
