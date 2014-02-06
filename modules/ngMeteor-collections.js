@@ -9,7 +9,7 @@ ngMeteorCollections.factory('$collection', ['$window', '$rootScope', 'HashKeyCop
 				Deps.autorun(function(){
 					Meteor.subscribe(name);
 					scope[name] = HashKeyCopier.copyHashKeys(scope[name],collection.find(selector, options).fetch(),["_id"]);
-					//if(!scope.$$phase){scope.$apply()} // I think this bit is redundant now.
+					if(!scope.$$phase){scope.$apply()} // I think this bit is redundant now.
 				});
 				angular.extend(scope[name].__proto__, {
 					add: function(data){

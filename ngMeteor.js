@@ -1,10 +1,8 @@
-// ngMeteor - Package Scope Variable
+// Define ngMeteor and its dependencies
 ngMeteor = angular.module('ngMeteor', [
-	//ngMeteor core packages.
 	'ngMeteor.collections', 
 	'ngMeteor.template',
 	'hashKeyCopier',
-	//Angular optional packages. Testing modules such as mock and scenario have been omitted.
 	'ngRoute', 
 	'ngTouch',
 	'ngAnimate',
@@ -22,7 +20,7 @@ ngMeteor.config(['$interpolateProvider',
 	}
 ]);
 
-// Manual initilisation of the ngMeteor module
+// Manual initilisation of ngMeteor
 angular.element(document).ready(function() {
 	if(Template.__defaultLayout__){
 		// For compatability with iron-router
