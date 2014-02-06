@@ -8,7 +8,8 @@ ngMeteor
 <pre><code>curl https://install.meteor.com | /bin/sh</code></pre>
 2. Install [Meteorite](https://github.com/oortcloud/meteorite#installing-meteorite)
 <pre><code>npm install -g meteorite</code></pre>
-3. Install ngMeteor
+3. Create a new meteor app using <code>meteor create myapp</code> or navigate to the root of your existing app.
+4. Install ngMeteor
 <pre><code>mrt add ngMeteor</code></pre>
 
 
