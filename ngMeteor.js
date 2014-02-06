@@ -4,17 +4,13 @@ ngMeteor = angular.module('ngMeteor', [
 	'ngMeteor.collections', 
 	'ngMeteor.template',
 	'hashKeyCopier',
-	//Optional packages. Will separate these out into separate smart packages later.
-	//'ngMeteor.router',
-	//'ngMeteor.touch', 
-	//'ui.select2',
 	//Angular optional packages. Testing modules such as mock and scenario have been omitted.
-	'ngRoute', //This is already included in ngMeteor.router
+	'ngRoute', 
 	'ngTouch',
 	'ngAnimate',
 	'ngCookies',
 	'ngResource',
-	'ngSanitize',
+	'ngSanitize'
 ]);
 
 // Change the data-bindings from {{foo}} to [[foo]]

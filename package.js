@@ -5,36 +5,23 @@ Package.describe({
 Package.on_use(function (api) {
 	// Exports the ngMeteor package scope
 	api.export('ngMeteor', 'client');
-
+	
 	// Files to load in Client only.
 	api.add_files([
-		// AngularJS Files
-		'lib/angular/angular.js',
-		'lib/angular/angular-route.js',
-		'lib/angular/angular-animate.js',
-		'lib/angular/angular-cookies.js',
-		'lib/angular/angular-resource.js',
-		'lib/angular/angular-sanitize.js',
-		'lib/angular/angular-csp.css',
-		'lib/angular/angular-touch.js',
-		'lib/angular/angular-hash-key-copier.js',
-		// HammerJS Files
-		'lib/hammer/hammer.js',
-		// Select2 Files
-		'lib/select2/select2.js',
-		'lib/select2/ui-select2.js',
-		'lib/select2/select2.css',
-		'lib/select2/select2-bootstrap.css',
-		'lib/select2/select2.png',
-		'lib/select2/select2x2.png',
-		'lib/select2/select2-spinner.gif',
+		// Lib Files
+		'lib/angular.js',
+		'lib/angular-route.js',
+		'lib/angular-animate.js',
+		'lib/angular-cookies.js',
+		'lib/angular-resource.js',
+		'lib/angular-sanitize.js',
+		'lib/angular-csp.css',
+		'lib/angular-touch.js',
+		'lib/angular-hash-key-copier.js',
 		// Module Files
-		'modules/ngMeteor.touch.js',
 		'modules/ngMeteor.collections.js',
 		'modules/ngMeteor.template.js',
-		'modules/ngMeteor.router.js',
 		// Finally load ngMeteor File
 		'ngMeteor.js'
 	], 'client');
-
 });
