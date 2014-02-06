@@ -128,7 +128,7 @@ You can render this template using handlebars as you would for any other Meteor 
 
     {{> foo}}
 
-A template created this way will also be added to the $templateCache of the <code>ngmeteor</code> angular module. To invoke the template in AngularJS you could use <code><div ng-view></div></code> and specify the template in the $templateCache when defining your routes using the $routeProvider or your can use the ng-template directive to render your template like this:
+Templates will also be added to the $templateCache of the <code>ngmeteor</code> angular module. To invoke the template in AngularJS you could use <code><div ng-view></div></code> and specify the template in the $templateCache when defining your routes using the $routeProvider or your could use the ng-template directive to render your template like this:
 
     <ANY ng-template="foo"></ANY>
 
