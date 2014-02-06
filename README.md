@@ -12,12 +12,12 @@ ngMeteor
 
 ## Usage
 ### Table of Contents
-[New Data-Binding to avoid conflict](https://github.com/loneleeandroo/ngMeteor#new-data-binding-to-avoid-conflict)
-[Using Meteor Collections](https://github.com/loneleeandroo/ngMeteor#using-meteor-collections)
-[Adding controllers, directives, filters and services](https://github.com/loneleeandroo/ngMeteor#adding-controllers-directives-filters-and-services)
-[Creating and inserting template views](https://github.com/loneleeandroo/ngMeteor#creating-and-inserting-template-views)
-[Routing](https://github.com/loneleeandroo/ngMeteor#routing)
-[Module Injection](https://github.com/loneleeandroo/ngMeteor#module-injection)
+- [New Data-Binding to avoid conflict](https://github.com/loneleeandroo/ngMeteor#new-data-binding-to-avoid-conflict)
+- [Using Meteor Collections](https://github.com/loneleeandroo/ngMeteor#using-meteor-collections)
+- [Adding controllers, directives, filters and services](https://github.com/loneleeandroo/ngMeteor#adding-controllers-directives-filters-and-services)
+- [Creating and inserting template views](https://github.com/loneleeandroo/ngMeteor#creating-and-inserting-template-views)
+- [Routing](https://github.com/loneleeandroo/ngMeteor#routing)
+- [Module Injection](https://github.com/loneleeandroo/ngMeteor#module-injection)
 
 ### New Data-Binding to avoid conflict
 To prevent conflicts with Handlebars, ngMeteor has changed the default AngularJS data bindings from <code>{{foo}}</code> to <code>[[foo]]</code>. For example:
