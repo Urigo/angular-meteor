@@ -124,29 +124,16 @@ A template is defined using the template tags (this could be in a standalone fil
       <h1>Hello, World!</h1>
     </template>
 
-A template created this way will be added to the $templateCache of the <code>ngmeteor</code> angular module. To invoke the template, you can use ng-template. This is the recommended way to use ng-template for browser compatability: 
+You can render this template using handlebars as you would for any other Meteor app:
+
+    {{> foo}}
+
+A template created this way will also be added to the $templateCache of the <code>ngmeteor</code> angular module. To invoke the template in AngularJS you could use <code><div ng-view></div></code> and specify the template in the $templateCache when defining your routes using the $routeProvider or your can use the ng-template directive to render your template like this:
 
     <ANY ng-template="foo"></ANY>
 
     <!--Add the ng-controller attribute if you want to load a controller at the same time.-->    
     <ANY ng-template="foo" ng-controller="fooCtrl"></ANY>
-
-It is also possible to use ng-template like this but you will need to be aware of [IE compatability](http://docs.angularjs.org/guide/ie):
-
-    <ng-template name="foo"></ng-template>
-
-    <!--Add the ng-controller attribute if you want to load a controller at the same time.-->    
-    <ng-template name="foo" ng-controller="fooCtrl"></ng-template>
-
-Alternatively, you could also use either ng-include (must use single quotations within the double quotations):
-
-    <ANY ng-include=" 'foo' "></ANY>
-
-Or Handlebars:
-
-    {{> foo}}
-
-If you prefer to use [Meteor's default template APIs](http://docs.meteor.com/#templates_api) rather than AngularJS's controllers, directives, filters and services, then you will need to render the template using Handlebars.
 
 ### Routing
 The [ngRoute](http://docs.angularjs.org/api/ngRoute) module developed by the AngularJS team is included in ngMeteor, which will satisfy those with simple routing needs, however, for larger applications with more complexed routes, it would be wise to consider using the [meteor-angular-ui-router](https://github.com/ccll/meteor-angular-ui-router) smart package for ngMeteor, which exposes the popular [ui-router](https://github.com/angular-ui/ui-router) module to ngMeteor. For those of you that have grown accustomed to the Meteor methods of routing, ngMeteor is ready to use with [Iron Router](https://github.com/EventedMind/iron-router). 
