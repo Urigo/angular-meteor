@@ -86,7 +86,7 @@ Remember that you must first publish the collection from the server to the clien
     });
 
 ### Adding controllers, directives, filters and services
-It is best practice to not use globally defined controllers like they do in the AngularJS demos. Always use the exported package scope <code>ngMeteor</code> as your angular module to register your controller with $controllerProvider. Furthermore, to prevent errors when minifying and obfuscating the controllers, directives, filters or services, you need to use [Dependency Injection](http://docs.angularjs.org/guide/di). For example:
+It is best practice to not use globally defined controllers like they do in the AngularJS demos. Always use the exported package scope ngMeteor as your angular module to register your controller with $controllerProvider. Furthermore, to prevent errors when minifying and obfuscating the controllers, directives, filters or services, you need to use [Dependency Injection](http://docs.angularjs.org/guide/di). For example:
 
     ngMeteor.controller('TodoCtrl', ['$scope', '$collection',
       function($scope, $collection) {
@@ -128,7 +128,7 @@ You can render this template using handlebars as you would for any other Meteor 
 
     {{> foo}}
 
-Templates will also be added to the $templateCache of the <code>ngmeteor</code> angular module. To invoke the template in AngularJS you could use ng-view and specify the template in the $templateCache when defining your routes using the $routeProvider or your could use the ng-template directive to render your template like this:
+Templates will also be added to the $templateCache of the ngMeteor angular module. To invoke the template in AngularJS you could use ng-view and specify the template in the $templateCache when defining your routes using the $routeProvider or your could use the ng-template directive to render your template like this:
 
     <ANY ng-template="foo"></ANY>
 
