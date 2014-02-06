@@ -1,2 +1,4 @@
 .build*
 .DS_Store
+modules/ngMeteor.router.js
+modules/ngMeteor.touch.js
