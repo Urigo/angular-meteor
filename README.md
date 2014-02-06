@@ -4,16 +4,21 @@ ngMeteor
 > Currently implementing a [Demo Page](http://ng.meteor.com).
 
 ## Quick start
-1. Install [Meteor](http://docs.meteor.com/#quickstart)
-<pre><code>curl https://install.meteor.com | /bin/sh</code></pre>
-2. Install [Meteorite](https://github.com/oortcloud/meteorite#installing-meteorite)
-<pre><code>npm install -g meteorite</code></pre>
+1. Install [Meteor](http://docs.meteor.com/#quickstart) <code>curl https://install.meteor.com | /bin/sh</code>
+2. Install [Meteorite](https://github.com/oortcloud/meteorite#installing-meteorite) <code>npm install -g meteorite</code>
 3. Create a new meteor app using <code>meteor create myapp</code> or navigate to the root of your existing app.
-4. Install ngMeteor
-<pre><code>mrt add ngMeteor</code></pre>
+4. Install ngMeteor <code>mrt add ngMeteor</code>
 
 
 ## Usage
+### Table of Contents
+[New Data-Binding to avoid conflict](https://github.com/loneleeandroo/ngMeteor#new-data-binding-to-avoid-conflict)
+[Using Meteor Collections](https://github.com/loneleeandroo/ngMeteor#using-meteor-collections)
+[Adding controllers, directives, filters and services](https://github.com/loneleeandroo/ngMeteor#adding-controllers-directives-filters-and-services)
+[Creating and inserting template views](https://github.com/loneleeandroo/ngMeteor#creating-and-inserting-template-views)
+[Routing](https://github.com/loneleeandroo/ngMeteor#routing)
+[Module Injection](https://github.com/loneleeandroo/ngMeteor#module-injection)
+
 ### New Data-Binding to avoid conflict
 To prevent conflicts with Handlebars, ngMeteor has changed the default AngularJS data bindings from <code>{{foo}}</code> to <code>[[foo]]</code>. For example:
 
