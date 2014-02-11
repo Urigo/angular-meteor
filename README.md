@@ -39,7 +39,11 @@ To prevent conflicts with Handlebars, ngMeteor has changed the default AngularJS
     </div>
 
 ### Using Meteor Collections
-When adding Meteor collections to a $scope, you can preserve the reactivity of the collection by using the <code>$collection</code> service like this:
+ngMeteor uses the default [Meteor collections](http://docs.meteor.com/#meteor_collection), so you would declare a new collection like this:
+
+    todos = new Meteor.Collection("todos");
+
+To preserve the reactivity of the Meteor collection in your AngularJS controllers and directives, you should inject and use the <code>$collection</code> service instead of calling the Meteor collection directly. This is how you would use the <code>$collection</code> service:
 
     $collection(name, scope, selector, options)
 
