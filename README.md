@@ -2,6 +2,7 @@ ngMeteor
 ========
 > The simplest no-conflict way to use AngularJS with Meteor, Meteorite and Atmosphere Smart Packages.
 > Currently implementing a [Demo Page](http://ng.meteor.com).
+> Made this using ngMeteor for me to use while I was playing Pokemon X, [PokeLab](http://pokelab.meteor.com/). It basically calculates the type effectiveness.
 
 ## Quick start
 1. Install [Meteor](http://docs.meteor.com/#quickstart) <code>curl https://install.meteor.com | /bin/sh</code>
