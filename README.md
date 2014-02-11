@@ -24,10 +24,10 @@ To prevent conflicts with Handlebars, ngMeteor has changed the default AngularJS
 
     <h2>Todo</h2>
     <div ng-controller="TodoCtrl">
-      <span>[[remaining()]] of [[Todos.length]] remaining</span>
+      <span>[[remaining()]] of [[todos.length]] remaining</span>
       [ <a href="" ng-click="archive()">archive</a> ]
       <ul class="unstyled">
-        <li ng-repeat="todo in Todos | filter:todoText">
+        <li ng-repeat="todo in todos | filter:todoText">
           <input type="checkbox" ng-model="todo.done" ng-change="saveTodo()">
           <span class="done-[[todo.done]]">[[todo.text]]</span>
         </li>
@@ -102,7 +102,7 @@ It is best practice to not use globally defined controllers like they do in the 
         };
 
         $scope.saveTodo = function(){
-          $scope.Todos.add($scope.Todos);
+          $scope.todos.add($scope.todos);
         }
        
         $scope.remaining = function() {
