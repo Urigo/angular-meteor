@@ -10,9 +10,10 @@ ngMeteorCollections.factory('$collection', ['$window', '$rootScope', 'HashKeyCop
 					Meteor.subscribe(name);
 					scope[name] = HashKeyCopier.copyHashKeys(scope[name],collection.find(selector, options).fetch(),["_id"]);
 					if(!scope.$$phase){scope.$apply()} // I think this bit is redundant now.
-				});
-				angular.extend(scope[name].__proto__, {
-					add: function(data){
+
+					// Temporary Fix
+					//===================================================================
+					scope[name].add = function(data){
 						data = angular.copy(data);
 						upsert = function(item){
 							if(!item._id){
@@ -33,8 +34,8 @@ ngMeteorCollections.factory('$collection', ['$window', '$rootScope', 'HashKeyCop
 							}
 						}
 						Deps.flush();
-					},
-					delete: function(data){
+					}
+					scope[name].delete = function(data){
 						if(!data){
 							console.error("Cannot delete null");
 						} else{
@@ -52,6 +53,8 @@ ngMeteorCollections.factory('$collection', ['$window', '$rootScope', 'HashKeyCop
 						}
 						Deps.flush();
 					}
+					//===================================================================
+
 				});
 				return scope[name];
 			} else{
