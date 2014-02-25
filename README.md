@@ -141,7 +141,7 @@ Templates will also be added to the $templateCache of the ngMeteor angular modul
     <ANY ng-template="foo" ng-controller="fooCtrl"></ANY>
 
 ### Routing
-The [ngRoute](http://docs.angularjs.org/api/ngRoute) module developed by the AngularJS team is included in ngMeteor, which will satisfy those with simple routing needs, however, for larger applications with more complexed routes, it would be wise to consider using the [meteor-angular-ui-router](https://github.com/ccll/meteor-angular-ui-router) smart package for ngMeteor, which exposes the popular [ui-router](https://github.com/angular-ui/ui-router) module to ngMeteor. For those of you that have grown accustomed to the Meteor methods of routing, ngMeteor is ready to use with [Iron Router](https://github.com/EventedMind/iron-router). 
+The [ngRoute](http://docs.angularjs.org/api/ngRoute) module developed by the AngularJS team is included in ngMeteor, which will satisfy those with simple routing needs, however, for larger applications with more complexed routes, it would be wise to consider using the [meteor-angular-ui-router](https://github.com/ccll/meteor-angular-ui-router) smart package for ngMeteor, which exposes the popular [ui-router](https://github.com/angular-ui/ui-router) module to ngMeteor. For those of you that have grown accustomed to the Meteor methods of routing, unfortunately ngMeteor is not yet ready to use with [Iron Router](https://github.com/EventedMind/iron-router), the initial render of the templates includes the AngularJS bindings however subsequent renders does not, but work is being done to make them work together.
 
 ### Module Injection
 If you have a module called myModule, for example:
