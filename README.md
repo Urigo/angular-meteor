@@ -143,16 +143,16 @@ Templates will also be added to the $templateCache of the ngMeteor angular modul
 ### Routing
 The [ngRoute](http://docs.angularjs.org/api/ngRoute) module developed by the AngularJS team is included in ngMeteor, which will satisfy those with simple routing needs. For example, if you want to call a template called 'foo' and a controller called 'TodoCtrl' when someone lands on your home page you would define your route like this:
 
-      ngMeteor.config(['$routeProvider', '$locationProvider',
-        function($routeProvider, $locationProvider) {
-          $routeProvider.when('/',{
-            templateUrl: 'foo',
-            controller: 'TodoCtrl'
-          });
+    ngMeteor.config(['$routeProvider', '$locationProvider',
+      function($routeProvider, $locationProvider) {
+        $routeProvider.when('/',{
+          templateUrl: 'foo',
+          controller: 'TodoCtrl'
+        });
           
-          $locationProvider.html5Mode(true);
-        }
-      ]);
+        $locationProvider.html5Mode(true);
+      }
+    ]);
 
 For larger applications with more complexed routes, it would be wise to consider using the [meteor-angular-ui-router](https://github.com/ccll/meteor-angular-ui-router) smart package for ngMeteor, which exposes the popular [ui-router](https://github.com/angular-ui/ui-router) module to ngMeteor. For those of you that have grown accustomed to the Meteor methods of routing, unfortunately ngMeteor is not yet ready to use with [Iron Router](https://github.com/EventedMind/iron-router), the initial render of the templates includes the AngularJS bindings however subsequent renders does not, but work is being done to make them work together.
 
