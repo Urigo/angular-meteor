@@ -95,9 +95,15 @@ Remember that you must first publish the collection from the server to the clien
     });
     
     todos.allow({
-      insert: true,
-      update: true,
-      remove: true
+      insert: function(){
+        return true;
+      },
+      update: function(){
+        return true;
+      },
+      remove: function(){
+        return true;
+      }
     });
 
 ### Adding controllers, directives, filters and services
