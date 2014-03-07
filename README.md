@@ -94,7 +94,11 @@ Remember that you must first publish the collection from the server to the clien
       return todos.find({});
     });
     
-    todos.allow({})
+    todos.allow({
+      insert: true,
+      update: true,
+      remove: true
+    });
 
 ### Adding controllers, directives, filters and services
 It is best practice to not use globally defined controllers like they do in the AngularJS demos. Always use the exported package scope ngMeteor as your angular module to register your controller with $controllerProvider. Furthermore, to prevent errors when minifying and obfuscating the controllers, directives, filters or services, you need to use [Dependency Injection](http://docs.angularjs.org/guide/di). For example:
