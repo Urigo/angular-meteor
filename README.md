@@ -132,7 +132,7 @@ It is best practice to not use globally defined controllers like they do in the 
        
         $scope.archive = function() {
           angular.forEach($scope.todos, function(todo) {
-            if (!todo.done) $scope.todos.delete(todo);
+            if (todo.done) $scope.todos.delete(todo);
           });
         };
       }
