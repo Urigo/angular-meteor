@@ -1,18 +1,34 @@
 var ngMeteorCollections = angular.module('ngMeteor.collections', []);
 
-ngMeteorCollections.factory('$collection', ['$window', '$rootScope', 'HashKeyCopier',
-	function($window, $rootScope, HashKeyCopier){
+ngMeteorCollections.factory('$collection', ['$window', '$rootScope', 'HashKeyCopier', '$q',
+	function($window, $rootScope, HashKeyCopier, $q){
 		return function (name, scope, selector, options) {
 			var collection = $window[name];
 			if(!selector) selector = {};
 			if(collection instanceof Meteor.Collection){
 				Deps.autorun(function(){
-					Meteor.subscribe(name);
+					var subscription = Meteor.subscribe(name);
 					scope[name] = HashKeyCopier.copyHashKeys(scope[name],collection.find(selector, options).fetch(),["_id"]);
 					if(!scope.$$phase){scope.$apply()} // I think this bit is redundant now.
 
 					// Temporary Fix
 					//===================================================================
+					scope[name].ready = function(fn){
+						var deferred = $q.defer();
+
+						isReady = setInterval(function() {
+					        if ( subscription.ready() ) {
+					        	deferred.resolve('ready');
+					        	clearInterval(isReady);
+					        } else {
+					        	deferred.reject('not ready');
+					        }
+					    }, 100);
+
+					    deferred.promise.then(function(){
+					    	fn();
+					    });
+					}
 					scope[name].add = function(data){
 						data = angular.copy(data);
 						upsert = function(item){
