@@ -84,7 +84,7 @@ Furthermore, AngularJS models defined using the <code>$collection</code> service
 
 Where the <code>add</code> method is a replacement for both [Meteor.Collection.insert](http://docs.meteor.com/#insert) and [Meteor.Collection.update](http://docs.meteor.com/#update), which is also considered the persistent version of the AngularJS push method, and the <code>delete</code> method is a replacement for [Meteor.Collection.remove](http://docs.meteor.com/#remove). All changes made will be based on the _id property.
 
-There is also a ready method available
+There is also a ready method available, you may need to remove the autopublish package for it to work:
 
     $scope.todos.ready(function(){ ... })
 
