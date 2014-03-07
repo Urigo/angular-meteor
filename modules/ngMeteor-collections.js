@@ -35,7 +35,9 @@ ngMeteorCollections.factory('$collection', ['$window', '$rootScope', 'HashKeyCop
 							if(!item._id){
 								collection.insert(item);
 							}else{
-								collection.update(item._id, {$set: item});
+								var item_id = item._id;
+								delete item._id;
+								collection.update(item_id, {$set: item});
 							}
 						}
 						if(!data){
