@@ -84,11 +84,17 @@ Furthermore, AngularJS models defined using the <code>$collection</code> service
 
 Where the <code>add</code> method is a replacement for both [Meteor.Collection.insert](http://docs.meteor.com/#insert) and [Meteor.Collection.update](http://docs.meteor.com/#update), which is also considered the persistent version of the AngularJS push method, and the <code>delete</code> method is a replacement for [Meteor.Collection.remove](http://docs.meteor.com/#remove). All changes made will be based on the _id property.
 
-Remember that you must first publish the collection from the server to the client, using the following code on the server, before you can access it on the client if you have removed the autopublish package:
+There is also a ready method available
+
+    $scope.todos.ready(function(){ ... })
+
+Remember that you must first publish the collection from the server to the client, using the following code on the server, before you can access it on the client if you have removed the autopublish and insecure packages:
 
     Meteor.publish("todos", function () {
       return todos.find({});
     });
+    
+    todos.allow({})
 
 ### Adding controllers, directives, filters and services
 It is best practice to not use globally defined controllers like they do in the AngularJS demos. Always use the exported package scope ngMeteor as your angular module to register your controller with $controllerProvider. Furthermore, to prevent errors when minifying and obfuscating the controllers, directives, filters or services, you need to use [Dependency Injection](http://docs.angularjs.org/guide/di). For example:
