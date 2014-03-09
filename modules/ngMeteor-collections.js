@@ -7,7 +7,7 @@ ngMeteorCollections.factory('$collection', ['$window', '$rootScope', 'HashKeyCop
 			if(!selector) selector = {};
 			if(collection instanceof Meteor.Collection){
 				Deps.autorun(function(){
-					var subscription = Meteor.subscribe(name, selector, publisher);
+					var subscription = Meteor.subscribe(name, selector, options, publisher);
 					scope[name] = HashKeyCopier.copyHashKeys(scope[name],collection.find(selector, options).fetch(),["_id"]);
 					if(!scope.$$phase){scope.$apply()} // I think this bit is redundant now.
 
