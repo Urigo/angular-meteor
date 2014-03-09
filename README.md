@@ -46,9 +46,9 @@ ngMeteor uses the default [Meteor collections](http://docs.meteor.com/#meteor_co
 
 To preserve the reactivity of the Meteor collection in your AngularJS controllers and directives, you should inject and use the <code>$collection</code> service instead of calling the Meteor collection directly. This is how you would use the <code>$collection</code> service:
 
-    $collection(name, scope, selector, options)
+    $collection(name, scope, selector, options, publisher)
 
-Where the <code>name</code> argument refers to the name of the Meteor Collection, <code>scope</code> refers to the $scope you would like to add the collection to, and the arguments <code>selector</code> and <code>options</code> are the same as they are for [Meteor.Collection.find](http://docs.meteor.com/#find). For example, if I have a Meteor collection called "todos", which I want to add into the scope of my controller, $scope, then I would do this:
+Where the <code>name</code> argument refers to the name of the Meteor Collection, <code>scope</code> refers to the $scope you would like to add the collection to, and the arguments <code>selector</code> and <code>options</code> are the same as they are for [Meteor.Collection.find](http://docs.meteor.com/#find). The <code>selector</code> and <code>options</code> arguments will be passed to Meteor.publish on the server. Additionally, the <code>publisher</code> argument allows you to optionally pass additional arugments to Meteor.publish on the server (see the example publish function below). For example, if I have a Meteor collection called "todos", which I want to add into the scope of my controller, $scope, then I would do this:
 
     $collection("todos", $scope)
 
@@ -88,10 +88,10 @@ There is also a ready method available, you may need to remove the autopublish p
 
     $scope.todos.ready(function(){ ... })
 
-Remember that you must first publish the collection from the server to the client, using the following code on the server, before you can access it on the client if you have removed the autopublish and insecure packages:
+Remember that you must first publish the collection from the server to the client before you can access it on the client if you have removed the autopublish and insecure packages:
 
-    Meteor.publish("todos", function () {
-      return todos.find({});
+    Meteor.publish("todos", function (selector, options, publisher) {
+      return todos.find(selector, options);
     });
     
     todos.allow({
