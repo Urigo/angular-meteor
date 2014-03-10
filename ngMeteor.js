@@ -37,12 +37,4 @@ angular.element(document).ready(function() {
 	if (!angular.element(document).injector()){
 		angular.bootstrap(document, ['ngMeteor']);
 	}
-
-	Deps.afterFlush(function(){
-		angular.element(document).injector().invoke(function($compile, $document, $rootScope){
-			$compile($document)($rootScope);
-			$rootScope.$digest();
-		});
-	});
-	
 });
