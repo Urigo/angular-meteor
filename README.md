@@ -183,9 +183,14 @@ it can be easily injected into ngMeteor like this:
 
 Using this method, additional functionality has been provided to ngMeteor in the form of separate atmosphere smart packages that expose and inject angular modules into ngMeteor. These packages have been developed by either the ngMeteor Team and/or by third parties. The following is a non-exhaustive list of these packages:
 
-- [meteor-angular-ui-router](https://github.com/ccll/meteor-angular-ui-router) empowers ngMeteor with the [ui-router](https://github.com/angular-ui/ui-router) module.
-- [meteor-angular-bootstrap](https://github.com/ccll/meteor-angular-bootstrap) empowers ngMeteor with the [ui-bootstrap](http://angular-ui.github.io/bootstrap/) module.
-- [meteor-ionic](https://github.com/cramrov/meteor-ionic) empowers ngMeteor with the [Ionic Framework](http://ionicframework.com/).
+- [angular-ui-router](https://github.com/ccll/meteor-angular-ui-router) empowers ngMeteor with the [ui-router](https://github.com/angular-ui/ui-router) module.
+- - [spiderable-ui-router](https://github.com/ccll/meteor-spiderable-ui-router) integrates the Meteor spiderable package with the [ui-router](https://github.com/angular-ui/ui-router) module.
+- [angular-bootstrap](https://github.com/ccll/meteor-angular-bootstrap) empowers ngMeteor with the [ui-bootstrap](http://angular-ui.github.io/bootstrap/) framework.
+- [ionic](https://github.com/cramrov/meteor-ionic) empowers ngMeteor with the [Ionic Framework](http://ionicframework.com/).
+- [angular-leaflet](https://github.com/QaDeS/meteor-angularjs-leaflet) empowers ngMeteor with the [Leaflet](https://github.com/tombatossals/angular-leaflet-directive) directive.
+- [angular-nojquery](https://github.com/QaDeS/meteor-angularjs-nojquery) prevents jQuery from interfering with ngMeteor.
+- [angular-ui-utlis](https://github.com/pscanf/meteor-angular-ui-utils) empowers ngMeteor with the [ui-utlis](http://angular-ui.github.io/ui-utils/) utiliy package.
+- [ngStorage](https://github.com/pscanf/meteor-ngStorage) empowers ngMeteor with the [ngStorage](https://github.com/gsklee/ngStorage) module.
 
 Feel free to make ngMeteor module smart packages, and please contact [loneleeandroo](https://github.com/loneleeandroo) if you would like your package to be listed here as well.
 
