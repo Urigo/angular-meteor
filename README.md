@@ -44,7 +44,7 @@ ngMeteor uses the default [Meteor collections](http://docs.meteor.com/#meteor_co
 
     todos = new Meteor.Collection("todos");
 
-To preserve the reactivity of the Meteor collection in your AngularJS controllers and directives, you should inject and use the <code>$collection</code> service instead of calling the Meteor collection directly. This is how you would use the <code>$collection</code> service:
+To preserve the reactivity of the Meteor collection in your AngularJS controllers and directives, you should inject and use the <code>$collection</code> service instead of calling the Meteor collection directly. The $collection service will automatically subscribe to your published Meteor collection so you will not need to use Meteor.subscribe beforehand. This is how you would use the <code>$collection</code> service:
 
     $collection(name, scope, selector, options, publisher)
 
