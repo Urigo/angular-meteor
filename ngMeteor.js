@@ -21,19 +21,6 @@ ngMeteor.config(['$interpolateProvider',
 
 // Manual initilisation of ngMeteor
 angular.element(document).ready(function() {
-	if(Template.__defaultLayout__){
-		// For compatability with iron-router
-		Template.__defaultLayout__.rendered = function(){
-			angular.bootstrap(document, ['ngMeteor']);
-		}
-	}else{
-		angular.bootstrap(document, ['ngMeteor']);
-	}
-});
-
-
-// Manual initilisation of ngMeteor
-angular.element(document).ready(function() {
 	if (!angular.element(document).injector()){
 		angular.bootstrap(document, ['ngMeteor']);
 	}
