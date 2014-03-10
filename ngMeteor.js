@@ -9,7 +9,6 @@ ngMeteor = angular.module('ngMeteor', [
 	'ngCookies',
 	'ngResource',
 	'ngSanitize'
-	//'ngMock'
 ]);
 
 // Change the data-bindings from {{foo}} to [[foo]]
