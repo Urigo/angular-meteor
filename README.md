@@ -184,7 +184,7 @@ it can be easily injected into ngMeteor like this:
 Using this method, additional functionality has been provided to ngMeteor in the form of separate atmosphere smart packages that expose and inject angular modules into ngMeteor. These packages have been developed by either the ngMeteor Team and/or by third parties. The following is a non-exhaustive list of these packages:
 
 - [angular-ui-router](https://github.com/ccll/meteor-angular-ui-router) empowers ngMeteor with the [ui-router](https://github.com/angular-ui/ui-router) module.
-- [spiderable-ui-router](https://github.com/ccll/meteor-spiderable-ui-router) integrates the Meteor spiderable package with the [angular-ui-router](https://github.com/ccll/meteor-angular-ui-router) smart package.
+- [spiderable-ui-router](https://github.com/ccll/meteor-spiderable-ui-router) integrates the Meteor spiderable smart package with the [angular-ui-router](https://github.com/ccll/meteor-angular-ui-router) smart package.
 - [angular-bootstrap](https://github.com/ccll/meteor-angular-bootstrap) empowers ngMeteor with the [ui-bootstrap](http://angular-ui.github.io/bootstrap/) framework.
 - [ionic](https://github.com/cramrov/meteor-ionic) empowers ngMeteor with the [Ionic Framework](http://ionicframework.com/).
 - [angular-leaflet](https://github.com/QaDeS/meteor-angularjs-leaflet) empowers ngMeteor with the [Leaflet](https://github.com/tombatossals/angular-leaflet-directive) directive.
