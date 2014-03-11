@@ -84,7 +84,7 @@ Furthermore, AngularJS models defined using the <code>$collection</code> service
 
 Where the <code>add</code> method is a replacement for both [Meteor.Collection.insert](http://docs.meteor.com/#insert) and [Meteor.Collection.update](http://docs.meteor.com/#update), which is also considered the persistent version of the AngularJS push method, and the <code>delete</code> method is a replacement for [Meteor.Collection.remove](http://docs.meteor.com/#remove). All changes made will be based on the _id property.
 
-There is also a ready method available, you may need to remove the autopublish package for it to work:
+There is also a ready method available, you need to remove the autopublish smart package for it to work:
 
     $scope.todos.ready(function(){ ... })
 
@@ -155,6 +155,8 @@ Templates will also be added to the $templateCache of the ngMeteor angular modul
 
     <!--Add the ng-controller attribute if you want to load a controller at the same time.-->    
     <ANY ng-template="foo" ng-controller="fooCtrl"></ANY>
+    
+Templates with names starting with "_", for example "__define__", will not be put into the $templateCache, so you will not be able to access those templates using ng-template, ng-include or ng-view.
 
 ### Routing
 The [ngRoute](http://docs.angularjs.org/api/ngRoute) module developed by the AngularJS team is included in ngMeteor, which will satisfy those with simple routing needs. For example, if you want to call a template called 'foo' and a controller called 'TodoCtrl' when someone lands on your home page you would define your route like this:
