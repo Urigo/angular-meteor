@@ -108,7 +108,7 @@ Remember that you must first publish the collection from the server to the clien
       }
     });
     
-The current way to use the Meteor.collections method is to do this:
+The current way to use the Meteor.users is to do this:
 
     Users = Meteor.users;
     
