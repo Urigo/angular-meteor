@@ -40,6 +40,8 @@ To prevent conflicts with Handlebars, ngMeteor has changed the default AngularJS
     </div>
 
 ### Using Meteor Collections
+> I'm working on improving the way the $collection service works in the next version of ngMeteor. The improvements will slighlty change the way you currently use $collection in your application, more details on the changes will be available upon the release of the new $collection service. The changes will give you greater flexibility and control over how you declare, subscribe and publish functions without deviating too much from the current implementation.
+
 ngMeteor uses the default [Meteor collections](http://docs.meteor.com/#meteor_collection), so you would declare a new collection like this:
 
     todos = new Meteor.Collection("todos");
@@ -105,6 +107,18 @@ Remember that you must first publish the collection from the server to the clien
         return true;
       }
     });
+    
+The current way to use the Meteor.collections method is to do this:
+
+    Users = Meteor.users;
+    
+    if(Meteor.isClient){
+        ngMeteor.controller("TodoCtrl, ['$scope','$collection', 
+            function($scope,$collection){
+                $collection('Users', $scope);
+            }
+        ]);
+    }
 
 ### Adding controllers, directives, filters and services
 It is best practice to not use globally defined controllers like they do in the AngularJS demos. Always use the exported package scope ngMeteor as your angular module to register your controller with $controllerProvider. Furthermore, to prevent errors when minifying and obfuscating the controllers, directives, filters or services, you need to use [Dependency Injection](http://docs.angularjs.org/guide/di). For example:
