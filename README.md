@@ -40,7 +40,7 @@ To prevent conflicts with Handlebars, ngMeteor has changed the default AngularJS
     </div>
 
 ### Using Meteor Collections
-> I'm working on improving the way the $collection service works in the next version of ngMeteor. The improvements will slighlty change the way you currently use $collection in your application, more details on the changes will be available upon the release of the new $collection service. The changes will give you greater flexibility and control over how you declare, subscribe and publish functions without deviating too much from the current implementation.
+> I'm working on improving the way the $collection service works in the next version of ngMeteor. The improvements will slightly change the way you currently use $collection in your application, more details on the changes will be available upon the release of the new $collection service. The changes will give you greater flexibility and control over how you declare, subscribe and publish functions without deviating too much from the current implementation.
 
 ngMeteor uses the default [Meteor collections](http://docs.meteor.com/#meteor_collection), so you would declare a new collection like this:
 
