@@ -37,10 +37,10 @@ angular.element(document).ready(function() {
 			var runResult = oldRun.apply(this, arguments);
 			key = this._currentController.template
 			Template[key].rendered = function(){
-				angular.element(document).injector().invoke(function($compile, $document, $rootScope){
+				angular.element(document).injector().invoke(['$compile', '$document', '$rootScope', function($compile, $document, $rootScope){
 					$compile($document)($rootScope);
 					$rootScope.$digest();
-				});
+				}]);
 				Template[key].rendered = null;
 			}
 			return runResult;
