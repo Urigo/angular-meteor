@@ -31,19 +31,21 @@ ngMeteorTemplate.directive('ngTemplate', ['$templateCache', '$compile',
 
 // Re-compiles template when rendering with Iron-Router
 angular.element(document).ready(function() {
-	if(Package['iron-router']){
-		var oldRun = Router.run;
-		Router.run = function() {
-			var runResult = oldRun.apply(this, arguments);
-			key = this._currentController.template
-			Template[key].rendered = function(){
-				angular.element(document).injector().invoke(['$compile', '$document', '$rootScope', function($compile, $document, $rootScope){
-					$compile($document)($rootScope);
-					$rootScope.$digest();
-				}]);
-				Template[key].rendered = null;
-			}
-			return runResult;
-		};
-	}
+    if(Package['iron-router']){
+        var oldRun = Router.run;
+        Router.run = function() {
+            var runResult = oldRun.apply(this, arguments);
+            key = this._currentController.template
+            var oldRendered = Template[key].rendered;
+            Template[key].rendered = function(){
+                angular.element(document).injector().invoke(['$compile', '$document', '$rootScope', function($compile, $document, $rootScope){
+                    $compile($document)($rootScope);
+                    $rootScope.$digest();
+                    oldRendered.apply(this, arguments);
+                }]);
+                Template[key].rendered = oldRendered;
+            }
+            return runResult;
+        };
+    }
 });
