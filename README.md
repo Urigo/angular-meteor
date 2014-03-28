@@ -3,6 +3,16 @@ ngMeteor
 > The simplest no-conflict way to use AngularJS with Meteor, Meteorite and Atmosphere Smart Packages.
 > Currently implementing a [Demo Page](http://ng.meteor.com).
 
+## Features for v0.2
+* Decouple Meteor.subscribe from $collection service.
+* Allow users to define their own model to attach the $collection service.
+* Include method to save all objects in a model to the collection.
+* Include method to delete all objects in a model from the collection.
+* Include method to allow users to automatically create a three way data bind between model, view and collection.
+* Update documentation on $collection service with examples.
+* More general method to recompile angular code whenever a template is re-rendered using Handlebar helpers, such as #if and with iron-router.
+* Optional: Create ngMeteor generator for Yeoman to allow users to get started more quickly.
+
 ## Quick start
 1. Install [Meteor](http://docs.meteor.com/#quickstart) <code>curl https://install.meteor.com | /bin/sh</code>
 2. Install [Meteorite](https://github.com/oortcloud/meteorite#installing-meteorite) <code>npm install -g meteorite</code>
