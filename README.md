@@ -15,4 +15,5 @@ ngMeteor v0.2
 * More general method to recompile angular code whenever a template is re-rendered using Handlebar helpers, such as #if and with iron-router, than the current workaround for iron-router.
 * Move all documentation from README to ng.meteor.com with walkthroughs and examples akin the AngularJS website.
 * Add new method to inject angular modules into ngMeteor.
+* Update to Angular v1.3.x (latest).
 * Optional: Create ngMeteor generator for Yeoman to allow users to get started more quickly and easily.
