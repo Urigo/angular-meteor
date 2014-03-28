@@ -4,7 +4,7 @@ ngMeteor
 > Currently implementing a [Demo Page](http://ng.meteor.com).
 
 ## Features for v0.2
-* Decouple Meteor.subscribe from $collection service.
+* Decouple Meteor.subscribe from $collection service to allow users to subscribe to publishers with a different name to the collection, and also allow multiple subscriptions.
 * Allow users to define their own model to attach the $collection service.
 * Include method to save all objects in a model to the collection.
 * Include method to delete all objects in a model from the collection.
