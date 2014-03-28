@@ -2,6 +2,7 @@ ngMeteor v0.2
 ========
 > The simplest no-conflict way to use AngularJS with Meteor, Meteorite and Atmosphere Smart Packages.
 > [Explore ngMeteor](http://ng.meteor.com).
+
 > WARNING: This branch is not stable yet. It is subject to experimentation and change.
 
 ## TODO for v0.2
