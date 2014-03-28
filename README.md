@@ -10,7 +10,7 @@ ngMeteor
 * Include method to delete all objects in a model from the collection.
 * Include method to allow users to automatically create a three way data bind between model, view and collection.
 * Update documentation on $collection service with examples.
-* More general method to recompile angular code whenever a template is re-rendered using Handlebar helpers, such as #if and with iron-router.
+* More general method to recompile angular code whenever a template is re-rendered using Handlebar helpers, such as #if and with iron-router, than the current workaround for iron-router.
 * Optional: Create ngMeteor generator for Yeoman to allow users to get started more quickly.
 
 ## Quick start
