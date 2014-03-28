@@ -2,9 +2,9 @@ var ngMeteorTemplate = angular.module('ngMeteor.template', []);
 
 ngMeteorTemplate.run(['$templateCache',
 	function($templateCache) {
-		angular.forEach(Template, function(render, name){
+		angular.forEach(Template, function(template, name){
 			if(name.charAt(0) != "_"){
-				$templateCache.put(name, render() );
+				$templateCache.put(name, template.render() );
 			}
 		});
 	}
