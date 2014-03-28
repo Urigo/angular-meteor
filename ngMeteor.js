@@ -2,7 +2,6 @@
 ngMeteor = angular.module('ngMeteor', [
 	'ngMeteor.collections', 
 	'ngMeteor.template',
-	'hashKeyCopier',
 	'ngRoute', 
 	'ngTouch',
 	'ngAnimate',
