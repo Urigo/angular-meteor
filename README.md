@@ -2,8 +2,9 @@ ngMeteor v0.2
 ========
 > The simplest no-conflict way to use AngularJS with Meteor, Meteorite and Atmosphere Smart Packages.
 > [Explore ngMeteor](http://ng.meteor.com).
+> This branch is not stable yet.
 
-## Features for v0.2
+## TODO for v0.2
 * Decouple Meteor.subscribe from $collection service to allow users to subscribe to publishers with a different name to the collection, and also allow multiple subscriptions.
 * Allow users to define their own model to attach the $collection service.
 * Include method to save all objects in a model to the collection.
