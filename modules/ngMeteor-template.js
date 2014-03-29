@@ -39,9 +39,9 @@ angular.element(document).ready(function() {
     if(Package['iron-router']){
         var oldRun = Router.run;
         Router.run = function() {
-            var runResult = oldRun.apply(this, arguments);
-            key = this._currentController.template
-            var oldRendered = Template[key].rendered;
+            var runResult = oldRun.apply(this, arguments),
+            	key = this._currentController.template,
+            	oldRendered = Template[key].rendered;
             Template[key].rendered = function(){
                 angular.element(document).injector().invoke(['$compile', '$document', '$rootScope', 
                 	function($compile, $document, $rootScope){
