@@ -13,10 +13,10 @@ ngMeteorTemplate.run(['$templateCache',
 ngMeteorTemplate.directive('ngTemplate', [
 	function() {
 		return {
-			restrict: 'AE',
+			restrict: 'A',
 			scope: true,
 			template: function(element, attributes){
-				var	name = attributes.ngTemplate || attributes.name,   
+				var	name = attributes.ngTemplate,   
 					template = Template[name],
 					templateString = null;
 
@@ -27,6 +27,17 @@ ngMeteorTemplate.directive('ngTemplate', [
 				}
 
 		      	return templateString;		    
+			},
+			link: function(scope, element, attributes) {
+				var	name = attributes.ngTemplate,
+					template = Template[name];
+					
+				angular.forEach(template._events, function(eventObj){
+					var eventType = eventObj.events,
+						eventSelector = eventObj.selector,
+						eventHandler = eventObj.handler;
+					$('[ng-template="' + name + '"] ' + eventSelector + '').bind(eventType, eventHandler);
+				});
 			}
 		};
 	}
