@@ -11,8 +11,8 @@ ngMeteor v0.2
 * Allow users to define their own model to attach the $collection service. (Done)
 * Include method to save all objects in a model to the collection. (Done)
 * Include method to delete all objects in a model from the collection. (Done)
-* Include method to allow users to automatically create a three way data bind between model, view and collection.
-* Update documentation on $collection service with examples. (In progress)
+* Include method to allow users to automatically create a three way data bind between model, view and collection. (In progress)
+* Update documentation on $collection service with examples.
 * More general method to recompile angular code whenever a template is re-rendered using Handlebar helpers, such as #if and with iron-router, than the current workaround for iron-router.
 * Move all documentation from README to ng.meteor.com with walkthroughs and examples akin the AngularJS website.
 * Add new method to inject angular modules into ngMeteor.
