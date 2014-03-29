@@ -4,7 +4,8 @@ ngMeteorTemplate.run(['$templateCache',
 	function($templateCache) {
 		angular.forEach(Template, function(render, name){
 			if(name.charAt(0) != "_"){
-				$templateCache.put(name, render() );
+				var templateString = HTML.toHTML(template.render());
+				$templateCache.put(name, templateString);
 			}
 		});
 	}

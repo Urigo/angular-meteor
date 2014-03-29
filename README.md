@@ -16,4 +16,5 @@ ngMeteor v0.2
 * Move all documentation from README to ng.meteor.com with walkthroughs and examples akin the AngularJS website.
 * Add new method to inject angular modules into ngMeteor.
 * Update to Angular v1.3.x (latest).
+* Pass helper functions to ngMeteor templates.
 * Optional: Create ngMeteor generator for Yeoman to allow users to get started more quickly and easily.
