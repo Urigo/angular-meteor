@@ -20,12 +20,10 @@ ngMeteorTemplate.directive('ngTemplate', [
 					template = Template[name],
 					templateString = null;
 
-					console.log(template);
-
 				if(angular.isDefined(template)){
 					templateString = HTML.toHTML(template.render());
 				} else{
-					throw new ReferenceError("There is no Meteor template with the name '" + attributes.ngTemplate + "'.");
+					throw new ReferenceError("There is no Meteor template with the name '" + name + "'.");
 				}
 
 		      	return templateString;		    
