@@ -43,11 +43,13 @@ angular.element(document).ready(function() {
             key = this._currentController.template
             var oldRendered = Template[key].rendered;
             Template[key].rendered = function(){
-                angular.element(document).injector().invoke(['$compile', '$document', '$rootScope', function($compile, $document, $rootScope){
-                    $compile($document)($rootScope);
-                    $rootScope.$digest();
-                    oldRendered.apply(this, arguments);
-                }]);
+                angular.element(document).injector().invoke(['$compile', '$document', '$rootScope', 
+                	function($compile, $document, $rootScope){
+	                    $compile($document)($rootScope);
+	                    $rootScope.$digest();
+	                    oldRendered.apply(this, arguments);
+                	}
+                ]);
                 Template[key].rendered = oldRendered;
             }
             return runResult;
