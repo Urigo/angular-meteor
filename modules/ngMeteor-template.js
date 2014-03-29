@@ -2,30 +2,34 @@ var ngMeteorTemplate = angular.module('ngMeteor.template', []);
 
 ngMeteorTemplate.run(['$templateCache',
 	function($templateCache) {
-		angular.forEach(Template, function(render, name){
+		angular.forEach(Template, function(template, name){
 			if(name.charAt(0) != "_"){
-				var templateString = HTML.toHTML(template.render());
-				$templateCache.put(name, templateString);
+				$templateCache.put(name, '<div ng-template="' + name + '"></div>');
 			}
 		});
 	}
 ]);
 
-ngMeteorTemplate.directive('ngTemplate', ['$templateCache', '$compile',
-	function($templateCache, $compile) {
+ngMeteorTemplate.directive('ngTemplate', [
+	function() {
 		return {
 			restrict: 'AE',
 			scope: true,
-			link: function(scope, element, attributes) {
-				var	name = attributes.ngTemplate || attributes.name,
-					template = $templateCache.get(name);
+			template: function(element, attributes){
+				var	name = attributes.ngTemplate || attributes.name,   
+					template = Template[name],
+					templateString = null;
+
+					console.log(template);
+
 				if(angular.isDefined(template)){
-					element.html(template);
-					element.replaceWith($compile(element.html())(scope));
+					templateString = HTML.toHTML(template.render());
 				} else{
-					console.error("ngMeteor: There is no template with the name '" + attributes.ngTemplate + "'");
+					throw new ReferenceError("There is no Meteor template with the name '" + attributes.ngTemplate + "'.");
 				}
-	        }
+
+		      	return templateString;		    
+			}
 		};
 	}
 ]);
