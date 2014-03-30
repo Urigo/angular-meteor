@@ -4,7 +4,7 @@ ngMeteor
 > Currently implementing a [Demo Page](http://ng.meteor.com).
 > Also, I made this little app using ngMeteor so that I could calculate the type effectiveness quickly while I was playing Pokemon Y, [PokeLab](http://pokelab.meteor.com/).
 
-> ngMeteor works with Blaze.
+> ngMeteor v0.1.22+ works with Blaze.
 
 ## Quick start
 1. Install [Meteor](http://docs.meteor.com/#quickstart) <code>curl https://install.meteor.com | /bin/sh</code>
