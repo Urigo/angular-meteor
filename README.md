@@ -6,6 +6,8 @@ ngMeteor v0.2
 > WARNING: This branch is not stable yet. It is subject to experimentation and change.
 
 ## TODO for v0.2
+> Target release to be before May 2014.
+
 ### Dependencies (100% Done)
 * Update to Angular v1.3.x (latest). (Done)
 
