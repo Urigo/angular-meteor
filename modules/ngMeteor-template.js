@@ -4,19 +4,19 @@ ngMeteorTemplate.run(['$templateCache',
 	function($templateCache) {
 		angular.forEach(Template, function(template, name){
 			if(name.charAt(0) != "_"){ // Ignores templates with names starting with "_"
-				$templateCache.put(name, '<div ng-template="' + name + '"></div>');
+				$templateCache.put(name, '<ng-template name="' + name + '"></span>');
 			}
 		});
 	}
 ]);
 
-ngMeteorTemplate.directive('ngTemplate', [
-	function() {
+ngMeteorTemplate.directive('ngTemplate', ['$templateCache',
+	function($templateCache) {
 		return {
-			restrict: 'A',
+			restrict: 'E',
 			scope: true,
 			template: function(element, attributes){
-				var	name = attributes.ngTemplate,   
+				var	name = attributes.name,   
 					template = Template[name],
 					templateRender = template.render(),
 					templateString = null;
@@ -26,7 +26,7 @@ ngMeteorTemplate.directive('ngTemplate', [
 					if (angular.isObject(v)) {
 						if (v._super) {
 							var transcludeTemplateName = v._super.kind.replace('Template_','');
-							templateRender[k] = new HTML.Raw('<span ng-template="' + transcludeTemplateName + '"></span>');
+							templateRender[k] = new HTML.Raw($templateCache.get(transcludeTemplateName));
 						}
 					}
 				});
@@ -40,9 +40,9 @@ ngMeteorTemplate.directive('ngTemplate', [
 		      	return templateString;		    
 			},
 			link: function(scope, element, attributes) {
-				var	name = attributes.ngTemplate,
+				var	name = attributes.name,
 					template = Template[name];
-				
+
 				// Includes the templates event maps. 
 				// Attaching events using selectors is not the recommended approach taken by AngularJS.
 				// That being said, the template event maps are included to maintain flexibility in the Meteor + Angular integration.
@@ -52,7 +52,8 @@ ngMeteorTemplate.directive('ngTemplate', [
 					var eventType = eventObj.events,
 						eventSelector = eventObj.selector,
 						eventHandler = eventObj.handler;
-					$('[ng-template="' + name + '"] ' + eventSelector + '').bind(eventType, eventHandler);
+
+						$('ng-template[name="' + name + '"] ' + eventSelector + '').bind(eventType, eventHandler);
 				});
 			}
 		};
