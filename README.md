@@ -37,4 +37,5 @@ ngMeteor v0.2
 * Move all documentation from README to ng.meteor.com with walkthroughs and examples akin the AngularJS website.
 
 ### Optionals
+* Removing AngularJS lib files from ngMeteor pacakge and recommend users to use [bower smart package](https://github.com/mquandalle/meteor-bower) to fetch latest AngularJS files. 
 * Create ngMeteor generator for Yeoman to allow users to get started more quickly and easily.
