@@ -53,6 +53,8 @@ ngMeteorTemplate.directive('ngTemplate', ['$templateCache',
 						eventSelector = eventObj.selector,
 						eventHandler = eventObj.handler;
 
+						// Test all eventType to see if there is an equivalent in jQuery.
+
 						$('ng-template[name="' + name + '"] ' + eventSelector + '').bind(eventType, eventHandler);
 				});
 			}
