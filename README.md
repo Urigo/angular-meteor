@@ -8,7 +8,7 @@ ngMeteor v0.2
 ## TODO for v0.2
 > Target release to be before May 2014.
 >
-> ngMeteor v0.2+ will be dropping support for IE 8 because due to the release of [AngularJS v1.3+](http://blog.angularjs.org/2013/12/angularjs-13-new-release-approaches.html).
+> ngMeteor v0.2+ will be dropping support for IE 8 due to the release of [AngularJS v1.3+](http://blog.angularjs.org/2013/12/angularjs-13-new-release-approaches.html).
 
 ### Dependencies (100% Done)
 * Update to Angular v1.3.x (latest). (Done)
