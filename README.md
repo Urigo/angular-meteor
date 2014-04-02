@@ -31,11 +31,11 @@ ngMeteor v0.2
 * More general method to recompile angular code whenever a template is re-rendered using Handlebar helpers, such as #if and with iron-router, than the current workaround for iron-router.
 
 ### Documentation (0% Done)
+* Move all documentation from README to ng.meteor.com with walkthroughs and examples akin the AngularJS website.
 * Update documentation on $collection service with examples.
 * Update documentation on ngTemplate directive with examples.
 * Update documentation on ngMeteor module injection with examples.
 * Updated documentation to recommend the [Best Practice Recommendations for Angular App Structure](https://docs.google.com/document/d/1XXMvReO8-Awi1EZXAXS4PzDzdNvV6pGcuaF4Q9821Es/pub) for structuring the client folder.
-* Move all documentation from README to ng.meteor.com with walkthroughs and examples akin the AngularJS website.
 
 ### Optionals
 * Removing AngularJS lib files from ngMeteor pacakge and recommend users to use the [bower smart package](https://github.com/mquandalle/meteor-bower) to fetch latest AngularJS files. 
