@@ -7,14 +7,19 @@ ngMeteor v0.2
 
 ## TODO for v0.2
 * Update to Angular v1.3.x (latest). (Done)
+* Add new method to inject angular modules into ngMeteor. (In progress)
 * Decouple Meteor.subscribe from $collection service to allow users to subscribe to publishers with a different name to the collection, and also allow multiple subscriptions. (Done)
 * Allow users to define their own model to attach the $collection service. (Done)
 * Include method to save all objects in a model to the collection. (Done)
 * Include method to delete all objects in a model from the collection. (Done)
 * Include method to allow users to automatically create a three way data bind between model, view and collection. (In progress)
+* Use ngTemplate's template property to render the Meteor template. (Done)
+* Transclude nested templates using the ngTemplate directive. (Done)
+* Pass Meteor template event maps to the ngTemplate directive. (Done)
+* Store the ngTemplate directive in $templateCache rather then the raw HTML string. (Done)
+* More general method to recompile angular code whenever a template is re-rendered using Handlebar helpers, such as #if and with iron-router, than the current workaround for iron-router. (In progress)
 * Update documentation on $collection service with examples.
-* More general method to recompile angular code whenever a template is re-rendered using Handlebar helpers, such as #if and with iron-router, than the current workaround for iron-router.
+* Update documentation on ngTemplate directive with examples.
+* Update documentation on ngMeteor module injection with examples.
 * Move all documentation from README to ng.meteor.com with walkthroughs and examples akin the AngularJS website.
-* Add new method to inject angular modules into ngMeteor.
-* Pass helper functions to ngMeteor templates.
 * Optional: Create ngMeteor generator for Yeoman to allow users to get started more quickly and easily.

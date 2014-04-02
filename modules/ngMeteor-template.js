@@ -3,7 +3,7 @@ var ngMeteorTemplate = angular.module('ngMeteor.template', []);
 ngMeteorTemplate.run(['$templateCache',
 	function($templateCache) {
 		angular.forEach(Template, function(template, name){
-			if(name.charAt(0) != "_"){
+			if(name.charAt(0) != "_"){ // Ignores templates with names starting with "_"
 				$templateCache.put(name, '<div ng-template="' + name + '"></div>');
 			}
 		});
@@ -18,10 +18,21 @@ ngMeteorTemplate.directive('ngTemplate', [
 			template: function(element, attributes){
 				var	name = attributes.ngTemplate,   
 					template = Template[name],
+					templateRender = template.render(),
 					templateString = null;
 
+				// Check for nested templates in the render object and replace them with the equivalent ngTemplate directive.
+				angular.forEach(templateRender, function(v,k){
+					if (angular.isObject(v)) {
+						if (v._super) {
+							var transcludeTemplateName = v._super.kind.replace('Template_','');
+							templateRender[k] = new HTML.Raw('<span ng-template="' + transcludeTemplateName + '"></span>');
+						}
+					}
+				});
+
 				if(angular.isDefined(template)){
-					templateString = HTML.toHTML(template.render());
+					templateString = HTML.toHTML(templateRender);
 				} else{
 					throw new ReferenceError("There is no Meteor template with the name '" + name + "'.");
 				}
@@ -31,7 +42,12 @@ ngMeteorTemplate.directive('ngTemplate', [
 			link: function(scope, element, attributes) {
 				var	name = attributes.ngTemplate,
 					template = Template[name];
-					
+				
+				// Includes the templates event maps. 
+				// Attaching events using selectors is not the recommended approach taken by AngularJS.
+				// That being said, the template event maps are included to maintain flexibility in the Meteor + Angular integration.
+				// It is not ngMeteor's role to dictate which approach a developer should take, 
+				// so ngMeteor has left it up to the user to decide which approach they prefer when developing.
 				angular.forEach(template._events, function(eventObj){
 					var eventType = eventObj.events,
 						eventSelector = eventObj.selector,
