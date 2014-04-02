@@ -33,6 +33,7 @@ ngMeteor v0.2
 * Update documentation on $collection service with examples.
 * Update documentation on ngTemplate directive with examples.
 * Update documentation on ngMeteor module injection with examples.
+* Updated documentation to recommend the [Best Practice Recommendations for Angular App Structure](https://docs.google.com/document/d/1XXMvReO8-Awi1EZXAXS4PzDzdNvV6pGcuaF4Q9821Es/pub) for structuring the client folder.
 * Move all documentation from README to ng.meteor.com with walkthroughs and examples akin the AngularJS website.
 
 ### Optionals
