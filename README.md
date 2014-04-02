@@ -8,6 +8,7 @@ ngMeteor v0.2
 ## TODO for v0.2
 * Update to Angular v1.3.x (latest). (Done)
 * Add new method to inject angular modules into ngMeteor. (In progress)
+* Allow users to define their own angular module, ngMeteor will be injected automatically. (In progress)
 * Decouple Meteor.subscribe from $collection service to allow users to subscribe to publishers with a different name to the collection, and also allow multiple subscriptions. (Done)
 * Allow users to define their own model to attach the $collection service. (Done)
 * Include method to save all objects in a model to the collection. (Done)
