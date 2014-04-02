@@ -16,7 +16,7 @@ ngMeteor v0.2
 * Use ngTemplate's template property to render the Meteor template. (Done)
 * Transclude nested templates using the ngTemplate directive. (Done)
 * Pass Meteor template event maps to the ngTemplate directive. (Done)
-* Store the ngTemplate directive in $templateCache rather then the raw HTML string. (Done)
+* Store the ngTemplate directive in $templateCache rather than the raw HTML string. (Done)
 * More general method to recompile angular code whenever a template is re-rendered using Handlebar helpers, such as #if and with iron-router, than the current workaround for iron-router. (In progress)
 * Update documentation on $collection service with examples.
 * Update documentation on ngTemplate directive with examples.
