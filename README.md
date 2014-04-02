@@ -13,7 +13,7 @@ ngMeteor v0.2
 ### Dependencies (100% Done)
 * Update to Angular v1.3.x (latest). (Done)
 
-### Modules (0% Done)
+### Modules (100% Done)
 * Add new method to inject angular modules into ngMeteor. (Done)
 
 ### Collections (90% Done)
