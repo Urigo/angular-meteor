@@ -17,6 +17,7 @@ Package.on_use(function (api) {
 		'lib/angular-route.js',
 		'lib/angular-sanitize.js',
 		'lib/angular-touch.js',
+		'lib/angular-hash-key-copier.js',
 		// Module Files
 		'modules/ngMeteor-collections.js',
 		'modules/ngMeteor-template.js',

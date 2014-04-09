@@ -43,11 +43,13 @@ ngMeteorTemplate.directive('ngTemplate', ['$templateCache',
 				var	name = attributes.name,
 					template = Template[name];
 
-				// Includes the templates event maps. 
-				// Attaching events using selectors is not the recommended approach taken by AngularJS.
-				// That being said, the template event maps are included to maintain flexibility in the Meteor + Angular integration.
-				// It is not ngMeteor's role to dictate which approach a developer should take, 
-				// so ngMeteor has left it up to the user to decide which approach they prefer when developing.
+				/**
+				* Includes the templates event maps. 
+				* Attaching events using selectors is not the recommended approach taken by AngularJS.
+				* That being said, the template event maps are included to maintain flexibility in the Meteor + Angular integration.
+				* It is not ngMeteor's role to dictate which approach a developer should take, 
+				* so ngMeteor has left it up to the user to decide which approach they prefer when developing.
+				**/
 				angular.forEach(template._events, function(eventObj){
 					var eventType = eventObj.events,
 						eventSelector = eventObj.selector,
@@ -57,6 +59,7 @@ ngMeteorTemplate.directive('ngTemplate', ['$templateCache',
 
 						$('ng-template[name="' + name + '"] ' + eventSelector + '').bind(eventType, eventHandler);
 				});
+
 			}
 		};
 	}

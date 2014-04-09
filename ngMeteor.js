@@ -7,7 +7,8 @@ ngMeteor = angular.module('ngMeteor', [
 	'ngAnimate',
 	'ngCookies',
 	'ngResource',
-	'ngSanitize'
+	'ngSanitize',
+	'hashKeyCopier'
 ]);
 
 // Method to allow injection of angular modules dependencies into ngMeteor
