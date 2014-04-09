@@ -16,12 +16,12 @@ ngMeteor v0.2
 ### Modules (100% Done)
 * Add new method to inject angular modules into ngMeteor. (Done)
 
-### Collections (90% Done)
+### Collections (100% Done. Testing in progress.)
 * Decouple Meteor.subscribe from $collection service to allow users to subscribe to publishers with a different name to the collection, and also allow multiple subscriptions. (Done)
 * Allow users to define their own model to attach to the $collection service. (Done)
 * Include method to save all objects in a model to the collection. (Done)
 * Include method to delete all objects in a model from the collection. (Done)
-* Include method to allow users to automatically create a three way data bind between model, view and collection. (In progress)
+* Include method to allow users to automatically create a three way data bind between model, view and collection. (Done)
 
 ### Templates (80% Done)
 * Use ngTemplate's template property to render the Meteor template. (Done)
