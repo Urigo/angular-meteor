@@ -24,15 +24,15 @@ ngMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier',
 						scope.$on('$destroy', function() { self.stop; }); // Stop computation if scope is destroyed.
 					});
 
-					if (auto) {
-						scope.$watchCollection(model, function(newItems, oldItems){
+					if (auto) { // Deep watches the model and performs autobind.
+						scope.$watch(model, function(newItems, oldItems){
 							// Remove items that don't exist in the collection anymore.
 							angular.forEach(oldItems, function(oldItem){
 								var index = newItems.map(function(item) { return item._id; }).indexOf(oldItem._id); 
 								if (index == -1) newItems.remove(oldItem._id);
 							});
 							newItems.save(); // Saves all items.
-						});
+						}, auto);
 					}
 				}
 			};
