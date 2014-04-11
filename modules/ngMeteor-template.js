@@ -32,7 +32,7 @@ ngMeteorTemplate.directive('ngTemplate', ['$templateCache',
 				});
 
 				if(angular.isDefined(template)){
-					templateString = HTML.toHTML(templateRender);
+					templateString = UI.toHTML(templateRender);
 				} else{
 					throw new ReferenceError("There is no Meteor template with the name '" + name + "'.");
 				}
@@ -64,26 +64,3 @@ ngMeteorTemplate.directive('ngTemplate', ['$templateCache',
 		};
 	}
 ]);
-
-// Re-compiles template when rendering with Iron-Router
-angular.element(document).ready(function() {
-    if(Package['iron-router']){
-        var oldRun = Router.run;
-        Router.run = function() {
-            var runResult = oldRun.apply(this, arguments),
-            	key = this._currentController.template,
-            	oldRendered = Template[key].rendered;
-            Template[key].rendered = function(){
-                angular.element(document).injector().invoke(['$compile', '$document', '$rootScope', 
-                	function($compile, $document, $rootScope){
-	                    $compile($document)($rootScope);
-	                    $rootScope.$digest();
-	                    oldRendered.apply(this, arguments);
-                	}
-                ]);
-                Template[key].rendered = oldRendered;
-            }
-            return runResult;
-        };
-    }
-});

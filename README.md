@@ -23,12 +23,12 @@ ngMeteor v0.2
 * Include method to delete all objects in a model from the collection. (Done)
 * Include method to allow users to automatically create a three way data bind between model, view and collection. (Done)
 
-### Templates (80% Done)
+### Templates (100% Done. Testing in progress.)
 * Use ngTemplate's template property to render the Meteor template. (Done)
 * Transclude nested templates using the ngTemplate directive. (Done)
 * Pass Meteor template event maps to the ngTemplate directive. (Done)
 * Store the ngTemplate directive in $templateCache rather than the raw HTML of the template. (Done)
-* More general method to recompile angular code whenever a template is re-rendered using Handlebar helpers, such as #if and with iron-router, than the current workaround for iron-router.
+* More general method to recompile angular code whenever a template is re-rendered using Handlebar helpers, such as #if and with iron-router, than the current workaround for iron-router. (Done)
 
 ### Documentation (0% Done)
 * Move all documentation from README to ng.meteor.com with walkthroughs and examples akin the AngularJS website.

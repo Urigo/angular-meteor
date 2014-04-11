@@ -31,4 +31,15 @@ angular.element(document).ready(function() {
 	if (!angular.element(document).injector()){
 		angular.bootstrap(document, ['ngMeteor']);
 	}
+
+	var notifyParented = UI.Component.notifyParented;
+	UI.Component.notifyParented = function() {
+		notifyParented.apply(this, arguments);
+		angular.element(document).injector().invoke(['$compile', '$document', '$rootScope', 
+        	function($compile, $document, $rootScope){
+                $compile($document)($rootScope);
+                if(!$rootScope.$$phase) $rootScope.$apply(); 
+        	}
+        ]);
+	}	
 });
