@@ -1,3 +1,4 @@
+'use strict';
 var ngMeteorCollections = angular.module('ngMeteor.collections', []);
 
 ngMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier',
@@ -15,13 +16,15 @@ ngMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier',
 					}
 
 					Deps.autorun(function(self){
-						var ngCollection = new ngMeteorCollection(collection, $q, selector, options);
+						var ngCollection = new AngularMeteorCollection(collection, $q, selector, options);
 
 						// Bind collection to model in scope. Transfer $$hashKey based on _id.
 						scope[model] = HashKeyCopier.copyHashKeys(scope[model],ngCollection,["_id"]);
 
 						if(!scope.$$phase) scope.$apply(); // Update bindings in scope.
-						scope.$on('$destroy', function() { self.stop; }); // Stop computation if scope is destroyed.
+						scope.$on('$destroy', function() {
+                            self.stop(); // Stop computation if scope is destroyed.
+                        });
 					});
 
 					if (auto) { // Deep watches the model and performs autobind.
@@ -40,19 +43,19 @@ ngMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier',
 	}
 ]);
 
-ngMeteorCollection = function(collection, $q, selector, options) {
+var AngularMeteorCollection = function(collection, $q, selector, options) {
 	var self = collection.find(selector, options).fetch();
 
-	self.__proto__ = ngMeteorCollection.prototype;
+	self.__proto__ = AngularMeteorCollection.prototype;
 	self.__proto__.$q = $q;
 	self.__proto__.$$collection = collection;
 
 	return self;
-}
+};
 
-ngMeteorCollection.prototype = new Array;
+AngularMeteorCollection.prototype = []; // Allows inheritance of native Array methods.
 
-ngMeteorCollection.prototype.save = function save (docs) {
+AngularMeteorCollection.prototype.save = function save (docs) {
 	var self = this,
 		collection = self.$$collection,
 		$q = self.$q,
@@ -63,7 +66,7 @@ ngMeteorCollection.prototype.save = function save (docs) {
 	* or insert an object if the _id is not set in the collection.
 	* Returns a promise.
 	*/
-	upsertObject = function (item, $q) {
+	function upsertObject(item, $q) {
 		var deferred = $q.defer();
 
 		item = angular.copy(item); // Makes a deep copy without the $$hashKeys.
@@ -71,7 +74,7 @@ ngMeteorCollection.prototype.save = function save (docs) {
 		if (item._id) { // Performs an update if the _id property is set.
 			var item_id = item._id; // Store the _id in temporary variable
 			delete item._id; // Remove the _id property so that it can be $set using update.
-			collection.update(item_id, {$set: item}, function(error, result) {
+			collection.update(item_id, {$set: item}, function(error) {
 				if(error) {
 					deferred.reject(error);
 				}else{
@@ -109,9 +112,9 @@ ngMeteorCollection.prototype.save = function save (docs) {
 	}
 
 	return $q.all(promises); // Returns all promises when they're resolved.
-}
+};
 
-ngMeteorCollection.prototype.remove = function remove (keys) {
+AngularMeteorCollection.prototype.remove = function remove (keys) {
 	var self = this,
 		collection = self.$$collection,
 		$q = self.$q,
@@ -122,11 +125,11 @@ ngMeteorCollection.prototype.remove = function remove (keys) {
 	* equal to the specified key.
 	* Returns a promise.
 	*/
-	removeObject = function (key, $q) {
+	function removeObject(key, $q) {
 		var deferred = $q.defer();
 
 		if (key) { // Checks if 'key' argument is set.
-			collection.remove(key, function(error, result) {
+			collection.remove(key, function(error) {
 				if(error) {
 					deferred.reject(error);
 				}else{
@@ -158,4 +161,4 @@ ngMeteorCollection.prototype.remove = function remove (keys) {
 	}
 
 	return $q.all(promises); // Returns all promises when they're resolved.
-}
+};

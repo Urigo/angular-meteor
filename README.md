@@ -1,42 +1,131 @@
 ngMeteor v0.2
 ========
 > The simplest no-conflict way to use AngularJS with Meteor, Meteorite and Atmosphere Smart Packages.
-> [See how ngMeteor just works](http://ng.meteor.com)
 
-> WARNING: This branch is not stable yet. It is subject to experimentation and change.
+## Quick start
+1. Install [Meteor](http://docs.meteor.com/#quickstart) <code>curl https://install.meteor.com | /bin/sh</code>
+2. Install [Meteorite](https://github.com/oortcloud/meteorite#installing-meteorite) <code>npm install -g meteorite</code>
+3. Create a new meteor app using <code>meteor create myapp</code> or navigate to the root of your existing app.
+4. Install ngMeteor <code>mrt add ngMeteor</code>
 
-## TODO for v0.2
-> Target release to be before May 2014.
->
-> ngMeteor v0.2+ will be dropping support for IE 8 due to the release of [AngularJS v1.3+](http://blog.angularjs.org/2013/12/angularjs-13-new-release-approaches.html).
+## Usage
+### Table of Contents
+- [New Data-Binding to avoid conflict](https://github.com/loneleeandroo/ngMeteor#new-data-binding-to-avoid-conflict)
+- [Using Meteor Collections](https://github.com/loneleeandroo/ngMeteor#using-meteor-collections)
+- [Adding controllers, directives, filters and services](https://github.com/loneleeandroo/ngMeteor#adding-controllers-directives-filters-and-services)
+- [Creating and inserting template views](https://github.com/loneleeandroo/ngMeteor#creating-and-inserting-template-views)
+- [Routing](https://github.com/loneleeandroo/ngMeteor#routing)
+- [Module Injection](https://github.com/loneleeandroo/ngMeteor#module-injection)
 
-### Dependencies (100% Done)
-* Update to Angular v1.3.x (latest). (Done)
+### New Data-Binding to avoid conflict
+To prevent conflicts with Meteor's Blaze live templating engine, ngMeteor has changed the default AngularJS data bindings from <code>{{...}}</code> to <code>[[...]]</code>. For example:
 
-### Modules (100% Done)
-* Add new method to inject angular modules into ngMeteor. (Done)
+    <div>
+        <label>Name:</label>
+        <input type="text" ng-model="yourName" placeholder="Enter a name here">
+        <hr>
+        <h1>Hello [[yourName]]!</h1>
+    </div>
 
-### Collections (100% Done. Testing in progress.)
-* Decouple Meteor.subscribe from $collection service to allow users to subscribe to publishers with a different name to the collection, and also allow multiple subscriptions. (Done)
-* Allow users to define their own model to attach to the $collection service. (Done)
-* Include method to save all objects in a model to the collection. (Done)
-* Include method to delete all objects in a model from the collection. (Done)
-* Include method to allow users to automatically create a three way data bind between model, view and collection. (Done)
+### Using Meteor Collections
+> If you're upgrading from v0.1 please read this section for changes on using the $collection service.
 
-### Templates (100% Done. Testing in progress.)
-* Use ngTemplate's template property to render the Meteor template. (Done)
-* Transclude nested templates using the ngTemplate directive. (Done)
-* Pass Meteor template event maps to the ngTemplate directive. (Done)
-* Store the ngTemplate directive in $templateCache rather than the raw HTML of the template. (Done)
-* More general method to recompile angular code whenever a template is re-rendered using Handlebar helpers, such as #if and with iron-router, than the current workaround for iron-router. (Done)
+ngMeteor provides an AngularJS service called $collection, which is a wrapper for [Meteor collections](http://docs.meteor.com/#meteor_collection) to enable reactivity within AngularJS. The $collection service no longer subscribes to a publisher function automatically, so you must explicitly subscribe to a publisher function before calling the $collection service.
 
-### Documentation (0% Done)
-* Move all documentation from README to ng.meteor.com with walkthroughs and examples akin the AngularJS website.
-* Update documentation on $collection service with examples.
-* Update documentation on ngTemplate directive with examples.
-* Update documentation on ngMeteor module injection with examples.
-* Updated documentation to recommend the [Best Practice Recommendations for Angular App Structure](https://docs.google.com/document/d/1XXMvReO8-Awi1EZXAXS4PzDzdNvV6pGcuaF4Q9821Es/pub) for structuring the client folder.
+    $collection(collection, selector, options)
 
-### Optionals
-* Removing AngularJS lib files from ngMeteor pacakge and recommend users to use the [bower smart package](https://github.com/mquandalle/meteor-bower) to fetch latest AngularJS files. 
-* Create ngMeteor generator for Yeoman to allow users to get started more quickly and easily, using the [Best Practice Recommendations for Angular App Structure](https://docs.google.com/document/d/1XXMvReO8-Awi1EZXAXS4PzDzdNvV6pGcuaF4Q9821Es/pub) for structuring the client folder.
+| Arguments     | Type                                                                      | Description                                                       | Required  |
+| :------------ | :------------------------------------------------------------------------ | :---------------------------------------------------------------- | :-------- |
+| collection    | [Meteor Collection Object](http://docs.meteor.com/#meteor_collection)     | The Meteor Collection                                             | Yes       |
+| selector      | [Mongo Selector (Object or String)](http://docs.meteor.com/#selectors)    | Same as [Meteor Collection Find](http://docs.meteor.com/#find)    | No        |
+| options       | Object                                                                    | Same as [Meteor Collection Find](http://docs.meteor.com/#find)    | No        |
+
+The $collection service only has one method, and that is <code>bind</code>, which is used to bind the collection to an Angular model so that you can use it in your scope:
+
+    bind(scope, model, auto)
+
+| Arguments     | Type      | Description                                                                                                                                                                                                                                                              | Required  | Default   |
+| :------------ | :-------- | :------------------------------------------------------------------------                                                                                                                                                                                                | :-------- | :-------- |
+| scope         | Scope     | The scope the collection will be bound to.                                                                                                                                                                                                                               | Yes       |           |
+| model         | String    | The model the collection will be bound to.                                                                                                                                                                                                                               | Yes       |           |
+| auto          | Boolean   | By default, changes in the model will not automatically update the collection. However if set to true, changes in the client will be automatically propagated back to the collection. A deep watch is created when this is set to true, which sill degrade performance.  | No        | false     |
+
+Once a collection has been bound using the <code>bind</code> method, the model will have access to the following methods for upserting/removing objects in the collection. If the <code>auto</code> argument as been set to true, then the user will not need to call these methods because these methods will be called automatically whenever the model changes.
+
+| Method                    | Argument  | Type                                  | Description                                                                                                                       |
+| :------------             | :------   | :-------------------------            | :-------------                                                                                                                    |
+| <code>save(docs)</code>   | docs      | Object or Array of Objects            | Upsert an object into the collection. If no argument is passed, all the objects in the model to the collection will be upserted.  |
+| <code>remove(keys)</code> | keys      | _id String or Array of _id Strings    | Removes an object from the collection. If no argument is passed, all the objects in the collection will be removed.               |
+
+For example:
+
+    /**
+     * Assume autopublish package is removed so we can work with multiple publisher functions.
+     * If insecure package is also removed, then you'll need to define the collection permissions as well.
+     **/
+
+    // Define a new Meteor Collection
+    Todos = new Meteor.Collection('todos');
+
+    if (Meteor.isClient) {
+        ngMeteor.controller("mainCtrl", ['$scope', '$collection',
+            function($scope, $collection){
+
+                // Subscribe to all public Todos
+                Meteor.subscribe('publicTodos');
+
+                // Bind all the todos to $scope.todos
+                $collection(Todos).bind($scope, 'todos');
+
+                // Bind all sticky todos to $scope.stickyTodos
+                $collection(Todos, {sticky: true}).bind($scope, 'stickyTodos');
+
+                // todo might be an object like this {text: "Learn Angular", sticky: false}
+                // or an array like this [{text: "Learn Angular", sticky: false}, {text: "Hello World", sticky: true}]
+                $scope.save = function(todo) {
+                    $scope.todos.save(todo);
+                };
+
+                $scope.saveAll = function() {
+                    $scope.todos.save();
+                };
+
+                $scope.toSticky = function(todo) {
+                    if (angular.isArray(todo)){
+                        angular.forEach(todo, function(object) {
+                            object.sticky = true;
+                        });
+                    } else {
+                        todo.sticky = true;
+                    }
+
+                    $scope.stickyTodos.save(todo);
+                };
+
+                // todoId might be an string like this "WhrnEez5yBRgo4yEm"
+                // or an array like this ["WhrnEez5yBRgo4yEm","gH6Fa4DXA3XxQjXNS"]
+                $scope.remove = function(todoId) {
+                    $scope.todos.remove(todoId);
+                };
+
+                $scope.removeAll = function() {
+                    $scope.todos.remove();
+                };
+            }
+        ]);
+    }
+
+    if (Meteor.isServer) {
+
+        // Returns all objects in the Todos collection with public set to true.
+        Meteor.publish('publicTodos', function(){
+            return Todos.find({public: true});
+        });
+
+        // Returns all objects in the Todos collection with public set to false.
+        Meteor.publish('privateTodos', function(){
+            return Todos.find({public: false});
+        });
+
+    }
+
