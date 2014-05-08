@@ -36,11 +36,15 @@ angular.element(document).ready(function () {
   var notifyParented = UI.Component.notifyParented;
   UI.Component.notifyParented = function () {
     notifyParented.apply(this, arguments);
-    angular.element(document).injector().invoke(['$compile', '$document', '$rootScope',
-      function ($compile, $document, $rootScope) {
-        $compile($document)($rootScope);
-        if (!$rootScope.$$phase) $rootScope.$apply();
-      }
-    ]);
+    if (this.region) {
+      Deps.afterFlush(function() {
+        angular.element(document).injector().invoke(['$compile', '$document', '$rootScope',
+          function ($compile, $document, $rootScope) {
+            $compile($document)($rootScope);
+            if (!$rootScope.$$phase) $rootScope.$apply();
+          }
+        ]);
+      });
+    }
   }
 });
