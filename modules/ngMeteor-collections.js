@@ -23,8 +23,6 @@ ngMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier',
             // Bind collection to model in scope. Transfer $$hashKey based on _id.
             scope[model] = HashKeyCopier.copyHashKeys(scope[model], ngCollection, ["_id"]);
 
-            console.log(self._id);
-
             if (!scope.$$phase) scope.$apply(); // Update bindings in scope.
             scope.$on('$destroy', function () {
               self.stop(); // Stop computation if scope is destroyed.
