@@ -15,8 +15,6 @@ ngMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier',
             throw new TypeError("The third argument of bind must be a boolean.");
           }
 
-          console.log(scope.$id);
-
           Deps.autorun(function (self) {
             var ngCollection = new AngularMeteorCollection(collection, $q, selector, options);
 
