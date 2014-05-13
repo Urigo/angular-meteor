@@ -50,7 +50,7 @@ var AngularMeteorCollection = function (collection, $q, selector, options) {
 
   self.__proto__ = AngularMeteorCollection.prototype;
   self.__proto__.$q = $q;
-  self.__proto__.$$collection = collection;
+  self.$$collection = collection;
 
   return self;
 };
@@ -130,8 +130,10 @@ AngularMeteorCollection.prototype.remove = function remove(keys) {
   function removeObject(key, $q) {
     var deferred = $q.defer();
 
+    console.log(collection);
+
     if (key) { // Checks if 'key' argument is set.
-      collection.remove(key, function (error) {
+      collection.remove({_id: key}, function (error) {
         if (error) {
           deferred.reject(error);
         } else {
