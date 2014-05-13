@@ -131,6 +131,9 @@ AngularMeteorCollection.prototype.remove = function remove(keys) {
     var deferred = $q.defer();
 
     if (key) { // Checks if 'key' argument is set.
+      if(key._id) {
+        key = key._id;
+      }
       collection.remove({_id: key}, function (error) {
         if (error) {
           deferred.reject(error);
