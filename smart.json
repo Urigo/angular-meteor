@@ -3,7 +3,7 @@
     "description": "The simplest no-conflict way to use AngularJS with Meteor",
     "homepage": "https://github.com/loneleeandroo/ngMeteor",
     "author": "Androo Lee",
-    "git": "https://github.com/loneleeandroo/ngMeteor.git",
+    "git": "https://github.com/loneleeandroo/ngMeteor.git#test-bower",
     "version": "0.2.0",
     "packages": {
         "bower": {}
