@@ -13,11 +13,10 @@ Package.on_use(function(api) {
     api.add_files([
         // Bower Dependencies
         'bower.json',
-        // Lib Files
-        'lib/angular-hash-key-copier.js',
         // Module Files
         'modules/ngMeteor-collections.js',
         'modules/ngMeteor-template.js',
+        'modules/ngMeteor-hashKeyCopier.js',
         // Finally load ngMeteor File
         'ngMeteor.js'
     ], 'client');
