@@ -11,7 +11,6 @@ Package.on_use(function(api) {
 
     api.add_files('smart.json', 'client');
 
-    /*
     // Files to load in Client only.
     api.add_files([
         // Lib Files
@@ -30,5 +29,4 @@ Package.on_use(function(api) {
         // Finally load ngMeteor File
         'ngMeteor.js'
     ], 'client');
-    */
 });
