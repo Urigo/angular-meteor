@@ -7,8 +7,5 @@
     "version": "0.2.0",
     "packages": {
         "bower": {}
-    },
-    "bower": {
-        "angular": "1.2.15"
     }
 }

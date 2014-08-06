@@ -3,17 +3,16 @@ Package.describe({
 });
 
 Package.on_use(function(api) {
-    // Add dependencies
+    // Use bower
     api.use('bower', 'client');
 
     // Exports the ngMeteor package scope
     api.export('ngMeteor', 'client');
 
-    api.add_files('smart.json', 'client');
-
     // Files to load in Client only.
     api.add_files([
-        // Lib Files
+        // Bower Dependencies
+        'bower.json',
         //'lib/angular.js',
         //'lib/angular-csp.css',
         //'lib/angular-animate.js',
