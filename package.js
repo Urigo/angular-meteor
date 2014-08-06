@@ -13,14 +13,7 @@ Package.on_use(function(api) {
     api.add_files([
         // Bower Dependencies
         'bower.json',
-        //'lib/angular.js',
-        //'lib/angular-csp.css',
-        //'lib/angular-animate.js',
-        //'lib/angular-cookies.js',
-        //'lib/angular-resource.js',
-        //'lib/angular-route.js',
-        //'lib/angular-sanitize.js',
-        //'lib/angular-touch.js',
+        // Lib Files
         'lib/angular-hash-key-copier.js',
         // Module Files
         'modules/ngMeteor-collections.js',
