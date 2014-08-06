@@ -4,7 +4,8 @@ Package.describe({
 
 Package.on_use(function(api) {
     // Use bower
-    api.use('bower', 'client');
+    //api.use('bower', 'client');
+    api.use('famono');
 
     // Exports the ngMeteor package scope
     api.export('ngMeteor', 'client');
@@ -12,7 +13,8 @@ Package.on_use(function(api) {
     // Files to load in Client only.
     api.add_files([
         // Bower Dependencies
-        'bower.json',
+        //'bower.json',
+        'smart.require',
         // Module Files
         'modules/ngMeteor-collections.js',
         'modules/ngMeteor-template.js',
