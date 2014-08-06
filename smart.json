@@ -6,6 +6,6 @@
     "git": "https://github.com/loneleeandroo/ngMeteor.git",
     "version": "0.2.0",
     "packages": {
-        "famono: {}
+        "famono": {}
     }
 }
