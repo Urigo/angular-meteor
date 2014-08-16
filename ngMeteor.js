@@ -33,8 +33,8 @@ angular.element(document).ready(function () {
   }
 
   // Recompiles whenever the DOM elements are updated.
-  var notifyParented = UI.Component.notifyParented;
-  UI.Component.notifyParented = function () {
+  var notifyParented = Blaze.View.notifyParented;
+  Blaze.View.notifyParented = function () {
     notifyParented.apply(this, arguments);
     if (this.region) {
       Deps.afterFlush(function() {
