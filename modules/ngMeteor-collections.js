@@ -134,7 +134,7 @@ AngularMeteorCollection.prototype.remove = function remove(keys) {
       if(key._id) {
         key = key._id;
       }
-      collection.remove({_id: key}, function (error) {
+      collection.remove(new Meteor.Collection.ObjectID(key._str), function (error) {
         if (error) {
           deferred.reject(error);
         } else {
