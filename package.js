@@ -5,7 +5,9 @@ Package.describe({
 Package.on_use(function (api) {
 	// Exports the ngMeteor package scope
 	api.export('ngMeteor', 'client');
-	
+
+    api.use('jquery', 'client');
+
 	// Files to load in Client only.
 	api.add_files([
 		// Lib Files
