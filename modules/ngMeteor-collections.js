@@ -29,6 +29,10 @@ ngMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier',
 
           if (auto) { // Deep watches the model and performs autobind.
             scope.$watch(model, function (newItems, oldItems) {
+              if (angular.equals(newItems, oldItems)) {
+                return;
+              }
+              
               // Remove items that don't exist in the collection anymore.
               angular.forEach(oldItems, function (oldItem) {
                 var index = newItems.map(function (item) {
