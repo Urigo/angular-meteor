@@ -32,8 +32,8 @@ ngMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier',
               // Remove items that don't exist in the collection anymore.
               angular.forEach(oldItems, function (oldItem) {
                 var index = newItems.map(function (item) {
-                  return item._id;
-                }).indexOf(oldItem._id);
+                  return item._id._str;
+                }).indexOf(oldItem._id._str);
                 if (index == -1) newItems.remove(oldItem._id);
               });
               newItems.save(); // Saves all items.
