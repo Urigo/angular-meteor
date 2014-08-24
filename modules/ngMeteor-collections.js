@@ -76,11 +76,12 @@ AngularMeteorCollection.prototype.save = function save(docs) {
     if (item._id) { // Performs an update if the _id property is set.
       var item_id = item._id; // Store the _id in temporary variable
       delete item._id; // Remove the _id property so that it can be $set using update.
-      collection.update(new Meteor.Collection.ObjectID(item_id._str), {$set: item}, function (error) {
+      var objectId = (item_id._str) ? new Meteor.Collection.ObjectID(item_id._str) : item_id;
+      collection.update(objectId, {$set: item}, function (error) {
         if (error) {
           deferred.reject(error);
         } else {
-          deferred.resolve({_id: item_id, action: "updated"});
+          deferred.resolve({_id: objectId, action: "updated"});
         }
       });
     } else { // Performs an insert if the _id property isn't set.
@@ -134,11 +135,12 @@ AngularMeteorCollection.prototype.remove = function remove(keys) {
       if(key._id) {
         key = key._id;
       }
-      collection.remove(new Meteor.Collection.ObjectID(key._str), function (error) {
+      var objectId = (key._str) ? new Meteor.Collection.ObjectID(key._str) : key;
+      collection.remove(objectId, function (error) {
         if (error) {
           deferred.reject(error);
         } else {
-          deferred.resolve({_id: key, action: "removed"});
+          deferred.resolve({_id: objectId, action: "removed"});
         }
       });
     } else {
