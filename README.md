@@ -128,4 +128,8 @@ For example:
         });
 
     }
+    
+We've also updated the meteor-angular-ui-router to support Meteor 0.8.3:
+
+- [angular-ui-router](https://github.com/Urigo/meteor-angular-ui-router) empowers ngMeteor with the [ui-router](https://github.com/angular-ui/ui-router) module.
 
