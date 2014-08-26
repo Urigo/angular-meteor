@@ -71,7 +71,8 @@ AngularMeteorCollection.prototype.save = function save(docs) {
   function upsertObject(item, $q) {
     var deferred = $q.defer();
 
-    item = angular.copy(item); // Makes a deep copy without the $$hashKeys.
+    item = angular.copy(item);
+    delete item.$$hashKeys;
 
     if (item._id) { // Performs an update if the _id property is set.
       var item_id = item._id; // Store the _id in temporary variable
