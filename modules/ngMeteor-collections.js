@@ -72,9 +72,9 @@ AngularMeteorCollection.prototype.save = function save(docs) {
     var deferred = $q.defer();
 
     item = angular.copy(item);
-    delete item.$$hashKeys;
+    delete item.$$hashKey;
     for (var property in item) {
-      delete property.$$hashKeys;
+      delete property.$$hashKey;
     }
 
     if (item._id) { // Performs an update if the _id property is set.
