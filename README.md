@@ -133,3 +133,6 @@ We've also updated the meteor-angular-ui-router to support Meteor 0.8.3:
 
 - [angular-ui-router](https://github.com/Urigo/meteor-angular-ui-router) empowers ngMeteor with the [ui-router](https://github.com/angular-ui/ui-router) module.
 
+## Issues (put it here until we move to our own repo and could create issues)
+- Add the option to choose if to use JQuery or AngularJS's JQuery lite. [see here](https://github.com/Urigo/ngMeteor/pull/1)
+
