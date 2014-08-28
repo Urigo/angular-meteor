@@ -36,3 +36,6 @@
 ehthumbs.db
 Thumbs.db
 .build*
+smart.json
+smart.lock
+packages

@@ -1,83 +1,175 @@
+'use strict';
 var ngMeteorCollections = angular.module('ngMeteor.collections', []);
 
-ngMeteorCollections.factory('$collection', ['$window', '$rootScope', 'HashKeyCopier', '$q',
-	function($window, $rootScope, HashKeyCopier, $q){
-		return function (name, scope, selector, options, publisher) {
-			var collection = $window[name];
-			if(!selector) selector = {};
-			if(collection instanceof Meteor.Collection){
-				Deps.autorun(function(){
-					var subscription = Meteor.subscribe(name, selector, options, publisher);
-					scope[name] = HashKeyCopier.copyHashKeys(scope[name],collection.find(selector, options).fetch(),["_id"]);
-					if(!scope.$$phase){scope.$apply()} // I think this bit is redundant now.
+ngMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier',
+  function ($q, HashKeyCopier) {
+    return function (collection, selector, options) {
+      if (!selector) selector = {};
+      if (!(collection instanceof Meteor.Collection)) {
+        throw new TypeError("The first argument of $collection must be a Meteor.Collection object.");
+      }
+      return {
+        bind: function (scope, model, auto) {
+          auto = auto || false; // Sets default binding type.
+          if (!(typeof auto === 'boolean')) { // Checks if auto is a boolean.
+            throw new TypeError("The third argument of bind must be a boolean.");
+          }
 
-					// Temporary Fix
-					//===================================================================
-					scope[name].ready = function(fn){
-						var deferred = $q.defer();
+          Deps.autorun(function (self) {
+            var ngCollection = new AngularMeteorCollection(collection, $q, selector, options);
 
-						isReady = setInterval(function() {
-					        if ( subscription.ready() ) {
-					        	deferred.resolve('ready');
-					        	clearInterval(isReady);
-					        } else {
-					        	deferred.reject('not ready');
-					        }
-					    }, 100);
+            // Bind collection to model in scope. Transfer $$hashKey based on _id.
+            scope[model] = HashKeyCopier.copyHashKeys(scope[model], ngCollection, ["_id"]);
 
-					    deferred.promise.then(function(){
-					    	fn();
-					    });
-					}
-					scope[name].add = function(data){
-						data = angular.copy(data);
-						upsert = function(item){
-							if(!item._id){
-								collection.insert(item);
-							}else{
-								var item_id = item._id;
-								delete item._id;
-								collection.update(item_id, {$set: item});
-							}
-						}
-						if(!data){
-							console.error("Cannot add null");
-						} else{
-							if(angular.isArray(data)){
-								angular.forEach(data, function(value, key){
-									upsert(value);
-								});
-							}else{
-								upsert(data);
-							}
-						}
-						Deps.flush();
-					}
-					scope[name].delete = function(data){
-						if(!data){
-							console.error("Cannot delete null");
-						} else{
-							if(!data._id){
-								console.error("Cannot delete an object without an _id")
-							} else{
-								if(angular.isArray(data)){
-									angular.forEach(data, function(item, key){
-										collection.remove(item._id);
-									});
-								}else{
-									collection.remove(data._id);
-								}
-							}
-						}
-						Deps.flush();
-					}
-					//===================================================================
+            if (!scope.$$phase) scope.$apply(); // Update bindings in scope.
+            scope.$on('$destroy', function () {
+              self.stop(); // Stop computation if scope is destroyed.
+            });
+          });
 
-				});
-				return scope[name];
-			} else{
-				console.error('There is no Meteor Collection called "' + name + '"')
-			}
-		}
-	}
+          if (auto) { // Deep watches the model and performs autobind.
+            scope.$watch(model, function (newItems, oldItems) {
+              // Remove items that don't exist in the collection anymore.
+              angular.forEach(oldItems, function (oldItem) {
+                var index = newItems.map(function (item) {
+                  return item._id._str;
+                }).indexOf(oldItem._id._str);
+                if (index == -1) newItems.remove(oldItem._id);
+              });
+              newItems.save(); // Saves all items.
+            }, auto);
+          }
+        }
+      };
+    }
+  }
 ]);
+
+var AngularMeteorCollection = function (collection, $q, selector, options) {
+  var self = collection.find(selector, options).fetch();
+
+  self.__proto__ = AngularMeteorCollection.prototype;
+  self.__proto__.$q = $q;
+  self.$$collection = collection;
+
+  return self;
+};
+
+AngularMeteorCollection.prototype = []; // Allows inheritance of native Array methods.
+
+AngularMeteorCollection.prototype.save = function save(docs) {
+  var self = this,
+    collection = self.$$collection,
+    $q = self.$q,
+    promises = []; // To store all promises.
+
+  /*
+   * The upsertObject function will either update an object if the _id exists
+   * or insert an object if the _id is not set in the collection.
+   * Returns a promise.
+   */
+  function upsertObject(item, $q) {
+    var deferred = $q.defer();
+
+    item = angular.copy(item);
+    delete item.$$hashKey;
+    for (var property in item) {
+      delete property.$$hashKey;
+    }
+
+    if (item._id) { // Performs an update if the _id property is set.
+      var item_id = item._id; // Store the _id in temporary variable
+      delete item._id; // Remove the _id property so that it can be $set using update.
+      var objectId = (item_id._str) ? new Meteor.Collection.ObjectID(item_id._str) : item_id;
+      collection.update(objectId, {$set: item}, function (error) {
+        if (error) {
+          deferred.reject(error);
+        } else {
+          deferred.resolve({_id: objectId, action: "updated"});
+        }
+      });
+    } else { // Performs an insert if the _id property isn't set.
+      collection.insert(item, function (error, result) {
+        if (error) {
+          deferred.reject(error);
+        } else {
+          deferred.resolve({_id: result, action: "inserted"});
+        }
+      });
+    }
+
+    return deferred.promise;
+  }
+
+  /*
+   * How to update the collection depending on the 'docs' argument passed.
+   */
+  if (docs) { // Checks if a 'docs' argument was passed.
+    if (angular.isArray(docs)) { // If an array of objects were passed.
+      angular.forEach(docs, function (doc) {
+        this.push(upsertObject(doc, $q));
+      }, promises);
+    } else { // If a single object was passed.
+      promises.push(upsertObject(docs, $q));
+    }
+  } else { // If no 'docs' argument was passed, save the entire collection.
+    angular.forEach(self, function (doc) {
+      this.push(upsertObject(doc, $q));
+    }, promises);
+  }
+
+  return $q.all(promises); // Returns all promises when they're resolved.
+};
+
+AngularMeteorCollection.prototype.remove = function remove(keys) {
+  var self = this,
+    collection = self.$$collection,
+    $q = self.$q,
+    promises = []; // To store all promises.
+
+  /*
+   * The removeObject function will delete an object with the _id property
+   * equal to the specified key.
+   * Returns a promise.
+   */
+  function removeObject(key, $q) {
+    var deferred = $q.defer();
+
+    if (key) { // Checks if 'key' argument is set.
+      if(key._id) {
+        key = key._id;
+      }
+      var objectId = (key._str) ? new Meteor.Collection.ObjectID(key._str) : key;
+      collection.remove(objectId, function (error) {
+        if (error) {
+          deferred.reject(error);
+        } else {
+          deferred.resolve({_id: objectId, action: "removed"});
+        }
+      });
+    } else {
+      deferred.reject("key cannot be null");
+    }
+
+    return deferred.promise;
+  }
+
+  /*
+   * What to remove from collection depending on the 'keys' argument passed.
+   */
+  if (keys) { // Checks if a 'keys' argument was passed.
+    if (angular.isArray(keys)) { // If an array of keys were passed.
+      angular.forEach(keys, function (key) {
+        this.push(removeObject(key, $q));
+      }, promises);
+    } else { // If a single key was passed.
+      promises.push(removeObject(keys, $q));
+    }
+  } else { // If no 'keys' argument was passed, save the entire collection.
+    angular.forEach(self, function (doc) {
+      this.push(removeObject(doc._id, $q));
+    }, promises);
+  }
+
+  return $q.all(promises); // Returns all promises when they're resolved.
+};
