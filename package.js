@@ -7,9 +7,9 @@ Package.describe({
 Package.on_use(function (api) {
   api.versionsFrom('METEOR@0.9.0.1');
   // Exports the ngMeteor package scope
-  api.export('ngMeteor', 'client');
+  api.export('urigo:ngmeteor', 'client');
 
-    api.use('jquery', 'client');
+  api.use('jquery', 'client');
 
   // Files to load in Client only.
   api.add_files([
