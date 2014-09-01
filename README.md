@@ -211,6 +211,10 @@ it can be easily injected into ngMeteor like this:
 Using this method, additional functionality has been provided to urigo:ngmeteor in the form of separate Meteor packages that expose and inject angular modules into ngMeteor. These packages have been developed by either the ngMeteor Team and/or by third parties. The following is a non-exhaustive list of these packages:
 
 - [urigo:angular-ui-router](https://github.com/Urigo/meteor-angular-ui-router) empowers ngMeteor with the [ui-router](https://github.com/angular-ui/ui-router) module.
+- [netanelgilad:angular-file-upload](https://github.com/netanelgilad/meteor-angular-file-upload) empowers ngMeteor with [angular-file-upload](https://github.com/nervgh/angular-file-upload) module.
+- [davidyaha:ng-grid](https://github.com/davidyaha/meteor-ng-grid) empowers ngMeteor with [ui-grid](https://github.com/angular-ui/ng-grid) module.
+- [netanelgilad:angular-sortable-view](https://github.com/netanelgilad/meteor-angular-sortable-view/) empowers ngMeteor with [angular-sortable-view](https://github.com/kamilkp/angular-sortable-view) module.
+- [netanelgilad:text-angular](https://github.com/netanelgilad/meteor-textAngular/) empowers ngMeteor with [textAngular](https://github.com/fraywing/textAngular) module.
 
 Feel free to make ngMeteor module smart packages, and please contact [urigo](https://github.com/urigo) if you would like your package to be listed here as well.
 Be sure to be compatible with Meteor 0.9.0 and above and it's packaging system!
