@@ -4,10 +4,12 @@ var ngMeteorCollections = angular.module('ngMeteor.collections', []);
 ngMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier',
   function ($q, HashKeyCopier) {
     return function (collection, selector, options) {
-      if (!selector) selector = {};
+      selector = selector || {};
+
       if (!(collection instanceof Meteor.Collection)) {
         throw new TypeError("The first argument of $collection must be a Meteor.Collection object.");
       }
+
       return {
         bind: function (scope, model, auto) {
           auto = auto || false; // Sets default binding type.
@@ -15,16 +17,18 @@ ngMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier',
             throw new TypeError("The third argument of bind must be a boolean.");
           }
 
-          Deps.autorun(function (self) {
+          var comp = Deps.autorun(function (self) {
             var ngCollection = new AngularMeteorCollection(collection, $q, selector, options);
 
             // Bind collection to model in scope. Transfer $$hashKey based on _id.
+            // TODO Make this more efficient
             scope[model] = HashKeyCopier.copyHashKeys(scope[model], ngCollection, ["_id"]);
 
-            if (!scope.$$phase) scope.$apply(); // Update bindings in scope.
-            scope.$on('$destroy', function () {
-              self.stop(); // Stop computation if scope is destroyed.
-            });
+            if (!scope.$$phase) scope.$apply();
+          });
+
+          scope.$on('$destroy', function () {
+            comp.stop(); // Stop computation if scope is destroyed.
           });
 
           if (auto) { // Deep watches the model and performs autobind.
@@ -45,6 +49,7 @@ ngMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier',
   }
 ]);
 
+// Ctor
 var AngularMeteorCollection = function (collection, $q, selector, options) {
   var self = collection.find(selector, options).fetch();
 
