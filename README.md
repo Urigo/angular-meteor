@@ -3,7 +3,7 @@ ngMeteor
 > The simplest no-conflict way to use AngularJS with Meteor.
 
 > ngMeteor v0.1.22+ works with Blaze.
-> ngMeteor v0.2.0+ works with Meteor 0.8.2, 0.8.3, 0.9.0 and above.
+> ngMeteor v0.2.0+ works with Meteor 0.8.2, 0.8.3, 0.9.0, 0.9.1 and above.
 
 ## Quick start
 1. Install [Meteor](http://docs.meteor.com/#quickstart) <code>curl https://install.meteor.com | /bin/sh</code>
