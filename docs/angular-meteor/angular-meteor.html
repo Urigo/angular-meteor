@@ -3,12 +3,15 @@
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
+<div ng-controller="MainCtrl">
+  <p>Nothing here [['yet' + '!']]</p>
 
   {{> hello}}
+</div>
 </body>
 
 <template name="hello">
   <button>Click Me</button>
   <p>You've pressed the button {{counter}} times.</p>
+  <p>Nothing here [['yet' + '!']]</p>
 </template>
