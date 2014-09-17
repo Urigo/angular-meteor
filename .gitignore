@@ -39,3 +39,7 @@ Thumbs.db
 smart.json
 smart.lock
 packages
+
+# IDE's #
+#########
+.idea
