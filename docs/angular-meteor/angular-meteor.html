@@ -3,7 +3,7 @@
 </head>
 
 <body>
-<header class="navbar navbar-default navbar-fixed-top">
+<header class="navbar navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -14,14 +14,35 @@
       </button>
       <a class="navbar-brand" href="#">Angular-Meteor</a>
     </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="#">Home</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Learn <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Tutorial</a></li>
+          </ul>
+        </li>
+      </ul>
+      <form class="navbar-form navbar-left" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+      </form>
+    </div><!-- /.navbar-collapse -->
   </div>
 </header>
 <main>
-  <div class="container">
-    <div ng-controller="MainCtrl">
-      <p>Nothing here [['yet' + '!']]</p>
+  <div class="hero-unit">
+    <div class="container">
+      <div class="main-logo">
+        <img src="/images/meteor-angular-logo.png">
+      </div>
+      <div ng-controller="MainCtrl">
+        <p>Nothing here [['yet' + '!']]</p>
 
-      {{> hello}}
+        {{> hello}}
+      </div>
     </div>
   </div>
 </main>
