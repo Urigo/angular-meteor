@@ -20,13 +20,13 @@ ngMeteor.config(['$interpolateProvider',
   }
 ]);
 
-// Manual initilisation of ngMeteor
+// Manual initialisation of ngMeteor
 angular.element(document).ready(function () {
   if (!angular.element(document).injector()) {
     angular.bootstrap(document, ['ngMeteor']);
   }
 
-  // Recompiles whenever the DOM elements are updated.
+  // Recompile whenever the DOM elements are updated.
   var notifyParented = Blaze.View.notifyParented;
   Blaze.View.notifyParented = function () {
     notifyParented.apply(this, arguments);

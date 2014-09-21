@@ -16,11 +16,11 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="#">Home</a></li>
+        <li><a href="/">Home</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">Learn <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Tutorial</a></li>
+            <li><a href="/tutorial">Tutorial</a></li>
           </ul>
         </li>
       </ul>
@@ -32,24 +32,5 @@
     </div><!-- /.navbar-collapse -->
   </div>
 </header>
-<main>
-  <div class="hero-unit">
-    <div class="container">
-      <div class="main-logo">
-        <img src="/images/meteor-angular-logo.png">
-      </div>
-      <div ng-controller="MainCtrl">
-        <p>Nothing here [['yet' + '!']]</p>
-
-        {{> hello}}
-      </div>
-    </div>
-  </div>
-</main>
+<main ui-view></main>
 </body>
-
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
-  <p>Nothing here [['yet' + '!']]</p>
-</template>

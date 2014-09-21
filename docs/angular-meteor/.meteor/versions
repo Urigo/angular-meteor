@@ -46,9 +46,11 @@ simison:bootstrap3-less@0.3.0
 spacebars-compiler@1.0.2
 spacebars@1.0.1
 templating@1.0.6
+tinytest@1.0.1
 tracker@1.0.2
 ui@1.0.2
 underscore@1.0.0
+urigo:angular-ui-router@0.4.2
 urigo:ngmeteor@0.3.0
 url@1.0.0
 webapp-hashing@1.0.0
