@@ -12,7 +12,7 @@ Package.on_use(function (api) {
   api.use('jquery', 'client');
 
   // Including bower
-  api.use('mquandalle:bower', 'client');
+  api.use('mquandalle:bower@0.1.11', 'client');
   api.add_files('smart.json', 'client');
 
   // Files to load in Client only.
