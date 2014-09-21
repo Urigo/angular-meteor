@@ -7,4 +7,6 @@ meteor-platform
 autopublish
 insecure
 urigo:ngmeteor@0.3.0
+less
+simison:bootstrap3-less
 
