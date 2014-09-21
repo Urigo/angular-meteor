@@ -11,17 +11,13 @@ Package.on_use(function (api) {
 
   api.use('jquery', 'client');
 
+  // Including bower
+  api.use('mquandalle:bower', 'client');
+  api.add_files('smart.json', 'client');
+
   // Files to load in Client only.
   api.add_files([
     // Lib Files
-    'lib/angular.js',
-    'lib/angular-csp.css',
-    'lib/angular-animate.js',
-    'lib/angular-cookies.js',
-    'lib/angular-resource.js',
-    'lib/angular-route.js',
-    'lib/angular-sanitize.js',
-    'lib/angular-touch.js',
     'lib/angular-hash-key-copier.js',
     // Module Files
     'modules/ngMeteor-collections.js',
