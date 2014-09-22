@@ -1,5 +1,16 @@
 <template name="tutorial.html">
-  <div>
-    This is the tutorial
+  <div class="container tutorial-container">
+    <div class="row">
+      <div class="col-md-3">
+        <h2><a href="/tutorial">Tutorial</a></h2>
+        <ul class="nav">
+          <li><a href="/tutorial/step_00">0 - Bootstrapping</a></li>
+
+        </ul>
+      </div>
+      <div class="col-md-9">
+        <div ui-view></div>
+      </div>
+    </div>
   </div>
 </template>
