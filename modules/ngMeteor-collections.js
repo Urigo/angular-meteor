@@ -43,15 +43,19 @@ ngMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier',
               // Remove items that don't exist in the collection anymore.
               angular.forEach(oldItems, function (oldItem) {
                 var index = newItems.map(function (item) {
-                  return item._id._str;
-                }).indexOf(oldItem._id._str);
-                if (index == -1) newItems.remove(oldItem._id);
+                  return item._id;
+                }).indexOf(oldItem._id);
+                if (index == -1) { // To here get all objects that pushed or spliced
+                  if (oldItem._id) { // This is a check to get only the spliced objects
+                    newItems.remove(oldItem._id);
+                  }
+                }
               });
               newItems.save(); // Saves all items.
             }, auto);
           }
         }
-        
+
       };
     }
   }
