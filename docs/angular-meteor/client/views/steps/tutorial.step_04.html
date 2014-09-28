@@ -1,0 +1,154 @@
+<template name="tutorial.step_04.html">
+  <div>
+    <a href="https://github.com/Urigo/ngmeteor/edit/master/docs/angular-meteor/client/views/steps/tutorial.step_00.html"
+       class="btn btn-default btn-lg improve-button">
+      <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
+    </a>
+    <ul class="btn-group tutorial-nav">
+      <a href="tutorial/"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
+      <a href="http://angular.github.io/angular-phonecat/step-0/app"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
+      <a href="https://github.com/angular/angular-phonecat/compare/step-0~1...step-0"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
+      <a href="tutorial/step_01"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
+    </ul>
+
+    <do-nothing>
+      {{#markdown}}
+
+# Step 4 - Adding and removing objects
+
+
+Now that we have full data binding from server till client, let's interact the data and see the updates in action.
+
+In this chapter you will add the option to add a new party and delete an existing one.
+
+First let's add a simple form with a button that will add a new party.
+
+Add to following form inside the PartiesListCtrl div:
+
+    <form>
+      <label>Name</label>
+      <input>
+      <label>Description</label>
+      <input>
+      <button>Add</button>
+    </form>
+
+So that index.html will look like that:
+
+__`index.html`:__
+
+    <body>
+
+    <div ng-controller="PartiesListCtrl">
+
+      <form>
+        <label>Name</label>
+        <input>
+        <label>Description</label>
+        <input>
+        <button>Add</button>
+      </form>
+
+      <ul>
+        <li ng-repeat="party in parties">
+          [[party.name]]
+          <p>[[party.description]]</p>
+        </li>
+      </ul>
+
+    </div>
+
+    </body>
+
+
+
+Now we need to make this form functional.
+
+## ng-model
+
+First thing, let's bind the value of the inputs into a new party variable.
+
+To do that we will use the simple and powerful [ng-model](https://docs.angularjs.org/api/ng/directive/ngModel) AngularJS directive.
+
+Add ng-model to the form like that:
+
+    <form>
+      <label>Name</label>
+      <input ng-model="newParty.name">
+      <label>Description</label>
+      <input ng-model="newParty.description">
+      <button>Add</button>
+    </form>
+
+Now each time the user types inside those inputs, the value of the newParty variable will automatically (and also when newParty will change outside of the HTML, the inputs will be updated accordingly).
+
+## ng-click
+
+Now let's bind a click event to the add button with Angular's [ng-click](https://docs.angularjs.org/api/ng/directive/ngClick) directive.
+
+
+    <button ng-click="parties.push(newParty)">Add</button>
+
+ng-click binds the click event into an expression.
+So we taken the parties scope array (when accessing scope variables in the HTML, there is no need to add $scope. before) and pushed the newParty variable into it.
+
+Open a different browser, push the button and see how the party is added on both clients. so simple!
+
+
+Now, let's add the ability to delete parties.
+
+Let's add an X button to each party:
+
+      <ul>
+        <li ng-repeat="party in parties">
+          [[party.name]]
+          <p>[[party.description]]</p>
+          <button ng-click="remove(party)">X</button>
+        </li>
+      </ul>
+
+
+So this time we are binding ng-click to a scope function that gets the current party as a parameter.
+
+So let's go into the controller and add that function.
+
+Add that function inside the PartiesListCtrl in app.js:
+
+    $scope.remove = function(party){
+      $scope.parties.splice( $scope.parties.indexOf(party), 1 );
+    };
+
+And this is how the controller should look now:
+
+    angular.module("socially").controller("PartiesListCtrl", ['$scope', '$collection',
+      function($scope, $collection){
+
+        Meteor.subscribe("parties");
+        $collection(Parties).bind($scope, 'parties', true);
+
+        $scope.remove = function(party){
+          $scope.parties.splice( $scope.parties.indexOf(party), 1 );
+        };
+
+    }]);
+
+
+Now try to delete a few parties and watch them being removed also from the other browser clients.
+
+
+# Summary
+
+So now i've seen how easy it is to manipulate the data using AngularJS's powerful directives and sync that data with Meteor's powerful Mongo.collection API.
+
+
+      {{/markdown}}
+    </do-nothing>
+
+    <ul class="btn-group tutorial-nav">
+      <a href="tutorial/"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
+      <a href="http://angular.github.io/angular-phonecat/step-0/app"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
+      <a href="https://github.com/angular/angular-phonecat/compare/step-0~1...step-0"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
+      <a href="tutorial/step_01"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
+    </ul>
+  </div>
+</template>
