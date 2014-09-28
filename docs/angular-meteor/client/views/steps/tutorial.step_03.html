@@ -1,0 +1,150 @@
+<template name="tutorial.step_03.html">
+  <div>
+    <a href="https://github.com/Urigo/ngmeteor/edit/master/docs/angular-meteor/client/views/steps/tutorial.step_00.html"
+       class="btn btn-default btn-lg improve-button">
+      <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
+    </a>
+    <ul class="btn-group tutorial-nav">
+      <a href="tutorial/"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
+      <a href="http://angular.github.io/angular-phonecat/step-0/app"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
+      <a href="https://github.com/angular/angular-phonecat/compare/step-0~1...step-0"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
+      <a href="tutorial/step_01"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
+    </ul>
+
+    <do-nothing>
+      {{#markdown}}
+
+# Step 3 - 3-Way data binding
+
+
+OK, so we have a nice client side application that creates and renders it's own data.
+
+So, if we were in every other Framework other then Meteor we would start implementing a series of REST end points to connect the server to the client.
+Also, we would need to create a database and functions to connect to it.
+
+And we haven't talked about realtime, so then we need to add sockets, and local DB for cache and handle latency compensation (or just ignore those features and create a not so good and modern app...)
+
+But luckily, we use Meteor!
+
+
+Meteor makes writing distributed client code as simple as talking to a local database. It's a clean, simple, and secure approach that obviates the need to implement individual RPC endpoints, manually cache data on the client to avoid slow roundtrips to the server, and carefully orchestrate invalidation messages to every client as data changes.
+
+In Meteor, the client and server share the same database API. The same exact application code — like validators and computed properties — can often run in both places. But while code running on the server has direct access to the database, code running on the client does not. This distinction is the basis for Meteor's data security model.
+
+Every Meteor client includes an in-memory database cache. To manage the client cache, the server publishes sets of JSON documents, and the client subscribes to those sets. As documents in a set change, the server patches each client's cache.
+
+
+That introduce us to a new concept - Reactivity.
+In an Angularish language we might call it 3 way data binding.
+
+The way to handle data in Meteor is through the Mongo.Collection class. It is used to declare MongoDB collections and to manipulate them.
+
+Thanks to minimongo, Meteor's client-side Mongo emulator, Mongo.Collection can be used from both client and server code.
+
+So first, let's define our first parties collection that will store all our parties.
+
+Add
+
+      Parties = new Mongo.Collection("parties");
+
+To the beginning of the file.
+
+Notice that this code runs outside of the isClient statement.
+That means that this collection and the actions on it will run both on the client (minimongo) and the server (Mongo) and Meteor will take care of syncing them both.
+
+Now that we've created the collection, our client needs to subscribe to it's changes.
+We do this with the Meteor.subscribe function:
+
+Add
+
+      Meteor.subscribe("parties");
+
+Inside the PartiesListCtrl controller.
+
+
+So now, we have a parties Meteor collection and a parties AngularJS collection, but they are not binded to each other.
+
+To bind them we are going to use angular-meteor built-in [service](https://docs.angularjs.org/guide/services) called $collection.
+
+We are going to replace the declaration of $scope.parties with the following command:
+
+    $collection(Parties).bind($scope, 'parties', true);
+
+That line declares a new $scope.parties variable so we don't need to do something like $scope.parties = []; and then binds it to the Parties Mongo collection.
+
+We also need to add the $collection service to the controller with dependency injection.
+
+Our app.js file should look like this:
+
+__`app.js`:__
+
+    Parties = new Mongo.Collection("parties");
+
+    if (Meteor.isClient) {
+
+    angular.module('socially',['ngMeteor']);
+
+    Meteor.startup(function () {
+      angular.bootstrap(document, ['socially']);
+    });
+
+    angular.module("socially").controller("PartiesListCtrl", ['$scope', '$collection',
+      function($scope, $collection){
+
+        Meteor.subscribe("parties");
+        $collection(Parties).bind($scope, 'parties', true);
+
+      }]);
+    }
+
+
+Now every change that will happen to the $scope.parties variable will automatically be saved to the local minimongo and synced to the MongoDB server DB and all the other clients in realtime!
+
+But we still don't have information so let's add some.
+Let's initialize our server with the same parties we had before.
+
+Add this to the bottom of app.js:
+
+    if (Meteor.isServer) {
+      Meteor.startup(function () {
+        if (Parties.find().count() === 0) {
+
+          var parties = [
+            {'name': 'Dubstep-Free Zone',
+              'description': 'Fast just got faster with Nexus S.'},
+            {'name': 'All dubstep all the time',
+              'description': 'Get it on!'},
+            {'name': 'Savage lounging',
+              'description': 'Leisure suit required. And only fiercest manners.'}
+          ];
+
+          for (var i = 0; i < parties.length; i++)
+            Parties.insert({name: parties[i].name, description: parties[i].description});
+
+        }
+       });
+    }
+
+As you can probably understand, this code runs only on the server, and when Meteor starts it initialize the DB with sample parties.
+
+Run the app and see if you see the list of parties on the screen.
+
+In the next chapter we will see how easy it is to manipulate the data, save and publish the changes to the server and all the connected clients.
+
+
+# Summary
+
+In this chapter you saw how easy and fast it is to create a full connection between our client data, the server and all the other connected clients.
+
+
+      {{/markdown}}
+    </do-nothing>
+
+    <ul class="btn-group tutorial-nav">
+      <a href="tutorial/"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
+      <a href="http://angular.github.io/angular-phonecat/step-0/app"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
+      <a href="https://github.com/angular/angular-phonecat/compare/step-0~1...step-0"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
+      <a href="tutorial/step_01"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
+    </ul>
+  </div>
+</template>
