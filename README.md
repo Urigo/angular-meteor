@@ -130,6 +130,17 @@ For example:
 
     }
 
+<code>bindOne</code> - used to bind the a single model to your scope:
+
+    bindOne(scope, model, id, auto)
+
+| Arguments     | Type      | Description                                                                   | Required  | Default   |
+| :------------ | :-------- | :------------------------------------------------------------------------     | :-------- | :-------- |
+| scope         | Scope     | The scope the model will be bound to.                                         | Yes       |           |
+| model         | String    | The scope property the model will be bound to.                                | Yes       |           |
+| id            | String    | The id used to look up the model from the collection                          | Yes       |           |
+| auto          | Boolean   | By default, changes in the model will not automatically update the collection. However if set to true, changes in the client will be automatically propagated back to the collection. A deep watch is created when this is set to true, which sill degrade performance.  | No        | false     |
+
 
 ### Adding controllers, directives, filters and services
 It is best practice to not use globally defined controllers like they do in the AngularJS demos. Always use the exported package scope ngMeteor as your angular module to register your controller with $controllerProvider. Furthermore, to prevent errors when minifying and obfuscating the controllers, directives, filters or services, you need to use [Dependency Injection](http://docs.angularjs.org/guide/di). For example:
