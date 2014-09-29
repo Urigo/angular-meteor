@@ -1,0 +1,74 @@
+<template name="tutorial.step_06.html">
+<div>
+<a href="https://github.com/Urigo/ngmeteor/edit/master/docs/angular-meteor/client/views/steps/tutorial.step_00.html"
+   class="btn btn-default btn-lg improve-button">
+  <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
+</a>
+<ul class="btn-group tutorial-nav">
+  <a href="tutorial/"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
+  <a href="http://angular.github.io/angular-phonecat/step-0/app"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
+  <a href="https://github.com/angular/angular-phonecat/compare/step-0~1...step-0"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
+  <a href="tutorial/step_01"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
+</ul>
+
+<do-nothing>
+  {{#markdown}}
+
+# Step 6 - Bind one object
+
+In this step, you will implement the party details view, which is displayed when a user clicks on a party in the parties list.
+The user will also be able to change the party's details.
+
+To implement the party details view we will use $collection.bindOne to fetch our data, and update it back in realtime when the user changes it.
+
+# Controller
+
+We'll expand the PartyDetailsCtrl by using the $collection service (add it will Angular's dependency injection) to bind the specific party.
+
+    angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$collection',
+      function($scope, $stateParams, $collection){
+
+        $collection(Parties).bindOne($scope, 'party', $stateParams.partyId, true);
+
+    }]);
+
+To bind to a specific object, we call the bindOne function with the following parameters:
+
+* Param 1: The scope we use (we send the current scope)
+* Param 2: The scope variable we use (we send 'party' which means that the object will be binded to $scope.party)
+* Param 3: The id of the object in the collection (taken from the url param with the $stateParam service)
+* Param 4: A flag if to bind the object so that every change in the client will be sent to the server automatically
+
+
+# Template
+
+In party-details.html let's replace the binding to the partyId with binding to party.name and party.description:
+
+    <template name="party-details.html">
+      Here you will see and change the details of the party:
+
+      <input ng-model="party.name">
+      <input ng-model="party.description">
+
+      {{lt}}/template>
+
+Now, when you run the app, navigate into a party's page, and change the inputs, the server and all the clients update immediately.
+No save buttons, no round trips, it just works.
+
+# Summery
+
+I've seen the power of the binding between AngularJS and Meteor.
+
+Let's move on the do some order and structure in our application.
+
+      {{/markdown}}
+</do-nothing>
+
+<ul class="btn-group tutorial-nav">
+  <a href="tutorial/"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
+  <a href="http://angular.github.io/angular-phonecat/step-0/app"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
+  <a href="https://github.com/angular/angular-phonecat/compare/step-0~1...step-0"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
+  <a href="tutorial/step_01"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
+</ul>
+</div>
+</template>
