@@ -5,74 +5,63 @@
       <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
     </a>
     <ul class="btn-group tutorial-nav">
-      <a href="tutorial/"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
+      <a href="/tutorial"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
       <a href="http://angular.github.io/angular-phonecat/step-0/app"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
-      <a href="https://github.com/angular/angular-phonecat/compare/step-0~1...step-0"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
-      <a href="tutorial/step_01"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
+      <a href="https://github.com/Urigo/meteor-angular-socially/compare/afd6d42e02b4518652e4061a215728a7b45d2ffb...01d51d5cb9f704478379c67195600dd831487b81"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
+      <a href="/tutorial/step_01"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
     </ul>
 
-    <h1>Step 0</h1>
-    <p>
-      You are now ready to build the Meteor-Angular socially app.
-    </p>
-    <p>
-      In this step, you will become familiar with the most important source code files,
-      learn how to start the Meteor server, connect an AngularJS FrontEnd to it and run the application in the browser.
-    </p>
-    <p>
-      First step - let's install Meteor!
-    </p>
-    <p>
-      Open your command line and paste this command:
-    </p>
-    <pre><code>
-      <span class="pln">$ curl https://install.meteor.com/ | sh</span>
-    </code></pre>
-    <p>
-      Now let's create our app - write this in the command line:
-    </p>
-    <pre><code>
-      <span class="pln">$ meteor create socially</span>
-    </code></pre>
-    <p>
-      Now let's see what we got.  go into the folder:
-    </p>
-    <pre><code>
-      <span class="pln">$ cd socially</span>
-    </code></pre>
-    <p>
-      and run the app like so:
-    </p>
-    <pre><code>
-      <span class="pln">$ meteor</span>
-      <span class="pln"></span>
-      <span class="pln">=> Started proxy.</span>
-      <span class="pln">=> Started MongoDB.</span>
-      <span class="pln">=> Started your app.</span>
-      <span class="pln">=> App running at: http://localhost:3000/</span>
-    </code></pre>
-    <p>Now go to <a href="http://localhost:3000/">http://localhost:3000/</a>
-      and look at the amazing app that's running on your computer!
-    </p>
-    <p>So, as you can see, we have a full running app! which includes a server and a client.</p>
-    <p>But let's start from the beginning, please delete to following files:</p>
-    <pre><code>
-      <span class="pln">socially.css	socially.html	socially.js</span>
-    </code></pre>
-    <p>Now we can start building our app.  first let's create a new index.html file and place this code inside and run the app again:</p>
+    <do-nothing>
+      {{#markdown}}
+# Step 0
 
-    <pre><code class="lang-html">
-      <span class="tag">&lt;body&gt;</span><span class="pln">
+You are now ready to build the Meteor-Angular socially app.
 
-        </span><span class="tag">&lt;p&gt;</span><span class="pln">Nothing here</span><span class="tag">&lt;/p&gt;</span><span class="pln">
+In this step, you will become familiar with the most important source code files,
+learn how to start the Meteor server, connect an AngularJS FrontEnd to it and run the application in the browser.
 
-      </span><span class="tag">&lt;/body&gt;</span>
-    </code></pre>
-<do-nothing>
-{{#markdown}}
+First step - let's install Meteor!
+
+Open your command line and paste this command:
+
+    $ curl https://install.meteor.com/ | sh
+
+Now let's create our app - write this in the command line:
+
+    $ meteor create socially
+
+Now let's see what we got.  go into the folder:
+
+    $ cd socially
+
+and run the app like so:
+
+    $ meteor
+
+    => Started proxy
+    => Started MongoDB.
+    => Started your app.
+    >=> App running at: http://localhost:3000/
+
+Now go to [http://localhost:3000/](http://localhost:3000/)
+and look at the amazing app that's running on your computer!
+
+So, as you can see, we have a full running app! which includes a server and a client.
+
+But let's start from the beginning, please delete to following files:
+
+    socially.css	socially.html	socially.js
+
+Now we can start building our app.
+first let's create a new index.html file and place this code inside and run the app again:
+
+__`index.html`:__
+
+    <body>
+      <p>Nothing here</p>
+    </body>
 
 As you can see, there is no html tag, no head tag, very simple..
-
 
   
 the reason is the way Meteor structuring and serving the files to the client.
@@ -149,10 +138,10 @@ Now let's go to [step 1](step_01) and add some content to the web app.
     </do-nothing>
 
     <ul class="btn-group tutorial-nav">
-      <a href="tutorial/"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
+      <a href="/tutorial"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
       <a href="http://angular.github.io/angular-phonecat/step-0/app"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
-      <a href="https://github.com/angular/angular-phonecat/compare/step-0~1...step-0"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
-      <a href="tutorial/step_01"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
+      <a href="https://github.com/Urigo/meteor-angular-socially/compare/afd6d42e02b4518652e4061a215728a7b45d2ffb...01d51d5cb9f704478379c67195600dd831487b81"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
+      <a href="/tutorial/step_01"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
     </ul>
   </div>
 </template>
