@@ -10,7 +10,7 @@ ngMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier',
       }
       return {
 
-        bindOne: function(scope, model, id) {
+        bindOne: function(scope, model, id, auto) {
           Deps.autorun(function(self) {
             scope[model] = collection.findOne(id);
             if (!scope.$$phase) scope.$apply(); // Update bindings in scope.
@@ -18,6 +18,14 @@ ngMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier',
               self.stop(); // Stop computation if scope is destroyed.
             });
           });
+
+          if (auto) { // Deep watches the model and performs autobind.
+            scope.$watch(model, function (newItem, oldItem) {
+              if (newItem)
+                if (newItem._id)
+                  collection.update({_id: newItem._id}, { $set: _.omit(newItem, '_id') });
+            }, true);
+          }
         },
 
         bind: function (scope, model, auto) {
