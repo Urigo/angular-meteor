@@ -10,6 +10,9 @@ ngMeteor
 2. Create a new meteor app using <code>meteor create myapp</code> or navigate to the root of your existing app.
 4. Install urigo:ngmeteor <code>meteor add urigo:ngmeteor</code>
 
+## Getting started tutorial
+[http://angularjs.meteor.com/tutorial](http://angularjs.meteor.com/tutorial)
+
 ## Usage
 ### Table of Contents
 - [New Data-Binding to avoid conflict](https://github.com/urigo/ngmeteor#new-data-binding-to-avoid-conflict)
