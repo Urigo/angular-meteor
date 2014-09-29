@@ -1,0 +1,14 @@
+{
+    "name": "angular-meteor-docs",
+    "description": "",
+    "homepage": "",
+    "author": "urigo <uri.goldshtein@gmail.com>",
+    "git": "",
+    "version": "",
+    "packages": {
+      "bower": {}
+    },
+    "bower": {
+      "angular-markdown-directive": "0.3.0"
+    }
+}
