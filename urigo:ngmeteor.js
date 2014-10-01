@@ -1,5 +1,6 @@
 // Define ngMeteor and its dependencies
 ngMeteor = angular.module('ngMeteor', [
+  'ngMeteor.subscribe',
   'ngMeteor.collections',
   'ngMeteor.template',
   'hashKeyCopier'

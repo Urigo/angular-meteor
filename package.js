@@ -20,6 +20,7 @@ Package.on_use(function (api) {
     // Lib Files
     'lib/angular-hash-key-copier.js',
     // Module Files
+    'modules/ngMeteor-subscribe.js',
     'modules/ngMeteor-collections.js',
     'modules/ngMeteor-template.js',
     // Finally load ngMeteor File

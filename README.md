@@ -44,15 +44,16 @@ ngMeteor provides an AngularJS service called $collection, which is a wrapper fo
 | selector      | [Mongo Selector (Object or String)](http://docs.meteor.com/#selectors)    | Same as [Meteor Collection Find](http://docs.meteor.com/#find)    | No        |
 | options       | Object                                                                    | Same as [Meteor Collection Find](http://docs.meteor.com/#find)    | No        |
 
-The $collection service only has one method, and that is <code>bind</code>, which is used to bind the collection to an Angular model so that you can use it in your scope:
+<code>bind</code>, which is used to bind the collection to an Angular model so that you can use it in your scope:
 
     bind(scope, model, auto)
 
-| Arguments     | Type      | Description                                                                                                                                                                                                                                                              | Required  | Default   |
-| :------------ | :-------- | :------------------------------------------------------------------------                                                                                                                                                                                                | :-------- | :-------- |
-| scope         | Scope     | The scope the collection will be bound to.                                                                                                                                                                                                                               | Yes       |           |
-| model         | String    | The model the collection will be bound to.                                                                                                                                                                                                                               | Yes       |           |
-| auto          | Boolean   | By default, changes in the model will not automatically update the collection. However if set to true, changes in the client will be automatically propagated back to the collection. A deep watch is created when this is set to true, which sill degrade performance.  | No        | false     |
+| Arguments     | Type             | Description                                                                                                                                                                                                                                                              | Required  | Default   |
+| :------------ | :--------------- | :------------------------------------------------------------------------                                                                                                                                                                                                | :-------- | :-------- |
+| scope         | Scope            | The scope the collection will be bound to.                                                                                                                                                                                                                               | Yes       |           |
+| model         | String           | The model the collection will be bound to.                                                                                                                                                                                                                               | Yes       |           |
+| auto          | Boolean          | By default, changes in the model will not automatically update the collection. However if set to true, changes in the client will be automatically propagated back to the collection. A deep watch is created when this is set to true, which sill degrade performance.  | No        | false     |
+| publisher     | Boolean/String   | By default, bind method will not automatically subscribe to the collection. However if set to true, bind will call Meteor.subscribe on the current collection. you can also set publisher to a string and then bind will call Meteor publish with that string.           | No        | false     |
 
 Once a collection has been bound using the <code>bind</code> method, the model will have access to the following methods for upserting/removing objects in the collection. If the <code>auto</code> argument as been set to true, then the user will not need to call these methods because these methods will be called automatically whenever the model changes.
 
@@ -143,6 +144,19 @@ For example:
 | model         | String    | The scope property the model will be bound to.                                | Yes       |           |
 | id            | String    | The id used to look up the model from the collection                          | Yes       |           |
 | auto          | Boolean   | By default, changes in the model will not automatically update the collection. However if set to true, changes in the client will be automatically propagated back to the collection. A deep watch is created when this is set to true, which sill degrade performance.  | No        | false     |
+
+
+### Subscribe
+
+ngMeteor provides an AngularJS service called $subscribe, which is a wrapper for [Meteor.subscribe](http://docs.meteor.com/#meteor_subscribe) to subscribe the client to a Meteor.publish Method within AngularJS with promises. 
+
+    $subscribe.subscribe(name, subscribeArguments)   
+    
+Returns a promise when subscription is ready.
+
+    $subscribe.subscribe('todos').then(function(){
+                  console.log($scope.todos);
+                });
 
 
 ### Adding controllers, directives, filters and services

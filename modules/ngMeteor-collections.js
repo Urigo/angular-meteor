@@ -1,8 +1,8 @@
 'use strict';
-var ngMeteorCollections = angular.module('ngMeteor.collections', []);
+var ngMeteorCollections = angular.module('ngMeteor.collections', ['ngMeteor.subscribe']);
 
-ngMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier',
-  function ($q, HashKeyCopier) {
+ngMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier', '$subscribe',
+  function ($q, HashKeyCopier, $subscribe) {
     return function (collection, selector, options) {
       if (!selector) selector = {};
       if (!(collection instanceof Meteor.Collection)) {
@@ -28,7 +28,7 @@ ngMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier',
           }
         },
 
-        bind: function (scope, model, auto) {
+        bind: function (scope, model, auto, publisher) {
           auto = auto || false; // Sets default binding type.
           if (!(typeof auto === 'boolean')) { // Checks if auto is a boolean.
             throw new TypeError("The third argument of bind must be a boolean.");
@@ -62,8 +62,26 @@ ngMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier',
               newItems.save(); // Saves all items.
             }, auto);
           }
-        }
 
+          var deferred = $q.defer();
+
+          if (publisher) {  // Subscribe to a publish method
+            var publishName = null;
+            if (publisher === true)
+              publishName = collection._name;
+            else
+              publishName = publisher;
+
+            $subscribe.subscribe(publishName).then(function(){
+              deferred.resolve(scope[model]);
+            });
+
+          } else { // If no subscription, resolve immediately
+            deferred.resolve(scope[model]);
+          }
+
+          return deferred.promise;
+        }
       };
     }
   }
