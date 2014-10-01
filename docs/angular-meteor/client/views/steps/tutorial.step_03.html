@@ -52,23 +52,15 @@ To the beginning of the file.
 Notice that this code runs outside of the isClient statement.
 That means that this collection and the actions on it will run both on the client (minimongo) and the server (Mongo) and Meteor will take care of syncing them both.
 
-Now that we've created the collection, our client needs to subscribe to it's changes.
-We do this with the Meteor.subscribe function:
-
-Add
-
-      Meteor.subscribe("parties");
-
-Inside the PartiesListCtrl controller.
-
-
-So now, we have a parties Meteor collection and a parties AngularJS collection, but they are not binded to each other.
+Now that we've created the collection, our client needs to subscribe to it's changes and bind it to our parties AngularJS collection.
 
 To bind them we are going to use angular-meteor built-in [service](https://docs.angularjs.org/guide/services) called $collection.
 
-We are going to replace the declaration of $scope.parties with the following command:
+The $collection.bind function will not only bind but also subscribe to the parties Mongo collection.
 
-    $collection(Parties).bind($scope, 'parties', true);
+We are going to replace the declaration of $scope.parties with the following command inside the PartiesListCtrl controller:
+
+    $collection(Parties).bind($scope, 'parties', true, true);
 
 That line declares a new $scope.parties variable so we don't need to do something like $scope.parties = []; and then binds it to the Parties Mongo collection.
 
@@ -91,8 +83,7 @@ __`app.js`:__
     angular.module("socially").controller("PartiesListCtrl", ['$scope', '$collection',
       function($scope, $collection){
 
-        Meteor.subscribe("parties");
-        $collection(Parties).bind($scope, 'parties', true);
+        $collection(Parties).bind($scope, 'parties', true, true);
 
       }]);
     }

@@ -123,8 +123,7 @@ And this is how the controller should look now:
     angular.module("socially").controller("PartiesListCtrl", ['$scope', '$collection',
       function($scope, $collection){
 
-        Meteor.subscribe("parties");
-        $collection(Parties).bind($scope, 'parties', true);
+        $collection(Parties).bind($scope, 'parties', true, true);
 
         $scope.remove = function(party){
           $scope.parties.splice( $scope.parties.indexOf(party), 1 );
