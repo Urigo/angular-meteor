@@ -4,12 +4,12 @@
   "homepage": "https://github.com/Urigo/ngMeteor",
   "author": "Androo Lee & Uri Goldshtein",
   "git": "https://github.com/Urigo/ngMeteor.git",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "packages": {
     "bower": {}
   },
   "bower": {
-    "angular": "1.2.25",
-    "angular-sanitize": "1.2.25"
+    "angular": "1.2.26",
+    "angular-sanitize": "1.2.26"
   }
 }
