@@ -20,6 +20,7 @@ ngMeteor
 - [Adding controllers, directives, filters and services](https://github.com/urigo/ngmeteor#adding-controllers-directives-filters-and-services)
 - [Creating and inserting template views](https://github.com/urigo/ngmeteor#creating-and-inserting-template-views)
 - [Routing](https://github.com/urigo/ngmeteor#routing)
+- [User service] (https://github.com/urigo/ngmeteor#user)
 - [Module Injection](https://github.com/urigo/ngmeteor#module-injection)
 
 ### New Data-Binding to avoid conflict
@@ -226,6 +227,23 @@ The [ngRoute](http://docs.angularjs.org/api/ngRoute) module developed by the Ang
     ]);
 
 For larger applications with more completed routes, it would be wise to consider using the [urigo:angular-ui-router](https://github.com/Urigo/meteor-angular-ui-router) Meteor package for ngMeteor, which exposes the popular [ui-router](https://github.com/angular-ui/ui-router) module to ngMeteor. For those of you that have grown accustomed to the Meteor methods of routing, ngMeteor is compatible with [Iron Router](https://github.com/EventedMind/iron-router).
+    
+### User
+    
+ngMeteor support a $user service to bind the current logged in user and it's data.
+    
+<code>bind</code> - used to bind the current logged in user to your scope:
+
+    bind(scope, model)
+
+| Arguments     | Type      | Description                                                                   | Required  | Default   |
+| :------------ | :-------- | :------------------------------------------------------------------------     | :-------- | :-------- |
+| scope         | Scope     | The scope the model will be bound to.                                         | Yes       |           |
+| model         | String    | The scope property the model will be bound to.                                | Yes       |           |
+
+    $user.bind($scope, 'user');
+        
+    $user.bind($rootScope, 'user');    
     
 ### Module Injection
 If you have a module called myModule, for example:

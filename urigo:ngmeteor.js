@@ -3,6 +3,7 @@ ngMeteor = angular.module('ngMeteor', [
   'ngMeteor.subscribe',
   'ngMeteor.collections',
   'ngMeteor.template',
+  'ngMeteor.user',
   'hashKeyCopier'
 ]);
 

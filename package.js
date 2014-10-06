@@ -23,6 +23,7 @@ Package.on_use(function (api) {
     'modules/ngMeteor-subscribe.js',
     'modules/ngMeteor-collections.js',
     'modules/ngMeteor-template.js',
+    'modules/ngMeteor-user.js',
     // Finally load ngMeteor File
     'urigo:ngmeteor.js'
   ], 'client');
