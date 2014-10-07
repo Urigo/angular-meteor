@@ -1,5 +1,5 @@
-angular-meteor
-==============
+[angular-meteor](http://angularjs.meteor.com/tutorial)
+======================================================
 > The power of Meteor and the simplicity and eco-system of AngularJS
 
 ## Quick start
@@ -12,14 +12,21 @@ angular-meteor
 
 ## Usage
 ### Table of Contents
+- [App initialization](https://github.com/urigo/angular-meteor#app-initialization)
 - [New Data-Binding to avoid conflict](https://github.com/urigo/angular-meteor#new-data-binding-to-avoid-conflict)
 - [Using Meteor Collections](https://github.com/urigo/angular-meteor#using-meteor-collections)
 - [Adding controllers, directives, filters and services](https://github.com/urigo/angular-meteor#adding-controllers-directives-filters-and-services)
 - [Creating and inserting template views](https://github.com/urigo/angular-meteor#creating-and-inserting-template-views)
 - [Routing](https://github.com/urigo/angular-meteor#routing)
-- [User service] (https://github.com/urigo/angular-meteor#user)
-- [Module Injection](https://github.com/urigo/angular-meteor#module-injection)
+- [User service] (https://github.com/urigo/angular-meteor#User)
 
+### App initialization
+If you have a module called myModule, for example:
+
+    myModule = angular.module('myModule',['angular-meteor']);
+    
+[More in step 0 in the tutorial](http://angularjs.meteor.com/tutorial/step_00)
+    
 ### New Data-Binding to avoid conflict
 To prevent conflicts with Meteor's Blaze live templating engine, angular-meteor has changed the default AngularJS data bindings from <code>{{...}}</code> to <code>[[...]]</code>. For example:
 
@@ -29,6 +36,8 @@ To prevent conflicts with Meteor's Blaze live templating engine, angular-meteor 
         <hr>
         <h1>Hello [[yourName]]!</h1>
     </div>
+    
+[More in step 2 of the tutorial](http://angularjs.meteor.com/tutorial/step_02)    
 
 ### Using Meteor Collections
 
@@ -44,7 +53,7 @@ angular-meteor provides an AngularJS service called $collection, which is a wrap
 
 <code>bind</code>, which is used to bind the collection to an Angular model so that you can use it in your scope:
 
-    bind(scope, model, auto)
+    bind(scope, model, auto, publisher)
 
 | Arguments     | Type             | Description                                                                                                                                                                                                                                                              | Required  | Default   |
 | :------------ | :--------------- | :------------------------------------------------------------------------                                                                                                                                                                                                | :-------- | :-------- |
@@ -60,6 +69,8 @@ Once a collection has been bound using the <code>bind</code> method, the model w
 | <code>save(docs)</code>   | docs      | Object or Array of Objects            | Upsert an object into the collection. If no argument is passed, all the objects in the model to the collection will be upserted.  |
 | <code>remove(keys)</code> | keys      | _id String or Array of _id Strings    | Removes an object from the collection. If no argument is passed, all the objects in the collection will be removed.               |
 
+[More in step 3 of the tutorial](http://angularjs.meteor.com/tutorial/step_03)
+
 For example:
 
     /**
@@ -67,11 +78,11 @@ For example:
      * If insecure package is also removed, then you'll need to define the collection permissions as well.
      **/
 
-    // Define a new Meteor Collection
-    Todos = new Meteor.Collection('todos');
+    // Define a new Meteor Mongo Collection
+    Todos = new Mongo.Collection('todos');
 
     if (Meteor.isClient) {
-        angular-meteor.controller("mainCtrl", ['$scope', '$collection',
+        app.controller("mainCtrl", ['$scope', '$collection',
             function($scope, $collection){
 
                 // Subscribe to all public Todos
@@ -143,6 +154,7 @@ For example:
 | id            | String    | The id used to look up the model from the collection                          | Yes       |           |
 | auto          | Boolean   | By default, changes in the model will not automatically update the collection. However if set to true, changes in the client will be automatically propagated back to the collection. A deep watch is created when this is set to true, which sill degrade performance.  | No        | false     |
 
+[More in step 6 of the tutorial](http://angularjs.meteor.com/tutorial/step_06)
 
 ### Subscribe
 
@@ -160,7 +172,7 @@ Returns a promise when subscription is ready.
 ### Adding controllers, directives, filters and services
 It is best practice to not use globally defined controllers like they do in the AngularJS demos. Always use the exported package scope angular-meteor as your angular module to register your controller with $controllerProvider. Furthermore, to prevent errors when minifying and obfuscating the controllers, directives, filters or services, you need to use [Dependency Injection](http://docs.angularjs.org/guide/di). For example:
 
-    angular-meteor.controller('TodoCtrl', ['$scope', '$collection',
+    app.controller('TodoCtrl', ['$scope', '$collection',
       function($scope, $collection) {
         $collection("todos", $scope);
        
@@ -211,6 +223,8 @@ Templates with names starting with an underscore, for example "_foo", will not b
 
 ### Routing
 It would be wise to consider using the [urigo:angular-ui-router](https://github.com/Urigo/meteor-angular-ui-router) Meteor package for angular-meteor, which exposes the popular [ui-router](https://github.com/angular-ui/ui-router) module to angular-meteor. For those of you that have grown accustomed to the Meteor methods of routing, angular-meteor is compatible with [Iron Router](https://github.com/EventedMind/iron-router).
+
+[More in step 5 of the tutorial](http://angularjs.meteor.com/tutorial/step_05)
     
 ### User
     
@@ -229,15 +243,10 @@ angular-meteor support a $user service to bind the current logged in user and it
         
     $user.bind($rootScope, 'user');    
     
-### Module Injection
-If you have a module called myModule, for example:
+[More in step 8 of the tutorial](http://angularjs.meteor.com/tutorial-02/step_08)    
 
-    myModule = angular.module('myModule',[]);
+### Additional packages
 
-it can be easily injected into angular-meteor like this:
-
-    angular-meteor.requires.push('myModule');
-    
 Using this method, additional functionality has been provided to urigo:angular-meteor in the form of separate Meteor packages that expose and inject angular modules into angular-meteor. These packages have been developed by either the angular-meteor Team and/or by third parties. The following is a non-exhaustive list of these packages:
 
 - [urigo:angular-ui-router](https://github.com/Urigo/meteor-angular-ui-router) empowers angular-meteor with the [ui-router](https://github.com/angular-ui/ui-router) module.
