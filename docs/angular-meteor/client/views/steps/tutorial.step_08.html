@@ -1,0 +1,177 @@
+<template name="tutorial.step_08.html">
+  <div>
+    <a href="https://github.com/Urigo/ngmeteor/edit/master/docs/angular-meteor/client/views/steps/tutorial.step_08.html"
+       class="btn btn-default btn-lg improve-button">
+      <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
+    </a>
+    <ul class="btn-group tutorial-nav">
+      <a href="/tutorial/step_07"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
+      <a href="http://socially-step08.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
+      <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_07...step_08"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
+      <a href="/tutorial-02/step_09"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
+    </ul>
+
+    <do-nothing>
+      {{#markdown}}
+
+# Step 8 - User accounts and permissions
+
+One of Meteor's most powerful packages is the Meteor account system.
+
+Right now, our app is publishing all the parties to all the clients and all the clients can change those parties and the changes are reflected back to all
+the other clients automatically.
+
+This is super powerful and easy, but what about security?  we don't want anyone to be able to change any party..
+
+First thing we should do is to remove the 'insecure' package that automatically added to any new Meteor application.
+
+The 'insecure' package makes the default behaviour of Meteor collections to permit all.
+
+By removing that package the default behaviour is changed to deny all.
+
+So first execute this command in the command line:
+
+    meteor remove insecure
+
+
+Now let's try to change the parties array or a specific party.  Nothing working.
+
+Now, we will have to write an explicit security rule for each operation we want to make on the Mongo collection.
+
+So first, let's add the 'accounts-password' Meteor package.
+it's a very powerful package for all the user operations you can think of: Login, signup, change password, password recovery, email confirmation and more..
+
+     meteor add accounts-password
+
+Now we will the also the 'accounts-ui' package.  that package contains all the HTML and CSS we need to the users forms.
+
+Later on in this tutorial we will replace those default account-ui forms with a custom Angular forms.
+
+    meteor add accounts-ui
+
+Now let's add the accounts-ui template ( {> loginButtons }} ) into our app, into index.html:
+
+__`index.html`:__
+
+      <body>
+
+      <div>
+        {> loginButtons }}
+        <h1>
+          <a href="/parties">Home</a>
+        </h1>
+        <div ui-view></div>
+      </div>
+
+      </body>
+
+
+Run the code, create an account, login, logout..
+
+Now that we have our account system, we can start defining our security rules for the parties.
+
+Let's go to the model folder and change the file to look like this:
+
+__`model/parties.js`:__
+
+    Parties = new Mongo.Collection("parties");
+
+    Parties.allow({
+      insert: function (userId, party) {
+        return userId && party.owner === userId;
+      },
+      update: function (userId, party, fields, modifier) {
+        if (userId !== party.owner)
+          return false;
+
+        return true;
+      },
+      remove: function (userId, party) {
+        if (userId !== party.owner)
+          return false;
+
+        return true;
+      }
+    });
+
+The collection.allow function defines the permissions that the client needs to write directly to the collection (like we did until now).
+
+In each callback of action type (insert, update, remove) the functions should return true if they think the operation should be allowed.
+Otherwise they should return false, or nothing at all (undefined).
+
+The available callbacks are:
+
+* insert(userId, doc)
+
+  The user userId wants to insert the document doc into the collection. Return true if this should be allowed.
+
+  doc will contain the _id field if one was explicitly set by the client, or if there is an active transform. You can use this to prevent users from specifying arbitrary _id fields.
+
+* update(userId, doc, fieldNames, modifier)
+
+  The user userId wants to update a document doc. (doc is the current version of the document from the database, without the proposed update.) Return true to permit the change.
+
+  fieldNames is an array of the (top-level) fields in doc that the client wants to modify, for example ['name', 'score'].
+
+  modifier is the raw Mongo modifier that the client wants to execute; for example, {$set: {'name.first': "Alice"}, $inc: {score: 1}}.
+
+  Only Mongo modifiers are supported (operations like $set and $push). If the user tries to replace the entire document rather than use $-modifiers, the request will be denied without checking the allow functions.
+
+* remove(userId, doc)
+
+  The user userId wants to remove doc from the database. Return true to permit this.
+
+
+In our example:
+
+* insert - only if the user who makes the insert is the party owner.
+* update - only if the user who makes the update is the party owner.
+* remove - only if the user who deletes the party is the party owner.
+
+
+OK, so now non of the parties has an owner so we can't change any of them.
+
+So let's add the following simple code to define an owner for each party that gets created.
+
+First, we need to get the details of the current user. for that we are going to use ngMeteor $user service.
+
+Add the following line to the PartiesListCtrl:
+
+    $user.bind($scope, 'user');
+
+Don't forget to add $user in the controller's dependency injection:
+
+    angular.module("socially").controller("PartiesListCtrl", ['$scope', '$collection', '$user',
+      function($scope, $collection, $user){
+
+The code we added binds Meteor's User object to $scope.user and updates it every time it gets updated.
+
+So now let's take our current user's id and set it as the owner id of the party we are creating:
+
+Change the code for the add button in parties-list.html to this:
+
+    <button ng-click="newParty.owner=user._id; parties.push(newParty)">Add</button>
+
+So first we set the new party's owner to our current user's id and then push it to the parties collection like before.
+
+Now, start the app in 2 different browsers and login with 2 different users.
+
+Test editing and removing your own parties, and try to do the same for parties owned by another user.
+
+# Summery
+
+Amazing, only few lines of code and we have a secure application!
+
+The step will take care of privacy, not showing users parties they are not allowed to see.
+
+        {{/markdown}}
+    </do-nothing>
+
+    <ul class="btn-group tutorial-nav">
+      <a href="/tutorial/step_07"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
+      <a href="http://socially-step08.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
+      <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_07...step_08"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
+      <a href="/tutorial-02/step_09"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
+    </ul>
+  </div>
+</template>
