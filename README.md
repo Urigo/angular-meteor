@@ -8,20 +8,20 @@ ngMeteor
 ## Quick start
 1. Install [Meteor](http://docs.meteor.com/#quickstart) <code>curl https://install.meteor.com | /bin/sh</code>
 2. Create a new meteor app using <code>meteor create myapp</code> or navigate to the root of your existing app.
-4. Install urigo:ngmeteor <code>meteor add urigo:ngmeteor</code>
+4. Install urigo:angular <code>meteor add urigo:angular</code>
 
 ## Getting started tutorial
 [http://angularjs.meteor.com/tutorial](http://angularjs.meteor.com/tutorial)
 
 ## Usage
 ### Table of Contents
-- [New Data-Binding to avoid conflict](https://github.com/urigo/ngmeteor#new-data-binding-to-avoid-conflict)
-- [Using Meteor Collections](https://github.com/urigo/ngmeteor#using-meteor-collections)
-- [Adding controllers, directives, filters and services](https://github.com/urigo/ngmeteor#adding-controllers-directives-filters-and-services)
-- [Creating and inserting template views](https://github.com/urigo/ngmeteor#creating-and-inserting-template-views)
-- [Routing](https://github.com/urigo/ngmeteor#routing)
-- [User service] (https://github.com/urigo/ngmeteor#user)
-- [Module Injection](https://github.com/urigo/ngmeteor#module-injection)
+- [New Data-Binding to avoid conflict](https://github.com/urigo/angular-meteor#new-data-binding-to-avoid-conflict)
+- [Using Meteor Collections](https://github.com/urigo/angular-meteor#using-meteor-collections)
+- [Adding controllers, directives, filters and services](https://github.com/urigo/angular-meteor#adding-controllers-directives-filters-and-services)
+- [Creating and inserting template views](https://github.com/urigo/angular-meteor#creating-and-inserting-template-views)
+- [Routing](https://github.com/urigo/angular-meteor#routing)
+- [User service] (https://github.com/urigo/angular-meteor#user)
+- [Module Injection](https://github.com/urigo/angular-meteor#module-injection)
 
 ### New Data-Binding to avoid conflict
 To prevent conflicts with Meteor's Blaze live templating engine, ngMeteor has changed the default AngularJS data bindings from <code>{{...}}</code> to <code>[[...]]</code>. For example:

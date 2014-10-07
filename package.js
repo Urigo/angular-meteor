@@ -24,13 +24,13 @@ Package.on_use(function (api) {
     'modules/ngMeteor-collections.js',
     'modules/ngMeteor-template.js',
     'modules/ngMeteor-user.js',
-    // Finally load ngMeteor File
-    'urigo:ngmeteor.js'
+    // Finally load angular-meteor File
+    'urigo:angular.js'
   ], 'client');
 });
 
 Package.onTest(function(api) {
   api.use('tinytest');
-  api.use('urigo:ngmeteor');
-  api.addFiles('urigo:ngmeteor-tests.js');
+  api.use('urigo:angular');
+  api.addFiles('urigo:angular-tests.js');
 });
