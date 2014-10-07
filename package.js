@@ -6,8 +6,8 @@ Package.describe({
 
 Package.on_use(function (api) {
   api.versionsFrom('METEOR@0.9.0.1');
-  // Exports the ngMeteor package scope
-  api.export('ngMeteor', 'client');
+  // Exports the angular package scope
+  api.export('angularMeteor', 'client');
 
   api.use('jquery', 'client');
 
@@ -20,10 +20,10 @@ Package.on_use(function (api) {
     // Lib Files
     'lib/angular-hash-key-copier.js',
     // Module Files
-    'modules/ngMeteor-subscribe.js',
-    'modules/ngMeteor-collections.js',
-    'modules/ngMeteor-template.js',
-    'modules/ngMeteor-user.js',
+    'modules/angular-meteor-subscribe.js',
+    'modules/angular-meteor-collections.js',
+    'modules/angular-meteor-template.js',
+    'modules/angular-meteor-user.js',
     // Finally load angular-meteor File
     'urigo:angular.js'
   ], 'client');

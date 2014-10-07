@@ -1,6 +1,6 @@
 <template name="tutorial.step_02.html">
   <div>
-    <a href="https://github.com/Urigo/ngmeteor/edit/master/docs/angular-meteor/client/views/steps/tutorial.step_02.html"
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/docs/angular-meteor/client/views/steps/tutorial.step_02.html"
        class="btn btn-default btn-lg improve-button">
       <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
     </a>
@@ -81,14 +81,14 @@ So let's continue with starting our AngularJS applicantion, we will call it "soc
 __`app.js`:__
 
       if (Meteor.isClient) {
-        angular.module('socially',['ngMeteor']);
+        angular.module('socially',['angular-meteor']);
 
         Meteor.startup(function () {
           angular.bootstrap(document, ['socially']);
         });
       }
 
-What we did here is to declare a new angular module named 'socially' and making it dependant on the 'ngMeteor' module (that we included in the first step).
+What we did here is to declare a new angular module named 'socially' and making it dependant on the 'angular-meteor' module (that we included in the first step).
 
 Then we told our applicantion to start our angular module applicantion on startup.
 
@@ -101,7 +101,7 @@ Now let's create our PartiesListCtrl controller and place data in it.
 __`app.js`:__
 
       if (Meteor.isClient) {
-        angular.module('socially',['ngMeteor']);
+        angular.module('socially',['angular-meteor']);
 
         Meteor.startup(function () {
           angular.bootstrap(document, ['socially']);

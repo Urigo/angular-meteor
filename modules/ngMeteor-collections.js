@@ -1,7 +1,7 @@
 'use strict';
-var ngMeteorCollections = angular.module('ngMeteor.collections', ['ngMeteor.subscribe']);
+var angularMeteorCollections = angular.module('angular-meteor.collections', ['angular-meteor.subscribe']);
 
-ngMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier', '$subscribe',
+angularMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier', '$subscribe',
   function ($q, HashKeyCopier, $subscribe) {
     return function (collection, selector, options) {
       if (!selector) selector = {};

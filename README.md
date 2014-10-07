@@ -1,9 +1,6 @@
-ngMeteor
-========
-> The simplest no-conflict way to use AngularJS with Meteor.
-
-> ngMeteor v0.1.22+ works with Blaze.
-> ngMeteor v0.2.0+ works with Meteor 0.8.2, 0.8.3, 0.9.0, 0.9.1 and above.
+angular-meteor
+==============
+> The power of Meteor and the simplicity and eco-system of AngularJS
 
 ## Quick start
 1. Install [Meteor](http://docs.meteor.com/#quickstart) <code>curl https://install.meteor.com | /bin/sh</code>
@@ -24,7 +21,7 @@ ngMeteor
 - [Module Injection](https://github.com/urigo/angular-meteor#module-injection)
 
 ### New Data-Binding to avoid conflict
-To prevent conflicts with Meteor's Blaze live templating engine, ngMeteor has changed the default AngularJS data bindings from <code>{{...}}</code> to <code>[[...]]</code>. For example:
+To prevent conflicts with Meteor's Blaze live templating engine, angular-meteor has changed the default AngularJS data bindings from <code>{{...}}</code> to <code>[[...]]</code>. For example:
 
     <div>
         <label>Name:</label>
@@ -35,7 +32,7 @@ To prevent conflicts with Meteor's Blaze live templating engine, ngMeteor has ch
 
 ### Using Meteor Collections
 
-ngMeteor provides an AngularJS service called $collection, which is a wrapper for [Meteor collections](http://docs.meteor.com/#meteor_collection) to enable reactivity within AngularJS. The $collection service no longer subscribes to a publisher function automatically, so you must explicitly subscribe to a publisher function before calling the $collection service.
+angular-meteor provides an AngularJS service called $collection, which is a wrapper for [Meteor collections](http://docs.meteor.com/#meteor_collection) to enable reactivity within AngularJS. The $collection service no longer subscribes to a publisher function automatically, so you must explicitly subscribe to a publisher function before calling the $collection service.
 
     $collection(collection, selector, options)
 
@@ -74,7 +71,7 @@ For example:
     Todos = new Meteor.Collection('todos');
 
     if (Meteor.isClient) {
-        ngMeteor.controller("mainCtrl", ['$scope', '$collection',
+        angular-meteor.controller("mainCtrl", ['$scope', '$collection',
             function($scope, $collection){
 
                 // Subscribe to all public Todos
@@ -149,7 +146,7 @@ For example:
 
 ### Subscribe
 
-ngMeteor provides an AngularJS service called $subscribe, which is a wrapper for [Meteor.subscribe](http://docs.meteor.com/#meteor_subscribe) to subscribe the client to a Meteor.publish Method within AngularJS with promises. 
+angular-meteor provides an AngularJS service called $subscribe, which is a wrapper for [Meteor.subscribe](http://docs.meteor.com/#meteor_subscribe) to subscribe the client to a Meteor.publish Method within AngularJS with promises. 
 
     $subscribe.subscribe(name, subscribeArguments)   
     
@@ -161,9 +158,9 @@ Returns a promise when subscription is ready.
 
 
 ### Adding controllers, directives, filters and services
-It is best practice to not use globally defined controllers like they do in the AngularJS demos. Always use the exported package scope ngMeteor as your angular module to register your controller with $controllerProvider. Furthermore, to prevent errors when minifying and obfuscating the controllers, directives, filters or services, you need to use [Dependency Injection](http://docs.angularjs.org/guide/di). For example:
+It is best practice to not use globally defined controllers like they do in the AngularJS demos. Always use the exported package scope angular-meteor as your angular module to register your controller with $controllerProvider. Furthermore, to prevent errors when minifying and obfuscating the controllers, directives, filters or services, you need to use [Dependency Injection](http://docs.angularjs.org/guide/di). For example:
 
-    ngMeteor.controller('TodoCtrl', ['$scope', '$collection',
+    angular-meteor.controller('TodoCtrl', ['$scope', '$collection',
       function($scope, $collection) {
         $collection("todos", $scope);
        
@@ -203,7 +200,7 @@ You can render this template using handlebars as you would for any other Meteor 
 
     {{> foo}}
 
-Templates will also be added to the $templateCache of the ngMeteor angular module. To invoke the template in AngularJS you could use ng-view and specify the template in the $templateCache when defining your routes using the $routeProvider or your could use the ng-template directive to render your template like this:
+Templates will also be added to the $templateCache of the angular-meteor module. To invoke the template in AngularJS you could use ng-view and specify the template in the $templateCache when defining your routes using the $routeProvider or your could use the ng-template directive to render your template like this:
 
     <ANY ng-template="foo"></ANY>
 
@@ -213,24 +210,11 @@ Templates will also be added to the $templateCache of the ngMeteor angular modul
 Templates with names starting with an underscore, for example "_foo", will not be put into the $templateCache, so you will not be able to access those templates using ng-template, ng-include or ng-view.
 
 ### Routing
-The [ngRoute](http://docs.angularjs.org/api/ngRoute) module developed by the AngularJS team is included in ngMeteor, which will satisfy those with simple routing needs. For example, if you want to call a template called 'foo' and a controller called 'TodoCtrl' when someone lands on your home page you would define your route like this:
-
-    ngMeteor.config(['$routeProvider', '$locationProvider',
-      function($routeProvider, $locationProvider) {
-        $routeProvider.when('/',{
-          templateUrl: 'foo',
-          controller: 'TodoCtrl'
-        });
-          
-        $locationProvider.html5Mode(true);
-      }
-    ]);
-
-For larger applications with more completed routes, it would be wise to consider using the [urigo:angular-ui-router](https://github.com/Urigo/meteor-angular-ui-router) Meteor package for ngMeteor, which exposes the popular [ui-router](https://github.com/angular-ui/ui-router) module to ngMeteor. For those of you that have grown accustomed to the Meteor methods of routing, ngMeteor is compatible with [Iron Router](https://github.com/EventedMind/iron-router).
+It would be wise to consider using the [urigo:angular-ui-router](https://github.com/Urigo/meteor-angular-ui-router) Meteor package for angular-meteor, which exposes the popular [ui-router](https://github.com/angular-ui/ui-router) module to angular-meteor. For those of you that have grown accustomed to the Meteor methods of routing, angular-meteor is compatible with [Iron Router](https://github.com/EventedMind/iron-router).
     
 ### User
     
-ngMeteor support a $user service to bind the current logged in user and it's data.
+angular-meteor support a $user service to bind the current logged in user and it's data.
     
 <code>bind</code> - used to bind the current logged in user to your scope:
 
@@ -250,18 +234,18 @@ If you have a module called myModule, for example:
 
     myModule = angular.module('myModule',[]);
 
-it can be easily injected into ngMeteor like this:
+it can be easily injected into angular-meteor like this:
 
-    ngMeteor.requires.push('myModule');
+    angular-meteor.requires.push('myModule');
     
-Using this method, additional functionality has been provided to urigo:ngmeteor in the form of separate Meteor packages that expose and inject angular modules into ngMeteor. These packages have been developed by either the ngMeteor Team and/or by third parties. The following is a non-exhaustive list of these packages:
+Using this method, additional functionality has been provided to urigo:angular-meteor in the form of separate Meteor packages that expose and inject angular modules into angular-meteor. These packages have been developed by either the angular-meteor Team and/or by third parties. The following is a non-exhaustive list of these packages:
 
-- [urigo:angular-ui-router](https://github.com/Urigo/meteor-angular-ui-router) empowers ngMeteor with the [ui-router](https://github.com/angular-ui/ui-router) module.
-- [netanelgilad:angular-file-upload](https://github.com/netanelgilad/meteor-angular-file-upload) empowers ngMeteor with [angular-file-upload](https://github.com/nervgh/angular-file-upload) module.
-- [davidyaha:ng-grid](https://github.com/davidyaha/meteor-ng-grid) empowers ngMeteor with [ui-grid](https://github.com/angular-ui/ng-grid) module.
-- [netanelgilad:angular-sortable-view](https://github.com/netanelgilad/meteor-angular-sortable-view/) empowers ngMeteor with [angular-sortable-view](https://github.com/kamilkp/angular-sortable-view) module.
-- [netanelgilad:text-angular](https://github.com/netanelgilad/meteor-textAngular/) empowers ngMeteor with [textAngular](https://github.com/fraywing/textAngular) module.
+- [urigo:angular-ui-router](https://github.com/Urigo/meteor-angular-ui-router) empowers angular-meteor with the [ui-router](https://github.com/angular-ui/ui-router) module.
+- [netanelgilad:angular-file-upload](https://github.com/netanelgilad/meteor-angular-file-upload) empowers angular-meteor with [angular-file-upload](https://github.com/nervgh/angular-file-upload) module.
+- [davidyaha:ng-grid](https://github.com/davidyaha/meteor-ng-grid) empowers angular-meteor with [ui-grid](https://github.com/angular-ui/ng-grid) module.
+- [netanelgilad:angular-sortable-view](https://github.com/netanelgilad/meteor-angular-sortable-view/) empowers angular-meteor with [angular-sortable-view](https://github.com/kamilkp/angular-sortable-view) module.
+- [netanelgilad:text-angular](https://github.com/netanelgilad/meteor-textAngular/) empowers angular-meteor with [textAngular](https://github.com/fraywing/textAngular) module.
 
-Feel free to make ngMeteor module smart packages, and please contact [urigo](https://github.com/urigo) if you would like your package to be listed here as well.
+Feel free to make angular-meteor module smart packages, and please contact [urigo](https://github.com/urigo) if you would like your package to be listed here as well.
 Be sure to be compatible with Meteor 0.9.0 and above and it's packaging system!
 

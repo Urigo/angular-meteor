@@ -1,6 +1,6 @@
-var ngMeteorUser = angular.module('ngMeteor.user', []);
+var angularMeteorUser = angular.module('angular-meteor.user', []);
 
-ngMeteorUser.factory("$user", [function() {
+angularMeteorUser.factory("$user", [function() {
   return {
     bind: function(scope, model) {
       Deps.autorun(function(self) {

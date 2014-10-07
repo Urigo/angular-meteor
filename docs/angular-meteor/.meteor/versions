@@ -52,7 +52,7 @@ tracker@1.0.2
 ui@1.0.3
 underscore@1.0.0
 urigo:angular-ui-router@0.5.0
-urigo:ngmeteor@0.3.1
+urigo:angular@0.3.5
 url@1.0.0
 webapp-hashing@1.0.0
 webapp@1.1.2

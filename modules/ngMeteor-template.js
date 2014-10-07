@@ -1,6 +1,6 @@
-var ngMeteorTemplate = angular.module('ngMeteor.template', []);
+var angularMeteorTemplate = angular.module('angular-meteor.template', []);
 
-ngMeteorTemplate.run(['$templateCache',
+angularMeteorTemplate.run(['$templateCache',
   function ($templateCache) {
     angular.forEach(Template, function (template, name) {
       if (name.charAt(0) != "_"  && name != "prototype"  && name != "loginButtons") { // Ignores templates with names starting with "_"
@@ -10,7 +10,7 @@ ngMeteorTemplate.run(['$templateCache',
   }
 ]);
 
-ngMeteorTemplate.directive('ngTemplate', ['$templateCache',
+angularMeteorTemplate.directive('ngTemplate', ['$templateCache',
   function ($templateCache) {
     return {
       restrict: 'E',
@@ -53,8 +53,8 @@ ngMeteorTemplate.directive('ngTemplate', ['$templateCache',
          * Includes the templates event maps.
          * Attaching events using selectors is not the recommended approach taken by AngularJS.
          * That being said, the template event maps are included to maintain flexibility in the Meteor + Angular integration.
-         * It is not ngMeteor's role to dictate which approach a developer should take,
-         * so ngMeteor has left it up to the user to decide which approach they prefer when developing.
+         * It is not angular-meteor's role to dictate which approach a developer should take,
+         * so angular-meteor has left it up to the user to decide which approach they prefer when developing.
          **/
         angular.forEach(template._events, function (eventObj) {
           var eventType = eventObj.events,

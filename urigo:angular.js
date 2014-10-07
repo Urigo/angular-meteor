@@ -1,31 +1,31 @@
-// Define ngMeteor and its dependencies
-ngMeteor = angular.module('ngMeteor', [
-  'ngMeteor.subscribe',
-  'ngMeteor.collections',
-  'ngMeteor.template',
-  'ngMeteor.user',
+// Define angular-meteor and its dependencies
+angularMeteor = angular.module('angular-meteor', [
+  'angular-meteor.subscribe',
+  'angular-meteor.collections',
+  'angular-meteor.template',
+  'angular-meteor.user',
   'hashKeyCopier'
 ]);
 
-// Method to allow injection of angular modules dependencies into ngMeteor
-ngMeteor.injector = function (modules) {
+// Method to allow injection of angular modules dependencies into angular-meteor
+angularMeteor.injector = function (modules) {
   angular.forEach(modules, function (module) {
-    ngMeteor.requires.push(module);
+    angularMeteor.requires.push(module);
   });
 };
 
 // Change the data-bindings from {{foo}} to [[foo]]
-ngMeteor.config(['$interpolateProvider',
+angularMeteor.config(['$interpolateProvider',
   function ($interpolateProvider) {
     $interpolateProvider.startSymbol('[[');
     $interpolateProvider.endSymbol(']]');
   }
 ]);
 
-// Manual initialisation of ngMeteor
+// Manual initialisation of angular-meteor
 angular.element(document).ready(function () {
   if (!angular.element(document).injector()) {
-    angular.bootstrap(document, ['ngMeteor']);
+    angular.bootstrap(document, ['angular-meteor']);
   }
 
   // Recompile whenever the DOM elements are updated.
