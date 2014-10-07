@@ -10,6 +10,9 @@
 ## Getting started tutorial
 [http://angularjs.meteor.com/tutorial](http://angularjs.meteor.com/tutorial)
 
+## Package 
+[urigo:angular](https://atmospherejs.com/urigo/angular)
+
 ## Usage
 ### Table of Contents
 - [App initialization](https://github.com/urigo/angular-meteor#app-initialization)
