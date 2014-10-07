@@ -1,7 +1,7 @@
 {
   "name": "urigo:ngmeteor",
   "description": "The simplest no-conflict way to use AngularJS with Meteor",
-  "homepage": "https://github.com/Urigo/ngMeteor",
+  "homepage": "https://github.com/Urigo/angular-meteor.git",
   "author": "Androo Lee & Uri Goldshtein",
   "git": "https://github.com/Urigo/ngMeteor.git",
   "version": "0.3.5",
