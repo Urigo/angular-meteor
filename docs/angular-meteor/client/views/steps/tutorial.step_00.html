@@ -48,7 +48,7 @@ and look at the amazing app that's running on your computer!
 
 So, as you can see, we have a full running app! which includes a server and a client.
 
-But let's start from the beginning, please delete to following files:
+But let's start from the beginning, please delete the following files:
 
     socially.css	socially.html	socially.js
 
@@ -61,10 +61,10 @@ __`index.html`:__
       <p>Nothing here</p>
     </body>
 
-As you can see, there is no html tag, no head tag, very simple..
+As you can see, there is no html tag, no head tag, very simple.
 
   
-the reason is the way Meteor structuring and serving the files to the client.
+The reason is the way Meteor structures and serves files to the client.
 
 Meteor scans all the HTML files in your application and concatenates them together.
 
@@ -74,7 +74,7 @@ Then it will search for all the HTML files containing HEAD or BODY tags and conc
 
 
 
-So in our case, Meteor found our index.html file, found the BODY tag inside and added it's content to the main generated file's BODY tag.
+So in our case, Meteor found our index.html file, found the BODY tag inside and added it's content to the BODY tag of the main generated file.
 
 (right-click -> inspect element on the page to see the generated file)
 
@@ -86,7 +86,7 @@ Now first things first, let's add the AngularJS package to Meteor (we will discu
 
 
 
-back in the command line, launch this command:
+Back in the command line, launch this command:
 
     $ meteor add urigo:angular
 
@@ -113,16 +113,16 @@ This line demonstrates two core features of Angular's templating capabilities:
 * A binding, denoted by Double-square-brackets [[ ]]
 * a simple expression 'yet' + '!' used in this binding.
 
-AngularJS is finding those Double-square-brackets, evaluates the expression and insert the result into the DOM in place of the binding.
+AngularJS finds those Double-square-brackets, evaluates the expression and inserts the result into the DOM in place of the binding.
 Rather than a one-time insert, as we'll see in the next steps, a binding will result in efficient continuous updates whenever the result of the expression evaluation changes.
 Inside in the client side, like a future smart browser would do.
 
 
 > You can see that we are using Double-square-brackets instead of double-curlies.
 >
-> That is because Meteor templating system uses double-curlies and if we will use them Meteor will override Angular.
+> That is because Meteor templating system uses double-curlies. If we use them in our AngularJS view HTML, Meteor will override Angular.
 >
-> Fortunatly Angular (unlike Meteor..) gives us the option to change the double-curlies to Double-square-brackets.
+> Fortunately, Angular (unlike Meteor...) gives us the option to change the double-curlies to Double-square-brackets.
 >
 > But you don't need to do anything, urigo:angular takes care of that for you.
 
