@@ -224,6 +224,18 @@ Templates will also be added to the $templateCache of the angular-meteor module.
     
 Templates with names starting with an underscore, for example "_foo", will not be put into the $templateCache, so you will not be able to access those templates using ng-template, ng-include or ng-view.
 
+You can include Meteor templates with <meteor-include src="loginButtons"></meteor-include> (loginButtons is the template name).
+
+    <template name="phones">
+      <meteor-include src="loginButtons"></meteor-include>
+        <ul>
+          <li ng-repeat="phone in phones">
+            [[phone.name]]
+            <p>[[phone.snippet]]</p>
+          </li>
+        </ul>
+    </template>
+
 ### Routing
 It would be wise to consider using the [urigo:angular-ui-router](https://github.com/Urigo/meteor-angular-ui-router) Meteor package for angular-meteor, which exposes the popular [ui-router](https://github.com/angular-ui/ui-router) module to angular-meteor. For those of you that have grown accustomed to the Meteor methods of routing, angular-meteor is compatible with [Iron Router](https://github.com/EventedMind/iron-router).
 
