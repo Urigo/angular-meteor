@@ -70,3 +70,22 @@ angularMeteorTemplate.directive('ngTemplate', ['$templateCache',
     };
   }
 ]);
+
+angularMeteorTemplate.directive('meteorInclude', [
+  '$compile',
+  function ($compile) {
+    return {
+      restrict: 'AE',
+      scope: false,
+      link: function (scope, element, attributes) {
+        var name = attributes.meteorInclude || attributes.src;
+        if (name && Template[name]) {
+          var template = Template[name];
+          Blaze.renderWithData(template, scope, element.get(0));
+        } else {
+          console.error("meteorTemplate: There is no template with the name '" + name + "'");
+        }
+      }
+    };
+  }
+]);
