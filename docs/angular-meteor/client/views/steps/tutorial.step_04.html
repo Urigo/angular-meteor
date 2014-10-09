@@ -17,7 +17,7 @@
 # Step 4 - Adding/removing objects and Angular event handling
 
 
-Now that we have full data binding from server till client, let's interact the data and see the updates in action.
+Now that we have full data binding from server to client, let's interact with the data and see the updates in action.
 
 In this chapter you will add the option to add a new party and delete an existing one.
 
@@ -70,7 +70,7 @@ First thing, let's bind the value of the inputs into a new party variable.
 
 To do that we will use the simple and powerful [ng-model](https://docs.angularjs.org/api/ng/directive/ngModel) AngularJS directive.
 
-Add ng-model to the form like that:
+Add ng-model to the form like this:
 
     <form>
       <label>Name</label>
@@ -80,7 +80,7 @@ Add ng-model to the form like that:
       <button>Add</button>
     </form>
 
-Now each time the user types inside those inputs, the value of the newParty variable will automatically (and also when newParty will change outside of the HTML, the inputs will be updated accordingly).
+Now each time the user types inside those inputs, the value of the newParty scope variable will be automatically updated.  Conversely, if $scope.newParty is changed outside of the HTML, the input values will be updated accordingly.
 
 ## ng-click
 
@@ -90,9 +90,9 @@ Now let's bind a click event to the add button with Angular's [ng-click](https:/
     <button ng-click="parties.push(newParty)">Add</button>
 
 ng-click binds the click event into an expression.
-So we taken the parties scope array (when accessing scope variables in the HTML, there is no need to add $scope. before) and pushed the newParty variable into it.
+So we take the parties scope array (when accessing scope variables in the HTML, there is no need to add $scope. before) and push the newParty variable into it.
 
-Open a different browser, push the button and see how the party is added on both clients. so simple!
+Open a different browser, click the button and see how the party is added on both clients. So simple!
 
 
 Now, let's add the ability to delete parties.
@@ -132,12 +132,12 @@ And this is how the controller should look now:
     }]);
 
 
-Now try to delete a few parties and watch them being removed also from the other browser clients.
+Now try to delete a few parties and also watch them being removed from other browser clients.
 
 
 # Summary
 
-So now i've seen how easy it is to manipulate the data using AngularJS's powerful directives and sync that data with Meteor's powerful Mongo.collection API.
+So now you've seen how easy it is to manipulate the data using AngularJS's powerful directives and sync that data with Meteor's powerful Mongo.collection API.
 
 
       {{/markdown}}
