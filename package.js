@@ -9,7 +9,7 @@ Package.on_use(function (api) {
   // Exports the angular package scope
   api.export('angularMeteor', 'client');
 
-  api.use('jquery', 'client');
+  api.use('jquery', 'client', {weak: true});
 
   // Including bower
   api.use('mquandalle:bower@0.1.11', 'client');
