@@ -19,10 +19,10 @@
 
 OK, so we have a nice client side application that creates and renders it's own data.
 
-So, if we were in every other Framework other then Meteor we would start implementing a series of REST end points to connect the server to the client.
+So, if we were in any Framework other than Meteor, we would start implementing a series of REST end points to connect the server to the client.
 Also, we would need to create a database and functions to connect to it.
 
-And we haven't talked about realtime, so then we need to add sockets, and local DB for cache and handle latency compensation (or just ignore those features and create a not so good and modern app...)
+And we haven't talked about realtime, so then we need to add sockets, and a local DB for cache and handle latency compensation (or just ignore those features and create a not - so - good and modern app...)
 
 But luckily, we use Meteor!
 
@@ -43,14 +43,14 @@ Thanks to minimongo, Meteor's client-side Mongo emulator, Mongo.Collection can b
 
 So first, let's define our first parties collection that will store all our parties.
 
-Add
+Add:
 
       Parties = new Mongo.Collection("parties");
 
-To the beginning of the file.
+to the beginning of the file.
 
 Notice that this code runs outside of the isClient statement.
-That means that this collection and the actions on it will run both on the client (minimongo) and the server (Mongo) and Meteor will take care of syncing them both.
+That means that this collection and the actions on it will run both on the client (minimongo) and the server (Mongo) and Meteor will take care of syncing both of them.
 
 Now that we've created the collection, our client needs to subscribe to it's changes and bind it to our parties AngularJS collection.
 
@@ -62,7 +62,7 @@ We are going to replace the declaration of $scope.parties with the following com
 
     $collection(Parties).bind($scope, 'parties', true, true);
 
-That line declares a new $scope.parties variable so we don't need to do something like $scope.parties = []; and then binds it to the Parties Mongo collection.
+That line declares a new $scope.parties variable so we don't need to do something like $scope.parties = []; and then bind it to the Parties Mongo collection.
 
 We also need to add the $collection service to the controller with dependency injection.
 
