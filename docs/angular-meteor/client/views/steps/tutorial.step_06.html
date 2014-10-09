@@ -23,7 +23,7 @@ To implement the party details view we will use $collection.bindOne to fetch our
 
 # Controller
 
-We'll expand the PartyDetailsCtrl by using the $collection service (add it will Angular's dependency injection) to bind the specific party.
+We'll expand the PartyDetailsCtrl by using the $collection service (add it with Angular's dependency injection) to bind the specific party.
 
     angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$collection',
       function($scope, $stateParams, $collection){
@@ -55,11 +55,11 @@ In party-details.html let's replace the binding to the partyId with binding to p
 Now, when you run the app, navigate into a party's page, and change the inputs, the server and all the clients update immediately.
 No save buttons, no round trips, it just works.
 
-# Summery
+# Summary
 
-I've seen the power of the binding between AngularJS and Meteor.
+We've seen the power of 3-way binding between the DOM, AngularJS and Meteor.
 
-Let's move on the do some order and structure in our application.
+Let's move on to provide some order and structure in our application.
 
       {{/markdown}}
 </do-nothing>
