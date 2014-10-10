@@ -20,7 +20,7 @@ In this step, you will learn how to create a layout template and how to build an
 
 The goals for this step:
 
-* When you will navigate to index.html, you will be redirected to index.html/phones and the phone list appears in the browser.
+* When you will navigate to index.html, you will be redirected to index.html/parties and the party list appears in the browser.
 * When you click on a party link the url changes to one specific to that party and the stub of a party detail page is displayed.
 
 # Dependencies
@@ -81,10 +81,10 @@ __`parties-list.html`:__
         </ul>
       {{lt}}/template>
 
-The code is almost the same except those changes:
+The code is almost the same except these changes:
 
 1. Wrapped the code in a template tag with a name attribute
-2. Added a link to the parties name display (that link will take us the that party's detailed page
+2. Added a link to the parties name display (that link will take us the that party's detailed page)
 
 ## Meteor templates
 
@@ -122,7 +122,7 @@ __`party-details.html`:__
 
       <template name="party-details.html">
         Here you will see the details of party number: [[ partyId ]]
-      {{lt}}/template>
+      </template>
 
 We will get to it later on.
 
@@ -153,7 +153,7 @@ Add this config code in app.js, after the angular app has been defined:
     }]);
 
 
-Using the angualr app's .config() method, we request the $stateProvider to be injected into our config function and use the state method to define our routes.
+Using the Angular app's .config() method, we request the $stateProvider to be injected into our config function and use the state method to define our routes.
 
 Our application routes are defined as follows:
 
