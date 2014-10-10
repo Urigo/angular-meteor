@@ -21,7 +21,7 @@ One of Meteor's most powerful packages is the Meteor account system.
 Right now, our app is publishing all the parties to all the clients and all the clients can change those parties and the changes are reflected back to all
 the other clients automatically.
 
-This is super powerful and easy, but what about security?  we don't want anyone to be able to change any party..
+This is super powerful and easy, but what about security?  We don't want anyone to be able to change any party...
 
 First thing we should do is to remove the 'insecure' package that automatically added to any new Meteor application.
 
@@ -43,7 +43,7 @@ it's a very powerful package for all the user operations you can think of: Login
 
      meteor add accounts-password
 
-Now we will the also the 'accounts-ui' package.  that package contains all the HTML and CSS we need to the users forms.
+Now we will the also the 'accounts-ui' package.  That package contains all the HTML and CSS we need for the user operation forms.
 
 Later on in this tutorial we will replace those default account-ui forms with a custom Angular forms.
 
@@ -70,7 +70,7 @@ __`index.html`:__
       </body>
 
 
-Run the code, create an account, login, logout..
+Run the code, create an account, login, logout...
 
 Now that we have our account system, we can start defining our security rules for the parties.
 
@@ -133,7 +133,7 @@ In our example:
 * remove - only if the user who deletes the party is the party owner.
 
 
-OK, so now non of the parties has an owner so we can't change any of them.
+OK, so now none of the parties has an owner so we can't change any of them.
 
 So let's add the following simple code to define an owner for each party that gets created.
 
@@ -162,11 +162,11 @@ Now, start the app in 2 different browsers and login with 2 different users.
 
 Test editing and removing your own parties, and try to do the same for parties owned by another user.
 
-# Summery
+# Summary
 
 Amazing, only few lines of code and we have a secure application!
 
-The step will take care of privacy, not showing users parties they are not allowed to see.
+The next step will take care of privacy, not showing users parties they are not allowed to see.
 
         {{/markdown}}
     </do-nothing>
