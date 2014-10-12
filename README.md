@@ -225,6 +225,8 @@ Templates will also be added to the $templateCache of the angular-meteor module.
     
 Templates with names starting with an underscore, for example "_foo", will not be put into the $templateCache, so you will not be able to access those templates using ng-template, ng-include or ng-view.
 
+### meteor-include
+
 You can include Meteor templates with <meteor-include src="loginButtons"></meteor-include> (loginButtons is the template name).
 
     <template name="phones">
