@@ -263,7 +263,7 @@ angular-meteor support a $user service to bind the current logged in user and it
 
 ### Meteor methods with promises
 
-angular-meteor introduces the $methods service with wraps up [Meteor.methods](http://docs.meteor.com/#methods_header) with [AngularJS promises](https://docs.angularjs.org/api/ng/service/$q).
+angular-meteor introduces the $methods service which wraps up [Meteor.methods](http://docs.meteor.com/#methods_header) with [AngularJS promises](https://docs.angularjs.org/api/ng/service/$q).
  
 Simply call **$methods.call** function and instead of sending the function of handling success and error as a parameter, handle the success and error in the AngularJS way with the 'then' method:
  
