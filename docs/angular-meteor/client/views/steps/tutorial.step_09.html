@@ -122,6 +122,8 @@ Create a new file under the 'server' folder named users.js and place the followi
 
 So here again we use the Mongo API to return all the users (find with an empty object) but we select to return only the emails and profile fields.
 
+* Notice that in any way each object (in our case each user) will contain its _id field.
+
 emails field holds all the user's email addresses, and the profile might holds more information like the user's name is exists
 (in our case, if the user logged in with the Facebook login, the accounts-facebook package puts the user's name from Facebook automatically into that field).
 
