@@ -22,6 +22,7 @@
 - [Creating and inserting template views](https://github.com/urigo/angular-meteor#creating-and-inserting-template-views)
 - [Routing](https://github.com/urigo/angular-meteor#routing)
 - [User service] (https://github.com/urigo/angular-meteor#User)
+- [Meteor methods with promises] (https://github.com/urigo/angular-meteor#meteor-methods-with-promises)
 
 ### App initialization
 If you have a module called myModule, for example:
@@ -260,6 +261,27 @@ angular-meteor support a $user service to bind the current logged in user and it
     
 [More in step 8 of the tutorial](http://angularjs.meteor.com/tutorial-02/step_08)    
 
+### Meteor methods with promises
+
+angular-meteor introduces the $methods service with wraps up [Meteor.methods](http://docs.meteor.com/#methods_header) with [AngularJS promises](https://docs.angularjs.org/api/ng/service/$q).
+ 
+Simply call **$methods.call** function and instead of sending the function of handling success and error as a parameter, handle the success and error in the AngularJS way with the 'then' method:
+ 
+    $scope.invite = function(party, user){
+
+      $methods.call('invite', party._id, user._id).then(
+        function(data){
+          // Handle success
+          console.log('success inviting', data.userId);
+        },
+        function(err){
+          // Handle error
+          console.log('failed', err);
+        }
+      );
+      
+    };
+    
 ### Additional packages
 
 Using this method, additional functionality has been provided to urigo:angular-meteor in the form of separate Meteor packages that expose and inject angular modules into angular-meteor. These packages have been developed by either the angular-meteor Team and/or by third parties. The following is a non-exhaustive list of these packages:

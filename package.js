@@ -24,6 +24,7 @@ Package.on_use(function (api) {
     'modules/angular-meteor-collections.js',
     'modules/angular-meteor-template.js',
     'modules/angular-meteor-user.js',
+    'modules/angular-meteor-methods.js',
     // Finally load angular-meteor File
     'urigo:angular.js'
   ], 'client');
