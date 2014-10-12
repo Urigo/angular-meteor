@@ -162,6 +162,29 @@ Now, start the app in 2 different browsers and login with 2 different users.
 
 Test editing and removing your own parties, and try to do the same for parties owned by another user.
 
+# Social login
+
+We also want to let users login with their Facebook and Twitter accounts.
+
+To this, we simply need to add the right packages in the console:
+
+    meteor add accounts-facebook
+    meteor add accounts-twitter
+
+Now run the app.  when you will first press the login buttons of the social login, meteor will show you a wizard that will help you define your app.
+
+You can also skip the wizard and configure it manually like the explanation here: [http://docs.meteor.com/#meteor_loginwithexternalservice](http://docs.meteor.com/#meteor_loginwithexternalservice)
+
+There are more social login services you can use:
+
+* Facebook
+* Github
+* Google
+* Meetup
+* Twitter
+* Weibo
+* Meteor developer account
+
 # Summary
 
 Amazing, only few lines of code and we have a secure application!
