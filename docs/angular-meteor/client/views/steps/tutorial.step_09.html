@@ -106,6 +106,50 @@ In each of the users create a few public parties and a few private ones.
 Now log out and see which user sees which parties.
 
 
+In the next step, we will want to invite users to private parties. for that, we will need to get all the users, but only their emails without other data which will hurt their privacy.
+
+So let's create another publish method for getting only the needed data on the user.
+
+Notice the we don't need to create a new Meteor collection like we did with parties. **Meteor.users** is a pre-defined collection which is defined by the meteor-accounts package.
+
+So let's start with defining our publish function.
+
+Create a new file under the 'server' folder named users.js and place the following code in:
+
+    Meteor.publish("users", function () {
+      return Meteor.users.find({}, {fields: {emails: 1, profile: 1}});
+    });
+
+So here again we use the Mongo API to return all the users (find with an empty object) but we select to return only the emails and profile fields.
+
+emails field holds all the user's email addresses, and the profile might holds more information like the user's name is exists
+(in our case, if the user logged in with the Facebook login, the accounts-facebook package puts the user's name from Facebook automatically into that field).
+
+Now let's subscribe to that publish Method.  in the client->parties->controllers->parties-list.js file add the following line:
+
+    $collection(Meteor.users).bind($scope, 'users', false, true);
+
+* We bind to the Meteor.users collection
+* Binding the result to $scope.users
+* Notice that we passes false to the 3rd parameter. that means that we don't want to update that collection from the client.
+specifying false for a collection you are sure you won't update will help performance but if you will leave it true,
+nothing will happen because the client doesn't have permissions to write to that collection anyway.
+* Specifying true in the 4th parameter means that we will also subscribe to the 'users' publish method.
+
+Now let's add the list of users to the view to make sure it works.
+
+Add this ng-repeat list to the end of parties-list.html:
+
+    <ul>
+      Users:
+      <li ng-repeat="user in users">
+        <div>[[ user.emails[0].address ]]</div>
+      </li>
+    </ul>
+
+Run the app and see the list of all the users' emails.
+
+
 # Summery
 
 We've added the support of privacy to our parties app.
@@ -113,7 +157,7 @@ We've added the support of privacy to our parties app.
 We also learned how to use the Meteor.publish command to control the data and permissions sent to the client
 and how to subscribe to it with the $collection.bind 4th parameter.
 
-In the next step we will learn about Meteor methods, which let's us run more logic in the server then the Mongo API and the allow method.
+In the next step we will learn how to filter the users list in the client side with AngularJS filters and create a custom filter for our own needs.
 
       {{/markdown}}
     </do-nothing>
