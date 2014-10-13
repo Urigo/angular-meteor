@@ -22,8 +22,8 @@ So let's add a 'public' flag on parties - if a party is public we will let anyon
 
 First we need to remove the 'autopublish' Meteor package.
 
-autopublish is added to any new Meteor project. it pushed a full copy of the database to each client.
-it helped us until now, but it's not so good for privacy...
+autopublish is added to any new Meteor project. It pushes a full copy of the database to each client.
+It helped us until now, but it's not so good for privacy...
 
 Write this command in the consle:
 
@@ -64,11 +64,11 @@ The first parameter is the name of the subscription. the client will subscribe t
 The second parameter is a function the defines what will be returned in the subscription.
 That function will determine what data will be returned and the permissions needed.
 
-So in our case the first name parameter is "parties". so in the client we will need to subscribe to the "parties" collection.
+In our case the first name parameter is "parties". So we will need to subscribe to the "parties" collection in the client.
 
-We already doing that by setting true in the 4th parameter of the $collection.bind function.
+Fortunately, we are already doing that by setting true in the 4th parameter of the $collection.bind function.
 
-if we wanted to subscribe to a different name then the collection name itself - "parties" we would set that parameter with the subscription name like that:
+If we wanted to subscribe to a different name then the collection name itself - "parties" we would set that parameter with the subscription name like that:
 
     $collection(Parties).bind($scope, 'parties', true, 'publicPartiesSubscription');
 
@@ -80,10 +80,10 @@ So we create a query - start with the find method on the Parties collection.
 
 Inside the find method we use the [$or](http://docs.mongodb.org/manual/reference/operator/query/or/), [$and](http://docs.mongodb.org/manual/reference/operator/query/and/) and [$exists](http://docs.mongodb.org/manual/reference/operator/query/exists/) Mongo operators to pull our wanted parties:
 
-Or that the owner parameter exists and it's the current logged in user (which we have access to with the command this.userId), or that the party's public flag exists and it's set as true.
+Either that the owner parameter exists and it's the current logged in user (which we have access to with the command this.userId), or that the party's public flag exists and it's set as true.
 
 
-So now let's add the public flag to the parties and see how does it affect the parties the client gets.
+So now let's add the public flag to the parties and see how it affects the parties the client gets.
 
 Let's add a checkbox to the new party form in parties-list.html:
 
@@ -110,7 +110,7 @@ In the next step, we will want to invite users to private parties. for that, we 
 
 So let's create another publish method for getting only the needed data on the user.
 
-Notice the we don't need to create a new Meteor collection like we did with parties. **Meteor.users** is a pre-defined collection which is defined by the meteor-accounts package.
+Notice the we don't need to create a new Meteor collection like we did with parties. **Meteor.users** is a pre-defined collection which is defined by the [meteor-accounts](http://docs.meteor.com/#accounts_api) package.
 
 So let's start with defining our publish function.
 
@@ -122,9 +122,9 @@ Create a new file under the 'server' folder named users.js and place the followi
 
 So here again we use the Mongo API to return all the users (find with an empty object) but we select to return only the emails and profile fields.
 
-* Notice that in any way each object (in our case each user) will contain its _id field.
+* Notice that each object (i.e. each user) will automatically contain its _id field.
 
-emails field holds all the user's email addresses, and the profile might holds more information like the user's name is exists
+The emails field holds all the user's email addresses, and the profile might hold more optional information like the user's name 
 (in our case, if the user logged in with the Facebook login, the accounts-facebook package puts the user's name from Facebook automatically into that field).
 
 Now let's subscribe to that publish Method.  in the client->parties->controllers->partyDetails.js file add the following line:
@@ -152,7 +152,7 @@ Add this ng-repeat list to the end of parties-details.html:
 Run the app and see the list of all the users' emails.
 
 
-# Summery
+# Summary
 
 We've added the support of privacy to our parties app.
 
