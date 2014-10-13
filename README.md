@@ -157,6 +157,7 @@ For example:
 | model         | String    | The scope property the model will be bound to.                                | Yes       |           |
 | id            | String    | The id used to look up the model from the collection                          | Yes       |           |
 | auto          | Boolean   | By default, changes in the model will not automatically update the collection. However if set to true, changes in the client will be automatically propagated back to the collection. A deep watch is created when this is set to true, which sill degrade performance.  | No        | false     |
+| publisher     | Boolean/String   | By default, bindOne method will not automatically subscribe to the collection. However if set to true, bind will call Meteor.subscribe on the current collection. you can also set publisher to a string and then bind will call Meteor publish with that string.           | No        | false     |
 
 [More in step 6 of the tutorial](http://angularjs.meteor.com/tutorial/step_06)
 

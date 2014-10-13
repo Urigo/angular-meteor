@@ -10,7 +10,7 @@ angularMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier', '$subscr
       }
       return {
 
-        bindOne: function(scope, model, id, auto) {
+        bindOne: function(scope, model, id, auto, publisher) {
           Deps.autorun(function(self) {
             scope[model] = collection.findOne(id);
             if (!scope.$$phase) scope.$apply(); // Update bindings in scope.
@@ -26,6 +26,25 @@ angularMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier', '$subscr
                   collection.update({_id: newItem._id}, { $set: _.omit(newItem, '_id') });
             }, true);
           }
+
+          var deferred = $q.defer();
+
+          if (publisher) {  // Subscribe to a publish method
+            var publishName = null;
+            if (publisher === true)
+              publishName = collection._name;
+            else
+              publishName = publisher;
+
+            $subscribe.subscribe(publishName).then(function(){
+              deferred.resolve(scope[model]);
+            });
+
+          } else { // If no subscription, resolve immediately
+            deferred.resolve(scope[model]);
+          }
+
+          return deferred.promise;
         },
 
         bind: function (scope, model, auto, publisher) {
