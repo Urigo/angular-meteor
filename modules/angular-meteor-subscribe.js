@@ -3,10 +3,10 @@ var angularMeteorSubscribe = angular.module('angular-meteor.subscribe', []);
 
 angularMeteorSubscribe.service('$subscribe', ['$q',
   function ($q) {
-    this.subscribe = function(name, subscribeArguments){
+    this.subscribe = function(){
       var deferred = $q.defer();
 
-      var subscription = Meteor.subscribe(name);
+      var subscription = Meteor.subscribe.apply(this, arguments);
 
       Deps.autorun(function() {
         if ( subscription.ready() ) {
