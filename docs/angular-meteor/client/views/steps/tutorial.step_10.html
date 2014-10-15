@@ -18,12 +18,12 @@
 
 Our next mission is to invite users to private parties.
 
-And we have subscribed to list of all users.  but we can't invite everyone,
-we can't invite the owner of the party and we can't invite users who are already invited, so why not filter them out of the view?
+We have subscribed to list of all users, but we can't invite everyone.
+We can't invite the owner of the party and we can't invite users who are already invited, so why not filter them out of the view?
 
-To do so we will use AngularJS powerful filter feature.
+To do so we will use the powerful [filter feature](https://docs.angularjs.org/guide/filter) of AngularJS.
 
-But before we create our own, let's learn how to use the useful existing filters.
+But before we create our own, let's learn how to use some of the [built-in filters](https://docs.angularjs.org/api/ng/filter) in the core AngularJS module.
 
 Let's add a search feature to our app.
 
@@ -31,7 +31,7 @@ Add a search input into the parties-list.html file:
 
     <input type="search" ng-model="search">
 
-and then we will filter the parties array with that. the parties list HTML should look like that:
+and then we will filter the parties array with that. The parties list HTML should look like that:
 
     <ul>
       Parties:
@@ -47,13 +47,13 @@ and then we will filter the parties array with that. the parties list HTML shoul
       </li>
     </ul>
 
-That's it!   try to run the app and write a search query in the input field.
+That's it!   Try to run the app and write a search query in the input field.
 
-So what we did here is appending the parties array with a filter with the parameter search.
+So what we did here is process the parties array with a filter with the parameter "search".
 
 Now let's use another filter to order the parties list.
 
-Let's add a select tag that is binded to the sorting way we want:
+Let's add a select tag that is bound to a scope property that will control the sort direction of the party list:
 
     <select ng-model="orderProperty">
       <option value="name">Ascending</option>
@@ -129,8 +129,8 @@ At this point we need to return the filtered array.
 
 The great thing here is that thanks to Meteor we have access to the great [underscore](http://docs.meteor.com/#underscore) library.
 
-So we use underscore's filter method the check for each user isn't the party's owner or that
-he does not already _contains (another underscore method) in the invited list.
+So we use underscore's "filter" method to remove each user that either isn't the party's owner or that
+is not already _contains (another underscore method) in the invited list.
 
 So now let's use our new filter
 
@@ -148,8 +148,7 @@ Run the app and see the users in each party.
 
 We still don't have invites but you can see that the filter already filters the party owners out of the list.
 
-
-But some of the users don't have emails, some of them may have signed in with Facebook. in that case we want to display their name and not the empty email field.
+But some of the users don't have emails (maybe some of them may have signed in with Facebook). In that case we want to display their name and not the empty email field.
 
 But it's only in the display so its perfect for a filter.
 
@@ -223,17 +222,17 @@ and define the creator scope function in the partiesListCtrl in partiesList.js:
       return owner;
     };
 
-Now we get the user object to the HTML. but we want his name, so let's put the displayName filter on that as well:
+Now we get the user object to the HTML. But we want his name, so let's put the displayName filter on that as well:
 
     <p><small>Posted by [[ creator(party) | displayName ]]</small></p>
 
 
 
-# Summery
+# Summary
 
 In this chapter we learned about AngularJS filters and how easy they are to use and to read from the HTML.
 
-In the next step we will learn about Meteor methods, which let's us run more logic in the server then the Mongo API and the allow method.
+In the next step we will learn about Meteor methods, which enables us to run custom logic in the server, beyond the Mongo API and the allow/deny methods.
 
       {{/markdown}}
     </do-nothing>
