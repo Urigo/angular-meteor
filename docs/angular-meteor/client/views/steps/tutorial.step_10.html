@@ -137,7 +137,7 @@ So now let's use our new filter
 Simply add the filter to the list of users and send the current party to the party parameter, inside party-details.html:
 
     <ul>
-      Users:
+      Users to invite:
       <li ng-repeat="user in users | uninvited:party">
         <div>[[ user.emails[0].address ]]</div>
       </li>
@@ -147,6 +147,86 @@ Simply add the filter to the list of users and send the current party to the par
 Run the app and see the users in each party.
 
 We still don't have invites but you can see that the filter already filters the party owners out of the list.
+
+
+But some of the users don't have emails, some of them may have signed in with Facebook. in that case we want to display their name and not the empty email field.
+
+But it's only in the display so its perfect for a filter.
+
+We want the list to simply look like this:
+
+    <ul>
+      Users to invite:
+      <li ng-repeat="user in users | uninvited:party">
+        <div>[[ user | displayName ]]</div>
+      </li>
+    </ul>
+
+and that the filter displayName will handle to logic and display the user's name in the best way possible.
+
+So let's create another custom filter 'displayName'.
+
+Create a new file under the filters folder named displayName.js and place that code inside:
+
+    angular.module("socially").filter('displayName', function () {
+      return function (user) {
+        if (!user)
+          return;
+        if (user.profile && user.profile.name)
+          return user.profile.name;
+        else if (user.emails)
+          return user.emails[0].address;
+        else
+          return user;
+      }
+    });
+
+
+Pretty simple logic but it's so much nicer to put it here and make the HTML shorter and more readable.
+
+AngularJS can also display the return value of a function in the HTML.
+
+To demonstrate let's add to each party in the parties list the creator's name:
+
+Add this line to the parties list in parties-list.html:
+
+    <p><small>Posted by [[ creator(party) ]]</small></p>
+
+so it will look like this:
+
+    <li ng-repeat="party in parties | filter:search | orderBy:orderProperty ">
+      <a href="/parties/[[party._id]]">[[party.name]]</a>
+
+      <p>[[party.description]]</p>
+      <button ng-click="remove(party)">X</button>
+      <p><small>Posted by [[ creator(party) ]]</small></p>
+    </li>
+
+and define the creator scope function in the partiesListCtrl in partiesList.js:
+
+    $scope.getUserById = function(userId){
+      return Meteor.users.findOne(userId);
+    };
+
+    $scope.creator = function(party){
+      if (!party)
+        return;
+      var owner = $scope.getUserById(party.owner);
+      if (!owner)
+        return "noboby";
+
+      if ($scope.user)
+        if ($scope.user._id)
+          if (owner._id === $scope.user._id)
+            return "me";
+
+      return owner;
+    };
+
+Now we get the user object to the HTML. but we want his name, so let's put the displayName filter on that as well:
+
+    <p><small>Posted by [[ creator(party) | displayName ]]</small></p>
+
 
 
 # Summery
