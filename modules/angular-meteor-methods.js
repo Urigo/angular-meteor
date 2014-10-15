@@ -7,7 +7,7 @@ angularMeteorMethods.service('$methods', ['$q',
 
       var deferred = $q.defer();
 
-      [].push.call(arguments, function (err, data) {
+      Array.prototype.push.call(arguments, function (err, data) {
         if (err)
           deferred.reject(err);
         else
