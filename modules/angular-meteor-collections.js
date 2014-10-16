@@ -57,7 +57,8 @@ angularMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier', '$subscr
             var ngCollection = new AngularMeteorCollection(collection, $q, selector, options);
 
             // Bind collection to model in scope. Transfer $$hashKey based on _id.
-            scope[model] = HashKeyCopier.copyHashKeys(scope[model], ngCollection, ["_id"]);
+            var newArray = HashKeyCopier.copyHashKeys(scope[model], ngCollection, ["_id"]);
+            scope[model] = updateAngularCollection(newArray, scope[model]);
 
             if (!scope.$$phase) scope.$apply(); // Update bindings in scope.
             scope.$on('$destroy', function () {
@@ -233,4 +234,19 @@ AngularMeteorCollection.prototype.remove = function remove(keys) {
   }
 
   return $q.all(promises); // Returns all promises when they're resolved.
+};
+
+var updateAngularCollection = function (newArray, oldArray) {
+  if (!newArray || !oldArray) return newArray;
+
+  for (var i = 0; i < newArray.length; i++) {
+    for (var j = 0; j < oldArray.length; j++) {
+      if (angular.equals(newArray[i], oldArray[j])) {
+        newArray[i] = oldArray[j];
+        break;
+      }
+    }
+  }
+
+  return newArray;
 };
