@@ -247,20 +247,19 @@ It would be wise to consider using the [urigo:angular-ui-router](https://github.
     
 ### User
     
-angular-meteor support a $user service to bind the current logged in user and it's data.
+angular-meteor adds to your application 2 $rootScope variables - 
+
+* $rootScope.currentUser - The current logged in user and it's data. it is undefined if the user is not logged in.
+* $rootScope.loggingIn - True if a login method (such as Meteor.loginWithPassword, Meteor.loginWithFacebook, or Accounts.createUser) is currently in progress.
     
-<code>bind</code> - used to bind the current logged in user to your scope:
-
-    bind(scope, model)
-
-| Arguments     | Type      | Description                                                                   | Required  | Default   |
-| :------------ | :-------- | :------------------------------------------------------------------------     | :-------- | :-------- |
-| scope         | Scope     | The scope the model will be bound to.                                         | Yes       |           |
-| model         | String    | The scope property the model will be bound to.                                | Yes       |           |
-
-    $user.bind($scope, 'user');
-        
-    $user.bind($rootScope, 'user');    
+    if ($rootScope.currentUser)
+    
+    if (!$rootScope.currentUser)
+    
+also available in the templates:
+    
+    ng-if="$root.curentUser"
+      
     
 [More in step 8 of the tutorial](http://angularjs.meteor.com/tutorial-02/step_08)    
 
