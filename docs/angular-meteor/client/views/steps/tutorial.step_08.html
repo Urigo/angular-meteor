@@ -137,24 +137,18 @@ OK, so now none of the parties has an owner so we can't change any of them.
 
 So let's add the following simple code to define an owner for each party that gets created.
 
-First, we need to get the details of the current user. for that we are going to use angular-meteor $user service.
+So now let's take our current user's id and set it as the owner id of the party we are creating.
+angular-meteor provides us with a $rootScope variable named currentUser that holds the current user record, or null if no user is logged in.
 
-Add the following line to the PartiesListCtrl:
+[$rootScope](https://docs.angularjs.org/api/ng/service/$rootScope) is the most upper scope in the application.
+Every application has a single root scope. All other scopes are descendant scopes of the root scope.
 
-    $user.bind($scope, 'user');
-
-Don't forget to add $user in the controller's dependency injection:
-
-    angular.module("socially").controller("PartiesListCtrl", ['$scope', '$collection', '$user',
-      function($scope, $collection, $user){
-
-The code we added binds Meteor's User object to $scope.user and updates it every time it gets updated.
-
-So now let's take our current user's id and set it as the owner id of the party we are creating:
+To access $rootScope inside a controller you add it the the dependencies.
+To access $rootScope in a template you simply write $root. and then the name of the property.
 
 Change the code for the add button in parties-list.html to this:
 
-    <button ng-click="newParty.owner=user._id; parties.push(newParty)">Add</button>
+    <button ng-click="newParty.owner=$root.currentUser._id; parties.push(newParty)">Add</button>
 
 So first we set the new party's owner to our current user's id and then push it to the parties collection like before.
 
