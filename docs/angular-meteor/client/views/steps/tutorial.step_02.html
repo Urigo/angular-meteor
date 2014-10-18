@@ -45,14 +45,14 @@ __`index.html`:__
       </div>
 
 
-We replaced the hard-coded phone list with the [ngRepeat](https://docs.angularjs.org/api/ng/directive/ngRepeat) directive and two Angular expressions:
+We replaced the hard-coded party list with the [ngRepeat](https://docs.angularjs.org/api/ng/directive/ngRepeat) directive and two Angular expressions:
 
 * The ng-repeat="party in parties" attribute in the li tag is an Angular repeater directive. The repeater tells Angular to create a li element for each party in the list using the li tag as the template.
 * The expressions wrapped in double-square-brackets ([[party.name]] and [[party.description]]) will be replaced by the value of the expressions.
 
-We have added a new directive, called ng-controller, which attaches a PartiesListCtrl controller to the div tag. At this point:
+We have added a new directive, called ng-controller, which attaches the PartiesListCtrl controller to the div tag. At this point:
 
-* The expressions in double-square-brackets ([[party.name]] and [[party.description]] denote bindings, which are referring to our application model, which is set up in our PartiesListCtrl controller.
+* The expressions in double-square-brackets ([[party.name]] and [[party.description]]) denote bindings, which are referring to our application model, which is set up in our PartiesListCtrl controller.
 
 
 # AngularJS app
@@ -61,7 +61,7 @@ Now we are going to create our own AngularJS client app with client controller a
 
 First, let's create our app.
 
-Create a new app.js file.  now you can see another example of Meteor's power and simplicity - no need to include this file anywhere. Meteor will take care of it by going through all the files in the folder and including them automaticly.
+Create a new app.js file.  now you can see another example of Meteor's power and simplicity - no need to include this file anywhere. Meteor will take care of it by going through all the files in the folder and including them automatically.
 
 But Meteor's goal is to break down the barrier between client and server, and the code you write runs everywhere! (more on that later).
 But we need Angular's power only in the client side, so how can we do that?
@@ -76,7 +76,7 @@ __`app.js`:__
 
 Now anything that will happen inside this if statement will run only on the client side.
 
-So let's continue with starting our AngularJS applicantion, we will call it "socially":
+So let's continue with starting our AngularJS application, we will call it "socially":
 
 __`app.js`:__
 
@@ -90,7 +90,7 @@ __`app.js`:__
 
 What we did here is to declare a new angular module named 'socially' and making it dependant on the 'angular-meteor' module (that we included in the first step).
 
-Then we told our applicantion to start our angular module applicantion on startup.
+Then we told our application to start our angular module on startup.
 
 
 # Model and Controller
@@ -112,7 +112,7 @@ __`app.js`:__
 
             $scope.parties = [
               {'name': 'Dubstep-Free Zone',
-                'description': 'Fast just got faster with Nexus S.'},
+                'description': 'Can we please just for an evening not listen to dubstep.'},
               {'name': 'All dubstep all the time',
                 'description': 'Get it on!'},
               {'name': 'Savage lounging',
