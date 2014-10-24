@@ -23,8 +23,7 @@ angularMeteor.config(['$interpolateProvider',
   }
 ]);
 
-// Manual initialisation of angular-meteor
-angular.element(document).ready(function () {
+var onReady = function () {
   if (!angular.element(document).injector()) {
     angular.bootstrap(document, ['angular-meteor']);
   }
@@ -44,4 +43,12 @@ angular.element(document).ready(function () {
       });
     }
   }
-});
+};
+
+// Manual initialisation of angular-meteor
+if (Meteor.isCordova) {
+  angular.element(document).on("deviceready", onReady);
+}
+else {
+  angular.element(document).ready(onReady);
+}
