@@ -1,0 +1,259 @@
+<template name="tutorial.step_14.html">
+  <div>
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/docs/angular-meteor/client/views/steps/tutorial.step_14.html"
+       class="btn btn-default btn-lg improve-button">
+      <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
+    </a>
+    <ul class="btn-group tutorial-nav">
+      <a href="/tutorial-02/step_13"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
+      <a href="http://socially-step14.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
+      <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_13...step_14"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
+      <a href="/tutorial-02/step_15"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
+    </ul>
+
+    <do-nothing>
+      {{#markdown}}
+
+# Step 14 - Google Maps
+
+Let's add location to our parties.
+
+The most popular maps widget is Google Maps so let's use that.
+
+First, let's add the angular-google-maps Meteor package:
+
+    meteor add urigo:angular-google-maps
+
+
+Then let's define the module dependency in our app. go to app.js inside the 'client->lib' folder:
+
+    angular.module('socially',['angular-meteor', 'ui.router', 'google-maps'.ns()]);
+
+
+Now let's add a map the party-details.html. first add this HTML snippet to the end of the template:
+
+        <div class="party-details-maps">
+          <div class="angular-google-map-container">
+            <ui-gmap-google-map center="map.center" events="map.events" zoom="map.zoom">
+            </ui-gmap-google-map>
+          </div>
+        </div>
+
+Here we created the google-map directive with attributes for biding the center, handling events and zoom of the map.
+So let's define those variables in our scope. go to partyDetails.js.
+Inside we will create the $scope.map variable to hold the properties on the map:
+
+    $scope.map = {
+      center: {
+        latitude: 45,
+        longitude: -73
+      },
+      zoom: 8,
+      events: {}
+    };
+
+To display a Google Map widget we have to define it's height and width. let's do that now.
+Create a new file named partyDetails.less inside the 'client->parties->styles' folder and place to following LESS code inside:
+
+    @import "/client/styles/main";
+
+    .party-details-maps {
+      .angular-google-map-container {
+        height: 400px;
+        width: 400px;
+      }
+    }
+
+Now run the app and go to the party details page. you should see a new Google Map widget.  but it doesn't do anything yet.
+
+Let's add a marker that will be binded to the party's location.
+
+inside party-details.html:
+
+        <div class="party-details-maps">
+          <div class="angular-google-map-container">
+            <ui-gmap-google-map center="map.center" events="map.events" zoom="map.zoom">
+              <ui-gmap-marker coords="party.location" options="map.marker.options" events="map.marker.events" idkey="party._id">
+              </ui-gmap-marker>
+            </ui-gmap-google-map>
+          </div>
+        </div>
+
+the ui-gmap-marker directive represents a marker inside the map. we use the following attributes:
+
+* coords - where is the scope the marker location will be binded to.
+* options - object that holds the marker options. we are going to use the draggable option.
+* events - handling the events on the marker, we will use the click event.
+* idKey - where in the scope there exists the unique id of the object that the marker represent.
+
+so let's extend our $scope.map variable to include handling those options:
+
+inside partyDetails.js:
+
+    $scope.map = {
+      center: {
+        latitude: 45,
+        longitude: -73
+      },
+      zoom: 8,
+      events: {
+        click: function (mapModel, eventName, originalEventArgs) {
+          if (!$scope.party)
+            return;
+
+          if (!$scope.party.location)
+            $scope.party.location = {};
+
+          $scope.party.location.latitude = originalEventArgs[0].latLng.lat();
+          $scope.party.location.longitude = originalEventArgs[0].latLng.lng();
+          //scope apply required because this event handler is outside of the angular domain
+          $scope.$apply();
+        }
+      },
+      marker: {
+        options: { draggable: true },
+        events: {
+          dragend: function (marker, eventName, args) {
+            if (!$scope.party.location)
+              $scope.party.location = {};
+
+            $scope.party.location.latitude = marker.getPosition().lat();
+            $scope.party.location.longitude = marker.getPosition().lng();
+          }
+        }
+      }
+    };
+
+What happened here:
+
+* We added the click event to the map. event time the user clicks the map, we take the location from the click event's params and save it as the party's new location.
+notice that in the end we call $scope.$apply();  this is because that event comes outside of Angular and we need to let Angular know that something has change so it will run another $digest cycle.
+* We defined the options object under the marker to specify the marker is draggable.
+* We handled the dragend event that happens when the marker is droped in a new location. we take the location from the event's params and save it as the party's new location.
+
+Again, with the great Meteor platform there is no need for sync or save function. we just set it and it syncs in all other clients.
+
+Test it to see clicking and dragging works.
+
+
+# Multiple markers
+
+Now let's add a map to the parties list to show all the parties on the map.
+
+So let's add the directives to parties-list.html:
+
+        <div class="angular-google-map-container">
+          <ui-gmap-google-map center="map.center" zoom="map.zoom">
+            <ui-gmap-markers models="filteredParties" coords="'location'" click="'onClicked'"
+                             fit="true" idkey="'_id'" doRebuildAll="true">
+            </ui-gmap-markers>
+          </ui-gmap-google-map>
+        </div>
+
+add it under the search input.
+
+You can see that the difference between the directive we used in party-details.html is that ui-gmap-markers is plural.
+the attributes we use:
+
+* models - the scope array that the markers represent.
+* coords - the property the holds the location.
+* click - handler for the click event on a marker
+* fit - a boolean to automatically zoom the map to fit all the markers inside
+* idKey - the property that holds the unique id of the array
+* doRebuildAll - a refresh option, will help us to refresh the markers in search
+
+notice that we've put filteredParties in the models property. this is because we want the map to filter the markers when we search as well.
+
+Now, inside partiesList.js let's add the following code:
+
+    $collection(Parties).bind($scope, 'parties', true, true).then(
+      function(){
+
+        $scope.parties.forEach( function (party) {
+          party.onClicked = function () {
+            onMarkerClicked(party);
+          };
+        });
+
+        $scope.filteredParties = $scope.parties;
+
+        $scope.$watch("search", function(search){
+          $scope.filteredParties = $filter("filter")($scope.parties, search);
+        });
+
+        $scope.map = {
+          center: {
+            latitude: 45,
+            longitude: -73
+          },
+          zoom: 8
+        };
+
+        var onMarkerClicked = function(marker){
+          $state.go('partyDetails', {partyId: marker._id});
+        }
+    });
+
+we are using the promise returned from $collection(Parties).bind to run the following commands:
+
+* Adding to each party a function that handles a click event with the party's specific information
+* Initializing the filteredParties $scope variable
+* Watching the search input and filtering the parties on every change (exactly like we have done in ng-repeat but inside the controller).
+we are doing that because of a bug in angular-google-maps, otherwise we could have used the [following solution](http://stackoverflow.com/a/16053955/1426570).
+* Initializing the map object
+* Defining a function to handle the click. navigates to the party's page.
+
+Don't forget the new dependencies to the controller:
+
+    angular.module("socially").controller("PartiesListCtrl", ['$scope', '$collection', '$methods', '$rootScope', '$filter', '$state',
+      function($scope, $collection, $methods, $rootScope, $filter, $state){
+
+Now we just need to add styles also to the map in the parties-list.  go into partiesList.less and make it look like that:
+
+    @import "/client/styles/main";
+
+    .parties-list {
+
+      .party {
+        background-color: #ffffff;
+        border: 1px solid black;
+        margin: 20px;
+        padding: 10px;
+      }
+
+      .angular-google-map-container {
+        height: 400px;
+        width: 600px;
+        margin: 10px;
+      }
+    }
+
+we have to .angular-google-map-container classes with different styles. one in partiesList.less and one in partyDetail.less.
+we distinguish them with the help of LESS's nested syntax.
+
+So we need to add the .parties-list class to the parties-list.html template, like that:
+
+    <template name="parties-list.html">
+      <div class="row parties-list">
+
+
+# Summery
+
+Run the app.  look at how little code we needed to add maps support to our app.
+
+AngularJS has huge eco system full of great directives like the angular-google-maps one.
+
+
+      {{/markdown}}
+    </do-nothing>
+
+    <ul class="btn-group tutorial-nav">
+      <a href="/tutorial-02/step_13"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
+      <a href="http://socially-step14.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
+      <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_13...step_14"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
+      <a href="/tutorial-02/step_15"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
+    </ul>
+  </div>
+</template>
+
+
