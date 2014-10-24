@@ -82,6 +82,7 @@ angularMeteorTemplate.directive('meteorInclude', [
         if (name && Template[name]) {
           var template = Template[name];
           Blaze.renderWithData(template, scope, element.get(0));
+          $compile(element.contents())(scope);
         } else {
           console.error("meteorTemplate: There is no template with the name '" + name + "'");
         }
