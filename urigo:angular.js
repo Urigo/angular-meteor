@@ -33,7 +33,7 @@ var onReady = function () {
   Blaze.View.notifyParented = function () {
     notifyParented.apply(this, arguments);
     if (this.region) {
-      Deps.afterFlush(function() {
+      Tracker.afterFlush(function() {
         angular.element(document).injector().invoke(['$compile', '$document', '$rootScope',
           function ($compile, $document, $rootScope) {
             $compile($document)($rootScope);

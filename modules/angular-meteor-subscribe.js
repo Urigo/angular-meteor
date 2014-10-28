@@ -8,7 +8,7 @@ angularMeteorSubscribe.service('$subscribe', ['$q',
 
       var subscription = Meteor.subscribe.apply(this, arguments);
 
-      Deps.autorun(function() {
+      Tracker.autorun(function() {
         if ( subscription.ready() ) {
           deferred.resolve();
         }
