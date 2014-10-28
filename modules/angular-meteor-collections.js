@@ -11,7 +11,7 @@ angularMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier', '$subscr
       return {
 
         bindOne: function(scope, model, id, auto, publisher) {
-          Deps.autorun(function(self) {
+          Tracker.autorun(function(self) {
             scope[model] = collection.findOne(id);
             if (!scope.$$phase) scope.$apply(); // Update bindings in scope.
             scope.$on('$destroy', function () {
@@ -47,40 +47,69 @@ angularMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier', '$subscr
           return deferred.promise;
         },
 
-        bind: function (scope, model, auto, publisher) {
+        bind: function (scope, model, auto, publisher, paginate) {
           auto = auto || false; // Sets default binding type.
           if (!(typeof auto === 'boolean')) { // Checks if auto is a boolean.
             throw new TypeError("The third argument of bind must be a boolean.");
           }
 
-          Deps.autorun(function (self) {
-            var ngCollection = new AngularMeteorCollection(collection, $q, selector, options);
+          var unregisterWatch = null;
 
-            // Bind collection to model in scope. Transfer $$hashKey based on _id.
-            var newArray = HashKeyCopier.copyHashKeys(scope[model], ngCollection, ["_id"]);
-            scope[model] = updateAngularCollection(newArray, scope[model]);
+          var rebind = function(){
+            Tracker.autorun(function (self) {
 
-            if (!scope.$$phase) scope.$apply(); // Update bindings in scope.
-            scope.$on('$destroy', function () {
-              self.stop(); // Stop computation if scope is destroyed.
-            });
-          });
+              if (paginate){
+                options = {
+                  limit: parseInt(scope.perPage),
+                  skip: (parseInt(scope.page) - 1) * parseInt(scope.perPage)
+                };
+                if (scope.sort) { options.sort = [scope.sort]; }
+              }
 
-          if (auto) { // Deep watches the model and performs autobind.
-            scope.$watch(model, function (newItems, oldItems) {
-              // Remove items that don't exist in the collection anymore.
-              angular.forEach(oldItems, function (oldItem) {
-                var index = newItems.map(function (item) {
-                  return item._id;
-                }).indexOf(oldItem._id);
-                if (index == -1) { // To here get all objects that pushed or spliced
-                  if (oldItem._id) { // This is a check to get only the spliced objects
-                    newItems.remove(oldItem._id);
-                  }
-                }
+              var ngCollection = new AngularMeteorCollection(collection, $q, selector, options);
+
+              // Bind collection to model in scope. Transfer $$hashKey based on _id.
+              var newArray = HashKeyCopier.copyHashKeys(scope[model], ngCollection, ["_id"]);
+              scope[model] = updateAngularCollection(newArray, scope[model]);
+
+              if (!scope.$$phase) scope.$apply(); // Update bindings in scope.
+              scope.$on('$destroy', function () {
+                self.stop(); // Stop computation if scope is destroyed.
               });
-              newItems.save(); // Saves all items.
-            }, auto);
+            });
+
+            if (auto) { // Deep watches the model and performs autobind.
+              unregisterWatch = scope.$watch(model, function (newItems, oldItems) {
+                // Remove items that don't exist in the collection anymore.
+                angular.forEach(oldItems, function (oldItem) {
+                  var index = newItems.map(function (item) {
+                    return item._id;
+                  }).indexOf(oldItem._id);
+                  if (index == -1) { // To here get all objects that pushed or spliced
+                    if (oldItem._id) { // This is a check to get only the spliced objects
+                      newItems.remove(oldItem._id);
+                    }
+                  }
+                });
+                newItems.save(); // Saves all items.
+              }, auto);
+            }
+          };
+          rebind();
+
+          if (paginate){
+            scope.$watch("page", function(newValue, oldValue){
+              if (!newValue)
+                return;
+
+              if (newValue == oldValue)
+                return;
+
+              if (unregisterWatch)
+                unregisterWatch();
+
+              rebind();
+            });
           }
 
           var deferred = $q.defer();

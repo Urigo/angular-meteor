@@ -65,6 +65,15 @@ angular-meteor provides an AngularJS service called $collection, which is a wrap
 | model         | String           | The name of the model that the collection will be bound to.                                                                                                                                                                                                                               | Yes       |           |
 | auto          | Boolean          | By default, changes in the model will not automatically update the collection. However if set to true, changes in the client will be automatically propagated back to the collection. A deep watch is created when this is set to true, which will degrade performance.  | No        | false     |
 | publisher     | Boolean/String   | By default, bind method will not automatically subscribe to the collection. However if set to true, bind will call Meteor.subscribe on the current collection. you can also set publisher to a string and then bind will call Meteor publish with that string.           | No        | false     |
+| paginate      | Boolean          | By default, bind method will not automatically add support to paginate the collection. However if set to true, the bind method will also add pagination functionality to the scope.           | No        | false     |
+
+Paginate will use the following scope properties to implement pagination:
+
+| Property      | Type      | Description                                                                                 | Required  | Default   |
+| :------------ | :-------- | :------------------------------------------------------------------------                   | :-------- | :-------- |
+| perPage       | Number    | The number of items on each page                                                             |           |
+| page          | Number    | The current page number (1 based). A $watch is setup to re-fetch the collection on change    | Yes       |           |
+
 
 Once a collection has been bound using the <code>bind</code> method, the model will have access to the following methods for upserting/removing objects in the collection. If the <code>auto</code> argument has been set to true, then the user will not need to call these methods because these methods will be called automatically whenever the model changes.
 
