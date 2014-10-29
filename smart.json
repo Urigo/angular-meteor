@@ -4,7 +4,7 @@
   "homepage": "https://github.com/Urigo/angular-meteor.git",
   "author": "Androo Lee & Uri Goldshtein",
   "git": "https://github.com/Urigo/angular-meteor.git",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "packages": {
     "bower": {}
   },
