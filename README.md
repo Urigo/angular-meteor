@@ -10,6 +10,9 @@
 ## Getting started tutorial
 [http://angularjs.meteor.com/tutorial](http://angularjs.meteor.com/tutorial)
 
+## Mailing list
+[https://groups.google.com/forum/#!forum/angular-meteor](https://groups.google.com/forum/#!forum/angular-meteor)
+
 ## Package 
 [urigo:angular](https://atmospherejs.com/urigo/angular)
 
