@@ -34,7 +34,7 @@ So first execute this command in the command line:
     meteor remove insecure
 
 
-Now let's try to change the parties array or a specific party.  Nothing working.
+Now let's try to change the parties array or a specific party.  Nothing's working.
 
 Now, we will have to write an explicit security rule for each operation we want to make on the Mongo collection.
 
@@ -43,7 +43,7 @@ it's a very powerful package for all the user operations you can think of: Login
 
      meteor add accounts-password
 
-Now we will the also the 'accounts-ui' package.  That package contains all the HTML and CSS we need for the user operation forms.
+Now we will also add the 'accounts-ui' package.  That package contains all the HTML and CSS we need for the user operation forms.
 
 Later on in this tutorial we will replace those default account-ui forms with a custom Angular forms.
 
@@ -133,17 +133,17 @@ In our example:
 * remove - only if the user who deletes the party is the party owner.
 
 
-OK, so now none of the parties has an owner so we can't change any of them.
+OK, right now none of the parties has an owner so we can't change any of them.
 
 So let's add the following simple code to define an owner for each party that gets created.
 
-So now let's take our current user's id and set it as the owner id of the party we are creating.
+Let's take our current user's id and set it as the owner id of the party we are creating.
 angular-meteor provides us with a $rootScope variable named currentUser that holds the current user record, or null if no user is logged in.
 
 [$rootScope](https://docs.angularjs.org/api/ng/service/$rootScope) is the most upper scope in the application.
 Every application has a single root scope. All other scopes are descendant scopes of the root scope.
 
-To access $rootScope inside a controller you add it the the dependencies.
+To access $rootScope inside a controller you add it through the dependency injection.
 To access $rootScope in a template you simply write $root. and then the name of the property.
 
 Change the code for the add button in parties-list.html to this:
@@ -160,7 +160,7 @@ Test editing and removing your own parties, and try to do the same for parties o
 
 We also want to let users login with their Facebook and Twitter accounts.
 
-To this, we simply need to add the right packages in the console:
+To do this, we simply need to add the right packages in the console:
 
     meteor add accounts-facebook
     meteor add accounts-twitter
