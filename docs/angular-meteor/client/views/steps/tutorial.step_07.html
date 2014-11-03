@@ -70,7 +70,7 @@ Lastly, the Meteor server will serve any files under the public directory. This 
 
 # AngularJS folder structure
 
-There are many ways to organize and structure an AngularJS apps.
+There are many ways to organize and structure an AngularJS app.
 
 The 2 main approaches are:
 
@@ -97,7 +97,7 @@ So now let's re-structure our app (to see the end result and all the steps in gi
 4. Remove the now - unnecessary if(Meteor.isClient) condition from app.js. Everything in the 'client' folder runs only on the browser.
 5. Create a 'server' folder under the root folder. Everything inside that folder will run only on the server. Now create a folder called 'startup' under the 'server' folder and create a file called loadParties.js under it. Now go to app.js, cut all the code inside the if (Meteor.isServer) statement and place it inside the loadParties.js file. Again, no need for the if statement anymore because all the code inside the 'server' folder runs only on the server.
 6. Create a file called 'routes.js' under the 'client' folder. Cut the .config code that defines the routes and paste it inside that file.
-7. Create a folder called 'parties' inside the client folder. and inside it create another to folders. one called 'controllers' and one called 'views'.
+7. Create a folder called 'parties' inside the client folder. and inside it create another two folders. one called 'controllers' and one called 'views'.
 8. Create a new file inside the client->parties->controllers folder called 'partiesList.js'. Cut the code for the PartiesListCtrl from app.js and place it in there.
 9. Create a new file inside the client->parties->controllers folder called 'partyDetails.js'. Cut the code for the PartyDetailsCtrl from app.js and place it in there.
 10. Move index.html into the 'client' folder.
