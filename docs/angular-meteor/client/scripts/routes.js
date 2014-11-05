@@ -9,6 +9,18 @@ angular.module("meteor-angular-docs").config(['$urlRouterProvider', '$stateProvi
         template: UiRouter.template('main.html'),
         controller: 'MainCtrl'
       })
+      .state('about', {
+        url: '/about',
+        template: UiRouter.template('about.html')
+      })
+      .state('api', {
+        url: '/api',
+        template: UiRouter.template('api.html')
+      })
+        .state('api.collection', {
+          url: '/collection',
+          template: UiRouter.template('api.collection.html')
+        })
       .state('tutorial', {
         abstract: true,
         url: '/tutorial',

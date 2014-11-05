@@ -1,0 +1,26 @@
+<template name="api.html">
+  <div class="container tutorial-container">
+    <div class="row">
+      <div class="col-md-3">
+        <h2><a href="/api">API</a></h2>
+        <ul class="nav">
+          <li><a href="/api/collection">$collection</a></li>
+          <li><a href="/api/step_01">$collection.bind</a></li>
+          <li><a href="/api/step_01">$collection.bindOne</a></li>
+          <li><a href="/api/step_02">AngularMeteorCollection.save</a></li>
+          <li><a href="/api/step_03">AngularMeteorCollection.remove</a></li>
+          <li><a href="/api/step_03">$subscribe.subscribe</a></li>
+          <li><a href="/api/step_03">$methods.call</a></li>
+          <li><a href="/api/step_03">User</a></li>
+          <li><a href="/api/step_03">meteor-include directive</a></li>
+          <li><a href="/api/step_03">meteor-angular-ui-router</a></li>
+        </ul>
+        <h2><a href="https://docs.angularjs.org/api">AngularJS API Reference</a></h2>
+        <h2><a href="https://docs.meteor.com/#/full/">Meteor Docs</a></h2>
+      </div>
+      <div class="col-md-9 main-tutorial">
+        <div ui-view></div>
+      </div>
+    </div>
+  </div>
+</template>
