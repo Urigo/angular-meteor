@@ -10,6 +10,18 @@ body {
   header {
     background-color: #2c2c2c;
 
+    .navbar-brand {
+      //width: 100px;
+      //height: 50px;
+      margin: auto 0;
+      padding: 5px 15px;
+
+      img {
+        width: auto;
+        height: 100%;
+      }
+    }
+
     .nav {
       li {
         a {
@@ -36,7 +48,7 @@ body {
   }
 
   .hero-unit {
-    padding:30px 80px;
+    padding:100px 80px;
     margin:0;
     background: -moz-linear-gradient(top,  rgba(221,221,221,1) 0%, rgba(225,225,225,0) 21%, rgba(235,235,235,0) 81%, rgba(238,238,238,1) 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(221,221,221,1)), color-stop(21%,rgba(225,225,225,0)), color-stop(81%,rgba(235,235,235,0)), color-stop(100%,rgba(238,238,238,1))); /* Chrome,Safari4+ */
@@ -66,8 +78,15 @@ body {
       .github {
         font-size: 35px;
       }
+
+      iframe {
+        border: 3px solid gray;
+      }
     }
 
+  }
+  .main-unit {
+    padding:30px 80px;
   }
   .tutorial-container {
 

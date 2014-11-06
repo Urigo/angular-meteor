@@ -11,4 +11,5 @@ less
 simison:bootstrap3-less
 urigo:angular-ui-router@0.6.0
 showdown
+linto:fontawesome
 
