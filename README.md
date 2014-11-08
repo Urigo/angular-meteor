@@ -2,6 +2,9 @@
 ======================================================
 > The power of Meteor and the simplicity and eco-system of AngularJS
 
+# Please support our ng-conf 2015 talk proposal by commenting on it here:
+[https://github.com/ng-conf/submissions-2015/pull/172](https://github.com/ng-conf/submissions-2015/pull/172)
+
 ## Quick start
 1. Install [Meteor](http://docs.meteor.com/#quickstart) <code>curl https://install.meteor.com | /bin/sh</code>
 2. Create a new meteor app using <code>meteor create myapp</code> or navigate to the root of your existing app.
