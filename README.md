@@ -313,3 +313,9 @@ Using this method, additional functionality has been provided to urigo:angular-m
 Feel free to make angular-meteor module smart packages, and please contact [urigo](https://github.com/urigo) if you would like your package to be listed here as well.
 Be sure to be compatible with Meteor 0.9.0 and above and it's packaging system!
 
+### Acknowledgement
+
+This project started as [ngMeteor](https://github.com/loneleeandroo/ngMeteor), a pre-0.9 meteorite package. 
+Since then a lot has changed but that was the main base.
+
+Also, a lot of features were inspired by @superchris's [angular-meteor fork of ngMeteor](https://github.com/superchris/angular-meteor)
