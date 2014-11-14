@@ -21,6 +21,38 @@ angular.module("meteor-angular-docs").config(['$urlRouterProvider', '$stateProvi
           url: '/collection',
           template: UiRouter.template('api.collection.html')
         })
+        .state('api.collection-bind', {
+          url: '/collection-bind',
+          template: UiRouter.template('api.collection-bind.html')
+        })
+        .state('api.collection-bindOne', {
+          url: '/collection-bindOne',
+          template: UiRouter.template('api.collection-bindOne.html')
+        })
+        .state('api.AngularMeteorCollection', {
+          url: '/AngularMeteorCollection',
+          template: UiRouter.template('api.AngularMeteorCollection.html')
+        })
+        .state('api.subscribe', {
+          url: '/subscribe',
+          template: UiRouter.template('api.subscribe.html')
+        })
+        .state('api.methods', {
+          url: '/methods',
+          template: UiRouter.template('api.methods.html')
+        })
+        .state('api.user', {
+          url: '/user',
+          template: UiRouter.template('api.user.html')
+        })
+        .state('api.meteor-include', {
+          url: '/meteor-include',
+          template: UiRouter.template('api.meteor-include.html')
+        })
+        .state('api.collection-pagination', {
+          url: '/collection-pagination',
+          template: UiRouter.template('api.collection-pagination.html')
+        })
       .state('tutorial', {
         abstract: true,
         url: '/tutorial',

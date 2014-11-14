@@ -13,11 +13,14 @@
 ## Getting started tutorial
 [http://angularjs.meteor.com/tutorial](http://angularjs.meteor.com/tutorial)
 
+## Package
+[urigo:angular](https://atmospherejs.com/urigo/angular)
+
+## Roadmap
+[https://trello.com/b/Wj9U0ulk/angular-meteor](https://trello.com/b/Wj9U0ulk/angular-meteor)
+
 ## Mailing list
 [https://groups.google.com/forum/#!forum/angular-meteor](https://groups.google.com/forum/#!forum/angular-meteor)
-
-## Package 
-[urigo:angular](https://atmospherejs.com/urigo/angular)
 
 ## Usage
 ### Table of Contents
@@ -51,146 +54,23 @@ To prevent conflicts with Meteor's Blaze live templating engine, angular-meteor 
 
 ### Using Meteor Collections
 
-angular-meteor provides an AngularJS service called $collection, which is a wrapper for [Meteor collections](http://docs.meteor.com/#meteor_collection) to enable reactivity within AngularJS. The $collection service no longer subscribes to a publisher function automatically, so you must explicitly subscribe to a publisher function before calling the $collection service.
+[$collection](http://angularjs.meteor.com/api/collection)
 
-    $collection(collection, selector, options)
+[$collection.bind](http://angularjs.meteor.com/api/collection-bind)
 
-| Arguments     | Type                                                                      | Description                                                       | Required  |
-| :------------ | :------------------------------------------------------------------------ | :---------------------------------------------------------------- | :-------- |
-| collection    | [Meteor Collection Object](http://docs.meteor.com/#meteor_collection)     | The Meteor Collection                                             | Yes       |
-| selector      | [Mongo Selector (Object or String)](http://docs.meteor.com/#selectors)    | Same as [Meteor Collection Find](http://docs.meteor.com/#find)    | No        |
-| options       | Object                                                                    | Same as [Meteor Collection Find](http://docs.meteor.com/#find)    | No        |
+[$collection.bindOne](http://angularjs.meteor.com/api/collection-bindOne)
 
-<code>bind</code>, which is used to bind the collection to an Angular model so that you can use it in your scope:
+[AngularMeteorCollection](http://angularjs.meteor.com/api/AngularMeteorCollection)
 
-    bind(scope, model, auto, publisher)
-
-| Arguments     | Type             | Description                                                                                                                                                                                                                                                              | Required  | Default   |
-| :------------ | :--------------- | :------------------------------------------------------------------------                                                                                                                                                                                                | :-------- | :-------- |
-| scope         | Scope            | The scope the collection will be bound to.                                                                                                                                                                                                                               | Yes       |           |
-| model         | String           | The name of the model that the collection will be bound to.                                                                                                                                                                                                                               | Yes       |           |
-| auto          | Boolean          | By default, changes in the model will not automatically update the collection. However if set to true, changes in the client will be automatically propagated back to the collection. A deep watch is created when this is set to true, which will degrade performance.  | No        | false     |
-| publisher     | Boolean/String   | By default, bind method will not automatically subscribe to the collection. However if set to true, bind will call Meteor.subscribe on the current collection. you can also set publisher to a string and then bind will call Meteor publish with that string.           | No        | false     |
-| paginate      | Boolean          | By default, bind method will not automatically add support to paginate the collection. However if set to true, the bind method will also add pagination functionality to the scope.           | No        | false     |
-
-Paginate will use the following scope properties to implement pagination:
-
-| Property      | Type      | Description                                                                                 | Required  | Default   |
-| :------------ | :-------- | :------------------------------------------------------------------------                   | :-------- | :-------- |
-| perPage       | Number    | The number of items on each page                                                             |           |
-| page          | Number    | The current page number (1 based). A $watch is setup to re-fetch the collection on change    | Yes       |           |
-
-
-Once a collection has been bound using the <code>bind</code> method, the model will have access to the following methods for upserting/removing objects in the collection. If the <code>auto</code> argument has been set to true, then the user will not need to call these methods because these methods will be called automatically whenever the model changes.
-
-| Method                    | Argument  | Type                                  | Description                                                                                                                       |
-| :------------             | :------   | :-------------------------            | :-------------                                                                                                                    |
-| <code>save(docs)</code>   | docs      | Object or Array of Objects            | Upsert an object into the collection. If no argument is passed, all the objects in the model of the collection will be upserted.  |
-| <code>remove(keys)</code> | keys      | _id String or Array of _id Strings    | Removes an object from the collection. If no argument is passed, all the objects in the collection will be removed.               |
-
-[More in step 3 of the tutorial](http://angularjs.meteor.com/tutorial/step_03)
-
-For example:
-
-    /**
-     * Assume autopublish package is removed so we can work with multiple publisher functions.
-     * If insecure package is also removed, then you'll need to define the collection permissions as well.
-     **/
-
-    // Define a new Meteor Mongo Collection
-    Todos = new Mongo.Collection('todos');
-
-    if (Meteor.isClient) {
-        app.controller("mainCtrl", ['$scope', '$collection',
-            function($scope, $collection){
-
-                // Subscribe to all public Todos
-                Meteor.subscribe('publicTodos');
-
-                // Bind all the todos to $scope.todos
-                $collection(Todos).bind($scope, 'todos');
-
-                // Bind all sticky todos to $scope.stickyTodos
-                $collection(Todos, {sticky: true}).bind($scope, 'stickyTodos');
-
-                // todo might be an object like this {text: "Learn Angular", sticky: false}
-                // or an array like this [{text: "Learn Angular", sticky: false}, {text: "Hello World", sticky: true}]
-                $scope.save = function(todo) {
-                    $scope.todos.save(todo);
-                };
-
-                $scope.saveAll = function() {
-                    $scope.todos.save();
-                };
-
-                $scope.toSticky = function(todo) {
-                    if (angular.isArray(todo)){
-                        angular.forEach(todo, function(object) {
-                            object.sticky = true;
-                        });
-                    } else {
-                        todo.sticky = true;
-                    }
-
-                    $scope.stickyTodos.save(todo);
-                };
-
-                // todoId might be an string like this "WhrnEez5yBRgo4yEm"
-                // or an array like this ["WhrnEez5yBRgo4yEm","gH6Fa4DXA3XxQjXNS"]
-                $scope.remove = function(todoId) {
-                    $scope.todos.remove(todoId);
-                };
-
-                $scope.removeAll = function() {
-                    $scope.todos.remove();
-                };
-            }
-        ]);
-    }
-
-    if (Meteor.isServer) {
-
-        // Returns all objects in the Todos collection with public set to true.
-        Meteor.publish('publicTodos', function(){
-            return Todos.find({public: true});
-        });
-
-        // Returns all objects in the Todos collection with public set to false.
-        Meteor.publish('privateTodos', function(){
-            return Todos.find({public: false});
-        });
-
-    }
-
-<code>bindOne</code> - used to bind a single model to your scope:
-
-    bindOne(scope, model, id, auto)
-
-| Arguments     | Type      | Description                                                                   | Required  | Default   |
-| :------------ | :-------- | :------------------------------------------------------------------------     | :-------- | :-------- |
-| scope         | Scope     | The scope the model will be bound to.                                         | Yes       |           |
-| model         | String    | The scope property the model will be bound to.                                | Yes       |           |
-| id            | String    | The id used to look up the model from the collection                          | Yes       |           |
-| auto          | Boolean   | By default, changes in the model will not automatically update the collection. However if set to true, changes in the client will be automatically propagated back to the collection. A deep watch is created when this is set to true, which will degrade performance.  | No        | false     |
-| publisher     | Boolean/String   | By default, bindOne method will not automatically subscribe to the collection. However if set to true, bind will call Meteor.subscribe on the current collection. you can also set publisher to a string and then bind will call Meteor publish with that string.           | No        | false     |
 
 [More in step 6 of the tutorial](http://angularjs.meteor.com/tutorial/step_06)
 
 ### Subscribe
 
-angular-meteor provides an AngularJS service called $subscribe, which is a wrapper for [Meteor.subscribe](http://docs.meteor.com/#meteor_subscribe) to subscribe the client to a Meteor.publish Method within AngularJS with promises. 
-
-    $subscribe.subscribe(name, subscribeArguments)   
-    
-Returns a promise when subscription is ready.
-
-    $subscribe.subscribe('todos').then(function(){
-                  console.log($scope.todos);
-                });
-
+[$subscribe.subscribe](http://angularjs.meteor.com/api/subscribe)
 
 ### Adding controllers, directives, filters and services
-It is best practice to not use globally defined controllers like they do in the AngularJS demos. Always use the exported package scope angular-meteor as your angular module to register your controller with $controllerProvider. Furthermore, to prevent errors when minifying and obfuscating the controllers, directives, filters or services, you need to use [Dependency Injection](http://docs.angularjs.org/guide/di). For example:
+To prevent errors when minifying and obfuscating the controllers, directives, filters or services, you need to use [Dependency Injection](http://docs.angularjs.org/guide/di). For example:
 
     app.controller('TodoCtrl', ['$scope', '$collection',
       function($scope, $collection) {
@@ -243,17 +123,10 @@ Templates with names starting with an underscore, for example "_foo", will not b
 
 ### meteor-include
 
-You can include Meteor templates with <meteor-include src="loginButtons"></meteor-include> (loginButtons is the template name).
+You can include Meteor native templates.
 
-    <template name="phones">
-      <meteor-include src="loginButtons"></meteor-include>
-        <ul>
-          <li ng-repeat="phone in phones">
-            [[phone.name]]
-            <p>[[phone.snippet]]</p>
-          </li>
-        </ul>
-    </template>
+[meteor-include](http://angularjs.meteor.com/api/meteor-include)
+
 
 ### Routing
 It would be wise to consider using the [urigo:angular-ui-router](https://github.com/Urigo/meteor-angular-ui-router) Meteor package for angular-meteor, which exposes the popular [ui-router](https://github.com/angular-ui/ui-router) module to angular-meteor. For those of you that have grown accustomed to the Meteor methods of routing, angular-meteor is compatible with [Iron Router](https://github.com/EventedMind/iron-router).
@@ -262,42 +135,13 @@ It would be wise to consider using the [urigo:angular-ui-router](https://github.
     
 ### User
     
-angular-meteor adds to your application 2 $rootScope variables - 
-
-* $rootScope.currentUser - The current logged in user and it's data. it is undefined if the user is not logged in.
-* $rootScope.loggingIn - True if a login method (such as Meteor.loginWithPassword, Meteor.loginWithFacebook, or Accounts.createUser) is currently in progress.
-    
-    if ($rootScope.currentUser)
-    
-    if (!$rootScope.currentUser)
-    
-also available in the templates:
-    
-    ng-if="$root.curentUser"
-      
+[angular-meteor User](http://angularjs.meteor.com/api/user)
     
 [More in step 8 of the tutorial](http://angularjs.meteor.com/tutorial-02/step_08)    
 
 ### Meteor methods with promises
 
-angular-meteor introduces the $methods service which wraps up [Meteor.methods](http://docs.meteor.com/#methods_header) with [AngularJS promises](https://docs.angularjs.org/api/ng/service/$q).
- 
-Simply call **$methods.call** function and instead of sending the function of handling success and error as a parameter, handle the success and error in the AngularJS way with the 'then' method:
- 
-    $scope.invite = function(party, user){
-
-      $methods.call('invite', party._id, user._id).then(
-        function(data){
-          // Handle success
-          console.log('success inviting', data.userId);
-        },
-        function(err){
-          // Handle error
-          console.log('failed', err);
-        }
-      );
-      
-    };
+[$methods](http://angularjs.meteor.com/api/methods)
     
 ### Additional packages
 
