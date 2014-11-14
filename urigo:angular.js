@@ -28,11 +28,9 @@ var onReady = function () {
     angular.bootstrap(document, ['angular-meteor']);
   }
 
-  // Recompile whenever the DOM elements are updated.
-  var notifyParented = Blaze.View.notifyParented;
-  Blaze.View.notifyParented = function () {
-    notifyParented.apply(this, arguments);
-    if (this.region) {
+// Recompile after iron:router builds page
+  if(typeof Router != 'undefined') {
+    Router.onAfterAction(function(req, res, next) {
       Tracker.afterFlush(function() {
         angular.element(document).injector().invoke(['$compile', '$document', '$rootScope',
           function ($compile, $document, $rootScope) {
@@ -41,7 +39,7 @@ var onReady = function () {
           }
         ]);
       });
-    }
+    });
   }
 };
 
