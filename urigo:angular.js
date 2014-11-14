@@ -29,7 +29,7 @@ var onReady = function () {
   }
 
 // Recompile after iron:router builds page
-  if(Router) {
+  if(typeof Router != 'undefined') {
     Router.onAfterAction(function(req, res, next) {
       Tracker.afterFlush(function() {
         angular.element(document).injector().invoke(['$compile', '$document', '$rootScope',
