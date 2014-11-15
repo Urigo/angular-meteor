@@ -1,0 +1,138 @@
+<template name="tutorial.step_13.html">
+  <div>
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/steps/tutorial.step_13.html"
+       class="btn btn-default btn-lg improve-button">
+      <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
+    </a>
+    <ul class="btn-group tutorial-nav">
+      <a href="/tutorial-02/step_12"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
+      <a href="http://socially-step13.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
+      <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_12...step_13"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
+      <a href="/tutorial-02/step_14"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
+    </ul>
+
+    <do-nothing>
+      {{#markdown}}
+
+# Step 13 - CSS, LESS and Bootstrap
+
+Meteor has a great support for CSS.
+
+Like other types of files, Meteor gathers all CSS files for the client will get a bundle with all the CSS in your app.
+
+Meteor also pre-process the CSS files and minifies them (in development it doesn't for easier debugging).
+
+Meteor also supports [LESS](http://lesscss.org/) as it's default CSS pre-processor (the package is maintain by Meteor team themselves).
+
+LESS extends CSS with dynamic behavior such as variables, mixins, operations and functions. It allows for more compact stylesheets and helps reduce code duplication in CSS files.
+
+With the less package installed, .less files in your application are automatically compiled to CSS and the results are included in the client CSS bundle.
+
+# Adding simple styling
+
+Create a new folder called 'styles' under the 'client' folder and add a new file - main.css under that folder.
+
+Then change the background color of our app:
+
+    body {
+      background-color: rgba(0,0,0,.2);
+    }
+
+run the app and see your background color changed.
+
+OK, simple styling works, but we want to be able to use [LESS](http://lesscss.org/).
+
+So first, change the file name from main.css to main.less.  now add the LESS package in the command line:
+
+    meteor add less
+
+Test that everything still works the same.
+
+# CSS Frameworks
+
+There are many CSS frameworks that help us write less CSS.
+
+Right now the most popular one is [Bootstrap](http://getbootstrap.com/) so we are going to use that in this tutorial.
+
+* We are also keeping close watch on [Polymer](https://www.polymer-project.org/) and [Famo.us/angular](http://famo.us/integrations/angular) and might might update the tutorial to use those instead of Bootstrap in the future.
+
+Let's add Bootstrap Meteor package to our project:
+
+    meteor add nemo64:bootstrap
+
+
+and create an empty custom.bootstrap.json file in the 'styles' folder.
+
+Run the app and then visit the custom.bootstrap.json again. change everything in false to true.
+
+Now let's start organizing by putting the Home link and the login buttons inside a navbar and the rest of the content inside a Bootstrap .container class.
+
+Inside index.html surround the H1 and the loginButton with a header like that:
+
+        <body>
+
+        <div>
+          <header class="navbar navbar-fixed-top">
+            <div class="container">
+              <div class="navbar-header">
+                <h1>
+                  <a href="/parties">Home</a>
+                </h1>
+              </div>
+              <meteor-include src="loginButtons"></meteor-include>
+            </div>
+          </header>
+          <div ui-view class="container"></div>
+        </div>
+
+        </body>
+
+Now go to main.less and add a different background color to the navbar:
+
+    body {
+      background-color: rgba(0,0,0,.2);
+      padding-top: 70px;
+
+      .navbar {
+        background-color: #ffffff;
+      }
+    }
+
+notice that we nested the .navbar inside the body. this is part of the [LESS syntax for nested rules](http://lesscss.org/features/#features-overview-feature-nested-rules).
+
+# Designing the parties list
+
+Now we are going to design the parties list.
+
+Like the Javascript and HTML files, we want the specific styling of parties to be inside the 'client->parties' folder so create a folder named styles until the parties folder.
+
+Inside that folder create a new file named 'partiesList.less'.
+
+The first thing we need to do in a new LESS file is to import the main file into it like this:
+
+    @import "/client/styles/main";
+
+
+Now we can start writing specific LESS code inside that file.
+
+For the rest of the styling changes please take a look at the diff between the steps here:
+[Code Diff](https://github.com/Urigo/meteor-angular-socially/compare/step_12...step_13)
+
+
+# Summery
+
+So we learned how to use CSS, LESS and Bootstrap in Meteor.
+
+      {{/markdown}}
+    </do-nothing>
+
+    <ul class="btn-group tutorial-nav">
+      <a href="/tutorial-02/step_12"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
+      <a href="http://socially-step13.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
+      <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_12...step_13"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
+      <a href="/tutorial-02/step_14"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
+    </ul>
+  </div>
+</template>
+
+

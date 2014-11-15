@@ -1,0 +1,56 @@
+<template name="api.meteor-include.html">
+  <div>
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/api/api.meteor-include.html"
+       class="btn btn-default btn-lg improve-button">
+      <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
+    </a>
+
+    <do-nothing>
+        {{#markdown}}
+
+# meteor-include directive
+
+A directive to include Meteor native Blaze [templates](http://docs.meteor.com/#/full/templates_api)
+
+----
+
+## Usage
+
+    <meteor-include
+        src="">
+    </meteor-include>
+
+### Arguments
+
+<table class="variables-matrix input-arguments">
+<thead>
+<tr>
+  <th>Param</th>
+  <th>Type</th>
+  <th>Details</th>
+  <th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>Template name</td>
+  <td><a href="" class="label type-hint type-hint-string">string</a></td>
+  <td><p>The name of the template to include</p></td>
+  <td><a href="" class="label type-hint type-hint-array">Yes</a></td>
+</tr>
+</tbody>
+</table>
+
+----
+
+## Example
+
+
+    <meteor-include src="loginButtons"></meteor-include>
+
+
+        {{/markdown}}
+    </do-nothing>
+
+  </div>
+</template>

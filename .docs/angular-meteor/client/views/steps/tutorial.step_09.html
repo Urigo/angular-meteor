@@ -1,0 +1,182 @@
+<template name="tutorial.step_09.html">
+  <div class="row">
+    <div class="col-md-12">
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/steps/tutorial.step_09.html"
+       class="btn btn-default btn-lg improve-button">
+      <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
+    </a>
+    <ul class="btn-group tutorial-nav">
+      <a href="/tutorial-02/step_08"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
+      <a href="http://socially-step09.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
+      <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_08...step_09"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
+      <a href="/tutorial-02/step_10"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
+    </ul>
+
+  </div>
+
+  <div class="col-md-8">
+    <h1>Step 9 - Privacy and publish-subscribe functions</h1>
+  </div>
+  <div class="video-tutorial col-md-4">
+    <iframe width="300" height="169" src="//www.youtube.com/embed/aovtn-JFy_Y?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd" frameborder="0" allowfullscreen></iframe>
+  </div>
+
+  <do-nothing class="col-md-12">
+      {{#markdown}}
+
+Right now our app has no privacy, every user can see all the parties on the screen.
+
+So let's add a 'public' flag on parties - if a party is public we will let anyone see it, but if a party if private, only the owner can see it.
+
+First we need to remove the 'autopublish' Meteor package.
+
+autopublish is added to any new Meteor project. It pushes a full copy of the database to each client.
+It helped us until now, but it's not so good for privacy...
+
+Write this command in the consle:
+
+    meteor remove autopublish
+
+
+Now run the app.   You can't see any parties.
+
+So now we need to tell Meteor what parties should it publish to the clients.
+
+To do that we will use Meteor's publish command.
+
+Publish functions should go only in the server so the client won't have access to them.
+So let's create a new file named parties.js inside the server folder.
+
+Inside the file insert this code:
+
+    Meteor.publish("parties", function () {
+      return Parties.find({
+        $or:[
+          {$and:[
+            {"public": true},
+            {"public": {$exists: true}}
+          ]},
+          {$and:[
+            {owner: this.userId},
+            {owner: {$exists: true}}
+          ]}
+        ]});
+    });
+
+Let's see what is happening here.
+
+First, we have the Meteor.publish - a function to define what to publish from the server to the client.
+
+The first parameter is the name of the subscription. the client will subscribe to that name.
+
+The second parameter is a function the defines what will be returned in the subscription.
+That function will determine what data will be returned and the permissions needed.
+
+In our case the first name parameter is "parties". So we will need to subscribe to the "parties" collection in the client.
+
+Fortunately, we are already doing that by setting true in the 4th parameter of the $collection.bind function.
+
+If we wanted to subscribe to a different name then the collection name itself - "parties" we would set that parameter with the subscription name like that:
+
+    $collection(Parties).bind($scope, 'parties', true, 'publicPartiesSubscription');
+
+
+
+In the second parameter, our function uses the Mongo API to return the wanted documents (document are the JSON-style data structure of MongoDB).
+
+So we create a query - start with the find method on the Parties collection.
+
+Inside the find method we use the [$or](http://docs.mongodb.org/manual/reference/operator/query/or/), [$and](http://docs.mongodb.org/manual/reference/operator/query/and/) and [$exists](http://docs.mongodb.org/manual/reference/operator/query/exists/) Mongo operators to pull our wanted parties:
+
+Either that the owner parameter exists and it's the current logged in user (which we have access to with the command this.userId), or that the party's public flag exists and it's set as true.
+
+
+So now let's add the public flag to the parties and see how it affects the parties the client gets.
+
+Let's add a checkbox to the new party form in parties-list.html:
+
+    <label>Public</label>
+    <input type="checkbox" ng-model="newParty.public">
+
+Notice how easy it is to bind a checkbox to a model with AngularJS!
+
+Let's add the same to the party-details.html page:
+
+    <label>Is public</label>
+    <input type="checkbox" ng-model="party.public">
+
+Now let's run the app.
+
+Log in with 2 different users in 2 different browsers.
+
+In each of the users create a few public parties and a few private ones.
+
+Now log out and see which user sees which parties.
+
+
+In the next step, we will want to invite users to private parties. for that, we will need to get all the users, but only their emails without other data which will hurt their privacy.
+
+So let's create another publish method for getting only the needed data on the user.
+
+Notice the we don't need to create a new Meteor collection like we did with parties. **Meteor.users** is a pre-defined collection which is defined by the [meteor-accounts](http://docs.meteor.com/#accounts_api) package.
+
+So let's start with defining our publish function.
+
+Create a new file under the 'server' folder named users.js and place the following code in:
+
+    Meteor.publish("users", function () {
+      return Meteor.users.find({}, {fields: {emails: 1, profile: 1}});
+    });
+
+So here again we use the Mongo API to return all the users (find with an empty object) but we select to return only the emails and profile fields.
+
+* Notice that each object (i.e. each user) will automatically contain its _id field.
+
+The emails field holds all the user's email addresses, and the profile might hold more optional information like the user's name 
+(in our case, if the user logged in with the Facebook login, the accounts-facebook package puts the user's name from Facebook automatically into that field).
+
+Now let's subscribe to that publish Method.  in the client->parties->controllers->partyDetails.js file add the following line:
+
+    $collection(Meteor.users).bind($scope, 'users', false, true);
+
+* We bind to the Meteor.users collection
+* Binding the result to $scope.users
+* Notice that we passes false to the 3rd parameter. that means that we don't want to update that collection from the client.
+specifying false for a collection you are sure you won't update will help performance but if you will leave it true,
+nothing will happen because the client doesn't have permissions to write to that collection anyway.
+* Specifying true in the 4th parameter means that we will also subscribe to the 'users' publish method.
+
+Now let's add the list of users to the view to make sure it works.
+
+Add this ng-repeat list to the end of parties-details.html:
+
+    <ul>
+      Users:
+      <li ng-repeat="user in users">
+        <div>[[ user.emails[0].address ]]</div>
+      </li>
+    </ul>
+
+Run the app and see the list of all the users' emails.
+
+
+# Summary
+
+We've added the support of privacy to our parties app.
+
+We also learned how to use the Meteor.publish command to control the data and permissions sent to the client
+and how to subscribe to it with the $collection.bind 4th parameter.
+
+In the next step we will learn how to filter the users list in the client side with AngularJS filters and create a custom filter for our own needs.
+
+      {{/markdown}}
+    </do-nothing>
+
+    <ul class="btn-group tutorial-nav">
+      <a href="/tutorial-02/step_08"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
+      <a href="http://socially-step09.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
+      <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_08...step_09"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
+      <a href="/tutorial-02/step_10"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
+    </ul>
+  </div>
+</template>

@@ -1,0 +1,91 @@
+<template name="api.subscribe.html">
+  <div>
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/api/api.subscribe.html"
+       class="btn btn-default btn-lg improve-button">
+      <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
+    </a>
+
+    <do-nothing>
+        {{#markdown}}
+
+# $subscribe
+
+A service which is a wrapper for [Meteor.subscribe](http://docs.meteor.com/#/full/meteor_subscribe).
+It subscribes to a [Meteor.publish](http://docs.meteor.com/#/full/publishandsubscribe) method in the client and returns a [AngularJS promise](https://docs.angularjs.org/api/ng/service/$q) when ready
+
+----
+
+## Usage
+
+    $subscribe.subscribe(name, publisherArguments)
+
+### Arguments
+
+<table class="variables-matrix input-arguments">
+<thead>
+<tr>
+  <th>Param</th>
+  <th>Type</th>
+  <th>Details</th>
+  <th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>name</td>
+  <td><a href="" class="label type-hint type-hint-string">string</a></td>
+  <td><p>Name of the subscription. Matches the name of the server's <em>publish()</em> call.</p></td>
+  <td><a href="" class="label type-hint type-hint-array">Yes</a></td>
+</tr>
+<tr>
+  <td>publisherArguments</td>
+  <td><a href="" class="label type-hint type-hint-object">any</a></td>
+  <td><p>Optional arguments passed to publisher function on server.</p></td>
+  <td><a href="" class="label type-hint type-hint-object">No</a></td>
+</tr>
+</tbody>
+</table>
+
+
+## Returns
+
+<table class="variables-matrix return-arguments">
+<tbody><tr>
+  <td><a href="" class="label type-hint type-hint-expression">promise</a></td>
+  <td><p>The promise solves successfully when subscription is ready.</p></td>
+</tr>
+</tbody></table>
+
+----
+
+## Example
+
+
+    // Define a new Meteor Mongo Collection
+    Todos = new Mongo.Collection('todos');
+
+    if (Meteor.isClient) {
+
+      app.controller("mainCtrl", ['$scope', '$collection',
+        function($scope, $collection){
+
+          $subscribe.subscribe('todos').then(function(){
+            console.log($scope.todos + ' is ready');
+          });
+        }
+      ]);
+    }
+
+    if (Meteor.isServer) {
+
+      Meteor.publish('todos', function(){
+        return Todos.find();
+      });
+
+    }
+
+        {{/markdown}}
+    </do-nothing>
+
+  </div>
+</template>

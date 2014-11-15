@@ -1,0 +1,9 @@
+{
+  "name": "bootstrap3-less",
+  "description": "Bootstrap 3 with LESS for easy CSS customization",
+  "homepage": "https://github.com/simison/bootstrap3-less",
+  "author": "Mikael Korpela <mikael@ihminen.org>",
+  "version": "0.2.1",
+  "git": "https://github.com/simison/bootstrap3-less",
+  "packages": {}
+}

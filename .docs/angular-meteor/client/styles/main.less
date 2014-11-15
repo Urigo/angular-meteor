@@ -1,0 +1,219 @@
+@import "/packages/bootstrap3-less/bootstrap.import.less";
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300);
+
+@icon-font-path: "/fonts/";
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  padding-top: 50px;
+
+  header {
+    background-color: #2c2c2c;
+
+    .navbar-brand {
+      //width: 100px;
+      //height: 50px;
+      margin: auto 0;
+      padding: 5px 15px;
+
+      img {
+        width: auto;
+        height: 100%;
+      }
+    }
+
+    .nav {
+      li {
+        a {
+          color: #f5f5f5;
+
+          &:hover {
+            background-color: #2c2c2c;
+            color: white;
+            font-weight: bold;
+          }
+          &:focus {
+            background-color: #2c2c2c;
+            color: white;
+            font-weight: bold;
+          }
+        }
+        ul {
+          a {
+            color: #000000;
+          }
+        }
+      }
+    }
+  }
+
+  .hero-unit {
+    padding:100px 80px;
+    margin:0;
+    background: -moz-linear-gradient(top,  rgba(221,221,221,1) 0%, rgba(225,225,225,0) 21%, rgba(235,235,235,0) 81%, rgba(238,238,238,1) 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(221,221,221,1)), color-stop(21%,rgba(225,225,225,0)), color-stop(81%,rgba(235,235,235,0)), color-stop(100%,rgba(238,238,238,1))); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  rgba(221,221,221,1) 0%,rgba(225,225,225,0) 21%,rgba(235,235,235,0) 81%,rgba(238,238,238,1) 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  rgba(221,221,221,1) 0%,rgba(225,225,225,0) 21%,rgba(235,235,235,0) 81%,rgba(238,238,238,1) 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  rgba(221,221,221,1) 0%,rgba(225,225,225,0) 21%,rgba(235,235,235,0) 81%,rgba(238,238,238,1) 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  rgba(221,221,221,1) 0%,rgba(225,225,225,0) 21%,rgba(235,235,235,0) 81%,rgba(238,238,238,1) 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#dddddd', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
+
+    background-color:white;
+
+    .container {
+      text-align: center;
+
+      .main-logo {
+
+        width: 600px;
+        height: 420px;
+        margin: 0 auto;
+
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
+
+      .github {
+        font-size: 35px;
+      }
+
+      iframe {
+        border: 3px solid gray;
+      }
+    }
+
+  }
+  .main-unit {
+    padding:30px 80px;
+  }
+  .tutorial-container {
+
+    .improve-button {
+      float: right;
+    }
+
+    .tutorial-nav {
+      float: left;
+    }
+
+    .video-tutorial {
+      padding: 10px;
+
+      iframe {
+        border: 3px solid gray;
+        float: right;
+      }
+    }
+
+    .main-tutorial {
+      padding-top: 20px;
+
+      do-nothing {
+        font-size: 20px;
+      }
+    }
+  }
+}
+
+.variables-matrix {
+  border:1px solid #ddd;
+  width:100%;
+  margin:10px 0;
+}
+
+.variables-matrix td,
+.variables-matrix th {
+  padding:10px;
+}
+
+.variables-matrix td {
+  border-top:1px solid #eee;
+}
+
+.variables-matrix td + td,
+.variables-matrix th + th {
+  border-left:1px solid #eee;
+}
+
+.variables-matrix tr:nth-child(even) td {
+  background:#f5f5f5;
+}
+
+.variables-matrix th {
+  background:#f1f1f1;
+}
+
+.variables-matrix td {
+  vertical-align:top;
+  padding:5px;
+}
+
+.type-hint {
+  display:inline-block;
+  background: gray;
+}
+
+.variables-matrix .type-hint {
+  text-align:center;
+  min-width:60px;
+  margin:1px 5px;
+}
+
+.type-hint + .type-hint {
+  margin-top:5px;
+}
+
+.type-hint-expression {
+  background:purple;
+}
+
+.type-hint-date {
+  background:pink;
+}
+
+.type-hint-string {
+  background:#3a87ad;
+}
+
+.type-hint-function {
+  background:green;
+}
+
+.type-hint-object {
+  background:#999;
+}
+
+.type-hint-array {
+  background:#F90;;
+}
+
+.type-hint-boolean {
+  background:rgb(18, 131, 39);
+}
+
+.type-hint-number {
+  background:rgb(189, 63, 66);
+}
+
+.type-hint-regexp {
+  background: rgb(90, 84, 189);
+}
+
+.type-hint-domelement {
+  background: rgb(95, 158, 160);
+}
+
+.return-arguments,
+.return-arguments th,
+.return-arguments th + th,
+.return-arguments td,
+.return-arguments td + td {
+  border-radius:0;
+  border:0;
+}
+
+.return-arguments td:first-child {
+  width:100px;
+}

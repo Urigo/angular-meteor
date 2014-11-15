@@ -1,0 +1,82 @@
+<template name="tutorial.step_06.html">
+<div class="row">
+  <div class="col-md-12">
+        <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/steps/tutorial.step_06.html"
+           class="btn btn-default btn-lg improve-button">
+          <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
+        </a>
+      <ul class="btn-group tutorial-nav">
+        <a href="/tutorial/step_05"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
+        <a href="http://socially-step06.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
+        <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_05...step_06"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
+        <a href="/tutorial/step_07"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
+      </ul>
+    </div>
+
+  <div class="col-md-8">
+    <h1>Step 6 - Bind one object</h1>
+  </div>
+  <div class="video-tutorial col-md-4">
+    <iframe width="300" height="169" src="//www.youtube.com/embed/XxkayFJ8r4A?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd" frameborder="0" allowfullscreen></iframe>
+  </div>
+
+  <do-nothing class="col-md-12">
+  {{#markdown}}
+
+In this step, you will implement the party details view, which is displayed when a user clicks on a party in the parties list.
+The user will also be able to change the party's details.
+
+To implement the party details view we will use $collection.bindOne to fetch our data, and update it back in realtime when the user changes it.
+
+# Controller
+
+We'll expand the PartyDetailsCtrl by using the $collection service (add it with Angular's dependency injection) to bind the specific party.
+
+    angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$collection',
+      function($scope, $stateParams, $collection){
+
+        $collection(Parties).bindOne($scope, 'party', $stateParams.partyId, true, true);
+
+    }]);
+
+To bind to a specific object, we call the bindOne function with the following parameters:
+
+* Param 1: The scope we use (we send the current scope)
+* Param 2: The scope variable we use (we send 'party' which means that the object will be binded to $scope.party)
+* Param 3: The id of the object in the collection (taken from the url param with the $stateParam service)
+* Param 4: A flag if to bind the object so that every change in the client will be sent to the server automatically
+* Param 5: A flag to subscribe to the collection. it's good in case we got to party details before getting into parties list controller.
+
+
+# Template
+
+In party-details.html let's replace the binding to the partyId with binding to party.name and party.description:
+
+    <template name="party-details.html">
+      Here you will see and change the details of the party:
+
+      <input ng-model="party.name">
+      <input ng-model="party.description">
+
+      {{lt}}/template>
+
+Now, when you run the app, navigate into a party's page, and change the inputs, the server and all the clients update immediately.
+No save buttons, no round trips, it just works.
+
+# Summary
+
+We've seen the power of 3-way binding between the DOM, AngularJS and Meteor.
+
+Let's move on to provide some order and structure in our application.
+
+      {{/markdown}}
+</do-nothing>
+
+  <ul class="btn-group tutorial-nav">
+    <a href="/tutorial/step_05"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
+    <a href="http://socially-step06.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
+    <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_05...step_06"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
+    <a href="/tutorial/step_07"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
+  </ul>
+</div>
+</template>

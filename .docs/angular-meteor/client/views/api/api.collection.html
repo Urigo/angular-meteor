@@ -1,0 +1,75 @@
+<template name="api.collection.html">
+  <div>
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/api/api.collection.html"
+       class="btn btn-default btn-lg improve-button">
+      <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
+    </a>
+
+    <do-nothing>
+        {{#markdown}}
+
+# $collection
+
+A service that wraps the [Meteor collections](http://docs.meteor.com/#/full/collections) to enable reactivity within AngularJS.
+
+----
+
+## Usage
+
+    $collection(collection, selector, options)
+
+### Arguments
+
+
+
+<table class="variables-matrix input-arguments">
+<thead>
+<tr>
+  <th>Param</th>
+  <th>Type</th>
+  <th>Details</th>
+  <th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>collection</td>
+  <td><a href="http://docs.meteor.com/#/full/collections" class="label type-hint type-hint-string">Meteor Collection Object</a></td>
+  <td><p>The Meteor Collection</p></td>
+  <td><a href="" class="label type-hint type-hint-array">Yes</a></td>
+</tr>
+<tr>
+  <td>selector</td>
+  <td><a href="http://docs.meteor.com/#/full/selectors" class="label type-hint type-hint-object">Mongo Selector (Object or String)</a></td>
+  <td><p>Same as <a href="http://docs.meteor.com/#/full/find">Meteor Collection Find</a></p></td>
+  <td><a href="" class="label type-hint type-hint-object">No</a></td>
+</tr>
+<tr>
+  <td>options</td>
+  <td><a href="" class="label type-hint type-hint-object">Object</a></td>
+  <td><p>Same as <a href="http://docs.meteor.com/#/full/find">Meteor Collection Find</a></p></td>
+  <td><a href="" class="label type-hint type-hint-object">No</a></td>
+</tr>
+</tbody>
+</table>
+
+
+## Returns
+
+<table class="variables-matrix return-arguments">
+<tbody><tr>
+  <td><a href="" class="label type-hint type-hint-object">object</a></td>
+  <td><p>Newly created $collection object with the following set of methods:</p>
+    <ul>
+      <li><code><span class="pln">bind</span></code> — <a href="/api/collection-bind">Go to reference</a></li>
+      <li><code><span class="pln">bindOne</span></code> — <a href="/api/collection-bindone">Go to reference</a></li>
+    </ul>
+  </td>
+</tr>
+</tbody></table>
+
+        {{/markdown}}
+    </do-nothing>
+
+  </div>
+</template>

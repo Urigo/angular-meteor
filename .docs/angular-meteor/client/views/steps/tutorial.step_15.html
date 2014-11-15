@@ -1,0 +1,140 @@
+<template name="tutorial.step_15.html">
+  <div>
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/steps/tutorial.step_15.html"
+       class="btn btn-default btn-lg improve-button">
+      <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
+    </a>
+    <ul class="btn-group tutorial-nav">
+      <a href="/tutorial-02/step_14"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
+      <a href="http://socially-step15.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
+      <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_14...step_15"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
+      <a href="/tutorial-02/step_16"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
+    </ul>
+
+    <do-nothing>
+      {{#markdown}}
+
+# Step 15 - Pagination
+
+Now we are dealing with a few parties.
+But we need to support also a large number of parties.
+
+In that case, we want to have pagination support.
+
+With pagination we can break the array of parties down to pages so the user won't have to scroll down to find a party,
+but also and even more important, we can fetch only a few parties at a time instead of all the parties collection for better performance.
+
+# angular-meteor pagination support
+
+First thing, let's add support for the built-in pagination for the parties collection in partiesList.js.
+
+All you need to do is add 'true' in the fifth parameter.
+
+    $collection(Parties).bind($scope, 'parties', true, true, true).then(
+
+Now the bind method is watching on 2 scope parameters:
+
+1. $scope.perPage - A variable that holds how many objects we want to display in each page
+2. $scope.page - A variable that holds the current page number
+
+To handle those we need to define them in our scope:
+
+    $scope.page = 1;
+    $scope.perPage = 3;
+
+
+# pagination directive
+
+In AngularJS's eco system there are a lot of directive for handling pagination.
+
+Our personal favorite is [angular-utils-pagination](https://github.com/michaelbromley/angularUtils/tree/master/src/directives/pagination).
+
+To add the directive add it's Meteor package to the project:
+
+    meteor add urigo:angular-utils-pagination
+
+Add it as a dependency to our Angular app in app.js:
+
+    angular.module('socially',[
+      'angular-meteor',
+      'ui.router',
+      'google-maps'.ns(),
+      'angularUtils.directives.dirPagination'
+    ]);
+
+
+Now let's add the directive in parties-list.html. change the ng-repeat of parties to this:
+
+    <li dir-paginate="party in parties | itemsPerPage: perPage | filter:search | orderBy:orderProperty"
+        class="party" total-items="partiesCount.count">
+
+and after the UL closes add this directive:
+
+    <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
+
+as you can see, dir-paginate list takes the number of objects in array (that we defined before) but also takes the total number items (we will get to that soon).
+On the dir-pagination-controls directive there is a method on-page-change and there we can call our own function.
+
+let's create the pageChanged function inside the partiesList.js:
+
+    $scope.pageChanged = function(newPage) {
+      $scope.page = newPage;
+    };
+
+Now every time we will change the page, the scope variable will change accordingly and update the bind method that watches it.
+
+# Getting total count of a collection
+
+Getting a total count of a collection might seem easy, but there is a problem.
+The client only holds the number of object that it subscribed to. that means that if the client is not subscribed to the whole array calling find().count on a collection will result in a partial count.
+
+So we need access in the client for the total count even if we are not subscribed to the whole collection.
+
+For that we can use the [tmeasday:publish-counts](https://github.com/percolatestudio/publish-counts) package. In the command line:
+
+    meteor add tmeasday:publish-counts
+
+
+That package helps to publish the count of a cursor, in real time without dependency on the subscribe method.
+
+Inside the server -> parties.js file, add the following code inside the Meteor.publish("parties" function, at the beginning of the function. before the existing return statement:
+
+    Counts.publish(this, 'numberOfParties', Parties.find({
+      $or:[
+        {$and:[
+          {"public": true},
+          {"public": {$exists: true}}
+        ]},
+        {$and:[
+          {owner: this.userId},
+          {owner: {$exists: true}}
+        ]},
+        {$and:[
+          {invited: this.userId},
+          {invited: {$exists: true}}
+        ]}
+    ]}));
+
+Now on the client we have access to the Counts collection. let's subscribe to that in the partiesList.js file:
+
+    $collection(Counts).bindOne($scope, 'partiesCount', 'numberOfParties');
+
+Now the partiesCount will hold the number of parties and will send it to the directive in the parties-list.html (which we already defined earlier).
+
+Now run the app.
+Create lots of parties and see that you can see only 3 at a time and you can scroll between the pages with the directive that populates the number of pages automatically.
+
+
+      {{/markdown}}
+    </do-nothing>
+
+    <ul class="btn-group tutorial-nav">
+      <a href="/tutorial-02/step_14"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
+      <a href="http://socially-step15.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
+      <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_14...step_15"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
+      <a href="/tutorial-02/step_16"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
+    </ul>
+  </div>
+</template>
+
+
