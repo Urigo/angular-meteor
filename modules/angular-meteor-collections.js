@@ -13,7 +13,7 @@ angularMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier', '$subscr
         bindOne: function(scope, model, id, auto, publisher) {
           Tracker.autorun(function(self) {
             scope[model] = collection.findOne(id);
-            if (!scope.$$phase) scope.$apply(); // Update bindings in scope.
+            if (!scope.$root.$$phase) scope.$apply(); // Update bindings in scope.
             scope.$on('$destroy', function () {
               self.stop(); // Stop computation if scope is destroyed.
             });
@@ -72,7 +72,7 @@ angularMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier', '$subscr
               var newArray = HashKeyCopier.copyHashKeys(scope[model], ngCollection, ["_id"]);
               scope[model] = updateAngularCollection(newArray, scope[model]);
 
-              if (!scope.$$phase) scope.$apply(); // Update bindings in scope.
+              if (!scope.$root.$$phase) scope.$apply(); // Update bindings in scope.
               scope.$on('$destroy', function () {
                 self.stop(); // Stop computation if scope is destroyed.
               });
