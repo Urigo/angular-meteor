@@ -5,6 +5,7 @@ angularMeteor = angular.module('angular-meteor', [
   'angular-meteor.template',
   'angular-meteor.user',
   'angular-meteor.methods',
+  'angular-meteor.session',
   'hashKeyCopier'
 ]);
 

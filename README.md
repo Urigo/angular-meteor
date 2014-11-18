@@ -30,8 +30,9 @@
 - [Adding controllers, directives, filters and services](https://github.com/urigo/angular-meteor#adding-controllers-directives-filters-and-services)
 - [Creating and inserting template views](https://github.com/urigo/angular-meteor#creating-and-inserting-template-views)
 - [Routing](https://github.com/urigo/angular-meteor#routing)
-- [User service] (https://github.com/urigo/angular-meteor#User)
-- [Meteor methods with promises] (https://github.com/urigo/angular-meteor#meteor-methods-with-promises)
+- [User service](https://github.com/urigo/angular-meteor#User)
+- [Meteor methods with promises](https://github.com/urigo/angular-meteor#meteor-methods-with-promises)
+- [Bind Meteor session](https://github.com/urigo/angular-meteor#bind-meteor-session)
 
 ### App initialization
 If you have a module called myModule, for example:
@@ -142,6 +143,10 @@ It would be wise to consider using the [urigo:angular-ui-router](https://github.
 ### Meteor methods with promises
 
 [$methods](http://angularjs.meteor.com/api/methods)
+
+### Bind Meteor session
+
+[$session](http://angularjs.meteor.com/api/session)
     
 ### Additional packages
 

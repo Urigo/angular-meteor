@@ -37,6 +37,10 @@ angular.module("meteor-angular-docs").config(['$urlRouterProvider', '$stateProvi
           url: '/subscribe',
           template: UiRouter.template('api.subscribe.html')
         })
+        .state('api.session', {
+          url: '/session',
+          template: UiRouter.template('api.session.html')
+        })
         .state('api.methods', {
           url: '/methods',
           template: UiRouter.template('api.methods.html')

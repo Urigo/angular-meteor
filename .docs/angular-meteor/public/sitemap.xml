@@ -102,6 +102,10 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>http://angularjs.meteor.com/api/session</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>http://angularjs.meteor.com/api/methods</loc>
     <priority>0.5</priority>
   </url>

@@ -1,6 +1,6 @@
 Package.describe({
   summary: "The simplest no-conflict way to use AngularJS with Meteor, Meteorite and Atmosphere Smart Packages.",
-  version: "0.5.6",
+  version: "0.5.7",
   git: "https://github.com/Urigo/angular-meteor.git"
 });
 
@@ -25,6 +25,7 @@ Package.on_use(function (api) {
     'modules/angular-meteor-template.js',
     'modules/angular-meteor-user.js',
     'modules/angular-meteor-methods.js',
+    'modules/angular-meteor-session.js',
     // Finally load angular-meteor File
     'urigo:angular.js'
   ], 'client');
