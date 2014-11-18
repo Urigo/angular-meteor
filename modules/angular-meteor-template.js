@@ -14,7 +14,7 @@ angularMeteorTemplate.directive('ngTemplate', ['$templateCache',
   function ($templateCache) {
     return {
       restrict: 'E',
-      scope: true,
+      scope: false,
       template: function (element, attributes) {
 
         // Check if version prior 0.8.3
