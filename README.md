@@ -155,7 +155,7 @@ Using this method, additional functionality has been provided to urigo:angular-m
 - [urigo:angular-ui-router](https://github.com/Urigo/meteor-angular-ui-router) empowers angular-meteor with the [ui-router](https://github.com/angular-ui/ui-router) module.
 - [urigo:ionic](https://github.com/Urigo/meteor-ionic) [Ionic Framework](http://ionicframework.com/) on top of Meteor.
 - [netanelgilad:angular-file-upload](https://github.com/netanelgilad/meteor-angular-file-upload) empowers angular-meteor with [angular-file-upload](https://github.com/nervgh/angular-file-upload) module.
-- [davidyaha:ng-grid](https://github.com/davidyaha/meteor-ng-grid) empowers angular-meteor with [ui-grid](https://github.com/angular-ui/ng-grid) module.
+- [davidyaha:smart-table](https://github.com/davidyaha/meteor-smart-table) empowers angular-meteor with [smart-table](https://github.com/lorenzofox3/Smart-Table) module.
 - [netanelgilad:angular-sortable-view](https://github.com/netanelgilad/meteor-angular-sortable-view/) empowers angular-meteor with [angular-sortable-view](https://github.com/kamilkp/angular-sortable-view) module.
 - [netanelgilad:text-angular](https://github.com/netanelgilad/meteor-textAngular/) empowers angular-meteor with [textAngular](https://github.com/fraywing/textAngular) module.
 
