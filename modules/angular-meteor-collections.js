@@ -136,6 +136,56 @@ angularMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier', '$subscr
   }
 ]);
 
+angularMeteorCollections.factory('$amCollection', function($rootScope) {
+  return function(collection, selector, auto, options) {
+    // Validate parameters
+    auto = auto || false; // Sets default binding type.
+    if (!(typeof auto === 'boolean')) { // Checks if auto is a boolean.
+      throw new TypeError("The third argument of bind must be a boolean.");
+    }
+
+    // Data members
+    var that = this;
+    this.data = null; // Holds the collection fetch result
+
+    /**
+     * Fetches the latest data from Meteor and update the data variable.
+     */
+    Tracker.autorun(function (self) {
+      var ngCollection = new AngularMeteorCollection(collection, $q, selector, options);
+
+      // Optimized Update the data array variable
+      var newArray = HashKeyCopier.copyHashKeys(this.data, ngCollection, ["_id"]);
+      that.data = updateAngularCollection(newArray, this.data);
+    });
+
+    if (auto) { // Deep watches the model and performs autobind.
+      var unregisterWatch = $rootScope.$watch(function() {
+        return that.data;
+      }, function (newItems, oldItems) {
+        if (newItems !== oldItems && angular.isUndefined(newItems)) {
+          return unregisterWatch();
+        }
+
+        // Remove items that don't exist in the collection anymore.
+        angular.forEach(oldItems, function (oldItem) {
+          var index = newItems.map(function (item) {
+            return item._id;
+          }).indexOf(oldItem._id);
+          if (index == -1) { // To here get all objects that pushed or spliced
+            if (oldItem._id) { // This is a check to get only the spliced objects
+              newItems.remove(oldItem._id);
+            }
+          }
+        });
+        newItems.save(); // Saves all items.
+      }, true);
+    }
+
+    return that.data;
+  }
+});
+
 var AngularMeteorCollection = function (collection, $q, selector, options) {
   var self = collection.find(selector, options).fetch();
 
