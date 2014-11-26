@@ -78,6 +78,10 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>http://angularjs.meteor.com/manifest</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>http://angularjs.meteor.com/api</loc>
     <priority>0.8</priority>
   </url>
