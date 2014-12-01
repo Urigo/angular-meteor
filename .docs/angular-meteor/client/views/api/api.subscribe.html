@@ -66,8 +66,8 @@ It subscribes to a [Meteor.publish](http://docs.meteor.com/#/full/publishandsubs
 
     if (Meteor.isClient) {
 
-      app.controller("mainCtrl", ['$scope', '$collection',
-        function($scope, $collection){
+      app.controller("mainCtrl", ['$scope', '$collection', '$subscribe',
+        function($scope, $collection, $subscribe){
 
           $subscribe.subscribe('todos').then(function(){
             console.log($scope.todos + ' is ready');
