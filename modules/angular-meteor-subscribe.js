@@ -5,14 +5,19 @@ angularMeteorSubscribe.service('$subscribe', ['$q',
   function ($q) {
     this.subscribe = function(){
       var deferred = $q.defer();
+      var args = Array.prototype.slice.call(arguments);
 
-      var subscription = Meteor.subscribe.apply(this, arguments);
-
-      Tracker.autorun(function() {
-        if ( subscription.ready() ) {
+      // callbacks supplied as last argument
+      args.push({
+        onReady: function () {
           deferred.resolve();
+        },
+        onError: function (err) {
+          deferred.reject(err);
         }
       });
+
+      var subscription = Meteor.subscribe.apply(this, args);
 
       return deferred.promise;
     };
