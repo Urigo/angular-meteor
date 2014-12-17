@@ -63,6 +63,37 @@ In party-details.html let's replace the binding to the partyId with binding to p
 Now, when you run the app, navigate into a party's page, and change the inputs, the server and all the clients update immediately.
 No save buttons, no round trips, it just works.
 
+# Classic Save and Cancel buttons
+
+In case you don't want to use the live editing that angular-meteor provides and want to preset to your users a classic "Save" "Cancel" form, you can do that as well.
+
+First, let's change param 4 from true to false (cancel the auto-bind).
+Then, let's add a bind to the whole collection with regular bind.
+Now, it means that we have access to the save function of the collection from the bind function and we can use it in a click of a button:
+
+
+    $collection(Parties).bindOne($scope, 'party', $stateParams.partyId, false);
+    $collection(Parties).bind($scope, 'parties');
+
+    $scope.saveParty = function(){
+      $scope.parties.save($scope.party);
+    };
+
+And then in the template (with a cancel button that simply directs back to the parties list without doing any save functionality):
+
+    <template name="party-details.html">
+      Here you will see and change the details of the party:
+
+      <input ng-model="party.name">
+      <input ng-model="party.description">
+
+      <button ng-click="saveParty()">Save</button>
+
+      <button><a href="/parties">Cancel</a></button>
+
+    {{lt}}/template>
+
+
 # Summary
 
 We've seen the power of 3-way binding between the DOM, AngularJS and Meteor.
