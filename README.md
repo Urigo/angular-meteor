@@ -23,15 +23,14 @@
 [https://groups.google.com/forum/#!forum/angular-meteor](https://groups.google.com/forum/#!forum/angular-meteor)
 
 ## Contributing
-We would love contributions in code and in the tutorial.
+We would love contributions in:
 
-Our roadmap is here: [Public Trello board](https://trello.com/b/Wj9U0ulk/angular-meteor).
-You can add a card about want you want to see in the library or in the tutorial.
+1. Code
+2. [Tutorial](http://angularjs.meteor.com/tutorial) - Our goal with the tutorial is to add as many common tasks as possible. If you want to create and add your own chapter we would be happy to help you writing and adding it.
+3. [External issues](https://github.com/Urigo/angular-meteor/blob/master/External-issues.md) - help us push external issues that affect our community.
+4. [Roadmap](https://trello.com/b/Wj9U0ulk/angular-meteor) - You can add a card about want you want to see in the library or in the tutorial.
 
-Our goal with the tutorial is to add as many common tasks as possible.
-If you want to create and add your own chapter we would be happy to help you writing and adding it.
-
-We are also considering money compansation for contributers, more as a tribute then a profit for now.
+* We are also considering money compansation for contributers, more as a tribute then a profit for now.
 
 ## Usage
 ### Table of Contents
