@@ -165,6 +165,15 @@ Add this ng-repeat list to the end of parties-details.html:
 Run the app and see the list of all the users' emails.
 
 
+# Understanding Meteor's Publish-Subscribe
+
+It is very important to understand Meteor's Publish-Subscribe mechanism so you don't get confused and use it to filter things in the view!
+
+Meteor accumulates all the data from the different subscription of a collection in the client, so adding a different subscription in a different
+view won't delete the data that is already in the client.
+
+Please read more [here](http://www.meteorpedia.com/read/Understanding_Meteor_Publish_and_Subscribe).
+
 # Summary
 
 We've added the support of privacy to our parties app.
