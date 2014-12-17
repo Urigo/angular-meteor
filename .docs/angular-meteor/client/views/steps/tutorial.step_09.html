@@ -82,6 +82,11 @@ If we wanted to subscribe to a different name then the collection name itself - 
 
 
 
+* Our publish function can also take parameters.  In that case, we would also need to pass the parameters from the client.
+To do that, we would need to use the [$subscribe service](http://angularjs.meteor.com/api/subscribe) directly and not through the $collection service.
+For more information about the $subscribe service [click here](http://angularjs.meteor.com/api/subscribe).
+
+
 In the second parameter, our function uses the Mongo API to return the wanted documents (document are the JSON-style data structure of MongoDB).
 
 So we create a query - start with the find method on the Parties collection.
