@@ -86,8 +86,21 @@ angularMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier', '$subscr
                     return item._id;
                   }).indexOf(oldItem._id);
                   if (index == -1) { // To here get all objects that pushed or spliced
-                    if (oldItem._id) { // This is a check to get only the spliced objects
-                      newItems.remove(oldItem._id);
+                    var localIndex;
+                    if (!oldItem._id)
+                      localIndex = -1;
+                    else if (oldItem._id && !oldItem._id._str)
+                      localIndex = -1;
+                    else {
+                      localIndex = newItems.map(function (item) {
+                        if (item._id)
+                          return item._id._str;
+                      }).indexOf(oldItem._id._str);
+                    }
+                    if (localIndex == -1){
+                      if (oldItem._id) { // This is a check to get only the spliced objects
+                        newItems.remove(oldItem._id);
+                      }
                     }
                   }
                 });
