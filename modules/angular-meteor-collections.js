@@ -63,7 +63,7 @@ angularMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier', '$subscr
                   limit: parseInt(scope.perPage),
                   skip: (parseInt(scope.page) - 1) * parseInt(scope.perPage)
                 };
-                if (scope.sort) { options.sort = [scope.sort]; }
+                if (scope.sort) { options.sort = scope.sort; }
               }
 
               var ngCollection = new AngularMeteorCollection(collection, $q, selector, options);
@@ -98,11 +98,12 @@ angularMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier', '$subscr
           rebind();
 
           if (paginate){
-            scope.$watch("page", function(newValue, oldValue){
-              if (!newValue)
+            scope.$watchGroup(['page', 'sort'], function(newValues, oldValues){
+              if (!newValues)
                 return;
 
-              if (newValue == oldValue)
+              if (newValues[0] == oldValues[0] &&
+                newValues[1] == oldValues[1])
                 return;
 
               if (unregisterWatch)
