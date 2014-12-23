@@ -238,6 +238,8 @@ in the controller lets associate that dropdown to $scope.sort:
     $scope.$watch('orderProperty', function(){
       if ($scope.orderProperty)
         $scope.sort = {name: parseInt($scope.orderProperty)};
+
+      $scope.partiesSubscribe();
     });
 
 and also initialize it at the beginning:
@@ -248,6 +250,12 @@ and also initialize it at the beginning:
 and remove the following line of code (old initialization):
 
     $scope.orderProperty = 'name';
+
+
+There is a need to re-subscribe after changing the sort parameter because if the sort change will sent different documents to the client the publish
+method needs to know it.
+
+For example, if we had 4 parties and we will change the sorting, then the server will need to send the client the 4th party (which it didn't sent until now).
 
 
 We made a lot of changes so please check the step's code [here](https://github.com/Urigo/meteor-angular-socially/compare/step_14...step_15)
