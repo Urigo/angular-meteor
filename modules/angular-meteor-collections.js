@@ -150,17 +150,17 @@ angularMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier', '$subscr
   }
 ]);
 
-angularMeteorCollections.factory('$amCollection', function($rootScope) {
-  return function(collection, selector, auto, options) {
+angularMeteorCollections.factory('$amCollection', function($rootScope, $q, HashKeyCopier) {
+  return function(collection, auto, selector, options) {
     // Validate parameters
+    if (!selector) selector = {};
     auto = auto || false; // Sets default binding type.
     if (!(typeof auto === 'boolean')) { // Checks if auto is a boolean.
       throw new TypeError("The third argument of bind must be a boolean.");
     }
 
     // Data members
-    var that = this;
-    this.data = null; // Holds the collection fetch result
+    var data = null; // Holds the collection fetch result
 
     /**
      * Fetches the latest data from Meteor and update the data variable.
@@ -169,13 +169,13 @@ angularMeteorCollections.factory('$amCollection', function($rootScope) {
       var ngCollection = new AngularMeteorCollection(collection, $q, selector, options);
 
       // Optimized Update the data array variable
-      var newArray = HashKeyCopier.copyHashKeys(this.data, ngCollection, ["_id"]);
-      that.data = updateAngularCollection(newArray, this.data);
+      var newArray = HashKeyCopier.copyHashKeys(data, ngCollection, ["_id"]);
+      data = updateAngularCollection(newArray, data);
     });
 
     if (auto) { // Deep watches the model and performs autobind.
       var unregisterWatch = $rootScope.$watch(function() {
-        return that.data;
+        return data;
       }, function (newItems, oldItems) {
         if (newItems !== oldItems && angular.isUndefined(newItems)) {
           return unregisterWatch();
@@ -196,7 +196,7 @@ angularMeteorCollections.factory('$amCollection', function($rootScope) {
       }, true);
     }
 
-    return that.data;
+    return data;
   }
 });
 
