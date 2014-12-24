@@ -66,10 +66,13 @@ It subscribes to a [Meteor.publish](http://docs.meteor.com/#/full/publishandsubs
 
     if (Meteor.isClient) {
 
-      app.controller("mainCtrl", ['$scope', '$collection',
-        function($scope, $collection){
+      app.controller("mainCtrl", ['$scope', '$collection', '$subscribe',
+        function($scope, $collection, $subscribe){
 
           $subscribe.subscribe('todos').then(function(){
+            // Bind all the todos to $scope.todos
+            $collection(Todos).bind($scope, 'todos');
+
             console.log($scope.todos + ' is ready');
           });
         }
@@ -79,7 +82,7 @@ It subscribes to a [Meteor.publish](http://docs.meteor.com/#/full/publishandsubs
     if (Meteor.isServer) {
 
       Meteor.publish('todos', function(){
-        return Todos.find();
+        return Todos.find({});
       });
 
     }

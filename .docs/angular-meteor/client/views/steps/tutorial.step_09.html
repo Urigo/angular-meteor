@@ -82,6 +82,11 @@ If we wanted to subscribe to a different name then the collection name itself - 
 
 
 
+* Our publish function can also take parameters.  In that case, we would also need to pass the parameters from the client.
+To do that, we would need to use the [$subscribe service](http://angularjs.meteor.com/api/subscribe) directly and not through the $collection service.
+For more information about the $subscribe service [click here](http://angularjs.meteor.com/api/subscribe).
+
+
 In the second parameter, our function uses the Mongo API to return the wanted documents (document are the JSON-style data structure of MongoDB).
 
 So we create a query - start with the find method on the Parties collection.
@@ -159,6 +164,15 @@ Add this ng-repeat list to the end of parties-details.html:
 
 Run the app and see the list of all the users' emails.
 
+
+# Understanding Meteor's Publish-Subscribe
+
+It is very important to understand Meteor's Publish-Subscribe mechanism so you don't get confused and use it to filter things in the view!
+
+Meteor accumulates all the data from the different subscription of a collection in the client, so adding a different subscription in a different
+view won't delete the data that is already in the client.
+
+Please read more [here](http://www.meteorpedia.com/read/Understanding_Meteor_Publish_and_Subscribe).
 
 # Summary
 

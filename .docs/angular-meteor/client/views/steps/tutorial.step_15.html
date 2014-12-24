@@ -124,6 +124,147 @@ Now the partiesCount will hold the number of parties and will send it to the dir
 Now run the app.
 Create lots of parties and see that you can see only 3 at a time and you can scroll between the pages with the directive that populates the number of pages automatically.
 
+# Server side pagination
+
+There is only one problem in our current solution - the server doesn't paginate.
+all the documents are sent to the client and only the client filters by pages (the current pages selectors are working on the minimongo on the client).
+
+It can work for most cases, but in some, sending too many documents to the client will result in bad performance.
+
+So the add those selectors to our server, we first should add an options parameter to our publish method:
+
+    Meteor.publish("parties", function (options) {
+
+and then send it to our parties find function:
+
+    return Parties.find({
+      $or:[
+        {$and:[
+          {"public": true},
+          {"public": {$exists: true}}
+        ]},
+      {$and:[
+        {owner: this.userId},
+        {owner: {$exists: true}}
+      ]},
+      {$and:[
+        {invited: this.userId},
+        {invited: {$exists: true}}
+      ]}
+     ]}, options);
+
+
+Read more about the options parameter [here](http://docs.meteor.com/#/full/find).
+
+Now we need to send the options parameter in our subscription.
+To do that, we can't use the subscription we used in the $collection.bind method because it doesn't support parameters,
+so we should replace it with calling directly to the [$subscribe.subscribe method](http://angularjs.meteor.com/api/subscribe).
+
+Let's add a scope function that does that (don't forget to add dependencies to the controller):
+
+    $scope.partiesSubscribe = function(){
+      return $subscribe.subscribe('parties', {
+        limit: parseInt($scope.perPage),
+        skip: (parseInt($scope.page) - 1) * parseInt($scope.perPage),
+        sort: $scope.sort
+      });
+    };
+
+We are actually copying the way angular-meteor is filtering the collection in the client side, but sending it to the server.
+
+We also need to cancel the subscription in the bind method:
+
+    $collection(Parties).bind($scope, 'parties', true, false, true);
+
+and move everything that is happening in the promise of the first subscription to the promise of the new one:
+
+    $collection(Meteor.users).bind($scope, 'users', false, true).then(function(){
+
+      $scope.partiesSubscribe().then(function(){
+
+        $collection(Parties).bind($scope, 'parties', true, false, true);
+
+        $scope.parties.forEach( function (party) {
+          party.onClicked = function () {
+            onMarkerClicked(party);
+          };
+        });
+
+        $scope.filteredParties = $scope.parties;
+
+        $scope.$watch("search", function(search){
+          $scope.filteredParties = $filter("filter")($scope.parties, search);
+        });
+
+        $scope.map = {
+          center: {
+            latitude: 45,
+            longitude: -73
+          },
+          zoom: 8
+        };
+
+        var onMarkerClicked = function(marker){
+          $state.go('partyDetails', {partyId: marker._id});
+        }
+      });
+
+      $collection(Counts).bindOne($scope, 'partiesCount', 'numberOfParties');
+    });
+
+Now we also want to to re-subscribe to our publish method each time we change the page, so the publish method will know our current page:
+
+    $scope.pageChanged = function(newPage) {
+      $scope.page = newPage;
+
+      $scope.partiesSubscribe();
+    };
+
+and the last thing we want to do, is to send the sort parameter with the options,
+because with pagination it can affect which documents will be sent to the client.
+
+So in the HTML template, let's change the values of the sorting dropdown:
+
+    <option value="1">Ascending</option>
+    <option value="-1">Descending</option>
+
+and remove the sorting filter from dir-paginate:
+
+    <li dir-paginate="party in parties | itemsPerPage: perPage | filter:search"
+
+
+in the controller lets associate that dropdown to $scope.sort:
+
+    $scope.$watch('orderProperty', function(){
+      if ($scope.orderProperty)
+        $scope.sort = {name: parseInt($scope.orderProperty)};
+
+      $scope.partiesSubscribe();
+    });
+
+and also initialize it at the beginning:
+
+    $scope.sort = { name: 1 };
+    $scope.orderProperty = '1';
+
+and remove the following line of code (old initialization):
+
+    $scope.orderProperty = 'name';
+
+
+There is a need to re-subscribe after changing the sort parameter because if the sort change will sent different documents to the client the publish
+method needs to know it.
+
+For example, if we had 4 parties and we will change the sorting, then the server will need to send the client the 4th party (which it didn't sent until now).
+
+
+We made a lot of changes so please check the step's code [here](https://github.com/Urigo/meteor-angular-socially/compare/step_14...step_15)
+to make sure you have everything needed and run the application.
+
+# Summery
+
+Now we have full pagination of client and server side with the help of Meteor's options and Angular's directives.
+
 
       {{/markdown}}
     </do-nothing>

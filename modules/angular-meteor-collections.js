@@ -63,7 +63,7 @@ angularMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier', '$subscr
                   limit: parseInt(scope.perPage),
                   skip: (parseInt(scope.page) - 1) * parseInt(scope.perPage)
                 };
-                if (scope.sort) { options.sort = [scope.sort]; }
+                if (scope.sort) { options.sort = scope.sort; }
               }
 
               var ngCollection = new AngularMeteorCollection(collection, $q, selector, options);
@@ -86,8 +86,21 @@ angularMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier', '$subscr
                     return item._id;
                   }).indexOf(oldItem._id);
                   if (index == -1) { // To here get all objects that pushed or spliced
-                    if (oldItem._id) { // This is a check to get only the spliced objects
-                      newItems.remove(oldItem._id);
+                    var localIndex;
+                    if (!oldItem._id)
+                      localIndex = -1;
+                    else if (oldItem._id && !oldItem._id._str)
+                      localIndex = -1;
+                    else {
+                      localIndex = newItems.map(function (item) {
+                        if (item._id)
+                          return item._id._str;
+                      }).indexOf(oldItem._id._str);
+                    }
+                    if (localIndex == -1){
+                      if (oldItem._id) { // This is a check to get only the spliced objects
+                        newItems.remove(oldItem._id);
+                      }
                     }
                   }
                 });
@@ -98,11 +111,12 @@ angularMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier', '$subscr
           rebind();
 
           if (paginate){
-            scope.$watch("page", function(newValue, oldValue){
-              if (!newValue)
+            scope.$watchGroup(['page', 'sort'], function(newValues, oldValues){
+              if (!newValues)
                 return;
 
-              if (newValue == oldValue)
+              if (newValues[0] == oldValues[0] &&
+                newValues[1] == oldValues[1])
                 return;
 
               if (unregisterWatch)
@@ -136,17 +150,17 @@ angularMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier', '$subscr
   }
 ]);
 
-angularMeteorCollections.factory('$amCollection', function($rootScope) {
-  return function(collection, selector, auto, options) {
+angularMeteorCollections.factory('$amCollection', function($rootScope, $q, HashKeyCopier) {
+  return function(collection, auto, selector, options) {
     // Validate parameters
+    if (!selector) selector = {};
     auto = auto || false; // Sets default binding type.
     if (!(typeof auto === 'boolean')) { // Checks if auto is a boolean.
       throw new TypeError("The third argument of bind must be a boolean.");
     }
 
     // Data members
-    var that = this;
-    this.data = null; // Holds the collection fetch result
+    var data = null; // Holds the collection fetch result
 
     /**
      * Fetches the latest data from Meteor and update the data variable.
@@ -155,13 +169,13 @@ angularMeteorCollections.factory('$amCollection', function($rootScope) {
       var ngCollection = new AngularMeteorCollection(collection, $q, selector, options);
 
       // Optimized Update the data array variable
-      var newArray = HashKeyCopier.copyHashKeys(this.data, ngCollection, ["_id"]);
-      that.data = updateAngularCollection(newArray, this.data);
+      var newArray = HashKeyCopier.copyHashKeys(data, ngCollection, ["_id"]);
+      data = updateAngularCollection(newArray, data);
     });
 
     if (auto) { // Deep watches the model and performs autobind.
       var unregisterWatch = $rootScope.$watch(function() {
-        return that.data;
+        return data;
       }, function (newItems, oldItems) {
         if (newItems !== oldItems && angular.isUndefined(newItems)) {
           return unregisterWatch();
@@ -182,7 +196,7 @@ angularMeteorCollections.factory('$amCollection', function($rootScope) {
       }, true);
     }
 
-    return that.data;
+    return data;
   }
 });
 
