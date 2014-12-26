@@ -150,11 +150,11 @@ angularMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier', '$subscr
   }
 ]);
 
-angularMeteorCollections.factory('$amCollection', function($rootScope, $q, HashKeyCopier) {
-  return function(collection, auto, selector, options) {
+angularMeteorCollections.factory('$meteorCollection', function($rootScope, $q, HashKeyCopier) {
+  return function(collection, selector, options, auto) {
     // Validate parameters
     if (!selector) selector = {};
-    auto = auto || false; // Sets default binding type.
+    auto = auto || true; // Sets default binding type.
     if (!(typeof auto === 'boolean')) { // Checks if auto is a boolean.
       throw new TypeError("The third argument of bind must be a boolean.");
     }
@@ -177,18 +177,27 @@ angularMeteorCollections.factory('$amCollection', function($rootScope, $q, HashK
       var unregisterWatch = $rootScope.$watch(function() {
         return data;
       }, function (newItems, oldItems) {
-        if (newItems !== oldItems && angular.isUndefined(newItems)) {
-          return unregisterWatch();
-        }
-
         // Remove items that don't exist in the collection anymore.
         angular.forEach(oldItems, function (oldItem) {
           var index = newItems.map(function (item) {
             return item._id;
           }).indexOf(oldItem._id);
           if (index == -1) { // To here get all objects that pushed or spliced
-            if (oldItem._id) { // This is a check to get only the spliced objects
-              newItems.remove(oldItem._id);
+            var localIndex;
+            if (!oldItem._id)
+              localIndex = -1;
+            else if (oldItem._id && !oldItem._id._str)
+              localIndex = -1;
+            else {
+              localIndex = newItems.map(function (item) {
+                if (item._id)
+                  return item._id._str;
+              }).indexOf(oldItem._id._str);
+            }
+            if (localIndex == -1){
+              if (oldItem._id) { // This is a check to get only the spliced objects
+                newItems.remove(oldItem._id);
+              }
             }
           }
         });
