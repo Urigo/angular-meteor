@@ -150,64 +150,70 @@ angularMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier', '$subscr
   }
 ]);
 
-angularMeteorCollections.factory('$meteorCollection', function($rootScope, $q, HashKeyCopier) {
-  return function(collection, selector, options, auto) {
-    // Validate parameters
-    if (!selector) selector = {};
-    auto = auto || true; // Sets default binding type.
-    if (!(typeof auto === 'boolean')) { // Checks if auto is a boolean.
-      throw new TypeError("The third argument of bind must be a boolean.");
-    }
+angularMeteorCollections.factory('$meteorCollection', ['$rootScope', '$q',
+  function($rootScope, $q) {
+    return function(collection, selector, options, auto) {
 
-    // Data members
-    var data = null; // Holds the collection fetch result
+      // Validate parameters
+      if (!selector) selector = {};
+      if (!(collection instanceof Meteor.Collection)) {
+        throw new TypeError("The first argument of $collection must be a Meteor.Collection object.");
+      }
+      auto = auto !== false;
+      if (!(typeof auto === 'boolean')) { // Checks if auto is a boolean.
+        throw new TypeError("The third argument of bind must be a boolean.");
+      }
 
-    /**
-     * Fetches the latest data from Meteor and update the data variable.
-     */
-    Tracker.autorun(function (self) {
-      var ngCollection = new AngularMeteorCollection(collection, $q, selector, options);
+      // Data members
+      var data = new AngularMeteorCollection(collection, $q, selector, options);
 
-      // Optimized Update the data array variable
-      var newArray = HashKeyCopier.copyHashKeys(data, ngCollection, ["_id"]);
-      data = updateAngularCollection(newArray, data);
-    });
+      /**
+       * Fetches the latest data from Meteor and update the data variable.
+       */
+      Tracker.autorun(function (self) {
+        var ngCollection = new AngularMeteorCollection(collection, $q, selector, options);
 
-    if (auto) { // Deep watches the model and performs autobind.
-      var unregisterWatch = $rootScope.$watch(function() {
-        return data;
-      }, function (newItems, oldItems) {
-        // Remove items that don't exist in the collection anymore.
-        angular.forEach(oldItems, function (oldItem) {
-          var index = newItems.map(function (item) {
-            return item._id;
-          }).indexOf(oldItem._id);
-          if (index == -1) { // To here get all objects that pushed or spliced
-            var localIndex;
-            if (!oldItem._id)
-              localIndex = -1;
-            else if (oldItem._id && !oldItem._id._str)
-              localIndex = -1;
-            else {
-              localIndex = newItems.map(function (item) {
-                if (item._id)
-                  return item._id._str;
-              }).indexOf(oldItem._id._str);
-            }
-            if (localIndex == -1){
-              if (oldItem._id) { // This is a check to get only the spliced objects
-                newItems.remove(oldItem._id);
+        data.length = 0; // Clear initial array
+        data.push.apply(data, ngCollection); // Push data to initial array
+
+        if (!$rootScope.$$phase) $rootScope.$apply();
+      });
+
+      if (auto) { // Deep watches the model and performs autobind.
+        var unregisterWatch = $rootScope.$watch(function() {
+          return data;
+        }, function (newItems, oldItems) {
+          // Remove items that don't exist in the collection anymore.
+          angular.forEach(oldItems, function (oldItem) {
+            var index = newItems.map(function (item) {
+              return item._id;
+            }).indexOf(oldItem._id);
+            if (index == -1) { // To here get all objects that pushed or spliced
+              var localIndex;
+              if (!oldItem._id)
+                localIndex = -1;
+              else if (oldItem._id && !oldItem._id._str)
+                localIndex = -1;
+              else {
+                localIndex = newItems.map(function (item) {
+                  if (item._id)
+                    return item._id._str;
+                }).indexOf(oldItem._id._str);
+              }
+              if (localIndex == -1){
+                if (oldItem._id) { // This is a check to get only the spliced objects
+                  newItems.remove(oldItem._id);
+                }
               }
             }
-          }
-        });
-        newItems.save(); // Saves all items.
-      }, true);
-    }
+          });
+          newItems.save(); // Saves all items.
+        }, true);
+      }
 
-    return data;
-  }
-});
+      return data;
+    }
+  }]);
 
 var AngularMeteorCollection = function (collection, $q, selector, options) {
   var self = collection.find(selector, options).fetch();
