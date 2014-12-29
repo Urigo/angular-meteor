@@ -152,26 +152,26 @@ angularMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier', '$subscr
 
 angularMeteorCollections.factory('$meteorCollection', ['$rootScope', '$q',
   function($rootScope, $q) {
-    return function(collection, selector, options, auto) {
+    return function(reactiveFunc, auto) {
 
       // Validate parameters
-      if (!selector) selector = {};
-      if (!(collection instanceof Meteor.Collection)) {
-        throw new TypeError("The first argument of $collection must be a Meteor.Collection object.");
+      if (!(typeof reactiveFunc == "function")) {
+        throw new TypeError("The first argument of $meteorCollection must be a function.");
       }
       auto = auto !== false;
       if (!(typeof auto === 'boolean')) { // Checks if auto is a boolean.
-        throw new TypeError("The third argument of bind must be a boolean.");
+        throw new TypeError("The second argument of bind must be a boolean.");
       }
 
-      // Data members
-      var data = new AngularMeteorCollection(collection, $q, selector, options);
+      var cursor = reactiveFunc.apply();
+      var data = new AngularMeteorCollection(cursor, $q);
 
       /**
        * Fetches the latest data from Meteor and update the data variable.
        */
       Tracker.autorun(function (self) {
-        var ngCollection = new AngularMeteorCollection(collection, $q, selector, options);
+        var cursor = reactiveFunc.apply();
+        var ngCollection = new AngularMeteorCollection(cursor, $q);
 
         data.length = 0; // Clear initial array
         data.push.apply(data, ngCollection); // Push data to initial array
@@ -216,11 +216,19 @@ angularMeteorCollections.factory('$meteorCollection', ['$rootScope', '$q',
   }]);
 
 var AngularMeteorCollection = function (collection, $q, selector, options) {
-  var self = collection.find(selector, options).fetch();
+  var cursor;
+  if (collection instanceof Meteor.Collection.Cursor) {
+    cursor = collection;
+  }
+  else {
+    cursor = collection.find(selector, options);
+  }
+
+  var self = cursor.fetch();
 
   self.__proto__ = AngularMeteorCollection.prototype;
   self.__proto__.$q = $q;
-  self.$$collection = collection;
+  self.$$collection = cursor.collection;
 
   return self;
 };
