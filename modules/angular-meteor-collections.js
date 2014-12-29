@@ -152,25 +152,36 @@ angularMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier', '$subscr
 
 angularMeteorCollections.factory('$meteorCollection', ['$rootScope', '$q',
   function($rootScope, $q) {
-    return function(reactiveFunc, auto) {
+    return function(reactiveFunc, auto, selector, options) {
 
       // Validate parameters
-      if (!(typeof reactiveFunc == "function")) {
-        throw new TypeError("The first argument of $meteorCollection must be a function.");
+      if (!(typeof reactiveFunc == "function" || reactiveFunc instanceof Mongo.Collection)) {
+        throw new TypeError("The first argument of $meteorCollection must be a function or a Mongo.Collection.");
       }
       auto = auto !== false;
       if (!(typeof auto === 'boolean')) { // Checks if auto is a boolean.
         throw new TypeError("The second argument of bind must be a boolean.");
       }
 
-      var cursor = reactiveFunc.apply();
+
+      function getCursor() {
+        if (reactiveFunc instanceof Mongo.Collection) {
+          return reactiveFunc.find(selector, options);
+        }
+        else {
+          return reactiveFunc.apply();
+        }
+      }
+
+
+      var cursor = getCursor();
       var data = new AngularMeteorCollection(cursor, $q);
 
       /**
        * Fetches the latest data from Meteor and update the data variable.
        */
       Tracker.autorun(function (self) {
-        var cursor = reactiveFunc.apply();
+        var cursor = getCursor();
         var ngCollection = new AngularMeteorCollection(cursor, $q);
 
         data.length = 0; // Clear initial array
