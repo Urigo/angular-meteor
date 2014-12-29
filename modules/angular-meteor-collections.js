@@ -159,7 +159,7 @@ angularMeteorCollections.factory('$meteorCollection', ['$rootScope', '$q',
       if (!(collection instanceof Meteor.Collection)) {
         throw new TypeError("The first argument of $collection must be a Meteor.Collection object.");
       }
-      auto = auto !== false;
+      auto = auto !== false; // Making auto default true - http://stackoverflow.com/a/15464208/1426570
       if (!(typeof auto === 'boolean')) { // Checks if auto is a boolean.
         throw new TypeError("The third argument of bind must be a boolean.");
       }
@@ -170,11 +170,13 @@ angularMeteorCollections.factory('$meteorCollection', ['$rootScope', '$q',
       /**
        * Fetches the latest data from Meteor and update the data variable.
        */
-      Tracker.autorun(function (self) {
+      Tracker.autorun(function(){
         var ngCollection = new AngularMeteorCollection(collection, $q, selector, options);
 
-        data.length = 0; // Clear initial array
-        data.push.apply(data, ngCollection); // Push data to initial array
+        // Clear initial array instead of creating a new one so the our scope will keep track of changes
+        // http://stackoverflow.com/a/20969271/1426570
+        data.length = 0;
+        data.push.apply(data, ngCollection);
 
         if (!$rootScope.$$phase) $rootScope.$apply();
       });
