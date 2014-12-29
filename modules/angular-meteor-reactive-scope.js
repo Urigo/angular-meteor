@@ -7,22 +7,22 @@ angularMeteorReactiveScope.run(['$rootScope', function($rootScope) {
   Object.getPrototypeOf($rootScope).getReactivly = function(property) {
     var self = this;
 
-    if (!self.trackerDeps) {
-      self.trackerDeps = {};
+    if (!self.$$trackerDeps) {
+      self.$$trackerDeps = {};
     }
 
-    if (!self.trackerDeps[property]) {
-      self.trackerDeps[property] = new Tracker.Dependency();
-      self.trackerDeps[property].depend();
-
+    if (!self.$$trackerDeps[property]) {
+      self.$$trackerDeps[property] = new Tracker.Dependency();
 
       self.$watch(function() {
-        return this[property]
+        return self[property]
       }, function() {
-        self.trackerDeps[property].changed();
+        self.$$trackerDeps[property].changed();
       });
     }
 
-    return this[property];
+    self.$$trackerDeps[property].depend();
+
+    return self[property];
   };
 }]);
