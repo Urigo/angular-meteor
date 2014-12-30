@@ -1,8 +1,8 @@
 'use strict';
 var angularMeteorCollections = angular.module('angular-meteor.collections', ['angular-meteor.subscribe']);
 
-angularMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier', '$subscribe',
-  function ($q, HashKeyCopier, $subscribe) {
+angularMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier', '$subscribe', '$rootScope',
+  function ($q, HashKeyCopier, $subscribe, $rootScope) {
     return function (collection, selector, options) {
       if (!selector) selector = {};
       if (!(collection instanceof Meteor.Collection)) {
@@ -66,7 +66,7 @@ angularMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier', '$subscr
                 if (scope.sort) { options.sort = scope.sort; }
               }
 
-              var ngCollection = new AngularMeteorCollection(collection, $q, selector, options);
+              var ngCollection = new AngularMeteorCollection(collection, $q, selector, options, $rootScope);
 
               // Bind collection to model in scope. Transfer $$hashKey based on _id.
               var newArray = HashKeyCopier.copyHashKeys(scope[model], ngCollection, ["_id"]);
@@ -152,8 +152,7 @@ angularMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier', '$subscr
 
 angularMeteorCollections.factory('$meteorCollection', ['$rootScope', '$q',
   function($rootScope, $q) {
-    return function(reactiveFunc, auto, selector, options) {
-
+    return function(reactiveFunc, auto) {
       // Validate parameters
       if (!(typeof reactiveFunc == "function" || reactiveFunc instanceof Mongo.Collection)) {
         throw new TypeError("The first argument of $meteorCollection must be a function or a Mongo.Collection.");
@@ -163,88 +162,137 @@ angularMeteorCollections.factory('$meteorCollection', ['$rootScope', '$q',
         throw new TypeError("The second argument of bind must be a boolean.");
       }
 
-
-      function getCursor() {
-        if (reactiveFunc instanceof Mongo.Collection) {
-          return reactiveFunc.find(selector, options);
-        }
-        else {
-          return reactiveFunc.apply();
+      if (reactiveFunc instanceof Mongo.Collection) {
+        var collection = reactiveFunc;
+        reactiveFunc  = function() {
+          return collection.find({});
         }
       }
 
+      var ngCollection = new AngularMeteorCollection(reactiveFunc(), $q, $rootScope);
 
-      var cursor = getCursor();
-      var data = new AngularMeteorCollection(cursor, $q);
+      function setAutoBind() {
+        if (auto) { // Deep watches the model and performs autobind.
+          ngCollection.unregisterAutoBind = $rootScope.$watchCollection(function () {
+            return ngCollection;
+          }, function (newItems, oldItems) {
+            if (!ngCollection.UPDATING_FROM_SERVER && newItems !== oldItems) {
+              // Remove items that don't exist in the collection anymore.
+              angular.forEach(oldItems, function (oldItem) {
+                var index = newItems.map(function (item) {
+                  return item._id;
+                }).indexOf(oldItem._id);
+                if (index == -1) { // To here get all objects that pushed or spliced
+                  var localIndex;
+                  if (!oldItem._id)
+                    localIndex = -1;
+                  else if (oldItem._id && !oldItem._id._str)
+                    localIndex = -1;
+                  else {
+                    localIndex = newItems.map(function (item) {
+                      if (item._id)
+                        return item._id._str;
+                    }).indexOf(oldItem._id._str);
+                  }
+                  if (localIndex == -1) {
+                    if (oldItem._id) { // This is a check to get only the spliced objects
+                      newItems.remove(oldItem._id);
+                    }
+                  }
+                }
+              });
+              newItems.save(); // Saves all items.
+            }
+          }, true);
+        }
+      }
 
       /**
        * Fetches the latest data from Meteor and update the data variable.
        */
-      Tracker.autorun(function (self) {
-        var cursor = getCursor();
-        var ngCollection = new AngularMeteorCollection(cursor, $q);
-
-        data.length = 0; // Clear initial array
-        data.push.apply(data, ngCollection); // Push data to initial array
-
-        if (!$rootScope.$$phase) $rootScope.$apply();
+      Tracker.autorun(function () {
+        // When the reactive func gets recomputated we need to stop any previous
+        // observeChanges
+        Tracker.onInvalidate(function() {
+          //ngCollection.UPDATING_FROM_SERVER = true;
+          ngCollection.stop();
+        });
+        //ngCollection.UPDATING_FROM_SERVER = false;
+        ngCollection.updateCursor(reactiveFunc());
+        setAutoBind();
       });
 
-      if (auto) { // Deep watches the model and performs autobind.
-        var unregisterWatch = $rootScope.$watch(function() {
-          return data;
-        }, function (newItems, oldItems) {
-          // Remove items that don't exist in the collection anymore.
-          angular.forEach(oldItems, function (oldItem) {
-            var index = newItems.map(function (item) {
-              return item._id;
-            }).indexOf(oldItem._id);
-            if (index == -1) { // To here get all objects that pushed or spliced
-              var localIndex;
-              if (!oldItem._id)
-                localIndex = -1;
-              else if (oldItem._id && !oldItem._id._str)
-                localIndex = -1;
-              else {
-                localIndex = newItems.map(function (item) {
-                  if (item._id)
-                    return item._id._str;
-                }).indexOf(oldItem._id._str);
-              }
-              if (localIndex == -1){
-                if (oldItem._id) { // This is a check to get only the spliced objects
-                  newItems.remove(oldItem._id);
-                }
-              }
-            }
-          });
-          newItems.save(); // Saves all items.
-        }, true);
-      }
-
-      return data;
+      return ngCollection;
     }
   }]);
 
-var AngularMeteorCollection = function (collection, $q, selector, options) {
+var AngularMeteorCollection = function (collection, $q, selector, options, $rootScope) {
+  this.__proto__.$q = $q;
+
   var cursor;
-  if (collection instanceof Meteor.Collection.Cursor) {
+  if (collection instanceof Mongo.Collection.Cursor) {
     cursor = collection;
+    $rootScope = selector;
+
+    this.$$collection = cursor.collection;
   }
   else {
+    this.$$collection = collection;
     cursor = collection.find(selector, options);
   }
 
-  var self = cursor.fetch();
+  this.__proto__.$rootScope = $rootScope;
+  this.updateCursor(cursor);
 
-  self.__proto__ = AngularMeteorCollection.prototype;
-  self.__proto__.$q = $q;
-  self.$$collection = cursor.collection;
-
-  return self;
+  return this;
 };
 
 AngularMeteorCollection.prototype = []; // Allows inheritance of native Array methods.
+
+AngularMeteorCollection.prototype.updateCursor = function(cursor) {
+  var self = this;
+
+  function safeApply() {
+    // Clearing the watch is need so no updates are sent to server
+    // while handling updates from the server
+    self.UPDATING_FROM_SERVER = true;
+    if (!self.$rootScope.$$phase) self.$rootScope.$apply();
+    self.UPDATING_FROM_SERVER = false;
+  }
+
+  // XXX - consider adding an option for a non-orderd result
+  // for faster performance
+  if (self.observeHandle) {
+    self.observeHandle.stop();
+    this.length = 0;
+  }
+  self.observeHandle = cursor.observeChanges ({
+    addedBefore : function(id, fields, before) {
+      self.splice(before, 0, angular.extend(fields, { _id : id }));
+      safeApply();
+    },
+    changed : function(id, fields) {
+      angular.extend(_.findWhere(self, { _id : id }), fields);
+      safeApply();
+    },
+    movedBefore : function(id, before) {
+      var index = self.indexOf(_.findWhere(self, { _id : id }));
+      var removed = self.splice(index, 1)[0];
+      self.splice(before, 0, removed);
+      safeApply();
+    },
+    removed : function(id) {
+      self.splice(self.indexOf(_.findWhere(self, { _id : id })), 1);
+      safeApply();
+    }
+  });
+};
+
+AngularMeteorCollection.prototype.stop = function() {
+  this.unregisterAutoBind();
+  this.observeHandle.stop();
+  this.length = 0;
+};
 
 AngularMeteorCollection.prototype.save = function save(docs) {
   var self = this,
