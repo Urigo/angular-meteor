@@ -69,7 +69,7 @@ angularMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier', '$subscr
               var ngCollection = new AngularMeteorCollection(collection, $q, selector, options, $rootScope);
 
               // Bind collection to model in scope. Transfer $$hashKey based on _id.
-              var newArray = HashKeyCopier.copyHashKeys(scope[model], ngCollection, ["_id"]);
+              var newArray = HashKeyCopier.copyHashKeys(scope[model], ngCollection.data, ["_id"]);
               scope[model] = updateAngularCollection(newArray, scope[model]);
 
               if (!scope.$root.$$phase) scope.$apply(); // Update bindings in scope.
@@ -173,8 +173,8 @@ angularMeteorCollections.factory('$meteorCollection', ['$rootScope', '$q',
 
       function setAutoBind() {
         if (auto) { // Deep watches the model and performs autobind.
-          ngCollection.unregisterAutoBind = $rootScope.$watchCollection(function () {
-            return ngCollection;
+          ngCollection.unregisterAutoBind = $rootScope.$watch(function () {
+            ngCollection.data;
           }, function (newItems, oldItems) {
             if (!ngCollection.UPDATING_FROM_SERVER && newItems !== oldItems) {
               // Remove items that don't exist in the collection anymore.
@@ -196,12 +196,12 @@ angularMeteorCollections.factory('$meteorCollection', ['$rootScope', '$q',
                   }
                   if (localIndex == -1) {
                     if (oldItem._id) { // This is a check to get only the spliced objects
-                      newItems.remove(oldItem._id);
+                      ngCollection.remove(oldItem._id);
                     }
                   }
                 }
               });
-              newItems.save(); // Saves all items.
+              ngCollection.save(); // Saves all items.
             }
           }, true);
         }
@@ -222,12 +222,13 @@ angularMeteorCollections.factory('$meteorCollection', ['$rootScope', '$q',
         setAutoBind();
       });
 
-      return ngCollection;
+      return ngCollection.data;
     }
   }]);
 
 var AngularMeteorCollection = function (collection, $q, selector, options, $rootScope) {
   this.__proto__.$q = $q;
+  this.data = [];
 
   var cursor;
   if (collection instanceof Mongo.Collection.Cursor) {
@@ -247,8 +248,6 @@ var AngularMeteorCollection = function (collection, $q, selector, options, $root
   return this;
 };
 
-AngularMeteorCollection.prototype = []; // Allows inheritance of native Array methods.
-
 AngularMeteorCollection.prototype.updateCursor = function(cursor) {
   var self = this;
 
@@ -264,25 +263,35 @@ AngularMeteorCollection.prototype.updateCursor = function(cursor) {
   // for faster performance
   if (self.observeHandle) {
     self.observeHandle.stop();
-    this.length = 0;
   }
   self.observeHandle = cursor.observeChanges ({
     addedBefore : function(id, fields, before) {
-      self.splice(before, 0, angular.extend(fields, { _id : id }));
+      var newItem = angular.extend(fields, { _id : id });
+      if (before == null) {
+        self.data.push(newItem);
+      }
+      else {
+        self.data.splice(before, 0, newItem);
+      }
       safeApply();
     },
     changed : function(id, fields) {
-      angular.extend(_.findWhere(self, { _id : id }), fields);
+      angular.extend(_.findWhere(self.data, { _id : id }), fields);
       safeApply();
     },
     movedBefore : function(id, before) {
-      var index = self.indexOf(_.findWhere(self, { _id : id }));
-      var removed = self.splice(index, 1)[0];
-      self.splice(before, 0, removed);
+      var index = self.data.indexOf(_.findWhere(self.data, { _id : id }));
+      var removed = self.data.splice(index, 1)[0];
+      if (before == null) {
+        self.data.push(removed);
+      }
+      else {
+        self.data.splice(before, 0, removed);
+      }
       safeApply();
     },
     removed : function(id) {
-      self.splice(self.indexOf(_.findWhere(self, { _id : id })), 1);
+      self.data.splice(self.data.indexOf(_.findWhere(self.data, { _id : id })), 1);
       safeApply();
     }
   });
@@ -291,7 +300,9 @@ AngularMeteorCollection.prototype.updateCursor = function(cursor) {
 AngularMeteorCollection.prototype.stop = function() {
   this.unregisterAutoBind();
   this.observeHandle.stop();
-  this.length = 0;
+  while(this.data.length > 0) {
+    this.data.pop();
+  }
 };
 
 AngularMeteorCollection.prototype.save = function save(docs) {
