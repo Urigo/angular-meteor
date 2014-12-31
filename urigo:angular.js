@@ -2,6 +2,7 @@
 angularMeteor = angular.module('angular-meteor', [
   'angular-meteor.subscribe',
   'angular-meteor.collections',
+  'angular-meteor.meteor-collection',
   'angular-meteor.template',
   'angular-meteor.user',
   'angular-meteor.methods',
