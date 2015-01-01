@@ -4,6 +4,13 @@ Package.describe({
   git: "https://github.com/Urigo/angular-meteor.git"
 });
 
+Package.registerBuildPlugin({
+  name: "compileAngularTemplates",
+  sources: [
+    "plugin/handler.js",
+  ]
+});
+
 Package.on_use(function (api) {
   api.versionsFrom('METEOR@0.9.0.1');
   // Exports the angular package scope

@@ -16,14 +16,6 @@ angularMeteor.injector = function (modules) {
   });
 };
 
-// Change the data-bindings from {{foo}} to [[foo]]
-angularMeteor.config(['$interpolateProvider',
-  function ($interpolateProvider) {
-    $interpolateProvider.startSymbol('[[');
-    $interpolateProvider.endSymbol(']]');
-  }
-]);
-
 var onReady = function () {
   if (!angular.element(document).injector()) {
     angular.bootstrap(document, ['angular-meteor']);
