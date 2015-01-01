@@ -1,8 +1,19 @@
 'use strict';
 var angularMeteorCollections = angular.module('angular-meteor.meteor-collection', []);
 
-var AngularMeteorCollection = function (cursor, $q, $rootScope) {
-  this.data = [];
+var CollectionData = function($subscribe) {
+  this.__proto__.$subscribe = $subscribe;
+};
+
+CollectionData.prototype = [];
+
+CollectionData.prototype.subscribe = function() {
+  this.$subscribe.subscribe.apply(this, arguments);
+  return this;
+};
+
+var AngularMeteorCollection = function (cursor, $q, $rootScope, $subscribe) {
+  this.data = new CollectionData($subscribe);
   this.$$collection = cursor.collection;
   this.__proto__.$q = $q;
   this.__proto__.$rootScope = $rootScope;
@@ -185,8 +196,8 @@ AngularMeteorCollection.prototype.remove = function remove(keys) {
   return $q.all(promises); // Returns all promises when they're resolved.
 };
 
-angularMeteorCollections.factory('$meteorCollection', ['$rootScope', '$q',
-  function($rootScope, $q) {
+angularMeteorCollections.factory('$meteorCollection', ['$rootScope', '$q', '$subscribe',
+  function($rootScope, $q, $subscribe) {
     return function(reactiveFunc, auto) {
       // Validate parameters
       if (!(typeof reactiveFunc == "function" || reactiveFunc instanceof Mongo.Collection)) {
@@ -204,7 +215,7 @@ angularMeteorCollections.factory('$meteorCollection', ['$rootScope', '$q',
         }
       }
 
-      var ngCollection = new AngularMeteorCollection(reactiveFunc(), $q, $rootScope);
+      var ngCollection = new AngularMeteorCollection(reactiveFunc(), $q, $rootScope, $subscribe);
 
       function setAutoBind() {
         if (auto) { // Deep watches the model and performs autobind.
