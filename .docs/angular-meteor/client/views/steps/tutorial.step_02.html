@@ -42,6 +42,7 @@ The view component is constructed by Angular from this template:
 
 __`index.html`:__
 
+      <body>
       <div ng-controller="PartiesListCtrl">
         <ul>
           <li ng-repeat="party in parties">
@@ -50,6 +51,7 @@ __`index.html`:__
           </li>
         </ul>
       </div>
+      </body>
 
 
 We replaced the hard-coded party list with the [ngRepeat](https://docs.angularjs.org/api/ng/directive/ngRepeat) directive and two Angular expressions:
