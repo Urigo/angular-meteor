@@ -7,8 +7,6 @@ Plugin.registerSourceHandler('tpl', {
 }, function(compileStep) {
   var contents = compileStep.read().toString('utf8');
 
-  console.log(compileStep.inputPath);
-
   compileStep.addAsset({
     path : compileStep.inputPath,
     data : contents
