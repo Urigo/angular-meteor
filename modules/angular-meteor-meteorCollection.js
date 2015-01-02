@@ -14,8 +14,11 @@ var getCollectionByName = function (string) {
 
 var angularMeteorCollections = angular.module('angular-meteor.meteor-collection', ['angular-meteor.subscribe']);
 
-angularMeteorCollections.factory('$meteorCollectionData', ['$subscribe', function ($subscribe) {
-  var CollectionData = function () {
+angularMeteorCollections.factory('$meteorCollectionData', ['$q', '$subscribe', function ($q, $subscribe) {
+
+  var collection = {};
+  var CollectionData = function (cursor) {
+    collection = getCollectionByName(cursor.collection.name);
   };
 
   CollectionData.prototype = [];
@@ -25,89 +28,8 @@ angularMeteorCollections.factory('$meteorCollectionData', ['$subscribe', functio
     return this;
   };
 
-  return CollectionData;
-}]);
-
-angularMeteorCollections.factory('$meteorAngularMeteorCollection', ['$q', '$rootScope', '$subscribe', '$meteorCollectionData',
-  function ($q, $rootScope, $subscribe, $meteorCollectionData) {
-  var AngularMeteorCollection = function (cursor) {
-    this.data = new $meteorCollectionData();
-    this.$$collection = getCollectionByName(cursor.collection.name);
-
-    return this;
-  };
-
-  AngularMeteorCollection.prototype.updateCursor = function (cursor) {
-    var self = this;
-
-    function safeApply() {
-      // Clearing the watch is needed so no updates are sent to server
-      // while handling updates from the server
-      self.UPDATING_FROM_SERVER = true;
-      if (!$rootScope.$$phase) $rootScope.$apply();
-      self.UPDATING_FROM_SERVER = false;
-    }
-
-    // XXX - consider adding an option for a non-orderd result
-    // for faster performance
-    if (self.observeHandle) {
-      self.observeHandle.stop();
-    }
-
-    self.observeHandle = cursor.observeChanges({
-      addedBefore: function (id, fields, before) {
-        if (!self.CLIENT_UPDATING) {
-          var newItem = angular.extend(fields, {_id: id});
-          if (before == null) {
-            self.data.push(newItem);
-          }
-          else {
-            self.data.splice(before, 0, newItem);
-          }
-          safeApply();
-        }
-      },
-      changed: function (id, fields) {
-        if (!self.CLIENT_UPDATING) {
-          angular.extend(_.findWhere(self.data, {_id: id}), fields);
-          safeApply();
-        }
-      },
-      movedBefore: function (id, before) {
-        if (!self.CLIENT_UPDATING) {
-          var index = self.data.indexOf(_.findWhere(self.data, {_id: id}));
-          var removed = self.data.splice(index, 1)[0];
-          if (before == null) {
-            self.data.push(removed);
-          }
-          else {
-            self.data.splice(before, 0, removed);
-          }
-          safeApply();
-        }
-      },
-      removed: function (id) {
-        if (!self.CLIENT_UPDATING) {
-          self.data.splice(self.data.indexOf(_.findWhere(self.data, {_id: id})), 1);
-          safeApply();
-        }
-      }
-    });
-  };
-
-  AngularMeteorCollection.prototype.stop = function () {
-    if (this.unregisterAutoBind)
-      this.unregisterAutoBind();
-
-    this.observeHandle.stop();
-    while (this.data.length > 0) {
-      this.data.pop();
-    }
-  };
-
-  AngularMeteorCollection.prototype.save = function save(docs) {
+  CollectionData.prototype.save = function save(docs) {
     var self = this,
-      collection = self.$$collection,
       promises = []; // To store all promises.
 
     /*
@@ -168,14 +90,15 @@ angularMeteorCollections.factory('$meteorAngularMeteorCollection', ['$q', '$root
       } else { // If a single object was passed.
         var currentPromise = upsertObject(docs, $q);
         currentPromise.then(function(result){
-          if (result.action == "inserted")
+          if (result.action == "inserted"){
             docs._id = result._id;
+            self.push(docs);
+          }
         });
-        this.push(currentPromise);
-        promises.push();
+        promises.push(currentPromise);
       }
     } else { // If no 'docs' argument was passed, save the entire collection.
-      angular.forEach(self.data, function (doc) {
+      angular.forEach(_.without(self, 'CLIENT_UPDATING'), function (doc) {
         var currentPromise = upsertObject(doc, $q);
         currentPromise.then(function(result){
           if (result.action == "inserted")
@@ -188,9 +111,8 @@ angularMeteorCollections.factory('$meteorAngularMeteorCollection', ['$q', '$root
     return $q.all(promises); // Returns all promises when they're resolved.
   };
 
-  AngularMeteorCollection.prototype.remove = function remove(keys) {
+  CollectionData.prototype.remove = function remove(keys) {
     var self = this,
-      collection = self.$$collection,
       promises = []; // To store all promises.
 
     /*
@@ -228,18 +150,121 @@ angularMeteorCollections.factory('$meteorAngularMeteorCollection', ['$q', '$root
     if (keys) { // Checks if a 'keys' argument was passed.
       if (angular.isArray(keys)) { // If an array of keys were passed.
         angular.forEach(keys, function (key) {
-          this.push(removeObject(key, $q));
+          var currentPromise = removeObject(key, $q);
+          currentPromise.then(function(result){
+            if (result.action == "removed"){
+              var deletedItemIndex = self.indexOf(_.findWhere(self, {_id: result._id}));
+              if (deletedItemIndex != -1)
+                self.splice(self.indexOf(_.findWhere(self, {_id: result._id})), 1);
+            }
+          });
+          this.push(currentPromise);
         }, promises);
       } else { // If a single key was passed.
-        promises.push(removeObject(keys, $q));
+        var currentPromise = removeObject(keys, $q);
+        currentPromise.then(function(result){
+          if (result.action == "removed"){
+            var deletedItemIndex = self.indexOf(_.findWhere(self, {_id: result._id}));
+            if (deletedItemIndex != -1)
+              self.splice(self.indexOf(_.findWhere(self, {_id: result._id})), 1);
+          }
+        });
+        promises.push(currentPromise);
       }
     } else { // If no 'keys' argument was passed, save the entire collection.
-      angular.forEach(self.data, function (doc) {
-        this.push(removeObject(doc._id, $q));
+      angular.forEach(_.without(self, 'CLIENT_UPDATING'), function (doc) {
+        var currentPromise = removeObject(doc._id, $q);
+        currentPromise.then(function(result){
+          if (result.action == "removed"){
+            var deletedItemIndex = self.indexOf(_.findWhere(self, {_id: result._id}));
+            if (deletedItemIndex != -1)
+              self.splice(self.indexOf(_.findWhere(self, {_id: result._id})), 1);
+          }
+        });
+        this.push(currentPromise);
       }, promises);
     }
 
     return $q.all(promises); // Returns all promises when they're resolved.
+  };
+
+  return CollectionData;
+}]);
+
+angularMeteorCollections.factory('$meteorAngularMeteorCollection', ['$rootScope', '$subscribe', '$meteorCollectionData',
+  function ($rootScope, $subscribe, $meteorCollectionData) {
+  var AngularMeteorCollection = function (cursor) {
+    this.data = new $meteorCollectionData(cursor);
+
+    return this;
+  };
+
+  AngularMeteorCollection.prototype.updateCursor = function (cursor) {
+    var self = this;
+
+    function safeApply() {
+      // Clearing the watch is needed so no updates are sent to server
+      // while handling updates from the server
+      self.UPDATING_FROM_SERVER = true;
+      if (!$rootScope.$$phase) $rootScope.$apply();
+      self.UPDATING_FROM_SERVER = false;
+    }
+
+    // XXX - consider adding an option for a non-orderd result
+    // for faster performance
+    if (self.observeHandle) {
+      self.observeHandle.stop();
+    }
+
+    self.observeHandle = cursor.observeChanges({
+      addedBefore: function (id, fields, before) {
+        if (!self.data.CLIENT_UPDATING) {
+          var newItem = angular.extend(fields, {_id: id});
+          if (before == null) {
+            self.data.push(newItem);
+          }
+          else {
+            self.data.splice(before, 0, newItem);
+          }
+          safeApply();
+        }
+      },
+      changed: function (id, fields) {
+        if (!self.data.CLIENT_UPDATING) {
+          angular.extend(_.findWhere(self.data, {_id: id}), fields);
+          safeApply();
+        }
+      },
+      movedBefore: function (id, before) {
+        if (!self.data.CLIENT_UPDATING) {
+          var index = self.data.indexOf(_.findWhere(self.data, {_id: id}));
+          var removed = self.data.splice(index, 1)[0];
+          if (before == null) {
+            self.data.push(removed);
+          }
+          else {
+            self.data.splice(before, 0, removed);
+          }
+          safeApply();
+        }
+      },
+      removed: function (id) {
+        if (!self.data.CLIENT_UPDATING) {
+          self.data.splice(self.data.indexOf(_.findWhere(self.data, {_id: id})), 1);
+          safeApply();
+        }
+      }
+    });
+  };
+
+  AngularMeteorCollection.prototype.stop = function () {
+    if (this.unregisterAutoBind)
+      this.unregisterAutoBind();
+
+    this.observeHandle.stop();
+    while (this.data.length > 0) {
+      this.data.pop();
+    }
   };
 
   return AngularMeteorCollection;
@@ -269,7 +294,7 @@ angularMeteorCollections.factory('$meteorCollection', ['$rootScope', '$meteorAng
       function setAutoBind() {
         if (auto) { // Deep watches the model and performs autobind.
           ngCollection.unregisterAutoBind = $rootScope.$watch(function () {
-            return ngCollection.data;
+            return _.without(ngCollection.data, 'CLIENT_UPDATING');
           }, function (newItems, oldItems) {
             if (!ngCollection.UPDATING_FROM_SERVER && newItems !== oldItems) {
               // Remove items that don't exist in the collection anymore.
@@ -291,12 +316,12 @@ angularMeteorCollections.factory('$meteorCollection', ['$rootScope', '$meteorAng
                   }
                   if (localIndex == -1) {
                     if (oldItem._id) { // This is a check to get only the spliced objects
-                      ngCollection.remove(oldItem._id);
+                      ngCollection.data.remove(oldItem._id);
                     }
                   }
                 }
               });
-              ngCollection.save(); // Saves all items.
+              ngCollection.data.save(); // Saves all items.
             }
           }, true);
         }
