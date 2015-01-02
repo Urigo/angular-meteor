@@ -93,7 +93,7 @@ Now each time the user types inside those inputs, the value of the newParty scop
 Now let's bind a click event to the add button with Angular's [ng-click](https://docs.angularjs.org/api/ng/directive/ngClick) directive.
 
 
-    <button ng-click="parties.push(newParty)">Add</button>
+    <button ng-click="parties.push(newParty); newParty='';">Add</button>
 
 ng-click binds the click event into an expression.
 So we take the parties scope array (when accessing scope variables in the HTML, there is no need to add $scope. before) and push the newParty variable into it.
@@ -139,6 +139,41 @@ And this is how the controller should look now:
 
 
 Now try to delete a few parties and also watch them being removed from other browser clients.
+
+
+# AngularMeteorCollection functions
+
+$meteorCollection's return value is a new collection from type AngularMeteorCollection.
+
+It is not only responsible for keeping the collection updated, it also has helper functions for saving and deleting objects.
+
+Let's try to use instead of the current solution.
+
+First let's replace our push to save in the add button action:
+
+    <button ng-click="parties.save(newParty); newParty='';">Add</button>
+
+There isn't a lot of difference here accept a little bit of performance, but now let's change our remove function:
+
+    $scope.remove = function(party){
+      $scope.parties.remove(party);
+    };
+
+Much nicer!  and also better performance.
+
+Let's also add a button for remove all parties:
+
+    <button ng-click="removeAll()">remove all</button>
+
+and add it's function in the scope:
+
+    $scope.removeAll = function(){
+      $scope.parties.remove();
+    };
+
+Very simple syntax.
+
+You can read more about AngularMeteorCollection and it's helper functions in the [API reference](http://angularjs.meteor.com/api/AngularMeteorCollection).
 
 
 # Summary
