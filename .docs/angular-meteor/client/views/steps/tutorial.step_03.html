@@ -128,6 +128,35 @@ Run the app and see if you see the list of parties on the screen.
 
 In the next chapter we will see how easy it is to manipulate the data, save and publish the changes to the server and all the connected clients.
 
+# Inserting parties from the console
+
+Items inside collections are called documents. Let's use the server database console to insert some documents into our collection.
+In a new terminal tab, go to your app directory and type:
+
+    meteor mongo
+
+This opens a console into your app's local development database. Into the prompt, type:
+
+    db.parties.insert({ name: "A new party", description: "From the mongo console!" });
+
+In your web browser, you will see the UI of your app immediately update to show the new party.
+You can see that we didn't have to write any code to connect the server-side database to our front-end code — it just happened automatically.
+
+Insert a few more parties from the database console with different text.
+
+Now let's do the same but with remove. Into the prompt, type the following command to look at all the parties and their properties:
+
+    db.parties.find({});
+
+Now choose one party you want to remove and copy it's id property.
+Then, remove it like that (replace N4KzMEvtm4dYvk2TF with your party's id value):
+
+    db.parties.remove( {"_id": "N4KzMEvtm4dYvk2TF"});
+
+Again, you will see the UI of your app immediately update to without the removed party.
+
+In the next step, we'll see how to add functionality to our app's UI so that we can add parties without using the database console.
+
 
 # Summary
 
