@@ -1,4 +1,17 @@
 'use strict';
+
+var getCollectionByName = function (string) {
+  for (var globalObject in window) {
+    if (window[globalObject] instanceof Meteor.Collection) {
+      if (window[globalObject]._name == string){
+        return window[globalObject];
+        break;
+      }
+    }
+  }
+  return undefined; // if none of the collections match
+};
+
 var angularMeteorCollections = angular.module('angular-meteor.meteor-collection', ['angular-meteor.subscribe']);
 
 angularMeteorCollections.factory('$meteorCollectionData', ['$subscribe', function ($subscribe) {
@@ -15,11 +28,11 @@ angularMeteorCollections.factory('$meteorCollectionData', ['$subscribe', functio
   return CollectionData;
 }]);
 
-angularMeteorCollections.factory('$meteorAngularMeteorCollection', ['$q', '$rootScope', '$subscribe', '$meteorCollectionData', function ($q, $rootScope, $subscribe, $meteorCollectionData) {
-  var AngularMeteorCollection = function (cursor, collection) {
+angularMeteorCollections.factory('$meteorAngularMeteorCollection', ['$q', '$rootScope', '$subscribe', '$meteorCollectionData',
+  function ($q, $rootScope, $subscribe, $meteorCollectionData) {
+  var AngularMeteorCollection = function (cursor) {
     this.data = new $meteorCollectionData();
-    this.$$collection = collection;
-    this.updateCursor(cursor);
+    this.$$collection = getCollectionByName(cursor.collection.name);
 
     return this;
   };
@@ -83,7 +96,9 @@ angularMeteorCollections.factory('$meteorAngularMeteorCollection', ['$q', '$root
   };
 
   AngularMeteorCollection.prototype.stop = function () {
-    this.unregisterAutoBind();
+    if (this.unregisterAutoBind)
+      this.unregisterAutoBind();
+
     this.observeHandle.stop();
     while (this.data.length > 0) {
       this.data.pop();
@@ -143,14 +158,30 @@ angularMeteorCollections.factory('$meteorAngularMeteorCollection', ['$q', '$root
     if (docs) { // Checks if a 'docs' argument was passed.
       if (angular.isArray(docs)) { // If an array of objects were passed.
         angular.forEach(docs, function (doc) {
-          this.push(upsertObject(doc, $q));
+          var currentPromise = upsertObject(doc, $q);
+          currentPromise.then(function(result){
+            if (result.action == "inserted")
+              doc._id = result._id;
+          });
+          this.push(currentPromise);
         }, promises);
       } else { // If a single object was passed.
-        promises.push(upsertObject(docs, $q));
+        var currentPromise = upsertObject(docs, $q);
+        currentPromise.then(function(result){
+          if (result.action == "inserted")
+            docs._id = result._id;
+        });
+        this.push(currentPromise);
+        promises.push();
       }
     } else { // If no 'docs' argument was passed, save the entire collection.
       angular.forEach(self.data, function (doc) {
-        this.push(upsertObject(doc, $q));
+        var currentPromise = upsertObject(doc, $q);
+        currentPromise.then(function(result){
+          if (result.action == "inserted")
+            doc._id = result._id;
+        });
+        this.push(currentPromise);
       }, promises);
     }
 
@@ -216,25 +247,24 @@ angularMeteorCollections.factory('$meteorAngularMeteorCollection', ['$q', '$root
 
 angularMeteorCollections.factory('$meteorCollection', ['$rootScope', '$meteorAngularMeteorCollection',
   function ($rootScope, $meteorAngularMeteorCollection) {
-    return function (collection, auto, reactiveFunc) {
+    return function (reactiveFunc, auto) {
       // Validate parameters
-      if (angular.isDefined(collection) && !(collection instanceof Mongo.Collection)) {
-        throw new TypeError("The first argument of $meteorCollection must be a collection.");
+      if (!reactiveFunc) {
+        throw new TypeError("The first argument of $meteorCollection is undefined.");
       }
-      if (reactiveFunc) {
-        if (!(typeof reactiveFunc == "function")) {
-          throw new TypeError("The third argument of $meteorCollection must be a function that returns a cursor.");
-        }
+      if (!(typeof reactiveFunc == "function" || reactiveFunc instanceof Mongo.Collection)) {
+        throw new TypeError("The first argument of $meteorCollection must be a function or a Mongo.Collection.");
       }
       auto = auto !== false;
 
-      if (!reactiveFunc) {
-        reactiveFunc = function () {
+      if (reactiveFunc instanceof Mongo.Collection) {
+        var collection = reactiveFunc;
+        reactiveFunc = function() {
           return collection.find({});
         }
       }
 
-      var ngCollection = new $meteorAngularMeteorCollection(reactiveFunc(), collection);
+      var ngCollection = new $meteorAngularMeteorCollection(reactiveFunc());
 
       function setAutoBind() {
         if (auto) { // Deep watches the model and performs autobind.
