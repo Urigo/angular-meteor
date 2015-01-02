@@ -181,8 +181,8 @@ angularMeteorCollections.factory('$meteorCollectionData', ['$q', '$subscribe', '
   return CollectionData;
 }]);
 
-angularMeteorCollections.factory('$meteorAngularMeteorCollection', ['$rootScope', '$subscribe', '$meteorCollectionData',
-  function ($rootScope, $subscribe, $meteorCollectionData) {
+angularMeteorCollections.factory('$meteorAngularMeteorCollection', ['$rootScope', '$meteorCollectionData',
+  function ($rootScope, $meteorCollectionData) {
   var AngularMeteorCollection = function (cursor) {
     this.data = new $meteorCollectionData(cursor);
 
