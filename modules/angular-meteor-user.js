@@ -1,14 +1,10 @@
-var angularMeteorUser = angular.module('angular-meteor.user', []);
+var angularMeteorUser = angular.module('angular-meteor.user', ['angular-meteor.utils']);
 
-angularMeteorUser.run(['$rootScope', function($rootScope){
-  Tracker.autorun(function(self) {
+angularMeteorUser.run(['$rootScope', '$meteorUtils', function($rootScope, $meteorUtils){
+  $meteorUtils.autorun($rootScope, function(){
     if (Meteor.user) {
       $rootScope.currentUser = Meteor.user();
       $rootScope.loggingIn = Meteor.loggingIn();
-      if (!$rootScope.$$phase) $rootScope.$apply();
-      $rootScope.$on('$destroy', function () {
-        self.stop(); // Stop computation if scope is destroyed.
-      });
     }
   });
 }]);
