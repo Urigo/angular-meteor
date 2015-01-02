@@ -1,19 +1,15 @@
 'use strict';
-var angularMeteorSession = angular.module('angular-meteor.session', []);
+var angularMeteorSession = angular.module('angular-meteor.session', ['angular-meteor.utils']);
 
-angularMeteorSession.factory('$session', [
-  function () {
+angularMeteorSession.factory('$session', ['$meteorUtils',
+  function ($meteorUtils) {
     return function (session) {
 
       return {
 
         bind: function(scope, model) {
-          Tracker.autorun(function(self) {
+          $meteorUtils.autorun(scope, function() {
             scope[model] = Session.get(session);
-            if (!scope.$root.$$phase) scope.$apply(); // Update bindings in scope.
-            scope.$on('$destroy', function () {
-              self.stop(); // Stop computation if scope is destroyed.
-            });
           });
 
           scope.$watch(model, function (newItem, oldItem) {
