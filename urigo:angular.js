@@ -8,6 +8,7 @@ angularMeteor = angular.module('angular-meteor', [
   'angular-meteor.methods',
   'angular-meteor.session',
   'angular-meteor.reactive-scope',
+  'angular-meteor.utils',
   'hashKeyCopier'
 ]);
 

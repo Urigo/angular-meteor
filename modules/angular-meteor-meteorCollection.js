@@ -1,24 +1,14 @@
 'use strict';
 
-var getCollectionByName = function (string) {
-  for (var globalObject in window) {
-    if (window[globalObject] instanceof Meteor.Collection) {
-      if (window[globalObject]._name == string){
-        return window[globalObject];
-        break;
-      }
-    }
-  }
-  return undefined; // if none of the collections match
-};
+var angularMeteorCollections = angular.module('angular-meteor.meteor-collection',
+  ['angular-meteor.subscribe', 'angular-meteor.utils']);
 
-var angularMeteorCollections = angular.module('angular-meteor.meteor-collection', ['angular-meteor.subscribe']);
-
-angularMeteorCollections.factory('$meteorCollectionData', ['$q', '$subscribe', function ($q, $subscribe) {
+angularMeteorCollections.factory('$meteorCollectionData', ['$q', '$subscribe', '$meteorUtils',
+  function ($q, $subscribe, $meteorUtils) {
 
   var collection = {};
   var CollectionData = function (cursor) {
-    collection = getCollectionByName(cursor.collection.name);
+    collection = $meteorUtils.getCollectionByName(cursor.collection.name);
   };
 
   CollectionData.prototype = [];

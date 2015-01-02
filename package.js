@@ -35,6 +35,7 @@ Package.on_use(function (api) {
     'modules/angular-meteor-methods.js',
     'modules/angular-meteor-session.js',
     'modules/angular-meteor-reactive-scope.js',
+    'modules/angular-meteor-utils.js',
     // Finally load angular-meteor File
     'urigo:angular.js'
   ], 'client');
