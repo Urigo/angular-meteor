@@ -14,8 +14,7 @@ angularMeteorCollections.factory('$meteorCollectionData', ['$q', '$subscribe', '
   CollectionData.prototype = [];
 
   CollectionData.prototype.subscribe = function () {
-    $subscribe.subscribe.apply(this, arguments);
-    return this;
+    return $subscribe.subscribe.apply(this, arguments);
   };
 
   CollectionData.prototype.save = function save(docs) {
