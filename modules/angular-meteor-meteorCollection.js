@@ -22,7 +22,8 @@ AngularMeteorCollection.prototype = [];
 
 AngularMeteorCollection.prototype.subscribe = function () {
   var self = this;
-  return self.$subscribe.subscribe.apply(this, arguments);
+  self.$subscribe.subscribe.apply(this, arguments);
+  return this;
 };
 
 AngularMeteorCollection.prototype.save = function save(docs) {
@@ -215,7 +216,8 @@ AngularMeteorCollection.prototype.updateCursor = function (cursor) {
           self.push(newItem);
         }
         else {
-          self.splice(before, 0, newItem);
+          var beforeIndex = _.indexOf(self, _.findWhere(self, { _id: id}));
+          self.splice(beforeIndex, 0, newItem);
         }
         safeApply();
       }
@@ -234,7 +236,8 @@ AngularMeteorCollection.prototype.updateCursor = function (cursor) {
           self.push(removed);
         }
         else {
-          self.splice(before, 0, removed);
+          var beforeIndex = _.indexOf(self, _.findWhere(self, { _id: id}));
+          self.splice(beforeIndex, 0, removed);
         }
         safeApply();
       }
@@ -278,6 +281,8 @@ angularMeteorCollections.factory('$meteorCollection', ['$q', '$subscribe', '$met
         }
       }
 
+      var itemAddedDep = new Tracker.Dependency();
+
       var ngCollection = new AngularMeteorCollection(reactiveFunc(), $q, $subscribe, $meteorUtils, $rootScope);
 
       function setAutoBind() {
@@ -310,7 +315,11 @@ angularMeteorCollections.factory('$meteorCollection', ['$q', '$subscribe', '$met
                   }
                 }
               });
-              ngCollection.save(); // Saves all items.
+              ngCollection.save().then(function() { // Saves all items.
+                if(newItems.length > oldItems.length) {
+                  itemAddedDep.changed();
+                }
+              });
             }
           }, true);
         }
@@ -329,6 +338,8 @@ angularMeteorCollections.factory('$meteorCollection', ['$q', '$subscribe', '$met
         //ngCollection.UPDATING_FROM_SERVER = false;
         ngCollection.updateCursor(reactiveFunc());
         setAutoBind();
+
+        itemAddedDep.depend();
       });
 
       return ngCollection;
