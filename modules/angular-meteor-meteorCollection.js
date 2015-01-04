@@ -6,9 +6,11 @@ var angularMeteorCollections = angular.module('angular-meteor.meteor-collection'
 angularMeteorCollections.factory('$meteorCollectionData', ['$q', '$subscribe', '$meteorUtils',
   function ($q, $subscribe, $meteorUtils) {
 
-  var collection = {};
   var CollectionData = function (cursor) {
-    collection = $meteorUtils.getCollectionByName(cursor.collection.name);
+    var self = this;
+
+    self.$$collection = $meteorUtils.getCollectionByName(cursor.collection.name);
+
   };
 
   CollectionData.prototype = [];
@@ -40,7 +42,7 @@ angularMeteorCollections.factory('$meteorCollectionData', ['$q', '$subscribe', '
         delete item._id; // Remove the _id property so that it can be $set using update.
         var objectId = (item_id._str) ? new Meteor.Collection.ObjectID(item_id._str) : item_id;
         self.CLIENT_UPDATING = true;
-        collection.update(objectId, {$set: item}, function (error) {
+        self.$$collection.update(objectId, {$set: item}, function (error) {
           self.CLIENT_UPDATING = false;
           if (error) {
             deferred.reject(error);
@@ -50,7 +52,7 @@ angularMeteorCollections.factory('$meteorCollectionData', ['$q', '$subscribe', '
         });
       } else { // Performs an insert if the _id property isn't set.
         self.CLIENT_UPDATING = true;
-        collection.insert(item, function (error, result) {
+        self.$$collection.insert(item, function (error, result) {
           self.CLIENT_UPDATING = false;
           if (error) {
             deferred.reject(error);
@@ -118,7 +120,7 @@ angularMeteorCollections.factory('$meteorCollectionData', ['$q', '$subscribe', '
         }
         var objectId = (key._str) ? new Meteor.Collection.ObjectID(key._str) : key;
         self.CLIENT_UPDATING = true;
-        collection.remove(objectId, function (error) {
+        self.$$collection.remove(objectId, function (error) {
           self.CLIENT_UPDATING = false;
           if (error) {
             deferred.reject(error);
