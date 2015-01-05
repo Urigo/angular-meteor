@@ -1,7 +1,7 @@
 'use strict';
 var angularMeteorMethods = angular.module('angular-meteor.methods', []);
 
-angularMeteorMethods.service('$methods', ['$q',
+angularMeteorMethods.service('$meteorMethods', ['$q',
   function ($q) {
     this.call = function(){
 
