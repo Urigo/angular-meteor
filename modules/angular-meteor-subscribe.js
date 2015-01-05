@@ -1,7 +1,7 @@
 'use strict';
 var angularMeteorSubscribe = angular.module('angular-meteor.subscribe', []);
 
-angularMeteorSubscribe.service('$subscribe', ['$q',
+angularMeteorSubscribe.service('$meteorSubscribe', ['$q',
   function ($q) {
     this.subscribe = function(){
       var deferred = $q.defer();

@@ -4,13 +4,13 @@ var angularMeteorCollections = angular.module('angular-meteor.meteor-collection'
   ['angular-meteor.subscribe', 'angular-meteor.utils']);
 
 
-var AngularMeteorCollection = function (cursor, $q, $subscribe, $meteorUtils, $rootScope) {
+var AngularMeteorCollection = function (cursor, $q, $meteorSubscribe, $meteorUtils, $rootScope) {
 
   var self = [];
 
   self.__proto__ = AngularMeteorCollection.prototype;
   self.__proto__.$q = $q;
-  self.__proto__.$subscribe = $subscribe;
+  self.__proto__.$meteorSubscribe = $meteorSubscribe;
   self.__proto__.$rootScope = $rootScope;
 
   self.$$collection = $meteorUtils.getCollectionByName(cursor.collection.name);
@@ -22,7 +22,7 @@ AngularMeteorCollection.prototype = [];
 
 AngularMeteorCollection.prototype.subscribe = function () {
   var self = this;
-  self.$subscribe.subscribe.apply(this, arguments);
+  self.$meteorSubscribe.subscribe.apply(this, arguments);
   return this;
 };
 
@@ -262,8 +262,8 @@ AngularMeteorCollection.prototype.stop = function () {
 };
 
 
-angularMeteorCollections.factory('$meteorCollection', ['$q', '$subscribe', '$meteorUtils', '$rootScope',
-  function ($q, $subscribe, $meteorUtils, $rootScope) {
+angularMeteorCollections.factory('$meteorCollection', ['$q', '$meteorSubscribe', '$meteorUtils', '$rootScope',
+  function ($q, $meteorSubscribe, $meteorUtils, $rootScope) {
     return function (reactiveFunc, auto) {
       // Validate parameters
       if (!reactiveFunc) {
@@ -283,7 +283,7 @@ angularMeteorCollections.factory('$meteorCollection', ['$q', '$subscribe', '$met
 
       var itemAddedDep = new Tracker.Dependency();
 
-      var ngCollection = new AngularMeteorCollection(reactiveFunc(), $q, $subscribe, $meteorUtils, $rootScope);
+      var ngCollection = new AngularMeteorCollection(reactiveFunc(), $q, $meteorSubscribe, $meteorUtils, $rootScope);
 
       function setAutoBind() {
         if (auto) { // Deep watches the model and performs autobind.

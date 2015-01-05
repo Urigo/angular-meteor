@@ -145,8 +145,8 @@ var updateAngularCollection = function (newArray, oldArray) {
   return newArray;
 };
 
-angularMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier', '$subscribe',
-  function ($q, HashKeyCopier, $subscribe) {
+angularMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier', '$meteorSubscribe',
+  function ($q, HashKeyCopier, $meteorSubscribe) {
     return function (collection, selector, options) {
       if (!selector) selector = {};
       if (!(collection instanceof Meteor.Collection)) {
@@ -180,7 +180,7 @@ angularMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier', '$subscr
             else
               publishName = publisher;
 
-            $subscribe.subscribe(publishName).then(function(){
+            $meteorSubscribe.subscribe(publishName).then(function(){
               deferred.resolve(scope[model]);
             });
 
@@ -279,7 +279,7 @@ angularMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier', '$subscr
             else
               publishName = publisher;
 
-            $subscribe.subscribe(publishName).then(function(){
+            $meteorSubscribe.subscribe(publishName).then(function(){
               deferred.resolve(scope[model]);
             });
 
