@@ -108,7 +108,9 @@ So now let's re-structure our app (to see the end result and all the steps in gi
 8. Create a new file inside the client->parties->controllers folder called 'partiesList.js'. Cut the code for the PartiesListCtrl from app.js and place it in there.
 9. Create a new file inside the client->parties->controllers folder called 'partyDetails.js'. Cut the code for the PartyDetailsCtrl from app.js and place it in there.
 10. Move index.html into the 'client' folder.
-11. Move parties-list.html and party-details.html into the client->parties->views folder.
+11. Move parties-list.tpl and party-details.tpl into the client->parties->views folder.
+12. Update the templateUrl in the routes to our templates to -  templateUrl: 'client/parties/views/party-details.tpl' and templateUrl: 'client/parties/views/parties-list.tpl'
+
 
 As you can see, everything is still working as before.
 We haven't needed to change any references in index.html like other frameworks. Meteor just takes care of all this.
