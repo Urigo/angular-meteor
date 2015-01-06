@@ -1,4 +1,4 @@
-<template name="tutorial.step_05.html">
+
   <div class="row">
   <div class="col-md-12">
     <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/steps/tutorial.step_05.html"
@@ -21,24 +21,38 @@
   </div>
 
   <do-nothing class="col-md-12">
-      {{#markdown}}
+  <btf-markdown>
 
 In this step, you will learn how to create a layout template and how to build an app that has multiple views by adding routing, using an Angular module called 'ui-router'.
 
 The goals for this step:
 
-* When you will navigate to index.html, you will be redirected to index.html/parties and the party list appears in the browser.
+* When you will navigate to index.tpl, you will be redirected to index.tpl/parties and the party list appears in the browser.
 * When you click on a party link the url changes to one specific to that party and the stub of a party detail page is displayed.
 
 # Dependencies
 
 The routing functionality added by this step is provided by the [ui-router](https://github.com/angular-ui/ui-router) module, which is distributed separately from the core Angular framework.
 
-We are using a [Meteor package](https://github.com/Urigo/meteor-angular-ui-router) to add this module to our app.
+We will install ui-router with the help of [bower](http://bower.io/).
+To add bower functionality to Meteor we are using a Meteor package called [mquandalle:bower](https://atmospherejs.com/mquandalle/bower).
 
 Type in the command line:
 
-    meteor add urigo:angular-ui-router
+    meteor add mquandalle:bower
+
+Then add a new file in the root of your project called 'bower.json' and fill it up with these lines:
+
+__`bower.json`:__
+
+    {
+      "name": "socially",
+      "version": "0.0.1",
+      "dependencies": {
+        "angular-ui-router": "0.2.13"
+      },
+      "private": true
+    }
 
 Then add the ui-router as a dependency to our angular app in app.js:
 
@@ -48,11 +62,11 @@ Then add the ui-router as a dependency to our angular app in app.js:
 # Multiple Views, Routing and Layout Template
 
 Our app is slowly growing and becoming more complex.
-Until now, the app provided our users with a single view (the list of all parties), and all of the template code was located in the index.html file.
+Until now, the app provided our users with a single view (the list of all parties), and all of the template code was located in the index.tpl file.
 The next step in building the app is to add a view that will show detailed information about each of the parties in our list.
 
-To add the detailed view, we could expand the index.html file to contain template code for both views, but that would get messy very quickly.
-Instead, we are going to turn the index.html template into what we call a "layout template". This is a template that is common for all views in our application.
+To add the detailed view, we could expand the index.tpl file to contain template code for both views, but that would get messy very quickly.
+Instead, we are going to turn the index.tpl template into what we call a "layout template". This is a template that is common for all views in our application.
 Other "partial templates" are then included into this layout template depending on the current "route" — the view that is currently displayed to the user.
 
 Application routes in Angular are declared via the [$stateProvider](https://github.com/angular-ui/ui-router/wiki), which is the provider of the $state service.
@@ -64,34 +78,37 @@ Using this feature we can implement deep linking, which lets us utilize the brow
 
 The $state service is usually used in conjunction with the uiView directive.
 The role of the uiView directive is to include the view template for the current route into the layout template.
-This makes it a perfect fit for our index.html template.
+This makes it a perfect fit for our index.tpl template.
 
-Let's create a new html file called parties-list.html and paste the existing list code from index.html into it:
+Let's create a new html file called parties-list.tpl and paste the existing list code from index.tpl into it:
 
-__`parties-list.html`:__
+__`parties-list.tpl`:__
 
-      <template name="parties-list.html">
-        <form>
-          <label>Name</label>
-          <input ng-model="newParty.name">
-          <label>Description</label>
-          <input ng-model="newParty.description">
-          <button ng-click="parties.push(newParty)">Add</button>
-        </form>
-        <ul>
-          <li ng-repeat="party in parties">
-            <a href="/parties/[[party._id]]">[[party.name]]</a>
+      </btf-markdown>
 
-            <p>[[party.description]]</p>
-            <button ng-click="remove(party)">X</button>
-          </li>
-        </ul>
-      {{lt}}/template>
+<pre><code><span class="xml">    <span class="hljs-tag">&lt;<span class="hljs-title">form</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">label</span>&gt;</span>Name<span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">"newParty.name"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">label</span>&gt;</span>Description<span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">"newParty.description"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">ng-click</span>=<span class="hljs-value">"parties.push(newParty)"</span>&gt;</span>Add<span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">form</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">ul</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">ng-repeat</span>=<span class="hljs-value">"party in parties"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"/parties/</span></span></span><span class="hljs-expression">{{<span class="hljs-variable">party.</span>_<span class="hljs-variable">id</span>}}</span><span class="xml"><span class="hljs-tag"><span class="hljs-value">"</span>&gt;</span></span><span class="hljs-expression">{{<span class="hljs-variable">party.name</span>}}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
 
-The code is almost the same except these changes:
+        <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span></span><span class="hljs-expression">{{<span class="hljs-variable">party.description</span>}}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">ng-click</span>=<span class="hljs-value">"remove(party)"</span>&gt;</span>X<span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span></span>
+</code></pre>
 
-1. Wrapped the code in a template tag with a name attribute
-2. Added a link to the parties name display (that link will take us the that party's detailed page)
+    <btf-markdown>
+
+
+The code is almost the same except for this one change:
+
+- Added a link to the parties name display (that link will take us the that party's detailed page)
 
 ## Meteor templates
 
@@ -106,34 +123,39 @@ Now let's go back to index.html and replace the content with the ui-view directi
 
 __`index.html`:__
 
-      <head>
-        <base href="/">
-      </head>
-      <body>
+</btf-markdown>
 
-      <div>
-        <h1>
-          <a href="/parties">Home</a>
-        </h1>
-        <div ui-view></div>
-      </div>
+<pre><code>  <span class="hljs-tag">&lt;<span class="hljs-title">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">base</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"/"</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">head</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">body</span>&gt;</span>
 
-      </body>
+  <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">h1</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"/parties"</span>&gt;</span>Home<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">h1</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">ui-view</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
 
+  <span class="hljs-tag">&lt;/<span class="hljs-title">body</span>&gt;</span>
+</code></pre>
+
+    <btf-markdown>
 Notice we did 2 things:
 
 1. replaced all the content with ui-view (that will be responsible of including the right content according to the current url)
 2. Added an h1 header with a link to the main parties page
 3. We added base tag the head (required when using HTML5 location mode)
 
+Now we can delete the index.tpl file which we don't use anymore.
+
 Now let's add a placeholder to the new party details page.
-Create a new html file called party-details.html and paste the following code in:
+Create a new html file called party-details.tpl and paste the following code in:
 
-__`party-details.html`:__
+__`party-details.tpl`:__
 
-      <template name="party-details.html">
-        Here you will see the details of party number: [[ partyId ]]
-      {{lt}}/template>
+
+        Here you will see the details of party number: {{ partyId }}
 
 We will get to it later on.
 
@@ -151,12 +173,12 @@ Add this config code in app.js, after the angular app has been defined:
         $stateProvider
           .state('parties', {
             url: '/parties',
-            template: UiRouter.template('parties-list.html'),
+            templateUrl: 'parties-list.tpl',
             controller: 'PartiesListCtrl'
           })
           .state('partyDetails', {
             url: '/parties/:partyId',
-            template: UiRouter.template('party-details.html'),
+            templateUrl: 'party-details.tpl',
             controller: 'PartyDetailsCtrl'
           });
 
@@ -179,7 +201,7 @@ All variables defined with the : notation are extracted into the $stateParams ob
 
 # Controllers
 
-As you might have seen we removed the controller definition from the ng-controller directive in the index.html and moved it into the routes definitions.
+As you might have seen we removed the controller definition from the ng-controller directive in the index.tpl and moved it into the routes definitions.
 
 But we still need to define our PartyDetailsCtrl controller.
 Add this code under the existing controller:
@@ -199,19 +221,12 @@ Now we have all in place.  Run the app and notice a few things:
 * Try to put arbitrary text in the url - something like http://localhost/strange-url  .  you are supposed to be automatically redirected to the main parties list.
 
 
-# Experiments
-
-Try to add an [[parties]] binding to index.html, and you'll see that nothing happens even when you are in the parties list view.
-This is because the parties model is visible only in the scope managed by PartiesListCtrl, which is associated with the div ng-view element.
-If you add the same binding into the parties-list.html template, the binding will work as expected.
-
-
 # Summary
 
 With the routing set up and the parties list view implemented, we're ready to go to the next step to implement the party details view.
 
 
-      {{/markdown}}
+        </btf-markdown>
     </do-nothing>
 
     <ul class="btn-group tutorial-nav">
@@ -221,4 +236,4 @@ With the routing set up and the parties list view implemented, we're ready to go
       <a href="/tutorial/step_06"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
     </ul>
   </div>
-</template>
+
