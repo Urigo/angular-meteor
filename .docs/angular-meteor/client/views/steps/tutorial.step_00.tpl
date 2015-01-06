@@ -1,4 +1,4 @@
-<template name="tutorial.step_00.html">
+
   <div class="row">
     <div class="col-md-12">
         <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/steps/tutorial.step_00.html"
@@ -19,9 +19,8 @@
       <div class="video-tutorial col-md-4">
         <iframe width="300" height="169" src="//www.youtube.com/embed/LVuCeKswPPE?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd" frameborder="0" allowfullscreen></iframe>
       </div>
-
     <do-nothing class="col-md-12">
-      {{#markdown}}
+      <btf-markdown>
 
 You are now ready to build the Meteor-Angular socially app.
 
@@ -71,7 +70,7 @@ __`index.html`:__
 
 As you can see, there is no html tag, no head tag, very simple.
 
-  
+
 The reason is the way Meteor structures and serves files to the client.
 
 Meteor scans all the HTML files in your application and concatenates them together.
@@ -102,47 +101,68 @@ This package takes care of including the latest AngularJS library code into our 
 
 That's it! now we can use the AngularJS power in our Meteor app.
 
-Let's start simple - change the P tag so that index.html file will look like this:
+To start simple, create a new file called index.tpl under the main folder, this will be our HTML page.
 
+Then move the p tag into it:
+
+__`index.tpl`:__
+
+    <p>Nothing here</p>
+
+Now let's include that file into our main index.html file:
 
 __`index.html`:__
 
     <body>
-      <p>Nothing here [[ 'yet' + '!' ]]</p>
+      <div ng-include="'index.tpl'"></div>
     </body>
 
-# What is the code doing?
-Double-square-brackets binding with an expression:
+Now run the app.  everything is the same.  now let's start AngularJS:
 
-    Nothing here [['yet' + '!']]
+inside index.html add ng-app attribute on the DIV like that:
+
+    <div ng-app ng-include="'index.tpl'"></div>
+
+and now inside our index.tpl let's use Angular:
+
+    <p>Nothing here {{ 'yet' + '!' }}</p>
+
+
+# What is the code doing?
+double curly braces binding with an expression:
+
+    Nothing here {{'yet' + '!'}}
 
 This line demonstrates two core features of Angular's templating capabilities:
 
-* A binding, denoted by Double-square-brackets [[ ]]
+* A binding, denoted by double curly braces {{ }}
 * a simple expression 'yet' + '!' used in this binding.
 
-AngularJS finds those Double-square-brackets, evaluates the expression and inserts the result into the DOM in place of the binding.
+AngularJS finds those double curly braces, evaluates the expression and inserts the result into the DOM in place of the binding.
 Rather than a one-time insert, as we'll see in the next steps, a binding will result in efficient continuous updates whenever the result of the expression evaluation changes.
 Inside in the client side, like a future smart browser would do.
 
 
-> You can see that we are using Double-square-brackets instead of double-curlies.
+> Why did use a new file extension file.tpl ?
 >
 > That is because Meteor templating system uses double-curlies. If we use them in our AngularJS view HTML, Meteor will override Angular.
 >
-> Fortunately, Angular (unlike Meteor...) gives us the option to change the double-curlies to Double-square-brackets.
+> Fortunately, we created a new file extension to make Meteor not override our Angular expression.
 >
-> But you don't need to do anything, urigo:angular takes care of that for you.
+> If you still want to use HTML files without changing their extension, Angular (unlike Meteor...) gives us the [option to change the double-curlies to Double-square-brackets](http://stackoverflow.com/a/12923955/1426570)
+
 
 
 # Experiments
 Try adding a new expression to the index.html that will do some math:
 
-    <p>1 + 2 = [[ 1 + 2 ]]</p>
+    <p>1 + 2 = {{ 1 + 2 }}</p>
 
 # Summary
 Now let's go to [step 1](step_01) and add some content to the web app.
-{{/markdown}}
+
+
+        </btf-markdown>
     </do-nothing>
 
     <ul class="btn-group tutorial-nav">
@@ -152,4 +172,4 @@ Now let's go to [step 1](step_01) and add some content to the web app.
       <a href="/tutorial/step_01"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
     </ul>
   </div>
-</template>
+

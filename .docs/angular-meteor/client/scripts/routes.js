@@ -81,7 +81,7 @@ angular.module("meteor-angular-docs").config(['$urlRouterProvider', '$stateProvi
         })
         .state('tutorial.step00', {
           url: '/step_00',
-          template: UiRouter.template('tutorial.step_00.html')
+          templateUrl: 'client/views/steps/tutorial.step_00.tpl'
         })
         .state('tutorial.step01', {
           url: '/step_01',
@@ -89,7 +89,7 @@ angular.module("meteor-angular-docs").config(['$urlRouterProvider', '$stateProvi
         })
         .state('tutorial.step02', {
           url: '/step_02',
-          template: UiRouter.template('tutorial.step_02.html')
+          templateUrl: 'client/views/steps/tutorial.step_02.tpl'
         })
         .state('tutorial.step03', {
           url: '/step_03',

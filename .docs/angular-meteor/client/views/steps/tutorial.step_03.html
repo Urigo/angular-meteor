@@ -66,11 +66,11 @@ The $collection.bind function will not only bind but also subscribe to the parti
 
 We are going to replace the declaration of $scope.parties with the following command inside the PartiesListCtrl controller:
 
-    $collection(Parties).bind($scope, 'parties', true, true);
+    $scope.parties = $meteorCollection(Parties);
 
 That line declares a new $scope.parties variable so we don't need to do something like $scope.parties = []; and then bind it to the Parties Mongo collection.
 
-We also need to add the $collection service to the controller with dependency injection.
+We also need to add the $meteorCollection service to the controller with dependency injection.
 
 Our app.js file should look like this:
 
@@ -82,14 +82,10 @@ __`app.js`:__
 
     angular.module('socially',['angular-meteor']);
 
-    Meteor.startup(function () {
-      angular.bootstrap(document, ['socially']);
-    });
+    angular.module("socially").controller("PartiesListCtrl", ['$scope', '$meteorCollection',
+      function($scope, $meteorCollection){
 
-    angular.module("socially").controller("PartiesListCtrl", ['$scope', '$collection',
-      function($scope, $collection){
-
-        $collection(Parties).bind($scope, 'parties', true, true);
+        $scope.parties = $meteorCollection(Parties);
 
       }]);
     }
