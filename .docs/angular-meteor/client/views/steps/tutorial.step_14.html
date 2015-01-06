@@ -205,8 +205,8 @@ we are doing that because of a bug in angular-google-maps, otherwise we could ha
 
 Don't forget the new dependencies to the controller:
 
-    angular.module("socially").controller("PartiesListCtrl", ['$scope', '$collection', '$methods', '$rootScope', '$filter', '$state',
-      function($scope, $collection, $methods, $rootScope, $filter, $state){
+    angular.module("socially").controller("PartiesListCtrl", ['$scope', '$collection', '$meteorMethods', '$rootScope', '$filter', '$state',
+      function($scope, $collection, $meteorMethods, $rootScope, $filter, $state){
 
 Now we just need to add styles also to the map in the parties-list.  go into partiesList.less and make it look like that:
 

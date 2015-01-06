@@ -78,7 +78,7 @@ To prevent conflicts with Meteor's Blaze live templating engine, angular-meteor 
 
 ### Subscribe
 
-[$subscribe.subscribe](http://angularjs.meteor.com/api/subscribe)
+[$meteorSubscribe.subscribe](http://angularjs.meteor.com/api/subscribe)
 
 ### Adding controllers, directives, filters and services
 To prevent errors when minifying and obfuscating the controllers, directives, filters or services, you need to use [Dependency Injection](http://docs.angularjs.org/guide/di). For example:
@@ -152,11 +152,11 @@ It would be wise to consider using the [urigo:angular-ui-router](https://github.
 
 ### Meteor methods with promises
 
-[$methods](http://angularjs.meteor.com/api/methods)
+[$meteorMethods](http://angularjs.meteor.com/api/methods)
 
 ### Bind Meteor session
 
-[$session](http://angularjs.meteor.com/api/session)
+[$meteorSession](http://angularjs.meteor.com/api/session)
     
 ### Additional packages
 

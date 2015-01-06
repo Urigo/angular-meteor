@@ -60,9 +60,9 @@ A function that binds the collection defined in the $collection service to an An
   <td>publisher</td>
   <td><a href="" class="label type-hint type-hint-boolean">Boolean</a>/<a href="" class="label type-hint type-hint-string">String</a></td>
   <td><p>By default, bind method will not automatically subscribe to the collection.
-    However if set to true, bind will call the <a href="api/subscribe">$subscribe service</a> on the current collection.
+    However if set to true, bind will call the <a href="api/subscribe">$meteorSubscribe service</a> on the current collection.
     You can also set publisher to a string and then bind will call Meteor publish with that string as the publish method's name.
-    * Please note that if you want to pass a parameter to the publish method you should use the <a href="api/subscribe">$subscribe service</a>
+    * Please note that if you want to pass a parameter to the publish method you should use the <a href="api/subscribe">$meteorSubscribe service</a>
     because adding the parameter in $collection.bind is not supported.</p></td>
   <td><a href="" class="label type-hint type-hint-object">No</a></td>
   <td><a href="" class="label type-hint type-hint-number">False</a></td>

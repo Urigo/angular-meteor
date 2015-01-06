@@ -8,7 +8,7 @@
     <do-nothing>
         {{#markdown}}
 
-# $subscribe
+# $meteorSubscribe
 
 A service which is a wrapper for [Meteor.subscribe](http://docs.meteor.com/#/full/meteor_subscribe).
 It subscribes to a [Meteor.publish](http://docs.meteor.com/#/full/publishandsubscribe) method in the client and returns a [AngularJS promise](https://docs.angularjs.org/api/ng/service/$q) when ready
@@ -17,7 +17,7 @@ It subscribes to a [Meteor.publish](http://docs.meteor.com/#/full/publishandsubs
 
 ## Usage
 
-    $subscribe.subscribe(name, publisherArguments)
+    $meteorSubscribe.subscribe(name, publisherArguments)
 
 ### Arguments
 
@@ -51,8 +51,9 @@ It subscribes to a [Meteor.publish](http://docs.meteor.com/#/full/publishandsubs
 
 <table class="variables-matrix return-arguments">
 <tbody><tr>
-  <td><a href="" class="label type-hint type-hint-expression">promise</a></td>
-  <td><p>The promise solves successfully when subscription is ready.</p></td>
+  <td><a href="" class="label type-hint type-hint-expression">promise(subscriptionHandle)</a></td>
+  <td><p>The promise solved successfully when subscription is ready.
+    The success promise holds the <a href="http://docs.meteor.com/#/full/meteor_subscribe">subscription handle</a>.</p></td>
 </tr>
 </tbody></table>
 
@@ -66,14 +67,17 @@ It subscribes to a [Meteor.publish](http://docs.meteor.com/#/full/publishandsubs
 
     if (Meteor.isClient) {
 
-      app.controller("mainCtrl", ['$scope', '$collection', '$subscribe',
-        function($scope, $collection, $subscribe){
+      app.controller("mainCtrl", ['$scope', '$meteorCollection', '$meteorSubscribe',
+        function($scope, $meteorCollection, $meteorSubscribe){
 
-          $subscribe.subscribe('todos').then(function(){
+          $meteorSubscribe.subscribe('todos').then(function(subscriptionHandle){
             // Bind all the todos to $scope.todos
-            $collection(Todos).bind($scope, 'todos');
+            $scope.todos = $meteorCollection(Todos);
 
             console.log($scope.todos + ' is ready');
+
+            // You can use the subscription handle to stop the subscription if you want
+            subscriptionHandle.stop();
           });
         }
       ]);

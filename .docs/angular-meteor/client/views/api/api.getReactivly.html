@@ -1,0 +1,86 @@
+<template name="api.getReactivly.html">
+  <div>
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/api/api.getReactivly.html"
+       class="btn btn-default btn-lg improve-button">
+      <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
+    </a>
+
+    <do-nothing>
+        {{#markdown}}
+
+# scope.getReactivly
+
+A method to get a $scope variable and watch it reactivly
+
+----
+
+## Usage
+
+scope.getReactivly(scopeVariableName)
+
+### Arguments
+
+<table class="variables-matrix input-arguments">
+<thead>
+<tr>
+  <th>Param</th>
+  <th>Type</th>
+  <th>Details</th>
+  <th>Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>scopeVariableName</td>
+  <td><a href="" class="label type-hint type-hint-string">string</a></td>
+  <td><p>The name of the scope's variable to bind to</p></td>
+  <td><a href="" class="label type-hint type-hint-array">Yes</a></td>
+</tr>
+</tbody>
+</table>
+
+
+## Returns
+
+<table class="variables-matrix return-arguments">
+<tbody><tr>
+  <td><a href="" class="label type-hint type-hint-expression">Reactive variable</a></td>
+  <td><p>A reactive variable that is binded to the scope variable and fires a changed event every time
+  the scope variable changed</p></td>
+</tr>
+</tbody></table>
+
+----
+
+## Example
+
+
+    $scope.sort = { name: 1 };
+
+    $scope.parties = $meteorCollection(function() {
+      return Parties.find({}, {
+        sort : $scope.getReactivly('sort')     // Every time $scope.sort will change,
+                                               // the reactive function will re-run again
+      });
+    });
+
+
+    // Everytime one of the getReactivly variables will change,
+    // the autorun will fire and the subscription will re-run
+    $meteorUtils.autorun($scope, function() {
+      $meteorSubscribe.subscribe('parties', {
+        limit: parseInt($scope.getReactivly('perPage')),
+        skip: (parseInt($scope.getReactivly('page')) - 1) * parseInt($scope.getReactivly('perPage')),
+        sort: $scope.getReactivly('sort')
+      }).then(function() {
+
+        console.log('new parties in page equals - ', $scope.parties);
+      });
+    });
+
+
+        {{/markdown}}
+    </do-nothing>
+
+  </div>
+</template>

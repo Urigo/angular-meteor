@@ -86,6 +86,10 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>http://angularjs.meteor.com/api/meteorCollection</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>http://angularjs.meteor.com/api/collection</loc>
     <priority>0.5</priority>
   </url>
@@ -119,6 +123,10 @@
   </url>
   <url>
     <loc>http://angularjs.meteor.com/api/meteor-include</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://angularjs.meteor.com/api/getReactivly</loc>
     <priority>0.5</priority>
   </url>
   <url>

@@ -158,12 +158,12 @@ Read more about the options parameter [here](http://docs.meteor.com/#/full/find)
 
 Now we need to send the options parameter in our subscription.
 To do that, we can't use the subscription we used in the $collection.bind method because it doesn't support parameters,
-so we should replace it with calling directly to the [$subscribe.subscribe method](http://angularjs.meteor.com/api/subscribe).
+so we should replace it with calling directly to the [$meteorSubscribe.subscribe method](http://angularjs.meteor.com/api/subscribe).
 
 Let's add a scope function that does that (don't forget to add dependencies to the controller):
 
     $scope.partiesSubscribe = function(){
-      return $subscribe.subscribe('parties', {
+      return $meteorSubscribe.subscribe('parties', {
         limit: parseInt($scope.perPage),
         skip: (parseInt($scope.page) - 1) * parseInt($scope.perPage),
         sort: $scope.sort

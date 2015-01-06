@@ -91,16 +91,16 @@ Don't forget to add the email package to your project in the command line:
 
 Now let's call that method from the client.
 
-Inside the partyDetails controller add '$methods' to the controller's dependencies:
+Inside the partyDetails controller add '$meteorMethods' to the controller's dependencies:
 
-    angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$collection', '$methods',
-      function($scope, $stateParams, $collection, $methods){
+    angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$collection', '$meteorMethods',
+      function($scope, $stateParams, $collection, $meteorMethods){
 
 
 Then add a scope method called invite:
 
     $scope.invite = function(user){
-      $methods.call('invite', $scope.party._id, user._id).then(
+      $meteorMethods.call('invite', $scope.party._id, user._id).then(
         function(data){
           console.log('success inviting', data);
         },
@@ -215,7 +215,7 @@ Now let's call that function from the partiesList.
 Add an rsvp scope function to the partiesListCtrl in partiesList.js:
 
     $scope.rsvp = function(partyId, rsvp){
-      $methods.call('rsvp', partyId, rsvp).then(
+      $meteorMethods.call('rsvp', partyId, rsvp).then(
         function(data){
           console.log('success responding', data);
         },
@@ -225,10 +225,10 @@ Add an rsvp scope function to the partiesListCtrl in partiesList.js:
       );
     };
 
-don't forget to add the $methods service to the controllers dependencies:
+don't forget to add the $meteorMethods service to the controllers dependencies:
 
-      angular.module("socially").controller("PartiesListCtrl", ['$scope', '$collection', '$user', '$methods',
-        function($scope, $collection, $user, $methods){
+      angular.module("socially").controller("PartiesListCtrl", ['$scope', '$collection', '$user', '$meteorMethods',
+        function($scope, $collection, $user, $meteorMethods){
 
 
 and let's add action buttons to call the right rsvp in the HTML.

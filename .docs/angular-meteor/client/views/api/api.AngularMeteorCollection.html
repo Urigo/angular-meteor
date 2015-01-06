@@ -16,7 +16,7 @@ An object that connects a [Meteor Collection](http://docs.meteor.com/#/full/coll
 
 ## Usage
 
-See [bind](/api/collection-bind) and [bindOne](/api/collection-bindOne)
+See [$meteorCollection](/api/meteorCollection)
 
 ----
 
@@ -95,7 +95,7 @@ See [bind](/api/collection-bind) and [bindOne](/api/collection-bindOne)
 ## Example
 
     // Bind all the todos to $scope.todos without auto-save
-    $collection(Todos).bind($scope, 'todos');
+    $scope.todos = $meteorCollection(Todos, false);
 
     var todoObject = {name:'first todo'};
     var todoArray = [{name:'second todo'}, {name:'third todo'}];

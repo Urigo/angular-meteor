@@ -25,6 +25,10 @@ angular.module("meteor-angular-docs").config(['$urlRouterProvider', '$stateProvi
           url: '/collection',
           template: UiRouter.template('api.collection.html')
         })
+        .state('api.meteorCollection', {
+          url: '/meteorCollection',
+          template: UiRouter.template('api.meteorCollection.html')
+        })
         .state('api.collection-bind', {
           url: '/collection-bind',
           template: UiRouter.template('api.collection-bind.html')
@@ -52,6 +56,10 @@ angular.module("meteor-angular-docs").config(['$urlRouterProvider', '$stateProvi
         .state('api.user', {
           url: '/user',
           template: UiRouter.template('api.user.html')
+        })
+        .state('api.getReactivly', {
+          url: '/getReactivly',
+          template: UiRouter.template('api.getReactivly.html')
         })
         .state('api.meteor-include', {
           url: '/meteor-include',
