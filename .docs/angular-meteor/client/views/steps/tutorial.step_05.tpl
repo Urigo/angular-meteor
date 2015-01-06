@@ -154,8 +154,12 @@ Create a new html file called party-details.tpl and paste the following code in:
 
 __`party-details.tpl`:__
 
+        </btf-markdown>
 
-        Here you will see the details of party number: {{ partyId }}
+     <pre><code>   Here you will see <span class="hljs-operator">the</span> details <span class="hljs-operator">of</span> party <span class="hljs-built_in">number</span>: {{ partyId }}
+     </code></pre>
+
+    <btf-markdown>
 
 We will get to it later on.
 
