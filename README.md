@@ -8,7 +8,7 @@ We just released angular-meteor version 0.6-alpha with a lot of exciting new fea
 It has a completely new API for collections, templates and routing.
 
 It also has breaking changes.
-Please read more and get ready here: 
+Please read more and get ready here: [0.6.0-alpha release](https://github.com/Urigo/angular-meteor/releases/tag/0.6.0-alpha)
 
 We will support the old API only until the end of the beta version so please update your applications.
 
