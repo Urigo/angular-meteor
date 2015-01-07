@@ -33,13 +33,14 @@ Add to following form inside the PartiesListCtrl div:
 
   </btf-markdown>
 
-<pre><code><span class="hljs-tag">&lt;<span class="hljs-title">form</span>&gt;</span>
+<pre><code>
+<span class="hljs-tag">&lt;<span class="hljs-title">form</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-title">label</span>&gt;</span>Name<span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-title">input</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-title">label</span>&gt;</span>Description<span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-title">input</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-title">button</span>&gt;</span>Add<span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-title">form</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">form</span>&gt;</span>
 </code></pre>
 
     <btf-markdown>
@@ -85,13 +86,14 @@ Add ng-model to the form like this:
 
       </btf-markdown>
 
-<pre><code><span class="hljs-tag">&lt;<span class="hljs-title">form</span>&gt;</span>
+<pre><code>
+<span class="hljs-tag">&lt;<span class="hljs-title">form</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-title">label</span>&gt;</span>Name<span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">"newParty.name"</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-title">label</span>&gt;</span>Description<span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">"newParty.description"</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-title">button</span>&gt;</span>Add<span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-title">form</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">form</span>&gt;</span>
 </code></pre>
 
       <btf-markdown>
@@ -105,8 +107,8 @@ Now let's bind a click event to the add button with Angular's [ng-click](https:/
 
     </btf-markdown>
 
-    <pre><code><span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">ng-click</span>=<span class="hljs-value">"parties.push(newParty); newParty='';"</span>&gt;</span>Add<span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
-    </code></pre>
+<pre><code><span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">ng-click</span>=<span class="hljs-value">"parties.push(newParty); newParty='';"</span>&gt;</span>Add<span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
+</code></pre>
 
     <btf-markdown>
 
