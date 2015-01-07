@@ -2,6 +2,15 @@
 ======================================================
 > The power of Meteor and the simplicity and eco-system of AngularJS
 
+# New 0.6 version - biggest change we had so far!
+We just released angular-meteor version 0.6-alpha with a lot of many exciting features.
+
+It has a completly new API for collections, templates and routing.
+
+It also has breaking changes.
+Please read more and get ready here: 
+
+
 # Please support our ng-conf 2015 talk proposal by commenting on it here:
 [https://github.com/ng-conf/submissions-2015/pull/172](https://github.com/ng-conf/submissions-2015/pull/172)
 
@@ -51,30 +60,27 @@ If you have a module called myModule, for example:
     
 [More in step 0 in the tutorial](http://angularjs.meteor.com/tutorial/step_00)
     
-### New Data-Binding to avoid conflict
-To prevent conflicts with Meteor's Blaze live templating engine, angular-meteor has changed the default AngularJS data bindings from <code>{{...}}</code> to <code>[[...]]</code>. For example:
+### Data-Binding
+From angulr-meteor version 0.6 you can use AngularJS's default delimiters and there is no need to change them.
+
+All you need to do is change your AngularJS HTML template files to end with .tpl extension like - myFile.tpl
+
+Then you can use it regularly, for example:
 
     <div>
         <label>Name:</label>
         <input type="text" ng-model="yourName" placeholder="Enter a name here">
         <hr>
-        <h1>Hello [[yourName]]!</h1>
+        <h1>Hello {{yourName}}!</h1>
     </div>
     
 [More in step 2 of the tutorial](http://angularjs.meteor.com/tutorial/step_02)    
 
 ### Using Meteor Collections
 
-[$collection](http://angularjs.meteor.com/api/collection)
+[$meteorCollection](http://angularjs.meteor.com/api/meteorCollection)
 
-[$collection.bind](http://angularjs.meteor.com/api/collection-bind)
-
-[$collection.bindOne](http://angularjs.meteor.com/api/collection-bindOne)
-
-[AngularMeteorCollection](http://angularjs.meteor.com/api/AngularMeteorCollection)
-
-
-[More in step 6 of the tutorial](http://angularjs.meteor.com/tutorial/step_06)
+[More in step 3 of the tutorial](http://angularjs.meteor.com/tutorial/step_03)
 
 ### Subscribe
 
@@ -83,18 +89,19 @@ To prevent conflicts with Meteor's Blaze live templating engine, angular-meteor 
 ### Adding controllers, directives, filters and services
 To prevent errors when minifying and obfuscating the controllers, directives, filters or services, you need to use [Dependency Injection](http://docs.angularjs.org/guide/di). For example:
 
-    app.controller('TodoCtrl', ['$scope', '$collection',
-      function($scope, $collection) {
-        $collection("todos", $scope);
+    app.controller('TodoCtrl', ['$scope', '$meteorCollection',
+      function($scope, $meteorCollection) {
+      
+        $scope.todos = $meteorCollection(Todos);
        
         $scope.addTodo = function() {
-          $scope.todos.add({text:$scope.todoText, done:false});
+          $scope.todos.push({text:$scope.todoText, done:false});
           $scope.todoText = '';
         };
 
         $scope.saveTodo = function(){
-          $scope.todos.add($scope.todos);
-        }
+          $scope.todos.save($scope.newTodo);
+        };
        
         $scope.remaining = function() {
           var count = 0;
@@ -106,43 +113,24 @@ To prevent errors when minifying and obfuscating the controllers, directives, fi
        
         $scope.archive = function() {
           angular.forEach($scope.todos, function(todo) {
-            if (todo.done) $scope.todos.delete(todo);
+            if (todo.done) $scope.todos.remove(todo);
           });
         };
       }
     ]);
 
-### Creating and inserting template views
-A template is defined using the template tags (this could be in a standalone file or included in another file).
+### Routing
+There is no need anymore to use the [urigo:angular-ui-router](https://github.com/Urigo/meteor-angular-ui-router) pacage.
+You can just include [ui-router](https://github.com/angular-ui/ui-router) with the [meteor bower package](https://atmospherejs.com/mquandalle/bower) and in templateUrl insert the path to the tpl files.
 
-    <template name="foo">
-      <h1>Hello, World!</h1>
-    </template>
-
-You can render this template using handlebars as you would for any other Meteor app:
-
-    {{> foo}}
-
-Templates will also be added to the $templateCache of the angular-meteor module. To invoke the template in AngularJS you could use ng-view and specify the template in the $templateCache when defining your routes using the $routeProvider or you could use the ng-template directive to render your template like this:
-
-    <ANY ng-template="foo"></ANY>
-
-    <!--Add the ng-controller attribute if you want to load a controller at the same time.-->    
-    <ANY ng-template="foo" ng-controller="fooCtrl"></ANY>
-    
-Templates with names starting with an underscore, for example "_foo", will not be put into the $templateCache, so you will not be able to access those templates using ng-template, ng-include or ng-view.
+[More in step 5 of the tutorial](http://angularjs.meteor.com/tutorial/step_05)
 
 ### meteor-include
 
-You can include Meteor native templates.
+You can include Meteor's native templates.
 
 [meteor-include](http://angularjs.meteor.com/api/meteor-include)
 
-
-### Routing
-It would be wise to consider using the [urigo:angular-ui-router](https://github.com/Urigo/meteor-angular-ui-router) Meteor package for angular-meteor, which exposes the popular [ui-router](https://github.com/angular-ui/ui-router) module to angular-meteor. For those of you that have grown accustomed to the Meteor methods of routing, angular-meteor is compatible with [Iron Router](https://github.com/EventedMind/iron-router).
-
-[More in step 5 of the tutorial](http://angularjs.meteor.com/tutorial/step_05)
     
 ### User
     
@@ -162,7 +150,6 @@ It would be wise to consider using the [urigo:angular-ui-router](https://github.
 
 Using this method, additional functionality has been provided to urigo:angular-meteor in the form of separate Meteor packages that expose and inject angular modules into angular-meteor. These packages have been developed by either the angular-meteor Team and/or by third parties. The following is a non-exhaustive list of these packages:
 
-- [urigo:angular-ui-router](https://github.com/Urigo/meteor-angular-ui-router) empowers angular-meteor with the [ui-router](https://github.com/angular-ui/ui-router) module.
 - [urigo:ionic](https://github.com/Urigo/meteor-ionic) [Ionic Framework](http://ionicframework.com/) on top of Meteor.
 - [netanelgilad:angular-file-upload](https://github.com/netanelgilad/meteor-angular-file-upload) empowers angular-meteor with [angular-file-upload](https://github.com/nervgh/angular-file-upload) module.
 - [davidyaha:smart-table](https://github.com/davidyaha/meteor-smart-table) empowers angular-meteor with [smart-table](https://github.com/lorenzofox3/Smart-Table) module.
