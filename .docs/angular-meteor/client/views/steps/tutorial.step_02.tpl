@@ -45,24 +45,25 @@ The view component is constructed by Angular from this template:
 __`index.tpl`:__
 
       </btf-markdown>
-<pre><code><span class="xml">  <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">ng-controller</span>=<span class="hljs-value">"PartiesListCtrl"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">ul</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">ng-repeat</span>=<span class="hljs-value">"party in parties"</span>&gt;</span>
-        </span><span class="hljs-expression">{{<span class="hljs-variable">party.name</span>}}</span><span class="xml">
-        <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span></span><span class="hljs-expression">{{<span class="hljs-variable">party.description</span>}}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
-      <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span></span>
+<pre><code><span class="xml">
+<span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">ng-controller</span>=<span class="hljs-value">"PartiesListCtrl"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">ul</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">ng-repeat</span>=<span class="hljs-value">"party in parties"</span>&gt;</span>
+      </span><span class="hljs-expression">{{<span class="hljs-variable">party.name</span>}}</span><span class="xml">
+      <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span></span><span class="hljs-expression">{{<span class="hljs-variable">party.description</span>}}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span></span>
 </code></pre>
       <btf-markdown>
 We replaced the hard-coded party list with the [ngRepeat](https://docs.angularjs.org/api/ng/directive/ngRepeat) directive and two Angular expressions:
 
 * The ng-repeat="party in parties" attribute in the li tag is an Angular repeater directive. The repeater tells Angular to create a li element for each party in the list using the li tag as the template.
-* The expressions wrapped in double-curly-braches ({{party.name}} and {{party.description}}) will be replaced by the value of the expressions.
+* The expressions wrapped in double-curly-braches ( {{party.name}} and {{party.description}} ) will be replaced by the value of the expressions.
 
 We have added a new directive, called ng-controller, which attaches the PartiesListCtrl controller to the div tag. At this point:
 
-* The expressions in double-curly-braches ({{party.name}} and {{party.description}}) denote bindings, which are referring to our application model, which is set up in our PartiesListCtrl controller.
+* The expressions in double-curly-braches ( {{party.name}} and {{party.description}} ) denote bindings, which are referring to our application model, which is set up in our PartiesListCtrl controller.
 
 
 # AngularJS app
@@ -98,7 +99,8 @@ And name our application in the ng-app directive in index.html:
 
       </btf-markdown>
 
-<pre><code>&lt;<span class="hljs-operator">div</span> ng-app=<span class="hljs-string">"socially"</span> ng-<span class="hljs-built_in">include</span>=<span class="hljs-string">"'index.tpl'"</span>&gt;&lt;/<span class="hljs-operator">div</span>&gt;
+<pre><code>
+&lt;<span class="hljs-operator">div</span> ng-app=<span class="hljs-string">"socially"</span> ng-<span class="hljs-built_in">include</span>=<span class="hljs-string">"'index.tpl'"</span>&gt;&lt;/<span class="hljs-operator">div</span>&gt;
 </code></pre>
       <btf-markdown>
 
@@ -156,7 +158,13 @@ To learn more about Angular scopes, see the [angular scope documentation](https:
 
 Add another binding to index.html. For example:
 
-      <p>Total number of parties: {{parties.length}}</p>
+</btf-markdown>
+
+<pre><code>
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>Total number of parties: </span><span class="hljs-expression">{{<span class="hljs-variable">parties.length</span>}}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span></span>
+</code></pre>
+
+<btf-markdown>
 
 Create a new model property in the controller (inside app.js) and bind to it from the template. For example:
 
@@ -164,7 +172,11 @@ Create a new model property in the controller (inside app.js) and bind to it fro
 
 Then add a new binding to index.html:
 
-      <p>Hello, {{name}}!</p>
+</btf-markdown>
+<pre><code>
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>Hello, </span><span class="hljs-expression">{{<span class="hljs-variable">name</span>}}</span><span class="xml">!<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span></span>
+</code></pre>
+<btf-markdown>
 
 Verify that it says "Hello, World!".
 
@@ -172,9 +184,10 @@ Create a repeater in index.html that constructs a simple table:
 
       </btf-markdown>
 
-      <pre><code><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">table</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">tr</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">th</span>&gt;</span>row number<span class="hljs-tag">&lt;/<span class="hljs-title">th</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">tr</span> <span class="hljs-attribute">ng-repeat</span>=<span class="hljs-value">"i in [0, 1, 2, 3, 4, 5, 6, 7]"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">td</span>&gt;</span></span><span class="hljs-expression">{{<span class="hljs-variable">i</span>}}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
+<pre><code>
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">table</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">tr</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">th</span>&gt;</span>row number<span class="hljs-tag">&lt;/<span class="hljs-title">th</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">tr</span> <span class="hljs-attribute">ng-repeat</span>=<span class="hljs-value">"i in [0, 1, 2, 3, 4, 5, 6, 7]"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">td</span>&gt;</span></span><span class="hljs-expression">{{<span class="hljs-variable">i</span>}}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">table</span>&gt;</span></span>
       </code></pre>
         <btf-markdown>
@@ -182,9 +195,10 @@ Create a repeater in index.html that constructs a simple table:
 Now, make the list 1-based by incrementing i by one in the binding:
 
         </btf-markdown>
-      <pre><code><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">table</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">tr</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">th</span>&gt;</span>row number<span class="hljs-tag">&lt;/<span class="hljs-title">th</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">tr</span> <span class="hljs-attribute">ng-repeat</span>=<span class="hljs-value">"i in [0, 1, 2, 3, 4, 5, 6, 7]"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">td</span>&gt;</span></span><span class="hljs-expression">{{<span class="hljs-variable">i</span>+1}}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
+<pre><code>
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">table</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">tr</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">th</span>&gt;</span>row number<span class="hljs-tag">&lt;/<span class="hljs-title">th</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">tr</span> <span class="hljs-attribute">ng-repeat</span>=<span class="hljs-value">"i in [0, 1, 2, 3, 4, 5, 6, 7]"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">td</span>&gt;</span></span><span class="hljs-expression">{{<span class="hljs-variable">i</span>+1}}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">td</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">tr</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">table</span>&gt;</span></span>
       </code></pre>
       <btf-markdown>
