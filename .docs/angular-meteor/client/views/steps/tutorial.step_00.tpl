@@ -64,9 +64,15 @@ first let's create a new index.html file and place this code inside and run the 
 
 __`index.html`:__
 
-    <body>
-      <p>Nothing here</p>
-    </body>
+          </btf-markdown>
+
+<pre><code>
+<span class="hljs-tag">&lt;<span class="hljs-title">body</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>Nothing here<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">body</span>&gt;</span>
+</code></pre>
+
+      <btf-markdown>
 
 As you can see, there is no html tag, no head tag, very simple.
 
@@ -101,32 +107,55 @@ This package takes care of including the latest AngularJS library code into our 
 
 That's it! now we can use the AngularJS power in our Meteor app.
 
-To start simple, create a new file called index.tpl under the main folder, this will be our HTML page.
+To start simple, create a new file called index.tpl under the main folder, this will be our main HTML template page.
+
+* We are using the .tpl file extension so that Blaze - Meteor's templating system won't compile and override our AngularJS expressions.
 
 Then move the p tag into it:
 
 __`index.tpl`:__
 
-    <p>Nothing here</p>
+          </btf-markdown>
+
+<pre><code>
+<span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>Nothing here<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+</code></pre>
+
+      <btf-markdown>
 
 Now let's include that file into our main index.html file:
 
 __`index.html`:__
 
-    <body>
-      <div ng-include="'index.tpl'"></div>
-    </body>
+      </btf-markdown>
+
+<pre><code>
+<span class="hljs-tag">&lt;<span class="hljs-title">body</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">ng-include</span>=<span class="hljs-value">"'index.tpl'"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">body</span>&gt;</span>
+</code></pre>
+
+      <btf-markdown>
 
 Now run the app.  everything is the same.  now let's start AngularJS:
 
-inside index.html add ng-app attribute on the DIV like that:
+inside index.html add an ng-app attribute on the DIV like that:
 
-    <div ng-app ng-include="'index.tpl'"></div>
+</btf-markdown>
+<pre><code>
+&lt;<span class="hljs-operator">div</span> ng-app ng-<span class="hljs-built_in">include</span>=<span class="hljs-string">"'index.tpl'"</span>&gt;&lt;/<span class="hljs-operator">div</span>&gt;
+</code></pre>
+<btf-markdown>
 
 and now inside our index.tpl let's use Angular:
 
-    <p>Nothing here {{ 'yet' + '!' }}</p>
+</btf-markdown>
 
+<pre><code>
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>Nothing here </span><span class="hljs-expression">{{ '<span class="hljs-variable">yet</span>' + '!' }}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span></span>
+</code></pre>
+
+<btf-markdown>
 
 # What is the code doing?
 double curly braces binding with an expression:
@@ -156,7 +185,13 @@ Inside in the client side, like a future smart browser would do.
 # Experiments
 Try adding a new expression to the index.html that will do some math:
 
-    <p>1 + 2 = {{ 1 + 2 }}</p>
+</btf-markdown>
+
+<pre><code>
+<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>1 + 2 = </span><span class="hljs-variable">{{ 1 + 2 }}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span></span>
+</code></pre>
+
+<btf-markdown>
 
 # Summary
 Now let's go to [step 1](step_01) and add some content to the web app.
