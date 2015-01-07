@@ -3,13 +3,14 @@
 > The power of Meteor and the simplicity and eco-system of AngularJS
 
 # New 0.6 version - biggest change we had so far!
-We just released angular-meteor version 0.6-alpha with a lot of many exciting features.
+We just released angular-meteor version 0.6-alpha with a lot of exciting new features.
 
-It has a completly new API for collections, templates and routing.
+It has a completely new API for collections, templates and routing.
 
 It also has breaking changes.
 Please read more and get ready here: 
 
+We will support the old API only until the end of the beta version so please update your applications.
 
 # Please support our ng-conf 2015 talk proposal by commenting on it here:
 [https://github.com/ng-conf/submissions-2015/pull/172](https://github.com/ng-conf/submissions-2015/pull/172)
