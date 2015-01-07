@@ -6,7 +6,7 @@
 meteor-platform
 autopublish
 insecure
-urigo:angular
+urigo:angular@0.6.0-alpha
 less
 simison:bootstrap3-less
 urigo:angular-ui-router@0.6.0

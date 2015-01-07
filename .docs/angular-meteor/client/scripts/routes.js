@@ -65,6 +65,10 @@ angular.module("meteor-angular-docs").config(['$urlRouterProvider', '$stateProvi
           url: '/meteor-include',
           template: UiRouter.template('api.meteor-include.html')
         })
+        .state('api.utils', {
+          url: '/utils',
+          template: UiRouter.template('api.utils.html')
+        })
         .state('api.collection-pagination', {
           url: '/collection-pagination',
           template: UiRouter.template('api.collection-pagination.html')
