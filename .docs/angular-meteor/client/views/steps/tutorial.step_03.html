@@ -60,9 +60,7 @@ That means that this collection and the actions on it will run both on the clien
 
 Now that we've created the collection, our client needs to subscribe to it's changes and bind it to our parties AngularJS collection.
 
-To bind them we are going to use angular-meteor built-in [service](https://docs.angularjs.org/guide/services) called $collection.
-
-The $collection.bind function will not only bind but also subscribe to the parties Mongo collection.
+To bind them we are going to use angular-meteor built-in [service](https://docs.angularjs.org/guide/services) called $meteorCollection.
 
 We are going to replace the declaration of $scope.parties with the following command inside the PartiesListCtrl controller:
 
