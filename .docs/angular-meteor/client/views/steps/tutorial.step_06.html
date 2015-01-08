@@ -26,39 +26,33 @@
 In this step, you will implement the party details view, which is displayed when a user clicks on a party in the parties list.
 The user will also be able to change the party's details.
 
-To implement the party details view we will use $collection.bindOne to fetch our data, and update it back in realtime when the user changes it.
+To implement the party details view we will use $meteorObject to fetch our data, and update it back in realtime when the user changes it.
 
 # Controller
 
-We'll expand the PartyDetailsCtrl by using the $collection service (add it with Angular's dependency injection) to bind the specific party.
+We'll expand the PartyDetailsCtrl by using the $meteorObject service (add it with Angular's dependency injection) to bind the specific party.
 
-    angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$collection',
-      function($scope, $stateParams, $collection){
+    angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteorObject',
+      function($scope, $stateParams, $meteorObject){
 
-        $collection(Parties).bindOne($scope, 'party', $stateParams.partyId, true, true);
+        $scope.party = $meteorObject(Parties, $stateParams.partyId);
 
     }]);
 
-To bind to a specific object, we call the bindOne function with the following parameters:
+We are sending #meteorObject a Mongo collection and the Id of the object we want to bind to.
 
-* Param 1: The scope we use (we send the current scope)
-* Param 2: The scope variable we use (we send 'party' which means that the object will be binded to $scope.party)
-* Param 3: The id of the object in the collection (taken from the url param with the $stateParam service)
-* Param 4: A flag if to bind the object so that every change in the client will be sent to the server automatically
-* Param 5: A flag to subscribe to the collection. it's good in case we got to party details before getting into parties list controller.
+$meteorObject returns an [AngularMeteorObject]() that contains the data.
 
 
 # Template
 
-In party-details.html let's replace the binding to the partyId with binding to party.name and party.description:
+In party-details.tpl let's replace the binding to the partyId with binding to party.name and party.description:
 
-    <template name="party-details.html">
-      Here you will see and change the details of the party:
+    Here you will see and change the details of the party:
 
-      <input ng-model="party.name">
-      <input ng-model="party.description">
+    <input ng-model="party.name">
+    <input ng-model="party.description">
 
-      {{lt}}/template>
 
 Now, when you run the app, navigate into a party's page, and change the inputs, the server and all the clients update immediately.
 No save buttons, no round trips, it just works.
@@ -67,36 +61,71 @@ No save buttons, no round trips, it just works.
 
 In case you don't want to use the live editing that angular-meteor provides and want to preset to your users a classic "Save" "Cancel" form, you can do that as well.
 
-First, let's change param 4 from true to false (cancel the auto-bind).
-Then, let's add a bind to the whole collection with regular bind.
-Now, it means that we have access to the save function of the collection from the bind function and we can use it in a click of a button:
+First, let's change our template:
+
+__party-details.tpl__
 
 
-    $collection(Parties).bindOne($scope, 'party', $stateParams.partyId, false);
-    $collection(Parties).bind($scope, 'parties');
+    Here you will see and change the details of the party:
 
-    $scope.saveParty = function(){
-      $scope.parties.save($scope.party);
+    <input ng-model="party.name">
+    <input ng-model="party.description">
+
+    <button ng-click="save()">Save</button>
+    <button ng-click="reset()">Reset form</button>
+    <button><a href="/parties">Cancel</a></button>
+
+
+
+Now let's move to the controller.
+
+First send $meteorObject false in the 3rd parameter so it won't auto-save the object on every change:
+
+
+    $scope.party = $meteorObject(Parties, $stateParams.partyId, false);
+
+
+Now let's add the functions that handle the buttons clicks:
+
+    $scope.save = function() {
+      $scope.party.save();
     };
 
-And then in the template (with a cancel button that simply directs back to the parties list without doing any save functionality):
+    $scope.reset = function() {
+      $scope.party.reset();
+    };
 
-    <template name="party-details.html">
-      Here you will see and change the details of the party:
 
-      <input ng-model="party.name">
-      <input ng-model="party.description">
+As you can see, $meteorObject return an object from type [AngularMeteorObject]() the contains 2 functions - save and reset.
 
-      <button ng-click="saveParty()">Save</button>
+save() - saves the current value of the object to the server.
+reset() - reset the current value of the object to the one in the server.
 
-      <button><a href="/parties">Cancel</a></button>
+Your controller should look like this:
 
-    {{lt}}/template>
+    angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteorObject',
+      function($scope, $stateParams, $meteorObject){
+
+        $scope.party = $meteorObject(Parties, $stateParams.partyId, false);
+
+        $scope.save = function() {
+          $scope.party.save();
+        };
+
+        $scope.reset = function() {
+          $scope.party.reset();
+        };
+
+    }]);
+
+That's it!
+
+Simple and easy.
 
 
 # Summary
 
-We've seen the power of 3-way binding between the DOM, AngularJS and Meteor.
+We've seen the power of 3-way binding between the DOM, AngularJS and Meteor.  In collection and in objects.
 
 Let's move on to provide some order and structure in our application.
 
