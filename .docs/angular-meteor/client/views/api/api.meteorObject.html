@@ -1,0 +1,111 @@
+<template name="api.meteorObject.html">
+  <div>
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/api/api.meteorObject.html"
+       class="btn btn-default btn-lg improve-button">
+      <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
+    </a>
+
+    <do-nothing>
+        {{#markdown}}
+
+# $meteorObject
+
+A service that wraps a Meteor object to enable reactivity within AngularJS.
+
+----
+
+## Usage
+
+$meteorObject(collection, id, auto)
+
+### Arguments
+
+
+
+<table class="variables-matrix input-arguments">
+<thead>
+<tr>
+  <th>Param</th>
+  <th>Type</th>
+  <th>Details</th>
+  <th>Required</th>
+  <th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>collection</td>
+  <td>
+    <a href="http://docs.meteor.com/#/full/collections" class="label type-hint type-hint-string">Meteor Collection Object</a>
+  </td>
+  <td><p>A Meteor Collection to bind to.</p></td>
+  <td><a href="" class="label type-hint type-hint-array">Yes</a></td>
+  <td></td>
+</tr>
+<tr>
+  <td>id</td>
+  <td><a href="" class="label type-hint type-hint-string">string</a></td>
+  <td><p>The Id of the object to bind to</p></td>
+  <td><a href="" class="label type-hint type-hint-object">Yes</a></td>
+  <td></td>
+</tr>
+<tr>
+  <td>autoClientSave</td>
+  <td><a href="" class="label type-hint type-hint-boolean">Boolean</a></td>
+  <td><p>By default, changes in the Angular object will automatically update the Meteor object.
+    However if set to false, changes in the client won't be automatically propagated back to the Meteor object.</p></td>
+  <td><a href="" class="label type-hint type-hint-object">No</a></td>
+  <td><a href="" class="label type-hint type-hint-boolean">True</a></td>
+</tr>
+</tbody>
+</table>
+
+
+## Returns
+
+<table class="variables-matrix return-arguments">
+<tbody><tr>
+  <td><a href="" class="label type-hint type-hint-object">object</a></td>
+  <td><p>Newly created <a href="/api/AngularMeteorCollection">AngularMeteorObject</a> object with the following set of methods:</p>
+    <ul>
+      <li><code><span class="pln">save</span></code> — saves the current value of the object to the server.</li>
+      <li><code><span class="pln">reset</span></code> — reset the current value of the object to the one in the server.</li>
+    </ul>
+  </td>
+</tr>
+</tbody></table>
+
+
+----
+
+## Example
+
+
+    // Define a new Meteor Mongo Collection
+    Parties = new Mongo.Collection('parties');
+
+    if (Meteor.isClient) {
+
+      angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteorObject',
+        function($scope, $stateParams, $meteorObject){
+
+          $scope.party = $meteorObject(Parties, $stateParams.partyId);
+
+          $scope.partyNotAuto = $meteorObject(Parties, $stateParams.partyId, false);
+
+          $scope.save = function() {
+            $scope.partyNotAuto.save();
+          };
+
+          $scope.reset = function() {
+            $scope.partyNotAuto.reset();
+          };
+
+      }]);
+    }
+
+        {{/markdown}}
+    </do-nothing>
+
+  </div>
+</template>
