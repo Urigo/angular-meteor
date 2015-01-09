@@ -1,4 +1,4 @@
-<template name="tutorial.step_09.html">
+
   <div class="row">
     <div class="col-md-12">
     <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/steps/tutorial.step_09.html"
@@ -22,7 +22,7 @@
   </div>
 
   <do-nothing class="col-md-12">
-      {{#markdown}}
+  <btf-markdown>
 
 Right now our app has no privacy, every user can see all the parties on the screen.
 
@@ -74,17 +74,19 @@ That function will determine what data will be returned and the permissions need
 
 In our case the first name parameter is "parties". So we will need to subscribe to the "parties" collection in the client.
 
-Fortunately, we are already doing that by setting true in the 4th parameter of the $collection.bind function.
+We have 2 way of doing this:
 
-If we wanted to subscribe to a different name then the collection name itself - "parties" we would set that parameter with the subscription name like that:
+1. Using the [$meteorSubscribe](/api/subscribe) service that also return a promise when the subscribing is done
+2. using [AngularMeteorCollection's](/api/AngularMeteorCollection) subscribe function which is exactly the same but it's
+here just for syntactic sugar doesn't return a promise.
 
-    $collection(Parties).bind($scope, 'parties', true, 'publicPartiesSubscription');
+Right now we don't need the promise so let's use the second way:
 
+    $scope.parties = $meteorCollection(Parties).subscribe('parties');
 
 
 * Our publish function can also take parameters.  In that case, we would also need to pass the parameters from the client.
-To do that, we would need to use the [$meteorSubscribe service](http://angularjs.meteor.com/api/subscribe) directly and not through the $collection service.
-For more information about the $meteorSubscribe service [click here](http://angularjs.meteor.com/api/subscribe).
+For more information about the $meteorSubscribe service [click here](http://angularjs.meteor.com/api/subscribe) or the subscribe function of [AngularMeteorCollection](/api/AngularMeteorCollection).
 
 
 In the second parameter, our function uses the Mongo API to return the wanted documents (document are the JSON-style data structure of MongoDB).
@@ -98,17 +100,27 @@ Either that the owner parameter exists and it's the current logged in user (whic
 
 So now let's add the public flag to the parties and see how it affects the parties the client gets.
 
-Let's add a checkbox to the new party form in parties-list.html:
+Let's add a checkbox to the new party form in parties-list.tpl:
 
-    <label>Public</label>
-    <input type="checkbox" ng-model="newParty.public">
+  </btf-markdown>
+
+<pre><code><span class="hljs-tag">&lt;<span class="hljs-title">label</span>&gt;</span>Public<span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"checkbox"</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">"newParty.public"</span>&gt;</span>
+</code></pre>
+
+    <btf-markdown>
 
 Notice how easy it is to bind a checkbox to a model with AngularJS!
 
-Let's add the same to the party-details.html page:
+Let's add the same to the party-details.tpl page:
 
-    <label>Is public</label>
-    <input type="checkbox" ng-model="party.public">
+        </btf-markdown>
+
+<pre><code>&lt;<span class="hljs-keyword">label</span>&gt;<span class="hljs-keyword">Is</span> public&lt;/<span class="hljs-keyword">label</span>&gt;
+&lt;input <span class="hljs-keyword">type</span>=<span class="hljs-string">"checkbox"</span> ng-model=<span class="hljs-string">"party.public"</span>&gt;
+</code></pre>
+
+        <btf-markdown>
 
 Now let's run the app.
 
@@ -142,25 +154,28 @@ The emails field holds all the user's email addresses, and the profile might hol
 
 Now let's subscribe to that publish Method.  in the client->parties->controllers->partyDetails.js file add the following line:
 
-    $collection(Meteor.users).bind($scope, 'users', false, true);
+    $scope.users = $meteorCollection(Meteor.users, false).subscribe('users');
 
 * We bind to the Meteor.users collection
 * Binding the result to $scope.users
-* Notice that we passes false to the 3rd parameter. that means that we don't want to update that collection from the client.
-specifying false for a collection you are sure you won't update will help performance but if you will leave it true,
-nothing will happen because the client doesn't have permissions to write to that collection anyway.
-* Specifying true in the 4th parameter means that we will also subscribe to the 'users' publish method.
+* Notice that we passes false in the second parameter. that means that we don't want to update that collection from the client.
+* Calling [AngularMeteorCollection's](/api/AngularMeteorCollection) subscribe function.
 
 Now let's add the list of users to the view to make sure it works.
 
-Add this ng-repeat list to the end of parties-details.html:
+Add this ng-repeat list to the end of parties-details.tpl:
 
-    <ul>
-      Users:
-      <li ng-repeat="user in users">
-        <div>[[ user.emails[0].address ]]</div>
-      </li>
-    </ul>
+</btf-markdown>
+
+<pre><code><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">ul</span>&gt;</span>
+  Users:
+  <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">ng-repeat</span>=<span class="hljs-value">"user in users"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span></span><span class="hljs-expression">{{ <span class="hljs-variable">user.emails</span>[0]<span class="hljs-variable">.address</span> }}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span></span>
+</code></pre>
+
+<btf-markdown>
 
 Run the app and see the list of all the users' emails.
 
@@ -183,7 +198,7 @@ and how to subscribe to it with the $collection.bind 4th parameter.
 
 In the next step we will learn how to filter the users list in the client side with AngularJS filters and create a custom filter for our own needs.
 
-      {{/markdown}}
+    </btf-markdown>
     </do-nothing>
 
     <ul class="btn-group tutorial-nav">
@@ -193,4 +208,4 @@ In the next step we will learn how to filter the users list in the client side w
       <a href="/tutorial-02/step_10"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
     </ul>
   </div>
-</template>
+

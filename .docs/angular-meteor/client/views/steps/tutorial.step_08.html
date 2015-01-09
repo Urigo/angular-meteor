@@ -64,9 +64,12 @@ So instead of adding {> loginButtons }} like in Meteor we will add <meteor-inclu
 
 __`index.html`:__
 
+      <head>
+        <base href="/">
+      </head>
       <body>
 
-      <div>
+      <div ng-app="socially">
         <meteor-include src="loginButtons"></meteor-include>
         <h1>
           <a href="/parties">Home</a>
