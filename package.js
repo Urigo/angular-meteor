@@ -13,8 +13,6 @@ Package.registerBuildPlugin({
 
 Package.on_use(function (api) {
   api.versionsFrom('METEOR@0.9.0.1');
-  // Exports the angular package scope
-  api.export('angularMeteor', 'client');
 
   api.use('jquery', 'client', {weak: true});
 

@@ -1,5 +1,5 @@
 // Define angular-meteor and its dependencies
-angularMeteor = angular.module('angular-meteor', [
+angular.module('angular-meteor', [
   'angular-meteor.subscribe',
   'angular-meteor.collections',
   'angular-meteor.meteor-collection',
@@ -13,17 +13,7 @@ angularMeteor = angular.module('angular-meteor', [
   'hashKeyCopier'
 ]);
 
-// Method to allow injection of angular modules dependencies into angular-meteor
-angularMeteor.injector = function (modules) {
-  angular.forEach(modules, function (module) {
-    angularMeteor.requires.push(module);
-  });
-};
-
 var onReady = function () {
-  if (!angular.element(document).injector()) {
-    angular.bootstrap(document, ['angular-meteor']);
-  }
 
 // Recompile after iron:router builds page
   if(typeof Router != 'undefined') {
