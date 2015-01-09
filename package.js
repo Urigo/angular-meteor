@@ -42,6 +42,21 @@ Package.on_use(function (api) {
 
 Package.onTest(function(api) {
   api.use('tinytest');
-  api.use('urigo:angular');
-  api.addFiles('urigo:angular-tests.js');
+  api.use(['test-helpers'], ['client']);
+  api.addFiles([
+    'test/deps/angular.js',
+    'urigo:angular.js',
+    'lib/angular-hash-key-copier.js',
+    'modules/angular-meteor-collections.js',
+    'modules/angular-meteor-meteorCollection.js',
+    'modules/angular-meteor-methods.js',
+    'modules/angular-meteor-object.js',
+    'modules/angular-meteor-reactive-scope.js',
+    'modules/angular-meteor-session.js',
+    'modules/angular-meteor-subscribe.js',
+    'modules/angular-meteor-template.js',
+    'modules/angular-meteor-user.js',
+    'modules/angular-meteor-utils.js',
+    'test/urigo:angular-tests.js'
+  ], ['client']);
 });
