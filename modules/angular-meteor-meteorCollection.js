@@ -159,6 +159,8 @@ AngularMeteorCollection.prototype.remove = function remove(keys) {
             if (deletedItemIndex != -1)
               self.splice(self.indexOf(_.findWhere(self, {_id: result._id})), 1);
           }
+        }, function(error){
+          self.push(collection.findOne(key));
         });
         this.push(currentPromise);
       }, promises);
@@ -170,6 +172,8 @@ AngularMeteorCollection.prototype.remove = function remove(keys) {
           if (deletedItemIndex != -1)
             self.splice(self.indexOf(_.findWhere(self, {_id: result._id})), 1);
         }
+      }, function(error){
+        self.push(collection.findOne(keys));
       });
       promises.push(currentPromise);
     }
@@ -182,6 +186,8 @@ AngularMeteorCollection.prototype.remove = function remove(keys) {
           if (deletedItemIndex != -1)
             self.splice(self.indexOf(_.findWhere(self, {_id: result._id})), 1);
         }
+      }, function(error){
+        self.push(collection.findOne(doc._id));
       });
       this.push(currentPromise);
     }, promises);
