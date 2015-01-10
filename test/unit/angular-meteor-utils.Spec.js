@@ -16,21 +16,28 @@ describe('Given the Angular Meteor Utils Service', function() {
 
     });
 
-    describe('when calling GetCollectionByName()', function() {
+    describe('when using GetCollectionByName(collectionName)', function() {
 
         beforeEach(function() {
-            function Collection() {
-                alert('test');
-            }
+
+            // Mocking a Collection
+            function Collection() {}
             Collection.prototype._name = 'myCollection';
             Mongo = {Collection: Collection};
             window.myCol = new Mongo.Collection;
         });
 
-        it('should return a mongo collection', function() {
+        it('should find and return a mongo collection by name', function() {
             var output = $meteorUtils.getCollectionByName('myCollection');
             expect(output).toEqual(window.myCol);
 
         });
+
+        it('should return "undefined" if it cant find the collection', function() {
+
+            var output = $meteorUtils.getCollectionByName('myCollectionFake');
+            expect(output).toEqual(undefined);
+
+        })
     });
 });
