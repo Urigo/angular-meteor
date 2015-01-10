@@ -1,7 +1,7 @@
 
   <div class="row">
     <div class="col-md-12">
-        <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/steps/tutorial.step_04.html"
+        <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/steps/tutorial.step_04.tpl"
            class="btn btn-default btn-lg improve-button">
           <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
         </a>
@@ -45,7 +45,7 @@ Add to following form inside the PartiesListCtrl div:
 
     <btf-markdown>
 
-So that index.html will look like that:
+So that index.tpl will look like that:
 
 __`index.tpl`:__
 

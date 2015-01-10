@@ -1,7 +1,7 @@
 
   <div class="row">
   <div class="col-md-12">
-    <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/steps/tutorial.step_05.html"
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/steps/tutorial.step_05.tpl"
        class="btn btn-default btn-lg improve-button">
       <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
     </a>
@@ -195,8 +195,8 @@ Using the Angular app's .config() method, we request the $stateProvider to be in
 
 Our application routes are defined as follows:
 
-* ('/parties'): The parties list view will be shown when the URL hash fragment is /parties. To construct this view, Angular will use the parties-list.html template and the PartiesListCtrl controller.
-* ('/parties/:partyId'): The party details view will be shown when the URL hash fragment matches '/parties/:partyId', where :partyId is a variable part of the URL. To construct the party details view, Angular will use the party-details.html template and the PartyDetailsCtrl controller.
+* ('/parties'): The parties list view will be shown when the URL hash fragment is /parties. To construct this view, Angular will use the parties-list.tpl template and the PartiesListCtrl controller.
+* ('/parties/:partyId'): The party details view will be shown when the URL hash fragment matches '/parties/:partyId', where :partyId is a variable part of the URL. To construct the party details view, Angular will use the party-details.tpl template and the PartyDetailsCtrl controller.
 * $urlRouterProvider.otherwise("/parties"): triggers a redirection to /parties when the browser address doesn't match either of our routes.
 * $locationProvider.html5Mode(true): Sets the url to look like a regular one. more about it [here](https://docs.angularjs.org/guide/$location#hashbang-and-html5-modes).
 

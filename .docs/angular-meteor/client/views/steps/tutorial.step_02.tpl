@@ -1,7 +1,7 @@
 
   <div class="row">
     <div class="col-md-12">
-        <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/steps/tutorial.step_02.html"
+        <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/steps/tutorial.step_02.tpl"
            class="btn btn-default btn-lg improve-button">
           <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
         </a>
@@ -156,7 +156,7 @@ To learn more about Angular scopes, see the [angular scope documentation](https:
 
 # Experiments
 
-Add another binding to index.html. For example:
+Add another binding to index.tpl. For example:
 
 </btf-markdown>
 
@@ -170,7 +170,7 @@ Create a new model property in the controller (inside app.js) and bind to it fro
 
       $scope.name = "World";
 
-Then add a new binding to index.html:
+Then add a new binding to index.tpl:
 
 </btf-markdown>
 <pre><code>
@@ -180,7 +180,7 @@ Then add a new binding to index.html:
 
 Verify that it says "Hello, World!".
 
-Create a repeater in index.html that constructs a simple table:
+Create a repeater in index.tpl that constructs a simple table:
 
       </btf-markdown>
 

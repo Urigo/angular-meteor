@@ -1,7 +1,7 @@
 
   <div class="row">
     <div class="col-md-12">
-    <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/steps/tutorial.step_09.html"
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/steps/tutorial.step_09.tpl"
        class="btn btn-default btn-lg improve-button">
       <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
     </a>
@@ -160,6 +160,11 @@ Now let's subscribe to that publish Method.  in the client->parties->controllers
 * Binding the result to $scope.users
 * Notice that we passes false in the second parameter. that means that we don't want to update that collection from the client.
 * Calling [AngularMeteorCollection's](/api/AngularMeteorCollection) subscribe function.
+
+Also, let's add a subscription to the party in case we get strait to there and won't go through the parties controller:
+
+    $scope.party = $meteorObject(Parties, $stateParams.partyId).subscribe('parties');
+
 
 Now let's add the list of users to the view to make sure it works.
 

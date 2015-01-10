@@ -1,7 +1,7 @@
 
   <div class="row">
     <div class="col-md-12">
-        <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/steps/tutorial.step_00.html"
+        <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/steps/tutorial.step_00.tpl"
            class="btn btn-default btn-lg improve-button">
           <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
         </a>
@@ -183,7 +183,7 @@ Inside in the client side, like a future smart browser would do.
 
 
 # Experiments
-Try adding a new expression to the index.html that will do some math:
+Try adding a new expression to the index.tpl that will do some math:
 
 </btf-markdown>
 

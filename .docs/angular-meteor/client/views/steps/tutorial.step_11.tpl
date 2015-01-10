@@ -1,6 +1,6 @@
-<template name="tutorial.step_11.html">
+
   <div>
-    <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/steps/tutorial.step_11.html"
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/steps/tutorial.step_11.tpl"
        class="btn btn-default btn-lg improve-button">
       <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
     </a>
@@ -12,7 +12,7 @@
     </ul>
 
     <do-nothing>
-      {{#markdown}}
+  <btf-markdown>
 
 # Step 11 - Meteor methods with promises
 
@@ -121,13 +121,18 @@ The promise we resolve with 'then' which defines 2 parameters:
 
 Now let's add a button to invite each user we want. Edit the users lists in the partyDetails template to look like this:
 
-    <ul>
-      Users:
-      <li ng-repeat="user in users | uninvited:party">
-        <div>[[ user | displayName ]]</div>
-        <button ng-click="invite(user)">Invite</button>
-      </li>
-    </ul>
+    </btf-markdown>
+
+<pre><code><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">ul</span>&gt;</span>
+  Users:
+  <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">ng-repeat</span>=<span class="hljs-value">"user in users | uninvited:party"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span></span><span class="hljs-expression">{{ <span class="hljs-variable">user</span> | <span class="hljs-variable">displayName</span> }}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">ng-click</span>=<span class="hljs-value">"invite(user)"</span>&gt;</span>Invite<span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span></span>
+</code></pre>
+
+      <btf-markdown>
 
 Now that we have the invite function working, we also want to publish the parties to the invited users.
 Let's add that permission to the publish parties method:
@@ -232,33 +237,41 @@ don't forget to add the $meteorMethods service to the controllers dependencies:
 
 
 and let's add action buttons to call the right rsvp in the HTML.
-Add this code into parties-list.html inside the parties list itself (inside the ng-repeat):
+Add this code into parties-list.tpl inside the parties list itself (inside the ng-repeat):
 
-      <div>
-        <input type="button" value="I'm going!" ng-click="rsvp(party._id, 'yes')">
-        <input type="button" value="Maybe" ng-click="rsvp(party._id, 'maybe')">
-        <input type="button" value="No" ng-click="rsvp(party._id, 'no')">
-      </div>
+        </btf-markdown>
+<pre><code>  &lt;div&gt;
+  &lt;input <span class="hljs-variable">type=</span><span class="hljs-string">"button"</span> <span class="hljs-variable">value=</span><span class="hljs-string">"I'm going!"</span> <span class="hljs-variable">ng-click=</span><span class="hljs-string">"rsvp(party._id, 'yes')"</span>&gt;
+  &lt;input <span class="hljs-variable">type=</span><span class="hljs-string">"button"</span> <span class="hljs-variable">value=</span><span class="hljs-string">"Maybe"</span> <span class="hljs-variable">ng-click=</span><span class="hljs-string">"rsvp(party._id, 'maybe')"</span>&gt;
+  &lt;input <span class="hljs-variable">type=</span><span class="hljs-string">"button"</span> <span class="hljs-variable">value=</span><span class="hljs-string">"No"</span> <span class="hljs-variable">ng-click=</span><span class="hljs-string">"rsvp(party._id, 'no')"</span>&gt;
+  &lt;/div&gt;
+</code></pre>
+
+      <btf-markdown>
 
 
 Now let's display for each party who is coming.
 Just after the code you just added (still inside the parties ng-repeat) add the following code:
 
-      <div>
-        Who is coming:
-        Yes - [[ (party.rsvps | filter:{rsvp:'yes'}).length ]]
-        Maybe - [[ (party.rsvps | filter:{rsvp:'maybe'}).length ]]
-        No - [[ (party.rsvps | filter:{rsvp:'no'}).length ]]
-        <div ng-repeat="rsvp in party.rsvps | filter:{rsvp:'yes'}">
-          [[ getUserById(rsvp.user) | displayName ]] - [[ rsvp.rsvp ]]
-        </div>
-        <div ng-repeat="rsvp in party.rsvps | filter:{rsvp:'maybe'}">
-          [[ getUserById(rsvp.user) | displayName ]] - [[ rsvp.rsvp ]]
-        </div>
-        <div ng-repeat="rsvp in party.rsvps | filter:{rsvp:'no'}">
-          [[ getUserById(rsvp.user) | displayName ]] - [[ rsvp.rsvp ]]
-        </div>
-      </div>
+   </btf-markdown>
+
+<pre><code><span class="xml">  <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
+    Who is coming:
+    Yes - </span><span class="hljs-expression">{{ (<span class="hljs-variable">party.rsvps</span> | <span class="hljs-variable">filter</span>:{<span class="hljs-variable">rsvp</span>:'<span class="hljs-variable">yes</span>'})<span class="hljs-variable">.length</span> }}</span><span class="xml">
+    Maybe - </span><span class="hljs-expression">{{ (<span class="hljs-variable">party.rsvps</span> | <span class="hljs-variable">filter</span>:{<span class="hljs-variable">rsvp</span>:'<span class="hljs-variable">maybe</span>'})<span class="hljs-variable">.length</span> }}</span><span class="xml">
+    No - </span><span class="hljs-expression">{{ (<span class="hljs-variable">party.rsvps</span> | <span class="hljs-variable">filter</span>:{<span class="hljs-variable">rsvp</span>:'<span class="hljs-variable">no</span>'})<span class="hljs-variable">.length</span> }}</span><span class="xml">
+    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">ng-repeat</span>=<span class="hljs-value">"rsvp in party.rsvps | filter:{rsvp:'yes'}"</span>&gt;</span>
+      </span><span class="hljs-expression">{{ <span class="hljs-variable">getUserById</span>(<span class="hljs-variable">rsvp.user</span>) | <span class="hljs-variable">displayName</span> }}</span><span class="xml"> - </span><span class="hljs-expression">{{ <span class="hljs-variable">rsvp.rsvp</span> }}</span><span class="xml">
+    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">ng-repeat</span>=<span class="hljs-value">"rsvp in party.rsvps | filter:{rsvp:'maybe'}"</span>&gt;</span>
+      </span><span class="hljs-expression">{{ <span class="hljs-variable">getUserById</span>(<span class="hljs-variable">rsvp.user</span>) | <span class="hljs-variable">displayName</span> }}</span><span class="xml"> - </span><span class="hljs-expression">{{ <span class="hljs-variable">rsvp.rsvp</span> }}</span><span class="xml">
+    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">ng-repeat</span>=<span class="hljs-value">"rsvp in party.rsvps | filter:{rsvp:'no'}"</span>&gt;</span>
+      </span><span class="hljs-expression">{{ <span class="hljs-variable">getUserById</span>(<span class="hljs-variable">rsvp.user</span>) | <span class="hljs-variable">displayName</span> }}</span><span class="xml"> - </span><span class="hljs-expression">{{ <span class="hljs-variable">rsvp.rsvp</span> }}</span><span class="xml">
+    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span></span>
+</code></pre>
+      <btf-markdown>
 
 First, take a look at the use of filter with length to find how many people responded with each response type.
 
@@ -266,12 +279,17 @@ then, look at using ng-repeat inside an ng-repeat - ng-repeat on revps inside pa
 
 Now let's add a list of the users who haven't responded yet just below the code we just added:
 
-      <ul>
-        Users who not responded:
-        <li ng-repeat="invitedUser in outstandingInvitations(party)">
-          [[ invitedUser | displayName ]]
-        </li>
-      </ul>
+        </btf-markdown>
+
+<pre><code><span class="xml">  <span class="hljs-tag">&lt;<span class="hljs-title">ul</span>&gt;</span>
+    Users who not responded:
+    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">ng-repeat</span>=<span class="hljs-value">"invitedUser in outstandingInvitations(party)"</span>&gt;</span>
+      </span><span class="hljs-expression">{{ <span class="hljs-variable">invitedUser</span> | <span class="hljs-variable">displayName</span> }}</span><span class="xml">
+    <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span></span>
+</code></pre>
+
+      <btf-markdown>
 
 Again, an ng-repeat inside an ng-repeat.  this time we are calling a function the will give us back all the users who haven't responded to that specific party.
 add that function inside the partiesListCtrl in the partiesList.js file:
@@ -301,7 +319,7 @@ There are stuff that there is no need for them to show up if the user is not aut
 
 So in the next chapter we are going to learn about a few simple but very useful AngularJS directive to help us conditionally add or remove DOM.
 
-      {{/markdown}}
+    </btf-markdown>
     </do-nothing>
 
     <ul class="btn-group tutorial-nav">
@@ -311,6 +329,6 @@ So in the next chapter we are going to learn about a few simple but very useful 
       <a href="/tutorial-02/step_12"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
     </ul>
   </div>
-</template>
+
 
 
