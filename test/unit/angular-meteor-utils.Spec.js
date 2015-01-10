@@ -1,17 +1,19 @@
 'use strict';
 
-var Mongo;
+var Mongo, Tracker;
 
 describe('Given the Angular Meteor Utils Service', function() {
 
-    var $meteorUtils;
+    var $meteorUtils, $scope;
 
     beforeEach(function () {
 
         module('angular-meteor.utils');
         // Injecting Services to use
-        inject(function (_$meteorUtils_) {
+        inject(function (_$meteorUtils_, _$rootScope_) {
             $meteorUtils = _$meteorUtils_;
+            // Creates a new child scope.
+            $scope = _$rootScope_.$new();
         });
 
     });
@@ -20,7 +22,7 @@ describe('Given the Angular Meteor Utils Service', function() {
 
         beforeEach(function() {
 
-            // Mocking a Collection
+            // Mocking Collection
             function Collection() {}
             Collection.prototype._name = 'myCollection';
             Mongo = {Collection: Collection};
@@ -33,11 +35,34 @@ describe('Given the Angular Meteor Utils Service', function() {
 
         });
 
-        it('should return "undefined" if it cant find the collection', function() {
+        it('should return "undefined" if it can\'t find the collection', function() {
 
             var output = $meteorUtils.getCollectionByName('myCollectionFake');
             expect(output).toEqual(undefined);
 
         })
     });
+
+    describe('when using autorun(scope, function)', function() {
+
+        beforeEach(function() {
+
+            // Mocking Tracker behavior
+            Tracker = {
+                autorun: function(fn) {
+                    return 'autorun';
+                }
+            }
+        });
+
+        it('should return the "autorun" object so that can be stopped manually', function() {
+
+            function fn(){}
+            var output = $meteorUtils.autorun($scope, fn);
+            expect(output).toEqual('autorun');
+
+        });
+
+    });
+
 });
