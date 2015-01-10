@@ -44,7 +44,7 @@ Package.onTest(function(api) {
   api.use('tinytest');
   api.use(['test-helpers'], ['client']);
   api.addFiles([
-    'test/deps/angular.js',
+    'node_modules/angular/angular.js',
     'urigo:angular.js',
     'lib/angular-hash-key-copier.js',
     'modules/angular-meteor-collections.js',
