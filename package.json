@@ -24,6 +24,8 @@
   },
   "homepage": "https://github.com/Urigo/angular-meteor",
   "devDependencies": {
+    "angular": "^1.3.8",
+    "angular-mocks": "^1.3.8",
     "istanbul": "^0.3.5",
     "jasmine-core": "^2.1.3",
     "karma": "^0.12.31",
