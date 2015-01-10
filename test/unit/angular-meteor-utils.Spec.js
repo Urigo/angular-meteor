@@ -40,7 +40,7 @@ describe('Given the Angular Meteor Utils Service', function () {
     it('should return "undefined" if it can\'t find the collection', function () {
 
       var output = $meteorUtils.getCollectionByName('myCollectionFake');
-      expect(output).toEqual(undefined);
+      expect(output).toBeUndefined();
 
     })
   });
