@@ -8,7 +8,6 @@ angularMeteorUtils.service('$meteorUtils', [
         if (window[globalObject] instanceof Mongo.Collection) {
           if (window[globalObject]._name == string){
             return window[globalObject];
-            break;
           }
         }
       }
