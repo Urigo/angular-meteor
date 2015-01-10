@@ -44,8 +44,8 @@ module.exports = function(config) {
       // specify a common output directory
       dir: '.coverage',
       reporters: [
-        { type: 'text'}
-
+        { type: 'text'},
+        { type: 'html'}
       ]
     },
 
