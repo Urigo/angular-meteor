@@ -91,6 +91,30 @@ describe('Given the Angular Meteor Utils Service', function () {
 
     });
 
+    describe('when destroying the $scope', function() {
+
+      beforeEach(function() {
+
+        Tracker = {
+          autorun: function (fn) {
+            fn({firstRun: true});
+            return {
+              stop: jasmine.createSpy('spy')
+            }
+          }
+        };
+
+      });
+
+      it('should stop the "autorun"', function() {
+
+        var output = $meteorUtils.autorun($scope, function fn() {});
+        $scope.$destroy();
+        expect(output.stop).toHaveBeenCalled();
+
+      });
+    });
+
   });
 
 });
