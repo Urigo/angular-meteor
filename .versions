@@ -8,8 +8,9 @@ ejson@1.0.5
 follower-livedata@1.0.3
 geojson-utils@1.0.2
 id-map@1.0.2
+jquery@1.0.2
 json@1.0.2
-local-test:urigo:angular@0.6.0-alpha
+local-test:urigo:angular@0.6.0
 logging@1.0.6
 meteor@1.1.4
 minimongo@1.0.6
@@ -18,7 +19,8 @@ mquandalle:bower@0.1.11
 ordered-dict@1.0.2
 random@1.0.2
 retry@1.0.2
+test-helpers@1.0.3
 tinytest@1.0.4
 tracker@1.0.4
 underscore@1.0.2
-urigo:angular@0.6.0-alpha
+urigo:angular@0.6.0
