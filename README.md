@@ -3,18 +3,16 @@
 > The power of Meteor and the simplicity and eco-system of AngularJS
 
 # New 0.6 version - biggest change we had so far!
-We just released angular-meteor version 0.6-alpha with a lot of exciting new features.
+We just released angular-meteor version 0.6.0 with a lot of exciting new features.
 
 It has a completely new API for collections, templates and routing.
 
 It also has breaking changes.
-Please read more and get ready here: [0.6.0-alpha release](https://github.com/Urigo/angular-meteor/releases/tag/0.6.0-alpha)
+Please read more and get ready here: [0.6.0 release](https://github.com/Urigo/angular-meteor/releases/tag/0.6.0)
 
-We will support the old API only until the end of the beta version so please update your applications.
+Update to the new version:
 
-To try out the alpha version and see that you are ready:
-
-    meteor add urigo:angular@0.6.0-alpha
+    meteor update
 
 # Please support our ng-conf 2015 talk proposal by commenting on it here:
 [https://github.com/ng-conf/submissions-2015/pull/172](https://github.com/ng-conf/submissions-2015/pull/172)
