@@ -1,5 +1,5 @@
 'use strict';
-var angularMeteorCollections = angular.module('angular-meteor.collections', ['angular-meteor.subscribe']);
+var angularMeteorCollections = angular.module('angular-meteor.collections', ['angular-meteor.subscribe', 'hashKeyCopier']);
 
 var AngularMeteorCollection = function (collection, $q, selector, options) {
   var self = collection.find(selector, options).fetch();
@@ -148,10 +148,15 @@ var updateAngularCollection = function (newArray, oldArray) {
 angularMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier', '$meteorSubscribe',
   function ($q, HashKeyCopier, $meteorSubscribe) {
     return function (collection, selector, options) {
+
       if (!selector) selector = {};
+      console.log('getting here 1', collection, selector, options);
       if (!(collection instanceof Meteor.Collection)) {
+        console.log('getting here 2');
         throw new TypeError("The first argument of $collection must be a Meteor.Collection object.");
       }
+      console.log('getting here 3');
+
       return {
 
         bindOne: function(scope, model, id, auto, publisher) {
@@ -192,8 +197,10 @@ angularMeteorCollections.factory('$collection', ['$q', 'HashKeyCopier', '$meteor
         },
 
         bind: function (scope, model, auto, publisher, paginate) {
+          console.log('get here');
           auto = auto || false; // Sets default binding type.
           if (!(typeof auto === 'boolean')) { // Checks if auto is a boolean.
+            console.log('and this is what haapens');
             throw new TypeError("The third argument of bind must be a boolean.");
           }
 
