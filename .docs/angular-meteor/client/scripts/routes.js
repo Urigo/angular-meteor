@@ -61,9 +61,9 @@ angular.module("meteor-angular-docs").config(['$urlRouterProvider', '$stateProvi
           url: '/user',
           template: UiRouter.template('api.user.html')
         })
-        .state('api.getReactivly', {
-          url: '/getReactivly',
-          template: UiRouter.template('api.getReactivly.html')
+        .state('api.getReactively', {
+          url: '/getReactively',
+          template: UiRouter.template('api.getReactively.html')
         })
         .state('api.meteor-include', {
           url: '/meteor-include',

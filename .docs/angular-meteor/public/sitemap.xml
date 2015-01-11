@@ -130,7 +130,7 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/api/getReactivly</loc>
+    <loc>http://angularjs.meteor.com/api/getReactively</loc>
     <priority>0.5</priority>
   </url>
   <url>

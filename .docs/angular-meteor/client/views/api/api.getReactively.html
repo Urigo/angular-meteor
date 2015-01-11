@@ -1,6 +1,6 @@
-<template name="api.getReactivly.html">
+<template name="api.getReactively.html">
   <div>
-    <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/api/api.getReactivly.html"
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/api/api.getReactively.html"
        class="btn btn-default btn-lg improve-button">
       <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
     </a>
@@ -8,7 +8,7 @@
     <do-nothing>
         {{#markdown}}
 
-# scope.getReactivly
+# scope.getReactively
 
 A method to get a $scope variable and watch it reactivly
 
@@ -16,7 +16,7 @@ A method to get a $scope variable and watch it reactivly
 
 ## Usage
 
-scope.getReactivly(scopeVariableName)
+scope.getReactively(scopeVariableName)
 
 ### Arguments
 
@@ -59,19 +59,19 @@ scope.getReactivly(scopeVariableName)
 
     $scope.parties = $meteorCollection(function() {
       return Parties.find({}, {
-        sort : $scope.getReactivly('sort')     // Every time $scope.sort will change,
+        sort : $scope.getReactively('sort')     // Every time $scope.sort will change,
                                                // the reactive function will re-run again
       });
     });
 
 
-    // Everytime one of the getReactivly variables will change,
+    // Everytime one of the getReactively variables will change,
     // the autorun will fire and the subscription will re-run
     $meteorUtils.autorun($scope, function() {
       $meteorSubscribe.subscribe('parties', {
-        limit: parseInt($scope.getReactivly('perPage')),
-        skip: (parseInt($scope.getReactivly('page')) - 1) * parseInt($scope.getReactivly('perPage')),
-        sort: $scope.getReactivly('sort')
+        limit: parseInt($scope.getReactively('perPage')),
+        skip: (parseInt($scope.getReactively('page')) - 1) * parseInt($scope.getReactively('perPage')),
+        sort: $scope.getReactively('sort')
       }).then(function() {
 
         console.log('new parties in page equals - ', $scope.parties);

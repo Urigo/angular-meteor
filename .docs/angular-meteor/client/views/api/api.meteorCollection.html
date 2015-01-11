@@ -40,7 +40,7 @@ $meteorCollection(collection, auto)
     <a href="http://docs.meteor.com/#/full/mongo_cursor" class="label type-hint type-hint-regexp">Reactive Function</a>
   </td>
   <td><p>A Meteor Collection or a reactive function to bind to.
-    reactive function can be used with $scope.getReactivly to add $scope variable as reactive variable to the cursor.</p></td>
+    reactive function can be used with $scope.getReactively to add $scope variable as reactive variable to the cursor.</p></td>
   <td><a href="" class="label type-hint type-hint-array">Yes</a></td>
   <td></td>
 </tr>
@@ -93,7 +93,7 @@ $meteorCollection(collection, auto)
           // Binds the query to $scope.sticky so that if it changes, Meteor will re-run the query and bind it
           // to $scope.stickyTodos
           $scope.stickyTodos = $meteorCollection(function(){
-            return Todos.find({sticky: $scope.getReactivly('sticky')});
+            return Todos.find({sticky: $scope.getReactively('sticky')});
           });
 
           // Bind without auto-save all todos to $scope.notAutoTodos

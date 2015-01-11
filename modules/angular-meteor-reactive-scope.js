@@ -4,7 +4,7 @@
 var angularMeteorReactiveScope = angular.module('angular-meteor.reactive-scope', []);
 
 angularMeteorReactiveScope.run(['$rootScope', function($rootScope) {
-  Object.getPrototypeOf($rootScope).getReactivly = function(property) {
+  Object.getPrototypeOf($rootScope).getReactively = function(property) {
     var self = this;
 
     if (!self.$$trackerDeps) {
