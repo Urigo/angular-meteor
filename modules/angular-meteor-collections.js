@@ -1,5 +1,5 @@
 'use strict';
-var angularMeteorCollections = angular.module('angular-meteor.collections', ['angular-meteor.subscribe']);
+var angularMeteorCollections = angular.module('angular-meteor.collections', ['angular-meteor.subscribe', 'hashKeyCopier']);
 
 var AngularMeteorCollection = function (collection, $q, selector, options) {
   var self = collection.find(selector, options).fetch();
