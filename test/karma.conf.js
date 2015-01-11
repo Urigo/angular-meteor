@@ -17,6 +17,7 @@ module.exports = function(config) {
     files: [
       'node_modules/angular/angular.js',
       'node_modules/angular-mocks/angular-mocks.js',
+      'lib/angular-hash-key-copier.js',
       'modules/**/*.js',
       'test/unit/**/*Spec.js'
     ],
@@ -44,8 +45,8 @@ module.exports = function(config) {
       // specify a common output directory
       dir: '.coverage',
       reporters: [
-        { type: 'text'}
-
+        { type: 'text'},
+        { type: 'html'}
       ]
     },
 

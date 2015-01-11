@@ -59,12 +59,60 @@ describe('Given the Angular Meteor Utils Service', function () {
 
     it('should return the "autorun" object so that can be stopped manually', function () {
 
-      function fn() {
-      }
 
-      var output = $meteorUtils.autorun($scope, fn);
+      var output = $meteorUtils.autorun($scope, function fn() {});
       expect(output).toEqual('autorun');
 
+    });
+
+    describe('when firstRun is set to: false', function() {
+
+      beforeEach(function() {
+
+        Tracker = {
+          autorun: function (fn) {
+            fn({firstRun: false})
+          }
+        };
+
+        spyOn($scope, '$apply');
+
+      });
+
+      it('should call $scope.$apply()', function(done) {
+
+        $meteorUtils.autorun($scope, function fn() {});
+
+        setTimeout(function() {
+          expect($scope.$apply).toHaveBeenCalled();
+          done()
+        }, 0);
+      });
+
+    });
+
+    describe('when destroying the $scope', function() {
+
+      beforeEach(function() {
+
+        Tracker = {
+          autorun: function (fn) {
+            fn({firstRun: true});
+            return {
+              stop: jasmine.createSpy('spy')
+            }
+          }
+        };
+
+      });
+
+      it('should stop the "autorun"', function() {
+
+        var output = $meteorUtils.autorun($scope, function fn() {});
+        $scope.$destroy();
+        expect(output.stop).toHaveBeenCalled();
+
+      });
     });
 
   });
