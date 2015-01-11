@@ -59,9 +59,6 @@ angularMeteorObject.factory('$meteorObject', ['$rootScope', '$meteorUtils', '$me
         throw new TypeError("The first argument of $collection must be a Meteor.Collection object.");
       }
       auto = auto !== false; // Making auto default true - http://stackoverflow.com/a/15464208/1426570
-      if (!(typeof auto === 'boolean')) { // Checks if auto is a boolean.
-        throw new TypeError("The third argument of bind must be a boolean.");
-      }
 
       var data = new AngularMeteorObject(collection, id, options, $meteorSubscribe);
 
