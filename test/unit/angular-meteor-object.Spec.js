@@ -4,18 +4,18 @@ var Meteor;
 
 describe('Given the $meteorObject factory', function() {
 
-  var $meteorObject, updateSpy;
+  var $meteorObject, updateSpy, findOneSpy;
 
   beforeEach(function() {
 
     updateSpy = jasmine.createSpy('update');
+    findOneSpy = jasmine.createSpy('findOne').and.returnValue({_id: 1})
 
     var C = function C() {}
 
-    C.prototype.findOne = function() {
-      return {_id: 1}
-    };
+    C.prototype.findOne = findOneSpy;
     C.prototype.update = updateSpy;
+
 
     Meteor = {
       Collection: C
@@ -51,7 +51,7 @@ describe('Given the $meteorObject factory', function() {
 
   });
 
-  describe('When calling save()', function() {
+  describe('when calling save()', function() {
 
     it('should invoke Collection.update()', function() {
 
@@ -62,6 +62,22 @@ describe('Given the $meteorObject factory', function() {
       result.save();
 
       expect(updateSpy).toHaveBeenCalled();
+
+    });
+
+  });
+
+
+  describe('when calling reset()', function() {
+
+    it('should invoke Collection.findOne() to repopulate the data from the collection', function() {
+      var myCol = new Meteor.Collection();
+
+      var result = $meteorObject(myCol, 1);
+
+      result.reset();
+
+      expect(findOneSpy).toHaveBeenCalled();
 
     });
 
