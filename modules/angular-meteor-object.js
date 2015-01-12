@@ -1,4 +1,4 @@
-var angularMeteorObject = angular.module('angular-meteor.object', []);
+var angularMeteorObject = angular.module('angular-meteor.object', ['angular-meteor.utils', 'angular-meteor.subscribe']);
 
 var AngularMeteorObject = function (collection, id, options, $meteorSubscribe) {
   var self = collection.findOne(id, options);
