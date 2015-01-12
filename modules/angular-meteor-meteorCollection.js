@@ -6,7 +6,7 @@ var angularMeteorCollections = angular.module('angular-meteor.meteor-collection'
 
 var AngularMeteorCollection = function (cursor, $q, $meteorSubscribe, $meteorUtils, $rootScope) {
 
-  var self = [];
+  var self = {};
 
   self.__proto__ = AngularMeteorCollection.prototype;
   self.__proto__.$q = $q;
@@ -18,7 +18,7 @@ var AngularMeteorCollection = function (cursor, $q, $meteorSubscribe, $meteorUti
   return self;
 };
 
-AngularMeteorCollection.prototype = [];
+AngularMeteorCollection.prototype = {};
 
 AngularMeteorCollection.prototype.subscribe = function () {
   var self = this;
