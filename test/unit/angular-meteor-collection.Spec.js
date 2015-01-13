@@ -4,7 +4,7 @@ var Mongo, Tracker, Meteor;
 
 describe('Given the $meteorCollection service', function() {
 
-  var $meteorCollection, spySubscribe;
+  var $meteorCollection, subscribeSpy;
 
   beforeEach(function() {
 
@@ -45,10 +45,10 @@ describe('Given the $meteorCollection service', function() {
       onInvalidate: function() {}
     };
 
-    spySubscribe = jasmine.createSpy('spySubscribe');
+    subscribeSpy = jasmine.createSpy('spySubscribe');
 
     Meteor = {
-      subscribe: spySubscribe
+      subscribe: subscribeSpy
     };
 
     module('angular-meteor.meteor-collection');
@@ -100,7 +100,7 @@ describe('Given the $meteorCollection service', function() {
         var output1 = $meteorCollection(myCollection);
         output1.subscribe();
         expect(typeof output1).toBe('object');
-        expect(spySubscribe).toHaveBeenCalled();
+        expect(subscribeSpy).toHaveBeenCalled();
 
       });
 
