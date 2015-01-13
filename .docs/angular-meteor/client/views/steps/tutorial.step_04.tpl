@@ -149,7 +149,7 @@ Add that function inside the PartiesListCtrl in app.js:
 And this is how the controller should look now:
 
     angular.module("socially").controller("PartiesListCtrl", ['$scope', '$meteorCollection',
-      function($scope, $collection){
+      function($scope, $meteorCollection){
 
         $scope.parties = $meteorCollection(Parties);
 

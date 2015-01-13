@@ -30,7 +30,7 @@ Then let's define the module dependency in our app. go to app.js inside the 'cli
     angular.module('socially',['angular-meteor', 'ui.router', 'google-maps'.ns()]);
 
 
-Now let's add a map the party-details.html. first add this HTML snippet to the end of the template:
+Now let's add a map the party-details.tpl. first add this HTML snippet to the end of the template:
 
         <div class="party-details-maps">
           <div class="angular-google-map-container">
@@ -68,7 +68,7 @@ Now run the app and go to the party details page. you should see a new Google Ma
 
 Let's add a marker that will be binded to the party's location.
 
-inside party-details.html:
+inside party-details.tpl:
 
         <div class="party-details-maps">
           <div class="angular-google-map-container">
@@ -140,7 +140,7 @@ Test it to see clicking and dragging works.
 
 Now let's add a map to the parties list to show all the parties on the map.
 
-So let's add the directives to parties-list.html:
+So let's add the directives to parties-list.tpl:
 
         <div class="angular-google-map-container">
           <ui-gmap-google-map center="map.center" zoom="map.zoom">
@@ -152,7 +152,7 @@ So let's add the directives to parties-list.html:
 
 add it under the search input.
 
-You can see that the difference between the directive we used in party-details.html is that ui-gmap-markers is plural.
+You can see that the difference between the directive we used in party-details.tpl is that ui-gmap-markers is plural.
 the attributes we use:
 
 * models - the scope array that the markers represent.
@@ -166,9 +166,8 @@ notice that we've put filteredParties in the models property. this is because we
 
 Now, inside partiesList.js let's add the following code:
 
-    $collection(Parties).bind($scope, 'parties', true, true).then(
-      function(){
-
+      $scope.parties = $meteorCollection(Parties).subscribe('parties');
+      $meteorSubscribe.subscribe('parties').then(function(){
         $scope.parties.forEach( function (party) {
           party.onClicked = function () {
             onMarkerClicked(party);
@@ -192,9 +191,12 @@ Now, inside partiesList.js let's add the following code:
         var onMarkerClicked = function(marker){
           $state.go('partyDetails', {partyId: marker._id});
         }
-    });
+      });
+      $scope.users = $meteorCollection(Meteor.users, false).subscribe('users');
 
-we are using the promise returned from $collection(Parties).bind to run the following commands:
+We need to run logic only after the subscription is running, so we changed the $meteorCollection.subscribe method to the [$meteorSubscribe service](http://angularjs.meteor.com/api/subscribe).
+
+we are using the promise returned from $meteorSubscribe to run the following commands:
 
 * Adding to each party a function that handles a click event with the party's specific information
 * Initializing the filteredParties $scope variable
@@ -205,8 +207,8 @@ we are doing that because of a bug in angular-google-maps, otherwise we could ha
 
 Don't forget the new dependencies to the controller:
 
-    angular.module("socially").controller("PartiesListCtrl", ['$scope', '$collection', '$meteorMethods', '$rootScope', '$filter', '$state',
-      function($scope, $collection, $meteorMethods, $rootScope, $filter, $state){
+    angular.module("socially").controller("PartiesListCtrl", ['$scope', '$meteorCollection', '$rootScope', '$meteorMethods', '$filter', '$state', '$meteorSubscribe',
+      function($scope, $meteorCollection, $rootScope, $meteorMethods, $filter, $state, $meteorSubscribe){
 
 Now we just need to add styles also to the map in the parties-list.  go into partiesList.less and make it look like that:
 
@@ -231,10 +233,9 @@ Now we just need to add styles also to the map in the parties-list.  go into par
 we have to .angular-google-map-container classes with different styles. one in partiesList.less and one in partyDetail.less.
 we distinguish them with the help of LESS's nested syntax.
 
-So we need to add the .parties-list class to the parties-list.html template, like that:
+So we need to add the .parties-list class to the parties-list.tpl template, like that:
 
-    <template name="parties-list.html">
-      <div class="row parties-list">
+    <div class="row parties-list">
 
 
 # Summery
