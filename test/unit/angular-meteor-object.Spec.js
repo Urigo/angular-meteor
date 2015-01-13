@@ -4,27 +4,49 @@ var Meteor;
 
 describe('Given the $meteorObject factory', function() {
 
-  var $meteorObject, updateSpy, findOneSpy;
+  var $meteorObject, updateSpy, findOneSpy, subscribeSpy, updateSpy, Collection, $rootScope;
 
   beforeEach(function() {
 
     updateSpy = jasmine.createSpy('update');
-    findOneSpy = jasmine.createSpy('findOne').and.returnValue({_id: 1})
+    findOneSpy = jasmine.createSpy('findOne').and.returnValue({_id: 1});
+    subscribeSpy = jasmine.createSpy('subscribe');
+    updateSpy = jasmine.createSpy('update');
 
-    var C = function C() {}
+    Collection = function Collection() {}
 
-    C.prototype.findOne = findOneSpy;
-    C.prototype.update = updateSpy;
+    Collection.prototype.findOne = findOneSpy;
+    Collection.prototype.update = updateSpy;
+
+    Collection.prototype.find = function(){
+      return {
+        collection: {
+          name: 'myCollection'
+        },
+        cursor: {
+          collection: {
+            name: 'myCollection'
+          }
+        },
+        observeChanges: function(){}
+      }
+    };
+
+    Collection.prototype._name = 'myCollection';
+
+    Collection.prototype.update = updateSpy;
 
 
     Meteor = {
-      Collection: C
+      Collection: Collection,
+      subscribe: subscribeSpy
     };
 
     module('angular-meteor.object');
 
-    inject(function(_$meteorObject_) {
+    inject(function(_$meteorObject_, _$rootScope_) {
       $meteorObject = _$meteorObject_;
+      $rootScope = _$rootScope_;
     });
 
   });
@@ -38,7 +60,7 @@ describe('Given the $meteorObject factory', function() {
 
     });
 
-    it('should return an AngularMeteor object that contains: save(), reset() and subscribe() methods', function() {
+    it('should return an AngularMeteor object that contains: save(), reset() and subscribe() and other internal methods', function() {
 
       var myCol = new Meteor.Collection();
       var result = $meteorObject(myCol);
@@ -46,6 +68,49 @@ describe('Given the $meteorObject factory', function() {
       expect(typeof result.save).toEqual('function');
       expect(typeof result.reset).toEqual('function');
       expect(typeof result.subscribe).toEqual('function');
+
+      expect(typeof result.$$collection).toEqual('object');
+      //expect(typeof result.$$options).toEqual('function');
+      expect(typeof result.$meteorSubscribe).toEqual('object');
+      //expect(typeof result.$$id).toEqual('function');
+
+    });
+
+    it('should return the Mongo collection under $$collection', function() {
+
+      var myCol = new Meteor.Collection();
+      var output = $meteorObject(myCol);
+
+      expect(output.$$collection._name).toEqual('myCollection');
+
+    });
+
+    describe('with an empty collection', function() {
+
+      it('should work just fine', function() {
+
+        Collection.prototype.findOne = jasmine.createSpy('findOneAndFalse').and.returnValue(false);
+
+        var myCol = new Meteor.Collection();
+        var output = $meteorObject(myCol);
+        expect(output.$$collection._name).toEqual('myCollection');
+
+      });
+
+    });
+
+    describe('with auto set to: true (default)', function() {
+
+      it('should call collection.update()', function() {
+
+        var myCol = new Meteor.Collection();
+        $meteorObject(myCol, 1, true);
+        $rootScope.$apply();
+
+        expect(updateSpy).toHaveBeenCalled();
+
+      });
+
 
     });
 
@@ -78,6 +143,22 @@ describe('Given the $meteorObject factory', function() {
       result.reset();
 
       expect(findOneSpy).toHaveBeenCalled();
+
+    });
+
+  });
+
+  describe('when calling subscribe()', function() {
+
+    it('should subscribe to the collection', function() {
+
+      var myCol = new Meteor.Collection();
+
+      var result = $meteorObject(myCol, 1);
+
+      result.subscribe();
+
+      expect(subscribeSpy).toHaveBeenCalled();
 
     });
 
