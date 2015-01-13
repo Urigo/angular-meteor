@@ -79,7 +79,7 @@ describe('Given the meteorInclude directive', function() {
     it('should let Blaze to do their thing instead of compiling the template', function() {
 
       //console.log(Object.getOwnPropertyNames(elm['0']));
-      elm = angular.element('<meteor-include src="myTemplate" class="content"></meteor-include>');
+      elm = angular.element('<meteor-include src="myTemplate"></meteor-include>');
       element = $compile(elm)($scope);
       $scope.$digest();
 
