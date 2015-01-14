@@ -59,7 +59,7 @@ describe('Given the meteorInclude directive', function() {
           event1: {
             events: 'click',
             selector: 'div',
-            handler: function() {}
+            handler: 'handler'
           }
         },
         render: false
@@ -127,11 +127,21 @@ describe('Given the meteorInclude directive', function() {
 
     });
 
-    // Work in progress: we need a way to test that the events were bind to the jQuery object.
-    xit('should bind jQuery events', function() {
-      elm = angular.element('<ng-template name="myTemplate">test</ng-template>');
+    it('should bind jQuery events from the Blaze template', function() {
+
+      var bindSpy = jasmine.createSpy();
+
+      spyOn(window, '$').and.returnValue({
+        bind: bindSpy
+      });
+
+      elm = angular.element('<ng-template name="myTemplate"></ng-template>');
       element = $compile(elm)($scope);
       $scope.$digest();
+
+      expect(window.$).toHaveBeenCalledWith('ng-template[name="myTemplate"] div')
+      expect(bindSpy).toHaveBeenCalledWith('click', 'handler')
+
     });
 
   });
