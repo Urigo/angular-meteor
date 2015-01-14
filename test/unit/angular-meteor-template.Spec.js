@@ -45,7 +45,6 @@ describe('Given the Template Service', function() {
 
 });
 
-// Work in progress...
 describe('Given the meteorInclude directive', function() {
 
   var $rootScope, $compile, $scope, element, elm;
@@ -55,15 +54,11 @@ describe('Given the meteorInclude directive', function() {
     module('angular-meteor.template');
 
     Template = {
-      myTemplate: '<div>{{city}}</div>'
+      myTemplate: '<div></div>'
     };
 
     Blaze = {
-      renderWithData: function(){
-
-        return '<div>barcelona</div>';
-
-      }
+      renderWithData: jasmine.createSpy('Blaze')
     };
 
     inject(function(_$rootScope_, _$compile_){
@@ -71,8 +66,6 @@ describe('Given the meteorInclude directive', function() {
         $rootScope = _$rootScope_;
         $compile = _$compile_;
         $scope = $rootScope.$new();
-
-        $scope.city = 'barcelona';
 
 
     });
@@ -83,17 +76,16 @@ describe('Given the meteorInclude directive', function() {
 
   describe('when using the "meteor-include" directive', function() {
 
-    // I can't get this test to work. There is some weirdness about element.get(0)
-    // Todo: research
-    xit('should let Blaze to do their thing instead of compiling the template', function() {
+    it('should let Blaze to do their thing instead of compiling the template', function() {
 
       //console.log(Object.getOwnPropertyNames(elm['0']));
-      elm = angular.element('<meteor-include src="myTemplate" class="content"></meteor-include>');
+      elm = angular.element('<meteor-include src="myTemplate"></meteor-include>');
       element = $compile(elm)($scope);
       $scope.$digest();
-      expect(elm['0'].innerHTML).toEqual('barcelona');
-    });
 
+      expect(Blaze.renderWithData).toHaveBeenCalled();
+
+    });
 
     describe('with an invalid template name', function() {
 
