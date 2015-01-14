@@ -1,6 +1,6 @@
 'use strict';
 
-var Template, Blaze;
+var Template, Blaze, UI;
 
 describe('Given the Template Service', function() {
 
@@ -54,11 +54,26 @@ describe('Given the meteorInclude directive', function() {
     module('angular-meteor.template');
 
     Template = {
-      myTemplate: '<div></div>'
+      myTemplate: {
+        _events: {
+          event1: {
+            events: 'click',
+            selector: 'div',
+            handler: function() {}
+          }
+        },
+        render: false
+      }
     };
 
     Blaze = {
-      renderWithData: jasmine.createSpy('Blaze')
+      renderWithData: jasmine.createSpy('Blaze'),
+      toHTML: jasmine.createSpy('BlazeToHTML')
+
+    };
+
+    UI = {
+      toHTML: function(){}
     };
 
     inject(function(_$rootScope_, _$compile_){
@@ -66,8 +81,6 @@ describe('Given the meteorInclude directive', function() {
         $rootScope = _$rootScope_;
         $compile = _$compile_;
         $scope = $rootScope.$new();
-
-
     });
 
     spyOn(console, 'error');
@@ -102,5 +115,25 @@ describe('Given the meteorInclude directive', function() {
 
   });
 
+  describe('when using the "ng-template"', function() {
+
+    it('should invoke Blaze.toHTML', function() {
+
+      elm = angular.element('<ng-template name="myTemplate"></ng-template>');
+      element = $compile(elm)($scope);
+      $scope.$digest();
+
+      expect(Blaze.toHTML).toHaveBeenCalled();
+
+    });
+
+    // Work in progress: we need a way to test that the events were bind to the jQuery object.
+    xit('should bind jQuery events', function() {
+      elm = angular.element('<ng-template name="myTemplate">test</ng-template>');
+      element = $compile(elm)($scope);
+      $scope.$digest();
+    });
+
+  });
 
 });
