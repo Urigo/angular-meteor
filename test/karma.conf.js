@@ -21,7 +21,7 @@ module.exports = function(config) {
       'node_modules/lodash/lodash.js',
       'lib/angular-hash-key-copier.js',
       'modules/**/*.js',
-      'test/unit/**/*Spec.js'
+      'test/angular/unit/**/*Spec.js'
     ],
 
 
