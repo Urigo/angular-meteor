@@ -144,6 +144,25 @@ describe('Given the meteorInclude directive', function() {
 
     });
 
+
+     describe('with an old version of Meteor', function() {
+
+       beforeEach(function() {
+         Template.myTemplate.render = true;
+       });
+
+
+       it('should invoke Blaze.toHTML', function() {
+
+         elm = angular.element('<ng-template name="myTemplate"></ng-template>');
+         element = $compile(elm)($scope);
+         $scope.$digest();
+
+         expect(Blaze.toHTML).toHaveBeenCalled();
+
+       });
+
+     });
   });
 
 });

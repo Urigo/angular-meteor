@@ -42,7 +42,16 @@ describe('Given the $meteorObject factory', function() {
       subscribe: subscribeSpy
     };
 
-    module('angular-meteor.object');
+    module('angular-meteor.object', function($provide) {
+
+      var mock = {
+        autorun: function(a,b) {
+          b()
+        }
+      };
+
+      $provide.value('$meteorUtils', mock);
+    });
 
     inject(function(_$meteorObject_, _$rootScope_) {
       $meteorObject = _$meteorObject_;
