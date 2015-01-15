@@ -57,6 +57,6 @@ Package.onTest(function(api) {
     'modules/angular-meteor-template.js',
     'modules/angular-meteor-user.js',
     'modules/angular-meteor-utils.js',
-    'test/urigo:angular-tests.js'
+    'test/e2e/tests.js'
   ], ['client']);
 });
