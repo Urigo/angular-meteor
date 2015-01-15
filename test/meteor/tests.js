@@ -1,4 +1,8 @@
-
+/*
+ * How to run these tests
+ * go to the main directory and run:
+ * meteor test-packages ./
+ */
 
 Tinytest.add('When bootstrapping Angular.js ', function (test) {
 
