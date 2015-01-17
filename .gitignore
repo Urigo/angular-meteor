@@ -16,4 +16,3 @@ Thumbs.db
 .meteor/local/bower
 .coverage
 node_modules
-coverage
