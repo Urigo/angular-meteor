@@ -215,7 +215,46 @@ when the sort changes. So all we have left is to sit back and enjoy out paginati
 We made a lot of changes so please check the step's code [here](https://github.com/Urigo/meteor-angular-socially/compare/step_14...step_15)
 to make sure you have everything needed and run the application.
 
-# Summery
+# Reactive Search
+
+Now that we have the basis for pagination, all we have left is to add reactive server-side searching of parties. That means
+that we will be able to enter a search string and have the app search for parties that match that name in the server and
+return only the relevant results! That is pretty awesome, and we are going to do all that only in server lines of code. So
+let's get started.
+
+As before, let's add the server side support. We need to add a new argument to our publish method which will hold the
+requested search string. We will call it..... searchString! Here it goes:
+
+    Meteor.publish("parties", function (options, searchString) {
+
+Yep that was simple. Now we are going to filter the correct results using mongo's regex ability. We are going to add this
+line at two places where are using find:
+
+    'name' : { '$regex' : '.*' + searchString || '' + '.*', '$options' : 'i' },
+
+As you can see this will filter all the parties with a name that contain the searchString. Now let's move on to the client
+side.
+
+We already have a search input in our template. And it is bound to the `search` ng-model. Which means we have the $scope.search
+variable available. Remove the lines that had to do with filtering before:
+
+    $scope.filteredParties = $scope.parties;
+
+    $scope.$watch("search", function(search){
+      $scope.filteredParties = $filter("filter")($scope.parties, search);
+    });
+
+And all we have left to do is call the subscribe method with our reactive scope variable:
+
+    $meteorSubscribe.subscribe('parties', {
+      limit: parseInt($scope.getReactively('perPage')),
+      skip: (parseInt($scope.getReactively('page')) - 1) * parseInt($scope.getReactively('perPage')),
+      sort: $scope.getReactively('sort')
+    }, $scope.getReactively('search')).then(function() {
+
+Wow that is all that is need to have a fully reactive search with pagination! Quite amazing right?
+
+# Summary
 
 Now we have full pagination of client and server side with the help of Meteor's options and Angular's directives.
 
