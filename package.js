@@ -8,7 +8,10 @@ Package.registerBuildPlugin({
   name: "compileAngularTemplates",
   sources: [
     "plugin/handler.js",
-  ]
+  ],
+  npmDependencies : {
+    'html-minifier' : '0.6.9'
+  }
 });
 
 Package.on_use(function (api) {

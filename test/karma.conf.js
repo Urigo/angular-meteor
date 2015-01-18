@@ -45,7 +45,7 @@ module.exports = function(config) {
 
     coverageReporter: {
       // specify a common output directory
-      dir: 'coverage',
+      dir: '.coverage',
       reporters: [
         //{ type: 'text'},
         //{ type: 'html'}
