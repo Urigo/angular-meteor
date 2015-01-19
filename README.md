@@ -35,12 +35,12 @@ We would love contributions in:
 
 We are also considering money compensation for contributors, more as a tribute then a profit for now.
 
-## Contributor Setup
+## Contributor Developer Setup
 Create a directory for your local packages.
 ```bash
 $ mkdir meteorLocalPackages
 ```
-Add the enviromental variable `PACKAGE_DIRS` to your `.bash_profile`
+Add the environmental variable `PACKAGE_DIRS` to your `.bash_profile`
 ```bash
 echo "export PACKAGE_DIRS=$HOME/meteorLocalPackages" >> ~/.bash_profile;
 ```
