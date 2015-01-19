@@ -60,6 +60,7 @@ Add your local package
 ```
 meteor add my-package
 ```
+Now you can start using your own copy of the `angular-meteor` project from `myProject`.
 
 ## Usage
 ### Table of Contents
