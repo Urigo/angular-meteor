@@ -33,7 +33,34 @@ We would love contributions in:
 3. [External issues](https://github.com/Urigo/angular-meteor/issues/109) - help us push external issues that affect our community.
 4. [Roadmap](https://trello.com/b/Wj9U0ulk/angular-meteor) - you can add a card about want you want to see in the library or in the tutorial.
 
-We are also considering money compansation for contributers, more as a tribute then a profit for now.
+We are also considering money compensation for contributors, more as a tribute then a profit for now.
+
+## Contributor Developer Setup
+Create a directory for your local packages.
+```bash
+$ mkdir meteorLocalPackages
+```
+Add the environmental variable `PACKAGE_DIRS` to your `.bash_profile`
+```bash
+echo "export PACKAGE_DIRS=$HOME/meteorLocalPackages" >> ~/.bash_profile;
+```
+Fork the project.
+
+Pull the repo from the local packages directory.
+```bash
+cd ~/meteorLocalPackages
+git clone https://github.com/[your_username]/angular-meteor.git my-package
+```
+Create your Meteor Project
+```bash
+meteor create myProject
+cd myProject
+```
+Add your local package
+```
+meteor add my-package
+```
+Now you can start using your own copy of the `angular-meteor` project from `myProject`.
 
 ## Usage
 ### Table of Contents
