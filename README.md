@@ -33,7 +33,7 @@ We would love contributions in:
 3. [External issues](https://github.com/Urigo/angular-meteor/issues/109) - help us push external issues that affect our community.
 4. [Roadmap](https://trello.com/b/Wj9U0ulk/angular-meteor) - you can add a card about want you want to see in the library or in the tutorial.
 
-We are also considering money compansation for contributers, more as a tribute then a profit for now.
+We are also considering money compensation for contributors, more as a tribute then a profit for now.
 
 ## Contributor Setup
 Create a directory for your local packages.
