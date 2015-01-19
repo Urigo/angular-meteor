@@ -56,10 +56,15 @@ Create your Meteor Project
 meteor create myProject
 cd myProject
 ```
+Create a folder called 'packages' under myProject
+
+Create a link to your local package under the 'packages' folder
+
 Add your local package
 ```
 meteor add my-package
 ```
+
 Now you can start using your own copy of the `angular-meteor` project from `myProject`.
 
 ## Usage
