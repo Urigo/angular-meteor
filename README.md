@@ -94,7 +94,7 @@ However, you need to write your Angular template markup in `.tpl` files, since M
 </head>
 
 <body>
-    <div ng-app="myModule">
+    <div ng-app>
         <ng-include src="'/client/views/user.tpl'"></ng-include>
         <ng-include src="'/client/views/settings.tpl'"></ng-include>
     </div>
