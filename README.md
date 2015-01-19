@@ -36,32 +36,20 @@ We would love contributions in:
 We are also considering money compensation for contributors, more as a tribute then a profit for now.
 
 ## Contributor Developer Setup
-Create a directory for your local packages.
-```bash
-$ mkdir meteorLocalPackages
-```
-Add the environmental variable `PACKAGE_DIRS` to your `.bash_profile`
-```bash
-echo "export PACKAGE_DIRS=$HOME/meteorLocalPackages" >> ~/.bash_profile;
-```
-Fork the project.
-
-Pull the repo from the local packages directory.
-```bash
-cd ~/meteorLocalPackages
-git clone https://github.com/[your_username]/angular-meteor.git my-package
-```
 Create your Meteor Project
 ```bash
 meteor create myProject
 cd myProject
 ```
-Create a folder called 'packages' under myProject
-
-Create a link to your local package under the 'packages' folder
-
+Create a `packages` directory and clone from your forked repo
+```bash
+mkdir packages
+cd packages
+git clone https://github.com/[your_username]/angular-meteor.git my-package
+```
 Add your local package
 ```
+cd ..
 meteor add my-package
 ```
 
