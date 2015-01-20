@@ -34,7 +34,6 @@
     "karma": "^0.12.31",
     "karma-chrome-launcher": "^0.1.7",
     "karma-coverage": "^0.2.7",
-    "karma-coveralls": "^0.1.5",
     "karma-firefox-launcher": "^0.1.4",
     "karma-jasmine": "^0.3.4",
     "lodash": "^2.4.1"
