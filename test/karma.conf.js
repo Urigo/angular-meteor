@@ -40,14 +40,14 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress', 'coverage', 'coveralls'],
+    reporters: ['progress', 'dots', 'coverage'],
 
 
     coverageReporter: {
       // specify a common output directory
       dir: '.coverage',
       reporters: [
-        //{ type: 'text'},
+        { type: 'text'},
         //{ type: 'html'}
         {type: 'lcov'}
       ]
