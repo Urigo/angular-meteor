@@ -68,7 +68,8 @@ $meteorObject(collection, id, auto)
   <td><a href="" class="label type-hint type-hint-object">object</a></td>
   <td><p>Newly created <a href="/api/AngularMeteorCollection">AngularMeteorObject</a> object with the following set of methods:</p>
     <ul>
-      <li><code><span class="pln">save</span></code> — saves the current value of the object to the server.</li>
+      <li><code><span class="pln">save</span></code> — saves the current value of the object to the server.
+        returns a promise with an error in case for an error or a number of successful docs changed in case of success.</li>
       <li><code><span class="pln">reset</span></code> — reset the current value of the object to the one in the server.</li>
     </ul>
   </td>
@@ -94,7 +95,11 @@ $meteorObject(collection, id, auto)
           $scope.partyNotAuto = $meteorObject(Parties, $stateParams.partyId, false);
 
           $scope.save = function() {
-            $scope.partyNotAuto.save();
+            $scope.partyNotAuto.save().then(function(numberOfDocs){
+              console.log('save success doc affected ', numberOfDocs);
+            }, function(error){
+              console.log('save error', error);
+            });
           };
 
           $scope.reset = function() {
