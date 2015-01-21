@@ -21,7 +21,7 @@ module.exports = function(config) {
       'node_modules/lodash/lodash.js',
       'lib/angular-hash-key-copier.js',
       'modules/**/*.js',
-      'test/unit/**/*Spec.js'
+      'test/angular/unit/**/*Spec.js'
     ],
 
 
@@ -40,7 +40,7 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress', 'coverage'],
+    reporters: ['progress', 'dots', 'coverage'],
 
 
     coverageReporter: {
@@ -48,7 +48,8 @@ module.exports = function(config) {
       dir: '.coverage',
       reporters: [
         { type: 'text'},
-        { type: 'html'}
+        //{ type: 'html'}
+        {type: 'lcov'}
       ]
     },
 

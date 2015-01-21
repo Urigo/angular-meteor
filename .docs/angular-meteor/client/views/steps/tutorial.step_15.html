@@ -26,22 +26,76 @@ but also and even more important, we can fetch only a few parties at a time inst
 
 # angular-meteor pagination support
 
-First thing, let's add support for the built-in pagination for the parties collection in partiesList.js.
+What we want to acheieve with angular-meteor is server-based reactive pagination.
+That is no simple task, but using the angular-meteor it could make your life a lot simpler.
 
-All you need to do is add 'true' in the fifth parameter.
+To achieve server-based reactive pagination we need to have support for pagination in the server as well as in the client.
+That means that our publish function for the parties collection would have to change and also the way that we subscribe to that publication.
+So first let's take care of our server-side.
 
-    $collection(Parties).bind($scope, 'parties', true, true, true).then(
+In our parties.js file in the server directory we are going to change the publish method like this:
 
-Now the bind method is watching on 2 scope parameters:
+    Meteor.publish("parties", function (options) {
+    ...
+    ...
+    return Parties.find({
+      $or:[
+        {$and:[
+          {"public": true},
+          {"public": {$exists: true}}
+        ]},
+        {$and:[
+          {owner: this.userId},
+          {owner: {$exists: true}}
+        ]},
+        {$and:[
+          {invited: this.userId},
+          {invited: {$exists: true}}
+        ]}
+      ]}, options);
 
-1. $scope.perPage - A variable that holds how many objects we want to display in each page
-2. $scope.page - A variable that holds the current page number
+Now our publish method receives an options arguments which we then pass to the Parties.find() function call.
+This will allow us to send arguments to the find functions' modifier right from the subscribe call. The options object can
+contain properties like `skip`, `sort` and `limit` which we will shortly use ourselves.
 
-To handle those we need to define them in our scope:
+Let's get back to our client code. We now need to change our subscribe call with options we want to set for pagination.
+What are those parameters that we want to set on the options argument? That is a good question. In order to have pagination in our
+parties list we will need to save the current page, the number of parties per page and the sort order. So let's add this parameters to our scope
+in the partiesList.js file.
 
     $scope.page = 1;
     $scope.perPage = 3;
+    $scope.sort = { name: 1 };
 
+That's cool, but let's do something with these variables expect define them. So where we want to use them is when we call the subscribe method.
+And we are also going to use this $scope variables in a reactive way so that when they change our subscription will get recomputed and we will get
+the correct data from the server. We can do that like so:
+
+    $meteorUtils.autorun($scope, function() {
+      $meteorSubscribe.subscribe('parties', {
+        limit: parseInt($scope.getReactively('perPage')),
+        skip: (parseInt($scope.getReactively('page')) - 1) * parseInt($scope.getReactively('perPage')),
+        sort: $scope.getReactively('sort')
+      }).then(function() {
+    ....
+    ....
+
+What happens here is we are construction an options object that is going to be the modifier for the Parties.find() call.
+We set the limit to the perPage we defined as that is the number of parties we want to get. We also set the skip property
+to the number of party we want to start with which is the current page minus one times the parties per page, and the last
+property we set is the sort order we want to get the parties by. Simple right?
+
+The last part, which is the catchy part, is also adding the sort modifier to the way we get the collection data from the
+minimongo. That is because the sorting is not saved when the data is sent from the server to the client. So to make sure our
+data is sorted also on the client we can do the following:
+
+    $scope.parties = $meteorCollection(function() {
+      return Parties.find({}, {
+        sort : $scope.getReactively('sort')
+      });
+    });
+
+This will allow us to have a sorted array of parties on the client.
 
 # pagination directive
 
@@ -117,110 +171,16 @@ Inside the server -> parties.js file, add the following code inside the Meteor.p
 
 Now on the client we have access to the Counts collection. let's subscribe to that in the partiesList.js file:
 
-    $collection(Counts).bindOne($scope, 'partiesCount', 'numberOfParties');
+    $scope.partiesCount = $meteorCollection(Counts)[0];
 
 Now the partiesCount will hold the number of parties and will send it to the directive in the parties-list.html (which we already defined earlier).
 
 Now run the app.
 Create lots of parties and see that you can see only 3 at a time and you can scroll between the pages with the directive that populates the number of pages automatically.
 
-# Server side pagination
+# Changing the sort reactively
 
-There is only one problem in our current solution - the server doesn't paginate.
-all the documents are sent to the client and only the client filters by pages (the current pages selectors are working on the minimongo on the client).
-
-It can work for most cases, but in some, sending too many documents to the client will result in bad performance.
-
-So the add those selectors to our server, we first should add an options parameter to our publish method:
-
-    Meteor.publish("parties", function (options) {
-
-and then send it to our parties find function:
-
-    return Parties.find({
-      $or:[
-        {$and:[
-          {"public": true},
-          {"public": {$exists: true}}
-        ]},
-      {$and:[
-        {owner: this.userId},
-        {owner: {$exists: true}}
-      ]},
-      {$and:[
-        {invited: this.userId},
-        {invited: {$exists: true}}
-      ]}
-     ]}, options);
-
-
-Read more about the options parameter [here](http://docs.meteor.com/#/full/find).
-
-Now we need to send the options parameter in our subscription.
-To do that, we can't use the subscription we used in the $collection.bind method because it doesn't support parameters,
-so we should replace it with calling directly to the [$meteorSubscribe.subscribe method](http://angularjs.meteor.com/api/subscribe).
-
-Let's add a scope function that does that (don't forget to add dependencies to the controller):
-
-    $scope.partiesSubscribe = function(){
-      return $meteorSubscribe.subscribe('parties', {
-        limit: parseInt($scope.perPage),
-        skip: (parseInt($scope.page) - 1) * parseInt($scope.perPage),
-        sort: $scope.sort
-      });
-    };
-
-We are actually copying the way angular-meteor is filtering the collection in the client side, but sending it to the server.
-
-We also need to cancel the subscription in the bind method:
-
-    $collection(Parties).bind($scope, 'parties', true, false, true);
-
-and move everything that is happening in the promise of the first subscription to the promise of the new one:
-
-    $collection(Meteor.users).bind($scope, 'users', false, true).then(function(){
-
-      $scope.partiesSubscribe().then(function(){
-
-        $collection(Parties).bind($scope, 'parties', true, false, true);
-
-        $scope.parties.forEach( function (party) {
-          party.onClicked = function () {
-            onMarkerClicked(party);
-          };
-        });
-
-        $scope.filteredParties = $scope.parties;
-
-        $scope.$watch("search", function(search){
-          $scope.filteredParties = $filter("filter")($scope.parties, search);
-        });
-
-        $scope.map = {
-          center: {
-            latitude: 45,
-            longitude: -73
-          },
-          zoom: 8
-        };
-
-        var onMarkerClicked = function(marker){
-          $state.go('partyDetails', {partyId: marker._id});
-        }
-      });
-
-      $collection(Counts).bindOne($scope, 'partiesCount', 'numberOfParties');
-    });
-
-Now we also want to to re-subscribe to our publish method each time we change the page, so the publish method will know our current page:
-
-    $scope.pageChanged = function(newPage) {
-      $scope.page = newPage;
-
-      $scope.partiesSubscribe();
-    };
-
-and the last thing we want to do, is to send the sort parameter with the options,
+The last thing we want to do, is to send the sort parameter with the options reactively,
 because with pagination it can affect which documents will be sent to the client.
 
 So in the HTML template, let's change the values of the sorting dropdown:
@@ -238,8 +198,6 @@ in the controller lets associate that dropdown to $scope.sort:
     $scope.$watch('orderProperty', function(){
       if ($scope.orderProperty)
         $scope.sort = {name: parseInt($scope.orderProperty)};
-
-      $scope.partiesSubscribe();
     });
 
 and also initialize it at the beginning:
@@ -251,17 +209,52 @@ and remove the following line of code (old initialization):
 
     $scope.orderProperty = 'name';
 
-
-There is a need to re-subscribe after changing the sort parameter because if the sort change will sent different documents to the client the publish
-method needs to know it.
-
-For example, if we had 4 parties and we will change the sorting, then the server will need to send the client the 4th party (which it didn't sent until now).
-
+Now we don't have to do anything other than that. $scope.getReactively will take care of updating the subscription for us
+when the sort changes. So all we have left is to sit back and enjoy out pagination working like a charm.
 
 We made a lot of changes so please check the step's code [here](https://github.com/Urigo/meteor-angular-socially/compare/step_14...step_15)
 to make sure you have everything needed and run the application.
 
-# Summery
+# Reactive Search
+
+Now that we have the basis for pagination, all we have left is to add reactive server-side searching of parties. That means
+that we will be able to enter a search string and have the app search for parties that match that name in the server and
+return only the relevant results! That is pretty awesome, and we are going to do all that only in several lines of code. So
+let's get started.
+
+As before, let's add the server side support. We need to add a new argument to our publish method which will hold the
+requested search string. We will call it..... searchString! Here it goes:
+
+    Meteor.publish("parties", function (options, searchString) {
+
+Yep that was simple. Now we are going to filter the correct results using mongo's regex ability. We are going to add this
+line at two places where we are using `find`:
+
+    'name' : { '$regex' : '.*' + searchString || '' + '.*', '$options' : 'i' },
+
+As you can see this will filter all the parties with a name that contains the searchString. Now let's move on to the client
+side.
+
+We already have a search input in our template. And it is bound to the `search` ng-model. Which means we have the $scope.search
+variable available. Remove the lines that had to do with filtering before:
+
+    $scope.filteredParties = $scope.parties;
+
+    $scope.$watch("search", function(search){
+      $scope.filteredParties = $filter("filter")($scope.parties, search);
+    });
+
+And all we have left to do is call the subscribe method with our reactive scope variable:
+
+    $meteorSubscribe.subscribe('parties', {
+      limit: parseInt($scope.getReactively('perPage')),
+      skip: (parseInt($scope.getReactively('page')) - 1) * parseInt($scope.getReactively('perPage')),
+      sort: $scope.getReactively('sort')
+    }, $scope.getReactively('search')).then(function() {
+
+Wow that is all that is needed to have a fully reactive search with pagination! Quite amazing right?
+
+# Summary
 
 Now we have full pagination of client and server side with the help of Meteor's options and Angular's directives.
 

@@ -1,6 +1,6 @@
 var angularMeteorObject = angular.module('angular-meteor.object', ['angular-meteor.utils', 'angular-meteor.subscribe']);
 
-var AngularMeteorObject = function (collection, id, options, $meteorSubscribe) {
+var AngularMeteorObject = function (collection, id, options, $meteorSubscribe, $q) {
   var self = collection.findOne(id, options);
 
   if (!self){
@@ -11,6 +11,7 @@ var AngularMeteorObject = function (collection, id, options, $meteorSubscribe) {
   self.$$collection = collection;
   self.$$options = options;
   self.$$id = id;
+  self.__proto__.$q = $q;
   self.__proto__.$meteorSubscribe = $meteorSubscribe;
 
   return self;
@@ -26,11 +27,26 @@ AngularMeteorObject.prototype.subscribe = function () {
 
 AngularMeteorObject.prototype.save = function save() {
   var self = this,
-    collection = self.$$collection;
+    collection = self.$$collection,
+    $q = self.$q;
+
+  var deferred = $q.defer();
 
   if (self)
     if (self._id)
-      collection.update({_id: self._id}, { $set: _.omit(self, '_id', 'save', 'reset', '$$collection', '$$options', '$meteorSubscribe', '$$id') });
+      collection.update(
+        {_id: self._id},
+        { $set: _.omit(self, '_id', 'save', 'reset', '$$collection', '$$options', '$meteorSubscribe', '$$id', '$q') },
+        function(error, numberOfDocs){
+          if (error) {
+            deferred.reject(error);
+          } else {
+            deferred.resolve(numberOfDocs);
+          }
+        }
+      );
+
+  return deferred.promise;
 };
 
 AngularMeteorObject.prototype.reset = function reset() {
@@ -50,8 +66,8 @@ AngularMeteorObject.prototype.reset = function reset() {
 };
 
 
-angularMeteorObject.factory('$meteorObject', ['$rootScope', '$meteorUtils', '$meteorSubscribe',
-  function($rootScope, $meteorUtils, $meteorSubscribe) {
+angularMeteorObject.factory('$meteorObject', ['$rootScope', '$meteorUtils', '$meteorSubscribe', '$q',
+  function($rootScope, $meteorUtils, $meteorSubscribe, $q) {
     return function(collection, id, auto, options) {
 
       // Validate parameters
@@ -60,7 +76,7 @@ angularMeteorObject.factory('$meteorObject', ['$rootScope', '$meteorUtils', '$me
       }
       auto = auto !== false; // Making auto default true - http://stackoverflow.com/a/15464208/1426570
 
-      var data = new AngularMeteorObject(collection, id, options, $meteorSubscribe);
+      var data = new AngularMeteorObject(collection, id, options, $meteorSubscribe, $q);
 
       $meteorUtils.autorun($rootScope, function() {
         data.reset();
@@ -68,11 +84,11 @@ angularMeteorObject.factory('$meteorObject', ['$rootScope', '$meteorUtils', '$me
 
       if (auto) { // Deep watches the model and performs autobind.
         $rootScope.$watch(function(){
-          return _.omit(data, 'save', 'reset', '$$collection', '$$options', '$meteorSubscribe', '$$id');
+          return _.omit(data, 'save', 'reset', '$$collection', '$$options', '$meteorSubscribe', '$$id', '$q');
         }, function (newItem, oldItem) {
           if (newItem) {
             if (newItem._id) {
-              collection.update({_id: newItem._id}, {$set: _.omit(newItem, '_id', 'save', 'reset', '$$collection', '$$options', '$meteorSubscribe', '$$id')});
+              collection.update({_id: newItem._id}, {$set: _.omit(newItem, '_id', 'save', 'reset', '$$collection', '$$options', '$meteorSubscribe', '$$id', '$q')});
             }
           }
         }, true);

@@ -1,6 +1,6 @@
 'use strict';
 
-var Template, Blaze;
+var Template, Blaze, UI;
 
 describe('Given the Template Service', function() {
 
@@ -28,7 +28,7 @@ describe('Given the Template Service', function() {
     it('should ignore templates with names "prototype", "loginButtons" or starting with _', function() {
 
       var output1 = $templateCache.get('other');
-      expect(output1).toEqual('<ng-template name="other"></span>');
+      expect(output1).toEqual('<ng-template name="other"></ng-template>');
 
       var output2 = $templateCache.get('_x');
       expect(output2).toBeUndefined();
@@ -54,11 +54,26 @@ describe('Given the meteorInclude directive', function() {
     module('angular-meteor.template');
 
     Template = {
-      myTemplate: '<div></div>'
+      myTemplate: {
+        _events: {
+          event1: {
+            events: 'click',
+            selector: 'div',
+            handler: 'handler'
+          }
+        },
+        render: false
+      }
     };
 
     Blaze = {
-      renderWithData: jasmine.createSpy('Blaze')
+      renderWithData: jasmine.createSpy('Blaze'),
+      toHTML: jasmine.createSpy('BlazeToHTML')
+
+    };
+
+    UI = {
+      toHTML: function(){}
     };
 
     inject(function(_$rootScope_, _$compile_){
@@ -66,8 +81,6 @@ describe('Given the meteorInclude directive', function() {
         $rootScope = _$rootScope_;
         $compile = _$compile_;
         $scope = $rootScope.$new();
-
-
     });
 
     spyOn(console, 'error');
@@ -102,5 +115,54 @@ describe('Given the meteorInclude directive', function() {
 
   });
 
+  describe('when using the "ng-template"', function() {
+
+    it('should invoke Blaze.toHTML', function() {
+
+      elm = angular.element('<ng-template name="myTemplate"></ng-template>');
+      element = $compile(elm)($scope);
+      $scope.$digest();
+
+      expect(Blaze.toHTML).toHaveBeenCalled();
+
+    });
+
+    it('should bind jQuery events from the Blaze template', function() {
+
+      var bindSpy = jasmine.createSpy();
+
+      spyOn(window, '$').and.returnValue({
+        bind: bindSpy
+      });
+
+      elm = angular.element('<ng-template name="myTemplate"></ng-template>');
+      element = $compile(elm)($scope);
+      $scope.$digest();
+
+      expect(window.$).toHaveBeenCalledWith('ng-template[name="myTemplate"] div')
+      expect(bindSpy).toHaveBeenCalledWith('click', 'handler')
+
+    });
+
+
+     describe('with an old version of Meteor', function() {
+
+       beforeEach(function() {
+         Template.myTemplate.render = true;
+       });
+
+
+       it('should invoke Blaze.toHTML', function() {
+
+         elm = angular.element('<ng-template name="myTemplate"></ng-template>');
+         element = $compile(elm)($scope);
+         $scope.$digest();
+
+         expect(Blaze.toHTML).toHaveBeenCalled();
+
+       });
+
+     });
+  });
 
 });

@@ -1,4 +1,4 @@
-[angular-meteor](http://angularjs.meteor.com/tutorial) [![Build Status](https://travis-ci.org/Urigo/angular-meteor.svg?branch=master)](https://travis-ci.org/Urigo/angular-meteor)
+[angular-meteor](http://angularjs.meteor.com/tutorial) [![Build Status](https://travis-ci.org/Urigo/angular-meteor.svg?branch=master)](https://travis-ci.org/Urigo/angular-meteor) [![Coverage Status](https://coveralls.io/repos/yagoferrer/angular-meteor/badge.svg?branch=master)](https://coveralls.io/r/yagoferrer/angular-meteor?branch=master)
 ======================================================
 > The power of Meteor and the simplicity and eco-system of AngularJS
 
@@ -33,7 +33,27 @@ We would love contributions in:
 3. [External issues](https://github.com/Urigo/angular-meteor/issues/109) - help us push external issues that affect our community.
 4. [Roadmap](https://trello.com/b/Wj9U0ulk/angular-meteor) - you can add a card about want you want to see in the library or in the tutorial.
 
-We are also considering money compansation for contributers, more as a tribute then a profit for now.
+We are also considering money compensation for contributors, more as a tribute then a profit for now.
+
+## Contributor Developer Setup
+Create your Meteor Project
+```bash
+meteor create myProject
+cd myProject
+```
+Create a `packages` directory and clone from your forked repo
+```bash
+mkdir packages
+cd packages
+git clone https://github.com/[your_username]/angular-meteor.git my-package
+```
+Add your local package
+```
+cd ..
+meteor add my-package
+```
+
+Now you can start using your own copy of the `angular-meteor` project from `myProject`.
 
 ## Usage
 ### Table of Contents
@@ -74,7 +94,7 @@ However, you need to write your Angular template markup in `.tpl` files, since M
 </head>
 
 <body>
-    <div ng-app="myModule">
+    <div ng-app>
         <ng-include src="'/client/views/user.tpl'"></ng-include>
         <ng-include src="'/client/views/settings.tpl'"></ng-include>
     </div>
@@ -193,7 +213,11 @@ $meteorSession('counter').bind($scope, 'counter');
 
 ### Additional packages
 
-Using this method, additional functionality has been provided to urigo:angular-meteor in the form of separate Meteor packages that expose and inject angular modules into angular-meteor. These packages have been developed by either the angular-meteor team and/or by third parties. The following is a non-exhaustive list of these packages:
+To add AngularJS libraries from the community just use the [meteor-bower](https://github.com/mquandalle/meteor-bower) package.
+
+Sometimes an extra logic is needed to include the libraries to Meteor, for that you can create a Meteor package for them.
+
+Similar packages have been developed by either the angular-meteor team and/or by third parties. The following is a non-exhaustive list of these packages:
 
 - [urigo:ionic](https://github.com/Urigo/meteor-ionic) [Ionic Framework](http://ionicframework.com/) on top of Meteor.
 - [netanelgilad:angular-file-upload](https://github.com/netanelgilad/meteor-angular-file-upload) empowers angular-meteor with [angular-file-upload](https://github.com/nervgh/angular-file-upload) module.
