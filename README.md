@@ -213,7 +213,11 @@ $meteorSession('counter').bind($scope, 'counter');
 
 ### Additional packages
 
-Using this method, additional functionality has been provided to urigo:angular-meteor in the form of separate Meteor packages that expose and inject angular modules into angular-meteor. These packages have been developed by either the angular-meteor team and/or by third parties. The following is a non-exhaustive list of these packages:
+To add AngularJS libraries from the community just use the [meteor-bower](https://github.com/mquandalle/meteor-bower) package.
+
+Sometimes an extra logic is needed to include the libraries to Meteor, for that you can create a Meteor package for them.
+
+Similar packages have been developed by either the angular-meteor team and/or by third parties. The following is a non-exhaustive list of these packages:
 
 - [urigo:ionic](https://github.com/Urigo/meteor-ionic) [Ionic Framework](http://ionicframework.com/) on top of Meteor.
 - [netanelgilad:angular-file-upload](https://github.com/netanelgilad/meteor-angular-file-upload) empowers angular-meteor with [angular-file-upload](https://github.com/nervgh/angular-file-upload) module.
