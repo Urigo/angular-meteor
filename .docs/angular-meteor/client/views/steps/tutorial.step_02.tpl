@@ -66,53 +66,10 @@ We have added a new directive, called ng-controller, which attaches the PartiesL
 * The expressions in double-curly-braches ( {{party.name}} and {{party.description}} ) denote bindings, which are referring to our application model, which is set up in our PartiesListCtrl controller.
 
 
-# AngularJS app
-
-Now we are going to create our own AngularJS client app with client controller and model.
-
-First, let's create our app.
-
-Create a new app.js file.  now you can see another example of Meteor's power and simplicity - no need to include this file anywhere. Meteor will take care of it by going through all the files in the folder and including them automatically.
-
-But Meteor's goal is to break down the barrier between client and server, and the code you write runs everywhere! (more on that later).
-But we need Angular's power only in the client side, so how can we do that?
-
-There are a few ways to tell Meteor to run a code only on the client/server/phone side, let's start with the simplest way - Meteor.isClient variable.
-
-__`app.js`:__
-
-      if (Meteor.isClient) {
-
-      }
-
-Now anything that will happen inside this if statement will run only on the client side.
-
-So let's continue with starting our AngularJS application, we will call it "socially":
-
-__`app.js`:__
-
-      if (Meteor.isClient) {
-        angular.module('socially',['angular-meteor']);
-      }
-
-And name our application in the ng-app directive in index.html:
-
-      </btf-markdown>
-
-<pre><code>
-&lt;<span class="hljs-operator">div</span> ng-app=<span class="hljs-string">"socially"</span> ng-<span class="hljs-built_in">include</span>=<span class="hljs-string">"'index.tpl'"</span>&gt;&lt;/<span class="hljs-operator">div</span>&gt;
-</code></pre>
-      <btf-markdown>
-
-
-What we did here is to declare a new angular module named 'socially' and making it dependant on the 'angular-meteor' module (that we included in the first step).
-
-Then we told our application to start our angular module on startup.
-
-
 # Model and Controller
 
-Now let's create our PartiesListCtrl controller and place data in it.
+Now we are going to create our controller and model.
+We start with PartiesListCtrl controller and place data in it.
 
 
 __`app.js`:__

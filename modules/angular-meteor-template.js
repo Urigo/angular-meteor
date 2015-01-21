@@ -3,47 +3,29 @@ var angularMeteorTemplate = angular.module('angular-meteor.template', []);
 angularMeteorTemplate.run(['$templateCache',
   function ($templateCache) {
     angular.forEach(Template, function (template, name) {
-      if (name.charAt(0) != "_"  && name != "prototype"  && name != "loginButtons") { // Ignores templates with names starting with "_"
-        $templateCache.put(name, '<ng-template name="' + name + '"></span>');
+      if (
+        name.charAt(0) != "_"  &&
+        name != "prototype"  &&
+        name != "loginButtons" &&
+        name != "instance"  &&
+        name != "currentData"  &&
+        name != "parentData"  &&
+        name != "body"  &&
+        name != "registerHelper") { // Ignores templates with names starting with "_"
+
+          $templateCache.put(name, '<ng-template name="' + name + '"></ng-template>');
       }
     });
   }
 ]);
 
-angularMeteorTemplate.directive('ngTemplate', ['$templateCache',
-  function ($templateCache) {
+angularMeteorTemplate.directive('ngTemplate', [
+  function () {
     return {
       restrict: 'E',
       scope: false,
       template: function (element, attributes) {
-
-        // Check if version prior 0.8.3
-        if (Template[attributes.name].render){
-          var name = attributes.name,
-            template = Template[name],
-            templateRender = Blaze.toHTML(template),
-            templateString = null;
-
-          // Check for nested templates in the render object and replace them with the equivalent ngTemplate directive.
-          angular.forEach(templateRender, function (v, k) {
-            if (angular.isObject(v)) {
-              if (v._super) {
-                var transcludeTemplateName = v._super.kind.replace('Template_', '');
-                templateRender[k] = new HTML.Raw($templateCache.get(transcludeTemplateName));
-              }
-            }
-          });
-
-          if (angular.isDefined(template)) {
-            templateString = UI.toHTML(templateRender);
-          } else {
-            throw new ReferenceError("There is no Meteor template with the name '" + name + "'.");
-          }
-
-          return templateString;
-        } else {
-          return Blaze.toHTML(Template[attributes.name]);
-        }
+        return Blaze.toHTML(Template[attributes.name]);
       },
       link: function (scope, element, attributes) {
         var name = attributes.name,

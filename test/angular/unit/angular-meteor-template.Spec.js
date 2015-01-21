@@ -28,7 +28,7 @@ describe('Given the Template Service', function() {
     it('should ignore templates with names "prototype", "loginButtons" or starting with _', function() {
 
       var output1 = $templateCache.get('other');
-      expect(output1).toEqual('<ng-template name="other"></span>');
+      expect(output1).toEqual('<ng-template name="other"></ng-template>');
 
       var output2 = $templateCache.get('_x');
       expect(output2).toBeUndefined();
