@@ -11,10 +11,10 @@ var diffObjects = function (a, b) {
   var result = {};
 
   angular.forEach(a, function (value, key) {
-    if (b[key] === value)
+    if (angular.equals(value, b[key]))
       return;
 
-    result[key] = angular.isObject(value) ? diffObjects(value, b[key]) : value;
+    result[key] = angular.isObject(value) && !angular.isArray(value) ? diffObjects(value, b[key]) : value;
 
     // If a nested object is identical between a and b, it is initially
     // attached as an empty object. If it was not empty from the beginning,
