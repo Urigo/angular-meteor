@@ -3,6 +3,31 @@
 var angularMeteorCollections = angular.module('angular-meteor.meteor-collection',
   ['angular-meteor.subscribe', 'angular-meteor.utils']);
 
+/**
+ * Performs a deep diff between two objects
+ * Returns an object with any identical keys excluded
+ */
+var diffObjects = function (a, b) {
+  var result = {};
+
+  angular.forEach(a, function (value, key) {
+    if (b[key] === value)
+      return;
+
+    result[key] = angular.isObject(value) ? diffObjects(value, b[key]) : value;
+
+    // If a nested object is identical between a and b, it is initially
+    // attached as an empty object. If it was not empty from the beginning,
+    // remove it from the result
+    if (angular.isObject(result[key]) && Object.keys(result[key]).length === 0) {
+      if (Object.keys(a[key]).length !== 0) {
+        delete result[key];
+      }
+    }
+  });
+
+  return result;
+};
 
 var AngularMeteorCollection = function (cursor, $q, $meteorSubscribe, $meteorUtils, $rootScope) {
 
@@ -270,7 +295,7 @@ AngularMeteorCollection.prototype.stop = function () {
 
 angularMeteorCollections.factory('$meteorCollection', ['$q', '$meteorSubscribe', '$meteorUtils', '$rootScope',
   function ($q, $meteorSubscribe, $meteorUtils, $rootScope) {
-    return function (reactiveFunc, auto) {
+    return function (reactiveFunc, auto, diffChanges) {
       // Validate parameters
       if (!reactiveFunc) {
         throw new TypeError("The first argument of $meteorCollection is undefined.");
@@ -321,11 +346,27 @@ angularMeteorCollections.factory('$meteorCollection', ['$q', '$meteorSubscribe',
                   }
                 }
               });
-              ngCollection.save().then(function() { // Saves all items.
+
+              var updatesResolved = function () {
                 if(newItems.length > oldItems.length) {
                   itemAddedDep.changed();
                 }
-              });
+              };
+
+              if (diffChanges) {
+                var promises = [];
+
+                angular.forEach(newItems, function (newItem, i) {
+                  var diff = diffObjects(newItem, oldItems[i]);
+                  diff._id = newItem._id;
+
+                  promises.push(ngCollection.save(diff));
+                });
+
+                $q.all(promises).then(updatesResolved);
+              } else {
+                ngCollection.save().then(updatesResolved);
+              }
             }
           }, true);
         }
