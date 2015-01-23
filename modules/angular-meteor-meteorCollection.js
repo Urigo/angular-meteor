@@ -358,9 +358,11 @@ angularMeteorCollections.factory('$meteorCollection', ['$q', '$meteorSubscribe',
 
                 angular.forEach(newItems, function (newItem, i) {
                   var diff = diffObjects(newItem, oldItems[i]);
-                  diff._id = newItem._id;
 
-                  promises.push(ngCollection.save(diff));
+                  if (Object.keys(diff).length > 0 && !(Object.keys(diff).length === 1 && diff.$$hashKey)) {
+                    diff._id = newItem._id;
+                    promises.push(ngCollection.save(diff));
+                  }
                 });
 
                 $q.all(promises).then(updatesResolved);
