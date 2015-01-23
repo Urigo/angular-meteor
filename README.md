@@ -8,7 +8,7 @@ We just released angular-meteor version 0.6.0 with a lot of exciting new feature
 
 Update to the new version by running:
 
-```sh
+```bash
 $ meteor update
 ```
 
@@ -36,18 +36,24 @@ We would love contributions in:
 We are also considering money compensation for contributors, more as a tribute then a profit for now.
 
 ## Contributor Developer Setup
+
 Create your Meteor Project
+
 ```bash
 meteor create myProject
 cd myProject
 ```
+
 Create a `packages` directory and clone from your forked repo
+
 ```bash
 mkdir packages
 cd packages
 git clone https://github.com/[your_username]/angular-meteor.git my-package
 ```
+
 Add your local package
+
 ```
 cd ..
 meteor add my-package
@@ -84,7 +90,7 @@ From angular-meteor version 0.6 you can use Angular's default template delimiter
 
 However, you need to write your Angular template markup in `.tpl` files, since Meteor won't look at those files as Spacebars templates. Tying HTML and `.tpl` files together isn't very difficult, we can simply use Angular's `ng-include`.
 
-*It's worth noting that Meteor will resolve the URL's you give `ng-include` from the root of your project, not relative to the file you're viewing in your browser.*
+Please note that the names of the templates to Angular will be their URL as Meteor sees it when minifying the .tpl files. **Hence every template URL is relative to the root of the Meteor project, and contains no leading forward slash.** This is important to note when working with `ng-include` to include templates.
 
 `client/index.html`:
 
@@ -94,9 +100,9 @@ However, you need to write your Angular template markup in `.tpl` files, since M
 </head>
 
 <body>
-    <div ng-app>
-        <ng-include src="'/client/views/user.tpl'"></ng-include>
-        <ng-include src="'/client/views/settings.tpl'"></ng-include>
+    <div ng-app="myModule">
+        <ng-include src="'client/views/user.tpl'"></ng-include>
+        <ng-include src="'client/views/settings.tpl'"></ng-include>
     </div>
 </body>
 ```
