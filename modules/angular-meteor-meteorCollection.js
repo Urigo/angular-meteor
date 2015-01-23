@@ -222,7 +222,7 @@ AngularMeteorCollection.prototype.updateCursor = function (cursor) {
           self.push(newItem);
         }
         else {
-          var beforeIndex = _.indexOf(self, _.findWhere(self, { _id: id}));
+          var beforeIndex = _.indexOf(self, _.findWhere(self, { _id: before}));
           self.splice(beforeIndex, 0, newItem);
         }
         safeApply();
@@ -242,7 +242,7 @@ AngularMeteorCollection.prototype.updateCursor = function (cursor) {
           self.push(removed);
         }
         else {
-          var beforeIndex = _.indexOf(self, _.findWhere(self, { _id: id}));
+          var beforeIndex = _.indexOf(self, _.findWhere(self, { _id: before}));
           self.splice(beforeIndex, 0, removed);
         }
         safeApply();
