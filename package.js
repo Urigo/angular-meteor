@@ -18,6 +18,8 @@ Package.on_use(function (api) {
   api.versionsFrom('METEOR@0.9.0.1');
 
   api.use('jquery', 'client', {weak: true});
+  api.use('minimongo');  // for idStringify
+  api.use('observe-sequence');
 
   // Including bower
   api.use('mquandalle:bower@0.1.11', 'client');
