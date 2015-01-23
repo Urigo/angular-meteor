@@ -36,7 +36,7 @@ AngularMeteorObject.prototype.save = function save() {
     if (self._id)
       collection.update(
         {_id: self._id},
-        { $set: _.omit(self, '_id', 'save', 'reset', '$$collection', '$$options', '$meteorSubscribe', '$$id', '$q') },
+        { $set: _.omit(angular.copy(self), '_id') },
         function(error, numberOfDocs){
           if (error) {
             deferred.reject(error);
@@ -84,11 +84,11 @@ angularMeteorObject.factory('$meteorObject', ['$rootScope', '$meteorUtils', '$me
 
       if (auto) { // Deep watches the model and performs autobind.
         $rootScope.$watch(function(){
-          return _.omit(data, 'save', 'reset', '$$collection', '$$options', '$meteorSubscribe', '$$id', '$q');
+          return _.omit(data, 'save', 'reset', '$$collection', '$$options', '$meteorSubscribe', '$$id', '$q', '$$hashkey');
         }, function (newItem, oldItem) {
           if (newItem) {
             if (newItem._id) {
-              collection.update({_id: newItem._id}, {$set: _.omit(newItem, '_id', 'save', 'reset', '$$collection', '$$options', '$meteorSubscribe', '$$id', '$q')});
+              collection.update({_id: newItem._id}, {$set: _.omit(angular.copy(newItem), '_id')});
             }
           }
         }, true);
