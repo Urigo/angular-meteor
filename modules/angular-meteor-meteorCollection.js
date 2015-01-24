@@ -106,18 +106,18 @@ var diffArray = function (lastSeqArray, seqArray, callbacks) {
 
 // Performs a deep diff between two objects.
 // Returns an object with any identical keys excluded
-var diffObjects = function (a, b) {
+var diffObject = function (lastObject, object) {
   var result = {};
 
-  angular.forEach(a, function (value, key) {
-    if (angular.equals(value, b[key]))
+  angular.forEach(lastObject, function (value, key) {
+    if (angular.equals(value, object[key]))
       return;
 
-    result[key] = angular.isObject(value) && !angular.isArray(value) ? diffObjects(value, b[key]) : value;
+    result[key] = angular.isObject(value) && !angular.isArray(value) ? diffObject(value, object[key]) : value;
 
-    // If a nested object is identical between a and b, it is initially
-    // attached as an empty object. If it was not empty from the beginning,
-    // remove it from the result
+    // If a nested object is identical between lastObject and object, it
+    // is initially attached as an empty object. If it was not empty
+    // from the beginning, remove it from the result
     if (angular.isObject(result[key]) && Object.keys(result[key]).length === 0) {
       if (Object.keys(a[key]).length !== 0) {
         delete result[key];
@@ -377,7 +377,7 @@ angularMeteorCollections.factory('$meteorCollection', ['$q', '$meteorSubscribe',
                   ngCollection.remove(id);
                 },
                 changedAt: function (id, newItem, oldItem, index) {
-                  var diff = diffObjects(newItem, oldItem);
+                  var diff = diffObject(newItem, oldItem);
 
                   if (Object.keys(diff).length > 0 && !(Object.keys(diff).length === 1 && diff.$$hashKey)) {
                     diff._id = newItem._id;
