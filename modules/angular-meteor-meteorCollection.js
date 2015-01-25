@@ -107,7 +107,7 @@ var angularMeteorCollections = angular.module('angular-meteor.meteor-collection'
   ['angular-meteor.subscribe', 'angular-meteor.utils']);
 
 
-var AngularMeteorCollection = function (cursor, $q, $meteorSubscribe, $meteorUtils, $rootScope) {
+var AngularMeteorCollection = function (cursor, $q, $meteorSubscribe, $meteorUtils, $rootScope, $timeout) {
 
   var self = [];
 
@@ -115,6 +115,7 @@ var AngularMeteorCollection = function (cursor, $q, $meteorSubscribe, $meteorUti
   self.__proto__.$q = $q;
   self.__proto__.$meteorSubscribe = $meteorSubscribe;
   self.__proto__.$rootScope = $rootScope;
+  self.__proto__.$timeout = $timeout;
 
   self.$$collection = $meteorUtils.getCollectionByName(cursor.collection.name);
 
@@ -247,14 +248,18 @@ AngularMeteorCollection.prototype.remove = function remove(keys) {
 
 AngularMeteorCollection.prototype.updateCursor = function (cursor) {
   var self = this,
-    $rootScope = self.$rootScope;
+    $rootScope = self.$rootScope,
+    $timeout = self.$timeout;
 
   function safeApply() {
     // Clearing the watch is needed so no updates are sent to server
     // while handling updates from the server
     self.UPDATING_FROM_SERVER = true;
     if (!$rootScope.$$phase) $rootScope.$apply();
-    self.UPDATING_FROM_SERVER = false;
+    // Making sure we are setting to false only after one digest cycle and not before
+    $timeout(function(){
+      self.UPDATING_FROM_SERVER = false;
+    },0,false);
   }
 
   // XXX - consider adding an option for a non-orderd result
@@ -312,8 +317,8 @@ AngularMeteorCollection.prototype.stop = function () {
 };
 
 
-angularMeteorCollections.factory('$meteorCollection', ['$q', '$meteorSubscribe', '$meteorUtils', '$rootScope',
-  function ($q, $meteorSubscribe, $meteorUtils, $rootScope) {
+angularMeteorCollections.factory('$meteorCollection', ['$q', '$meteorSubscribe', '$meteorUtils', '$rootScope', '$timeout',
+  function ($q, $meteorSubscribe, $meteorUtils, $rootScope, $timeout) {
     return function (reactiveFunc, auto) {
       // Validate parameters
       if (!reactiveFunc) {
@@ -331,7 +336,7 @@ angularMeteorCollections.factory('$meteorCollection', ['$q', '$meteorSubscribe',
         }
       }
 
-      var ngCollection = new AngularMeteorCollection(reactiveFunc(), $q, $meteorSubscribe, $meteorUtils, $rootScope);
+      var ngCollection = new AngularMeteorCollection(reactiveFunc(), $q, $meteorSubscribe, $meteorUtils, $rootScope, $timeout);
 
       function setAutoBind() {
         if (auto) { // Deep watches the model and performs autobind.
