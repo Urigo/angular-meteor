@@ -86,22 +86,62 @@ var diffArray = function (lastSeqArray, seqArray, callbacks) {
 
   _.each(posNew, function (pos, idString) {
     var id = idParse(idString);
+
     if (_.has(posOld, idString)) {
-      // specifically for primitive types, compare equality before
-      // firing the 'changedAt' callback. otherwise, always fire it
-      // because doing a deep EJSON comparison is not guaranteed to
-      // work (an array can contain arbitrary objects, and 'transform'
-      // can be used on cursors). also, deep diffing is not
-      // necessarily the most efficient (if only a specific subfield
-      // of the object is later accessed).
       var newItem = seqArray[pos];
       var oldItem = lastSeqArray[posOld[idString]];
+      var setDiff = diffObjectChanges(oldItem, newItem);
+      var unsetDiff = diffObjectRemovals(oldItem, newItem);
 
-      if (typeof newItem === 'object' || newItem !== oldItem)
-        callbacks.changedAt(id, newItem, oldItem, pos);
+      if (setDiff)
+        setDiff._id = newItem._id;
+
+      if (unsetDiff)
+        unsetDiff._id = newItem._id;
+
+      if (setDiff || unsetDiff)
+        callbacks.changedAt(id, setDiff, unsetDiff, pos);
     }
   });
 };
+
+// Diffs two objects and returns the keys that have been added or changed.
+// Can be used to construct a Mongo {$set: {}} modifier
+var diffObjectChanges = function (oldItem, newItem) {
+  var result = {};
+
+  angular.forEach(newItem, function (value, key) {
+    if (angular.equals(value, oldItem[key]))
+      return;
+
+    result[key] = value;
+  });
+
+  if (!(_.keys(result).length > 0 && !(_.keys(result).length === 1 && result.$$hashKey)))
+    result = undefined;
+
+  return result;
+};
+
+// Diffs two objects and returns the keys that have been removed.
+// Can be used to construct a Mongo {$unset: {}} modifier
+var diffObjectRemovals = function (oldItem, newItem) {
+  var newItemKeys = _.keys(newItem);
+  var oldItemKeys = _.keys(oldItem);
+  var result = {};
+
+  if (newItemKeys.length < oldItemKeys.length) {
+    angular.forEach(oldItemKeys, function (key) {
+      if (!_.contains(newItemKeys, key))
+        result[key] = "";
+    });
+  }
+
+  if (_.keys(result).length === 0)
+    result = undefined;
+
+  return result;
+}
 
 var angularMeteorCollections = angular.module('angular-meteor.meteor-collection',
   ['angular-meteor.subscribe', 'angular-meteor.utils']);
@@ -130,7 +170,7 @@ AngularMeteorCollection.prototype.subscribe = function () {
   return this;
 };
 
-AngularMeteorCollection.prototype.save = function save(docs) {
+AngularMeteorCollection.prototype.save = function save(docs, useUnsetModifier) {
   var self = this,
     collection = self.$$collection,
     $q = self.$q,
@@ -150,8 +190,9 @@ AngularMeteorCollection.prototype.save = function save(docs) {
       var item_id = item._id; // Store the _id in temporary variable
       delete item._id; // Remove the _id property so that it can be $set using update.
       var objectId = (item_id._str) ? new Meteor.Collection.ObjectID(item_id._str) : item_id;
+      var modifier = (useUnsetModifier) ? {$unset: item} : {$set: item};
 
-      collection.update(objectId, {$set: item}, function (error) {
+      collection.update(objectId, modifier, function (error) {
         if (error) {
           deferred.reject(error);
         } else {
@@ -356,8 +397,12 @@ angularMeteorCollections.factory('$meteorCollection', ['$q', '$meteorSubscribe',
                 removedAt: function (id, item, index) {
                   ngCollection.remove(id);
                 },
-                changedAt: function (id, newItem, oldItem, index) {
-                  ngCollection.save(newItem);
+                changedAt: function (id, setDiff, unsetDiff, index) {
+                  if (setDiff)
+                    ngCollection.save(setDiff);
+
+                  if (unsetDiff)
+                    ngCollection.save(unsetDiff, true);
                 },
                 movedTo: function (id, item, fromIndex, toIndex) {
                   // XXX do we need this?
