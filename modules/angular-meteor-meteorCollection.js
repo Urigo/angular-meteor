@@ -86,19 +86,36 @@ var diffArray = function (lastSeqArray, seqArray, callbacks) {
 
   _.each(posNew, function (pos, idString) {
     var id = idParse(idString);
+
     if (_.has(posOld, idString)) {
-      // specifically for primitive types, compare equality before
-      // firing the 'changedAt' callback. otherwise, always fire it
-      // because doing a deep EJSON comparison is not guaranteed to
-      // work (an array can contain arbitrary objects, and 'transform'
-      // can be used on cursors). also, deep diffing is not
-      // necessarily the most efficient (if only a specific subfield
-      // of the object is later accessed).
       var newItem = seqArray[pos];
       var oldItem = lastSeqArray[posOld[idString]];
+      var diff = {};
 
-      if (typeof newItem === 'object' || newItem !== oldItem)
-        callbacks.changedAt(id, newItem, oldItem, pos);
+      if (_.keys(newItem).length < _.keys(oldItem).length) {
+        callbacks.changedAt(id, newItem, pos);
+      } else {
+        angular.forEach(newItem, function (value, key) {
+          if (angular.equals(value, oldItem[key]))
+            return;
+
+          diff[key] = angular.isObject(value) && !angular.isArray(value) ? diffObject(value, oldItem[key]) : value;
+
+          // If a nested object is identical between newItem and oldItem, it
+          // is initially attached as an empty object. If it was not empty
+          // from the beginning, remove it from the diff
+          if (angular.isObject(diff[key]) && _.keys(diff[key]).length === 0) {
+            if (_.keys(value).length !== 0) {
+              delete diff[key];
+            }
+          }
+        });
+
+        if (_.keys(diff).length > 0 && !(_.keys(diff).length === 1 && diff.$$hashKey)) {
+          diff._id = newItem._id;
+          callbacks.changedAt(id, diff, pos);
+        }
+      }
     }
   });
 };
@@ -356,8 +373,8 @@ angularMeteorCollections.factory('$meteorCollection', ['$q', '$meteorSubscribe',
                 removedAt: function (id, item, index) {
                   ngCollection.remove(id);
                 },
-                changedAt: function (id, newItem, oldItem, index) {
-                  ngCollection.save(newItem);
+                changedAt: function (id, diff, index) {
+                  ngCollection.save(diff);
                 },
                 movedTo: function (id, item, fromIndex, toIndex) {
                   // XXX do we need this?
