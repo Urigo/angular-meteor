@@ -90,51 +90,66 @@ var diffArray = function (lastSeqArray, seqArray, callbacks) {
     if (_.has(posOld, idString)) {
       var newItem = seqArray[pos];
       var oldItem = lastSeqArray[posOld[idString]];
-      var newItemKeys = _.keys(newItem);
-      var oldItemKeys = _.keys(oldItem);
-      var setDiff = {};
-      var unsetDiff = {};
+      var setDiff = diffObjectChanges(oldItem, newItem);
+      var unsetDiff = diffObjectRemovals(oldItem, newItem);
 
-      angular.forEach(newItem, function (value, key) {
-        if (angular.equals(value, oldItem[key]))
-          return;
-
-        setDiff[key] = angular.isObject(value) && !angular.isArray(value) ? diffObject(value, oldItem[key]) : value;
-
-        // If a nested object is identical between newItem and oldItem, it
-        // is initially attached as an empty object. If it was not empty
-        // from the beginning, remove it from the setDiff
-        if (angular.isObject(setDiff[key]) && _.keys(setDiff[key]).length === 0) {
-          if (_.keys(value).length !== 0) {
-            delete setDiff[key];
-          }
-        }
-      });
-
-      if (newItemKeys.length < oldItemKeys.length) {
-        angular.forEach(oldItemKeys, function (key) {
-          if (!_.contains(newItemKeys, key))
-            unsetDiff[key] = "";
-        });
-      }
-
-      if (!(_.keys(setDiff).length > 0 && !(_.keys(setDiff).length === 1 && setDiff.$$hashKey))) {
-        setDiff = undefined;
-      } else {
+      if (setDiff)
         setDiff._id = newItem._id;
-      }
 
-      if (_.keys(unsetDiff).length === 0) {
-        unsetDiff = undefined;
-      } else {
+      if (unsetDiff)
         unsetDiff._id = newItem._id;
-      }
 
       if (setDiff || unsetDiff)
         callbacks.changedAt(id, setDiff, unsetDiff, pos);
     }
   });
 };
+
+// Diffs two objects and returns the keys that have been added or changed.
+// Can be used to construct a Mongo {$set: {}} modifier
+var diffObjectChanges = function (oldItem, newItem) {
+  var result = {};
+
+  angular.forEach(newItem, function (value, key) {
+    if (angular.equals(value, oldItem[key]))
+      return;
+
+    result[key] = angular.isObject(value) && !angular.isArray(value) ? diffObjectChanges(oldItem[key], value) : value;
+
+    // If a nested object is identical between newItem and oldItem, it
+    // is initially attached as an empty object. If it was not empty
+    // from the beginning, remove it from the result
+    if (angular.isObject(result[key]) && _.keys(result[key]).length === 0) {
+      if (_.keys(value).length !== 0)
+        delete result[key];
+    }
+  });
+
+  if (!(_.keys(result).length > 0 && !(_.keys(result).length === 1 && result.$$hashKey)))
+    result = undefined;
+
+  return result;
+};
+
+// Diffs two objects and returns the keys that have been removed.
+// Can be used to construct a Mongo {$unset: {}} modifier
+var diffObjectRemovals = function (oldItem, newItem) {
+  var newItemKeys = _.keys(newItem);
+  var oldItemKeys = _.keys(oldItem);
+  var result = {};
+
+  if (newItemKeys.length < oldItemKeys.length) {
+    angular.forEach(oldItemKeys, function (key) {
+      if (!_.contains(newItemKeys, key))
+        result[key] = "";
+    });
+  }
+
+  if (_.keys(result).length === 0)
+    result = undefined;
+
+  return result;
+}
 
 var angularMeteorCollections = angular.module('angular-meteor.meteor-collection',
   ['angular-meteor.subscribe', 'angular-meteor.utils']);
