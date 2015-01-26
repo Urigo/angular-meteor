@@ -114,15 +114,7 @@ var diffObjectChanges = function (oldItem, newItem) {
     if (angular.equals(value, oldItem[key]))
       return;
 
-    result[key] = angular.isObject(value) && !angular.isArray(value) ? diffObjectChanges(oldItem[key], value) : value;
-
-    // If a nested object is identical between newItem and oldItem, it
-    // is initially attached as an empty object. If it was not empty
-    // from the beginning, remove it from the result
-    if (angular.isObject(result[key]) && _.keys(result[key]).length === 0) {
-      if (_.keys(value).length !== 0)
-        delete result[key];
-    }
+    result[key] = value;
   });
 
   if (!(_.keys(result).length > 0 && !(_.keys(result).length === 1 && result.$$hashKey)))
