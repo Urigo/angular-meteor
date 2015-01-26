@@ -92,21 +92,21 @@ var diffArray = function (lastSeqArray, seqArray, callbacks) {
       var oldItem = lastSeqArray[posOld[idString]];
       var newItemKeys = _.keys(newItem);
       var oldItemKeys = _.keys(oldItem);
-      var diff = {};
-      var removedDiff = {};
+      var setDiff = {};
+      var unsetDiff = {};
 
       angular.forEach(newItem, function (value, key) {
         if (angular.equals(value, oldItem[key]))
           return;
 
-        diff[key] = angular.isObject(value) && !angular.isArray(value) ? diffObject(value, oldItem[key]) : value;
+        setDiff[key] = angular.isObject(value) && !angular.isArray(value) ? diffObject(value, oldItem[key]) : value;
 
         // If a nested object is identical between newItem and oldItem, it
         // is initially attached as an empty object. If it was not empty
-        // from the beginning, remove it from the diff
-        if (angular.isObject(diff[key]) && _.keys(diff[key]).length === 0) {
+        // from the beginning, remove it from the setDiff
+        if (angular.isObject(setDiff[key]) && _.keys(setDiff[key]).length === 0) {
           if (_.keys(value).length !== 0) {
-            delete diff[key];
+            delete setDiff[key];
           }
         }
       });
@@ -114,24 +114,24 @@ var diffArray = function (lastSeqArray, seqArray, callbacks) {
       if (newItemKeys.length < oldItemKeys.length) {
         angular.forEach(oldItemKeys, function (key) {
           if (!_.contains(newItemKeys, key))
-            removedDiff[key] = "";
+            unsetDiff[key] = "";
         });
       }
 
-      if (!(_.keys(diff).length > 0 && !(_.keys(diff).length === 1 && diff.$$hashKey))) {
-        diff = undefined;
+      if (!(_.keys(setDiff).length > 0 && !(_.keys(setDiff).length === 1 && setDiff.$$hashKey))) {
+        setDiff = undefined;
       } else {
-        diff._id = newItem._id;
+        setDiff._id = newItem._id;
       }
 
-      if (_.keys(removedDiff).length === 0) {
-        removedDiff = undefined;
+      if (_.keys(unsetDiff).length === 0) {
+        unsetDiff = undefined;
       } else {
-        removedDiff._id = newItem._id;
+        unsetDiff._id = newItem._id;
       }
 
-      if (diff || removedDiff)
-        callbacks.changedAt(id, diff, removedDiff, pos);
+      if (setDiff || unsetDiff)
+        callbacks.changedAt(id, setDiff, unsetDiff, pos);
     }
   });
 };
@@ -163,7 +163,7 @@ AngularMeteorCollection.prototype.subscribe = function () {
   return this;
 };
 
-AngularMeteorCollection.prototype.save = function save(docs, removeKeys) {
+AngularMeteorCollection.prototype.save = function save(docs, useUnsetModifier) {
   var self = this,
     collection = self.$$collection,
     $q = self.$q,
@@ -183,7 +183,7 @@ AngularMeteorCollection.prototype.save = function save(docs, removeKeys) {
       var item_id = item._id; // Store the _id in temporary variable
       delete item._id; // Remove the _id property so that it can be $set using update.
       var objectId = (item_id._str) ? new Meteor.Collection.ObjectID(item_id._str) : item_id;
-      var modifier = (removeKeys) ? {$unset: item} : {$set: item};
+      var modifier = (useUnsetModifier) ? {$unset: item} : {$set: item};
 
       collection.update(objectId, modifier, function (error) {
         if (error) {
@@ -390,12 +390,12 @@ angularMeteorCollections.factory('$meteorCollection', ['$q', '$meteorSubscribe',
                 removedAt: function (id, item, index) {
                   ngCollection.remove(id);
                 },
-                changedAt: function (id, diff, removedDiff, index) {
-                  if (diff)
-                    ngCollection.save(diff);
+                changedAt: function (id, setDiff, unsetDiff, index) {
+                  if (setDiff)
+                    ngCollection.save(setDiff);
 
-                  if (removedDiff)
-                    ngCollection.save(removedDiff, true);
+                  if (unsetDiff)
+                    ngCollection.save(unsetDiff, true);
                 },
                 movedTo: function (id, item, fromIndex, toIndex) {
                   // XXX do we need this?
