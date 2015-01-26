@@ -90,32 +90,48 @@ var diffArray = function (lastSeqArray, seqArray, callbacks) {
     if (_.has(posOld, idString)) {
       var newItem = seqArray[pos];
       var oldItem = lastSeqArray[posOld[idString]];
+      var newItemKeys = _.keys(newItem);
+      var oldItemKeys = _.keys(oldItem);
       var diff = {};
+      var removedDiff = {};
 
-      if (_.keys(newItem).length < _.keys(oldItem).length) {
-        callbacks.changedAt(id, newItem, pos);
-      } else {
-        angular.forEach(newItem, function (value, key) {
-          if (angular.equals(value, oldItem[key]))
-            return;
+      angular.forEach(newItem, function (value, key) {
+        if (angular.equals(value, oldItem[key]))
+          return;
 
-          diff[key] = angular.isObject(value) && !angular.isArray(value) ? diffObject(value, oldItem[key]) : value;
+        diff[key] = angular.isObject(value) && !angular.isArray(value) ? diffObject(value, oldItem[key]) : value;
 
-          // If a nested object is identical between newItem and oldItem, it
-          // is initially attached as an empty object. If it was not empty
-          // from the beginning, remove it from the diff
-          if (angular.isObject(diff[key]) && _.keys(diff[key]).length === 0) {
-            if (_.keys(value).length !== 0) {
-              delete diff[key];
-            }
+        // If a nested object is identical between newItem and oldItem, it
+        // is initially attached as an empty object. If it was not empty
+        // from the beginning, remove it from the diff
+        if (angular.isObject(diff[key]) && _.keys(diff[key]).length === 0) {
+          if (_.keys(value).length !== 0) {
+            delete diff[key];
           }
-        });
-
-        if (_.keys(diff).length > 0 && !(_.keys(diff).length === 1 && diff.$$hashKey)) {
-          diff._id = newItem._id;
-          callbacks.changedAt(id, diff, pos);
         }
+      });
+
+      if (newItemKeys.length < oldItemKeys.length) {
+        angular.forEach(oldItemKeys, function (key) {
+          if (!_.contains(newItemKeys, key))
+            removedDiff[key] = "";
+        });
       }
+
+      if (!(_.keys(diff).length > 0 && !(_.keys(diff).length === 1 && diff.$$hashKey))) {
+        diff = undefined;
+      } else {
+        diff._id = newItem._id;
+      }
+
+      if (_.keys(removedDiff).length === 0) {
+        removedDiff = undefined;
+      } else {
+        removedDiff._id = newItem._id;
+      }
+
+      if (diff || removedDiff)
+        callbacks.changedAt(id, diff, removedDiff, pos);
     }
   });
 };
@@ -147,7 +163,7 @@ AngularMeteorCollection.prototype.subscribe = function () {
   return this;
 };
 
-AngularMeteorCollection.prototype.save = function save(docs) {
+AngularMeteorCollection.prototype.save = function save(docs, removeKeys) {
   var self = this,
     collection = self.$$collection,
     $q = self.$q,
@@ -167,8 +183,9 @@ AngularMeteorCollection.prototype.save = function save(docs) {
       var item_id = item._id; // Store the _id in temporary variable
       delete item._id; // Remove the _id property so that it can be $set using update.
       var objectId = (item_id._str) ? new Meteor.Collection.ObjectID(item_id._str) : item_id;
+      var modifier = (removeKeys) ? {$unset: item} : {$set: item};
 
-      collection.update(objectId, {$set: item}, function (error) {
+      collection.update(objectId, modifier, function (error) {
         if (error) {
           deferred.reject(error);
         } else {
@@ -373,8 +390,12 @@ angularMeteorCollections.factory('$meteorCollection', ['$q', '$meteorSubscribe',
                 removedAt: function (id, item, index) {
                   ngCollection.remove(id);
                 },
-                changedAt: function (id, diff, index) {
-                  ngCollection.save(diff);
+                changedAt: function (id, diff, removedDiff, index) {
+                  if (diff)
+                    ngCollection.save(diff);
+
+                  if (removedDiff)
+                    ngCollection.save(removedDiff, true);
                 },
                 movedTo: function (id, item, fromIndex, toIndex) {
                   // XXX do we need this?
