@@ -105,43 +105,84 @@ var diffArray = function (lastSeqArray, seqArray, callbacks) {
   });
 };
 
+// Takes an object and returns a shallow copy, ie. with all keys at
+// a one-level depth. Transforms the name of each key using dot notation
+var flattenObject = function (object, parentKey) {
+  var flattened = {};
+
+  angular.forEach(object, function (value, key) {
+    if (isActualObject(value)) {
+      angular.extend(flattened, flattenObject(value, key));
+    } else {
+      var dotNotedKey = (parentKey) ? parentKey + "." + key : key;
+      flattened[dotNotedKey] = value;
+    }
+  });
+
+  return flattened;
+};
+
+// Can tell whether a value is an object and not an array
+var isActualObject = function (value) {
+  return angular.isObject(value) && !angular.isArray(value);
+};
+
 // Diffs two objects and returns the keys that have been added or changed.
 // Can be used to construct a Mongo {$set: {}} modifier
 var diffObjectChanges = function (oldItem, newItem) {
   var result = {};
 
   angular.forEach(newItem, function (value, key) {
-    if (angular.equals(value, oldItem[key]))
+    if (oldItem && angular.equals(value, oldItem[key]))
       return;
 
-    result[key] = value;
+    if (isActualObject(value)) {
+      var diff = diffObjectChanges(oldItem[key], value);
+      if (diff) result[key] = diff;
+    } else {
+      result[key] = value;
+    }
+
+    // If a nested object is identical between newItem and oldItem, it
+    // is initially attached as an empty object. Here we remove it from
+    // the result if it was not empty from the beginning.
+    if (isActualObject(result[key]) && _.keys(result[key]).length === 0) {
+      if (_.keys(value).length !== 0)
+        delete result[key];
+    }
   });
 
   if (!(_.keys(result).length > 0 && !(_.keys(result).length === 1 && result.$$hashKey)))
-    result = undefined;
-
-  return result;
+    return undefined;
+  else
+    return flattenObject(result);
 };
 
 // Diffs two objects and returns the keys that have been removed.
 // Can be used to construct a Mongo {$unset: {}} modifier
 var diffObjectRemovals = function (oldItem, newItem) {
-  var newItemKeys = _.keys(newItem);
+  if (newItem == null)
+    return true;
+
   var oldItemKeys = _.keys(oldItem);
+  var newItemKeys = _.keys(newItem);
   var result = {};
 
-  if (newItemKeys.length < oldItemKeys.length) {
-    angular.forEach(oldItemKeys, function (key) {
-      if (!_.contains(newItemKeys, key))
-        result[key] = "";
-    });
-  }
+  angular.forEach(oldItemKeys, function (key) {
+    if (!_.contains(newItemKeys, key))
+      result[key] = true;
+
+    if (isActualObject(oldItem[key])) {
+      var diff = diffObjectRemovals(oldItem[key], newItem[key]);
+      if (diff) result[key] = diff;
+    }
+  });
 
   if (_.keys(result).length === 0)
-    result = undefined;
-
-  return result;
-}
+    return undefined;
+  else
+    return flattenObject(result);
+};
 
 var angularMeteorCollections = angular.module('angular-meteor.meteor-collection',
   ['angular-meteor.subscribe', 'angular-meteor.utils']);
