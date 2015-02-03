@@ -29,6 +29,7 @@ Package.on_use(function (api) {
   api.add_files([
     // Lib Files
     'lib/angular-hash-key-copier.js',
+    'lib/diff-array.js',
     // Module Files
     'modules/angular-meteor-subscribe.js',
     'modules/angular-meteor-collections.js',
@@ -47,11 +48,14 @@ Package.on_use(function (api) {
 
 Package.onTest(function(api) {
   api.use('tinytest');
+  api.use('minimongo');
   api.use(['test-helpers'], ['client']);
+
   api.addFiles([
     'node_modules/angular/angular.js',
     'urigo:angular.js',
     'lib/angular-hash-key-copier.js',
+    'lib/diff-array.js',
     'modules/angular-meteor-collections.js',
     'modules/angular-meteor-meteorCollection.js',
     'modules/angular-meteor-methods.js',
