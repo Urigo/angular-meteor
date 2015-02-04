@@ -10,7 +10,7 @@ Plugin.registerSourceHandler('tpl', {
   var contents = compileStep.read().toString('utf8');
 
   var results = 'angular.module(\'angular-meteor\').run([\'$templateCache\', function($templateCache) {' +
-    '$templateCache.put(\'' + compileStep.inputPath + '\', \'' +
+    '$templateCache.put(\'' + compileStep.inputPath.replace(/\\/g, "/") + '\', \'' +
       minify(contents.replace(/'/g, "\\'"), {
         collapseWhitespace : true,
         removeComments : true,
