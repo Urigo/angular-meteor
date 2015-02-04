@@ -22,8 +22,8 @@ Package.on_use(function (api) {
   api.use('observe-sequence');
 
   // Including bower
-  api.use('mquandalle:bower@0.1.11', 'client');
-  api.add_files('smart.json', 'client');
+  api.use('mquandalle:bower@1.3.12', 'client');
+  api.add_files('bower.json', 'client');
 
   // Files to load in Client only.
   api.add_files([
