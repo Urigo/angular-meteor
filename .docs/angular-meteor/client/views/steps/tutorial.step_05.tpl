@@ -34,25 +34,11 @@ The goals for this step:
 
 The routing functionality added by this step is provided by the [ui-router](https://github.com/angular-ui/ui-router) module, which is distributed separately from the core Angular framework.
 
-We will install ui-router with the help of [bower](http://bower.io/).
-To add bower functionality to Meteor we are using a Meteor package called [mquandalle:bower](https://atmospherejs.com/mquandalle/bower).
+We will install ui-router with the help of [the official Meteor package](https://atmospherejs.com/angularui/angular-ui-router).
 
 Type in the command line:
 
-    meteor add mquandalle:bower
-
-Then add a new file in the root of your project called 'bower.json' and fill it up with these lines:
-
-__`bower.json`:__
-
-    {
-      "name": "socially",
-      "version": "0.0.1",
-      "dependencies": {
-        "angular-ui-router": "0.2.13"
-      },
-      "private": true
-    }
+    meteor add angularui:angular-ui-router
 
 Then add the ui-router as a dependency to our angular app in app.js:
 
