@@ -56,11 +56,11 @@ Later on in this tutorial we will replace those default account-ui forms with a 
 
     meteor add accounts-ui
 
-Now let's add the accounts-ui template ( {> loginButtons }} ) into our app, into index.html.
+Now let's add the accounts-ui template ( {{> loginButtons }} ) into our app, into index.html.
 
 To add Meteor's templates into AngularJS templates, angular-meteor provides us with the meteor-include directive.
 
-So instead of adding {> loginButtons }} like in Meteor we will add <meteor-include src="loginButtons"></meteor-include> :
+So instead of adding {{> loginButtons }} like in Meteor we will add <meteor-include src="loginButtons"></meteor-include> :
 
 __`index.html`:__
 
@@ -156,7 +156,7 @@ Every application has a single root scope. All other scopes are descendant scope
 To access $rootScope inside a controller you add it through the dependency injection.
 To access $rootScope in a template you simply write $root. and then the name of the property.
 
-Change the code for the add button in parties-list.html to this:
+Change the code for the add button in parties-list.tpl to this:
 
     <button ng-click="newParty.owner=$root.currentUser._id; parties.push(newParty)">Add</button>
 
