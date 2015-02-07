@@ -36,7 +36,7 @@ AngularMeteorObject.prototype.save = function save() {
     if (self._id)
       collection.update(
         {_id: self._id},
-        { $set: _.omit(angular.copy(self), '_id') },
+        { $set: angular.copy(_.omit(self, '_id', 'save', 'reset', '$$collection', '$$options', '$meteorSubscribe', '$$id', '$q', '$$hashkey')) },
         function(error, numberOfDocs){
           if (error) {
             deferred.reject(error);
