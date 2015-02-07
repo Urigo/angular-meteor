@@ -135,8 +135,10 @@ AngularMeteorCollection.prototype.remove = function remove(keys) {
       promises.push(removeObject(keys, $q));
     }
   } else { // If no 'keys' argument was passed, save the entire collection.
-    // XXX When removing all, why not do collection.remove({})  ?
-    angular.forEach(self, function (doc) {
+    // When removing all, we do not use collection.remove({}) because Meteor doesn't give the client side that permissions
+    // http://stackoverflow.com/a/15465286/1426570
+    var originalSelf = angular.copy(self);
+    angular.forEach(originalSelf, function (doc) {
       this.push(removeObject(doc._id, $q));
     }, promises);
   }
