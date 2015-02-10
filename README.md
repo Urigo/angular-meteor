@@ -1,4 +1,4 @@
-[angular-meteor](http://angularjs.meteor.com/tutorial) [![Build Status](https://travis-ci.org/Urigo/angular-meteor.svg?branch=master)](https://travis-ci.org/Urigo/angular-meteor) [![Coverage Status](https://coveralls.io/repos/yagoferrer/angular-meteor/badge.svg?branch=master)](https://coveralls.io/r/yagoferrer/angular-meteor?branch=master)
+[angular-meteor](http://angularjs.meteor.com/tutorial)
 ======================================================
 > The power of Meteor and the simplicity and eco-system of AngularJS
 
