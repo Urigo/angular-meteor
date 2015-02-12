@@ -1,6 +1,6 @@
 Package.describe({
   summary: "The simplest no-conflict way to use AngularJS with Meteor, Meteorite and Atmosphere Smart Packages.",
-  version: "0.6.7",
+  version: "0.6.8",
   git: "https://github.com/Urigo/angular-meteor.git"
 });
 
