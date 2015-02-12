@@ -159,7 +159,7 @@ angular.module("meteor-angular-docs").config(['$urlRouterProvider', '$stateProvi
         })
         .state('tutorial02.step15', {
           url: '/step_15',
-          template: UiRouter.template('tutorial.step_15.html')
+        templateUrl: 'client/views/steps/tutorial.step_15.tpl'
         });
 
     $locationProvider.html5Mode(true);

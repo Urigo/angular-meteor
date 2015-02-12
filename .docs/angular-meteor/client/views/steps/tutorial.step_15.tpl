@@ -1,20 +1,20 @@
 
   <div>
-    <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/steps/tutorial.step_12.tpl"
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/steps/tutorial.step_15.html"
        class="btn btn-default btn-lg improve-button">
       <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
     </a>
     <ul class="btn-group tutorial-nav">
-      <a href="/tutorial-02/step_11"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
-      <a href="http://socially-step12.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
-      <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_11...step_12"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
-      <a href="/tutorial-02/step_13"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
+      <a href="/tutorial-02/step_14"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
+      <a href="http://socially-step15.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
+      <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_14...step_15"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
+      <a href="/tutorial-02/step_16"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
     </ul>
 
     <do-nothing>
   <btf-markdown>
 
-# Step 12 - Conditional template directives with AngularJS
+# Step 15 - Conditional template directives with AngularJS
 
 AngularJS has great and very simple directives that help us show and hide DOM elements conditionally.
 You can bind them to an expression, variables or functions.
@@ -30,34 +30,34 @@ In parties-list.tpl add a ng-show directive to the form like that:
 
     </btf-markdown>
 
-<pre><code>&lt;<span class="hljs-tag">form</span> ng-show=<span class="hljs-string">"user"</span>&gt;
+<pre><code>&lt;form ng-<span class="hljs-literal">show</span>=<span class="hljs-string">"<span class="hljs-variable">$root</span>.currentUser"</span>&gt;
 </code></pre>
 
       <btf-markdown>
 
-Note that 'user' is the scope variable that we used earlier that is bound to the current logged-in user with the help of the `$user` service.
-If it is undefined, this means that there is no logged-in user.  So only if 'user' exists will the form will be shown.
+Note that '$root.currentUser' is the $rootScope variable that we use that is bound to the current logged-in user.
+If it is undefined, this means that there is no logged-in user.  So only if '$root.currentUser' exists will the form will be shown.
 
 Then right after the form, add this HTML:
 
 </btf-markdown>
 
 <pre><code>
-&lt;<span class="hljs-operator">div</span> ng-hide=<span class="hljs-string">"user"</span>&gt;
+&lt;<span class="hljs-operator">div</span> ng-hide=<span class="hljs-string">"$root.currentUser"</span>&gt;
   Log <span class="hljs-operator">in</span> <span class="hljs-built_in">to</span> <span class="hljs-built_in">create</span> <span class="hljs-operator">a</span> party!
 &lt;/<span class="hljs-operator">div</span>&gt;
 </code></pre>
 
       <btf-markdown>
 
-That is exactly the opposite - if 'user' exists, hide that div. Note that this statement is equivalent to ng-show="!user".
+That is exactly the opposite - if '$root.currentUser' exists, hide that div. Note that this statement is equivalent to ng-show="!$root.currentUser".
 
 Now add the same to the RSVP buttons:
 
           </btf-markdown>
 
 <pre><code>
-&lt;div <span class="hljs-variable">ng-show=</span><span class="hljs-string">"user"</span>&gt;
+&lt;div <span class="hljs-variable">ng-show=</span><span class="hljs-string">"$root.currentUser"</span>&gt;
   &lt;input <span class="hljs-variable">type=</span><span class="hljs-string">"button"</span> <span class="hljs-variable">value=</span><span class="hljs-string">"I'm going!"</span> <span class="hljs-variable">ng-click=</span><span class="hljs-string">"rsvp(party._id, 'yes')"</span>&gt;
   &lt;input <span class="hljs-variable">type=</span><span class="hljs-string">"button"</span> <span class="hljs-variable">value=</span><span class="hljs-string">"Maybe"</span> <span class="hljs-variable">ng-click=</span><span class="hljs-string">"rsvp(party._id, 'maybe')"</span>&gt;
   &lt;input <span class="hljs-variable">type=</span><span class="hljs-string">"button"</span> <span class="hljs-variable">value=</span><span class="hljs-string">"No"</span> <span class="hljs-variable">ng-click=</span><span class="hljs-string">"rsvp(party._id, 'no')"</span>&gt;
@@ -66,13 +66,24 @@ Now add the same to the RSVP buttons:
 
       <btf-markdown>
 
+Add let's add this the the end of the RSVP buttons:
+
+      </btf-markdown>
+
+<pre><code>
+&lt;<span class="hljs-keyword">div</span> ng-hide=<span class="hljs-string">"$root.currentUser"</span>&gt;
+  &lt;i&gt;Sign <span class="hljs-keyword">in</span> <span class="hljs-keyword">to</span> RSVP <span class="hljs-keyword">for</span> this party.&lt;/i&gt;
+&lt;/<span class="hljs-keyword">div</span>&gt;
+</code></pre>
+
+      <btf-markdown>
 
 Next thing we want to hide is the 'delete party' option, in case the logged-in user is not the party's owner.
 Lets add ng-show to the delete button like that:
 
 </btf-markdown>
 
-<pre><code><span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">ng-click</span>=<span class="hljs-value">"remove(party)"</span> <span class="hljs-attribute">ng-show</span>=<span class="hljs-value">"user &amp;&amp; user._id == party.owner"</span>&gt;</span>X<span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
+<pre><code>&lt;button ng-click=<span class="hljs-string">"remove(party)"</span> ng-<span class="hljs-literal">show</span>=<span class="hljs-string">"<span class="hljs-variable">$root</span>.currentUser &amp;&amp; <span class="hljs-variable">$root</span>.currentUser._id == party.owner"</span>&gt;X&lt;/button&gt;
 </code></pre>
 
       <btf-markdown>
@@ -133,7 +144,7 @@ and add the `ng-show` to the `ul` in party-details.tpl:
 
       <btf-markdown>
 
-Now lets add a `div` that tells the user that everyone is already invited, if that is the case:
+Now lets add a `li` that tells the user that everyone is already invited, if that is the case:
 
 </btf-markdown>
 
@@ -178,10 +189,10 @@ In the next chapter we will add some CSS and styling to our app.
     </do-nothing>
 
     <ul class="btn-group tutorial-nav">
-      <a href="/tutorial-02/step_11"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
-      <a href="http://socially-step12.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
-      <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_11...step_12"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
-      <a href="/tutorial-02/step_13"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
+      <a href="/tutorial-02/step_14"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
+      <a href="http://socially-step15.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
+      <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_14...step_15"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
+      <a href="/tutorial-02/step_16"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
     </ul>
   </div>
 
