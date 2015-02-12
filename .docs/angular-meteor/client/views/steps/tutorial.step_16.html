@@ -1,20 +1,20 @@
-<template name="tutorial.step_14.html">
+<template name="tutorial.step_16.html">
   <div>
-    <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/steps/tutorial.step_14.html"
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/steps/tutorial.step_16.html"
        class="btn btn-default btn-lg improve-button">
       <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
     </a>
     <ul class="btn-group tutorial-nav">
-      <a href="/tutorial-02/step_13"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
-      <a href="http://socially-step14.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
-      <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_13...step_14"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
-      <a href="/tutorial-02/step_15"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
+      <a href="/tutorial-02/step_15"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
+      <a href="http://socially-step16.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
+      <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_15...step_16"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
+      <a href="/tutorial-02/step_17"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
     </ul>
 
     <do-nothing>
       {{#markdown}}
 
-# Step 14 - Google Maps
+# Step 16 - Google Maps
 
 Let's add location to our parties.
 
@@ -27,7 +27,12 @@ First, let's add the angular-google-maps Meteor package:
 
 Then let's define the module dependency in our app. go to app.js inside the 'client->lib' folder:
 
-    angular.module('socially',['angular-meteor', 'ui.router', 'google-maps'.ns()]);
+    angular.module('socially',[
+      'angular-meteor',
+      'ui.router',
+      'angularUtils.directives.dirPagination',
+      'google-maps'.ns()
+    ]);
 
 
 Now let's add a map the party-details.tpl. first add this HTML snippet to the end of the template:
@@ -53,16 +58,13 @@ Inside we will create the $scope.map variable to hold the properties on the map:
     };
 
 To display a Google Map widget we have to define it's height and width. let's do that now.
-Create a new file named partyDetails.less inside the 'client->parties->styles' folder and place to following LESS code inside:
+Create a new file named parties.css inside a new folder called 'styles' placed like this 'client->parties->styles' and place to following CSS code inside:
 
-    @import "/client/styles/main";
-
-    .party-details-maps {
-      .angular-google-map-container {
-        height: 400px;
-        width: 400px;
-      }
+    .angular-google-map-container {
+      height: 400px;
+      width: 400px;
     }
+
 
 Now run the app and go to the party details page. you should see a new Google Map widget.  but it doesn't do anything yet.
 
@@ -70,14 +72,14 @@ Let's add a marker that will be binded to the party's location.
 
 inside party-details.tpl:
 
-        <div class="party-details-maps">
-          <div class="angular-google-map-container">
-            <ui-gmap-google-map center="map.center" events="map.events" zoom="map.zoom">
-              <ui-gmap-marker coords="party.location" options="map.marker.options" events="map.marker.events" idkey="party._id">
-              </ui-gmap-marker>
-            </ui-gmap-google-map>
-          </div>
-        </div>
+
+    <div class="angular-google-map-container">
+      <ui-gmap-google-map center="map.center" events="map.events" zoom="map.zoom">
+        <ui-gmap-marker coords="party.location" options="map.marker.options" events="map.marker.events" idkey="party._id">
+        </ui-gmap-marker>
+      </ui-gmap-google-map>
+    </div>
+
 
 the ui-gmap-marker directive represents a marker inside the map. we use the following attributes:
 
@@ -142,15 +144,15 @@ Now let's add a map to the parties list to show all the parties on the map.
 
 So let's add the directives to parties-list.tpl:
 
-        <div class="angular-google-map-container">
-          <ui-gmap-google-map center="map.center" zoom="map.zoom">
-            <ui-gmap-markers models="filteredParties" coords="'location'" click="'onClicked'"
-                             fit="true" idkey="'_id'" doRebuildAll="true">
-            </ui-gmap-markers>
-          </ui-gmap-google-map>
-        </div>
+      <div class="angular-google-map-container">
+        <ui-gmap-google-map center="map.center" zoom="map.zoom">
+          <ui-gmap-markers models="parties" coords="'location'" click="'onClicked'"
+                           fit="true" idkey="'_id'" doRebuildAll="true">
+          </ui-gmap-markers>
+        </ui-gmap-google-map>
+      </div>
 
-add it under the search input.
+add it under the search and sorting div.
 
 You can see that the difference between the directive we used in party-details.tpl is that ui-gmap-markers is plural.
 the attributes we use:
@@ -162,22 +164,20 @@ the attributes we use:
 * idKey - the property that holds the unique id of the array
 * doRebuildAll - a refresh option, will help us to refresh the markers in search
 
-notice that we've put filteredParties in the models property. this is because we want the map to filter the markers when we search as well.
+Now, inside partiesList.js let's add the following code to the parties subscription promise return:
 
-Now, inside partiesList.js let's add the following code:
+    $meteorUtils.autorun($scope, function() {
+      $meteorSubscribe.subscribe('parties', {
+        limit: parseInt($scope.getReactively('perPage')),
+        skip: (parseInt($scope.getReactively('page')) - 1) * parseInt($scope.getReactively('perPage')),
+        sort: $scope.getReactively('sort')
+      }, $scope.getReactively('search')).then(function() {
+        $scope.partiesCount = $meteorCollection(Counts)[0];
 
-      $scope.parties = $meteorCollection(Parties).subscribe('parties');
-      $meteorSubscribe.subscribe('parties').then(function(){
         $scope.parties.forEach( function (party) {
           party.onClicked = function () {
             onMarkerClicked(party);
           };
-        });
-
-        $scope.filteredParties = $scope.parties;
-
-        $scope.$watch("search", function(search){
-          $scope.filteredParties = $filter("filter")($scope.parties, search);
         });
 
         $scope.map = {
@@ -191,52 +191,15 @@ Now, inside partiesList.js let's add the following code:
         var onMarkerClicked = function(marker){
           $state.go('partyDetails', {partyId: marker._id});
         }
+
       });
-      $scope.users = $meteorCollection(Meteor.users, false).subscribe('users');
-
-We need to run logic only after the subscription is running, so we changed the $meteorCollection.subscribe method to the [$meteorSubscribe service](http://angularjs.meteor.com/api/subscribe).
-
-we are using the promise returned from $meteorSubscribe to run the following commands:
+    });
 
 * Adding to each party a function that handles a click event with the party's specific information
-* Initializing the filteredParties $scope variable
-* Watching the search input and filtering the parties on every change (exactly like we have done in ng-repeat but inside the controller).
-we are doing that because of a bug in angular-google-maps, otherwise we could have used the [following solution](http://stackoverflow.com/a/16053955/1426570).
 * Initializing the map object
 * Defining a function to handle the click. navigates to the party's page.
 
-Don't forget the new dependencies to the controller:
-
-    angular.module("socially").controller("PartiesListCtrl", ['$scope', '$meteorCollection', '$rootScope', '$meteorMethods', '$filter', '$state', '$meteorSubscribe',
-      function($scope, $meteorCollection, $rootScope, $meteorMethods, $filter, $state, $meteorSubscribe){
-
-Now we just need to add styles also to the map in the parties-list.  go into partiesList.less and make it look like that:
-
-    @import "/client/styles/main";
-
-    .parties-list {
-
-      .party {
-        background-color: #ffffff;
-        border: 1px solid black;
-        margin: 20px;
-        padding: 10px;
-      }
-
-      .angular-google-map-container {
-        height: 400px;
-        width: 600px;
-        margin: 10px;
-      }
-    }
-
-we have to .angular-google-map-container classes with different styles. one in partiesList.less and one in partyDetail.less.
-we distinguish them with the help of LESS's nested syntax.
-
-So we need to add the .parties-list class to the parties-list.tpl template, like that:
-
-    <div class="row parties-list">
-
+* Don't forget to add $state to our controller's dependencies.
 
 # Summery
 
@@ -249,10 +212,10 @@ AngularJS has huge eco system full of great directives like the angular-google-m
     </do-nothing>
 
     <ul class="btn-group tutorial-nav">
-      <a href="/tutorial-02/step_13"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
-      <a href="http://socially-step14.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
-      <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_13...step_14"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
-      <a href="/tutorial-02/step_15"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
+      <a href="/tutorial-02/step_15"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
+      <a href="http://socially-step16.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
+      <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_15...step_16"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
+      <a href="/tutorial-02/step_17"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
     </ul>
   </div>
 </template>
