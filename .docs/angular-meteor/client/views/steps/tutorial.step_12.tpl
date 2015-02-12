@@ -14,167 +14,405 @@
     <do-nothing>
   <btf-markdown>
 
-# Step 12 - Conditional template directives with AngularJS
+# Step 12 - Search, sort, pagination and reactive vars
 
-AngularJS has great and very simple directives that help us show and hide DOM elements conditionally.
-You can bind them to an expression, variables or functions.
+Now we are dealing with a few parties.
+But we need to support also a large number of parties.
 
-# ng-show and ng-hide
+In that case, we want to have pagination support.
 
-First, let's learn about [ng-show](https://docs.angularjs.org/api/ng/directive/ngShow) and [ng-hide](https://docs.angularjs.org/api/ng/directive/ngHide).
+With pagination we can break the array of parties down to pages so the user won't have to scroll down to find a party,
+but also and even more important, we can fetch only a few parties at a time instead of all the parties collection for better performance.
 
-So one thing we want to hide and show is the form for creating a new party. If a user is not logged in, they can't create a party, so why displaying the form for them?
-If the user is not logged in, we want to display a message saying they need to log in to create a new party.
+The interesting thing about pagination if that it is dependent on the filters we want to put on top of the collection, for example,
+if we are in page 3, but we change how we sort the collection, we should get different results, same thing with search - if we start
+a search, there might be not enough results for 3 pages.
 
-In parties-list.tpl add a ng-show directive to the form like that:
+For AngularJS developers, this chapter will show how powerful Meteor is.
+in the official AngularJS tutorial, we add sorting and search the works only on the client side, which is real world scenarios are not so helpful.
+Now, in this chapter we are going to perform a real-time search, sort and paginate that will run all the way to the server.
 
-    </btf-markdown>
+# angular-meteor pagination support
 
-<pre><code>&lt;<span class="hljs-tag">form</span> ng-show=<span class="hljs-string">"user"</span>&gt;
-</code></pre>
+So we want to achieve with angular-meteor is server-based reactive pagination.
+That is no simple task, but using the angular-meteor it could make your life a lot simpler.
+
+To achieve server-based reactive pagination we need to have support for pagination in the server as well as in the client.
+That means that our publish function for the parties collection would have to change and also the way that we subscribe to that publication.
+So first let's take care of our server-side.
+
+In our parties.js file in the server directory we are going to add the 'options' variable to the publish method like this:
+
+    Meteor.publish("parties", function (options) {
+      return Parties.find({
+        $or:[
+          {$and:[
+            {"public": true},
+            {"public": {$exists: true}}
+          ]},
+          {$and:[
+            {owner: this.userId},
+            {owner: {$exists: true}}
+          ]}
+        ]}, options);
+    }];
+
+Now our publish method receives an options arguments which we then pass to the Parties.find() function call.
+This will allow us to send arguments to the find function's modifier right from the subscribe call. The options object can
+contain properties like `skip`, `sort` and `limit` which we will shortly use ourselves - [Collection Find](http://docs.meteor.com/#/full/find).
+
+Let's get back to our client code. We now need to change our subscribe call with options we want to set for pagination.
+What are those parameters that we want to set on the options argument? That is a good question. In order to have pagination in our
+parties list we will need to save the current page, the number of parties per page and the sort order. So let's add this parameters to our scope
+in the top of the controller in client/controllers/partiesList.js file.
+
+    $scope.page = 1;
+    $scope.perPage = 3;
+    $scope.sort = { name: 1 };
+
+That's cool, but let's do something with these variables expect define them. So where we want to use them is when we call the subscribe method.
+But right now, we are subscribing to the collection in the short form which doesn't get parameters:
+
+    $scope.parties = $meteorCollection(Parties).subscribe('parties');
+
+So first we need to add the [$meteorSubscribe](http://angularjs.meteor.com/api/subscribe) service and call it separately
+(don't forget to add it to the dependencies of the controller):
+
+    $scope.parties = $meteorCollection(Parties);
+
+    $meteorSubscribe.subscribe('parties');
+
+Now let's send the parameters in the options object:
+
+    $meteorSubscribe.subscribe('parties', {
+      limit: parseInt($scope.perPage),
+      skip: parseInt(($scope.page - 1) * $scope.perPage),
+      sort: $scope.sort
+    });
+
+So we built an object that contains 3 properties:
+
+* limit - how many parties to send per page
+* skip  - the number of parties we want to start with which is the current page minus one times the parties per page
+* sort  - the sorting of the collection in [MongoDB syntax](http://docs.mongodb.org/manual/reference/method/cursor.sort/)
+
+Now we also need to add the sort modifier to the way we get the collection data from the minimongo.
+That is because the sorting is not saved when the data is sent from the server to the client.
+So to make sure our data is sorted also on the client need to defined is also in the parties collection.
+To do that we are going to replace the 'Parties' collection parameter with a [cursor](http://docs.meteor.com/#/full/mongo_cursor) for that parties collection:
+
+    $scope.parties = $meteorCollection(function() {
+      return Parties.find({}, {
+        sort : $scope.sort
+      });
+    });
+
+
+# pagination directive
+
+Now we need a UI to change and move between the pages.
+
+In AngularJS's eco system there are a lot of directive for handling pagination.
+
+Our personal favorite is [angular-utils-pagination](https://github.com/michaelbromley/angularUtils/tree/master/src/directives/pagination).
+
+To add the directive add it's Meteor package to the project:
+
+    meteor add urigo:angular-utils-pagination
+
+Add it as a dependency to our Angular app in app.js:
+
+    angular.module('socially',['angular-meteor', 'ui.router', 'angularUtils.directives.dirPagination']);
+
+
+Now let's add the directive in parties-list.tpl. change the ng-repeat of parties to this:
+
+  </btf-markdown>
+
+    <pre><code>&lt;li <span class="hljs-variable">dir-paginate=</span><span class="hljs-string">"party in parties | itemsPerPage: perPage"</span> <span class="hljs-variable">total-items=</span><span class="hljs-string">"partiesCount.count"</span>&gt;
+    </code></pre>
 
       <btf-markdown>
 
-Note that 'user' is the scope variable that we used earlier that is bound to the current logged-in user with the help of the `$user` service.
-If it is undefined, this means that there is no logged-in user.  So only if 'user' exists will the form will be shown.
+and after the UL closes add this directive:
 
-Then right after the form, add this HTML:
+      </btf-markdown>
 
-</btf-markdown>
-
-<pre><code>
-&lt;<span class="hljs-operator">div</span> ng-hide=<span class="hljs-string">"user"</span>&gt;
-  Log <span class="hljs-operator">in</span> <span class="hljs-built_in">to</span> <span class="hljs-built_in">create</span> <span class="hljs-operator">a</span> party!
-&lt;/<span class="hljs-operator">div</span>&gt;
-</code></pre>
+    <pre><code>&lt;dir-pagination-controls <span class="hljs-function_start"><span class="hljs-keyword">on</span></span>-page-change=<span class="hljs-string">"pageChanged(newPageNumber)"</span>&gt;&lt;/dir-pagination-controls&gt;
+    </code></pre>
 
       <btf-markdown>
 
-That is exactly the opposite - if 'user' exists, hide that div. Note that this statement is equivalent to ng-show="!user".
+as you can see, dir-paginate list takes the number of objects in a page (that we defined before) but also takes the total number items (we will get to that soon).
+With this bindings it calculates what buttons of pages it should display inside the dir-pagination-controls directive.
 
-Now add the same to the RSVP buttons:
+On the dir-pagination-controls directive there is a method on-page-change and there we can call our own function.
+so we call 'pageChanged' function with the new selection as a parameter.
 
-          </btf-markdown>
+let's create the pageChanged function inside the partiesList controller (client/controllers/partiesList.js):
 
-<pre><code>
-&lt;div <span class="hljs-variable">ng-show=</span><span class="hljs-string">"user"</span>&gt;
-  &lt;input <span class="hljs-variable">type=</span><span class="hljs-string">"button"</span> <span class="hljs-variable">value=</span><span class="hljs-string">"I'm going!"</span> <span class="hljs-variable">ng-click=</span><span class="hljs-string">"rsvp(party._id, 'yes')"</span>&gt;
-  &lt;input <span class="hljs-variable">type=</span><span class="hljs-string">"button"</span> <span class="hljs-variable">value=</span><span class="hljs-string">"Maybe"</span> <span class="hljs-variable">ng-click=</span><span class="hljs-string">"rsvp(party._id, 'maybe')"</span>&gt;
-  &lt;input <span class="hljs-variable">type=</span><span class="hljs-string">"button"</span> <span class="hljs-variable">value=</span><span class="hljs-string">"No"</span> <span class="hljs-variable">ng-click=</span><span class="hljs-string">"rsvp(party._id, 'no')"</span>&gt;
-&lt;/div&gt;
-</code></pre>
-
-      <btf-markdown>
-
-
-Next thing we want to hide is the 'delete party' option, in case the logged-in user is not the party's owner.
-Lets add ng-show to the delete button like that:
-
-</btf-markdown>
-
-<pre><code><span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">ng-click</span>=<span class="hljs-value">"remove(party)"</span> <span class="hljs-attribute">ng-show</span>=<span class="hljs-value">"user &amp;&amp; user._id == party.owner"</span>&gt;</span>X<span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
-</code></pre>
-
-      <btf-markdown>
-
-In here you can see that `ng-show` can get a statement, in our case - the user exists (logged in) and is also the party's owner.
-
-
-# ng-if
-
-[ng-if](https://docs.angularjs.org/api/ng/directive/ngIf) acts almost the same as `ng-show` but the difference between them
-is that `ng-show` hides the element by changing the display css property and `ng-if` simply removes it from the DOM completely.
-
-So let's use `ng-if` to hide the outstanding invitations from a party, if the party is public (everyone is invited!):
-
-</btf-markdown>
-
-        <pre><code><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">ng-if</span>=<span class="hljs-value">"!party.public"</span>&gt;</span>
-  Users who not responded:
-  <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">ng-repeat</span>=<span class="hljs-value">"invitedUser in outstandingInvitations(party)"</span>&gt;</span>
-    </span><span class="hljs-expression">{{ <span class="hljs-variable">invitedUser</span> | <span class="hljs-variable">displayName</span> }}</span><span class="xml">
-  <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">ng-if</span>=<span class="hljs-value">"party.public"</span>&gt;</span>
-  Everyone is invited
-<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span></span>
-        </code></pre>
-
-      <btf-markdown>
-
-# Assigning a function
-
-Now lets hide the 'Users to invite' inside party-details.tpl is case the user is not logged in or can't invite to the party:
-
-To do that we will create a scope function that returns a boolean and associate it with `ng-show`:
-
-Create a new function inside partyDetailsCtrl inside the partyDetails.js file named `canInvite`:
-
-    $scope.canInvite = function (){
-      if (!$scope.party)
-        return false;
-
-      return !$scope.party.public &&
-        $scope.party.owner === Meteor.userId();
+    $scope.pageChanged = function(newPage) {
+      $scope.page = newPage;
     };
 
-and add the `ng-show` to the `ul` in party-details.tpl:
+Now every time we will change the page, the scope variable will change accordingly and update the bind method that watches it.
 
-</btf-markdown>
+* Notice that to buttons of the directive doesn't look very nice now because we haven't added any design and CSS to our application, we will do it later on.
 
-<pre><code><span class="xml">  <span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">ng-show</span>=<span class="hljs-value">"canInvite()"</span>&gt;</span>
-    Users to invite:
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">ng-repeat</span>=<span class="hljs-value">"user in users | uninvited:party"</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span></span><span class="hljs-expression">{{ <span class="hljs-variable">user</span> | <span class="hljs-variable">displayName</span> }}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">ng-click</span>=<span class="hljs-value">"invite(user)"</span>&gt;</span>Invite<span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span></span>
-</code></pre>
+# Getting total count of a collection
 
-      <btf-markdown>
+Getting a total count of a collection might seem easy, but there is a problem.
+The client only holds the number of object that it subscribed to. that means that if the client is not subscribed to the whole array calling find().count on a collection will result in a partial count.
 
-Now lets add a `div` that tells the user that everyone is already invited, if that is the case:
+So we need access in the client for the total count even if we are not subscribed to the whole collection.
 
-</btf-markdown>
+For that we can use the [tmeasday:publish-counts](https://github.com/percolatestudio/publish-counts) package. In the command line:
 
-      <pre><code><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">ul</span> <span class="hljs-attribute">ng-show</span>=<span class="hljs-value">"canInvite()"</span>&gt;</span>
-    Users to invite:
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">ng-repeat</span>=<span class="hljs-value">"user in users | uninvited:party"</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span></span><span class="hljs-expression">{{ <span class="hljs-variable">user</span> | <span class="hljs-variable">displayName</span> }}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">ng-click</span>=<span class="hljs-value">"invite(user)"</span>&gt;</span>Invite<span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">ng-if</span>=<span class="hljs-value">"(users | uninvited:party).length &lt;= 0"</span>&gt;</span>
-      Everyone are already invited.
-    <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span></span>
-      </code></pre>
+    meteor add tmeasday:publish-counts
 
-      <btf-markdown>
-Here, we are taking the result of the uninvited users and checking for its length.
 
-# ng-disabled
+That package helps to publish the count of a cursor, in real time without dependency on the subscribe method.
 
-Now lets disable the partyDetails input fields in case the user doesn't have permission to change them (currently, the server is stopping the user, but there is no visual feedback aside from the server overriding the local edit immediately after):
+Inside the server/parties.js file, add the following code inside the Meteor.publish("parties" function, at the beginning of the function. before the existing return statement:
 
-     </btf-markdown>
+    Counts.publish(this, 'numberOfParties', Parties.find({
+      $or:[
+        {$and:[
+          {"public": true},
+          {"public": {$exists: true}}
+        ]},
+        {$and:[
+          {owner: this.userId},
+          {owner: {$exists: true}}
+        ]}
+    ]}));
+
+So the file should look like this now:
+
+    Meteor.publish("parties", function (options) {
+      Counts.publish(this, 'numberOfParties', Parties.find({
+        $or:[
+          {$and:[
+            {"public": true},
+            {"public": {$exists: true}}
+          ]},
+          {$and:[
+            {owner: this.userId},
+            {owner: {$exists: true}}
+          ]}
+      ]}));
+      return Parties.find({
+        $or:[
+          {$and:[
+            {"public": true},
+            {"public": {$exists: true}}
+          ]},
+          {$and:[
+            {owner: this.userId},
+            {owner: {$exists: true}}
+        ]}
+      ]} ,options);
+    });
+
+As you can see, we query only the parties that should be available to that specific client, but without the options variable so we get the full
+number of parties.
+
+Now on the client we have access to the Counts collection.
+let's save that in the client/controllers/partiesList.js file when the subscription finishes successful (using the promise $meteorSubscribe retunrs):
+
+    $meteorSubscribe.subscribe('parties', {
+      limit: parseInt($scope.perPage),
+      skip: parseInt(($scope.page - 1) * $scope.perPage),
+      sort: $scope.sort
+    }).then(function(){
+      $scope.partiesCount = $meteorCollection(Counts)[0];
+    });
+
+
+Now the partiesCount will hold the number of parties and will send it to the directive in the parties-list.tpl (which we already defined earlier).
+
+But there is a problem - try to create a few parties and then change pages...  the subscription won't run again!
+
+# Reactive variables
+
+Meteor is relaying deeply on the concept of [reactivity](http://docs.meteor.com/#/full/reactivity).
+
+This means that is a [reactive variable](http://docs.meteor.com/#/full/reactivevar) changes, Meteor is aware of that with it's [Tracker object](http://docs.meteor.com/#/full/tracker_autorun).
+
+But Angular's scope variables are only watched by Angular and are not reactive vars for Meteor...
+
+For that angular-meteor created [getReactively](http://angularjs.meteor.com/api/getReactively) - a way to make an Angular scope variable to a reactive variable.
+
+So first, in order to make the subscription run each time something changes in one of the parameters, we need to place it inside an autorun block.
+To do that, we are going to use the [$meteorUtils.autorun](http://angularjs.meteor.com/api/utils) function:
+
+    $meteorUtils.autorun($scope, function() {
+
+      $meteorSubscribe.subscribe('parties', {
+        limit: parseInt($scope.perPage),
+        skip: parseInt(($scope.page - 1) * $scope.perPage),
+        sort: $scope.sort
+      }).then(function(){
+        $scope.partiesCount = $meteorCollection(Counts)[0];
+      });
+
+    });
+
+But this still won't help us because there is no reactive variables inside.  so let's use [getReactively](http://angularjs.meteor.com/api/getReactively) for that:
+
+    $meteorUtils.autorun($scope, function() {
+
+      $meteorSubscribe.subscribe('parties', {
+        limit: parseInt($scope.getReactively('perPage')),
+        skip: (parseInt($scope.getReactively('page')) - 1) * parseInt($scope.getReactively('perPage')),
+        sort: $scope.getReactively('sort')
+      }).then(function(){
+        $scope.partiesCount = $meteorCollection(Counts)[0];
+      });
+
+    });
+
+What's happening here is that getReactively returns a reactive variable that fires a changed event every time the scope variable changes,
+and then autorun knows the execute it's given function again.
+The will cause the subscription to re-run again with the new options parameter and we will get the correct data from the server.
+
+$meteorCollection is also listening to reactive variables so let's change our $scope.parties initialization as well:
+
+    $scope.parties = $meteorCollection(function() {
+      return Parties.find({}, {
+        sort : $scope.getReactively('sort')
+      });
+    });
+
+Now run the app.
+Create lots of parties and see that you can see only 3 at a time and you can scroll between the pages with the directive that populates the number of pages automatically.
+
+# Changing the sort reactively
+
+We haven't placed anywhere in the UI a way to change sorting so let's do that right now.
+
+So in the HTML template, let's add a sorting dropdown inside the UL:
+
+  </btf-markdown>
 
 <pre><code>
-&lt;input <span class="hljs-variable">ng-model=</span><span class="hljs-string">"party.name"</span> <span class="hljs-variable">ng-disabled=</span><span class="hljs-string">"party.owner != $root.currentUser._id"</span>&gt;
-  &lt;input <span class="hljs-variable">ng-model=</span><span class="hljs-string">"party.description"</span> <span class="hljs-variable">ng-disabled=</span><span class="hljs-string">"party.owner != $root.currentUser._id"</span>&gt;
-  &lt;label&gt;Is public&lt;/label&gt;
-&lt;input <span class="hljs-variable">type=</span><span class="hljs-string">"checkbox"</span> <span class="hljs-variable">ng-model=</span><span class="hljs-string">"party.public"</span> <span class="hljs-variable">ng-disabled=</span><span class="hljs-string">"party.owner != $root.currentUser._id"</span>&gt;
+  <span class="hljs-tag">&lt;<span class="hljs-title">h1</span>&gt;</span>Parties:<span class="hljs-tag">&lt;/<span class="hljs-title">h1</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">select</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">"orderProperty"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">option</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">"1"</span>&gt;</span>Ascending<span class="hljs-tag">&lt;/<span class="hljs-title">option</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">option</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">"-1"</span>&gt;</span>Descending<span class="hljs-tag">&lt;/<span class="hljs-title">option</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">select</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
 </code></pre>
 
       <btf-markdown>
 
+
+in the controller lets associate that dropdown to $scope.sort:
+
+    $scope.$watch('orderProperty', function(){
+      if ($scope.orderProperty)
+        $scope.sort = {name: parseInt($scope.orderProperty)};
+    });
+
+and also initialize it at the beginning:
+
+    $scope.sort = { name: 1 };
+    $scope.orderProperty = '1';
+
+Now we don't have to do anything other than that. $scope.getReactively will take care of updating the subscription for us
+when the sort changes. So all we have left is to sit back and enjoy out pagination working like a charm.
+
+We made a lot of changes so please check the step's code [here](https://github.com/Urigo/meteor-angular-socially/compare/step_14...step_15)
+to make sure you have everything needed and run the application.
+
+# Reactive Search
+
+Now that we have the basis for pagination, all we have left is to add reactive server-side searching of parties. That means
+that we will be able to enter a search string and have the app search for parties that match that name in the server and
+return only the relevant results! That is pretty awesome, and we are going to do all that only in several lines of code. So
+let's get started.
+
+As before, let's add the server side support. We need to add a new argument to our publish method which will hold the
+requested search string. We will call it..... searchString! Here it goes:
+
+    Meteor.publish("parties", function (options, searchString) {
+
+Yep that was simple. Now we are going to filter the correct results using mongo's regex ability. We are going to add this
+line at two places where we are using `find`, in publish Counts and in the return of the parties cursor:
+
+    'name' : { '$regex' : '.*' + searchString || '' + '.*', '$options' : 'i' },
+
+So server/parties.js should look like that:
+
+    Meteor.publish("parties", function (options, searchString) {
+      if (searchString == null)
+        searchString = '';
+      Counts.publish(this, 'numberOfParties', Parties.find({
+        'name' : { '$regex' : '.*' + searchString || '' + '.*', '$options' : 'i' },
+        $or:[
+          {$and:[
+            {"public": true},
+            {"public": {$exists: true}}
+          ]},
+          {$and:[
+            {owner: this.userId},
+            {owner: {$exists: true}}
+          ]}
+      ]}));
+      return Parties.find({
+        'name' : { '$regex' : '.*' + searchString || '' + '.*', '$options' : 'i' },
+        $or:[
+          {$and:[
+            {"public": true},
+            {"public": {$exists: true}}
+          ]},
+          {$and:[
+            {owner: this.userId},
+            {owner: {$exists: true}}
+          ]}
+        ]} ,options);
+    });
+
+As you can see this will filter all the parties with a name that contains the searchString.
+
+*  we added also if (searchString == null) searchString = '';  so that if we won't get that parameter we will just return the whole collection.
+
+Now let's move on to the client side.
+
+First let's place a search input into our template and bind it into a 'search' scope variable:
+
+  </btf-markdown>
+
+<pre><code>
+  <span class="hljs-tag">&lt;<span class="hljs-title">h1</span>&gt;</span>Parties:<span class="hljs-tag">&lt;/<span class="hljs-title">h1</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"search"</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">"search"</span> <span class="hljs-attribute">placeholder</span>=<span class="hljs-value">"Search"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">select</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">"orderProperty"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">option</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">"1"</span>&gt;</span>Ascending<span class="hljs-tag">&lt;/<span class="hljs-title">option</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">option</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">"-1"</span>&gt;</span>Descending<span class="hljs-tag">&lt;/<span class="hljs-title">option</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">select</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+</code></pre>
+
+      <btf-markdown>
+
+And all we have left to do is call the subscribe method with our reactive scope variable:
+
+    $meteorSubscribe.subscribe('parties', {
+      limit: parseInt($scope.getReactively('perPage')),
+      skip: (parseInt($scope.getReactively('page')) - 1) * parseInt($scope.getReactively('perPage')),
+      sort: $scope.getReactively('sort')
+    }, $scope.getReactively('search')).then(function() {
+
+Wow that is all that is needed to have a fully reactive search with pagination! Quite amazing right?
 
 # Summary
 
-So now our example looks much better after we hide things based on the current situation.
+Now we have full pagination with search and sorting for client and server side with the help of Meteor's options and Angular's directives.
 
-In the next chapter we will add some CSS and styling to our app.
 
-      </btf-markdown>
+  </btf-markdown>
     </do-nothing>
 
     <ul class="btn-group tutorial-nav">
