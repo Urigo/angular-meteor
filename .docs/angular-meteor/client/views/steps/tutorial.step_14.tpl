@@ -1,20 +1,20 @@
 
   <div>
-    <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/steps/tutorial.step_11.tpl"
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/steps/tutorial.step_14.html"
        class="btn btn-default btn-lg improve-button">
       <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
     </a>
     <ul class="btn-group tutorial-nav">
-      <a href="/tutorial-02/step_10"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
-      <a href="http://socially-step11.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
-      <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_10...step_11"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
-      <a href="/tutorial-02/step_12"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
+      <a href="/tutorial-02/step_13"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
+      <a href="http://socially-step14.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
+      <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_13...step_14"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
+      <a href="/tutorial-02/step_15"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
     </ul>
 
     <do-nothing>
   <btf-markdown>
 
-# Step 11 - Meteor methods with promises
+# Step 14 - Meteor methods with promises
 
 In this step we will learn how to use Meteor methods and how angular-meteor enhances them with the support of promises.
 
@@ -93,8 +93,9 @@ Now let's call that method from the client.
 
 Inside the partyDetails controller add '$meteorMethods' to the controller's dependencies:
 
-    angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$collection', '$meteorMethods',
-      function($scope, $stateParams, $collection, $meteorMethods){
+    angular.module("socially").controller("PartyDetailsCtrl", [
+      '$scope', '$stateParams', '$meteorObject', '$meteorCollection', '$meteorMethods',
+      function($scope, $stateParams, $meteorObject, $meteorCollection, $meteorMethods){
 
 
 Then add a scope method called invite:
@@ -124,7 +125,7 @@ Now let's add a button to invite each user we want. Edit the users lists in the 
     </btf-markdown>
 
 <pre><code><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">ul</span>&gt;</span>
-  Users:
+  Users to invite:
   <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">ng-repeat</span>=<span class="hljs-value">"user in users | uninvited:party"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span></span><span class="hljs-expression">{{ <span class="hljs-variable">user</span> | <span class="hljs-variable">displayName</span> }}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">ng-click</span>=<span class="hljs-value">"invite(user)"</span>&gt;</span>Invite<span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
@@ -135,7 +136,7 @@ Now let's add a button to invite each user we want. Edit the users lists in the 
       <btf-markdown>
 
 Now that we have the invite function working, we also want to publish the parties to the invited users.
-Let's add that permission to the publish parties method:
+Let's add that permission to the publish parties method (and the Counts!):
 
       {$and:[
         {invited: this.userId},
@@ -144,8 +145,11 @@ Let's add that permission to the publish parties method:
 
 And the full publish method:
 
-    Meteor.publish("parties", function () {
-      return Parties.find({
+    Meteor.publish("parties", function (options, searchString) {
+      if (searchString == null)
+        searchString = '';
+      Counts.publish(this, 'numberOfParties', Parties.find({
+        'name' : { '$regex' : '.*' + searchString || '' + '.*', '$options' : 'i' },
         $or:[
           {$and:[
             {"public": true},
@@ -159,7 +163,23 @@ And the full publish method:
             {invited: this.userId},
             {invited: {$exists: true}}
           ]}
-        ]});
+      ]}));
+      return Parties.find({
+        'name' : { '$regex' : '.*' + searchString || '' + '.*', '$options' : 'i' },
+        $or:[
+          {$and:[
+            {"public": true},
+            {"public": {$exists: true}}
+          ]},
+          {$and:[
+            {owner: this.userId},
+            {owner: {$exists: true}}
+          ]},
+          {$and:[
+            {invited: this.userId},
+            {invited: {$exists: true}}
+          ]}
+        ]} ,options);
     });
 
 Great!
@@ -230,20 +250,16 @@ Add an rsvp scope function to the partiesListCtrl in partiesList.js:
       );
     };
 
-don't forget to add the $meteorMethods service to the controllers dependencies:
-
-      angular.module("socially").controller("PartiesListCtrl", ['$scope', '$collection', '$user', '$meteorMethods',
-        function($scope, $collection, $user, $meteorMethods){
-
+* don't forget to add the $meteorMethods service to the controllers dependencies.
 
 and let's add action buttons to call the right rsvp in the HTML.
 Add this code into parties-list.tpl inside the parties list itself (inside the ng-repeat):
 
         </btf-markdown>
 <pre><code>  &lt;div&gt;
-  &lt;input <span class="hljs-variable">type=</span><span class="hljs-string">"button"</span> <span class="hljs-variable">value=</span><span class="hljs-string">"I'm going!"</span> <span class="hljs-variable">ng-click=</span><span class="hljs-string">"rsvp(party._id, 'yes')"</span>&gt;
-  &lt;input <span class="hljs-variable">type=</span><span class="hljs-string">"button"</span> <span class="hljs-variable">value=</span><span class="hljs-string">"Maybe"</span> <span class="hljs-variable">ng-click=</span><span class="hljs-string">"rsvp(party._id, 'maybe')"</span>&gt;
-  &lt;input <span class="hljs-variable">type=</span><span class="hljs-string">"button"</span> <span class="hljs-variable">value=</span><span class="hljs-string">"No"</span> <span class="hljs-variable">ng-click=</span><span class="hljs-string">"rsvp(party._id, 'no')"</span>&gt;
+    &lt;input <span class="hljs-variable">type=</span><span class="hljs-string">"button"</span> <span class="hljs-variable">value=</span><span class="hljs-string">"I'm going!"</span> <span class="hljs-variable">ng-click=</span><span class="hljs-string">"rsvp(party._id, 'yes')"</span>&gt;
+    &lt;input <span class="hljs-variable">type=</span><span class="hljs-string">"button"</span> <span class="hljs-variable">value=</span><span class="hljs-string">"Maybe"</span> <span class="hljs-variable">ng-click=</span><span class="hljs-string">"rsvp(party._id, 'maybe')"</span>&gt;
+    &lt;input <span class="hljs-variable">type=</span><span class="hljs-string">"button"</span> <span class="hljs-variable">value=</span><span class="hljs-string">"No"</span> <span class="hljs-variable">ng-click=</span><span class="hljs-string">"rsvp(party._id, 'no')"</span>&gt;
   &lt;/div&gt;
 </code></pre>
 
@@ -306,7 +322,13 @@ here we are using underscore's _.filter, _.contains and _.findWhere to extract t
 
 Notice we are doing this check on $scope.users but we haven't initialized it yet in this controller. so add this code as well:
 
-    $collection(Meteor.users).bind($scope, 'users', false, true);
+Change
+
+    $meteorSubscribe.subscribe('users');
+
+With:
+
+    $scope.users = $meteorCollection(Meteor.users, false).subscribe('users');
 
 
 
@@ -323,10 +345,10 @@ So in the next chapter we are going to learn about a few simple but very useful 
     </do-nothing>
 
     <ul class="btn-group tutorial-nav">
-      <a href="/tutorial-02/step_10"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
-      <a href="http://socially-step11.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
-      <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_10...step_11"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
-      <a href="/tutorial-02/step_12"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
+      <a href="/tutorial-02/step_13"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
+      <a href="http://socially-step14.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
+      <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_13...step_14"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
+      <a href="/tutorial-02/step_15"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
     </ul>
   </div>
 
