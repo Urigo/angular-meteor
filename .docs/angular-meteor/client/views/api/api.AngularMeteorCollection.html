@@ -88,6 +88,38 @@ See [$meteorCollection](/api/meteorCollection)
 </table>
 
 <br>
+<h3><p><code><span class="pln">subscribe( :subscriptionName );</span></code></p></h3>
+<br>
+
+A shorten (Syntactic sugar) function for the <a href="/api/subscribe">$meteorSubscribe.subscribe function</a>.
+
+Takes only one parameter and not returns a promise like <a href="/api/subscribe">$meteorSubscribe.subscribe</a> does.
+
+#### Parameters
+
+<table class="variables-matrix input-arguments">
+  <thead>
+  <tr>
+    <th>Param</th>
+    <th>Type</th>
+    <th>Details</th>
+    <th>Required</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>subscriptionName</td>
+    <td>
+      <a href="" class="label type-hint type-hint-string">subscriptionName</a>
+    </td>
+    <td><p>The subscription name to subscribe to.  exactly like the first parameter in $meteorSubscribe service.
+    </p></td>
+    <td><a href="" class="label type-hint type-hint-object">Yes</a></td>
+  </tr>
+  </tbody>
+</table>
+
+<br>
 
 ----
 
@@ -117,6 +149,10 @@ See [$meteorCollection](/api/meteorCollection)
     $scope.todos.pop();  // removes only in scope
 
     $scope.todos.remove(); // syncs also in Meteor collection
+
+
+    // Using the subscribe function
+    $scope.parties = $meteorCollection(Parties).subscribe('partiesSubscription');
 
         {{/markdown}}
     </do-nothing>
