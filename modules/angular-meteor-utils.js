@@ -4,6 +4,9 @@ var angularMeteorUtils = angular.module('angular-meteor.utils', []);
 angularMeteorUtils.service('$meteorUtils', [
   function () {
     this.getCollectionByName = function(string){
+      if ('users' === string) {
+          return Meteor.users;
+      }
       for (var globalObject in window) {
         if (window[globalObject] instanceof Mongo.Collection) {
           if (window[globalObject]._name == string){
