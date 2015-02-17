@@ -20,6 +20,7 @@ Package.on_use(function (api) {
   api.use('jquery', 'client', {weak: true});
   api.use('minimongo');  // for idStringify
   api.use('observe-sequence');
+  api.use('dburles:mongo-collection-instances@0.3.1', 'client'); // For getCollectionByName
 
   // Including bower
   api.use('mquandalle:bower@1.3.12', 'client');
