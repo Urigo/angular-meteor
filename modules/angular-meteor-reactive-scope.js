@@ -3,9 +3,10 @@
  */
 var angularMeteorReactiveScope = angular.module('angular-meteor.reactive-scope', []);
 
-angularMeteorReactiveScope.run(['$rootScope', function($rootScope) {
+angularMeteorReactiveScope.run(['$rootScope', '$parse', function($rootScope, $parse) {
   Object.getPrototypeOf($rootScope).getReactively = function(property) {
     var self = this;
+    var getValue = $parse(property);
 
     if (!self.$$trackerDeps) {
       self.$$trackerDeps = {};
@@ -15,7 +16,7 @@ angularMeteorReactiveScope.run(['$rootScope', function($rootScope) {
       self.$$trackerDeps[property] = new Tracker.Dependency();
 
       self.$watch(function() {
-        return self[property]
+        return getValue(self)
       }, function() {
         self.$$trackerDeps[property].changed();
       });
@@ -23,6 +24,6 @@ angularMeteorReactiveScope.run(['$rootScope', function($rootScope) {
 
     self.$$trackerDeps[property].depend();
 
-    return self[property];
+    return getValue(self);
   };
 }]);
