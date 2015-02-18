@@ -56,11 +56,11 @@ Later on in this tutorial we will replace those default account-ui forms with a 
 
     meteor add accounts-ui
 
-Now let's add the accounts-ui template ( {> loginButtons }} ) into our app, into index.html.
+Now let's add the accounts-ui template ( {{|> loginButtons }} ) into our app, into index.html.
 
 To add Meteor's templates into AngularJS templates, angular-meteor provides us with the meteor-include directive.
 
-So instead of adding {> loginButtons }} like in Meteor we will add <meteor-include src="loginButtons"></meteor-include> :
+So instead of adding {{|> loginButtons }} like in Meteor we will add <meteor-include src="loginButtons"></meteor-include> :
 
 __`index.html`:__
 
