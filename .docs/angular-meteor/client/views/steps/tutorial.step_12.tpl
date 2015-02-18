@@ -29,7 +29,7 @@ if we are in page 3, but we change how we sort the collection, we should get dif
 a search, there might be not enough results for 3 pages.
 
 For AngularJS developers, this chapter will show how powerful Meteor is.
-in the official AngularJS tutorial, we add sorting and search the works only on the client side, which is real world scenarios are not so helpful.
+In the official AngularJS tutorial, we add sorting and search the works only on the client side, which is real world scenarios are not so helpful.
 Now, in this chapter we are going to perform a real-time search, sort and paginate that will run all the way to the server.
 
 # angular-meteor pagination support
