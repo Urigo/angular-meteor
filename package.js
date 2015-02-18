@@ -17,14 +17,10 @@ Package.registerBuildPlugin({
 Package.on_use(function (api) {
   api.versionsFrom('METEOR@0.9.0.1');
 
-  api.use('jquery', 'client', {weak: true});
+  api.use('angularjs:angular@1.3.13', 'client');
   api.use('minimongo');  // for idStringify
   api.use('observe-sequence');
   api.use('dburles:mongo-collection-instances@0.3.1', 'client'); // For getCollectionByName
-
-  // Including bower
-  api.use('mquandalle:bower@1.3.12', 'client');
-  api.add_files('bower.json', 'client');
 
   // Files to load in Client only.
   api.add_files([
