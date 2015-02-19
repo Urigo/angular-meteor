@@ -36,7 +36,7 @@ AngularMeteorObject.prototype.save = function save() {
     if (self._id)
       collection.update(
         {_id: self._id},
-        { $set: angular.copy(_.omit(self, '_id', 'save', 'reset', '$$collection', '$$options', '$meteorSubscribe', '$$id', '$q', '$$hashkey')) },
+        { $set: angular.copy(_.omit(self, '_id', self.$$internalProps)) },
         function(error, numberOfDocs){
           if (error) {
             deferred.reject(error);
@@ -65,6 +65,11 @@ AngularMeteorObject.prototype.reset = function reset() {
   }
 };
 
+// A list of internals properties to not watch for, nor pass to the Document on update and etc.
+AngularMeteorObject.prototype.$$internalProps = [
+  'save', 'reset', '$$collection', '$$options', '$meteorSubscribe', '$$id', '$q', '$$hashkey', '$$internalProps'
+];
+
 
 angularMeteorObject.factory('$meteorObject', ['$rootScope', '$meteorUtils', '$meteorSubscribe', '$q',
   function($rootScope, $meteorUtils, $meteorSubscribe, $q) {
@@ -84,7 +89,7 @@ angularMeteorObject.factory('$meteorObject', ['$rootScope', '$meteorUtils', '$me
 
       if (auto) { // Deep watches the model and performs autobind.
         $rootScope.$watch(function(){
-          return _.omit(data, 'save', 'reset', '$$collection', '$$options', '$meteorSubscribe', '$$id', '$q', '$$hashkey');
+          return _.omit(data, data.$$internalProps);
         }, function (newItem, oldItem) {
           if (newItem) {
             if (newItem._id) {
