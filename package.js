@@ -45,11 +45,13 @@ Package.on_use(function (api) {
 
 Package.onTest(function(api) {
   api.use('tinytest');
+  api.use('underscore');
   api.use('minimongo');
+  api.use('angularjs:angular@1.3.13', 'client');
+  api.use('dburles:mongo-collection-instances@0.3.1', 'client'); // For getCollectionByName
   api.use(['test-helpers'], ['client']);
 
   api.addFiles([
-    'node_modules/angular/angular.js',
     'urigo:angular.js',
     'lib/angular-hash-key-copier.js',
     'lib/diff-array.js',
