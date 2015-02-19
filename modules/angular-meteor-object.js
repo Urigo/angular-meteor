@@ -65,9 +65,26 @@ AngularMeteorObject.prototype.reset = function reset() {
   }
 };
 
+AngularMeteorObject.prototype.stop = function stop() {
+  if (this.unregisterAutoDestroy) {
+    this.unregisterAutoDestroy();
+  }
+  this.unregisterAutoDestroy = null;
+
+  if (this.unregisterAutoBind) {
+    this.unregisterAutoBind();
+  }
+  this.unregisterAutoBind = null;
+
+  if (this.autorunComputation && this.autorunComputation.stop) {
+    this.autorunComputation.stop();
+  }
+  this.autorunComputation = null;
+};
+
 // A list of internals properties to not watch for, nor pass to the Document on update and etc.
 AngularMeteorObject.prototype.$$internalProps = [
-  'save', 'reset', '$$collection', '$$options', '$meteorSubscribe', '$$id', '$q', '$$hashkey', '$$internalProps'
+  'save', 'reset', '$$collection', '$$options', '$meteorSubscribe', '$$id', '$q', '$$hashkey', '$$internalProps', 'subscribe', 'stop', 'autorunComputation', 'unregisterAutoBind', 'unregisterAutoDestroy'
 ];
 
 
@@ -83,12 +100,12 @@ angularMeteorObject.factory('$meteorObject', ['$rootScope', '$meteorUtils', '$me
 
       var data = new AngularMeteorObject(collection, id, options, $meteorSubscribe, $q);
 
-      $meteorUtils.autorun($rootScope, function() {
+      data.autorunComputation = $meteorUtils.autorun($rootScope, function() {
         data.reset();
       });
 
       if (auto) { // Deep watches the model and performs autobind.
-        $rootScope.$watch(function(){
+        data.unregisterAutoBind = $rootScope.$watch(function(){
           return _.omit(data, data.$$internalProps);
         }, function (newItem, oldItem) {
           if (newItem) {
@@ -97,8 +114,16 @@ angularMeteorObject.factory('$meteorObject', ['$rootScope', '$meteorUtils', '$me
             }
           }
         }, true);
+
       }
 
+      data.unregisterAutoDestroy = $rootScope.$on('$destroy', function() {
+        if (data && data.stop) {
+          data.stop();
+        }
+        data = undefined;
+      });
+
       return data;
-    }
+    };
   }]);
