@@ -57,9 +57,16 @@ AngularMeteorObject.prototype.reset = function reset() {
 
   if (collection){
     var serverValue = collection.findOne(id, options);
-    for (var prop in serverValue) {
-      if (serverValue.hasOwnProperty(prop)) {
-        self[prop] = serverValue[prop];
+    var prop;
+    if (serverValue) {
+      for (prop in serverValue) {
+        if (serverValue.hasOwnProperty(prop)) {
+          self[prop] = serverValue[prop];
+        }
+      }
+    } else {
+      for (prop in _.omit(self, self.$$internalProps)) {
+        delete self[prop];
       }
     }
   }
