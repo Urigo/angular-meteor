@@ -1,4 +1,5 @@
 Package.describe({
+  name: "urigo:angular",
   summary: "The simplest no-conflict way to use AngularJS with Meteor, Meteorite and Atmosphere Smart Packages.",
   version: "0.6.8",
   git: "https://github.com/Urigo/angular-meteor.git"
@@ -17,13 +18,10 @@ Package.registerBuildPlugin({
 Package.on_use(function (api) {
   api.versionsFrom('METEOR@0.9.0.1');
 
-  api.use('jquery', 'client', {weak: true});
+  api.use('angularjs:angular@1.3.13', 'client');
   api.use('minimongo');  // for idStringify
   api.use('observe-sequence');
-
-  // Including bower
-  api.use('mquandalle:bower@1.3.12', 'client');
-  api.add_files('bower.json', 'client');
+  api.use('dburles:mongo-collection-instances@0.3.1', 'client'); // For getCollectionByName
 
   // Files to load in Client only.
   api.add_files([
@@ -42,18 +40,20 @@ Package.on_use(function (api) {
     'modules/angular-meteor-reactive-scope.js',
     'modules/angular-meteor-utils.js',
     // Finally load angular-meteor File
-    'urigo:angular.js'
+    'angular-meteor.js'
   ], 'client');
 });
 
 Package.onTest(function(api) {
   api.use('tinytest');
+  api.use('underscore');
   api.use('minimongo');
+  api.use('angularjs:angular@1.3.13', 'client');
+  api.use('dburles:mongo-collection-instances@0.3.1', 'client'); // For getCollectionByName
   api.use(['test-helpers'], ['client']);
 
   api.addFiles([
-    'node_modules/angular/angular.js',
-    'urigo:angular.js',
+    'angular-meteor.js',
     'lib/angular-hash-key-copier.js',
     'lib/diff-array.js',
     'modules/angular-meteor-collections.js',
