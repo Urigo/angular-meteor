@@ -1,6 +1,6 @@
 var angularMeteorUser = angular.module('angular-meteor.user', ['angular-meteor.utils']);
 
-angularMeteorUser.run(['$rootScope', '$meteorUtils', function($rootScope, $meteorUtils){
+angularMeteorUser.run(['$rootScope', '$meteorUtils', '$q', function($rootScope, $meteorUtils, $q){
   var currentUserDefer;
 
   $meteorUtils.autorun($rootScope, function(){
