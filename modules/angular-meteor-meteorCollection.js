@@ -170,7 +170,7 @@ AngularMeteorCollection.prototype.updateCursor = function (cursor) {
 
   self.observeHandle = cursor.observeChanges({
     addedBefore: function (id, fields, before) {
-      var newItem = angular.extend(fields, {_id: id});
+      var newItem = self.$$collection.findOne(id);
       if (before == null) {
         self.push(newItem);
       }
