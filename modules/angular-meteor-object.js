@@ -36,7 +36,7 @@ AngularMeteorObject.prototype.save = function save() {
     if (self._id)
       collection.update(
         {_id: self._id},
-        { $set: angular.copy(_.omit(self, '_id', 'save', 'reset', '$$collection', '$$options', '$meteorSubscribe', '$$id', '$q', '$$hashkey')) },
+        { $set: angular.copy(_.omit(self, '_id', self.$$internalProps)) },
         function(error, numberOfDocs){
           if (error) {
             deferred.reject(error);
@@ -57,13 +57,42 @@ AngularMeteorObject.prototype.reset = function reset() {
 
   if (collection){
     var serverValue = collection.findOne(id, options);
-    for (var prop in serverValue) {
-      if (serverValue.hasOwnProperty(prop)) {
-        self[prop] = serverValue[prop];
+    var prop;
+    if (serverValue) {
+      for (prop in serverValue) {
+        if (serverValue.hasOwnProperty(prop)) {
+          self[prop] = serverValue[prop];
+        }
+      }
+    } else {
+      for (prop in _.omit(self, self.$$internalProps)) {
+        delete self[prop];
       }
     }
   }
 };
+
+AngularMeteorObject.prototype.stop = function stop() {
+  if (this.unregisterAutoDestroy) {
+    this.unregisterAutoDestroy();
+  }
+  this.unregisterAutoDestroy = null;
+
+  if (this.unregisterAutoBind) {
+    this.unregisterAutoBind();
+  }
+  this.unregisterAutoBind = null;
+
+  if (this.autorunComputation && this.autorunComputation.stop) {
+    this.autorunComputation.stop();
+  }
+  this.autorunComputation = null;
+};
+
+// A list of internals properties to not watch for, nor pass to the Document on update and etc.
+AngularMeteorObject.prototype.$$internalProps = [
+  'save', 'reset', '$$collection', '$$options', '$meteorSubscribe', '$$id', '$q', '$$hashkey', '$$internalProps', 'subscribe', 'stop', 'autorunComputation', 'unregisterAutoBind', 'unregisterAutoDestroy'
+];
 
 
 angularMeteorObject.factory('$meteorObject', ['$rootScope', '$meteorUtils', '$meteorSubscribe', '$q',
@@ -78,22 +107,30 @@ angularMeteorObject.factory('$meteorObject', ['$rootScope', '$meteorUtils', '$me
 
       var data = new AngularMeteorObject(collection, id, options, $meteorSubscribe, $q);
 
-      $meteorUtils.autorun($rootScope, function() {
+      data.autorunComputation = $meteorUtils.autorun($rootScope, function() {
         data.reset();
       });
 
       if (auto) { // Deep watches the model and performs autobind.
-        $rootScope.$watch(function(){
-          return _.omit(data, 'save', 'reset', '$$collection', '$$options', '$meteorSubscribe', '$$id', '$q', '$$hashkey');
+        data.unregisterAutoBind = $rootScope.$watch(function(){
+          return _.omit(data, data.$$internalProps);
         }, function (newItem, oldItem) {
           if (newItem) {
-            if (newItem._id) {
-              collection.update({_id: newItem._id}, {$set: _.omit(angular.copy(newItem), '_id')});
+            if (newItem._id && !_.isEmpty(newItem = _.omit(angular.copy(newItem), '_id'))) {
+              collection.update({_id: newItem._id}, {$set: newItem});
             }
           }
         }, true);
+
       }
 
+      data.unregisterAutoDestroy = $rootScope.$on('$destroy', function() {
+        if (data && data.stop) {
+          data.stop();
+        }
+        data = undefined;
+      });
+
       return data;
-    }
+    };
   }]);
