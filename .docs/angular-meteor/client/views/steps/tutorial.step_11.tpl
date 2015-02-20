@@ -120,7 +120,7 @@ Now that we have seen how easy it is to deploy our app and run it on mobile, let
 
 [https://github.com/meteor/meteor/wiki/How-to-submit-your-iOS-app-to-App-Store](https://github.com/meteor/meteor/wiki/How-to-submit-your-iOS-app-to-App-Store)
 
-# Summery
+# Summary
 
 Now you can see how easy and amazing it is to work with Meteor and PhoneGap together.
 

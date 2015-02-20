@@ -3,7 +3,7 @@
  */
 
 var minify = Npm.require('html-minifier').minify;
-Plugin.registerSourceHandler('tpl', {
+Plugin.registerSourceHandler('ng.html', {
   isTemplate: true,
   archMatching: "web"
 }, function(compileStep) {

@@ -53,3 +53,57 @@ Tinytest.addAsync('Diff changes to array', function (test, done) {
   angular.bootstrap(document.createElement('div'), ['diffArrayTest']);
 
 });
+
+Tinytest.add('$meteorCollection initialization', function (test) {
+
+  if (Meteor.isServer) {
+    Meteor.startup(function() {
+      return Meteor.methods({
+        removeAllParties: function() {
+          Parties.remove({});
+        }
+      });
+    });
+  }
+  if (Mongo.Collection.get('parties') == undefined)
+    Parties = new Mongo.Collection('parties');
+
+  Meteor.call('removeAllParties');
+
+  var parties = [
+    {'name': 'Dubstep-Free Zone',
+      'description': 'Fast just got faster with Nexus S.'},
+    {'name': 'All dubstep all the time',
+      'description': 'Get it on!'},
+    {'name': 'Savage lounging',
+      'description': 'Leisure suit required. And only fiercest manners.'}
+  ];
+
+  for (var i = 0; i < parties.length; i++)
+    Parties.insert({name: parties[i].name, description: parties[i].description});
+
+  if (Meteor.isClient) {
+
+    var app = angular.module('app', ['angular-meteor']);
+
+    app.run(['$rootScope', '$meteorCollection',
+      function($rootScope, $meteorCollection){
+
+        $rootScope.parties = $meteorCollection(Parties);
+
+        var partiesWithoutIds = _.map($rootScope.parties, function(o) { return _.omit(o, '_id'); });
+        test.equal(
+          partiesWithoutIds,
+          parties,
+          'it should be equal to the Parties collection');
+
+        _.each($rootScope.parties, function(currentParty){
+          test.isTrue(_.has(currentParty, '_id'), 'has an _id field');
+        });
+
+      }]);
+
+    angular.bootstrap(document.createElement('div'), ['app']);
+  }
+
+});

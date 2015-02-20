@@ -4,14 +4,7 @@ var angularMeteorUtils = angular.module('angular-meteor.utils', []);
 angularMeteorUtils.service('$meteorUtils', [
   function () {
     this.getCollectionByName = function(string){
-      for (var globalObject in window) {
-        if (window[globalObject] instanceof Mongo.Collection) {
-          if (window[globalObject]._name == string){
-            return window[globalObject];
-          }
-        }
-      }
-      return undefined; // if none of the collections match
+      return Mongo.Collection.get(string);
     };
     this.autorun = function(scope, fn) {
       // wrapping around Deps.autorun

@@ -33,7 +33,7 @@ First we need to remove the 'autopublish' Meteor package.
 autopublish is added to any new Meteor project. It pushes a full copy of the database to each client.
 It helped us until now, but it's not so good for privacy...
 
-Write this command in the consle:
+Write this command in the console:
 
     meteor remove autopublish
 
