@@ -7,17 +7,19 @@ angularMeteorUser.run(['$rootScope', '$meteorUtils', '$q', function($rootScope, 
     if (Meteor.user) {
       $rootScope.currentUser = Meteor.user();
       $rootScope.loggingIn = Meteor.loggingIn();
+
+      // if there is no currentUserDefer (on first autorun)
+      // or it is already resolved, but the Meteor.user() is changing
+      if (!currentUserDefer || Meteor.loggingIn() ) {
+        currentUserDefer = $q.defer();
+        $rootScope.currentUserPromise = currentUserDefer.promise;
+      }
+      if ( !Meteor.loggingIn() )
+        currentUserDefer.resolve( Meteor.user() );
     }
 
-    // if there is no currentUserDefer (on first autorun)
-    // or it is already resolved, but the Meteor.user() is changing
-    if (!currentUserDefer || Meteor.loggingIn() ) {
-      currentUserDefer = $q.defer();
-      $rootScope.currentUserPromise = currentUserDefer.promise;
-    }
-    if ( !Meteor.loggingIn() ) {
-      currentUserDefer.resolve( Meteor.user() );
-    }
+
+
 
   });
 }]);
