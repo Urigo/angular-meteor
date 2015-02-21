@@ -152,13 +152,25 @@ AngularMeteorCollection.prototype.updateCursor = function (cursor) {
     $timeout = self.$timeout;
 
   function safeApply() {
+    // If already updating from the server, then digest is already timeouted
+    // and will run in next turn
+    if (self.UPDATING_FROM_SERVER) {
+      return;
+    }
+
     // Clearing the watch is needed so no updates are sent to server
     // while handling updates from the server
     self.UPDATING_FROM_SERVER = true;
-    if (!$rootScope.$$phase) $rootScope.$apply();
-    // Making sure we are setting to false only after one digest cycle and not before
-    $timeout(function(){
-      self.UPDATING_FROM_SERVER = false;
+
+    // Making sure we are running digest only once, after all changes
+    // are handled (in next turn)
+    $timeout(function() {
+      if (!$rootScope.$$phase) $rootScope.$apply();
+      // Making sure we are setting to false only after one digest cycle
+      // and not before
+      $timeout(function(){
+        self.UPDATING_FROM_SERVER = false;
+      },0,false);
     },0,false);
   }
 
@@ -170,7 +182,7 @@ AngularMeteorCollection.prototype.updateCursor = function (cursor) {
 
   self.observeHandle = cursor.observeChanges({
     addedBefore: function (id, fields, before) {
-      var newItem = angular.extend(fields, {_id: id});
+      var newItem = self.$$collection.findOne(id);
       if (before == null) {
         self.push(newItem);
       }

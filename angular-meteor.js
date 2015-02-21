@@ -18,7 +18,14 @@ angularMeteor.run(['$compile', '$document', '$rootScope', function ($compile, $d
     if(typeof Router != 'undefined') {
       Router.onAfterAction(function(req, res, next) {
         Tracker.afterFlush(function() {
-          $compile($document)($rootScope);
+          if (Router.current().ready()){
+            $compile(Router.current()._layout.view._domrange.firstNode())($rootScope);
+            if (Router.current()._layout.view._domrange.firstNode() != Router.current()._layout.view._domrange.lastNode())
+              $compile(Router.current()._layout.view._domrange.lastNode())($rootScope);
+          }
+          else
+            $compile($document)($rootScope);
+
           if (!$rootScope.$$phase) $rootScope.$apply();
         });
       });
