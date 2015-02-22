@@ -115,9 +115,12 @@ angularMeteorObject.factory('$meteorObject', ['$rootScope', '$meteorUtils', '$me
         data.unregisterAutoBind = $rootScope.$watch(function(){
           return _.omit(data, data.$$internalProps);
         }, function (newItem, oldItem) {
-          if (newItem)
-            if (newItem._id)
-              collection.update({_id: newItem._id}, {$set: _.omit(angular.copy(newItem), '_id')});
+          if (newItem) {
+            var newItemId = newItem._id;
+            if (newItemId && !_.isEmpty(newItem = _.omit(angular.copy(newItem), '_id'))) {
+              collection.update({_id: newItemId}, {$set: newItem});
+            }
+          }
         }, true);
       }
 
