@@ -73,18 +73,17 @@ in the top of the controller in client/controllers/partiesList.js file.
 That's cool, but let's do something with these variables expect define them. So where we want to use them is when we call the subscribe method.
 But right now, we are subscribing to the collection in the short form which doesn't get parameters:
 
-    $scope.parties = $meteorCollection(Parties).subscribe('parties');
+    $scope.parties = $meteor.collection(Parties).subscribe('parties');
 
-So first we need to add the [$meteorSubscribe](http://angularjs.meteor.com/api/subscribe) service and call it separately
-(don't forget to add it to the dependencies of the controller):
+So first we need to add the [$meteor.subscribe](http://angularjs.meteor.com/api/subscribe) service and call it separately:
 
-    $scope.parties = $meteorCollection(Parties);
+    $scope.parties = $meteor.collection(Parties);
 
-    $meteorSubscribe.subscribe('parties');
+    $meteor.subscribe('parties');
 
 Now let's send the parameters in the options object:
 
-    $meteorSubscribe.subscribe('parties', {
+    $meteor.subscribe('parties', {
       limit: parseInt($scope.perPage),
       skip: parseInt(($scope.page - 1) * $scope.perPage),
       sort: $scope.sort
@@ -101,7 +100,7 @@ That is because the sorting is not saved when the data is sent from the server t
 So to make sure our data is sorted also on the client need to defined is also in the parties collection.
 To do that we are going to replace the 'Parties' collection parameter with a [cursor](http://docs.meteor.com/#/full/mongo_cursor) for that parties collection:
 
-    $scope.parties = $meteorCollection(function() {
+    $scope.parties = $meteor.collection(function() {
       return Parties.find({}, {
         sort : $scope.sort
       });
@@ -125,7 +124,7 @@ Add it as a dependency to our Angular app in app.js:
     angular.module('socially',['angular-meteor', 'ui.router', 'angularUtils.directives.dirPagination']);
 
 
-Now let's add the directive in parties-list.tpl. change the ng-repeat of parties to this:
+Now let's add the directive in parties-list.ng.html , change the ng-repeat of parties to this:
 
   </btf-markdown>
 
@@ -185,7 +184,7 @@ Inside the server/parties.js file, add the following code inside the Meteor.publ
           {owner: this.userId},
           {owner: {$exists: true}}
         ]}
-    ]}));
+    ]}), { noReady: true });
 
 So the file should look like this now:
 
@@ -200,7 +199,7 @@ So the file should look like this now:
             {owner: this.userId},
             {owner: {$exists: true}}
           ]}
-      ]}));
+      ]}), { noReady: true });
       return Parties.find({
         $or:[
           {$and:[
@@ -217,19 +216,21 @@ So the file should look like this now:
 As you can see, we query only the parties that should be available to that specific client, but without the options variable so we get the full
 number of parties.
 
-Now on the client we have access to the Counts collection.
-let's save that in the client/controllers/partiesList.js file when the subscription finishes successful (using the promise $meteorSubscribe retunrs):
+* We are passing '{ noReady: true }' in the last argument so that the publication will be ready only after the our main cursor is ready - [readiness](https://github.com/percolatestudio/publish-counts#readiness).
 
-    $meteorSubscribe.subscribe('parties', {
+Now on the client we have access to the Counts collection.
+let's save that in the client/controllers/partiesList.js file when the subscription finishes successful (using the promise $meteor.subscribe returns):
+
+    $meteor.subscribe('parties', {
       limit: parseInt($scope.perPage),
       skip: parseInt(($scope.page - 1) * $scope.perPage),
       sort: $scope.sort
     }).then(function(){
-      $scope.partiesCount = $meteorCollection(Counts)[0];
+      $scope.partiesCount = $meteor.object(Counts ,'numberOfParties', false);
     });
 
 
-Now the partiesCount will hold the number of parties and will send it to the directive in the parties-list.tpl (which we already defined earlier).
+Now the partiesCount will hold the number of parties and will send it to the directive in the parties-list.ng.html (which we already defined earlier).
 
 But there is a problem - try to create a few parties and then change pages...  the subscription won't run again!
 
@@ -244,30 +245,30 @@ But Angular's scope variables are only watched by Angular and are not reactive v
 For that angular-meteor created [getReactively](http://angularjs.meteor.com/api/getReactively) - a way to make an Angular scope variable to a reactive variable.
 
 So first, in order to make the subscription run each time something changes in one of the parameters, we need to place it inside an autorun block.
-To do that, we are going to use the [$meteorUtils.autorun](http://angularjs.meteor.com/api/utils) function:
+To do that, we are going to use the [$meteor.autorun](http://angularjs.meteor.com/api/utils) function:
 
-    $meteorUtils.autorun($scope, function() {
+    $meteor.autorun($scope, function() {
 
-      $meteorSubscribe.subscribe('parties', {
+      $meteor.subscribe('parties', {
         limit: parseInt($scope.perPage),
         skip: parseInt(($scope.page - 1) * $scope.perPage),
         sort: $scope.sort
       }).then(function(){
-        $scope.partiesCount = $meteorCollection(Counts)[0];
+        $scope.partiesCount = $meteor.object(Counts ,'numberOfParties', false);
       });
 
     });
 
 But this still won't help us because there is no reactive variables inside.  so let's use [getReactively](http://angularjs.meteor.com/api/getReactively) for that:
 
-    $meteorUtils.autorun($scope, function() {
+    $meteor.autorun($scope, function() {
 
-      $meteorSubscribe.subscribe('parties', {
+      $meteor.subscribe('parties', {
         limit: parseInt($scope.getReactively('perPage')),
         skip: (parseInt($scope.getReactively('page')) - 1) * parseInt($scope.getReactively('perPage')),
         sort: $scope.getReactively('sort')
       }).then(function(){
-        $scope.partiesCount = $meteorCollection(Counts)[0];
+        $scope.partiesCount = $meteor.object(Counts ,'numberOfParties', false);
       });
 
     });
@@ -276,9 +277,9 @@ What's happening here is that getReactively returns a reactive variable that fir
 and then autorun knows the execute it's given function again.
 The will cause the subscription to re-run again with the new options parameter and we will get the correct data from the server.
 
-$meteorCollection is also listening to reactive variables so let's change our $scope.parties initialization as well:
+$meteor.collection is also listening to reactive variables so let's change our $scope.parties initialization as well:
 
-    $scope.parties = $meteorCollection(function() {
+    $scope.parties = $meteor.collection(function() {
       return Parties.find({}, {
         sort : $scope.getReactively('sort')
       });
@@ -359,7 +360,7 @@ So server/parties.js should look like that:
             {owner: this.userId},
             {owner: {$exists: true}}
           ]}
-      ]}));
+      ]}), { noReady: true });
       return Parties.find({
         'name' : { '$regex' : '.*' + searchString || '' + '.*', '$options' : 'i' },
         $or:[
@@ -399,7 +400,7 @@ First let's place a search input into our template and bind it into a 'search' s
 
 And all we have left to do is call the subscribe method with our reactive scope variable:
 
-    $meteorSubscribe.subscribe('parties', {
+    $meteor.subscribe('parties', {
       limit: parseInt($scope.getReactively('perPage')),
       skip: (parseInt($scope.getReactively('page')) - 1) * parseInt($scope.getReactively('perPage')),
       sort: $scope.getReactively('sort')

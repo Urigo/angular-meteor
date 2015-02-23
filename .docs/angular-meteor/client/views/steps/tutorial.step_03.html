@@ -60,15 +60,15 @@ That means that this collection and the actions on it will run both on the clien
 
 Now that we've created the collection, our client needs to subscribe to it's changes and bind it to our parties AngularJS collection.
 
-To bind them we are going to use angular-meteor built-in [service](https://docs.angularjs.org/guide/services) called $meteorCollection.
+To bind them we are going to use angular-meteor built-in [service](https://docs.angularjs.org/guide/services) called $meteor.collection.
 
 We are going to replace the declaration of $scope.parties with the following command inside the PartiesListCtrl controller:
 
-    $scope.parties = $meteorCollection(Parties);
+    $scope.parties = $meteor.collection(Parties);
 
 That line declares a new $scope.parties variable so we don't need to do something like $scope.parties = []; and then bind it to the Parties Mongo collection.
 
-We also need to add the $meteorCollection service to the controller with dependency injection.
+We also need to add the $meteor service to the controller with dependency injection.
 
 Our app.js file should look like this:
 
@@ -80,10 +80,10 @@ __`app.js`:__
 
     angular.module('socially',['angular-meteor']);
 
-    angular.module("socially").controller("PartiesListCtrl", ['$scope', '$meteorCollection',
-      function($scope, $meteorCollection){
+    angular.module("socially").controller("PartiesListCtrl", ['$scope', '$meteor',
+      function($scope, $meteor){
 
-        $scope.parties = $meteorCollection(Parties);
+        $scope.parties = $meteor.collection(Parties);
 
       }]);
     }

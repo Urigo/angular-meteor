@@ -8,7 +8,7 @@
     <do-nothing>
         {{#markdown}}
 
-# $meteorMethods
+# $meteor.call
 
 A service service which wraps up [Meteor.methods](http://docs.meteor.com/#/full/methods_header) with [AngularJS promises](https://docs.angularjs.org/api/ng/service/$q).
 
@@ -16,7 +16,7 @@ A service service which wraps up [Meteor.methods](http://docs.meteor.com/#/full/
 
 ## Usage
 
-    $meteorMethods.call(name, methodArguments)
+    $meteor.call(name, methodArguments)
 
 ### Arguments
 
@@ -63,7 +63,7 @@ A service service which wraps up [Meteor.methods](http://docs.meteor.com/#/full/
 
     $scope.invite = function(party, user){
 
-      $meteorMethods.call('invite', party._id, user._id).then(
+      $meteor.call('invite', party._id, user._id).then(
         function(data){
 
           // Handle success

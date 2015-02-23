@@ -8,7 +8,7 @@
     <do-nothing>
         {{#markdown}}
 
-# $meteorCollection
+# $meteor.collection
 
 A service that wraps the [Meteor collections](http://docs.meteor.com/#/full/collections) to enable reactivity within AngularJS.
 
@@ -16,7 +16,7 @@ A service that wraps the [Meteor collections](http://docs.meteor.com/#/full/coll
 
 ## Usage
 
-$meteorCollection(collection, auto)
+$meteor.collection(collection, auto)
 
 ### Arguments
 
@@ -82,22 +82,22 @@ $meteorCollection(collection, auto)
 
     if (Meteor.isClient) {
 
-      app.controller("mainCtrl", ['$scope', '$meteorCollection',
-        function($scope, $meteorCollection){
+      app.controller("mainCtrl", ['$scope', '$meteor',
+        function($scope, $meteor){
 
           // Bind all the todos to $scope.todos
-          $scope.todos = $meteorCollection(Todos);
+          $scope.todos = $meteor.collection(Todos);
 
           $scope.sticky = true;
           // Bind all sticky todos to $scope.stickyTodos
           // Binds the query to $scope.sticky so that if it changes, Meteor will re-run the query and bind it
           // to $scope.stickyTodos
-          $scope.stickyTodos = $meteorCollection(function(){
+          $scope.stickyTodos = $meteor.collection(function(){
             return Todos.find({sticky: $scope.getReactively('sticky')});
           });
 
           // Bind without auto-save all todos to $scope.notAutoTodos
-          $scope.notAutoTodos = $meteorCollection(Todos, false).subscribe("publicTodos");
+          $scope.notAutoTodos = $meteor.collection(Todos, false).subscribe("publicTodos");
 
           // todo might be an object like this {text: "Learn Angular", sticky: false}
           // or an array like this:

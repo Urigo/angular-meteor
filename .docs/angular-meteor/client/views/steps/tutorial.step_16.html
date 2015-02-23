@@ -22,7 +22,7 @@ The most popular maps widget is Google Maps so let's use that.
 
 First, let's add the angular-google-maps Meteor package:
 
-    meteor add urigo:angular-google-maps
+    meteor add angularui:angular-google-maps
 
 
 Then let's define the module dependency in our app. go to app.js inside the 'client->lib' folder:
@@ -31,11 +31,11 @@ Then let's define the module dependency in our app. go to app.js inside the 'cli
       'angular-meteor',
       'ui.router',
       'angularUtils.directives.dirPagination',
-      'google-maps'.ns()
+      'uiGmapgoogle-maps'
     ]);
 
 
-Now let's add a map the party-details.tpl. first add this HTML snippet to the end of the template:
+Now let's add a map the party-details.ng.html , first add this HTML snippet to the end of the template:
 
         <div class="party-details-maps">
           <div class="angular-google-map-container">
@@ -70,7 +70,7 @@ Now run the app and go to the party details page. you should see a new Google Ma
 
 Let's add a marker that will be binded to the party's location.
 
-inside party-details.tpl:
+inside party-details.ng.html:
 
 
     <div class="angular-google-map-container">
@@ -142,7 +142,7 @@ Test it to see clicking and dragging works.
 
 Now let's add a map to the parties list to show all the parties on the map.
 
-So let's add the directives to parties-list.tpl:
+So let's add the directives to parties-list.ng.html:
 
       <div class="angular-google-map-container">
         <ui-gmap-google-map center="map.center" zoom="map.zoom">
@@ -154,7 +154,7 @@ So let's add the directives to parties-list.tpl:
 
 add it under the search and sorting div.
 
-You can see that the difference between the directive we used in party-details.tpl is that ui-gmap-markers is plural.
+You can see that the difference between the directive we used in party-details.ng.html is that ui-gmap-markers is plural.
 the attributes we use:
 
 * models - the scope array that the markers represent.
@@ -166,13 +166,13 @@ the attributes we use:
 
 Now, inside partiesList.js let's add the following code to the parties subscription promise return:
 
-    $meteorUtils.autorun($scope, function() {
-      $meteorSubscribe.subscribe('parties', {
+    $meteor.autorun($scope, function() {
+      $meteor.subscribe('parties', {
         limit: parseInt($scope.getReactively('perPage')),
         skip: (parseInt($scope.getReactively('page')) - 1) * parseInt($scope.getReactively('perPage')),
         sort: $scope.getReactively('sort')
       }, $scope.getReactively('search')).then(function() {
-        $scope.partiesCount = $meteorCollection(Counts)[0];
+        $scope.partiesCount = $meteor.object(Counts ,'numberOfParties', false);
 
         $scope.parties.forEach( function (party) {
           party.onClicked = function () {

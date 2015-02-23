@@ -8,7 +8,7 @@
     <do-nothing>
         {{#markdown}}
 
-# $meteorSubscribe
+# $meteor.subscribe
 
 A service which is a wrapper for [Meteor.subscribe](http://docs.meteor.com/#/full/meteor_subscribe).
 It subscribes to a [Meteor.publish](http://docs.meteor.com/#/full/publishandsubscribe) method in the client and returns a [AngularJS promise](https://docs.angularjs.org/api/ng/service/$q) when ready
@@ -17,7 +17,7 @@ It subscribes to a [Meteor.publish](http://docs.meteor.com/#/full/publishandsubs
 
 ## Usage
 
-    $meteorSubscribe.subscribe(name, publisherArguments)
+    $meteor.subscribe(name, publisherArguments)
 
 ### Arguments
 
@@ -67,12 +67,12 @@ It subscribes to a [Meteor.publish](http://docs.meteor.com/#/full/publishandsubs
 
     if (Meteor.isClient) {
 
-      app.controller("mainCtrl", ['$scope', '$meteorCollection', '$meteorSubscribe',
-        function($scope, $meteorCollection, $meteorSubscribe){
+      app.controller("mainCtrl", ['$scope', '$meteor',
+        function($scope, $meteor){
 
-          $meteorSubscribe.subscribe('todos').then(function(subscriptionHandle){
+          $meteor.subscribe('todos').then(function(subscriptionHandle){
             // Bind all the todos to $scope.todos
-            $scope.todos = $meteorCollection(Todos);
+            $scope.todos = $meteor.collection(Todos);
 
             console.log($scope.todos + ' is ready');
 

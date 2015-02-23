@@ -76,17 +76,17 @@ In our case the first name parameter is "parties". So we will need to subscribe 
 
 We have 2 way of doing this:
 
-1. Using the [$meteorSubscribe](/api/subscribe) service that also return a promise when the subscribing is done
+1. Using the [$meteor.subscribe](/api/subscribe) service that also return a promise when the subscribing is done
 2. using [AngularMeteorCollection's](/api/AngularMeteorCollection) subscribe function which is exactly the same but it's
 here just for syntactic sugar doesn't return a promise.
 
 Right now we don't need the promise so let's use the second way:
 
-    $scope.parties = $meteorCollection(Parties).subscribe('parties');
+    $scope.parties = $meteor.collection(Parties).subscribe('parties');
 
 
 * Our publish function can also take parameters.  In that case, we would also need to pass the parameters from the client.
-For more information about the $meteorSubscribe service [click here](http://angularjs.meteor.com/api/subscribe) or the subscribe function of [AngularMeteorCollection](/api/AngularMeteorCollection).
+For more information about the $meteor.subscribe service [click here](http://angularjs.meteor.com/api/subscribe) or the subscribe function of [AngularMeteorCollection](/api/AngularMeteorCollection).
 
 
 In the second parameter, our function uses the Mongo API to return the wanted documents (document are the JSON-style data structure of MongoDB).
@@ -100,7 +100,7 @@ Either that the owner parameter exists and it's the current logged in user (whic
 
 So now let's add the public flag to the parties and see how it affects the parties the client gets.
 
-Let's add a checkbox to the new party form in parties-list.tpl:
+Let's add a checkbox to the new party form in parties-list.ng.html:
 
   </btf-markdown>
 
@@ -112,7 +112,7 @@ Let's add a checkbox to the new party form in parties-list.tpl:
 
 Notice how easy it is to bind a checkbox to a model with AngularJS!
 
-Let's add the same to the party-details.tpl page:
+Let's add the same to the party-details.ng.html page:
 
         </btf-markdown>
 
@@ -149,12 +149,12 @@ So here again we use the Mongo API to return all the users (find with an empty o
 
 * Notice that each object (i.e. each user) will automatically contain its _id field.
 
-The emails field holds all the user's email addresses, and the profile might hold more optional information like the user's name 
+The emails field holds all the user's email addresses, and the profile might hold more optional information like the user's name
 (in our case, if the user logged in with the Facebook login, the accounts-facebook package puts the user's name from Facebook automatically into that field).
 
 Now let's subscribe to that publish Method.  in the client->parties->controllers->partyDetails.js file add the following line:
 
-    $scope.users = $meteorCollection(Meteor.users, false).subscribe('users');
+    $scope.users = $meteor.collection(Meteor.users, false).subscribe('users');
 
 * We bind to the Meteor.users collection
 * Binding the result to $scope.users
@@ -163,12 +163,12 @@ Now let's subscribe to that publish Method.  in the client->parties->controllers
 
 Also, let's add a subscription to the party in case we get strait to there and won't go through the parties controller:
 
-    $scope.party = $meteorObject(Parties, $stateParams.partyId).subscribe('parties');
+    $scope.party = $meteor.object(Parties, $stateParams.partyId).subscribe('parties');
 
 
 Now let's add the list of users to the view to make sure it works.
 
-Add this ng-repeat list to the end of parties-details.tpl:
+Add this ng-repeat list to the end of parties-details.ng.html:
 
 </btf-markdown>
 

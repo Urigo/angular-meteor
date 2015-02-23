@@ -8,7 +8,7 @@
     <do-nothing>
       {{#markdown}}
 
-# $meteorSession
+# $meteor.session
 
 A service that binds a scope variable to a Meteor Session variable.
 
@@ -16,7 +16,7 @@ A service that binds a scope variable to a Meteor Session variable.
 
 ## Usage
 
-        $meteorSession(sessionKey).bind(scope, model)
+        $meteor.session(sessionKey).bind(scope, model)
 
 ### Arguments
 
@@ -57,10 +57,10 @@ A service that binds a scope variable to a Meteor Session variable.
 
     if (Meteor.isClient) {
 
-      app.controller("detailCtrl", ['$scope', '$meteorSession',
-        function($scope, $meteorSession){
+      app.controller("detailCtrl", ['$scope', '$meteor',
+        function($scope, $meteor){
 
-          $meteorSession('counter').bind($scope, 'counter');
+          $meteor.session('counter').bind($scope, 'counter');
 
           Tracker.autorun(function () {
             console.log('angular counter changed', Session.get('counter'));

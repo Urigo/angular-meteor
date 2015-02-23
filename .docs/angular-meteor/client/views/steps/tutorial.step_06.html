@@ -26,27 +26,27 @@
 In this step, you will implement the party details view, which is displayed when a user clicks on a party in the parties list.
 The user will also be able to change the party's details.
 
-To implement the party details view we will use $meteorObject to fetch our data, and update it back in realtime when the user changes it.
+To implement the party details view we will use $meteor.object to fetch our data, and update it back in realtime when the user changes it.
 
 # Controller
 
-We'll expand the PartyDetailsCtrl by using the $meteorObject service (add it with Angular's dependency injection) to bind the specific party.
+We'll expand the PartyDetailsCtrl by using the $meteor.object service (add it with Angular's dependency injection) to bind the specific party.
 
-    angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteorObject',
-      function($scope, $stateParams, $meteorObject){
+    angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
+      function($scope, $stateParams, $meteor){
 
-        $scope.party = $meteorObject(Parties, $stateParams.partyId);
+        $scope.party = $meteor.object(Parties, $stateParams.partyId);
 
     }]);
 
 We are sending #meteorObject a Mongo collection and the Id of the object we want to bind to.
 
-$meteorObject returns an [AngularMeteorObject]() that contains the data.
+$meteor.object returns an [AngularMeteorObject](/api/meteorObject) that contains the data.
 
 
 # Template
 
-In party-details.tpl let's replace the binding to the partyId with binding to party.name and party.description:
+In party-details.ng.html let's replace the binding to the partyId with binding to party.name and party.description:
 
     Here you will see and change the details of the party:
 
@@ -63,7 +63,7 @@ In case you don't want to use the live editing that angular-meteor provides and 
 
 First, let's change our template:
 
-__party-details.tpl__
+__party-details.ng.html__
 
 
     Here you will see and change the details of the party:
@@ -79,10 +79,10 @@ __party-details.tpl__
 
 Now let's move to the controller.
 
-First send $meteorObject false in the 3rd parameter so it won't auto-save the object on every change:
+First send $meteor.object false in the 3rd parameter so it won't auto-save the object on every change:
 
 
-    $scope.party = $meteorObject(Parties, $stateParams.partyId, false);
+    $scope.party = $meteor.object(Parties, $stateParams.partyId, false);
 
 
 Now let's add the functions that handle the buttons clicks:
@@ -96,17 +96,17 @@ Now let's add the functions that handle the buttons clicks:
     };
 
 
-As you can see, $meteorObject return an object from type [AngularMeteorObject](/api/meteorObject) the contains 2 functions - save and reset.
+As you can see, $meteor.object return an object from type [AngularMeteorObject](/api/meteorObject) the contains 2 functions - save and reset.
 
 save() - saves the current value of the object to the server.
 reset() - reset the current value of the object to the one in the server.
 
 Your controller should look like this:
 
-    angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteorObject',
-      function($scope, $stateParams, $meteorObject){
+    angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
+      function($scope, $stateParams, $meteor){
 
-        $scope.party = $meteorObject(Parties, $stateParams.partyId, false);
+        $scope.party = $meteor.object(Parties, $stateParams.partyId, false);
 
         $scope.save = function() {
           $scope.party.save().then(function(numberOfDocs){

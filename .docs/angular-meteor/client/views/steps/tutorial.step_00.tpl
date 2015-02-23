@@ -107,13 +107,13 @@ This package takes care of including the latest AngularJS library code into our 
 
 That's it! now we can use the AngularJS power in our Meteor app.
 
-To start simple, create a new file called index.tpl under the main folder, this will be our main HTML template page.
+To start simple, create a new file called index.ng.html under the main folder, this will be our main HTML template page.
 
-* We are using the .tpl file extension so that Blaze - Meteor's templating system won't compile and override our AngularJS expressions.
+* We are using the .ng.html file extension so that Blaze - Meteor's templating system won't compile and override our AngularJS expressions.
 
 Then move the p tag into it:
 
-__`index.tpl`:__
+__`index.ng.html`:__
 
           </btf-markdown>
 
@@ -131,7 +131,7 @@ __`index.html`:__
 
 <pre><code>
 <span class="hljs-tag">&lt;<span class="hljs-title">body</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">ng-include</span>=<span class="hljs-value">"'index.tpl'"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">ng-include</span>=<span class="hljs-value">"'index.ng.html'"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">body</span>&gt;</span>
 </code></pre>
 
@@ -170,7 +170,7 @@ And name our application in the ng-app directive in index.html:
       </btf-markdown>
 
 <pre><code>
-  &lt;<span class="hljs-operator">div</span> ng-app=<span class="hljs-string">"socially"</span> ng-<span class="hljs-built_in">include</span>=<span class="hljs-string">"'index.tpl'"</span>&gt;&lt;/<span class="hljs-operator">div</span>&gt;
+  &lt;<span class="hljs-operator">div</span> ng-app=<span class="hljs-string">"socially"</span> ng-<span class="hljs-built_in">include</span>=<span class="hljs-string">"'index.ng.html'"</span>&gt;&lt;/<span class="hljs-operator">div</span>&gt;
 </code></pre>
       <btf-markdown>
 
@@ -181,7 +181,7 @@ Now run the app.
 
 everything is the same.
 
-and now inside our index.tpl let's use Angular:
+and now inside our index.ng.html let's use Angular:
 
 </btf-markdown>
 
@@ -206,7 +206,7 @@ Rather than a one-time insert, as we'll see in the next steps, a binding will re
 Inside in the client side, like a future smart browser would do.
 
 
-> Why did use a new file extension file.tpl ?
+> Why did use a new file extension file.ng.html ?
 >
 > That is because Meteor templating system uses double-curlies. If we use them in our AngularJS view HTML, Meteor will override Angular.
 >
@@ -217,7 +217,7 @@ Inside in the client side, like a future smart browser would do.
 
 
 # Experiments
-Try adding a new expression to the index.tpl that will do some math:
+Try adding a new expression to the index.ng.html that will do some math:
 
 </btf-markdown>
 

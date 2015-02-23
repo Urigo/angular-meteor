@@ -42,7 +42,7 @@ In Angular, the view is a projection of the model through the HTML template. Thi
 
 The view component is constructed by Angular from this template:
 
-__`index.tpl`:__
+__`index.ng.html`:__
 
       </btf-markdown>
 <pre><code><span class="xml">
@@ -113,7 +113,7 @@ To learn more about Angular scopes, see the [angular scope documentation](https:
 
 # Experiments
 
-Add another binding to index.tpl. For example:
+Add another binding to index.ng.html , For example:
 
 </btf-markdown>
 
@@ -127,7 +127,7 @@ Create a new model property in the controller (inside app.js) and bind to it fro
 
       $scope.name = "World";
 
-Then add a new binding to index.tpl:
+Then add a new binding to index.ng.html:
 
 </btf-markdown>
 <pre><code>
@@ -137,7 +137,7 @@ Then add a new binding to index.tpl:
 
 Verify that it says "Hello, World!".
 
-Create a repeater in index.tpl that constructs a simple table:
+Create a repeater in index.ng.html that constructs a simple table:
 
       </btf-markdown>
 

@@ -45,9 +45,9 @@ Add to following form inside the PartiesListCtrl div:
 
     <btf-markdown>
 
-So that index.tpl will look like that:
+So that index.ng.html will look like that:
 
-__`index.tpl`:__
+__`index.ng.html`:__
 
     </btf-markdown>
 
@@ -148,10 +148,10 @@ Add that function inside the PartiesListCtrl in app.js:
 
 And this is how the controller should look now:
 
-    angular.module("socially").controller("PartiesListCtrl", ['$scope', '$meteorCollection',
-      function($scope, $meteorCollection){
+    angular.module("socially").controller("PartiesListCtrl", ['$scope', '$meteor',
+      function($scope, $meteor){
 
-        $scope.parties = $meteorCollection(Parties);
+        $scope.parties = $meteor.collection(Parties);
 
         $scope.remove = function(party){
           $scope.parties.splice( $scope.parties.indexOf(party), 1 );
@@ -165,7 +165,7 @@ Now try to delete a few parties and also watch them being removed from other bro
 
 # AngularMeteorCollection functions
 
-$meteorCollection's return value is a new collection from type AngularMeteorCollection.
+$meteor.collection's return value is a new collection from type AngularMeteorCollection.
 
 It is not only responsible for keeping the collection updated, it also has helper functions for saving and deleting objects.
 

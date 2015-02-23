@@ -57,7 +57,7 @@ scope.getReactively(scopeVariableName)
 
     $scope.sort = { name: 1 };
 
-    $scope.parties = $meteorCollection(function() {
+    $scope.parties = $meteor.collection(function() {
       return Parties.find({}, {
         sort : $scope.getReactively('sort')     // Every time $scope.sort will change,
                                                // the reactive function will re-run again
@@ -67,8 +67,8 @@ scope.getReactively(scopeVariableName)
 
     // Everytime one of the getReactively variables will change,
     // the autorun will fire and the subscription will re-run
-    $meteorUtils.autorun($scope, function() {
-      $meteorSubscribe.subscribe('parties', {
+    $meteor.autorun($scope, function() {
+      $meteor.subscribe('parties', {
         limit: parseInt($scope.getReactively('perPage')),
         skip: (parseInt($scope.getReactively('page')) - 1) * parseInt($scope.getReactively('perPage')),
         sort: $scope.getReactively('sort')

@@ -55,7 +55,7 @@ Three [$rootScope](https://docs.angularjs.org/api/ng/service/$rootScope) variabl
     $stateProvider
         .state('home', {
             url: '/',
-            templateUrl: 'client/views/home.tpl',
+            templateUrl: 'client/views/home.ng.html',
             controller: 'HomeController'
             resolve: {
                 currentUserNonReactive: $rootScope.currentUserPromise

@@ -91,17 +91,10 @@ Don't forget to add the email package to your project in the command line:
 
 Now let's call that method from the client.
 
-Inside the partyDetails controller add '$meteorMethods' to the controller's dependencies:
-
-    angular.module("socially").controller("PartyDetailsCtrl", [
-      '$scope', '$stateParams', '$meteorObject', '$meteorCollection', '$meteorMethods',
-      function($scope, $stateParams, $meteorObject, $meteorCollection, $meteorMethods){
-
-
-Then add a scope method called invite:
+Add a scope method called invite:
 
     $scope.invite = function(user){
-      $meteorMethods.call('invite', $scope.party._id, user._id).then(
+      $meteor.call('invite', $scope.party._id, user._id).then(
         function(data){
           console.log('success inviting', data);
         },
@@ -240,7 +233,7 @@ Now let's call that function from the partiesList.
 Add an rsvp scope function to the partiesListCtrl in partiesList.js:
 
     $scope.rsvp = function(partyId, rsvp){
-      $meteorMethods.call('rsvp', partyId, rsvp).then(
+      $meteor.call('rsvp', partyId, rsvp).then(
         function(data){
           console.log('success responding', data);
         },
@@ -250,10 +243,8 @@ Add an rsvp scope function to the partiesListCtrl in partiesList.js:
       );
     };
 
-* don't forget to add the $meteorMethods service to the controllers dependencies.
-
 and let's add action buttons to call the right rsvp in the HTML.
-Add this code into parties-list.tpl inside the parties list itself (inside the ng-repeat):
+Add this code into parties-list.ng.html inside the parties list itself (inside the ng-repeat):
 
         </btf-markdown>
 <pre><code>  &lt;div&gt;
@@ -324,11 +315,11 @@ Notice we are doing this check on $scope.users but we haven't initialized it yet
 
 Change
 
-    $meteorSubscribe.subscribe('users');
+    $meteor.subscribe('users');
 
 With:
 
-    $scope.users = $meteorCollection(Meteor.users, false).subscribe('users');
+    $scope.users = $meteor.collection(Meteor.users, false).subscribe('users');
 
 
 

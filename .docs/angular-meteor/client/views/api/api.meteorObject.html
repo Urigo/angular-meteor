@@ -8,7 +8,7 @@
     <do-nothing>
         {{#markdown}}
 
-# $meteorObject
+# $meteor.object
 
 A service that wraps a Meteor object to enable reactivity within AngularJS.
 
@@ -16,7 +16,7 @@ A service that wraps a Meteor object to enable reactivity within AngularJS.
 
 ## Usage
 
-$meteorObject(collection, id, auto)
+$meteor.object(collection, id, auto)
 
 ### Arguments
 
@@ -87,12 +87,12 @@ $meteorObject(collection, id, auto)
 
     if (Meteor.isClient) {
 
-      angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteorObject',
-        function($scope, $stateParams, $meteorObject){
+      angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
+        function($scope, $stateParams, $meteor){
 
-          $scope.party = $meteorObject(Parties, $stateParams.partyId);
+          $scope.party = $meteor.object(Parties, $stateParams.partyId);
 
-          $scope.partyNotAuto = $meteorObject(Parties, $stateParams.partyId, false);
+          $scope.partyNotAuto = $meteor.object(Parties, $stateParams.partyId, false);
 
           $scope.save = function() {
             $scope.partyNotAuto.save().then(function(numberOfDocs){

@@ -16,7 +16,7 @@ An object that connects a [Meteor Collection](http://docs.meteor.com/#/full/coll
 
 ## Usage
 
-See [$meteorCollection](/api/meteorCollection)
+See [$meteor.collection](/api/meteorCollection)
 
 ----
 
@@ -91,9 +91,9 @@ See [$meteorCollection](/api/meteorCollection)
 <h3><p><code><span class="pln">subscribe( :subscriptionName );</span></code></p></h3>
 <br>
 
-A shorten (Syntactic sugar) function for the <a href="/api/subscribe">$meteorSubscribe.subscribe function</a>.
+A shorten (Syntactic sugar) function for the <a href="/api/subscribe">$meteor.subscribe function</a>.
 
-Takes only one parameter and not returns a promise like <a href="/api/subscribe">$meteorSubscribe.subscribe</a> does.
+Takes only one parameter and not returns a promise like <a href="/api/subscribe">$meteor.subscribe</a> does.
 
 #### Parameters
 
@@ -112,7 +112,7 @@ Takes only one parameter and not returns a promise like <a href="/api/subscribe"
     <td>
       <a href="" class="label type-hint type-hint-string">subscriptionName</a>
     </td>
-    <td><p>The subscription name to subscribe to.  exactly like the first parameter in $meteorSubscribe service.
+    <td><p>The subscription name to subscribe to.  exactly like the first parameter in $meteor.subscribe service.
     </p></td>
     <td><a href="" class="label type-hint type-hint-object">Yes</a></td>
   </tr>
@@ -127,7 +127,7 @@ Takes only one parameter and not returns a promise like <a href="/api/subscribe"
 ## Example
 
     // Bind all the todos to $scope.todos without auto-save
-    $scope.todos = $meteorCollection(Todos, false);
+    $scope.todos = $meteor.collection(Todos, false);
 
     var todoObject = {name:'first todo'};
     var todoArray = [{name:'second todo'}, {name:'third todo'}];
@@ -152,7 +152,7 @@ Takes only one parameter and not returns a promise like <a href="/api/subscribe"
 
 
     // Using the subscribe function
-    $scope.parties = $meteorCollection(Parties).subscribe('partiesSubscription');
+    $scope.parties = $meteor.collection(Parties).subscribe('partiesSubscription');
 
         {{/markdown}}
     </do-nothing>
