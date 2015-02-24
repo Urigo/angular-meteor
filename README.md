@@ -2,16 +2,6 @@
 ======================================================
 > The power of Meteor and the simplicity and eco-system of AngularJS
 
-# New v0.6 - the biggest changes so far!
-
-We just released angular-meteor version 0.6.0 with a lot of exciting new features, including new API's for collections, templates and routing. It does have some breaking changes too. You can read more on the details in the [release notes](https://github.com/Urigo/angular-meteor/releases/tag/0.6.0)
-
-Update to the new version by running:
-
-```bash
-$ meteor update
-```
-
 ## Please support our ng-conf 2015 talk proposal by commenting on it [here](https://github.com/ng-conf/submissions-2015/pull/172)
 
 ## Quick start
@@ -30,10 +20,7 @@ We would love contributions in:
 
 1. Code
 2. [Tutorial](http://angularjs.meteor.com/tutorial) - our goal with the tutorial is to add as many common tasks as possible. If you want to create and add your own chapter we would be happy to help you writing and adding it.
-3. [External issues](https://github.com/Urigo/angular-meteor/issues/109) - help us push external issues that affect our community.
-4. [Roadmap](https://trello.com/b/Wj9U0ulk/angular-meteor) - you can add a card about want you want to see in the library or in the tutorial.
-
-We are also considering money compensation for contributors, more as a tribute then a profit for now.
+3. [Roadmap](https://trello.com/b/Wj9U0ulk/angular-meteor) - you can add a card about want you want to see in the library or in the tutorial.
 
 ## Contributor Developer Setup
 
@@ -88,9 +75,9 @@ You don't need to bootstrap the application manually, simply specifying the `ng-
 
 From angular-meteor version 0.6 you can use Angular's default template delimiters and there is no need to change them.
 
-However, you need to write your Angular template markup in `.tpl` files, since Meteor won't look at those files as Spacebars templates. Tying HTML and `.tpl` files together isn't very difficult, we can simply use Angular's `ng-include`.
+However, you need to write your Angular template markup in `.ng.html` files, since Meteor won't look at those files as Spacebars templates. Tying HTML and `.ng.html` files together isn't very difficult, we can simply use Angular's `ng-include`.
 
-Please note that the names of the templates to Angular will be their URL as Meteor sees it when minifying the .tpl files. **Hence every template URL is relative to the root of the Meteor project, and contains no leading forward slash.** This is important to note when working with `ng-include` to include templates.
+Please note that the names of the templates to Angular will be their URL as Meteor sees it when minifying the .ng.html files. **Hence every template URL is relative to the root of the Meteor project, and contains no leading forward slash.** This is important to note when working with `ng-include` to include templates.
 
 `client/index.html`:
 
@@ -101,13 +88,13 @@ Please note that the names of the templates to Angular will be their URL as Mete
 
 <body>
     <div ng-app="myModule">
-        <ng-include src="'client/views/user.tpl'"></ng-include>
-        <ng-include src="'client/views/settings.tpl'"></ng-include>
+        <ng-include src="'client/views/user.ng.html'"></ng-include>
+        <ng-include src="'client/views/settings.ng.html'"></ng-include>
     </div>
 </body>
 ```
 
-`client/views/user.tpl`:
+`client/views/user.ng.html`:
 
 ```html
 <div>
@@ -122,23 +109,23 @@ Please note that the names of the templates to Angular will be their URL as Mete
 
 ### Using Meteor Collections
 
-angular-meteor provides 3-way data binding (view-client-server) by tying a Meteor collection to an Angular model. The API to accomplish this is [$meteorCollection](http://angularjs.meteor.com/api/meteorCollection).
+angular-meteor provides 3-way data binding (view-client-server) by tying a Meteor collection to an Angular model. The API to accomplish this is [$meteor.collection](http://angularjs.meteor.com/api/meteorCollection).
 
 ```js
-$scope.todos = $meteorCollection(Todos);
+$scope.todos = $meteor.collection(Todos);
 ```
 
 [More in step 3 of the tutorial](http://angularjs.meteor.com/tutorial/step_03)
 
 ### Subscribe
 
-[$meteorSubscribe.subscribe](http://angularjs.meteor.com/api/subscribe) is a wrapper for `Meteor.subscribe` that returns a promise.
+[$meteor.subscribe](http://angularjs.meteor.com/api/subscribe) is a wrapper for `Meteor.subscribe` that returns a promise.
 
 Here's an example of how to tie a Meteor collection to a clean Angular model in the form of an array:
 
 ```js
-$meteorSubscribe.subscribe('Todos').then(function () {
-    $scope.todos = $meteorCollection(Todos);
+$meteor.subscribe('Todos').then(function () {
+    $scope.todos = $meteor.collection(Todos);
 });
 ```
 
@@ -147,10 +134,10 @@ $meteorSubscribe.subscribe('Todos').then(function () {
 When adding controllers and the likes, remember to use [Dependency Injection](http://docs.angularjs.org/guide/di). This is common Angular practice and helps you avoid problems when minifying and obfuscating code.
 
 ```js
-app.controller('TodoCtrl', ['$scope', '$meteorCollection',
-function($scope, $meteorCollection) {
+app.controller('TodoCtrl', ['$scope', '$meteor',
+function($scope, $meteor) {
 
-    $scope.todos = $meteorCollection(Todos);
+    $scope.todos = $meteor.collection(Todos);
 
     $scope.addTodo = function() {
         $scope.todos.push({text:$scope.todoText, done:false});
@@ -166,7 +153,7 @@ function($scope, $meteorCollection) {
 
 ### Routing
 
-You no longer need to use the special [urigo:angular-ui-router](https://github.com/Urigo/meteor-angular-ui-router) package. Instead, you can include [angular-ui-router](https://github.com/angular-ui/ui-router) either with Bower by using [mquandalle:bower](https://atmospherejs.com/mquandalle/bower) or manually by downloading it and injecting it with dependency injection like you would with any other Angular module.
+Use to official AngularUI ui-router Meteor package - [angularui:angular-ui-router](https://atmospherejs.com/angularui/angular-ui-router)
 
 More on how to actually use angular-ui-router in [step 5 of the tutorial](http://angularjs.meteor.com/tutorial/step_05)
 
@@ -184,7 +171,7 @@ You can include Meteor's native templates with the [meteor-include](http://angul
 
 #### Caveat regarding &lt;meteor-include&gt;
 
-The 0.6 release relies more heavily on Angular's default templating system and it is now usually recommended that you use `ng-include` over `meteor-include`. This is because you can't use Angular's template delimiters directly within Meteor templates and you would still need to use an `ng-include` directive to include any Angular template markup in your Meteor templates.
+Since 0.6 release, angular-meteor relies more heavily on Angular's default templating system and it is now usually recommended that you use `ng-include` over `meteor-include`. This is because you can't use Angular's template delimiters directly within Meteor templates and you would still need to use an `ng-include` directive to include any Angular template markup in your Meteor templates.
 
 Although it is possible to combine the two systems for including templates, using one of them to the furthest extent possible helps us avoid the recipe for headaches that is unnecessarily deep template hierarchies.
 
@@ -201,20 +188,20 @@ $rootScope.loggingIn; // true if a Meteor login method is currently in progress
 
 ### Meteor methods with promises
 
-[$meteorMethods](http://angularjs.meteor.com/api/methods) calls a Meteor method and returns a promise.
+[$meteor.call](http://angularjs.meteor.com/api/methods) calls a Meteor method and returns a promise.
 
 ```js
-$meteorMethods.call('addUser', username).then(function (data) {
+$meteor.call('addUser', username).then(function (data) {
     console.log('User added', data);
 });
 ```
 
 ### Bind Meteor session
 
-[$meteorSession](http://angularjs.meteor.com/api/session) binds a scope variable to a Meteor Session variable.
+[$meteor.session](http://angularjs.meteor.com/api/session) binds a scope variable to a Meteor Session variable.
 
 ```js
-$meteorSession('counter').bind($scope, 'counter');
+$meteor.session('counter').bind($scope, 'counter');
 ```
 
 ### Additional packages

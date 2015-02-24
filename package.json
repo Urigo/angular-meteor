@@ -1,6 +1,6 @@
 {
   "name": "angular-meteor",
-  "version": "0.7.0-beta.2",
+  "version": "0.7.0",
   "description": "The simplest no-conflict way to use AngularJS with Meteor, Meteorite and Atmosphere Smart Packages.",
   "main": "package.js",
   "directories": {
