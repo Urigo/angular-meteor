@@ -17,16 +17,32 @@ angularMeteor.run(['$compile', '$document', '$rootScope', function ($compile, $d
     // Recompile after iron:router builds page
     if(typeof Router != 'undefined') {
       Router.onAfterAction(function(req, res, next) {
-        Tracker.afterFlush(function() {
-          if (Router.current().ready()){
-            $compile(Router.current()._layout.view._domrange.firstNode())($rootScope);
-            if (Router.current()._layout.view._domrange.firstNode() != Router.current()._layout.view._domrange.lastNode())
-              $compile(Router.current()._layout.view._domrange.lastNode())($rootScope);
+        Tracker.nonreactive(function() {
+          if (Router.current().ready()) {
+            Tracker.afterFlush(function() {
+                if (Router.current()._docCompiled) {
+                  for (var prop in Router.current()._layout._regions) {
+                    var region = Router.current()._layout._regions[prop];
+                    var firstNode = region.view._domrange.firstNode();
+                    var lastNode = region.view._domrange.lastNode();
+                    $compile(firstNode)($rootScope);
+                    if (firstNode != lastNode) {
+                      $compile(lastNode)($rootScope);
+                    }
+                  }
+                } else {
+                  $compile($document)($rootScope);
+                  Router.current()._docCompiled = true;
+                }
+                if (!$rootScope.$$phase) $rootScope.$apply(); 
+            });
+          } else {
+            Tracker.afterFlush(function() {
+              $compile($document)($rootScope);
+              if (!$rootScope.$$phase) $rootScope.$apply();
+              Router.current()._docCompiled = true;
+            });
           }
-          else
-            $compile($document)($rootScope);
-
-          if (!$rootScope.$$phase) $rootScope.$apply();
         });
       });
     }
