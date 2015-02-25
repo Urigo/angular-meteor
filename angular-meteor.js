@@ -25,7 +25,7 @@ angularMeteor.run(['$compile', '$document', '$rootScope', function ($compile, $d
             Tracker.afterFlush(function() {
                 // Checks if document's been compiled to the moment.
                 // If yes, compile only newly inserted parts.
-                if (Router.current()._docCompiled) {                                                             // 28
+                if (Router.current()._docCompiled) {
                     for (var prop in Router.current()._layout._regions) {
                     var region = Router.current()._layout._regions[prop];
                     var firstNode = region.view._domrange.firstNode();
@@ -34,8 +34,8 @@ angularMeteor.run(['$compile', '$document', '$rootScope', function ($compile, $d
                     if (firstNode != lastNode) {
                       $compile(lastNode)($rootScope);
                     }
-                  }                                                               // 29                                                         // 30
-                } else {
+                  }
+             } else {
                 	  $compile($document)($rootScope);
                   	Router.current()._docCompiled = true;
                 }
