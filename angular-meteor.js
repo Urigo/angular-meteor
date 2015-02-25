@@ -20,21 +20,11 @@ angularMeteor.run(['$compile', '$document', '$rootScope', function ($compile, $d
         Tracker.nonreactive(function() {
           if (Router.current().ready()) {
             Tracker.afterFlush(function() {
-                if (Router.current()._docCompiled) {
-                  for (var prop in Router.current()._layout._regions) {
-                    var region = Router.current()._layout._regions[prop];
-                    var firstNode = region.view._domrange.firstNode();
-                    var lastNode = region.view._domrange.lastNode();
-                    $compile(firstNode)($rootScope);
-                    if (firstNode != lastNode) {
-                      $compile(lastNode)($rootScope);
-                    }
-                  }
-                } else {
+                if (!Router.current()._docCompiled) {
                   $compile($document)($rootScope);
                   Router.current()._docCompiled = true;
                 }
-                if (!$rootScope.$$phase) $rootScope.$apply(); 
+                if (!$rootScope.$$phase) $rootScope.$apply();  
             });
           } else {
             Tracker.afterFlush(function() {
