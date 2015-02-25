@@ -23,14 +23,22 @@ angularMeteor.run(['$compile', '$document', '$rootScope', function ($compile, $d
             // Again since Router.current().ready() is reactive we cant wrap it in Tracker.afterFlush
             // therefor we use it twice for ready and not ready cases (see below).
             Tracker.afterFlush(function() {
-                // Checks if document's been compiled to the moment which happens when
-                // no loading template has been used and route is ready instantly (no waitOn in the route).
-                if (!Router.current()._docCompiled) {
-                  $compile($document)($rootScope);
-                  Router.current()._docCompiled = true;
+                // Checks if document's been compiled to the moment.
+                // If yes, compile only newly inserted parts.
+                if (Router.current()._docCompiled) {                                                             // 28
+                    for (var prop in Router.current()._layout._regions) {
+                    var region = Router.current()._layout._regions[prop];
+                    var firstNode = region.view._domrange.firstNode();
+                    var lastNode = region.view._domrange.lastNode();
+                    $compile(firstNode)($rootScope);
+                    if (firstNode != lastNode) {
+                      $compile(lastNode)($rootScope);
+                    }
+                  }                                                               // 29                                                         // 30
+                } else {
+                	  $compile($document)($rootScope);
+                  	Router.current()._docCompiled = true;
                 }
-                // Document should have been compiled to that moment in all cases which means it's
-                // enough to apply scope to make it work (even if new expressions appeared there).
                 if (!$rootScope.$$phase) $rootScope.$apply();  
             });
           } else {
