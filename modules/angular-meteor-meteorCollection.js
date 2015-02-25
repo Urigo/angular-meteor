@@ -197,7 +197,15 @@ AngularMeteorCollection.prototype.updateCursor = function (cursor) {
       safeApply();
     },
     removed: function (id) {
-      var removedObject = _.findWhere(self, {_id: id});
+      var removedObject;
+      if (id._str){
+        removedObject = _.find(self, function(obj) {
+          return obj._id._str == id._str;
+        });
+      }
+      else
+        removedObject = _.findWhere(self, {_id: id});
+
       if (removedObject){
         self.splice(self.indexOf(removedObject), 1);
         safeApply();
