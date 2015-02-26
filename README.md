@@ -1,10 +1,10 @@
-[angular-meteor](http://angularjs.meteor.com/tutorial)
+<a href="http://angularjs.meteor.com/"><img src="http://angularjs.meteor.com/images/no-text-logo.png" width="50" height="50" /></a>  [angular-meteor](http://angularjs.meteor.com/tutorial) 
 ======================================================
 > The power of Meteor and the simplicity and eco-system of AngularJS
 
 ## Community - Thank you so much for making the [ng-conf 2015 talk](https://github.com/ng-conf/submissions-2015/pull/172) happen!
 Follow the talk here - <a href="http://www.ng-conf.org/schedule">
-<img src="http://lh3.googleusercontent.com/-LHJwKtNqcU0/UipDx8KHUnI/AAAAAAAAAH4/qeow7Kltot8/s620-no/ng-conf.png" width="80" height="80" />
+<img src="http://lh3.googleusercontent.com/-LHJwKtNqcU0/UipDx8KHUnI/AAAAAAAAAH4/qeow7Kltot8/s620-no/ng-conf.png" width="50" height="50" />
 </a>
 
 ## Quick start
