@@ -37,7 +37,7 @@ Now let's create our app - write this in the command line:
 
     $ meteor create socially
 
-Now let's see what we got.  go into the folder:
+Now let's see what we got. Go into the folder:
 
     $ cd socially
 
