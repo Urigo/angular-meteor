@@ -43,14 +43,14 @@ Then right after the form, add this HTML:
 </btf-markdown>
 
 <pre><code>
-&lt;<span class="hljs-operator">div</span> ng-hide=<span class="hljs-string">"$root.currentUser"</span>&gt;
+&lt;<span class="hljs-operator">div</span> ng-hide=<span class="hljs-string">"$root.currentUser || $root.loggingIn"</span>&gt;
   Log <span class="hljs-operator">in</span> <span class="hljs-built_in">to</span> <span class="hljs-built_in">create</span> <span class="hljs-operator">a</span> party!
 &lt;/<span class="hljs-operator">div</span>&gt;
 </code></pre>
 
       <btf-markdown>
 
-That is exactly the opposite - if '$root.currentUser' exists, hide that div. Note that this statement is equivalent to ng-show="!$root.currentUser".
+That is exactly the opposite - if '$root.currentUser' exists or we're in the processing of logging in, hide that div. Note that this statement is equivalent to ng-show="!$root.currentUser && !$root.loggingIn".
 
 Now add the same to the RSVP buttons:
 
