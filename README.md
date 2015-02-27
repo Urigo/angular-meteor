@@ -13,6 +13,7 @@ Follow the talk here - <a href="http://www.ng-conf.org/schedule">
 3. Install urigo:angular `$ meteor add urigo:angular`
 
 ## Resources
+- [Change Log, updates and breaking changes](https://github.com/Urigo/angular-meteor/releases)
 - [Getting started tutorial](https://angularjs.meteor.com/tutorial)
 - [Meteor package - urigo:angular](https://atmospherejs.com/urigo/angular)
 - [Roadmap - Trello board](https://trello.com/b/Wj9U0ulk/angular-meteor)
