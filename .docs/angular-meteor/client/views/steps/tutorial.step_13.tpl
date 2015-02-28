@@ -1,7 +1,7 @@
 
     <div class="row">
       <div class="col-md-12">
-        <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/steps/tutorial.step_13.html"
+        <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/steps/tutorial.step_13.tpl"
            class="btn btn-default btn-lg improve-button">
           <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
         </a>
