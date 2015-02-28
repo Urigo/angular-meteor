@@ -17,41 +17,43 @@ angularMeteor.run(['$compile', '$document', '$rootScope', function ($compile, $d
     // Recompile after iron:router builds page
     if(typeof Router != 'undefined') {
       Router.onAfterAction(function(req, res, next) {
-        // Since Router.current().ready() is reactive we wrap it in Tracker.nonreactive to avoid re-runs.
-        Tracker.nonreactive(function() {
-          if (Router.current().ready()) {
-            // Again since Router.current().ready() is reactive we cant wrap it in Tracker.afterFlush
-            // therefor we use it twice for ready and not ready cases (see below).
+          // Since Router.current().ready() is reactive we wrap it in Tracker.nonreactive to avoid re-runs.
+          Tracker.nonreactive(function() {
             Tracker.afterFlush(function() {
-                // Checks if document's been compiled to the moment.
-                // If yes, compile only newly inserted parts.
-                if (Router.current()._docCompiled) {
-                    for (var prop in Router.current()._layout._regions) {
-                    var region = Router.current()._layout._regions[prop];
-                    var firstNode = region.view._domrange.firstNode();
-                    var lastNode = region.view._domrange.lastNode();
-                    $compile(firstNode)($rootScope);
-                    if (firstNode != lastNode) {
-                      $compile(lastNode)($rootScope);
-                    }
-                  }
-             } else {
-                	  $compile($document)($rootScope);
-                  	Router.current()._docCompiled = true;
-                }
-                if (!$rootScope.$$phase) $rootScope.$apply();  
-            });
-          } else {
-            // Compiles and applies scope for the first time when current route is not ready.
-            Tracker.afterFlush(function() {
-              $compile($document)($rootScope);
-              if (!$rootScope.$$phase) $rootScope.$apply();
-              Router.current()._docCompiled = true;
-            });
-          }
+              if (Router.current().ready()) {
+                // Since onAfterAction runs always twice when a route has waitOn's subscriptions,
+                // we need to handle case when data is already loaded at the moment Tracker.afterFlush executes
+                // which means it will run twice with Router.current().ready equals true.
+                // That's we save state to an additional auxiliry variable _done.
+                if (!Router.current()._done) {
+                    // Checks if document's been compiled to the moment.
+                    // If yes, compile only newly inserted parts.
+		                if (Router.current()._docCompiled) {
+		                    for (var prop in Router.current()._layout._regions) {
+			                    var region = Router.current()._layout._regions[prop];
+			                    var firstNode = region.view._domrange.firstNode();
+			                    var lastNode = region.view._domrange.lastNode();
+			                    $compile(firstNode)($rootScope);
+			                    if (firstNode != lastNode) {
+			                      $compile(lastNode)($rootScope);
+			                    }
+		                  	}
+		             	  } else {
+		                	$compile($document)($rootScope);
+		                  Router.current()._docCompiled = true;
+		                }
+		                if (!$rootScope.$$phase) $rootScope.$apply();
+		                Router.current()._done = true;  
+	            	}
+	          } else {
+	              // Compiles and applies scope for the first time when current route is not ready.
+              	$compile($document)($rootScope);
+              	if (!$rootScope.$$phase) $rootScope.$apply();
+	              Router.current()._docCompiled = true;
+	          }
+          });
         });
       });
-    }
   }]);
 
 // Putting all services under $meteor service for syntactic sugar
