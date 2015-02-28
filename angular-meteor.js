@@ -38,8 +38,8 @@ angularMeteor.run(['$compile', '$document', '$rootScope', function ($compile, $d
 			              $compile(lastNode)($rootScope);
 			            }
 			  	}
-			       } else {
-				$compile($document)($rootScope);
+			} else {
+			  $compile($document)($rootScope);
 			  Router.current()._docCompiled = true;
 			}
 			if (!$rootScope.$$phase) $rootScope.$apply();
