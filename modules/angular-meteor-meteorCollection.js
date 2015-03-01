@@ -168,48 +168,23 @@ AngularMeteorCollection.prototype.updateCursor = function (cursor) {
     self.observeHandle.stop();
   }
 
-  self.observeHandle = cursor.observeChanges({
-    addedBefore: function (id, fields, before) {
-      var newItem = self.$$collection.findOne(id);
-      if (before == null) {
-        self.push(newItem);
-      }
-      else {
-        var beforeIndex = _.indexOf(self, _.findWhere(self, { _id: before}));
-        self.splice(beforeIndex, 0, newItem);
-      }
+  self.observeHandle = cursor.observe({
+    addedAt: function (document, atIndex) {
+      self.splice(atIndex, 0, document);
       safeApply();
     },
-    changed: function (id, fields) {
-      angular.extend(_.findWhere(self, {_id: id}), fields);
+    changed: function (document, oldDocument, atIndex) {
+      self.splice(atIndex, 1, document);
       safeApply();
     },
-    movedBefore: function (id, before) {
-      var index = self.indexOf(_.findWhere(self, {_id: id}));
-      var removed = self.splice(index, 1)[0];
-      if (before == null) {
-        self.push(removed);
-      }
-      else {
-        var beforeIndex = _.indexOf(self, _.findWhere(self, { _id: before}));
-        self.splice(beforeIndex, 0, removed);
-      }
+    movedTo: function (document, fromIndex, toIndex) {
+      self.splice(fromIndex, 1);
+      self.splice(toIndex, 0, document);
       safeApply();
     },
-    removed: function (id) {
-      var removedObject;
-      if (id._str){
-        removedObject = _.find(self, function(obj) {
-          return obj._id._str == id._str;
-        });
-      }
-      else
-        removedObject = _.findWhere(self, {_id: id});
-
-      if (removedObject){
-        self.splice(self.indexOf(removedObject), 1);
-        safeApply();
-      }
+    removedAt: function (oldDocument, atIndex) {
+      self.splice(atIndex, 1);
+      safeApply();
     }
   });
 };
