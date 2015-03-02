@@ -220,26 +220,53 @@ angularMeteorCollections.factory('$meteorCollection', ['$q', '$meteorSubscribe',
       }
 
       var ngCollection = new AngularMeteorCollection(reactiveFunc(), $q, $meteorSubscribe, $meteorUtils, $rootScope, $timeout);
+      var realOldItems;
 
       function setAutoBind() {
         if (auto) { // Deep watches the model and performs autobind.
           ngCollection.unregisterAutoBind = $rootScope.$watch(function () {
+            if (ngCollection.UPDATING_FROM_SERVER){
+              realOldItems = _.without(ngCollection, 'UPDATING_FROM_SERVER');
+              return 'UPDATING_FROM_SERVER';
+            }
             return _.without(ngCollection, 'UPDATING_FROM_SERVER');
           }, function (newItems, oldItems) {
-            if (!ngCollection.UPDATING_FROM_SERVER && newItems !== oldItems) {
+            //console.log('watch', newItems);
+            if (newItems == 'UPDATING_FROM_SERVER'){
+              //console.log('newItems in nono', newItems);
+              //console.log('oldItems in nono', oldItems);
+              //console.log('real old items save', realOldItems);
+              return;
+            }
+            if (oldItems == 'UPDATING_FROM_SERVER'){
+              oldItems = realOldItems;
+              //console.log('old after nonono', oldItems);
+              //return;
+            }
+            //console.log('oldItems', oldItems);
+            //console.log('newItems', newItems);
 
-              diffArray(angular.copy(oldItems), angular.copy(newItems), {
+
+
+            if (newItems !== oldItems) {
+
+              diffArray(oldItems, newItems, {
                 addedAt: function (id, item, index) {
-                  var newValue = angular.copy(ngCollection[index]);
+                  //console.log('added', item);
                   ngCollection.unregisterAutoBind();
-                  ngCollection.splice( index, 1 );
+                  var newValue = ngCollection.splice( index, 1 );
                   setAutoBind();
                   ngCollection.save(newValue);
                 },
                 removedAt: function (id, item, index) {
+                  // TODO: Revert those changes as well
+                  console.log('removed', item);
                   ngCollection.remove(id);
                 },
                 changedAt: function (id, setDiff, unsetDiff, index) {
+                  // TODO: Revert those changes as well
+                  console.log('updated set', setDiff);
+                  console.log('updated unset', unsetDiff);
                   if (setDiff)
                     ngCollection.save(setDiff);
 
