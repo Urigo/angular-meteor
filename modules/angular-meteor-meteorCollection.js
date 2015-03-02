@@ -231,42 +231,32 @@ angularMeteorCollections.factory('$meteorCollection', ['$q', '$meteorSubscribe',
             }
             return _.without(ngCollection, 'UPDATING_FROM_SERVER');
           }, function (newItems, oldItems) {
-            //console.log('watch', newItems);
-            if (newItems == 'UPDATING_FROM_SERVER'){
-              //console.log('newItems in nono', newItems);
-              //console.log('oldItems in nono', oldItems);
-              //console.log('real old items save', realOldItems);
+            if (newItems == 'UPDATING_FROM_SERVER')
               return;
-            }
-            if (oldItems == 'UPDATING_FROM_SERVER'){
-              oldItems = realOldItems;
-              //console.log('old after nonono', oldItems);
-              //return;
-            }
-            //console.log('oldItems', oldItems);
-            //console.log('newItems', newItems);
 
+            if (oldItems == 'UPDATING_FROM_SERVER')
+              oldItems = realOldItems;
 
 
             if (newItems !== oldItems) {
 
               diffArray(oldItems, newItems, {
                 addedAt: function (id, item, index) {
-                  //console.log('added', item);
                   ngCollection.unregisterAutoBind();
-                  var newValue = ngCollection.splice( index, 1 );
+                  var newValue = ngCollection.splice( index, 1 )[0];
                   setAutoBind();
                   ngCollection.save(newValue);
                 },
                 removedAt: function (id, item, index) {
-                  // TODO: Revert those changes as well
-                  console.log('removed', item);
+                  ngCollection.unregisterAutoBind();
+                  ngCollection.splice(index, 0, item);
+                  setAutoBind();
                   ngCollection.remove(id);
                 },
-                changedAt: function (id, setDiff, unsetDiff, index) {
-                  // TODO: Revert those changes as well
-                  console.log('updated set', setDiff);
-                  console.log('updated unset', unsetDiff);
+                changedAt: function (id, setDiff, unsetDiff, index, oldItem) {
+                  ngCollection.unregisterAutoBind();
+                  ngCollection.splice(index, 1, oldItem);
+                  setAutoBind();
                   if (setDiff)
                     ngCollection.save(setDiff);
 
