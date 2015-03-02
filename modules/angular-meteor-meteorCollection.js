@@ -173,7 +173,7 @@ AngularMeteorCollection.prototype.updateCursor = function (cursor) {
       self.splice(atIndex, 0, document);
       safeApply();
     },
-    changed: function (document, oldDocument, atIndex) {
+    changedAt: function (document, oldDocument, atIndex) {
       self.splice(atIndex, 1, document);
       safeApply();
     },
@@ -182,9 +182,20 @@ AngularMeteorCollection.prototype.updateCursor = function (cursor) {
       self.splice(toIndex, 0, document);
       safeApply();
     },
-    removedAt: function (oldDocument, atIndex) {
-      self.splice(atIndex, 1);
-      safeApply();
+    removedAt: function (oldDocument) {
+      var removedObject;
+      if (oldDocument._id._str){
+        removedObject = _.find(self, function(obj) {
+          return obj._id._str == oldDocument._id._str;
+        });
+      }
+      else
+        removedObject = _.findWhere(self, {_id: oldDocument._id});
+
+      if (removedObject){
+        self.splice(self.indexOf(removedObject), 1);
+        safeApply();
+      }
     }
   });
 };
@@ -248,15 +259,10 @@ angularMeteorCollections.factory('$meteorCollection', ['$q', '$meteorSubscribe',
                   ngCollection.save(newValue);
                 },
                 removedAt: function (id, item, index) {
-                  ngCollection.unregisterAutoBind();
-                  ngCollection.splice(index, 0, item);
-                  setAutoBind();
                   ngCollection.remove(id);
                 },
                 changedAt: function (id, setDiff, unsetDiff, index, oldItem) {
-                  ngCollection.unregisterAutoBind();
-                  ngCollection.splice(index, 1, oldItem);
-                  setAutoBind();
+
                   if (setDiff)
                     ngCollection.save(setDiff);
 
