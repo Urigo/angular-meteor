@@ -1,0 +1,45 @@
+@import "variables.less";
+
+header {
+  background-color: @background-color;
+  padding: 2rem;
+
+  .navbar-brand {
+    margin: auto 0;
+    padding: 1rem;
+    height: auto;
+
+    img {
+      width: auto;
+      height: 100%;
+    }
+  }
+
+  .navbar-toggle {
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    .icon-bar {
+      background-color: @text-color;
+    }
+  }
+
+  .nav {
+    color: @text-color;
+    li {
+      a {
+        color: @text-color;
+
+        &:hover {
+          font-weight: bold;
+        }
+        &:focus {
+          font-weight: bold;
+        }
+      }
+      ul {
+        a {
+          color: #000000;
+        }
+      }
+    }
+  }
+}
