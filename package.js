@@ -39,6 +39,7 @@ Package.on_use(function (api) {
     'modules/angular-meteor-session.js',
     'modules/angular-meteor-reactive-scope.js',
     'modules/angular-meteor-utils.js',
+    'modules/angular-meteor-camera.js',
     // Finally load angular-meteor File
     'angular-meteor.js'
   ], 'client');
@@ -66,6 +67,7 @@ Package.onTest(function(api) {
     'modules/angular-meteor-template.js',
     'modules/angular-meteor-user.js',
     'modules/angular-meteor-utils.js',
+    'modules/angular-meteor-camera.js',
     'test/meteor/tests.js'
   ], ['client']);
 });

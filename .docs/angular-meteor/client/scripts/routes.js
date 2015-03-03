@@ -73,6 +73,10 @@ angular.module("meteor-angular-docs").config(['$urlRouterProvider', '$stateProvi
           url: '/utils',
           template: UiRouter.template('api.utils.html')
         })
+        .state('api.camera', {
+          url: '/camera',
+          template: UiRouter.template('api.camera.html')
+        })
         .state('api.collection-pagination', {
           url: '/collection-pagination',
           template: UiRouter.template('api.collection-pagination.html')
