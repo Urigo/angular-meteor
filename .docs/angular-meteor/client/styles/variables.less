@@ -1,0 +1,46 @@
+@background-color: #f6f6f6;
+@text-color: #333333;
+@angular-red: #a6120d;
+@active-button: #dd1b16;
+@drop-shadow: 0px 2px 4px 0px rgba(0,0,0,0.50);
+
+@cta-color: #f2f2f2;
+@border-radius: 3px;
+
+@hero-background: url("/images/angular-bg.png");
+@hero-background-color: @text-color;
+@hero-text-color: @background-color;
+
+@font-face {
+  font-family: "league-spartan";
+  src: url("/fonts/spartan/leaguespartan-bold.eot");
+  src: url("/fonts/spartan/leaguespartan-bold.eot?#iefix") format("embedded-opentype"),
+       url("/fonts/spartan/leaguespartan-bold.woff") format("woff"),
+       url("/fonts/spartan/leaguespartan-bold.ttf") format("ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@header-font: "league-spartan";
+
+.btn-default{
+  border-radius: @border-radius;
+  -moz-box-shadow:    @drop-shadow;
+  box-shadow:         @drop-shadow;
+  border: 2px solid @angular-red;
+  font-size: 2rem;
+  padding: 1rem 2rem;
+  margin-top: 5rem;
+  transition: .5s color, .5s background-color, .5s border-color;
+
+  i {
+    top: 2px;
+    font-size: 1.75rem;
+  }
+
+  &:active,
+  &:hover{
+    background-color: @active-button;
+    border-color: @active-button;
+  }
+}
