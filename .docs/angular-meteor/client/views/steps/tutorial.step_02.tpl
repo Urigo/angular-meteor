@@ -14,7 +14,7 @@
     </div>
 
     <div class="col-md-8">
-      <h1>Step 2</h1>
+      <h1>Step 2 - Dynamic Template</h1>
     </div>
     <div class="video-tutorial col-md-4">
       <iframe width="300" height="169" src="//www.youtube.com/embed/dN2rc-z_pxQ?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd" frameborder="0" allowfullscreen></iframe>
@@ -172,11 +172,12 @@ So, let's go to step 3 to learn how to bind ourselves to the great power of Mete
 
     </btf-markdown>
     </do-nothing>
-
+    <div class="col-md-12">
     <ul class="btn-group tutorial-nav">
       <a href="/tutorial/step_01"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
       <a href="http://socially-step02.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
       <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_01...step_02"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
       <a href="/tutorial/step_03"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
     </ul>
+    </div>
   </div>

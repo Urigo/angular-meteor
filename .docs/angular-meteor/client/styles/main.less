@@ -53,8 +53,9 @@ main{
 
   .cta {
     background: @angular-red;
-    border: 2px solid @cta-color;
+    border: 3px solid @cta-color;
     color: @cta-color;
+    margin-top: 5rem;
     -moz-box-shadow:    @drop-shadow;
     box-shadow:         @drop-shadow;
   }
@@ -70,11 +71,15 @@ main{
   margin: 2rem auto;
 }
 
-.intro{
+.intro {
   margin: 3rem auto 7rem;
 
-  h1{
+  h1 {
     margin-bottom: 4rem;
+  }
+
+  .tutorials {
+    margin-top: 5rem;
   }
 }
 
@@ -164,6 +169,7 @@ main{
 
   .tutorial-nav {
     float: left;
+    padding: 0;
   }
 
   .video-tutorial {
@@ -184,6 +190,10 @@ main{
 
     do-nothing {
       font-size: 20px;
+    }
+
+    p{
+      max-width: 640px;
     }
   }
 }

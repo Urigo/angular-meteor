@@ -46,13 +46,14 @@ Now, we'll take a detour to see that while we were building a web app, we also c
 
       </btf-markdown>
     </do-nothing>
-
+<div class="col-md-12">
     <ul class="btn-group tutorial-nav">
       <a href="/tutorial-02/step_09"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
       <a href="http://socially-step10.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
       <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_09...step_10"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
       <a href="/tutorial-02/step_11"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
     </ul>
+    </div>
   </div>
 
 
