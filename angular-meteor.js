@@ -10,6 +10,7 @@ var angularMeteor = angular.module('angular-meteor', [
   'angular-meteor.session',
   'angular-meteor.reactive-scope',
   'angular-meteor.utils',
+  'angular-meteor.camera',
   'hashKeyCopier'
 ]);
 
@@ -33,8 +34,8 @@ angularMeteor.run(['$compile', '$document', '$rootScope', function ($compile, $d
   }]);
 
 // Putting all services under $meteor service for syntactic sugar
-angularMeteor.service('$meteor', ['$meteorCollection', '$meteorObject', '$meteorMethods', '$meteorSession', '$meteorSubscribe', '$meteorUtils',
-  function($meteorCollection, $meteorObject, $meteorMethods, $meteorSession, $meteorSubscribe, $meteorUtils){
+angularMeteor.service('$meteor', ['$meteorCollection', '$meteorObject', '$meteorMethods', '$meteorSession', '$meteorSubscribe', '$meteorUtils', '$meteorCamera',
+  function($meteorCollection, $meteorObject, $meteorMethods, $meteorSession, $meteorSubscribe, $meteorUtils, $meteorCamera){
     this.collection = $meteorCollection;
     this.object = $meteorObject;
     this.subscribe = $meteorSubscribe.subscribe;
@@ -42,4 +43,5 @@ angularMeteor.service('$meteor', ['$meteorCollection', '$meteorObject', '$meteor
     this.session = $meteorSession;
     this.autorun = $meteorUtils.autorun;
     this.getCollectionByName = $meteorUtils.getCollectionByName;
+    this.getPicture = $meteorCamera.getPicture;
 }]);

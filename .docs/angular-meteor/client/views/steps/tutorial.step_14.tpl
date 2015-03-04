@@ -323,7 +323,7 @@ With:
 
 
 
-# Summery
+# Summary
 
 Run the application.
 

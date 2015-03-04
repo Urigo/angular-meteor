@@ -173,7 +173,7 @@ AngularMeteorCollection.prototype.updateCursor = function (cursor) {
       self.splice(atIndex, 0, document);
       safeApply();
     },
-    changed: function (document, oldDocument, atIndex) {
+    changedAt: function (document, oldDocument, atIndex) {
       self.splice(atIndex, 1, document);
       safeApply();
     },
@@ -182,9 +182,20 @@ AngularMeteorCollection.prototype.updateCursor = function (cursor) {
       self.splice(toIndex, 0, document);
       safeApply();
     },
-    removedAt: function (oldDocument, atIndex) {
-      self.splice(atIndex, 1);
-      safeApply();
+    removedAt: function (oldDocument) {
+      var removedObject;
+      if (oldDocument._id._str){
+        removedObject = _.find(self, function(obj) {
+          return obj._id._str == oldDocument._id._str;
+        });
+      }
+      else
+        removedObject = _.findWhere(self, {_id: oldDocument._id});
+
+      if (removedObject){
+        self.splice(self.indexOf(removedObject), 1);
+        safeApply();
+      }
     }
   });
 };
@@ -220,26 +231,38 @@ angularMeteorCollections.factory('$meteorCollection', ['$q', '$meteorSubscribe',
       }
 
       var ngCollection = new AngularMeteorCollection(reactiveFunc(), $q, $meteorSubscribe, $meteorUtils, $rootScope, $timeout);
+      var realOldItems;
 
       function setAutoBind() {
         if (auto) { // Deep watches the model and performs autobind.
           ngCollection.unregisterAutoBind = $rootScope.$watch(function () {
+            if (ngCollection.UPDATING_FROM_SERVER){
+              realOldItems = _.without(ngCollection, 'UPDATING_FROM_SERVER');
+              return 'UPDATING_FROM_SERVER';
+            }
             return _.without(ngCollection, 'UPDATING_FROM_SERVER');
           }, function (newItems, oldItems) {
-            if (!ngCollection.UPDATING_FROM_SERVER && newItems !== oldItems) {
+            if (newItems == 'UPDATING_FROM_SERVER')
+              return;
 
-              diffArray(angular.copy(oldItems), angular.copy(newItems), {
+            if (oldItems == 'UPDATING_FROM_SERVER')
+              oldItems = realOldItems;
+
+
+            if (newItems !== oldItems) {
+
+              diffArray(oldItems, newItems, {
                 addedAt: function (id, item, index) {
-                  var newValue = angular.copy(ngCollection[index]);
                   ngCollection.unregisterAutoBind();
-                  ngCollection.splice( index, 1 );
+                  var newValue = ngCollection.splice( index, 1 )[0];
                   setAutoBind();
                   ngCollection.save(newValue);
                 },
                 removedAt: function (id, item, index) {
                   ngCollection.remove(id);
                 },
-                changedAt: function (id, setDiff, unsetDiff, index) {
+                changedAt: function (id, setDiff, unsetDiff, index, oldItem) {
+
                   if (setDiff)
                     ngCollection.save(setDiff);
 

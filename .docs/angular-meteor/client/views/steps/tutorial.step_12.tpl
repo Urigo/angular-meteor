@@ -408,6 +408,48 @@ And all we have left to do is call the subscribe method with our reactive scope 
 
 Wow that is all that is needed to have a fully reactive search with pagination! Quite amazing right?
 
+
+# Stopping a subscription
+
+There is only one problem in our app right now - if you will go into the party details page and then go back, the pagination and search will stop working.
+
+The reason is that we are calling a different subscription on the same collection inside the partyDetails controller..
+
+So to fix that, we will have to close that subscription after leaving the controller.
+
+First thing, we need to catch the event of the controller closing by adding the $scope.$on('$destroy'):
+
+    $scope.$on('$destroy', function() {
+
+    });
+
+Now we need to get the subscription handle with we will use to stop the subscription.
+
+We will need to call the $meteor.subscribe it self instead of the shortcut we are using right now.
+
+First remove to subscription from $meteor.object:
+
+    $scope.party = $meteor.object(Parties, $stateParams.partyId);
+
+And now add the subscribe function and save the handle somewhere:
+
+    var subscriptionHandle;
+
+    $meteor.subscribe('parties').then(function(handle) {
+      subscriptionHandle = handle;
+    });
+
+And last thing, stop the subscription when the scope is destroyed:
+
+    $scope.$on('$destroy', function() {
+      subscriptionHandle.stop();
+    });
+
+That's it.
+
+Maybe in the future we will add an automatic way to open and close subscriptions in scope's load and destroy events.
+
+
 # Summary
 
 Now we have full pagination with search and sorting for client and server side with the help of Meteor's options and Angular's directives.
