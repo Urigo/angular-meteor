@@ -14,7 +14,7 @@
     </div>
 
       <div class="col-md-8">
-        <h1>Step 0</h1>
+        <h1>Step 0 - Bootstrapping</h1>
       </div>
       <div class="video-tutorial col-md-4">
         <iframe width="300" height="169" src="//www.youtube.com/embed/LVuCeKswPPE?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd" frameborder="0" allowfullscreen></iframe>
@@ -233,7 +233,7 @@ Now let's go to [step 1](step_01) and add some content to the web app.
 
         </btf-markdown>
     </do-nothing>
-
+  <div class="col-md-12">
     <ul class="btn-group tutorial-nav">
       <a href="/tutorial"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
       <a href="http://socially-step00.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
@@ -241,4 +241,5 @@ Now let's go to [step 1](step_01) and add some content to the web app.
       <a href="/tutorial/step_01"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
     </ul>
   </div>
+</div>
 

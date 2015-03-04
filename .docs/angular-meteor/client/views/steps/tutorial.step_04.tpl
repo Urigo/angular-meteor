@@ -215,11 +215,12 @@ So now you've seen how easy it is to manipulate the data using AngularJS's power
 
     </btf-markdown>
     </do-nothing>
-
+<div class="col-md-12">
     <ul class="btn-group tutorial-nav">
       <a href="/tutorial/step_03"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
       <a href="http://socially-step04.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
       <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_03...step_04"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
       <a href="/tutorial/step_05"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
     </ul>
+    </div>
   </div>

@@ -1,7 +1,7 @@
 <template name="api.html">
   <div class="container tutorial-container">
     <div class="row">
-      <div class="col-md-3">
+      <div class="col-md-3 menu">
         <h2><a href="/api">API</a></h2>
         <ul class="nav">
           <li><a href="/api/meteorCollection">$meteor.collection</a></li>
@@ -25,8 +25,18 @@
         <h2><a href="https://docs.meteor.com/#/full/">Meteor Docs</a></h2>
       </div>
       <div class="col-md-9 main-tutorial">
-        <div ui-view></div>
+        <div ui-view>
+
+          <h1>Angular-Meteor API</h1>
+
+          <p>Browse the Angular-Meteor API to to find things you need.
+          </p>
+
+          <p>New here? Check out our <a href="/tutorial/">tutorial</a> to get started.
+          </p>
+        </div>
       </div>
     </div>
   </div>
+
 </template>
