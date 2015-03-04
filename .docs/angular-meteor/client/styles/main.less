@@ -1,5 +1,6 @@
 @import "/packages/bootstrap3-less/bootstrap.import.less";
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:500);
 
 @import "variables.less";
 
@@ -7,7 +8,12 @@
 
 @icon-font-path: "/fonts/";
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: @header-font;
   font-weight: normal;
 }
@@ -20,10 +26,23 @@ h2 {
   font-size: 2.2rem;
 }
 
+h3 {
+  font-size: 1.8rem;
+}
+
 body {
   font-size: 16px;
   font-family: 'Open Sans', sans-serif;
   text-align: left;
+}
+
+strong {
+  font-family: "leaguespartan", sans-serif;
+}
+
+
+hr {
+  margin: 3rem 0;
 }
 
 main{
@@ -163,6 +182,17 @@ main{
 }
 
 .tutorial-container {
+
+  p,
+  li,
+  h1,
+  h2,
+  h3,
+  hr {
+    max-width: 640px;
+  }
+
+
   .improve-button {
     float: right;
   }
@@ -191,12 +221,10 @@ main{
     do-nothing {
       font-size: 20px;
     }
-
-    p{
-      max-width: 640px;
-    }
   }
 }
+
+// Code styles
 
 .variables-matrix {
   border:1px solid #ddd;
