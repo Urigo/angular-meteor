@@ -21,37 +21,36 @@ angularMeteor.run(['$compile', '$document', '$rootScope', function ($compile, $d
         // to avoid re-runs.
         Tracker.nonreactive(function() {
           Tracker.afterFlush(function() {
-            if (Router.current().ready()) {
+            var route = Router.current(); 
+            if (route.ready()) {
               // Since onAfterAction runs always twice when a route has waitOn's subscriptions,
               // we need to handle case when data is already loaded at the moment
               // Tracker.afterFlush executes which means it will run twice with
               // Router.current().ready equals true.
               // That's we save state to an additional auxiliry variable _done.
-              if (!Router.current()._done) {
+              if (!route.state.get('__rendered')) {
                 // Checks if document's been compiled to the moment.
                 // If yes, compile only newly inserted parts.
-                if (Router.current()._docCompiled) {
-                  for (var prop in Router.current()._layout._regions) {
-                    var region = Router.current()._layout._regions[prop];
-                    var firstNode = region.view._domrange.firstNode();
-                    var lastNode = region.view._domrange.lastNode();
-                    $compile(firstNode)($rootScope);
-                    if (firstNode != lastNode) {
-                      $compile(lastNode)($rootScope);
+                if (route.state.get('__compiled')) {
+                  for (var prop in route._layout._regions) {
+                    var region = route._layout._regions[prop];
+                    var node = region.view._domrange.firstNode();
+                    while (node) {
+                       $compile(node)($rootScope);
+                       node = node.nextSibling;
                     }
                   }
                 } else {
                   $compile($document)($rootScope);
-                  Router.current()._docCompiled = true;
                 }
                 if (!$rootScope.$$phase) $rootScope.$apply();
-                Router.current()._done = true;  
+                route.state.set('__rendered', true); 
               }
             } else {
                 // Compiles and applies scope for the first time when current route is not ready.
                 $compile($document)($rootScope);
                 if (!$rootScope.$$phase) $rootScope.$apply();
-                Router.current()._docCompiled = true;
+                route.state.set('__compiled', true);
              }
           });
         });
