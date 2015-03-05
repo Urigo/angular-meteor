@@ -123,49 +123,39 @@ angular.module("meteor-angular-docs").config(['$urlRouterProvider', '$stateProvi
           url: '/step_07',
           template: UiRouter.template('tutorial.step_07.html')
         })
-      .state('tutorial02', {
-        abstract: true,
-        url: '/tutorial-02',
-        template: UiRouter.template('tutorial-02.html'),
-        controller: 'TutorialCtrl'
-      })
-        .state('tutorial02.intro', {
-          url: '',
-          template: UiRouter.template('tutorial-02.intro.html')
-        })
-        .state('tutorial02.step08', {
+        .state('tutorial.step08', {
           url: '/step_08',
           template: UiRouter.template('tutorial.step_08.html')
         })
-        .state('tutorial02.step09', {
+        .state('tutorial.step09', {
           url: '/step_09',
           templateUrl: 'client/views/steps/tutorial.step_09.tpl'
         })
-        .state('tutorial02.step10', {
+        .state('tutorial.step10', {
           url: '/step_10',
           templateUrl: 'client/views/steps/tutorial.step_10.tpl'
         })
-        .state('tutorial02.step11', {
+        .state('tutorial.step11', {
           url: '/step_11',
           templateUrl: 'client/views/steps/tutorial.step_11.tpl'
         })
-        .state('tutorial02.step12', {
+        .state('tutorial.step12', {
           url: '/step_12',
           templateUrl: 'client/views/steps/tutorial.step_12.tpl'
         })
-        .state('tutorial02.step13', {
+        .state('tutorial.step13', {
           url: '/step_13',
         templateUrl: 'client/views/steps/tutorial.step_13.tpl'
         })
-        .state('tutorial02.step14', {
+        .state('tutorial.step14', {
           url: '/step_14',
         templateUrl: 'client/views/steps/tutorial.step_14.tpl'
         })
-        .state('tutorial02.step15', {
+        .state('tutorial.step15', {
           url: '/step_15',
         templateUrl: 'client/views/steps/tutorial.step_15.tpl'
         })
-        .state('tutorial02.step16', {
+        .state('tutorial.step16', {
           url: '/step_16',
           template: UiRouter.template('tutorial.step_16.html')
         });

@@ -188,7 +188,7 @@ $rootScope.currentUser; // Currently logged in user and its data
 $rootScope.loggingIn; // true if a Meteor login method is currently in progress
 ```
 
-[More in step 8 of the tutorial](http://angularjs.meteor.com/tutorial-02/step_08)
+[More in step 8 of the tutorial](http://angularjs.meteor.com/tutorial/step_08)
 
 ### Meteor methods with promises
 
