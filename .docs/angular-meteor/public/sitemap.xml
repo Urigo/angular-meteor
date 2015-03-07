@@ -38,39 +38,39 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/tutorial-02</loc>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>http://angularjs.meteor.com/tutorial-02/step_08</loc>
+    <loc>http://angularjs.meteor.com/tutorial/step_08</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/tutorial-02/step_09</loc>
+    <loc>http://angularjs.meteor.com/tutorial/step_09</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/tutorial-02/step_10</loc>
+    <loc>http://angularjs.meteor.com/tutorial/step_10</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/tutorial-02/step_11</loc>
+    <loc>http://angularjs.meteor.com/tutorial/step_11</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/tutorial-02/step_12</loc>
+    <loc>http://angularjs.meteor.com/tutorial/step_12</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/tutorial-02/step_13</loc>
+    <loc>http://angularjs.meteor.com/tutorial/step_13</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/tutorial-02/step_14</loc>
+    <loc>http://angularjs.meteor.com/tutorial/step_14</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/tutorial-02/step_15</loc>
+    <loc>http://angularjs.meteor.com/tutorial/step_15</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://angularjs.meteor.com/tutorial/step_16</loc>
     <priority>0.5</priority>
   </url>
   <url>

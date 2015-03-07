@@ -18,16 +18,42 @@ angularMeteor.run(['$compile', '$document', '$rootScope', function ($compile, $d
     // Recompile after iron:router builds page
     if(typeof Router != 'undefined') {
       Router.onAfterAction(function(req, res, next) {
-        Tracker.afterFlush(function() {
-          if (Router.current().ready()){
-            $compile(Router.current()._layout.view._domrange.firstNode())($rootScope);
-            if (Router.current()._layout.view._domrange.firstNode() != Router.current()._layout.view._domrange.lastNode())
-              $compile(Router.current()._layout.view._domrange.lastNode())($rootScope);
-          }
-          else
-            $compile($document)($rootScope);
-
-          if (!$rootScope.$$phase) $rootScope.$apply();
+        // Since Router.current().ready() is reactive we wrap it in Tracker.nonreactive
+        // to avoid re-runs.
+        Tracker.nonreactive(function() {
+          Tracker.afterFlush(function() {
+            var route = Router.current(); 
+            if (route.ready()) {
+              // Since onAfterAction runs always twice when a route has waitOn's subscriptions,
+              // we need to handle case when data is already loaded at the moment
+              // Tracker.afterFlush executes which means it will run twice with
+              // Router.current().ready equals true.
+              // That's we save state to an additional auxiliry variable _done.
+              if (!route.state.get('__rendered')) {
+                // Checks if document's been compiled to the moment.
+                // If yes, compile only newly inserted parts.
+                if (route.state.get('__compiled')) {
+                  for (var prop in route._layout._regions) {
+                    var region = route._layout._regions[prop];
+                    var node = region.view._domrange.firstNode();
+                    while (node) {
+                       $compile(node)($rootScope);
+                       node = node.nextSibling;
+                    }
+                  }
+                } else {
+                  $compile($document)($rootScope);
+                }
+                if (!$rootScope.$$phase) $rootScope.$apply();
+                route.state.set('__rendered', true); 
+              }
+            } else {
+                // Compiles and applies scope for the first time when current route is not ready.
+                $compile($document)($rootScope);
+                if (!$rootScope.$$phase) $rootScope.$apply();
+                route.state.set('__compiled', true);
+             }
+          });
         });
       });
     }
