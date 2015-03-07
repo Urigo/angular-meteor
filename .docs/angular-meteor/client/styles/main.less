@@ -18,18 +18,18 @@ h6 {
 }
 
 h1 {
-  font-size: 2.5rem;
+  font-size: 2rem;
 }
 
 h2 {
-  font-size: 2.2rem;
+  font-size: 1.7rem;
 }
 
 h3 {
-  font-size: 1.8rem;
+  font-size: 1.4rem;
 }
 
-body {
+html, body {
   font-size: 16px;
   font-family: 'Open Sans', sans-serif;
   text-align: left;
@@ -44,7 +44,7 @@ hr {
 }
 
 main{
-  padding: 9rem 0;
+  padding: 4rem 0;
 }
 
 .main-unit{
@@ -95,18 +95,19 @@ main{
     margin-bottom: 4rem;
   }
 
-  .tutorials {
-    margin-top: 5rem;
+  .tutorial-cta {
+    margin: 3rem auto 2rem;
+    max-width: 400px;
   }
 }
 
 .small-hero{
   background-color: @cta-color;
   color: @text-color;
-  padding: 1rem;
+  padding: 2rem;
   border-radius: @border-radius;
   transition: 1s background-color, 1s color;
-  height: 400px;
+  height: 440px;
 
   &:hover{
     background-color: @hero-background-color;
@@ -127,13 +128,10 @@ main{
 .video {
   background-color: @second-background-color;
   padding-bottom: 3rem;
-
-  .container{
-    padding-top: 1rem;
-  }
+  padding-top: 1rem;
 
   h1 {
-    margin: 4rem;
+    margin: 3rem;
   }
 
   .video-wrapper {
@@ -190,7 +188,6 @@ main{
     max-width: 640px;
   }
 
-
   .improve-button {
     float: right;
   }
@@ -218,6 +215,29 @@ main{
 
     do-nothing {
       font-size: 20px;
+    }
+  }
+}
+
+.roadmap {
+  .node {
+    width: 24%;
+    display: inline-block;
+    position: relative;
+    vertical-align: top;
+    text-align: center;
+    font-size: .8rem;
+
+    &::before {
+      content:'';
+      margin: 1rem auto;
+      width: 20px;
+      height: 20px;
+      border-radius: 30px;
+      display: block;
+      background-color: @angular-red;
+      border: 2px solid white;
+      box-shadow: 0px 0px 0px 2px @angular-red;
     }
   }
 }
