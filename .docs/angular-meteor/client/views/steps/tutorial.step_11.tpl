@@ -11,10 +11,18 @@
       <a href="/tutorial/step_12"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
     </ul>
 
-    <do-nothing>
+    <div class="col-md-8">
+      <h1>Step 11 - Running your app on Android or iOS with PhoneGap</h1>
+    </div>
+    <div class="video-tutorial col-md-4">
+      <iframe width="300" height="169" src="//www.youtube.com/embed/5vZOI2fi13U?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <do-nothing class="col-md-12">
   <btf-markdown>
 
-# Step 11 - Running your app on Android or iOS with PhoneGap
+
+
 
 So far, we've been building our app and testing only in a web browser,
 but Meteor has been designed to work across different platforms - your socially website can become an iOS or Android app in just a few commands.
