@@ -66,8 +66,7 @@ __`index.html`:__
 
           </btf-markdown>
 
-<pre><code>
-<span class="hljs-tag">&lt;<span class="hljs-title">body</span>&gt;</span>
+<pre><code><span class="hljs-tag">&lt;<span class="hljs-title">body</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>Nothing here<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">body</span>&gt;</span>
 </code></pre>
@@ -117,8 +116,7 @@ __`index.ng.html`:__
 
           </btf-markdown>
 
-<pre><code>
-<span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>Nothing here<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
+<pre><code><span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>Nothing here<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
 </code></pre>
 
       <btf-markdown>
@@ -129,8 +127,7 @@ __`index.html`:__
 
       </btf-markdown>
 
-<pre><code>
-<span class="hljs-tag">&lt;<span class="hljs-title">body</span>&gt;</span>
+<pre><code><span class="hljs-tag">&lt;<span class="hljs-title">body</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">ng-include</span>=<span class="hljs-value">"'index.ng.html'"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-title">body</span>&gt;</span>
 </code></pre>
@@ -169,8 +166,7 @@ And name our application in the ng-app directive in index.html:
 
       </btf-markdown>
 
-<pre><code>
-  &lt;<span class="hljs-operator">div</span> ng-app=<span class="hljs-string">"socially"</span> ng-<span class="hljs-built_in">include</span>=<span class="hljs-string">"'index.ng.html'"</span>&gt;&lt;/<span class="hljs-operator">div</span>&gt;
+<pre><code>&lt;<span class="hljs-operator">div</span> ng-app=<span class="hljs-string">"socially"</span> ng-<span class="hljs-built_in">include</span>=<span class="hljs-string">"'index.ng.html'"</span>&gt;&lt;/<span class="hljs-operator">div</span>&gt;
 </code></pre>
       <btf-markdown>
 
@@ -185,8 +181,7 @@ and now inside our index.ng.html let's use Angular:
 
 </btf-markdown>
 
-<pre><code>
-<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>Nothing here </span><span class="hljs-expression">{{ '<span class="hljs-variable">yet</span>' + '!' }}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span></span>
+<pre><code><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>Nothing here </span><span class="hljs-expression">{{ '<span class="hljs-variable">yet</span>' + '!' }}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span></span>
 </code></pre>
 
 <btf-markdown>
@@ -221,8 +216,7 @@ Try adding a new expression to the index.ng.html that will do some math:
 
 </btf-markdown>
 
-<pre><code>
-<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>1 + 2 = </span><span class="hljs-variable">{{ 1 + 2 }}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span></span>
+<pre><code><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>1 + 2 = </span><span class="hljs-variable">{{ 1 + 2 }}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span></span>
 </code></pre>
 
 <btf-markdown>
