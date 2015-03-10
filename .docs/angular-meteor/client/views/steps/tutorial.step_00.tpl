@@ -17,7 +17,7 @@
         <h1>Step 0 - Bootstrapping</h1>
       </div>
       <div class="video-tutorial col-md-4">
-        <iframe width="300" height="169" src="//www.youtube.com/embed/LVuCeKswPPE?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd" frameborder="0" allowfullscreen></iframe>
+        <iframe width="300" height="169" src="//www.youtube.com/embed/s2RWlIrkCaE?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd" frameborder="0" allowfullscreen></iframe>
       </div>
     <do-nothing class="col-md-12">
       <btf-markdown>

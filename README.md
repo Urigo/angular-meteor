@@ -3,9 +3,7 @@
 > The power of Meteor and the simplicity and eco-system of AngularJS
 
 ## Community - Thank you so much for making the [ng-conf 2015 talk](https://github.com/ng-conf/submissions-2015/pull/172) happen!
-Follow the talk here - <a href="http://www.ng-conf.org/schedule">
-<img src="http://lh3.googleusercontent.com/-LHJwKtNqcU0/UipDx8KHUnI/AAAAAAAAAH4/qeow7Kltot8/s620-no/ng-conf.png" width="50" height="50" />
-</a>
+[![ng-conf](http://img.youtube.com/vi/uFmf-DeCdEE/0.jpg)](https://www.youtube.com/embed/videoseries?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd)
 
 ## Quick start
 1. Install [Meteor](http://docs.meteor.com/#quickstart) `$ curl https://install.meteor.com | /bin/sh`
