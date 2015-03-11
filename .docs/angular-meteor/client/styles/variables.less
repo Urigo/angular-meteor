@@ -12,36 +12,4 @@
 @hero-background-color: @text-color;
 @hero-text-color: @background-color;
 
-@font-face {
-  font-family: "league-spartan";
-  src: url("/fonts/spartan/leaguespartan-bold.eot");
-  src: url("/fonts/spartan/leaguespartan-bold.eot?#iefix") format("embedded-opentype"),
-       url("/fonts/spartan/leaguespartan-bold.woff") format("woff"),
-       url("/fonts/spartan/leaguespartan-bold.ttf") format("ttf");
-  font-weight: normal;
-  font-style: normal;
-}
-
 @header-font: "league-spartan";
-
-.btn-default,
-.btn-primary {
-  background-color: white;
-  border-radius: @border-radius;
-  border: 3px solid @angular-red;
-  font-size: 1rem;
-  padding: .5rem 1rem;
-  transition: .25s color, .25s background-color, .25s border-color;
-  color: @angular-red;
-
-  i {
-    top: 2px;
-  }
-
-  &:active,
-  &:hover{
-    background-color: @active-button;
-    border-color: @active-button;
-    color: @background-color;
-  }
-}

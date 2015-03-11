@@ -7,6 +7,16 @@
 
 @icon-font-path: "/fonts/";
 
+@font-face {
+  font-family: "league-spartan";
+  src: url("/fonts/spartan/leaguespartan-bold.eot");
+  src: url("/fonts/spartan/leaguespartan-bold.eot?#iefix") format("embedded-opentype"),
+       url("/fonts/spartan/leaguespartan-bold.woff") format("woff"),
+       url("/fonts/spartan/leaguespartan-bold.ttf") format("ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
 h1,
 h2,
 h3,
@@ -41,6 +51,28 @@ strong {
 
 hr {
   margin: 3rem 0;
+}
+
+.btn-default,
+.btn-primary {
+  background-color: white;
+  border-radius: @border-radius;
+  border: 3px solid @angular-red;
+  font-size: 1rem;
+  padding: .5rem 1rem;
+  transition: .25s color, .25s background-color, .25s border-color;
+  color: @angular-red;
+
+  i {
+    top: 2px;
+  }
+
+  &:active,
+  &:hover{
+    background-color: @active-button;
+    border-color: @active-button;
+    color: @background-color;
+  }
 }
 
 main{
@@ -159,9 +191,11 @@ main{
 }
 
 .menu {
-  padding: 1rem 0;
+  padding: 1rem .5rem 1rem 1rem;
   border-radius: @border-radius;
   position: relative;
+  background-color: @background-color;
+  font-size: 1rem;
 
   h2 {
     margin-left: 1rem;
@@ -172,19 +206,22 @@ main{
   }
 
   li a {
-    color: @text-color;
+    color: @angular-red;
     transition: .2s color, .2s background-color;
     text-indent: -2em;
     padding: 10px 3em;
     position: relative;
     z-index: 0;
 
+  }
+
+  &.tutorial-menu li a {
     &::before {
       content: '';
       height: .8em;
       width: .8em;
       display: inline-block;
-      border: 2px solid @text-color;
+      border: 2px solid @angular-red;
       border-radius: 1em;
       margin-right: .5em;
       position: relative;
@@ -194,7 +231,7 @@ main{
     }
 
     &::after {
-      border-right: 1px solid @text-color;
+      border-right: 1px solid @angular-red;
       content: '';
       display: block;
       height: 104%;
@@ -205,6 +242,7 @@ main{
     }
 
     &:hover,
+    &.active,
     &:focus {
       color: @active-button;
       background-color: transparent;
@@ -221,8 +259,8 @@ main{
   }
 }
 
-.tutorial-container {
-
+.tutorial-container .main-tutorial{
+  font-size: 1.2rem;
   p,
   li,
   h1,
@@ -264,68 +302,7 @@ main{
   }
 }
 
-.team {
-  display: inline-block;
-  list-style: none;
-  padding: 0;
-  margin-top: 2rem;
-
-  li {
-    padding: 1rem;
-    text-align: center;
-  }
-}
-
-.roadmap-wrapper {
-  margin-top: 2rem;
-}
-
-.roadmap {
-  background-color: @second-background-color;
-  border-radius: @border-radius;
-  padding: 3rem 1rem;
-  position: relative;
-  z-index: 0;
-
-  .node {
-    width: 24%;
-    display: inline-block;
-    position: relative;
-    vertical-align: top;
-    text-align: center;
-    font-size: .8rem;
-
-    &::before {
-      content:'';
-      margin: 1rem auto;
-      width: 20px;
-      height: 20px;
-      border-radius: 30px;
-      display: block;
-      background-color: @angular-red;
-      border: 2px solid white;
-      z-index: 1;
-      box-shadow: 0px 0px 2px 2px @angular-red;
-    }
-
-    &::after {
-      border-bottom: 1px solid @angular-red;
-      content: '';
-      display: block;
-      width: 104%;
-      position: absolute;
-      background-color: blue;
-      top: 26px;
-      left: 50%;
-      box-shadow: 0 0 20px @angular-red;
-      z-index: -1;
-    }
-
-    &:last-child::after {
-      display: none;
-    }
-  }
-}
+@import "about/about.less";
 
 // Code styles
 
