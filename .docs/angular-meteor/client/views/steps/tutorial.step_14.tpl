@@ -11,10 +11,16 @@
       <a href="/tutorial/step_15"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
     </ul>
 
-    <do-nothing>
+    <div class="col-md-8">
+      <h1>Step 14 - Meteor methods with promises</h1>
+    </div>
+    <div class="video-tutorial col-md-4">
+      <iframe width="300" height="169" src="//www.youtube.com/embed/qNUjZjfaYt8?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <do-nothing class="col-md-12">
   <btf-markdown>
 
-# Step 14 - Meteor methods with promises
 
 In this step we will learn how to use Meteor methods and how angular-meteor enhances them with the support of promises.
 

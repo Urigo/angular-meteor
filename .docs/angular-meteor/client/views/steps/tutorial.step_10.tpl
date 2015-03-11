@@ -18,7 +18,7 @@
     <h1>Step 10 - Deploying your app</h1>
   </div>
   <div class="video-tutorial col-md-4">
-    <iframe width="300" height="169" src="//www.youtube.com/embed/FusQ1D8jy3o?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd" frameborder="0" allowfullscreen></iframe>
+    <iframe width="300" height="169" src="//www.youtube.com/embed/2WnZBKv9H9o?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd" frameborder="0" allowfullscreen></iframe>
   </div>
 
   <do-nothing class="col-md-12">

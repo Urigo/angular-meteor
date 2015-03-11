@@ -17,7 +17,7 @@
       <h1>Step 2 - Dynamic Template</h1>
     </div>
     <div class="video-tutorial col-md-4">
-      <iframe width="300" height="169" src="//www.youtube.com/embed/dN2rc-z_pxQ?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd" frameborder="0" allowfullscreen></iframe>
+      <iframe width="300" height="169" src="//www.youtube.com/embed/xUod-yoDfEE?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd" frameborder="0" allowfullscreen></iframe>
     </div>
 
     <do-nothing class="col-md-12">
