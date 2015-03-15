@@ -18,6 +18,7 @@ Plugin.registerSourceHandler('ng.html', {
     '$templateCache.put(\'' + compileStep.inputPath.replace(/\\/g, "/") + '\', \'' +
       minify(contents.replace(/'/g, "\\'"), {
         collapseWhitespace : true,
+        conservativeCollapse: true,
         removeComments : true,
         minifyJS : true,
         minifyCSS: true,
