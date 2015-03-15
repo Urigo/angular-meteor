@@ -13,39 +13,21 @@
 
 # Angular-Meteor Manifest
 
-## General
-
 ### Don’t choose one solution
 
-Developers tend to think they need to choose one solution - Meteor or AngularJS.
+We created this library so you could use **both Blaze and AngularJS** in the same application and even on the same page, template or directive.
 
-When they understand they can use Angular-Meteor, they think they need to choose between Blaze or AngularJS.
-
-We disagree. We created this library so you could use **both Blaze and AngularJS** in the same application and even on the same page, template or directive.
-
-You can start with AngularJS and migrate your application slowly to Blaze.
-You can start using Blaze and move slowly to AngularJS.
-You can use both of them together forever.
+* You can start with AngularJS and migrate your application slowly to Blaze.
+* You can start using Blaze and move slowly to AngularJS.
+* You can use both of them together forever.
 
 ### A combined power
 
-Both frameworks have missing parts: we found that they complement each other, creating a more complete solution.
-
-By combining both tools we are **merging both communities**, for greater power over existing solutions.
-
-As we sit in the middle, we see ways both frameworks can make their API’s more open for other frameworks. We're **making both frameworks more open and integrate-able**.
-
+Use libraries, packages and solutions from both communities.
 
 ### Neutrality
 
-Meteor and AngularJS are two advanced, very popular JavaScript frameworks with very strong development teams behind them.
-
-Both frameworks have agendas and marketing teams. They believe in their mission and need to make money for the guys who pay for their development.
-Most of the core team developers in each framework haven't used the other framework.
-
-Developers who use one of the frameworks are naturally more comfortable with the technology they are familiar with.
-
-We are here to be neutral.
+We are here to give neutral perspective on the two frameworks.
 
 
 ----
@@ -53,43 +35,11 @@ We are here to be neutral.
 
 ## Why use AngularJS on top of Meteor
 
-### MVC and MVVM structure
-
-In Meteor’s client, everything is global. AngularJS is great with structuring large applications
-
-AngularJS DOM syntax makes it easier to place the view login in the view and the app logic in JS.
-
-If you still want to use global variables, Meteor is still there for you - as is Angular’s `$rootScope`.
-
-### Running few applications on the same Meteor server
-
-Angular’s modularity makes it easier to run few separate client applications on the same Meteor server.
-
-### Ecosystem and community
-
-* AngularJS community is huge and very mature. They have solutions for almost any requirement you can think of -
-local storage, forms, UI components, calendars, maps and of course many more.
-* There are a lot of other frameworks that works great with AngularJS - e.g. React, Famo.us, Ionic Framework, ngCordova.
-* The amount of the community’s code inside AngularJS core code is substantial, and the framework core is very easy to look into and pull request.
-
-### Learning curve
-
-* AngularJS introduces a lot of new concepts for Meteor developers like directives, dependency injection and filters. Some of those might be hard for a starting developer. Those concepts are important for a lot of use cases, but if you want to keep it simple, you don’t have to learn them.
-* It is hard to believe that a framework with such a steep learning curve would grow so fast in 2 years, but it has.
-* Events - for some, handling events on top of HTML makes the code much more readable and easy than handling it in the javascript code like
-the JQuery concept.
-
-### The “Extending HTML” approach is taken also by browsers, standards and Polymer
-
-### Code sharing
-
-As AngularJS is not intrusive and can work inside other technologies, using it gives you the possibility to share code and knowledge with other frameworks besides Meteor.
-
-### Future
-
-Angular 2.0 - Angular’s team chose to rewrite the whole framework for its version 2.0.
-As it sounds scary, we appreciate the courage and it gives a lot of room for the framework to become a lot better while still holding the huge experience with the existing code.
-There are not a lot of frameworks that have the commitment and audacity to do that.
+* MVC and MVVM structure on the client
+* Use existing applications
+* Ecosystem and community
+* Easy entrance to Meteor
+* Angular 2.0
 
 ----
 
@@ -97,35 +47,11 @@ There are not a lot of frameworks that have the commitment and audacity to do th
 ## Why use Meteor with AngularJS
 
 
-### All the possibilities of a server without compromising the easiness
-
-Two of Meteor core principles that you can actually see when developing with it:
-
-1. Nothing in Meteor should harm the experience of a new Meteor developer - building an app with Meteor is as fast and easy as it gets.
-2. Nothing in Meteor should preclude an expert from doing what they want - Meteor is not similar to Firebase. Meteor is a full blown server, you can do much more in Meteor than in Firebase.
-
-### Super easy, Real-time integration with the database
-
-### Very easy and comfortable build process
-
-### Automatic Latency compensation with local minimongo on the client
-
-### Amazing tools for working with Cordova applications
-
-### Ecosystem - Like AngularJS, Meteor is also built from combining a lot of separate, individual packages written by the core team and the community:
-Accounts and permissions, Search, sorting and pagination from client until the server, underscore, client and server router and much more.
-
-### Easy deployment
-
-----
-
-## Should I use Angular-Meteor or Asteroid
-
-Asteroid is a very interesting solution on top of Meteor. It separates the client side completely from Meteor so that you can take an existing front-end solution and still use Meteor reactivity and methods.
-
-In Asteroid you are missing Meteor’s client side abilities like using Blaze templates, latency compensation and minimongo and the Cordova support.
-
-With Asteroid you need to choose and can’t use both AngularJS and Blaze.
+* Best real time backend for AngularJS
+* Super easy, Real-time integration with the database
+* Full stack and open source
+* Great Cordova integration
+* Easy deployment
 
 
         {{/markdown}}
