@@ -69,7 +69,7 @@ contain properties like `skip`, `sort` and `limit` which we will shortly use our
 
 Let's get back to our client code. We now need to change our subscribe call with options we want to set for pagination.
 What are those parameters that we want to set on the options argument? That is a good question. In order to have pagination in our
-parties list we will need to save the current page, the number of parties per page and the sort order. So let's add this parameters to our scope
+parties list we will need to save the current page, the number of parties per page and the sort order. So let's add these parameters to our scope
 in the top of the controller in client/controllers/partiesList.js file.
 
     $scope.page = 1;
