@@ -40,7 +40,7 @@ Now, in this chapter we are going to perform a real-time search, sort and pagina
 
 # angular-meteor pagination support
 
-So we want to achieve with angular-meteor is server-based reactive pagination.
+What we want to achieve with angular-meteor is server-based reactive pagination.
 That is no simple task, but using the angular-meteor it could make your life a lot simpler.
 
 To achieve server-based reactive pagination we need to have support for pagination in the server as well as in the client.
