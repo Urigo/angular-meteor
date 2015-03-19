@@ -15,7 +15,7 @@
 - [Getting started tutorial](https://angularjs.meteor.com/tutorial)
 - [Meteor package - urigo:angular](https://atmospherejs.com/urigo/angular)
 - [Roadmap - Trello board](https://trello.com/b/Wj9U0ulk/angular-meteor)
-- [Mailing list - Google group](https://groups.google.com/forum/#!forum/angular-meteor)
+- [Meteor Forums](https://forums.meteor.com/)
 
 ## Contributing
 We would love contributions in:
