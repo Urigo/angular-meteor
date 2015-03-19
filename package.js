@@ -15,6 +15,16 @@ Package.registerBuildPlugin({
   }
 });
 
+Package.registerBuildPlugin({
+  name: 'ngAnnotate',
+  sources: [
+    'plugin/annotate.js'
+  ],
+  npmDependencies: {
+    'ng-annotate': '0.15.4'
+  }
+});
+
 Package.on_use(function (api) {
   api.versionsFrom('METEOR@0.9.0.1');
 
