@@ -76,7 +76,7 @@ in the top of the controller in client/controllers/partiesList.js file.
     $scope.perPage = 3;
     $scope.sort = { name: 1 };
 
-That's cool, but let's do something with these variables expect define them. So where we want to use them is when we call the subscribe method.
+That's cool, but let's do something with these variables except defining them. So where we want to use them is when we call the subscribe method.
 But right now, we are subscribing to the collection in the short form which doesn't get parameters:
 
     $scope.parties = $meteor.collection(Parties).subscribe('parties');
@@ -429,7 +429,7 @@ First thing, we need to catch the event of the controller closing by adding the 
 
     });
 
-Now we need to get the subscription handle with we will use to stop the subscription.
+Now we need to get the subscription handle which will be used later to stop the subscription.
 
 We will need to call the $meteor.subscribe it self instead of the shortcut we are using right now.
 
