@@ -22,7 +22,7 @@ angularMeteor.run(['$compile', '$document', '$rootScope', function ($compile, $d
         // to avoid re-runs.
         Tracker.nonreactive(function() {
           Tracker.afterFlush(function() {
-            var route = Router.current(); 
+            var route = Router.current();
             if (route.ready()) {
               // Since onAfterAction runs always twice when a route has waitOn's subscriptions,
               // we need to handle case when data is already loaded at the moment
@@ -45,7 +45,7 @@ angularMeteor.run(['$compile', '$document', '$rootScope', function ($compile, $d
                   $compile($document)($rootScope);
                 }
                 if (!$rootScope.$$phase) $rootScope.$apply();
-                route.state.set('__rendered', true); 
+                route.state.set('__rendered', true);
               }
             } else {
                 // Compiles and applies scope for the first time when current route is not ready.
@@ -60,12 +60,27 @@ angularMeteor.run(['$compile', '$document', '$rootScope', function ($compile, $d
   }]);
 
 // Putting all services under $meteor service for syntactic sugar
-angularMeteor.service('$meteor', ['$meteorCollection', '$meteorObject', '$meteorMethods', '$meteorSession', '$meteorSubscribe', '$meteorUtils', '$meteorCamera',
-  function($meteorCollection, $meteorObject, $meteorMethods, $meteorSession, $meteorSubscribe, $meteorUtils, $meteorCamera){
+angularMeteor.service('$meteor', ['$meteorCollection', '$meteorObject', '$meteorMethods', '$meteorSession', '$meteorSubscribe', '$meteorUtils', '$meteorCamera', '$meteorUser',
+  function($meteorCollection, $meteorObject, $meteorMethods, $meteorSession, $meteorSubscribe, $meteorUtils, $meteorCamera, $meteorUser){
     this.collection = $meteorCollection;
     this.object = $meteorObject;
     this.subscribe = $meteorSubscribe.subscribe;
     this.call = $meteorMethods.call;
+    this.loginWithPassword = $meteorUser.loginWithPassword;
+    this.createUser = $meteorUser.createUser;
+    this.changePassword = $meteorUser.changePassword;
+    this.forgotPassword = $meteorUser.forgotPassword;
+    this.resetPassword = $meteorUser.resetPassword;
+    this.verifyEmail = $meteorUser.verifyEmail;
+    this.loginWithMeteorDeveloperAccount = $meteorUser.loginWithMeteorDeveloperAccount;
+    this.loginWithFacebook = $meteorUser.loginWithFacebook;
+    this.loginWithGithub = $meteorUser.loginWithGithub;
+    this.loginWithGoogle = $meteorUser.loginWithGoogle;
+    this.loginWithMeetup = $meteorUser.loginWithMeetup;
+    this.loginWithTwitter = $meteorUser.loginWithTwitter;
+    this.loginWithWeibo = $meteorUser.loginWithWeibo;
+    this.logout = $meteorUser.logout;
+    this.logoutOtherClients = $meteorUser.logoutOtherClients;
     this.session = $meteorSession;
     this.autorun = $meteorUtils.autorun;
     this.getCollectionByName = $meteorUtils.getCollectionByName;

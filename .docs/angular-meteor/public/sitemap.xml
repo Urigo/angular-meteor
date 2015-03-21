@@ -87,22 +87,10 @@
   </url>
   <url>
     <loc>http://angularjs.meteor.com/api/meteorCollection</loc>
-    <priority>0.5</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>http://angularjs.meteor.com/api/meteorObject</loc>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>http://angularjs.meteor.com/api/collection</loc>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>http://angularjs.meteor.com/api/collection-bind</loc>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>http://angularjs.meteor.com/api/collection-bindOne</loc>
     <priority>0.5</priority>
   </url>
   <url>
@@ -122,8 +110,8 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/api/user</loc>
-    <priority>0.5</priority>
+    <loc>http://angularjs.meteor.com/api/auth</loc>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>http://angularjs.meteor.com/api/meteor-include</loc>
@@ -135,10 +123,6 @@
   </url>
   <url>
     <loc>http://angularjs.meteor.com/api/utils</loc>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>http://angularjs.meteor.com/api/collection-pagination</loc>
     <priority>0.5</priority>
   </url>
 </urlset>
