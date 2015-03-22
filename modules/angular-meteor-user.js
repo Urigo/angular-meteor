@@ -20,8 +20,37 @@ angularMeteorUser.run(['$rootScope', '$meteorUtils', '$q', function($rootScope, 
   });
 }]);
 
-angularMeteorUser.service('$meteorUser', ['$q',
-  function ($q) {
+angularMeteorUser.service('$meteorUser', ['$rootScope', '$meteorUtils', '$q',
+  function($rootScope, $meteorUtils, $q){
+
+    this.waitForUser = function(){
+
+      var deferred = $q.defer();
+
+      $meteorUtils.autorun($rootScope, function(){
+        if ( !Meteor.loggingIn() )
+          deferred.resolve( Meteor.user() );
+      });
+
+      return deferred.promise;
+    };
+
+    this.requireUser = function(){
+
+      var deferred = $q.defer();
+
+      $meteorUtils.autorun($rootScope, function(){
+        if ( !Meteor.loggingIn() ) {
+          if ( Meteor.user() == null)
+            deferred.reject("AUTH_REQUIRED");
+          else
+            deferred.resolve( Meteor.user() );
+        }
+      });
+
+      return deferred.promise;
+    };
+
     this.loginWithPassword = function(user, password){
 
       var deferred = $q.defer();

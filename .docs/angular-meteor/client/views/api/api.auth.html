@@ -20,7 +20,9 @@ Methods and [$rootScope](https://docs.angularjs.org/api/ng/service/$rootScope) v
 
     $rootScope.loggingIn
 
-    $rootScope.currentUserPromise
+    $meteor.waitForUser()
+
+    $meteor.requireUser()
 
     $meteor.loginWithPassword(user, password)
 
@@ -63,9 +65,6 @@ Methods and [$rootScope](https://docs.angularjs.org/api/ng/service/$rootScope) v
         — True if a login method (such as Meteor.loginWithPassword, Meteor.loginWithFacebook, or Accounts.createUser) is currently in progress.
         A reactive data source. Can be use to display animation while user is logging in.
       </li>
-      <li><code><span class="pln">$rootScope.currentUserPromise</span></code> —
-          A promise that is resolved with the <a href="http://docs.meteor.com/#/full/meteor_user">currentUser</a> when the user subscription is ready.
-          You can wait on it in your route provider's <strong>resolve</strong> config to make sure the <a href="http://docs.meteor.com/#/full/meteor_user">currentUser</a> is not still <i>undefined</i> when you need it in your controllers.</li>
     </ul>
   </td>
 </tr>
@@ -81,17 +80,6 @@ Methods and [$rootScope](https://docs.angularjs.org/api/ng/service/$rootScope) v
     // In controllers
     if ($rootScope.currentUser)
 
-    // In route config ('ui-router' in the example, but works with 'ngRoute' the same way)
-    $stateProvider
-        .state('home', {
-            url: '/',
-            templateUrl: 'client/views/home.ng.html',
-            controller: 'HomeController'
-            resolve: {
-                currentUserNonReactive: $rootScope.currentUserPromise
-            }
-        });
-
         {{/markdown}}
 
       {{#markdown}}
@@ -102,6 +90,69 @@ Methods and [$rootScope](https://docs.angularjs.org/api/ng/service/$rootScope) v
 Those methods are provided by the accounts-password package.
 See the <a href="http://docs.meteor.com/#/full/accounts_passwords">Meteor's Passwords section</a>
 
+<br>
+<h3><p><code><span class="pln">waitForUser();</span></code></p></h3>
+
+Returns a promise fulfilled with the <a href="http://docs.meteor.com/#/full/meteor_user">currentUser</a> when the user subscription is ready.
+<br>
+This is useful when you want to grab the current user before the route is rendered.
+<br>
+If there is no logged in user, it will return null.
+
+----
+
+#### Example
+
+    // In route config ('ui-router' in the example, but works with 'ngRoute' the same way)
+    $stateProvider
+      .state('home', {
+        url: '/',
+        templateUrl: 'client/views/home.ng.html',
+        controller: 'HomeController'
+        resolve: {
+          "currentUser": ["$meteor", function($meteor){
+            return $meteor.waitForUser();
+          }]
+        }
+    });
+
+<br>
+<h3><p><code><span class="pln">requireUser();</span></code></p></h3>
+
+Resolves the promise successfully if a user is authenticated and rejects otherwise.
+<br>
+This is useful in cases where you want to require a route to have an authenticated user.
+<br>
+You can catch the rejected promise and redirect the unauthenticated user to a different page, such as the login page.
+
+----
+
+#### Example
+
+    // In route config ('ui-router' in the example, but works with 'ngRoute' the same way)
+    $stateProvider
+      .state('home', {
+        url: '/',
+        templateUrl: 'client/views/home.ng.html',
+        controller: 'HomeController'
+        resolve: {
+          "currentUser": ["$meteor", function($meteor){
+            return $meteor.requireUser();
+          }]
+        }
+    });
+
+    app.run(["$rootScope", "$location", function($rootScope, $location) {
+      $rootScope.$on("stateChangeError", function(event, next, previous, error) {
+        // We can catch the error thrown when the $meteor.requireUser() promise is rejected
+        // and redirect the user back to the login page
+        if (error === "AUTH_REQUIRED") {
+          $location.path("/login");
+        }
+      });
+    }]);
+
+<br>
 <h3><p><code><span class="pln">loginWithPassword( :user, :password );</span></code></p></h3>
 
 Log the user in with a password.
