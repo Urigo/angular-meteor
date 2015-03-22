@@ -31,7 +31,7 @@ AngularMeteorObject.prototype.subscribe = function () {
   return this;
 };
 
-AngularMeteorObject.prototype.save = function save() {
+AngularMeteorObject.prototype.save = function save(docs) {
   var self = this,
     collection = self.$$collection,
     $q = self.$q;
@@ -39,10 +39,11 @@ AngularMeteorObject.prototype.save = function save() {
   var deferred = $q.defer();
 
   if (self)
-    if (self._id)
+    if (self._id){
+      var updates = docs? docs : angular.copy(_.omit(self, '_id', self.$$internalProps));
       collection.update(
         {_id: self._id},
-        { $set: angular.copy(_.omit(self, '_id', self.$$internalProps)) },
+        { $set: updates },
         function(error, numberOfDocs){
           if (error) {
             deferred.reject(error);
@@ -51,6 +52,7 @@ AngularMeteorObject.prototype.save = function save() {
           }
         }
       );
+    }
 
   return deferred.promise;
 };
