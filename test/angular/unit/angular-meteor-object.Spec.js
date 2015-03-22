@@ -173,4 +173,24 @@ describe('Given the $meteorObject factory', function() {
 
   });
 
+  describe('when calling raw()', function() {
+    it('should return the raw object', function() {
+
+      var myCol = new Meteor.Collection();
+
+      var result = $meteorObject(myCol, 1);
+
+      var raw = result.raw();
+
+      angular.forEach(result.$$internalProps, function(prop) {
+        expect(typeof raw[prop]).toEqual('undefined');
+      });
+
+      // Double check .raw() is removed too.
+      expect(typeof raw.raw).toEqual('undefined');
+
+      expect(raw._id).toEqual(1);
+    });
+  });
+
 });

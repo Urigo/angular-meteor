@@ -19,6 +19,12 @@ var AngularMeteorObject = function (collection, id, options, $meteorSubscribe, $
 
 AngularMeteorObject.prototype = {};
 
+AngularMeteorObject.prototype.raw = function () {
+  var self = this;
+
+  return angular.copy(_.omit(self, self.$$internalProps));
+};
+
 AngularMeteorObject.prototype.subscribe = function () {
   var self = this;
   self.$meteorSubscribe.subscribe.apply(this, arguments);
@@ -91,7 +97,7 @@ AngularMeteorObject.prototype.stop = function stop() {
 
 // A list of internals properties to not watch for, nor pass to the Document on update and etc.
 AngularMeteorObject.prototype.$$internalProps = [
-  'save', 'reset', '$$collection', '$$options', '$meteorSubscribe', '$$id', '$q', '$$hashkey', '$$internalProps', 'subscribe', 'stop', 'autorunComputation', 'unregisterAutoBind', 'unregisterAutoDestroy'
+  'save', 'reset', '$$collection', '$$options', '$meteorSubscribe', '$$id', '$q', '$$hashkey', '$$internalProps', 'subscribe', 'stop', 'autorunComputation', 'unregisterAutoBind', 'unregisterAutoDestroy', 'raw'
 ];
 
 
