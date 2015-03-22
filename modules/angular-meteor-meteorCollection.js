@@ -204,7 +204,9 @@ AngularMeteorCollection.prototype.stop = function () {
   if (this.unregisterAutoBind)
     this.unregisterAutoBind();
 
-  this.observeHandle.stop();
+  if (this.observeHandle)
+    this.observeHandle.stop();
+
   while (this.length > 0) {
     this.pop();
   }
