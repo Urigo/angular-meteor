@@ -173,21 +173,21 @@ describe('Given the $meteorObject factory', function() {
 
   });
 
-  describe('when calling raw()', function() {
+  describe('when calling getRawObject()', function() {
     it('should return the raw object', function() {
 
       var myCol = new Meteor.Collection();
 
       var result = $meteorObject(myCol, 1);
 
-      var raw = result.raw();
+      var raw = result.getRawObject();
 
       angular.forEach(result.$$internalProps, function(prop) {
         expect(typeof raw[prop]).toEqual('undefined');
       });
 
-      // Double check .raw() is removed too.
-      expect(typeof raw.raw).toEqual('undefined');
+      // Double check .getRawObject() is removed too.
+      expect(typeof raw.getRawObject).toEqual('undefined');
 
       expect(raw._id).toEqual(1);
     });
