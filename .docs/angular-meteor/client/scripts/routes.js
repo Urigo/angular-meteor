@@ -45,6 +45,10 @@ angular.module("meteor-angular-docs").config(['$urlRouterProvider', '$stateProvi
           url: '/AngularMeteorCollection',
           template: UiRouter.template('api.AngularMeteorCollection.html')
         })
+        .state('api.AngularMeteorObject', {
+          url: '/AngularMeteorObject',
+          template: UiRouter.template('api.AngularMeteorObject.html')
+        })
         .state('api.subscribe', {
           url: '/subscribe',
           template: UiRouter.template('api.subscribe.html')
