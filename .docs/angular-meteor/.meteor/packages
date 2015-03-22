@@ -6,7 +6,8 @@
 meteor-platform
 autopublish
 insecure
-urigo:angular@0.6.0-alpha
+urigo:angular
+angularjs:angular-sanitize
 less
 simison:bootstrap3-less
 urigo:angular-ui-router@0.6.0
@@ -14,3 +15,5 @@ showdown
 linto:fontawesome
 
 mquandalle:bower
+
+urigo:angularmeteormarkdown

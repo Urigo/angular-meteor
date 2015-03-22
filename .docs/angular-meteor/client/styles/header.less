@@ -2,11 +2,11 @@
 
 header {
   background-color: @background-color;
-  padding: 2rem;
+  padding: 1rem;
 
   .navbar-brand {
     margin: auto 0;
-    padding: 1rem;
+    padding: .5rem;
     height: auto;
 
     img {
@@ -40,6 +40,17 @@ header {
           color: #000000;
         }
       }
+    }
+  }
+
+  .dropdown-menu {
+    border-radius: @border-radius;
+
+    li a {
+      padding: .4rem 20px;
+      transition: background-color .2s;
+      box-shadow: 0px 0px 29px fade(@second-background-color, 10%) inset;
+      border-bottom: 1px solid @second-background-color;
     }
   }
 }

@@ -6,10 +6,10 @@
       <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
     </a>
     <ul class="btn-group tutorial-nav">
-      <a href="/tutorial-02/step_09"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
+      <a href="/tutorial/step_09"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
       <a href="http://socially-step10.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
       <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_09...step_10"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
-      <a href="/tutorial-02/step_11"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
+      <a href="/tutorial/step_11"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
     </ul>
 
   </div>
@@ -18,7 +18,7 @@
     <h1>Step 10 - Deploying your app</h1>
   </div>
   <div class="video-tutorial col-md-4">
-    <iframe width="300" height="169" src="//www.youtube.com/embed/FusQ1D8jy3o?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd" frameborder="0" allowfullscreen></iframe>
+    <iframe width="300" height="169" src="//www.youtube.com/embed/2WnZBKv9H9o?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd" frameborder="0" allowfullscreen></iframe>
   </div>
 
   <do-nothing class="col-md-12">
@@ -27,7 +27,8 @@
 Now that we have a working app, we can go public!
 Meteor makes it really easy to put an app up on the internet where other people can use it.
 
-Simply type in the command line of your app directory:
+Simply type in the command line of your app directory
+(replace 'myappname' with your own name and make sure there is no existing site already deployed in the same address):
 
     meteor deploy myappname.meteor.com
 
@@ -48,10 +49,10 @@ Now, we'll take a detour to see that while we were building a web app, we also c
     </do-nothing>
 <div class="col-md-12">
     <ul class="btn-group tutorial-nav">
-      <a href="/tutorial-02/step_09"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
+      <a href="/tutorial/step_09"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
       <a href="http://socially-step10.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
       <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_09...step_10"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
-      <a href="/tutorial-02/step_11"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
+      <a href="/tutorial/step_11"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
     </ul>
     </div>
   </div>

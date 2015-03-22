@@ -17,7 +17,7 @@
     <h1>Step 4 - Adding/removing objects and Angular event handling</h1>
   </div>
   <div class="video-tutorial col-md-4">
-    <iframe width="300" height="169" src="//www.youtube.com/embed/aLkjOL0Yyo4?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd" frameborder="0" allowfullscreen></iframe>
+    <iframe width="300" height="169" src="//www.youtube.com/embed/ijKsWglJI0k?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd" frameborder="0" allowfullscreen></iframe>
   </div>
 
   <do-nothing class="col-md-12">

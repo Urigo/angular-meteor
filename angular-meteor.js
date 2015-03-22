@@ -22,37 +22,36 @@ angularMeteor.run(['$compile', '$document', '$rootScope', function ($compile, $d
         // to avoid re-runs.
         Tracker.nonreactive(function() {
           Tracker.afterFlush(function() {
-            if (Router.current().ready()) {
-               // Since onAfterAction runs always twice when a route has waitOn's subscriptions,
-               // we need to handle case when data is already loaded at the moment
-               // Tracker.afterFlush executes which means it will run twice with
-               // Router.current().ready equals true.
-               // That's we save state to an additional auxiliry variable _done.
-              if (!Router.current()._done) {
+            var route = Router.current();
+            if (route.ready()) {
+              // Since onAfterAction runs always twice when a route has waitOn's subscriptions,
+              // we need to handle case when data is already loaded at the moment
+              // Tracker.afterFlush executes which means it will run twice with
+              // Router.current().ready equals true.
+              // That's we save state to an additional auxiliry variable _done.
+              if (!route.state.get('__rendered')) {
                 // Checks if document's been compiled to the moment.
                 // If yes, compile only newly inserted parts.
-                if (Router.current()._docCompiled) {
-                  for (var prop in Router.current()._layout._regions) {
-                    var region = Router.current()._layout._regions[prop];
-                    var firstNode = region.view._domrange.firstNode();
-                    var lastNode = region.view._domrange.lastNode();
-                    $compile(firstNode)($rootScope);
-                    if (firstNode != lastNode) {
-                      $compile(lastNode)($rootScope);
+                if (route.state.get('__compiled')) {
+                  for (var prop in route._layout._regions) {
+                    var region = route._layout._regions[prop];
+                    var node = region.view._domrange.firstNode();
+                    while (node) {
+                       $compile(node)($rootScope);
+                       node = node.nextSibling;
                     }
                   }
                 } else {
                   $compile($document)($rootScope);
-                  Router.current()._docCompiled = true;
                 }
                 if (!$rootScope.$$phase) $rootScope.$apply();
-                Router.current()._done = true;  
+                route.state.set('__rendered', true);
               }
             } else {
                 // Compiles and applies scope for the first time when current route is not ready.
                 $compile($document)($rootScope);
                 if (!$rootScope.$$phase) $rootScope.$apply();
-                Router.current()._docCompiled = true;
+                route.state.set('__compiled', true);
              }
           });
         });
@@ -61,12 +60,29 @@ angularMeteor.run(['$compile', '$document', '$rootScope', function ($compile, $d
   }]);
 
 // Putting all services under $meteor service for syntactic sugar
-angularMeteor.service('$meteor', ['$meteorCollection', '$meteorObject', '$meteorMethods', '$meteorSession', '$meteorSubscribe', '$meteorUtils', '$meteorCamera',
-  function($meteorCollection, $meteorObject, $meteorMethods, $meteorSession, $meteorSubscribe, $meteorUtils, $meteorCamera){
+angularMeteor.service('$meteor', ['$meteorCollection', '$meteorObject', '$meteorMethods', '$meteorSession', '$meteorSubscribe', '$meteorUtils', '$meteorCamera', '$meteorUser',
+  function($meteorCollection, $meteorObject, $meteorMethods, $meteorSession, $meteorSubscribe, $meteorUtils, $meteorCamera, $meteorUser){
     this.collection = $meteorCollection;
     this.object = $meteorObject;
     this.subscribe = $meteorSubscribe.subscribe;
     this.call = $meteorMethods.call;
+    this.loginWithPassword = $meteorUser.loginWithPassword;
+    this.requireUser = $meteorUser.requireUser;
+    this.waitForUser = $meteorUser.waitForUser;
+    this.createUser = $meteorUser.createUser;
+    this.changePassword = $meteorUser.changePassword;
+    this.forgotPassword = $meteorUser.forgotPassword;
+    this.resetPassword = $meteorUser.resetPassword;
+    this.verifyEmail = $meteorUser.verifyEmail;
+    this.loginWithMeteorDeveloperAccount = $meteorUser.loginWithMeteorDeveloperAccount;
+    this.loginWithFacebook = $meteorUser.loginWithFacebook;
+    this.loginWithGithub = $meteorUser.loginWithGithub;
+    this.loginWithGoogle = $meteorUser.loginWithGoogle;
+    this.loginWithMeetup = $meteorUser.loginWithMeetup;
+    this.loginWithTwitter = $meteorUser.loginWithTwitter;
+    this.loginWithWeibo = $meteorUser.loginWithWeibo;
+    this.logout = $meteorUser.logout;
+    this.logoutOtherClients = $meteorUser.logoutOtherClients;
     this.session = $meteorSession;
     this.autorun = $meteorUtils.autorun;
     this.getCollectionByName = $meteorUtils.getCollectionByName;

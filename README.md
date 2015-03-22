@@ -3,9 +3,7 @@
 > The power of Meteor and the simplicity and eco-system of AngularJS
 
 ## Community - Thank you so much for making the [ng-conf 2015 talk](https://github.com/ng-conf/submissions-2015/pull/172) happen!
-Follow the talk here - <a href="http://www.ng-conf.org/schedule">
-<img src="http://lh3.googleusercontent.com/-LHJwKtNqcU0/UipDx8KHUnI/AAAAAAAAAH4/qeow7Kltot8/s620-no/ng-conf.png" width="50" height="50" />
-</a>
+[![ng-conf](http://img.youtube.com/vi/uFmf-DeCdEE/0.jpg)](https://www.youtube.com/embed/videoseries?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd)
 
 ## Quick start
 1. Install [Meteor](http://docs.meteor.com/#quickstart) `$ curl https://install.meteor.com | /bin/sh`
@@ -17,7 +15,7 @@ Follow the talk here - <a href="http://www.ng-conf.org/schedule">
 - [Getting started tutorial](https://angularjs.meteor.com/tutorial)
 - [Meteor package - urigo:angular](https://atmospherejs.com/urigo/angular)
 - [Roadmap - Trello board](https://trello.com/b/Wj9U0ulk/angular-meteor)
-- [Mailing list - Google group](https://groups.google.com/forum/#!forum/angular-meteor)
+- [Meteor Forums](https://forums.meteor.com/)
 
 ## Contributing
 We would love contributions in:
@@ -25,6 +23,7 @@ We would love contributions in:
 1. Code
 2. [Tutorial](http://angularjs.meteor.com/tutorial) - our goal with the tutorial is to add as many common tasks as possible. If you want to create and add your own chapter we would be happy to help you writing and adding it.
 3. [Roadmap](https://trello.com/b/Wj9U0ulk/angular-meteor) - you can add a card about want you want to see in the library or in the tutorial.
+4. I ([Urigo](https://github.com/urigo)) live around the world with one small bag, so another way of contributing can be by offering me a place to sleep somewhere interesting around the world that I have to see :) 
 
 ## Contributor Developer Setup
 
@@ -188,7 +187,7 @@ $rootScope.currentUser; // Currently logged in user and its data
 $rootScope.loggingIn; // true if a Meteor login method is currently in progress
 ```
 
-[More in step 8 of the tutorial](http://angularjs.meteor.com/tutorial-02/step_08)
+[More in step 8 of the tutorial](http://angularjs.meteor.com/tutorial/step_08)
 
 ### Meteor methods with promises
 
@@ -222,6 +221,7 @@ Similar packages have been developed by either the angular-meteor team and/or by
 - [netanelgilad:angular-sortable-view](https://github.com/netanelgilad/meteor-angular-sortable-view/) empowers angular-meteor with [angular-sortable-view](https://github.com/kamilkp/angular-sortable-view) module.
 - [netanelgilad:text-angular](https://github.com/netanelgilad/meteor-textAngular/) empowers angular-meteor with [textAngular](https://github.com/fraywing/textAngular) module.
 - [tonekk:angular-moment](https://github.com/tonekk/meteor-angular-moment) empowers angular-meteor with [angularMoment](https://github.com/urish/angular-moment) module.
+- [civilframe:angular-jade](https://github.com/civilframe/meteor-angular-jade) enables the usage of JADE files in place of HTML files. Files ending in *.ng.jade and will be compiled to *.html.
 
 Feel free to make angular-meteor module smart packages, and please contact [urigo](https://github.com/urigo) if you would like your package to be listed here as well. Be sure to be compatible with Meteor 0.9.0 and above and it's packaging system!
 

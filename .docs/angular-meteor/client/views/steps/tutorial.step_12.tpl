@@ -5,16 +5,22 @@
       <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
     </a>
     <ul class="btn-group tutorial-nav">
-      <a href="/tutorial-02/step_11"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
+      <a href="/tutorial/step_11"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
       <a href="http://socially-step12.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
       <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_11...step_12"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
-      <a href="/tutorial-02/step_13"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
+      <a href="/tutorial/step_13"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
     </ul>
 
-    <do-nothing>
+    <div class="col-md-8">
+      <h1>Step 12 - Search, sort, pagination and reactive vars</h1>
+    </div>
+    <div class="video-tutorial col-md-4">
+      <iframe width="300" height="169" src="//www.youtube.com/embed/8XQI2XpyH18?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <do-nothing class="col-md-12">
   <btf-markdown>
 
-# Step 12 - Search, sort, pagination and reactive vars
 
 Now we are dealing with a few parties.
 But we need to support also a large number of parties.
@@ -29,12 +35,12 @@ if we are in page 3, but we change how we sort the collection, we should get dif
 a search, there might be not enough results for 3 pages.
 
 For AngularJS developers, this chapter will show how powerful Meteor is.
-In the official AngularJS tutorial, we add sorting and search the works only on the client side, which is real world scenarios are not so helpful.
+In the official AngularJS tutorial, we add sorting and search the works only on the client side, which in real world scenarios are not so helpful.
 Now, in this chapter we are going to perform a real-time search, sort and paginate that will run all the way to the server.
 
 # angular-meteor pagination support
 
-So we want to achieve with angular-meteor is server-based reactive pagination.
+What we want to achieve with angular-meteor is server-based reactive pagination.
 That is no simple task, but using the angular-meteor it could make your life a lot simpler.
 
 To achieve server-based reactive pagination we need to have support for pagination in the server as well as in the client.
@@ -63,14 +69,14 @@ contain properties like `skip`, `sort` and `limit` which we will shortly use our
 
 Let's get back to our client code. We now need to change our subscribe call with options we want to set for pagination.
 What are those parameters that we want to set on the options argument? That is a good question. In order to have pagination in our
-parties list we will need to save the current page, the number of parties per page and the sort order. So let's add this parameters to our scope
+parties list we will need to save the current page, the number of parties per page and the sort order. So let's add these parameters to our scope
 in the top of the controller in client/controllers/partiesList.js file.
 
     $scope.page = 1;
     $scope.perPage = 3;
     $scope.sort = { name: 1 };
 
-That's cool, but let's do something with these variables expect define them. So where we want to use them is when we call the subscribe method.
+That's cool, but let's do something with these variables except defining them. So where we want to use them is when we call the subscribe method.
 But right now, we are subscribing to the collection in the short form which doesn't get parameters:
 
     $scope.parties = $meteor.collection(Parties).subscribe('parties');
@@ -423,7 +429,7 @@ First thing, we need to catch the event of the controller closing by adding the 
 
     });
 
-Now we need to get the subscription handle with we will use to stop the subscription.
+Now we need to get the subscription handle which will be used later to stop the subscription.
 
 We will need to call the $meteor.subscribe it self instead of the shortcut we are using right now.
 
@@ -459,10 +465,10 @@ Now we have full pagination with search and sorting for client and server side w
     </do-nothing>
 <div class="col-md-12">
     <ul class="btn-group tutorial-nav">
-      <a href="/tutorial-02/step_11"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
+      <a href="/tutorial/step_11"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
       <a href="http://socially-step12.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
       <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_11...step_12"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
-      <a href="/tutorial-02/step_13"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
+      <a href="/tutorial/step_13"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
     </ul>
     </div>
   </div>

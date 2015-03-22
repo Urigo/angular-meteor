@@ -5,16 +5,24 @@
       <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
     </a>
     <ul class="btn-group tutorial-nav">
-      <a href="/tutorial-02/step_10"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
+      <a href="/tutorial/step_10"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
       <a href="http://socially-step11.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
       <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_10...step_11"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
-      <a href="/tutorial-02/step_12"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
+      <a href="/tutorial/step_12"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
     </ul>
 
-    <do-nothing>
+    <div class="col-md-8">
+      <h1>Step 11 - Running your app on Android or iOS with PhoneGap</h1>
+    </div>
+    <div class="video-tutorial col-md-4">
+      <iframe width="300" height="169" src="//www.youtube.com/embed/5vZOI2fi13U?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <do-nothing class="col-md-12">
   <btf-markdown>
 
-# Step 11 - Running your app on Android or iOS with PhoneGap
+
+
 
 So far, we've been building our app and testing only in a web browser,
 but Meteor has been designed to work across different platforms - your socially website can become an iOS or Android app in just a few commands.
@@ -49,7 +57,7 @@ from index.html
 ## PhoneGap
 
 Meteor makes it easy to set up all of the tools required to build mobile apps, but downloading all of the programs can take a while - for Android the download is about 300MB and for iOS you need to install Xcode which is about 2GB.
-If you don't want to wait to download these tools, feel free to skip to the [next step](/tutorial-02/step_12).
+If you don't want to wait to download these tools, feel free to skip to the [next step](/tutorial/step_12).
 
 ### Running on an Android emulator
 
@@ -135,10 +143,10 @@ More more detailed information:
     </do-nothing>
 <div class="col-md-12">
     <ul class="btn-group tutorial-nav">
-      <a href="/tutorial-02/step_10"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
+      <a href="/tutorial/step_10"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
       <a href="http://socially-step11.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
       <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_10...step_11"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
-      <a href="/tutorial-02/step_12"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
+      <a href="/tutorial/step_12"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
     </ul>
     </div>
   </div>
