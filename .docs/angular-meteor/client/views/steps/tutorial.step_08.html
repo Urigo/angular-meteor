@@ -14,7 +14,7 @@
   </div>
 
   <div class="col-md-8">
-    <h1>Step 8 - User accounts and permissions</h1>
+    <h1>Step 8 - User accounts, authentication and permissions</h1>
   </div>
   <div class="video-tutorial col-md-4">
     <iframe width="300" height="169" src="//www.youtube.com/embed/PgS-IAMn9Ig?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd" frameborder="0" allowfullscreen></iframe>
@@ -190,6 +190,56 @@ There are more social login services you can use:
 * Twitter
 * Weibo
 * Meteor developer account
+
+
+
+# Authentication With Routers
+
+Now that we prevented authorized users from changing parties they don't own,
+there is no reason for them to go into the party details page.
+
+We can easily prevent them from going into that view using our routes.
+
+angular-meteor provide us with two functions that help us to do that:
+
+* [waitForUser](/api/auth) - returns a promise with the current user if it's logged in or null if it's not.
+* [requireUser](/api/auth) - same as waitForUser but in case the user is not logged in it rejects the promise instead of solving it with null.
+
+So let's add requireUser to our route in partyDetails so that it will prevent users from going inside there.
+
+We are going to use the [resolve](https://github.com/angular-ui/ui-router/wiki#resolve) object of ui-router and ngRoute:
+
+__`client/routes.js`:__
+
+    .state('partyDetails', {
+      url: '/parties/:partyId',
+      templateUrl: 'client/parties/views/party-details.ng.html',
+      controller: 'PartyDetailsCtrl',
+      resolve: {
+        "currentUser": ["$meteor", function($meteor){
+          return $meteor.requireUser();
+        }]
+      }
+    });
+
+Now, if a user is not logged in to the system, it won't be able to access that route.
+
+We also want to handle that scenario and redirect the user to the main page.
+
+on the top of the routes file, let's add these lines:
+
+
+__`client/routes.js`:__
+
+    angular.module("socially").run(["$rootScope", "$location", function($rootScope, $location) {
+      $rootScope.$on("stateChangeError", function(event, next, previous, error) {
+        // We can catch the error thrown when the $requireUser promise is rejected
+        // and redirect the user back to the main page
+        if (error === "AUTH_REQUIRED") {
+          $location.path("/parties");
+        }
+      });
+    }]);
 
 # Summary
 

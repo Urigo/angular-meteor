@@ -61,9 +61,9 @@ angular.module("meteor-angular-docs").config(['$urlRouterProvider', '$stateProvi
           url: '/methods',
           template: UiRouter.template('api.methods.html')
         })
-        .state('api.user', {
-          url: '/user',
-          template: UiRouter.template('api.user.html')
+        .state('api.auth', {
+          url: '/auth',
+          template: UiRouter.template('api.auth.html')
         })
         .state('api.getReactively', {
           url: '/getReactively',

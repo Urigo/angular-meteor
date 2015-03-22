@@ -27,7 +27,8 @@
 Now that we have a working app, we can go public!
 Meteor makes it really easy to put an app up on the internet where other people can use it.
 
-Simply type in the command line of your app directory:
+Simply type in the command line of your app directory
+(replace 'myappname' with your own name and make sure there is no existing site already deployed in the same address):
 
     meteor deploy myappname.meteor.com
 
