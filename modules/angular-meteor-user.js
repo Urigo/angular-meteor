@@ -59,7 +59,7 @@ angularMeteorUser.service('$meteorUser', ['$rootScope', '$meteorUtils', '$q',
 
       var deferred = $q.defer();
 
-      Meteor.createUser(options, function(err){
+      Accounts.createUser(options, function(err){
         if (err)
           deferred.reject(err);
         else
@@ -73,7 +73,7 @@ angularMeteorUser.service('$meteorUser', ['$rootScope', '$meteorUtils', '$q',
 
       var deferred = $q.defer();
 
-      Meteor.changePassword(oldPassword, newPassword, function(err){
+      Accounts.changePassword(oldPassword, newPassword, function(err){
         if (err)
           deferred.reject(err);
         else
@@ -87,7 +87,7 @@ angularMeteorUser.service('$meteorUser', ['$rootScope', '$meteorUtils', '$q',
 
       var deferred = $q.defer();
 
-      Meteor.forgotPassword(options, function(err){
+      Accounts.forgotPassword(options, function(err){
         if (err)
           deferred.reject(err);
         else
@@ -101,7 +101,7 @@ angularMeteorUser.service('$meteorUser', ['$rootScope', '$meteorUtils', '$q',
 
       var deferred = $q.defer();
 
-      Meteor.resetPassword(token, newPassword, function(err){
+      Accounts.resetPassword(token, newPassword, function(err){
         if (err)
           deferred.reject(err);
         else
@@ -115,7 +115,7 @@ angularMeteorUser.service('$meteorUser', ['$rootScope', '$meteorUtils', '$q',
 
       var deferred = $q.defer();
 
-      Meteor.verifyEmail(token, function(err){
+      Accounts.verifyEmail(token, function(err){
         if (err)
           deferred.reject(err);
         else
