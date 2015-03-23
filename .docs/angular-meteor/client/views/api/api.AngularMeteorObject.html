@@ -61,6 +61,13 @@ Returns a promise with an error in case for an error or a number of successful d
 
 Reset the current value of the object to the one in the server.
 
+<br>
+<h3><p><code><span class="pln">getRawObject();</span></code></p></h3>
+
+Returns a copy of the AngularMeteorObject with all the AngularMeteor-specific
+internal properties removed. The returned object is then safe to use as a parameter
+for <a href="/api/methods">method calls</a>, or anywhere else where the data needs
+to be converted to JSON.
 
 ----
 
@@ -93,6 +100,19 @@ Reset the current value of the object to the one in the server.
 
     Parties.attachSchema(PartySchema);
 
+    Meteor.methods({
+      doFancyStuff: function(party) {
+        var id = party._id;
+        // Do something fancy, like link with partygoers.
+
+        party.description = "Set to fancy description!";
+
+        delete party._id;
+
+        Parties.update({_id: id}, {$set: { party }});
+      }
+    });
+
     if (Meteor.isClient) {
 
       angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
@@ -121,6 +141,10 @@ Reset the current value of the object to the one in the server.
             $scope.partyNotAuto.reset();
           };
 
+          // Call a method that does fancy stuff to the object.
+          $scope.callMethod = function() {
+            $meteor.call('doFancyStuff', $scope.party.getRawObject());
+          };
       }]);
     }
 
