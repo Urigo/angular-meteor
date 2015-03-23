@@ -1,7 +1,7 @@
 {
   "name": "angular-meteor",
   "main": "angular-meteor.js",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "homepage": "https://github.com/Urigo/angular-meteor",
   "authors": [
     "Uri Goldshtein <uri.goldshtein@gmail.com>"
