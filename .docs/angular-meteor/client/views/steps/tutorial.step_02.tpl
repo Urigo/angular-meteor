@@ -124,7 +124,7 @@ going through minification.
 
 angular-meteor uses that process automatically. all you need to do is to change your .js files endings to .ng.js
 
-then you can write your dependency injection like that:
+then you can write your dependency injection like this:
 
     angular.module("socially").controller("PartiesListCtrl",
       function($scope){
