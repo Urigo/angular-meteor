@@ -110,6 +110,26 @@ The concept of a scope in Angular is crucial. A scope can be seen as the glue wh
 
 To learn more about Angular scopes, see the [angular scope documentation](https://docs.angularjs.org/api/ng/type/$rootScope.Scope).
 
+# ng-annotate and .ng.js
+
+As you can see, when we declared the controller, we used strings for [dependency annotations](https://docs.angularjs.org/guide/di#dependency-annotation) that avoids minification problems:
+
+    angular.module("socially").controller("PartiesListCtrl", ['$scope',
+      function($scope){
+        // ...
+    }]);
+
+There is a very popular Angular tool that's called [ng-annotate](https://github.com/olov/ng-annotate) that takes care of that for us so we can write regular code like it's not
+going through minification.
+
+angular-meteor uses that process automatically. all you need to do is to change your .js files endings to .ng.js
+
+then you can write your dependency injection like that:
+
+    angular.module("socially").controller("PartiesListCtrl",
+      function($scope){
+        // ...
+    });
 
 # Experiments
 
