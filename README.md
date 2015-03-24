@@ -215,7 +215,7 @@ Sometimes an extra logic is needed to include the libraries to Meteor, for that 
 
 Similar packages have been developed by either the angular-meteor team and/or by third parties. The following is a non-exhaustive list of these packages:
 
-- [urigo:ionic](https://github.com/Urigo/meteor-ionic) [Ionic Framework](http://ionicframework.com/) on top of Meteor.
+- [driftyco:ionic](https://atmospherejs.com/driftyco/ionic) [Ionic Framework](http://ionicframework.com/) on top of Meteor. Official release.
 - [netanelgilad:angular-file-upload](https://github.com/netanelgilad/meteor-angular-file-upload) empowers angular-meteor with [angular-file-upload](https://github.com/nervgh/angular-file-upload) module.
 - [davidyaha:smart-table](https://github.com/davidyaha/meteor-smart-table) empowers angular-meteor with [smart-table](https://github.com/lorenzofox3/Smart-Table) module.
 - [netanelgilad:angular-sortable-view](https://github.com/netanelgilad/meteor-angular-sortable-view/) empowers angular-meteor with [angular-sortable-view](https://github.com/kamilkp/angular-sortable-view) module.
