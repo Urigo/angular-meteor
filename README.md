@@ -13,6 +13,7 @@
 ## Resources
 - [Change Log, updates and breaking changes](https://github.com/Urigo/angular-meteor/releases)
 - [Getting started tutorial](https://angularjs.meteor.com/tutorial)
+- [Example application](https://github.com/Urigo/meteor-angular-socially) (Final version of the tutorial)
 - [Meteor package - urigo:angular](https://atmospherejs.com/urigo/angular)
 - [Roadmap - Trello board](https://trello.com/b/Wj9U0ulk/angular-meteor)
 - [Meteor Forums](https://forums.meteor.com/)
