@@ -134,6 +134,7 @@ __`index.html`:__
 
       <btf-markdown>
 
+But if you load this in your browser, you'll see nothing. That's because we still need to create the actual Angular app, which we'll do next.
 
 # AngularJS app
 
