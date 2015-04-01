@@ -109,7 +109,7 @@ Please note that the names of the templates to Angular will be their URL as Mete
 </div>
 ```
 
-[More in step 2 of the tutorial](http://angularjs.meteor.com/tutorial/step_02)
+[More in step 0 of the tutorial](http://angularjs.meteor.com/tutorial/step_00)
 
 ### Using Meteor Collections
 
@@ -139,19 +139,19 @@ When adding controllers and the likes, remember to use [Dependency Injection](ht
 
 ```js
 app.controller('TodoCtrl', ['$scope', '$meteor',
-function($scope, $meteor) {
+  function($scope, $meteor) {
 
     $scope.todos = $meteor.collection(Todos);
 
     $scope.addTodo = function() {
-        $scope.todos.push({text:$scope.todoText, done:false});
-        $scope.todoText = '';
+      $scope.todos.push({text:$scope.todoText, done:false});
+      $scope.todoText = '';
     };
 
     $scope.saveTodo = function(){
-        $scope.todos.save($scope.newTodo);
+      $scope.todos.save($scope.newTodo);
     };
-}
+  }
 ]);
 ```
 
@@ -179,20 +179,15 @@ Since 0.6 release, angular-meteor relies more heavily on Angular's default templ
 
 Although it is possible to combine the two systems for including templates, using one of them to the furthest extent possible helps us avoid the recipe for headaches that is unnecessarily deep template hierarchies.
 
-### User
+### User Authentication
 
-angular-meteor provides two $rootScope variables to support Meteor.user when working with Meteor's accounts package. [Documentation](http://angularjs.meteor.com/api/user).
-
-```js
-$rootScope.currentUser; // Currently logged in user and its data
-$rootScope.loggingIn; // true if a Meteor login method is currently in progress
-```
+angular-meteor provides complete for the [Meteor accounts system](http://docs.meteor.com/#/full/accounts_api). more details here -  [Documentation](http://angularjs.meteor.com/api/user).
 
 [More in step 8 of the tutorial](http://angularjs.meteor.com/tutorial/step_08)
 
 ### Meteor methods with promises
 
-[$meteor.call](http://angularjs.meteor.com/api/methods) calls a Meteor method and returns a promise.
+[$meteor.call](http://angularjs.meteor.com/api/methods) calls a [Meteor method](http://docs.meteor.com/#/full/meteor_methods) and returns a promise.
 
 ```js
 $meteor.call('addUser', username).then(function (data) {
@@ -209,12 +204,7 @@ $meteor.session('counter').bind($scope, 'counter');
 ```
 
 ### Additional packages
-
-To add AngularJS libraries from the community just use the [meteor-bower](https://github.com/mquandalle/meteor-bower) package.
-
-Sometimes an extra logic is needed to include the libraries to Meteor, for that you can create a Meteor package for them.
-
-Similar packages have been developed by either the angular-meteor team and/or by third parties. The following is a non-exhaustive list of these packages:
+The following is a non-exhaustive list of Meteor packages common Angular libraries:
 
 - [urigo:ionic](https://atmospherejs.com/urigo/ionic) [Ionic Framework](http://ionicframework.com/) on top of Meteor. Official release.
 - [netanelgilad:angular-file-upload](https://github.com/netanelgilad/meteor-angular-file-upload) empowers angular-meteor with [angular-file-upload](https://github.com/nervgh/angular-file-upload) module.
@@ -224,7 +214,7 @@ Similar packages have been developed by either the angular-meteor team and/or by
 - [tonekk:angular-moment](https://github.com/tonekk/meteor-angular-moment) empowers angular-meteor with [angularMoment](https://github.com/urish/angular-moment) module.
 - [civilframe:angular-jade](https://github.com/civilframe/meteor-angular-jade) enables the usage of JADE files in place of HTML files. Files ending in *.ng.jade and will be compiled to *.html.
 
-Feel free to make angular-meteor module smart packages, and please contact [urigo](https://github.com/urigo) if you would like your package to be listed here as well. Be sure to be compatible with Meteor 0.9.0 and above and it's packaging system!
+Feel free to make more Angular packages and add them to that list as well.
 
 ### Acknowledgement
 
