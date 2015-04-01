@@ -23,7 +23,7 @@ We would love contributions in:
 
 1. Code
 2. [Tutorial](http://angularjs.meteor.com/tutorial) - our goal with the tutorial is to add as many common tasks as possible. If you want to create and add your own chapter we would be happy to help you writing and adding it.
-3. [Roadmap](https://trello.com/b/Wj9U0ulk/angular-meteor) - you can add a card about want you want to see in the library or in the tutorial.
+3. [Roadmap](https://trello.com/b/Wj9U0ulk/angular-meteor) - you can add a card about what you want to see in the library or in the tutorial.
 4. I ([Urigo](https://github.com/urigo)) live around the world with one small bag, so another way of contributing can be by offering me a place to sleep somewhere interesting around the world that I have to see :) 
 
 ## Contributor Developer Setup
@@ -71,7 +71,7 @@ If you have a module called myModule, you can initialize your app like you would
 var myModule = angular.module('myModule', ['angular-meteor']);
 ```
 
-You don't need to bootstrap the application manually, simply specifying the `ng-app` attribute on a container element will do (*Meteor currently doesn't allow attributes to be set on the &lt;body&gt;)*.
+You don't need to bootstrap the application manually, simply specifying the `ng-app` attribute on a container element will do.
 
 [More in step 0 in the tutorial](http://angularjs.meteor.com/tutorial/step_00)
 
