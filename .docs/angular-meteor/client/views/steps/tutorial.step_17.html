@@ -1,20 +1,20 @@
-<template name="tutorial.step_13.html">
+<template name="tutorial.step_17.html">
   <div>
-    <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/steps/tutorial.step_13.html"
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/steps/tutorial.step_17.html"
        class="btn btn-default btn-lg improve-button">
       <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
     </a>
     <ul class="btn-group tutorial-nav">
-      <a href="/tutorial/step_12"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
-      <a href="http://socially-step13.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
-      <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_12...step_13"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
-      <a href="/tutorial/step_14"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
+      <a href="/tutorial/step_16"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
+      <a href="http://socially-step17.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
+      <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_16...step_17"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
+      <a href="/tutorial/step_18"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
     </ul>
 
     <do-nothing>
       {{#markdown}}
 
-# Step 13 - CSS, LESS and Bootstrap
+# Step 17 - CSS, LESS and Bootstrap
 
 Meteor has a great support for CSS.
 
@@ -58,12 +58,8 @@ Right now the most popular one is [Bootstrap](http://getbootstrap.com/) so we ar
 
 Let's add Bootstrap Meteor package to our project:
 
-    meteor add nemo64:bootstrap
+    meteor add twbs:bootstrap
 
-
-and create an empty custom.bootstrap.json file in the 'styles' folder.
-
-Run the app and then visit the custom.bootstrap.json again. change everything in false to true.
 
 Now let's start organizing by putting the Home link and the login buttons inside a navbar and the rest of the content inside a Bootstrap .container class.
 
@@ -116,7 +112,7 @@ The first thing we need to do in a new LESS file is to import the main file into
 Now we can start writing specific LESS code inside that file.
 
 For the rest of the styling changes please take a look at the diff between the steps here:
-[Code Diff](https://github.com/Urigo/meteor-angular-socially/compare/step_12...step_13)
+[Code Diff](https://github.com/Urigo/meteor-angular-socially/compare/step_16...step_17)
 
 
 # Summary
@@ -127,10 +123,10 @@ So we learned how to use CSS, LESS and Bootstrap in Meteor.
     </do-nothing>
 
     <ul class="btn-group tutorial-nav">
-      <a href="/tutorial/step_12"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
-      <a href="http://socially-step13.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
-      <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_12...step_13"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
-      <a href="/tutorial/step_14"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
+      <a href="/tutorial/step_16"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
+      <a href="http://socially-step17.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
+      <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_16...step_17"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
+      <a href="/tutorial/step_18"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
     </ul>
   </div>
 </template>
