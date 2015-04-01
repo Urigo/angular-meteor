@@ -172,12 +172,18 @@ You can include Meteor's native templates with the [meteor-include](http://angul
 
 <meteor-include src='todoList'></meteor-include>
 ```
+#### Passing arguments to meteor-include
+To pass parameters to a meteor-include directive, create a Blaze template that includes the template you want to include with parameters and include that template with meteor-include:
 
+     <template name="quickFormWithParameters">
+       {{> quickForm collection="Books" id="insertBookForm" type="insert"}}
+     </template>
+     
+     <meteor-include src="quickFormWithParameters">
+     
 #### Caveat regarding &lt;meteor-include&gt;
 
 Since 0.6 release, angular-meteor relies more heavily on Angular's default templating system and it is now usually recommended that you use `ng-include` over `meteor-include`. This is because you can't use Angular's template delimiters directly within Meteor templates and you would still need to use an `ng-include` directive to include any Angular template markup in your Meteor templates.
-
-Although it is possible to combine the two systems for including templates, using one of them to the furthest extent possible helps us avoid the recipe for headaches that is unnecessarily deep template hierarchies.
 
 ### User Authentication
 
