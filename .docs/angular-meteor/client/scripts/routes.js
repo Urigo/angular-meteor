@@ -173,7 +173,6 @@ angular.module("meteor-angular-docs").config(['$urlRouterProvider', '$stateProvi
 
  .run(function($rootScope) {
    $rootScope.$on('$stateChangeSuccess', function() {
-       // window.scrollTo(0, 0);
-     document.body.scrollTop = 0;
+     window.scrollTo(0, 0);
    })
  })
