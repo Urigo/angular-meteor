@@ -226,8 +226,9 @@ angularMeteorCollections.factory('$meteorCollection', ['$q', '$meteorSubscribe',
       if (!(typeof reactiveFunc == "function")) {
         var cursorFunc = reactiveFunc.find;
         collection = angular.isDefined(collection) ? collection : reactiveFunc;
+        var originalCollection = reactiveFunc;
         reactiveFunc = function() {
-          return cursorFunc({});
+          return cursorFunc.apply(originalCollection, [{}]);
         }
       }
 
