@@ -4,7 +4,7 @@ var angularMeteorCollections = angular.module('angular-meteor.meteor-collection'
   ['angular-meteor.subscribe', 'angular-meteor.utils', 'diffArray']);
 
 
-var AngularMeteorCollection = function (cursor, $q, $meteorSubscribe, $meteorUtils, $rootScope, $timeout) {
+var AngularMeteorCollection = function (cursor, collection, $q, $meteorSubscribe, $meteorUtils, $rootScope, $timeout) {
 
   var self = [];
 
@@ -14,7 +14,7 @@ var AngularMeteorCollection = function (cursor, $q, $meteorSubscribe, $meteorUti
   self.__proto__.$rootScope = $rootScope;
   self.__proto__.$timeout = $timeout;
 
-  self.$$collection = $meteorUtils.getCollectionByName(cursor.collection.name);
+  self.$$collection = angular.isDefined(collection) ? collection : $meteorUtils.getCollectionByName(cursor.collection.name);
 
   return self;
 };
@@ -40,8 +40,6 @@ AngularMeteorCollection.prototype.save = function save(docs, useUnsetModifier) {
    */
   function upsertObject(item, $q) {
     var deferred = $q.defer();
-
-    item = angular.copy(item);
 
     if (item._id) { // Performs an update if the _id property is set.
       var item_id = item._id; // Store the _id in temporary variable
@@ -215,24 +213,26 @@ AngularMeteorCollection.prototype.stop = function () {
 
 angularMeteorCollections.factory('$meteorCollection', ['$q', '$meteorSubscribe', '$meteorUtils', '$rootScope', '$timeout', 'diffArray',
   function ($q, $meteorSubscribe, $meteorUtils, $rootScope, $timeout, diffArray) {
-    return function (reactiveFunc, auto) {
+    return function (reactiveFunc, auto, collection) {
       // Validate parameters
       if (!reactiveFunc) {
         throw new TypeError("The first argument of $meteorCollection is undefined.");
       }
-      if (!(typeof reactiveFunc == "function" || reactiveFunc instanceof Mongo.Collection)) {
-        throw new TypeError("The first argument of $meteorCollection must be a function or a Mongo.Collection.");
+      if (!(typeof reactiveFunc == "function" || angular.isFunction(reactiveFunc.find))) {
+        throw new TypeError("The first argument of $meteorCollection must be a function or a have a find function property.");
       }
       auto = auto !== false;
 
-      if (reactiveFunc instanceof Mongo.Collection) {
-        var collection = reactiveFunc;
+      if (!(typeof reactiveFunc == "function")) {
+        var cursorFunc = reactiveFunc.find;
+        collection = angular.isDefined(collection) ? collection : reactiveFunc;
+        var originalCollection = reactiveFunc;
         reactiveFunc = function() {
-          return collection.find({});
+          return cursorFunc.apply(originalCollection, [{}]);
         }
       }
 
-      var ngCollection = new AngularMeteorCollection(reactiveFunc(), $q, $meteorSubscribe, $meteorUtils, $rootScope, $timeout);
+      var ngCollection = new AngularMeteorCollection(reactiveFunc(), collection, $q, $meteorSubscribe, $meteorUtils, $rootScope, $timeout);
       var realOldItems;
 
       function setAutoBind() {
