@@ -9,6 +9,9 @@ Plugin.registerSourceHandler('ng.html', {
 }, function(compileStep) {
   var contents = compileStep.read().toString('utf8');
 
+  // Just parse the html to make sure it is correct before minifying
+  HTMLTools.parseFragment(contents);
+
   var results = 'angular.module(\'angular-meteor\').run([\'$templateCache\', function($templateCache) {' +
     // Since compileStep.inputPath uses backslashes on Windows, we need replace them
     // with forward slashes to be able to consistently include templates across platforms.
