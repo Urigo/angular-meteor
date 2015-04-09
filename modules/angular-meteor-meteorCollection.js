@@ -41,8 +41,6 @@ AngularMeteorCollection.prototype.save = function save(docs, useUnsetModifier) {
   function upsertObject(item, $q) {
     var deferred = $q.defer();
 
-    item = angular.copy(item);
-
     if (item._id) { // Performs an update if the _id property is set.
       var item_id = item._id; // Store the _id in temporary variable
       delete item._id; // Remove the _id property so that it can be $set using update.
