@@ -98,8 +98,20 @@ angularMeteorObject.factory('AngularMeteorObject', ['$q', '$meteorSubscribe', fu
 
 // A list of internals properties to not watch for, nor pass to the Document on update and etc.
   AngularMeteorObject.prototype.$$internalProps = [
-    'save', 'reset', '$$collection', '$$options', '$$id', '$$hashkey', '$$internalProps', 'subscribe', 'stop', 'autorunComputation', 'unregisterAutoBind', 'unregisterAutoDestroy', 'getRawObject'
+    'save', 'reset', '$$collection', '$$options', '$$id', '$$hashkey', '$$internalProps', 'subscribe', 'stop', 'autorunComputation', 'unregisterAutoBind', 'unregisterAutoDestroy', 'getRawObject',
+    'collection', '_eventEmitter'
   ];
+
+  AngularMeteorObject.prototype.internalProps = function() {
+    var self = this;
+    var internalProps = [].concat(self.$$internalProps);
+    _.each(self, function(value, prop) {
+      if (angular.isFunction(self[prop])) {
+        internalProps.push(prop);
+      }
+    });
+    return internalProps;
+  };
 
   return AngularMeteorObject;
 }]);
@@ -110,9 +122,13 @@ angularMeteorObject.factory('$meteorObject', ['$rootScope', '$meteorUtils', 'Ang
     return function(collection, id, auto, options) {
 
       // Validate parameters
-      if (!(collection instanceof Meteor.Collection)) {
-        throw new TypeError("The first argument of $collection must be a Meteor.Collection object.");
+      if (!collection) {
+        throw new TypeError("The first argument of $meteorCollection is undefined.");
       }
+      if (!angular.isFunction(collection.findOne)) {
+        throw new TypeError("The first argument of $meteorCollection must be a function or a have a findOne function property.");
+      }
+
       auto = auto !== false; // Making auto default true - http://stackoverflow.com/a/15464208/1426570
 
       var data = new AngularMeteorObject(collection, id, options);
@@ -123,7 +139,7 @@ angularMeteorObject.factory('$meteorObject', ['$rootScope', '$meteorUtils', 'Ang
 
       if (auto) { // Deep watches the model and performs autobind.
         data.unregisterAutoBind = $rootScope.$watch(function(){
-          return _.omit(data, data.$$internalProps);
+          return _.omit(data, data.internalProps());
         }, function (newItem, oldItem) {
           if (newItem) {
             var newItemId = newItem._id;
