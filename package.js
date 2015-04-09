@@ -1,7 +1,7 @@
 Package.describe({
   name: "urigo:angular",
   summary: "The simplest no-conflict way to use AngularJS with Meteor, Meteorite and Atmosphere Smart Packages.",
-  version: "0.8.2",
+  version: "0.8.3",
   git: "https://github.com/Urigo/angular-meteor.git"
 });
 
@@ -10,6 +10,7 @@ Package.registerBuildPlugin({
   sources: [
     "plugin/handler.js"
   ],
+  use: ['html-tools'],
   npmDependencies : {
     'html-minifier' : '0.6.9'
   }
