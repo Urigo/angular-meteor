@@ -73,6 +73,10 @@ angular.module("meteor-angular-docs").config(['$urlRouterProvider', '$stateProvi
           url: '/meteor-include',
           template: UiRouter.template('api.meteor-include.html')
         })
+        .state('api.collectionfs', {
+          url: '/collectionfs',
+          template: UiRouter.template('api.collectionfs.html')
+        })
         .state('api.utils', {
           url: '/utils',
           template: UiRouter.template('api.utils.html')
