@@ -29,7 +29,7 @@ Plugin.registerSourceHandler('ng.html', {
     '}]);';
 
   compileStep.addJavaScript({
-    path : compileStep.inputPath,
+    path : compileStep.inputPath + '.js',
     data : results,
     sourcePath : compileStep.inputPath
   });
