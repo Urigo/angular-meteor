@@ -169,4 +169,10 @@ angular.module("meteor-angular-docs").config(['$urlRouterProvider', '$stateProvi
         });
 
     $locationProvider.html5Mode(true);
-  }]);
+  }])
+
+ .run(function($rootScope) {
+   $rootScope.$on('$stateChangeSuccess', function() {
+     window.scrollTo(0, 0);
+   })
+ })
