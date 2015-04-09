@@ -10,9 +10,15 @@ Plugin.registerSourceHandler('ng.js', {
     add: true
   });
 
-  compileStep.addJavaScript({
-    path : compileStep.inputPath,
-    data : ret.src,
-    sourcePath : compileStep.inputPath
-  });
+  if (ret.errors) {
+    throw new Error(ret.errors.join(': '));
+  }
+  else {
+    compileStep.addJavaScript({
+      path : compileStep.inputPath,
+      data : ret.src,
+      sourcePath : compileStep.inputPath
+    });
+  }
+
 });
