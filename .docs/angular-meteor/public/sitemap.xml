@@ -125,4 +125,8 @@
     <loc>http://angularjs.meteor.com/api/utils</loc>
     <priority>0.5</priority>
   </url>
+  <url>
+    <loc>http://angularjs.meteor.com/api/collectionfs</loc>
+    <priority>0.5</priority>
+  </url>
 </urlset>
