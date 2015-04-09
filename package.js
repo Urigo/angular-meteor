@@ -10,7 +10,7 @@ Package.registerBuildPlugin({
   sources: [
     "plugin/handler.js"
   ],
-  use: ['html-tools'],
+  use: ['html-tools@1.0.4'],
   npmDependencies : {
     'html-minifier' : '0.6.9'
   }
