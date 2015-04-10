@@ -167,6 +167,10 @@ angular.module("meteor-angular-docs").config(['$urlRouterProvider', '$stateProvi
           url: '/step_16',
           template: UiRouter.template('tutorial.step_16.html')
         })
+        .state('tutorial.step17', {
+          url: '/step_17',
+          template: UiRouter.template('tutorial.step_17.html')
+        })
         .state('tutorial.next_steps', {
           url: '/next_steps',
           template: UiRouter.template('tutorial.next_steps.html')
