@@ -242,7 +242,15 @@ angularMeteorCollections.factory('$meteorCollection', ['$q', '$meteorSubscribe',
               realOldItems = _.without(ngCollection, 'UPDATING_FROM_SERVER');
               return 'UPDATING_FROM_SERVER';
             }
-            return _.without(ngCollection, 'UPDATING_FROM_SERVER');
+            return _.without(_.map(ngCollection, function(object) {
+              var internalProps = ['collection'];
+              _.each(object, function (value, prop) {
+                if (angular.isFunction(object[prop])) {
+                  internalProps.push(prop);
+                }
+              });
+              return _.omit(object, internalProps);
+            }), 'UPDATING_FROM_SERVER');
           }, function (newItems, oldItems) {
             if (newItems == 'UPDATING_FROM_SERVER')
               return;
