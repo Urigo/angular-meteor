@@ -8,7 +8,10 @@ angularMeteorObject.factory('AngularMeteorObject', ['$q', '$meteorSubscribe', fu
       self = {};
     }
 
-    self.__proto__ = AngularMeteorObject.prototype;
+    var specificPrototype = {};
+    specificPrototype.__proto__ = AngularMeteorObject.prototype;
+
+    self.__proto__ = specificPrototype;
     self.$$collection = collection;
     self.$$options = options;
     self.$$id = id;
@@ -64,8 +67,7 @@ angularMeteorObject.factory('AngularMeteorObject', ['$q', '$meteorSubscribe', fu
       var serverValue = collection.findOne(id, options);
       var prop;
       if (serverValue) {
-        angular.extend(Object.getPrototypeOf(serverValue), AngularMeteorObject.prototype);
-        self.__proto__ = Object.getPrototypeOf(serverValue);
+        angular.extend(Object.getPrototypeOf(self), Object.getPrototypeOf(serverValue));
         for (prop in serverValue) {
           if (serverValue.hasOwnProperty(prop)) {
             self[prop] = serverValue[prop];
