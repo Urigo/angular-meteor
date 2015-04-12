@@ -151,23 +151,22 @@ AngularMeteorCollection.prototype.updateCursor = function (cursor) {
     $rootScope = self.$rootScope,
     $timeout = self.$timeout;
 
-  var appliedAsync = false;
+  var handler;
+  // Function applies async to combine multiple operations (savings, deletions etc)
+  // in one processing.
   function safeApply() {
+    if (handler) {
+      clearTimeout(handler);
+      handler = null;
+    }
     // Clearing the watch is needed so no updates are sent to server
     // while handling updates from the server
     self.UPDATING_FROM_SERVER = true;
-    if (!appliedAsync) {
-      appliedAsync = true;
-      // Applies here async to combine multiple operations (savings, deletions etc)
-      // in one processing.
-      $rootScope.$applyAsync(function() {
-        // Making sure we are setting to false only after one digest cycle and not before
-        $timeout(function() {
-          appliedAsync = false;
-          self.UPDATING_FROM_SERVER = false;
-        }, 0, false);
-      });
-    }
+    handler = setTimeout(function() {
+      $rootScope.$apply();
+      // Making sure we are setting to false only after one digest cycle and not before
+      self.UPDATING_FROM_SERVER = false;
+    });
   }
 
   // XXX - consider adding an option for a non-orderd result
