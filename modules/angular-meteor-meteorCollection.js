@@ -8,13 +8,9 @@ angularMeteorCollections.factory('AngularMeteorCollection', ['$q', '$meteorSubsc
 
     var AngularMeteorCollection = function (cursor, collection) {
 
-      function create (proto) {
-        function f () {}
-        f.prototype = proto;
-        return new f;
-      }
+      var self = [];
 
-      var self = create(AngularMeteorCollection.prototype);
+      angular.extend(Object.getPrototypeOf(self), AngularMeteorCollection.prototype);
       self.$$collection = angular.isDefined(collection) ? collection : $meteorUtils.getCollectionByName(cursor.collection.name);
 
       return self;
