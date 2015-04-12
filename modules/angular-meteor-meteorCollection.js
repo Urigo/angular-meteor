@@ -151,15 +151,23 @@ AngularMeteorCollection.prototype.updateCursor = function (cursor) {
     $rootScope = self.$rootScope,
     $timeout = self.$timeout;
 
+  var appliedAsync = false;
   function safeApply() {
     // Clearing the watch is needed so no updates are sent to server
     // while handling updates from the server
     self.UPDATING_FROM_SERVER = true;
-    if (!$rootScope.$$phase) $rootScope.$apply();
-    // Making sure we are setting to false only after one digest cycle and not before
-    $timeout(function(){
-      self.UPDATING_FROM_SERVER = false;
-    },0,false);
+    if (!appliedAsync) {
+      appliedAsync = true;
+      // Applies here async to combine multiple operations (savings, deletions etc)
+      // in one processing.
+      $rootScope.$applyAsync(function() {
+        // Making sure we are setting to false only after one digest cycle and not before
+        $timeout(function() {
+          appliedAsync = false;
+          self.UPDATING_FROM_SERVER = false;
+        }, 0, false);
+      });
+    }
   }
 
   // XXX - consider adding an option for a non-orderd result
@@ -238,7 +246,7 @@ angularMeteorCollections.factory('$meteorCollection', ['$q', '$meteorSubscribe',
       function setAutoBind() {
         if (auto) { // Deep watches the model and performs autobind.
           ngCollection.unregisterAutoBind = $rootScope.$watch(function () {
-            if (ngCollection.UPDATING_FROM_SERVER){
+            if (ngCollection.UPDATING_FROM_SERVER) {
               realOldItems = _.without(ngCollection, 'UPDATING_FROM_SERVER');
               return 'UPDATING_FROM_SERVER';
             }
