@@ -200,8 +200,8 @@ angularMeteorCollections.factory('AngularMeteorCollection', ['$q', '$meteorSubsc
 }]);
 
 
-angularMeteorCollections.factory('$meteorCollection', ['$q', 'AngularMeteorCollection', '$rootScope', 'diffArray',
-  function ($q, AngularMeteorCollection, $rootScope, diffArray) {
+angularMeteorCollections.factory('$meteorCollection', ['AngularMeteorCollection', '$rootScope', 'diffArray',
+  function (AngularMeteorCollection, $rootScope, diffArray) {
     return function (reactiveFunc, auto, collection) {
       // Validate parameters
       if (!reactiveFunc) {
