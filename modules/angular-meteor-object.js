@@ -2,21 +2,11 @@ var angularMeteorObject = angular.module('angular-meteor.object', ['angular-mete
 
 angularMeteorObject.factory('AngularMeteorObject', ['$q', '$meteorSubscribe', function($q, $meteorSubscribe) {
   var AngularMeteorObject = function (collection, id, options) {
-    var self = collection.findOne(id, options);
+    angular.extend(this, collection.findOne(id, options));
 
-    if (!self){
-      self = {};
-    }
-
-    var specificPrototype = {};
-    specificPrototype.__proto__ = AngularMeteorObject.prototype;
-
-    self.__proto__ = specificPrototype;
-    self.$$collection = collection;
-    self.$$options = options;
-    self.$$id = id;
-
-    return self;
+    this.$$collection = collection;
+    this.$$options = options;
+    this.$$id = id;
   };
 
   AngularMeteorObject.prototype = {};
@@ -109,15 +99,28 @@ angularMeteorObject.factory('AngularMeteorObject', ['$q', '$meteorSubscribe', fu
 
 angularMeteorObject.factory('$meteorObject', ['$rootScope', '$meteorUtils', 'AngularMeteorObject',
   function($rootScope, $meteorUtils, AngularMeteorObject) {
-    return function(collection, id, auto, options) {
+    // Used for prototype inheritance in browsers that don't support changing
+    // the proto property (like IE<11...)
+    function _inherit(a, b) {
+      function F() {}
+      F.prototype = b.prototype;
+      a.prototype = new F();
+    }
 
+    return function(collection, id, auto, options) {
       // Validate parameters
       if (!(collection instanceof Meteor.Collection)) {
         throw new TypeError("The first argument of $collection must be a Meteor.Collection object.");
       }
       auto = auto !== false; // Making auto default true - http://stackoverflow.com/a/15464208/1426570
 
-      var data = new AngularMeteorObject(collection, id, options);
+      var dataConstructor = function() {
+        AngularMeteorObject.apply(this, arguments);
+      };
+      _inherit(dataConstructor, AngularMeteorObject);
+      // Make the data inherit from another prototype object for collection
+      // helpers and other packages that change the prototype of object in collections.
+      var data = new dataConstructor(collection, id, options);
 
       data.autorunComputation = $meteorUtils.autorun($rootScope, function() {
         data.reset();
