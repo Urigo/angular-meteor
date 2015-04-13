@@ -86,14 +86,10 @@ angularMeteorObject.factory('AngularMeteorObject', ['$q', '$meteorSubscribe', fu
   ];
 
   var createAngularMeteorObject = function(collection, id, options){
-    var data = collection.findOne(id, options);
-
-    // If findOne returns undefined, create an empty object but
     // Make data not be an object so we can extend it to preserve
     // Collection Helpers and the like
-    if (!data){
-      data = new function SubObject() {};
-    }
+    var data = new function SubObject() {};
+    angular.extend(data, collection.findOne(id, options));
 
     data.$$collection = collection;
     data.$$options = options;
