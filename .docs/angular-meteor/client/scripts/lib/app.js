@@ -12,6 +12,6 @@ Meteor.startup(function () {
 
   ga('create', 'UA-60610351-1', 'auto');
 
-  angular.bootstrap(document, ['meteor-angular-docs']);
+  angular.bootstrap(document, ['meteor-angular-docs'], {strictDi: true});
 
 });
