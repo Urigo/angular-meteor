@@ -7,7 +7,10 @@ angularMeteorCollections.factory('AngularMeteorCollection', ['$q', '$meteorSubsc
   function($q, $meteorSubscribe, $meteorUtils, $rootScope, $timeout) {
 
     var AngularMeteorCollection = function (cursor, collection) {
-      this.$$collection = angular.isDefined(collection) ? collection : $meteorUtils.getCollectionByName(cursor.collection.name);
+      var self = [];
+      angular.extend(self, AngularMeteorCollection.prototype);
+      self.$$collection = angular.isDefined(collection) ? collection : $meteorUtils.getCollectionByName(cursor.collection.name);
+      return self;
     };
 
     AngularMeteorCollection.prototype = [];
