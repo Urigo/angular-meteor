@@ -3,21 +3,19 @@
 var angularMeteorCollections = angular.module('angular-meteor.meteor-collection',
   ['angular-meteor.subscribe', 'angular-meteor.utils', 'diffArray']);
 
+// The reason angular meteor collection is a factory function and not something
+// that inherit from array comes from here: http://perfectionkills.com/how-ecmascript-5-still-does-not-allow-to-subclass-an-array/
+// We went with the direct extensions approach
 angularMeteorCollections.factory('AngularMeteorCollection', ['$q', '$meteorSubscribe', '$meteorUtils', '$rootScope', '$timeout',
   function($q, $meteorSubscribe, $meteorUtils, $rootScope, $timeout) {
+    var AngularMeteorCollection = {};
 
-    var AngularMeteorCollection = function (cursor, collection) {
-      this.$$collection = angular.isDefined(collection) ? collection : $meteorUtils.getCollectionByName(cursor.collection.name);
-    };
-
-    AngularMeteorCollection.prototype = [];
-
-    AngularMeteorCollection.prototype.subscribe = function () {
+    AngularMeteorCollection.subscribe = function () {
       $meteorSubscribe.subscribe.apply(this, arguments);
       return this;
     };
 
-    AngularMeteorCollection.prototype.save = function save(docs, useUnsetModifier) {
+    AngularMeteorCollection.save = function save(docs, useUnsetModifier) {
       var self = this,
         collection = self.$$collection,
         promises = []; // To store all promises.
@@ -76,7 +74,7 @@ angularMeteorCollections.factory('AngularMeteorCollection', ['$q', '$meteorSubsc
       return $q.all(promises); // Returns all promises when they're resolved.
     };
 
-    AngularMeteorCollection.prototype.remove = function remove(keys) {
+    AngularMeteorCollection.remove = function remove(keys) {
       var self = this,
         collection = self.$$collection,
         promises = []; // To store all promises.
@@ -132,7 +130,7 @@ angularMeteorCollections.factory('AngularMeteorCollection', ['$q', '$meteorSubsc
       return $q.all(promises); // Returns all promises when they're resolved.
     };
 
-    AngularMeteorCollection.prototype.updateCursor = function (cursor) {
+    AngularMeteorCollection.updateCursor = function (cursor) {
       var self = this;
 
       function safeApply() {
@@ -184,7 +182,7 @@ angularMeteorCollections.factory('AngularMeteorCollection', ['$q', '$meteorSubsc
       });
     };
 
-    AngularMeteorCollection.prototype.stop = function () {
+    AngularMeteorCollection.stop = function () {
       if (this.unregisterAutoBind)
         this.unregisterAutoBind();
 
@@ -196,7 +194,17 @@ angularMeteorCollections.factory('AngularMeteorCollection', ['$q', '$meteorSubsc
       }
     };
 
-    return AngularMeteorCollection;
+    var createAngularMeteorCollection = function (cursor, collection) {
+      var data = [];
+
+      data.$$collection = angular.isDefined(collection) ? collection : $meteorUtils.getCollectionByName(cursor.collection.name);
+
+      angular.extend(data, AngularMeteorCollection);
+
+      return data;
+    };
+
+    return createAngularMeteorCollection;
 }]);
 
 
