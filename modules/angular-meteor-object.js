@@ -1,28 +1,20 @@
 var angularMeteorObject = angular.module('angular-meteor.object', ['angular-meteor.utils', 'angular-meteor.subscribe']);
 
 angularMeteorObject.factory('AngularMeteorObject', ['$q', '$meteorSubscribe', function($q, $meteorSubscribe) {
-  var AngularMeteorObject = function (collection, id, options) {
-    angular.extend(this, collection.findOne(id, options));
+  var AngularMeteorObject = {};
 
-    this.$$collection = collection;
-    this.$$options = options;
-    this.$$id = id;
-  };
-
-  AngularMeteorObject.prototype = {};
-
-  AngularMeteorObject.prototype.getRawObject = function () {
+  AngularMeteorObject.getRawObject = function () {
     var self = this;
 
     return angular.copy(_.omit(self, self.$$internalProps));
   };
 
-  AngularMeteorObject.prototype.subscribe = function () {
+  AngularMeteorObject.subscribe = function () {
     $meteorSubscribe.subscribe.apply(this, arguments);
     return this;
   };
 
-  AngularMeteorObject.prototype.save = function save(docs) {
+  AngularMeteorObject.save = function save(docs) {
     var self = this,
       collection = self.$$collection;
 
@@ -47,7 +39,7 @@ angularMeteorObject.factory('AngularMeteorObject', ['$q', '$meteorSubscribe', fu
     return deferred.promise;
   };
 
-  AngularMeteorObject.prototype.reset = function reset() {
+  AngularMeteorObject.reset = function reset() {
     var self = this,
       collection = self.$$collection,
       options = self.$$options,
@@ -71,7 +63,7 @@ angularMeteorObject.factory('AngularMeteorObject', ['$q', '$meteorSubscribe', fu
     }
   };
 
-  AngularMeteorObject.prototype.stop = function stop() {
+  AngularMeteorObject.stop = function stop() {
     if (this.unregisterAutoDestroy) {
       this.unregisterAutoDestroy();
     }
@@ -89,24 +81,28 @@ angularMeteorObject.factory('AngularMeteorObject', ['$q', '$meteorSubscribe', fu
   };
 
 // A list of internals properties to not watch for, nor pass to the Document on update and etc.
-  AngularMeteorObject.prototype.$$internalProps = [
+  AngularMeteorObject.$$internalProps = [
     'save', 'reset', '$$collection', '$$options', '$$id', '$$hashkey', '$$internalProps', 'subscribe', 'stop', 'autorunComputation', 'unregisterAutoBind', 'unregisterAutoDestroy', 'getRawObject'
   ];
 
-  return AngularMeteorObject;
+  var createAngularMeteorObject = function(collection, id, options){
+    var data = collection.findOne(id, options);
+
+    data.$$collection = collection;
+    data.$$options = options;
+    data.$$id = id;
+
+    angular.extend(data, AngularMeteorObject);
+
+    return data;
+  };
+
+  return createAngularMeteorObject;
 }]);
 
 
 angularMeteorObject.factory('$meteorObject', ['$rootScope', '$meteorUtils', 'AngularMeteorObject',
   function($rootScope, $meteorUtils, AngularMeteorObject) {
-    // Used for prototype inheritance in browsers that don't support changing
-    // the proto property (like IE<11...)
-    function _inherit(a, b) {
-      function F() {}
-      F.prototype = b.prototype;
-      a.prototype = new F();
-    }
-
     return function(collection, id, auto, options) {
       // Validate parameters
       if (!(collection instanceof Meteor.Collection)) {
@@ -114,13 +110,7 @@ angularMeteorObject.factory('$meteorObject', ['$rootScope', '$meteorUtils', 'Ang
       }
       auto = auto !== false; // Making auto default true - http://stackoverflow.com/a/15464208/1426570
 
-      var dataConstructor = function() {
-        AngularMeteorObject.apply(this, arguments);
-      };
-      _inherit(dataConstructor, AngularMeteorObject);
-      // Make the data inherit from another prototype object for collection
-      // helpers and other packages that change the prototype of object in collections.
-      var data = new dataConstructor(collection, id, options);
+      var data = new AngularMeteorObject(collection, id, options);
 
       data.autorunComputation = $meteorUtils.autorun($rootScope, function() {
         data.reset();
