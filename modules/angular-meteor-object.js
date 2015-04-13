@@ -89,7 +89,10 @@ angularMeteorObject.factory('AngularMeteorObject', ['$q', '$meteorSubscribe', fu
     var data = collection.findOne(id, options);
 
     if (!data){
-      data = {};
+      // Make data not be an object so we can extend it to preserve
+      // Collection Helpers and the like
+      function SubObject() {}
+      data = new SubObject();
     }
 
     data.$$collection = collection;
