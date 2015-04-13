@@ -88,6 +88,10 @@ angularMeteorObject.factory('AngularMeteorObject', ['$q', '$meteorSubscribe', fu
   var createAngularMeteorObject = function(collection, id, options){
     var data = collection.findOne(id, options);
 
+    if (!data){
+      data = {};
+    }
+
     data.$$collection = collection;
     data.$$options = options;
     data.$$id = id;
