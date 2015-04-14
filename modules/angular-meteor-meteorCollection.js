@@ -265,12 +265,14 @@ angularMeteorCollections.factory('$meteorCollection', ['$q', '$meteorSubscribe',
 
             if (newItems !== oldItems) {
 
+              var addedCount = 0;
               diffArray(oldItems, newItems, {
                 addedAt: function (id, item, index) {
                   ngCollection.unregisterAutoBind();
-                  var newValue = ngCollection.pop();
+                  var newValue = ngCollection.splice( index - addedCount, 1 ).pop();
                   setAutoBind();
                   ngCollection.save(newValue);
+                  addedCount++;
                 },
                 removedAt: function (id, item, index) {
                   ngCollection.remove(id);
