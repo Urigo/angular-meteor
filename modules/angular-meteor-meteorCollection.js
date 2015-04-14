@@ -7,6 +7,7 @@ var angularMeteorCollections = angular.module('angular-meteor.meteor-collection'
 var AngularMeteorCollection = function (cursor, $q, $meteorSubscribe, $meteorUtils, $rootScope, $timeout) {
 
   var self = [];
+  self._serverBackup = [];
 
   self.__proto__ = AngularMeteorCollection.prototype;
   self.__proto__.$q = $q;
@@ -151,22 +152,22 @@ AngularMeteorCollection.prototype.updateCursor = function (cursor) {
     $rootScope = self.$rootScope,
     $timeout = self.$timeout;
 
-  var handler;
+  var promise;
   // Function applies async to combine multiple operations (savings, deletions etc)
   // in one processing.
   function safeApply() {
-    if (handler) {
-      clearTimeout(handler);
-      handler = null;
+    if (promise) {
+      $timeout.cancel(promise);
+      promise = null;
     }
     // Clearing the watch is needed so no updates are sent to server
     // while handling updates from the server
     self.UPDATING_FROM_SERVER = true;
-    handler = setTimeout(function() {
+    promise = $timeout(function () {
       $rootScope.$apply();
-      // Making sure we are setting to false only after one digest cycle and not before
       self.UPDATING_FROM_SERVER = false;
-    });
+      $rootScope.$apply();
+    }, 0, false);
   }
 
   // XXX - consider adding an option for a non-orderd result
@@ -178,15 +179,19 @@ AngularMeteorCollection.prototype.updateCursor = function (cursor) {
   self.observeHandle = cursor.observe({
     addedAt: function (document, atIndex) {
       self.splice(atIndex, 0, document);
+      self._serverBackup.splice(atIndex, 0, document);
       safeApply();
     },
     changedAt: function (document, oldDocument, atIndex) {
       self.splice(atIndex, 1, document);
+      self._serverBackup.splice(atIndex, 1, document);
       safeApply();
     },
     movedTo: function (document, fromIndex, toIndex) {
       self.splice(fromIndex, 1);
       self.splice(toIndex, 0, document);
+      self._serverBackup.splice(fromIndex, 1);
+      self._serverBackup.splice(toIndex, 0, document);
       safeApply();
     },
     removedAt: function (oldDocument) {
@@ -201,6 +206,7 @@ AngularMeteorCollection.prototype.updateCursor = function (cursor) {
 
       if (removedObject){
         self.splice(self.indexOf(removedObject), 1);
+        self._serverBackup.splice(self.indexOf(removedObject), 1);
         safeApply();
       }
     }
@@ -216,6 +222,7 @@ AngularMeteorCollection.prototype.stop = function () {
 
   while (this.length > 0) {
     this.pop();
+    this._serverBackup.pop();
   }
 };
 
@@ -240,13 +247,11 @@ angularMeteorCollections.factory('$meteorCollection', ['$q', '$meteorSubscribe',
       }
 
       var ngCollection = new AngularMeteorCollection(reactiveFunc(), $q, $meteorSubscribe, $meteorUtils, $rootScope, $timeout);
-      var realOldItems;
 
       function setAutoBind() {
         if (auto) { // Deep watches the model and performs autobind.
           ngCollection.unregisterAutoBind = $rootScope.$watch(function () {
             if (ngCollection.UPDATING_FROM_SERVER) {
-              realOldItems = _.without(ngCollection, 'UPDATING_FROM_SERVER');
               return 'UPDATING_FROM_SERVER';
             }
             return _.without(ngCollection, 'UPDATING_FROM_SERVER');
@@ -255,7 +260,7 @@ angularMeteorCollections.factory('$meteorCollection', ['$q', '$meteorSubscribe',
               return;
 
             if (oldItems == 'UPDATING_FROM_SERVER')
-              oldItems = realOldItems;
+              oldItems = ngCollection._serverBackup;
 
 
             if (newItems !== oldItems) {
@@ -263,7 +268,7 @@ angularMeteorCollections.factory('$meteorCollection', ['$q', '$meteorSubscribe',
               diffArray(oldItems, newItems, {
                 addedAt: function (id, item, index) {
                   ngCollection.unregisterAutoBind();
-                  var newValue = ngCollection.splice( index, 1 )[0];
+                  var newValue = ngCollection.pop();
                   setAutoBind();
                   ngCollection.save(newValue);
                 },
