@@ -22,7 +22,7 @@ Methods and [$rootScope](https://docs.angularjs.org/api/ng/service/$rootScope) v
 
     $meteor.waitForUser()
 
-    $meteor.requireUser()
+    $meteor.requireUser([validatorFn])
 
     $meteor.loginWithPassword(user, password)
 
@@ -119,7 +119,7 @@ See the <a href="/tutorial/step_08#authenticationwithrouters">“Authentication 
     });
 
 <br>
-<h3><p><code><span class="pln">requireUser();</span></code></p></h3>
+<h3><p><code><span class="pln">requireUser([validatorFn]);</span></code></p></h3>
 
 Resolves the promise successfully if a user is authenticated and rejects otherwise.
 <br>
@@ -128,6 +128,10 @@ This is useful in cases where you want to require a route to have an authenticat
 You can catch the rejected promise and redirect the unauthenticated user to a different page, such as the login page.
 <br>
 See the <a href="/tutorial/step_08#authenticationwithrouters">“Authentication with Routers”</a> section of our tutorial for more information and a full example.
+<br>
+This method can receive a function as a parameter, which can be used to do custom validation prior to resolving/rejecting the promise.
+<br>
+If the validator function is present, the method will only resolve if the function returns true. If it returns a string, it will reject the promise with such string. Otherwise (false, null, undefined) it will reject the promise with the "FORBIDDEN" error string.
 
 
 
@@ -146,16 +150,53 @@ See the <a href="/tutorial/step_08#authenticationwithrouters">“Authentication 
             return $meteor.requireUser();
           }]
         }
-    });
+      })
+      .state('admin', {
+        url: '/admin',
+        templateUrl: 'client/views/admin.ng.html',
+        controller: 'AdminController'
+        resolve: {
+          "currentUser": ["$meteor", function($meteor){
+            return $meteor.requireUser(function(user) {
+              return user.username==='admin';
+            });
+          }]
+        }
+      })
+      .state('admin2', {
+        url: '/admin2',
+        templateUrl: 'client/views/admin2.ng.html',
+        controller: 'Admin2Controller'
+        resolve: {
+          "currentUser": ["$meteor", function($meteor){
+            return $meteor.requireUser(function(user) {
+              if (user.username==='admin2') {
+                return true;
+              }
+
+              return 'UNAUTHORIZED';
+            });
+          }]
+        }
+      });
 
     app.run(["$rootScope", "$state", function($rootScope, $state) {
       $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
         // We can catch the error thrown when the $meteor.requireUser() promise is rejected
-        // and redirect the user back to the login page
-        if (error === "AUTH_REQUIRED") {
-          // It is better to use $state instead of $location. See Issue #283.
-          $state.go('logIn')
-        }
+        // or the custom error, and redirect the user back to the login page
+        switch(error) {
+          case "AUTH_REQUIRED":
+            $state.go('logIn');
+            break;
+          case "FORBIDDEN":
+            $state.go('forbidden');
+            break;
+          case "UNAUTHORIZED":
+            $state.go('unauthorized');
+            break;
+          default:
+            $state.go('internal-client-error');
+		}
       });
     }]);
 

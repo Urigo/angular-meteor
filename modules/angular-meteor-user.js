@@ -25,7 +25,7 @@ angularMeteorUser.service('$meteorUser', ['$rootScope', '$meteorUtils', '$q',
       return deferred.promise;
     };
 
-    this.requireUser = function(checker){
+    this.requireUser = function(validatorFn){
 
       var deferred = $q.defer();
 
@@ -33,13 +33,15 @@ angularMeteorUser.service('$meteorUser', ['$rootScope', '$meteorUtils', '$q',
         if ( !Meteor.loggingIn() ) {
           if ( Meteor.user() == null)
             deferred.reject("AUTH_REQUIRED");
-          else if (checker) {
-            var checked = checker( Meteor.user() );
+          else if (validatorFn) {
+            var valid = validatorFn( Meteor.user() );
 
-            if ( typeof checked === 'string' )
-              deferred.reject( checked );
-            else
+            if ( valid === true )
               deferred.resolve( Meteor.user() );
+            else if ( typeof valid === "string" )
+              deferred.reject( valid );
+            else
+              deferred.reject( "FORBIDDEN" );
           } else
             deferred.resolve( Meteor.user() );
         }
