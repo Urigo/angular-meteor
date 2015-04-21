@@ -8,7 +8,7 @@ angularMeteorReactiveScope.run(['$rootScope', '$parse', function($rootScope, $pa
     var self = this;
     var getValue = $parse(property);
 
-    if (!self.$$trackerDeps) {
+    if (!self.hasOwnProperty('$$trackerDeps')) {
       self.$$trackerDeps = {};
     }
 
