@@ -16,7 +16,7 @@ A method to get a $scope variable and watch it reactivly
 
 ## Usage
 
-    scope.getReactively(scopeVariableName)
+    scope.getReactively(scopeVariableName, objectEquality)
 
 ### Arguments
 
@@ -27,6 +27,7 @@ A method to get a $scope variable and watch it reactivly
   <th>Type</th>
   <th>Details</th>
   <th>Required</th>
+	<th>Default</th>
 </tr>
 </thead>
 <tbody>
@@ -35,6 +36,14 @@ A method to get a $scope variable and watch it reactivly
   <td><a href="" class="label type-hint type-hint-string">string</a></td>
   <td><p>The name of the scope's variable to bind to</p></td>
   <td><a href="" class="label type-hint type-hint-array">Yes</a></td>
+	<td></td>
+</tr>
+<tr>
+	<td>objectEquality</td>
+	<td><a href="" class="label type-hint type-hint-boolean">boolean</a></td>
+	<td><p>Watch the object equality using angular.equals instead of comparing for reference equality, deeper watch but also slower</p></td>
+	<td><a href="" class="label type-hint type-hint-array">No</a></td>
+	<td><a href="" class="label type-hint type-hint-object">false</a></td>
 </tr>
 </tbody>
 </table>
