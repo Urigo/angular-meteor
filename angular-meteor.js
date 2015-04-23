@@ -68,6 +68,7 @@ angularMeteor.service('$meteor', ['$meteorCollection', '$meteorObject', '$meteor
     this.call = $meteorMethods.call;
     this.loginWithPassword = $meteorUser.loginWithPassword;
     this.requireUser = $meteorUser.requireUser;
+    this.requireValidUser = $meteorUser.requireValidUser;
     this.waitForUser = $meteorUser.waitForUser;
     this.createUser = $meteorUser.createUser;
     this.changePassword = $meteorUser.changePassword;
