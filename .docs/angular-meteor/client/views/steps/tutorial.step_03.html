@@ -110,7 +110,7 @@ Add this to the bottom of app.js:
           ];
 
           for (var i = 0; i < parties.length; i++)
-            Parties.insert({name: parties[i].name, description: parties[i].description});
+            Parties.insert(parties[i]);
 
         }
        });

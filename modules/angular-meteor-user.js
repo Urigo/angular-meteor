@@ -12,6 +12,7 @@ angularMeteorUser.run(['$rootScope', '$meteorUtils', function($rootScope, $meteo
 
 angularMeteorUser.service('$meteorUser', ['$rootScope', '$meteorUtils', '$q',
   function($rootScope, $meteorUtils, $q){
+    var self = this;
 
     this.waitForUser = function(){
 
@@ -40,6 +41,19 @@ angularMeteorUser.service('$meteorUser', ['$rootScope', '$meteorUtils', '$q',
 
       return deferred.promise;
     };
+
+    this.requireValidUser = function(validatorFn) {
+      return self.requireUser().then(function(user){
+        var valid = validatorFn( user );
+
+        if ( valid === true )
+          return user;
+        else if ( typeof valid === "string" )
+          return $q.reject( valid );
+        else
+          return $q.reject( "FORBIDDEN" );
+	  });
+	};
 
     this.loginWithPassword = function(user, password){
 

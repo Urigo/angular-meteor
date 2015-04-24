@@ -84,6 +84,23 @@ Right now we don't need the promise so let's use the second way:
 
     $scope.parties = $meteor.collection(Parties).subscribe('parties');
 
+It is the same as:
+    $meteor.subscribe('parties');
+    $scope.parties = $meteor.collection(Parties);
+    
+But it is a *good practise* to resolve a subscription in state's resolve function:
+    .state('parties', {
+      url: '/parties',
+      templateUrl: 'client/parties/views/parties-list.ng.html',
+      controller: 'PartiesListCtrl',
+      resolve : {
+        'subscribe' : [
+          '$meteor',
+          ($meteor) ->
+            $meteor.subscribe('parties');
+        ]
+      }
+    })
 
 * Our publish function can also take parameters.  In that case, we would also need to pass the parameters from the client.
 For more information about the $meteor.subscribe service [click here](http://angularjs.meteor.com/api/subscribe) or the subscribe function of [AngularMeteorCollection](/api/AngularMeteorCollection).
