@@ -6,7 +6,7 @@ angularMeteorObject.factory('AngularMeteorObject', ['$q', '$meteorSubscribe', fu
   AngularMeteorObject.getRawObject = function () {
     var self = this;
 
-    return angular.copy(_.omit(self, self.internalProps()));
+    return angular.copy(_.omit(self, self.$$internalProps));
   };
 
   AngularMeteorObject.subscribe = function () {
@@ -22,7 +22,7 @@ angularMeteorObject.factory('AngularMeteorObject', ['$q', '$meteorSubscribe', fu
 
     if (self)
       if (self._id){
-        var updates = docs? docs : angular.copy(_.omit(self, '_id', self.internalProps()));
+        var updates = docs? docs : angular.copy(_.omit(self, '_id', self.$$internalProps));
         collection.update(
           {_id: self._id},
           { $set: updates },
@@ -56,7 +56,7 @@ angularMeteorObject.factory('AngularMeteorObject', ['$q', '$meteorSubscribe', fu
           }
         }
       } else {
-        for (prop in _.omit(self, self.internalProps())) {
+        for (prop in _.omit(self, self.$$internalProps)) {
           delete self[prop];
         }
       }

@@ -241,11 +241,6 @@ angularMeteorCollections.factory('$meteorCollection', ['AngularMeteorCollection'
             }
             return _.without(_.map(ngCollection, function(object) {
               var internalProps = ['collection'];
-              _.each(object, function (value, prop) {
-                if (angular.isFunction(object[prop])) {
-                  internalProps.push(prop);
-                }
-              });
               return _.omit(object, internalProps);
             }), 'UPDATING_FROM_SERVER');
           }, function (newItems, oldItems) {
