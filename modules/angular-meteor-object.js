@@ -86,17 +86,6 @@ angularMeteorObject.factory('AngularMeteorObject', ['$q', '$meteorSubscribe', fu
     'collection', '_eventEmitter'
   ];
 
-  AngularMeteorObject.internalProps = function() {
-    var self = this;
-    var internalProps = [].concat(AngularMeteorObject.$$internalProps);
-    _.each(self, function(value, prop) {
-      if (angular.isFunction(self[prop])) {
-        internalProps.push(prop);
-      }
-    });
-    return internalProps;
-  };
-
   var createAngularMeteorObject = function(collection, id, options){
     // Make data not be an object so we can extend it to preserve
     // Collection Helpers and the like
@@ -137,7 +126,7 @@ angularMeteorObject.factory('$meteorObject', ['$rootScope', '$meteorUtils', 'Ang
 
       if (auto) { // Deep watches the model and performs autobind.
         data.unregisterAutoBind = $rootScope.$watch(function(){
-          return _.omit(data, data.internalProps());
+          return _.omit(data, data.$$internalProps);
         }, function (newItem, oldItem) {
           if (newItem !== oldItem && newItem) {
             var newItemId = newItem._id;
