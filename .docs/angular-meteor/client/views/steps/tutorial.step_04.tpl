@@ -180,7 +180,7 @@ First let's replace our push to save in the add button action:
 
     <btf-markdown>
 
-There isn't a lot of difference here accept a little bit of performance, but now let's change our remove function:
+There isn't a lot of difference here except a little bit of performance, but now let's change our remove function:
 
     $scope.remove = function(party){
       $scope.parties.remove(party);
