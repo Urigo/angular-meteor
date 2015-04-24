@@ -49,7 +49,7 @@ angularMeteorUser.service('$meteorUser', ['$rootScope', '$meteorUtils', '$q',
         if ( valid === true )
           return user;
         else if ( typeof valid === "string" )
-          return $.reject( valid );
+          return $q.reject( valid );
         else
           return $q.reject( "FORBIDDEN" );
 	  });
