@@ -212,12 +212,7 @@ $meteor.session('counter').bind($scope, 'counter');
 ### Additional packages
 The following is a non-exhaustive list of Meteor packages common Angular libraries:
 
-- [urigo:ionic](https://atmospherejs.com/urigo/ionic) [Ionic Framework](http://ionicframework.com/) on top of Meteor. Official release.
-- [netanelgilad:angular-file-upload](https://github.com/netanelgilad/meteor-angular-file-upload) empowers angular-meteor with [angular-file-upload](https://github.com/nervgh/angular-file-upload) module.
-- [davidyaha:smart-table](https://github.com/davidyaha/meteor-smart-table) empowers angular-meteor with [smart-table](https://github.com/lorenzofox3/Smart-Table) module.
-- [netanelgilad:angular-sortable-view](https://github.com/netanelgilad/meteor-angular-sortable-view/) empowers angular-meteor with [angular-sortable-view](https://github.com/kamilkp/angular-sortable-view) module.
-- [netanelgilad:text-angular](https://github.com/netanelgilad/meteor-textAngular/) empowers angular-meteor with [textAngular](https://github.com/fraywing/textAngular) module.
-- [tonekk:angular-moment](https://github.com/tonekk/meteor-angular-moment) empowers angular-meteor with [angularMoment](https://github.com/urish/angular-moment) module.
+- [Meteor packages for Angular 3rd party libraries](https://trello.com/c/EGCdgHAk/47-official-meteor-packages-to)
 - [civilframe:angular-jade](https://github.com/civilframe/meteor-angular-jade) enables the usage of JADE files in place of HTML files. Files ending in *.ng.jade and will be compiled to *.html.
 - [pbastowski:angular-babel](https://github.com/pbastowski/angular-meteor-babel/) empowers angular-meteor with Babel and ng-annotate all in the one package. Files ending in .es6 will first be transpiled by Babel and then annotated with ng-annotate.
 
