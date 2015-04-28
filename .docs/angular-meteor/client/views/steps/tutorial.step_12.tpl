@@ -123,7 +123,7 @@ Our personal favorite is [angular-utils-pagination](https://github.com/michaelbr
 
 To add the directive add it's Meteor package to the project:
 
-    meteor add urigo:angular-utils-pagination
+    meteor add angularutils:pagination
 
 Add it as a dependency to our Angular app in app.js:
 
