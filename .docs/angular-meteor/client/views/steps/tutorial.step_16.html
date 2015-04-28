@@ -152,7 +152,7 @@ So let's add the directives to parties-list.ng.html:
 
       <div class="angular-google-map-container">
         <ui-gmap-google-map center="map.center" zoom="map.zoom">
-          <ui-gmap-markers models="parties" coords="'location'" click="'onClicked'"
+          <ui-gmap-markers models="parties" coords="'location'" click="onClicked()"
                            fit="true" idkey="'_id'" doRebuildAll="true">
           </ui-gmap-markers>
         </ui-gmap-google-map>
@@ -180,11 +180,11 @@ Now, inside partiesList.js let's add the following code to the parties subscript
       }, $scope.getReactively('search')).then(function() {
         $scope.partiesCount = $meteor.object(Counts ,'numberOfParties', false);
 
-        $scope.parties.forEach( function (party) {
+	      $scope.parties.forEach( function (party) {
           party.onClicked = function () {
-            onMarkerClicked(party);
-          };
-        });
+	          $state.go('partyDetails', {partyId: party._id});
+	        };
+	      });
 
         $scope.map = {
           center: {
@@ -193,10 +193,6 @@ Now, inside partiesList.js let's add the following code to the parties subscript
           },
           zoom: 8
         };
-
-        var onMarkerClicked = function(marker){
-          $state.go('partyDetails', {partyId: marker._id});
-        }
 
       });
     });
