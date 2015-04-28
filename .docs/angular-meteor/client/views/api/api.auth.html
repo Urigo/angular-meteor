@@ -198,7 +198,7 @@ The mandatory validator function will be called with the authenticated user as t
          controller: 'AdminController'
          resolve: {
            "currentUser": ["$meteor", function($meteor){
-             return $meteor.requireUser(function(user) {
+             return $meteor.requireValidUser(function(user) {
                return user.username==='admin';
              });
            }]
@@ -210,7 +210,7 @@ The mandatory validator function will be called with the authenticated user as t
          controller: 'Admin2Controller'
          resolve: {
            "currentUser": ["$meteor", function($meteor){
-             return $meteor.requireUser(function(user) {
+             return $meteor.requireValidUser(function(user) {
                if (user.username==='admin2') {
                  return true;
                }
