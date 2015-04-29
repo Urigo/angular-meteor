@@ -28,6 +28,15 @@ angularMeteorCollections.factory('AngularMeteorCollection', ['$q', '$meteorSubsc
       function upsertObject(item, $q) {
         var deferred = $q.defer();
 
+        // delete $$hashkey two levels down
+        if (item.$$hashKey)
+          delete item.$$hashKey;
+
+        angular.forEach(item, function(prop) {
+          if (prop.$$hashKey)
+            delete item.$$hashKey;
+        });
+
         if (item._id) { // Performs an update if the _id property is set.
           var item_id = item._id; // Store the _id in temporary variable
           delete item._id; // Remove the _id property so that it can be $set using update.
