@@ -34,7 +34,7 @@ angularMeteorCollections.factory('AngularMeteorCollection', ['$q', '$meteorSubsc
 
         angular.forEach(item, function(prop) {
           if (prop.$$hashKey)
-            delete item.$$hashKey;
+            delete prop.$$hashKey;
         });
 
         if (item._id) { // Performs an update if the _id property is set.
