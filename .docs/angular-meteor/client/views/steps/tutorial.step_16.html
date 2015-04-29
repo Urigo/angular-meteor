@@ -8,7 +8,7 @@
       <a href="/tutorial/step_15"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
       <a href="http://socially-step16.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
       <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_15...step_16"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
-      <a href="/tutorial/next_steps"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
+      <a href="/tutorial/step_17"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
     </ul>
 
     <div class="col-md-8">
@@ -152,7 +152,7 @@ So let's add the directives to parties-list.ng.html:
 
       <div class="angular-google-map-container">
         <ui-gmap-google-map center="map.center" zoom="map.zoom">
-          <ui-gmap-markers models="parties" coords="'location'" click="'onClicked'"
+          <ui-gmap-markers models="parties" coords="'location'" click="onClicked()"
                            fit="true" idkey="'_id'" doRebuildAll="true">
           </ui-gmap-markers>
         </ui-gmap-google-map>
@@ -180,11 +180,11 @@ Now, inside partiesList.js let's add the following code to the parties subscript
       }, $scope.getReactively('search')).then(function() {
         $scope.partiesCount = $meteor.object(Counts ,'numberOfParties', false);
 
-        $scope.parties.forEach( function (party) {
+	      $scope.parties.forEach( function (party) {
           party.onClicked = function () {
-            onMarkerClicked(party);
-          };
-        });
+	          $state.go('partyDetails', {partyId: party._id});
+	        };
+	      });
 
         $scope.map = {
           center: {
@@ -193,10 +193,6 @@ Now, inside partiesList.js let's add the following code to the parties subscript
           },
           zoom: 8
         };
-
-        var onMarkerClicked = function(marker){
-          $state.go('partyDetails', {partyId: marker._id});
-        }
 
       });
     });
@@ -221,7 +217,7 @@ AngularJS has huge eco system full of great directives like the angular-google-m
       <a href="/tutorial/step_15"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
       <a href="http://socially-step16.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
       <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_15...step_16"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
-      <a href="/tutorial/next_steps"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
+      <a href="/tutorial/step_17"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
     </ul>
     </div>
   </div>

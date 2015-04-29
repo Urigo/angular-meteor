@@ -73,6 +73,10 @@ angular.module("meteor-angular-docs").config(['$urlRouterProvider', '$stateProvi
           url: '/meteor-include',
           template: UiRouter.template('api.meteor-include.html')
         })
+        .state('api.collectionfs', {
+          url: '/collectionfs',
+          template: UiRouter.template('api.collectionfs.html')
+        })
         .state('api.utils', {
           url: '/utils',
           template: UiRouter.template('api.utils.html')
@@ -163,10 +167,20 @@ angular.module("meteor-angular-docs").config(['$urlRouterProvider', '$stateProvi
           url: '/step_16',
           template: UiRouter.template('tutorial.step_16.html')
         })
+        .state('tutorial.step17', {
+          url: '/step_17',
+          template: UiRouter.template('tutorial.step_17.html')
+        })
         .state('tutorial.next_steps', {
           url: '/next_steps',
           template: UiRouter.template('tutorial.next_steps.html')
         });
 
     $locationProvider.html5Mode(true);
-  }]);
+  }])
+
+ .run(['$rootScope', function($rootScope) {
+   $rootScope.$on('$stateChangeSuccess', function() {
+     window.scrollTo(0, 0);
+   })
+ }]);

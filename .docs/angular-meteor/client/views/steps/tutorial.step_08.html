@@ -200,12 +200,13 @@ there is no reason for them to go into the party details page.
 
 We can easily prevent them from going into that view using our routes.
 
-angular-meteor provide us with two functions that help us to do that:
+angular-meteor provide us with 3 functions that help us to do that:
 
 * [waitForUser](/api/auth) - returns a promise with the current user if it's logged in or null if it's not.
 * [requireUser](/api/auth) - same as waitForUser but in case the user is not logged in it rejects the promise instead of solving it with null.
+* [requireValidUser](/api/auth) - same as requireUser but gets a function as a parameter that checks if the user is valid by custom logic.
 
-So let's add requireUser to our route in partyDetails so that it will prevent users from going inside there.
+So let's add requireUser to our route in partyDetails so that it will prevent users from going inside there without logging in first.
 
 We are going to use the [resolve](https://github.com/angular-ui/ui-router/wiki#resolve) object of ui-router and ngRoute:
 
@@ -231,12 +232,12 @@ on the top of the routes file, let's add these lines:
 
 __`client/routes.js`:__
 
-    angular.module("socially").run(["$rootScope", "$location", function($rootScope, $location) {
+    angular.module("socially").run(["$rootScope", "$state", function($rootScope, $state) {
       $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
         // We can catch the error thrown when the $requireUser promise is rejected
         // and redirect the user back to the main page
         if (error === "AUTH_REQUIRED") {
-          $location.path("/parties");
+          $state.go('parties');
         }
       });
     }]);

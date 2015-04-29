@@ -1,7 +1,7 @@
 Package.describe({
   name: "urigo:angular",
   summary: "The simplest no-conflict way to use AngularJS with Meteor, Meteorite and Atmosphere Smart Packages.",
-  version: "0.8.2",
+  version: "0.8.6",
   git: "https://github.com/Urigo/angular-meteor.git"
 });
 
@@ -10,6 +10,7 @@ Package.registerBuildPlugin({
   sources: [
     "plugin/handler.js"
   ],
+  use: ['html-tools@1.0.4'],
   npmDependencies : {
     'html-minifier' : '0.6.9'
   }
@@ -28,7 +29,7 @@ Package.registerBuildPlugin({
 Package.on_use(function (api) {
   api.versionsFrom('METEOR@0.9.0.1');
 
-  api.use('angularjs:angular@1.3.15', 'client');
+  api.use('angular:angular@1.3.15_1', 'client');
   api.use('minimongo');  // for idStringify
   api.use('observe-sequence');
   api.use('dburles:mongo-collection-instances@0.3.3', 'client'); // For getCollectionByName
@@ -78,6 +79,12 @@ Package.onTest(function(api) {
     'modules/angular-meteor-user.js',
     'modules/angular-meteor-utils.js',
     'modules/angular-meteor-camera.js',
+    'test/meteor/test_collections.js',
     'test/meteor/tests.js'
   ], ['client']);
+
+  api.addFiles([
+    'test/meteor/test_collections.js',
+    'test/meteor/test_server.js'
+  ], ['server']);
 });

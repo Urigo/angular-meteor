@@ -185,6 +185,9 @@ Our application routes are defined as follows:
 * ('/parties/:partyId'): The party details view will be shown when the URL hash fragment matches '/parties/:partyId', where :partyId is a variable part of the URL. To construct the party details view, Angular will use the party-details.ng.html template and the PartyDetailsCtrl controller.
 * $urlRouterProvider.otherwise("/parties"): triggers a redirection to /parties when the browser address doesn't match either of our routes.
 * $locationProvider.html5Mode(true): Sets the url to look like a regular one. more about it [here](https://docs.angularjs.org/guide/$location#hashbang-and-html5-modes).
+* Each template gets loaded by it's relative path to the project's top folder ('party-details.ng.html').  this is done by angular-meteor's build process which loads the templates into cache and names them according to their paths.
+If the templates are coming from a packages, they will get a prefix of the package name like that - 'my-app_my-package_client/views/my-template.ng.html'.
+You can read more about the templating build process in [our code](https://github.com/Urigo/angular-meteor/blob/master/plugin/handler.js).
 
 Note the use of the :partyId parameter in the second route declaration.
 The $state service uses the route declaration — '/parties/:partyId' — as a template that is matched against the current URL.

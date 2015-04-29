@@ -74,6 +74,10 @@
     <priority>0.5</priority>
   </url>
   <url>
+    <loc>http://angularjs.meteor.com/tutorial/step_17</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
     <loc>http://angularjs.meteor.com/about</loc>
     <priority>0.6</priority>
   </url>
@@ -123,6 +127,10 @@
   </url>
   <url>
     <loc>http://angularjs.meteor.com/api/utils</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://angularjs.meteor.com/api/collectionfs</loc>
     <priority>0.5</priority>
   </url>
 </urlset>

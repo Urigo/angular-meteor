@@ -1,0 +1,37 @@
+<template name="api.collectionfs.html">
+  <div>
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/api/api.collectionfs.html"
+       class="btn btn-default btn-lg improve-button">
+      <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
+    </a>
+
+    <do-nothing>
+        {{#markdown}}
+
+# CollectionFS
+
+When working with CollectionFS we need to work differently with the `$meteor.collection` because
+collectionFS collection is a bit different than `Mongo.Collection`.
+
+To work with collectionFS we send a third argument to `$meteor.collection` which is the CollectionFS
+collection so that angular-meteor can use it to save and remove files.
+
+----
+
+## Usage
+
+    $meteorCollection(function() {
+        return Images.find();
+    }, false, Images);
+
+    // Or
+
+    $meteorCollection(Images, false);
+
+----
+
+        {{/markdown}}
+    </do-nothing>
+
+  </div>
+</template>
