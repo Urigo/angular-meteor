@@ -17,6 +17,22 @@ angular.module("meteor-angular-docs").config(['$urlRouterProvider', '$stateProvi
         url: '/manifest',
         template: UiRouter.template('manifest.html')
       })
+      .state('server', {
+        url: '/server',
+        template: UiRouter.template('server.html')
+      })
+        .state('server.bootstrapping', {
+          url: '/bootstrapping',
+          template: UiRouter.template('server.bootstrapping.html')
+        })
+        .state('server.di', {
+          url: '/di',
+          template: UiRouter.template('server.di.html')
+        })
+        .state('server.api', {
+          url: '/api',
+          template: UiRouter.template('server.api.html')
+        })
       .state('api', {
         url: '/api',
         template: UiRouter.template('api.html')
