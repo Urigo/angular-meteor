@@ -43,6 +43,15 @@ We are sending #meteorObject a Mongo collection and the Id of the object we want
 
 $meteor.object returns an [AngularMeteorObject](/api/meteorObject) that contains the data.
 
+$meteor.object accepts a selector as the second argument.
+
+That selector can be Mongo Selector, Object ID, or String.
+
+In our example we used the Object's ID but it can also come in the form of {field: query}.
+
+$meteor.object will find the first document that matches the selector,
+as ordered by sort and skip options, exactly like Meteor's [collection.findOne](http://docs.meteor.com/#/full/findone)
+
 
 # Template
 

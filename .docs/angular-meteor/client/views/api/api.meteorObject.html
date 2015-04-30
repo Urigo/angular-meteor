@@ -11,12 +11,14 @@
 # $meteor.object
 
 A service that wraps a Meteor object to enable reactivity within AngularJS.
+Finds the first document that matches the selector, as ordered by sort and skip options.
+Wraps [collection.findOne](http://docs.meteor.com/#/full/findone)
 
 ----
 
 ## Usage
 
-    $meteor.object(collection, id, auto)
+    $meteor.object(collection, selector, auto)
 
 ### Arguments
 
@@ -43,10 +45,13 @@ A service that wraps a Meteor object to enable reactivity within AngularJS.
   <td></td>
 </tr>
 <tr>
-  <td>id</td>
-  <td><a href="" class="label type-hint type-hint-string">string</a></td>
-  <td><p>The Id of the object to bind to</p></td>
-  <td><a href="" class="label type-hint type-hint-object">Yes</a></td>
+  <td>selector</td>
+  <td><a href="" class="label type-hint type-hint-string">Mongo Selector, Object ID, or String</a></td>
+  <td><p>A query describing the documents to find or just the ID of the document.
+    $meteor.object will find the first document that matches the selector,
+	  as ordered by sort and skip options, exactly like Meteor's <a href="http://docs.meteor.com/#/full/findone">collection.findOne</a>
+  </p></td>
+  <td><a href="" class="label type-hint type-hint-array">Yes</a></td>
   <td></td>
 </tr>
 <tr>
@@ -105,6 +110,9 @@ A service that wraps a Meteor object to enable reactivity within AngularJS.
           $scope.reset = function() {
             $scope.partyNotAuto.reset();
           };
+
+          // Query selector example
+          $scope.partyOfUser = $meteor.object(Parties, {userId: Meteor.userId()});
 
       }]);
     }
