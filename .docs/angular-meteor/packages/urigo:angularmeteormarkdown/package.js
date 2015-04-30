@@ -13,4 +13,7 @@ Package.registerBuildPlugin({
 
 Package.on_use(function (api) {
   api.versionsFrom('METEOR@0.9.0.1');
+
+  // Files to load in Client only.
+  api.add_files('markdown.js', 'client');
 });

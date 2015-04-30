@@ -1,4 +1,4 @@
-angular.module("meteor-angular-docs").config(['$urlRouterProvider', '$stateProvider', '$locationProvider',
+angular.module("meteor-angular-docs").config(
   function($urlRouterProvider, $stateProvider, $locationProvider){
 
     $urlRouterProvider.otherwise("/");
@@ -193,10 +193,10 @@ angular.module("meteor-angular-docs").config(['$urlRouterProvider', '$stateProvi
         });
 
     $locationProvider.html5Mode(true);
-  }])
+  })
 
- .run(['$rootScope', function($rootScope) {
+ .run(function($rootScope) {
    $rootScope.$on('$stateChangeSuccess', function() {
      window.scrollTo(0, 0);
    })
- }]);
+ });
