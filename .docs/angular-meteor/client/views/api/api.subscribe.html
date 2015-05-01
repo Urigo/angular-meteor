@@ -8,16 +8,20 @@
     <do-nothing>
         {{#markdown}}
 
-# $meteor.subscribe
+# $meteor.subscribe   /    $scope.subscribe
 
 A service which is a wrapper for [Meteor.subscribe](http://docs.meteor.com/#/full/meteor_subscribe).
-It subscribes to a [Meteor.publish](http://docs.meteor.com/#/full/publishandsubscribe) method in the client and returns a [AngularJS promise](https://docs.angularjs.org/api/ng/service/$q) when ready
+It subscribes to a [Meteor.publish](http://docs.meteor.com/#/full/publishandsubscribe) method in the client and returns a [AngularJS promise](https://docs.angularjs.org/api/ng/service/$q) when ready.
+
+Calling $scope.subscribe will automatically stop the subscription when the scope is destroyed.
 
 ----
 
 ## Usage
 
     $meteor.subscribe(name, publisherArguments)
+
+    $scope.subscribe(name, publisherArguments)
 
 ### Arguments
 
@@ -79,6 +83,15 @@ It subscribes to a [Meteor.publish](http://docs.meteor.com/#/full/publishandsubs
             // You can use the subscription handle to stop the subscription if you want
             subscriptionHandle.stop();
           });
+
+          $scope.subscribe('books').then(function(subscriptionHandle){
+            // Bind all the todos to $scope.books
+            $scope.books = $meteor.collection(Books);
+
+            console.log($scope.books + ' is ready');
+
+            // No need to stop the subscription, it will automatically close on scope destroy
+          });
         }
       ]);
     }
@@ -87,6 +100,10 @@ It subscribes to a [Meteor.publish](http://docs.meteor.com/#/full/publishandsubs
 
       Meteor.publish('todos', function(){
         return Todos.find({});
+      });
+
+      Meteor.publish('books', function(){
+        return Books.find({});
       });
 
     }
