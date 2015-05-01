@@ -33,7 +33,7 @@ angularMeteorCollections.factory('AngularMeteorCollection', ['$q', '$meteorSubsc
           delete item.$$hashKey;
 
         angular.forEach(item, function(prop) {
-          if (prop.$$hashKey)
+          if (_.isObject(prop) && prop.$$hashKey)
             delete prop.$$hashKey;
         });
 
