@@ -1,5 +1,7 @@
 <a href="http://angularjs.meteor.com/"><img src="http://angularjs.meteor.com/images/no-text-logo.png" width="50" height="50" /></a>  [angular-meteor](http://angularjs.meteor.com/tutorial) 
 ======================================================
+
+[![Join the chat at https://gitter.im/Urigo/angular-meteor](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Urigo/angular-meteor?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 > The power of Meteor and the simplicity and eco-system of AngularJS
 
 ## Community - Thank you so much for making the [ng-conf 2015 talk](https://github.com/ng-conf/submissions-2015/pull/172) happen!
