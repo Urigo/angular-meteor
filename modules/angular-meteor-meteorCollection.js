@@ -302,3 +302,17 @@ angularMeteorCollections.factory('$meteorCollection', ['AngularMeteorCollection'
       return ngCollection;
     }
   }]);
+
+angularMeteorCollections.run(['$rootScope', '$q', '$meteorCollection',
+  function($rootScope, $q, $meteorCollection) {
+    Object.getPrototypeOf($rootScope).$meteorCollection = function() {
+      var args = Array.prototype.slice.call(arguments);
+      var collection = $meteorCollection.apply(this, args);
+
+      this.$on('$destroy', function() {
+        collection.stop();
+	  });
+
+      return collection;
+	};
+  }]);
