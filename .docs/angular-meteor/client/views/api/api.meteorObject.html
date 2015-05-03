@@ -8,17 +8,21 @@
     <do-nothing>
         {{#markdown}}
 
-# $meteor.object
+# $meteor.object   /    $scope.$meteorObject
 
 A service that wraps a Meteor object to enable reactivity within AngularJS.
 Finds the first document that matches the selector, as ordered by sort and skip options.
 Wraps [collection.findOne](http://docs.meteor.com/#/full/findone)
+
+Calling $scope.$meteorObject will automatically stop the object when the scope is destroyed.
 
 ----
 
 ## Usage
 
     $meteor.object(collection, selector, auto)
+
+    $scope.$meteorObject(collection, selector, auto)
 
 ### Arguments
 
@@ -97,7 +101,7 @@ Wraps [collection.findOne](http://docs.meteor.com/#/full/findone)
 
           $scope.party = $meteor.object(Parties, $stateParams.partyId);
 
-          $scope.partyNotAuto = $meteor.object(Parties, $stateParams.partyId, false);
+          $scope.partyNotAuto = $scope.$meteorObject(Parties, $stateParams.partyId, false);
 
           $scope.save = function() {
             $scope.partyNotAuto.save().then(function(numberOfDocs){
