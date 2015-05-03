@@ -1,4 +1,4 @@
-<a href="http://angularjs.meteor.com/"><img src="http://angularjs.meteor.com/images/no-text-logo.png" width="50" height="50" /></a>  [angular-meteor](http://angularjs.meteor.com/tutorial) 
+<a href="http://angularjs.meteor.com/"><img src="http://angularjs.meteor.com/images/logo-large.png" width="60" height="60" /></a>  [angular-meteor](http://angularjs.meteor.com/tutorial) 
 ======================================================
 
 [![Join the chat at https://gitter.im/Urigo/angular-meteor](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Urigo/angular-meteor?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
