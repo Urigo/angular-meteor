@@ -139,6 +139,32 @@ More more detailed information:
 
 * [https://github.com/meteor/meteor/wiki/Meteor-Cordova-Phonegap-integration](https://github.com/meteor/meteor/wiki/Meteor-Cordova-Phonegap-integration)
 
+# Troubleshoot
+
+If your application does not works for any reason, first try running meteor with the verbose flag in order to get more information about your launch. In order to do that, run the following command:
+
+    meteor run ios --verbose
+    Note: You can also run it with "android" platform.
+
+The following are solution for common issues we encountered:
+
+### Emulator starts, but the application does not launch
+This issue caused because of permissions issue that prevents from Cordova to launch the APK/APP on the simulator.
+Usually you will see on the verbose log these errors:
+
+    "Timed out waiting for device to boot"
+    "You may not have the required environment or OS to run this project"
+In order to fix that issue you will need to fix the permission by running these commands:
+
+    sudo chown -R YOUR_USERNAME /usr/local/lib/node_modules/
+    sudo chmod -R 777 /usr/local/lib/node_modules/
+    sudo chown -r YOUR_USERNAME ~/.meteor/
+    sudo chmod -R 777 ~/.meteor/
+    sudo chown -r YOUR_USERNAME YOUR_PROJECT_FOLDER
+    sudo chmod -R 777 YOUR_PROJECT_FOLDER
+
+    Replace YOUR_PROJECT_FOLDER with your project folder and YOUR_USERNAME with the user you use to run the "meteor run" command.
+
     </btf-markdown>
     </do-nothing>
 <div class="col-md-12">
