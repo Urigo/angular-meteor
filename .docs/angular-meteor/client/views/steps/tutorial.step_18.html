@@ -21,110 +21,237 @@
     <do-nothing class="col-md-12">
       {{#markdown}}
 
-Meteor has a great support for CSS.
+In this step we will consider switching from *Twitter Bootstrap* to [*angular-material*](https://material.angularjs.org/#/). 
 
-Like other types of files, Meteor gathers all CSS files for the client will get a bundle with all the CSS in your app.
+Angular-material is an AngularJS wrapper for Google's Material Design CSS framework. Material Design is a mobile-first design language used in many new Google's applications, especially on the Android platform. 
 
-Meteor also pre-process the CSS files and minifies them (in development it doesn't for easier debugging).
+First we have to remove bootstrap from our application. Type 
 
-Meteor also supports [LESS](http://lesscss.org/) as it's the default CSS pre-processor (the package is maintain by Meteor team themselves).
+    meteor remove twbs:bootstrap
 
-LESS extends CSS with dynamic behavior such as variables, mixins, operations and functions. It allows for more compact stylesheets and helps reduce code duplication in CSS files.
+Now we have to add the angular-material package: 
 
-With the less package installed, .less files in your application are automatically compiled to CSS and the results are included in the client CSS bundle.
+    meteor add planettraining:angular-material
 
-# Adding simple styling
+Next, we want to inject the angular-material to our Angular application. Edit your `client/lib/app.js` and add `ngMaterial`:
 
-Create a new folder called 'styles' under the 'client' folder and add a new file - main.css under that folder.
+        angular.module('socially',[
+	      'angular-meteor',
+	      'ui.router',
+	      'angularUtils.directives.dirPagination',
+	      'uiGmapgoogle-maps', 
+	      'ngMaterial'
+	    ]);
 
-Then change the background color of our app:
+That's it, now we can use angular-material in our application layout. 
 
-    body {
-      background-color: rgba(0,0,0,.04);
-    }
+Angular-material uses declarative syntax, i.e. directives, to utilize Material Design elements in HTML documents. 
 
-run the app and see your background color changed.
+First we want to change our `index.html` to make use of the flex grid layout provided by Material Design. So, change your `client/index.html` to look like this: 
 
-# CSS Frameworks
-
-There are many CSS frameworks that help us write less CSS.
-
-Right now the most popular one is [Bootstrap](http://getbootstrap.com/) so we are going to use that in this tutorial.
-
-* We are also keeping close watch on [Polymer](https://www.polymer-project.org/) and [Famo.us/angular](http://famo.us/integrations/angular) and might  update the tutorial to use those instead of Bootstrap in the future.
-
-Let's add Bootstrap Meteor package to our project:
-
-    meteor add twbs:bootstrap
-
-
-Now let's start organizing by putting the Home link and the login buttons inside a navbar and the rest of the content inside a Bootstrap .container class.
-
-Inside index.html surround the H1 and the loginButton with a header like that:
-
-        <body>
-
-        <div ng-app="socially">
-          <header class="navbar navbar-fixed-top">
-            <div class="container-fluid">
-              <div class="navbar-header">
-                <h1>
-                  <a href="/parties">Home</a>
-                </h1>
-              </div>
-              <meteor-include src="loginButtons"></meteor-include>
-            </div>
-          </header>
-          <div ui-view class="container-fluid"></div>
+    <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <base href="/">
+    </head>
+    
+    <body layout="column">
+      <md-toolbar md-scroll-shrink layout="row" layout-align="start center" layout-padding>    
+        <div>
+          <a href="/parties">Parties</a>
         </div>
+        <span flex></span>
+        <div class="navbar-right navbar-text">
+          <meteor-include src="loginButtons"></meteor-include>
+        </div>
+      </md-toolbar>  
+      <div ui-view class="container-fluid"></div>
+    </body>
 
-        </body>
+You can see we use `layout="column"` in the `body` tag, which tells angular-material to lay all inner tags of `body` vertically. Next, we use the handy `md-toolbar` directive as a wrapper for our app's toolbar. We tell it to shrink on vertical scroll with `md-scroll-shrink` attribute and to lay inner elements in a row. We also tell it `layout-align="start center"` to lay innner elements at `start` of the primary direction (row), meaning element should start at the left edge, and lay them at `center` of the secondary direction (column), so they are stacked centrally in the vertical direction. We also tell it to put padding around all inner elements with `layout-padding`. 
+Inside the `md-toolbar` you see we used `<span flex></span>` element which is actually a separator blank element which is used to fill all the available blank space between the first and third element in the toolbar. So, now we have a link to Parties to the left, a span to fill all space, and a login button. 
+Element layout flex grid is very simple and intuitive in angular-material and you can read all about it [here](https://material.angularjs.org/#/layout/grid).
 
-Converting to Bootstrap doesn't stop here. By applying bootstrap styles to various other parts of our Socially app, our website will look better on different screens. Have a look at [Code Diff](https://github.com/Urigo/meteor-angular-socially/compare/step_16...step_17) to see how we changed the structure of the main files.
+Next, we need to convert our parties list and party detail views to angular-material. 
+First, replace the code in your `client/views/parties-list.ng.html` with this code:
 
-# Less
+    <md-content layout-padding>
+      <div layout="column">      
+          <md-whiteframe class="md-whiteframe-z1" layout layout-align="center center" ng-hide="$root.currentUser || $root.loggingIn">
+            <span>Log in to create a party!</span>
+          </md-whiteframe>
+          <form ng-show="$root.currentUser">
+            <h2 class="md-headline">Create a new party:</h2>      
+            <md-input-container>
+              <label>Name</label>
+              <input ng-model="newParty.name" id="nameInput" type="text" aria-label="Name">
+            </md-input-container>
+            <md-input-container>
+              <label>Description</label>
+              <input ng-model="newParty.description" id="description" type="text" aria-label="Description">
+            </md-input-container>
+            <md-checkbox ng-model="newParty.public" id="public" aria-label="Public">
+              Public        
+            </md-checkbox>
+            <md-button ng-click="newParty.owner=$root.currentUser._id;parties.push(newParty); newParty='';">Add</md-button>
+          </form>  
+      </div>
+    
+      <div layout="column">
+        <h2 class="md-headline">Parties:</h2>
+        <form layout="row">
+          <md-input-container md-no-float>      
+            <md-icon md-svg-icon="action:ic_search_24px"></md-icon>
+            <input type="text" ng-model="search" id="search" placeholder="Search" aria-label="Search">        
+          </md-input-container>
+          <span flex></span>
+          <md-input-container>        
+            <md-select ng-model="orderProperty" placeholder="Sort Order">
+              <md-option value="1">Ascending</md-option>
+              <md-option value="-1">Descending</md-option>
+            </md-select>
+          </md-input-container>
+        </form>
+        <div class="angular-google-map-container">
+          <ui-gmap-google-map center="map.center" zoom="map.zoom">
+            <ui-gmap-markers models="parties" coords="'location'" click="onClicked()"
+                             fit="true" idkey="'_id'" doRebuildAll="true">
+            </ui-gmap-markers>
+          </ui-gmap-google-map>
+        </div>  
+      </div>
+      <div layout="column" layout-padding>
+        <div dir-paginate="party in parties | itemsPerPage: perPage" total-items="partiesCount.count" layout="column">
+          <div layout="row">
+            <div flex="80">
+              <h2><a href="/parties/{{party._id}}">{{party.name}}</a></h2>
+              <p>{{party.description}}</p>
+            </div>
+            <span flex></span>        
+            <md-button ng-click="remove(party)" ng-show="$root.currentUser && $root.currentUser._id == party.owner">
+              <md-icon md-svg-icon="content:ic_clear_24px"></md-icon>
+            </md-button>      
+          </div>
+    
+          <div ng-show="$root.currentUser" layout="row">
+            <md-button ng-click="rsvp(party._id, 'yes')">I'm going!</md-button>
+            <md-button ng-click="rsvp(party._id, 'maybe')">Maybe</md-button>
+            <md-button ng-click="rsvp(party._id, 'no')">No</md-button>
+          </div>
+          <div ng-if="party.public">
+            Everyone is invited
+          </div>
+          <div ng-hide="$root.currentUser">
+            <i>Sign in to RSVP for this party.</i>
+          </div>
+    
+          <div>
+            <strong>Who is coming:</strong>
+            Yes - {{ (party.rsvps | filter:{rsvp:'yes'}).length }}
+            Maybe - {{ (party.rsvps | filter:{rsvp:'maybe'}).length }}
+            No - {{ (party.rsvps | filter:{rsvp:'no'}).length }}
+            <div ng-repeat="rsvp in party.rsvps | filter:{rsvp:'yes'}">
+                {{ getUserById(rsvp.user) | displayName }} - {{ rsvp.rsvp }}
+            </div>
+            <div ng-repeat="rsvp in party.rsvps | filter:{rsvp:'maybe'}">
+                {{ getUserById(rsvp.user) | displayName }} - {{ rsvp.rsvp }}
+            </div>
+            <div ng-repeat="rsvp in party.rsvps | filter:{rsvp:'no'}">
+                {{ getUserById(rsvp.user) | displayName }} - {{ rsvp.rsvp }}
+            </div>
+          </div>
+          <md-list ng-if="!party.public">
+            Users who haven't responded:
+            <md-list-item ng-repeat="invitedUser in outstandingInvitations(party)">
+                {{ invitedUser | displayName }}
+            </md-list-item>
+          </md-list>
+          <p><small>Posted by {{ creator(party) | displayName }}</small></p>
+        </div>
+      </div>
+      <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
+    </md-content>
 
-OK, simple styling works, but we want to be able to use [LESS](http://lesscss.org/).
+First we wrapped everything into the `md-content` tag. We replaced all the buttons with `md-button` tags. We also wrapped form inputs into `md-input-container` tags which enable the Material Design style labels for inputs.
+One new thing we also have to add is usage of Material Design icon set. Google provides free icons for Material Design. You can install it by typing: 
 
-First change the file name from main.css to main.less.  now add the LESS package in the command line:
+    meteor add planettraining:material-design-icons
 
-    meteor add less
+We have to define the `$mdIconProvider` in the `client/app.js`. Insert these lines after the `angular.module` declaration: 
 
-Test that everything still works the same.
+    var themeIcons = function ($mdIconProvider) {
+    
+      $mdIconProvider
+        .iconSet("social", "/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-social.svg")
+        .iconSet("action", "/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-action.svg")
+        .iconSet("communication", "/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-communication.svg")
+        .iconSet("content", "/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-content.svg")
+        .iconSet("toggle", "/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-toggle.svg")
+        .iconSet("navigation", "/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-navigation.svg")
+        .iconSet("image", "/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-image.svg");
+    
+    };
+    
+    angular.module('socially')
+      .config(themeIcons);
 
-Now go to main.less and add a different background color to the navbar:
+You don't have to define all these icon sets. You just need to define those you need to use. You can see a full list of available icons [here](http://google.github.io/material-design-icons/). You can see in the view code above that to use icons you write: 
 
-    body {
-      background-color: rgba(0,0,0,.2);
-      padding-top: 70px;
+    <md-icon md-svg-icon="content:ic_clear_24px"></md-icon>
 
-      .navbar {
-        background-color: #ffffff;
-      }
-    }
+in the `md-svg-icon` attribute you list `<iconset>:<icon_name>` in our case `content:ic_clear_24px`. 
 
-notice that we nested the .navbar inside the body. this is part of the [LESS syntax for nested rules](http://lesscss.org/features/#features-overview-feature-nested-rules).
+Now, replace the code in the `client/view/party-details.ng.html` with the following code: 
 
-# Designing the parties list
+    <legend>
+      Here you will see and change the details of the party:
+    </legend>
+    <form layout="column">
+      <md-input-container>
+        <label>Party Name</label>
+        <input ng-model="party.name" ng-disabled="party.owner != $root.currentUser._id" type="text" aria-label="Name">
+      </md-input-container>
+      <md-input-container>
+        <label>Party Description</label>
+        <input ng-model="party.description" ng-disabled="party.owner != $root.currentUser._id" type="text" aria-label="Description">
+      </md-input-container>
+      <md-checkbox ng-model="party.public" ng-disabled="party.owner != $root.currentUser._id" aria-label="Public">
+          Is public        
+      </md-checkbox>  
+    
+      <div layout="row" layout-align="left">
+        <md-button ng-click="save()">Save</md-button>
+        <md-button ng-click="reset()">Reset form</md-button>
+        <md-button ng-href="/parties">Cancel</md-button>
+      </div>
+    
+      <md-list ng-show="canInvite()">
+        <md-subheader class="md-no-sticky">Users to invite:</md-subheader>
+        <md-list-item ng-repeat="user in users | uninvited:party">
+          <div>{{ user | displayName }}</div>
+          <md-button ng-click="invite(user)">Invite</md-button>
+        </md-list-item>
+        <md-list-item ng-if="(users | uninvited:party).length <= 0">
+          Everyone are already invited.
+        </md-list-item>
+      </md-list>
+    
+      <div class="angular-google-map-container">
+        <ui-gmap-google-map center="map.center" events="map.events" zoom="map.zoom">
+          <ui-gmap-marker coords="party.location" options="map.marker.options" events="map.marker.events" idkey="party._id">
+          </ui-gmap-marker>
+        </ui-gmap-google-map>
+      </div>
+    </form>
 
-Now we are going to design the parties list.
+Here, a you can see a specific type of button used by angular-material. We have a link button: 
 
-Like the Javascript and HTML files, we want the specific styling of parties to be inside the 'client->parties' folder so create a folder named styles until the parties folder.
+    <md-button ng-href="/parties">Cancel</md-button>
 
-Inside that folder create a new file named 'partiesList.less'.
+Angular-material makes a regular button that points to a link using `ng-href`. 
 
-The first thing we need to do in a new LESS file is to import it from the main file:
+This is all we have to do to use angular-material in our application. 
 
-    @import "../parties/styles/parties.import.less";
 
-Now we can start writing specific LESS code inside that file.
-
-For the rest of the styling changes please take a look at the diff between the steps here:
-[Code Diff](https://github.com/Urigo/meteor-angular-socially/compare/step_16...step_17)
-
-# Summary
-
-So we learned how to use CSS, LESS and Bootstrap in Meteor.
 
       {{/markdown}}
     </do-nothing>
