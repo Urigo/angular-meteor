@@ -1,0 +1,212 @@
+<template name="angular-2.html">
+  <div class="main-unit container">
+    <div class="angular-2">
+      <h1>A Clear Migration Path to Angular 2</h1>
+      <img src="/images/angular-2-shield-large.png"/>
+      <p>Some of our community members have been working on getting Angular-Meteor working with Angular 2.</p>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="angular-2-option">
+            <h2>Angular 2 Now</h2>
+            <p>
+              Angular 2 Now is a library by <a href="https://github.com/pbastowski" title="@pbastowski"><i class="fa fa-github"></i> @pbastowski</a> that is targeted at people who:
+            </p>
+            <ul>
+              <li> are about to start a new project in Angular 1.x and are thinking about migrating to Angular 2 when it finally arrives.
+              </li>
+              <li> just like the Angular 2 component annotations for creating directives, but don't care much for the rest of Angular 2 at this stage.
+              </li>
+            </ul>
+            <p>Learn how to start using Angular 2 in <a href="https://github.com/pbastowski/angular2-now" title="Angular 2 Now Github Repository">the repository</a> on Github.</p>
+            <p>Have a look at the <a href="https://github.com/pbastowski/meteor-angular-socially/tree/feature/ng2now" title="Angular Meteor Socially">angular-meteor-socially</a> app rewritten using Angular 2 Now.</p>
+            <p ng-init="toggleAngular2NowCode = false">
+            Look at some sample code <a ng-click="toggleAngular2NowCode = !toggleAngular2NowCode" class="fa" ng-class="{ 'fa-chevron-circle-right': !toggleAngular2NowCode, 'fa-chevron-circle-down': toggleAngular2NowCode }"></a>
+            </p>
+            <btf-markdown ng-show="toggleAngular2NowCode">
+```
+var {Component, View, Inject} = angular2;
+
+angular.module('socially');
+
+@Component({selector: 'parties-list'})
+@View({templateUrl: 'client/parties/parties-list/parties-list.ng.html'})
+@Inject(['$scope', '$meteor', '$rootScope', '$state'])
+
+class PartiesList {
+  constructor($scope, $meteor, $rootScope, $state) {
+
+    // Scope properties
+    $scope.page = 1;
+    $scope.perPage = 3;
+    $scope.sort = {name: 1};
+    $scope.orderProperty = '1';
+
+    $scope.users = $meteor.collection(Meteor.users, false).subscribe('users');
+
+    $scope.parties = $meteor.collection(function () {
+      return Parties.find({}, {
+        sort: $scope.getReactively('sort')
+      });
+    });
+
+    // Scope method declarations (API)
+    $scope.creator = creator;
+    $scope.rsvp = rsvp;
+    $scope.getUserById = getUserById;
+    $scope.pageChanged = pageChanged;
+    $scope.remove = remove;
+
+    // Tasks to run on directive initialisation
+    $meteor.autorun($scope, autorun);
+    $scope.$watch('orderProperty', watchOrderProperty);
+
+    // API and task implementation functions
+    function autorun() {
+      $meteor.subscribe('parties', {
+        limit: parseInt($scope.getReactively('perPage')),
+        skip:  (parseInt($scope.getReactively('page')) - 1) * parseInt($scope.getReactively('perPage')),
+        sort:  $scope.getReactively('sort')
+      }, $scope.getReactively('search')).then(function () {
+        $scope.partiesCount = $meteor.object(Counts, 'numberOfParties', false);
+
+        $scope.parties.forEach(function (party) {
+          party.onClicked = function () {
+            onMarkerClicked(party);
+          };
+        });
+
+        $scope.map = {
+          center: {
+            latitude:  45,
+            longitude: -73
+          },
+          zoom:   8
+        };
+
+        var onMarkerClicked = function (marker) {
+          $state.go('partyDetails', {partyId: marker._id});
+        }
+
+      });
+    }
+
+    function watchOrderProperty() {
+      if ($scope.orderProperty)
+        $scope.sort = {name: parseInt($scope.orderProperty)};
+    }
+
+    function remove(party) {
+      $scope.parties.splice($scope.parties.indexOf(party), 1);
+    }
+
+    function pageChanged(newPage) {
+      $scope.page = newPage;
+    }
+
+    function getUserById(userId) {
+      return Meteor.users.findOne(userId);
+    }
+
+    function creator(party) {
+      if (!party)
+        return;
+      var owner = $scope.getUserById(party.owner);
+      if (!owner)
+        return "nobody";
+
+      if ($rootScope.currentUser)
+        if ($rootScope.currentUser._id)
+          if (owner._id === $rootScope.currentUser._id)
+            return "me";
+
+      return owner;
+    }
+
+    function rsvp(partyId, rsvp) {
+      $meteor.call('rsvp', partyId, rsvp).then(
+        function (data) {
+          console.log('success responding', data);
+        },
+        function (err) {
+          console.log('failed', err);
+        }
+      );
+    }
+  }
+}
+```
+            </btf-markdown>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="angular-2-option">
+            <h2>Angular 2.0.0-alpha</h2>
+            <p>
+              Use a repackaged version of Angular 2.0.0-alpha in your Meteor code using this library by <a href="https://github.com/netanelgilad"><i class="fa fa-github"></i> @netanelgilad</a>.
+            </p>
+            <p>
+              Check out <a href="https://github.com/netanelgilad/meteor-angular2" title="Meteor-Angular2">the repository on Github</a>.
+            </p>
+            <p>
+            Have a look at the <a href="https://github.com/Urigo/meteor-angular2.0-socially" title="Angular Meteor Socially">angular-meteor-socially</a> example app rewritten using Angular 2.0.0.
+            </p>
+            <p ng-init="toggleAngular2Code = false">
+            Look at some sample code <a ng-click="toggleAngular2Code = !toggleAngular2Code" class="fa" ng-class="{ 'fa-chevron-circle-right': !toggleAngular2Code, 'fa-chevron-circle-down': toggleAngular2Code }"></a>
+            {{ toggleAngular2Code }}
+            </p>
+            <btf-markdown ng-show="toggleAngular2Code">
+```
+import {Component, View, bootstrap, For, If} from 'angular2/angular2';
+import {Parties} from 'model/parties';
+
+@Component({
+    selector: 'parties-list'
+})
+@View({
+    templateUrl: 'client/parties-list.ng.html',
+    directives: [For, If]
+})
+class PartiesList {
+    selectedParty: Object = {
+        name: '',
+        description: ''
+    };
+
+    parties: Object;
+
+    constructor() {
+        var self = this;
+        Tracker.autorun(zone.bind(function () {
+            self.parties = Parties.find({}).fetch();
+        }));
+    }
+
+    addParty(name: string, description: string) {
+        Parties.insert({
+            name: name,
+            description: description
+        });
+    }
+
+    remove(party: Object) {
+        Parties.remove(party._id);
+    }
+
+    selectParty(party: Object) {
+        this.selectedParty = party;
+    }
+
+    saveParty(name: string, description: string) {
+        Parties.update(this.selectedParty._id, {$set: {name: name, description: description}});
+    }
+}
+
+bootstrap(PartiesList);
+```
+            </btf-markdown>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
