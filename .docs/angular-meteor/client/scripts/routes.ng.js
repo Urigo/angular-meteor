@@ -21,9 +21,9 @@ angular.module("meteor-angular-docs").config(
         url: '/server',
         template: UiRouter.template('server.html')
       })
-      .state('angular-2', {
-        url: '/angular-2',
-        template: UiRouter.template('angular-2.html')
+      .state('angular2', {
+        url: '/angular2',
+        template: UiRouter.template('angular2.html')
       })
         .state('server.bootstrapping', {
           url: '/bootstrapping',
