@@ -287,11 +287,221 @@ Here, a you can see a specific type of button used by angular-material. We have 
 
 Angular-material makes a regular button that points to a link using `ng-href`. 
 
-This is all we have to do to use angular-material in our application.
+Next, we need to make our users management pages use Material Design. 
 
+First we want to remove the Meteor's login button from the toolbar and insert our custom buttons. So, open `client/index.html` and remove the following code from the toolbar:
 
+    <div class="navbar-right navbar-text">
+          <meteor-include src="loginButtons"></meteor-include>
+    </div>
 
-      </btf-markdown>
+and replace it with: 
+
+    <md-button ng-href="/login" ng-hide="$root.currentUser">Login</md-button>
+    <md-button ng-href="/register" ng-hide="$root.currentUser">Sign up</md-button>
+    <div ng-show="$root.currentUser">{{ $root.currentUser }}</div>
+    <md-button ng-href="/logout" ng-show="$root.currentUser">Logout</md-button> 
+
+You see that we now show `Login` and `Sign up` buttons when the user is not logged in, and we show user name and `Logout` button when the user is logged in. 
+
+Having created these buttons we need to assign them corresponding routes as referenced in the `ng-href` attributes of our buttons. Open the `client/routes.js` and insert following routes below the `$stateProvider` line, and above the existing routes:
+
+    .state('login', {
+	    url: '/login',
+        templateUrl: 'client/users/views/login.ng.html',
+        controller: 'LoginCtrl',
+        controllerAs: 'lc'
+    })
+    .state('register',{
+	    url: '/register', 
+        templateUrl: 'client/users/views/register.ng.html',
+        controller: 'RegisterCtrl',
+        controllerAs: 'rc'
+    })
+    .state('resetpw', {
+	    url: '/resetpw', 
+        templateUrl: 'client/users/views/reset-password.ng.html',
+        controller: 'ResetCtrl',
+        controllerAs: 'rpc'
+    })
+    .state('logout', {
+	    url: '/logout', 
+        resolve: {
+        "logout": ['$meteor', '$state', function($meteor, $state) {
+	        return $meteor.logout().then(function(){
+		            $state.go('parties');
+	            }, function(err){
+	                console.log('logout error - ', err);
+                });
+            }]
+       }
+    })
+
+  First thing of note here is that we're using `controllerAs` parameter in the route definition. This gives an alias to `$scope` and many other benefits. For detailed information, read [this article](http://toddmotto.com/digging-into-angulars-controller-as-syntax/). You will see later how we use it. 
+  Second thing is in the `logout` route. We use a `resolve` parameter to define a sort of inline action for this route, as there is not too much logic associated with it, and there is no template. We need this route to log the user out of the system and redirect to home page. So we use `$meteor.logout()` method which returns a promise, and on successful logout we redirect the user to the home page, i.e. `parties` state. On failure, we log an error to the browser console.
+  For each of our routes we have declared a template and a controller. So, let's go ahead and create them. Create a subfolder `users` in the `client/` folder, and in the `users` subfolder create subfolders `controllers`, and `views`. We now need to create a controller and a view for each of our routes. 
+  Create a file `client/users/controllers/login.js`. Paste the following code: 
+
+  
+
+    angular.module("socially").controller("LoginCtrl", ['$meteor', '$state', 
+          function($meteor, $state){
+        	  var vm = this;
+        	  
+        	  vm.credentials = {
+        		  email: '',
+        		  password: ''
+        	  };
+            
+              vm.error = '';
+        	  
+        	  vm.login = function (){
+        		  $meteor.loginWithPassword(vm.credentials.email, vm.credentials.password).then(
+                function(){
+                  $state.go('parties');
+                },
+                function(err){
+                  vm.error = 'Login error - ' + err;
+                }
+              );
+        	  };
+          }
+        ]);
+
+Now, instead of using $scope, we're using *controller as* syntax, so we declare a variable `vm` and assign `this` to it. From now on, each `$scope.` variable or method will be declared as `vm.` variable or method. We created a `credentials` object containing email and password that will be passed to us from the view. We created a `login`  method that will execute the user log in. You can see a list of API methods for users management provided by `angular-meteor` [here](http://angularjs.meteor.com/api/auth). Just as we did in the `logout` route, here we utilize an `angular-meteor` method `$meteor.loginWithPassword()` which takes two arguments. The first argument is username or email, and the second argument is the password. It returns a promise, and on success we redirect the user `parties` state, or assign error message to our `vm.error` property of the controller. 
+Now create a view file with login form in `client/users/views` folder and name it `login.ng.html`. Paste the followind code: 
+
+    <md-content layout="row">
+    <span flex></span>
+    <md-whiteframe layout="column" flex="50">
+    	<div layout="row" layout-align="space-around center">
+    		<div>Login with:</div>
+    		<md-button>Twitter</md-button>
+    		<md-button>Facebook</md-button>
+    	</div>
+    	<div ng-show="lc.error" class="md-warn"><small>{{ lc.error }}</small></div>
+    	<form layout="column">
+    		<md-input-container>		
+    			<md-icon md-svg-icon="content:ic_mail_24px"></md-icon>
+    			<input type="text" ng-model="lc.credentials.email" placeholder="email" aria-label="email" />
+    		</md-input-container>
+    		<md-input-container>
+    			<md-icon md-svg-icon="action:ic_lock_open_24px"></md-icon>
+    			<input type="password" ng-model="lc.credentials.password" placeholder="password" aria-label="password" />
+    		</md-input-container>
+    		<md-button class="md-raised md-primary" ng-click="lc.login()" aria-label="login">Sign In</md-button>
+    	</form>
+    	<div layout="row" layout-align="space-around center"><a href="/resetpw">Forgot password?</a><a href="/register">Create an account</a></div>
+    </md-whiteframe>
+    <span flex></span>
+    </md-content>
+
+In our router file, we declared the login route controller to be `LoginCtrl` and a `controllerAs` parameter to be `lc`. This is an alias for our controller and it corresponds to the `vm` variable in our controller code. So to address all variables/objects/methods of our controller, we prefix them with `lc.` in our view. You can see in the view that we use `lc.error`, `lc.credentials`, and `lc.login()`. 
+
+The procedure is the same for the `register` and `resetpw` routes, so now you create `client/users/controllers/register.js` and paste following code into it: 
+
+    angular.module("socially").controller("RegisterCtrl", ['$meteor', '$state', 
+      function($meteor, $state){
+    	  var vm = this;
+    	  
+    	  vm.credentials = {
+    		  email: '',
+    		  password: ''
+    	  };
+        
+        vm.error = '';
+    	  
+    	  vm.register = function (){
+    		  $meteor.createUser(vm.credentials).then(
+            function(){
+              $state.go('parties');
+            },
+            function(err){
+              vm.error = 'Registration error - ' + err;
+            }
+          );
+    	  };
+      }
+    ]);
+      
+  Create a file `client/users/views/register.ng.html` and paste the following code into it: 
+
+    <md-content layout="row">
+    <span flex></span>
+    <md-whiteframe layout="column" flex="50">
+    	<div layout="row" layout-align="space-around center">
+    		<div>Login with:</div>
+    		<md-button>Twitter</md-button>
+    		<md-button>Facebook</md-button>
+    	</div>
+    	<div ng-show="rc.error" class="md-warn"><small>{{ rc.error }}</small></div>
+    	<form layout="column">
+    		<md-input-container>		
+    			<md-icon md-svg-icon="content:ic_mail_24px"></md-icon>
+    			<input type="text" ng-model="rc.credentials.email" placeholder="email" aria-label="email" />
+    		</md-input-container>
+    		<md-input-container>
+    			<md-icon md-svg-icon="action:ic_lock_open_24px"></md-icon>
+    			<input type="password" ng-model="rc.credentials.password" placeholder="password" aria-label="password" />
+    		</md-input-container>
+    		<md-button class="md-raised md-primary" ng-click="rc.register()">Create Account</md-button>
+    	</form>
+    	<div layout="row" layout-align="end center"><a href="/login">Login</a></div>
+    </md-whiteframe>
+    <span flex></span>
+    </md-content>
+
+Create a file `client/users/controllers/reset.js` and paste the following code into it: 
+
+    angular.module("socially").controller("ResetCtrl", ['$meteor', '$state', 
+      function($meteor, $state){
+    	  var vm = this;
+    	  
+    	  vm.credentials = {
+    		  email: ''
+    	  };
+    	
+    	  vm.error = '';
+    	  
+    	  vm.register = function (){
+    		  $meteor.forgotPassword(vm.credentials.email).then(
+    	        function(){
+    	          $state.go('parties');
+    	        },
+    	        function(err){
+    	          vm.error = 'Error sending forgot password email - ' + err;
+    	        }
+    	      );
+    	  };
+      }
+    ]);
+
+And, finally, create a corresponding view `client/users/views/reset-password.ng.html` and paste the following into it: 
+
+    <md-content layout="row">
+    <span flex></span>
+    <md-whiteframe layout="column" flex="50">
+    	<div layout="row" layout-align="space-around center">
+    		<div>Login with:</div>
+    		<md-button>Twitter</md-button>
+    		<md-button>Facebook</md-button>
+    	</div>
+    	<div ng-show="rpc.error" class="md-warn"><small>{{ rpc.error }}</small></div>
+    	<form layout="column">
+    		<md-input-container>		
+    			<md-icon md-svg-icon="content:ic_mail_24px"></md-icon>
+    			<input type="text" ng-model="rpc.credentials.email" placeholder="email" aria-label="email" />
+    		</md-input-container>		
+    		<md-button class="md-raised md-primary" ng-click="rpc.reset()" aria-label="login">Reset password</md-button>
+    	</form>
+    	<div layout="row" layout-align="end center"><a href="/login">Login</a></div>
+    </md-whiteframe>
+    <span flex></span>
+    </md-content>
+
+That's it, now you can enjoy the new user management forms with Material Design. 
+</btf-markdown>
+ {{/markdown}}
     </do-nothing>
 
     <div class="col-md-12">
