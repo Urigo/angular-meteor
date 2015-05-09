@@ -26,7 +26,7 @@
 
 Right now our app has no privacy, every user can see all the parties on the screen.
 
-So let's add a 'public' flag on parties - if a party is public we will let anyone see it, but if a party if private, only the owner can see it.
+So let's add a 'public' flag on parties - if a party is public we will let anyone see it, but if a party is private, only the owner can see it.
 
 First we need to remove the 'autopublish' Meteor package.
 
