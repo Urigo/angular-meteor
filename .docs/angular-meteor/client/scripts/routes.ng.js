@@ -191,6 +191,10 @@ angular.module("meteor-angular-docs").config(
           url: '/step_18',
           templateUrl: 'client/views/steps/tutorial.step_18.tpl'
         })
+        .state('tutorial.step19', {
+          url: '/step_19',
+          templateUrl: 'client/views/steps/tutorial.step_19.tpl'
+        })
         .state('tutorial.next_steps', {
           url: '/next_steps',
           template: UiRouter.template('tutorial.next_steps.html')
