@@ -1,5 +1,5 @@
   <div>
-    <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/steps/tutorial.step_19.html"
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/steps/tutorial.step_19.tpl"
        class="btn btn-default btn-lg improve-button">
       <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
     </a>
@@ -182,7 +182,7 @@ The last part of this solution is to commit the `package.js` file into your fork
 
 **If you want to provide even some more helpful solution** - you can use [these instructions](https://github.com/MeteorPackaging/grunt-gulp-meteor) to create a Gulp/Grunt task that automatically published a new version of the package every time the developer publishes a new release.
 
-# Solution 2
+# Solution #2
 This is a more simple solution - this solution will be useful in case you want just to create an Atmosphere package without helping the developer to integrate Meteor in his versions publishing process.
 
 You can just use `bower`, install the package locally on your computer, then create a `package.js` file and run `meteor publish`.
@@ -223,7 +223,7 @@ For example, this is how the ngInfiniteScroll package will be published using th
 # Summary
 As you can see, using existing packages in your angular-meteor application is simple, and when we encounter a third-party library without Meteor package support we can help by creating the "package.js" file and created a pull request (Solution #1).
 
-Also, we can use a automatic publisher that helps us to publish packages real quick (Solution #2).
+Also, you can use a automatic publisher that helps us to publish packages real quick (Solution #2).
 
 **We prefer that the first solution will be your choice in order to enrich the Meteor and angular-meteor community and help other developers to use third-party packages.**
 
