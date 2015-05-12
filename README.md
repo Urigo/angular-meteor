@@ -191,7 +191,7 @@ Since 0.6 release, angular-meteor relies more heavily on Angular's default templ
 
 ### User Authentication
 
-angular-meteor provides complete for the [Meteor accounts system](http://docs.meteor.com/#/full/accounts_api). more details here -  [Documentation](http://angularjs.meteor.com/api/user).
+angular-meteor provides complete support for the [Meteor accounts system](http://docs.meteor.com/#/full/accounts_api). more details here -  [Documentation](http://angularjs.meteor.com/api/user).
 
 [More in step 8 of the tutorial](http://angularjs.meteor.com/tutorial/step_08)
 
