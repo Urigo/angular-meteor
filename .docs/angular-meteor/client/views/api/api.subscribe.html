@@ -8,12 +8,12 @@
     <do-nothing>
         {{#markdown}}
 
-# $meteor.subscribe   /    $scope.subscribe
+# $meteor.subscribe   /    $scope.$meteorSubscribe
 
 A service which is a wrapper for [Meteor.subscribe](http://docs.meteor.com/#/full/meteor_subscribe).
 It subscribes to a [Meteor.publish](http://docs.meteor.com/#/full/publishandsubscribe) method in the client and returns a [AngularJS promise](https://docs.angularjs.org/api/ng/service/$q) when ready.
 
-Calling $scope.subscribe will automatically stop the subscription when the scope is destroyed.
+Calling $scope.$meteorSubscribe will automatically stop the subscription when the scope is destroyed.
 
 ----
 
@@ -21,7 +21,7 @@ Calling $scope.subscribe will automatically stop the subscription when the scope
 
     $meteor.subscribe(name, publisherArguments)
 
-    $scope.subscribe(name, publisherArguments)
+    $scope.$meteorSubscribe(name, publisherArguments)
 
 ### Arguments
 
@@ -84,7 +84,7 @@ Calling $scope.subscribe will automatically stop the subscription when the scope
             subscriptionHandle.stop();
           });
 
-          $scope.subscribe('books').then(function(subscriptionHandle){
+          $scope.$meteorSubscribe('books').then(function(subscriptionHandle){
             // Bind all the todos to $scope.books
             $scope.books = $meteor.collection(Books);
 

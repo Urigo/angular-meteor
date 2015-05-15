@@ -142,3 +142,17 @@ angularMeteorObject.factory('$meteorObject', ['$rootScope', '$meteorUtils', 'Ang
       return data;
     };
   }]);
+
+angularMeteorObject.run(['$rootScope', '$q', '$meteorObject',
+  function($rootScope, $q, $meteorObject) {
+    Object.getPrototypeOf($rootScope).$meteorObject = function() {
+      var args = Array.prototype.slice.call(arguments);
+      var object = $meteorObject.apply(this, args);
+
+      this.$on('$destroy', function() {
+        object.stop();
+	  });
+
+      return object;
+	};
+  }]);
