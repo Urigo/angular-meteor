@@ -14,6 +14,11 @@ angularMeteorObject.factory('AngularMeteorObject', ['$q', '$meteorSubscribe', fu
     return this;
   };
 
+  AngularMeteorObject.$meteorSubscribe = function () {
+    this.subscribe.apply(this, arguments);
+    return this;
+  };
+
   AngularMeteorObject.save = function save(docs) {
     var self = this,
       collection = self.$$collection;
@@ -82,7 +87,7 @@ angularMeteorObject.factory('AngularMeteorObject', ['$q', '$meteorSubscribe', fu
 
 // A list of internals properties to not watch for, nor pass to the Document on update and etc.
   AngularMeteorObject.$$internalProps = [
-    'save', 'reset', '$$collection', '$$options', '$$id', '$$hashkey', '$$internalProps', 'subscribe', 'stop', 'autorunComputation', 'unregisterAutoBind', 'unregisterAutoDestroy', 'getRawObject'
+    'save', 'reset', '$$collection', '$$options', '$$id', '$$hashkey', '$$internalProps', 'subscribe', '$meteorSubscribe', 'stop', 'autorunComputation', 'unregisterAutoBind', 'unregisterAutoDestroy', 'getRawObject'
   ];
 
   var createAngularMeteorObject = function(collection, id, options){
@@ -151,8 +156,8 @@ angularMeteorObject.run(['$rootScope', '$q', '$meteorObject',
 
       this.$on('$destroy', function() {
         object.stop();
-	  });
+      });
 
       return object;
-	};
+    };
   }]);
