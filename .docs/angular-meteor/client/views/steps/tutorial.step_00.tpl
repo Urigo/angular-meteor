@@ -136,6 +136,16 @@ __`index.html`:__
 
 But if you load this in your browser, you'll see nothing. That's because we still need to create the actual Angular app, which we'll do next.
 
+* It's very important to note - all the paths are always absolute, not relative!  so if 'index.ng.html' was inside a client folder, you would have to place the whole path from the route app, doesn't matter where you are
+calling the file from, like that:
+
+      </btf-markdown>
+
+<pre><code>&lt;<span class="hljs-operator">div</span> ng-<span class="hljs-built_in">include</span>=<span class="hljs-string">"'client/index.ng.html'"</span>&gt;&lt;/<span class="hljs-operator">div</span>&gt;
+</code></pre>
+
+	    <btf-markdown>
+
 # AngularJS app
 
 AngularJS apps are actually individual modules so now we are going to create our app module.

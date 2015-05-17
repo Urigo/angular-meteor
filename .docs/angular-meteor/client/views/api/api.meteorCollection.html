@@ -8,15 +8,20 @@
     <do-nothing>
         {{#markdown}}
 
-# $meteor.collection
+# $meteor.collection   /    $scope.$meteorCollection
 
 A service that wraps the [Meteor collections](http://docs.meteor.com/#/full/collections) to enable reactivity within AngularJS.
+
+Calling $scope.$meteorCollection is exactly the same but additionally it will automatically stop the collection when the scope is destroyed.
+Therefor this is the recommended method.
 
 ----
 
 ## Usage
 
     $meteor.collection(collection, auto)
+
+    $scope.$meteorCollection(collection, auto)
 
 ### Arguments
 
@@ -104,7 +109,7 @@ A service that wraps the [Meteor collections](http://docs.meteor.com/#/full/coll
           });
 
           // Bind without auto-save all todos to $scope.notAutoTodos
-          $scope.notAutoTodos = $meteor.collection(Todos, false).subscribe("publicTodos");
+          $scope.notAutoTodos = $scope.$meteorCollection(Todos, false).subscribe("publicTodos");
 
           // todo might be an object like this {text: "Learn Angular", sticky: false}
           // or an array like this:

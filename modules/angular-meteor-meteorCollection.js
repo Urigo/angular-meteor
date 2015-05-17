@@ -28,6 +28,15 @@ angularMeteorCollections.factory('AngularMeteorCollection', ['$q', '$meteorSubsc
       function upsertObject(item, $q) {
         var deferred = $q.defer();
 
+        // delete $$hashkey two levels down
+        if (item.$$hashKey)
+          delete item.$$hashKey;
+
+        angular.forEach(item, function(prop) {
+          if (_.isObject(prop) && prop.$$hashKey)
+            delete prop.$$hashKey;
+        });
+
         if (item._id) { // Performs an update if the _id property is set.
           var item_id = item._id; // Store the _id in temporary variable
           delete item._id; // Remove the _id property so that it can be $set using update.
@@ -314,3 +323,26 @@ function updateCollection(newCollection, oldCollection, diffMethod) {
     }
   });
 }
+
+angularMeteorCollections.run(['$rootScope', '$q', '$meteorCollection', '$meteorSubscribe',
+  function($rootScope, $q, $meteorCollection, $meteorSubscribe) {
+    Object.getPrototypeOf($rootScope).$meteorCollection = function() {
+      var args = Array.prototype.slice.call(arguments);
+      var collection = $meteorCollection.apply(this, args);
+      var subscription = null;
+
+      collection.subscribe = function () {
+        var args = Array.prototype.slice.call(arguments);
+        subscription = $meteorSubscribe._subscribe(this, $q.defer(), args);
+        return collection;
+      };
+
+      this.$on('$destroy', function() {
+        collection.stop();
+        if (subscription)
+          subscription.stop();
+	    });
+
+      return collection;
+	};
+  }]);

@@ -95,6 +95,8 @@ A shorten (Syntactic sugar) function for the <a href="/api/subscribe">$meteor.su
 
 Takes only one parameter and not returns a promise like <a href="/api/subscribe">$meteor.subscribe</a> does.
 
+When called after $scope.meteorCollection, it acts the same but in addition it automatically closes the subscription when the scope is destroyed.
+
 #### Parameters
 
 <table class="variables-matrix input-arguments">

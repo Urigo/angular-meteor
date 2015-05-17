@@ -9,12 +9,9 @@ insecure
 urigo:angular
 angular:angular-sanitize
 less
-simison:bootstrap3-less
-urigo:angular-ui-router@0.6.0
+urigo:angular-ui-router
 showdown
-linto:fontawesome
-
-mquandalle:bower
-
 urigo:angularmeteormarkdown
 urigo:angulartics
+twbs:bootstrap
+fortawesome:fontawesome

@@ -1,5 +1,7 @@
-<a href="http://angularjs.meteor.com/"><img src="http://angularjs.meteor.com/images/no-text-logo.png" width="50" height="50" /></a>  [angular-meteor](http://angularjs.meteor.com/tutorial) 
+<a href="http://angular-meteor.com/"><img src="http://angular-meteor.com/images/logo-large.png" width="60" height="60" /></a>  [angular-meteor](http://angular-meteor.com/tutorial) 
 ======================================================
+
+[![Join the chat at https://gitter.im/Urigo/angular-meteor](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Urigo/angular-meteor?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 > The power of Meteor and the simplicity and eco-system of AngularJS
 
 ## Community - Thank you so much for making the [ng-conf 2015 talk](https://github.com/ng-conf/submissions-2015/pull/172) happen!
@@ -12,8 +14,10 @@
 
 ## Resources
 - [Change Log, updates and breaking changes](https://github.com/Urigo/angular-meteor/releases)
-- [Getting started tutorial](https://angularjs.meteor.com/tutorial)
+- [Getting started tutorial](https://angular-meteor.com/tutorial)
+- [angular-meteor University](https://github.com/Urigo/meteor-angular-socially#angular-meteor-university-)
 - [Example application](https://github.com/Urigo/meteor-angular-socially) (Final version of the tutorial)
+- [angular-meteor Blog](https://medium.com/angular-meteor)
 - [Meteor package - urigo:angular](https://atmospherejs.com/urigo/angular)
 - [Roadmap - Trello board](https://trello.com/b/Wj9U0ulk/angular-meteor)
 - [Meteor Forums](https://forums.meteor.com/)
@@ -22,7 +26,7 @@
 We would love contributions in:
 
 1. Code
-2. [Tutorial](http://angularjs.meteor.com/tutorial) - our goal with the tutorial is to add as many common tasks as possible. If you want to create and add your own chapter we would be happy to help you writing and adding it.
+2. [Tutorial](http://angular-meteor.com/tutorial) - our goal with the tutorial is to add as many common tasks as possible. If you want to create and add your own chapter we would be happy to help you writing and adding it.
 3. [Roadmap](https://trello.com/b/Wj9U0ulk/angular-meteor) - you can add a card about what you want to see in the library or in the tutorial.
 4. I ([Urigo](https://github.com/urigo)) live around the world with one small bag, so another way of contributing can be by offering me a place to sleep somewhere interesting around the world that I have to see :) 
 
@@ -73,7 +77,7 @@ var myModule = angular.module('myModule', ['angular-meteor']);
 
 You don't need to bootstrap the application manually, simply specifying the `ng-app` attribute on a container element will do.
 
-[More in step 0 in the tutorial](http://angularjs.meteor.com/tutorial/step_00)
+[More in step 0 in the tutorial](http://angular-meteor.com/tutorial/step_00)
 
 ### Data binding
 
@@ -109,21 +113,21 @@ Please note that the names of the templates to Angular will be their URL as Mete
 </div>
 ```
 
-[More in step 0 of the tutorial](http://angularjs.meteor.com/tutorial/step_00)
+[More in step 0 of the tutorial](http://angular-meteor.com/tutorial/step_00)
 
 ### Using Meteor Collections
 
-angular-meteor provides 3-way data binding (view-client-server) by tying a Meteor collection to an Angular model. The API to accomplish this is [$meteor.collection](http://angularjs.meteor.com/api/meteorCollection).
+angular-meteor provides 3-way data binding (view-client-server) by tying a Meteor collection to an Angular model. The API to accomplish this is [$meteor.collection](http://angular-meteor.com/api/meteorCollection).
 
 ```js
 $scope.todos = $meteor.collection(Todos);
 ```
 
-[More in step 3 of the tutorial](http://angularjs.meteor.com/tutorial/step_03)
+[More in step 3 of the tutorial](http://angular-meteor.com/tutorial/step_03)
 
 ### Subscribe
 
-[$meteor.subscribe](http://angularjs.meteor.com/api/subscribe) is a wrapper for `Meteor.subscribe` that returns a promise.
+[$meteor.subscribe](http://angular-meteor.com/api/subscribe) is a wrapper for `Meteor.subscribe` that returns a promise.
 
 Here's an example of how to tie a Meteor collection to a clean Angular model in the form of an array:
 
@@ -159,11 +163,11 @@ app.controller('TodoCtrl', ['$scope', '$meteor',
 
 Use to official AngularUI ui-router Meteor package - [angularui:angular-ui-router](https://atmospherejs.com/angularui/angular-ui-router)
 
-More on how to actually use angular-ui-router in [step 5 of the tutorial](http://angularjs.meteor.com/tutorial/step_05)
+More on how to actually use angular-ui-router in [step 5 of the tutorial](http://angular-meteor.com/tutorial/step_05)
 
 ### &lt;meteor-include&gt;
 
-You can include Meteor's native templates with the [meteor-include](http://angularjs.meteor.com/api/meteor-include) directive.
+You can include Meteor's native templates with the [meteor-include](http://angular-meteor.com/api/meteor-include) directive.
 
 ```html
 <template name="todoList">
@@ -187,13 +191,13 @@ Since 0.6 release, angular-meteor relies more heavily on Angular's default templ
 
 ### User Authentication
 
-angular-meteor provides complete for the [Meteor accounts system](http://docs.meteor.com/#/full/accounts_api). more details here -  [Documentation](http://angularjs.meteor.com/api/user).
+angular-meteor provides complete support for the [Meteor accounts system](http://docs.meteor.com/#/full/accounts_api). more details here -  [Documentation](http://angular-meteor.com/api/user).
 
-[More in step 8 of the tutorial](http://angularjs.meteor.com/tutorial/step_08)
+[More in step 8 of the tutorial](http://angular-meteor.com/tutorial/step_08)
 
 ### Meteor methods with promises
 
-[$meteor.call](http://angularjs.meteor.com/api/methods) calls a [Meteor method](http://docs.meteor.com/#/full/meteor_methods) and returns a promise.
+[$meteor.call](http://angular-meteor.com/api/methods) calls a [Meteor method](http://docs.meteor.com/#/full/meteor_methods) and returns a promise.
 
 ```js
 $meteor.call('addUser', username).then(function (data) {
@@ -203,7 +207,7 @@ $meteor.call('addUser', username).then(function (data) {
 
 ### Bind Meteor session
 
-[$meteor.session](http://angularjs.meteor.com/api/session) binds a scope variable to a Meteor Session variable.
+[$meteor.session](http://angular-meteor.com/api/session) binds a scope variable to a Meteor Session variable.
 
 ```js
 $meteor.session('counter').bind($scope, 'counter');

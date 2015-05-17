@@ -421,39 +421,19 @@ There is only one problem in our app right now - if you will go into the party d
 
 The reason is that we are calling a different subscription on the same collection inside the partyDetails controller..
 
-So to fix that, we will have to close that subscription after leaving the controller.
+So to fix that, we will have to close that subscription after the partyDetails controller is destroyed.
 
-First thing, we need to catch the event of the controller closing by adding the $scope.$on('$destroy'):
-
-    $scope.$on('$destroy', function() {
-
-    });
-
-Now we need to get the subscription handle which will be used later to stop the subscription.
-
-We will need to call the $meteor.subscribe it self instead of the shortcut we are using right now.
+Web can do that be calling $scope.subscribe method. it will automatically close the subscription when the scope gets destroyed.
 
 First remove to subscription from $meteor.object:
 
     $scope.party = $meteor.object(Parties, $stateParams.partyId);
 
-And now add the subscribe function and save the handle somewhere:
+And now add the subscribe function:
 
-    var subscriptionHandle;
-
-    $meteor.subscribe('parties').then(function(handle) {
-      subscriptionHandle = handle;
-    });
-
-And last thing, stop the subscription when the scope is destroyed:
-
-    $scope.$on('$destroy', function() {
-      subscriptionHandle.stop();
-    });
+    $scope.subscribe('parties');
 
 That's it.
-
-Maybe in the future we will add an automatic way to open and close subscriptions in scope's load and destroy events.
 
 
 # Summary

@@ -166,7 +166,7 @@ Tinytest.addAsync('$meteorCollection updates from server and client concurrent s
                       test.isTrue(fromClient.length == 200);
                       done();
                     });
-                  }, 120, false);
+                  }, 200, false);
               });
             }, 100, false);
             

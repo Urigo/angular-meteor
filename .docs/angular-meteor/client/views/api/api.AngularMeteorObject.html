@@ -62,6 +62,40 @@ Returns a promise with an error in case for an error or a number of successful d
 Reset the current value of the object to the one in the server.
 
 <br>
+<h3><p><code><span class="pln">subscribe( :subscriptionName );</span></code></p></h3>
+<br>
+
+A shorten (Syntactic sugar) function for the <a href="/api/subscribe">$meteor.subscribe function</a>.
+
+Takes only one parameter and not returns a promise like <a href="/api/subscribe">$meteor.subscribe</a> does.
+
+When called after $scope.meteorObject, it acts the same but in addition it automatically closes the subscription when the scope is destroyed.
+
+#### Parameters
+
+<table class="variables-matrix input-arguments">
+  <thead>
+  <tr>
+    <th>Param</th>
+    <th>Type</th>
+    <th>Details</th>
+    <th>Required</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>subscriptionName</td>
+    <td>
+      <a href="" class="label type-hint type-hint-string">subscriptionName</a>
+    </td>
+    <td><p>The subscription name to subscribe to.  exactly like the first parameter in $meteor.subscribe service.
+    </p></td>
+    <td><a href="" class="label type-hint type-hint-object">Yes</a></td>
+  </tr>
+  </tbody>
+</table>
+
+<br>
 <h3><p><code><span class="pln">getRawObject();</span></code></p></h3>
 
 Returns a copy of the AngularMeteorObject with all the AngularMeteor-specific
