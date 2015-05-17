@@ -156,10 +156,8 @@ angularMeteorCollections.factory('AngularMeteorCollection', ['$q', '$meteorSubsc
           $rootScope.$apply();
         }
         promise = $timeout(function () {
-          // Saves changes only when new docs have been added.
-          if (self.length != self._serverBackup.length) {
-            updateCollection(self, self._serverBackup, diffArray);
-          }
+          // Saves changes happened within the previous update from server.
+          updateCollection(self, self._serverBackup, diffArray);
           self.UPDATING_FROM_SERVER = false;
           $rootScope.$apply();
         }, 0, false);
