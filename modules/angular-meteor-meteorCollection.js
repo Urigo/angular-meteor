@@ -303,15 +303,24 @@ angularMeteorCollections.factory('$meteorCollection', ['AngularMeteorCollection'
     }
   }]);
 
-angularMeteorCollections.run(['$rootScope', '$q', '$meteorCollection',
-  function($rootScope, $q, $meteorCollection) {
+angularMeteorCollections.run(['$rootScope', '$q', '$meteorCollection', '$meteorSubscribe',
+  function($rootScope, $q, $meteorCollection, $meteorSubscribe) {
     Object.getPrototypeOf($rootScope).$meteorCollection = function() {
       var args = Array.prototype.slice.call(arguments);
       var collection = $meteorCollection.apply(this, args);
+      var subscription = null;
+
+      collection.subscribe = function () {
+        var args = Array.prototype.slice.call(arguments);
+        subscription = $meteorSubscribe._subscribe(this, $q.defer(), args);
+        return collection;
+      };
 
       this.$on('$destroy', function() {
         collection.stop();
-	  });
+        if (subscription)
+          subscription.stop();
+	    });
 
       return collection;
 	};

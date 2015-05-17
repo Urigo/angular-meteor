@@ -143,14 +143,23 @@ angularMeteorObject.factory('$meteorObject', ['$rootScope', '$meteorUtils', 'Ang
     };
   }]);
 
-angularMeteorObject.run(['$rootScope', '$q', '$meteorObject',
-  function($rootScope, $q, $meteorObject) {
+angularMeteorObject.run(['$rootScope', '$q', '$meteorObject', '$meteorSubscribe',
+  function($rootScope, $q, $meteorObject, $meteorSubscribe) {
     Object.getPrototypeOf($rootScope).$meteorObject = function() {
       var args = Array.prototype.slice.call(arguments);
       var object = $meteorObject.apply(this, args);
+      var subscription = null;
+
+      object.subscribe = function () {
+        var args = Array.prototype.slice.call(arguments);
+        subscription = $meteorSubscribe._subscribe(this, $q.defer(), args);
+        return object;
+      };
 
       this.$on('$destroy', function() {
         object.stop();
+        if (subscription)
+          subscription.stop();
 	  });
 
       return object;
