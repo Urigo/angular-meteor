@@ -199,7 +199,7 @@ angularMeteorCollections.factory('AngularMeteorCollection', ['$q', '$meteorSubsc
 
           if (removedObject){
             self.splice(self.indexOf(removedObject), 1);
-            self._serverBackup.splice(self.indexOf(removedObject), 1);
+            self._serverBackup.splice(self._serverBackup.indexOf(removedObject), 1);
             safeApply();
           }
         }
