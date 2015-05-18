@@ -79,12 +79,6 @@ Package.onTest(function(api) {
     'modules/angular-meteor-user.js',
     'modules/angular-meteor-utils.js',
     'modules/angular-meteor-camera.js',
-    'test/meteor/test_collections.js',
     'test/meteor/tests.js'
   ], ['client']);
-
-  api.addFiles([
-    'test/meteor/test_collections.js',
-    'test/meteor/test_server.js'
-  ], ['server']);
 });
