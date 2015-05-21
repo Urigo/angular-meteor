@@ -245,7 +245,7 @@ angularMeteorCollections.factory('$meteorCollection', ['AngularMeteorCollection'
         if (auto) { // Deep watches the model and performs autobind.
           ngCollection.unregisterAutoBind = $rootScope.$watch(function () {
             if (ngCollection.UPDATING_FROM_SERVER){
-              realOldItems = _.without(ngCollection, 'UPDATING_FROM_SERVER');
+              realOldItems = angular.copy(_.without(ngCollection, 'UPDATING_FROM_SERVER'));
               return 'UPDATING_FROM_SERVER';
             }
             return _.without(ngCollection, 'UPDATING_FROM_SERVER');
