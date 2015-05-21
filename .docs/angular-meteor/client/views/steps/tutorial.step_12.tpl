@@ -61,7 +61,7 @@ In our parties.js file in the server directory we are going to add the 'options'
             {owner: {$exists: true}}
           ]}
         ]}, options);
-    }];
+    });
 
 Now our publish method receives an options arguments which we then pass to the Parties.find() function call.
 This will allow us to send arguments to the find function's modifier right from the subscribe call. The options object can
