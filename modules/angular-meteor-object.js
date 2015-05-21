@@ -82,7 +82,8 @@ angularMeteorObject.factory('AngularMeteorObject', ['$q', '$meteorSubscribe', fu
 
 // A list of internals properties to not watch for, nor pass to the Document on update and etc.
   AngularMeteorObject.$$internalProps = [
-    'save', 'reset', '$$collection', '$$options', '$$id', '$$hashkey', '$$internalProps', 'subscribe', 'stop', 'autorunComputation', 'unregisterAutoBind', 'unregisterAutoDestroy', 'getRawObject'
+    'save', 'reset', '$$collection', '$$options', '$$id', '$$hashkey', '$$internalProps', 'subscribe', 'stop', 'autorunComputation', 'unregisterAutoBind', 'unregisterAutoDestroy', 'getRawObject',
+    'collection', '_eventEmitter'
   ];
 
   var createAngularMeteorObject = function(collection, id, options){
@@ -108,9 +109,13 @@ angularMeteorObject.factory('$meteorObject', ['$rootScope', '$meteorUtils', 'Ang
   function($rootScope, $meteorUtils, AngularMeteorObject) {
     return function(collection, id, auto, options) {
       // Validate parameters
-      if (!(collection instanceof Meteor.Collection)) {
-        throw new TypeError("The first argument of $collection must be a Meteor.Collection object.");
+      if (!collection) {
+        throw new TypeError("The first argument of $meteorCollection is undefined.");
       }
+      if (!angular.isFunction(collection.findOne)) {
+        throw new TypeError("The first argument of $meteorCollection must be a function or a have a findOne function property.");
+      }
+
       auto = auto !== false; // Making auto default true - http://stackoverflow.com/a/15464208/1426570
 
       var data = new AngularMeteorObject(collection, id, options);
