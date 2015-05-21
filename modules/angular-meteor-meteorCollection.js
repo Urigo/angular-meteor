@@ -6,8 +6,8 @@ var angularMeteorCollections = angular.module('angular-meteor.meteor-collection'
 // The reason angular meteor collection is a factory function and not something
 // that inherit from array comes from here: http://perfectionkills.com/how-ecmascript-5-still-does-not-allow-to-subclass-an-array/
 // We went with the direct extensions approach
-angularMeteorCollections.factory('AngularMeteorCollection', ['$q', '$meteorSubscribe', '$meteorUtils', '$rootScope', '$timeout',
-  function($q, $meteorSubscribe, $meteorUtils, $rootScope, $timeout) {
+angularMeteorCollections.factory('AngularMeteorCollection', ['$q', '$meteorSubscribe', '$meteorUtils', '$rootScope', '$timeout', 'deepCopy',
+  function($q, $meteorSubscribe, $meteorUtils, $rootScope, $timeout, deepCopy) {
     var AngularMeteorCollection = {};
 
     AngularMeteorCollection.subscribe = function () {
@@ -28,14 +28,8 @@ angularMeteorCollections.factory('AngularMeteorCollection', ['$q', '$meteorSubsc
       function upsertObject(item, $q) {
         var deferred = $q.defer();
 
-        // delete $$hashkey two levels down
-        if (item.$$hashKey)
-          delete item.$$hashKey;
-
-        angular.forEach(item, function(prop) {
-          if (_.isObject(prop) && prop.$$hashKey)
-            delete prop.$$hashKey;
-        });
+        // delete $$hashkey
+        item = $meteorUtils.stripDollarPrefixedKeys(item);
 
         if (item._id) { // Performs an update if the _id property is set.
           var item_id = item._id; // Store the _id in temporary variable
@@ -165,7 +159,7 @@ angularMeteorCollections.factory('AngularMeteorCollection', ['$q', '$meteorSubsc
           safeApply();
         },
         changedAt: function (document, oldDocument, atIndex) {
-          self.splice(atIndex, 1, document);
+          deepCopy(self[atIndex], document);
           safeApply();
         },
         movedTo: function (document, fromIndex, toIndex) {
@@ -255,7 +249,6 @@ angularMeteorCollections.factory('$meteorCollection', ['AngularMeteorCollection'
 
             if (oldItems == 'UPDATING_FROM_SERVER')
               oldItems = realOldItems;
-
 
             if (newItems !== oldItems) {
 

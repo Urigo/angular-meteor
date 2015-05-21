@@ -3,6 +3,7 @@ var angularMeteorUtils = angular.module('angular-meteor.utils', []);
 
 angularMeteorUtils.service('$meteorUtils', [
   function () {
+    var self = this;
     this.getCollectionByName = function(string){
       return Mongo.Collection.get(string);
     };
@@ -26,6 +27,17 @@ angularMeteorUtils.service('$meteorUtils', [
       // return autorun object so that it can be stopped manually
       return comp;
     };
+    // Borrowed from angularFire - https://github.com/firebase/angularfire/blob/master/src/utils.js#L445-L454
+    this.stripDollarPrefixedKeys = function (data) {
+      if( !angular.isObject(data) ) { return data; }
+      var out = angular.isArray(data)? [] : {};
+      angular.forEach(data, function(v,k) {
+        if(typeof k !== 'string' || k.charAt(0) !== '$') {
+          out[k] = self.stripDollarPrefixedKeys(v);
+        }
+      });
+      return out;
+    }
   }]);
 
 angularMeteorUtils.run(['$rootScope', '$meteorUtils',
