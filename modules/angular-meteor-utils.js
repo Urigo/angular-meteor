@@ -27,3 +27,10 @@ angularMeteorUtils.service('$meteorUtils', [
       return comp;
     };
   }]);
+
+angularMeteorUtils.run(['$rootScope', '$meteorUtils',
+  function($rootScope, $meteorUtils) {
+    Object.getPrototypeOf($rootScope).$meteorAutorun = function(fn) {
+      return $meteorUtils.autorun(this, fn);
+    };
+}]);
