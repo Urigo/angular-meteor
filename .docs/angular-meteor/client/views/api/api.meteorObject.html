@@ -24,6 +24,11 @@ Therefor this is the recommended method.
     $meteor.object(collection, selector, auto)
 
     $scope.$meteorObject(collection, selector, auto)
+    
+  If you documents are saved with objects IDs (and not strings:  <a href="http://docs.meteor.com/#/full/mongo_collection" >see here </a>), 
+you should use <code> new Mongo.objectID  </code> to retieve the object. 
+
+	
 
 ### Arguments
 
@@ -129,3 +134,6 @@ Therefor this is the recommended method.
 
   </div>
 </template>
+
+
+
