@@ -153,7 +153,7 @@ angularMeteorCollections.factory('AngularMeteorCollection', ['$q', '$meteorSubsc
         // while handling updates from the server.
         if (!self.UPDATING_FROM_SERVER) {
           self.UPDATING_FROM_SERVER = true;
-          $rootScope.$apply();
+          if (!$rootScope.$$phase) $rootScope.$apply();
         }
         promise = $timeout(function () {
           // Saves changes happened within the previous update from server.
@@ -188,19 +188,32 @@ angularMeteorCollections.factory('AngularMeteorCollection', ['$q', '$meteorSubsc
           safeApply();
         },
         removedAt: function (oldDocument) {
-          var removedObject;
-          if (oldDocument._id._str){
-            removedObject = _.find(self, function(obj) {
-              return obj._id._str == oldDocument._id._str;
-            });
+          function findRemoveInd(col, doc) {
+              var removedObj;
+              // No _.findIndex in underscore 1.5.x
+              if (doc._id._str) {
+                removedObj = _.find(col, function(obj) {
+                  return obj._id._str == doc._id._str;
+                });
+              }
+              else {
+                removedObj = _.findWhere(col, {_id: doc._id});
+              }
+              return _.indexOf(col, removedObj);
           }
-          else
-            removedObject = _.findWhere(self, {_id: oldDocument._id});
 
-          if (removedObject){
-            self.splice(self.indexOf(removedObject), 1);
-            self._serverBackup.splice(self._serverBackup.indexOf(removedObject), 1);
+          var removeInd = findRemoveInd(self, oldDocument);
+          if (removeInd != -1) {
+            self.splice(removeInd, 1);
+            self._serverBackup.splice(removeInd, 1);
             safeApply();
+          } else {
+            // If it's been removed on client then it's already not in collection
+            // itself but still is in the _serverBackup.
+            removeInd = findRemoveInd(self._serverBackup, oldDocument);
+            if (removeInd != -1) {
+              self._serverBackup.splice(removeInd, 1);
+            }
           }
         }
       });
