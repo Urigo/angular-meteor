@@ -423,7 +423,7 @@ The reason is that we are calling a different subscription on the same collectio
 
 So to fix that, we will have to close that subscription after the partyDetails controller is destroyed.
 
-Web can do that be calling $scope.subscribe method. it will automatically close the subscription when the scope gets destroyed.
+Web can do that be calling **$scope**.subscribe method. it will **automatically close** the subscription when the scope gets destroyed.
 
 First remove to subscription from $meteor.object:
 
