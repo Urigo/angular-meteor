@@ -55,28 +55,28 @@ angular.module('socially');
 
 class PartiesList {
   constructor($scope, $meteor, $rootScope, $state) {
-    var that = this;
+    var self = this;
 
     // Scope properties
-    that.page = 1;
-    that.perPage = 3;
-    that.sort = {name: 1};
-    that.orderProperty = '1';
+    self.page = 1;
+    self.perPage = 3;
+    self.sort = {name: 1};
+    self.orderProperty = '1';
 
-    that.users = $meteor.collection(Meteor.users, false).subscribe('users');
+    self.users = $meteor.collection(Meteor.users, false).subscribe('users');
 
-    that.parties = $meteor.collection(function () {
+    self.parties = $meteor.collection(function () {
       return Parties.find({}, {
         sort: $scope.getReactively('vm.sort')
       });
     });
 
     // Scope method declarations (API)
-    that.creator = creator;
-    that.rsvp = rsvp;
-    that.getUserById = getUserById;
-    that.pageChanged = pageChanged;
-    that.remove = remove;
+    self.creator = creator;
+    self.rsvp = rsvp;
+    self.getUserById = getUserById;
+    self.pageChanged = pageChanged;
+    self.remove = remove;
 
     // Tasks to run on directive initialisation
     $meteor.autorun($scope, autorun);
@@ -94,13 +94,13 @@ class PartiesList {
         },
 
         $scope.getReactively('vm.search')).then(function () {
-          that.partiesCount = $meteor.object(Counts, 'numberOfParties', false);
+          self.partiesCount = $meteor.object(Counts, 'numberOfParties', false);
 
-          that.parties.forEach( party => {
+          self.parties.forEach( party => {
             party.onClicked = () => $state.go('partyDetails', {partyId: party._id})
           });
 
-          that.map = {
+          self.map = {
             center: {
               latitude:  45,
               longitude: -73
@@ -114,16 +114,16 @@ class PartiesList {
     }
 
     function watchOrderProperty() {
-      if (that.orderProperty)
-        that.sort = {name: parseInt(that.orderProperty)};
+      if (self.orderProperty)
+        self.sort = {name: parseInt(self.orderProperty)};
     }
 
     function remove(party) {
-      that.parties.splice(that.parties.indexOf(party), 1);
+      self.parties.splice(self.parties.indexOf(party), 1);
     }
 
     function pageChanged(newPage) {
-      that.page = newPage;
+      self.page = newPage;
     }
 
     function getUserById(userId) {
@@ -133,7 +133,7 @@ class PartiesList {
     function creator(party) {
       if (!party)
         return;
-      var owner = that.getUserById(party.owner);
+      var owner = self.getUserById(party.owner);
       if (!owner)
         return "nobody";
 
