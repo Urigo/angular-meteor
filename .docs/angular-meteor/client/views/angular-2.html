@@ -41,37 +41,42 @@
             </p>
             <btf-markdown>
 ```
-var {Component, View, Inject} = angular2;
+"use strict";
+
+var {Component, View, Inject, State} = angular2now;
 
 angular.module('socially');
 
+@State({ name: 'parties', url: '/parties', defaultRoute: true, html5Mode: true })
+
 @Component({selector: 'parties-list'})
-@View({templateUrl: 'client/parties/parties-list/parties-list.ng.html'})
+@View({templateUrl: 'client/parties-list/parties-list.html'})
 @Inject(['$scope', '$meteor', '$rootScope', '$state'])
 
 class PartiesList {
   constructor($scope, $meteor, $rootScope, $state) {
+    var self = this;
 
     // Scope properties
-    $scope.page = 1;
-    $scope.perPage = 3;
-    $scope.sort = {name: 1};
-    $scope.orderProperty = '1';
+    self.page = 1;
+    self.perPage = 3;
+    self.sort = {name: 1};
+    self.orderProperty = '1';
 
-    $scope.users = $meteor.collection(Meteor.users, false).subscribe('users');
+    self.users = $meteor.collection(Meteor.users, false).subscribe('users');
 
-    $scope.parties = $meteor.collection(function () {
+    self.parties = $meteor.collection(function () {
       return Parties.find({}, {
-        sort: $scope.getReactively('sort')
+        sort: $scope.getReactively('vm.sort')
       });
     });
 
     // Scope method declarations (API)
-    $scope.creator = creator;
-    $scope.rsvp = rsvp;
-    $scope.getUserById = getUserById;
-    $scope.pageChanged = pageChanged;
-    $scope.remove = remove;
+    self.creator = creator;
+    self.rsvp = rsvp;
+    self.getUserById = getUserById;
+    self.pageChanged = pageChanged;
+    self.remove = remove;
 
     // Tasks to run on directive initialisation
     $meteor.autorun($scope, autorun);
@@ -79,45 +84,46 @@ class PartiesList {
 
     // API and task implementation functions
     function autorun() {
-      $meteor.subscribe('parties', {
-        limit: parseInt($scope.getReactively('perPage')),
-        skip:  (parseInt($scope.getReactively('page')) - 1) * parseInt($scope.getReactively('perPage')),
-        sort:  $scope.getReactively('sort')
-      }, $scope.getReactively('search')).then(function () {
-        $scope.partiesCount = $meteor.object(Counts, 'numberOfParties', false);
+      $meteor.subscribe(
+        'parties',
 
-        $scope.parties.forEach(function (party) {
-          party.onClicked = function () {
-            onMarkerClicked(party);
+        {
+          limit: parseInt($scope.getReactively('vm.perPage')),
+          skip:  (parseInt($scope.getReactively('vm.page')) - 1) * parseInt($scope.getReactively('vm.perPage')),
+          sort:  $scope.getReactively('vm.sort')
+        },
+
+        $scope.getReactively('vm.search')).then(function () {
+          self.partiesCount = $meteor.object(Counts, 'numberOfParties', false);
+
+          self.parties.forEach( party => {
+            party.onClicked = () => $state.go('partyDetails', {partyId: party._id})
+          });
+
+          self.map = {
+            center: {
+              latitude:  45,
+              longitude: -73
+            },
+            zoom:   8
           };
-        });
 
-        $scope.map = {
-          center: {
-            latitude:  45,
-            longitude: -73
-          },
-          zoom:   8
-        };
-
-        var onMarkerClicked = function (marker) {
-          $state.go('partyDetails', {partyId: marker._id});
         }
 
-      });
+      );
     }
 
     function watchOrderProperty() {
-      if ($scope.orderProperty)
-        $scope.sort = {name: parseInt($scope.orderProperty)};
+      if (self.orderProperty)
+        self.sort = {name: parseInt(self.orderProperty)};
     }
 
     function remove(party) {
-      $scope.parties.splice($scope.parties.indexOf(party), 1);
+      self.parties.splice(self.parties.indexOf(party), 1);
     }
 
     function pageChanged(newPage) {
-      $scope.page = newPage;
+      self.page = newPage;
     }
 
     function getUserById(userId) {
@@ -127,7 +133,7 @@ class PartiesList {
     function creator(party) {
       if (!party)
         return;
-      var owner = $scope.getUserById(party.owner);
+      var owner = self.getUserById(party.owner);
       if (!owner)
         return "nobody";
 
