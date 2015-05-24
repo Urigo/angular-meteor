@@ -61,7 +61,7 @@ In our parties.js file in the server directory we are going to add the 'options'
             {owner: {$exists: true}}
           ]}
         ]}, options);
-    }];
+    });
 
 Now our publish method receives an options arguments which we then pass to the Parties.find() function call.
 This will allow us to send arguments to the find function's modifier right from the subscribe call. The options object can
@@ -423,7 +423,7 @@ The reason is that we are calling a different subscription on the same collectio
 
 So to fix that, we will have to close that subscription after the partyDetails controller is destroyed.
 
-Web can do that be calling $scope.subscribe method. it will automatically close the subscription when the scope gets destroyed.
+Web can do that be calling **$scope.$meteorSubscribe** method. it will **automatically close** the subscription when the scope gets destroyed.
 
 First remove to subscription from $meteor.object:
 
@@ -431,7 +431,7 @@ First remove to subscription from $meteor.object:
 
 And now add the subscribe function:
 
-    $scope.subscribe('parties');
+    $scope.$meteorSubscribe('parties');
 
 That's it.
 

@@ -14,8 +14,7 @@ A service that wraps a Meteor object to enable reactivity within AngularJS.
 Finds the first document that matches the selector, as ordered by sort and skip options.
 Wraps [collection.findOne](http://docs.meteor.com/#/full/findone)
 
-Calling $scope.$meteorObject is exactly the same but additionally it will automatically stop the object when the scope is destroyed.
-Therefor this is the recommended method.
+Calling $scope.$meteorObject is exactly the same but additionally it will automatically stop the object when the scope is destroyed; therefore this is the recommended method.
 
 ----
 
@@ -24,6 +23,12 @@ Therefor this is the recommended method.
     $meteor.object(collection, selector, auto)
 
     $scope.$meteorObject(collection, selector, auto)
+
+  If you documents are saved with objects IDs (and not strings:  <a href="http://docs.meteor.com/#/full/mongo_collection" >see here </a>),
+you should use <code> new Mongo.objectID  </code> to retieve the object.
+
+    $meteor.object (collection, new Meteor.ObjectID (stringId), auto);
+
 
 ### Arguments
 
@@ -104,6 +109,7 @@ Therefor this is the recommended method.
 
           $scope.party = $meteor.object(Parties, $stateParams.partyId);
 
+
           $scope.partyNotAuto = $scope.$meteorObject(Parties, $stateParams.partyId, false);
 
           $scope.save = function() {
@@ -129,3 +135,6 @@ Therefor this is the recommended method.
 
   </div>
 </template>
+
+
+

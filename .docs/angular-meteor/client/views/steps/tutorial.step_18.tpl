@@ -1,4 +1,3 @@
-
   <div>
     <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/steps/tutorial.step_18.html"
        class="btn btn-default btn-lg improve-button">
@@ -20,12 +19,11 @@
 
     <do-nothing class="col-md-12">
       <btf-markdown>
+In this step we will consider switching from *Twitter Bootstrap* to [*angular-material*](https://material.angularjs.org/#/).
 
-In this step we will consider switching from *Twitter Bootstrap* to [*angular-material*](https://material.angularjs.org/#/). 
+Angular-material is an AngularJS implementation of the Google's [Material Design specifications](http://www.google.com/design/spec/material-design/introduction.html). Material Design is a mobile-first design language used in many new Google's applications, especially on the Android platform.
 
-Angular-material is an AngularJS wrapper for Google's Material Design CSS framework. Material Design is a mobile-first design language used in many new Google's applications, especially on the Android platform. 
-
-First we have to remove bootstrap from our application. Type in the console:
+To start, first we have to remove bootstrap from our application. Type in the console:
 
     meteor remove twbs:bootstrap
 
@@ -35,7 +33,7 @@ Now we have to add the angular-material Meteor package:
 
 Next, we want to inject the angular-material module to our Angular application. Edit your `client/lib/app.js` and add `ngMaterial`:
 
-        angular.module('socially',[
+      angular.module('socially',[
 	      'angular-meteor',
 	      'ui.router',
 	      'angularUtils.directives.dirPagination',
@@ -131,12 +129,16 @@ First, replace the code in your `client/views/parties-list.ng.html` with this co
         <span class="hljs-tag">&lt;/<span class="hljs-title">md-select</span>&gt;</span>
       <span class="hljs-tag">&lt;/<span class="hljs-title">md-input-container</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-title">form</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"angular-google-map-container"</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">ui-gmap-google-map</span> <span class="hljs-attribute">center</span>=<span class="hljs-value">"map.center"</span> <span class="hljs-attribute">zoom</span>=<span class="hljs-value">"map.zoom"</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">ui-gmap-markers</span> <span class="hljs-attribute">models</span>=<span class="hljs-value">"parties"</span> <span class="hljs-attribute">coords</span>=<span class="hljs-value">"'location'"</span> <span class="hljs-attribute">click</span>=<span class="hljs-value">"onClicked()"</span>
-                         <span class="hljs-attribute">fit</span>=<span class="hljs-value">"true"</span> <span class="hljs-attribute">idkey</span>=<span class="hljs-value">"'_id'"</span> <span class="hljs-attribute">doRebuildAll</span>=<span class="hljs-value">"true"</span>&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-title">ui-gmap-markers</span>&gt;</span>
-      <span class="hljs-tag">&lt;/<span class="hljs-title">ui-gmap-google-map</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">layout</span>=<span class="hljs-value">"row"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">flex</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">flex</span>=<span class="hljs-value">"60"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"angular-google-map-container"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">ui-gmap-google-map</span> <span class="hljs-attribute">center</span>=<span class="hljs-value">"map.center"</span> <span class="hljs-attribute">zoom</span>=<span class="hljs-value">"map.zoom"</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-title">ui-gmap-markers</span> <span class="hljs-attribute">models</span>=<span class="hljs-value">"parties"</span> <span class="hljs-attribute">coords</span>=<span class="hljs-value">"'location'"</span> <span class="hljs-attribute">click</span>=<span class="hljs-value">"onClicked()"</span>
+                           <span class="hljs-attribute">fit</span>=<span class="hljs-value">"true"</span> <span class="hljs-attribute">idkey</span>=<span class="hljs-value">"'_id'"</span> <span class="hljs-attribute">doRebuildAll</span>=<span class="hljs-value">"true"</span>&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-title">ui-gmap-markers</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">ui-gmap-google-map</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">flex</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">layout</span>=<span class="hljs-value">"column"</span> <span class="hljs-attribute">layout-padding</span>&gt;</span>
@@ -194,7 +196,15 @@ First, replace the code in your `client/views/parties-list.ng.html` with this co
 
 	    <btf-markdown>
 
-First we wrapped everything into the `md-content` tag. We replaced all the buttons with `md-button` tags. We also wrapped form inputs into `md-input-container` tags which enable the Material Design style labels for inputs.
+What did we do:
+
+* Wrapped everything into the `md-content` tag
+* Replaced all the buttons with `md-button` tags
+* Wrapped form inputs into `md-input-container` tags which enable the Material Design style labels for inputs
+* Added material design Icons
+
+## Material Design Icons
+
 One new thing we also have to add is usage of Material Design icon set. Google provides free icons for Material Design. You can install it by typing: 
 
     meteor add planettraining:material-design-icons
@@ -287,22 +297,37 @@ Here, a you can see a specific type of button used by angular-material. We have 
 
 Angular-material makes a regular button that points to a link using `ng-href`. 
 
+## Custom Angular forms and Accounts-UI Material Design
+
 Next, we need to make our users management pages use Material Design. 
+
+To do that we are going to define our accounts routes manually and use [angular-meteor's auth methods](/api/auth) in our code.
 
 First we want to remove the Meteor's login button from the toolbar and insert our custom buttons. So, open `client/index.html` and remove the following code from the toolbar:
 
-    <div class="navbar-right navbar-text">
-          <meteor-include src="loginButtons"></meteor-include>
-    </div>
+	    </btf-markdown>
 
-and replace it with: 
+<pre><code>
+<span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"navbar-right navbar-text"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-title">meteor-include</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"loginButtons"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">meteor-include</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+</code></pre>
 
-    <md-button ng-href="/login" ng-hide="$root.currentUser">Login</md-button>
-    <md-button ng-href="/register" ng-hide="$root.currentUser">Sign up</md-button>
-    <div ng-show="$root.currentUser">{{ $root.currentUser }}</div>
-    <md-button ng-href="/logout" ng-show="$root.currentUser">Logout</md-button> 
+	    <btf-markdown>
 
-You see that we now show `Login` and `Sign up` buttons when the user is not logged in, and we show user name and `Logout` button when the user is logged in. 
+and replace it with:
+
+	    </btf-markdown>
+
+<pre><code><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">md-button</span> <span class="hljs-attribute">ng-href</span>=<span class="hljs-value">"/login"</span> <span class="hljs-attribute">ng-hide</span>=<span class="hljs-value">"$root.currentUser"</span>&gt;</span>Login<span class="hljs-tag">&lt;/<span class="hljs-title">md-button</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">md-button</span> <span class="hljs-attribute">ng-href</span>=<span class="hljs-value">"/register"</span> <span class="hljs-attribute">ng-hide</span>=<span class="hljs-value">"$root.currentUser"</span>&gt;</span>Sign up<span class="hljs-tag">&lt;/<span class="hljs-title">md-button</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">ng-show</span>=<span class="hljs-value">"$root.currentUser"</span>&gt;</span></span><span class="hljs-expression">{{ $<span class="hljs-variable">root.currentUser</span> }}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">md-button</span> <span class="hljs-attribute">ng-href</span>=<span class="hljs-value">"/logout"</span> <span class="hljs-attribute">ng-show</span>=<span class="hljs-value">"$root.currentUser"</span>&gt;</span>Logout<span class="hljs-tag">&lt;/<span class="hljs-title">md-button</span>&gt;</span></span>
+</code></pre>
+
+	    <btf-markdown>
+
+Now show `Login` and `Sign up` buttons when the user is not logged in, and we show user name and `Logout` button when the user is logged in.
 
 Having created these buttons we need to assign them corresponding routes as referenced in the `ng-href` attributes of our buttons. Open the `client/routes.js` and insert following routes below the `$stateProvider` line, and above the existing routes:
 
@@ -337,66 +362,94 @@ Having created these buttons we need to assign them corresponding routes as refe
        }
     })
 
-  First thing of note here is that we're using `controllerAs` parameter in the route definition. This gives an alias to `$scope` and many other benefits. For detailed information, read [this article](http://toddmotto.com/digging-into-angulars-controller-as-syntax/). You will see later how we use it. 
-  Second thing is in the `logout` route. We use a `resolve` parameter to define a sort of inline action for this route, as there is not too much logic associated with it, and there is no template. We need this route to log the user out of the system and redirect to home page. So we use `$meteor.logout()` method which returns a promise, and on successful logout we redirect the user to the home page, i.e. `parties` state. On failure, we log an error to the browser console.
-  For each of our routes we have declared a template and a controller. So, let's go ahead and create them. Create a subfolder `users` in the `client/` folder, and in the `users` subfolder create subfolders `controllers`, and `views`. We now need to create a controller and a view for each of our routes. 
-  Create a file `client/users/controllers/login.js`. Paste the following code: 
+* controllerAs -
+First thing of note here is that we're using `controllerAs` parameter in the route definition. This gives an alias to `$scope` and many other benefits. For detailed information, read [this article](http://toddmotto.com/digging-into-angulars-controller-as-syntax/). You will see later how we use it.
+* Routes -
+Second thing is in the `logout` route. We use a `resolve` parameter to define a sort of inline action for this route, as there is not too much logic associated with it, and there is no template. We need this route to log the user out of the system and redirect to home page. So we use `$meteor.logout()` method which returns a promise, and on successful logout we redirect the user to the home page, i.e. `parties` state. On failure, we log an error to the browser console.
+For each of our routes we have declared a template and a controller.
 
-  
+So, let's go ahead and create them. Create a subfolder `users` in the `client/` folder, and in the `users` subfolder create subfolders `controllers`, and `views`. We now need to create a controller and a view for each of our routes.
 
-    angular.module("socially").controller("LoginCtrl", ['$meteor', '$state', 
-          function($meteor, $state){
-        	  var vm = this;
-        	  
-        	  vm.credentials = {
-        		  email: '',
-        		  password: ''
-        	  };
-            
-              vm.error = '';
-        	  
-        	  vm.login = function (){
-        		  $meteor.loginWithPassword(vm.credentials.email, vm.credentials.password).then(
-                function(){
-                  $state.go('parties');
-                },
-                function(err){
-                  vm.error = 'Login error - ' + err;
-                }
-              );
-        	  };
-          }
-        ]);
 
-Now, instead of using $scope, we're using *controller as* syntax, so we declare a variable `vm` and assign `this` to it. From now on, each `$scope.` variable or method will be declared as `vm.` variable or method. We created a `credentials` object containing email and password that will be passed to us from the view. We created a `login`  method that will execute the user log in. You can see a list of API methods for users management provided by `angular-meteor` [here](http://angularjs.meteor.com/api/auth). Just as we did in the `logout` route, here we utilize an `angular-meteor` method `$meteor.loginWithPassword()` which takes two arguments. The first argument is username or email, and the second argument is the password. It returns a promise, and on success we redirect the user `parties` state, or assign error message to our `vm.error` property of the controller. 
-Now create a view file with login form in `client/users/views` folder and name it `login.ng.html`. Paste the followind code: 
+Create a file `client/users/controllers/login.js`. Paste the following code:
 
-    <md-content layout="row">
-    <span flex></span>
-    <md-whiteframe layout="column" flex="50">
-    	<div layout="row" layout-align="space-around center">
-    		<div>Login with:</div>
-    		<md-button>Twitter</md-button>
-    		<md-button>Facebook</md-button>
-    	</div>
-    	<div ng-show="lc.error" class="md-warn"><small>{{ lc.error }}</small></div>
-    	<form layout="column">
-    		<md-input-container>		
-    			<md-icon md-svg-icon="content:ic_mail_24px"></md-icon>
-    			<input type="text" ng-model="lc.credentials.email" placeholder="email" aria-label="email" />
-    		</md-input-container>
-    		<md-input-container>
-    			<md-icon md-svg-icon="action:ic_lock_open_24px"></md-icon>
-    			<input type="password" ng-model="lc.credentials.password" placeholder="password" aria-label="password" />
-    		</md-input-container>
-    		<md-button class="md-raised md-primary" ng-click="lc.login()" aria-label="login">Sign In</md-button>
-    	</form>
-    	<div layout="row" layout-align="space-around center"><a href="/resetpw">Forgot password?</a><a href="/register">Create an account</a></div>
-    </md-whiteframe>
-    <span flex></span>
-    </md-content>
+    angular.module("socially").controller("LoginCtrl", ['$meteor', '$state',
+      function($meteor, $state){
+        var vm = this;
 
-In our router file, we declared the login route controller to be `LoginCtrl` and a `controllerAs` parameter to be `lc`. This is an alias for our controller and it corresponds to the `vm` variable in our controller code. So to address all variables/objects/methods of our controller, we prefix them with `lc.` in our view. You can see in the view that we use `lc.error`, `lc.credentials`, and `lc.login()`. 
+        vm.credentials = {
+          email: '',
+          password: ''
+        };
+
+        vm.error = '';
+
+        vm.login = function (){
+          $meteor.loginWithPassword(vm.credentials.email, vm.credentials.password).then(
+            function(){
+              $state.go('parties');
+            },
+            function(err){
+              vm.error = 'Login error - ' + err;
+            }
+          );
+        };
+      }
+    ]);
+
+Now, instead of using $scope, we're using *controller as* syntax, so we declare a variable `vm` and assign `this` to it.
+From now on, each `$scope.` variable or method will be declared as `vm.` variable or method.
+
+We created a `credentials` object containing email and password that will be passed to us from the view. We created a `login` method that will execute the user log in.
+
+You can see a list of API methods for users management provided by `angular-meteor` [here](http://angularjs.meteor.com/api/auth).
+
+Just as we did in the `logout` route, here we utilize an `angular-meteor` method `$meteor.loginWithPassword()` which takes two arguments
+
+1. username or email
+2. password
+
+It returns a promise, and on success we redirect the user `parties` state, or assign error message to our `vm.error` property of the controller.
+
+Now create a view file with login form in `client/users/views` folder and name it `login.ng.html`. Paste the following code:
+
+	    </btf-markdown>
+
+<pre><code><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">md-content</span> <span class="hljs-attribute">layout</span>=<span class="hljs-value">"row"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">flex</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">md-whiteframe</span> <span class="hljs-attribute">layout</span>=<span class="hljs-value">"column"</span> <span class="hljs-attribute">flex</span>=<span class="hljs-value">"50"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">layout</span>=<span class="hljs-value">"row"</span> <span class="hljs-attribute">layout-align</span>=<span class="hljs-value">"space-around center"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>Login with:<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">md-button</span>&gt;</span>Twitter<span class="hljs-tag">&lt;/<span class="hljs-title">md-button</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">md-button</span>&gt;</span>Facebook<span class="hljs-tag">&lt;/<span class="hljs-title">md-button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">ng-show</span>=<span class="hljs-value">"lc.error"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"md-warn"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">small</span>&gt;</span></span><span class="hljs-expression">{{ <span class="hljs-variable">lc.error</span> }}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">small</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">form</span> <span class="hljs-attribute">layout</span>=<span class="hljs-value">"column"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">md-input-container</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">md-icon</span> <span class="hljs-attribute">md-svg-icon</span>=<span class="hljs-value">"content:ic_mail_24px"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">md-icon</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text"</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">"lc.credentials.email"</span> <span class="hljs-attribute">placeholder</span>=<span class="hljs-value">"email"</span> <span class="hljs-attribute">aria-label</span>=<span class="hljs-value">"email"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">md-input-container</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">md-input-container</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">md-icon</span> <span class="hljs-attribute">md-svg-icon</span>=<span class="hljs-value">"action:ic_lock_open_24px"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">md-icon</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"password"</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">"lc.credentials.password"</span> <span class="hljs-attribute">placeholder</span>=<span class="hljs-value">"password"</span> <span class="hljs-attribute">aria-label</span>=<span class="hljs-value">"password"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">md-input-container</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">md-button</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"md-raised md-primary"</span> <span class="hljs-attribute">ng-click</span>=<span class="hljs-value">"lc.login()"</span> <span class="hljs-attribute">aria-label</span>=<span class="hljs-value">"login"</span>&gt;</span>Sign In<span class="hljs-tag">&lt;/<span class="hljs-title">md-button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">form</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">layout</span>=<span class="hljs-value">"row"</span> <span class="hljs-attribute">layout-align</span>=<span class="hljs-value">"space-around center"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"/resetpw"</span>&gt;</span>Forgot password?<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"/register"</span>&gt;</span>Create an account<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">md-whiteframe</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">flex</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">md-content</span>&gt;</span></span>
+</code></pre>
+
+	    <btf-markdown>
+
+
+In our router file, we declared the login route controller to be `LoginCtrl` and a `controllerAs` parameter to be `lc`.
+
+This is an alias for our controller and it corresponds to the `vm` variable in our controller code.
+So to address all variables/objects/methods of our controller, we prefix them with `lc.`
+
+In our view. You can see in the view that we use `lc.error`, `lc.credentials`, and `lc.login()`.
 
 The procedure is the same for the `register` and `resetpw` routes, so now you create `client/users/controllers/register.js` and paste following code into it: 
 
@@ -424,32 +477,37 @@ The procedure is the same for the `register` and `resetpw` routes, so now you cr
       }
     ]);
       
-  Create a file `client/users/views/register.ng.html` and paste the following code into it: 
+Create a file `client/users/views/register.ng.html` and paste the following code into it:
 
-    <md-content layout="row">
-    <span flex></span>
-    <md-whiteframe layout="column" flex="50">
-    	<div layout="row" layout-align="space-around center">
-    		<div>Login with:</div>
-    		<md-button>Twitter</md-button>
-    		<md-button>Facebook</md-button>
-    	</div>
-    	<div ng-show="rc.error" class="md-warn"><small>{{ rc.error }}</small></div>
-    	<form layout="column">
-    		<md-input-container>		
-    			<md-icon md-svg-icon="content:ic_mail_24px"></md-icon>
-    			<input type="text" ng-model="rc.credentials.email" placeholder="email" aria-label="email" />
-    		</md-input-container>
-    		<md-input-container>
-    			<md-icon md-svg-icon="action:ic_lock_open_24px"></md-icon>
-    			<input type="password" ng-model="rc.credentials.password" placeholder="password" aria-label="password" />
-    		</md-input-container>
-    		<md-button class="md-raised md-primary" ng-click="rc.register()">Create Account</md-button>
-    	</form>
-    	<div layout="row" layout-align="end center"><a href="/login">Login</a></div>
-    </md-whiteframe>
-    <span flex></span>
-    </md-content>
+	    </btf-markdown>
+
+<pre><code><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">md-content</span> <span class="hljs-attribute">layout</span>=<span class="hljs-value">"row"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">flex</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">md-whiteframe</span> <span class="hljs-attribute">layout</span>=<span class="hljs-value">"column"</span> <span class="hljs-attribute">flex</span>=<span class="hljs-value">"50"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">layout</span>=<span class="hljs-value">"row"</span> <span class="hljs-attribute">layout-align</span>=<span class="hljs-value">"space-around center"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>Login with:<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">md-button</span>&gt;</span>Twitter<span class="hljs-tag">&lt;/<span class="hljs-title">md-button</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">md-button</span>&gt;</span>Facebook<span class="hljs-tag">&lt;/<span class="hljs-title">md-button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">ng-show</span>=<span class="hljs-value">"rc.error"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"md-warn"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">small</span>&gt;</span></span><span class="hljs-expression">{{ <span class="hljs-variable">rc.error</span> }}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">small</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">form</span> <span class="hljs-attribute">layout</span>=<span class="hljs-value">"column"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">md-input-container</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">md-icon</span> <span class="hljs-attribute">md-svg-icon</span>=<span class="hljs-value">"content:ic_mail_24px"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">md-icon</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text"</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">"rc.credentials.email"</span> <span class="hljs-attribute">placeholder</span>=<span class="hljs-value">"email"</span> <span class="hljs-attribute">aria-label</span>=<span class="hljs-value">"email"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">md-input-container</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">md-input-container</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">md-icon</span> <span class="hljs-attribute">md-svg-icon</span>=<span class="hljs-value">"action:ic_lock_open_24px"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">md-icon</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"password"</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">"rc.credentials.password"</span> <span class="hljs-attribute">placeholder</span>=<span class="hljs-value">"password"</span> <span class="hljs-attribute">aria-label</span>=<span class="hljs-value">"password"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">md-input-container</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">md-button</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"md-raised md-primary"</span> <span class="hljs-attribute">ng-click</span>=<span class="hljs-value">"rc.register()"</span>&gt;</span>Create Account<span class="hljs-tag">&lt;/<span class="hljs-title">md-button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">form</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">layout</span>=<span class="hljs-value">"row"</span> <span class="hljs-attribute">layout-align</span>=<span class="hljs-value">"end center"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"/login"</span>&gt;</span>Login<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">md-whiteframe</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">flex</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">md-content</span>&gt;</span></span>
+</code></pre>
+
+	    <btf-markdown>
 
 Create a file `client/users/controllers/reset.js` and paste the following code into it: 
 
@@ -476,32 +534,45 @@ Create a file `client/users/controllers/reset.js` and paste the following code i
       }
     ]);
 
-And, finally, create a corresponding view `client/users/views/reset-password.ng.html` and paste the following into it: 
+And, finally, create a corresponding view `client/users/views/reset-password.ng.html` and paste the following into it:
 
-    <md-content layout="row">
-    <span flex></span>
-    <md-whiteframe layout="column" flex="50">
-    	<div layout="row" layout-align="space-around center">
-    		<div>Login with:</div>
-    		<md-button>Twitter</md-button>
-    		<md-button>Facebook</md-button>
-    	</div>
-    	<div ng-show="rpc.error" class="md-warn"><small>{{ rpc.error }}</small></div>
-    	<form layout="column">
-    		<md-input-container>		
-    			<md-icon md-svg-icon="content:ic_mail_24px"></md-icon>
-    			<input type="text" ng-model="rpc.credentials.email" placeholder="email" aria-label="email" />
-    		</md-input-container>		
-    		<md-button class="md-raised md-primary" ng-click="rpc.reset()" aria-label="login">Reset password</md-button>
-    	</form>
-    	<div layout="row" layout-align="end center"><a href="/login">Login</a></div>
-    </md-whiteframe>
-    <span flex></span>
-    </md-content>
+	    </btf-markdown>
 
-That's it, now you can enjoy the new user management forms with Material Design. 
+<pre><code><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">md-content</span> <span class="hljs-attribute">layout</span>=<span class="hljs-value">"row"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">flex</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">md-whiteframe</span> <span class="hljs-attribute">layout</span>=<span class="hljs-value">"column"</span> <span class="hljs-attribute">flex</span>=<span class="hljs-value">"50"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">layout</span>=<span class="hljs-value">"row"</span> <span class="hljs-attribute">layout-align</span>=<span class="hljs-value">"space-around center"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>Login with:<span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">md-button</span>&gt;</span>Twitter<span class="hljs-tag">&lt;/<span class="hljs-title">md-button</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">md-button</span>&gt;</span>Facebook<span class="hljs-tag">&lt;/<span class="hljs-title">md-button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">ng-show</span>=<span class="hljs-value">"rpc.error"</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"md-warn"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">small</span>&gt;</span></span><span class="hljs-expression">{{ <span class="hljs-variable">rpc.error</span> }}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">small</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">form</span> <span class="hljs-attribute">layout</span>=<span class="hljs-value">"column"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">md-input-container</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">md-icon</span> <span class="hljs-attribute">md-svg-icon</span>=<span class="hljs-value">"content:ic_mail_24px"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">md-icon</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text"</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">"rpc.credentials.email"</span> <span class="hljs-attribute">placeholder</span>=<span class="hljs-value">"email"</span> <span class="hljs-attribute">aria-label</span>=<span class="hljs-value">"email"</span> /&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">md-input-container</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">md-button</span> <span class="hljs-attribute">class</span>=<span class="hljs-value">"md-raised md-primary"</span> <span class="hljs-attribute">ng-click</span>=<span class="hljs-value">"rpc.reset()"</span> <span class="hljs-attribute">aria-label</span>=<span class="hljs-value">"login"</span>&gt;</span>Reset password<span class="hljs-tag">&lt;/<span class="hljs-title">md-button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-title">form</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">layout</span>=<span class="hljs-value">"row"</span> <span class="hljs-attribute">layout-align</span>=<span class="hljs-value">"end center"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"/login"</span>&gt;</span>Login<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">md-whiteframe</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">span</span> <span class="hljs-attribute">flex</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">span</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-title">md-content</span>&gt;</span></span>
+</code></pre>
+
+	    <btf-markdown>
+
+# Summary
+
+In this chapter we two main things:
+
+1. How to work with angular-material-design in our angular-meteor app
+2. How to create custom Angular forms for our application's auth
+
+I hope one of you will create an accounts-ui package based on that code and will save us all tons of code!
+
+
 </btf-markdown>
- {{/markdown}}
     </do-nothing>
 
     <div class="col-md-12">
