@@ -1,8 +1,8 @@
 'use strict';
 var angularMeteorUtils = angular.module('angular-meteor.utils', []);
 
-angularMeteorUtils.service('$meteorUtils', [
-  function () {
+angularMeteorUtils.service('$meteorUtils', [ '$timeout',
+  function ($timeout) {
     var self = this;
     this.getCollectionByName = function(string){
       return Mongo.Collection.get(string);
@@ -14,11 +14,7 @@ angularMeteorUtils.service('$meteorUtils', [
 
         // this is run immediately for the first call
         // but after that, we need to $apply to start Angular digest
-        if (!c.firstRun) setTimeout(function() {
-          // wrap $apply in setTimeout to avoid conflict with
-          // other digest cycles
-          scope.$apply();
-        }, 0);
+        if (!c.firstRun) $timeout(angular.noop, 0);
       });
       // stop autorun when scope is destroyed
       scope.$on('$destroy', function() {
