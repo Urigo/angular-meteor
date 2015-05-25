@@ -89,7 +89,7 @@ It is the same as:
     $scope.parties = $meteor.collection(Parties);
     
 But it is a *good practise* to resolve a subscription in state's resolve function:
-    .state('parties', {
+     .state('parties', {
       url: '/parties',
       templateUrl: 'client/parties/views/parties-list.ng.html',
       controller: 'PartiesListCtrl',
@@ -100,7 +100,7 @@ But it is a *good practise* to resolve a subscription in state's resolve functio
           }
         ]
       }
-    });
+     });
 
 * Our publish function can also take parameters.  In that case, we would also need to pass the parameters from the client.
 For more information about the $meteor.subscribe service [click here](http://angularjs.meteor.com/api/subscribe) or the subscribe function of [AngularMeteorCollection](/api/AngularMeteorCollection).
