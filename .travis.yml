@@ -1,10 +1,4 @@
 language: node_js
-node_js:
-    - "0.10"
-before_script:
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
-script:
-  - node_modules/karma/bin/karma start test/karma.conf.js --single-run --browsers Firefox
-after_success:
-  - cat ./.coverage/*/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+install: curl https://install.meteor.com | /bin/sh
+script: VELOCITY_TEST_PACKAGES=1 meteor test-packages --driver-package velocity:html-reporter --velocity ./
+

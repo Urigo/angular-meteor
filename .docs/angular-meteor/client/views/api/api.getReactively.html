@@ -87,6 +87,26 @@ A method to get a $scope variable and watch it reactivly
       });
     });
 
+## Example 2 - controllerAs syntax
+
+When using the `controllerAs` syntax for controller naming and referencing in templates, also if you are using the 
+[angular2-now](https://github.com/pbastowski/angular2-now) library, you will need to prefix the variable name
+with the name of your controller. That is, whatever name you supplied in controllerAs.
+
+So, if controllerAs is `vm` then the following will work.
+
+        limit: parseInt($scope.getReactively('vm.perPage')),
+        skip: (parseInt($scope.getReactively('vm.page')) - 1) * parseInt($scope.getReactively('vm.perPage')),
+        sort: $scope.getReactively('vm.sort')
+
+
+Angular2-now always uses the controllerAs syntax internally and prefixes it's controllers with the camelCased version 
+of your component's selector. If your component's selector is `parties-list` then the prefix will be `partiesList`
+and the code should look like this.
+
+        limit: parseInt($scope.getReactively('partiesList.perPage')),
+        skip: (parseInt($scope.getReactively('partiesList.page')) - 1) * parseInt($scope.getReactively('partiesList.perPage')),
+
 
         {{/markdown}}
     </do-nothing>
