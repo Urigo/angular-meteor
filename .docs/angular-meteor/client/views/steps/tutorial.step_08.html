@@ -110,7 +110,7 @@ __`model/parties.js`:__
       }
     });
 
-The collection.allow function defines the permissions that the client needs to write directly to the collection (like we did until now).
+The [collection.allow Meteor function](http://docs.meteor.com/#/full/allow) defines the permissions that the client needs to write directly to the collection (like we did until now).
 
 In each callback of action type (insert, update, remove) the functions should return true if they think the operation should be allowed.
 Otherwise they should return false, or nothing at all (undefined).
