@@ -61,6 +61,11 @@ Package.onTest(function(api) {
   api.use('urigo:angular');
   api.use('angular:angular-mocks');
 
+  // auxiliary
+  api.addFiles([
+    'tests/integration/auxiliary/matchers.js'
+  ]);
+
   // spec files
   api.addFiles([
     'tests/integration/angular-meteor-session-spec.js',
