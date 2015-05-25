@@ -63,6 +63,9 @@ Package.onTest(function(api) {
 
   // spec files
   api.addFiles([
-    'tests/unit/angular-meteor-session-spec.js'
+    'tests/integration/angular-meteor-session-spec.js',
+    'tests/integration/angular-meteor-diff-array-spec.js',
+    'tests/integration/angular-meteor-collection-spec.js',
+    'tests/integration/angular-meteor-utils-spec.js'
   ], 'client');
 });

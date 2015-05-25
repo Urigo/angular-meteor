@@ -1,4 +1,4 @@
-describe('$meteorSession', function () {
+describe('$meteorSession service', function () {
   var $meteorSession,
       $rootScope,
       $scope;
