@@ -11,7 +11,7 @@
     </ul>
 
     <div class="col-md-8">
-      <h1>Step 18 - angular-material</h1>
+      <h1>Step 18 - angular-material and custom Angular auth forms</h1>
     </div>
     <div class="video-tutorial col-md-4">
       <iframe width="300" height="169" src="//www.youtube.com/embed/A6qsm_RDc9Y?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd" frameborder="0" allowfullscreen></iframe>
