@@ -57,28 +57,12 @@ Package.on_use(function (api) {
 });
 
 Package.onTest(function(api) {
-  api.use('tinytest');
-  api.use('underscore');
-  api.use('minimongo');
-  api.use('angular:angular@1.3.15_1', 'client');
-  api.use('dburles:mongo-collection-instances@0.3.3', 'client'); // For getCollectionByName
-  api.use(['test-helpers'], ['client']);
+  api.use('sanjo:jasmine');
+  api.use('urigo:angular');
+  api.use('angular:angular-mocks');
 
+  // spec files
   api.addFiles([
-    'angular-meteor.js',
-    'lib/angular-hash-key-copier.js',
-    'lib/diff-array.js',
-    'modules/angular-meteor-collections.js',
-    'modules/angular-meteor-meteorCollection.js',
-    'modules/angular-meteor-methods.js',
-    'modules/angular-meteor-object.js',
-    'modules/angular-meteor-reactive-scope.js',
-    'modules/angular-meteor-session.js',
-    'modules/angular-meteor-subscribe.js',
-    'modules/angular-meteor-template.js',
-    'modules/angular-meteor-user.js',
-    'modules/angular-meteor-utils.js',
-    'modules/angular-meteor-camera.js',
-    'test/meteor/tests.js'
-  ], ['client']);
+    'tests/unit/angular-meteor-session-spec.js'
+  ], 'client');
 });
