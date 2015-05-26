@@ -201,7 +201,8 @@ Add this ng-repeat list to the end of parties-details.ng.html:
 
 <btf-markdown>
 
-Run the app and see the list of all the users' emails.
+Run the app and see the list of all the users' emails that created a login and password and did not use a service to login.
+Facebook, Google etc. users email is located in a sub-document called services. 
 
 
 # Understanding Meteor's Publish-Subscribe
