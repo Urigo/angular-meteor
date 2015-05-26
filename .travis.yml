@@ -1,4 +1,4 @@
 language: node_js
 install: curl https://install.meteor.com | /bin/sh
-script: VELOCITY_TEST_PACKAGES=1 meteor test-packages --driver-package velocity:html-reporter --velocity ./
+script: ./run_tests_ci.sh
 

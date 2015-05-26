@@ -201,7 +201,103 @@ Add this ng-repeat list to the end of parties-details.ng.html:
 
 <btf-markdown>
 
-Run the app and see the list of all the users' emails.
+Run the app and see the list of all the users' emails that created a login and password and did not use a service to login.
+
+* The structure of the Users collection is different between regular email-password, Facebook, Google etc.
+
+The Document structure looks like this (notice where the email is in each one):
+
+__`Email-Password`:__
+
+    {
+      "_id" : "8qJt6dRSNDHBuqpXu",
+      "createdAt" : ISODate("2015-05-26T00:29:05.109-07:00"),
+      "services" : {
+        "password" : {
+          "bcrypt" : "$2a$10$oSykELjSzcoFWXZTwI5.lOl4BsB1EfcR8RbEm/KsS3zA4x5vlwne6"
+        },
+        "resume" : {
+          "loginTokens" : [
+            {
+              "when" : ISODate("2015-05-26T00:29:05.112-07:00"),
+              "hashedToken" : "6edmW0Wby2xheFxyiUOqDYYFZmOtYHg7VmtXUxEceHg="
+            }
+          ]
+        }
+      },
+      "emails" : [
+        {
+          "address" : "email@email.com",
+          "verified" : false
+        }
+      ]
+    }
+
+__`Facebook`:__
+
+    {
+      "_id" : "etKoiD8MxkQTjTQRY",
+      "createdAt" : ISODate("2015-05-25T17:42:16.850-07:00"),
+      "services" : {
+        "facebook" : {
+          "accessToken" : "CAAM10fSvI...",
+          "expiresAt" : 1437770457288.0000000000000000,
+          "id" : "10153317814289291",
+          "email" : "email@email.com",
+          "name" : "FirstName LastName",
+          "first_name" : "FirstName",
+          "last_name" : "LastName",
+          "link" : "https://www.facebook.com/app_scoped_user_id/foo"
+          "gender" : "male",
+          "locale" : "en_US"
+        },
+        "resume" : {
+          "loginTokens" : []
+        }
+      },
+      "profile" : {
+        "name" : "First Name LastName"
+      }
+    }
+
+__`Google`:__
+
+    {
+      "_id" : "337r4wwSRWe5B6CCw",
+      "createdAt" : ISODate("2015-05-25T22:53:32.172-07:00"),
+      "services" : {
+        "google" : {
+          "accessToken" : "ya29.fwHSzHvC...",
+          "idToken" : "eyJhbGciOiJSUzI1NiIs...",
+          "expiresAt" : 1432624691685.0000000000000000,
+          "id" : "107497376789285885122",
+          "email" : "email@email.com",
+          "verified_email" : true,
+          "name" : "FirstName LastName",
+          "given_name" : "FirstName",
+          "family_name" : "LastName",
+          "picture" : "https://lh5.googleusercontent.com/-foo.jpeg
+          "locale" : "en",
+          "gender" : "male"
+        },
+        "resume" : {
+          "loginTokens" : [
+            {
+              "when" : ISODate("2015-05-25T23:18:11.788-07:00"),
+              "hashedToken" : "NaKS2Zeermw+bPlMLhaihsNu6jPaW5+ucFDF2BXT4WQ="
+            }
+          ]
+        }
+      },
+      "profile" : {
+        "name" : "First Name LastName"
+      }
+    }
+
+
+Right now it means that the emails of the users that logged in with with email-password will be displayed.
+
+In the chapter of Angular filters we will change the display code to show all emails.
 
 
 # Understanding Meteor's Publish-Subscribe
