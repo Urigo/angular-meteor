@@ -202,97 +202,102 @@ Add this ng-repeat list to the end of parties-details.ng.html:
 <btf-markdown>
 
 Run the app and see the list of all the users' emails that created a login and password and did not use a service to login.
-Facebook, Google etc. users email is located in a sub-document called services. 
 
-The Document structure for the Facebook and Google login service looks like this:
+* The structure of the Users collection is different between regular email-password, Facebook, Google etc.
 
-/* 1 */
-{
-    "_id" : "etKoiD8MxkQTjTQRY",
-    "createdAt" : ISODate("2015-05-25T17:42:16.850-07:00"),
-    "services" : {
-        "facebook" : {
-            "accessToken" : "CAAM10fSvIhABAKYNNnykDZAFZBOLwr9Qhj6kVq4MiMMO5VemAkJaiRvqSiYTkY3AqeBheYhzx7dumuruc07GRmPkmZC6S1ZAF0ZAZAXYzTjrA8cQlKkOZB0SwHBZAvZBMtQ4EaquvtUK0We7ZB4otbJBenrAF4uEZB9k5TfBrLGY8MdM7aP3Bvl4razrRZCIiPJZAuZB8ZCCZB6xeegzaiXVKMyUkRZC0mgHfkxRyZCVsZD",
-            "expiresAt" : 1437770457288.0000000000000000,
-            "id" : "10153317814289291",
-            "email" : "email@email.com",
-            "name" : "FirstName LastName",
-            "first_name" : "FirstName",
-            "last_name" : "LastName",
-            "link" : "https://www.facebook.com/app_scoped_user_id/foo"
-            "gender" : "male",
-            "locale" : "en_US"
-        },
-        "resume" : {
-            "loginTokens" : []
-        }
-    },
-    "profile" : {
-        "name" : "First Name LastName"
-    }
-}
+The Document structure looks like this (notice where the email is in each one):
 
-/* 2 */
-{
-    "_id" : "337r4wwSRWe5B6CCw",
-    "createdAt" : ISODate("2015-05-25T22:53:32.172-07:00"),
-    "services" : {
-        "google" : {
-            "accessToken" : "ya29.fwHSzHvCYPh9Vz3UJcYEvMS9knV6LpTe-kQf3cx5567CL93EBVb-lXAaREU0vUQJvALTDesTiZDzTg",
-            "idToken" : "eyJhbGciOiJSUzI1NiIsImtpZCI6IjcxNThkODVjODU3ZjM2OGJmM2E0NDhiMjI3MjBhM2E1NWIwNzM0NDcifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwic3ViIjoiMTA3NDk3Mzc2Nzg5Mjg1ODg1MTIyIiwiYXpwIjoiNDE4NjcxMDMwNzI3LXNpcDh2NHBkMWJiN2F2YjdhdGtydTAwNm1jbmJnZW5rLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiZW1haWwiOiJibGV2aW5zY21AZ21haWwuY29tIiwiYXRfaGFzaCI6IjZMZTYwSE0zMkNxMkQybkRpMlQ2ZnciLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwiYXVkIjoiNDE4NjcxMDMwNzI3LXNpcDh2NHBkMWJiN2F2YjdhdGtydTAwNm1jbmJnZW5rLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiaWF0IjoxNDMyNjIxMDkxLCJleHAiOjE0MzI2MjQ2OTF9.pYEDATkLdvC5DEcwOXrnZno2PHW_Y8y3XeIa7-pJemGi4QHAYKsnkRBP4cgVJ4kaTC9leSOFBrGjPNTbtfMTCp_jL_fcCkPbKyxHXwAK_k7fELmoScRZ7v7LV17GWUmdSsU-incnDYsCSBxvptcZkYQGJzqwsb74Yklh3SOfIho",
-            "expiresAt" : 1432624691685.0000000000000000,
-            "id" : "107497376789285885122",
-            "email" : "email@email.com",
-            "verified_email" : true,
-            "name" : "FirstName LastName",
-            "given_name" : "FirstName",
-            "family_name" : "LastName",
-            "picture" : "https://lh5.googleusercontent.com/-foo.jpeg
-            "locale" : "en",
-            "gender" : "male"
-        },
-        "resume" : {
-            "loginTokens" : [ 
-                {
-                    "when" : ISODate("2015-05-25T23:18:11.788-07:00"),
-                    "hashedToken" : "NaKS2Zeermw+bPlMLhaihsNu6jPaW5+ucFDF2BXT4WQ="
-                }
-            ]
-        }
-    },
-    "profile" : {
-        "name" : "First Name LastName"
-    }
-}
+__`Email-Password`:__
 
-/* 3 */
-{
-    "_id" : "8qJt6dRSNDHBuqpXu",
-    "createdAt" : ISODate("2015-05-26T00:29:05.109-07:00"),
-    "services" : {
+    {
+      "_id" : "8qJt6dRSNDHBuqpXu",
+      "createdAt" : ISODate("2015-05-26T00:29:05.109-07:00"),
+      "services" : {
         "password" : {
-            "bcrypt" : "$2a$10$oSykELjSzcoFWXZTwI5.lOl4BsB1EfcR8RbEm/KsS3zA4x5vlwne6"
+          "bcrypt" : "$2a$10$oSykELjSzcoFWXZTwI5.lOl4BsB1EfcR8RbEm/KsS3zA4x5vlwne6"
         },
         "resume" : {
-            "loginTokens" : [ 
-                {
-                    "when" : ISODate("2015-05-26T00:29:05.112-07:00"),
-                    "hashedToken" : "6edmW0Wby2xheFxyiUOqDYYFZmOtYHg7VmtXUxEceHg="
-                }
-            ]
+          "loginTokens" : [
+            {
+              "when" : ISODate("2015-05-26T00:29:05.112-07:00"),
+              "hashedToken" : "6edmW0Wby2xheFxyiUOqDYYFZmOtYHg7VmtXUxEceHg="
+            }
+          ]
         }
-    },
-    "emails" : [ 
+      },
+      "emails" : [
         {
-            "address" : "email@email.com",
-            "verified" : false
+          "address" : "email@email.com",
+          "verified" : false
         }
-    ]
-}
+      ]
+    }
 
-Compare the services login structure in Document /* 1 */ and document /* 2 */ with Document /* 3 */ which is a created login. 
-You can see why only created users will show up in our list of emails.
+__`Facebook`:__
 
+    {
+      "_id" : "etKoiD8MxkQTjTQRY",
+      "createdAt" : ISODate("2015-05-25T17:42:16.850-07:00"),
+      "services" : {
+        "facebook" : {
+          "accessToken" : "CAAM10fSvI...",
+          "expiresAt" : 1437770457288.0000000000000000,
+          "id" : "10153317814289291",
+          "email" : "email@email.com",
+          "name" : "FirstName LastName",
+          "first_name" : "FirstName",
+          "last_name" : "LastName",
+          "link" : "https://www.facebook.com/app_scoped_user_id/foo"
+          "gender" : "male",
+          "locale" : "en_US"
+        },
+        "resume" : {
+          "loginTokens" : []
+        }
+      },
+      "profile" : {
+        "name" : "First Name LastName"
+      }
+    }
+
+__`Google`:__
+
+    {
+      "_id" : "337r4wwSRWe5B6CCw",
+      "createdAt" : ISODate("2015-05-25T22:53:32.172-07:00"),
+      "services" : {
+        "google" : {
+          "accessToken" : "ya29.fwHSzHvC...",
+          "idToken" : "eyJhbGciOiJSUzI1NiIs...",
+          "expiresAt" : 1432624691685.0000000000000000,
+          "id" : "107497376789285885122",
+          "email" : "email@email.com",
+          "verified_email" : true,
+          "name" : "FirstName LastName",
+          "given_name" : "FirstName",
+          "family_name" : "LastName",
+          "picture" : "https://lh5.googleusercontent.com/-foo.jpeg
+          "locale" : "en",
+          "gender" : "male"
+        },
+        "resume" : {
+          "loginTokens" : [
+            {
+              "when" : ISODate("2015-05-25T23:18:11.788-07:00"),
+              "hashedToken" : "NaKS2Zeermw+bPlMLhaihsNu6jPaW5+ucFDF2BXT4WQ="
+            }
+          ]
+        }
+      },
+      "profile" : {
+        "name" : "First Name LastName"
+      }
+    }
+
+
+Right now it means that the emails of the users that logged in with with email-password will be displayed.
+
+In the chapter of Angular filters we will change the display code to show all emails.
 
 
 # Understanding Meteor's Publish-Subscribe
