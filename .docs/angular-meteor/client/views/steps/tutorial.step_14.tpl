@@ -25,7 +25,7 @@
 In this step we will learn how to use Meteor methods and how angular-meteor enhances them with the support of promises.
 
 Meteor methods are a way to perform more complex logic then the allow method does.
-The Meteor methods are responsibly for checking permissions, just like the allow method does.
+The Meteor methods are responsible for checking permissions, just like the allow method does.
 
 In our case, we will create an invite method that invites a user to a party.
 
