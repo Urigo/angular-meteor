@@ -87,8 +87,8 @@ Right now we don't need the promise so let's use the second way:
 It is the same as:
     $meteor.subscribe('parties');
     $scope.parties = $meteor.collection(Parties);
-    
-But it is a *good practise* to resolve a subscription in state's resolve function:
+
+But it is a *good practice* to resolve a subscription in state's resolve function:
 
      .state('parties', {
         url: '/parties',
