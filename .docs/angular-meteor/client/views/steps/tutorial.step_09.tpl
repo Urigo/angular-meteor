@@ -170,7 +170,8 @@ So here again we use the Mongo API to return all the users (find with an empty o
 The emails field holds all the user's email addresses, and the profile might hold more optional information like the user's name
 (in our case, if the user logged in with the Facebook login, the accounts-facebook package puts the user's name from Facebook automatically into that field).
 
-Now let's subscribe to that publish Method.  in the client->parties->controllers->partyDetails.js file add the following line:
+Now let's subscribe to that publish Method.  in the client->parties->controllers->partyDetails.js file add the following line inside the controller.
+If you just add to the end you will get an uncaught reference $scope not defined:
 
     $scope.users = $meteor.collection(Meteor.users, false).subscribe('users');
 
@@ -179,7 +180,7 @@ Now let's subscribe to that publish Method.  in the client->parties->controllers
 * Notice that we passes false in the second parameter. that means that we don't want to update that collection from the client.
 * Calling [AngularMeteorCollection's](/api/AngularMeteorCollection) subscribe function.
 
-Also, let's add a subscription to the party in case we get strait to there and won't go through the parties controller:
+Also, let's add a subscription to the party in case we get straight to there and won't go through the parties router:
 
     $scope.party = $meteor.object(Parties, $stateParams.partyId).subscribe('parties');
 
