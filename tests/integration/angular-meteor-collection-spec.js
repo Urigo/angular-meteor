@@ -153,9 +153,11 @@ describe('$meteorCollection service', function() {
       });
       spyOn($ngCol, 'save');
 
+      // Adds docs on the client.
       for (var i = 100; i < 106; i++) {
         $ngCol.push({count: i});
       }
+
       $timeout.flush();
 
       expect($ngCol.length).toEqual(10);
@@ -173,12 +175,14 @@ describe('$meteorCollection service', function() {
       });
       spyOn($ngCol, 'remove').and.callThrough();
 
+      // Removes last two docs on the client.
       $ngCol.pop();
       $ngCol.pop();
 
       $timeout.flush();
 
-      // It should stay at 10 after removing.
+      // Size should stay at 10 after removing because
+      // limit is set.
       expect($ngCol.length).toEqual(10);
       expect($ngCol.remove).toHaveBeenCalled();
       expect($ngCol.remove.calls.count()).toEqual(2);
