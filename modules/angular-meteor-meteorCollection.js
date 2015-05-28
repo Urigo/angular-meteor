@@ -30,7 +30,8 @@ angularMeteorCollections.factory('AngularMeteorCollection', ['$q', '$meteorSubsc
         var deferred = $q.defer();
 
         // delete $$hashkey
-        item = angular.copy(item);
+        if (!item instanceof File)
+          item = angular.copy(item);
 
         if (item._id) { // Performs an update if the _id property is set.
           var item_id = item._id; // Store the _id in temporary variable
