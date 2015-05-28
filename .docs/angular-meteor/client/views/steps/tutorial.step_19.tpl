@@ -127,6 +127,7 @@ Package.onUse(function(api) {
   api.use('DEPENDENCY_NAME', where); // Dependencies
 
   api.addFiles('FILE_NAME', where); // Files in use
+});   
 ```
 
 Now, just fill the information inside the file, according to the package information, the `bower.json` could be helpful to fill missing information you can't find.
@@ -157,6 +158,7 @@ Package.onUse(function(api) {
   api.use('stevezhu:lodash@3.5.0', where); // Surprised?! Read the bower.json file!
 
   api.addFiles('src/angularjs-dropdown-multiselect.js', where); // Files in use
+});   
 ```
 
 **Important Notes:**

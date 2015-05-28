@@ -1,7 +1,7 @@
 Package.describe({
   name: "urigo:angular",
   summary: "The simplest no-conflict way to use AngularJS with Meteor, Meteorite and Atmosphere Smart Packages.",
-  version: "0.8.10",
+  version: "0.8.12",
   git: "https://github.com/Urigo/angular-meteor.git"
 });
 
@@ -71,6 +71,11 @@ Package.onTest(function(api) {
     'tests/integration/angular-meteor-session-spec.js',
     'tests/integration/angular-meteor-diff-array-spec.js',
     'tests/integration/angular-meteor-collection-spec.js',
-    'tests/integration/angular-meteor-utils-spec.js'
+    'tests/integration/angular-meteor-utils-spec.js',
+    'tests/integration/test_collections.js'
   ], 'client');
+
+  api.addFiles([
+    'tests/integration/test_collections.js'
+  ], 'server');
 });
