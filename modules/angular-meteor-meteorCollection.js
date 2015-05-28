@@ -7,8 +7,8 @@ var angularMeteorCollections = angular.module('angular-meteor.meteor-collection'
 // that inherit from array comes from here: http://perfectionkills.com/how-ecmascript-5-still-does-not-allow-to-subclass-an-array/
 // We went with the direct extensions approach
 angularMeteorCollections.factory('AngularMeteorCollection', ['$q', '$meteorSubscribe', '$meteorUtils', '$rootScope',
-  '$timeout', 'deepCopy', 'diffArray',
-  function($q, $meteorSubscribe, $meteorUtils, $rootScope, $timeout, deepCopy, diffArray) {
+  '$timeout', 'deepCopyChanges', 'deepCopyRemovals', 'diffArray',
+  function($q, $meteorSubscribe, $meteorUtils, $rootScope, $timeout, deepCopyChanges, deepCopyRemovals, diffArray) {
     var AngularMeteorCollection = {};
 
     AngularMeteorCollection.subscribe = function () {
@@ -171,7 +171,8 @@ angularMeteorCollections.factory('AngularMeteorCollection', ['$q', '$meteorSubsc
           safeApply();
         },
         changedAt: function (document, oldDocument, atIndex) {
-          deepCopy(self[atIndex], document);
+          deepCopyChanges(self[atIndex], document);
+          deepCopyRemovals(self[atIndex], document);
           self._serverBackup[atIndex] = self[atIndex];
           safeApply();
         },
