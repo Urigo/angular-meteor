@@ -76,11 +76,12 @@ A service that binds a scope variable to a Meteor Session variable.
     HTML
 
         <div ng-controller="MainCtrl">
-          angular counter = {{counter }}
+          <p> angular counter = [[counter]] </p>
           <button ng-click="increment()">Add angular counter</button>
           <button>Increment Meteor counter</button>
         </div>
 
+(use curly brackets instead of square brackets in HTML around counter)
       {{/markdown}}
     </do-nothing>
 
