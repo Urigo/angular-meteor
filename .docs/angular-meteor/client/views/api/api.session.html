@@ -57,36 +57,31 @@ A service that binds a scope variable to a Meteor Session variable.
 
     if (Meteor.isClient) {
 
-      app.controller("detailCtrl", ['$scope', '$meteor',
+      app.controller("MainCtrl", ['$scope', '$meteor',
         function($scope, $meteor){
 
           $meteor.session('counter').bind($scope, 'counter');
 
+          $scope.increment = function (){
+            $scope.counter ++;
+          }
+
           Tracker.autorun(function () {
             console.log('angular counter changed', Session.get('counter'));
           });
-
         }]);
-
       }
-
-      Template.hello.events({
-        'click button': function () {
-          // increment the counter when button is clicked
-          Session.set("counter", Session.get("counter") + 1);
-        }
-      });
-
     }
 
     HTML
 
         <div ng-controller="MainCtrl">
-          angular counter = [[ counter ]]
-          <button ng-click="counter=counter+1">Add angular counter</button>
-          <button>Add Meteor counter</button>
+          <p> angular counter = [[counter]] </p>
+          <button ng-click="increment()">Add angular counter</button>
+          <button>Increment Meteor counter</button>
         </div>
 
+(use curly brackets instead of square brackets in HTML around counter)
       {{/markdown}}
     </do-nothing>
 
