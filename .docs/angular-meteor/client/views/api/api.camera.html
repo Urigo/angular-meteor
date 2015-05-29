@@ -81,7 +81,7 @@ Must add [mdg:camera package](https://atmospherejs.com/mdg/camera) to use!
 
         <div ng-controller="cameraCtrl">
           <button ng-click="takePicture()">Picture</button>
-          <img ng-src="{{party.imageData}}">
+          <img ng-src="~{{party.imageData~}}'">
         </div>
 
       {{/markdown}}
