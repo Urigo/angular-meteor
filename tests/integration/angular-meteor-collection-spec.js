@@ -97,6 +97,24 @@ describe('$meteorCollection service', function() {
     });
   });
 
+  describe('reactive cursor', function() {
+    it('should update the array when the reactive cursor function recomputes', function() {
+      var dependency = new Tracker.Dependency();
+      var reactiveFunc = jasmine.createSpy().and.callFake(function() {
+        dependency.depend();
+        return MyCollection.find({});
+      });
+      var meteorReactiveArray = $meteorCollection(reactiveFunc);
+
+      MyCollection.update({ a: 1}, { a : 6});
+      dependency.changed();
+      Tracker.flush();
+
+      expect(reactiveFunc).toHaveBeenCalled();
+      expect(meteorReactiveArray).toEqualCollection(MyCollection);
+    });
+  });
+
   describe('autobind on', function() {
     beforeEach(function() {
       meteorArray = $meteorCollection(MyCollection);
@@ -109,6 +127,26 @@ describe('$meteorCollection service', function() {
         a : '7',
         b: '8'
       });
+      $rootScope.$apply();
+
+      // assert
+      expect(meteorArray).toEqualCollection(MyCollection);
+    });
+
+    it('should update the collection when an item is changed in the array', function() {
+      // act
+      meteorArray[0].a = 888;
+
+      $rootScope.$apply();
+
+      // assert
+      expect(meteorArray).toEqualCollection(MyCollection);
+    });
+
+    it('should update the collection when an item is removed from the array', function() {
+      // act
+      meteorArray.splice(0, 1);
+
       $rootScope.$apply();
 
       // assert
@@ -191,7 +229,7 @@ describe('$meteorCollection service', function() {
   });
 
   describe('objects with $$hashkey', function() {
-    it('should be saved to the collection when save is called', function() {
+    it('should be saved to the collection when save is called', function(done) {
       // add haskeys to objects in the array
       meteorArray.forEach(function(item, index) {
         item.$$hashKey = index;
@@ -200,9 +238,12 @@ describe('$meteorCollection service', function() {
       var itemChanged = meteorArray[0];
       itemChanged.a = 444;
 
-      meteorArray.save();
-
-      expect({a : 444, b: 2}).toBeFoundExactlyInCollection(MyCollection);
+      meteorArray.save().then(function() {
+        expect({a : 444, b: 2}).toBeFoundExactlyInCollection(MyCollection);
+        done();
+      }, function() {
+        done();
+      });
     });
 
     it('should save objects with nested $$haskey fields when save is called', function(done) {
