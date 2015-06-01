@@ -1,0 +1,20 @@
+<div ng-controller="MainCtrl">
+  <div>
+    <input type="text" ng-model="numOfItems" />
+    <button ng-click="addItems(numOfItems)">Add Items</button>
+    <button ng-click="removeItems(numOfItems)">Remove Items</button>
+  </div>
+  <div>
+    Number of Items: {{ items.length }}
+  </div>
+  <div>
+    Initial data total time : {{ initialDataTotalTime }}ms, Initial data scope applys : {{ initialDataScopeApplys }}
+  </div>
+  <div>
+    <ul>
+      <li ng-repeat="item in items">
+        {{ item.guid }} <button ng-click="removeItem(item._id)">X</button>
+      </li>
+    </ul>
+  </div>
+</div>
