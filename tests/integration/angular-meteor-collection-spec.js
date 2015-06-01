@@ -189,4 +189,42 @@ describe('$meteorCollection service', function() {
     });
 
   });
+
+  describe('objects with $$hashkey', function() {
+    it('should be saved to the collection when save is called', function() {
+      // add haskeys to objects in the array
+      meteorArray.forEach(function(item, index) {
+        item.$$hashKey = index;
+      });
+
+      var itemChanged = meteorArray[0];
+      itemChanged.a = 444;
+
+      meteorArray.save();
+
+      expect({a : 444}).toBeFoundInCollection(MyCollection);
+    });
+
+    it('should save objects with nested $$haskey fields when save is called', function() {
+      var itemWithNestedArray = {
+        myId : 555,
+        nestedArray : [
+          {
+            $$hashkey: 1,
+            a: 10,
+            b: 11
+          },
+          {
+            $$hashkey: 2,
+            a: 12,
+            b: 13
+          }
+        ]
+      };
+
+      meteorArray.save(itemWithNestedArray);
+
+      expect({myId : 555}).toBeFoundInCollection(MyCollection);
+    });
+  });
 });

@@ -8,5 +8,15 @@ customMatchers = {
         return result;
       }
     };
+  },
+  toBeFoundInCollection : function() {
+    return {
+      compare : function(actual, expected) {
+        var result = {};
+        var expectedItem = expected.findOne(actual);
+        result.pass = !_.isUndefined(expectedItem);
+        return result;
+      }
+    };
   }
 };
