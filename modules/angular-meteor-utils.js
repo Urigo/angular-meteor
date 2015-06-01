@@ -23,6 +23,17 @@ angularMeteorUtils.service('$meteorUtils', [ '$timeout',
       // return autorun object so that it can be stopped manually
       return comp;
     };
+    // Borrowed from angularFire - https://github.com/firebase/angularfire/blob/master/src/utils.js#L445-L454
+    this.stripDollarPrefixedKeys = function (data) {
+      if( !angular.isObject(data) || data instanceof File) { return data; }
+      var out = angular.isArray(data)? [] : {};
+      angular.forEach(data, function(v,k) {
+        if(typeof k !== 'string' || k.charAt(0) !== '$') {
+          out[k] = self.stripDollarPrefixedKeys(v);
+        }
+      });
+      return out;
+    }
   }]);
 
 angularMeteorUtils.run(['$rootScope', '$meteorUtils',

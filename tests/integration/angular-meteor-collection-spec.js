@@ -202,29 +202,16 @@ describe('$meteorCollection service', function() {
 
       meteorArray.save();
 
-      expect({a : 444}).toBeFoundInCollection(MyCollection);
+      expect({a : 444, b: 2}).toBeFoundExactlyInCollection(MyCollection);
     });
 
-    it('should save objects with nested $$haskey fields when save is called', function() {
-      var itemWithNestedArray = {
-        myId : 555,
-        nestedArray : [
-          {
-            $$hashkey: 1,
-            a: 10,
-            b: 11
-          },
-          {
-            $$hashkey: 2,
-            a: 12,
-            b: 13
-          }
-        ]
-      };
-
-      meteorArray.save(itemWithNestedArray);
-
-      expect({myId : 555}).toBeFoundInCollection(MyCollection);
+    it('should save objects with nested $$haskey fields when save is called', function(done) {
+      meteorArray.save(itemWithNestedHashkeyArrays).then(function() {
+        expect(itemWithNestedHashkeysRemoved).toBeFoundExactlyInCollection(MyCollection);
+        done();
+      }, function() {
+        done();
+      });
     });
   });
 });

@@ -63,7 +63,8 @@ Package.onTest(function(api) {
 
   // auxiliary
   api.addFiles([
-    'tests/integration/auxiliary/matchers.js'
+    'tests/integration/auxiliary/matchers.js',
+    'tests/integration/auxiliary/test_data.js'
   ]);
 
   // spec files

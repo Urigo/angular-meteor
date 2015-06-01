@@ -31,7 +31,7 @@ angularMeteorCollections.factory('AngularMeteorCollection', ['$q', '$meteorSubsc
 
         // delete $$hashkey
         if (!(item instanceof File))
-          item = angular.copy(item);
+          item = $meteorUtils.stripDollarPrefixedKeys(item);
 
         if (item._id) { // Performs an update if the _id property is set.
           var item_id = item._id; // Store the _id in temporary variable
@@ -45,6 +45,7 @@ angularMeteorCollections.factory('AngularMeteorCollection', ['$q', '$meteorSubsc
             } else {
               deferred.resolve({_id: objectId, action: "updated"});
             }
+            $rootScope.$apply();
           });
         } else { // Performs an insert if the _id property isn't set.
           collection.insert(item, function (error, result) {
@@ -53,6 +54,7 @@ angularMeteorCollections.factory('AngularMeteorCollection', ['$q', '$meteorSubsc
             } else {
               deferred.resolve({_id: result, action: "inserted"});
             }
+            $rootScope.$apply();
           });
         }
         return deferred.promise;
@@ -103,6 +105,7 @@ angularMeteorCollections.factory('AngularMeteorCollection', ['$q', '$meteorSubsc
             } else {
               deferred.resolve({_id: objectId, action: "removed"});
             }
+            $rootScope.$apply();
           });
         } else {
           deferred.reject("key cannot be null");
