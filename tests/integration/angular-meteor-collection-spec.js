@@ -115,6 +115,40 @@ describe('$meteorCollection service', function() {
     });
   });
 
+  describe('autobind off', function() {
+    var notAutoArray;
+
+    beforeEach(function() {
+      notAutoArray = $meteorCollection(MyCollection, false);
+    });
+
+    it('should not update the collection when a changes a happens to the array', function() {
+      var newItem = {
+        a : 10,
+        b : 11
+      };
+      notAutoArray.push(newItem);
+
+      $rootScope.$apply();
+
+      expect(newItem).not.toBeFoundExactlyInCollection(MyCollection);
+    });
+
+    it('should not save an item from the server when an item is received from the server', function() {
+      var saveSpy = spyOn(notAutoArray, 'save').and.callThrough();
+
+      MyCollection.insert({
+        a : 10,
+        b : 11
+      });
+
+      $timeout.flush();
+
+      expect(saveSpy).not.toHaveBeenCalled();
+      expect(notAutoArray).toEqualCollection(MyCollection);
+    });
+  });
+
   describe('autobind on', function() {
     beforeEach(function() {
       meteorArray = $meteorCollection(MyCollection);
