@@ -10,7 +10,7 @@
 
 # $meteor.session
 
-A service that binds a scope variable to a Meteor Session variable.
+A service that binds an angular $scope variable to a Meteor Session variable, so it can be interacted (get, set) from within Angular modules as well as Meteor modules (templates).
 
 ----
 
@@ -57,7 +57,7 @@ A service that binds a scope variable to a Meteor Session variable.
 
     if (Meteor.isClient) {
 
-      app.controller("detailCtrl", ['$scope', '$meteor',
+      app.controller("MainCtrl", ['$scope', '$meteor',
         function($scope, $meteor){
 
           $meteor.session('counter').bind($scope, 'counter');
@@ -70,7 +70,7 @@ A service that binds a scope variable to a Meteor Session variable.
 
       }
 
-      Template.hello.events({
+      Template.hello.events({ // change to variable from outside angular
         'click button': function () {
           // increment the counter when button is clicked
           Session.set("counter", Session.get("counter") + 1);
