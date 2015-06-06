@@ -59,8 +59,7 @@ See [$meteor.collection](/api/meteorCollection)
 <table class="variables-matrix return-arguments">
 <tbody><tr>
   <td><a href="" class="label type-hint type-hint-object">object</a></td>
-  <td><p>Returns a promise on success with the id and the action happened: "inserted" or "updated"</p>
-
+  <td><p>Returns a promise on success with the array of ids and the actions happened: "inserted" or "updated" for each one of the docs </p>
   </td>
 </tr>
 </tbody></table>
@@ -97,6 +96,17 @@ See [$meteor.collection](/api/meteorCollection)
 </tr>
 </tbody>
 </table>
+
+### Returns
+
+<table class="variables-matrix return-arguments">
+<tbody><tr>
+  <td><a href="" class="label type-hint type-hint-object">object</a></td>
+  <td><p>Returns a promise on success with the array of ids and the "removed" action</p>
+  </td>
+</tr>
+</tbody></table>
+
 
 <br>
 <h3><p><code><span class="pln">subscribe( :subscriptionName );</span></code></p></h3>
