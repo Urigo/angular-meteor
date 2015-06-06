@@ -280,8 +280,8 @@ But this still won't help us because there is no reactive variables inside.  so 
     });
 
 What's happening here is that getReactively returns a reactive variable that fires a changed event every time the scope variable changes,
-and then autorun knows the execute it's given function again.
-The will cause the subscription to re-run again with the new options parameter and we will get the correct data from the server.
+and then autorun knows to execute it's given function again.
+This will cause the subscription to re-run again with the new options parameter and we will get the correct data from the server.
 
 $meteor.collection is also listening to reactive variables so let's change our $scope.parties initialization as well:
 
