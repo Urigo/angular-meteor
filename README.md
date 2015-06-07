@@ -4,8 +4,7 @@
 [![Join the chat at https://gitter.im/Urigo/angular-meteor](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Urigo/angular-meteor?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 > The power of Meteor and the simplicity and eco-system of AngularJS
 
-## Community - Thank you so much for making the [ng-conf 2015 talk](https://github.com/ng-conf/submissions-2015/pull/172) happen!
-[![ng-conf](http://img.youtube.com/vi/uFmf-DeCdEE/0.jpg)](https://www.youtube.com/embed/videoseries?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd)
+[![ng-conf](http://img.youtube.com/vi/_mu6BWsnaPM/0.jpg)](https://www.youtube.com/watch?v=_mu6BWsnaPM)
 
 ## Quick start
 1. Install [Meteor](http://docs.meteor.com/#quickstart) `$ curl https://install.meteor.com | /bin/sh`
@@ -21,6 +20,7 @@
 - [Meteor package - urigo:angular](https://atmospherejs.com/urigo/angular)
 - [Roadmap - Trello board](https://trello.com/b/Wj9U0ulk/angular-meteor)
 - [Meteor Forums](https://forums.meteor.com/)
+- [Awesome Meteor](https://github.com/Urigo/awesome-meteor) - A curated, community driven list of awesome Meteor packages, libraries, resources and shiny thing
 
 ## Contributing
 We would love contributions in:
