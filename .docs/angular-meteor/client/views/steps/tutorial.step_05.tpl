@@ -215,6 +215,15 @@ Now we have all in place.  Run the app and notice a few things:
 * Try to put arbitrary text in the url - something like http://localhost/strange-url  .  you are supposed to be automatically redirected to the main parties list.
 
 
+#### Common Mistakes
+
+In case you won't enter the right absolute path (maybe by accident add a relative one), then you might be getting the folowwing error:
+
+WARNING: Tried to load angular more than once.
+
+In this case first make sure you entered all the paths correctly with `.ng.html` end.
+
+
 # Summary
 
 With the routing set up and the parties list view implemented, we're ready to go to the next step to implement the party details view.

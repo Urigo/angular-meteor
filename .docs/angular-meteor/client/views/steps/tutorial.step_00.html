@@ -1,7 +1,7 @@
-
+<template name="tutorial.step_00.html">
   <div class="row">
     <div class="col-md-12">
-        <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/steps/tutorial.step_00.tpl"
+        <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/steps/tutorial.step_00.html"
            class="btn btn-default btn-lg improve-button">
           <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
         </a>
@@ -20,7 +20,7 @@
         <iframe width="300" height="169" src="//www.youtube.com/embed/s2RWlIrkCaE?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd" frameborder="0" allowfullscreen></iframe>
       </div>
     <do-nothing class="col-md-12">
-      <btf-markdown>
+    {{#markdown}}
 
 You are now ready to build the Meteor-Angular socially app.
 
@@ -64,14 +64,10 @@ first let's create a new index.html file and place this code inside and run the 
 
 __`index.html`:__
 
-          </btf-markdown>
+    <body>
+	    <p>Nothing here</p>
+    </body>
 
-<pre><code><span class="hljs-tag">&lt;<span class="hljs-title">body</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>Nothing here<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">body</span>&gt;</span>
-</code></pre>
-
-      <btf-markdown>
 
 As you can see, there is no html tag, no head tag, very simple.
 
@@ -114,37 +110,22 @@ Then move the p tag into it:
 
 __`index.ng.html`:__
 
-          </btf-markdown>
-
-<pre><code><span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>Nothing here<span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
-</code></pre>
-
-      <btf-markdown>
+    <p>Nothing here</p>
 
 Now let's include that file into our main index.html file:
 
 __`index.html`:__
 
-      </btf-markdown>
-
-<pre><code><span class="hljs-tag">&lt;<span class="hljs-title">body</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">ng-include</span>=<span class="hljs-value">"'index.ng.html'"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">body</span>&gt;</span>
-</code></pre>
-
-      <btf-markdown>
+    <body>
+      <div ng-include="'index.ng.html'"></div>
+    </body>
 
 But if you load this in your browser, you'll see nothing. That's because we still need to create the actual Angular app, which we'll do next.
 
 * It's very important to note - all the paths are always absolute, not relative!  so if 'index.ng.html' was inside a client folder, you would have to place the whole path from the route app, doesn't matter where you are
 calling the file from, like that:
 
-      </btf-markdown>
-
-<pre><code>&lt;<span class="hljs-operator">div</span> ng-<span class="hljs-built_in">include</span>=<span class="hljs-string">"'client/index.ng.html'"</span>&gt;&lt;/<span class="hljs-operator">div</span>&gt;
-</code></pre>
-
-	    <btf-markdown>
+    <div ng-include="'client/index.ng.html'"></div>
 
 # AngularJS app
 
@@ -175,12 +156,7 @@ __`app.js`:__
 
 And name our application in the ng-app directive in index.html:
 
-      </btf-markdown>
-
-<pre><code>&lt;<span class="hljs-operator">div</span> ng-app=<span class="hljs-string">"socially"</span> ng-<span class="hljs-built_in">include</span>=<span class="hljs-string">"'index.ng.html'"</span>&gt;&lt;/<span class="hljs-operator">div</span>&gt;
-</code></pre>
-      <btf-markdown>
-
+    <div ng-app="socially" ng-include="'index.ng.html'"></div>
 
 What we did here is to declare a new angular module named 'socially' and making it dependant on the 'angular-meteor' module (that we included in the first step).
 
@@ -190,21 +166,16 @@ everything is the same.
 
 and now inside our index.ng.html let's use Angular:
 
-</btf-markdown>
-
-<pre><code><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>Nothing here </span><span class="hljs-expression">{{ '<span class="hljs-variable">yet</span>' + '!' }}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span></span>
-</code></pre>
-
-<btf-markdown>
+    <p>Nothing here {{dstache}} 'yet' + '!' }}</p>
 
 # What is the code doing?
 double curly braces binding with an expression:
 
-    Nothing here {{'yet' + '!'}}
+    Nothing here {{dstache}}'yet' + '!'}}
 
 This line demonstrates two core features of Angular's templating capabilities:
 
-* A binding, denoted by double curly braces {{ }}
+* A binding, denoted by double curly braces {{dstache}} }}
 * a simple expression 'yet' + '!' used in this binding.
 
 AngularJS finds those double curly braces, evaluates the expression and inserts the result into the DOM in place of the binding.
@@ -225,18 +196,13 @@ Inside in the client side, like a future smart browser would do.
 # Experiments
 Try adding a new expression to the index.ng.html that will do some math:
 
-</btf-markdown>
-
-<pre><code><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span>1 + 2 = </span><span class="hljs-variable">{{ 1 + 2 }}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span></span>
-</code></pre>
-
-<btf-markdown>
+    <p>1 + 2 = {{dstache}} 1 + 2 }}</p>
 
 # Summary
 Now let's go to [step 1](step_01) and add some content to the web app.
 
 
-        </btf-markdown>
+    {{/markdown}}
     </do-nothing>
   <div class="col-md-12">
     <ul class="btn-group tutorial-nav">
@@ -247,4 +213,4 @@ Now let's go to [step 1](step_01) and add some content to the web app.
     </ul>
   </div>
 </div>
-
+</template>
