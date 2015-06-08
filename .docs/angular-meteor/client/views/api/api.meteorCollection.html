@@ -17,8 +17,8 @@ This service binds between the angularjs $scope variables and the meteor collect
 
 The autobinding is optional, and can be set to false, so changes in the angular $scope varialbles will have to be explictly saved to the collection to be updated to the meteor collection. 
 The AngularMeteor collection can be explicitly stopped by calling the stop() function. It important to stop the collection to avoid the increase in number of watchers.  
-Calling $scope.$meteorCollection does the same but will also stop the collection when the scope is destroyed.
-Therefore this is the recommended method.
+Calling $scope.$meteorCollection is exactly the same as calling $meteor.collection but additionally it will automatically stop the collection when the scope is destroyed.
+Therefore it is recommended to use $scope.$meteorCollection.
 
 ----
 
