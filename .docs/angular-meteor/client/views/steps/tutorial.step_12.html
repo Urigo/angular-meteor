@@ -1,6 +1,6 @@
-
+<template name="tutorial.step_12.html">
   <div>
-    <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/steps/tutorial.step_12.tpl"
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/steps/tutorial.step_12.html"
        class="btn btn-default btn-lg improve-button">
       <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
     </a>
@@ -19,7 +19,7 @@
     </div>
 
     <do-nothing class="col-md-12">
-  <btf-markdown>
+	    {{#markdown}}
 
 
 Now we are dealing with a few parties.
@@ -132,21 +132,11 @@ Add it as a dependency to our Angular app in app.js:
 
 Now let's add the directive in parties-list.ng.html , change the ng-repeat of parties to this:
 
-  </btf-markdown>
-
-    <pre><code>&lt;li <span class="hljs-variable">dir-paginate=</span><span class="hljs-string">"party in parties | itemsPerPage: perPage"</span> <span class="hljs-variable">total-items=</span><span class="hljs-string">"partiesCount.count"</span>&gt;
-    </code></pre>
-
-      <btf-markdown>
+    <li dir-paginate="party in parties | itemsPerPage: perPage" total-items="partiesCount.count">
 
 and after the UL closes add this directive:
 
-      </btf-markdown>
-
-    <pre><code>&lt;dir-pagination-controls <span class="hljs-function_start"><span class="hljs-keyword">on</span></span>-page-change=<span class="hljs-string">"pageChanged(newPageNumber)"</span>&gt;&lt;/dir-pagination-controls&gt;
-    </code></pre>
-
-      <btf-markdown>
+    <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
 
 as you can see, dir-paginate list takes the number of objects in a page (that we defined before) but also takes the total number items (we will get to that soon).
 With this bindings it calculates what buttons of pages it should display inside the dir-pagination-controls directive.
@@ -300,19 +290,13 @@ We haven't placed anywhere in the UI a way to change sorting so let's do that ri
 
 So in the HTML template, let's add a sorting dropdown inside the UL:
 
-  </btf-markdown>
-
-<pre><code>
-  <span class="hljs-tag">&lt;<span class="hljs-title">h1</span>&gt;</span>Parties:<span class="hljs-tag">&lt;/<span class="hljs-title">h1</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">select</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">"orderProperty"</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">option</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">"1"</span>&gt;</span>Ascending<span class="hljs-tag">&lt;/<span class="hljs-title">option</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">option</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">"-1"</span>&gt;</span>Descending<span class="hljs-tag">&lt;/<span class="hljs-title">option</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-title">select</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-</code></pre>
-
-      <btf-markdown>
+    <h1>Parties:</h1>
+    <div>
+      <select ng-model="orderProperty">
+        <option value="1">Ascending</option>
+        <option value="-1">Descending</option>
+      </select>
+    </div>
 
 
 in the controller lets associate that dropdown to $scope.sort:
@@ -389,20 +373,14 @@ Now let's move on to the client side.
 
 First let's place a search input into our template and bind it into a 'search' scope variable:
 
-  </btf-markdown>
-
-<pre><code>
-  <span class="hljs-tag">&lt;<span class="hljs-title">h1</span>&gt;</span>Parties:<span class="hljs-tag">&lt;/<span class="hljs-title">h1</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"search"</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">"search"</span> <span class="hljs-attribute">placeholder</span>=<span class="hljs-value">"Search"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">select</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">"orderProperty"</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">option</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">"1"</span>&gt;</span>Ascending<span class="hljs-tag">&lt;/<span class="hljs-title">option</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">option</span> <span class="hljs-attribute">value</span>=<span class="hljs-value">"-1"</span>&gt;</span>Descending<span class="hljs-tag">&lt;/<span class="hljs-title">option</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-title">select</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-</code></pre>
-
-      <btf-markdown>
+    <h1>Parties:</h1>
+    <div>
+      <input type="search" ng-model="search" placeholder="Search">
+      <select ng-model="orderProperty">
+        <option value="1">Ascending</option>
+        <option value="-1">Descending</option>
+      </select>
+    </div>
 
 And all we have left to do is call the subscribe method with our reactive scope variable:
 
@@ -435,13 +413,26 @@ And now add the subscribe function:
 
 That's it.
 
+In case you want to stop it manually before the scope closes you can use the subscription handle from the $meteorSubscribe function:
+
+    var savedSubscriptionHandle = null;
+
+    $scope.$meteorSubscribe('parties').then(function(subscriptionHandle){
+		  // You can use the subscription handle to stop the subscription if you want
+      savedSubscriptionHandle = subscriptionHandle;
+    });
+
+    // When you want to manually close the subscription
+    savedSubscriptionHandle.stop();
+
+For more information look at [$meteorSubscribe API](/api/subscribe).
 
 # Summary
 
 Now we have full pagination with search and sorting for client and server side with the help of Meteor's options and Angular's directives.
 
 
-  </btf-markdown>
+			{{/markdown}}
     </do-nothing>
 <div class="col-md-12">
     <ul class="btn-group tutorial-nav">
@@ -452,6 +443,6 @@ Now we have full pagination with search and sorting for client and server side w
     </ul>
     </div>
   </div>
-
+</template>
 
 

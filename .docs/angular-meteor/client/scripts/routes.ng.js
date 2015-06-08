@@ -169,7 +169,7 @@ angular.module("meteor-angular-docs").config(
         })
         .state('tutorial.step12', {
           url: '/step_12',
-          templateUrl: 'client/views/steps/tutorial.step_12.tpl'
+          template: UiRouter.template('tutorial.step_12.html')
         })
         .state('tutorial.step13', {
           url: '/step_13',
@@ -177,7 +177,7 @@ angular.module("meteor-angular-docs").config(
         })
         .state('tutorial.step14', {
           url: '/step_14',
-        templateUrl: 'client/views/steps/tutorial.step_14.tpl'
+          templateUrl: 'client/views/steps/tutorial.step_14.tpl'
         })
         .state('tutorial.step15', {
           url: '/step_15',
