@@ -11,17 +11,22 @@
 # $meteor.collection   /    $scope.$meteorCollection
 
 A service that wraps the [Meteor collections](http://docs.meteor.com/#/full/collections) to enable reactivity within AngularJS.
+This service binds between the angularjs $scope variables and the meteor collection. Service binding include 3 parts: 
+- watching the changes in angular $scope and updating the meteor collection. (called "autobind")
+- watching hte changes in the meteor collection and updating the angular $scope varialbles (called "observe").
 
-Calling $scope.$meteorCollection is exactly the same but additionally it will automatically stop the collection when the scope is destroyed.
-Therefor this is the recommended method.
+The autobinding is optional, and can be set to false, so changes in the angular $scope varialbles will have to be explictly saved to the collection to be updated to the meteor collection. 
+The AngularMeteor collection can be explicitly stopped by calling the stop() function. It important to stop the collection to avoid the increase in number of watchers.  
+Calling $scope.$meteorCollection does the same but will also stop the collection when the scope is destroyed.
+Therefore this is the recommended method.
 
 ----
 
 ## Usage
 
-    $meteor.collection(collection, auto)
+    $meteor.collection(collection, autobind)
 
-    $scope.$meteorCollection(collection, auto)
+    $scope.$meteorCollection(collection, autobind)
 
 ### Arguments
 
@@ -73,12 +78,7 @@ Therefor this is the recommended method.
 <table class="variables-matrix return-arguments">
 <tbody><tr>
   <td><a href="" class="label type-hint type-hint-object">object</a></td>
-  <td><p>Newly created <a href="/api/AngularMeteorCollection">AngularMeteorCollection</a> object with the following set of methods:</p>
-    <ul>
-      <li><code><span class="pln">save</span></code> — <a href="/api/AngularMeteorCollection">Go to reference</a></li>
-      <li><code><span class="pln">remove</span></code> — <a href="/api/AngularMeteorCollection">Go to reference</a></li>
-      <li><code><span class="pln">subscribe</span></code> — <a href="/api/AngularMeteorCollection">Go to reference</a></li>
-    </ul>
+  <td><p>Newly created <a href="/api/AngularMeteorCollection">AngularMeteorCollection</a> object.  
   </td>
 </tr>
 </tbody></table>
@@ -169,6 +169,7 @@ Therefor this is the recommended method.
       });
 
     }
+
 
         {{/markdown}}
     </do-nothing>
