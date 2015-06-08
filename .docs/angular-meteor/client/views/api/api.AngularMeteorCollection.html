@@ -10,7 +10,7 @@
 
 # AngularMeteorCollection
 
-An object that connects a [Meteor Collection](http://docs.meteor.com/#/full/collections) to an AngularJS scope variable
+An object that binds a [Meteor Collection](http://docs.meteor.com/#/full/collections) to an AngularJS scope variable. This is the object that return by calling the [$meteor.collection service](http://angular-meteor.com/api/meteorCollection). It represents the documents that exist in the Meteor local collection
 
 ----
 
@@ -63,12 +63,11 @@ See [$meteor.collection](/api/meteorCollection)
   </td>
 </tr>
 </tbody></table>
-
 <br>
 <h3><p><code><span class="pln">remove( :keys );</span></code></p></h3>
 <br>
 
-#### Parameters
+<h4>Parameters</h4>
 
 <table class="variables-matrix input-arguments">
 <thead>
@@ -98,7 +97,6 @@ See [$meteor.collection](/api/meteorCollection)
 </table>
 
 ### Returns
-
 <table class="variables-matrix return-arguments">
 <tbody><tr>
   <td><a href="" class="label type-hint type-hint-object">object</a></td>
@@ -106,19 +104,16 @@ See [$meteor.collection](/api/meteorCollection)
   </td>
 </tr>
 </tbody></table>
-
-
 <br>
 <h3><p><code><span class="pln">subscribe( :subscriptionName );</span></code></p></h3>
 <br>
-
 A shorten (Syntactic sugar) function for the <a href="/api/subscribe">$meteor.subscribe function</a>.
 
 Takes only one parameter and not returns a promise like <a href="/api/subscribe">$meteor.subscribe</a> does.
 
 When called after $scope.meteorCollection, it acts the same but in addition it automatically closes the subscription when the scope is destroyed.
 
-#### Parameters
+<h4>Parameters</h4>
 
 <table class="variables-matrix input-arguments">
   <thead>
@@ -141,12 +136,19 @@ When called after $scope.meteorCollection, it acts the same but in addition it a
   </tr>
   </tbody>
 </table>
-
+#### Returns
+None
 <br>
+<h3><p><code><span class="pln">stop();</span></code></p></h3>
+<br>
+Stops watching the current collection for changes made in the scope variable or the meteor collection. 
 
+#### Parameters
+None
+#### Returns
+None
+<br>
 ----
-
-
 ## Example
 
     // Bind all the todos to $scope.todos without auto-save
