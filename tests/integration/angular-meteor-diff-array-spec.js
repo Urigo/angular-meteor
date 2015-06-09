@@ -35,5 +35,26 @@ describe('diffArray module', function() {
         1,
         jasmine.any(Object));
     });
+
+    describe('when comparing two arrays with two different dates', function() {
+      it('should notify callback with changedAt', function() {
+        var oldCollection = [{
+          _id: "a", date: new Date(1111, 1, 1)
+        }];
+        var newCollection = [{
+          _id: "a", date: new Date(2222, 2, 2)
+        }];
+        var changedAtSpy = jasmine.createSpy('changedAt');
+
+        diffArray(oldCollection, newCollection, { changedAt: changedAtSpy });
+
+        expect(changedAtSpy).toHaveBeenCalledWith(
+          'a',
+          {_id: "a", date: new Date(2222, 2, 2)},
+          undefined,
+          0,
+          jasmine.any(Object));
+      });
+    });
   });
 });
