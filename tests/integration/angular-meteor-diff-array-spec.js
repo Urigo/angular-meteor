@@ -3,11 +3,13 @@ describe('diffArray module', function() {
 
   describe('diffArray service', function() {
     var diffArray,
-        deepCopyRemovals;
+        deepCopyRemovals,
+        deepCopyChanges;
 
-    beforeEach(angular.mock.inject(function(_diffArray_, _deepCopyRemovals_) {
+    beforeEach(angular.mock.inject(function(_diffArray_, _deepCopyRemovals_, _deepCopyChanges_) {
       diffArray = _diffArray_;
       deepCopyRemovals = _deepCopyRemovals_;
+      deepCopyChanges = _deepCopyChanges_;
     }));
 
     it('should notify addedAt and changedAt changes between two arrays', function() {
@@ -65,6 +67,27 @@ describe('diffArray module', function() {
         var newItem = {_id: 1, field : 0};
 
         deepCopyRemovals(oldItem, newItem);
+
+        expect(oldItem).toEqual(newItem);
+      });
+
+      it('should not remove fields with null value', function() {
+        var oldItem = {_id: 1, field : 0, another : 3};
+        var newItem = {_id: 1, field : 0, another: null};
+        var oldItemBefore = angular.copy(oldItem);
+
+        deepCopyRemovals(oldItem, newItem);
+
+        expect(oldItem).toEqual(oldItemBefore);
+      });
+    });
+
+    describe('deepCopyChanges', function() {
+      it('should copy null values', function() {
+        var oldItem = {_id: 1, field : 0, another : 3};
+        var newItem = {_id: 1, field : 0, another: null};
+
+        deepCopyChanges(oldItem, newItem);
 
         expect(oldItem).toEqual(newItem);
       });
