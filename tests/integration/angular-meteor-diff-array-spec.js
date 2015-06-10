@@ -2,10 +2,12 @@ describe('diffArray module', function() {
   beforeEach(angular.mock.module('diffArray'));
 
   describe('diffArray service', function() {
-    var diffArray;
+    var diffArray,
+        deepCopyRemovals;
 
-    beforeEach(angular.mock.inject(function(_diffArray_) {
+    beforeEach(angular.mock.inject(function(_diffArray_, _deepCopyRemovals_) {
       diffArray = _diffArray_;
+      deepCopyRemovals = _deepCopyRemovals_;
     }));
 
     it('should notify addedAt and changedAt changes between two arrays', function() {
@@ -54,6 +56,17 @@ describe('diffArray module', function() {
           undefined,
           0,
           jasmine.any(Object));
+      });
+    });
+
+    describe('deepCopyRemovals', function() {
+      it('should handle fields that are false-y correctly', function() {
+        var oldItem = {_id: 1, field : 0, another : 3};
+        var newItem = {_id: 1, field : 0};
+
+        deepCopyRemovals(oldItem, newItem);
+
+        expect(oldItem).toEqual(newItem);
       });
     });
   });
