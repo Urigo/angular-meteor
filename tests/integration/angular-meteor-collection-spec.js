@@ -289,4 +289,28 @@ describe('$meteorCollection service', function() {
       });
     });
   });
+
+  describe('objects with date', function() {
+    it('should be saved to the collection when save is called', function(done) {
+
+      var itemChanged = meteorArray[0];
+      itemChanged.a = new Date("October 13, 2014 11:13:00");
+
+      meteorArray.save().then(function() {
+        expect({a : new Date("October 13, 2014 11:13:00"), b: 2}).toBeFoundExactlyInCollection(MyCollection);
+        done();
+      }, function() {
+        done();
+      });
+    });
+
+    it('should save objects with nested date fields when save is called', function(done) {
+      meteorArray.save(itemWithNestedDateFields).then(function() {
+        expect(itemWithNestedDateFields).toBeFoundExactlyInCollection(MyCollection);
+        done();
+      }, function() {
+        done();
+      });
+    });
+  });
 });
