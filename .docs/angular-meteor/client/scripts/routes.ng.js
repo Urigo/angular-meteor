@@ -21,10 +21,10 @@ angular.module("meteor-angular-docs").config(
         url: '/server',
         template: UiRouter.template('server.html')
       })
-      .state('angular2', {
-        url: '/angular2',
-        template: UiRouter.template('angular2.html')
-      })
+        .state('server.base', {
+          url: '/base',
+          template: UiRouter.template('server-base.html')
+        })
         .state('server.bootstrapping', {
           url: '/bootstrapping',
           template: UiRouter.template('server.bootstrapping.html')
@@ -37,6 +37,10 @@ angular.module("meteor-angular-docs").config(
           url: '/api',
           template: UiRouter.template('server.api.html')
         })
+      .state('angular2', {
+        url: '/angular2',
+        template: UiRouter.template('angular2.html')
+      })
       .state('api', {
         url: '/api',
         template: UiRouter.template('api.html')
