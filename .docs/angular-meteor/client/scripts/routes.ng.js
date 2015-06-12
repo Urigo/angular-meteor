@@ -25,15 +25,15 @@ angular.module("meteor-angular-docs").config(
           url: '/base',
           template: UiRouter.template('server-base.html')
         })
-        .state('server.bootstrapping', {
+        .state('server.base.bootstrapping', {
           url: '/bootstrapping',
           template: UiRouter.template('server.bootstrapping.html')
         })
-        .state('server.di', {
+        .state('server.base.di', {
           url: '/di',
           template: UiRouter.template('server.di.html')
         })
-        .state('server.api', {
+        .state('server.base.api', {
           url: '/api',
           template: UiRouter.template('server.api.html')
         })
