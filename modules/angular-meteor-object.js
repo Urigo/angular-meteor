@@ -110,10 +110,10 @@ angularMeteorObject.factory('$meteorObject', ['$rootScope', '$meteorUtils', 'Ang
     return function(collection, id, auto, options) {
       // Validate parameters
       if (!collection) {
-        throw new TypeError("The first argument of $meteorCollection is undefined.");
+        throw new TypeError("The first argument of $meteorObject is undefined.");
       }
       if (!angular.isFunction(collection.findOne)) {
-        throw new TypeError("The first argument of $meteorCollection must be a function or a have a findOne function property.");
+        throw new TypeError("The first argument of $meteorObject must be a function or a have a findOne function property.");
       }
 
       auto = auto !== false; // Making auto default true - http://stackoverflow.com/a/15464208/1426570
