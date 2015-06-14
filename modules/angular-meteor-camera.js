@@ -11,7 +11,7 @@ angularMeteorUtils.service('$meteorCamera', ['$q',
 
       MeteorCamera.getPicture(options, function (error, data) {
         if (error)
-          deferred.reject(err);
+          deferred.reject(error);
 
         if (data)
           deferred.resolve(data);
