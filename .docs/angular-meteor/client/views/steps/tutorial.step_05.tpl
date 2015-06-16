@@ -217,7 +217,7 @@ Now we have all in place.  Run the app and notice a few things:
 
 #### Common Mistakes
 
-In case you won't enter the right absolute path (maybe by accident add a relative one), then you might be getting the folowwing error:
+In case you won't enter the right absolute path (maybe by accident add a relative one), then you might be getting the following error:
 
 WARNING: Tried to load angular more than once.
 
