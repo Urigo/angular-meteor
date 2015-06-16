@@ -91,6 +91,25 @@ describe('diffArray module', function() {
 
         expect(oldItem).toEqual(newItem);
       });
+      it('should copy new values', function() {
+        var oldItem = {
+            
+        };
+        var newItem = {
+          "copies": {
+            "images": {
+              "name": "somthing.png",
+              "type": "image/png",
+              "size": 4508257
+            }
+          }
+        };
+
+        deepCopyChanges(oldItem, newItem);
+
+        expect(oldItem).toEqual(newItem);
+      });
     });
+      
   });
 });
