@@ -70,4 +70,33 @@ describe('$meteorUtils service', function () {
       expect(handle.stop).toHaveBeenCalled();
     });
   });
+  describe('stripDollarPrefixedKeys', function () {
+
+    it('should remove keys with $ prefix', function(){
+
+      var result = $meteorUtils.stripDollarPrefixedKeys({'$foo': 1, '$$baz': 3, bar : 2});
+      expect(result.hasOwnProperty('$foo')).toBe(false);
+      expect(result.hasOwnProperty('$$baz')).toBe(false);
+      expect(result.bar).toEqual(2);
+
+    });
+    it('should ignore FS.File instances', function(){
+
+      var cfsExits = typeof FS === 'object';
+      if(!cfsExits){
+        FS = {
+          File : function(){}
+        };
+      }
+
+      var fsFile = new FS.File();
+      var result = $meteorUtils.stripDollarPrefixedKeys(fsFile);
+
+      if(!cfsExits){ // clean up
+        delete FS;
+      }
+      expect(result).toBe(result);
+
+    });
+  });
 });
