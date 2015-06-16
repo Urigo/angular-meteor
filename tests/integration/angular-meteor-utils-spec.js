@@ -82,9 +82,9 @@ describe('$meteorUtils service', function () {
     });
     it('should ignore FS.File instances', function(){
 
-      var cfsExits = typeof FS === 'object';
+      var cfsExits = typeof window.FS === 'object';
       if(!cfsExits){
-        FS = {
+        window.FS = {
           File : function(){}
         };
       }
@@ -93,9 +93,25 @@ describe('$meteorUtils service', function () {
       var result = $meteorUtils.stripDollarPrefixedKeys(fsFile);
 
       if(!cfsExits){ // clean up
-        delete FS;
+        delete window.FS;
       }
-      expect(result).toBe(result);
+      expect(result).toBe(fsFile);
+
+    });
+    it('should ignore Date instances', function(){
+
+      var input = new Date();
+      var result = $meteorUtils.stripDollarPrefixedKeys(input);
+
+      expect(result).toBe(input);
+
+    });
+    it('should ignore File instances', function(){
+
+      var input = new File([], "myfile.jpg");
+      var result = $meteorUtils.stripDollarPrefixedKeys(input);
+
+      expect(result).toBe(input);
 
     });
   });
