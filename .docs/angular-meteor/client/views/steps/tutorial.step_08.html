@@ -97,16 +97,10 @@ __`model/parties.js`:__
         return userId && party.owner === userId;
       },
       update: function (userId, party, fields, modifier) {
-        if (userId !== party.owner)
-          return false;
-
-        return true;
+        return userId && party.owner === userId;
       },
       remove: function (userId, party) {
-        if (userId !== party.owner)
-          return false;
-
-        return true;
+        return userId && party.owner === userId;
       }
     });
 
