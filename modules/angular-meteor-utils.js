@@ -25,7 +25,12 @@ angularMeteorUtils.service('$meteorUtils', [ '$timeout',
     };
     // Borrowed from angularFire - https://github.com/firebase/angularfire/blob/master/src/utils.js#L445-L454
     this.stripDollarPrefixedKeys = function (data) {
-      if( !angular.isObject(data) || data instanceof File || (typeof FS === 'object' && data instanceof FS.File) || data instanceof Date) { return data; }
+      if( !angular.isObject(data) ||
+        data instanceof Date ||
+        data instanceof File ||
+        (typeof FS === 'object' && data instanceof FS.File)) {
+        return data;
+      }
       var out = angular.isArray(data)? [] : {};
       angular.forEach(data, function(v,k) {
         if(typeof k !== 'string' || k.charAt(0) !== '$') {
