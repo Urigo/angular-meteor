@@ -1,7 +1,7 @@
-
+<template name="tutorial.step_05.html">
   <div class="row">
   <div class="col-md-12">
-    <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/steps/tutorial.step_05.tpl"
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/steps/tutorial.step_05.html"
        class="btn btn-default btn-lg improve-button">
       <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
     </a>
@@ -21,7 +21,7 @@
   </div>
 
   <do-nothing class="col-md-12">
-  <btf-markdown>
+{{#markdown}}
 
 In this step, you will learn how to create a layout template and how to build an app that has multiple views by adding routing, using an Angular module called 'ui-router'.
 
@@ -70,26 +70,21 @@ Let's create a new html file called parties-list.ng.html and paste the existing 
 
 __`parties-list.ng.html`:__
 
-      </btf-markdown>
+    <form>
+      <label>Name</label>
+      <input ng-model="newParty.name">
+      <label>Description</label>
+      <input ng-model="newParty.description">
+      <button ng-click="parties.push(newParty)">Add</button>
+    </form>
+    <ul>
+      <li ng-repeat="party in parties">
+        <a href="/parties/{{dstache}}party._id}}">{{dstache}}party.name}}</a>
 
-<pre><code><span class="xml">    <span class="hljs-tag">&lt;<span class="hljs-title">form</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">label</span>&gt;</span>Name<span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">"newParty.name"</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">label</span>&gt;</span>Description<span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">"newParty.description"</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">ng-click</span>=<span class="hljs-value">"parties.push(newParty)"</span>&gt;</span>Add<span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-title">form</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">ul</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">ng-repeat</span>=<span class="hljs-value">"party in parties"</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"/parties/</span></span></span><span class="hljs-expression">{{<span class="hljs-variable">party.</span>_<span class="hljs-variable">id</span>}}</span><span class="xml"><span class="hljs-tag"><span class="hljs-value">"</span>&gt;</span></span><span class="hljs-expression">{{<span class="hljs-variable">party.name</span>}}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
-
-        <span class="hljs-tag">&lt;<span class="hljs-title">p</span>&gt;</span></span><span class="hljs-expression">{{<span class="hljs-variable">party.description</span>}}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">p</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">ng-click</span>=<span class="hljs-value">"remove(party)"</span>&gt;</span>X<span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
-      <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span></span>
-</code></pre>
-
-    <btf-markdown>
+        <p>{{dstache}}party.description}}</p>
+        <button ng-click="remove(party)">X</button>
+      </li>
+    </ul>
 
 
 The code is almost the same except for this one change:
@@ -109,25 +104,20 @@ Now let's go back to index.html and replace the content with the ui-view directi
 
 __`index.html`:__
 
-</btf-markdown>
+    <head>
+      <base href="/">
+    </head>
+    <body ng-app="socially">
 
-<pre><code>
-<span class="hljs-tag">&lt;<span class="hljs-title">head</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-title">base</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"/"</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">head</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">body</span>&gt;</span>
+    <div>
+      <h1>
+        <a href="/parties">Home</a>
+      </h1>
+      <div ui-view></div>
+    </div>
 
-  <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">ng-app</span>=<span class="hljs-value">"socially"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">h1</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">a</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"/parties"</span>&gt;</span>Home<span class="hljs-tag">&lt;/<span class="hljs-title">a</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-title">h1</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">ui-view</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+    </body>
 
-<span class="hljs-tag">&lt;/<span class="hljs-title">body</span>&gt;</span>
-</code></pre>
-
-    <btf-markdown>
 Notice we did 2 things:
 
 1. replaced all the content with ui-view (that will be responsible of including the right content according to the current url)
@@ -141,12 +131,8 @@ Create a new html file called party-details.ng.html and paste the following code
 
 __`party-details.ng.html`:__
 
-        </btf-markdown>
+    Here you will see the details of party number: {{dstache}} partyId }}
 
-     <pre><code>   Here you will see <span class="hljs-operator">the</span> details <span class="hljs-operator">of</span> party <span class="hljs-built_in">number</span>: {{ partyId }}
-     </code></pre>
-
-    <btf-markdown>
 
 We will get to it later on.
 
@@ -217,7 +203,7 @@ Now we have all in place.  Run the app and notice a few things:
 
 #### Common Mistakes
 
-In case you won't enter the right absolute path (maybe by accident add a relative one), then you might be getting the folowwing error:
+In case you won't enter the right absolute path (maybe by accident add a relative one), then you might be getting the following error:
 
 WARNING: Tried to load angular more than once.
 
@@ -229,7 +215,7 @@ In this case first make sure you entered all the paths correctly with `.ng.html`
 With the routing set up and the parties list view implemented, we're ready to go to the next step to implement the party details view.
 
 
-        </btf-markdown>
+{{/markdown}}
     </do-nothing>
     <div class="col-md-12">
     <ul class="btn-group tutorial-nav">
@@ -240,4 +226,5 @@ With the routing set up and the parties list view implemented, we're ready to go
     </ul>
     </div>
   </div>
+</template>
 
