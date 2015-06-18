@@ -50,13 +50,46 @@ describe('diffArray module', function() {
         }];
         var changedAtSpy = jasmine.createSpy('changedAt');
 
-        diffArray(oldCollection, newCollection, { changedAt: changedAtSpy });
+        expect(function(){diffArray(oldCollection, newCollection, { changedAt: changedAtSpy })}).not.toThrow();
 
         expect(changedAtSpy).toHaveBeenCalledWith(
           'a',
           {_id: "a", date: new Date(2222, 2, 2)},
           undefined,
           0,
+          jasmine.any(Object));
+      });
+    });
+
+    describe('no exception on first compare and ignore $$hashkeys', function() {
+      it('should notify callback with changedAt', function() {
+        var oldCollection = [{
+          _id: "a", date: new Date(1111, 1, 1), checked: true, $$hashKey: "object:4"
+        },
+        {
+          _id: "b", date: new Date(2222, 2, 2), checked: true, $$hashKey: "object:6"
+        },
+        {
+          _id: "c", date: new Date(2222, 2, 2), checked: true, $$hashKey: "object:8"
+        }];
+        var newCollection = [{
+          _id: "a", date: new Date(1111, 1, 1), checked: true
+        },
+        {
+          _id: "b", date: new Date(2222, 2, 2), checked: false
+        },
+        {
+          _id: "c", date: new Date(2222, 2, 2), checked: true
+        }];
+        var changedAtSpy = jasmine.createSpy('changedAt');
+
+        expect(function(){diffArray(oldCollection, newCollection, { changedAt: changedAtSpy })}).not.toThrow();
+
+        expect(changedAtSpy).toHaveBeenCalledWith(
+          'b',
+          {checked: false, _id: "b"},
+          undefined,
+          1,
           jasmine.any(Object));
       });
     });
