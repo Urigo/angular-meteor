@@ -55,7 +55,7 @@ and look at the amazing app that's running on your computer!
 
 So, as you can see, we have a full running app! which includes a server and a client.
 
-But let's start from the beginning, please delete the following files:
+The default Meteor app starts life with three files, one 'js', one 'html' and one 'css' file. Each named with the application name you used in the 'create' command above, in our case this is 'socially'. We're going to add our own files for this tutorial. So let's start by deleting the following files:
 
     socially.css	socially.html	socially.js
 
@@ -72,7 +72,7 @@ __`index.html`:__
 As you can see, there is no html tag, no head tag, very simple.
 
 
-The reason is the way Meteor structures and serves files to the client.
+The reason for this is the way Meteor structures and serves files to the client.
 
 Meteor scans all the HTML files in your application and concatenates them together.
 
@@ -120,23 +120,24 @@ __`index.html`:__
       <div ng-include="'index.ng.html'"></div>
     </body>
 
-But if you load this in your browser, you'll see nothing. That's because we still need to create the actual Angular app, which we'll do next.
+But if you load this in your browser, you won't see anything. That's because we still need to create the actual Angular app, which we'll do next.
 
-* It's very important to note - all the paths are always absolute, not relative!  so if 'index.ng.html' was inside a client folder, you would have to place the whole path from the route app, doesn't matter where you are
-calling the file from, like that:
+* It's very important to note - the paths are always absolute, not relative!  so if 'index.ng.html' was inside a client folder, you would have to place the whole path from the route app, doesn't matter where you're calling the file from. 
+
+like this (e.g. if index.ng.html was in the 'client' folder):
 
     <div ng-include="'client/index.ng.html'"></div>
 
 # AngularJS app
 
-AngularJS apps are actually individual modules so now we are going to create our app module.
+AngularJS apps are actually individual modules. So to start with lets create our app module.
 
-Create a new app.js file.  now you can see another example of Meteor's power and simplicity - no need to include this file anywhere. Meteor will take care of it by going through all the files in the folder and including them automatically.
+Create a new app.js file.  Now you can see another example of Meteor's power and simplicity - no need to include this file anywhere. Meteor will take care of it by going through all the files in the folder and including them automatically.
 
-But Meteor's goal is to break down the barrier between client and server, and the code you write runs everywhere! (more on that later).
+One of Meteor's goals is to break down the barrier between client and server, so the code you write can run everywhere! (more on that later).
 But we need Angular's power only in the client side, so how can we do that?
 
-There are a few ways to tell Meteor to run a code only on the client/server/phone side, let's start with the simplest way - Meteor.isClient variable.
+There are a few ways to tell Meteor to run code only on the client/server/phone side, let's start with the simplest way - Meteor.isClient variable.
 
 __`app.js`:__
 
@@ -144,9 +145,9 @@ __`app.js`:__
 
     }
 
-Now anything that will happen inside this if statement will run only on the client side.
+Now everything inside this 'if' statement will only run on the client side.
 
-So let's continue with starting our AngularJS application, we will call it "socially":
+Let's continue defining our AngularJS application module, and give it the name "socially":
 
 __`app.js`:__
 
@@ -154,17 +155,15 @@ __`app.js`:__
       angular.module('socially',['angular-meteor']);
     }
 
-And name our application in the ng-app directive in index.html:
+And use the same application name in the ng-app directive in index.html:
 
     <div ng-app="socially" ng-include="'index.ng.html'"></div>
 
-What we did here is to declare a new angular module named 'socially' and making it dependant on the 'angular-meteor' module (that we included in the first step).
+What we did here is to declare a new angular module named 'socially' and make it dependant on the 'angular-meteor' module (that we included in the first step).
 
 Now run the app.
 
-everything is the same.
-
-and now inside our index.ng.html let's use Angular:
+Everything is the same, but now inside our index.ng.html let's use Angular:
 
     <p>Nothing here {{dstache}} 'yet' + '!' }}</p>
 
@@ -178,16 +177,16 @@ This line demonstrates two core features of Angular's templating capabilities:
 * A binding, denoted by double curly braces {{dstache}} }}
 * a simple expression 'yet' + '!' used in this binding.
 
-AngularJS finds those double curly braces, evaluates the expression and inserts the result into the DOM in place of the binding.
+AngularJS finds the double curly braces, evaluates the expression and inserts the result into the DOM in place of the binding.
 Rather than a one-time insert, as we'll see in the next steps, a binding will result in efficient continuous updates whenever the result of the expression evaluation changes.
-Inside in the client side, like a future smart browser would do.
+Inside in the client side code, like a future smart browser would do.
 
 
-> Why did use a new file extension file.ng.html ?
+> Why did we use the new file extension file.ng.html ?
 >
-> That is because Meteor templating system uses double-curlies. If we use them in our AngularJS view HTML, Meteor will override Angular.
+> That's because the Meteor templating system uses double-curlies. If we use them in our AngularJS view HTML, Meteor will override Angular.
 >
-> Fortunately, we created a new file extension to make Meteor not override our Angular expression.
+> Fortunately, we created a new file extension to stop Meteor overriding our Angular expression.
 >
 > If you still want to use HTML files without changing their extension, Angular (unlike Meteor...) gives us the [option to change the double-curlies to Double-square-brackets](http://stackoverflow.com/a/12923955/1426570)
 
