@@ -156,7 +156,9 @@ __`app.js`:__
 
 And name our application in the ng-app directive in index.html:
 
-    <div ng-app="socially" ng-include="'index.ng.html'"></div>
+    <body ng-app="socially">
+      <div ng-include="'index.ng.html'"></div>
+    </body>
 
 What we did here is to declare a new angular module named 'socially' and making it dependant on the 'angular-meteor' module (that we included in the first step).
 

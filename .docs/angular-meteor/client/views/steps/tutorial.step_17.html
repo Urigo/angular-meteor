@@ -62,23 +62,23 @@ Now let's start organizing by putting the Home link and the login buttons inside
 
 Inside index.html surround the H1 and the loginButton with a header like that:
 
-        <body>
+    <body>
 
-        <div ng-app="socially">
-          <header class="navbar navbar-fixed-top">
-            <div class="container-fluid">
-              <div class="navbar-header">
-                <h1>
-                  <a href="/parties">Home</a>
-                </h1>
-              </div>
-              <meteor-include src="loginButtons"></meteor-include>
-            </div>
-          </header>
-          <div ui-view class="container-fluid"></div>
+    <div>
+      <header class="navbar navbar-fixed-top">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <h1>
+              <a href="/parties">Home</a>
+            </h1>
+          </div>
+          <meteor-include src="loginButtons"></meteor-include>
         </div>
+      </header>
+      <div ui-view class="container-fluid"></div>
+    </div>
 
-        </body>
+    </body>
 
 Converting to Bootstrap doesn't stop here. By applying bootstrap styles to various other parts of our Socially app, our website will look better on different screens. Have a look at [Code Diff](https://github.com/Urigo/meteor-angular-socially/compare/step_16...step_17) to see how we changed the structure of the main files.
 
