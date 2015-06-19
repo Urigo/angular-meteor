@@ -62,8 +62,17 @@ angularMeteorTemplate.directive('meteorInclude', [
       link: function (scope, element, attributes) {
         var name = attributes.meteorInclude || attributes.src;
         if (name && Template[name]) {
+          // Making scope reactive so Meteor will know it was changed
+          var reactiveScope = new ReactiveVar();
+          scope.$watch(function() {
+            // Happens on every $digest cycle
+            reactiveScope.set(scope);
+          });
+          scopeFunction = function () {
+            return reactiveScope.get();
+          };
           var template = Template[name];
-          var viewHandler = Blaze.renderWithData(template, scope, element[0]);
+          var viewHandler = Blaze.renderWithData(template, scopeFunction, element[0]);
           $compile(element.contents())(scope);
           scope.$on('$destroy', function() {
             Blaze.remove(viewHandler);
@@ -75,3 +84,9 @@ angularMeteorTemplate.directive('meteorInclude', [
     };
   }
 ]);
+
+getAngularScope = function(self){
+  self.autorun(function () {
+      self.$scope = Template.currentData();
+  });
+};
