@@ -33,7 +33,7 @@ With that in mind, let's use a little Angular and JavaScript to add model, view,
 
 Goals for this step:
 
-* The list of three parties is now generated dynamically from data in the model of the client
+* Generate the parties list dynamically from data in a model (client only for now).
 
 
 # View and Template
@@ -98,7 +98,7 @@ The controller is simply a constructor function that takes a $scope parameter.
 
 The data model (a simple array of parties in object literal notation) is now instantiated within the PartiesListCtrl controller.
 
-Although the controller is not yet doing very much, it plays a crucial role. By providing context for our data model, the controller allows us to establish data-binding between the model and the view. We connected the dots between the presentation, data, and logic components as follows:
+Although the controller is not yet doing very much, it plays a crucial role. By providing context for our data model, the controller allows us to establish data-binding between the model and the view. We connected the dots between the presentation, the data, and the logic components as follows:
 
 * The ngController directive, located on the body tag, references the name of our controller, PartiesListCtrl (located in the JavaScript file app.js).
 
@@ -119,12 +119,11 @@ As you can see, when we declared the controller, we used strings for [dependency
         // ...
     }]);
 
-There is a very popular Angular tool that's called [ng-annotate](https://github.com/olov/ng-annotate) that takes care of that for us so we can write regular code like it's not
-going through minification.
+There is a very popular Angular tool that's called [ng-annotate](https://github.com/olov/ng-annotate) that takes care of that for us so we can write regular code that won't get mangled in minification.
 
-angular-meteor uses that process automatically. all you need to do is to change your .js files endings to .ng.js
+angular-meteor uses that process automatically. All you need to do is to change your .js files to end with .ng.js
 
-then you can write your dependency injection like this:
+Then you can write your dependency injection like this:
 
     angular.module("socially").controller("PartiesListCtrl",
       function($scope){
@@ -143,7 +142,7 @@ Add another binding to index.ng.html , For example:
 
 <btf-markdown>
 
-Create a new model property in the controller (inside app.js) and bind to it from the template. For example:
+Create a new model property in the controller (inside app.js) and bind to it in the template. For example:
 
       $scope.name = "World";
 
@@ -186,7 +185,7 @@ Extra points: try and make an 8x8 table using an additional ng-repeat.
 
 You now have a dynamic app that features separate model, view, and controller components.
 
-But, this is all client side, which is nice for tutorials, but in a real application we need to save the data in a DB on the server and sync all the clients with it.
+But, this is all client side, which is nice for tutorials, but in a real application we need to persist the data on the server and sync all the clients with it.
 
 So, let's go to step 3 to learn how to bind ourselves to the great power of Meteor.
 
