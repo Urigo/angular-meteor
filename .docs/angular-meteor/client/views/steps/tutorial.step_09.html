@@ -1,7 +1,7 @@
-
+<template name="tutorial.step_09.html">
   <div class="row">
     <div class="col-md-12">
-    <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/steps/tutorial.step_09.tpl"
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/steps/tutorial.step_09.html"
        class="btn btn-default btn-lg improve-button">
       <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
     </a>
@@ -22,15 +22,15 @@
   </div>
 
   <do-nothing class="col-md-12">
-  <btf-markdown>
+{{#markdown}}
 
 Right now our app has no privacy, every user can see all the parties on the screen.
 
-So let's add a 'public' flag on parties - if a party is public we will let anyone see it, but if a party is private, only the owner can see it.
+So let's add a `public` flag on parties - if a party is public we will let anyone see it, but if a party is private, only the owner can see it.
 
-First we need to remove the 'autopublish' Meteor package.
+First we need to remove the `autopublish` Meteor package.
 
-autopublish is added to any new Meteor project. It pushes a full copy of the database to each client.
+`autopublish` is added to any new Meteor project. It pushes a full copy of the database to each client.
 It helped us until now, but it's not so good for privacy...
 
 Write this command in the console:
@@ -42,10 +42,11 @@ Now run the app.   You can't see any parties.
 
 So now we need to tell Meteor what parties should it publish to the clients.
 
-To do that we will use Meteor's publish command.
+To do that we will use Meteor's [publish function](http://docs.meteor.com/#/full/meteor_publish).
 
 Publish functions should go only in the server so the client won't have access to them.
-So let's create a new file named parties.js inside the server folder.
+
+Let's create a new file named `parties.js` inside the server folder.
 
 Inside the file insert this code:
 
@@ -63,21 +64,20 @@ Inside the file insert this code:
         ]});
     });
 
-Let's see what is happening here.
+Let's see what's happening here:
 
-First, we have the Meteor.publish - a function to define what to publish from the server to the client.
+* We have `Meteor.publish` - a function to define what to publish from the server to the client
+* The first parameter is the name of the subscription. the client will subscribe to that name
+* The second parameter is a function the defines what will be returned in the subscription
 
-The first parameter is the name of the subscription. the client will subscribe to that name.
-
-The second parameter is a function the defines what will be returned in the subscription.
 That function will determine what data will be returned and the permissions needed.
 
-In our case the first name parameter is "parties". So we will need to subscribe to the "parties" collection in the client.
+In our case the first name parameter is **"parties"**. So we will need to subscribe to the **"parties"** collection in the client.
 
-We have 2 way of doing this:
+We have two ways of doing that:
 
 1. Using the [$meteor.subscribe](/api/subscribe) service that also return a promise when the subscribing is done
-2. using [AngularMeteorCollection's](/api/AngularMeteorCollection) subscribe function which is exactly the same but it's
+2. Using [AngularMeteorCollection's](/api/AngularMeteorCollection) subscribe function which is exactly the same but it's
 here just for syntactic sugar doesn't return a promise.
 
 Right now we don't need the promise so let's use the second way:
@@ -85,10 +85,11 @@ Right now we don't need the promise so let's use the second way:
     $scope.parties = $meteor.collection(Parties).subscribe('parties');
 
 It is the same as:
+
     $meteor.subscribe('parties');
     $scope.parties = $meteor.collection(Parties);
 
-But it is a *good practice* to resolve a subscription in state's resolve function:
+You can also resolve a subscription in state's resolve function:
 
      .state('parties', {
         url: '/parties',
@@ -103,8 +104,9 @@ But it is a *good practice* to resolve a subscription in state's resolve functio
         }
      });
 
-* Our publish function can also take parameters.  In that case, we would also need to pass the parameters from the client.
-For more information about the $meteor.subscribe service [click here](http://angularjs.meteor.com/api/subscribe) or the subscribe function of [AngularMeteorCollection](/api/AngularMeteorCollection).
+> Our publish function can also take parameters.  In that case, we would also need to pass the parameters from the client.
+>
+> For more information about the `$meteor.subscribe` service [click here](http://angularjs.meteor.com/api/subscribe)
 
 
 In the second parameter, our function uses the Mongo API to return the wanted documents (document are the JSON-style data structure of MongoDB).
@@ -118,27 +120,17 @@ Either that the owner parameter exists and it's the current logged in user (whic
 
 So now let's add the public flag to the parties and see how it affects the parties the client gets.
 
-Let's add a checkbox to the new party form in parties-list.ng.html:
+Let's add a checkbox to the new party form in `parties-list.ng.html`:
 
-  </btf-markdown>
-
-<pre><code><span class="hljs-tag">&lt;<span class="hljs-title">label</span>&gt;</span>Public<span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"checkbox"</span> <span class="hljs-attribute">ng-model</span>=<span class="hljs-value">"newParty.public"</span>&gt;</span>
-</code></pre>
-
-    <btf-markdown>
+    <label>Public</label>
+    <input type="checkbox" ng-model="newParty.public">
 
 Notice how easy it is to bind a checkbox to a model with AngularJS!
 
-Let's add the same to the party-details.ng.html page:
+Let's add the same to the `party-details.ng.html` page:
 
-        </btf-markdown>
-
-<pre><code>&lt;<span class="hljs-keyword">label</span>&gt;<span class="hljs-keyword">Is</span> public&lt;/<span class="hljs-keyword">label</span>&gt;
-&lt;input <span class="hljs-keyword">type</span>=<span class="hljs-string">"checkbox"</span> ng-model=<span class="hljs-string">"party.public"</span>&gt;
-</code></pre>
-
-        <btf-markdown>
+    <label>Is public</label>
+    <input type="checkbox" ng-model="party.public">
 
 Now let's run the app.
 
@@ -157,7 +149,7 @@ Notice the we don't need to create a new Meteor collection like we did with part
 
 So let's start with defining our publish function.
 
-Create a new file under the 'server' folder named users.js and place the following code in:
+Create a new file under the `server` folder named `users.js` and place the following code in:
 
     Meteor.publish("users", function () {
       return Meteor.users.find({}, {fields: {emails: 1, profile: 1}});
@@ -170,7 +162,7 @@ So here again we use the Mongo API to return all the users (find with an empty o
 The emails field holds all the user's email addresses, and the profile might hold more optional information like the user's name
 (in our case, if the user logged in with the Facebook login, the accounts-facebook package puts the user's name from Facebook automatically into that field).
 
-Now let's subscribe to that publish Method.  in the client->parties->controllers->partyDetails.js file add the following line inside the controller.
+Now let's subscribe to that publish Method.  in the `client->parties->controllers->partyDetails.js` file add the following line inside the controller.
 If you just add to the end you will get an uncaught reference $scope not defined:
 
     $scope.users = $meteor.collection(Meteor.users, false).subscribe('users');
@@ -180,26 +172,22 @@ If you just add to the end you will get an uncaught reference $scope not defined
 * Notice that we passes false in the second parameter. that means that we don't want to update that collection from the client.
 * Calling [AngularMeteorCollection's](/api/AngularMeteorCollection) subscribe function.
 
-Also, let's add a subscription to the party in case we get straight to there and won't go through the parties router:
+Also, let's add a subscription to the party in this controller as well.
+This is because if we will get to this controller directly, the subscription in the other controller won't be called and we will have no data at all.
 
     $scope.party = $meteor.object(Parties, $stateParams.partyId).subscribe('parties');
 
 
 Now let's add the list of users to the view to make sure it works.
 
-Add this ng-repeat list to the end of parties-details.ng.html:
+Add this ng-repeat list to the end of `parties-details.ng.html`:
 
-</btf-markdown>
-
-<pre><code><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">ul</span>&gt;</span>
-  Users:
-  <span class="hljs-tag">&lt;<span class="hljs-title">li</span> <span class="hljs-attribute">ng-repeat</span>=<span class="hljs-value">"user in users"</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span></span><span class="hljs-expression">{{ <span class="hljs-variable">user.emails</span>[0]<span class="hljs-variable">.address</span> }}</span><span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-title">li</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-title">ul</span>&gt;</span></span>
-</code></pre>
-
-<btf-markdown>
+    <ul>
+      Users:
+      <li ng-repeat="user in users">
+        <div>{{dstache}} user.emails[0].address }}</div>
+      </li>
+    </ul>
 
 Run the app and see the list of all the users' emails that created a login and password and did not use a service to login.
 
@@ -318,7 +306,7 @@ and how to subscribe to it with the $collection.bind 4th parameter.
 
 In the next step we will learn how to filter the users list in the client side with AngularJS filters and create a custom filter for our own needs.
 
-    </btf-markdown>
+{{/markdown}}
     </do-nothing>
 <div class="col-md-12">
     <ul class="btn-group tutorial-nav">
@@ -329,4 +317,4 @@ In the next step we will learn how to filter the users list in the client side w
     </ul>
     </div>
   </div>
-
+</template>
