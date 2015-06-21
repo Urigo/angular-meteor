@@ -56,8 +56,7 @@ Holds the current Angular [scope](https://docs.angularjs.org/guide/scope) as [Te
 
 
 The `meteor-include` directive holds the Angular scope of the directive as the
-as [Template.currentData](http://docs.meteor.com/#/full/template_currentdata) of the Meteor template,
-names it `$scope` and update it reactively.
+as [Template.currentData](http://docs.meteor.com/#/full/template_currentdata) of the Meteor template.
 
 
 #### Example using scope data
@@ -116,16 +115,9 @@ __`blaze-angular.js`:__
 
       }]);
 
-      Template.partiesBlazeTemplate.onCreated(function () {
-        // getAngularScope is a helper function supplied by angular-meteor
-        getAngularScope(this);
-      });
-
       Template.partiesBlazeTemplate.helpers({
         parties: function() {
-          // Make sure scope is already defined as Blaze loads before Angular
-          if (Template.instance().$scope)
-            return Template.instance().$scope.parties
+          return Template.currentData().getReactively('parties', true);
         }
       });
     }
