@@ -25,6 +25,14 @@ A service which contains helpful utilities for angular-meteor applications
 ## Methods
 
 <h3><p><code><span class="pln">autorun( :scope, :function );</span></code></p></h3>
+<h3><p><code><span class="pln">$scope.$meteorAutorun( :function );</span></code></p></h3>
+
+Wrapper function to Meteor's [Tracker.autorun](http://docs.meteor.com/#/full/tracker_autorun).
+
+Keeps the changes in Angular's scope context and closes the autorun when scope automatically destroys.
+
+The two types of syntax works the same way.
+
 <br>
 
 #### Parameters
