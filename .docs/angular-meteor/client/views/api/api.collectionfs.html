@@ -13,19 +13,22 @@
 When working with CollectionFS we need to work differently with the `$meteor.collection` because
 collectionFS collection is a bit different than `Mongo.Collection`.
 
-To work with collectionFS we send a third argument to `$meteor.collection` which is the CollectionFS
+To work with collectionFS we send a **third argument** to `$meteor.collection` which is the `CollectionFS`
 collection so that angular-meteor can use it to save and remove files.
 
 ----
 
 ## Usage
 
+    $meteorCollection(Images, false, Images);
+
+    // Or in case you want a different query
+
     $meteorCollection(function() {
-        return Images.find();
+      return Images.find();
     }, false, Images);
 
-    // Or
-
+    // Or in case you don't want to make change to the collection and just display it
     $meteorCollection(Images, false);
 
 ----
