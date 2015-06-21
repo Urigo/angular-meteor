@@ -12,14 +12,16 @@
 3. Install urigo:angular `$ meteor add urigo:angular`
 
 ## Resources
-- [Change Log, updates and breaking changes](https://github.com/Urigo/angular-meteor/releases)
 - [Getting started tutorial](https://angular-meteor.com/tutorial)
-- [angular-meteor University](https://github.com/Urigo/meteor-angular-socially#angular-meteor-university-)
 - [Example application](https://github.com/Urigo/meteor-angular-socially) (Final version of the tutorial)
+- [angular-meteor University](https://github.com/Urigo/meteor-angular-socially#angular-meteor-university-)
+- Questions and help - [stack-overflow `angular-meteor` tag](http://stackoverflow.com/questions/tagged/angular-meteor)
+- Discussions - [Meteor Forums](https://forums.meteor.com/) and [![Join the chat at https://gitter.im/Urigo/angular-meteor](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Urigo/angular-meteor?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+- [Report issues](https://github.com/Urigo/angular-meteor/issues)
+- [Change Log, updates and breaking changes](https://github.com/Urigo/angular-meteor/releases)
+- [Roadmap - Trello board](https://trello.com/b/Wj9U0ulk/angular-meteor)
 - [angular-meteor Blog](https://medium.com/angular-meteor)
 - [Meteor package - urigo:angular](https://atmospherejs.com/urigo/angular)
-- [Roadmap - Trello board](https://trello.com/b/Wj9U0ulk/angular-meteor)
-- [Meteor Forums](https://forums.meteor.com/)
 - [Awesome Meteor](https://github.com/Urigo/awesome-meteor) - A curated, community driven list of awesome Meteor packages, libraries, resources and shiny thing
 
 ## Contributing
@@ -29,6 +31,8 @@ We would love contributions in:
 2. [Tutorial](http://angular-meteor.com/tutorial) - our goal with the tutorial is to add as many common tasks as possible. If you want to create and add your own chapter we would be happy to help you writing and adding it.
 3. [Roadmap](https://trello.com/b/Wj9U0ulk/angular-meteor) - you can add a card about what you want to see in the library or in the tutorial.
 4. I ([Urigo](https://github.com/urigo)) live around the world with one small bag, so another way of contributing can be by offering me a place to sleep somewhere interesting around the world that I have to see :) 
+
+If you want to contribute and need help or don't know what should you do, you can [contact me directly](https://github.com/urigo)
 
 ## Contributor Developer Setup
 
