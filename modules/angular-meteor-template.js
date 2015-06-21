@@ -62,19 +62,8 @@ angularMeteorTemplate.directive('meteorInclude', [
       link: function (scope, element, attributes) {
         var name = attributes.meteorInclude || attributes.src;
         if (name && Template[name]) {
-          // Making scope reactive so Meteor will know it was changed
-          var reactiveScope = new ReactiveVar();
-          scope.$watch(function(scope) {
-            // Watching the whole scope - http://stackoverflow.com/a/16242911/1426570
-            return hash(scope);
-          }, function() {
-            reactiveScope.set(scope);
-          });
-          scopeFunction = function () {
-            return reactiveScope.get();
-          };
           var template = Template[name];
-          var viewHandler = Blaze.renderWithData(template, scopeFunction, element[0]);
+          var viewHandler = Blaze.renderWithData(template, scope, element[0]);
           $compile(element.contents())(scope);
           scope.$on('$destroy', function() {
             Blaze.remove(viewHandler);
@@ -86,39 +75,3 @@ angularMeteorTemplate.directive('meteorInclude', [
     };
   }
 ]);
-
-getAngularScope = function(self){
-  self.autorun(function () {
-      self.$scope = Template.currentData();
-  });
-};
-
-function hash(obj, done) {
-  done = done || [];
-  var k, v, type;
-  var result = '';
-  for (k in obj) {
-    v = obj[k];
-    type = typeof (v);
-    if (type == 'object') {
-      done.push(v);
-      if (done.indexOf(v) == -1) {
-        result += k + hash(v);
-      }
-    } else if (type == 'number' || type == 'string'){
-      result += shash(k + v);
-    }
-  }
-  return shash(result);
-}
-
-function shash(s) {
-  var hash = 0, i, char;
-  if (s.length == 0) return hash;
-  for (i = 0; i < s.length; i++) {
-    char = s.charCodeAt(i);
-    hash = ((hash<<5)-hash)+char;
-    hash = hash & hash; // Convert to 32bit integer
-  }
-  return hash;
-}

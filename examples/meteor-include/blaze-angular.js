@@ -14,15 +14,9 @@ if (Meteor.isClient) {
 
     }]);
 
-  Template.partiesBlazeTemplate.onCreated(function () {
-    // getAngularScope is a helper function supplied by angular-meteor
-    getAngularScope(this);
-  });
-
   Template.partiesBlazeTemplate.helpers({
     parties: function() {
-      if (Template.instance().$scope)  // Make sure scope is already defined as Blaze loads before Angular
-        return Template.instance().$scope.parties
+      return Template.currentData().getReactively('parties', true);
     }
   });
 }
