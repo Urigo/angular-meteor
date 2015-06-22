@@ -1,0 +1,596 @@
+<template name="tutorial.step_18.html">
+  <div>
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/steps/tutorial.step_18.html"
+       class="btn btn-default btn-lg improve-button">
+      <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
+    </a>
+    <ul class="btn-group tutorial-nav">
+      <a href="/tutorial/step_17"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
+      <a href="http://socially-step18.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
+      <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_17...step_18"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
+      <a href="/tutorial/step_19"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
+    </ul>
+
+    <div class="col-md-8">
+      <h1>Step 18 - angular-material and custom Angular auth forms</h1>
+    </div>
+    <div class="video-tutorial col-md-4">
+      <iframe width="300" height="169" src="//www.youtube.com/embed/A6qsm_RDc9Y?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd" frameborder="0" allowfullscreen></iframe>
+    </div>
+
+    <do-nothing class="col-md-12">
+  {{#markdown}}
+
+In this step we will consider switching from *Twitter Bootstrap* to [*angular-material*](https://material.angularjs.org/#/).
+
+Angular-material is an AngularJS implementation of the Google's [Material Design specifications](http://www.google.com/design/spec/material-design/introduction.html). Material Design is a mobile-first design language used in many new Google's applications, especially on the Android platform.
+
+To start, first we have to remove bootstrap from our application. Type in the console:
+
+    meteor remove twbs:bootstrap
+
+Now we have to add the angular-material Meteor package:
+
+    meteor add angular:angular-material
+
+Next, we want to inject the angular-material module to our Angular application. Edit your `client/lib/app.js` and add `ngMaterial`:
+
+      angular.module('socially',[
+	      'angular-meteor',
+	      'ui.router',
+	      'angularUtils.directives.dirPagination',
+	      'uiGmapgoogle-maps', 
+	      'ngMaterial'
+	    ]);
+
+That's it, now we can use angular-material in our application layout. 
+
+Angular-material uses declarative syntax, i.e. directives, to utilize Material Design elements in HTML documents. 
+
+First we want to change our `index.html` to make use of the flex grid layout provided by Material Design. So, change your `client/index.html` to look like this:
+
+    <head>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <base href="/">
+    </head>
+
+    <body layout="column">
+    <md-toolbar md-scroll-shrink layout="row" layout-align="start center" layout-padding>
+      <div>
+        <a href="/parties">Parties</a>
+      </div>
+      <span flex></span>
+      <div class="navbar-right navbar-text">
+        <meteor-include src="loginButtons"></meteor-include>
+      </div>
+    </md-toolbar>
+    <div ui-view class="container-fluid"></div>
+    </body>
+
+You can see we use `layout="column"` in the `body` tag, which tells angular-material to lay all inner tags of `body` vertically.
+
+Next, we use the handy `md-toolbar` directive as a wrapper for our app's toolbar.
+We tell it to shrink on vertical scroll with `md-scroll-shrink` attribute and to lay inner elements in a row.
+
+We also tell it `layout-align="start center"` to lay inner elements at `start` of the primary direction (row), meaning element should start at the left edge, and lay them at `center` of the secondary direction (column), so they are stacked centrally in the vertical direction.
+We also tell it to put padding around all inner elements with `layout-padding`.
+
+Inside the `md-toolbar` you see we used
+
+    <span flex></span>
+
+element which is actually a separator blank element which is used to fill all the available blank space between the first and third element in the toolbar.
+
+So, now we have a link to Parties to the left, a span to fill all space, and a login button.
+Element layout flex grid is very simple and intuitive in angular-material and you can read all about it [here](https://material.angularjs.org/#/layout/grid).
+
+Next, we need to convert our parties list and party detail views to angular-material. 
+First, replace the code in your `client/views/parties-list.ng.html` with this code:
+
+    <md-content layout-padding>
+      <div layout="column">
+        <md-whiteframe class="md-whiteframe-z1" layout
+                       layout-align="center center"
+                       ng-hide="$root.currentUser || $root.loggingIn">
+          <span>Log in to create a party!</span>
+        </md-whiteframe>
+        <form ng-show="$root.currentUser">
+          <h2 class="md-headline">Create a new party:</h2>
+          <md-input-container>
+            <label>Name</label>
+            <input ng-model="newParty.name" id="nameInput"
+                   type="text" aria-label="Name">
+          </md-input-container>
+          <md-input-container>
+            <label>Description</label>
+            <input ng-model="newParty.description" id="description"
+                   type="text" aria-label="Description">
+          </md-input-container>
+          <md-checkbox ng-model="newParty.public"
+                       id="public" aria-label="Public">
+            Public
+          </md-checkbox>
+          <md-button ng-click="newParty.owner=$root.currentUser._id;parties.push(newParty); newParty='';">
+            Add</md-button>
+        </form>
+      </div>
+
+      <div layout="column">
+        <h2 class="md-headline">Parties:</h2>
+        <form layout="row">
+          <md-input-container md-no-float>
+            <md-icon md-svg-icon="action:ic_search_24px"></md-icon>
+            <input type="text" ng-model="search" id="search"
+                   placeholder="Search" aria-label="Search">
+          </md-input-container>
+          <span flex></span>
+          <md-input-container>
+            <md-select ng-model="orderProperty" placeholder="Sort Order">
+              <md-option value="1">Ascending</md-option>
+              <md-option value="-1">Descending</md-option>
+            </md-select>
+          </md-input-container>
+        </form>
+        <div layout="row">
+          <div flex></div>
+          <div flex="60" class="angular-google-map-container">
+            <ui-gmap-google-map center="map.center" zoom="map.zoom">
+              <ui-gmap-markers models="parties" coords="'location'" click="onClicked()"
+                               fit="true" idkey="'_id'" doRebuildAll="true">
+              </ui-gmap-markers>
+            </ui-gmap-google-map>
+          </div>
+          <div flex></div>
+        </div>
+      </div>
+      <div layout="column" layout-padding>
+        <div dir-paginate="party in parties | itemsPerPage: perPage"
+             total-items="partiesCount.count" layout="column">
+          <div layout="row">
+            <div flex="80">
+              <h2><a href="/parties/{{dstache}}party._id}}">{{dstache}}party.name}}</a></h2>
+              <p>{{dstache}}party.description}}</p>
+            </div>
+            <span flex></span>
+            <md-button ng-click="remove(party)"
+                       ng-show="$root.currentUser && $root.currentUser._id == party.owner">
+              <md-icon md-svg-icon="content:ic_clear_24px"></md-icon>
+            </md-button>
+          </div>
+
+          <div ng-show="$root.currentUser" layout="row">
+            <md-button ng-click="rsvp(party._id, 'yes')">I'm going!</md-button>
+            <md-button ng-click="rsvp(party._id, 'maybe')">Maybe</md-button>
+            <md-button ng-click="rsvp(party._id, 'no')">No</md-button>
+          </div>
+          <div ng-if="party.public">
+            Everyone is invited
+          </div>
+          <div ng-hide="$root.currentUser">
+            <i>Sign in to RSVP for this party.</i>
+          </div>
+
+          <div>
+            <strong>Who is coming:</strong>
+            Yes - {{dstache}} (party.rsvps | filter:{rsvp:'yes'}).length }}
+            Maybe - {{dstache}} (party.rsvps | filter:{rsvp:'maybe'}).length }}
+            No - {{dstache}} (party.rsvps | filter:{rsvp:'no'}).length }}
+            <div ng-repeat="rsvp in party.rsvps | filter:{rsvp:'yes'}">
+              {{dstache}} getUserById(rsvp.user) | displayName }} - {{dstache}} rsvp.rsvp }}
+            </div>
+            <div ng-repeat="rsvp in party.rsvps | filter:{rsvp:'maybe'}">
+              {{dstache}} getUserById(rsvp.user) | displayName }} - {{dstache}} rsvp.rsvp }}
+            </div>
+            <div ng-repeat="rsvp in party.rsvps | filter:{rsvp:'no'}">
+              {{dstache}} getUserById(rsvp.user) | displayName }} - {{dstache}} rsvp.rsvp }}
+            </div>
+          </div>
+          <md-list ng-if="!party.public">
+            Users who haven't responded:
+            <md-list-item ng-repeat="invitedUser in outstandingInvitations(party)">
+              {{dstache}} invitedUser | displayName }}
+            </md-list-item>
+          </md-list>
+          <p><small>Posted by {{dstache}} creator(party) | displayName }}</small></p>
+        </div>
+      </div>
+      <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
+    </md-content>
+
+What did we do:
+
+* Wrapped everything into the `md-content` tag
+* Replaced all the buttons with `md-button` tags
+* Wrapped form inputs into `md-input-container` tags which enable the Material Design style labels for inputs
+* Added material design Icons
+
+## Material Design Icons
+
+One new thing we also have to add is usage of Material Design icon set. Google provides free icons for Material Design. You can install it by typing: 
+
+    meteor add planettraining:material-design-icons
+
+We have to define the `$mdIconProvider` in the `client/app.js`. Insert these lines after the `angular.module` declaration: 
+
+    var themeIcons = function ($mdIconProvider) {
+    
+      $mdIconProvider
+        .iconSet("social",
+                 "/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-social.svg")
+
+        .iconSet("action",
+                 "/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-action.svg")
+
+        .iconSet("communication",
+                 "/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-communication.svg")
+
+        .iconSet("content",
+                 "/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-content.svg")
+
+        .iconSet("toggle",
+                 "/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-toggle.svg")
+
+        .iconSet("navigation",
+                 "/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-navigation.svg")
+
+        .iconSet("image",
+                 "/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-image.svg");
+    
+    };
+    
+    angular.module('socially')
+      .config(themeIcons);
+
+You don't have to define all these icon sets.
+You just need to define those you need to use.
+You can see a full list of available icons [here](http://google.github.io/material-design-icons/).
+You can see in the view code above that to use icons you write:
+
+    <md-icon md-svg-icon="content:ic_clear_24px"></md-icon>
+
+in the `md-svg-icon` attribute you list `<iconset>:<icon_name>` in our case `content:ic_clear_24px`. 
+
+Now, replace the code in the `client/view/party-details.ng.html` with the following code:
+
+    <legend>
+      Here you will see and change the details of the party:
+    </legend>
+    <form layout="column">
+      <md-input-container>
+        <label>Party Name</label>
+        <input ng-model="party.name"
+               ng-disabled="party.owner != $root.currentUser._id"
+               type="text" aria-label="Name">
+      </md-input-container>
+      <md-input-container>
+        <label>Party Description</label>
+        <input ng-model="party.description"
+               ng-disabled="party.owner != $root.currentUser._id"
+               type="text" aria-label="Description">
+      </md-input-container>
+      <md-checkbox ng-model="party.public"
+                   ng-disabled="party.owner != $root.currentUser._id"
+                   aria-label="Public">
+        Is public
+      </md-checkbox>
+
+      <div layout="row" layout-align="left">
+        <md-button ng-click="save()">Save</md-button>
+        <md-button ng-click="reset()">Reset form</md-button>
+        <md-button ng-href="/parties">Cancel</md-button>
+      </div>
+
+      <md-list ng-show="canInvite()">
+        <md-subheader class="md-no-sticky">Users to invite:</md-subheader>
+        <md-list-item ng-repeat="user in users | uninvited:party">
+          <div>{{dstache}} user | displayName }}</div>
+          <md-button ng-click="invite(user)">Invite</md-button>
+        </md-list-item>
+        <md-list-item ng-if="(users | uninvited:party).length <= 0">
+          Everyone are already invited.
+        </md-list-item>
+      </md-list>
+
+      <div class="angular-google-map-container">
+        <ui-gmap-google-map center="map.center" events="map.events" zoom="map.zoom">
+          <ui-gmap-marker coords="party.location"
+                          options="map.marker.options"
+                          events="map.marker.events"
+                          idkey="party._id">
+          </ui-gmap-marker>
+        </ui-gmap-google-map>
+      </div>
+    </form>
+
+Here, a you can see a specific type of button used by angular-material. We have a link button:
+
+    <md-button ng-href="/parties">Cancel</md-button>
+
+Angular-material makes a regular button that points to a link using `ng-href`. 
+
+## Custom Angular forms and Accounts-UI Material Design
+
+Next, we need to make our users management pages use Material Design. 
+
+To do that we are going to define our accounts routes manually and use [angular-meteor's auth methods](/api/auth) in our code.
+
+First we want to remove the Meteor's login button from the toolbar and insert our custom buttons. So, open `client/index.html` and remove the following code from the toolbar:
+
+    <div class="navbar-right navbar-text">
+      <meteor-include src="loginButtons"></meteor-include>
+    </div>
+
+and replace it with:
+
+    <md-button ng-href="/login" ng-hide="$root.currentUser">Login</md-button>
+    <md-button ng-href="/register" ng-hide="$root.currentUser">Sign up</md-button>
+    <div ng-show="$root.currentUser">{{dstache}} $root.currentUser }}</div>
+    <md-button ng-href="/logout" ng-show="$root.currentUser">Logout</md-button>
+
+Now show `Login` and `Sign up` buttons when the user is not logged in, and we show user name and `Logout` button when the user is logged in.
+
+Having created these buttons we need to assign them corresponding routes as referenced in the `ng-href` attributes of our buttons.
+
+Open the `client/routes.js` and insert following routes below the `$stateProvider` line, and above the existing routes:
+
+    .state('login', {
+	    url: '/login',
+        templateUrl: 'client/users/views/login.ng.html',
+        controller: 'LoginCtrl',
+        controllerAs: 'lc'
+    })
+    .state('register',{
+	    url: '/register', 
+        templateUrl: 'client/users/views/register.ng.html',
+        controller: 'RegisterCtrl',
+        controllerAs: 'rc'
+    })
+    .state('resetpw', {
+	    url: '/resetpw', 
+        templateUrl: 'client/users/views/reset-password.ng.html',
+        controller: 'ResetCtrl',
+        controllerAs: 'rpc'
+    })
+    .state('logout', {
+	    url: '/logout', 
+        resolve: {
+        "logout": ['$meteor', '$state', function($meteor, $state) {
+	        return $meteor.logout().then(function(){
+		            $state.go('parties');
+	            }, function(err){
+	                console.log('logout error - ', err);
+                });
+            }]
+       }
+    })
+
+* controllerAs -
+First thing of note here is that we're using `controllerAs` parameter in the route definition. This gives an alias to `$scope` and many other benefits. For detailed information, read [this article](http://toddmotto.com/digging-into-angulars-controller-as-syntax/). You will see later how we use it.
+* Routes -
+Second thing is in the `logout` route. We use a `resolve` parameter to define a sort of inline action for this route, as there is not too much logic associated with it, and there is no template. We need this route to log the user out of the system and redirect to home page. So we use `$meteor.logout()` method which returns a promise, and on successful logout we redirect the user to the home page, i.e. `parties` state. On failure, we log an error to the browser console.
+For each of our routes we have declared a template and a controller.
+
+So, let's go ahead and create them. Create a subfolder `users` in the `client/` folder, and in the `users` subfolder create subfolders `controllers`, and `views`. We now need to create a controller and a view for each of our routes.
+
+
+Create a file `client/users/controllers/login.js`. Paste the following code:
+
+    angular.module("socially").controller("LoginCtrl", ['$meteor', '$state',
+      function($meteor, $state){
+        var vm = this;
+
+        vm.credentials = {
+          email: '',
+          password: ''
+        };
+
+        vm.error = '';
+
+        vm.login = function (){
+          $meteor.loginWithPassword(vm.credentials.email, vm.credentials.password).then(
+            function(){
+              $state.go('parties');
+            },
+            function(err){
+              vm.error = 'Login error - ' + err;
+            }
+          );
+        };
+      }
+    ]);
+
+Now, instead of using $scope, we're using *controller as* syntax, so we declare a variable `vm` and assign `this` to it.
+From now on, each `$scope.` variable or method will be declared as `vm.` variable or method.
+
+We created a `credentials` object containing email and password that will be passed to us from the view. We created a `login` method that will execute the user log in.
+
+You can see a list of API methods for users management provided by `angular-meteor` [here](http://angularjs.meteor.com/api/auth).
+
+Just as we did in the `logout` route, here we utilize an `angular-meteor` method `$meteor.loginWithPassword()` which takes two arguments
+
+1. username or email
+2. password
+
+It returns a promise, and on success we redirect the user `parties` state, or assign error message to our `vm.error` property of the controller.
+
+Now create a view file with login form in `client/users/views` folder and name it `login.ng.html`. Paste the following code:
+
+    <md-content layout="row">
+      <span flex></span>
+      <md-whiteframe layout="column" flex="50">
+        <div layout="row" layout-align="space-around center">
+          <div>Login with:</div>
+          <md-button>Twitter</md-button>
+          <md-button>Facebook</md-button>
+        </div>
+        <div ng-show="lc.error" class="md-warn"><small>{{dstache}} lc.error }}</small></div>
+        <form layout="column">
+          <md-input-container>
+            <md-icon md-svg-icon="content:ic_mail_24px"></md-icon>
+            <input type="text" ng-model="lc.credentials.email"
+                   placeholder="email" aria-label="email" />
+          </md-input-container>
+          <md-input-container>
+            <md-icon md-svg-icon="action:ic_lock_open_24px"></md-icon>
+            <input type="password" ng-model="lc.credentials.password"
+                   placeholder="password" aria-label="password" />
+          </md-input-container>
+          <md-button class="md-raised md-primary" ng-click="lc.login()"
+                     aria-label="login">Sign In</md-button>
+        </form>
+        <div layout="row" layout-align="space-around center">
+          <a href="/resetpw">Forgot password?</a>
+          <a href="/register">Create an account</a>
+        </div>
+      </md-whiteframe>
+      <span flex></span>
+    </md-content>
+
+
+In our router file, we declared the login route controller to be `LoginCtrl` and a `controllerAs` parameter to be `lc`.
+
+This is an alias for our controller and it corresponds to the `vm` variable in our controller code.
+So to address all variables/objects/methods of our controller, we prefix them with `lc.`
+
+In our view. You can see in the view that we use `lc.error`, `lc.credentials`, and `lc.login()`.
+
+The procedure is the same for the `register` and `resetpw` routes, so now you create `client/users/controllers/register.js` and paste following code into it: 
+
+    angular.module("socially").controller("RegisterCtrl", ['$meteor', '$state', 
+      function($meteor, $state){
+    	  var vm = this;
+    	  
+    	  vm.credentials = {
+    		  email: '',
+    		  password: ''
+    	  };
+        
+        vm.error = '';
+    	  
+    	  vm.register = function (){
+    		  $meteor.createUser(vm.credentials).then(
+            function(){
+              $state.go('parties');
+            },
+            function(err){
+              vm.error = 'Registration error - ' + err;
+            }
+          );
+    	  };
+      }
+    ]);
+      
+Create a file `client/users/views/register.ng.html` and paste the following code into it:
+
+    <md-content layout="row">
+      <span flex></span>
+      <md-whiteframe layout="column" flex="50">
+        <div layout="row" layout-align="space-around center">
+          <div>Login with:</div>
+          <md-button>Twitter</md-button>
+          <md-button>Facebook</md-button>
+        </div>
+        <div ng-show="rc.error" class="md-warn">
+          <small>{{dstache}} rc.error }}</small>
+        </div>
+        <form layout="column">
+          <md-input-container>
+            <md-icon md-svg-icon="content:ic_mail_24px"></md-icon>
+            <input type="text" ng-model="rc.credentials.email"
+                   placeholder="email" aria-label="email" />
+          </md-input-container>
+          <md-input-container>
+            <md-icon md-svg-icon="action:ic_lock_open_24px"></md-icon>
+            <input type="password" ng-model="rc.credentials.password"
+                   placeholder="password" aria-label="password" />
+          </md-input-container>
+          <md-button class="md-raised md-primary"
+                     ng-click="rc.register()">Create Account</md-button>
+        </form>
+        <div layout="row" layout-align="end center">
+          <a href="/login">Login</a>
+        </div>
+      </md-whiteframe>
+      <span flex></span>
+    </md-content>
+
+Create a file `client/users/controllers/reset.js` and paste the following code into it: 
+
+    angular.module("socially").controller("ResetCtrl", ['$meteor', '$state', 
+      function($meteor, $state){
+    	  var vm = this;
+    	  
+    	  vm.credentials = {
+    		  email: ''
+    	  };
+    	
+    	  vm.error = '';
+    	  
+    	  vm.register = function (){
+    		  $meteor.forgotPassword(vm.credentials.email).then(
+    	        function(){
+    	          $state.go('parties');
+    	        },
+    	        function(err){
+    	          vm.error = 'Error sending forgot password email - ' + err;
+    	        }
+    	      );
+    	  };
+      }
+    ]);
+
+And, finally, create a corresponding view `client/users/views/reset-password.ng.html` and paste the following into it:
+
+    <md-content layout="row">
+      <span flex></span>
+      <md-whiteframe layout="column" flex="50">
+        <div layout="row" layout-align="space-around center">
+          <div>Login with:</div>
+          <md-button>Twitter</md-button>
+          <md-button>Facebook</md-button>
+        </div>
+        <div ng-show="rpc.error" class="md-warn">
+          <small>{{dstache}} rpc.error }}</small>
+        </div>
+        <form layout="column">
+          <md-input-container>
+            <md-icon md-svg-icon="content:ic_mail_24px"></md-icon>
+            <input type="text" ng-model="rpc.credentials.email"
+                   placeholder="email" aria-label="email" />
+          </md-input-container>
+          <md-button class="md-raised md-primary"
+                     ng-click="rpc.reset()" aria-label="login">Reset password</md-button>
+        </form>
+        <div layout="row" layout-align="end center">
+          <a href="/login">Login</a>
+        </div>
+      </md-whiteframe>
+      <span flex></span>
+    </md-content>
+
+# Summary
+
+In this chapter we two main things:
+
+1. How to work with angular-material-design in our angular-meteor app
+2. How to create custom Angular forms for our application's auth
+
+I hope one of you will create an accounts-ui package based on that code and will save us all tons of code!
+
+
+  {{/markdown}}
+    </do-nothing>
+
+    <div class="col-md-12">
+	    <ul class="btn-group tutorial-nav">
+		    <a href="/tutorial/step_17"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
+		    <a href="http://socially-step18.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
+		    <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_17...step_18"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
+		    <a href="/tutorial/step_19"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
+	    </ul>
+    </div>
+  </div>
+</template>
+
+
+
