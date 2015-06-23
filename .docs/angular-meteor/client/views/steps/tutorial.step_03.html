@@ -28,16 +28,16 @@ OK, so we have a nice client side application that creates and renders it's own 
 So, if we were in any Framework other than Meteor, we would start implementing a series of REST end points to connect the server to the client.
 Also, we would need to create a database and functions to connect to it.
 
-And we haven't talked about realtime, so then we need to add sockets, and a local DB for cache and handle latency compensation (or just ignore those features and create a not - so - good and modern app...)
+And we haven't talked about realtime, in which case we would need to add sockets, and a local DB for cache and handle latency compensation (or just ignore those features and create a not - so - good and modern app...)
 
 But luckily, we use Meteor!
 
 
 Meteor makes writing distributed client code as simple as talking to a local database. It's a clean, simple, and secure approach that obviates the need to implement individual RPC endpoints, manually cache data on the client to avoid slow roundtrips to the server, and carefully orchestrate invalidation messages to every client as data changes.
 
-In Meteor, the client and server share the same database API. The same exact application code — like validators and computed properties — can often run in both places. But while code running on the server has direct access to the database, code running on the client does not. This distinction is the basis for Meteor's data security model.
+In Meteor, the client and server share the same database API. The exact same application code — like validators and computed properties — can often run in both places. But while code running on the server has direct access to the database, code running on the client does not. This distinction is the basis for Meteor's data security model.
 
-Every Meteor client includes an in-memory database cache. To manage the client cache, the server publishes sets of JSON documents, and the client subscribes to those sets. As documents in a set change, the server patches each client's cache.
+Every Meteor client includes an in-memory database cache. To manage the client cache, the server publishes sets of JSON documents, and the client subscribes to these sets. As documents in a set change, the server patches each client's cache.
 
 
 That introduce us to a new concept - Reactivity.
@@ -60,13 +60,13 @@ That means that this collection and the actions on it will run both on the clien
 
 Now that we've created the collection, our client needs to subscribe to it's changes and bind it to our parties AngularJS collection.
 
-To bind them we are going to use angular-meteor built-in [service](https://docs.angularjs.org/guide/services) called $meteor.collection.
+To bind them we are going to use the built-in angular-meteor [service](https://docs.angularjs.org/guide/services) called $meteor.collection.
 
 We are going to replace the declaration of $scope.parties with the following command inside the PartiesListCtrl controller:
 
     $scope.parties = $meteor.collection(Parties);
 
-That line declares a new $scope.parties variable so we don't need to do something like $scope.parties = []; and then bind it to the Parties Mongo collection.
+This line declares a new $scope.parties variable so we don't need to do something like $scope.parties = []; and then bind it to the Parties Mongo collection.
 
 We also need to add the $meteor service to the controller with dependency injection.
 
@@ -89,9 +89,9 @@ __`app.js`:__
     }
 
 
-Now every change that will happen to the $scope.parties variable will automatically be saved to the local minimongo and synced to the MongoDB server DB and all the other clients in realtime!
+Now every change that happens to the $scope.parties variable will automatically be saved to the local minimongo and synced to the MongoDB server DB and all the other clients in realtime!
 
-But we still don't have information so let's add some.
+But we still don't have data in that collection, so let's add some.
 Let's initialize our server with the same parties we had before.
 
 Add this to the bottom of app.js:
@@ -116,11 +116,11 @@ Add this to the bottom of app.js:
        });
     }
 
-As you can probably understand, this code runs only on the server, and when Meteor starts it initialize the DB with sample parties.
+As you can probably understand, this code runs only on the server, and when Meteor starts it initializes the DB with these sample parties.
 
-Run the app and see if you see the list of parties on the screen.
+Run the app and you should see the list of parties on the screen.
 
-In the next chapter we will see how easy it is to manipulate the data, save and publish the changes to the server and all the connected clients.
+In the next chapter we will see how easy it is to manipulate the data, save and publish changes to the server, and by doing so, all the connected clients will automatically get updated.
 
 # Inserting parties from the console
 
@@ -129,7 +129,7 @@ In a new terminal tab, go to your app directory and type:
 
     meteor mongo
 
-This opens a console into your app's local development database. Into the prompt, type:
+This opens a console into your app's local development database. At the prompt, type:
 
     db.parties.insert({ name: "A new party", description: "From the mongo console!" });
 
@@ -138,18 +138,18 @@ You can see that we didn't have to write any code to connect the server-side dat
 
 Insert a few more parties from the database console with different text.
 
-Now let's do the same but with remove. Into the prompt, type the following command to look at all the parties and their properties:
+Now let's do the same but with remove. At the prompt, type the following command to look at all the parties and their properties:
 
     db.parties.find({});
 
 Now choose one party you want to remove and copy it's id property.
-Then, remove it like that (replace N4KzMEvtm4dYvk2TF with your party's id value):
+Then, remove it using that id (replace N4KzMEvtm4dYvk2TF with your party's id value):
 
     db.parties.remove( {"_id": "N4KzMEvtm4dYvk2TF"});
 
-Again, you will see the UI of your app immediately update to without the removed party.
+Again, you will see the UI of your app immediately update with that party removed.
 
-Try running more actions like update an object from the console and so on..
+Try running more actions like updating an object from the console and so on.
 
 In the next step, we'll see how to add functionality to our app's UI so that we can add parties without using the database console.
 
