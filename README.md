@@ -16,7 +16,7 @@
 - [Example application](https://github.com/Urigo/meteor-angular-socially) (Final version of the tutorial)
 - [angular-meteor University](https://github.com/Urigo/meteor-angular-socially#angular-meteor-university-)
 - Questions and help - [stack-overflow `angular-meteor` tag](http://stackoverflow.com/questions/tagged/angular-meteor)
-- Discussions - [Meteor Forums](https://forums.meteor.com/) and [![Join the chat at https://gitter.im/Urigo/angular-meteor](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Urigo/angular-meteor?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+- Discussions - [Angular category on the Meteor Forum](https://forums.meteor.com/c/angular) and [![Join the chat at https://gitter.im/Urigo/angular-meteor](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Urigo/angular-meteor?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 - [Report issues](https://github.com/Urigo/angular-meteor/issues)
 - [Change Log, updates and breaking changes](https://github.com/Urigo/angular-meteor/releases)
 - [Roadmap - Trello board](https://trello.com/b/Wj9U0ulk/angular-meteor)
