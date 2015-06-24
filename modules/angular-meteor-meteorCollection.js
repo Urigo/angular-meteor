@@ -7,8 +7,8 @@ var angularMeteorCollections = angular.module('angular-meteor.meteor-collection'
 // that inherit from array comes from here: http://perfectionkills.com/how-ecmascript-5-still-does-not-allow-to-subclass-an-array/
 // We went with the direct extensions approach
 angularMeteorCollections.factory('AngularMeteorCollection', ['$q', '$meteorSubscribe', '$meteorUtils', '$rootScope',
-  '$timeout', 'deepCopyChanges', 'deepCopyRemovals', 'diffArray',
-  function($q, $meteorSubscribe, $meteorUtils, $rootScope, $timeout, deepCopyChanges, deepCopyRemovals, diffArray) {
+  '$timeout', 'deepCopyChanges', 'deepCopyRemovals',
+  function ($q, $meteorSubscribe, $meteorUtils, $rootScope, $timeout, deepCopyChanges, deepCopyRemovals) {
     var AngularMeteorCollection = {};
 
     AngularMeteorCollection.subscribe = function () {
@@ -155,7 +155,7 @@ angularMeteorCollections.factory('AngularMeteorCollection', ['$q', '$meteorSubsc
         }
         promise = $timeout(function () {
           // Saves changes happened within the previous update from server.
-          updateCollection(self, self._serverBackup, diffArray);
+          updateCollection(self, self._serverBackup, self.diffArrayFunc);
           self.UPDATING_FROM_SERVER = false;
           $rootScope.$apply();
         }, 0, false);
@@ -188,17 +188,17 @@ angularMeteorCollections.factory('AngularMeteorCollection', ['$q', '$meteorSubsc
         },
         removedAt: function (oldDocument) {
           function findRemoveInd(col, doc) {
-              var removedObj;
-              // No _.findIndex in underscore 1.5.x
-              if (doc._id._str) {
-                removedObj = _.find(col, function(obj) {
-                  return obj._id._str == doc._id._str;
-                });
-              }
-              else {
-                removedObj = _.findWhere(col, {_id: doc._id});
-              }
-              return _.indexOf(col, removedObj);
+            var removedObj;
+            // No _.findIndex in underscore 1.5.x
+            if (doc._id._str) {
+              removedObj = _.find(col, function (obj) {
+                return obj._id._str == doc._id._str;
+              });
+            }
+            else {
+              removedObj = _.findWhere(col, {_id: doc._id});
+            }
+            return _.indexOf(col, removedObj);
           }
 
           var removeInd = findRemoveInd(self, oldDocument);
@@ -231,10 +231,10 @@ angularMeteorCollections.factory('AngularMeteorCollection', ['$q', '$meteorSubsc
       }
     };
 
-    var createAngularMeteorCollection = function (cursor, collection) {
+    var createAngularMeteorCollection = function (cursor, collection, diffArrayFunc) {
       var data = [];
       data._serverBackup = [];
-
+      data.diffArrayFunc = diffArrayFunc;
       data.$$collection = angular.isDefined(collection) ? collection : $meteorUtils.getCollectionByName(cursor.collection.name);
 
       angular.extend(data, AngularMeteorCollection);
@@ -243,11 +243,22 @@ angularMeteorCollections.factory('AngularMeteorCollection', ['$q', '$meteorSubsc
     };
 
     return createAngularMeteorCollection;
+  }]);
+
+angularMeteorCollections.factory('$meteorCollectionFS', ['$meteorCollection', 'diffArray', function ($meteorCollection, diffArray) {
+  var noNestedDiffArray = function (lastSeqArray, seqArray, callbacks) {
+    return diffArray(lastSeqArray, seqArray, callbacks, true);
+  };
+
+  return function (reactiveFunc, auto, collection) {
+    return new $meteorCollection(reactiveFunc, auto, collection, noNestedDiffArray);
+  };
 }]);
+
 
 angularMeteorCollections.factory('$meteorCollection', ['AngularMeteorCollection', '$rootScope', 'diffArray',
   function (AngularMeteorCollection, $rootScope, diffArray) {
-    return function (reactiveFunc, auto, collection) {
+    return function (reactiveFunc, auto, collection, diffArrayFunc) {
       // Validate parameters
       if (!reactiveFunc) {
         throw new TypeError("The first argument of $meteorCollection is undefined.");
@@ -256,17 +267,18 @@ angularMeteorCollections.factory('$meteorCollection', ['AngularMeteorCollection'
         throw new TypeError("The first argument of $meteorCollection must be a function or a have a find function property.");
       }
       auto = auto !== false;
+      diffArrayFunc = diffArrayFunc || diffArray;
 
       if (!(typeof reactiveFunc == "function")) {
         var cursorFunc = reactiveFunc.find;
         collection = angular.isDefined(collection) ? collection : reactiveFunc;
         var originalCollection = reactiveFunc;
-        reactiveFunc = function() {
+        reactiveFunc = function () {
           return cursorFunc.apply(originalCollection, [{}]);
         }
       }
 
-      var ngCollection = new AngularMeteorCollection(reactiveFunc(), collection);
+      var ngCollection = new AngularMeteorCollection(reactiveFunc(), collection, diffArrayFunc);
 
       function setAutoBind() {
         if (auto) { // Deep watches the model and performs autobind.
@@ -277,13 +289,13 @@ angularMeteorCollections.factory('$meteorCollection', ['AngularMeteorCollection'
             return angular.copy(_.without(ngCollection, 'UPDATING_FROM_SERVER'));
           }, function (newItems, oldItems) {
             if (newItems === 'UPDATING_FROM_SERVER' ||
-                oldItems === 'UPDATING_FROM_SERVER')
+              oldItems === 'UPDATING_FROM_SERVER')
               return;
 
             if (newItems !== oldItems) {
               ngCollection.unregisterAutoBind();
 
-              updateCollection(ngCollection, oldItems, diffArray);
+              updateCollection(ngCollection, oldItems, diffArrayFunc);
 
               setAutoBind();
             }
@@ -313,7 +325,7 @@ function updateCollection(newCollection, oldCollection, diffMethod) {
   var addedCount = 0;
   diffMethod(oldCollection, newCollection, {
     addedAt: function (id, item, index) {
-      var newValue = newCollection.splice( index - addedCount, 1 ).pop();
+      var newValue = newCollection.splice(index - addedCount, 1).pop();
       newCollection.save(newValue);
       addedCount++;
     },
@@ -335,8 +347,8 @@ function updateCollection(newCollection, oldCollection, diffMethod) {
 }
 
 angularMeteorCollections.run(['$rootScope', '$q', '$meteorCollection', '$meteorSubscribe',
-  function($rootScope, $q, $meteorCollection, $meteorSubscribe) {
-    Object.getPrototypeOf($rootScope).$meteorCollection = function() {
+  function ($rootScope, $q, $meteorCollection, $meteorSubscribe) {
+    Object.getPrototypeOf($rootScope).$meteorCollection = function () {
       var args = Array.prototype.slice.call(arguments);
       var collection = $meteorCollection.apply(this, args);
       var subscription = null;
@@ -347,12 +359,12 @@ angularMeteorCollections.run(['$rootScope', '$q', '$meteorCollection', '$meteorS
         return collection;
       };
 
-      this.$on('$destroy', function() {
+      this.$on('$destroy', function () {
         collection.stop();
         if (subscription)
           subscription.stop();
-	    });
+      });
 
       return collection;
-	};
+    };
   }]);
