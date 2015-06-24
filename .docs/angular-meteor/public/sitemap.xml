@@ -1,152 +1,176 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://angularjs.meteor.com/</loc>
+    <loc>http://angular-meteor.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/tutorial</loc>
+    <loc>http://angular-meteor.com/tutorial</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/tutorial/step_00</loc>
+    <loc>http://angular-meteor.com/tutorial/step_00</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/tutorial/step_01</loc>
+    <loc>http://angular-meteor.com/tutorial/step_01</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/tutorial/step_03</loc>
+    <loc>http://angular-meteor.com/tutorial/step_03</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/tutorial/step_04</loc>
+    <loc>http://angular-meteor.com/tutorial/step_04</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/tutorial/step_05</loc>
+    <loc>http://angular-meteor.com/tutorial/step_05</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/tutorial/step_06</loc>
+    <loc>http://angular-meteor.com/tutorial/step_06</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/tutorial/step_07</loc>
+    <loc>http://angular-meteor.com/tutorial/step_07</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/tutorial/step_08</loc>
+    <loc>http://angular-meteor.com/tutorial/step_08</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/tutorial/step_09</loc>
+    <loc>http://angular-meteor.com/tutorial/step_09</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/tutorial/step_10</loc>
+    <loc>http://angular-meteor.com/tutorial/step_10</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/tutorial/step_11</loc>
+    <loc>http://angular-meteor.com/tutorial/step_11</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/tutorial/step_12</loc>
+    <loc>http://angular-meteor.com/tutorial/step_12</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/tutorial/step_13</loc>
+    <loc>http://angular-meteor.com/tutorial/step_13</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/tutorial/step_14</loc>
+    <loc>http://angular-meteor.com/tutorial/step_14</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/tutorial/step_15</loc>
+    <loc>http://angular-meteor.com/tutorial/step_15</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/tutorial/step_16</loc>
+    <loc>http://angular-meteor.com/tutorial/step_16</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/tutorial/step_17</loc>
+    <loc>http://angular-meteor.com/tutorial/step_17</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/tutorial/step_18</loc>
+    <loc>http://angular-meteor.com/tutorial/step_18</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/tutorial/step_19</loc>
+    <loc>http://angular-meteor.com/tutorial/step_19</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/about</loc>
+    <loc>http://angular-meteor.com/about</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/manifest</loc>
+    <loc>http://angular-meteor.com/manifest</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/api</loc>
+    <loc>http://angular-meteor.com/api</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/server</loc>
+    <loc>http://angular-meteor.com/server</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/angular2</loc>
+    <loc>http://angular-meteor.com/server/base</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/api/meteorCollection</loc>
+    <loc>http://angular-meteor.com/server/base/bootstrapping</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://angular-meteor.com/server/base/di</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://angular-meteor.com/server/base/api</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://angular-meteor.com/angular2</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://angular-meteor.com/api/meteorCollection</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/api/meteorObject</loc>
+    <loc>http://angular-meteor.com/api/AngularMeteorCollection</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/api/AngularMeteorCollection</loc>
+    <loc>http://angular-meteor.com/api/meteorObject</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/api/subscribe</loc>
+    <loc>http://angular-meteor.com/api/AngularMeteorObject</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/api/session</loc>
+    <loc>http://angular-meteor.com/api/subscribe</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/api/methods</loc>
+    <loc>http://angular-meteor.com/api/methods</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/api/auth</loc>
+    <loc>http://angular-meteor.com/api/auth</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/api/meteor-include</loc>
+    <loc>http://angular-meteor.com/api/getReactively</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>http://angular-meteor.com/api/meteor-include</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/api/getReactively</loc>
+    <loc>http://angular-meteor.com/api/collectionfs</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/api/utils</loc>
+    <loc>http://angular-meteor.com/api/utils</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angularjs.meteor.com/api/collectionfs</loc>
+    <loc>http://angular-meteor.com/api/camera</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://angular-meteor.com/api/session</loc>
     <priority>0.5</priority>
   </url>
 </urlset>
