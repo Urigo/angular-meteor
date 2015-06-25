@@ -29,7 +29,7 @@ Package.registerBuildPlugin({
 Package.on_use(function (api) {
   api.versionsFrom('METEOR@0.9.0.1');
 
-  api.use('angular:angular@1.4.0', 'client');
+  api.use('angular:angular@1.4.1', 'client');
   api.use('minimongo');  // for idStringify
   api.use('observe-sequence');
   api.use('dburles:mongo-collection-instances@0.3.3', 'client'); // For getCollectionByName
