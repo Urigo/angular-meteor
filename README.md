@@ -36,6 +36,8 @@ If you want to contribute and need help or don't know what should you do, you ca
 
 ## Contributor Developer Setup
 
+### Run local urigo:angular in your project
+
 Create your Meteor Project
 
 ```bash
@@ -59,6 +61,15 @@ meteor add my-package
 ```
 
 Now you can start using your own copy of the `angular-meteor` project from `myProject`.
+
+### Running tests
+
+In the command line
+```
+. run_tests.sh
+```
+
+Then go to `localhost:3000` in your browser
 
 ## Usage
 ### Table of Contents
