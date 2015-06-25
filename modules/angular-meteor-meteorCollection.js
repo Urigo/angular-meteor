@@ -346,25 +346,30 @@ function updateCollection(newCollection, oldCollection, diffMethod) {
   });
 }
 
-angularMeteorCollections.run(['$rootScope', '$q', '$meteorCollection', '$meteorSubscribe',
-  function ($rootScope, $q, $meteorCollection, $meteorSubscribe) {
-    Object.getPrototypeOf($rootScope).$meteorCollection = function () {
-      var args = Array.prototype.slice.call(arguments);
-      var collection = $meteorCollection.apply(this, args);
-      var subscription = null;
-
-      collection.subscribe = function () {
+angularMeteorCollections.run(['$rootScope', '$q', '$meteorCollection', '$meteorCollectionFS', '$meteorSubscribe',
+  function ($rootScope, $q, $meteorCollection, $meteorCollectionFS, $meteorSubscribe) {
+    var collectionFunc = function (collectionType) {
+      return function() {
         var args = Array.prototype.slice.call(arguments);
-        subscription = $meteorSubscribe._subscribe(this, $q.defer(), args);
+        var collection = collectionType.apply(this, args);
+        var subscription = null;
+
+        collection.subscribe = function () {
+          var args = Array.prototype.slice.call(arguments);
+          subscription = $meteorSubscribe._subscribe(this, $q.defer(), args);
+          return collection;
+        };
+
+        this.$on('$destroy', function () {
+          collection.stop();
+          if (subscription)
+            subscription.stop();
+        });
+
         return collection;
-      };
-
-      this.$on('$destroy', function () {
-        collection.stop();
-        if (subscription)
-          subscription.stop();
-      });
-
-      return collection;
+      }
     };
+
+    Object.getPrototypeOf($rootScope).$meteorCollection = collectionFunc($meteorCollection);
+    Object.getPrototypeOf($rootScope).$meteorCollectionFS = collectionFunc($meteorCollectionFS);
   }]);

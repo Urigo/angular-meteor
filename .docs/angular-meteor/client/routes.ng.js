@@ -203,6 +203,10 @@ angular.module("meteor-angular-docs").config(
           url: '/step_19',
           template: UiRouter.template('tutorial.step_19.html')
         })
+        .state('tutorial.step20', {
+          url: '/step_20',
+          template: UiRouter.template('tutorial.step_20.html')
+        })
         .state('tutorial.next_steps', {
           url: '/next_steps',
           template: UiRouter.template('tutorial.next_steps.html')
