@@ -29,4 +29,25 @@ angularMeteorReactiveScope.run(['$rootScope', '$parse', function($rootScope, $pa
 
     return getValue(self);
   };
+  Object.getPrototypeOf($rootScope).getCollectionReactively = function(property) {
+    var self = this;
+    var getValue = $parse(property);
+
+
+    if (!self.hasOwnProperty('$$trackerDeps')) {
+      self.$$trackerDeps = {};
+    }
+
+    if (!self.$$trackerDeps[property]) {
+      self.$$trackerDeps[property] = new Tracker.Dependency();
+
+      self.$watchCollection(property, function() {
+        self.$$trackerDeps[property].changed();
+      });
+    }
+
+    self.$$trackerDeps[property].depend();
+
+    return getValue(self);
+  };
 }]);
