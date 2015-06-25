@@ -12,6 +12,60 @@ describe('diffArray module', function() {
       deepCopyChanges = _deepCopyChanges_;
     }));
 
+    it('should check for nested objects on default', function() {
+      var addedDoc = {_id: "c", b: 1};
+      var oldCollection = [
+        {_id: "a", identical: "property"},
+        {_id: "b", first: 2, second: {firstNested: "b"}, willBeRemoved: ":'("}
+      ];
+      var newCollection = [
+        {_id: "a", identical: "property"},
+        {_id: "b", first: 2, second: {nestedInSecond: "a"}, third: "hello"},
+        addedDoc
+      ];
+      var addedAtSpy = jasmine.createSpy('addedAt');
+      var changedAtSpy = jasmine.createSpy('changedAt');
+
+      diffArray(oldCollection, newCollection, {
+        addedAt: addedAtSpy,
+        changedAt: changedAtSpy,
+      });
+
+      expect(changedAtSpy).toHaveBeenCalledWith(
+        'b',
+        {_id: "b", "second.nestedInSecond": "a", "third": "hello"},
+        {_id: "b", "second.firstNested": true, willBeRemoved: true},
+        1,
+        jasmine.any(Object));
+    });
+
+    it('should not check for nested objects when asking to ignore it', function() {
+      var addedDoc = {_id: "c", b: 1};
+      var oldCollection = [
+        {_id: "a", identical: "property"},
+        {_id: "b", first: 2, second: {firstNested: "b"}, willBeRemoved: ":'("}
+      ];
+      var newCollection = [
+        {_id: "a", identical: "property"},
+        {_id: "b", first: 2, second: {nestedInSecond: "a"}, third: "hello"},
+        addedDoc
+      ];
+      var addedAtSpy = jasmine.createSpy('addedAt');
+      var changedAtSpy = jasmine.createSpy('changedAt');
+
+      diffArray(oldCollection, newCollection, {
+        addedAt: addedAtSpy,
+        changedAt: changedAtSpy
+      }, true); // TRUE here means to ignore nested
+
+      expect(changedAtSpy).toHaveBeenCalledWith(
+        'b',
+        {_id: "b", "third": "hello"},
+        {_id: "b", willBeRemoved: true},
+        1,
+        jasmine.any(Object));
+    });
+
     it('should notify addedAt and changedAt changes between two arrays', function() {
       var addedDoc = {_id: "c", b: 1};
       var oldCollection = [

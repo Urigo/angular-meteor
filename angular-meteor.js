@@ -31,9 +31,10 @@ angularMeteor.run(['$compile', '$document', '$rootScope', function ($compile, $d
   }]);
 
 // Putting all services under $meteor service for syntactic sugar
-angularMeteor.service('$meteor', ['$meteorCollection', '$meteorObject', '$meteorMethods', '$meteorSession', '$meteorSubscribe', '$meteorUtils', '$meteorCamera', '$meteorUser',
-  function($meteorCollection, $meteorObject, $meteorMethods, $meteorSession, $meteorSubscribe, $meteorUtils, $meteorCamera, $meteorUser){
+angularMeteor.service('$meteor', ['$meteorCollection', '$meteorCollectionFS', '$meteorObject', '$meteorMethods', '$meteorSession', '$meteorSubscribe', '$meteorUtils', '$meteorCamera', '$meteorUser',
+  function($meteorCollection, $meteorCollectionFS, $meteorObject, $meteorMethods, $meteorSession, $meteorSubscribe, $meteorUtils, $meteorCamera, $meteorUser){
     this.collection = $meteorCollection;
+    this.collectionFS = $meteorCollectionFS;
     this.object = $meteorObject;
     this.subscribe = $meteorSubscribe.subscribe;
     this.call = $meteorMethods.call;
