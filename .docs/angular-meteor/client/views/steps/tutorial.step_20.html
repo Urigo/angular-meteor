@@ -1,0 +1,83 @@
+<template name="tutorial.step_20.html">
+  <div>
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/views/steps/tutorial.step_20.html"
+       class="btn btn-default btn-lg improve-button">
+      <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
+    </a>
+    <ul class="btn-group tutorial-nav">
+      <a href="/tutorial/step_19"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
+      <a href="/tutorial/next_steps"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
+    </ul>
+
+    <div class="col-md-8">
+      <h1>Step 20 - CollectionFS</h1>
+    </div>
+    <div class="video-tutorial col-md-4">
+    </div>
+
+    <do-nothing class="col-md-12">
+  {{#markdown}}
+
+CollectionFS is a suite of Meteor packages that together provide a complete file management solution including uploading, downloading, storage, synchronization, manipulation, and copying. It supports several storage adapters for saving to the local filesystem, GridFS, or S3, and additional storage adapters can be created.
+The full documentation for CollectionFS could be found [here](https://github.com/CollectionFS/Meteor-CollectionFS).
+CollectionFS is also available for using with Angular-Meteor using the `$meteorCollectionFS` API.
+
+This part of the tutorial will demonstrate usage of CollectionFS and Angular-Meteor using the example of file-uploading.
+In order to provide the full experience of both AngularJS and Meteor - the example will use the [ng-file-upload](https://github.com/danialfarid/ng-file-upload) in the client-side, and CollectionFS on the server side.
+
+
+You can find the full example of this project under the Angular-Meteor's GitHub repository, inside the examples/collectionfs folder.
+
+This part of the tutorial assumes you already have a basic experience with Angular-Meteor, and will use some of the APIs that this package provides.
+So assuming you already have an Angular-Meteor project, we will starting by adding CollectionFS to our project by running the following command:
+```
+meteor add cfs:standard-packages
+```
+
+Now, we will decide the the storage adapter we want to use. CollectionFS provides adapters for many popular storage methods, link FileSystem, GridFS, Amazon S3 and DropBox.
+In this example, we will use the GridFS as storage adapters, so we will add the adapter adapter by running this command:
+```
+meteor add cfs:gridfs
+```
+Node: you can find more information about Stores and Storage Adapters on the CollectionFS's GitHub repository.
+
+So now we have the CollectionFS support and the storage adapter - we need to create a CollectionFS object to handle our files.
+Note that you will need to define the collection as shared resource because you will need to use the collection in noth client and server side.
+
+I create the model.js file, and define a regular CollectionFS object called "Images":
+```
+Images = new FS.Collection("images", {
+    stores: [
+      new FS.Store.GridFS("original")
+    ],
+    filter: {
+      allow: {
+        contentTypes: ['image/*']
+      }
+    }
+});
+```
+
+So now we have the collection, we need to create a client-side that handles the images upload, so first we will add ng-file-upload package:
+```
+meteor add danialfarid:ng-file-upload
+```
+Note: you can use basic HTML `<input type="file">`  or any other package as you want - you only need the HTML5 File object to be provided.
+
+So now we wil create "client" directory with a basic usage of *ng-file-upload* inside it:
+```
+
+```
+  {{/markdown}}
+    </do-nothing>
+
+    <div class="col-md-12">
+	    <ul class="btn-group tutorial-nav">
+		    <a href="/tutorial/step_19"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
+		    <a href="/tutorial/next_steps"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
+	    </ul>
+    </div>
+  </div>
+</template>
+
+
