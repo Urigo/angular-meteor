@@ -94,6 +94,46 @@ describe('diffArray module', function() {
         jasmine.any(Object));
     });
 
+
+    it('should detect transition from non-null to empty nested object', function() {
+      var oldCollection = [{_id: "a", simple: 1, nested: 1}];
+      var newCollection = [{_id: "a", simple: 2, nested: {}}];
+      var changedAtSpy = jasmine.createSpy('changedAt');
+
+      diffArray(oldCollection, newCollection, {changedAt: changedAtSpy});
+      expect(changedAtSpy).toHaveBeenCalledWith(
+        'a', {_id: "a", simple: 2, nested: {}}, undefined, 0, _.clone(oldCollection[0]));
+    });
+
+    it('should detect transition from empty nested object to non-null', function() {
+      var oldCollection = [{_id: "a", simple: 1, nested: {}}];
+      var newCollection = [{_id: "a", simple: 2, nested: 1}];
+      var changedAtSpy = jasmine.createSpy('changedAt');
+
+      diffArray(oldCollection, newCollection, {changedAt: changedAtSpy});
+      expect(changedAtSpy).toHaveBeenCalledWith(
+        'a', {_id: "a", simple: 2, nested: 1}, undefined, 0, _.clone(oldCollection[0]));
+    });
+    it('should detect transition from non-null to empty array', function() {
+      var oldCollection = [{_id: "a", simple: 1, nested: 1}];
+      var newCollection = [{_id: "a", simple: 2, nested: []}];
+      var changedAtSpy = jasmine.createSpy('changedAt');
+
+      diffArray(oldCollection, newCollection, {changedAt: changedAtSpy});
+      expect(changedAtSpy).toHaveBeenCalledWith(
+        'a', {_id: "a", simple: 2, nested: []}, undefined, 0, _.clone(oldCollection[0]));
+    });
+
+    it('should detect transition from empty array to non-null', function() {
+      var oldCollection = [{_id: "a", simple: 1, nested: []}];
+      var newCollection = [{_id: "a", simple: 2, nested: 1}];
+      var changedAtSpy = jasmine.createSpy('changedAt');
+
+      diffArray(oldCollection, newCollection, {changedAt: changedAtSpy});
+      expect(changedAtSpy).toHaveBeenCalledWith(
+        'a', {_id: "a", simple: 2, nested: 1}, undefined, 0, _.clone(oldCollection[0]));
+    });
+
     describe('when comparing two arrays with two different dates', function() {
       it('should notify callback with changedAt', function() {
         var oldCollection = [{
