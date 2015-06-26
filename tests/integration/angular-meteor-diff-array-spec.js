@@ -4,13 +4,20 @@ describe('diffArray module', function() {
   describe('diffArray service', function() {
     var diffArray,
         deepCopyRemovals,
-        deepCopyChanges;
+        deepCopyChanges,
+        addedAtSpy,
+        changedAtSpy;
 
     beforeEach(angular.mock.inject(function(_diffArray_, _deepCopyRemovals_, _deepCopyChanges_) {
       diffArray = _diffArray_;
       deepCopyRemovals = _deepCopyRemovals_;
       deepCopyChanges = _deepCopyChanges_;
     }));
+
+    beforeEach(function(){
+      addedAtSpy = jasmine.createSpy('addedAt');
+      changedAtSpy = jasmine.createSpy('changedAt');
+    });
 
     it('should check for nested objects on default', function() {
       var addedDoc = {_id: "c", b: 1};
@@ -23,8 +30,6 @@ describe('diffArray module', function() {
         {_id: "b", first: 2, second: {nestedInSecond: "a"}, third: "hello"},
         addedDoc
       ];
-      var addedAtSpy = jasmine.createSpy('addedAt');
-      var changedAtSpy = jasmine.createSpy('changedAt');
 
       diffArray(oldCollection, newCollection, {
         addedAt: addedAtSpy,
@@ -50,8 +55,6 @@ describe('diffArray module', function() {
         {_id: "b", first: 2, second: {nestedInSecond: "a"}, third: "hello"},
         addedDoc
       ];
-      var addedAtSpy = jasmine.createSpy('addedAt');
-      var changedAtSpy = jasmine.createSpy('changedAt');
 
       diffArray(oldCollection, newCollection, {
         addedAt: addedAtSpy,
@@ -77,8 +80,6 @@ describe('diffArray module', function() {
         {_id: "b", first: 2, second: {nestedInSecond: "a"}, third: "hello"},
         addedDoc
       ];
-      var addedAtSpy = jasmine.createSpy('addedAt');
-      var changedAtSpy = jasmine.createSpy('changedAt');
 
       diffArray(oldCollection, newCollection, {
         addedAt: addedAtSpy,
@@ -97,8 +98,6 @@ describe('diffArray module', function() {
     it('should detect transition from null to empty nested object', function() {
       var oldCollection = [{_id: "a", simple: 1, nested: null}];
       var newCollection = [{_id: "a", simple: 2, nested: {}}];
-      var changedAtSpy = jasmine.createSpy('changedAt');
-
       diffArray(oldCollection, newCollection, {changedAt: changedAtSpy});
       expect(changedAtSpy).toHaveBeenCalledWith(
         'a', {_id: "a", simple: 2, nested: {}}, undefined, 0, _.clone(oldCollection[0]));
@@ -107,8 +106,6 @@ describe('diffArray module', function() {
     it('should detect transition from empty nested object to null', function() {
       var oldCollection = [{_id: "a", simple: 1, nested: {}}];
       var newCollection = [{_id: "a", simple: 2, nested: null}];
-      var changedAtSpy = jasmine.createSpy('changedAt');
-
       diffArray(oldCollection, newCollection, {changedAt: changedAtSpy});
       expect(changedAtSpy).toHaveBeenCalledWith(
         'a', {_id: "a", simple: 2, nested: null}, undefined, 0, _.clone(oldCollection[0]));
@@ -117,8 +114,6 @@ describe('diffArray module', function() {
     it('should detect transition from non-null to empty nested object', function() {
       var oldCollection = [{_id: "a", simple: 1, nested: 1}];
       var newCollection = [{_id: "a", simple: 2, nested: {}}];
-      var changedAtSpy = jasmine.createSpy('changedAt');
-
       diffArray(oldCollection, newCollection, {changedAt: changedAtSpy});
       expect(changedAtSpy).toHaveBeenCalledWith(
         'a', {_id: "a", simple: 2, nested: {}}, undefined, 0, _.clone(oldCollection[0]));
@@ -127,8 +122,6 @@ describe('diffArray module', function() {
     it('should detect transition from empty nested object to non-null', function() {
       var oldCollection = [{_id: "a", simple: 1, nested: {}}];
       var newCollection = [{_id: "a", simple: 2, nested: 1}];
-      var changedAtSpy = jasmine.createSpy('changedAt');
-
       diffArray(oldCollection, newCollection, {changedAt: changedAtSpy});
       expect(changedAtSpy).toHaveBeenCalledWith(
         'a', {_id: "a", simple: 2, nested: 1}, undefined, 0, _.clone(oldCollection[0]));
@@ -137,8 +130,6 @@ describe('diffArray module', function() {
     it('should detect transition from null to empty array', function() {
       var oldCollection = [{_id: "a", simple: 1, nested: null}];
       var newCollection = [{_id: "a", simple: 2, nested: []}];
-      var changedAtSpy = jasmine.createSpy('changedAt');
-
       diffArray(oldCollection, newCollection, {changedAt: changedAtSpy});
       expect(changedAtSpy).toHaveBeenCalledWith(
         'a', {_id: "a", simple: 2, nested: []}, undefined, 0, _.clone(oldCollection[0]));
@@ -147,8 +138,6 @@ describe('diffArray module', function() {
     it('should detect transition from empty array to null', function() {
       var oldCollection = [{_id: "a", simple: 1, nested: []}];
       var newCollection = [{_id: "a", simple: 2, nested: null}];
-      var changedAtSpy = jasmine.createSpy('changedAt');
-
       diffArray(oldCollection, newCollection, {changedAt: changedAtSpy});
       expect(changedAtSpy).toHaveBeenCalledWith(
         'a', {_id: "a", simple: 2, nested: null}, undefined, 0, _.clone(oldCollection[0]));
@@ -157,8 +146,6 @@ describe('diffArray module', function() {
     it('should detect transition from non-null to empty array', function() {
       var oldCollection = [{_id: "a", simple: 1, nested: 1}];
       var newCollection = [{_id: "a", simple: 2, nested: []}];
-      var changedAtSpy = jasmine.createSpy('changedAt');
-
       diffArray(oldCollection, newCollection, {changedAt: changedAtSpy});
       expect(changedAtSpy).toHaveBeenCalledWith(
         'a', {_id: "a", simple: 2, nested: []}, undefined, 0, _.clone(oldCollection[0]));
@@ -167,8 +154,6 @@ describe('diffArray module', function() {
     it('should detect transition from empty array to non-null', function() {
       var oldCollection = [{_id: "a", simple: 1, nested: []}];
       var newCollection = [{_id: "a", simple: 2, nested: 1}];
-      var changedAtSpy = jasmine.createSpy('changedAt');
-
       diffArray(oldCollection, newCollection, {changedAt: changedAtSpy});
       expect(changedAtSpy).toHaveBeenCalledWith(
         'a', {_id: "a", simple: 2, nested: 1}, undefined, 0, _.clone(oldCollection[0]));
@@ -182,7 +167,6 @@ describe('diffArray module', function() {
         var newCollection = [{
           _id: "a", date: new Date(2222, 2, 2)
         }];
-        var changedAtSpy = jasmine.createSpy('changedAt');
 
         expect(function(){diffArray(oldCollection, newCollection, { changedAt: changedAtSpy })}).not.toThrow();
 
@@ -215,7 +199,6 @@ describe('diffArray module', function() {
         {
           _id: "c", date: new Date(2222, 2, 2), checked: true
         }];
-        var changedAtSpy = jasmine.createSpy('changedAt');
 
         expect(function(){diffArray(oldCollection, newCollection, { changedAt: changedAtSpy })}).not.toThrow();
 
