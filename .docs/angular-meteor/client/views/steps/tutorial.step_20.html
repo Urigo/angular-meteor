@@ -66,8 +66,64 @@ Note: you can use basic HTML `<input type="file">`  or any other package as you 
 
 So now we wil create "client" directory with a basic usage of *ng-file-upload* inside it:
 ```
-
+    <div ngf-drop ngf-select
+         ngf-change="addImages($files)"
+         ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box"
+         ngf-multiple="false" ngf-allow-dir="true" ngf-accept="'image/*'"
+         ngf-drop-available="dropAvailable">
+      <div>Click here to select image</div>
+      <div>
+        <string>OR</string>
+      </div>
+      <div ng-show="dropAvailable">You can also drop image to here</div>
+    </div>
 ```
+
+I used "ngfChange" attribute in order to know when the user selected a file, so lets add the Controller and the "addImages" function to handle the upload.
+```
+angular.module('example', ['angular-meteor', 'ngFileUpload']);
+
+angular.module('example').controller('ExampleCtrl', function ($meteor, $scope) {
+  $scope.addImages = function (files) {
+    // TODO: Handle the file upload
+  };
+});
+```
+
+Great! Now all we have to to is to use $meteorCollectionFS in order to get the CollectionFS we created.
+Note that the API of $meteorCollectionFS is the same of $meteorCollection, the only difference is that $meteorCollectionFS works with HTML File object.
+```
+angular.module('example').controller('ExampleCtrl', function ($meteor, $scope) {
+  $scope.images = $scope.$meteorCollectionFS(Images, false, Images);
+
+  $scope.addImages = function (files) {
+    $scope.images.save(files);
+  };
+});
+```
+
+And that's it! Now the file is uploaded!
+We can easily use ng-repeat or any other code to display our list, and use `url()` method to get the image url, for example:
+```
+    <table>
+      <thead>
+      <tr>
+        <th>File Name</th>
+        <th>Thumbnail</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="image in images">
+        <td>{{image.original.name}}</td>
+        <td><img class="thumbnail" ng-src="{ { image.url() } }"></td>
+      </tr>
+      </tbody>
+    </table>
+```
+
+
+You can see the full example in the Angular-Meteor repository, under examples/collectionfs.
+
   {{/markdown}}
     </do-nothing>
 
