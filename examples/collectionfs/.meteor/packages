@@ -9,5 +9,9 @@ autopublish
 insecure
 cfs:standard-packages
 cfs:gridfs
-danialfarid:ng-file-upload
+cfs:graphicsmagick
+jonblum:jquery-cropper
 urigo:angular
+velocity:html-reporter
+xolvio:cucumber
+danialfarid:ng-file-upload
