@@ -97,7 +97,7 @@ HTML files in a Meteor application are treated quite a bit differently from a se
 Meteor scans all the HTML files in your directory for three top-level elements: HEAD, BODY, and TEMPLATE.
 The head and body sections are separately concatenated into a single head and body, which are transmitted to the client on initial page load.
 
-Meteor converts both the templates and body content and generates a client-side JavaScript file (bundle-time, with html & JS) and makes the template available under the Template namespace.
+Meteor converts both the templates and body content and generates a client-side JavaScript file (bundle-time, with [HTMLjs](https://atmospherejs.com/meteor/htmljs)) and makes the template available under the Template namespace.
 It's a really convenient way to ship HTML templates to the client.
 
 Now let's go back to index.html and replace the content with the ui-view directive:
