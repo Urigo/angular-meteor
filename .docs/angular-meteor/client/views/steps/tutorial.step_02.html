@@ -139,13 +139,16 @@ Create a new model property in the controller (inside app.js) and bind to it in 
 
 Then add a new binding to `index.ng.html`:
 
-    $scope.name = "World";
+    <p>Hello, {{dstache}}name}}!</p>
 
 Verify that it says "Hello, World!".
 
 Create a repeater in index.ng.html that constructs a simple table:
 
-    <p>Hello, {{dstache}}name}}!</p>
+     <table>
+      <tr><th>Party Names</th></tr>
+      <tr ng-repeat="party in parties"><td>{{dstache}}party.name}}</td></tr>
+    </table>
 
 Now, make the list 1-based by incrementing i by one in the binding:
 
