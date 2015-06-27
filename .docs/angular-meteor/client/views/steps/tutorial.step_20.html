@@ -23,10 +23,6 @@ The full documentation for CollectionFS could be found [here](https://github.com
 CollectionFS is also available for using with Angular-Meteor using the `$meteorCollectionFS` API.
 
 This part of the tutorial will demonstrate usage of CollectionFS and Angular-Meteor using the example of file-uploading.
-In order to provide the full experience of both AngularJS and Meteor - the example will use the [ng-file-upload](https://github.com/danialfarid/ng-file-upload) in the client-side, and CollectionFS on the server side.
-
-
-You can find the full example of this project under the Angular-Meteor's GitHub repository, inside the examples/collectionfs folder.
 
 This part of the tutorial assumes you already have a basic experience with Angular-Meteor, and will use some of the APIs that this package provides.
 So assuming you already have an Angular-Meteor project, we will starting by adding CollectionFS to our project by running the following command:
@@ -58,36 +54,25 @@ Images = new FS.Collection("images", {
 });
 ```
 
-So now we have the collection, we need to create a client-side that handles the images upload, so first we will add ng-file-upload package:
-```
-meteor add danialfarid:ng-file-upload
-```
+So now we have the collection, we need to create a client-side that handles the images upload.
 Note: you can use basic HTML `<input type="file">`  or any other package as you want - you only need the HTML5 File object to be provided.
 
-So now we wil create "client" directory with a basic usage of *ng-file-upload* inside it:
+So now we wil create `example.ng.hmtl` "client" directory with a basic usage of HTML File input inside it:
 ```
-    <div ngf-drop ngf-select
-         ngf-change="addImages($files)"
-         ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box"
-         ngf-multiple="false" ngf-allow-dir="true" ngf-accept="'image/*'"
-         ngf-drop-available="dropAvailable">
-      <div>Click here to select image</div>
-      <div>
-        <string>OR</string>
-      </div>
-      <div ng-show="dropAvailable">You can also drop image to here</div>
+    <div ng-controller="ExampleCtrl">
+      <input type="file" id="upload-file">
     </div>
-```
+``
 
-I used "ngfChange" attribute in order to know when the user selected a file, so lets add the Controller and the "addImages" function to handle the upload.
-```
-angular.module('example', ['angular-meteor', 'ngFileUpload']);
+No we need to create the main logic in our `example.js`, we will liste to "change" event on the File input and add the image to collection:
+ ```
+angular.module('example', ['angular-meteor']);
 
-angular.module('example').controller('ExampleCtrl', function ($meteor, $scope) {
-  $scope.addImages = function (files) {
-    // TODO: Handle the file upload
-  };
-});
+angular.module('example').controller('ExampleCtrl', ['$scope', function ($scope) {
+  $('#upload-file').bind("change", function (event) {
+    // TODO: Save the image
+  });
+}]);
 ```
 
 Great! Now all we have to to is to use $meteorCollectionFS in order to get the CollectionFS we created.

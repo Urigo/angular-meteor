@@ -1,11 +1,11 @@
-angular.module('example', ['angular-meteor', 'ngFileUpload']);
+angular.module('example', ['angular-meteor']);
 
 angular.module('example').controller('ExampleCtrl', ['$scope', function ($scope) {
-    $scope.images = $scope.$meteorCollectionFS(Images, false, Images);
+  $scope.images = $scope.$meteorCollectionFS(Images, false, Images);
 
-  $scope.addImages = function (files) {
-    $scope.images.save(files);
-  };
+  $('#upload-file').bind("change", function (event) {
+    $scope.images.save(event.target.files[0]);
+  });
 
   $scope.removeImage = function(image) {
     $scope.images.remove(image);
