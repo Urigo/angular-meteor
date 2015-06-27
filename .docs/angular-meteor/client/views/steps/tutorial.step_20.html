@@ -282,6 +282,105 @@ That's it! Now we have a photo gallery with the ability to sort our images!
 You can find the full code of this example under Angular-Meteor repository, in the examples/collectionfs-sortable directory.
 
 # #3: Edit image before save
+One of the most common actions we want to make with pictures is edit it before saving, we will add to our example ability to crop images before uploading them to the server.
+In this example, we will use [ngImgCrop](https://github.com/alexk111/ngImgCrop/) which provides us the ability to do that.
+So lets start by adding the package to our project:
+```
+meteor add alexk111:ng-img-crop
+```
+And add a dependency in our module:
+```
+angular.module('example', ['angular-meteor', /*...*/, 'ngImgCrop']);
+```
+We want to perform the crop in the client side only, before saving it in the CollectionFS, so lets get the uploaded image, and instead of saving it in the server - we will get the Data Url of it, and use it in the ngImgCrop:
+```
+$scope.addImages = function (files) {
+  if (files.length > 0) {
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+      $scope.$apply(function() {
+        $scope.imgSrc = e.target.result;
+        $scope.myCroppedImage = '';
+      })
+    };
+
+    reader.readAsDataURL(files[0]);
+  }
+  else {
+    $scope.imgSrc = undefined;
+  }
+};
+```
+We take the file object and used HTML5 FileReader API to read the file from the user on the client side, without uploading it to the server.
+Then we saved the DataURI of the image into a $scope variable.
+Next, we will need to use this DataURI with the ngImgCrop direcrtive as follow, and lets add a button that runs a $scope function to save the image:
+```
+<div ng-if="imgSrc" class="ng-crop-container">
+  <img-crop image="imgSrc" result-image="$parent.myCroppedImage" area-type="square"></img-crop>
+  <button ng-click="saveCroppedImage()">Save</button>
+</div>
+```
+So now we have a upload button which give the user ability to pick a image and then edit and crop it, all we have to do is save it.
+In order to save, we need to implement `saveCroppedImage()` function. We will use the same `$meteorCollectionFS` API we used before, just use the `save` function.
+CollectionFS have the ability to receive DataURI and save it, just like a File object. So the implementation looks like that:
+```
+$scope.saveCroppedImage = function() {
+  if ($scope.myCroppedImage !== '') {
+    $scope.images.save($scope.myCroppedImage)
+  }
+};
+```
+
+And we are done! Now we have the ability to crop images and then save them using CollectionFS.
+You can find the full code of this example under Angular-Meteor repository, in the examples/collectionfs-crop directory.
+
+# #4: Image Thumbnails
+Another common usage with images upload, is the ability to save thumbnails of the image as soon as we upload it.
+CollectionFS gives the ability to handle multiple Stores object, and perform manipulations before we save it in each store.
+You can find the full information about image manipulation in the [CollectionFS docs](https://github.com/CollectionFS/Meteor-CollectionFS#image-manipulation).
+Also, make sure you add `meteor add cfs:graphicsmagick` and install graphicsmagick, for more information, follow the instructions on the CollectionFS GitHub page.
+So in order to add ability to save thumbnails, lets add a new store in the `model.js` and use `transformWrite` ability:
+```
+Images = new FS.Collection("images", {
+  stores: [
+    new FS.Store.GridFS("original"),
+    new FS.Store.GridFS("thumbnail", {
+      transformWrite: function(fileObj, readStream, writeStream) {
+        gm(readStream, fileObj.name()).resize('32', '32', '!').stream().pipe(writeStream);
+      }
+    })
+  ],
+  filter: {
+    allow: {
+      contentTypes: ['image/*']
+    }
+  }
+});
+```
+So now each image we upload will be saved also as thumbnail.
+All we have to do is use and display the thumbnail instead of the original image. We just need to add a param to `url()` method of File objects and decide which Store to use when creating the URL:
+```
+<table>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Thumbnail</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="image in images">
+    <td><a href="" ui-sref=".image({imageId: image._id})">{{image.original.name}}</a></td>
+    <td><a target="_blank" ng-href="{ { image.url({store: 'original'}) } }"><img ng-src="{ { image.url({store: 'thumbnail'}) } }"></a></td>
+    <td><button ng-click="removeImage(image)">X</button></td>
+  </tr>
+  </tbody>
+</table>
+```
+That's it! Now we added the ability to save thumbnails for the images and use them in the view!
+You can find the full code of this example under Angular-Meteor repository, in the examples/collectionfs-thumbnails directory.
+
+
   {{/markdown}}
     </do-nothing>
 
