@@ -7,10 +7,8 @@
 meteor-platform
 autopublish
 insecure
+urigo:angular
 cfs:standard-packages
 cfs:gridfs
-cfs:graphicsmagick
-jonblum:jquery-cropper
-urigo:angular
-velocity:html-reporter
-xolvio:cucumber
+danialfarid:ng-file-upload
+vitalets:angular-xeditable

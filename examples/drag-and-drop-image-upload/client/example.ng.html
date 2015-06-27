@@ -1,0 +1,28 @@
+<div ng-controller="ExampleCtrl">
+  <div ngf-drop ngf-select
+       ngf-change="addImages($files)"
+       ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box"
+       ngf-multiple="false" ngf-allow-dir="false" ngf-accept="'image/*'"
+       ngf-drop-available="dropAvailable">
+    <div>Click here to select image</div>
+    <div>
+      <strong>OR</strong>
+    </div>
+    <div ng-show="dropAvailable">You can also drop image to here</div>
+  </div>
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Thumbnail</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="image in images">
+      <td><a href="" ui-sref=".image({imageId: image._id})">{{image.original.name}}</a></td>
+      <td><img class="thumbnail" ng-src="{{ image.url('thumbnails')}}"></td>
+      <td><button ng-click="removeImage(image)">X</button></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

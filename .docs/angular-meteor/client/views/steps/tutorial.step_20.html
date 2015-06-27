@@ -105,10 +105,183 @@ We can easily use ng-repeat or any other code to display our list, and use `url(
       </tbody>
     </table>
 ```
-
-
 You can see the full example in the Angular-Meteor repository, under examples/collectionfs.
+No we will talk about some more abilities that we can add to our Images Upload page, many of them are the result of using AngularJS directives and Angular-Meteor.
 
+# #1: Drag-and-Drop
+We can use AngularJS directives that handles file upload and gives us more abilities such as drag & drop, file validation on the client side and some more.
+In this example, I will use [ng-file-upload](https://github.com/danialfarid/ng-file-upload), which have many features for file upload.
+In order to do this, lets add the package to our project:
+```
+meteor add danialfarid:ng-file-upload
+```
+
+Now, lets add a dependency to our module:
+```
+angular.module('example', ['angular-meteor', 'ngFileUpload']);
+```
+
+And just like in the directive's documentation, we will add an upload object to our HTML instead of regular File Input:
+```
+<div ngf-drop ngf-select
+  ngf-change="addImages($files)"
+  ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box"
+  ngf-multiple="false" ngf-allow-dir="false" ngf-accept="'image/*'"
+  ngf-drop-available="dropAvailable">
+    <div>Click here to select image</div>
+    <div>
+      <strong>OR</strong>
+    </div>
+    <div ng-show="dropAvailable">You can also drop image to here</div>
+</div>
+```
+
+Also, in order to make the "drop-zone" look like a dropable area in my page, I added this CSS in `example.css` file:
+```
+.drop-box {
+  background: #F8F8F8;
+  border: 5px dashed #DDD;
+  width: 230px;
+  height: 65px;
+  text-align: center;
+  padding-top: 25px;
+  margin-left: 10px;
+}
+
+.drop-box.dragover {
+  border: 5px dashed blue;
+}
+
+.drop-box.dragover-err {
+  border: 5px dashed red;
+}
+```
+
+I also used ngfChange attribute to know when the user chooses a file, the callback is addImages($files), so lets add this to our `example.js` file instead of using "change" event:
+```
+$scope.addImages = function (files) {
+  $scope.images.save(files);
+};
+```
+
+And that's it! now we can upload images by using drag and drop!
+You can find the full code of this example under Angular-Meteor repository, in the examples/drag-and-drop-image-upload directory.
+
+# #2: Metadata
+Using CollectionFS, we can also save metadata on the files we store.
+In order to to that, we just need to add the name of the property to the File object before we upload it.
+
+A common example for metadata for images is description. let's see how we can do that.
+
+## Add Description
+Using CollectionFS, we can set any metadata on our File object, and then save in on the collection.
+In order to do that really nice and user-friendly, I used [angular-xeditable](https://github.com/vitalets/angular-xeditable).
+Lets add the angular-xeditable package to our project:
+```
+meteor add vitalets:angular-xeditable
+```
+And add a dependency in our module:
+```
+angular.module('example', ['angular-meteor', 'ngFileUpload', 'xeditable']);
+```
+
+Now, lets add some more style to our table, by creating a tile for each image (instead of table), with "Description" under it:
+```
+// example.ng.html
+<div class="images-tiles-container">
+  <div ng-repeat="image in images" class="image-tile">
+    <button ng-click="removeImage(image)" class="delete-button">X</button>
+    <img class="thumbnail" ng-src="{ { image.url() } }"><br />
+  </div>
+</div>
+
+// Add to example.css
+.image-tile {
+  float: left;
+  position: relative;
+  border: 1px solid cadetblue;
+  margin-right: 30px;
+  padding: 5px;
+}
+
+.delete-button {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  background-color: white;
+}
+```
+
+And now lets add under the `img` tag the xeditable:
+```
+<img class="thumbnail" ng-src="{ { image.url() } }"><br />
+<a href="#" editable-text="image.metadata.description" onbeforesave="updateDescription($data, image)">{ { image.metadata.description || 'No Description' } }</a>
+```
+We will use the angular-xeditable ability to notify us and run a callback when the value changes, using `onbeforesave` attribute. The function will receive with the `$data` (the xeditable value) and `image` which is the current image.
+So lets implement the updateDescription method on our $scope. We will use the ability to run `update` function on CollectionFS File objects, and use `$set` to update our metadata, for more ways of doing it, you can read [this](https://github.com/CollectionFS/Meteor-CollectionFS/wiki/How-to:-Update-existing-file's-metadata) in CollectionFS wiki.
+```
+$scope.updateDescription = function($data, image) {
+  image.update({$set: {'metadata.description': $data}});
+};
+```
+
+That's it! Now we have a photo gallery with description for each image!
+You can find the full code of this example under Angular-Meteor repository, in the examples/collectionfs-metadata directory.
+
+## Order Images
+After we learned how to use CollectionFS metadata and how to update metadata values, we can also add an ability to sort and update the images order.
+To get the ability to sort the images, let's use [angular-sortable-view](https://github.com/kamilkp/angular-sortable-view).
+
+Add the package by running this command:
+```
+meteor add netanelgilad:angular-sortable-view
+```
+And then add a dependency for the module:
+```
+angular.module('example', ['angular-meteor', 'ngFileUpload', 'xeditable', 'angular-sortable-view']);
+```
+
+The basics of angular-sortable-view is to add the `sv-?` attributes to our page, just like the examples in the `angular-sortable-view` repository, So let's do that:
+```
+    <div class="images-tiles-container" sv-root sv-part="images" sv-on-sort="updateOrder($indexFrom, $indexTo)">
+      <div ng-repeat="image in images" class="image-tile" sv-element>
+        <button ng-click="removeImage(image)" class="delete-button">X</button>
+        <img draggable="false" class="thumbnail" ng-src="{ { image.url()} }">
+        <!-- ... some more code ... -->
+      </div>
+    </div>
+```
+I use the `sv-on-sort` callback to know when the sort is done and which image moved to which position.
+Now let's implement the $scope function that will create and move the objects, this function orders the item in the new order and moves the items as needed.
+```
+$scope.updateOrder = function(indexFrom, indexTo) {
+  var imagesOrder = [];
+
+  angular.forEach($scope.images, function (image, index) {
+    image.metadata.order = index + 1;
+    imagesOrder.push({image: image, order: image.metadata.order});
+  });
+
+  var moved = $scope.images.splice(indexTo, 1)[0];
+  $scope.images.splice(indexFrom, 0, moved);
+
+  _.forEach(imagesOrder, function(imageOrder) {
+    imageOrder.image.update({ $set: { 'metadata.order': imageOrder.order } });
+  });
+};
+```
+
+And now let's add the actual order for the display by modifying the subscription of the collection:
+```
+$scope.images = $scope.$meteorCollectionFS(function() {
+  return Images.find({}, {sort: [['metadata.order', 'asc']]})
+}, false);
+```
+
+That's it! Now we have a photo gallery with the ability to sort our images!
+You can find the full code of this example under Angular-Meteor repository, in the examples/collectionfs-sortable directory.
+
+# #3: Edit image before save
   {{/markdown}}
     </do-nothing>
 
