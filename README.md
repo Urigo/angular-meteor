@@ -16,11 +16,12 @@
 - [Example application](https://github.com/Urigo/meteor-angular-socially) (Final version of the tutorial)
 - [angular-meteor University](https://github.com/Urigo/meteor-angular-socially#angular-meteor-university-)
 - Questions and help - [stack-overflow `angular-meteor` tag](http://stackoverflow.com/questions/tagged/angular-meteor)
-- Discussions - [Meteor Forums](https://forums.meteor.com/) and [![Join the chat at https://gitter.im/Urigo/angular-meteor](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Urigo/angular-meteor?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+- Discussions - [Angular category on the Meteor Forum](https://forums.meteor.com/c/angular) and [![Join the chat at https://gitter.im/Urigo/angular-meteor](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Urigo/angular-meteor?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 - [Report issues](https://github.com/Urigo/angular-meteor/issues)
 - [Change Log, updates and breaking changes](https://github.com/Urigo/angular-meteor/releases)
 - [Roadmap - Trello board](https://trello.com/b/Wj9U0ulk/angular-meteor)
 - [angular-meteor Blog](https://medium.com/angular-meteor)
+- [angular-meteor Yeoman generator](https://github.com/ndxbxrme/generator-angular-meteor)
 - [Meteor package - urigo:angular](https://atmospherejs.com/urigo/angular)
 - [Awesome Meteor](https://github.com/Urigo/awesome-meteor) - A curated, community driven list of awesome Meteor packages, libraries, resources and shiny thing
 
@@ -36,6 +37,8 @@ If you want to contribute and need help or don't know what should you do, you ca
 
 ## Contributor Developer Setup
 
+### Run local urigo:angular in your project
+
 Create your Meteor Project
 
 ```bash
@@ -43,29 +46,37 @@ meteor create myProject
 cd myProject
 ```
 
-Create a `packages` directory and clone from your forked repo
+Fork angular-meteor and clone the angular-meteor library to another directory named `urigo:angular`
+```
+mkdir urigo:angular
+git clone https://github.com/[your_username]/angular-meteor.git urigo:angular
+```
+
+Create a `packages` directory under your project's root folder and link your forked repo
 
 ```bash
+cd myProject
 mkdir packages
 cd packages
-git clone https://github.com/[your_username]/angular-meteor.git my-package
-```
-
-Add your local package
-
-```
-cd ..
-meteor add my-package
+ln -s ~/path_to_your_repos/urigo\:angular
 ```
 
 Now you can start using your own copy of the `angular-meteor` project from `myProject`.
 
+### Running tests
+
+In the command line
+```
+. run_tests.sh
+```
+
+Then go to `localhost:3000` in your browser
+
 ## Usage
 ### Table of Contents
 - [App initialization](#app-initialization)
-- [Data binding (new method to avoid conflicts)](#data-binding)
-- [Using Meteor Collections](#using-meteor-collections)
-- [Adding controllers, directives, filters and services](#adding-controllers-directives-filters-and-services)
+- [Templating[#templating]
+- [Binding to Meteor Collections](#binding-to-meteor-collections)
 - [Routing](#routing)
 - [User service](#user)
 - [Meteor methods with promises](#meteor-methods-with-promises)
@@ -73,23 +84,20 @@ Now you can start using your own copy of the `angular-meteor` project from `myPr
 
 ### App initialization
 
-If you have a module called myModule, you can initialize your app like you would normally and by specifying angular-meteor as a dependency:
+Register `angular-meteor` as a module in our application:
 
 ```js
-var myModule = angular.module('myModule', ['angular-meteor']);
+angular
+  .module('myModule', ['angular-meteor']);
 ```
-
-You don't need to bootstrap the application manually, simply specifying the `ng-app` attribute on a container element will do.
 
 [More in step 0 in the tutorial](http://angular-meteor.com/tutorial/step_00)
 
-### Data binding
+### Templating
 
-From angular-meteor version 0.6 you can use Angular's default template delimiters and there is no need to change them.
+You need to write your Angular template markup in `.ng.html` files, since Meteor won't look at those files as Spacebars templates. Tying HTML and `.ng.html` files together isn't very difficult, we can simply use Angular's `ng-include`.
 
-However, you need to write your Angular template markup in `.ng.html` files, since Meteor won't look at those files as Spacebars templates. Tying HTML and `.ng.html` files together isn't very difficult, we can simply use Angular's `ng-include`.
-
-Please note that the names of the templates to Angular will be their URL as Meteor sees it when minifying the .ng.html files. **Hence every template URL is relative to the root of the Meteor project, and contains no leading forward slash.** This is important to note when working with `ng-include` to include templates.
+Please note that the names of the templates to Angular will be their URL as Meteor sees it when minifying the '.ng.html' files. **Hence every template URL is relative to the root of the Meteor project, and contains no leading forward slash.** This is important to note when working with `ng-include` to include templates.
 
 `client/index.html`:
 
@@ -98,11 +106,9 @@ Please note that the names of the templates to Angular will be their URL as Mete
     <title>Angular and Meteor</title>
 </head>
 
-<body>
-    <div ng-app="myModule">
-        <ng-include src="'client/views/user.ng.html'"></ng-include>
-        <ng-include src="'client/views/settings.ng.html'"></ng-include>
-    </div>
+<body ng-app="myModule">
+    <ng-include src="'client/views/user.ng.html'"></ng-include>
+    <ng-include src="'client/views/settings.ng.html'"></ng-include>
 </body>
 ```
 
@@ -119,9 +125,9 @@ Please note that the names of the templates to Angular will be their URL as Mete
 
 [More in step 0 of the tutorial](http://angular-meteor.com/tutorial/step_00)
 
-### Using Meteor Collections
+### Binding to Meteor Collections
 
-angular-meteor provides 3-way data binding (view-client-server) by tying a Meteor collection to an Angular model. The API to accomplish this is [$meteor.collection](http://angular-meteor.com/api/meteorCollection).
+[angular-meteor](http://angular-meteor.com/) provides 3-way data binding (view-client-server) by tying a Meteor collection to an Angular model. The API to accomplish this is [$meteor.collection](http://angular-meteor.com/api/meteorCollection).
 
 ```js
 $scope.todos = $meteor.collection(Todos);
@@ -141,27 +147,7 @@ $meteor.subscribe('Todos').then(function () {
 });
 ```
 
-### Adding controllers, directives, filters and services
-
-When adding controllers and the likes, remember to use [Dependency Injection](http://docs.angularjs.org/guide/di). This is common Angular practice and helps you avoid problems when minifying and obfuscating code.
-
-```js
-app.controller('TodoCtrl', ['$scope', '$meteor',
-  function($scope, $meteor) {
-
-    $scope.todos = $meteor.collection(Todos);
-
-    $scope.addTodo = function() {
-      $scope.todos.push({text:$scope.todoText, done:false});
-      $scope.todoText = '';
-    };
-
-    $scope.saveTodo = function(){
-      $scope.todos.save($scope.newTodo);
-    };
-  }
-]);
-```
+[More in step 9 of the tutorial](http://angular-meteor.com/tutorial/step_09)
 
 ### Routing
 
@@ -180,18 +166,8 @@ You can include Meteor's native templates with the [meteor-include](http://angul
 
 <meteor-include src='todoList'></meteor-include>
 ```
-#### Passing arguments to meteor-include
-To pass parameters to a meteor-include directive, create a Blaze template that includes the template you want to include with parameters and include that template with meteor-include:
 
-     <template name="quickFormWithParameters">
-       {{> quickForm collection="Books" id="insertBookForm" type="insert"}}
-     </template>
-     
-     <meteor-include src="quickFormWithParameters">
-     
-#### Caveat regarding &lt;meteor-include&gt;
-
-Since 0.6 release, angular-meteor relies more heavily on Angular's default templating system and it is now usually recommended that you use `ng-include` over `meteor-include`. This is because you can't use Angular's template delimiters directly within Meteor templates and you would still need to use an `ng-include` directive to include any Angular template markup in your Meteor templates.
+Read more on meteor-include, using parameters and binding Meteor templates to Angular's scope in the [API docs](http://angular-meteor.com/api/meteor-include).
 
 ### User Authentication
 
@@ -208,6 +184,8 @@ $meteor.call('addUser', username).then(function (data) {
     console.log('User added', data);
 });
 ```
+
+[More in step 14 of the tutorial](http://angular-meteor.com/tutorial/step_14)
 
 ### Bind Meteor session
 

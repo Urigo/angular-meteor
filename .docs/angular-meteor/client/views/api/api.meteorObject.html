@@ -27,7 +27,7 @@ Calling $scope.$meteorObject is exactly the same but additionally it will automa
   If you documents are saved with objects IDs (and not strings:  <a href="http://docs.meteor.com/#/full/mongo_collection" >see here </a>),
 you should use <code> new Mongo.objectID  </code> to retieve the object.
 
-    $meteor.object (collection, new Meteor.ObjectID (stringId), auto);
+    $meteor.object (collection, new Mongo.ObjectID (stringId), auto); // you can also use Meteor.Collection.ObjectID
 
 
 ### Arguments

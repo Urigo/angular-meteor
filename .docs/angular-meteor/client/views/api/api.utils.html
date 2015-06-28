@@ -68,6 +68,19 @@ The two types of syntax works the same way.
 </tbody>
 </table>
 
+
+----
+## Example
+
+			$meteor.autorun($scope, function() {
+          if ($scope.getReactively('currentUser')) {
+              $scope.userForScore = $scope.$meteorObject(Userinfo, {user_id: $scope.getReactively('currentUser')._id});//$rootScope.currentUser._id
+          }
+      });
+
+
+## Method
+
 <br>
 <h3><p><code><span class="pln">getCollectionByName( :collectionName );</span></code></p></h3>
 <br>

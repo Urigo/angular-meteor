@@ -89,7 +89,7 @@ A method to get a $scope variable and watch it reactivly
 
 ## Example 2 - controllerAs syntax
 
-When using the `controllerAs` syntax for controller naming and referencing in templates, also if you are using the 
+When using the `controllerAs` syntax for controller naming and referencing in templates, also if you are using the
 [angular2-now](https://github.com/pbastowski/angular2-now) library, you will need to prefix the variable name
 with the name of your controller. That is, whatever name you supplied in controllerAs.
 
@@ -100,12 +100,80 @@ So, if controllerAs is `vm` then the following will work.
         sort: $scope.getReactively('vm.sort')
 
 
-Angular2-now always uses the controllerAs syntax internally and prefixes it's controllers with the camelCased version 
+Angular2-now always uses the controllerAs syntax internally and prefixes it's controllers with the camelCased version
 of your component's selector. If your component's selector is `parties-list` then the prefix will be `partiesList`
 and the code should look like this.
 
         limit: parseInt($scope.getReactively('partiesList.perPage')),
         skip: (parseInt($scope.getReactively('partiesList.page')) - 1) * parseInt($scope.getReactively('partiesList.perPage')),
+
+        {{/markdown}}
+    </do-nothing>
+
+      <do-nothing>
+        {{#markdown}}
+# $scope.getCollectionReactively
+
+A method to get a $scope variable the will be a collection (__not__ in terms of an ```AngularMeteorCollection```).
+
+This means dependencies will rerun if:
+
+- the variable is an object and properties are added or removed from the project
+- the variable is an array and elements are pushed or removed from the array.
+
+This is more expensive than a simple ```getReactively("myVar")``` but still better than ```getReactively("myVar", true)``` as it does not need to compare the collection deeply during every digest. See the [angular docs](https://docs.angularjs.org/api/ng/type/$rootScope.Scope#$watchCollection) for further information.
+
+----
+
+## Usage
+
+    $scope.getCollectionReactively(scopeVariableName)
+### Arguments
+
+<table class="variables-matrix input-arguments">
+    <thead>
+    <tr>
+        <th>Param</th>
+        <th>Type</th>
+        <th>Details</th>
+        <th>Required</th>
+        <th>Default</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>scopeVariableName</td>
+        <td><a href="" class="label type-hint type-hint-string">string</a></td>
+        <td><p>The name of the scope's variable to bind to</p></td>
+        <td><a href="" class="label type-hint type-hint-array">Yes</a></td>
+        <td></td>
+    </tr>
+
+    </tbody>
+</table>
+
+
+## Returns
+
+<table class="variables-matrix return-arguments">
+    <tbody><tr>
+        <td><a href="" class="label type-hint type-hint-expression">Reactive variable</a></td>
+        <td><p>A reactive variable that is binded to the scope variable and fires a changed event every time
+            the scope variable changes or if new elements are added to or removed from the resolved object or array </p></td>
+    </tr>
+    </tbody></table>
+
+----
+
+## Example
+
+
+    $scope.things = ["foo"];
+    $scope.$meteorAutorun(function(){
+     var values = $scope.$getCollectionReactively("foo");
+     console.log("values",values);
+     //this runs everytime $scope.things.push(...)
+    });
 
 
         {{/markdown}}
