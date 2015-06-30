@@ -6,11 +6,13 @@
     </a>
     <ul class="btn-group tutorial-nav">
       <a href="/tutorial/step_19"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
+      <a href="http://socially-step20.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
+      <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_18...step_20"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
       <a href="/tutorial/next_steps"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
     </ul>
 
     <div class="col-md-8">
-      <h1>Step 20 - CollectionFS</h1>
+      <h1>Step 20 - Handling Files with CollectionFS</h1>
     </div>
     <div class="video-tutorial col-md-4">
     </div>
@@ -18,13 +20,14 @@
     <do-nothing class="col-md-12">
   {{#markdown}}
 
-CollectionFS is a suite of Meteor packages that together provide a complete file management solution including uploading, downloading, storage, synchronization, manipulation, and copying. It supports several storage adapters for saving to the local filesystem, GridFS, or S3, and additional storage adapters can be created.
-The full documentation for CollectionFS could be found [here](https://github.com/CollectionFS/Meteor-CollectionFS).
-CollectionFS is also available for using with Angular-Meteor using the `$meteorCollectionFS` API.
+In this step we are going to add the ability to upload images into our app, and also sorting and naming them.
 
-This part of the tutorial will demonstrate usage of CollectionFS and Angular-Meteor using the example of file-uploading.
+Angular-Meteor provides us with the [$meteor.collectionFS API](/api/files) that wraps [CollectionFS](https://github.com/CollectionFS/Meteor-CollectionFS).
 
-This part of the tutorial assumes you already have a basic experience with Angular-Meteor, and will use some of the APIs that this package provides.
+[CollectionFS](https://github.com/CollectionFS/Meteor-CollectionFS) is a suite of Meteor packages that together provide a complete file management solution including uploading, downloading, storage, synchronization, manipulation, and copying.
+
+It supports several storage adapters for saving to the local filesystem, GridFS, or S3, and additional storage adapters can be created.
+
 So assuming you already have an Angular-Meteor project, we will starting by adding CollectionFS to our project by running the following command:
 ```
 meteor add cfs:standard-packages
@@ -387,6 +390,8 @@ You can find the full code of this example under Angular-Meteor repository, in t
     <div class="col-md-12">
 	    <ul class="btn-group tutorial-nav">
 		    <a href="/tutorial/step_19"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
+        <a href="http://socially-step20.meteor.com/"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
+        <a href="https://github.com/Urigo/meteor-angular-socially/compare/step_18...step_20"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
 		    <a href="/tutorial/next_steps"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
 	    </ul>
     </div>
