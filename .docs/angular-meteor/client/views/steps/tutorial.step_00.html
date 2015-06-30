@@ -22,16 +22,22 @@
     <do-nothing class="col-md-12">
     {{#markdown}}
 
-You are now ready to build the Meteor-Angular socially app.
+Lets start building our Meteor-Angular socially app.
 
-In this step, you will become familiar with the most important source code files,
-learn how to start the Meteor server, connect an AngularJS FrontEnd to it and run the application in the browser.
+In this step, you will:
+
+1. Become familiar with the most important source code files
+2. Learn how to start the Meteor server
+3. Connect an Angular FrontEnd
+4. Run the application in the browser
 
 First step - let's install Meteor!
 
 Open your command line and paste this command:
 
     $ curl https://install.meteor.com/ | sh
+
+> If you are on a Windows machine, go [here](https://www.meteor.com/install) to install
 
 Now let's create our app - write this in the command line:
 
@@ -55,17 +61,19 @@ and look at the amazing app that's running on your computer!
 
 So, as you can see, we have a full running app! which includes a server and a client.
 
-The default Meteor app starts life with three files, one 'js', one 'html' and one 'css' file. Each named with the application name you used in the 'create' command above, in our case this is 'socially'. We're going to add our own files for this tutorial. So let's start by deleting the following files:
+The default Meteor app starts life with three files, one `js`, one `html` and one `css` file. Each named with the application name you used in the `create` command above, in our case this is `socially`.
+
+We are going to add our own files for this tutorial. So let's start by deleting the following files:
 
     socially.css	socially.html	socially.js
 
 Now we can start building our app.
-first let's create a new index.html file and place this code inside and run the app again:
+first let's create a new `index.html` file and place this code inside and run the app again:
 
 __`index.html`:__
 
     <body>
-	    <p>Nothing here</p>
+      <p>Nothing here</p>
     </body>
 
 
@@ -76,15 +84,15 @@ The reason for this is the way Meteor structures and serves files to the client.
 
 Meteor scans all the HTML files in your application and concatenates them together.
 
-It will create the HTML, HEAD and BODY tags by itself and place in there everything it needs to run the app.
+It will create the `HTML`, `HEAD` and `BODY` tags by itself and place in there everything it needs to run the app.
 
-Then it will search for all the HTML files containing HEAD or BODY tags and concatenate their content into the main file.
+Then it will search for all the HTML files containing `HEAD` or `BODY` tags and concatenate their content into the main file.
 
 
 
-So in our case, Meteor found our index.html file, found the BODY tag inside and added it's content to the BODY tag of the main generated file.
+So in our case, Meteor found our `index.html` file, found the `BODY` tag inside and added it's content to the `BODY` tag of the main generated file.
 
-(right-click -> inspect element on the page to see the generated file)
+> (right-click -> inspect element on the page to see the generated file)
 
 
 
@@ -98,21 +106,21 @@ Back in the command line, launch this command:
 
     $ meteor add urigo:angular
 
-This package takes care of including the latest AngularJS library code into our app.
+This package takes care of connecting Angular to Meteor and includes the latest AngularJS library code into our app.
 
 That's it! now we can use the AngularJS power in our Meteor app.
 
-To start simple, create a new file called index.ng.html under the main folder, this will be our main HTML template page.
+To start simple, create a new file called `index.ng.html` under the main folder, this will be our main `HTML` template page.
 
-* We are using the .ng.html file extension so that Blaze - Meteor's templating system won't compile and override our AngularJS expressions.
+* We are using the `.ng.html` file extension so that Blaze - Meteor's templating system won't compile and override our AngularJS expressions.
 
-Then move the p tag into it:
+Then move the `p` tag into it:
 
 __`index.ng.html`:__
 
     <p>Nothing here</p>
 
-Now let's include that file into our main index.html file:
+Now let's include that file into our main `index.html` file:
 
 __`index.html`:__
 
@@ -120,11 +128,11 @@ __`index.html`:__
       <div ng-include="'index.ng.html'"></div>
     </body>
 
-But if you load this in your browser, you won't see anything. That's because we still need to create the actual Angular app, which we'll do next.
+But if you load this in your browser, **you won't see anything**. That's because we still need to **create the actual Angular app**, which we'll do next.
 
-* It's very important to note - the paths are always absolute, not relative!  so if 'index.ng.html' was inside a client folder, you would have to place the whole path from the route app, doesn't matter where you're calling the file from. 
+* It's very important to note - the **paths are always absolute, not relative!**  so if `index.ng.html` was inside a folder named `client`, you would have to place the whole path from the route app, doesn't matter where you're calling the file from.
 
-like this (e.g. if index.ng.html was in the 'client' folder):
+like this (e.g. if `index.ng.html` was in a folder named `client`):
 
     <div ng-include="'client/index.ng.html'"></div>
 
@@ -132,12 +140,14 @@ like this (e.g. if index.ng.html was in the 'client' folder):
 
 AngularJS apps are actually individual modules. So to start with lets create our app module.
 
-Create a new app.js file.  Now you can see another example of Meteor's power and simplicity - no need to include this file anywhere. Meteor will take care of it by going through all the files in the folder and including them automatically.
+Create a new `app.js` file.
+
+Now you can see another example of Meteor's power and simplicity - no need to include this file anywhere. Meteor will take care of it by going through all the files in the folder and including them automatically.
 
 One of Meteor's goals is to break down the barrier between client and server, so the code you write can run everywhere! (more on that later).
 But we need Angular's power only in the client side, so how can we do that?
 
-There are a few ways to tell Meteor to run code only on the client/server/phone side, let's start with the simplest way - Meteor.isClient variable.
+There are a few ways to tell Meteor to run code only on the client/server/phone side, let's start with the simplest way - [Meteor.isClient](http://docs.meteor.com/#/full/meteor_isserver) variable.
 
 __`app.js`:__
 
@@ -145,9 +155,9 @@ __`app.js`:__
 
     }
 
-Now everything inside this 'if' statement will only run on the client side.
+Now everything inside this `if` statement will only run on the client side.
 
-Let's continue defining our AngularJS application module, and give it the name "socially":
+Let's continue defining our AngularJS application module, give it the name `socially` and add `angular-meteor` module as a dependency:
 
 __`app.js`:__
 
@@ -155,44 +165,23 @@ __`app.js`:__
       angular.module('socially',['angular-meteor']);
     }
 
-And use the same application name in the ng-app directive in index.html:
+And use the same application name in the `ng-app` directive in `index.html`:
 
     <body ng-app="socially">
       <div ng-include="'index.ng.html'"></div>
     </body>
 
-What we did here is to declare a new angular module named 'socially' and make it dependant on the 'angular-meteor' module (that we included in the first step).
-
 Now run the app.
 
-Everything is the same, but now inside our index.ng.html let's use Angular:
+Everything is the same, so now inside our `index.ng.html` let's use Angular:
 
     <p>Nothing here {{dstache}} 'yet' + '!' }}</p>
 
-# What is the code doing?
-double curly braces binding with an expression:
+Run the app again and the screen should look like this:
 
-    Nothing here {{dstache}}'yet' + '!'}}
+    Nothing here yet!
 
-This line demonstrates two core features of Angular's templating capabilities:
-
-* A binding, denoted by double curly braces {{dstache}} }}
-* a simple expression 'yet' + '!' used in this binding.
-
-AngularJS finds the double curly braces, evaluates the expression and inserts the result into the DOM in place of the binding.
-Rather than a one-time insert, as we'll see in the next steps, a binding will result in efficient continuous updates whenever the result of the expression evaluation changes.
-Inside in the client side code, like a future smart browser would do.
-
-
-> Why did we use the new file extension file.ng.html ?
->
-> That's because the Meteor templating system uses double-curlies. If we use them in our AngularJS view HTML, Meteor will override Angular.
->
-> Fortunately, we created a new file extension to stop Meteor overriding our Angular expression.
->
-> If you still want to use HTML files without changing their extension, Angular (unlike Meteor...) gives us the [option to change the double-curlies to Double-square-brackets](http://stackoverflow.com/a/12923955/1426570)
-
-
+Angular interpreted the expression like any other Angular application.
 
 # Experiments
 Try adding a new expression to the index.ng.html that will do some math:
@@ -200,7 +189,7 @@ Try adding a new expression to the index.ng.html that will do some math:
     <p>1 + 2 = {{dstache}} 1 + 2 }}</p>
 
 # Summary
-Now let's go to [step 1](/tutorial/step_01) and add some content to the web app.
+Now let's go to [step 1](/tutorial/step_01) and add some content to our application.
 
 
     {{/markdown}}

@@ -29,7 +29,7 @@ In this chapter you will add the ability to insert a new party and delete an exi
 
 First let's create a simple form with a button that will add a new party.
 
-Add the following form inside the PartiesListCtrl div:
+Add the following form inside the `PartiesListCtrl div`:
 
     <form>
       <label>Name</label>
@@ -40,7 +40,7 @@ Add the following form inside the PartiesListCtrl div:
     </form>
 
 
-So that index.ng.html will look like this:
+So that `index.ng.html` will look like this:
 
 __`index.ng.html`:__
 
@@ -72,7 +72,7 @@ First things first, let's bind the value of the inputs into a new party variable
 
 To do that we'll use the simple and powerful [ng-model](https://docs.angularjs.org/api/ng/directive/ngModel) AngularJS directive.
 
-Add ng-model to the form like this:
+Add `ng-model` to the form like this:
 
     <form>
       <label>Name</label>
@@ -145,7 +145,7 @@ It is not only responsible for keeping the collection updated, it also has helpe
 
 Let's try to use these helper functions instead of the current implementation.
 
-First let's replace our 'push' with 'save' in the add button action:
+First let's replace our `push` with `save` in the add button action:
 
     <button ng-click="parties.save(newParty); newParty='';">Add</button>
 
@@ -174,7 +174,7 @@ You can read more about AngularMeteorCollection and it's helper functions in the
 
 # Summary
 
-So now you've seen how easy it is to manipulate the data using AngularJS's powerful directives and sync that data with Meteor's powerful Mongo.collection API.
+So now you've seen how easy it is to manipulate the data using Angular's powerful directives and sync that data with Meteor's powerful Mongo.collection API.
 
 
   {{/markdown}}

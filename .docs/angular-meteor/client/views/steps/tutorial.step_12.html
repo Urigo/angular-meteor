@@ -35,19 +35,19 @@ if we are in page 3, but we change how we sort the collection, we should get dif
 a search, there might be not enough results for 3 pages.
 
 For AngularJS developers, this chapter will show how powerful Meteor is.
-In the official AngularJS tutorial, we add sorting and search the works only on the client side, which in real world scenarios are not so helpful.
+In the official AngularJS tutorial, we add sorting and search that works only on the client side, which in real world scenarios are not so helpful.
 Now, in this chapter we are going to perform a real-time search, sort and paginate that will run all the way to the server.
 
 # angular-meteor pagination support
 
 What we want to achieve with angular-meteor is server-based reactive pagination.
-That is no simple task, but using the angular-meteor it could make your life a lot simpler.
+That is no simple task, but using angular-meteor could make life a lot simpler.
 
 To achieve server-based reactive pagination we need to have support for pagination in the server as well as in the client.
 That means that our publish function for the parties collection would have to change and also the way that we subscribe to that publication.
 So first let's take care of our server-side.
 
-In our parties.js file in the server directory we are going to add the 'options' variable to the publish method like this:
+In our parties.js file in the server directory we are going to add the `options` variable to the publish method like this:
 
     Meteor.publish("parties", function (options) {
       return Parties.find({
@@ -63,14 +63,14 @@ In our parties.js file in the server directory we are going to add the 'options'
         ]}, options);
     });
 
-Now our publish method receives an options arguments which we then pass to the Parties.find() function call.
+Now our publish method receives an options arguments which we then pass to the `Parties.find()` function call.
 This will allow us to send arguments to the find function's modifier right from the subscribe call. The options object can
 contain properties like `skip`, `sort` and `limit` which we will shortly use ourselves - [Collection Find](http://docs.meteor.com/#/full/find).
 
 Let's get back to our client code. We now need to change our subscribe call with options we want to set for pagination.
-What are those parameters that we want to set on the options argument? That is a good question. In order to have pagination in our
+What are those parameters that we want to set on the options argument? In order to have pagination in our
 parties list we will need to save the current page, the number of parties per page and the sort order. So let's add these parameters to our scope
-in the top of the controller in client/controllers/partiesList.js file.
+in the top of the controller in `client/controllers/partiesList.js` file.
 
     $scope.page = 1;
     $scope.perPage = 3;
@@ -97,14 +97,14 @@ Now let's send the parameters in the options object:
 
 So we built an object that contains 3 properties:
 
-* limit - how many parties to send per page
-* skip  - the number of parties we want to start with which is the current page minus one times the parties per page
-* sort  - the sorting of the collection in [MongoDB syntax](http://docs.mongodb.org/manual/reference/method/cursor.sort/)
+* **limit** - how many parties to send per page
+* **skip**  - the number of parties we want to start with which is the current page minus one times the parties per page
+* **sort**  - the sorting of the collection in [MongoDB syntax](http://docs.mongodb.org/manual/reference/method/cursor.sort/)
 
-Now we also need to add the sort modifier to the way we get the collection data from the minimongo.
+Now we also need to add the sort modifier to the way we get the collection data from the Minimongo.
 That is because the sorting is not saved when the data is sent from the server to the client.
 So to make sure our data is sorted also on the client need to defined is also in the parties collection.
-To do that we are going to replace the 'Parties' collection parameter with a [cursor](http://docs.meteor.com/#/full/mongo_cursor) for that parties collection:
+To do that we are going to replace the `Parties` collection parameter with a [cursor](http://docs.meteor.com/#/full/mongo_cursor) for that parties collection:
 
     $scope.parties = $meteor.collection(function() {
       return Parties.find({}, {
@@ -141,8 +141,8 @@ and after the UL closes add this directive:
 as you can see, dir-paginate list takes the number of objects in a page (that we defined before) but also takes the total number items (we will get to that soon).
 With this bindings it calculates what buttons of pages it should display inside the dir-pagination-controls directive.
 
-On the dir-pagination-controls directive there is a method on-page-change and there we can call our own function.
-so we call 'pageChanged' function with the new selection as a parameter.
+On the dir-pagination-controls directive there is a method `on-page-change` and there we can call our own function.
+so we call `pageChanged` function with the new selection as a parameter.
 
 let's create the pageChanged function inside the partiesList controller (client/controllers/partiesList.js):
 
@@ -168,13 +168,13 @@ For that we can use the [tmeasday:publish-counts](https://github.com/percolatest
 
 That package helps to publish the count of a cursor, in real time without dependency on the subscribe method.
 
-Inside the server/parties.js file, add the following code inside the Meteor.publish("parties" function, at the beginning of the function. before the existing return statement:
+Inside the `server/parties.js` file, add the following code inside the `Meteor.publish("parties" ` function, at the beginning of the function. before the existing return statement:
 
     Counts.publish(this, 'numberOfParties', Parties.find({
       $or:[
         {$and:[
-          {"public": true},
-          {"public": {$exists: true}}
+          {'public': true},
+          {'public': {$exists: true}}
         ]},
         {$and:[
           {owner: this.userId},
@@ -188,8 +188,8 @@ So the file should look like this now:
       Counts.publish(this, 'numberOfParties', Parties.find({
         $or:[
           {$and:[
-            {"public": true},
-            {"public": {$exists: true}}
+            {'public': true},
+            {'public': {$exists: true}}
           ]},
           {$and:[
             {owner: this.userId},
@@ -199,8 +199,8 @@ So the file should look like this now:
       return Parties.find({
         $or:[
           {$and:[
-            {"public": true},
-            {"public": {$exists: true}}
+            {'public': true},
+            {'public': {$exists: true}}
           ]},
           {$and:[
             {owner: this.userId},
@@ -212,10 +212,10 @@ So the file should look like this now:
 As you can see, we query only the parties that should be available to that specific client, but without the options variable so we get the full
 number of parties.
 
-* We are passing '{ noReady: true }' in the last argument so that the publication will be ready only after the our main cursor is ready - [readiness](https://github.com/percolatestudio/publish-counts#readiness).
+* We are passing `{ noReady: true }` in the last argument so that the publication will be ready only after the our main cursor is ready - [readiness](https://github.com/percolatestudio/publish-counts#readiness).
 
 Now on the client we have access to the Counts collection.
-let's save that in the client/controllers/partiesList.js file when the subscription finishes successful (using the promise $meteor.subscribe returns):
+let's save that in the `client/controllers/partiesList.js` file when the subscription finishes successful (using the promise $meteor.subscribe returns):
 
     $meteor.subscribe('parties', {
       limit: parseInt($scope.perPage),

@@ -26,20 +26,20 @@
 In this step, you will implement the party details view, which is displayed when a user clicks on a party in the parties list.
 The user will also be able to change the party's details.
 
-To implement the party details view we will use $meteor.object to fetch our data, and update it back in realtime when the user changes it.
+To implement the party details view we will use [$meteor.object](/api/meteorObject) to fetch our data, and update it back in realtime when the user changes it.
 
 # Controller
 
-We'll expand the PartyDetailsCtrl by using the $meteor.object service (add it with Angular's dependency injection) to bind the specific party.
+We'll expand the PartyDetailsCtrl by using the [$meteor.object](/api/meteorObject) service (add it with Angular's dependency injection) to bind the specific party:
 
-    angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
+    angular.module('socially').controller('PartyDetailsCtrl', ['$scope', '$stateParams', '$meteor',
       function($scope, $stateParams, $meteor){
 
         $scope.party = $meteor.object(Parties, $stateParams.partyId);
 
     }]);
 
-We are sending #meteorObject a Mongo collection and the Id of the object we want to bind to.
+We are sending $meteor.object a Mongo collection and the Id of the object we want to bind to.
 
 $meteor.object returns an [AngularMeteorObject](/api/meteorObject) that contains the data.
 
@@ -47,7 +47,7 @@ $meteor.object accepts a selector as the second argument.
 
 That selector can be a Mongo Selector, Object ID, or String.
 
-In our example we used the Object's ID but it can also come in the form of {field: query}.
+In our example we used the Object's ID but it can also come in the form of `{field: query}`.
 
 $meteor.object will find the first document that matches the selector,
 as directed by the sort and skip options, exactly like Meteor's [collection.findOne](http://docs.meteor.com/#/full/findone)
@@ -55,7 +55,7 @@ as directed by the sort and skip options, exactly like Meteor's [collection.find
 
 # Template
 
-In party-details.ng.html let's replace the binding to the partyId with a binding to party.name and party.description:
+In `party-details.ng.html` let's replace the binding to the `partyId` with a binding to `party.name` and `party.description`:
 
     Here you will see and change the details of the party:
 
@@ -88,7 +88,7 @@ __party-details.ng.html__
 
 Now let's move to the controller.
 
-First, in the call to $meteor.object set the 3rd parameter to false so it won't auto-save the object on every change:
+First, in the call to `$meteor.object` set the 3rd parameter to `false` so it won't auto-save the object on every change:
 
 
     $scope.party = $meteor.object(Parties, $stateParams.partyId, false);
@@ -105,14 +105,14 @@ Now let's add the functions that handle the button clicks:
     };
 
 
-As you can see, $meteor.object returns an object from type [AngularMeteorObject](/api/meteorObject) which contains 2 functions - save and reset.
+As you can see, $meteor.object returns an object from type [AngularMeteorObject](/api/meteorObject) which contains 2 functions - `save` and `reset`.
 
-save() - saves the current value of the object to the server.
-reset() - resets the current value of the object from the server.
+**save()** - saves the current value of the object to the server.
+**reset()** - resets the current value of the object from the server.
 
 Your controller should look like this:
 
-    angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
+    angular.module('socially').controller('PartyDetailsCtrl', ['$scope', '$stateParams', '$meteor',
       function($scope, $stateParams, $meteor){
 
         $scope.party = $meteor.object(Parties, $stateParams.partyId, false);

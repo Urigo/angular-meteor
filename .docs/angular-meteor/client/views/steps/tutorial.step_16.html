@@ -31,7 +31,7 @@ First, let's add the angular-google-maps Meteor package:
     meteor add angularui:angular-google-maps
 
 
-Then let's define the module dependency in our app. go to app.js inside the 'client->lib' folder:
+Then let's define the module dependency in our app. go to `app.js` inside the `client->lib` folder:
 
     angular.module('socially',[
       'angular-meteor',
@@ -41,17 +41,19 @@ Then let's define the module dependency in our app. go to app.js inside the 'cli
     ]);
 
 
-Now let's add a map the party-details.ng.html , first add this HTML snippet to the end of the template:
+Now let's add a map the `party-details.ng.html` , first add this HTML snippet to the end of the template:
 
         <div class="party-details-maps">
           <div class="angular-google-map-container">
-            <ui-gmap-google-map center="party.location || map.center" events="map.events" zoom="map.zoom">
+            <ui-gmap-google-map center="party.location || map.center"
+                                events="map.events" zoom="map.zoom">
             </ui-gmap-google-map>
           </div>
         </div>
 
 Here we created the google-map directive with attributes for biding the center, handling events and zoom of the map.
-So let's define those variables in our scope. go to partyDetails.js.
+So let's define those variables in our scope. go to `partyDetails.js`.
+
 Inside we will create the $scope.map variable to hold the properties on the map:
 
     $scope.map = {
@@ -64,7 +66,7 @@ Inside we will create the $scope.map variable to hold the properties on the map:
     };
 
 To display a Google Map widget we have to define it's height and width. let's do that now.
-Create a new file named parties.css inside a new folder called 'styles' placed like this 'client->parties->styles' and place to following CSS code inside:
+Create a new file named parties.css inside a new folder called `styles` placed like this `client->parties->styles` and place to following CSS code inside:
 
     .angular-google-map-container {
       height: 400px;
@@ -80,8 +82,10 @@ inside party-details.ng.html:
 
 
     <div class="angular-google-map-container">
-      <ui-gmap-google-map center="party.location || map.center" events="map.events" zoom="map.zoom">
-        <ui-gmap-marker coords="party.location" options="map.marker.options" events="map.marker.events" idkey="party._id">
+      <ui-gmap-google-map center="party.location || map.center"
+                          events="map.events" zoom="map.zoom">
+        <ui-gmap-marker coords="party.location" options="map.marker.options"
+                        events="map.marker.events" idkey="party._id">
         </ui-gmap-marker>
       </ui-gmap-google-map>
     </div>

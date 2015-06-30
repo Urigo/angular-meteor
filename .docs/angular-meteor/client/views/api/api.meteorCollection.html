@@ -8,17 +8,24 @@
     <do-nothing>
         {{#markdown}}
 
-# $meteor.collection   /    $scope.$meteorCollection
+# $meteor.collection   /   $scope.$meteorCollection
 
-A service that wraps the [Meteor collections](http://docs.meteor.com/#/full/collections) to enable reactivity within AngularJS.
-This service binds between the angularjs $scope variables and the meteor collection. Service binding include 3 parts: 
-- watching the changes in angular $scope and updating the meteor collection. (called "autobind")
-- watching hte changes in the meteor collection and updating the angular $scope varialbles (called "observe").
+A service that wraps the [Meteor collections](http://docs.meteor.com/#/full/collections) to enable reactivity within Angular.
 
-The autobinding is optional, and can be set to false, so changes in the angular $scope varialbles will have to be explictly saved to the collection to be updated to the meteor collection. 
-The AngularMeteor collection can be explicitly stopped by calling the stop() function. It important to stop the collection to avoid the increase in number of watchers.  
-Calling $scope.$meteorCollection is exactly the same as calling $meteor.collection but additionally it will automatically stop the collection when the scope is destroyed.
-Therefore it is recommended to use $scope.$meteorCollection.
+This service binds between the Angular `$scope` variables and the meteor collection.
+
+Service binding include 3 parts:
+
+* watching the changes in **Angular $scope** and updating the **Meteor Collection**. (called "autobind")
+* watching hte changes in the **Meteor Collection** and updating the **Angular $scope** variables (called "observe")
+
+The autobinding is optional, and can be set to false, so changes in the Angular $scope variables will have to be explicitly saved to the collection to be updated to the Meteor Collection.
+
+The AngularMeteor collection can be explicitly stopped by calling the `stop()` function. It is important to stop the collection to avoid the increase in number of watchers.
+
+Calling `$scope.$meteorCollection` is exactly the same as calling `$meteor.collection` but additionally it will automatically stop the collection when the scope is destroyed.
+
+Therefore **using `$scope.$meteorCollection` is recommended use** over $scope.$meteorCollection.
 
 ----
 
