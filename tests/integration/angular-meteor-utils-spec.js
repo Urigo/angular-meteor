@@ -80,35 +80,11 @@ describe('$meteorUtils service', function () {
       expect(result.bar).toEqual(2);
 
     });
-    it('should ignore FS.File instances', function(){
 
-      var cfsExits = typeof window.FS === 'object';
-      if(!cfsExits){
-        window.FS = {
-          File : function(){}
-        };
-      }
 
-      var fsFile = new FS.File();
-      var result = $meteorUtils.stripDollarPrefixedKeys(fsFile);
-
-      if(!cfsExits){ // clean up
-        delete window.FS;
-      }
-      expect(result).toBe(fsFile);
-
-    });
     it('should ignore Date instances', function(){
 
       var input = new Date();
-      var result = $meteorUtils.stripDollarPrefixedKeys(input);
-
-      expect(result).toBe(input);
-
-    });
-    it('should ignore File instances', function(){
-
-      var input = new File([], "myfile.jpg");
       var result = $meteorUtils.stripDollarPrefixedKeys(input);
 
       expect(result).toBe(input);

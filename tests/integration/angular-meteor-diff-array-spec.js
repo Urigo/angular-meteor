@@ -122,7 +122,7 @@ describe('diffArray module', function() {
     it('should detect transition from empty nested object to non-null', function() {
       var oldCollection = [{_id: "a", simple: 1, nested: {}}];
       var newCollection = [{_id: "a", simple: 2, nested: 1}];
-      diffArray(oldCollection, newCollection, {changedAt: changedAtSpy});
+      diffArray(oldCollection, newCollection, {changedAt: changedAtSpy}, true);
       expect(changedAtSpy).toHaveBeenCalledWith(
         'a', {_id: "a", simple: 2, nested: 1}, undefined, 0, _.clone(oldCollection[0]));
     });
