@@ -33,7 +33,7 @@
         //.chooseFile('#upload-file', '/home/netanel/Pictures/hospital.jpg')
         .click('#upload-file')
         .keys(filePath)
-        .pause(1000)
+        .pause(3000)
         .call(callback);
     });
 
