@@ -43,24 +43,47 @@ Node: you can find more information about Stores and Storage Adapters on the Col
 So now we have the CollectionFS support and the storage adapter - we need to create a CollectionFS object to handle our files.
 Note that you will need to define the collection as shared resource because you will need to use the collection in noth client and server side.
 
-I create the model.js file, and define a regular CollectionFS object called "Images":
+I create the model/images.js file, and define a regular CollectionFS object called "Images", also, I used the CollectionFS API that allows me to defined auth-rules.
+Finally, I publish the collection just like any other collection, in order to allow the client to subsribe to those images:
 ```
 Images = new FS.Collection("images", {
-    stores: [
-      new FS.Store.GridFS("original")
-    ],
-    filter: {
-      allow: {
-        contentTypes: ['image/*']
-      }
+  stores: [
+    new FS.Store.GridFS("original")
+  ],
+  filter: {
+    allow: {
+      contentTypes: ['image/*']
     }
+  }
 });
+
+if (Meteor.isServer) {
+  Images.allow({
+    insert: function (userId) {
+      return (userId ? true : false);
+    },
+    remove: function (userId) {
+      return (userId ? true : false);
+    },
+    download: function () {
+      return true;
+    },
+    update: function (userId) {
+      return (userId ? true : false);
+    }
+  });
+
+  Meteor.publish('images', function() {
+    return Images.find({});
+  });
+}
+
 ```
 
 So now we have the collection, we need to create a client-side that handles the images upload.
 Note: you can use basic HTML `<input type="file">`  or any other package as you want - you only need the HTML5 File object to be provided.
 
-So now we wil create `example.ng.hmtl` "client" directory with a basic usage of HTML File input inside it:
+So now we wil create `example.ng.html` "client" directory with a basic usage of HTML File input inside it:
 ```
     <div ng-controller="ExampleCtrl">
       <input type="file" id="upload-file">
@@ -110,6 +133,9 @@ We can easily use ng-repeat or any other code to display our list, and use `url(
 ```
 You can see the full example in the Angular-Meteor repository, under examples/collectionfs.
 No we will talk about some more abilities that we can add to our Images Upload page, many of them are the result of using AngularJS directives and Angular-Meteor.
+All of the following examples are implemented in the Step 20 of the Angular-Meteor-Socially.
+
+**Note that I used `$mdDialog` that opens when the user click "Add Photo" to the party, but the examples in this page does not include this in order to keep the code simple and easy to understand.**
 
 # #1: Drag-and-Drop
 We can use AngularJS directives that handles file upload and gives us more abilities such as drag & drop, file validation on the client side and some more.
