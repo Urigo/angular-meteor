@@ -86,10 +86,6 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorial/step_20</loc>
-    <priority>0.5</priority>
-  </url>
-  <url>
     <loc>http://angular-meteor.com/about</loc>
     <priority>0.6</priority>
   </url>
@@ -106,22 +102,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/server/base</loc>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>http://angular-meteor.com/server/base/bootstrapping</loc>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>http://angular-meteor.com/server/base/di</loc>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>http://angular-meteor.com/server/base/api</loc>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>http://angular-meteor.com/angular2</loc>
     <priority>0.8</priority>
   </url>
@@ -130,19 +110,19 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/api/AngularMeteorCollection</loc>
-    <priority>0.5</priority>
-  </url>
-  <url>
     <loc>http://angular-meteor.com/api/meteorObject</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/api/AngularMeteorObject</loc>
+    <loc>http://angular-meteor.com/api/AngularMeteorCollection</loc>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://angular-meteor.com/api/subscribe</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://angular-meteor.com/api/session</loc>
     <priority>0.5</priority>
   </url>
   <url>
@@ -154,15 +134,11 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/api/getReactively</loc>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>http://angular-meteor.com/api/meteor-include</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/api/files</loc>
+    <loc>http://angular-meteor.com/api/getReactively</loc>
     <priority>0.5</priority>
   </url>
   <url>
@@ -170,11 +146,7 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/api/camera</loc>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>http://angular-meteor.com/api/session</loc>
+    <loc>http://angular-meteor.com/api/collectionfs</loc>
     <priority>0.5</priority>
   </url>
 </urlset>
