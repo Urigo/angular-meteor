@@ -59,16 +59,16 @@ and run the app like so:
 Now go to [http://localhost:3000/](http://localhost:3000/)
 and look at the amazing app that's running on your computer!
 
-So, as you can see, we have a full running app! which includes a server and a client.
+So, as you can see, we have a full running app which includes a server and a client!
 
-The default Meteor app starts life with three files, one `js`, one `html` and one `css` file. Each named with the application name you used in the `create` command above, in our case this is `socially`.
+The default Meteor app starts life with three files, one `js`, one `html` and one `css` file. Each named with the application name you used in the `create` command above. In our case this is `socially`.
 
 We are going to add our own files for this tutorial. So let's start by deleting the following files:
 
     socially.css	socially.html	socially.js
 
 Now we can start building our app.
-first let's create a new `index.html` file and place this code inside and run the app again:
+First, let's create a new `index.html` file and place this code inside. Then run the app again:
 
 __`index.html`:__
 
@@ -108,7 +108,7 @@ Back in the command line, launch this command:
 
 This package takes care of connecting Angular to Meteor and includes the latest AngularJS library code into our app.
 
-That's it! now we can use the AngularJS power in our Meteor app.
+That's it! Now we can use the AngularJS power in our Meteor app.
 
 To start simple, create a new file called `index.ng.html` under the main folder, this will be our main `HTML` template page.
 
@@ -138,7 +138,7 @@ like this (e.g. if `index.ng.html` was in a folder named `client`):
 
 # AngularJS app
 
-AngularJS apps are actually individual modules. So to start with lets create our app module.
+AngularJS apps are actually individual modules. So let's create our app module.
 
 Create a new `app.js` file.
 
@@ -157,7 +157,7 @@ __`app.js`:__
 
 Now everything inside this `if` statement will only run on the client side.
 
-Let's continue defining our AngularJS application module, give it the name `socially` and add `angular-meteor` module as a dependency:
+Let's continue defining our AngularJS application module. Give it the name `socially` and add `angular-meteor` module as a dependency:
 
 __`app.js`:__
 
