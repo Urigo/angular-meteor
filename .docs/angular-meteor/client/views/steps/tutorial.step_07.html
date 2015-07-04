@@ -47,8 +47,8 @@ From the `docs.meteor.com` site:
 
 ## Load order
 
-It is best to write your application in such a way that it is insensitive to the order in which files are loaded, for example by using Meteor.startup, or by moving load order sensitive code into packages, which can explicitly control both the load order of their contents and their load order with respect to other packages.
-However sometimes load order dependencies in your application are unavoidable.
+It is best to write your application in such a way that it is insensitive to the order in which files are loaded. This can be achieved by using, for example, Meteor.startup or by moving load order sensitive code into packages, which can explicitly control both the load order of their contents and their load order with respect to other packages.
+However, sometimes load order dependencies in your application are unavoidable.
 
 The JavaScript and CSS files in an application are loaded according to these rules:
 
@@ -81,14 +81,14 @@ Lastly, the Meteor server will serve any files under the public directory. This 
 
 There are many ways to organize and structure an AngularJS app.
 
-The 2 main approaches are:
+The two main approaches are:
 
 * Sorting by file type (controllers, views, etc..)
 * Sorting based on functionality (users, parties, products, etc..)
 
-The first approach seams to work better with smaller applications and also is the current structure of the [yeoman-angular-generator](https://github.com/yeoman/generator-angular).
+The first approach seems to work better with smaller applications and is also the current structure of the [yeoman-angular-generator](https://github.com/yeoman/generator-angular).
 
-The second approach seams to work better for large scale applications.
+The second approach seems to work better for large scale applications.
 
 As we are working close with the Meteor collections, we believe a better approach will be based on functionality, which also correlates to the Meteor's collection structure.
 

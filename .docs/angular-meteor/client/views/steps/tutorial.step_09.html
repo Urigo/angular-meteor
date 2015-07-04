@@ -80,7 +80,7 @@ We have two ways of doing that:
 2. Using [AngularMeteorCollection's](/api/AngularMeteorCollection) subscribe function which is exactly the same but it's
 here just for syntactic sugar doesn't return a promise.
 
-Right now we don't need the promise so let's use the second way:
+Right now we don't need the promise, so let's use the second way:
 
     $scope.parties = $meteor.collection(Parties).subscribe('parties');
 
@@ -141,7 +141,7 @@ In each of the users create a few public parties and a few private ones.
 Now log out and see which user sees which parties.
 
 
-In the next step, we will want to invite users to private parties. for that, we will need to get all the users, but only their emails without other data which will hurt their privacy.
+In the next step, we will want to invite users to private parties. For that, we will need to get all the users, but only their emails without other data which will hurt their privacy.
 
 So let's create another publish method for getting only the needed data on the user.
 

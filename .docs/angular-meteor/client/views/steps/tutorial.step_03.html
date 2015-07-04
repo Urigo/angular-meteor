@@ -25,7 +25,7 @@
 
 OK, so we have a nice client side application that creates and renders it's own data.
 
-So, if we were in any Framework other than Meteor, we would start implementing a series of REST end points to connect the server to the client.
+So, if we were in any framework other than Meteor, we would start implementing a series of REST endpoints to connect the server to the client.
 Also, we would need to create a database and functions to connect to it.
 
 And we haven't talked about realtime, in which case we would need to add sockets, and a local DB for cache and handle latency compensation (or just ignore those features and create a not - so - good and modern app...)
@@ -41,9 +41,9 @@ That introduce us to a new concept - **Full Stack Reactivity**.
 
 In an Angularish language we might call it **3 way data binding**.
 
-The way to handle data in Meteor is through the Mongo.Collection class. It is used to declare MongoDB collections and to manipulate them.
+The way to handle data in Meteor is through the `Mongo.Collection` class. It is used to declare MongoDB collections and to manipulate them.
 
-Thanks to minimongo, Meteor's client-side Mongo emulator, Mongo.Collection can be used from both client and server code.
+Thanks to minimongo, Meteor's client-side Mongo emulator, `Mongo.Collection` can be used from both client and server code.
 
 # Declare a collection
 
@@ -77,7 +77,7 @@ Our `app.js` file should look like this:
 
 __`app.js`:__
 
-    Parties = new Mongo.Collection("parties");
+    Parties = new M`ongo.Collection("parties");
 
     if (Meteor.isClient) {
 
