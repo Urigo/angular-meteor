@@ -25,10 +25,10 @@
 
 One of Meteor's most powerful packages is the Meteor account system.
 
-Right now, our app is publishing all the parties to all the clients and all the clients can change those parties and the changes are reflected back to all
+Right now, our app is publishing all the parties to all the clients, and all the clients can change those parties. The changes are then reflected back to all
 the other clients automatically.
 
-This is super powerful and easy, but what about security?  We don't want anyone to be able to change any party...
+This is super powerful and easy, but what about security?  We don't want any user to be able to change any party...
 
 First thing we should do is to remove the 'insecure' package that automatically added to any new Meteor application.
 
@@ -36,7 +36,7 @@ The 'insecure' package makes the default behaviour of Meteor collections to perm
 
 By removing that package the default behaviour is changed to deny all.
 
-So first execute this command in the command line:
+Execute this command in the command line:
 
     meteor remove insecure
 
@@ -46,13 +46,13 @@ Now let's try to change the parties array or a specific party.  Nothing's workin
 Now, we will have to write an explicit security rule for each operation we want to make on the Mongo collection.
 
 So first, let's add the 'accounts-password' Meteor package.
-it's a very powerful package for all the user operations you can think of: Login, signup, change password, password recovery, email confirmation and more..
+It's a very powerful package for all the user operations you can think of: Login, signup, change password, password recovery, email confirmation and more.
 
      meteor add accounts-password
 
-Now we will also add the 'accounts-ui' package.  That package contains all the HTML and CSS we need for the user operation forms.
+Now we will also add the 'accounts-ui' package.  This package contains all the HTML and CSS we need for the user operation forms.
 
-Later on in this tutorial we will replace those default account-ui forms with a custom Angular forms.
+Later on in this tutorial we will replace those default account-ui forms with custom Angular forms.
 
     meteor add accounts-ui
 
@@ -152,7 +152,7 @@ Every application has a single root scope. All other scopes are descendant scope
 To access $rootScope inside a controller you add it through the dependency injection.
 To access $rootScope in a template you simply write $root. and then the name of the property.
 
-Change the code for the add button in parties-list.ng.html to this:
+Change the code for the add button in `parties-list.ng.html` to this:
 
     <button ng-click="newParty.owner=$root.currentUser._id; parties.push(newParty)">Add</button>
 
@@ -238,7 +238,7 @@ __`client/routes.js`:__
 
 # Summary
 
-Amazing, only few lines of code and we have a secure application!
+Amazing, only a few lines of code and we have a secure application!
 
 Please note it is possible for someone with malicious intent to override your route on the client (in the client/routes.js). 
 As that is where we are validating the user is authenticated, they can remove the check and get access.

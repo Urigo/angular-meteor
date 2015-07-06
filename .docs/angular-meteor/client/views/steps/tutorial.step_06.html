@@ -23,14 +23,14 @@
   <do-nothing class="col-md-12">
   {{#markdown}}
 
-In this step, you will implement the party details view, which is displayed when a user clicks on a party in the parties list.
+In this step, we will implement the party details view, which is displayed when a user clicks on a party in the parties list.
 The user will also be able to change the party's details.
 
 To implement the party details view we will use [$meteor.object](/api/meteorObject) to fetch our data, and update it back in realtime when the user changes it.
 
 # Controller
 
-We'll expand the PartyDetailsCtrl by using the [$meteor.object](/api/meteorObject) service (add it with Angular's dependency injection) to bind the specific party:
+We'll expand the `PartyDetailsCtrl` by using the [$meteor.object](/api/meteorObject) service (add it with Angular's dependency injection) to bind the specific party:
 
     angular.module('socially').controller('PartyDetailsCtrl', ['$scope', '$stateParams', '$meteor',
       function($scope, $stateParams, $meteor){
