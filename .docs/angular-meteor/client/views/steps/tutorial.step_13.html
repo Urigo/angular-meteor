@@ -47,7 +47,7 @@ Create a new folder named `filters` under the `client->parties` folder.
 
 Under that folder create a new file named `uninvited.js` and place that code inside:
 
-    angular.module("socially").filter('uninvited', function () {
+    angular.module('socially').filter('uninvited', function () {
       return function (users, party) {
         if (!party)
           return false;
@@ -62,7 +62,7 @@ Under that folder create a new file named `uninvited.js` and place that code ins
       }
     });
 
-* So first we define a filter to the "socially" module (our app)
+* So first we define a filter to the 'socially' module (our app)
 * The filter named `uninvited`
 * Filters always get at least one parameter and the first parameter is always the object or array that we are filtering (like the parties in the previous example)
 So here we are filtering the users array so that's the first parameter
@@ -110,7 +110,7 @@ So let's create another custom filter `displayName`.
 
 Create a new file under the filters folder named `displayName.js` and place that code inside:
 
-    angular.module("socially").filter('displayName', function () {
+    angular.module('socially').filter('displayName', function () {
       return function (user) {
         if (!user)
           return;
@@ -154,12 +154,12 @@ and define the creator scope function in the partiesListCtrl in `partiesList.js`
         return;
       var owner = $scope.getUserById(party.owner);
       if (!owner)
-        return "nobody";
+        return 'nobody';
 
       if ($rootScope.currentUser)
         if ($rootScope.currentUser._id)
           if (owner._id === $rootScope.currentUser._id)
-            return "me";
+            return 'me';
 
       return owner;
     };
@@ -171,7 +171,7 @@ As you can see, we are using the `Meteor.users` collection here but we haven't m
 but if we weren't, we would get an empty array in Meteor.users).
 So let's add a subscription to Meteor.users in the list controller as well:
 
-        $meteor.subscribe('users');
+    $scope.$meteorSubscribe('users');
 
 
 Now we get the user object to the HTML. But we want his name, so let's put the displayName filter on that as well:

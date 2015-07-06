@@ -115,7 +115,7 @@ So we create a query - start with the find method on the Parties collection.
 
 Inside the find method we use the [$or](http://docs.mongodb.org/manual/reference/operator/query/or/), [$and](http://docs.mongodb.org/manual/reference/operator/query/and/) and [$exists](http://docs.mongodb.org/manual/reference/operator/query/exists/) Mongo operators to pull our wanted parties:
 
-Either that the owner parameter exists and it's the current logged in user (which we have access to with the command this.userId), or that the party's public flag exists and it's set as true.
+Either that the owner parameter exists and it's the current logged in user (which we have access to with the command `this.userId`), or that the party's public flag exists and it's set as true.
 
 
 So now let's add the public flag to the parties and see how it affects the parties the client gets.
@@ -157,7 +157,7 @@ Create a new file under the `server` folder named `users.js` and place the follo
 
 So here again we use the Mongo API to return all the users (find with an empty object) but we select to return only the emails and profile fields.
 
-* Notice that each object (i.e. each user) will automatically contain its _id field.
+* Notice that each object (i.e. each user) will automatically contain its `_id` field.
 
 The emails field holds all the user's email addresses, and the profile might hold more optional information like the user's name
 (in our case, if the user logged in with the Facebook login, the accounts-facebook package puts the user's name from Facebook automatically into that field).
@@ -169,8 +169,8 @@ If you just add to the end you will get an uncaught reference $scope not defined
 
 * We bind to the Meteor.users collection
 * Binding the result to $scope.users
-* Notice that we passes false in the second parameter. that means that we don't want to update that collection from the client.
-* Calling [AngularMeteorCollection's](/api/AngularMeteorCollection) subscribe function.
+* Notice that we passes `false` in the second parameter. that means that we don't want to update that collection from the client
+* Calling [AngularMeteorCollection's](/api/AngularMeteorCollection) subscribe function
 
 Also, let's add a subscription to the party in this controller as well.
 This is because if we will get to this controller directly, the subscription in the other controller won't be called and we will have no data at all.
@@ -301,8 +301,8 @@ Please read more [here](http://www.meteorpedia.com/read/Understanding_Meteor_Pub
 
 We've added the support of privacy to our parties app.
 
-We also learned how to use the Meteor.publish command to control the data and permissions sent to the client
-and how to subscribe to it with the $collection.bind 4th parameter.
+We also learned how to use the `Meteor.publish` command to control the data and permissions sent to the client
+and how to subscribe to it with the $meteor.collection publish function.
 
 In the next step we will learn how to filter the users list in the client side with AngularJS filters and create a custom filter for our own needs.
 

@@ -78,7 +78,7 @@ Paste the following code into the end of parties.js file in the model directory:
 
 Let's look at the code.
 
-First, all Meteor methods are defined inside Meteor.methods({}); object.
+First, all Meteor methods are defined inside `Meteor.methods({});` object.
 
 Each property of that object is a method and the name of that property in the name of the method. in our case - invite.
 
@@ -87,7 +87,7 @@ Then the value of the property is the function we call. in our case it takes 2 p
 First, we check validation with the the [check](http://docs.meteor.com/#check_package) function.
 
 the rest of the code is pretty much self explanatory, but important thing to notice is the Email function that sends email to the invited client.
-This function can't be called from the client side so we have to put it inside an isServer statement.
+This function can't be called from the client side so we have to put it inside an `isServer` statement.
 
 Don't forget to add the email package to your project in the command line:
 
@@ -299,7 +299,7 @@ add that function inside the partiesListCtrl in the partiesList.js file:
       });
     };
 
-here we are using underscore's _.filter, _.contains and _.findWhere to extract the users who are invited to the party but are not exist in the rsvps array.
+here we are using underscore's `_.filter`, `_.contains` and `_.findWhere` to extract the users who are invited to the party but are not exist in the rsvps array.
 
 Notice we are doing this check on $scope.users but we haven't initialized it yet in this controller. so add this code as well:
 

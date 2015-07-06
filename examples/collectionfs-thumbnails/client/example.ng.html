@@ -1,0 +1,18 @@
+<div ng-controller="ExampleCtrl">
+  <input type="file" id="upload-file">
+  <table>
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Thumbnail</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="image in images">
+      <td><a href="" ui-sref=".image({imageId: image._id})">{{image.original.name}}</a></td>
+      <td><a target="_blank" ng-href="{{ image.url({store: 'original'})}}"><img ng-src="{{ image.url({store: 'thumbnail'})}}"></a></td>
+      <td><button ng-click="removeImage(image)">X</button></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

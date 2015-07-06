@@ -43,18 +43,18 @@ See [$meteor.object](/api/meteorObject)
     <a href="" class="label type-hint type-hint-string">empty</a>/
     <a href="" class="label type-hint type-hint-object">object</a>
   </td>
-  <td><p>The doc to save to the Meteor Object.
-         If nothing is passed, the method saves everything in the AngularMeteorObject as is. Unchanged properties will be overridden with their existing values, which may trigger hooks.</p>
-      <p>
-         If doc is passed, the method only updates the Meteor Object with the properties passed, and no other changes will be saved.
-      </p>
+  <td><p> Document properties to save to the meteor object data. </p>
+         
   </td>
   <td><a href="" class="label type-hint type-hint-object">No</a></td>
 </tr>
 </tbody>
 </table>
 
-Returns a promise with an error in case for an error or a number of successful docs changed in case of success.
+If a document is passed, the method will only update nothing is passed, the Meteor Object with the properties passed, and no other changes will be saved.
+If no document argument is passed, the method saves all current data on the AngularMeteorObject. 
+Even unchanged properties will be overridden with their current values, hence hooks may be triggered on them. 
+Returns a promise with value of 1 when successful (this is the number of docs successfully updated) or an error. 
 
 <br>
 <h3><p><code><span class="pln">reset();</span></code></p></h3>
@@ -67,7 +67,7 @@ Reset the current value of the object to the one in the server.
 
 A shorten (Syntactic sugar) function for the <a href="/api/subscribe">$meteor.subscribe function</a>.
 
-Takes only one parameter and not returns a promise like <a href="/api/subscribe">$meteor.subscribe</a> does.
+The function takes only one parameter and does not return a promise like <a href="/api/subscribe">$meteor.subscribe</a> does.
 
 When called after $scope.meteorObject, it acts the same but in addition it automatically closes the subscription when the scope is destroyed.
 
@@ -90,18 +90,28 @@ When called after $scope.meteorObject, it acts the same but in addition it autom
     </td>
     <td><p>The subscription name to subscribe to.  exactly like the first parameter in $meteor.subscribe service.
     </p></td>
-    <td><a href="" class="label type-hint type-hint-object">Yes</a></td>
+    <td><a href="" class="label type-hint type-hint-array">Yes</a></td>
   </tr>
   </tbody>
 </table>
 
 <br>
 <h3><p><code><span class="pln">getRawObject();</span></code></p></h3>
+#### Parameters
+None
 
 Returns a copy of the AngularMeteorObject with all the AngularMeteor-specific
 internal properties removed. The returned object is then safe to use as a parameter
 for <a href="/api/methods">method calls</a>, or anywhere else where the data needs
 to be converted to JSON.
+
+<br>
+<h3><p><code><span class="pln">stop();</span></code></p></h3>
+#### Parameters
+None
+
+Stops watching the object for changes. 
+
 
 ----
 

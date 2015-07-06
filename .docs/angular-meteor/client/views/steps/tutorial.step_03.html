@@ -33,19 +33,19 @@ And we haven't talked about realtime, in which case we would need to add sockets
 But luckily, we use Meteor!
 
 
-Meteor makes writing distributed client code as simple as talking to a local database. It's a clean, simple, and secure approach that obviates the need to implement individual RPC endpoints, manually cache data on the client to avoid slow roundtrips to the server, and carefully orchestrate invalidation messages to every client as data changes.
+Meteor makes writing distributed client code as simple as talking to a local database.
 
-In Meteor, the client and server share the same database API. The exact same application code — like validators and computed properties — can often run in both places. But while code running on the server has direct access to the database, code running on the client does not. This distinction is the basis for Meteor's data security model.
+Every Meteor client includes an in-memory database cache. To manage the client cache, the server publishes sets of JSON documents, and the client subscribes to these sets. As documents in a set change, the server patches each client's cache automatically.
 
-Every Meteor client includes an in-memory database cache. To manage the client cache, the server publishes sets of JSON documents, and the client subscribes to these sets. As documents in a set change, the server patches each client's cache.
+That introduce us to a new concept - **Full Stack Reactivity**.
 
-
-That introduce us to a new concept - Reactivity.
-In an Angularish language we might call it 3 way data binding.
+In an Angularish language we might call it **3 way data binding**.
 
 The way to handle data in Meteor is through the Mongo.Collection class. It is used to declare MongoDB collections and to manipulate them.
 
 Thanks to minimongo, Meteor's client-side Mongo emulator, Mongo.Collection can be used from both client and server code.
+
+# Declare a collection
 
 So first, let's define our first parties collection that will store all our parties.
 
@@ -53,24 +53,27 @@ Add:
 
       Parties = new Mongo.Collection("parties");
 
-to the beginning of the file.
+to the beginning of the `app.js` file.
 
-Notice that this code runs outside of the isClient statement.
-That means that this collection and the actions on it will run both on the client (minimongo) and the server (Mongo) and Meteor will take care of syncing both of them.
+Notice that this code runs outside of the `isClient` statement.
 
-Now that we've created the collection, our client needs to subscribe to it's changes and bind it to our parties AngularJS collection.
+That means that this collection and the actions on it will run both on the client (minimongo) and the server (Mongo), you only have to write it once, and Meteor will take care of syncing both of them.
 
-To bind them we are going to use the built-in angular-meteor [service](https://docs.angularjs.org/guide/services) called $meteor.collection.
+# Binding to Angular
 
-We are going to replace the declaration of $scope.parties with the following command inside the PartiesListCtrl controller:
+Now that we've created the collection, our client needs to subscribe to it's changes and bind it to our parties Angular array.
+
+To bind them we are going to use the built-in angular-meteor service called [$meteor.collection](/api/meteorCollection).
+
+We are going to replace the declaration of `$scope.parties` with the following command inside the `PartiesListCtrl` controller:
 
     $scope.parties = $meteor.collection(Parties);
 
-This line declares a new $scope.parties variable so we don't need to do something like $scope.parties = []; and then bind it to the Parties Mongo collection.
+This line declares a new `$scope.parties` variable (so we don't need to do something like `$scope.parties = [];` ) and then binds it to the Parties Mongo collection.
 
-We also need to add the $meteor service to the controller with dependency injection.
+We also need to add the `$meteor` service to the controller with dependency injection.
 
-Our app.js file should look like this:
+Our `app.js` file should look like this:
 
 __`app.js`:__
 
@@ -78,23 +81,23 @@ __`app.js`:__
 
     if (Meteor.isClient) {
 
-    angular.module('socially',['angular-meteor']);
+      angular.module('socially',['angular-meteor']);
 
-    angular.module("socially").controller("PartiesListCtrl", ['$scope', '$meteor',
-      function($scope, $meteor){
+      angular.module('socially').controller('PartiesListCtrl', ['$scope', '$meteor',
+        function($scope, $meteor){
 
-        $scope.parties = $meteor.collection(Parties);
+          $scope.parties = $meteor.collection(Parties);
 
-      }]);
+        }]);
     }
 
 
-Now every change that happens to the $scope.parties variable will automatically be saved to the local minimongo and synced to the MongoDB server DB and all the other clients in realtime!
+Now every change that happens to the `$scope.parties` variable will automatically be saved to the local minimongo and synced to the MongoDB server DB and all the other clients in realtime!
 
 But we still don't have data in that collection, so let's add some.
 Let's initialize our server with the same parties we had before.
 
-Add this to the bottom of app.js:
+Add this to the bottom of `app.js`:
 
     if (Meteor.isServer) {
       Meteor.startup(function () {

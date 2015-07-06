@@ -97,8 +97,8 @@ angular.module("meteor-angular-docs").config(
           url: '/meteor-include',
           template: UiRouter.template('api.meteor-include.html')
         })
-        .state('api.collectionfs', {
-          url: '/collectionfs',
+        .state('api.files', {
+          url: '/files',
           template: UiRouter.template('api.collectionfs.html')
         })
         .state('api.utils', {
@@ -202,6 +202,10 @@ angular.module("meteor-angular-docs").config(
         .state('tutorial.step19', {
           url: '/step_19',
           template: UiRouter.template('tutorial.step_19.html')
+        })
+        .state('tutorial.step20', {
+          url: '/step_20',
+          template: UiRouter.template('tutorial.step_20.html')
         })
         .state('tutorial.next_steps', {
           url: '/next_steps',
