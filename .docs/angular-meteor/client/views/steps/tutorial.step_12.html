@@ -240,6 +240,7 @@ But Angular's scope variables are only watched by Angular and are not reactive v
 For that angular-meteor created [getReactively](/api/getReactively) - a way to make an Angular scope variable to a reactive variable.
 
 In order to make the subscription run each time something changes in one of the parameters, we need to place it inside an autorun block.
+
 To do that, we are going to use the [$meteor.autorun](/api/utils) function:
 
     $meteor.autorun($scope, function() {
