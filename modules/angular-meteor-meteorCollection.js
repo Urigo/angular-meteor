@@ -219,8 +219,10 @@ angularMeteorCollections.factory('AngularMeteorCollection', ['$q', '$meteorSubsc
     };
 
     AngularMeteorCollection.stop = function () {
-      if (this.unregisterAutoBind)
+      if (this.unregisterAutoBind){
+        this._isAutoBind = false;
         this.unregisterAutoBind();
+      }
 
       if (this.observeHandle)
         this.observeHandle.stop();
@@ -282,17 +284,21 @@ angularMeteorCollections.factory('$meteorCollection', ['AngularMeteorCollection'
 
       function setAutoBind() {
         if (auto) { // Deep watches the model and performs autobind.
+          ngCollection._isAutoBind = true;
           ngCollection.unregisterAutoBind = $rootScope.$watch(function () {
             if (ngCollection.UPDATING_FROM_SERVER) {
               return 'UPDATING_FROM_SERVER';
             }
             return angular.copy(_.without(ngCollection, 'UPDATING_FROM_SERVER'));
           }, function (newItems, oldItems) {
+            if (ngCollection._isAutoBind == false)
+              return;
             if (newItems === 'UPDATING_FROM_SERVER' ||
               oldItems === 'UPDATING_FROM_SERVER')
               return;
 
             if (newItems !== oldItems) {
+              ngCollection._isAutoBind = false;
               ngCollection.unregisterAutoBind();
 
               updateCollection(ngCollection, oldItems, diffArrayFunc);
