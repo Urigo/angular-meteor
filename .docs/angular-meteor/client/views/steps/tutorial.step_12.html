@@ -81,7 +81,7 @@ But right now, we are subscribing to the collection in the short form which does
 
     $scope.parties = $meteor.collection(Parties).subscribe('parties');
 
-So first we need to add the [$meteor.subscribe](http://angularjs.meteor.com/api/subscribe) service and call it separately:
+So first we need to add the [$meteor.subscribe](/api/subscribe) service and call it separately:
 
     $scope.parties = $meteor.collection(Parties);
 
@@ -238,10 +238,10 @@ This means that is a [reactive variable](http://docs.meteor.com/#/full/reactivev
 
 But Angular's scope variables are only watched by Angular and are not reactive vars for Meteor...
 
-For that angular-meteor created [getReactively](http://angularjs.meteor.com/api/getReactively) - a way to make an Angular scope variable to a reactive variable.
+For that angular-meteor created [getReactively](/api/getReactively) - a way to make an Angular scope variable to a reactive variable.
 
 So first, in order to make the subscription run each time something changes in one of the parameters, we need to place it inside an autorun block.
-To do that, we are going to use the [$meteor.autorun](http://angularjs.meteor.com/api/utils) function:
+To do that, we are going to use the [$meteor.autorun](/api/utils) function:
 
     $meteor.autorun($scope, function() {
 
@@ -255,7 +255,7 @@ To do that, we are going to use the [$meteor.autorun](http://angularjs.meteor.co
 
     });
 
-But this still won't help us because there is no reactive variables inside.  so let's use [getReactively](http://angularjs.meteor.com/api/getReactively) for that:
+But this still won't help us because there is no reactive variables inside, so let's use [getReactively](/api/getReactively) for that:
 
     $meteor.autorun($scope, function() {
 
