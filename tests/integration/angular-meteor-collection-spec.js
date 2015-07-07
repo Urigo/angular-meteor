@@ -69,6 +69,14 @@ describe('$meteorCollection service', function() {
       expect($rootScope.$apply).toHaveBeenCalled();
     });
 
+    it('should update the array when a collection item unset-field is assigned a deep-object', function() {
+      var item = MyCollection.findOne();
+      MyCollection.update(item._id, {$unset: {a: 1}});
+      MyCollection.update(item._id, {a: {L1: {L2: {L3: 'v'}}}});
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
+    });
+
     it('should update the array when a collection item object-field is assigned a deep-object', function() {
       var item = MyCollection.findOne();
       MyCollection.update(item._id, {a: {}});
