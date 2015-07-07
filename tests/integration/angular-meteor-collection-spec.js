@@ -32,7 +32,7 @@ describe('$meteorCollection service', function() {
 
     spyOn($rootScope, '$apply').and.callThrough();
 
-    MyCollection = new Mongo.Collection();
+    MyCollection = new Mongo.Collection(null);
     MyCollection.insert(testObjects[0]);
     MyCollection.insert(testObjects[1]);
     MyCollection.insert(testObjects[2]);
