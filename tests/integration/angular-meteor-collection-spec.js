@@ -91,6 +91,14 @@ describe('$meteorCollection service', function() {
       expect($rootScope.$apply).toHaveBeenCalled();
     });
 
+    it('should update the array when a collection item falsy primitive-field is assigned a deep-object', function() {
+      var item = MyCollection.findOne();
+      MyCollection.update(item._id, {a: 0});
+      MyCollection.update(item._id, {a: {L1: {L2: {L3: 'v'}}}});
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
+    });
+
     it('should update the array when a collection item null-field is assigned a deep-object', function() {
       var item = MyCollection.findOne();
       MyCollection.update(item._id, {a: null});
@@ -103,6 +111,14 @@ describe('$meteorCollection service', function() {
       var item = MyCollection.findOne();
       MyCollection.update(item._id, {a: null});
       MyCollection.update(item._id, {a: {subfield: 'v'}});
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
+    });
+
+    it('should update the array when a collection item null-field is assigned a array-object', function() {
+      var item = MyCollection.findOne();
+      MyCollection.update(item._id, {a: null});
+      MyCollection.update(item._id, {a: [1, 2, 3]});
       expect(meteorArray).toEqualCollection(MyCollection);
       expect($rootScope.$apply).toHaveBeenCalled();
     });
@@ -127,6 +143,30 @@ describe('$meteorCollection service', function() {
       var item = MyCollection.findOne();
       MyCollection.update(item._id, {a: {subfield: null}});
       MyCollection.update(item._id, {a: {subfield: 'v'}});
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
+    });
+
+    it('should update the array when a collection item null-subfield is assigned a array-object', function() {
+      var item = MyCollection.findOne();
+      MyCollection.update(item._id, {a: {subfield: null}});
+      MyCollection.update(item._id, {a: {subfield: [1, 2, 3]}});
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
+    });
+
+    it('should update the array when a collection item deep-field is assigned a primitive', function() {
+      var item = MyCollection.findOne();
+      MyCollection.update(item._id, {a: {L1: {L2: {L3: 0}}}});
+      MyCollection.update(item._id, {a: {L1: {L2: {L3: 1}}}});
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
+    });
+
+    it('should update the array when a collection item deep-field is assigned a deep-object', function() {
+      var item = MyCollection.findOne();
+      MyCollection.update(item._id, {a: {L1: null}});
+      MyCollection.update(item._id, {a: {L1: {L2: {L3: 1}}}});
       expect(meteorArray).toEqualCollection(MyCollection);
       expect($rootScope.$apply).toHaveBeenCalled();
     });
