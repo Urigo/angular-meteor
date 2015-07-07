@@ -69,6 +69,62 @@ describe('$meteorCollection service', function() {
       expect($rootScope.$apply).toHaveBeenCalled();
     });
 
+    it('should update the array when a collection item object-field is assigned a deep-object', function() {
+      var item = MyCollection.findOne();
+      MyCollection.update(item._id, {a: {}});
+      MyCollection.update(item._id, {a: {L1: {L2: {L3: 'v'}}}});
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
+    });
+
+    it('should update the array when a collection item primitive-field is assigned a deep-object', function() {
+      var item = MyCollection.findOne();
+      MyCollection.update(item._id, {a: 1});
+      MyCollection.update(item._id, {a: {L1: {L2: {L3: 'v'}}}});
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
+    });
+
+    it('should update the array when a collection item null-field is assigned a deep-object', function() {
+      var item = MyCollection.findOne();
+      MyCollection.update(item._id, {a: null});
+      MyCollection.update(item._id, {a: {L1: {L2: {L3: 'v'}}}});
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
+    });
+
+    it('should update the array when a collection item null-field is assigned a shallow-object', function() {
+      var item = MyCollection.findOne();
+      MyCollection.update(item._id, {a: null});
+      MyCollection.update(item._id, {a: {subfield: 'v'}});
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
+    });
+
+    it('should update the array when a collection item nested-object is nulled', function() {
+      var item = MyCollection.findOne();
+      MyCollection.update(item._id, {a: {subfield: 'v'}});
+      MyCollection.update(item._id, {a: null});
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
+    });
+
+    it('should update the array when a collection item non-null-subfield is nulled', function() {
+      var item = MyCollection.findOne();
+      MyCollection.update(item._id, {a: {subfield: 'v'}});
+      MyCollection.update(item._id, {a: {subfield: null}});
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
+    });
+
+    it('should update the array when a collection item null-subfield is assigned a primitive', function() {
+      var item = MyCollection.findOne();
+      MyCollection.update(item._id, {a: {subfield: null}});
+      MyCollection.update(item._id, {a: {subfield: 'v'}});
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
+    });
+
     it('should update the array when an item is removed from the collection', function() {
       // arrange
       var anyItem = MyCollection.findOne({});
