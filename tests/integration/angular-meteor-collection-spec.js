@@ -4,98 +4,191 @@ describe('$meteorCollection service', function() {
       $rootScope,
       $timeout,
       meteorArray,
-      testObjects = [
-      {
-        'a' : 1,
-        'b' : 2
-      },
-      {
-        'a' : 3,
-        'b' : 4
-      },
-      {
-        'a' : 5,
-        'b' : 6
-      }
-      ];
+      testObjects;
 
-  beforeEach(angular.mock.module('angular-meteor'));
-
+  // Setup jasmine.
   beforeEach(function() {
     jasmine.addMatchers(customMatchers);
   });
 
+  // Inject angular stuff.
+  beforeEach(angular.mock.module('angular-meteor'));
   beforeEach(angular.mock.inject(function(_$meteorCollection_, _$rootScope_, _$timeout_) {
     $meteorCollection = _$meteorCollection_;
     $rootScope = _$rootScope_;
     $timeout = _$timeout_;
+  }));
 
+  // Initialize spies.
+  beforeEach(function(){
     spyOn($rootScope, '$apply').and.callThrough();
+  });
 
-    MyCollection = new Mongo.Collection();
+  // Initialize data.
+  beforeEach(function(){
+    testObjects = [
+      {'a' : 1, 'b' : 2},
+      {'a' : 3, 'b' : 4},
+      {'a' : 5, 'b' : 6}];
+    MyCollection = new Mongo.Collection(null);
     MyCollection.insert(testObjects[0]);
     MyCollection.insert(testObjects[1]);
     MyCollection.insert(testObjects[2]);
-
     meteorArray = $meteorCollection(MyCollection, false);
-  }));
+  });
+
 
   describe('initialisation', function() {
     it('should return an array with all items in the Mongo Collection', function() {
-      // assert
       expect(meteorArray).toEqualCollection(MyCollection);
     });
   });
 
+
   describe('collection updates', function() {
     it('should update the array when a new item is inserted into the collection', function() {
-      // act
       MyCollection.insert({ a : '7', b: '8'});
-
-      // assert
       expect(meteorArray).toEqualCollection(MyCollection);
       expect($rootScope.$apply).toHaveBeenCalled();
     });
 
     it('should update the array when an item is updated in the collection', function() {
-      // arrange
       var anyItem = MyCollection.findOne({});
-
-      // act
       MyCollection.update({ _id : anyItem._id }, { a : '7', b : '8'});
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
+    });
 
-      // assert
+    it('should update the array when a collection item unset-field is assigned a deep-object', function() {
+      var item = MyCollection.findOne();
+      MyCollection.update(item._id, {$unset: {a: 1}});
+      MyCollection.update(item._id, {a: {L1: {L2: {L3: 'v'}}}});
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
+    });
+
+    it('should update the array when a collection item object-field is assigned a deep-object', function() {
+      var item = MyCollection.findOne();
+      MyCollection.update(item._id, {a: {}});
+      MyCollection.update(item._id, {a: {L1: {L2: {L3: 'v'}}}});
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
+    });
+
+    it('should update the array when a collection item array-field is assigned a deep-object', function() {
+      var item = MyCollection.findOne();
+      MyCollection.update(item._id, {a: []});
+      MyCollection.update(item._id, {a: {L1: {L2: {L3: 'v'}}}});
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
+    });
+
+    it('should update the array when a collection item primitive-field is assigned a deep-object', function() {
+      var item = MyCollection.findOne();
+      MyCollection.update(item._id, {a: 1});
+      MyCollection.update(item._id, {a: {L1: {L2: {L3: 'v'}}}});
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
+    });
+
+    it('should update the array when a collection item falsy primitive-field is assigned a deep-object', function() {
+      var item = MyCollection.findOne();
+      MyCollection.update(item._id, {a: 0});
+      MyCollection.update(item._id, {a: {L1: {L2: {L3: 'v'}}}});
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
+    });
+
+    it('should update the array when a collection item null-field is assigned a deep-object', function() {
+      var item = MyCollection.findOne();
+      MyCollection.update(item._id, {a: null});
+      MyCollection.update(item._id, {a: {L1: {L2: {L3: 'v'}}}});
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
+    });
+
+    it('should update the array when a collection item null-field is assigned a shallow-object', function() {
+      var item = MyCollection.findOne();
+      MyCollection.update(item._id, {a: null});
+      MyCollection.update(item._id, {a: {subfield: 'v'}});
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
+    });
+
+    it('should update the array when a collection item null-field is assigned a array-object', function() {
+      var item = MyCollection.findOne();
+      MyCollection.update(item._id, {a: null});
+      MyCollection.update(item._id, {a: [1, 2, 3]});
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
+    });
+
+    it('should update the array when a collection item nested-object is nulled', function() {
+      var item = MyCollection.findOne();
+      MyCollection.update(item._id, {a: {subfield: 'v'}});
+      MyCollection.update(item._id, {a: null});
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
+    });
+
+    it('should update the array when a collection item non-null-subfield is nulled', function() {
+      var item = MyCollection.findOne();
+      MyCollection.update(item._id, {a: {subfield: 'v'}});
+      MyCollection.update(item._id, {a: {subfield: null}});
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
+    });
+
+    it('should update the array when a collection item null-subfield is assigned a primitive', function() {
+      var item = MyCollection.findOne();
+      MyCollection.update(item._id, {a: {subfield: null}});
+      MyCollection.update(item._id, {a: {subfield: 'v'}});
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
+    });
+
+    it('should update the array when a collection item null-subfield is assigned a array-object', function() {
+      var item = MyCollection.findOne();
+      MyCollection.update(item._id, {a: {subfield: null}});
+      MyCollection.update(item._id, {a: {subfield: [1, 2, 3]}});
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
+    });
+
+    it('should update the array when a collection item deep-field is assigned a primitive', function() {
+      var item = MyCollection.findOne();
+      MyCollection.update(item._id, {a: {L1: {L2: {L3: 0}}}});
+      MyCollection.update(item._id, {a: {L1: {L2: {L3: 1}}}});
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
+    });
+
+    it('should update the array when a collection item deep-field is assigned a deep-object', function() {
+      var item = MyCollection.findOne();
+      MyCollection.update(item._id, {a: {L1: null}});
+      MyCollection.update(item._id, {a: {L1: {L2: {L3: 1}}}});
       expect(meteorArray).toEqualCollection(MyCollection);
       expect($rootScope.$apply).toHaveBeenCalled();
     });
 
     it('should update the array when an item is removed from the collection', function() {
-      // arrange
       var anyItem = MyCollection.findOne({});
-
-      // act
       MyCollection.remove({ _id : anyItem._id });
-
-      // assert
       expect(meteorArray).toEqualCollection(MyCollection);
       expect($rootScope.$apply).toHaveBeenCalled();
     });
 
-    it('should update the array when multiple changed occur on the collection', function() {
-      // arrange
+    it('should update the array when multiple changes occur on the collection', function() {
       var anyItem = MyCollection.findOne({});
       var anotherItem = MyCollection.findOne({a : '1'});
-
-      // act
       MyCollection.remove({ _id : anyItem._id });
       MyCollection.update({ _id : anotherItem }, { $set : { b : '100 '}});
       MyCollection.insert({ a : '7', b : '8'});
-
-      // assert
       expect(meteorArray).toEqualCollection(MyCollection);
       expect($rootScope.$apply).toHaveBeenCalled();
     });
   });
+
 
   describe('reactive cursor', function() {
     it('should update the array when the reactive cursor function recomputes', function() {
@@ -114,6 +207,7 @@ describe('$meteorCollection service', function() {
       expect(meteorReactiveArray).toEqualCollection(MyCollection);
     });
   });
+
 
   describe('autobind off', function() {
     var notAutoArray;
@@ -149,6 +243,7 @@ describe('$meteorCollection service', function() {
     });
   });
 
+
   describe('autobind on', function() {
     beforeEach(function() {
       meteorArray = $meteorCollection(MyCollection);
@@ -156,67 +251,48 @@ describe('$meteorCollection service', function() {
     });
 
     it('should update the collection when a new item is pushed into the array', function() {
-      // act
-      meteorArray.push({
-        a : '7',
-        b: '8'
-      });
+      meteorArray.push({a : '7', b: '8'});
       $rootScope.$apply();
-
-      // assert
       expect(meteorArray).toEqualCollection(MyCollection);
     });
 
     it('should update the collection when an item is changed in the array', function() {
-      // act
       meteorArray[0].a = 888;
-
       $rootScope.$apply();
-
-      // assert
       expect(meteorArray).toEqualCollection(MyCollection);
     });
 
     it('should update the collection when an item is removed from the array', function() {
-      // act
       meteorArray.splice(0, 1);
-
       $rootScope.$apply();
-
-      // assert
       expect(meteorArray).toEqualCollection(MyCollection);
     });
   });
 
+
   describe('observe server changes', function() {
 
+    // Cleaning up after each test.
     beforeEach(function() {
-      // Cleaning up after each test.
       bigCollection.find({}).forEach(function(doc) {
         bigCollection.remove(doc._id);
       });
-
       for (var i = 0; i < 100; i++) {
         bigCollection.insert({count: i});
       }
     });
 
     it('$apply executed twice', function() {
-
       var $ngCol = $meteorCollection(bigCollection);
-
       expect($rootScope.$apply).toHaveBeenCalled();
-
       expect($ngCol).toEqualCollection(bigCollection);
 
       // No matter how much elements MyCollection contains
       // $rootScope.$apply should be called twice.
       expect($rootScope.$apply.calls.count()).toEqual(2);
-
     });
 
     it('push updates from client handled correctly', function() {
-
       $rootScope.limit = 10;
       var $ngCol = $meteorCollection(function() {
         return bigCollection.find({}, {
@@ -231,14 +307,12 @@ describe('$meteorCollection service', function() {
       }
 
       $timeout.flush();
-
       expect($ngCol.length).toEqual(10);
       expect($ngCol.save).toHaveBeenCalled();
       expect($ngCol.save.calls.count()).toEqual(6);
     });
 
     it('remove updates from client handled correctly', function() {
-
       $rootScope.limit = 10;
       var $ngCol = $meteorCollection(function() {
         return bigCollection.find({}, {
@@ -259,8 +333,8 @@ describe('$meteorCollection service', function() {
       expect($ngCol.remove).toHaveBeenCalled();
       expect($ngCol.remove.calls.count()).toEqual(2);
     });
-
   });
+
 
   describe('objects with $$hashkey', function() {
     it('should be saved to the collection when save is called', function(done) {
@@ -290,9 +364,9 @@ describe('$meteorCollection service', function() {
     });
   });
 
+
   describe('objects with date', function() {
     it('should be saved to the collection when save is called', function(done) {
-
       var itemChanged = meteorArray[0];
       itemChanged.a = new Date("October 13, 2014 11:13:00");
 
