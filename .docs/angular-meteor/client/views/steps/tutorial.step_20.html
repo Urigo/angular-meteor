@@ -28,7 +28,7 @@ Angular-Meteor provides us with the [$meteor.collectionFS API](/api/files) that 
 
 It supports several storage adapters for saving to the local filesystem, GridFS, or S3, and additional storage adapters can be created.
 
-So assuming you already have an Angular-Meteor project, we will starting by adding CollectionFS to our project by running the following command:
+So let's add image upload to our app! We will start by adding CollectionFS to our project by running the following command:
 ```
 meteor add cfs:standard-packages
 ```
@@ -38,13 +38,15 @@ In this example, we will use the GridFS as storage adapters, so we will add the 
 ```
 meteor add cfs:gridfs
 ```
-Node: you can find more information about Stores and Storage Adapters on the CollectionFS's GitHub repository.
+Note: you can find more information about Stores and Storage Adapters on the CollectionFS's GitHub repository.
 
 So now we have the CollectionFS support and the storage adapter - we need to create a CollectionFS object to handle our files.
-Note that you will need to define the collection as shared resource because you will need to use the collection in noth client and server side.
+Note that you will need to define the collection as shared resource because you will need to use the collection in both client and server side.
+
+### Creating the CollectionFS
 
 I create the model/images.js file, and define a regular CollectionFS object called "Images", also, I used the CollectionFS API that allows me to defined auth-rules.
-Finally, I publish the collection just like any other collection, in order to allow the client to subsribe to those images:
+Finally, I publish the collection just like any other collection, in order to allow the client to subscribe to those images:
 ```
 Images = new FS.Collection("images", {
   stores: [
@@ -80,92 +82,88 @@ if (Meteor.isServer) {
 
 ```
 
+And let's add the usage of $meteorCollectionFS to our core controller (`PartiesListCtrl`):
+```
+$scope.images = $meteor.collectionFS(Images, false, Images).subscribe('images');
+```
+
 So now we have the collection, we need to create a client-side that handles the images upload.
-Note: you can use basic HTML `<input type="file">`  or any other package as you want - you only need the HTML5 File object to be provided.
 
-So now we wil create `example.ng.html` "client" directory with a basic usage of HTML File input inside it:
-```
-    <div ng-controller="ExampleCtrl">
-      <input type="file" id="upload-file">
-    </div>
-``
+### Image Upload
 
-Now we need to create the main logic in our `example.js`, we will listen to "change" event on the File input and add the image to collection:
- ```
-angular.module('example', ['angular-meteor']);
-
-angular.module('example').controller('ExampleCtrl', ['$scope', function ($scope) {
-  $('#upload-file').bind("change", function (event) {
-    // TODO: Save the image
-  });
-}]);
-```
-
-Great! Now all we have to to is to use $meteorCollectionFS in order to get the CollectionFS we created.
-Note that the API of $meteorCollectionFS is the same of $meteorCollection, the only difference is that $meteorCollectionFS works with HTML File object.
-```
-angular.module('example').controller('ExampleCtrl', function ($meteor, $scope) {
-  $scope.images = $scope.$meteorCollectionFS(Images, false, Images);
-
-  $scope.addImages = function (files) {
-    $scope.images.save(files);
-  };
-});
-```
-
-And that's it! Now the file is uploaded!
-We can easily use ng-repeat or any other code to display our list, and use `url()` method to get the image url, for example:
-```
-    <table>
-      <thead>
-      <tr>
-        <th>File Name</th>
-        <th>Thumbnail</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr ng-repeat="image in images">
-        <td>{{image.original.name}}</td>
-        <td><img class="thumbnail" ng-src="{ { image.url() } }"></td>
-      </tr>
-      </tbody>
-    </table>
-```
-You can see the full example in the Angular-Meteor repository, under examples/collectionfs.
-No we will talk about some more abilities that we can add to our Images Upload page, many of them are the result of using AngularJS directives and Angular-Meteor.
-All of the following examples are implemented in the Step 20 of the Angular-Meteor-Socially.
-
-**Note that I used `$mdDialog` that opens when the user click "Add Photo" to the party, but the examples in this page does not include this in order to keep the code simple and easy to understand.**
-
-# #1: Drag-and-Drop
-We can use AngularJS directives that handles file upload and gives us more abilities such as drag & drop, file validation on the client side and some more.
+Note that you can use basic HTML `<input type="file">`  or any other package as you want - you only need the HTML5 File object to be provided.
+For our application, we would like to add ability to drag-and-drop images, so we can use AngularJS directives that handles file upload and gives us more abilities such as drag & drop, file validation on the client side and some more.
 In this example, I will use [ng-file-upload](https://github.com/danialfarid/ng-file-upload), which have many features for file upload.
 In order to do this, lets add the package to our project:
 ```
 meteor add danialfarid:ng-file-upload
 ```
 
-Now, lets add a dependency to our module:
+Now, lets add a dependency in the `app.js` file:
 ```
-angular.module('example', ['angular-meteor', 'ngFileUpload']);
+angular.module('socially',[
+  'angular-meteor',
+  /** ... more deps ... **/
+  'ngFileUpload'
+]);
 ```
 
-And just like in the directive's documentation, we will add an upload object to our HTML instead of regular File Input:
+Now, before adding the actual file upload to the client, let's add a `$mdDialog` that will show the file upload form, in the `partiesList.js` file:
 ```
-<div ngf-drop ngf-select
-  ngf-change="addImages($files)"
-  ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box"
-  ngf-multiple="false" ngf-allow-dir="false" ngf-accept="'image/*'"
-  ngf-drop-available="dropAvailable">
-    <div>Click here to select image</div>
-    <div>
-      <strong>OR</strong>
+$scope.openAddImageModal = function() {
+  $mdDialog.show({
+    controller: 'AddPhotoCtrl',
+    templateUrl: 'client/parties/views/add-photo-modal.ng.html',
+    scope: $scope.$new()
+  }).then(function(image) {
+    // We will add here later the logic to handle the link between the image and the party
+  });
+};
+```
+
+And add a button that calls our `openAddImageModal` function inside the create new party form:
+```
+<md-button class="md-raised" ng-click="openAddImageModal()">Add Photo</md-button>
+```
+
+As you can see, Now let's create the view for this dialog and add the `ng-file-upload` directive:
+```
+<md-dialog class="add-photo-dialog">
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Add Photos To Your Event</h2>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div>
+        <div ngf-drop ngf-select
+             ngf-change="addImages($files)"
+             ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box"
+             ngf-multiple="false" ngf-allow-dir="false" ngf-accept="'image/*'"
+             ngf-drop-available="dropAvailable">
+          <div>Click here to select image</div>
+          <div>
+            <strong>OR</strong>
+          </div>
+          <div ng-show="dropAvailable">You can also drop image to here</div>
+        </div>
+      </div>
+    </md-dialog-content>
+    <div class="md-actions" layout="row">
+      <span flex></span>
+      <md-button ng-click="close()" class="md-primary">
+        Done
+      </md-button>
+      <md-button ng-click="close()" class="md-warn">
+        Cancel
+      </md-button>
     </div>
-    <div ng-show="dropAvailable">You can also drop image to here</div>
-</div>
+  </form>
+</md-dialog>
 ```
 
-Also, in order to make the "drop-zone" look like a dropable area in my page, I added this CSS in `example.css` file:
+Also, in order to make the "drop-zone" look like a dropable area in my page, I added this CSS in the application stylesheet:
 ```
 .drop-box {
   background: #F8F8F8;
@@ -186,6 +184,21 @@ Also, in order to make the "drop-zone" look like a dropable area in my page, I a
 }
 ```
 
+The main code in this HTML is the usage of `addImages` function in the `nfg-change` attribute, because this is the function that handles the main logic of uploading the image.
+So let's create the controller (`addPhotoCtrl.js`) and implement this function:
+```
+angular.module("socially").controller("AddPhotoCtrl", ['$scope', '$meteor', '$rootScope', '$state', '$mdDialog',
+  function($scope, $meteor, $rootScope, $state, $mdDialog,) {
+    $scope.addImages = function (files) {
+      if (files.length > 0) {
+        $scope.images.save(files[0]);
+      }
+    };
+
+    $scope.close = $mdDialog.hide;
+  }]);
+```
+
 I also used ngfChange attribute to know when the user chooses a file, the callback is addImages($files), so lets add this to our `example.js` file instead of using "change" event:
 ```
 $scope.addImages = function (files) {
@@ -194,123 +207,11 @@ $scope.addImages = function (files) {
 ```
 
 And that's it! now we can upload images by using drag and drop!
-You can find the full code of this example under Angular-Meteor repository, in the examples/drag-and-drop-image-upload directory.
 
-# #2: Metadata
-Using CollectionFS, we can also save metadata on the files we store.
-In order to to that, we just need to add the name of the property to the File object before we upload it.
+Now let's add some more cool features!
 
-A common example for metadata for images is description. let's see how we can do that.
+### Image Crop
 
-## Add Description
-Using CollectionFS, we can set any metadata on our File object, and then save in on the collection.
-In order to do that really nice and user-friendly, I used [angular-xeditable](https://github.com/vitalets/angular-xeditable).
-Lets add the angular-xeditable package to our project:
-```
-meteor add vitalets:angular-xeditable
-```
-And add a dependency in our module:
-```
-angular.module('example', ['angular-meteor', 'ngFileUpload', 'xeditable']);
-```
-
-Now, lets add some more style to our table, by creating a tile for each image (instead of table), with "Description" under it:
-```
-// example.ng.html
-<div class="images-tiles-container">
-  <div ng-repeat="image in images" class="image-tile">
-    <button ng-click="removeImage(image)" class="delete-button">X</button>
-    <img class="thumbnail" ng-src="{ { image.url() } }"><br />
-  </div>
-</div>
-
-// Add to example.css
-.image-tile {
-  float: left;
-  position: relative;
-  border: 1px solid cadetblue;
-  margin-right: 30px;
-  padding: 5px;
-}
-
-.delete-button {
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  background-color: white;
-}
-```
-
-And now lets add under the `img` tag the xeditable:
-```
-<img class="thumbnail" ng-src="{ { image.url() } }"><br />
-<a href="#" editable-text="image.metadata.description" onbeforesave="updateDescription($data, image)">{ { image.metadata.description || 'No Description' } }</a>
-```
-We will use the angular-xeditable ability to notify us and run a callback when the value changes, using `onbeforesave` attribute. The function will receive with the `$data` (the xeditable value) and `image` which is the current image.
-So lets implement the updateDescription method on our $scope. We will use the ability to run `update` function on CollectionFS File objects, and use `$set` to update our metadata, for more ways of doing it, you can read [this](https://github.com/CollectionFS/Meteor-CollectionFS/wiki/How-to:-Update-existing-file's-metadata) in CollectionFS wiki.
-```
-$scope.updateDescription = function($data, image) {
-  image.update({$set: {'metadata.description': $data}});
-};
-```
-
-That's it! Now we have a photo gallery with description for each image!
-You can find the full code of this example under Angular-Meteor repository, in the examples/collectionfs-metadata directory.
-
-## Order Images
-After we learned how to use CollectionFS metadata and how to update metadata values, we can also add an ability to sort and update the images order.
-To get the ability to sort the images, let's use [angular-sortable-view](https://github.com/kamilkp/angular-sortable-view).
-
-Add the package by running this command:
-```
-meteor add netanelgilad:angular-sortable-view
-```
-And then add a dependency for the module:
-```
-angular.module('example', ['angular-meteor', 'ngFileUpload', 'xeditable', 'angular-sortable-view']);
-```
-
-The basics of angular-sortable-view is to add the `sv-?` attributes to our page, just like the examples in the `angular-sortable-view` repository, So let's do that:
-```
-    <div class="images-tiles-container" sv-root sv-part="images" sv-on-sort="updateOrder($indexFrom, $indexTo)">
-      <div ng-repeat="image in images" class="image-tile" sv-element>
-        <button ng-click="removeImage(image)" class="delete-button">X</button>
-        <img draggable="false" class="thumbnail" ng-src="{ { image.url()} }">
-        <!-- ... some more code ... -->
-      </div>
-    </div>
-```
-I use the `sv-on-sort` callback to know when the sort is done and which image moved to which position.
-Now let's implement the $scope function that will create and move the objects, this function orders the item in the new order and moves the items as needed.
-```
-$scope.updateOrder = function(indexFrom, indexTo) {
-  var imagesOrder = [];
-
-  angular.forEach($scope.images, function (image, index) {
-    image.metadata.order = index + 1;
-    imagesOrder.push({image: image, order: image.metadata.order});
-  });
-
-  var moved = $scope.images.splice(indexTo, 1)[0];
-  $scope.images.splice(indexFrom, 0, moved);
-
-  _.forEach(imagesOrder, function(imageOrder) {
-    imageOrder.image.update({ $set: { 'metadata.order': imageOrder.order } });
-  });
-};
-```
-
-And now let's add the actual order for the display by modifying the subscription of the collection:
-```
-$scope.images = $scope.$meteorCollectionFS(function() {
-  return Images.find({}, {sort: [['metadata.order', 'asc']]})
-}, false);
-```
-
-That's it! Now we have a photo gallery with the ability to sort our images!
-You can find the full code of this example under Angular-Meteor repository, in the examples/collectionfs-sortable directory.
-
-# #3: Edit image before save
 One of the most common actions we want to make with pictures is edit it before saving, we will add to our example ability to crop images before uploading them to the server.
 In this example, we will use [ngImgCrop](https://github.com/alexk111/ngImgCrop/) which provides us the ability to do that.
 So lets start by adding the package to our project:
@@ -319,7 +220,7 @@ meteor add alexk111:ng-img-crop
 ```
 And add a dependency in our module:
 ```
-angular.module('example', ['angular-meteor', /*...*/, 'ngImgCrop']);
+angular.module('socially', ['angular-meteor', /*...*/, 'ngImgCrop']);
 ```
 We want to perform the crop in the client side only, before saving it in the CollectionFS, so lets get the uploaded image, and instead of saving it in the server - we will get the Data Url of it, and use it in the ngImgCrop:
 ```
@@ -331,7 +232,7 @@ $scope.addImages = function (files) {
       $scope.$apply(function() {
         $scope.imgSrc = e.target.result;
         $scope.myCroppedImage = '';
-      })
+      });
     };
 
     reader.readAsDataURL(files[0]);
@@ -341,30 +242,198 @@ $scope.addImages = function (files) {
   }
 };
 ```
+
 We take the file object and used HTML5 FileReader API to read the file from the user on the client side, without uploading it to the server.
 Then we saved the DataURI of the image into a $scope variable.
-Next, we will need to use this DataURI with the ngImgCrop direcrtive as follow, and lets add a button that runs a $scope function to save the image:
+Next, we will need to use this DataURI with the ngImgCrop directive as follow:
 ```
-<div ng-if="imgSrc" class="ng-crop-container">
-  <img-crop image="imgSrc" result-image="$parent.myCroppedImage" area-type="square"></img-crop>
-  <button ng-click="saveCroppedImage()">Save</button>
+<div ng-show="imgSrc" class="ng-crop-container">
+  <img-crop image="imgSrc" result-image="myCroppedImage" area-type="square"></img-crop>
 </div>
 ```
-So now we have a upload button which give the user ability to pick a image and then edit and crop it, all we have to do is save it.
+
+And let's change the logic of the "Done" button to call a function that will actually save the edited image:
+```
+<md-button ng-click="saveCroppedImage()" ng-disabled="!imgSrc" class="md-primary">
+  Add Image
+</md-button>
+```
+
 In order to save, we need to implement `saveCroppedImage()` function. We will use the same `$meteorCollectionFS` API we used before, just use the `save` function.
 CollectionFS have the ability to receive DataURI and save it, just like a File object. So the implementation looks like that:
 ```
 $scope.saveCroppedImage = function() {
   if ($scope.myCroppedImage !== '') {
-    $scope.images.save($scope.myCroppedImage)
+    $scope.images.save($scope.myCroppedImage).then(function() {
+      $scope.uploadedImage = result[0]._id;
+      $scope.answer(true);
+    });
   }
 };
 ```
 
-And we are done! Now we have the ability to crop images and then save them using CollectionFS.
-You can find the full code of this example under Angular-Meteor repository, in the examples/collectionfs-crop directory.
+We will save the image call the `answer` function that just close the modal:
+```
+$scope.answer = function(saveImage) {
+  if (saveImage) {
+    $mdDialog.hide($scope.uploadedImage);
+  }
+  else {
+    if ($scope.uploadedImage) {
+      $scope.images.remove($scope.uploadedImage._id);
+    }
 
-# #4: Image Thumbnails
+    $mdDialog.hide();
+  }
+}
+```
+
+And because we can share the information from the recently closed dialog with the main view (the add party form), we can just the Promise of the `show` function and implement a logic that will save the list of images we want to attach to out party:
+```
+$mdDialog.show({
+  controller: 'AddPhotoCtrl',
+    templateUrl: 'client/parties/views/add-photo-modal.ng.html',
+    scope: $scope.$new(),
+  }).then(function(image) {
+    if (image) {
+      if (!$scope.newPartyImages) {
+        $scope.newPartyImages = [];
+      }
+
+      $scope.newPartyImages.push(image);
+    }
+})
+```
+
+And we are done! Now we have the ability to crop images and then save them using CollectionFS.
+
+### Display Uploaded Images
+
+Let's add a simple gallery to list the images in the new party form:
+```
+<div layout="row" class="images-container-title">
+  <div ng-show="!newPartyImages || newPartyImages.length === 0">Add photo by clicking "Add Photo"</div>
+  <div class="party-image-container" ng-repeat="image in newPartyImages">
+    <img draggable="false" ng-src="{ { image.url() } }"/><br/>
+  </div>
+</div>
+```
+
+Cool! We can the all the images we want to attach to the new party!
+
+Now let's add description to our images!
+
+### Images Metadata & Description
+
+Using CollectionFS, we can also save metadata on the files we store.
+In order to to that, we just need to update the image object with the value, on the `metadata` property of each image.
+
+In order to do that really nice and user-friendly, I used [angular-xeditable](https://github.com/vitalets/angular-xeditable).
+Lets add the angular-xeditable package to our project:
+```
+meteor add vitalets:angular-xeditable
+```
+And add a dependency in our module:
+```
+angular.module('socially', ['angular-meteor', /* ... */ 'xeditable']);
+```
+
+Now, let's use angular-xeditable and add usage under the image:
+```
+<img draggable="false" ng-src="{ { image.url() } }"/><br/>
+<a href="#" editable-text="image.metadata.description"
+   onbeforesave="updateDescription($data, image)">{ { image.metadata.description || 'Click to add description' } }</a>
+```
+
+And, of course, implement `updateDescription` function on the scope:
+```
+$scope.updateDescription = function($data, image) {
+  image.update({$set: {'metadata.description': $data}});
+};
+```
+
+That's it! Now we have a photo gallery with description for each image!
+
+### Sort Images
+
+After we learned how to use CollectionFS metadata and how to update metadata values, we can also add an ability to sort and update the images order.
+To get the ability to sort the images, let's use [angular-sortable-view](https://github.com/kamilkp/angular-sortable-view).
+
+Add the package by running this command:
+```
+meteor add netanelgilad:angular-sortable-view
+```
+And then add a dependency for the module:
+```
+angular.module('socially', ['angular-meteor', /* ... */ 'angular-sortable-view']);
+```
+
+The basics of angular-sortable-view is to add the `sv-?` attributes to our page, just like the examples in the `angular-sortable-view` repository, So let's do that:
+```
+<div layout="row" class="images-container-title" sv-root sv-part="newPartyImages" sv-on-sort="updateOrder($partTo)">
+  <div ng-show="!newPartyImages || newPartyImages.length === 0">Add photo by clicking "Add Photo"</div>
+  <div sv-element class="party-image-container" ng-repeat="image in newPartyImages">
+    <!-- Some more html -->
+  </div>
+</div>
+```
+I use the `sv-on-sort` callback to know when the sort is done and which image moved to which position, the $partTo is the array with indexes updated after the sort is done.
+
+Now let's implement the $scope function that will just save the order on the image as a local information, we will use it really soon.
+```
+$scope.updateOrder = function(sortedArr) {
+    angular.forEach(sortedArr, function(item, index) {
+      item.currentOrder = index;
+    });
+  };
+};
+```
+
+We can also add a highlight to the first image, which we will use as the main image, by adding an indication for that:
+```
+// HTML
+<div class="main-image" ng-show="$index === 0">Main Image</div>
+
+// CSS
+.main-image {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  background-color: #f8f8f8;
+}
+```
+
+So now we have image gallery with ability to edit and add images, add a description to the images, and ability to sort.
+Now we just need to add the logic that connect those images with that party we are creating!
+
+### Link Image To Object
+
+So as you know, we have all the images stored in `newPartyImages` array, we let's implement the `createParty` function, and save a link to the image with it's order:
+```
+$scope.createParty = function() {
+  $scope.newParty.owner = $rootScope.currentUser._id;
+
+  // Link the images and the order to the new party
+  if ($scope.newPartyImages && $scope.newPartyImages.length > 0) {
+    $scope.newParty.images = [];
+
+    angular.forEach($scope.newPartyImages, function(image) {
+      $scope.newParty.images.push({id: image._id, order: image.currentOrder})
+    });
+  }
+
+  // Save the party
+  $scope.parties.push($scope.newParty);
+
+  // Reset the form
+  $scope.newPartyImages = [];
+  $scope.newParty = {};
+};
+```
+
+And that's it!
+
+### Thumbnails
 Another common usage with images upload, is the ability to save thumbnails of the image as soon as we upload it.
 CollectionFS gives the ability to handle multiple Stores object, and perform manipulations before we save it in each store.
 You can find the full information about image manipulation in the [CollectionFS docs](https://github.com/CollectionFS/Meteor-CollectionFS#image-manipulation).
@@ -390,25 +459,11 @@ Images = new FS.Collection("images", {
 So now each image we upload will be saved also as thumbnail.
 All we have to do is use and display the thumbnail instead of the original image. We just need to add a param to `url()` method of File objects and decide which Store to use when creating the URL:
 ```
-<table>
-  <thead>
-  <tr>
-    <th>Name</th>
-    <th>Thumbnail</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr ng-repeat="image in images">
-    <td><a href="" ui-sref=".image({imageId: image._id})">{{image.original.name}}</a></td>
-    <td><a target="_blank" ng-href="{ { image.url({store: 'original'}) } }"><img ng-src="{ { image.url({store: 'thumbnail'}) } }"></a></td>
-    <td><button ng-click="removeImage(image)">X</button></td>
-  </tr>
-  </tbody>
-</table>
+<img ng-src="{ { image.url({store: 'thumbnail'}) } }">
 ```
 That's it! Now we added the ability to save thumbnails for the images and use them in the view!
-You can find the full code of this example under Angular-Meteor repository, in the examples/collectionfs-thumbnails directory.
 
+In addition to the angular-meteor-socially tutorial, you can find simple examples of each step of the tutorial in the Angular-Meteor repository, under examples/ directory.
 
   {{/markdown}}
     </do-nothing>
