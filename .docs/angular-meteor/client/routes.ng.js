@@ -93,6 +93,10 @@ angular.module("meteor-angular-docs").config(
           url: '/getReactively',
           template: UiRouter.template('api.getReactively.html')
         })
+        .state('api.getCollectionByName', {
+          url: '/getCollectionByName',
+          template: UiRouter.template('api.getCollectionByName.html')
+        })
         .state('api.meteor-include', {
           url: '/meteor-include',
           template: UiRouter.template('api.meteor-include.html')

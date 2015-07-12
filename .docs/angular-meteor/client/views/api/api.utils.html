@@ -8,23 +8,21 @@
     <do-nothing>
         {{#markdown}}
 
-# $meteorUtils
+# $meteor.autorun / $scope.$meteorAutorun
 
-A service which contains helpful utilities for angular-meteor applications
 
 ----
 
 ## Usage
 
-    $meteor.autorun( :scope, :function );  /  $scope.$meteorAutorun( :function );
-
-    $meteor.getCollectionByName( :collectionName );
+    $meteor.autorun( :scope, :function );
+    $scope.$meteorAutorun( :function );
 
 ----
 
 ## Methods
 
-<h3><p><code><span class="pln">autorun( :scope, :function );</span></code></p></h3>
+<h3><p><code><span class="pln">$meteor.autorun( :scope, :function );</span></code></p></h3>
 <h3><p><code><span class="pln">$scope.$meteorAutorun( :function );</span></code></p></h3>
 
 Wrapper function to Meteor's [Tracker.autorun](http://docs.meteor.com/#/full/tracker_autorun).
@@ -74,40 +72,13 @@ The two types of syntax works the same way.
 
 			$meteor.autorun($scope, function() {
           if ($scope.getReactively('currentUser')) {
-              $scope.userForScore = $scope.$meteorObject(Userinfo, {user_id: $scope.getReactively('currentUser')._id});//$rootScope.currentUser._id
+            //getting $rootScope.currentUser._id
+            $scope.userForScore =
+              $scope.$meteorObject(Userinfo, {user_id: $scope.getReactively('currentUser')._id});
           }
       });
 
 
-## Method
-
-<br>
-<h3><p><code><span class="pln">getCollectionByName( :collectionName );</span></code></p></h3>
-<br>
-
-#### Parameters
-
-<table class="variables-matrix input-arguments">
-<thead>
-<tr>
-  <th>Param</th>
-  <th>Type</th>
-  <th>Details</th>
-  <th>Required</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td>collectionName</td>
-  <td>
-    <a href="" class="label type-hint type-hint-string">string</a>
-  </td>
-  <td><p>The name of the collection you want to get back
-  </p></td>
-  <td><a href="" class="label type-hint type-hint-array">Yes</a></td>
-</tr>
-</tbody>
-</table>
 
 <br>
 
