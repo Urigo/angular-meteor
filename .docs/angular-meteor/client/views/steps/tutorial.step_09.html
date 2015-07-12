@@ -80,7 +80,7 @@ We have two ways of doing that:
 2. Using [AngularMeteorCollection's](/api/AngularMeteorCollection) subscribe function which is exactly the same but it's
 here just for syntactic sugar doesn't return a promise.
 
-Right now we don't need the promise so let's use the second way:
+Right now we don't need the promise, so let's use the second way:
 
     $scope.parties = $meteor.collection(Parties).subscribe('parties');
 
@@ -106,7 +106,7 @@ You can also resolve a subscription in state's resolve function:
 
 > Our publish function can also take parameters.  In that case, we would also need to pass the parameters from the client.
 >
-> For more information about the `$meteor.subscribe` service [click here](http://angularjs.meteor.com/api/subscribe)
+> For more information about the `$meteor.subscribe` service [click here](/api/subscribe)
 
 
 In the second parameter, our function uses the Mongo API to return the wanted documents (document are the JSON-style data structure of MongoDB).
@@ -141,7 +141,7 @@ In each of the users create a few public parties and a few private ones.
 Now log out and see which user sees which parties.
 
 
-In the next step, we will want to invite users to private parties. for that, we will need to get all the users, but only their emails without other data which will hurt their privacy.
+In the next step, we will want to invite users to private parties. For that, we will need to get all the users, but only their emails without other data which will hurt their privacy.
 
 So let's create another publish method for getting only the needed data on the user.
 
@@ -301,7 +301,7 @@ Please read more [here](http://www.meteorpedia.com/read/Understanding_Meteor_Pub
 
 We've added the support of privacy to our parties app.
 
-We also learned how to use the `Meteor.publish` command to control the data and permissions sent to the client
+We also learned how to use the `Meteor.publish` command to control permissions and the data sent to the client
 and how to subscribe to it with the $meteor.collection publish function.
 
 In the next step we will learn how to filter the users list in the client side with AngularJS filters and create a custom filter for our own needs.

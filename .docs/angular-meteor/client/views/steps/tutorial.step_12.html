@@ -22,10 +22,9 @@
 	    {{#markdown}}
 
 
-Now we are dealing with a few parties.
-But we need to support also a large number of parties.
+Currently we are dealing with a few parties, but we also need to support also a large number of parties.
 
-In that case, we want to have pagination support.
+Therefore, we want to have `pagination` support.
 
 With pagination we can break the array of parties down to pages so the user won't have to scroll down to find a party,
 but also and even more important, we can fetch only a few parties at a time instead of all the parties collection for better performance.
@@ -35,7 +34,7 @@ if we are in page 3, but we change how we sort the collection, we should get dif
 a search, there might be not enough results for 3 pages.
 
 For AngularJS developers, this chapter will show how powerful Meteor is.
-In the official AngularJS tutorial, we add sorting and search that works only on the client side, which in real world scenarios are not so helpful.
+In the official AngularJS tutorial, we added sorting and search that only worked on the client side, which in real world scenarios are not so helpful.
 Now, in this chapter we are going to perform a real-time search, sort and paginate that will run all the way to the server.
 
 # angular-meteor pagination support
@@ -47,7 +46,7 @@ To achieve server-based reactive pagination we need to have support for paginati
 That means that our publish function for the parties collection would have to change and also the way that we subscribe to that publication.
 So first let's take care of our server-side.
 
-In our parties.js file in the server directory we are going to add the `options` variable to the publish method like this:
+In our `parties.js` file in the server directory we are going to add the `options` variable to the publish method like this:
 
     Meteor.publish("parties", function (options) {
       return Parties.find({
@@ -81,7 +80,7 @@ But right now, we are subscribing to the collection in the short form which does
 
     $scope.parties = $meteor.collection(Parties).subscribe('parties');
 
-So first we need to add the [$meteor.subscribe](http://angularjs.meteor.com/api/subscribe) service and call it separately:
+So first we need to add the [$meteor.subscribe](/api/subscribe) service and call it separately:
 
     $scope.parties = $meteor.collection(Parties);
 
@@ -117,7 +116,7 @@ To do that we are going to replace the `Parties` collection parameter with a [cu
 
 Now we need a UI to change and move between the pages.
 
-In AngularJS's eco system there are a lot of directive for handling pagination.
+In AngularJS's eco system there are a lot of directives for handling pagination.
 
 Our personal favorite is [angular-utils-pagination](https://github.com/michaelbromley/angularUtils/tree/master/src/directives/pagination).
 
@@ -125,12 +124,12 @@ To add the directive add it's Meteor package to the project:
 
     meteor add angularutils:pagination
 
-Add it as a dependency to our Angular app in app.js:
+Add it as a dependency to our Angular app in `app.js`:
 
     angular.module('socially',['angular-meteor', 'ui.router', 'angularUtils.directives.dirPagination']);
 
 
-Now let's add the directive in parties-list.ng.html , change the ng-repeat of parties to this:
+Now let's add the directive in `parties-list.ng.html` , change the ng-repeat of parties to this:
 
     <li dir-paginate="party in parties | itemsPerPage: perPage" total-items="partiesCount.count">
 
@@ -138,26 +137,26 @@ and after the UL closes add this directive:
 
     <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
 
-as you can see, dir-paginate list takes the number of objects in a page (that we defined before) but also takes the total number items (we will get to that soon).
+As you can see, dir-paginate list takes the number of objects in a page (that we defined before) but also takes the total number items (we will get to that soon).
 With this bindings it calculates what buttons of pages it should display inside the dir-pagination-controls directive.
 
 On the dir-pagination-controls directive there is a method `on-page-change` and there we can call our own function.
 so we call `pageChanged` function with the new selection as a parameter.
 
-let's create the pageChanged function inside the partiesList controller (client/controllers/partiesList.js):
+Let's create the pageChanged function inside the partiesList controller `(client/controllers/partiesList.js)`:
 
     $scope.pageChanged = function(newPage) {
       $scope.page = newPage;
     };
 
-Now every time we will change the page, the scope variable will change accordingly and update the bind method that watches it.
+Now every time we change the page, the scope variable will change accordingly and update the bind method that watches it.
 
-* Notice that to buttons of the directive doesn't look very nice now because we haven't added any design and CSS to our application, we will do it later on.
+* Notice that the buttons of the directive doesn't look very nice now because we haven't added any design and CSS to our application, we will do it later on.
 
 # Getting total count of a collection
 
 Getting a total count of a collection might seem easy, but there is a problem.
-The client only holds the number of object that it subscribed to. that means that if the client is not subscribed to the whole array calling find().count on a collection will result in a partial count.
+The client only holds the number of object that it subscribed to. That means that if the client is not subscribed to the whole array calling find().count on a collection will result in a partial count.
 
 So we need access in the client for the total count even if we are not subscribed to the whole collection.
 
@@ -166,7 +165,7 @@ For that we can use the [tmeasday:publish-counts](https://github.com/percolatest
     meteor add tmeasday:publish-counts
 
 
-That package helps to publish the count of a cursor, in real time without dependency on the subscribe method.
+This package helps to publish the count of a cursor, in real time without dependency on the subscribe method.
 
 Inside the `server/parties.js` file, add the following code inside the `Meteor.publish("parties" ` function, at the beginning of the function. before the existing return statement:
 
@@ -215,7 +214,7 @@ number of parties.
 * We are passing `{ noReady: true }` in the last argument so that the publication will be ready only after the our main cursor is ready - [readiness](https://github.com/percolatestudio/publish-counts#readiness).
 
 Now on the client we have access to the Counts collection.
-let's save that in the `client/controllers/partiesList.js` file when the subscription finishes successful (using the promise $meteor.subscribe returns):
+Let's save that in the `client/controllers/partiesList.js` file when the subscription finishes successful (using the promise $meteor.subscribe returns):
 
     $meteor.subscribe('parties', {
       limit: parseInt($scope.perPage),
@@ -226,7 +225,7 @@ let's save that in the `client/controllers/partiesList.js` file when the subscri
     });
 
 
-Now the partiesCount will hold the number of parties and will send it to the directive in the parties-list.ng.html (which we already defined earlier).
+Now the partiesCount will hold the number of parties and will send it to the directive in the `parties-list.ng.html` (which we already defined earlier).
 
 But there is a problem - try to create a few parties and then change pages...  the subscription won't run again!
 
@@ -238,10 +237,11 @@ This means that is a [reactive variable](http://docs.meteor.com/#/full/reactivev
 
 But Angular's scope variables are only watched by Angular and are not reactive vars for Meteor...
 
-For that angular-meteor created [getReactively](http://angularjs.meteor.com/api/getReactively) - a way to make an Angular scope variable to a reactive variable.
+For that angular-meteor created [getReactively](/api/getReactively) - a way to make an Angular scope variable to a reactive variable.
 
-So first, in order to make the subscription run each time something changes in one of the parameters, we need to place it inside an autorun block.
-To do that, we are going to use the [$meteor.autorun](http://angularjs.meteor.com/api/utils) function:
+In order to make the subscription run each time something changes in one of the parameters, we need to place it inside an autorun block.
+
+To do that, we are going to use the [$meteor.autorun](/api/utils) function:
 
     $meteor.autorun($scope, function() {
 
@@ -255,7 +255,7 @@ To do that, we are going to use the [$meteor.autorun](http://angularjs.meteor.co
 
     });
 
-But this still won't help us because there is no reactive variables inside.  so let's use [getReactively](http://angularjs.meteor.com/api/getReactively) for that:
+But this still won't help us because there is no reactive variables inside, so let's use [getReactively](/api/getReactively) for that:
 
     $meteor.autorun($scope, function() {
 
@@ -269,7 +269,7 @@ But this still won't help us because there is no reactive variables inside.  so 
 
     });
 
-What's happening here is that getReactively returns a reactive variable that fires a changed event every time the scope variable changes,
+What's happening here is that `getReactively` returns a reactive variable that fires a changed event every time the scope variable changes,
 and then autorun knows to execute it's given function again.
 This will cause the subscription to re-run again with the new options parameter and we will get the correct data from the server.
 
@@ -334,7 +334,7 @@ line at two places where we are using `find`, in publish Counts and in the retur
 
     'name' : { '$regex' : '.*' + searchString || '' + '.*', '$options' : 'i' },
 
-So server/parties.js should look like that:
+So `server/parties.js` should look like that:
 
     Meteor.publish("parties", function (options, searchString) {
       if (searchString == null)
@@ -401,9 +401,9 @@ The reason is that we are calling a different subscription on the same collectio
 
 So to fix that, we will have to close that subscription after the partyDetails controller is destroyed.
 
-Web can do that be calling **$scope.$meteorSubscribe** method. it will **automatically close** the subscription when the scope gets destroyed.
+We can do that by the calling `$scope.$meteorSubscribe` method. It will **automatically close** the subscription when the scope gets destroyed.
 
-First remove to subscription from $meteor.object:
+First remove the subscription from $meteor.object:
 
     $scope.party = $meteor.object(Parties, $stateParams.partyId);
 

@@ -27,7 +27,7 @@ Like other types of files, Meteor gathers all CSS files for the client will get 
 
 Meteor also pre-process the CSS files and minifies them (in development it doesn't for easier debugging).
 
-Meteor also supports [LESS](http://lesscss.org/) as it's the default CSS pre-processor (the package is maintain by Meteor team themselves).
+Meteor also supports [LESS](http://lesscss.org/) as its default CSS pre-processor (the package is maintained by the Meteor team themselves).
 
 LESS extends CSS with dynamic behavior such as variables, mixins, operations and functions. It allows for more compact stylesheets and helps reduce code duplication in CSS files.
 
@@ -43,7 +43,7 @@ Then change the background color of our app:
       background-color: rgba(0,0,0,.04);
     }
 
-run the app and see your background color changed.
+Run the app and see your background color changed.
 
 # CSS Frameworks
 
@@ -60,7 +60,7 @@ Let's add Bootstrap Meteor package to our project:
 
 Now let's start organizing by putting the Home link and the login buttons inside a navbar and the rest of the content inside a Bootstrap .container class.
 
-Inside index.html surround the H1 and the loginButton with a header like that:
+Inside `index.html` surround the H1 and the loginButton with a header like that:
 
     <body>
 
@@ -86,13 +86,13 @@ Converting to Bootstrap doesn't stop here. By applying bootstrap styles to vario
 
 OK, simple styling works, but we want to be able to use [LESS](http://lesscss.org/).
 
-First change the file name from main.css to main.less.  now add the LESS package in the command line:
+First change the file name from main.css to `main.less`.  Now add the LESS package in the command line:
 
     meteor add less
 
-Test that everything still works the same.
+Test that everything still works as before.
 
-Now go to main.less and add a different background color to the navbar:
+Now go to `main.less` and add a different background color to the navbar:
 
     body {
       background-color: rgba(0,0,0,.2);
@@ -103,7 +103,7 @@ Now go to main.less and add a different background color to the navbar:
       }
     }
 
-notice that we nested the .navbar inside the body. this is part of the [LESS syntax for nested rules](http://lesscss.org/features/#features-overview-feature-nested-rules).
+Notice that we nested the .navbar inside the body. This is part of the [LESS syntax for nested rules](http://lesscss.org/features/#features-overview-feature-nested-rules).
 
 # Designing the parties list
 
@@ -124,7 +124,7 @@ For the rest of the styling changes please take a look at the diff between the s
 
 # Summary
 
-So we learned how to use CSS, LESS and Bootstrap in Meteor.
+Ee learned how to use CSS, LESS and Bootstrap in Meteor.
 
       {{/markdown}}
     </do-nothing>

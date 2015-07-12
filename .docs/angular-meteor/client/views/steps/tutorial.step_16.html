@@ -52,7 +52,7 @@ Now let's add a map the `party-details.ng.html` , first add this HTML snippet to
         </div>
 
 Here we created the google-map directive with attributes for biding the center, handling events and zoom of the map.
-So let's define those variables in our scope. go to `partyDetails.js`.
+So let's define those variables in our scope. Go to `partyDetails.js`.
 
 Inside we will create the $scope.map variable to hold the properties on the map:
 
@@ -65,7 +65,7 @@ Inside we will create the $scope.map variable to hold the properties on the map:
       events: {}
     };
 
-To display a Google Map widget we have to define it's height and width. let's do that now.
+To display a Google Map widget we have to define it's height and width. Let's do that now.
 Create a new file named parties.css inside a new folder called `styles` placed like this `client->parties->styles` and place to following CSS code inside:
 
     .angular-google-map-container {
@@ -74,11 +74,11 @@ Create a new file named parties.css inside a new folder called `styles` placed l
     }
 
 
-Now run the app and go to the party details page. you should see a new Google Map widget.  but it doesn't do anything yet.
+Now run the app and go to the party details page. You should see a new Google Map widget, but it doesn't do anything yet.
 
 Let's add a marker that will be binded to the party's location.
 
-inside party-details.ng.html:
+Inside `party-details.ng.html`:
 
 
     <div class="angular-google-map-container">
@@ -91,16 +91,16 @@ inside party-details.ng.html:
     </div>
 
 
-the ui-gmap-marker directive represents a marker inside the map. we use the following attributes:
+The ui-gmap-marker directive represents a marker inside the map. We use the following attributes:
 
 * coords - where is the scope the marker location will be binded to.
-* options - object that holds the marker options. we are going to use the draggable option.
-* events - handling the events on the marker, we will use the click event.
+* options - object that holds the marker options. We are going to use the draggable option.
+* events - handling the events on the marker. We will use the click event.
 * idKey - where in the scope there exists the unique id of the object that the marker represent.
 
-so let's extend our $scope.map variable to include handling those options:
+Let's extend our $scope.map variable to include handling those options:
 
-inside partyDetails.js:
+Inside `partyDetails.js`:
 
     $scope.map = {
       center: {
@@ -138,12 +138,12 @@ inside partyDetails.js:
 
 What happened here:
 
-* We added the click event to the map. event time the user clicks the map, we take the location from the click event's params and save it as the party's new location.
-notice that in the end we call $scope.$apply();  this is because that event comes outside of Angular and we need to let Angular know that something has change so it will run another $digest cycle.
+* We added the click event to the map. Every time the user clicks the map, we take the location from the click event's params and save it as the party's new location.
+Notice that in the end we call $scope.$apply();  this is because that event comes outside of Angular and we need to let Angular know that something has change so it will run another $digest cycle.
 * We defined the options object under the marker to specify the marker is draggable.
-* We handled the dragend event that happens when the marker is droped in a new location. we take the location from the event's params and save it as the party's new location.
+* We handled the dragend event that happens when the marker is droped in a new location. We take the location from the event's params and save it as the party's new location.
 
-Again, with the great Meteor platform there is no need for sync or save function. we just set it and it syncs in all other clients.
+Again, with the great Meteor platform there is no need for sync or save function. We just set it and it syncs in all other clients.
 
 Test it to see clicking and dragging works.
 
@@ -152,7 +152,7 @@ Test it to see clicking and dragging works.
 
 Now let's add a map to the parties list to show all the parties on the map.
 
-So let's add the directives to parties-list.ng.html:
+So let's add the directives to `parties-list.ng.html`:
 
       <div class="angular-google-map-container">
         <ui-gmap-google-map center="party.location || map.center" zoom="map.zoom">
@@ -162,10 +162,10 @@ So let's add the directives to parties-list.ng.html:
         </ui-gmap-google-map>
       </div>
 
-add it under the search and sorting div.
+Add it under the search and sorting div.
 
-You can see that the difference between the directive we used in party-details.ng.html is that ui-gmap-markers is plural.
-the attributes we use:
+You can see that the difference between the directive we used in `party-details.ng.html` is that ui-gmap-markers is plural.
+The attributes we use:
 
 * models - the scope array that the markers represent.
 * coords - the property the holds the location.
@@ -174,7 +174,7 @@ the attributes we use:
 * idKey - the property that holds the unique id of the array
 * doRebuildAll - a refresh option, will help us to refresh the markers in search
 
-Now, inside partiesList.js let's add the following code to the parties subscription promise return:
+Now, inside `partiesList.js` let's add the following code to the parties subscription promise return:
 
     $meteor.autorun($scope, function() {
       $meteor.subscribe('parties', {
@@ -209,9 +209,9 @@ Now, inside partiesList.js let's add the following code to the parties subscript
 
 # Summary
 
-Run the app.  look at how little code we needed to add maps support to our app.
+Run the app.  Look at how little code we needed to add maps support to our app.
 
-AngularJS has huge eco system full of great directives like the angular-google-maps one.
+AngularJS has a huge eco system full of great directives like the angular-google-maps one.
 
 
       {{/markdown}}

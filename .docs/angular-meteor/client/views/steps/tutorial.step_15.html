@@ -94,7 +94,7 @@ Now lets hide the 'Users to invite' inside `party-details.ng.html` is case the u
 
 To do that we will create a scope function that returns a boolean and associate it with `ng-show`:
 
-Create a new function inside partyDetailsCtrl inside the partyDetails.js file named `canInvite`:
+Create a new function inside partyDetailsCtrl inside the `partyDetails.js` file named `canInvite`:
 
     $scope.canInvite = function (){
       if (!$scope.party)

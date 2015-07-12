@@ -23,7 +23,7 @@
 
 In this step we will consider switching from *Twitter Bootstrap* to [*angular-material*](https://material.angularjs.org/#/).
 
-Angular-material is an AngularJS implementation of the Google's [Material Design specifications](http://www.google.com/design/spec/material-design/introduction.html). Material Design is a mobile-first design language used in many new Google's applications, especially on the Android platform.
+Angular-material is an AngularJS implementation of Google's [Material Design specifications](http://www.google.com/design/spec/material-design/introduction.html). Material Design is a mobile-first design language used in many new Google's applications, especially on the Android platform.
 
 To start, first we have to remove bootstrap from our application. Type in the console:
 
@@ -33,7 +33,7 @@ Now we have to add the angular-material Meteor package:
 
     meteor add angular:angular-material
 
-Next, we want to inject the angular-material module to our Angular application. Edit your `client/lib/app.js` and add `ngMaterial`:
+Next, we want to inject the angular-material module into our Angular application. Edit your `client/lib/app.js` and add `ngMaterial`:
 
       angular.module('socially',[
 	      'angular-meteor',
@@ -404,7 +404,7 @@ From now on, each `$scope.` variable or method will be declared as `vm.` variabl
 
 We created a `credentials` object containing email and password that will be passed to us from the view. We created a `login` method that will execute the user log in.
 
-You can see a list of API methods for users management provided by `angular-meteor` [here](http://angularjs.meteor.com/api/auth).
+You can see a list of API methods for users management provided by `angular-meteor` [here](/api/auth).
 
 Just as we did in the `logout` route, here we utilize an `angular-meteor` method `$meteor.loginWithPassword()` which takes two arguments
 
@@ -526,7 +526,7 @@ Create a file `client/users/controllers/reset.js` and paste the following code i
     	
     	  vm.error = '';
     	  
-    	  vm.register = function (){
+    	  vm.reset = function (){
     		  $meteor.forgotPassword(vm.credentials.email).then(
     	        function(){
     	          $state.go('parties');

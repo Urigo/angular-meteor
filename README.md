@@ -21,8 +21,9 @@
 - [Change Log, updates and breaking changes](https://github.com/Urigo/angular-meteor/releases)
 - [Roadmap - Trello board](https://trello.com/b/Wj9U0ulk/angular-meteor)
 - [angular-meteor Blog](https://medium.com/angular-meteor)
-- [angular-meteor Yeoman generator](https://github.com/ndxbxrme/generator-angular-meteor)
+- Starters - [angular-meteor Yeoman generator](https://github.com/ndxbxrme/generator-angular-meteor), [Angular-Meteor-Boilerplate with TypeScript](https://github.com/ShMcK/Angular-Meteor-Boilerplate)
 - [Meteor package - urigo:angular](https://atmospherejs.com/urigo/angular)
+- [Angular-Meteor Platform](https://github.com/planet-training/angular-meteor-platform) - No Blaze, plain HTML
 - [Awesome Meteor](https://github.com/Urigo/awesome-meteor) - A curated, community driven list of awesome Meteor packages, libraries, resources and shiny thing
 
 ## Contributing

@@ -27,7 +27,8 @@ angularMeteorUtils.service('$meteorUtils', [ '$timeout',
     this.stripDollarPrefixedKeys = function (data) {
       if( !angular.isObject(data) ||
         data instanceof Date ||
-        (angular.isDefined(FS) && angular.isDefined(FS.File) && data instanceof FS.File)) {
+        data instanceof File ||
+        (typeof FS === 'object' && data instanceof FS.File)) {
         return data;
       }
       var out = angular.isArray(data)? [] : {};
