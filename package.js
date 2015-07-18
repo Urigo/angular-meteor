@@ -72,6 +72,7 @@ Package.onTest(function(api) {
     'tests/integration/angular-meteor-session-spec.js',
     'tests/integration/angular-meteor-diff-array-spec.js',
     'tests/integration/angular-meteor-collection-spec.js',
+    'tests/integration/angular-meteor-object-spec.js',
     'tests/integration/angular-meteor-reactive-scope-spec.js',
     'tests/integration/angular-meteor-utils-spec.js',
     'tests/integration/test_collections.js'
