@@ -48,6 +48,7 @@ retry@1.0.3
 routepolicy@1.0.5
 session@1.1.0
 showdown@1.0.4
+simple:highlight.js@1.0.9
 spacebars@1.0.6
 spacebars-compiler@1.0.6
 templating@1.1.1
