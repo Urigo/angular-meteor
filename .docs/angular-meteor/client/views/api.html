@@ -1,39 +1,41 @@
 <template name="api.html">
-  <div class="container tutorial-container">
-    <div class="row">
-      <div class="col-md-3 menu">
-        <h2><a href="/api">API</a></h2>
-        <ul class="nav">
-          <li><a href="/api/meteorCollection">$meteor.collection</a></li>
-          <li><a href="/api/AngularMeteorCollection">AngularMeteorCollection</a></li>
-          <li><a href="/api/meteorObject">$meteor.object</a></li>
-          <li><a href="/api/AngularMeteorObject">AngularMeteorObject</a></li>
-          <li><a href="/api/subscribe">$meteor.subscribe</a></li>
-          <li><a href="/api/methods">$meteor.call</a></li>
-          <li><a href="/api/auth">User Authentication</a></li>
-          <li><a href="/api/getReactively">$scope.getReactively</a></li>
-          <li><a href="/api/meteor-include">meteor-include directive</a></li>
-          <li><a href="/api/files">CollectionFS</a></li>
-          <li><a href="/api/utils">$meteorUtils</a></li>
-          <li><a href="/api/camera">$meteorCamera</a></li>
-          <li><a href="/api/session">$meteor.session.bind</a></li>
-        </ul>
-        <h2><a href="https://docs.angularjs.org/api">AngularJS API Reference</a></h2>
-        <h2><a href="https://docs.meteor.com/#/full/">Meteor Docs</a></h2>
-      </div>
-      <div class="col-md-9 main-tutorial">
-        <div ui-view>
+    <div class="container tutorial-container">
+        <div class="row">
+            <div class="col-md-3 menu">
+                <h2><a href="/api">API</a></h2>
+                <ul class="nav">
+                    <li><a href="/api/meteorCollection">$meteor.collection</a></li>
+                    <li><a href="/api/AngularMeteorCollection">AngularMeteorCollection</a></li>
+                    <li><a href="/api/meteorObject">$meteor.object</a></li>
+                    <li><a href="/api/AngularMeteorObject">AngularMeteorObject</a></li>
+                    <li><a href="/api/subscribe">$meteor.subscribe</a></li>
+                    <li><a href="/api/methods">$meteor.call</a></li>
+                    <li><a href="/api/auth">User Authentication</a></li>
+                    <li><a href="/api/getReactively">$scope.getReactively</a></li>
+                    <li><a href="/api/meteor-include">meteor-include directive</a></li>
+                    <li><a href="/api/files">Files</a></li>
+                    <li><a href="/api/utils">$meteor.autorun</a></li>
+                    <li><a href="/api/getCollectionByName">$meteor.getCollectionByName</a></li>
+                    <li><a href="/api/camera">Camera</a></li>
+                    <li><a href="/api/session">$meteor.session.bind</a></li>
+                </ul>
+                <h2><a href="https://docs.angularjs.org/api">AngularJS API Reference</a></h2>
 
-          <h1>Angular-Meteor API</h1>
+                <h2><a href="https://docs.meteor.com/#/full/">Meteor Docs</a></h2>
+            </div>
+            <div class="col-md-9 main-tutorial">
+                <div ui-view>
 
-          <p>Browse the Angular-Meteor API to to find things you need.
-          </p>
+                    <h1>Angular-Meteor API</h1>
 
-          <p>New here? Check out our <a href="/tutorial/">tutorial</a> to get started.
-          </p>
+                    <p>Browse the Angular-Meteor API to to find things you need.
+                    </p>
+
+                    <p>New here? Check out our <a href="/tutorial/">tutorial</a> to get started.
+                    </p>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 
 </template>
