@@ -113,6 +113,10 @@ angular.module("meteor-angular-docs").config(
           url: '/collection-pagination',
           template: UiRouter.template('api.collection-pagination.html')
         })
+        .state('api.ngFileExtension', {
+          url: '/ngFileExtension',
+          template: UiRouter.template('api.ngFileExtension.html')
+        })
       .state('tutorial', {
         abstract: true,
         url: '/tutorial',

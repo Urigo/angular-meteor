@@ -177,4 +177,8 @@
     <loc>http://angular-meteor.com/api/session</loc>
     <priority>0.5</priority>
   </url>
+  <url>
+    <loc>http://angular-meteor.com/api/ngFileExtension</loc>
+    <priority>0.5</priority>
+  </url>
 </urlset>
