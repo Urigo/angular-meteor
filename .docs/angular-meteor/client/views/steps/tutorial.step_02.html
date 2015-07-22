@@ -47,11 +47,11 @@ __`index.ng.html`:__
 We replaced the hard-coded party list with the [ngRepeat](https://docs.angularjs.org/api/ng/directive/ngRepeat) directive and two Angular expressions:
 
 * The `ng-repeat="party in parties"` attribute in the `li` tag is an Angular repeater directive. The repeater tells Angular to create a `li` element for each party in the list using the `li` tag as the template.
-* The expressions wrapped in double-curly-braches ( `{{dstache}}party.name}}` and `{{dstache}}party.description}}` ) will be replaced by the value of the expressions.
+* The expressions wrapped in double-curly-braces ( `{{dstache}}party.name}}` and `{{dstache}}party.description}}` ) will be replaced by the value of the expressions.
 
 We have added a new directive, called `ng-controller`, which attaches the `PartiesListCtrl` controller to the `div` tag. At this point:
 
-* The expressions in double-curly-braches are referring to our application model, which is set up in our `PartiesListCtrl` controller.
+* The expressions in double-curly-braces are referring to our application model, which is set up in our `PartiesListCtrl` controller.
 
 
 # Model and Controller
