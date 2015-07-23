@@ -1,0 +1,18 @@
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+.build*
+
+# IDE's #
+#########
+.idea
+
+.meteor/local/bower
+.coverage
+node_modules

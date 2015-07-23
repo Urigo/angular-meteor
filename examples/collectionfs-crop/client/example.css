@@ -1,0 +1,54 @@
+.img-container {
+    width: 1000px;
+}
+
+.img-responsive {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    vertical-align:bottom;
+}
+
+.thumbnail {
+    height: 112px;
+    width: 112px;
+}
+
+.ng-crop-container {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 80px;
+}
+
+.drop-box {
+    background: #F8F8F8;
+    border: 5px dashed #DDD;
+    width: 230px;
+    height: 65px;
+    text-align: center;
+    padding-top: 25px;
+    margin-left: 10px;
+}
+
+.drop-box.dragover {
+    border: 5px dashed blue;
+}
+
+.drop-box.dragover-err {
+    border: 5px dashed red;
+}
+
+.image-tile {
+    float: left;
+    position: relative;
+    border: 1px solid cadetblue;
+    margin-right: 30px;
+    padding: 5px;
+}
+
+.delete-button {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background-color: white;
+}

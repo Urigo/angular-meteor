@@ -1,0 +1,18 @@
+<head></head>
+<body ng-app="blaze-angular-scope"
+      ng-controller="AngularCtrl"
+      ng-include="'blaze-angular-scope.ng.html'">
+</body>
+
+<template name="partiesBlazeTemplate">
+  <div>
+    Angular parties inside Blaze:
+    {{#each parties}}
+      {{> party}}
+    {{/each}}
+  </div>
+</template>
+
+<template name="party">
+  <li>Name: {{name}} , Description: {{description}}</li>
+</template>

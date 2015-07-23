@@ -1,0 +1,15 @@
+.img-container {
+    width: 1000px;
+}
+
+.img-responsive {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    vertical-align:bottom;
+}
+
+.thumbnail {
+    height: 112px;
+    width: 112px;
+}
