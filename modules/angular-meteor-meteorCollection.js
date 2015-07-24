@@ -3,7 +3,7 @@
 var collectionUtils = {};
 
 var angularMeteorCollection = angular.module('angular-meteor.meteor-collection',
-  ['angular-meteor.subscribe', 'angular-meteor.utils', 'diffArray']);
+  ['angular-meteor.stopper', 'angular-meteor.subscribe', 'angular-meteor.utils', 'diffArray']);
 
 // The reason angular meteor collection is a factory function and not something
 // that inherit from array comes from here: http://perfectionkills.com/how-ecmascript-5-still-does-not-allow-to-subclass-an-array/
@@ -224,7 +224,7 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
     };
 
     return AngularMeteorCollection;
-  }]);
+}]);
 
 angularMeteorCollection.factory('$meteorCollectionFS', ['$meteorCollection', 'diffArray',
   function ($meteorCollection, diffArray) {
@@ -308,36 +308,14 @@ angularMeteorCollection.factory('$meteorCollection', [
     };
 
     return $meteorCollection;
-  }]);
+ }]);
 
-angularMeteorCollection.run([
-  '$rootScope', '$q', '$meteorCollection', '$meteorCollectionFS', '$meteorSubscribe',
-  function ($rootScope, $q, $meteorCollection, $meteorCollectionFS, $meteorSubscribe) {
-    var bindCollection = function ($collection) {
-      function $boundCollection() {
-        var args = Array.prototype.slice.call(arguments);
-        var collection = $collection.apply(this, args);
-        angular.extend(collection, $boundCollection);
-
-        this.$on('$destroy', function () {
-          collection.stop();
-          if (collection.subscription) collection.subscription.stop();
-        });
-
-        return collection;
-      }
-
-      $boundCollection.subscribe = function() {
-        var args = Array.prototype.slice.call(arguments);
-        this.subscription = $meteorSubscribe._subscribe(this, $q.defer(), args);
-        return this;
-      };
-    };
-
+angularMeteorCollection.run(['$rootScope', '$meteorCollection', '$meteorCollectionFS', '$meteorStopper',
+  function ($rootScope, $meteorCollection, $meteorCollectionFS, $meteorStopper) {
     var scopeProto = Object.getPrototypeOf($rootScope);
-    scopeProto.$meteorCollection = bindCollection($meteorCollection);
-    scopeProto.$meteorCollectionFS = bindCollection($meteorCollectionFS);
-  }]);
+    scopeProto.$meteorCollection = $meteorStopper($meteorCollection);
+    scopeProto.$meteorCollectionFS = $meteorStopper($meteorCollectionFS);
+ }]);
 
 // Local utilities
 
