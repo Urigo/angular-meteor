@@ -260,7 +260,7 @@ angularMeteorCollection.factory('$meteorCollection', [
 
       diffArrayFunc = diffArrayFunc || diffArray;
       var ngCollection = new AngularMeteorCollection(reactiveFunc(), collection, diffArrayFunc);
-      ngCollection.auto = auto !== false;
+      ngCollection._auto = auto !== false;
       ngCollection.diffArrayFunc = diffArrayFunc || diffArray;
       angular.extend(ngCollection, $meteorCollection);
 
@@ -273,14 +273,14 @@ angularMeteorCollection.factory('$meteorCollection', [
         });
 
         ngCollection.updateCursor(reactiveFunc());
-        ngCollection.setAutoBind();
+        ngCollection._setAutoBind();
       });
 
       return ngCollection;
     }
 
-    $meteorCollection.setAutoBind = function() {
-      if (!this.auto) return;
+    $meteorCollection._setAutoBind = function() {
+      if (!this._auto) return;
 
       var self = this;
       this._isAutoBind = true;
@@ -302,7 +302,7 @@ angularMeteorCollection.factory('$meteorCollection', [
           self.unregisterAutoBind();
           collectionUtils.updateCollection(self, oldItems, self.diffArrayFunc);
 
-          self.setAutoBind();
+          self._setAutoBind();
         }
       }, true);
     };
