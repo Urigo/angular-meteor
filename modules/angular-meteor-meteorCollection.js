@@ -290,20 +290,15 @@ angularMeteorCollection.factory('$meteorCollection', [
           return 'UPDATING_FROM_SERVER';
         }
         return angular.copy(_.without(self, 'UPDATING_FROM_SERVER'));
-      }, function (newItems, oldItems) {
-        if (self._isAutoBind == false)
-          return;
-        if (newItems === 'UPDATING_FROM_SERVER' ||
-          oldItems === 'UPDATING_FROM_SERVER')
-          return;
+      }, function (items, oldItems) {
+        if (self._isAutoBind == false) return;
+        if (items === 'UPDATING_FROM_SERVER' || oldItems === 'UPDATING_FROM_SERVER') return;
+        if (items === oldItems) return;
 
-        if (newItems !== oldItems) {
-          self._isAutoBind = false;
-          self.unregisterAutoBind();
-          collectionUtils.updateCollection(self, oldItems, self.diffArrayFunc);
-
-          self._setAutoBind();
-        }
+        self._isAutoBind = false;
+        self.unregisterAutoBind();
+        collectionUtils.updateCollection(self, oldItems, self.diffArrayFunc);
+        self._setAutoBind();
       }, true);
     };
 

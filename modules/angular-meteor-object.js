@@ -1,6 +1,6 @@
 'use-strict';
 
-var angularMeteorObject = angular.module('angular-meteor.object', ['angular-meteor.utils', 'angular-meteor.subscribe']);
+var angularMeteorObject = angular.module('angular-meteor.object', ['angular-meteor.utils', 'angular-meteor.subscribe', 'getUpdates']);
 
 angularMeteorObject.factory('AngularMeteorObject', ['$q', '$meteorSubscribe', function($q, $meteorSubscribe) {
   // A list of internals properties to not watch for, nor pass to the Document on update and etc.
@@ -97,8 +97,8 @@ angularMeteorObject.factory('AngularMeteorObject', ['$q', '$meteorSubscribe', fu
 }]);
 
 
-angularMeteorObject.factory('$meteorObject', ['$rootScope', '$meteorUtils', 'AngularMeteorObject',
-  function($rootScope, $meteorUtils, AngularMeteorObject) {
+angularMeteorObject.factory('$meteorObject', ['$rootScope', '$meteorUtils', 'getUpdates', 'AngularMeteorObject',
+  function($rootScope, $meteorUtils, getUpdates, AngularMeteorObject) {
     function $meteorObject(collection, id, auto, options) {
       // Validate parameters
       if (!collection) {
@@ -123,16 +123,20 @@ angularMeteorObject.factory('$meteorObject', ['$rootScope', '$meteorUtils', 'Ang
         self.reset(true);
       });
 
-      // Deep watches the model and performs autobind.
+      // Deep watches the model and performs autobind
       this.unregisterAutoBind = this._auto && $rootScope.$watch(function(){
-        return _.omit(self, self.$$internalProps);
-      }, function (newItem, oldItem) {
-        if (newItem !== oldItem && newItem) {
-          var newItemId = newItem._id;
-          if (newItemId && !_.isEmpty(newItem = _.omit(angular.copy(newItem), '_id'))) {
-            collection.update({_id: newItemId}, {$set: newItem});
-          }
-        }
+        return self.getRawObject();
+      }, function (item, oldItem) {
+        if (item === oldItem) return;
+
+        var id = item._id;
+        delete item._id;
+        delete oldItem._id;
+
+        var updates = getUpdates(item, oldItem);
+        if (_.isEmpty(updates)) return;
+
+        collection.update({_id: id}, updates);
       }, true);
 
       this.unregisterAutoDestroy = $rootScope.$on('$destroy', function() {
