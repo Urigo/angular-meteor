@@ -37,13 +37,17 @@ describe('$meteorCollection service', function() {
     meteorArray = $meteorCollection(MyCollection, false);
   });
 
+  function applyInDelay(delay) {
+    setTimeout(function() {
+      $rootScope.$apply();
+    }, 2000);
+  }
 
   describe('initialisation', function() {
     it('should return an array with all items in the Mongo Collection', function() {
       expect(meteorArray).toEqualCollection(MyCollection);
     });
   });
-
 
   describe('collection updates', function() {
     it('should update the array when a new item is inserted into the collection', function() {
@@ -269,6 +273,33 @@ describe('$meteorCollection service', function() {
     });
   });
 
+  describe('testing remove() method', function() {
+    beforeEach(function() {
+      meteorArray = $meteorCollection(MyCollection);
+      $timeout.flush();
+    });
+
+    it('remove items different ways', function() {
+      var items = MyCollection.find({}).fetch();
+      var length = meteorArray.length;
+      meteorArray.remove(items[0]._id);
+      meteorArray.remove(items[1]);
+      $rootScope.$apply();
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect(meteorArray.length).toEqual(length - 2);
+    });
+
+    it('throws if not string or ObjectId', function() {
+        expect(function() {
+          meteorArray.remove(1231231);
+        }).toThrow();
+    });
+
+    it('removing with ObjectId', function() {
+      meteorArray.remove(new Mongo.ObjectID());
+    });
+  });
+
 
   describe('observe server changes', function() {
 
@@ -352,6 +383,11 @@ describe('$meteorCollection service', function() {
       }, function() {
         done();
       });
+
+      // To resolve promises $rootScope should apply.
+      // Since we are testing on real data we apply in some time
+      // to be sure promises ready.
+      applyInDelay(1000);
     });
 
     it('should save objects with nested $$haskey fields when save is called', function(done) {
@@ -361,6 +397,8 @@ describe('$meteorCollection service', function() {
       }, function() {
         done();
       });
+
+      applyInDelay(1000);
     });
   });
 
@@ -376,6 +414,8 @@ describe('$meteorCollection service', function() {
       }, function() {
         done();
       });
+
+      applyInDelay(1000); 
     });
 
     it('should save objects with nested date fields when save is called', function(done) {
@@ -385,6 +425,9 @@ describe('$meteorCollection service', function() {
       }, function() {
         done();
       });
+
+      applyInDelay(1000);
     });
   });
+
 });
