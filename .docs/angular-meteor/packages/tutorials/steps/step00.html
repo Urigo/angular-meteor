@@ -1,0 +1,49 @@
+<template name="meteor-step00">
+  <div id="content">
+          <h1 class="header" style="padding-bottom:10px;margin:0px">Installing Meteor on OS X, Linux and Windows</h1>
+          <h3 class="subhead" style="padding-top:0px">Current version: {{meteorVersion}}</h3>
+          <hr/>
+
+{{#markdown}}
+
+  Meteor supports **OS X, Windows, and Linux**, and is simple to install. The command line installer supports Mac OS X
+  10.7 (Lion) and above, and Linux on x86 and x86_64 architectures. The Windows installer supports Windows 7, Windows 8.1, Windows Server 2008, and Windows Server 2012.
+
+### On OS X or Linux?
+
+  Install the latest official Meteor release from
+  your terminal:
+
+```bash
+curl https://install.meteor.com/ | sh
+```
+
+### On Windows?
+
+  [Download the official Meteor installer
+  here](https://install.meteor.com/windows).
+
+
+###What Next?
+
+Now that you've installed Meteor, check out [the tutorial](/tutorials/blaze) that
+teaches you how to build a collaborative todo list app while showing you
+Meteor's most exciting and useful features. You can also read about [the
+design of the Meteor platform](/projects) or check out the
+[complete documentation](https://docs.meteor.com).
+
+{{/markdown}}
+
+<div class="row">
+  <hr />
+  <div class="col-md-6">
+    <p>Get on the mailing list - the latest Meteor news, new releases, critical security alerts, and nothing else.</p>
+  </div>
+  <div class="col-md-6">
+    {{> emailForm}}
+  </div>
+</div>
+
+</div>
+
+</template>

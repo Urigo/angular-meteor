@@ -1,0 +1,1431 @@
+From 8e14e687c3fe4add10f1d93215051d27faf3dd7c Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Tue, 14 Jul 2015 19:05:51 -0700
+Subject: [PATCH 01/34] Step 1: Run `meteor create`
+
+---
+ .meteor/.finished-upgraders |  8 ++++++++
+ .meteor/.gitignore          |  1 +
+ .meteor/.id                 |  7 +++++++
+ .meteor/packages            |  9 +++++++++
+ .meteor/platforms           |  2 ++
+ .meteor/release             |  1 +
+ .meteor/versions            | 48 +++++++++++++++++++++++++++++++++++++++++++++
+ simple-todos.css            |  1 +
+ simple-todos.html           | 14 +++++++++++++
+ simple-todos.js             | 23 ++++++++++++++++++++++
+ 10 files changed, 114 insertions(+)
+ create mode 100644 .meteor/.finished-upgraders
+ create mode 100644 .meteor/.gitignore
+ create mode 100644 .meteor/.id
+ create mode 100644 .meteor/packages
+ create mode 100644 .meteor/platforms
+ create mode 100644 .meteor/release
+ create mode 100644 .meteor/versions
+ create mode 100644 simple-todos.css
+ create mode 100644 simple-todos.html
+ create mode 100644 simple-todos.js
+
+diff --git a/.meteor/.finished-upgraders b/.meteor/.finished-upgraders
+new file mode 100644
+index 0000000..8a76103
+--- /dev/null
++++ b/.meteor/.finished-upgraders
+@@ -0,0 +1,8 @@
++# This file contains information which helps Meteor properly upgrade your
++# app when you run 'meteor update'. You should check it into version control
++# with your project.
++
++notices-for-0.9.0
++notices-for-0.9.1
++0.9.4-platform-file
++notices-for-facebook-graph-api-2
+diff --git a/.meteor/.gitignore b/.meteor/.gitignore
+new file mode 100644
+index 0000000..4083037
+--- /dev/null
++++ b/.meteor/.gitignore
+@@ -0,0 +1 @@
++local
+diff --git a/.meteor/.id b/.meteor/.id
+new file mode 100644
+index 0000000..9a3be4f
+--- /dev/null
++++ b/.meteor/.id
+@@ -0,0 +1,7 @@
++# This file contains a token that is unique to your project.
++# Check it into your repository along with the rest of this directory.
++# It can be used for purposes such as:
++#   - ensuring you don't accidentally deploy one app on top of another
++#   - providing package authors with aggregated statistics
++
++1v2pn7n1jbklfu1hg4tnm
+diff --git a/.meteor/packages b/.meteor/packages
+new file mode 100644
+index 0000000..99704e0
+--- /dev/null
++++ b/.meteor/packages
+@@ -0,0 +1,9 @@
++# Meteor packages used by this project, one per line.
++# Check this file (and the other files in this directory) into your repository.
++#
++# 'meteor add' and 'meteor remove' will edit this file for you,
++# but you can also edit it by hand.
++
++meteor-platform
++autopublish
++insecure
+diff --git a/.meteor/platforms b/.meteor/platforms
+new file mode 100644
+index 0000000..efeba1b
+--- /dev/null
++++ b/.meteor/platforms
+@@ -0,0 +1,2 @@
++server
++browser
+diff --git a/.meteor/release b/.meteor/release
+new file mode 100644
+index 0000000..dab6b55
+--- /dev/null
++++ b/.meteor/release
+@@ -0,0 +1 @@
++METEOR@1.1.0.2
+diff --git a/.meteor/versions b/.meteor/versions
+new file mode 100644
+index 0000000..410e1d9
+--- /dev/null
++++ b/.meteor/versions
+@@ -0,0 +1,48 @@
++autopublish@1.0.3
++autoupdate@1.2.1
++base64@1.0.3
++binary-heap@1.0.3
++blaze@2.1.2
++blaze-tools@1.0.3
++boilerplate-generator@1.0.3
++callback-hook@1.0.3
++check@1.0.5
++ddp@1.1.0
++deps@1.0.7
++ejson@1.0.6
++fastclick@1.0.3
++geojson-utils@1.0.3
++html-tools@1.0.4
++htmljs@1.0.4
++http@1.1.0
++id-map@1.0.3
++insecure@1.0.3
++jquery@1.11.3_2
++json@1.0.3
++launch-screen@1.0.2
++livedata@1.0.13
++logging@1.0.7
++meteor@1.1.6
++meteor-platform@1.2.2
++minifiers@1.1.5
++minimongo@1.0.8
++mobile-status-bar@1.0.3
++mongo@1.1.0
++observe-sequence@1.0.6
++ordered-dict@1.0.3
++random@1.0.3
++reactive-dict@1.1.0
++reactive-var@1.0.5
++reload@1.1.3
++retry@1.0.3
++routepolicy@1.0.5
++session@1.1.0
++spacebars@1.0.6
++spacebars-compiler@1.0.6
++templating@1.1.1
++tracker@1.0.7
++ui@1.0.6
++underscore@1.0.3
++url@1.0.4
++webapp@1.2.0
++webapp-hashing@1.0.3
+diff --git a/simple-todos.css b/simple-todos.css
+new file mode 100644
+index 0000000..b6b4052
+--- /dev/null
++++ b/simple-todos.css
+@@ -0,0 +1 @@
++/* CSS declarations go here */
+diff --git a/simple-todos.html b/simple-todos.html
+new file mode 100644
+index 0000000..b08c7c3
+--- /dev/null
++++ b/simple-todos.html
+@@ -0,0 +1,14 @@
++<head>
++  <title>simple-todos</title>
++</head>
++
++<body>
++  <h1>Welcome to Meteor!</h1>
++
++  {{> hello}}
++</body>
++
++<template name="hello">
++  <button>Click Me</button>
++  <p>You've pressed the button {{counter}} times.</p>
++</template>
+diff --git a/simple-todos.js b/simple-todos.js
+new file mode 100644
+index 0000000..4f8c65d
+--- /dev/null
++++ b/simple-todos.js
+@@ -0,0 +1,23 @@
++if (Meteor.isClient) {
++  // counter starts at 0
++  Session.setDefault('counter', 0);
++
++  Template.hello.helpers({
++    counter: function () {
++      return Session.get('counter');
++    }
++  });
++
++  Template.hello.events({
++    'click button': function () {
++      // increment the counter when button is clicked
++      Session.set('counter', Session.get('counter') + 1);
++    }
++  });
++}
++
++if (Meteor.isServer) {
++  Meteor.startup(function () {
++    // code to run on server at startup
++  });
++}
+-- 
+2.2.1
+
+
+From be5979a8eae5766f74314e57f41037f4977d1372 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Tue, 14 Jul 2015 19:07:22 -0700
+Subject: [PATCH 02/34] Step 2.1: Replace starter HTML code
+
+---
+ simple-todos.html | 19 +++++++++++++------
+ 1 file changed, 13 insertions(+), 6 deletions(-)
+
+diff --git a/simple-todos.html b/simple-todos.html
+index b08c7c3..95624e7 100644
+--- a/simple-todos.html
++++ b/simple-todos.html
+@@ -1,14 +1,21 @@
+ <head>
+-  <title>simple-todos</title>
++  <title>Todo List</title>
+ </head>
+ 
+ <body>
+-  <h1>Welcome to Meteor!</h1>
++  <div class="container">
++    <header>
++      <h1>Todo List</h1>
++    </header>
+ 
+-  {{> hello}}
++    <ul>
++      {{#each tasks}}
++        {{> task}}
++      {{/each}}
++    </ul>
++  </div>
+ </body>
+ 
+-<template name="hello">
+-  <button>Click Me</button>
+-  <p>You've pressed the button {{counter}} times.</p>
++<template name="task">
++  <li>{{text}}</li>
+ </template>
+-- 
+2.2.1
+
+
+From eda253878e20ba2577f28fe6fd7c3ce5090aec18 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Tue, 14 Jul 2015 19:07:50 -0700
+Subject: [PATCH 03/34] Step 2.2: Replace starter JS code
+
+---
+ simple-todos.js | 27 +++++++--------------------
+ 1 file changed, 7 insertions(+), 20 deletions(-)
+
+diff --git a/simple-todos.js b/simple-todos.js
+index 4f8c65d..871b655 100644
+--- a/simple-todos.js
++++ b/simple-todos.js
+@@ -1,23 +1,10 @@
+ if (Meteor.isClient) {
+-  // counter starts at 0
+-  Session.setDefault('counter', 0);
+-
+-  Template.hello.helpers({
+-    counter: function () {
+-      return Session.get('counter');
+-    }
+-  });
+-
+-  Template.hello.events({
+-    'click button': function () {
+-      // increment the counter when button is clicked
+-      Session.set('counter', Session.get('counter') + 1);
+-    }
+-  });
+-}
+-
+-if (Meteor.isServer) {
+-  Meteor.startup(function () {
+-    // code to run on server at startup
++  // This code only runs on the client
++  Template.body.helpers({
++    tasks: [
++      { text: "This is task 1" },
++      { text: "This is task 2" },
++      { text: "This is task 3" }
++    ]
+   });
+ }
+-- 
+2.2.1
+
+
+From e15faa0c628c7756e51d2470432f9aa548729739 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Tue, 14 Jul 2015 19:08:17 -0700
+Subject: [PATCH 04/34] Step 2.3: Add CSS
+
+---
+ simple-todos.css | 125 +++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 125 insertions(+)
+
+diff --git a/simple-todos.css b/simple-todos.css
+index b6b4052..ed5e77e 100644
+--- a/simple-todos.css
++++ b/simple-todos.css
+@@ -1 +1,126 @@
+ /* CSS declarations go here */
++body {
++  font-family: sans-serif;
++  background-color: #315481;
++  background-image: linear-gradient(to bottom, #315481, #918e82 100%);
++  background-attachment: fixed;
++
++  position: absolute;
++  top: 0;
++  bottom: 0;
++  left: 0;
++  right: 0;
++
++  padding: 0;
++  margin: 0;
++
++  font-size: 14px;
++}
++
++.container {
++  max-width: 600px;
++  margin: 0 auto;
++  min-height: 100%;
++  background: white;
++}
++
++header {
++  background: #d2edf4;
++  background-image: linear-gradient(to bottom, #d0edf5, #e1e5f0 100%);
++  padding: 20px 15px 15px 15px;
++  position: relative;
++}
++
++#login-buttons {
++  display: block;
++}
++
++h1 {
++  font-size: 1.5em;
++  margin: 0;
++  margin-bottom: 10px;
++  display: inline-block;
++  margin-right: 1em;
++}
++
++form {
++  margin-top: 10px;
++  margin-bottom: -10px;
++  position: relative;
++}
++
++.new-task input {
++  box-sizing: border-box;
++  padding: 10px 0;
++  background: transparent;
++  border: none;
++  width: 100%;
++  padding-right: 80px;
++  font-size: 1em;
++}
++
++.new-task input:focus{
++  outline: 0;
++}
++
++ul {
++  margin: 0;
++  padding: 0;
++  background: white;
++}
++
++.delete {
++  float: right;
++  font-weight: bold;
++  background: none;
++  font-size: 1em;
++  border: none;
++  position: relative;
++}
++
++li {
++  position: relative;
++  list-style: none;
++  padding: 15px;
++  border-bottom: #eee solid 1px;
++}
++
++li .text {
++  margin-left: 10px;
++}
++
++li.checked {
++  color: #888;
++}
++
++li.checked .text {
++  text-decoration: line-through;
++}
++
++li.private {
++  background: #eee;
++  border-color: #ddd;
++}
++
++header .hide-completed {
++  float: right;
++}
++
++.toggle-private {
++  margin-left: 5px;
++}
++
++@media (max-width: 600px) {
++  li {
++    padding: 12px 15px;
++  }
++
++  .search {
++    width: 150px;
++    clear: both;
++  }
++
++  .new-task input {
++    padding-bottom: 5px;
++  }
++}
+-- 
+2.2.1
+
+
+From f78906af3d2d15fdb1851ff28122f9e08bc4ac9f Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Tue, 14 Jul 2015 19:08:48 -0700
+Subject: [PATCH 05/34] Step 3.1: Define Tasks collection and load tasks from
+ it
+
+---
+ simple-todos.js | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/simple-todos.js b/simple-todos.js
+index 871b655..69fdf2c 100644
+--- a/simple-todos.js
++++ b/simple-todos.js
+@@ -1,10 +1,10 @@
++Tasks = new Mongo.Collection("tasks");
++
+ if (Meteor.isClient) {
+   // This code only runs on the client
+   Template.body.helpers({
+-    tasks: [
+-      { text: "This is task 1" },
+-      { text: "This is task 2" },
+-      { text: "This is task 3" }
+-    ]
++    tasks: function () {
++      return Tasks.find({});
++    }
+   });
+ }
+-- 
+2.2.1
+
+
+From 8434ab7042eb750c50ab58efd7231f1c97c630ed Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Tue, 14 Jul 2015 19:10:21 -0700
+Subject: [PATCH 06/34] Step 4.1: Add form for new tasks
+
+---
+ simple-todos.html | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/simple-todos.html b/simple-todos.html
+index 95624e7..e31aef1 100644
+--- a/simple-todos.html
++++ b/simple-todos.html
+@@ -6,6 +6,10 @@
+   <div class="container">
+     <header>
+       <h1>Todo List</h1>
++
++      <form class="new-task">
++        <input type="text" name="text" placeholder="Type to add new tasks" />
++      </form>
+     </header>
+ 
+     <ul>
+-- 
+2.2.1
+
+
+From 7a1ace1482bbdd5ce38aa5db28ecb20ce0e12863 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Tue, 14 Jul 2015 19:11:45 -0700
+Subject: [PATCH 07/34] Step 4.2: Add event handler for form submit
+
+---
+ simple-todos.js | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
+
+diff --git a/simple-todos.js b/simple-todos.js
+index 69fdf2c..8bfe857 100644
+--- a/simple-todos.js
++++ b/simple-todos.js
+@@ -7,4 +7,23 @@ if (Meteor.isClient) {
+       return Tasks.find({});
+     }
+   });
++
++  Template.body.events({
++    "submit .new-task": function (event) {
++      // Prevent default browser form submit
++      event.preventDefault();
++
++      // Get value from form element
++      var text = event.target.text.value;
++
++      // Insert a task into the collection
++      Tasks.insert({
++        text: text,
++        createdAt: new Date() // current time
++      });
++
++      // Clear form
++      event.target.text.value = "";
++    }
++  });
+ }
+-- 
+2.2.1
+
+
+From a06c2235fa31bb876edc2f62ba62310dee40ab6c Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Tue, 14 Jul 2015 19:12:14 -0700
+Subject: [PATCH 08/34] Step 4.3: Show newest tasks at the top
+
+---
+ simple-todos.js | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/simple-todos.js b/simple-todos.js
+index 8bfe857..545a1db 100644
+--- a/simple-todos.js
++++ b/simple-todos.js
+@@ -4,7 +4,8 @@ if (Meteor.isClient) {
+   // This code only runs on the client
+   Template.body.helpers({
+     tasks: function () {
+-      return Tasks.find({});
++      // Show newest tasks at the top
++      return Tasks.find({}, {sort: {createdAt: -1}});
+     }
+   });
+ 
+-- 
+2.2.1
+
+
+From 5cdfa73dcd1a1973bf31e76ffb0e6af96d9a2d8a Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Tue, 14 Jul 2015 19:12:57 -0700
+Subject: [PATCH 09/34] Step 5.1: Add buttons to Task component
+
+---
+ simple-todos.html | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/simple-todos.html b/simple-todos.html
+index e31aef1..94341cc 100644
+--- a/simple-todos.html
++++ b/simple-todos.html
+@@ -21,5 +21,11 @@
+ </body>
+ 
+ <template name="task">
+-  <li>{{text}}</li>
++  <li class="{{#if checked}}checked{{/if}}">
++    <button class="delete">&times;</button>
++
++    <input type="checkbox" checked="{{checked}}" class="toggle-checked" />
++
++    <span class="text">{{text}}</span>
++  </li>
+ </template>
+-- 
+2.2.1
+
+
+From 383896358ebfb53c237a8611fc11a86aa71fbbf6 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Tue, 14 Jul 2015 19:13:40 -0700
+Subject: [PATCH 10/34] Step 5.2: Add event handlers for Task buttons
+
+---
+ simple-todos.js | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/simple-todos.js b/simple-todos.js
+index 545a1db..36bdc0c 100644
+--- a/simple-todos.js
++++ b/simple-todos.js
+@@ -27,4 +27,16 @@ if (Meteor.isClient) {
+       event.target.text.value = "";
+     }
+   });
++
++  Template.task.events({
++    "click .toggle-checked": function () {
++      // Set the checked property to the opposite of its current value
++      Tasks.update(this._id, {
++        $set: {checked: ! this.checked}
++      });
++    },
++    "click .delete": function () {
++      Tasks.remove(this._id);
++    }
++  });
+ }
+-- 
+2.2.1
+
+
+From e62e4c1f8ca6f9808b6f3a78c39c4874dffdcbb4 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Tue, 14 Jul 2015 19:24:18 -0700
+Subject: [PATCH 11/34] Step 8.1: Add hide-completed checkbox to HTML
+
+---
+ simple-todos.html | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/simple-todos.html b/simple-todos.html
+index 94341cc..7d837a9 100644
+--- a/simple-todos.html
++++ b/simple-todos.html
+@@ -7,6 +7,11 @@
+     <header>
+       <h1>Todo List</h1>
+ 
++      <label class="hide-completed">
++        <input type="checkbox" checked="{{hideCompleted}}" />
++        Hide Completed Tasks
++      </label>
++
+       <form class="new-task">
+         <input type="text" name="text" placeholder="Type to add new tasks" />
+       </form>
+-- 
+2.2.1
+
+
+From 8a5390d3f596e1c2cefe56bfd417838ca834978c Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Tue, 14 Jul 2015 19:24:58 -0700
+Subject: [PATCH 12/34] Step 8.2: Add event handler for checkbox
+
+---
+ simple-todos.js | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/simple-todos.js b/simple-todos.js
+index 36bdc0c..19f7ffd 100644
+--- a/simple-todos.js
++++ b/simple-todos.js
+@@ -25,6 +25,9 @@ if (Meteor.isClient) {
+ 
+       // Clear form
+       event.target.text.value = "";
++    },
++    "change .hide-completed input": function (event) {
++      Session.set("hideCompleted", event.target.checked);
+     }
+   });
+ 
+-- 
+2.2.1
+
+
+From 3352071c6d1c414f94ee21038f28c45651d6216c Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Tue, 14 Jul 2015 19:25:38 -0700
+Subject: [PATCH 13/34] Step 8.3: Add helpers to body template
+
+---
+ simple-todos.js | 12 ++++++++++--
+ 1 file changed, 10 insertions(+), 2 deletions(-)
+
+diff --git a/simple-todos.js b/simple-todos.js
+index 19f7ffd..546fbe2 100644
+--- a/simple-todos.js
++++ b/simple-todos.js
+@@ -4,8 +4,16 @@ if (Meteor.isClient) {
+   // This code only runs on the client
+   Template.body.helpers({
+     tasks: function () {
+-      // Show newest tasks at the top
+-      return Tasks.find({}, {sort: {createdAt: -1}});
++      if (Session.get("hideCompleted")) {
++        // If hide completed is checked, filter tasks
++        return Tasks.find({checked: {$ne: true}}, {sort: {createdAt: -1}});
++      } else {
++        // Otherwise, return all of the tasks
++        return Tasks.find({}, {sort: {createdAt: -1}});
++      }
++    },
++    hideCompleted: function () {
++      return Session.get("hideCompleted");
+     }
+   });
+ 
+-- 
+2.2.1
+
+
+From d7e04b692a361153918f4a88548dfdc1c0220367 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Tue, 14 Jul 2015 19:26:17 -0700
+Subject: [PATCH 14/34] Step 8.4: Add incompleteCount helper to body
+
+---
+ simple-todos.js | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/simple-todos.js b/simple-todos.js
+index 546fbe2..81bc5a9 100644
+--- a/simple-todos.js
++++ b/simple-todos.js
+@@ -14,6 +14,9 @@ if (Meteor.isClient) {
+     },
+     hideCompleted: function () {
+       return Session.get("hideCompleted");
++    },
++    incompleteCount: function () {
++      return Tasks.find({checked: {$ne: true}}).count();
+     }
+   });
+ 
+-- 
+2.2.1
+
+
+From 48c14895d510dd095da3e114a40152d9291cbb83 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Tue, 14 Jul 2015 19:26:37 -0700
+Subject: [PATCH 15/34] Step 8.5: Display incompleteCount
+
+---
+ simple-todos.html | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/simple-todos.html b/simple-todos.html
+index 7d837a9..cb9b6f1 100644
+--- a/simple-todos.html
++++ b/simple-todos.html
+@@ -5,7 +5,7 @@
+ <body>
+   <div class="container">
+     <header>
+-      <h1>Todo List</h1>
++      <h1>Todo List ({{incompleteCount}})</h1>
+ 
+       <label class="hide-completed">
+         <input type="checkbox" checked="{{hideCompleted}}" />
+-- 
+2.2.1
+
+
+From 36e2490f9302894bb63ce241343da41519b03600 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Tue, 14 Jul 2015 19:27:03 -0700
+Subject: [PATCH 16/34] Step 9.1: Add accounts-ui and accounts-password
+
+---
+ .meteor/packages |  2 ++
+ .meteor/versions | 11 +++++++++++
+ 2 files changed, 13 insertions(+)
+
+diff --git a/.meteor/packages b/.meteor/packages
+index 99704e0..21b8d34 100644
+--- a/.meteor/packages
++++ b/.meteor/packages
+@@ -7,3 +7,5 @@
+ meteor-platform
+ autopublish
+ insecure
++accounts-ui
++accounts-password
+diff --git a/.meteor/versions b/.meteor/versions
+index 410e1d9..26385bb 100644
+--- a/.meteor/versions
++++ b/.meteor/versions
+@@ -1,3 +1,7 @@
++accounts-base@1.2.0
++accounts-password@1.1.1
++accounts-ui@1.1.5
++accounts-ui-unstyled@1.1.7
+ autopublish@1.0.3
+ autoupdate@1.2.1
+ base64@1.0.3
+@@ -10,6 +14,7 @@ check@1.0.5
+ ddp@1.1.0
+ deps@1.0.7
+ ejson@1.0.6
++email@1.0.6
+ fastclick@1.0.3
+ geojson-utils@1.0.3
+ html-tools@1.0.4
+@@ -20,7 +25,9 @@ insecure@1.0.3
+ jquery@1.11.3_2
+ json@1.0.3
+ launch-screen@1.0.2
++less@1.0.14
+ livedata@1.0.13
++localstorage@1.0.3
+ logging@1.0.7
+ meteor@1.1.6
+ meteor-platform@1.2.2
+@@ -28,6 +35,7 @@ minifiers@1.1.5
+ minimongo@1.0.8
+ mobile-status-bar@1.0.3
+ mongo@1.1.0
++npm-bcrypt@0.7.8_2
+ observe-sequence@1.0.6
+ ordered-dict@1.0.3
+ random@1.0.3
+@@ -36,9 +44,12 @@ reactive-var@1.0.5
+ reload@1.1.3
+ retry@1.0.3
+ routepolicy@1.0.5
++service-configuration@1.0.4
+ session@1.1.0
++sha@1.0.3
+ spacebars@1.0.6
+ spacebars-compiler@1.0.6
++srp@1.0.3
+ templating@1.1.1
+ tracker@1.0.7
+ ui@1.0.6
+-- 
+2.2.1
+
+
+From 788b22e96afdbb0fb604834f4d08c61bb0178628 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Tue, 14 Jul 2015 19:27:23 -0700
+Subject: [PATCH 17/34] Step 9.2: Include loginButtons
+
+---
+ simple-todos.html | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/simple-todos.html b/simple-todos.html
+index cb9b6f1..55f385c 100644
+--- a/simple-todos.html
++++ b/simple-todos.html
+@@ -12,6 +12,8 @@
+         Hide Completed Tasks
+       </label>
+ 
++      {{> loginButtons}}
++
+       <form class="new-task">
+         <input type="text" name="text" placeholder="Type to add new tasks" />
+       </form>
+-- 
+2.2.1
+
+
+From ddf3246896747a89f96aa64788f3daeca2e9a5c6 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Tue, 14 Jul 2015 19:27:46 -0700
+Subject: [PATCH 18/34] Step 9.3: Configure accounts-ui
+
+---
+ simple-todos.js | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/simple-todos.js b/simple-todos.js
+index 81bc5a9..0d524f7 100644
+--- a/simple-todos.js
++++ b/simple-todos.js
+@@ -53,4 +53,8 @@ if (Meteor.isClient) {
+       Tasks.remove(this._id);
+     }
+   });
++
++  Accounts.ui.config({
++    passwordSignupFields: "USERNAME_ONLY"
++  });
+ }
+-- 
+2.2.1
+
+
+From cd80f2966275060c64e4418c44cf13669386ce4d Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Tue, 14 Jul 2015 19:28:24 -0700
+Subject: [PATCH 19/34] Step 9.4: Update insert to include user data
+
+---
+ simple-todos.js | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/simple-todos.js b/simple-todos.js
+index 0d524f7..cf0bd1e 100644
+--- a/simple-todos.js
++++ b/simple-todos.js
+@@ -31,7 +31,9 @@ if (Meteor.isClient) {
+       // Insert a task into the collection
+       Tasks.insert({
+         text: text,
+-        createdAt: new Date() // current time
++        createdAt: new Date(),            // current time
++        owner: Meteor.userId(),           // _id of logged in user
++        username: Meteor.user().username  // username of logged in user
+       });
+ 
+       // Clear form
+-- 
+2.2.1
+
+
+From 29cff394ae08784db32c90affdc3bf8686b21d83 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Tue, 14 Jul 2015 19:28:47 -0700
+Subject: [PATCH 20/34] Step 9.5: Only show add task form if logged in
+
+---
+ simple-todos.html | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/simple-todos.html b/simple-todos.html
+index 55f385c..9e4b61a 100644
+--- a/simple-todos.html
++++ b/simple-todos.html
+@@ -14,9 +14,11 @@
+ 
+       {{> loginButtons}}
+ 
+-      <form class="new-task">
+-        <input type="text" name="text" placeholder="Type to add new tasks" />
+-      </form>
++      {{#if currentUser}}
++        <form class="new-task">
++          <input type="text" name="text" placeholder="Type to add new tasks" />
++        </form>
++      {{/if}}
+     </header>
+ 
+     <ul>
+-- 
+2.2.1
+
+
+From d7ad84ff5ae149e78621c85a1d2fd32959439f29 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Tue, 14 Jul 2015 19:29:11 -0700
+Subject: [PATCH 21/34] Step 9.6: Display username next to task
+
+---
+ simple-todos.html | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/simple-todos.html b/simple-todos.html
+index 9e4b61a..55c1dc9 100644
+--- a/simple-todos.html
++++ b/simple-todos.html
+@@ -35,6 +35,6 @@
+ 
+     <input type="checkbox" checked="{{checked}}" class="toggle-checked" />
+ 
+-    <span class="text">{{text}}</span>
++    <span class="text"><strong>{{username}}</strong> - {{text}}</span>
+   </li>
+ </template>
+-- 
+2.2.1
+
+
+From 59808d546321d201594a14dfa6a84c4a28eab53a Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Tue, 14 Jul 2015 19:29:52 -0700
+Subject: [PATCH 22/34] Step 10.1: Remove insecure package
+
+---
+ .meteor/packages | 1 -
+ .meteor/versions | 1 -
+ 2 files changed, 2 deletions(-)
+
+diff --git a/.meteor/packages b/.meteor/packages
+index 21b8d34..bb3b694 100644
+--- a/.meteor/packages
++++ b/.meteor/packages
+@@ -6,6 +6,5 @@
+ 
+ meteor-platform
+ autopublish
+-insecure
+ accounts-ui
+ accounts-password
+diff --git a/.meteor/versions b/.meteor/versions
+index 26385bb..6a03dd0 100644
+--- a/.meteor/versions
++++ b/.meteor/versions
+@@ -21,7 +21,6 @@ html-tools@1.0.4
+ htmljs@1.0.4
+ http@1.1.0
+ id-map@1.0.3
+-insecure@1.0.3
+ jquery@1.11.3_2
+ json@1.0.3
+ launch-screen@1.0.2
+-- 
+2.2.1
+
+
+From c209b47dcce29206ee5235e09817558440905a6e Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Tue, 14 Jul 2015 19:30:20 -0700
+Subject: [PATCH 23/34] Step 10.2: Define some methods
+
+---
+ simple-todos.js | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+
+diff --git a/simple-todos.js b/simple-todos.js
+index cf0bd1e..40edc1a 100644
+--- a/simple-todos.js
++++ b/simple-todos.js
+@@ -60,3 +60,25 @@ if (Meteor.isClient) {
+     passwordSignupFields: "USERNAME_ONLY"
+   });
+ }
++
++Meteor.methods({
++  addTask: function (text) {
++    // Make sure the user is logged in before inserting a task
++    if (! Meteor.userId()) {
++      throw new Meteor.Error("not-authorized");
++    }
++
++    Tasks.insert({
++      text: text,
++      createdAt: new Date(),
++      owner: Meteor.userId(),
++      username: Meteor.user().username
++    });
++  },
++  deleteTask: function (taskId) {
++    Tasks.remove(taskId);
++  },
++  setChecked: function (taskId, setChecked) {
++    Tasks.update(taskId, { $set: { checked: setChecked} });
++  }
++});
+-- 
+2.2.1
+
+
+From 7f422feef91339c9ffe9afd0a6069a14297f45b4 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Tue, 14 Jul 2015 19:31:24 -0700
+Subject: [PATCH 24/34] Step 10.3: Replace insert with addTask method
+
+---
+ simple-todos.js | 7 +------
+ 1 file changed, 1 insertion(+), 6 deletions(-)
+
+diff --git a/simple-todos.js b/simple-todos.js
+index 40edc1a..3f35197 100644
+--- a/simple-todos.js
++++ b/simple-todos.js
+@@ -29,12 +29,7 @@ if (Meteor.isClient) {
+       var text = event.target.text.value;
+ 
+       // Insert a task into the collection
+-      Tasks.insert({
+-        text: text,
+-        createdAt: new Date(),            // current time
+-        owner: Meteor.userId(),           // _id of logged in user
+-        username: Meteor.user().username  // username of logged in user
+-      });
++      Meteor.call("addTask", text);
+ 
+       // Clear form
+       event.target.text.value = "";
+-- 
+2.2.1
+
+
+From 40f20dec61f94269f434f8e6600f52e48dab9c59 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Tue, 14 Jul 2015 19:31:46 -0700
+Subject: [PATCH 25/34] Step 10.4: Replace update and remove with methods
+
+---
+ simple-todos.js | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
+
+diff --git a/simple-todos.js b/simple-todos.js
+index 3f35197..d477b50 100644
+--- a/simple-todos.js
++++ b/simple-todos.js
+@@ -42,12 +42,10 @@ if (Meteor.isClient) {
+   Template.task.events({
+     "click .toggle-checked": function () {
+       // Set the checked property to the opposite of its current value
+-      Tasks.update(this._id, {
+-        $set: {checked: ! this.checked}
+-      });
++      Meteor.call("setChecked", this._id, ! this.checked);
+     },
+     "click .delete": function () {
+-      Tasks.remove(this._id);
++      Meteor.call("deleteTask", this._id);
+     }
+   });
+ 
+-- 
+2.2.1
+
+
+From 6d476642901e702bac6ead65d5522dbe85e7852c Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Tue, 14 Jul 2015 19:32:19 -0700
+Subject: [PATCH 26/34] Step 11.1: Remove autopublish
+
+---
+ .meteor/packages | 1 -
+ .meteor/versions | 1 -
+ 2 files changed, 2 deletions(-)
+
+diff --git a/.meteor/packages b/.meteor/packages
+index bb3b694..aaee953 100644
+--- a/.meteor/packages
++++ b/.meteor/packages
+@@ -5,6 +5,5 @@
+ # but you can also edit it by hand.
+ 
+ meteor-platform
+-autopublish
+ accounts-ui
+ accounts-password
+diff --git a/.meteor/versions b/.meteor/versions
+index 6a03dd0..6766561 100644
+--- a/.meteor/versions
++++ b/.meteor/versions
+@@ -2,7 +2,6 @@ accounts-base@1.2.0
+ accounts-password@1.1.1
+ accounts-ui@1.1.5
+ accounts-ui-unstyled@1.1.7
+-autopublish@1.0.3
+ autoupdate@1.2.1
+ base64@1.0.3
+ binary-heap@1.0.3
+-- 
+2.2.1
+
+
+From b292ba8028b19999a63e84d48fb2ca15d1e30110 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Tue, 14 Jul 2015 19:33:17 -0700
+Subject: [PATCH 27/34] Step 11.2: Add publish and subscribe
+
+---
+ simple-todos.js | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff --git a/simple-todos.js b/simple-todos.js
+index d477b50..31eda5c 100644
+--- a/simple-todos.js
++++ b/simple-todos.js
+@@ -1,7 +1,16 @@
+ Tasks = new Mongo.Collection("tasks");
+ 
++if (Meteor.isServer) {
++  // This code only runs on the server
++  Meteor.publish("tasks", function () {
++    return Tasks.find();
++  });
++}
++
+ if (Meteor.isClient) {
+   // This code only runs on the client
++  Meteor.subscribe("tasks");
++
+   Template.body.helpers({
+     tasks: function () {
+       if (Session.get("hideCompleted")) {
+-- 
+2.2.1
+
+
+From 2c186456f68d31fbc51ef87cf10d8ff5a60f7cfe Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Tue, 14 Jul 2015 19:33:43 -0700
+Subject: [PATCH 28/34] Step 11.3: Add private button
+
+---
+ simple-todos.html | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+diff --git a/simple-todos.html b/simple-todos.html
+index 55c1dc9..bd18923 100644
+--- a/simple-todos.html
++++ b/simple-todos.html
+@@ -35,6 +35,16 @@
+ 
+     <input type="checkbox" checked="{{checked}}" class="toggle-checked" />
+ 
++    {{#if isOwner}}
++      <button class="toggle-private">
++        {{#if private}}
++          Private
++        {{else}}
++          Public
++        {{/if}}
++      </button>
++    {{/if}}
++
+     <span class="text"><strong>{{username}}</strong> - {{text}}</span>
+   </li>
+ </template>
+-- 
+2.2.1
+
+
+From d1a2cc5eefa0b830f5f952cb6a94a496d7bb13aa Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Tue, 14 Jul 2015 19:34:13 -0700
+Subject: [PATCH 29/34] Step 11.4: Add private class to private tasks
+
+---
+ simple-todos.html | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/simple-todos.html b/simple-todos.html
+index bd18923..08854e2 100644
+--- a/simple-todos.html
++++ b/simple-todos.html
+@@ -30,7 +30,7 @@
+ </body>
+ 
+ <template name="task">
+-  <li class="{{#if checked}}checked{{/if}}">
++  <li class="{{#if checked}}checked{{/if}} {{#if private}}private{{/if}}">
+     <button class="delete">&times;</button>
+ 
+     <input type="checkbox" checked="{{checked}}" class="toggle-checked" />
+-- 
+2.2.1
+
+
+From ba34429a728da182231069f71f46ece369baa31b Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Tue, 14 Jul 2015 19:34:47 -0700
+Subject: [PATCH 30/34] Step 11.5: Define helper to check ownership
+
+---
+ simple-todos.js | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/simple-todos.js b/simple-todos.js
+index 31eda5c..db6e512 100644
+--- a/simple-todos.js
++++ b/simple-todos.js
+@@ -48,6 +48,12 @@ if (Meteor.isClient) {
+     }
+   });
+ 
++  Template.task.helpers({
++    isOwner: function () {
++      return this.owner === Meteor.userId();
++    }
++  });
++
+   Template.task.events({
+     "click .toggle-checked": function () {
+       // Set the checked property to the opposite of its current value
+-- 
+2.2.1
+
+
+From 47e1ff964973d319585bc7f5eb45b7ea78581028 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Tue, 14 Jul 2015 19:35:31 -0700
+Subject: [PATCH 31/34] Step 11.6: Define method to set tasks to private
+
+---
+ simple-todos.js | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+diff --git a/simple-todos.js b/simple-todos.js
+index db6e512..ff07739 100644
+--- a/simple-todos.js
++++ b/simple-todos.js
+@@ -88,5 +88,15 @@ Meteor.methods({
+   },
+   setChecked: function (taskId, setChecked) {
+     Tasks.update(taskId, { $set: { checked: setChecked} });
++  },
++  setPrivate: function (taskId, setToPrivate) {
++    var task = Tasks.findOne(taskId);
++
++    // Make sure only the task owner can make a task private
++    if (task.owner !== Meteor.userId()) {
++      throw new Meteor.Error("not-authorized");
++    }
++
++    Tasks.update(taskId, { $set: { private: setToPrivate } });
+   }
+ });
+-- 
+2.2.1
+
+
+From 06f0e314c1dfe3dc8a44288e71d02cac85a32c0c Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Tue, 14 Jul 2015 19:35:55 -0700
+Subject: [PATCH 32/34] Step 11.7: Add event handler to call the setPrivate
+ method
+
+---
+ simple-todos.js | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/simple-todos.js b/simple-todos.js
+index ff07739..937e361 100644
+--- a/simple-todos.js
++++ b/simple-todos.js
+@@ -61,6 +61,9 @@ if (Meteor.isClient) {
+     },
+     "click .delete": function () {
+       Meteor.call("deleteTask", this._id);
++    },
++    "click .toggle-private": function () {
++      Meteor.call("setPrivate", this._id, ! this.private);
+     }
+   });
+ 
+-- 
+2.2.1
+
+
+From 6682fe168d69eb11b7fe280b67ae87fc6c06425a Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Tue, 14 Jul 2015 19:36:38 -0700
+Subject: [PATCH 33/34] Step 11.8: Only publish tasks the user is allowed to
+ see
+
+---
+ simple-todos.js | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/simple-todos.js b/simple-todos.js
+index 937e361..fea68a1 100644
+--- a/simple-todos.js
++++ b/simple-todos.js
+@@ -2,8 +2,14 @@ Tasks = new Mongo.Collection("tasks");
+ 
+ if (Meteor.isServer) {
+   // This code only runs on the server
++  // Only publish tasks that are public or belong to the current user
+   Meteor.publish("tasks", function () {
+-    return Tasks.find();
++    return Tasks.find({
++      $or: [
++        { private: {$ne: true} },
++        { owner: this.userId }
++      ]
++    });
+   });
+ }
+ 
+-- 
+2.2.1
+
+
+From b5957208d50a064a4a22780c7ef76259691b2c7a Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Tue, 14 Jul 2015 19:37:36 -0700
+Subject: [PATCH 34/34] Step 11.9: Add some extra security to methods
+
+---
+ simple-todos.js | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/simple-todos.js b/simple-todos.js
+index fea68a1..9bf41bb 100644
+--- a/simple-todos.js
++++ b/simple-todos.js
+@@ -93,9 +93,21 @@ Meteor.methods({
+     });
+   },
+   deleteTask: function (taskId) {
++    var task = Tasks.findOne(taskId);
++    if (task.private && task.owner !== Meteor.userId()) {
++      // If the task is private, make sure only the owner can delete it
++      throw new Meteor.Error("not-authorized");
++    }
++
+     Tasks.remove(taskId);
+   },
+   setChecked: function (taskId, setChecked) {
++    var task = Tasks.findOne(taskId);
++    if (task.private && task.owner !== Meteor.userId()) {
++      // If the task is private, make sure only the owner can check it off
++      throw new Meteor.Error("not-authorized");
++    }
++
+     Tasks.update(taskId, { $set: { checked: setChecked} });
+   },
+   setPrivate: function (taskId, setToPrivate) {
+-- 
+2.2.1
+

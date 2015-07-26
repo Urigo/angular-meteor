@@ -1,0 +1,59 @@
+<template name="server.api">
+  <div>
+    <do-nothing>
+      {{#markdown}}
+# Building Server Side API
+
+Angular services on the server side can be used to expose api to the client side just like
+`Meteor.methods` are used. Using Angular services to expose server side api is more modular since the methods
+are inherently namespaced unlike `Meteor.methods`. Apart from being more modular, calling server methods using
+Angular services is more angular-friendly and easier when coming from the world of angular.
+
+To expose API from the server to the clients we first have to create a service that will hold the
+functions we want to expose to the world:
+
+    // server/api/calculator.js
+    angular.module('myApp').service('Calculator', function() {
+      this.add = function(a, b) {
+        return a + b;
+      };
+    });
+
+The service does not have to do anything special in it's definition to become an API to the client. The
+`Calculator` service can be called from server side code just like any other service.
+
+Now we need to tell angular-meteor to expose this service as an API to our client. We do that using the
+`ServerAPIProvider`. Using this provider we register our service as an API:
+
+    // server/api/apis.js
+    angular.module('myApp').config(function(ServerAPIProvider) {
+      ServerAPIProvider.register('Calculator');
+    });
+
+After that is done the service is now exposed to clients as an API. That means that in our client side
+we now have a service called `Calculator` that has the exact same methods as the service in the server,
+but when calling the functions of the service we will get a promise as the return value and not the actual
+return value of the server function. The promise that we get will resolve with the value that the server
+function returns.
+
+Example usage:
+
+    // client/controllers/main.js
+    angular.module('myApp').controller('MainCtrl', function(Calculator) {
+      $scope.currentResult = 0;
+
+      $scope.add = function(value) {
+        Calculator.add($scope.currentResult, value).then(function(result) {
+          $scope.currentResult = result;
+        });
+      };
+    });
+
+An important note is that if the service that was registered as an API is in common code (also defined on the client)
+the call to the service function will call the client function and the server function both using the client function
+as a stub. That is the same expected result when using a `Meteor.method`.
+
+      {{/markdown}}
+    </do-nothing>
+  </div>
+</template>

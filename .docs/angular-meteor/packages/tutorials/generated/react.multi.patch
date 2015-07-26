@@ -1,0 +1,1764 @@
+From 0aa691766c1c76cfab3436e0507f33ad27e23962 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Mon, 13 Jul 2015 12:00:51 -0700
+Subject: [PATCH 01/41] Step 1: Run `meteor create`
+
+---
+ .meteor/.finished-upgraders |  8 ++++++++
+ .meteor/.gitignore          |  1 +
+ .meteor/.id                 |  7 +++++++
+ .meteor/packages            |  9 +++++++++
+ .meteor/platforms           |  2 ++
+ .meteor/release             |  1 +
+ .meteor/versions            | 48 +++++++++++++++++++++++++++++++++++++++++++++
+ simple-todos-react.css      |  1 +
+ simple-todos-react.html     | 14 +++++++++++++
+ simple-todos-react.js       | 23 ++++++++++++++++++++++
+ 10 files changed, 114 insertions(+)
+ create mode 100644 .meteor/.finished-upgraders
+ create mode 100644 .meteor/.gitignore
+ create mode 100644 .meteor/.id
+ create mode 100644 .meteor/packages
+ create mode 100644 .meteor/platforms
+ create mode 100644 .meteor/release
+ create mode 100644 .meteor/versions
+ create mode 100644 simple-todos-react.css
+ create mode 100644 simple-todos-react.html
+ create mode 100644 simple-todos-react.js
+
+diff --git a/.meteor/.finished-upgraders b/.meteor/.finished-upgraders
+new file mode 100644
+index 0000000..8a76103
+--- /dev/null
++++ b/.meteor/.finished-upgraders
+@@ -0,0 +1,8 @@
++# This file contains information which helps Meteor properly upgrade your
++# app when you run 'meteor update'. You should check it into version control
++# with your project.
++
++notices-for-0.9.0
++notices-for-0.9.1
++0.9.4-platform-file
++notices-for-facebook-graph-api-2
+diff --git a/.meteor/.gitignore b/.meteor/.gitignore
+new file mode 100644
+index 0000000..4083037
+--- /dev/null
++++ b/.meteor/.gitignore
+@@ -0,0 +1 @@
++local
+diff --git a/.meteor/.id b/.meteor/.id
+new file mode 100644
+index 0000000..3bab3ba
+--- /dev/null
++++ b/.meteor/.id
+@@ -0,0 +1,7 @@
++# This file contains a token that is unique to your project.
++# Check it into your repository along with the rest of this directory.
++# It can be used for purposes such as:
++#   - ensuring you don't accidentally deploy one app on top of another
++#   - providing package authors with aggregated statistics
++
++ucqipf8prm38bs7dxj
+diff --git a/.meteor/packages b/.meteor/packages
+new file mode 100644
+index 0000000..99704e0
+--- /dev/null
++++ b/.meteor/packages
+@@ -0,0 +1,9 @@
++# Meteor packages used by this project, one per line.
++# Check this file (and the other files in this directory) into your repository.
++#
++# 'meteor add' and 'meteor remove' will edit this file for you,
++# but you can also edit it by hand.
++
++meteor-platform
++autopublish
++insecure
+diff --git a/.meteor/platforms b/.meteor/platforms
+new file mode 100644
+index 0000000..efeba1b
+--- /dev/null
++++ b/.meteor/platforms
+@@ -0,0 +1,2 @@
++server
++browser
+diff --git a/.meteor/release b/.meteor/release
+new file mode 100644
+index 0000000..dab6b55
+--- /dev/null
++++ b/.meteor/release
+@@ -0,0 +1 @@
++METEOR@1.1.0.2
+diff --git a/.meteor/versions b/.meteor/versions
+new file mode 100644
+index 0000000..410e1d9
+--- /dev/null
++++ b/.meteor/versions
+@@ -0,0 +1,48 @@
++autopublish@1.0.3
++autoupdate@1.2.1
++base64@1.0.3
++binary-heap@1.0.3
++blaze@2.1.2
++blaze-tools@1.0.3
++boilerplate-generator@1.0.3
++callback-hook@1.0.3
++check@1.0.5
++ddp@1.1.0
++deps@1.0.7
++ejson@1.0.6
++fastclick@1.0.3
++geojson-utils@1.0.3
++html-tools@1.0.4
++htmljs@1.0.4
++http@1.1.0
++id-map@1.0.3
++insecure@1.0.3
++jquery@1.11.3_2
++json@1.0.3
++launch-screen@1.0.2
++livedata@1.0.13
++logging@1.0.7
++meteor@1.1.6
++meteor-platform@1.2.2
++minifiers@1.1.5
++minimongo@1.0.8
++mobile-status-bar@1.0.3
++mongo@1.1.0
++observe-sequence@1.0.6
++ordered-dict@1.0.3
++random@1.0.3
++reactive-dict@1.1.0
++reactive-var@1.0.5
++reload@1.1.3
++retry@1.0.3
++routepolicy@1.0.5
++session@1.1.0
++spacebars@1.0.6
++spacebars-compiler@1.0.6
++templating@1.1.1
++tracker@1.0.7
++ui@1.0.6
++underscore@1.0.3
++url@1.0.4
++webapp@1.2.0
++webapp-hashing@1.0.3
+diff --git a/simple-todos-react.css b/simple-todos-react.css
+new file mode 100644
+index 0000000..b6b4052
+--- /dev/null
++++ b/simple-todos-react.css
+@@ -0,0 +1 @@
++/* CSS declarations go here */
+diff --git a/simple-todos-react.html b/simple-todos-react.html
+new file mode 100644
+index 0000000..e296a58
+--- /dev/null
++++ b/simple-todos-react.html
+@@ -0,0 +1,14 @@
++<head>
++  <title>simple-todos-react</title>
++</head>
++
++<body>
++  <h1>Welcome to Meteor!</h1>
++
++  {{> hello}}
++</body>
++
++<template name="hello">
++  <button>Click Me</button>
++  <p>You've pressed the button {{counter}} times.</p>
++</template>
+diff --git a/simple-todos-react.js b/simple-todos-react.js
+new file mode 100644
+index 0000000..4f8c65d
+--- /dev/null
++++ b/simple-todos-react.js
+@@ -0,0 +1,23 @@
++if (Meteor.isClient) {
++  // counter starts at 0
++  Session.setDefault('counter', 0);
++
++  Template.hello.helpers({
++    counter: function () {
++      return Session.get('counter');
++    }
++  });
++
++  Template.hello.events({
++    'click button': function () {
++      // increment the counter when button is clicked
++      Session.set('counter', Session.get('counter') + 1);
++    }
++  });
++}
++
++if (Meteor.isServer) {
++  Meteor.startup(function () {
++    // code to run on server at startup
++  });
++}
+-- 
+2.2.1
+
+
+From 7ba04da80922a977448359e5eaef88f6d2f28ea0 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Mon, 13 Jul 2015 12:02:01 -0700
+Subject: [PATCH 02/41] Step 2.1: Add the React package
+
+---
+ .meteor/packages |  1 +
+ .meteor/versions | 10 ++++++++++
+ 2 files changed, 11 insertions(+)
+
+diff --git a/.meteor/packages b/.meteor/packages
+index 99704e0..10cd8b0 100644
+--- a/.meteor/packages
++++ b/.meteor/packages
+@@ -7,3 +7,4 @@
+ meteor-platform
+ autopublish
+ insecure
++react
+diff --git a/.meteor/versions b/.meteor/versions
+index 410e1d9..288ee5f 100644
+--- a/.meteor/versions
++++ b/.meteor/versions
+@@ -1,5 +1,7 @@
+ autopublish@1.0.3
+ autoupdate@1.2.1
++babel-compiler@5.6.15
++babel-runtime@0.1.1
+ base64@1.0.3
+ binary-heap@1.0.3
+ blaze@2.1.2
+@@ -7,6 +9,8 @@ blaze-tools@1.0.3
+ boilerplate-generator@1.0.3
+ callback-hook@1.0.3
+ check@1.0.5
++coffeescript@1.0.6
++cosmos:browserify@0.4.0
+ ddp@1.1.0
+ deps@1.0.7
+ ejson@1.0.6
+@@ -19,6 +23,7 @@ id-map@1.0.3
+ insecure@1.0.3
+ jquery@1.11.3_2
+ json@1.0.3
++jsx@0.1.1
+ launch-screen@1.0.2
+ livedata@1.0.13
+ logging@1.0.7
+@@ -31,6 +36,11 @@ mongo@1.1.0
+ observe-sequence@1.0.6
+ ordered-dict@1.0.3
+ random@1.0.3
++react@0.1.2
++react-meteor-data@0.1.0
++react-runtime@0.13.3_2
++react-runtime-dev@0.13.3_2
++react-runtime-prod@0.13.3_1
+ reactive-dict@1.1.0
+ reactive-var@1.0.5
+ reload@1.1.3
+-- 
+2.2.1
+
+
+From 54289ae4946acb191d1f153aa4e8cfb938970811 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Mon, 13 Jul 2015 12:03:54 -0700
+Subject: [PATCH 03/41] Step 2.2: Replace starter HTML code
+
+---
+ simple-todos-react.html | 11 ++---------
+ 1 file changed, 2 insertions(+), 9 deletions(-)
+
+diff --git a/simple-todos-react.html b/simple-todos-react.html
+index e296a58..1aae2d4 100644
+--- a/simple-todos-react.html
++++ b/simple-todos-react.html
+@@ -1,14 +1,7 @@
+ <head>
+-  <title>simple-todos-react</title>
++  <title>Todo List</title>
+ </head>
+ 
+ <body>
+-  <h1>Welcome to Meteor!</h1>
+-
+-  {{> hello}}
++  <div id="render-target"></div>
+ </body>
+-
+-<template name="hello">
+-  <button>Click Me</button>
+-  <p>You've pressed the button {{counter}} times.</p>
+-</template>
+-- 
+2.2.1
+
+
+From 676c35859282935e8c2cb81ff12b2b27135ae33e Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Mon, 13 Jul 2015 12:05:08 -0700
+Subject: [PATCH 04/41] Step 2.3: Replace starter JS
+
+---
+ simple-todos-react.js  | 23 -----------------------
+ simple-todos-react.jsx |  8 ++++++++
+ 2 files changed, 8 insertions(+), 23 deletions(-)
+ delete mode 100644 simple-todos-react.js
+ create mode 100644 simple-todos-react.jsx
+
+diff --git a/simple-todos-react.js b/simple-todos-react.js
+deleted file mode 100644
+index 4f8c65d..0000000
+--- a/simple-todos-react.js
++++ /dev/null
+@@ -1,23 +0,0 @@
+-if (Meteor.isClient) {
+-  // counter starts at 0
+-  Session.setDefault('counter', 0);
+-
+-  Template.hello.helpers({
+-    counter: function () {
+-      return Session.get('counter');
+-    }
+-  });
+-
+-  Template.hello.events({
+-    'click button': function () {
+-      // increment the counter when button is clicked
+-      Session.set('counter', Session.get('counter') + 1);
+-    }
+-  });
+-}
+-
+-if (Meteor.isServer) {
+-  Meteor.startup(function () {
+-    // code to run on server at startup
+-  });
+-}
+diff --git a/simple-todos-react.jsx b/simple-todos-react.jsx
+new file mode 100644
+index 0000000..a7e2d2f
+--- /dev/null
++++ b/simple-todos-react.jsx
+@@ -0,0 +1,8 @@
++if (Meteor.isClient) {
++  // This code is executed on the client only
++
++  Meteor.startup(function () {
++    // Use Meteor.startup to render the component after the page is ready
++    React.render(<App />, document.getElementById("render-target"));
++  });
++}
+-- 
+2.2.1
+
+
+From 1f2cc89f74f801642f4bc0e3d2ff14c569765ca0 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Mon, 13 Jul 2015 12:05:58 -0700
+Subject: [PATCH 05/41] Step 2.4: Create App component
+
+---
+ App.jsx | 30 ++++++++++++++++++++++++++++++
+ 1 file changed, 30 insertions(+)
+ create mode 100644 App.jsx
+
+diff --git a/App.jsx b/App.jsx
+new file mode 100644
+index 0000000..27ac66e
+--- /dev/null
++++ b/App.jsx
+@@ -0,0 +1,30 @@
++// App component - represents the whole app
++App = React.createClass({
++  getTasks() {
++    return [
++      { _id: 1, text: "This is task 1" },
++      { _id: 2, text: "This is task 2" },
++      { _id: 3, text: "This is task 3" }
++    ];
++  },
++
++  renderTasks() {
++    return this.getTasks().map((task) => {
++      return <Task key={task._id} task={task} />;
++    });
++  },
++
++  render() {
++    return (
++      <div className="container">
++        <header>
++          <h1>Todo List</h1>
++        </header>
++
++        <ul>
++          {this.renderTasks()}
++        </ul>
++      </div>
++    );
++  }
++});
+-- 
+2.2.1
+
+
+From 8aa85a45acb1ffcc7f94c141a3563556236b9b1c Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Mon, 13 Jul 2015 12:06:31 -0700
+Subject: [PATCH 06/41] Step 2.5: Create Task component
+
+---
+ Task.jsx | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+ create mode 100644 Task.jsx
+
+diff --git a/Task.jsx b/Task.jsx
+new file mode 100644
+index 0000000..c49e7ac
+--- /dev/null
++++ b/Task.jsx
+@@ -0,0 +1,13 @@
++// Task component - represents a single todo item
++Task = React.createClass({
++  propTypes: {
++    // This component gets the task to display through a React prop.
++    // We can use propTypes to indicate it is required
++    task: React.PropTypes.object.isRequired
++  },
++  render() {
++    return (
++      <li>{this.props.task.text}</li>
++    );
++  }
++});
+-- 
+2.2.1
+
+
+From c5f475a98824525922a32e69ac5eca7de0316957 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Mon, 13 Jul 2015 12:07:02 -0700
+Subject: [PATCH 07/41] Step 2.6: Add CSS
+
+---
+ simple-todos-react.css | 125 +++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 125 insertions(+)
+
+diff --git a/simple-todos-react.css b/simple-todos-react.css
+index b6b4052..cec3ae6 100644
+--- a/simple-todos-react.css
++++ b/simple-todos-react.css
+@@ -1 +1,126 @@
+ /* CSS declarations go here */
++body {
++  font-family: sans-serif;
++  background-color: #315481;
++  background-image: linear-gradient(to bottom, #315481, #918e82 100%);
++  background-attachment: fixed;
++
++  position: absolute;
++  top: 0;
++  bottom: 0;
++  left: 0;
++  right: 0;
++
++  padding: 0;
++  margin: 0;
++
++  font-size: 14px;
++}
++
++.container {
++  max-width: 600px;
++  margin: 0 auto;
++  min-height: 100%;
++  background: white;
++}
++
++header {
++  background: #d2edf4;
++  background-image: linear-gradient(to bottom, #d0edf5, #e1e5f0 100%);
++  padding: 20px 15px 15px 15px;
++  position: relative;
++}
++
++#login-buttons {
++  display: block;
++}
++
++h1 {
++  font-size: 1.5em;
++  margin: 0;
++  margin-bottom: 10px;
++  display: inline-block;
++  margin-right: 1em;
++}
++
++form {
++  margin-top: 10px;
++  margin-bottom: -10px;
++  position: relative;
++}
++
++.new-task input {
++  box-sizing: border-box;
++  padding: 10px 0;
++  background: transparent;
++  border: none;
++  width: 100%;
++  padding-right: 80px;
++  font-size: 1em;
++}
++
++.new-task input:focus{
++  outline: 0;
++}
++
++ul {
++  margin: 0;
++  padding: 0;
++  background: white;
++}
++
++.delete {
++  float: right;
++  font-weight: bold;
++  background: none;
++  font-size: 1em;
++  border: none;
++  position: relative;
++}
++
++li {
++  position: relative;
++  list-style: none;
++  padding: 15px;
++  border-bottom: #eee solid 1px;
++}
++
++li .text {
++  margin-left: 10px;
++}
++
++li.checked {
++  color: #888;
++}
++
++li.checked .text {
++  text-decoration: line-through;
++}
++
++li.private {
++  background: #eee;
++  border-color: #ddd;
++}
++
++header .hide-completed {
++  float: right;
++}
++
++.toggle-private {
++  margin-left: 5px;
++}
++
++@media (max-width: 600px) {
++  li {
++    padding: 12px 15px;
++  }
++
++  .search {
++    width: 150px;
++    clear: both;
++  }
++
++  .new-task input {
++    padding-bottom: 5px;
++  }
++}
+\ No newline at end of file
+-- 
+2.2.1
+
+
+From 33dd1dab78f3c09ddd6f24664e042f2ddbf8ce01 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Mon, 13 Jul 2015 12:08:08 -0700
+Subject: [PATCH 08/41] Step 3.1: Define tasks collection
+
+---
+ simple-todos-react.jsx | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/simple-todos-react.jsx b/simple-todos-react.jsx
+index a7e2d2f..a67b030 100644
+--- a/simple-todos-react.jsx
++++ b/simple-todos-react.jsx
+@@ -1,3 +1,6 @@
++// Define a collection to hold our tasks
++Tasks = new Mongo.Collection("tasks");
++
+ if (Meteor.isClient) {
+   // This code is executed on the client only
+ 
+-- 
+2.2.1
+
+
+From 9276239ccfca511667a61cdad7182a9a95681216 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Mon, 13 Jul 2015 12:08:44 -0700
+Subject: [PATCH 09/41] Step 3.2: Modify App component to get tasks from
+ collection
+
+---
+ App.jsx | 18 +++++++++++-------
+ 1 file changed, 11 insertions(+), 7 deletions(-)
+
+diff --git a/App.jsx b/App.jsx
+index 27ac66e..60f1400 100644
+--- a/App.jsx
++++ b/App.jsx
+@@ -1,15 +1,19 @@
+ // App component - represents the whole app
+ App = React.createClass({
+-  getTasks() {
+-    return [
+-      { _id: 1, text: "This is task 1" },
+-      { _id: 2, text: "This is task 2" },
+-      { _id: 3, text: "This is task 3" }
+-    ];
++
++  // This mixin makes the getMeteorData method work
++  mixins: [ReactMeteorData],
++
++  // Loads items from the Tasks collection and puts them on this.data.tasks
++  getMeteorData() {
++    return {
++      tasks: Tasks.find({}).fetch()
++    }
+   },
+ 
+   renderTasks() {
+-    return this.getTasks().map((task) => {
++    // Get tasks from this.data.tasks
++    return this.data.tasks.map((task) => {
+       return <Task key={task._id} task={task} />;
+     });
+   },
+-- 
+2.2.1
+
+
+From 6a9590b6ad0b3a8aee577d5ce33b4df759f2acba Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Mon, 13 Jul 2015 12:13:37 -0700
+Subject: [PATCH 10/41] Step 4.1: Add form for new tasks
+
+---
+ App.jsx | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/App.jsx b/App.jsx
+index 60f1400..7b798bb 100644
+--- a/App.jsx
++++ b/App.jsx
+@@ -23,6 +23,13 @@ App = React.createClass({
+       <div className="container">
+         <header>
+           <h1>Todo List</h1>
++
++          <form className="new-task" onSubmit={this.handleSubmit} >
++            <input
++              type="text"
++              ref="textInput"
++              placeholder="Type to add new tasks" />
++          </form>
+         </header>
+ 
+         <ul>
+-- 
+2.2.1
+
+
+From 595556f61f3ba902a055bd310df9ffbd4576dc6b Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Mon, 13 Jul 2015 12:14:08 -0700
+Subject: [PATCH 11/41] Step 4.2: Add handleSubmit method to App component
+
+---
+ App.jsx | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+
+diff --git a/App.jsx b/App.jsx
+index 7b798bb..67184cc 100644
+--- a/App.jsx
++++ b/App.jsx
+@@ -18,6 +18,21 @@ App = React.createClass({
+     });
+   },
+ 
++  handleSubmit(event) {
++    event.preventDefault();
++
++    // Find the text field via the React ref
++    var text = React.findDOMNode(this.refs.textInput).value.trim();
++
++    Tasks.insert({
++      text: text,
++      createdAt: new Date() // current time
++    });
++
++    // Clear form
++    React.findDOMNode(this.refs.textInput).value = "";
++  },
++
+   render() {
+     return (
+       <div className="container">
+-- 
+2.2.1
+
+
+From 5c4ba0f7864e0a2cbf0bcb03b6a7df22586d5e68 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Mon, 13 Jul 2015 12:14:40 -0700
+Subject: [PATCH 12/41] Step 4.3: Update getMeteorData to sort tasks by time
+
+---
+ App.jsx | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/App.jsx b/App.jsx
+index 67184cc..64197bd 100644
+--- a/App.jsx
++++ b/App.jsx
+@@ -7,7 +7,7 @@ App = React.createClass({
+   // Loads items from the Tasks collection and puts them on this.data.tasks
+   getMeteorData() {
+     return {
+-      tasks: Tasks.find({}).fetch()
++      tasks: Tasks.find({}, {sort: {createdAt: -1}}).fetch()
+     }
+   },
+ 
+-- 
+2.2.1
+
+
+From d9b4770a22e1a99eac80e95fe0510cbc8648f9b1 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Mon, 13 Jul 2015 12:17:06 -0700
+Subject: [PATCH 13/41] Step 5.1: Update Task component to add features
+
+---
+ Task.jsx | 32 +++++++++++++++++++++++++++++---
+ 1 file changed, 29 insertions(+), 3 deletions(-)
+
+diff --git a/Task.jsx b/Task.jsx
+index c49e7ac..d1c618b 100644
+--- a/Task.jsx
++++ b/Task.jsx
+@@ -1,13 +1,39 @@
+ // Task component - represents a single todo item
+ Task = React.createClass({
+   propTypes: {
+-    // This component gets the task to display through a React prop.
+-    // We can use propTypes to indicate it is required
+     task: React.PropTypes.object.isRequired
+   },
++
++  toggleChecked() {
++    // Set the checked property to the opposite of its current value
++    Tasks.update(this.props.task._id, {
++      $set: {checked: ! this.props.task.checked}
++    });
++  },
++
++  deleteThisTask() {
++    Tasks.remove(this.props.task._id);
++  },
++
+   render() {
++    // Give tasks a different className when they are checked off,
++    // so that we can style them nicely in CSS
++    const taskClassName = this.props.task.checked ? "checked" : "";
++
+     return (
+-      <li>{this.props.task.text}</li>
++      <li className={taskClassName}>
++        <button className="delete" onClick={this.deleteThisTask}>
++          &times;
++        </button>
++
++        <input
++          type="checkbox"
++          readOnly={true}
++          checked={this.props.task.checked}
++          onClick={this.toggleChecked} />
++
++        <span className="text">{this.props.task.text}</span>
++      </li>
+     );
+   }
+ });
+-- 
+2.2.1
+
+
+From ef6891054dfa0c797e0dd95761f2966c16efcf8f Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Mon, 13 Jul 2015 12:21:30 -0700
+Subject: [PATCH 14/41] Step 8.1: Add hide completed checkbox to App component
+
+---
+ App.jsx | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff --git a/App.jsx b/App.jsx
+index 64197bd..ef39e73 100644
+--- a/App.jsx
++++ b/App.jsx
+@@ -39,6 +39,15 @@ App = React.createClass({
+         <header>
+           <h1>Todo List</h1>
+ 
++          <label className="hide-completed">
++            <input
++              type="checkbox"
++              readOnly={true}
++              checked={this.state.hideCompleted}
++              onClick={this.toggleHideCompleted} />
++            Hide Completed Tasks
++          </label>
++
+           <form className="new-task" onSubmit={this.handleSubmit} >
+             <input
+               type="text"
+-- 
+2.2.1
+
+
+From 958c0d75290e64d006305f2dd03dede162e2f527 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Mon, 13 Jul 2015 12:22:07 -0700
+Subject: [PATCH 15/41] Step 8.2: Add getInitialState to App component
+
+---
+ App.jsx | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/App.jsx b/App.jsx
+index ef39e73..144582d 100644
+--- a/App.jsx
++++ b/App.jsx
+@@ -4,6 +4,12 @@ App = React.createClass({
+   // This mixin makes the getMeteorData method work
+   mixins: [ReactMeteorData],
+ 
++  getInitialState() {
++    return {
++      hideCompleted: false
++    }
++  },
++
+   // Loads items from the Tasks collection and puts them on this.data.tasks
+   getMeteorData() {
+     return {
+-- 
+2.2.1
+
+
+From 8c602b47086cb8d5e3ea23812811dbe97941ba01 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Mon, 13 Jul 2015 12:22:32 -0700
+Subject: [PATCH 16/41] Step 8.3: Add toggleHideCompleted handler to App
+
+---
+ App.jsx | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/App.jsx b/App.jsx
+index 144582d..6799fca 100644
+--- a/App.jsx
++++ b/App.jsx
+@@ -39,6 +39,12 @@ App = React.createClass({
+     React.findDOMNode(this.refs.textInput).value = "";
+   },
+ 
++  toggleHideCompleted() {
++    this.setState({
++      hideCompleted: ! this.state.hideCompleted
++    });
++  },
++
+   render() {
+     return (
+       <div className="container">
+-- 
+2.2.1
+
+
+From a1694b147586aec4cb1c7537600b6b503412670d Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Mon, 13 Jul 2015 12:23:02 -0700
+Subject: [PATCH 17/41] Step 8.4: Replace getMeteorData to filter tasks
+
+---
+ App.jsx | 11 +++++++++--
+ 1 file changed, 9 insertions(+), 2 deletions(-)
+
+diff --git a/App.jsx b/App.jsx
+index 6799fca..105577e 100644
+--- a/App.jsx
++++ b/App.jsx
+@@ -12,9 +12,16 @@ App = React.createClass({
+ 
+   // Loads items from the Tasks collection and puts them on this.data.tasks
+   getMeteorData() {
+-    return {
+-      tasks: Tasks.find({}, {sort: {createdAt: -1}}).fetch()
++    let query = {};
++
++    if (this.state.hideCompleted) {
++      // If hide completed is checked, filter tasks
++      query = {checked: {$ne: true}};
+     }
++
++    return {
++      tasks: Tasks.find(query, {sort: {createdAt: -1}}).fetch()
++    };
+   },
+ 
+   renderTasks() {
+-- 
+2.2.1
+
+
+From 0dce33f22620717927a9c45046554fb0af0fc5b4 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Mon, 13 Jul 2015 12:23:44 -0700
+Subject: [PATCH 18/41] Step 8.5: Update getMeteorData to return
+ incompleteCount
+
+---
+ App.jsx | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/App.jsx b/App.jsx
+index 105577e..09415f3 100644
+--- a/App.jsx
++++ b/App.jsx
+@@ -20,7 +20,8 @@ App = React.createClass({
+     }
+ 
+     return {
+-      tasks: Tasks.find(query, {sort: {createdAt: -1}}).fetch()
++      tasks: Tasks.find(query, {sort: {createdAt: -1}}).fetch(),
++      incompleteCount: Tasks.find({checked: {$ne: true}}).count()
+     };
+   },
+ 
+-- 
+2.2.1
+
+
+From 2786f6c52923459e83212a1ea9b0b0a809f410d9 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Mon, 13 Jul 2015 12:24:09 -0700
+Subject: [PATCH 19/41] Step 8.6: Display incompleteCount in the header
+
+---
+ App.jsx | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/App.jsx b/App.jsx
+index 09415f3..f5b8224 100644
+--- a/App.jsx
++++ b/App.jsx
+@@ -57,7 +57,7 @@ App = React.createClass({
+     return (
+       <div className="container">
+         <header>
+-          <h1>Todo List</h1>
++          <h1>Todo List ({this.data.incompleteCount})</h1>
+ 
+           <label className="hide-completed">
+             <input
+-- 
+2.2.1
+
+
+From 6f0c0b03ed3f6e084572fa12de678123c45f28b2 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Mon, 13 Jul 2015 12:26:02 -0700
+Subject: [PATCH 20/41] Step 9.1: Add accounts-ui and accounts-password
+ packages
+
+---
+ .meteor/packages |  2 ++
+ .meteor/versions | 11 +++++++++++
+ 2 files changed, 13 insertions(+)
+
+diff --git a/.meteor/packages b/.meteor/packages
+index 10cd8b0..b08108a 100644
+--- a/.meteor/packages
++++ b/.meteor/packages
+@@ -8,3 +8,5 @@ meteor-platform
+ autopublish
+ insecure
+ react
++accounts-ui
++accounts-password
+diff --git a/.meteor/versions b/.meteor/versions
+index 288ee5f..e964910 100644
+--- a/.meteor/versions
++++ b/.meteor/versions
+@@ -1,3 +1,7 @@
++accounts-base@1.2.0
++accounts-password@1.1.1
++accounts-ui@1.1.5
++accounts-ui-unstyled@1.1.7
+ autopublish@1.0.3
+ autoupdate@1.2.1
+ babel-compiler@5.6.15
+@@ -14,6 +18,7 @@ cosmos:browserify@0.4.0
+ ddp@1.1.0
+ deps@1.0.7
+ ejson@1.0.6
++email@1.0.6
+ fastclick@1.0.3
+ geojson-utils@1.0.3
+ html-tools@1.0.4
+@@ -25,7 +30,9 @@ jquery@1.11.3_2
+ json@1.0.3
+ jsx@0.1.1
+ launch-screen@1.0.2
++less@1.0.14
+ livedata@1.0.13
++localstorage@1.0.3
+ logging@1.0.7
+ meteor@1.1.6
+ meteor-platform@1.2.2
+@@ -33,6 +40,7 @@ minifiers@1.1.5
+ minimongo@1.0.8
+ mobile-status-bar@1.0.3
+ mongo@1.1.0
++npm-bcrypt@0.7.8_2
+ observe-sequence@1.0.6
+ ordered-dict@1.0.3
+ random@1.0.3
+@@ -46,9 +54,12 @@ reactive-var@1.0.5
+ reload@1.1.3
+ retry@1.0.3
+ routepolicy@1.0.5
++service-configuration@1.0.4
+ session@1.1.0
++sha@1.0.3
+ spacebars@1.0.6
+ spacebars-compiler@1.0.6
++srp@1.0.3
+ templating@1.1.1
+ tracker@1.0.7
+ ui@1.0.6
+-- 
+2.2.1
+
+
+From dab17acf27046daafcabc4e29c05ffd911ad5291 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Mon, 13 Jul 2015 12:26:59 -0700
+Subject: [PATCH 21/41] Step 9.2: Create Accounts UI wrapper component
+
+---
+ AccountsUIWrapper.jsx | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+ create mode 100644 AccountsUIWrapper.jsx
+
+diff --git a/AccountsUIWrapper.jsx b/AccountsUIWrapper.jsx
+new file mode 100644
+index 0000000..87fd3b3
+--- /dev/null
++++ b/AccountsUIWrapper.jsx
+@@ -0,0 +1,15 @@
++AccountsUIWrapper = React.createClass({
++  componentDidMount() {
++    // Use Meteor Blaze to render login buttons
++    this.view = Blaze.render(Template.loginButtons,
++      React.findDOMNode(this.refs.container));
++  },
++  componentWillUnmount() {
++    // Clean up Blaze view
++    Blaze.remove(this.view);
++  },
++  render() {
++    // Just render a placeholder container that will be filled in
++    return <span ref="container" />;
++  }
++});
+-- 
+2.2.1
+
+
+From 7af1c6780234736bb8f442c5cbf206ee53246263 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Mon, 13 Jul 2015 12:27:36 -0700
+Subject: [PATCH 22/41] Step 9.3: Include sign in form
+
+---
+ App.jsx | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/App.jsx b/App.jsx
+index f5b8224..e829c27 100644
+--- a/App.jsx
++++ b/App.jsx
+@@ -68,6 +68,8 @@ App = React.createClass({
+             Hide Completed Tasks
+           </label>
+ 
++          <AccountsUIWrapper />
++
+           <form className="new-task" onSubmit={this.handleSubmit} >
+             <input
+               type="text"
+-- 
+2.2.1
+
+
+From 2e167dbdf1654a04f002771edecd0ff0a00c0557 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Mon, 13 Jul 2015 12:28:08 -0700
+Subject: [PATCH 23/41] Step 9.4: Configure accounts-ui to only require
+ username
+
+---
+ simple-todos-react.jsx | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/simple-todos-react.jsx b/simple-todos-react.jsx
+index a67b030..36ce4bc 100644
+--- a/simple-todos-react.jsx
++++ b/simple-todos-react.jsx
+@@ -3,6 +3,9 @@ Tasks = new Mongo.Collection("tasks");
+ 
+ if (Meteor.isClient) {
+   // This code is executed on the client only
++  Accounts.ui.config({
++    passwordSignupFields: "USERNAME_ONLY"
++  });
+ 
+   Meteor.startup(function () {
+     // Use Meteor.startup to render the component after the page is ready
+-- 
+2.2.1
+
+
+From 3f4b411ff42e6f82f4d43d28fdf5cfb1b1197682 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Mon, 13 Jul 2015 12:28:46 -0700
+Subject: [PATCH 24/41] Step 9.5: Update insert to save username and owner
+
+---
+ App.jsx | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/App.jsx b/App.jsx
+index e829c27..dd7862f 100644
+--- a/App.jsx
++++ b/App.jsx
+@@ -40,7 +40,9 @@ App = React.createClass({
+ 
+     Tasks.insert({
+       text: text,
+-      createdAt: new Date() // current time
++      createdAt: new Date(),            // current time
++      owner: Meteor.userId(),           // _id of logged in user
++      username: Meteor.user().username  // username of logged in user
+     });
+ 
+     // Clear form
+-- 
+2.2.1
+
+
+From 4fff683816569ab5f5654251f6dd77527b9a59b5 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Mon, 13 Jul 2015 12:29:16 -0700
+Subject: [PATCH 25/41] Step 9.6: Update getMeteorData to return data about
+ user
+
+---
+ App.jsx | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/App.jsx b/App.jsx
+index dd7862f..dfedd85 100644
+--- a/App.jsx
++++ b/App.jsx
+@@ -21,7 +21,8 @@ App = React.createClass({
+ 
+     return {
+       tasks: Tasks.find(query, {sort: {createdAt: -1}}).fetch(),
+-      incompleteCount: Tasks.find({checked: {$ne: true}}).count()
++      incompleteCount: Tasks.find({checked: {$ne: true}}).count(),
++      currentUser: Meteor.user()
+     };
+   },
+ 
+-- 
+2.2.1
+
+
+From 199ef1827ecc472723946d7c2ffa25216d40a793 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Mon, 13 Jul 2015 12:30:06 -0700
+Subject: [PATCH 26/41] Step 9.7: Wrap new task form to only show when logged
+ in
+
+---
+ App.jsx | 14 ++++++++------
+ 1 file changed, 8 insertions(+), 6 deletions(-)
+
+diff --git a/App.jsx b/App.jsx
+index dfedd85..b8824a4 100644
+--- a/App.jsx
++++ b/App.jsx
+@@ -73,12 +73,14 @@ App = React.createClass({
+ 
+           <AccountsUIWrapper />
+ 
+-          <form className="new-task" onSubmit={this.handleSubmit} >
+-            <input
+-              type="text"
+-              ref="textInput"
+-              placeholder="Type to add new tasks" />
+-          </form>
++          { this.data.currentUser ?
++            <form className="new-task" onSubmit={this.handleSubmit} >
++              <input
++                type="text"
++                ref="textInput"
++                placeholder="Type to add new tasks" />
++            </form> : ''
++          }
+         </header>
+ 
+         <ul>
+-- 
+2.2.1
+
+
+From 50e06b33c4e05ebe111cd855b5ab015ec743be5c Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Mon, 13 Jul 2015 12:30:48 -0700
+Subject: [PATCH 27/41] Step 9.8: Update Task component to show username
+
+---
+ Task.jsx | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/Task.jsx b/Task.jsx
+index d1c618b..2caead7 100644
+--- a/Task.jsx
++++ b/Task.jsx
+@@ -32,7 +32,9 @@ Task = React.createClass({
+           checked={this.props.task.checked}
+           onClick={this.toggleChecked} />
+ 
+-        <span className="text">{this.props.task.text}</span>
++        <span className="text">
++          <strong>{this.props.task.username}</strong>: {this.props.task.text}
++        </span>
+       </li>
+     );
+   }
+-- 
+2.2.1
+
+
+From 0a8e5501bd5c1bedb7ccb3c251722ff84972f922 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Mon, 13 Jul 2015 12:31:22 -0700
+Subject: [PATCH 28/41] Step 10.1: Remove insecure package
+
+---
+ .meteor/packages | 1 -
+ .meteor/versions | 1 -
+ 2 files changed, 2 deletions(-)
+
+diff --git a/.meteor/packages b/.meteor/packages
+index b08108a..6f2b627 100644
+--- a/.meteor/packages
++++ b/.meteor/packages
+@@ -6,7 +6,6 @@
+ 
+ meteor-platform
+ autopublish
+-insecure
+ react
+ accounts-ui
+ accounts-password
+diff --git a/.meteor/versions b/.meteor/versions
+index e964910..0d54bf9 100644
+--- a/.meteor/versions
++++ b/.meteor/versions
+@@ -25,7 +25,6 @@ html-tools@1.0.4
+ htmljs@1.0.4
+ http@1.1.0
+ id-map@1.0.3
+-insecure@1.0.3
+ jquery@1.11.3_2
+ json@1.0.3
+ jsx@0.1.1
+-- 
+2.2.1
+
+
+From 6e735ca97ff876c4ac4c75b2ae374ddeb86abb8d Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Mon, 13 Jul 2015 12:32:21 -0700
+Subject: [PATCH 29/41] Step 10.2: Add methods for add, remove, update task
+
+---
+ simple-todos-react.jsx | 24 ++++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
+
+diff --git a/simple-todos-react.jsx b/simple-todos-react.jsx
+index 36ce4bc..b1aa692 100644
+--- a/simple-todos-react.jsx
++++ b/simple-todos-react.jsx
+@@ -12,3 +12,27 @@ if (Meteor.isClient) {
+     React.render(<App />, document.getElementById("render-target"));
+   });
+ }
++
++Meteor.methods({
++  addTask(text) {
++    // Make sure the user is logged in before inserting a task
++    if (! Meteor.userId()) {
++      throw new Meteor.Error("not-authorized");
++    }
++
++    Tasks.insert({
++      text: text,
++      createdAt: new Date(),
++      owner: Meteor.userId(),
++      username: Meteor.user().username
++    });
++  },
++
++  removeTask(taskId) {
++    Tasks.remove(taskId);
++  },
++
++  setChecked(taskId, setChecked) {
++    Tasks.update(taskId, { $set: { checked: setChecked} });
++  }
++});
+-- 
+2.2.1
+
+
+From d0803ad5673e8fae47b9ff7fed850a80d5f2d64e Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Mon, 13 Jul 2015 12:32:59 -0700
+Subject: [PATCH 30/41] Step 10.3: Update App component to use addTask method
+
+---
+ App.jsx | 7 +------
+ 1 file changed, 1 insertion(+), 6 deletions(-)
+
+diff --git a/App.jsx b/App.jsx
+index b8824a4..858f96b 100644
+--- a/App.jsx
++++ b/App.jsx
+@@ -39,12 +39,7 @@ App = React.createClass({
+     // Find the text field via the React ref
+     var text = React.findDOMNode(this.refs.textInput).value.trim();
+ 
+-    Tasks.insert({
+-      text: text,
+-      createdAt: new Date(),            // current time
+-      owner: Meteor.userId(),           // _id of logged in user
+-      username: Meteor.user().username  // username of logged in user
+-    });
++    Meteor.call("addTask", text);
+ 
+     // Clear form
+     React.findDOMNode(this.refs.textInput).value = "";
+-- 
+2.2.1
+
+
+From 570c42f724a873d7d2a2c71bd0581522f8f2e23f Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Mon, 13 Jul 2015 12:33:38 -0700
+Subject: [PATCH 31/41] Step 10.4: Update Task to use setChecked and removeTask
+ methods
+
+---
+ Task.jsx | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
+
+diff --git a/Task.jsx b/Task.jsx
+index 2caead7..32577ed 100644
+--- a/Task.jsx
++++ b/Task.jsx
+@@ -6,13 +6,11 @@ Task = React.createClass({
+ 
+   toggleChecked() {
+     // Set the checked property to the opposite of its current value
+-    Tasks.update(this.props.task._id, {
+-      $set: {checked: ! this.props.task.checked}
+-    });
++    Meteor.call("setChecked", this.props.task._id, ! this.props.task.checked);
+   },
+ 
+   deleteThisTask() {
+-    Tasks.remove(this.props.task._id);
++    Meteor.call("removeTask", this.props.task._id);
+   },
+ 
+   render() {
+-- 
+2.2.1
+
+
+From e9da4141e5deed48e6ef079e3867e70aba388583 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Mon, 13 Jul 2015 12:34:33 -0700
+Subject: [PATCH 32/41] Step 11.1: Remove autopublish package
+
+---
+ .meteor/packages | 1 -
+ .meteor/versions | 1 -
+ 2 files changed, 2 deletions(-)
+
+diff --git a/.meteor/packages b/.meteor/packages
+index 6f2b627..81dd35c 100644
+--- a/.meteor/packages
++++ b/.meteor/packages
+@@ -5,7 +5,6 @@
+ # but you can also edit it by hand.
+ 
+ meteor-platform
+-autopublish
+ react
+ accounts-ui
+ accounts-password
+diff --git a/.meteor/versions b/.meteor/versions
+index 0d54bf9..777cca4 100644
+--- a/.meteor/versions
++++ b/.meteor/versions
+@@ -2,7 +2,6 @@ accounts-base@1.2.0
+ accounts-password@1.1.1
+ accounts-ui@1.1.5
+ accounts-ui-unstyled@1.1.7
+-autopublish@1.0.3
+ autoupdate@1.2.1
+ babel-compiler@5.6.15
+ babel-runtime@0.1.1
+-- 
+2.2.1
+
+
+From a1ad699753dbd4730d2d34ac50e810e573c52a99 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Mon, 13 Jul 2015 12:35:03 -0700
+Subject: [PATCH 33/41] Step 11.2: Add publish to server and subscribe to
+ client
+
+---
+ simple-todos-react.jsx | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/simple-todos-react.jsx b/simple-todos-react.jsx
+index b1aa692..f62ed9e 100644
+--- a/simple-todos-react.jsx
++++ b/simple-todos-react.jsx
+@@ -7,12 +7,20 @@ if (Meteor.isClient) {
+     passwordSignupFields: "USERNAME_ONLY"
+   });
+ 
++  Meteor.subscribe("tasks");
++
+   Meteor.startup(function () {
+     // Use Meteor.startup to render the component after the page is ready
+     React.render(<App />, document.getElementById("render-target"));
+   });
+ }
+ 
++if (Meteor.isServer) {
++  Meteor.publish("tasks", function () {
++    return Tasks.find();
++  });
++}
++
+ Meteor.methods({
+   addTask(text) {
+     // Make sure the user is logged in before inserting a task
+-- 
+2.2.1
+
+
+From 2347589fa6cd3b885929ea430dc9024bf12f8482 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Mon, 13 Jul 2015 12:36:29 -0700
+Subject: [PATCH 34/41] Step 11.3: Add setPrivate method
+
+---
+ simple-todos-react.jsx | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+
+diff --git a/simple-todos-react.jsx b/simple-todos-react.jsx
+index f62ed9e..c2a3196 100644
+--- a/simple-todos-react.jsx
++++ b/simple-todos-react.jsx
+@@ -42,5 +42,16 @@ Meteor.methods({
+ 
+   setChecked(taskId, setChecked) {
+     Tasks.update(taskId, { $set: { checked: setChecked} });
++  },
++
++  setPrivate(taskId, setToPrivate) {
++    const task = Tasks.findOne(taskId);
++
++    // Make sure only the task owner can make a task private
++    if (task.owner !== Meteor.userId()) {
++      throw new Meteor.Error("not-authorized");
++    }
++
++    Tasks.update(taskId, { $set: { private: setToPrivate } });
+   }
+ });
+-- 
+2.2.1
+
+
+From 96a833da5b09ddf5b279027a383ba8593bef06b6 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Mon, 13 Jul 2015 12:36:59 -0700
+Subject: [PATCH 35/41] Step 11.4: Update renderTasks to pass in
+ showPrivateButton
+
+---
+ App.jsx | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/App.jsx b/App.jsx
+index 858f96b..82915ec 100644
+--- a/App.jsx
++++ b/App.jsx
+@@ -29,7 +29,13 @@ App = React.createClass({
+   renderTasks() {
+     // Get tasks from this.data.tasks
+     return this.data.tasks.map((task) => {
+-      return <Task key={task._id} task={task} />;
++      const currentUserId = this.data.currentUser && this.data.currentUser._id;
++      const showPrivateButton = task.owner === currentUserId;
++
++      return <Task
++        key={task._id}
++        task={task}
++        showPrivateButton={showPrivateButton} />;
+     });
+   },
+ 
+-- 
+2.2.1
+
+
+From 20cf428657fbb42ec937d319e0d7a993226fe551 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Mon, 13 Jul 2015 12:37:28 -0700
+Subject: [PATCH 36/41] Step 11.5: Add a new prop type for Task component
+
+---
+ Task.jsx | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/Task.jsx b/Task.jsx
+index 32577ed..c85416a 100644
+--- a/Task.jsx
++++ b/Task.jsx
+@@ -1,7 +1,8 @@
+ // Task component - represents a single todo item
+ Task = React.createClass({
+   propTypes: {
+-    task: React.PropTypes.object.isRequired
++    task: React.PropTypes.object.isRequired,
++    showPrivateButton: React.PropTypes.bool.isRequired
+   },
+ 
+   toggleChecked() {
+-- 
+2.2.1
+
+
+From 7049ced6d9fdbcdded6c9a0e5dc9b6260255f2a8 Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Mon, 13 Jul 2015 12:38:04 -0700
+Subject: [PATCH 37/41] Step 11.6: Add private button, shown only to owner
+
+---
+ Task.jsx | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/Task.jsx b/Task.jsx
+index c85416a..1bbd4fb 100644
+--- a/Task.jsx
++++ b/Task.jsx
+@@ -31,6 +31,12 @@ Task = React.createClass({
+           checked={this.props.task.checked}
+           onClick={this.toggleChecked} />
+ 
++        { this.props.showPrivateButton ? (
++          <button className="toggle-private" onClick={this.togglePrivate}>
++            { this.props.task.private ? "Private" : "Public" }
++          </button>
++        ) : ''}
++
+         <span className="text">
+           <strong>{this.props.task.username}</strong>: {this.props.task.text}
+         </span>
+-- 
+2.2.1
+
+
+From 2603b34a2809af83f48c80f22b37f812df15f9ea Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Mon, 13 Jul 2015 12:38:33 -0700
+Subject: [PATCH 38/41] Step 11.7: Add private button event handler to Task
+
+---
+ Task.jsx | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/Task.jsx b/Task.jsx
+index 1bbd4fb..75827dd 100644
+--- a/Task.jsx
++++ b/Task.jsx
+@@ -14,6 +14,10 @@ Task = React.createClass({
+     Meteor.call("removeTask", this.props.task._id);
+   },
+ 
++  togglePrivate() {
++    Meteor.call("setPrivate", this.props.task._id, ! this.props.task.private);
++  },
++
+   render() {
+     // Give tasks a different className when they are checked off,
+     // so that we can style them nicely in CSS
+-- 
+2.2.1
+
+
+From 6eafb3a49a126f0a10db9c5f524ab2e74ba9880d Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Mon, 13 Jul 2015 12:39:22 -0700
+Subject: [PATCH 39/41] Step 11.8: Add private className to Task when needed
+
+---
+ Task.jsx | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/Task.jsx b/Task.jsx
+index 75827dd..37eadd3 100644
+--- a/Task.jsx
++++ b/Task.jsx
+@@ -21,7 +21,9 @@ Task = React.createClass({
+   render() {
+     // Give tasks a different className when they are checked off,
+     // so that we can style them nicely in CSS
+-    const taskClassName = this.props.task.checked ? "checked" : "";
++    // Add "checked" and/or "private" to the className when needed
++    const taskClassName = (this.props.task.checked ? "checked" : "") + " " +
++      (this.props.task.private ? "private" : "");
+ 
+     return (
+       <li className={taskClassName}>
+-- 
+2.2.1
+
+
+From b3d376a377d8a57135ea67f10b81fdcc566765ff Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Mon, 13 Jul 2015 12:39:58 -0700
+Subject: [PATCH 40/41] Step 11.9: Only publish tasks the current user can see
+
+---
+ simple-todos-react.jsx | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/simple-todos-react.jsx b/simple-todos-react.jsx
+index c2a3196..24849d5 100644
+--- a/simple-todos-react.jsx
++++ b/simple-todos-react.jsx
+@@ -16,8 +16,14 @@ if (Meteor.isClient) {
+ }
+ 
+ if (Meteor.isServer) {
++  // Only publish tasks that are public or belong to the current user
+   Meteor.publish("tasks", function () {
+-    return Tasks.find();
++    return Tasks.find({
++      $or: [
++        { private: {$ne: true} },
++        { owner: this.userId }
++      ]
++    });
+   });
+ }
+ 
+-- 
+2.2.1
+
+
+From e53e739f4b2586bf2f3e9786403bb57438194ffc Mon Sep 17 00:00:00 2001
+From: Sashko Stubailo <sashko@stubailo.com>
+Date: Mon, 13 Jul 2015 12:40:55 -0700
+Subject: [PATCH 41/41] Step 11.10: Add extra security to methods
+
+---
+ simple-todos-react.jsx | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/simple-todos-react.jsx b/simple-todos-react.jsx
+index 24849d5..2b4ada2 100644
+--- a/simple-todos-react.jsx
++++ b/simple-todos-react.jsx
+@@ -43,10 +43,22 @@ Meteor.methods({
+   },
+ 
+   removeTask(taskId) {
++    const task = Tasks.findOne(taskId);
++    if (task.private && task.owner !== Meteor.userId()) {
++      // If the task is private, make sure only the owner can delete it
++      throw new Meteor.Error("not-authorized");
++    }
++
+     Tasks.remove(taskId);
+   },
+ 
+   setChecked(taskId, setChecked) {
++    const task = Tasks.findOne(taskId);
++    if (task.private && task.owner !== Meteor.userId()) {
++      // If the task is private, make sure only the owner can check it off
++      throw new Meteor.Error("not-authorized");
++    }
++
+     Tasks.update(taskId, { $set: { checked: setChecked} });
+   },
+ 
+-- 
+2.2.1
+

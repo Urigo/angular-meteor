@@ -1,0 +1,91 @@
+<template name="api.camera">
+  <div>
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/content/api/api.camera.html"
+       class="btn btn-default btn-lg improve-button">
+      <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
+    </a>
+
+    <do-nothing>
+      {{#markdown}}
+
+# $meteor.camera
+
+A helper service for taking pictures across platforms.
+
+Must add [mdg:camera package](https://atmospherejs.com/mdg/camera) to use!
+
+----
+
+## Usage
+
+        meteor add mdg:camera
+
+        $meteor.getPicture(:options);
+
+### Arguments
+
+<table class="variables-matrix input-arguments">
+  <thead>
+  <tr>
+    <th>Param</th>
+    <th>Type</th>
+    <th>Details</th>
+    <th>Required</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>options</td>
+    <td><a href="https://docs.angularjs.org/guide/scope" class="label type-hint type-hint-objectstring">Object</a></td>
+    <td>
+      <p>options is an optional argument that is an Object with the following possible keys:</p>
+      <p>* width - An integer that specifies the minimum width of the returned photo.</p>
+      <p>* height - An integer that specifies the minimum height of the returned photo.</p>
+      <p>* quality - A number from 0 to 100 specifying the desired quality of JPEG encoding.</p></td>
+    <td><a href="" class="label type-hint type-hint-array">no</a></td>
+  </tr>
+  </tbody>
+</table>
+
+## Returns
+
+<table class="variables-matrix return-arguments">
+  <tbody><tr>
+    <td><a href="" class="label type-hint type-hint-expression">promise(data)</a></td>
+    <td><p>The promise solved successfully when the picture is taken with the data as a parameter
+      or rejected with an error as a parameter in case of error.</p></td>
+  </tr>
+  </tbody></table>
+
+----
+
+## Example
+
+    if (Meteor.isClient) {
+
+      app.controller("cameraCtrl", ['$scope', '$meteor',
+        function($scope, $meteor){
+
+          $scope.takePicture = function(){
+            $meteor.getPicture().then(function(data){
+              $scope.party.imageData = data;
+            });
+          };
+
+        }]);
+      }
+
+    }
+
+    HTML
+
+        <div ng-controller="cameraCtrl">
+          <button ng-click="takePicture()">Picture</button>
+          <img ng-src="{{dstache}}party.imageData}}">
+        </div>
+
+      {{/markdown}}
+    </do-nothing>
+
+  </div>
+</template>

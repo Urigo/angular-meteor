@@ -1,0 +1,60 @@
+<template name="sidebarAPI">
+  {{> sidebarDesktopAPI}}
+</template>
+
+<template name="sidebarDesktopAPI">
+    {{#if pages}}
+      {{> Template.dynamic template=sidebarType}}
+    {{/if}}
+    {{#if groups}}
+      {{#each groups}}
+        {{#if title}}
+          <h2>{{title}}</h2>
+        {{/if}}
+        {{> sidebarDesktopAPI}}
+        {{#if hr}}
+          <hr />
+        {{/if}}
+      {{/each}}
+    {{/if}}
+</template>
+
+<template name="sidebarMobileAPI">
+  <select class="component-sidebar-mobile">
+  {{#if pages}}
+    {{#each pages}}
+        <option value="{{route}}" class='sidebar-item-mobile' {{selectedMobile}}>{{title}}</option>
+    {{/each}}
+  {{/if}}
+  {{#if groups}}
+    {{#each groups}}
+        <optgroup label="{{title}}">
+          {{#each pages}}
+            <option value="{{path}}" class='sidebar-item-mobile' {{selectedMobile}}>{{title}}</option>
+          {{/each}}
+        </optgroup>
+    {{/each}}
+  {{/if}}
+  </select>
+</template>
+
+<template name="sidebarDefaultAPI">
+  <div class="col-md-3 menu">
+    <h2><a href="/api">API</a></h2>
+    <ul class="nav">
+      {{#each pages}}
+        <li id='{{id}}'>
+          {{#sidebarLinkAPI}}
+            {{title}}
+          {{/sidebarLinkAPI}}
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+</template>
+
+<template name="sidebarLinkAPI">
+  <a href='{{sidebarPath}}' class="{{selected}}">
+    {{> UI.contentBlock}}
+  </a>
+</template>

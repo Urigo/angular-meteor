@@ -1,0 +1,29 @@
+<template name="GitPatch">
+  <div class="github-diff-container">
+    <div class="title-panel">
+      {{#if step}}
+        <strong>{{step}}</strong>&nbsp;
+      {{/if}}
+      {{summary}}
+      <a class="on-github" href="{{gitHubLink}}">
+        {{fileName}} &raquo;
+      </a>
+    </div>
+    <div class="code-window">
+      <div class="inside-scroll-container">
+        <div class="line-numbers">
+          {{#each lineNumbers}}
+            <pre class="line-number">{{this}}</pre>
+          {{/each}}
+        </div>
+        <div class="line-content">
+          {{#each lines}}
+            {{#unless equals type "removed"}}
+              <pre class="{{type}}">{{{content}}}</pre>
+            {{/unless}}
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

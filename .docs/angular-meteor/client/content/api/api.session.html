@@ -1,0 +1,94 @@
+<template name="api.session">
+  <div>
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/content/api/api.session.html"
+       class="btn btn-default btn-lg improve-button">
+      <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
+    </a>
+
+    <do-nothing>
+      {{#markdown}}
+
+# $meteor.session
+
+A service that binds an angular $scope variable to a Meteor Session variable, so it can be interacted (get, set) from within Angular modules as well as Meteor modules (templates).
+
+----
+
+## Usage
+
+        $meteor.session(sessionKey).bind(scope, model)
+
+### Arguments
+
+<table class="variables-matrix input-arguments">
+  <thead>
+  <tr>
+    <th>Param</th>
+    <th>Type</th>
+    <th>Details</th>
+    <th>Required</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>sessionKey</td>
+    <td><a href="https://docs.angularjs.org/guide/scope" class="label type-hint type-hint-string">string</a></td>
+    <td><p>The name of the session variable</p></td>
+    <td><a href="" class="label type-hint type-hint-array">Yes</a></td>
+  </tr>
+  <tr>
+    <td>scope</td>
+    <td><a href="https://docs.angularjs.org/guide/scope" class="label type-hint type-hint-regexp">Scope</a></td>
+    <td><p>The scope the document will be bound to</p></td>
+    <td><a href="" class="label type-hint type-hint-array">Yes</a></td>
+  </tr>
+  <tr>
+    <td>model</td>
+    <td><a href="" class="label type-hint type-hint-string">String</a></td>
+    <td><p>The name of the scope's model variable that the document will be bound to</p></td>
+    <td><a href="" class="label type-hint type-hint-array">Yes</a></td>
+  </tr>
+  </tbody>
+</table>
+
+----
+
+## Example
+
+    if (Meteor.isClient) {
+
+      app.controller("MainCtrl", ['$scope', '$meteor',
+        function($scope, $meteor){
+
+          $meteor.session('counter').bind($scope, 'counter');
+
+          Tracker.autorun(function () {
+            console.log('angular counter changed', Session.get('counter'));
+          });
+
+        }]);
+
+      }
+
+      Template.hello.events({ // change to variable from outside angular
+        'click button': function () {
+          // increment the counter when button is clicked
+          Session.set("counter", Session.get("counter") + 1);
+        }
+      });
+
+    }
+
+    HTML
+
+        <div ng-controller="MainCtrl">
+          angular counter = [[ counter ]]
+          <button ng-click="counter=counter+1">Add angular counter</button>
+          <button>Add Meteor counter</button>
+        </div>
+
+      {{/markdown}}
+    </do-nothing>
+
+  </div>
+</template>

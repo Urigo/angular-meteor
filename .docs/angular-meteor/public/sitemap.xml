@@ -6,87 +6,95 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorial</loc>
+    <loc>http://angular-meteor.com/tutorialIntro</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorial/step_00</loc>
+    <loc>http://angular-meteor.com/tutorials/angular1/bootstrapping</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorial/step_01</loc>
+    <loc>http://angular-meteor.com/tutorials/angular1/static-template</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorial/step_03</loc>
+    <loc>http://angular-meteor.com/tutorials/angular1/dynamic-template</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorial/step_04</loc>
+    <loc>http://angular-meteor.com/tutorials/angular1/3-way-data-binding</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorial/step_05</loc>
+    <loc>http://angular-meteor.com/tutorials/angular1/adding-removing-objects-and-angular-event-handling</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorial/step_06</loc>
+    <loc>http://angular-meteor.com/tutorials/angular1/routing-and-multiple-views</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorial/step_07</loc>
+    <loc>http://angular-meteor.com/tutorials/angular1/bind-one-object</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorial/step_08</loc>
+    <loc>http://angular-meteor.com/tutorials/angular1/folder-structure</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorial/step_09</loc>
+    <loc>http://angular-meteor.com/tutorials/angular1/user-accounts-authentication-and-permissions</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorial/step_10</loc>
+    <loc>http://angular-meteor.com/tutorials/angular1/privacy-and-publish-subscribe-functions</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorial/step_11</loc>
+    <loc>http://angular-meteor.com/tutorials/angular1/deploying-your-app</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorial/step_12</loc>
+    <loc>http://angular-meteor.com/tutorials/angular1/running-your-app-on-android-or-ios-with-phoneGap</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorial/step_13</loc>
+    <loc>http://angular-meteor.com/tutorials/angular1/search-sort-pagination-and-reactive-vars</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorial/step_14</loc>
+    <loc>http://angular-meteor.com/tutorials/angular1/using-and-creating-angularjs-filters</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorial/step_15</loc>
+    <loc>http://angular-meteor.com/tutorials/angular1/meteor-methods-with-promises</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorial/step_16</loc>
+    <loc>http://angular-meteor.com/tutorials/angular1/conditional-template-directives-with-angularjs</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorial/step_17</loc>
+    <loc>http://angular-meteor.com/tutorials/angular1/google-maps</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorial/step_18</loc>
+    <loc>http://angular-meteor.com/tutorials/angular1/css-less-and-bootstrap</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorial/step_19</loc>
+    <loc>http://angular-meteor.com/tutorials/angular1/angular-material-and-custom-angular-auth-forms</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorial/step_20</loc>
+    <loc>http://angular-meteor.com/tutorials/angular1/3rd-party-libraries</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://angular-meteor.com/tutorials/angular1/handling-files-with-collectionfs</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://angular-meteor.com/tutorials/angular1/next-steps</loc>
     <priority>0.5</priority>
   </url>
   <url>
@@ -94,7 +102,7 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/manifest</loc>
+    <loc>http://angular-meteor.com/manifesto</loc>
     <priority>0.6</priority>
   </url>
   <url>

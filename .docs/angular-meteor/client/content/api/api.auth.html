@@ -1,0 +1,710 @@
+<template name="api.auth">
+  <div>
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/content/api/api.auth.html"
+       class="btn btn-default btn-lg improve-button">
+      <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
+    </a>
+
+    <do-nothing>
+        {{#markdown}}
+
+# Accounts, users and authentication
+
+Methods and [$rootScope](https://docs.angularjs.org/api/ng/service/$rootScope) variables to support [Meteor.user](http://docs.meteor.com/#/full/meteor_user) and [Meteor's accounts system](http://docs.meteor.com/#/full/accounts_api)
+
+----
+
+## Usage
+
+    $rootScope.currentUser
+
+    $rootScope.loggingIn
+
+    $meteor.waitForUser()
+
+    $meteor.requireUser()
+
+    $meteor.requireValidUser(validatorFn)
+
+    $meteor.loginWithPassword(user, password)
+
+    $meteor.createUser(options)
+
+    $meteor.changePassword(oldPassword, newPassword)
+
+    $meteor.forgotPassword(options)
+
+    $meteor.resetPassword(token, newPassword)
+
+    $meteor.verifyEmail(token)
+
+    $meteor.logout()
+
+    $meteor.logoutOtherClients()
+
+    $meteor.loginWithMeteorDeveloperAccount(options)
+    $meteor.loginWithFacebook(options)
+    $meteor.loginWithGithub(options)
+    $meteor.loginWithGoogle(options)
+    $meteor.loginWithMeetup(options)
+    $meteor.loginWithTwitter(options)
+    $meteor.loginWithWeibo(options)
+
+## Variables
+
+<table class="variables-matrix return-arguments">
+<tbody><tr>
+  <td><a href="" class="label type-hint type-hint-expression">$rootScope</a></td>
+  <td><p>Adding to $rootScope support for Meteor's <a href="http://docs.meteor.com/#/full/template_currentuser">currentUser</a>
+         and <a href="http://docs.meteor.com/#/full/template_loggingin">loggingIn</a>
+  </p>
+    <ul>
+      <li><code><span class="pln">$rootScope.currentUser</span></code>
+        — The <a href="http://docs.meteor.com/#/full/template_currentuser">current logged in user</a> and it's data.
+        it is <strong>null</strong> if the user is not logged in. A reactive data source.
+      </li>
+      <li><code><span class="pln">$rootScope.loggingIn</span></code>
+        — True if a login method (such as Meteor.loginWithPassword, Meteor.loginWithFacebook, or Accounts.createUser) is currently in progress.
+        A reactive data source. Can be use to display animation while user is logging in.
+      </li>
+    </ul>
+  </td>
+</tr>
+</tbody></table>
+
+----
+
+#### Example
+
+    // In templates
+    ng-if="$root.currentUser"
+
+    // In controllers
+    if ($rootScope.currentUser)
+
+        {{/markdown}}
+
+      {{#markdown}}
+
+<hr>
+<h2 id="methods">Methods</h2>
+
+Those methods are provided by the accounts-password package.
+See the <a href="http://docs.meteor.com/#/full/accounts_passwords">Meteor's Passwords section</a>
+
+<br>
+<h3><p><code><span class="pln">waitForUser();</span></code></p></h3>
+
+Returns a promise fulfilled with the <a href="http://docs.meteor.com/#/full/meteor_user">currentUser</a> when the user subscription is ready.
+<br>
+This is useful when you want to grab the current user before the route is rendered.
+<br>
+If there is no logged in user, it will return null.
+<br>
+See the <a href="/tutorial/step_08#authenticationwithrouters">“Authentication with Routers”</a> section of our tutorial for more information and a full example.
+
+----
+
+#### Example
+
+    // In route config ('ui-router' in the example, but works with 'ngRoute' the same way)
+    $stateProvider
+      .state('home', {
+        url: '/',
+        templateUrl: 'client/views/home.ng.html',
+        controller: 'HomeController'
+        resolve: {
+          "currentUser": ["$meteor", function($meteor){
+            return $meteor.waitForUser();
+          }]
+        }
+    });
+
+<br>
+<h3><p><code><span class="pln">requireUser();</span></code></p></h3>
+
+Resolves the promise successfully if a user is authenticated and rejects otherwise.
+<br>
+This is useful in cases where you want to require a route to have an authenticated user.
+<br>
+You can catch the rejected promise and redirect the unauthenticated user to a different page, such as the login page.
+<br>
+See the <a href="/tutorial/step_08#authenticationwithrouters">“Authentication with Routers”</a> section of our tutorial for more information and a full example.
+
+
+
+----
+
+#### Example
+
+    // In route config ('ui-router' in the example, but works with 'ngRoute' the same way)
+    $stateProvider
+      .state('home', {
+        url: '/',
+        templateUrl: 'client/views/home.ng.html',
+        controller: 'HomeController'
+        resolve: {
+          "currentUser": ["$meteor", function($meteor){
+            return $meteor.requireUser();
+          }]
+        }
+      });
+
+    app.run(["$rootScope", "$state", function($rootScope, $state) {
+      $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
+        // We can catch the error thrown when the $meteor.requireUser() promise is rejected
+        // and redirect the user back to the login page
+        if (error === "AUTH_REQUIRED") {
+            // It is better to use $state instead of $location. See Issue #283.
+            $state.go('logIn');
+        }
+      });
+    }]);
+
+<br>
+<h3><p><code><span class="pln">requireValidUser(validatorFn);</span></code></p></h3>
+
+Resolves the promise successfully if a user is authenticated and the validatorFn returns true; rejects otherwise.
+<br>
+This is useful in cases where you want to require a route to have an authenticated user and do extra validation like the user's role or group.
+<br>
+You can catch the rejected promise and redirect the unauthenticated user to a different page, such as the login page.
+<br>
+See the <a href="/tutorial/step_08#authenticationwithrouters">“Authentication with Routers”</a> section of our tutorial for more information and a full example.
+<br>
+The mandatory validator function will be called with the authenticated user as the single param and it's expected to return true in order to resolve. If it returns a string, the promise will be rejected using said string as the reason. Any other return (false, null, undefined) will be rejected with the default "FORBIDDEN" reason.
+
+
+
+----
+
+#### Example
+
+    // In route config ('ui-router' in the example, but works with 'ngRoute' the same way)
+    $stateProvider
+      .state('home', {
+        url: '/',
+        templateUrl: 'client/views/home.ng.html',
+        controller: 'HomeController'
+        resolve: {
+          "currentUser": ["$meteor", function($meteor){
+            return $meteor.requireUser();
+          }]
+        }
+       })
+       .state('admin', {
+         url: '/admin',
+         templateUrl: 'client/views/admin.ng.html',
+         controller: 'AdminController'
+         resolve: {
+           "currentUser": ["$meteor", function($meteor){
+             return $meteor.requireValidUser(function(user) {
+               return user.username==='admin';
+             });
+           }]
+         }
+       })
+       .state('admin2', {
+         url: '/admin2',
+         templateUrl: 'client/views/admin2.ng.html',
+         controller: 'Admin2Controller'
+         resolve: {
+           "currentUser": ["$meteor", function($meteor){
+             return $meteor.requireValidUser(function(user) {
+               if (user.username==='admin2') {
+                 return true;
+               }
+
+               return 'UNAUTHORIZED';
+             });
+           }]
+         }
+      });
+
+    app.run(["$rootScope", "$state", function($rootScope, $state) {
+      $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
+        // We can catch the error thrown when the $meteor.requireUser() promise is rejected
+        // or the custom error, and redirect the user back to the login page
+        switch(error) {
+          case "AUTH_REQUIRED":
+            $state.go('logIn');
+            break;
+          case "FORBIDDEN":
+            $state.go('forbidden');
+            break;
+          case "UNAUTHORIZED":
+            $state.go('unauthorized');
+            break;
+          default:
+            $state.go('internal-client-error');
+        }
+      });
+    }]);
+
+<br>
+<h3><p><code><span class="pln">loginWithPassword( :user, :password );</span></code></p></h3>
+
+Log the user in with a password.
+
+<br>
+<h4>Parameters</h4>
+
+<table class="variables-matrix input-arguments">
+  <thead>
+  <tr>
+    <th>Param</th>
+    <th>Type</th>
+    <th>Details</th>
+    <th>Required</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>user</td>
+    <td>
+      <a href="" class="label type-hint type-hint-object">Object</a> /
+      <a href="" class="label type-hint type-hint-string">String</a>
+    </td>
+    <td><p>Either a string interpreted as a username or an email; or an object with a single key: email, username or id.
+    </p></td>
+    <td><a href="" class="label type-hint type-hint-object">Yes</a></td>
+  </tr>
+  <tr>
+    <td>password</td>
+    <td>
+      <a href="" class="label type-hint type-hint-string">String</a>
+    </td>
+    <td><p>The user's password.
+    </p></td>
+    <td><a href="" class="label type-hint type-hint-object">Yes</a></td>
+  </tr>
+  </tbody>
+</table>
+<br>
+
+
+#### Example
+
+    $meteor.loginWithPassword(user, password).then(function(){
+        console.log('Login success');
+      }, function(err){
+        console.log('Login error - ', err);
+      });
+    }
+
+
+<br>
+<h3><p><code><span class="pln">createUser( :options );</span></code></p></h3>
+
+Create a new user. <a href="http://docs.meteor.com/#/full/accounts_createuser">More information</a>.
+
+<br>
+<h4>Options</h4>
+
+<table class="variables-matrix input-arguments">
+  <thead>
+  <tr>
+    <th>Param</th>
+    <th>Type</th>
+    <th>Details</th>
+    <th>Required</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>username</td>
+    <td>
+      <a href="" class="label type-hint type-hint-string">String</a>
+    </td>
+    <td><p>A unique name for this user.
+    </p></td>
+    <td><a href="" class="label type-hint type-hint-object">must provide username or email</a></td>
+  </tr>
+  <tr>
+    <td>email</td>
+    <td>
+      <a href="" class="label type-hint type-hint-string">String</a>
+    </td>
+    <td><p>The user's email address.
+    </p></td>
+    <td><a href="" class="label type-hint type-hint-object">must provide username or email</a></td>
+  </tr>
+  <tr>
+    <td>password</td>
+    <td>
+      <a href="" class="label type-hint type-hint-string">String</a>
+    </td>
+    <td><p>The user's password. This is <strong>not</strong> sent in plain text over the wire.
+    </p></td>
+    <td><a href="" class="label type-hint type-hint-object">Yes</a></td>
+  </tr>
+  <tr>
+    <td>profile</td>
+    <td>
+      <a href="" class="label type-hint type-hint-object">Object</a>
+    </td>
+    <td><p>The user's profile, typically including the name field.
+    </p></td>
+    <td><a href="" class="label type-hint type-hint-object">No</a></td>
+  </tr>
+  </tbody>
+</table>
+<br>
+
+
+#### Example
+
+    $meteor.createUser({
+          username:'moma',
+          email:'example@gmail.com',
+          password: 'Bksd@asdf',
+          profile: {expertize: 'Developer'}
+        }).then(function(){
+        console.log('Login success');
+      }, function(err){
+        console.log('Login error - ', err);
+      });
+    }
+
+
+<br>
+<h3><p><code><span class="pln">changePassword( :oldPassword, :newPassword );</span></code></p></h3>
+
+Change the current user's password. Must be logged in.
+
+<br>
+<h4>Options</h4>
+
+<table class="variables-matrix input-arguments">
+  <thead>
+  <tr>
+    <th>Param</th>
+    <th>Type</th>
+    <th>Details</th>
+    <th>Required</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>oldPassword</td>
+    <td>
+      <a href="" class="label type-hint type-hint-string">String</a>
+    </td>
+    <td><p>The user's current password. This is <strong>not</strong> sent in plain text over the wire.
+    </p></td>
+    <td><a href="" class="label type-hint type-hint-object">Yes</a></td>
+  </tr>
+  <tr>
+    <td>newPassword</td>
+    <td>
+      <a href="" class="label type-hint type-hint-string">String</a>
+    </td>
+    <td><p>A new password for the user. This is <strong>not</strong> sent in plain text over the wire.
+    </p></td>
+    <td><a href="" class="label type-hint type-hint-object">Yes</a></td>
+  </tr>
+  </tbody>
+</table>
+<br>
+
+
+#### Example
+
+    $meteor.changePassword('old', 'new232f3').then(function(){
+        console.log('Change password success');
+      }, function(err){
+        console.log('Error changing password - ', err);
+      });
+    }
+
+
+<br>
+<h3><p><code><span class="pln">forgotPassword( :options );</span></code></p></h3>
+
+Request a forgot password email.
+
+<br>
+<h4>Options</h4>
+
+<table class="variables-matrix input-arguments">
+  <thead>
+  <tr>
+    <th>Param</th>
+    <th>Type</th>
+    <th>Details</th>
+    <th>Required</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>email</td>
+    <td>
+      <a href="" class="label type-hint type-hint-string">String</a>
+    </td>
+    <td><p>The email address to send a password reset link.
+    </p></td>
+    <td><a href="" class="label type-hint type-hint-object">Yes</a></td>
+  </tr>
+  </tbody>
+</table>
+<br>
+
+
+#### Example
+
+    $meteor.forgotPassword({email: 'sample@gmail.com'}).then(function(){
+        console.log('Success sending forgot password email');
+      }, function(err){
+        console.log('Error sending forgot password email - ', err);
+      });
+    }
+
+
+<br>
+<h3><p><code><span class="pln">resetPassword( :token, :newPassword );</span></code></p></h3>
+
+Reset the password for a user using a token received in email. Logs the user in afterwards.
+
+<br>
+<h4>Parameters</h4>
+
+<table class="variables-matrix input-arguments">
+  <thead>
+  <tr>
+    <th>Param</th>
+    <th>Type</th>
+    <th>Details</th>
+    <th>Required</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>token</td>
+    <td>
+      <a href="" class="label type-hint type-hint-string">String</a>
+    </td>
+    <td><p>The token retrieved from the reset password URL.
+    </p></td>
+    <td><a href="" class="label type-hint type-hint-object">Yes</a></td>
+  </tr>
+  <tr>
+    <td>newPassword</td>
+    <td>
+      <a href="" class="label type-hint type-hint-string">String</a>
+    </td>
+    <td><p>A new password for the user. This is <strong>not</strong> sent in plain text over the wire.
+    </p></td>
+    <td><a href="" class="label type-hint type-hint-object">Yes</a></td>
+  </tr>
+  </tbody>
+</table>
+<br>
+
+
+#### Example
+
+    $meteor.resetPassword($stateParams.token, 'new232f3').then(function(){
+        console.log('Reset password success');
+      }, function(err){
+        console.log('Error resetting password - ', err);
+      });
+    }
+
+
+
+<br>
+<h3><p><code><span class="pln">verifyEmail( :token );</span></code></p></h3>
+
+Marks the user's email address as verified. Logs the user in afterwards.
+
+<br>
+<h4>Parameters</h4>
+
+<table class="variables-matrix input-arguments">
+  <thead>
+  <tr>
+    <th>Param</th>
+    <th>Type</th>
+    <th>Details</th>
+    <th>Required</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>token</td>
+    <td>
+      <a href="" class="label type-hint type-hint-string">String</a>
+    </td>
+    <td><p>The token retrieved from the reset password URL.
+    </p></td>
+    <td><a href="" class="label type-hint type-hint-object">Yes</a></td>
+  </tr>
+  </tbody>
+</table>
+<br>
+
+
+#### Example
+
+    $meteor.verifyEmail($stateParams.token).then(function(){
+        console.log('Success verifying password ');
+      }, function(err){
+        console.log('Error verifying password - ', err);
+      });
+    }
+
+
+<br>
+<h3><p><code><span class="pln">loginWith'ExternalService'( :options );</span></code></p></h3>
+
+Log the user in using an external service.
+
+Available functions are:
+<br>
+<ul>
+  <li>$meteor.loginWithFacebook</li>
+  <li>$meteor.loginWithTwitter</li>
+  <li>$meteor.loginWithGoogle</li>
+  <li>$meteor.loginWithGithub</li>
+  <li>$meteor.loginWithMeetup</li>
+  <li>$meteor.loginWithWeibo</li>
+</ul>
+
+<br>
+<h4>options</h4>
+
+<table class="variables-matrix input-arguments">
+  <thead>
+  <tr>
+    <th>Param</th>
+    <th>Type</th>
+    <th>Details</th>
+    <th>Required</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>requestPermissions</td>
+    <td>
+      <a href="" class="label type-hint type-hint-string">Array of Strings</a>
+    </td>
+    <td><p>A list of permissions to request from the user.
+    </p></td>
+    <td><a href="" class="label type-hint type-hint-object">No</a></td>
+  </tr>
+  <tr>
+    <td>requestOfflineToken</td>
+    <td>
+      <a href="" class="label type-hint type-hint-boolean">Boolean</a>
+    </td>
+    <td><p>If true, asks the user for permission to act on their behalf when offline. This stores an additional offline token in the services field of the user document. Currently only supported with Google.
+    </p></td>
+    <td><a href="" class="label type-hint type-hint-object">No</a></td>
+  </tr>
+  <tr>
+    <td>forceApprovalPrompt</td>
+    <td>
+      <a href="" class="label type-hint type-hint-boolean">Boolean</a>
+    </td>
+    <td><p>If true, forces the user to approve the app's permissions, even if previously approved. Currently only supported with Google.
+    </p></td>
+    <td><a href="" class="label type-hint type-hint-object">No</a></td>
+  </tr>
+  <tr>
+    <td>userEmail</td>
+    <td>
+      <a href="" class="label type-hint type-hint-string">String</a>
+    </td>
+    <td><p>An email address that the external service will use to pre-fill the login prompt. Currently only supported with Meteor developer accounts.
+    </p></td>
+    <td><a href="" class="label type-hint type-hint-object">No</a></td>
+  </tr>
+  <tr>
+    <td>loginStyle</td>
+    <td>
+      <a href="" class="label type-hint type-hint-string">String</a>
+    </td>
+    <td><p>Login style ("popup" or "redirect", defaults to the login service configuration).
+      The "popup" style opens the login page in a separate popup window, which is generally preferred because the Meteor application doesn't need to be reloaded.
+      The "redirect" style redirects the Meteor application's window to the login page, and the login service provider redirects back to the Meteor application which is then reloaded.
+      The "redirect" style can be used in situations where a popup window can't be opened, such as in a mobile UIWebView.
+      The "redirect" style however relies on session storage which isn't available in Safari private mode, so the "popup" style will be forced if session storage can't be used.
+    </p></td>
+    <td><a href="" class="label type-hint type-hint-object">No</a></td>
+  </tr>
+  </tbody>
+</table>
+<br>
+
+
+#### Example
+
+    $meteor.loginWithFacebook({requestPermissions: ['email']}).then(function(){
+        console.log('Login success');
+      }, function(err){
+        console.log('Login error - ', err);
+      });
+    }
+
+
+<br>
+<h3><p><code><span class="pln">logout();</span></code></p></h3>
+
+Log the user out.
+
+<br>
+
+#### Returns
+
+<table class="variables-matrix return-arguments">
+  <tbody><tr>
+    <td><a href="" class="label type-hint type-hint-object">promise</a></td>
+    <td><p>Resolves with no arguments on success, or reject with a Error argument on failure.</p></td>
+  </tr>
+  </tbody></table>
+
+#### Example
+
+    $meteor.logout().then(function(){
+        console.log('Logout success');
+      }, function(err){
+        console.log('logout error - ', err);
+      });
+    }
+
+
+<br>
+<h3><p><code><span class="pln">logoutOtherClients();</span></code></p></h3>
+
+Log out other clients logged in as the current user, but does not log out the client that calls this function.
+<br>
+For example, when called in a user's browser, connections in that browser remain logged in, but any other browsers or DDP clients logged in as that user will be logged out.
+
+<br>
+
+#### Returns
+
+<table class="variables-matrix return-arguments">
+  <tbody><tr>
+    <td><a href="" class="label type-hint type-hint-object">promise</a></td>
+    <td><p>Resolves with no arguments on success, or reject with a Error argument on failure.</p></td>
+  </tr>
+  </tbody></table>
+
+#### Example
+
+    $meteor.logoutOtherClients().then(function(){
+        console.log('Logout success');
+      }, function(err){
+        console.log('logout error - ', err);
+      });
+    }
+
+
+
+
+        {{/markdown}}
+    </do-nothing>
+
+  </div>
+</template>

@@ -1,0 +1,36 @@
+<template name="api.ngFileExtension">
+  <div>
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/content/api/api.ngFileExtension.html"
+       class="btn btn-default btn-lg improve-button">
+      <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
+    </a>
+
+    <div>
+      {{#markdown}}
+
+# .ng.js and .ng.html files
+
+## ng-annotate and .ng.js
+
+If you want to avoid minification problems with Angular's [dependency annotations](https://docs.angularjs.org/guide/di#dependency-annotation), you normally need to use a syntax that you're probably already familiar with:
+
+    angular.module('socially').controller('PartiesListCtrl', ['$scope',
+      function($scope){
+        // ...
+    }]);
+
+There is a very popular Angular tool called [ng-annotate](https://github.com/olov/ng-annotate) that automatically adds and removes AngularJS dependency injection annotations. Angular-meteor uses that process automatically. All you need to do is to change your `.js` files to end with `.ng.js`. Those files will be recognised by Angular-meteor and automatically corrected, so you can simply write your dependency injection like this:
+
+    angular.module('socially').controller('PartiesListCtrl',
+      function($scope){
+        // ...
+    });
+
+## AngularJS templates: .ng.html
+
+Both [Blaze](https://www.meteor.com/blaze) (Meteor's templating system) and AngularJS use the same braces or 'double curley brackets' syntax for expressions. That causes issues when you're working with AngularJS in Meteor: Blaze will compile and override your AngularJS expression. To disable that behaviour, you can use the `.ng.html` file extension.
+      {{/markdown}}
+    </div>
+
+  </div>
+</template>

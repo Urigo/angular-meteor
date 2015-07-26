@@ -1,0 +1,33 @@
+<template name="api.collectionfs">
+  <div>
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/content/api/api.collectionfs.html"
+       class="btn btn-default btn-lg improve-button">
+      <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
+    </a>
+
+    <do-nothing>
+        {{#markdown}}
+
+# CollectionFS
+
+CollectionFS works a bit different from regular Meteor.Collection object, and in order to use these special collections we need to use `$meteorCollectionFS` (or `$meteor.collectionFS`).
+The API is the same of $meteor.collection, the only difference is the handling of this collection behind-the-scenes.
+
+----
+
+## Usage
+
+    $meteor.collectionFS(Images, false);
+
+    // Or in case you want a different query
+    $meteor.collectionFS(function() {
+      return Images.find();
+    }, false);
+
+----
+
+        {{/markdown}}
+    </do-nothing>
+
+  </div>
+</template>

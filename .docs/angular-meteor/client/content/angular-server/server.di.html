@@ -1,0 +1,42 @@
+<template name="server.di">
+  <div>
+    <do-nothing>
+      {{#markdown}}
+# Dependency Injection
+
+Having Angular on the server gives us access to an awesome part of Angular, that is still missing in Meteor -
+Dependency Injection. We can now use Angular services on the server to make modular code with more explicit
+dependencies. We can use the things we know and love like provides, factories and services.
+
+To create a service just do it the same as you would in a regular angular app. For example:
+
+    // server/math.js
+    angular.module('myApp').service('Math', function() {
+      this.add = function(a, b) {
+        return a + b;
+      }
+    });
+
+Now that we have a service set up we can use it through injection in other services.
+
+    // server/calculator.js
+    angular.module('myApp').service('Calculator', function(Math) {
+      this.add = function(a, b) {
+        return 'Result: ' + Math.add(a, b);
+      }
+    });
+
+We can use dependency injection even in Meteor's world if we wrap it in a `run` section:
+
+    // server/publications/cool-users.js
+    angular.module('myApp').run(function(Users) {
+      Meteor.publish('cool-users', function() {
+        return Meteor.users.find({
+          _id : { $in : Users.getCoolUsersIds() }
+        });
+      });
+    });
+      {{/markdown}}
+    </do-nothing>
+  </div>
+</template>

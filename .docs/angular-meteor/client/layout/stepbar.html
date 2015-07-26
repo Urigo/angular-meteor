@@ -1,0 +1,81 @@
+<template name="stepbar">
+  {{#unless ../stepbarHide}}
+  <div class="stepbar">
+    {{> stepbarButtons }}
+  </div>
+  {{/unless}}
+</template>
+
+<template name="stepbarBottom">
+  {{#unless ../stepbarHide}}
+    <div class="stepbar stepbar-bottom">
+      {{> stepbarButtons }}
+    </div>
+  {{/unless}}
+</template>
+
+<template name="stepbarButtons">
+  {{#if prev}}
+    <a href="{{prev.path}}" class="prev-button btn btn-default">{{#if prevContent}}{{prevContent}}{{else}}Prev{{/if}}</a>
+  {{/if}}
+  {{#if next}}
+    <a href="{{next.path}}" class="next-button btn btn-default">{{#if nextContent}}{{nextContent}}{{else}}Next{{/if}}</a>
+  {{/if}}
+</template>
+
+<template name="stepbarButtonsPrevious">
+  <a href="{{prev.path}}"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
+</template>
+
+<template name="stepbarButtonsNext">
+  {{#if next}}
+    <a href="{{next.path}}"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
+  {{/if}}
+</template>
+
+<template name="stepbarLiveDemo">
+  {{#if next}}
+    <a href="{{liveDemoLink}}"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
+  {{/if}}
+</template>
+
+<template name="stepbarCodeDiff">
+  {{#if next}}
+    {{#if CommitDiff}}
+      <a href="{{ghRepoName}}/commit/{{CommitDiff}}"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
+    {{else}}
+      <a href="{{ghRepoName}}/compare/step_{{previousCommit}}...step_{{currentCommit}}"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
+    {{/if}}
+  {{/if}}
+</template>
+
+<template name="tutorialNavigationButtons">
+  <ul class="btn-group tutorial-nav">
+    {{> stepbarButtonsPrevious }}
+    {{> stepbarLiveDemo }}
+    {{> stepbarCodeDiff }}
+    {{> stepbarButtonsNext }}
+  </ul>
+</template>
+
+<template name="improveDoc">
+  <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/content/tutorials/angular1/steps/{{contentTemplate}}"
+     class="btn btn-default btn-lg improve-button">
+    <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
+  </a>
+</template>
+
+<template name="tutorialStepHeader">
+  <div class="col-md-12">
+    {{> improveDoc }}
+    {{> tutorialNavigationButtons }}
+  </div>
+
+  <div class="col-md-8">
+    <h1>Step {{id}} - {{title}}</h1>
+  </div>
+  <div class="video-tutorial col-md-4">
+    <iframe width="300" height="169" src="{{video}}" frameborder="0" allowfullscreen></iframe>
+  </div>
+</template>
+

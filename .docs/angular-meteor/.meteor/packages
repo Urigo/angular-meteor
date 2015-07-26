@@ -1,18 +1,29 @@
-# Meteor packages used by this project, one per line.
+# Skybreak packages used by this project, one per line.
 #
-# 'meteor add' and 'meteor remove' will edit this file for you,
+# 'skybreak add' and 'skybreak remove' will edit this file for you,
 # but you can also edit it by hand.
 
-meteor-platform
-autopublish
-insecure
-urigo:angular
-angular:angular-sanitize
-less
-urigo:angular-ui-router
 showdown
-urigo:angularmeteormarkdown
-urigo:angulartics
+meyerweb-reset
+http
+spiderable
+handlebars
+standard-app-packages
+my-moment
+accounts-ui
+accounts-password
+less
+browser-policy-framing
+browser-policy-content
+reload-safetybelt
+markdown
+iron:router
+mrt:leaflet
+sacha:spin
+reactive-var
+chuangbo:cookie
+simple:highlight.js
+percolatestudio:segment.io@1.1.0_1
+tutorials
 twbs:bootstrap
 fortawesome:fontawesome
-simple:highlight.js

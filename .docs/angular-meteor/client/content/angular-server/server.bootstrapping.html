@@ -1,0 +1,28 @@
+<template name="server.bootstrapping">
+  <div>
+    <do-nothing>
+      {{#markdown}}
+# Bootstrapping Angular-Server
+
+To enjoy the benefits of Angular on the server side, the first thing we have to do
+is bootstrap our application.
+
+That is no different from bootstrapping an Angular application on the client side, though
+the only exception is that we cannot use the `ng-app` directive to bootstrap our application
+automatically. So we will need use the `angular.bootstrap` function to manually bootstrap
+our application. Anywhere in your server code, just call `angular.bootstrap` but without specifying
+an element to bootstrap with (because we are on the server of course).
+
+For example:
+
+    // server/startup.js
+    angular.bootstrap(['todoMVC']);
+
+Once the application is bootstrapped the application runs the same as it would in the client side.
+Meaning you would first have the `config` phase of the application bootstrap and then the `run` phase.
+You can use these phases for server configuration and startup logic, but with the advantage of running inside
+Angular's context giving you access to dependency injection.
+      {{/markdown}}
+    </do-nothing>
+  </div>
+</template>
