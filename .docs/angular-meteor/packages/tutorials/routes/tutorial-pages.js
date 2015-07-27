@@ -30,7 +30,7 @@ TUTORIAL_PAGES = {
       seoTitlePrefix: "Angular 2.0 Meteor Tutorial | ",
       subHead: "Angular 2.0 Meteor tutorial",
       stepbarHide: true,
-      pages: ANGULAR_TUT
+      pages: ANGULAR2_TUT
     }
   ]
-}
+};

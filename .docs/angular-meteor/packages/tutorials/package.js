@@ -91,7 +91,7 @@ Package.onUse(function (api) {
   api.export('TUTORIAL_PAGES');
 
   api.export('REACT_TUT');
-  api.export('ANGULAR_TUT');
+  api.export('ANGULAR2_TUT');
   api.export('ANGULAR1_TUT');
 
   // For easier debugging

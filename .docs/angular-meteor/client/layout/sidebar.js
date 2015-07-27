@@ -17,13 +17,13 @@ PAGES = [
     title: "Angular 2.0",
     route: "tutorials.angular2",
     path: "/tutorials/angular2",
-    pathRedirect: "/tutorials/angular2/creating-an-app",
-    ghRepoName: "simple-todos-angular",
+    pathRedirect: "/tutorials/angular2/bootstrapping",
+    ghRepoName: "https://github.com/ShMcK/Angular2-Meteor-Demos/tree/master/ng2-socially",
     subSidebarType: "sidebarStepsCollapse",
     seoTitlePrefix: "Angular 2.0 Meteor Tutorial | ",
     subHead: "Angular 2.0 Meteor tutorial",
     stepbarHide: true,
-    pages: ANGULAR_TUT
+    pages: ANGULAR2_TUT
   }
 ];
 
