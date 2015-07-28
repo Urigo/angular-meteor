@@ -1,4 +1,4 @@
-<template name="tutorialAngular2.step_04.html">
+<template name="tutorial.step_04.html">
   {{#markdown}}
 
 Now that we have full data binding from server to client, let's interact with the data and see the updates in action.
@@ -170,6 +170,10 @@ __`parties-form/parties-form.ng.html`:__
 Now calling `f.value`, or displaying {{f.value}} will give us the value of our form.
 
 ## (submit)
+
+In Angular 2, the model determines the view. Change the model, and the view automatically updates thanks to Angular 2's change detection with Zone.js.
+
+But then how does the view trigger changes in the model? It does this through events, which are indicated by the round bracket () syntax. `(submit)` or `(click)` are examples of events.
 
 Now let's bind a submit event to the add button provided to us by the [NgForm](https://angular.io/docs/js/latest/api/forms/NgForm-class.html) directive. This will trigger if the button is clicked, or if the user presses enter on the final field.
 
