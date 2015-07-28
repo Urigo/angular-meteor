@@ -26,6 +26,8 @@ Wow, that's a lot. Now let's see how easy it is to implement these router hooks.
 
 In our previous example, we began loading our data in the constructor.
 
+__`parties-details/parties-details.ts`:__
+
     export class PartyDetails {
 
       constructor(@Inject(RouteParams) routeParams:RouteParams) {
@@ -44,6 +46,8 @@ What if the `Parties.find()` was unsuccessful? The users page would return nothi
 By using a router lifecycle hook, the route will not change unless the data is collected.
 
 Router lifecycle hooks are easy to use. Simply add a method to the component class with the name of the hook.
+
+__`parties-details/parties-details.ts`:__
 
     export class PartyDetails {
       constructor(@Inject(RouteParams) routeParams:RouteParams) {
