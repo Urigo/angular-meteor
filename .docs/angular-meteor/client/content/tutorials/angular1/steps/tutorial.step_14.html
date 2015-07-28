@@ -137,7 +137,7 @@ And the full publish method:
             {invited: this.userId},
             {invited: {$exists: true}}
           ]}
-      ]}));
+      ]}), { noReady: true });
       return Parties.find({
         'name' : { '$regex' : '.*' + searchString || '' + '.*', '$options' : 'i' },
         $or:[
