@@ -22,21 +22,23 @@ Let's import and add the package dependencies.
 
 __`app.ts`:__
 
-    import {Component, View, bootstrap} from 'angular2/angular2';
-    import {routerInjectables, routerDirectives, Router, RouteConfig} from 'angular2/router';
-    // Alternatively, HashLocationStrategy
+    if (Meteor.isClient) {
+      import {Component, View, bootstrap} from 'angular2/angular2';
+      import {routerInjectables, routerDirectives, Router, RouteConfig} from 'angular2/router';
+      // Alternatively, HashLocationStrategy
 
-    @Component({
-      selector: 'app'
-    })
-    @View({
-      template: 'index.ng.html',
-      directives: [routerDirectives]
-    })
-    @RouteConfig()
-    class Socially {}
+      @Component({
+        selector: 'app'
+      })
+      @View({
+        template: 'index.ng.html',
+        directives: [routerDirectives]
+      })
+      @RouteConfig()
+      class Socially {}
 
-    bootstrap(Socially, [routerInjectables]);
+      bootstrap(Socially, [routerInjectables]);
+    }
 
 Let's make a checklist of what we need to get our router working. We'll go over each of these soon enough:
 
@@ -78,22 +80,24 @@ Let's move the content of Socially out into a `party-list` component. Create a n
 
 __`parties-list/parties-list.ts`:__
 
-    import {Component, View, NgFor} from 'angular2/angular2';
-    import {routerDirectives} from 'angular2/router';
-    import {PartiesForm} from 'client/parties-form/parties-form';
+    if (Meteor.isClient) {
+      import {Component, View, NgFor} from 'angular2/angular2';
+      import {routerDirectives} from 'angular2/router';
+      import {PartiesForm} from 'client/parties-form/parties-form';
 
-    @Component({
-      selector: 'parties-list'
-    })
-    @View({
-      templateUrl: 'parties-list/parties-list.ng.html',
-      directives: [NgFor, routerDirectives, PartiesForm]
-    })
-    export class PartiesList {
-      constructor() {
-        Tracker.autorun(zone.bind(() => {
-          this.parties = Parties.find().fetch();
-        }));
+      @Component({
+        selector: 'parties-list'
+      })
+      @View({
+        templateUrl: 'parties-list/parties-list.ng.html',
+        directives: [NgFor, routerDirectives, PartiesForm]
+      })
+      export class PartiesList {
+        constructor() {
+          Tracker.autorun(zone.bind(() => {
+            this.parties = Parties.find().fetch();
+          }));
+        }
       }
     }
 
@@ -103,23 +107,25 @@ Move the `index.ng.html` file into the parties-list folder and rename it `partie
 
 __`app.ts`:__
 
-    import {Component, View, bind, bootstrap} from 'angular2/angular2';
-    import {routerInjectables, routerDirectives, Router, RouteConfig} from 'angular2/router';
-    import {LocationStrategy, Location, HashLocationStrategy } from 'angular2/router'; // HTML5LocationStrategy
+    if (Meteor.isClient) {
+      import {Component, View, bind, bootstrap} from 'angular2/angular2';
+      import {routerInjectables, routerDirectives, Router, RouteConfig} from 'angular2/router';
+      import {LocationStrategy, Location, HashLocationStrategy } from 'angular2/router'; // HTML5LocationStrategy
 
-    import {PartiesList} from 'parties-list/parties-list';
+      import {PartiesList} from 'parties-list/parties-list';
 
-    @Component({
-      selector: 'socially'
-    })
-    @View({
-      template: '<router-outlet></router-outlet>',
-      directives: [routerDirectives]
-    })
-    @RouteConfig()
-    class Socially {}
+      @Component({
+        selector: 'socially'
+      })
+      @View({
+        template: '<router-outlet></router-outlet>',
+        directives: [routerDirectives]
+      })
+      @RouteConfig()
+      class Socially {}
 
-    bootstrap(Socially, [routerInjectables]);
+      bootstrap(Socially, [routerInjectables]);
+    }
 
 Notice the View is now point to a `template` declared within the `.ts` file. This is an alternative to specifying our `templateUrl` path.
 
@@ -143,15 +149,17 @@ Before configuring our routes, let's setup one more component: `party-details`. 
 
 __`party-details/party-details.ts`:__
 
-    import {Component, View} from 'angular2/angular2';
+    if (Meteor.isClient) {
+      import {Component, View} from 'angular2/angular2';
 
-    @Component({
-      selector: 'party-details'
-    })
-    @View({
-      templateUrl: 'party-details/party-details.ng.html'
-    })
-    export class PartyDetails {}
+      @Component({
+        selector: 'party-details'
+      })
+      @View({
+        templateUrl: 'party-details/party-details.ng.html'
+      })
+      export class PartyDetails {}
+    }
 
 And the template for the component:
 
