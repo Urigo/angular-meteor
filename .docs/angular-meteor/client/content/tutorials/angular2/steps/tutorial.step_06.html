@@ -26,12 +26,12 @@ Wow, that's a lot. Now let's see how easy it is to implement these router hooks.
 
 In our previous example, we began loading our data in the constructor.
 
-__`parties-details/parties-details.ts`:__
+__`client/parties-details/parties-details.ts`:__
 
     export class PartyDetails {
 
       constructor(@Inject(RouteParams) routeParams:RouteParams) {
-        this.partyId = routeParams.params.params.partyId;
+        this.partyId = routeParams.params.partyId;
 
           Tracker.autorun(zone.bind(() => {
             this.party = Parties.find(this.partyId).fetch()[0];
@@ -47,7 +47,7 @@ By using a router lifecycle hook, the route will not change unless the data is c
 
 Router lifecycle hooks are easy to use. Simply add a method to the component class with the name of the hook.
 
-__`parties-details/parties-details.ts`:__
+__`client/parties-details/parties-details.ts`:__
 
     export class PartyDetails {
       constructor(@Inject(RouteParams) routeParams:RouteParams) {
@@ -64,6 +64,8 @@ __`parties-details/parties-details.ts`:__
 
 If no party is found, our hook will return `null` and fail.
 
+*Note: Issue: routes currently fail if you reload while using the HTML5Strategy*
+
 Now we can take the loaded data, add it into it's own model, and save or cancel any changes.
 
 
@@ -74,7 +76,9 @@ Earlier we mentioned there are two kinds of forms in Angular 2: template-driven 
 
 Let's change `party-details.ng.html` to a form, so that we can edit the party details.
 
-__`parties-details/parties-details.ng.html`:__
+If you completed the challenge in part 05, you should have a router-link button pointing to parties-details, with a corresponding alias in the RouteConfig of `app.ts`.
+
+__`client/parties-details/parties-details.ng.html`:__
 
     <form>
       <label>Name</label>
@@ -85,12 +89,12 @@ __`parties-details/parties-details.ng.html`:__
 
       <button type="submit">Save</button>
       <button>Reset form</button>
-      <button [router-link]="['/parties']">Cancel</button>
+      <button [router-link]="['/parties-list']">Cancel</button>
     </form>
 
 If you completed the 'challenge' in step 5, your party-details component should now look like this:
 
-__`parties-details/parties-details.ts`:__
+__`client/parties-details/parties-details.ts`:__
 
     if (Meteor.isClient) {
       import {Component, View, Attribute, Inject} from 'angular2/angular2';
@@ -123,7 +127,7 @@ __`parties-details/parties-details.ts`:__
 
 The NgModel dependency can be found in `formDirectives`. First, import it and add it to your list of View directives.
 
-__`parties-details/parties-details.ts`:__
+__`client/parties-details/parties-details.ts`:__
 
     import {formDirectives} from 'angular2/angular2';
 
@@ -138,13 +142,13 @@ Now that Angular knows about NgModel, we can use it in our template.
 
 The syntax looks a bit different: `[(ng-model)]`. Ng-model binds to `this.party` loaded in `onActivate` and the data should fill out the inputs.
 
-__`parties-details/parties-details.ng.html`:__
+__`client/parties-details/parties-details.ng.html`:__
 
     <form>
-      <label for="name">Name</label>
+      <label>Name</label>
       <input type="text" [(ng-model)]="party.name">
 
-      <label for="description">Description</label>
+      <label>Description</label>
       <input type="text" [(ng-model)]="party.description">
 
       <button type="submit">Save</button>
@@ -163,9 +167,9 @@ Notices it updates automatically. You can contrast this to form Controls which o
 
 But unlike a form control, NgModel doesn't come with built in control or form validators. If you need to validate your form, you can still use the two input binding approaches together.
 
-__`parties-details/parties-details.ng.html`:__
+__`client/parties-details/parties-details.ng.html`:__
 
-    <form #f="form" [ng-form-model]="partyDetailsForm" #f="form">
+    <form #f="form" [ng-form-model]="partyDetailsForm">
       <label for="name">Name</label>
       <input type="text" ng-control="name" [(ng-model)]="party.name">
 
