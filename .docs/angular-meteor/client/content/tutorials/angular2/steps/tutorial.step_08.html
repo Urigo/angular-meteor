@@ -1,6 +1,10 @@
 <template name="tutorial.step_08.html">
 {{#markdown}}
 
+In this section we'll look at using Meteor Accounts & take a quick detour into using Services in Angular 2.
+
+# User Accounts
+
 One of Meteor's most powerful packages is the Meteor account system.
 
 Right now, our app is publishing all the parties to all the clients, and all the clients can change those parties. The changes are then reflected back to all
@@ -16,8 +20,7 @@ By removing that package the default behaviour is changed to deny all.
 
 Execute this command in the command line:
 
-meteor remove insecure
-
+    meteor remove insecure
 
 Now let's try to change the parties array or a specific party.  Nothing's working.
 
@@ -59,6 +62,8 @@ __`index.html`:__
 
 Run the code, create an account, login, logout...
 
+## Meteor.allow()
+
 Now that we have our account system, we can start defining our security rules for the parties.
 
 Let's go to the model folder and change the file to look like this:
@@ -81,6 +86,8 @@ __`model/parties.ts`:__
         return userId && party.owner === userId;
       }
     });
+
+## Mongo Commands (insert, update, remove)
 
 The [collection.allow Meteor function](http://docs.meteor.com/#/full/allow) defines the permissions that the client needs to write directly to the collection (like we did until now).
 
@@ -117,13 +124,26 @@ In our example:
 * remove - only if the user who deletes the party is the party owner.
 
 
+## Meteor.userId()
+
 OK, right now none of the parties has an owner so we can't change any of them.
 
 So let's add the following simple code to define an owner for each party that gets created.
 
 Let's take our current user's id and set it as the owner id of the party we are creating.
 
-Change the code for the add button in `parties-form.ts` to this:
+If you're using TypeScript, you'll have to adjust your IParty interface:
+
+__`typings/socially/socially.d.ts`:__
+
+    interface IParty {
+      _id?: string;
+      name: string;
+      description: string;
+      user: string;
+    }
+
+Change the code for the add button in `parties-form.ts` to to also insert a user:
 
 __`client/parties-form/parties-form.ts`:__
 
@@ -147,11 +167,96 @@ __`client/parties-form/parties-form.ts`:__
         }
       }
 
-So first we set the new party's owner to our current user's id and then push it to the parties collection like before.
+Do the same to `party-details.ts`:
+
+__`client/parties-details/party-details.ts`:__
+
+    Parties.update(party._id, {
+      name: party.name,
+      description: party.description,
+      user: Meteor.userId()
+    });
+
+
+ So first we set the new party's owner to our current user's id and then push it to the parties collection like before.
 
 Now, start the app in 2 different browsers and login with 2 different users.
 
 Test editing and removing your own parties, and try to do the same for parties owned by another user.
+
+
+This could get dangerously repetitive. This is an opportunity to see how services work in Angular 2.
+
+## Angular 2 Services
+
+Let's create a `PartyService` for handling party changes:
+
+__`client/lib/party-service.ts`:__
+
+    export class PartyService {
+      add(party) { ... }
+      update (party) { ... }
+      remove(partyId) { ... }
+    }
+
+It may not be clear what these parameters are, so using types can help.
+
+__`client/lib/party-service.ts`:__
+
+    export class PartyService {
+      add(party:IParty) { ... }
+      update(party:IParty) { ... }
+      remove(partyId:string) { ... }
+    }
+
+That's much clearer.
+
+# Challenge: Move the code add, update and remove code into the `PartyService`.
+
+## Injecting an Angular 2 Service
+
+This process should get easier, in fact, it should look this:
+
+    constructor(public partyService:PartyService) {
+    add() {
+    if (this.partiesForm.valid) {
+      partyService.add(this.partiesForm.value);
+  ...
+
+A note about the constructor syntax here:
+
+* public - binds this.partyService to pa rtyService (you can also use 'private', though it acts the same)
+* partyService - the optional alias we use for PartyService
+* PartyService - the target we are injecting into the class
+
+Unfortunately, the syntax listed above isn't currently working. We'll have to do it in a slightly messier way.
+
+In `parties-list.ts`, `party-details.ts` and `party-form.ts` follow the instructions below.
+
+1. `import {Inject} from 'angular2/angular2';`
+2. `import {PartyService} from `client/lib/party-service';`
+3. In the component, add  `viewInjector: [PartyService]`
+
+  @Component({
+      selector: 'parties-list',
+      viewInjector: [PartyService]
+  })
+
+4. Inject partyService into the constructor and set `this.partyService` to the injected.
+
+    constructor(@Inject(PartyService) partyService:PartyService) {
+      this.partyService = partyService;
+
+5. Access the service through `this.partyService` in your methods.
+
+    this.partyService.remove(party._id)
+
+I hope this syntax will clean up in the future.
+
+# Challenge
+
+Inject the PartyService into the three places it's needed.
+
 
 # Social login
 
@@ -207,16 +312,16 @@ __`client/party-details/party-details.ts`:__
 
     export class PartyDetails {
         constructor() {...}
-            canActivate() {
-                if (!Meteor.userId()) {
-                  alert('Please login first');
-                  return false;
-                }
-            return true;
+          canActivate() {
+            if (!Meteor.userId()) {
+              alert('Please login first');
+              return false;
             }
+            return true;
         }
     }
 
+* NOTE: This approach is currently not working. *
 
 We don't need to handle any redirect because the route request was denied early on.
 

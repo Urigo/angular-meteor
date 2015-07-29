@@ -188,13 +188,16 @@ We'll keep our example simple for now, without using form controls.
 # Challenges
 
 * Add a submit button that saves your data changes
-* Create a reset button that resets the form to it's original value. Hint: set the model to a separate variable.
+* Create a reset button that resets the form to it's original value.
+  Hint: underscore comes built into Meteor. Use `_.clone(obj)` to make a copy.
 * Use the `canDeactivate` hook to prompt the user if they want to save any changes before leaving.
 That is, if the user presses the "cancel" button when changes haven't been saved yet, the user should see an alert:
 
     "Would you like to save changes?"
       \- "ok" -> save changes and complete the route
       \- "cancel" -> stay on the same page
+
+    Hint: use `_.isEqual(obj1, obj2)` to compare two objects with underscore.
 
   {{/markdown}}
 </template>

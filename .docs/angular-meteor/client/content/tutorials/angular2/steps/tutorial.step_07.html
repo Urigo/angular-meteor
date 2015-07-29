@@ -69,9 +69,12 @@ Put IParty in a folder `typings/socially` and call it `socially.d.ts`. Now it ca
 __`typings/socially/socially.d.ts`:__
 
     interface IParty {
+      _id?: string;
       name: string;
       description: string;
     }
+
+Note that `_id` is marked as optional, as parties won't get the id until they are passed into a Mongo collection.
 
 We can use IParty to declare some types in our app. For example, in `party-details.ts` I've made several type declarations.
 
