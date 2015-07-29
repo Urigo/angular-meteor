@@ -6,10 +6,11 @@ OK, so we have a nice client side application that creates and renders it's own 
 So, if we were in any framework other than Meteor, we would start implementing a series of REST endpoints to connect the server to the client.
 Also, we would need to create a database and functions to connect to it.
 
-And we haven't talked about realtime, in which case we would need to add sockets, and a local DB for cache and handle latency compensation (or just ignore those features and create a not - so - good and modern app...)
+And we haven't talked about real-time, in which case we would need to add sockets, and a local DB for cache and handle latency compensation (or just ignore those features and create a not - so - good and modern app...)
 
 But luckily, we use Meteor!
 
+# Reactivity in Meteor
 
 Meteor makes writing distributed client code as simple as talking to a local database.
 
@@ -23,25 +24,31 @@ The way to handle data in Meteor is through the `Mongo.Collection` class. It is 
 
 Thanks to minimongo, Meteor's client-side Mongo emulator, `Mongo.Collection` can be used from both client and server code.
 
+In short, Meteor's default setup has:
+
+* real-time reactivity through web sockets
+* two databases. One on the client for fast changes, another behind the server for official changes
+* so much more!
+
 # Declare a collection
 
 So first, let's define our first parties collection that will store all our parties.
 
-Add:
+In a separate folder called "model", add a file called "parties.ts". Include this:
+
+__`model/parties.ts`:__
 
     Parties = new Mongo.Collection("parties");
 
-to the beginning of the `app.ts` file.
-
-Notice that this code runs outside of the `isClient` statement.
-
-That means that this collection and the actions on it will run both on the client (minimongo) and the server (Mongo), you only have to write it once, and Meteor will take care of syncing both of them.
+Because this file is located outside of a special folder name, like 'client', this collection and the actions on it will run both on the client (minimongo) and the server (Mongo), you only have to write it once, and Meteor will take care of syncing both of them.
 
 # Binding to Angular
 
 Now that we've created the collection, our client needs to subscribe to it's changes and bind it to our parties Angular array.
 
 To bind them we will simply reference the parties in the constructor, then call fetch to retrieve them.
+
+__`client/app.ts`:__
 
     constructor() {
       this.parties = Parties.find().fetch();
@@ -51,62 +58,64 @@ But what happens if the parties data changes on the server-side? How can we tell
 
 For now, we can use Meteor [Tracker](https://www.meteor.com/tracker), a reactive wrapper that we will run data when a change occurs. We will bind it to Angular's change detection system, [Zone.js](https://github.com/angular/zone.js).
 
+__`client/app.ts`:__
+
     Tracker.autorun(zone.bind(() => {
       this.parties = Parties.find().fetch();
     }));
 
-Our `app.ts` file should look like this:
+The fat arrow syntax `=>` is also from ES2015, and tells the function to run in it's parents context. In other words, it tells `this` to be the context of the class Socially.
 
-__`app.ts`:__
+Our `app.ts` file should now look like this:
 
-    Parties = new Mongo.Collection("parties");
+__`client/app.ts`:__
 
-    if (Meteor.isClient) {
-      import {Component, View, NgFor, bootstrap} from 'angular2/angular2';
+    import {Component, View, NgFor, bootstrap} from 'angular2/angular2';
 
-      @Component({
-        selector: 'app'
-      })
-      @View({
-        templateUrl: "index.ng.html",
-        directives: [NgFor]
-      })
-      class Socially {
-        constructor () {
-          Tracker.autorun(zone.bind(() => {
-            this.parties = Parties.find().fetch();
-          }));
-        }
+    @Component({
+      selector: 'app'
+    })
+    @View({
+      templateUrl: "client/index.ng.html",
+      directives: [NgFor]
+    })
+    class Socially {
+      constructor () {
+        Tracker.autorun(zone.bind(() => {
+          this.parties = Parties.find().fetch();
+        }));
       }
-
-      bootstrap(Socially);
     }
+
+    bootstrap(Socially);
 
 Now every change what happens to the `this.parties` variable will automatically be saved to the local minimongo DB and synced to the MongoDB server DB and all the other clients in realtime!
 
 But we still don't have data in that collection, so let's add some.
 Let's initialize our server with the same parties we had before.
 
-Add this to the bottom of `app.ts`:
+Create a new folder called 'server' and create a file called 'loadParties.ts' inside of it. Server is another special folder name in Meteor, it's contents will only run on the server.
 
-    if (Meteor.isServer) {
-      Meteor.startup(function () {
-        if (Parties.find().count() === 0) {
+Add the following to the file:
 
-        var parties = [
+__`server/loadParties.ts`:__
+
+    Meteor.startup(function () {
+      if (Parties.find().count() === 0) {
+
+      var parties = [
           {'name': 'Dubstep-Free Zone',
           'description': 'Can we please just for an evening not listen to dubstep.'},
           {'name': 'All dubstep all the time',
           'description': 'Get it on!'},
           {'name': 'Savage lounging',
           'description': 'Leisure suit required. And only fiercest manners.'}
-        ];
+      ];
 
-        for (var i = 0; i < parties.length; i++)
+      for (var i = 0; i < parties.length; i++)
           Parties.insert(parties[i]);
-        }
-      });
-    }
+      }
+    });
 
 As you can probably understand, this code runs only on the server, and when Meteor starts it initializes the DB with these sample parties.
 

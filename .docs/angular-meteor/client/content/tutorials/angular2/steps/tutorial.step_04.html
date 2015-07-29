@@ -7,29 +7,31 @@ In this chapter you will add the ability to insert a new party and delete an exi
 
 First, let's create a simple form with a button that will add a new party.
 
+# Component Architecture
+
 In Angular 2, it's common practice to break your app into smaller components. Let's make a new component called `parties-form`, and put it inside it's own directory with the same name.
 
-__`parties-form/parties-form.ts`:__
+__`client/parties-form/parties-form.ts`:__
 
-    if (Meteor.isClient) {
-      import {Component, View} from 'angular2/angular2';
+    import {Component, View} from 'angular2/angular2';
 
-      @Component({
-        selector: 'parties-form'
-      })
-      @View({
-        templateUrl: "parties-form/parties-form.ng.html"
-      })
-      export class PartiesForm {}
-    }
+    @Component({
+      selector: 'parties-form'
+    })
+    @View({
+      templateUrl: "client/parties-form/parties-form.ng.html"
+    })
+    export class PartiesForm {}
 
 Notice that we are exporting the class `PartiesForm` using ES6 module syntax. This is how files and dependencies can be passed to each other without the use of script tags in the view.
+
+When data is `export`ed, it must also be `import`ed on the other end. We'll get to that soon.
 
 Also note that we aren't bootstrapping this component, as it is going inside of the bootstrapped root component.
 
 Inside `parties-form/parties-form.ng.html`, add the following form:
 
-__`parties-form/parties-form.ng.html`:__
+__`client/parties-form/parties-form.ng.html`:__
 
     <form>
       <label>Name</label>
@@ -41,14 +43,14 @@ __`parties-form/parties-form.ng.html`:__
 
 Link to the parties-form component in `index.ng.html`
 
-__`index.ng.html`:__
+__`client/index.ng.html`:__
 
     <div>
 
       <parties-form></parties-form>
 
       <ul>
-        <li ng-repeat="party in parties">
+        <li *ng-for="#party of parties">
           {{dstache}}party.name}}
           <p>{{dstache}}party.description}}</p>
         </li>
@@ -56,23 +58,25 @@ __`index.ng.html`:__
 
     </div>
 
-And finally let your Socially Component know it should use the `parties-form` component.
+And finally let your Socially Component know it should import and use the `parties-form` component.
 
-__`app.ts`:__
+__`client/app.ts`:__
 
-    if (Meteor.isClient) {
       import {Component, View, NgFor, bootstrap} from 'angular2/angular2';
-      import {PartiesForm} from 'parties-form/parties-form';
+      import {PartiesForm} from 'client/parties-form/parties-form';
 
       ...
 
       @View({
-        templateUrl: "index.ng.html",
+        templateUrl: "client/index.ng.html",
         directives: [NgFor, PartiesForm]
       })
       class Socially () { ... }
     }
 
+Again, first we import the class, then we add it to our list of View directives.
+
+# Angular 2 Forms
 
 Now let's get back to the form and make it functional.
 
@@ -82,9 +86,8 @@ In Angular 2, there are two main ways to create forms: we will address 'model-dr
 
 First up, import the form directives & controls.
 
-__`parties-form/parties-form.ts`:__
+__`client/parties-form/parties-form.ts`:__
 
-    if (Meteor.isClient) {
       import {Component, View} from 'angular2/angular2';
       import {formDirectives, Control, ControlGroup, Validators} from 'angular2/angular2';
 
@@ -98,9 +101,11 @@ __`parties-form/parties-form.ts`:__
       export class PartiesForm {}
     }
 
-Now we can construct our form controls
+By now you should have the hang of it. `import`, and add it to the View directives.
 
-__`parties-form/parties-form.ts`:__
+Next, we can construct our form controls. For controls give you access to useful form features such as validators and much more.
+
+__`client/parties-form/parties-form.ts`:__
 
     export class PartiesForm {
       constructor() {
@@ -116,13 +121,13 @@ Alternatively, form controls can be created one at a time using Control, but it'
 
     this.partiesForm.controls.name = new Control('');
 
-  is the same as
+is the same as
 
     this.partiesForm = new ControlGroup({
       name: new Control('')
     });
 
-The first value provided is the initial value for the form control. For example, `this.name = new Control('Bob')` would initialize the form value to 'Bob', or `this.name = new Control()` would initialize to null.
+The first value provided is the initial value for the form control. For example, `this.name = new Control('Bob')` would initialize the form value to 'Bob', or `this.name = new Control()` would initialize the value to null.
 
     this.partiesForm.value;
     > { name: '', description: ''}
@@ -132,9 +137,9 @@ We could also access the control values individually.
     this.partiesForm.controls.name.value;
     > ''
 
-A control can also take a Validator, which binds to the form.
+A control can also take a Validator, which binds to the form. Name & description are both required, so let's specify that.
 
-__`parties-form/parties-form.ts`:__
+__`client/parties-form/parties-form.ts`:__
 
     constructor() {
       this.partiesForm = new ControlGroup({
@@ -144,12 +149,13 @@ __`parties-form/parties-form.ts`:__
 
 The required validator here specifies that the form isn't valid if name or description are empty.
 
+    this.partiesForm.value = '';
     this.partiesForm.valid
     > false
 
 First things first, let's bind the control group to the form and the controls to the input values.
 
-__`parties-form/parties-form.ng.html`:__
+__`client/parties-form/parties-form.ng.html`:__
 
     <form [ng-form-model]="partiesForm">
       <label>Name</label>
@@ -163,11 +169,14 @@ Now each time the user types inside these inputs, the value of the partiesForm a
 
 Alternatively we can bind to the form by using a local variable in the template, indicated by the '#' symbol.
 
-__`parties-form/parties-form.ng.html`:__
+__`client/parties-form/parties-form.ng.html`:__
 
     <form [ng-form-model]="partiesForm" #f="form">
 
-Now calling `f.value`, or displaying {{f.value}} will give us the value of our form.
+Now calling `f.value`, or displaying {{dstache}}f.value}} will give us the value of our form.
+
+    f.value
+    > {name: '', description: ''}
 
 ## (submit)
 
@@ -177,15 +186,15 @@ But then how does the view trigger changes in the model? It does this through ev
 
 Now let's bind a submit event to the add button provided to us by the [NgForm](https://angular.io/docs/js/latest/api/forms/NgForm-class.html) directive. This will trigger if the button is clicked, or if the user presses enter on the final field.
 
-__`parties-form/parties-form.ng.html`:__
+__`client/parties-form/parties-form.ng.html`:__
 
-    <form [ng-form-model]="partiesForm" #f="form" (submit)="add(f)">
+    <form [ng-form-model]="partiesForm" #f="form" (submit)="add(f.value)">
       <button type="submit">Add</button>
     </form>
 
 In Angular 2, events are indicated by the round bracket () syntax. Here we are telling Angular to call a method `add` on submit and pass in the value of the form, `f`. Let's add the add method to our PartiesForm class.
 
-__`parties-form/parties-form.ts`:__
+__`client/parties-form/parties-form.ts`:__
 
     class PartiesForm {
       constructor() { ... },
@@ -194,23 +203,22 @@ __`parties-form/parties-form.ts`:__
         // validate if the form is valid
         if (this.partiesForm.valid) {
 
-        // add to Parties (insecure version, use methods instead)
-        // We will use method calls later in part 14
+          // insert parties (insecure way)
+          Parties.insert({
+            name: party.name,
+            description: party.description
+          });
 
-        Parties.insert({
-          name: party.name,
-          description: party.description
-        });
-
-        //reset values to empty strings
+        //reset input values to empty strings
         this.partyForm.controls.name.updateValue('');
         this.partyForm.controls.description.updateValue('');
+        }
       }
     }
 
 Open a different browser, fill out the form, submit and see how the party is added on both clients. So simple!
 
-As a note, if you are dealing with more complex forms, use [Form Builder](https://github.com/angular/angular/blob/master/modules/angular2/src/forms/form_builder.ts), which further simplifies the use of Controls & ControlGroups.
+> As a note, if you are dealing with more complex forms, use [Form Builder](https://github.com/angular/angular/blob/master/modules/angular2/src/forms/form_builder.ts), which further simplifies the use of Controls & ControlGroups.
 
 ## (click)
 
@@ -218,7 +226,7 @@ Now, let's add the ability to delete parties.
 
 Let's add an X button to each party:
 
-__`index.ng.html`:__
+__`client/index.ng.html`:__
 
     <ul>
       <li *ng-for="party of parties">
@@ -233,8 +241,11 @@ Here again, we are binding an event to the class context and passing in the part
 
 Let's go into the class and add that function.
 
-Add the function inside the PartiesListCtrl in `app.js`:
+Add the function inside the Socially class in `app.ts`:
 
+__`client/app.ts`:__
+
+    constructor() {...}
     remove(party){
       Parties.remove(party._id);
     };
@@ -243,7 +254,7 @@ The Mongo Collection Parties has a function called 'remove'. We search for the r
 
 And this is how the class should now look:
 
-__`app.ts`:__
+__`client/app.ts`:__
 
     class Socially {
       constructor() {
