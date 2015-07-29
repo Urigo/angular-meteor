@@ -7,9 +7,17 @@
 [![ng-conf](http://img.youtube.com/vi/_mu6BWsnaPM/0.jpg)](https://www.youtube.com/watch?v=_mu6BWsnaPM)
 
 ## Quick start
+
+### Meteor Project
 1. Install [Meteor](http://docs.meteor.com/#quickstart) `$ curl https://install.meteor.com | /bin/sh`
 2. Create a new meteor app using `$ meteor create myapp` or navigate to the root of your existing app
 3. Install urigo:angular `$ meteor add urigo:angular`
+
+### Meteor client side - with Bower
+> Use Meteor as a service in your existing non Meteor angular application
+
+1. Install [meteor-client-side](https://github.com/idanwe/meteor-client-side) `$ bower install meteor-client-side`
+2. Install angular-meteor `$ bower install angular-meteor`
 
 ## Resources
 - [Getting started tutorial](https://angular-meteor.com/tutorial)
