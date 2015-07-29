@@ -1,4 +1,4 @@
-<template name="tutorialAngular2.step_00.html">
+<template name="tutorial.step_00.html">
   {{#markdown}}
 > Disclaimer: Angular 2 is not yet production ready. The API will change. For now, consider this tutorial for educational purposes.
 
@@ -10,6 +10,8 @@ In this step, you will:
 2. Learn how to start the Meteor server
 3. Connect an Angular 2 FrontEnd
 4. Run the application in the browser
+
+## Meteor Setup
 
 First step - let's install Meteor!
 
@@ -45,12 +47,17 @@ The default Meteor app starts life with three files, one `js`, one `html` and on
 
 We are going to add our own files for this tutorial. So let's start by deleting the following files:
 
-  socially.css	  socially.html    socially.js
+    - socially.css    (delete)
+    - socially.html   (delete)
+    - socially.js     (delete)
 
 Now we can start building our app.
+
+Create a directory called `client`. It is important that the name is `client`. Meteor will run files inside this directory only on the client. More about that in step 7.
+
 First, let's create a new `index.html` file and place this code inside. Then run the app again:
 
-__`index.html`:__
+__`client/index.html`:__
 
     <body>
       <p>Nothing here</p>
@@ -67,14 +74,15 @@ It will create the `HTML`, `HEAD` and `BODY` tags by itself and place in there e
 Then it will search for all the HTML files containing `HEAD` or `BODY` tags and concatenate their content into the main file.
 
 
-So in our case, Meteor found our `index.html` file, found the `BODY` tag inside and added it's content to the `BODY` tag of the main generated file.
+So in our case, Meteor found our `index.html` file, recognized it was meant for the client only, found the `BODY` tag inside and added it's content to the `BODY` tag of the main generated file.
 
 > (right-click -> inspect element on the page to see the generated file)
 
+## Angular 2 Package
 
 Now it's time to add Angular 2 to our stack!
 
-Now first things first, let's add the Angular 2 package to Meteor (we will discuss more about Meteor packages later in this tutorial)
+First things first, let's add the Angular 2 package to Meteor (we will discuss more about Meteor packages later in this tutorial)
 
 Back in the command line, launch this command:
 
@@ -82,46 +90,48 @@ Back in the command line, launch this command:
 
 This package takes care of connecting Angular to Meteor and includes the latest Angular 2 library code into our app.
 
+## TypeScript
 
-In this tutorial, we'll be using TypeScript. If you don't know TypeScript, don't worry. Valid JavaScript is valid TypeScript. TypeScript just adds more optional features to JavaScript such as types & interfaces.
+In this tutorial, we'll be using TypeScript. Don't worry if you're not familiar with TypeScript. Valid JavaScript is valid TypeScript.
 
-Why TypeScript? It's true, Angular 2 can be written in regular JavaScript (ES5), the new JavaScript (ES2015) or TypeScript. However, TypeScript is the recommended choice by the Angular team. As we progress, I hope you'll come to understand why.
+TypeScript just adds more optional features to JavaScript such as types & interfaces. You'll be able to do this tutorial fine without understanding what these are yet; but if you'd like to learn more try the [TypeScript tutorial]([Learn more](http://www.typescriptlang.org/Tutorial).
+
+Why TypeScript? It's true, Angular 2 can be written in regular JavaScript (ES5), the new JavaScript (ES2015 aka ES6) or TypeScript. However, TypeScript is the recommended choice by the Angular team. As we progress, I hope you'll come to understand why.
 
 Install a TypeScript compiler with Angular 2 features enabled. In the command line:
 
     $ meteor add netanelgilad:angular2-typescript
 
-This compiler will convert our `.ts` files to ES5 valid `.js` files.
+This compiler will convert our `.ts` files to valid `.js` files.
 
-ES2015 & TypeScript both use ES6 modules. These are the `import` and `export` statements that have arrived in JavaScript. To load modules, we'll use System.js.
+ES2015 & TypeScript both use modules. These are the `import` and `export` statements that have arrived in JavaScript.
+
+## System.js
+
+System.js is a module loader built into the `shmck:angular2` package. We'll use it to load out root component.
 
 __`index.ng.html`:__
 
     <body>
-      <script>System.import('app')</script>
+      <p>Nothing here</p>
+      <script>System.import('client/app')</script>
     </body>
 
-Here we're telling System.js to load `app.js`, which is created from our `app.ts` file.
+Here we're telling System.js to load `app.js`, which is compiled from our `app.ts` file.
 
-That's it! Now we can use the Angular 2 power in our Meteor app.
+Once we've created our `app.ts` file we can use Angular 2 in our Meteor app.
 
-To start simple, create a new file called `index.ng.html` under the main folder, this will be our main `HTML` template page.
+## Root Component
 
-  * We are using the `.ng.html` file extension so that Blaze - Meteor's templating system won't compile and override our Angular 2 expressions.
+A component is a controller with an attached view. Think of it like a brick in the castle of your app.
 
-Then move the `p` tag into it:
-
-__`index.ng.html`:__
-
-    <p>Nothing here</p>
-
-We'll create a root component tag called `app`, which will load `index.ng.html` in the view. Now let's include that component into our main `index.html` file:
+We'll create a root component tag called `app`. Let's include that component into our main `index.html` file:
 
 __`index.html`:__
 
     <body>
       <app></app>
-      <script>System.import('app')</script>
+      <script>System.import('client/app')</script>
     </body>
 
 But if you load this in your browser, **you won't see anything**. That's because we still need to **create the actual Angular 2 component**, which we'll do next.
@@ -130,48 +140,33 @@ But if you load this in your browser, **you won't see anything**. That's because
 
 Angular 2 code is structured like a tree of components inside of each other. So let's create our root component which other components will stem out of.
 
-Create a new `app.ts` file.
+Create a new `app.ts` file inside of the `client` folder.
 
 Now you can see another example of Meteor's power and simplicity - no need to include this file anywhere. Meteor will take care of it by going through all the files in the folder and including them automatically.
-
-One of Meteor's goals is to break down the barrier between client and server, so the code you write can run everywhere! (more on that later).
-But we need Angular's power only in the client side, so how can we do that?
-
-There are a few ways to tell Meteor to run code only on the client/server/phone side, let's start with the simplest way - [Meteor.isClient](http://docs.meteor.com/#/full/meteor_isserver) variable.
-
-__`app.ts`:__
-
-    if (Meteor.isClient) {
-
-    }
-
-Now everything inside this `if` statement will only run on the client side.
 
 Let's continue defining our Angular 2 application module.
 
 __`app.ts`:__
 
-    if (Meteor.isClient) {
-      import {Component, View, bootstrap} from 'angular2/angular2';
+    import {Component, View, bootstrap} from 'angular2/angular2';
 
-      @Component({
-        selector: 'app'
-      })
-      @View({
-        templateUrl: "index.ng.html"
-      })
-      class Socially {}
+    @Component({
+      selector: 'app'
+    })
+    @View({
+      template: "<p>Hello World!</p>"
+    })
+    class Socially {}
 
-      bootstrap(Socially);
-    }
+    bootstrap(Socially);
 
-First we're importing the dependencies we need from `angular2/angular2`. This is not a folder and file in your directory, but referring to an alias provided to System.js.
+First we're importing the dependencies we needed from `angular2/angular2`. This is not a folder and file in your directory, but referring to an alias provided to System.js in the `shmck:angular2` package.
 
 Notice the `@` syntax. In Angular 2, these are called Annotations. They are similar to a new feature coming to ES2016 called Decorators. You can read more about the differences between the two [here](http://blog.thoughtram.io/angular/2015/05/03/the-difference-between-annotations-and-decorators.html).
 
 Basically Annotations allow us to elegantly add metadata to classes. Just consider it pretty syntax for now.
 
-Notice the Component Selector matches the `<app>` tag we provided in index.html, and View templateUrl points to the view file.
+Also notice the component Selector matches the `<app>` tag we provided in index.html, and View template creates the view.
 
 The class, Socially, inherits from @Component and @View.
 
@@ -181,7 +176,28 @@ Now run the app.
 
     $ meteor
 
-Everything is the same, so now inside our `index.ng.html` let's use Angular:
+# Templates
+
+Let's make one change. Create a new file called `index.ng.html` under the 'client' folder, this will be our main `HTML` template page.
+
+* We are using the `.ng.html` file extension so that Blaze - Meteor's templating system won't compile and override our Angular 2 expressions.
+
+Then move the `p` tag into it:
+
+ __`client/index.ng.html`:__
+
+    <p>Nothing here</p>
+
+Change your template in `app.ts` to target `index.ng.html`.
+
+__`client/app.ts`:__
+
+    @View({
+      // template: "<p>Hello World!</p>"
+      templateUrl: 'client/index.ng.html'
+    })
+
+Now our component template will load from the given path. Let's use Angular inside of `index.ng.html` to see that's working:
 
     <p>Nothing here {{dstache}} 'yet' + '!' }}</p>
 
@@ -191,13 +207,21 @@ Run the app again and the screen should look like this:
 
 Angular interpreted the expression like any other Angular application.
 
+# Notes
+
+Again, Angular 2 is still in development. It is not recommended for production yet.
+
+You may notice a `require` error in the console; however, the app will still run. This should be sorted out in the near future.
+
 # Experiments
 Try adding a new expression to the index.ng.html that will do some math:
 
     <p>1 + 2 = {{dstache}} 1 + 2 }}</p>
+
 
 # Summary
 Now let's go to [step 1](/tutorial/step_01) and add some content to our application.
 
   {{/markdown}}
 </template>
+
