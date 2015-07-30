@@ -46,8 +46,8 @@ __`client/app.ts`:__
 
 Just to be clear, make sure you:
 
-* added `NgFor` to the `import` statement.
-* added `NgFor` as a directive in the view
+- added `NgFor` to the `import` statement.
+- added `NgFor` as a directive in the view
 
 Why so much work setting up a new dependency? Angular 2 is trying to avoid namespace collisions, so dependencies are always imported and specified.
 
@@ -85,10 +85,10 @@ You'll see the data model, parties, is now instantiated within the Socially comp
 
 Although the controller is not yet doing very much, it plays a crucial role. By providing context for our data model, the controller allows us to establish data-binding between the model and the view. We connected the dots between the presentation, the data, and the logic components as follows:
 
-* The selector 'app', located on the `body` tag, references the name of our class, `Socially` (located in the JavaScript file `app.js` which is compiled automatically from `app.ts`).
-* The class Socially references the View using the templateUrl path to `client/index.ng.html`
-* The Socially class constructor loads the data into the class, using the context of the class itself (this).
-* The template, `index.ng.html` accesses `parties` using the Socially class context
+- The selector 'app', located on the `body` tag, references the name of our class, `Socially` (located in the JavaScript file `app.js` which is compiled automatically from `app.ts`).
+- The class Socially references the View using the templateUrl path to `client/index.ng.html`
+- The Socially class constructor loads the data into the class, using the context of the class itself (this).
+- The template, `index.ng.html` accesses `parties` using the Socially class context
 
 # Summary
 

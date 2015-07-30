@@ -133,8 +133,8 @@ Our template here is the `<router-outlet></router-outlet>`. This is where the ro
 
 We also have the choice of two location URL strategies:
 
-* HTML5 - www.site.com/
-* Hash - www.site.com/#/
+- HTML5 - www.site.com/
+- Hash - www.site.com/#/
 
 Don't forget to import `bind` helps hook up our URL location strategy.
 
@@ -226,8 +226,8 @@ __`client/parties-list/parties-list.ng.html`:__
 
 This route syntax may look complicated, but that is because it is very flexible.
 
-* The preceding `/` indicates that the route is at the same level, whereas a `../` would map to the parent component url
-* Routes are placed in an array to allow for more complicated route paths
+- The preceding `/` indicates that the route is at the same level, whereas a `../` would map to the parent component url
+- Routes are placed in an array to allow for more complicated route paths
 
 
 # Injecting Route Params
@@ -255,10 +255,10 @@ __`client/parties-details/parties-details.ts`:__
 
 Several things are happening here.
 
-* First we must import our dependencies for `Inject` and `RouteParams`.
-* Next, we inject `RouteParams` into our `PartyDetails` class and give it an alias of `routeParams`.
-* We catch the `partyId` from the routeParams
-* Finally, we set `this.party` to fetch the selected party from the Mongo Collection `Parties`.
+- First we must import our dependencies for `Inject` and `RouteParams`.
+- Next, we inject `RouteParams` into our `PartyDetails` class and give it an alias of `routeParams`.
+- We catch the `partyId` from the routeParams
+- Finally, we set `this.party` to fetch the selected party from the Mongo Collection `Parties`.
 
 So now we can route to pages with the data loading. But if you route to a party-details page and press 'reload', the data fails.
 

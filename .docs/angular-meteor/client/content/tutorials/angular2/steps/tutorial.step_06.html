@@ -5,9 +5,9 @@ In this step we'll continue looking at the Angular router & forms.
 
 By the end, you should have an understanding of:
 
-* **Router lifecycle hooks**
-* The difference between **template driven** & **model driven** forms
-* How to use **ng-model** for two way binding
+- **Router lifecycle hooks**
+- The difference between **template driven** & **model driven** forms
+- How to use **ng-model** for two way binding
 
 # Router Lifecycle Hooks
 
@@ -187,12 +187,12 @@ We'll keep our example simple for now, without using form controls.
 
 # Challenges
 
-* Add a submit button that saves your data changes.
+- Add a submit button that saves your data changes.
 
-* Create a reset button that resets the form to it's original value.<br/>
+- Create a reset button that resets the form to it's original value.<br/>
   **Hint: A functional programming library, [Underscore](http://underscorejs.org/),  comes built into Meteor. Use `_.clone(obj)` to make a copy of another object.**
 
-* Use the `canDeactivate` hook to prompt the user if they want to save any changes before leaving.
+- Use the `canDeactivate` hook to prompt the user if they want to save any changes before leaving.
 That is, if the user presses the "cancel" button when changes haven't been saved yet, the user should see an alert:
 
     "Would you like to save changes?"

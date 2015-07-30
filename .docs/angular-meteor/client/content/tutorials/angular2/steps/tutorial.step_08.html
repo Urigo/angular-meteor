@@ -260,7 +260,7 @@ This process should get easier, in fact, it should look this:
 
 A note about the constructor syntax here:
 
-* public - binds this.partyService to pa rtyService (you can also use 'private', though it acts the same)
+* public - binds this.partyService to partyService (you can also use 'private', though it acts the same)
 * partyService - the optional alias we use for PartyService
 * PartyService - the target we are injecting into the class
 
@@ -268,9 +268,9 @@ Unfortunately, the syntax listed above isn't currently working. Keep in mind, An
 
 In `parties-list.ts`, `party-details.ts` and `party-form.ts` follow the instructions below.
 
-1. `import {Inject} from 'angular2/angular2';`
-2. `import {PartyService} from `client/lib/party-service';`
-3. In the component, add  `viewInjector: [PartyService]`
+- `import {Inject} from 'angular2/angular2';`
+- `import {PartyService} from `client/lib/party-service';`
+- In the component, add  `viewInjector: [PartyService]`
 
     @Component({
         selector: 'parties-list',
