@@ -5,9 +5,9 @@ In this step we'll continue looking at the Angular router & forms.
 
 By the end, you should have an understanding of:
 
-* Router lifecycle hooks
-* The difference between template driven & model driven forms
-* How to use ng-model for two way binding
+* **Router lifecycle hooks**
+* The difference between **template driven** & **model driven** forms
+* How to use **ng-model** for two way binding
 
 # Router Lifecycle Hooks
 
@@ -64,7 +64,7 @@ __`client/parties-details/parties-details.ts`:__
 
 If no party is found, our hook will return `null` and fail.
 
-*Note: Issue: routes currently fail if you reload while using the HTML5Strategy*
+> Issue: routes currently fail if you reload while using the `HTML5Strategy`
 
 Now we can take the loaded data, add it into it's own model, and save or cancel any changes.
 
@@ -76,7 +76,7 @@ Earlier we mentioned there are two kinds of forms in Angular 2: template-driven 
 
 Let's change `party-details.ng.html` to a form, so that we can edit the party details.
 
-If you completed the challenge in part 05, you should have a router-link button pointing to parties-details, with a corresponding alias in the RouteConfig of `app.ts`.
+If you completed the challenge in part 5, you should have a router-link button pointing to parties-details, with a corresponding alias in the RouteConfig of `app.ts`.
 
 __`client/parties-details/parties-details.ng.html`:__
 
@@ -187,9 +187,11 @@ We'll keep our example simple for now, without using form controls.
 
 # Challenges
 
-* Add a submit button that saves your data changes
-* Create a reset button that resets the form to it's original value.
-  Hint: underscore comes built into Meteor. Use `_.clone(obj)` to make a copy.
+* Add a submit button that saves your data changes.
+
+* Create a reset button that resets the form to it's original value.<br/>
+  **Hint: A functional programming library, [Underscore](http://underscorejs.org/),  comes built into Meteor. Use `_.clone(obj)` to make a copy of another object.**
+
 * Use the `canDeactivate` hook to prompt the user if they want to save any changes before leaving.
 That is, if the user presses the "cancel" button when changes haven't been saved yet, the user should see an alert:
 
@@ -197,7 +199,7 @@ That is, if the user presses the "cancel" button when changes haven't been saved
       \- "ok" -> save changes and complete the route
       \- "cancel" -> stay on the same page
 
-    Hint: use `_.isEqual(obj1, obj2)` to compare two objects with underscore.
+**Hint: use `_.isEqual(obj1, obj2)` to compare two objects with Underscore.**
 
   {{/markdown}}
 </template>
