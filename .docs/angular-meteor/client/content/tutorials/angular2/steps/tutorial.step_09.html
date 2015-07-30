@@ -152,6 +152,8 @@ __`client/parties-form/parties-form.ng.html`:__
     <label>Public</label>
     <input type="checkbox" ng-control="isPublic">
 
+> Checkbox currently not working. You can use `[checked]="isPublic" (click)="toggleCheck()"` for now if you need a work around.
+
 Notice how easy it is to bind a checkbox to a model with Angular 2!
 
 Let's add the same to the `party-details.ng.html` page:
