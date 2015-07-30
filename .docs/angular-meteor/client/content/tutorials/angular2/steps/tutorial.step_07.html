@@ -33,11 +33,27 @@ Meteor will combine these together auto-magically.
 
 Earlier I mentioned that TypeScript has features which make it more powerful than ES2015 alone. We'll look at some of these.
 
+We don't have time to cover the uses and benefits of types here in detail, but I'd encourage you to [learn more](http://www.typescriptlang.org/).
+
+## TypeScript: Supported editors
+
+TypesScript runs during development time, giving you better code completion and informing you of potential errors in your code.
+
+To get the power of TypeScript, use a TypeScript friendly editor. These include:
+
+* Visual Studio or VS Code(https://www.visualstudio.com/)
+* [Webstorm](https://www.jetbrains.com/webstorm/)
+* [Atom](https://atom.io/packages/atom-typescript)
+* [Sublime Text](https://github.com/Microsoft/TypeScript-Sublime-Plugin)
+* [Eclipse](https://github.com/palantir/eclipse-typescript)
+
+Let's look at some of the features of TypeScript in brief detail.
+
 ## TypeScript: Types
 
-Types help you find mistakes. For example, we can let the TypeScript compiler know that the `partyId` should be a string, and that routeParams should have the type of RouteParams. If partyId ever returns a number, or array, we know something went wrong right away. It will become highlighted by your IDE or text editor.
+[Types](http://www.typescriptlang.org/Handbook#basic-types) help you find mistakes. For example, we can let the TypeScript compiler know that the `partyId` should be a string, and that routeParams should have the type of RouteParams. If partyId ever returns a number, or array, we know something went wrong right away. It will become highlighted by your IDE or text editor.
 
-Keep in mind, type-checking is not delivered in the outputted JavaScript. It is only extra sugar for your development environment, and adds no weight to the finished product.
+Keep in mind, type-checking is not delivered in the outputted JavaScript. It is only extra sugar for your development environment, and adds no weight to the outputted `.js` file.
 
     export class PartyDetails {
       partyId: string;
@@ -47,13 +63,9 @@ Keep in mind, type-checking is not delivered in the outputted JavaScript. It is 
     ...
     }
 
-We don't have time to cover the uses and benefits of types here in detail, but I'd encourage you to [learn more](http://www.typescriptlang.org/).
-
-We'll just gloss over a few benefits quickly.
-
 ## TypeScript: Interfaces
 
-Interfaces sound complicated, but I can assure you, they are very simple. They are just groups of types in an object.
+[Interfaces](http://www.typescriptlang.org/Handbook#interfaces) sound complicated, but I can assure you, they are very simple. They are just groups of types in an object.
 
 We could declare a party as:
 
@@ -85,6 +97,7 @@ __`client/party-details/party-details.ts`:__
       resetToParty: IParty;
       party: IParty;
       constructor() {...}
+    }
 
 Identifying that both party & resetToParty should have strings for a name and description. Otherwise, the IDE or text editor should let me know something is wrong. Maybe I made a typo.
 
@@ -104,15 +117,15 @@ __`server/loadParties.ts`:__
 
 This all keeps you notified about mistakes or typos. TypeScript's power is seen more and more as your project and team grow.
 
-## TypeScript: Declarations
+## TypeScript: Declare
 
-You may have noticed that Meteor's global variables are being highlighted by your TypeScript checker. Let's fix that.
+You may have noticed that Meteor's global variables are being highlighted by your TypeScript checker. This is because we haven't yet declared them. Let's fix that.
 
 __`client/party-details/party-details.ts`:__
 
     declare var Parties;
 
-Declaring items let's TypeScript know that you want it there, and it's not an error.
+Declaring items let's TypeScript know that `Parties` is an accepted variable.
 
 ## TypeScript: Type Definition Files
 
@@ -156,19 +169,17 @@ Now if Parties is returning anything other than a valid Mongo Collection, we'll 
 
 ## TypeScript: Generics
 
-A generic is a varable that can be passed into an interface. Let's look back at `Parties` again.
+A [generic](http://www.typescriptlang.org/Handbook#generics) is a varable that can be passed into an interface. You can recognize it from the `<T>` syntax. Let's look back at `Parties` again.
 
     declare var Parties:Mongo.Collection<IParty>;
 
-Now we've told TypeScript that Parties is a Mongo Collection made up of IParty elements.
+Now we've told TypeScript that Parties is a Mongo Collection made up of not just anything, but only IParty elements.
 
 
 # Challenge
 
-Add types, interfaces, generics, declarations & type Definition files.
-
-Or not, as mentioned previously, TypeScript features are optional. Without them, you're basically just writing ES2015 code.
-
+* Add types, interfaces, generics, declarations & type Definition files to your project.
+* Or not, as mentioned previously, TypeScript features are optional. Without them, you're basically just writing ES2015 code and compiling it to ES5.
 
 
   {{/markdown}}
