@@ -2,7 +2,7 @@
   {{#markdown}}
 Right now our app has no privacy, every user can see all the parties on the screen.
 
-So let's add a `public` flag on parties - if a party is public we will let anyone see it, but if a party is private, only the owner can see it.
+So let's add a `isPublic` flag on parties - if a party is public we will let anyone see it, but if a party is private, only the owner can see it.
 
 ## Autopublish
 
@@ -131,10 +131,11 @@ So we create a query - start with the find method on the Parties collection.
 
 Inside the find method we use the [$or](http://docs.mongodb.org/manual/reference/operator/query/or/), [$and](http://docs.mongodb.org/manual/reference/operator/query/and/) and [$exists](http://docs.mongodb.org/manual/reference/operator/query/exists/) Mongo operators to pull our wanted parties:
 
-Either that the owner parameter exists and it's the current logged in user (which we have access to with the command `this.userId`), or that the party's public flag exists and it's set as true.
+Either that the owner parameter exists and it's the current logged in user (which we have access to with the command `this.userId`), or that the party's `isPublic` flag exists and it's set as true.
 
+> Note: `public` is a reserved future word in JavaScript, and also used in TypeScript. So we've instead named the property `isPublic`
 
-So now let's add the public flag to the parties and see how it affects the parties the client gets.
+So now let's add the `isPublic` flag to the parties and see how it affects the parties the client gets.
 
 Let's add a checkbox to the new party form in `parties-form.ng.html`:
 

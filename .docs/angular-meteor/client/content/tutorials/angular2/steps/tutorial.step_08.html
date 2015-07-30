@@ -368,7 +368,8 @@ Amazing, only a few lines of code and we have a secure application!
 
 Please note it is possible for someone with malicious intent to override your route configuration on the client.
 As that is where we the user is authenticated, they can remove the check to get access.
-You should never restrict access to sensitive data, sensitive areas, using the client router.
+
+You should never restrict access to sensitive data, sensitive areas, using the client router only.
 This is the reason we also made restrictions on the server using the allow/deny functionality, so even if someone gets in they cannot make updates.
 While this prevents writes from happening from unintended sources, reads can still be an issue.
 The next step will take care of privacy, not showing users parties they are not allowed to see.
