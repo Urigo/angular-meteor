@@ -2,7 +2,7 @@
 var angularMeteorSession = angular.module('angular-meteor.session', ['angular-meteor.utils']);
 
 angularMeteorSession.factory('$meteorSession', ['$meteorUtils', '$parse',
-  function ($meteorUtils, '$parse') {
+  function ($meteorUtils, $parse) {
     return function (session) {
 
       return {
