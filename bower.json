@@ -1,6 +1,6 @@
 {
   "name": "angular-meteor",
-  "main": "angular-meteor.js",
+  "main": ".dist/angular-meteor.bundle.min.js",
   "version": "0.9.3",
   "homepage": "https://github.com/Urigo/angular-meteor",
   "authors": [
@@ -33,6 +33,12 @@
     ".versions",
     "package.js",
     "package.json",
-    "versions.json"
-  ]
+    "versions.json",
+    "run_tests.sh",
+    "run_tests_ci.sh"
+  ],
+  "dependencies": {
+    "meteor-client-side": "0.1.0",
+    "angular": "1.4.1"
+  }
 }
