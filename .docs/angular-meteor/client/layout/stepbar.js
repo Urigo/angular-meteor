@@ -88,3 +88,14 @@ Template.stepbarCodeDiff.helpers({
     }
   }
 });
+
+Template.improveDoc.helpers({
+  tutorialName: function () {
+    var rData = Router.current().data();
+    if (rData.parent.route == 'tutorials.angular2'){
+      return 'angular2';
+    } else {
+      return 'angular1'
+    }
+  }
+});
