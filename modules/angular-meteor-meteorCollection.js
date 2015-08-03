@@ -9,8 +9,11 @@ var angularMeteorCollection = angular.module('angular-meteor.meteor-collection',
 // that inherit from array comes from here: http://perfectionkills.com/how-ecmascript-5-still-does-not-allow-to-subclass-an-array/
 // We went with the direct extensions approach
 angularMeteorCollection.factory('AngularMeteorCollection', [
-  '$q', '$meteorSubscribe', '$meteorUtils', '$rootScope', '$timeout', 'deepCopyChanges', 'deepCopyRemovals',
-  function ($q, $meteorSubscribe, $meteorUtils, $rootScope, $timeout, deepCopyChanges, deepCopyRemovals) {
+  '$q', '$meteorSubscribe', '$meteorUtils', '$rootScope', '$timeout', 'diffArray',
+  function ($q, $meteorSubscribe, $meteorUtils, $rootScope, $timeout, diffArray) {
+    var deepCopyChanges = diffArray.deepCopyChanges;
+    var deepCopyRemovals = diffArray.deepCopyRemovals;
+
     function AngularMeteorCollection (cursor, collection, diffArrayFunc) {
       var data = [];
       data._serverBackup = [];
@@ -80,16 +83,16 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
       }
 
       this.observeHandle = cursor.observe({
-        addedAt: function (doc, toIndex) {
-          self.splice(toIndex, 0, doc);
-          self._serverBackup.splice(toIndex, 0, doc);
+        addedAt: function (doc, atIndex) {
+          self.splice(atIndex, 0, doc);
+          self._serverBackup.splice(atIndex, 0, doc);
           self.safeApply();
         },
 
-        changedAt: function (doc, oldDoc, toIndex) {
-          deepCopyChanges(self[toIndex], doc);
-          deepCopyRemovals(self[toIndex], doc);
-          self._serverBackup[toIndex] = self[toIndex];
+        changedAt: function (doc, oldDoc, atIndex) {
+          deepCopyChanges(self[atIndex], doc);
+          deepCopyRemovals(self[atIndex], doc);
+          self._serverBackup[atIndex] = self[atIndex];
           self.safeApply();
         },
 

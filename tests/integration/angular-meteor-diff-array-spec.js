@@ -8,10 +8,10 @@ describe('diffArray module', function() {
         addedAtSpy,
         changedAtSpy;
 
-    beforeEach(angular.mock.inject(function(_diffArray_, _deepCopyRemovals_, _deepCopyChanges_) {
+    beforeEach(angular.mock.inject(function(_diffArray_) {
       diffArray = _diffArray_;
-      deepCopyRemovals = _deepCopyRemovals_;
-      deepCopyChanges = _deepCopyChanges_;
+      deepCopyRemovals = diffArray.deepCopyRemovals;
+      deepCopyChanges = diffArray.deepCopyChanges;
     }));
 
     beforeEach(function(){
