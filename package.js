@@ -39,9 +39,11 @@ Package.on_use(function (api) {
     // Lib Files
     'lib/angular-hash-key-copier.js',
     'lib/diff-array.js',
+    'lib/get-updates.js',
     // Module Files
     'modules/angular-meteor-subscribe.js',
     'modules/angular-meteor-collections.js',
+    'modules/angular-meteor-stopper.js',
     'modules/angular-meteor-meteorCollection.js',
     'modules/angular-meteor-object.js',
     'modules/angular-meteor-template.js',
