@@ -2,7 +2,7 @@
 
 var collectionUtils = {};
 
-var angularMeteorCollection = angular.module('angular-meteor.meteor-collection',
+var angularMeteorCollection = angular.module('angular-meteor.collection',
   ['angular-meteor.stopper', 'angular-meteor.subscribe', 'angular-meteor.utils', 'diffArray']);
 
 // The reason angular meteor collection is a factory function and not something

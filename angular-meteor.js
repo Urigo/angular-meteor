@@ -1,8 +1,7 @@
 // Define angular-meteor and its dependencies
 var angularMeteor = angular.module('angular-meteor', [
   'angular-meteor.subscribe',
-  'angular-meteor.collections',
-  'angular-meteor.meteor-collection',
+  'angular-meteor.collection',
   'angular-meteor.object',
   'angular-meteor.template',
   'angular-meteor.user',
