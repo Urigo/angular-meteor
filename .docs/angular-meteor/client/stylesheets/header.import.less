@@ -1,4 +1,4 @@
-@import "variables.less";
+@import "variables.import.less";
 
 header {
   background-color: @background-color;
@@ -17,6 +17,7 @@ header {
 
   .navbar-toggle {
     border: 1px solid rgba(0, 0, 0, 0.05);
+
     .icon-bar {
       background-color: @text-color;
     }
@@ -24,17 +25,12 @@ header {
 
   .nav {
     color: @text-color;
+
     li {
       a {
         color: @text-color;
-
-        // &:hover {
-        //   font-weight: bold;
-        // }
-        // &:focus {
-        //   font-weight: bold;
-        // }
       }
+      // Second level menu. 
       ul {
         a {
           color: #000000;
@@ -54,3 +50,5 @@ header {
     }
   }
 }
+
+@import "header.mob.import.less";
