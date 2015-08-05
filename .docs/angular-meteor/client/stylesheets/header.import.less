@@ -1,4 +1,4 @@
-@import "variables.less";
+@import "variables.import.less";
 
 header {
   background-color: @background-color;
@@ -17,6 +17,7 @@ header {
 
   .navbar-toggle {
     border: 1px solid rgba(0, 0, 0, 0.05);
+
     .icon-bar {
       background-color: @text-color;
     }
@@ -24,22 +25,21 @@ header {
 
   .nav {
     color: @text-color;
+
     li {
       a {
         color: @text-color;
+      }
+      // Second level menu. 
+      ul a {
+          color: black;
+      }
+    }
 
-        // &:hover {
-        //   font-weight: bold;
-        // }
-        // &:focus {
-        //   font-weight: bold;
-        // }
-      }
-      ul {
-        a {
-          color: #000000;
-        }
-      }
+    .tutorial-dropdown {
+      columns: 2;
+      -webkit-columns: 2;
+      -moz-columns: 2;
     }
   }
 
@@ -54,3 +54,7 @@ header {
     }
   }
 }
+
+// Adds mobile specific styles at the end
+// to override default styles above.
+@import "header.mob.import.less";

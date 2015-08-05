@@ -1,0 +1,104 @@
+@import "../../variables.import.less";
+@import "common.import.less";
+@import "left_menu.import.less";
+@import "code_styles.import.less";
+@import "code_box.import.less";
+
+.tutorial-container {
+  .main-content {
+    .improve-button {
+      margin-top: 0
+    }
+
+    .tutorial-nav {
+      float: left;
+      margin-top: 0;
+    }
+
+    .video-tutorial {
+      padding: 10px;
+
+      iframe {
+        border: 3px solid gray;
+        float: right;
+      }
+    }
+  }
+}
+
+@media (max-width: 990px) {
+  .tutorial-container {
+    .main-content {
+      .tutorial-nav {
+        float: none;
+        display: block;
+      }
+
+      .improve-button {
+          float: none;
+          text-align: left;
+          margin: 1rem 0;
+      }
+    }
+  }
+}
+
+.left-menu {
+  .tutorials-nav-button {
+    padding: 0 4px;
+
+    h4 {
+      font-size: 14px;
+    }
+
+    &.active {
+      background-color: #dd1b16;
+      border-color: @active-button;
+      color: @background-color;
+
+      &::before {
+        border-color: @active-button;
+        background-color: @active-button;
+      }
+    }
+  }
+
+  &.tutorial-menu li a {
+    &::before {
+      content: '';
+      height: .8em;
+      width: .8em;
+      display: inline-block;
+      border: 2px solid @angular-red;
+      border-radius: 1em;
+      margin-right: .5em;
+      position: relative;
+      top: -1px;
+      background: white;
+      z-index: 5;
+    }
+
+    &::after {
+      border-right: 1px solid @angular-red;
+      content: '';
+      display: block;
+      height: 104%;
+      position: absolute;
+      top: 21px;
+      left: 22px;
+      z-index: -1;
+    }
+
+    &:hover,
+    &.active,
+    &:focus {
+      color: @active-button;
+      background-color: transparent;
+
+      &::before {
+        border-color: @active-button;
+        background-color: @active-button;
+      }
+    }
+  }
+}

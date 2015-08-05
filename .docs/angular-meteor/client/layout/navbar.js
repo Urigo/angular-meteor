@@ -21,7 +21,7 @@ Template.navbar.helpers({
 });
 
 Template.navbar.events({
-  'click a, click .login-button': function () {
+  'click a[class!="dropdown-toggle"], click .login-button': function () {
     $(".navbar-collapse").removeClass("in");
   }
 });

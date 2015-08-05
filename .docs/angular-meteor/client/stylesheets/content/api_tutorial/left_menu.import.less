@@ -1,0 +1,31 @@
+@import "../../variables.import.less";
+
+// Left-side API content menu.
+.left-menu {
+  padding: 1rem .5rem 1rem 1rem;
+  border-radius: @border-radius;
+  position: relative;
+  background-color: @background-color;
+  font-size: 1rem;
+
+  h2 {
+    margin-left: 1rem;
+  }
+
+  a {
+    color: @angular-red;
+  }
+
+  li a {
+    color: @angular-red;
+    transition: .2s color, .2s background-color;
+    text-indent: -2em;
+    padding: 10px 3em;
+    position: relative;
+    z-index: 0;
+  }
+
+  li:last-child a::after {
+    display: none;
+  }
+}
