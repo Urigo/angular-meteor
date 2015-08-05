@@ -31,11 +31,15 @@ header {
         color: @text-color;
       }
       // Second level menu. 
-      ul {
-        a {
-          color: #000000;
-        }
+      ul a {
+          color: black;
       }
+    }
+
+    .tutorial-dropdown {
+      columns: 2;
+      -webkit-columns: 2;
+      -moz-columns: 2;
     }
   }
 
@@ -51,4 +55,6 @@ header {
   }
 }
 
+// Adds mobile specific styles at the end
+// to override default styles above.
 @import "header.mob.import.less";

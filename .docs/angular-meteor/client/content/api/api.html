@@ -1,11 +1,9 @@
 <template name='api'>
-  <div class="container tutorial-container">
+  <div class="container api-container">
     <div class="row">
       {{> sidebarAPI api}}
-      <div class="col-md-9 main-tutorial">
-        <div>
-          {{> Template.dynamic template=mdContent}}
-        </div>
+      <div class="col-md-9 main-content">
+        {{> Template.dynamic template=mdContent}}
       </div>
     </div>
   </div>

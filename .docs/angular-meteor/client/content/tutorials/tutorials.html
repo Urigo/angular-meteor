@@ -2,16 +2,14 @@
   <div class="container tutorial-container">
     <div class="row">
       {{> sidebar tutorials}}
-      <div class="col-md-9 main-tutorial">
-        <div>
-          <div class="row">
-            {{> tutorialStepHeader }}
-            <div class="col-md-12">
-              {{> Template.dynamic template=contentTemplate}}
-            </div>
-            <div class="col-md-12">
-              {{> tutorialNavigationButtons }}
-            </div>
+      <div class="col-md-9 main-content">
+        <div class="row">
+          {{> tutorialStepHeader }}
+          <div class="col-md-12">
+            {{> Template.dynamic template=contentTemplate}}
+          </div>
+          <div class="col-md-12">
+            {{> tutorialNavigationButtons }}
           </div>
         </div>
       </div>

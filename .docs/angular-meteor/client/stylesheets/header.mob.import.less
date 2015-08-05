@@ -1,6 +1,22 @@
-// Keeps showing hamburger menu till 1050px width.
 @media (max-width: 1050px) {
   header {
+    .nav {
+      .tutorial-dropdown {
+        columns: 1;
+        -webkit-columns: 1;
+        -moz-columns: 1;
+
+        &>li>a {
+          white-space: normal;
+        }
+      }
+    }
+
+    .navbar-nav .open .dropdown-menu {
+      background-color: white;
+    }
+
+    // Keeps showing hamburger menu till 1050px width.
     .navbar-header {
       float: none;
     }

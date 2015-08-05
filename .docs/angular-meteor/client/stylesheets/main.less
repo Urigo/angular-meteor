@@ -1,11 +1,8 @@
 @import "open-sans.import.less";
 @import "variables.import.less";
 @import "header.import.less";
-@import "code-styles.import.less";
-@import "angular-2.import.less";
-@import "about/about.import.less";
 @import "home/home.import.less";
-@import "api/api.import.less";
+@import "content/content.import.less";
 
 @icon-font-path: "/fonts/";
 
@@ -81,12 +78,16 @@ main {
   }
 }
 
-header {
-  .nav {
-    .tutorial-dropdown {
-      columns: 2;
-      -webkit-columns: 2;
-      -moz-columns: 2;
-    }
+.ctas {
+  display: block;
+  text-align: center;
+  margin: 2rem 0;
+
+  &>* {
+    margin-right: 10px;
   }
 }
+
+// Adds mobile specific styles at the end
+// to override default styles above.
+@import "main.mob.import.less";
