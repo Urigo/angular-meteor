@@ -381,16 +381,12 @@ describe('$meteorCollection service', function() {
       meteorArray.save();
 
       expect({a : 444, b: 2}).toBeFoundExactlyInCollection(MyCollection);
-
-      $rootScope.$apply();
     });
 
     it('should save objects with nested $$haskey fields when save is called', function() {
       meteorArray.save(itemWithNestedHashkeyArrays);
 
       expect(itemWithNestedHashkeysRemoved).toBeFoundExactlyInCollection(MyCollection);
-
-      $rootScope.$apply();
     });
   });
 
@@ -404,16 +400,12 @@ describe('$meteorCollection service', function() {
 
       expect({a : new Date("October 13, 2014 11:13:00"), b: 2})
         .toBeFoundExactlyInCollection(MyCollection);
-
-      $rootScope.$apply();
     });
 
     it('should save objects with nested date fields when save is called', function() {
       meteorArray.save(itemWithNestedDateFields);
 
       expect(itemWithNestedDateFields).toBeFoundExactlyInCollection(MyCollection);
-
-      $rootScope.$apply();
     });
   });
 
