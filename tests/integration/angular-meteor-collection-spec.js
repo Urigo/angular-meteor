@@ -37,12 +37,6 @@ describe('$meteorCollection service', function() {
     meteorArray = $meteorCollection(MyCollection, false);
   });
 
-  function applyInDelay(delay) {
-    setTimeout(function() {
-      $rootScope.$apply();
-    }, 2000);
-  }
-
   describe('initialisation', function() {
     it('should return an array with all items in the Mongo Collection', function() {
       expect(meteorArray).toEqualCollection(MyCollection);
@@ -289,6 +283,13 @@ describe('$meteorCollection service', function() {
       expect(meteorArray.length).toEqual(length - 2);
     });
 
+    it('removing all', function() {
+      meteorArray.remove();
+      $rootScope.$apply();
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect(meteorArray.length).toEqual(0);
+    });
+
     it('throws if not string or ObjectId', function() {
         expect(function() {
           meteorArray.remove(1231231);
@@ -368,7 +369,7 @@ describe('$meteorCollection service', function() {
 
 
   describe('objects with $$hashkey', function() {
-    it('should be saved to the collection when save is called', function(done) {
+    it('should be saved to the collection when save is called', function() {
       // add haskeys to objects in the array
       meteorArray.forEach(function(item, index) {
         item.$$hashKey = index;
@@ -377,56 +378,34 @@ describe('$meteorCollection service', function() {
       var itemChanged = meteorArray[0];
       itemChanged.a = 444;
 
-      meteorArray.save().then(function() {
-        expect({a : 444, b: 2}).toBeFoundExactlyInCollection(MyCollection);
-        done();
-      }, function() {
-        done();
-      });
+      meteorArray.save();
 
-      // To resolve promises $rootScope should apply.
-      // Since we are testing on real data we apply in some time
-      // to be sure promises ready.
-      applyInDelay(1000);
+      expect({a : 444, b: 2}).toBeFoundExactlyInCollection(MyCollection);
     });
 
-    it('should save objects with nested $$haskey fields when save is called', function(done) {
-      meteorArray.save(itemWithNestedHashkeyArrays).then(function() {
-        expect(itemWithNestedHashkeysRemoved).toBeFoundExactlyInCollection(MyCollection);
-        done();
-      }, function() {
-        done();
-      });
+    it('should save objects with nested $$haskey fields when save is called', function() {
+      meteorArray.save(itemWithNestedHashkeyArrays);
 
-      applyInDelay(1000);
+      expect(itemWithNestedHashkeysRemoved).toBeFoundExactlyInCollection(MyCollection);
     });
   });
 
 
   describe('objects with date', function() {
-    it('should be saved to the collection when save is called', function(done) {
+    it('should be saved to the collection when save is called', function() {
       var itemChanged = meteorArray[0];
       itemChanged.a = new Date("October 13, 2014 11:13:00");
 
-      meteorArray.save().then(function() {
-        expect({a : new Date("October 13, 2014 11:13:00"), b: 2}).toBeFoundExactlyInCollection(MyCollection);
-        done();
-      }, function() {
-        done();
-      });
+      meteorArray.save();
 
-      applyInDelay(1000); 
+      expect({a : new Date("October 13, 2014 11:13:00"), b: 2})
+        .toBeFoundExactlyInCollection(MyCollection);
     });
 
-    it('should save objects with nested date fields when save is called', function(done) {
-      meteorArray.save(itemWithNestedDateFields).then(function() {
-        expect(itemWithNestedDateFields).toBeFoundExactlyInCollection(MyCollection);
-        done();
-      }, function() {
-        done();
-      });
+    it('should save objects with nested date fields when save is called', function() {
+      meteorArray.save(itemWithNestedDateFields);
 
-      applyInDelay(1000);
+      expect(itemWithNestedDateFields).toBeFoundExactlyInCollection(MyCollection);
     });
   });
 
