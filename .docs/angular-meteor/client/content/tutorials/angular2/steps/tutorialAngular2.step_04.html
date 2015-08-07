@@ -95,7 +95,7 @@ __`client/parties-form/parties-form.ts`:__
         selector: 'parties-form'
       })
       @View({
-        templateUrl: "parties-form/parties-form.ng.html",
+        templateUrl: "client/parties-form/parties-form.ng.html",
         directives: [formDirectives]
       })
       export class PartiesForm {}
@@ -210,8 +210,8 @@ __`client/parties-form/parties-form.ts`:__
           });
 
         //reset input values to empty strings
-        this.partyForm.controls.name.updateValue('');
-        this.partyForm.controls.description.updateValue('');
+        this.partiesForm.controls.name.updateValue('');
+        this.partiesForm.controls.description.updateValue('');
         }
       }
     }
