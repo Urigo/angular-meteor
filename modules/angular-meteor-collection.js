@@ -250,12 +250,12 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
 angularMeteorCollection.factory('$meteorCollectionFS', ['$meteorCollection', 'diffArray',
   function ($meteorCollection, diffArray) {
     function $meteorCollectionFS(reactiveFunc, auto, collection) {
-      var noNestedDiffArray = function (lastSeqArray, seqArray, callbacks) {
-        return diffArray(lastSeqArray, seqArray, callbacks, true);
-      };
-
       return new $meteorCollection(reactiveFunc, auto, collection, noNestedDiffArray);
     }
+
+    var noNestedDiffArray = function (lastSeqArray, seqArray, callbacks) {
+      return diffArray(lastSeqArray, seqArray, callbacks, true);
+    };
 
     return $meteorCollectionFS;
 }]);

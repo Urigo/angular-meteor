@@ -71,7 +71,9 @@ Package.onTest(function(api) {
   // spec files
   api.addFiles([
     'tests/integration/angular-meteor-session-spec.js',
+    'tests/integration/angular-meteor-stopper-spec.js',
     'tests/integration/angular-meteor-diff-array-spec.js',
+    'tests/integration/angular-meteor-get-updates-spec.js',
     'tests/integration/angular-meteor-collection-spec.js',
     'tests/integration/angular-meteor-object-spec.js',
     'tests/integration/angular-meteor-reactive-scope-spec.js',
