@@ -57,16 +57,11 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
     AngularMeteorCollection._upsertDoc = function(doc, useUnsetModifier) { 
       var deferred = $q.defer();
       var collection = this.$$collection;
+      var createFulfill = _.partial($meteorUtils.fulfill, deferred);
+      var fulfill;
 
       // delete $$hashkey
       doc = $meteorUtils.stripDollarPrefixedKeys(doc);
-
-      function onComplete(docId, error, action) {
-        if (error)
-          deferred.reject(error);
-        else
-          deferred.resolve({_id: docId, action: action});
-      }
 
       // update
       var docId = doc._id;
@@ -80,14 +75,12 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
         else
           modifier = { $set: doc };
 
-        collection.update(docId, modifier, function (error) {
-          onComplete(docId, error, 'updated');
-        });
+        fulfill = createFulfill({ _id: docId, action: 'updated' });
+        collection.update(docId, modifier, fulfill); 
       } else {
         // insert
-        collection.insert(doc, function (error, docId) {
-          onComplete(docId, error, 'inserted');
-        });
+        fulfill = createFulfill({ _id: docId, action: 'inserted' });
+        collection.insert(doc, fulfill);
       }
 
       return deferred.promise;
@@ -121,17 +114,11 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
     };
 
     AngularMeteorCollection._removeDoc = function(id) {
-      var deffered = $q.defer();
+      var deferred = $q.defer();
       var collection = this.$$collection;
-
-      collection.remove(id, function(err) {
-        if (err)
-          deffered.reject(err);
-        else
-          deffered.resolve({_id: id, action: 'removed'});
-      });
-
-      return deffered.promise;
+      var fulfill = $meteorUtils.fulfill(deferred, { _id: id, action: 'removed' });
+      collection.remove(id, fulfill);
+      return deferred.promise;
     };
 
     AngularMeteorCollection.updateCursor = function (cursor) {

@@ -39,6 +39,19 @@ angularMeteorUtils.service('$meteorUtils', [ '$timeout',
       });
       return out;
     };
+    // Returns a callback which fulfills promise
+    this.fulfill = function(deferred) {
+      var results = [].slice.call(arguments, 1);
+
+      return function(err) {
+        results = _.isEmpty(results) ? [].slice.call(arguments, 1) : results;
+
+        if (err)
+          deferred.reject(err);
+        else
+          deferred.resolve.apply(deferred, results);
+      };
+    };
   }]);
 
 angularMeteorUtils.run(['$rootScope', '$meteorUtils',

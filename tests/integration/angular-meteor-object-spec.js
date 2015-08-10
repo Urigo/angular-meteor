@@ -1,6 +1,7 @@
 describe('$meteorObject service', function () {
   var $meteorObject,
       $rootScope,
+      AngularMeteorCollection,
       TestCollection,
       id,
       meteorObject;
@@ -12,13 +13,14 @@ describe('$meteorObject service', function () {
 
   beforeEach(angular.mock.module('angular-meteor'));
 
-  beforeEach(angular.mock.inject(function (_$meteorObject_, _$rootScope_) {
+  beforeEach(angular.mock.inject(function (_$meteorObject_, _$rootScope_, _AngularMeteorCollection_) {
     $meteorObject = _$meteorObject_;
     $rootScope = _$rootScope_;
+    AngularMeteorCollection = _AngularMeteorCollection_;
   }));
 
   beforeEach(function () {
-    id = 'test_1'
+    id = 'test_1';
     var data = { _id: id, a: 1, b: 2 };
 
     TestCollection = new Mongo.Collection(null);
@@ -65,8 +67,40 @@ describe('$meteorObject service', function () {
     expect(meteorObject.clientProp).not.toBeDefined();
   });
 
-  describe('#reset()', function () {
+  describe('#save()', function() {
+    it('should save updates specified', function() {
+      meteorObject.save({
+        c: 3
+      });
 
+      var doc = TestCollection.findOne(id);
+
+      expect(doc).toDeepEqual({
+        _id: id,
+        a: 1,
+        b: 2,
+        c: 3
+      });
+
+      expect(meteorObject.getRawObject()).toDeepEqual(doc);
+    });
+
+    it('should save object changes if no updates were specified', function() {
+      meteorObject.c = 3;
+      meteorObject.save();
+
+      var doc = TestCollection.findOne(id);
+
+      expect(doc).toDeepEqual({
+        _id: id,
+        a: 1,
+        b: 2,
+        c: 3
+      });
+    });
+  });
+
+  describe('#reset()', function () {
     it('should remove the client property by default', function () {
       meteorObject.clientProp = 'delete';
       meteorObject.reset();

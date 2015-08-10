@@ -91,4 +91,43 @@ describe('$meteorUtils service', function () {
 
     });
   });
+
+  describe('fulfill()', function() {
+    var deferred = {
+      resolve: function() {},
+      reject: function() {}
+    };
+
+    beforeEach(function() {
+      spyOn(deferred, 'resolve');
+      spyOn(deferred, 'reject');
+    });
+
+    it('should return a function which fulfills promise with according to the results', function() {
+      var fulfill = $meteorUtils.fulfill(deferred);
+
+      var err = Error();
+      fulfill(err);
+      expect(deferred.reject.calls.count()).toEqual(1);
+      expect(deferred.reject.calls.mostRecent().args[0]).toEqual(err);
+
+      var result1 = 1;
+      var result2 = 2;
+      fulfill(null, result1, result2);
+      expect(deferred.resolve.calls.count()).toEqual(1);
+      expect(deferred.resolve.calls.mostRecent().args[0]).toEqual(result1);
+      expect(deferred.resolve.calls.mostRecent().args[1]).toEqual(result2);
+    });
+
+    it('should return a function which is resolved with the specified results', function() {
+      var result1 = 1;
+      var result2 = 2;
+      var fulfill = $meteorUtils.fulfill(deferred, result1, result2);
+
+      fulfill(null, 3, 4);
+      expect(deferred.resolve.calls.count()).toEqual(1);
+      expect(deferred.resolve.calls.mostRecent().args[0]).toEqual(result1);
+      expect(deferred.resolve.calls.mostRecent().args[1]).toEqual(result2);
+    });
+  });
 });

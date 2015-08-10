@@ -1,15 +1,15 @@
 'use strict';
 
-var angularMeteorObject = angular.module('angular-meteor.object', ['angular-meteor.utils', 'angular-meteor.subscribe', 'angular-meteor.collection', 'getUpdates']);
+var angularMeteorObject = angular.module('angular-meteor.object', ['angular-meteor.utils', 'angular-meteor.subscribe', 'angular-meteor.collection', 'getUpdates', 'diffArray']);
 
 angularMeteorObject.factory('AngularMeteorObject', [
-  '$q', '$meteorSubscribe', '$meteorCollection', 
-  function($q, $meteorSubscribe, $meteorCollection) {
+  '$q', '$meteorSubscribe', '$meteorCollection', '$meteorUtils', 'diffArray',
+  function($q, $meteorSubscribe, $meteorCollection, $meteorUtils, diffArray) {
     // A list of internals properties to not watch for, nor pass to the Document on update and etc.
     AngularMeteorObject.$$internalProps = [
-      '$$ngCollection', '$$collection', '$$options', '$$id', '$$hashkey', '$$internalProps', '$$scope',
+      '$$collection', '$$options', '$$id', '$$hashkey', '$$internalProps', '$$scope',
       'save', 'reset', 'subscribe', 'stop', 'autorunComputation', 'unregisterAutoBind', 'unregisterAutoDestroy', 'getRawObject',
-      '_auto', '_setAutos', '_eventEmitter', '_serverBackup'
+      '_auto', '_setAutos', '_eventEmitter', '_serverBackup', '_updateLocal'
     ];
 
     function AngularMeteorObject (collection, id, options){
@@ -21,7 +21,6 @@ angularMeteorObject.factory('AngularMeteorObject', [
       angular.extend(data, AngularMeteorObject);
 
       data._serverBackup = doc || {};
-      data.$$ngCollection = $meteorCollection(collection);
       data.$$collection = collection;
       data.$$options = options;
       data.$$id = id;
@@ -30,8 +29,7 @@ angularMeteorObject.factory('AngularMeteorObject', [
     }
 
     AngularMeteorObject.getRawObject = function () {
-      var self = this;
-      return angular.copy(_.omit(self, self.$$internalProps));
+      return angular.copy(_.omit(this, this.$$internalProps));
     };
 
     AngularMeteorObject.subscribe = function () {
@@ -39,9 +37,20 @@ angularMeteorObject.factory('AngularMeteorObject', [
       return this;
     };
 
-    AngularMeteorObject.save = function(docs) {
-      var updates = docs || this.getRawObject();
-      return this.$$ngCollection.save(updates);
+    AngularMeteorObject.save = function(updates) {
+      var self = this;
+      var deferred = $q.defer();
+
+      if (updates) {
+        this.$$collection.update(this._id, { $set: updates }, $meteorUtils.fulfill(deferred));
+        diffArray.deepCopyChanges(self, updates);
+      }
+
+      else {
+        this.$$collection.update(this._id, this.getRawObject(), $meteorUtils.fulfill(deferred));
+      }
+
+      return deferred.promise; 
     };
 
     AngularMeteorObject.reset = function(keepClientProps) {
