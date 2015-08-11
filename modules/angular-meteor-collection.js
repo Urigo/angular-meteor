@@ -12,9 +12,6 @@ var angularMeteorCollection = angular.module('angular-meteor.collection',
 angularMeteorCollection.factory('AngularMeteorCollection', [
   '$q', '$meteorSubscribe', '$meteorUtils', '$rootScope', '$timeout', 'diffArray',
   function ($q, $meteorSubscribe, $meteorUtils, $rootScope, $timeout, diffArray) {
-    var deepCopyChanges = diffArray.deepCopyChanges;
-    var deepCopyRemovals = diffArray.deepCopyRemovals;
-
     function AngularMeteorCollection (cursor, collection, diffArrayFunc) {
       var data = [];
       data._serverBackup = [];
@@ -139,8 +136,8 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
         },
 
         changedAt: function (doc, oldDoc, atIndex) {
-          deepCopyChanges(self[atIndex], doc);
-          deepCopyRemovals(self[atIndex], doc);
+          diffArray.deepCopyChanges(self[atIndex], doc);
+          diffArray.deepCopyRemovals(self[atIndex], doc);
           self._serverBackup[atIndex] = self[atIndex];
           applyPromise = self._safeApply(applyPromise);
         },
