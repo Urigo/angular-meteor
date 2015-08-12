@@ -9,7 +9,7 @@ angularMeteorObject.factory('AngularMeteorObject', [
     AngularMeteorObject.$$internalProps = [
       '$$collection', '$$options', '$$id', '$$hashkey', '$$internalProps', '$$scope',
       'save', 'reset', 'subscribe', 'stop', 'autorunComputation', 'unregisterAutoBind', 'unregisterAutoDestroy', 'getRawObject',
-      '_auto', '_setAutos', '_eventEmitter', '_serverBackup', '_updateLocal'
+      '_auto', '_setAutos', '_eventEmitter', '_serverBackup'
     ];
 
     function AngularMeteorObject (collection, id, options){
@@ -37,19 +37,16 @@ angularMeteorObject.factory('AngularMeteorObject', [
       return this;
     };
 
-    AngularMeteorObject.save = function(updates) {
-      var self = this;
+    AngularMeteorObject.save = function(changes) {
       var deferred = $q.defer();
+      var updates;
 
-      if (updates) {
-        this.$$collection.update(this._id, { $set: updates }, $meteorUtils.fulfill(deferred));
-        diffArray.deepCopyChanges(self, updates);
-      }
+      if (changes)
+        updates = { $set: changes };
+      else
+        updates = this.getRawObject();
 
-      else {
-        this.$$collection.update(this._id, this.getRawObject(), $meteorUtils.fulfill(deferred));
-      }
-
+      this.$$collection.update(this._id, updates, $meteorUtils.fulfill(deferred));
       return deferred.promise; 
     };
 

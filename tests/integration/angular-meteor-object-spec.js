@@ -40,7 +40,6 @@ describe('$meteorObject service', function () {
     expect(meteorObject.a).not.toBeDefined('angular meteor object have unset property');
   });
 
-
   it('should keep the client only property after autorun updates', function () {
     meteorObject.clientProp = 'keep';
 
@@ -82,6 +81,7 @@ describe('$meteorObject service', function () {
         c: 3
       });
 
+      Tracker.flush();
       expect(meteorObject.getRawObject()).toDeepEqual(doc);
     });
 
