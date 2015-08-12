@@ -19,9 +19,7 @@ angularMeteorReactiveScope.run(['$rootScope', '$parse', function($rootScope, $pa
       self.$watch(function() {
         return getValue(self)
       }, function(newVal, oldVal) {
-        if (newVal !== oldVal) {
-          self.$$trackerDeps[property].changed();
-        }
+        self.$$trackerDeps[property].changed();
       }, objectEquality);
     }
 
