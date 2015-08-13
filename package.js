@@ -60,7 +60,7 @@ Package.on_use(function (api) {
 Package.onTest(function(api) {
   api.use('sanjo:jasmine@0.13.6');
   api.use('urigo:angular');
-  api.use('angular:angular-mocks');
+  api.use('angular:angular-mocks@1.4.2');
 
   // auxiliary
   api.addFiles([
