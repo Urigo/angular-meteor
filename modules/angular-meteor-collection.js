@@ -13,7 +13,7 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
   '$q', '$meteorSubscribe', '$meteorUtils', '$rootScope', '$timeout', 'diffArray',
   function ($q, $meteorSubscribe, $meteorUtils, $rootScope, $timeout, diffArray) {
     var syncMeteorMethods = ['find', 'findOne', 'allow', 'deny'];
-    var asyncMetehorMethods = ['insert', 'update', 'upsert', 'remove'];
+    var asyncMetehorMethods = ['insert', 'update', 'upsert'];
     var meteorMethods = syncMeteorMethods.concat(asyncMetehorMethods);
 
     function AngularMeteorCollection (cursor, collection, diffArrayFunc) {
