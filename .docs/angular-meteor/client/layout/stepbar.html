@@ -50,7 +50,7 @@
 </template>
 
 <template name="tutorialNavigationButtons">
-  <ul class="btn-group tutorial-nav">
+  <ul class="btn-group nav">
     {{> stepbarButtonsPrevious }}
     {{> stepbarLiveDemo }}
     {{> stepbarCodeDiff }}
@@ -66,16 +66,17 @@
 </template>
 
 <template name="tutorialStepHeader">
-  <div class="col-md-12">
-    {{> improveDoc }}
-    {{> tutorialNavigationButtons }}
+  <div class="row buttons">
+    <div class="col-md-12">
+      {{> improveDoc }}
+      {{> tutorialNavigationButtons}}
+    </div>
   </div>
-
-  <div class="col-md-8">
-    <h1>Step {{id}} - {{title}}</h1>
-  </div>
-  <div class="video-tutorial col-md-4">
-    <iframe width="300" height="169" src="{{video}}" frameborder="0" allowfullscreen></iframe>
+  <div class="row">
+    <h1 class="col-md-8 col-xs-12 title">Step {{id}} - {{title}}</h1>
+    <div class="col-md-4 col-xs-12 video">
+      <iframe src="{{video}}" frameborder="0" allowfullscreen></iframe>
+    </div>
   </div>
 </template>
 
