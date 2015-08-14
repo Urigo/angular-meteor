@@ -171,7 +171,7 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
 
       var hUnsetTimeout = null;
       // Here we use $timeout to combine multiple updates that go
-      // one after another.
+      // each one after another.
       function unsetServerUpdateMode() {
         if (hUnsetTimeout) {
           $timeout.cancel(hUnsetTimeout);
@@ -232,7 +232,6 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
         }
       });
   
-      var hTimeout = null;
       this._hDataAutorun = Tracker.autorun(function() {
         cursor.fetch();
         if (serverMode) {
@@ -247,9 +246,7 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
     };
 
     AngularMeteorCollection._stopCursor = function() {
-      if (this._unsetAutoClientSave) {
-        this._unsetAutoClientSave();
-      }
+      this._unsetAutoClientSave();
 
       if (this._hObserve) {
         this._hObserve.stop();
@@ -385,6 +382,7 @@ var collectionUtils = {
   // Finds changes between two collections and saves differences.
   diff: function(newCollection, oldCollection, diffMethod) {
     var changes = {added: [], removed: [], changed: []};
+
     diffMethod(oldCollection, newCollection, {
       addedAt: function(id, item, index) {
         changes.added.push({item: item, index: index});
