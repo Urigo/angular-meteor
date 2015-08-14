@@ -409,4 +409,90 @@ describe('$meteorCollection service', function() {
     });
   });
 
+  describe('meteor methods', function() {
+    var syncMethods = ['find', 'findOne', 'allow', 'deny'];
+    var asyncMethods = ['insert', 'update', 'upsert'];
+
+    describe('sync methods', function() {
+      it('should be called with the provided arguments and return the result', function() {
+        syncMethods.forEach(function(method) {
+          spyOn(Meteor.Collection.prototype, method).and.returnValue('result');
+        });
+
+        syncMethods.forEach(function(method) {
+          var result = meteorArray[method](1, 2, 3);
+          expect(result).toEqual('result');
+          expect(Meteor.Collection.prototype[method]).toHaveBeenCalled();
+          expect(Meteor.Collection.prototype[method].calls.mostRecent().object).toEqual(MyCollection);
+          expect(Meteor.Collection.prototype[method].calls.mostRecent().args).toEqual([1, 2, 3]);
+        });
+      });
+    });
+
+    describe('async methods', function() {
+      describe('resolution', function() {
+        it('should be called with the provided arguments and return a resolved promise', function(done) {
+          done = _.after(asyncMethods.length, done);
+
+          asyncMethods.forEach(function(method) {
+            spyOn(Meteor.Collection.prototype, method).and.callFake(function() {
+              var callback = _.last(arguments);
+
+              _.defer(function() {
+                callback(null, 'result');
+              });
+            });
+          });
+
+          asyncMethods.forEach(function(method) {
+            var promise = meteorArray[method](1, 2, 3);
+            expect(Meteor.Collection.prototype[method]).toHaveBeenCalled();
+            expect(Meteor.Collection.prototype[method].calls.mostRecent().object).toEqual(MyCollection);
+            expect(Meteor.Collection.prototype[method].calls.mostRecent().args.slice(0, -1)).toEqual([1, 2, 3]);
+
+            promise.then(function(result) {
+              expect(result).toEqual('result');
+              done();
+            });
+          });
+
+          _.defer(function() {
+            $rootScope.$apply();
+          });
+        });
+      });
+
+      describe('rejection', function() {
+        it('should be called with the provieded arguments and return a rejected promise', function(done) {
+          done = _.after(asyncMethods.length, done);
+
+          asyncMethods.forEach(function(method) {
+            spyOn(Meteor.Collection.prototype, method).and.callFake(function() {
+              var callback = _.last(arguments);
+
+              _.defer(function() {
+                callback('error');
+              });
+            });
+          });
+
+          asyncMethods.forEach(function(method) {
+            var promise = meteorArray[method](1, 2, 3);
+            expect(Meteor.Collection.prototype[method]).toHaveBeenCalled();
+            expect(Meteor.Collection.prototype[method].calls.mostRecent().object).toEqual(MyCollection);
+            expect(Meteor.Collection.prototype[method].calls.mostRecent().args.slice(0, -1)).toEqual([1, 2, 3]);
+
+            promise.catch(function(err) {
+              expect(err).toEqual('error');
+              done();
+            });
+          });
+
+          _.defer(function() {
+            $rootScope.$apply();
+          });
+        });
+      });
+    });
+  });
 });

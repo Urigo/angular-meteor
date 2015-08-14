@@ -12,6 +12,10 @@ var angularMeteorCollection = angular.module('angular-meteor.collection',
 angularMeteorCollection.factory('AngularMeteorCollection', [
   '$q', '$meteorSubscribe', '$meteorUtils', '$rootScope', '$timeout', 'diffArray',
   function ($q, $meteorSubscribe, $meteorUtils, $rootScope, $timeout, diffArray) {
+    var syncMeteorMethods = ['find', 'findOne', 'allow', 'deny'];
+    var asyncMetehorMethods = ['insert', 'update', 'upsert', 'remove'];
+    var meteorMethods = syncMeteorMethods.concat(asyncMetehorMethods);
+
     function AngularMeteorCollection (cursor, collection, diffArrayFunc) {
       var data = [];
       data._serverBackup = [];
@@ -22,6 +26,7 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
       else
         data.$$collection = $meteorUtils.getCollectionByName(cursor.collection.name);
 
+      extendMeteor(data);
       angular.extend(data, AngularMeteorCollection);
       return data;
     }
@@ -226,6 +231,27 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
         collectionUtils.updateCollection(self, oldItems, self.diffArrayFunc);
         self.setAutoBind();
       }, true);
+    };
+
+    var extendMeteor = function(data) {
+      meteorMethods.forEach(function(method) {
+        data[method] = function() {
+          if (_.contains(syncMeteorMethods, method))
+            return this.$$collection[method].apply(this.$$collection, arguments);
+
+          var deferred = $q.defer();
+          var promise = deferred.promise;
+          var fulfill = $meteorUtils.fulfill(deferred);
+          var args = [].slice.call(arguments).concat(fulfill);
+          this.$$collection[method].apply(this.$$collection, args);
+
+          promise.finally(function() {
+            $timeout(angular.noop);
+          });
+
+          return promise;
+        };
+      });
     };
 
     return AngularMeteorCollection;
