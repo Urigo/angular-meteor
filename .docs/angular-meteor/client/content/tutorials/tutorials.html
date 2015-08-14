@@ -3,14 +3,14 @@
     <div class="row">
       {{> sidebar tutorials}}
       <div class="col-md-9 main-content">
-        <div class="header">
-          {{> tutorialStepHeader}}
-        </div>
-        <div class="body">
-          {{> Template.dynamic template=contentTemplate}}
-        </div>
-        <div class="footer">
-          {{> tutorialNavigationButtons}}
+        <div class="row">
+          {{> tutorialStepHeader }}
+          <div class="col-md-12">
+            {{> Template.dynamic template=contentTemplate}}
+          </div>
+          <div class="col-md-12">
+            {{> tutorialNavigationButtons }}
+          </div>
         </div>
       </div>
     </div>

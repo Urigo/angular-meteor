@@ -5,27 +5,41 @@
 @import "code_box.import.less";
 
 .tutorial-container {
-  .improve-button {
-    margin: 0
-  }
+  .main-content {
+    .improve-button {
+      margin-top: 0
+    }
 
-  .video iframe {
-    float: right;
-    border: 3px solid gray;
-    width: 300px;
-    height: 169px;
-  }
+    .tutorial-nav {
+      float: left;
+      margin-top: 0;
+    }
 
-  .nav {
-    float: left;
-  }
+    .video-tutorial {
+      padding: 10px;
 
-  .buttons {
-    margin-bottom: 2rem;
+      iframe {
+        border: 3px solid gray;
+        float: right;
+      }
+    }
   }
+}
 
-  .header, .footer {
-    margin-bottom: 1rem;
+@media (max-width: 990px) {
+  .tutorial-container {
+    .main-content {
+      .tutorial-nav {
+        float: none;
+        display: block;
+      }
+
+      .improve-button {
+          float: none;
+          text-align: left;
+          margin: 1rem 0;
+      }
+    }
   }
 }
 
@@ -88,5 +102,3 @@
     }
   }
 }
-
-@import "tutorial.mob.import.less";
