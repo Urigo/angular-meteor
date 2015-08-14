@@ -1,6 +1,6 @@
 var angularMeteorTemplate = angular.module('angular-meteor.template', []);
 
-if (typeof Template != 'undefined' && typeof Blaze != 'undefined') {
+//if (typeof Template != 'undefined' && typeof Blaze != 'undefined') {
   angularMeteorTemplate.run(['$templateCache',
     function ($templateCache) {
       angular.forEach(Template, function (template, name) {
@@ -76,4 +76,4 @@ if (typeof Template != 'undefined' && typeof Blaze != 'undefined') {
       };
     }
   ]);
-}
+//}

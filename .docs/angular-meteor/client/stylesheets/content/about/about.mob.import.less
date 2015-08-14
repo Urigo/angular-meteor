@@ -1,33 +1,33 @@
 @media (max-width: 992px) {
-  .team li img {
-    width: 6rem;
-    height: 6rem;
+  .about {
+    .team li img {
+      width: 6rem;
+      height: 6rem;
+    }
   }
 }
 
-@media (max-width: 768px) {
-    .team li img {
-        width: 7rem;
-        height: 7rem;
+@media (max-width: 767px) {
+  .about {
+    .title {
+      margin-bottom: 0;
     }
 
-    .roadmap-wrapper {
-        // Clears right padding to avoid wrapping.
-        padding-right: 0;
-        padding-left: 0;
-
-        h2, p {
-            padding-left: 15px;
-        }
+    .team li img {
+      width: 7rem;
+      height: 7rem;
     }
 
     .roadmap {
-        .node {
-            // Removes trailing red line
-            // for second step.
-            &:nth-child(2)::after {
-                display: none;
-            }
+      padding: 2rem 0;
+
+      .node {
+        // Removes trailing red line
+        // for second step.
+        &:nth-child(2)::after {
+            display: none;
         }
+      }
     }
+  }
 }
