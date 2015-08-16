@@ -61,6 +61,7 @@ Package.onTest(function(api) {
   api.use('sanjo:jasmine@0.13.6');
   api.use('urigo:angular');
   api.use('angular:angular-mocks@1.4.2');
+  api.use('mdg:camera@1.1.5');
 
   // auxiliary
   api.addFiles([
@@ -73,6 +74,7 @@ Package.onTest(function(api) {
     'tests/integration/angular-meteor-methods-spec.js',
     'tests/integration/angular-meteor-session-spec.js',
     'tests/integration/angular-meteor-stopper-spec.js',
+    'tests/integration/angular-meteor-camera-spec.js',
     'tests/integration/angular-meteor-diff-array-spec.js',
     'tests/integration/angular-meteor-get-updates-spec.js',
     'tests/integration/angular-meteor-collection-spec.js',
