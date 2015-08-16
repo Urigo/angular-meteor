@@ -95,7 +95,7 @@ __`client/parties-list/parties-list.ts`:__
       export class PartiesList {
         constructor() {
           Tracker.autorun(zone.bind(() => {
-          this.parties = Parties.find().fetch();
+            this.parties = Parties.find().fetch();
         }));
       }
     }
