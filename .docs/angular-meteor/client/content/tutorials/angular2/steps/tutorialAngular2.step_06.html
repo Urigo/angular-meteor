@@ -96,27 +96,24 @@ If you completed the 'challenge' in step 5, your party-details component should 
 
 __`client/parties-details/parties-details.ts`:__
 
-    if (Meteor.isClient) {
-      import {Component, View, Attribute, Inject} from 'angular2/angular2';
-      import {routerDirectives, RouteParams} from 'angular2/router';
+    import {Component, View, Attribute, Inject} from 'angular2/angular2';
+    import {routerDirectives, RouteParams} from 'angular2/router';
 
-      @Component({
-        selector: 'party-details'
-      })
-      @View({
-        templateUrl: 'client/party-details/party-details.ng.html',
-        directives: [routerDirectives]
-      })
-      export class PartyDetails{
-        constructor(@Inject(RouteParams) routeParams:RouteParams) {
-          this.params = routeParams.params;
-        }
-        onActivate() {
-          this.party = Parties.find(this.params.partyId).fetch()[0];
-            if (this.party) {
-              return true;
-            }
-          }
+    @Component({
+      selector: 'party-details'
+    })
+    @View({
+      templateUrl: 'client/party-details/party-details.ng.html',
+      directives: [routerDirectives]
+    })
+    export class PartyDetails{
+      constructor(@Inject(RouteParams) routeParams:RouteParams) {
+        this.params = routeParams.params;
+      }
+      onActivate() {
+        this.party = Parties.find(this.params.partyId).fetch()[0];
+        if (this.party) {
+          return true;
         }
       }
     }
@@ -153,7 +150,7 @@ __`client/parties-details/parties-details.ng.html`:__
 
       <button type="submit">Save</button>
       <button>Reset form</button>
-      <button [router-link]="['/parties']">Cancel</button>
+      <button [router-link]="['/parties-list']">Cancel</button>
     </form>
 
 Let's do a little test to see how form controls and events work in Angular 2. Bind to `party.name` below the input, and change the input text.
@@ -178,7 +175,7 @@ __`client/parties-details/parties-details.ng.html`:__
 
       <button type="submit">Save</button>
       <button>Reset form</button>
-      <button [router-link]="['/parties']">Cancel</button>
+      <button [router-link]="['/parties-list']">Cancel</button>
     </form>
 
 To get this to work, you'll also have to add the corresponding ControlGroup in `parties-details.ts` that matches the `[ng-form-model]`.

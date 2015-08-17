@@ -95,10 +95,13 @@ __`client/parties-list/parties-list.ts`:__
       export class PartiesList {
         constructor() {
           Tracker.autorun(zone.bind(() => {
-          this.parties = Parties.find().fetch();
-        }));
+            this.parties = Parties.find().fetch();
+          }));
+        },
+        remove(party) {
+          Parties.remove(party._id);
+        }
       }
-    }
 
 Move the `index.ng.html` file into the parties-list folder and rename it `parties-list.ng.html`.
 

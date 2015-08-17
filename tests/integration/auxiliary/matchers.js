@@ -9,6 +9,7 @@ customMatchers = {
       }
     };
   },
+
   toBeFoundExactlyInCollection : function(util, customEqualityTesters) {
     return {
       compare : function(actual, expected) {
@@ -28,6 +29,16 @@ customMatchers = {
           result.message = 'Expected ' + JSON.stringify(actual) + ' to be found in collection ' + JSON.stringify(expected.find({}).fetch());
         }
 
+        return result;
+      }
+    };
+  },
+
+  toDeepEqual: function(util, customEqualityTesters) {
+    return {
+      compare: function(actual, expected) {
+        var result = {};
+        result.pass = _.isEqual(actual, expected);
         return result;
       }
     };
