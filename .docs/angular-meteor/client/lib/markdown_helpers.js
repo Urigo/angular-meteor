@@ -9,3 +9,4 @@ Handlebars.registerHelper('tstache', function() {
 Handlebars.registerHelper('lt', function() {
   return '<';
 });
+

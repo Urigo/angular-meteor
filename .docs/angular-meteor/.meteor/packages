@@ -24,6 +24,10 @@ reactive-var
 chuangbo:cookie
 simple:highlight.js
 percolatestudio:segment.io@1.1.0_1
-tutorials
 twbs:bootstrap
 fortawesome:fontawesome
+mdg:tutorial-diff-box
+mdg:tutorial-registry
+tutorials
+simple:markdown-templating@1.2.7
+mdg:tutorial-step-diff-compiler

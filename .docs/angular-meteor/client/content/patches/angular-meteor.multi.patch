@@ -1,0 +1,220 @@
+From 9e3080168633d4b2a5c3dd4a860fe2f8771322e8 Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 14:23:47 +0300
+Subject: [PATCH 1/9] Step 0.1: Create empty index.html file
+
+---
+ index.html | 3 +++
+ 1 file changed, 3 insertions(+)
+ create mode 100644 index.html
+
+diff --git a/index.html b/index.html
+new file mode 100644
+index 0000000..ef412ef
+--- /dev/null
++++ b/index.html
+@@ -0,0 +1,3 @@
++<body>
++  <p>Nothing here</p>
++</body>
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 2cb6cc6b54ab557bc03cc6ddcb985531a79a9369 Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 14:34:33 +0300
+Subject: [PATCH 2/9] Add angular-meteor to the project and add change the main
+ page
+
+---
+ index.html    | 2 +-
+ index.ng.html | 1 +
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+ create mode 100644 index.ng.html
+
+diff --git a/index.html b/index.html
+index ef412ef..bf21494 100644
+--- a/index.html
++++ b/index.html
+@@ -1,3 +1,3 @@
+ <body>
+-  <p>Nothing here</p>
++  <div ng-include="'index.ng.html'"></div>
+ </body>
+diff --git a/index.ng.html b/index.ng.html
+new file mode 100644
+index 0000000..79ed426
+--- /dev/null
++++ b/index.ng.html
+@@ -0,0 +1 @@
++<p>Nothing here</p>
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 9376c5fc09a4a990a28547cf643a37812288fc10 Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 15:45:01 +0300
+Subject: [PATCH 3/9] Revert "Add angular-meteor to the project and add change
+ the main page"
+
+This reverts commit 2cb6cc6b54ab557bc03cc6ddcb985531a79a9369.
+---
+ index.html    | 2 +-
+ index.ng.html | 1 -
+ 2 files changed, 1 insertion(+), 2 deletions(-)
+ delete mode 100644 index.ng.html
+
+diff --git a/index.html b/index.html
+index bf21494..ef412ef 100644
+--- a/index.html
++++ b/index.html
+@@ -1,3 +1,3 @@
+ <body>
+-  <div ng-include="'index.ng.html'"></div>
++  <p>Nothing here</p>
+ </body>
+diff --git a/index.ng.html b/index.ng.html
+deleted file mode 100644
+index 79ed426..0000000
+--- a/index.ng.html
++++ /dev/null
+@@ -1 +0,0 @@
+-<p>Nothing here</p>
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 0a564b8b735409e03f92d1b5de072814e3f22b20 Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 16:47:59 +0300
+Subject: [PATCH 4/9] Step 0.2: Move the main HTML into index.ng.html
+
+---
+ index.ng.html | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 index.ng.html
+
+diff --git a/index.ng.html b/index.ng.html
+new file mode 100644
+index 0000000..79ed426
+--- /dev/null
++++ b/index.ng.html
+@@ -0,0 +1 @@
++<p>Nothing here</p>
+-- 
+2.3.2 (Apple Git-55)
+
+
+From f07ee765a41c36639f3f9ee3d84c4608fceb6522 Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 16:49:45 +0300
+Subject: [PATCH 5/9] Step 0.3: Include the angular main file inside the
+ index.html file
+
+---
+ index.html | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/index.html b/index.html
+index ef412ef..bf21494 100644
+--- a/index.html
++++ b/index.html
+@@ -1,3 +1,3 @@
+ <body>
+-  <p>Nothing here</p>
++  <div ng-include="'index.ng.html'"></div>
+ </body>
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 9e55616290d7bf5417dbe551023a487254e931b2 Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 17:14:56 +0300
+Subject: [PATCH 6/9] Step 0.4: Create app.js file to contain the AngularJS
+ application
+
+---
+ app.js | 3 +++
+ 1 file changed, 3 insertions(+)
+ create mode 100644 app.js
+
+diff --git a/app.js b/app.js
+new file mode 100644
+index 0000000..2465ea1
+--- /dev/null
++++ b/app.js
+@@ -0,0 +1,3 @@
++if (Meteor.isClient) {
++
++}
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 2f0587779960cdb2b22060cac9fdeafbec0a9bc3 Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 17:16:03 +0300
+Subject: [PATCH 7/9] Step 0.5: Create AngularJS module and add angular-meteor
+ dependency
+
+---
+ app.js | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/app.js b/app.js
+index 2465ea1..987f384 100644
+--- a/app.js
++++ b/app.js
+@@ -1,3 +1,3 @@
+ if (Meteor.isClient) {
+-
++  angular.module('socially',['angular-meteor']);
+ }
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 1ac42a79ef6e234ae930679e122ce51e01c7ba08 Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 17:25:28 +0300
+Subject: [PATCH 8/9] Step 0.6: Add ng-app
+
+---
+ index.html | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/index.html b/index.html
+index bf21494..963f4fa 100644
+--- a/index.html
++++ b/index.html
+@@ -1,3 +1,3 @@
+-<body>
++<body ng-app="socially">
+   <div ng-include="'index.ng.html'"></div>
+ </body>
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 558c4c5b2c4d9058f3777f655c33c80cb6c283b9 Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 17:31:28 +0300
+Subject: [PATCH 9/9] Step 0.7: Add AngularJS code!
+
+---
+ index.ng.html | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/index.ng.html b/index.ng.html
+index 79ed426..a9c8ddc 100644
+--- a/index.ng.html
++++ b/index.ng.html
+@@ -1 +1 @@
+-<p>Nothing here</p>
++<p>Nothing here {{ 'yet' + '!' }}</p>
+-- 
+2.3.2 (Apple Git-55)
+
