@@ -1,5 +1,4 @@
-<template name="tutorial.step_02.html">
-  {{#markdown}}
+{{#template name="tutorial.step_02.html"}}
 
 Now it's time to make the web page dynamic — with AngularJS.
 
@@ -11,16 +10,7 @@ In Angular, the view is a projection of the model through the HTML template. Thi
 
 Let's change our template to be dynamic:
 
-__`index.ng.html`:__
-
-    <div ng-controller="PartiesListCtrl">
-      <ul>
-        <li ng-repeat="party in parties">
-          {{dstache}}party.name}}
-          <p>{{dstache}}party.description}}</p>
-        </li>
-      </ul>
-    </div>
+{{> DiffBox tutorialName="angular-meteor" step="2.1"}}
 
 We replaced the hard-coded party list with the [ngRepeat](https://docs.angularjs.org/api/ng/directive/ngRepeat) directive and two Angular expressions:
 
@@ -37,29 +27,7 @@ We have added a new directive, called `ng-controller`, which attaches the `Parti
 Now we are going to create our controller and model.
 We start with `PartiesListCtrl` controller and place data in it.
 
-
-__`app.js`:__
-
-      if (Meteor.isClient) {
-        angular
-          .module('socially',['angular-meteor']);
-
-        angular
-          .module('socially').controller('PartiesListCtrl', ['$scope',
-            function($scope){
-
-              $scope.parties = [
-                {'name': 'Dubstep-Free Zone',
-                  'description': 'Can we please just for an evening not listen to dubstep.'},
-                {'name': 'All dubstep all the time',
-                  'description': 'Get it on!'},
-                {'name': 'Savage lounging',
-                  'description': 'Leisure suit required. And only fiercest manners.'}
-              ];
-
-          }]);
-      }
-
+{{> DiffBox tutorialName="angular-meteor" step="2.2"}}
 
 Here we declared a controller called `PartiesListCtrl` and registered it in our Angular module app - `socially`.
 
@@ -99,5 +67,4 @@ But, this is all client side, which is nice for tutorials, but in a real applica
 
 So, let's go to [step 3](/tutorial/step_03) to learn how to bind our application to the great power of Meteor.
 
-  {{/markdown}}
-</template>
+{{/template}}
