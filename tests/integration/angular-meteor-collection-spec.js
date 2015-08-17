@@ -254,7 +254,7 @@ describe('$meteorCollection service', function() {
     });
 
     it('should update the collection when a new item is pushed into the array', function() {
-      meteorArray.push({a : '7', b: '8'});
+      meteorArray.push({a: '7', b: '8'});
       $rootScope.$apply();
       expect(meteorArray).toEqualCollection(MyCollection);
     });
@@ -347,7 +347,7 @@ describe('$meteorCollection service', function() {
       $timeout.flush();
       expect($ngCol.length).toEqual(10);
       expect($ngCol.save).toHaveBeenCalled();
-      expect($ngCol.save.calls.count()).toEqual(6);
+      expect($ngCol.save.calls.count()).toEqual(1);
     });
 
     it('remove updates from client handled correctly', function() {
@@ -369,7 +369,7 @@ describe('$meteorCollection service', function() {
       // limit is set.
       expect($ngCol.length).toEqual(10);
       expect($ngCol.remove).toHaveBeenCalled();
-      expect($ngCol.remove.calls.count()).toEqual(2);
+      expect($ngCol.remove.calls.count()).toEqual(1);
     });
   });
 
@@ -386,7 +386,7 @@ describe('$meteorCollection service', function() {
 
       meteorArray.save();
 
-      expect({a : 444, b: 2}).toBeFoundExactlyInCollection(MyCollection);
+      expect({a: 444, b: 2}).toBeFoundExactlyInCollection(MyCollection);
     });
 
     it('should save objects with nested $$haskey fields when save is called', function() {
@@ -402,8 +402,7 @@ describe('$meteorCollection service', function() {
       itemChanged.a = new Date("October 13, 2014 11:13:00");
 
       meteorArray.save();
-
-      expect({a : new Date("October 13, 2014 11:13:00"), b: 2})
+      expect({a: new Date("October 13, 2014 11:13:00"), b: 2})
         .toBeFoundExactlyInCollection(MyCollection);
     });
 

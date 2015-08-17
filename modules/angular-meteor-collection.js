@@ -275,29 +275,43 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
 
     AngularMeteorCollection._saveChanges = function(changes) {
       // First applies changes to the collection itself.
+      var newDocs = [];
       for (var itemInd = changes.added.length - 1; itemInd >= 0; itemInd--) {
         this.splice(changes.added[itemInd].index, 1);
+        newDocs.push(changes.added[itemInd].item);
+      }
+      // Then saves all new docs in bulk.
+      if (newDocs.length) {
+        this.save(newDocs);
       }
 
-      // Then saves additions.
-      for (var itemInd = 0; itemInd < changes.added.length; itemInd++) {
-        this.save(changes.added[itemInd].item);
-      }
-
-      // Then saves removes.
+      // Collects docs to remove.
+      var removeDocs = [];
       for (var itemInd = 0; itemInd < changes.removed.length; itemInd++) {
-        this.remove(changes.removed[itemInd].item);
+        removeDocs.push(changes.removed[itemInd].item);
+      }
+      // Removes docs in bulk.
+      if (removeDocs.length) {
+        this.remove(removeDocs);
       }
 
-      // Then saves changes.
+      // Collects set and unset changes.
+      var setDocs = [], unsetDocs = [];
       for (var itemInd = 0; itemInd < changes.changed.length; itemInd++) {
         var change = changes.changed[itemInd];
         if (change.setDiff) {
-          this.save(change.setDiff);
+          setDocs.push(change.setDiff);
         }
         if (change.unsetDiff) {
-          this.save(change.unsetDiff, true);
+          unsetDocs.push(change.unsetDiff);
         }
+      }
+      // Then saves all changes in bulk.
+      if (setDocs.length) {
+        this.save(setDocs);
+      }
+      if (unsetDocs.length) {
+        this.save(unsetDocs, true);
       }
     };
 
