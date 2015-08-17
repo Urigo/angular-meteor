@@ -1,6 +1,4 @@
-<template name="tutorial.step_16.html">
-  {{#markdown}}
-
+{{#template name="tutorial.step_16.html"}}
 
 Let's add location to our parties.
 
@@ -13,46 +11,23 @@ First, let's add the angular-google-maps Meteor package:
 
 Then let's define the module dependency in our app. go to `app.js` inside the `client->lib` folder:
 
-    angular.module('socially',[
-      'angular-meteor',
-      'ui.router',
-      'angularUtils.directives.dirPagination',
-      'uiGmapgoogle-maps'
-    ]);
-
+{{> DiffBox tutorialName="angular-meteor" step="16.1"}}
 
 Now let's add a map the `party-details.ng.html` , first add this HTML snippet to the end of the template:
 
-        <div class="party-details-maps">
-          <div class="angular-google-map-container">
-            <ui-gmap-google-map center="party.location || map.center"
-                                events="map.events" zoom="map.zoom">
-            </ui-gmap-google-map>
-          </div>
-        </div>
+{{> DiffBox tutorialName="angular-meteor" step="16.2"}}
 
 Here we created the google-map directive with attributes for biding the center, handling events and zoom of the map.
 So let's define those variables in our scope. Go to `partyDetails.js`.
 
 Inside we will create the $scope.map variable to hold the properties on the map:
 
-    $scope.map = {
-      center: {
-        latitude: 45,
-        longitude: -73
-      },
-      zoom: 8,
-      events: {}
-    };
+{{> DiffBox tutorialName="angular-meteor" step="16.3"}}
 
 To display a Google Map widget we have to define it's height and width. Let's do that now.
 Create a new file named parties.css inside a new folder called `styles` placed like this `client->parties->styles` and place to following CSS code inside:
 
-    .angular-google-map-container {
-      height: 400px;
-      width: 400px;
-    }
-
+{{> DiffBox tutorialName="angular-meteor" step="16.4"}}
 
 Now run the app and go to the party details page. You should see a new Google Map widget, but it doesn't do anything yet.
 
@@ -60,16 +35,7 @@ Let's add a marker that will be binded to the party's location.
 
 Inside `party-details.ng.html`:
 
-
-    <div class="angular-google-map-container">
-      <ui-gmap-google-map center="party.location || map.center"
-                          events="map.events" zoom="map.zoom">
-        <ui-gmap-marker coords="party.location" options="map.marker.options"
-                        events="map.marker.events" idkey="party._id">
-        </ui-gmap-marker>
-      </ui-gmap-google-map>
-    </div>
-
+{{> DiffBox tutorialName="angular-meteor" step="16.5"}}
 
 The ui-gmap-marker directive represents a marker inside the map. We use the following attributes:
 
@@ -82,39 +48,7 @@ Let's extend our $scope.map variable to include handling those options:
 
 Inside `partyDetails.js`:
 
-    $scope.map = {
-      center: {
-        latitude: 45,
-        longitude: -73
-      },
-      zoom: 8,
-      events: {
-        click: function (mapModel, eventName, originalEventArgs) {
-          if (!$scope.party)
-            return;
-
-          if (!$scope.party.location)
-            $scope.party.location = {};
-
-          $scope.party.location.latitude = originalEventArgs[0].latLng.lat();
-          $scope.party.location.longitude = originalEventArgs[0].latLng.lng();
-          //scope apply required because this event handler is outside of the angular domain
-          $scope.$apply();
-        }
-      },
-      marker: {
-        options: { draggable: true },
-        events: {
-          dragend: function (marker, eventName, args) {
-            if (!$scope.party.location)
-              $scope.party.location = {};
-
-            $scope.party.location.latitude = marker.getPosition().lat();
-            $scope.party.location.longitude = marker.getPosition().lng();
-          }
-        }
-      }
-    };
+{{> DiffBox tutorialName="angular-meteor" step="16.6"}}
 
 What happened here:
 
@@ -134,13 +68,7 @@ Now let's add a map to the parties list to show all the parties on the map.
 
 So let's add the directives to `parties-list.ng.html`:
 
-      <div class="angular-google-map-container">
-        <ui-gmap-google-map center="party.location || map.center" zoom="map.zoom">
-          <ui-gmap-markers models="parties" coords="'location'" click="onClicked()"
-                           fit="true" idkey="'_id'" doRebuildAll="true">
-          </ui-gmap-markers>
-        </ui-gmap-google-map>
-      </div>
+{{> DiffBox tutorialName="angular-meteor" step="16.7"}}
 
 Add it under the search and sorting div.
 
@@ -156,30 +84,7 @@ The attributes we use:
 
 Now, inside `partiesList.js` let's add the following code to the parties subscription promise return:
 
-    $meteor.autorun($scope, function() {
-      $meteor.subscribe('parties', {
-        limit: parseInt($scope.getReactively('perPage')),
-        skip: (parseInt($scope.getReactively('page')) - 1) * parseInt($scope.getReactively('perPage')),
-        sort: $scope.getReactively('sort')
-      }, $scope.getReactively('search')).then(function() {
-        $scope.partiesCount = $meteor.object(Counts ,'numberOfParties', false);
-
-	      $scope.parties.forEach( function (party) {
-          party.onClicked = function () {
-	          $state.go('partyDetails', {partyId: party._id});
-	        };
-	      });
-
-        $scope.map = {
-          center: {
-            latitude: 45,
-            longitude: -73
-          },
-          zoom: 8
-        };
-
-      });
-    });
+{{> DiffBox tutorialName="angular-meteor" step="16.8"}}
 
 * Adding to each party a function that handles a click event with the party's specific information
 * Initializing the map object
@@ -194,7 +99,4 @@ Run the app.  Look at how little code we needed to add maps support to our app.
 AngularJS has a huge eco system full of great directives like the angular-google-maps one.
 
 
-  {{/markdown}}
-</template>
-
-
+{{/template}}
