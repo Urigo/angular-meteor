@@ -1,5 +1,4 @@
-<template name="tutorial.step_06.html">
-  {{#markdown}}
+{{#template name="tutorial.step_06.html"}}
 
 In this step, we will implement the party details view, which is displayed when a user clicks on a party in the parties list.
 The user will also be able to change the party's details.
@@ -10,12 +9,7 @@ To implement the party details view we will use [$meteor.object](/api/meteorObje
 
 We'll expand the `PartyDetailsCtrl` by using the [$meteor.object](/api/meteorObject) service (add it with Angular's dependency injection) to bind the specific party:
 
-    angular.module('socially').controller('PartyDetailsCtrl', ['$scope', '$stateParams', '$meteor',
-      function($scope, $stateParams, $meteor){
-
-        $scope.party = $meteor.object(Parties, $stateParams.partyId);
-
-    }]);
+{{> DiffBox tutorialName="angular-meteor" step="6.1"}}
 
 We are sending $meteor.object a Mongo collection and the Id of the object we want to bind to.
 
@@ -35,11 +29,7 @@ as directed by the sort and skip options, exactly like Meteor's [collection.find
 
 In `party-details.ng.html` let's replace the binding to the `partyId` with a binding to `party.name` and `party.description`:
 
-    Here you will see and change the details of the party:
-
-    <input ng-model="party.name">
-    <input ng-model="party.description">
-
+{{> DiffBox tutorialName="angular-meteor" step="6.2"}}
 
 Now, when you run the app, navigate into a party's page, and change the inputs, the server and all the clients update immediately.
 No save buttons, no round trips, it just works.
@@ -50,38 +40,17 @@ In case you don't want to use the live editing that angular-meteor provides and 
 
 First, let's change our template:
 
-__party-details.ng.html__
-
-
-    Here you will see and change the details of the party:
-
-    <input ng-model="party.name">
-    <input ng-model="party.description">
-
-    <button ng-click="save()">Save</button>
-    <button ng-click="reset()">Reset form</button>
-    <button ui-sref="parties">Cancel</button>
-
-
+{{> DiffBox tutorialName="angular-meteor" step="6.3"}}
 
 Now let's move to the controller.
 
 First, in the call to `$meteor.object` set the 3rd parameter to `false` so it won't auto-save the object on every change:
 
-
-    $scope.party = $meteor.object(Parties, $stateParams.partyId, false);
-
+{{> DiffBox tutorialName="angular-meteor" step="6.4"}}
 
 Now let's add the functions that handle the button clicks:
 
-    $scope.save = function() {
-      $scope.party.save();
-    };
-
-    $scope.reset = function() {
-      $scope.party.reset();
-    };
-
+{{> DiffBox tutorialName="angular-meteor" step="6.5"}}
 
 As you can see, $meteor.object returns an object from type [AngularMeteorObject](/api/meteorObject) which contains 2 functions - `save` and `reset`.
 
@@ -90,24 +59,7 @@ As you can see, $meteor.object returns an object from type [AngularMeteorObject]
 
 Your controller should look like this:
 
-    angular.module('socially').controller('PartyDetailsCtrl', ['$scope', '$stateParams', '$meteor',
-      function($scope, $stateParams, $meteor){
-
-        $scope.party = $meteor.object(Parties, $stateParams.partyId, false);
-
-        $scope.save = function() {
-          $scope.party.save().then(function(numberOfDocs){
-            console.log('save success doc affected ', numberOfDocs);
-          }, function(error){
-            console.log('save error', error);
-          });
-        };
-
-        $scope.reset = function() {
-          $scope.party.reset();
-        };
-
-    }]);
+{{> DiffBox tutorialName="angular-meteor" step="6.6"}}
 
 That's it!
 
@@ -120,5 +72,4 @@ We've seen the power of 3-way binding between the DOM, AngularJS and Meteor.  In
 
 Let's move on to provide some order and structure in our application.
 
-  {{/markdown}}
-</template>
+{{/template}}
