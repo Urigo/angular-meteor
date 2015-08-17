@@ -44,6 +44,11 @@ describe('$meteorCollection service', function() {
   });
 
   describe('collection updates', function() {
+
+    beforeEach(function() {
+      $timeout.flush();
+    });
+
     it('should update the array when a new item is inserted into the collection', function() {
       MyCollection.insert({ a : '7', b: '8'});
       expect(meteorArray).toEqualCollection(MyCollection);
@@ -316,9 +321,10 @@ describe('$meteorCollection service', function() {
 
     it('$apply executed twice', function() {
       var $ngCol = $meteorCollection(bigCollection);
+      $timeout.flush();
+
       expect($rootScope.$apply).toHaveBeenCalled();
       expect($ngCol).toEqualCollection(bigCollection);
-
       // No matter how much elements MyCollection contains
       // $rootScope.$apply should be called twice.
       expect($rootScope.$apply.calls.count()).toEqual(2);
@@ -389,7 +395,6 @@ describe('$meteorCollection service', function() {
       expect(itemWithNestedHashkeysRemoved).toBeFoundExactlyInCollection(MyCollection);
     });
   });
-
 
   describe('objects with date', function() {
     it('should be saved to the collection when save is called', function() {
