@@ -1,46 +1,12 @@
-<template name="tutorial.step_04.html">
-  {{#markdown}}
+{{#template name="tutorial.step_04.html"}}
 
 Now that we have full data binding from server to client, let's interact with the data and see the updates in action.
 
 In this chapter you will add the ability to insert a new party and delete an existing one from the UI.
 
-First, let's create a simple form with a button that will add a new party.
+First, let's create a simple form with a button that will add a new party, we will add it above the list, inside the "PartiesListCtrl" controller's div.
 
-Add the following form inside the `PartiesListCtrl div`:
-
-    <form>
-      <label>Name</label>
-      <input>
-      <label>Description</label>
-      <input>
-      <button>Add</button>
-    </form>
-
-
-The `index.ng.html` file will now look like this:
-
-__`index.ng.html`:__
-
-    <div ng-controller="PartiesListCtrl">
-
-      <form>
-        <label>Name</label>
-        <input>
-        <label>Description</label>
-        <input>
-        <button>Add</button>
-      </form>
-
-      <ul>
-        <li ng-repeat="party in parties">
-          {{dstache}}party.name}}
-          <p>{{dstache}}party.description}}</p>
-        </li>
-      </ul>
-
-    </div>
-
+{{> DiffBox tutorialName="angular-meteor" step="4.1"}}
 
 Now we need to make this form functional.
 
@@ -52,13 +18,7 @@ To do that we'll use the simple and powerful [ng-model](https://docs.angularjs.o
 
 Add `ng-model` to the form like this:
 
-    <form>
-      <label>Name</label>
-      <input ng-model="newParty.name">
-      <label>Description</label>
-      <input ng-model="newParty.description">
-      <button>Add</button>
-    </form>
+{{> DiffBox tutorialName="angular-meteor" step="4.2"}}
 
 Now each time the user types inside these inputs, the value of the newParty scope variable will be automatically updated.  Conversely, if `$scope.newParty` is changed outside of the HTML, the input values will be updated accordingly.
 
@@ -66,8 +26,7 @@ Now each time the user types inside these inputs, the value of the newParty scop
 
 Now let's bind a click event to the add button with Angular's [ng-click](https://docs.angularjs.org/api/ng/directive/ngClick) directive.
 
-
-    <button ng-click="parties.push(newParty); newParty='';">Add</button>
+{{> DiffBox tutorialName="angular-meteor" step="4.3"}}
 
 `ng-click` binds the click event to an expression.
 So we take the parties scope array (when accessing scope variables in the HTML, there is no need to add $scope. before them) and push the newParty variable into it.
@@ -79,14 +38,7 @@ Now, let's add the ability to delete parties.
 
 Let's add an X button to each party:
 
-    <ul>
-      <li ng-repeat="party in parties">
-        {{dstache}}party.name}}
-        <p>{{dstache}}party.description}}</p>
-        <button ng-click="remove(party)">X</button>
-      </li>
-    </ul>
-
+{{> DiffBox tutorialName="angular-meteor" step="4.4"}}
 
 This time we are binding ng-click to a scope function that gets the current party as a parameter.
 
@@ -94,26 +46,9 @@ Let's go into the controller and add that function.
 
 Add the function inside the PartiesListCtrl in `app.js`:
 
-    $scope.remove = function(party){
-      $scope.parties.splice( $scope.parties.indexOf(party), 1 );
-    };
-
-And this is how the controller should now look:
-
-    angular.module("socially").controller("PartiesListCtrl", ['$scope', '$meteor',
-      function($scope, $meteor){
-
-        $scope.parties = $meteor.collection(Parties);
-
-        $scope.remove = function(party){
-          $scope.parties.splice( $scope.parties.indexOf(party), 1 );
-        };
-
-    }]);
-
+{{> DiffBox tutorialName="angular-meteor" step="4.5"}}
 
 Now try to delete a few parties and also watch them being removed from other browser clients.
-
 
 # AngularMeteorCollection functions
 
@@ -125,25 +60,21 @@ Let's try to use these helper functions instead of the current implementation.
 
 First let's replace our `push` with `save` in the add button action:
 
-    <button ng-click="parties.save(newParty); newParty='';">Add</button>
+{{> DiffBox tutorialName="angular-meteor" step="4.6"}}
 
 There isn't much difference here except a small performance improvement, but now let's change our remove function:
 
-    $scope.remove = function(party){
-      $scope.parties.remove(party);
-    };
+{{> DiffBox tutorialName="angular-meteor" step="4.7"}}
 
 Much nicer, and gives better performance!
 
 Also let's add a button to remove all parties:
 
-    <button ng-click="removeAll()">remove all</button>
+{{> DiffBox tutorialName="angular-meteor" step="4.8"}}
 
 not forgetting to add this new function to the scope:
 
-    $scope.removeAll = function(){
-      $scope.parties.remove();
-    };
+{{> DiffBox tutorialName="angular-meteor" step="4.9"}}
 
 Again, very simple syntax.
 
@@ -154,6 +85,4 @@ You can read more about AngularMeteorCollection and it's helper functions in the
 
 So now you've seen how easy it is to manipulate the data using Angular's powerful directives and sync that data with Meteor's powerful Mongo.collection API.
 
-
-  {{/markdown}}
-</template>
+{{/template}}

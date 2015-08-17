@@ -1,5 +1,4 @@
-<template name="tutorial.step_05.html">
-  {{#markdown}}
+{{#template name="tutorial.step_05.html"}}
 
 In this step, you will learn how to create a layout template and how to build an app that has multiple views by adding routing, using an Angular module called `ui-router`.
 
@@ -20,8 +19,7 @@ Type in the command line:
 
 Then add the ui-router as a dependency to our angular app in `app.js`:
 
-    angular.module('socially',['angular-meteor', 'ui.router']);
-
+{{> DiffBox tutorialName="angular-meteor" step="5.1"}}
 
 # Multiple Views, Routing and Layout Template
 
@@ -48,24 +46,7 @@ This makes it a perfect fit for our `index.ng.html` template.
 
 Let's create a new html file called `parties-list.ng.html` and paste the existing list code from `index.ng.html` into it:
 
-__`parties-list.ng.html`:__
-
-    <form>
-      <label>Name</label>
-      <input ng-model="newParty.name">
-      <label>Description</label>
-      <input ng-model="newParty.description">
-      <button ng-click="parties.push(newParty)">Add</button>
-    </form>
-    <ul>
-      <li ng-repeat="party in parties">
-        <a href="/parties/{{dstache}}party._id}}">{{dstache}}party.name}}</a>
-
-        <p>{{dstache}}party.description}}</p>
-        <button ng-click="remove(party)">X</button>
-      </li>
-    </ul>
-
+{{> DiffBox tutorialName="angular-meteor" step="5.2"}}
 
 The code is almost the same except for this one change:
 
@@ -73,21 +54,7 @@ The code is almost the same except for this one change:
 
 Now let's go back to `index.html` and replace the content with the `ui-view` directive:
 
-__`index.html`:__
-
-    <head>
-      <base href="/">
-    </head>
-    <body ng-app="socially">
-
-    <div>
-      <h1>
-        <a href="/parties">Home</a>
-      </h1>
-      <div ui-view></div>
-    </div>
-
-    </body>
+{{> DiffBox tutorialName="angular-meteor" step="5.3"}}
 
 Notice we did 3 things:
 
@@ -100,39 +67,16 @@ Now we can delete the `index.ng.html` file, it's not used any more.
 Let's add a placeholder to the new party details page.
 Create a new html file called `party-details.ng.html` and paste in the following code:
 
-__`party-details.ng.html`:__
-
-    Here you will see the details of party number: {{dstache}} partyId }}
-
+{{> DiffBox tutorialName="angular-meteor" step="5.4"}}
 
 This code can serve as a placeholder for now. We'll get back to filling out the details later on.
-
 
 # Routes definition
 
 Now let's configure our routes.
 Add this config code in `app.js`, after the Angular app has been defined:
 
-    angular.module('socially').config(['$urlRouterProvider', '$stateProvider', '$locationProvider',
-      function($urlRouterProvider, $stateProvider, $locationProvider){
-
-        $locationProvider.html5Mode(true);
-
-        $stateProvider
-          .state('parties', {
-            url: '/parties',
-            templateUrl: 'parties-list.ng.html',
-            controller: 'PartiesListCtrl'
-          })
-          .state('partyDetails', {
-            url: '/parties/:partyId',
-            templateUrl: 'party-details.ng.html',
-            controller: 'PartyDetailsCtrl'
-          });
-
-          $urlRouterProvider.otherwise('/parties');
-    }]);
-
+{{> DiffBox tutorialName="angular-meteor" step="5.5"}}
 
 Using the Angular app's .config() method, we request the `$stateProvider` to be injected into our config function and use the state method to define our routes.
 
@@ -157,13 +101,7 @@ As you might have seen we removed the controller definition from the ng-controll
 But we still need to define our `PartyDetailsCtrl` controller.
 Add this code under the existing controller:
 
-    angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams',
-      function($scope, $stateParams){
-
-        $scope.partyId = $stateParams.partyId;
-
-    }]);
-
+{{> DiffBox tutorialName="angular-meteor" step="5.6"}}
 
 Now all is in place.  Run the app and you'll notice a few things:
 
@@ -185,7 +123,4 @@ If that's the case, double check your paths and remember to use the file extensi
 
 With the routing set up and the parties list view implemented, we're ready to go to the next step and implement the party details view.
 
-
-  {{/markdown}}
-</template>
-
+{{/template}}
