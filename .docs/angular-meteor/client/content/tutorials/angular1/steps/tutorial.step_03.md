@@ -1,5 +1,4 @@
-<template name="tutorial.step_03.html">
-  {{#markdown}}
+{{#template name="tutorial.step_03.html"}}
 
 OK, so we have a nice client side application that creates and renders it's own data.
 
@@ -29,7 +28,7 @@ So first, let's define our first parties collection that will store all our part
 
 Add:
 
-      Parties = new Mongo.Collection("parties");
+{{> DiffBox tutorialName="angular-meteor" step="3.1"}}
 
 to the beginning of the `app.js` file.
 
@@ -45,7 +44,7 @@ To bind them we are going to use the built-in angular-meteor service called [$me
 
 We are going to replace the declaration of `$scope.parties` with the following command inside the `PartiesListCtrl` controller:
 
-    $scope.parties = $meteor.collection(Parties);
+{{> DiffBox tutorialName="angular-meteor" step="3.2"}}
 
 This line declares a new `$scope.parties` variable (so we don't need to do something like `$scope.parties = [];` ) and then binds it to the Parties Mongo collection.
 
@@ -53,22 +52,7 @@ We also need to add the `$meteor` service to the controller with dependency inje
 
 Our `app.js` file should look like this:
 
-__`app.js`:__
-
-    Parties = new Mongo.Collection("parties");
-
-    if (Meteor.isClient) {
-
-      angular.module('socially',['angular-meteor']);
-
-      angular.module('socially').controller('PartiesListCtrl', ['$scope', '$meteor',
-        function($scope, $meteor){
-
-          $scope.parties = $meteor.collection(Parties);
-
-        }]);
-    }
-
+{{> DiffBox tutorialName="angular-meteor" step="3.3"}}
 
 Now every change that happens to the `$scope.parties` variable will automatically be saved to the local minimongo and synced to the MongoDB server DB and all the other clients in realtime!
 
@@ -77,25 +61,7 @@ Let's initialize our server with the same parties we had before.
 
 Add this to the bottom of `app.js`:
 
-    if (Meteor.isServer) {
-      Meteor.startup(function () {
-        if (Parties.find().count() === 0) {
-
-          var parties = [
-            {'name': 'Dubstep-Free Zone',
-              'description': 'Can we please just for an evening not listen to dubstep.'},
-            {'name': 'All dubstep all the time',
-              'description': 'Get it on!'},
-            {'name': 'Savage lounging',
-              'description': 'Leisure suit required. And only fiercest manners.'}
-          ];
-
-          for (var i = 0; i < parties.length; i++)
-            Parties.insert(parties[i]);
-
-        }
-       });
-    }
+{{> DiffBox tutorialName="angular-meteor" step="3.4"}}
 
 As you can probably understand, this code runs only on the server, and when Meteor starts it initializes the DB with these sample parties.
 
@@ -139,6 +105,4 @@ In the next step, we'll see how to add functionality to our app's UI so that we 
 
 In this chapter you saw how easy and fast it is to create a full connection between our client data, the server and all the other connected clients.
 
-
-  {{/markdown}}
-</template>
+{{/template}}
