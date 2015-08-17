@@ -9,7 +9,9 @@ angularMeteorStopper.factory('$meteorStopper', ['$q', '$meteorSubscribe',
       return function() {
         var args = Array.prototype.slice.call(arguments);
         var meteorEntity = $meteorEntity.apply(this, args);
+
         angular.extend(meteorEntity, $meteorStopper);
+        meteorEntity.$$scope = this;
 
         this.$on('$destroy', function () {
           meteorEntity.stop();
@@ -22,7 +24,7 @@ angularMeteorStopper.factory('$meteorStopper', ['$q', '$meteorSubscribe',
 
     $meteorStopper.subscribe = function() {
       var args = Array.prototype.slice.call(arguments);
-      this.subscription = $meteorSubscribe._subscribe(this, $q.defer(), args);
+      this.subscription = $meteorSubscribe._subscribe(this.$$scope, $q.defer(), args);
       return this;
     };
 

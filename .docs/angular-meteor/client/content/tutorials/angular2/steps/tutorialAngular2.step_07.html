@@ -113,7 +113,23 @@ As well as on the server within Meteor. TypeScript works everywhere.
 
 __`server/loadParties.ts`:__
 
-    var parties:IParty[] = [ ... ]
+Meteor.startup(function () {
+    if (Hierarchy.find().count() === 0) {
+
+        var hierarchy:ILevel[] = [
+            {'name': 'Milieu',
+                'description': 'Veget'},
+            {'name': 'Alliance',
+                'description': 'Yeaaah'},
+            {'name': 'Association',
+                'description': 'Juncus'}
+        ];
+
+        for (var i = 0; i < hierarchy.length; i++)
+            Hierarchy.insert(hierarchy[i]);
+    }
+});
+
 
 This all keeps you notified about mistakes or typos. TypeScript's power is seen more and more as your project and team grow.
 

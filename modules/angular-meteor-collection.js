@@ -6,19 +6,24 @@ var angularMeteorCollection = angular.module('angular-meteor.collection',
 // The reason angular meteor collection is a factory function and not something
 // that inherit from array comes from here:
 // http://perfectionkills.com/how-ecmascript-5-still-does-not-allow-to-subclass-an-array/
-// We went with the direct extensions approach
+// We went with the direct extensions approach.
 angularMeteorCollection.factory('AngularMeteorCollection', [
   '$q', '$meteorSubscribe', '$meteorUtils', '$rootScope', '$timeout', 'diffArray',
   function($q, $meteorSubscribe, $meteorUtils, $rootScope, $timeout, diffArray) {
-    var deepCopyChanges = diffArray.deepCopyChanges;
-    var deepCopyRemovals = diffArray.deepCopyRemovals;
-
     function AngularMeteorCollection(curDefFunc, collection, diffArrayFunc, autoClientSave) {
       var data = [];
+      // Server backup data to evaluate what changes come from client
+      // after each server update.
       data._serverBackup = [];
+      // Array differ function.
       data._diffArrayFunc = diffArrayFunc;
+      // Handler of the cursor observer.
       data._hObserve = null;
+      // On new cursor autorun handler
+      // (autorun for reactive variables).
       data._hNewCurAutorun = null;
+      // On new data autorun handler
+      // (autorun for cursor.fetch).
       data._hDataAutorun = null;
 
       if (angular.isDefined(collection)) {
@@ -47,7 +52,7 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
         }
         self._updateCursor(curDefFunc(), autoClientSave);
       });
-    }
+    };
 
     AngularMeteorCollection.subscribe = function() {
       $meteorSubscribe.subscribe.apply(this, arguments);
@@ -74,20 +79,14 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
       return allPromise;
     };
 
-    AngularMeteorCollection._upsertDoc = function(doc, useUnsetModifier) { 
+    AngularMeteorCollection._upsertDoc = function(doc, useUnsetModifier) {
       var deferred = $q.defer();
       var collection = this.$$collection;
+      var createFulfill = _.partial($meteorUtils.fulfill, deferred);
+      var fulfill;
 
       // delete $$hashkey
       doc = $meteorUtils.stripDollarPrefixedKeys(doc);
-
-      function onComplete(docId, error, action) {
-        if (error) {
-          deferred.reject(error);
-          return;
-        }
-        deferred.resolve({_id: docId, action: action});
-      }
 
       // update
       var docId = doc._id;
@@ -96,14 +95,12 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
         // it can be $set using update.
         delete doc._id;
         var modifier = useUnsetModifier ? {$unset: doc} : {$set: doc};
-        collection.update(docId, modifier, function(error) {
-          onComplete(docId, error, 'updated');
-        });
+        fulfill = createFulfill({_id: docId, action: 'updated'});
+        collection.update(docId, modifier, fulfill);
       } else {
         // insert
-        collection.insert(doc, function(error, docId) {
-          onComplete(docId, error, 'inserted');
-        });
+        fulfill = createFulfill({_id: docId, action: 'inserted'});
+        collection.insert(doc, fulfill);
       }
 
       return deferred.promise;
@@ -137,18 +134,11 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
     };
 
     AngularMeteorCollection._removeDoc = function(id) {
-      var deffered = $q.defer();
+      var deferred = $q.defer();
       var collection = this.$$collection;
-
-      collection.remove(id, function(err) {
-        if (err) {
-          deffered.reject(err);
-          return;
-        }
-        deffered.resolve({_id: id, action: 'removed'});
-      });
-
-      return deffered.promise;
+      var fulfill = $meteorUtils.fulfill(deferred, { _id: id, action: 'removed' });
+      collection.remove(id, fulfill);
+      return deferred.promise;
     };
 
     AngularMeteorCollection._updateCursor = function(cursor, autoClientSave) {
@@ -164,7 +154,7 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
       var serverMode = false;
       function setServerUpdateMode(name) {
         serverMode = true;
-        // To simplify server update logic, we don't follow 
+        // To simplify server update logic, we don't follow
         // updates from the client at the same time.
         self._unsetAutoClientSave();
       }
@@ -199,8 +189,8 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
         },
 
         changedAt: function(doc, oldDoc, atIndex) {
-          deepCopyChanges(self[atIndex], doc);
-          deepCopyRemovals(self[atIndex], doc);
+          diffArray.deepCopyChanges(self[atIndex], doc);
+          diffArray.deepCopyRemovals(self[atIndex], doc);
           self._serverBackup[atIndex] = self[atIndex];
           setServerUpdateMode();
         },
@@ -231,7 +221,7 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
           }
         }
       });
-  
+
       this._hDataAutorun = Tracker.autorun(function() {
         cursor.fetch();
         if (serverMode) {
@@ -267,12 +257,12 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
     AngularMeteorCollection._setAutoClientSave = function() {
       var self = this;
 
-      // Always unsets auto save to keep only one $watch handler. 
+      // Always unsets auto save to keep only one $watch handler.
       self._unsetAutoClientSave();
 
       self._hRegAutoBind = $rootScope.$watch(function() {
         return self;
-      }, function (nItems, oItems) {
+      }, function(nItems, oItems) {
         if (nItems === oItems) return;
 
         self._unsetAutoClientSave();
@@ -317,13 +307,12 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
 angularMeteorCollection.factory('$meteorCollectionFS', ['$meteorCollection', 'diffArray',
   function($meteorCollection, diffArray) {
     function $meteorCollectionFS(reactiveFunc, autoClientSave, collection) {
-      var noNestedDiffArray = function(lastSeqArray, seqArray, callbacks) {
-        return diffArray(lastSeqArray, seqArray, callbacks, true);
-      };
-
-      return new $meteorCollection(reactiveFunc, autoClientSave,
-        collection, noNestedDiffArray);
+      return new $meteorCollection(reactiveFunc, autoClientSave, collection, noNestedDiffArray);
     }
+
+    var noNestedDiffArray = function(lastSeqArray, seqArray, callbacks) {
+      return diffArray(lastSeqArray, seqArray, callbacks, true);
+    };
 
     return $meteorCollectionFS;
 }]);
@@ -361,7 +350,7 @@ angularMeteorCollection.factory('$meteorCollection', [
 
 angularMeteorCollection.run([
   '$rootScope', '$meteorCollection', '$meteorCollectionFS', '$meteorStopper',
-  function ($rootScope, $meteorCollection, $meteorCollectionFS, $meteorStopper) {
+  function($rootScope, $meteorCollection, $meteorCollectionFS, $meteorStopper) {
     var scopeProto = Object.getPrototypeOf($rootScope);
     scopeProto.$meteorCollection = $meteorStopper($meteorCollection);
     scopeProto.$meteorCollectionFS = $meteorStopper($meteorCollectionFS);
