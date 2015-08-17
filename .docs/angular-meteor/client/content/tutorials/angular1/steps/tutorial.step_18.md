@@ -1,5 +1,4 @@
-<template name="tutorial.step_18.html">
-  {{#markdown}}
+{{#template name="tutorial.step_18.html"}}
 
 In this step we will consider switching from *Twitter Bootstrap* to [*angular-material*](https://material.angularjs.org/#/).
 
@@ -558,8 +557,4 @@ In this chapter we two main things:
 I hope one of you will create an accounts-ui package based on that code and will save us all tons of code!
 
 
-  {{/markdown}}
-</template>
-
-
-
+{{/template}}
