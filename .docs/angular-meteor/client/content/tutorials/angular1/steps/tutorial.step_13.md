@@ -1,5 +1,4 @@
-<template name="tutorial.step_13.html">
-  {{#markdown}}
+{{#template name="tutorial.step_13.html"}}
 
 Our next mission is to invite users to private parties.
 
@@ -24,20 +23,7 @@ Create a new folder named `filters` under the `client->parties` folder.
 
 Under that folder create a new file named `uninvited.js` and place that code inside:
 
-    angular.module('socially').filter('uninvited', function () {
-      return function (users, party) {
-        if (!party)
-          return false;
-
-        return _.filter(users, function (user) {
-          if (user._id == party.owner ||
-              _.contains(party.invited, user._id))
-            return false;
-          else
-            return true;
-        });
-      }
-    });
+{{> DiffBox tutorialName="angular-meteor" step="13.1"}}
 
 * First we define a filter to the 'socially' module (our app)
 * The filter is named `uninvited`
@@ -57,12 +43,7 @@ So now let's use our new filter
 
 Simply add the filter to the list of users and send the current party to the party parameter, inside `party-details.ng.html`:
 
-    <ul>
-      Users to invite:
-      <li ng-repeat="user in users | uninvited:party">
-        <div>{{dstache}} user.emails[0].address }}</div>
-      </li>
-    </ul>
+{{> DiffBox tutorialName="angular-meteor" step="13.2"}}
 
 Run the app and see the users in each party.
 
@@ -74,12 +55,7 @@ But it's only in the display so its perfect for a filter.
 
 We want the list to simply look like this:
 
-    <ul>
-      Users to invite:
-      <li ng-repeat="user in users | uninvited:party">
-        <div>{{dstache}} user | displayName }}</div>
-      </li>
-    </ul>
+{{> DiffBox tutorialName="angular-meteor" step="13.3"}}
 
 and that the filter `displayName` will handle to logic and display the user's name in the best way possible.
 
@@ -87,19 +63,7 @@ So let's create another custom filter `displayName`.
 
 Create a new file under the filters folder named `displayName.js` and place that code inside:
 
-    angular.module('socially').filter('displayName', function () {
-      return function (user) {
-        if (!user)
-          return;
-        if (user.profile && user.profile.name)
-          return user.profile.name;
-        else if (user.emails)
-          return user.emails[0].address;
-        else
-          return user;
-      }
-    });
-
+{{> DiffBox tutorialName="angular-meteor" step="13.4"}}
 
 Pretty simple logic but it's so much nicer to put it here and make the HTML shorter and more readable.
 
@@ -107,39 +71,14 @@ AngularJS can also display the return value of a function in the HTML.
 
 To demonstrate let's add to each party in the parties list the creator's name:
 
-Add this line to the parties list in `parties-list.ng.html`:
-
-    <p><small>Posted by {{dstache}} creator(party) }}</small></p>
-
+Add a line that displays the user information to the parties list in `parties-list.ng.html`,
 so it will look like this:
 
-    <li dir-paginate="party in parties | itemsPerPage: perPage" total-items="partiesCount.count">
-      <a href="/parties/{{party._id}}">{{dstache}}party.name}}</a>
-      <p>{{dstache}}party.description}}</p>
-      <button ng-click="remove(party)">X</button>
-      <p><small>Posted by {{dstache}} creator(party) }}</small></p>
-    </li>
+{{> DiffBox tutorialName="angular-meteor" step="13.5"}}
 
 and define the creator scope function in the partiesListCtrl in `partiesList.js`:
 
-    $scope.getUserById = function(userId){
-      return Meteor.users.findOne(userId);
-    };
-
-    $scope.creator = function(party){
-      if (!party)
-        return;
-      var owner = $scope.getUserById(party.owner);
-      if (!owner)
-        return 'nobody';
-
-      if ($rootScope.currentUser)
-        if ($rootScope.currentUser._id)
-          if (owner._id === $rootScope.currentUser._id)
-            return 'me';
-
-      return owner;
-    };
+{{> DiffBox tutorialName="angular-meteor" step="13.6"}}
 
 * Remember to add `$rootScope` to the controller's dependency injection
 
@@ -148,14 +87,11 @@ As you can see, we are using the `Meteor.users` collection here but we haven't m
 but if we weren't, we would get an empty array in Meteor.users).
 So let's add a subscription to Meteor.users in the list controller as well:
 
-    $scope.$meteorSubscribe('users');
-
+{{> DiffBox tutorialName="angular-meteor" step="13.7"}}
 
 Now we get the user object to the HTML. But we want his name, so let's put the displayName filter on that as well:
 
-    <p><small>Posted by {{dstache}} creator(party) | displayName }}</small></p>
-
-
+{{> DiffBox tutorialName="angular-meteor" step="13.8"}}
 
 # Summary
 
@@ -163,9 +99,4 @@ In this chapter we learned about AngularJS filters and how easy they are to use 
 
 In the next step we will learn about Meteor methods, which enables us to run custom logic in the server, beyond the Mongo API and the allow/deny methods.
 
-
-
-  {{/markdown}}
-</template>
-
-
+{{/template}}
