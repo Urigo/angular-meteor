@@ -1,6 +1,4 @@
-<template name="tutorial.step_15.html">
-  {{#markdown}}
-
+{{#template name="tutorial.step_15.html"}}
 
 AngularJS has great and very simple directives that help us show and hide DOM elements conditionally.
 You can bind them to an expression, variables or functions.
@@ -14,7 +12,7 @@ If the user is not logged in, we want to display a message saying they need to l
 
 In `parties-list.ng.html` add a ng-show directive to the form like that:
 
-    <form ng-show="$root.currentUser">
+{{> DiffBox tutorialName="angular-meteor" step="15.1"}}
 
 Note that `$root.currentUser` is the $rootScope variable that we use that is bound to the current logged-in user.
 
@@ -22,31 +20,22 @@ If it is undefined, this means that there is no logged-in user.  So only if '$ro
 
 Then right after the form, add this HTML:
 
-    <div ng-hide="$root.currentUser || $root.loggingIn">
-      Log in to create a party!
-    </div>
+{{> DiffBox tutorialName="angular-meteor" step="15.2"}}
 
 That is exactly the opposite - if `$root.currentUser` exists or we're in the processing of logging in, hide that div. Note that this statement is equivalent to `ng-show="!$root.currentUser && !$root.loggingIn"`.
 
 Now add the same to the RSVP buttons:
 
-    <div ng-show="$root.currentUser">
-      <input type="button" value="I'm going!" ng-click="rsvp(party._id, 'yes')">
-      <input type="button" value="Maybe" ng-click="rsvp(party._id, 'maybe')">
-      <input type="button" value="No" ng-click="rsvp(party._id, 'no')">
-    </div>
+{{> DiffBox tutorialName="angular-meteor" step="15.3"}}
 
 Add let's add this the the end of the RSVP buttons:
 
-    <div ng-hide="$root.currentUser">
-      <i>Sign in to RSVP for this party.</i>
-    </div>
+{{> DiffBox tutorialName="angular-meteor" step="15.4"}}
 
 Next thing we want to hide is the 'delete party' option, in case the logged-in user is not the party's owner.
 Lets add ng-show to the delete button like that:
 
-    <button ng-click="remove(party)"
-            ng-show="$root.currentUser && $root.currentUser._id == party.owner">X</button>
+{{> DiffBox tutorialName="angular-meteor" step="15.5"}}
 
 In here you can see that `ng-show` can get a statement, in our case - the user exists (logged in) and is also the party's owner.
 
@@ -58,15 +47,7 @@ is that `ng-show` hides the element by changing the display css property and `ng
 
 So let's use `ng-if` to hide the outstanding invitations from a party, if the party is public (everyone is invited!):
 
-    <ul ng-if="!party.public">
-      Users who not responded:
-      <li ng-repeat="invitedUser in outstandingInvitations(party)">
-        {{dstache}} invitedUser | displayName }}
-      </li>
-    </ul>
-    <div ng-if="party.public">
-      Everyone is invited
-    </div>
+{{> DiffBox tutorialName="angular-meteor" step="15.6"}}
 
 # Assigning a function
 
@@ -76,36 +57,11 @@ To do that we will create a scope function that returns a boolean and associate 
 
 Create a new function inside partyDetailsCtrl inside the `partyDetails.js` file named `canInvite`:
 
-    $scope.canInvite = function (){
-      if (!$scope.party)
-        return false;
+{{> DiffBox tutorialName="angular-meteor" step="15.7"}}
 
-      return !$scope.party.public &&
-        $scope.party.owner === Meteor.userId();
-    };
+and add the `ng-show` to the `ul` in `party-details.ng.html`, and lets add a `li` that tells the user that everyone is already invited, if that is the case:
 
-and add the `ng-show` to the `ul` in `party-details.ng.html`:
-
-    <ul ng-show="canInvite()">
-      Users to invite:
-      <li ng-repeat="user in users | uninvited:party">
-        <div>{{dstache}} user | displayName }}</div>
-        <button ng-click="invite(user)">Invite</button>
-      </li>
-    </ul>
-
-Now lets add a `li` that tells the user that everyone is already invited, if that is the case:
-
-    <ul ng-show="canInvite()">
-      Users to invite:
-      <li ng-repeat="user in users | uninvited:party">
-        <div>{{dstache}} user | displayName }}</div>
-        <button ng-click="invite(user)">Invite</button>
-      </li>
-      <li ng-if="(users | uninvited:party).length <= 0">
-        Everyone are already invited.
-      </li>
-    </ul>
+{{> DiffBox tutorialName="angular-meteor" step="15.8"}}
 
 Here, we are taking the result of the uninvited users and checking for its length.
 
@@ -113,14 +69,7 @@ Here, we are taking the result of the uninvited users and checking for its lengt
 
 Now lets disable the partyDetails input fields in case the user doesn't have permission to change them (currently, the server is stopping the user, but there is no visual feedback aside from the server overriding the local edit immediately after):
 
-    <input ng-model="party.name"
-           ng-disabled="party.owner != $root.currentUser._id">
-    <input ng-model="party.description"
-           ng-disabled="party.owner != $root.currentUser._id">
-    <label>Is public</label>
-    <input type="checkbox" ng-model="party.public"
-           ng-disabled="party.owner != $root.currentUser._id">
-
+{{> DiffBox tutorialName="angular-meteor" step="15.9"}}
 
 # Summary
 
@@ -128,7 +77,4 @@ So now our example looks much better after we hide things based on the current s
 
 In the next chapter we will add some CSS and styling to our app.
 
-  {{/markdown}}
-</template>
-
-
+{{/template}}
