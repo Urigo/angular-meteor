@@ -115,11 +115,7 @@ And add a button that calls our `openAddImageModal` function inside the create n
 <md-button class="md-raised" ng-click="openAddImageModal()">Add Photo</md-button>
 ```
 
-Now let's create the view for this dialog and add the `ng-file-upload` directive,
-Create a new html file called `add-photo-modal.ng.html` in `client/parties/views/` folder.
-Paste the following code into it.
-
-`add-photo-modal.ng.html`:
+As you can see, Now let's create the view for this dialog and add the `ng-file-upload` directive:
 ```
 <md-dialog class="add-photo-dialog">
   <form>
@@ -156,21 +152,6 @@ Paste the following code into it.
 </md-dialog>
 ```
 
-The most important code in this HTML is the usage of `addImages` function in the `nfg-change` attribute, because this function handles the image uploading.
-So let's create the controller (`addPhotoCtrl.js`) and implement this function:
-```
-angular.module("socially").controller("AddPhotoCtrl", ['$scope', '$meteor', '$rootScope', '$state', '$mdDialog',
-  function($scope, $meteor, $rootScope, $state, $mdDialog,) {
-    $scope.addImages = function (files) {
-      if (files.length > 0) {
-        $scope.images.save(files[0]);
-      }
-    };
-
-    $scope.close = $mdDialog.hide;
-  }]);
-```
-
 Also, in order to make the "drop-zone" look like a dropable area in my page, I added this CSS in the application stylesheet:
 ```
 .drop-box {
@@ -190,6 +171,21 @@ Also, in order to make the "drop-zone" look like a dropable area in my page, I a
 .drop-box.dragover-err {
   border: 5px dashed red;
 }
+```
+
+The main code in this HTML is the usage of `addImages` function in the `nfg-change` attribute, because this is the function that handles the main logic of uploading the image.
+So let's create the controller (`addPhotoCtrl.js`) and implement this function:
+```
+angular.module("socially").controller("AddPhotoCtrl", ['$scope', '$meteor', '$rootScope', '$state', '$mdDialog',
+  function($scope, $meteor, $rootScope, $state, $mdDialog,) {
+    $scope.addImages = function (files) {
+      if (files.length > 0) {
+        $scope.images.save(files[0]);
+      }
+    };
+
+    $scope.close = $mdDialog.hide;
+  }]);
 ```
 
 I also used ngfChange attribute to know when the user chooses a file, the callback is addImages($files), so lets add this to our `example.js` file instead of using "change" event:
@@ -241,6 +237,7 @@ Then we saved the DataURI of the image into a $scope variable.
 Next, we will need to use this DataURI with the ngImgCrop directive as follow:
 ```
 <div ng-show="imgSrc" class="ng-crop-container">
+  <h3>Great! Now edit & crop your image...</h3><br />
   <img-crop image="imgSrc" result-image="myCroppedImage" area-type="square"></img-crop>
 </div>
 ```
@@ -257,8 +254,8 @@ CollectionFS have the ability to receive DataURI and save it, just like a File o
 ```
 $scope.saveCroppedImage = function() {
   if ($scope.myCroppedImage !== '') {
-    $scope.images.save($scope.myCroppedImage).then(function() {
-      $scope.uploadedImage = result[0]._id;
+    $scope.images.save($scope.myCroppedImage).then(function(result) {
+      $scope.uploadedImage = result && result[0] && result[0]._id;
       $scope.answer(true);
     });
   }
@@ -296,6 +293,14 @@ $mdDialog.show({
       $scope.newPartyImages.push(image);
     }
 });
+```
+
+Now just add a bit of css, So the image crop will be visible, , By adding this css in the application stylesheet: 
+```
+.ng-crop-container {
+  width: 100%;
+  height: 150px;
+}
 ```
 
 And we are done! Now we have the ability to crop images and then save them using CollectionFS.
