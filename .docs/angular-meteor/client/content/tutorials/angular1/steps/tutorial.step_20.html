@@ -89,17 +89,24 @@ angular.module('socially',[
 ]);
 ```
 
-Now, before adding the actual file upload to the client, let's add a `$mdDialog` that will show the file upload form, in the `partiesList.js` file:
+Now, before adding the actual file upload to the client, let's add a `$mdDialog`. that will show the file upload form, in the `partiesList.js` file:
 ```
-$scope.openAddImageModal = function() {
-  $mdDialog.show({
-    controller: 'AddPhotoCtrl',
-    templateUrl: 'client/parties/views/add-photo-modal.ng.html',
-    scope: $scope.$new()
-  }).then(function(image) {
-    // We will add here later the logic to handle the link between the image and the party
-  });
-};
+angular
+        .module('socially').controller('PartiesListCtrl', ['$scope', /** ... more deps ... **/ , '$mdDialog',
+            function($scope, /** ... more deps ... **/, $mdDialog){
+            
+              /** ... Already exisiting code ... **/
+              
+              $scope.openAddImageModal = function() {
+                $mdDialog.show({
+                  controller: 'AddPhotoCtrl',
+                  templateUrl: 'client/parties/views/add-photo-modal.ng.html',
+                  scope: $scope.$new()
+                }).then(function(image) {
+                    // We will add here later the logic to handle the link between the image and the party
+                });
+              };
+    }]);
 ```
 
 And add a button that calls our `openAddImageModal` function inside the create new party form:
