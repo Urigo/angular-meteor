@@ -115,7 +115,11 @@ And add a button that calls our `openAddImageModal` function inside the create n
 <md-button class="md-raised" ng-click="openAddImageModal()">Add Photo</md-button>
 ```
 
-As you can see, Now let's create the view for this dialog and add the `ng-file-upload` directive:
+Now let's create the view for this dialog and add the `ng-file-upload` directive,
+Create a new html file called `add-photo-modal.ng.html` in `client/parties/views/` folder.
+Paste the following code into it.
+
+`add-photo-modal.ng.html`:
 ```
 <md-dialog class="add-photo-dialog">
   <form>
@@ -152,6 +156,21 @@ As you can see, Now let's create the view for this dialog and add the `ng-file-u
 </md-dialog>
 ```
 
+The most important code in this HTML is the usage of `addImages` function in the `nfg-change` attribute, because this function handles the image uploading.
+So let's create the controller (`addPhotoCtrl.js`) and implement this function:
+```
+angular.module("socially").controller("AddPhotoCtrl", ['$scope', '$meteor', '$rootScope', '$state', '$mdDialog',
+  function($scope, $meteor, $rootScope, $state, $mdDialog,) {
+    $scope.addImages = function (files) {
+      if (files.length > 0) {
+        $scope.images.save(files[0]);
+      }
+    };
+
+    $scope.close = $mdDialog.hide;
+  }]);
+```
+
 Also, in order to make the "drop-zone" look like a dropable area in my page, I added this CSS in the application stylesheet:
 ```
 .drop-box {
@@ -171,21 +190,6 @@ Also, in order to make the "drop-zone" look like a dropable area in my page, I a
 .drop-box.dragover-err {
   border: 5px dashed red;
 }
-```
-
-The main code in this HTML is the usage of `addImages` function in the `nfg-change` attribute, because this is the function that handles the main logic of uploading the image.
-So let's create the controller (`addPhotoCtrl.js`) and implement this function:
-```
-angular.module("socially").controller("AddPhotoCtrl", ['$scope', '$meteor', '$rootScope', '$state', '$mdDialog',
-  function($scope, $meteor, $rootScope, $state, $mdDialog,) {
-    $scope.addImages = function (files) {
-      if (files.length > 0) {
-        $scope.images.save(files[0]);
-      }
-    };
-
-    $scope.close = $mdDialog.hide;
-  }]);
 ```
 
 I also used ngfChange attribute to know when the user chooses a file, the callback is addImages($files), so lets add this to our `example.js` file instead of using "change" event:
