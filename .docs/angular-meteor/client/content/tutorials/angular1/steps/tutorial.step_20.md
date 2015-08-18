@@ -1,7 +1,6 @@
 {{#template name="tutorial.step_20.html"}}
 {{> downloadPreviousStep stepName="step_19"}}
 
-
 In this step we are going to add the ability to upload images into our app, and also sorting and naming them.
 
 Angular-Meteor provides us with the [$meteor.collectionFS API](/api/files) that wraps [CollectionFS](https://github.com/CollectionFS/Meteor-CollectionFS).

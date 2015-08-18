@@ -1,10 +1,5 @@
-<<<<<<< HEAD:.docs/angular-meteor/client/content/tutorials/angular1/steps/tutorial.step_06.md
 {{#template name="tutorial.step_06.html"}}
-=======
-<template name="tutorial.step_06.html">
-  {{#markdown}}
-  {{> downloadPreviousStep stepName="step_05"}}
->>>>>>> cfd6d558450f6006daa7028c513626503cc49477:.docs/angular-meteor/client/content/tutorials/angular1/steps/tutorial.step_06.html
+{{> downloadPreviousStep stepName="step_05"}}
 
 In this step, we will implement the party details view, which is displayed when a user clicks on a party in the parties list.
 The user will also be able to change the party's details.

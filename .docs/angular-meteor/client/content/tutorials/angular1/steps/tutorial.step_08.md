@@ -1,10 +1,5 @@
-<<<<<<< HEAD:.docs/angular-meteor/client/content/tutorials/angular1/steps/tutorial.step_08.md
 {{#template name="tutorial.step_08.html"}}
-=======
-<template name="tutorial.step_08.html">
-  {{#markdown}}
-  {{> downloadPreviousStep stepName="step_07"}}
->>>>>>> cfd6d558450f6006daa7028c513626503cc49477:.docs/angular-meteor/client/content/tutorials/angular1/steps/tutorial.step_08.html
+{{> downloadPreviousStep stepName="step_07"}}
 
 One of Meteor's most powerful packages is the Meteor account system.
 

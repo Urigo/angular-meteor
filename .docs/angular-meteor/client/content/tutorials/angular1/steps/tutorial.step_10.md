@@ -1,10 +1,5 @@
-<<<<<<< HEAD:.docs/angular-meteor/client/content/tutorials/angular1/steps/tutorial.step_10.md
 {{#template name="tutorial.step_10.html"}}
-=======
-<template name="tutorial.step_10.html">
-  {{#markdown}}
-  {{> downloadPreviousStep stepName="step_10"}}
->>>>>>> cfd6d558450f6006daa7028c513626503cc49477:.docs/angular-meteor/client/content/tutorials/angular1/steps/tutorial.step_10.html
+{{> downloadPreviousStep stepName="step_10"}}
 
 Now that we have a working app, we can go public!
 Meteor makes it really easy to put an app up on the internet where other people can use it.

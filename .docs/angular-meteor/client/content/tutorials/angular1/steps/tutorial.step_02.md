@@ -1,10 +1,5 @@
-<<<<<<< HEAD:.docs/angular-meteor/client/content/tutorials/angular1/steps/tutorial.step_02.md
 {{#template name="tutorial.step_02.html"}}
-=======
-<template name="tutorial.step_02.html">
-  {{#markdown}}
-  {{> downloadPreviousStep stepName="step_01"}}
->>>>>>> cfd6d558450f6006daa7028c513626503cc49477:.docs/angular-meteor/client/content/tutorials/angular1/steps/tutorial.step_02.html
+{{> downloadPreviousStep stepName="step_01"}}
 
 Now it's time to make the web page dynamic — with AngularJS.
 

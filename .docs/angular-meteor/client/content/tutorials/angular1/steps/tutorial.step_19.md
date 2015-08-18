@@ -1,12 +1,7 @@
-<<<<<<< HEAD:.docs/angular-meteor/client/content/tutorials/angular1/steps/tutorial.step_19.md
 {{#template name="tutorial.step_19.html"}}
-=======
-<template name="tutorial.step_19.html">
-  {{#markdown}}
-  {{> downloadPreviousStep stepName="step_18"}}
->>>>>>> cfd6d558450f6006daa7028c513626503cc49477:.docs/angular-meteor/client/content/tutorials/angular1/steps/tutorial.step_19.html
+{{> downloadPreviousStep stepName="step_18"}}
 
-  This part of the tutorial will cover the usage of third-party libraries with angular-meteor.
+This part of the tutorial will cover the usage of third-party libraries with angular-meteor.
 
 Parts of this tutorial are also relevant for users who uses only Meteor, without angular-meteor, because the solution for third-party libraries comes from Meteor packaging manager - **Atmosphere**.
 

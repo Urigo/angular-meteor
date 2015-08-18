@@ -1,10 +1,5 @@
-<<<<<<< HEAD:.docs/angular-meteor/client/content/tutorials/angular1/steps/tutorial.step_07.md
 {{#template name="tutorial.step_07.html"}}
-=======
-<template name="tutorial.step_07.html">
-  {{#markdown}}
-  {{> downloadPreviousStep stepName="step_06"}}
->>>>>>> cfd6d558450f6006daa7028c513626503cc49477:.docs/angular-meteor/client/content/tutorials/angular1/steps/tutorial.step_07.html
+{{> downloadPreviousStep stepName="step_06"}}
 
 OK, so we have a working app, but, like a tutorial, it's not well organized.
 

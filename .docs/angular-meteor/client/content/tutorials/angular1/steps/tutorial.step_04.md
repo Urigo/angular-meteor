@@ -1,10 +1,5 @@
-<<<<<<< HEAD:.docs/angular-meteor/client/content/tutorials/angular1/steps/tutorial.step_04.md
 {{#template name="tutorial.step_04.html"}}
-=======
-<template name="tutorial.step_04.html">
-  {{#markdown}}
-  {{> downloadPreviousStep stepName="step_03"}}
->>>>>>> cfd6d558450f6006daa7028c513626503cc49477:.docs/angular-meteor/client/content/tutorials/angular1/steps/tutorial.step_04.html
+{{> downloadPreviousStep stepName="step_03"}}
 
 Now that we have full data binding from server to client, let's interact with the data and see the updates in action.
 

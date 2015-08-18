@@ -1,10 +1,5 @@
-<<<<<<< HEAD:.docs/angular-meteor/client/content/tutorials/angular1/steps/tutorial.step_05.md
 {{#template name="tutorial.step_05.html"}}
-=======
-<template name="tutorial.step_05.html">
-  {{#markdown}}
-  {{> downloadPreviousStep stepName="step_04"}}
->>>>>>> cfd6d558450f6006daa7028c513626503cc49477:.docs/angular-meteor/client/content/tutorials/angular1/steps/tutorial.step_05.html
+{{> downloadPreviousStep stepName="step_04"}}
 
 In this step, you will learn how to create a layout template and how to build an app that has multiple views by adding routing, using an Angular module called `ui-router`.
 
