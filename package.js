@@ -70,6 +70,7 @@ Package.onTest(function(api) {
 
   // spec files
   api.addFiles([
+    'tests/integration/angular-meteor-methods-spec.js',
     'tests/integration/angular-meteor-session-spec.js',
     'tests/integration/angular-meteor-stopper-spec.js',
     'tests/integration/angular-meteor-diff-array-spec.js',
