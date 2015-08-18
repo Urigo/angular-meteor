@@ -1,7 +1,6 @@
-<template name="tutorial.step_19.html">
-  {{#markdown}}
+{{#template name="tutorial.step_19.html"}}
 
-This part of the tutorial will cover the usage of third-party libraries with angular-meteor.
+  This part of the tutorial will cover the usage of third-party libraries with angular-meteor.
 
 Parts of this tutorial are also relevant for users who uses only Meteor, without angular-meteor, because the solution for third-party libraries comes from Meteor packaging manager - **Atmosphere**.
 
@@ -214,7 +213,4 @@ Also, you can use a automatic publisher that helps us to publish packages real q
 
 **We prefer that the first solution will be your choice in order to enrich the Meteor and angular-meteor community and help other developers to use third-party packages.**
 
-  {{/markdown}}
-</template>
-
-
+{{/template}}

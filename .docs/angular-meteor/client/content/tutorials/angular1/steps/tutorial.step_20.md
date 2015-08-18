@@ -1,5 +1,4 @@
-<template name="tutorial.step_20.html">
-  {{#markdown}}
+{{#template name="tutorial.step_20.html"}}
 
 In this step we are going to add the ability to upload images into our app, and also sorting and naming them.
 
@@ -26,47 +25,14 @@ Note that you will need to define the collection as shared resource because you 
 
 ### Creating the CollectionFS
 
-I create the model/images.js file, and define a regular CollectionFS object called "Images", also, I used the CollectionFS API that allows me to defined auth-rules.
+I create the `model/images.js` file, and define a regular CollectionFS object called "Images", also, I used the CollectionFS API that allows me to defined auth-rules.
 Finally, I publish the collection just like any other collection, in order to allow the client to subscribe to those images:
-```
-Images = new FS.Collection("images", {
-  stores: [
-    new FS.Store.GridFS("original")
-  ],
-  filter: {
-    allow: {
-      contentTypes: ['image/*']
-    }
-  }
-});
 
-if (Meteor.isServer) {
-  Images.allow({
-    insert: function (userId) {
-      return (userId ? true : false);
-    },
-    remove: function (userId) {
-      return (userId ? true : false);
-    },
-    download: function () {
-      return true;
-    },
-    update: function (userId) {
-      return (userId ? true : false);
-    }
-  });
-
-  Meteor.publish('images', function() {
-    return Images.find({});
-  });
-}
-
-```
+{{> DiffBox tutorialName="angular-meteor" step="20.1"}}
 
 And let's add the usage of $meteorCollectionFS to our core controller (`PartiesListCtrl`):
-```
-$scope.images = $meteor.collectionFS(Images, false, Images).subscribe('images');
-```
+
+{{> DiffBox tutorialName="angular-meteor" step="20.2"}}
 
 So now we have the collection, we need to create a client-side that handles the images upload.
 
@@ -81,111 +47,33 @@ meteor add danialfarid:ng-file-upload
 ```
 
 Now, lets add a dependency in the `app.js` file:
-```
-angular.module('socially',[
-  'angular-meteor',
-  /** ... more deps ... **/
-  'ngFileUpload'
-]);
-```
+
+{{> DiffBox tutorialName="angular-meteor" step="20.3"}}
 
 Now, before adding the actual file upload to the client, let's add a `$mdDialog` that will show the file upload form, in the `partiesList.js` file:
-```
-$scope.openAddImageModal = function() {
-  $mdDialog.show({
-    controller: 'AddPhotoCtrl',
-    templateUrl: 'client/parties/views/add-photo-modal.ng.html',
-    scope: $scope.$new()
-  }).then(function(image) {
-    // We will add here later the logic to handle the link between the image and the party
-  });
-};
-```
+
+{{> DiffBox tutorialName="angular-meteor" step="20.4"}}
+
+Also, don't forget the $mdDialog dependency on the scope!
+
+{{> DiffBox tutorialName="angular-meteor" step="20.4.1"}}
 
 And add a button that calls our `openAddImageModal` function inside the create new party form:
-```
-<md-button class="md-raised" ng-click="openAddImageModal()">Add Photo</md-button>
-```
 
-As you can see, Now let's create the view for this dialog and add the `ng-file-upload` directive:
-```
-<md-dialog class="add-photo-dialog">
-  <form>
-    <md-toolbar>
-      <div class="md-toolbar-tools">
-        <h2>Add Photos To Your Event</h2>
-      </div>
-    </md-toolbar>
-    <md-dialog-content>
-      <div>
-        <div ngf-drop ngf-select
-             ngf-change="addImages($files)"
-             ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box"
-             ngf-multiple="false" ngf-allow-dir="false" ngf-accept="'image/*'"
-             ngf-drop-available="dropAvailable">
-          <div>Click here to select image</div>
-          <div>
-            <strong>OR</strong>
-          </div>
-          <div ng-show="dropAvailable">You can also drop image to here</div>
-        </div>
-      </div>
-    </md-dialog-content>
-    <div class="md-actions" layout="row">
-      <span flex></span>
-      <md-button ng-click="close()" class="md-primary">
-        Done
-      </md-button>
-      <md-button ng-click="close()" class="md-warn">
-        Cancel
-      </md-button>
-    </div>
-  </form>
-</md-dialog>
-```
+{{> DiffBox tutorialName="angular-meteor" step="20.5"}}
 
-Also, in order to make the "drop-zone" look like a dropable area in my page, I added this CSS in the application stylesheet:
-```
-.drop-box {
-  background: #F8F8F8;
-  border: 5px dashed #DDD;
-  width: 230px;
-  height: 65px;
-  text-align: center;
-  padding-top: 25px;
-  margin-left: 10px;
-}
+Now let's create the view in a new file - `client/parties/views/add-photo-modal.ng.html` for this dialog and add the `ng-file-upload` directive:
 
-.drop-box.dragover {
-  border: 5px dashed blue;
-}
+{{> DiffBox tutorialName="angular-meteor" step="20.6"}}
 
-.drop-box.dragover-err {
-  border: 5px dashed red;
-}
-```
+Also, in order to make the "drop-zone" look like a dropable area in my page, I added this CSS in the `parties.import.less` stylesheet:
+
+{{> DiffBox tutorialName="angular-meteor" step="20.7"}}
 
 The main code in this HTML is the usage of `addImages` function in the `nfg-change` attribute, because this is the function that handles the main logic of uploading the image.
 So let's create the controller (`addPhotoCtrl.js`) and implement this function:
-```
-angular.module("socially").controller("AddPhotoCtrl", ['$scope', '$meteor', '$rootScope', '$state', '$mdDialog',
-  function($scope, $meteor, $rootScope, $state, $mdDialog,) {
-    $scope.addImages = function (files) {
-      if (files.length > 0) {
-        $scope.images.save(files[0]);
-      }
-    };
 
-    $scope.close = $mdDialog.hide;
-  }]);
-```
-
-I also used ngfChange attribute to know when the user chooses a file, the callback is addImages($files), so lets add this to our `example.js` file instead of using "change" event:
-```
-$scope.addImages = function (files) {
-  $scope.images.save(files);
-};
-```
+{{> DiffBox tutorialName="angular-meteor" step="20.8"}}
 
 And that's it! now we can upload images by using drag and drop!
 
@@ -200,105 +88,51 @@ So lets start by adding the package to our project:
 meteor add alexk111:ng-img-crop
 ```
 And add a dependency in our module:
-```
-angular.module('socially', ['angular-meteor', /*...*/, 'ngImgCrop']);
-```
+
+{{> DiffBox tutorialName="angular-meteor" step="20.9"}}
+
 We want to perform the crop in the client side only, before saving it in the CollectionFS, so lets get the uploaded image, and instead of saving it in the server - we will get the Data Url of it, and use it in the ngImgCrop:
-```
-$scope.addImages = function (files) {
-  if (files.length > 0) {
-    var reader = new FileReader();
 
-    reader.onload = function (e) {
-      $scope.$apply(function() {
-        $scope.imgSrc = e.target.result;
-        $scope.myCroppedImage = '';
-      });
-    };
-
-    reader.readAsDataURL(files[0]);
-  }
-  else {
-    $scope.imgSrc = undefined;
-  }
-};
-```
+{{> DiffBox tutorialName="angular-meteor" step="20.10"}}
 
 We take the file object and used HTML5 FileReader API to read the file from the user on the client side, without uploading it to the server.
 Then we saved the DataURI of the image into a $scope variable.
 Next, we will need to use this DataURI with the ngImgCrop directive as follow:
-```
-<div ng-show="imgSrc" class="ng-crop-container">
-  <img-crop image="imgSrc" result-image="myCroppedImage" area-type="square"></img-crop>
-</div>
-```
+
+{{> DiffBox tutorialName="angular-meteor" step="20.11"}}
+
+And add `ng-hide` to the upload control, in order to hide after the user picks an image to crop.
+
+{{> DiffBox tutorialName="angular-meteor" step="20.12"}}
+
+And add some CSS to make it look better:
+
+{{> DiffBox tutorialName="angular-meteor" step="20.12.1"}}
 
 And let's change the logic of the "Done" button to call a function that will actually save the edited image:
-```
-<md-button ng-click="saveCroppedImage()" ng-disabled="!imgSrc" class="md-primary">
-  Add Image
-</md-button>
-```
+
+{{> DiffBox tutorialName="angular-meteor" step="20.13"}}
 
 In order to save, we need to implement `saveCroppedImage()` function. We will use the same `$meteorCollectionFS` API we used before, just use the `save` function.
 CollectionFS have the ability to receive DataURI and save it, just like a File object. So the implementation looks like that:
-```
-$scope.saveCroppedImage = function() {
-  if ($scope.myCroppedImage !== '') {
-    $scope.images.save($scope.myCroppedImage).then(function() {
-      $scope.uploadedImage = result[0]._id;
-      $scope.answer(true);
-    });
-  }
-};
-```
 
-We will save the image call the `answer` function that just close the modal:
-```
-$scope.answer = function(saveImage) {
-  if (saveImage) {
-    $mdDialog.hide($scope.uploadedImage);
-  }
-  else {
-    if ($scope.uploadedImage) {
-      $scope.images.remove($scope.uploadedImage._id);
-    }
+{{> DiffBox tutorialName="angular-meteor" step="20.14"}}
 
-    $mdDialog.hide();
-  }
-}
-```
+We will save the image call the `answer` function that just close the modal and notifies the main page about the action the user made (save / cancel)
+
+{{> DiffBox tutorialName="angular-meteor" step="20.15"}}
 
 And because we can share the information from the recently closed dialog with the main view (the add party form), we can just the Promise of the `show` function and implement a logic that will save the list of images we want to attach to out party:
-```
-$mdDialog.show({
-  controller: 'AddPhotoCtrl',
-    templateUrl: 'client/parties/views/add-photo-modal.ng.html',
-    scope: $scope.$new(),
-  }).then(function(image) {
-    if (image) {
-      if (!$scope.newPartyImages) {
-        $scope.newPartyImages = [];
-      }
 
-      $scope.newPartyImages.push(image);
-    }
-})
-```
+{{> DiffBox tutorialName="angular-meteor" step="20.16"}}
 
 And we are done! Now we have the ability to crop images and then save them using CollectionFS.
 
 ### Display Uploaded Images
 
 Let's add a simple gallery to list the images in the new party form:
-```
-<div layout="row" class="images-container-title">
-  <div ng-show="!newPartyImages || newPartyImages.length === 0">Add photo by clicking "Add Photo"</div>
-  <div class="party-image-container" ng-repeat="image in newPartyImages">
-    <img draggable="false" ng-src="{ { image.url() } }"/><br/>
-  </div>
-</div>
-```
+
+{{> DiffBox tutorialName="angular-meteor" step="20.17"}}
 
 Cool! We can the all the images we want to attach to the new party!
 
@@ -315,23 +149,16 @@ Lets add the angular-xeditable package to our project:
 meteor add vitalets:angular-xeditable
 ```
 And add a dependency in our module:
-```
-angular.module('socially', ['angular-meteor', /* ... */ 'xeditable']);
-```
+
+{{> DiffBox tutorialName="angular-meteor" step="20.18"}}
 
 Now, let's use angular-xeditable and add usage under the image:
-```
-<img draggable="false" ng-src="{ { image.url() } }"/><br/>
-<a href="#" editable-text="image.metadata.description"
-   onbeforesave="updateDescription($data, image)">{ { image.metadata.description || 'Click to add description' } }</a>
-```
 
-And, of course, implement `updateDescription` function on the scope:
-```
-$scope.updateDescription = function($data, image) {
-  image.update({$set: {'metadata.description': $data}});
-};
-```
+{{> DiffBox tutorialName="angular-meteor" step="20.19"}}
+
+And, of course, implement `updateDescription` function on the parties list scope:
+
+{{> DiffBox tutorialName="angular-meteor" step="20.20"}}
 
 That's it! Now we have a photo gallery with description for each image!
 
@@ -345,44 +172,28 @@ Add the package by running this command:
 meteor add netanelgilad:angular-sortable-view
 ```
 And then add a dependency for the module:
-```
-angular.module('socially', ['angular-meteor', /* ... */ 'angular-sortable-view']);
-```
+
+{{> DiffBox tutorialName="angular-meteor" step="20.21"}}
 
 The basics of angular-sortable-view is to add the `sv-?` attributes to our page, just like the examples in the `angular-sortable-view` repository, So let's do that:
-```
-<div layout="row" class="images-container-title" sv-root sv-part="newPartyImages" sv-on-sort="updateOrder($partTo)">
-  <div ng-show="!newPartyImages || newPartyImages.length === 0">Add photo by clicking "Add Photo"</div>
-  <div sv-element class="party-image-container" ng-repeat="image in newPartyImages">
-    <!-- Some more html -->
-  </div>
-</div>
-```
+
+{{> DiffBox tutorialName="angular-meteor" step="20.22"}}
+
+I also added `draggable="false"` to prevent the browser's default behavior for dragging images.
+
 I use the `sv-on-sort` callback to know when the sort is done and which image moved to which position, the $partTo is the array with indexes updated after the sort is done.
 
 Now let's implement the $scope function that will just save the order on the image as a local information, we will use it really soon.
-```
-$scope.updateOrder = function(sortedArr) {
-    angular.forEach(sortedArr, function(item, index) {
-      item.currentOrder = index;
-    });
-  };
-};
-```
+
+{{> DiffBox tutorialName="angular-meteor" step="20.23"}}
 
 We can also add a highlight to the first image, which we will use as the main image, by adding an indication for that:
-```
-// HTML
-<div class="main-image" ng-show="$index === 0">Main Image</div>
 
-// CSS
-.main-image {
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  background-color: #f8f8f8;
-}
-```
+{{> DiffBox tutorialName="angular-meteor" step="20.24"}}
+
+And some CSS to make it look better:
+
+{{> DiffBox tutorialName="angular-meteor" step="20.25"}}
 
 So now we have image gallery with ability to edit and add images, add a description to the images, and ability to sort.
 Now we just need to add the logic that connect those images with that party we are creating!
@@ -390,27 +201,19 @@ Now we just need to add the logic that connect those images with that party we a
 ### Link Image To Object
 
 So as you know, we have all the images stored in `newPartyImages` array, we let's implement the `createParty` function, and save a link to the image with it's order:
-```
-$scope.createParty = function() {
-  $scope.newParty.owner = $rootScope.currentUser._id;
+{{> DiffBox tutorialName="angular-meteor" step="20.26"}}
 
-  // Link the images and the order to the new party
-  if ($scope.newPartyImages && $scope.newPartyImages.length > 0) {
-    $scope.newParty.images = [];
+And now update the button to call this function:
 
-    angular.forEach($scope.newPartyImages, function(image) {
-      $scope.newParty.images.push({id: image._id, order: image.currentOrder})
-    });
-  }
+{{> DiffBox tutorialName="angular-meteor" step="20.27"}}
 
-  // Save the party
-  $scope.parties.push($scope.newParty);
+And finally, to display the main image in the parties list, add the following code:
 
-  // Reset the form
-  $scope.newPartyImages = [];
-  $scope.newParty = {};
-};
-```
+{{> DiffBox tutorialName="angular-meteor" step="20.28"}}
+
+And implement the `getMainImage` function:
+
+{{> DiffBox tutorialName="angular-meteor" step="20.29"}}
 
 And that's it!
 
@@ -420,33 +223,16 @@ CollectionFS gives the ability to handle multiple Stores object, and perform man
 You can find the full information about image manipulation in the [CollectionFS docs](https://github.com/CollectionFS/Meteor-CollectionFS#image-manipulation).
 Also, make sure you add `meteor add cfs:graphicsmagick` and install graphicsmagick, for more information, follow the instructions on the CollectionFS GitHub page.
 So in order to add ability to save thumbnails, lets add a new store in the `model.js` and use `transformWrite` ability:
-```
-Images = new FS.Collection("images", {
-  stores: [
-    new FS.Store.GridFS("original"),
-    new FS.Store.GridFS("thumbnail", {
-      transformWrite: function(fileObj, readStream, writeStream) {
-        gm(readStream, fileObj.name()).resize('32', '32', '!').stream().pipe(writeStream);
-      }
-    })
-  ],
-  filter: {
-    allow: {
-      contentTypes: ['image/*']
-    }
-  }
-});
-```
+
+{{> DiffBox tutorialName="angular-meteor" step="20.30"}}
+
 So now each image we upload will be saved also as thumbnail.
 All we have to do is use and display the thumbnail instead of the original image. We just need to add a param to `url()` method of File objects and decide which Store to use when creating the URL:
-```
-<img ng-src="{ { image.url({store: 'thumbnail'}) } }">
-```
+
+{{> DiffBox tutorialName="angular-meteor" step="20.31"}}
+
 That's it! Now we added the ability to save thumbnails for the images and use them in the view!
 
 In addition to the angular-meteor-socially tutorial, you can find simple examples of each step of the tutorial in the Angular-Meteor repository, under examples/ directory.
 
-  {{/markdown}}
-</template>
-
-
+{{/template}}
