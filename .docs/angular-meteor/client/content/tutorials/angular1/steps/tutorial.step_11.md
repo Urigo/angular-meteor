@@ -1,4 +1,10 @@
+<<<<<<< HEAD:.docs/angular-meteor/client/content/tutorials/angular1/steps/tutorial.step_11.md
 {{#template name="tutorial.step_11.html"}}
+=======
+<template name="tutorial.step_11.html">
+  {{#markdown}}
+  {{> downloadPreviousStep stepName="step_11"}}
+>>>>>>> cfd6d558450f6006daa7028c513626503cc49477:.docs/angular-meteor/client/content/tutorials/angular1/steps/tutorial.step_11.html
 
 So far, we've been building our app and testing only in a web browser,
 but Meteor has been designed to work across different platforms - your socially website can become an iOS or Android app in just a few commands.

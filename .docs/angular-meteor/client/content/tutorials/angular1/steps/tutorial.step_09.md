@@ -1,4 +1,10 @@
+<<<<<<< HEAD:.docs/angular-meteor/client/content/tutorials/angular1/steps/tutorial.step_09.md
 {{#template name="tutorial.step_09.html"}}
+=======
+<template name="tutorial.step_09.html">
+  {{#markdown}}
+  {{> downloadPreviousStep stepName="step_08"}}
+>>>>>>> cfd6d558450f6006daa7028c513626503cc49477:.docs/angular-meteor/client/content/tutorials/angular1/steps/tutorial.step_09.html
 
 Right now our app has no privacy, every user can see all the parties on the screen.
 

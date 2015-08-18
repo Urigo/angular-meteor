@@ -1,4 +1,11 @@
+<<<<<<< HEAD:.docs/angular-meteor/client/content/tutorials/angular1/steps/tutorial.step_12.md
 {{#template name="tutorial.step_12.html"}}
+=======
+<template name="tutorial.step_12.html">
+  {{#markdown}}
+  {{> downloadPreviousStep stepName="step_11"}}
+
+>>>>>>> cfd6d558450f6006daa7028c513626503cc49477:.docs/angular-meteor/client/content/tutorials/angular1/steps/tutorial.step_12.html
 
 Currently we are dealing with a few parties, but we also need to support also a large number of parties.
 
