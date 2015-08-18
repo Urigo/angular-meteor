@@ -188,13 +188,6 @@ angular.module("socially").controller("AddPhotoCtrl", ['$scope', '$meteor', '$ro
   }]);
 ```
 
-I also used ngfChange attribute to know when the user chooses a file, the callback is addImages($files), so lets add this to our `example.js` file instead of using "change" event:
-```
-$scope.addImages = function (files) {
-  $scope.images.save(files);
-};
-```
-
 And that's it! now we can upload images by using drag and drop!
 
 Now let's add some more cool features!
