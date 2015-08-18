@@ -266,7 +266,7 @@ $scope.answer = function(saveImage) {
 
     $mdDialog.hide();
   }
-}
+};
 ```
 
 And because we can share the information from the recently closed dialog with the main view (the add party form), we can just the Promise of the `show` function and implement a logic that will save the list of images we want to attach to out party:
@@ -283,7 +283,7 @@ $mdDialog.show({
 
       $scope.newPartyImages.push(image);
     }
-})
+});
 ```
 
 And we are done! Now we have the ability to crop images and then save them using CollectionFS.
