@@ -1,7 +1,7 @@
 From 9e3080168633d4b2a5c3dd4a860fe2f8771322e8 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 14:23:47 +0300
-Subject: [PATCH 001/104] Step 0.1: Create empty index.html file
+Subject: [PATCH 001/154] Step 0.1: Create empty index.html file
 
 ---
  index.html | 3 +++
@@ -24,7 +24,7 @@ index 0000000..ef412ef
 From 2cb6cc6b54ab557bc03cc6ddcb985531a79a9369 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 14:34:33 +0300
-Subject: [PATCH 002/104] Add angular-meteor to the project and add change the
+Subject: [PATCH 002/154] Add angular-meteor to the project and add change the
  main page
 
 ---
@@ -56,7 +56,7 @@ index 0000000..79ed426
 From 9376c5fc09a4a990a28547cf643a37812288fc10 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 15:45:01 +0300
-Subject: [PATCH 003/104] Revert "Add angular-meteor to the project and add
+Subject: [PATCH 003/154] Revert "Add angular-meteor to the project and add
  change the main page"
 
 This reverts commit 2cb6cc6b54ab557bc03cc6ddcb985531a79a9369.
@@ -89,7 +89,7 @@ index 79ed426..0000000
 From 0a564b8b735409e03f92d1b5de072814e3f22b20 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 16:47:59 +0300
-Subject: [PATCH 004/104] Step 0.2: Move the main HTML into index.ng.html
+Subject: [PATCH 004/154] Step 0.2: Move the main HTML into index.ng.html
 
 ---
  index.ng.html | 1 +
@@ -110,7 +110,7 @@ index 0000000..79ed426
 From f07ee765a41c36639f3f9ee3d84c4608fceb6522 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 16:49:45 +0300
-Subject: [PATCH 005/104] Step 0.3: Include the angular main file inside the
+Subject: [PATCH 005/154] Step 0.3: Include the angular main file inside the
  index.html file
 
 ---
@@ -133,7 +133,7 @@ index ef412ef..bf21494 100644
 From 9e55616290d7bf5417dbe551023a487254e931b2 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 17:14:56 +0300
-Subject: [PATCH 006/104] Step 0.4: Create app.js file to contain the AngularJS
+Subject: [PATCH 006/154] Step 0.4: Create app.js file to contain the AngularJS
  application
 
 ---
@@ -157,7 +157,7 @@ index 0000000..2465ea1
 From 2f0587779960cdb2b22060cac9fdeafbec0a9bc3 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 17:16:03 +0300
-Subject: [PATCH 007/104] Step 0.5: Create AngularJS module and add
+Subject: [PATCH 007/154] Step 0.5: Create AngularJS module and add
  angular-meteor dependency
 
 ---
@@ -180,7 +180,7 @@ index 2465ea1..987f384 100644
 From 1ac42a79ef6e234ae930679e122ce51e01c7ba08 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 17:25:28 +0300
-Subject: [PATCH 008/104] Step 0.6: Add ng-app
+Subject: [PATCH 008/154] Step 0.6: Add ng-app
 
 ---
  index.html | 2 +-
@@ -202,7 +202,7 @@ index bf21494..963f4fa 100644
 From 558c4c5b2c4d9058f3777f655c33c80cb6c283b9 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 17:31:28 +0300
-Subject: [PATCH 009/104] Step 0.7: Add AngularJS code!
+Subject: [PATCH 009/154] Step 0.7: Add AngularJS code!
 
 ---
  index.ng.html | 2 +-
@@ -222,7 +222,7 @@ index 79ed426..a9c8ddc 100644
 From 93775c58628a82788c131d5c570c3691404bc27b Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 18:17:02 +0300
-Subject: [PATCH 010/104] Add some static HTML to the application
+Subject: [PATCH 010/154] Add some static HTML to the application
 
 ---
  index.ng.html | 15 ++++++++++++++-
@@ -255,7 +255,7 @@ index a9c8ddc..dd1ef68 100644
 From c45dd30702e4623c132bf172713fbd473828324c Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 18:17:26 +0300
-Subject: [PATCH 011/104] Revert "Add some static HTML to the application"
+Subject: [PATCH 011/154] Revert "Add some static HTML to the application"
 
 This reverts commit 93775c58628a82788c131d5c570c3691404bc27b.
 ---
@@ -289,7 +289,7 @@ index dd1ef68..a9c8ddc 100644
 From 635337fb05f3a3870107a76f800d73b8f3f9f597 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 18:18:08 +0300
-Subject: [PATCH 012/104] Step 1.1: Add some static HTML the to main page
+Subject: [PATCH 012/154] Step 1.1: Add some static HTML the to main page
 
 ---
  index.ng.html | 15 ++++++++++++++-
@@ -322,7 +322,7 @@ index a9c8ddc..dd1ef68 100644
 From 6240f10604bf1aaef15af9b6b2b50a92aa826c66 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 18:20:42 +0300
-Subject: [PATCH 013/104] Step 2.1: Use dynamic template instead of static
+Subject: [PATCH 013/154] Step 2.1: Use dynamic template instead of static
 
 ---
  index.ng.html | 22 ++++++++--------------
@@ -362,7 +362,7 @@ index dd1ef68..7f8c6d9 100644
 From 6e7629a14aeb15bcf5d4d09eb5a7efcad4b3157f Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 18:22:53 +0300
-Subject: [PATCH 014/104] Step 2.2: Add the parties controller
+Subject: [PATCH 014/154] Step 2.2: Add the parties controller
 
 ---
  app.js | 21 +++++++++++++++++++--
@@ -403,7 +403,7 @@ index 987f384..9cbfb86 100644
 From d4684ff16bedbe4be95acc1b49fb18791aec5be7 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 18:27:33 +0300
-Subject: [PATCH 015/104] Step 3.1: Add the parties collection
+Subject: [PATCH 015/154] Step 3.1: Add the parties collection
 
 ---
  app.js | 2 ++
@@ -426,7 +426,7 @@ index 9cbfb86..c280708 100644
 From fe64d639689585622d814981685f764f50a77d1a Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 18:39:33 +0300
-Subject: [PATCH 016/104] Step 3.2: Add the $meteor.collection to the $scope
+Subject: [PATCH 016/154] Step 3.2: Add the $meteor.collection to the $scope
 
 ---
  app.js | 15 +--------------
@@ -465,7 +465,7 @@ index c280708..b67154d 100644
 From eb07ef77a353f557a98f0e291242b03a26d3f7b2 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 18:40:05 +0300
-Subject: [PATCH 017/104] Step 3.3: Add a dependency to $meteor
+Subject: [PATCH 017/154] Step 3.3: Add a dependency to $meteor
 
 ---
  app.js | 2 +-
@@ -492,7 +492,7 @@ index b67154d..698ceb5 100644
 From e57d3e9d78a51a4d18267b8028d87d0a050b6177 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 18:43:17 +0300
-Subject: [PATCH 018/104] Step 3.4: Add some data to the parties collection
+Subject: [PATCH 018/154] Step 3.4: Add some data to the parties collection
 
 ---
  app.js | 17 +++++++++++++++++
@@ -532,7 +532,7 @@ index 698ceb5..5fcad11 100644
 From 48adafa009190b5193f16aa461f3777b703a480e Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 18:49:37 +0300
-Subject: [PATCH 019/104] Step 4.1: Add basic form to the view
+Subject: [PATCH 019/154] Step 4.1: Add basic form to the view
 
 ---
  index.ng.html | 7 +++++++
@@ -561,7 +561,7 @@ index 7f8c6d9..4880315 100644
 From 4d4411239e7abc65a55515323c8bdd4222df6692 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 18:50:38 +0300
-Subject: [PATCH 020/104] Step 4.2: Add ng-model to the form's inputs
+Subject: [PATCH 020/154] Step 4.2: Add ng-model to the form's inputs
 
 ---
  index.ng.html | 4 ++--
@@ -590,7 +590,7 @@ index 4880315..ea6dc8f 100644
 From b76cb0c3452e1e279be876f3f203ac2008ebb9c4 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 18:51:15 +0300
-Subject: [PATCH 021/104] Step 4.3: Add ng-click logic to the "Add" button
+Subject: [PATCH 021/154] Step 4.3: Add ng-click logic to the "Add" button
 
 ---
  index.ng.html | 2 +-
@@ -616,7 +616,7 @@ index ea6dc8f..d39fd36 100644
 From a01637ebc273308940d7d46e3ef07ae0e5e35bae Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 18:52:46 +0300
-Subject: [PATCH 022/104] Step 4.4: Add delete button to the parties list
+Subject: [PATCH 022/154] Step 4.4: Add delete button to the parties list
 
 ---
  index.ng.html | 1 +
@@ -641,7 +641,7 @@ index d39fd36..614c3a0 100644
 From e13f8b5f343c6a843fb3e0a9911975897f3ef216 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 18:53:55 +0300
-Subject: [PATCH 023/104] Step 4.5: Add remove logic to the controller
+Subject: [PATCH 023/154] Step 4.5: Add remove logic to the controller
 
 ---
  app.js | 4 ++++
@@ -669,7 +669,7 @@ index 5fcad11..fbe73ca 100644
 From 63016ba7329dd9ebf60a7a2f509ee11f19fee45e Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 18:55:39 +0300
-Subject: [PATCH 024/104] Step 4.6: Replace push with save
+Subject: [PATCH 024/154] Step 4.6: Replace push with save
 
 ---
  index.ng.html | 2 +-
@@ -695,7 +695,7 @@ index 614c3a0..68ec2ac 100644
 From b0190118b6de0b445329ecca199f1ce95fd7ae3d Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 18:56:41 +0300
-Subject: [PATCH 025/104] Step 4.7: Use remove function instead of splice
+Subject: [PATCH 025/154] Step 4.7: Use remove function instead of splice
 
 ---
  app.js | 2 +-
@@ -721,7 +721,7 @@ index fbe73ca..a0119e6 100644
 From 251a3efe08fb0cf827138f5d900561ffa71092a4 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 18:57:38 +0300
-Subject: [PATCH 026/104] Step 4.8: Add Remove All button
+Subject: [PATCH 026/154] Step 4.8: Add Remove All button
 
 ---
  index.ng.html | 1 +
@@ -746,7 +746,7 @@ index 68ec2ac..5c567a8 100644
 From cdd20a5e46e1323d269105a667cd283b4dd09bc4 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 18:58:20 +0300
-Subject: [PATCH 027/104] Step 4.9: Add Remove All logic to the controller
+Subject: [PATCH 027/154] Step 4.9: Add Remove All logic to the controller
 
 ---
  app.js | 4 ++++
@@ -774,7 +774,7 @@ index a0119e6..f2ea8fd 100644
 From 895d5dae9d7cafce16f2f40fb12e84c516e67853 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 19:03:28 +0300
-Subject: [PATCH 028/104] Step 5.1: Add angular-ui-router dependency
+Subject: [PATCH 028/154] Step 5.1: Add angular-ui-router dependency
 
 ---
  app.js | 2 +-
@@ -800,7 +800,7 @@ index f2ea8fd..c68e970 100644
 From 597a8f46c89a22140f06e752b442de5bc143bbbb Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 19:08:18 +0300
-Subject: [PATCH 029/104] Step 5.2: Create parties list page
+Subject: [PATCH 029/154] Step 5.2: Create parties list page
 
 ---
  parties-list.ng.html | 17 +++++++++++++++++
@@ -837,7 +837,7 @@ index 0000000..5c567a8
 From ce42492612d76790f609f03d841fa2fd9c47709d Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 19:09:27 +0300
-Subject: [PATCH 030/104] Step 5.3: Update index.html
+Subject: [PATCH 030/154] Step 5.3: Update index.html
 
 ---
  index.html | 17 ++++++++++++++---
@@ -873,7 +873,7 @@ index 963f4fa..0fcd817 100644
 From 6f728390fdea570e920529b6d54b29a193b351d6 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 19:12:39 +0300
-Subject: [PATCH 031/104] Remove index.ng.html
+Subject: [PATCH 031/154] Remove index.ng.html
 
 ---
  index.ng.html | 17 -----------------
@@ -910,7 +910,7 @@ index 5c567a8..0000000
 From 1b9e1619c0e0900f90c6e0135bed9ce55db1a6aa Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 19:12:51 +0300
-Subject: [PATCH 032/104] Step 5.4: Create party details page
+Subject: [PATCH 032/154] Step 5.4: Create party details page
 
 ---
  party-details.ng.html | 1 +
@@ -932,7 +932,7 @@ index 0000000..68fe7fe
 From 742be2247550ea71b51778be8de1f24f56a8aec3 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 19:13:05 +0300
-Subject: [PATCH 033/104] Update packages with ui router
+Subject: [PATCH 033/154] Update packages with ui router
 
 ---
  .meteor/packages | 1 +
@@ -965,7 +965,7 @@ index 10658a5..fd36a32 100644
 From 7200081060bbb136ae4740299c64574c9a6bcc35 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 19:16:01 +0300
-Subject: [PATCH 034/104] Step 5.5: Add routes definitions
+Subject: [PATCH 034/154] Step 5.5: Add routes definitions
 
 ---
  app.js | 20 ++++++++++++++++++++
@@ -1009,7 +1009,7 @@ index c68e970..af141a9 100644
 From 235dc500bdedf1e408f7f4540d69e65c58a997bc Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 19:17:00 +0300
-Subject: [PATCH 035/104] Step 5.6: Add party details controller
+Subject: [PATCH 035/154] Step 5.6: Add party details controller
 
 ---
  app.js | 7 +++++++
@@ -1040,7 +1040,7 @@ index af141a9..6b55a29 100644
 From 9c7254848a60614d7e9eb6c4d0193a63c1d0bb01 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 19:17:00 +0300
-Subject: [PATCH 036/104] Step 5.6: Add party details controller
+Subject: [PATCH 036/154] Step 5.6: Add party details controller
 
 ---
  app.js | 7 +++++++
@@ -1071,7 +1071,7 @@ index af141a9..6b55a29 100644
 From b636a10612c4ca42b6ceee66a6bf699240bae8e4 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 19:34:52 +0300
-Subject: [PATCH 037/104] Step 5.2: Create the parties list
+Subject: [PATCH 037/154] Step 5.2: Create the parties list
 
 ---
  parties-list.ng.html | 32 +++++++++++++++-----------------
@@ -1122,7 +1122,7 @@ index 5c567a8..2b64715 100644
 From edb3c9dd74daa5f7b5766674b9056df489e7556b Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 19:41:12 +0300
-Subject: [PATCH 038/104] Step 6.1: Add $meteor.object to the controller
+Subject: [PATCH 038/154] Step 6.1: Add $meteor.object to the controller
 
 ---
  app.js | 8 +++-----
@@ -1154,7 +1154,7 @@ index 6b55a29..49a49da 100644
 From 67af65cdf46cdbdacaa4149ecdac5115996cb642 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 19:44:09 +0300
-Subject: [PATCH 039/104] Step 6.2: Add binding to the party details
+Subject: [PATCH 039/154] Step 6.2: Add binding to the party details
 
 ---
  party-details.ng.html | 5 ++++-
@@ -1179,7 +1179,7 @@ index 68fe7fe..31f8472 100644
 From 69fae21fa050a9cb7abaa897f296d3e0a7d3a19c Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 19:46:20 +0300
-Subject: [PATCH 040/104] Step 6.3: Add some buttons to the form
+Subject: [PATCH 040/154] Step 6.3: Add some buttons to the form
 
 ---
  party-details.ng.html | 6 +++++-
@@ -1208,7 +1208,7 @@ index 31f8472..52e92e7 100644
 From c402b9de91e6296aeed1dd9ad93c80f12f4fbb63 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 19:46:51 +0300
-Subject: [PATCH 041/104] Step 6.4: Update the usage of $meteor.object
+Subject: [PATCH 041/154] Step 6.4: Update the usage of $meteor.object
 
 ---
  app.js | 2 +-
@@ -1234,7 +1234,7 @@ index 49a49da..98446ad 100644
 From 24e1b389200c3ef428e483b16d1d8ab857f79489 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 19:47:13 +0300
-Subject: [PATCH 042/104] Step 6.5: Add logic to the controller
+Subject: [PATCH 042/154] Step 6.5: Add logic to the controller
 
 ---
  app.js | 8 ++++++++
@@ -1266,7 +1266,7 @@ index 98446ad..8d196ef 100644
 From f6b8b4a29b88a183116957d132adc71247ab6ee6 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 19:48:18 +0300
-Subject: [PATCH 043/104] Step 6.6: Full implementation of the controller logic
+Subject: [PATCH 043/154] Step 6.6: Full implementation of the controller logic
 
 ---
  app.js | 6 +++++-
@@ -1296,7 +1296,7 @@ index 8d196ef..9534a19 100644
 From f89fa42cb1089a576c3c421d5658811d8ab44317 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 19:54:24 +0300
-Subject: [PATCH 044/104] Step 7.1: client/lib/app.js
+Subject: [PATCH 044/154] Step 7.1: client/lib/app.js
 
 ---
  client/lib/app.js | 1 +
@@ -1318,7 +1318,7 @@ index 0000000..999bdc1
 From 2aff75501707adf1eae12e2c94af07d2b110b00c Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 20:00:58 +0300
-Subject: [PATCH 045/104] Step 7.2: model/parties.js
+Subject: [PATCH 045/154] Step 7.2: model/parties.js
 
 ---
  model/parties.js | 1 +
@@ -1340,7 +1340,7 @@ index 0000000..dc0ccc3
 From 9742fa48ad943bb9f36ec20aa114f099e4ec96d1 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 20:04:29 +0300
-Subject: [PATCH 046/104] Step 7.3: server/startup/loadParties.js
+Subject: [PATCH 046/154] Step 7.3: server/startup/loadParties.js
 
 ---
  server/startup/loadParties.js | 14 ++++++++++++++
@@ -1374,7 +1374,7 @@ index 0000000..8d3780e
 From 9f5acfc3dc56df5bc45d1c243a9e87331e27917a Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 20:06:09 +0300
-Subject: [PATCH 047/104] Step 7.4: client/routes.js
+Subject: [PATCH 047/154] Step 7.4: client/routes.js
 
 ---
  client/routes.js | 19 +++++++++++++++++++
@@ -1414,7 +1414,7 @@ index 0000000..1c6fcc3
 From 6d3bd492fb049a55bf03eae777c6d0d77dc3e0d2 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 20:07:25 +0300
-Subject: [PATCH 048/104] Step 7.5: client/parties/controllers/partiesList.js
+Subject: [PATCH 048/154] Step 7.5: client/parties/controllers/partiesList.js
 
 ---
  client/parties/controllers/partiesList.js | 13 +++++++++++++
@@ -1448,7 +1448,7 @@ index 0000000..888df64
 From 06530afc2cab3bc101f7220ffcd9653856798ec3 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 20:08:05 +0300
-Subject: [PATCH 049/104] Step 7.6: client/parties/controllers/partyDetails.js
+Subject: [PATCH 049/154] Step 7.6: client/parties/controllers/partyDetails.js
 
 ---
  client/parties/controllers/partyDetails.js | 4 ++++
@@ -1472,7 +1472,7 @@ index 0000000..0503dab
 From 93583096342c6b5848866c37c60a1400b8684b3a Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 20:10:21 +0300
-Subject: [PATCH 050/104] Move index.html
+Subject: [PATCH 050/154] Move index.html
 
 ---
  client/index.html | 14 ++++++++++++++
@@ -1530,7 +1530,7 @@ index 0fcd817..0000000
 From bbbefa48ac11db7dee7014a11c1a76fd81fc1041 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 20:11:30 +0300
-Subject: [PATCH 051/104] Step 7.7: client/parties/views/parties-list.ng.html
+Subject: [PATCH 051/154] Step 7.7: client/parties/views/parties-list.ng.html
 
 ---
  client/views/parties-list.ng.html | 15 +++++++++++++++
@@ -1566,7 +1566,7 @@ index 0000000..2b64715
 From 01410dc154e2a7373853a63f717d10d0d6afb1e2 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 20:12:05 +0300
-Subject: [PATCH 052/104] Step 7.8: client/parties/views/party-details.ng.html
+Subject: [PATCH 052/154] Step 7.8: client/parties/views/party-details.ng.html
 
 ---
  client/views/party-details.ng.html | 4 ++++
@@ -1591,7 +1591,7 @@ index 0000000..31f8472
 From 923f73df40c04fc28064cc32cd54f744d6dc092d Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 20:13:14 +0300
-Subject: [PATCH 053/104] Revert to old code for tutorial
+Subject: [PATCH 053/154] Revert to old code for tutorial
 
 ---
  client/routes.js | 4 ++--
@@ -1623,7 +1623,7 @@ index 1c6fcc3..0c8d7a3 100644
 From c09c2ecffc13c1059c0f904c9227b3f465b83369 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 20:13:46 +0300
-Subject: [PATCH 054/104] Step 7.9: Update templateUrl for routes
+Subject: [PATCH 054/154] Step 7.9: Update templateUrl for routes
 
 ---
  client/routes.js | 4 ++--
@@ -1655,7 +1655,7 @@ index 0c8d7a3..1c6fcc3 100644
 From 0c961f8b69227097798f8d3daa9f3a3c5c825863 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 20:15:20 +0300
-Subject: [PATCH 055/104] Clean up after updating the file structure
+Subject: [PATCH 055/154] Clean up after updating the file structure
 
 ---
  app.js                                     | 71 ------------------------------
@@ -1862,7 +1862,7 @@ index 52e92e7..0000000
 From cdc9447b3cab8bd6f57330d505b98d5b04869ddc Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 20:25:35 +0300
-Subject: [PATCH 056/104] Step 8.1: Use meteor-include to load the loginButtons
+Subject: [PATCH 056/154] Step 8.1: Use meteor-include to load the loginButtons
 
 ---
  client/index.html | 2 +-
@@ -1891,7 +1891,7 @@ index 0fcd817..136ca2f 100644
 From 74eb209a05581afdc4636669799f67027d2ef7a3 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 20:29:32 +0300
-Subject: [PATCH 057/104] Step 8.2:  Add allow logic to the model
+Subject: [PATCH 057/154] Step 8.2:  Add allow logic to the model
 
 ---
  model/parties.js | 14 +++++++++++++-
@@ -1925,7 +1925,7 @@ index dc0ccc3..b793c1f 100644
 From 9994fbc94f38136abe83fd7e6cf98e6d0d7b3de0 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 20:34:30 +0300
-Subject: [PATCH 058/104] Step 8.3: Add current user to the new party
+Subject: [PATCH 058/154] Step 8.3: Add current user to the new party
 
 ---
  client/parties/views/parties-list.ng.html | 2 +-
@@ -1951,7 +1951,7 @@ index 2b64715..afbe90d 100644
 From 8590f52a1e3c10552aa449966dea01e78e53eb1d Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 20:37:17 +0300
-Subject: [PATCH 059/104] Step 8.4: Update route
+Subject: [PATCH 059/154] Step 8.4: Update route
 
 ---
  client/routes.js | 7 ++++++-
@@ -1982,7 +1982,7 @@ index 1c6fcc3..412a40d 100644
 From 695e82ec42b6445ca3b9648c153cd34e6c1031bf Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 20:41:38 +0300
-Subject: [PATCH 060/104] Step 8.5: Handle case that user is not logged in
+Subject: [PATCH 060/154] Step 8.5: Handle case that user is not logged in
 
 ---
  client/routes.js | 10 ++++++++++
@@ -2013,7 +2013,7 @@ index 412a40d..4626576 100644
 From 93440d42cf252836c69bed3b293b2a170ef38fad Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 20:46:35 +0300
-Subject: [PATCH 061/104] Update packages
+Subject: [PATCH 061/154] Update packages
 
 ---
  .meteor/packages |  5 ++++-
@@ -2107,7 +2107,7 @@ index fd36a32..5ff8a6b 100644
 From 163cfba1579fc13dbe08c410bcf01542990131f0 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 20:50:23 +0300
-Subject: [PATCH 062/104] Step 9.1: Usage of publish method
+Subject: [PATCH 062/154] Step 9.1: Usage of publish method
 
 ---
  server/parties.js | 13 +++++++++++++
@@ -2141,7 +2141,7 @@ index 0000000..277f09a
 From 280db6da1b96472cc0ee7484acf04a607e070f9c Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 20:53:15 +0300
-Subject: [PATCH 063/104] Step 9.2: Use "subscribe" function on the scope
+Subject: [PATCH 063/154] Step 9.2: Use "subscribe" function on the scope
 
 ---
  client/parties/controllers/partiesList.js | 2 +-
@@ -2167,7 +2167,7 @@ index 888df64..e0f806b 100644
 From 4fc9ffbeab1991686a5db64e4f952a40f8539472 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:00:41 +0300
-Subject: [PATCH 064/104] Step 9.3: Add checkbox for public party
+Subject: [PATCH 064/154] Step 9.3: Add checkbox for public party
 
 ---
  client/parties/views/parties-list.ng.html | 2 ++
@@ -2193,7 +2193,7 @@ index afbe90d..ca956ea 100644
 From ce4d832840acbb1f2d093dabb6cfabfa8e835f25 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:03:38 +0300
-Subject: [PATCH 065/104] Step 9.4: Add checkbox for public party in the
+Subject: [PATCH 065/154] Step 9.4: Add checkbox for public party in the
  details
 
 ---
@@ -2220,7 +2220,7 @@ index 31f8472..f798477 100644
 From 80280fbdf74ba34ee8faae9931354e9e09cf661c Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:04:57 +0300
-Subject: [PATCH 066/104] Step 9.5: Publish the users collection
+Subject: [PATCH 066/154] Step 9.5: Publish the users collection
 
 ---
  server/users.js | 3 +++
@@ -2244,7 +2244,7 @@ index 0000000..f5becea
 From 16d8d5dd2d585eea05f09261a23688fa24b65c3b Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:06:51 +0300
-Subject: [PATCH 067/104] Step 9.6: Subscribe to the users collection
+Subject: [PATCH 067/154] Step 9.6: Subscribe to the users collection
 
 ---
  client/parties/controllers/partyDetails.js | 1 +
@@ -2267,7 +2267,7 @@ index 0503dab..7ac734b 100644
 From 1480c36e8e78b339e501c0baad8a559311d232ef Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:08:09 +0300
-Subject: [PATCH 068/104] Step 9.7: Subscribe to the parties collection
+Subject: [PATCH 068/154] Step 9.7: Subscribe to the parties collection
 
 ---
  client/parties/controllers/partyDetails.js | 2 +-
@@ -2291,7 +2291,7 @@ index 7ac734b..a65cabc 100644
 From 001543c981ec611fdc9f0b4f9b295833422559cd Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:09:09 +0300
-Subject: [PATCH 069/104] Step 9.8: Add the user details
+Subject: [PATCH 069/154] Step 9.8: Add the user details
 
 ---
  client/parties/views/party-details.ng.html | 7 +++++++
@@ -2320,7 +2320,7 @@ index f798477..a640092 100644
 From a3367ec45102090e37eaa1a0bfe1ff61e3883240 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:13:54 +0300
-Subject: [PATCH 070/104] Step 11.1: Update the module initialization
+Subject: [PATCH 070/154] Step 11.1: Update the module initialization
 
 ---
  client/lib/app.js | 11 ++++++++++-
@@ -2351,7 +2351,7 @@ index 999bdc1..436212a 100644
 From f8be41d7694488cd38ec4b173eb98f2b9422bfeb Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:16:29 +0300
-Subject: [PATCH 071/104] Step 11.2: Remove the ng-app directive
+Subject: [PATCH 071/154] Step 11.2: Remove the ng-app directive
 
 ---
  client/index.html | 2 +-
@@ -2377,7 +2377,7 @@ index 136ca2f..d0ba166 100644
 From 3f48e20d255ad2baa64d443a231f68e5b03c94f0 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:17:49 +0300
-Subject: [PATCH 072/104] Update packages
+Subject: [PATCH 072/154] Update packages
 
 ---
  .meteor/packages | 1 -
@@ -2415,7 +2415,7 @@ index 5ff8a6b..58b2863 100644
 From f7723e2f8d7d96f3aaeff3de3e55db5626b76b43 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:20:14 +0300
-Subject: [PATCH 073/104] Step 12.1: Add options to the parties publish
+Subject: [PATCH 073/154] Step 12.1: Add options to the parties publish
 
 ---
  server/parties.js | 4 ++--
@@ -2446,7 +2446,7 @@ index 277f09a..663bcd8 100644
 From a94894364c89ffc9659b7c7abfd1ad9d31bae2cc Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:23:07 +0300
-Subject: [PATCH 074/104] Step 12.2: Add the sorting params to the scope
+Subject: [PATCH 074/154] Step 12.2: Add the sorting params to the scope
 
 ---
  client/parties/controllers/partiesList.js | 4 ++++
@@ -2474,7 +2474,7 @@ index e0f806b..c2c8136 100644
 From f62ed04412ec91f20f9f3597b0498d9760379589 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:25:07 +0300
-Subject: [PATCH 075/104] Step 12.3: Separate the collection and the subscribe
+Subject: [PATCH 075/154] Step 12.3: Separate the collection and the subscribe
 
 ---
  client/parties/controllers/partiesList.js | 3 ++-
@@ -2501,7 +2501,7 @@ index c2c8136..30e37d9 100644
 From 0d609c440565f58d059944d3c38d7e2469b922b7 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:25:32 +0300
-Subject: [PATCH 076/104] Step 12.4: Add the params to the subscribe
+Subject: [PATCH 076/154] Step 12.4: Add the params to the subscribe
 
 ---
  client/parties/controllers/partiesList.js | 6 +++++-
@@ -2531,7 +2531,7 @@ index 30e37d9..311ed73 100644
 From 605aa4ecca02c705887b963db8ec057f08b8dec5 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:26:26 +0300
-Subject: [PATCH 077/104] Step 12.5: Replace the Parties collection with cursor
+Subject: [PATCH 077/154] Step 12.5: Replace the Parties collection with cursor
 
 ---
  client/parties/controllers/partiesList.js | 7 ++++++-
@@ -2562,7 +2562,7 @@ index 311ed73..54727b6 100644
 From 4d79f552972f6ea6601b21378989382df6867ddc Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:32:41 +0300
-Subject: [PATCH 078/104] Step 12.6: Add the pagination module
+Subject: [PATCH 078/154] Step 12.6: Add the pagination module
 
 ---
  client/lib/app.js | 2 +-
@@ -2585,7 +2585,7 @@ index 436212a..79b962b 100644
 From 138a048dae558140ac2394ac5e09439f6cb74077 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:33:26 +0300
-Subject: [PATCH 079/104] Step 12.7: Use the pagination directive
+Subject: [PATCH 079/154] Step 12.7: Use the pagination directive
 
 ---
  client/parties/views/parties-list.ng.html | 2 +-
@@ -2611,7 +2611,7 @@ index ca956ea..806534f 100644
 From e408bbaac9161d6ab2f3bb60438c45997fc6d565 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:33:51 +0300
-Subject: [PATCH 080/104] Step 12.8: Add the pagination controls
+Subject: [PATCH 080/154] Step 12.8: Add the pagination controls
 
 ---
  client/parties/views/parties-list.ng.html | 3 ++-
@@ -2637,7 +2637,7 @@ index 806534f..1041916 100644
 From a00ab08e3e953f91d23097ca23baf4b80c2417fe Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:35:01 +0300
-Subject: [PATCH 081/104] Step 12.9: Add function to handle the page change
+Subject: [PATCH 081/154] Step 12.9: Add function to handle the page change
 
 ---
  client/parties/controllers/partiesList.js | 4 ++++
@@ -2664,7 +2664,7 @@ index 54727b6..7549424 100644
 From f6e3d8c945485eff662f7bf5003eec9ac3cf410c Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:38:00 +0300
-Subject: [PATCH 082/104] Step 12.10: Add parties count publish
+Subject: [PATCH 082/154] Step 12.10: Add parties count publish
 
 ---
  server/parties.js | 12 ++++++++++++
@@ -2698,7 +2698,7 @@ index 663bcd8..9622905 100644
 From 2bf8b504d9cda45a1a7510b572d429c9058906c9 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:40:14 +0300
-Subject: [PATCH 083/104] Step 12.11: Add parties count to the client
+Subject: [PATCH 083/154] Step 12.11: Add parties count to the client
 
 ---
  client/parties/controllers/partiesList.js | 2 ++
@@ -2724,7 +2724,7 @@ index 7549424..8251b94 100644
 From 96f7efbd839e0b3cfab9cf35d9fa83e5928113b7 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:41:19 +0300
-Subject: [PATCH 084/104] Step 12.12: Add autorun to wrap the subscribe
+Subject: [PATCH 084/154] Step 12.12: Add autorun to wrap the subscribe
 
 ---
  client/parties/controllers/partiesList.js | 14 ++++++++------
@@ -2762,7 +2762,7 @@ index 8251b94..251320d 100644
 From 56559d02e897d897348002d4872f5403123bf247 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:41:47 +0300
-Subject: [PATCH 085/104] Step 12.13: Added usage of getReactivly
+Subject: [PATCH 085/154] Step 12.13: Added usage of getReactivly
 
 ---
  client/parties/controllers/partiesList.js | 6 +++---
@@ -2792,7 +2792,7 @@ index 251320d..51dd62d 100644
 From 4a1070a1aa95f8b352114343863c7e0a595b7f72 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:43:10 +0300
-Subject: [PATCH 086/104] Step 12.14: Added usage of getReactivly to the
+Subject: [PATCH 086/154] Step 12.14: Added usage of getReactivly to the
  collection
 
 ---
@@ -2819,7 +2819,7 @@ index 51dd62d..6df313b 100644
 From 3b5e183e2f7890bfcf2b1262c1146830afc55f24 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:43:45 +0300
-Subject: [PATCH 087/104] Step 12.15: Add sort controls to the view
+Subject: [PATCH 087/154] Step 12.15: Add sort controls to the view
 
 ---
  client/parties/views/parties-list.ng.html | 7 +++++++
@@ -2850,7 +2850,7 @@ index 1041916..3d39e49 100644
 From 928a97f83834eeee4039c0f3384b41b5f3a661f6 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:44:25 +0300
-Subject: [PATCH 088/104] Step 12.16: Add order logic to the client
+Subject: [PATCH 088/154] Step 12.16: Add order logic to the client
 
 ---
  client/parties/controllers/partiesList.js | 5 +++++
@@ -2878,7 +2878,7 @@ index 6df313b..d3ba0ae 100644
 From 2eff59cab86ab27209e6ddcb05256ebcafd7ab04 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:46:02 +0300
-Subject: [PATCH 089/104] Step 12.17: Add default sort definition
+Subject: [PATCH 089/154] Step 12.17: Add default sort definition
 
 ---
  client/parties/controllers/partiesList.js | 1 +
@@ -2903,7 +2903,7 @@ index d3ba0ae..c375d15 100644
 From b73bee25d975837eb0cca69cf0604dc8cb7a5c0b Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:48:55 +0300
-Subject: [PATCH 090/104] Step 12.18: Add search string to the collection
+Subject: [PATCH 090/154] Step 12.18: Add search string to the collection
 
 ---
  server/parties.js | 2 +-
@@ -2926,7 +2926,7 @@ index 9622905..5366910 100644
 From 6e61a8fefb76966cc4cf9373d5e2545a950724cd Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:50:07 +0300
-Subject: [PATCH 091/104] Step 12.19: Add the search logic
+Subject: [PATCH 091/154] Step 12.19: Add the search logic
 
 ---
  server/parties.js | 5 +++++
@@ -2961,7 +2961,7 @@ index 5366910..c2dc88b 100644
 From 5cd165ebd28e37fbee8a74334630ed3f92486f8b Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:51:56 +0300
-Subject: [PATCH 092/104] Step 12.20: Add the search input
+Subject: [PATCH 092/154] Step 12.20: Add the search input
 
 ---
  client/parties/views/parties-list.ng.html | 1 +
@@ -2986,7 +2986,7 @@ index 3d39e49..e5fd486 100644
 From ec1a9a6079eb6d5d5845d35875a8feeed95d1241 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:52:39 +0300
-Subject: [PATCH 093/104] Step 12.21: Add the search param to the subscribe
+Subject: [PATCH 093/154] Step 12.21: Add the search param to the subscribe
 
 ---
  client/parties/controllers/partiesList.js | 2 +-
@@ -3012,7 +3012,7 @@ index c375d15..2423087 100644
 From fcc186b7c231a3c66739f3c6c2a3e3d032d7be11 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:55:28 +0300
-Subject: [PATCH 094/104] Step 12.22: Remove the subscription from the object
+Subject: [PATCH 094/154] Step 12.22: Remove the subscription from the object
 
 ---
  client/parties/controllers/partyDetails.js | 2 +-
@@ -3036,7 +3036,7 @@ index a65cabc..7ac734b 100644
 From 37edf3df5549a3b68002640d19a9343056134e9b Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:56:02 +0300
-Subject: [PATCH 095/104] Step 12.23: Add $scope subscription to the collection
+Subject: [PATCH 095/154] Step 12.23: Add $scope subscription to the collection
 
 ---
  client/parties/controllers/partyDetails.js | 1 +
@@ -3059,7 +3059,7 @@ index 7ac734b..4cfb48d 100644
 From 511e35f01a655e2176f49e39bb2bdb0d3b92b9cb Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:57:59 +0300
-Subject: [PATCH 096/104] Step 13.1: Create the filter
+Subject: [PATCH 096/154] Step 13.1: Create the filter
 
 ---
  client/parties/filters/uninvited.js | 14 ++++++++++++++
@@ -3094,7 +3094,7 @@ index 0000000..9166e47
 From 7d9fba302b0de05a1cf8d3ab5c75cf15293d115d Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:59:45 +0300
-Subject: [PATCH 097/104] Step 13.2: Use the filter
+Subject: [PATCH 097/154] Step 13.2: Use the filter
 
 ---
  client/parties/views/party-details.ng.html | 4 ++--
@@ -3123,7 +3123,7 @@ index a640092..5ab9471 100644
 From 34355f602202e45db0aa2a89120c4e614fc21b9a Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 22:00:48 +0300
-Subject: [PATCH 098/104] Step 13.3: Use filter to display user details
+Subject: [PATCH 098/154] Step 13.3: Use filter to display user details
 
 ---
  client/parties/views/party-details.ng.html | 2 +-
@@ -3149,7 +3149,7 @@ index 5ab9471..4642f74 100644
 From 475b5dafc06399894b2b3cdca4fe70d3c26d2b90 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 22:01:22 +0300
-Subject: [PATCH 099/104] Step 13.4: Create the displayName filter
+Subject: [PATCH 099/154] Step 13.4: Create the displayName filter
 
 ---
  client/parties/filters/displayName.js | 12 ++++++++++++
@@ -3181,7 +3181,7 @@ index 0000000..162f496
 From 13098aa1c6b3012eb9418ed86efa876a3edb7801 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 22:05:24 +0300
-Subject: [PATCH 100/104] Step 13.5: Added user details
+Subject: [PATCH 100/154] Step 13.5: Added user details
 
 ---
  client/parties/views/parties-list.ng.html | 1 +
@@ -3207,7 +3207,7 @@ index e5fd486..d3cc5e0 100644
 From fc6798f40120dc31224535ef74a7af012caa09f5 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 22:07:30 +0300
-Subject: [PATCH 101/104] Step 13.6: Added the logic to the controller
+Subject: [PATCH 101/154] Step 13.6: Added the logic to the controller
 
 ---
  client/parties/controllers/partiesList.js | 23 +++++++++++++++++++++--
@@ -3257,7 +3257,7 @@ index 2423087..00852a7 100644
 From b153a3bc34eb813ea358311d9175a31945dabcbf Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 22:12:01 +0300
-Subject: [PATCH 102/104] Step 13.5: Added user details
+Subject: [PATCH 102/154] Step 13.5: Added user details
 
 ---
  client/parties/views/parties-list.ng.html | 2 +-
@@ -3284,7 +3284,7 @@ index d3cc5e0..3d05a0e 100644
 From c62a6b3649d30d4008c4704d31e055d1e9f46c94 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 22:13:18 +0300
-Subject: [PATCH 103/104] Step 13.7: Added subscribe to the users collection
+Subject: [PATCH 103/154] Step 13.7: Added subscribe to the users collection
 
 ---
  client/parties/controllers/partiesList.js | 2 ++
@@ -3310,7 +3310,7 @@ index 00852a7..afdef32 100644
 From 873c86c550722cff8dd6d400f4b9a5f9d7cf5b2f Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 22:13:48 +0300
-Subject: [PATCH 104/104] Step 13.8: Use filter to display the user info
+Subject: [PATCH 104/154] Step 13.8: Use filter to display the user info
 
 ---
  client/parties/views/parties-list.ng.html | 2 +-
@@ -3329,6 +3329,2292 @@ index 3d05a0e..d3cc5e0 100644
    </li>
  </ul>
  <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
+\ No newline at end of file
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 61fdd96b343472bb99141756ce7134fd237eef45 Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 22:17:32 +0300
+Subject: [PATCH 105/154] Update packages and clean up old code
+
+---
+ .meteor/packages              |  2 ++
+ .meteor/versions              |  2 ++
+ server/startup/loadParties.js | 14 --------------
+ 3 files changed, 4 insertions(+), 14 deletions(-)
+ delete mode 100644 server/startup/loadParties.js
+
+diff --git a/.meteor/packages b/.meteor/packages
+index b462d6f..1f4b5b4 100644
+--- a/.meteor/packages
++++ b/.meteor/packages
+@@ -11,3 +11,5 @@ accounts-password
+ accounts-ui
+ accounts-facebook
+ accounts-twitter
++angularutils:pagination
++tmeasday:publish-counts
+diff --git a/.meteor/versions b/.meteor/versions
+index 58b2863..6128de0 100644
+--- a/.meteor/versions
++++ b/.meteor/versions
+@@ -7,6 +7,7 @@ accounts-ui@1.1.5
+ accounts-ui-unstyled@1.1.7
+ angular:angular@1.4.4
+ angularui:angular-ui-router@0.2.15
++angularutils:pagination@0.7.0
+ autoupdate@1.2.1
+ base64@1.0.3
+ binary-heap@1.0.3
+@@ -60,6 +61,7 @@ spacebars@1.0.6
+ spacebars-compiler@1.0.6
+ srp@1.0.3
+ templating@1.1.1
++tmeasday:publish-counts@0.7.0
+ tracker@1.0.7
+ twitter@1.1.4
+ ui@1.0.6
+diff --git a/server/startup/loadParties.js b/server/startup/loadParties.js
+deleted file mode 100644
+index 8d3780e..0000000
+--- a/server/startup/loadParties.js
++++ /dev/null
+@@ -1,14 +0,0 @@
+-Meteor.startup(function () {
+-  if (Parties.find().count() === 0) {
+-    var parties = [
+-      {'name': 'Dubstep-Free Zone',
+-        'description': 'Fast just got faster with Nexus S.'},
+-      {'name': 'All dubstep all the time',
+-        'description': 'Get it on!'},
+-      {'name': 'Savage lounging',
+-        'description': 'Leisure suit required. And only fiercest manners.'}
+-    ];
+-    for (var i = 0; i < parties.length; i++)
+-      Parties.insert({name: parties[i].name, description: parties[i].description});
+-  }
+-});
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 81eed2a3ee26107aaae6568bbca79a9caeb39fcc Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 22:23:03 +0300
+Subject: [PATCH 106/154] Step 14.1: Add meteor method to the model
+
+---
+ model/parties.js | 46 +++++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 45 insertions(+), 1 deletion(-)
+
+diff --git a/model/parties.js b/model/parties.js
+index b793c1f..8998b5e 100644
+--- a/model/parties.js
++++ b/model/parties.js
+@@ -10,4 +10,48 @@ Parties.allow({
+   remove: function (userId, party) {
+     return userId && party.owner === userId;
+   }
+-});
+\ No newline at end of file
++});
++
++Meteor.methods({
++  invite: function (partyId, userId) {
++    check(partyId, String);
++    check(userId, String);
++    var party = Parties.findOne(partyId);
++    if (!party)
++      throw new Meteor.Error(404, "No such party");
++    if (party.owner !== this.userId)
++      throw new Meteor.Error(404, "No such party");
++    if (party.public)
++      throw new Meteor.Error(400,
++        "That party is public. No need to invite people.");
++
++    if (userId !== party.owner && ! _.contains(party.invited, userId)) {
++      Parties.update(partyId, { $addToSet: { invited: userId } });
++
++      var from = contactEmail(Meteor.users.findOne(this.userId));
++      var to = contactEmail(Meteor.users.findOne(userId));
++
++      if (Meteor.isServer && to) {
++        // This code only runs on the server. If you didn't want clients
++        // to be able to see it, you could move it to a separate file.
++        Email.send({
++          from: "noreply@socially.com",
++          to: to,
++          replyTo: from || undefined,
++          subject: "PARTY: " + party.title,
++          text:
++          "Hey, I just invited you to '" + party.title + "' on Socially." +
++          "\n\nCome check it out: " + Meteor.absoluteUrl() + "\n"
++        });
++      }
++    }
++  }
++});
++
++var contactEmail = function (user) {
++  if (user.emails && user.emails.length)
++    return user.emails[0].address;
++  if (user.services && user.services.facebook && user.services.facebook.email)
++    return user.services.facebook.email;
++  return null;
++};
+\ No newline at end of file
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 730c27eca78f16c08e8fcc334e198ff9d51b95d7 Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 22:25:19 +0300
+Subject: [PATCH 107/154] Step 14.2: Add invite method to the client
+
+---
+ client/parties/controllers/partyDetails.js | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+
+diff --git a/client/parties/controllers/partyDetails.js b/client/parties/controllers/partyDetails.js
+index 4cfb48d..045ea9d 100644
+--- a/client/parties/controllers/partyDetails.js
++++ b/client/parties/controllers/partyDetails.js
+@@ -3,4 +3,15 @@ angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$statePara
+     $scope.party = $meteor.object(Parties, $stateParams.partyId);
+     $scope.users = $meteor.collection(Meteor.users, false).subscribe('users');
+     $scope.$meteorSubscribe('parties');
++
++    $scope.invite = function(user){
++      $meteor.call('invite', $scope.party._id, user._id).then(
++        function(data){
++          console.log('success inviting', data);
++        },
++        function(err){
++          console.log('failed', err);
++        }
++      );
++    };
+   }]);
+-- 
+2.3.2 (Apple Git-55)
+
+
+From e0a00756e87e4967365b75fd240882e491e55311 Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 22:26:39 +0300
+Subject: [PATCH 108/154] Step 14.3: Add invite button to the view
+
+---
+ client/parties/views/party-details.ng.html | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/client/parties/views/party-details.ng.html b/client/parties/views/party-details.ng.html
+index 4642f74..609a4ba 100644
+--- a/client/parties/views/party-details.ng.html
++++ b/client/parties/views/party-details.ng.html
+@@ -9,5 +9,6 @@ Here you will see and change the details of the party:
+   Users to invite:
+   <li ng-repeat="user in users | uninvited:party">
+     <div>{{ user | displayName }}</div>
++    <button ng-click="invite(user)">Invite</button>
+   </li>
+ </ul>
+\ No newline at end of file
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 659d04152e5a7ab78d5a2a181650a78de25c493a Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 22:27:54 +0300
+Subject: [PATCH 109/154] Step 14.4: Add invited logic to the publish
+
+---
+ server/parties.js | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/server/parties.js b/server/parties.js
+index c2dc88b..b691e30 100644
+--- a/server/parties.js
++++ b/server/parties.js
+@@ -12,6 +12,10 @@ Meteor.publish("parties", function (options, searchString) {
+       {$and:[
+         {owner: this.userId},
+         {owner: {$exists: true}}
++      ]},
++      {$and:[
++        {invited: this.userId},
++        {invited: {$exists: true}}
+       ]}
+     ]}), { noReady: true });
+ 
+@@ -25,6 +29,10 @@ Meteor.publish("parties", function (options, searchString) {
+       {$and:[
+         {owner: this.userId},
+         {owner: {$exists: true}}
++      ]},
++      {$and:[
++        {invited: this.userId},
++        {invited: {$exists: true}}
+       ]}
+     ]}, options);
+ });
+\ No newline at end of file
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 351afed19208358d6a2d1eeb0a45733a4caa9d28 Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 22:30:21 +0300
+Subject: [PATCH 110/154] Step 14.5: Add RSVP function to the server
+
+---
+ model/parties.js | 40 ++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 40 insertions(+)
+
+diff --git a/model/parties.js b/model/parties.js
+index 8998b5e..37b10e5 100644
+--- a/model/parties.js
++++ b/model/parties.js
+@@ -45,6 +45,46 @@ Meteor.methods({
+         });
+       }
+     }
++  },
++  rsvp: function (partyId, rsvp) {
++    check(partyId, String);
++    check(rsvp, String);
++    if (! this.userId)
++      throw new Meteor.Error(403, "You must be logged in to RSVP");
++    if (! _.contains(['yes', 'no', 'maybe'], rsvp))
++      throw new Meteor.Error(400, "Invalid RSVP");
++    var party = Parties.findOne(partyId);
++    if (! party)
++      throw new Meteor.Error(404, "No such party");
++    if (! party.public && party.owner !== this.userId &&
++      !_.contains(party.invited, this.userId))
++    // private, but let's not tell this to the user
++      throw new Meteor.Error(403, "No such party");
++
++    var rsvpIndex = _.indexOf(_.pluck(party.rsvps, 'user'), this.userId);
++    if (rsvpIndex !== -1) {
++      // update existing rsvp entry
++
++      if (Meteor.isServer) {
++        // update the appropriate rsvp entry with $
++        Parties.update(
++          {_id: partyId, "rsvps.user": this.userId},
++          {$set: {"rsvps.$.rsvp": rsvp}});
++      } else {
++        // minimongo doesn't yet support $ in modifier. as a temporary
++        // workaround, make a modifier that uses an index. this is
++        // safe on the client since there's only one thread.
++        var modifier = {$set: {}};
++        modifier.$set["rsvps." + rsvpIndex + ".rsvp"] = rsvp;
++        Parties.update(partyId, modifier);
++      }
++      // Possible improvement: send email to the other people that are
++      // coming to the party.
++    } else {
++      // add new rsvp entry
++      Parties.update(partyId,
++        {$push: {rsvps: {user: this.userId, rsvp: rsvp}}});
++    }
+   }
+ });
+ 
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 093aeef78d9f8948b22d60a51872002c6e119467 Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 22:31:14 +0300
+Subject: [PATCH 111/154] Step 14.6: Add RSVP function to the client
+
+---
+ client/parties/controllers/partiesList.js | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+
+diff --git a/client/parties/controllers/partiesList.js b/client/parties/controllers/partiesList.js
+index afdef32..ea7eb56 100644
+--- a/client/parties/controllers/partiesList.js
++++ b/client/parties/controllers/partiesList.js
+@@ -41,6 +41,17 @@ angular.module("socially").controller("PartiesListCtrl", ['$scope', '$meteor', '
+         $scope.sort = {name: parseInt($scope.orderProperty)};
+     });
+ 
++    $scope.rsvp = function(partyId, rsvp){
++      $meteor.call('rsvp', partyId, rsvp).then(
++        function(data){
++          console.log('success responding', data);
++        },
++        function(err){
++          console.log('failed', err);
++        }
++      );
++    };
++
+     $scope.getUserById = function(userId){
+       return Meteor.users.findOne(userId);
+     };
+-- 
+2.3.2 (Apple Git-55)
+
+
+From e67719681e44752b5e482682b1a66852c5173414 Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 22:33:05 +0300
+Subject: [PATCH 112/154] Step 14.7: Add RSVP control to the view
+
+---
+ client/parties/views/parties-list.ng.html | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/client/parties/views/parties-list.ng.html b/client/parties/views/parties-list.ng.html
+index d3cc5e0..451835f 100644
+--- a/client/parties/views/parties-list.ng.html
++++ b/client/parties/views/parties-list.ng.html
+@@ -21,6 +21,13 @@
+     <a href="/parties/{{party._id}}">{{party.name}}</a>
+     <p>{{party.description}}</p>
+     <button ng-click="remove(party)">X</button>
++
++    <div>
++      <input type="button" value="I'm going!" ng-click="rsvp(party._id, 'yes')">
++      <input type="button" value="Maybe" ng-click="rsvp(party._id, 'maybe')">
++      <input type="button" value="No" ng-click="rsvp(party._id, 'no')">
++    </div>
++
+     <p><small>Posted by {{ creator(party) | displayName }}</small></p>
+   </li>
+ </ul>
+-- 
+2.3.2 (Apple Git-55)
+
+
+From aa4e0a50f62bc52691433c2cb3ea1f12dc774910 Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 22:33:44 +0300
+Subject: [PATCH 113/154] Step 14.8: Add RSVP list to the view
+
+---
+ client/parties/views/parties-list.ng.html | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+
+diff --git a/client/parties/views/parties-list.ng.html b/client/parties/views/parties-list.ng.html
+index 451835f..98e33e5 100644
+--- a/client/parties/views/parties-list.ng.html
++++ b/client/parties/views/parties-list.ng.html
+@@ -27,6 +27,21 @@
+       <input type="button" value="Maybe" ng-click="rsvp(party._id, 'maybe')">
+       <input type="button" value="No" ng-click="rsvp(party._id, 'no')">
+     </div>
++    <div>
++      Who is coming:
++      Yes - {{ (party.rsvps | filter:{rsvp:'yes'}).length }}
++      Maybe - {{ (party.rsvps | filter:{rsvp:'maybe'}).length }}
++      No - {{ (party.rsvps | filter:{rsvp:'no'}).length }}
++      <div ng-repeat="rsvp in party.rsvps | filter:{rsvp:'yes'}">
++        {{ getUserById(rsvp.user) | displayName }} - {{ rsvp.rsvp }}
++      </div>
++      <div ng-repeat="rsvp in party.rsvps | filter:{rsvp:'maybe'}">
++        {{ getUserById(rsvp.user) | displayName }} - {{ rsvp.rsvp }}
++      </div>
++      <div ng-repeat="rsvp in party.rsvps | filter:{rsvp:'no'}">
++        {{ getUserById(rsvp.user) | displayName }} - {{ rsvp.rsvp }}
++      </div>
++    </div>
+ 
+     <p><small>Posted by {{ creator(party) | displayName }}</small></p>
+   </li>
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 302f422ee9ca95b092aaa97b8142746b0c46ab9f Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 22:34:19 +0300
+Subject: [PATCH 114/154] Step 14.9: Add RSVP list to the view of users who not
+ responded
+
+---
+ client/parties/views/parties-list.ng.html | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/client/parties/views/parties-list.ng.html b/client/parties/views/parties-list.ng.html
+index 98e33e5..e4660f1 100644
+--- a/client/parties/views/parties-list.ng.html
++++ b/client/parties/views/parties-list.ng.html
+@@ -43,6 +43,13 @@
+       </div>
+     </div>
+ 
++    <ul>
++      Users who not responded:
++      <li ng-repeat="invitedUser in outstandingInvitations(party)">
++        {{dstache}} invitedUser | displayName }}
++      </li>
++    </ul>
++
+     <p><small>Posted by {{ creator(party) | displayName }}</small></p>
+   </li>
+ </ul>
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 6d31a69795ac254d90c4f814c76de0df900b35e5 Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 22:34:54 +0300
+Subject: [PATCH 115/154] Step 14.10: Added logic to the controller
+
+---
+ client/parties/controllers/partiesList.js | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/client/parties/controllers/partiesList.js b/client/parties/controllers/partiesList.js
+index ea7eb56..57d1f52 100644
+--- a/client/parties/controllers/partiesList.js
++++ b/client/parties/controllers/partiesList.js
+@@ -52,6 +52,13 @@ angular.module("socially").controller("PartiesListCtrl", ['$scope', '$meteor', '
+       );
+     };
+ 
++    $scope.outstandingInvitations = function (party) {
++      return _.filter($scope.users, function (user) {
++        return (_.contains(party.invited, user._id) &&
++        !_.findWhere(party.rsvps, {user: user._id}));
++      });
++    };
++
+     $scope.getUserById = function(userId){
+       return Meteor.users.findOne(userId);
+     };
+-- 
+2.3.2 (Apple Git-55)
+
+
+From ec82ab47fcf59ca7fde2c325001a7e6444ba9d46 Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 22:35:37 +0300
+Subject: [PATCH 116/154] Step 14.11: Add users collection
+
+---
+ client/parties/controllers/partiesList.js | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/client/parties/controllers/partiesList.js b/client/parties/controllers/partiesList.js
+index 57d1f52..2273fb3 100644
+--- a/client/parties/controllers/partiesList.js
++++ b/client/parties/controllers/partiesList.js
+@@ -6,7 +6,7 @@ angular.module("socially").controller("PartiesListCtrl", ['$scope', '$meteor', '
+     $scope.sort = { name: 1 };
+     $scope.orderProperty = '1';
+ 
+-    $scope.$meteorSubscribe('users');
++    $scope.users = $meteor.collection(Meteor.users, false).subscribe('users');
+ 
+     $scope.parties = $meteor.collection(function() {
+       return Parties.find({}, {
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 10adbc07159fe99f6c3eb0f2a35c3729fce20a2e Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 22:39:54 +0300
+Subject: [PATCH 117/154] Step 15.1: Add ng-show to the directive
+
+---
+ client/parties/views/parties-list.ng.html | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/client/parties/views/parties-list.ng.html b/client/parties/views/parties-list.ng.html
+index e4660f1..f3a0f85 100644
+--- a/client/parties/views/parties-list.ng.html
++++ b/client/parties/views/parties-list.ng.html
+@@ -1,4 +1,4 @@
+-<form>
++<form ng-show="$root.currentUser">
+   <label>Name</label>
+   <input ng-model="newParty.name">
+   <label>Description</label>
+-- 
+2.3.2 (Apple Git-55)
+
+
+From dd6757344554767c92e2b12006b27f3ec685bcb5 Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 22:40:35 +0300
+Subject: [PATCH 118/154] Step 15.2: Add message to users that not logged in
+
+---
+ client/parties/views/parties-list.ng.html | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/client/parties/views/parties-list.ng.html b/client/parties/views/parties-list.ng.html
+index f3a0f85..d15876f 100644
+--- a/client/parties/views/parties-list.ng.html
++++ b/client/parties/views/parties-list.ng.html
+@@ -8,6 +8,9 @@
+   <button ng-click="newParty.owner=$root.currentUser._id; parties.push(newParty)">Add</button>
+   <button ng-click="removeAll()">Remove All</button>
+ </form>
++<div ng-hide="$root.currentUser || $root.loggingIn">
++  Log in to create a party!
++</div>
+ <ul>
+   <h1>Parties:</h1>
+   <div>
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 342d9028fea65290541d2d2d8f739db6f42162e7 Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 22:41:09 +0300
+Subject: [PATCH 119/154] Step 15.3: Add ng-show to the RSVP buttons
+
+---
+ client/parties/views/parties-list.ng.html | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/client/parties/views/parties-list.ng.html b/client/parties/views/parties-list.ng.html
+index d15876f..f3c8063 100644
+--- a/client/parties/views/parties-list.ng.html
++++ b/client/parties/views/parties-list.ng.html
+@@ -25,7 +25,7 @@
+     <p>{{party.description}}</p>
+     <button ng-click="remove(party)">X</button>
+ 
+-    <div>
++    <div ng-show="$root.currentUser">
+       <input type="button" value="I'm going!" ng-click="rsvp(party._id, 'yes')">
+       <input type="button" value="Maybe" ng-click="rsvp(party._id, 'maybe')">
+       <input type="button" value="No" ng-click="rsvp(party._id, 'no')">
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 42d2b1ede34c0ef8cfa78d9972d3fbbb677832ca Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 22:41:46 +0300
+Subject: [PATCH 120/154] Step 15.4: Add message for not-logged in users on the
+ RSVP buttons
+
+---
+ client/parties/views/parties-list.ng.html | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/client/parties/views/parties-list.ng.html b/client/parties/views/parties-list.ng.html
+index f3c8063..19a43f9 100644
+--- a/client/parties/views/parties-list.ng.html
++++ b/client/parties/views/parties-list.ng.html
+@@ -30,6 +30,10 @@
+       <input type="button" value="Maybe" ng-click="rsvp(party._id, 'maybe')">
+       <input type="button" value="No" ng-click="rsvp(party._id, 'no')">
+     </div>
++    <div ng-hide="$root.currentUser">
++      <i>Sign in to RSVP for this party.</i>
++    </div>
++
+     <div>
+       Who is coming:
+       Yes - {{ (party.rsvps | filter:{rsvp:'yes'}).length }}
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 1b18b4723481bf2d354a7d06047291868c314389 Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 22:42:52 +0300
+Subject: [PATCH 121/154] Step 15.5: Add ng-show to delete button
+
+---
+ client/parties/views/parties-list.ng.html | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/client/parties/views/parties-list.ng.html b/client/parties/views/parties-list.ng.html
+index 19a43f9..c1c5752 100644
+--- a/client/parties/views/parties-list.ng.html
++++ b/client/parties/views/parties-list.ng.html
+@@ -23,7 +23,7 @@
+   <li dir-paginate="party in parties | itemsPerPage: perPage" total-items="partiesCount.count">
+     <a href="/parties/{{party._id}}">{{party.name}}</a>
+     <p>{{party.description}}</p>
+-    <button ng-click="remove(party)">X</button>
++    <button ng-click="remove(party)" ng-show="$root.currentUser && $root.currentUser._id == party.owner">X</button>
+ 
+     <div ng-show="$root.currentUser">
+       <input type="button" value="I'm going!" ng-click="rsvp(party._id, 'yes')">
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 4e82eeff6b7687c892e4ab3a20f856de014a8800 Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 22:43:59 +0300
+Subject: [PATCH 122/154] Step 15.6: Add ng-if to outstanding RSVP
+
+---
+ client/parties/views/parties-list.ng.html | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/client/parties/views/parties-list.ng.html b/client/parties/views/parties-list.ng.html
+index c1c5752..58652c8 100644
+--- a/client/parties/views/parties-list.ng.html
++++ b/client/parties/views/parties-list.ng.html
+@@ -50,12 +50,15 @@
+       </div>
+     </div>
+ 
+-    <ul>
++    <ul ng-if="!party.public">
+       Users who not responded:
+       <li ng-repeat="invitedUser in outstandingInvitations(party)">
+         {{dstache}} invitedUser | displayName }}
+       </li>
+     </ul>
++    <div ng-if="party.public">
++      Everyone is invited
++    </div>
+ 
+     <p><small>Posted by {{ creator(party) | displayName }}</small></p>
+   </li>
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 4c4b799735b96c675bcb658610268ece87fed432 Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 22:46:41 +0300
+Subject: [PATCH 123/154] Step 15.7: Add canInvite logic
+
+---
+ client/parties/controllers/partyDetails.js | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/client/parties/controllers/partyDetails.js b/client/parties/controllers/partyDetails.js
+index 045ea9d..0c27c6e 100644
+--- a/client/parties/controllers/partyDetails.js
++++ b/client/parties/controllers/partyDetails.js
+@@ -14,4 +14,12 @@ angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$statePara
+         }
+       );
+     };
++
++    $scope.canInvite = function (){
++      if (!$scope.party)
++        return false;
++
++      return !$scope.party.public &&
++        $scope.party.owner === Meteor.userId();
++    };
+   }]);
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 6ea5aae18ac1945174f9c280d51ab6562f854c97 Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 22:47:19 +0300
+Subject: [PATCH 124/154] Step 15.8: Add usage for ng-show with canInvite
+
+---
+ client/parties/views/party-details.ng.html | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/client/parties/views/party-details.ng.html b/client/parties/views/party-details.ng.html
+index 609a4ba..a695811 100644
+--- a/client/parties/views/party-details.ng.html
++++ b/client/parties/views/party-details.ng.html
+@@ -5,10 +5,13 @@ Here you will see and change the details of the party:
+ <label>Is public</label>
+ <input type="checkbox" ng-model="party.public">
+ 
+-<ul>
++<ul ng-show="canInvite()">
+   Users to invite:
+   <li ng-repeat="user in users | uninvited:party">
+     <div>{{ user | displayName }}</div>
+     <button ng-click="invite(user)">Invite</button>
+   </li>
++  <li ng-if="(users | uninvited:party).length <= 0">
++    Everyone are already invited.
++  </li>
+ </ul>
+\ No newline at end of file
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 853709f2e1dec49c13af6b35c5ed57ff4c46d57c Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 22:49:32 +0300
+Subject: [PATCH 125/154] Step 15.9: Example of ng-disabled
+
+---
+ client/parties/views/party-details.ng.html | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/client/parties/views/party-details.ng.html b/client/parties/views/party-details.ng.html
+index a695811..f17a8f2 100644
+--- a/client/parties/views/party-details.ng.html
++++ b/client/parties/views/party-details.ng.html
+@@ -1,9 +1,9 @@
+ Here you will see and change the details of the party:
+ 
+-<input ng-model="party.name">
+-<input ng-model="party.description">
++<input ng-model="party.name" ng-disabled="party.owner != $root.currentUser._id">
++<input ng-model="party.description" ng-disabled="party.owner != $root.currentUser._id">
+ <label>Is public</label>
+-<input type="checkbox" ng-model="party.public">
++<input type="checkbox" ng-model="party.public" ng-disabled="party.owner != $root.currentUser._id">
+ 
+ <ul ng-show="canInvite()">
+   Users to invite:
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 86a6e35af6ede583515df198965f028694b02d85 Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 22:54:08 +0300
+Subject: [PATCH 126/154] Step 16.1: Add google maps module dependency
+
+---
+ client/lib/app.js | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/client/lib/app.js b/client/lib/app.js
+index 79b962b..980e7c3 100644
+--- a/client/lib/app.js
++++ b/client/lib/app.js
+@@ -1,5 +1,9 @@
+-angular.module('socially',['angular-meteor', 'ui.router', 'angularUtils.directives.dirPagination']);
+-
++angular.module('socially',[
++  'angular-meteor',
++  'ui.router',
++  'angularUtils.directives.dirPagination',
++  'uiGmapgoogle-maps'
++]);
+ function onReady() {
+   angular.bootstrap(document, ['socially']);
+ }
+-- 
+2.3.2 (Apple Git-55)
+
+
+From e5d387c68f331e61962a2beb6c0c7288ca8fe2af Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 22:54:54 +0300
+Subject: [PATCH 127/154] Step 16.2: Add basic map to the view
+
+---
+ client/parties/views/party-details.ng.html | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
+
+diff --git a/client/parties/views/party-details.ng.html b/client/parties/views/party-details.ng.html
+index f17a8f2..73c4640 100644
+--- a/client/parties/views/party-details.ng.html
++++ b/client/parties/views/party-details.ng.html
+@@ -14,4 +14,12 @@ Here you will see and change the details of the party:
+   <li ng-if="(users | uninvited:party).length <= 0">
+     Everyone are already invited.
+   </li>
+-</ul>
+\ No newline at end of file
++</ul>
++
++<div class="party-details-maps">
++  <div class="angular-google-map-container">
++    <ui-gmap-google-map center="party.location || map.center"
++                        events="map.events" zoom="map.zoom">
++    </ui-gmap-google-map>
++  </div>
++</div>
+\ No newline at end of file
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 7b567cf5885ce1d39ea58b35887b137eae910474 Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 22:55:24 +0300
+Subject: [PATCH 128/154] Step 16.3: Add map params to the controller
+
+---
+ client/parties/controllers/partyDetails.js | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff --git a/client/parties/controllers/partyDetails.js b/client/parties/controllers/partyDetails.js
+index 0c27c6e..75e12f2 100644
+--- a/client/parties/controllers/partyDetails.js
++++ b/client/parties/controllers/partyDetails.js
+@@ -22,4 +22,13 @@ angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$statePara
+       return !$scope.party.public &&
+         $scope.party.owner === Meteor.userId();
+     };
++
++    $scope.map = {
++      center: {
++        latitude: 45,
++        longitude: -73
++      },
++      zoom: 8,
++      events: {}
++    };
+   }]);
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 2e2936ac54fa299b2d68a4a8620d0b7f4d32bb9d Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 22:56:18 +0300
+Subject: [PATCH 129/154] Step 16.4: Create basic CSS style with google map
+ style
+
+---
+ client/parties/styles/parties.css | 4 ++++
+ 1 file changed, 4 insertions(+)
+ create mode 100644 client/parties/styles/parties.css
+
+diff --git a/client/parties/styles/parties.css b/client/parties/styles/parties.css
+new file mode 100644
+index 0000000..219ff39
+--- /dev/null
++++ b/client/parties/styles/parties.css
+@@ -0,0 +1,4 @@
++.angular-google-map-container {
++    height: 400px;
++    width: 400px;
++}
+\ No newline at end of file
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 0253eda09a5c549484d137a91f09c346978d1ad5 Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 22:57:43 +0300
+Subject: [PATCH 130/154] Step 16.5: Add party marker to the map
+
+---
+ client/parties/views/party-details.ng.html | 13 +++++++------
+ 1 file changed, 7 insertions(+), 6 deletions(-)
+
+diff --git a/client/parties/views/party-details.ng.html b/client/parties/views/party-details.ng.html
+index 73c4640..7ef1f8d 100644
+--- a/client/parties/views/party-details.ng.html
++++ b/client/parties/views/party-details.ng.html
+@@ -16,10 +16,11 @@ Here you will see and change the details of the party:
+   </li>
+ </ul>
+ 
+-<div class="party-details-maps">
+-  <div class="angular-google-map-container">
+-    <ui-gmap-google-map center="party.location || map.center"
+-                        events="map.events" zoom="map.zoom">
+-    </ui-gmap-google-map>
+-  </div>
++<div class="angular-google-map-container">
++  <ui-gmap-google-map center="party.location || map.center"
++                      events="map.events" zoom="map.zoom">
++    <ui-gmap-marker coords="party.location" options="map.marker.options"
++                    events="map.marker.events" idkey="party._id">
++    </ui-gmap-marker>
++  </ui-gmap-google-map>
+ </div>
+\ No newline at end of file
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 21dc6b4dca5b3bd1fd72e742a049051eddf43f99 Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 22:58:32 +0300
+Subject: [PATCH 131/154] Step 16.6: Add the marker creation logic to the
+ controller
+
+---
+ client/parties/controllers/partyDetails.js | 27 ++++++++++++++++++++++++++-
+ 1 file changed, 26 insertions(+), 1 deletion(-)
+
+diff --git a/client/parties/controllers/partyDetails.js b/client/parties/controllers/partyDetails.js
+index 75e12f2..b6209e5 100644
+--- a/client/parties/controllers/partyDetails.js
++++ b/client/parties/controllers/partyDetails.js
+@@ -29,6 +29,31 @@ angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$statePara
+         longitude: -73
+       },
+       zoom: 8,
+-      events: {}
++      events: {
++        click: function (mapModel, eventName, originalEventArgs) {
++          if (!$scope.party)
++            return;
++
++          if (!$scope.party.location)
++            $scope.party.location = {};
++
++          $scope.party.location.latitude = originalEventArgs[0].latLng.lat();
++          $scope.party.location.longitude = originalEventArgs[0].latLng.lng();
++          //scope apply required because this event handler is outside of the angular domain
++          $scope.$apply();
++        }
++      },
++      marker: {
++        options: { draggable: true },
++        events: {
++          dragend: function (marker, eventName, args) {
++            if (!$scope.party.location)
++              $scope.party.location = {};
++
++            $scope.party.location.latitude = marker.getPosition().lat();
++            $scope.party.location.longitude = marker.getPosition().lng();
++          }
++        }
++      }
+     };
+   }]);
+-- 
+2.3.2 (Apple Git-55)
+
+
+From ad2704b928aabce31141fbb8dc630f98df526907 Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 22:59:21 +0300
+Subject: [PATCH 132/154] Step 16.7: Add map to the parties list
+
+---
+ client/parties/views/parties-list.ng.html | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/client/parties/views/parties-list.ng.html b/client/parties/views/parties-list.ng.html
+index 58652c8..e0e9d47 100644
+--- a/client/parties/views/parties-list.ng.html
++++ b/client/parties/views/parties-list.ng.html
+@@ -20,6 +20,13 @@
+       <option value="-1">Descending</option>
+     </select>
+   </div>
++  <div class="angular-google-map-container">
++    <ui-gmap-google-map center="party.location || map.center" zoom="map.zoom">
++      <ui-gmap-markers models="parties" coords="'location'" click="onClicked()"
++                       fit="true" idkey="'_id'" doRebuildAll="true">
++      </ui-gmap-markers>
++    </ui-gmap-google-map>
++  </div>
+   <li dir-paginate="party in parties | itemsPerPage: perPage" total-items="partiesCount.count">
+     <a href="/parties/{{party._id}}">{{party.name}}</a>
+     <p>{{party.description}}</p>
+-- 
+2.3.2 (Apple Git-55)
+
+
+From a6c023efc8bb60eff4fe19b527ae7696896d8dd1 Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 23:00:02 +0300
+Subject: [PATCH 133/154] Step 16.8: Add map logic to the parties list
+ controller
+
+---
+ client/parties/controllers/partiesList.js | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+
+diff --git a/client/parties/controllers/partiesList.js b/client/parties/controllers/partiesList.js
+index 2273fb3..4c3255e 100644
+--- a/client/parties/controllers/partiesList.js
++++ b/client/parties/controllers/partiesList.js
+@@ -21,6 +21,21 @@ angular.module("socially").controller("PartiesListCtrl", ['$scope', '$meteor', '
+         sort: $scope.getReactively('sort')
+       }, $scope.getReactively('search')).then(function() {
+         $scope.partiesCount = $meteor.object(Counts ,'numberOfParties', false);
++
++        $scope.parties.forEach( function (party) {
++          party.onClicked = function () {
++            $state.go('partyDetails', {partyId: party._id});
++          };
++        });
++
++        $scope.map = {
++          center: {
++            latitude: 45,
++            longitude: -73
++          },
++          zoom: 8
++        };
++
+       });
+     });
+ 
+-- 
+2.3.2 (Apple Git-55)
+
+
+From c0a47ef415a2fc05f2a2f63620398d706920c800 Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 23:05:03 +0300
+Subject: [PATCH 134/154] Update packages, cleanup
+
+---
+ .meteor/packages                           |  2 ++
+ .meteor/versions                           |  2 ++
+ client/parties/controllers/partiesList.js  | 42 +++++++++++-------------------
+ client/parties/controllers/partyDetails.js | 17 +++++++++---
+ client/parties/views/parties-list.ng.html  | 11 ++++----
+ client/parties/views/party-details.ng.html |  8 +++---
+ 6 files changed, 41 insertions(+), 41 deletions(-)
+
+diff --git a/.meteor/packages b/.meteor/packages
+index 1f4b5b4..f8c5347 100644
+--- a/.meteor/packages
++++ b/.meteor/packages
+@@ -13,3 +13,5 @@ accounts-facebook
+ accounts-twitter
+ angularutils:pagination
+ tmeasday:publish-counts
++email
++angularui:angular-google-maps
+diff --git a/.meteor/versions b/.meteor/versions
+index 6128de0..5a2077d 100644
+--- a/.meteor/versions
++++ b/.meteor/versions
+@@ -6,6 +6,7 @@ accounts-twitter@1.0.4
+ accounts-ui@1.1.5
+ accounts-ui-unstyled@1.1.7
+ angular:angular@1.4.4
++angularui:angular-google-maps@2.1.5
+ angularui:angular-ui-router@0.2.15
+ angularutils:pagination@0.7.0
+ autoupdate@1.2.1
+@@ -60,6 +61,7 @@ sha@1.0.3
+ spacebars@1.0.6
+ spacebars-compiler@1.0.6
+ srp@1.0.3
++stevezhu:lodash@1.0.2
+ templating@1.1.1
+ tmeasday:publish-counts@0.7.0
+ tracker@1.0.7
+diff --git a/client/parties/controllers/partiesList.js b/client/parties/controllers/partiesList.js
+index 4c3255e..03e6f34 100644
+--- a/client/parties/controllers/partiesList.js
++++ b/client/parties/controllers/partiesList.js
+@@ -1,5 +1,5 @@
+-angular.module("socially").controller("PartiesListCtrl", ['$scope', '$meteor', '$rootScope',
+-  function($scope, $meteor, $rootScope){
++angular.module("socially").controller("PartiesListCtrl", ['$scope', '$meteor', '$rootScope', '$state',
++  function($scope, $meteor, $rootScope, $state){
+ 
+     $scope.page = 1;
+     $scope.perPage = 3;
+@@ -35,7 +35,6 @@ angular.module("socially").controller("PartiesListCtrl", ['$scope', '$meteor', '
+           },
+           zoom: 8
+         };
+-
+       });
+     });
+ 
+@@ -43,10 +42,6 @@ angular.module("socially").controller("PartiesListCtrl", ['$scope', '$meteor', '
+       $scope.parties.splice( $scope.parties.indexOf(party), 1 );
+     };
+ 
+-    $scope.removeAll = function(){
+-      $scope.parties.remove();
+-    };
+-
+     $scope.pageChanged = function(newPage) {
+       $scope.page = newPage;
+     };
+@@ -56,24 +51,6 @@ angular.module("socially").controller("PartiesListCtrl", ['$scope', '$meteor', '
+         $scope.sort = {name: parseInt($scope.orderProperty)};
+     });
+ 
+-    $scope.rsvp = function(partyId, rsvp){
+-      $meteor.call('rsvp', partyId, rsvp).then(
+-        function(data){
+-          console.log('success responding', data);
+-        },
+-        function(err){
+-          console.log('failed', err);
+-        }
+-      );
+-    };
+-
+-    $scope.outstandingInvitations = function (party) {
+-      return _.filter($scope.users, function (user) {
+-        return (_.contains(party.invited, user._id) &&
+-        !_.findWhere(party.rsvps, {user: user._id}));
+-      });
+-    };
+-
+     $scope.getUserById = function(userId){
+       return Meteor.users.findOne(userId);
+     };
+@@ -83,13 +60,24 @@ angular.module("socially").controller("PartiesListCtrl", ['$scope', '$meteor', '
+         return;
+       var owner = $scope.getUserById(party.owner);
+       if (!owner)
+-        return 'nobody';
++        return "nobody";
+ 
+       if ($rootScope.currentUser)
+         if ($rootScope.currentUser._id)
+           if (owner._id === $rootScope.currentUser._id)
+-            return 'me';
++            return "me";
+ 
+       return owner;
+     };
++
++    $scope.rsvp = function(partyId, rsvp){
++      $meteor.call('rsvp', partyId, rsvp).then(
++        function(data){
++          console.log('success responding', data);
++        },
++        function(err){
++          console.log('failed', err);
++        }
++      );
++    };
+   }]);
+\ No newline at end of file
+diff --git a/client/parties/controllers/partyDetails.js b/client/parties/controllers/partyDetails.js
+index b6209e5..76a733f 100644
+--- a/client/parties/controllers/partyDetails.js
++++ b/client/parties/controllers/partyDetails.js
+@@ -1,8 +1,14 @@
+ angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$stateParams', '$meteor',
+-  function ($scope, $stateParams, $meteor) {
++  function($scope, $stateParams, $meteor){
++
+     $scope.party = $meteor.object(Parties, $stateParams.partyId);
++
++    var subscriptionHandle;
++    $meteor.subscribe('parties').then(function(handle) {
++      subscriptionHandle = handle;
++    });
++
+     $scope.users = $meteor.collection(Meteor.users, false).subscribe('users');
+-    $scope.$meteorSubscribe('parties');
+ 
+     $scope.invite = function(user){
+       $meteor.call('invite', $scope.party._id, user._id).then(
+@@ -15,6 +21,10 @@ angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$statePara
+       );
+     };
+ 
++    $scope.$on('$destroy', function() {
++      subscriptionHandle.stop();
++    });
++
+     $scope.canInvite = function (){
+       if (!$scope.party)
+         return false;
+@@ -56,4 +66,5 @@ angular.module("socially").controller("PartyDetailsCtrl", ['$scope', '$statePara
+         }
+       }
+     };
+-  }]);
++
++  }]);
+\ No newline at end of file
+diff --git a/client/parties/views/parties-list.ng.html b/client/parties/views/parties-list.ng.html
+index e0e9d47..f87b68d 100644
+--- a/client/parties/views/parties-list.ng.html
++++ b/client/parties/views/parties-list.ng.html
+@@ -1,12 +1,12 @@
+ <form ng-show="$root.currentUser">
++  <h2>Create a new party:</h2>
+   <label>Name</label>
+   <input ng-model="newParty.name">
+   <label>Description</label>
+   <input ng-model="newParty.description">
+   <label>Public</label>
+   <input type="checkbox" ng-model="newParty.public">
+-  <button ng-click="newParty.owner=$root.currentUser._id; parties.push(newParty)">Add</button>
+-  <button ng-click="removeAll()">Remove All</button>
++  <button ng-click="newParty.owner=$root.currentUser._id;parties.push(newParty); newParty='';">Add</button>
+ </form>
+ <div ng-hide="$root.currentUser || $root.loggingIn">
+   Log in to create a party!
+@@ -21,7 +21,7 @@
+     </select>
+   </div>
+   <div class="angular-google-map-container">
+-    <ui-gmap-google-map center="party.location || map.center" zoom="map.zoom">
++    <ui-gmap-google-map center="map.center" zoom="map.zoom">
+       <ui-gmap-markers models="parties" coords="'location'" click="onClicked()"
+                        fit="true" idkey="'_id'" doRebuildAll="true">
+       </ui-gmap-markers>
+@@ -56,11 +56,10 @@
+         {{ getUserById(rsvp.user) | displayName }} - {{ rsvp.rsvp }}
+       </div>
+     </div>
+-
+     <ul ng-if="!party.public">
+       Users who not responded:
+       <li ng-repeat="invitedUser in outstandingInvitations(party)">
+-        {{dstache}} invitedUser | displayName }}
++        {{ invitedUser | displayName }}
+       </li>
+     </ul>
+     <div ng-if="party.public">
+@@ -70,4 +69,4 @@
+     <p><small>Posted by {{ creator(party) | displayName }}</small></p>
+   </li>
+ </ul>
+-<dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
+\ No newline at end of file
++<dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
+diff --git a/client/parties/views/party-details.ng.html b/client/parties/views/party-details.ng.html
+index 7ef1f8d..0018231 100644
+--- a/client/parties/views/party-details.ng.html
++++ b/client/parties/views/party-details.ng.html
+@@ -17,10 +17,8 @@ Here you will see and change the details of the party:
+ </ul>
+ 
+ <div class="angular-google-map-container">
+-  <ui-gmap-google-map center="party.location || map.center"
+-                      events="map.events" zoom="map.zoom">
+-    <ui-gmap-marker coords="party.location" options="map.marker.options"
+-                    events="map.marker.events" idkey="party._id">
++  <ui-gmap-google-map center="map.center" events="map.events" zoom="map.zoom">
++    <ui-gmap-marker coords="party.location" options="map.marker.options" events="map.marker.events" idkey="party._id">
+     </ui-gmap-marker>
+   </ui-gmap-google-map>
+-</div>
+\ No newline at end of file
++</div>
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 01208cac187d1624e86305a9f1acc5bef1ea6127 Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 23:08:21 +0300
+Subject: [PATCH 135/154] Step 17.1: Add main CSS file
+
+---
+ client/styles/main.css | 3 +++
+ 1 file changed, 3 insertions(+)
+ create mode 100644 client/styles/main.css
+
+diff --git a/client/styles/main.css b/client/styles/main.css
+new file mode 100644
+index 0000000..4397047
+--- /dev/null
++++ b/client/styles/main.css
+@@ -0,0 +1,3 @@
++body {
++    background-color: rgba(0,0,0,.04);
++}
+\ No newline at end of file
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 6aa6992bfe632f35a79d31eb087b4b52883241de Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 23:09:03 +0300
+Subject: [PATCH 136/154] Step 17.2: Add navbar and style to the login button
+
+---
+ client/index.html | 16 +++++++++++-----
+ 1 file changed, 11 insertions(+), 5 deletions(-)
+
+diff --git a/client/index.html b/client/index.html
+index d0ba166..00d1dc0 100644
+--- a/client/index.html
++++ b/client/index.html
+@@ -4,11 +4,17 @@
+ <body>
+ 
+ <div>
+-  <meteor-include src="loginButtons"></meteor-include>
+-  <h1>
+-    <a href="/parties">Home</a>
+-  </h1>
+-  <div ui-view></div>
++  <header class="navbar navbar-fixed-top">
++    <div class="container-fluid">
++      <div class="navbar-header">
++        <h1>
++          <a href="/parties">Home</a>
++        </h1>
++      </div>
++      <meteor-include src="loginButtons"></meteor-include>
++    </div>
++  </header>
++  <div ui-view class="container-fluid"></div>
+ </div>
+ 
+ </body>
+\ No newline at end of file
+-- 
+2.3.2 (Apple Git-55)
+
+
+From ec726798d600b9b7f51429f766ebededac457b1e Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 23:09:43 +0300
+Subject: [PATCH 137/154] Step 17.3: Basic usage of LESS
+
+---
+ client/styles/main.css  | 3 ---
+ client/styles/main.less | 8 ++++++++
+ 2 files changed, 8 insertions(+), 3 deletions(-)
+ delete mode 100644 client/styles/main.css
+ create mode 100644 client/styles/main.less
+
+diff --git a/client/styles/main.css b/client/styles/main.css
+deleted file mode 100644
+index 4397047..0000000
+--- a/client/styles/main.css
++++ /dev/null
+@@ -1,3 +0,0 @@
+-body {
+-    background-color: rgba(0,0,0,.04);
+-}
+\ No newline at end of file
+diff --git a/client/styles/main.less b/client/styles/main.less
+new file mode 100644
+index 0000000..6acada4
+--- /dev/null
++++ b/client/styles/main.less
+@@ -0,0 +1,8 @@
++body {
++    background-color: rgba(0,0,0,.2);
++    padding-top: 70px;
++
++    .navbar {
++        background-color: #ffffff;
++    }
++}
+\ No newline at end of file
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 3c4f24202f5c8fd161524f8c0f9fc0bf15872c44 Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 23:10:22 +0300
+Subject: [PATCH 138/154] Change the name of parties css
+
+---
+ client/parties/styles/parties.css         | 4 ----
+ client/parties/styles/parties.import.less | 4 ++++
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+ delete mode 100644 client/parties/styles/parties.css
+ create mode 100644 client/parties/styles/parties.import.less
+
+diff --git a/client/parties/styles/parties.css b/client/parties/styles/parties.css
+deleted file mode 100644
+index 219ff39..0000000
+--- a/client/parties/styles/parties.css
++++ /dev/null
+@@ -1,4 +0,0 @@
+-.angular-google-map-container {
+-    height: 400px;
+-    width: 400px;
+-}
+\ No newline at end of file
+diff --git a/client/parties/styles/parties.import.less b/client/parties/styles/parties.import.less
+new file mode 100644
+index 0000000..219ff39
+--- /dev/null
++++ b/client/parties/styles/parties.import.less
+@@ -0,0 +1,4 @@
++.angular-google-map-container {
++    height: 400px;
++    width: 400px;
++}
+\ No newline at end of file
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 9105b34bd47773f9c0e4392a8b8eb62e2607aefe Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 23:10:50 +0300
+Subject: [PATCH 139/154] Step 17.4: Add import to parties LESS file
+
+---
+ client/styles/main.less | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/client/styles/main.less b/client/styles/main.less
+index 6acada4..87c5240 100644
+--- a/client/styles/main.less
++++ b/client/styles/main.less
+@@ -5,4 +5,7 @@ body {
+     .navbar {
+         background-color: #ffffff;
+     }
+-}
+\ No newline at end of file
++}
++
++
++@import "../parties/styles/parties.import.less";
+\ No newline at end of file
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 208b8159514251535c84ad334e0ea89fac481d56 Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 17 Aug 2015 23:16:28 +0300
+Subject: [PATCH 140/154] Update packages to step 17
+
+---
+ .meteor/packages | 2 ++
+ .meteor/versions | 3 +++
+ 2 files changed, 5 insertions(+)
+
+diff --git a/.meteor/packages b/.meteor/packages
+index f8c5347..a734f07 100644
+--- a/.meteor/packages
++++ b/.meteor/packages
+@@ -15,3 +15,5 @@ angularutils:pagination
+ tmeasday:publish-counts
+ email
+ angularui:angular-google-maps
++less
++angular:angular-material
+diff --git a/.meteor/versions b/.meteor/versions
+index 5a2077d..479ffc4 100644
+--- a/.meteor/versions
++++ b/.meteor/versions
+@@ -6,6 +6,9 @@ accounts-twitter@1.0.4
+ accounts-ui@1.1.5
+ accounts-ui-unstyled@1.1.7
+ angular:angular@1.4.4
++angular:angular-animate@1.4.4
++angular:angular-aria@1.4.4
++angular:angular-material@0.10.1
+ angularui:angular-google-maps@2.1.5
+ angularui:angular-ui-router@0.2.15
+ angularutils:pagination@0.7.0
+-- 
+2.3.2 (Apple Git-55)
+
+
+From c9a37b3b6c4b3a7ec6b20c6edf8abc0d2980216d Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Tue, 18 Aug 2015 16:38:35 +0300
+Subject: [PATCH 141/154] Step 18.1: Add the ngMaterial dependency
+
+---
+ client/lib/app.js | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/client/lib/app.js b/client/lib/app.js
+index 980e7c3..d4e8b68 100644
+--- a/client/lib/app.js
++++ b/client/lib/app.js
+@@ -2,7 +2,8 @@ angular.module('socially',[
+   'angular-meteor',
+   'ui.router',
+   'angularUtils.directives.dirPagination',
+-  'uiGmapgoogle-maps'
++  'uiGmapgoogle-maps',
++  'ngMaterial'
+ ]);
+ function onReady() {
+   angular.bootstrap(document, ['socially']);
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 6dbb2f9474870c940388e8f75e900f69f5a110ac Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Tue, 18 Aug 2015 16:42:59 +0300
+Subject: [PATCH 142/154] Step 18.2: Update the index.html to use
+ angular-material
+
+---
+ client/index.html | 22 ++++++++++------------
+ 1 file changed, 10 insertions(+), 12 deletions(-)
+
+diff --git a/client/index.html b/client/index.html
+index 00d1dc0..62b0921 100644
+--- a/client/index.html
++++ b/client/index.html
+@@ -1,20 +1,18 @@
+ <head>
++  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <base href="/">
+ </head>
+-<body>
+ 
+-<div>
+-  <header class="navbar navbar-fixed-top">
+-    <div class="container-fluid">
+-      <div class="navbar-header">
+-        <h1>
+-          <a href="/parties">Home</a>
+-        </h1>
+-      </div>
++<body layout="column">
++  <md-toolbar md-scroll-shrink layout="row" layout-align="start center" layout-padding>
++    <div>
++      <a href="/parties">Parties</a>
++    </div>
++    <span flex></span>
++
++    <div class="navbar-right navbar-text">
+       <meteor-include src="loginButtons"></meteor-include>
+     </div>
+-  </header>
++  </md-toolbar>
+   <div ui-view class="container-fluid"></div>
+-</div>
+-
+ </body>
+\ No newline at end of file
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 512622984525097c773c9df80e2da4c22f605186 Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Tue, 18 Aug 2015 16:44:19 +0300
+Subject: [PATCH 143/154] Step 18.3: Update parties list to use
+ angular-material
+
+---
+ client/parties/views/parties-list.ng.html | 165 ++++++++++++++++++------------
+ 1 file changed, 101 insertions(+), 64 deletions(-)
+
+diff --git a/client/parties/views/parties-list.ng.html b/client/parties/views/parties-list.ng.html
+index f87b68d..0b2cc34 100644
+--- a/client/parties/views/parties-list.ng.html
++++ b/client/parties/views/parties-list.ng.html
+@@ -1,72 +1,109 @@
+-<form ng-show="$root.currentUser">
+-  <h2>Create a new party:</h2>
+-  <label>Name</label>
+-  <input ng-model="newParty.name">
+-  <label>Description</label>
+-  <input ng-model="newParty.description">
+-  <label>Public</label>
+-  <input type="checkbox" ng-model="newParty.public">
+-  <button ng-click="newParty.owner=$root.currentUser._id;parties.push(newParty); newParty='';">Add</button>
+-</form>
+-<div ng-hide="$root.currentUser || $root.loggingIn">
+-  Log in to create a party!
+-</div>
+-<ul>
+-  <h1>Parties:</h1>
+-  <div>
+-    <input type="search" ng-model="search" placeholder="Search">
+-    <select ng-model="orderProperty">
+-      <option value="1">Ascending</option>
+-      <option value="-1">Descending</option>
+-    </select>
++<md-content layout-padding>
++  <div layout="column">
++    <md-whiteframe class="md-whiteframe-z1" layout
++                   layout-align="center center"
++                   ng-hide="$root.currentUser || $root.loggingIn">
++      <span>Log in to create a party!</span>
++    </md-whiteframe>
++    <form ng-show="$root.currentUser">
++      <h2 class="md-headline">Create a new party:</h2>
++      <md-input-container>
++        <label>Name</label>
++        <input ng-model="newParty.name" id="nameInput"
++               type="text" aria-label="Name">
++      </md-input-container>
++      <md-input-container>
++        <label>Description</label>
++        <input ng-model="newParty.description" id="description"
++               type="text" aria-label="Description">
++      </md-input-container>
++      <md-checkbox ng-model="newParty.public"
++                   id="public" aria-label="Public">
++        Public
++      </md-checkbox>
++      <md-button ng-click="newParty.owner=$root.currentUser._id;parties.push(newParty); newParty='';">
++        Add</md-button>
++    </form>
+   </div>
+-  <div class="angular-google-map-container">
+-    <ui-gmap-google-map center="map.center" zoom="map.zoom">
+-      <ui-gmap-markers models="parties" coords="'location'" click="onClicked()"
+-                       fit="true" idkey="'_id'" doRebuildAll="true">
+-      </ui-gmap-markers>
+-    </ui-gmap-google-map>
+-  </div>
+-  <li dir-paginate="party in parties | itemsPerPage: perPage" total-items="partiesCount.count">
+-    <a href="/parties/{{party._id}}">{{party.name}}</a>
+-    <p>{{party.description}}</p>
+-    <button ng-click="remove(party)" ng-show="$root.currentUser && $root.currentUser._id == party.owner">X</button>
+ 
+-    <div ng-show="$root.currentUser">
+-      <input type="button" value="I'm going!" ng-click="rsvp(party._id, 'yes')">
+-      <input type="button" value="Maybe" ng-click="rsvp(party._id, 'maybe')">
+-      <input type="button" value="No" ng-click="rsvp(party._id, 'no')">
+-    </div>
+-    <div ng-hide="$root.currentUser">
+-      <i>Sign in to RSVP for this party.</i>
++  <div layout="column">
++    <h2 class="md-headline">Parties:</h2>
++    <form layout="row">
++      <md-input-container md-no-float>
++        <md-icon md-svg-icon="action:ic_search_24px"></md-icon>
++        <input type="text" ng-model="search" id="search"
++               placeholder="Search" aria-label="Search">
++      </md-input-container>
++      <span flex></span>
++      <md-input-container>
++        <md-select ng-model="orderProperty" placeholder="Sort Order">
++          <md-option value="1">Ascending</md-option>
++          <md-option value="-1">Descending</md-option>
++        </md-select>
++      </md-input-container>
++    </form>
++    <div layout="row">
++      <div flex></div>
++      <div flex="60" class="angular-google-map-container">
++        <ui-gmap-google-map center="map.center" zoom="map.zoom">
++          <ui-gmap-markers models="parties" coords="'location'" click="onClicked()"
++                           fit="true" idkey="'_id'" doRebuildAll="true">
++          </ui-gmap-markers>
++        </ui-gmap-google-map>
++      </div>
++      <div flex></div>
+     </div>
++  </div>
++  <div layout="column" layout-padding>
++    <div dir-paginate="party in parties | itemsPerPage: perPage"
++         total-items="partiesCount.count" layout="column">
++      <div layout="row">
++        <div flex="80">
++          <h2><a href="/parties/{{party._id}}">{{party.name}}</a></h2>
++          <p>{{party.description}}</p>
++        </div>
++        <span flex></span>
++        <md-button ng-click="remove(party)"
++                   ng-show="$root.currentUser && $root.currentUser._id == party.owner">
++          <md-icon md-svg-icon="content:ic_clear_24px"></md-icon>
++        </md-button>
++      </div>
+ 
+-    <div>
+-      Who is coming:
+-      Yes - {{ (party.rsvps | filter:{rsvp:'yes'}).length }}
+-      Maybe - {{ (party.rsvps | filter:{rsvp:'maybe'}).length }}
+-      No - {{ (party.rsvps | filter:{rsvp:'no'}).length }}
+-      <div ng-repeat="rsvp in party.rsvps | filter:{rsvp:'yes'}">
+-        {{ getUserById(rsvp.user) | displayName }} - {{ rsvp.rsvp }}
++      <div ng-show="$root.currentUser" layout="row">
++        <md-button ng-click="rsvp(party._id, 'yes')">I'm going!</md-button>
++        <md-button ng-click="rsvp(party._id, 'maybe')">Maybe</md-button>
++        <md-button ng-click="rsvp(party._id, 'no')">No</md-button>
+       </div>
+-      <div ng-repeat="rsvp in party.rsvps | filter:{rsvp:'maybe'}">
+-        {{ getUserById(rsvp.user) | displayName }} - {{ rsvp.rsvp }}
++      <div ng-if="party.public">
++        Everyone is invited
+       </div>
+-      <div ng-repeat="rsvp in party.rsvps | filter:{rsvp:'no'}">
+-        {{ getUserById(rsvp.user) | displayName }} - {{ rsvp.rsvp }}
++      <div ng-hide="$root.currentUser">
++        <i>Sign in to RSVP for this party.</i>
+       </div>
+-    </div>
+-    <ul ng-if="!party.public">
+-      Users who not responded:
+-      <li ng-repeat="invitedUser in outstandingInvitations(party)">
+-        {{ invitedUser | displayName }}
+-      </li>
+-    </ul>
+-    <div ng-if="party.public">
+-      Everyone is invited
+-    </div>
+ 
+-    <p><small>Posted by {{ creator(party) | displayName }}</small></p>
+-  </li>
+-</ul>
+-<dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
++      <div>
++        <strong>Who is coming:</strong>
++        Yes - {{ (party.rsvps | filter:{rsvp:'yes'}).length }}
++        Maybe - {{ (party.rsvps | filter:{rsvp:'maybe'}).length }}
++        No - {{ (party.rsvps | filter:{rsvp:'no'}).length }}
++        <div ng-repeat="rsvp in party.rsvps | filter:{rsvp:'yes'}">
++          {{ getUserById(rsvp.user) | displayName }} - {{ rsvp.rsvp }}
++        </div>
++        <div ng-repeat="rsvp in party.rsvps | filter:{rsvp:'maybe'}">
++          {{ getUserById(rsvp.user) | displayName }} - {{ rsvp.rsvp }}
++        </div>
++        <div ng-repeat="rsvp in party.rsvps | filter:{rsvp:'no'}">
++          {{ getUserById(rsvp.user) | displayName }} - {{ rsvp.rsvp }}
++        </div>
++      </div>
++      <md-list ng-if="!party.public">
++        Users who haven't responded:
++        <md-list-item ng-repeat="invitedUser in outstandingInvitations(party)">
++          {{ invitedUser | displayName }}
++        </md-list-item>
++      </md-list>
++      <p><small>Posted by {{ creator(party) | displayName }}</small></p>
++    </div>
++  </div>
++  <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
++</md-content>
+\ No newline at end of file
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 32b4cbe7b9c342455c0c352af19b5deca97e158f Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Tue, 18 Aug 2015 16:46:41 +0300
+Subject: [PATCH 144/154] Update packages for step 18
+
+---
+ .meteor/packages | 1 +
+ .meteor/versions | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/.meteor/packages b/.meteor/packages
+index a734f07..a7ed332 100644
+--- a/.meteor/packages
++++ b/.meteor/packages
+@@ -17,3 +17,4 @@ email
+ angularui:angular-google-maps
+ less
+ angular:angular-material
++planettraining:material-design-icons
+diff --git a/.meteor/versions b/.meteor/versions
+index 479ffc4..d10d60b 100644
+--- a/.meteor/versions
++++ b/.meteor/versions
+@@ -52,6 +52,7 @@ oauth1@1.1.4
+ oauth2@1.1.3
+ observe-sequence@1.0.6
+ ordered-dict@1.0.3
++planettraining:material-design-icons@2.0.0
+ random@1.0.3
+ reactive-dict@1.1.0
+ reactive-var@1.0.5
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 2e457cc6cf7eea424a53f24b3808fabc6609956c Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Tue, 18 Aug 2015 16:48:05 +0300
+Subject: [PATCH 145/154] Step 18.4: Add icons definitions to the module
+
+---
+ client/lib/app.js | 14 +++++++++++++-
+ 1 file changed, 13 insertions(+), 1 deletion(-)
+
+diff --git a/client/lib/app.js b/client/lib/app.js
+index d4e8b68..4c43c2d 100644
+--- a/client/lib/app.js
++++ b/client/lib/app.js
+@@ -1,10 +1,22 @@
+-angular.module('socially',[
++angular.module('socially', [
+   'angular-meteor',
+   'ui.router',
+   'angularUtils.directives.dirPagination',
+   'uiGmapgoogle-maps',
+   'ngMaterial'
+ ]);
++
++angular.module('socially').config(['$mdIconProvider', function ($mdIconProvider) {
++  $mdIconProvider
++    .iconSet("social", "/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-social.svg")
++    .iconSet("action", "/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-action.svg")
++    .iconSet("communication", "/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-communication.svg")
++    .iconSet("content", "/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-content.svg")
++    .iconSet("toggle", "/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-toggle.svg")
++    .iconSet("navigation", "/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-navigation.svg")
++    .iconSet("image", "/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/svg-sprite-image.svg");
++}]);
++
+ function onReady() {
+   angular.bootstrap(document, ['socially']);
+ }
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 0ecde0a720a79bc9c41228a951facf81de009a5e Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Tue, 18 Aug 2015 16:48:40 +0300
+Subject: [PATCH 146/154] Step 18.5: Update party details view to use
+ angular-material
+
+---
+ client/parties/views/party-details.ng.html | 67 ++++++++++++++++++++----------
+ 1 file changed, 46 insertions(+), 21 deletions(-)
+
+diff --git a/client/parties/views/party-details.ng.html b/client/parties/views/party-details.ng.html
+index 0018231..fa63e46 100644
+--- a/client/parties/views/party-details.ng.html
++++ b/client/parties/views/party-details.ng.html
+@@ -1,24 +1,49 @@
+-Here you will see and change the details of the party:
++<legend>
++  Here you will see and change the details of the party:
++</legend>
++<form layout="column">
++  <md-input-container>
++    <label>Party Name</label>
++    <input ng-model="party.name"
++           ng-disabled="party.owner != $root.currentUser._id"
++           type="text" aria-label="Name">
++  </md-input-container>
++  <md-input-container>
++    <label>Party Description</label>
++    <input ng-model="party.description"
++           ng-disabled="party.owner != $root.currentUser._id"
++           type="text" aria-label="Description">
++  </md-input-container>
++  <md-checkbox ng-model="party.public"
++               ng-disabled="party.owner != $root.currentUser._id"
++               aria-label="Public">
++    Is public
++  </md-checkbox>
+ 
+-<input ng-model="party.name" ng-disabled="party.owner != $root.currentUser._id">
+-<input ng-model="party.description" ng-disabled="party.owner != $root.currentUser._id">
+-<label>Is public</label>
+-<input type="checkbox" ng-model="party.public" ng-disabled="party.owner != $root.currentUser._id">
++  <div layout="row" layout-align="left">
++    <md-button ng-click="save()">Save</md-button>
++    <md-button ng-click="reset()">Reset form</md-button>
++    <md-button ng-href="/parties">Cancel</md-button>
++  </div>
+ 
+-<ul ng-show="canInvite()">
+-  Users to invite:
+-  <li ng-repeat="user in users | uninvited:party">
+-    <div>{{ user | displayName }}</div>
+-    <button ng-click="invite(user)">Invite</button>
+-  </li>
+-  <li ng-if="(users | uninvited:party).length <= 0">
+-    Everyone are already invited.
+-  </li>
+-</ul>
++  <md-list ng-show="canInvite()">
++    <md-subheader class="md-no-sticky">Users to invite:</md-subheader>
++    <md-list-item ng-repeat="user in users | uninvited:party">
++      <div>{{ user | displayName }}</div>
++      <md-button ng-click="invite(user)">Invite</md-button>
++    </md-list-item>
++    <md-list-item ng-if="(users | uninvited:party).length <= 0">
++      Everyone are already invited.
++    </md-list-item>
++  </md-list>
+ 
+-<div class="angular-google-map-container">
+-  <ui-gmap-google-map center="map.center" events="map.events" zoom="map.zoom">
+-    <ui-gmap-marker coords="party.location" options="map.marker.options" events="map.marker.events" idkey="party._id">
+-    </ui-gmap-marker>
+-  </ui-gmap-google-map>
+-</div>
++  <div class="angular-google-map-container">
++    <ui-gmap-google-map center="map.center" events="map.events" zoom="map.zoom">
++      <ui-gmap-marker coords="party.location"
++                      options="map.marker.options"
++                      events="map.marker.events"
++                      idkey="party._id">
++      </ui-gmap-marker>
++    </ui-gmap-google-map>
++  </div>
++</form>
+\ No newline at end of file
+-- 
+2.3.2 (Apple Git-55)
+
+
+From f7815df4e3c36a8ee4949d4f54eef3420b48f759 Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Tue, 18 Aug 2015 16:55:44 +0300
+Subject: [PATCH 147/154] Step 18.6: Custom auth buttons
+
+---
+ client/index.html | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/client/index.html b/client/index.html
+index 62b0921..51398ae 100644
+--- a/client/index.html
++++ b/client/index.html
+@@ -10,9 +10,10 @@
+     </div>
+     <span flex></span>
+ 
+-    <div class="navbar-right navbar-text">
+-      <meteor-include src="loginButtons"></meteor-include>
+-    </div>
++    <md-button ng-href="/login" ng-hide="$root.currentUser">Login</md-button>
++    <md-button ng-href="/register" ng-hide="$root.currentUser">Sign up</md-button>
++    <div ng-show="$root.currentUser">{{ $root.currentUser }}</div>
++    <md-button ng-href="/logout" ng-show="$root.currentUser">Logout</md-button>
+   </md-toolbar>
+   <div ui-view class="container-fluid"></div>
+ </body>
+\ No newline at end of file
+-- 
+2.3.2 (Apple Git-55)
+
+
+From ed4c68b89abee82f5f162dee56043bb0a43a0f74 Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Tue, 18 Aug 2015 16:57:44 +0300
+Subject: [PATCH 148/154] Step 18.7: Add custom auth routes
+
+---
+ client/routes.js | 32 +++++++++++++++++++++++++++++++-
+ 1 file changed, 31 insertions(+), 1 deletion(-)
+
+diff --git a/client/routes.js b/client/routes.js
+index 4626576..19da1be 100644
+--- a/client/routes.js
++++ b/client/routes.js
+@@ -28,7 +28,37 @@ angular.module("socially").config(['$urlRouterProvider', '$stateProvider', '$loc
+             return $meteor.requireUser();
+           }]
+         }
+-      });
++      })
++      .state('login', {
++        url: '/login',
++        templateUrl: 'client/users/views/login.ng.html',
++        controller: 'LoginCtrl',
++        controllerAs: 'lc'
++      })
++      .state('register',{
++        url: '/register',
++        templateUrl: 'client/users/views/register.ng.html',
++        controller: 'RegisterCtrl',
++        controllerAs: 'rc'
++      })
++      .state('resetpw', {
++        url: '/resetpw',
++        templateUrl: 'client/users/views/reset-password.ng.html',
++        controller: 'ResetCtrl',
++        controllerAs: 'rpc'
++      })
++      .state('logout', {
++        url: '/logout',
++        resolve: {
++          "logout": ['$meteor', '$state', function($meteor, $state) {
++            return $meteor.logout().then(function(){
++              $state.go('parties');
++            }, function(err){
++              console.log('logout error - ', err);
++            });
++          }]
++        }
++      })
+ 
+     $urlRouterProvider.otherwise("/parties");
+   }]);
+\ No newline at end of file
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 1f88f78358df3594ebbaeb56bc3c2999cfb159ad Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Tue, 18 Aug 2015 16:59:00 +0300
+Subject: [PATCH 149/154] Step 18.8: Create login controller
+
+---
+ client/users/controllers/login.js | 23 +++++++++++++++++++++++
+ 1 file changed, 23 insertions(+)
+ create mode 100644 client/users/controllers/login.js
+
+diff --git a/client/users/controllers/login.js b/client/users/controllers/login.js
+new file mode 100644
+index 0000000..d1e4664
+--- /dev/null
++++ b/client/users/controllers/login.js
+@@ -0,0 +1,23 @@
++angular.module("socially").controller("LoginCtrl", ['$meteor', '$state',
++  function ($meteor, $state) {
++    var vm = this;
++
++    vm.credentials = {
++      email: '',
++      password: ''
++    };
++
++    vm.error = '';
++
++    vm.login = function () {
++      $meteor.loginWithPassword(vm.credentials.email, vm.credentials.password).then(
++        function () {
++          $state.go('parties');
++        },
++        function (err) {
++          vm.error = 'Login error - ' + err;
++        }
++      );
++    };
++  }
++]);
+\ No newline at end of file
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 69e4eaf04e492426184a4cfb892195696f21088d Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Tue, 18 Aug 2015 17:00:26 +0300
+Subject: [PATCH 150/154] Step 18.9: Create login view
+
+---
+ client/users/views/login.ng.html | 33 +++++++++++++++++++++++++++++++++
+ 1 file changed, 33 insertions(+)
+ create mode 100644 client/users/views/login.ng.html
+
+diff --git a/client/users/views/login.ng.html b/client/users/views/login.ng.html
+new file mode 100644
+index 0000000..2ad8a07
+--- /dev/null
++++ b/client/users/views/login.ng.html
+@@ -0,0 +1,33 @@
++<md-content layout="row">
++  <span flex></span>
++  <md-whiteframe layout="column" flex="50">
++    <div layout="row" layout-align="space-around center">
++      <div>Login with:</div>
++      <md-button>Twitter</md-button>
++      <md-button>Facebook</md-button>
++    </div>
++    <div ng-show="lc.error" class="md-warn">
++      <small>{{ lc.error }}</small>
++    </div>
++    <form layout="column">
++      <md-input-container>
++        <md-icon md-svg-icon="content:ic_mail_24px"></md-icon>
++        <input type="text" ng-model="lc.credentials.email"
++               placeholder="email" aria-label="email"/>
++      </md-input-container>
++      <md-input-container>
++        <md-icon md-svg-icon="action:ic_lock_open_24px"></md-icon>
++        <input type="password" ng-model="lc.credentials.password"
++               placeholder="password" aria-label="password"/>
++      </md-input-container>
++      <md-button class="md-raised md-primary" ng-click="lc.login()"
++                 aria-label="login">Sign In
++      </md-button>
++    </form>
++    <div layout="row" layout-align="space-around center">
++      <a href="/resetpw">Forgot password?</a>
++      <a href="/register">Create an account</a>
++    </div>
++  </md-whiteframe>
++  <span flex></span>
++</md-content>
+\ No newline at end of file
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 9f5c7915be23e47a448c0501215d2ef651af0203 Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Tue, 18 Aug 2015 17:01:05 +0300
+Subject: [PATCH 151/154] Step 18.10: Create register controller
+
+---
+ client/users/controllers/register.js | 23 +++++++++++++++++++++++
+ 1 file changed, 23 insertions(+)
+ create mode 100644 client/users/controllers/register.js
+
+diff --git a/client/users/controllers/register.js b/client/users/controllers/register.js
+new file mode 100644
+index 0000000..f21b5f5
+--- /dev/null
++++ b/client/users/controllers/register.js
+@@ -0,0 +1,23 @@
++angular.module("socially").controller("RegisterCtrl", ['$meteor', '$state',
++  function ($meteor, $state) {
++    var vm = this;
++
++    vm.credentials = {
++      email: '',
++      password: ''
++    };
++
++    vm.error = '';
++
++    vm.register = function () {
++      $meteor.createUser(vm.credentials).then(
++        function () {
++          $state.go('parties');
++        },
++        function (err) {
++          vm.error = 'Registration error - ' + err;
++        }
++      );
++    };
++  }
++]);
+\ No newline at end of file
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 7fc6c3446fba119b520e8f790d6d473312ec1f50 Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Tue, 18 Aug 2015 17:01:35 +0300
+Subject: [PATCH 152/154] Step 18.11: Create register view
+
+---
+ client/users/views/register.ng.html | 32 ++++++++++++++++++++++++++++++++
+ 1 file changed, 32 insertions(+)
+ create mode 100644 client/users/views/register.ng.html
+
+diff --git a/client/users/views/register.ng.html b/client/users/views/register.ng.html
+new file mode 100644
+index 0000000..c36f39d
+--- /dev/null
++++ b/client/users/views/register.ng.html
+@@ -0,0 +1,32 @@
++<md-content layout="row">
++  <span flex></span>
++  <md-whiteframe layout="column" flex="50">
++    <div layout="row" layout-align="space-around center">
++      <div>Login with:</div>
++      <md-button>Twitter</md-button>
++      <md-button>Facebook</md-button>
++    </div>
++    <div ng-show="rc.error" class="md-warn">
++      <small>{{ rc.error }}</small>
++    </div>
++    <form layout="column">
++      <md-input-container>
++        <md-icon md-svg-icon="content:ic_mail_24px"></md-icon>
++        <input type="text" ng-model="rc.credentials.email"
++               placeholder="email" aria-label="email"/>
++      </md-input-container>
++      <md-input-container>
++        <md-icon md-svg-icon="action:ic_lock_open_24px"></md-icon>
++        <input type="password" ng-model="rc.credentials.password"
++               placeholder="password" aria-label="password"/>
++      </md-input-container>
++      <md-button class="md-raised md-primary"
++                 ng-click="rc.register()">Create Account
++      </md-button>
++    </form>
++    <div layout="row" layout-align="end center">
++      <a href="/login">Login</a>
++    </div>
++  </md-whiteframe>
++  <span flex></span>
++</md-content>
+\ No newline at end of file
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 0c14c9f60a1ddef13d189b7e7cd74929d5ed558c Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Tue, 18 Aug 2015 17:02:02 +0300
+Subject: [PATCH 153/154] Step 18.12: Create reset controller
+
+---
+ client/users/controllers/reset.js | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+ create mode 100644 client/users/controllers/reset.js
+
+diff --git a/client/users/controllers/reset.js b/client/users/controllers/reset.js
+new file mode 100644
+index 0000000..2c40b6b
+--- /dev/null
++++ b/client/users/controllers/reset.js
+@@ -0,0 +1,22 @@
++angular.module("socially").controller("ResetCtrl", ['$meteor', '$state',
++  function ($meteor, $state) {
++    var vm = this;
++
++    vm.credentials = {
++      email: ''
++    };
++
++    vm.error = '';
++
++    vm.reset = function () {
++      $meteor.forgotPassword(vm.credentials.email).then(
++        function () {
++          $state.go('parties');
++        },
++        function (err) {
++          vm.error = 'Error sending forgot password email - ' + err;
++        }
++      );
++    };
++  }
++]);
+\ No newline at end of file
+-- 
+2.3.2 (Apple Git-55)
+
+
+From a259170dc67a96ca3d3a3fcb7dfb53a447e4c4df Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Tue, 18 Aug 2015 17:02:39 +0300
+Subject: [PATCH 154/154] Step 18.13: Create reset view
+
+---
+ client/users/views/reset-password.ng.html | 27 +++++++++++++++++++++++++++
+ 1 file changed, 27 insertions(+)
+ create mode 100644 client/users/views/reset-password.ng.html
+
+diff --git a/client/users/views/reset-password.ng.html b/client/users/views/reset-password.ng.html
+new file mode 100644
+index 0000000..f365b52
+--- /dev/null
++++ b/client/users/views/reset-password.ng.html
+@@ -0,0 +1,27 @@
++<md-content layout="row">
++  <span flex></span>
++  <md-whiteframe layout="column" flex="50">
++    <div layout="row" layout-align="space-around center">
++      <div>Login with:</div>
++      <md-button>Twitter</md-button>
++      <md-button>Facebook</md-button>
++    </div>
++    <div ng-show="rpc.error" class="md-warn">
++      <small>{{ rpc.error }}</small>
++    </div>
++    <form layout="column">
++      <md-input-container>
++        <md-icon md-svg-icon="content:ic_mail_24px"></md-icon>
++        <input type="text" ng-model="rpc.credentials.email"
++               placeholder="email" aria-label="email"/>
++      </md-input-container>
++      <md-button class="md-raised md-primary"
++                 ng-click="rpc.reset()" aria-label="login">Reset password
++      </md-button>
++    </form>
++    <div layout="row" layout-align="end center">
++      <a href="/login">Login</a>
++    </div>
++  </md-whiteframe>
++  <span flex></span>
++</md-content>
 \ No newline at end of file
 -- 
 2.3.2 (Apple Git-55)
