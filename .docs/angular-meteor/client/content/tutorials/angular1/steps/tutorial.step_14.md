@@ -1,4 +1,5 @@
 {{#template name="tutorial.step_14.html"}}
+{{> downloadPreviousStep stepName="step_13"}}
 
 In this step we will learn how to use Meteor methods and how angular-meteor enhances them with the support of promises.
 
