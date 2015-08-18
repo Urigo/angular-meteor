@@ -1,6 +1,5 @@
-<template name="tutorial.step_17.html">
-  {{#markdown}}
-  {{> downloadPreviousStep stepName="step_16"}}
+{{#template name="tutorial.step_17.html"}}
+{{> downloadPreviousStep stepName="step_16"}}
 
 Meteor has a great support for CSS.
 
@@ -20,9 +19,7 @@ Create a new folder called 'styles' under the 'client' folder and add a new file
 
 Then change the background color of our app:
 
-    body {
-      background-color: rgba(0,0,0,.04);
-    }
+{{> DiffBox tutorialName="angular-meteor" step="17.1"}}
 
 Run the app and see your background color changed.
 
@@ -43,23 +40,7 @@ Now let's start organizing by putting the Home link and the login buttons inside
 
 Inside `index.html` surround the H1 and the loginButton with a header like that:
 
-    <body>
-
-    <div>
-      <header class="navbar navbar-fixed-top">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <h1>
-              <a href="/parties">Home</a>
-            </h1>
-          </div>
-          <meteor-include src="loginButtons"></meteor-include>
-        </div>
-      </header>
-      <div ui-view class="container-fluid"></div>
-    </div>
-
-    </body>
+{{> DiffBox tutorialName="angular-meteor" step="17.2"}}
 
 Converting to Bootstrap doesn't stop here. By applying bootstrap styles to various other parts of our Socially app, our website will look better on different screens. Have a look at [Code Diff](https://github.com/Urigo/meteor-angular-socially/compare/step_16...step_17) to see how we changed the structure of the main files.
 
@@ -75,14 +56,8 @@ Test that everything still works as before.
 
 Now go to `main.less` and add a different background color to the navbar:
 
-    body {
-      background-color: rgba(0,0,0,.2);
-      padding-top: 70px;
+{{> DiffBox tutorialName="angular-meteor" step="17.3"}}
 
-      .navbar {
-        background-color: #ffffff;
-      }
-    }
 
 Notice that we nested the .navbar inside the body. This is part of the [LESS syntax for nested rules](http://lesscss.org/features/#features-overview-feature-nested-rules).
 
@@ -96,7 +71,7 @@ Inside that folder create a new file named 'partiesList.less'.
 
 The first thing we need to do in a new LESS file is to import it from the main file:
 
-    @import "../parties/styles/parties.import.less";
+{{> DiffBox tutorialName="angular-meteor" step="17.4"}}
 
 Now we can start writing specific LESS code inside that file.
 
@@ -105,9 +80,6 @@ For the rest of the styling changes please take a look at the diff between the s
 
 # Summary
 
-Ee learned how to use CSS, LESS and Bootstrap in Meteor.
+We learned how to use CSS, LESS and Bootstrap in Meteor.
 
-  {{/markdown}}
-</template>
-
-
+{{/template}}

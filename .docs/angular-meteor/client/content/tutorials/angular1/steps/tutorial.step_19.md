@@ -1,6 +1,5 @@
-<template name="tutorial.step_19.html">
-  {{#markdown}}
-  {{> downloadPreviousStep stepName="step_18"}}
+{{#template name="tutorial.step_19.html"}}
+{{> downloadPreviousStep stepName="step_18"}}
 
 This part of the tutorial will cover the usage of third-party libraries with angular-meteor.
 
@@ -215,7 +214,4 @@ Also, you can use a automatic publisher that helps us to publish packages real q
 
 **We prefer that the first solution will be your choice in order to enrich the Meteor and angular-meteor community and help other developers to use third-party packages.**
 
-  {{/markdown}}
-</template>
-
-
+{{/template}}

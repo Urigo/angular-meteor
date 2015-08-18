@@ -1,6 +1,5 @@
-<template name="tutorial.step_09.html">
-  {{#markdown}}
-  {{> downloadPreviousStep stepName="step_08"}}
+{{#template name="tutorial.step_09.html"}}
+{{> downloadPreviousStep stepName="step_08"}}
 
 Right now our app has no privacy, every user can see all the parties on the screen.
 
@@ -28,19 +27,7 @@ Let's create a new file named `parties.js` inside the server folder.
 
 Inside the file insert this code:
 
-    Meteor.publish("parties", function () {
-      return Parties.find({
-        $or:[
-          {$and:[
-            {"public": true},
-            {"public": {$exists: true}}
-          ]},
-          {$and:[
-            {owner: this.userId},
-            {owner: {$exists: true}}
-          ]}
-        ]});
-    });
+{{> DiffBox tutorialName="angular-meteor" step="9.1"}}
 
 Let's see what's happening here:
 
@@ -62,7 +49,7 @@ here just for syntactic sugar doesn't return a promise.
 
 Right now we don't need the promise, so let's use the second way:
 
-    $scope.parties = $meteor.collection(Parties).subscribe('parties');
+{{> DiffBox tutorialName="angular-meteor" step="9.2"}}
 
 It is the same as:
 
@@ -102,15 +89,13 @@ So now let's add the public flag to the parties and see how it affects the parti
 
 Let's add a checkbox to the new party form in `parties-list.ng.html`:
 
-    <label>Public</label>
-    <input type="checkbox" ng-model="newParty.public">
+{{> DiffBox tutorialName="angular-meteor" step="9.3"}}
 
 Notice how easy it is to bind a checkbox to a model with AngularJS!
 
 Let's add the same to the `party-details.ng.html` page:
 
-    <label>Is public</label>
-    <input type="checkbox" ng-model="party.public">
+{{> DiffBox tutorialName="angular-meteor" step="9.4"}}
 
 Now let's run the app.
 
@@ -131,9 +116,7 @@ So let's start with defining our publish function.
 
 Create a new file under the `server` folder named `users.js` and place the following code in:
 
-    Meteor.publish("users", function () {
-      return Meteor.users.find({}, {fields: {emails: 1, profile: 1}});
-    });
+{{> DiffBox tutorialName="angular-meteor" step="9.5"}}
 
 So here again we use the Mongo API to return all the users (find with an empty object) but we select to return only the emails and profile fields.
 
@@ -145,7 +128,7 @@ The emails field holds all the user's email addresses, and the profile might hol
 Now let's subscribe to that publish Method.  In the `client->parties->controllers->partyDetails.js` file add the following line inside the controller.
 If you just add to the end you will get an uncaught reference $scope not defined:
 
-    $scope.users = $meteor.collection(Meteor.users, false).subscribe('users');
+{{> DiffBox tutorialName="angular-meteor" step="9.6"}}
 
 * We bind to the Meteor.users collection
 * Binding the result to $scope.users
@@ -155,19 +138,13 @@ If you just add to the end you will get an uncaught reference $scope not defined
 Also, let's add a subscription to the party in this controller as well.
 This is because if we will get to this controller directly, the subscription in the other controller won't be called and we will have no data at all.
 
-    $scope.party = $meteor.object(Parties, $stateParams.partyId).subscribe('parties');
-
+{{> DiffBox tutorialName="angular-meteor" step="9.7"}}
 
 Now let's add the list of users to the view to make sure it works.
 
 Add this ng-repeat list to the end of `party-details.ng.html`:
 
-    <ul>
-      Users:
-      <li ng-repeat="user in users">
-        <div>{{dstache}} user.emails[0].address }}</div>
-      </li>
-    </ul>
+{{> DiffBox tutorialName="angular-meteor" step="9.8"}}
 
 Run the app and see the list of all the users' emails that created a login and password and did not use a service to login.
 
@@ -288,5 +265,4 @@ If you are not quite sure what is the difference between collection and publicat
 
 In the next step we will learn how to filter the users list in the client side with AngularJS filters and create a custom filter for our own needs.
 
-  {{/markdown}}
-</template>
+{{/template}}

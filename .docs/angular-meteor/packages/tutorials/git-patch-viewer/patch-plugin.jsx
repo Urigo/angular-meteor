@@ -101,5 +101,5 @@ function parsePatch(contents) {
   return data;
 }
 
-Plugin.registerSourceHandler("multi.patch", {isTemplate: true}, multiPatchHandler);
-Plugin.registerSourceHandler("patch", {isTemplate: true}, patchHandler);
+//Plugin.registerSourceHandler("multi.patch", {isTemplate: true}, multiPatchHandler);
+//Plugin.registerSourceHandler("patch", {isTemplate: true}, patchHandler);

@@ -1,5 +1,4 @@
-<template name="tutorial.step_00.html">
-  {{#markdown}}
+{{#template name="tutorial.step_00.html"}}
 
 Let's start building our Meteor-Angular socially app.
 
@@ -49,12 +48,7 @@ We are going to add our own files for this tutorial. So let's start by deleting 
 Now we can start building our app.
 First, let's create a new `index.html` file and place this code inside. Then run the app again:
 
-__`index.html`:__
-
-    <body>
-      <p>Nothing here</p>
-    </body>
-
+{{> DiffBox tutorialName="angular-meteor" step="0.1"}}
 
 As you can see, there is no html tag, no head tag, very simple.
 
@@ -95,17 +89,11 @@ To start simple, create a new file called `index.ng.html` under the main folder,
 
 Then move the `p` tag into it:
 
-__`index.ng.html`:__
-
-    <p>Nothing here</p>
+{{> DiffBox tutorialName="angular-meteor" step="0.2"}}
 
 Now let's include that file into our main `index.html` file:
 
-__`index.html`:__
-
-    <body>
-      <div ng-include="'index.ng.html'"></div>
-    </body>
+{{> DiffBox tutorialName="angular-meteor" step="0.3"}}
 
 But if you load this in your browser, **you won't see anything**. That's because we still need to **create the actual Angular app**, which we'll do next.
 
@@ -128,33 +116,23 @@ But we need Angular's power only in the client side, so how can we do that?
 
 There are a few ways to tell Meteor to run code only on the client/server/phone side, let's start with the simplest way - [Meteor.isClient](http://docs.meteor.com/#/full/meteor_isserver) variable.
 
-__`app.js`:__
-
-    if (Meteor.isClient) {
-
-    }
+{{> DiffBox tutorialName="angular-meteor" step="0.4"}}
 
 Now everything inside this `if` statement will only run on the client side.
 
 Let's continue defining our AngularJS application module. Give it the name `socially` and add `angular-meteor` module as a dependency:
 
-__`app.js`:__
-
-    if (Meteor.isClient) {
-      angular.module('socially',['angular-meteor']);
-    }
+{{> DiffBox tutorialName="angular-meteor" step="0.5"}}
 
 And use the same application name in the `ng-app` directive in `index.html`:
 
-    <body ng-app="socially">
-      <div ng-include="'index.ng.html'"></div>
-    </body>
+{{> DiffBox tutorialName="angular-meteor" step="0.6"}}
 
 Now run the app.
 
 Everything is the same, so now inside our `index.ng.html` let's use Angular:
 
-    <p>Nothing here {{dstache}} 'yet' + '!' }}</p>
+{{> DiffBox tutorialName="angular-meteor" step="0.7"}}
 
 Run the app again and the screen should look like this:
 
@@ -170,6 +148,4 @@ Try adding a new expression to the index.ng.html that will do some math:
 # Summary
 Now let's go to [step 1](/tutorial/step_01) and add some content to our application.
 
-
-  {{/markdown}}
-</template>
+{{/template}}

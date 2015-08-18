@@ -1,6 +1,5 @@
-<template name="tutorial.step_11.html">
-  {{#markdown}}
-  {{> downloadPreviousStep stepName="step_11"}}
+{{#template name="tutorial.step_11.html"}}
+{{> downloadPreviousStep stepName="step_11"}}
 
 So far, we've been building our app and testing only in a web browser,
 but Meteor has been designed to work across different platforms - your socially website can become an iOS or Android app in just a few commands.
@@ -11,26 +10,15 @@ Before we set up PhoneGap (which is super simple with Meteor) we will need to ma
 
 In `app.js` file, we will manually bootstrap our AngularJS app according to the right platform:
 
-__app.js__:
-
-
-    angular.module('socially',['angular-meteor', 'ui.router']);
-
-    function onReady() {
-      angular.bootstrap(document, ['socially']);
-    }
-
-    if (Meteor.isCordova)
-      angular.element(document).on("deviceready", onReady);
-    else
-      angular.element(document).ready(onReady);
+{{> DiffBox tutorialName="angular-meteor" step="11.1"}}
 
 And then we will remove
 
     ng-app="socially"
 
-from `index.html`
+from `index.html`:
 
+{{> DiffBox tutorialName="angular-meteor" step="11.2"}}
 
 ## PhoneGap
 
@@ -143,7 +131,4 @@ In order to fix that issue you will need to fix the permission by running these 
 
     Replace YOUR_PROJECT_FOLDER with your project folder and YOUR_USERNAME with the user you use to run the "meteor run" command.
 
-  {{/markdown}}
-</template>
-
-
+{{/template}}

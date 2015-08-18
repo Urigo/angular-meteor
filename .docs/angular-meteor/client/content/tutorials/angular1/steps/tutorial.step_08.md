@@ -1,6 +1,5 @@
-<template name="tutorial.step_08.html">
-  {{#markdown}}
-  {{> downloadPreviousStep stepName="step_07"}}
+{{#template name="tutorial.step_08.html"}}
+{{> downloadPreviousStep stepName="step_07"}}
 
 One of Meteor's most powerful packages is the Meteor account system.
 
@@ -43,23 +42,9 @@ So instead of adding <code ng-non-bindable>&#123;&#123;> loginButtons &#125;&#12
 
     <meteor-include src="loginButtons"></meteor-include>
 
-__`index.html`:__
+So the `index.html` will look like this:
 
-      <head>
-        <base href="/">
-      </head>
-      <body ng-app="socially">
-
-      <div>
-        <meteor-include src="loginButtons"></meteor-include>
-        <h1>
-          <a href="/parties">Home</a>
-        </h1>
-        <div ui-view></div>
-      </div>
-
-      </body>
-
+{{> DiffBox tutorialName="angular-meteor" step="8.1"}}
 
 Run the code, create an account, login, logout...
 
@@ -67,21 +52,7 @@ Now that we have our account system, we can start defining our security rules fo
 
 Let's go to the model folder and change the file to look like this:
 
-__`model/parties.js`:__
-
-    Parties = new Mongo.Collection("parties");
-
-    Parties.allow({
-      insert: function (userId, party) {
-        return userId && party.owner === userId;
-      },
-      update: function (userId, party, fields, modifier) {
-        return userId && party.owner === userId;
-      },
-      remove: function (userId, party) {
-        return userId && party.owner === userId;
-      }
-    });
+{{> DiffBox tutorialName="angular-meteor" step="8.2"}}
 
 The [collection.allow Meteor function](http://docs.meteor.com/#/full/allow) defines the permissions that the client needs to write directly to the collection (like we did until now).
 
@@ -133,7 +104,7 @@ To access $rootScope in a template you simply write $root. and then the name of 
 
 Change the code for the add button in `parties-list.ng.html` to this:
 
-    <button ng-click="newParty.owner=$root.currentUser._id; parties.push(newParty)">Add</button>
+{{> DiffBox tutorialName="angular-meteor" step="8.3"}}
 
 So first we set the new party's owner to our current user's id and then push it to the parties collection like before.
 
@@ -183,18 +154,7 @@ So let's add requireUser to our route in partyDetails so that it will prevent us
 
 We are going to use the [resolve](https://github.com/angular-ui/ui-router/wiki#resolve) object of ui-router and ngRoute:
 
-__`client/routes.js`:__
-
-    .state('partyDetails', {
-      url: '/parties/:partyId',
-      templateUrl: 'client/parties/views/party-details.ng.html',
-      controller: 'PartyDetailsCtrl',
-      resolve: {
-        "currentUser": ["$meteor", function($meteor){
-          return $meteor.requireUser();
-        }]
-      }
-    });
+{{> DiffBox tutorialName="angular-meteor" step="8.4"}}
 
 Now, if a user is not logged in to the system, it won't be able to access that route.
 
@@ -202,18 +162,7 @@ We also want to handle that scenario and redirect the user to the main page.
 
 on the top of the routes file, let's add these lines:
 
-
-__`client/routes.js`:__
-
-    angular.module("socially").run(["$rootScope", "$state", function($rootScope, $state) {
-      $rootScope.$on("$stateChangeError", function(event, toState, toParams, fromState, fromParams, error) {
-        // We can catch the error thrown when the $requireUser promise is rejected
-        // and redirect the user back to the main page
-        if (error === "AUTH_REQUIRED") {
-          $state.go('parties');
-        }
-      });
-    }]);
+{{> DiffBox tutorialName="angular-meteor" step="8.5"}}
 
 # Summary
 
@@ -226,5 +175,4 @@ This is the reason we also made restrictions on the server using the allow/deny 
 While this prevents writes from happening from unintended sources, reads can still be an issue.
 The next step will take care of privacy, not showing users parties they are not allowed to see.
 
-  {{/markdown}}
-</template>
+{{/template}}

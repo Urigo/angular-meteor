@@ -1,7 +1,5 @@
-<template name="tutorial.step_12.html">
-  {{#markdown}}
-  {{> downloadPreviousStep stepName="step_11"}}
-
+{{#template name="tutorial.step_12.html"}}
+{{> downloadPreviousStep stepName="step_11"}}
 
 Currently we are dealing with a few parties, but we also need to support also a large number of parties.
 
@@ -29,19 +27,7 @@ So first let's take care of our server-side.
 
 In our `parties.js` file in the server directory we are going to add the `options` variable to the publish method like this:
 
-    Meteor.publish("parties", function (options) {
-      return Parties.find({
-        $or:[
-          {$and:[
-            {"public": true},
-            {"public": {$exists: true}}
-          ]},
-          {$and:[
-            {owner: this.userId},
-            {owner: {$exists: true}}
-          ]}
-        ]}, options);
-    });
+{{> DiffBox tutorialName="angular-meteor" step="12.1"}}
 
 Now our publish method receives an options arguments which we then pass to the `Parties.find()` function call.
 This will allow us to send arguments to the find function's modifier right from the subscribe call. The options object can
@@ -52,9 +38,7 @@ What are those parameters that we want to set on the options argument? In order 
 parties list we will need to save the current page, the number of parties per page and the sort order. So let's add these parameters to our scope
 in the top of the controller in `client/controllers/partiesList.js` file.
 
-    $scope.page = 1;
-    $scope.perPage = 3;
-    $scope.sort = { name: 1 };
+{{> DiffBox tutorialName="angular-meteor" step="12.2"}}
 
 That's cool, but let's do something with these variables except defining them. So where we want to use them is when we call the subscribe method.
 But right now, we are subscribing to the collection in the short form which doesn't get parameters:
@@ -63,17 +47,12 @@ But right now, we are subscribing to the collection in the short form which does
 
 So first we need to add the [$meteor.subscribe](/api/subscribe) service and call it separately:
 
-    $scope.parties = $meteor.collection(Parties);
-
-    $meteor.subscribe('parties');
+{{> DiffBox tutorialName="angular-meteor" step="12.3"}}
 
 Now let's send the parameters in the options object:
 
-    $meteor.subscribe('parties', {
-      limit: parseInt($scope.perPage),
-      skip: parseInt(($scope.page - 1) * $scope.perPage),
-      sort: $scope.sort
-    });
+{{> DiffBox tutorialName="angular-meteor" step="12.4"}}
+
 
 So we built an object that contains 3 properties:
 
@@ -86,12 +65,7 @@ That is because the sorting is not saved when the data is sent from the server t
 So to make sure our data is sorted also on the client need to defined is also in the parties collection.
 To do that we are going to replace the `Parties` collection parameter with a [cursor](http://docs.meteor.com/#/full/mongo_cursor) for that parties collection:
 
-    $scope.parties = $meteor.collection(function() {
-      return Parties.find({}, {
-        sort : $scope.sort
-      });
-    });
-
+{{> DiffBox tutorialName="angular-meteor" step="12.5"}}
 
 # pagination directive
 
@@ -107,16 +81,15 @@ To add the directive add it's Meteor package to the project:
 
 Add it as a dependency to our Angular app in `app.js`:
 
-    angular.module('socially',['angular-meteor', 'ui.router', 'angularUtils.directives.dirPagination']);
-
+{{> DiffBox tutorialName="angular-meteor" step="12.6"}}
 
 Now let's add the directive in `parties-list.ng.html` , change the ng-repeat of parties to this:
 
-    <li dir-paginate="party in parties | itemsPerPage: perPage" total-items="partiesCount.count">
+{{> DiffBox tutorialName="angular-meteor" step="12.7"}}
 
 and after the UL closes add this directive:
 
-    <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
+{{> DiffBox tutorialName="angular-meteor" step="12.8"}}
 
 As you can see, dir-paginate list takes the number of objects in a page (that we defined before) but also takes the total number items (we will get to that soon).
 With this bindings it calculates what buttons of pages it should display inside the dir-pagination-controls directive.
@@ -126,9 +99,7 @@ so we call `pageChanged` function with the new selection as a parameter.
 
 Let's create the pageChanged function inside the partiesList controller `(client/controllers/partiesList.js)`:
 
-    $scope.pageChanged = function(newPage) {
-      $scope.page = newPage;
-    };
+{{> DiffBox tutorialName="angular-meteor" step="12.9"}}
 
 Now every time we change the page, the scope variable will change accordingly and update the bind method that watches it.
 
@@ -148,46 +119,10 @@ For that we can use the [tmeasday:publish-counts](https://github.com/percolatest
 
 This package helps to publish the count of a cursor, in real time without dependency on the subscribe method.
 
-Inside the `server/parties.js` file, add the following code inside the `Meteor.publish("parties" ` function, at the beginning of the function. before the existing return statement:
-
-    Counts.publish(this, 'numberOfParties', Parties.find({
-      $or:[
-        {$and:[
-          {'public': true},
-          {'public': {$exists: true}}
-        ]},
-        {$and:[
-          {owner: this.userId},
-          {owner: {$exists: true}}
-        ]}
-    ]}), { noReady: true });
-
+Inside the `server/parties.js` file, add the code that handles the count inside the `Meteor.publish("parties" ` function, at the beginning of the function. before the existing return statement,
 So the file should look like this now:
 
-    Meteor.publish("parties", function (options) {
-      Counts.publish(this, 'numberOfParties', Parties.find({
-        $or:[
-          {$and:[
-            {'public': true},
-            {'public': {$exists: true}}
-          ]},
-          {$and:[
-            {owner: this.userId},
-            {owner: {$exists: true}}
-          ]}
-      ]}), { noReady: true });
-      return Parties.find({
-        $or:[
-          {$and:[
-            {'public': true},
-            {'public': {$exists: true}}
-          ]},
-          {$and:[
-            {owner: this.userId},
-            {owner: {$exists: true}}
-        ]}
-      ]} ,options);
-    });
+{{> DiffBox tutorialName="angular-meteor" step="12.10"}}
 
 As you can see, we query only the parties that should be available to that specific client, but without the options variable so we get the full
 number of parties.
@@ -197,14 +132,7 @@ number of parties.
 Now on the client we have access to the Counts collection.
 Let's save that in the `client/controllers/partiesList.js` file when the subscription finishes successful (using the promise $meteor.subscribe returns):
 
-    $meteor.subscribe('parties', {
-      limit: parseInt($scope.perPage),
-      skip: parseInt(($scope.page - 1) * $scope.perPage),
-      sort: $scope.sort
-    }).then(function(){
-      $scope.partiesCount = $meteor.object(Counts ,'numberOfParties', false);
-    });
-
+{{> DiffBox tutorialName="angular-meteor" step="12.11"}}
 
 Now the partiesCount will hold the number of parties and will send it to the directive in the `parties-list.ng.html` (which we already defined earlier).
 
@@ -224,31 +152,11 @@ In order to make the subscription run each time something changes in one of the 
 
 To do that, we are going to use the [$meteor.autorun](/api/utils) function:
 
-    $meteor.autorun($scope, function() {
-
-      $meteor.subscribe('parties', {
-        limit: parseInt($scope.perPage),
-        skip: parseInt(($scope.page - 1) * $scope.perPage),
-        sort: $scope.sort
-      }).then(function(){
-        $scope.partiesCount = $meteor.object(Counts ,'numberOfParties', false);
-      });
-
-    });
+{{> DiffBox tutorialName="angular-meteor" step="12.12"}}
 
 But this still won't help us because there is no reactive variables inside, so let's use [getReactively](/api/getReactively) for that:
 
-    $meteor.autorun($scope, function() {
-
-      $meteor.subscribe('parties', {
-        limit: parseInt($scope.getReactively('perPage')),
-        skip: (parseInt($scope.getReactively('page')) - 1) * parseInt($scope.getReactively('perPage')),
-        sort: $scope.getReactively('sort')
-      }).then(function(){
-        $scope.partiesCount = $meteor.object(Counts ,'numberOfParties', false);
-      });
-
-    });
+{{> DiffBox tutorialName="angular-meteor" step="12.13"}}
 
 What's happening here is that `getReactively` returns a reactive variable that fires a changed event every time the scope variable changes,
 and then autorun knows to execute it's given function again.
@@ -256,11 +164,7 @@ This will cause the subscription to re-run again with the new options parameter 
 
 $meteor.collection is also listening to reactive variables so let's change our $scope.parties initialization as well:
 
-    $scope.parties = $meteor.collection(function() {
-      return Parties.find({}, {
-        sort : $scope.getReactively('sort')
-      });
-    });
+{{> DiffBox tutorialName="angular-meteor" step="12.14"}}
 
 Now run the app.
 Create lots of parties and see that you can see only 3 at a time and you can scroll between the pages with the directive that populates the number of pages automatically.
@@ -271,26 +175,15 @@ We haven't placed anywhere in the UI a way to change sorting so let's do that ri
 
 So in the HTML template, let's add a sorting dropdown inside the UL:
 
-    <h1>Parties:</h1>
-    <div>
-      <select ng-model="orderProperty">
-        <option value="1">Ascending</option>
-        <option value="-1">Descending</option>
-      </select>
-    </div>
-
+{{> DiffBox tutorialName="angular-meteor" step="12.15"}}
 
 in the controller lets associate that dropdown to $scope.sort:
 
-    $scope.$watch('orderProperty', function(){
-      if ($scope.orderProperty)
-        $scope.sort = {name: parseInt($scope.orderProperty)};
-    });
+{{> DiffBox tutorialName="angular-meteor" step="12.16"}}
 
 and also initialize it at the beginning:
 
-    $scope.sort = { name: 1 };
-    $scope.orderProperty = '1';
+{{> DiffBox tutorialName="angular-meteor" step="12.17"}}
 
 Now we don't have to do anything other than that. $scope.getReactively will take care of updating the subscription for us
 when the sort changes. So all we have left is to sit back and enjoy out pagination working like a charm.
@@ -308,7 +201,7 @@ let's get started.
 As before, let's add the server side support. We need to add a new argument to our publish method which will hold the
 requested search string. We will call it..... searchString! Here it goes:
 
-    Meteor.publish("parties", function (options, searchString) {
+{{> DiffBox tutorialName="angular-meteor" step="12.18"}}
 
 Yep that was simple. Now we are going to filter the correct results using mongo's regex ability. We are going to add this
 line at two places where we are using `find`, in publish Counts and in the return of the parties cursor:
@@ -317,34 +210,7 @@ line at two places where we are using `find`, in publish Counts and in the retur
 
 So `server/parties.js` should look like that:
 
-    Meteor.publish("parties", function (options, searchString) {
-      if (searchString == null)
-        searchString = '';
-      Counts.publish(this, 'numberOfParties', Parties.find({
-        'name' : { '$regex' : '.*' + searchString || '' + '.*', '$options' : 'i' },
-        $or:[
-          {$and:[
-            {"public": true},
-            {"public": {$exists: true}}
-          ]},
-          {$and:[
-            {owner: this.userId},
-            {owner: {$exists: true}}
-          ]}
-      ]}), { noReady: true });
-      return Parties.find({
-        'name' : { '$regex' : '.*' + searchString || '' + '.*', '$options' : 'i' },
-        $or:[
-          {$and:[
-            {"public": true},
-            {"public": {$exists: true}}
-          ]},
-          {$and:[
-            {owner: this.userId},
-            {owner: {$exists: true}}
-          ]}
-        ]} ,options);
-    });
+{{> DiffBox tutorialName="angular-meteor" step="12.19"}}
 
 As you can see this will filter all the parties with a name that contains the searchString.
 
@@ -354,22 +220,11 @@ Now let's move on to the client side.
 
 First let's place a search input into our template and bind it into a 'search' scope variable:
 
-    <h1>Parties:</h1>
-    <div>
-      <input type="search" ng-model="search" placeholder="Search">
-      <select ng-model="orderProperty">
-        <option value="1">Ascending</option>
-        <option value="-1">Descending</option>
-      </select>
-    </div>
+{{> DiffBox tutorialName="angular-meteor" step="12.20"}}
 
 And all we have left to do is call the subscribe method with our reactive scope variable:
 
-    $meteor.subscribe('parties', {
-      limit: parseInt($scope.getReactively('perPage')),
-      skip: (parseInt($scope.getReactively('page')) - 1) * parseInt($scope.getReactively('perPage')),
-      sort: $scope.getReactively('sort')
-    }, $scope.getReactively('search')).then(function() {
+{{> DiffBox tutorialName="angular-meteor" step="12.21"}}
 
 Wow that is all that is needed to have a fully reactive search with pagination! Quite amazing right?
 
@@ -386,11 +241,11 @@ We can do that by the calling `$scope.$meteorSubscribe` method. It will **automa
 
 First remove the subscription from $meteor.object:
 
-    $scope.party = $meteor.object(Parties, $stateParams.partyId);
+{{> DiffBox tutorialName="angular-meteor" step="12.22"}}
 
 And now add the subscribe function:
 
-    $scope.$meteorSubscribe('parties');
+{{> DiffBox tutorialName="angular-meteor" step="12.23"}}
 
 That's it.
 
@@ -412,8 +267,4 @@ For more information look at [$meteorSubscribe API](/api/subscribe).
 
 Now we have full pagination with search and sorting for client and server side with the help of Meteor's options and Angular's directives.
 
-
-  {{/markdown}}
-</template>
-
-
+{{/template}}
