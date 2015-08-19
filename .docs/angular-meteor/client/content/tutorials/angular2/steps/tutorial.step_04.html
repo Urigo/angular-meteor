@@ -89,14 +89,14 @@ First up, import the form directives & controls.
 __`client/parties-form/parties-form.ts`:__
 
       import {Component, View} from 'angular2/angular2';
-      import {formDirectives, Control, ControlGroup, Validators} from 'angular2/angular2';
+      import {FORM_DIRECTIVES, Control, ControlGroup, Validators} from 'angular2/angular2';
 
       @Component({
         selector: 'parties-form'
       })
       @View({
         templateUrl: "parties-form/parties-form.ng.html",
-        directives: [formDirectives]
+        directives: [FORM_DIRECTIVES]
       })
       export class PartiesForm {}
     }
