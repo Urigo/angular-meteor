@@ -81,6 +81,16 @@ In the command line
 
 Then go to `localhost:3000` in your browser
 
+### Contributing to documentation and tutorials.
+
+Whether it's a typo, some clarification, or a whole new feature - here's how to get started:
+
+1. Follow the steps to get started as a developer for angular-meteor.
+2. Change into the .docs directory and then angular-meteor `cd .docs/angular-meteor`
+3. Run the app for the documentation `meteor`
+4. Start tweaking and updating!
+
+
 ## Usage
 ### Table of Contents
 - [App initialization](#app-initialization)
