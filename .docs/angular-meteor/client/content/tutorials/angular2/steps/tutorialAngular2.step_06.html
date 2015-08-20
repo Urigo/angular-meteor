@@ -11,7 +11,7 @@ By the end, you should have an understanding of:
 
 # Router Lifecycle Hooks
 
-The new Angular router offers a lot more options. Many of these stem out of the lifecycle hooks. These hooks are places where you can run code during different stages of a route being requested, activated, de-activated and removed.
+The new Angular router offers a lot more options. Many of these stem out of the [lifecycle hooks](https://angular.github.io/router/lifecycle). These hooks are places where you can run code during different stages of a route being requested, activated, de-activated and removed.
 
 Hooks take a function and return false if Let's have a look at our choices:
 
@@ -96,24 +96,27 @@ If you completed the 'challenge' in step 5, your party-details component should 
 
 __`client/parties-details/parties-details.ts`:__
 
-    import {Component, View, Attribute, Inject} from 'angular2/angular2';
-    import {routerDirectives, RouteParams} from 'angular2/router';
+    if (Meteor.isClient) {
+      import {Component, View, Attribute, Inject} from 'angular2/angular2';
+      import {routerDirectives, RouteParams} from 'angular2/router';
 
-    @Component({
-      selector: 'party-details'
-    })
-    @View({
-      templateUrl: 'client/party-details/party-details.ng.html',
-      directives: [routerDirectives]
-    })
-    export class PartyDetails{
-      constructor(@Inject(RouteParams) routeParams:RouteParams) {
-        this.params = routeParams.params;
-      }
-      onActivate() {
-        this.party = Parties.find(this.params.partyId).fetch()[0];
-        if (this.party) {
-          return true;
+      @Component({
+        selector: 'party-details'
+      })
+      @View({
+        templateUrl: 'client/party-details/party-details.ng.html',
+        directives: [routerDirectives]
+      })
+      export class PartyDetails{
+        constructor(@Inject(RouteParams) routeParams:RouteParams) {
+          this.params = routeParams.params;
+        }
+        onActivate() {
+          this.party = Parties.find(this.params.partyId).fetch()[0];
+            if (this.party) {
+              return true;
+            }
+          }
         }
       }
     }
@@ -122,16 +125,16 @@ __`client/parties-details/parties-details.ts`:__
 
 [Ng-model](https://angular.io/docs/js/latest/api/forms/NgModel-class.html) binds a view's model to the controller's model. Think of it as a kind of two-way binding. Let's setup the dependencies and look at an example.
 
-The NgModel dependency can be found in `formDirectives`. First, import it and add it to your list of View directives.
+The NgModel dependency can be found in `FORM_DIRECTIVES`. First, import it and add it to your list of View directives.
 
 __`client/parties-details/parties-details.ts`:__
 
-    import {formDirectives} from 'angular2/angular2';
+    import {FORM_DIRECTIVES} from 'angular2/angular2';
 
     @Component( ... )
     @View({
       templateUrl: 'client/party-details/party-details.ng.html',
-      directives: [routerDirectives, formDirectives]
+      directives: [routerDirectives, FORM_DIRECTIVES]
     })
     export class PartyDetails { ... }
 

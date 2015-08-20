@@ -89,14 +89,14 @@ First up, import the form directives & controls.
 __`client/parties-form/parties-form.ts`:__
 
       import {Component, View} from 'angular2/angular2';
-      import {formDirectives, Control, ControlGroup, Validators} from 'angular2/angular2';
+      import {FORM_DIRECTIVES, Control, ControlGroup, Validators} from 'angular2/angular2';
 
       @Component({
         selector: 'parties-form'
       })
       @View({
-        templateUrl: "client/parties-form/parties-form.ng.html",
-        directives: [formDirectives]
+        templateUrl: "parties-form/parties-form.ng.html",
+        directives: [FORM_DIRECTIVES]
       })
       export class PartiesForm {}
     }
@@ -198,7 +198,7 @@ __`client/parties-form/parties-form.ts`:__
 
     class PartiesForm {
       constructor() { ... },
-      
+
       add(party) {
         // validate if the form is valid
         if (this.partiesForm.valid) {
