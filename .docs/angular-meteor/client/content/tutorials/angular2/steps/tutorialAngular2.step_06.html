@@ -98,14 +98,14 @@ __`client/parties-details/parties-details.ts`:__
 
     if (Meteor.isClient) {
       import {Component, View, Attribute, Inject} from 'angular2/angular2';
-      import {ROUTER_DIRECTIVES, RouteParams} from 'angular2/router';
+      import {routerDirectives, RouteParams} from 'angular2/router';
 
       @Component({
         selector: 'party-details'
       })
       @View({
         templateUrl: 'client/party-details/party-details.ng.html',
-        directives: [ROUTER_DIRECTIVES]
+        directives: [routerDirectives]
       })
       export class PartyDetails{
         constructor(@Inject(RouteParams) routeParams:RouteParams) {
@@ -134,7 +134,7 @@ __`client/parties-details/parties-details.ts`:__
     @Component( ... )
     @View({
       templateUrl: 'client/party-details/party-details.ng.html',
-      directives: [ROUTER_DIRECTIVES, FORM_DIRECTIVES]
+      directives: [routerDirectives, FORM_DIRECTIVES]
     })
     export class PartyDetails { ... }
 

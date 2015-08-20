@@ -25,7 +25,7 @@ Let's import and add the package dependencies.
 __`client/app.ts`:__
 
     import {Component, View, bootstrap} from 'angular2/angular2';
-    import {routerInjectables, ROUTER_DIRECTIVES, Router, RouteConfig} from 'angular2/router';
+    import {routerInjectables, routerDirectives, Router, RouteConfig} from 'angular2/router';
 
     import {PartiesForm} from 'client/parties-form/parties-form';
 
@@ -34,7 +34,7 @@ __`client/app.ts`:__
     })
     @View({
       template: 'index.ng.html',
-      directives: [NgFor, PartiesForm, ROUTER_DIRECTIVES]
+      directives: [NgFor, PartiesForm, routerDirectives]
     })
     @RouteConfig()
     class Socially {}
@@ -45,7 +45,7 @@ Let's make a checklist of what we need to get our router working. We'll go over 
 
 * imports from `'angular2/router'`
 * `@RouteConfig()` which will specify our routes soon
-* View directives adding `ROUTER_DIRECTIVES`, allowing us to communicate with the view
+* View directives adding `routerDirectives`, allowing us to communicate with the view
 * inject `routerInjectables` into the child components
 * a location where components will be created, the `<router-outlet></router-outlet>`
 * declare the base route in `index.html` (required when using the HTML5LocationStrategy, rather than the HashLocationStategy)
@@ -82,7 +82,7 @@ Let's move the content of Socially out into a `party-list` component. Create a n
 __`client/parties-list/parties-list.ts`:__
 
       import {Component, View, NgFor} from 'angular2/angular2';
-      import {ROUTER_DIRECTIVES} from 'angular2/router';
+      import {routerDirectives} from 'angular2/router';
       import {PartiesForm} from 'client/parties-form/parties-form';
 
       @Component({
@@ -90,7 +90,7 @@ __`client/parties-list/parties-list.ts`:__
       })
       @View({
         templateUrl: 'client/parties-list/parties-list.ng.html',
-        directives: [NgFor, ROUTER_DIRECTIVES, PartiesForm]
+        directives: [NgFor, routerDirectives, PartiesForm]
       })
       export class PartiesList {
         constructor() {
@@ -110,7 +110,7 @@ Move the `index.ng.html` file into the parties-list folder and rename it `partie
 __`client/app.ts`:__
 
     import {Component, View, bind, bootstrap} from 'angular2/angular2';
-    import {routerInjectables, ROUTER_DIRECTIVES, Router, RouteConfig} from 'angular2/router';
+    import {routerInjectables, routerDirectives, Router, RouteConfig} from 'angular2/router';
     import {LocationStrategy, Location, HashLocationStrategy } from 'angular2/router'; // HTML5LocationStrategy
 
     import {PartiesList} from 'client/parties-list/parties-list';
@@ -120,7 +120,7 @@ __`client/app.ts`:__
     })
     @View({
       template: '<router-outlet></router-outlet>',
-      directives: [ROUTER_DIRECTIVES]
+      directives: [routerDirectives]
     })
     @RouteConfig()
     class Socially {}
@@ -209,17 +209,17 @@ Let's see how we move around different urls using the `<router-link>`. First we'
 __`client/parties-list/parties-list.ts`:__
 
     import {Component, View, NgFor} from 'angular2/angular2';
-    import {ROUTER_DIRECTIVES} from 'angular2/router';
+    import {routerDirectives} from 'angular2/router';
     import {PartyForm} from 'client/party-form/party-form';
 
     @Component( ... )
     @View({
       templateUrl: 'client/parties/parties.ng.html',
-      directives: [NgFor, ROUTER_DIRECTIVES, PartyForm]
+      directives: [NgFor, routerDirectives, PartyForm]
     })
     export class PartiesList { ... }
 
-Make sure you imported the `ROUTER_DIRECTIVES` and specified it as a view directive.
+Make sure you imported the `routerDirectives` and specified it as a view directive.
 
 Now we can wrap our party in a `router-link` and pass in the `_id` as a parameter. Note that the id is auto-generated when an item is inserted into a Mongo Collection.
 
