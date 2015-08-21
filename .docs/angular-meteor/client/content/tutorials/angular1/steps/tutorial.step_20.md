@@ -1,4 +1,4 @@
-{{#template name="tutorial.step_20.html"}}
+{{#template name="tutorial.step_20.md"}}
 {{> downloadPreviousStep stepName="step_19"}}
 
 In this step we are going to add the ability to upload images into our app, and also sorting and naming them.

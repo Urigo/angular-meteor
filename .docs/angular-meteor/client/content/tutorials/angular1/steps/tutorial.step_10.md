@@ -1,4 +1,4 @@
-{{#template name="tutorial.step_10.html"}}
+{{#template name="tutorial.step_10.md"}}
 {{> downloadPreviousStep stepName="step_10"}}
 
 Now that we have a working app, we can go public!

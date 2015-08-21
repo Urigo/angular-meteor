@@ -1,4 +1,4 @@
-{{#template name="tutorial.step_09.html"}}
+{{#template name="tutorial.step_09.md"}}
 {{> downloadPreviousStep stepName="step_08"}}
 
 Right now our app has no privacy, every user can see all the parties on the screen.

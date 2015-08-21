@@ -1,4 +1,4 @@
-{{#template name="tutorial.step_08.html"}}
+{{#template name="tutorial.step_08.md"}}
 {{> downloadPreviousStep stepName="step_07"}}
 
 One of Meteor's most powerful packages is the Meteor account system.
