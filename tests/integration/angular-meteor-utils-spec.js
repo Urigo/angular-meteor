@@ -103,7 +103,7 @@ describe('$meteorUtils service', function () {
       spyOn(deferred, 'reject');
     });
 
-    it('should return a function which fulfills promise with according to the results', function() {
+    it('should return a function which fulfills a promise', function() {
       var fulfill = $meteorUtils.fulfill(deferred);
 
       var err = Error();
@@ -117,13 +117,18 @@ describe('$meteorUtils service', function () {
       expect(deferred.resolve.calls.mostRecent().args[0]).toEqual(result);
     });
 
-    it('should return a function which is resolved with the specified results', function() {
+    it('should fulfill promise with the bound results', function() {
+      var err = Error();
       var result = {};
-      var fulfill = $meteorUtils.fulfill(deferred, result);
+      var fulfill = $meteorUtils.fulfill(deferred, err, result);
 
       fulfill();
       expect(deferred.resolve.calls.count()).toEqual(1);
       expect(deferred.resolve.calls.mostRecent().args[0]).toEqual(result);
+
+      fulfill(Error());
+      expect(deferred.reject.calls.count()).toEqual(1);
+      expect(deferred.reject.calls.mostRecent().args[0]).toEqual(err);
     });
   });
 });

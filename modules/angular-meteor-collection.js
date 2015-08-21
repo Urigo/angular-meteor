@@ -95,11 +95,11 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
         // it can be $set using update.
         delete doc._id;
         var modifier = useUnsetModifier ? {$unset: doc} : {$set: doc};
-        fulfill = createFulfill({_id: docId, action: 'updated'});
+        fulfill = createFulfill(null, {_id: docId, action: 'updated'});
         collection.update(docId, modifier, fulfill);
       } else {
         // insert
-        fulfill = createFulfill({_id: docId, action: 'inserted'});
+        fulfill = createFulfill(null, {_id: docId, action: 'inserted'});
         collection.insert(doc, fulfill);
       }
 
@@ -136,7 +136,7 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
     AngularMeteorCollection._removeDoc = function(id) {
       var deferred = $q.defer();
       var collection = this.$$collection;
-      var fulfill = $meteorUtils.fulfill(deferred, { _id: id, action: 'removed' });
+      var fulfill = $meteorUtils.fulfill(deferred, null, { _id: id, action: 'removed' });
       collection.remove(id, fulfill);
       return deferred.promise;
     };

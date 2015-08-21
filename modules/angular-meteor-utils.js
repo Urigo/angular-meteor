@@ -40,14 +40,12 @@ angularMeteorUtils.service('$meteorUtils', [ '$timeout',
       return out;
     };
     // Returns a callback which fulfills promise
-    this.fulfill = function(deferred, result) {
-      return function(err) {
-        result = result == null ? arguments[1] : result;
-
+    this.fulfill = function(deferred, boundError, boundResult) {
+      return function(err, result) {
         if (err)
-          deferred.reject(err);
+          deferred.reject(boundError == null ? err : boundError);
         else
-          deferred.resolve(result);
+          deferred.resolve(boundResult == null ? result : boundResult);
       };
     };
   }]);
