@@ -24,7 +24,6 @@
     - [Table of Contents](#table-of-contents)
     - [App initialization](#app-initialization)
     - [Templating](#templating)
-- [Hello {{yourName}}!](#hello-yourname)
     - [Binding to Meteor Collections](#binding-to-meteor-collections)
     - [Subscribe](#subscribe)
     - [Routing](#routing)
