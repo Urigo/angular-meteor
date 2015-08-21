@@ -13,11 +13,12 @@
     h1 {
       text-shadow: @drop-shadow;
       color: @hero-text-color;
+      font-size: 1.7rem;
     }
 
     .main-logo {
-      width: 400px;
-      height: 400px;
+      width: 260px;
+      height: 260px;
       background-image: url("/images/logo-large.png");
       background-size: contain;
       background-repeat: no-repeat;
@@ -26,9 +27,9 @@
 
     .cta {
       background: @angular-red;
-      border: 3px solid @cta-color;
+      border: 2px solid @cta-color;
       color: @cta-color;
-      margin-top: 5rem;
+      margin-top: 3rem;
       -moz-box-shadow: @drop-shadow;
       box-shadow: @drop-shadow;
 
@@ -40,15 +41,13 @@
   }
 
   .intro {
+    padding-bottom: 3rem;
+    padding-top: 1rem;
+    background-color: @second-background-color;
     margin: 3rem auto 7rem;
 
     h1 {
       margin-bottom: 4rem;
-    }
-
-    .tutorial-cta {
-      margin: 3rem auto 2rem;
-      max-width: 400px;
     }
   }
 
@@ -77,7 +76,6 @@
   }
 
   .video {
-    background-color: @second-background-color;
     padding-bottom: 3rem;
     padding-top: 1rem;
 
@@ -87,14 +85,19 @@
 
     .video-wrapper {
       margin: 0 auto;
-    
+
       iframe {
         width: 860px;
         height: 480px;
-        border: 3px solid @hero-background-color;
+        border: 2px solid @hero-background-color;
         background-color: @hero-background-color;
         border-radius: @border-radius;
       }
+    }
+
+    .tutorial-cta {
+      margin: 3rem auto 2rem;
+      max-width: 400px;
     }
   }
 
