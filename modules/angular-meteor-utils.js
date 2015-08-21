@@ -1,8 +1,9 @@
 'use strict';
 var angularMeteorUtils = angular.module('angular-meteor.utils', []);
 
-angularMeteorUtils.service('$meteorUtils', [ '$timeout',
-  function ($timeout) {
+angularMeteorUtils.service('$meteorUtils', [
+  '$q', '$timeout',
+  function ($q, $timeout) {
     var self = this;
     this.getCollectionByName = function(string){
       return Mongo.Collection.get(string);
@@ -48,7 +49,18 @@ angularMeteorUtils.service('$meteorUtils', [ '$timeout',
           deferred.resolve(boundResult == null ? result : boundResult);
       };
     };
-  }]);
+    // creates a function which invokes method with the given arguments and returns a promise
+    this.promissor = function(obj, method) {
+      return function() {
+        var deferred = $q.defer();
+        var fulfill = self.fulfill(deferred);
+        var args = _.toArray(arguments).concat(fulfill);
+        obj[method].apply(obj, args);
+        return deferred.promise;
+      };
+    };
+  }
+]);
 
 angularMeteorUtils.run(['$rootScope', '$meteorUtils',
   function($rootScope, $meteorUtils) {

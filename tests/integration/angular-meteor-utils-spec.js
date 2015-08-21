@@ -131,4 +131,37 @@ describe('$meteorUtils service', function () {
       expect(deferred.reject.calls.mostRecent().args[0]).toEqual(err);
     });
   });
+
+  describe('promissor', function() {
+    it('should create a function which invokes method with the given arguments and returns a promise', function(done) {
+      var next = _.after(2, done);
+      var obj = { method: function() {} };
+      var promissor = $meteorUtils.promissor(obj, 'method');
+
+      spyOn(obj, 'method');
+      promissor(1, 2, 3);
+      expect(obj.method).toHaveBeenCalledWith(1, 2, 3, jasmine.any(Function));
+
+      obj.method.and.callFake(function(callback) {
+        callback(null, 'result');
+      });
+
+      promissor().then(function(result) {
+        expect(result).toEqual('result');
+        next();
+      });
+
+      obj.method.and.callFake(function(callback) {
+        callback('error');
+      });
+
+      promissor().catch(function(err) {
+        expect(err).toEqual('error');
+        next();
+      });
+
+      $rootScope.$apply();
+    });
+  });
 });
+
