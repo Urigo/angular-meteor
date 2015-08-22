@@ -29,7 +29,7 @@ Package.registerBuildPlugin({
 Package.on_use(function (api) {
   api.versionsFrom('METEOR@0.9.0.1');
 
-  api.use('angular:angular@1.4.1', 'client');
+  api.use('angular:angular@1.4.4', 'client');
   api.use('minimongo');  // for idStringify
   api.use('observe-sequence');
   api.use('dburles:mongo-collection-instances@0.3.4', 'client'); // For getCollectionByName
@@ -60,7 +60,7 @@ Package.on_use(function (api) {
 Package.onTest(function(api) {
   api.use('sanjo:jasmine@0.13.6');
   api.use('urigo:angular');
-  api.use('angular:angular-mocks@1.4.2');
+  api.use('angular:angular-mocks@1.4.4');
   api.use('mdg:camera@1.1.5');
 
   // auxiliary
