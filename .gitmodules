@@ -1,0 +1,3 @@
+[submodule "examples/parties/packages/angular2"]
+	path = examples/parties/packages/angular2
+	url = https://github.com/barbatus/angular2
