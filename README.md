@@ -6,6 +6,36 @@
 
 [![ng-conf](http://img.youtube.com/vi/_mu6BWsnaPM/0.jpg)](https://www.youtube.com/watch?v=_mu6BWsnaPM)
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [<a href="http://angular-meteor.com/"><img src="http://angular-meteor.com/images/logo-large.png" width="60" height="60" /></a>  [angular-meteor](http://angular-meteor.com/tutorial) [![Build Status](https://travis-ci.org/Urigo/angular-meteor.svg?branch=master)](https://travis-ci.org/Urigo/angular-meteor) [![Bower version](https://badge.fury.io/bo/angular-meteor.svg)](http://badge.fury.io/bo/angular-meteor)](#a-hrefhttpangular-meteorcomimg-srchttpangular-meteorcomimageslogo-largepng-width60-height60-a--angular-meteorhttpangular-meteorcomtutorial-build-statushttpstravis-ciorgurigoangular-meteorsvgbranchmasterhttpstravis-ciorgurigoangular-meteor-bower-versionhttpsbadgefuryioboangular-meteorsvghttpbadgefuryioboangular-meteor)
+  - [Quick start](#quick-start)
+    - [Meteor Project](#meteor-project)
+    - [Meteor client side - with Bower](#meteor-client-side---with-bower)
+  - [Resources](#resources)
+  - [Contributing](#contributing)
+  - [Contributor Developer Setup](#contributor-developer-setup)
+    - [Run local urigo:angular in your project](#run-local-urigoangular-in-your-project)
+    - [Running tests](#running-tests)
+    - [Contributing to documentation and tutorials.](#contributing-to-documentation-and-tutorials)
+  - [Usage](#usage)
+    - [Table of Contents](#table-of-contents)
+    - [App initialization](#app-initialization)
+    - [Templating](#templating)
+    - [Binding to Meteor Collections](#binding-to-meteor-collections)
+    - [Subscribe](#subscribe)
+    - [Routing](#routing)
+    - [&lt;meteor-include&gt;](#&ltmeteor-include&gt)
+    - [User Authentication](#user-authentication)
+    - [Meteor methods with promises](#meteor-methods-with-promises)
+    - [Bind Meteor session](#bind-meteor-session)
+    - [Additional packages](#additional-packages)
+    - [Acknowledgement](#acknowledgement)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## Quick start
 
 ### Meteor Project
