@@ -25,7 +25,7 @@ To do that we will use Meteor's [publish function](http://docs.meteor.com/#/full
 
 Publish functions should go only in the server so the client won't have access to them.
 
-Let's create a new file named `parties.jt` inside the server folder.
+Let's create a new file named `parties.ts` inside the server folder.
 
 Inside the file insert this code:
 
@@ -211,7 +211,7 @@ __`client/party-details/party-details.ts`:__
 
 Now let's add the list of users to the view to make sure it works.
 
-Add this ng-repeat list to the end of `parties-details.ng.html`. Don't forget to import `NgFor` and add it as a directive.
+Add this ng-for list to the end of `parties-details.ng.html`. Don't forget to import `NgFor` and add it as a directive.
 
 __`client/party-details/party-details.ts`:__
 
