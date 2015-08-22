@@ -87,19 +87,22 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
 
       // delete $$hashkey
       doc = $meteorUtils.stripDollarPrefixedKeys(doc);
+      var docId = doc._id;
+      // in case id does not exist in the collection
+      // NOTE: do not use #upsert() method, since it does not exist in FS.Collection
+      var isExist = collection.findOne(docId);
 
       // update
-      var docId = doc._id;
-      if (docId) {
+      if (isExist) {
         // Deletes _id property (from the copy) so that
         // it can be $set using update.
         delete doc._id;
         var modifier = useUnsetModifier ? {$unset: doc} : {$set: doc};
-        fulfill = createFulfill(null, {_id: docId, action: 'updated'});
+        fulfill = createFulfill({_id: docId, action: 'updated'});
         collection.update(docId, modifier, fulfill);
+      // insert
       } else {
-        // insert
-        fulfill = createFulfill(null, {_id: docId, action: 'inserted'});
+        fulfill = createFulfill({_id: docId, action: 'inserted'});
         collection.insert(doc, fulfill);
       }
 

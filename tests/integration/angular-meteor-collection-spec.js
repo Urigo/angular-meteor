@@ -272,7 +272,7 @@ describe('$meteorCollection service', function() {
     });
   });
 
-  describe('testing remove() method', function() {
+  describe('remove()', function() {
     beforeEach(function() {
       meteorArray = $meteorCollection(MyCollection);
       $timeout.flush();
@@ -281,8 +281,10 @@ describe('$meteorCollection service', function() {
     it('remove items different ways', function() {
       var items = MyCollection.find({}).fetch();
       var length = meteorArray.length;
-      meteorArray.remove(items[0]._id);
+
       meteorArray.remove(items[1]);
+      meteorArray.remove(items[0]._id);
+
       $rootScope.$apply();
       expect(meteorArray).toEqualCollection(MyCollection);
       expect(meteorArray.length).toEqual(length - 2);
@@ -306,6 +308,41 @@ describe('$meteorCollection service', function() {
     });
   });
 
+  describe('save()', function() {
+    var Collection;
+    var $scope;
+
+    beforeEach(function() {
+      Collection = new Meteor.Collection(null);
+      $scope = $rootScope.$new();
+      $scope.collection = $scope.$meteorCollection(Collection, false);
+    });
+
+    it('should insert an unexisting document and digest', function() {
+      var doc = { _id: 'unexist-doc' };
+
+      $scope.collection.save(doc);
+      expect(Collection.findOne(doc)).toDeepEqual(doc);
+    });
+
+    it('should update an existing document and digest', function() {
+      var doc = { _id: 'existing-doc' };
+      $scope.collection.save(doc);
+
+      doc.a = 1;
+      $scope.collection.save(doc);
+      expect(Collection.findOne(doc)).toDeepEqual(doc);
+      $rootScope.$apply();
+    });
+
+    it('should save multiple documents', function() {
+      var doc1 = { _id: 'first-doc' };
+      var doc2 = { _id: 'second-doc' };
+      var docs = [doc1, doc2];
+      $scope.collection.save(docs);
+      expect(Collection.find().fetch()).toDeepEqual(docs);
+    });
+  });
 
   describe('observe server changes', function() {
 
