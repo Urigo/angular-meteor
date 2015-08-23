@@ -1,5 +1,4 @@
-<template name="tutorialAngular2.step_08.html">
-{{#markdown}}
+{{#template name="tutorialAngular2.step_08.html"}}
 
 In this section we'll look at using Meteor Accounts & take a quick detour into using Services in Angular 2.
 
@@ -374,5 +373,4 @@ This is the reason we also made restrictions on the server using the allow/deny 
 While this prevents writes from happening from unintended sources, reads can still be an issue.
 The next step will take care of privacy, not showing users parties they are not allowed to see.
 
-{{/markdown}}
-</template>
+{{/template}}

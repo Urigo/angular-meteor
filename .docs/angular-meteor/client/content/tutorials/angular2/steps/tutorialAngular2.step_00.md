@@ -1,5 +1,5 @@
-<template name="tutorialAngular2.step_00.html">
-  {{#markdown}}
+{{#template name="tutorialAngular2.step_00.html"}}
+
 > Disclaimer: Angular 2 is not yet production ready. The API will change. For now, consider this tutorial for educational purposes.
 
 Let's start building our Meteor Angular 2 Socially app.
@@ -110,7 +110,7 @@ ES2015 & TypeScript both use modules. These are the `import` and `export` statem
 
 System.js is a module loader built into the `shmck:angular2` package. We'll use it to load our root component.
 
-__`index.html`:__
+__`client/index.html`:__
 
     <body>
       <p>Nothing here</p>
@@ -127,7 +127,7 @@ A component is a controller with an attached view. Think of it like a brick in t
 
 We'll create a root component tag called `app`. Let's include that component into our main `index.html` file:
 
-__`index.html`:__
+__`client/index.html`:__
 
     <body>
       <app></app>
@@ -146,7 +146,7 @@ Now you can see another example of Meteor's power and simplicity - no need to in
 
 Let's continue defining our Angular 2 application module.
 
-__`app.ts`:__
+__`client/app.ts`:__
 
     import {Component, View, bootstrap} from 'angular2/angular2';
 
@@ -221,10 +221,7 @@ Try adding a new expression to the index.ng.html that will do some math:
 
     <p>1 + 2 = {{dstache}} 1 + 2 }}</p>
 
-
 # Summary
 Now let's go to [step 1](/tutorial/step_01) and add some content to our application.
 
-  {{/markdown}}
-</template>
-
+{{/template}}
