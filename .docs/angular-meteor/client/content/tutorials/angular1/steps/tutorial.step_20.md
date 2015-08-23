@@ -7,27 +7,28 @@ Angular-Meteor provides us with the [$meteor.collectionFS API](/api/files) that 
 
 [CollectionFS](https://github.com/CollectionFS/Meteor-CollectionFS) is a suite of Meteor packages that together provide a complete file management solution including uploading, downloading, storage, synchronization, manipulation, and copying.
 
-It supports several storage adapters for saving to the local filesystem, GridFS, or S3, and additional storage adapters can be created.
+It supports several storage adapters for saving files to the local filesystem, GridFS, Amazon S3, or DropBox,  and additional storage adapters can be created.
 
-So let's add image upload to our app! We will start by adding CollectionFS to our project by running the following command:
+So let's add image upload to our app!
+We will start by adding CollectionFS to our project, by running the following command:
 ```
 meteor add cfs:standard-packages
 ```
 
-Now, we will decide the the storage adapter we want to use. CollectionFS provides adapters for many popular storage methods, link FileSystem, GridFS, Amazon S3 and DropBox.
-In this example, we will use the GridFS as storage adapters, so we will add the adapter adapter by running this command:
+Now, we will decide the storage adapter we want to use. 
+In this example, we will use the GridFS as storage adapters, so we will add the adapter by running this command:
 ```
 meteor add cfs:gridfs
 ```
-Note: you can find more information about Stores and Storage Adapters on the CollectionFS's GitHub repository.
+Note: you can find more information about Stores and Storage Adapters on the [CollectionFS](https://github.com/CollectionFS/Meteor-CollectionFS)'s GitHub repository.
 
-So now we have the CollectionFS support and the storage adapter - we need to create a CollectionFS object to handle our files.
+So now we have the CollectionFS support and the storage adapter installed - we still need to create a CollectionFS object to handle our files.
 Note that you will need to define the collection as shared resource because you will need to use the collection in both client and server side.
 
 ### Creating the CollectionFS
 
-I create the `model/images.js` file, and define a regular CollectionFS object called "Images", also, I used the CollectionFS API that allows me to defined auth-rules.
-Finally, I publish the collection just like any other collection, in order to allow the client to subscribe to those images:
+Let's start by creating `model/images.js` file, and define a regular CollectionFS object called "Images", also, We use the CollectionFS API that allows us to defined auth-rules.
+Finally, We will publish the collection just like any other collection, in order to allow the client to subscribe to those images:
 
 {{> DiffBox tutorialName="angular-meteor" step="20.1"}}
 
@@ -35,12 +36,13 @@ And let's add the usage of $meteorCollectionFS to our core controller (`PartiesL
 
 {{> DiffBox tutorialName="angular-meteor" step="20.2"}}
 
-So now we have the collection, we need to create a client-side that handles the images upload.
+So now we have the collection, We can now create a client-side that handles the images upload.
 
 ### Image Upload
 
-Note that you can use basic HTML `<input type="file">`  or any other package as you want - you only need the HTML5 File object to be provided.
-For our application, we would like to add ability to drag-and-drop images, so we can use AngularJS directives that handles file upload and gives us more abilities such as drag & drop, file validation on the client side and some more.
+Note that for file upload you can use basic HTML `<input type="file">`  or any other package - you only need the HTML5 File object to be provided.
+
+For our application, we would like to add ability to drag-and-drop images, so we use AngularJS directive that handles file upload and gives us more abilities such as drag & drop, file validation on the client side.
 In this example, I will use [ng-file-upload](https://github.com/danialfarid/ng-file-upload), which have many features for file upload.
 In order to do this, lets add the package to our project:
 ```
@@ -71,19 +73,21 @@ Also, in order to make the "drop-zone" look like a dropable area in my page, I a
 
 {{> DiffBox tutorialName="angular-meteor" step="20.7"}}
 
-The main code in this HTML is the usage of `addImages` function in the `nfg-change` attribute, because this is the function that handles the main logic of uploading the image.
-So let's create the controller (`addPhotoCtrl.js`) and implement this function:
+Now lets implement the image uploading function - `addImages` in the `nfg-change` attribute on `add-photo-modal.ng.html` we just created,
+For this function we create the controller (`addPhotoCtrl.js`) and use the following :
 
 {{> DiffBox tutorialName="angular-meteor" step="20.8"}}
 
 And that's it! now we can upload images by using drag and drop!
 
-Now let's add some more cool features!
+Just note that the Application UI still don't show it :)
+
+Now let's add some more cool features, And make the image uploaded image visible!
 
 ### Image Crop
 
-One of the most common actions we want to make with pictures is edit it before saving, we will add to our example ability to crop images before uploading them to the server.
-In this example, we will use [ngImgCrop](https://github.com/alexk111/ngImgCrop/) which provides us the ability to do that.
+One of the most common actions we want to make with pictures is edit them before saving. 
+We will add to our example ability to crop images before uploading them to the server, using [ngImgCrop](https://github.com/alexk111/ngImgCrop/) package.
 So lets start by adding the package to our project:
 ```
 meteor add alexk111:ng-img-crop
@@ -92,17 +96,17 @@ And add a dependency in our module:
 
 {{> DiffBox tutorialName="angular-meteor" step="20.9"}}
 
-We want to perform the crop in the client side only, before saving it in the CollectionFS, so lets get the uploaded image, and instead of saving it in the server - we will get the Data Url of it, and use it in the ngImgCrop:
+We want to perform the crop on the client, before saving it to the CollectionFS, so lets get the uploaded image, and instead of saving it to the server - we will get the Data Url of it, and use it in the ngImgCrop:
 
 {{> DiffBox tutorialName="angular-meteor" step="20.10"}}
 
-We take the file object and used HTML5 FileReader API to read the file from the user on the client side, without uploading it to the server.
+We took the file object and used HTML5 FileReader API to read the file from the user on the client side, without uploading it to the server.
 Then we saved the DataURI of the image into a $scope variable.
 Next, we will need to use this DataURI with the ngImgCrop directive as follow:
 
 {{> DiffBox tutorialName="angular-meteor" step="20.11"}}
 
-And add `ng-hide` to the upload control, in order to hide after the user picks an image to crop.
+Moreover we add `ng-hide` to the upload control, in order to hide it, after the user picks an image to crop.
 
 {{> DiffBox tutorialName="angular-meteor" step="20.12"}}
 
@@ -119,15 +123,14 @@ CollectionFS have the ability to receive DataURI and save it, just like a File o
 
 {{> DiffBox tutorialName="angular-meteor" step="20.14"}}
 
-We will save the image call the `answer` function that just close the modal and notifies the main page about the action the user made (save / cancel)
+We will save the image call and just close the modal and notifies the main page about the action the user made.
 
-{{> DiffBox tutorialName="angular-meteor" step="20.15"}}
-
-And because we can share the information from the recently closed dialog with the main view (the add party form), we can just the Promise of the `show` function and implement a logic that will save the list of images we want to attach to out party:
+And because we can share the information from the recently closed dialog with the main view (the add party form), we will implement a logic that will save the list of images we want to attach to out party by adding it to the Promise of the `show` function and :
 
 {{> DiffBox tutorialName="angular-meteor" step="20.16"}}
 
-And we are done! Now we have the ability to crop images and then save them using CollectionFS.
+And we are almost done, Now we have the ability to crop images and then save them using CollectionFS.
+We are just missing the display :).
 
 ### Display Uploaded Images
 
@@ -135,16 +138,16 @@ Let's add a simple gallery to list the images in the new party form:
 
 {{> DiffBox tutorialName="angular-meteor" step="20.17"}}
 
-Cool! We can the all the images we want to attach to the new party!
+Cool! We can now add all the images we want to attach to the new party!
 
 Now let's add description to our images!
 
 ### Images Metadata & Description
 
 Using CollectionFS, we can also save metadata on the files we store.
-In order to to that, we just need to update the image object with the value, on the `metadata` property of each image.
+In order to to that, we just need to update the `metadata` property of the image object.
 
-In order to do that really nice and user-friendly, I used [angular-xeditable](https://github.com/vitalets/angular-xeditable).
+In order to do that with really nice and user-friendly ui, I used [angular-xeditable](https://github.com/vitalets/angular-xeditable).
 Lets add the angular-xeditable package to our project:
 ```
 meteor add vitalets:angular-xeditable
