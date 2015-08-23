@@ -1,4 +1,4 @@
 DiffBox.registerTutorial("angular-meteor", {
-  gitHubRepoName: "dotansimha/angular-meteor-socially-new",
+  gitHubRepoName: "Urigo/meteor-angular-socially",
   patchFilename: "client/content/patches/angular-meteor.multi.patch"
 });
