@@ -1,5 +1,5 @@
-<template name="tutorialAngular2.step_00.html">
-  {{#markdown}}
+{{#template name="tutorialAngular2.step_00.html"}}
+
 > Disclaimer: Angular 2 is not yet production ready. The API will change. For now, consider this tutorial for educational purposes.
 
 Let's start building our Meteor Angular 2 Socially app.
@@ -221,10 +221,7 @@ Try adding a new expression to the index.ng.html that will do some math:
 
     <p>1 + 2 = {{dstache}} 1 + 2 }}</p>
 
-
 # Summary
 Now let's go to [step 1](/tutorial/step_01) and add some content to our application.
 
-  {{/markdown}}
-</template>
-
+{{/template}}

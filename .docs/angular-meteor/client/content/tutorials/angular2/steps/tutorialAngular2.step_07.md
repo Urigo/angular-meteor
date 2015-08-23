@@ -1,5 +1,4 @@
-<template name="tutorialAngular2.step_07.html">
-  {{#markdown}}
+{{#template name="tutorialAngular2.step_07.html"}}
 
 In this article, we'll look at two things:
 
@@ -196,7 +195,5 @@ Now we've told TypeScript that Parties is a Mongo Collection made up of not just
 
 - Add types, interfaces, generics, declarations & type Definition files to your project.
 - Or not, as mentioned previously, TypeScript features are optional. Without them, you're basically just writing ES2015 code and compiling it to ES5.
-
-
-  {{/markdown}}
-</template>
+  
+{{/template}}

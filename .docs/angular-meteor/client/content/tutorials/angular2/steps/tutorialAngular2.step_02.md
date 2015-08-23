@@ -1,6 +1,5 @@
-<template name="tutorialAngular2.step_02.html">
-  {{#markdown}}
-
+{{#template name="tutorialAngular2.step_02.html"}}
+    
 Now it's time to make the web page dynamic — with Angular 2.
 
 This step will still be focusing on client side Angular tools. The next one will show you how to get the power of Meteor.
@@ -76,7 +75,6 @@ __`client/app.ts`:__
         }
       }
 
-
 Run the app again.
 
     meteor
@@ -98,5 +96,4 @@ But, this is all client side, which is nice for tutorials, but in a real applica
 
 So, let's go to [step 3](/tutorial/step_03) to learn how to bind our application to the great power of Meteor.
 
-  {{/markdown}}
-</template>
+{{/template}}

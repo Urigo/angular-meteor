@@ -1,5 +1,4 @@
-<template name="tutorialAngular2.step_04.html">
-  {{#markdown}}
+{{#template name="tutorialAngular2.step_04.html"}}    
 
 Now that we have full data binding from server to client, let's interact with the data and see the updates in action.
 
@@ -274,5 +273,4 @@ Now try to delete a few parties and also watch them being removed from other bro
 
 So now you've seen how easy it is to manipulate the data using Angular's powerful directives and sync that data with Meteor's powerful Mongo.collection API.
 
-   {{/markdown}}
-</template>
+{{/template}}
