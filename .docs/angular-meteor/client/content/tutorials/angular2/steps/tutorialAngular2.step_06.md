@@ -1,6 +1,5 @@
-<template name="tutorialAngular2.step_06.html">
-  {{#markdown}}
-
+{{#template name="tutorialAngular2.step_06.html"}}
+  
 In this step we'll continue looking at the Angular router & forms.
 
 By the end, you should have an understanding of:
@@ -201,5 +200,4 @@ That is, if the user presses the "cancel" button when changes haven't been saved
 
 **Hint: use `_.isEqual(obj1, obj2)` to compare two objects with Underscore.**
 
-  {{/markdown}}
-</template>
+{{/template}}

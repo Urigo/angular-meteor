@@ -1,6 +1,5 @@
-<template name="tutorialAngular2.step_03.html">
-  {{#markdown}}
-
+{{#template name="tutorialAngular2.step_03.html"}}
+    
 OK, so we have a nice client side application that creates and renders it's own data.
 
 So, if we were in any framework other than Meteor, we would start implementing a series of REST endpoints to connect the server to the client.
@@ -154,10 +153,8 @@ Try running more actions like updating an object from the console and so on.
 
 In the next step, we'll see how to add functionality to our app's UI so that we can add parties without using the database console.
 
-
 # Summary
 
 In this chapter you saw how easy and fast it is to create a full connection between our client data, the server and all the other connected clients.
 
-  {{/markdown}}
-</template>
+{{/template}}

@@ -1,5 +1,4 @@
-<template name="tutorialAngular2.step_05.html">
-  {{#markdown}}
+{{#template name="tutorialAngular2.step_05.html"}}
 
 In this step, you will learn how to create a layout template and how to build an app that has multiple views by adding routing, using the new Angular router.
 
@@ -267,7 +266,6 @@ So now we can route to pages with the data loading. But if you route to a party-
 
 We will see a better way to handle this kind of routing in the next step.
 
-
 # Challenge
 
 Add a link back to the `PartyList` component from `PartyDetails`.
@@ -278,5 +276,4 @@ We've seen only a glimpse of the power & flexibility of Angular 2's new router.
 
 In the next unit we'll look at another router feature: **LifeCycle Hooks**.
 
-    {{/markdown}}
-</template>
+{{/template}}

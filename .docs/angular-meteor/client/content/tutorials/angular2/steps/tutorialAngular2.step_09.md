@@ -1,5 +1,5 @@
-<template name="tutorialAngular2.step_09.html">
-  {{#markdown}}
+{{#template name="tutorialAngular2.step_09.html"}}
+  
 Right now our app has no privacy, every user can see all the parties on the screen.
 
 So let's add a `isPublic` flag on parties - if a party is public we will let anyone see it, but if a party is private, only the owner can see it.
@@ -357,5 +357,4 @@ If you are not quite sure what is the difference between collection and publicat
 
 In the next step we will learn how to filter the users list in the client side with Angular pipes and create a custom pipe for our own needs.
 
-  {{/markdown}}
-</template>
+{{/template}}
