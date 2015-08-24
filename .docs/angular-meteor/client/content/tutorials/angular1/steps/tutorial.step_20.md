@@ -74,7 +74,7 @@ Also, in order to make the "drop-zone" look like a dropable area in my page, I a
 
 {{> DiffBox tutorialName="angular-meteor" step="20.7"}}
 
-Now lets implement the image uploading function - `addImages` in the `nfg-change` attribute on `add-photo-modal.ng.html` we just created,
+Now lets implement the image uploading function - `addImages` in the `nfg-change` attribute on html file we just created.
 For this function we create the controller (`addPhotoCtrl.js`) and use the following :
 
 {{> DiffBox tutorialName="angular-meteor" step="20.8"}}
