@@ -191,12 +191,6 @@ The basics of angular-sortable-view is to add the `sv-?` attributes to our page,
 
 I also added `draggable="false"` to prevent the browser's default behavior for dragging images.
 
-I use the `sv-on-sort` callback to know when the sort is done and which image moved to which position, the $partTo is the array with indexes updated after the sort is done.
-
-Now let's implement the $scope function that will just save the order on the image as a local information, we will use it really soon.
-
-{{> DiffBox tutorialName="angular-meteor" step="20.23"}}
-
 We can also add a highlight to the first image, which we will use as the main image, by adding an indication for that:
 
 {{> DiffBox tutorialName="angular-meteor" step="20.24"}}
@@ -233,8 +227,10 @@ CollectionFS gives the ability to handle multiple Stores object, and perform man
 You can find the full information about image manipulation in the [CollectionFS docs](https://github.com/CollectionFS/Meteor-CollectionFS#image-manipulation).
 
 Also, make sure you add graphicsmagick package by inserting the following line in the terminal :
-`meteor add cfs:graphicsmagick` 
-For more information, follow the instructions on the CollectionFS GitHub page.
+```
+meteor add cfs:graphicsmagick
+```
+For more information, follow the instructions on the [CollectionFS](https://github.com/CollectionFS/Meteor-CollectionFS) GitHub page.
 In order to add ability to save thumbnails, lets add a new store in the `images.js` modal and use `transformWrite` ability:
 
 {{> DiffBox tutorialName="angular-meteor" step="20.30"}}
