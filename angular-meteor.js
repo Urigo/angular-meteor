@@ -15,9 +15,9 @@ var angularMeteor = angular.module('angular-meteor', [
 
 angularMeteor.run(['$compile', '$document', '$rootScope', function ($compile, $document, $rootScope) {
     // Recompile after iron:router builds page
-    if(typeof Router != 'undefined') {
+    if(Package['iron:router'].Router) {
       var appLoaded = false;
-      Router.onAfterAction(function(req, res, next) {
+      Package['iron:router'].Router.onAfterAction(function(req, res, next) {
         Tracker.afterFlush(function() {
           if (!appLoaded) {
             $compile($document)($rootScope);
