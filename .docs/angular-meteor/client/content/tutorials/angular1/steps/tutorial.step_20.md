@@ -164,6 +164,11 @@ And, of course, implement `updateDescription` function on the parties list scope
 
 {{> DiffBox tutorialName="angular-meteor" step="20.20"}}
 
+Due to problem with open issue in [angular-xeditable](https://github.com/vitalets/angular-xeditable/issues/6) 
+We need to change the form on `parties.list.ng.html` into div to make the inline editing of `angular-xeditable` work.
+
+{{> DiffBox tutorialName="angular-meteor" step="20.20.1"}}
+
 That's it! Now we have a photo gallery with description for each image!
 
 ### Sort Images
