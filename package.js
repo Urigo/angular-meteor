@@ -1,6 +1,6 @@
 Package.describe({
   name: "urigo:angular",
-  summary: "The simplest no-conflict way to use AngularJS with Meteor, Meteorite and Atmosphere Smart Packages.",
+  summary: "Everything you need to use AngularJS in your Meteor app",
   version: "0.9.3",
   git: "https://github.com/Urigo/angular-meteor.git"
 });
