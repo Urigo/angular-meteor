@@ -27,7 +27,8 @@ Note that you will need to define the collection as shared resource because you 
 
 ### Creating the CollectionFS
 
-Let's start by creating `model/images.js` file, and define a regular CollectionFS object called "Images", also, We use the CollectionFS API that allows us to defined auth-rules.
+Let's start by creating `model/images.js` file, and define a regular CollectionFS object called "Images".
+Also we will use the CollectionFS API that allows us to defined auth-rules.
 Finally, We will publish the collection just like any other collection, in order to allow the client to subscribe to those images:
 
 {{> DiffBox tutorialName="angular-meteor" step="20.1"}}
