@@ -96,14 +96,14 @@ If you completed the challenge in step 5, your party-details component should no
 __`client/party-details/party-details.ts`:__
 
     import {Component, View, Attribute, Inject} from 'angular2/angular2';
-    import {routerDirectives, RouteParams} from 'angular2/router';
+    import {ROUTER_DIRECTIVES, RouteParams} from 'angular2/router';
 
     @Component({
       selector: 'party-details'
     })
     @View({
       templateUrl: 'client/party-details/party-details.ng.html',
-      directives: [routerDirectives]
+      directives: [ROUTER_DIRECTIVES]
     })
     export class PartyDetails{
       constructor(@Inject(RouteParams) routeParams:RouteParams) {
@@ -121,16 +121,16 @@ __`client/party-details/party-details.ts`:__
 
 [ng-model](https://angular.io/docs/js/latest/api/forms/NgModel-class.html) binds a view's model to the controller's model. Think of it as a kind of two-way binding. Let's setup the dependencies and look at an example.
 
-The NgModel dependency can be found in `formDirectives`. First, import it and add it to your list of View directives.
+The NgModel dependency can be found in `FORM_DIRECTIVES`. First, import it and add it to your list of View directives.
 
 __`client/party-details/party-details.ts`:__
 
-    import {formDirectives} from 'angular2/angular2';
+    import {FORM_DIRECTIVES} from 'angular2/angular2';
 
     @Component( ... )
     @View({
       templateUrl: 'client/party-details/party-details.ng.html',
-      directives: [routerDirectives, formDirectives]
+      directives: [ROUTER_DIRECTIVES, FORM_DIRECTIVES]
     })
     export class PartyDetails { ... }
 
