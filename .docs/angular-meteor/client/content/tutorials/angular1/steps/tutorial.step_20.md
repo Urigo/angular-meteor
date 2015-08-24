@@ -199,12 +199,12 @@ And some CSS to make it look better:
 
 {{> DiffBox tutorialName="angular-meteor" step="20.25"}}
 
-So now we have image gallery with ability to edit and add images, add a description to the images, and ability to sort.
-Now we just need to add the logic that connect those images with that party we are creating!
+So now we have image gallery with ability to add images, edit them, add a description and sort.
+Now we just need to add the logic that connect those images with the party we are creating!
 
 ### Link Image To Object
 
-So as you know, we have all the images stored in `newPartyImages` array, we let's implement the `createParty` function, and save a link to the image with it's order:
+So as you know, we have all the images stored in `newPartyImages` array, Let's implement the `createParty` function, and save a link to the images with the right order:
 {{> DiffBox tutorialName="angular-meteor" step="20.26"}}
 
 And now update the button to call this function:
@@ -222,21 +222,24 @@ And implement the `getMainImage` function:
 And that's it!
 
 ### Thumbnails
-Another common usage with images upload, is the ability to save thumbnails of the image as soon as we upload it.
+Another common usage with image upload, is the ability to save thumbnails of the image as soon as we upload it.
 CollectionFS gives the ability to handle multiple Stores object, and perform manipulations before we save it in each store.
 You can find the full information about image manipulation in the [CollectionFS docs](https://github.com/CollectionFS/Meteor-CollectionFS#image-manipulation).
-Also, make sure you add `meteor add cfs:graphicsmagick` and install graphicsmagick, for more information, follow the instructions on the CollectionFS GitHub page.
-So in order to add ability to save thumbnails, lets add a new store in the `model.js` and use `transformWrite` ability:
+
+Also, make sure you add graphicsmagick package by inserting the following line in the terminal :
+`meteor add cfs:graphicsmagick` 
+For more information, follow the instructions on the CollectionFS GitHub page.
+In order to add ability to save thumbnails, lets add a new store in the `images.js` modal and use `transformWrite` ability:
 
 {{> DiffBox tutorialName="angular-meteor" step="20.30"}}
 
 So now each image we upload will be saved also as thumbnail.
-All we have to do is use and display the thumbnail instead of the original image. We just need to add a param to `url()` method of File objects and decide which Store to use when creating the URL:
+All we have to do in order to display the thumbnail instead of the original image is to add a param to `url()` method of File objects and decide which Store to use when creating the URL:
 
 {{> DiffBox tutorialName="angular-meteor" step="20.31"}}
 
 That's it! Now we added the ability to save thumbnails for the images and use them in the view!
 
-In addition to the angular-meteor-socially tutorial, you can find simple examples of each step of the tutorial in the Angular-Meteor repository, under examples/ directory.
+In addition to the [angular-meteor-socially](https://github.com/Urigo/meteor-angular-socially) tutorial, you can find simple examples of each step of the tutorial in the Angular-Meteor repository, under [examples/](https://github.com/Urigo/angular-meteor/tree/master/examples) directory.
 
 {{/template}}
