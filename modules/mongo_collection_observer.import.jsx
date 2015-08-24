@@ -5,7 +5,15 @@ class CursorHandle {
   _hAutoNotify;
   _hCurObserver;
 
-  constructor(cursor, hAutoNotify, hCurObserver) {
+  constructor(cursor: Mongo.Cursor<any>,
+    hAutoNotify: Tracker.Computation,
+    hCurObserver: Object) {
+    check(cursor, Mongo.Cursor);
+    check(hAutoNotify, Tracker.Computation);
+    check(hCurObserver, Match.Where(function(observer) {
+      return !!observer.stop;
+    }));
+
     this._cursor = cursor;
     this._hAutoNotify = hAutoNotify;
     this._hCurObserver = hCurObserver;
@@ -19,6 +27,8 @@ class CursorHandle {
 
 export class AddChange {
   constructor(index: number, item: any) {
+    check(index, Number);
+
     this.index = index;
     this.item = item;
   }
@@ -26,6 +36,9 @@ export class AddChange {
 
 export class MoveChange {
   constructor(fromIndex: number, toIndex: number) {
+    check(fromIndex, Number);
+    check(toIndex, Number);
+
     this.fromIndex = fromIndex;
     this.toIndex = toIndex;
   }
@@ -33,6 +46,8 @@ export class MoveChange {
 
 export class RemoveChange {
   constructor(index: number) {
+    check(index, Number);
+
     this.index = index;
   }
 }
@@ -46,6 +61,8 @@ export class MongoCollectionObserver extends EventEmitter {
   _propMap: Object;
 
   constructor(cursorDefFunc) {
+    check(cursorDefFunc, Function);
+
     super();
     this._docs = [];
     this._changes = [];

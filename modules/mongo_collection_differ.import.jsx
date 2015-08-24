@@ -21,8 +21,8 @@ export class MongoCollectionDiffer {
     this._inserted = [];
     this._removed = [];
     this._moved = [];
-    this._observer = null;;
-    this._lastChanges = [];
+    this._lastChanges = null;
+    this._observer = null;
   }
 
   forEachAddedItem(fn: Function) {
@@ -46,7 +46,7 @@ export class MongoCollectionDiffer {
   diff(observer: MongoCollectionObserver) {
     this._reset();
 
-    if (this._observer !== observer) {
+    if (observer && this._observer !== observer) {
       var self = this;
       if (this._subscription) {
         ObservableWrapper.dispose(this._subscription);
@@ -56,7 +56,7 @@ export class MongoCollectionDiffer {
           self._updateLatestValue(changes);
         });
       this._observer = observer;
-      this._lastChanges =this._observer.lastChanges
+      this._lastChanges = this._observer.lastChanges;
     }
 
     if (this._lastChanges) {

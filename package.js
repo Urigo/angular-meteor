@@ -10,6 +10,7 @@ Package.onUse(function(api) {
   api.versionsFrom('1.1.0.3');
 
   api.use([
+    'check@1.0.5',
     'universe:modules@0.4.1'
   ]);
 
@@ -27,5 +28,10 @@ Package.onUse(function(api) {
 
 Package.onTest(function(api) {
   api.use('tinytest');
-  api.use('angular2-meteor');
+  api.use('sanjo:jasmine@0.18.0');
+  api.use('urigo:angular2-meteor');
+
+  api.addFiles([
+    'tests/client/unit/mongo_collection_differ_spec.js'
+  ], 'client');
 });
