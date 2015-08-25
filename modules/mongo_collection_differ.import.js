@@ -10,6 +10,7 @@ export class MongoCollectionDifferFactory extends DefaultIterableDifferFactory {
   }
 }
 
+// TODO(barbatus): to implement IterableDiffer interface.
 export class MongoCollectionDiffer {
   _inserted: Array<CollectionChangeRecord>;
   _removed: Array<CollectionChangeRecord>;

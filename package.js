@@ -20,9 +20,9 @@ Package.onUse(function(api) {
 
   api.addFiles([
     'system-config.js',
-    'main.import.jsx',
-    'modules/mongo_collection_observer.import.jsx',
-    'modules/mongo_collection_differ.import.jsx'
+    'main.import.js',
+    'modules/mongo_collection_observer.import.js',
+    'modules/mongo_collection_differ.import.js'
   ]);
 });
 
@@ -32,6 +32,7 @@ Package.onTest(function(api) {
   api.use('urigo:angular2-meteor');
 
   api.addFiles([
-    'tests/client/unit/mongo_collection_differ_spec.js'
+    'tests/client/unit/mongo_collection_differ_spec.js',
+    'tests/client/unit/mongo_collection_observer_spec.js'
   ], 'client');
 });

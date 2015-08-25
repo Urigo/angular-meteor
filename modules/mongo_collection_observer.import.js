@@ -2,8 +2,8 @@ import {EventEmitter} from 'angular2/angular2';
 
 class CursorHandle {
   _cursor: Mongo.Cursor<any>;
-  _hAutoNotify;
-  _hCurObserver;
+  _hAutoNotify: Tracker.Computation;
+  _hCurObserver: Object;
 
   constructor(cursor: Mongo.Cursor<any>,
     hAutoNotify: Tracker.Computation,
@@ -58,7 +58,8 @@ export class MongoCollectionObserver extends EventEmitter {
   _lastChanges: Array<any>;
   _cursorDefFunc: Function;
   _hCursor: CursorHandle;
-  _propMap: Object;
+  _propMap: Map<String, Object>;
+  _eventMap: Map<String, Array<Function>>;
 
   constructor(cursorDefFunc) {
     check(cursorDefFunc, Function);
@@ -67,7 +68,8 @@ export class MongoCollectionObserver extends EventEmitter {
     this._docs = [];
     this._changes = [];
     this._lastChanges = [];
-    this._propMap = {};
+    this._propMap = new Map();
+    this._eventMap = new Map();
     this._cursorDefFunc = cursorDefFunc;
   
     this._defineGets(cursorDefFunc);
@@ -82,28 +84,51 @@ export class MongoCollectionObserver extends EventEmitter {
     cursorDefFunc.call(this);
   }
 
-  get(propName): any {
-    if (!this._propMap[propName]) {
+  get(propName: String): any {
+    check(propName, String);
+
+    if (!this._propMap.get(propName)) {
       var depVar = new Tracker.Dependency();
-      this._propMap[propName] = {
+      this._propMap.set(propName, {
         depVar: depVar,
         value: this[propName]
-      };
+      });
       var self = this;
       Object.defineProperty(this, propName, {
           get: function() {
-            return self._propMap[propName].value;
+            return self._propMap.get(propName).value;
           },
           set: function(value) {
-            self._propMap[propName].value = value;
-            self._propMap[propName].depVar.changed();
+            self._propMap.get(propName).value = value;
+            self._propMap.get(propName).depVar.changed();
           },
           enumerable: true,
           configurable: true
       });
     }
-    this._propMap[propName].depVar.depend();
+    this._propMap.get(propName).depVar.depend();
     return this[propName];
+  }
+
+  on(eventName, callback) {
+    check(eventName, String);
+    check(callback, Function);
+
+    if (!this._eventMap.has(eventName)) {
+      this._eventMap.set(eventName, []);
+    }
+    this._eventMap.get(eventName).push(callback);
+  }
+
+  _raise(eventName) {
+    check(eventName, String);
+
+    if (this._eventMap.has(eventName)) {
+      var callbacks = this._eventMap.get(eventName);
+      for (let callback of callbacks) {
+        callback();
+      }
+    }
   }
 
   _startAutoCursorUpdate(cursorDefFunc) {
@@ -114,6 +139,7 @@ export class MongoCollectionObserver extends EventEmitter {
         self._hCursor = null;
       }
       self._hCursor = self._startCursor(cursorDefFunc.call(self));
+      self._raise('newCursor');
     }));
   }
 

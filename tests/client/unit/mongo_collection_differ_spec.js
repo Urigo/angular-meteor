@@ -39,26 +39,34 @@ describe('MongoCollectionDiffer', function() {
     expect(differ.diff()).toBe(null);
   });
 
-  it('all collection changes are provided', function() {
+  it('all collection changes are handled', function() {
     var differ = new MongoCollectionDiffer();
     differ.diff(fakeObserver);
     var changes = [
-      new AddChange({name: 'some doc'}, 5),
+      new AddChange(5, {name: 'some doc'}),
       new RemoveChange(15),
       new MoveChange(10, 20)];
     fakeObserver.next(changes);
     differ.diff();
 
-    differ.forEachAddedItem(function(addChange) {
+    var forEachAddedItem = jasmine.createSpy().and.callFake(function(addChange) {
       expect(addChange.item).toEqual(changes[0].item);
       expect(addChange.currentIndex).toEqual(changes[0].index);
     });
-    differ.forEachRemovedItem(function(removeChange) {
+    differ.forEachAddedItem(forEachAddedItem);
+    expect(forEachAddedItem).toHaveBeenCalled();
+
+    var forEachRemovedItem = jasmine.createSpy().and.callFake(function(removeChange) {
       expect(removeChange.previousIndex).toEqual(changes[1].index);
     });
-    differ.forEachMovedItem(function(moveChange) {
+    differ.forEachRemovedItem(forEachRemovedItem);
+    expect(forEachRemovedItem).toHaveBeenCalled();
+
+    var forEachMovedItem = jasmine.createSpy().and.callFake(function(moveChange) {
       expect(moveChange.previousIndex).toEqual(changes[2].fromIndex);
       expect(moveChange.currentIndex).toEqual(changes[2].toIndex);
     });
+    differ.forEachMovedItem(forEachMovedItem);
+    expect(forEachMovedItem).toHaveBeenCalled();
   });
 });
