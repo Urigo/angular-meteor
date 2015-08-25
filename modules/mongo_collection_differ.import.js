@@ -1,4 +1,4 @@
-import {ChangeDetectorRef} from 'angular2/angular2';
+import {ChangeDetectorRef, IterableDiffers, bind} from 'angular2/angular2';
 import {ObservableWrapper, DefaultIterableDifferFactory, CollectionChangeRecord} from 'angular2/change_detection';
 import {MongoCollectionObserver, AddChange, MoveChange, RemoveChange} from './mongo_collection_observer';
 

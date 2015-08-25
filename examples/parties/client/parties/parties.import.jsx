@@ -7,10 +7,7 @@ import {PartyForm} from 'client/party-form/party-form';
 import {MongoCollectionDifferFactory, MongoCollectionObserver} from 'angular2-meteor';
 
 @Component({
-  selector: 'parties',
-  viewBindings: [
-    IterableDiffers.extend([new MongoCollectionDifferFactory()])
-  ]
+  selector: 'parties'
 })
 @View({
   templateUrl: 'client/parties/parties.ng.html',
@@ -25,7 +22,7 @@ export class PartiesCmp {
     });
   }
 
-  loadParty(location) {
+  searchLocation(location) {
     this.parties.location = location;
   }
 }

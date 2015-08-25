@@ -1,4 +1,4 @@
-import {Component, View, bootstrap, bind} from 'angular2/angular2';
+import {Component, View, bind} from 'angular2/angular2';
 
 import {Router, routerInjectables, RouterOutlet, routerDirectives, RouteConfig} from 'angular2/router';
 
@@ -6,6 +6,8 @@ import {LocationStrategy, Location, HashLocationStrategy} from 'angular2/router'
 
 import {PartiesCmp} from './parties/parties';
 import {PartyDetailsCmp} from './party-details/party-details';
+
+import {bootstrap} from 'angular2-meteor';
 
 @Component({
   selector: 'socially'

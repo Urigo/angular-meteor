@@ -21,8 +21,11 @@ Package.onUse(function(api) {
   api.addFiles([
     'system-config.js',
     'main.import.js',
+    'modules/cursor_handle.import.js',
     'modules/mongo_collection_observer.import.js',
-    'modules/mongo_collection_differ.import.js'
+    'modules/mongo_collection_differ.import.js',
+    'modules/mongo_object_observer.import.js',
+    'modules/bootstrap.import.js'
   ]);
 });
 
