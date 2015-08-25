@@ -211,4 +211,20 @@ export class MongoCollectionObserver extends EventEmitter {
     this._docs.splice(index, 1);
     this._changes.push(new RemoveChange(index));
   }
+
+  destroy() {
+    if (this._hCursor) {
+      this._hCursor.stop();
+    }
+    this._propMap.clear();
+    this._eventMap.clear();
+    this._docs.length = 0;
+    this._changes.length = 0;
+
+    this._hCursor = null;
+    this._propMap = null;
+    this._eventMap = null;
+    this._docs = null;
+    this._changes = null;
+  }
 }

@@ -69,6 +69,15 @@ export class MongoCollectionDiffer {
     return null;
   }
 
+  onDestroy() {
+    if (this._subscription) {
+      ObservableWrapper.dispose(this._subscription);
+    }
+    if (this._observer) {
+      this._observer.destroy();
+    }
+  }
+
   _updateLatestValue(changes) {
     this._lastChanges = changes;
   }
