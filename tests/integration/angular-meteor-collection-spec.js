@@ -342,6 +342,62 @@ describe('$meteorCollection service', function() {
       $scope.collection.save(docs);
       expect(Collection.find().fetch()).toDeepEqual(docs);
     });
+
+    describe('objects with $$hashkey', function() {
+      it('should be saved to the collection when save is called', function() {
+        // add haskeys to objects in the array
+        meteorArray.forEach(function(item, index) {
+          item.$$hashKey = index;
+        });
+
+        var itemChanged = meteorArray[0];
+        itemChanged.a = 444;
+
+        meteorArray.save();
+
+        expect({a: 444, b: 2}).toBeFoundExactlyInCollection(MyCollection);
+      });
+
+      it('should save objects with nested $$haskey fields when save is called', function() {
+        meteorArray.save(itemWithNestedHashkeyArrays);
+
+        expect(itemWithNestedHashkeysRemoved).toBeFoundExactlyInCollection(MyCollection);
+      });
+    });
+
+    describe('objects with date', function() {
+      it('should be saved to the collection when save is called', function() {
+        var itemChanged = meteorArray[0];
+        itemChanged.a = new Date("October 13, 2014 11:13:00");
+
+        meteorArray.save();
+        expect({a: new Date("October 13, 2014 11:13:00"), b: 2})
+          .toBeFoundExactlyInCollection(MyCollection);
+      });
+
+      it('should save objects with nested date fields when save is called', function() {
+        meteorArray.save(itemWithNestedDateFields);
+
+        expect(itemWithNestedDateFields).toBeFoundExactlyInCollection(MyCollection);
+      });
+
+      it('should be inserted to the collection if not exist', function() {
+        var id = 'date-doc';
+        var doc = { _id: id, date: new Date() };
+        $scope.collection.save(doc);
+        expect(Collection.findOne(id)).toDeepEqual(doc);
+      });
+
+      it('should update an auto binded collection', function() {
+        var id = 'date-doc';
+        var doc = { _id: id, date: new Date() };
+        $scope.collection = $scope.$meteorCollection(Collection, true);
+        Collection.insert(doc);
+
+        Tracker.flush();
+        expect(_.findWhere($scope.collection, { _id: id })).toDeepEqual(doc);
+      });
+    });
   });
 
   describe('observe server changes', function() {
@@ -409,45 +465,4 @@ describe('$meteorCollection service', function() {
       expect($ngCol.remove.calls.count()).toEqual(1);
     });
   });
-
-
-  describe('objects with $$hashkey', function() {
-    it('should be saved to the collection when save is called', function() {
-      // add haskeys to objects in the array
-      meteorArray.forEach(function(item, index) {
-        item.$$hashKey = index;
-      });
-
-      var itemChanged = meteorArray[0];
-      itemChanged.a = 444;
-
-      meteorArray.save();
-
-      expect({a: 444, b: 2}).toBeFoundExactlyInCollection(MyCollection);
-    });
-
-    it('should save objects with nested $$haskey fields when save is called', function() {
-      meteorArray.save(itemWithNestedHashkeyArrays);
-
-      expect(itemWithNestedHashkeysRemoved).toBeFoundExactlyInCollection(MyCollection);
-    });
-  });
-
-  describe('objects with date', function() {
-    it('should be saved to the collection when save is called', function() {
-      var itemChanged = meteorArray[0];
-      itemChanged.a = new Date("October 13, 2014 11:13:00");
-
-      meteorArray.save();
-      expect({a: new Date("October 13, 2014 11:13:00"), b: 2})
-        .toBeFoundExactlyInCollection(MyCollection);
-    });
-
-    it('should save objects with nested date fields when save is called', function() {
-      meteorArray.save(itemWithNestedDateFields);
-
-      expect(itemWithNestedDateFields).toBeFoundExactlyInCollection(MyCollection);
-    });
-  });
-
 });
