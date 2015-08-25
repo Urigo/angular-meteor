@@ -124,7 +124,7 @@ Whether it's a typo, some clarification, or a whole new feature - here's how to 
 ## Usage
 ### Table of Contents
 - [App initialization](#app-initialization)
-- [Templating[#templating]
+- [Templating](#templating)
 - [Binding to Meteor Collections](#binding-to-meteor-collections)
 - [Routing](#routing)
 - [User service](#user)
