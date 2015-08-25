@@ -1,9 +1,16 @@
+'use strict';
+
 var angularMeteorUser = angular.module('angular-meteor.user', ['angular-meteor.utils']);
 
+// requires package 'accounts-password'
 angularMeteorUser.service('$meteorUser', [
   '$rootScope', '$meteorUtils', '$q',
   function($rootScope, $meteorUtils, $q){
+    var pack = Package['accounts-base'];
+    if (!pack) return;
+
     var self = this;
+    var Accounts = pack.Accounts;
 
     this.waitForUser = function(){
 
