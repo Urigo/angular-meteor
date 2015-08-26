@@ -98,6 +98,27 @@ describe('$meteorObject service', function () {
         c: 3
       });
     });
+
+    it('should create a new document if object does not exist and id is defined', function() {
+      var id = 'test_2';
+      var meteorObject = $meteorObject(TestCollection, id, false);
+      meteorObject._id = id;
+      meteorObject.save();
+
+      var doc = TestCollection.findOne(id);
+      expect(doc._id).toEqual(id);
+    });
+
+    it('should create a new document if object does not exist and no id is defined', function() {
+      var meteorObject = $meteorObject(TestCollection, undefined, false);
+      meteorObject.save();
+
+      Tracker.flush();
+      var id = meteorObject._id;
+
+      var doc = TestCollection.findOne(id);
+      expect(doc._id).toEqual(id);
+    });
   });
 
   describe('#reset()', function () {
@@ -138,23 +159,28 @@ describe('$meteorObject service', function () {
 
   describe('update and data binding', function() {
     beforeEach(function() {
+      spyOn(TestCollection, 'update').and.callThrough();
       // Watching changes (auto modifier not set to false)
       meteorObject = $meteorObject(TestCollection, id);
       $rootScope.$apply();
     });
 
-    it('should update doc on digestion', function() {
+    it('should update nested doc fields on digestion', function() {
       var doc;
 
-      meteorObject.c = 'c';
+      meteorObject.c = { d: 'd' };
       $rootScope.$apply();
       doc = TestCollection.findOne(id);
       expect(meteorObject.getRawObject()).toDeepEqual(doc);
+      expect(TestCollection.update.calls.mostRecent().args[0]).toEqual({ _id: id });
+      expect(TestCollection.update.calls.mostRecent().args[1]).toEqual({ $set: { 'c.d': 'd' } });
 
-      delete meteorObject.c;
+      delete meteorObject.c.d;
       $rootScope.$apply();
       doc = TestCollection.findOne(id);
       expect(meteorObject.getRawObject()).toDeepEqual(doc);
+      expect(TestCollection.update.calls.mostRecent().args[0]).toEqual({ _id: id });
+      expect(TestCollection.update.calls.mostRecent().args[1]).toEqual({ $unset: { 'c.d': true } });
     });
   });
 });
