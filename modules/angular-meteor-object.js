@@ -23,7 +23,7 @@ angularMeteorObject.factory('AngularMeteorObject', [
       data._serverBackup = doc || {};
       data.$$collection = collection;
       data.$$options = options;
-      data.$$id = id;
+      data.$$id = id || new Mongo.ObjectID();
 
       return data;
     }
@@ -39,17 +39,30 @@ angularMeteorObject.factory('AngularMeteorObject', [
 
     AngularMeteorObject.save = function(changes) {
       var deferred = $q.defer();
-      var updates;
+      var collection = this.$$collection;
+      var isExist = collection.findOne(this.$$id);
 
-      if (!this._id)
-        this._id = new Mongo.ObjectID().toJSONValue();
+      // update
+      if (isExist) {
+        var updates;
 
-      if (changes)
-        updates = { $set: changes };
-      else
-        updates = this.getRawObject();
+        if (changes)
+          updates = { $set: changes };
+        else
+          updates = this.getRawObject();
 
-      this.$$collection.upsert(this._id, updates, $meteorUtils.fulfill(deferred));
+        // NOTE: do not use #upsert() method, since it does not exist in some collections
+        collection.update(this.$$id, updates, $meteorUtils.fulfill(deferred));
+      }
+      // insert
+      else {
+        var doc = this.getRawObject();
+        doc._id = this.$$id;
+
+        if (changes) _.extend(doc, _.omit(changes, this.$$internalProps));
+        collection.insert(doc, $meteorUtils.fulfill(deferred));
+      }
+
       return deferred.promise; 
     };
 
@@ -82,7 +95,6 @@ angularMeteorObject.factory('AngularMeteorObject', [
           delete self[prop];
           delete self._serverBackup[prop];
         });
-
       } 
 
       else {
