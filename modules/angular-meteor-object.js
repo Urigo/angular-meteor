@@ -3,8 +3,8 @@
 var angularMeteorObject = angular.module('angular-meteor.object', ['angular-meteor.utils', 'angular-meteor.subscribe', 'angular-meteor.collection', 'getUpdates', 'diffArray']);
 
 angularMeteorObject.factory('AngularMeteorObject', [
-  '$q', '$meteorSubscribe', '$meteorCollection', '$meteorUtils', 'diffArray',
-  function($q, $meteorSubscribe, $meteorCollection, $meteorUtils, diffArray) {
+  '$q', '$meteorSubscribe', '$meteorCollection', '$meteorUtils', 'diffArray', 'getUpdates',
+  function($q, $meteorSubscribe, $meteorCollection, $meteorUtils, diffArray, getUpdates) {
     // A list of internals properties to not watch for, nor pass to the Document on update and etc.
     AngularMeteorObject.$$internalProps = [
       '$$collection', '$$options', '$$id', '$$hashkey', '$$internalProps', '$$scope',
@@ -37,30 +37,32 @@ angularMeteorObject.factory('AngularMeteorObject', [
       return this;
     };
 
-    AngularMeteorObject.save = function(changes) {
+    AngularMeteorObject.save = function(custom) {
       var deferred = $q.defer();
       var collection = this.$$collection;
-      var isExist = collection.findOne(this.$$id);
+      var createFulfill = _.partial($meteorUtils.fulfill, deferred);
+      var oldDoc = collection.findOne(this.$$id);
+      var mods;
 
       // update
-      if (isExist) {
-        var updates;
-
-        if (changes)
-          updates = { $set: changes };
+      if (oldDoc) {
+        if (custom)
+          mods = { $set: custom };
         else
-          updates = this.getRawObject();
+          mods = getUpdates(oldDoc, this.getRawObject());
 
         // NOTE: do not use #upsert() method, since it does not exist in some collections
-        collection.update(this.$$id, updates, $meteorUtils.fulfill(deferred));
+        collection.update(this.$$id, mods, createFulfill({ action: 'updated' }));
       }
       // insert
       else {
-        var doc = this.getRawObject();
-        doc._id = this.$$id;
+        if (custom)
+          mods = _.clone(custom);
+        else
+          mods = this.getRawObject();
 
-        if (changes) _.extend(doc, _.omit(changes, this.$$internalProps));
-        collection.insert(doc, $meteorUtils.fulfill(deferred));
+        mods._id = this.$$id;
+        collection.insert(mods, createFulfill({ action: 'inserted' }));
       }
 
       return deferred.promise; 
