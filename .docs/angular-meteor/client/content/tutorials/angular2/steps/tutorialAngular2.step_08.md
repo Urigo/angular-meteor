@@ -139,7 +139,7 @@ __`typings/socially/socially.d.ts`:__
       _id?: string;
       name: string;
       description: string;
-      user: string;
+      owner: string;
     }
 
 Change the code for the add button in `parties-form.ts` to to also insert a user:
@@ -156,7 +156,7 @@ __`client/parties-form/parties-form.ts`:__
             Parties.insert({
                 name: party.name,
                 description: party.description,
-                user: Meteor.userId()
+                owner: Meteor.userId()
             });
 
             //reset values to empty strings
@@ -224,24 +224,24 @@ The resulting service should look like this:
 
 __`client/lib/party-service.ts`:__
 
-  export class PartyService {
-    add(party:IParty) {
-      Parties.insert(this.getPartyObject(party));
+    export class PartyService {
+     add(party:IParty) {
+        Parties.insert(this.getPartyObject(party));
+      }
+      update(party:IParty) {
+        Parties.update(party._id, this.getPartyObject(party));
+      }
+      remove(partyId:string) {
+        Parties.remove(partyId);
+      }
+      getPartyObject(party) {
+        return {
+          name: party.name,
+          description: party.description,
+          user: Meteor.userId()
+        };
+      }
     }
-    update(party:IParty) {
-      Parties.update(party._id, this.getPartyObject(party));
-    }
-    remove(partyId:string) {
-      Parties.remove(partyId);
-    }
-    getPartyObject(party) {
-      return {
-        name: party.name,
-        description: party.description,
-        user: Meteor.userId()
-      };
-    }
-  }
 
 Much cleaner.
 
@@ -270,6 +270,8 @@ In `parties-list.ts`, `party-details.ts` and `party-form.ts` follow the instruct
 - `import {Inject} from 'angular2/angular2';`
 - `import {PartyService} from `client/lib/party-service';`
 - In the component, add  `viewInjector: [PartyService]`
+git 
+
 
     @Component({
         selector: 'parties-list',
@@ -278,10 +280,12 @@ In `parties-list.ts`, `party-details.ts` and `party-form.ts` follow the instruct
 
 4. Inject partyService into the constructor and set `this.partyService` to the injected.
 
+
     constructor(@Inject(PartyService) partyService:PartyService) {
       this.partyService = partyService;
 
 5. Access the service through `this.partyService` in your methods.
+
 
     this.partyService.remove(party._id)
 
