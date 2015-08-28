@@ -58,7 +58,7 @@ Keep in mind, type-checking is not delivered in the outputted JavaScript. It is 
       partyId: string;
       constructor(@Inject(RouteParams) routeParams:RouteParams) {
         this.partyId = routeParams.params.partyId;
-      }ƒ
+      }
     ...
     }
 

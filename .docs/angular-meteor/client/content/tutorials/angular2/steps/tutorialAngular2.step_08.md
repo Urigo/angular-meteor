@@ -270,7 +270,6 @@ In `parties-list.ts`, `party-details.ts` and `party-form.ts` follow the instruct
 - `import {Inject} from 'angular2/angular2';`
 - `import {PartyService} from `client/lib/party-service';`
 - In the component, add  `viewInjector: [PartyService]`
-git 
 
 
     @Component({
