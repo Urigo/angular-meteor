@@ -10,16 +10,7 @@ In Angular, the view is a projection of the model through the HTML template. Thi
 
 Let's change our template to be dynamic:
 
-__`client/index.ng.html`:__
-
-    <div>
-      <ul>
-        <li *ng-for="#party of parties">
-          {{dstache}}party.name}}
-          <p>{{dstache}}party.description}}</p>
-        </li>
-      </ul>
-    </div>
+{{> DiffBox tutorialName="angular2-meteor" step="2.1"}}
 
 We replaced the hard-coded party list with the [NgFor](https://angular.io/docs/js/latest/api/directives/NgFor-class.html) directive and two Angular expressions:
 
@@ -28,20 +19,7 @@ We replaced the hard-coded party list with the [NgFor](https://angular.io/docs/j
 
 To get this to work, we'll have to import NgFor and tell Angular 2 we are using it in the template.
 
-__`client/app.ts`:__
-
-    import {Component, View, NgFor, bootstrap} from 'angular2/angular2';
-
-    @Component({
-      selector: 'app'
-    })
-    @View({
-      templateUrl: "client/index.ng.html",
-      directives: [NgFor]
-    })
-    class Socially {}
-
-    bootstrap(Socially);
+{{> DiffBox tutorialName="angular2-meteor" step="2.2"}}
 
 Just to be clear, make sure you:
 
@@ -60,20 +38,7 @@ This is not crazy TypeScript syntax, this is what JavaScript looks like now as o
 
 We can attach data with the context 'this', referring to the Socially class.
 
-__`client/app.ts`:__
-
-    class Socially {
-      constructor () {
-        this.parties = [
-          {'name': 'Dubstep-Free Zone',
-          'description': 'Can we please just for an evening not listen to dubstep.'},
-          {'name': 'All dubstep all the time',
-          'description': 'Get it on!'},
-          {'name': 'Savage lounging',
-          'description': 'Leisure suit required. And only fiercest manners.'}
-          ];
-        }
-      }
+{{> DiffBox tutorialName="angular2-meteor" step="2.3"}}
 
 Run the app again.
 
