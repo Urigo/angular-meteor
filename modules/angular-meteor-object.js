@@ -41,12 +41,15 @@ angularMeteorObject.factory('AngularMeteorObject', [
       var deferred = $q.defer();
       var updates;
 
+      if (!this._id)
+        this._id = new Mongo.ObjectID().toJSONValue();
+
       if (changes)
         updates = { $set: changes };
       else
         updates = this.getRawObject();
 
-      this.$$collection.update(this._id, updates, $meteorUtils.fulfill(deferred));
+      this.$$collection.upsert(this._id, updates, $meteorUtils.fulfill(deferred));
       return deferred.promise; 
     };
 
