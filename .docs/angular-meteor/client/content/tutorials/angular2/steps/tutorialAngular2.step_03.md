@@ -35,9 +35,7 @@ So first, let's define our first parties collection that will store all our part
 
 In a separate folder called "model", add a file called "parties.ts". Include this:
 
-__`model/parties.ts`:__
-
-    Parties = new Mongo.Collection("parties");
+{{> DiffBox tutorialName="angular2-meteor" step="3.1"}}
 
 Because this file is located outside of a special folder name, like 'client', this collection and the actions on it will run both on the client (minimongo) and the server (Mongo), you only have to write it once, and Meteor will take care of syncing both of them.
 
@@ -57,11 +55,7 @@ But what happens if the parties data changes on the server-side? How can we tell
 
 For now, we can use Meteor [Tracker](https://www.meteor.com/tracker), a reactive wrapper that we will run data when a change occurs. We will bind it to Angular's change detection system, [Zone.js](https://github.com/angular/zone.js).
 
-__`client/app.ts`:__
-
-    Tracker.autorun(zone.bind(() => {
-      this.parties = Parties.find().fetch();
-    }));
+{{> DiffBox tutorialName="angular2-meteor" step="3.2"}}
 
 The fat arrow syntax `=>` is also from ES2015, and tells the function to run in it's parents context. In other words, it tells `this` to be the context of the class Socially.
 
@@ -97,24 +91,7 @@ Create a new folder called 'server' and create a file called 'loadParties.ts' in
 
 Add the following to the file:
 
-__`server/loadParties.ts`:__
-
-    Meteor.startup(function () {
-      if (Parties.find().count() === 0) {
-
-      var parties = [
-          {'name': 'Dubstep-Free Zone',
-          'description': 'Can we please just for an evening not listen to dubstep.'},
-          {'name': 'All dubstep all the time',
-          'description': 'Get it on!'},
-          {'name': 'Savage lounging',
-          'description': 'Leisure suit required. And only fiercest manners.'}
-      ];
-
-      for (var i = 0; i < parties.length; i++)
-          Parties.insert(parties[i]);
-      }
-    });
+{{> DiffBox tutorialName="angular2-meteor" step="3.3"}}
 
 As you can probably understand, this code runs only on the server, and when Meteor starts it initializes the DB with these sample parties.
 
