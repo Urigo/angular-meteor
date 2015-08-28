@@ -255,7 +255,7 @@ This process should get easier, in fact, it should look this:
     add() {
       if (this.partiesForm.valid) {
         partyService.add(this.partiesForm.value);
-  ...
+        ...
 
 A note about the constructor syntax here:
 
@@ -268,13 +268,13 @@ Unfortunately, the syntax listed above isn't currently working. Keep in mind, An
 In `parties-list.ts`, `party-details.ts` and `party-form.ts` follow the instructions below.
 
 - `import {Inject} from 'angular2/angular2';`
-- `import {PartyService} from `client/lib/party-service';`
-- In the component, add  `viewInjector: [PartyService]`
+- `import {PartyService} from 'client/lib/party-service';`
+- In the component, add  `viewBindings: [PartyService]`
 
 
     @Component({
         selector: 'parties-list',
-        viewInjector: [PartyService]
+        viewBindings: [PartyService]
     })
 
 4. Inject partyService into the constructor and set `this.partyService` to the injected.
@@ -317,7 +317,6 @@ There are more social login services you can use:
 * Twitter
 * Weibo
 * Meteor developer account
-
 
 
 # Authentication With Routers
