@@ -7,7 +7,7 @@
 meteor-platform
 autopublish
 insecure
-urigo:angular
+angular
 cfs:standard-packages
 cfs:gridfs
 danialfarid:ng-file-upload

@@ -76,7 +76,7 @@ templating@1.1.1
 tracker@1.0.7
 ui@1.0.6
 underscore@1.0.3
-urigo:angular@0.9.1
+angular@1.0.0-rc.2
 url@1.0.4
 velocity:chokidar@1.0.1_1
 velocity:core@0.6.5

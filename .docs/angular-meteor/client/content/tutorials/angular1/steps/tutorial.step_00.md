@@ -77,7 +77,7 @@ Now first things first, let's add the AngularJS package to Meteor (we will discu
 
 Back in the command line, launch this command:
 
-    $ meteor add urigo:angular
+    $ meteor add angular
 
 This package takes care of connecting Angular to Meteor and includes the latest AngularJS library code into our app.
 
