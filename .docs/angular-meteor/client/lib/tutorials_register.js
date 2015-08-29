@@ -3,7 +3,7 @@ DiffBox.registerTutorial("angular-meteor", {
   patchFilename: "client/content/patches/angular-meteor.multi.patch"
 });
 
-Diffbox.registerTutorial('angular2-meteor', {
-  githubRepoName: 'shmck/ng2-socially-tutorial',
+DiffBox.registerTutorial('angular2-meteor', {
+  gitHubRepoName: 'shmck/ng2-socially-tutorial',
   patchFilename: 'client/content/patches/angular2-meteor.multi.patch'
 });
