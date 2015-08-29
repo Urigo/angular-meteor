@@ -30,7 +30,12 @@ Package.on_use(function (api) {
   api.versionsFrom('METEOR@0.9.0.1');
 
   api.use('angular:angular@1.4.4', 'client');
-  api.use('minimongo');  // for idStringify
+  api.use('minimongo');
+  if (Package['mongo-id']) {
+    // Since commit b3096e93661bc79bab73a63bae0e14643030a9a3, MongoId is
+    // in a separate package. We need to use it for idParse and idStringify.
+    api.use('mongo-id');
+  }
   api.use('observe-sequence');
   api.use('dburles:mongo-collection-instances@0.3.4', 'client'); // For getCollectionByName
 
