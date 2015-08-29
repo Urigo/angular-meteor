@@ -1,7 +1,7 @@
 Package.describe({
-  name: "urigo:angular",
+  name: "angular",
   summary: "Everything you need to use AngularJS in your Meteor app",
-  version: "0.9.3",
+  version: "1.0.0-rc.2",
   git: "https://github.com/Urigo/angular-meteor.git"
 });
 
@@ -59,7 +59,7 @@ Package.on_use(function (api) {
 
 Package.onTest(function(api) {
   api.use('sanjo:jasmine@0.13.6');
-  api.use('urigo:angular');
+  api.use('angular');
   api.use('angular:angular-mocks@1.4.4');
   api.use('mdg:camera@1.1.5');
 

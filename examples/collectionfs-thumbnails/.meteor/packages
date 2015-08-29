@@ -11,6 +11,6 @@ cfs:standard-packages
 cfs:gridfs
 cfs:graphicsmagick
 jonblum:jquery-cropper
-urigo:angular
+angular
 velocity:html-reporter
 xolvio:cucumber
