@@ -6,6 +6,7 @@ BrowserPolicy.content.allowInlineScripts();
 BrowserPolicy.content.allowScriptOrigin("cdn.optimizely.com");
 BrowserPolicy.content.allowScriptOrigin("ssl.google-analytics.com");
 BrowserPolicy.content.allowScriptOrigin("www.google-analytics.com");
+BrowserPolicy.content.allowScriptOrigin("www.googletagmanager.com");
 BrowserPolicy.content.allowScriptOrigin("api.mixpanel.com");
 BrowserPolicy.content.allowScriptOrigin("cdn.mxpnl.com");
 BrowserPolicy.content.allowScriptOrigin("cdn.segment.com");
