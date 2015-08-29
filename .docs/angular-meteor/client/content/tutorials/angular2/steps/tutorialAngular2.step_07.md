@@ -112,22 +112,22 @@ As well as on the server within Meteor. TypeScript works everywhere.
 
 __`server/loadParties.ts`:__
 
-Meteor.startup(function () {
-    if (Hierarchy.find().count() === 0) {
-
-        var hierarchy:ILevel[] = [
-            {'name': 'Milieu',
-                'description': 'Veget'},
-            {'name': 'Alliance',
-                'description': 'Yeaaah'},
-            {'name': 'Association',
-                'description': 'Juncus'}
+    Meteor.startup(function () {
+      if (Parties.find().count() === 0) {
+    
+        var parties:IParty[] = [
+          {'name': 'Dubstep-Free Zone',
+            'description': 'Can we please just for an evening not listen to dubstep.'},
+          {'name': 'All dubstep all the time',
+            'description': 'Get it on!'},
+          {'name': 'Savage lounging',
+            'description': 'Leisure suit required. And only fiercest manners.'}
         ];
+    
+        for (var i = 0; i < parties.length; i++)
+          Parties.insert(parties[i]);
+      }
 
-        for (var i = 0; i < hierarchy.length; i++)
-            Hierarchy.insert(hierarchy[i]);
-    }
-});
 
 
 This all keeps you notified about mistakes or typos. TypeScript's power is seen more and more as your project and team grow.
@@ -136,7 +136,7 @@ This all keeps you notified about mistakes or typos. TypeScript's power is seen 
 
 You may have noticed that Meteor's global variables are being highlighted by your TypeScript checker. This is because we haven't yet declared them. Let's fix that.
 
-__`client/party-details/party-details.ts`:__
+__`typings/socially/socially.d.ts`:__
 
     declare var Parties;
 

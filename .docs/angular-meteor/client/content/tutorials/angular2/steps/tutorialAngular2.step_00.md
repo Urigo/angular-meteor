@@ -57,11 +57,7 @@ Create a directory called `client`. It is important that the name is `client`. M
 
 First, let's create a new `index.html` file and place this code inside. Then run the app again:
 
-__`client/index.html`:__
-
-    <body>
-      <p>Nothing here</p>
-    </body>
+{{> DiffBox tutorialName="angular2-meteor" step="0.1"}}
 
 As you can see, there is no html tag, no head tag, very simple.
 
@@ -110,12 +106,7 @@ ES2015 & TypeScript both use modules. These are the `import` and `export` statem
 
 System.js is a module loader built into the `shmck:angular2` package. We'll use it to load our root component.
 
-__`client/index.html`:__
-
-    <body>
-      <p>Nothing here</p>
-      <script>System.import('client/app')</script>
-    </body>
+{{> DiffBox tutorialName="angular2-meteor" step="0.2"}}
 
 Here we're telling System.js to load `app.js`, which is compiled from our `app.ts` file.
 
@@ -127,12 +118,7 @@ A component is a controller with an attached view. Think of it like a brick in t
 
 We'll create a root component tag called `app`. Let's include that component into our main `index.html` file:
 
-__`client/index.html`:__
-
-    <body>
-      <app></app>
-      <script>System.import('client/app')</script>
-    </body>
+{{> DiffBox tutorialName="angular2-meteor" step="0.3"}}
 
 But if you load this in your browser, **you won't see anything**. That's because we still need to **create the actual Angular 2 component**, which we'll do next.
 
@@ -146,19 +132,7 @@ Now you can see another example of Meteor's power and simplicity - no need to in
 
 Let's continue defining our Angular 2 application module.
 
-__`client/app.ts`:__
-
-    import {Component, View, bootstrap} from 'angular2/angular2';
-
-    @Component({
-      selector: 'app'
-    })
-    @View({
-      template: "<p>Hello World!</p>"
-    })
-    class Socially {}
-
-    bootstrap(Socially);
+{{> DiffBox tutorialName="angular2-meteor" step="0.4"}}
 
 First we're importing the dependencies we needed from `angular2/angular2`. This is not a folder and file in your directory, but referring to an alias provided to System.js in the `shmck:angular2` package.
 
@@ -190,12 +164,7 @@ Then move the `p` tag into it:
 
 Change your template in `app.ts` to target `index.ng.html`.
 
-__`client/app.ts`:__
-
-    @View({
-      // template: "<p>Hello World!</p>"
-      templateUrl: 'client/index.ng.html'
-    })
+{{> DiffBox tutorialName="angular2-meteor" step="0.5"}}
 
 Now our component template will load from the given path. Let's use Angular inside of `index.ng.html` to see that's working:
 
