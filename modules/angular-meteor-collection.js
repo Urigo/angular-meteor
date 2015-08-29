@@ -201,7 +201,7 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
           self.splice(fromIndex, 1);
           self.splice(toIndex, 0, doc);
           self._serverBackup.splice(fromIndex, 1);
-          self._serverBackup.splice(i, 0, doc);
+          self._serverBackup.splice(toIndex, 0, doc);
           setServerUpdateMode();
         },
 
