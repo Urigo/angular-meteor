@@ -38,6 +38,10 @@ Now let's add the accounts-ui template ( <code ng-non-bindable>&#123;&#123;> log
 
 To add Meteor's templates into AngularJS templates, angular-meteor provides us with the [blaze-template](/api/blaze-template) directive.
 
+To start using, we need to add the `urigo:angular-blaze-template` [package](https://github.com/Urigo/angular-blaze-template):
+
+    meteor add urigo:angular-blaze-template
+
 So instead of adding <code ng-non-bindable>&#123;&#123;> loginButtons &#125;&#125;</code> like in Meteor we will add:
 
     <blaze-template name="loginButtons"></blaze-template>
