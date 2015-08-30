@@ -1,14 +1,14 @@
 {{#template name="tutorial.step_03.md"}}
 {{> downloadPreviousStep stepName="step_02"}}
 
-OK, so we have a nice client side application that creates and renders it's own data.
+We now have a nice client side application that creates and renders its own data.
 
-So, if we were in any framework other than Meteor, we would start implementing a series of REST endpoints to connect the server to the client.
+If we were in any framework other than Meteor, we would start implementing a series of REST endpoints to connect the server to the client.
 Also, we would need to create a database and functions to connect to it.
 
 And we haven't talked about realtime, in which case we would need to add sockets, and a local DB for cache and handle latency compensation (or just ignore those features and create a not - so - good and modern app...)
 
-But luckily, we use Meteor!
+But luckily, we're using Meteor!
 
 
 Meteor makes writing distributed client code as simple as talking to a local database.
@@ -25,7 +25,7 @@ Thanks to minimongo, Meteor's client-side Mongo emulator, `Mongo.Collection` can
 
 # Declare a collection
 
-So first, let's define our first parties collection that will store all our parties.
+So first, let's define the parties collection that will store all our parties.
 
 Add:
 
@@ -39,7 +39,7 @@ That means that this collection and the actions on it will run both on the clien
 
 # Binding to Angular
 
-Now that we've created the collection, our client needs to subscribe to it's changes and bind it to our parties Angular array.
+Now that we've created the collection, our client needs to subscribe to its changes and bind it to our parties Angular array.
 
 To bind them we are going to use the built-in angular-meteor service called [$meteor.collection](/api/meteorCollection).
 
@@ -57,8 +57,7 @@ Our `app.js` file should look like this:
 
 Now every change that happens to the `$scope.parties` variable will automatically be saved to the local minimongo and synced to the MongoDB server DB and all the other clients in realtime!
 
-But we still don't have data in that collection, so let's add some.
-Let's initialize our server with the same parties we had before.
+But we still don't have data in that collection, so let's add some by initializing our server with the same parties we had before.
 
 Add this to the bottom of `app.js`:
 
@@ -68,7 +67,7 @@ As you can probably understand, this code runs only on the server, and when Mete
 
 Run the app and you should see the list of parties on the screen.
 
-In the next chapter we will see how easy it is to manipulate the data, save and publish changes to the server, and by doing so, all the connected clients will automatically get updated.
+In the next chapter we will see how easy it is to manipulate the data, save and publish changes to the server, and how by doing so, all the connected clients will automatically get updated.
 
 # Inserting parties from the console
 
@@ -82,7 +81,7 @@ This opens a console into your app's local development database. At the prompt, 
     db.parties.insert({ name: "A new party", description: "From the mongo console!" });
 
 In your web browser, you will see the UI of your app immediately update to show the new party.
-You can see that we didn't have to write any code to connect the server-side database to our front-end code — it just happened automatically.
+As you see we didn't have to write any code to connect the server-side database to our front-end code — it just happened automatically.
 
 Insert a few more parties from the database console with different text.
 
@@ -90,20 +89,20 @@ Now let's do the same but with remove. At the prompt, type the following command
 
     db.parties.find({});
 
-Now choose one party you want to remove and copy it's id property.
-Then, remove it using that id (replace N4KzMEvtm4dYvk2TF with your party's id value):
+Now choose one party you want to remove and copy it's `id` property.
+Remove it using that id (replace `N4KzMEvtm4dYvk2TF` with your party's id value):
 
     db.parties.remove( {"_id": "N4KzMEvtm4dYvk2TF"});
 
 Again, you will see the UI of your app immediately update with that party removed.
 
-Try running more actions like updating an object from the console and so on.
-
-In the next step, we'll see how to add functionality to our app's UI so that we can add parties without using the database console.
+Try running more actions like updating an object from the console and so on. Check out the mongodb documentation to explore <a href="http://docs.mongodb.org/manual/tutorial/getting-started-with-the-mongo-shell/">the mongodb shell</a>.
 
 
 # Summary
 
 In this chapter you saw how easy and fast it is to create a full connection between our client data, the server and all the other connected clients.
+
+In the next step, we'll see how to add functionality to our app's UI so that we can add parties without using the database console.
 
 {{/template}}
