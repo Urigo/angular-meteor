@@ -93,7 +93,7 @@ To do that we are going to define our accounts routes manually and use [angular-
 First we want to remove the Meteor's login button from the toolbar and insert our custom buttons. So, open `client/index.html` and remove the following code from the toolbar:
 
     <div class="navbar-right navbar-text">
-      <meteor-include src="loginButtons"></meteor-include>
+      <blaze-template name="loginButtons"></blaze-template>
     </div>
 
 and replace it with:

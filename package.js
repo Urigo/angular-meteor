@@ -1,7 +1,7 @@
 Package.describe({
   name: "angular",
   summary: "Everything you need to use AngularJS in your Meteor app",
-  version: "1.0.0-rc.3",
+  version: "1.0.0-rc.4",
   git: "https://github.com/Urigo/angular-meteor.git"
 });
 
@@ -50,7 +50,6 @@ Package.on_use(function (api) {
     'modules/angular-meteor-stopper.js',
     'modules/angular-meteor-collection.js',
     'modules/angular-meteor-object.js',
-    'modules/angular-meteor-template.js',
     'modules/angular-meteor-user.js',
     'modules/angular-meteor-methods.js',
     'modules/angular-meteor-session.js',

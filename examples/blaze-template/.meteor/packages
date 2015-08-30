@@ -8,3 +8,4 @@ meteor-platform
 autopublish
 insecure
 angular
+urigo:angular-blaze-template

@@ -174,19 +174,11 @@ Use to official AngularUI ui-router Meteor package - [angularui:angular-ui-route
 
 More on how to actually use angular-ui-router in [step 5 of the tutorial](http://angular-meteor.com/tutorial/step_05)
 
-### &lt;meteor-include&gt;
+### &lt;blaze-template&gt;
 
-You can include Meteor's native templates with the [meteor-include](http://angular-meteor.com/api/meteor-include) directive.
+Include Blaze templates in your [angular-meteor](http://angular-meteor.com/) application.
 
-```html
-<template name="todoList">
-    A couple of todos
-</template>
-
-<meteor-include src='todoList'></meteor-include>
-```
-
-Read more on meteor-include, using parameters and binding Meteor templates to Angular's scope in the [API docs](http://angular-meteor.com/api/meteor-include).
+Use the [urigo:angular-blaze-template package](https://github.com/urigo/angular-blaze-template/). 
 
 ### User Authentication
 
