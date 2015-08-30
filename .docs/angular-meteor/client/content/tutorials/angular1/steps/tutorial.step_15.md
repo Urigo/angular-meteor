@@ -1,4 +1,4 @@
-{{#template name="tutorial.step_15.html"}}
+{{#template name="tutorial.step_15.md"}}
 {{> downloadPreviousStep stepName="step_14"}}
 
 AngularJS has great and very simple directives that help us show and hide DOM elements conditionally.

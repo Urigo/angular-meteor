@@ -1,5 +1,4 @@
-<template name="tutorialAngular2.step_10.html">
-  {{#markdown}}
+{{#template name="tutorialAngular2.step_10.html"}}
 
 Now that we have a working app, we can go public!
 Meteor makes it really easy to put an app up on the internet where other people can use it.
@@ -21,5 +20,4 @@ Congratulations, you've made a working app that you can now use with your friend
 
 Now, we'll take a detour to see that while we were building a web app, we also created a pretty nice mobile app along the way.
 
-  {{/markdown}}
-</template>
+{{/template}}

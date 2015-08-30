@@ -51,9 +51,9 @@ See [$meteor.object](/api/meteorObject)
 </tbody>
 </table>
 
-If a document is passed, the method will only update nothing is passed, the Meteor Object with the properties passed, and no other changes will be saved.
-If no document argument is passed, the method saves all current data on the AngularMeteorObject. 
-Even unchanged properties will be overridden with their current values, hence hooks may be triggered on them. 
+If a document is passed, the method will compare between the document and the data, and will save the necessary changes into AngularMeteorObject.
+If no document argument is passed, the method saves all current data on the AngularMeteorObject,
+even unchanged properties will be overridden with their current values, hence hooks may be triggered on them. 
 Returns a promise with value of 1 when successful (this is the number of docs successfully updated) or an error. 
 
 <br>

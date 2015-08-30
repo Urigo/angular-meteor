@@ -1,4 +1,4 @@
-{{#template name="tutorial.step_00.html"}}
+{{#template name="tutorial.step_00.md"}}
 
 Let's start building our Meteor-Angular socially app.
 
@@ -78,7 +78,7 @@ First things first, let's add the AngularJS package to Meteor (we will discuss M
 
 Back in the command line, launch this command:
 
-    $ meteor add urigo:angular
+    $ meteor add angular
 
 This package takes care of connecting Angular to Meteor and includes the latest AngularJS library code.
 

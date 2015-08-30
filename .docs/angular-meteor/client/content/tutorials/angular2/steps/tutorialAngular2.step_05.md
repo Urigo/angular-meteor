@@ -1,5 +1,4 @@
-<template name="tutorialAngular2.step_05.html">
-  {{#markdown}}
+{{#template name="tutorialAngular2.step_05.html"}}
 
 In this step, you will learn how to create a layout template and how to build an app that has multiple views by adding routing, using the new Angular router.
 
@@ -127,7 +126,7 @@ __`client/app.ts`:__
 
     bootstrap(Socially, [
       routerInjectables,
-      bind(LocationStrategy).toClass(HashLocationStrategy) // HTML5Strategy
+      bind(LocationStrategy).toClass(HashLocationStrategy) // HTML5LocationStrategy
     ]);
 
 Notice the View is now point to a `template` declared within the `.ts` file. This is an alternative to specifying our `templateUrl` path.
@@ -139,7 +138,7 @@ We also have the choice of two location URL strategies:
 - HTML5 - www.site.com/
 - Hash - www.site.com/#/
 
-Don't forget to import `bind` helps hook up our URL location strategy.
+Don't forget to import `bind` helper that hooks up our URL location strategy.
 
 Good. Now our app structure looks like this:
 
@@ -154,7 +153,7 @@ Think of dependencies in Angular as a trees. The final line:
       bind(LocationStrategy).toClass(HashLocationStrategy)
     ]);
 
-Here, the dependencies such as `routerInjectables` are passed to all of Socially's child routes on bootstrapping.
+Here, the dependencies such as `routerInjectables` are passed to all of Socially's components on bootstrapping.
 
 ## Party Details
 
@@ -229,8 +228,8 @@ __`client/parties-list/parties-list.ng.html`:__
 
 This route syntax may look complicated, but that is because it is very flexible.
 
-- The preceding `/` indicates that the route is at the same level, whereas a `../` would map to the parent component url
-- Routes are placed in an array to allow for more complicated route paths
+- The preceding `/` indicates that the route path we are linking to is an absolute path (routing supports multiple hierarchies of routers, but we don't need that in our simple app).
+- Routes are placed in an array to allow for more complicated route paths and mixing route paths and parameters.
 
 
 # Injecting Route Params
@@ -267,7 +266,6 @@ So now we can route to pages with the data loading. But if you route to a party-
 
 We will see a better way to handle this kind of routing in the next step.
 
-
 # Challenge
 
 Add a link back to the `PartyList` component from `PartyDetails`.
@@ -278,5 +276,4 @@ We've seen only a glimpse of the power & flexibility of Angular 2's new router.
 
 In the next unit we'll look at another router feature: **LifeCycle Hooks**.
 
-    {{/markdown}}
-</template>
+{{/template}}

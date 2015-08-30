@@ -3,8 +3,8 @@
 var angularMeteorObject = angular.module('angular-meteor.object', ['angular-meteor.utils', 'angular-meteor.subscribe', 'angular-meteor.collection', 'getUpdates', 'diffArray']);
 
 angularMeteorObject.factory('AngularMeteorObject', [
-  '$q', '$meteorSubscribe', '$meteorCollection', '$meteorUtils', 'diffArray',
-  function($q, $meteorSubscribe, $meteorCollection, $meteorUtils, diffArray) {
+  '$q', '$meteorSubscribe', '$meteorCollection', '$meteorUtils', 'diffArray', 'getUpdates',
+  function($q, $meteorSubscribe, $meteorCollection, $meteorUtils, diffArray, getUpdates) {
     // A list of internals properties to not watch for, nor pass to the Document on update and etc.
     AngularMeteorObject.$$internalProps = [
       '$$collection', '$$options', '$$id', '$$hashkey', '$$internalProps', '$$scope',
@@ -23,7 +23,7 @@ angularMeteorObject.factory('AngularMeteorObject', [
       data._serverBackup = doc || {};
       data.$$collection = collection;
       data.$$options = options;
-      data.$$id = id;
+      data.$$id = id || new Mongo.ObjectID();
 
       return data;
     }
@@ -37,16 +37,34 @@ angularMeteorObject.factory('AngularMeteorObject', [
       return this;
     };
 
-    AngularMeteorObject.save = function(changes) {
+    AngularMeteorObject.save = function(custom) {
       var deferred = $q.defer();
-      var updates;
+      var collection = this.$$collection;
+      var createFulfill = _.partial($meteorUtils.fulfill, deferred);
+      var oldDoc = collection.findOne(this.$$id);
+      var mods;
 
-      if (changes)
-        updates = { $set: changes };
-      else
-        updates = this.getRawObject();
+      // update
+      if (oldDoc) {
+        if (custom)
+          mods = { $set: custom };
+        else
+          mods = getUpdates(oldDoc, this.getRawObject());
 
-      this.$$collection.update(this._id, updates, $meteorUtils.fulfill(deferred));
+        // NOTE: do not use #upsert() method, since it does not exist in some collections
+        collection.update(this.$$id, mods, createFulfill({ action: 'updated' }));
+      }
+      // insert
+      else {
+        if (custom)
+          mods = _.clone(custom);
+        else
+          mods = this.getRawObject();
+
+        mods._id = this.$$id;
+        collection.insert(mods, createFulfill({ action: 'inserted' }));
+      }
+
       return deferred.promise; 
     };
 
@@ -79,7 +97,6 @@ angularMeteorObject.factory('AngularMeteorObject', [
           delete self[prop];
           delete self._serverBackup[prop];
         });
-
       } 
 
       else {

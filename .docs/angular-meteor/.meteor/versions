@@ -45,9 +45,9 @@ livedata@1.0.13
 localstorage@1.0.3
 logging@1.0.7
 markdown@1.0.4
-mdg:tutorial-diff-box@0.1.1
+mdg:tutorial-diff-box@0.2.1
 mdg:tutorial-registry@0.1.1
-mdg:tutorial-step-diff-compiler@0.1.1
+mdg:tutorial-step-diff-compiler@0.2.0
 meteor@1.1.6
 meteor-platform@1.2.2
 meyerweb-reset@1.0.3

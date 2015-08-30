@@ -103,7 +103,7 @@ describe('$meteorUtils service', function () {
       spyOn(deferred, 'reject');
     });
 
-    it('should return a function which fulfills promise with according to the results', function() {
+    it('should return a function which fulfills a promise', function() {
       var fulfill = $meteorUtils.fulfill(deferred);
 
       var err = Error();
@@ -111,23 +111,57 @@ describe('$meteorUtils service', function () {
       expect(deferred.reject.calls.count()).toEqual(1);
       expect(deferred.reject.calls.mostRecent().args[0]).toEqual(err);
 
-      var result1 = 1;
-      var result2 = 2;
-      fulfill(null, result1, result2);
+      var result = {};
+      fulfill(null, result);
       expect(deferred.resolve.calls.count()).toEqual(1);
-      expect(deferred.resolve.calls.mostRecent().args[0]).toEqual(result1);
-      expect(deferred.resolve.calls.mostRecent().args[1]).toEqual(result2);
+      expect(deferred.resolve.calls.mostRecent().args[0]).toEqual(result);
     });
 
-    it('should return a function which is resolved with the specified results', function() {
-      var result1 = 1;
-      var result2 = 2;
-      var fulfill = $meteorUtils.fulfill(deferred, result1, result2);
+    it('should fulfill promise with the bound results', function() {
+      var err = Error();
+      var result = {};
+      var fulfill = $meteorUtils.fulfill(deferred, err, result);
 
-      fulfill(null, 3, 4);
+      fulfill();
       expect(deferred.resolve.calls.count()).toEqual(1);
-      expect(deferred.resolve.calls.mostRecent().args[0]).toEqual(result1);
-      expect(deferred.resolve.calls.mostRecent().args[1]).toEqual(result2);
+      expect(deferred.resolve.calls.mostRecent().args[0]).toEqual(result);
+
+      fulfill(Error());
+      expect(deferred.reject.calls.count()).toEqual(1);
+      expect(deferred.reject.calls.mostRecent().args[0]).toEqual(err);
+    });
+  });
+
+  describe('promissor', function() {
+    it('should create a function which invokes method with the given arguments and returns a promise', function(done) {
+      var next = _.after(2, done);
+      var obj = { method: function() {} };
+      var promissor = $meteorUtils.promissor(obj, 'method');
+
+      spyOn(obj, 'method');
+      promissor(1, 2, 3);
+      expect(obj.method).toHaveBeenCalledWith(1, 2, 3, jasmine.any(Function));
+
+      obj.method.and.callFake(function(callback) {
+        callback(null, 'result');
+      });
+
+      promissor().then(function(result) {
+        expect(result).toEqual('result');
+        next();
+      });
+
+      obj.method.and.callFake(function(callback) {
+        callback('error');
+      });
+
+      promissor().catch(function(err) {
+        expect(err).toEqual('error');
+        next();
+      });
+
+      $rootScope.$apply();
     });
   });
 });
+

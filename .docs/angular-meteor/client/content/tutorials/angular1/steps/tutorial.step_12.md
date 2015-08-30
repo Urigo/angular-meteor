@@ -1,4 +1,4 @@
-{{#template name="tutorial.step_12.html"}}
+{{#template name="tutorial.step_12.md"}}
 {{> downloadPreviousStep stepName="step_11"}}
 
 Currently we are dealing with a few parties, but we also need to support also a large number of parties.

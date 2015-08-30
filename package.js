@@ -1,7 +1,7 @@
 Package.describe({
-  name: "urigo:angular",
-  summary: "The simplest no-conflict way to use AngularJS with Meteor, Meteorite and Atmosphere Smart Packages.",
-  version: "0.9.3",
+  name: "angular",
+  summary: "Everything you need to use AngularJS in your Meteor app",
+  version: "1.0.0-rc.3",
   git: "https://github.com/Urigo/angular-meteor.git"
 });
 
@@ -29,8 +29,13 @@ Package.registerBuildPlugin({
 Package.on_use(function (api) {
   api.versionsFrom('METEOR@0.9.0.1');
 
-  api.use('angular:angular@1.4.1', 'client');
-  api.use('minimongo');  // for idStringify
+  api.use('angular:angular@1.4.4', 'client');
+  api.use('minimongo');
+  if (Package['mongo-id']) {
+    // Since commit b3096e93661bc79bab73a63bae0e14643030a9a3, MongoId is
+    // in a separate package. We need to use it for idParse and idStringify.
+    api.use('mongo-id');
+  }
   api.use('observe-sequence');
   api.use('dburles:mongo-collection-instances@0.3.4', 'client'); // For getCollectionByName
 
@@ -59,8 +64,9 @@ Package.on_use(function (api) {
 
 Package.onTest(function(api) {
   api.use('sanjo:jasmine@0.13.6');
-  api.use('urigo:angular');
-  api.use('angular:angular-mocks@1.4.2');
+  api.use('angular');
+  api.use('angular:angular-mocks@1.4.4');
+  api.use('mdg:camera@1.1.5');
 
   // auxiliary
   api.addFiles([
@@ -70,8 +76,10 @@ Package.onTest(function(api) {
 
   // spec files
   api.addFiles([
+    'tests/integration/angular-meteor-methods-spec.js',
     'tests/integration/angular-meteor-session-spec.js',
     'tests/integration/angular-meteor-stopper-spec.js',
+    'tests/integration/angular-meteor-camera-spec.js',
     'tests/integration/angular-meteor-diff-array-spec.js',
     'tests/integration/angular-meteor-get-updates-spec.js',
     'tests/integration/angular-meteor-collection-spec.js',

@@ -1,4 +1,4 @@
-{{#template name="tutorial.step_18.html"}}
+{{#template name="tutorial.step_18.md"}}
 {{> downloadPreviousStep stepName="step_17"}}
 
 

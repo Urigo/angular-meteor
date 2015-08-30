@@ -1,4 +1,4 @@
-var gitPatchParser = Npm.require("git-patch-parser");
+var gitPatchParser = Npm.require("am-git-patch-parser");
 
 Plugin.registerSourceHandler("multi.patch", {isTemplate: true}, multiPatchHandler);
 

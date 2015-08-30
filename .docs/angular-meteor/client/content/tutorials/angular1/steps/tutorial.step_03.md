@@ -1,4 +1,4 @@
-{{#template name="tutorial.step_03.html"}}
+{{#template name="tutorial.step_03.md"}}
 {{> downloadPreviousStep stepName="step_02"}}
 
 We now have a nice client side application that creates and renders its own data.

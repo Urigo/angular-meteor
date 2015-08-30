@@ -1,5 +1,4 @@
-<template name="tutorialAngular2.step_08.html">
-{{#markdown}}
+{{#template name="tutorialAngular2.step_08.html"}}
 
 In this section we'll look at using Meteor Accounts & take a quick detour into using Services in Angular 2.
 
@@ -140,7 +139,7 @@ __`typings/socially/socially.d.ts`:__
       _id?: string;
       name: string;
       description: string;
-      user: string;
+      owner: string;
     }
 
 Change the code for the add button in `parties-form.ts` to to also insert a user:
@@ -157,7 +156,7 @@ __`client/parties-form/parties-form.ts`:__
             Parties.insert({
                 name: party.name,
                 description: party.description,
-                user: Meteor.userId()
+                owner: Meteor.userId()
             });
 
             //reset values to empty strings
@@ -225,24 +224,24 @@ The resulting service should look like this:
 
 __`client/lib/party-service.ts`:__
 
-  export class PartyService {
-    add(party:IParty) {
-      Parties.insert(this.getPartyObject(party));
+    export class PartyService {
+     add(party:IParty) {
+        Parties.insert(this.getPartyObject(party));
+      }
+      update(party:IParty) {
+        Parties.update(party._id, this.getPartyObject(party));
+      }
+      remove(partyId:string) {
+        Parties.remove(partyId);
+      }
+      getPartyObject(party) {
+        return {
+          name: party.name,
+          description: party.description,
+          user: Meteor.userId()
+        };
+      }
     }
-    update(party:IParty) {
-      Parties.update(party._id, this.getPartyObject(party));
-    }
-    remove(partyId:string) {
-      Parties.remove(partyId);
-    }
-    getPartyObject(party) {
-      return {
-        name: party.name,
-        description: party.description,
-        user: Meteor.userId()
-      };
-    }
-  }
 
 Much cleaner.
 
@@ -256,7 +255,7 @@ This process should get easier, in fact, it should look this:
     add() {
       if (this.partiesForm.valid) {
         partyService.add(this.partiesForm.value);
-  ...
+        ...
 
 A note about the constructor syntax here:
 
@@ -269,20 +268,23 @@ Unfortunately, the syntax listed above isn't currently working. Keep in mind, An
 In `parties-list.ts`, `party-details.ts` and `party-form.ts` follow the instructions below.
 
 - `import {Inject} from 'angular2/angular2';`
-- `import {PartyService} from `client/lib/party-service';`
-- In the component, add  `viewInjector: [PartyService]`
+- `import {PartyService} from 'client/lib/party-service';`
+- In the component, add  `viewBindings: [PartyService]`
+
 
     @Component({
         selector: 'parties-list',
-        viewInjector: [PartyService]
+        viewBindings: [PartyService]
     })
 
 4. Inject partyService into the constructor and set `this.partyService` to the injected.
+
 
     constructor(@Inject(PartyService) partyService:PartyService) {
       this.partyService = partyService;
 
 5. Access the service through `this.partyService` in your methods.
+
 
     this.partyService.remove(party._id)
 
@@ -315,7 +317,6 @@ There are more social login services you can use:
 * Twitter
 * Weibo
 * Meteor developer account
-
 
 
 # Authentication With Routers
@@ -374,5 +375,4 @@ This is the reason we also made restrictions on the server using the allow/deny 
 While this prevents writes from happening from unintended sources, reads can still be an issue.
 The next step will take care of privacy, not showing users parties they are not allowed to see.
 
-{{/markdown}}
-</template>
+{{/template}}

@@ -87,18 +87,20 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
 
       // delete $$hashkey
       doc = $meteorUtils.stripDollarPrefixedKeys(doc);
+      var docId = doc._id;
+      var isExist = collection.findOne(docId);
 
       // update
-      var docId = doc._id;
-      if (docId) {
+      if (isExist) {
         // Deletes _id property (from the copy) so that
         // it can be $set using update.
         delete doc._id;
         var modifier = useUnsetModifier ? {$unset: doc} : {$set: doc};
         fulfill = createFulfill({_id: docId, action: 'updated'});
+        // NOTE: do not use #upsert() method, since it does not exist in some collections
         collection.update(docId, modifier, fulfill);
+      // insert
       } else {
-        // insert
         fulfill = createFulfill({_id: docId, action: 'inserted'});
         collection.insert(doc, fulfill);
       }
@@ -136,7 +138,7 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
     AngularMeteorCollection._removeDoc = function(id) {
       var deferred = $q.defer();
       var collection = this.$$collection;
-      var fulfill = $meteorUtils.fulfill(deferred, { _id: id, action: 'removed' });
+      var fulfill = $meteorUtils.fulfill(deferred, null, { _id: id, action: 'removed' });
       collection.remove(id, fulfill);
       return deferred.promise;
     };
@@ -199,7 +201,7 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
           self.splice(fromIndex, 1);
           self.splice(toIndex, 0, doc);
           self._serverBackup.splice(fromIndex, 1);
-          self._serverBackup.splice(i, 0, doc);
+          self._serverBackup.splice(toIndex, 0, doc);
           setServerUpdateMode();
         },
 

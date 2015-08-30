@@ -1,4 +1,4 @@
-{{#template name="tutorial.step_07.html"}}
+{{#template name="tutorial.step_07.md"}}
 {{> downloadPreviousStep stepName="step_06"}}
 
 OK, so we have a working app, but, like a tutorial, it's not well organized.

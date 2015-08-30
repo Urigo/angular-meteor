@@ -1,4 +1,4 @@
-{{#template name="tutorial.step_17.html"}}
+{{#template name="tutorial.step_17.md"}}
 {{> downloadPreviousStep stepName="step_16"}}
 
 Meteor has a great support for CSS.

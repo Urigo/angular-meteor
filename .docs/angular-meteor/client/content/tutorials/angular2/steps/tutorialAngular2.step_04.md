@@ -1,5 +1,4 @@
-<template name="tutorialAngular2.step_04.html">
-  {{#markdown}}
+{{#template name="tutorialAngular2.step_04.html"}}    
 
 Now that we have full data binding from server to client, let's interact with the data and see the updates in action.
 
@@ -11,17 +10,7 @@ First, let's create a simple form with a button that will add a new party.
 
 In Angular 2, it's common practice to break your app into smaller components. Let's make a new component called `parties-form`, and put it inside it's own directory with the same name.
 
-__`client/parties-form/parties-form.ts`:__
-
-    import {Component, View} from 'angular2/angular2';
-
-    @Component({
-      selector: 'parties-form'
-    })
-    @View({
-      templateUrl: "client/parties-form/parties-form.ng.html"
-    })
-    export class PartiesForm {}
+{{> DiffBox tutorialName="angular2-meteor" step="4.1"}}
 
 Notice that we are exporting the class `PartiesForm` using ES6 module syntax. This is how files and dependencies can be passed to each other without the use of script tags in the view.
 
@@ -31,48 +20,15 @@ Also note that we aren't bootstrapping this component, as it is going inside of 
 
 Inside `parties-form/parties-form.ng.html`, add the following form:
 
-__`client/parties-form/parties-form.ng.html`:__
-
-    <form>
-      <label>Name</label>
-      <input type="text">
-      <label>Description</label>
-      <input type="text">
-      <button>Add</button>
-    </form>
+{{> DiffBox tutorialName="angular2-meteor" step="4.2"}}
 
 Link to the parties-form component in `index.ng.html`
 
-__`client/index.ng.html`:__
-
-    <div>
-
-      <parties-form></parties-form>
-
-      <ul>
-        <li *ng-for="#party of parties">
-          {{dstache}}party.name}}
-          <p>{{dstache}}party.description}}</p>
-        </li>
-      </ul>
-
-    </div>
+{{> DiffBox tutorialName="angular2-meteor" step="4.3"}}
 
 And finally let your Socially Component know it should import and use the `parties-form` component.
 
-__`client/app.ts`:__
-
-      import {Component, View, NgFor, bootstrap} from 'angular2/angular2';
-      import {PartiesForm} from 'client/parties-form/parties-form';
-
-      ...
-
-      @View({
-        templateUrl: "client/index.ng.html",
-        directives: [NgFor, PartiesForm]
-      })
-      class Socially () { ... }
-    }
+{{> DiffBox tutorialName="angular2-meteor" step="4.4"}}
 
 Again, first we import the class, then we add it to our list of View directives.
 
@@ -86,34 +42,13 @@ In Angular 2, there are two main ways to create forms: we will address 'model-dr
 
 First up, import the form directives & controls.
 
-__`client/parties-form/parties-form.ts`:__
-
-      import {Component, View} from 'angular2/angular2';
-      import {FORM_DIRECTIVES, Control, ControlGroup, Validators} from 'angular2/angular2';
-
-      @Component({
-        selector: 'parties-form'
-      })
-      @View({
-        templateUrl: "parties-form/parties-form.ng.html",
-        directives: [FORM_DIRECTIVES]
-      })
-      export class PartiesForm {}
-    }
+{{> DiffBox tutorialName="angular2-meteor" step="4.5"}}
 
 By now you should have the hang of it. `import`, and add it to the View directives.
 
 Next, we can construct our form controls. For controls give you access to useful form features such as validators and much more.
 
-__`client/parties-form/parties-form.ts`:__
-
-    export class PartiesForm {
-      constructor() {
-        this.partiesForm = new ControlGroup({
-          name: new Control(''),
-          description: new Control('')
-        });
-      }
+{{> DiffBox tutorialName="angular2-meteor" step="4.6"}}
 
 We are binding `this.partiesForm` here to a [Control Group](https://angular.io/docs/js/latest/api/forms/ControlGroup-class.html). Think of a control group as a wrapper for a group of form controls.
 
@@ -139,13 +74,7 @@ We could also access the control values individually.
 
 A control can also take a Validator, which binds to the form. Name & description are both required, so let's specify that.
 
-__`client/parties-form/parties-form.ts`:__
-
-    constructor() {
-      this.partiesForm = new ControlGroup({
-        name: new Control('', Validators.required),
-        description: new Control('', Validators.required)
-      });
+{{> DiffBox tutorialName="angular2-meteor" step="4.7"}}
 
 The required validator here specifies that the form isn't valid if name or description are empty.
 
@@ -155,15 +84,7 @@ The required validator here specifies that the form isn't valid if name or descr
 
 First things first, let's bind the control group to the form and the controls to the input values.
 
-__`client/parties-form/parties-form.ng.html`:__
-
-    <form [ng-form-model]="partiesForm">
-      <label>Name</label>
-      <input type="text" ng-control="name">
-      <label>Description</label>
-      <input type="text" ng-control="description">
-      <button>Add</button>
-    </form>
+{{> DiffBox tutorialName="angular2-meteor" step="4.8"}}
 
 Now each time the user types inside these inputs, the value of the partiesForm and its controls will be automatically updated.  Conversely, if `this.partiesForm.value` is changed outside of the HTML, the input values will be updated accordingly.
 
@@ -186,35 +107,11 @@ But then how does the view trigger changes in the model? It does this through ev
 
 Now let's bind a submit event to the add button provided to us by the [NgForm](https://angular.io/docs/js/latest/api/forms/NgForm-class.html) directive. This will trigger if the button is clicked, or if the user presses enter on the final field.
 
-__`client/parties-form/parties-form.ng.html`:__
-
-    <form [ng-form-model]="partiesForm" #f="form" (submit)="add(f.value)">
-      <button type="submit">Add</button>
-    </form>
+{{> DiffBox tutorialName="angular2-meteor" step="4.9"}}
 
 In Angular 2, events are indicated by the round bracket () syntax. Here we are telling Angular to call a method `add` on submit and pass in the value of the form, `f`. Let's add the add method to our PartiesForm class.
 
-__`client/parties-form/parties-form.ts`:__
-
-    class PartiesForm {
-      constructor() { ... },
-
-      add(party) {
-        // validate if the form is valid
-        if (this.partiesForm.valid) {
-
-          // insert parties (insecure way)
-          Parties.insert({
-            name: party.name,
-            description: party.description
-          });
-
-        //reset input values to empty strings
-        this.partiesForm.controls.name.updateValue('');
-        this.partiesForm.controls.description.updateValue('');
-        }
-      }
-    }
+{{> DiffBox tutorialName="angular2-meteor" step="4.10"}}
 
 Open a different browser, fill out the form, submit and see how the party is added on both clients. So simple!
 
@@ -226,15 +123,7 @@ Now, let's add the ability to delete parties.
 
 Let's add an X button to each party:
 
-__`client/index.ng.html`:__
-
-    <ul>
-      <li *ng-for="party of parties">
-        {{dstache}}party.name}}
-        <p>{{dstache}}party.description}}</p>
-        <button (click)="remove(party)">X</button>
-      </li>
-    </ul>
+{{> DiffBox tutorialName="angular2-meteor" step="4.11"}}
 
 
 Here again, we are binding an event to the class context and passing in the party as a parameter.
@@ -243,12 +132,7 @@ Let's go into the class and add that function.
 
 Add the function inside the Socially class in `app.ts`:
 
-__`client/app.ts`:__
-
-    constructor() {...}
-    remove(party){
-      Parties.remove(party._id);
-    }
+{{> DiffBox tutorialName="angular2-meteor" step="4.12"}}
 
 The Mongo Collection Parties has a function called 'remove'. We search for the relevant party by its identifier, `_id`, and delete it.
 
@@ -274,5 +158,4 @@ Now try to delete a few parties and also watch them being removed from other bro
 
 So now you've seen how easy it is to manipulate the data using Angular's powerful directives and sync that data with Meteor's powerful Mongo.collection API.
 
-   {{/markdown}}
-</template>
+{{/template}}

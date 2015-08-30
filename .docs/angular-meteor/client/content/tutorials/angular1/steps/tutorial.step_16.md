@@ -1,4 +1,4 @@
-{{#template name="tutorial.step_16.html"}}
+{{#template name="tutorial.step_16.md"}}
 {{> downloadPreviousStep stepName="step_15"}}
 
 Let's add location to our parties.

@@ -1,22 +1,21 @@
 'use strict';
-var angularMeteorUtils = angular.module('angular-meteor.camera', []);
 
-angularMeteorUtils.service('$meteorCamera', ['$q',
-  function ($q) {
+var angularMeteorCamera = angular.module('angular-meteor.camera', ['angular-meteor.utils']);
+
+// requires package 'mdg:camera'
+angularMeteorCamera.service('$meteorCamera', [
+  '$q', '$meteorUtils',
+  function ($q, $meteorUtils) {
+    var pack = Package['mdg:camera'];
+    if (!pack) return;
+
+    var MeteorCamera = pack.MeteorCamera;
+
     this.getPicture = function(options){
-      if (!options)
-        options = {};
-
+      options = options || {};
       var deferred = $q.defer();
-
-      MeteorCamera.getPicture(options, function (error, data) {
-        if (error)
-          deferred.reject(error);
-
-        if (data)
-          deferred.resolve(data);
-      });
-
+      MeteorCamera.getPicture(options, $meteorUtils.fulfill(deferred));
       return deferred.promise;
     };
-  }]);
+  }
+]);
