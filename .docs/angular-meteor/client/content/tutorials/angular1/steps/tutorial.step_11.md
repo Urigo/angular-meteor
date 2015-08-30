@@ -107,7 +107,7 @@ More more detailed information:
 
 # Troubleshoot
 
-If your application does not works for any reason, first try running meteor with the verbose flag in order to get more information about your launch. In order to do that, run the following command:
+If your application does not work for any reason, first try running meteor with the verbose flag in order to get more information about your launch. In order to do that, run the following command:
 
     meteor run ios --verbose
     Note: You can also run it with "android" platform.
