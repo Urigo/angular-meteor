@@ -1,4 +1,4 @@
-angular@1.0.0-rc.2
+angular@1.0.0-rc.3
 angular:angular@1.4.4
 base64@1.0.3
 binary-heap@1.0.3
@@ -24,4 +24,4 @@ random@1.0.3
 retry@1.0.3
 tracker@1.0.7
 underscore@1.0.3
-urigo:angular@0.10.0
+urigo:angular@0.10.1
