@@ -9,3 +9,4 @@ autopublish
 insecure
 urigo:angular2-meteor
 anti:fake
+reactive-var

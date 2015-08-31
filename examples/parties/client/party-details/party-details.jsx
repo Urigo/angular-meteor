@@ -2,7 +2,7 @@ import {Component, View, Inject} from 'angular2/angular2';
 
 import {routerDirectives, RouteParams} from 'angular2/router';
 
-import {MongoObjectObserver} from 'angular2-meteor';
+import {zoneAutorun} from 'angular2-meteor';
 
 @Component({
   selector: 'party-details',
@@ -19,7 +19,9 @@ export class PartyDetailsCmp {
   constructor(routeParams: RouteParams) {
     this.params = routeParams.params;
 
-    this.party = new MongoObjectObserver(Parties, this.params.partyId);
+    zoneAutorun(() => {
+      this.party = Parties.findOne(this.params.partyId);
+    });
   }
 }
 PartyDetailsCmp.parameters = [[RouteParams]];

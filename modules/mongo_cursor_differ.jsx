@@ -1,10 +1,12 @@
+'use strict';
+
 import {ChangeDetectorRef, IterableDiffers, bind} from 'angular2/angular2';
 import {DefaultIterableDifferFactory, CollectionChangeRecord} from 'angular2/change_detection';
 import {ObservableWrapper} from 'angular2/facade';
-import {MongoCollectionObserver, AddChange, MoveChange, RemoveChange} from './mongo_collection_observer';
+import {MongoCollectionObserver, AddChange, MoveChange, RemoveChange} from './mongo_cursor_observer';
 
 export class MongoCollectionDifferFactory extends DefaultIterableDifferFactory {
-  supports(obj: Object): boolean { return obj instanceof MongoCollectionObserver; }
+  supports(obj: Object): boolean { return obj instanceof Mongo.Cursor; }
 
   create(cdRef: ChangeDetectorRef): MongoCollectionDiffer {
     return new MongoCollectionDiffer(cdRef);
@@ -18,6 +20,7 @@ export class MongoCollectionDiffer {
   _moved: Array<CollectionChangeRecord>;
   _observer: MongoCollectionObserver;
   _lastChanges: Array<AddChange|MoveChange|RemoveChange>;
+  _listSize: Number;
 
   constructor(cdRef: ChangeDetectorRef) {
     this._inserted = [];
@@ -25,6 +28,8 @@ export class MongoCollectionDiffer {
     this._moved = [];
     this._lastChanges = null;
     this._observer = null;
+    this._cursor = null;
+    this._listSize = 0;
   }
 
   forEachAddedItem(fn: Function) {
@@ -45,19 +50,18 @@ export class MongoCollectionDiffer {
     }
   }
 
-  diff(observer: MongoCollectionObserver) {
+  diff(cursor: Mongo.Cursor<any>) {
     this._reset();
 
-    if (observer && this._observer !== observer) {
+    if (cursor && this._cursor !== cursor) {
+      this._destroyObserver();
+      this._cursor = cursor;
+      this._observer = new MongoCollectionObserver(this._cursor);
       var self = this;
-      if (this._subscription) {
-        ObservableWrapper.dispose(this._subscription);
-      }
-      this._subscription = ObservableWrapper.subscribe(observer,
+      this._subscription = ObservableWrapper.subscribe(this._observer,
         changes => {
           self._updateLatestValue(changes);
         });
-      this._observer = observer;
       this._lastChanges = this._observer.lastChanges;
     }
 
@@ -71,12 +75,19 @@ export class MongoCollectionDiffer {
   }
 
   onDestroy() {
+    this._destroyObserver();
+  }
+
+  _destroyObserver() {
     if (this._subscription) {
       ObservableWrapper.dispose(this._subscription);
     }
     if (this._observer) {
       this._observer.destroy();
     }
+
+    this._applyCleanup();
+    this._listSize = 0;
   }
 
   _updateLatestValue(changes) {
@@ -89,11 +100,19 @@ export class MongoCollectionDiffer {
     this._removed.length = 0;
   }
 
+  _applyCleanup() {
+    for (var index = 0; index < this._listSize; index++) {
+      this._removed.push(this._createChangeRecord(
+        null, index, null));
+    }
+  }
+
   _applyChanges(changes) {
     for (var i = 0; i < changes.length; i++) {
       if (changes[i] instanceof AddChange) {
         this._inserted.push(this._createChangeRecord(
           changes[i].index, null, changes[i].item));
+        this._listSize++;
       }
       if (changes[i] instanceof MoveChange) {
         this._moved.push(this._createChangeRecord(
@@ -102,6 +121,7 @@ export class MongoCollectionDiffer {
       if (changes[i] instanceof RemoveChange) {
         this._removed.push(this._createChangeRecord(
           null, changes[i].index, changes[i].item));
+        this._listSize--;
       }
     }
   }

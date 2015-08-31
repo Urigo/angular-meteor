@@ -1,8 +1,10 @@
+'use strict';
+
 import * as ng2 from 'angular2/angular2';
 
 import {defaultIterableDiffers} from 'angular2/change_detection';
 
-import {MongoCollectionDifferFactory} from './mongo_collection_differ';
+import {MongoCollectionDifferFactory} from './mongo_cursor_differ';
 
 export function bootstrap(classFn, bindings) {
   var newBindings = bindings || [];

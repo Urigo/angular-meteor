@@ -1,3 +1,5 @@
+'use strict';
+
 export class CursorHandle {
   _cursor: Mongo.Cursor<any>;
   _hAutoNotify: Tracker.Computation;

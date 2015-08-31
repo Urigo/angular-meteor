@@ -1,3 +1,5 @@
+'use strict';
+
 import {EventEmitter} from 'angular2/angular2';
 
 import {CursorHandle} from './cursor_handle';
@@ -35,98 +37,22 @@ export class MongoCollectionObserver extends EventEmitter {
   _lastChanges: Array<any>;
   _cursorDefFunc: Function;
   _hCursor: CursorHandle;
-  _propMap: Map<String, Object>;
-  _eventMap: Map<String, Array<Function>>;
 
-  constructor(cursorDefFunc) {
-    check(cursorDefFunc, Function);
+  constructor(cursor: Mongo.Cursor<any>) {
+    check(cursor, Mongo.Cursor);
 
     super();
     this._docs = [];
     this._changes = [];
     this._lastChanges = [];
-    this._propMap = new Map();
-    this._eventMap = new Map();
-    this._cursorDefFunc = cursorDefFunc;
-  
-    this._defineGets(cursorDefFunc);
-    this._startAutoCursorUpdate(cursorDefFunc); 
+
+    Meteor.setTimeout(() => {
+      this._hCursor = this._startCursor(cursor);
+    });
   }
 
   get lastChanges() {
     return this._lastChanges;
-  }
-
-  _defineGets(cursorDefFunc) {
-    cursorDefFunc.call(this);
-  }
-
-  get(propName: String): any {
-    check(propName, String);
-
-    if (!this._propMap.get(propName)) {
-      var depVar = new Tracker.Dependency();
-      this._propMap.set(propName, {
-        depVar: depVar,
-        value: this[propName]
-      });
-      var self = this;
-      Object.defineProperty(this, propName, {
-          get: function() {
-            return self._propMap.get(propName).value;
-          },
-          set: function(value) {
-            self._propMap.get(propName).value = value;
-            self._propMap.get(propName).depVar.changed();
-          },
-          enumerable: true,
-          configurable: true
-      });
-    }
-    this._propMap.get(propName).depVar.depend();
-    return this[propName];
-  }
-
-  on(eventName, callback) {
-    check(eventName, String);
-    check(callback, Function);
-
-    if (!this._eventMap.has(eventName)) {
-      this._eventMap.set(eventName, []);
-    }
-    this._eventMap.get(eventName).push(callback);
-  }
-
-  _raise(eventName) {
-    check(eventName, String);
-
-    if (this._eventMap.has(eventName)) {
-      var callbacks = this._eventMap.get(eventName);
-      for (let callback of callbacks) {
-        callback();
-      }
-    }
-  }
-
-  _startAutoCursorUpdate(cursorDefFunc) {
-    var self = this;
-    Tracker.autorun(zone.bind(() => {
-      if (self._hCursor) {
-        self._stopCursor(self._hCursor);
-        self._hCursor = null;
-      }
-      self._hCursor = self._startCursor(cursorDefFunc.call(self));
-      self._raise('newCursor');
-    }));
-  }
-
-  _stopCursor(cursorHandle: CursorHandle) {
-    cursorHandle.stop();
-    var len = this._docs.length;
-    this._docs.length = 0;
-    for (var i = 0; i < len; i++) {
-      this._changes.push(new RemoveChange(i));
-    }
   }
 
   _startCursor(cursor: Mongo.Cursor<any>) {
@@ -136,14 +62,13 @@ export class MongoCollectionObserver extends EventEmitter {
   }
 
   _startAutoChangesNotify(cursor: Mongo.Cursor<any>) {
-    var self = this;
     return Tracker.autorun(zone.bind(() => {
       cursor.fetch();
-      var lastChanges = self._changes.splice(0);
+      var lastChanges = this._changes.splice(0);
       if (lastChanges.length) {
-        self.next(lastChanges);
+        this.next(lastChanges);
       }
-      self._lastChanges = lastChanges;
+      this._lastChanges = lastChanges;
     }));
   }
 
@@ -193,14 +118,10 @@ export class MongoCollectionObserver extends EventEmitter {
     if (this._hCursor) {
       this._hCursor.stop();
     }
-    this._propMap.clear();
-    this._eventMap.clear();
     this._docs.length = 0;
     this._changes.length = 0;
 
     this._hCursor = null;
-    this._propMap = null;
-    this._eventMap = null;
     this._docs = null;
     this._changes = null;
   }

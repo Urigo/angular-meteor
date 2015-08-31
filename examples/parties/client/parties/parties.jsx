@@ -4,7 +4,7 @@ import {routerDirectives} from 'angular2/router';
 
 import {PartyForm} from 'client/party-form/party-form';
 
-import {MongoCollectionDifferFactory, MongoCollectionObserver} from 'angular2-meteor';
+import {zoneAutorun} from 'angular2-meteor';
 
 @Component({
   selector: 'parties'
@@ -15,14 +15,16 @@ import {MongoCollectionDifferFactory, MongoCollectionObserver} from 'angular2-me
 })
 export class PartiesCmp {
   parties: IParty[];
+  location: ReactiveVar;
 
   constructor() {
-    this.parties = new MongoCollectionObserver(function() {
-      return Parties.find({location: this.get('location')});
+    this.location = new ReactiveVar('Palo Alto');
+    zoneAutorun(() => {
+      this.parties = Parties.find({location: this.location.get()});
     });
   }
 
   searchLocation(location) {
-    this.parties.location = location;
+    this.location.set(location);
   }
 }

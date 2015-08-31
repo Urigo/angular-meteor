@@ -21,10 +21,10 @@ Package.onUse(function(api) {
   api.addFiles([
     'system_config.js',
     'main.jsx',
+    'modules/utils.jsx',
     'modules/cursor_handle.jsx',
-    'modules/mongo_collection_observer.jsx',
-    'modules/mongo_collection_differ.jsx',
-    'modules/mongo_object_observer.jsx',
+    'modules/mongo_cursor_observer.jsx',
+    'modules/mongo_cursor_differ.jsx',
     'modules/bootstrap.jsx'
   ]);
 });
