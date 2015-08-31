@@ -1,4 +1,5 @@
 {{#template name="tutorialAngular2.step_05.html"}}
+{{> downloadPreviousStep stepName="step_04"}}
 
 In this step, you will learn how to create a layout template and how to build an app that has multiple views by adding routing, using the new Angular router.
 
@@ -108,7 +109,18 @@ If `party-details` is targeted, with a `partyId` parameter, it will route to the
 
 Let's see how we move around different urls using the `<router-link>`. First we'll have to import and declare our dependencies.
 
-{{> DiffBox tutorialName="angular2-meteor" step="5.9"}}
+__`client/parties-list/parties-list.ts`:__
+
+    import {Component, View, NgFor} from 'angular2/angular2';
+    import {routerDirectives} from 'angular2/router';
+    import {PartyForm} from 'client/party-form/party-form';
+
+    @Component( ... )
+    @View({
+      templateUrl: 'client/parties/parties.ng.html',
+      directives: [NgFor, routerDirectives, PartyForm]
+    })
+    export class PartiesList { ... }
 
 Make sure you imported the `routerDirectives` and specified it as a view directive.
 
@@ -126,9 +138,7 @@ This route syntax may look complicated, but that is because it is very flexible.
 
 # Injecting Route Params
 
-As we are moving from the `party-list` to a specific party's `party-details`, we will need to grab the route parameters and load the correct party. 
-
-Let's do this in `party-details.ts`.
+As we are moving from the `party-list` to a specific party's `party-details`, we will need to grab the route parameters and load the correct party. Let's do this in `party-details.ts`.
 
 __`client/parties-details/parties-details.ts`:__
 
