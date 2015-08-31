@@ -3,22 +3,22 @@
 import {ChangeDetectorRef, IterableDiffers, bind} from 'angular2/angular2';
 import {DefaultIterableDifferFactory, CollectionChangeRecord} from 'angular2/change_detection';
 import {ObservableWrapper} from 'angular2/facade';
-import {MongoCollectionObserver, AddChange, MoveChange, RemoveChange} from './mongo_cursor_observer';
+import {MongoCursorObserver, AddChange, MoveChange, RemoveChange} from './mongo_cursor_observer';
 
-export class MongoCollectionDifferFactory extends DefaultIterableDifferFactory {
+export class MongoCursorDifferFactory extends DefaultIterableDifferFactory {
   supports(obj: Object): boolean { return obj instanceof Mongo.Cursor; }
 
-  create(cdRef: ChangeDetectorRef): MongoCollectionDiffer {
-    return new MongoCollectionDiffer(cdRef);
+  create(cdRef: ChangeDetectorRef): MongoCursorObserver {
+    return new MongoCursorDiffer(cdRef);
   }
 }
 
 // TODO(barbatus): to implement IterableDiffer interface.
-export class MongoCollectionDiffer {
+export class MongoCursorDiffer {
   _inserted: Array<CollectionChangeRecord>;
   _removed: Array<CollectionChangeRecord>;
   _moved: Array<CollectionChangeRecord>;
-  _observer: MongoCollectionObserver;
+  _curObserver: MongoCursorObserver;
   _lastChanges: Array<AddChange|MoveChange|RemoveChange>;
   _listSize: Number;
 
@@ -27,7 +27,7 @@ export class MongoCollectionDiffer {
     this._removed = [];
     this._moved = [];
     this._lastChanges = null;
-    this._observer = null;
+    this._curObserver = null;
     this._cursor = null;
     this._listSize = 0;
   }
@@ -56,13 +56,12 @@ export class MongoCollectionDiffer {
     if (cursor && this._cursor !== cursor) {
       this._destroyObserver();
       this._cursor = cursor;
-      this._observer = new MongoCollectionObserver(this._cursor);
-      var self = this;
-      this._subscription = ObservableWrapper.subscribe(this._observer,
-        changes => {
-          self._updateLatestValue(changes);
+      this._curObserver = new MongoCursorObserver(this._cursor);
+      this._subscription = ObservableWrapper.subscribe(this._curObserver,
+        (changes) => {
+          this._updateLatestValue(changes);
         });
-      this._lastChanges = this._observer.lastChanges;
+      this._lastChanges = this._curObserver.lastChanges;
     }
 
     if (this._lastChanges) {
@@ -82,8 +81,8 @@ export class MongoCollectionDiffer {
     if (this._subscription) {
       ObservableWrapper.dispose(this._subscription);
     }
-    if (this._observer) {
-      this._observer.destroy();
+    if (this._curObserver) {
+      this._curObserver.destroy();
     }
 
     this._applyCleanup();

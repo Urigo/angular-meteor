@@ -31,7 +31,7 @@ export class RemoveChange {
   }
 }
 
-export class MongoCollectionObserver extends EventEmitter {
+export class MongoCursorObserver extends EventEmitter {
   _docs: Array<any>;
   _changes: Array<any>;
   _lastChanges: Array<any>;
