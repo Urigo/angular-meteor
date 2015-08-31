@@ -7,6 +7,5 @@
 meteor-platform
 autopublish
 insecure
-universe:modules
 urigo:angular2-meteor
 anti:fake

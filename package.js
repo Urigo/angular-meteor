@@ -11,21 +11,21 @@ Package.onUse(function(api) {
 
   api.use([
     'check@1.0.5',
-    'universe:modules@0.4.1'
+    'barbatus:angular2@0.3.0'
   ]);
 
   api.imply([
-    'barbatus:angular2@0.2.0'
+    'barbatus:angular2@0.3.0'
   ]);
 
   api.addFiles([
-    'system-config.js',
-    'main.import.js',
-    'modules/cursor_handle.import.js',
-    'modules/mongo_collection_observer.import.js',
-    'modules/mongo_collection_differ.import.js',
-    'modules/mongo_object_observer.import.js',
-    'modules/bootstrap.import.js'
+    'system_config.js',
+    'main.jsx',
+    'modules/cursor_handle.jsx',
+    'modules/mongo_collection_observer.jsx',
+    'modules/mongo_collection_differ.jsx',
+    'modules/mongo_object_observer.jsx',
+    'modules/bootstrap.jsx'
   ]);
 });
 
