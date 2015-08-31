@@ -112,17 +112,17 @@ Let's see how we move around different urls using the `<router-link>`. First we'
 __`client/parties-list/parties-list.ts`:__
 
     import {Component, View, NgFor} from 'angular2/angular2';
-    import {routerDirectives} from 'angular2/router';
+    import {RouterLink} from 'angular2/router';
     import {PartyForm} from 'client/party-form/party-form';
 
     @Component( ... )
     @View({
       templateUrl: 'client/parties/parties.ng.html',
-      directives: [NgFor, routerDirectives, PartyForm]
+      directives: [NgFor, RouterLink, PartyForm]
     })
     export class PartiesList { ... }
 
-Make sure you imported the `routerDirectives` and specified it as a view directive.
+Make sure you imported the `RouterLink` and specified it as a view directive.
 
 Now we can wrap our party in a `router-link` and pass in the `_id` as a parameter. Note that the id is auto-generated when an item is inserted into a Mongo Collection.
 
