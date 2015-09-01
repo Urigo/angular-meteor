@@ -33,3 +33,7 @@ Meteor.startup(function() {
     }
   }
 });
+
+Meteor.publish('parties', function(location) {
+  return Parties.find({location: location});
+});

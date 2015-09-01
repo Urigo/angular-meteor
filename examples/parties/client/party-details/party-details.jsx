@@ -2,7 +2,7 @@ import {Component, View, Inject} from 'angular2/angular2';
 
 import {routerDirectives, RouteParams} from 'angular2/router';
 
-import {zoneAutorun} from 'angular2-meteor';
+import {MeteorComponent} from 'angular2-meteor';
 
 @Component({
   selector: 'party-details',
@@ -12,16 +12,17 @@ import {zoneAutorun} from 'angular2-meteor';
   templateUrl: 'client/party-details/party-details.ng.html',
   directives: [routerDirectives]
 })
-export class PartyDetailsCmp {
+export class PartyDetailsCmp extends MeteorComponent {
   party: IParty;
   params;
 
   constructor(routeParams: RouteParams) {
-    this.params = routeParams.params;
+    super();
 
-    zoneAutorun(() => {
+    this.params = routeParams.params;
+    this.autorun(() => {
       this.party = Parties.findOne(this.params.partyId);
-    });
+    }, true);
   }
 }
 PartyDetailsCmp.parameters = [[RouteParams]];

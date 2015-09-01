@@ -1,10 +1,10 @@
-import {Component, View, NgModel, NgFor, IterableDiffers} from 'angular2/angular2';
+import {Component, View, NgModel, NgFor, LifecycleEvent, IterableDiffers} from 'angular2/angular2';
 
 import {routerDirectives} from 'angular2/router';
 
 import {PartyForm} from 'client/party-form/party-form';
 
-import {zoneAutorun} from 'angular2-meteor';
+import {MeteorComponent, MongoCursorDifferFactory} from 'angular2-meteor';
 
 @Component({
   selector: 'parties'
@@ -13,18 +13,22 @@ import {zoneAutorun} from 'angular2-meteor';
   templateUrl: 'client/parties/parties.ng.html',
   directives: [NgFor, routerDirectives, NgModel, PartyForm]
 })
-export class PartiesCmp {
+export class PartiesCmp extends MeteorComponent {
   parties: IParty[];
   location: ReactiveVar;
 
   constructor() {
+    super();
+    this.subscribe('parties', 'Palo Alto');
     this.location = new ReactiveVar('Palo Alto');
-    zoneAutorun(() => {
+
+    this.autorun(() => {
       this.parties = Parties.find({location: this.location.get()});
-    });
+    }, true);
   }
 
   searchLocation(location) {
+    this.subscribe('parties', location);
     this.location.set(location);
   }
 }

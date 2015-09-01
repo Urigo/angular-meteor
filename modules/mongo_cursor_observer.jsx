@@ -118,8 +118,6 @@ export class MongoCursorObserver extends EventEmitter {
     if (this._hCursor) {
       this._hCursor.stop();
     }
-    this._docs.length = 0;
-    this._changes.length = 0;
 
     this._hCursor = null;
     this._docs = null;

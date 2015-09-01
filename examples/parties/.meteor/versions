@@ -1,5 +1,4 @@
 anti:fake@0.4.1
-autopublish@1.0.3
 autoupdate@1.2.1
 babel-compiler@5.8.3_1
 babel-runtime@0.1.3
@@ -50,6 +49,7 @@ templating@1.1.1
 tracker@1.0.7
 ui@1.0.6
 underscore@1.0.3
+universe:modules@0.4.1
 urigo:angular2-meteor@0.1.0
 url@1.0.4
 webapp@1.2.0
