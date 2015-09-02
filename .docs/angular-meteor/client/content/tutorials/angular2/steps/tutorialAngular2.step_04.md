@@ -1,4 +1,5 @@
-{{#template name="tutorialAngular2.step_04.html"}}    
+{{#template name="tutorialAngular2.step_04.html"}}  
+{{> downloadPreviousStep stepName="step_03"}}
 
 Now that we have full data binding from server to client, let's interact with the data and see the updates in action.
 

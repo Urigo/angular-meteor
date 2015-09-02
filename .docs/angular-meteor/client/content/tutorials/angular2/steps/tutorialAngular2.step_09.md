@@ -219,7 +219,7 @@ __`client/party-details/party-details.ts`:__
 
     @View({
       templateUrl: 'client/party-details/party-details.ng.html',
-      directives: [FORM_DIRECTIVES, routerDirectives, NgFor]
+      directives: [FORM_DIRECTIVES, RouterLink, NgFor]
     })
     export class PartyDetails {
      ...

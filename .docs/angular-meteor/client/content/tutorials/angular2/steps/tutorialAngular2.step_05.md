@@ -1,4 +1,5 @@
 {{#template name="tutorialAngular2.step_05.html"}}
+{{> downloadPreviousStep stepName="step_04"}}
 
 In this step, you will learn how to create a layout template and how to build an app that has multiple views by adding routing, using the new Angular router.
 
@@ -21,40 +22,18 @@ Type in the command line:
 
 Let's import and add the package dependencies.
 
-__`client/app.ts`:__
-
-    import {Component, View, bootstrap} from 'angular2/angular2';
-    import {routerInjectables, routerDirectives, Router, RouteConfig} from 'angular2/router';
-
-    import {PartiesForm} from 'client/parties-form/parties-form';
-
-    @Component({
-      selector: 'app'
-    })
-    @View({
-      template: 'index.ng.html',
-      directives: [NgFor, PartiesForm, routerDirectives]
-    })
-    @RouteConfig()
-    class Socially {}
-
-    bootstrap(Socially, [routerInjectables]);
+{{> DiffBox tutorialName="angular2-meteor" step="5.1"}}
 
 Let's make a checklist of what we need to get our router working. We'll go over each of these soon enough:
 
 * imports from `'angular2/router'`
 * `@RouteConfig()` which will specify our routes soon
-* View directives adding `routerDirectives`, allowing us to communicate with the view
+* View directives adding `RouterOutlet` and `RouterLink`, allowing us to communicate with the view
 * inject `routerInjectables` into the child components
 * a location where components will be created, the `<router-outlet></router-outlet>`
 * declare the base route in `index.html` (required when using the HTML5LocationStrategy, rather than the HashLocationStategy)
 
-__`client/index.html`:__
-
-    <head>
-      <base href="/">
-    </head>
-    <body> ... </body>
+{{> DiffBox tutorialName="angular2-meteor" step="5.2"}}
 
 # Multiple Views, Routing and Layout Template
 
@@ -78,67 +57,19 @@ In the new Angular router, we don't route to templates or controllers. Instead, 
 
 Let's move the content of Socially out into a `party-list` component. Create a new file called `parties-list.ts` and put it in its own component folder. We'll also import some router directives to use later.
 
-__`client/parties-list/parties-list.ts`:__
-
-      import {Component, View, NgFor} from 'angular2/angular2';
-      import {routerDirectives} from 'angular2/router';
-      import {PartiesForm} from 'client/parties-form/parties-form';
-
-      @Component({
-        selector: 'parties-list'
-      })
-      @View({
-        templateUrl: 'client/parties-list/parties-list.ng.html',
-        directives: [NgFor, routerDirectives, PartiesForm]
-      })
-      export class PartiesList {
-        constructor() {
-          Tracker.autorun(zone.bind(() => {
-            this.parties = Parties.find().fetch();
-          }));
-        },
-        remove(party) {
-          Parties.remove(party._id);
-        }
-      }
-
-Move the `index.ng.html` file into the parties-list folder and rename it `parties-list.ng.html`.
+_{{> DiffBox tutorialName="angular2-meteor" step="5.3"}}
 
 `app.ts` should be looking a lot cleaner now.
 
-__`client/app.ts`:__
-
-    import {Component, View, bind, bootstrap} from 'angular2/angular2';
-    import {routerInjectables, routerDirectives, Router, RouteConfig} from 'angular2/router';
-    import {LocationStrategy, Location, HashLocationStrategy } from 'angular2/router'; // HTML5LocationStrategy
-
-    import {PartiesList} from 'client/parties-list/parties-list';
-
-    @Component({
-      selector: 'app'
-    })
-    @View({
-      template: '<router-outlet></router-outlet>',
-      directives: [routerDirectives]
-    })
-    @RouteConfig()
-    class Socially {}
-
-    bootstrap(Socially, [
-      routerInjectables,
-      bind(LocationStrategy).toClass(HashLocationStrategy) // HTML5LocationStrategy
-    ]);
+{{> DiffBox tutorialName="angular2-meteor" step="5.4"}}
 
 Notice the View is now point to a `template` declared within the `.ts` file. This is an alternative to specifying our `templateUrl` path.
 
 Our template here is the `<router-outlet></router-outlet>`. This is where the route components will be located on the page when the url changes.
 
-We also have the choice of two location URL strategies:
+Move the `index.ng.html` file into the parties-list folder and rename it `parties-list.ng.html`.
 
-- HTML5 - www.site.com/
-- Hash - www.site.com/#/
-
-Don't forget to import `bind` helper that hooks up our URL location strategy.
+{{> DiffBox tutorialName="angular2-meteor" step="5.5"}}
 
 Good. Now our app structure looks like this:
 
@@ -149,8 +80,7 @@ Good. Now our app structure looks like this:
 Think of dependencies in Angular as a trees. The final line:
 
     bootstrap(Socially, [
-      routerInjectables,
-      bind(LocationStrategy).toClass(HashLocationStrategy)
+      routerInjectables
     ]);
 
 Here, the dependencies such as `routerInjectables` are passed to all of Socially's components on bootstrapping.
@@ -159,45 +89,19 @@ Here, the dependencies such as `routerInjectables` are passed to all of Socially
 
 Before configuring our routes, let's setup one more component: `party-details`. When you click on a party in the list, it should route to this PartyDetails component for more party information.
 
-__`client/party-details/party-details.ts`:__
+{{> DiffBox tutorialName="angular2-meteor" step="5.6"}}
 
-    import {Component, View} from 'angular2/angular2';
+And a template with placeholders for the component:
 
-    @Component({
-      selector: 'party-details'
-    })
-    @View({
-      templateUrl: 'client/party-details/party-details.ng.html'
-    })
-    export class PartyDetails {}
-
-And the template for the component:
-
-__`client/party-details/party-details.ng.html`:__
-
-    <header>
-      <h2>{{dstache}}party.name}}</h2>
-
-      <p>{{dstache}}party.description}}</p>
-    </header>
+{{> DiffBox tutorialName="angular2-meteor" step="5.7"}}
 
 # Configuring Routes
 
 Let's configure our routes. This is how we map url paths to components.
 
-__`client/app.ts`:__
+{{> DiffBox tutorialName="angular2-meteor" step="5.8"}}
 
-    import {PartiesList} from 'client/parties-list/parties-list';
-    import {PartyDetails} from 'client/party-details/party-details';
-
-    @Component( ... )
-    @View( ... )
-    @RouteConfig([
-      {path: '/',  component: PartiesList},
-      {path: '/party/:partyId', as: 'party-details', component: PartyDetails}
-    ])
-
-Here the default path url will launch PartyList within the `<router-outlet>`.
+Here the default path url will launch PartyList within the `<router-outlet>` and redirect to the '/parties' url.
 
 If `party-details` is targeted, with a `partyId` parameter, it will route to the PartyDetails component with access to that parameter.
 
@@ -208,17 +112,17 @@ Let's see how we move around different urls using the `<router-link>`. First we'
 __`client/parties-list/parties-list.ts`:__
 
     import {Component, View, NgFor} from 'angular2/angular2';
-    import {routerDirectives} from 'angular2/router';
+    import {RouterLink} from 'angular2/router';
     import {PartyForm} from 'client/party-form/party-form';
 
     @Component( ... )
     @View({
       templateUrl: 'client/parties/parties.ng.html',
-      directives: [NgFor, routerDirectives, PartyForm]
+      directives: [NgFor, RouterLink, PartyForm]
     })
     export class PartiesList { ... }
 
-Make sure you imported the `routerDirectives` and specified it as a view directive.
+Make sure you imported the `RouterLink` and specified it as a view directive.
 
 Now we can wrap our party in a `router-link` and pass in the `_id` as a parameter. Note that the id is auto-generated when an item is inserted into a Mongo Collection.
 
