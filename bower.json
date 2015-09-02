@@ -1,7 +1,7 @@
 {
   "name": "angular-meteor",
   "main": ".dist/angular-meteor.bundle.min.js",
-  "version": "0.9.3",
+  "version": "0.10.0",
   "homepage": "https://github.com/Urigo/angular-meteor",
   "authors": [
     "Uri Goldshtein <uri.goldshtein@gmail.com>"
@@ -39,6 +39,6 @@
   ],
   "dependencies": {
     "meteor-client-side": "0.1.0",
-    "angular": "1.4.1"
+    "angular": "1.4.4"
   }
 }

@@ -76,11 +76,11 @@ API_REFERENCE = {
         },
         {
           id: "09",
-          route: "api.meteor-include",
-          path: "/api/meteor-include",
-          title: "meteor-include directive",
-          seoTitle: "meteor-include directive",
-          mdContent: "api.meteor-include"
+          route: "api.blaze-template",
+          path: "/api/blaze-template",
+          title: "blaze-template directive",
+          seoTitle: "blaze-template directive",
+          mdContent: "api.blaze-template"
         },
         {
           id: "10",

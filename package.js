@@ -1,7 +1,7 @@
 Package.describe({
-  name: "urigo:angular",
+  name: "angular",
   summary: "Everything you need to use AngularJS in your Meteor app",
-  version: "0.9.3",
+  version: "1.0.0-rc.4",
   git: "https://github.com/Urigo/angular-meteor.git"
 });
 
@@ -30,7 +30,12 @@ Package.on_use(function (api) {
   api.versionsFrom('METEOR@0.9.0.1');
 
   api.use('angular:angular@1.4.4', 'client');
-  api.use('minimongo');  // for idStringify
+  api.use('minimongo');
+  if (Package['mongo-id']) {
+    // Since commit b3096e93661bc79bab73a63bae0e14643030a9a3, MongoId is
+    // in a separate package. We need to use it for idParse and idStringify.
+    api.use('mongo-id');
+  }
   api.use('observe-sequence');
   api.use('dburles:mongo-collection-instances@0.3.4', 'client'); // For getCollectionByName
 
@@ -45,7 +50,6 @@ Package.on_use(function (api) {
     'modules/angular-meteor-stopper.js',
     'modules/angular-meteor-collection.js',
     'modules/angular-meteor-object.js',
-    'modules/angular-meteor-template.js',
     'modules/angular-meteor-user.js',
     'modules/angular-meteor-methods.js',
     'modules/angular-meteor-session.js',
@@ -59,7 +63,7 @@ Package.on_use(function (api) {
 
 Package.onTest(function(api) {
   api.use('sanjo:jasmine@0.13.6');
-  api.use('urigo:angular');
+  api.use('angular');
   api.use('angular:angular-mocks@1.4.4');
   api.use('mdg:camera@1.1.5');
 

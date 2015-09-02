@@ -91,6 +91,7 @@ Router.map(function () {
   //
   createSubRoutes(API_REFERENCE);
   redirect('/api', '/api/meteorCollection');
+  redirect('/api/meteor-include', '/api/blaze-template');
 
   // -------------------------------------------------------------------------
   // Angular Server routes

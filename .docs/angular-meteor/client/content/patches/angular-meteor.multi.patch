@@ -1862,7 +1862,7 @@ index 52e92e7..0000000
 From cdc9447b3cab8bd6f57330d505b98d5b04869ddc Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 20:25:35 +0300
-Subject: [PATCH 056/196] Step 8.1: Use meteor-include to load the loginButtons
+Subject: [PATCH 056/196] Step 8.1: Use blaze-template to load the loginButtons
 
 ---
  client/index.html | 2 +-
@@ -1876,7 +1876,7 @@ index 0fcd817..136ca2f 100644
  <body>
  
  <div ng-app="socially">
-+  <meteor-include src="loginButtons"></meteor-include>
++  <blaze-template name="loginButtons"></blaze-template>
    <h1>
      <a href="/parties">Home</a>
    </h1>
@@ -2367,7 +2367,7 @@ index 136ca2f..d0ba166 100644
  
 -<div ng-app="socially">
 +<div>
-   <meteor-include src="loginButtons"></meteor-include>
+   <blaze-template name="loginButtons"></blaze-template>
    <h1>
      <a href="/parties">Home</a>
 -- 
@@ -4640,7 +4640,7 @@ index d0ba166..00d1dc0 100644
  <body>
  
  <div>
--  <meteor-include src="loginButtons"></meteor-include>
+-  <blaze-template name="loginButtons"></blaze-template>
 -  <h1>
 -    <a href="/parties">Home</a>
 -  </h1>
@@ -4652,7 +4652,7 @@ index d0ba166..00d1dc0 100644
 +          <a href="/parties">Home</a>
 +        </h1>
 +      </div>
-+      <meteor-include src="loginButtons"></meteor-include>
++      <blaze-template name="loginButtons"></blaze-template>
 +    </div>
 +  </header>
 +  <div ui-view class="container-fluid"></div>
@@ -4873,7 +4873,7 @@ index 00d1dc0..62b0921 100644
 +    <span flex></span>
 +
 +    <div class="navbar-right navbar-text">
-       <meteor-include src="loginButtons"></meteor-include>
+       <blaze-template name="loginButtons"></blaze-template>
      </div>
 -  </header>
 +  </md-toolbar>
@@ -5263,7 +5263,7 @@ index 62b0921..51398ae 100644
      <span flex></span>
  
 -    <div class="navbar-right navbar-text">
--      <meteor-include src="loginButtons"></meteor-include>
+-      <blaze-template name="loginButtons"></blaze-template>
 -    </div>
 +    <md-button ng-href="/login" ng-hide="$root.currentUser">Login</md-button>
 +    <md-button ng-href="/register" ng-hide="$root.currentUser">Sign up</md-button>

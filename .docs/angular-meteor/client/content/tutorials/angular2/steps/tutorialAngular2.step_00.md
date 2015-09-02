@@ -166,7 +166,7 @@ Then move the `p` tag into it:
 
  {{> DiffBox tutorialName="angular2-meteor" step="0.7"}}
 
-
+    
 Now our component template will load from the given path. Let's use Angular inside of `index.ng.html` to see that's working:
 
     <p>Nothing here {{dstache}} 'yet' + '!' }}</p>

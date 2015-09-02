@@ -6,42 +6,12 @@
 
 [![ng-conf](http://img.youtube.com/vi/_mu6BWsnaPM/0.jpg)](https://www.youtube.com/watch?v=_mu6BWsnaPM)
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
-
-- [<a href="http://angular-meteor.com/"><img src="http://angular-meteor.com/images/logo-large.png" width="60" height="60" /></a>  [angular-meteor](http://angular-meteor.com/tutorial) [![Build Status](https://travis-ci.org/Urigo/angular-meteor.svg?branch=master)](https://travis-ci.org/Urigo/angular-meteor) [![Bower version](https://badge.fury.io/bo/angular-meteor.svg)](http://badge.fury.io/bo/angular-meteor)](#a-hrefhttpangular-meteorcomimg-srchttpangular-meteorcomimageslogo-largepng-width60-height60-a--angular-meteorhttpangular-meteorcomtutorial-build-statushttpstravis-ciorgurigoangular-meteorsvgbranchmasterhttpstravis-ciorgurigoangular-meteor-bower-versionhttpsbadgefuryioboangular-meteorsvghttpbadgefuryioboangular-meteor)
-  - [Quick start](#quick-start)
-    - [Meteor Project](#meteor-project)
-    - [Meteor client side - with Bower](#meteor-client-side---with-bower)
-  - [Resources](#resources)
-  - [Contributing](#contributing)
-  - [Contributor Developer Setup](#contributor-developer-setup)
-    - [Run local urigo:angular in your project](#run-local-urigoangular-in-your-project)
-    - [Running tests](#running-tests)
-    - [Contributing to documentation and tutorials.](#contributing-to-documentation-and-tutorials)
-  - [Usage](#usage)
-    - [Table of Contents](#table-of-contents)
-    - [App initialization](#app-initialization)
-    - [Templating](#templating)
-    - [Binding to Meteor Collections](#binding-to-meteor-collections)
-    - [Subscribe](#subscribe)
-    - [Routing](#routing)
-    - [&lt;meteor-include&gt;](#&ltmeteor-include&gt)
-    - [User Authentication](#user-authentication)
-    - [Meteor methods with promises](#meteor-methods-with-promises)
-    - [Bind Meteor session](#bind-meteor-session)
-    - [Additional packages](#additional-packages)
-    - [Acknowledgement](#acknowledgement)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 ## Quick start
 
 ### Meteor Project
 1. Install [Meteor](http://docs.meteor.com/#quickstart) `$ curl https://install.meteor.com | /bin/sh`
 2. Create a new meteor app using `$ meteor create myapp` or navigate to the root of your existing app
-3. Install urigo:angular `$ meteor add urigo:angular`
+3. Install Angular `$ meteor add angular`
 
 ### Meteor client side - with Bower
 > Use Meteor as a service in your existing non Meteor angular application
@@ -60,7 +30,7 @@
 - [Roadmap - Trello board](https://trello.com/b/Wj9U0ulk/angular-meteor)
 - [angular-meteor Blog](https://medium.com/angular-meteor)
 - Starters - [angular-meteor Yeoman generator](https://github.com/ndxbxrme/generator-angular-meteor), [Angular-Meteor-Boilerplate with TypeScript](https://github.com/ShMcK/Angular-Meteor-Boilerplate)
-- [Meteor package - urigo:angular](https://atmospherejs.com/urigo/angular)
+- [Meteor package - angular](https://atmospherejs.com/meteor/angular)
 - [Angular-Meteor Platform](https://github.com/planet-training/angular-meteor-platform) - No Blaze, plain HTML
 - [Awesome Meteor](https://github.com/Urigo/awesome-meteor) - A curated, community driven list of awesome Meteor packages, libraries, resources and shiny thing
 
@@ -76,7 +46,7 @@ If you want to contribute and need help or don't know what should you do, you ca
 
 ## Contributor Developer Setup
 
-### Run local urigo:angular in your project
+### Run local angular-meteor in your project
 
 Create your Meteor Project
 
@@ -85,10 +55,10 @@ meteor create myProject
 cd myProject
 ```
 
-Fork angular-meteor and clone the angular-meteor library to another directory named `urigo:angular`
+Fork angular-meteor and clone the angular-meteor library to another directory named `angular`
 ```
-mkdir urigo:angular
-git clone https://github.com/[your_username]/angular-meteor.git urigo:angular
+mkdir angular
+git clone https://github.com/[your_username]/angular-meteor.git angular
 ```
 
 Create a `packages` directory under your project's root folder and link your forked repo
@@ -97,7 +67,7 @@ Create a `packages` directory under your project's root folder and link your for
 cd myProject
 mkdir packages
 cd packages
-ln -s ~/path_to_your_repos/urigo\:angular
+ln -s ~/path_to_your_repos/angular
 ```
 
 Now you can start using your own copy of the `angular-meteor` project from `myProject`.
@@ -204,19 +174,11 @@ Use to official AngularUI ui-router Meteor package - [angularui:angular-ui-route
 
 More on how to actually use angular-ui-router in [step 5 of the tutorial](http://angular-meteor.com/tutorial/step_05)
 
-### &lt;meteor-include&gt;
+### &lt;blaze-template&gt;
 
-You can include Meteor's native templates with the [meteor-include](http://angular-meteor.com/api/meteor-include) directive.
+Include Blaze templates in your [angular-meteor](http://angular-meteor.com/) application.
 
-```html
-<template name="todoList">
-    A couple of todos
-</template>
-
-<meteor-include src='todoList'></meteor-include>
-```
-
-Read more on meteor-include, using parameters and binding Meteor templates to Angular's scope in the [API docs](http://angular-meteor.com/api/meteor-include).
+Use the [urigo:angular-blaze-template package](https://github.com/urigo/angular-blaze-template/). 
 
 ### User Authentication
 

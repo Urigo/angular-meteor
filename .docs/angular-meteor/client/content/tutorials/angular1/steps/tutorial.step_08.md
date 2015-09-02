@@ -36,11 +36,15 @@ Later on in this tutorial we will replace those default account-ui forms with cu
 
 Now let's add the accounts-ui template ( <code ng-non-bindable>&#123;&#123;> loginButtons &#125;&#125;</code> ) into our app, into index.html.
 
-To add Meteor's templates into AngularJS templates, angular-meteor provides us with the [meteor-include](/api/meteor-include) directive.
+To add Meteor's templates into AngularJS templates, angular-meteor provides us with the [blaze-template](/api/blaze-template) directive.
+
+To start using, we need to add the `urigo:angular-blaze-template` [package](https://github.com/Urigo/angular-blaze-template):
+
+    meteor add urigo:angular-blaze-template
 
 So instead of adding <code ng-non-bindable>&#123;&#123;> loginButtons &#125;&#125;</code> like in Meteor we will add:
 
-    <meteor-include src="loginButtons"></meteor-include>
+    <blaze-template name="loginButtons"></blaze-template>
 
 So the `index.html` will look like this:
 

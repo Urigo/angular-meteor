@@ -2,14 +2,14 @@
 
 Let's start building our Meteor-Angular socially app.
 
-In this step, you will:
+This is an introductory step - you will:
 
 1. Become familiar with the most important source code files
 2. Learn how to start the Meteor server
 3. Connect an Angular FrontEnd
 4. Run the application in the browser
 
-First step - let's install Meteor!
+But first - let's install Meteor!
 
 Open your command line and paste this command:
 
@@ -17,7 +17,7 @@ Open your command line and paste this command:
 
 > If you are on a Windows machine, go [here](https://www.meteor.com/install) to install
 
-Now let's create our app - write this in the command line:
+Now let's create your first app - type this into the command line:
 
     $ meteor create socially
 
@@ -34,26 +34,26 @@ and run the app like so:
     => Started your app.
     >=> App running at: http://localhost:3000/
 
-Now go to [http://localhost:3000/](http://localhost:3000/)
+Use your browser to go to [http://localhost:3000/](http://localhost:3000/)
 and look at the amazing app that's running on your computer!
 
-So, as you can see, we have a full running app which includes a server and a client!
+We now have a fully functional app which includes both a server and a client.
 
 The default Meteor app starts life with three files, one `js`, one `html` and one `css` file. Each named with the application name you used in the `create` command above. In our case this is `socially`.
 
 We are going to add our own files for this tutorial. So let's start by deleting the following files:
 
-    socially.css	socially.html	socially.js
+    $ rm socially.css	socially.html	socially.js
 
-Now we can start building our app.
-First, let's create a new `index.html` file and place this code inside. Then run the app again:
+And let's start building our app.
+First, create a new `index.html` file and place this code inside. Then run the app again:
 
 {{> DiffBox tutorialName="angular-meteor" step="0.1"}}
 
-As you can see, there is no html tag, no head tag, very simple.
+Note that there is no `<html>` tag and no `<head>` tag - it's very simple.
 
 
-The reason for this is the way Meteor structures and serves files to the client.
+This is because of how Meteor structures and serves files to the client.
 
 Meteor scans all the HTML files in your application and concatenates them together.
 
@@ -68,24 +68,25 @@ So in our case, Meteor found our `index.html` file, found the `BODY` tag inside 
 > (right-click -> inspect element on the page to see the generated file)
 
 
+# Adding AngularJS
 
-Now it's time to add AngularJS to our stack!
+Time to add AngularJS to our stack!
 
-Now first things first, let's add the AngularJS package to Meteor (we will discuss more about Meteor packages later in this tutorial)
+First things first, let's add the AngularJS package to Meteor (we will discuss Meteor packages further later in this tutorial)
 
 
 
 Back in the command line, launch this command:
 
-    $ meteor add urigo:angular
+    $ meteor add angular
 
-This package takes care of connecting Angular to Meteor and includes the latest AngularJS library code into our app.
+This package takes care of connecting Angular to Meteor and includes the latest AngularJS library code.
 
-That's it! Now we can use the AngularJS power in our Meteor app.
+That's it! Now we can use AngularJS's power in our Meteor app.
 
 To start simple, create a new file called `index.ng.html` under the main folder, this will be our main `HTML` template page.
 
-* We are using the `.ng.html` file extension so that Blaze - Meteor's templating system won't compile and override our AngularJS expressions.
+> We are using the `.ng.html` file extension so that Blaze - Meteor's templating system - won't compile and override our AngularJS expressions.
 
 Then move the `p` tag into it:
 
@@ -97,24 +98,24 @@ Now let's include that file into our main `index.html` file:
 
 But if you load this in your browser, **you won't see anything**. That's because we still need to **create the actual Angular app**, which we'll do next.
 
-* It's very important to note - the **paths are always absolute, not relative!**  so if `index.ng.html` was inside a folder named `client`, you would have to place the whole path from the route app, doesn't matter where you're calling the file from.
+> It's very important to note - the **paths are always absolute, not relative!**  so if `index.ng.html` was inside a folder named `client`, you would have to place the whole path from the route app, doesn't matter where you're calling the file from.
 
-like this (e.g. if `index.ng.html` was in a folder named `client`):
+E.g. if `index.ng.html` was in a folder named `client` your include would look like:
 
     <div ng-include="'client/index.ng.html'"></div>
 
-# AngularJS app
+# Building The AngularJS App
 
 AngularJS apps are actually individual modules. So let's create our app module.
 
 Create a new `app.js` file.
 
-Now you can see another example of Meteor's power and simplicity - no need to include this file anywhere. Meteor will take care of it by going through all the files in the folder and including them automatically.
+Here you see another example of Meteor's power and simplicity - no need to include this file anywhere. Meteor will take care of it by going through all the files in the `socially` folder and including them automatically.
 
 One of Meteor's goals is to break down the barrier between client and server, so the code you write can run everywhere! (more on that later).
 But we need Angular's power only in the client side, so how can we do that?
 
-There are a few ways to tell Meteor to run code only on the client/server/phone side, let's start with the simplest way - [Meteor.isClient](http://docs.meteor.com/#/full/meteor_isserver) variable.
+There are a few ways to tell Meteor to run code only on the client/server/phone side, let's start with the simplest way - [Meteor.isClient](http://docs.meteor.com/#/full/meteor_isclient) variable.
 
 {{> DiffBox tutorialName="angular-meteor" step="0.4"}}
 
@@ -145,7 +146,7 @@ Try adding a new expression to the index.ng.html that will do some math:
 
     <p>1 + 2 = {{dstache}} 1 + 2 }}</p>
 
-# Summary
-Now let's go to [step 1](/tutorial/step_01) and add some content to our application.
+# Done!
+Go to [step 1](/tutorial/step_01) to add some content to our application.
 
 {{/template}}
