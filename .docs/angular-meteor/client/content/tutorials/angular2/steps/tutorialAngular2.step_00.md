@@ -106,7 +106,12 @@ ES2015 & TypeScript both use modules. These are the `import` and `export` statem
 
 System.js is a module loader built into the `shmck:angular2` package. We'll use it to load our root component.
 
-{{> DiffBox tutorialName="angular2-meteor" step="0.2"}}
+__`client/index.html`:__
+
+    <body>
+      <p>Nothing here</p>
+      <script>System.import("client/app");</script>
+    </body>
 
 Here we're telling System.js to load `app.js`, which is compiled from our `app.ts` file.
 
@@ -164,8 +169,12 @@ Then move the `p` tag into it:
 
 Change your template in `app.ts` to target `index.ng.html`.
 
-{{> DiffBox tutorialName="angular2-meteor" step="0.5"}}
+__`client/app.ts`:__
 
+    @View({
+      templateUrl: 'client/index.ng.html'
+    })
+    
 Now our component template will load from the given path. Let's use Angular inside of `index.ng.html` to see that's working:
 
     <p>Nothing here {{dstache}} 'yet' + '!' }}</p>
