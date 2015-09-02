@@ -102,11 +102,13 @@ This compiler will convert our `.ts` files to valid `.js` files.
 
 ES2015 & TypeScript both use modules. These are the `import` and `export` statements that have arrived in JavaScript.
 
+{{> DiffBox tutorialName="angular2-meteor" step="0.2"}}
+
 ## System.js
 
 System.js is a module loader built into the `shmck:angular2` package. We'll use it to load our root component.
 
-{{> DiffBox tutorialName="angular2-meteor" step="0.2"}}
+{{> DiffBox tutorialName="angular2-meteor" step="0.3"}}
 
 Here we're telling System.js to load `app.js`, which is compiled from our `app.ts` file.
 
@@ -118,7 +120,7 @@ A component is a controller with an attached view. Think of it like a brick in t
 
 We'll create a root component tag called `app`. Let's include that component into our main `index.html` file:
 
-{{> DiffBox tutorialName="angular2-meteor" step="0.3"}}
+{{> DiffBox tutorialName="angular2-meteor" step="0.4"}}
 
 But if you load this in your browser, **you won't see anything**. That's because we still need to **create the actual Angular 2 component**, which we'll do next.
 
@@ -132,7 +134,7 @@ Now you can see another example of Meteor's power and simplicity - no need to in
 
 Let's continue defining our Angular 2 application module.
 
-{{> DiffBox tutorialName="angular2-meteor" step="0.4"}}
+{{> DiffBox tutorialName="angular2-meteor" step="0.5"}}
 
 First we're importing the dependencies we needed from `angular2/angular2`. This is not a folder and file in your directory, but referring to an alias provided to System.js in the `shmck:angular2` package.
 
@@ -156,15 +158,14 @@ Let's make one change. Create a new file called `index.ng.html` under the 'clien
 
 * We are using the `.ng.html` file extension so that Blaze - Meteor's templating system won't compile and override our Angular 2 expressions.
 
-Then move the `p` tag into it:
-
- __`client/index.ng.html`:__
-
-    <p>Nothing here</p>
-
 Change your template in `app.ts` to target `index.ng.html`.
 
-{{> DiffBox tutorialName="angular2-meteor" step="0.5"}}
+{{> DiffBox tutorialName="angular2-meteor" step="0.6"}}
+
+Then move the `p` tag into it:
+
+ {{> DiffBox tutorialName="angular2-meteor" step="0.7"}}
+
 
 Now our component template will load from the given path. Let's use Angular inside of `index.ng.html` to see that's working:
 
