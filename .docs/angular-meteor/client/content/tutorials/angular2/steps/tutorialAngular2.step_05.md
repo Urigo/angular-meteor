@@ -19,10 +19,12 @@ We will install angular-router with the help of [a package I've put together](ht
 Type in the command line:
 
     $ meteor add shmck:angular2-router
+    
+{{> DiffBox tutorialName="angular2-meteor" step="5.1"}}
 
 Let's import and add the package dependencies.
 
-{{> DiffBox tutorialName="angular2-meteor" step="5.1"}}
+{{> DiffBox tutorialName="angular2-meteor" step="5.2"}}
 
 Let's make a checklist of what we need to get our router working. We'll go over each of these soon enough:
 
@@ -33,7 +35,7 @@ Let's make a checklist of what we need to get our router working. We'll go over 
 * a location where components will be created, the `<router-outlet></router-outlet>`
 * declare the base route in `index.html` (required when using the HTML5LocationStrategy, rather than the HashLocationStategy)
 
-{{> DiffBox tutorialName="angular2-meteor" step="5.2"}}
+{{> DiffBox tutorialName="angular2-meteor" step="5.3"}}
 
 # Multiple Views, Routing and Layout Template
 
@@ -57,11 +59,11 @@ In the new Angular router, we don't route to templates or controllers. Instead, 
 
 Let's move the content of Socially out into a `party-list` component. Create a new file called `parties-list.ts` and put it in its own component folder. We'll also import some router directives to use later.
 
-_{{> DiffBox tutorialName="angular2-meteor" step="5.3"}}
+_{{> DiffBox tutorialName="angular2-meteor" step="5.4"}}
 
 `app.ts` should be looking a lot cleaner now.
 
-{{> DiffBox tutorialName="angular2-meteor" step="5.4"}}
+{{> DiffBox tutorialName="angular2-meteor" step="5.5"}}
 
 Notice the View is now point to a `template` declared within the `.ts` file. This is an alternative to specifying our `templateUrl` path.
 
@@ -69,7 +71,7 @@ Our template here is the `<router-outlet></router-outlet>`. This is where the ro
 
 Move the `index.ng.html` file into the parties-list folder and rename it `parties-list.ng.html`.
 
-{{> DiffBox tutorialName="angular2-meteor" step="5.5"}}
+{{> DiffBox tutorialName="angular2-meteor" step="5.6"}}
 
 Good. Now our app structure looks like this:
 
@@ -89,17 +91,17 @@ Here, the dependencies such as `routerInjectables` are passed to all of Socially
 
 Before configuring our routes, let's setup one more component: `party-details`. When you click on a party in the list, it should route to this PartyDetails component for more party information.
 
-{{> DiffBox tutorialName="angular2-meteor" step="5.6"}}
+{{> DiffBox tutorialName="angular2-meteor" step="5.7"}}
 
 And a template with placeholders for the component:
 
-{{> DiffBox tutorialName="angular2-meteor" step="5.7"}}
+{{> DiffBox tutorialName="angular2-meteor" step="5.8"}}
 
 # Configuring Routes
 
 Let's configure our routes. This is how we map url paths to components.
 
-{{> DiffBox tutorialName="angular2-meteor" step="5.8"}}
+{{> DiffBox tutorialName="angular2-meteor" step="5.9"}}
 
 Here the default path url will launch PartyList within the `<router-outlet>` and redirect to the '/parties' url.
 
