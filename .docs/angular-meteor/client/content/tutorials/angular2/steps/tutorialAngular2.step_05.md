@@ -20,9 +20,11 @@ Type in the command line:
 
     $ meteor add shmck:angular2-router
     
+It will now be added to our list of packages.    
+    
 {{> DiffBox tutorialName="angular2-meteor" step="5.1"}}
 
-Let's import and add the package dependencies.
+Let's import and add the package dependencies into our app.
 
 {{> DiffBox tutorialName="angular2-meteor" step="5.2"}}
 
@@ -30,10 +32,11 @@ Let's make a checklist of what we need to get our router working. We'll go over 
 
 * imports from `'angular2/router'`
 * `@RouteConfig()` which will specify our routes soon
-* View directives adding `RouterOutlet` and `RouterLink`, allowing us to communicate with the view
+* View directives adding `RouterOutlet` and `RouterLink`
 * inject `routerInjectables` into the child components
-* a location where components will be created, the `<router-outlet></router-outlet>`
-* declare the base route in `index.html` (required when using the HTML5LocationStrategy, rather than the HashLocationStategy)
+* a location in the view where components will be created, the `<router-outlet></router-outlet>`
+
+Be sure to declare the base route in `index.html` (required when using the HTML5LocationStrategy, rather than the HashLocationStategy). 
 
 {{> DiffBox tutorialName="angular2-meteor" step="5.3"}}
 
@@ -73,6 +76,8 @@ Move the `index.ng.html` file into the parties-list folder and rename it `partie
 
 {{> DiffBox tutorialName="angular2-meteor" step="5.6"}}
 
+{{> DiffBox tutorialName="angular2-meteor" step="5.7"}}
+
 Good. Now our app structure looks like this:
 
     Socially
@@ -91,17 +96,17 @@ Here, the dependencies such as `routerInjectables` are passed to all of Socially
 
 Before configuring our routes, let's setup one more component: `party-details`. When you click on a party in the list, it should route to this PartyDetails component for more party information.
 
-{{> DiffBox tutorialName="angular2-meteor" step="5.7"}}
+{{> DiffBox tutorialName="angular2-meteor" step="5.8"}}
 
 And a template with placeholders for the component:
 
-{{> DiffBox tutorialName="angular2-meteor" step="5.8"}}
+{{> DiffBox tutorialName="angular2-meteor" step="5.9"}}
 
 # Configuring Routes
 
 Let's configure our routes. This is how we map url paths to components.
 
-{{> DiffBox tutorialName="angular2-meteor" step="5.9"}}
+{{> DiffBox tutorialName="angular2-meteor" step="5.10"}}
 
 Here the default path url will launch PartyList within the `<router-outlet>` and redirect to the '/parties' url.
 
@@ -111,20 +116,14 @@ If `party-details` is targeted, with a `partyId` parameter, it will route to the
 
 Let's see how we move around different urls using the `<router-link>`. First we'll have to import and declare our dependencies.
 
-__`client/parties-list/parties-list.ts`:__
-
-    import {Component, View, NgFor} from 'angular2/angular2';
-    import {RouterLink} from 'angular2/router';
-    import {PartyForm} from 'client/party-form/party-form';
-
-    @Component( ... )
-    @View({
-      templateUrl: 'client/parties/parties.ng.html',
-      directives: [NgFor, RouterLink, PartyForm]
-    })
-    export class PartiesList { ... }
+{{> DiffBox tutorialName="angular2-meteor" step="5.11"}}
+{{> DiffBox tutorialName="angular2-meteor" step="5.12"}}
 
 Make sure you imported the `RouterLink` and specified it as a view directive.
+ 
+Let's update our party-details view to use dynamic bindings to see if everything is working.
+
+{{> DiffBox tutorialName="angular2-meteor" step="5.13"}}
 
 Now we can wrap our party in a `router-link` and pass in the `_id` as a parameter. Note that the id is auto-generated when an item is inserted into a Mongo Collection.
 
@@ -142,24 +141,7 @@ This route syntax may look complicated, but that is because it is very flexible.
 
 As we are moving from the `party-list` to a specific party's `party-details`, we will need to grab the route parameters and load the correct party. Let's do this in `party-details.ts`.
 
-__`client/parties-details/parties-details.ts`:__
-
-    import {Component, View, Inject} from 'angular2/angular2';
-    import {RouteParams} from 'angular2/router';
-
-    @Component( ... )
-    @View({
-      templateUrl: 'client/party-details/party-details.ng.html'
-    })
-    export class PartyDetails {
-      constructor(@Inject(RouteParams) routeParams:RouteParams) {
-        this.partyId = routeParams.params.partyId;
-
-        Tracker.autorun(zone.bind(() => {
-          this.party = Parties.find(this.partyId).fetch()[0];
-        }));
-      }
-    }
+{{> DiffBox tutorialName="angular2-meteor" step="5.14"}}
 
 Several things are happening here.
 
