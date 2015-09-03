@@ -1,4 +1,5 @@
 {{#template name="tutorialAngular2.step_08.html"}}
+{{> downloadPreviousStep stepName="step_07"}} 
 
 In this section we'll look at using Meteor Accounts & take a quick detour into using Services in Angular 2.
 
@@ -44,20 +45,7 @@ Note: An Angular 2 component version of `loginButtons` is in the works, and can 
 
 For now, we can add `loginButtons` to our `index.html`, which will still work.
 
-
-__`index.html`:__
-
-    <head>
-      <base href="/">
-    </head>
-    <body>
-        {{dstache}}> loginButtons}}
-
-        <app></app>
-
-        <script>System.import('client/app');</script>
-    </body>
-
+{{> DiffBox tutorialName="angular2-meteor" step="8.1"}}
 
 Run the code, create an account, login, logout...
 
@@ -67,24 +55,7 @@ Now that we have our account system, we can start defining our security rules fo
 
 Let's go to the model folder and change the file to look like this:
 
-__`model/parties.ts`:__
-
-    Parties = new Mongo.Collection("parties");
-
-    Parties.allow({
-      insert: function (party) {
-        var userId = Meteor.userId();
-        return userId && party.owner === userId;
-      },
-      update: function (party, fields, modifier) {
-        var userId = Meteor.userId();
-        return userId && party.owner === userId;
-      },
-      remove: function (party) {
-        var userId = Meteor.userId();
-        return userId && party.owner === userId;
-      }
-    });
+{{> DiffBox tutorialName="angular2-meteor" step="8.3"}}
 
 ## Mongo Commands (insert, update, remove)
 
@@ -133,14 +104,7 @@ Let's take our current user's id and set it as the owner id of the party we are 
 
 If you're using TypeScript, you'll have to adjust your IParty interface:
 
-__`typings/socially/socially.d.ts`:__
-
-    interface IParty {
-      _id?: string;
-      name: string;
-      description: string;
-      owner: string;
-    }
+{{> DiffBox tutorialName="angular2-meteor" step="8.4"}}
 
 Change the code for the add button in `parties-form.ts` to to also insert a user:
 
