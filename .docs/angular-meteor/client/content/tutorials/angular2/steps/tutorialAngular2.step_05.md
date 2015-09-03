@@ -116,26 +116,24 @@ If `party-details` is targeted, with a `partyId` parameter, it will route to the
 
 Let's see how we move around different urls using the `<router-link>`. First we'll have to import and declare our dependencies.
 
-{{> DiffBox tutorialName="angular2-meteor" step="5.11"}}
-{{> DiffBox tutorialName="angular2-meteor" step="5.12"}}
-
-Make sure you imported the `RouterLink` and specified it as a view directive.
- 
-Let's update our party-details view to use dynamic bindings to see if everything is working.
-
-{{> DiffBox tutorialName="angular2-meteor" step="5.13"}}
-
 Now we can wrap our party in a `router-link` and pass in the `_id` as a parameter. Note that the id is auto-generated when an item is inserted into a Mongo Collection.
 
-__`client/parties-list/parties-list.ng.html`:__
-
-    <a [router-link]="['/party-details', {partyId: party._id}]">{{dstache}}party.name}}</a>
+{{> DiffBox tutorialName="angular2-meteor" step="5.11"}}
 
 This route syntax may look complicated, but that is because it is very flexible.
 
 - The preceding `/` indicates that the route path we are linking to is an absolute path (routing supports multiple hierarchies of routers, but we don't need that in our simple app).
 - Routes are placed in an array to allow for more complicated route paths and mixing route paths and parameters.
 
+Make sure you imported the `RouterLink` and specified it as a view directive.
+
+{{> DiffBox tutorialName="angular2-meteor" step="5.12"}} 
+ 
+Let's update our party-details view to use dynamic bindings to see if everything is working.
+
+{{> DiffBox tutorialName="angular2-meteor" step="5.13"}}
+
+Great, now we just have to pass in the route params from the RouterLink.
 
 # Injecting Route Params
 
