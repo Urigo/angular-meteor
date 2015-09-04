@@ -1,4 +1,5 @@
 {{#template name="tutorialAngular2.step_06.html"}}
+{{> downloadPreviousStep stepName="step_05"}}  
   
 In this step we'll continue looking at the Angular router & forms.
 
@@ -46,19 +47,7 @@ By using a router lifecycle hook, the route will not change unless the data is c
 
 Router lifecycle hooks are easy to use. Simply add a method to the component class with the name of the hook.
 
-__`client/party-details/party-details.ts`:__
-
-    export class PartyDetails {
-      constructor(@Inject(RouteParams) routeParams:RouteParams) {
-        this.params = routeParams.params;
-      }
-      onActivate() {
-        this.party = Parties.find(this.params.partyId).fetch()[0];
-        if (this.party) {
-          return true;
-        }
-      }
-    }
+{{> DiffBox tutorialName="angular2-meteor" step="6.1"}}
 
 If no party is found, our hook will return `undefined` and fail.
 
@@ -76,45 +65,8 @@ Let's change `party-details.ng.html` to a form, so that we can edit the party de
 
 If you completed the challenge in part 5, you should have a router-link button pointing to party-details, with a corresponding alias in the RouteConfig of `app.ts`.
 
-__`client/party-details/party-details.ng.html`:__
+{{> DiffBox tutorialName="angular2-meteor" step="6.2"}}
 
-    <form>
-      <label>Name</label>
-      <input type="text">
-
-      <label>Description</label>
-      <input type="text">
-
-      <button type="submit">Save</button>
-      <button>Reset form</button>
-      <button [router-link]="['/parties-list']">Cancel</button>
-    </form>
-
-If you completed the challenge in step 5, your party-details component should now look like this:
-
-__`client/party-details/party-details.ts`:__
-
-    import {Component, View, Attribute, Inject} from 'angular2/angular2';
-    import {ROUTER_DIRECTIVES, RouteParams} from 'angular2/router';
-
-    @Component({
-      selector: 'party-details'
-    })
-    @View({
-      templateUrl: 'client/party-details/party-details.ng.html',
-      directives: [ROUTER_DIRECTIVES]
-    })
-    export class PartyDetails{
-      constructor(@Inject(RouteParams) routeParams:RouteParams) {
-        this.params = routeParams.params;
-      }
-      onActivate() {
-        this.party = Parties.find(this.params.partyId).fetch()[0];
-        if (this.party) {
-          return true;
-        }
-      }
-    }
 
 ## ng-model
 
@@ -122,34 +74,13 @@ __`client/party-details/party-details.ts`:__
 
 The NgModel dependency can be found in `FORM_DIRECTIVES`. First, import it and add it to your list of View directives.
 
-__`client/party-details/party-details.ts`:__
-
-    import {FORM_DIRECTIVES} from 'angular2/angular2';
-
-    @Component( ... )
-    @View({
-      templateUrl: 'client/party-details/party-details.ng.html',
-      directives: [ROUTER_DIRECTIVES, FORM_DIRECTIVES]
-    })
-    export class PartyDetails { ... }
+{{> DiffBox tutorialName="angular2-meteor" step="6.3"}}
 
 Now that Angular knows about NgModel, we can use it in our template.
 
 The syntax looks a bit different: `[(ng-model)]`. Ng-model binds to `this.party` loaded in `onActivate` and the data should fill out the inputs.
 
-__`client/party-details/party-details.ng.html`:__
-
-    <form>
-      <label>Name</label>
-      <input type="text" [(ng-model)]="party.name">
-
-      <label>Description</label>
-      <input type="text" [(ng-model)]="party.description">
-
-      <button type="submit">Save</button>
-      <button>Reset form</button>
-      <button [router-link]="['/parties-list']">Cancel</button>
-    </form>
+{{> DiffBox tutorialName="angular2-meteor" step="6.4"}}
 
 Let's do a little test to see how form controls and events work in Angular 2. Bind to `party.name` below the input, and change the input text.
 

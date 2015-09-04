@@ -1,4 +1,5 @@
 {{#template name="tutorialAngular2.step_07.html"}}
+{{> downloadPreviousStep stepName="step_06"}}  
 
 In this article, we'll look at two things:
 
@@ -54,13 +55,7 @@ Let's look at some of the features of TypeScript in brief detail.
 
 Keep in mind, type-checking is not delivered in the outputted JavaScript. It is only extra sugar for your development environment, and adds no weight to the outputted `.js` file.
 
-    export class PartyDetails {
-      partyId: string;
-      constructor(@Inject(RouteParams) routeParams:RouteParams) {
-        this.partyId = routeParams.params.partyId;
-      }
-    ...
-    }
+{{> DiffBox tutorialName="angular2-meteor" step="7.1"}}
 
 ## TypeScript: Interfaces
 
@@ -77,58 +72,23 @@ But that would get repetitive. Instead, we can call it an interface once, and re
 
 Put IParty in a folder `typings/socially` and call it `socially.d.ts`. Now it can be shared across the app.
 
-__`typings/socially/socially.d.ts`:__
-
-    interface IParty {
-      _id?: string;
-      name: string;
-      description: string;
-    }
+{{> DiffBox tutorialName="angular2-meteor" step="7.2"}}
 
 Note that `_id` is marked as optional, as parties won't get the id until they are passed into a Mongo collection.
 
 We can use IParty to declare some types in our app. For example, in `party-details.ts` I've made several type declarations.
 
-__`client/party-details/party-details.ts`:__
-
-    export class PartyDetails {
-      partyId: string;
-      resetToParty: IParty;
-      party: IParty;
-      constructor() {...}
-    }
+{{> DiffBox tutorialName="angular2-meteor" step="7.3"}}
 
 Identifying that both party & resetToParty should have strings for a name and description. Otherwise, the IDE or text editor should let me know something is wrong. Maybe I made a typo.
 
 We can also specify that any declaration of parties is an array of IParty.
 
-__`client/parties-list/parties-list.ts`:__
-
-    export class PartiesList {
-      parties: IParty[];
-      ...
+{{> DiffBox tutorialName="angular2-meteor" step="7.4"}}
 
 As well as on the server within Meteor. TypeScript works everywhere.
 
-__`server/loadParties.ts`:__
-
-    Meteor.startup(function () {
-      if (Parties.find().count() === 0) {
-    
-        var parties:IParty[] = [
-          {'name': 'Dubstep-Free Zone',
-            'description': 'Can we please just for an evening not listen to dubstep.'},
-          {'name': 'All dubstep all the time',
-            'description': 'Get it on!'},
-          {'name': 'Savage lounging',
-            'description': 'Leisure suit required. And only fiercest manners.'}
-        ];
-    
-        for (var i = 0; i < parties.length; i++)
-          Parties.insert(parties[i]);
-      }
-
-
+{{> DiffBox tutorialName="angular2-meteor" step="7.5"}}
 
 This all keeps you notified about mistakes or typos. TypeScript's power is seen more and more as your project and team grow.
 
@@ -136,9 +96,7 @@ This all keeps you notified about mistakes or typos. TypeScript's power is seen 
 
 You may have noticed that Meteor's global variables are being highlighted by your TypeScript checker. This is because we haven't yet declared them. Let's fix that.
 
-__`typings/socially/socially.d.ts`:__
-
-    declare var Parties;
+{{> DiffBox tutorialName="angular2-meteor" step="7.6"}}
 
 Declaring items let's TypeScript know that `Parties` is an accepted variable.
 
@@ -175,9 +133,7 @@ Now we will have the interfaces from these different frameworks.
 
 Let's specify that `Parties` is actually a Mongo collection, which will be picked up by TypeScript.
 
-__`client/party-details/party-details.ts`:__
-
-    declare var Parties:Mongo.Collection;
+{{> DiffBox tutorialName="angular2-meteor" step="7.8"}}
 
 Now if Parties is returning anything other than a valid Mongo Collection, we'll get an error.
 
@@ -186,7 +142,7 @@ Now if Parties is returning anything other than a valid Mongo Collection, we'll 
 
 A [generic](http://www.typescriptlang.org/Handbook#generics) is a varable that can be passed into an interface. You can recognize it from the `<T>` syntax. Let's look back at `Parties` again.
 
-    declare var Parties:Mongo.Collection<IParty>;
+{{> DiffBox tutorialName="angular2-meteor" step="7.9"}}
 
 Now we've told TypeScript that Parties is a Mongo Collection made up of not just anything, but only IParty elements.
 
