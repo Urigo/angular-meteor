@@ -76,7 +76,6 @@ Move the `index.ng.html` file into the parties-list folder and rename it `partie
 
 {{> DiffBox tutorialName="angular2-meteor" step="5.6"}}
 
-{{> DiffBox tutorialName="angular2-meteor" step="5.7"}}
 
 Good. Now our app structure looks like this:
 
