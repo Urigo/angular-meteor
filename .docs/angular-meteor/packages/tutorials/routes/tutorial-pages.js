@@ -25,7 +25,7 @@ TUTORIAL_PAGES = {
       route: "tutorials.angular2",
       path: "/tutorials/angular2",
       pathRedirect: "/tutorials/angular2/bootstrapping",
-      ghRepoName: "simple-todos-angular",
+      ghRepoName: "https://github.com/ShMcK/ng2-socially-tutorial",
       subSidebarType: "sidebarStepsCollapse",
       seoTitlePrefix: "Angular 2.0 Meteor Tutorial | ",
       subHead: "Angular 2.0 Meteor tutorial",
