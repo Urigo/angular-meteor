@@ -40,7 +40,7 @@ angularMeteorObject.factory('AngularMeteorObject', [
     AngularMeteorObject.save = function(custom) {
       var deferred = $q.defer();
       var collection = this.$$collection;
-      var createFulfill = _.partial($meteorUtils.fulfill, deferred);
+      var createFulfill = _.partial($meteorUtils.fulfill, deferred, null);
       var oldDoc = collection.findOne(this.$$id);
       var mods;
 
