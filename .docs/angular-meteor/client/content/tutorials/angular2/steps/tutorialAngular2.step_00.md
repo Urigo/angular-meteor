@@ -192,6 +192,6 @@ Try adding a new expression to the index.ng.html that will do some math:
     <p>1 + 2 = {{dstache}} 1 + 2 }}</p>
 
 # Summary
-Now let's go to [step 1](/tutorial/step_01) and add some content to our application.
+Now let's go to [step 1](/tutorials/angular2/static-template) and add some content to our application.
 
 {{/template}}
