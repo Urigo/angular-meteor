@@ -172,22 +172,25 @@ In `parties-list.ts`, `party-details.ts` and `party-form.ts` follow the instruct
 - `import {PartyService} from 'client/lib/party-service';`
 - In the component, add  `viewBindings: [PartyService]`
 
-
+```
     @Component({
         selector: 'parties-list',
         viewBindings: [PartyService]
     })
+```
 
 4. Inject partyService into the constructor and set `this.partyService` to the injected.
 
-
+```
     constructor(@Inject(PartyService) partyService:PartyService) {
       this.partyService = partyService;
+```
 
 5. Access the service through `this.partyService` in your methods.
 
-
+```
     this.partyService.remove(party._id)
+```
 
 I hope this syntax will clean up in the future.
 
