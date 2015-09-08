@@ -8,8 +8,7 @@ var angularMeteor = angular.module('angular-meteor', [
   'angular-meteor.session',
   'angular-meteor.reactive-scope',
   'angular-meteor.utils',
-  'angular-meteor.camera',
-  'hashKeyCopier'
+  'angular-meteor.camera'
 ]);
 
 angularMeteor.run(['$compile', '$document', '$rootScope', function ($compile, $document, $rootScope) {

@@ -46,7 +46,6 @@ Package.on_use(function (api) {
   // Files to load in Client only.
   api.add_files([
     // Lib Files
-    'lib/angular-hash-key-copier.js',
     'lib/diff-array.js',
     'lib/get-updates.js',
     // Module Files
