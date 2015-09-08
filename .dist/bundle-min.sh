@@ -1,14 +1,15 @@
+# Run this script from .dist folder
 cd ../..
-PARENT=$(pwd)
+PARENT=$(pwd) # The parent folder of the project
 BUNDLER_TEMP="tmp-angular-meteor-bundler"
 
 # Create temp meteor project
-rm -rf $BUNDLER_TEMP
-meteor create $BUNDLER_TEMP
-cd $BUNDLER_TEMP
+rm -rf "./$BUNDLER_TEMP"
+meteor create "./$BUNDLER_TEMP"
+cd "./$BUNDLER_TEMP"
 
-# Add local urigo:angular
-PACKAGE_DIRS=$PARENT meteor add urigo:angular
+# Add local angular
+PACKAGE_DIRS=$PARENT meteor add angular
 
 # Build the packages for getting the dependencies
 PACKAGE_DIRS=$PARENT meteor build --debug .
@@ -24,14 +25,14 @@ mkdir $OUTPUT_PATH
 cp "$PACKAGES_PATH/observe-sequence.js" $OUTPUT_PATH
 cp "$PACKAGES_PATH/lai_collection-extensions.js" $OUTPUT_PATH
 cp "$PACKAGES_PATH/dburles_mongo-collection-instances.js" $OUTPUT_PATH
-cp "$PACKAGES_PATH/urigo_angular.js" $OUTPUT_PATH
+cp "$PACKAGES_PATH/angular.js" $OUTPUT_PATH
 
 cd $OUTPUT_PATH
 
 cat observe-sequence.js >> angular-meteor.bundle.js
 cat lai_collection-extensions.js >> angular-meteor.bundle.js
 cat dburles_mongo-collection-instances.js >> angular-meteor.bundle.js
-cat urigo_angular.js >> angular-meteor.bundle.js
+cat angular.js >> angular-meteor.bundle.js
 
 curl -X POST -s --data-urlencode 'input@angular-meteor.bundle.js' http://javascript-minifier.com/raw > angular-meteor.bundle.min.js
 
