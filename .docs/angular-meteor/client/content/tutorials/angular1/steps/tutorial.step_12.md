@@ -103,7 +103,7 @@ Let's create the pageChanged function inside the partiesList controller `(client
 
 Now every time we change the page, the scope variable will change accordingly and update the bind method that watches it.
 
-* Notice that the buttons of the directive doesn't look very nice now because we haven't added any design and CSS to our application, we will do it later on.
+* Note that in this point, the pagination will not work until we add the missing "partiesCount" variable in the next step of the tutorial.
 
 # Getting total count of a collection
 
