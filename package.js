@@ -31,12 +31,16 @@ Package.on_use(function (api) {
 
   api.use('angular:angular@1.4.4', 'client');
   api.use('minimongo');
+  // Since commit b3096e93661bc79bab73a63bae0e14643030a9a3, MongoId and
+  // diff-sequence are separate packages from minimongo.
+  // We need to use it for idParse, idStringify and diffQueryOrderedChanges
+  // in lib/diff-array.js
+  if (Package['diff-sequence']) {
+    api.use('diff-sequence');
+  }
   if (Package['mongo-id']) {
-    // Since commit b3096e93661bc79bab73a63bae0e14643030a9a3, MongoId is
-    // in a separate package. We need to use it for idParse and idStringify.
     api.use('mongo-id');
   }
-  api.use('observe-sequence');
   api.use('dburles:mongo-collection-instances@0.3.4', 'client'); // For getCollectionByName
 
   // Files to load in Client only.
