@@ -194,9 +194,16 @@ In `parties-list.ts`, `party-details.ts` and `party-form.ts` follow the instruct
 
 I hope this syntax will clean up in the future.
 
+In the end, it should look like this:
+
+{{> DiffBox tutorialName="angular2-meteor" step="8.11"}}
+
+
 # Challenge
 
 Inject the PartyService into the three places it's needed.
+
+If you have difficulties, please checkout steps [8.12](https://github.com/ShMcK/ng2-socially-tutorial/commit/84379e8326e7bb392d9aebea5fd25dd782a6b684) or [8.13](https://github.com/ShMcK/ng2-socially-tutorial/commit/b87c18b8b61a026d0d2f44691c946c2c158e03b2) in the tutorial-repo.
 
 
 # Social login
@@ -209,6 +216,8 @@ To do this, we simply need to add the right packages in the console:
     meteor add accounts-twitter
 
 Now run the app.  when you will first press the login buttons of the social login, meteor will show you a wizard that will help you define your app.
+
+{{> DiffBox tutorialName="angular2-meteor" step="8.14"}}
 
 You can also skip the wizard and configure it manually like the explanation here: [http://docs.meteor.com/#meteor_loginwithexternalservice](http://docs.meteor.com/#meteor_loginwithexternalservice)
 
@@ -232,15 +241,7 @@ We can easily prevent them from going into that view using our routes.
 
 We are going to use the `canActivate` router hook.
 
-__`client/party-details/party-details.ts`:__
-
-    export class PartyDetails {
-        constructor() {...}
-            canActivate() {
-              return Meteor.userId();
-            }
-        }
-    }
+{{> DiffBox tutorialName="angular2-meteor" step="8.15"}}
 
 Now, if a user is not logged in to the system, it won't be able to access that route.
 
@@ -248,18 +249,7 @@ The call to `Meteor.userId()` will return null if none is found, and will return
 
 We could even add a helpful alert here.
 
-__`client/party-details/party-details.ts`:__
-
-    export class PartyDetails {
-        constructor() {...}
-          canActivate() {
-            if (!Meteor.userId()) {
-              alert('Please login first');
-              return false;
-            }
-            return true;
-        }
-    }
+{{> DiffBox tutorialName="angular2-meteor" step="8.16"}}
 
 * NOTE: This approach is currently not working. *
 

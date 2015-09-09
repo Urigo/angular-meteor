@@ -32,8 +32,8 @@ Let's make a checklist of what we need to get our router working. We'll go over 
 
 * imports from `'angular2/router'`
 * `@RouteConfig()` which will specify our routes soon
-* View directives adding `RouterOutlet` and `RouterLink`
-* inject `routerInjectables` into the child components
+* View directives adding `ROUTER_DIRECTIVES`, which include `RouterOutlet` and `RouterLink`
+* inject `ROUTER_BINDINGS` into the child components
 * a location in the view where components will be created, the `<router-outlet></router-outlet>`
 
 Be sure to declare the base route in `index.html` (required when using the HTML5LocationStrategy, rather than the HashLocationStategy). 
@@ -86,10 +86,10 @@ Good. Now our app structure looks like this:
 Think of dependencies in Angular as a trees. The final line:
 
     bootstrap(Socially, [
-      routerInjectables
+      ROUTER_BINDINGS
     ]);
 
-Here, the dependencies such as `routerInjectables` are passed to all of Socially's components on bootstrapping.
+Here, the dependencies such as `ROUTER_BINDINGS` are passed to all of Socially's components on bootstrapping.
 
 ## Party Details
 
