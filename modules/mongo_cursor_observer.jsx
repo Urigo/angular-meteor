@@ -46,9 +46,7 @@ export class MongoCursorObserver extends EventEmitter {
     this._changes = [];
     this._lastChanges = [];
 
-    Meteor.setTimeout(() => {
-      this._hCursor = this._startCursor(cursor);
-    });
+    this._hCursor = this._startCursor(cursor);
   }
 
   get lastChanges() {
@@ -62,14 +60,14 @@ export class MongoCursorObserver extends EventEmitter {
   }
 
   _startAutoChangesNotify(cursor: Mongo.Cursor<any>) {
-    return Tracker.autorun(zone.bind(() => {
+    return Tracker.autorun(() => {
       cursor.fetch();
       var lastChanges = this._changes.splice(0);
       if (lastChanges.length) {
         this.next(lastChanges);
       }
       this._lastChanges = lastChanges;
-    }));
+    });
   }
 
   _startCursorObserver(cursor: Mongo.Cursor<any>) {

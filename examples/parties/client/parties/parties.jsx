@@ -1,17 +1,17 @@
-import {Component, View, NgModel, NgFor, LifecycleEvent, IterableDiffers} from 'angular2/angular2';
+import {Component, View, NgModel, NgFor} from 'angular2/angular2';
 
-import {routerDirectives} from 'angular2/router';
+import {ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {PartyForm} from 'client/party-form/party-form';
 
-import {MeteorComponent, MongoCursorDifferFactory} from 'angular2-meteor';
+import {MeteorComponent} from 'angular2-meteor';
 
 @Component({
   selector: 'parties'
 })
 @View({
   templateUrl: 'client/parties/parties.ng.html',
-  directives: [NgFor, routerDirectives, NgModel, PartyForm]
+  directives: [NgFor, ROUTER_DIRECTIVES, NgModel, PartyForm]
 })
 export class PartiesCmp extends MeteorComponent {
   parties: IParty[];

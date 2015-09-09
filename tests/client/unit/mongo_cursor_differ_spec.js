@@ -1,27 +1,9 @@
-function MongoCollectionObserverFake() {
-  this._generators = [];
-
-  this.observer = function(generator) {
-    this._generators.push(generator);
-  };
-
-  this.next = function(value) {
-    for (var i = 0; i < this._generators.length; i++) {
-      this._generators[i].next(value);
-    }
-  };
-
-  this.clear = function() {
-    this._generators.length = 0;
-  };
-}
-
-describe('MongoCollectionDiffer', function() {
+describe('MongoCursorDiffer', function() {
   // TODO(barbatus): change to make use SystemJS with Jasmine
   // in a proper way.
   beforeAll(function(done) {
     System.import('angular2-meteor').then(function(ng2) {
-      MongoCollectionDiffer = ng2.MongoCollectionDiffer;
+      MongoCursorDiffer = ng2.MongoCursorDiffer;
       AddChange = ng2.AddChange;
       RemoveChange = ng2.RemoveChange;
       MoveChange = ng2.MoveChange;
@@ -29,19 +11,22 @@ describe('MongoCollectionDiffer', function() {
     });
   });
 
+  var fakeFactory;
   var fakeObserver;
   beforeEach(function() {
-    fakeObserver = new MongoCollectionObserverFake();
+    fakeCursor = new MongoCollectionCursorFake();
+    fakeObserver = new MongoCollectionObserverFake(fakeCursor);
+    fakeFactory = new ObserverFactoryFake(fakeObserver);
   });
 
   it('should return null if no changes', function() {
-    var differ = new MongoCollectionDiffer();
+    var differ = new MongoCursorDiffer(null /*cdRef*/, fakeFactory);
     expect(differ.diff()).toBe(null);
   });
 
   it('all collection changes are handled', function() {
-    var differ = new MongoCollectionDiffer();
-    differ.diff(fakeObserver);
+    var differ = new MongoCursorDiffer(null /*cdRef*/, fakeFactory);
+    differ.diff(fakeCursor);
     var changes = [
       new AddChange(5, {name: 'some doc'}),
       new RemoveChange(15),

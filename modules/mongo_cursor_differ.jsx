@@ -1,19 +1,32 @@
 'use strict';
 
-import {ChangeDetectorRef, IterableDiffers, bind} from 'angular2/angular2';
+import {ChangeDetectorRef, bind} from 'angular2/angular2';
 import {DefaultIterableDifferFactory, CollectionChangeRecord} from 'angular2/change_detection';
 import {ObservableWrapper} from 'angular2/facade';
+
 import {MongoCursorObserver, AddChange, MoveChange, RemoveChange} from './mongo_cursor_observer';
 
 export class MongoCursorDifferFactory extends DefaultIterableDifferFactory {
   supports(obj: Object): boolean { return obj instanceof Mongo.Cursor; }
 
   create(cdRef: ChangeDetectorRef): MongoCursorObserver {
-    return new MongoCursorDiffer(cdRef);
+    return new MongoCursorDiffer(cdRef, new MongoCursorObserverFactory());
   }
 }
 
-// TODO(barbatus): to implement IterableDiffer interface.
+export class ObserverFactory {
+  create(cursor: Object) {}
+}
+
+class MongoCursorObserverFactory extends ObserverFactory {
+  create(cursor: Object) {
+    if (cursor instanceof Mongo.Cursor) {
+      return new MongoCursorObserver(cursor);
+    }
+    return null;
+  }
+}
+
 export class MongoCursorDiffer {
   _inserted: Array<CollectionChangeRecord>;
   _removed: Array<CollectionChangeRecord>;
@@ -22,7 +35,7 @@ export class MongoCursorDiffer {
   _lastChanges: Array<AddChange|MoveChange|RemoveChange>;
   _listSize: Number;
 
-  constructor(cdRef: ChangeDetectorRef) {
+  constructor(cdRef: ChangeDetectorRef, obsFactory: ObserverFactory) {
     this._inserted = [];
     this._removed = [];
     this._moved = [];
@@ -30,6 +43,7 @@ export class MongoCursorDiffer {
     this._curObserver = null;
     this._cursor = null;
     this._listSize = 0;
+    this._obsFactory = obsFactory;
   }
 
   forEachAddedItem(fn: Function) {
@@ -56,11 +70,11 @@ export class MongoCursorDiffer {
     if (cursor && this._cursor !== cursor) {
       this._destroyObserver();
       this._cursor = cursor;
-      this._curObserver = new MongoCursorObserver(this._cursor);
+      this._curObserver = this._obsFactory.create(cursor);
       this._subscription = ObservableWrapper.subscribe(this._curObserver,
-        (changes) => {
+        zone.bind(changes => {
           this._updateLatestValue(changes);
-        });
+        }));
       this._lastChanges = this._curObserver.lastChanges;
     }
 

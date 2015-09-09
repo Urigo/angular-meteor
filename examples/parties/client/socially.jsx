@@ -1,6 +1,6 @@
 import {Component, View, bind} from 'angular2/angular2';
 
-import {Router, routerInjectables, RouterOutlet, routerDirectives, RouteConfig} from 'angular2/router';
+import {Router, ROUTER_BINDINGS, RouterOutlet, ROUTER_DIRECTIVES, RouteConfig} from 'angular2/router';
 
 import {LocationStrategy, Location, HashLocationStrategy} from 'angular2/router';
 
@@ -14,7 +14,7 @@ import {bootstrap} from 'angular2-meteor';
 })
 @View({
   template: '<router-outlet></router-outlet>',
-  directives: [routerDirectives, PartiesCmp, PartyDetailsCmp]
+  directives: [ROUTER_DIRECTIVES, PartiesCmp, PartyDetailsCmp]
 })
 @RouteConfig([
   {path: '/',  component: PartiesCmp},
@@ -23,6 +23,6 @@ import {bootstrap} from 'angular2-meteor';
 class Socially {}
 
 bootstrap(Socially, [
-  routerInjectables,
+  ROUTER_BINDINGS,
   bind(LocationStrategy).toClass(HashLocationStrategy)
 ]);

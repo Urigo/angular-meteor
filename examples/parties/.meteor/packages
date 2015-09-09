@@ -6,6 +6,6 @@
 
 meteor-platform
 insecure
-urigo:angular2-meteor
 anti:fake
 reactive-var
+urigo:angular2-meteor
