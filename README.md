@@ -1,7 +1,7 @@
 # Meteor-Angular2
 Angular2 + Meteor integration.
 
-Mongo collections are only supported at the moment.
+##### Angular2 version: alpha-36.
 
-For a demo, please, look at the parties app in the examples directory
-(ng2-parties.meteor.com).
+## Installation
+    meteor add urigo:angular2-meteor
