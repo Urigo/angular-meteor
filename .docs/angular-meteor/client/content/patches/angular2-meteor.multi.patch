@@ -1,7 +1,7 @@
 From 7c682b25c883bfe89dbe1f56a3e8a7a2cc8b1719 Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Sun, 23 Aug 2015 10:59:46 +0900
-Subject: [PATCH 01/83] tutorial renamed
+Subject: [PATCH 01/82] tutorial renamed
 
 ---
  packages/ng2-socially-tutorial/client/registerTutorial.js | 2 +-
@@ -40,7 +40,7 @@ index d97c1f3..20936b0 100644
 From 206924ba42aa74f5147f0a13f5b39eaf7660d367 Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Sun, 23 Aug 2015 11:00:49 +0900
-Subject: [PATCH 02/83] tutorial setup
+Subject: [PATCH 02/82] tutorial setup
 
 ---
  packages/ng2-socially-tutorial/client/registerTutorial.js | 9 +--------
@@ -72,7 +72,7 @@ index ff69a6a..51fb898 100644
 From d1bb9c347de63be2299fd9054ce3fe3296ecb07c Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Sun, 23 Aug 2015 15:49:01 +0900
-Subject: [PATCH 03/83] setup
+Subject: [PATCH 03/82] setup
 
 ---
  packages/ng2-socially-tutorial/README.md           |  0
@@ -135,7 +135,7 @@ index 20936b0..0000000
 From c236cd4f3a65f3edd2c3dc79009916bb94ea69ad Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Sun, 23 Aug 2015 16:04:34 +0900
-Subject: [PATCH 04/83] Step 0.1: Create empty index.html file in client folder
+Subject: [PATCH 04/82] Step 0.1: Create empty index.html file in client folder
 
 ---
  client/index.html | 3 +++
@@ -159,7 +159,7 @@ index 0000000..b65138f
 From 362df29e79a316287c2502b40f0d3cd3c5c6e20e Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Wed, 2 Sep 2015 23:04:16 +0900
-Subject: [PATCH 05/83] Step 0.2: Add angular2 & typescript-compiler packages
+Subject: [PATCH 05/82] Step 0.2: Add angular2 & typescript-compiler packages
 
 ---
  .meteor/packages | 2 ++
@@ -182,7 +182,7 @@ index fd37458..51eee55 100644
 From 976b0b9e29965245eb1637eab4d754c609ea027b Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Wed, 2 Sep 2015 23:04:51 +0900
-Subject: [PATCH 06/83] meteor versions
+Subject: [PATCH 06/82] meteor versions
 
 ---
  .meteor/versions | 2 ++
@@ -215,7 +215,7 @@ index 09061f3..e6389f9 100644
 From 70a0203d065451a32d28223cb369cfd9e07b5f75 Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Wed, 2 Sep 2015 23:05:24 +0900
-Subject: [PATCH 07/83] Step 0.3: Import bootstrap component with System.js
+Subject: [PATCH 07/82] Step 0.3: Import bootstrap component with System.js
 
 ---
  client/index.html | 1 +
@@ -238,7 +238,7 @@ index b65138f..d8daf11 100644
 From 53069112d0a9101b61b9b6d8eee473acf238d8be Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Sun, 23 Aug 2015 16:12:36 +0900
-Subject: [PATCH 08/83] Step 0.4: Create Angular2 root component
+Subject: [PATCH 08/82] Step 0.4: Create Angular2 root component
 
 ---
  client/index.html | 2 +-
@@ -262,7 +262,7 @@ index d8daf11..b3cd76e 100644
 From 2b7219ab3f93d1111b60c247b0bd47c488271c2d Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Sun, 23 Aug 2015 16:13:57 +0900
-Subject: [PATCH 09/83] Step 0.5: Create root component, app.ts
+Subject: [PATCH 09/82] Step 0.5: Create root component, app.ts
 
 ---
  client/app.ts | 11 +++++++++++
@@ -294,7 +294,7 @@ index 0000000..e989752
 From 8d0160b703c72ba60ccc8dacbb16f0840e1d5795 Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Wed, 2 Sep 2015 23:08:53 +0900
-Subject: [PATCH 10/83] Step 0.6: change inline template to templateUrl
+Subject: [PATCH 10/82] Step 0.6: change inline template to templateUrl
 
 ---
  client/app.ts | 2 +-
@@ -320,7 +320,7 @@ index e989752..b793e6a 100644
 From dfb894eec06f355df5b002bbdcf7be6c06dca8e8 Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Wed, 2 Sep 2015 23:09:19 +0900
-Subject: [PATCH 11/83] Step 0.7: create index.ng.html template
+Subject: [PATCH 11/82] Step 0.7: create index.ng.html template
 
 ---
  client/index.ng.html | 1 +
@@ -342,7 +342,7 @@ index 0000000..ff611cc
 From 0b524c416099c601c52d5e8f1087326d5ba86e5a Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Sun, 23 Aug 2015 18:46:13 +0900
-Subject: [PATCH 12/83] Step 1.1: Add static HTML to the template
+Subject: [PATCH 12/82] Step 1.1: Add static HTML to the template
 
 ---
  client/index.ng.html | 15 ++++++++++++++-
@@ -377,7 +377,7 @@ index ff611cc..9ea318e 100644
 From 3308f199bf3e273cedcc8948c46ef759aab484d2 Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Sun, 23 Aug 2015 18:47:42 +0900
-Subject: [PATCH 13/83] Step 2.1: Use dynamic template with NgFor
+Subject: [PATCH 13/82] Step 2.1: Use dynamic template with NgFor
 
 ---
  client/index.ng.html | 22 ++++++++--------------
@@ -419,7 +419,7 @@ index 9ea318e..79a13be 100644
 From 7dc55835795bfd72eb3599c2eea1740a788cee58 Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Sun, 23 Aug 2015 18:51:01 +0900
-Subject: [PATCH 14/83] Step 2.2: Load NgFor dependency, add to View directives
+Subject: [PATCH 14/82] Step 2.2: Load NgFor dependency, add to View directives
  list
 
 ---
@@ -451,7 +451,7 @@ index b793e6a..afbfbca 100644
 From 4003a3fd9af9860b15029b67a8884652bcff727d Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Sun, 23 Aug 2015 18:52:11 +0900
-Subject: [PATCH 15/83] Step 2.3: Load parties data into Socially
+Subject: [PATCH 15/82] Step 2.3: Load parties data into Socially
 
 ---
  client/app.ts | 13 ++++++++++++-
@@ -488,7 +488,7 @@ index afbfbca..c5ceff3 100644
 From 12b810a6b87ce08768dc4bd459fc503b8ef8209b Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Sun, 23 Aug 2015 18:53:48 +0900
-Subject: [PATCH 16/83] Step 3.1: Add the parties collection
+Subject: [PATCH 16/82] Step 3.1: Add the parties collection
 
 ---
  model/parties.ts | 1 +
@@ -510,7 +510,7 @@ index 0000000..f9329b3
 From 8e00f1da7590ad6b4d3d44e04a1df5bb5c625f90 Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Sun, 23 Aug 2015 18:55:48 +0900
-Subject: [PATCH 17/83] Step 3.2: Fetch parties reactively
+Subject: [PATCH 17/82] Step 3.2: Fetch parties reactively
 
 ---
  client/app.ts | 11 +++--------
@@ -545,7 +545,7 @@ index c5ceff3..94f0af6 100644
 From 66ef5a86e5e1fc86ba7c0d68298e2048e2ec11a1 Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Sun, 23 Aug 2015 18:58:55 +0900
-Subject: [PATCH 18/83] Step 3.3: Load initial parties data if none exists
+Subject: [PATCH 18/82] Step 3.3: Load initial parties data if none exists
 
 ---
  server/loadParties.ts | 16 ++++++++++++++++
@@ -582,7 +582,7 @@ index 0000000..a2a6e3d
 From a846c58c756f69fe52c365eadc6bf3eb5200b125 Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Sun, 23 Aug 2015 19:01:03 +0900
-Subject: [PATCH 19/83] Step 4.1: Create parties-form component
+Subject: [PATCH 19/82] Step 4.1: Create parties-form component
 
 ---
  client/parties-form/parties-form.ts | 9 +++++++++
@@ -612,7 +612,7 @@ index 0000000..c541876
 From daced371e38e6a378d2ee6d0566b7b640137dcf0 Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Sun, 23 Aug 2015 19:02:11 +0900
-Subject: [PATCH 20/83] Step 4.2: Initialize the parties-form view
+Subject: [PATCH 20/82] Step 4.2: Initialize the parties-form view
 
 ---
  client/parties-form/parties-form.ng.html | 7 +++++++
@@ -640,7 +640,7 @@ index 0000000..c81e1cf
 From a16c92d72e47276b404db2f2496ee5968ceb88f4 Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Sun, 23 Aug 2015 19:03:11 +0900
-Subject: [PATCH 21/83] Step 4.3: Load the parties-form component
+Subject: [PATCH 21/82] Step 4.3: Load the parties-form component
 
 ---
  client/index.ng.html | 3 +++
@@ -665,7 +665,7 @@ index 79a13be..9a6b4e2 100644
 From d4f0facf8f69be0f6408854336e6b4f0ac4b69cb Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Sun, 23 Aug 2015 19:05:10 +0900
-Subject: [PATCH 22/83] Step 4.4: Import the Parties form and add it to the App
+Subject: [PATCH 22/82] Step 4.4: Import the Parties form and add it to the App
  View directives list
 
 ---
@@ -697,7 +697,7 @@ index 94f0af6..c6be929 100644
 From 97fbe943a4f7f0f473e08791e74939f8f8d8a45a Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Sun, 23 Aug 2015 19:07:53 +0900
-Subject: [PATCH 23/83] Step 4.5: Import form directives and add them to the
+Subject: [PATCH 23/82] Step 4.5: Import form directives and add them to the
  list of parties-form view directives
 
 ---
@@ -729,7 +729,7 @@ index c541876..3c356a8 100644
 From 82d0832cd8d4312c02edc8301e856da4bb9bcb23 Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Sun, 23 Aug 2015 19:11:26 +0900
-Subject: [PATCH 24/83] Step 4.6: Create a partiesForm control group
+Subject: [PATCH 24/82] Step 4.6: Create a partiesForm control group
 
 ---
  client/parties-form/parties-form.ts | 9 ++++++++-
@@ -761,7 +761,7 @@ index 3c356a8..e170216 100644
 From a5a44d29878029fac27bb7cae47aca6449ebb7e7 Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Sun, 23 Aug 2015 19:12:50 +0900
-Subject: [PATCH 25/83] Step 4.7: Add 'required' form validators
+Subject: [PATCH 25/82] Step 4.7: Add 'required' form validators
 
 ---
  client/parties-form/parties-form.ts | 4 ++--
@@ -790,7 +790,7 @@ index e170216..5263602 100644
 From 034733b11987b12e65362b8215686185e0b91286 Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Sun, 23 Aug 2015 19:14:06 +0900
-Subject: [PATCH 26/83] Step 4.8: Add ng-form-model & ng-control's to the
+Subject: [PATCH 26/82] Step 4.8: Add ng-form-model & ng-control's to the
  parties-form template
 
 ---
@@ -820,7 +820,7 @@ index c81e1cf..57ec6da 100644
 From 9bfdefdfdc903c37ba8e52c8f97e05b53688aa9c Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Sun, 23 Aug 2015 19:15:34 +0900
-Subject: [PATCH 27/83] Step 4.9: Add local variable for form & submit event to
+Subject: [PATCH 27/82] Step 4.9: Add local variable for form & submit event to
  parties-form template
 
 ---
@@ -844,7 +844,7 @@ index 57ec6da..15b84df 100644
 From 8fd92fe67770ec98b978486f1b98ca3056b8eb21 Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Sun, 23 Aug 2015 19:17:26 +0900
-Subject: [PATCH 28/83] Step 4.10: create an add party method on the
+Subject: [PATCH 28/82] Step 4.10: create an add party method on the
  PartiesForm class
 
 ---
@@ -883,7 +883,7 @@ index 5263602..ca69373 100644
 From 723ebad60b16fdac9453feddbcd0d50440c88eeb Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Sun, 23 Aug 2015 19:18:34 +0900
-Subject: [PATCH 29/83] Step 4.11: Add a remove party button and click event to
+Subject: [PATCH 29/82] Step 4.11: Add a remove party button and click event to
  the parties list
 
 ---
@@ -910,7 +910,7 @@ index 9a6b4e2..08d720a 100644
 From f005bb682aaf16d471c17d4cb766f4ca48c6ff55 Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Sun, 23 Aug 2015 19:19:36 +0900
-Subject: [PATCH 30/83] Step 4.12: Add a remove party method to the parties
+Subject: [PATCH 30/82] Step 4.12: Add a remove party method to the parties
  list
 
 ---
@@ -939,7 +939,7 @@ index c6be929..57e190f 100644
 From 12d8b70a41923719685cda7ae4b77502dd04b31f Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Thu, 3 Sep 2015 13:49:18 +0900
-Subject: [PATCH 31/83] Step 5.1: Add Angular2 Router package
+Subject: [PATCH 31/82] Step 5.1: Add Angular2 Router package
 
 ---
  .meteor/packages | 1 +
@@ -961,7 +961,7 @@ index 51eee55..7ef3f27 100644
 From a82edd3c79cb96db275349d9024bd89d958736dd Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Thu, 3 Sep 2015 13:50:12 +0900
-Subject: [PATCH 32/83] update version of angular2-router
+Subject: [PATCH 32/82] update version of angular2-router
 
 ---
  .meteor/versions | 1 +
@@ -983,10 +983,10 @@ index e6389f9..289f8e1 100644
 2.3.5
 
 
-From e81586cf11cb5ea69f95e31f43407db04c179b72 Mon Sep 17 00:00:00 2001
+From 1cd938385d2c2a2a005c417f8b0ad057d8884649 Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Thu, 3 Sep 2015 13:51:27 +0900
-Subject: [PATCH 33/83] Step 5.2: Import Router dependencies, add them to View
+Subject: [PATCH 33/82] Step 5.2: Import Router dependencies, add them to View
  directives, and init RouteConfig
 
 ---
@@ -994,12 +994,12 @@ Subject: [PATCH 33/83] Step 5.2: Import Router dependencies, add them to View
  1 file changed, 4 insertions(+), 2 deletions(-)
 
 diff --git a/client/app.ts b/client/app.ts
-index 57e190f..39cb4dd 100644
+index 57e190f..ad04f9b 100644
 --- a/client/app.ts
 +++ b/client/app.ts
 @@ -1,4 +1,5 @@
  import {Component, View, NgFor, bootstrap} from 'angular2/angular2';
-+import {routerInjectables, RouterOutlet, RouterLink, RouteConfig} from 'angular2/router';
++import {ROUTER_BINDINGS, ROUTER_DIRECTIVES, RouteConfig} from 'angular2/router';
  import {PartiesForm} from 'client/parties-form/parties-form';
  
  @Component({
@@ -1008,7 +1008,7 @@ index 57e190f..39cb4dd 100644
  @View({
    templateUrl: 'client/index.ng.html',
 -  directives: [NgFor, PartiesForm]
-+  directives: [NgFor, PartiesForm, RouterOutlet, RouterLink]
++  directives: [NgFor, PartiesForm, ROUTER_DIRECTIVES]
  })
 +@RouteConfig()
  class Socially {
@@ -1020,16 +1020,16 @@ index 57e190f..39cb4dd 100644
  
 -bootstrap(Socially);
 \ No newline at end of file
-+bootstrap(Socially, [routerInjectables]);
++bootstrap(Socially, [ROUTER_BINDINGS]);
 \ No newline at end of file
 -- 
 2.3.5
 
 
-From 1ada52da1300ce9dbcc223c85eb254be171dd7f5 Mon Sep 17 00:00:00 2001
+From 01863e41e610aae8e009c3f1871a8776f7c6be37 Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Thu, 27 Aug 2015 08:37:04 +0900
-Subject: [PATCH 34/83] Step 5.3: Add base href
+Subject: [PATCH 34/82] Step 5.3: Add base href
 
 ---
  client/index.html | 3 +++
@@ -1050,16 +1050,39 @@ index b3cd76e..9956097 100644
 2.3.5
 
 
-From b4c37504da8a42feb8bc0678c42660059c83fd38 Mon Sep 17 00:00:00 2001
+From d813fc0d74a75199c6b2fc0b6fa7aad2e5bac065 Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Thu, 27 Aug 2015 08:39:15 +0900
-Subject: [PATCH 35/83] Step 5.4: Move root app into a parties-list component
+Subject: [PATCH 35/82] Step 5.4: Move root app into a parties-list component
 
 ---
+ client/app.ts                       | 11 +----------
  client/parties-list/parties-list.ts | 20 ++++++++++++++++++++
- 1 file changed, 20 insertions(+)
+ 2 files changed, 21 insertions(+), 10 deletions(-)
  create mode 100644 client/parties-list/parties-list.ts
 
+diff --git a/client/app.ts b/client/app.ts
+index ad04f9b..5f07ea7 100644
+--- a/client/app.ts
++++ b/client/app.ts
+@@ -10,15 +10,6 @@ import {PartiesForm} from 'client/parties-form/parties-form';
+   directives: [NgFor, PartiesForm, ROUTER_DIRECTIVES]
+ })
+ @RouteConfig()
+-class Socially {
+-  constructor () {
+-    Tracker.autorun(zone.bind(() => {
+-      this.parties = Parties.find().fetch();
+-    }));
+-  }
+-  remove(party) {
+-    Parties.remove(party._id);
+-  }
+-}
++class Socially {}
+ 
+ bootstrap(Socially, [ROUTER_BINDINGS]);
+\ No newline at end of file
 diff --git a/client/parties-list/parties-list.ts b/client/parties-list/parties-list.ts
 new file mode 100644
 index 0000000..87a5c7c
@@ -1091,58 +1114,10 @@ index 0000000..87a5c7c
 2.3.5
 
 
-From f52a3c9ae2da41a91e67f5a91fb0fb7cad9c1ff3 Mon Sep 17 00:00:00 2001
-From: ShMcK <me@shmck.com>
-Date: Thu, 27 Aug 2015 08:42:38 +0900
-Subject: [PATCH 36/83] Step 5.5: Cleanup the root app, change the template to
- use <router-outlet>
-
----
- client/app.ts | 18 ++++--------------
- 1 file changed, 4 insertions(+), 14 deletions(-)
-
-diff --git a/client/app.ts b/client/app.ts
-index 39cb4dd..e688c81 100644
---- a/client/app.ts
-+++ b/client/app.ts
-@@ -1,24 +1,14 @@
--import {Component, View, NgFor, bootstrap} from 'angular2/angular2';
-+import {Component, View, bootstrap} from 'angular2/angular2';
- import {routerInjectables, RouterOutlet, RouterLink, RouteConfig} from 'angular2/router';
--import {PartiesForm} from 'client/parties-form/parties-form';
- 
- @Component({
-   selector: 'app'
- })
- @View({
--  templateUrl: 'client/index.ng.html',
--  directives: [NgFor, PartiesForm, RouterOutlet, RouterLink]
-+  template: '<router-outlet></router-outlet>',
-+  directives: [RouterOutlet, RouterLink]
- })
- @RouteConfig()
--class Socially {
--  constructor () {
--    Tracker.autorun(zone.bind(() => {
--      this.parties = Parties.find().fetch();
--    }));
--  }
--  remove(party) {
--    Parties.remove(party._id);
--  }
--}
-+class Socially {}
- 
- bootstrap(Socially, [routerInjectables]);
-\ No newline at end of file
--- 
-2.3.5
-
-
-From fb25eb675bb1aba07206ee4ce5624bc9f4634f73 Mon Sep 17 00:00:00 2001
+From 6c3d7dfe8006b2e98022a0e0c769afb735296915 Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Thu, 3 Sep 2015 14:32:52 +0900
-Subject: [PATCH 37/83] Step 5.6: Move index.ng.html into parties-list.ng.html
+Subject: [PATCH 36/82] Step 5.6: Move index.ng.html into parties-list.ng.html
 
 ---
  client/parties-list/parties-list.ng.html | 12 ++++++++++++
@@ -1172,10 +1147,10 @@ index 0000000..08d720a
 2.3.5
 
 
-From d037448d4f0bd0b9ad5e973a98c63a345accab70 Mon Sep 17 00:00:00 2001
+From f6e2bf718d0ad621a6a8e2fe79aa6db6d193530b Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Thu, 3 Sep 2015 14:33:21 +0900
-Subject: [PATCH 38/83] Step 5.7: Cleanup index.ng.html
+Subject: [PATCH 37/82] Step 5.7: Cleanup index.ng.html
 
 ---
  client/index.ng.html | 12 ------------
@@ -1205,10 +1180,10 @@ index 08d720a..0000000
 2.3.5
 
 
-From ab07423378864ad01534fc09d9f1c248ed4c355a Mon Sep 17 00:00:00 2001
+From c78a05cdcf21b7d0b2185cbfdda9d78998c085aa Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Thu, 27 Aug 2015 08:49:20 +0900
-Subject: [PATCH 39/83] Step 5.8: Create PartyDetails component
+Subject: [PATCH 38/82] Step 5.8: Create PartyDetails component
 
 ---
  client/party-details/party-details.ts | 9 +++++++++
@@ -1235,10 +1210,10 @@ index 0000000..d0f37b5
 2.3.5
 
 
-From f9826846b67031a6b31eb71c6346d7e69346c2ae Mon Sep 17 00:00:00 2001
+From 0417050e58ccc25999fdb109cb95e4796cd25569 Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Thu, 27 Aug 2015 08:50:35 +0900
-Subject: [PATCH 40/83] Step 5.9: Add party-details template with placeholder
+Subject: [PATCH 39/82] Step 5.9: Add party-details template with placeholder
  info
 
 ---
@@ -1262,22 +1237,22 @@ index 0000000..f36ae3c
 2.3.5
 
 
-From 56432502645b022f5a644fcbaa6f0337abf1ed93 Mon Sep 17 00:00:00 2001
+From 95e2e37f1729c9f7fe18329c0f207041da76d7de Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Thu, 27 Aug 2015 09:03:27 +0900
-Subject: [PATCH 41/83] Step 5.10: Configure routes in app.ts
+Subject: [PATCH 40/82] Step 5.10: Configure routes in app.ts
 
 ---
  client/app.ts | 10 +++++++++-
  1 file changed, 9 insertions(+), 1 deletion(-)
 
 diff --git a/client/app.ts b/client/app.ts
-index e688c81..7a53328 100644
+index 5f07ea7..433d202 100644
 --- a/client/app.ts
 +++ b/client/app.ts
-@@ -1,6 +1,10 @@
- import {Component, View, bootstrap} from 'angular2/angular2';
- import {routerInjectables, RouterOutlet, RouterLink, RouteConfig} from 'angular2/router';
+@@ -2,6 +2,10 @@ import {Component, View, NgFor, bootstrap} from 'angular2/angular2';
+ import {ROUTER_BINDINGS, ROUTER_DIRECTIVES, RouteConfig} from 'angular2/router';
+ import {PartiesForm} from 'client/parties-form/parties-form';
  
 +// Components
 +import {PartiesList} from 'client/parties-list/parties-list';
@@ -1286,9 +1261,9 @@ index e688c81..7a53328 100644
  @Component({
    selector: 'app'
  })
-@@ -8,7 +12,11 @@ import {routerInjectables, RouterOutlet, RouterLink, RouteConfig} from 'angular2
-   template: '<router-outlet></router-outlet>',
-   directives: [RouterOutlet, RouterLink]
+@@ -9,7 +13,11 @@ import {PartiesForm} from 'client/parties-form/parties-form';
+   templateUrl: 'client/index.ng.html',
+   directives: [NgFor, PartiesForm, ROUTER_DIRECTIVES]
  })
 -@RouteConfig()
 +@RouteConfig([
@@ -1298,16 +1273,16 @@ index e688c81..7a53328 100644
 +])
  class Socially {}
  
- bootstrap(Socially, [routerInjectables]);
+ bootstrap(Socially, [ROUTER_BINDINGS]);
 \ No newline at end of file
 -- 
 2.3.5
 
 
-From 447536b5fb1448b4326402f0f40b190d9f1bc375 Mon Sep 17 00:00:00 2001
+From 080293fd07de5ee56e57a66487f2d20c9db6e06f Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Thu, 3 Sep 2015 14:34:58 +0900
-Subject: [PATCH 42/83] Step 5.11: Create parties-list template
+Subject: [PATCH 41/82] Step 5.11: Create parties-list template
 
 ---
  client/parties-list/parties-list.ng.html | 2 +-
@@ -1330,10 +1305,10 @@ index 08d720a..13693eb 100644
 2.3.5
 
 
-From beecc53d92eb19311686d74efbaa20ee6ca8f131 Mon Sep 17 00:00:00 2001
+From 90872436d7943257ec8d75e330164c3e1fa909eb Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Thu, 3 Sep 2015 14:35:44 +0900
-Subject: [PATCH 43/83] Step 5.12: create parties-list component
+Subject: [PATCH 42/82] Step 5.12: create parties-list component
 
 ---
  client/parties-list/parties-list.ts | 3 ++-
@@ -1362,10 +1337,10 @@ index 87a5c7c..81cebec 100644
 2.3.5
 
 
-From 9c6071c7658015bb87ab9bb39c27c8a90235db71 Mon Sep 17 00:00:00 2001
+From e2682bcc8d4a4624153b8e447ad6ee84ff28931d Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Thu, 27 Aug 2015 09:23:41 +0900
-Subject: [PATCH 44/83] Step 5.13: Create dynamic party name & description
+Subject: [PATCH 43/82] Step 5.13: Create dynamic party name & description
  bindings
 
 ---
@@ -1389,10 +1364,10 @@ index f36ae3c..9e3ead7 100644
 2.3.5
 
 
-From 3b7d2c2c14dbb628f6c44b92391dbfc8dc48882e Mon Sep 17 00:00:00 2001
+From a0e3a028f587f1f03967d6644b9e5a13252a34d4 Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Thu, 27 Aug 2015 09:25:06 +0900
-Subject: [PATCH 45/83] Step 5.14: Import RouteParams & Inject, catch specific
+Subject: [PATCH 44/82] Step 5.14: Import RouteParams & Inject, catch specific
  party data
 
 ---
@@ -1430,10 +1405,10 @@ index d0f37b5..a580f03 100644
 2.3.5
 
 
-From 2129cd58cb3e1ad2828533610406a2c51b006436 Mon Sep 17 00:00:00 2001
+From a5ccd3d9e399a8e105b1484a534d82c19dd865de Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Thu, 27 Aug 2015 09:38:17 +0900
-Subject: [PATCH 46/83] Step 5.15: Challenge -- create a link back to the
+Subject: [PATCH 45/82] Step 5.15: Challenge -- create a link back to the
  parties-list from party-details
 
 ---
@@ -1476,10 +1451,10 @@ index a580f03..f6828cd 100644
 2.3.5
 
 
-From 046145cc56e8036b4604a4b170fe5d5d58e0123b Mon Sep 17 00:00:00 2001
+From 4e80953c83f34124b05dd27e8c5f075866b0467a Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Thu, 27 Aug 2015 09:45:19 +0900
-Subject: [PATCH 47/83] Step 6.1: Use the router hook onActivate to load
+Subject: [PATCH 46/82] Step 6.1: Use the router hook onActivate to load
  PartyDetails data
 
 ---
@@ -1511,10 +1486,10 @@ index f6828cd..b16fe33 100644
 2.3.5
 
 
-From a2bac314efcbb81c64961b298eed3917db47df82 Mon Sep 17 00:00:00 2001
+From b2adc08201f6329cdef4f17deaec0ebfa67fb756 Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Thu, 27 Aug 2015 09:48:54 +0900
-Subject: [PATCH 48/83] Step 6.2: Change party-details.ng.html to a form
+Subject: [PATCH 47/82] Step 6.2: Change party-details.ng.html to a form
 
 ---
  client/party-details/party-details.ng.html | 14 +++++++++-----
@@ -1547,10 +1522,10 @@ index 999312d..baecbbe 100644
 2.3.5
 
 
-From 1ab8ff7aef65770c97b38e3a70c96fd8f0cc99a5 Mon Sep 17 00:00:00 2001
+From b5942404d3ca78ca6ccc86d41e34b04d18712195 Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Thu, 27 Aug 2015 09:50:38 +0900
-Subject: [PATCH 49/83] Step 6.3: import FORM_DIRECTIVES into party-details and
+Subject: [PATCH 48/82] Step 6.3: import FORM_DIRECTIVES into party-details and
  add it to the directive view
 
 ---
@@ -1580,10 +1555,10 @@ index b16fe33..4d3c7d3 100644
 2.3.5
 
 
-From 32e4be803ae3ec652b9cc8f25c66570e333c1d1c Mon Sep 17 00:00:00 2001
+From 49c2de011992aa6b05ac1af8fea419cb5055bb77 Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Thu, 27 Aug 2015 09:53:06 +0900
-Subject: [PATCH 50/83] Step 6.4: Use ng-model in our party-details form
+Subject: [PATCH 49/82] Step 6.4: Use ng-model in our party-details form
 
 ---
  client/party-details/party-details.ng.html | 4 ++--
@@ -1609,10 +1584,10 @@ index baecbbe..82c782f 100644
 2.3.5
 
 
-From a64126f71ec340b44ed6a0eb94fb389c8712ae85 Mon Sep 17 00:00:00 2001
+From 44ce86c6a3d8992402dfa536310c539463126822 Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Thu, 3 Sep 2015 21:14:55 +0900
-Subject: [PATCH 51/83] Step 6.5: Save party-details on submit from template
+Subject: [PATCH 50/82] Step 6.5: Save party-details on submit from template
 
 ---
  client/party-details/party-details.ng.html | 2 +-
@@ -1632,10 +1607,10 @@ index 82c782f..4d74675 100644
 2.3.5
 
 
-From c9f1a1870c792025a939587aae302223a132d434 Mon Sep 17 00:00:00 2001
+From 831a052675d6dffe053b7b60432d23ead6ae668e Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Thu, 3 Sep 2015 21:15:15 +0900
-Subject: [PATCH 52/83] Step 6.6: Save party-details on submit from component,
+Subject: [PATCH 51/82] Step 6.6: Save party-details on submit from component,
  update db
 
 ---
@@ -1666,10 +1641,10 @@ index 4d3c7d3..5d8007d 100644
 2.3.5
 
 
-From 5a3dfc0cb4224cdf29fb2f41e32646c07c4ecd59 Mon Sep 17 00:00:00 2001
+From bdd9253cec5a720ff4841228a2acb68aaad7b644 Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Thu, 27 Aug 2015 10:16:52 +0900
-Subject: [PATCH 53/83] Step 6.7: Validateparty fields to be strings with at
+Subject: [PATCH 52/82] Step 6.7: Validateparty fields to be strings with at
  least one character before saving
 
 ---
@@ -1700,10 +1675,10 @@ index 5d8007d..3e80ee0 100644
 2.3.5
 
 
-From 183f1bfbf26d57b7f26e38e1f5f530f0011cf551 Mon Sep 17 00:00:00 2001
+From 564d4991d89d28c7f239508ea60cd4459e9b2d0b Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Thu, 3 Sep 2015 21:16:30 +0900
-Subject: [PATCH 54/83] Step 6.8: form reset button
+Subject: [PATCH 53/82] Step 6.8: form reset button
 
 ---
  client/party-details/party-details.ng.html | 2 +-
@@ -1726,10 +1701,10 @@ index 4d74675..ae6bfb6 100644
 2.3.5
 
 
-From 8cce08dfdc8a97815c5c10dcb6c9be27ebd26579 Mon Sep 17 00:00:00 2001
+From a4e113d4ee1d371a2e7adf99791e0b74b95f2c8b Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Thu, 3 Sep 2015 21:16:51 +0900
-Subject: [PATCH 55/83] Step 6.9: reset button triggers earlier saved state
+Subject: [PATCH 54/82] Step 6.9: reset button triggers earlier saved state
 
 ---
  client/party-details/party-details.ts | 7 +++++++
@@ -1762,10 +1737,10 @@ index 3e80ee0..55215a3 100644
 2.3.5
 
 
-From 0fe19ac04b421c1a0a821afe96f9bc20286c0071 Mon Sep 17 00:00:00 2001
+From f73e0495efb30191a802fc62c7d225d5e08301da Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Thu, 27 Aug 2015 10:28:00 +0900
-Subject: [PATCH 56/83] Step 6.10: use router canDeactivate hook to check if a
+Subject: [PATCH 55/82] Step 6.10: use router canDeactivate hook to check if a
  user wants to leave without saving
 
 ---
@@ -1791,10 +1766,10 @@ index 55215a3..a1bfe0a 100644
 2.3.5
 
 
-From 35961ac2d76e3ffae3bad0f65c3698e0d4f800c0 Mon Sep 17 00:00:00 2001
+From 7dab2622b49faece42459d29e8dd5574fc257a94 Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Thu, 27 Aug 2015 13:16:41 +0900
-Subject: [PATCH 57/83] Step 7.1: Specified partyId string type
+Subject: [PATCH 56/82] Step 7.1: Specified partyId string type
 
 ---
  client/party-details/party-details.ts | 1 +
@@ -1816,10 +1791,10 @@ index a1bfe0a..c7ea24b 100644
 2.3.5
 
 
-From 7135c16256fe78ace78173da60ed12ef0e1e2a3b Mon Sep 17 00:00:00 2001
+From 052a80b4f8d28430af75bccf0df025f59d271765 Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Thu, 27 Aug 2015 13:18:05 +0900
-Subject: [PATCH 58/83] Step 7.2: Declared IParty interface
+Subject: [PATCH 57/82] Step 7.2: Declared IParty interface
 
 ---
  typings/socially/socially.d.ts | 5 +++++
@@ -1842,10 +1817,10 @@ index 0000000..98cd875
 2.3.5
 
 
-From 3d1e1ce6d36c6e85b9ee2c94b751eee9dc29ca1d Mon Sep 17 00:00:00 2001
+From a7346ae4b8da7cd051f7466e4d2fb6a6e1799661 Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Thu, 27 Aug 2015 13:19:42 +0900
-Subject: [PATCH 59/83] Step 7.3: use IParty type in PartyDetails
+Subject: [PATCH 58/82] Step 7.3: use IParty type in PartyDetails
 
 ---
  client/party-details/party-details.ts | 2 ++
@@ -1868,10 +1843,10 @@ index c7ea24b..e641735 100644
 2.3.5
 
 
-From 80d9a0804480d99d544356644d14f75c3f48be26 Mon Sep 17 00:00:00 2001
+From 44cadc0008d1cde3599534658e006f69e913391a Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Thu, 27 Aug 2015 13:21:19 +0900
-Subject: [PATCH 60/83] Step 7.4: Added type of IParty array to parties in
+Subject: [PATCH 59/82] Step 7.4: Added type of IParty array to parties in
  PartiesList
 
 ---
@@ -1894,10 +1869,10 @@ index 81cebec..c80ee8c 100644
 2.3.5
 
 
-From 1a84726b4d36ee42be187a3473f2370de50966f9 Mon Sep 17 00:00:00 2001
+From 16287e0e53a7bfb01d7e688fb7326c67a8ef2436 Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Thu, 27 Aug 2015 13:23:35 +0900
-Subject: [PATCH 61/83] Step 7.5: Declared IParty array type of parties in
+Subject: [PATCH 60/82] Step 7.5: Declared IParty array type of parties in
  loadParties.ts
 
 ---
@@ -1921,10 +1896,10 @@ index a2a6e3d..9dd05e7 100644
 2.3.5
 
 
-From 524c1702a344b150bf66b5d210fa9fe7593a29d1 Mon Sep 17 00:00:00 2001
+From 292c390063da20574c341a3c744bc8d1a95c677d Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Thu, 27 Aug 2015 13:24:53 +0900
-Subject: [PATCH 62/83] Step 7.6: declare var Parties in socially.d.ts
+Subject: [PATCH 61/82] Step 7.6: declare var Parties in socially.d.ts
 
 ---
  typings/socially/socially.d.ts | 2 ++
@@ -1944,10 +1919,10 @@ index 98cd875..a01ea81 100644
 2.3.5
 
 
-From 65da52f5bb8c0c1f07de218a445126012841e0cf Mon Sep 17 00:00:00 2001
+From e84c6036114e6c4aa0170abf3baa7487c3b6a026 Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Thu, 27 Aug 2015 13:26:53 +0900
-Subject: [PATCH 63/83] Step 7.7: tsd install angular2 meteor
+Subject: [PATCH 62/82] Step 7.7: tsd install angular2 meteor
 
 ---
  typings/angular2/angular2.d.ts       | 6043 ++++++++++++++++++++++++++++++++++
@@ -9607,10 +9582,10 @@ index 0000000..f1dc527
 2.3.5
 
 
-From be9ae3662902203f32d4f819c003b9717332b31d Mon Sep 17 00:00:00 2001
+From 78b906c307f230864e8cba4045947b062a58c6ab Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Thu, 27 Aug 2015 13:27:31 +0900
-Subject: [PATCH 64/83] Step 7.8: give Parties a type of Mongo.Collection
+Subject: [PATCH 63/82] Step 7.8: give Parties a type of Mongo.Collection
 
 ---
  typings/socially/socially.d.ts | 2 +-
@@ -9630,10 +9605,10 @@ index a01ea81..b85433f 100644
 2.3.5
 
 
-From f867c1855509e96a112a1fb4e0a200484be98e8b Mon Sep 17 00:00:00 2001
+From 86ec781e754c2eaa4f9e4d839f1751849ff3da0f Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Thu, 27 Aug 2015 13:28:11 +0900
-Subject: [PATCH 65/83] Step 7.9: Provide Parties a generic type of IParty
+Subject: [PATCH 64/82] Step 7.9: Provide Parties a generic type of IParty
 
 ---
  typings/socially/socially.d.ts | 2 +-
@@ -9653,10 +9628,10 @@ index b85433f..34bb272 100644
 2.3.5
 
 
-From 1b4453ab396cdd2497645bfaec734f8b1d8bcaa6 Mon Sep 17 00:00:00 2001
+From 285e7dd88e863f8969225e01d63d412f9a5502f4 Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Thu, 27 Aug 2015 13:33:18 +0900
-Subject: [PATCH 66/83] Step 7.10: implement typescript features
+Subject: [PATCH 65/82] Step 7.10: implement typescript features
 
 ---
  client/parties-form/parties-form.ts | 3 ++-
@@ -9713,10 +9688,10 @@ index 34bb272..6f0d6d3 100644
 2.3.5
 
 
-From fe111d4cbc320c1700e55a82bfa80b63b5442cc2 Mon Sep 17 00:00:00 2001
+From ace317b5ecfe43bb2e94a83c9e876615c775de58 Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Thu, 27 Aug 2015 13:35:05 +0900
-Subject: [PATCH 67/83] Step 8.1: Remove insecure, add accounts-password &
+Subject: [PATCH 66/82] Step 8.1: Remove insecure, add accounts-password &
  accounts-ui
 
 ---
@@ -9745,10 +9720,10 @@ index 7ef3f27..e8de9f8 100644
 2.3.5
 
 
-From 99b503d743077be570a29fb593d43a6ad81026a0 Mon Sep 17 00:00:00 2001
+From afd5261cf1d9ef4006e99879968339661c945a73 Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Thu, 27 Aug 2015 13:36:43 +0900
-Subject: [PATCH 68/83] Step 8.2: Add loginButtons template to index.html
+Subject: [PATCH 67/82] Step 8.2: Add loginButtons template to index.html
 
 ---
  client/index.html | 1 +
@@ -9771,10 +9746,10 @@ index 9956097..5f1d6b8 100644
 2.3.5
 
 
-From cdab866e18663b35217539b4bd3964f5aff529fc Mon Sep 17 00:00:00 2001
+From cf710ca24008c99f57988d279616359c5e355325 Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Thu, 27 Aug 2015 13:39:21 +0900
-Subject: [PATCH 69/83] Step 8.3: Create security rules for insert, update &
+Subject: [PATCH 68/82] Step 8.3: Create security rules for insert, update &
  removing Parties
 
 ---
@@ -9809,10 +9784,10 @@ index f9329b3..80c4772 100644
 2.3.5
 
 
-From 6bf8f068f3beb65308e049b3aa5b583ba30557cc Mon Sep 17 00:00:00 2001
+From 1bcbab94a097b6cab8c63df21bc0f9aa1bd033e8 Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Fri, 4 Sep 2015 18:15:34 +0900
-Subject: [PATCH 70/83] Step 8.4: Add owner to IParty interface
+Subject: [PATCH 69/82] Step 8.4: Add owner to IParty interface
 
 ---
  typings/socially/socially.d.ts | 1 +
@@ -9833,10 +9808,10 @@ index 6f0d6d3..cfadbb5 100644
 2.3.5
 
 
-From 966fa38f1646e6ec3833cd980465238916157227 Mon Sep 17 00:00:00 2001
+From c2ff86c0aea9a0f32ae6e290f768ee378d41c4b2 Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Fri, 4 Sep 2015 18:16:45 +0900
-Subject: [PATCH 71/83] Step 8.5: add owner to PartiesForm add method
+Subject: [PATCH 70/82] Step 8.5: add owner to PartiesForm add method
 
 ---
  client/parties-form/parties-form.ts | 3 ++-
@@ -9860,10 +9835,10 @@ index 4612ef2..698630f 100644
 2.3.5
 
 
-From 55f130be2ce1544ceea289841119e43d9b4c4792 Mon Sep 17 00:00:00 2001
+From 3add29a9009ff9fa7bc6c8bb9a407b167edf7b56 Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Fri, 4 Sep 2015 18:18:01 +0900
-Subject: [PATCH 72/83] Step 8.6: Add owner to PartyDetails save method
+Subject: [PATCH 71/82] Step 8.6: Add owner to PartyDetails save method
 
 ---
  client/party-details/party-details.ts | 3 ++-
@@ -9887,10 +9862,10 @@ index e641735..90b93ba 100644
 2.3.5
 
 
-From 1c99fc319329fc7d2978cd225421f22860239ccd Mon Sep 17 00:00:00 2001
+From f241e7be9866c2dc200345d4685e7486c558ba1b Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Fri, 4 Sep 2015 18:22:04 +0900
-Subject: [PATCH 73/83] Step 8.7: PartyService init
+Subject: [PATCH 72/82] Step 8.7: PartyService init
 
 ---
  client/lib/party-service.ts | 5 +++++
@@ -9913,10 +9888,10 @@ index 0000000..3a9b75f
 2.3.5
 
 
-From 26b944f1584711ba5f479df320e94ad1c08bc8b1 Mon Sep 17 00:00:00 2001
+From 73d98e37ebf3d6c533bfef4761e65386bd26e115 Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Fri, 4 Sep 2015 18:22:39 +0900
-Subject: [PATCH 74/83] Step 8.8: Add types to PartyService
+Subject: [PATCH 73/82] Step 8.8: Add types to PartyService
 
 ---
  client/lib/party-service.ts | 6 +++---
@@ -9940,10 +9915,10 @@ index 3a9b75f..6743c35 100644
 2.3.5
 
 
-From 585b110e0a9d762afe25f5738fb407025705afff Mon Sep 17 00:00:00 2001
+From 8270aa019f2bde63304c3f627ec82efad9cc7533 Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Fri, 4 Sep 2015 18:24:10 +0900
-Subject: [PATCH 75/83] Step 8.9: create getPartyObject in PartyService
+Subject: [PATCH 74/82] Step 8.9: create getPartyObject in PartyService
 
 ---
  client/lib/party-service.ts | 7 +++++++
@@ -9970,10 +9945,10 @@ index 6743c35..8852856 100644
 2.3.5
 
 
-From 9b09b9f82a43059bf97d3d623faac0b356206410 Mon Sep 17 00:00:00 2001
+From ca655a8308f9f8b32a322626211625c76e61b016 Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Fri, 4 Sep 2015 18:25:09 +0900
-Subject: [PATCH 76/83] Step 8.10: create add, update, & remove methods on
+Subject: [PATCH 75/82] Step 8.10: create add, update, & remove methods on
  PartyService
 
 ---
@@ -10005,10 +9980,10 @@ index 8852856..40535a3 100644
 2.3.5
 
 
-From 4c2efe52c0fc99d87c3499a222a29ca48a80d969 Mon Sep 17 00:00:00 2001
+From a6513669ddbbc46de2139ae827259dad46116729 Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Tue, 8 Sep 2015 15:48:47 +0900
-Subject: [PATCH 77/83] Step 8.11: modify PartiesList to use
+Subject: [PATCH 76/82] Step 8.11: modify PartiesList to use
  PartyService.remove
 
 ---
@@ -10055,10 +10030,10 @@ index b69936b..8c93a3e 100644
 2.3.5
 
 
-From 84379e8326e7bb392d9aebea5fd25dd782a6b684 Mon Sep 17 00:00:00 2001
+From 54f71fa9f915e3c409f55e20afc7869cf5d73f00 Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Tue, 8 Sep 2015 15:52:41 +0900
-Subject: [PATCH 78/83] Step 8.12: mody PartyDetails to use PartyService.update
+Subject: [PATCH 77/82] Step 8.12: mody PartyDetails to use PartyService.update
 
 ---
  client/party-details/party-details.ts | 15 ++++++++-------
@@ -10110,10 +10085,10 @@ index 90b93ba..77fd85d 100644
 2.3.5
 
 
-From b87c18b8b61a026d0d2f44691c946c2c158e03b2 Mon Sep 17 00:00:00 2001
+From 803501c6e22b74a58491f49912a829c0925e8915 Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Tue, 8 Sep 2015 15:58:43 +0900
-Subject: [PATCH 79/83] Step 8.13: modify PartiesForm to use PartyService.add
+Subject: [PATCH 78/82] Step 8.13: modify PartiesForm to use PartyService.add
 
 ---
  client/parties-form/parties-form.ts | 13 ++++++-------
@@ -10159,10 +10134,10 @@ index 698630f..1fa8f5a 100644
 2.3.5
 
 
-From a0f842117f69239c28eedbe0828b1797b06b182e Mon Sep 17 00:00:00 2001
+From ca3f4b6c1137c349e2bdaf796c2dc41e33b6076e Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Tue, 8 Sep 2015 16:00:13 +0900
-Subject: [PATCH 80/83] Step 8.14: add accounts-facebook, accounts-twitter
+Subject: [PATCH 79/82] Step 8.14: add accounts-facebook, accounts-twitter
  packages
 
 ---
@@ -10183,10 +10158,10 @@ index e8de9f8..037f969 100644
 2.3.5
 
 
-From 118b1503fc4bed2cfb5bc417bc18bfa7529dbe37 Mon Sep 17 00:00:00 2001
+From 9618edb50cca912570c7891763b95ef3a4808e4a Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Tue, 8 Sep 2015 16:01:03 +0900
-Subject: [PATCH 81/83] update package versions
+Subject: [PATCH 80/82] update package versions
 
 ---
  .meteor/versions | 20 +++++++++++++++++++-
@@ -10262,10 +10237,10 @@ index 289f8e1..810d881 100644
 2.3.5
 
 
-From 9923d97a549abce2ae3fbae4d38310545df6582e Mon Sep 17 00:00:00 2001
+From 5f92a0ba0eee7352372be1f8d3304305137c1d40 Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Tue, 8 Sep 2015 16:02:09 +0900
-Subject: [PATCH 82/83] Step 8.15: Add canActivate to PartyDetails to verify
+Subject: [PATCH 81/82] Step 8.15: Add canActivate to PartyDetails to verify
  user is logged in
 
 ---
@@ -10290,10 +10265,10 @@ index 77fd85d..788119f 100644
 2.3.5
 
 
-From ca05ee753214e6be7cc21ac182eca39d381a3d14 Mon Sep 17 00:00:00 2001
+From a7e3d1faca9c16bf2a5b2378732b72e935612e49 Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Tue, 8 Sep 2015 16:05:07 +0900
-Subject: [PATCH 83/83] Step 8.16: User login alert during canActivate failure
+Subject: [PATCH 82/82] Step 8.16: User login alert during canActivate failure
 
 ---
  client/party-details/party-details.ts | 4 ++++
