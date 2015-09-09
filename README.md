@@ -49,7 +49,7 @@ To do that, import ````bootstrap```` from Meteor-Angular2 package and remove pre
     bootstrap(Socially);
 ````
 
-Since that, you can use Meteor collections in the same way as you would in a regular Meteor app with Blaze:
+Since that, you can use Meteor collections in the same way as you would do in a regular Meteor app with Blaze:
 
 In ````client/app.ts````:
 ````ts
