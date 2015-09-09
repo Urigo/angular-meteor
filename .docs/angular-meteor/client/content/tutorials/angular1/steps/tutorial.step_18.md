@@ -33,7 +33,7 @@ And update the usage in the `AddNewPartyCtrl`:
 {{> DiffBox tutorialName="angular-meteor" step="18.3"}}
 
 Great! So now in order get rid of all the bootstrap change we make, we need to remove some and modify some CSS and LESS.
-I did that [in this commit](), and this is not part of the tutorial because the CSS is just copy-and-paste piece of code.
+I did that [in this commit](https://github.com/Urigo/meteor-angular-socially/commit/e9b9b795c5c250659b044da0a5134ac32aad8096), and this is not part of the tutorial because the CSS is just copy-and-paste piece of code.
 Note that most of the change in this commit includes deleting CSS rules that used to override the Bootstrap's design.
 
 Angular-material uses declarative syntax, i.e. directives, to utilize Material Design elements in HTML documents.
