@@ -80,6 +80,9 @@ Add Angular2 template file ````app.ng.html```` with the following content:
 To unleash full power of what mixing Angular2 and Meteor gives us,
 please refer to Parties app example.
 
-
+## TODO:
+- Update Angular2 tutorial at http://angular-meteor.com/tutorials/angular2;
+- Add TypeScript Meteor typings;
+- Integrate other Angular2 modules to be conveniently used with Meteor (e.g. ````ControlGroup````).
 
 
