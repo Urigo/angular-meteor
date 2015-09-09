@@ -75,7 +75,7 @@ Add Angular2 template file ````app.ng.html```` with the following content:
 ````
 
 
-**At that moment, we are ready to go!**
+**At that moment, you are ready to go!**
 
 To unleash full power of what mixing Angular2 and Meteor gives us,
 please refer to Parties app example.
