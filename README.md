@@ -83,6 +83,6 @@ please refer to Parties app example.
 ## TODO:
 - Update Angular2 tutorial at http://angular-meteor.com/tutorials/angular2;
 - Add TypeScript's Meteor typings;
-- Integrate other Angular2 modules to be conveniently used with Meteor (e.g. ````ControlGroup````).
+- Integrate other Angular2 modules which can be used with Meteor in a more convenient way (e.g. ````ControlGroup````).
 
 
