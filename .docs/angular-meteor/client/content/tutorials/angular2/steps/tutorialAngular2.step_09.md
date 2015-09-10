@@ -1,4 +1,5 @@
 {{#template name="tutorialAngular2.step_09.html"}}
+{{> downloadPreviousStep stepName="step_08"}} 
   
 Right now our app has no privacy, every user can see all the parties on the screen.
 
@@ -17,6 +18,8 @@ Write this command in the console:
 
 Now run the app.   You can't see any parties.
 
+{{> DiffBox tutorialName="angular2-meteor" step="9.1"}}
+
 ## Meteor.publish
 
 So now we need to tell Meteor what parties should it publish to the clients.
@@ -29,11 +32,7 @@ Let's create a new file named `parties.ts` inside the server folder.
 
 Inside the file insert this code:
 
-__`server/parties.ts`:__
-
-    Meteor.publish("parties", function () {
-      return Parties.find();
-    });
+{{> DiffBox tutorialName="angular2-meteor" step="9.2"}}
 
 Let's see what's happening here:
 
@@ -53,35 +52,12 @@ Using [Meteor.subscribe](http://docs.meteor.com/#/full/meteor_subscribe) we can 
 
 You can add this to our PartiesList component.
 
-__`client/parties-list/parties-list.ts`:__
-
-    export class PartiesList {
-      constructor () {
-        Meteor.subscribe('parties');
-        Tracker.autorun(zone.bind(() => {
-          this.parties = Parties.find().fetch();
-        }));
-      }
-    }
+{{> DiffBox tutorialName="angular2-meteor" step="9.3"}}
 
 
 Now let's limit the data sent to client.
 
-__`server/parties.ts`:__
-
-    Meteor.publish("parties", function () {
-      return Parties.find({
-        $or:[
-          {$and:[
-            {"isPublic": true},
-            {"isPublic": {$exists: true}}
-          ]},
-          {$and:[
-            {owner: this.userId},
-            {owner: {$exists: true}}
-          ]}
-        ]});
-    });
+{{> DiffBox tutorialName="angular2-meteor" step="9.4"}}
 
 Our publish function can also take parameters.  In that case, we would also need to pass the parameters from the client.
 
@@ -93,37 +69,19 @@ Reset the database from the console:
 
 We'll add a different set of data in `loadParties.ts`:
 
-__`server/parties.ts`:__
-
-    var parties:IParty[] = [{
-      name: 'Dubstep-Free Zone',
-      description: 'Can we please just for an evening not listen to dubstep.',
-      owner: 'anonymous',
-      isPublic: true
-    }, {
-      name: 'All dubstep all the time',
-      description: 'Get it on!',
-      owner: 'anonymous',
-      isPublic: true
-    }, {
-      name: 'Savage lounging',
-      description: 'Leisure suit required. And only fiercest manners.',
-      owner: 'anonymous',
-      isPublic: false
-    }];
+{{> DiffBox tutorialName="angular2-meteor" step="9.5"}}
 
 Run the app again, and you should see only two items. The third being `public: false` and hidden.
+
+Let's also update our IParty interface to include the new key: `isPublic`.
+
+{{> DiffBox tutorialName="angular2-meteor" step="9.6"}}
 
 ## Meteor subscribe with params
 
 We can use these parameters to limit the items we are subscribing to.
 
-__`client/party-details/party-details.ts`:__
-
-      onActivate() {
-        Meteor.subscribe('parties', this.partyId);
-        this.party = Parties.find(this.partyId).fetch();
-      }
+{{> DiffBox tutorialName="angular2-meteor" step="9.7"}}
 
 In the second parameter, our function uses the Mongo API to return the wanted documents (document are the JSON-style data structure of MongoDB).
 
@@ -139,18 +97,9 @@ So now let's add the `isPublic` flag to the parties and see how it affects the p
 
 Let's add a checkbox to the new party form in `parties-form.ng.html`:
 
-__`client/parties-form/parties-form.ts`:__
+{{> DiffBox tutorialName="angular2-meteor" step="9.8"}}
 
-    this.partiesForm = new ControlGroup({
-      name: new Control('', Validators.required),
-      description: new Control('', Validators.required),
-      isPublic: new Control(false)
-    });
-
-__`client/parties-form/parties-form.ng.html`:__
-
-    <label>Public</label>
-    <input type="checkbox" ng-control="isPublic">
+{{> DiffBox tutorialName="angular2-meteor" step="9.9"}}
 
 > Checkbox currently not working. You can use `[checked]="isPublic" (click)="toggleCheck()"` for now if you need a work around.
 
@@ -158,10 +107,7 @@ Notice how easy it is to bind a checkbox to a model with Angular 2!
 
 Let's add the same to the `party-details.ng.html` page:
 
-__`client/party-details/party-details.ng.html`:__
-
-    <label>Is public</label>
-    <input type="checkbox" [(ng-model)]="party.public">
+{{> DiffBox tutorialName="angular2-meteor" step="9.9"}}
 
 Now let's run the app.
 
@@ -182,11 +128,7 @@ So let's start with defining our publish function.
 
 Create a new file under the `server` folder named `users.ts` and place the following code in:
 
-__`server/users.ts`:__
-
-    Meteor.publish("users", function () {
-      return Meteor.users.find({}, {fields: {emails: 1, profile: 1}});
-    });
+{{> DiffBox tutorialName="angular2-meteor" step="9.11"}}
 
 So here again we use the Mongo API to return all the users (find with an empty object) but we select to return only the emails and profile fields.
 
@@ -197,14 +139,7 @@ The emails field holds all the user's email addresses, and the profile might hol
 
 Now let's subscribe to that publish method in our PartyDetails component.
 
-__`client/party-details/party-details.ts`:__
-
-    onActivate() {
-      Meteor.subscribe('users');
-      this.users = Meteor.users();
-
-    ...
-    }
+{{> DiffBox tutorialName="angular2-meteor" step="9.12"}}
 
 * We bind to the Meteor.users collection
 * Binding the result to this.users
@@ -213,30 +148,9 @@ Now let's add the list of users to the view to make sure it works.
 
 Add this ng-for list to the end of `parties-details.ng.html`. Don't forget to import `NgFor` and add it as a directive.
 
-__`client/party-details/party-details.ts`:__
+{{> DiffBox tutorialName="angular2-meteor" step="9.13"}}
 
-    import {NgFor} from 'angular2/angular2';
-
-    @View({
-      templateUrl: 'client/party-details/party-details.ng.html',
-      directives: [FORM_DIRECTIVES, RouterLink, NgFor]
-    })
-    export class PartyDetails {
-     ...
-      onActivate() {
-        this.users = Meteor.users;
-      ...
-      }
-    }
-
-__`client/party-details/party-details.ng.html`:__
-
-    <ul>
-      Users:
-      <li *ng-for="#user of users">
-        <div>{{dstache}} user.emails[0].address }}</div>
-      </li>
-    </ul>
+{{> DiffBox tutorialName="angular2-meteor" step="9.14"}}
 
 Run the app and see the list of all the users' emails that created a login and password and did not use a service to login.
 
