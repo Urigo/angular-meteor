@@ -645,341 +645,6 @@ Package['dburles:mongo-collection-instances'] = {};
 var Meteor = Package.meteor.Meteor;
 var LocalCollection = Package.minimongo.LocalCollection;
 var Minimongo = Package.minimongo.Minimongo;
-var ObserveSequence = Package['observe-sequence'].ObserveSequence;
-
-(function () {
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                            //
-// packages/angular/lib/angular-hash-key-copier.js                                                            //
-//                                                                                                            //
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                                              //
-(function( ng ) {                                                                                             // 1
-	"use strict";                                                                                                // 2
-                                                                                                              // 3
-	// We're going to package this as its own module. Not sure how else to distribute                            // 4
-	// an AngularJS class since it depends on an actual application name at the code-                            // 5
-	// time of the class definition.                                                                             // 6
-	var module = ng.module( "hashKeyCopier", [] );                                                               // 7
-                                                                                                              // 8
-	// Define the injectable. We're using "value" because the result is a construtor,                            // 9
-	// NOT the result of a constructor instantiation.                                                            // 10
-	module.value( "HashKeyCopier", HashKeyCopier );                                                              // 11
-                                                                                                              // 12
-	// I am the constructor.                                                                                     // 13
-	function HashKeyCopier( source, destination, uniqueIdentifiers ) {                                           // 14
-                                                                                                              // 15
-		// ---                                                                                                      // 16
-		// INITIALIZATION.                                                                                          // 17
-		// ---                                                                                                      // 18
-                                                                                                              // 19
-                                                                                                              // 20
-		// I am the key that AngularJS uses to store the expando property.                                          // 21
-		var hashKeyPropertyName = "$$hashKey";                                                                      // 22
-                                                                                                              // 23
-		// I am the index of hashKeys in the source object. This provides a pseudo-                                 // 24
-		// location of each hashKey value based on the structure of the source object.                              // 25
-		var hashKeyIndex = {};                                                                                      // 26
-                                                                                                              // 27
-		// I am a collection of keys used to determine the identity of an object at a                               // 28
-		// given location within the source / destination targets. It is one of these                               // 29
-		// keys that will be used to determine if two objects are logically equivalent;                             // 30
-		// and therefore, should have the same hashKey.                                                             // 31
-		//                                                                                                          // 32
-		// If nothing is provided, default to the most common - ID.                                                 // 33
-		if ( ! uniqueIdentifiers ) {                                                                                // 34
-                                                                                                              // 35
-			uniqueIdentifiers = [ "id" ];                                                                              // 36
-                                                                                                              // 37
-		}                                                                                                           // 38
-                                                                                                              // 39
-		// I am the RegEx pattern that determins if a given string represents a proprietary                         // 40
-		// AngularJS name - they all being with "$". We don't need to waste our time                                // 41
-		// looking at these properties when it comes to iterating over our targets.                                 // 42
-		var angularJSPropertyPattern = /^$/i;                                                                       // 43
-                                                                                                              // 44
-                                                                                                              // 45
-		// ---                                                                                                      // 46
-		// PUBLIC METDHODS.                                                                                         // 47
-		// ---                                                                                                      // 48
-                                                                                                              // 49
-                                                                                                              // 50
-		// I execute the copy operation from the source object to the destination object.                           // 51
-		function copyHashKeys() {	                                                                                  // 52
-                                                                                                              // 53
-			// If either the existing or the source objects are empty, there's nothing to                              // 54
-			// do - just return the destination.                                                                       // 55
-			if ( isTargetEmpty( source ) || isTargetEmpty( destination ) ) {                                           // 56
-				                                                                                                          // 57
-				return( destination );                                                                                    // 58
-                                                                                                              // 59
-			}                                                                                                          // 60
-                                                                                                              // 61
-			// Reset the hash key index for the copy operation.                                                        // 62
-			hashKeyIndex = {};                                                                                         // 63
-                                                                                                              // 64
-			// Build and apply the hashkey index.                                                                      // 65
-			buildHashKeyIndexFromSource();                                                                             // 66
-			applyHashKeyIndexToDestination();                                                                          // 67
-                                                                                                              // 68
-			return( destination );                                                                                     // 69
-                                                                                                              // 70
-		}                                                                                                           // 71
-                                                                                                              // 72
-                                                                                                              // 73
-		// ---                                                                                                      // 74
-		// PRIVATE METDHODS.                                                                                        // 75
-		// ---                                                                                                      // 76
-                                                                                                              // 77
-                                                                                                              // 78
-		// I apply the hashkey index to the current destination.                                                    // 79
-		function applyHashKeyIndexToDestination() {                                                                 // 80
-                                                                                                              // 81
-			if ( ng.isArray( destination ) ) {                                                                         // 82
-                                                                                                              // 83
-				applyHashKeyIndexToArray( "[]", destination );                                                            // 84
-                                                                                                              // 85
-			} else if ( ng.isObject( destination ) ) {                                                                 // 86
-                                                                                                              // 87
-				applyHashKeyIndexToObject( ".", destination );                                                            // 88
-                                                                                                              // 89
-			}                                                                                                          // 90
-                                                                                                              // 91
-		}                                                                                                           // 92
-                                                                                                              // 93
-                                                                                                              // 94
-		// I apply the hashkey index to the given Array.                                                            // 95
-		function applyHashKeyIndexToArray( path, target ) {                                                         // 96
-                                                                                                              // 97
-			for ( var i = 0, length = target.length ; i < length ; i++ ) {                                             // 98
-                                                                                                              // 99
-				var targetItem = target[ i ];                                                                             // 100
-                                                                                                              // 101
-				if ( ng.isArray( targetItem ) ) {                                                                         // 102
-                                                                                                              // 103
-					applyHashKeyIndexToArray( ( path + "[]" ), targetItem );                                                 // 104
-                                                                                                              // 105
-				} else if ( ng.isObject( targetItem ) ) {                                                                 // 106
-                                                                                                              // 107
-					applyHashKeyIndexToObject( ( path + "." ), targetItem );                                                 // 108
-                                                                                                              // 109
-				}                                                                                                         // 110
-                                                                                                              // 111
-			}                                                                                                          // 112
-                                                                                                              // 113
-		}                                                                                                           // 114
-                                                                                                              // 115
-                                                                                                              // 116
-		// I apply the hasheky index to the given Object.                                                           // 117
-		function applyHashKeyIndexToObject( path, target ) {                                                        // 118
-                                                                                                              // 119
-			var identifier = getUniqueIdentifierForObject( target );                                                   // 120
-                                                                                                              // 121
-			if ( identifier ) {                                                                                        // 122
-                                                                                                              // 123
-				var hashKeyPath = ( path + target[ identifier ] );                                                        // 124
-                                                                                                              // 125
-				if ( hashKeyIndex.hasOwnProperty( hashKeyPath ) ) {                                                       // 126
-                                                                                                              // 127
-					target[ hashKeyPropertyName ] = hashKeyIndex[ hashKeyPath ];                                             // 128
-                                                                                                              // 129
-				}                                                                                                         // 130
-				                                                                                                          // 131
-			}                                                                                                          // 132
-                                                                                                              // 133
-			for ( var key in target ) {                                                                                // 134
-                                                                                                              // 135
-				if ( target.hasOwnProperty( key ) && isUserDefinedProperty( key ) ) {                                     // 136
-                                                                                                              // 137
-					var targetItem = target[ key ];                                                                          // 138
-                                                                                                              // 139
-					if ( ng.isArray( targetItem ) ) {                                                                        // 140
-                                                                                                              // 141
-						applyHashKeyIndexToArray( ( path + key + "[]" ), targetItem );                                          // 142
-                                                                                                              // 143
-					} else if ( ng.isObject( targetItem ) ) {                                                                // 144
-                                                                                                              // 145
-						applyHashKeyIndexToObject( ( path + key + "." ), targetItem );                                          // 146
-                                                                                                              // 147
-					}                                                                                                        // 148
-                                                                                                              // 149
-				}                                                                                                         // 150
-                                                                                                              // 151
-			}                                                                                                          // 152
-                                                                                                              // 153
-		}                                                                                                           // 154
-                                                                                                              // 155
-                                                                                                              // 156
-		// I build the hashkey index from the current source object.                                                // 157
-		function buildHashKeyIndexFromSource() {                                                                    // 158
-                                                                                                              // 159
-			if ( ng.isArray( source ) ) {                                                                              // 160
-                                                                                                              // 161
-				buildHashKeyIndexFromArray( "[]", source );                                                               // 162
-                                                                                                              // 163
-			} else if ( ng.isObject( source ) ) {                                                                      // 164
-                                                                                                              // 165
-				buildHashKeyIndexFromObject( ".", source );                                                               // 166
-                                                                                                              // 167
-			}                                                                                                          // 168
-                                                                                                              // 169
-		}                                                                                                           // 170
-                                                                                                              // 171
-                                                                                                              // 172
-		// I build the hashkey index from the given Array.                                                          // 173
-		function buildHashKeyIndexFromArray( path, target ) {                                                       // 174
-                                                                                                              // 175
-			for ( var i = 0, length = target.length ; i < length ; i++ ) {                                             // 176
-                                                                                                              // 177
-				var targetItem = target[ i ];                                                                             // 178
-                                                                                                              // 179
-				if ( ng.isArray( targetItem ) ) {                                                                         // 180
-                                                                                                              // 181
-					buildHashKeyIndexFromArray( ( path + "[]" ), targetItem );                                               // 182
-                                                                                                              // 183
-				} else if ( ng.isObject( targetItem ) ) {                                                                 // 184
-                                                                                                              // 185
-					buildHashKeyIndexFromObject( ( path + "." ), targetItem );                                               // 186
-                                                                                                              // 187
-				}                                                                                                         // 188
-                                                                                                              // 189
-			}                                                                                                          // 190
-                                                                                                              // 191
-		}                                                                                                           // 192
-                                                                                                              // 193
-                                                                                                              // 194
-		// I build the hashkey index from the given Object.                                                         // 195
-		function buildHashKeyIndexFromObject( path, target ) {                                                      // 196
-                                                                                                              // 197
-			if ( target.hasOwnProperty( hashKeyPropertyName ) ) {                                                      // 198
-                                                                                                              // 199
-				var identifier = getUniqueIdentifierForObject( target );                                                  // 200
-                                                                                                              // 201
-				if ( identifier ) {                                                                                       // 202
-                                                                                                              // 203
-					hashKeyIndex[ path + target[ identifier ] ] = target[ hashKeyPropertyName ];                             // 204
-					                                                                                                         // 205
-				}                                                                                                         // 206
-                                                                                                              // 207
-			}                                                                                                          // 208
-                                                                                                              // 209
-			for ( var key in target ) {                                                                                // 210
-                                                                                                              // 211
-				if ( target.hasOwnProperty( key ) && isUserDefinedProperty( key ) ) {                                     // 212
-                                                                                                              // 213
-					var targetItem = target[ key ];                                                                          // 214
-                                                                                                              // 215
-					if ( ng.isArray( targetItem ) ) {                                                                        // 216
-                                                                                                              // 217
-						buildHashKeyIndexFromArray( ( path + key + "[]" ), targetItem );                                        // 218
-                                                                                                              // 219
-					} else if ( ng.isObject( targetItem ) ) {                                                                // 220
-                                                                                                              // 221
-						buildHashKeyIndexFromObject( ( path + key + "." ) , targetItem );                                       // 222
-                                                                                                              // 223
-					}                                                                                                        // 224
-                                                                                                              // 225
-				}                                                                                                         // 226
-                                                                                                              // 227
-			}                                                                                                          // 228
-                                                                                                              // 229
-		}                                                                                                           // 230
-                                                                                                              // 231
-                                                                                                              // 232
-		// I return the unique identifier for the given object; returns null if none of the                         // 233
-		// keys match any of the defined identifiers.                                                               // 234
-		function getUniqueIdentifierForObject( target ) {                                                           // 235
-                                                                                                              // 236
-			for ( var i = 0, length = uniqueIdentifiers.length ; i < length ; i++ ) {                                  // 237
-                                                                                                              // 238
-				var identifier = uniqueIdentifiers[ i ];                                                                  // 239
-                                                                                                              // 240
-				if ( target.hasOwnProperty( identifier ) ) {                                                              // 241
-                                                                                                              // 242
-					return( identifier );                                                                                    // 243
-                                                                                                              // 244
-				}                                                                                                         // 245
-                                                                                                              // 246
-			}                                                                                                          // 247
-                                                                                                              // 248
-			return( null );                                                                                            // 249
-                                                                                                              // 250
-		}                                                                                                           // 251
-                                                                                                              // 252
-                                                                                                              // 253
-		// I check to see if the given object is locigally empty.                                                   // 254
-		function isTargetEmpty( target ) {                                                                          // 255
-                                                                                                              // 256
-			// If the object is a falsey, determine it as empty.                                                       // 257
-			if ( ! target ) {                                                                                          // 258
-                                                                                                              // 259
-				return( true );                                                                                           // 260
-                                                                                                              // 261
-			}                                                                                                          // 262
-                                                                                                              // 263
-			// If the value is an array, check its length.                                                             // 264
-			if ( ng.isArray( target ) ) {                                                                              // 265
-                                                                                                              // 266
-				return( target.length === 0 );                                                                            // 267
-                                                                                                              // 268
-			}                                                                                                          // 269
-                                                                                                              // 270
-			// If the value is an object, consider to to be non-empty.                                                 // 271
-			if ( ng.isObject( target ) ) {                                                                             // 272
-                                                                                                              // 273
-				return( false );                                                                                          // 274
-                                                                                                              // 275
-			}                                                                                                          // 276
-			                                                                                                           // 277
-			// If the value was neither an array nor an object, consider it empty for the                              // 278
-			// purposes of our copy operation.                                                                         // 279
-			return( true );                                                                                            // 280
-                                                                                                              // 281
-		}                                                                                                           // 282
-                                                                                                              // 283
-                                                                                                              // 284
-		// I determine if the given property name is one defined by the user (or more                               // 285
-		// specifically, one that is NOT defined by the AngularJS framework).                                       // 286
-		function isUserDefinedProperty( name ) {                                                                    // 287
-                                                                                                              // 288
-			return( ! angularJSPropertyPattern.test( name ) );                                                         // 289
-                                                                                                              // 290
-		}                                                                                                           // 291
-                                                                                                              // 292
-                                                                                                              // 293
-		// ---                                                                                                      // 294
-		// RETURN PUBLIC API.                                                                                       // 295
-		// ---                                                                                                      // 296
-                                                                                                              // 297
-                                                                                                              // 298
-		return({                                                                                                    // 299
-			copyHashKeys: copyHashKeys                                                                                 // 300
-		});                                                                                                         // 301
-                                                                                                              // 302
-	}                                                                                                            // 303
-                                                                                                              // 304
-	// I provide a "static" method that encapsulates the proper instantation and                                 // 305
-	// execution of the copy operation.                                                                          // 306
-	HashKeyCopier.copyHashKeys = function( source, destination, uniqueIdentifiers ) {                            // 307
-                                                                                                              // 308
-		var copier = new HashKeyCopier( source, destination, uniqueIdentifiers );                                   // 309
-                                                                                                              // 310
-		copier.copyHashKeys();                                                                                      // 311
-                                                                                                              // 312
-		return( destination );                                                                                      // 313
-                                                                                                              // 314
-	};                                                                                                           // 315
-                                                                                                              // 316
-})( angular );                                                                                                // 317
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-}).call(this);
-
-
-
-
-
 
 (function () {
 
@@ -1001,175 +666,181 @@ module.factory('diffArray', ['getUpdates',                                      
     // Calculates the differences between `lastSeqArray` and                                                  // 10
     // `seqArray` and calls appropriate functions from `callbacks`.                                           // 11
     // Reuses Minimongo's diff algorithm implementation.                                                      // 12
-    function diffArray(lastSeqArray, seqArray, callbacks, preventNestedDiff) {                                // 13
-      preventNestedDiff = !!preventNestedDiff;                                                                // 14
-      var diffFn = Package.minimongo.LocalCollection._diffQueryOrderedChanges;                                // 15
-      var oldObjIds = [];                                                                                     // 16
-      var newObjIds = [];                                                                                     // 17
-      var posOld = {}; // maps from idStringify'd ids                                                         // 18
-      var posNew = {}; // ditto                                                                               // 19
-      var posCur = {};                                                                                        // 20
-      var lengthCur = lastSeqArray.length;                                                                    // 21
-                                                                                                              // 22
-      _.each(seqArray, function (doc, i) {                                                                    // 23
-        newObjIds.push({_id: doc._id});                                                                       // 24
-        posNew[idStringify(doc._id)] = i;                                                                     // 25
-      });                                                                                                     // 26
-                                                                                                              // 27
-      _.each(lastSeqArray, function (doc, i) {                                                                // 28
-        oldObjIds.push({_id: doc._id});                                                                       // 29
-        posOld[idStringify(doc._id)] = i;                                                                     // 30
-        posCur[idStringify(doc._id)] = i;                                                                     // 31
+    // XXX Should be replaced with the original diffArray function here:                                      // 13
+    // https://github.com/meteor/meteor/blob/devel/packages/observe-sequence/observe_sequence.js#L152         // 14
+    // When it will become nested as well, tracking here: https://github.com/meteor/meteor/issues/3764        // 15
+    function diffArray(lastSeqArray, seqArray, callbacks, preventNestedDiff) {                                // 16
+      preventNestedDiff = !!preventNestedDiff;                                                                // 17
+                                                                                                              // 18
+      var diffFn = Package.minimongo.LocalCollection._diffQueryOrderedChanges ||                              // 19
+        Package['diff-sequence'].DiffSequence.diffQueryOrderedChanges;                                        // 20
+                                                                                                              // 21
+      var oldObjIds = [];                                                                                     // 22
+      var newObjIds = [];                                                                                     // 23
+      var posOld = {}; // maps from idStringify'd ids                                                         // 24
+      var posNew = {}; // ditto                                                                               // 25
+      var posCur = {};                                                                                        // 26
+      var lengthCur = lastSeqArray.length;                                                                    // 27
+                                                                                                              // 28
+      _.each(seqArray, function (doc, i) {                                                                    // 29
+        newObjIds.push({_id: doc._id});                                                                       // 30
+        posNew[idStringify(doc._id)] = i;                                                                     // 31
       });                                                                                                     // 32
                                                                                                               // 33
-      // Arrays can contain arbitrary objects. We don't diff the                                              // 34
-      // objects. Instead we always fire 'changedAt' callback on every                                        // 35
-      // object. The consumer of `observe-sequence` should deal with                                          // 36
-      // it appropriately.                                                                                    // 37
-      diffFn(oldObjIds, newObjIds, {                                                                          // 38
-        addedBefore: function (id, doc, before) {                                                             // 39
-          var position = before ? posCur[idStringify(before)] : lengthCur;                                    // 40
-                                                                                                              // 41
-          _.each(posCur, function (pos, id) {                                                                 // 42
-            if (pos >= position) posCur[id]++;                                                                // 43
-          });                                                                                                 // 44
-                                                                                                              // 45
-          lengthCur++;                                                                                        // 46
-          posCur[idStringify(id)] = position;                                                                 // 47
-                                                                                                              // 48
-          callbacks.addedAt(                                                                                  // 49
-            id,                                                                                               // 50
-            seqArray[posNew[idStringify(id)]],                                                                // 51
-            position,                                                                                         // 52
-            before                                                                                            // 53
-          );                                                                                                  // 54
-        },                                                                                                    // 55
-                                                                                                              // 56
-        movedBefore: function (id, before) {                                                                  // 57
-          var prevPosition = posCur[idStringify(id)];                                                         // 58
-          var position = before ? posCur[idStringify(before)] : lengthCur - 1;                                // 59
-                                                                                                              // 60
-          _.each(posCur, function (pos, id) {                                                                 // 61
-            if (pos >= prevPosition && pos <= position)                                                       // 62
-              posCur[id]--;                                                                                   // 63
-            else if (pos <= prevPosition && pos >= position)                                                  // 64
-              posCur[id]++;                                                                                   // 65
-          });                                                                                                 // 66
-                                                                                                              // 67
-          posCur[idStringify(id)] = position;                                                                 // 68
-                                                                                                              // 69
-          callbacks.movedTo(                                                                                  // 70
-            id,                                                                                               // 71
-            seqArray[posNew[idStringify(id)]],                                                                // 72
-            prevPosition,                                                                                     // 73
-            position,                                                                                         // 74
-            before                                                                                            // 75
-          );                                                                                                  // 76
-        },                                                                                                    // 77
-        removed: function (id) {                                                                              // 78
-          var prevPosition = posCur[idStringify(id)];                                                         // 79
-                                                                                                              // 80
-          _.each(posCur, function (pos, id) {                                                                 // 81
-            if (pos >= prevPosition) posCur[id]--;                                                            // 82
-          });                                                                                                 // 83
-                                                                                                              // 84
-          delete posCur[idStringify(id)];                                                                     // 85
-          lengthCur--;                                                                                        // 86
-                                                                                                              // 87
-          callbacks.removedAt(                                                                                // 88
-            id,                                                                                               // 89
-            lastSeqArray[posOld[idStringify(id)]],                                                            // 90
-            prevPosition                                                                                      // 91
-          );                                                                                                  // 92
-        }                                                                                                     // 93
-      });                                                                                                     // 94
-                                                                                                              // 95
-      _.each(posNew, function (pos, idString) {                                                               // 96
-        if (!_.has(posOld, idString)) return;                                                                 // 97
-                                                                                                              // 98
-        var id = idParse(idString);                                                                           // 99
-        var newItem = seqArray[pos] || {};                                                                    // 100
-        var oldItem = lastSeqArray[posOld[idString]];                                                         // 101
-        var updates = getUpdates(oldItem, newItem, preventNestedDiff);                                        // 102
-        var setDiff = updates.$set;                                                                           // 103
-        var unsetDiff = updates.$unset;                                                                       // 104
-                                                                                                              // 105
-        if (setDiff)                                                                                          // 106
-          setDiff._id = newItem._id;                                                                          // 107
-                                                                                                              // 108
-        if (unsetDiff)                                                                                        // 109
-          unsetDiff._id = newItem._id;                                                                        // 110
+      _.each(lastSeqArray, function (doc, i) {                                                                // 34
+        oldObjIds.push({_id: doc._id});                                                                       // 35
+        posOld[idStringify(doc._id)] = i;                                                                     // 36
+        posCur[idStringify(doc._id)] = i;                                                                     // 37
+      });                                                                                                     // 38
+                                                                                                              // 39
+      // Arrays can contain arbitrary objects. We don't diff the                                              // 40
+      // objects. Instead we always fire 'changedAt' callback on every                                        // 41
+      // object. The consumer of `observe-sequence` should deal with                                          // 42
+      // it appropriately.                                                                                    // 43
+      diffFn(oldObjIds, newObjIds, {                                                                          // 44
+        addedBefore: function (id, doc, before) {                                                             // 45
+          var position = before ? posCur[idStringify(before)] : lengthCur;                                    // 46
+                                                                                                              // 47
+          _.each(posCur, function (pos, id) {                                                                 // 48
+            if (pos >= position) posCur[id]++;                                                                // 49
+          });                                                                                                 // 50
+                                                                                                              // 51
+          lengthCur++;                                                                                        // 52
+          posCur[idStringify(id)] = position;                                                                 // 53
+                                                                                                              // 54
+          callbacks.addedAt(                                                                                  // 55
+            id,                                                                                               // 56
+            seqArray[posNew[idStringify(id)]],                                                                // 57
+            position,                                                                                         // 58
+            before                                                                                            // 59
+          );                                                                                                  // 60
+        },                                                                                                    // 61
+                                                                                                              // 62
+        movedBefore: function (id, before) {                                                                  // 63
+          var prevPosition = posCur[idStringify(id)];                                                         // 64
+          var position = before ? posCur[idStringify(before)] : lengthCur - 1;                                // 65
+                                                                                                              // 66
+          _.each(posCur, function (pos, id) {                                                                 // 67
+            if (pos >= prevPosition && pos <= position)                                                       // 68
+              posCur[id]--;                                                                                   // 69
+            else if (pos <= prevPosition && pos >= position)                                                  // 70
+              posCur[id]++;                                                                                   // 71
+          });                                                                                                 // 72
+                                                                                                              // 73
+          posCur[idStringify(id)] = position;                                                                 // 74
+                                                                                                              // 75
+          callbacks.movedTo(                                                                                  // 76
+            id,                                                                                               // 77
+            seqArray[posNew[idStringify(id)]],                                                                // 78
+            prevPosition,                                                                                     // 79
+            position,                                                                                         // 80
+            before                                                                                            // 81
+          );                                                                                                  // 82
+        },                                                                                                    // 83
+        removed: function (id) {                                                                              // 84
+          var prevPosition = posCur[idStringify(id)];                                                         // 85
+                                                                                                              // 86
+          _.each(posCur, function (pos, id) {                                                                 // 87
+            if (pos >= prevPosition) posCur[id]--;                                                            // 88
+          });                                                                                                 // 89
+                                                                                                              // 90
+          delete posCur[idStringify(id)];                                                                     // 91
+          lengthCur--;                                                                                        // 92
+                                                                                                              // 93
+          callbacks.removedAt(                                                                                // 94
+            id,                                                                                               // 95
+            lastSeqArray[posOld[idStringify(id)]],                                                            // 96
+            prevPosition                                                                                      // 97
+          );                                                                                                  // 98
+        }                                                                                                     // 99
+      });                                                                                                     // 100
+                                                                                                              // 101
+      _.each(posNew, function (pos, idString) {                                                               // 102
+        if (!_.has(posOld, idString)) return;                                                                 // 103
+                                                                                                              // 104
+        var id = idParse(idString);                                                                           // 105
+        var newItem = seqArray[pos] || {};                                                                    // 106
+        var oldItem = lastSeqArray[posOld[idString]];                                                         // 107
+        var updates = getUpdates(oldItem, newItem, preventNestedDiff);                                        // 108
+        var setDiff = updates.$set;                                                                           // 109
+        var unsetDiff = updates.$unset;                                                                       // 110
                                                                                                               // 111
-        if (setDiff || unsetDiff)                                                                             // 112
-          callbacks.changedAt(id, setDiff, unsetDiff, pos, oldItem);                                          // 113
-      });                                                                                                     // 114
-    }                                                                                                         // 115
-                                                                                                              // 116
-    diffArray.deepCopyChanges = function (oldItem, newItem) {                                                 // 117
-      var setDiff = getUpdates(oldItem, newItem).$set;                                                        // 118
-                                                                                                              // 119
-      _.each(setDiff, function(v, deepKey) {                                                                  // 120
-        setDeep(oldItem, deepKey, v);                                                                         // 121
-      });                                                                                                     // 122
-    };                                                                                                        // 123
-                                                                                                              // 124
-    diffArray.deepCopyRemovals = function (oldItem, newItem) {                                                // 125
-      var unsetDiff = getUpdates(oldItem, newItem).$unset;                                                    // 126
-                                                                                                              // 127
-      _.each(unsetDiff, function(v, deepKey) {                                                                // 128
-        unsetDeep(oldItem, deepKey);                                                                          // 129
-      });                                                                                                     // 130
-    };                                                                                                        // 131
-                                                                                                              // 132
-    var setDeep = function(obj, deepKey, v) {                                                                 // 133
-      var split = deepKey.split('.');                                                                         // 134
-      var initialKeys = _.initial(split);                                                                     // 135
-      var lastKey = _.last(split);                                                                            // 136
-                                                                                                              // 137
-      initialKeys.reduce(function(subObj, k, i) {                                                             // 138
-        var nextKey = split[i + 1];                                                                           // 139
-                                                                                                              // 140
-        if (isNumStr(nextKey)) {                                                                              // 141
-          if (subObj[k] == null) subObj[k] = [];                                                              // 142
-          if (subObj[k].length == parseInt(nextKey)) subObj[k].push(null);                                    // 143
-        }                                                                                                     // 144
-                                                                                                              // 145
-        else if (subObj[k] == null || !isHash(subObj[k])) {                                                   // 146
-          subObj[k] = {};                                                                                     // 147
-        }                                                                                                     // 148
-                                                                                                              // 149
-        return subObj[k];                                                                                     // 150
-      }, obj);                                                                                                // 151
-                                                                                                              // 152
-      getDeep(obj, initialKeys)[lastKey] = v;                                                                 // 153
-      return v;                                                                                               // 154
-    };                                                                                                        // 155
-                                                                                                              // 156
-    var unsetDeep = function(obj, deepKey) {                                                                  // 157
-      var split = deepKey.split('.');                                                                         // 158
-      var initialKeys = _.initial(split);                                                                     // 159
-      var lastKey = _.last(split);                                                                            // 160
-      return delete getDeep(obj, initialKeys)[lastKey];                                                       // 161
-    };                                                                                                        // 162
-                                                                                                              // 163
-    var getDeep = function(obj, keys) {                                                                       // 164
-      return keys.reduce(function(subObj, k) {                                                                // 165
-        return subObj[k];                                                                                     // 166
-      }, obj);                                                                                                // 167
+        if (setDiff)                                                                                          // 112
+          setDiff._id = newItem._id;                                                                          // 113
+                                                                                                              // 114
+        if (unsetDiff)                                                                                        // 115
+          unsetDiff._id = newItem._id;                                                                        // 116
+                                                                                                              // 117
+        if (setDiff || unsetDiff)                                                                             // 118
+          callbacks.changedAt(id, setDiff, unsetDiff, pos, oldItem);                                          // 119
+      });                                                                                                     // 120
+    }                                                                                                         // 121
+                                                                                                              // 122
+    diffArray.deepCopyChanges = function (oldItem, newItem) {                                                 // 123
+      var setDiff = getUpdates(oldItem, newItem).$set;                                                        // 124
+                                                                                                              // 125
+      _.each(setDiff, function(v, deepKey) {                                                                  // 126
+        setDeep(oldItem, deepKey, v);                                                                         // 127
+      });                                                                                                     // 128
+    };                                                                                                        // 129
+                                                                                                              // 130
+    diffArray.deepCopyRemovals = function (oldItem, newItem) {                                                // 131
+      var unsetDiff = getUpdates(oldItem, newItem).$unset;                                                    // 132
+                                                                                                              // 133
+      _.each(unsetDiff, function(v, deepKey) {                                                                // 134
+        unsetDeep(oldItem, deepKey);                                                                          // 135
+      });                                                                                                     // 136
+    };                                                                                                        // 137
+                                                                                                              // 138
+    var setDeep = function(obj, deepKey, v) {                                                                 // 139
+      var split = deepKey.split('.');                                                                         // 140
+      var initialKeys = _.initial(split);                                                                     // 141
+      var lastKey = _.last(split);                                                                            // 142
+                                                                                                              // 143
+      initialKeys.reduce(function(subObj, k, i) {                                                             // 144
+        var nextKey = split[i + 1];                                                                           // 145
+                                                                                                              // 146
+        if (isNumStr(nextKey)) {                                                                              // 147
+          if (subObj[k] == null) subObj[k] = [];                                                              // 148
+          if (subObj[k].length == parseInt(nextKey)) subObj[k].push(null);                                    // 149
+        }                                                                                                     // 150
+                                                                                                              // 151
+        else if (subObj[k] == null || !isHash(subObj[k])) {                                                   // 152
+          subObj[k] = {};                                                                                     // 153
+        }                                                                                                     // 154
+                                                                                                              // 155
+        return subObj[k];                                                                                     // 156
+      }, obj);                                                                                                // 157
+                                                                                                              // 158
+      getDeep(obj, initialKeys)[lastKey] = v;                                                                 // 159
+      return v;                                                                                               // 160
+    };                                                                                                        // 161
+                                                                                                              // 162
+    var unsetDeep = function(obj, deepKey) {                                                                  // 163
+      var split = deepKey.split('.');                                                                         // 164
+      var initialKeys = _.initial(split);                                                                     // 165
+      var lastKey = _.last(split);                                                                            // 166
+      return delete getDeep(obj, initialKeys)[lastKey];                                                       // 167
     };                                                                                                        // 168
                                                                                                               // 169
-    var isHash = function(obj) {                                                                              // 170
-      return _.isObject(obj) &&                                                                               // 171
-             Object.getPrototypeOf(obj) === Object.prototype;                                                 // 172
-    };                                                                                                        // 173
-                                                                                                              // 174
-    var isNumStr = function(str) {                                                                            // 175
-      return str.match(/^\d+$/);                                                                              // 176
-    };                                                                                                        // 177
-                                                                                                              // 178
-    return diffArray;                                                                                         // 179
-}]);                                                                                                          // 180
-                                                                                                              // 181
+    var getDeep = function(obj, keys) {                                                                       // 170
+      return keys.reduce(function(subObj, k) {                                                                // 171
+        return subObj[k];                                                                                     // 172
+      }, obj);                                                                                                // 173
+    };                                                                                                        // 174
+                                                                                                              // 175
+    var isHash = function(obj) {                                                                              // 176
+      return _.isObject(obj) &&                                                                               // 177
+             Object.getPrototypeOf(obj) === Object.prototype;                                                 // 178
+    };                                                                                                        // 179
+                                                                                                              // 180
+    var isNumStr = function(str) {                                                                            // 181
+      return str.match(/^\d+$/);                                                                              // 182
+    };                                                                                                        // 183
+                                                                                                              // 184
+    return diffArray;                                                                                         // 185
+}]);                                                                                                          // 186
+                                                                                                              // 187
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }).call(this);
@@ -2530,58 +2201,57 @@ var angularMeteor = angular.module('angular-meteor', [                          
   'angular-meteor.session',                                                                                   // 8
   'angular-meteor.reactive-scope',                                                                            // 9
   'angular-meteor.utils',                                                                                     // 10
-  'angular-meteor.camera',                                                                                    // 11
-  'hashKeyCopier'                                                                                             // 12
-]);                                                                                                           // 13
-                                                                                                              // 14
-angularMeteor.run(['$compile', '$document', '$rootScope', function ($compile, $document, $rootScope) {        // 15
-    // Recompile after iron:router builds page                                                                // 16
-    if(Package['iron:router']) {                                                                              // 17
-      var appLoaded = false;                                                                                  // 18
-      Package['iron:router'].Router.onAfterAction(function(req, res, next) {                                  // 19
-        Tracker.afterFlush(function() {                                                                       // 20
-          if (!appLoaded) {                                                                                   // 21
-            $compile($document)($rootScope);                                                                  // 22
-            if (!$rootScope.$$phase) $rootScope.$apply();                                                     // 23
-            appLoaded = true;                                                                                 // 24
-          }                                                                                                   // 25
-        })                                                                                                    // 26
-      });                                                                                                     // 27
-    }                                                                                                         // 28
-  }]);                                                                                                        // 29
-                                                                                                              // 30
-// Putting all services under $meteor service for syntactic sugar                                             // 31
+  'angular-meteor.camera'                                                                                     // 11
+]);                                                                                                           // 12
+                                                                                                              // 13
+angularMeteor.run(['$compile', '$document', '$rootScope', function ($compile, $document, $rootScope) {        // 14
+    // Recompile after iron:router builds page                                                                // 15
+    if(Package['iron:router']) {                                                                              // 16
+      var appLoaded = false;                                                                                  // 17
+      Package['iron:router'].Router.onAfterAction(function(req, res, next) {                                  // 18
+        Tracker.afterFlush(function() {                                                                       // 19
+          if (!appLoaded) {                                                                                   // 20
+            $compile($document)($rootScope);                                                                  // 21
+            if (!$rootScope.$$phase) $rootScope.$apply();                                                     // 22
+            appLoaded = true;                                                                                 // 23
+          }                                                                                                   // 24
+        })                                                                                                    // 25
+      });                                                                                                     // 26
+    }                                                                                                         // 27
+  }]);                                                                                                        // 28
+                                                                                                              // 29
+// Putting all services under $meteor service for syntactic sugar                                             // 30
 angularMeteor.service('$meteor', ['$meteorCollection', '$meteorCollectionFS', '$meteorObject', '$meteorMethods', '$meteorSession', '$meteorSubscribe', '$meteorUtils', '$meteorCamera', '$meteorUser',
   function($meteorCollection, $meteorCollectionFS, $meteorObject, $meteorMethods, $meteorSession, $meteorSubscribe, $meteorUtils, $meteorCamera, $meteorUser){
-    this.collection = $meteorCollection;                                                                      // 34
-    this.collectionFS = $meteorCollectionFS;                                                                  // 35
-    this.object = $meteorObject;                                                                              // 36
-    this.subscribe = $meteorSubscribe.subscribe;                                                              // 37
-    this.call = $meteorMethods.call;                                                                          // 38
-    this.loginWithPassword = $meteorUser.loginWithPassword;                                                   // 39
-    this.requireUser = $meteorUser.requireUser;                                                               // 40
-    this.requireValidUser = $meteorUser.requireValidUser;                                                     // 41
-    this.waitForUser = $meteorUser.waitForUser;                                                               // 42
-    this.createUser = $meteorUser.createUser;                                                                 // 43
-    this.changePassword = $meteorUser.changePassword;                                                         // 44
-    this.forgotPassword = $meteorUser.forgotPassword;                                                         // 45
-    this.resetPassword = $meteorUser.resetPassword;                                                           // 46
-    this.verifyEmail = $meteorUser.verifyEmail;                                                               // 47
-    this.loginWithMeteorDeveloperAccount = $meteorUser.loginWithMeteorDeveloperAccount;                       // 48
-    this.loginWithFacebook = $meteorUser.loginWithFacebook;                                                   // 49
-    this.loginWithGithub = $meteorUser.loginWithGithub;                                                       // 50
-    this.loginWithGoogle = $meteorUser.loginWithGoogle;                                                       // 51
-    this.loginWithMeetup = $meteorUser.loginWithMeetup;                                                       // 52
-    this.loginWithTwitter = $meteorUser.loginWithTwitter;                                                     // 53
-    this.loginWithWeibo = $meteorUser.loginWithWeibo;                                                         // 54
-    this.logout = $meteorUser.logout;                                                                         // 55
-    this.logoutOtherClients = $meteorUser.logoutOtherClients;                                                 // 56
-    this.session = $meteorSession;                                                                            // 57
-    this.autorun = $meteorUtils.autorun;                                                                      // 58
-    this.getCollectionByName = $meteorUtils.getCollectionByName;                                              // 59
-    this.getPicture = $meteorCamera.getPicture;                                                               // 60
-}]);                                                                                                          // 61
-                                                                                                              // 62
+    this.collection = $meteorCollection;                                                                      // 33
+    this.collectionFS = $meteorCollectionFS;                                                                  // 34
+    this.object = $meteorObject;                                                                              // 35
+    this.subscribe = $meteorSubscribe.subscribe;                                                              // 36
+    this.call = $meteorMethods.call;                                                                          // 37
+    this.loginWithPassword = $meteorUser.loginWithPassword;                                                   // 38
+    this.requireUser = $meteorUser.requireUser;                                                               // 39
+    this.requireValidUser = $meteorUser.requireValidUser;                                                     // 40
+    this.waitForUser = $meteorUser.waitForUser;                                                               // 41
+    this.createUser = $meteorUser.createUser;                                                                 // 42
+    this.changePassword = $meteorUser.changePassword;                                                         // 43
+    this.forgotPassword = $meteorUser.forgotPassword;                                                         // 44
+    this.resetPassword = $meteorUser.resetPassword;                                                           // 45
+    this.verifyEmail = $meteorUser.verifyEmail;                                                               // 46
+    this.loginWithMeteorDeveloperAccount = $meteorUser.loginWithMeteorDeveloperAccount;                       // 47
+    this.loginWithFacebook = $meteorUser.loginWithFacebook;                                                   // 48
+    this.loginWithGithub = $meteorUser.loginWithGithub;                                                       // 49
+    this.loginWithGoogle = $meteorUser.loginWithGoogle;                                                       // 50
+    this.loginWithMeetup = $meteorUser.loginWithMeetup;                                                       // 51
+    this.loginWithTwitter = $meteorUser.loginWithTwitter;                                                     // 52
+    this.loginWithWeibo = $meteorUser.loginWithWeibo;                                                         // 53
+    this.logout = $meteorUser.logout;                                                                         // 54
+    this.logoutOtherClients = $meteorUser.logoutOtherClients;                                                 // 55
+    this.session = $meteorSession;                                                                            // 56
+    this.autorun = $meteorUtils.autorun;                                                                      // 57
+    this.getCollectionByName = $meteorUtils.getCollectionByName;                                              // 58
+    this.getPicture = $meteorCamera.getPicture;                                                               // 59
+}]);                                                                                                          // 60
+                                                                                                              // 61
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }).call(this);

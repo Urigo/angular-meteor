@@ -1,4 +1,5 @@
-# Run this script from .dist folder
+# Run this script from dist folder
+DIST_FOLDER=$(pwd) # The folder that the bundled files will be copy in to
 cd ../..
 PARENT=$(pwd) # The parent folder of the project
 BUNDLER_TEMP="tmp-angular-meteor-bundler"
@@ -34,9 +35,11 @@ cat lai_collection-extensions.js >> angular-meteor.bundle.js
 cat dburles_mongo-collection-instances.js >> angular-meteor.bundle.js
 cat angular.js >> angular-meteor.bundle.js
 
+# Minify
 curl -X POST -s --data-urlencode 'input@angular-meteor.bundle.js' http://javascript-minifier.com/raw > angular-meteor.bundle.min.js
 
-cp angular-meteor.bundle.* ../angular-meteor/.dist
+# Copy the bundled files to the project
+cp angular-meteor.bundle.* $DIST_FOLDER
 
 rm -rf "$PARENT/$BUNDLER_TEMP" # Cleanup the temp folder
 rm -rf $OUTPUT_PATH # Cleanup the output folder
