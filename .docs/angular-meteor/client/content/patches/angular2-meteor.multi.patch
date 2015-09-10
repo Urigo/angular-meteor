@@ -10553,10 +10553,10 @@ index 15b84df..1f2781f 100644
 2.3.5
 
 
-From 34cc6a1094d90aa475b7437d5abead454fb0551e Mon Sep 17 00:00:00 2001
+From 0331360500208a271196b5edc4faebe50b2b7b08 Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Thu, 10 Sep 2015 16:12:31 +0900
-Subject: [PATCH 92/96] Step 9.11: add isPublic to party-details template form
+Subject: [PATCH 92/96] Step 9.10: add isPublic to party-details template form
 
 ---
  client/party-details/party-details.ng.html | 3 +++
@@ -10580,10 +10580,10 @@ index ae6bfb6..1b4092a 100644
 2.3.5
 
 
-From 73b1ba9ec3d8f3c760a7aeaabf5d53ee0891b661 Mon Sep 17 00:00:00 2001
+From b1898012a7d15ca1ab1afe6a08df218480c52658 Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Thu, 10 Sep 2015 16:13:32 +0900
-Subject: [PATCH 93/96] Step 9.12: Publish email and profile fields of users
+Subject: [PATCH 93/96] Step 9.11: Publish email and profile fields of users
 
 ---
  server/users.ts | 3 +++
@@ -10604,10 +10604,10 @@ index 0000000..f5becea
 2.3.5
 
 
-From 0938a56e89dd2b69a052bfb1027c050c1287d1cf Mon Sep 17 00:00:00 2001
+From 02d974fbdd9fdd3e43d5c6b4df5cba564eb454e6 Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Thu, 10 Sep 2015 16:14:51 +0900
-Subject: [PATCH 94/96] Step 9.13: subscribe to users in PartyDetails
+Subject: [PATCH 94/96] Step 9.12: subscribe to users in PartyDetails
 
 ---
  client/party-details/party-details.ts | 2 ++
@@ -10630,10 +10630,10 @@ index d3801d9..e31fa5e 100644
 2.3.5
 
 
-From 9ad0a22fbf28e3b04080669439e06e6e5375590a Mon Sep 17 00:00:00 2001
+From 28e45df45d0ff3d9ed037a2312bfb41856a9dd67 Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Thu, 10 Sep 2015 16:16:00 +0900
-Subject: [PATCH 95/96] Step 9.14: load NgFor into PartyDetails
+Subject: [PATCH 95/96] Step 9.13: load NgFor into PartyDetails
 
 ---
  client/party-details/party-details.ts | 4 ++--
@@ -10662,10 +10662,10 @@ index e31fa5e..5dd6a0c 100644
 2.3.5
 
 
-From 70e916d9ee78729bdc5092928fae4921c0c5dbbf Mon Sep 17 00:00:00 2001
+From c0ab9f329799d982dd35669595887820fbbdaf73 Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Thu, 10 Sep 2015 16:17:19 +0900
-Subject: [PATCH 96/96] Step 9.15: load list of users in party-details
+Subject: [PATCH 96/96] Step 9.14: load list of users in party-details
  template, wrap in a div
 
 ---
