@@ -26,12 +26,12 @@ Package.registerBuildPlugin({
   }
 });
 
-Package.on_use(function (api) {
-  api.versionsFrom('METEOR@0.9.0.1');
+Package.onUse(function (api) {
+  api.versionsFrom('METEOR@1.2-rc.17');
+  api.use('minimongo@1.0.9-rc.0');
+  api.use('observe-sequence@1.0.7-rc.0');
 
   api.use('angular:angular@1.4.4', 'client');
-  api.use('check', 'client');
-  api.use('minimongo');
   // Since commit b3096e93661bc79bab73a63bae0e14643030a9a3, MongoId and
   // diff-sequence are separate packages from minimongo.
   // We need to use it for idParse, idStringify and diffQueryOrderedChanges
@@ -66,7 +66,7 @@ Package.on_use(function (api) {
 });
 
 Package.onTest(function(api) {
-  api.use('sanjo:jasmine@0.13.6');
+  api.use('sanjo:jasmine@0.18.0');
   api.use('angular');
   api.use('angular:angular-mocks@1.4.4');
   api.use('mdg:camera@1.1.5');
