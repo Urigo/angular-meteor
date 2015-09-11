@@ -17,13 +17,16 @@ Package.registerBuildPlugin({
 });
 
 Package.registerBuildPlugin({
-  name: 'ngAnnotate',
-  sources: [
-    'plugin/annotate.js'
+  name: 'compileNGScript',
+  use: [
+    'caching-compiler'
   ],
   npmDependencies: {
     'ng-annotate': '0.15.4'
-  }
+  },
+  sources: [
+    'plugin/ng-script-compiler.js'
+  ]
 });
 
 Package.onUse(function (api) {
@@ -43,6 +46,7 @@ Package.onUse(function (api) {
     api.use('mongo-id');
   }
   api.use('dburles:mongo-collection-instances@0.3.4', 'client'); // For getCollectionByName
+  api.use('isobuild:compiler-plugin@1.0.0'); // Used for compilers
 
   // Files to load in Client only.
   api.add_files([
