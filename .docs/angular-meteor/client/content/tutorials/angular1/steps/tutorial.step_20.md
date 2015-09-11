@@ -54,19 +54,16 @@ Now, lets add a dependency in the `app.js` file:
 
 {{> DiffBox tutorialName="angular-meteor" step="20.3"}}
 
-Now, before adding the actual file upload to the client, let's add a `$mdDialog` that will show the file upload form, in the `partiesList.js` file:
+Now, let's add the usage of ng-gile-upload to the add new party modal, note that we use ng-controller there and we create the controller in the next step.
 
 {{> DiffBox tutorialName="angular-meteor" step="20.4"}}
 
-Also, don't forget the $mdDialog dependency on the scope!
-
-{{> DiffBox tutorialName="angular-meteor" step="20.4.1"}}
-
-And add a button that calls our `openAddImageModal` function inside the create new party form:
+And now we will create the `AddPhotoCtrl` controller.
+We also implement the image uploading function - `addImages` in the `nfg-change` attribute on html file we just created.
 
 {{> DiffBox tutorialName="angular-meteor" step="20.5"}}
 
-Now let's create the view in a new file - `client/parties/views/add-photo-modal.ng.html` for this dialog and add the `ng-file-upload` directive:
+And we need to make sure we also have the Images collection on the scope in order to save the photos:
 
 {{> DiffBox tutorialName="angular-meteor" step="20.6"}}
 
@@ -74,15 +71,8 @@ Also, in order to make the "drop-zone" look like a dropable area in my page, I a
 
 {{> DiffBox tutorialName="angular-meteor" step="20.7"}}
 
-Now lets implement the image uploading function - `addImages` in the `nfg-change` attribute on html file we just created.
-For this function we create the controller (`addPhotoCtrl.js`) and use the following :
-
-{{> DiffBox tutorialName="angular-meteor" step="20.8"}}
-
 And that's it! now we can upload images by using drag and drop!
-
-Just note that the Application UI still don't show it :)
-
+Just note that the Application UI still don't show the new images we upload... we will add this later.
 Now let's add some more cool features, And make the image uploaded image visible!
 
 ### Image Crop
@@ -95,49 +85,50 @@ meteor add alexk111:ng-img-crop
 ```
 And add a dependency in our module:
 
-{{> DiffBox tutorialName="angular-meteor" step="20.9"}}
+{{> DiffBox tutorialName="angular-meteor" step="20.8"}}
 
 We want to perform the crop on the client, before saving it to the CollectionFS, so lets get the uploaded image, and instead of saving it to the server - we will get the Data Url of it, and use it in the ngImgCrop:
 
-{{> DiffBox tutorialName="angular-meteor" step="20.10"}}
+{{> DiffBox tutorialName="angular-meteor" step="20.9"}}
 
 We took the file object and used HTML5 FileReader API to read the file from the user on the client side, without uploading it to the server.
 Then we saved the DataURI of the image into a $scope variable.
 Next, we will need to use this DataURI with the ngImgCrop directive as follow:
 
-{{> DiffBox tutorialName="angular-meteor" step="20.11"}}
+{{> DiffBox tutorialName="angular-meteor" step="20.10"}}
 
 Moreover we add `ng-hide` to the upload control, in order to hide it, after the user picks an image to crop.
 
-{{> DiffBox tutorialName="angular-meteor" step="20.12"}}
+{{> DiffBox tutorialName="angular-meteor" step="20.11"}}
 
 And add some CSS to make it look better:
 
-{{> DiffBox tutorialName="angular-meteor" step="20.12.1"}}
+{{> DiffBox tutorialName="angular-meteor" step="20.12"}}
 
-And let's change the logic of the "Done" button to call a function that will actually save the edited image:
+And let's add a button that saves the new cropped image.
 
 {{> DiffBox tutorialName="angular-meteor" step="20.13"}}
 
 In order to save, we need to implement `saveCroppedImage()` function. We will use the same `$meteorCollectionFS` API we used before, just use the `save` function.
 CollectionFS have the ability to receive DataURI and save it, just like a File object. So the implementation looks like that:
 
+So we take the image object and save it to the CollectionFS and put it in an array we called `newPartyImages` that will hold the images for the new party.
+Then we reset the form by updating the value of `imgSrc` variable (we used it in the `ng-hide`).
+
 {{> DiffBox tutorialName="angular-meteor" step="20.14"}}
 
-We will save the image call and just close the modal and notifies the main page about the action the user made.
+And we need to add the `newPartyImages` array in the controller:
 
-And because we can share the information from the recently closed dialog with the main view (the add party form), we will implement a logic that will save the list of images we want to attach to out party by adding it to the Promise of the `show` function and :
-
-{{> DiffBox tutorialName="angular-meteor" step="20.16"}}
+{{> DiffBox tutorialName="angular-meteor" step="20.15"}}
 
 And we are almost done, Now we have the ability to crop images and then save them using CollectionFS.
-We are just missing the display :).
+We are just missing the display!
 
 ### Display Uploaded Images
 
 Let's add a simple gallery to list the images in the new party form:
 
-{{> DiffBox tutorialName="angular-meteor" step="20.17"}}
+{{> DiffBox tutorialName="angular-meteor" step="20.16"}}
 
 Cool! We can now add all the images we want to attach to the new party!
 
@@ -155,20 +146,24 @@ meteor add vitalets:angular-xeditable
 ```
 And add a dependency in our module:
 
-{{> DiffBox tutorialName="angular-meteor" step="20.18"}}
+{{> DiffBox tutorialName="angular-meteor" step="20.17"}}
 
 Now, let's use angular-xeditable and add usage under the image:
 
-{{> DiffBox tutorialName="angular-meteor" step="20.19"}}
+{{> DiffBox tutorialName="angular-meteor" step="20.18"}}
 
 And, of course, implement `updateDescription` function on the parties list scope:
 
-{{> DiffBox tutorialName="angular-meteor" step="20.20"}}
+{{> DiffBox tutorialName="angular-meteor" step="20.19"}}
 
 Due to problem with open issue in [angular-xeditable](https://github.com/vitalets/angular-xeditable/issues/6) 
-We need to change the form on `parties.list.ng.html` into div to make the inline editing of `angular-xeditable` work.
+We need to change the form on `add-new-party-modal.ng.html` into div to make the inline editing of `angular-xeditable` work.
 
-{{> DiffBox tutorialName="angular-meteor" step="20.20.1"}}
+{{> DiffBox tutorialName="angular-meteor" step="20.20"}}
+
+And to keep the layout of form with angular-material, we can add these CSS rules to the div:
+
+{{> DiffBox tutorialName="angular-meteor" step="20.21"}}
 
 That's it! Now we have a photo gallery with description for each image!
 
@@ -183,11 +178,11 @@ meteor add netanelgilad:angular-sortable-view
 ```
 And then add a dependency for the module:
 
-{{> DiffBox tutorialName="angular-meteor" step="20.21"}}
+{{> DiffBox tutorialName="angular-meteor" step="20.22"}}
 
 The basics of angular-sortable-view is to add the `sv-?` attributes to our page, just like the examples in the `angular-sortable-view` repository, So let's do that:
 
-{{> DiffBox tutorialName="angular-meteor" step="20.22"}}
+{{> DiffBox tutorialName="angular-meteor" step="20.23"}}
 
 I also added `draggable="false"` to prevent the browser's default behavior for dragging images.
 
@@ -205,19 +200,21 @@ Now we just need to add the logic that connect those images with the party we ar
 ### Link Image To Object
 
 So as you know, we have all the images stored in `newPartyImages` array, Let's implement the `createParty` function, and save a link to the images with the right order:
+
 {{> DiffBox tutorialName="angular-meteor" step="20.26"}}
-
-And now update the button to call this function:
-
-{{> DiffBox tutorialName="angular-meteor" step="20.27"}}
 
 And finally, to display the main image in the parties list, add the following code:
 
-{{> DiffBox tutorialName="angular-meteor" step="20.28"}}
+{{> DiffBox tutorialName="angular-meteor" step="20.27"}}
 
 And implement the `getMainImage` function:
 
+{{> DiffBox tutorialName="angular-meteor" step="20.28"}}
+
+With some CSS rules to make it look better:
+
 {{> DiffBox tutorialName="angular-meteor" step="20.29"}}
+
 
 And that's it!
 
