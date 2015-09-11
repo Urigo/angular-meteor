@@ -92,7 +92,7 @@ So now let's re-structure our app (to see the end result and all the steps in gi
 
 {{> DiffBox tutorialName="angular-meteor" step="7.3"}}
 
-6. Create a file called `routes.js` under the `client` folder. Cut the `.config` code that defines the routes and paste it inside that file.
+6. Create a file called `routes.js` under the `client` folder. Cut the `.config` code that defines the routes and paste it inside that file. Remember to edit the paths to your views by adding 'client/' to each templateUrl.
 
 {{> DiffBox tutorialName="angular-meteor" step="7.4"}}
 
