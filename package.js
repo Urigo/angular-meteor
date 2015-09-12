@@ -11,11 +11,11 @@ Package.onUse(function(api) {
 
   api.use([
     'check@1.0.5',
-    'barbatus:angular2@0.4.1'
+    'barbatus:angular2@0.4.2'
   ]);
 
   api.imply([
-    'barbatus:angular2@0.4.1'
+    'barbatus:angular2@0.4.2'
   ]);
 
   api.addFiles([
