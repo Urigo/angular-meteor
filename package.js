@@ -11,22 +11,25 @@ Package.onUse(function(api) {
 
   api.use([
     'check@1.0.5',
-    'barbatus:angular2@0.4.0'
+    'barbatus:angular2@0.4.1'
   ]);
 
   api.imply([
-    'barbatus:angular2@0.4.0'
+    'barbatus:angular2@0.4.1'
   ]);
 
   api.addFiles([
-    'system_config.js',
+    'system_config.js'
+  ]);
+
+  api.addFiles([
     'main.jsx',
     'modules/meteor_component.jsx',
     'modules/cursor_handle.jsx',
     'modules/mongo_cursor_observer.jsx',
     'modules/mongo_cursor_differ.jsx',
     'modules/bootstrap.jsx'
-  ]);
+  ], 'client');
 });
 
 Package.onTest(function(api) {

@@ -1,6 +1,8 @@
 import {Component, View} from 'angular2/angular2';
 import {FORM_DIRECTIVES, Control, ControlGroup, Validators} from 'angular2/angular2';
 
+import {Parties} from 'collections/parties';
+
 @Component({
   selector: 'party-form'
 })

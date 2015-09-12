@@ -5,7 +5,7 @@ import {EventEmitter} from 'angular2/angular2';
 import {CursorHandle} from './cursor_handle';
 
 export class AddChange {
-  constructor(index: number, item: any) {
+  constructor(index: Number, item: any) {
     check(index, Number);
 
     this.index = index;
@@ -14,7 +14,7 @@ export class AddChange {
 }
 
 export class MoveChange {
-  constructor(fromIndex: number, toIndex: number) {
+  constructor(fromIndex: Number, toIndex: Number) {
     check(fromIndex, Number);
     check(toIndex, Number);
 
@@ -24,7 +24,7 @@ export class MoveChange {
 }
 
 export class RemoveChange {
-  constructor(index: number) {
+  constructor(index: Number) {
     check(index, Number);
 
     this.index = index;

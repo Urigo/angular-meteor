@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "bluebird": {
+      "version": "2.9.27"
+    }
+  }
+}

@@ -4,6 +4,8 @@ import {ROUTER_DIRECTIVES, RouteParams} from 'angular2/router';
 
 import {MeteorComponent} from 'angular2-meteor';
 
+import {Parties} from 'collections/parties';
+
 @Component({
   selector: 'party-details',
   viewInjector: [RouteParams]

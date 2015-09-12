@@ -6,6 +6,8 @@ import {PartyForm} from 'client/party-form/party-form';
 
 import {MeteorComponent} from 'angular2-meteor';
 
+import {Parties} from 'collections/parties';
+
 @Component({
   selector: 'parties'
 })

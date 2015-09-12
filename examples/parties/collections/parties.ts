@@ -1,4 +1,4 @@
-Parties = new Mongo.Collection('parties');
+export var Parties = new Mongo.Collection('parties');
 
 Parties.allow({
   insert: function(userId, party) {
