@@ -1,7 +1,7 @@
 # Meteor-Angular2
 Angular2 + Meteor integration.
 
-##### Angular2 version: alpha-36.
+##### Angular2 version: alpha-37.
 
 ## Quick start
 
