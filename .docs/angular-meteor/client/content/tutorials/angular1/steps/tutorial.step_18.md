@@ -18,13 +18,29 @@ Next, we want to inject the angular-material module into our Angular application
 
 {{> DiffBox tutorialName="angular-meteor" step="18.1"}}
 
-That's it, now we can use angular-material in our application layout. 
+Don't forget to remove the `ui.bootstrap` dependency! It's not longer needed!
 
-Angular-material uses declarative syntax, i.e. directives, to utilize Material Design elements in HTML documents. 
+That's it, now we can use angular-material in our application layout.
+
+Our application will have some errors now because we used to use services like `$modal` that belong to bootstrap's core.
+
+So first, let's fix is by using `$mdDialog` instead of `$modal`:
+
+{{> DiffBox tutorialName="angular-meteor" step="18.2"}}
+
+And update the usage in the `AddNewPartyCtrl`:
+
+{{> DiffBox tutorialName="angular-meteor" step="18.3"}}
+
+Great! So now in order get rid of all the bootstrap change we make, we need to remove some and modify some CSS and LESS.
+I did that [in this commit](https://github.com/Urigo/meteor-angular-socially/commit/e9b9b795c5c250659b044da0a5134ac32aad8096), and this is not part of the tutorial because the CSS is just copy-and-paste piece of code.
+Note that most of the change in this commit includes deleting CSS rules that used to override the Bootstrap's design.
+
+Angular-material uses declarative syntax, i.e. directives, to utilize Material Design elements in HTML documents.
 
 First we want to change our `index.html` to make use of the flex grid layout provided by Material Design. So, change your `client/index.html` to look like this:
 
-{{> DiffBox tutorialName="angular-meteor" step="18.2"}}
+{{> DiffBox tutorialName="angular-meteor" step="18.4"}}
 
 You can see we use `layout="column"` in the `body` tag, which tells angular-material to lay all inner tags of `body` vertically.
 
@@ -43,10 +59,10 @@ element which is actually a separator blank element which is used to fill all th
 So, now we have a link to Parties to the left, a span to fill all space, and a login button.
 Element layout flex grid is very simple and intuitive in angular-material and you can read all about it [here](https://material.angularjs.org/#/layout/grid).
 
-Next, we need to convert our parties list and party detail views to angular-material. 
+Next, we need to convert our parties list and party detail views to angular-material.
 First, replace the code in your `client/views/parties-list.ng.html` with this code:
 
-{{> DiffBox tutorialName="angular-meteor" step="18.3"}}
+{{> DiffBox tutorialName="angular-meteor" step="18.5"}}
 
 What did we do:
 
@@ -54,16 +70,17 @@ What did we do:
 * Replaced all the buttons with `md-button` tags
 * Wrapped form inputs into `md-input-container` tags which enable the Material Design style labels for inputs
 * Added material design Icons
+* Use `md-card-content` to display each item in the list
 
 ## Material Design Icons
 
-One new thing we also have to add is usage of Material Design icon set. Google provides free icons for Material Design. You can install it by typing: 
+One new thing we also have to add is usage of Material Design icon set. Google provides free icons for Material Design. You can install it by typing:
 
     meteor add planettraining:material-design-icons
 
 We have to define the `$mdIconProvider` in the `client/lib/app.js`. Insert these lines after the `angular.module` declaration:
 
-{{> DiffBox tutorialName="angular-meteor" step="18.4"}}
+{{> DiffBox tutorialName="angular-meteor" step="18.6"}}
 
 You don't have to define all these icon sets.
 You just need to define those you need to use.
@@ -72,11 +89,15 @@ You can see in the view code above that to use icons you write:
 
     <md-icon md-svg-icon="content:ic_clear_24px"></md-icon>
 
-in the `md-svg-icon` attribute you list `<iconset>:<icon_name>` in our case `content:ic_clear_24px`. 
+in the `md-svg-icon` attribute you list `<iconset>:<icon_name>` in our case `content:ic_clear_24px`.
 
 Now, replace the code in the `client/view/party-details.ng.html` with the following code:
 
-{{> DiffBox tutorialName="angular-meteor" step="18.5"}}
+{{> DiffBox tutorialName="angular-meteor" step="18.7"}}
+
+And now replace the HTML in the new party modal to use angular-material:
+
+{{> DiffBox tutorialName="angular-meteor" step="18.8"}}
 
 Here, as you can see a specific type of button used by angular-material. We have a link button:
 
@@ -86,19 +107,19 @@ Angular-Material makes a regular button that points to a link using `ng-href`.
 
 ## Custom Angular forms and Accounts-UI Material Design
 
-Next, we need to make our users management pages use Material Design. 
+Next, we need to make our users management pages use Material Design.
 
 To do that we are going to define our accounts routes manually and use [angular-meteor's auth methods](/api/auth) in our code.
 
 First we want to remove the Meteor's login button from the toolbar and insert our custom buttons. So, open `client/index.html` and remove the following code from the toolbar:
 
     <div class="navbar-right navbar-text">
-      <blaze-template name="loginButtons"></blaze-template>
+        <meteor-include src="loginButtons"></meteor-include>
     </div>
 
 and replace it with:
 
-{{> DiffBox tutorialName="angular-meteor" step="18.6"}}
+{{> DiffBox tutorialName="angular-meteor" step="18.9"}}
 
 Now show `Login` and `Sign up` buttons when the user is not logged in, and we show user name and `Logout` button when the user is logged in.
 
@@ -106,7 +127,7 @@ Having created these buttons we need to assign them corresponding routes as refe
 
 Open the `client/routes.js` and insert following routes below the `$stateProvider` line, and above the existing routes:
 
-{{> DiffBox tutorialName="angular-meteor" step="18.7"}}
+{{> DiffBox tutorialName="angular-meteor" step="18.10"}}
 
 * controllerAs -
 First thing of note here is that we're using `controllerAs` parameter in the route definition. This gives an alias to `$scope` and many other benefits. For detailed information, read [this article](http://toddmotto.com/digging-into-angulars-controller-as-syntax/). You will see later how we use it.
@@ -119,7 +140,7 @@ So, let's go ahead and create them. Create a subfolder `users` in the `client/` 
 
 Create a file `client/users/controllers/login.js`. Paste the following code:
 
-{{> DiffBox tutorialName="angular-meteor" step="18.8"}}
+{{> DiffBox tutorialName="angular-meteor" step="18.11"}}
 
 Now, instead of using $scope, we're using *controller as* syntax, so we declare a variable `vm` and assign `this` to it.
 From now on, each `$scope.` variable or method will be declared as `vm.` variable or method.
@@ -137,7 +158,7 @@ It returns a promise, and on success we redirect the user `parties` state, or as
 
 Now create a view file with login form in `client/users/views` folder and name it `login.ng.html`. Paste the following code:
 
-{{> DiffBox tutorialName="angular-meteor" step="18.9"}}
+{{> DiffBox tutorialName="angular-meteor" step="18.12"}}
 
 In our router file, we declared the login route controller to be `LoginCtrl` and a `controllerAs` parameter to be `lc`.
 
@@ -146,21 +167,21 @@ So to address all variables/objects/methods of our controller, we prefix them wi
 
 In our view. You can see in the view that we use `lc.error`, `lc.credentials`, and `lc.login()`.
 
-The procedure is the same for the `register` and `resetpw` routes, so now you create `client/users/controllers/register.js` and paste following code into it: 
+The procedure is the same for the `register` and `resetpw` routes, so now you create `client/users/controllers/register.js` and paste following code into it:
 
-{{> DiffBox tutorialName="angular-meteor" step="18.10"}}
-      
+{{> DiffBox tutorialName="angular-meteor" step="18.13"}}
+
 Create a file `client/users/views/register.ng.html` and paste the following code into it:
 
-{{> DiffBox tutorialName="angular-meteor" step="18.11"}}
+{{> DiffBox tutorialName="angular-meteor" step="18.14"}}
 
-Create a file `client/users/controllers/reset.js` and paste the following code into it: 
+Create a file `client/users/controllers/reset.js` and paste the following code into it:
 
-{{> DiffBox tutorialName="angular-meteor" step="18.12"}}
+{{> DiffBox tutorialName="angular-meteor" step="18.15"}}
 
 And, finally, create a corresponding view `client/users/views/reset-password.ng.html` and paste the following into it:
 
-{{> DiffBox tutorialName="angular-meteor" step="18.13"}}
+{{> DiffBox tutorialName="angular-meteor" step="18.16"}}
 
 # Summary
 
