@@ -9739,10 +9739,10 @@ index 34bb272..6f0d6d3 100644
 2.3.5
 
 
-From 4dff3e746fcd07103ff51afbdbb0a55d1c0eb698 Mon Sep 17 00:00:00 2001
+From 4c7a54c63eee7feed7cd2cf1abb4cc83fc11730b Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Thu, 27 Aug 2015 13:36:43 +0900
-Subject: [PATCH 66/96] Step 8.2: Add loginButtons template to index.html
+Subject: [PATCH 66/96] Step 8.1: Add loginButtons template to index.html
 
 ---
  client/index.html | 1 +
@@ -9765,7 +9765,7 @@ index 9956097..5f1d6b8 100644
 2.3.5
 
 
-From 1f572f45aad54dda74001d869b77601eb37abcab Mon Sep 17 00:00:00 2001
+From c7f9bc8ae30d058110de135919dabeb62c15e64d Mon Sep 17 00:00:00 2001
 From: ShMcK <me@shmck.com>
 Date: Thu, 27 Aug 2015 13:39:21 +0900
 Subject: [PATCH 67/96] Step 8.3: Create security rules for insert, update &
@@ -9803,7 +9803,7 @@ index f9329b3..80c4772 100644
 2.3.5
 
 
-From b4b7c9e12db030ac93fced47f0cb55c83c9616b8 Mon Sep 17 00:00:00 2001
+From ebd6e50bacff3a76e1b67d412b1e73797ffec94c Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Fri, 4 Sep 2015 18:15:34 +0900
 Subject: [PATCH 68/96] Step 8.4: Add owner to IParty interface
@@ -9827,7 +9827,7 @@ index 6f0d6d3..cfadbb5 100644
 2.3.5
 
 
-From a3d941488afa6636bf1ae17512f4232140582713 Mon Sep 17 00:00:00 2001
+From 1c018e0c0e391c259a7d06f05ac7a06e7f61f9d5 Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Fri, 4 Sep 2015 18:16:45 +0900
 Subject: [PATCH 69/96] Step 8.5: add owner to PartiesForm add method
@@ -9854,7 +9854,7 @@ index 4612ef2..698630f 100644
 2.3.5
 
 
-From 78da8f00f5bb3d9c6e56a34136c25707247527e9 Mon Sep 17 00:00:00 2001
+From 9d4ae65dc3c8cf2ece54a194bf248dfbeb16ee53 Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Fri, 4 Sep 2015 18:18:01 +0900
 Subject: [PATCH 70/96] Step 8.6: Add owner to PartyDetails save method
@@ -9881,7 +9881,7 @@ index e641735..90b93ba 100644
 2.3.5
 
 
-From dfbb27003691b7a6894ecc1c7114092413353e44 Mon Sep 17 00:00:00 2001
+From c9867105e9ab4384ceddc9407749fe7b7e473425 Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Fri, 4 Sep 2015 18:22:04 +0900
 Subject: [PATCH 71/96] Step 8.7: PartyService init
@@ -9907,7 +9907,7 @@ index 0000000..3a9b75f
 2.3.5
 
 
-From 5f8d3497c0cbb81727d5540c6ee219a2e53f0972 Mon Sep 17 00:00:00 2001
+From 864ae1fbe99a03f7f350a6984f740f8c0ac838a3 Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Fri, 4 Sep 2015 18:22:39 +0900
 Subject: [PATCH 72/96] Step 8.8: Add types to PartyService
@@ -9934,7 +9934,7 @@ index 3a9b75f..6743c35 100644
 2.3.5
 
 
-From 6b86d64b7f3cae0d4b95b6cd030256612350a062 Mon Sep 17 00:00:00 2001
+From 4189c0b7a1e0b0f56b831e4fadb5a808c8dac9f8 Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Fri, 4 Sep 2015 18:24:10 +0900
 Subject: [PATCH 73/96] Step 8.9: create getPartyObject in PartyService
@@ -9964,7 +9964,7 @@ index 6743c35..8852856 100644
 2.3.5
 
 
-From e03446c9ca136a4341461012a1067db385ef1acf Mon Sep 17 00:00:00 2001
+From e58287f6e96607996498e6d97962fda73348cad8 Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Fri, 4 Sep 2015 18:25:09 +0900
 Subject: [PATCH 74/96] Step 8.10: create add, update, & remove methods on
@@ -9999,7 +9999,7 @@ index 8852856..40535a3 100644
 2.3.5
 
 
-From 12917887167cfa366f93ba4329fec85a301bd668 Mon Sep 17 00:00:00 2001
+From ee7efa9453d5162d20ec023693daccf08ee1dd5d Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Tue, 8 Sep 2015 15:48:47 +0900
 Subject: [PATCH 75/96] Step 8.11: modify PartiesList to use
@@ -10049,7 +10049,7 @@ index b69936b..8c93a3e 100644
 2.3.5
 
 
-From 5b453b701181a2e95364755a460ed9bc232d4cf5 Mon Sep 17 00:00:00 2001
+From 2a07e095b32b3856915a49cad4b996da5a87ffd2 Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Tue, 8 Sep 2015 15:52:41 +0900
 Subject: [PATCH 76/96] Step 8.12: mody PartyDetails to use PartyService.update
@@ -10104,7 +10104,7 @@ index 90b93ba..77fd85d 100644
 2.3.5
 
 
-From ad6937f87e57459727fd90fb39d1c8b6d75b0fd1 Mon Sep 17 00:00:00 2001
+From c4f8f7c813a370b25c547bed92b96862dfb7f0ab Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Tue, 8 Sep 2015 15:58:43 +0900
 Subject: [PATCH 77/96] Step 8.13: modify PartiesForm to use PartyService.add
@@ -10153,7 +10153,7 @@ index 698630f..1fa8f5a 100644
 2.3.5
 
 
-From 1636ede8747adbe1245b34c94ca990ba260a019c Mon Sep 17 00:00:00 2001
+From f4e56a021c5cdff2bde8439e5f592944fed6cb31 Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Sun, 13 Sep 2015 08:57:50 +0900
 Subject: [PATCH 78/96] Step 8.14: add accounts-facebook, accounts-twitter
@@ -10177,7 +10177,7 @@ index db55abd..41f772f 100644
 2.3.5
 
 
-From 8dd9e2fa82597e969d0b360bea37ec176cf92fb6 Mon Sep 17 00:00:00 2001
+From 1c0b1430c7ad600ae1b97a0189eff6f46bc223dd Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Sun, 13 Sep 2015 08:58:09 +0900
 Subject: [PATCH 79/96] update versions: accounts packages
@@ -10256,7 +10256,7 @@ index 76c60ea..635df16 100644
 2.3.5
 
 
-From ce531e620c95b94d3fcaed89573872590f7bf5f7 Mon Sep 17 00:00:00 2001
+From 14fc8588338e5479e1230df05fdde2c72531d6d7 Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Tue, 8 Sep 2015 16:02:09 +0900
 Subject: [PATCH 80/96] Step 8.15: Add canActivate to PartyDetails to verify
@@ -10284,7 +10284,7 @@ index 77fd85d..788119f 100644
 2.3.5
 
 
-From 6a7fa7a47336c6548021010cb97013c8f8975582 Mon Sep 17 00:00:00 2001
+From 5cf99270c37d2da6374225a017c241766db071b6 Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Tue, 8 Sep 2015 16:05:07 +0900
 Subject: [PATCH 81/96] Step 8.16: User login alert during canActivate failure
@@ -10312,7 +10312,7 @@ index 788119f..d6f2511 100644
 2.3.5
 
 
-From 96ad1e8f034d478f8ebaebe762d39ac9d91f8b36 Mon Sep 17 00:00:00 2001
+From d7b5172329aca416ec03fec9606b538c13e41418 Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Thu, 10 Sep 2015 16:02:42 +0900
 Subject: [PATCH 82/96] Step 9.1: remove autopublish package
@@ -10337,7 +10337,7 @@ index 41f772f..260111e 100644
 2.3.5
 
 
-From b279232b8db4863569c6b9624c6f2381bcb6b097 Mon Sep 17 00:00:00 2001
+From 3b834d809daa0d24f7721e43a723dda821a42035 Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Fri, 11 Sep 2015 08:14:04 +0900
 Subject: [PATCH 83/96] update package versions after autopublish removed
@@ -10362,7 +10362,7 @@ index 635df16..860b234 100644
 2.3.5
 
 
-From 8d3293fac4d634f3ed38e3dd555e09e4e3342683 Mon Sep 17 00:00:00 2001
+From 7418bd7b32317bd18f4edfbb6d9c196c9a09f949 Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Thu, 10 Sep 2015 16:03:54 +0900
 Subject: [PATCH 84/96] Step 9.2: Publish parties collection
@@ -10386,7 +10386,7 @@ index 0000000..6c7413f
 2.3.5
 
 
-From 300871cdda97d333f08ad00a49530cf4ec79d5ca Mon Sep 17 00:00:00 2001
+From 9fc2e4b9bbca99f7b6d8b9d9972dca9107151a5a Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Thu, 10 Sep 2015 16:04:53 +0900
 Subject: [PATCH 85/96] Step 9.3: subscribe to parties colleciton in
@@ -10412,7 +10412,7 @@ index 8c93a3e..6faed45 100644
 2.3.5
 
 
-From 68ee56c40039b94854ad4de22e89bac60a6a7218 Mon Sep 17 00:00:00 2001
+From 6a4274a8ee8b0b33c26beb888266160b083c2229 Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Thu, 10 Sep 2015 16:06:14 +0900
 Subject: [PATCH 86/96] Step 9.4: publish only parties that are public or owned
@@ -10446,7 +10446,7 @@ index 6c7413f..63ea457 100644
 2.3.5
 
 
-From bc7de421bf428105c900168aad25c1f23eee1d86 Mon Sep 17 00:00:00 2001
+From 17528fe7f1d70399b37d1324bd948f29d375a9c7 Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Thu, 10 Sep 2015 16:07:25 +0900
 Subject: [PATCH 87/96] Step 9.5: load initial parties with owner and isPublic
@@ -10495,7 +10495,7 @@ index 9dd05e7..554afb8 100644
 2.3.5
 
 
-From 349011cce963057557d4d51959713c4aa1bdaa1e Mon Sep 17 00:00:00 2001
+From 2791ca59c9e7e350fe67f4a0bdcf9c8e40d15f44 Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Thu, 10 Sep 2015 16:09:10 +0900
 Subject: [PATCH 88/96] Step 9.6: Add isPublic value to IParty interface
@@ -10519,7 +10519,7 @@ index cfadbb5..9337c78 100644
 2.3.5
 
 
-From 58d673de897116ee35c101959f3b0f6c7d077e96 Mon Sep 17 00:00:00 2001
+From fc6dd224637467cd69f464e8be88548a3e5169ee Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Thu, 10 Sep 2015 16:09:53 +0900
 Subject: [PATCH 89/96] Step 9.7: Subscribe to parties in PartyDetails
@@ -10544,7 +10544,7 @@ index d6f2511..d3801d9 100644
 2.3.5
 
 
-From cfd6dbaa486ada4be35d22fcb761aed4ea819160 Mon Sep 17 00:00:00 2001
+From 323027a2e03a6f01db29ab20100bc5edf597d8bc Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Thu, 10 Sep 2015 16:10:44 +0900
 Subject: [PATCH 90/96] Step 9.8: add isPublic to PartiesForm form
@@ -10571,7 +10571,7 @@ index 1fa8f5a..aa065a1 100644
 2.3.5
 
 
-From 89772185a89230022d8728655b6f414bc0441f40 Mon Sep 17 00:00:00 2001
+From d19f347bdb1272b7cd71f9d63344f3fe355aa9a7 Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Thu, 10 Sep 2015 16:11:24 +0900
 Subject: [PATCH 91/96] Step 9.9: add isPublic to parties-form template
@@ -10597,7 +10597,7 @@ index 15b84df..1f2781f 100644
 2.3.5
 
 
-From 9444b6d54b8730f56502851106c6223c4db3839f Mon Sep 17 00:00:00 2001
+From eff86fa8e249d809051554aaa53ee6eaaf015625 Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Thu, 10 Sep 2015 16:12:31 +0900
 Subject: [PATCH 92/96] Step 9.10: add isPublic to party-details template form
@@ -10624,7 +10624,7 @@ index ae6bfb6..1b4092a 100644
 2.3.5
 
 
-From b192076f40c320c7fc85d279cacf044ea94556e3 Mon Sep 17 00:00:00 2001
+From baa01d44a623ef90457ec789801a1675fe5e6879 Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Thu, 10 Sep 2015 16:13:32 +0900
 Subject: [PATCH 93/96] Step 9.11: Publish email and profile fields of users
@@ -10648,7 +10648,7 @@ index 0000000..f5becea
 2.3.5
 
 
-From c4865e8a0423ced51103a4948d9d10cc4e8d957c Mon Sep 17 00:00:00 2001
+From 01088648dfc744ec576beb63ff16eec60382050c Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Thu, 10 Sep 2015 16:14:51 +0900
 Subject: [PATCH 94/96] Step 9.12: subscribe to users in PartyDetails
@@ -10674,7 +10674,7 @@ index d3801d9..e31fa5e 100644
 2.3.5
 
 
-From b46826e5a26996d0588a5504d811735f726f286f Mon Sep 17 00:00:00 2001
+From b5541ff7c5299690a2112950a32bf84c789b13b2 Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Thu, 10 Sep 2015 16:16:00 +0900
 Subject: [PATCH 95/96] Step 9.13: load NgFor into PartyDetails
@@ -10706,7 +10706,7 @@ index e31fa5e..5dd6a0c 100644
 2.3.5
 
 
-From ab3f79399348a9e707277c129aac3c1da0b9bb09 Mon Sep 17 00:00:00 2001
+From c9f4e4370e7ef7c1d3668061b4cfd45d250823dc Mon Sep 17 00:00:00 2001
 From: ShMcK <shawn.j.mckay@gmail.com>
 Date: Sun, 13 Sep 2015 08:28:36 +0900
 Subject: [PATCH 96/96] Step 9.14: add ngFor to party-details template
