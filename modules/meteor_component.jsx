@@ -1,11 +1,11 @@
 'use strict';
 
-import {Component, IterableDiffers} from 'angular2/angular2';
+import {Component, LifecycleEvent} from 'angular2/angular2';
 
 import {MongoCursorDifferFactory} from './mongo_cursor_differ';
 
 @Component({
-  bindings: [IterableDiffers.extend([new MongoCursorDifferFactory()])]
+  lifecycle: [LifecycleEvent.onDestroy]
 })
 export class MeteorComponent {
   _hAutoruns: Array<Tracker.Computation>;
