@@ -1,6 +1,10 @@
 {{#template name="tutorial.step_09.md"}}
 {{> downloadPreviousStep stepName="step_08"}}
 
+
+Publish and subscribe to data is very different from other methods, such as using REST APIs. So don't miss the articles in the section below for deeper understanding how they work. 
+
+
 Right now our app has no privacy, every user can see all the parties on the screen.
 
 So let's add a `public` flag on parties - if a party is public we will let anyone see it, but if a party is private, only the owner can see it.
@@ -252,7 +256,7 @@ It is very important to understand Meteor's Publish-Subscribe mechanism so you d
 Meteor accumulates all the data from the different subscription of a collection in the client, so adding a different subscription in a different
 view won't delete the data that is already in the client.
 
-Please read more [here](http://www.meteorpedia.com/read/Understanding_Meteor_Publish_and_Subscribe).
+More information about publications and subscription in [this blog article] (https://medium.com/angular-meteor/coll-pub-sub-with-angular-meteor-cb13fe48f570) and this  [meteorpedia article](http://www.meteorpedia.com/read/Understanding_Meteor_Publish_and_Subscribe).
 
 # Summary
 
@@ -260,8 +264,6 @@ We've added the support of privacy to our parties app.
 
 We also learned how to use the `Meteor.publish` command to control permissions and the data sent to the client
 and how to subscribe to it with the $meteor.collection publish function.
-
-If you are not quite sure what is the difference between collection and publication - you may want to check this article on the [blog] (https://medium.com/angular-meteor/coll-pub-sub-with-angular-meteor-cb13fe48f570) 
 
 In the next step we will learn how to filter the users list in the client side with AngularJS filters and create a custom filter for our own needs.
 
