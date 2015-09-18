@@ -6,27 +6,27 @@ Package.describe({
 });
 
 Package.registerBuildPlugin({
-  name: "compileAngularTemplates",
+  name: "compileNGTemplate",
   sources: [
-    "plugin/handler.js"
+    "plugin/ng-template-compiler.js"
   ],
-  use: ['html-tools@1.0.4'],
+  use: [
+    'html-tools@1.0.4'
+  ],
   npmDependencies : {
+    'cheerio': '0.19.0',
     'html-minifier' : '0.6.9'
   }
 });
 
 Package.registerBuildPlugin({
   name: 'compileNGScript',
-  use: [
-    'caching-compiler'
+  sources: [
+    'plugin/ng-script-compiler.js'
   ],
   npmDependencies: {
     'ng-annotate': '0.15.4'
-  },
-  sources: [
-    'plugin/ng-script-compiler.js'
-  ]
+  }
 });
 
 Package.onUse(function (api) {
