@@ -103,7 +103,7 @@ Let's add the same to the `party-details.ng.html` page:
 
 Now let's run the app.
 
-Log in with 2 different users in 2 different browsers.
+Log in with 2 different users in 2 different browsers (you can use 2 different browsers, such as Chrome and Firefox, or use the anonymous mode on the same browser - e.g. incognito mode on Chrome, private browsing in Firefox or inPrivate mode in Edge).
 
 In each of the users create a few public parties and a few private ones.
 
@@ -256,7 +256,7 @@ It is very important to understand Meteor's Publish-Subscribe mechanism so you d
 Meteor accumulates all the data from the different subscription of a collection in the client, so adding a different subscription in a different
 view won't delete the data that is already in the client.
 
-More information about publications and subscription in [this blog article] (https://medium.com/angular-meteor/coll-pub-sub-with-angular-meteor-cb13fe48f570) and this  [meteorpedia article](http://www.meteorpedia.com/read/Understanding_Meteor_Publish_and_Subscribe).
+More information about publications and subscription in [this blog article](https://medium.com/angular-meteor/coll-pub-sub-with-angular-meteor-cb13fe48f570) and this  [meteorpedia article](http://www.meteorpedia.com/read/Understanding_Meteor_Publish_and_Subscribe).
 
 # Summary
 
