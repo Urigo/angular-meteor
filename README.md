@@ -80,7 +80,7 @@ At this moment, you are ready to create awesome apps powered by Angular2 and Met
 There is few details left though.
 For more information, please look at Parties demo app.
 
-#TypeScript Compilation
+###TypeScript Compilation
 This package has built-in TypeScript compiler plugin, that is not only compile ````ts```` files, but also provides (by default) diagnostics of that compilation to the terminal (e.g. syntactics, semantics errors). So, if you have code like this:
 ````ts
     var parties = new Mongo.Collection('parties');
