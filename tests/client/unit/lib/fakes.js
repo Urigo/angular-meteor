@@ -14,19 +14,19 @@ MongoCollectionObserverFake = function() {
   this.clear = function() {
     this._generators.length = 0;
   };
-}
+};
 
 ObserverFactoryFake = function(observer) {
   this._observer = observer;
 
   this.create = function(cursor) {
     return this._observer;
-  }
-}
+  };
+};
 
 ObserveHandleFake = function() {
   this.stop = function() {};
-}
+};
 
 MongoCollectionCursorFake = function() {
   this._generators = [];
@@ -40,4 +40,4 @@ MongoCollectionCursorFake = function() {
   this.fetch = function() {};
 
   MongoCollectionCursorFake.prototype = Object.create(Mongo.Cursor.prototype);
-}
+};
