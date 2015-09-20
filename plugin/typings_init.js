@@ -10,12 +10,6 @@ if(canProceed() && !fs.existsSync(typingsDir)) {
 
   mkdirp.sync(typingsDir);
   fs.writeFileSync(typingsFile, getReference());
-
-  console.log('\n-> Typings has been added.')
-  console.log('-> please start your app again.\n');
-  // We need to kill the current running process to
-  // have all typings in place on the next run.
-  process.exit(0);
 }
 
 // check whether is this `meteor test-packages` or not
