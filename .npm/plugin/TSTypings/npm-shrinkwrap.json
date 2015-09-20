@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "mkdirp": {
+      "version": "0.5.0",
+      "dependencies": {
+        "minimist": {
+          "version": "0.0.8"
+        }
+      }
+    }
+  }
+}

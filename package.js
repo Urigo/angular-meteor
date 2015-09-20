@@ -6,6 +6,16 @@ Package.describe({
   documentation: 'README.md'
 });
 
+Package.registerBuildPlugin({
+  name: 'TSTypings',
+  sources: [
+    'plugin/typings_init.js'
+  ],
+  npmDependencies: {
+    'mkdirp': '0.5.0'
+  }
+});
+
 Package.onUse(function(api) {
   api.versionsFrom('1.1.0.3');
 
