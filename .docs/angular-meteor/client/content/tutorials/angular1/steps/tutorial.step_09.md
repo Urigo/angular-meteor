@@ -60,7 +60,7 @@ It is the same as:
     $meteor.subscribe('parties');
     $scope.parties = $meteor.collection(Parties);
 
-You can also resolve a subscription in state's resolve function:
+If you prefer to add your subscriptions in your routing.js, you can move them over like this:
 
      .state('parties', {
         url: '/parties',
