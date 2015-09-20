@@ -77,7 +77,7 @@ Add Angular2 template file ````app.ng.html```` with the following content:
 
 At this moment, you are ready to create awesome apps powered by Angular2 and Meteor!
 
-There is few details left though.
+There is some details left though.
 For more information, please look at Parties demo app.
 
 ###TypeScript Compilation
@@ -87,10 +87,11 @@ This package has built-in TypeScript compiler plugin, that is not only compile `
 ````
 It will likely curse that ````Mongo```` is undefined. Luckily, packages adds Angular2 and Meteor declaration file, which means you'll need only to reference it in your TypeScript files to fix errors. 
 
-When you first run your app, Angular2-Meteor will create a declarations (or typings) file ````typings/angular2-meteor.d.ts```` in your app folder . Add reference to it (relatively to top folder) in every TypeScript file you have created as follows:
+When you first run your app, Angular2-Meteor will create a declarations (or typings) file ````typings/angular2-meteor.d.ts```` in your app folder . Add reference to it in every TypeScript file you have created as follows:
 ````ts
 /// <reference path="../typings/angular2-meteor.d.ts" />
 ````
+Make sure that paths are relative to app top folder.
 
 Note: if you just loaded your app from a repository into empty folder and is running it first time, you'll need to re-start it in order to have all package declaration files in place.
 
