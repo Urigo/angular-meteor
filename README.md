@@ -11,7 +11,7 @@ Angular2 + Meteor integration.
 ### Import Angular2 into your app:
 Package supports TypeScript and Babel (.jsx extension) as languages for development with Angular2.
 
-Angular2 template files go in  ````ng.html```` extension files, same as in [angular-meteor](https://github.com/Urigo/angular-meteor) package.
+Angular2 template files should go in  ````ng.html```` extension files, same as in [angular-meteor](https://github.com/Urigo/angular-meteor) package.
 
 ES6 modules are supported via SystemJS module loader library.
 
