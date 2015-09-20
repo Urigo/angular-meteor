@@ -38,7 +38,7 @@ Add ````index.html```` file with the folowing content:
 
 ### Start using Meteor in your Angular2 app:
 This packages comes with some modules that makes it easy to use Meteor in Angular2.
-To load that modules, you will need to bootsrap your app with the help of the package's bootstraper.
+To load that modules, you will need to bootsrap your app with the help of this package's bootstraper.
 
 To do that, import ````bootstrap```` from Meteor-Angular2 package and remove previous one imported from ````angular2/angular2````:
 
@@ -87,7 +87,7 @@ This package has built-in TypeScript compiler plugin, that is not only compile `
 ````
 It will likely curse that ````Mongo```` is undefined. Luckily, packages adds Angular2 and Meteor declaration file, which means you'll need only to reference it in your TypeScript files to fix errors. 
 
-When you first run your app, Angular2-Meteor will create a declarations (or typings) file ````typings/angular2-meteor.d.ts```` in your app folder . Add reference to it (relatively to top folder) in every TypeScript file you have created, for example:
+When you first run your app, Angular2-Meteor will create a declarations (or typings) file ````typings/angular2-meteor.d.ts```` in your app folder . Add reference to it (relatively to top folder) in every TypeScript file you have created as follows:
 ````ts
 /// <reference path="../typings/angular2-meteor.d.ts" />
 ````
