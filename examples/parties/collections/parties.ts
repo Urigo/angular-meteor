@@ -1,4 +1,6 @@
-export var Parties = new Mongo.Collection('parties');
+/// <reference path="../typings/all.d.ts" />
+
+export var Parties = new Mongo.Collection<Party>('parties');
 
 Parties.allow({
   insert: function(userId, party) {

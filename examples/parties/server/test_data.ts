@@ -1,3 +1,5 @@
+/// <reference path="../typings/all.d.ts" />
+
 import {Parties} from 'collections/parties';
 
 export function loadTestData() {

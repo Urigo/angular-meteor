@@ -1,3 +1,5 @@
+/// <reference path="../../typings/all.d.ts" />
+
 import {Component, View, NgModel, NgFor} from 'angular2/angular2';
 
 import {ROUTER_DIRECTIVES} from 'angular2/router';
@@ -16,8 +18,8 @@ import {Parties} from 'collections/parties';
   directives: [NgFor, ROUTER_DIRECTIVES, NgModel, PartyForm]
 })
 export class PartiesCmp extends MeteorComponent {
-  parties: IParty[];
-  location: ReactiveVar;
+  parties: Mongo.Cursor<Party>;
+  location: ReactiveVar<String>;
 
   constructor() {
     super();
@@ -25,7 +27,8 @@ export class PartiesCmp extends MeteorComponent {
     this.location = new ReactiveVar('Palo Alto');
 
     this.autorun(() => {
-      this.parties = Parties.find({location: this.location.get()});
+      var selector = { location: this.location.get() };
+      this.parties = Parties.find(selector);
     }, true);
   }
 

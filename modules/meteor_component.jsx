@@ -24,7 +24,13 @@ export class MeteorComponent {
   }
 
   subscribe() {
-    var args = Array.prototype.slice.call(arguments);
+    var args = _.toArray(arguments);
+    if (args.length) {
+      var last = _.last(args);
+      if (_.isFunction(last)) {
+        args[args.length - 1] = zone.bind(last);
+      }
+    }
     var hSubscribe = Meteor.subscribe.apply(this, args);
     this._hSubscribes.push(hSubscribe);
   }

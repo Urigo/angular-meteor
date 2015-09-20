@@ -1,5 +1,7 @@
+/// <reference path="../../typings/all.d.ts" />
+
 import {Component, View} from 'angular2/angular2';
-import {FORM_DIRECTIVES, Control, ControlGroup, Validators} from 'angular2/angular2';
+import {FORM_DIRECTIVES, Control, FormBuilder, ControlGroup, Validators} from 'angular2/angular2';
 
 import {Parties} from 'collections/parties';
 
@@ -8,23 +10,24 @@ import {Parties} from 'collections/parties';
 })
 @View({
   templateUrl: 'client/party-form/party-form.ng.html',
-  directives: [FORM_DIRECTIVES]
+  directives: [FORM_DIRECTIVES],
 })
 export class PartyForm {
   partyForm: ControlGroup;
 
   constructor() {
-    this.partyForm = new ControlGroup({
-      name: new Control('', Validators.required),
-      description: new Control('', Validators.required),
-      location: new Control('', Validators.required)
+    var fb = new FormBuilder()
+    this.partyForm = fb.group({
+      name: ['', Validators.required],
+      description: ['', Validators.required],
+      location: ['', Validators.required]
     });
   }
 
   add(event) {
     event.preventDefault();
 
-    var party: IParty = this.partyForm.value;
+    var party: Party = this.partyForm.value;
 
     if (this.partyForm.valid) {
       Parties.insert({
@@ -33,9 +36,9 @@ export class PartyForm {
         location: party.location
       });
 
-      this.partyForm.controls.name.updateValue('');
-      this.partyForm.controls.description.updateValue('');
-      this.partyForm.controls.location.updateValue('');
+      this.partyForm.controls['name'].updateValue('');
+      this.partyForm.controls['description'].updateValue('');
+      this.partyForm.controls['location'].updateValue('');
     }
   }
 }

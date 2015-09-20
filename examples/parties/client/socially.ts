@@ -1,3 +1,5 @@
+/// <reference path="../typings/all.d.ts" />
+
 import {Component, View, bind} from 'angular2/angular2';
 
 import {Router, ROUTER_BINDINGS, RouterOutlet, ROUTER_DIRECTIVES, RouteConfig} from 'angular2/router';

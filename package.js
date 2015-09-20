@@ -11,11 +11,12 @@ Package.onUse(function(api) {
 
   api.use([
     'check@1.0.5',
-    'barbatus:angular2@0.4.3'
+    'barbatus:angular2@0.4.4',
+    'underscore'
   ]);
 
   api.imply([
-    'barbatus:angular2@0.4.3'
+    'barbatus:angular2@0.4.4'
   ]);
 
   api.addFiles([
@@ -30,6 +31,11 @@ Package.onUse(function(api) {
     'modules/mongo_cursor_differ.jsx',
     'modules/bootstrap.jsx'
   ], 'client');
+
+  // Adds TS typings.
+  api.addFiles([
+    'typings/angular2-meteor.d.ts'
+  ], 'server');
 });
 
 Package.onTest(function(api) {
