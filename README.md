@@ -9,11 +9,11 @@ Angular2 + Meteor integration.
     meteor add urigo:angular2-meteor
 
 ### Import Angular2 into your app:
-Package supports TypeScript and Babel (.jsx files) as languages for development with Angular2.
+Package supports TypeScript and Babel (.jsx extension) as languages for development with Angular2.
 
-Angular2 template files are supported through ````ng.html```` extension, same as in [angular-meteor](https://github.com/Urigo/angular-meteor) package.
+Angular2 template files go in  ````ng.html```` extension files, same as in [angular-meteor](https://github.com/Urigo/angular-meteor) package.
 
-ES6 modules are supported through SystemJS module loader library.
+ES6 modules are supported via SystemJS module loader library.
 
 To start, create ````app.ts```` file, import ````Component```` and ````View```` and then bootstrap the app:
 ````ts
@@ -37,7 +37,8 @@ Add ````index.html```` file with the folowing content:
 ````
 
 ### Start using Meteor in your Angular2 app:
-We need to load bindings that will help us to use Meteor smoothly.
+This packages comes with some modules that makes it easy to use Meteor in Angular2.
+To load that modules, you will need to bootsrap your app with the help of the package's bootstraper.
 
 To do that, import ````bootstrap```` from Meteor-Angular2 package and remove previous one imported from ````angular2/angular2````:
 
@@ -49,9 +50,9 @@ To do that, import ````bootstrap```` from Meteor-Angular2 package and remove pre
     bootstrap(Socially);
 ````
 
-Since that, you can use Meteor collections in the same way as you would do in a regular Meteor app with Blaze:
+After that, you can use Meteor collections in the same way as you would do in a regular Meteor app with Blaze.
 
-In ````client/app.ts````:
+For example, change ````client/app.ts```` to:
 ````ts
     ....
     
@@ -74,15 +75,27 @@ Add Angular2 template file ````app.ng.html```` with the following content:
     </div>
 ````
 
+At this moment, you are ready to create awesome apps powered by Angular2 and Meteor!
 
-**At that moment, you are ready to go!**
+There is few details left though.
+For more information, please look at Parties demo app.
 
-To unleash full power of what mixing Angular2 and Meteor gives us,
-please refer to Parties app example.
+#TypeScript Compilation
+This package has built-in TypeScript compiler plugin, that is not only compile ````ts```` files, but also provides (by default) diagnostics of that compilation to the terminal (e.g. syntactics, semantics errors). So, if you have code like this:
+````ts
+    var parties = new Mongo.Collection('parties');
+````
+It will likely curse that ````Mongo```` is undefined. Luckily, packages adds Angular2 and Meteor declaration file, which means you'll need only to reference it in your TypeScript files to fix errors. 
 
-## TODO:
-- Update Angular2 tutorial at http://angular-meteor.com/tutorials/angular2;
-- Add TypeScript's Meteor typings;
-- Integrate other Angular2 modules which can be used with Meteor in a more convenient way (e.g. ````ControlGroup````);
-- Increase test coverage.
+When you first run your app, Angular2-Meteor will create a declarations (or typings) file ````typings/angular2-meteor.d.ts```` in your app folder . Add reference to it (relatively to top folder) in every TypeScript file you have created, for example:
+````ts
+/// <reference path="../typings/angular2-meteor.d.ts" />
+````
+
+Note: if you just loaded your app from a repository into empty folder and is running it first time, you'll need to re-start it in order to have all package declaration files in place.
+
+
+
+
+
 
