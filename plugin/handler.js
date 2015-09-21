@@ -14,7 +14,8 @@ Plugin.registerSourceHandler('ng.html', {
 
   // Build the templateCache prefix using the package name
   // In case the template is not from a package but the user's app there will be no prefix - client/views/my-template.ng.html
-  // In case the template came from a package the prefix will be - my-username_my-package_client/views/my-template.ng.html
+  // In case the template came from a local package the prefix will be - local-package-name_client/views/my-template.ng.html
+  // In case the template came from a published package the prefix will be - developer-name_package-name_client/views/my-template.ng.html
   var packagePrefix = compileStep.packageName;
   packagePrefix = packagePrefix ? (packagePrefix.replace(/:/g, '_') + '_') : '';
 
