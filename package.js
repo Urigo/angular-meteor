@@ -30,7 +30,7 @@ Package.registerBuildPlugin({
 });
 
 Package.onUse(function (api) {
-  api.versionsFrom('METEOR@1.2-rc.17');
+  api.versionsFrom('METEOR@1.2.0.1');
   api.use('underscore@1.0.4-rc.0');
   api.use('tracker@1.0.8-rc.0');
   api.use('session@1.1.1-rc.0');
