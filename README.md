@@ -74,7 +74,7 @@ Now you can start using your own copy of the `angular-meteor` project from `myPr
 
 ### Running tests
 
-First make sure velocity cli is installed
+First make sure `velocity-cli` is installed
 ```
 sudo npm install velocity-cli -g
 ```
@@ -119,9 +119,13 @@ angular
 
 ### Templating
 
-You need to write your Angular template markup in `.ng.html` files, since Meteor won't look at those files as Spacebars templates. Tying HTML and `.ng.html` files together isn't very difficult, we can simply use Angular's `ng-include`.
+Before writing any `angular` templates, make sure to remove `blaze-html-templates` first, so there won't be any conflicts with the templates engines:
 
-Please note that the names of the templates to Angular will be their URL as Meteor sees it when minifying the '.ng.html' files. **Hence every template URL is relative to the root of the Meteor project, and contains no leading forward slash.** This is important to note when working with `ng-include` to include templates.
+```
+blaze-html-templates
+```
+
+Please note that the names of the templates to Angular will be their URL as Meteor sees it when minifying the `html` files. **Hence every template URL is relative to the root of the Meteor project, and contains no leading forward slash.** This is important to note when working with `ng-include` to include templates.
 
 `client/index.html`:
 
@@ -131,12 +135,12 @@ Please note that the names of the templates to Angular will be their URL as Mete
 </head>
 
 <body ng-app="myModule">
-    <ng-include src="'client/views/user.ng.html'"></ng-include>
-    <ng-include src="'client/views/settings.ng.html'"></ng-include>
+    <ng-include src="'client/views/user.html'"></ng-include>
+    <ng-include src="'client/views/settings.html'"></ng-include>
 </body>
 ```
 
-`client/views/user.ng.html`:
+`client/views/user.html`:
 
 ```html
 <div>
