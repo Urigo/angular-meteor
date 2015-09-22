@@ -9,3 +9,4 @@ insecure
 anti:fake
 reactive-var
 urigo:angular2-meteor
+blaze-html-templates
