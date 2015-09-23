@@ -12,7 +12,7 @@ import {Parties} from 'collections/parties';
   selector: 'party-details'
 })
 @View({
-  templateUrl: 'client/party-details/party-details.ng.html',
+  templateUrl: 'client/party-details/party-details.html',
   directives: [ROUTER_DIRECTIVES]
 })
 export class PartyDetailsCmp extends MeteorComponent {
