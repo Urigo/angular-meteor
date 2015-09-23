@@ -11,8 +11,6 @@ Angular2 + Meteor integration.
 ### Import Angular2 into your app:
 Package supports TypeScript and Babel (.jsx file extension) as languages for development with Angular2.
 
-Angular2 template files should go in  ````ng.html```` extension files, same as in [angular-meteor](https://github.com/Urigo/angular-meteor) package.
-
 ES6 modules are supported via SystemJS module loader library.
 
 To start, create ````app.ts```` file, import ````Component```` and ````View```` and then bootstrap the app:
@@ -28,12 +26,6 @@ To start, create ````app.ts```` file, import ````Component```` and ````View```` 
     class Socially {}
     
     bootstrap(Socially);
-````
-Add ````index.html```` file with the folowing content:
-````html
-    <body>
-        <script>System.import('client/app');</script>
-    </body>
 ````
 
 ### Start using Meteor in your Angular2 app:
@@ -57,7 +49,7 @@ For example, change ````client/app.ts```` to:
     ....
     
     @View({
-      templateUrl: 'client/app.ng.html'
+      templateUrl: 'client/app.html'
     })
     class Socially {
         constructor() {
@@ -68,7 +60,7 @@ For example, change ````client/app.ts```` to:
     ....
 ````
 
-Add Angular2 template file ````app.ng.html```` with the following content:
+Add Angular2 template file ````app.html```` with the following content:
 ````html
     <div *ng-for="#party of parties">
       <p>Name: {{party.name}}</p>
