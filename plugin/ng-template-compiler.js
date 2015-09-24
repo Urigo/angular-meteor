@@ -3,38 +3,22 @@ var htmlMinifier = Npm.require('html-minifier');
 var uglify = Npm.require('uglify-js');
 
 var processFiles = function(files) {
-  files.forEach(function(file) {
-    if (file.getBasename() == 'index.html')
-      processIndex(file);
-    else
-      processTemplate(file);
-  });
+  files.forEach(processFile);
 };
 
 // If a body or a head tag are specified, will append each to its appropriate section,
 // If not, will append the html to the body section.
-var processIndex = function(file) {
+var processFile = function(file) {
   var $contents = $(file.getContentsAsString());
-  var $head = $contents.closest('head');
-  var $body = $contents.closest('body');
-  
-  if (!$head.length)
-    $head = $('<head>');
+  var isStatic = $contents.closest('head,body').length;
+  var isTemplate = $contents.closest(':not(head,body)').length;
 
-  if (!$body.length)
-    $body = $('<body>').append($contents.filter(':not(head)'));
-
-  console.log($head.html());
-
-  file.addHtml({
-    data: minifyHtml($.html($head)),
-    section: 'head'
-  });
-
-  file.addHtml({
-    data: minifyHtml($.html($body)),
-    section: 'body'
-  });
+  if (isTemplate && isStatic)
+    throw Error(file.getBasename() + ' can\'t contain <head> or <body> tags with other tags in top level of template');
+  if (isTemplate)
+    return processTemplate(file);
+  if (isStatic)
+    return processStatic(file);
 };
 
 var processTemplate = function(file) {
@@ -59,6 +43,24 @@ var processTemplate = function(file) {
     data: minifyJs(templateScript),
     path: file.getPathInPackage() + '.js'
   });
+};
+
+var processStatic = function(file) {
+  var $contents = $(file.getContentsAsString());
+  var $head = $contents.closest('head');
+  var $body = $contents.closest('body');
+
+  if ($head.length)
+    file.addHtml({
+      data: minifyHtml($head.html()),
+      section: 'head'
+    });
+
+  if ($body.length)
+    file.addHtml({
+      data: minifyHtml($body.html()),
+      section: 'body'
+    });
 };
 
 var templateScriptTemplate = function() {
