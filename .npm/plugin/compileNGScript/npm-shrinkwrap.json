@@ -16,7 +16,7 @@
           "version": "0.6.1",
           "dependencies": {
             "wordwrap": {
-              "version": "0.0.2"
+              "version": "0.0.3"
             },
             "minimist": {
               "version": "0.0.10"
@@ -41,7 +41,7 @@
           "version": "0.1.43",
           "dependencies": {
             "amdefine": {
-              "version": "0.1.0"
+              "version": "1.0.0"
             }
           }
         },
