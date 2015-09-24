@@ -15,7 +15,8 @@ Package.registerBuildPlugin({
   ],
   npmDependencies : {
     'cheerio': '0.19.0',
-    'html-minifier' : '0.6.9'
+    'html-minifier' : '0.6.9',
+    'uglify-js': '2.4.24'
   }
 });
 
