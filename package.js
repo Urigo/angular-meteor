@@ -32,14 +32,14 @@ Package.registerBuildPlugin({
 
 Package.onUse(function (api) {
   api.versionsFrom('METEOR@1.2.0.1');
-  api.use('underscore@1.0.4-rc.0');
-  api.use('tracker@1.0.8-rc.0');
-  api.use('session@1.1.1-rc.0');
-  api.use('mongo@1.1.1-rc.0');
-  api.use('ejson@1.0.7-rc.0');
-  api.use('check@1.0.6-rc.0');
-  api.use('minimongo@1.0.9-rc.0');
-  api.use('observe-sequence@1.0.7-rc.0');
+  api.use('underscore@1.0.4');
+  api.use('tracker@1.0.8');
+  api.use('session@1.1.1');
+  api.use('mongo@1.1.1');
+  api.use('ejson@1.0.7');
+  api.use('check@1.0.6');
+  api.use('minimongo@1.0.9');
+  api.use('observe-sequence@1.0.7');
 
   api.use('angular:angular@1.4.4', 'client');
   // Since commit b3096e93661bc79bab73a63bae0e14643030a9a3, MongoId and
@@ -77,11 +77,11 @@ Package.onUse(function (api) {
 });
 
 Package.onTest(function(api) {
-  api.use('underscore@1.0.4-rc.0');
-  api.use('tracker@1.0.8-rc.0');
-  api.use('session@1.1.1-rc.0');
-  api.use('mongo@1.1.1-rc.0');
-  api.use('sanjo:jasmine@0.18.0');
+  api.use('underscore@1.0.4');
+  api.use('tracker@1.0.8');
+  api.use('session@1.1.1');
+  api.use('mongo@1.1.1');
+  api.use('sanjo:jasmine@0.19.0');
   api.use('angular:angular-mocks@1.4.4');
   api.use('mdg:camera@1.1.5');
   api.use('angular');

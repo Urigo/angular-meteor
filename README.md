@@ -74,11 +74,6 @@ Now you can start using your own copy of the `angular-meteor` project from `myPr
 
 ### Running tests
 
-First make sure `velocity-cli` is installed
-```
-sudo npm install velocity-cli -g
-```
-
 In the command line
 ```
 . run_tests.sh
