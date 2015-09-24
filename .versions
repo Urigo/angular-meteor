@@ -1,4 +1,4 @@
-angular@1.0.0-rc.6
+angular@1.0.0-rc.7
 angular:angular@1.4.4
 angular:angular-mocks@1.4.4
 base64@1.0.3
@@ -21,7 +21,7 @@ jquery@1.11.3_2
 json@1.0.3
 lai:collection-extensions@0.1.4
 less@1.0.14
-local-test:angular@1.0.0-rc.6
+local-test:angular@1.0.0-rc.7
 logging@1.0.7
 mdg:camera@1.1.5
 meteor@1.1.6
