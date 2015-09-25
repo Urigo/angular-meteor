@@ -2,7 +2,6 @@
 var ngAnnotate = Npm.require('ng-annotate');
 
 Plugin.registerSourceHandler('ng.js', {
-  isTemplate: true,
   archMatching: 'web'
 }, function(compileStep) {
 
