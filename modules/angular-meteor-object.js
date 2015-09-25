@@ -48,8 +48,13 @@ angularMeteorObject.factory('AngularMeteorObject', [
       if (oldDoc) {
         if (custom)
           mods = { $set: custom };
-        else
+        else {
           mods = getUpdates(oldDoc, this.getRawObject());
+          // If there are no updates, there is nothing to do here, returning
+          if (_.isEmpty(mods)) {
+            return $q.when({ action: 'updated' });
+          }
+        }
 
         // NOTE: do not use #upsert() method, since it does not exist in some collections
         collection.update(this.$$id, mods, createFulfill({ action: 'updated' }));
