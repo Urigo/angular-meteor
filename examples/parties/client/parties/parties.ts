@@ -14,7 +14,7 @@ import {Parties} from 'collections/parties';
   selector: 'parties'
 })
 @View({
-  templateUrl: 'client/parties/parties.ng.html',
+  templateUrl: 'client/parties/parties.html',
   directives: [NgFor, ROUTER_DIRECTIVES, NgModel, PartyForm]
 })
 export class PartiesCmp extends MeteorComponent {

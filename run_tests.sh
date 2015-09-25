@@ -1,2 +1,2 @@
 #!/bin/sh
-VELOCITY_TEST_PACKAGES=1 meteor test-packages --driver-package velocity:html-reporter ./
+velocity test-package ./ --release velocity:METEOR@1.2-rc.15_2 --driver-package=velocity:html-reporter@0.9.0-rc.4

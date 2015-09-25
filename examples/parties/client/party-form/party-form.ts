@@ -9,7 +9,7 @@ import {Parties} from 'collections/parties';
   selector: 'party-form'
 })
 @View({
-  templateUrl: 'client/party-form/party-form.ng.html',
+  templateUrl: 'client/party-form/party-form.html',
   directives: [FORM_DIRECTIVES],
 })
 export class PartyForm {

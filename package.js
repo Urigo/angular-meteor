@@ -17,12 +17,14 @@ Package.registerBuildPlugin({
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.1.0.3');
+  api.versionsFrom('1.2.0.1');
 
   api.use([
     'check@1.0.5',
-    'barbatus:angular2@0.4.4',
-    'underscore'
+    'mongo@1.1.1-rc.0',
+    'tracker@1.0.8-rc.0',
+    'underscore@1.0.4-rc.0',
+    'barbatus:angular2@0.4.4'
   ]);
 
   api.imply([
@@ -49,9 +51,13 @@ Package.onUse(function(api) {
 });
 
 Package.onTest(function(api) {
-  api.use('tinytest');
-  api.use('sanjo:jasmine@0.18.0');
-  api.use('urigo:angular2-meteor');
+  api.use([
+    'tinytest',
+    'sanjo:jasmine@0.18.0',
+    'mongo@1.1.1-rc.0',
+    'underscore@1.0.4-rc.0',
+    'urigo:angular2-meteor'
+  ]);
 
   api.addFiles([
     'tests/client/unit/lib/fakes.js',
