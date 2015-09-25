@@ -28,7 +28,7 @@ Package.onUse(function(api) {
   ]);
 
   api.imply([
-    'barbatus:angular2@0.4.6'
+    'barbatus:angular2@0.5.0'
   ]);
 
   api.addFiles([
