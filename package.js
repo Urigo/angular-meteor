@@ -21,14 +21,14 @@ Package.onUse(function(api) {
 
   api.use([
     'check@1.0.5',
-    'mongo@1.1.1-rc.0',
-    'tracker@1.0.8-rc.0',
-    'underscore@1.0.4-rc.0',
-    'barbatus:angular2@0.4.4'
+    'mongo@1.1.1',
+    'tracker@1.0.8',
+    'underscore@1.0.4',
+    'barbatus:angular2@0.5.0'
   ]);
 
   api.imply([
-    'barbatus:angular2@0.4.4'
+    'barbatus:angular2@0.4.6'
   ]);
 
   api.addFiles([
@@ -54,8 +54,8 @@ Package.onTest(function(api) {
   api.use([
     'tinytest',
     'sanjo:jasmine@0.18.0',
-    'mongo@1.1.1-rc.0',
-    'underscore@1.0.4-rc.0',
+    'mongo@1.1.1',
+    'underscore@1.0.4',
     'urigo:angular2-meteor'
   ]);
 
