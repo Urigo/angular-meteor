@@ -10,7 +10,7 @@ And we haven't talked about real-time, in which case we would need to add socket
 
 But luckily, we use Meteor!
 
-# Reactivity in Meteor
+# Data Model and Reactivity in Meteor
 
 Meteor makes writing distributed client code as simple as talking to a local database.
 
@@ -34,23 +34,44 @@ In short, Meteor's default setup has:
 
 So first, let's define our first parties collection that will store all our parties.
 
-In a separate folder called "model", add a file called "parties.ts". Include this:
+In a separate folder called "collections", add a file called "parties.ts". Include this:
 
-{{> DiffBox tutorialName="angular2-meteor" step="3.1"}}
+{{> DiffBox tutorialName="angular2-tutorial" step="3.1"}}
 
-Because this file is located outside of a special folder name, like 'client', this collection and the actions on it will run both on the client (minimongo) and the server (Mongo), you only have to write it once, and Meteor will take care of syncing both of them.
+We've just created not only a file called "parties.ts", but also a System.js module
+called "collections/parties". This works is done by TypeScript compiler behind the scene.
 
-# Binding to Angular
+TypeScript compiler coverts `.ts` file to ES5, then register a System.js module with the same name as
+relative path of the file in the app.
 
-Now that we've created the collection, our client needs to subscribe to it's changes and bind it to our parties Angular array.
+That's why we use special word `export`. By this way, we tell System.js
+what this module export to the outside world.
 
-To bind them we will simply reference the parties in the constructor, then call fetch to retrieve them.
+Because this file is located outside of a special folder name, like "client", this collection and the actions on it will run both on the client (minimongo) and the server (Mongo).
 
-__`client/app.ts`:__
+So, at this moment we have two modules that declare two version of our parties collection:
+one — for client side and one — for server side. All synchronization between
+these two version of collections is handled by Meteor.
 
-    constructor() {
-      this.parties = Parties.find().fetch();
-    }
+Last thing is, again, to add the declaration file reference to this file.
+
+    /// <reference path="../typings/angular2-meteor.d.ts" />
+
+# Simple binding to Angular
+
+Now that we've created the collection, our client needs to subscribe to it's changes and bind it to our `this.parties` array.
+Angular2's `ng-for` directive works by default with pure arrays, hence, we'll need to get an array of documents out of our Mongo collection.
+Since Mongo collections are full Mongo collections even on the client side (thanks to Meteor), we can query documents with help of `find` or `findOne` API methods.
+
+Thus, we have at least one way to load our data model. Lets query all parties using `Parties.find()` and call fetch to retrieve them.
+
+But first, lets import `Parties` collection:
+
+{{> DiffBox tutorialName="angular2-tutorial" step="3.3"}}
+
+Then, change `client/app.ts` to:
+
+{{> DiffBox tutorialName="angular2-tutorial" step="3.4"}}
 
 But what happens if the parties data changes on the server-side? How can we tell parties to update itself?
 
@@ -65,6 +86,8 @@ Our `app.ts` file should now look like this:
 __`client/app.ts`:__
 
     import {Component, View, NgFor, bootstrap} from 'angular2/angular2';
+
+    import {Parties} from 'collections/parties';
 
     @Component({
       selector: 'app'
@@ -84,6 +107,67 @@ __`client/app.ts`:__
     bootstrap(Socially);
 
 Now every change what happens to the `this.parties` variable will automatically be saved to the local minimongo DB and synced to the MongoDB server DB and all the other clients in realtime!
+
+# Blaze-like binding to Angular
+
+In previous section we've loaded array of documents in the most straightforward way.
+But what if assign `Parties.find()` to `this.parties`, same way as we do in a regular Meteor app
+with Blaze, and Angular2 could understand how to handle it? That would be an ideal way to work
+with Mongo collections. `Parties.find()` returns an instance of `Mongo.Cursor`, which can provide reactively
+all documents, that have been loaded, changed or added etc, to every component.
+The only thing is how can we teach Angular2 to understand Mongo cursors?
+
+Luckily, Angular2 comes with the concept of so called differ classes - classes that are used by 
+the `ng-for` directive to provide information of what has been changed in a collection to render 
+this collection effectively. This concept is similar to the dirty checking in Angular 1.x but with some
+differences. Angular2 now estimates difference between two arrays much more effectively and
+customers can create own differs for own types. 
+
+Angular2-Meteor package implements a special differ class for Mongo cursors.
+All we need to do is to create a special binding to that class and load it into our app.
+
+Angular2-Meteor package has own bootstrap that overrides basic bootstrap and adds
+some new bindings.
+
+Lets change `bootstrap` from `angular2/angular2` to `bootstrap` from `angular2-meteor` as follows:
+
+    import {Component, View, NgFor} from 'angular2/angular2';
+
+    import {bootstrap} from 'angular2-meteor';
+
+    bootstrap(Socially);
+
+`angular2-meteor` is an alias of the System.js module that contains all componets that comes with Angular2-Meteor package.
+
+Now, change `app.ts` to:
+
+    import {Component, View, NgFor} from 'angular2/angular2';
+
+    import {bootstrap} from 'angular2-meteor';
+
+    @Component({
+      selector: 'app'
+    })
+    @View({
+      templateUrl: "client/index.ng.html",
+      directives: [NgFor]
+    })
+    class Socially {
+      constructor () {
+        this.parties = Parties.find();
+      }
+    }
+
+    bootstrap(Socially);
+
+Run your app again and you should see that it works as before.
+It loads same data as before and all changes to the `this.parties` that
+should happen reactively happen reactively. At the same time, this code
+looks much simplier as before.
+
+Lets stick to this approach from now on.
+
+# Initializing Data on Server Side
 
 But we still don't have data in that collection, so let's add some.
 Let's initialize our server with the same parties we had before.
