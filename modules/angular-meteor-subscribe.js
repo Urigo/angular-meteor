@@ -8,7 +8,6 @@ angularMeteorSubscribe.service('$meteorSubscribe', ['$q',
     this._subscribe = function(scope, deferred, args) {
       var subscription = null;
       var lastArg = args[args.length - 1];
-      var promiseFulfilled = deferred.promise.$$state.status;
 
       // User supplied onStop callback
       // save it for later use and remove
@@ -25,7 +24,7 @@ angularMeteorSubscribe.service('$meteorSubscribe', ['$q',
           deferred.resolve(subscription);
         },
         onStop: function(err) {
-          if (!promiseFulfilled) {
+          if (!deferred.promise.$$state.status) {
             if (err)
               deferred.reject(err);
             else
