@@ -7,13 +7,19 @@ var processFiles = function(files) {
     var isClient = file.getDirname().split('/')[0] == 'client';
 
     if (isClient)
-      processAppTemplate(file);
+      appTemplate.process(file);
     else
-      processRegularTemplate(file);
+      regularTemplate.process(file);
   });
+
+  appTemplate.drain();
 };
 
-var processAppTemplate = (function() {
+var appTemplate = (function() {
+  // The following variables stores data for the draining process
+  var file;
+  var ngTemplatesCache = [];
+
   var processFile = function(file) {
     var $contents = $(file.getContentsAsString());
     var isIndexTemplate = $contents.closest('head,body').length;
@@ -24,7 +30,7 @@ var processAppTemplate = (function() {
     if (isIndexTemplate)
       return processIndexTemplate(file);
     if (isAngularTemplate)
-      return processAngularTemplate(file);
+      return processNgTemplate(file);
   };
 
   var processIndexTemplate = function(file) {
@@ -45,40 +51,66 @@ var processAppTemplate = (function() {
       });
   };
 
-  var processAngularTemplate = function(file) {
+  var processNgTemplate = function() {
+    // Init variable in outer scope
+    file = arguments[0];
     // Build the templateCache prefix using the package name
     // In case the template is not from a package but the user's app there will be no prefix - client/views/my-template.ng.html
     // In case the template came from a package the prefix will be - my-app_my-package_client/views/my-template.ng.html
-    var packagePrefix = file.getPackageName();
-    packagePrefix = packagePrefix ? (packagePrefix.replace(/:/g, '_') + '_') : '';
+    var packageName = file.getPackageName() || '';
+    var packagePrefix = packageName && packageName.replace(':', '_') + '_';
 
     // Dirname returned with forward slashes which fixes back slashes issue on windows' paths,
     // see ticket: https://github.com/Urigo/angular-meteor/issues/169.
     // Using JSON.stringify to escape quote characters.
-    var templatePath = JSON.stringify(packagePrefix + file.getDirname() + '/' + file.getBasename());
-    var templateContent = JSON.stringify(minifyHtml(file.getContentsAsString()));
-
-    var templateScript = getFnBody(templateScriptTemplate)
-      .replace('_$templatePath_', templatePath)
-      .replace('_$templateContent_', templateContent);
-
-    file.addJavaScript({
-      path: file.getPathInPackage() + '.js',
-      data: minifyJs(templateScript),
-      bare: true
+    ngTemplatesCache.push({
+      __path: JSON.stringify(packagePrefix + file.getDirname() + '/' + file.getBasename()),
+      __content: JSON.stringify(minifyHtml(file.getContentsAsString()))
     });
   };
 
-  var templateScriptTemplate = function() {
-    angular.module('angular-meteor').run(['$templateCache', function($templateCache) {
-      $templateCache.put(_$templatePath_, _$templateContent_);
+  // Creates a module which stores all angular templates
+  var drainNgTemplates = function() {
+    if (!file) return;
+
+    // Splicing for next drain
+    var storeTemplates = ngTemplatesCache.splice(0).map(function(template) {
+      return generateScript(storeTemplateStatement, template);
+    }).join('');
+
+    var templatesModule = generateScript(tempaltesModuleStatement, {
+      __body: storeTemplates
+    });
+
+    file.addJavaScript({
+      path: 'templates.js',
+      data: templatesModule,
+      bare: true
+    });
+
+    // Nullify for next drain
+    file = null;
+  };
+
+  /* Evaluation functions */
+
+  var tempaltesModuleStatement = function() {
+    angular.module('angular-meteor.templates', []).run(['$templateCache', function($templateCache) {
+      __body
     }]);
   };
 
-  return processFile;
+  var storeTemplateStatement = function() {
+    $templateCache.put(__path, __content);
+  };
+
+  return {
+    process: processFile,
+    drain: drainNgTemplates
+  };
 })();
 
-var processRegularTemplate = (function() {
+var regularTemplate = (function() {
   var processFile = function(file) {
     file.addAsset({
       path: file.getPathInPackage(),
@@ -86,8 +118,18 @@ var processRegularTemplate = (function() {
     });
   };
 
-  return processFile;
+  return {
+    process: processFile
+  };
 })();
+
+var generateScript = function(fn, replacements) {
+  var script = Object.keys(replacements).reduce(function(script, match) {
+    return script.replace(new RegExp(match, 'g'), replacements[match]);
+  }, getFnBody(fn));
+
+  return minifyJs(script);
+};
 
 var getFnBody = function(fn) {
   return fn.toString().match(/^function\s\(\)\s\{((?:.|\n)*)\}$/)[1];
