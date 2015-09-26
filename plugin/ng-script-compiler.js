@@ -1,10 +1,13 @@
 var ngAnnotate = Npm.require('ng-annotate');
 
-var processFiles = function(files) {
-  files.forEach(processFile);
-};
+function NgScriptCompiler() {
+  SimpleCachingCompiler.apply(this, arguments);
+}
 
-var processFile = function(file) {
+NgScriptCompiler.prototype = Object.create(SimpleCachingCompiler.prototype);
+NgScriptCompiler.prototype.constructor = NgScriptCompiler;
+
+NgScriptCompiler.prototype.compileOneFile = function(file) {
   var annotated = ngAnnotate(file.getContentsAsString(), {
     add: true
   });
@@ -13,16 +16,18 @@ var processFile = function(file) {
     throw new Error(annotated.errors.join(': '));
   }
 
-  file.addJavaScript({
-    data: annotated.src,
+  return annotated.src;
+};
+
+NgScriptCompiler.prototype.addOneFile = function(file) {
+  return {
+    type: 'JavaScript',
     path: file.getPathInPackage()
-  });
+  };
 };
 
 Plugin.registerCompiler({
-  extensions: ['js'],
-  filenames: []
-
+  extensions: ['js']
 }, function() {
-  return { processFilesForTarget: processFiles };
+  return new NgScriptCompiler();
 });

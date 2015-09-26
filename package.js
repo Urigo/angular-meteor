@@ -23,7 +23,11 @@ Package.registerBuildPlugin({
 Package.registerBuildPlugin({
   name: 'compileNGScript',
   sources: [
+    'plugin/simple-caching-compiler.js',
     'plugin/ng-script-compiler.js'
+  ],
+  use: [
+    'caching-compiler'
   ],
   npmDependencies: {
     'ng-annotate': '0.15.4'
