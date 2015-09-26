@@ -3,34 +3,41 @@ var htmlMinifier = Npm.require('html-minifier');
 var uglify = Npm.require('uglify-js');
 
 var processFiles = function(files) {
+  var appFiles = [];
+  var otherFiles = [];
+
   files.forEach(function(file) {
     var isClient = file.getDirname().split('/')[0] == 'client';
 
     if (isClient)
-      appTemplate.process(file);
+      appFiles.push(file);
     else
-      regularTemplate.process(file);
+      otherFiles.push(file);
   });
 
-  appTemplate.drain();
+  appProcessor.process(appFiles);
+  defaultProcessor.process(otherFiles);
 };
 
-var appTemplate = (function() {
-  // The following variables stores data for the draining process
-  var file;
-  var ngTemplatesCache = [];
+var appProcessor = (function() {
+  var processFiles = function(files) {
+    var ngTemplates = [];
 
-  var processFile = function(file) {
-    var $contents = $(file.getContentsAsString());
-    var isIndexTemplate = $contents.closest('head,body').length;
-    var isAngularTemplate = $contents.closest(':not(head,body)').length;
+    files.forEach(function(file) {
+      var $contents = $(file.getContentsAsString());
+      var isIndexTemplate = $contents.closest('head,body').length;
+      var isNgTemplate = $contents.closest(':not(head,body)').length;
 
-    if (isIndexTemplate && isAngularTemplate)
-      throw Error(file.getBasename() + ' can\'t contain <head> or <body> tags with other tags in top level of template');
-    if (isIndexTemplate)
-      return processIndexTemplate(file);
-    if (isAngularTemplate)
-      return processNgTemplate(file);
+      if (isIndexTemplate && isNgTemplate)
+        throw Error(file.getBasename() + ' can\'t contain <head> or <body> tags with other tags in top level of template');
+      if (isIndexTemplate)
+        return processIndexTemplate(file);
+      if (isNgTemplate)
+        return ngTemplates.push(processNgTemplate(file));
+    });
+
+    if (ngTemplates.length)
+      drainNgTemplates(ngTemplates, files[0]);
   };
 
   var processIndexTemplate = function(file) {
@@ -63,18 +70,16 @@ var appTemplate = (function() {
     // Dirname returned with forward slashes which fixes back slashes issue on windows' paths,
     // see ticket: https://github.com/Urigo/angular-meteor/issues/169.
     // Using JSON.stringify to escape quote characters.
-    ngTemplatesCache.push({
+    return {
       __path: JSON.stringify(packagePrefix + file.getDirname() + '/' + file.getBasename()),
       __content: JSON.stringify(minifyHtml(file.getContentsAsString()))
-    });
+    };
   };
 
   // Creates a module which stores all angular templates
-  var drainNgTemplates = function() {
-    if (!file) return;
-
+  var drainNgTemplates = function(ngTemplates, file) {
     // Splicing for next drain
-    var storeTemplates = ngTemplatesCache.splice(0).map(function(template) {
+    var storeTemplates = ngTemplates.map(function(template) {
       return generateScript(storeTemplateStatement, template);
     }).join('');
 
@@ -87,9 +92,6 @@ var appTemplate = (function() {
       data: templatesModule,
       bare: true
     });
-
-    // Nullify for next drain
-    file = null;
   };
 
   /* Evaluation functions */
@@ -105,21 +107,22 @@ var appTemplate = (function() {
   };
 
   return {
-    process: processFile,
-    drain: drainNgTemplates
+    process: processFiles
   };
 })();
 
-var regularTemplate = (function() {
-  var processFile = function(file) {
-    file.addAsset({
-      path: file.getPathInPackage(),
-      data: minifyHtml(file.getContentsAsString())
+var defaultProcessor = (function() {
+  var processFiles = function(files) {
+    files.forEach(function(file) {
+      file.addAsset({
+        path: file.getPathInPackage(),
+        data: minifyHtml(file.getContentsAsString())
+      });
     });
   };
 
   return {
-    process: processFile
+    process: processFiles
   };
 })();
 
