@@ -7,13 +7,35 @@ angularMeteorSubscribe.service('$meteorSubscribe', ['$q',
 
     this._subscribe = function(scope, deferred, args) {
       var subscription = null;
+      var lastArg = args[args.length - 1];
+      var promiseFulfilled = deferred.promise.$$state.status;
+
+      // User supplied onStop callback
+      // save it for later use and remove
+      // from subscription arguments
+      if (angular.isObject(lastArg) &&
+          angular.isFunction(lastArg.onStop)) {
+        var onStop = lastArg.onStop;
+
+        args.pop();
+      }
 
       args.push({
         onReady: function() {
           deferred.resolve(subscription);
         },
-        onError: function(err) {
-          deferred.reject(err);
+        onStop: function(err) {
+          if (!promiseFulfilled) {
+            if (err)
+              deferred.reject(err);
+            else
+              deferred.reject(new Meteor.Error("Subscription Stopped",
+                "Subscription stopped by a call to stop method. Either by the client or by the server."));
+          } else if (onStop)
+            // After promise was resolved or rejected
+            // call user supplied onStop callback.
+            onStop.apply(this, Array.prototype.slice.call(arguments));
+
         }
       });
 
