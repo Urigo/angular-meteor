@@ -1,36 +1,51 @@
 Package.describe({
-  name: "angular",
-  summary: "Everything you need to use AngularJS in your Meteor app",
-  version: "1.0.0-rc.7",
-  git: "https://github.com/Urigo/angular-meteor.git"
+  name: 'angular',
+  summary: 'Everything you need to use AngularJS in your Meteor app',
+  version: '1.0.0-rc.7',
+  git: 'https://github.com/Urigo/angular-meteor.git'
 });
 
 Package.registerBuildPlugin({
-  name: "compileNGTemplate",
+  name: 'ng-template-builder',
   sources: [
-    "plugin/ng-template-compiler.js"
+    'plugin/utils.js',
+    'plugin/compilers/compiler.js',
+    'plugin/compilers/html-compiler.js',
+    'plugin/compilers/template-compiler.js',
+    'plugin/compilers/ng-template-compiler.js',
+    'plugin/registrars/ng-template-registrar.js'
   ],
   use: [
-    'html-tools@1.0.4'
+    'ecmascript@0.1.4',
+    'caching-compiler@1.0.0',
+    'caching-html-compiler@1.0.0',
+    'underscore@1.0.4'
   ],
   npmDependencies : {
     'cheerio': '0.19.0',
     'html-minifier' : '0.6.9',
-    'uglify-js': '2.4.24'
+    'uglify-js': '2.4.24',
   }
 });
 
 Package.registerBuildPlugin({
-  name: 'compileNGScript',
+  name: 'ng-script-builder',
   sources: [
-    'plugin/simple-caching-compiler.js',
-    'plugin/ng-script-compiler.js'
+    'plugin/utils.js',
+    'plugin/compilers/compiler.js',
+    'plugin/compilers/script-compiler.js',
+    'plugin/compilers/ng-script-compiler.js',
+    'plugin/registrars/ng-script-registrar.js'
   ],
   use: [
-    'caching-compiler'
+    'ecmascript@0.1.4',
+    'caching-compiler@1.0.0',
+    'underscore@1.0.4'
   ],
   npmDependencies: {
-    'ng-annotate': '0.15.4'
+    'ng-annotate': '0.15.4',
+    'html-minifier' : '0.6.9',
+    'uglify-js': '2.4.24'
   }
 });
 
