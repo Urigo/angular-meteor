@@ -3,70 +3,135 @@ var htmlMinifier = Npm.require('html-minifier');
 var uglify = Npm.require('uglify-js');
 
 var processFiles = function(files) {
-  files.forEach(processFile);
-};
+  var appFiles = [];
+  var otherFiles = [];
 
-// If a body or a head tag are specified, will append each to its appropriate section,
-// If not, will append the html to the body section.
-var processFile = function(file) {
-  var $contents = $(file.getContentsAsString());
-  var isStatic = $contents.closest('head,body').length;
-  var isTemplate = $contents.closest(':not(head,body)').length;
+  files.forEach(function(file) {
+    var isClient = file.getDirname().split('/')[0] == 'client';
 
-  if (isTemplate && isStatic)
-    throw Error(file.getBasename() + ' can\'t contain <head> or <body> tags with other tags in top level of template');
-  if (isTemplate)
-    return processTemplate(file);
-  if (isStatic)
-    return processStatic(file);
-};
-
-var processTemplate = function(file) {
-  // Build the templateCache prefix using the package name
-  // In case the template is not from a package but the user's app there will be no prefix - client/views/my-template.ng.html
-  // In case the template came from a package the prefix will be - my-app_my-package_client/views/my-template.ng.html
-  var packagePrefix = file.getPackageName();
-  packagePrefix = packagePrefix ? (packagePrefix.replace(/:/g, '_') + '_') : '';
-
-  // Since some paths use backs lashes on Windows, we need to replace them
-  // with forward slashes to be able to consistently include templates across platforms.
-  // Ticket here: https://github.com/Urigo/angular-meteor/issues/169
-  // Using JSON.stringify to escape quote characters.
-  var templatePath = JSON.stringify(packagePrefix + file.getPathInPackage().replace(/\\/g, '/'));
-  var templateContent = JSON.stringify(minifyHtml(file.getContentsAsString()));
-
-  var templateScript = getFnBody(templateScriptTemplate)
-    .replace('_$templatePath_', templatePath)
-    .replace('_$templateContent_', templateContent);
-
-  file.addJavaScript({
-    data: minifyJs(templateScript),
-    path: file.getPathInPackage() + '.js'
+    if (isClient)
+      appFiles.push(file);
+    else
+      otherFiles.push(file);
   });
+
+  appProcessor.process(appFiles);
+  defaultProcessor.process(otherFiles);
 };
 
-var processStatic = function(file) {
-  var $contents = $(file.getContentsAsString());
-  var $head = $contents.closest('head');
-  var $body = $contents.closest('body');
+var appProcessor = (function() {
+  var processFiles = function(files) {
+    var ngTemplates = [];
 
-  if ($head.length)
-    file.addHtml({
-      data: minifyHtml($head.html()),
-      section: 'head'
+    files.forEach(function(file) {
+      var $contents = $(file.getContentsAsString());
+      var isIndexTemplate = $contents.closest('head,body').length;
+      var isNgTemplate = $contents.closest(':not(head,body)').length;
+
+      if (isIndexTemplate && isNgTemplate)
+        throw Error(file.getBasename() + ' can\'t contain <head> or <body> tags with other tags in top level of template');
+      if (isIndexTemplate)
+        return processIndexTemplate(file);
+      if (isNgTemplate)
+        return ngTemplates.push(processNgTemplate(file));
     });
 
-  if ($body.length)
-    file.addHtml({
-      data: minifyHtml($body.html()),
-      section: 'body'
-    });
-};
+    if (ngTemplates.length)
+      drainNgTemplates(ngTemplates, files[0]);
+  };
 
-var templateScriptTemplate = function() {
-  angular.module('angular-meteor').run(['$templateCache', function($templateCache) {
-    $templateCache.put(_$templatePath_, _$templateContent_);
-  }]);
+  var processIndexTemplate = function(file) {
+    var $contents = $(file.getContentsAsString());
+    var $head = $contents.closest('head');
+    var $body = $contents.closest('body');
+
+    if ($head.length)
+      file.addHtml({
+        data: minifyHtml($head.html()),
+        section: 'head'
+      });
+
+    if ($body.length)
+      file.addHtml({
+        data: minifyHtml($body.html()),
+        section: 'body'
+      });
+  };
+
+  var processNgTemplate = function() {
+    // Init variable in outer scope
+    file = arguments[0];
+    // Build the templateCache prefix using the package name
+    // In case the template is not from a package but the user's app there will be no prefix - client/views/my-template.ng.html
+    // In case the template came from a package the prefix will be - my-app_my-package_client/views/my-template.ng.html
+    var packageName = file.getPackageName() || '';
+    var packagePrefix = packageName && packageName.replace(':', '_') + '_';
+
+    // Dirname returned with forward slashes which fixes back slashes issue on windows' paths,
+    // see ticket: https://github.com/Urigo/angular-meteor/issues/169.
+    // Using JSON.stringify to escape quote characters.
+    return {
+      __path: JSON.stringify(packagePrefix + file.getDirname() + '/' + file.getBasename()),
+      __content: JSON.stringify(minifyHtml(file.getContentsAsString()))
+    };
+  };
+
+  // Creates a module which stores all angular templates
+  var drainNgTemplates = function(ngTemplates, file) {
+    // Splicing for next drain
+    var storeTemplates = ngTemplates.map(function(template) {
+      return generateScript(storeTemplateStatement, template);
+    }).join('');
+
+    var templatesModule = generateScript(tempaltesModuleStatement, {
+      __body: storeTemplates
+    });
+
+    file.addJavaScript({
+      path: 'templates.js',
+      data: templatesModule,
+      bare: true
+    });
+  };
+
+  /* Evaluation functions */
+
+  var tempaltesModuleStatement = function() {
+    angular.module('angular-meteor.templates', []).run(['$templateCache', function($templateCache) {
+      __body
+    }]);
+  };
+
+  var storeTemplateStatement = function() {
+    $templateCache.put(__path, __content);
+  };
+
+  return {
+    process: processFiles
+  };
+})();
+
+var defaultProcessor = (function() {
+  var processFiles = function(files) {
+    files.forEach(function(file) {
+      file.addAsset({
+        path: file.getPathInPackage(),
+        data: minifyHtml(file.getContentsAsString())
+      });
+    });
+  };
+
+  return {
+    process: processFiles
+  };
+})();
+
+var generateScript = function(fn, replacements) {
+  var script = Object.keys(replacements).reduce(function(script, match) {
+    return script.replace(new RegExp(match, 'g'), replacements[match]);
+  }, getFnBody(fn));
+
+  return minifyJs(script);
 };
 
 var getFnBody = function(fn) {
