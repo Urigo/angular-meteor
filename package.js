@@ -1,7 +1,7 @@
 Package.describe({
   name: "angular",
   summary: "Everything you need to use AngularJS in your Meteor app",
-  version: "1.0.0-rc.10",
+  version: "1.0.0-rc.11",
   git: "https://github.com/Urigo/angular-meteor.git"
 });
 
@@ -44,6 +44,7 @@ Package.on_use(function (api) {
   }
   api.use('dburles:mongo-collection-instances@0.3.4', 'client'); // For getCollectionByName
 
+  api.use('ejson');
   api.use('tracker@1.0.7');
   api.use('underscore');
   api.use('session');
