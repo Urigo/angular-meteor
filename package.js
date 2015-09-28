@@ -1,7 +1,7 @@
 Package.describe({
   name: "angular",
   summary: "Everything you need to use AngularJS in your Meteor app",
-  version: "1.0.0-rc.7",
+  version: "1.0.0-rc.11",
   git: "https://github.com/Urigo/angular-meteor.git"
 });
 
@@ -26,7 +26,8 @@ Package.registerBuildPlugin({
     'plugin/ng-script-compiler.js'
   ],
   npmDependencies: {
-    'ng-annotate': '0.15.4'
+    'babel-core':  '5.8.26',
+    'ng-annotate': '1.0.2'
   }
 });
 
@@ -60,6 +61,11 @@ Package.onUse(function (api) {
     // Lib Files
     'lib/diff-array.js',
     'lib/get-updates.js',
+
+    // babel-files
+    'lib/core-js-no-number.js',
+    'lib/runtime.js',
+
     // Module Files
     'modules/angular-meteor-subscribe.js',
     'modules/angular-meteor-stopper.js',
@@ -72,7 +78,11 @@ Package.onUse(function (api) {
     'modules/angular-meteor-utils.js',
     'modules/angular-meteor-camera.js',
     // Finally load angular-meteor File
-    'angular-meteor.js'
+    'angular-meteor.js',
+
+    // watch for changes in the config file and rebuild
+    '../../.babelrc'
+
   ], 'client');
 });
 
