@@ -96,6 +96,7 @@ Package.onTest(function(api) {
     'tests/integration/angular-meteor-camera-spec.js',
     'tests/integration/angular-meteor-diff-array-spec.js',
     'tests/integration/angular-meteor-get-updates-spec.js',
+    'tests/integration/angular-meteor-subscribe-spec.js',
     'tests/integration/angular-meteor-collection-spec.js',
     'tests/integration/angular-meteor-object-spec.js',
     'tests/integration/angular-meteor-reactive-scope-spec.js',
