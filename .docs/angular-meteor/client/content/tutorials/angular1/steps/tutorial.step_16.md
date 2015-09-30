@@ -56,7 +56,7 @@ What happened here:
 * We added the click event to the map. Every time the user clicks the map, we take the location from the click event's params and save it as the party's new location.
 Notice that in the end we call $scope.$apply();  this is because that event comes outside of Angular and we need to let Angular know that something has change so it will run another $digest cycle.
 * We defined the options object under the marker to specify the marker is draggable.
-* We handled the dragend event that happens when the marker is droped in a new location. We take the location from the event's params and save it as the party's new location.
+* We handled the dragend event that happens when the marker is dropped to a new location. We take the location from the event's params and save it as the party's new location.
 
 Again, with the great Meteor platform there is no need for sync or save function. We just set it and it syncs in all other clients.
 
