@@ -85,7 +85,7 @@ Now, let's start with some cool fonts and some CSS changes to make the `index.ht
 
 {{> DiffBox tutorialName="angular-meteor" step="17.9"}}
 
-And verify that we have `angular-ui-bootstrap` dependency in the module definition, because we will use `$modal` service later.
+And verify that we have `ui.bootstrap` dependency in the module definition, because we will use `$modal` service later.
 
 {{> DiffBox tutorialName="angular-meteor" step="17.10"}}
 
