@@ -77,7 +77,7 @@ You can see that the difference between the directive we used in `party-details.
 The attributes we use:
 
 * models - the scope array that the markers represent.
-* coords - the property the holds the location.
+* coords - the property that holds the location.
 * click - handler for the click event on a marker
 * fit - a boolean to automatically zoom the map to fit all the markers inside
 * idKey - the property that holds the unique id of the array
