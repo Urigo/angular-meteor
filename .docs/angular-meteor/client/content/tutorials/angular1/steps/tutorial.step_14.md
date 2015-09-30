@@ -22,6 +22,10 @@ Then the value of the property is the function we call. In our case it takes 2 p
 
 First, we check validation with the the [check](http://docs.meteor.com/#check_package) function.
 
+To use [check](http://docs.meteor.com/#check_package) we need to add the [check package](https://atmospherejs.com/meteor/check):
+
+    meteor add check
+
 The rest of the code is pretty much self explanatory, but important thing to notice is the Email function that sends email to the invited client.
 This function can't be called from the client side so we have to put it inside an `isServer` statement.
 
