@@ -18,7 +18,7 @@ Now let's add a map the `party-details.ng.html` , first add this HTML snippet to
 
 {{> DiffBox tutorialName="angular-meteor" step="16.2"}}
 
-Here we created the google-map directive with attributes for biding the center, handling events and zoom of the map.
+Here we created the google-map directive with attributes for binding the center, handling events and zoom of the map.
 So let's define those variables in our scope. Go to `partyDetails.js`.
 
 Inside we will create the $scope.map variable to hold the properties on the map:
