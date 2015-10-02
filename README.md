@@ -45,7 +45,7 @@ Also, if you name your main component `app.ts`, package checks its presence and 
 otherwise, you'll need to import main module manually by adding next lines to the `index.html`:
 ````html
 <body>
-    System.import('client/main_module_file_name');
+    <script>System.import('client/main_module_file_name');</script>
 </body>
 ````
 
