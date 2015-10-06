@@ -30,7 +30,7 @@ Package.on_use(function (api) {
   api.versionsFrom('METEOR@0.9.0.1');
 
   api.use('angular:angular@1.4.4', 'client');
-  api.use('check');
+  api.use('check', 'client');
   api.use('minimongo');
   // Since commit b3096e93661bc79bab73a63bae0e14643030a9a3, MongoId and
   // diff-sequence are separate packages from minimongo.
