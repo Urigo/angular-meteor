@@ -7,7 +7,7 @@ Angular2 + Meteor integration.
 
 ### Install package:
 This package is not published yet. If you want to try it out, please, 
-clone it from the current repo into a local folder.
+clone it into a local folder from the current repo.
 
 ### Import Angular2 into your app:
 Package supports TypeScript and Babel (.jsx file extension) as languages for development with Angular2.
@@ -31,22 +31,26 @@ To start, create `app.ts` file, import `Component` and `View` and then bootstrap
 
 Add `index.html` file to the app top folder:
 ````html
-    <app></app>
+    <body>
+       <app></app>
+    </body>
 ````
 At this point you should see app working and showing "Hello word".
 
-Presence of `index.html` is mandatory. Treat it as a starting point of your app,
-where you can add `<head></head>` or `<body></body>` with, for example,
-script links to load in the head or some required content in the body.
-
-If you added just `<app></app>` without body element (as above), package will create it for you.
-
-Also, if you name your main component `app.ts`, package checks its presence and if it's there it imports this System.js module for you,
-otherwise, you'll need to import main module manually by adding next lines to the `index.html`:
+If you have HTML file in the app root folder with `body` or `head` tag, the package will recognize it as
+your master HTML file skipping inserting a default layout. Otherwise, it'll insert bootstrap HTML as follows:
 ````html
 <body>
-    <script>System.import('client/main_module_file_name');</script>
+    <app></app>
 </body>
+````
+Also, if you name your main client component `app.ts`, the package will import `client/app` System.js module for you.
+
+You can name it as you want, only this time you'll need to import it manually by adding next script to the `index.html` or some JS file (say, `main.js`):
+````js
+Meteor.startup(() => {
+    System.import('client/foo');
+});
 ````
 
 ### Start using Meteor in your Angular2 app:
@@ -92,6 +96,16 @@ At this moment, you are ready to create awesome apps backed by the power of Angu
 
 There is some details left though.
 For more information, please look at Parties demo app.
+
+### Server Side
+You can import TypeScript and System.js on the server side same way as on the client side.
+
+Similar to the client's main module `app.ts`, but only this time - `main.ts`, the package checks existance of the file in the server folder and imports for you in case of success. Otherwise, you can name main module as you want and import by:
+````ts
+Meteor.startup(() => {
+    System.import('server/foo').await();
+))
+````
 
 ###TypeScript Compilation
 This package has built-in TypeScript compiler plugin, that is not only compile `ts` files, but also provides (by default) diagnostics of the compilation to the terminal (e.g. syntactic, semantic errors). So, if you have code like this:
