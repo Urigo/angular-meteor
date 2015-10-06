@@ -19,7 +19,7 @@ To start, create `app.ts` file, import `Component` and `View` and then bootstrap
     import {Component, View, bootstrap} from 'angular2/angular2';
     
     @Component({
-      selector: 'app'
+      selector: 'socially'
     })
     @View({
       template: "<p>Hello World!</p>"
@@ -32,13 +32,12 @@ To start, create `app.ts` file, import `Component` and `View` and then bootstrap
 Add `index.html` file to the app top folder:
 ````html
     <body>
-       <app></app>
+       <socially></socially>
     </body>
 ````
 At this point you should see app working and showing "Hello word".
 
-If you have HTML file in the app root folder with `body` or `head` tag, the package will recognize it as
-your master HTML file skipping inserting a default layout. Otherwise, it'll insert bootstrap HTML as follows:
+If you have HTML file in the app root folder with `body` or `head` tag (`index.html` in our case), the package will recognize it as your master HTML file and will skip inserting a default layout. Otherwise, it'll insert bootstrap HTML as follows:
 ````html
 <body>
     <app></app>
