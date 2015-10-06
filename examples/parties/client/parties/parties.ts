@@ -1,4 +1,5 @@
-/// <reference path="../../typings/all.d.ts" />
+/// <reference path="../../typings/angular2-meteor.d.ts" />
+/// <reference path="../../typings/socially.d.ts" />
 
 import {Component, View, NgModel, NgFor} from 'angular2/angular2';
 

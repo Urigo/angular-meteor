@@ -1,4 +1,4 @@
-/// <reference path="../typings/all.d.ts" />
+/// <reference path="../typings/angular2-meteor.d.ts" />
 
 import {Component, View, bind} from 'angular2/angular2';
 

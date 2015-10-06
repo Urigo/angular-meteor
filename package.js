@@ -24,11 +24,11 @@ Package.onUse(function(api) {
     'mongo@1.1.1',
     'tracker@1.0.8',
     'underscore@1.0.4',
-    'barbatus:angular2@0.5.5'
+    'barbatus:angular2@0.5.6'
   ]);
 
   api.imply([
-    'barbatus:angular2@0.5.5'
+    'barbatus:angular2@0.5.6'
   ]);
 
   api.addFiles([

@@ -1,4 +1,5 @@
-/// <reference path="../../typings/all.d.ts" />
+/// <reference path="../../typings/angular2-meteor.d.ts" />
+/// <reference path="../../typings/socially.d.ts" />
 
 import {Component, View} from 'angular2/angular2';
 import {FORM_DIRECTIVES, Control, FormBuilder, ControlGroup, Validators} from 'angular2/angular2';

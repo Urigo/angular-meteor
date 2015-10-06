@@ -1,4 +1,5 @@
-/// <reference path="../typings/all.d.ts" />
+/// <reference path="../typings/angular2-meteor.d.ts" />
+/// <reference path="../typings/fake.d.ts" />
 
 import {Parties} from 'collections/parties';
 
