@@ -52,7 +52,7 @@ So let's use `ng-if` to hide the outstanding invitations from a party, if the pa
 
 # Assigning a function
 
-Now lets hide the 'Users to invite' inside `party-details.ng.html` is case the user is not logged in or can't invite to the party:
+Now lets hide the 'Users to invite' inside `party-details.ng.html` in case the user is not logged in or can't invite to the party:
 
 To do that we will create a scope function that returns a boolean and associate it with `ng-show`:
 

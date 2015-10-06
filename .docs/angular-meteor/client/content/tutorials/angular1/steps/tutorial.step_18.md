@@ -18,7 +18,7 @@ Next, we want to inject the angular-material module into our Angular application
 
 {{> DiffBox tutorialName="angular-meteor" step="18.3"}}
 
-Don't forget to remove the `ui.bootstrap` dependency! It's not longer needed!
+Don't forget to remove the `ui.bootstrap` dependency! It's no longer needed!
 
 That's it, now we can use angular-material in our application layout.
 
