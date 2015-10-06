@@ -56,8 +56,19 @@ angularMeteorObject.factory('AngularMeteorObject', [
           }
         }
 
-        // NOTE: do not use #upsert() method, since it does not exist in some collections
-        collection.update(this.$$id, mods, createFulfill({ action: 'updated' }));
+        var pullUpdate;
+        if (mods.$pull) {
+          pullUpdate = { $pull : mods.$pull };
+        }
+
+        if (!pullUpdate) {
+          // NOTE: do not use #upsert() method, since it does not exist in some collections
+          collection.update(this.$$id, mods, createFulfill({action: 'updated'}));
+        }
+        else {
+          collection.update(this.$$id, mods);
+          collection.update(this.$$id, pullUpdate, createFulfill({action: 'updated'}))
+        }
       }
       // insert
       else {
@@ -70,7 +81,7 @@ angularMeteorObject.factory('AngularMeteorObject', [
         collection.insert(mods, createFulfill({ action: 'inserted' }));
       }
 
-      return deferred.promise; 
+      return deferred.promise;
     };
 
     AngularMeteorObject.reset = function(keepClientProps) {
@@ -102,7 +113,7 @@ angularMeteorObject.factory('AngularMeteorObject', [
           delete self[prop];
           delete self._serverBackup[prop];
         });
-      } 
+      }
 
       else {
         _.keys(this.getRawObject()).forEach(function(prop) {
@@ -159,7 +170,10 @@ angularMeteorObject.factory('$meteorObject', [
       this.unregisterAutoBind = this._auto && $rootScope.$watch(function(){
         return self.getRawObject();
       }, function (item, oldItem) {
-        if (item === oldItem) return;
+        if (item === oldItem) {
+          self.$$collection.update({_id: item._id}, self.getRawObject());
+          return;
+        }
 
         var id = item._id;
         delete item._id;
@@ -167,8 +181,17 @@ angularMeteorObject.factory('$meteorObject', [
 
         var updates = getUpdates(oldItem, item);
         if (_.isEmpty(updates)) return;
+        var pullUpdate;
 
+        if (updates.$pull) {
+          pullUpdate = { $pull : updates.$pull };
+          delete updates.$pull;
+        }
         self.$$collection.update({_id: id}, updates);
+
+        if (pullUpdate) {
+          self.$$collection.update({ _id : id}, pullUpdate);
+        }
       }, true);
 
       this.unregisterAutoDestroy = $rootScope.$on('$destroy', function() {

@@ -45,7 +45,8 @@ describe('getUpdates module', function() {
       var expectedUpdates = {
         $set: {
           'b.e': 'e',
-          'd' : [1,2,4,3]
+          'd.2': 4,
+          'd.3': 3
         }
       };
 
@@ -72,6 +73,30 @@ describe('getUpdates module', function() {
         $unset: {
           'a': true,
           'b.e': true
+        }
+      };
+
+      var actualUpdates = getUpdates(src, dst);
+      expect(actualUpdates).toDeepEqual(expectedUpdates);
+    });
+
+    it('should define a "$pull" property when the destination object has an array value with missing elements', function() {
+      var src = {
+        arr: [1, 2, 3, 4, 5]
+      };
+
+      var dst = {
+        arr: [1, 2, 3]
+      };
+
+      var expectedUpdates = {
+        $unset: {
+          'arr.3': true,
+          'arr.4': true
+        },
+
+        $pull: {
+          'arr': null
         }
       };
 
@@ -158,7 +183,9 @@ describe('getUpdates module', function() {
 
       expect(updates).toDeepEqual({
         $set: {
-          'a': [1,2,3],
+          'a.0': 1,
+          'a.1': 2,
+          'a.2': 3
         }
       });
     });
@@ -206,7 +233,9 @@ describe('getUpdates module', function() {
 
       expect(updates).toDeepEqual({
         $set: {
-          'a.subfield': [1,2,3],
+          'a.subfield.0': 1,
+          'a.subfield.1': 2,
+          'a.subfield.2': 3
         }
       });
     });
