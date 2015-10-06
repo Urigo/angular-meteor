@@ -1,5 +1,5 @@
-var path = Npm.require('path');
-var fs = Npm.require('fs');
+var path = Plugin.path;
+var fs = Plugin.fs;
 var mkdirp = Npm.require('mkdirp');
 
 var typingsDir = path.resolve('./typings');
