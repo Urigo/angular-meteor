@@ -95,12 +95,12 @@ Add Angular2 template file `client/parties.html` with a content as follows:
 At this moment, you are ready to create awesome apps backed by the power of Angular2 and Meteor!
 
 There is some details left though.
-For more information, please look at Parties demo app.
+For more information, please check Parties demo app.
 
 ### Server Side
 You can import TypeScript and System.js on the server side same way as on the client side.
 
-Similar to the client's main module `app.ts`, but only this time - `main.ts`, the package checks existance of the file in the server folder and imports for you in case of success. Otherwise, you can name main module as you want and import by:
+Similar to the client's main module `app.ts`, the package checks existance of `main.ts` file in the server folder and, in case of success, will import it for you. Otherwise, you can name main module as you want and import by:
 ````ts
 Meteor.startup(() => {
     System.import('server/foo').await();
