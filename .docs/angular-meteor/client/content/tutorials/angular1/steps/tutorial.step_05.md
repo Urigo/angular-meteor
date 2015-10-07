@@ -49,9 +49,10 @@ Let's create a new html file called `parties-list.ng.html` and paste the existin
 
 {{> DiffBox tutorialName="angular-meteor" step="5.3"}}
 
-The code is almost the same except for this one change:
+The code is almost the same except for this two changes:
 
 - Added a link to the parties name display (that link will take us to that party's detailed page)
+- Deleting the div with ng-controller information which will be handled by routes definition (see next)
 
 Now let's go back to `index.html` and replace the content with the `ui-view` directive:
 
