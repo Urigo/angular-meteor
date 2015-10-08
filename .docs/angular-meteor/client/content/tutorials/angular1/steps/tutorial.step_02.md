@@ -33,7 +33,7 @@ The data model is now instantiated within the `PartiesListCtrl` controller.
 
 Although the controller is not yet doing very much, it plays a crucial role. By providing context for our data model, the controller allows us to establish data-binding between the model and the view. We connected the dots between the presentation, the data, and the logic components as follows:
 
-* The ngController directive, located on the `body` tag, references the name of our controller, `PartiesListCtrl` (located in the JavaScript file `app.js`).
+* The ngController directive, located on the `div` tag, references the name of our controller, `PartiesListCtrl` (located in the JavaScript file `app.js`).
 * The `PartiesListCtrl` controller attaches the party data to the `$scope` that was injected into our controller function. This controller scope is available to all bindings located within the `div ng-controller="PartiesListCtrl">` tag.
 
 # ng-annotate and .ng.js
