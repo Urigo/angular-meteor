@@ -130,5 +130,10 @@ In order to fix that issue you will need to fix the permission by running these 
     sudo chmod -R 777 YOUR_PROJECT_FOLDER
 
     Replace YOUR_PROJECT_FOLDER with your project folder and YOUR_USERNAME with the user you use to run the "meteor run" command.
+    
+### ERROR whitelist rejection while running on iOS
+
+* Create `mobile-config.js` and add `App.accessRule('*');`
+* Re-run meteor
 
 {{/template}}
