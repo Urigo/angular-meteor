@@ -1,4 +1,4 @@
-From 67899b7a84462edde30552a29d56a191ab814434 Mon Sep 17 00:00:00 2001
+From 837175cfa2a6792fcae90f541f68ad7e28bb0c58 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Mon, 28 Sep 2015 00:46:56 +0300
 Subject: [PATCH 001/212] Step 0.2: Remove all starter files
@@ -72,7 +72,7 @@ index 4f8c65d..0000000
 2.3.8 (Apple Git-58)
 
 
-From 66e0fbec632aaa701bca13452f8330827e2ea7f0 Mon Sep 17 00:00:00 2001
+From 504c01e454b92a4c6ac851d698b6a57c6c919355 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 14:23:47 +0300
 Subject: [PATCH 002/212] Step 0.3: Create empty index.html file
@@ -95,7 +95,7 @@ index 0000000..ef412ef
 2.3.8 (Apple Git-58)
 
 
-From fc51e9547f78f614e2898f21ace80a7d728b7b52 Mon Sep 17 00:00:00 2001
+From 37f5cc3aab3b4339180e15c58a3ae7795f8ea4e8 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Mon, 28 Sep 2015 00:50:28 +0300
 Subject: [PATCH 003/212] Step 0.4: Add the Angular package
@@ -144,7 +144,7 @@ index e378b68..a702ca4 100644
 2.3.8 (Apple Git-58)
 
 
-From 5deeb29832a9025fbcd94064c473485f8a3df218 Mon Sep 17 00:00:00 2001
+From 109bde16e3ac5c6e97f87b97a07ce6858af66fbf Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 16:47:59 +0300
 Subject: [PATCH 004/212] Step 0.5: Move the main HTML content into
@@ -166,7 +166,7 @@ index 0000000..79ed426
 2.3.8 (Apple Git-58)
 
 
-From 0584900a3f549f7be91b04a242a1335ebdcbb3cc Mon Sep 17 00:00:00 2001
+From c65034b23046f3100084c3a55dea228f7498ff2c Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 16:49:45 +0300
 Subject: [PATCH 005/212] Step 0.6: Include the angular main file inside the
@@ -189,7 +189,7 @@ index ef412ef..bf21494 100644
 2.3.8 (Apple Git-58)
 
 
-From 7c2da248dcb8a04ee3706694ad52c7d5140f8fb1 Mon Sep 17 00:00:00 2001
+From 0e646539c2c54e3c897a5268e41577f5d50edf36 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 17:14:56 +0300
 Subject: [PATCH 006/212] Step 0.7: Create app.js file to contain the AngularJS
@@ -213,7 +213,7 @@ index 0000000..2465ea1
 2.3.8 (Apple Git-58)
 
 
-From 094088dcb85c856558d91f4f07cb7d59dd074797 Mon Sep 17 00:00:00 2001
+From 0898e59c26d4e1dbb602ec4367bef29f768499b9 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 17:16:03 +0300
 Subject: [PATCH 007/212] Step 0.8: Create AngularJS module and add
@@ -236,7 +236,7 @@ index 2465ea1..987f384 100644
 2.3.8 (Apple Git-58)
 
 
-From 08eb55f2cf9f0eb0802813637dddba89f632d891 Mon Sep 17 00:00:00 2001
+From 203fb09d12b0b55bab64b592be23097e80050e25 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 17:25:28 +0300
 Subject: [PATCH 008/212] Step 0.9: Add ng-app
@@ -258,7 +258,7 @@ index bf21494..963f4fa 100644
 2.3.8 (Apple Git-58)
 
 
-From 231e072d7ec503179b259b24aa68c16a54036fff Mon Sep 17 00:00:00 2001
+From 87832ce5249cb2bea986eb6016c7a402cec50d12 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 17:31:28 +0300
 Subject: [PATCH 009/212] Step 0.10: Add AngularJS code!
@@ -278,7 +278,7 @@ index 79ed426..a9c8ddc 100644
 2.3.8 (Apple Git-58)
 
 
-From e63fd08c2876090949c09f41d65ef99f7a08a7f9 Mon Sep 17 00:00:00 2001
+From b6491b4d01be3e38f3070a20c05995ca3ccfaf93 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 18:18:08 +0300
 Subject: [PATCH 010/212] Step 1.1: Add some static HTML the to main page
@@ -311,7 +311,7 @@ index a9c8ddc..dd1ef68 100644
 2.3.8 (Apple Git-58)
 
 
-From c69c6d8d011a04ecde74212a35ca55fe24057820 Mon Sep 17 00:00:00 2001
+From 5c8aa8a486d2a5c285fa37cd96a34aa691cd0cb3 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 18:20:42 +0300
 Subject: [PATCH 011/212] Step 2.1: Use dynamic template instead of static
@@ -351,7 +351,7 @@ index dd1ef68..7f8c6d9 100644
 2.3.8 (Apple Git-58)
 
 
-From edb28f16c8a4885fd92d69e1fa0f1a9a123d0b5e Mon Sep 17 00:00:00 2001
+From 6b7c7cdaa14b52e87b7c9cea846fd0471e80fd49 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 18:22:53 +0300
 Subject: [PATCH 012/212] Step 2.2: Add the parties controller
@@ -392,7 +392,7 @@ index 987f384..9cbfb86 100644
 2.3.8 (Apple Git-58)
 
 
-From 64a53f695d0b4bb6d0d598cb6d07eb0baa71b241 Mon Sep 17 00:00:00 2001
+From ab7708a8c5114028c4b0c0a7ef09f6213d62d54c Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 18:27:33 +0300
 Subject: [PATCH 013/212] Step 3.1: Add the parties collection
@@ -415,7 +415,7 @@ index 9cbfb86..c280708 100644
 2.3.8 (Apple Git-58)
 
 
-From 4d4ba7879c2b306aeaa70232d688dda0ae3127da Mon Sep 17 00:00:00 2001
+From 4b601ae42690eb19ba93be8d4694b9e695e5075d Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 18:39:33 +0300
 Subject: [PATCH 014/212] Step 3.2: Add the $meteor.collection to the $scope
@@ -454,7 +454,7 @@ index c280708..b67154d 100644
 2.3.8 (Apple Git-58)
 
 
-From ea4859380957b8e5424b4562861c1908fcc4003a Mon Sep 17 00:00:00 2001
+From bffdc12d8e6a83be25cdddfa11cd59eba976c469 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 18:40:05 +0300
 Subject: [PATCH 015/212] Step 3.3: Add a dependency to $meteor
@@ -481,7 +481,7 @@ index b67154d..698ceb5 100644
 2.3.8 (Apple Git-58)
 
 
-From 4fb93bd2a8c380d362feac98a6dccd74e71cb0ce Mon Sep 17 00:00:00 2001
+From a27635af1a91f68c961adf7c4a8da924bd3bce29 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 18:43:17 +0300
 Subject: [PATCH 016/212] Step 3.4: Add some data to the parties collection
@@ -521,7 +521,7 @@ index 698ceb5..5fcad11 100644
 2.3.8 (Apple Git-58)
 
 
-From 4645218adbed1c2f1cae187236437f82e58059b2 Mon Sep 17 00:00:00 2001
+From a9390a56b4752ddb12bd124b61318902fc664b03 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 18:49:37 +0300
 Subject: [PATCH 017/212] Step 4.1: Add basic form to the view
@@ -550,7 +550,7 @@ index 7f8c6d9..4880315 100644
 2.3.8 (Apple Git-58)
 
 
-From 2afa2d1fc31c5279fa3fbc31ffd13fe7440f4fab Mon Sep 17 00:00:00 2001
+From 310db332e614109285cfb14cc0b9426eea9d7d72 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 18:50:38 +0300
 Subject: [PATCH 018/212] Step 4.2: Add ng-model to the form's inputs
@@ -579,7 +579,7 @@ index 4880315..ea6dc8f 100644
 2.3.8 (Apple Git-58)
 
 
-From effe776db67e897473b950e0bd6fcf853a19e6d8 Mon Sep 17 00:00:00 2001
+From 9155fcb530e129e597db849b7c886431ce81f6b4 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 18:51:15 +0300
 Subject: [PATCH 019/212] Step 4.3: Add ng-click logic to the "Add" button
@@ -605,7 +605,7 @@ index ea6dc8f..d39fd36 100644
 2.3.8 (Apple Git-58)
 
 
-From bd133c2c12016ca5ca83169c35419a9c63ee9d1f Mon Sep 17 00:00:00 2001
+From 03b1f2c13f1f38e28aa3dcd68318940d8cd298ab Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 18:52:46 +0300
 Subject: [PATCH 020/212] Step 4.4: Add delete button to the parties list
@@ -630,7 +630,7 @@ index d39fd36..614c3a0 100644
 2.3.8 (Apple Git-58)
 
 
-From 071a8465f67fcab6993259b91ba2a0d62210fb58 Mon Sep 17 00:00:00 2001
+From 23b6be8a3608de8f9bbc18d114aabb1094849a3c Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 18:53:55 +0300
 Subject: [PATCH 021/212] Step 4.5: Add remove logic to the controller
@@ -658,7 +658,7 @@ index 5fcad11..fbe73ca 100644
 2.3.8 (Apple Git-58)
 
 
-From 7f8c5238b63128d24d4724215253e681f6c05b95 Mon Sep 17 00:00:00 2001
+From a7cad69dd80492c79d6eafb3bcece70bed57fc8e Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 18:55:39 +0300
 Subject: [PATCH 022/212] Step 4.6: Replace push with save
@@ -684,7 +684,7 @@ index 614c3a0..68ec2ac 100644
 2.3.8 (Apple Git-58)
 
 
-From 8aae9e62e3d2dd57a8ab77a7331c98473e193599 Mon Sep 17 00:00:00 2001
+From 60d88bcf6a5f3f972cba6ff370024f08ef56e091 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 18:56:41 +0300
 Subject: [PATCH 023/212] Step 4.7: Use remove function instead of splice
@@ -710,7 +710,7 @@ index fbe73ca..a0119e6 100644
 2.3.8 (Apple Git-58)
 
 
-From 74aeb0fbda160681a54f6aa99ee40d83757a3653 Mon Sep 17 00:00:00 2001
+From 014625a3e098789d2e9ca87092d022c1ffb0936f Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 18:57:38 +0300
 Subject: [PATCH 024/212] Step 4.8: Add Remove All button
@@ -735,7 +735,7 @@ index 68ec2ac..5c567a8 100644
 2.3.8 (Apple Git-58)
 
 
-From 924cf4bd456e0323ccb9a7ca4eba2cb3867b6a66 Mon Sep 17 00:00:00 2001
+From 95576fd3a3d57182014e47983a5697299fa5c040 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 18:58:20 +0300
 Subject: [PATCH 025/212] Step 4.9: Add Remove All logic to the controller
@@ -763,7 +763,7 @@ index a0119e6..f2ea8fd 100644
 2.3.8 (Apple Git-58)
 
 
-From ada868e4eb898203fdbed8d5de369c9bc006100d Mon Sep 17 00:00:00 2001
+From 9f5f42007f060e512dad2a25116704b7fbfbf3b4 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Mon, 28 Sep 2015 01:24:43 +0300
 Subject: [PATCH 026/212] Step 5.1: Add the angularui:angular-ui-router package
@@ -797,7 +797,7 @@ index a702ca4..02f8c3e 100644
 2.3.8 (Apple Git-58)
 
 
-From f9ec4383e4a2cf2107416a3af4eb449af99d4570 Mon Sep 17 00:00:00 2001
+From a8cec14611db6efce7f190786a668caabbd6fcd0 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 19:03:28 +0300
 Subject: [PATCH 027/212] Step 5.2: Add angular-ui-router dependency
@@ -823,7 +823,7 @@ index f2ea8fd..c68e970 100644
 2.3.8 (Apple Git-58)
 
 
-From 7078400b978e3dbe1b6b7053eaa2dc173ffcda07 Mon Sep 17 00:00:00 2001
+From aa51e6410e2d594df40e7c257d65e1ccdd539640 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 19:08:18 +0300
 Subject: [PATCH 028/212] Step 5.3: Create parties list page
@@ -858,7 +858,7 @@ index 0000000..28a1881
 2.3.8 (Apple Git-58)
 
 
-From f058076279150a6be2875d9844aa0361075d2c8d Mon Sep 17 00:00:00 2001
+From bc48f8f5e1749f929c72a247cc33c2052c2f6d56 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 19:09:27 +0300
 Subject: [PATCH 029/212] Step 5.4: Update index.html
@@ -894,7 +894,7 @@ index 963f4fa..0fcd817 100644
 2.3.8 (Apple Git-58)
 
 
-From f881bf4bef15947a13e8fd902afb6e5617e917db Mon Sep 17 00:00:00 2001
+From 114d75173be4f8389fce5e56d5c1a0613fe2a312 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 19:12:39 +0300
 Subject: [PATCH 030/212] Step 5.5: Remove index.ng.html
@@ -931,7 +931,7 @@ index 5c567a8..0000000
 2.3.8 (Apple Git-58)
 
 
-From 51d98f87db4ce9c81d6404ed071db8797a555187 Mon Sep 17 00:00:00 2001
+From 031b45baa68181a22d2ca6b7c630b1775d2f6c17 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 19:12:51 +0300
 Subject: [PATCH 031/212] Step 5.6: Create party details page
@@ -953,7 +953,7 @@ index 0000000..68fe7fe
 2.3.8 (Apple Git-58)
 
 
-From 81cba4af000531545bbc07713026ee57fbe9fcdb Mon Sep 17 00:00:00 2001
+From 1120fccf4dc9c4d40602115b12fc33f9e1a68aa2 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 19:16:01 +0300
 Subject: [PATCH 032/212] Step 5.7: Add routes definitions
@@ -997,7 +997,7 @@ index c68e970..af141a9 100644
 2.3.8 (Apple Git-58)
 
 
-From 43a386872726b6d2d4cdef7c8fe31625c85b2137 Mon Sep 17 00:00:00 2001
+From b74695f2ad0661324bdcfd7892eefbbabe7986bf Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 19:17:00 +0300
 Subject: [PATCH 033/212] Step 5.8: Add party details controller
@@ -1028,7 +1028,7 @@ index af141a9..6b55a29 100644
 2.3.8 (Apple Git-58)
 
 
-From 238810c6bdc006a01dfe56759c1767e49e47eef6 Mon Sep 17 00:00:00 2001
+From 36a4a01681aeea4a189c55130cff94d3eae04b89 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 19:41:12 +0300
 Subject: [PATCH 034/212] Step 6.1: Add $meteor.object to the controller
@@ -1060,7 +1060,7 @@ index 6b55a29..49a49da 100644
 2.3.8 (Apple Git-58)
 
 
-From 8c4d3696a75075e21f88b25d816d608afd1d83b1 Mon Sep 17 00:00:00 2001
+From 8333544350c3cc1e0698d8fdaf4a68f4c50e2bc3 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 19:44:09 +0300
 Subject: [PATCH 035/212] Step 6.2: Add binding to the party details
@@ -1085,7 +1085,7 @@ index 68fe7fe..31f8472 100644
 2.3.8 (Apple Git-58)
 
 
-From 2316bd33958ea0beccb6a5fff7d3d9f41be161a4 Mon Sep 17 00:00:00 2001
+From 25e5fbc0015554ccadb02987ca1977198060d45a Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 19:46:20 +0300
 Subject: [PATCH 036/212] Step 6.3: Add some buttons to the form
@@ -1114,7 +1114,7 @@ index 31f8472..52e92e7 100644
 2.3.8 (Apple Git-58)
 
 
-From 1a8e76925455c9c164f8fdf4591ec5865412758d Mon Sep 17 00:00:00 2001
+From 9dd1d968fa73b55fec301b118aa423e181303c9a Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 19:46:51 +0300
 Subject: [PATCH 037/212] Step 6.4: Update the usage of $meteor.object
@@ -1140,7 +1140,7 @@ index 49a49da..98446ad 100644
 2.3.8 (Apple Git-58)
 
 
-From 0b82f82da43148e5126d05e0cc5b634944a55e17 Mon Sep 17 00:00:00 2001
+From 927dc6785468872a495af8468d8775e702369086 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 19:47:13 +0300
 Subject: [PATCH 038/212] Step 6.5: Add logic to the controller
@@ -1172,7 +1172,7 @@ index 98446ad..8d196ef 100644
 2.3.8 (Apple Git-58)
 
 
-From ab35a9ab25026a9d4a0ddbc35a41578ddb01bb60 Mon Sep 17 00:00:00 2001
+From b91597e926b28d161300e71395a56e1a5d446cac Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 19:48:18 +0300
 Subject: [PATCH 039/212] Step 6.6: Full implementation of the controller logic
@@ -1202,7 +1202,7 @@ index 8d196ef..9534a19 100644
 2.3.8 (Apple Git-58)
 
 
-From aeb7e6a99e9e1de43dd4d0650f8b8a947636388f Mon Sep 17 00:00:00 2001
+From 281340e6b29f46aa6bf5af1c187dec97d7799f58 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 19:54:24 +0300
 Subject: [PATCH 040/212] Step 7.1: client/lib/app.js
@@ -1224,7 +1224,7 @@ index 0000000..999bdc1
 2.3.8 (Apple Git-58)
 
 
-From 1205f21d8f1abe7492b229d81b61d635e32ec568 Mon Sep 17 00:00:00 2001
+From 631ca933273c05f1027a2eecd4311c6ac7d410b1 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 20:00:58 +0300
 Subject: [PATCH 041/212] Step 7.2: model/parties.js
@@ -1246,7 +1246,7 @@ index 0000000..dc0ccc3
 2.3.8 (Apple Git-58)
 
 
-From 6940ba16eecd9d2f496aaa8cc91243e01b8304c6 Mon Sep 17 00:00:00 2001
+From 5001543a2807eaf8ee506da681b97dcea3081ccb Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 20:04:29 +0300
 Subject: [PATCH 042/212] Step 7.3: server/startup/loadParties.js
@@ -1280,7 +1280,7 @@ index 0000000..8d3780e
 2.3.8 (Apple Git-58)
 
 
-From 354e783dfe7d7db75964e61038a97b8f7eca4cb5 Mon Sep 17 00:00:00 2001
+From 68deb38cbdd2edc131524421550296dae105b8dc Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 20:06:09 +0300
 Subject: [PATCH 043/212] Step 7.4: client/routes.js
@@ -1320,7 +1320,7 @@ index 0000000..0c8d7a3
 2.3.8 (Apple Git-58)
 
 
-From 5cb227fb83e7cdfde9c5bae0c2c51ca2a8b7aafc Mon Sep 17 00:00:00 2001
+From 48fdc6e57a2f2fd49fb769a54085b886ab96013b Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 20:07:25 +0300
 Subject: [PATCH 044/212] Step 7.5: client/parties/controllers/partiesList.js
@@ -1354,7 +1354,7 @@ index 0000000..888df64
 2.3.8 (Apple Git-58)
 
 
-From 4f210dd0e94910c7746e986e2b2cc9f31773d9f8 Mon Sep 17 00:00:00 2001
+From 86e3a992bb8cdec25cdda25363a5f257d010e81f Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 20:08:05 +0300
 Subject: [PATCH 045/212] Step 7.6: client/parties/controllers/partyDetails.js
@@ -1378,7 +1378,7 @@ index 0000000..0503dab
 2.3.8 (Apple Git-58)
 
 
-From 008db570e01015b49faef07adb9c2e98bd49c512 Mon Sep 17 00:00:00 2001
+From 46727c7818f9d456b9a5373c8650139029fff688 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 20:10:21 +0300
 Subject: [PATCH 046/212] Step 7.7: Move index.html
@@ -1436,7 +1436,7 @@ index 0fcd817..0000000
 2.3.8 (Apple Git-58)
 
 
-From d51a8d9bb3736f0a5db828975bfc9adc0d8806a1 Mon Sep 17 00:00:00 2001
+From 434725192ca569cebab07d0193cdb45e17ed65e8 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 20:11:30 +0300
 Subject: [PATCH 047/212] Step 7.8: Move to
@@ -1473,7 +1473,7 @@ index 0000000..2b64715
 2.3.8 (Apple Git-58)
 
 
-From 6351adf16f1e4c888cf669ec02dbd58867213961 Mon Sep 17 00:00:00 2001
+From 2babc6fa926ebbfbf6d854d9b8f3c63b3fac411a Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 20:12:05 +0300
 Subject: [PATCH 048/212] Step 7.9: Move to
@@ -1499,7 +1499,7 @@ index 0000000..31f8472
 2.3.8 (Apple Git-58)
 
 
-From 9057b448a4615860446d9eeea224fb7e38d66ed5 Mon Sep 17 00:00:00 2001
+From 0308efdb2c93d678003d6107b812b89860e45124 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 20:13:46 +0300
 Subject: [PATCH 049/212] Step 7.10: Update templateUrl for routes
@@ -1531,7 +1531,7 @@ index 0c8d7a3..1c6fcc3 100644
 2.3.8 (Apple Git-58)
 
 
-From 5afb9557059ae56a6805b07da9b03482b85ea837 Mon Sep 17 00:00:00 2001
+From b378b376d234fec12149320ca7b5d46136bc3dea Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Mon, 28 Sep 2015 01:58:45 +0300
 Subject: [PATCH 050/212] Step 7.11: Delete remaining files
@@ -1663,7 +1663,7 @@ index 52e92e7..0000000
 2.3.8 (Apple Git-58)
 
 
-From aec1f610351b030f439df585c746b7d41cc5955f Mon Sep 17 00:00:00 2001
+From 9da5f43ef558c46d8ee4dd90903e9edf2e65b2c9 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Mon, 28 Sep 2015 02:08:39 +0300
 Subject: [PATCH 051/212] Step 8.1: Remove the insecure package
@@ -1700,7 +1700,7 @@ index 02f8c3e..b82db53 100644
 2.3.8 (Apple Git-58)
 
 
-From 3bb28d91ebfe06f2c2458a4cfa2137b99f72a488 Mon Sep 17 00:00:00 2001
+From a819172810581d8df0593be502deb1ddedb7e6ae Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Mon, 28 Sep 2015 02:09:42 +0300
 Subject: [PATCH 052/212] Step 8.2: Add the accounts-password package
@@ -1781,7 +1781,7 @@ index b82db53..f39416e 100644
 2.3.8 (Apple Git-58)
 
 
-From 9ea3b23dcc463406b04c2bd92b16214554097c18 Mon Sep 17 00:00:00 2001
+From a2a56ce1ba9ac39839645febc1eac5d26561525c Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Mon, 28 Sep 2015 02:10:30 +0300
 Subject: [PATCH 053/212] Step 8.3: Add the accounts-ui package
@@ -1824,7 +1824,7 @@ index f39416e..339747b 100644
 2.3.8 (Apple Git-58)
 
 
-From 36324bb7d18d8f50ba396a070c71eb3f851445c6 Mon Sep 17 00:00:00 2001
+From 25762b6ab69e53e03942cad05404ea6c615aa6a4 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Mon, 28 Sep 2015 02:11:49 +0300
 Subject: [PATCH 054/212] Step 8.4: Add the urigo:angular-blaze-template
@@ -1860,7 +1860,7 @@ index 339747b..93c847f 100644
 2.3.8 (Apple Git-58)
 
 
-From 2eef02bd839be407d204d3bf1028f14493762147 Mon Sep 17 00:00:00 2001
+From 8f05059324429eb3c7d448905d721956df1b1fe4 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Mon, 28 Sep 2015 02:14:04 +0300
 Subject: [PATCH 055/212] Step 8.5: Use blaze-template directive to load the
@@ -1886,7 +1886,7 @@ index 0fcd817..cfc3aeb 100644
 2.3.8 (Apple Git-58)
 
 
-From 9db39d3d78bc47d1422d3f93f7a214d9d56d751f Mon Sep 17 00:00:00 2001
+From 7e3820a4906ec870282b74f57c3e96263ab8d229 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 20:29:32 +0300
 Subject: [PATCH 056/212] Step 8.6:  Add allow logic to the model
@@ -1920,7 +1920,7 @@ index dc0ccc3..b793c1f 100644
 2.3.8 (Apple Git-58)
 
 
-From f1f776b832884804f1c35d3e49e58bcc827c8414 Mon Sep 17 00:00:00 2001
+From d10b9bb4a82492aad63e8759883fa5e6e0f4877e Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 20:34:30 +0300
 Subject: [PATCH 057/212] Step 8.7: Add current user to the new party
@@ -1946,7 +1946,7 @@ index 2b64715..afbe90d 100644
 2.3.8 (Apple Git-58)
 
 
-From 04f0c44c1726fdcbf297650a282e399f1f7d801c Mon Sep 17 00:00:00 2001
+From 90c68481058aefb38c870e4cb90cfe7b577a2f13 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Mon, 28 Sep 2015 02:17:17 +0300
 Subject: [PATCH 058/212] Step 8.8: Add accounts-facebook accounts-twitter
@@ -2010,7 +2010,7 @@ index 93c847f..739c87b 100644
 2.3.8 (Apple Git-58)
 
 
-From 520f79ea0e5dea16e8bdb63bebbc5669484171c8 Mon Sep 17 00:00:00 2001
+From 87796490025079c0700d77b52bac9a99612f5a3c Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 20:37:17 +0300
 Subject: [PATCH 059/212] Step 8.9: Update route
@@ -2041,7 +2041,7 @@ index 1c6fcc3..412a40d 100644
 2.3.8 (Apple Git-58)
 
 
-From 505ed0f95a140cf9826a1d64dc304ea17c2b5324 Mon Sep 17 00:00:00 2001
+From c8773f312bccc73c24a43ae678b7824f5e87b3cc Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 20:41:38 +0300
 Subject: [PATCH 060/212] Step 8.10: Handle case that user is not logged in
@@ -2072,7 +2072,7 @@ index 412a40d..e88ad92 100644
 2.3.8 (Apple Git-58)
 
 
-From 27781a0a2b2e63fb9ed5ee605d8963f92d68eaab Mon Sep 17 00:00:00 2001
+From 97acaa97385e0cc5ca426fbdcd912d2a385da384 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Mon, 28 Sep 2015 02:27:21 +0300
 Subject: [PATCH 061/212] Step 9.1: Remove the autopublish package
@@ -2110,7 +2110,7 @@ index 739c87b..ad16cab 100644
 2.3.8 (Apple Git-58)
 
 
-From e5d7970887b1864aed0852a9a5b2f8e2b0c52b99 Mon Sep 17 00:00:00 2001
+From 52c37df13bd9a182a0cad778b0144736d539a6f0 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 20:50:23 +0300
 Subject: [PATCH 062/212] Step 9.2: Usage of publish method
@@ -2144,7 +2144,7 @@ index 0000000..277f09a
 2.3.8 (Apple Git-58)
 
 
-From adffe7d9289249486a6a2da8c0e4ae18925833c3 Mon Sep 17 00:00:00 2001
+From 64afcccc3af61d75b26d595395e0f28b2ded4a79 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 20:53:15 +0300
 Subject: [PATCH 063/212] Step 9.3: Use "subscribe" function on the scope
@@ -2170,7 +2170,7 @@ index 888df64..e0f806b 100644
 2.3.8 (Apple Git-58)
 
 
-From 328e10d7741c9e571a9f4975efb6a49ef1561f9d Mon Sep 17 00:00:00 2001
+From b0fcfc2e1120c07c2467907fb3490be551aa280c Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:00:41 +0300
 Subject: [PATCH 064/212] Step 9.4: Add checkbox for public party
@@ -2196,7 +2196,7 @@ index afbe90d..ca956ea 100644
 2.3.8 (Apple Git-58)
 
 
-From 1b3c984e71b6b5eb8dffb76a3b564b08e2e1e798 Mon Sep 17 00:00:00 2001
+From 275cd9f8c5ad712bca35a3bdcc6e23ce7dcb1b31 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:03:38 +0300
 Subject: [PATCH 065/212] Step 9.5: Add checkbox for public party in the
@@ -2223,7 +2223,7 @@ index 31f8472..f798477 100644
 2.3.8 (Apple Git-58)
 
 
-From af2347a46265e55d2e67f0d22914bbf6dbbae284 Mon Sep 17 00:00:00 2001
+From c0c987a6307cf3d55e825040dc27dbf523a0ff12 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:04:57 +0300
 Subject: [PATCH 066/212] Step 9.6: Publish the users collection
@@ -2247,7 +2247,7 @@ index 0000000..f5becea
 2.3.8 (Apple Git-58)
 
 
-From 670393b68a75615713efa1f4ed0aa7c0b8329d25 Mon Sep 17 00:00:00 2001
+From f3d08ab69ab28dee7bc6f0c38da849bbe15ddc05 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:06:51 +0300
 Subject: [PATCH 067/212] Step 9.7: Subscribe to the users collection
@@ -2270,7 +2270,7 @@ index 0503dab..7ac734b 100644
 2.3.8 (Apple Git-58)
 
 
-From 44f27232bf342aa943b3e150c3d9575381247a86 Mon Sep 17 00:00:00 2001
+From c63b8176d73c2b1465da95d9fb30ef67dfa85738 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:08:09 +0300
 Subject: [PATCH 068/212] Step 9.8: Subscribe to the parties collection
@@ -2294,7 +2294,7 @@ index 7ac734b..a65cabc 100644
 2.3.8 (Apple Git-58)
 
 
-From fba2e80a8228c49283255e661473a3f1420a0b32 Mon Sep 17 00:00:00 2001
+From bf3e38496b2e8ccba8a4a86790a61fa8ee23f554 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:09:09 +0300
 Subject: [PATCH 069/212] Step 9.9: Add the user details
@@ -2323,7 +2323,7 @@ index f798477..a640092 100644
 2.3.8 (Apple Git-58)
 
 
-From ed8cc8f62c453a202fb319b4bfb996156aac32af Mon Sep 17 00:00:00 2001
+From 94e30d342a37d8139858e0e8aeedab264bffa64a Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:13:54 +0300
 Subject: [PATCH 070/212] Step 11.1: Update the module initialization
@@ -2354,7 +2354,7 @@ index 999bdc1..436212a 100644
 2.3.8 (Apple Git-58)
 
 
-From 70a445c9c5d75ab552366c38ceb91e8ec7cdf04a Mon Sep 17 00:00:00 2001
+From 135c4050248015b865e0483b0cdcbb9d0657ce00 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:16:29 +0300
 Subject: [PATCH 071/212] Step 11.2: Remove the ng-app directive
@@ -2385,7 +2385,7 @@ index cfc3aeb..b42b266 100644
 2.3.8 (Apple Git-58)
 
 
-From ab87b7642e94f93812630ffaf13b46cb663b6649 Mon Sep 17 00:00:00 2001
+From 6d3ca71aed92e73840af06688e59534a33f4065d Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:20:14 +0300
 Subject: [PATCH 072/212] Step 12.1: Add options to the parties publish
@@ -2416,7 +2416,7 @@ index 277f09a..663bcd8 100644
 2.3.8 (Apple Git-58)
 
 
-From 37c2ae086a666e693404e8b1f6c735d52f4e6967 Mon Sep 17 00:00:00 2001
+From 90485bfd489d3ba3c27bc17811706728781f760a Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:23:07 +0300
 Subject: [PATCH 073/212] Step 12.2: Add the sorting params to the scope
@@ -2444,7 +2444,7 @@ index e0f806b..c2c8136 100644
 2.3.8 (Apple Git-58)
 
 
-From 7660d46cf308513812c5367f033a64b989565635 Mon Sep 17 00:00:00 2001
+From ebc5e4ad28499f5ab77e26e19bba693250a9e1fa Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:25:07 +0300
 Subject: [PATCH 074/212] Step 12.3: Separate the collection and the subscribe
@@ -2471,7 +2471,7 @@ index c2c8136..30e37d9 100644
 2.3.8 (Apple Git-58)
 
 
-From 1f0abceace6d0ebc5a35974b2fbedc1e1e78e531 Mon Sep 17 00:00:00 2001
+From a8896682d112f5ed16c4e23225d86ea76adafb41 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:25:32 +0300
 Subject: [PATCH 075/212] Step 12.4: Add the params to the subscribe
@@ -2501,7 +2501,7 @@ index 30e37d9..311ed73 100644
 2.3.8 (Apple Git-58)
 
 
-From 6ee2b2c964fd4117f50afbfb92838aa9fba16f6f Mon Sep 17 00:00:00 2001
+From 8a54370329fac08757ce64910212ad95fdb14322 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:26:26 +0300
 Subject: [PATCH 076/212] Step 12.5: Replace the Parties collection with cursor
@@ -2532,7 +2532,7 @@ index 311ed73..54727b6 100644
 2.3.8 (Apple Git-58)
 
 
-From fde298d339108ed3a868de0d4f3c4d534cf738f4 Mon Sep 17 00:00:00 2001
+From 8e9d6af74965ae31004f7ce55559e77513854a45 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Mon, 28 Sep 2015 02:48:28 +0300
 Subject: [PATCH 077/212] Step 12.6: Add the angularutils:pagination package
@@ -2567,7 +2567,7 @@ index ad16cab..9f46671 100644
 2.3.8 (Apple Git-58)
 
 
-From c338d3745ca16e1ae03d1ca1b76e15fb1fbc1a64 Mon Sep 17 00:00:00 2001
+From e0664624c36ddb261e524304da1cc78d41b95fb1 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:32:41 +0300
 Subject: [PATCH 078/212] Step 12.7: Add the pagination module
@@ -2590,7 +2590,7 @@ index 436212a..79b962b 100644
 2.3.8 (Apple Git-58)
 
 
-From 43ac16e5da151696d6f30a61a2305ef54e37d127 Mon Sep 17 00:00:00 2001
+From 81701198e3220809d944d8f43a2d32a667dc54dd Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:33:26 +0300
 Subject: [PATCH 079/212] Step 12.8: Use the pagination directive
@@ -2616,7 +2616,7 @@ index ca956ea..806534f 100644
 2.3.8 (Apple Git-58)
 
 
-From 9c8d6d69fb961a68d62d73f00fab73ef5fdcdd20 Mon Sep 17 00:00:00 2001
+From 67c2c7931aee7c1e672f26b3a9a1c80a137b1211 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:33:51 +0300
 Subject: [PATCH 080/212] Step 12.9: Add the pagination controls
@@ -2642,7 +2642,7 @@ index 806534f..1041916 100644
 2.3.8 (Apple Git-58)
 
 
-From 9b7a3d0a99b7a5da16029b1b493ace87091f1f38 Mon Sep 17 00:00:00 2001
+From 3b2c56442c61a681a8fb7346ea034fe69b3c460f Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:35:01 +0300
 Subject: [PATCH 081/212] Step 12.10: Add function to handle the page change
@@ -2669,7 +2669,7 @@ index 54727b6..7549424 100644
 2.3.8 (Apple Git-58)
 
 
-From ae30f3e6d1fa1f63f7c2281fe3f911da90e3fde2 Mon Sep 17 00:00:00 2001
+From f8aeed8af49e739a7c3853bfcc096523ea92e682 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Mon, 28 Sep 2015 02:50:32 +0300
 Subject: [PATCH 082/212] Step 12.11: Add the tmeasday:publish-counts package
@@ -2704,7 +2704,7 @@ index 9f46671..5d2ed86 100644
 2.3.8 (Apple Git-58)
 
 
-From d035f183d175c05bd8761475aa11f1c96838c413 Mon Sep 17 00:00:00 2001
+From 37bfae8b61e8ee74ae4f541f261db1f9606ad71d Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:38:00 +0300
 Subject: [PATCH 083/212] Step 12.12: Add parties count publish
@@ -2738,7 +2738,7 @@ index 663bcd8..9622905 100644
 2.3.8 (Apple Git-58)
 
 
-From 71ccc5ea92683d8aaedc401faff66c5d6b667a63 Mon Sep 17 00:00:00 2001
+From 05bb836d2efe5cb2ffc2653819961111cb1604c6 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:40:14 +0300
 Subject: [PATCH 084/212] Step 12.13: Add parties count to the client
@@ -2764,7 +2764,7 @@ index 7549424..8251b94 100644
 2.3.8 (Apple Git-58)
 
 
-From 4903acff4f8ee4c9e453e80eb5fa127561de7a4e Mon Sep 17 00:00:00 2001
+From cde6b3fbd25d983d406523e2cc7bc8c88b913c03 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:41:19 +0300
 Subject: [PATCH 085/212] Step 12.14: Add autorun to wrap the subscribe
@@ -2802,7 +2802,7 @@ index 8251b94..251320d 100644
 2.3.8 (Apple Git-58)
 
 
-From 2a1cf485978f02ab73d73be46e38cb59eb4ec20e Mon Sep 17 00:00:00 2001
+From b66288628e0bab22ba7b1af22fd10139313323c1 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:41:47 +0300
 Subject: [PATCH 086/212] Step 12.15: Added usage of getReactivly
@@ -2832,7 +2832,7 @@ index 251320d..51dd62d 100644
 2.3.8 (Apple Git-58)
 
 
-From 1a91bda464b2a95a05c81fd09db0524310d2b8df Mon Sep 17 00:00:00 2001
+From 9aa76100f5670dbc8c269a3e1e93f082d3d6d28a Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:43:10 +0300
 Subject: [PATCH 087/212] Step 12.16: Added usage of getReactivly to the
@@ -2859,7 +2859,7 @@ index 51dd62d..6df313b 100644
 2.3.8 (Apple Git-58)
 
 
-From 44c30cea9b448466d84d957ef8f624b93a9619aa Mon Sep 17 00:00:00 2001
+From c46c1bd1ce79a5f20e82cd51ca54a9fe141a6bb0 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:43:45 +0300
 Subject: [PATCH 088/212] Step 12.17: Add sort controls to the view
@@ -2890,7 +2890,7 @@ index 1041916..3d39e49 100644
 2.3.8 (Apple Git-58)
 
 
-From 442eeead536825ccd9d39f56ffb5d849011c1bb2 Mon Sep 17 00:00:00 2001
+From a5489f709246c35538a88b5990a3acc3d908699c Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:44:25 +0300
 Subject: [PATCH 089/212] Step 12.18: Add order logic to the client
@@ -2918,7 +2918,7 @@ index 6df313b..d3ba0ae 100644
 2.3.8 (Apple Git-58)
 
 
-From 829bc7f4d193150490216faa2ce7a276e59c702a Mon Sep 17 00:00:00 2001
+From 05cd386b7758f3fe59f41b7f1c59eb427ade85c8 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:46:02 +0300
 Subject: [PATCH 090/212] Step 12.19: Add default sort definition
@@ -2943,7 +2943,7 @@ index d3ba0ae..c375d15 100644
 2.3.8 (Apple Git-58)
 
 
-From 0a555e3d420b79d6b98f9e3e4d933586426e78ae Mon Sep 17 00:00:00 2001
+From 93811daec1f26a2474d3a4490a58273d3c657858 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:48:55 +0300
 Subject: [PATCH 091/212] Step 12.20: Add search string to the collection
@@ -2966,7 +2966,7 @@ index 9622905..5366910 100644
 2.3.8 (Apple Git-58)
 
 
-From 03c301632ba8d1ac49d908df92d750537ad0dff8 Mon Sep 17 00:00:00 2001
+From 0843930ddcefae64a176da1c6723acdf7a1ce371 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:50:07 +0300
 Subject: [PATCH 092/212] Step 12.21: Add the search logic
@@ -3001,7 +3001,7 @@ index 5366910..c2dc88b 100644
 2.3.8 (Apple Git-58)
 
 
-From 95aa8459686365c7c45160bf67894f0eb6633124 Mon Sep 17 00:00:00 2001
+From 1f2c788f4e49b887477e8c433f8b55a94f56be4c Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:51:56 +0300
 Subject: [PATCH 093/212] Step 12.22: Add the search input
@@ -3026,7 +3026,7 @@ index 3d39e49..e5fd486 100644
 2.3.8 (Apple Git-58)
 
 
-From 846a00fc8e14c4f2c4528e09a0e4a09880a7d778 Mon Sep 17 00:00:00 2001
+From 66b39d77e3d2e4b65ef2b0644d8de4af79217fca Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:52:39 +0300
 Subject: [PATCH 094/212] Step 12.23: Add the search param to the subscribe
@@ -3052,7 +3052,7 @@ index c375d15..2423087 100644
 2.3.8 (Apple Git-58)
 
 
-From dbd708e757a89ad15068bc66a44aedbd74ecc5dd Mon Sep 17 00:00:00 2001
+From 43c93d5e2aeb2c6e08ebf9e0ad7e81f0f7e9c48f Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:55:28 +0300
 Subject: [PATCH 095/212] Step 12.24: Remove the subscription from the object
@@ -3076,7 +3076,7 @@ index a65cabc..7ac734b 100644
 2.3.8 (Apple Git-58)
 
 
-From 199279297ae4a38c3d555035c925adca06627a7b Mon Sep 17 00:00:00 2001
+From d570eca60336258c59c9fe5a28a271f47a290555 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:56:02 +0300
 Subject: [PATCH 096/212] Step 12.25: Add $scope subscription to the collection
@@ -3099,7 +3099,7 @@ index 7ac734b..4cfb48d 100644
 2.3.8 (Apple Git-58)
 
 
-From 2b5c24cd7dc913fcaab5603f9fb18caf1db1a420 Mon Sep 17 00:00:00 2001
+From 2c4c0f53e138f14b968c6e5c5aeda0e20f6098c1 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:57:59 +0300
 Subject: [PATCH 097/212] Step 13.1: Create the filter
@@ -3134,7 +3134,7 @@ index 0000000..9166e47
 2.3.8 (Apple Git-58)
 
 
-From bb2cdbea5a32c9b321c286c4c14aedb1fdff17e8 Mon Sep 17 00:00:00 2001
+From 81a425c5b483196690ca016ada905eaed016fda9 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 21:59:45 +0300
 Subject: [PATCH 098/212] Step 13.2: Use the filter
@@ -3163,7 +3163,7 @@ index a640092..5ab9471 100644
 2.3.8 (Apple Git-58)
 
 
-From 1647f8c9d8c53d306f5cab91ef074cf28c04caf0 Mon Sep 17 00:00:00 2001
+From ad8be991ec1f5a74113cffe56575fdc8ade9bdcc Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 22:00:48 +0300
 Subject: [PATCH 099/212] Step 13.3: Use filter to display user details
@@ -3189,7 +3189,7 @@ index 5ab9471..4642f74 100644
 2.3.8 (Apple Git-58)
 
 
-From f6a7e6b5ffd47a1118853044de934ca9c8e1f2c8 Mon Sep 17 00:00:00 2001
+From 4e5fb7eaeac1b2d50fbb6a6ab937c275de8f7d3c Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 22:01:22 +0300
 Subject: [PATCH 100/212] Step 13.4: Create the displayName filter
@@ -3221,7 +3221,7 @@ index 0000000..162f496
 2.3.8 (Apple Git-58)
 
 
-From b5fbafdc0c78b58d834d9f522a5a96b2cce36520 Mon Sep 17 00:00:00 2001
+From fada006bdc8e004ad8fd2f1ee751dd5862f2bf1a Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 22:05:24 +0300
 Subject: [PATCH 101/212] Step 13.5: Added user details
@@ -3247,7 +3247,7 @@ index e5fd486..d3cc5e0 100644
 2.3.8 (Apple Git-58)
 
 
-From 558971c02a4e5c27ff47d66afd31070f9d135bb1 Mon Sep 17 00:00:00 2001
+From 6e23359007190aa0fbe1a42a6fae291e7c27fa97 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 22:07:30 +0300
 Subject: [PATCH 102/212] Step 13.6: Added the logic to the controller
@@ -3297,7 +3297,7 @@ index 2423087..00852a7 100644
 2.3.8 (Apple Git-58)
 
 
-From 9aa7e60949f8a44b7fe106c1eccb501949546b53 Mon Sep 17 00:00:00 2001
+From a8a7f07a1e4500cbea987e0c1351e3acfea62e4d Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 22:12:01 +0300
 Subject: [PATCH 103/212] Step 13.5: Added user details
@@ -3324,7 +3324,7 @@ index d3cc5e0..3d05a0e 100644
 2.3.8 (Apple Git-58)
 
 
-From 8e2e4d27bab6a7d40e9d280fa20b67930cca03b5 Mon Sep 17 00:00:00 2001
+From 8a809357b5c9c18fd50f748548eb4c760e589038 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 22:13:18 +0300
 Subject: [PATCH 104/212] Step 13.7: Added subscribe to the users collection
@@ -3350,7 +3350,7 @@ index 00852a7..afdef32 100644
 2.3.8 (Apple Git-58)
 
 
-From 3e2ecad78df1e0b1e9fb4db2588a16dd246f3e13 Mon Sep 17 00:00:00 2001
+From 11d14cf608d444f0dd1fd989db670ff7189c71e5 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 22:13:48 +0300
 Subject: [PATCH 105/212] Step 13.8: Use filter to display the user info
@@ -3377,7 +3377,7 @@ index 3d05a0e..d3cc5e0 100644
 2.3.8 (Apple Git-58)
 
 
-From 492e59c6a45c7a0d408f860461e2a62435a77e10 Mon Sep 17 00:00:00 2001
+From 1121c7453451e8ec0f0c6a1e9e2061e7c7dfc506 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 22:23:03 +0300
 Subject: [PATCH 106/212] Step 14.1: Add meteor method to the model
@@ -3446,7 +3446,7 @@ index b793c1f..8998b5e 100644
 2.3.8 (Apple Git-58)
 
 
-From 930d247902ce9ab2c4d3cb176de01311e7069986 Mon Sep 17 00:00:00 2001
+From 6048f6a7a033e4cb78f6132df625718e1efdc7bd Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Mon, 28 Sep 2015 03:01:09 +0300
 Subject: [PATCH 107/212] Step 14.2: Add the email package
@@ -3468,7 +3468,7 @@ index 7abcbd4..7264ae6 100644
 2.3.8 (Apple Git-58)
 
 
-From 981bab78f4e86f64a100a158ffbd9d365739810a Mon Sep 17 00:00:00 2001
+From b4012ba59dba2a6c9b1614b8b7ad0e8311472358 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 22:25:19 +0300
 Subject: [PATCH 108/212] Step 14.3: Add invite method to the client
@@ -3501,7 +3501,7 @@ index 4cfb48d..045ea9d 100644
 2.3.8 (Apple Git-58)
 
 
-From 711f57c1021729af0cf1c55801516c42bd2de0e6 Mon Sep 17 00:00:00 2001
+From d3d7443008fa36f007bb0f331d68b210c70f9730 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 22:26:39 +0300
 Subject: [PATCH 109/212] Step 14.4: Add invite button to the view
@@ -3526,7 +3526,7 @@ index 4642f74..609a4ba 100644
 2.3.8 (Apple Git-58)
 
 
-From f3ab80ff11b493c1ac8cfbfd22bc3b67b6b25dff Mon Sep 17 00:00:00 2001
+From 112c34b784b0e36edd751efea2c597bda0f71a25 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 22:27:54 +0300
 Subject: [PATCH 110/212] Step 14.5: Add invited logic to the publish
@@ -3566,7 +3566,7 @@ index c2dc88b..b691e30 100644
 2.3.8 (Apple Git-58)
 
 
-From 0256cd3edfbbf7f63b49799876c7d9d94da62533 Mon Sep 17 00:00:00 2001
+From afbb88aff46f8a221a966bdf940b8385459d99c4 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 22:30:21 +0300
 Subject: [PATCH 111/212] Step 14.6: Add RSVP function to the server
@@ -3630,7 +3630,7 @@ index 8998b5e..37b10e5 100644
 2.3.8 (Apple Git-58)
 
 
-From 5c352cb06386465220b571b3ccf375b99caaf418 Mon Sep 17 00:00:00 2001
+From c48ac0529d27418c27776b67708b7d5c5b9bd598 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 22:31:14 +0300
 Subject: [PATCH 112/212] Step 14.7: Add RSVP function to the client
@@ -3665,7 +3665,7 @@ index afdef32..ea7eb56 100644
 2.3.8 (Apple Git-58)
 
 
-From 97c9e8a504ccc3ee1f2a2eabcc628cb745a3ffc8 Mon Sep 17 00:00:00 2001
+From a7cd4d0909613874eac2aa4ee3acd50baa02981e Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 22:33:05 +0300
 Subject: [PATCH 113/212] Step 14.8: Add RSVP control to the view
@@ -3696,7 +3696,7 @@ index d3cc5e0..451835f 100644
 2.3.8 (Apple Git-58)
 
 
-From da16e8679b3fc2cc2961c7db5821f7466cb2ace2 Mon Sep 17 00:00:00 2001
+From 50956a6083d09a74cfd6bc69531d20e3665e0cb1 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 22:33:44 +0300
 Subject: [PATCH 114/212] Step 14.9: Add RSVP list to the view
@@ -3735,7 +3735,7 @@ index 451835f..98e33e5 100644
 2.3.8 (Apple Git-58)
 
 
-From e86887df371dd734e971711c5dbe549b2e755365 Mon Sep 17 00:00:00 2001
+From 225c8bc5ee937dcd98b58cd5161dc1cb2566f23b Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 22:34:19 +0300
 Subject: [PATCH 115/212] Step 14.10: Add RSVP list to the view of users who
@@ -3767,7 +3767,7 @@ index 98e33e5..feb6cd6 100644
 2.3.8 (Apple Git-58)
 
 
-From a897bba4b13adff4904f42e87b1711fb7a39ab61 Mon Sep 17 00:00:00 2001
+From 4ac17300d2c596b7570d3b8ceb7b1a0384a48f79 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 22:34:54 +0300
 Subject: [PATCH 116/212] Step 14.11: Added logic to the controller
@@ -3798,7 +3798,7 @@ index ea7eb56..57d1f52 100644
 2.3.8 (Apple Git-58)
 
 
-From f07e8e1e3a3075f694334a5524748effc226c7d7 Mon Sep 17 00:00:00 2001
+From 9c80500743d5273784d79a4eed2e5834dee6e491 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 22:35:37 +0300
 Subject: [PATCH 117/212] Step 14.12: Add users collection
@@ -3824,7 +3824,7 @@ index 57d1f52..2273fb3 100644
 2.3.8 (Apple Git-58)
 
 
-From 60b5c48a355f6509d2c13e520814540da56db2aa Mon Sep 17 00:00:00 2001
+From 354647eecde160be6c382b902d0be74e33962b96 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 22:39:54 +0300
 Subject: [PATCH 118/212] Step 15.1: Add ng-show to the directive
@@ -3847,7 +3847,7 @@ index feb6cd6..4ccaaa8 100644
 2.3.8 (Apple Git-58)
 
 
-From 63b22f055b4ad7ee0315ece96ab9b6cbc47899c6 Mon Sep 17 00:00:00 2001
+From 8ef8cea46d0129408d8ec94c782c7421e3f9d020 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 22:40:35 +0300
 Subject: [PATCH 119/212] Step 15.2: Add message to users that not logged in
@@ -3874,7 +3874,7 @@ index 4ccaaa8..7adf8b6 100644
 2.3.8 (Apple Git-58)
 
 
-From 74ec5a40bf8c785e4d0c5fe0da177801173a6b88 Mon Sep 17 00:00:00 2001
+From 2861e64098ab4d82c76242e1aca6b9230cb3eab5 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 22:41:09 +0300
 Subject: [PATCH 120/212] Step 15.3: Add ng-show to the RSVP buttons
@@ -3900,7 +3900,7 @@ index 7adf8b6..294ab3a 100644
 2.3.8 (Apple Git-58)
 
 
-From 7339294259e0ab63aae75674e2fd7c356045f634 Mon Sep 17 00:00:00 2001
+From 17ea623b6809373759b5cd64cc94fa9f4be0ebb1 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 22:41:46 +0300
 Subject: [PATCH 121/212] Step 15.4: Add message for not-logged in users on the
@@ -3929,7 +3929,7 @@ index 294ab3a..bafd3b8 100644
 2.3.8 (Apple Git-58)
 
 
-From 3dcf00df456a2a6024fa497f8e7ec1bb5d270e30 Mon Sep 17 00:00:00 2001
+From 212a015c70ae823cb8551070c68b734c9032b2bd Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 22:42:52 +0300
 Subject: [PATCH 122/212] Step 15.5: Add ng-show to delete button
@@ -3955,7 +3955,7 @@ index bafd3b8..fac465d 100644
 2.3.8 (Apple Git-58)
 
 
-From 3ce579417f69c4b5cb888928544341f03a9cf944 Mon Sep 17 00:00:00 2001
+From 2546328613be26b8bf1dccf366bbe7837ecf6bab Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 22:43:59 +0300
 Subject: [PATCH 123/212] Step 15.6: Add ng-if to outstanding RSVP
@@ -3989,7 +3989,7 @@ index fac465d..13cd0f7 100644
 2.3.8 (Apple Git-58)
 
 
-From d8fd9c18c023053f99fb2c550c2d0c6bcf3d7db0 Mon Sep 17 00:00:00 2001
+From dc792991a9feed398923af61ce5750aa58974043 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 22:46:41 +0300
 Subject: [PATCH 124/212] Step 15.7: Add canInvite logic
@@ -4019,7 +4019,7 @@ index 045ea9d..0c27c6e 100644
 2.3.8 (Apple Git-58)
 
 
-From cc5ad9b46f30eced2b90d848a9656f9b07cee556 Mon Sep 17 00:00:00 2001
+From 6ac0845a73eaab8bf4522e052c07da9f723390c6 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 22:47:19 +0300
 Subject: [PATCH 125/212] Step 15.8: Add usage for ng-show with canInvite
@@ -4052,7 +4052,7 @@ index 609a4ba..a695811 100644
 2.3.8 (Apple Git-58)
 
 
-From db88c9216a5b85189d9137dc9d9d0043fc135c22 Mon Sep 17 00:00:00 2001
+From d583b39090fc636593113968dd6573f2e8fe4c8d Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 22:49:32 +0300
 Subject: [PATCH 126/212] Step 15.9: Example of ng-disabled
@@ -4082,7 +4082,7 @@ index a695811..f17a8f2 100644
 2.3.8 (Apple Git-58)
 
 
-From 9e30b0c2e575d92b42e2fa462e92825f2a4d125d Mon Sep 17 00:00:00 2001
+From a3e5d3af301a0777744be7b34eafcaf5e28953c0 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Mon, 28 Sep 2015 03:07:46 +0300
 Subject: [PATCH 127/212] Step 16.1: Add the angularui:angular-google-maps
@@ -4134,7 +4134,7 @@ index 5d2ed86..92307e4 100644
 2.3.8 (Apple Git-58)
 
 
-From 44cad04af9dabf7831ce8eb54485eec2f70368dd Mon Sep 17 00:00:00 2001
+From 3c67785b0aeb51a635703e36dda7bf79db6f82cc Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 22:54:08 +0300
 Subject: [PATCH 128/212] Step 16.1: Add google maps module dependency
@@ -4163,7 +4163,7 @@ index 79b962b..980e7c3 100644
 2.3.8 (Apple Git-58)
 
 
-From 784442b8a91bfac272d30eb5df5ef251ec42d00c Mon Sep 17 00:00:00 2001
+From 500f0232d5b6daf0af5219c9ab621512f008b6d4 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 22:54:54 +0300
 Subject: [PATCH 129/212] Step 16.2: Add basic map to the view
@@ -4196,7 +4196,7 @@ index f17a8f2..73c4640 100644
 2.3.8 (Apple Git-58)
 
 
-From 1b7833ff32f627d8155305fc04df8b5df0fb8047 Mon Sep 17 00:00:00 2001
+From c8e0328a318834135cc6fafa236244c5e33ae9ab Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 22:55:24 +0300
 Subject: [PATCH 130/212] Step 16.3: Add map params to the controller
@@ -4227,7 +4227,7 @@ index 0c27c6e..75e12f2 100644
 2.3.8 (Apple Git-58)
 
 
-From c90ac33490d43a73444146d03e563681f7c7a1c0 Mon Sep 17 00:00:00 2001
+From dfe12a147a8810f96380fdd4564cd5a76598d0f8 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 22:56:18 +0300
 Subject: [PATCH 131/212] Step 16.4: Create basic CSS style with google map
@@ -4253,7 +4253,7 @@ index 0000000..219ff39
 2.3.8 (Apple Git-58)
 
 
-From 2d57d83b20c2f4abaf6b0fdd7665ea74bea4ca61 Mon Sep 17 00:00:00 2001
+From d3bce3a58da21c14e7256957867470b169f4c5a3 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 22:57:43 +0300
 Subject: [PATCH 132/212] Step 16.5: Add party marker to the map
@@ -4289,7 +4289,7 @@ index 73c4640..7ef1f8d 100644
 2.3.8 (Apple Git-58)
 
 
-From bb53455de2158213eb032f10aa9bd8aaf4ec9b9a Mon Sep 17 00:00:00 2001
+From a99222b7570bcd5ac6f0b03d0745d1e0c580f3ab Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 22:58:32 +0300
 Subject: [PATCH 133/212] Step 16.6: Add the marker creation logic to the
@@ -4340,7 +4340,7 @@ index 75e12f2..b6209e5 100644
 2.3.8 (Apple Git-58)
 
 
-From e59b66f9fb960fad4a0be50fee5c22635712b7ca Mon Sep 17 00:00:00 2001
+From 450773b5809cfb76e3ae2482f060c5c909ea7ce1 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 22:59:21 +0300
 Subject: [PATCH 134/212] Step 16.7: Add map to the parties list
@@ -4371,7 +4371,7 @@ index 13cd0f7..ec5e761 100644
 2.3.8 (Apple Git-58)
 
 
-From d31b4f6d2a71f31e84c39d6e2d996d2c733278e1 Mon Sep 17 00:00:00 2001
+From e4db3187275c74eeefe05f9a2d85544463221053 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 23:00:02 +0300
 Subject: [PATCH 135/212] Step 16.8: Add map logic to the parties list
@@ -4411,7 +4411,7 @@ index 2273fb3..4c3255e 100644
 2.3.8 (Apple Git-58)
 
 
-From f4da83f78433a267b813bb572929d9b28cfefa78 Mon Sep 17 00:00:00 2001
+From 594f6e5d2ae7c3b390e7297842a9c16f846e1005 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Mon, 28 Sep 2015 03:39:52 +0300
 Subject: [PATCH 136/212] Step 16.9: Add $state dependency to controller
@@ -4436,7 +4436,7 @@ index 4c3255e..f2ed290 100644
 2.3.8 (Apple Git-58)
 
 
-From 7cba974ba562723f0bdedea69238ab48f22b76a6 Mon Sep 17 00:00:00 2001
+From bba30a70d0894961be7ee199831eb6d56027e703 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 23:08:21 +0300
 Subject: [PATCH 137/212] Step 17.1: Add main CSS file
@@ -4460,7 +4460,7 @@ index 0000000..4397047
 2.3.8 (Apple Git-58)
 
 
-From cf5c8062e9c4fc0483d395862d71f7856f353c35 Mon Sep 17 00:00:00 2001
+From 1ca4b97178928920f990ce94c0bc7c7c06668cfa Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Mon, 28 Sep 2015 03:27:28 +0300
 Subject: [PATCH 138/212] Step 17.2: Add the twbs:bootstrap package
@@ -4495,7 +4495,7 @@ index 92307e4..06df8f6 100644
 2.3.8 (Apple Git-58)
 
 
-From 601cc5f142c62dc5c2cf8f0fb6d34ad08292b2f5 Mon Sep 17 00:00:00 2001
+From 49540f920ee4eaa238c1a71a72e7e0f1df80a07a Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 23:09:03 +0300
 Subject: [PATCH 139/212] Step 17.3: Add navbar and style to the login button
@@ -4536,7 +4536,7 @@ index b42b266..ceefe3a 100644
 2.3.8 (Apple Git-58)
 
 
-From e6deb86aadd1d39016c100fda106eaadc96c1928 Mon Sep 17 00:00:00 2001
+From c88b5fa5a2162cb275aaa76197ad76e3c6edcdf7 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Mon, 28 Sep 2015 03:48:29 +0300
 Subject: [PATCH 140/212] Step 17.4: Add the less package
@@ -4558,7 +4558,7 @@ index 7974098..445c0dc 100644
 2.3.8 (Apple Git-58)
 
 
-From 309c8597674a25b62fabcbd385337171cf3cedd4 Mon Sep 17 00:00:00 2001
+From 5679d325761bbc6c8a90a042e58bbf304fbcdef3 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 23:09:43 +0300
 Subject: [PATCH 141/212] Step 17.5: Basic usage of LESS
@@ -4599,7 +4599,7 @@ index 0000000..6acada4
 2.3.8 (Apple Git-58)
 
 
-From 83678a7aa4a0d46c47726fcea315c4a7ed3441ce Mon Sep 17 00:00:00 2001
+From cef2f5b212342da7a2436853b905bc54680572cf Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 23:10:22 +0300
 Subject: [PATCH 142/212] Step 17.6: Change the name of parties css
@@ -4637,7 +4637,7 @@ index 0000000..219ff39
 2.3.8 (Apple Git-58)
 
 
-From 7fafca218da50541ceada2bb80454bc797a2ac08 Mon Sep 17 00:00:00 2001
+From 182f095389ad8164e365a4360bce6a0e5d7abb39 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 23:10:50 +0300
 Subject: [PATCH 143/212] Step 17.7: Add import to parties LESS file
@@ -4665,7 +4665,7 @@ index 6acada4..87c5240 100644
 2.3.8 (Apple Git-58)
 
 
-From 286309460bea9fc6bb8778f2b8b690a88378cfcc Mon Sep 17 00:00:00 2001
+From 8699d56aeb3c6509f3094798bf61e9048ac462f3 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Mon, 28 Sep 2015 03:55:47 +0300
 Subject: [PATCH 144/212] Step 17.8: Add the angularui:angular-ui-bootstrap
@@ -4701,7 +4701,7 @@ index 06df8f6..3f033df 100644
 2.3.8 (Apple Git-58)
 
 
-From 39e8d3070c3a9fed0c6b9e3493531ce0c7beb5fb Mon Sep 17 00:00:00 2001
+From b54e699a8a16a3ed7611ca8514e97e1849d94145 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 9 Sep 2015 14:45:31 +0300
 Subject: [PATCH 145/212] Step 17.9: Update the index.html style and tags
@@ -4754,7 +4754,7 @@ index ceefe3a..4ac712e 100644
 2.3.8 (Apple Git-58)
 
 
-From 395d3b6f1152db4a9d20ad67fd0bafe4079f2f6f Mon Sep 17 00:00:00 2001
+From 1be29ef43d8a672672df7d960cfd9d7aa0e0aec0 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 9 Sep 2015 14:47:43 +0300
 Subject: [PATCH 146/212] Step 17.10: Add dependency for ui-bootstrap
@@ -4781,7 +4781,7 @@ index 980e7c3..c970d99 100644
 2.3.8 (Apple Git-58)
 
 
-From 75f7eeafae7b1316ba623d3dc2120e094fd789f6 Mon Sep 17 00:00:00 2001
+From e780d4c0aa659b5da520d6c112cc5ea6a09e7255 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 9 Sep 2015 14:49:19 +0300
 Subject: [PATCH 147/212] Step 17.11: Move the logic of add new party to
@@ -4813,7 +4813,7 @@ index 0000000..f2d0d1a
 2.3.8 (Apple Git-58)
 
 
-From 3d87e091b7adb2cf1e56d55c63170c35b026627c Mon Sep 17 00:00:00 2001
+From dac09ff6a34bf2d5b755ee509e0b2cb62d2b1f4b Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 9 Sep 2015 14:57:13 +0300
 Subject: [PATCH 148/212] Step 17.12: Create the view of new party modal
@@ -4858,7 +4858,7 @@ index 0000000..5fd3485
 2.3.8 (Apple Git-58)
 
 
-From 9152490cce71a70cbd250e0df98e8a5054e9bc5f Mon Sep 17 00:00:00 2001
+From 96706204893f0ec08c1f591f4cee95dea5478a2d Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 9 Sep 2015 14:58:55 +0300
 Subject: [PATCH 149/212] Step 17.13: Update the parties list HTML
@@ -5061,7 +5061,7 @@ index ec5e761..c66ae56 100644
 2.3.8 (Apple Git-58)
 
 
-From 5b5edac1ad58fd39bca9ca2f34a6b03ff944a345 Mon Sep 17 00:00:00 2001
+From c8a06f6863d0fac6fe8fff0dda9098f627c3d910 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 9 Sep 2015 14:59:12 +0300
 Subject: [PATCH 150/212] Step 17.14: Update the logic of the parties list
@@ -5195,7 +5195,7 @@ index f2ed290..b1da50c 100644
 2.3.8 (Apple Git-58)
 
 
-From 6ad7129d366fbfe3c2c2836199430d35759a907e Mon Sep 17 00:00:00 2001
+From ce997de6f569451d3a9b381530480b0aa3443a9d Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 9 Sep 2015 15:03:57 +0300
 Subject: [PATCH 151/212] Step 17.15: Create less file for each component and
@@ -5446,7 +5446,7 @@ index 0000000..4f19b98
 2.3.8 (Apple Git-58)
 
 
-From 2797aa0acbb0e29f994e1308a7b59c4e9d2eea50 Mon Sep 17 00:00:00 2001
+From 085f8e6a830f65bab326b1999f842173731d1f72 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 9 Sep 2015 15:04:28 +0300
 Subject: [PATCH 152/212] Step 17.16: Update the main less file to use the new
@@ -5510,7 +5510,7 @@ index 87c5240..e75ad09 100644
 2.3.8 (Apple Git-58)
 
 
-From dfea52412bcb29363fe18ed3b6c12283bcdbc84f Mon Sep 17 00:00:00 2001
+From afb610b9f585cf3e82b149f657600c84d933ced7 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 9 Sep 2015 15:05:35 +0300
 Subject: [PATCH 153/212] Step 17.17: Update the view of party details page
@@ -5605,7 +5605,7 @@ index 7ef1f8d..104a657 100644
 2.3.8 (Apple Git-58)
 
 
-From c650654cbdf02f31953278c51efc8e0827a11728 Mon Sep 17 00:00:00 2001
+From d3516386adb6e23d145c16956652cb1584f3b7f8 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Mon, 28 Sep 2015 04:17:21 +0300
 Subject: [PATCH 154/212] Step 18.1: Remove the twbs:bootstrap package
@@ -5642,7 +5642,7 @@ index 3f033df..c9c8d8b 100644
 2.3.8 (Apple Git-58)
 
 
-From c39418b77543b396be31cb873dce0d9189046e2d Mon Sep 17 00:00:00 2001
+From 21f14657c70242c6db4689deef14b1fd83deba8b Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Mon, 28 Sep 2015 04:20:39 +0300
 Subject: [PATCH 155/212] Step 18.2: Add the angular:angular-material package
@@ -5679,7 +5679,7 @@ index c9c8d8b..f186ec7 100644
 2.3.8 (Apple Git-58)
 
 
-From 0fea5ebcc9499dce69ad6ef29ba66b42246e2651 Mon Sep 17 00:00:00 2001
+From 4c68253f52c85a8490400f1a8b19bc893b34cb97 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Tue, 18 Aug 2015 16:38:35 +0300
 Subject: [PATCH 156/212] Step 18.3: Add the ngMaterial dependency
@@ -5705,7 +5705,7 @@ index c970d99..d4e8b68 100644
 2.3.8 (Apple Git-58)
 
 
-From 3200a5aa9eb373ce062aec94d70b8ef8a92da9d4 Mon Sep 17 00:00:00 2001
+From 25c9188cca7a31a3c68ba1ad24d980af2217cbc6 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 9 Sep 2015 22:34:04 +0300
 Subject: [PATCH 157/212] Step 18.4: Remove $modal and use $mdDialog instead
@@ -5762,7 +5762,7 @@ index b1da50c..686706f 100644
 2.3.8 (Apple Git-58)
 
 
-From 89151a7846a88bec2021a3465f3e67d34b8555f9 Mon Sep 17 00:00:00 2001
+From 04b86198b1b80d27aa1629fb1699917dfb6d6fd3 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 9 Sep 2015 22:34:26 +0300
 Subject: [PATCH 158/212] Step 18.5: Update usage in the modal controller
@@ -5803,7 +5803,7 @@ index f2d0d1a..af25c36 100644
 2.3.8 (Apple Git-58)
 
 
-From 4a26878ecc8c6438c175856de4518a5f085dd62d Mon Sep 17 00:00:00 2001
+From 4d2f8b4bad3e4c0679132d826fc79ec366c30410 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 9 Sep 2015 22:46:47 +0300
 Subject: [PATCH 159/212] Step 18.6: Update the LESS files to match
@@ -6146,7 +6146,7 @@ index e75ad09..438dc59 100644
 2.3.8 (Apple Git-58)
 
 
-From ee49cf7373190c33b663b28a0b6e57e90336a680 Mon Sep 17 00:00:00 2001
+From 144701a0119806c2dfe5fcadc6d357c699afa30e Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 9 Sep 2015 22:49:04 +0300
 Subject: [PATCH 160/212] Step 18.7: Update the index.html to use
@@ -6200,7 +6200,7 @@ index 4ac712e..a5d537e 100644
 2.3.8 (Apple Git-58)
 
 
-From a93b4f63569d0e4a7b6769b91049defeaabe9029 Mon Sep 17 00:00:00 2001
+From b5079afa54c5a3c603fc279fc85246fffc21c172 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 9 Sep 2015 22:51:31 +0300
 Subject: [PATCH 161/212] Step 18.8: Update parties list to use material's
@@ -6399,7 +6399,7 @@ index c66ae56..a389551 100644
 2.3.8 (Apple Git-58)
 
 
-From b99d292a179f87c47cd33d5159d0fec083169b8a Mon Sep 17 00:00:00 2001
+From 9e33bb46784b698ba738489caf6dec5983b661a8 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Mon, 28 Sep 2015 04:34:12 +0300
 Subject: [PATCH 162/212] Step 18.9: Add the
@@ -6435,7 +6435,7 @@ index f186ec7..fcc9ad5 100644
 2.3.8 (Apple Git-58)
 
 
-From 1811b51fb53ed9ff085d7ca0836a6a2715298a45 Mon Sep 17 00:00:00 2001
+From aec507fdf9fb2f3e64b5d061fc53168200a98d42 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 9 Sep 2015 22:56:15 +0300
 Subject: [PATCH 163/212] Step 18.10: Add angular material icons definitions
@@ -6476,7 +6476,7 @@ index d4e8b68..a350404 100644
 2.3.8 (Apple Git-58)
 
 
-From fc68b7566ba609819dd676630fa602fd4d2e92a1 Mon Sep 17 00:00:00 2001
+From c9b4ec7e42aae8bd8e2de4fa05edfc9c2b6358ee Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 9 Sep 2015 22:58:59 +0300
 Subject: [PATCH 164/212] Step 18.11: Update party details view to use
@@ -6587,7 +6587,7 @@ index 104a657..a1d808c 100644
 2.3.8 (Apple Git-58)
 
 
-From 2cb5fdd5843a4d69c5c1a3f6c979f6370cb90a45 Mon Sep 17 00:00:00 2001
+From b174f213d8dba6711854652214f79ccd9c462f4f Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 9 Sep 2015 23:01:12 +0300
 Subject: [PATCH 165/212] Step 18.12: Update new party modal view to use
@@ -6664,7 +6664,7 @@ index 5fd3485..464d006 100644
 2.3.8 (Apple Git-58)
 
 
-From cde1fba9b9d4456a3396660b86bbf3eed8c1fc10 Mon Sep 17 00:00:00 2001
+From 8cea0c4b340f58ff784e8e2b053f70221ae38960 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Thu, 10 Sep 2015 18:44:55 +0300
 Subject: [PATCH 166/212] Step 18.13: Custom auth buttons
@@ -6674,7 +6674,7 @@ Subject: [PATCH 166/212] Step 18.13: Custom auth buttons
  1 file changed, 4 insertions(+), 1 deletion(-)
 
 diff --git a/client/index.html b/client/index.html
-index a5d537e..d7d5937 100644
+index a5d537e..44093aa 100644
 --- a/client/index.html
 +++ b/client/index.html
 @@ -10,7 +10,10 @@
@@ -6684,7 +6684,7 @@ index a5d537e..d7d5937 100644
 -    <blaze-template name="loginButtons"></blaze-template>
 +    <md-button ng-href="/login" ng-hide="$root.currentUser">Login</md-button>
 +    <md-button ng-href="/register" ng-hide="$root.currentUser">Sign up</md-button>
-+    <div ng-show="$root.currentUser">{{ $root.currentUser }}</div>
++    <div ng-show="$root.currentUser" ng-bind="$root.currentUser"></div>
 +    <md-button ng-href="/logout" ng-show="$root.currentUser">Logout</md-button>
    </div>
  </md-toolbar>
@@ -6693,7 +6693,7 @@ index a5d537e..d7d5937 100644
 2.3.8 (Apple Git-58)
 
 
-From e136dd64cfc020b194b1fd6c5c49a63cf4771332 Mon Sep 17 00:00:00 2001
+From a94f1880c8968cd409c061fd4669751b824a7959 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Thu, 10 Sep 2015 18:45:56 +0300
 Subject: [PATCH 167/212] Step 18.14: Add custom auth routes
@@ -6747,7 +6747,7 @@ index e88ad92..13f33e6 100644
 2.3.8 (Apple Git-58)
 
 
-From f52ea1366305e5a7343df97d77048a5c08420a25 Mon Sep 17 00:00:00 2001
+From d8045fd9c495de4c691071fb147fa85bc94d3b80 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Thu, 10 Sep 2015 18:51:12 +0300
 Subject: [PATCH 168/212] Step 18.15: Create login controller
@@ -6791,7 +6791,7 @@ index 0000000..d1e4664
 2.3.8 (Apple Git-58)
 
 
-From ac92a136041bdcdfad236a4adf131f8e0e1f745a Mon Sep 17 00:00:00 2001
+From 42998ad1295fa92d82b11f219160909560a28628 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Thu, 10 Sep 2015 18:51:31 +0300
 Subject: [PATCH 169/212] Step 18.16: Create login view
@@ -6845,7 +6845,7 @@ index 0000000..2ad8a07
 2.3.8 (Apple Git-58)
 
 
-From 440b99843409e0860b2102b8e44877f3bf51d6a8 Mon Sep 17 00:00:00 2001
+From 5360de39155f11040a1a3bfbf262a8aaa0b1e0a5 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Thu, 10 Sep 2015 18:53:17 +0300
 Subject: [PATCH 170/212] Step 18.17: Create register controller
@@ -6889,7 +6889,7 @@ index 0000000..f21b5f5
 2.3.8 (Apple Git-58)
 
 
-From f418c9d544c8bedde5d27826e3fc71612dbde436 Mon Sep 17 00:00:00 2001
+From ca8ca60f7660f6497cedd7e2ad0113615e575a37 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Thu, 10 Sep 2015 18:53:37 +0300
 Subject: [PATCH 171/212] Step 18.18: Create register view
@@ -6942,7 +6942,7 @@ index 0000000..2278c2f
 2.3.8 (Apple Git-58)
 
 
-From 773dc669409cafec3212e796155d0f4241c116eb Mon Sep 17 00:00:00 2001
+From e8262bf2a22f6a24e47833049cb45236c91cdb43 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Thu, 10 Sep 2015 18:54:24 +0300
 Subject: [PATCH 172/212] Step 18.19: Create reset controller
@@ -6985,7 +6985,7 @@ index 0000000..56be12f
 2.3.8 (Apple Git-58)
 
 
-From c0a14242d43d56abc212ad9daaca60efe1a48bb9 Mon Sep 17 00:00:00 2001
+From cab8e366e6fed33cb8295c17da43bc39db25b3c2 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Tue, 18 Aug 2015 17:02:39 +0300
 Subject: [PATCH 173/212] Step 18.20: Create reset view
@@ -7033,7 +7033,7 @@ index 0000000..f365b52
 2.3.8 (Apple Git-58)
 
 
-From 9981867de39ee5dabc3e9a82d39233eb024eea99 Mon Sep 17 00:00:00 2001
+From 9842d19dc509217f2651c077ad072f9f16beb790 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Mon, 28 Sep 2015 04:48:03 +0300
 Subject: [PATCH 174/212] Step 20.1: Add the cfs:standard-packages package
@@ -7099,7 +7099,7 @@ index fcc9ad5..bd2f530 100644
 2.3.8 (Apple Git-58)
 
 
-From 90ca9509beb5ffde4ecf80eca6d528452201cdf3 Mon Sep 17 00:00:00 2001
+From 784b13fd45da55826dfb1e971eb33bfca1b2033c Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Mon, 28 Sep 2015 04:53:05 +0300
 Subject: [PATCH 175/212] Step 20.2: Add the cfs:gridfs package
@@ -7134,7 +7134,7 @@ index bd2f530..0f10faf 100644
 2.3.8 (Apple Git-58)
 
 
-From d27fc9225296aaece1b61d366cbcd672fa4c16d2 Mon Sep 17 00:00:00 2001
+From 5bef1c787073917f08c238833b1eedf291520942 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Tue, 18 Aug 2015 17:44:26 +0300
 Subject: [PATCH 176/212] Step 20.3: Create the Images collection and publish
@@ -7187,7 +7187,7 @@ index 0000000..5cec451
 2.3.8 (Apple Git-58)
 
 
-From b2a3a49e3a770aa74017aa15ab7bf54aa40119bf Mon Sep 17 00:00:00 2001
+From c1d3095d141a548a62c83bc097a86eee7fae9db0 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Fri, 11 Sep 2015 11:09:03 +0300
 Subject: [PATCH 177/212] Step 20.4: Add the collectionFs to the controller
@@ -7212,7 +7212,7 @@ index 686706f..c484d72 100644
 2.3.8 (Apple Git-58)
 
 
-From 3f5c73e67a04c42266f5009014ae1c6650f270e2 Mon Sep 17 00:00:00 2001
+From 2cea6e54d9bea4fcda81ecfb7ce709584971d89c Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Mon, 28 Sep 2015 04:56:10 +0300
 Subject: [PATCH 178/212] Step 20.5: Add the danialfarid:ng-file-upload package
@@ -7247,7 +7247,7 @@ index 0f10faf..e836442 100644
 2.3.8 (Apple Git-58)
 
 
-From b82ea5dba0c77ac64ac66f89470162503483d7aa Mon Sep 17 00:00:00 2001
+From d4a92602e4622701332e0ef6f63394be3a8bb8c1 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Fri, 11 Sep 2015 11:10:51 +0300
 Subject: [PATCH 179/212] Step 20.6: Add dependency for 'ngFileUpload' to the
@@ -7275,7 +7275,7 @@ index a350404..58f45d6 100644
 2.3.8 (Apple Git-58)
 
 
-From 9cda067f7a9c39c759a1e7e657f4e1c064bc849e Mon Sep 17 00:00:00 2001
+From be109ba3f0fc71654680864e8b418c4640192bc7 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Fri, 11 Sep 2015 11:35:57 +0300
 Subject: [PATCH 180/212] Step 20.7: Add usage of file uploader
@@ -7334,7 +7334,7 @@ index 464d006..e27ba83 100644
 2.3.8 (Apple Git-58)
 
 
-From fc75b47828342c6865a4d990751fc827fe2febea Mon Sep 17 00:00:00 2001
+From 0569d4c59c9c442376cab680f9647c45be30f626 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Fri, 11 Sep 2015 11:36:17 +0300
 Subject: [PATCH 181/212] Step 20.8: Create the file upload controller
@@ -7365,7 +7365,7 @@ index 0000000..072392f
 2.3.8 (Apple Git-58)
 
 
-From dfb0709d4a2d8f69f20bace8ad47805f43b90239 Mon Sep 17 00:00:00 2001
+From de2da4d148239929e822eae53c5c0bb8e9517750 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Fri, 11 Sep 2015 11:36:56 +0300
 Subject: [PATCH 182/212] Step 20.9: Add the images collection to the new party
@@ -7392,7 +7392,7 @@ index af25c36..25e890f 100644
 2.3.8 (Apple Git-58)
 
 
-From a2dfadf3b3b30ce8008721100d28faed9504fd4f Mon Sep 17 00:00:00 2001
+From bb20004933921fd83fbd535bf4bd0722177fe4f1 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Fri, 11 Sep 2015 13:04:27 +0300
 Subject: [PATCH 183/212] Step 20.10: Add some style to the upload component
@@ -7434,7 +7434,7 @@ index 0f7beb6..31cc3d1 100644
 2.3.8 (Apple Git-58)
 
 
-From 269e22fe30b64001bba324efcdceea13e27d4ec3 Mon Sep 17 00:00:00 2001
+From e19b573f7c139288c4b9b3fa28a7033a63f5e46e Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Mon, 28 Sep 2015 04:58:20 +0300
 Subject: [PATCH 184/212] Step 20.11: Add the alexk111:ng-img-crop package
@@ -7469,7 +7469,7 @@ index e836442..2269045 100644
 2.3.8 (Apple Git-58)
 
 
-From 80ff1af2c21b289c729f9d213519cb92f9ae1f99 Mon Sep 17 00:00:00 2001
+From 23f91bd2669b15641b88cdb0f0b5ac7c9b7d0bc3 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Fri, 11 Sep 2015 13:08:27 +0300
 Subject: [PATCH 185/212] Step 20.12: Add dependency for ngImgCrop
@@ -7496,7 +7496,7 @@ index 58f45d6..559741a 100644
 2.3.8 (Apple Git-58)
 
 
-From 0b800ef8afa20cab24cd3380c4e1bdbd02f4a9a4 Mon Sep 17 00:00:00 2001
+From d0c0c47c9f06f9a6df4e6d8add805a156299e41e Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Fri, 11 Sep 2015 13:10:28 +0300
 Subject: [PATCH 186/212] Step 20.13: Update the image upload logic
@@ -7540,7 +7540,7 @@ index 072392f..1df211d 100644
 2.3.8 (Apple Git-58)
 
 
-From 11e646fbbaa543d9cbccd85977b75a3810e275f7 Mon Sep 17 00:00:00 2001
+From 848e7464abd193554b6ec53441e4d194078f8dc0 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Fri, 11 Sep 2015 13:10:42 +0300
 Subject: [PATCH 187/212] Step 20.14: Add usage of ngImgCrop
@@ -7568,7 +7568,7 @@ index e27ba83..ff647a9 100644
 2.3.8 (Apple Git-58)
 
 
-From c3cd532235d9e96555a9ce88981e9098b28769e5 Mon Sep 17 00:00:00 2001
+From cf4b7bdd14f6509cbdb7f89890039f3540a9073a Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Fri, 11 Sep 2015 13:10:57 +0300
 Subject: [PATCH 188/212] Step 20.15: Add ng-hide to the uploader
@@ -7594,7 +7594,7 @@ index ff647a9..75cd7da 100644
 2.3.8 (Apple Git-58)
 
 
-From 23b7af9fcbd9ced8ba4985046b0ca57255f8fbd9 Mon Sep 17 00:00:00 2001
+From f77e7c31d8364d00e32a366e9d53fbc1217b3113 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Fri, 11 Sep 2015 13:17:35 +0300
 Subject: [PATCH 189/212] Step 20.16: Add some CSS to make the crop look better
@@ -7627,7 +7627,7 @@ index 31cc3d1..facbb89 100644
 2.3.8 (Apple Git-58)
 
 
-From 790da6c16776f051593f47818eac2dcf50382d61 Mon Sep 17 00:00:00 2001
+From e9caf1b503ae24b3cfcf77740af55bcf5ed2993e Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Fri, 11 Sep 2015 13:17:47 +0300
 Subject: [PATCH 190/212] Step 20.17: Add save button for the cropped image
@@ -7656,7 +7656,7 @@ index 75cd7da..e3b3983 100644
 2.3.8 (Apple Git-58)
 
 
-From c4d79235b552f4934db00d5161e3c8823dbe1733 Mon Sep 17 00:00:00 2001
+From ffac59f0abc48775685c28e20cc09a3fd3c09aec Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Fri, 11 Sep 2015 13:21:30 +0300
 Subject: [PATCH 191/212] Step 20.18: Add logic to save the cropped image
@@ -7689,7 +7689,7 @@ index 1df211d..f13361f 100644
 2.3.8 (Apple Git-58)
 
 
-From b042257d13a3373791f48012571475ac77efe757 Mon Sep 17 00:00:00 2001
+From 168b2ee89621c81da4fc1ad7c48d8767ccb1e682 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Fri, 11 Sep 2015 13:21:49 +0300
 Subject: [PATCH 192/212] Step 20.19: Add an array to hold all the new images
@@ -7714,7 +7714,7 @@ index 25e890f..b4642a7 100644
 2.3.8 (Apple Git-58)
 
 
-From edad636299d70b9abaaaa86281238595d378b325 Mon Sep 17 00:00:00 2001
+From 5d427c3a7c01a9f3db03f9fb72a976d91de17b64 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Fri, 11 Sep 2015 13:29:01 +0300
 Subject: [PATCH 193/212] Step 20.20: Add the display of uploaded images
@@ -7744,7 +7744,7 @@ index e3b3983..ae8f7fd 100644
 2.3.8 (Apple Git-58)
 
 
-From ffbc26b88e22a21c27d28b12de352770e2d371f0 Mon Sep 17 00:00:00 2001
+From cb15a6fd303977b0e7dc4ab62647f194ef8517f0 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Mon, 28 Sep 2015 05:00:34 +0300
 Subject: [PATCH 194/212] Step 20.21: Add the vitalets:angular-xeditable
@@ -7779,7 +7779,7 @@ index 2269045..7e1eaef 100644
 2.3.8 (Apple Git-58)
 
 
-From 419b722530599dd31e8dccce14be0e548f4c0887 Mon Sep 17 00:00:00 2001
+From 5d042bdcf9d1a7b09d6a54837a288cfca4e8cb3a Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Fri, 11 Sep 2015 13:30:58 +0300
 Subject: [PATCH 195/212] Step 20.22: Add xeditable dependency
@@ -7806,7 +7806,7 @@ index 559741a..b24da29 100644
 2.3.8 (Apple Git-58)
 
 
-From b73ebe1a7f3f382377b147e90c08779f386775b5 Mon Sep 17 00:00:00 2001
+From e8c54de8bd16eb11a543df022b85c1a16c463bea Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Fri, 11 Sep 2015 13:32:23 +0300
 Subject: [PATCH 196/212] Step 20.23: Add usage of angular-xeditable
@@ -7845,7 +7845,7 @@ index ae8f7fd..b7abd11 100644
 2.3.8 (Apple Git-58)
 
 
-From 39b7823a1cc8d2868a87150b54393f59ab7819b7 Mon Sep 17 00:00:00 2001
+From f5b076466a284e0fc0ee993a36b1d6cc539ea6f9 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Fri, 11 Sep 2015 13:33:12 +0300
 Subject: [PATCH 197/212] Step 20.24: Add the logic to update the description
@@ -7879,7 +7879,7 @@ index b4642a7..761dcc5 100644
 2.3.8 (Apple Git-58)
 
 
-From d5cd85ad1fce12d5c8dd7df6ad04784c317eae13 Mon Sep 17 00:00:00 2001
+From bceb892d122ba3e57e50cc56bc9913f2ac7333bc Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Fri, 11 Sep 2015 13:38:38 +0300
 Subject: [PATCH 198/212] Step 20.25: Use div instead of form
@@ -7909,7 +7909,7 @@ index b7abd11..3c8347b 100644
 2.3.8 (Apple Git-58)
 
 
-From ae85ff5a1521cd439efbbf0d5dc5e755d718b11f Mon Sep 17 00:00:00 2001
+From d00709fc25bae16886c2cf96ade06f78dad47abd Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Fri, 11 Sep 2015 13:38:57 +0300
 Subject: [PATCH 199/212] Step 20.26: Add form-layout to the div
@@ -7943,7 +7943,7 @@ index 438dc59..a964692 100644
 2.3.8 (Apple Git-58)
 
 
-From dd114dd449d2550f9d0704f24433a3fdb638211a Mon Sep 17 00:00:00 2001
+From 12899be7976edc6459ad4c7cb15e37ac331e4968 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Mon, 28 Sep 2015 05:03:47 +0300
 Subject: [PATCH 200/212] Step 20.27: Add the
@@ -7987,7 +7987,7 @@ index 7e1eaef..aeef4e3 100644
 2.3.8 (Apple Git-58)
 
 
-From ec36da35c522ddf3a5d40b116a82ceb8ee7ca98c Mon Sep 17 00:00:00 2001
+From 31947df9ab42e910fbdfc6b9838387a240c610f4 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Fri, 11 Sep 2015 13:40:59 +0300
 Subject: [PATCH 201/212] Step 20.28: Add dependency for
@@ -8015,7 +8015,7 @@ index b24da29..1a5d6dd 100644
 2.3.8 (Apple Git-58)
 
 
-From 2ed83713f2b963ae314ba18d51d24bc99f26696b Mon Sep 17 00:00:00 2001
+From 9be57ca45f89480cbd9677ad7747ae405db05895 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Fri, 11 Sep 2015 13:41:57 +0300
 Subject: [PATCH 202/212] Step 20.29: Add usage for angular-sortable
@@ -8045,7 +8045,7 @@ index 3c8347b..51f6c0f 100644
 2.3.8 (Apple Git-58)
 
 
-From aa0f31df05061d0de6d350803dd808e9be653797 Mon Sep 17 00:00:00 2001
+From 64f2ec04ef181a780b014fe90a2d6257c993aed1 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Fri, 11 Sep 2015 13:42:21 +0300
 Subject: [PATCH 203/212] Step 20.30: Add indication for main image in the view
@@ -8070,7 +8070,7 @@ index 51f6c0f..70d0469 100644
 2.3.8 (Apple Git-58)
 
 
-From 47e97d8af2c45cca5c14828a202515aa60d9049a Mon Sep 17 00:00:00 2001
+From 95466b253fb353aa7bab0f8d16112e9938b59476 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Fri, 11 Sep 2015 14:00:20 +0300
 Subject: [PATCH 204/212] Step 20.31: Add some css to the image gallery
@@ -8117,7 +8117,7 @@ index facbb89..4470813 100644
 2.3.8 (Apple Git-58)
 
 
-From 7910502792f665101355ff3f65530b0bdad0985f Mon Sep 17 00:00:00 2001
+From bab180401497b3bff417349a062fdba943a7d6b1 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Fri, 11 Sep 2015 14:03:34 +0300
 Subject: [PATCH 205/212] Step 20.32: Save the party with the images
@@ -8158,7 +8158,7 @@ index 761dcc5..7c82ada 100644
 2.3.8 (Apple Git-58)
 
 
-From 09ee8f9b4fb45c1d596f86b4b81cbdf065887d1c Mon Sep 17 00:00:00 2001
+From 89d48be373a791f5d4c5aa5c8d005195a856ceb2 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Fri, 11 Sep 2015 14:11:14 +0300
 Subject: [PATCH 206/212] Step 20.33: Display the party's main image
@@ -8186,7 +8186,7 @@ index a389551..ea83c45 100644
 2.3.8 (Apple Git-58)
 
 
-From ccf751e1514f1a1b833457f0688e3f4c8ebea04c Mon Sep 17 00:00:00 2001
+From 726da2c578c7e329200c0aa9f55cbfdb203247ec Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Fri, 11 Sep 2015 14:11:30 +0300
 Subject: [PATCH 207/212] Step 20.34: Add the logic to get the main image
@@ -8228,7 +8228,7 @@ index c484d72..21838b5 100644
 2.3.8 (Apple Git-58)
 
 
-From 029318e957d59440d72ad87a45ab8dd6361bf25f Mon Sep 17 00:00:00 2001
+From 45558ccf23ae55ad58c4ffa0d9e9bc8df6dc4ad1 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Fri, 11 Sep 2015 14:11:42 +0300
 Subject: [PATCH 208/212] Step 20.35: Add style to the main image
@@ -8257,7 +8257,7 @@ index 4470813..0e73444 100644
 2.3.8 (Apple Git-58)
 
 
-From 3a81327496b5ec0d665b76d3131a1db6d4e360aa Mon Sep 17 00:00:00 2001
+From 7bafe6d0fe86ce5ee6b10b367a7b5f2ab342caae Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Mon, 28 Sep 2015 05:06:19 +0300
 Subject: [PATCH 209/212] Step 20.36: Add the cfs:graphicsmagick package
@@ -8292,7 +8292,7 @@ index aeef4e3..02f6146 100644
 2.3.8 (Apple Git-58)
 
 
-From 05ec15569ae2f87256ab3d2477a37cfcdb4d4727 Mon Sep 17 00:00:00 2001
+From fe45fbf0de35ca91899a1a095d4ccee08c86ff6e Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Fri, 11 Sep 2015 14:13:15 +0300
 Subject: [PATCH 210/212] Step 20.37: Add another store for the thumbnails
@@ -8322,7 +8322,7 @@ index 5cec451..3b06d5f 100644
 2.3.8 (Apple Git-58)
 
 
-From 29a4f81dc2d9cc7c8fe294b1f6139ae85fb1288a Mon Sep 17 00:00:00 2001
+From ad399dd65bed26c9372fe38564cdf52cb37011ca Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Fri, 11 Sep 2015 14:13:50 +0300
 Subject: [PATCH 211/212] Step 20.38: Add thumbnails usage
@@ -8348,7 +8348,7 @@ index 70d0469..eed885c 100644
 2.3.8 (Apple Git-58)
 
 
-From 69b4ba97cf3ae3b166e5f8f976e7e8525c3a01ff Mon Sep 17 00:00:00 2001
+From f6d0926f6f21c9081c9fb2f1891cc97fbcbb882b Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 22 Aug 2015 22:11:09 +0300
 Subject: [PATCH 212/212] README and screenshot
