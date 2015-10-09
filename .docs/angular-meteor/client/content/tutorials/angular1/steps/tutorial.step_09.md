@@ -137,7 +137,7 @@ If you just add to the end you will get an uncaught reference $scope not defined
 
 * We bind to the Meteor.users collection
 * Binding the result to $scope.users
-* Notice that we passes `false` in the second parameter. That means that we don't want to update that collection from the client
+* Notice that we pass `false` in the second parameter. That means that we don't want to update that collection from the client
 * Calling [AngularMeteorCollection's](/api/AngularMeteorCollection) subscribe function
 
 Also, let's add a subscription to the party in this controller as well.
