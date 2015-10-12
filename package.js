@@ -1,7 +1,7 @@
 Package.describe({
   name: "angular",
   summary: "Everything you need to use AngularJS in your Meteor app",
-  version: "1.0.0-rc.11",
+  version: "1.2.0-alpha-1",
   git: "https://github.com/Urigo/angular-meteor.git"
 });
 
@@ -26,7 +26,7 @@ Package.registerBuildPlugin({
     'plugin/ng-script-compiler.js'
   ],
   npmDependencies: {
-    'babel-core':  '5.8.26',
+    'babel-core':  '5.8.25',
     'ng-annotate': '1.0.2'
   }
 });
@@ -42,7 +42,7 @@ Package.onUse(function (api) {
   api.use('minimongo@1.0.9');
   api.use('observe-sequence@1.0.7');
 
-  api.use('angular:angular@1.4.4', 'client');
+  api.use('angular:angular@1.4.5', 'client');
   // Since commit b3096e93661bc79bab73a63bae0e14643030a9a3, MongoId and
   // diff-sequence are separate packages from minimongo.
   // We need to use it for idParse, idStringify and diffQueryOrderedChanges
@@ -62,7 +62,7 @@ Package.onUse(function (api) {
     'lib/diff-array.js',
     'lib/get-updates.js',
 
-    // babel-files
+    // Babel files
     'lib/core-js-no-number.js',
     'lib/runtime.js',
 
@@ -77,11 +77,9 @@ Package.onUse(function (api) {
     'modules/angular-meteor-reactive-scope.js',
     'modules/angular-meteor-utils.js',
     'modules/angular-meteor-camera.js',
+
     // Finally load angular-meteor File
     'angular-meteor.js',
-
-    // watch for changes in the config file and rebuild
-    '../../.babelrc'
 
   ], 'client');
 });
