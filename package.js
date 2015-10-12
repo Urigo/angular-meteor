@@ -20,16 +20,16 @@ Package.registerBuildPlugin({
   }
 });
 
-Package.registerBuildPlugin({
-  name: 'compileNGScript',
-  sources: [
-    'plugin/ng-script-compiler.js'
-  ],
-  npmDependencies: {
-    'babel-core':  '5.8.25',
-    'ng-annotate': '1.0.2'
-  }
-});
+//Package.registerBuildPlugin({
+//  name: 'compileNGScript',
+//  sources: [
+//    'plugin/ng-script-compiler.js'
+//  ],
+//  npmDependencies: {
+//    'babel-core':  '5.8.25',
+//    'ng-annotate': '1.0.2'
+//  }
+//});
 
 Package.onUse(function (api) {
   api.versionsFrom('METEOR@1.2.0.1');
@@ -41,6 +41,8 @@ Package.onUse(function (api) {
   api.use('check@1.0.6');
   api.use('minimongo@1.0.9');
   api.use('observe-sequence@1.0.7');
+
+  api.imply('angular-babel@0.0.1');
 
   api.use('angular:angular@1.4.5', 'client');
   // Since commit b3096e93661bc79bab73a63bae0e14643030a9a3, MongoId and
@@ -62,9 +64,9 @@ Package.onUse(function (api) {
     'lib/diff-array.js',
     'lib/get-updates.js',
 
-    // Babel files
-    'lib/core-js-no-number.js',
-    'lib/runtime.js',
+    //// Babel files
+    //'lib/core-js-no-number.js',
+    //'lib/runtime.js',
 
     // Module Files
     'modules/angular-meteor-subscribe.js',
