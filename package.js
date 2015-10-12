@@ -24,11 +24,11 @@ Package.onUse(function(api) {
     'mongo@1.1.1',
     'tracker@1.0.8',
     'underscore@1.0.4',
-    'barbatus:angular2@0.5.6'
+    'barbatus:angular2@0.6.0'
   ]);
 
   api.imply([
-    'barbatus:angular2@0.5.6'
+    'barbatus:angular2@0.6.0'
   ]);
 
   api.addFiles([
@@ -36,12 +36,12 @@ Package.onUse(function(api) {
   ]);
 
   api.addFiles([
-    'main.jsx',
-    'modules/meteor_component.jsx',
-    'modules/cursor_handle.jsx',
-    'modules/mongo_cursor_observer.jsx',
-    'modules/mongo_cursor_differ.jsx',
-    'modules/bootstrap.jsx'
+    'main.ts',
+    'modules/meteor_component.ts',
+    'modules/cursor_handle.ts',
+    'modules/mongo_cursor_observer.ts',
+    'modules/mongo_cursor_differ.ts',
+    'modules/bootstrap.ts'
   ], 'client');
 
   // Adds TS typings.

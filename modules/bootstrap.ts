@@ -1,3 +1,5 @@
+/// <reference path="../typings/angular2-meteor.d.ts" />
+
 'use strict';
 
 import * as ng2 from 'angular2/angular2';

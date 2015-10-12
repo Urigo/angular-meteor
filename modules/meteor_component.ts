@@ -1,20 +1,14 @@
+/// <reference path="../typings/angular2-meteor.d.ts" />
+
 'use strict';
 
-import {Component, LifecycleEvent} from 'angular2/angular2';
+import {OnDestroy} from 'angular2/angular2';
 
 import {MongoCursorDifferFactory} from './mongo_cursor_differ';
 
-@Component({
-  lifecycle: [LifecycleEvent.onDestroy]
-})
-export class MeteorComponent {
-  _hAutoruns: Array<Tracker.Computation>;
-  _hSubscribes: Array<Object>;
-
-  constructor() {
-    this._hAutoruns = [];
-    this._hSubscribes = [];
-  }
+export class MeteorComponent implements OnDestroy {
+  _hAutoruns: Array<Tracker.Computation> = [];
+  _hSubscribes: Array<Meteor.SubscriptionHandle> = [];
 
   autorun(func, autoBind) {
     check(func, Function);

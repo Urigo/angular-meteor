@@ -1,3 +1,5 @@
+/// <reference path="../typings/angular2-meteor.d.ts" />
+
 'use strict';
 
 import {ChangeDetectorRef, bind} from 'angular2/angular2';
@@ -9,17 +11,17 @@ import {MongoCursorObserver, AddChange, MoveChange, RemoveChange} from './mongo_
 export class MongoCursorDifferFactory extends DefaultIterableDifferFactory {
   supports(obj: Object): boolean { return obj instanceof Mongo.Cursor; }
 
-  create(cdRef: ChangeDetectorRef): MongoCursorObserver {
+  create(cdRef: ChangeDetectorRef): MongoCursorDiffer {
     return new MongoCursorDiffer(cdRef, new MongoCursorObserverFactory());
   }
 }
 
-export class ObserverFactory {
-  create(cursor: Object) {}
+export interface ObserverFactory {
+  create(cursor: Object): Object;
 }
 
-class MongoCursorObserverFactory extends ObserverFactory {
-  create(cursor: Object) {
+class MongoCursorObserverFactory implements ObserverFactory {
+  create(cursor: Object): Object {
     if (cursor instanceof Mongo.Cursor) {
       return new MongoCursorObserver(cursor);
     }
@@ -28,21 +30,17 @@ class MongoCursorObserverFactory extends ObserverFactory {
 }
 
 export class MongoCursorDiffer {
-  _inserted: Array<CollectionChangeRecord>;
-  _removed: Array<CollectionChangeRecord>;
-  _moved: Array<CollectionChangeRecord>;
+  _inserted: Array<CollectionChangeRecord> = [];
+  _removed: Array<CollectionChangeRecord> = [];
+  _moved: Array<CollectionChangeRecord> = [];
   _curObserver: MongoCursorObserver;
   _lastChanges: Array<AddChange|MoveChange|RemoveChange>;
-  _listSize: Number;
+  _listSize: number = 0;
+  _cursor: Mongo.Cursor<any>;
+  _obsFactory: ObserverFactory;
+  _subscription: Object;
 
   constructor(cdRef: ChangeDetectorRef, obsFactory: ObserverFactory) {
-    this._inserted = [];
-    this._removed = [];
-    this._moved = [];
-    this._lastChanges = null;
-    this._curObserver = null;
-    this._cursor = null;
-    this._listSize = 0;
     this._obsFactory = obsFactory;
   }
 
@@ -70,7 +68,7 @@ export class MongoCursorDiffer {
     if (cursor && this._cursor !== cursor) {
       this._destroyObserver();
       this._cursor = cursor;
-      this._curObserver = this._obsFactory.create(cursor);
+      this._curObserver = <MongoCursorObserver>this._obsFactory.create(cursor);
       this._subscription = ObservableWrapper.subscribe(this._curObserver,
         zone.bind(changes => {
           this._updateLatestValue(changes);

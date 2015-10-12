@@ -17,7 +17,7 @@ import {Parties} from 'collections/parties';
   directives: [ROUTER_DIRECTIVES]
 })
 export class PartyDetailsCmp extends MeteorComponent {
-  party: Party = { name: '' };
+  party: Party = {name: ''};
 
   constructor(@Inject(RouteParams) routeParams: RouteParams) {
     super();

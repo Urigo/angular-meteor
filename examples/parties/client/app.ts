@@ -2,11 +2,12 @@
 
 import {Component, View, bind} from 'angular2/angular2';
 
-import {Router, ROUTER_BINDINGS, RouterOutlet, ROUTER_DIRECTIVES, RouteConfig} from 'angular2/router';
+import {Router, routerBindings, RouterOutlet, APP_BASE_HREF, ROUTER_DIRECTIVES, RouteConfig} from 'angular2/router';
 
 import {LocationStrategy, Location, HashLocationStrategy} from 'angular2/router';
 
 import {PartiesCmp} from './parties/parties';
+
 import {PartyDetailsCmp} from './party-details/party-details';
 
 import {bootstrap} from 'angular2-meteor';
@@ -16,15 +17,15 @@ import {bootstrap} from 'angular2-meteor';
 })
 @View({
   template: '<router-outlet></router-outlet>',
-  directives: [ROUTER_DIRECTIVES, PartiesCmp, PartyDetailsCmp]
+  directives: [ROUTER_DIRECTIVES, PartiesCmp]
 })
 @RouteConfig([
-  {path: '/',  component: PartiesCmp},
-  {path: '/party/:partyId', as: 'party-details', component: PartyDetailsCmp}
+  {path: '/', component: PartiesCmp},
+  {path: '/party/:partyId', as: 'PartyDetails', component: PartyDetailsCmp}
 ])
-class Socially {}
+export class Socially {}
 
 bootstrap(Socially, [
-  ROUTER_BINDINGS,
-  bind(LocationStrategy).toClass(HashLocationStrategy)
+  routerBindings(Socially),
+  bind(APP_BASE_HREF).toValue('/')
 ]);

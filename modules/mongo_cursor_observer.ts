@@ -1,3 +1,5 @@
+/// <reference path="../typings/angular2-meteor.d.ts" />
+
 'use strict';
 
 import {EventEmitter} from 'angular2/angular2';
@@ -5,46 +7,43 @@ import {EventEmitter} from 'angular2/angular2';
 import {CursorHandle} from './cursor_handle';
 
 export class AddChange {
-  constructor(index: Number, item: any) {
-    check(index, Number);
+  index: number;
+  item: any;
 
+  constructor(index: number, item: any) {
     this.index = index;
     this.item = item;
   }
 }
 
 export class MoveChange {
-  constructor(fromIndex: Number, toIndex: Number) {
-    check(fromIndex, Number);
-    check(toIndex, Number);
+  fromIndex: number;
+  toIndex: number;
 
+  constructor(fromIndex: number, toIndex: number) {
     this.fromIndex = fromIndex;
     this.toIndex = toIndex;
   }
 }
 
 export class RemoveChange {
-  constructor(index: Number) {
-    check(index, Number);
+  index: number;
 
+  constructor(index: number) {
     this.index = index;
   }
 }
 
 export class MongoCursorObserver extends EventEmitter {
-  _docs: Array<any>;
-  _changes: Array<any>;
-  _lastChanges: Array<any>;
+  _docs: Array<any> = [];
+  _changes: Array<any> = [];
+  _lastChanges: Array<any> = [];
   _cursorDefFunc: Function;
   _hCursor: CursorHandle;
 
   constructor(cursor: Mongo.Cursor<any>) {
-    check(cursor, Mongo.Cursor);
-
     super();
-    this._docs = [];
-    this._changes = [];
-    this._lastChanges = [];
+    check(cursor, Mongo.Cursor);
 
     this._hCursor = this._startCursor(cursor);
   }
@@ -53,7 +52,7 @@ export class MongoCursorObserver extends EventEmitter {
     return this._lastChanges;
   }
 
-  _startCursor(cursor: Mongo.Cursor<any>) {
+  _startCursor(cursor: Mongo.Cursor<any>): CursorHandle {
     var hCurObserver = this._startCursorObserver(cursor);
     var hAutoNotify = this._startAutoChangesNotify(cursor);
     return new CursorHandle(cursor, hAutoNotify, hCurObserver);
@@ -62,7 +61,7 @@ export class MongoCursorObserver extends EventEmitter {
   _startAutoChangesNotify(cursor: Mongo.Cursor<any>) {
     return Tracker.autorun(() => {
       cursor.fetch();
-      var lastChanges = this._changes.splice(0);
+      let lastChanges = this._changes.splice(0);
       if (lastChanges.length) {
         this.next(lastChanges);
       }
