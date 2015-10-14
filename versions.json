@@ -22,7 +22,7 @@
     ],
     [
       "check",
-      "1.0.2"
+      "1.0.6"
     ],
     [
       "dburles:mongo-collection-instances",
