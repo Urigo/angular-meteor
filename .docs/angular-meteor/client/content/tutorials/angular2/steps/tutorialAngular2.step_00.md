@@ -6,8 +6,8 @@ Let's start building our Meteor Angular 2 Socially app.
 
 In this step, you will:
 
-- Become familiar with the most important source code files
-- Learn how to start the Meteor server
+- Learn how to create a Meteor app 
+- Become familiar with the app's structure
 - Connect an Angular 2 FrontEnd
 - Run the application in the browser
 
@@ -64,17 +64,14 @@ As you can see, there is no html tag, no head tag, very simple.
 The reason for this is the way Meteor structures and serves files to the client.
 
 Meteor scans all the HTML files in your application and concatenates them together.
-
-It will create the `HTML`, `HEAD` and `BODY` tags by itself and place in there everything it needs to run the app.
-
-Then it will search for all the HTML files containing `HEAD` or `BODY` tags and concatenate their content into the main file.
-
+Contactenating means merging contents of appropriate `HTML`, `HEAD` and `BODY` tags,
+found inside these HTML files, together.
 
 So in our case, Meteor found our `index.html` file, recognized it was meant for the client only, found the `BODY` tag inside and added it's content to the `BODY` tag of the main generated file.
 
 > (right-click -> inspect element on the page to see the generated file)
 
-## Angular 2 Package
+## Angular2 Package
 
 Now it's time to add Angular 2 to our stack!
 
@@ -92,23 +89,28 @@ As you already know, Meteor processes all HTML files for you out of box.
 Files will be concatenated into one page.
 
 From other side, regular Angular (Angular 1.x or Angular2) apps have a modular structure, i.e.,
-consist of a set of template HTML files and JavaScript component files. Each template file belongs to 
-some component, for example, to a controller or a directive.
+consist of a set of template HTML files and JavaScript component files.
+Each template file might belong to some component, for example, to a custom directive.
+
 It means we would rather avoid concatenation all of them to let
-Angular2 use own mechanism to load template files for appropriate components.
+Angular2 components to load template files at the moment they need to.
 
 That's why `urigo:angular2-meteor` overrides standard Meteor HTML processor.
-The only file that's treated the same as before — `index.html`. So you 
-can add there `<HEAD>` or `<BODY>` tags if you want custom code there.
-Presence of `index.html` is mandatory.
-
-Think of `index.html` as the entry point of your app.
-A bit later, you'll learn what code you'll need in the `index.html` to
-load your root component to the app. 
-
-So, in order to make `urigo:angular2-meteor` work, you'll need to remove standard HTML processor `blaze-html-templates`:
+Lets remove standard HTML processor by:
 
     $ meteor remove blaze-html-templates
+
+This package has own HTML processor that recognizes two types of HTML files: one type — files that contain
+`<HEAD>` and `<BODY>` tags, everything else — considered as template files.
+
+If you have multiple HTML files with, say, `<BODY>` tags, they will be contactenated 
+all together into one file the same way as in case of the standard HTML processor.
+
+At the same time, template files are not touched by the processor at all
+and won't appear on the page initially.
+
+They will be loaded by appropriate Angular2 components at the time
+they are going to be rendered on the page.
 
 ## TypeScript
 
@@ -119,36 +121,43 @@ TypeScript just adds more optional features to JavaScript such as types & interf
 Angular 2 app can be written in regular JavaScript (ES5), the new JavaScript (ES2015 aka ES6) or TypeScript.
 Why TypeScript?
 
-If you've chosen ES6 or TypeScript, it will need eventually to compile code into ES5 — the only language supported fully in modern browsers —  using Babel or Traceur compilers for pure ES6 or TypeScript compiler
+If you've chosen ES6 or TypeScript, it will need eventually to compile code into ES5 — the only language fully supported in modern browsers — using Babel or Traceur compilers for pure ES6 or TypeScript compiler
 for TypeScript.
 
-However, TypeScript is the recommended choice by the Angular team. This is due to some reasons, one of them might be, for example, most advanced support of decorators in TypeScript among other compilers.
+However, TypeScript is the recommended choice by the Angular team. This is due to some reasons, one of them is most advanced support of decorators in TypeScript among other compilers.
 Decorators are still considered as an experimental feature that will likely appear only in ES7, so most compiler
-don't have full support of them. Besides that, TypeScript has convenient built-in type-checking support via declaration files and richer toolkit in general.
-What's decorators and how they are used in Angular2, you'll learn a bit later.
+don't have full support of them. What's decorators and how they are used in Angular2, you'll learn a bit later.
 
-Angular2-Meteor packages comes with built-in TypeScript compiler plugin, which means for
-now you don't need to worry about installing any other packages.
+Besides decorators reason, TypeScript has convenient built-in type-checking support via declaration files and richer toolkit in general
+in comparison to other mentioned compilers.
+
+Angular2-Meteor packages comes with built-in TypeScript compiler plugin, which means
+you don't need to worry about installing any other packages.
 
 As of Meteor 1.2, Meteor supports ES6 by default, in order to avoid conflicts between
 TypeScript and Meteor Ecmascript package, you'll need to remove it:
 
     $ meteor remove ecmascript
 
-TypeScript compiler will convert our `.ts` files to valid `.js` files.
+As you already might know, there are new `import` and `export` statements that have arrived in ES6.
+They are part of a notation that is supposed to separate an app into isolated modules, thus, helping
+us to structure our app as we want.
 
-ES6 & TypeScript both use modules. These are the `import` and `export` statements that have arrived in JavaScript.
+TypeScript can compile each file into a separate module.
+So lets learn how we are going use modules in our app.
 
 ## System.js
 
-As you already know, ES6 has modules convention (`import` and `export` are part of it), which is a set of rules and syntax used to load modules.
-Since modern browsers doesn't support ES6 yet, JS community has come up with different realizations of this convention in ES5.
+ES6 has new modules notation (`import` and `export` are part of it), which is a set of rules and syntax used to load separate modules.
+Since modern browsers doesn't support ES6 yet, JS community has come up with different implementations of this convention in ES5.
 
 We are going to use System.js, which is supported out of box in the `urigo:angular2-meteor` package.
-It means that you don't need to worry much about ES6 modules — TypeScript and System.js will do everything for you behind the scene.
 
-There is only one thing that you'll need to do potentially.
-You'll know what is it a bit later.
+Most of time you won't need to worry much about ES6 modules — TypeScript and System.js will do everything for you behind the scene.
+TypeScript will compile a `ts`-file into a separate System.js module by default in this package
+and System.js will load its dependencies and module itself on demand.
+
+There is only one small thing that you'll need to do potentially to bootstrap your app. You'll know what is it a bit later.
 
 # Root Component
 
@@ -179,7 +188,7 @@ The class, Socially, inherits from @Component and @View.
 
 Finally, we `bootstrap` our component, thus, marking it as the root component. An Angular 2 app can have multiple root components, but components must exist together within the same root in order to communicate with each other.
 
-## Running app
+## Running App
 
 The only thing left before we can run our app is to import the root module and 
 add `<app>` tag to the `index.html`.
@@ -194,14 +203,19 @@ This will load HTML and JavaScript code necessary to launch our app.
 
 Importing root module every time looks like a repetative task.
 Here comes good news — Angular2 package recognizes file named `app.ts`.
-if you have one in the app root folder, package will import it for you  behind the scene.
-We also can remove `<body>` tag.
+if you have one in the app root folder, package will import it for you behind the scene.
 
-It means we can simplify `index.html` above to just:
+Even more, if you called you app selector — `app`, you can get rid of `index.html` 
+at all since the package adds default layout with the `<app>` tag automatically as follows:
 
-{{> DiffBox tutorialName="angular2-tutorial" step="0.7"}}
+    <body>
+        <app></app>
+    </body>
 
-Now run the app.
+> Note: default layout is added only when there is no any other HTML files
+> with `head` or `body` tags.
+
+So lets remove `index.html` for now and run the app:
 
     $ meteor
 
