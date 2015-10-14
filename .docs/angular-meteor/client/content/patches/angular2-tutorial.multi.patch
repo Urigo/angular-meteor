@@ -1,0 +1,771 @@
+From a2759654b831fdc60cf071096dd9ace110b38019 Mon Sep 17 00:00:00 2001
+From: Alex <alex.borodach@gmail.com>
+Date: Sat, 26 Sep 2015 17:01:41 +0300
+Subject: [PATCH 01/25] Create README.md
+
+---
+ README.md | 2 ++
+ 1 file changed, 2 insertions(+)
+ create mode 100644 README.md
+
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..61fc3ee
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,2 @@
++# Angular2-Meteor Tutorial
++Tutorial is based on building Angular2 UI for a Meteor app called Socially.
+-- 
+2.3.8 (Apple Git-58)
+
+
+From 982577678528ecb16ccea76f9c4a178f09b8512f Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 26 Sep 2015 17:03:11 +0300
+Subject: [PATCH 02/25] Step 0.1: add client/index.html
+
+---
+ client/index.html | 3 +++
+ 1 file changed, 3 insertions(+)
+ create mode 100644 client/index.html
+
+diff --git a/client/index.html b/client/index.html
+new file mode 100644
+index 0000000..ef412ef
+--- /dev/null
++++ b/client/index.html
+@@ -0,0 +1,3 @@
++<body>
++  <p>Nothing here</p>
++</body>
+-- 
+2.3.8 (Apple Git-58)
+
+
+From 32756437d6a3cd6144aaea879dee45187eaf6d01 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 26 Sep 2015 17:08:36 +0300
+Subject: [PATCH 03/25] Step 0.2: add Angular2 package
+
+---
+ .meteor/packages | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/.meteor/packages b/.meteor/packages
+index a9f8340..feb8272 100644
+--- a/.meteor/packages
++++ b/.meteor/packages
+@@ -18,3 +18,4 @@ ecmascript              # Enable ECMAScript2015+ syntax in app code
+ 
+ autopublish             # Publish all data to the clients (for prototyping)
+ insecure                # Allow all DB writes from clients (for prototyping)
++urigo:angular2-meteor
+-- 
+2.3.8 (Apple Git-58)
+
+
+From 8ae5857626a2964f179c35e501a301c539c94bb8 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 26 Sep 2015 17:09:47 +0300
+Subject: [PATCH 04/25] Step 0.3: remove Blaze package
+
+---
+ .meteor/packages | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/.meteor/packages b/.meteor/packages
+index feb8272..c70808e 100644
+--- a/.meteor/packages
++++ b/.meteor/packages
+@@ -7,7 +7,6 @@
+ meteor-base             # Packages every Meteor app needs to have
+ mobile-experience       # Packages for a great mobile UX
+ mongo                   # The database Meteor supports right now
+-blaze-html-templates    # Compile .html files into Meteor Blaze views
+ session                 # Client-side reactive dictionary for your app
+ jquery                  # Helpful client-side library
+ tracker                 # Meteor's client-side reactive programming library
+-- 
+2.3.8 (Apple Git-58)
+
+
+From 0d456d718868498b1f3560d0c0e0a97d03bd9205 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 26 Sep 2015 17:10:32 +0300
+Subject: [PATCH 05/25] Step 0.4: remove ecmascript package
+
+---
+ .meteor/packages | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/.meteor/packages b/.meteor/packages
+index c70808e..2f89e25 100644
+--- a/.meteor/packages
++++ b/.meteor/packages
+@@ -13,7 +13,6 @@ tracker                 # Meteor's client-side reactive programming library
+ 
+ standard-minifiers      # JS/CSS minifiers run for production mode
+ es5-shim                # ECMAScript 5 compatibility for older browsers.
+-ecmascript              # Enable ECMAScript2015+ syntax in app code
+ 
+ autopublish             # Publish all data to the clients (for prototyping)
+ insecure                # Allow all DB writes from clients (for prototyping)
+-- 
+2.3.8 (Apple Git-58)
+
+
+From e116f09c9f71facbcf6b247be9050262e7755bf9 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 26 Sep 2015 17:12:43 +0300
+Subject: [PATCH 06/25] Step 0.5: create root component
+
+---
+ client/app.ts | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+ create mode 100644 client/app.ts
+
+diff --git a/client/app.ts b/client/app.ts
+new file mode 100644
+index 0000000..5dd0b52
+--- /dev/null
++++ b/client/app.ts
+@@ -0,0 +1,11 @@
++import {Component, View, bootstrap} from 'angular2/angular2';
++
++@Component({
++    selector: 'app'
++})
++@View({
++    template: 'Hello World!'
++})
++class Socially { }
++
++bootstrap(Socially);
+-- 
+2.3.8 (Apple Git-58)
+
+
+From 67c4d2a7773cf9b48fc6696b07deec63018c4644 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 26 Sep 2015 17:14:08 +0300
+Subject: [PATCH 07/25] Step 0.6: load root component
+
+---
+ client/index.html | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/client/index.html b/client/index.html
+index ef412ef..19d3bf1 100644
+--- a/client/index.html
++++ b/client/index.html
+@@ -1,3 +1,4 @@
+ <body>
+-  <p>Nothing here</p>
++  <app></app>
++  <script>System.import('client/app');</script>
+ </body>
+-- 
+2.3.8 (Apple Git-58)
+
+
+From e6aec95c3cebf33b6332c2af3e347e0cdd135a81 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 26 Sep 2015 17:19:17 +0300
+Subject: [PATCH 08/25] Step 0.7: remove index.html
+
+---
+ client/index.html | 4 ----
+ 1 file changed, 4 deletions(-)
+ delete mode 100644 client/index.html
+
+diff --git a/client/index.html b/client/index.html
+deleted file mode 100644
+index 19d3bf1..0000000
+--- a/client/index.html
++++ /dev/null
+@@ -1,4 +0,0 @@
+-<body>
+-  <app></app>
+-  <script>System.import('client/app');</script>
+-</body>
+-- 
+2.3.8 (Apple Git-58)
+
+
+From 0cef422be147d580b1609a8b3115bf6f689b258e Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 26 Sep 2015 17:20:40 +0300
+Subject: [PATCH 09/25] Step 0.8: add reference to the declaration file
+
+---
+ client/app.ts | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/client/app.ts b/client/app.ts
+index 5dd0b52..b918366 100644
+--- a/client/app.ts
++++ b/client/app.ts
+@@ -1,3 +1,5 @@
++/// &lt;reference path="../typings/angular2-meteor.d.ts" />
++
+ import {Component, View, bootstrap} from 'angular2/angular2';
+ 
+ @Component({
+-- 
+2.3.8 (Apple Git-58)
+
+
+From acfae5cd28420a60891d17807a08eb871f734e8d Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 26 Sep 2015 17:21:40 +0300
+Subject: [PATCH 10/25] Step 0.9: create app.html template
+
+---
+ client/app.html | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 client/app.html
+
+diff --git a/client/app.html b/client/app.html
+new file mode 100644
+index 0000000..a9c8ddc
+--- /dev/null
++++ b/client/app.html
+@@ -0,0 +1 @@
++<p>Nothing here {{ 'yet' + '!' }}</p>
+-- 
+2.3.8 (Apple Git-58)
+
+
+From 017e46a8ed3f1931104b8495df0d1aed8d254e8c Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 26 Sep 2015 17:22:33 +0300
+Subject: [PATCH 11/25] adds declaration files
+
+---
+ .meteor/versions             | 66 --------------------------------------------
+ typings/angular2-meteor.d.ts |  1 +
+ 2 files changed, 1 insertion(+), 66 deletions(-)
+ delete mode 100644 .meteor/versions
+ create mode 100644 typings/angular2-meteor.d.ts
+
+diff --git a/.meteor/versions b/.meteor/versions
+deleted file mode 100644
+index e378b68..0000000
+--- a/.meteor/versions
++++ /dev/null
+@@ -1,66 +0,0 @@
+-autopublish@1.0.4
+-autoupdate@1.2.3
+-babel-compiler@5.8.24_1
+-babel-runtime@0.1.4
+-base64@1.0.4
+-binary-heap@1.0.4
+-blaze@2.1.3
+-blaze-html-templates@1.0.1
+-blaze-tools@1.0.4
+-boilerplate-generator@1.0.4
+-caching-compiler@1.0.0
+-caching-html-compiler@1.0.1
+-callback-hook@1.0.4
+-check@1.0.6
+-ddp@1.2.2
+-ddp-client@1.2.1
+-ddp-common@1.2.1
+-ddp-server@1.2.1
+-deps@1.0.9
+-diff-sequence@1.0.1
+-ecmascript@0.1.4
+-ecmascript-collections@0.1.6
+-ejson@1.0.7
+-es5-shim@4.1.13
+-fastclick@1.0.7
+-geojson-utils@1.0.4
+-hot-code-push@1.0.0
+-html-tools@1.0.5
+-htmljs@1.0.5
+-http@1.1.1
+-id-map@1.0.4
+-insecure@1.0.4
+-jquery@1.11.4
+-launch-screen@1.0.4
+-livedata@1.0.15
+-logging@1.0.8
+-meteor@1.1.7
+-meteor-base@1.0.1
+-minifiers@1.1.7
+-minimongo@1.0.9
+-mobile-experience@1.0.1
+-mobile-status-bar@1.0.6
+-mongo@1.1.1
+-mongo-id@1.0.1
+-npm-mongo@1.4.39_1
+-observe-sequence@1.0.7
+-ordered-dict@1.0.4
+-promise@0.4.8
+-random@1.0.4
+-reactive-dict@1.1.1
+-reactive-var@1.0.6
+-reload@1.1.4
+-retry@1.0.4
+-routepolicy@1.0.6
+-session@1.1.1
+-spacebars@1.0.7
+-spacebars-compiler@1.0.7
+-standard-minifiers@1.0.0
+-templating@1.1.3
+-templating-tools@1.0.0
+-tracker@1.0.8
+-ui@1.0.8
+-underscore@1.0.4
+-url@1.0.5
+-webapp@1.2.2
+-webapp-hashing@1.0.5
+diff --git a/typings/angular2-meteor.d.ts b/typings/angular2-meteor.d.ts
+new file mode 100644
+index 0000000..1d5c0a1
+--- /dev/null
++++ b/typings/angular2-meteor.d.ts
+@@ -0,0 +1 @@
++/// <reference path="../.meteor/local/build/programs/server/assets/packages/urigo_angular2-meteor/typings/angular2-meteor.d.ts" />
+\ No newline at end of file
+-- 
+2.3.8 (Apple Git-58)
+
+
+From fae4f074b672a27b0162350174e98c4ee268c4ad Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 26 Sep 2015 17:23:10 +0300
+Subject: [PATCH 12/25] Step 0.10: change inline template to templateUrl
+
+---
+ client/app.ts | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/client/app.ts b/client/app.ts
+index b918366..2dcaa25 100644
+--- a/client/app.ts
++++ b/client/app.ts
+@@ -6,7 +6,7 @@ import {Component, View, bootstrap} from 'angular2/angular2';
+     selector: 'app'
+ })
+ @View({
+-    template: 'Hello World!'
++    templateUrl: 'client/app.html'
+ })
+ class Socially { }
+ 
+-- 
+2.3.8 (Apple Git-58)
+
+
+From d192b3a57946e9441e5ff8d5bacf260b1884aa50 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 26 Sep 2015 17:29:40 +0300
+Subject: [PATCH 13/25] Step 1.1: add static HTML to the template
+
+---
+ client/app.html | 15 ++++++++++++++-
+ 1 file changed, 14 insertions(+), 1 deletion(-)
+
+diff --git a/client/app.html b/client/app.html
+index a9c8ddc..dd1ef68 100644
+--- a/client/app.html
++++ b/client/app.html
+@@ -1 +1,14 @@
+-<p>Nothing here {{ 'yet' + '!' }}</p>
++<ul>
++  <li>
++    <span>Dubstep-Free Zone</span>
++    <p>
++      Can we please just for an evening not listen to dubstep.
++    </p>
++  </li>
++  <li>
++    <span>All dubstep all the time</span>
++    <p>
++      Get it on!
++    </p>
++  </li>
++</ul>
+-- 
+2.3.8 (Apple Git-58)
+
+
+From 1adb8a77745345844a053c37839a0f82a6f0ed5c Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 26 Sep 2015 17:30:49 +0300
+Subject: [PATCH 14/25] Step 2.1: use dynamic template with NgFor
+
+---
+ client/app.html | 22 ++++++++--------------
+ 1 file changed, 8 insertions(+), 14 deletions(-)
+
+diff --git a/client/app.html b/client/app.html
+index dd1ef68..d834ea7 100644
+--- a/client/app.html
++++ b/client/app.html
+@@ -1,14 +1,8 @@
+-<ul>
+-  <li>
+-    <span>Dubstep-Free Zone</span>
+-    <p>
+-      Can we please just for an evening not listen to dubstep.
+-    </p>
+-  </li>
+-  <li>
+-    <span>All dubstep all the time</span>
+-    <p>
+-      Get it on!
+-    </p>
+-  </li>
+-</ul>
++<div>
++  <ul>
++    <li *ng-for="#party of parties">
++      {{party.name}}
++      <p>{{party.description}}</p>
++    </li>
++  </ul>
++</div>
+-- 
+2.3.8 (Apple Git-58)
+
+
+From 7bbd5db255cdc2307e51f0b183ef64c3a68df518 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 26 Sep 2015 17:32:31 +0300
+Subject: [PATCH 15/25] Step 2.2: load NgFor directive, add it to the View's
+ directives list
+
+---
+ client/app.ts | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/client/app.ts b/client/app.ts
+index 2dcaa25..30495cd 100644
+--- a/client/app.ts
++++ b/client/app.ts
+@@ -1,12 +1,13 @@
+ /// &lt;reference path="../typings/angular2-meteor.d.ts" />
+ 
+-import {Component, View, bootstrap} from 'angular2/angular2';
++import {Component, View, NgFor, bootstrap} from 'angular2/angular2';
+ 
+ @Component({
+     selector: 'app'
+ })
+ @View({
+-    templateUrl: 'client/app.html'
++    templateUrl: 'client/app.html',
++    directives: [NgFor]
+ })
+ class Socially { }
+ 
+-- 
+2.3.8 (Apple Git-58)
+
+
+From 3265ee5e91573c227d2ea3a4dfd7b0dccc1753a6 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 26 Sep 2015 17:34:52 +0300
+Subject: [PATCH 16/25] Step 2.3: load parties data into the app
+
+---
+ client/app.ts | 13 ++++++++++++-
+ 1 file changed, 12 insertions(+), 1 deletion(-)
+
+diff --git a/client/app.ts b/client/app.ts
+index 30495cd..972ad81 100644
+--- a/client/app.ts
++++ b/client/app.ts
+@@ -9,6 +9,17 @@ import {Component, View, NgFor, bootstrap} from 'angular2/angular2';
+     templateUrl: 'client/app.html',
+     directives: [NgFor]
+ })
+-class Socially { }
++class Socially {
++    constructor () {
++        this.parties = [
++          {'name': 'Dubstep-Free Zone',
++            'description': 'Can we please just for an evening not listen to dubstep.'},
++          {'name': 'All dubstep all the time',
++            'description': 'Get it on!'},
++          {'name': 'Savage lounging',
++            'description': 'Leisure suit required. And only fiercest manners.'}
++        ];
++    }
++}
+ 
+ bootstrap(Socially);
+-- 
+2.3.8 (Apple Git-58)
+
+
+From 170c90b5d9d0a5997bbb9d1b43bffe6ed2bfd1d7 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 26 Sep 2015 17:36:13 +0300
+Subject: [PATCH 17/25] Step 2.4: define parties property
+
+---
+ client/app.ts | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/client/app.ts b/client/app.ts
+index 972ad81..476f941 100644
+--- a/client/app.ts
++++ b/client/app.ts
+@@ -10,6 +10,8 @@ import {Component, View, NgFor, bootstrap} from 'angular2/angular2';
+     directives: [NgFor]
+ })
+ class Socially {
++    parties: Array<Object>;
++
+     constructor () {
+         this.parties = [
+           {'name': 'Dubstep-Free Zone',
+-- 
+2.3.8 (Apple Git-58)
+
+
+From 714f1c97d89b4d19a44ededaebde3267f0a6af52 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 26 Sep 2015 18:30:37 +0300
+Subject: [PATCH 18/25] Step 3.1:  add the parties collection
+
+---
+ collections/parties.ts | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 collections/parties.ts
+
+diff --git a/collections/parties.ts b/collections/parties.ts
+new file mode 100644
+index 0000000..83fbd07
+--- /dev/null
++++ b/collections/parties.ts
+@@ -0,0 +1 @@
++export var Parties = new Mongo.Collection('parties');
+-- 
+2.3.8 (Apple Git-58)
+
+
+From 4b35804350ed4b5945a0b3b32ff49510978004dd Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 26 Sep 2015 18:36:20 +0300
+Subject: [PATCH 19/25] Step 3.2:  add reference to the declaration file
+
+---
+ collections/parties.ts | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/collections/parties.ts b/collections/parties.ts
+index 83fbd07..d1ed853 100644
+--- a/collections/parties.ts
++++ b/collections/parties.ts
+@@ -1 +1,3 @@
++/// &lt;reference path="../typings/angular2-meteor.d.ts" />
++
+ export var Parties = new Mongo.Collection('parties');
+-- 
+2.3.8 (Apple Git-58)
+
+
+From 15c5e65d9f92f9db9c9d2a72a2456c4a62197acc Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 26 Sep 2015 18:36:56 +0300
+Subject: [PATCH 20/25] Step 3.3:  import the parties collection
+
+---
+ client/app.ts | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/client/app.ts b/client/app.ts
+index 476f941..c23191e 100644
+--- a/client/app.ts
++++ b/client/app.ts
+@@ -2,6 +2,8 @@
+ 
+ import {Component, View, NgFor, bootstrap} from 'angular2/angular2';
+ 
++import {Parties} from 'collections/parties';
++
+ @Component({
+     selector: 'app'
+ })
+-- 
+2.3.8 (Apple Git-58)
+
+
+From 4726b5215212e8df80481e6973d734148a9b46e8 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 26 Sep 2015 18:39:19 +0300
+Subject: [PATCH 21/25] Step 3.4:  fetch parties
+
+---
+ client/app.ts | 9 +--------
+ 1 file changed, 1 insertion(+), 8 deletions(-)
+
+diff --git a/client/app.ts b/client/app.ts
+index c23191e..3506859 100644
+--- a/client/app.ts
++++ b/client/app.ts
+@@ -15,14 +15,7 @@ class Socially {
+     parties: Array<Object>;
+ 
+     constructor () {
+-        this.parties = [
+-          {'name': 'Dubstep-Free Zone',
+-            'description': 'Can we please just for an evening not listen to dubstep.'},
+-          {'name': 'All dubstep all the time',
+-            'description': 'Get it on!'},
+-          {'name': 'Savage lounging',
+-            'description': 'Leisure suit required. And only fiercest manners.'}
+-        ];
++        this.parties = Parties.find().fetch();
+     }
+ }
+ 
+-- 
+2.3.8 (Apple Git-58)
+
+
+From 19c43bffdb956d74035a274a0bfe464feb25059a Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 26 Sep 2015 18:47:23 +0300
+Subject: [PATCH 22/25] Step 3.5:  fetch parties reactively
+
+---
+ client/app.ts | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/client/app.ts b/client/app.ts
+index 3506859..1954985 100644
+--- a/client/app.ts
++++ b/client/app.ts
+@@ -15,7 +15,9 @@ class Socially {
+     parties: Array<Object>;
+ 
+     constructor () {
+-        this.parties = Parties.find().fetch();
++        Tracker.autorun(zone.bind(() => {
++            this.parties = Parties.find().fetch();
++        }));
+     }
+ }
+ 
+-- 
+2.3.8 (Apple Git-58)
+
+
+From e462befc87178908752452c75fc0ea40c90123fa Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Wed, 14 Oct 2015 22:55:11 +0300
+Subject: [PATCH 23/25] Step 3.6: Blaze-like binding to Angular2
+
+---
+ client/app.ts | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/client/app.ts b/client/app.ts
+index 1954985..d845cf7 100644
+--- a/client/app.ts
++++ b/client/app.ts
+@@ -1,9 +1,11 @@
+ /// &lt;reference path="../typings/angular2-meteor.d.ts" />
+ 
+-import {Component, View, NgFor, bootstrap} from 'angular2/angular2';
++import {Component, View, NgFor} from 'angular2/angular2';
+ 
+ import {Parties} from 'collections/parties';
+ 
++import {bootstrap} from 'angular2-meteor';
++
+ @Component({
+     selector: 'app'
+ })
+@@ -12,12 +14,10 @@ import {Parties} from 'collections/parties';
+     directives: [NgFor]
+ })
+ class Socially {
+-    parties: Array<Object>;
++    parties: Mongo.Cursor<Object>;
+ 
+     constructor () {
+-        Tracker.autorun(zone.bind(() => {
+-            this.parties = Parties.find().fetch();
+-        }));
++        this.parties = Parties.find();
+     }
+ }
+ 
+-- 
+2.3.8 (Apple Git-58)
+
+
+From 676cf20a811a682b52c02521817c53240c1a0915 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Wed, 14 Oct 2015 23:21:31 +0300
+Subject: [PATCH 24/25] Step 3.7:  loading initial parties on the server
+
+---
+ server/load_parties.ts | 25 +++++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
+ create mode 100644 server/load_parties.ts
+
+diff --git a/server/load_parties.ts b/server/load_parties.ts
+new file mode 100644
+index 0000000..cc8a079
+--- /dev/null
++++ b/server/load_parties.ts
+@@ -0,0 +1,25 @@
++import {Parties} from 'collections/parties';
++
++export function loadParties() {
++    if (Parties.find().count() === 0) {
++
++    var parties = [
++        {
++            'name': 'Dubstep-Free Zone',
++            'description': 'Can we please just for an evening not listen to dubstep.'
++        },
++        {
++            'name': 'All dubstep all the time',
++            'description': 'Get it on!'
++        },
++        {
++            'name': 'Savage lounging',
++            'description': 'Leisure suit required. And only fiercest manners.'
++        }
++    ];
++
++    for (var i = 0; i < parties.length; i++) {
++        Parties.insert(parties[i]);
++    }
++  }
++};
+-- 
+2.3.8 (Apple Git-58)
+
+
+From ad1cdd09af7b7f347ccbf3193588ed241fb62c70 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Wed, 14 Oct 2015 23:32:49 +0300
+Subject: [PATCH 25/25] Step 3.8:  bootstrapping server side
+
+---
+ server/main.ts | 3 +++
+ 1 file changed, 3 insertions(+)
+ create mode 100644 server/main.ts
+
+diff --git a/server/main.ts b/server/main.ts
+new file mode 100644
+index 0000000..80ba2c9
+--- /dev/null
++++ b/server/main.ts
+@@ -0,0 +1,3 @@
++import {loadParties} from './load_parties';
++
++Meteor.startup(loadParties);
+-- 
+2.3.8 (Apple Git-58)
+

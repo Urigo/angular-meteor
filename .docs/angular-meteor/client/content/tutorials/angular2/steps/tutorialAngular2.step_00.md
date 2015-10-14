@@ -6,14 +6,14 @@ Let's start building our Meteor Angular 2 Socially app.
 
 In this step, you will:
 
-- Become familiar with the most important source code files
-- Learn how to start the Meteor server
+- Learn how to create a Meteor app 
+- Become familiar with the app's structure
 - Connect an Angular 2 FrontEnd
 - Run the application in the browser
 
 ## Meteor Setup
 
-First step - let's install Meteor!
+First step — let's install Meteor!
 
 Open your command line and paste this command:
 
@@ -21,7 +21,7 @@ Open your command line and paste this command:
 
 > If you are on a Windows machine, go [here](https://www.meteor.com/install) to install
 
-Now let's create our app - write this in the command line:
+Now let's create our app — write this in the command line:
 
     $ meteor create socially
 
@@ -57,24 +57,21 @@ Create a directory called `client`. It is important that the name is `client`. M
 
 First, let's create a new `index.html` file and place this code inside. Then run the app again:
 
-{{> DiffBox tutorialName="angular2-meteor" step="0.1"}}
+{{> DiffBox tutorialName="angular2-tutorial" step="0.1"}}
 
 As you can see, there is no html tag, no head tag, very simple.
 
 The reason for this is the way Meteor structures and serves files to the client.
 
 Meteor scans all the HTML files in your application and concatenates them together.
-
-It will create the `HTML`, `HEAD` and `BODY` tags by itself and place in there everything it needs to run the app.
-
-Then it will search for all the HTML files containing `HEAD` or `BODY` tags and concatenate their content into the main file.
-
+Contactenating means merging contents of appropriate `HTML`, `HEAD` and `BODY` tags,
+found inside these HTML files, together.
 
 So in our case, Meteor found our `index.html` file, recognized it was meant for the client only, found the `BODY` tag inside and added it's content to the `BODY` tag of the main generated file.
 
 > (right-click -> inspect element on the page to see the generated file)
 
-## Angular 2 Package
+## Angular2 Package
 
 Now it's time to add Angular 2 to our stack!
 
@@ -82,9 +79,38 @@ First things first, let's add the Angular 2 package to Meteor (we will discuss m
 
 Back in the command line, launch this command:
 
-    $ meteor add shmck:angular2
+    $ meteor add urigo:angular2-meteor
 
 This package takes care of connecting Angular to Meteor and includes the latest Angular 2 library code into our app.
+
+## HTML
+
+As you already know, Meteor processes all HTML files for you out of box.
+Files will be concatenated into one page.
+
+From other side, regular Angular (Angular 1.x or Angular2) apps have a modular structure, i.e.,
+consist of a set of template HTML files and JavaScript component files.
+Each template file might belong to some component, for example, to a custom directive.
+
+It means we would rather avoid concatenation all of them to let
+Angular2 components to load template files at the moment they need to.
+
+That's why `urigo:angular2-meteor` overrides standard Meteor HTML processor.
+Lets remove standard HTML processor by:
+
+    $ meteor remove blaze-html-templates
+
+This package has own HTML processor that recognizes two types of HTML files: one type — files that contain
+`<HEAD>` and `<BODY>` tags, everything else — considered as template files.
+
+If you have multiple HTML files with, say, `<BODY>` tags, they will be contactenated 
+all together into one file the same way as in case of the standard HTML processor.
+
+At the same time, template files are not touched by the processor at all
+and won't appear on the page initially.
+
+They will be loaded by appropriate Angular2 components at the time
+they are going to be rendered on the page.
 
 ## TypeScript
 
@@ -92,41 +118,52 @@ In this tutorial, we'll be using TypeScript. Don't worry if you're not familiar 
 
 TypeScript just adds more optional features to JavaScript such as types & interfaces. You'll be able to do this tutorial fine without understanding what these are yet; but if you'd like to learn more try the [TypeScript tutorial] ([Learn more](http://www.typescriptlang.org/Tutorial)).
 
-Why TypeScript? It's true, Angular 2 can be written in regular JavaScript (ES5), the new JavaScript (ES2015 aka ES6) or TypeScript. However, TypeScript is the recommended choice by the Angular team. As we progress, I hope you'll come to understand why.
+Angular 2 app can be written in regular JavaScript (ES5), the new JavaScript (ES2015 aka ES6) or TypeScript.
+Why TypeScript?
 
-Install a TypeScript compiler with Angular 2 features enabled. In the command line:
+If you've chosen ES6 or TypeScript, it will need eventually to compile code into ES5 — the only language fully supported in modern browsers — using Babel or Traceur compilers for pure ES6 or TypeScript compiler
+for TypeScript.
 
-    $ meteor add netanelgilad:angular2-typescript
+However, TypeScript is the recommended choice by the Angular team. This is due to some reasons, one of them is most advanced support of decorators in TypeScript among other compilers.
+Decorators are still considered as an experimental feature that will likely appear only in ES7, so most compiler
+don't have full support of them. What's decorators and how they are used in Angular2, you'll learn a bit later.
 
-This compiler will convert our `.ts` files to valid `.js` files.
+Besides decorators reason, TypeScript has convenient built-in type-checking support via declaration files and richer toolkit in general
+in comparison to other mentioned compilers.
 
-ES2015 & TypeScript both use modules. These are the `import` and `export` statements that have arrived in JavaScript.
+Angular2-Meteor packages comes with built-in TypeScript compiler plugin, which means
+you don't need to worry about installing any other packages.
 
-{{> DiffBox tutorialName="angular2-meteor" step="0.2"}}
+As of Meteor 1.2, Meteor supports ES6 by default, in order to avoid conflicts between
+TypeScript and Meteor Ecmascript package, you'll need to remove it:
+
+    $ meteor remove ecmascript
+
+As you already might know, there are new `import` and `export` statements that have arrived in ES6.
+They are part of a notation that is supposed to separate an app into isolated modules, thus, helping
+us to structure our app as we want.
+
+TypeScript can compile each file into a separate module.
+So lets learn how we are going use modules in our app.
 
 ## System.js
 
-System.js is a module loader built into the `shmck:angular2` package. We'll use it to load our root component.
+ES6 has new modules notation (`import` and `export` are part of it), which is a set of rules and syntax used to load separate modules.
+Since modern browsers doesn't support ES6 yet, JS community has come up with different implementations of this convention in ES5.
 
-{{> DiffBox tutorialName="angular2-meteor" step="0.3"}}
+We are going to use System.js, which is supported out of box in the `urigo:angular2-meteor` package.
 
-Here we're telling System.js to load `app.js`, which is compiled from our `app.ts` file.
+Most of time you won't need to worry much about ES6 modules — TypeScript and System.js will do everything for you behind the scene.
+TypeScript will compile a `ts`-file into a separate System.js module by default in this package
+and System.js will load its dependencies and module itself on demand.
 
-Once we've created our `app.ts` file we can use Angular 2 in our Meteor app.
+There is only one small thing that you'll need to do potentially to bootstrap your app. You'll know what is it a bit later.
 
-## Root Component
+# Root Component
 
-A component is a controller with an attached view. Think of it like a brick in the castle of your app.
-
-We'll create a root component tag called `app`. Let's include that component into our main `index.html` file:
-
-{{> DiffBox tutorialName="angular2-meteor" step="0.4"}}
-
-But if you load this in your browser, **you won't see anything**. That's because we still need to **create the actual Angular 2 component**, which we'll do next.
-
-# Angular 2 Component
-
-Angular 2 code is structured like a tree of components inside of each other. So let's create our root component which other components will stem out of.
+Angular 2 code is structured like a tree of components inside of each other, where each component
+is a controller with an attached view. Since it's a tree, there should be a root component and leaf components
+that stem out of it. So let's create our root component.
 
 Create a new `app.ts` file inside of the `client` folder.
 
@@ -134,42 +171,87 @@ Now you can see another example of Meteor's power and simplicity - no need to in
 
 Let's continue defining our Angular 2 application module.
 
-{{> DiffBox tutorialName="angular2-meteor" step="0.5"}}
+{{> DiffBox tutorialName="angular2-tutorial" step="0.5"}}
 
-First we're importing the dependencies we needed from `angular2/angular2`. This is not a folder and file in your directory, but referring to an alias provided to System.js in the `shmck:angular2` package.
+First we're importing the dependencies we needed from `angular2/angular2`. This is not a folder and file in your directory, but a reference to a System.js module aliased `angular2/angular2` and available in the `urigo:angular2-meteor` package.
 
-Notice the `@` syntax. In Angular 2, these are called Annotations. They are similar to a new feature coming to ES2016 called Decorators. You can read more about the differences between the two [here](http://blog.thoughtram.io/angular/2015/05/03/the-difference-between-annotations-and-decorators.html).
+Notice the `@` syntax. In Angular 2, these are called Annotations. They are similar to a new feature coming to ES7 called Decorators.
+From consumers point of view, they are almost the same except Decorators are a proposed standard allowing us to add class metadata and Angular2's Annotations are 
+a realization of that metadata, implemented with the help of Decorators in TypeScript.
+You can read more about the differences between the two [here](http://blog.thoughtram.io/angular/2015/05/03/the-difference-between-annotations-and-decorators.html).
 
-Basically Annotations allow us to elegantly add metadata to classes. Just consider it pretty syntax for now.
+For now, consider Annotations is an elegant way to add metadata to classes.
 
-Also notice the component Selector matches the `<app>` tag we provided in index.html, and View template creates the view.
+Also notice, the Component's selector matches the `<app>` tag we provided in index.html, and View template creates the view.
 
 The class, Socially, inherits from @Component and @View.
 
-Finally, we `bootstrap` our component, marking it as the root component in `index.html`. An Angular 2 app can have multiple root components, but components must exist together within the same root in order to communicate with each other.
+Finally, we `bootstrap` our component, thus, marking it as the root component. An Angular 2 app can have multiple root components, but components must exist together within the same root in order to communicate with each other.
 
-Now run the app.
+## Running App
+
+The only thing left before we can run our app is to import the root module and 
+add `<app>` tag to the `index.html`.
+
+As you've already learned, the package uses System.js to manage ES6 modules, but System.js
+doesn't know anything about our `app` module.
+So lets import manually our `app` module and add `<app>` tag to the `index.html` as follows:
+
+{{> DiffBox tutorialName="angular2-tutorial" step="0.6"}}
+
+This will load HTML and JavaScript code necessary to launch our app.
+
+Importing root module every time looks like a repetative task.
+Here comes good news — Angular2 package recognizes file named `app.ts`.
+if you have one in the app root folder, package will import it for you behind the scene.
+
+Even more, if you called you app selector — `app`, you can get rid of `index.html` 
+at all since the package adds default layout with the `<app>` tag automatically as follows:
+
+    <body>
+        <app></app>
+    </body>
+
+> Note: default layout is added only when there is no any other HTML files
+> with `head` or `body` tags.
+
+So lets remove `index.html` for now and run the app:
 
     $ meteor
 
+## TypeScript Typings
+
+At this moment you've likely noticed a message in the console saying that `angular2/angular2` is not found.
+
+It happened because TypeScript compiler is configured in the package with diagnostics messages turned on by default and
+TypeScript compiler doesn't know anything about `angular2/angular2` module. To fix this, you will need
+to make use of TypeScript declaration files, which is a TypeScript way to inform compiler about API of third-party modules.
+
+
+After first run, you will find `angular2-meteor.d.ts` file in the new folder called "typings".
+This file has been created by the package at the start time and contains a special reference to Angular2 and Meteor declaration files.
+Link `app.ts` and `angular2-meteor.d.ts` by adding next line at the top of `app.ts`:
+
+{{> DiffBox tutorialName="angular2-tutorial" step="0.8"}}
+
+> Note: if you just loaded your app from a repository, you'll need to re-start it once.
+> This is due to Meteor local hierachy of files is not built yet at the time TypeScript compiler accesses them.
+
+
 # Templates
 
-Let's make one change. Create a new file called `index.ng.html` under the 'client' folder, this will be our main `HTML` template page.
+Let's make one change. Create a new file called `app.html` under the 'client' folder, this will be our main `HTML` template page:
 
-* We are using the `.ng.html` file extension so that Blaze - Meteor's templating system won't compile and override our Angular 2 expressions.
+{{> DiffBox tutorialName="angular2-tutorial" step="0.9"}}
 
-Change your template in `app.ts` to target `index.ng.html`.
+Change your template in `app.ts` to target `app.html`:
 
-{{> DiffBox tutorialName="angular2-meteor" step="0.6"}}
+{{> DiffBox tutorialName="angular2-tutorial" step="0.10"}}
+   
+Now our component template will load from the given path.
+As you can see, we are using Angular expression inside of `app.html` to check if it works:
 
-Then move the `p` tag into it:
-
- {{> DiffBox tutorialName="angular2-meteor" step="0.7"}}
-
-    
-Now our component template will load from the given path. Let's use Angular inside of `index.ng.html` to see that's working:
-
-    <p>Nothing here {{dstache}} 'yet' + '!' }}</p>
+    <p>Nothing here {{dstache}} "yet" + "!" }}</p>
 
 Run the app again and the screen should look like this:
 
@@ -179,12 +261,6 @@ Angular interpreted the expression like any other Angular application.
 
 > If the template doesn't change, it may be because your browser is caching the original template.
 > Learn [how to disable caching during development](https://developer.chrome.com/devtools/docs/settings) with Chrome.
-
-# Notes
-
-Again, Angular 2 is still in development. It is not recommended for production yet.
-
-You may notice a `require` error in the console; however, the app will still run. This should be sorted out in the near future.
 
 # Experiments
 Try adding a new expression to the index.ng.html that will do some math:

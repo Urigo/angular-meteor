@@ -104,7 +104,7 @@ Template.downloadPreviousStep.helpers({
   ghRepoName: function () {
     var rData = Router.current().data();
     if (rData.parent.route == 'tutorials.angular2'){
-      return 'https://github.com/ShMcK/ng2-socially-tutorial';
+      return 'https://github.com/barbatus/ng2-socially-tutorial';
     } else {
       return 'https://github.com/Urigo/meteor-angular-socially';
     }
