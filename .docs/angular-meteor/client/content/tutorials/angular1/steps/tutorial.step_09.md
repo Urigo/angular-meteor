@@ -266,6 +266,6 @@ We've added the support of privacy to our parties app.
 We also learned how to use the `Meteor.publish` command to control permissions and the data sent to the client
 and how to subscribe to it with the $meteor.collection subscribe function.
 
-In the next step we will learn how to filter the users list in the client side with AngularJS filters and create a custom filter for our own needs.
+In the next step we will learn how to deploy. You will see that Meteor makes it easy to put the application online.
 
 {{/template}}
