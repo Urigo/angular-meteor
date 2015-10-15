@@ -38,6 +38,7 @@ Package.onUse(function (api) {
     'routes/angular2Tut.js',
     'routes/angular1Tut.js',
     'routes/reactTut.js',
+    'routes/ionicTut.js',
     'routes/tutorial-pages.js'
   ]);
 
@@ -93,6 +94,7 @@ Package.onUse(function (api) {
   api.export('REACT_TUT');
   api.export('ANGULAR2_TUT');
   api.export('ANGULAR1_TUT');
+  api.export('IONIC_TUT');
 
   // For easier debugging
   api.export('GitPatches');
