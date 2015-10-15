@@ -2,5 +2,5 @@
   "diagnostics": true,
   "alwaysThrow": false,
   "noResolve": false,
-  "useCash": false
+  "useCash": true
 }
