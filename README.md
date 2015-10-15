@@ -108,7 +108,7 @@ Meteor.startup(() => {
 ````
 
 ###TypeScript Compilation
-The package uses this TypeScript [compilers](https://github.com/barbatus/angular2/blob/master/packages/ts-compilers/README.md) to compile `.ts`-files. Please, read there how you can configure TypeScript, what options are available or how you can speed up just-in-time compilation.
+The package uses this TypeScript [compilers](https://github.com/barbatus/ts-compilers/README.md) to compile `.ts`-files. Please, read there how you can configure TypeScript, what options are available or how you can speed up just-in-time compilation.
 
 By default, compiler will curse on syntactic errors and will log out all missing modules and other semantic errors to the terminal.
 So, if you have code like this:
