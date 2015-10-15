@@ -17,7 +17,7 @@ Notice that we are exporting the class `PartiesForm` using ES6 module syntax. Th
 
 When data is `export`ed, it must also be `import`ed on the other end. We'll get to that soon.
 
-Also note that we aren't bootstrapping this component, as it is going inside of the bootstrapped root component.
+Also note that we aren't bootstrapping this component, as it is going inside of the initial bootstrapped root component.
 
 Inside `parties-form/parties-form.ng.html`, add the following form:
 
@@ -37,7 +37,7 @@ Again, first we import the class, then we add it to our list of View directives.
 
 Now let's get back to the form and make it functional.
 
-In Angular 2, there are two main ways to create forms: we will address 'model-driven' forms in this step, but we'll also look at `template-driven` forms in step 06.
+In Angular 2, there are two primary ways to create forms: we will address 'model-driven' forms in this step, but we'll also look at `template-driven` forms later in step 06.
 
 ## Model Driven Forms
 
@@ -47,7 +47,7 @@ First up, import the form directives & controls.
 
 By now you should have the hang of it. `import`, and add it to the View directives.
 
-Next, we can construct our form controls. For controls give you access to useful form features such as validators and much more.
+Next, we can construct our form controls. Form controls give you access to useful form features such as validators and much more.
 
 {{> DiffBox tutorialName="angular2-meteor" step="4.6"}}
 
@@ -73,11 +73,11 @@ We could also access the control values individually.
     this.partiesForm.controls.name.value;
     > ''
 
-A control can also take a Validator, which binds to the form. Name & description are both required, so let's specify that.
+A control can also take a Validator, which binds to the form. 'Name' & 'description' are both required, so let's specify that.
 
 {{> DiffBox tutorialName="angular2-meteor" step="4.7"}}
 
-The required validator here specifies that the form isn't valid if name or description are empty.
+The required validator here specifies that the form isn't valid if 'name' or 'description' are empty.
 
     this.partiesForm.value = '';
     this.partiesForm.valid
