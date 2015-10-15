@@ -7,9 +7,11 @@ export class CursorHandle {
   _hAutoNotify: Tracker.Computation;
   _hCurObserver: Object;
 
-  constructor(cursor: Mongo.Cursor<any>,
-    hAutoNotify: Tracker.Computation,
-    hCurObserver: Object) {
+  constructor(
+      cursor: Mongo.Cursor<any>,
+      hAutoNotify: Tracker.Computation,
+      hCurObserver: Object) {
+
     check(cursor, Mongo.Cursor);
     check(hAutoNotify, Tracker.Computation);
     check(hCurObserver, Match.Where(function(observer) {

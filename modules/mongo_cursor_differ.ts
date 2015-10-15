@@ -8,14 +8,6 @@ import {ObservableWrapper} from 'angular2/facade';
 
 import {MongoCursorObserver, AddChange, MoveChange, RemoveChange} from './mongo_cursor_observer';
 
-export class MongoCursorDifferFactory extends DefaultIterableDifferFactory {
-  supports(obj: Object): boolean { return obj instanceof Mongo.Cursor; }
-
-  create(cdRef: ChangeDetectorRef): MongoCursorDiffer {
-    return new MongoCursorDiffer(cdRef, new MongoCursorObserverFactory());
-  }
-}
-
 export interface ObserverFactory {
   create(cursor: Object): Object;
 }
@@ -26,6 +18,14 @@ class MongoCursorObserverFactory implements ObserverFactory {
       return new MongoCursorObserver(cursor);
     }
     return null;
+  }
+}
+
+export class MongoCursorDifferFactory extends DefaultIterableDifferFactory {
+  supports(obj: Object): boolean { return obj instanceof Mongo.Cursor; }
+
+  create(cdRef: ChangeDetectorRef): MongoCursorDiffer {
+      return new MongoCursorDiffer(cdRef, new MongoCursorObserverFactory());
   }
 }
 
@@ -98,7 +98,6 @@ export class MongoCursorDiffer {
     }
 
     this._applyCleanup();
-    this._listSize = 0;
   }
 
   _updateLatestValue(changes) {
@@ -111,11 +110,14 @@ export class MongoCursorDiffer {
     this._removed.length = 0;
   }
 
+  // Reset previous state of the differ
+  // by removing all currently shown documents.
   _applyCleanup() {
     for (var index = 0; index < this._listSize; index++) {
       this._removed.push(this._createChangeRecord(
         null, index, null));
     }
+    this._listSize = 0;
   }
 
   _applyChanges(changes) {

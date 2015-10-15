@@ -1,10 +1,10 @@
 /// <reference path="../typings/angular2-meteor.d.ts" />
 
-import {Component, View, bind} from 'angular2/angular2';
+import {Component, View, provide} from 'angular2/angular2';
 
-import {Router, routerBindings, RouterOutlet, APP_BASE_HREF, ROUTER_DIRECTIVES, RouteConfig} from 'angular2/router';
+import {ROUTER_DIRECTIVES, RouteConfig} from 'angular2/router';
 
-import {LocationStrategy, Location, HashLocationStrategy} from 'angular2/router';
+import {ROUTER_PROVIDERS, HashLocationStrategy, LocationStrategy} from 'angular2/router';
 
 import {PartiesCmp} from './parties/parties';
 
@@ -26,6 +26,5 @@ import {bootstrap} from 'angular2-meteor';
 export class Socially {}
 
 bootstrap(Socially, [
-  routerBindings(Socially),
-  bind(APP_BASE_HREF).toValue('/')
+  ROUTER_PROVIDERS, provide(LocationStrategy, {useClass: HashLocationStrategy})
 ]);

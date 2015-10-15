@@ -37,9 +37,9 @@ export class PartyForm {
         location: party.location
       });
 
-      this.partyForm.controls['name'].updateValue('');
-      this.partyForm.controls['description'].updateValue('');
-      this.partyForm.controls['location'].updateValue('');
+      (<Control>this.partyForm.controls['name']).updateValue('');
+      (<Control>this.partyForm.controls['description']).updateValue('');
+      (<Control>this.partyForm.controls['location']).updateValue('');
     }
   }
 }

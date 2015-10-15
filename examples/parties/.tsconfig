@@ -1,5 +1,6 @@
 {
   "diagnostics": true,
   "alwaysThrow": false,
-  "noResolve": false
+  "noResolve": false,
+  "useCash": false
 }

@@ -9,5 +9,5 @@ insecure
 meteor-base
 mongo
 reactive-var
-urigo:angular2-meteor
 standard-minifiers
+urigo:angular2-meteor
