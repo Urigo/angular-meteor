@@ -6,8 +6,9 @@ Angular2 + Meteor integration.
 ## Quick start
 
 ### Install package:
-This package is not published yet. If you want to try it out, please, 
-clone it into a local folder from the current repo.
+````
+    mateor add urigo:angular2-meteor
+````
 
 ### Import Angular2 into your app:
 Package supports TypeScript and Babel (.jsx file extension) as languages for development with Angular2.
