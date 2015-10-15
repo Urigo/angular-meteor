@@ -1,8 +1,8 @@
 <template name="stepbar">
   {{#unless ../stepbarHide}}
-  <div class="stepbar">
-    {{> stepbarButtons }}
-  </div>
+    <div class="stepbar">
+      {{> stepbarButtons }}
+    </div>
   {{/unless}}
 </template>
 
@@ -16,35 +16,47 @@
 
 <template name="stepbarButtons">
   {{#if prev}}
-    <a href="{{prev.path}}" class="prev-button btn btn-default">{{#if prevContent}}{{prevContent}}{{else}}Prev{{/if}}</a>
+    <a href="{{prev.path}}" class="prev-button btn btn-default">{{#if prevContent}}{{prevContent}}{{else}}
+      Prev{{/if}}</a>
   {{/if}}
   {{#if next}}
-    <a href="{{next.path}}" class="next-button btn btn-default">{{#if nextContent}}{{nextContent}}{{else}}Next{{/if}}</a>
+    <a href="{{next.path}}" class="next-button btn btn-default">{{#if nextContent}}{{nextContent}}{{else}}
+      Next{{/if}}</a>
   {{/if}}
 </template>
 
 <template name="stepbarButtonsPrevious">
-  <a href="{{prev.path}}"><li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li></a>
+  <a href="{{prev.path}}">
+    <li class="btn btn-primary"><i class="glyphicon glyphicon-step-backward"></i> Previous</li>
+  </a>
 </template>
 
 <template name="stepbarButtonsNext">
   {{#if next}}
-    <a href="{{next.path}}"><li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li></a>
+    <a href="{{next.path}}">
+      <li class="btn btn-primary">Next <i class="glyphicon glyphicon-step-forward"></i></li>
+    </a>
   {{/if}}
 </template>
 
 <template name="stepbarLiveDemo">
   {{#if next}}
-    <a href="{{liveDemoLink}}"><li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li></a>
+    <a href="{{liveDemoLink}}">
+      <li class="btn btn-primary"><i class="glyphicon glyphicon-play"></i> Live Demo</li>
+    </a>
   {{/if}}
 </template>
 
 <template name="stepbarCodeDiff">
   {{#if next}}
     {{#if CommitDiff}}
-      <a href="{{ghRepoName}}/commit/{{CommitDiff}}"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
+      <a href="{{ghRepoName}}/commit/{{CommitDiff}}">
+        <li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li>
+      </a>
     {{else}}
-      <a href="{{ghRepoName}}/compare/step_{{previousCommit}}...step_{{currentCommit}}"><li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li></a>
+      <a href="{{ghRepoName}}/compare/step_{{previousCommit}}...step_{{currentCommit}}">
+        <li class="btn btn-primary"><i class="glyphicon glyphicon-search"></i> Code Diff</li>
+      </a>
     {{/if}}
   {{/if}}
 </template>
@@ -75,7 +87,9 @@
   <div class="row">
     <h1 class="col-md-8 col-xs-12 title">Step {{id}} - {{title}}</h1>
     <div class="col-md-4 col-xs-12 video">
-      <iframe src="{{video}}" frameborder="0" allowfullscreen></iframe>
+      {{#if video}}
+        <iframe src="{{video}}" frameborder="0" allowfullscreen></iframe>
+      {{/if}}
     </div>
   </div>
 </template>
