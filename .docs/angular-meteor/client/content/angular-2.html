@@ -198,52 +198,30 @@ class PartiesList {
 {{#markdown}}
 
 ```
-import {Component, View, bootstrap, For, If} from 'angular2/angular2';
-import {Parties} from 'model/parties';
+/// <reference path="../typings/angular2-meteor.d.ts" />
+
+import {Component, View, NgFor} from 'angular2/angular2';
+
+import {Parties} from 'collections/parties';
+
+import {bootstrap} from 'angular2-meteor';
 
 @Component({
-    selector: 'parties-list'
+  selector: 'app'
 })
 @View({
-    templateUrl: 'client/parties-list.ng.html',
-    directives: [For, If]
+  templateUrl: 'client/app.html',
+  directives: [NgFor]
 })
-class PartiesList {
-    selectedParty: Object = {
-        name: '',
-        description: ''
-    };
+class Socially {
+  parties: Mongo.Cursor<Object>;
 
-    parties: Object;
-
-    constructor() {
-        var self = this;
-        Tracker.autorun(zone.bind(function () {
-            self.parties = Parties.find({}).fetch();
-        }));
-    }
-
-    addParty(name: string, description: string) {
-        Parties.insert({
-            name: name,
-            description: description
-        });
-    }
-
-    remove(party: Object) {
-        Parties.remove(party._id);
-    }
-
-    selectParty(party: Object) {
-        this.selectedParty = party;
-    }
-
-    saveParty(name: string, description: string) {
-        Parties.update(this.selectedParty._id, {$set: {name: name, description: description}});
-    }
+  constructor () {
+    this.parties = Parties.find();
+  }
 }
 
-bootstrap(PartiesList);
+bootstrap(Socially);
 ```
 {{/markdown}}
           </div>
