@@ -76,6 +76,10 @@ Update the new dependencies in the `index.html` file:
 
 {{> DiffBox tutorialName="ionic-tutorial" step="3.10"}}
 
+and add the `angular-meteor dependency to our Angular app:
+
+{{> DiffBox tutorialName="ionic-tutorial" step="3.11"}}
+
 Now let’s create the same collections we defined on our server in our client app.
 
 Create a new file named `collections.js` under the `www/js` folder and app the collections there:
