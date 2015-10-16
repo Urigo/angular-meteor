@@ -1,4 +1,4 @@
-{{#template name="ionic.step_03.html"}}
+{{#template name="ionic.step_03.md"}}
 
 Now let’s change with chat view to look and work like WhatsApp.
 

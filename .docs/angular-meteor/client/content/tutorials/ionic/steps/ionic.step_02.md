@@ -1,4 +1,4 @@
-{{#template name="ionic.step_02.html"}}
+{{#template name="ionic.step_02.md"}}
 Now that we have the layout and some dummy data, let’s create a Meteor server and connect to it to make our app real.
 
 First download Meteor from the Meteor site: [https://www.meteor.com/](https://www.meteor.com/)

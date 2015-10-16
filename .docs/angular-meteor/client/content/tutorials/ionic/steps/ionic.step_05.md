@@ -1,4 +1,4 @@
-{{#template name="ionic.step_05.html"}}
+{{#template name="ionic.step_05.md"}}
 We will add now the ability to create new chats with new users and remove existing chats.
 
 Let’s add the open-new-chat button to the chat’s list:

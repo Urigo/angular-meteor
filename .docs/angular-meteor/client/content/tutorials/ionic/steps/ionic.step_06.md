@@ -1,4 +1,4 @@
-{{#template name="ionic.step_06.html"}}
+{{#template name="ionic.step_06.md"}}
 Right now all the chats are published to all the clients. that not very private…
 
 Let’s fix that.

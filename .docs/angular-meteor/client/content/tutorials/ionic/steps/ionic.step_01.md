@@ -1,4 +1,4 @@
-{{#template name="ionic.step_01.html"}}
+{{#template name="ionic.step_01.md"}}
 Now we have an app.  let’s make it look like Whatsapp.
 We are going to start with the Chats list.
 

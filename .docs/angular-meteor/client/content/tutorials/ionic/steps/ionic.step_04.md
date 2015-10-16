@@ -1,4 +1,4 @@
-{{#template name="ionic.step_04.html"}}
+{{#template name="ionic.step_04.md"}}
 Our app needs Users and authentication.
 
 Meteor’s authentication system has many possible authentication providers like Facebook, Google Account and [more](http://docs.meteor.com/#/full/meteor_loginwithexternalservice)).

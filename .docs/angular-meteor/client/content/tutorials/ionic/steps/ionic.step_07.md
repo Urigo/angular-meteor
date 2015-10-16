@@ -1,4 +1,4 @@
-{{#template name="ionic.step_07.html"}}
+{{#template name="ionic.step_07.md"}}
 Congratulations!
 
 You’ve created a WhatsApp app!

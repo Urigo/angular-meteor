@@ -92,8 +92,10 @@ Template.stepbarCodeDiff.helpers({
 Template.improveDoc.helpers({
   tutorialName: function () {
     var rData = Router.current().data();
-    if (rData.parent.route == 'tutorials.angular2'){
+    if (rData.parent.route == 'tutorials.angular2') {
       return 'angular2';
+    } else if (rData.parent.route == 'tutorials.ionic') {
+      return 'ionic'
     } else {
       return 'angular1'
     }

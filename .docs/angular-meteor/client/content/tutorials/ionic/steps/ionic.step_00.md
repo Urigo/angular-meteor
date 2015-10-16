@@ -1,4 +1,4 @@
-{{#template name="ionic.step_00.html"}}
+{{#template name="ionic.step_00.md"}}
 Both Meteor and Ionic took their platform to the next level in tooling.
 Both provide CLI interface instead of bringing bunch of dependencies and configure build tools.
 There is also differences between those tools, in this post we will focus on the Ionic CLI.
