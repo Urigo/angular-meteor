@@ -21,7 +21,7 @@ describe('$meteorObject service', function () {
 
   beforeEach(function () {
     id = 'test_1';
-    var data = { _id: id, a: 1, b: 2 };
+    var data = { _id: id, a: 1, b: 2, d: [1,2,3] };
 
     TestCollection = new Mongo.Collection(null);
     TestCollection.insert(data);
@@ -78,7 +78,8 @@ describe('$meteorObject service', function () {
         _id: id,
         a: 1,
         b: 2,
-        c: 3
+        c: 3,
+        d: [1,2,3]
       });
 
       Tracker.flush();
@@ -95,7 +96,8 @@ describe('$meteorObject service', function () {
         _id: id,
         a: 1,
         b: 2,
-        c: 3
+        c: 3,
+        d: [1,2,3]
       });
     });
 
@@ -133,7 +135,7 @@ describe('$meteorObject service', function () {
       meteorObject.clientProp = 'delete';
       meteorObject.reset(true);
 
-      expect(meteorObject.clientProp).toBeDefined('angular meteor object has client property'); 
+      expect(meteorObject.clientProp).toBeDefined('angular meteor object has client property');
     });
 
     it('should delete properties for an object that doesnt exist in the collection', function() {
@@ -181,6 +183,21 @@ describe('$meteorObject service', function () {
       expect(meteorObject.getRawObject()).toDeepEqual(doc);
       expect(TestCollection.update.calls.mostRecent().args[0]).toEqual({ _id: id });
       expect(TestCollection.update.calls.mostRecent().args[1]).toEqual({ $unset: { 'c.d': true } });
+    });
+
+    it('should save changes in a nested array', function() {
+      meteorObject.d.splice(1,1);
+
+      $rootScope.$apply();
+
+      var doc = TestCollection.findOne(id);
+
+      expect(doc).toDeepEqual({
+        _id : id,
+        a : 1,
+        b : 2,
+        d : [1, 3]
+      });
     });
   });
 });

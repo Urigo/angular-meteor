@@ -31,6 +31,18 @@ TUTORIAL_PAGES = {
       subHead: "Angular 2.0 Meteor tutorial",
       stepbarHide: true,
       pages: ANGULAR2_TUT
+    },
+    {
+      id: "3",
+      title: "Ionic",
+      route: "tutorials.ionic",
+      path: "/tutorials/ionic",
+      pathRedirect: "/tutorials/ionic/bootstrapping",
+      ghRepoName: "https://github.com/idanwe/ionic-cli-meteor-whatsapp-tutorial",
+      seoTitlePrefix: "Angular-Meteor and Ionic | ",
+      subHead: "Angular-Meteor and Ionic",
+      stepbarHide: true,
+      pages: IONIC_TUT
     }
   ]
 };

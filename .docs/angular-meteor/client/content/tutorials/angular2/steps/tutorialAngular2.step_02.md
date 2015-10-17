@@ -31,11 +31,11 @@ Why so much work setting up a new dependency? Angular 2 is trying to avoid names
 
 # Component as a Controller
 
-One convenient way to think of components role in Angular2 is as the role played by ````ngController```` in Angular 1.x.
-Each component defines own view via ````View```` annotation and creates data model that will be rendered in the view. 
+One convenient way to think of a components role in Angular2 is as the role played by ````ngController```` in Angular 1.x.
+Each component defines it's own view via the ````View```` annotation and creates a data model that will be rendered in the view. 
 
 Everything else is done within event handlers and other code that controls data flow between the view and the user
-and updates data model accordingly.
+and updates the data model accordingly.
 
 Now we are going to create out initial data model and render it in the view.
 This code will go inside of our Socially class [`constructor`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor). A constructor is a function run when a class is loaded, thus it loads the initial data for the class.
@@ -51,7 +51,7 @@ Run the app again.
 At this moment you will see a message in the console: _Property 'parties' does not exist on type 'Socially'_.
 These kind of messages can be annoying, but they do a great job — keep our code less buggy.
 
-It's so easy, for example, to misspell name of a property in dynamic languages like JavaScript.
+It's so easy, for example, to misspell the name of a property in dynamic languages like JavaScript.
 Thanks to TypeScript, we can use this compilation diagnostics to
 create less error-prone JavaScript applications.
 
@@ -66,14 +66,14 @@ Although the controller is not yet doing very much, it plays a crucial role. The
 
 - The selector 'app', located on the `body` tag, references the name of our class, `Socially` (located in the JavaScript file `app.js` which is compiled automatically from `app.ts`).
 - The class Socially references the View using the templateUrl path to `client/app.html`
-- The Socially class constructor loads the data into properties of the component class itself, thus proving data model for the view.
+- The Socially class constructor loads the data into properties of the component class itself, thus proving the data model for the view.
 - The template, `app.html` accesses `parties` using the Socially class context
 
 # Summary
 
 You now have a dynamic app that features separate model, view and controller components.
 
-But, this is all client side, which is nice for tutorials, but in a real application we need to persist the data on the server and sync all the clients with it.
+But, this is still all client side - which is nice for tutorials, but in a real application we need to persist the data on the server and sync all the clients with it.
 
 So, let's go to [step 3](/tutorial/step_03) to learn how to bind our application to the great power of Meteor.
 

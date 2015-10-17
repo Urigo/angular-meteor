@@ -48,7 +48,7 @@ So instead of adding <code ng-non-bindable>&#123;&#123;> loginButtons &#125;&#12
 
 So the `index.html` will look like this:
 
-{{> DiffBox tutorialName="angular-meteor" step="8.1"}}
+{{> DiffBox tutorialName="angular-meteor" step="8.5"}}
 
 Run the code, create an account, login, logout...
 
@@ -56,7 +56,7 @@ Now that we have our account system, we can start defining our security rules fo
 
 Let's go to the model folder and change the file to look like this:
 
-{{> DiffBox tutorialName="angular-meteor" step="8.2"}}
+{{> DiffBox tutorialName="angular-meteor" step="8.6"}}
 
 The [collection.allow Meteor function](http://docs.meteor.com/#/full/allow) defines the permissions that the client needs to write directly to the collection (like we did until now).
 
@@ -108,7 +108,7 @@ To access $rootScope in a template you simply write $root. and then the name of 
 
 Change the code for the add button in `parties-list.ng.html` to this:
 
-{{> DiffBox tutorialName="angular-meteor" step="8.3"}}
+{{> DiffBox tutorialName="angular-meteor" step="8.7"}}
 
 So first we set the new party's owner to our current user's id and then push it to the parties collection like before.
 
@@ -122,8 +122,7 @@ We also want to let users login with their Facebook and Twitter accounts.
 
 To do this, we simply need to add the right packages in the console:
 
-    meteor add accounts-facebook
-    meteor add accounts-twitter
+    meteor add accounts-facebook accounts-twitter
 
 Now run the app.  when you will first press the login buttons of the social login, meteor will show you a wizard that will help you define your app.
 
@@ -158,7 +157,7 @@ So let's add requireUser to our route in partyDetails so that it will prevent us
 
 We are going to use the [resolve](https://github.com/angular-ui/ui-router/wiki#resolve) object of ui-router and ngRoute:
 
-{{> DiffBox tutorialName="angular-meteor" step="8.4"}}
+{{> DiffBox tutorialName="angular-meteor" step="8.9"}}
 
 Now, if a user is not logged in to the system, it won't be able to access that route.
 
@@ -166,7 +165,7 @@ We also want to handle that scenario and redirect the user to the main page.
 
 on the top of the routes file, let's add these lines:
 
-{{> DiffBox tutorialName="angular-meteor" step="8.5"}}
+{{> DiffBox tutorialName="angular-meteor" step="8.10"}}
 
 # Summary
 

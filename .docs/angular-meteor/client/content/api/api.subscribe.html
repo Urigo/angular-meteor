@@ -47,6 +47,14 @@ Calling $scope.$meteorSubscribe will automatically stop the subscription when th
   <td><p>Optional arguments passed to publisher function on server.</p></td>
   <td><a href="" class="label type-hint type-hint-object">No</a></td>
 </tr>
+<tr>
+  <td>onStop</td>
+  <td><a href="" class="label type-hint type-hint-object">Object with onStop callback</a></td>
+  <td><p>The onStop callback is called after the returned promise is resolved. It will be called with a Meteor.Error
+    if the subscription fails or is terminated by the server. If the subscription is stopped by calling stop on the
+    subscription handle or inside the publication, onStop is called with no arguments.</p></td>
+  <td><a href="" class="label type-hint type-hint-object">No</a></td>
+</tr>
 </tbody>
 </table>
 
@@ -84,7 +92,7 @@ Calling $scope.$meteorSubscribe will automatically stop the subscription when th
             subscriptionHandle.stop();
           });
 
-          $scope.$meteorSubscribe('books').then(function(subscriptionHandle){
+          $scope.$meteorSubscribe('books', {onStop: notifyUser}).then(function(subscriptionHandle){
             // Bind all the todos to $scope.books
             $scope.books = $meteor.collection(Books);
 
@@ -92,6 +100,15 @@ Calling $scope.$meteorSubscribe will automatically stop the subscription when th
 
             // No need to stop the subscription, it will automatically close on scope destroy
           });
+
+          ////////////
+
+          function notifyUser(err) {
+            if (err)
+              alert(err.reason);
+            else
+              alert('Books subscription was stopped.');
+          }
         }
       ]);
     }

@@ -14,7 +14,7 @@ describe('getUpdates module', function() {
   describe('validations', function() {
     it('should throw an error if first argument is not an object', function() {
       var boundGetUpdates = _.partial(getUpdates);
-      expect(boundGetUpdates).toThrowError(/first argument.*object/); 
+      expect(boundGetUpdates).toThrowError(/first argument.*object/);
     });
 
     it('should throw an error if second argument is not an object', function() {

@@ -18,7 +18,7 @@ Now let's add a map the `party-details.ng.html` , first add this HTML snippet to
 
 {{> DiffBox tutorialName="angular-meteor" step="16.2"}}
 
-Here we created the google-map directive with attributes for biding the center, handling events and zoom of the map.
+Here we created the google-map directive with attributes for binding the center, handling events and zoom of the map.
 So let's define those variables in our scope. Go to `partyDetails.js`.
 
 Inside we will create the $scope.map variable to hold the properties on the map:
@@ -32,7 +32,7 @@ Create a new file named parties.css inside a new folder called `styles` placed l
 
 Now run the app and go to the party details page. You should see a new Google Map widget, but it doesn't do anything yet.
 
-Let's add a marker that will be binded to the party's location.
+Let's add a marker that will be bound to the party's location.
 
 Inside `party-details.ng.html`:
 
@@ -40,7 +40,7 @@ Inside `party-details.ng.html`:
 
 The ui-gmap-marker directive represents a marker inside the map. We use the following attributes:
 
-* coords - where is the scope the marker location will be binded to.
+* coords - where is the scope the marker location will be bound to.
 * options - object that holds the marker options. We are going to use the draggable option.
 * events - handling the events on the marker. We will use the click event.
 * idKey - where in the scope there exists the unique id of the object that the marker represent.
@@ -56,7 +56,7 @@ What happened here:
 * We added the click event to the map. Every time the user clicks the map, we take the location from the click event's params and save it as the party's new location.
 Notice that in the end we call $scope.$apply();  this is because that event comes outside of Angular and we need to let Angular know that something has change so it will run another $digest cycle.
 * We defined the options object under the marker to specify the marker is draggable.
-* We handled the dragend event that happens when the marker is droped in a new location. We take the location from the event's params and save it as the party's new location.
+* We handled the dragend event that happens when the marker is dropped to a new location. We take the location from the event's params and save it as the party's new location.
 
 Again, with the great Meteor platform there is no need for sync or save function. We just set it and it syncs in all other clients.
 
@@ -77,7 +77,7 @@ You can see that the difference between the directive we used in `party-details.
 The attributes we use:
 
 * models - the scope array that the markers represent.
-* coords - the property the holds the location.
+* coords - the property that holds the location.
 * click - handler for the click event on a marker
 * fit - a boolean to automatically zoom the map to fit all the markers inside
 * idKey - the property that holds the unique id of the array
