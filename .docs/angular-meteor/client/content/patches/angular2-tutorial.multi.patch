@@ -1,7 +1,7 @@
 From a2759654b831fdc60cf071096dd9ace110b38019 Mon Sep 17 00:00:00 2001
 From: Alex <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:01:41 +0300
-Subject: [PATCH 01/25] Create README.md
+Subject: [PATCH 01/36] Create README.md
 
 ---
  README.md | 2 ++
@@ -23,7 +23,7 @@ index 0000000..61fc3ee
 From 982577678528ecb16ccea76f9c4a178f09b8512f Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:03:11 +0300
-Subject: [PATCH 02/25] Step 0.1: add client/index.html
+Subject: [PATCH 02/36] Step 0.1: add client/index.html
 
 ---
  client/index.html | 3 +++
@@ -46,7 +46,7 @@ index 0000000..ef412ef
 From 32756437d6a3cd6144aaea879dee45187eaf6d01 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:08:36 +0300
-Subject: [PATCH 03/25] Step 0.2: add Angular2 package
+Subject: [PATCH 03/36] Step 0.2: add Angular2 package
 
 ---
  .meteor/packages | 1 +
@@ -68,7 +68,7 @@ index a9f8340..feb8272 100644
 From 8ae5857626a2964f179c35e501a301c539c94bb8 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:09:47 +0300
-Subject: [PATCH 04/25] Step 0.3: remove Blaze package
+Subject: [PATCH 04/36] Step 0.3: remove Blaze package
 
 ---
  .meteor/packages | 1 -
@@ -93,7 +93,7 @@ index feb8272..c70808e 100644
 From 0d456d718868498b1f3560d0c0e0a97d03bd9205 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:10:32 +0300
-Subject: [PATCH 05/25] Step 0.4: remove ecmascript package
+Subject: [PATCH 05/36] Step 0.4: remove ecmascript package
 
 ---
  .meteor/packages | 1 -
@@ -118,7 +118,7 @@ index c70808e..2f89e25 100644
 From e116f09c9f71facbcf6b247be9050262e7755bf9 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:12:43 +0300
-Subject: [PATCH 06/25] Step 0.5: create root component
+Subject: [PATCH 06/36] Step 0.5: create root component
 
 ---
  client/app.ts | 11 +++++++++++
@@ -149,7 +149,7 @@ index 0000000..5dd0b52
 From 67c4d2a7773cf9b48fc6696b07deec63018c4644 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:14:08 +0300
-Subject: [PATCH 07/25] Step 0.6: load root component
+Subject: [PATCH 07/36] Step 0.6: load root component
 
 ---
  client/index.html | 3 ++-
@@ -172,7 +172,7 @@ index ef412ef..19d3bf1 100644
 From e6aec95c3cebf33b6332c2af3e347e0cdd135a81 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:19:17 +0300
-Subject: [PATCH 08/25] Step 0.7: remove index.html
+Subject: [PATCH 08/36] Step 0.7: remove index.html
 
 ---
  client/index.html | 4 ----
@@ -196,7 +196,7 @@ index 19d3bf1..0000000
 From 0cef422be147d580b1609a8b3115bf6f689b258e Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:20:40 +0300
-Subject: [PATCH 09/25] Step 0.8: add reference to the declaration file
+Subject: [PATCH 09/36] Step 0.8: add reference to the declaration file
 
 ---
  client/app.ts | 2 ++
@@ -219,7 +219,7 @@ index 5dd0b52..b918366 100644
 From acfae5cd28420a60891d17807a08eb871f734e8d Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:21:40 +0300
-Subject: [PATCH 10/25] Step 0.9: create app.html template
+Subject: [PATCH 10/36] Step 0.9: create app.html template
 
 ---
  client/app.html | 1 +
@@ -240,7 +240,7 @@ index 0000000..a9c8ddc
 From 017e46a8ed3f1931104b8495df0d1aed8d254e8c Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:22:33 +0300
-Subject: [PATCH 11/25] adds declaration files
+Subject: [PATCH 11/36] adds declaration files
 
 ---
  .meteor/versions             | 66 --------------------------------------------
@@ -327,7 +327,7 @@ index 0000000..1d5c0a1
 --- /dev/null
 +++ b/typings/angular2-meteor.d.ts
 @@ -0,0 +1 @@
-+/// <reference path="../.meteor/local/build/programs/server/assets/packages/urigo_angular2-meteor/typings/angular2-meteor.d.ts" />
++/// &lt;reference path="../.meteor/local/build/programs/server/assets/packages/urigo_angular2-meteor/typings/angular2-meteor.d.ts" />
 \ No newline at end of file
 -- 
 2.3.8 (Apple Git-58)
@@ -336,7 +336,7 @@ index 0000000..1d5c0a1
 From fae4f074b672a27b0162350174e98c4ee268c4ad Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:23:10 +0300
-Subject: [PATCH 12/25] Step 0.10: change inline template to templateUrl
+Subject: [PATCH 12/36] Step 0.10: change inline template to templateUrl
 
 ---
  client/app.ts | 2 +-
@@ -362,7 +362,7 @@ index b918366..2dcaa25 100644
 From d192b3a57946e9441e5ff8d5bacf260b1884aa50 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:29:40 +0300
-Subject: [PATCH 13/25] Step 1.1: add static HTML to the template
+Subject: [PATCH 13/36] Step 1.1: add static HTML to the template
 
 ---
  client/app.html | 15 ++++++++++++++-
@@ -392,20 +392,20 @@ index a9c8ddc..dd1ef68 100644
 2.3.8 (Apple Git-58)
 
 
-From 1adb8a77745345844a053c37839a0f82a6f0ed5c Mon Sep 17 00:00:00 2001
+From 3f9aaaf38ff308bbe34366472fb1f1237ad85d81 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:30:49 +0300
-Subject: [PATCH 14/25] Step 2.1: use dynamic template with NgFor
+Subject: [PATCH 14/36] Step 2.1: use dynamic template with NgFor
 
 ---
- client/app.html | 22 ++++++++--------------
- 1 file changed, 8 insertions(+), 14 deletions(-)
+ client/app.html | 23 +++++++++--------------
+ 1 file changed, 9 insertions(+), 14 deletions(-)
 
 diff --git a/client/app.html b/client/app.html
-index dd1ef68..d834ea7 100644
+index dd1ef68..3197b77 100644
 --- a/client/app.html
 +++ b/client/app.html
-@@ -1,14 +1,8 @@
+@@ -1,14 +1,9 @@
 -<ul>
 -  <li>
 -    <span>Dubstep-Free Zone</span>
@@ -425,6 +425,7 @@ index dd1ef68..d834ea7 100644
 +    <li *ng-for="#party of parties">
 +      {{party.name}}
 +      <p>{{party.description}}</p>
++      <p>{{party.location}}</p>
 +    </li>
 +  </ul>
 +</div>
@@ -432,10 +433,10 @@ index dd1ef68..d834ea7 100644
 2.3.8 (Apple Git-58)
 
 
-From 7bbd5db255cdc2307e51f0b183ef64c3a68df518 Mon Sep 17 00:00:00 2001
+From f23e43bc574d3390aff5da8f4360d81d48811464 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:32:31 +0300
-Subject: [PATCH 15/25] Step 2.2: load NgFor directive, add it to the View's
+Subject: [PATCH 15/36] Step 2.2: load NgFor directive, add it to the View's
  directives list
 
 ---
@@ -466,20 +467,20 @@ index 2dcaa25..30495cd 100644
 2.3.8 (Apple Git-58)
 
 
-From 3265ee5e91573c227d2ea3a4dfd7b0dccc1753a6 Mon Sep 17 00:00:00 2001
+From ddc6f1484fa23a6ff28412d2bdd7b3bad35e1f9f Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:34:52 +0300
-Subject: [PATCH 16/25] Step 2.3: load parties data into the app
+Subject: [PATCH 16/36] Step 2.3: load parties data into the app
 
 ---
- client/app.ts | 13 ++++++++++++-
- 1 file changed, 12 insertions(+), 1 deletion(-)
+ client/app.ts | 19 ++++++++++++++++++-
+ 1 file changed, 18 insertions(+), 1 deletion(-)
 
 diff --git a/client/app.ts b/client/app.ts
-index 30495cd..972ad81 100644
+index 30495cd..bce2d15 100644
 --- a/client/app.ts
 +++ b/client/app.ts
-@@ -9,6 +9,17 @@ import {Component, View, NgFor, bootstrap} from 'angular2/angular2';
+@@ -9,6 +9,23 @@ import {Component, View, NgFor, bootstrap} from 'angular2/angular2';
      templateUrl: 'client/app.html',
      directives: [NgFor]
  })
@@ -488,11 +489,17 @@ index 30495cd..972ad81 100644
 +    constructor () {
 +        this.parties = [
 +          {'name': 'Dubstep-Free Zone',
-+            'description': 'Can we please just for an evening not listen to dubstep.'},
++           'description': 'Can we please just for an evening not listen to dubstep.',
++           'location': 'Palo Alto'
++          },
 +          {'name': 'All dubstep all the time',
-+            'description': 'Get it on!'},
++           'description': 'Get it on!',
++           'location': 'Palo Alto'
++          },
 +          {'name': 'Savage lounging',
-+            'description': 'Leisure suit required. And only fiercest manners.'}
++           'description': 'Leisure suit required. And only fiercest manners.',
++           'location': 'San Francisco'
++          }
 +        ];
 +    }
 +}
@@ -502,17 +509,17 @@ index 30495cd..972ad81 100644
 2.3.8 (Apple Git-58)
 
 
-From 170c90b5d9d0a5997bbb9d1b43bffe6ed2bfd1d7 Mon Sep 17 00:00:00 2001
+From 46b32868739a75d2b694beb643dcfacbcb518557 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:36:13 +0300
-Subject: [PATCH 17/25] Step 2.4: define parties property
+Subject: [PATCH 17/36] Step 2.4: define parties property
 
 ---
  client/app.ts | 2 ++
  1 file changed, 2 insertions(+)
 
 diff --git a/client/app.ts b/client/app.ts
-index 972ad81..476f941 100644
+index bce2d15..b52e219 100644
 --- a/client/app.ts
 +++ b/client/app.ts
 @@ -10,6 +10,8 @@ import {Component, View, NgFor, bootstrap} from 'angular2/angular2';
@@ -528,10 +535,10 @@ index 972ad81..476f941 100644
 2.3.8 (Apple Git-58)
 
 
-From 714f1c97d89b4d19a44ededaebde3267f0a6af52 Mon Sep 17 00:00:00 2001
+From 77f21f56bdea65070fc77c6437194dfe10933a40 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 18:30:37 +0300
-Subject: [PATCH 18/25] Step 3.1:  add the parties collection
+Subject: [PATCH 18/36] Step 3.1:  add the parties collection
 
 ---
  collections/parties.ts | 1 +
@@ -549,10 +556,10 @@ index 0000000..83fbd07
 2.3.8 (Apple Git-58)
 
 
-From 4b35804350ed4b5945a0b3b32ff49510978004dd Mon Sep 17 00:00:00 2001
+From 175bb73a6341a960c5b8eb838a6012ac74b08e37 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 18:36:20 +0300
-Subject: [PATCH 19/25] Step 3.2:  add reference to the declaration file
+Subject: [PATCH 19/36] Step 3.2:  add reference to the declaration file
 
 ---
  collections/parties.ts | 2 ++
@@ -570,17 +577,17 @@ index 83fbd07..d1ed853 100644
 2.3.8 (Apple Git-58)
 
 
-From 15c5e65d9f92f9db9c9d2a72a2456c4a62197acc Mon Sep 17 00:00:00 2001
+From 5847faf0e02e03dbd4e008fe8a9effab14e531a2 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 18:36:56 +0300
-Subject: [PATCH 20/25] Step 3.3:  import the parties collection
+Subject: [PATCH 20/36] Step 3.3:  import the parties collection
 
 ---
  client/app.ts | 2 ++
  1 file changed, 2 insertions(+)
 
 diff --git a/client/app.ts b/client/app.ts
-index 476f941..c23191e 100644
+index b52e219..061d6b6 100644
 --- a/client/app.ts
 +++ b/client/app.ts
 @@ -2,6 +2,8 @@
@@ -596,57 +603,37 @@ index 476f941..c23191e 100644
 2.3.8 (Apple Git-58)
 
 
-From 4726b5215212e8df80481e6973d734148a9b46e8 Mon Sep 17 00:00:00 2001
+From b3643282a1b99c1aab17ab1b6c28e60535136576 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
-Date: Sat, 26 Sep 2015 18:39:19 +0300
-Subject: [PATCH 21/25] Step 3.4:  fetch parties
+Date: Sat, 26 Sep 2015 18:47:23 +0300
+Subject: [PATCH 21/36] Step 3.5:  fetch parties reactively
 
 ---
- client/app.ts | 9 +--------
- 1 file changed, 1 insertion(+), 8 deletions(-)
+ client/app.ts | 17 +++--------------
+ 1 file changed, 3 insertions(+), 14 deletions(-)
 
 diff --git a/client/app.ts b/client/app.ts
-index c23191e..3506859 100644
+index 061d6b6..1954985 100644
 --- a/client/app.ts
 +++ b/client/app.ts
-@@ -15,14 +15,7 @@ class Socially {
+@@ -15,20 +15,9 @@ class Socially {
      parties: Array<Object>;
  
      constructor () {
 -        this.parties = [
 -          {'name': 'Dubstep-Free Zone',
--            'description': 'Can we please just for an evening not listen to dubstep.'},
+-           'description': 'Can we please just for an evening not listen to dubstep.',
+-           'location': 'Palo Alto'
+-          },
 -          {'name': 'All dubstep all the time',
--            'description': 'Get it on!'},
+-           'description': 'Get it on!',
+-           'location': 'Palo Alto'
+-          },
 -          {'name': 'Savage lounging',
--            'description': 'Leisure suit required. And only fiercest manners.'}
+-           'description': 'Leisure suit required. And only fiercest manners.',
+-           'location': 'San Francisco'
+-          }
 -        ];
-+        this.parties = Parties.find().fetch();
-     }
- }
- 
--- 
-2.3.8 (Apple Git-58)
-
-
-From 19c43bffdb956d74035a274a0bfe464feb25059a Mon Sep 17 00:00:00 2001
-From: barbatus <alex.borodach@gmail.com>
-Date: Sat, 26 Sep 2015 18:47:23 +0300
-Subject: [PATCH 22/25] Step 3.5:  fetch parties reactively
-
----
- client/app.ts | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
-
-diff --git a/client/app.ts b/client/app.ts
-index 3506859..1954985 100644
---- a/client/app.ts
-+++ b/client/app.ts
-@@ -15,7 +15,9 @@ class Socially {
-     parties: Array<Object>;
- 
-     constructor () {
--        this.parties = Parties.find().fetch();
 +        Tracker.autorun(zone.bind(() => {
 +            this.parties = Parties.find().fetch();
 +        }));
@@ -657,10 +644,10 @@ index 3506859..1954985 100644
 2.3.8 (Apple Git-58)
 
 
-From e462befc87178908752452c75fc0ea40c90123fa Mon Sep 17 00:00:00 2001
+From 813bd334684f0b28d8bb77401b4940a7acd018e9 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 14 Oct 2015 22:55:11 +0300
-Subject: [PATCH 23/25] Step 3.6: Blaze-like binding to Angular2
+Subject: [PATCH 22/36] Step 3.6: Blaze-like binding to Angular2
 
 ---
  client/app.ts | 10 +++++-----
@@ -702,22 +689,22 @@ index 1954985..d845cf7 100644
 2.3.8 (Apple Git-58)
 
 
-From 676cf20a811a682b52c02521817c53240c1a0915 Mon Sep 17 00:00:00 2001
+From 99e25f8902d2d83fd4998ebda5e70b9eb2af4b72 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 14 Oct 2015 23:21:31 +0300
-Subject: [PATCH 24/25] Step 3.7:  loading initial parties on the server
+Subject: [PATCH 23/36] Step 3.7:  loading initial parties on the server
 
 ---
- server/load_parties.ts | 25 +++++++++++++++++++++++++
- 1 file changed, 25 insertions(+)
+ server/load_parties.ts | 28 ++++++++++++++++++++++++++++
+ 1 file changed, 28 insertions(+)
  create mode 100644 server/load_parties.ts
 
 diff --git a/server/load_parties.ts b/server/load_parties.ts
 new file mode 100644
-index 0000000..cc8a079
+index 0000000..65c914a
 --- /dev/null
 +++ b/server/load_parties.ts
-@@ -0,0 +1,25 @@
+@@ -0,0 +1,28 @@
 +import {Parties} from 'collections/parties';
 +
 +export function loadParties() {
@@ -726,15 +713,18 @@ index 0000000..cc8a079
 +    var parties = [
 +        {
 +            'name': 'Dubstep-Free Zone',
-+            'description': 'Can we please just for an evening not listen to dubstep.'
++            'description': 'Can we please just for an evening not listen to dubstep.',
++            'location': 'Palo Alto'
 +        },
 +        {
 +            'name': 'All dubstep all the time',
-+            'description': 'Get it on!'
++            'description': 'Get it on!',
++            'location': 'Palo Alto'
 +        },
 +        {
 +            'name': 'Savage lounging',
-+            'description': 'Leisure suit required. And only fiercest manners.'
++            'description': 'Leisure suit required. And only fiercest manners.',
++            'location': 'San Francisco'
 +        }
 +    ];
 +
@@ -747,10 +737,10 @@ index 0000000..cc8a079
 2.3.8 (Apple Git-58)
 
 
-From ad1cdd09af7b7f347ccbf3193588ed241fb62c70 Mon Sep 17 00:00:00 2001
+From b9aa192cfa2ce8de9a11849aa789b43286443db8 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 14 Oct 2015 23:32:49 +0300
-Subject: [PATCH 25/25] Step 3.8:  bootstrapping server side
+Subject: [PATCH 24/36] Step 3.8:  bootstrapping server side
 
 ---
  server/main.ts | 3 +++
@@ -766,6 +756,374 @@ index 0000000..80ba2c9
 +import {loadParties} from './load_parties';
 +
 +Meteor.startup(loadParties);
+-- 
+2.3.8 (Apple Git-58)
+
+
+From d181f786548dece232176e40814e0d9eef6e43b2 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 17 Oct 2015 14:58:32 +0300
+Subject: [PATCH 25/36] Step 4.1:  create PartiesForm component
+
+---
+ client/parties-form/parties-form.ts | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+ create mode 100644 client/parties-form/parties-form.ts
+
+diff --git a/client/parties-form/parties-form.ts b/client/parties-form/parties-form.ts
+new file mode 100644
+index 0000000..6b50b1e
+--- /dev/null
++++ b/client/parties-form/parties-form.ts
+@@ -0,0 +1,11 @@
++/// &lt;reference path="../../typings/angular2-meteor.d.ts" />
++
++import {Component, View} from 'angular2/angular2';
++
++@Component({
++    selector: 'parties-form'
++})
++@View({
++    templateUrl: 'client/parties-form/parties-form.html'
++})
++export class PartiesForm { }
+-- 
+2.3.8 (Apple Git-58)
+
+
+From 4cc83812f3d444dab6ec9b6988d95eb31f9da951 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 17 Oct 2015 15:48:01 +0300
+Subject: [PATCH 26/36] Step 4.2: add parties-form.html template
+
+---
+ client/parties-form/parties-form.html | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+ create mode 100644 client/parties-form/parties-form.html
+
+diff --git a/client/parties-form/parties-form.html b/client/parties-form/parties-form.html
+new file mode 100644
+index 0000000..df0bd89
+--- /dev/null
++++ b/client/parties-form/parties-form.html
+@@ -0,0 +1,9 @@
++<form>
++  <label>Name</label>
++  <input type="text">
++  <label>Description</label>
++  <input type="text">
++  <label>Location</label>
++  <input type="text">
++  <button>Add</button>
++</form>
+-- 
+2.3.8 (Apple Git-58)
+
+
+From f35dff5481dc35edbae93114bc136cc4a9e8a231 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 17 Oct 2015 16:03:48 +0300
+Subject: [PATCH 27/36] Step 4.3: load the PartiesForm component
+
+---
+ client/app.html | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/client/app.html b/client/app.html
+index 3197b77..3b7d5f2 100644
+--- a/client/app.html
++++ b/client/app.html
+@@ -1,4 +1,5 @@
+ <div>
++  <parties-form></parties-form>
+   <ul>
+     <li *ng-for="#party of parties">
+       {{party.name}}
+-- 
+2.3.8 (Apple Git-58)
+
+
+From feb9996502df11363194f9ca08691ea388220c0d Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 17 Oct 2015 16:07:36 +0300
+Subject: [PATCH 28/36] Step 4.4:  import the PartiesForm component and link it
+ with the Socially component
+
+---
+ client/app.ts | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/client/app.ts b/client/app.ts
+index d845cf7..e1ce3b9 100644
+--- a/client/app.ts
++++ b/client/app.ts
+@@ -6,12 +6,14 @@ import {Parties} from 'collections/parties';
+ 
+ import {bootstrap} from 'angular2-meteor';
+ 
++import {PartiesForm} from 'client/parties-form/parties-form';
++
+ @Component({
+     selector: 'app'
+ })
+ @View({
+     templateUrl: 'client/app.html',
+-    directives: [NgFor]
++    directives: [NgFor, PartiesForm]
+ })
+ class Socially {
+     parties: Mongo.Cursor<Object>;
+-- 
+2.3.8 (Apple Git-58)
+
+
+From 8c0797d14b0c22aedeb4c347e4607f86e1ef8a5a Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 17 Oct 2015 17:32:28 +0300
+Subject: [PATCH 29/36] Step 4.5:  import dependencies and add form directives
+ to the View
+
+---
+ client/parties-form/parties-form.ts | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/client/parties-form/parties-form.ts b/client/parties-form/parties-form.ts
+index 6b50b1e..7b5aa85 100644
+--- a/client/parties-form/parties-form.ts
++++ b/client/parties-form/parties-form.ts
+@@ -2,10 +2,13 @@
+ 
+ import {Component, View} from 'angular2/angular2';
+ 
++import {FORM_DIRECTIVES, FormBuilder, ControlGroup, Validators} from 'angular2/angular2';
++
+ @Component({
+     selector: 'parties-form'
+ })
+ @View({
+-    templateUrl: 'client/parties-form/parties-form.html'
++    templateUrl: 'client/parties-form/parties-form.html',
++    directives: [FORM_DIRECTIVES]
+ })
+ export class PartiesForm { }
+-- 
+2.3.8 (Apple Git-58)
+
+
+From 8557aedfc098e392343418620051f70374795bdb Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 17 Oct 2015 17:41:26 +0300
+Subject: [PATCH 30/36] Step 4.6:  build a form model
+
+---
+ client/parties-form/parties-form.ts | 13 ++++++++++++-
+ 1 file changed, 12 insertions(+), 1 deletion(-)
+
+diff --git a/client/parties-form/parties-form.ts b/client/parties-form/parties-form.ts
+index 7b5aa85..fc535dd 100644
+--- a/client/parties-form/parties-form.ts
++++ b/client/parties-form/parties-form.ts
+@@ -11,4 +11,15 @@ import {FORM_DIRECTIVES, FormBuilder, ControlGroup, Validators} from 'angular2/a
+     templateUrl: 'client/parties-form/parties-form.html',
+     directives: [FORM_DIRECTIVES]
+ })
+-export class PartiesForm { }
++export class PartiesForm {
++    partiesForm: ControlGroup;
++
++    constructor() {
++        var fb = new FormBuilder();
++        this.partiesForm = fb.group({
++            name: [''],
++            description: [''],
++            location: ['']
++        });
++    }
++}
+-- 
+2.3.8 (Apple Git-58)
+
+
+From 99c5866541fc821b4ecb3ff17e147e723a8e877e Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 17 Oct 2015 18:34:57 +0300
+Subject: [PATCH 31/36] Step 4.7:  add form validation
+
+---
+ client/parties-form/parties-form.ts | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/client/parties-form/parties-form.ts b/client/parties-form/parties-form.ts
+index fc535dd..4b12b0a 100644
+--- a/client/parties-form/parties-form.ts
++++ b/client/parties-form/parties-form.ts
+@@ -17,9 +17,9 @@ export class PartiesForm {
+     constructor() {
+         var fb = new FormBuilder();
+         this.partiesForm = fb.group({
+-            name: [''],
++            name: ['', Validators.required],
+             description: [''],
+-            location: ['']
++            location: ['', Validators.required]
+         });
+     }
+ }
+-- 
+2.3.8 (Apple Git-58)
+
+
+From d8c2ada1e93f1f3783e2a773fa17f223938e9041 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 17 Oct 2015 20:20:32 +0300
+Subject: [PATCH 32/36] Step 4.8:  link the form and its model together
+
+---
+ client/parties-form/parties-form.html | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/client/parties-form/parties-form.html b/client/parties-form/parties-form.html
+index df0bd89..9f27831 100644
+--- a/client/parties-form/parties-form.html
++++ b/client/parties-form/parties-form.html
+@@ -1,9 +1,9 @@
+-<form>
++<form [ng-form-model]="partiesForm">
+   <label>Name</label>
+-  <input type="text">
++  <input type="text" ng-control="name">
+   <label>Description</label>
+-  <input type="text">
++  <input type="text" ng-control="description">
+   <label>Location</label>
+-  <input type="text">
++  <input type="text" ng-control="location">
+   <button>Add</button>
+ </form>
+-- 
+2.3.8 (Apple Git-58)
+
+
+From cdd90c6b926072416f5c2953f7fecf305bfaaa28 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 17 Oct 2015 20:33:32 +0300
+Subject: [PATCH 33/36] Step 4.9: add submit handler inside the template
+
+---
+ client/parties-form/parties-form.html | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/client/parties-form/parties-form.html b/client/parties-form/parties-form.html
+index 9f27831..ec3a114 100644
+--- a/client/parties-form/parties-form.html
++++ b/client/parties-form/parties-form.html
+@@ -1,4 +1,4 @@
+-<form [ng-form-model]="partiesForm">
++<form [ng-form-model]="partiesForm" #f="form" (submit)="addParty(f.value)">
+   <label>Name</label>
+   <input type="text" ng-control="name">
+   <label>Description</label>
+-- 
+2.3.8 (Apple Git-58)
+
+
+From c324be4c09808abf54eabff16200340856bd9de9 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 17 Oct 2015 20:34:52 +0300
+Subject: [PATCH 34/36] Step 4.10:  add addParty method inside the component
+
+---
+ client/parties-form/parties-form.ts | 18 +++++++++++++++++-
+ 1 file changed, 17 insertions(+), 1 deletion(-)
+
+diff --git a/client/parties-form/parties-form.ts b/client/parties-form/parties-form.ts
+index 4b12b0a..18dee47 100644
+--- a/client/parties-form/parties-form.ts
++++ b/client/parties-form/parties-form.ts
+@@ -2,7 +2,9 @@
+ 
+ import {Component, View} from 'angular2/angular2';
+ 
+-import {FORM_DIRECTIVES, FormBuilder, ControlGroup, Validators} from 'angular2/angular2';
++import {FORM_DIRECTIVES, FormBuilder, Control, ControlGroup, Validators} from 'angular2/angular2';
++
++import {Parties} from 'collections/parties';
+ 
+ @Component({
+     selector: 'parties-form'
+@@ -22,4 +24,18 @@ export class PartiesForm {
+             location: ['', Validators.required]
+         });
+     }
++
++    addParty(party) {
++        if (this.partiesForm.valid) {
++            Parties.insert({
++                name: party.name,
++                description: party.description,
++                location: party.location
++            });
++
++            (&lt;Control>this.partiesForm.controls['name']).updateValue('');
++            (&lt;Control>this.partiesForm.controls['description']).updateValue('');
++            (&lt;Control>this.partiesForm.controls['location']).updateValue('');
++        }
++    }
+ }
+-- 
+2.3.8 (Apple Git-58)
+
+
+From 8988762eb7e31dfae1582117ca799f43da23d714 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 17 Oct 2015 20:57:18 +0300
+Subject: [PATCH 35/36] Step 4.11:  Add a remove party button and click event
+ handler
+
+---
+ client/app.html | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/client/app.html b/client/app.html
+index 3b7d5f2..460dd4a 100644
+--- a/client/app.html
++++ b/client/app.html
+@@ -5,6 +5,7 @@
+       {{party.name}}
+       <p>{{party.description}}</p>
+       <p>{{party.location}}</p>
++      <button (click)="removeParty(party)">X</button>
+     </li>
+   </ul>
+ </div>
+-- 
+2.3.8 (Apple Git-58)
+
+
+From cc827a307e14fda611d6381d73eba98313d5bcba Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 17 Oct 2015 20:59:18 +0300
+Subject: [PATCH 36/36] 4.12:  Add removeParty method inside the component
+
+---
+ client/app.ts | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/client/app.ts b/client/app.ts
+index e1ce3b9..3f5ce82 100644
+--- a/client/app.ts
++++ b/client/app.ts
+@@ -21,6 +21,10 @@ class Socially {
+     constructor () {
+         this.parties = Parties.find();
+     }
++
++    removeParty(party) {
++        Parties.remove(party._id);
++    }
+ }
+ 
+ bootstrap(Socially);
 -- 
 2.3.8 (Apple Git-58)
 
