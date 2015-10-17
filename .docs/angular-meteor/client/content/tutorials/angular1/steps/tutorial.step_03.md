@@ -51,7 +51,7 @@ This line declares a new `$scope.parties` variable (so we don't need to do somet
 
 We also need to add the `$meteor` service to the controller with dependency injection.
 
-Our `app.js` file should look like this:
+Our `app.ng.js` file should look like this:
 
 {{> DiffBox tutorialName="angular-meteor" step="3.3"}}
 
@@ -59,7 +59,7 @@ Now every change that happens to the `$scope.parties` variable will automaticall
 
 But we still don't have data in that collection, so let's add some by initializing our server with the same parties we had before.
 
-Add this to the bottom of `app.js`:
+Add this to the bottom of `app.ng.js`:
 
 {{> DiffBox tutorialName="angular-meteor" step="3.4"}}
 
