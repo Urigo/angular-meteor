@@ -49,12 +49,11 @@ There is a very popular Angular tool that's called [ng-annotate](https://github.
 
 angular-meteor uses that process automatically. All you need to do is to change your `.js` files to end with `.ng.js`
 
-Then you can write your dependency injection like this:
+So let's change `app.js` to `app.ng.js` and change the usage in our controller:
 
-    angular.module('socially').controller('PartiesListCtrl',
-      function($scope){
-        // ...
-    });
+{{> DiffBox tutorialName="angular-meteor" step="2.4"}}
+
+And from now on, each AngularJS file we will create will use the `ng.js` extension!
 
 # Summary
 
