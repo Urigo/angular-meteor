@@ -17,3 +17,4 @@ Thumbs.db
 .coverage
 node_modules
 bower_components
+.npm
