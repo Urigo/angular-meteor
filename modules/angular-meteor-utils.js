@@ -29,6 +29,7 @@ angularMeteorUtils.service('$meteorUtils', [
       if( !angular.isObject(data) ||
         data instanceof Date ||
         data instanceof File ||
+        EJSON.toJSONValue(data).$type === 'oid' ||
         (typeof FS === 'object' && data instanceof FS.File)) {
         return data;
       }
