@@ -13,7 +13,7 @@ Let’s start with sending the Users information.
 
 Create a file named `publications.js` under the `server` folder and define the query we want to send to our clients inside:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="7.2"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="6.2"}}
 
 Meteor will use that `[Live Query](https://www.meteor.com/livequery)` to publish changes to the connected clients every time that query updates automatically.
 
@@ -36,7 +36,7 @@ To do it more easily, let’s use the `reywood:publish-composite` package.  in t
 
 And now let’s change the publication to add the Messages and the Users that are related to the Chats the users in participating in:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="7.4"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="6.4"}}
 
 And again, even with this complex query, Meteor will update all the connected client in real time whenever there is a change in the database.
 
@@ -45,13 +45,13 @@ Now that we have the publications ready, we can subscribe to them.
 We can subscribe in a route’s resolve to make sure all of the information is there before entering the route.
 Let’s add that to our parent `tab` state:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="7.5"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="6.5"}}
 
 And we can subscribe inside a controller so it will load faster without waiting for the information.
 
 Let’s do that inside the NewChat controller to subscribe to the users we can add to that chat:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="7.6"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="6.6"}}
 
 Notice that the `[$meteorSubscribe](http://angular-meteor.com/api/subscribe)` function resolve a promise when the data arrives so you know when you can use it.
 
