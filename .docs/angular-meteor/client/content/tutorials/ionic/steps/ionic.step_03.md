@@ -4,11 +4,11 @@ Now let’s change with chat view to look and work like WhatsApp.
 
 Let’s start with the HTML template:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="4.1"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="3.1"}}
 
 Change the timestamp of the message to be like WhatsApp by displaying the time passed since the message received. we will use and `angular-moment` filter for that:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="4.2"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="3.2"}}
 
 Don’t forget to add the dependency with Bower:
 
@@ -16,19 +16,19 @@ Don’t forget to add the dependency with Bower:
 
 And update index.html:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="4.4"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="3.4"}}
 
 And our Angular app’s dependencies:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="4.5"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="3.5"}}
 
 Now let’s add styles to our chat details view. Create a `sass` file named `chat-detail.scss` and paste this code in there:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="4.6"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="3.6"}}
 
 Don’t forget to import that `sass` file to your main `sass` app file:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="4.7" filename="scss/ionic.app.scss"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="3.7" filename="scss/ionic.app.scss"}}
 
 Also copy the following images to the `www/img` folder with their names:
 
@@ -42,7 +42,7 @@ This is how it should look now:
 
 Now that our view is ready, let’s bind the real Messages from the server to our chat details controller:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="4.9"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="3.9"}}
 
 Notice that we are using Mongo’s query language to get only the Messages for this particular chat.
 
@@ -54,29 +54,29 @@ We need an input directive that will handle all the event on mobile.
 
 Here is a prepared one that handles the `focus`, `blur` and `keydown` events.
 
-{{> DiffBox tutorialName="ionic-tutorial" step="4.10"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="3.10"}}
 
 Add it to a new `input.directive.js` file under a `www/js/directives` folder.
 
 Don’t forget to add the file to `index.html`:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="4.11"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="3.11"}}
 
 Now add that input directive into our chat details template:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="4.12"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="3.12"}}
 
 Now add the following logic to the `ChatDetailsCtrl` to handle scrolling of the chat according to the state of the mobile keyboard:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="4.13"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="3.13"}}
 
 Now let’s add a send button and event to our view:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="4.14"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="3.14"}}
 
 and add the controller logic to handle that change:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="4.15"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="3.15"}}
 
 And this is what we got so far:
 
@@ -86,7 +86,7 @@ We are calling a Meteor server method named `newMessage`.
 
 Let’s create that server method - create a new file on the server folder named `methods` and add the code inside:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="4.16"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="3.16"}}
 
 We are first checking to see if the parameters are correct using Meteor’s `check` function.
 (Add the `check` package but running this command in the command line of the server):
@@ -113,11 +113,11 @@ For more information, read that blog about Optimistic UI:
 
 So let’s add Optimistic UI method to newMessage. create a new file in `www/js/stubs.js` and paste the method in:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="4.18"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="3.18"}}
 
 Don’t forget to add the file to `index.html:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="4.19"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="3.19"}}
 
 Notice that we don’t need to change anything in our method call, Meteor already knows to call the Optimistic UI first and then the server one.
 
