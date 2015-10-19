@@ -165,7 +165,8 @@ Then, when you click on a party details link, `<router-outlet>` directive will c
 parameters of the current URL. Right after that moment if a `PartyDetails` instance is created by means of the dependency injection API,
 it's created with `RouteParams` injected and equalled to the current URL inside the constructor.
 
-More information about dependency injection in Angular 2 you can find in these awesome articles: [one](http://blog.thoughtram.io/angular/2015/09/17/resolve-service-dependencies-in-angular-2.html), [two](http://blog.thoughtram.io/angular/2015/09/17/resolve-service-dependencies-in-angular-2.html).
+If you want to read more about dependency injection in Angular 2, you can find excessive overview in this [article](http://blog.thoughtram.io/angular/2015/05/18/dependency-injection-in-angular-2.html).
+If you are interested what class metadata is, proceed [here](http://blog.thoughtram.io/angular/2015/09/17/resolve-service-dependencies-in-angular-2.html)
 
 Let's now load a party instance using received ID parameter:
 
