@@ -12,381 +12,1563 @@
 
 /* Imports */
 var Meteor = Package.meteor.Meteor;
-var Tracker = Package.tracker.Tracker;
-var Deps = Package.tracker.Deps;
-var MongoID = Package['mongo-id'].MongoID;
-var DiffSequence = Package['diff-sequence'].DiffSequence;
 var _ = Package.underscore._;
-var Random = Package.random.Random;
+var Base64 = Package.base64.Base64;
 
 /* Package-scope variables */
-var ObserveSequence, seqChangedToEmpty, seqChangedToArray, seqChangedToCursor;
+var EJSON, EJSONTest;
 
 (function(){
 
-///////////////////////////////////////////////////////////////////////////////////
-//                                                                               //
-// packages/observe-sequence/observe_sequence.js                                 //
-//                                                                               //
-///////////////////////////////////////////////////////////////////////////////////
-                                                                                 //
-var warn = function () {                                                         // 1
-  if (ObserveSequence._suppressWarnings) {                                       // 2
-    ObserveSequence._suppressWarnings--;                                         // 3
-  } else {                                                                       // 4
-    if (typeof console !== 'undefined' && console.warn)                          // 5
-      console.warn.apply(console, arguments);                                    // 6
-                                                                                 // 7
-    ObserveSequence._loggedWarnings++;                                           // 8
-  }                                                                              // 9
-};                                                                               // 10
-                                                                                 // 11
-var idStringify = MongoID.idStringify;                                           // 12
-var idParse = MongoID.idParse;                                                   // 13
-                                                                                 // 14
-ObserveSequence = {                                                              // 15
-  _suppressWarnings: 0,                                                          // 16
-  _loggedWarnings: 0,                                                            // 17
-                                                                                 // 18
-  // A mechanism similar to cursor.observe which receives a reactive             // 19
-  // function returning a sequence type and firing appropriate callbacks         // 20
-  // when the value changes.                                                     // 21
-  //                                                                             // 22
-  // @param sequenceFunc {Function} a reactive function returning a              // 23
-  //     sequence type. The currently supported sequence types are:              // 24
-  //     Array, Cursor, and null.                                                // 25
-  //                                                                             // 26
-  // @param callbacks {Object} similar to a specific subset of                   // 27
-  //     callbacks passed to `cursor.observe`                                    // 28
-  //     (http://docs.meteor.com/#observe), with minor variations to             // 29
-  //     support the fact that not all sequences contain objects with            // 30
-  //     _id fields.  Specifically:                                              // 31
-  //                                                                             // 32
-  //     * addedAt(id, item, atIndex, beforeId)                                  // 33
-  //     * changedAt(id, newItem, oldItem, atIndex)                              // 34
-  //     * removedAt(id, oldItem, atIndex)                                       // 35
-  //     * movedTo(id, item, fromIndex, toIndex, beforeId)                       // 36
-  //                                                                             // 37
-  // @returns {Object(stop: Function)} call 'stop' on the return value           // 38
-  //     to stop observing this sequence function.                               // 39
-  //                                                                             // 40
-  // We don't make any assumptions about our ability to compare sequence         // 41
-  // elements (ie, we don't assume EJSON.equals works; maybe there is extra      // 42
-  // state/random methods on the objects) so unlike cursor.observe, we may       // 43
-  // sometimes call changedAt() when nothing actually changed.                   // 44
-  // XXX consider if we *can* make the stronger assumption and avoid             // 45
-  //     no-op changedAt calls (in some cases?)                                  // 46
-  //                                                                             // 47
-  // XXX currently only supports the callbacks used by our                       // 48
-  // implementation of {{#each}}, but this can be expanded.                      // 49
-  //                                                                             // 50
-  // XXX #each doesn't use the indices (though we'll eventually need             // 51
-  // a way to get them when we support `@index`), but calling                    // 52
-  // `cursor.observe` causes the index to be calculated on every                 // 53
-  // callback using a linear scan (unless you turn it off by passing             // 54
-  // `_no_indices`).  Any way to avoid calculating indices on a pure             // 55
-  // cursor observe like we used to?                                             // 56
-  observe: function (sequenceFunc, callbacks) {                                  // 57
-    var lastSeq = null;                                                          // 58
-    var activeObserveHandle = null;                                              // 59
-                                                                                 // 60
-    // 'lastSeqArray' contains the previous value of the sequence                // 61
-    // we're observing. It is an array of objects with '_id' and                 // 62
-    // 'item' fields.  'item' is the element in the array, or the                // 63
-    // document in the cursor.                                                   // 64
-    //                                                                           // 65
-    // '_id' is whichever of the following is relevant, unless it has            // 66
-    // already appeared -- in which case it's randomly generated.                // 67
-    //                                                                           // 68
-    // * if 'item' is an object:                                                 // 69
-    //   * an '_id' field, if present                                            // 70
-    //   * otherwise, the index in the array                                     // 71
-    //                                                                           // 72
-    // * if 'item' is a number or string, use that value                         // 73
-    //                                                                           // 74
-    // XXX this can be generalized by allowing {{#each}} to accept a             // 75
-    // general 'key' argument which could be a function, a dotted                // 76
-    // field name, or the special @index value.                                  // 77
-    var lastSeqArray = []; // elements are objects of form {_id, item}           // 78
-    var computation = Tracker.autorun(function () {                              // 79
-      var seq = sequenceFunc();                                                  // 80
-                                                                                 // 81
-      Tracker.nonreactive(function () {                                          // 82
-        var seqArray; // same structure as `lastSeqArray` above.                 // 83
-                                                                                 // 84
-        if (activeObserveHandle) {                                               // 85
-          // If we were previously observing a cursor, replace lastSeqArray with
-          // more up-to-date information.  Then stop the old observe.            // 87
-          lastSeqArray = _.map(lastSeq.fetch(), function (doc) {                 // 88
-            return {_id: doc._id, item: doc};                                    // 89
-          });                                                                    // 90
-          activeObserveHandle.stop();                                            // 91
-          activeObserveHandle = null;                                            // 92
-        }                                                                        // 93
-                                                                                 // 94
-        if (!seq) {                                                              // 95
-          seqArray = seqChangedToEmpty(lastSeqArray, callbacks);                 // 96
-        } else if (seq instanceof Array) {                                       // 97
-          seqArray = seqChangedToArray(lastSeqArray, seq, callbacks);            // 98
-        } else if (isStoreCursor(seq)) {                                         // 99
-          var result /* [seqArray, activeObserveHandle] */ =                     // 100
-                seqChangedToCursor(lastSeqArray, seq, callbacks);                // 101
-          seqArray = result[0];                                                  // 102
-          activeObserveHandle = result[1];                                       // 103
-        } else {                                                                 // 104
-          throw badSequenceError();                                              // 105
-        }                                                                        // 106
-                                                                                 // 107
-        diffArray(lastSeqArray, seqArray, callbacks);                            // 108
-        lastSeq = seq;                                                           // 109
-        lastSeqArray = seqArray;                                                 // 110
-      });                                                                        // 111
-    });                                                                          // 112
-                                                                                 // 113
-    return {                                                                     // 114
-      stop: function () {                                                        // 115
-        computation.stop();                                                      // 116
-        if (activeObserveHandle)                                                 // 117
-          activeObserveHandle.stop();                                            // 118
-      }                                                                          // 119
-    };                                                                           // 120
-  },                                                                             // 121
-                                                                                 // 122
-  // Fetch the items of `seq` into an array, where `seq` is of one of the        // 123
-  // sequence types accepted by `observe`.  If `seq` is a cursor, a              // 124
-  // dependency is established.                                                  // 125
-  fetch: function (seq) {                                                        // 126
-    if (!seq) {                                                                  // 127
-      return [];                                                                 // 128
-    } else if (seq instanceof Array) {                                           // 129
-      return seq;                                                                // 130
-    } else if (isStoreCursor(seq)) {                                             // 131
-      return seq.fetch();                                                        // 132
-    } else {                                                                     // 133
-      throw badSequenceError();                                                  // 134
-    }                                                                            // 135
-  }                                                                              // 136
-};                                                                               // 137
-                                                                                 // 138
-var badSequenceError = function () {                                             // 139
-  return new Error("{{#each}} currently only accepts " +                         // 140
-                   "arrays, cursors or falsey values.");                         // 141
-};                                                                               // 142
-                                                                                 // 143
-var isStoreCursor = function (cursor) {                                          // 144
-  return cursor && _.isObject(cursor) &&                                         // 145
-    _.isFunction(cursor.observe) && _.isFunction(cursor.fetch);                  // 146
-};                                                                               // 147
-                                                                                 // 148
-// Calculates the differences between `lastSeqArray` and                         // 149
-// `seqArray` and calls appropriate functions from `callbacks`.                  // 150
-// Reuses Minimongo's diff algorithm implementation.                             // 151
-var diffArray = function (lastSeqArray, seqArray, callbacks) {                   // 152
-  var diffFn = Package['diff-sequence'].DiffSequence.diffQueryOrderedChanges;    // 153
-  var oldIdObjects = [];                                                         // 154
-  var newIdObjects = [];                                                         // 155
-  var posOld = {}; // maps from idStringify'd ids                                // 156
-  var posNew = {}; // ditto                                                      // 157
-  var posCur = {};                                                               // 158
-  var lengthCur = lastSeqArray.length;                                           // 159
-                                                                                 // 160
-  _.each(seqArray, function (doc, i) {                                           // 161
-    newIdObjects.push({_id: doc._id});                                           // 162
-    posNew[idStringify(doc._id)] = i;                                            // 163
-  });                                                                            // 164
-  _.each(lastSeqArray, function (doc, i) {                                       // 165
-    oldIdObjects.push({_id: doc._id});                                           // 166
-    posOld[idStringify(doc._id)] = i;                                            // 167
-    posCur[idStringify(doc._id)] = i;                                            // 168
-  });                                                                            // 169
-                                                                                 // 170
-  // Arrays can contain arbitrary objects. We don't diff the                     // 171
-  // objects. Instead we always fire 'changedAt' callback on every               // 172
-  // object. The consumer of `observe-sequence` should deal with                 // 173
-  // it appropriately.                                                           // 174
-  diffFn(oldIdObjects, newIdObjects, {                                           // 175
-    addedBefore: function (id, doc, before) {                                    // 176
-      var position = before ? posCur[idStringify(before)] : lengthCur;           // 177
-                                                                                 // 178
-      if (before) {                                                              // 179
-        // If not adding at the end, we need to update indexes.                  // 180
-        // XXX this can still be improved greatly!                               // 181
-        _.each(posCur, function (pos, id) {                                      // 182
-          if (pos >= position)                                                   // 183
-            posCur[id]++;                                                        // 184
-        });                                                                      // 185
-      }                                                                          // 186
-                                                                                 // 187
-      lengthCur++;                                                               // 188
-      posCur[idStringify(id)] = position;                                        // 189
-                                                                                 // 190
-      callbacks.addedAt(                                                         // 191
-        id,                                                                      // 192
-        seqArray[posNew[idStringify(id)]].item,                                  // 193
-        position,                                                                // 194
-        before);                                                                 // 195
-    },                                                                           // 196
-    movedBefore: function (id, before) {                                         // 197
-      if (id === before)                                                         // 198
-        return;                                                                  // 199
-                                                                                 // 200
-      var oldPosition = posCur[idStringify(id)];                                 // 201
-      var newPosition = before ? posCur[idStringify(before)] : lengthCur;        // 202
-                                                                                 // 203
-      // Moving the item forward. The new element is losing one position as it   // 204
-      // was removed from the old position before being inserted at the new      // 205
-      // position.                                                               // 206
-      // Ex.:   0  *1*  2   3   4                                                // 207
-      //        0   2   3  *1*  4                                                // 208
-      // The original issued callback is "1" before "4".                         // 209
-      // The position of "1" is 1, the position of "4" is 4.                     // 210
-      // The generated move is (1) -> (3)                                        // 211
-      if (newPosition > oldPosition) {                                           // 212
-        newPosition--;                                                           // 213
-      }                                                                          // 214
-                                                                                 // 215
-      // Fix up the positions of elements between the old and the new positions  // 216
-      // of the moved element.                                                   // 217
-      //                                                                         // 218
-      // There are two cases:                                                    // 219
-      //   1. The element is moved forward. Then all the positions in between    // 220
-      //   are moved back.                                                       // 221
-      //   2. The element is moved back. Then the positions in between *and* the
-      //   element that is currently standing on the moved element's future      // 223
-      //   position are moved forward.                                           // 224
-      _.each(posCur, function (elCurPosition, id) {                              // 225
-        if (oldPosition < elCurPosition && elCurPosition < newPosition)          // 226
-          posCur[id]--;                                                          // 227
-        else if (newPosition <= elCurPosition && elCurPosition < oldPosition)    // 228
-          posCur[id]++;                                                          // 229
-      });                                                                        // 230
-                                                                                 // 231
-      // Finally, update the position of the moved element.                      // 232
-      posCur[idStringify(id)] = newPosition;                                     // 233
-                                                                                 // 234
-      callbacks.movedTo(                                                         // 235
-        id,                                                                      // 236
-        seqArray[posNew[idStringify(id)]].item,                                  // 237
-        oldPosition,                                                             // 238
-        newPosition,                                                             // 239
-        before);                                                                 // 240
-    },                                                                           // 241
-    removed: function (id) {                                                     // 242
-      var prevPosition = posCur[idStringify(id)];                                // 243
-                                                                                 // 244
-      _.each(posCur, function (pos, id) {                                        // 245
-        if (pos >= prevPosition)                                                 // 246
-          posCur[id]--;                                                          // 247
-      });                                                                        // 248
-                                                                                 // 249
-      delete posCur[idStringify(id)];                                            // 250
-      lengthCur--;                                                               // 251
-                                                                                 // 252
-      callbacks.removedAt(                                                       // 253
-        id,                                                                      // 254
-        lastSeqArray[posOld[idStringify(id)]].item,                              // 255
-        prevPosition);                                                           // 256
-    }                                                                            // 257
-  });                                                                            // 258
-                                                                                 // 259
-  _.each(posNew, function (pos, idString) {                                      // 260
-    var id = idParse(idString);                                                  // 261
-    if (_.has(posOld, idString)) {                                               // 262
-      // specifically for primitive types, compare equality before               // 263
-      // firing the 'changedAt' callback. otherwise, always fire it              // 264
-      // because doing a deep EJSON comparison is not guaranteed to              // 265
-      // work (an array can contain arbitrary objects, and 'transform'           // 266
-      // can be used on cursors). also, deep diffing is not                      // 267
-      // necessarily the most efficient (if only a specific subfield             // 268
-      // of the object is later accessed).                                       // 269
-      var newItem = seqArray[pos].item;                                          // 270
-      var oldItem = lastSeqArray[posOld[idString]].item;                         // 271
-                                                                                 // 272
-      if (typeof newItem === 'object' || newItem !== oldItem)                    // 273
-          callbacks.changedAt(id, newItem, oldItem, pos);                        // 274
-      }                                                                          // 275
-  });                                                                            // 276
-};                                                                               // 277
-                                                                                 // 278
-seqChangedToEmpty = function (lastSeqArray, callbacks) {                         // 279
-  return [];                                                                     // 280
-};                                                                               // 281
-                                                                                 // 282
-seqChangedToArray = function (lastSeqArray, array, callbacks) {                  // 283
-  var idsUsed = {};                                                              // 284
-  var seqArray = _.map(array, function (item, index) {                           // 285
-    var id;                                                                      // 286
-    if (typeof item === 'string') {                                              // 287
-      // ensure not empty, since other layers (eg DomRange) assume this as well  // 288
-      id = "-" + item;                                                           // 289
-    } else if (typeof item === 'number' ||                                       // 290
-               typeof item === 'boolean' ||                                      // 291
-               item === undefined) {                                             // 292
-      id = item;                                                                 // 293
-    } else if (typeof item === 'object') {                                       // 294
-      id = (item && _.has(item, '_id')) ? item._id : index;                      // 295
-    } else {                                                                     // 296
-      throw new Error("{{#each}} doesn't support arrays with " +                 // 297
-                      "elements of type " + typeof item);                        // 298
-    }                                                                            // 299
-                                                                                 // 300
-    var idString = idStringify(id);                                              // 301
-    if (idsUsed[idString]) {                                                     // 302
-      if (typeof item === 'object' && '_id' in item)                             // 303
-        warn("duplicate id " + id + " in", array);                               // 304
-      id = Random.id();                                                          // 305
-    } else {                                                                     // 306
-      idsUsed[idString] = true;                                                  // 307
-    }                                                                            // 308
-                                                                                 // 309
-    return { _id: id, item: item };                                              // 310
-  });                                                                            // 311
-                                                                                 // 312
-  return seqArray;                                                               // 313
-};                                                                               // 314
-                                                                                 // 315
-seqChangedToCursor = function (lastSeqArray, cursor, callbacks) {                // 316
-  var initial = true; // are we observing initial data from cursor?              // 317
-  var seqArray = [];                                                             // 318
-                                                                                 // 319
-  var observeHandle = cursor.observe({                                           // 320
-    addedAt: function (document, atIndex, before) {                              // 321
-      if (initial) {                                                             // 322
-        // keep track of initial data so that we can diff once                   // 323
-        // we exit `observe`.                                                    // 324
-        if (before !== null)                                                     // 325
-          throw new Error("Expected initial data from observe in order");        // 326
-        seqArray.push({ _id: document._id, item: document });                    // 327
-      } else {                                                                   // 328
-        callbacks.addedAt(document._id, document, atIndex, before);              // 329
-      }                                                                          // 330
-    },                                                                           // 331
-    changedAt: function (newDocument, oldDocument, atIndex) {                    // 332
-      callbacks.changedAt(newDocument._id, newDocument, oldDocument,             // 333
-                          atIndex);                                              // 334
-    },                                                                           // 335
-    removedAt: function (oldDocument, atIndex) {                                 // 336
-      callbacks.removedAt(oldDocument._id, oldDocument, atIndex);                // 337
-    },                                                                           // 338
-    movedTo: function (document, fromIndex, toIndex, before) {                   // 339
-      callbacks.movedTo(                                                         // 340
-        document._id, document, fromIndex, toIndex, before);                     // 341
-    }                                                                            // 342
-  });                                                                            // 343
-  initial = false;                                                               // 344
-                                                                                 // 345
-  return [seqArray, observeHandle];                                              // 346
-};                                                                               // 347
-                                                                                 // 348
-///////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                   //
+// packages/ejson/packages/ejson.js                                                                                  //
+//                                                                                                                   //
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                     //
+(function(){                                                                                                         // 1
+                                                                                                                     // 2
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                   //
+// packages/ejson/ejson.js                                                                                           //
+//                                                                                                                   //
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                     //
+/**                                                                                                                  // 1
+ * @namespace                                                                                                        // 2
+ * @summary Namespace for EJSON functions                                                                            // 3
+ */                                                                                                                  // 4
+EJSON = {};                                                                                                          // 5
+EJSONTest = {};                                                                                                      // 6
+                                                                                                                     // 7
+                                                                                                                     // 8
+                                                                                                                     // 9
+// Custom type interface definition                                                                                  // 10
+/**                                                                                                                  // 11
+ * @class CustomType                                                                                                 // 12
+ * @instanceName customType                                                                                          // 13
+ * @memberOf EJSON                                                                                                   // 14
+ * @summary The interface that a class must satisfy to be able to become an                                          // 15
+ * EJSON custom type via EJSON.addType.                                                                              // 16
+ */                                                                                                                  // 17
+                                                                                                                     // 18
+/**                                                                                                                  // 19
+ * @function typeName                                                                                                // 20
+ * @memberOf EJSON.CustomType                                                                                        // 21
+ * @summary Return the tag used to identify this type.  This must match the tag used to register this type with [`EJSON.addType`](#ejson_add_type).
+ * @locus Anywhere                                                                                                   // 23
+ * @instance                                                                                                         // 24
+ */                                                                                                                  // 25
+                                                                                                                     // 26
+/**                                                                                                                  // 27
+ * @function toJSONValue                                                                                             // 28
+ * @memberOf EJSON.CustomType                                                                                        // 29
+ * @summary Serialize this instance into a JSON-compatible value.                                                    // 30
+ * @locus Anywhere                                                                                                   // 31
+ * @instance                                                                                                         // 32
+ */                                                                                                                  // 33
+                                                                                                                     // 34
+/**                                                                                                                  // 35
+ * @function clone                                                                                                   // 36
+ * @memberOf EJSON.CustomType                                                                                        // 37
+ * @summary Return a value `r` such that `this.equals(r)` is true, and modifications to `r` do not affect `this` and vice versa.
+ * @locus Anywhere                                                                                                   // 39
+ * @instance                                                                                                         // 40
+ */                                                                                                                  // 41
+                                                                                                                     // 42
+/**                                                                                                                  // 43
+ * @function equals                                                                                                  // 44
+ * @memberOf EJSON.CustomType                                                                                        // 45
+ * @summary Return `true` if `other` has a value equal to `this`; `false` otherwise.                                 // 46
+ * @locus Anywhere                                                                                                   // 47
+ * @param {Object} other Another object to compare this to.                                                          // 48
+ * @instance                                                                                                         // 49
+ */                                                                                                                  // 50
+                                                                                                                     // 51
+                                                                                                                     // 52
+var customTypes = {};                                                                                                // 53
+// Add a custom type, using a method of your choice to get to and                                                    // 54
+// from a basic JSON-able representation.  The factory argument                                                      // 55
+// is a function of JSON-able --> your object                                                                        // 56
+// The type you add must have:                                                                                       // 57
+// - A toJSONValue() method, so that Meteor can serialize it                                                         // 58
+// - a typeName() method, to show how to look it up in our type table.                                               // 59
+// It is okay if these methods are monkey-patched on.                                                                // 60
+// EJSON.clone will use toJSONValue and the given factory to produce                                                 // 61
+// a clone, but you may specify a method clone() that will be                                                        // 62
+// used instead.                                                                                                     // 63
+// Similarly, EJSON.equals will use toJSONValue to make comparisons,                                                 // 64
+// but you may provide a method equals() instead.                                                                    // 65
+/**                                                                                                                  // 66
+ * @summary Add a custom datatype to EJSON.                                                                          // 67
+ * @locus Anywhere                                                                                                   // 68
+ * @param {String} name A tag for your custom type; must be unique among custom data types defined in your project, and must match the result of your type's `typeName` method.
+ * @param {Function} factory A function that deserializes a JSON-compatible value into an instance of your type.  This should match the serialization performed by your type's `toJSONValue` method.
+ */                                                                                                                  // 71
+EJSON.addType = function (name, factory) {                                                                           // 72
+  if (_.has(customTypes, name))                                                                                      // 73
+    throw new Error("Type " + name + " already present");                                                            // 74
+  customTypes[name] = factory;                                                                                       // 75
+};                                                                                                                   // 76
+                                                                                                                     // 77
+var isInfOrNan = function (obj) {                                                                                    // 78
+  return _.isNaN(obj) || obj === Infinity || obj === -Infinity;                                                      // 79
+};                                                                                                                   // 80
+                                                                                                                     // 81
+var builtinConverters = [                                                                                            // 82
+  { // Date                                                                                                          // 83
+    matchJSONValue: function (obj) {                                                                                 // 84
+      return _.has(obj, '$date') && _.size(obj) === 1;                                                               // 85
+    },                                                                                                               // 86
+    matchObject: function (obj) {                                                                                    // 87
+      return obj instanceof Date;                                                                                    // 88
+    },                                                                                                               // 89
+    toJSONValue: function (obj) {                                                                                    // 90
+      return {$date: obj.getTime()};                                                                                 // 91
+    },                                                                                                               // 92
+    fromJSONValue: function (obj) {                                                                                  // 93
+      return new Date(obj.$date);                                                                                    // 94
+    }                                                                                                                // 95
+  },                                                                                                                 // 96
+  { // NaN, Inf, -Inf. (These are the only objects with typeof !== 'object'                                          // 97
+    // which we match.)                                                                                              // 98
+    matchJSONValue: function (obj) {                                                                                 // 99
+      return _.has(obj, '$InfNaN') && _.size(obj) === 1;                                                             // 100
+    },                                                                                                               // 101
+    matchObject: isInfOrNan,                                                                                         // 102
+    toJSONValue: function (obj) {                                                                                    // 103
+      var sign;                                                                                                      // 104
+      if (_.isNaN(obj))                                                                                              // 105
+        sign = 0;                                                                                                    // 106
+      else if (obj === Infinity)                                                                                     // 107
+        sign = 1;                                                                                                    // 108
+      else                                                                                                           // 109
+        sign = -1;                                                                                                   // 110
+      return {$InfNaN: sign};                                                                                        // 111
+    },                                                                                                               // 112
+    fromJSONValue: function (obj) {                                                                                  // 113
+      return obj.$InfNaN/0;                                                                                          // 114
+    }                                                                                                                // 115
+  },                                                                                                                 // 116
+  { // Binary                                                                                                        // 117
+    matchJSONValue: function (obj) {                                                                                 // 118
+      return _.has(obj, '$binary') && _.size(obj) === 1;                                                             // 119
+    },                                                                                                               // 120
+    matchObject: function (obj) {                                                                                    // 121
+      return typeof Uint8Array !== 'undefined' && obj instanceof Uint8Array                                          // 122
+        || (obj && _.has(obj, '$Uint8ArrayPolyfill'));                                                               // 123
+    },                                                                                                               // 124
+    toJSONValue: function (obj) {                                                                                    // 125
+      return {$binary: Base64.encode(obj)};                                                                          // 126
+    },                                                                                                               // 127
+    fromJSONValue: function (obj) {                                                                                  // 128
+      return Base64.decode(obj.$binary);                                                                             // 129
+    }                                                                                                                // 130
+  },                                                                                                                 // 131
+  { // Escaping one level                                                                                            // 132
+    matchJSONValue: function (obj) {                                                                                 // 133
+      return _.has(obj, '$escape') && _.size(obj) === 1;                                                             // 134
+    },                                                                                                               // 135
+    matchObject: function (obj) {                                                                                    // 136
+      if (_.isEmpty(obj) || _.size(obj) > 2) {                                                                       // 137
+        return false;                                                                                                // 138
+      }                                                                                                              // 139
+      return _.any(builtinConverters, function (converter) {                                                         // 140
+        return converter.matchJSONValue(obj);                                                                        // 141
+      });                                                                                                            // 142
+    },                                                                                                               // 143
+    toJSONValue: function (obj) {                                                                                    // 144
+      var newObj = {};                                                                                               // 145
+      _.each(obj, function (value, key) {                                                                            // 146
+        newObj[key] = EJSON.toJSONValue(value);                                                                      // 147
+      });                                                                                                            // 148
+      return {$escape: newObj};                                                                                      // 149
+    },                                                                                                               // 150
+    fromJSONValue: function (obj) {                                                                                  // 151
+      var newObj = {};                                                                                               // 152
+      _.each(obj.$escape, function (value, key) {                                                                    // 153
+        newObj[key] = EJSON.fromJSONValue(value);                                                                    // 154
+      });                                                                                                            // 155
+      return newObj;                                                                                                 // 156
+    }                                                                                                                // 157
+  },                                                                                                                 // 158
+  { // Custom                                                                                                        // 159
+    matchJSONValue: function (obj) {                                                                                 // 160
+      return _.has(obj, '$type') && _.has(obj, '$value') && _.size(obj) === 2;                                       // 161
+    },                                                                                                               // 162
+    matchObject: function (obj) {                                                                                    // 163
+      return EJSON._isCustomType(obj);                                                                               // 164
+    },                                                                                                               // 165
+    toJSONValue: function (obj) {                                                                                    // 166
+      var jsonValue = Meteor._noYieldsAllowed(function () {                                                          // 167
+        return obj.toJSONValue();                                                                                    // 168
+      });                                                                                                            // 169
+      return {$type: obj.typeName(), $value: jsonValue};                                                             // 170
+    },                                                                                                               // 171
+    fromJSONValue: function (obj) {                                                                                  // 172
+      var typeName = obj.$type;                                                                                      // 173
+      if (!_.has(customTypes, typeName))                                                                             // 174
+        throw new Error("Custom EJSON type " + typeName + " is not defined");                                        // 175
+      var converter = customTypes[typeName];                                                                         // 176
+      return Meteor._noYieldsAllowed(function () {                                                                   // 177
+        return converter(obj.$value);                                                                                // 178
+      });                                                                                                            // 179
+    }                                                                                                                // 180
+  }                                                                                                                  // 181
+];                                                                                                                   // 182
+                                                                                                                     // 183
+EJSON._isCustomType = function (obj) {                                                                               // 184
+  return obj &&                                                                                                      // 185
+    typeof obj.toJSONValue === 'function' &&                                                                         // 186
+    typeof obj.typeName === 'function' &&                                                                            // 187
+    _.has(customTypes, obj.typeName());                                                                              // 188
+};                                                                                                                   // 189
+                                                                                                                     // 190
+EJSON._getTypes = function () {                                                                                      // 191
+  return customTypes;                                                                                                // 192
+};                                                                                                                   // 193
+                                                                                                                     // 194
+EJSON._getConverters = function () {                                                                                 // 195
+  return builtinConverters;                                                                                          // 196
+};                                                                                                                   // 197
+                                                                                                                     // 198
+// for both arrays and objects, in-place modification.                                                               // 199
+var adjustTypesToJSONValue =                                                                                         // 200
+EJSON._adjustTypesToJSONValue = function (obj) {                                                                     // 201
+  // Is it an atom that we need to adjust?                                                                           // 202
+  if (obj === null)                                                                                                  // 203
+    return null;                                                                                                     // 204
+  var maybeChanged = toJSONValueHelper(obj);                                                                         // 205
+  if (maybeChanged !== undefined)                                                                                    // 206
+    return maybeChanged;                                                                                             // 207
+                                                                                                                     // 208
+  // Other atoms are unchanged.                                                                                      // 209
+  if (typeof obj !== 'object')                                                                                       // 210
+    return obj;                                                                                                      // 211
+                                                                                                                     // 212
+  // Iterate over array or object structure.                                                                         // 213
+  _.each(obj, function (value, key) {                                                                                // 214
+    if (typeof value !== 'object' && value !== undefined &&                                                          // 215
+        !isInfOrNan(value))                                                                                          // 216
+      return; // continue                                                                                            // 217
+                                                                                                                     // 218
+    var changed = toJSONValueHelper(value);                                                                          // 219
+    if (changed) {                                                                                                   // 220
+      obj[key] = changed;                                                                                            // 221
+      return; // on to the next key                                                                                  // 222
+    }                                                                                                                // 223
+    // if we get here, value is an object but not adjustable                                                         // 224
+    // at this level.  recurse.                                                                                      // 225
+    adjustTypesToJSONValue(value);                                                                                   // 226
+  });                                                                                                                // 227
+  return obj;                                                                                                        // 228
+};                                                                                                                   // 229
+                                                                                                                     // 230
+// Either return the JSON-compatible version of the argument, or undefined (if                                       // 231
+// the item isn't itself replaceable, but maybe some fields in it are)                                               // 232
+var toJSONValueHelper = function (item) {                                                                            // 233
+  for (var i = 0; i < builtinConverters.length; i++) {                                                               // 234
+    var converter = builtinConverters[i];                                                                            // 235
+    if (converter.matchObject(item)) {                                                                               // 236
+      return converter.toJSONValue(item);                                                                            // 237
+    }                                                                                                                // 238
+  }                                                                                                                  // 239
+  return undefined;                                                                                                  // 240
+};                                                                                                                   // 241
+                                                                                                                     // 242
+/**                                                                                                                  // 243
+ * @summary Serialize an EJSON-compatible value into its plain JSON representation.                                  // 244
+ * @locus Anywhere                                                                                                   // 245
+ * @param {EJSON} val A value to serialize to plain JSON.                                                            // 246
+ */                                                                                                                  // 247
+EJSON.toJSONValue = function (item) {                                                                                // 248
+  var changed = toJSONValueHelper(item);                                                                             // 249
+  if (changed !== undefined)                                                                                         // 250
+    return changed;                                                                                                  // 251
+  if (typeof item === 'object') {                                                                                    // 252
+    item = EJSON.clone(item);                                                                                        // 253
+    adjustTypesToJSONValue(item);                                                                                    // 254
+  }                                                                                                                  // 255
+  return item;                                                                                                       // 256
+};                                                                                                                   // 257
+                                                                                                                     // 258
+// for both arrays and objects. Tries its best to just                                                               // 259
+// use the object you hand it, but may return something                                                              // 260
+// different if the object you hand it itself needs changing.                                                        // 261
+//                                                                                                                   // 262
+var adjustTypesFromJSONValue =                                                                                       // 263
+EJSON._adjustTypesFromJSONValue = function (obj) {                                                                   // 264
+  if (obj === null)                                                                                                  // 265
+    return null;                                                                                                     // 266
+  var maybeChanged = fromJSONValueHelper(obj);                                                                       // 267
+  if (maybeChanged !== obj)                                                                                          // 268
+    return maybeChanged;                                                                                             // 269
+                                                                                                                     // 270
+  // Other atoms are unchanged.                                                                                      // 271
+  if (typeof obj !== 'object')                                                                                       // 272
+    return obj;                                                                                                      // 273
+                                                                                                                     // 274
+  _.each(obj, function (value, key) {                                                                                // 275
+    if (typeof value === 'object') {                                                                                 // 276
+      var changed = fromJSONValueHelper(value);                                                                      // 277
+      if (value !== changed) {                                                                                       // 278
+        obj[key] = changed;                                                                                          // 279
+        return;                                                                                                      // 280
+      }                                                                                                              // 281
+      // if we get here, value is an object but not adjustable                                                       // 282
+      // at this level.  recurse.                                                                                    // 283
+      adjustTypesFromJSONValue(value);                                                                               // 284
+    }                                                                                                                // 285
+  });                                                                                                                // 286
+  return obj;                                                                                                        // 287
+};                                                                                                                   // 288
+                                                                                                                     // 289
+// Either return the argument changed to have the non-json                                                           // 290
+// rep of itself (the Object version) or the argument itself.                                                        // 291
+                                                                                                                     // 292
+// DOES NOT RECURSE.  For actually getting the fully-changed value, use                                              // 293
+// EJSON.fromJSONValue                                                                                               // 294
+var fromJSONValueHelper = function (value) {                                                                         // 295
+  if (typeof value === 'object' && value !== null) {                                                                 // 296
+    if (_.size(value) <= 2                                                                                           // 297
+        && _.all(value, function (v, k) {                                                                            // 298
+          return typeof k === 'string' && k.substr(0, 1) === '$';                                                    // 299
+        })) {                                                                                                        // 300
+      for (var i = 0; i < builtinConverters.length; i++) {                                                           // 301
+        var converter = builtinConverters[i];                                                                        // 302
+        if (converter.matchJSONValue(value)) {                                                                       // 303
+          return converter.fromJSONValue(value);                                                                     // 304
+        }                                                                                                            // 305
+      }                                                                                                              // 306
+    }                                                                                                                // 307
+  }                                                                                                                  // 308
+  return value;                                                                                                      // 309
+};                                                                                                                   // 310
+                                                                                                                     // 311
+/**                                                                                                                  // 312
+ * @summary Deserialize an EJSON value from its plain JSON representation.                                           // 313
+ * @locus Anywhere                                                                                                   // 314
+ * @param {JSONCompatible} val A value to deserialize into EJSON.                                                    // 315
+ */                                                                                                                  // 316
+EJSON.fromJSONValue = function (item) {                                                                              // 317
+  var changed = fromJSONValueHelper(item);                                                                           // 318
+  if (changed === item && typeof item === 'object') {                                                                // 319
+    item = EJSON.clone(item);                                                                                        // 320
+    adjustTypesFromJSONValue(item);                                                                                  // 321
+    return item;                                                                                                     // 322
+  } else {                                                                                                           // 323
+    return changed;                                                                                                  // 324
+  }                                                                                                                  // 325
+};                                                                                                                   // 326
+                                                                                                                     // 327
+/**                                                                                                                  // 328
+ * @summary Serialize a value to a string.                                                                           // 329
+                                                                                                                     // 330
+For EJSON values, the serialization fully represents the value. For non-EJSON values, serializes the same way as `JSON.stringify`.
+ * @locus Anywhere                                                                                                   // 332
+ * @param {EJSON} val A value to stringify.                                                                          // 333
+ * @param {Object} [options]                                                                                         // 334
+ * @param {Boolean | Integer | String} options.indent Indents objects and arrays for easy readability.  When `true`, indents by 2 spaces; when an integer, indents by that number of spaces; and when a string, uses the string as the indentation pattern.
+ * @param {Boolean} options.canonical When `true`, stringifies keys in an object in sorted order.                    // 336
+ */                                                                                                                  // 337
+EJSON.stringify = function (item, options) {                                                                         // 338
+  var json = EJSON.toJSONValue(item);                                                                                // 339
+  if (options && (options.canonical || options.indent)) {                                                            // 340
+    return EJSON._canonicalStringify(json, options);                                                                 // 341
+  } else {                                                                                                           // 342
+    return JSON.stringify(json);                                                                                     // 343
+  }                                                                                                                  // 344
+};                                                                                                                   // 345
+                                                                                                                     // 346
+/**                                                                                                                  // 347
+ * @summary Parse a string into an EJSON value. Throws an error if the string is not valid EJSON.                    // 348
+ * @locus Anywhere                                                                                                   // 349
+ * @param {String} str A string to parse into an EJSON value.                                                        // 350
+ */                                                                                                                  // 351
+EJSON.parse = function (item) {                                                                                      // 352
+  if (typeof item !== 'string')                                                                                      // 353
+    throw new Error("EJSON.parse argument should be a string");                                                      // 354
+  return EJSON.fromJSONValue(JSON.parse(item));                                                                      // 355
+};                                                                                                                   // 356
+                                                                                                                     // 357
+/**                                                                                                                  // 358
+ * @summary Returns true if `x` is a buffer of binary data, as returned from [`EJSON.newBinary`](#ejson_new_binary).
+ * @param {Object} x The variable to check.                                                                          // 360
+ * @locus Anywhere                                                                                                   // 361
+ */                                                                                                                  // 362
+EJSON.isBinary = function (obj) {                                                                                    // 363
+  return !!((typeof Uint8Array !== 'undefined' && obj instanceof Uint8Array) ||                                      // 364
+    (obj && obj.$Uint8ArrayPolyfill));                                                                               // 365
+};                                                                                                                   // 366
+                                                                                                                     // 367
+/**                                                                                                                  // 368
+ * @summary Return true if `a` and `b` are equal to each other.  Return false otherwise.  Uses the `equals` method on `a` if present, otherwise performs a deep comparison.
+ * @locus Anywhere                                                                                                   // 370
+ * @param {EJSON} a                                                                                                  // 371
+ * @param {EJSON} b                                                                                                  // 372
+ * @param {Object} [options]                                                                                         // 373
+ * @param {Boolean} options.keyOrderSensitive Compare in key sensitive order, if supported by the JavaScript implementation.  For example, `{a: 1, b: 2}` is equal to `{b: 2, a: 1}` only when `keyOrderSensitive` is `false`.  The default is `false`.
+ */                                                                                                                  // 375
+EJSON.equals = function (a, b, options) {                                                                            // 376
+  var i;                                                                                                             // 377
+  var keyOrderSensitive = !!(options && options.keyOrderSensitive);                                                  // 378
+  if (a === b)                                                                                                       // 379
+    return true;                                                                                                     // 380
+  if (_.isNaN(a) && _.isNaN(b))                                                                                      // 381
+    return true; // This differs from the IEEE spec for NaN equality, b/c we don't want                              // 382
+                 // anything ever with a NaN to be poisoned from becoming equal to anything.                         // 383
+  if (!a || !b) // if either one is falsy, they'd have to be === to be equal                                         // 384
+    return false;                                                                                                    // 385
+  if (!(typeof a === 'object' && typeof b === 'object'))                                                             // 386
+    return false;                                                                                                    // 387
+  if (a instanceof Date && b instanceof Date)                                                                        // 388
+    return a.valueOf() === b.valueOf();                                                                              // 389
+  if (EJSON.isBinary(a) && EJSON.isBinary(b)) {                                                                      // 390
+    if (a.length !== b.length)                                                                                       // 391
+      return false;                                                                                                  // 392
+    for (i = 0; i < a.length; i++) {                                                                                 // 393
+      if (a[i] !== b[i])                                                                                             // 394
+        return false;                                                                                                // 395
+    }                                                                                                                // 396
+    return true;                                                                                                     // 397
+  }                                                                                                                  // 398
+  if (typeof (a.equals) === 'function')                                                                              // 399
+    return a.equals(b, options);                                                                                     // 400
+  if (typeof (b.equals) === 'function')                                                                              // 401
+    return b.equals(a, options);                                                                                     // 402
+  if (a instanceof Array) {                                                                                          // 403
+    if (!(b instanceof Array))                                                                                       // 404
+      return false;                                                                                                  // 405
+    if (a.length !== b.length)                                                                                       // 406
+      return false;                                                                                                  // 407
+    for (i = 0; i < a.length; i++) {                                                                                 // 408
+      if (!EJSON.equals(a[i], b[i], options))                                                                        // 409
+        return false;                                                                                                // 410
+    }                                                                                                                // 411
+    return true;                                                                                                     // 412
+  }                                                                                                                  // 413
+  // fallback for custom types that don't implement their own equals                                                 // 414
+  switch (EJSON._isCustomType(a) + EJSON._isCustomType(b)) {                                                         // 415
+    case 1: return false;                                                                                            // 416
+    case 2: return EJSON.equals(EJSON.toJSONValue(a), EJSON.toJSONValue(b));                                         // 417
+  }                                                                                                                  // 418
+  // fall back to structural equality of objects                                                                     // 419
+  var ret;                                                                                                           // 420
+  if (keyOrderSensitive) {                                                                                           // 421
+    var bKeys = [];                                                                                                  // 422
+    _.each(b, function (val, x) {                                                                                    // 423
+        bKeys.push(x);                                                                                               // 424
+    });                                                                                                              // 425
+    i = 0;                                                                                                           // 426
+    ret = _.all(a, function (val, x) {                                                                               // 427
+      if (i >= bKeys.length) {                                                                                       // 428
+        return false;                                                                                                // 429
+      }                                                                                                              // 430
+      if (x !== bKeys[i]) {                                                                                          // 431
+        return false;                                                                                                // 432
+      }                                                                                                              // 433
+      if (!EJSON.equals(val, b[bKeys[i]], options)) {                                                                // 434
+        return false;                                                                                                // 435
+      }                                                                                                              // 436
+      i++;                                                                                                           // 437
+      return true;                                                                                                   // 438
+    });                                                                                                              // 439
+    return ret && i === bKeys.length;                                                                                // 440
+  } else {                                                                                                           // 441
+    i = 0;                                                                                                           // 442
+    ret = _.all(a, function (val, key) {                                                                             // 443
+      if (!_.has(b, key)) {                                                                                          // 444
+        return false;                                                                                                // 445
+      }                                                                                                              // 446
+      if (!EJSON.equals(val, b[key], options)) {                                                                     // 447
+        return false;                                                                                                // 448
+      }                                                                                                              // 449
+      i++;                                                                                                           // 450
+      return true;                                                                                                   // 451
+    });                                                                                                              // 452
+    return ret && _.size(b) === i;                                                                                   // 453
+  }                                                                                                                  // 454
+};                                                                                                                   // 455
+                                                                                                                     // 456
+/**                                                                                                                  // 457
+ * @summary Return a deep copy of `val`.                                                                             // 458
+ * @locus Anywhere                                                                                                   // 459
+ * @param {EJSON} val A value to copy.                                                                               // 460
+ */                                                                                                                  // 461
+EJSON.clone = function (v) {                                                                                         // 462
+  var ret;                                                                                                           // 463
+  if (typeof v !== "object")                                                                                         // 464
+    return v;                                                                                                        // 465
+  if (v === null)                                                                                                    // 466
+    return null; // null has typeof "object"                                                                         // 467
+  if (v instanceof Date)                                                                                             // 468
+    return new Date(v.getTime());                                                                                    // 469
+  // RegExps are not really EJSON elements (eg we don't define a serialization                                       // 470
+  // for them), but they're immutable anyway, so we can support them in clone.                                       // 471
+  if (v instanceof RegExp)                                                                                           // 472
+    return v;                                                                                                        // 473
+  if (EJSON.isBinary(v)) {                                                                                           // 474
+    ret = EJSON.newBinary(v.length);                                                                                 // 475
+    for (var i = 0; i < v.length; i++) {                                                                             // 476
+      ret[i] = v[i];                                                                                                 // 477
+    }                                                                                                                // 478
+    return ret;                                                                                                      // 479
+  }                                                                                                                  // 480
+  // XXX: Use something better than underscore's isArray                                                             // 481
+  if (_.isArray(v) || _.isArguments(v)) {                                                                            // 482
+    // For some reason, _.map doesn't work in this context on Opera (weird test                                      // 483
+    // failures).                                                                                                    // 484
+    ret = [];                                                                                                        // 485
+    for (i = 0; i < v.length; i++)                                                                                   // 486
+      ret[i] = EJSON.clone(v[i]);                                                                                    // 487
+    return ret;                                                                                                      // 488
+  }                                                                                                                  // 489
+  // handle general user-defined typed Objects if they have a clone method                                           // 490
+  if (typeof v.clone === 'function') {                                                                               // 491
+    return v.clone();                                                                                                // 492
+  }                                                                                                                  // 493
+  // handle other custom types                                                                                       // 494
+  if (EJSON._isCustomType(v)) {                                                                                      // 495
+    return EJSON.fromJSONValue(EJSON.clone(EJSON.toJSONValue(v)), true);                                             // 496
+  }                                                                                                                  // 497
+  // handle other objects                                                                                            // 498
+  ret = {};                                                                                                          // 499
+  _.each(v, function (value, key) {                                                                                  // 500
+    ret[key] = EJSON.clone(value);                                                                                   // 501
+  });                                                                                                                // 502
+  return ret;                                                                                                        // 503
+};                                                                                                                   // 504
+                                                                                                                     // 505
+/**                                                                                                                  // 506
+ * @summary Allocate a new buffer of binary data that EJSON can serialize.                                           // 507
+ * @locus Anywhere                                                                                                   // 508
+ * @param {Number} size The number of bytes of binary data to allocate.                                              // 509
+ */                                                                                                                  // 510
+// EJSON.newBinary is the public documented API for this functionality,                                              // 511
+// but the implementation is in the 'base64' package to avoid                                                        // 512
+// introducing a circular dependency. (If the implementation were here,                                              // 513
+// then 'base64' would have to use EJSON.newBinary, and 'ejson' would                                                // 514
+// also have to use 'base64'.)                                                                                       // 515
+EJSON.newBinary = Base64.newBinary;                                                                                  // 516
+                                                                                                                     // 517
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                     // 527
+}).call(this);                                                                                                       // 528
+                                                                                                                     // 529
+                                                                                                                     // 530
+                                                                                                                     // 531
+                                                                                                                     // 532
+                                                                                                                     // 533
+                                                                                                                     // 534
+(function(){                                                                                                         // 535
+                                                                                                                     // 536
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                   //
+// packages/ejson/stringify.js                                                                                       //
+//                                                                                                                   //
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                     //
+// Based on json2.js from https://github.com/douglascrockford/JSON-js                                                // 1
+//                                                                                                                   // 2
+//    json2.js                                                                                                       // 3
+//    2012-10-08                                                                                                     // 4
+//                                                                                                                   // 5
+//    Public Domain.                                                                                                 // 6
+//                                                                                                                   // 7
+//    NO WARRANTY EXPRESSED OR IMPLIED. USE AT YOUR OWN RISK.                                                        // 8
+                                                                                                                     // 9
+function quote(string) {                                                                                             // 10
+  return JSON.stringify(string);                                                                                     // 11
+}                                                                                                                    // 12
+                                                                                                                     // 13
+var str = function (key, holder, singleIndent, outerIndent, canonical) {                                             // 14
+                                                                                                                     // 15
+  // Produce a string from holder[key].                                                                              // 16
+                                                                                                                     // 17
+  var i;          // The loop counter.                                                                               // 18
+  var k;          // The member key.                                                                                 // 19
+  var v;          // The member value.                                                                               // 20
+  var length;                                                                                                        // 21
+  var innerIndent = outerIndent;                                                                                     // 22
+  var partial;                                                                                                       // 23
+  var value = holder[key];                                                                                           // 24
+                                                                                                                     // 25
+  // What happens next depends on the value's type.                                                                  // 26
+                                                                                                                     // 27
+  switch (typeof value) {                                                                                            // 28
+  case 'string':                                                                                                     // 29
+    return quote(value);                                                                                             // 30
+  case 'number':                                                                                                     // 31
+    // JSON numbers must be finite. Encode non-finite numbers as null.                                               // 32
+    return isFinite(value) ? String(value) : 'null';                                                                 // 33
+  case 'boolean':                                                                                                    // 34
+    return String(value);                                                                                            // 35
+  // If the type is 'object', we might be dealing with an object or an array or                                      // 36
+  // null.                                                                                                           // 37
+  case 'object':                                                                                                     // 38
+    // Due to a specification blunder in ECMAScript, typeof null is 'object',                                        // 39
+    // so watch out for that case.                                                                                   // 40
+    if (!value) {                                                                                                    // 41
+      return 'null';                                                                                                 // 42
+    }                                                                                                                // 43
+    // Make an array to hold the partial results of stringifying this object value.                                  // 44
+    innerIndent = outerIndent + singleIndent;                                                                        // 45
+    partial = [];                                                                                                    // 46
+                                                                                                                     // 47
+    // Is the value an array?                                                                                        // 48
+    if (_.isArray(value) || _.isArguments(value)) {                                                                  // 49
+                                                                                                                     // 50
+      // The value is an array. Stringify every element. Use null as a placeholder                                   // 51
+      // for non-JSON values.                                                                                        // 52
+                                                                                                                     // 53
+      length = value.length;                                                                                         // 54
+      for (i = 0; i < length; i += 1) {                                                                              // 55
+        partial[i] = str(i, value, singleIndent, innerIndent, canonical) || 'null';                                  // 56
+      }                                                                                                              // 57
+                                                                                                                     // 58
+      // Join all of the elements together, separated with commas, and wrap them in                                  // 59
+      // brackets.                                                                                                   // 60
+                                                                                                                     // 61
+      if (partial.length === 0) {                                                                                    // 62
+        v = '[]';                                                                                                    // 63
+      } else if (innerIndent) {                                                                                      // 64
+        v = '[\n' + innerIndent + partial.join(',\n' + innerIndent) + '\n' + outerIndent + ']';                      // 65
+      } else {                                                                                                       // 66
+        v = '[' + partial.join(',') + ']';                                                                           // 67
+      }                                                                                                              // 68
+      return v;                                                                                                      // 69
+    }                                                                                                                // 70
+                                                                                                                     // 71
+                                                                                                                     // 72
+    // Iterate through all of the keys in the object.                                                                // 73
+    var keys = _.keys(value);                                                                                        // 74
+    if (canonical)                                                                                                   // 75
+      keys = keys.sort();                                                                                            // 76
+    _.each(keys, function (k) {                                                                                      // 77
+      v = str(k, value, singleIndent, innerIndent, canonical);                                                       // 78
+      if (v) {                                                                                                       // 79
+        partial.push(quote(k) + (innerIndent ? ': ' : ':') + v);                                                     // 80
+      }                                                                                                              // 81
+    });                                                                                                              // 82
+                                                                                                                     // 83
+                                                                                                                     // 84
+    // Join all of the member texts together, separated with commas,                                                 // 85
+    // and wrap them in braces.                                                                                      // 86
+                                                                                                                     // 87
+    if (partial.length === 0) {                                                                                      // 88
+      v = '{}';                                                                                                      // 89
+    } else if (innerIndent) {                                                                                        // 90
+      v = '{\n' + innerIndent + partial.join(',\n' + innerIndent) + '\n' + outerIndent + '}';                        // 91
+    } else {                                                                                                         // 92
+      v = '{' + partial.join(',') + '}';                                                                             // 93
+    }                                                                                                                // 94
+    return v;                                                                                                        // 95
+  }                                                                                                                  // 96
+}                                                                                                                    // 97
+                                                                                                                     // 98
+// If the JSON object does not yet have a stringify method, give it one.                                             // 99
+                                                                                                                     // 100
+EJSON._canonicalStringify = function (value, options) {                                                              // 101
+  // Make a fake root object containing our value under the key of ''.                                               // 102
+  // Return the result of stringifying the value.                                                                    // 103
+  options = _.extend({                                                                                               // 104
+    indent: "",                                                                                                      // 105
+    canonical: false                                                                                                 // 106
+  }, options);                                                                                                       // 107
+  if (options.indent === true) {                                                                                     // 108
+    options.indent = "  ";                                                                                           // 109
+  } else if (typeof options.indent === 'number') {                                                                   // 110
+    var newIndent = "";                                                                                              // 111
+    for (var i = 0; i < options.indent; i++) {                                                                       // 112
+      newIndent += ' ';                                                                                              // 113
+    }                                                                                                                // 114
+    options.indent = newIndent;                                                                                      // 115
+  }                                                                                                                  // 116
+  return str('', {'': value}, options.indent, "", options.canonical);                                                // 117
+};                                                                                                                   // 118
+                                                                                                                     // 119
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                     // 663
+}).call(this);                                                                                                       // 664
+                                                                                                                     // 665
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }).call(this);
 
 
 /* Exports */
 if (typeof Package === 'undefined') Package = {};
-Package['observe-sequence'] = {
-  ObserveSequence: ObserveSequence
+Package.ejson = {
+  EJSON: EJSON,
+  EJSONTest: EJSONTest
+};
+
+})();
+//////////////////////////////////////////////////////////////////////////
+//                                                                      //
+// This is a generated file. You can view the original                  //
+// source in your browser if your browser supports source maps.         //
+// Source maps are supported by all recent versions of Chrome, Safari,  //
+// and Firefox, and by Internet Explorer 11.                            //
+//                                                                      //
+//////////////////////////////////////////////////////////////////////////
+
+
+(function () {
+
+/* Imports */
+var Meteor = Package.meteor.Meteor;
+var EJSON = Package.ejson.EJSON;
+var IdMap = Package['id-map'].IdMap;
+var Random = Package.random.Random;
+
+/* Package-scope variables */
+var MongoID;
+
+(function(){
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                          //
+// packages/mongo-id/packages/mongo-id.js                                                                   //
+//                                                                                                          //
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                            //
+(function(){                                                                                                // 1
+                                                                                                            // 2
+////////////////////////////////////////////////////////////////////////////////////////////////////////    // 3
+//                                                                                                    //    // 4
+// packages/mongo-id/id.js                                                                            //    // 5
+//                                                                                                    //    // 6
+////////////////////////////////////////////////////////////////////////////////////////////////////////    // 7
+                                                                                                      //    // 8
+MongoID = {};                                                                                         // 1  // 9
+                                                                                                      // 2  // 10
+MongoID._looksLikeObjectID = function (str) {                                                         // 3  // 11
+  return str.length === 24 && str.match(/^[0-9a-f]*$/);                                               // 4  // 12
+};                                                                                                    // 5  // 13
+                                                                                                      // 6  // 14
+MongoID.ObjectID = function (hexString) {                                                             // 7  // 15
+  //random-based impl of Mongo ObjectID                                                               // 8  // 16
+  var self = this;                                                                                    // 9  // 17
+  if (hexString) {                                                                                    // 10
+    hexString = hexString.toLowerCase();                                                              // 11
+    if (!MongoID._looksLikeObjectID(hexString)) {                                                     // 12
+      throw new Error("Invalid hexadecimal string for creating an ObjectID");                         // 13
+    }                                                                                                 // 14
+    // meant to work with _.isEqual(), which relies on structural equality                            // 15
+    self._str = hexString;                                                                            // 16
+  } else {                                                                                            // 17
+    self._str = Random.hexString(24);                                                                 // 18
+  }                                                                                                   // 19
+};                                                                                                    // 20
+                                                                                                      // 21
+MongoID.ObjectID.prototype.toString = function () {                                                   // 22
+  var self = this;                                                                                    // 23
+  return "ObjectID(\"" + self._str + "\")";                                                           // 24
+};                                                                                                    // 25
+                                                                                                      // 26
+MongoID.ObjectID.prototype.equals = function (other) {                                                // 27
+  var self = this;                                                                                    // 28
+  return other instanceof MongoID.ObjectID &&                                                         // 29
+    self.valueOf() === other.valueOf();                                                               // 30
+};                                                                                                    // 31
+                                                                                                      // 32
+MongoID.ObjectID.prototype.clone = function () {                                                      // 33
+  var self = this;                                                                                    // 34
+  return new MongoID.ObjectID(self._str);                                                             // 35
+};                                                                                                    // 36
+                                                                                                      // 37
+MongoID.ObjectID.prototype.typeName = function() {                                                    // 38
+  return "oid";                                                                                       // 39
+};                                                                                                    // 40
+                                                                                                      // 41
+MongoID.ObjectID.prototype.getTimestamp = function() {                                                // 42
+  var self = this;                                                                                    // 43
+  return parseInt(self._str.substr(0, 8), 16);                                                        // 44
+};                                                                                                    // 45
+                                                                                                      // 46
+MongoID.ObjectID.prototype.valueOf =                                                                  // 47
+    MongoID.ObjectID.prototype.toJSONValue =                                                          // 48
+    MongoID.ObjectID.prototype.toHexString =                                                          // 49
+    function () { return this._str; };                                                                // 50
+                                                                                                      // 51
+EJSON.addType("oid",  function (str) {                                                                // 52
+  return new MongoID.ObjectID(str);                                                                   // 53
+});                                                                                                   // 54
+                                                                                                      // 55
+MongoID.idStringify = function (id) {                                                                 // 56
+  if (id instanceof MongoID.ObjectID) {                                                               // 57
+    return id.valueOf();                                                                              // 58
+  } else if (typeof id === 'string') {                                                                // 59
+    if (id === "") {                                                                                  // 60
+      return id;                                                                                      // 61
+    } else if (id.substr(0, 1) === "-" || // escape previously dashed strings                         // 62
+               id.substr(0, 1) === "~" || // escape escaped numbers, true, false                      // 63
+               MongoID._looksLikeObjectID(id) || // escape object-id-form strings                     // 64
+               id.substr(0, 1) === '{') { // escape object-form strings, for maybe implementing later       // 73
+      return "-" + id;                                                                                // 66
+    } else {                                                                                          // 67
+      return id; // other strings go through unchanged.                                               // 68
+    }                                                                                                 // 69
+  } else if (id === undefined) {                                                                      // 70
+    return '-';                                                                                       // 71
+  } else if (typeof id === 'object' && id !== null) {                                                 // 72
+    throw new Error("Meteor does not currently support objects other than ObjectID as ids");          // 73
+  } else { // Numbers, true, false, null                                                              // 74
+    return "~" + JSON.stringify(id);                                                                  // 75
+  }                                                                                                   // 76
+};                                                                                                    // 77
+                                                                                                      // 78
+                                                                                                      // 79
+MongoID.idParse = function (id) {                                                                     // 80
+  if (id === "") {                                                                                    // 81
+    return id;                                                                                        // 82
+  } else if (id === '-') {                                                                            // 83
+    return undefined;                                                                                 // 84
+  } else if (id.substr(0, 1) === '-') {                                                               // 85
+    return id.substr(1);                                                                              // 86
+  } else if (id.substr(0, 1) === '~') {                                                               // 87
+    return JSON.parse(id.substr(1));                                                                  // 88
+  } else if (MongoID._looksLikeObjectID(id)) {                                                        // 89
+    return new MongoID.ObjectID(id);                                                                  // 90
+  } else {                                                                                            // 91
+    return id;                                                                                        // 92
+  }                                                                                                   // 93
+};                                                                                                    // 94
+                                                                                                      // 95
+                                                                                                      // 96
+////////////////////////////////////////////////////////////////////////////////////////////////////////    // 105
+                                                                                                            // 106
+}).call(this);                                                                                              // 107
+                                                                                                            // 108
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+}).call(this);
+
+
+/* Exports */
+if (typeof Package === 'undefined') Package = {};
+Package['mongo-id'] = {
+  MongoID: MongoID
+};
+
+})();
+//////////////////////////////////////////////////////////////////////////
+//                                                                      //
+// This is a generated file. You can view the original                  //
+// source in your browser if your browser supports source maps.         //
+// Source maps are supported by all recent versions of Chrome, Safari,  //
+// and Firefox, and by Internet Explorer 11.                            //
+//                                                                      //
+//////////////////////////////////////////////////////////////////////////
+
+
+(function () {
+
+/* Imports */
+var Meteor = Package.meteor.Meteor;
+var _ = Package.underscore._;
+var EJSON = Package.ejson.EJSON;
+
+/* Package-scope variables */
+var DiffSequence;
+
+(function(){
+
+////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                        //
+// packages/diff-sequence/packages/diff-sequence.js                                       //
+//                                                                                        //
+////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                          //
+(function(){                                                                              // 1
+                                                                                          // 2
+/////////////////////////////////////////////////////////////////////////////////////     // 3
+//                                                                                 //     // 4
+// packages/diff-sequence/diff.js                                                  //     // 5
+//                                                                                 //     // 6
+/////////////////////////////////////////////////////////////////////////////////////     // 7
+                                                                                   //     // 8
+DiffSequence = {};                                                                 // 1   // 9
+                                                                                   // 2   // 10
+// ordered: bool.                                                                  // 3   // 11
+// old_results and new_results: collections of documents.                          // 4   // 12
+//    if ordered, they are arrays.                                                 // 5   // 13
+//    if unordered, they are IdMaps                                                // 6   // 14
+DiffSequence.diffQueryChanges = function (ordered, oldResults, newResults,         // 7   // 15
+                                              observer, options) {                 // 8   // 16
+  if (ordered)                                                                     // 9   // 17
+    DiffSequence.diffQueryOrderedChanges(                                          // 10  // 18
+      oldResults, newResults, observer, options);                                  // 11  // 19
+  else                                                                             // 12  // 20
+    DiffSequence.diffQueryUnorderedChanges(                                        // 13  // 21
+      oldResults, newResults, observer, options);                                  // 14  // 22
+};                                                                                 // 15  // 23
+                                                                                   // 16  // 24
+DiffSequence.diffQueryUnorderedChanges = function (oldResults, newResults,         // 17  // 25
+                                                       observer, options) {        // 18  // 26
+  options = options || {};                                                         // 19  // 27
+  var projectionFn = options.projectionFn || EJSON.clone;                          // 20  // 28
+                                                                                   // 21  // 29
+  if (observer.movedBefore) {                                                      // 22  // 30
+    throw new Error("_diffQueryUnordered called with a movedBefore observer!");    // 23  // 31
+  }                                                                                // 24  // 32
+                                                                                   // 25  // 33
+  newResults.forEach(function (newDoc, id) {                                       // 26  // 34
+    var oldDoc = oldResults.get(id);                                               // 27  // 35
+    if (oldDoc) {                                                                  // 28  // 36
+      if (observer.changed && !EJSON.equals(oldDoc, newDoc)) {                     // 29  // 37
+        var projectedNew = projectionFn(newDoc);                                   // 30  // 38
+        var projectedOld = projectionFn(oldDoc);                                   // 31  // 39
+        var changedFields =                                                        // 32  // 40
+              DiffSequence.makeChangedFields(projectedNew, projectedOld);          // 33  // 41
+        if (! _.isEmpty(changedFields)) {                                          // 34  // 42
+          observer.changed(id, changedFields);                                     // 35  // 43
+        }                                                                          // 36  // 44
+      }                                                                            // 37  // 45
+    } else if (observer.added) {                                                   // 38  // 46
+      var fields = projectionFn(newDoc);                                           // 39  // 47
+      delete fields._id;                                                           // 40  // 48
+      observer.added(newDoc._id, fields);                                          // 41  // 49
+    }                                                                              // 42  // 50
+  });                                                                              // 43  // 51
+                                                                                   // 44  // 52
+  if (observer.removed) {                                                          // 45  // 53
+    oldResults.forEach(function (oldDoc, id) {                                     // 46  // 54
+      if (!newResults.has(id))                                                     // 47  // 55
+        observer.removed(id);                                                      // 48  // 56
+    });                                                                            // 49  // 57
+  }                                                                                // 50  // 58
+};                                                                                 // 51  // 59
+                                                                                   // 52  // 60
+                                                                                   // 53  // 61
+DiffSequence.diffQueryOrderedChanges = function (old_results, new_results,         // 54  // 62
+                                                     observer, options) {          // 55  // 63
+  options = options || {};                                                         // 56  // 64
+  var projectionFn = options.projectionFn || EJSON.clone;                          // 57  // 65
+                                                                                   // 58  // 66
+  var new_presence_of_id = {};                                                     // 59  // 67
+  _.each(new_results, function (doc) {                                             // 60  // 68
+    if (new_presence_of_id[doc._id])                                               // 61  // 69
+      Meteor._debug("Duplicate _id in new_results");                               // 62  // 70
+    new_presence_of_id[doc._id] = true;                                            // 63  // 71
+  });                                                                              // 64  // 72
+                                                                                   // 65  // 73
+  var old_index_of_id = {};                                                        // 66  // 74
+  _.each(old_results, function (doc, i) {                                          // 67  // 75
+    if (doc._id in old_index_of_id)                                                // 68  // 76
+      Meteor._debug("Duplicate _id in old_results");                               // 69  // 77
+    old_index_of_id[doc._id] = i;                                                  // 70  // 78
+  });                                                                              // 71  // 79
+                                                                                   // 72  // 80
+  // ALGORITHM:                                                                    // 73  // 81
+  //                                                                               // 74  // 82
+  // To determine which docs should be considered "moved" (and which               // 75  // 83
+  // merely change position because of other docs moving) we run                   // 76  // 84
+  // a "longest common subsequence" (LCS) algorithm.  The LCS of the               // 77  // 85
+  // old doc IDs and the new doc IDs gives the docs that should NOT be             // 78  // 86
+  // considered moved.                                                             // 79  // 87
+                                                                                   // 80  // 88
+  // To actually call the appropriate callbacks to get from the old state to the   // 81  // 89
+  // new state:                                                                    // 82  // 90
+                                                                                   // 83  // 91
+  // First, we call removed() on all the items that only appear in the old         // 84  // 92
+  // state.                                                                        // 85  // 93
+                                                                                   // 86  // 94
+  // Then, once we have the items that should not move, we walk through the new    // 87  // 95
+  // results array group-by-group, where a "group" is a set of items that have     // 88  // 96
+  // moved, anchored on the end by an item that should not move.  One by one, we   // 89  // 97
+  // move each of those elements into place "before" the anchoring end-of-group    // 90  // 98
+  // item, and fire changed events on them if necessary.  Then we fire a changed   // 91  // 99
+  // event on the anchor, and move on to the next group.  There is always at       // 92  // 100
+  // least one group; the last group is anchored by a virtual "null" id at the     // 93  // 101
+  // end.                                                                          // 94  // 102
+                                                                                   // 95  // 103
+  // Asymptotically: O(N k) where k is number of ops, or potentially               // 96  // 104
+  // O(N log N) if inner loop of LCS were made to be binary search.                // 97  // 105
+                                                                                   // 98  // 106
+                                                                                   // 99  // 107
+  //////// LCS (longest common sequence, with respect to _id)                      // 100
+  // (see Wikipedia article on Longest Increasing Subsequence,                     // 101
+  // where the LIS is taken of the sequence of old indices of the                  // 102
+  // docs in new_results)                                                          // 103
+  //                                                                               // 104
+  // unmoved: the output of the algorithm; members of the LCS,                     // 105
+  // in the form of indices into new_results                                       // 106
+  var unmoved = [];                                                                // 107
+  // max_seq_len: length of LCS found so far                                       // 108
+  var max_seq_len = 0;                                                             // 109
+  // seq_ends[i]: the index into new_results of the last doc in a                  // 110
+  // common subsequence of length of i+1 <= max_seq_len                            // 111
+  var N = new_results.length;                                                      // 112
+  var seq_ends = new Array(N);                                                     // 113
+  // ptrs:  the common subsequence ending with new_results[n] extends              // 114
+  // a common subsequence ending with new_results[ptr[n]], unless                  // 115
+  // ptr[n] is -1.                                                                 // 116
+  var ptrs = new Array(N);                                                         // 117
+  // virtual sequence of old indices of new results                                // 118
+  var old_idx_seq = function(i_new) {                                              // 119
+    return old_index_of_id[new_results[i_new]._id];                                // 120
+  };                                                                               // 121
+  // for each item in new_results, use it to extend a common subsequence           // 122
+  // of length j <= max_seq_len                                                    // 123
+  for(var i=0; i<N; i++) {                                                         // 124
+    if (old_index_of_id[new_results[i]._id] !== undefined) {                       // 125
+      var j = max_seq_len;                                                         // 126
+      // this inner loop would traditionally be a binary search,                   // 127
+      // but scanning backwards we will likely find a subseq to extend             // 128
+      // pretty soon, bounded for example by the total number of ops.              // 129
+      // If this were to be changed to a binary search, we'd still want            // 130
+      // to scan backwards a bit as an optimization.                               // 131
+      while (j > 0) {                                                              // 132
+        if (old_idx_seq(seq_ends[j-1]) < old_idx_seq(i))                           // 133
+          break;                                                                   // 134
+        j--;                                                                       // 135
+      }                                                                            // 136
+                                                                                   // 137
+      ptrs[i] = (j === 0 ? -1 : seq_ends[j-1]);                                    // 138
+      seq_ends[j] = i;                                                             // 139
+      if (j+1 > max_seq_len)                                                       // 140
+        max_seq_len = j+1;                                                         // 141
+    }                                                                              // 142
+  }                                                                                // 143
+                                                                                   // 144
+  // pull out the LCS/LIS into unmoved                                             // 145
+  var idx = (max_seq_len === 0 ? -1 : seq_ends[max_seq_len-1]);                    // 146
+  while (idx >= 0) {                                                               // 147
+    unmoved.push(idx);                                                             // 148
+    idx = ptrs[idx];                                                               // 149
+  }                                                                                // 150
+  // the unmoved item list is built backwards, so fix that                         // 151
+  unmoved.reverse();                                                               // 152
+                                                                                   // 153
+  // the last group is always anchored by the end of the result list, which is     // 154
+  // an id of "null"                                                               // 155
+  unmoved.push(new_results.length);                                                // 156
+                                                                                   // 157
+  _.each(old_results, function (doc) {                                             // 158
+    if (!new_presence_of_id[doc._id])                                              // 159
+      observer.removed && observer.removed(doc._id);                               // 160
+  });                                                                              // 161
+  // for each group of things in the new_results that is anchored by an unmoved    // 162
+  // element, iterate through the things before it.                                // 163
+  var startOfGroup = 0;                                                            // 164
+  _.each(unmoved, function (endOfGroup) {                                          // 165
+    var groupId = new_results[endOfGroup] ? new_results[endOfGroup]._id : null;    // 166
+    var oldDoc, newDoc, fields, projectedNew, projectedOld;                        // 167
+    for (var i = startOfGroup; i < endOfGroup; i++) {                              // 168
+      newDoc = new_results[i];                                                     // 169
+      if (!_.has(old_index_of_id, newDoc._id)) {                                   // 170
+        fields = projectionFn(newDoc);                                             // 171
+        delete fields._id;                                                         // 172
+        observer.addedBefore && observer.addedBefore(newDoc._id, fields, groupId);        // 181
+        observer.added && observer.added(newDoc._id, fields);                      // 174
+      } else {                                                                     // 175
+        // moved                                                                   // 176
+        oldDoc = old_results[old_index_of_id[newDoc._id]];                         // 177
+        projectedNew = projectionFn(newDoc);                                       // 178
+        projectedOld = projectionFn(oldDoc);                                       // 179
+        fields = DiffSequence.makeChangedFields(projectedNew, projectedOld);       // 180
+        if (!_.isEmpty(fields)) {                                                  // 181
+          observer.changed && observer.changed(newDoc._id, fields);                // 182
+        }                                                                          // 183
+        observer.movedBefore && observer.movedBefore(newDoc._id, groupId);         // 184
+      }                                                                            // 185
+    }                                                                              // 186
+    if (groupId) {                                                                 // 187
+      newDoc = new_results[endOfGroup];                                            // 188
+      oldDoc = old_results[old_index_of_id[newDoc._id]];                           // 189
+      projectedNew = projectionFn(newDoc);                                         // 190
+      projectedOld = projectionFn(oldDoc);                                         // 191
+      fields = DiffSequence.makeChangedFields(projectedNew, projectedOld);         // 192
+      if (!_.isEmpty(fields)) {                                                    // 193
+        observer.changed && observer.changed(newDoc._id, fields);                  // 194
+      }                                                                            // 195
+    }                                                                              // 196
+    startOfGroup = endOfGroup+1;                                                   // 197
+  });                                                                              // 198
+                                                                                   // 199
+                                                                                   // 200
+};                                                                                 // 201
+                                                                                   // 202
+                                                                                   // 203
+// General helper for diff-ing two objects.                                        // 204
+// callbacks is an object like so:                                                 // 205
+// { leftOnly: function (key, leftValue) {...},                                    // 206
+//   rightOnly: function (key, rightValue) {...},                                  // 207
+//   both: function (key, leftValue, rightValue) {...},                            // 208
+// }                                                                               // 209
+DiffSequence.diffObjects = function (left, right, callbacks) {                     // 210
+  _.each(left, function (leftValue, key) {                                         // 211
+    if (_.has(right, key))                                                         // 212
+      callbacks.both && callbacks.both(key, leftValue, right[key]);                // 213
+    else                                                                           // 214
+      callbacks.leftOnly && callbacks.leftOnly(key, leftValue);                    // 215
+  });                                                                              // 216
+  if (callbacks.rightOnly) {                                                       // 217
+    _.each(right, function(rightValue, key) {                                      // 218
+      if (!_.has(left, key))                                                       // 219
+        callbacks.rightOnly(key, rightValue);                                      // 220
+    });                                                                            // 221
+  }                                                                                // 222
+};                                                                                 // 223
+                                                                                   // 224
+                                                                                   // 225
+DiffSequence.makeChangedFields = function (newDoc, oldDoc) {                       // 226
+  var fields = {};                                                                 // 227
+  DiffSequence.diffObjects(oldDoc, newDoc, {                                       // 228
+    leftOnly: function (key, value) {                                              // 229
+      fields[key] = undefined;                                                     // 230
+    },                                                                             // 231
+    rightOnly: function (key, value) {                                             // 232
+      fields[key] = value;                                                         // 233
+    },                                                                             // 234
+    both: function (key, leftValue, rightValue) {                                  // 235
+      if (!EJSON.equals(leftValue, rightValue))                                    // 236
+        fields[key] = rightValue;                                                  // 237
+    }                                                                              // 238
+  });                                                                              // 239
+  return fields;                                                                   // 240
+};                                                                                 // 241
+                                                                                   // 242
+DiffSequence.applyChanges = function (doc, changeFields) {                         // 243
+  _.each(changeFields, function (value, key) {                                     // 244
+    if (value === undefined)                                                       // 245
+      delete doc[key];                                                             // 246
+    else                                                                           // 247
+      doc[key] = value;                                                            // 248
+  });                                                                              // 249
+};                                                                                 // 250
+                                                                                   // 251
+                                                                                   // 252
+/////////////////////////////////////////////////////////////////////////////////////     // 261
+                                                                                          // 262
+}).call(this);                                                                            // 263
+                                                                                          // 264
+////////////////////////////////////////////////////////////////////////////////////////////
+
+}).call(this);
+
+
+/* Exports */
+if (typeof Package === 'undefined') Package = {};
+Package['diff-sequence'] = {
+  DiffSequence: DiffSequence
+};
+
+})();
+//////////////////////////////////////////////////////////////////////////
+//                                                                      //
+// This is a generated file. You can view the original                  //
+// source in your browser if your browser supports source maps.         //
+// Source maps are supported by all recent versions of Chrome, Safari,  //
+// and Firefox, and by Internet Explorer 11.                            //
+//                                                                      //
+//////////////////////////////////////////////////////////////////////////
+
+
+(function () {
+
+/* Imports */
+var Meteor = Package.meteor.Meteor;
+var _ = Package.underscore._;
+var Tracker = Package.tracker.Tracker;
+var Deps = Package.tracker.Deps;
+var EJSON = Package.ejson.EJSON;
+
+/* Package-scope variables */
+var ReactiveDict;
+
+(function(){
+
+//////////////////////////////////////////////////////////////////////////////////
+//                                                                              //
+// packages/reactive-dict/reactive-dict.js                                      //
+//                                                                              //
+//////////////////////////////////////////////////////////////////////////////////
+                                                                                //
+// XXX come up with a serialization method which canonicalizes object key       // 1
+// order, which would allow us to use objects as values for equals.             // 2
+var stringify = function (value) {                                              // 3
+  if (value === undefined)                                                      // 4
+    return 'undefined';                                                         // 5
+  return EJSON.stringify(value);                                                // 6
+};                                                                              // 7
+var parse = function (serialized) {                                             // 8
+  if (serialized === undefined || serialized === 'undefined')                   // 9
+    return undefined;                                                           // 10
+  return EJSON.parse(serialized);                                               // 11
+};                                                                              // 12
+                                                                                // 13
+var changed = function (v) {                                                    // 14
+  v && v.changed();                                                             // 15
+};                                                                              // 16
+                                                                                // 17
+// XXX COMPAT WITH 0.9.1 : accept migrationData instead of dictName             // 18
+ReactiveDict = function (dictName) {                                            // 19
+  // this.keys: key -> value                                                    // 20
+  if (dictName) {                                                               // 21
+    if (typeof dictName === 'string') {                                         // 22
+      // the normal case, argument is a string name.                            // 23
+      // _registerDictForMigrate will throw an error on duplicate name.         // 24
+      ReactiveDict._registerDictForMigrate(dictName, this);                     // 25
+      this.keys = ReactiveDict._loadMigratedDict(dictName) || {};               // 26
+      this.name = dictName;                                                     // 27
+    } else if (typeof dictName === 'object') {                                  // 28
+      // back-compat case: dictName is actually migrationData                   // 29
+      this.keys = dictName;                                                     // 30
+    } else {                                                                    // 31
+      throw new Error("Invalid ReactiveDict argument: " + dictName);            // 32
+    }                                                                           // 33
+  } else {                                                                      // 34
+    // no name given; no migration will be performed                            // 35
+    this.keys = {};                                                             // 36
+  }                                                                             // 37
+                                                                                // 38
+  this.allDeps = new Tracker.Dependency;                                        // 39
+  this.keyDeps = {}; // key -> Dependency                                       // 40
+  this.keyValueDeps = {}; // key -> Dependency                                  // 41
+};                                                                              // 42
+                                                                                // 43
+_.extend(ReactiveDict.prototype, {                                              // 44
+  // set() began as a key/value method, but we are now overloading it           // 45
+  // to take an object of key/value pairs, similar to backbone                  // 46
+  // http://backbonejs.org/#Model-set                                           // 47
+                                                                                // 48
+  set: function (keyOrObject, value) {                                          // 49
+    var self = this;                                                            // 50
+                                                                                // 51
+    if ((typeof keyOrObject === 'object') && (value === undefined)) {           // 52
+      // Called as `dict.set({...})`                                            // 53
+      self._setObject(keyOrObject);                                             // 54
+      return;                                                                   // 55
+    }                                                                           // 56
+    // the input isn't an object, so it must be a key                           // 57
+    // and we resume with the rest of the function                              // 58
+    var key = keyOrObject;                                                      // 59
+                                                                                // 60
+    value = stringify(value);                                                   // 61
+                                                                                // 62
+    var keyExisted = _.has(self.keys, key);                                     // 63
+    var oldSerializedValue = keyExisted ? self.keys[key] : 'undefined';         // 64
+    var isNewValue = (value !== oldSerializedValue);                            // 65
+                                                                                // 66
+    self.keys[key] = value;                                                     // 67
+                                                                                // 68
+    if (isNewValue || !keyExisted) {                                            // 69
+      self.allDeps.changed();                                                   // 70
+    }                                                                           // 71
+                                                                                // 72
+    if (isNewValue) {                                                           // 73
+      changed(self.keyDeps[key]);                                               // 74
+      if (self.keyValueDeps[key]) {                                             // 75
+        changed(self.keyValueDeps[key][oldSerializedValue]);                    // 76
+        changed(self.keyValueDeps[key][value]);                                 // 77
+      }                                                                         // 78
+    }                                                                           // 79
+  },                                                                            // 80
+                                                                                // 81
+  setDefault: function (key, value) {                                           // 82
+    var self = this;                                                            // 83
+    if (! _.has(self.keys, key)) {                                              // 84
+      self.set(key, value);                                                     // 85
+    }                                                                           // 86
+  },                                                                            // 87
+                                                                                // 88
+  get: function (key) {                                                         // 89
+    var self = this;                                                            // 90
+    self._ensureKey(key);                                                       // 91
+    self.keyDeps[key].depend();                                                 // 92
+    return parse(self.keys[key]);                                               // 93
+  },                                                                            // 94
+                                                                                // 95
+  equals: function (key, value) {                                               // 96
+    var self = this;                                                            // 97
+                                                                                // 98
+    // Mongo.ObjectID is in the 'mongo' package                                 // 99
+    var ObjectID = null;                                                        // 100
+    if (Package.mongo) {                                                        // 101
+      ObjectID = Package.mongo.Mongo.ObjectID;                                  // 102
+    }                                                                           // 103
+                                                                                // 104
+    // We don't allow objects (or arrays that might include objects) for        // 105
+    // .equals, because JSON.stringify doesn't canonicalize object key          // 106
+    // order. (We can make equals have the right return value by parsing the    // 107
+    // current value and using EJSON.equals, but we won't have a canonical      // 108
+    // element of keyValueDeps[key] to store the dependency.) You can still use
+    // "EJSON.equals(reactiveDict.get(key), value)".                            // 110
+    //                                                                          // 111
+    // XXX we could allow arrays as long as we recursively check that there     // 112
+    // are no objects                                                           // 113
+    if (typeof value !== 'string' &&                                            // 114
+        typeof value !== 'number' &&                                            // 115
+        typeof value !== 'boolean' &&                                           // 116
+        typeof value !== 'undefined' &&                                         // 117
+        !(value instanceof Date) &&                                             // 118
+        !(ObjectID && value instanceof ObjectID) &&                             // 119
+        value !== null) {                                                       // 120
+      throw new Error("ReactiveDict.equals: value must be scalar");             // 121
+    }                                                                           // 122
+    var serializedValue = stringify(value);                                     // 123
+                                                                                // 124
+    if (Tracker.active) {                                                       // 125
+      self._ensureKey(key);                                                     // 126
+                                                                                // 127
+      if (! _.has(self.keyValueDeps[key], serializedValue))                     // 128
+        self.keyValueDeps[key][serializedValue] = new Tracker.Dependency;       // 129
+                                                                                // 130
+      var isNew = self.keyValueDeps[key][serializedValue].depend();             // 131
+      if (isNew) {                                                              // 132
+        Tracker.onInvalidate(function () {                                      // 133
+          // clean up [key][serializedValue] if it's now empty, so we don't     // 134
+          // use O(n) memory for n = values seen ever                           // 135
+          if (! self.keyValueDeps[key][serializedValue].hasDependents())        // 136
+            delete self.keyValueDeps[key][serializedValue];                     // 137
+        });                                                                     // 138
+      }                                                                         // 139
+    }                                                                           // 140
+                                                                                // 141
+    var oldValue = undefined;                                                   // 142
+    if (_.has(self.keys, key)) oldValue = parse(self.keys[key]);                // 143
+    return EJSON.equals(oldValue, value);                                       // 144
+  },                                                                            // 145
+                                                                                // 146
+  all: function() {                                                             // 147
+    this.allDeps.depend();                                                      // 148
+    var ret = {};                                                               // 149
+    _.each(this.keys, function(value, key) {                                    // 150
+      ret[key] = parse(value);                                                  // 151
+    });                                                                         // 152
+    return ret;                                                                 // 153
+  },                                                                            // 154
+                                                                                // 155
+  clear: function() {                                                           // 156
+    var self = this;                                                            // 157
+                                                                                // 158
+    var oldKeys = self.keys;                                                    // 159
+    self.keys = {};                                                             // 160
+                                                                                // 161
+    self.allDeps.changed();                                                     // 162
+                                                                                // 163
+    _.each(oldKeys, function(value, key) {                                      // 164
+      changed(self.keyDeps[key]);                                               // 165
+      changed(self.keyValueDeps[key][value]);                                   // 166
+      changed(self.keyValueDeps[key]['undefined']);                             // 167
+    });                                                                         // 168
+                                                                                // 169
+  },                                                                            // 170
+                                                                                // 171
+  delete: function(key) {                                                       // 172
+    var self = this;                                                            // 173
+    var didRemove = false;                                                      // 174
+                                                                                // 175
+    if (_.has(self.keys, key)) {                                                // 176
+      var oldValue = self.keys[key];                                            // 177
+      delete self.keys[key];                                                    // 178
+      changed(self.keyDeps[key]);                                               // 179
+      if (self.keyValueDeps[key]) {                                             // 180
+        changed(self.keyValueDeps[key][oldValue]);                              // 181
+        changed(self.keyValueDeps[key]['undefined']);                           // 182
+      }                                                                         // 183
+      self.allDeps.changed();                                                   // 184
+      didRemove = true;                                                         // 185
+    }                                                                           // 186
+                                                                                // 187
+    return didRemove;                                                           // 188
+  },                                                                            // 189
+                                                                                // 190
+  _setObject: function (object) {                                               // 191
+    var self = this;                                                            // 192
+                                                                                // 193
+    _.each(object, function (value, key){                                       // 194
+      self.set(key, value);                                                     // 195
+    });                                                                         // 196
+  },                                                                            // 197
+                                                                                // 198
+  _ensureKey: function (key) {                                                  // 199
+    var self = this;                                                            // 200
+    if (!(key in self.keyDeps)) {                                               // 201
+      self.keyDeps[key] = new Tracker.Dependency;                               // 202
+      self.keyValueDeps[key] = {};                                              // 203
+    }                                                                           // 204
+  },                                                                            // 205
+                                                                                // 206
+  // Get a JSON value that can be passed to the constructor to                  // 207
+  // create a new ReactiveDict with the same contents as this one               // 208
+  _getMigrationData: function () {                                              // 209
+    // XXX sanitize and make sure it's JSONible?                                // 210
+    return this.keys;                                                           // 211
+  }                                                                             // 212
+});                                                                             // 213
+                                                                                // 214
+//////////////////////////////////////////////////////////////////////////////////
+
+}).call(this);
+
+
+
+
+
+
+(function(){
+
+//////////////////////////////////////////////////////////////////////////////////
+//                                                                              //
+// packages/reactive-dict/migration.js                                          //
+//                                                                              //
+//////////////////////////////////////////////////////////////////////////////////
+                                                                                //
+ReactiveDict._migratedDictData = {}; // name -> data                            // 1
+ReactiveDict._dictsToMigrate = {}; // name -> ReactiveDict                      // 2
+                                                                                // 3
+ReactiveDict._loadMigratedDict = function (dictName) {                          // 4
+  if (_.has(ReactiveDict._migratedDictData, dictName))                          // 5
+    return ReactiveDict._migratedDictData[dictName];                            // 6
+                                                                                // 7
+  return null;                                                                  // 8
+};                                                                              // 9
+                                                                                // 10
+ReactiveDict._registerDictForMigrate = function (dictName, dict) {              // 11
+  if (_.has(ReactiveDict._dictsToMigrate, dictName))                            // 12
+    throw new Error("Duplicate ReactiveDict name: " + dictName);                // 13
+                                                                                // 14
+  ReactiveDict._dictsToMigrate[dictName] = dict;                                // 15
+};                                                                              // 16
+                                                                                // 17
+if (Meteor.isClient && Package.reload) {                                        // 18
+  // Put old migrated data into ReactiveDict._migratedDictData,                 // 19
+  // where it can be accessed by ReactiveDict._loadMigratedDict.                // 20
+  var migrationData = Package.reload.Reload._migrationData('reactive-dict');    // 21
+  if (migrationData && migrationData.dicts)                                     // 22
+    ReactiveDict._migratedDictData = migrationData.dicts;                       // 23
+                                                                                // 24
+  // On migration, assemble the data from all the dicts that have been          // 25
+  // registered.                                                                // 26
+  Package.reload.Reload._onMigrate('reactive-dict', function () {               // 27
+    var dictsToMigrate = ReactiveDict._dictsToMigrate;                          // 28
+    var dataToMigrate = {};                                                     // 29
+                                                                                // 30
+    for (var dictName in dictsToMigrate)                                        // 31
+      dataToMigrate[dictName] = dictsToMigrate[dictName]._getMigrationData();   // 32
+                                                                                // 33
+    return [true, {dicts: dataToMigrate}];                                      // 34
+  });                                                                           // 35
+}                                                                               // 36
+                                                                                // 37
+//////////////////////////////////////////////////////////////////////////////////
+
+}).call(this);
+
+
+/* Exports */
+if (typeof Package === 'undefined') Package = {};
+Package['reactive-dict'] = {
+  ReactiveDict: ReactiveDict
+};
+
+})();
+//////////////////////////////////////////////////////////////////////////
+//                                                                      //
+// This is a generated file. You can view the original                  //
+// source in your browser if your browser supports source maps.         //
+// Source maps are supported by all recent versions of Chrome, Safari,  //
+// and Firefox, and by Internet Explorer 11.                            //
+//                                                                      //
+//////////////////////////////////////////////////////////////////////////
+
+
+(function () {
+
+/* Imports */
+var Meteor = Package.meteor.Meteor;
+var _ = Package.underscore._;
+var ReactiveDict = Package['reactive-dict'].ReactiveDict;
+var EJSON = Package.ejson.EJSON;
+
+/* Package-scope variables */
+var Session;
+
+(function(){
+
+///////////////////////////////////////////////////////////////////////////////////////
+//                                                                                   //
+// packages/session/packages/session.js                                              //
+//                                                                                   //
+///////////////////////////////////////////////////////////////////////////////////////
+                                                                                     //
+(function(){                                                                         // 1
+                                                                                     // 2
+/////////////////////////////////////////////////////////////////////////////////    // 3
+//                                                                             //    // 4
+// packages/session/session.js                                                 //    // 5
+//                                                                             //    // 6
+/////////////////////////////////////////////////////////////////////////////////    // 7
+                                                                               //    // 8
+Session = new ReactiveDict('session');                                         // 1  // 9
+                                                                               // 2  // 10
+// Documentation here is really awkward because the methods are defined        // 3  // 11
+// elsewhere                                                                   // 4  // 12
+                                                                               // 5  // 13
+/**                                                                            // 6  // 14
+ * @memberOf Session                                                           // 7  // 15
+ * @method set                                                                 // 8  // 16
+ * @summary Set a variable in the session. Notify any listeners that the value       // 17
+ * has changed (eg: redraw templates, and rerun any                            // 10
+ * [`Tracker.autorun`](#tracker_autorun) computations, that called             // 11
+ * [`Session.get`](#session_get) on this `key`.)                               // 12
+ * @locus Client                                                               // 13
+ * @param {String} key The key to set, eg, `selectedItem`                      // 14
+ * @param {EJSONable | undefined} value The new value for `key`                // 15
+ */                                                                            // 16
+                                                                               // 17
+/**                                                                            // 18
+ * @memberOf Session                                                           // 19
+ * @method setDefault                                                          // 20
+ * @summary Set a variable in the session if it hasn't been set before.        // 21
+ * Otherwise works exactly the same as [`Session.set`](#session_set).          // 22
+ * @locus Client                                                               // 23
+ * @param {String} key The key to set, eg, `selectedItem`                      // 24
+ * @param {EJSONable | undefined} value The new value for `key`                // 25
+ */                                                                            // 26
+                                                                               // 27
+/**                                                                            // 28
+ * @memberOf Session                                                           // 29
+ * @method get                                                                 // 30
+ * @summary Get the value of a session variable. If inside a [reactive         // 31
+ * computation](#reactivity), invalidate the computation the next time the     // 32
+ * value of the variable is changed by [`Session.set`](#session_set). This     // 33
+ * returns a clone of the session value, so if it's an object or an array,     // 34
+ * mutating the returned value has no effect on the value stored in the        // 35
+ * session.                                                                    // 36
+ * @locus Client                                                               // 37
+ * @param {String} key The name of the session variable to return              // 38
+ */                                                                            // 39
+                                                                               // 40
+/**                                                                            // 41
+ * @memberOf Session                                                           // 42
+ * @method equals                                                              // 43
+ * @summary Test if a session variable is equal to a value. If inside a        // 44
+ * [reactive computation](#reactivity), invalidate the computation the next    // 45
+ * time the variable changes to or from the value.                             // 46
+ * @locus Client                                                               // 47
+ * @param {String} key The name of the session variable to test                // 48
+ * @param {String | Number | Boolean | null | undefined} value The value to    // 49
+ * test against                                                                // 50
+ */                                                                            // 51
+                                                                               // 52
+/////////////////////////////////////////////////////////////////////////////////    // 61
+                                                                                     // 62
+}).call(this);                                                                       // 63
+                                                                                     // 64
+///////////////////////////////////////////////////////////////////////////////////////
+
+}).call(this);
+
+
+/* Exports */
+if (typeof Package === 'undefined') Package = {};
+Package.session = {
+  Session: Session
 };
 
 })();
