@@ -8,10 +8,16 @@ Package.describe({
 Package.registerBuildPlugin({
   name: "compileNGTemplate",
   sources: [
+    "plugin/ng-caching-html-compiler.js",
+    "plugin/ng-html-scanner.js",
     "plugin/ng-template-compiler.js"
   ],
   use: [
-    'html-tools@1.0.4'
+    'caching-html-compiler',
+    'ecmascript',
+    'templating-tools',
+    'underscore',
+    'html-tools'
   ],
   npmDependencies : {
     'cheerio': '0.19.0',

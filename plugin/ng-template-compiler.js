@@ -1,148 +1,99 @@
-var $ = Npm.require('cheerio');
 var htmlMinifier = Npm.require('html-minifier');
-var uglify = Npm.require('uglify-js');
 
-var processFiles = function(files) {
-  var appFiles = [];
-  var otherFiles = [];
+Plugin.registerCompiler({
+  extensions: ['html'],
+  archMatching: 'web',
+  isTemplate: true
+}, () => new NgCachingHtmlCompiler("angular", scanHtmlForTags, compileTagsToStaticHtml));
 
-  files.forEach(function(file) {
-    var isClient = file.getDirname().split('/')[0] == 'client';
+// Same API as TutorialTools.compileTagsWithSpacebars, but instead of compiling
+// with Spacebars, it just returns static HTML
+function compileTagsToStaticHtml(tags) {
+  var handler = new StaticHtmlTagHandler();
 
-    if (isClient)
-      appFiles.push(file);
-    else
-      otherFiles.push(file);
+  tags.forEach((tag) => {
+    handler.addTagToResults(tag);
   });
 
-  appProcessor.process(appFiles);
-  defaultProcessor.process(otherFiles);
+  return handler.getResults();
 };
 
-var appProcessor = (function() {
-  var processFiles = function(files) {
-    var ngTemplates = [];
-
-    files.forEach(function(file) {
-      var $contents = $(file.getContentsAsString());
-      var isIndexTemplate = $contents.closest('head,body').length;
-      var isNgTemplate = $contents.closest(':not(head,body)').length;
-
-      if (isIndexTemplate && isNgTemplate)
-        throw Error(file.getBasename() + ' can\'t contain <head> or <body> tags with other tags in top level of template');
-      if (isIndexTemplate)
-        return processIndexTemplate(file);
-      if (isNgTemplate)
-        return ngTemplates.push(processNgTemplate(file));
-    });
-
-    if (ngTemplates.length)
-      drainNgTemplates(ngTemplates, files[0]);
-  };
-
-  var processIndexTemplate = function(file) {
-    var $contents = $(file.getContentsAsString());
-    var $head = $contents.closest('head');
-    var $body = $contents.closest('body');
-
-    if ($head.length)
-      file.addHtml({
-        data: minifyHtml($head.html()),
-        section: 'head'
-      });
-
-    if ($body.length)
-      file.addHtml({
-        data: minifyHtml($body.html()),
-        section: 'body'
-      });
-  };
-
-  var processNgTemplate = function() {
-    // Init variable in outer scope
-    file = arguments[0];
-    // Build the templateCache prefix using the package name
-    // In case the template is not from a package but the user's app there will be no prefix - client/views/my-template.ng.html
-    // In case the template came from a package the prefix will be - my-app_my-package_client/views/my-template.ng.html
-    var packageName = file.getPackageName() || '';
-    var packagePrefix = packageName && packageName.replace(':', '_') + '_';
-
-    // Dirname returned with forward slashes which fixes back slashes issue on windows' paths,
-    // see ticket: https://github.com/Urigo/angular-meteor/issues/169.
-    // Using JSON.stringify to escape quote characters.
-    return {
-      __path: JSON.stringify(packagePrefix + file.getDirname() + '/' + file.getBasename()),
-      __content: JSON.stringify(minifyHtml(file.getContentsAsString()))
+class StaticHtmlTagHandler {
+  constructor() {
+    this.results = {
+      head: '',
+      body: '',
+      js: '',
+      bodyAttrs: {}
     };
-  };
+  }
 
-  // Creates a module which stores all angular templates
-  var drainNgTemplates = function(ngTemplates, file) {
-    // Splicing for next drain
-    var storeTemplates = ngTemplates.map(function(template) {
-      return generateScript(storeTemplateStatement, template);
-    }).join('');
+  getResults() {
+    return this.results;
+  }
 
-    var templatesModule = generateScript(tempaltesModuleStatement, {
-      __body: storeTemplates
+  addTagToResults(tag) {
+    this.tag = tag;
+
+    // do we have 1 or more attributes?
+    const hasAttribs = ! _.isEmpty(this.tag.attribs);
+
+    if (this.tag.tagName === "head") {
+      if (hasAttribs) {
+        this.throwCompileError("Attributes on <head> not supported");
+      }
+
+      this.results.head += this.tag.contents;
+      return;
+    }
+
+
+    // <body> or <template>
+
+    try {
+      if (this.tag.tagName === "body") {
+        this.addBodyAttrs(this.tag.attribs);
+
+        // We may be one of many `<body>` tags.
+        this.results.body += this.tag.contents;
+      } else if (this.tag.tagName === 'template') {
+        var contents = minifyHtml(this.tag.contents);
+
+        this.results.js += wrapAngularTemplate(this.tag.attribs.id, contents);
+      }
+      else {
+        this.throwCompileError("Expected <head> or <body> tag", this.tag.tagStartIndex);
+      }
+    } catch (e) {
+      if (e.scanner) {
+        // The error came from Spacebars
+        this.throwCompileError(e.message, this.tag.contentsStartIndex + e.offset);
+      } else {
+        throw e;
+      }
+    }
+  }
+
+  addBodyAttrs(attrs) {
+    Object.keys(attrs).forEach((attr) => {
+      const val = attrs[attr];
+
+      // This check is for conflicting body attributes in the same file;
+      // we check across multiple files in caching-html-compiler using the
+      // attributes on results.bodyAttrs
+      if (this.results.bodyAttrs.hasOwnProperty(attr) && this.results.bodyAttrs[attr] !== val) {
+        this.throwCompileError(
+          `<body> declarations have conflicting values for the '${attr}' attribute.`);
+      }
+
+      this.results.bodyAttrs[attr] = val;
     });
+  }
 
-    file.addJavaScript({
-      path: 'templates.js',
-      data: templatesModule,
-      bare: true
-    });
-  };
-
-  /* Evaluation functions */
-
-  var tempaltesModuleStatement = function() {
-    angular.module('angular-meteor.templates', []).run(['$templateCache', function($templateCache) {
-      __body
-    }]);
-  };
-
-  var storeTemplateStatement = function() {
-    $templateCache.put(__path, __content);
-  };
-
-  return {
-    process: processFiles
-  };
-})();
-
-var defaultProcessor = (function() {
-  var processFiles = function(files) {
-    files.forEach(function(file) {
-      file.addAsset({
-        path: file.getPathInPackage(),
-        data: minifyHtml(file.getContentsAsString())
-      });
-    });
-  };
-
-  return {
-    process: processFiles
-  };
-})();
-
-var generateScript = function(fn, replacements) {
-  var script = Object.keys(replacements).reduce(function(script, match) {
-    return script.replace(new RegExp(match, 'g'), replacements[match]);
-  }, getFnBody(fn));
-
-  return minifyJs(script);
-};
-
-var getFnBody = function(fn) {
-  return fn.toString().match(/^function\s\(\)\s\{((?:.|\n)*)\}$/)[1];
-};
-
-var minifyJs = function(js) {
-  return uglify.minify(js, {
-    fromString: true
-  }).code;
-};
+  throwCompileError(message, overrideIndex) {
+    TemplatingTools.throwCompileError(this.tag, message, overrideIndex);
+  }
+}
 
 var minifyHtml = function(html) {
   // Just parse the html to make sure it is correct before minifying
@@ -157,10 +108,7 @@ var minifyHtml = function(html) {
   });
 };
 
-Plugin.registerCompiler({
-  extensions: ['html'],
-  filenames: []
-
-}, function() {
-  return { processFilesForTarget: processFiles };
-});
+function wrapAngularTemplate(id, contents) {
+  return "angular.module('angular-meteor').run(['$templateCache', function($templateCache) { $templateCache.put('" +
+    id + "','" + contents + "');}]);";
+}
