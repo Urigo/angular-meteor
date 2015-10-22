@@ -1,6 +1,6 @@
 
-/// <reference path="../../barbatus_angular2/typings/angular2.d.ts" />
-/// <reference path="../../barbatus_angular2/typings/meteor/meteor.d.ts" />
+/// <reference path="angular2.d.ts" />
+/// <reference path="meteor/meteor.d.ts" />
 
 declare module ngMeteor {
   class MeteorComponent {

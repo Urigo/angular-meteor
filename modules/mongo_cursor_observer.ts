@@ -7,31 +7,15 @@ import {EventEmitter} from 'angular2/angular2';
 import {CursorHandle} from './cursor_handle';
 
 export class AddChange {
-  index: number;
-  item: any;
-
-  constructor(index: number, item: any) {
-    this.index = index;
-    this.item = item;
-  }
+  constructor(public index: number, public item: any) {}
 }
 
 export class MoveChange {
-  fromIndex: number;
-  toIndex: number;
-
-  constructor(fromIndex: number, toIndex: number) {
-    this.fromIndex = fromIndex;
-    this.toIndex = toIndex;
-  }
+  constructor(public fromIndex: number, public toIndex: number) {}
 }
 
 export class RemoveChange {
-  index: number;
-
-  constructor(index: number) {
-    this.index = index;
-  }
+  constructor(public index: number) {}
 }
 
 export class MongoCursorObserver extends EventEmitter {

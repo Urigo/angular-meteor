@@ -1,19 +1,9 @@
 Package.describe({
   name: 'urigo:angular2-meteor',
-  version: '0.2.2_3',
+  version: '0.2.3',
   summary: 'Angular2 and Meteor integration',
   git: 'https://github.com/Urigo/Meteor-Angular2',
   documentation: 'README.md'
-});
-
-Package.registerBuildPlugin({
-  name: 'TSTypings',
-  sources: [
-    'plugin/typings_init.js'
-  ],
-  npmDependencies: {
-    'mkdirp': '0.5.0'
-  }
 });
 
 Package.onUse(function(api) {
@@ -24,11 +14,11 @@ Package.onUse(function(api) {
     'mongo@1.1.1',
     'tracker@1.0.8',
     'underscore@1.0.4',
-    'barbatus:angular2@0.6.3_2'
+    'barbatus:angular2@0.6.4'
   ]);
 
   api.imply([
-    'barbatus:angular2@0.6.3_2'
+    'barbatus:angular2@0.6.4'
   ]);
 
   api.addFiles([
@@ -36,7 +26,7 @@ Package.onUse(function(api) {
   ]);
 
   // Adds TS typings.
-  api.addAssets([
+  api.addFiles([
     'typings/angular2-meteor.d.ts'
   ], 'server');
 
