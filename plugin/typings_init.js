@@ -6,7 +6,7 @@ var typingsDir = path.resolve('./typings');
 var typingsFile = path.resolve(typingsDir, 'angular2-meteor.d.ts');
 
 if(canProceed() && !fs.existsSync(typingsDir)) {
-  mkdirp.sync(typingsDir);
+  mkdirp.sync(Plugin.convertToOsPath(typingsDir));
 }
 
 if (canProceed() && !fs.existsSync(typingsFile)) {
