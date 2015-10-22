@@ -7,7 +7,7 @@ Angular2 + Meteor integration.
 
 ### Install package:
 ````
-    mateor add urigo:angular2-meteor
+    meteor add urigo:angular2-meteor
 ````
 
 ### Import Angular2 into your app:
