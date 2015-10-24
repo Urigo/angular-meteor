@@ -48,7 +48,14 @@ Template.stepbarLiveDemo.helpers({
     if (self.id < 10)
       zeroToStep = '0';
 
-    return 'http://socially-step' + zeroToStep + self.id + '.meteor.com/';
+    var route = Router.current().route.path(this) || 'angular';
+
+    if (route.indexOf('ionic') !== -1) {
+      return 'http://dotansimha.github.io/ionic-meteor-whatsapp-clone-step-' + zeroToStep + self.id;
+    }
+    else {
+      return 'http://socially-step' + zeroToStep + self.id + '.meteor.com/';
+    }
   },
   next: function () {
     var self = this;
