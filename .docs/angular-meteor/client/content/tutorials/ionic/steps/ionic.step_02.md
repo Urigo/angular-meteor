@@ -22,9 +22,9 @@ Let’s define two data collections, one for our Chats and one for Messages insi
 
 Create a `lib` folder inside our `server` folder and add a `collections.js` file which initialize those collections:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="3.2"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="2.2"}}
 
-{{> DiffBox tutorialName="ionic-tutorial" step="3.3"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="2.3"}}
 
 > We place those collections inside a `lib` folder because Meteor loads the `lib` folder prior to other folders!
 
@@ -32,7 +32,7 @@ Now we have the collections defined, let’s add the dummy data to the collectio
 
 Create a file named `bootstrap.js` inside the `server` folder and place that initialization code inside:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="3.4"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="2.4"}}
 
 The code is pretty easy and self explanatory.
 
@@ -48,7 +48,7 @@ Another interesting thing about Meteor, is that it comes with `ES2015` support o
 
 So let’s use `ES2015` on this file as well:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="3.6"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="2.6"}}
 
 We our server is ready!
 All we have to do is to start it is to write `meteor` inside the `server` directory command line:
@@ -64,7 +64,7 @@ Navigate the command line into your project’s root folder and type:
 
 Update the new dependencies in the `index.html` file:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="3.8"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="2.8"}}
 
 Now let’s add the `angular-meteor` package to help us sync Meteor to our Angular app.
 
@@ -74,25 +74,25 @@ Type in the command line:
 
 Update the new dependencies in the `index.html` file:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="3.10"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="2.10"}}
 
 and add the `angular-meteor dependency to our Angular app:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="3.11"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="2.11"}}
 
 Now let’s create the same collections we defined on our server in our client app.
 
 Create a new file named `collections.js` under the `www/js` folder and app the collections there:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="3.12"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="2.12"}}
 
 And don’t forget to update the `index.html` with the new file:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="3.13"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="2.13"}}
 
 Now let’s bind those collections to Angular `ChatsCtrl` controller:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="3.14"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="2.14"}}
 
 Now our app with all its clients is synced with our server in real time!
 
@@ -104,7 +104,7 @@ See the chat is being deleted and updated in all the connected client in real ti
 
 Now let’s bind a specific chat to to server inside the `ChatDetailsCtrl` controller:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="3.15"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="2.15"}}
 
 > Notice this is exactly the same collections as the server. adding `meteor-client-side` to our project has created `Minimongo` on our client side. `Minimongo` is a client side cache with exactly the same API as the Mongo database.
 
@@ -116,9 +116,9 @@ Now let’s bind a specific chat to to server inside the `ChatDetailsCtrl` contr
 
 We can now remove the client side mock data service we used before:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="3.16"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="2.16"}}
 
-{{> DiffBox tutorialName="ionic-tutorial" step="3.17"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="2.17"}}
 
 You can download a ZIP file with the project at this point [here](https://github.com/idanwe/ionic-cli-meteor-whatsapp-tutorial/archive/3f74094749b2ccef9e03fb32903c676b6176d915.zip).
 

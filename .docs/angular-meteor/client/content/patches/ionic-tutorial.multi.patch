@@ -1,7 +1,7 @@
-From 4a259465875b7973a070a661cd9a8f1e951356ac Mon Sep 17 00:00:00 2001
+From a006ce53c583bd0d7804d1d407ee2d786c673df5 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 13:28:58 -0400
-Subject: [PATCH 001/123] Step 1.2: Run `ionic serve`
+Subject: [PATCH 001/123] Step 0.2: Run `ionic serve`
 
 ---
  ionic.project | 4 ++++
@@ -23,10 +23,10 @@ index 0000000..a12d8f9
 2.3.2 (Apple Git-55)
 
 
-From 3e41da29f3a2c148c5b183275206ddfe2aa1fdc1 Mon Sep 17 00:00:00 2001
+From fba38c22c7bc1fbeb2b6e6320c9ff6b419beb7c9 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 13:41:45 -0400
-Subject: [PATCH 002/123] Step 2.1: Add WhatsApp tabs to app tabs view
+Subject: [PATCH 002/123] Step 1.1: Add WhatsApp tabs to app tabs view
 
 ---
  www/templates/tabs.html | 29 ++++++++++++++---------------
@@ -80,10 +80,10 @@ index ed615d2..4dc6e3f 100644
 2.3.2 (Apple Git-55)
 
 
-From d4c98474666dc1d905b8360aa5565a92f7f64b1b Mon Sep 17 00:00:00 2001
+From c0fb1da3eb8c4dec0558bf1280adbde894210ebd Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 13:47:52 -0400
-Subject: [PATCH 003/123] Step 2.2: Change app's name from `starter` to
+Subject: [PATCH 003/123] Step 1.2: Change app's name from `starter` to
  `whatsapp`
 
 ---
@@ -143,10 +143,10 @@ index db975f2..452ea1e 100644
 2.3.2 (Apple Git-55)
 
 
-From abad322b87b0059f19a13dbe3b4f9e765f740d04 Mon Sep 17 00:00:00 2001
+From ac512e3e927b08ecf5f110e1be401b6c7e752cb2 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 13:50:28 -0400
-Subject: [PATCH 004/123] Step 2.3: Change Mocking data to be like the future
+Subject: [PATCH 004/123] Step 1.3: Change Mocking data to be like the future
  server data
 
  id -> _id
@@ -282,10 +282,10 @@ index 452ea1e..6b80884 100644
 2.3.2 (Apple Git-55)
 
 
-From 508671c84b287c84d7ba31f82723f32b1690e52e Mon Sep 17 00:00:00 2001
+From 8cc6a0993a8174a810dd9766674421984582a1c1 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 13:53:43 -0400
-Subject: [PATCH 005/123] Step 2.4: run `bower install moment --save`
+Subject: [PATCH 005/123] Step 1.4: run `bower install moment --save`
 
 ---
  bower.json | 3 +++
@@ -308,10 +308,10 @@ index 1f51613..fcab2a2 100644
 2.3.2 (Apple Git-55)
 
 
-From 47414df2c86b69502d1180674e0b822bbb07c8b9 Mon Sep 17 00:00:00 2001
+From a169d54b9a49305504d7098ce5de87d8ef5c9e5a Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 13:54:42 -0400
-Subject: [PATCH 006/123] Step 2.5: Add moment to index.html
+Subject: [PATCH 006/123] Step 1.5: Add moment to index.html
 
 ---
  www/index.html | 1 +
@@ -333,10 +333,10 @@ index 4c4a759..6ad7faf 100644
 2.3.2 (Apple Git-55)
 
 
-From 545800acc94eefbdeeed99941499a2be708acfe5 Mon Sep 17 00:00:00 2001
+From 49c4fa313a36ad3c6fb6b73c033c9f219ebff726 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 14:22:03 -0400
-Subject: [PATCH 007/123] Step 2.6: Change chats tab to reflect the new data
+Subject: [PATCH 007/123] Step 1.6: Change chats tab to reflect the new data
  format
 
 ---
@@ -377,10 +377,10 @@ index 21a6675..0662cbb 100644
 2.3.2 (Apple Git-55)
 
 
-From 2af8f6459cba40b83abe673e4f3cfe69fe7b0c75 Mon Sep 17 00:00:00 2001
+From f986bd51f0498076b9dadcea3c59b8d3d99b89db Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 14:23:46 -0400
-Subject: [PATCH 008/123] Step 2.7: Create a new calendar filter
+Subject: [PATCH 008/123] Step 1.7: Create a new calendar filter
 
 ---
  www/js/filters/calendar.filter.js | 16 ++++++++++++++++
@@ -414,10 +414,10 @@ index 0000000..5fcb0bb
 2.3.2 (Apple Git-55)
 
 
-From 15adc961eedd2f9fac68f23383af8a377e8b6a58 Mon Sep 17 00:00:00 2001
+From fdcfdc8d251c770899c5a8b488d8705016eb1c28 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 14:24:36 -0400
-Subject: [PATCH 009/123] Step 2.8: Add the new calendar filter to index.html
+Subject: [PATCH 009/123] Step 1.8: Add the new calendar filter to index.html
 
 ---
  www/index.html | 1 +
@@ -439,10 +439,10 @@ index 6ad7faf..1ed76b7 100644
 2.3.2 (Apple Git-55)
 
 
-From 49579711ed2d8be8379e212fe005f913b341633b Mon Sep 17 00:00:00 2001
+From 9f1e04f3e2555148a6f7ed91dd2ebb8210ca37ab Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 14:24:59 -0400
-Subject: [PATCH 010/123] Step 2.9: Use calendar filter in chats tab
+Subject: [PATCH 010/123] Step 1.9: Use calendar filter in chats tab
 
 ---
  www/templates/tab-chats.html | 2 +-
@@ -465,10 +465,10 @@ index 0662cbb..73be9e8 100644
 2.3.2 (Apple Git-55)
 
 
-From 5c88c072def40e69e362ac701aba3fe750c01d7e Mon Sep 17 00:00:00 2001
+From b04c83886449a6ec6cc86c62cbfd05defac48813 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 14:26:46 -0400
-Subject: [PATCH 011/123] Step 2.10: Change chat detail tab to new data format
+Subject: [PATCH 011/123] Step 1.10: Change chat detail tab to new data format
 
 ---
  www/templates/chat-detail.html | 6 +++---
@@ -496,10 +496,10 @@ index e776d02..8247c37 100644
 2.3.2 (Apple Git-55)
 
 
-From 5861536abd527e9670772f487950069013c74a5f Mon Sep 17 00:00:00 2001
+From 5cb1c31c838bf16596ddea3bf0476002c92a371a Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 14:28:37 -0400
-Subject: [PATCH 012/123] Step 2.11: Delete tab-account and tab-dash
+Subject: [PATCH 012/123] Step 1.11: Delete tab-account and tab-dash
 
 ---
  www/templates/tab-account.html |  9 ---------
@@ -561,10 +561,10 @@ index 3da1e92..0000000
 2.3.2 (Apple Git-55)
 
 
-From 4cf39eb92c4cf4b766d0462ba7898caff62a6a32 Mon Sep 17 00:00:00 2001
+From 7b8cec53bdab5642df8a805f6b40c37af78a13d5 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 14:34:42 -0400
-Subject: [PATCH 013/123] Step 2.12: Delete tab-account and tab-dash from
+Subject: [PATCH 013/123] Step 1.12: Delete tab-account and tab-dash from
  router
 
 ---
@@ -615,10 +615,10 @@ index 10b20c5..0e2333a 100644
 2.3.2 (Apple Git-55)
 
 
-From e292fffe76355127cb0b01192bbb467a7ceabc21 Mon Sep 17 00:00:00 2001
+From 0ed0134ee9db5f0df63d7a536dc910150956743f Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 14:37:30 -0400
-Subject: [PATCH 014/123] Step 2.13: Delete tab-account and tab-dash from
+Subject: [PATCH 014/123] Step 1.13: Delete tab-account and tab-dash from
  controllers
 
 ---
@@ -654,10 +654,10 @@ index 63eb698..1ff8c0f 100644
 2.3.2 (Apple Git-55)
 
 
-From 925e9f2ad5ad9e9ef39ec97a5da8dc33cbf5dadc Mon Sep 17 00:00:00 2001
+From de0ecfb7fd6b605d3d929132a7c369daca0b787f Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 14:40:09 -0400
-Subject: [PATCH 015/123] Step 2.14: Move chats ctrl to its own file
+Subject: [PATCH 015/123] Step 1.14: Move chats ctrl to its own file
 
 ---
  www/js/controllers.js                  | 15 ---------------
@@ -717,10 +717,10 @@ index 0000000..9c53cb2
 2.3.2 (Apple Git-55)
 
 
-From 6eb48bd4f74bfb0e00b439c228916bd13af6ab3c Mon Sep 17 00:00:00 2001
+From 7345b51326c38a99736153ce4fede0680ab2d7ac Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 14:41:14 -0400
-Subject: [PATCH 016/123] Step 2.15: Add chats controller to index.html
+Subject: [PATCH 016/123] Step 1.15: Add chats controller to index.html
 
 ---
  www/index.html | 1 +
@@ -742,10 +742,10 @@ index 1ed76b7..e2413e7 100644
 2.3.2 (Apple Git-55)
 
 
-From 2a203bd3518fcb7aceac7db35cb978e88725ec63 Mon Sep 17 00:00:00 2001
+From ab48c1f33a2fed068bf2781009fe90bf1190e192 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 14:44:04 -0400
-Subject: [PATCH 017/123] Step 2.16: Move chat detail to its own file and
+Subject: [PATCH 017/123] Step 1.16: Move chat detail to its own file and
  update index.html
 
 ---
@@ -816,10 +816,10 @@ index 0000000..d9c0996
 2.3.2 (Apple Git-55)
 
 
-From 649e88c94c1fcd3040c1cf475f7aa4431470ebfc Mon Sep 17 00:00:00 2001
+From 72d725c3300fdd4b983990f45ca7cac50a62555a Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 14:49:18 -0400
-Subject: [PATCH 018/123] Step 2.17: Move routes to its own file
+Subject: [PATCH 018/123] Step 1.17: Move routes to its own file
 
 ---
  www/js/app.js    | 41 -----------------------------------------
@@ -923,10 +923,10 @@ index 0000000..ccec0f8
 2.3.2 (Apple Git-55)
 
 
-From f206adebf359a67ef9422008f2fdfe6f6f2803de Mon Sep 17 00:00:00 2001
+From a45e9fe05444b640baa2386dd914b4f594c8b79d Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 14:49:41 -0400
-Subject: [PATCH 019/123] Step 2.18: Add routes.js to index.html
+Subject: [PATCH 019/123] Step 1.18: Add routes.js to index.html
 
 ---
  www/index.html | 1 +
@@ -948,10 +948,10 @@ index 97501ae..acf5051 100644
 2.3.2 (Apple Git-55)
 
 
-From d334defb20459e90a2e6d0935af5b2c25d2eea3a Mon Sep 17 00:00:00 2001
+From 3474bdb324da810d124f82fe06b9a29402300d2d Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 14:52:20 -0400
-Subject: [PATCH 020/123] Step 2.19: Move config.js to it's own file and update
+Subject: [PATCH 020/123] Step 1.19: Move config.js to it's own file and update
  index.html
 
 ---
@@ -1029,10 +1029,10 @@ index 0000000..04a9bfe
 2.3.2 (Apple Git-55)
 
 
-From e6a09a305fd2773e8f044d8a82207a08dc151e72 Mon Sep 17 00:00:00 2001
+From 188d3ed1b661deeeb61ac5a0df9d602723fdb0b9 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 14:52:59 -0400
-Subject: [PATCH 021/123] Step 2.20: Change app.js to John Papa style
+Subject: [PATCH 021/123] Step 1.20: Change app.js to John Papa style
 
 ---
  www/js/app.js | 13 +++++--------
@@ -1062,10 +1062,10 @@ index 2299510..49460a2 100644
 2.3.2 (Apple Git-55)
 
 
-From 074297d0e502c7fcc7255489ad01888035da6900 Mon Sep 17 00:00:00 2001
+From 4efbe345788b4427a5f27ccdbc5be32bc682634d Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 20:22:32 -0400
-Subject: [PATCH 022/123] Step 2.21: Run `ionic setup sass`
+Subject: [PATCH 022/123] Step 1.21: Run `ionic setup sass`
 
 ---
  ionic.project             |   10 +-
@@ -8832,10 +8832,10 @@ index fd51441..5de00ad 100644
 2.3.2 (Apple Git-55)
 
 
-From 72c4bf1a6a442f93076e705782f5f788524a02b9 Mon Sep 17 00:00:00 2001
+From e09fef1a54343e4ec1c324dacaa681651e252918 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 21:12:18 -0400
-Subject: [PATCH 023/123] Step 2.22: Adding chats.scss
+Subject: [PATCH 023/123] Step 1.22: Adding chats.scss
 
 ---
  scss/chats.scss | 9 +++++++++
@@ -8862,10 +8862,10 @@ index 0000000..7c1b8d5
 2.3.2 (Apple Git-55)
 
 
-From 1fe77c2544c59c0b79545ff28527370afd55b6a5 Mon Sep 17 00:00:00 2001
+From 61cc459f9d4fa706446d59df4315a6a40f0c9b6a Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 21:15:44 -0400
-Subject: [PATCH 024/123] Step 2.23: Adding @import to chats.scss
+Subject: [PATCH 024/123] Step 1.23: Adding @import to chats.scss
 
 ---
  scss/ionic.app.scss       | 2 ++
@@ -8911,10 +8911,10 @@ index 034b3ac..7a96f70 100644
 2.3.2 (Apple Git-55)
 
 
-From 400548e8acee1a1c64e79edbdc25ce7c2bc87faf Mon Sep 17 00:00:00 2001
+From 8318bfc0daf872fe9791dc2930cb06bf0021fe17 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 21:17:19 -0400
-Subject: [PATCH 025/123] Step 2.24: Remove unnecessary style.css
+Subject: [PATCH 025/123] Step 1.24: Remove unnecessary style.css
 
 ---
  www/css/style.css | 1 -
@@ -8932,10 +8932,10 @@ index fa22927..0000000
 2.3.2 (Apple Git-55)
 
 
-From 4190022878ec5fb77fe7b006a543069cf2a2987f Mon Sep 17 00:00:00 2001
+From d7d84048ad4fb06c33902a7db045ab770126a8d6 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 21:37:10 -0400
-Subject: [PATCH 026/123] Step 3.1: Run `meteor create server`
+Subject: [PATCH 026/123] Step 2.1: Run `meteor create server`
 
 ---
  server/.meteor/.finished-upgraders | 12 +++++++
@@ -9171,10 +9171,10 @@ index 0000000..4f8c65d
 2.3.2 (Apple Git-55)
 
 
-From a87a7e171f34eddfd6364bcd16b8908ff61ba47a Mon Sep 17 00:00:00 2001
+From 4e8e0f8ff37c930a538e61d8db570110d479525b Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 22:05:32 -0400
-Subject: [PATCH 027/123] Step 3.1: Remove example app
+Subject: [PATCH 027/123] Step 2.1: Remove example app
 
 ---
  server/server.css  |  1 -
@@ -9245,10 +9245,10 @@ index 4f8c65d..0000000
 2.3.2 (Apple Git-55)
 
 
-From 5583b45229f1bc124b1da42678ea9a59cfa66d7a Mon Sep 17 00:00:00 2001
+From bd500e0b9505eabc0f863154319b375a4942b799 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 22:09:42 -0400
-Subject: [PATCH 028/123] Step 3.2: Create the Chats Mongo Collection
+Subject: [PATCH 028/123] Step 2.2: Create the Chats Mongo Collection
 
 ---
  server/lib/collections.js | 1 +
@@ -9267,10 +9267,10 @@ index 0000000..155a46a
 2.3.2 (Apple Git-55)
 
 
-From c46847505d826795c19a3dbe9ad289d6c52d06a4 Mon Sep 17 00:00:00 2001
+From 2da44a66aeee29afcfd53b2fabda3029ffb1a907 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 22:13:27 -0400
-Subject: [PATCH 029/123] Step 3.3: Create the Messages Mongo Collection
+Subject: [PATCH 029/123] Step 2.3: Create the Messages Mongo Collection
 
 ---
  server/lib/collections.js | 3 ++-
@@ -9290,10 +9290,10 @@ index 155a46a..b08a877 100644
 2.3.2 (Apple Git-55)
 
 
-From 54b6443d95c6574e00a5b5eec4961cb46d5b1bbc Mon Sep 17 00:00:00 2001
+From c3a0b9598834640cd2da965099374d0dff92be29 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 22:14:29 -0400
-Subject: [PATCH 030/123] Step 3.4: Create Mock data
+Subject: [PATCH 030/123] Step 2.4: Create Mock data
 
 ---
  server/bootstrap.js | 65 +++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -9376,10 +9376,10 @@ index 0000000..d315541
 2.3.2 (Apple Git-55)
 
 
-From 4e61427e84cb95cddd705ab94abf6d0552cdae9b Mon Sep 17 00:00:00 2001
+From 322ac15a9784d23338b6cf836defa1f3c2a71eff Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 22:17:23 -0400
-Subject: [PATCH 031/123] Step 3.5: Run `meteor add momentjs:moment`
+Subject: [PATCH 031/123] Step 2.5: Run `meteor add momentjs:moment`
 
 ---
  server/.meteor/packages | 1 +
@@ -9411,10 +9411,10 @@ index 9807f55..95bd90d 100644
 2.3.2 (Apple Git-55)
 
 
-From b1d3bd651306f99263ea2a482b43f479702903b1 Mon Sep 17 00:00:00 2001
+From fc428f732f54b3112f3b78ccef6d539685ad0c17 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 22:21:55 -0400
-Subject: [PATCH 032/123] Step 3.6: Use ES2015 in mock data code
+Subject: [PATCH 032/123] Step 2.6: Use ES2015 in mock data code
 
 ---
  server/bootstrap.js | 21 +++++++++------------
@@ -9462,10 +9462,10 @@ index d315541..935a356 100644
 2.3.2 (Apple Git-55)
 
 
-From 04331823526296c21b13132de508b06237b259ac Mon Sep 17 00:00:00 2001
+From 9d5e53349f6bbe4658ceca490311f97151174b19 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 22:26:42 -0400
-Subject: [PATCH 033/123] Step 3.7: Run `bower install meteor-client-side
+Subject: [PATCH 033/123] Step 2.7: Run `bower install meteor-client-side
  --save`
 
 ---
@@ -9489,10 +9489,10 @@ index fcab2a2..e9c8a16 100644
 2.3.2 (Apple Git-55)
 
 
-From 96f6936f491be63629465d3ee1b59e80ac530233 Mon Sep 17 00:00:00 2001
+From 280f1123c43b31eb71a8155f3d437f3992763217 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 22:28:10 -0400
-Subject: [PATCH 034/123] Step 3.8: Update index.html with meteor-client-side
+Subject: [PATCH 034/123] Step 2.8: Update index.html with meteor-client-side
 
 ---
  www/index.html | 2 ++
@@ -9515,10 +9515,10 @@ index 5de00ad..8486293 100644
 2.3.2 (Apple Git-55)
 
 
-From 8c37e8bad53be8e26497191189e9a3f9ab033595 Mon Sep 17 00:00:00 2001
+From b8ba23d75d17f3d196f494efc7ebe5f83a023044 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 22:31:04 -0400
-Subject: [PATCH 035/123] Step 3.9: Run `bower install angular-meteor --save`
+Subject: [PATCH 035/123] Step 2.9: Run `bower install angular-meteor --save`
 
 ---
  bower.json | 3 ++-
@@ -9541,10 +9541,10 @@ index e9c8a16..0cdbe7f 100644
 2.3.2 (Apple Git-55)
 
 
-From 86e66791fd2d6c724c3dadb5c26e6c209b636181 Mon Sep 17 00:00:00 2001
+From 4fe6111363d00b1fcbca5b08ce05225ee9c274c4 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 22:32:06 -0400
-Subject: [PATCH 036/123] Step 3.10: Update index.html to include
+Subject: [PATCH 036/123] Step 2.10: Update index.html to include
  angular-meteor
 
 ---
@@ -9567,10 +9567,10 @@ index 8486293..ffb33ba 100644
 2.3.2 (Apple Git-55)
 
 
-From 0501593ae423060be80bd6d6576a2d84933f48dc Mon Sep 17 00:00:00 2001
+From 8dfe931e9d6e3b062fb0d01c905394dbadd38415 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 22:35:59 -0400
-Subject: [PATCH 037/123] Step 3.11: Add `angular-meteor` to Angular app
+Subject: [PATCH 037/123] Step 2.11: Add `angular-meteor` to Angular app
  dependencies
 
 ---
@@ -9594,10 +9594,10 @@ index 49460a2..03d7050 100644
 2.3.2 (Apple Git-55)
 
 
-From b806aec59a176ffb8b72be174da5edc79a888cf2 Mon Sep 17 00:00:00 2001
+From c42707832c8763e8c56516b87c6ec20ee61e421d Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 22:38:46 -0400
-Subject: [PATCH 038/123] Step 3.12: Add Chats and Messages Collections to
+Subject: [PATCH 038/123] Step 2.12: Add Chats and Messages Collections to
  client side
 
 ---
@@ -9618,10 +9618,10 @@ index 0000000..b08a877
 2.3.2 (Apple Git-55)
 
 
-From 58109b894d94a38fc216e9b10801d27f7e9d2d82 Mon Sep 17 00:00:00 2001
+From adb724f58e033e7e13dabf5d3cfcff759721034a Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 22:39:24 -0400
-Subject: [PATCH 039/123] Step 3.13: Update index.html to include client side
+Subject: [PATCH 039/123] Step 2.13: Update index.html to include client side
  collections
 
 ---
@@ -9644,10 +9644,10 @@ index ffb33ba..51ae6a9 100644
 2.3.2 (Apple Git-55)
 
 
-From 1330dc7e70ce901336d2b299f43276cd67a9e3ca Mon Sep 17 00:00:00 2001
+From 704379f11b115b4563bb40a8674813823492c95a Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 22:42:34 -0400
-Subject: [PATCH 040/123] Step 3.14: Bind the chats Angular array to Meteor
+Subject: [PATCH 040/123] Step 2.14: Bind the chats Angular array to Meteor
  Chats Collection
 
 ---
@@ -9681,10 +9681,10 @@ index 9c53cb2..95b659e 100644
 2.3.2 (Apple Git-55)
 
 
-From 9f81ec5accc37b5f2456c459b35a7be55fe05bb4 Mon Sep 17 00:00:00 2001
+From d47b63646a6161c89b3fe1c74bd629c002e706ce Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 22:43:27 -0400
-Subject: [PATCH 041/123] Step 3.15: Bind specific chat to Meteor server in
+Subject: [PATCH 041/123] Step 2.15: Bind specific chat to Meteor server in
  chat details
 
 ---
@@ -9709,10 +9709,10 @@ index d9c0996..9ef2c52 100644
 2.3.2 (Apple Git-55)
 
 
-From b5dd082cb69f4d87076118fb59c919255110d35f Mon Sep 17 00:00:00 2001
+From bb684e14e8ff361c37c6d928ee91a52ed240a54f Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 22:51:13 -0400
-Subject: [PATCH 042/123] Step 3.16: Remove Angular dependency in Mock data
+Subject: [PATCH 042/123] Step 2.16: Remove Angular dependency in Mock data
 
 ---
  www/js/app.js | 1 -
@@ -9734,10 +9734,10 @@ index 03d7050..0158869 100644
 2.3.2 (Apple Git-55)
 
 
-From 3f74094749b2ccef9e03fb32903c676b6176d915 Mon Sep 17 00:00:00 2001
+From 73fd7d2ed8c288191fc50624253fd560d60f9a62 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 22:52:05 -0400
-Subject: [PATCH 043/123] Step 3.17: Delete mock data file and update
+Subject: [PATCH 043/123] Step 2.17: Delete mock data file and update
  index.html
 
 ---
@@ -9841,10 +9841,10 @@ index 6b80884..0000000
 2.3.2 (Apple Git-55)
 
 
-From 5a07f61b1207550d22168d8352ee7aff48c4de6c Mon Sep 17 00:00:00 2001
+From 216207c1b27c9504efeab201f9e456e47dc2f498 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 23:11:04 -0400
-Subject: [PATCH 044/123] Step 4.1: Change chat details HTML to WhatsApp like
+Subject: [PATCH 044/123] Step 3.1: Change chat details HTML to WhatsApp like
  layout
 
 ---
@@ -9889,10 +9889,10 @@ index 8247c37..7f1fc43 100644
 2.3.2 (Apple Git-55)
 
 
-From 827169609c3107d1b30e8567118fc23b3b42a7e5 Mon Sep 17 00:00:00 2001
+From 3a8f2e16f6dd846dd4c4200b1f1b15bba0c29e5f Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 23:32:42 -0400
-Subject: [PATCH 045/123] Step 4.2: Add time format to chat details
+Subject: [PATCH 045/123] Step 3.2: Add time format to chat details
 
 ---
  www/templates/chat-detail.html | 2 +-
@@ -9915,10 +9915,10 @@ index 7f1fc43..bcb94f0 100644
 2.3.2 (Apple Git-55)
 
 
-From 8b2b186ceba848811f9214a9753ab6fd1cf18d48 Mon Sep 17 00:00:00 2001
+From 516144475a0d33d08265459479f6c611f966955d Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 23:22:28 -0400
-Subject: [PATCH 046/123] Step 4.3: Run `bower install angular-moment --save`
+Subject: [PATCH 046/123] Step 3.3: Run `bower install angular-moment --save`
 
 ---
  bower.json | 3 ++-
@@ -9941,10 +9941,10 @@ index 0cdbe7f..ff4e396 100644
 2.3.2 (Apple Git-55)
 
 
-From a5d9c13569b46d342100d340830b05b01fa51a48 Mon Sep 17 00:00:00 2001
+From d15e542229c9a48bfab46444ae1c509a5a1a7af2 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 23:23:14 -0400
-Subject: [PATCH 047/123] Step 4.4: Update index.html to include angular-moment
+Subject: [PATCH 047/123] Step 3.4: Update index.html to include angular-moment
 
 ---
  www/index.html | 1 +
@@ -9966,10 +9966,10 @@ index 0a84b62..3d4de36 100644
 2.3.2 (Apple Git-55)
 
 
-From 0bfa4c849a3f4607d657898c0059fd9f6b4995da Mon Sep 17 00:00:00 2001
+From ed633a2ff2c1b71bd090ddaeb1768f09e1f9a80b Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 23:25:02 -0400
-Subject: [PATCH 048/123] Step 4.5: Add angular-moment to Angular App
+Subject: [PATCH 048/123] Step 3.5: Add angular-moment to Angular App
  dependencies
 
 ---
@@ -9993,10 +9993,10 @@ index 0158869..7081284 100644
 2.3.2 (Apple Git-55)
 
 
-From b819e74657fa134093027bb00d1a110fe34e898b Mon Sep 17 00:00:00 2001
+From db402eb4bdbf4b0523484d48c00ca4447f58d6d6 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 23:38:07 -0400
-Subject: [PATCH 049/123] Step 4.6: Add styles to chat details
+Subject: [PATCH 049/123] Step 3.6: Add styles to chat details
 
 ---
  scss/chat-detail.scss | 102 ++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -10116,10 +10116,10 @@ index 0000000..eff8e15
 2.3.2 (Apple Git-55)
 
 
-From d05fe8816369bad59cf1ab855d7bee2d69ad4ad4 Mon Sep 17 00:00:00 2001
+From 513ac7195d1441c022cb737c39d211cd42bb6eb6 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 23:39:38 -0400
-Subject: [PATCH 050/123] Step 4.7: @import chat details styles to app styles
+Subject: [PATCH 050/123] Step 3.7: @import chat details styles to app styles
 
 ---
  scss/ionic.app.scss       |  1 +
@@ -10231,10 +10231,10 @@ index 7a96f70..8be3e46 100644
 2.3.2 (Apple Git-55)
 
 
-From 6bc38ead9ec5d18f38314f7ce6ff091ec903e2c1 Mon Sep 17 00:00:00 2001
+From fd9c80812e91df6d4b38dd34b34ed33c5ad386e8 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 23:42:28 -0400
-Subject: [PATCH 051/123] Step 4.8: Add images to chat details styles
+Subject: [PATCH 051/123] Step 3.8: Add images to chat details styles
 
 ---
  www/img/chat-background.jpg | Bin 0 -> 29275 bytes
@@ -10855,10 +10855,10 @@ HcmV?d00001
 2.3.2 (Apple Git-55)
 
 
-From d5a0512a0d95efb5ffd4f2348bcb123b21c06ca7 Mon Sep 17 00:00:00 2001
+From 81281b84b2bc9fcb893c76de3b6ff3dc84c7c608 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 23:47:15 -0400
-Subject: [PATCH 052/123] Step 4.9: Bind Messages to the Messages Meteor
+Subject: [PATCH 052/123] Step 3.9: Bind Messages to the Messages Meteor
  Collection
 
 ---
@@ -10883,10 +10883,10 @@ index 9ef2c52..d13083b 100644
 2.3.2 (Apple Git-55)
 
 
-From a1f88ecac12c56e187e7623fb90bddb1a7eca1c2 Mon Sep 17 00:00:00 2001
+From 6c50f5fba6fd14bcd2ae4819bb39e3a40c7850d7 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 23:52:43 -0400
-Subject: [PATCH 053/123] Step 4.10: Create mobile input directive
+Subject: [PATCH 053/123] Step 3.10: Create mobile input directive
 
 ---
  www/js/directives/input.directive.js | 54 ++++++++++++++++++++++++++++++++++++
@@ -10958,10 +10958,10 @@ index 0000000..4a5de09
 2.3.2 (Apple Git-55)
 
 
-From eaa1b9a4baa3fcaea2bd11a4bf1df37e773e9d9d Mon Sep 17 00:00:00 2001
+From 64bdfd11cbaed58dbb32c4f84a61be179d8c0c01 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 23:53:50 -0400
-Subject: [PATCH 054/123] Step 4.11: Add mobile input directive to index.html
+Subject: [PATCH 054/123] Step 3.11: Add mobile input directive to index.html
 
 ---
  www/index.html | 1 +
@@ -10983,10 +10983,10 @@ index 3d4de36..f8e3962 100644
 2.3.2 (Apple Git-55)
 
 
-From 187ec1b8a7a934d2e10ae16a8fa8d70f245fc7be Mon Sep 17 00:00:00 2001
+From 8f836d3f835dcdea777be1b5f4acf5c144a18248 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Tue, 6 Oct 2015 23:57:56 -0400
-Subject: [PATCH 055/123] Step 4.12: Add input html to chat details
+Subject: [PATCH 055/123] Step 3.12: Add input html to chat details
 
 ---
  www/templates/chat-detail.html | 12 ++++++++++++
@@ -11018,10 +11018,10 @@ index bcb94f0..50d4302 100644
 2.3.2 (Apple Git-55)
 
 
-From e8352ac3c07546cb36dddf22820c178fb7b71350 Mon Sep 17 00:00:00 2001
+From 459a234e5a2278141ab8942b13a9982af9ef1539 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Wed, 7 Oct 2015 00:07:19 -0400
-Subject: [PATCH 056/123] Step 4.13: Scroll chat details view according to
+Subject: [PATCH 056/123] Step 3.13: Scroll chat details view according to
  keyboard open or closed
 
 ---
@@ -11064,10 +11064,10 @@ index d13083b..7995ac3 100644
 2.3.2 (Apple Git-55)
 
 
-From b309638bb63355a47034b75a8194723333fba483 Mon Sep 17 00:00:00 2001
+From 33d5c526a11d5fdac2fb63804c33bfbfc2d79c7c Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Wed, 7 Oct 2015 00:15:36 -0400
-Subject: [PATCH 057/123] Step 4.14: Add send message event to chat details
+Subject: [PATCH 057/123] Step 3.14: Add send message event to chat details
  view
 
 ---
@@ -11104,10 +11104,10 @@ index 50d4302..9c2d916 100644
 2.3.2 (Apple Git-55)
 
 
-From 9dcead286bf03a1f4f60cae2d2e3901a3d7c1d4b Mon Sep 17 00:00:00 2001
+From f53af11c96c65aaa66dea77f9b474f8193d6ee85 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Wed, 7 Oct 2015 00:21:06 -0400
-Subject: [PATCH 058/123] Step 4.15: Add controller logic for sending message
+Subject: [PATCH 058/123] Step 3.15: Add controller logic for sending message
 
 ---
  www/js/controllers/chat-detail.controller.js | 18 +++++++++++++++++-
@@ -11157,10 +11157,10 @@ index 7995ac3..c86aaac 100644
 2.3.2 (Apple Git-55)
 
 
-From 9fdf2cfa4ddb18d3d9b1d7c8b40c4c0c64c7fe5c Mon Sep 17 00:00:00 2001
+From e464573bcfc57e3203998a95fc8f6e06d68e8147 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Wed, 7 Oct 2015 10:38:48 -0400
-Subject: [PATCH 059/123] Step 4.16: Create server method - newMessage
+Subject: [PATCH 059/123] Step 3.16: Create server method - newMessage
 
 ---
  server/methods.js | 14 ++++++++++++++
@@ -11192,10 +11192,10 @@ index 0000000..8ec89aa
 2.3.2 (Apple Git-55)
 
 
-From 518ebc16bca390f9214c78d65615ec97af3b9e77 Mon Sep 17 00:00:00 2001
+From 087adcaba7fce54b43adb3947ae3a0e9144bc5f0 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Wed, 7 Oct 2015 10:40:12 -0400
-Subject: [PATCH 060/123] Step 4.17: Run `meteor add check`
+Subject: [PATCH 060/123] Step 3.17: Run `meteor add check`
 
 ---
  server/.meteor/packages | 1 +
@@ -11214,10 +11214,10 @@ index 923d56b..78a699b 100644
 2.3.2 (Apple Git-55)
 
 
-From ac03e9e222d6a13582b63102d72cc9eb88f6c17d Mon Sep 17 00:00:00 2001
+From 1e69eca5bedcb5f0e8904b99f2b40f9fa00f40e5 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Wed, 7 Oct 2015 10:59:08 -0400
-Subject: [PATCH 061/123] Step 4.18: Adding Optimistic UI with client side stub
+Subject: [PATCH 061/123] Step 3.18: Adding Optimistic UI with client side stub
  for newMessage method
 
 ---
@@ -11250,10 +11250,10 @@ index 0000000..8ec89aa
 2.3.2 (Apple Git-55)
 
 
-From c5039ed596ff07bf9101630823d655ad4e5281c1 Mon Sep 17 00:00:00 2001
+From 26c66ed5044682078668756c187a4ec4e369f7c1 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Wed, 7 Oct 2015 10:59:56 -0400
-Subject: [PATCH 062/123] Step 4.19: Adding stubs to index.html
+Subject: [PATCH 062/123] Step 3.19: Adding stubs to index.html
 
 ---
  www/index.html | 1 +
@@ -11275,10 +11275,10 @@ index f8e3962..69771c6 100644
 2.3.2 (Apple Git-55)
 
 
-From 48d4efc172c59351dc354635f765a803353d1b0c Mon Sep 17 00:00:00 2001
+From c86f60ade7682979edb70aacf611b515230625b3 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Wed, 7 Oct 2015 21:11:18 -0400
-Subject: [PATCH 063/123] Step 5.1: Run `meteor add okland:accounts-phone`
+Subject: [PATCH 063/123] Step 4.1: Run `meteor add okland:accounts-phone`
 
 ---
  server/.meteor/packages |  1 +
@@ -11356,10 +11356,10 @@ index 95bd90d..9f08ba1 100644
 2.3.2 (Apple Git-55)
 
 
-From d3b4d12075431c3ca6801f6c8157ebb0479dabc2 Mon Sep 17 00:00:00 2001
+From 60795dfbf2a2f5e7e195b4b0c522c4b5372239a8 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Wed, 7 Oct 2015 21:13:07 -0400
-Subject: [PATCH 064/123] Step 5.2: Add demo app SMS settings to server
+Subject: [PATCH 064/123] Step 4.2: Add demo app SMS settings to server
 
 ---
  server/settings.json | 11 +++++++++++
@@ -11388,10 +11388,10 @@ index 0000000..f804c83
 2.3.2 (Apple Git-55)
 
 
-From ce6bb340099ce6b1451369314795b4f64a652f30 Mon Sep 17 00:00:00 2001
+From 8652ae16a50222ea1b82dc98aab789aab2b98ecc Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Wed, 7 Oct 2015 21:13:38 -0400
-Subject: [PATCH 065/123] Step 5.3: Use SMS settings
+Subject: [PATCH 065/123] Step 4.3: Use SMS settings
 
 ---
  server/sms.js | 11 +++++++++++
@@ -11420,10 +11420,10 @@ index 0000000..0f59c9e
 2.3.2 (Apple Git-55)
 
 
-From a9bc45f5f14d576bfd911bb8a24b32cc70e71ead Mon Sep 17 00:00:00 2001
+From 43ac5283ba31a2908d80c97d5cbd7516b8375ace Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Wed, 7 Oct 2015 21:18:20 -0400
-Subject: [PATCH 066/123] Step 5.4: Run `bower install accounts-phone --save`
+Subject: [PATCH 066/123] Step 4.4: Run `bower install accounts-phone --save`
 
 ---
  bower.json | 3 ++-
@@ -11446,10 +11446,10 @@ index ff4e396..98032aa 100644
 2.3.2 (Apple Git-55)
 
 
-From 44746e6780d9d2f21d102b5f88604d39608d3491 Mon Sep 17 00:00:00 2001
+From 6368061fcc9d9575924c418dc51b829f78d218f0 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Thu, 8 Oct 2015 20:44:08 -0400
-Subject: [PATCH 067/123] Step 5.5: Update index.html
+Subject: [PATCH 067/123] Step 4.5: Update index.html
 
 ---
  www/index.html | 2 ++
@@ -11472,10 +11472,10 @@ index 69771c6..16d9c77 100644
 2.3.2 (Apple Git-55)
 
 
-From 24045b439ca5093de896e2b613aa11bf92420c22 Mon Sep 17 00:00:00 2001
+From dd188cafed73daaa8075f58689f9061993808846 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Thu, 8 Oct 2015 21:20:53 -0400
-Subject: [PATCH 068/123] Step 5.6: Add Login state
+Subject: [PATCH 068/123] Step 4.6: Add Login state
 
 ---
  www/js/routes.js | 6 ++++++
@@ -11502,10 +11502,10 @@ index ccec0f8..ed5e93d 100644
 2.3.2 (Apple Git-55)
 
 
-From 497f306abfefe696834e8be4c486016564791365 Mon Sep 17 00:00:00 2001
+From 05dfb1817f5a25999be43c1002789b9673c0d3ea Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Thu, 8 Oct 2015 21:27:43 -0400
-Subject: [PATCH 069/123] Step 5.7: Add Login view
+Subject: [PATCH 069/123] Step 4.7: Add Login view
 
 ---
  www/templates/login.html | 21 +++++++++++++++++++++
@@ -11544,10 +11544,10 @@ index 0000000..5d90b80
 2.3.2 (Apple Git-55)
 
 
-From 7c5fa97653ec66e7c8eab3249e9bde1aa223a5a1 Mon Sep 17 00:00:00 2001
+From a791501cdbd02fa81c9e42d652b6ff5ffd076642 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Thu, 8 Oct 2015 21:42:30 -0400
-Subject: [PATCH 070/123] Step 5.8: Add Login controller
+Subject: [PATCH 070/123] Step 4.8: Add Login controller
 
 ---
  www/js/controllers/login.controller.js | 57 ++++++++++++++++++++++++++++++++++
@@ -11622,10 +11622,10 @@ index 0000000..8250e98
 2.3.2 (Apple Git-55)
 
 
-From 13c824ec7b32974783864e5b17a8ce8d8e0f74c8 Mon Sep 17 00:00:00 2001
+From af9cc2dd5129c880955f62f9b15288e8bb6daf37 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Thu, 8 Oct 2015 21:51:28 -0400
-Subject: [PATCH 071/123] Step 5.9: Add Login controller to index.html
+Subject: [PATCH 071/123] Step 4.9: Add Login controller to index.html
 
 ---
  www/index.html | 1 +
@@ -11647,10 +11647,10 @@ index 16d9c77..ba453bc 100644
 2.3.2 (Apple Git-55)
 
 
-From 263955cc1a78af62be57e2d4a6f452944247d314 Mon Sep 17 00:00:00 2001
+From 72cfb32824a779dae8f705c9cd8942da24bcc5b2 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Thu, 8 Oct 2015 22:00:20 -0400
-Subject: [PATCH 072/123] Step 5.10: Add Confirmation routes
+Subject: [PATCH 072/123] Step 4.10: Add Confirmation routes
 
 ---
  www/js/routes.js | 6 ++++++
@@ -11677,10 +11677,10 @@ index ed5e93d..4b20584 100644
 2.3.2 (Apple Git-55)
 
 
-From 0b8985730f8fca1a06927910a3ab22289b0738e4 Mon Sep 17 00:00:00 2001
+From b2b624ddf843aeacebd91eac37d284221374b967 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Thu, 8 Oct 2015 22:09:21 -0400
-Subject: [PATCH 073/123] Step 5.11: Add Confirmation view
+Subject: [PATCH 073/123] Step 4.11: Add Confirmation view
 
 ---
  www/templates/confirmation.html | 24 ++++++++++++++++++++++++
@@ -11722,10 +11722,10 @@ index 0000000..05765ea
 2.3.2 (Apple Git-55)
 
 
-From 215dd7c2fc30b0089e2c5d2a467dbeed500a6437 Mon Sep 17 00:00:00 2001
+From 439572bb7613131f018420722de237cd653fd6dd Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Thu, 8 Oct 2015 22:11:55 -0400
-Subject: [PATCH 074/123] Step 5.12: Add Confirmation controller
+Subject: [PATCH 074/123] Step 4.12: Add Confirmation controller
 
 ---
  www/js/controllers/confirmation.controller.js | 37 +++++++++++++++++++++++++++
@@ -11780,10 +11780,10 @@ index 0000000..0c704f3
 2.3.2 (Apple Git-55)
 
 
-From 643e9924f5af3a33e043158b579652681263fe6d Mon Sep 17 00:00:00 2001
+From d9bac1f0b31e1bf54cef295ae36c75f1b65cbaba Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Thu, 8 Oct 2015 22:12:40 -0400
-Subject: [PATCH 075/123] Step 5.13: Add Confirmation controller to index.html
+Subject: [PATCH 075/123] Step 4.13: Add Confirmation controller to index.html
 
 ---
  www/index.html | 1 +
@@ -11805,10 +11805,10 @@ index ba453bc..012a1de 100644
 2.3.2 (Apple Git-55)
 
 
-From d17d6cd43e0e900b23750800fcc3353686b35662 Mon Sep 17 00:00:00 2001
+From d719589f07b1e85491654f143a1e6086eee7fa5e Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Thu, 8 Oct 2015 22:18:42 -0400
-Subject: [PATCH 076/123] Step 5.14: Add Profile state
+Subject: [PATCH 076/123] Step 4.14: Add Profile state
 
 ---
  www/js/routes.js | 6 ++++++
@@ -11835,10 +11835,10 @@ index 4b20584..2986c1a 100644
 2.3.2 (Apple Git-55)
 
 
-From 35697f88c7ea84e4f092b7576145a396616fa29e Mon Sep 17 00:00:00 2001
+From 6e82a8b250735cf722a05211c6fca1a03796727f Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Thu, 8 Oct 2015 22:20:33 -0400
-Subject: [PATCH 077/123] Step 5.15: Add Profile view
+Subject: [PATCH 077/123] Step 4.15: Add Profile view
 
 ---
  www/templates/profile.html | 27 +++++++++++++++++++++++++++
@@ -11882,10 +11882,10 @@ index 0000000..c707ac2
 2.3.2 (Apple Git-55)
 
 
-From 591248a51d0a53a6926ecbc4f52347bbfdd4c6d1 Mon Sep 17 00:00:00 2001
+From 35b16ec6c5536216aa150c14704ac85984eef7f3 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Thu, 8 Oct 2015 22:22:16 -0400
-Subject: [PATCH 078/123] Step 5.16: Add Profile controller
+Subject: [PATCH 078/123] Step 4.16: Add Profile controller
 
 ---
  www/js/controllers/profile.controller.js | 37 ++++++++++++++++++++++++++++++++
@@ -11940,10 +11940,10 @@ index 0000000..0047985
 2.3.2 (Apple Git-55)
 
 
-From 4f177a1742afe863ab380c4765ed602c4cad66ad Mon Sep 17 00:00:00 2001
+From fc61ffebb6405d3128f1fe58387abea328de3591 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Thu, 8 Oct 2015 22:23:12 -0400
-Subject: [PATCH 079/123] Step 5.17: Add Profile controller to index.html
+Subject: [PATCH 079/123] Step 4.17: Add Profile controller to index.html
 
 ---
  www/index.html | 1 +
@@ -11965,10 +11965,10 @@ index 012a1de..5b78286 100644
 2.3.2 (Apple Git-55)
 
 
-From b9060336d544573a6e7cc90f0868e7c691f59b92 Mon Sep 17 00:00:00 2001
+From 73ebb9ee416cde42882367d8812950ffd1e6e96a Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Thu, 8 Oct 2015 22:29:58 -0400
-Subject: [PATCH 080/123] Step 5.18: Add updateName methods to server
+Subject: [PATCH 080/123] Step 4.18: Add updateName methods to server
 
 ---
  server/methods.js | 9 +++++++++
@@ -11998,10 +11998,10 @@ index 8ec89aa..18c2b61 100644
 2.3.2 (Apple Git-55)
 
 
-From 736008f18f4fe0ce4ed80b76181d7b151bfba75c Mon Sep 17 00:00:00 2001
+From 6a3aa31f427ee9cb7ed1bb242dbc30e3973bc9d9 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Thu, 8 Oct 2015 22:34:06 -0400
-Subject: [PATCH 081/123] Step 5.19: Add logic styles
+Subject: [PATCH 081/123] Step 4.19: Add logic styles
 
 ---
  scss/login.scss | 6 ++++++
@@ -12025,10 +12025,10 @@ index 0000000..a6c2a96
 2.3.2 (Apple Git-55)
 
 
-From 0233a7a71b067b9f05a740f4216ff70abe4344d6 Mon Sep 17 00:00:00 2001
+From d26dd3084214654c5b20c4da003412523bb490b9 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Thu, 8 Oct 2015 22:34:45 -0400
-Subject: [PATCH 082/123] Step 5.20: Import Login styles
+Subject: [PATCH 082/123] Step 4.20: Import Login styles
 
 ---
  scss/ionic.app.scss | 2 ++
@@ -12051,10 +12051,10 @@ index b37fd0d..8f2c4e0 100644
 2.3.2 (Apple Git-55)
 
 
-From 77281404af5f7956a0177d74d8ef43a2b98ff2eb Mon Sep 17 00:00:00 2001
+From 82813bf1873c75675cab3f0b0ef19384974b7239 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Thu, 8 Oct 2015 22:36:19 -0400
-Subject: [PATCH 083/123] Step 5.21: Generated styles
+Subject: [PATCH 083/123] Step 4.21: Generated styles
 
 ---
  www/css/ionic.app.css     | 4 ++++
@@ -12089,10 +12089,10 @@ index 8be3e46..96d0158 100644
 2.3.2 (Apple Git-55)
 
 
-From 9215187d8ced565675550d792f68402a6880c385 Mon Sep 17 00:00:00 2001
+From 68a4cac61df8be06ac3852d72a7dfbf7ccc7b426 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Thu, 8 Oct 2015 22:37:04 -0400
-Subject: [PATCH 084/123] Step 5.22: Add Profile style
+Subject: [PATCH 084/123] Step 4.22: Add Profile style
 
 ---
  scss/profile.scss | 40 ++++++++++++++++++++++++++++++++++++++++
@@ -12150,10 +12150,10 @@ index 0000000..ef4c6cc
 2.3.2 (Apple Git-55)
 
 
-From 5cbd1f04b32215a82238cb1eb48cf23c7c45a2d4 Mon Sep 17 00:00:00 2001
+From a36eb0e92b5d82a3bc77bc9082b1af7cfeac2fef Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Thu, 8 Oct 2015 22:38:26 -0400
-Subject: [PATCH 085/123] Step 5.23: Import Profile styles
+Subject: [PATCH 085/123] Step 4.23: Import Profile styles
 
 ---
  scss/ionic.app.scss       |  1 +
@@ -12227,10 +12227,10 @@ index 96d0158..a3092ed 100644
 2.3.2 (Apple Git-55)
 
 
-From f5ab295333725db6305ed750dd5c26004895dd98 Mon Sep 17 00:00:00 2001
+From 6b8af9eb763fa977cc6b6626df1d94e6fcd54670 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Thu, 8 Oct 2015 23:26:12 -0400
-Subject: [PATCH 086/123] Step 5.24: requireUser for profile and chats pages
+Subject: [PATCH 086/123] Step 4.24: requireUser for profile and chats pages
 
 ---
  www/js/routes.js | 14 ++++++++++++--
@@ -12270,10 +12270,10 @@ index 2986c1a..e39deb3 100644
 2.3.2 (Apple Git-55)
 
 
-From 15d4ea498c4e58897c6f78603a30550bd6185286 Mon Sep 17 00:00:00 2001
+From 1efc22cb5fe0b311bf50ae1613412ebd881b5a87 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Thu, 8 Oct 2015 23:30:59 -0400
-Subject: [PATCH 087/123] Step 5.25: Redirect to Login in case of unlogged user
+Subject: [PATCH 087/123] Step 4.25: Redirect to Login in case of unlogged user
 
 ---
  www/js/auth.js | 13 +++++++++++++
@@ -12303,10 +12303,10 @@ index 0000000..0f8b76b
 2.3.2 (Apple Git-55)
 
 
-From 13dd8b3aaa600e051101e08ef63500fecd184a23 Mon Sep 17 00:00:00 2001
+From 76bf214d5c19fb260570a1ee849e4bac4c8b4d0c Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Thu, 8 Oct 2015 23:38:24 -0400
-Subject: [PATCH 088/123] Step 5.26: Add auth.js to index.html
+Subject: [PATCH 088/123] Step 4.26: Add auth.js to index.html
 
 ---
  www/index.html | 1 +
@@ -12328,10 +12328,10 @@ index 5b78286..0741a65 100644
 2.3.2 (Apple Git-55)
 
 
-From 680c03ac36927426b513195375ecfc1be60384cf Mon Sep 17 00:00:00 2001
+From a7d6f2f34baa3fddb03d6f02d89b4ca12957716a Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Thu, 8 Oct 2015 23:43:40 -0400
-Subject: [PATCH 089/123] Step 5.27: Secure server methods
+Subject: [PATCH 089/123] Step 4.27: Secure server methods
 
 ---
  server/methods.js | 10 ++++++++++
@@ -12368,10 +12368,10 @@ index 18c2b61..2ed4207 100644
 2.3.2 (Apple Git-55)
 
 
-From 24fc3b959358b5a106cab2bb9400c219ade68a6a Mon Sep 17 00:00:00 2001
+From 1dccf96302a2c595ce14f6d3821d306b520a8f48 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Thu, 8 Oct 2015 23:48:39 -0400
-Subject: [PATCH 090/123] Step 5.28: Add user id to message
+Subject: [PATCH 090/123] Step 4.28: Add user id to message
 
 ---
  server/methods.js | 1 +
@@ -12393,10 +12393,10 @@ index 2ed4207..2c41147 100644
 2.3.2 (Apple Git-55)
 
 
-From f669abb51f29cd8f241736421e6952b787adf2d5 Mon Sep 17 00:00:00 2001
+From 99dd399fcd1ff9b8702083ba0d3865f20babfef9 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Thu, 8 Oct 2015 23:49:56 -0400
-Subject: [PATCH 091/123] Step 5.29: Add user id to message in Optimistic UI as
+Subject: [PATCH 091/123] Step 4.29: Add user id to message in Optimistic UI as
  well
 
 ---
@@ -12419,10 +12419,10 @@ index 8ec89aa..78abafd 100644
 2.3.2 (Apple Git-55)
 
 
-From 42d84c1b5eb5c48b828aa133a210c0cfeacb3d4b Mon Sep 17 00:00:00 2001
+From da9488e63edbe13be76751588854a8a3f8783741 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Thu, 8 Oct 2015 23:52:46 -0400
-Subject: [PATCH 092/123] Step 5.30: Distinguishing my message from the other
+Subject: [PATCH 092/123] Step 4.30: Distinguishing my message from the other
  messages
 
 ---
@@ -12446,10 +12446,10 @@ index 9c2d916..ee00111 100644
 2.3.2 (Apple Git-55)
 
 
-From a5ced66cff2795f9e296fc12beee6c6b795e428b Mon Sep 17 00:00:00 2001
+From 28ee587e9e742f58dcbb430ebd81e10262d7407e Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Fri, 9 Oct 2015 00:02:59 -0400
-Subject: [PATCH 093/123] Step 5.31: Add settings view with logout button
+Subject: [PATCH 093/123] Step 4.31: Add settings view with logout button
 
 ---
  www/templates/tab-settings.html | 7 +++++++
@@ -12474,10 +12474,10 @@ index 0000000..6e502c5
 2.3.2 (Apple Git-55)
 
 
-From f6156a63931aca02188973a379cf8be2f43f3dd7 Mon Sep 17 00:00:00 2001
+From 921d155641f91d0e6e865b838fcd7ba87be147de Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Fri, 9 Oct 2015 00:04:07 -0400
-Subject: [PATCH 094/123] Step 5.32: Add settings route
+Subject: [PATCH 094/123] Step 4.32: Add settings route
 
 ---
  www/js/routes.js | 10 ++++++++++
@@ -12508,10 +12508,10 @@ index e39deb3..86bb416 100644
 2.3.2 (Apple Git-55)
 
 
-From 06541a85da07c23088cc8252dab7da6d06bde88e Mon Sep 17 00:00:00 2001
+From e2ddb983c8f09d7aeb5656b0162dfe4fcc7d491f Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Fri, 9 Oct 2015 00:05:16 -0400
-Subject: [PATCH 095/123] Step 5.33: Add settings controller
+Subject: [PATCH 095/123] Step 4.33: Add settings controller
 
 ---
  www/js/controllers/settings.controller.js | 15 +++++++++++++++
@@ -12544,10 +12544,10 @@ index 0000000..a95f994
 2.3.2 (Apple Git-55)
 
 
-From 0e5aae8c82741c6e18b2fca9d864edb28a3c8e3f Mon Sep 17 00:00:00 2001
+From a82018889a2dde2f98561942938d908588d847f1 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Fri, 9 Oct 2015 00:06:16 -0400
-Subject: [PATCH 096/123] Step 5.34: Add settings controller to index.html
+Subject: [PATCH 096/123] Step 4.34: Add settings controller to index.html
 
 ---
  www/index.html | 1 +
@@ -12569,10 +12569,10 @@ index 0741a65..93caee0 100644
 2.3.2 (Apple Git-55)
 
 
-From c0a0066672658a13488e9958ceec309f548d9be6 Mon Sep 17 00:00:00 2001
+From 689c31a3ccb0fef646ddc7f381e58cfc92666f35 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Fri, 9 Oct 2015 16:47:18 -0400
-Subject: [PATCH 097/123] Step 6.1: Add create new chat button
+Subject: [PATCH 097/123] Step 5.1: Add create new chat button
 
 ---
  www/templates/tab-chats.html | 6 ++++++
@@ -12597,10 +12597,10 @@ index 73be9e8..dc7c4d4 100644
 2.3.2 (Apple Git-55)
 
 
-From 8fe8e8b8503490c59bc9a883648bb662ae34476e Mon Sep 17 00:00:00 2001
+From 01206ec8910b9a37484122074cc9c49cec60a844 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Fri, 9 Oct 2015 16:51:00 -0400
-Subject: [PATCH 098/123] Step 6.2: Add create new chat function to chats
+Subject: [PATCH 098/123] Step 5.2: Add create new chat function to chats
  controller
 
 ---
@@ -12645,10 +12645,10 @@ index 95b659e..eef9816 100644
 2.3.2 (Apple Git-55)
 
 
-From 1016746cf867c289a6ff561736422f3a9fee1996 Mon Sep 17 00:00:00 2001
+From 3d72f28b078486ed48b8ca29ef08fe3dda95c50e Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Fri, 9 Oct 2015 21:07:36 -0400
-Subject: [PATCH 099/123] Step 6.3: New chat modal html
+Subject: [PATCH 099/123] Step 5.3: New chat modal html
 
 ---
  www/templates/new-chat.html | 19 +++++++++++++++++++
@@ -12685,10 +12685,10 @@ index 0000000..dee6b5c
 2.3.2 (Apple Git-55)
 
 
-From f21d7e43381328fc6540977cbaf792d63ff3d14a Mon Sep 17 00:00:00 2001
+From ca5db7ed6ed37ff0fc9cd35170d288529bf6426b Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Fri, 9 Oct 2015 21:11:12 -0400
-Subject: [PATCH 100/123] Step 6.4: Add new chat controller with Users list who
+Subject: [PATCH 100/123] Step 5.4: Add new chat controller with Users list who
  are not current user
 
 ---
@@ -12716,10 +12716,10 @@ index 0000000..8efe382
 2.3.2 (Apple Git-55)
 
 
-From 30e645d87cee0b2fb4a4df1edc93805fd6e4198d Mon Sep 17 00:00:00 2001
+From efeeb74f894edafa1ba590bc12df77fdc6b3dfdc Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Fri, 9 Oct 2015 21:11:40 -0400
-Subject: [PATCH 101/123] Step 6.5: Add create new chat controller logic
+Subject: [PATCH 101/123] Step 5.5: Add create new chat controller logic
 
 ---
  www/js/controllers/new-chat.controller.js | 25 ++++++++++++++++++++++++-
@@ -12767,10 +12767,10 @@ index 8efe382..dbc87f8 100644
 2.3.2 (Apple Git-55)
 
 
-From 9f7664015978dbc001157b92ca66ed48e5573734 Mon Sep 17 00:00:00 2001
+From f902b4d18c44fd790facedac0fcec33400f799fd Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Fri, 9 Oct 2015 21:12:33 -0400
-Subject: [PATCH 102/123] Step 6.6: Add new chat controller to index.html
+Subject: [PATCH 102/123] Step 5.6: Add new chat controller to index.html
 
 ---
  www/index.html | 1 +
@@ -12792,10 +12792,10 @@ index 93caee0..e00b0a9 100644
 2.3.2 (Apple Git-55)
 
 
-From 57c70c156927a3da1817cee1cdd6997c8e8555ea Mon Sep 17 00:00:00 2001
+From af5b5be5fdf08c7ed7ea4e9c9e7b9ac93a75b943 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Fri, 9 Oct 2015 21:16:01 -0400
-Subject: [PATCH 103/123] Step 6.7: Add new chat method to server
+Subject: [PATCH 103/123] Step 5.7: Add new chat method to server
 
 ---
  server/methods.js | 22 ++++++++++++++++++++++
@@ -12836,10 +12836,10 @@ index 2c41147..d908266 100644
 2.3.2 (Apple Git-55)
 
 
-From 34c87161b6f1502bac78d270276afddeb2d30159 Mon Sep 17 00:00:00 2001
+From 1d5423f1701b0b9dd8524606a1a91732da3416a9 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Fri, 9 Oct 2015 21:20:37 -0400
-Subject: [PATCH 104/123] Step 6.8: Add new chat Optimistic UI method
+Subject: [PATCH 104/123] Step 5.8: Add new chat Optimistic UI method
 
 ---
  www/js/stubs.js | 22 ++++++++++++++++++++++
@@ -12880,10 +12880,10 @@ index 78abafd..8e9f84d 100644
 2.3.2 (Apple Git-55)
 
 
-From 946136be7ce5209772b69885b6f5329b86dfce31 Mon Sep 17 00:00:00 2001
+From cc74bbdcd63826a7e76007cff36038951ba95bd9 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Fri, 9 Oct 2015 21:26:19 -0400
-Subject: [PATCH 105/123] Step 6.9: Use chat name filter in chats list
+Subject: [PATCH 105/123] Step 5.9: Use chat name filter in chats list
 
 ---
  www/templates/tab-chats.html | 2 +-
@@ -12906,10 +12906,10 @@ index dc7c4d4..e86ad62 100644
 2.3.2 (Apple Git-55)
 
 
-From 9b8092c5a72ee0e96192994021c6898725cb4d70 Mon Sep 17 00:00:00 2001
+From b282f994bc75c0c237c1afb8c47a4e7d98e16377 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Fri, 9 Oct 2015 21:27:00 -0400
-Subject: [PATCH 106/123] Step 6.10: Use chat name filter in chat-details
+Subject: [PATCH 106/123] Step 5.10: Use chat name filter in chat-details
 
 ---
  www/templates/chat-detail.html | 2 +-
@@ -12929,10 +12929,10 @@ index ee00111..3b9b85e 100644
 2.3.2 (Apple Git-55)
 
 
-From 8ddaaf369b8963de61d5a44016af3956fb8dfd10 Mon Sep 17 00:00:00 2001
+From 2479458e5d0eebf075501c22adae3f347055c2ff Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Fri, 9 Oct 2015 21:28:35 -0400
-Subject: [PATCH 107/123] Step 6.11: Create chat name filter
+Subject: [PATCH 107/123] Step 5.11: Create chat name filter
 
 ---
  www/js/filters/chat-name.filter.js | 15 +++++++++++++++
@@ -12965,10 +12965,10 @@ index 0000000..e0abe1d
 2.3.2 (Apple Git-55)
 
 
-From 8101352f3d5f065ecfbebdac8bdf0e4ec943b681 Mon Sep 17 00:00:00 2001
+From 4146309d57ccd99897f256db93f0d8533261af5a Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Fri, 9 Oct 2015 21:29:57 -0400
-Subject: [PATCH 108/123] Step 6.12: Add chat name filter to index.html
+Subject: [PATCH 108/123] Step 5.12: Add chat name filter to index.html
 
 ---
  www/index.html | 1 +
@@ -12990,10 +12990,10 @@ index e00b0a9..5e46a0a 100644
 2.3.2 (Apple Git-55)
 
 
-From 1f8a32ceac6fe3737b05ecd5df5aa06de0ab1ceb Mon Sep 17 00:00:00 2001
+From 03af5e60ba502cc8cf827db775662b288fd9dc2a Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Fri, 9 Oct 2015 21:31:40 -0400
-Subject: [PATCH 109/123] Step 6.13: Use chat picture filter in chats view
+Subject: [PATCH 109/123] Step 5.13: Use chat picture filter in chats view
 
 ---
  www/templates/tab-chats.html | 2 +-
@@ -13016,10 +13016,10 @@ index e86ad62..d53c4e7 100644
 2.3.2 (Apple Git-55)
 
 
-From 1cf1b4f9cf7d93f1b254b9d33aa376aaa70a7774 Mon Sep 17 00:00:00 2001
+From 007856a91ca923e30de221144866b82e29353701 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Fri, 9 Oct 2015 21:33:08 -0400
-Subject: [PATCH 110/123] Step 6.14: Use chat picture filter in chat details
+Subject: [PATCH 110/123] Step 5.14: Use chat picture filter in chat details
  view
 
 ---
@@ -13042,10 +13042,10 @@ index 3b9b85e..6c32c60 100644
 2.3.2 (Apple Git-55)
 
 
-From d64066ad8a57f5dc5cbba609442b75bde91456ff Mon Sep 17 00:00:00 2001
+From 48e19000afea20093b34849dc58fa75a79f5968b Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Fri, 9 Oct 2015 21:33:55 -0400
-Subject: [PATCH 111/123] Step 6.15: Create chat picture filter
+Subject: [PATCH 111/123] Step 5.15: Create chat picture filter
 
 ---
  www/js/filters/chat-picture.filter.js | 15 +++++++++++++++
@@ -13078,10 +13078,10 @@ index 0000000..c6d258e
 2.3.2 (Apple Git-55)
 
 
-From 763c4885bf97ac1d0d68cd4b06fdcb6d3b391d7a Mon Sep 17 00:00:00 2001
+From 4a8e56180c476755eaf6b0cf161cfcfb261bac6a Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Fri, 9 Oct 2015 21:34:36 -0400
-Subject: [PATCH 112/123] Step 6.16: Add chat picture filter to index.html
+Subject: [PATCH 112/123] Step 5.16: Add chat picture filter to index.html
 
 ---
  www/index.html | 1 +
@@ -13103,10 +13103,10 @@ index 5e46a0a..17044e2 100644
 2.3.2 (Apple Git-55)
 
 
-From 5a7f9b990619978eb4c229117f330f39046337b6 Mon Sep 17 00:00:00 2001
+From a1c65b1cea5a5939fea54319d4706d2c3e0eef75 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Fri, 9 Oct 2015 21:35:55 -0400
-Subject: [PATCH 113/123] Step 6.17: Add default chat picture svg file
+Subject: [PATCH 113/123] Step 5.17: Add default chat picture svg file
 
 ---
  www/img/user-default.svg | 27 +++++++++++++++++++++++++++
@@ -13150,10 +13150,10 @@ index 0000000..8fe9af2
 2.3.2 (Apple Git-55)
 
 
-From e85afb4a080de0905fb1fd0881542016db606e60 Mon Sep 17 00:00:00 2001
+From 44b16b7892737de162d922d71f3ae28b8365b4e6 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Fri, 9 Oct 2015 21:38:17 -0400
-Subject: [PATCH 114/123] Step 6.18: Run `meteor remove insecure`
+Subject: [PATCH 114/123] Step 5.18: Run `meteor remove insecure`
 
 ---
  server/.meteor/packages | 1 -
@@ -13188,10 +13188,10 @@ index 9f08ba1..9e5042d 100644
 2.3.2 (Apple Git-55)
 
 
-From 39bc5982371f0bda920641380a1321766785d315 Mon Sep 17 00:00:00 2001
+From 962703fc5e5c4b56023df18f40961a4f990d893e Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Fri, 9 Oct 2015 21:40:15 -0400
-Subject: [PATCH 115/123] Step 6.19: Create removeChat server method
+Subject: [PATCH 115/123] Step 5.19: Create removeChat server method
 
 ---
  server/methods.js | 18 ++++++++++++++++++
@@ -13230,10 +13230,10 @@ index d908266..4db2ddd 100644
 2.3.2 (Apple Git-55)
 
 
-From 01db620394b0a98bf18ed93466e361251a475c55 Mon Sep 17 00:00:00 2001
+From 691f517191f97b21cbdb9bb6997a088149feaed9 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Fri, 9 Oct 2015 21:40:55 -0400
-Subject: [PATCH 116/123] Step 6.20: Create removeChat Optimistic UI method
+Subject: [PATCH 116/123] Step 5.20: Create removeChat Optimistic UI method
 
 ---
  www/js/stubs.js | 7 +++++++
@@ -13261,10 +13261,10 @@ index 8e9f84d..2285ffe 100644
 2.3.2 (Apple Git-55)
 
 
-From b50c14358ffa7edb3c82fb903031116c1fd6e206 Mon Sep 17 00:00:00 2001
+From 0d183085347015a068ea5b38aa817adb978a02f5 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Fri, 9 Oct 2015 21:42:29 -0400
-Subject: [PATCH 117/123] Step 6.21: Change controller to call the removeChat
+Subject: [PATCH 117/123] Step 5.21: Change controller to call the removeChat
  method
 
 ---
@@ -13297,10 +13297,10 @@ index eef9816..e697bd9 100644
 2.3.2 (Apple Git-55)
 
 
-From 524864db4f1b63f507b48e2354bf484747ab0cfc Mon Sep 17 00:00:00 2001
+From 338bf6519efaee8aeb4defd6fcde718b87eaf876 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Fri, 9 Oct 2015 21:48:00 -0400
-Subject: [PATCH 118/123] Step 7.1: Run `meteor remove autopublish`
+Subject: [PATCH 118/123] Step 6.1: Run `meteor remove autopublish`
 
 ---
  server/.meteor/packages | 1 -
@@ -13333,10 +13333,10 @@ index 9e5042d..264be9e 100644
 2.3.2 (Apple Git-55)
 
 
-From d2476c3c146d0fda3b0effcfdaf07bd767d651c5 Mon Sep 17 00:00:00 2001
+From 4675e5542782dbc1f1c250ca44bc918fef8362a9 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Fri, 9 Oct 2015 21:51:08 -0400
-Subject: [PATCH 119/123] Step 7.2: Create users publication
+Subject: [PATCH 119/123] Step 6.2: Create users publication
 
 ---
  server/publications.js | 5 +++++
@@ -13359,10 +13359,10 @@ index 0000000..ce09314
 2.3.2 (Apple Git-55)
 
 
-From 9813ce3c214e75123bf951b180a2358a2a1d0086 Mon Sep 17 00:00:00 2001
+From be6966d5a8d64298ee421f836f69bbf5ab5d81ee Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Fri, 9 Oct 2015 21:54:47 -0400
-Subject: [PATCH 120/123] Step 7.3: Run `meteor add reywood:publish-composite`
+Subject: [PATCH 120/123] Step 6.3: Run `meteor add reywood:publish-composite`
 
 ---
  server/.meteor/packages | 1 +
@@ -13394,10 +13394,10 @@ index 264be9e..58b7155 100644
 2.3.2 (Apple Git-55)
 
 
-From e51a783e6c6eb9da19900f185b926615da9aa6cd Mon Sep 17 00:00:00 2001
+From 7a6ad9360a68bbaa5ede174de5c163fd62ca34b2 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Fri, 9 Oct 2015 22:07:05 -0400
-Subject: [PATCH 121/123] Step 7.4: Add "chats" composite publication
+Subject: [PATCH 121/123] Step 6.4: Add "chats" composite publication
 
 ---
  server/publications.js | 25 +++++++++++++++++++++++++
@@ -13442,10 +13442,10 @@ index ce09314..aceff3d 100644
 2.3.2 (Apple Git-55)
 
 
-From e459b5ab1487f7289ef6166e5c779dd6817f1d70 Mon Sep 17 00:00:00 2001
+From fbf95d83c5870ddc9832af99acada95d8bee3fe8 Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Fri, 9 Oct 2015 22:08:18 -0400
-Subject: [PATCH 122/123] Step 7.5: Subscribe to "chats" publication from route
+Subject: [PATCH 122/123] Step 6.5: Subscribe to "chats" publication from route
 
 ---
  www/js/routes.js | 3 +++
@@ -13469,10 +13469,10 @@ index 86bb416..b8428f4 100644
 2.3.2 (Apple Git-55)
 
 
-From 752f24f088ff4a575594035f6a308ef56522301d Mon Sep 17 00:00:00 2001
+From 9d6b5d5b7d9f5a22da9c404728c963d0dffbcdbd Mon Sep 17 00:00:00 2001
 From: Uri Goldshtein <uri.goldshtein@gmail.com>
 Date: Fri, 9 Oct 2015 22:09:27 -0400
-Subject: [PATCH 123/123] Step 7.6: Subscribe to "users" publication inside the
+Subject: [PATCH 123/123] Step 6.6: Subscribe to "users" publication inside the
  new-chat controller
 
 ---
