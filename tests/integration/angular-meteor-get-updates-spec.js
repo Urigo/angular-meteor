@@ -104,43 +104,6 @@ describe('getUpdates module', function() {
       expect(actualUpdates).toDeepEqual(expectedUpdates);
     });
 
-    it('should define a "$push" property when the destination object has a new array', function() {
-      var src = {
-        a: [1],
-        b: {
-          c: 'c'
-        }
-      };
-
-      var dst = {
-        a: [1, 2],
-        b: {
-          c: 'c',
-          z: 'z',
-          y: [9]
-        },
-        d: [3, 4],
-        e: [5],
-        f: []
-      };
-
-      var expectedUpdates = {
-        $set: {
-          'a.1': 2,
-          'b.z': 'z',
-          'f': []
-        },
-        $push: {
-          'b.y': 9,
-          'd': { $each: [3, 4] },
-          'e': 5
-        }
-      };
-
-      var updates = getUpdates(src, dst);
-      expect(updates).toDeepEqual(expectedUpdates);
-    });
-
     it('should get updates when object-field is assigned a deep-object', function() {
       var src = {a: {}};
       var dst = {a: {L1: {L2: {L3: 'v'}}}};
