@@ -25,7 +25,7 @@ And now to run in the emulator, run:
     # OR
     $ meteor run android
 
-You can also run in a real mobile device, for more instructions, read [Meteor and Cordova integration](https://github.com/meteor/meteor/wiki/Meteor-Cordova-Phonegap-integration).
+You can also run in a real mobile device, for more instructions, read [Meteor and Cordova integration](https://github.com/meteor/meteor/wiki/Meteor-Cordova-integration).
 
 So now our first step is to create the `packages` directory:
 

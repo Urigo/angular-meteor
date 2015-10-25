@@ -192,10 +192,10 @@ ANGULAR1_TUT = [
   },
   {
     id: "21",
-    title: 'Mobile & Packages Isolation',
+    title: 'Mobile Support & Packages Isolation',
     seoTitle: 'Mobile support and AngularJS modules isolation using Meteor packages',
-    route: "tutorials.angular1.mobile-support",
-    path: "/tutorials/angular1/mobile-support",
+    route: "tutorials.angular1.mobile-support-and-packages-isolation",
+    path: "/tutorials/angular1/mobile-support-and-packages-isolation",
     contentTemplate: 'tutorial.step_21.md',
     previousCodeStep: '20'
   },
