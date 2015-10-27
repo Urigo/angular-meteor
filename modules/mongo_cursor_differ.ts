@@ -30,15 +30,15 @@ export class MongoCursorDifferFactory extends DefaultIterableDifferFactory {
 }
 
 export class MongoCursorDiffer {
-  _inserted: Array<CollectionChangeRecord> = [];
-  _removed: Array<CollectionChangeRecord> = [];
-  _moved: Array<CollectionChangeRecord> = [];
-  _curObserver: MongoCursorObserver;
-  _lastChanges: Array<AddChange|MoveChange|RemoveChange>;
-  _listSize: number = 0;
-  _cursor: Mongo.Cursor<any>;
-  _obsFactory: ObserverFactory;
-  _subscription: Object;
+  private _inserted: Array<CollectionChangeRecord> = [];
+  private _removed: Array<CollectionChangeRecord> = [];
+  private _moved: Array<CollectionChangeRecord> = [];
+  private _curObserver: MongoCursorObserver;
+  private _lastChanges: Array<AddChange | MoveChange | RemoveChange>;
+  private _listSize: number = 0;
+  private _cursor: Mongo.Cursor<any>;
+  private _obsFactory: ObserverFactory;
+  private _subscription: Object;
 
   constructor(cdRef: ChangeDetectorRef, obsFactory: ObserverFactory) {
     this._obsFactory = obsFactory;

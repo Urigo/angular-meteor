@@ -3,14 +3,14 @@
 'use strict';
 
 export class CursorHandle {
-  _cursor: Mongo.Cursor<any>;
-  _hAutoNotify: Tracker.Computation;
-  _hCurObserver: Object;
+  private _cursor: Mongo.Cursor<any>;
+  private _hAutoNotify: Tracker.Computation;
+  private _hCurObserver: Meteor.LiveQueryHandle;
 
   constructor(
       cursor: Mongo.Cursor<any>,
       hAutoNotify: Tracker.Computation,
-      hCurObserver: Object) {
+      hCurObserver: Meteor.LiveQueryHandle) {
 
     check(cursor, Mongo.Cursor);
     check(hAutoNotify, Tracker.Computation);

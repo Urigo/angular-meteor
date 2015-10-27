@@ -14,13 +14,18 @@ MongoCollectionObserverFake = function() {
   this.clear = function() {
     this._generators.length = 0;
   };
+
+  this.destroy = function() {}
 };
 
 ObserverFactoryFake = function(observer) {
   this._observer = observer;
 
+  var self = this;
   this.create = function(cursor) {
-    return this._observer;
+    self.observer = self._observer ||
+      new MongoCollectionObserverFake(cursor);
+    return self.observer;
   };
 };
 

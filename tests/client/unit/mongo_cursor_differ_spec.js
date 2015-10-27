@@ -54,4 +54,34 @@ describe('MongoCursorDiffer', function() {
     differ.forEachMovedItem(forEachMovedItem);
     expect(forEachMovedItem).toHaveBeenCalled();
   });
+
+  it('new cursor being handled properly', function() {
+    var emptyFakeFactory = new ObserverFactoryFake();
+
+    var differ = new MongoCursorDiffer(null /*cdRef*/, emptyFakeFactory);
+    differ.diff(fakeCursor);
+    var changes1 = [
+      new AddChange(5, {name: 'cursor1 doc'})];
+    var fakeObserver1 = emptyFakeFactory.observer;
+    spyOn(fakeObserver1, 'destroy');
+    emptyFakeFactory.observer.next(changes1);
+    differ.diff();
+
+    var fakeCursor1 = new MongoCollectionCursorFake();
+    differ.diff(fakeCursor1);
+    var changes2 = [
+      new AddChange(10, {name: 'cursor2 doc'})];
+    var fakeObserver2 = emptyFakeFactory.observer;
+    emptyFakeFactory.observer.next(changes2);
+    differ.diff();
+
+    var forEachAddedItem = jasmine.createSpy().and.callFake(function(addChange) {
+      expect(addChange.item).toEqual(changes2[0].item);
+      expect(addChange.currentIndex).toEqual(changes2[0].index);
+    });
+    differ.forEachAddedItem(forEachAddedItem);
+    expect(forEachAddedItem).toHaveBeenCalled();
+
+    expect(fakeObserver1.destroy).toHaveBeenCalled();
+  });
 });

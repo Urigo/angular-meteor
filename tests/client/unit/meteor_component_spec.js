@@ -38,7 +38,7 @@ describe('MeteorComponent', function() {
         });
 
         describe('last arg is a boolean', function() {
-          it('should call Meteor,subscribe as usual', function() {
+          it('should call Meteor, subscribe as usual', function() {
             var args = ['collection', 'foo', 'bar', true];
             component.subscribe.apply(component, args);
             expect(Meteor.subscribe.calls.count()).toEqual(1);

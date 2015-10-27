@@ -19,11 +19,11 @@ export class RemoveChange {
 }
 
 export class MongoCursorObserver extends EventEmitter {
-  _docs: Array<any> = [];
-  _changes: Array<any> = [];
-  _lastChanges: Array<any> = [];
-  _cursorDefFunc: Function;
-  _hCursor: CursorHandle;
+  private _docs: Array<any> = [];
+  private _changes: Array<any> = [];
+  private _lastChanges: Array<any> = [];
+  private _cursorDefFunc: Function;
+  private _hCursor: CursorHandle;
 
   constructor(cursor: Mongo.Cursor<any>) {
     super();
@@ -42,7 +42,7 @@ export class MongoCursorObserver extends EventEmitter {
     return new CursorHandle(cursor, hAutoNotify, hCurObserver);
   }
 
-  _startAutoChangesNotify(cursor: Mongo.Cursor<any>) {
+  _startAutoChangesNotify(cursor: Mongo.Cursor<any>): Tracker.Computation {
     return Tracker.autorun(() => {
       cursor.fetch();
       let lastChanges = this._changes.splice(0);
@@ -53,7 +53,7 @@ export class MongoCursorObserver extends EventEmitter {
     });
   }
 
-  _startCursorObserver(cursor: Mongo.Cursor<any>) {
+  _startCursorObserver(cursor: Mongo.Cursor<any>): Meteor.LiveQueryHandle {
     var self = this;
     return cursor.observe({
       addedAt: function(doc, index) {

@@ -1,0 +1,15 @@
+{
+  "version": "v1",
+  "ref": "master",
+  "path": "typings",
+  "repo": "borisyankov/DefinitelyTyped",
+  "bundle": "typings/tsd.d.ts",
+  "installed": {
+    "meteor/meteor.d.ts": {
+      "commit": "22d5a3bccc039004944982be9967f52a12d9d8c7"
+    },
+    "underscore/underscore.d.ts": {
+      "commit": "925549c4eb5078662fff90d6d20b586118b09ed2"
+    }
+  }
+}
