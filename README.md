@@ -117,10 +117,10 @@ So, if you have code like this:
 ````
 It will likely curse that `Mongo` is undefined. Luckily, package adds Angular2 and Meteor declaration file, which means you'll need only to reference it in your TypeScript files to fix errors.
 
-When you first run your app, Angular2-Meteor will create a declarations (or typings) file `typings/angular2-meteor.d.ts` in your app folder . Add references to it in every TypeScript file you have created or are going to create as follows:
+When you first run your app, Angular2-Meteor will create a declarations (or typings) file `typings/angular2-meteor.d.ts` in your app folder . Add references to it in every TypeScript file that uses Meteor or Angular2 API as follows:
 ````ts
 /// <reference path="../typings/angular2-meteor.d.ts" />
 ````
 Make sure that paths are relative to the app top folder.
 
-> Note: if you just loaded your app from a repository into an empty folder and you're running it for the first time, you'll need to re-start it in order to have all package declaration files in place.
+> Note: if you just loaded your app from a repository into an empty folder and you're running it for the first time, you'll need to re-start it in order to have all package declaration files in place before development.
