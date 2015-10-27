@@ -1,7 +1,7 @@
 # Meteor-Angular2
 Angular2 + Meteor integration.
 
-##### Angular2 version: alpha-42.
+##### Angular2 version: alpha-44.
 
 ## Quick start
 
@@ -115,12 +115,12 @@ So, if you have code like this:
 ````ts
     var parties = new Mongo.Collection('parties');
 ````
-It will likely curse that `Mongo` is undefined. Luckily, package adds Angular2 and Meteor declaration file, which means you'll need only to reference it in your TypeScript files to fix errors.
+It will likely curse that `Mongo` is undefined. Luckily, the package adds Angular2 and Meteor declaration files, which means you'll need only to reference them in your TypeScript files to fix errors.
 
-When you first run your app, Angular2-Meteor will create a declarations (or typings) file `typings/angular2-meteor.d.ts` in your app folder . Add references to it in every TypeScript file that uses Meteor or Angular2 API as follows:
+After the first run of your app, Angular2-Meteor will create declaration (or typings) files (one of them is `typings/angular2-meteor.d.ts`) in the "typings" folder. Add references to `typings/angular2-meteor.d.ts` in every TypeScript file that uses Meteor or Angular2 API as follows:
 ````ts
 /// <reference path="../typings/angular2-meteor.d.ts" />
 ````
 Make sure that paths are relative to the app top folder.
 
-> Note: if you just loaded your app from a repository into an empty folder and you're running it for the first time, you'll need to re-start it in order to have all package declaration files in place before development.
+> Note: If you've just updated the package and started having errors in the console means that you need to update typings. To do that just remove "angular2" folder and "angular2-meteor.d.ts" from the "typings" folder and re-start the app. The package will re-install updated version of them.
