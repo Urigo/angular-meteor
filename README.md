@@ -123,4 +123,5 @@ After the first run of your app, Angular2-Meteor will create declaration (or typ
 ````
 Make sure that paths are relative to the app top folder.
 
-> Note: If you've just updated the package and started having errors in the console means that you need to update typings. To do that just remove "angular2" folder and "angular2-meteor.d.ts" from the "typings" folder and re-start the app. The package will re-install updated version of them.
+The package installs typings itself but doesn't overrides existing ones in the "typings" folder. So, if you've 
+updated package and started getting errors in the console, remove "angular2" folder and "angular2-meteor.d.ts" and re-start the app. New versions of them will be re-installed in the folder.
