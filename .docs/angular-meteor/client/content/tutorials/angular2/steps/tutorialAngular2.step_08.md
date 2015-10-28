@@ -1,4 +1,4 @@
-{{#template name="tutorialAngular2.step_08.html"}}
+{{#template name="tutorialAngular2.step_08.md"}}
 {{> downloadPreviousStep stepName="step_07"}} 
 
 In this section we'll look at using Meteor Accounts & take a quick detour into using Services in Angular 2.
