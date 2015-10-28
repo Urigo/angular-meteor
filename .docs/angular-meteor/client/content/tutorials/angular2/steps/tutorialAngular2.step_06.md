@@ -1,4 +1,4 @@
-{{#template name="tutorialAngular2.step_06.html"}}
+{{#template name="tutorialAngular2.step_06.md"}}
 {{> downloadPreviousStep stepName="step_05"}}  
   
 In this step we'll continue looking at the Angular router & forms.

@@ -1,4 +1,4 @@
-{{#template name="tutorialAngular2.step_02.html"}}
+{{#template name="tutorialAngular2.step_02.md"}}
 {{> downloadPreviousStep stepName="step_01"}}
     
 Now it's time to make the web page dynamic — with Angular 2.

@@ -22,14 +22,6 @@ var EJSON, EJSONTest;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                                   //
-// packages/ejson/packages/ejson.js                                                                                  //
-//                                                                                                                   //
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                                                     //
-(function(){                                                                                                         // 1
-                                                                                                                     // 2
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                                   //
 // packages/ejson/ejson.js                                                                                           //
 //                                                                                                                   //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -552,16 +544,16 @@ EJSON.clone = function (v) {                                                    
 EJSON.newBinary = Base64.newBinary;                                                                                  // 516
                                                                                                                      // 517
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                                                     // 527
-}).call(this);                                                                                                       // 528
-                                                                                                                     // 529
-                                                                                                                     // 530
-                                                                                                                     // 531
-                                                                                                                     // 532
-                                                                                                                     // 533
-                                                                                                                     // 534
-(function(){                                                                                                         // 535
-                                                                                                                     // 536
+
+}).call(this);
+
+
+
+
+
+
+(function(){
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                                   //
 // packages/ejson/stringify.js                                                                                       //
@@ -688,10 +680,6 @@ EJSON._canonicalStringify = function (value, options) {                         
 };                                                                                                                   // 118
                                                                                                                      // 119
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                                                     // 663
-}).call(this);                                                                                                       // 664
-                                                                                                                     // 665
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }).call(this);
 
@@ -727,29 +715,21 @@ var MongoID;
 
 (function(){
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                          //
-// packages/mongo-id/packages/mongo-id.js                                                                   //
-//                                                                                                          //
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                                            //
-(function(){                                                                                                // 1
-                                                                                                            // 2
-////////////////////////////////////////////////////////////////////////////////////////////////////////    // 3
-//                                                                                                    //    // 4
-// packages/mongo-id/id.js                                                                            //    // 5
-//                                                                                                    //    // 6
-////////////////////////////////////////////////////////////////////////////////////////////////////////    // 7
-                                                                                                      //    // 8
-MongoID = {};                                                                                         // 1  // 9
-                                                                                                      // 2  // 10
-MongoID._looksLikeObjectID = function (str) {                                                         // 3  // 11
-  return str.length === 24 && str.match(/^[0-9a-f]*$/);                                               // 4  // 12
-};                                                                                                    // 5  // 13
-                                                                                                      // 6  // 14
-MongoID.ObjectID = function (hexString) {                                                             // 7  // 15
-  //random-based impl of Mongo ObjectID                                                               // 8  // 16
-  var self = this;                                                                                    // 9  // 17
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                    //
+// packages/mongo-id/id.js                                                                            //
+//                                                                                                    //
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                      //
+MongoID = {};                                                                                         // 1
+                                                                                                      // 2
+MongoID._looksLikeObjectID = function (str) {                                                         // 3
+  return str.length === 24 && str.match(/^[0-9a-f]*$/);                                               // 4
+};                                                                                                    // 5
+                                                                                                      // 6
+MongoID.ObjectID = function (hexString) {                                                             // 7
+  //random-based impl of Mongo ObjectID                                                               // 8
+  var self = this;                                                                                    // 9
   if (hexString) {                                                                                    // 10
     hexString = hexString.toLowerCase();                                                              // 11
     if (!MongoID._looksLikeObjectID(hexString)) {                                                     // 12
@@ -805,7 +785,7 @@ MongoID.idStringify = function (id) {                                           
     } else if (id.substr(0, 1) === "-" || // escape previously dashed strings                         // 62
                id.substr(0, 1) === "~" || // escape escaped numbers, true, false                      // 63
                MongoID._looksLikeObjectID(id) || // escape object-id-form strings                     // 64
-               id.substr(0, 1) === '{') { // escape object-form strings, for maybe implementing later       // 73
+               id.substr(0, 1) === '{') { // escape object-form strings, for maybe implementing later
       return "-" + id;                                                                                // 66
     } else {                                                                                          // 67
       return id; // other strings go through unchanged.                                               // 68
@@ -837,11 +817,7 @@ MongoID.idParse = function (id) {                                               
 };                                                                                                    // 94
                                                                                                       // 95
                                                                                                       // 96
-////////////////////////////////////////////////////////////////////////////////////////////////////////    // 105
-                                                                                                            // 106
-}).call(this);                                                                                              // 107
-                                                                                                            // 108
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }).call(this);
 
@@ -875,119 +851,111 @@ var DiffSequence;
 
 (function(){
 
-////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                        //
-// packages/diff-sequence/packages/diff-sequence.js                                       //
-//                                                                                        //
-////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                          //
-(function(){                                                                              // 1
-                                                                                          // 2
-/////////////////////////////////////////////////////////////////////////////////////     // 3
-//                                                                                 //     // 4
-// packages/diff-sequence/diff.js                                                  //     // 5
-//                                                                                 //     // 6
-/////////////////////////////////////////////////////////////////////////////////////     // 7
-                                                                                   //     // 8
-DiffSequence = {};                                                                 // 1   // 9
-                                                                                   // 2   // 10
-// ordered: bool.                                                                  // 3   // 11
-// old_results and new_results: collections of documents.                          // 4   // 12
-//    if ordered, they are arrays.                                                 // 5   // 13
-//    if unordered, they are IdMaps                                                // 6   // 14
-DiffSequence.diffQueryChanges = function (ordered, oldResults, newResults,         // 7   // 15
-                                              observer, options) {                 // 8   // 16
-  if (ordered)                                                                     // 9   // 17
-    DiffSequence.diffQueryOrderedChanges(                                          // 10  // 18
-      oldResults, newResults, observer, options);                                  // 11  // 19
-  else                                                                             // 12  // 20
-    DiffSequence.diffQueryUnorderedChanges(                                        // 13  // 21
-      oldResults, newResults, observer, options);                                  // 14  // 22
-};                                                                                 // 15  // 23
-                                                                                   // 16  // 24
-DiffSequence.diffQueryUnorderedChanges = function (oldResults, newResults,         // 17  // 25
-                                                       observer, options) {        // 18  // 26
-  options = options || {};                                                         // 19  // 27
-  var projectionFn = options.projectionFn || EJSON.clone;                          // 20  // 28
-                                                                                   // 21  // 29
-  if (observer.movedBefore) {                                                      // 22  // 30
-    throw new Error("_diffQueryUnordered called with a movedBefore observer!");    // 23  // 31
-  }                                                                                // 24  // 32
-                                                                                   // 25  // 33
-  newResults.forEach(function (newDoc, id) {                                       // 26  // 34
-    var oldDoc = oldResults.get(id);                                               // 27  // 35
-    if (oldDoc) {                                                                  // 28  // 36
-      if (observer.changed && !EJSON.equals(oldDoc, newDoc)) {                     // 29  // 37
-        var projectedNew = projectionFn(newDoc);                                   // 30  // 38
-        var projectedOld = projectionFn(oldDoc);                                   // 31  // 39
-        var changedFields =                                                        // 32  // 40
-              DiffSequence.makeChangedFields(projectedNew, projectedOld);          // 33  // 41
-        if (! _.isEmpty(changedFields)) {                                          // 34  // 42
-          observer.changed(id, changedFields);                                     // 35  // 43
-        }                                                                          // 36  // 44
-      }                                                                            // 37  // 45
-    } else if (observer.added) {                                                   // 38  // 46
-      var fields = projectionFn(newDoc);                                           // 39  // 47
-      delete fields._id;                                                           // 40  // 48
-      observer.added(newDoc._id, fields);                                          // 41  // 49
-    }                                                                              // 42  // 50
-  });                                                                              // 43  // 51
-                                                                                   // 44  // 52
-  if (observer.removed) {                                                          // 45  // 53
-    oldResults.forEach(function (oldDoc, id) {                                     // 46  // 54
-      if (!newResults.has(id))                                                     // 47  // 55
-        observer.removed(id);                                                      // 48  // 56
-    });                                                                            // 49  // 57
-  }                                                                                // 50  // 58
-};                                                                                 // 51  // 59
-                                                                                   // 52  // 60
-                                                                                   // 53  // 61
-DiffSequence.diffQueryOrderedChanges = function (old_results, new_results,         // 54  // 62
-                                                     observer, options) {          // 55  // 63
-  options = options || {};                                                         // 56  // 64
-  var projectionFn = options.projectionFn || EJSON.clone;                          // 57  // 65
-                                                                                   // 58  // 66
-  var new_presence_of_id = {};                                                     // 59  // 67
-  _.each(new_results, function (doc) {                                             // 60  // 68
-    if (new_presence_of_id[doc._id])                                               // 61  // 69
-      Meteor._debug("Duplicate _id in new_results");                               // 62  // 70
-    new_presence_of_id[doc._id] = true;                                            // 63  // 71
-  });                                                                              // 64  // 72
-                                                                                   // 65  // 73
-  var old_index_of_id = {};                                                        // 66  // 74
-  _.each(old_results, function (doc, i) {                                          // 67  // 75
-    if (doc._id in old_index_of_id)                                                // 68  // 76
-      Meteor._debug("Duplicate _id in old_results");                               // 69  // 77
-    old_index_of_id[doc._id] = i;                                                  // 70  // 78
-  });                                                                              // 71  // 79
-                                                                                   // 72  // 80
-  // ALGORITHM:                                                                    // 73  // 81
-  //                                                                               // 74  // 82
-  // To determine which docs should be considered "moved" (and which               // 75  // 83
-  // merely change position because of other docs moving) we run                   // 76  // 84
-  // a "longest common subsequence" (LCS) algorithm.  The LCS of the               // 77  // 85
-  // old doc IDs and the new doc IDs gives the docs that should NOT be             // 78  // 86
-  // considered moved.                                                             // 79  // 87
-                                                                                   // 80  // 88
-  // To actually call the appropriate callbacks to get from the old state to the   // 81  // 89
-  // new state:                                                                    // 82  // 90
-                                                                                   // 83  // 91
-  // First, we call removed() on all the items that only appear in the old         // 84  // 92
-  // state.                                                                        // 85  // 93
-                                                                                   // 86  // 94
-  // Then, once we have the items that should not move, we walk through the new    // 87  // 95
-  // results array group-by-group, where a "group" is a set of items that have     // 88  // 96
-  // moved, anchored on the end by an item that should not move.  One by one, we   // 89  // 97
-  // move each of those elements into place "before" the anchoring end-of-group    // 90  // 98
-  // item, and fire changed events on them if necessary.  Then we fire a changed   // 91  // 99
-  // event on the anchor, and move on to the next group.  There is always at       // 92  // 100
-  // least one group; the last group is anchored by a virtual "null" id at the     // 93  // 101
-  // end.                                                                          // 94  // 102
-                                                                                   // 95  // 103
-  // Asymptotically: O(N k) where k is number of ops, or potentially               // 96  // 104
-  // O(N log N) if inner loop of LCS were made to be binary search.                // 97  // 105
-                                                                                   // 98  // 106
-                                                                                   // 99  // 107
+/////////////////////////////////////////////////////////////////////////////////////
+//                                                                                 //
+// packages/diff-sequence/diff.js                                                  //
+//                                                                                 //
+/////////////////////////////////////////////////////////////////////////////////////
+                                                                                   //
+DiffSequence = {};                                                                 // 1
+                                                                                   // 2
+// ordered: bool.                                                                  // 3
+// old_results and new_results: collections of documents.                          // 4
+//    if ordered, they are arrays.                                                 // 5
+//    if unordered, they are IdMaps                                                // 6
+DiffSequence.diffQueryChanges = function (ordered, oldResults, newResults,         // 7
+                                              observer, options) {                 // 8
+  if (ordered)                                                                     // 9
+    DiffSequence.diffQueryOrderedChanges(                                          // 10
+      oldResults, newResults, observer, options);                                  // 11
+  else                                                                             // 12
+    DiffSequence.diffQueryUnorderedChanges(                                        // 13
+      oldResults, newResults, observer, options);                                  // 14
+};                                                                                 // 15
+                                                                                   // 16
+DiffSequence.diffQueryUnorderedChanges = function (oldResults, newResults,         // 17
+                                                       observer, options) {        // 18
+  options = options || {};                                                         // 19
+  var projectionFn = options.projectionFn || EJSON.clone;                          // 20
+                                                                                   // 21
+  if (observer.movedBefore) {                                                      // 22
+    throw new Error("_diffQueryUnordered called with a movedBefore observer!");    // 23
+  }                                                                                // 24
+                                                                                   // 25
+  newResults.forEach(function (newDoc, id) {                                       // 26
+    var oldDoc = oldResults.get(id);                                               // 27
+    if (oldDoc) {                                                                  // 28
+      if (observer.changed && !EJSON.equals(oldDoc, newDoc)) {                     // 29
+        var projectedNew = projectionFn(newDoc);                                   // 30
+        var projectedOld = projectionFn(oldDoc);                                   // 31
+        var changedFields =                                                        // 32
+              DiffSequence.makeChangedFields(projectedNew, projectedOld);          // 33
+        if (! _.isEmpty(changedFields)) {                                          // 34
+          observer.changed(id, changedFields);                                     // 35
+        }                                                                          // 36
+      }                                                                            // 37
+    } else if (observer.added) {                                                   // 38
+      var fields = projectionFn(newDoc);                                           // 39
+      delete fields._id;                                                           // 40
+      observer.added(newDoc._id, fields);                                          // 41
+    }                                                                              // 42
+  });                                                                              // 43
+                                                                                   // 44
+  if (observer.removed) {                                                          // 45
+    oldResults.forEach(function (oldDoc, id) {                                     // 46
+      if (!newResults.has(id))                                                     // 47
+        observer.removed(id);                                                      // 48
+    });                                                                            // 49
+  }                                                                                // 50
+};                                                                                 // 51
+                                                                                   // 52
+                                                                                   // 53
+DiffSequence.diffQueryOrderedChanges = function (old_results, new_results,         // 54
+                                                     observer, options) {          // 55
+  options = options || {};                                                         // 56
+  var projectionFn = options.projectionFn || EJSON.clone;                          // 57
+                                                                                   // 58
+  var new_presence_of_id = {};                                                     // 59
+  _.each(new_results, function (doc) {                                             // 60
+    if (new_presence_of_id[doc._id])                                               // 61
+      Meteor._debug("Duplicate _id in new_results");                               // 62
+    new_presence_of_id[doc._id] = true;                                            // 63
+  });                                                                              // 64
+                                                                                   // 65
+  var old_index_of_id = {};                                                        // 66
+  _.each(old_results, function (doc, i) {                                          // 67
+    if (doc._id in old_index_of_id)                                                // 68
+      Meteor._debug("Duplicate _id in old_results");                               // 69
+    old_index_of_id[doc._id] = i;                                                  // 70
+  });                                                                              // 71
+                                                                                   // 72
+  // ALGORITHM:                                                                    // 73
+  //                                                                               // 74
+  // To determine which docs should be considered "moved" (and which               // 75
+  // merely change position because of other docs moving) we run                   // 76
+  // a "longest common subsequence" (LCS) algorithm.  The LCS of the               // 77
+  // old doc IDs and the new doc IDs gives the docs that should NOT be             // 78
+  // considered moved.                                                             // 79
+                                                                                   // 80
+  // To actually call the appropriate callbacks to get from the old state to the   // 81
+  // new state:                                                                    // 82
+                                                                                   // 83
+  // First, we call removed() on all the items that only appear in the old         // 84
+  // state.                                                                        // 85
+                                                                                   // 86
+  // Then, once we have the items that should not move, we walk through the new    // 87
+  // results array group-by-group, where a "group" is a set of items that have     // 88
+  // moved, anchored on the end by an item that should not move.  One by one, we   // 89
+  // move each of those elements into place "before" the anchoring end-of-group    // 90
+  // item, and fire changed events on them if necessary.  Then we fire a changed   // 91
+  // event on the anchor, and move on to the next group.  There is always at       // 92
+  // least one group; the last group is anchored by a virtual "null" id at the     // 93
+  // end.                                                                          // 94
+                                                                                   // 95
+  // Asymptotically: O(N k) where k is number of ops, or potentially               // 96
+  // O(N log N) if inner loop of LCS were made to be binary search.                // 97
+                                                                                   // 98
+                                                                                   // 99
   //////// LCS (longest common sequence, with respect to _id)                      // 100
   // (see Wikipedia article on Longest Increasing Subsequence,                     // 101
   // where the LIS is taken of the sequence of old indices of the                  // 102
@@ -1061,7 +1029,7 @@ DiffSequence.diffQueryOrderedChanges = function (old_results, new_results,      
       if (!_.has(old_index_of_id, newDoc._id)) {                                   // 170
         fields = projectionFn(newDoc);                                             // 171
         delete fields._id;                                                         // 172
-        observer.addedBefore && observer.addedBefore(newDoc._id, fields, groupId);        // 181
+        observer.addedBefore && observer.addedBefore(newDoc._id, fields, groupId);
         observer.added && observer.added(newDoc._id, fields);                      // 174
       } else {                                                                     // 175
         // moved                                                                   // 176
@@ -1141,11 +1109,7 @@ DiffSequence.applyChanges = function (doc, changeFields) {                      
 };                                                                                 // 250
                                                                                    // 251
                                                                                    // 252
-/////////////////////////////////////////////////////////////////////////////////////     // 261
-                                                                                          // 262
-}).call(this);                                                                            // 263
-                                                                                          // 264
-////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////
 
 }).call(this);
 
@@ -1490,29 +1454,21 @@ var Session;
 
 (function(){
 
-///////////////////////////////////////////////////////////////////////////////////////
-//                                                                                   //
-// packages/session/packages/session.js                                              //
-//                                                                                   //
-///////////////////////////////////////////////////////////////////////////////////////
-                                                                                     //
-(function(){                                                                         // 1
-                                                                                     // 2
-/////////////////////////////////////////////////////////////////////////////////    // 3
-//                                                                             //    // 4
-// packages/session/session.js                                                 //    // 5
-//                                                                             //    // 6
-/////////////////////////////////////////////////////////////////////////////////    // 7
-                                                                               //    // 8
-Session = new ReactiveDict('session');                                         // 1  // 9
-                                                                               // 2  // 10
-// Documentation here is really awkward because the methods are defined        // 3  // 11
-// elsewhere                                                                   // 4  // 12
-                                                                               // 5  // 13
-/**                                                                            // 6  // 14
- * @memberOf Session                                                           // 7  // 15
- * @method set                                                                 // 8  // 16
- * @summary Set a variable in the session. Notify any listeners that the value       // 17
+/////////////////////////////////////////////////////////////////////////////////
+//                                                                             //
+// packages/session/session.js                                                 //
+//                                                                             //
+/////////////////////////////////////////////////////////////////////////////////
+                                                                               //
+Session = new ReactiveDict('session');                                         // 1
+                                                                               // 2
+// Documentation here is really awkward because the methods are defined        // 3
+// elsewhere                                                                   // 4
+                                                                               // 5
+/**                                                                            // 6
+ * @memberOf Session                                                           // 7
+ * @method set                                                                 // 8
+ * @summary Set a variable in the session. Notify any listeners that the value
  * has changed (eg: redraw templates, and rerun any                            // 10
  * [`Tracker.autorun`](#tracker_autorun) computations, that called             // 11
  * [`Session.get`](#session_get) on this `key`.)                               // 12
@@ -1556,11 +1512,7 @@ Session = new ReactiveDict('session');                                         /
  * test against                                                                // 50
  */                                                                            // 51
                                                                                // 52
-/////////////////////////////////////////////////////////////////////////////////    // 61
-                                                                                     // 62
-}).call(this);                                                                       // 63
-                                                                                     // 64
-///////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
 
 }).call(this);
 

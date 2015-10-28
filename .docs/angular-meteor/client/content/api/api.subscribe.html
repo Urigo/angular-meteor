@@ -74,8 +74,9 @@ Calling $scope.$meteorSubscribe will automatically stop the subscription when th
 ## Example
 
 
-    // Define a new Meteor Mongo Collection
+    //Define new Meteor Mongo Collections
     Todos = new Mongo.Collection('todos');
+    Books = new Mongo.Collection('books');
 
     if (Meteor.isClient) {
 
@@ -93,7 +94,7 @@ Calling $scope.$meteorSubscribe will automatically stop the subscription when th
           });
 
           $scope.$meteorSubscribe('books', {onStop: notifyUser}).then(function(subscriptionHandle){
-            // Bind all the todos to $scope.books
+            // Bind all the books to $scope.books
             $scope.books = $meteor.collection(Books);
 
             console.log($scope.books + ' is ready');
