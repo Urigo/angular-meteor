@@ -1,7 +1,7 @@
 {{#template name="tutorial.step_15.md"}}
 {{> downloadPreviousStep stepName="step_14"}}
 
-AngularJS has great and very simple directives that help us show and hide DOM elements conditionally.
+Angular 1 has great and very simple directives that help us show and hide DOM elements conditionally.
 You can bind them to an expression, variables or functions.
 
 # ng-show and ng-hide

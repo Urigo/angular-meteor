@@ -4,7 +4,7 @@
 
 In this step we will consider switching from *Twitter Bootstrap* to [*angular-material*](https://material.angularjs.org/#/).
 
-Angular-material is an AngularJS implementation of Google's [Material Design specifications](http://www.google.com/design/spec/material-design/introduction.html). Material Design is a mobile-first design language used in many new Google's applications, especially on the Android platform.
+Angular-material is an Angular 1 implementation of Google's [Material Design specifications](http://www.google.com/design/spec/material-design/introduction.html). Material Design is a mobile-first design language used in many new Google's applications, especially on the Android platform.
 
 To start, first we have to remove bootstrap from our application. Type in the console:
 
@@ -14,7 +14,7 @@ Now we have to add the angular-material Meteor package:
 
     meteor add angular:angular-material
 
-Next, we want to inject the angular-material module into our Angular application. Edit your `client/lib/app.js` and add `ngMaterial`:
+Next, we want to inject the angular-material module into our Angular 1 application. Edit your `client/lib/app.js` and add `ngMaterial`:
 
 {{> DiffBox tutorialName="angular-meteor" step="18.3"}}
 
@@ -105,7 +105,7 @@ Here, as you can see a specific type of button used by angular-material. We have
 
 Angular-Material makes a regular button that points to a link using `ng-href`.
 
-## Custom Angular forms and Accounts-UI Material Design
+## Custom Angular 1 forms and Accounts-UI Material Design
 
 Next, we need to make our users management pages use Material Design.
 
@@ -188,7 +188,7 @@ And, finally, create a corresponding view `client/users/views/reset-password.ng.
 In this chapter we two main things:
 
 1. How to work with angular-material-design in our angular-meteor app
-2. How to create custom Angular forms for our application's auth
+2. How to create custom Angular 1 forms for our application's auth
 
 I hope one of you will create an accounts-ui package based on that code and will save us all tons of code!
 

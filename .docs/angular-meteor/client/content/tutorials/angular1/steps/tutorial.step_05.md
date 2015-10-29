@@ -1,7 +1,7 @@
 {{#template name="tutorial.step_05.md"}}
 {{> downloadPreviousStep stepName="step_04"}}
 
-In this step, you will learn how to create a layout template and how to build an app that has multiple views by adding routing, using an Angular module called `ui-router`.
+In this step, you will learn how to create a layout template and how to build an app that has multiple views by adding routing, using an Angular 1 module called `ui-router`.
 
 The goals for this step:
 
@@ -10,7 +10,7 @@ The goals for this step:
 
 # Dependencies
 
-The routing functionality added by this step is provided by the [ui-router](https://github.com/angular-ui/ui-router) module, which is distributed separately from the core Angular framework.
+The routing functionality added by this step is provided by the [ui-router](https://github.com/angular-ui/ui-router) module, which is distributed separately from the core Angular 1 framework.
 
 We will install ui-router with the help of [the official Meteor package](https://atmospherejs.com/angularui/angular-ui-router).
 
@@ -34,7 +34,7 @@ To add the detailed view, we could expand the `index.ng.html` file to contain te
 Instead, we are going to turn the `index.html` template into what we call a "layout template". This is a template that is common for all views in our application.
 Other "partial templates" are then included into this layout template depending on the current "route" — the view that is currently displayed to the user.
 
-Application routes in Angular are declared via the [$stateProvider](https://github.com/angular-ui/ui-router/wiki), which is the provider of the $state service.
+Application routes in Angular 1 are declared via the [$stateProvider](https://github.com/angular-ui/ui-router/wiki), which is the provider of the $state service.
 This service makes it easy to wire together controllers, view templates, and the current URL location in the browser.
 Using this feature we can implement deep linking, which lets us utilize the browser's history (back and forward navigation) and bookmarks.
 
@@ -76,15 +76,15 @@ This code can serve as a placeholder for now. We'll get back to filling out the 
 # Routes definition
 
 Now let's configure our routes.
-Add this config code in `app.js`, after the Angular app has been defined:
+Add this config code in `app.js`, after the Angular 1 app has been defined:
 
 {{> DiffBox tutorialName="angular-meteor" step="5.7"}}
 
-Using the Angular app's .config() method, we request the `$stateProvider` to be injected into our config function and use the state method to define our routes.
+Using the Angular 1 app's .config() method, we request the `$stateProvider` to be injected into our config function and use the state method to define our routes.
 
 Our application routes are defined as follows:
 
-* **('/parties')**: The parties list view will be shown when the URL hash fragment is /parties. To construct this view, Angular will use the parties-list.ng.html template and the PartiesListCtrl controller.
+* **('/parties')**: The parties list view will be shown when the URL hash fragment is /parties. To construct this view, Angular 1 will use the parties-list.ng.html template and the PartiesListCtrl controller.
 * **('/parties/:partyId')**: The party details view will be shown when the URL hash fragment matches '/parties/:partyId', where :partyId is a variable part of the URL. To construct the party details view, Angular will use the party-details.ng.html template and the PartyDetailsCtrl controller.
 * **$urlRouterProvider.otherwise('/parties')**: Triggers a redirection to /parties when the browser address doesn't match either of our routes.
 * **$locationProvider.html5Mode(true)**: Sets the URL to look like a regular one. more about it [here](https://docs.angularjs.org/guide/$location#hashbang-and-html5-modes).

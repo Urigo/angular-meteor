@@ -15,7 +15,7 @@ Now we need to make this form functional.
 
 First things first, let's bind the value of the inputs into a new party variable.
 
-To do that we'll use the simple and powerful [ng-model](https://docs.angularjs.org/api/ng/directive/ngModel) AngularJS directive.
+To do that we'll use the simple and powerful [ng-model](https://docs.angularjs.org/api/ng/directive/ngModel) Angular 1 directive.
 
 Add `ng-model` to the form like this:
 
@@ -25,7 +25,7 @@ Now each time the user types inside these inputs, the value of the newParty scop
 
 ## ng-click
 
-Now let's bind a click event to the add button with Angular's [ng-click](https://docs.angularjs.org/api/ng/directive/ngClick) directive.
+Now let's bind a click event to the add button with Angular 1's [ng-click](https://docs.angularjs.org/api/ng/directive/ngClick) directive.
 
 {{> DiffBox tutorialName="angular-meteor" step="4.3"}}
 
@@ -84,6 +84,6 @@ You can read more about AngularMeteorCollection and it's helper functions in the
 
 # Summary
 
-So now you've seen how easy it is to manipulate the data using Angular's powerful directives and sync that data with Meteor's powerful Mongo.collection API.
+So now you've seen how easy it is to manipulate the data using Angular 1's powerful directives and sync that data with Meteor's powerful Mongo.collection API.
 
 {{/template}}

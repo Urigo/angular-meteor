@@ -6,12 +6,12 @@ Our next mission is to invite users to private parties.
 We have subscribed to list of all users, but we can't invite everyone.
 We can't invite the owner of the party and we can't invite users who are already invited, so why not filter them out of the view?
 
-To do so we will use the powerful [filter feature](https://docs.angularjs.org/guide/filter) of AngularJS.
+To do so we will use the powerful [filter feature](https://docs.angularjs.org/guide/filter) of Angular 1.
 
 Filters can work on array as well as single values.
 We can aggregate any number of filters on top of each other.
 
-Here is the list of all of AngularJS built-in filters:
+Here is the list of all of Angular 1 built-in filters:
 [https://docs.angularjs.org/api/ng/filter](https://docs.angularjs.org/api/ng/filter)
 
 And here is a 3rd party library with many more filters:
@@ -96,7 +96,7 @@ Now we get the user object to the HTML. But we want his name, so let's put the d
 
 # Summary
 
-In this chapter we learned about AngularJS filters and how easy they are to use and to read from the HTML.
+In this chapter we learned about Angular 1 filters and how easy they are to use and to read from the HTML.
 
 In the next step we will learn about Meteor methods, which enables us to run custom logic in the server, beyond the Mongo API and the allow/deny methods.
 

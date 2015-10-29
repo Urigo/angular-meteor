@@ -96,7 +96,7 @@ Let's add a checkbox to the new party form in `parties-list.ng.html`:
 
 {{> DiffBox tutorialName="angular-meteor" step="9.4"}}
 
-Notice how easy it is to bind a checkbox to a model with AngularJS!
+Notice how easy it is to bind a checkbox to a model with Angular 1!
 
 Let's add the same to the `party-details.ng.html` page:
 
@@ -247,7 +247,7 @@ __`Google`:__
 
 Right now it means that the emails of the users that logged in with with email-password will be displayed.
 
-In the chapter of Angular filters we will change the display code to show all emails.
+In the chapter of Angular 1 filters we will change the display code to show all emails.
 
 
 # Understanding Meteor's Publish-Subscribe
