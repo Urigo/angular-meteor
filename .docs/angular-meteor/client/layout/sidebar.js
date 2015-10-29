@@ -1,7 +1,7 @@
 PAGES = [
   {
     id: "1",
-    title: "Angular",
+    title: "Angular 1",
     route: "tutorials.angular1",
     path: "/tutorials/angular1",
     pathRedirect: "/tutorials/angular1/bootstrapping",
@@ -14,7 +14,7 @@ PAGES = [
   },
   {
     id: "2",
-    title: "Angular 2.0",
+    title: "Angular 2",
     route: "tutorials.angular2",
     path: "/tutorials/angular2",
     pathRedirect: "/tutorials/angular2/bootstrapping",
