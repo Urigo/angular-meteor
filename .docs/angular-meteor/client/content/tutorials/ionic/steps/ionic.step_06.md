@@ -19,12 +19,14 @@ Meteor will use that `[Live Query](https://www.meteor.com/livequery)` to publish
 
 Now let’s do a more complex publication, let’s send each client only the Chats and Messages he is a part of:
 
+```
   Meteor.publish('chats', function () {
        if (! this.userId) {
          return;
        }
        return Chats.find({ userIds: this.userId });
   });
+```
 
 And now, let’s add the Messages from the those chats into the publication.
 

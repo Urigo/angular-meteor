@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "am-git-patch-parser": {
-      "version": "0.2.1"
+      "version": "http://registry.npmjs.org/am-git-patch-parser/-/am-git-patch-parser-0.2.1.tgz"
     }
   }
 }
