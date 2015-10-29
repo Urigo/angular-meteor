@@ -130,7 +130,7 @@ So here again we use the Mongo API to return all the users (find with an empty o
 The emails field holds all the user's email addresses, and the profile might hold more optional information like the user's name
 (in our case, if the user logged in with the Facebook login, the accounts-facebook package puts the user's name from Facebook automatically into that field).
 
-Now let's subscribe to that publish Method.  In the `client->parties->controllers->partyDetails.js` file add the following line inside the controller.
+Now let's subscribe to that publish Method.  In the `client->parties->controllers->partyDetails.ng.js` file add the following line inside the controller.
 If you just add to the end you will get an uncaught reference $scope not defined:
 
 {{> DiffBox tutorialName="angular-meteor" step="9.7"}}
