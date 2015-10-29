@@ -32,7 +32,7 @@ To do that, we need to do a joined collections publication.
 
 To do it more easily, let’s use the `reywood:publish-composite` package.  in the Meteor command line type:
 
-    $ meteor remove reywood:publish-composite
+    $ meteor add reywood:publish-composite
 
 And now let’s change the publication to add the Messages and the Users that are related to the Chats the users in participating in:
 
