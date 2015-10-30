@@ -121,6 +121,6 @@ Run the application.
 Looks like we have all the functionality we need but there is a lot of mess in the display.
 There are stuff that there is no need for them to show up if the user is not authorized to see or if they are empty.
 
-So in the next chapter we are going to learn about a few simple but very useful AngularJS directive to help us conditionally add or remove DOM.
+So in the next chapter we are going to learn about a few simple but very useful Angular 1 directive to help us conditionally add or remove DOM.
 
 {{/template}}

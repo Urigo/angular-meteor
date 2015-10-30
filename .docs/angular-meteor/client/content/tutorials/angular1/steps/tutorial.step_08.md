@@ -30,13 +30,13 @@ It's a very powerful package for all the user operations you can think of: Login
 
 Now we will also add the 'accounts-ui' package.  This package contains all the HTML and CSS we need for the user operation forms.
 
-Later on in this tutorial we will replace those default account-ui forms with custom Angular forms.
+Later on in this tutorial we will replace those default account-ui forms with custom Angular 1 forms.
 
     meteor add accounts-ui
 
 Now let's add the accounts-ui template ( <code ng-non-bindable>&#123;&#123;> loginButtons &#125;&#125;</code> ) into our app, into index.html.
 
-To add Meteor's templates into AngularJS templates, angular-meteor provides us with the [blaze-template](/api/blaze-template) directive.
+To add Meteor's templates into Angular 1 templates, angular-meteor provides us with the [blaze-template](/api/blaze-template) directive.
 
 To start using, we need to add the `urigo:angular-blaze-template` [package](https://github.com/Urigo/angular-blaze-template):
 
