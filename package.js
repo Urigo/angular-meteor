@@ -51,12 +51,6 @@ Package.onUse(function (api) {
   api.use('dburles:mongo-collection-instances@0.3.4', 'client'); // For getCollectionByName
   api.use('isobuild:compiler-plugin@1.0.0'); // Used for compilers
 
-  api.use('ejson');
-  api.use('tracker@1.0.7');
-  api.use('underscore');
-  api.use('session');
-  api.use('mongo@1.1.0');
-
   // Files to load in Client only.
   api.add_files([
     // Lib Files
@@ -87,11 +81,6 @@ Package.onTest(function(api) {
   api.use('angular:angular-mocks@1.4.4');
   api.use('mdg:camera@1.1.5');
   api.use('angular');
-
-  api.use('underscore');
-  api.use('session');
-  api.use('mongo');
-  api.use('tracker');
 
   // auxiliary
   api.addFiles([
