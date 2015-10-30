@@ -110,5 +110,5 @@ var minifyHtml = function(html) {
 
 function wrapAngularTemplate(id, contents) {
   return "angular.module('angular-meteor').run(['$templateCache', function($templateCache) { $templateCache.put('" +
-    id + "','" + contents + "');}]);";
+    id + "'," + JSON.stringify(contents) + ");}]);";
 }
