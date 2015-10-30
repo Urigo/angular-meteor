@@ -170,7 +170,7 @@ This is more expensive than a simple ```getReactively("myVar")``` but still bett
 
     $scope.things = ["foo"];
     $scope.$meteorAutorun(function(){
-     var values = $scope.$getCollectionReactively("things");
+     var values = $scope.getCollectionReactively("things");
      console.log("values",values);
      //this runs everytime $scope.things.push(...)
     });
