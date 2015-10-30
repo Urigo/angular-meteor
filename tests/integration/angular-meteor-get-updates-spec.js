@@ -14,7 +14,7 @@ describe('getUpdates module', function() {
   describe('validations', function() {
     it('should throw an error if first argument is not an object', function() {
       var boundGetUpdates = _.partial(getUpdates);
-      expect(boundGetUpdates).toThrowError(/first argument.*object/); 
+      expect(boundGetUpdates).toThrowError(/first argument.*object/);
     });
 
     it('should throw an error if second argument is not an object', function() {
@@ -183,9 +183,7 @@ describe('getUpdates module', function() {
 
       expect(updates).toDeepEqual({
         $set: {
-          'a.0': 1,
-          'a.1': 2,
-          'a.2': 3
+          'a': [1, 2, 3]
         }
       });
     });
@@ -233,9 +231,7 @@ describe('getUpdates module', function() {
 
       expect(updates).toDeepEqual({
         $set: {
-          'a.subfield.0': 1,
-          'a.subfield.1': 2,
-          'a.subfield.2': 3
+          'a.subfield': [1, 2, 3]
         }
       });
     });

@@ -24,6 +24,18 @@ PAGES = [
     subHead: "Angular 2.0 Meteor tutorial",
     stepbarHide: true,
     pages: ANGULAR2_TUT
+  },
+  {
+    id: "3",
+    title: "Ionic",
+    route: "tutorials.ionic",
+    path: "/tutorials/ionic",
+    pathRedirect: "/tutorials/ionic/bootstrapping",
+    ghRepoName: "https://github.com/idanwe/ionic-cli-meteor-whatsapp-tutorial",
+    seoTitlePrefix: "Angular-Meteor and Ionic | ",
+    subHead: "Angular-Meteor and Ionic",
+    stepbarHide: true,
+    pages: IONIC_TUT
   }
 ];
 
@@ -33,9 +45,27 @@ Template.sidebarDesktop.helpers({
   }
 });
 
+Template.tutorialSelector.helpers({
+  tutorialLink: function() {
+    var route = Router.current().route.path(this) || 'angular';
 
-Template.tutorialSelector.onCreated(function () {
-  this.data.pages = PAGES;
+    if (route.indexOf('ionic') !== -1) {
+      return 'ionic-tutorial';
+    }
+    else {
+      return 'tutorialIntro';
+    }
+  },
+  pages: function() {
+    var route = Router.current().route.path(this) || 'angular';
+
+    if (route.indexOf('ionic') !== -1) {
+      return [];
+    }
+    else {
+      return [PAGES[0], PAGES[1]];
+    }
+  }
 });
 
 Template.tutorialSelector.helpers({
@@ -46,8 +76,17 @@ Template.tutorialSelector.helpers({
   }
 });
 
-Template.sidebarDefault.onCreated(function () {
-  this.data.pages = ANGULAR1_TUT;
+Template.sidebarDefault.helpers({
+  pages: function() {
+    var route = Router.current().route.path(this) || 'angular';
+
+    if (route.indexOf('ionic') !== -1) {
+      return IONIC_TUT;
+    }
+    else {
+      return ANGULAR1_TUT;
+    }
+  }
 });
 
 Template.sidebarDefault.helpers({
@@ -102,8 +141,13 @@ Template.tutorialsLink.helpers({
     return rData.route == self.route || rData.parent.route == self.route ? "active" : "";
   },
   chapter: function () {
-    var rData = Router.current().data();
-    return rData.path.substr(rData.path.lastIndexOf('/'));
+    if (Router.current().data) {
+      var rData = Router.current().data();
+      return rData.path.substr(rData.path.lastIndexOf('/'));
+    }
+    else {
+      return [];
+    }
   }
 });
 

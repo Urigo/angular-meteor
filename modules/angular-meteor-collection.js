@@ -82,8 +82,10 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
     AngularMeteorCollection._upsertDoc = function(doc, useUnsetModifier) {
       var deferred = $q.defer();
       var collection = this.$$collection;
-      var createFulfill = _.partial($meteorUtils.fulfill, deferred, null);
-      var fulfill;
+      var upsertResult = function(action, _id) {
+        return {_id: _id, action: action }
+      }
+      var fulfill, createFulfill;
 
       // delete $$hashkey
       doc = $meteorUtils.stripDollarPrefixedKeys(doc);
@@ -96,12 +98,14 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
         // it can be $set using update.
         delete doc._id;
         var modifier = useUnsetModifier ? {$unset: doc} : {$set: doc};
-        fulfill = createFulfill({_id: docId, action: 'updated'});
+        createFulfill = _.partial(upsertResult, 'updated');
+        fulfill = $meteorUtils.fulfill(deferred, null, createFulfill);
         // NOTE: do not use #upsert() method, since it does not exist in some collections
         collection.update(docId, modifier, fulfill);
       // insert
       } else {
-        fulfill = createFulfill({_id: docId, action: 'inserted'});
+        createFulfill = _.partial(upsertResult, 'inserted');
+        fulfill = $meteorUtils.fulfill(deferred, null, createFulfill);
         collection.insert(doc, fulfill);
       }
 

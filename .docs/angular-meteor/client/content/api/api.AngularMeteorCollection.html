@@ -109,11 +109,11 @@ See [$meteor.collection](/api/meteorCollection)
 </tr>
 </tbody></table>
 <br>
-<h3><p><code><span class="pln">subscribe( :subscriptionName );</span></code></p></h3>
+<h3><p><code><span class="pln">subscribe( :subscriptionName, :PublisherArguments );</span></code></p></h3>
 <br>
 A shorter ('syntactic sugar') function for <a href="/api/subscribe">$meteor.subscribe</a>.
 
-Takes only one parameter and doesn't return a promise like <a href="/api/subscribe">$meteor.subscribe</a> does.
+Takes the subscription name and its parameters, but does not return a promise like <a href="/api/subscribe">$meteor.subscribe</a> does.
 
 When called after $scope.meteorCollection, it acts the same but in addition it automatically closes the subscription when the scope is destroyed.
 
@@ -138,6 +138,13 @@ When called after $scope.meteorCollection, it acts the same but in addition it a
     </p></td>
     <td><a href="" class="label type-hint type-hint-object">Yes</a></td>
   </tr>
+  <tr>
+    <td>publisherArguments</td>
+    <td><a href="" class="label type-hint type-hint-object">any</a></td>
+    <td><p>Optional arguments passed to publisher function on server.</p></td>
+    <td><a href="" class="label type-hint type-hint-object">No</a></td>
+  </tr>
+
   </tbody>
 </table>
 #### Returns

@@ -48,7 +48,14 @@ Template.stepbarLiveDemo.helpers({
     if (self.id < 10)
       zeroToStep = '0';
 
-    return 'http://socially-step' + zeroToStep + self.id + '.meteor.com/';
+    var route = Router.current().route.path(this) || 'angular';
+
+    if (route.indexOf('ionic') !== -1) {
+      return 'http://dotansimha.github.io/ionic-meteor-whatsapp-clone-step-' + zeroToStep + self.id;
+    }
+    else {
+      return 'http://socially-step' + zeroToStep + self.id + '.meteor.com/';
+    }
   },
   next: function () {
     var self = this;
@@ -92,8 +99,10 @@ Template.stepbarCodeDiff.helpers({
 Template.improveDoc.helpers({
   tutorialName: function () {
     var rData = Router.current().data();
-    if (rData.parent.route == 'tutorials.angular2'){
+    if (rData.parent.route == 'tutorials.angular2') {
       return 'angular2';
+    } else if (rData.parent.route == 'tutorials.ionic') {
+      return 'ionic'
     } else {
       return 'angular1'
     }
@@ -104,7 +113,7 @@ Template.downloadPreviousStep.helpers({
   ghRepoName: function () {
     var rData = Router.current().data();
     if (rData.parent.route == 'tutorials.angular2'){
-      return 'https://github.com/ShMcK/ng2-socially-tutorial';
+      return 'https://github.com/Urigo/meteor-angular2.0-socially';
     } else {
       return 'https://github.com/Urigo/meteor-angular-socially';
     }

@@ -22,6 +22,14 @@ function multiPatchHandler(compileStep) {
   });
 }
 
+function prepareSummary(message) {
+  return capitalizeFirstLetter(message.trim());
+}
+
+function capitalizeFirstLetter(message) {
+  return message.charAt(0).toUpperCase() + message.slice(1);
+}
+
 // Expects commit messages of the form:
 // "Step 2.2: Replace starter HTML code"
 // 
@@ -30,7 +38,13 @@ function parseOutStepNumberAndComment(parsedPatch) {
   var splitMessage = parsedPatch.message.split(":");
 
   if (splitMessage.length > 1) {
-    parsedPatch.stepNumber = splitMessage[0].split(" ")[1].trim();
-    parsedPatch.summary = splitMessage[1].trim(); 
+    var stepNumber = splitMessage[0].split(" ")[1];
+    if (!stepNumber) {
+      stepNumber = splitMessage[0].split(" ")[0];
+    }
+    parsedPatch.stepNumber = stepNumber.trim();
+    if (splitMessage[1]) {
+      parsedPatch.summary = prepareSummary(splitMessage[1]); 
+    }
   }
 }

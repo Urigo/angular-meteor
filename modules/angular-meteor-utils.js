@@ -29,6 +29,7 @@ angularMeteorUtils.service('$meteorUtils', [
       if( !angular.isObject(data) ||
         data instanceof Date ||
         data instanceof File ||
+        EJSON.toJSONValue(data).$type === 'oid' ||
         (typeof FS === 'object' && data instanceof FS.File)) {
         return data;
       }
@@ -45,6 +46,8 @@ angularMeteorUtils.service('$meteorUtils', [
       return function(err, result) {
         if (err)
           deferred.reject(boundError == null ? err : boundError);
+        else if (typeof boundResult == "function")
+          deferred.resolve(boundResult == null ? result : boundResult(result));
         else
           deferred.resolve(boundResult == null ? result : boundResult);
       };

@@ -59,9 +59,11 @@ Now every change that happens to the `$scope.parties` variable will automaticall
 
 But we still don't have data in that collection, so let's add some by initializing our server with the same parties we had before.
 
-Add this to the bottom of `app.js`:
+Let's create a file named `server.js`, and add this content:
 
-{{> DiffBox tutorialName="angular-meteor" step="3.4"}}
+{{> DiffBox tutorialName="angular-meteor" step="3.4" filename="server.js"}}
+
+> Note that we also moved the `Mongo.Collection` line from the `app.ng.js` because we want this line to work in both client and server, and `.ng.js` files are loaded in the client side only.
 
 As you can probably understand, this code runs only on the server, and when Meteor starts it initializes the DB with these sample parties.
 

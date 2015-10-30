@@ -273,4 +273,40 @@
     <loc>http://angular-meteor.com/api/ngFileExtension</loc>
     <priority>0.5</priority>
   </url>
+  <url>
+    <loc>http://angular-meteor.com/ionic-tutorial</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>http://angular-meteor.com/tutorials/ionic/bootstrapping</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>http://angular-meteor.com/tutorials/ionic/layout</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>http://angular-meteor.com/tutorials/ionic/server</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>http://angular-meteor.com/tutorials/ionic/methods</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>http://angular-meteor.com/tutorials/ionic/authentication</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>http://angular-meteor.com/tutorials/ionic/chats</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>http://angular-meteor.com/tutorials/ionic/privacy</loc>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>http://angular-meteor.com/tutorials/ionic/summary</loc>
+    <priority>0.4</priority>
+  </url>
 </urlset>

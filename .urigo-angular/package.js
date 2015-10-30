@@ -1,11 +1,11 @@
 Package.describe({
   name: "urigo:angular",
   summary: "Deprecated: use the official `angular` package instead!",
-  version: "1.0.0-rc.7",
+  version: "1.0.3",
   git: "https://github.com/Urigo/angular-meteor.git",
   documentation: null
 });
 
 Package.on_use(function (api) {
-  api.imply("angular@1.0.0-rc.7");
+  api.imply("angular@1.0.3");
 });

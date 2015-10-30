@@ -85,6 +85,11 @@ Router.map(function () {
     seoTitle: 'Angular Meteor Tutorials'
   });
 
+  self.route('ionic-tutorial', {
+    path: '/ionic-tutorial',
+    template: 'ionic-tutorial',
+    seoTitle: 'Angular Meteor and Ionic tutorial'
+  });
 
   // -------------------------------------------------------------------------
   // API reference routes

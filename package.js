@@ -1,7 +1,7 @@
 Package.describe({
   name: "angular",
   summary: "Everything you need to use AngularJS in your Meteor app",
-  version: "1.0.0-rc.7",
+  version: "1.0.3",
   git: "https://github.com/Urigo/angular-meteor.git"
 });
 
@@ -51,6 +51,12 @@ Package.onUse(function (api) {
   api.use('dburles:mongo-collection-instances@0.3.4', 'client'); // For getCollectionByName
   api.use('isobuild:compiler-plugin@1.0.0'); // Used for compilers
 
+  api.use('ejson');
+  api.use('tracker@1.0.7');
+  api.use('underscore');
+  api.use('session');
+  api.use('mongo@1.1.0');
+
   // Files to load in Client only.
   api.add_files([
     // Lib Files
@@ -82,6 +88,11 @@ Package.onTest(function(api) {
   api.use('mdg:camera@1.1.5');
   api.use('angular');
 
+  api.use('underscore');
+  api.use('session');
+  api.use('mongo');
+  api.use('tracker');
+
   // auxiliary
   api.addFiles([
     'tests/integration/auxiliary/matchers.js',
@@ -96,6 +107,7 @@ Package.onTest(function(api) {
     'tests/integration/angular-meteor-camera-spec.js',
     'tests/integration/angular-meteor-diff-array-spec.js',
     'tests/integration/angular-meteor-get-updates-spec.js',
+    'tests/integration/angular-meteor-subscribe-spec.js',
     'tests/integration/angular-meteor-collection-spec.js',
     'tests/integration/angular-meteor-object-spec.js',
     'tests/integration/angular-meteor-reactive-scope-spec.js',
