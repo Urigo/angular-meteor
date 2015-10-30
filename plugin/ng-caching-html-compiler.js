@@ -4,7 +4,7 @@ NgCachingHtmlCompiler = class NgCachingHtmlCompiler extends CachingHtmlCompiler 
     var packagePrefix = '';
 
     if (inputFile.getPackageName()) {
-      packagePrefix += inputFile.getPackageName() + '/';
+      packagePrefix += '/packages/' + inputFile.getPackageName() + '/';
     }
 
     const inputPath = packagePrefix + inputFile.getPathInPackage();
