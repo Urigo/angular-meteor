@@ -26,16 +26,6 @@ Package.registerBuildPlugin({
   }
 });
 
-Package.registerBuildPlugin({
-  name: 'compileNGScript',
-  sources: [
-    'plugin/ng-script-compiler.js'
-  ],
-  npmDependencies: {
-    'ng-annotate': '0.15.4'
-  }
-});
-
 Package.onUse(function (api) {
   api.versionsFrom('METEOR@1.2.0.1');
   api.use('underscore@1.0.4');
