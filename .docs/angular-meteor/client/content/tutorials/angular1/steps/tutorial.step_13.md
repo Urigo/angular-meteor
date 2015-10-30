@@ -22,7 +22,7 @@ Now let's create a custom filter that will filter out users that are the owners 
 
 Create a new folder named `filters` under the `client->parties` folder.
 
-Under that folder create a new file named `uninvited.js` and place that code inside:
+Under that folder create a new file named `uninvited.ng.js` and place that code inside:
 
 {{> DiffBox tutorialName="angular-meteor" step="13.1"}}
 
@@ -62,7 +62,7 @@ and that the filter `displayName` will handle to logic and display the user's na
 
 So let's create another custom filter `displayName`.
 
-Create a new file under the filters folder named `displayName.js` and place that code inside:
+Create a new file under the filters folder named `displayName.ng.js` and place that code inside:
 
 {{> DiffBox tutorialName="angular-meteor" step="13.4"}}
 
@@ -77,7 +77,7 @@ so it will look like this:
 
 {{> DiffBox tutorialName="angular-meteor" step="13.5"}}
 
-and define the creator scope function in the partiesListCtrl in `partiesList.js`:
+and define the creator scope function in the partiesListCtrl in `partiesList.ng.js`:
 
 {{> DiffBox tutorialName="angular-meteor" step="13.6"}}
 
