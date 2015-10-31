@@ -71,7 +71,7 @@ And now let's create this view, for now we will just use a placeholder that we w
 
 {{> DiffBox tutorialName="angular-meteor" step="21.7"}}
 
-Now, we need to declare using these files in our `package.js`, so any JS file will be declared using `api.addFiles` and any AngularJS template file (`.ng.html`) will be declared using `api.addAssets`.
+Now, we need to declare using these files in our `package.js`, so any JS file will be declared using `api.addFiles` and any AngularJS template file (`.html`) will be declared using `api.addAssets`.
 
 We also use the platform declaration, using the last argument of these functions.
 
@@ -123,7 +123,7 @@ Now we just need to add the browser package to our project:
 
   $ meteor add socially-browser
 
-Now let's copy the original login view file from `client/users/views/login.ng.html` to our package view (`login-browser.ng.html`):
+Now let's copy the original login view file from `client/users/views/login.html` to our package view (`login-browser.html`):
 
 {{> DiffBox tutorialName="angular-meteor" step="21.17"}}
 
@@ -131,7 +131,7 @@ And now let's move the current `LoginCtrl` from `client/users/controllers/login.
 
 {{> DiffBox tutorialName="angular-meteor" step="21.18"}}
 
-> Also, now you can delete `client/users/views/login.ng.html` file, we do no longer need it!
+> Also, now you can delete `client/users/views/login.html` file, we do no longer need it!
 
 And now we need to load the `LoginCtrl` in our package definition:
 

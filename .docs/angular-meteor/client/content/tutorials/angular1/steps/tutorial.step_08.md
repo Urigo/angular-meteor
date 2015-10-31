@@ -106,7 +106,7 @@ Every application has a single root scope. All other scopes are descendant scope
 To access $rootScope inside a controller you add it through the dependency injection.
 To access $rootScope in a template you simply write $root. and then the name of the property.
 
-Change the code for the add button in `parties-list.ng.html` to this:
+Change the code for the add button in `parties-list.html` to this:
 
 {{> DiffBox tutorialName="angular-meteor" step="8.7"}}
 

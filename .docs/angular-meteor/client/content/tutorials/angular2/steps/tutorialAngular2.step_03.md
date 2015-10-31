@@ -94,7 +94,7 @@ __`client/app.ts`:__
       selector: 'app'
     })
     @View({
-      templateUrl: "client/index.ng.html",
+      templateUrl: "client/index.html",
       directives: [NgFor]
     })
     class Socially {

@@ -84,9 +84,9 @@ This package takes care of connecting Angular to Meteor and includes the latest 
 
 That's it! Now we can use AngularJS's power in our Meteor app.
 
-To start simple, create a new file called `index.ng.html` under the main folder, this will be our main `HTML` template page.
+To start simple, create a new file called `index.html` under the main folder, this will be our main `HTML` template page.
 
-> We are using the `.ng.html` file extension so that Blaze - Meteor's templating system - won't compile and override our AngularJS expressions.
+> We are using the `.html` file extension so that Blaze - Meteor's templating system - won't compile and override our AngularJS expressions.
 
 Then move the `p` tag into it:
 
@@ -98,11 +98,11 @@ Now let's include that file into our main `index.html` file:
 
 But if you load this in your browser, **you won't see anything**. That's because we still need to **create the actual Angular app**, which we'll do next.
 
-> It's very important to note - the **paths are always absolute, not relative!**  so if `index.ng.html` was inside a folder named `client`, you would have to place the whole path from the route app, doesn't matter where you're calling the file from.
+> It's very important to note - the **paths are always absolute, not relative!**  so if `index.html` was inside a folder named `client`, you would have to place the whole path from the route app, doesn't matter where you're calling the file from.
 
-E.g. if `index.ng.html` was in a folder named `client` your include would look like:
+E.g. if `index.html` was in a folder named `client` your include would look like:
 
-    <div ng-include="'client/index.ng.html'"></div>
+    <div ng-include="'client/index.html'"></div>
 
 # Building The AngularJS App
 
@@ -131,7 +131,7 @@ And use the same application name in the `ng-app` directive in `index.html`:
 
 Now run the app.
 
-Everything is the same, so now inside our `index.ng.html` let's use Angular:
+Everything is the same, so now inside our `index.html` let's use Angular:
 
 {{> DiffBox tutorialName="angular-meteor" step="0.10"}}
 
@@ -142,7 +142,7 @@ Run the app again and the screen should look like this:
 Angular interpreted the expression like any other Angular application.
 
 # Experiments
-Try adding a new expression to the index.ng.html that will do some math:
+Try adding a new expression to the index.html that will do some math:
 
     <p>1 + 2 = {{dstache}} 1 + 2 }}</p>
 

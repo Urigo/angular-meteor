@@ -68,7 +68,7 @@ index 4f8c65d..0000000
 -    // code to run on server at startup
 -  });
 -}
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -91,7 +91,7 @@ index 0000000..ef412ef
 +<body>
 +  <p>Nothing here</p>
 +</body>
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -110,7 +110,7 @@ index a9f8340..03949b6 100644
 --- a/.meteor/packages
 +++ b/.meteor/packages
 @@ -18,3 +18,4 @@ ecmascript              # Enable ECMAScript2015+ syntax in app code
- 
+
  autopublish             # Publish all data to the clients (for prototyping)
  insecure                # Allow all DB writes from clients (for prototyping)
 +angular
@@ -140,7 +140,7 @@ index e378b68..a702ca4 100644
  launch-screen@1.0.4
  livedata@1.0.15
  logging@1.0.8
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -159,7 +159,7 @@ index 03949b6..3216f31 100644
 --- a/.meteor/packages
 +++ b/.meteor/packages
 @@ -18,4 +18,4 @@ ecmascript              # Enable ECMAScript2015+ syntax in app code
- 
+
  autopublish             # Publish all data to the clients (for prototyping)
  insecure                # Allow all DB writes from clients (for prototyping)
 -angular
@@ -174,7 +174,7 @@ index a702ca4..ea97952 100644
  angular:angular@1.4.6
  autopublish@1.0.4
  autoupdate@1.2.3
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -182,21 +182,21 @@ From a82fd7e74a9f01e7ef1a67956a2396160791fcc0 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 16:47:59 +0300
 Subject: [PATCH 005/239] Step 0.5: Move the main HTML content into
- index.ng.html
+ index.html
 
 ---
- index.ng.html | 1 +
+ index.html | 1 +
  1 file changed, 1 insertion(+)
- create mode 100644 index.ng.html
+ create mode 100644 index.html
 
-diff --git a/index.ng.html b/index.ng.html
+diff --git a/index.html b/index.html
 new file mode 100644
 index 0000000..79ed426
 --- /dev/null
-+++ b/index.ng.html
++++ b/index.html
 @@ -0,0 +1 @@
 +<p>Nothing here</p>
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -217,9 +217,9 @@ index ef412ef..bf21494 100644
 @@ -1,3 +1,3 @@
  <body>
 -  <p>Nothing here</p>
-+  <div ng-include="'index.ng.html'"></div>
++  <div ng-include="'index.html'"></div>
  </body>
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -243,7 +243,7 @@ index 0000000..2465ea1
 +if (Meteor.isClient) {
 +
 +}
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -266,7 +266,7 @@ index 2465ea1..987f384 100644
 -
 +  angular.module('socially',['angular-meteor']);
  }
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -286,9 +286,9 @@ index bf21494..963f4fa 100644
 @@ -1,3 +1,3 @@
 -<body>
 +<body ng-app="socially">
-   <div ng-include="'index.ng.html'"></div>
+   <div ng-include="'index.html'"></div>
  </body>
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -298,17 +298,17 @@ Date: Mon, 17 Aug 2015 17:31:28 +0300
 Subject: [PATCH 010/239] Step 0.10: Add AngularJS code!
 
 ---
- index.ng.html | 2 +-
+ index.html | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/index.ng.html b/index.ng.html
+diff --git a/index.html b/index.html
 index 79ed426..a9c8ddc 100644
---- a/index.ng.html
-+++ b/index.ng.html
+--- a/index.html
++++ b/index.html
 @@ -1 +1 @@
 -<p>Nothing here</p>
 +<p>Nothing here {{ 'yet' + '!' }}</p>
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -318,13 +318,13 @@ Date: Mon, 17 Aug 2015 18:18:08 +0300
 Subject: [PATCH 011/239] Step 1.1: Add some static HTML the to main page
 
 ---
- index.ng.html | 15 ++++++++++++++-
+ index.html | 15 ++++++++++++++-
  1 file changed, 14 insertions(+), 1 deletion(-)
 
-diff --git a/index.ng.html b/index.ng.html
+diff --git a/index.html b/index.html
 index a9c8ddc..dd1ef68 100644
---- a/index.ng.html
-+++ b/index.ng.html
+--- a/index.html
++++ b/index.html
 @@ -1 +1,14 @@
 -<p>Nothing here {{ 'yet' + '!' }}</p>
 +<ul>
@@ -341,7 +341,7 @@ index a9c8ddc..dd1ef68 100644
 +    </p>
 +  </li>
 +</ul>
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -351,13 +351,13 @@ Date: Mon, 17 Aug 2015 18:20:42 +0300
 Subject: [PATCH 012/239] Step 2.1: Use dynamic template instead of static
 
 ---
- index.ng.html | 22 ++++++++--------------
+ index.html | 22 ++++++++--------------
  1 file changed, 8 insertions(+), 14 deletions(-)
 
-diff --git a/index.ng.html b/index.ng.html
+diff --git a/index.html b/index.html
 index dd1ef68..7f8c6d9 100644
---- a/index.ng.html
-+++ b/index.ng.html
+--- a/index.html
++++ b/index.html
 @@ -1,14 +1,8 @@
 -<ul>
 -  <li>
@@ -381,7 +381,7 @@ index dd1ef68..7f8c6d9 100644
 +    </li>
 +  </ul>
 +</div>
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -422,7 +422,7 @@ index 987f384..9cbfb86 100644
 +  }]);
 +}
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -492,7 +492,7 @@ index 0000000..9cbfb86
 +  }]);
 +}
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -512,7 +512,7 @@ index 9cbfb86..eaef6a3 100644
 @@ -1,7 +1,7 @@
  if (Meteor.isClient) {
    angular.module('socially', ['angular-meteor']);
- 
+
 -  angular.module('socially').controller('PartiesListCtrl', ['$scope', function ($scope) {
 +  angular.module('socially').controller('PartiesListCtrl', function ($scope) {
      $scope.parties = [
@@ -526,7 +526,7 @@ index 9cbfb86..eaef6a3 100644
 +  });
  }
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -546,9 +546,9 @@ index 963f4fa..cbd22c9 100644
 @@ -1,3 +1,3 @@
 -<body ng-app="socially">
 +<body ng-app="socially" ng-strict-di="">
-   <div ng-include="'index.ng.html'"></div>
+   <div ng-include="'index.html'"></div>
  </body>
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -570,8 +570,8 @@ index eaef6a3..89788bb 100644
 +
  if (Meteor.isClient) {
    angular.module('socially', ['angular-meteor']);
- 
--- 
+
+--
 2.3.2 (Apple Git-55)
 
 
@@ -591,7 +591,7 @@ index 89788bb..5c2763d 100644
 @@ -3,20 +3,7 @@ Parties = new Mongo.Collection("parties");
  if (Meteor.isClient) {
    angular.module('socially', ['angular-meteor']);
- 
+
 -  angular.module('socially').controller('PartiesListCtrl', function ($scope) {
 -    $scope.parties = [
 -      {
@@ -612,7 +612,7 @@ index 89788bb..5c2763d 100644
    });
  }
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -632,14 +632,14 @@ index 5c2763d..89bb0f2 100644
 @@ -3,7 +3,7 @@ Parties = new Mongo.Collection("parties");
  if (Meteor.isClient) {
    angular.module('socially', ['angular-meteor']);
- 
+
 -  angular.module('socially').controller('PartiesListCtrl',function ($scope) {
 +  angular.module('socially').controller('PartiesListCtrl', function ($scope, $meteor) {
      $scope.parties = $meteor.collection(Parties);
    });
  }
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -663,7 +663,7 @@ index 89bb0f2..da36506 100644
 -
  if (Meteor.isClient) {
    angular.module('socially', ['angular-meteor']);
- 
+
 diff --git a/server.js b/server.js
 new file mode 100644
 index 0000000..3ce2ef4
@@ -689,7 +689,7 @@ index 0000000..3ce2ef4
 +  });
 +}
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -699,13 +699,13 @@ Date: Mon, 17 Aug 2015 18:49:37 +0300
 Subject: [PATCH 021/239] Step 4.1: Add basic form to the view
 
 ---
- index.ng.html | 7 +++++++
+ index.html | 7 +++++++
  1 file changed, 7 insertions(+)
 
-diff --git a/index.ng.html b/index.ng.html
+diff --git a/index.html b/index.html
 index 7f8c6d9..4880315 100644
---- a/index.ng.html
-+++ b/index.ng.html
+--- a/index.html
++++ b/index.html
 @@ -1,4 +1,11 @@
  <div ng-controller="PartiesListCtrl">
 +  <form>
@@ -718,7 +718,7 @@ index 7f8c6d9..4880315 100644
    <ul>
      <li ng-repeat="party in parties">
        {{party.name}}
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -728,13 +728,13 @@ Date: Mon, 17 Aug 2015 18:50:38 +0300
 Subject: [PATCH 022/239] Step 4.2: Add ng-model to the form's inputs
 
 ---
- index.ng.html | 4 ++--
+ index.html | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/index.ng.html b/index.ng.html
+diff --git a/index.html b/index.html
 index 4880315..ea6dc8f 100644
---- a/index.ng.html
-+++ b/index.ng.html
+--- a/index.html
++++ b/index.html
 @@ -1,9 +1,9 @@
  <div ng-controller="PartiesListCtrl">
    <form>
@@ -747,7 +747,7 @@ index 4880315..ea6dc8f 100644
      <button>Add</button>
    </form>
    <ul>
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -757,13 +757,13 @@ Date: Mon, 17 Aug 2015 18:51:15 +0300
 Subject: [PATCH 023/239] Step 4.3: Add ng-click logic to the "Add" button
 
 ---
- index.ng.html | 2 +-
+ index.html | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/index.ng.html b/index.ng.html
+diff --git a/index.html b/index.html
 index ea6dc8f..d39fd36 100644
---- a/index.ng.html
-+++ b/index.ng.html
+--- a/index.html
++++ b/index.html
 @@ -4,7 +4,7 @@
      <input ng-model="newParty.name">
      <label>Description</label>
@@ -773,7 +773,7 @@ index ea6dc8f..d39fd36 100644
    </form>
    <ul>
      <li ng-repeat="party in parties">
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -783,13 +783,13 @@ Date: Mon, 17 Aug 2015 18:52:46 +0300
 Subject: [PATCH 024/239] Step 4.4: Add delete button to the parties list
 
 ---
- index.ng.html | 1 +
+ index.html | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/index.ng.html b/index.ng.html
+diff --git a/index.html b/index.html
 index d39fd36..614c3a0 100644
---- a/index.ng.html
-+++ b/index.ng.html
+--- a/index.html
++++ b/index.html
 @@ -10,6 +10,7 @@
      <li ng-repeat="party in parties">
        {{party.name}}
@@ -798,7 +798,7 @@ index d39fd36..614c3a0 100644
      </li>
    </ul>
  </div>
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -816,7 +816,7 @@ index da36506..994968f 100644
 --- a/app.ng.js
 +++ b/app.ng.js
 @@ -3,5 +3,9 @@ if (Meteor.isClient) {
- 
+
    angular.module('socially').controller('PartiesListCtrl', function ($scope, $meteor) {
      $scope.parties = $meteor.collection(Parties);
 +
@@ -826,7 +826,7 @@ index da36506..994968f 100644
    });
  }
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -836,13 +836,13 @@ Date: Mon, 17 Aug 2015 18:55:39 +0300
 Subject: [PATCH 026/239] Step 4.6: Replace push with save
 
 ---
- index.ng.html | 2 +-
+ index.html | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/index.ng.html b/index.ng.html
+diff --git a/index.html b/index.html
 index 614c3a0..68ec2ac 100644
---- a/index.ng.html
-+++ b/index.ng.html
+--- a/index.html
++++ b/index.html
 @@ -4,7 +4,7 @@
      <input ng-model="newParty.name">
      <label>Description</label>
@@ -852,7 +852,7 @@ index 614c3a0..68ec2ac 100644
    </form>
    <ul>
      <li ng-repeat="party in parties">
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -871,7 +871,7 @@ index 994968f..30a428e 100644
 +++ b/app.ng.js
 @@ -5,7 +5,7 @@ if (Meteor.isClient) {
      $scope.parties = $meteor.collection(Parties);
- 
+
      $scope.remove = function(party){
 -      $scope.parties.splice($scope.parties.indexOf(party), 1);
 +      $scope.parties.remove(party);
@@ -879,7 +879,7 @@ index 994968f..30a428e 100644
    });
  }
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -889,13 +889,13 @@ Date: Mon, 17 Aug 2015 18:57:38 +0300
 Subject: [PATCH 028/239] Step 4.8: Add Remove All button
 
 ---
- index.ng.html | 1 +
+ index.html | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/index.ng.html b/index.ng.html
+diff --git a/index.html b/index.html
 index 68ec2ac..5c567a8 100644
---- a/index.ng.html
-+++ b/index.ng.html
+--- a/index.html
++++ b/index.html
 @@ -5,6 +5,7 @@
      <label>Description</label>
      <input ng-model="newParty.description">
@@ -904,7 +904,7 @@ index 68ec2ac..5c567a8 100644
    </form>
    <ul>
      <li ng-repeat="party in parties">
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -932,7 +932,7 @@ index 30a428e..6ea7dce 100644
    });
  }
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -967,7 +967,7 @@ index ea97952..ff41b50 100644
  autopublish@1.0.4
  autoupdate@1.2.3
  babel-compiler@5.8.24_1
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -988,10 +988,10 @@ index 6ea7dce..ce8c242 100644
  if (Meteor.isClient) {
 -  angular.module('socially', ['angular-meteor']);
 +  angular.module('socially', ['angular-meteor', 'ui.router']);
- 
+
    angular.module('socially').controller('PartiesListCtrl', function ($scope, $meteor) {
      $scope.parties = $meteor.collection(Parties);
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -1001,15 +1001,15 @@ Date: Mon, 17 Aug 2015 19:08:18 +0300
 Subject: [PATCH 032/239] Step 5.3: Create parties list page
 
 ---
- parties-list.ng.html | 15 +++++++++++++++
+ parties-list.html | 15 +++++++++++++++
  1 file changed, 15 insertions(+)
- create mode 100644 parties-list.ng.html
+ create mode 100644 parties-list.html
 
-diff --git a/parties-list.ng.html b/parties-list.ng.html
+diff --git a/parties-list.html b/parties-list.html
 new file mode 100644
 index 0000000..28a1881
 --- /dev/null
-+++ b/parties-list.ng.html
++++ b/parties-list.html
 @@ -0,0 +1,15 @@
 +<form>
 +  <label>Name</label>
@@ -1026,7 +1026,7 @@ index 0000000..28a1881
 +    <button ng-click="remove(party)">X</button>
 +  </li>
 +</ul>
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -1045,7 +1045,7 @@ index cbd22c9..16d4ecd 100644
 +++ b/index.html
 @@ -1,3 +1,14 @@
 -<body ng-app="socially" ng-strict-di="">
--  <div ng-include="'index.ng.html'"></div>
+-  <div ng-include="'index.html'"></div>
 -</body>
 +<head>
 +  <base href="/">
@@ -1062,24 +1062,24 @@ index cbd22c9..16d4ecd 100644
 +
 +</body>
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
 From 826a71e1eef1f69ee77de43cc3018a6ba81c5a6e Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 19:12:39 +0300
-Subject: [PATCH 034/239] Step 5.5: Remove index.ng.html
+Subject: [PATCH 034/239] Step 5.5: Remove index.html
 
 ---
- index.ng.html | 17 -----------------
+ index.html | 17 -----------------
  1 file changed, 17 deletions(-)
- delete mode 100644 index.ng.html
+ delete mode 100644 index.html
 
-diff --git a/index.ng.html b/index.ng.html
+diff --git a/index.html b/index.html
 deleted file mode 100644
 index 5c567a8..0000000
---- a/index.ng.html
+--- a/index.html
 +++ /dev/null
 @@ -1,17 +0,0 @@
 -<div ng-controller="PartiesListCtrl">
@@ -1099,7 +1099,7 @@ index 5c567a8..0000000
 -    </li>
 -  </ul>
 -</div>
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -1109,19 +1109,19 @@ Date: Mon, 17 Aug 2015 19:12:51 +0300
 Subject: [PATCH 035/239] Step 5.6: Create party details page
 
 ---
- party-details.ng.html | 1 +
+ party-details.html | 1 +
  1 file changed, 1 insertion(+)
- create mode 100644 party-details.ng.html
+ create mode 100644 party-details.html
 
-diff --git a/party-details.ng.html b/party-details.ng.html
+diff --git a/party-details.html b/party-details.html
 new file mode 100644
 index 0000000..68fe7fe
 --- /dev/null
-+++ b/party-details.ng.html
++++ b/party-details.html
 @@ -0,0 +1 @@
 +Here you will see the details of party number: {{ partyId }}
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -1141,7 +1141,7 @@ index ce8c242..a3966b2 100644
 @@ -1,6 +1,25 @@
  if (Meteor.isClient) {
    angular.module('socially', ['angular-meteor', 'ui.router']);
- 
+
 +  angular.module('socially').config(function($urlRouterProvider, $stateProvider, $locationProvider){
 +
 +      $locationProvider.html5Mode(true);
@@ -1149,22 +1149,22 @@ index ce8c242..a3966b2 100644
 +      $stateProvider
 +        .state('parties', {
 +          url: '/parties',
-+          templateUrl: 'parties-list.ng.html',
++          templateUrl: 'parties-list.html',
 +          controller: 'PartiesListCtrl'
 +        })
 +        .state('partyDetails', {
 +          url: '/parties/:partyId',
-+          templateUrl: 'party-details.ng.html',
++          templateUrl: 'party-details.html',
 +          controller: 'PartyDetailsCtrl'
 +        });
 +
 +      $urlRouterProvider.otherwise("/parties");
 +    });
-+  
++
    angular.module('socially').controller('PartiesListCtrl', function ($scope, $meteor) {
      $scope.parties = $meteor.collection(Parties);
- 
--- 
+
+--
 2.3.2 (Apple Git-55)
 
 
@@ -1186,7 +1186,7 @@ index a3966b2..90dbf90 100644
 +
  if (Meteor.isClient) {
    angular.module('socially', ['angular-meteor', 'ui.router']);
- 
+
 @@ -31,4 +33,8 @@ if (Meteor.isClient) {
        $scope.parties.remove();
      };
@@ -1197,7 +1197,7 @@ index a3966b2..90dbf90 100644
 +  });
  }
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -1217,7 +1217,7 @@ index 90dbf90..e1f8c30 100644
 @@ -34,7 +34,7 @@ if (Meteor.isClient) {
      };
    });
- 
+
 -  angular.module("socially").controller("PartyDetailsCtrl", function($scope, $stateParams) {
 -    $scope.partyId = $stateParams.partyId;
 +  angular.module("socially").controller("PartyDetailsCtrl", function($scope, $stateParams, $meteor) {
@@ -1225,7 +1225,7 @@ index 90dbf90..e1f8c30 100644
    });
  }
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -1235,13 +1235,13 @@ Date: Mon, 17 Aug 2015 19:44:09 +0300
 Subject: [PATCH 039/239] Step 6.2: Add binding to the party details
 
 ---
- party-details.ng.html | 5 ++++-
+ party-details.html | 5 ++++-
  1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/party-details.ng.html b/party-details.ng.html
+diff --git a/party-details.html b/party-details.html
 index 68fe7fe..31f8472 100644
---- a/party-details.ng.html
-+++ b/party-details.ng.html
+--- a/party-details.html
++++ b/party-details.html
 @@ -1 +1,4 @@
 -Here you will see the details of party number: {{ partyId }}
 \ No newline at end of file
@@ -1250,7 +1250,7 @@ index 68fe7fe..31f8472 100644
 +<input ng-model="party.name">
 +<input ng-model="party.description">
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -1260,16 +1260,16 @@ Date: Mon, 17 Aug 2015 19:46:20 +0300
 Subject: [PATCH 040/239] Step 6.3: Add some buttons to the form
 
 ---
- party-details.ng.html | 6 +++++-
+ party-details.html | 6 +++++-
  1 file changed, 5 insertions(+), 1 deletion(-)
 
-diff --git a/party-details.ng.html b/party-details.ng.html
+diff --git a/party-details.html b/party-details.html
 index 31f8472..52e92e7 100644
---- a/party-details.ng.html
-+++ b/party-details.ng.html
+--- a/party-details.html
++++ b/party-details.html
 @@ -1,4 +1,8 @@
  Here you will see and change the details of the party:
- 
+
  <input ng-model="party.name">
 -<input ng-model="party.description">
 \ No newline at end of file
@@ -1279,7 +1279,7 @@ index 31f8472..52e92e7 100644
 +<button ng-click="reset()">Reset form</button>
 +<button ui-sref="parties">Cancel</button>
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -1298,14 +1298,14 @@ index e1f8c30..9e31d5d 100644
 +++ b/app.ng.js
 @@ -35,6 +35,6 @@ if (Meteor.isClient) {
    });
- 
+
    angular.module("socially").controller("PartyDetailsCtrl", function($scope, $stateParams, $meteor) {
 -    $scope.party = $meteor.object(Parties, $stateParams.partyId);
 +    $scope.party = $meteor.object(Parties, $stateParams.partyId, false);
    });
  }
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -1323,7 +1323,7 @@ index 9e31d5d..0d212e6 100644
 --- a/app.ng.js
 +++ b/app.ng.js
 @@ -36,5 +36,13 @@ if (Meteor.isClient) {
- 
+
    angular.module("socially").controller("PartyDetailsCtrl", function($scope, $stateParams, $meteor) {
      $scope.party = $meteor.object(Parties, $stateParams.partyId, false);
 +
@@ -1337,7 +1337,7 @@ index 9e31d5d..0d212e6 100644
    });
  }
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -1356,7 +1356,7 @@ index 0d212e6..46819b9 100644
 +++ b/app.ng.js
 @@ -38,7 +38,11 @@ if (Meteor.isClient) {
      $scope.party = $meteor.object(Parties, $stateParams.partyId, false);
- 
+
      $scope.save = function() {
 -      $scope.party.save();
 +      $scope.party.save().then(function(numberOfDocs){
@@ -1365,9 +1365,9 @@ index 0d212e6..46819b9 100644
 +        console.log('save error', error);
 +      });
      };
- 
+
      $scope.reset = function() {
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -1389,7 +1389,7 @@ index 0000000..999bdc1
 @@ -0,0 +1 @@
 +angular.module('socially',['angular-meteor', 'ui.router']);
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -1411,7 +1411,7 @@ index 0000000..dc0ccc3
 @@ -0,0 +1 @@
 +Parties = new Mongo.Collection("parties");
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -1445,7 +1445,7 @@ index 0000000..8d3780e
 +      Parties.insert({name: parties[i].name, description: parties[i].description});
 +  }
 +});
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -1471,19 +1471,19 @@ index 0000000..4dc1ad3
 +  $stateProvider
 +    .state('parties', {
 +      url: '/parties',
-+      templateUrl: 'parties-list.ng.html',
++      templateUrl: 'parties-list.html',
 +      controller: 'PartiesListCtrl'
 +    })
 +    .state('partyDetails', {
 +      url: '/parties/:partyId',
-+      templateUrl: 'party-details.ng.html',
++      templateUrl: 'party-details.html',
 +      controller: 'PartyDetailsCtrl'
 +    });
 +
 +  $urlRouterProvider.otherwise("/parties");
 +});
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -1515,7 +1515,7 @@ index 0000000..ef2c64f
 +  };
 +});
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -1538,7 +1538,7 @@ index 0000000..a46e036
 +angular.module("socially").controller("PartyDetailsCtrl", function ($scope, $stateParams, $meteor) {
 +  $scope.party = $meteor.object(Parties, $stateParams.partyId);
 +});
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -1596,7 +1596,7 @@ index 16d4ecd..0000000
 -
 -</body>
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -1604,18 +1604,18 @@ From d7003b52cb1a0d3cd0885e0b291f49760522599a Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 17 Aug 2015 20:11:30 +0300
 Subject: [PATCH 051/239] Step 7.8: Move to
- client/parties/views/parties-list.ng.html
+ client/parties/views/parties-list.html
 
 ---
- client/parties/views/parties-list.ng.html | 15 +++++++++++++++
+ client/parties/views/parties-list.html | 15 +++++++++++++++
  1 file changed, 15 insertions(+)
- create mode 100644 client/parties/views/parties-list.ng.html
+ create mode 100644 client/parties/views/parties-list.html
 
-diff --git a/client/parties/views/parties-list.ng.html b/client/parties/views/parties-list.ng.html
+diff --git a/client/parties/views/parties-list.html b/client/parties/views/parties-list.html
 new file mode 100644
 index 0000000..2b64715
 --- /dev/null
-+++ b/client/parties/views/parties-list.ng.html
++++ b/client/parties/views/parties-list.html
 @@ -0,0 +1,15 @@
 +<form>
 +  <label>Name</label>
@@ -1633,32 +1633,32 @@ index 0000000..2b64715
 +  </li>
 +</ul>
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
 From b64c8393b672e034e410b3dc389ab0182e4b675a Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 17 Oct 2015 18:09:03 +0300
-Subject: [PATCH 052/239] Step 7.9: Move party-details.ng.html view
+Subject: [PATCH 052/239] Step 7.9: Move party-details.html view
 
 ---
- client/parties/views/party-details.ng.html | 4 ++++
+ client/parties/views/party-details.html | 4 ++++
  1 file changed, 4 insertions(+)
- create mode 100644 client/parties/views/party-details.ng.html
+ create mode 100644 client/parties/views/party-details.html
 
-diff --git a/client/parties/views/party-details.ng.html b/client/parties/views/party-details.ng.html
+diff --git a/client/parties/views/party-details.html b/client/parties/views/party-details.html
 new file mode 100644
 index 0000000..31f8472
 --- /dev/null
-+++ b/client/parties/views/party-details.ng.html
++++ b/client/parties/views/party-details.html
 @@ -0,0 +1,4 @@
 +Here you will see and change the details of the party:
 +
 +<input ng-model="party.name">
 +<input ng-model="party.description">
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -1679,18 +1679,18 @@ index 4dc1ad3..e146f42 100644
    $stateProvider
      .state('parties', {
        url: '/parties',
--      templateUrl: 'parties-list.ng.html',
-+      templateUrl: 'client/parties/views/parties-list.ng.html',
+-      templateUrl: 'parties-list.html',
++      templateUrl: 'client/parties/views/parties-list.html',
        controller: 'PartiesListCtrl'
      })
      .state('partyDetails', {
        url: '/parties/:partyId',
--      templateUrl: 'party-details.ng.html',
-+      templateUrl: 'client/parties/views/party-details.ng.html',
+-      templateUrl: 'party-details.html',
++      templateUrl: 'client/parties/views/party-details.html',
        controller: 'PartyDetailsCtrl'
      });
- 
--- 
+
+--
 2.3.2 (Apple Git-55)
 
 
@@ -1701,13 +1701,13 @@ Subject: [PATCH 054/239] Step 7.11: Delete remaining files
 
 ---
  app.ng.js             | 52 ---------------------------------------------------
- parties-list.ng.html  | 15 ---------------
- party-details.ng.html |  8 --------
+ parties-list.html  | 15 ---------------
+ party-details.html |  8 --------
  server.js             | 18 ------------------
  4 files changed, 93 deletions(-)
  delete mode 100644 app.ng.js
- delete mode 100644 parties-list.ng.html
- delete mode 100644 party-details.ng.html
+ delete mode 100644 parties-list.html
+ delete mode 100644 party-details.html
  delete mode 100644 server.js
 
 diff --git a/app.ng.js b/app.ng.js
@@ -1728,18 +1728,18 @@ index 46819b9..0000000
 -      $stateProvider
 -        .state('parties', {
 -          url: '/parties',
--          templateUrl: 'parties-list.ng.html',
+-          templateUrl: 'parties-list.html',
 -          controller: 'PartiesListCtrl'
 -        })
 -        .state('partyDetails', {
 -          url: '/parties/:partyId',
--          templateUrl: 'party-details.ng.html',
+-          templateUrl: 'party-details.html',
 -          controller: 'PartyDetailsCtrl'
 -        });
 -
 -      $urlRouterProvider.otherwise("/parties");
 -    });
--  
+-
 -  angular.module('socially').controller('PartiesListCtrl', function ($scope, $meteor) {
 -    $scope.parties = $meteor.collection(Parties);
 -
@@ -1769,10 +1769,10 @@ index 46819b9..0000000
 -  });
 -}
 \ No newline at end of file
-diff --git a/parties-list.ng.html b/parties-list.ng.html
+diff --git a/parties-list.html b/parties-list.html
 deleted file mode 100644
 index 28a1881..0000000
---- a/parties-list.ng.html
+--- a/parties-list.html
 +++ /dev/null
 @@ -1,15 +0,0 @@
 -<form>
@@ -1790,10 +1790,10 @@ index 28a1881..0000000
 -    <button ng-click="remove(party)">X</button>
 -  </li>
 -</ul>
-diff --git a/party-details.ng.html b/party-details.ng.html
+diff --git a/party-details.html b/party-details.html
 deleted file mode 100644
 index 52e92e7..0000000
---- a/party-details.ng.html
+--- a/party-details.html
 +++ /dev/null
 @@ -1,8 +0,0 @@
 -Here you will see and change the details of the party:
@@ -1830,7 +1830,7 @@ index 3ce2ef4..0000000
 -  });
 -}
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -1871,7 +1871,7 @@ index ff41b50..d15cf4d 100644
  jquery@1.11.4
  lai:collection-extensions@0.1.4
  launch-screen@1.0.4
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -1952,7 +1952,7 @@ index d15cf4d..1a4d49d 100644
  standard-minifiers@1.0.0
  templating@1.1.3
  templating-tools@1.0.0
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -1995,7 +1995,7 @@ index 1a4d49d..c29d0ee 100644
  livedata@1.0.15
  localstorage@1.0.5
  logging@1.0.8
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -2031,7 +2031,7 @@ index c29d0ee..a5c0311 100644
  url@1.0.5
  webapp@1.2.2
  webapp-hashing@1.0.5
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -2051,13 +2051,13 @@ index 16d4ecd..e529a71 100644
 +++ b/client/index.html
 @@ -4,6 +4,7 @@
  <body>
- 
+
  <div ng-app="socially" ng-strict-di="">
 +  <blaze-template name="loginButtons"></blaze-template>
    <h1>
      <a href="/parties">Home</a>
    </h1>
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -2091,7 +2091,7 @@ index dc0ccc3..b793c1f 100644
 +  }
 +});
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -2101,13 +2101,13 @@ Date: Mon, 17 Aug 2015 20:34:30 +0300
 Subject: [PATCH 061/239] Step 8.7: Add current user to the new party
 
 ---
- client/parties/views/parties-list.ng.html | 2 +-
+ client/parties/views/parties-list.html | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/client/parties/views/parties-list.ng.html b/client/parties/views/parties-list.ng.html
+diff --git a/client/parties/views/parties-list.html b/client/parties/views/parties-list.html
 index 2b64715..afbe90d 100644
---- a/client/parties/views/parties-list.ng.html
-+++ b/client/parties/views/parties-list.ng.html
+--- a/client/parties/views/parties-list.html
++++ b/client/parties/views/parties-list.html
 @@ -3,7 +3,7 @@
    <input ng-model="newParty.name">
    <label>Description</label>
@@ -2117,7 +2117,7 @@ index 2b64715..afbe90d 100644
    <button ng-click="removeAll()">Remove All</button>
  </form>
  <ul>
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -2181,7 +2181,7 @@ index a5c0311..a6541d7 100644
  ui@1.0.8
  underscore@1.0.4
  urigo:angular-blaze-template@0.0.1
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -2201,7 +2201,7 @@ index e146f42..1a29b62d 100644
 @@ -10,7 +10,12 @@ angular.module("socially").config(function ($urlRouterProvider, $stateProvider,
      .state('partyDetails', {
        url: '/parties/:partyId',
-       templateUrl: 'client/parties/views/party-details.ng.html',
+       templateUrl: 'client/parties/views/party-details.html',
 -      controller: 'PartyDetailsCtrl'
 +      controller: 'PartyDetailsCtrl',
 +      resolve: {
@@ -2210,9 +2210,9 @@ index e146f42..1a29b62d 100644
 +        }
 +      }
      });
- 
+
    $urlRouterProvider.otherwise("/parties");
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -2242,8 +2242,8 @@ index 1a29b62d..66296a4 100644
 +
  angular.module("socially").config(function ($urlRouterProvider, $stateProvider, $locationProvider) {
    $locationProvider.html5Mode(true);
- 
--- 
+
+--
 2.3.2 (Apple Git-55)
 
 
@@ -2285,7 +2285,7 @@ index a6541d7..edc1d00 100644
  autoupdate@1.2.3
  babel-compiler@5.8.24_1
  babel-runtime@0.1.4
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -2319,7 +2319,7 @@ index 0000000..277f09a
 +    ]});
 +});
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -2340,10 +2340,10 @@ index ef2c64f..34e0d55 100644
  angular.module("socially").controller("PartiesListCtrl", function ($scope, $meteor) {
 -  $scope.parties = $meteor.collection(Parties);
 +  $scope.parties = $meteor.collection(Parties).subscribe('parties');
- 
+
    $scope.remove = function (party) {
      $scope.parties.splice($scope.parties.indexOf(party), 1);
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -2353,13 +2353,13 @@ Date: Mon, 17 Aug 2015 21:00:41 +0300
 Subject: [PATCH 068/239] Step 9.4: Add checkbox for public party
 
 ---
- client/parties/views/parties-list.ng.html | 2 ++
+ client/parties/views/parties-list.html | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/client/parties/views/parties-list.ng.html b/client/parties/views/parties-list.ng.html
+diff --git a/client/parties/views/parties-list.html b/client/parties/views/parties-list.html
 index afbe90d..ca956ea 100644
---- a/client/parties/views/parties-list.ng.html
-+++ b/client/parties/views/parties-list.ng.html
+--- a/client/parties/views/parties-list.html
++++ b/client/parties/views/parties-list.html
 @@ -3,6 +3,8 @@
    <input ng-model="newParty.name">
    <label>Description</label>
@@ -2369,7 +2369,7 @@ index afbe90d..ca956ea 100644
    <button ng-click="newParty.owner=$root.currentUser._id; parties.push(newParty)">Add</button>
    <button ng-click="removeAll()">Remove All</button>
  </form>
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -2380,23 +2380,23 @@ Subject: [PATCH 069/239] Step 9.5: Add checkbox for public party in the
  details
 
 ---
- client/parties/views/party-details.ng.html | 4 +++-
+ client/parties/views/party-details.html | 4 +++-
  1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/client/parties/views/party-details.ng.html b/client/parties/views/party-details.ng.html
+diff --git a/client/parties/views/party-details.html b/client/parties/views/party-details.html
 index 31f8472..f798477 100644
---- a/client/parties/views/party-details.ng.html
-+++ b/client/parties/views/party-details.ng.html
+--- a/client/parties/views/party-details.html
++++ b/client/parties/views/party-details.html
 @@ -1,4 +1,6 @@
  Here you will see and change the details of the party:
- 
+
  <input ng-model="party.name">
 -<input ng-model="party.description">
 \ No newline at end of file
 +<input ng-model="party.description">
 +<label>Is public</label>
 +<input type="checkbox" ng-model="party.public">
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -2420,7 +2420,7 @@ index 0000000..f5becea
 +  return Meteor.users.find({}, {fields: {emails: 1, profile: 1}});
 +});
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -2444,7 +2444,7 @@ index a46e036..7d31eb1 100644
 +  $scope.users = $meteor.collection(Meteor.users, false).subscribe('users');
 +});
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -2468,7 +2468,7 @@ index 7d31eb1..2d9322e 100644
    $scope.users = $meteor.collection(Meteor.users, false).subscribe('users');
  });
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -2478,13 +2478,13 @@ Date: Mon, 17 Aug 2015 21:09:09 +0300
 Subject: [PATCH 073/239] Step 9.9: Add the user details
 
 ---
- client/parties/views/party-details.ng.html | 7 +++++++
+ client/parties/views/party-details.html | 7 +++++++
  1 file changed, 7 insertions(+)
 
-diff --git a/client/parties/views/party-details.ng.html b/client/parties/views/party-details.ng.html
+diff --git a/client/parties/views/party-details.html b/client/parties/views/party-details.html
 index f798477..a640092 100644
---- a/client/parties/views/party-details.ng.html
-+++ b/client/parties/views/party-details.ng.html
+--- a/client/parties/views/party-details.html
++++ b/client/parties/views/party-details.html
 @@ -4,3 +4,10 @@ Here you will see and change the details of the party:
  <input ng-model="party.description">
  <label>Is public</label>
@@ -2497,7 +2497,7 @@ index f798477..a640092 100644
 +  </li>
 +</ul>
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -2530,7 +2530,7 @@ index 999bdc1..526887e 100644
 +else
 +  angular.element(document).ready(onReady);
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -2550,13 +2550,13 @@ index e529a71..30e8bee 100644
 @@ -3,7 +3,7 @@
  </head>
  <body>
- 
+
 -<div ng-app="socially" ng-strict-di="">
 +<div>
    <blaze-template name="loginButtons"></blaze-template>
    <h1>
      <a href="/parties">Home</a>
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -2587,7 +2587,7 @@ index 277f09a..663bcd8 100644
 +    ]}, options);
  });
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -2607,7 +2607,7 @@ index 34e0d55..6f4d8f6 100644
 @@ -1,6 +1,10 @@
  angular.module("socially").controller("PartiesListCtrl", function ($scope, $meteor) {
    $scope.parties = $meteor.collection(Parties).subscribe('parties');
- 
+
 +  $scope.page = 1;
 +  $scope.perPage = 3;
 +  $scope.sort = {name: 1};
@@ -2615,7 +2615,7 @@ index 34e0d55..6f4d8f6 100644
    $scope.remove = function (party) {
      $scope.parties.splice($scope.parties.indexOf(party), 1);
    };
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -2635,13 +2635,13 @@ index 6f4d8f6..f89772c 100644
 @@ -5,6 +5,8 @@ angular.module("socially").controller("PartiesListCtrl", function ($scope, $mete
    $scope.perPage = 3;
    $scope.sort = {name: 1};
- 
+
 +  $meteor.subscribe('parties');
 +
    $scope.remove = function (party) {
      $scope.parties.splice($scope.parties.indexOf(party), 1);
    };
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -2661,17 +2661,17 @@ index f89772c..bf8cce4 100644
 @@ -5,7 +5,11 @@ angular.module("socially").controller("PartiesListCtrl", function ($scope, $mete
    $scope.perPage = 3;
    $scope.sort = {name: 1};
- 
+
 -  $meteor.subscribe('parties');
 +  $meteor.subscribe('parties', {
 +    limit: parseInt($scope.perPage),
 +    skip: parseInt(($scope.page - 1) * $scope.perPage),
 +    sort: $scope.sort
 +  });
- 
+
    $scope.remove = function (party) {
      $scope.parties.splice($scope.parties.indexOf(party), 1);
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -2691,11 +2691,11 @@ index bf8cce4..d784995 100644
 @@ -1,10 +1,15 @@
  angular.module("socially").controller("PartiesListCtrl", function ($scope, $meteor) {
 -  $scope.parties = $meteor.collection(Parties).subscribe('parties');
- 
+
    $scope.page = 1;
    $scope.perPage = 3;
    $scope.sort = {name: 1};
- 
+
 +  $scope.parties = $meteor.collection(function() {
 +    return Parties.find({}, {
 +      sort : $scope.sort
@@ -2705,7 +2705,7 @@ index bf8cce4..d784995 100644
    $meteor.subscribe('parties', {
      limit: parseInt($scope.perPage),
      skip: parseInt(($scope.page - 1) * $scope.perPage),
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -2740,7 +2740,7 @@ index edc1d00..05ac158 100644
  autoupdate@1.2.3
  babel-compiler@5.8.24_1
  babel-runtime@0.1.4
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -2760,10 +2760,10 @@ index 526887e..f6f5f1c 100644
 @@ -1,4 +1,4 @@
 -angular.module('socially',['angular-meteor', 'ui.router']);
 +angular.module('socially',['angular-meteor', 'ui.router', 'angularUtils.directives.dirPagination']);
- 
+
  function onReady() {
    angular.bootstrap(document, ['socially'], {
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -2773,13 +2773,13 @@ Date: Mon, 17 Aug 2015 21:33:26 +0300
 Subject: [PATCH 083/239] Step 12.8: Use the pagination directive
 
 ---
- client/parties/views/parties-list.ng.html | 2 +-
+ client/parties/views/parties-list.html | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/client/parties/views/parties-list.ng.html b/client/parties/views/parties-list.ng.html
+diff --git a/client/parties/views/parties-list.html b/client/parties/views/parties-list.html
 index ca956ea..806534f 100644
---- a/client/parties/views/parties-list.ng.html
-+++ b/client/parties/views/parties-list.ng.html
+--- a/client/parties/views/parties-list.html
++++ b/client/parties/views/parties-list.html
 @@ -9,7 +9,7 @@
    <button ng-click="removeAll()">Remove All</button>
  </form>
@@ -2789,7 +2789,7 @@ index ca956ea..806534f 100644
      <a href="/parties/{{party._id}}">{{party.name}}</a>
      <p>{{party.description}}</p>
      <button ng-click="remove(party)">X</button>
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -2799,13 +2799,13 @@ Date: Sat, 17 Oct 2015 18:38:23 +0300
 Subject: [PATCH 084/239] Step 12.9: Add the pagination controls
 
 ---
- client/parties/views/parties-list.ng.html | 3 ++-
+ client/parties/views/parties-list.html | 3 ++-
  1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/client/parties/views/parties-list.ng.html b/client/parties/views/parties-list.ng.html
+diff --git a/client/parties/views/parties-list.html b/client/parties/views/parties-list.html
 index 806534f..1041916 100644
---- a/client/parties/views/parties-list.ng.html
-+++ b/client/parties/views/parties-list.ng.html
+--- a/client/parties/views/parties-list.html
++++ b/client/parties/views/parties-list.html
 @@ -14,4 +14,5 @@
      <p>{{party.description}}</p>
      <button ng-click="remove(party)">X</button>
@@ -2815,7 +2815,7 @@ index 806534f..1041916 100644
 +</ul>
 +<dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -2836,7 +2836,7 @@ index d784995..fc5a8ea 100644
 @@ -20,7 +20,11 @@ angular.module("socially").controller("PartiesListCtrl", function ($scope, $mete
      $scope.parties.splice($scope.parties.indexOf(party), 1);
    };
- 
+
 -  $scope.removeAll = function () {
 +  $scope.removeAll = function(){
      $scope.parties.remove();
@@ -2847,7 +2847,7 @@ index d784995..fc5a8ea 100644
 +  };
  });
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -2882,7 +2882,7 @@ index 05ac158..edabe3a 100644
  tracker@1.0.8
  twitter@1.1.5
  ui@1.0.8
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -2916,7 +2916,7 @@ index 663bcd8..9622905 100644
    return Parties.find({
      $or:[
        {$and:[
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -2940,9 +2940,9 @@ index fc5a8ea..a3be704 100644
 +  }).then(function(){
 +    $scope.partiesCount = $meteor.object(Counts ,'numberOfParties', false);
    });
- 
+
    $scope.remove = function (party) {
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -2962,7 +2962,7 @@ index a3be704..3bac6c9 100644
 @@ -10,12 +10,14 @@ angular.module("socially").controller("PartiesListCtrl", function ($scope, $mete
      });
    });
- 
+
 -  $meteor.subscribe('parties', {
 -    limit: parseInt($scope.perPage),
 -    skip: parseInt(($scope.page - 1) * $scope.perPage),
@@ -2978,9 +2978,9 @@ index a3be704..3bac6c9 100644
 +      $scope.partiesCount = $meteor.object(Counts ,'numberOfParties', false);
 +    });
    });
- 
+
    $scope.remove = function (party) {
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -2998,7 +2998,7 @@ index 3bac6c9..a356dd0 100644
 --- a/client/parties/controllers/partiesList.ng.js
 +++ b/client/parties/controllers/partiesList.ng.js
 @@ -12,9 +12,9 @@ angular.module("socially").controller("PartiesListCtrl", function ($scope, $mete
- 
+
    $meteor.autorun($scope, function() {
      $meteor.subscribe('parties', {
 -      limit: parseInt($scope.perPage),
@@ -3010,7 +3010,7 @@ index 3bac6c9..a356dd0 100644
      }).then(function(){
        $scope.partiesCount = $meteor.object(Counts ,'numberOfParties', false);
      });
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -3029,15 +3029,15 @@ index a356dd0..b252774 100644
 --- a/client/parties/controllers/partiesList.ng.js
 +++ b/client/parties/controllers/partiesList.ng.js
 @@ -6,7 +6,7 @@ angular.module("socially").controller("PartiesListCtrl", function ($scope, $mete
- 
+
    $scope.parties = $meteor.collection(function() {
      return Parties.find({}, {
 -      sort : $scope.sort
 +      sort : $scope.getReactively('sort')
      });
    });
- 
--- 
+
+--
 2.3.2 (Apple Git-55)
 
 
@@ -3047,13 +3047,13 @@ Date: Sat, 17 Oct 2015 18:48:12 +0300
 Subject: [PATCH 092/239] Step 12.17: Add sort controls to the view
 
 ---
- client/parties/views/parties-list.ng.html | 7 +++++++
+ client/parties/views/parties-list.html | 7 +++++++
  1 file changed, 7 insertions(+)
 
-diff --git a/client/parties/views/parties-list.ng.html b/client/parties/views/parties-list.ng.html
+diff --git a/client/parties/views/parties-list.html b/client/parties/views/parties-list.html
 index 1041916..3d39e49 100644
---- a/client/parties/views/parties-list.ng.html
-+++ b/client/parties/views/parties-list.ng.html
+--- a/client/parties/views/parties-list.html
++++ b/client/parties/views/parties-list.html
 @@ -9,6 +9,13 @@
    <button ng-click="removeAll()">Remove All</button>
  </form>
@@ -3068,7 +3068,7 @@ index 1041916..3d39e49 100644
    <li dir-paginate="party in parties | itemsPerPage: perPage" total-items="partiesCount.count">
      <a href="/parties/{{party._id}}">{{party.name}}</a>
      <p>{{party.description}}</p>
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -3096,7 +3096,7 @@ index b252774..9a6d599 100644
 +  });
  });
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -3118,10 +3118,10 @@ index 9a6d599..09e746c 100644
    $scope.perPage = 3;
    $scope.sort = {name: 1};
 +  $scope.orderProperty = '1';
- 
+
    $scope.parties = $meteor.collection(function() {
      return Parties.find({}, {
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -3144,7 +3144,7 @@ index 9622905..5366910 100644
    Counts.publish(this, 'numberOfParties', Parties.find({
      $or:[
        {$and:[
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -3173,13 +3173,13 @@ index 5366910..c2dc88b 100644
          {'public': true},
 @@ -12,6 +16,7 @@ Meteor.publish("parties", function (options, searchString) {
      ]}), { noReady: true });
- 
+
    return Parties.find({
 +    'name' : { '$regex' : '.*' + searchString || '' + '.*', '$options' : 'i' },
      $or:[
        {$and:[
          {"public": true},
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -3189,13 +3189,13 @@ Date: Sat, 17 Oct 2015 18:52:28 +0300
 Subject: [PATCH 097/239] Step 12.22: Add the search input
 
 ---
- client/parties/views/parties-list.ng.html | 1 +
+ client/parties/views/parties-list.html | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/client/parties/views/parties-list.ng.html b/client/parties/views/parties-list.ng.html
+diff --git a/client/parties/views/parties-list.html b/client/parties/views/parties-list.html
 index 3d39e49..e5fd486 100644
---- a/client/parties/views/parties-list.ng.html
-+++ b/client/parties/views/parties-list.ng.html
+--- a/client/parties/views/parties-list.html
++++ b/client/parties/views/parties-list.html
 @@ -11,6 +11,7 @@
  <ul>
    <h1>Parties:</h1>
@@ -3204,7 +3204,7 @@ index 3d39e49..e5fd486 100644
      <select ng-model="orderProperty">
        <option value="1">Ascending</option>
        <option value="-1">Descending</option>
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -3230,7 +3230,7 @@ index 09e746c..ccb3442 100644
        $scope.partiesCount = $meteor.object(Counts ,'numberOfParties', false);
      });
    });
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -3254,7 +3254,7 @@ index 2d9322e..7d31eb1 100644
    $scope.users = $meteor.collection(Meteor.users, false).subscribe('users');
  });
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -3278,7 +3278,7 @@ index 7d31eb1..09a8dc7 100644
 +  $scope.$meteorSubscribe('parties');
  });
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -3313,7 +3313,7 @@ index 0000000..9166e47
 +  }
 +});
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -3323,16 +3323,16 @@ Date: Mon, 17 Aug 2015 21:59:45 +0300
 Subject: [PATCH 102/239] Step 13.2: Use the filter
 
 ---
- client/parties/views/party-details.ng.html | 4 ++--
+ client/parties/views/party-details.html | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/client/parties/views/party-details.ng.html b/client/parties/views/party-details.ng.html
+diff --git a/client/parties/views/party-details.html b/client/parties/views/party-details.html
 index a640092..5ab9471 100644
---- a/client/parties/views/party-details.ng.html
-+++ b/client/parties/views/party-details.ng.html
+--- a/client/parties/views/party-details.html
++++ b/client/parties/views/party-details.html
 @@ -6,8 +6,8 @@ Here you will see and change the details of the party:
  <input type="checkbox" ng-model="party.public">
- 
+
  <ul>
 -  Users:
 -  <li ng-repeat="user in users">
@@ -3342,7 +3342,7 @@ index a640092..5ab9471 100644
    </li>
  </ul>
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -3352,13 +3352,13 @@ Date: Mon, 17 Aug 2015 22:00:48 +0300
 Subject: [PATCH 103/239] Step 13.3: Use filter to display user details
 
 ---
- client/parties/views/party-details.ng.html | 2 +-
+ client/parties/views/party-details.html | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/client/parties/views/party-details.ng.html b/client/parties/views/party-details.ng.html
+diff --git a/client/parties/views/party-details.html b/client/parties/views/party-details.html
 index 5ab9471..4642f74 100644
---- a/client/parties/views/party-details.ng.html
-+++ b/client/parties/views/party-details.ng.html
+--- a/client/parties/views/party-details.html
++++ b/client/parties/views/party-details.html
 @@ -8,6 +8,6 @@ Here you will see and change the details of the party:
  <ul>
    Users to invite:
@@ -3368,7 +3368,7 @@ index 5ab9471..4642f74 100644
    </li>
  </ul>
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -3400,7 +3400,7 @@ index 0000000..162f496
 +      return user;
 +  }
 +});
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -3410,13 +3410,13 @@ Date: Sat, 17 Oct 2015 18:57:40 +0300
 Subject: [PATCH 105/239] Step 13.5: Added user details
 
 ---
- client/parties/views/parties-list.ng.html | 1 +
+ client/parties/views/parties-list.html | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/client/parties/views/parties-list.ng.html b/client/parties/views/parties-list.ng.html
+diff --git a/client/parties/views/parties-list.html b/client/parties/views/parties-list.html
 index e5fd486..3d05a0e 100644
---- a/client/parties/views/parties-list.ng.html
-+++ b/client/parties/views/parties-list.ng.html
+--- a/client/parties/views/parties-list.html
++++ b/client/parties/views/parties-list.html
 @@ -21,6 +21,7 @@
      <a href="/parties/{{party._id}}">{{party.name}}</a>
      <p>{{party.description}}</p>
@@ -3426,7 +3426,7 @@ index e5fd486..3d05a0e 100644
  </ul>
  <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -3475,7 +3475,7 @@ index ccb3442..0cbc2f8 100644
 +  };
  });
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -3495,13 +3495,13 @@ index 0cbc2f8..5e36b3f 100644
 @@ -4,6 +4,8 @@ angular.module("socially").controller("PartiesListCtrl", function ($scope, $mete
    $scope.sort = {name: 1};
    $scope.orderProperty = '1';
- 
+
 +  $scope.$meteorSubscribe('users');
 +
    $scope.parties = $meteor.collection(function() {
      return Parties.find({}, {
        sort : $scope.getReactively('sort')
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -3511,13 +3511,13 @@ Date: Mon, 17 Aug 2015 22:13:48 +0300
 Subject: [PATCH 108/239] Step 13.8: Use filter to display the user info
 
 ---
- client/parties/views/parties-list.ng.html | 2 +-
+ client/parties/views/parties-list.html | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/client/parties/views/parties-list.ng.html b/client/parties/views/parties-list.ng.html
+diff --git a/client/parties/views/parties-list.html b/client/parties/views/parties-list.html
 index 3d05a0e..d3cc5e0 100644
---- a/client/parties/views/parties-list.ng.html
-+++ b/client/parties/views/parties-list.ng.html
+--- a/client/parties/views/parties-list.html
++++ b/client/parties/views/parties-list.html
 @@ -21,7 +21,7 @@
      <a href="/parties/{{party._id}}">{{party.name}}</a>
      <p>{{party.description}}</p>
@@ -3528,7 +3528,7 @@ index 3d05a0e..d3cc5e0 100644
  </ul>
  <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -3597,7 +3597,7 @@ index b793c1f..8998b5e 100644
 +  return null;
 +};
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -3619,7 +3619,7 @@ index 0cf31b9..9d7b75a 100644
  angularutils:pagination
  tmeasday:publish-counts
 +check
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -3641,7 +3641,7 @@ index 9d7b75a..038d55d 100644
  tmeasday:publish-counts
  check
 +email
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -3675,7 +3675,7 @@ index 09a8dc7..ecba146 100644
 +  };
  });
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -3685,13 +3685,13 @@ Date: Mon, 17 Aug 2015 22:26:39 +0300
 Subject: [PATCH 113/239] Step 14.4: Add invite button to the view
 
 ---
- client/parties/views/party-details.ng.html | 1 +
+ client/parties/views/party-details.html | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/client/parties/views/party-details.ng.html b/client/parties/views/party-details.ng.html
+diff --git a/client/parties/views/party-details.html b/client/parties/views/party-details.html
 index 4642f74..609a4ba 100644
---- a/client/parties/views/party-details.ng.html
-+++ b/client/parties/views/party-details.ng.html
+--- a/client/parties/views/party-details.html
++++ b/client/parties/views/party-details.html
 @@ -9,5 +9,6 @@ Here you will see and change the details of the party:
    Users to invite:
    <li ng-repeat="user in users | uninvited:party">
@@ -3700,7 +3700,7 @@ index 4642f74..609a4ba 100644
    </li>
  </ul>
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -3727,7 +3727,7 @@ index c2dc88b..b691e30 100644
 +        {invited: {$exists: true}}
        ]}
      ]}), { noReady: true });
- 
+
 @@ -25,6 +29,10 @@ Meteor.publish("parties", function (options, searchString) {
        {$and:[
          {owner: this.userId},
@@ -3740,7 +3740,7 @@ index c2dc88b..b691e30 100644
      ]}, options);
  });
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -3803,8 +3803,8 @@ index 8998b5e..37b10e5 100644
 +    }
    }
  });
- 
--- 
+
+--
 2.3.2 (Apple Git-55)
 
 
@@ -3824,7 +3824,7 @@ index 5e36b3f..c8ba61c 100644
 @@ -39,6 +39,17 @@ angular.module("socially").controller("PartiesListCtrl", function ($scope, $mete
        $scope.sort = {name: parseInt($scope.orderProperty)};
    });
- 
+
 +  $scope.rsvp = function(partyId, rsvp){
 +    $meteor.call('rsvp', partyId, rsvp).then(
 +      function(data){
@@ -3839,7 +3839,7 @@ index 5e36b3f..c8ba61c 100644
    $scope.getUserById = function(userId){
      return Meteor.users.findOne(userId);
    };
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -3849,13 +3849,13 @@ Date: Mon, 17 Aug 2015 22:33:05 +0300
 Subject: [PATCH 117/239] Step 14.8: Add RSVP control to the view
 
 ---
- client/parties/views/parties-list.ng.html | 7 +++++++
+ client/parties/views/parties-list.html | 7 +++++++
  1 file changed, 7 insertions(+)
 
-diff --git a/client/parties/views/parties-list.ng.html b/client/parties/views/parties-list.ng.html
+diff --git a/client/parties/views/parties-list.html b/client/parties/views/parties-list.html
 index d3cc5e0..451835f 100644
---- a/client/parties/views/parties-list.ng.html
-+++ b/client/parties/views/parties-list.ng.html
+--- a/client/parties/views/parties-list.html
++++ b/client/parties/views/parties-list.html
 @@ -21,6 +21,13 @@
      <a href="/parties/{{party._id}}">{{party.name}}</a>
      <p>{{party.description}}</p>
@@ -3870,7 +3870,7 @@ index d3cc5e0..451835f 100644
      <p><small>Posted by {{ creator(party) | displayName }}</small></p>
    </li>
  </ul>
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -3880,13 +3880,13 @@ Date: Mon, 17 Aug 2015 22:33:44 +0300
 Subject: [PATCH 118/239] Step 14.9: Add RSVP list to the view
 
 ---
- client/parties/views/parties-list.ng.html | 15 +++++++++++++++
+ client/parties/views/parties-list.html | 15 +++++++++++++++
  1 file changed, 15 insertions(+)
 
-diff --git a/client/parties/views/parties-list.ng.html b/client/parties/views/parties-list.ng.html
+diff --git a/client/parties/views/parties-list.html b/client/parties/views/parties-list.html
 index 451835f..98e33e5 100644
---- a/client/parties/views/parties-list.ng.html
-+++ b/client/parties/views/parties-list.ng.html
+--- a/client/parties/views/parties-list.html
++++ b/client/parties/views/parties-list.html
 @@ -27,6 +27,21 @@
        <input type="button" value="Maybe" ng-click="rsvp(party._id, 'maybe')">
        <input type="button" value="No" ng-click="rsvp(party._id, 'no')">
@@ -3906,10 +3906,10 @@ index 451835f..98e33e5 100644
 +        {{ getUserById(rsvp.user) | displayName }} - {{ rsvp.rsvp }}
 +      </div>
 +    </div>
- 
+
      <p><small>Posted by {{ creator(party) | displayName }}</small></p>
    </li>
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -3920,17 +3920,17 @@ Subject: [PATCH 119/239] Step 14.10: Add RSVP list to the view of users who
  not responded
 
 ---
- client/parties/views/parties-list.ng.html | 7 +++++++
+ client/parties/views/parties-list.html | 7 +++++++
  1 file changed, 7 insertions(+)
 
-diff --git a/client/parties/views/parties-list.ng.html b/client/parties/views/parties-list.ng.html
+diff --git a/client/parties/views/parties-list.html b/client/parties/views/parties-list.html
 index 98e33e5..feb6cd6 100644
---- a/client/parties/views/parties-list.ng.html
-+++ b/client/parties/views/parties-list.ng.html
+--- a/client/parties/views/parties-list.html
++++ b/client/parties/views/parties-list.html
 @@ -43,6 +43,13 @@
        </div>
      </div>
- 
+
 +    <ul>
 +      Users who not responded:
 +      <li ng-repeat="invitedUser in outstandingInvitations(party)">
@@ -3941,7 +3941,7 @@ index 98e33e5..feb6cd6 100644
      <p><small>Posted by {{ creator(party) | displayName }}</small></p>
    </li>
  </ul>
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -3961,7 +3961,7 @@ index c8ba61c..1bae778 100644
 @@ -50,6 +50,13 @@ angular.module("socially").controller("PartiesListCtrl", function ($scope, $mete
      );
    };
- 
+
 +  $scope.outstandingInvitations = function (party) {
 +    return _.filter($scope.users, function (user) {
 +      return (_.contains(party.invited, user._id) &&
@@ -3972,7 +3972,7 @@ index c8ba61c..1bae778 100644
    $scope.getUserById = function(userId){
      return Meteor.users.findOne(userId);
    };
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -3992,13 +3992,13 @@ index 1bae778..d81440d 100644
 @@ -4,7 +4,7 @@ angular.module("socially").controller("PartiesListCtrl", function ($scope, $mete
    $scope.sort = {name: 1};
    $scope.orderProperty = '1';
- 
+
 -  $scope.$meteorSubscribe('users');
 +  $scope.users = $meteor.collection(Meteor.users, false).subscribe('users');
- 
+
    $scope.parties = $meteor.collection(function() {
      return Parties.find({}, {
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -4008,20 +4008,20 @@ Date: Mon, 17 Aug 2015 22:39:54 +0300
 Subject: [PATCH 122/239] Step 15.1: Add ng-show to the directive
 
 ---
- client/parties/views/parties-list.ng.html | 2 +-
+ client/parties/views/parties-list.html | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/client/parties/views/parties-list.ng.html b/client/parties/views/parties-list.ng.html
+diff --git a/client/parties/views/parties-list.html b/client/parties/views/parties-list.html
 index feb6cd6..4ccaaa8 100644
---- a/client/parties/views/parties-list.ng.html
-+++ b/client/parties/views/parties-list.ng.html
+--- a/client/parties/views/parties-list.html
++++ b/client/parties/views/parties-list.html
 @@ -1,4 +1,4 @@
 -<form>
 +<form ng-show="$root.currentUser">
    <label>Name</label>
    <input ng-model="newParty.name">
    <label>Description</label>
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -4031,13 +4031,13 @@ Date: Mon, 17 Aug 2015 22:40:35 +0300
 Subject: [PATCH 123/239] Step 15.2: Add message to users that not logged in
 
 ---
- client/parties/views/parties-list.ng.html | 3 +++
+ client/parties/views/parties-list.html | 3 +++
  1 file changed, 3 insertions(+)
 
-diff --git a/client/parties/views/parties-list.ng.html b/client/parties/views/parties-list.ng.html
+diff --git a/client/parties/views/parties-list.html b/client/parties/views/parties-list.html
 index 4ccaaa8..7adf8b6 100644
---- a/client/parties/views/parties-list.ng.html
-+++ b/client/parties/views/parties-list.ng.html
+--- a/client/parties/views/parties-list.html
++++ b/client/parties/views/parties-list.html
 @@ -8,6 +8,9 @@
    <button ng-click="newParty.owner=$root.currentUser._id; parties.push(newParty)">Add</button>
    <button ng-click="removeAll()">Remove All</button>
@@ -4048,7 +4048,7 @@ index 4ccaaa8..7adf8b6 100644
  <ul>
    <h1>Parties:</h1>
    <div>
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -4058,23 +4058,23 @@ Date: Mon, 17 Aug 2015 22:41:09 +0300
 Subject: [PATCH 124/239] Step 15.3: Add ng-show to the RSVP buttons
 
 ---
- client/parties/views/parties-list.ng.html | 2 +-
+ client/parties/views/parties-list.html | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/client/parties/views/parties-list.ng.html b/client/parties/views/parties-list.ng.html
+diff --git a/client/parties/views/parties-list.html b/client/parties/views/parties-list.html
 index 7adf8b6..294ab3a 100644
---- a/client/parties/views/parties-list.ng.html
-+++ b/client/parties/views/parties-list.ng.html
+--- a/client/parties/views/parties-list.html
++++ b/client/parties/views/parties-list.html
 @@ -25,7 +25,7 @@
      <p>{{party.description}}</p>
      <button ng-click="remove(party)">X</button>
- 
+
 -    <div>
 +    <div ng-show="$root.currentUser">
        <input type="button" value="I'm going!" ng-click="rsvp(party._id, 'yes')">
        <input type="button" value="Maybe" ng-click="rsvp(party._id, 'maybe')">
        <input type="button" value="No" ng-click="rsvp(party._id, 'no')">
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -4085,13 +4085,13 @@ Subject: [PATCH 125/239] Step 15.4: Add message for not-logged in users on the
  RSVP buttons
 
 ---
- client/parties/views/parties-list.ng.html | 4 ++++
+ client/parties/views/parties-list.html | 4 ++++
  1 file changed, 4 insertions(+)
 
-diff --git a/client/parties/views/parties-list.ng.html b/client/parties/views/parties-list.ng.html
+diff --git a/client/parties/views/parties-list.html b/client/parties/views/parties-list.html
 index 294ab3a..bafd3b8 100644
---- a/client/parties/views/parties-list.ng.html
-+++ b/client/parties/views/parties-list.ng.html
+--- a/client/parties/views/parties-list.html
++++ b/client/parties/views/parties-list.html
 @@ -30,6 +30,10 @@
        <input type="button" value="Maybe" ng-click="rsvp(party._id, 'maybe')">
        <input type="button" value="No" ng-click="rsvp(party._id, 'no')">
@@ -4103,7 +4103,7 @@ index 294ab3a..bafd3b8 100644
      <div>
        Who is coming:
        Yes - {{ (party.rsvps | filter:{rsvp:'yes'}).length }}
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -4113,23 +4113,23 @@ Date: Mon, 17 Aug 2015 22:42:52 +0300
 Subject: [PATCH 126/239] Step 15.5: Add ng-show to delete button
 
 ---
- client/parties/views/parties-list.ng.html | 2 +-
+ client/parties/views/parties-list.html | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/client/parties/views/parties-list.ng.html b/client/parties/views/parties-list.ng.html
+diff --git a/client/parties/views/parties-list.html b/client/parties/views/parties-list.html
 index bafd3b8..fac465d 100644
---- a/client/parties/views/parties-list.ng.html
-+++ b/client/parties/views/parties-list.ng.html
+--- a/client/parties/views/parties-list.html
++++ b/client/parties/views/parties-list.html
 @@ -23,7 +23,7 @@
    <li dir-paginate="party in parties | itemsPerPage: perPage" total-items="partiesCount.count">
      <a href="/parties/{{party._id}}">{{party.name}}</a>
      <p>{{party.description}}</p>
 -    <button ng-click="remove(party)">X</button>
 +    <button ng-click="remove(party)" ng-show="$root.currentUser && $root.currentUser._id == party.owner">X</button>
- 
+
      <div ng-show="$root.currentUser">
        <input type="button" value="I'm going!" ng-click="rsvp(party._id, 'yes')">
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -4139,17 +4139,17 @@ Date: Sat, 17 Oct 2015 19:18:44 +0300
 Subject: [PATCH 127/239] Step 15.6: Add ng-if to outstanding RSVP
 
 ---
- client/parties/views/parties-list.ng.html | 5 ++++-
+ client/parties/views/parties-list.html | 5 ++++-
  1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/client/parties/views/parties-list.ng.html b/client/parties/views/parties-list.ng.html
+diff --git a/client/parties/views/parties-list.html b/client/parties/views/parties-list.html
 index fac465d..13cd0f7 100644
---- a/client/parties/views/parties-list.ng.html
-+++ b/client/parties/views/parties-list.ng.html
+--- a/client/parties/views/parties-list.html
++++ b/client/parties/views/parties-list.html
 @@ -50,12 +50,15 @@
        </div>
      </div>
- 
+
 -    <ul>
 +    <ul ng-if="!party.public">
        Users who not responded:
@@ -4160,10 +4160,10 @@ index fac465d..13cd0f7 100644
 +    <div ng-if="party.public">
 +      Everyone is invited
 +    </div>
- 
+
      <p><small>Posted by {{ creator(party) | displayName }}</small></p>
    </li>
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -4195,7 +4195,7 @@ index ecba146..21613a2 100644
 +      $scope.party.owner === Meteor.userId();
 +  };
 +});
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -4205,17 +4205,17 @@ Date: Mon, 17 Aug 2015 22:47:19 +0300
 Subject: [PATCH 129/239] Step 15.8: Add usage for ng-show with canInvite
 
 ---
- client/parties/views/party-details.ng.html | 5 ++++-
+ client/parties/views/party-details.html | 5 ++++-
  1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/client/parties/views/party-details.ng.html b/client/parties/views/party-details.ng.html
+diff --git a/client/parties/views/party-details.html b/client/parties/views/party-details.html
 index 609a4ba..a695811 100644
---- a/client/parties/views/party-details.ng.html
-+++ b/client/parties/views/party-details.ng.html
+--- a/client/parties/views/party-details.html
++++ b/client/parties/views/party-details.html
 @@ -5,10 +5,13 @@ Here you will see and change the details of the party:
  <label>Is public</label>
  <input type="checkbox" ng-model="party.public">
- 
+
 -<ul>
 +<ul ng-show="canInvite()">
    Users to invite:
@@ -4228,7 +4228,7 @@ index 609a4ba..a695811 100644
 +  </li>
  </ul>
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -4238,16 +4238,16 @@ Date: Mon, 17 Aug 2015 22:49:32 +0300
 Subject: [PATCH 130/239] Step 15.9: Example of ng-disabled
 
 ---
- client/parties/views/party-details.ng.html | 6 +++---
+ client/parties/views/party-details.html | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/client/parties/views/party-details.ng.html b/client/parties/views/party-details.ng.html
+diff --git a/client/parties/views/party-details.html b/client/parties/views/party-details.html
 index a695811..f17a8f2 100644
---- a/client/parties/views/party-details.ng.html
-+++ b/client/parties/views/party-details.ng.html
+--- a/client/parties/views/party-details.html
++++ b/client/parties/views/party-details.html
 @@ -1,9 +1,9 @@
  Here you will see and change the details of the party:
- 
+
 -<input ng-model="party.name">
 -<input ng-model="party.description">
 +<input ng-model="party.name" ng-disabled="party.owner != $root.currentUser._id">
@@ -4255,10 +4255,10 @@ index a695811..f17a8f2 100644
  <label>Is public</label>
 -<input type="checkbox" ng-model="party.public">
 +<input type="checkbox" ng-model="party.public" ng-disabled="party.owner != $root.currentUser._id">
- 
+
  <ul ng-show="canInvite()">
    Users to invite:
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -4313,7 +4313,7 @@ index edabe3a..e48771a 100644
  templating@1.1.3
  templating-tools@1.0.0
  tmeasday:publish-counts@0.7.2
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -4342,7 +4342,7 @@ index f6f5f1c..a7ee61e 100644
  function onReady() {
    angular.bootstrap(document, ['socially'], {
      strictDi: true
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -4352,13 +4352,13 @@ Date: Sat, 17 Oct 2015 19:21:32 +0300
 Subject: [PATCH 133/239] Step 16.2: Add basic map to the view
 
 ---
- client/parties/views/party-details.ng.html | 10 +++++++++-
+ client/parties/views/party-details.html | 10 +++++++++-
  1 file changed, 9 insertions(+), 1 deletion(-)
 
-diff --git a/client/parties/views/party-details.ng.html b/client/parties/views/party-details.ng.html
+diff --git a/client/parties/views/party-details.html b/client/parties/views/party-details.html
 index f17a8f2..73c4640 100644
---- a/client/parties/views/party-details.ng.html
-+++ b/client/parties/views/party-details.ng.html
+--- a/client/parties/views/party-details.html
++++ b/client/parties/views/party-details.html
 @@ -14,4 +14,12 @@ Here you will see and change the details of the party:
    <li ng-if="(users | uninvited:party).length <= 0">
      Everyone are already invited.
@@ -4375,7 +4375,7 @@ index f17a8f2..73c4640 100644
 +  </div>
 +</div>
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -4406,7 +4406,7 @@ index 21613a2..88063ff 100644
 +    events: {}
 +  };
  });
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -4432,7 +4432,7 @@ index 0000000..219ff39
 +    width: 400px;
 +}
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -4442,17 +4442,17 @@ Date: Sat, 17 Oct 2015 19:23:30 +0300
 Subject: [PATCH 136/239] Step 16.5: Add party marker to the map
 
 ---
- client/parties/views/party-details.ng.html | 13 +++++++------
+ client/parties/views/party-details.html | 13 +++++++------
  1 file changed, 7 insertions(+), 6 deletions(-)
 
-diff --git a/client/parties/views/party-details.ng.html b/client/parties/views/party-details.ng.html
+diff --git a/client/parties/views/party-details.html b/client/parties/views/party-details.html
 index 73c4640..7ef1f8d 100644
---- a/client/parties/views/party-details.ng.html
-+++ b/client/parties/views/party-details.ng.html
+--- a/client/parties/views/party-details.html
++++ b/client/parties/views/party-details.html
 @@ -16,10 +16,11 @@ Here you will see and change the details of the party:
    </li>
  </ul>
- 
+
 -<div class="party-details-maps">
 -  <div class="angular-google-map-container">
 -    <ui-gmap-google-map center="party.location || map.center"
@@ -4468,7 +4468,7 @@ index 73c4640..7ef1f8d 100644
 +  </ui-gmap-google-map>
  </div>
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -4519,7 +4519,7 @@ index 88063ff..bbd4b0a 100644
 +    }
    };
  });
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -4529,13 +4529,13 @@ Date: Sat, 17 Oct 2015 19:26:01 +0300
 Subject: [PATCH 138/239] Step 16.7: Add map to the parties list
 
 ---
- client/parties/views/parties-list.ng.html | 7 +++++++
+ client/parties/views/parties-list.html | 7 +++++++
  1 file changed, 7 insertions(+)
 
-diff --git a/client/parties/views/parties-list.ng.html b/client/parties/views/parties-list.ng.html
+diff --git a/client/parties/views/parties-list.html b/client/parties/views/parties-list.html
 index 13cd0f7..ec5e761 100644
---- a/client/parties/views/parties-list.ng.html
-+++ b/client/parties/views/parties-list.ng.html
+--- a/client/parties/views/parties-list.html
++++ b/client/parties/views/parties-list.html
 @@ -20,6 +20,13 @@
        <option value="-1">Descending</option>
      </select>
@@ -4550,7 +4550,7 @@ index 13cd0f7..ec5e761 100644
    <li dir-paginate="party in parties | itemsPerPage: perPage" total-items="partiesCount.count">
      <a href="/parties/{{party._id}}">{{party.name}}</a>
      <p>{{party.description}}</p>
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -4595,8 +4595,8 @@ index d81440d..88ce88b 100644
 +
      });
    });
- 
--- 
+
+--
 2.3.2 (Apple Git-55)
 
 
@@ -4620,7 +4620,7 @@ index 0000000..4397047
 +    background-color: rgba(0,0,0,.04);
 +}
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -4655,7 +4655,7 @@ index e48771a..3890c74 100644
  twitter@1.1.5
  ui@1.0.8
  underscore@1.0.4
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -4674,7 +4674,7 @@ index 30e8bee..ceefe3a 100644
 +++ b/client/index.html
 @@ -4,12 +4,17 @@
  <body>
- 
+
  <div>
 -  <blaze-template name="loginButtons"></blaze-template>
 -  <h1>
@@ -4694,10 +4694,10 @@ index 30e8bee..ceefe3a 100644
 +  </header>
 +  <div ui-view class="container-fluid"></div>
  </div>
- 
+
  </body>
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -4719,7 +4719,7 @@ index 71959ae..0ec7f97 100644
  angularui:angular-google-maps
  twbs:bootstrap
 +less
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -4760,7 +4760,7 @@ index 0000000..6acada4
 +    }
 +}
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -4798,7 +4798,7 @@ index 0000000..219ff39
 +    width: 400px;
 +}
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -4826,7 +4826,7 @@ index 6acada4..87c5240 100644
 +
 +@import "../parties/styles/parties.import.less";
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -4862,7 +4862,7 @@ index 3890c74..2127a7f 100644
  angularui:angular-ui-router@0.2.15
  angularutils:pagination@0.7.0
  autoupdate@1.2.3
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -4887,7 +4887,7 @@ index ceefe3a..4ac712e 100644
 +  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
  </head>
  <body>
- 
+
 -<div>
 -  <header class="navbar navbar-fixed-top">
 -    <div class="container-fluid">
@@ -4909,13 +4909,13 @@ index ceefe3a..4ac712e 100644
 -</div>
 +  </div>
 +</nav>
- 
+
 +<div class="h100">
 +  <div ui-view class="ma-main-container container-fluid h100"></div>
 +</div>
  </body>
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -4942,7 +4942,7 @@ index a7ee61e..b466d8f 100644
  ]);
  function onReady() {
    angular.bootstrap(document, ['socially'], {
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -4974,7 +4974,7 @@ index 0000000..f2d0d1a
 +    }
 +  }]);
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -4984,15 +4984,15 @@ Date: Wed, 9 Sep 2015 14:57:13 +0300
 Subject: [PATCH 151/239] Step 17.12: Create the view of new party modal
 
 ---
- client/parties/views/add-new-party-modal.ng.html | 24 ++++++++++++++++++++++++
+ client/parties/views/add-new-party-modal.html | 24 ++++++++++++++++++++++++
  1 file changed, 24 insertions(+)
- create mode 100644 client/parties/views/add-new-party-modal.ng.html
+ create mode 100644 client/parties/views/add-new-party-modal.html
 
-diff --git a/client/parties/views/add-new-party-modal.ng.html b/client/parties/views/add-new-party-modal.ng.html
+diff --git a/client/parties/views/add-new-party-modal.html b/client/parties/views/add-new-party-modal.html
 new file mode 100644
 index 0000000..5fd3485
 --- /dev/null
-+++ b/client/parties/views/add-new-party-modal.ng.html
++++ b/client/parties/views/add-new-party-modal.html
 @@ -0,0 +1,24 @@
 +<div class="container-fluid ma-add-new-party-container">
 +  <div class="alert alert-info" ng-hide="$root.currentUser || $root.loggingIn">
@@ -5019,7 +5019,7 @@ index 0000000..5fd3485
 +  </form>
 +</div>
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -5029,13 +5029,13 @@ Date: Sat, 17 Oct 2015 19:29:08 +0300
 Subject: [PATCH 152/239] Step 17.13: Update the parties list HTML
 
 ---
- client/parties/views/parties-list.ng.html | 175 +++++++++++++++++++-----------
+ client/parties/views/parties-list.html | 175 +++++++++++++++++++-----------
  1 file changed, 110 insertions(+), 65 deletions(-)
 
-diff --git a/client/parties/views/parties-list.ng.html b/client/parties/views/parties-list.ng.html
+diff --git a/client/parties/views/parties-list.html b/client/parties/views/parties-list.html
 index ec5e761..c66ae56 100644
---- a/client/parties/views/parties-list.ng.html
-+++ b/client/parties/views/parties-list.ng.html
+--- a/client/parties/views/parties-list.html
++++ b/client/parties/views/parties-list.html
 @@ -1,73 +1,118 @@
 -<form ng-show="$root.currentUser">
 -  <label>Name</label>
@@ -5086,7 +5086,7 @@ index ec5e761..c66ae56 100644
 +        <form class="form-inline search-form">
 +          <div class="form-group">
 +            <label class="sr-only" for="search">Search</label>
- 
+
 -    <div>
 -      Who is coming:
 -      Yes - {{ (party.rsvps | filter:{rsvp:'yes'}).length }}
@@ -5193,7 +5193,7 @@ index ec5e761..c66ae56 100644
 +
 +          </div>
 +        </div>
- 
+
 -    <ul ng-if="!party.public">
 -      Users who not responded:
 -      <li ng-repeat="invitedUser in outstandingInvitations(party)">
@@ -5204,7 +5204,7 @@ index ec5e761..c66ae56 100644
 -      Everyone is invited
 -    </div>
 +    <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
- 
+
 -    <p><small>Posted by {{ creator(party) | displayName }}</small></p>
 -  </li>
 -</ul>
@@ -5222,7 +5222,7 @@ index ec5e761..c66ae56 100644
 +  </div>
 +</div>
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -5249,7 +5249,7 @@ index 88ce88b..20974ea 100644
 @@ -20,22 +20,82 @@ angular.module("socially").controller("PartiesListCtrl", function ($scope, $mete
      }, $scope.getReactively('search')).then(function(){
        $scope.partiesCount = $meteor.object(Counts ,'numberOfParties', false);
- 
+
 -      $scope.parties.forEach( function (party) {
 -        party.onClicked = function () {
 -          $state.go('partyDetails', {partyId: party._id});
@@ -5335,22 +5335,22 @@ index 88ce88b..20974ea 100644
 -        },
 -        zoom: 8
 -      };
- 
+
 +      });
      });
 -  });
- 
+
    $scope.remove = function (party) {
      $scope.parties.splice($scope.parties.indexOf(party), 1);
 @@ -90,4 +150,32 @@ angular.module("socially").controller("PartiesListCtrl", function ($scope, $mete
- 
+
      return owner;
    };
-+  
++
 +  $scope.openAddNewPartyModal = function () {
 +    var modalInstance = $modal.open({
 +      animation: true,
-+      templateUrl: 'client/parties/views/add-new-party-modal.ng.html',
++      templateUrl: 'client/parties/views/add-new-party-modal.html',
 +      controller: 'AddNewPartyCtrl',
 +      resolve: {
 +        parties: function () {
@@ -5376,7 +5376,7 @@ index 88ce88b..20974ea 100644
 +  }
  });
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -5627,7 +5627,7 @@ index 0000000..4f19b98
 +  }
 +}
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -5665,14 +5665,14 @@ index 87c5240..e75ad09 100644
 +    padding-top: 50px;
 +    font-family: 'Muli', sans-serif;
 +}
- 
+
 -    .navbar {
 -        background-color: #ffffff;
 -    }
 +.h100{
 +    height : 100%;
  }
- 
+
 +.w100{
 +    width:100%;
 +}
@@ -5683,7 +5683,7 @@ index 87c5240..e75ad09 100644
 +        padding-right : 0;
 +    }
 +}
- 
+
 -@import "../parties/styles/parties.import.less";
 \ No newline at end of file
 +@import "../parties/styles/parties.import.less";
@@ -5691,7 +5691,7 @@ index 87c5240..e75ad09 100644
 +@import "../parties/styles/new.party.import.less";
 +@import "../parties/styles/party.details.import.less";
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -5701,13 +5701,13 @@ Date: Wed, 9 Sep 2015 15:05:35 +0300
 Subject: [PATCH 156/239] Step 17.17: Update the view of party details page
 
 ---
- client/parties/views/party-details.ng.html | 72 +++++++++++++++++++++---------
+ client/parties/views/party-details.html | 72 +++++++++++++++++++++---------
  1 file changed, 50 insertions(+), 22 deletions(-)
 
-diff --git a/client/parties/views/party-details.ng.html b/client/parties/views/party-details.ng.html
+diff --git a/client/parties/views/party-details.html b/client/parties/views/party-details.html
 index 7ef1f8d..104a657 100644
---- a/client/parties/views/party-details.ng.html
-+++ b/client/parties/views/party-details.ng.html
+--- a/client/parties/views/party-details.html
++++ b/client/parties/views/party-details.html
 @@ -1,26 +1,54 @@
 -Here you will see and change the details of the party:
 +<div class="row ma-party-details-container">
@@ -5731,7 +5731,7 @@ index 7ef1f8d..104a657 100644
 +        <input type="checkbox" ng-model="party.public" ng-disabled="party.owner != $root.currentUser._id">
 +      </div>
 +    </form>
- 
+
 -<input ng-model="party.name" ng-disabled="party.owner != $root.currentUser._id">
 -<input ng-model="party.description" ng-disabled="party.owner != $root.currentUser._id">
 -<label>Is public</label>
@@ -5741,7 +5741,7 @@ index 7ef1f8d..104a657 100644
 +        Users to invite:
 +      </h3>
 +      <ul>
- 
+
 -<ul ng-show="canInvite()">
 -  Users to invite:
 -  <li ng-repeat="user in users | uninvited:party">
@@ -5768,15 +5768,15 @@ index 7ef1f8d..104a657 100644
 +    </h3>
 +
 +    <div class="angular-google-map-container">
-+      <ui-gmap-google-map center="party.location || map.center" 
++      <ui-gmap-google-map center="party.location || map.center"
 +                          events="map.events" zoom="map.zoom">
-+        <ui-gmap-marker coords="party.location" options="map.marker.options" 
++        <ui-gmap-marker coords="party.location" options="map.marker.options"
 +                        events="map.marker.events" idkey="party._id">
 +        </ui-gmap-marker>
 +      </ui-gmap-google-map>
 +    </div>
 +  </div>
- 
+
 -<div class="angular-google-map-container">
 -  <ui-gmap-google-map center="party.location || map.center"
 -                      events="map.events" zoom="map.zoom">
@@ -5786,7 +5786,7 @@ index 7ef1f8d..104a657 100644
 -  </ui-gmap-google-map>
  </div>
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -5823,7 +5823,7 @@ index 2127a7f..b14e623 100644
  twitter@1.1.5
  ui@1.0.8
  underscore@1.0.4
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -5860,7 +5860,7 @@ index b14e623..2c5dfcc 100644
  angularui:angular-google-maps@2.2.1
  angularui:angular-ui-bootstrap@0.13.0
  angularui:angular-ui-router@0.2.15
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -5886,7 +5886,7 @@ index b466d8f..2ca6523 100644
  ]);
  function onReady() {
    angular.bootstrap(document, ['socially'], {
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -5912,14 +5912,14 @@ index 20974ea..9498791 100644
 @@ -148,25 +148,26 @@ angular.module("socially").controller("PartiesListCtrl", function ($scope, $mete
          if (owner._id === $rootScope.currentUser._id)
            return 'me';
- 
+
 -    return owner;
 -  };
--  
+-
 -  $scope.openAddNewPartyModal = function () {
 -    var modalInstance = $modal.open({
 -      animation: true,
--      templateUrl: 'client/parties/views/add-new-party-modal.ng.html',
+-      templateUrl: 'client/parties/views/add-new-party-modal.html',
 -      controller: 'AddNewPartyCtrl',
 -      resolve: {
 -        parties: function () {
@@ -5930,7 +5930,7 @@ index 20974ea..9498791 100644
 +    $scope.openAddNewPartyModal = function(){
 +      $mdDialog.show({
 +        controller: 'AddNewPartyCtrl',
-+        templateUrl: 'client/parties/views/add-new-party-modal.ng.html',
++        templateUrl: 'client/parties/views/add-new-party-modal.html',
 +        clickOutsideToClose:true,
 +        resolve: {
 +          parties: function () {
@@ -5951,10 +5951,10 @@ index 20974ea..9498791 100644
 +          $scope.status = 'You cancelled the dialog.';
 +        });
 +    };
- 
+
    $scope.isRSVP = function (rsvp, party) {
      if (!$rootScope.currentUser._id) return false;
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -5995,7 +5995,7 @@ index f2d0d1a..af25c36 100644
      }
    }]);
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -6103,14 +6103,14 @@ index e863737..0f7beb6 100644
 +.navbar-text {
 +    margin-right: 0;
  }
- 
+
 -.ma-parties-col {
 -    padding-top: 20px;
 +#login-dropdown-list.accounts-dialog {
 +    right: 14px;
 +    left: auto;
  }
- 
+
 -.ma-party-item {
 -    .ma-party-name {
 -        margin-bottom: 20px;
@@ -6144,7 +6144,7 @@ index e863737..0f7beb6 100644
 +        display: -ms-flexbox;
 +        display: flex;
      }
- 
+
 -    .ma-remove {
 -        color: lighten(@color7, 20%);
 -        position: absolute;
@@ -6159,7 +6159,7 @@ index e863737..0f7beb6 100644
 +        -ms-flex: 1;
 +        flex: 1;
      }
- 
+
 -    .ma-party-item-bottom {
 -        padding-top: 10px;
 -        .ma-posted-by-col {
@@ -6212,7 +6212,7 @@ index e863737..0f7beb6 100644
 +            color:#aaa;
          }
 +    }
- 
+
 -        .ma-rsvp-sum {
 -            width: 160px;
 -            @media (min-width: 400px) {
@@ -6244,7 +6244,7 @@ index e863737..0f7beb6 100644
 -    }
 -}
 +        .ma-description{
- 
+
 -.ma-angular-map-col {
 -    .angular-google-map-container, .angular-google-map {
 -        height: 100%;
@@ -6331,14 +6331,14 @@ index e75ad09..438dc59 100644
 -    }
 +html, body {
  }
- 
+
  @import "../parties/styles/parties.import.less";
 +@import "../parties/styles/party.details.import.less";
  @import "../parties/styles/navbar.import.less";
 -@import "../parties/styles/new.party.import.less";
 -@import "../parties/styles/party.details.import.less";
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -6392,7 +6392,7 @@ index 4ac712e..a5d537e 100644
 +<div ui-view flex-gt-sm layout-gt-sm="row"></div>
  </body>
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -6403,13 +6403,13 @@ Subject: [PATCH 164/239] Step 18.8: Update parties list to use material's
  directives
 
 ---
- client/parties/views/parties-list.ng.html | 163 +++++++++++-------------------
+ client/parties/views/parties-list.html | 163 +++++++++++-------------------
  1 file changed, 60 insertions(+), 103 deletions(-)
 
-diff --git a/client/parties/views/parties-list.ng.html b/client/parties/views/parties-list.ng.html
+diff --git a/client/parties/views/parties-list.html b/client/parties/views/parties-list.html
 index c66ae56..a389551 100644
---- a/client/parties/views/parties-list.ng.html
-+++ b/client/parties/views/parties-list.ng.html
+--- a/client/parties/views/parties-list.html
++++ b/client/parties/views/parties-list.html
 @@ -1,118 +1,75 @@
 -<div class="row h100">
 -  <div class="col-md-6 ma-parties-col">
@@ -6476,7 +6476,7 @@ index c66ae56..a389551 100644
 +            <md-card-content>
 +              <h2 class="md-title ma-name" style=""><a href="/parties/{{party._id}}">{{party.name}}</a></h2>
 +              <p class="ma-description" style="padding:0 10px;margin-bottom:35px;margin-top: 6px;">{{party.description}}</p>
- 
+
 -        <div class="row ma-party-item-bottom">
 -          <div class="col-sm-8 ma-posted-by-col">
 -            <span class="ma-posted-by">Posted by {{ creator(party) | displayName }}  </span>
@@ -6498,14 +6498,14 @@ index c66ae56..a389551 100644
 -            <div ng-hide="$root.currentUser">
 -              <i>Sign in to RSVP for this party.</i>
 -            </div>
- 
+
 +              <div layout="row">
 +                <div flex="1">
 +                  <p style="margin-top:0px;margin-bottom:3px;font-size:14px;color:#aaa;">
 +                    <small>Posted by {{ creator(party) | displayName }}</small>
 +                    <span ng-if="party.public" style="font-size:12px;color:#999;">| Everyone is invited</span>
 +                  </p>
- 
+
 -          </div>
 -          <div class="col-sm-4">
 -            <div class="ma-rsvp-sum">
@@ -6569,7 +6569,7 @@ index c66ae56..a389551 100644
 +          </md-card>
          </div>
 +      </md-content>
- 
+
 -      </li>
 -    </ul>
 -    <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
@@ -6591,7 +6591,7 @@ index c66ae56..a389551 100644
 \ No newline at end of file
 +</md-content>
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -6627,7 +6627,7 @@ index 2c5dfcc..ddc3766 100644
  promise@0.4.8
  random@1.0.4
  rate-limit@1.0.0
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -6668,7 +6668,7 @@ index 2ca6523..44c8b9b 100644
  function onReady() {
    angular.bootstrap(document, ['socially'], {
      strictDi: true
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -6679,13 +6679,13 @@ Subject: [PATCH 167/239] Step 18.11: Update party details view to use
  angular-material
 
 ---
- client/parties/views/party-details.ng.html | 82 ++++++++++++++----------------
+ client/parties/views/party-details.html | 82 ++++++++++++++----------------
  1 file changed, 37 insertions(+), 45 deletions(-)
 
-diff --git a/client/parties/views/party-details.ng.html b/client/parties/views/party-details.ng.html
+diff --git a/client/parties/views/party-details.html b/client/parties/views/party-details.html
 index 104a657..a1d808c 100644
---- a/client/parties/views/party-details.ng.html
-+++ b/client/parties/views/party-details.ng.html
+--- a/client/parties/views/party-details.html
++++ b/client/parties/views/party-details.html
 @@ -1,54 +1,46 @@
 -<div class="row ma-party-details-container">
 -  <div class="col-sm-6 col-sm-offset-3">
@@ -6723,7 +6723,7 @@ index 104a657..a1d808c 100644
 +      <md-checkbox ng-model="party.public" ng-disabled="party.owner != $root.currentUser._id" aria-label="Public">
 +        Is public
 +      </md-checkbox>
- 
+
 -    <div class="ma-invite-list" ng-show="canInvite()">
 -      <h3>
 -        Users to invite:
@@ -6734,7 +6734,7 @@ index 104a657..a1d808c 100644
 +        <md-button ng-click="reset()">Reset form</md-button>
 +        <md-button ng-href="/parties">Cancel</md-button>
 +      </div>
- 
+
 -        <li ng-repeat="user in users | uninvited:party">
 +      <md-list ng-show="canInvite()">
 +        <md-subheader class="md-no-sticky">Users to invite:</md-subheader>
@@ -6752,24 +6752,24 @@ index 104a657..a1d808c 100644
 -    </div>
 +        </md-list-item>
 +      </md-list>
- 
+
 -
 -    <h3 class="ma-map-title">
 -      Click the map to set the party location
 -    </h3>
 -
 -    <div class="angular-google-map-container">
--      <ui-gmap-google-map center="party.location || map.center" 
+-      <ui-gmap-google-map center="party.location || map.center"
 -                          events="map.events" zoom="map.zoom">
--        <ui-gmap-marker coords="party.location" options="map.marker.options" 
+-        <ui-gmap-marker coords="party.location" options="map.marker.options"
 -                        events="map.marker.events" idkey="party._id">
 -        </ui-gmap-marker>
 -      </ui-gmap-google-map>
 -    </div>
 +      <div class="angular-google-map-container">
-+        <ui-gmap-google-map center="party.location || map.center" 
++        <ui-gmap-google-map center="party.location || map.center"
 +                            events="map.events" zoom="map.zoom">
-+          <ui-gmap-marker coords="party.location" options="map.marker.options" 
++          <ui-gmap-marker coords="party.location" options="map.marker.options"
 +                          events="map.marker.events" idkey="party._id">
 +          </ui-gmap-marker>
 +        </ui-gmap-google-map>
@@ -6779,7 +6779,7 @@ index 104a657..a1d808c 100644
 -
  </div>
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -6790,13 +6790,13 @@ Subject: [PATCH 168/239] Step 18.12: Update new party modal view to use
  angular-material
 
 ---
- client/parties/views/add-new-party-modal.ng.html | 54 ++++++++++++++----------
+ client/parties/views/add-new-party-modal.html | 54 ++++++++++++++----------
  1 file changed, 32 insertions(+), 22 deletions(-)
 
-diff --git a/client/parties/views/add-new-party-modal.ng.html b/client/parties/views/add-new-party-modal.ng.html
+diff --git a/client/parties/views/add-new-party-modal.html b/client/parties/views/add-new-party-modal.html
 index 5fd3485..464d006 100644
---- a/client/parties/views/add-new-party-modal.ng.html
-+++ b/client/parties/views/add-new-party-modal.ng.html
+--- a/client/parties/views/add-new-party-modal.html
++++ b/client/parties/views/add-new-party-modal.html
 @@ -1,24 +1,34 @@
 -<div class="container-fluid ma-add-new-party-container">
 -  <div class="alert alert-info" ng-hide="$root.currentUser || $root.loggingIn">
@@ -6856,7 +6856,7 @@ index 5fd3485..464d006 100644
 \ No newline at end of file
 +</md-dialog>
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -6885,7 +6885,7 @@ index a5d537e..44093aa 100644
    </div>
  </md-toolbar>
  <div ui-view flex-gt-sm layout-gt-sm="row"></div>
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -6903,7 +6903,7 @@ index 66296a4..930c9f0 100644
 --- a/client/routes.ng.js
 +++ b/client/routes.ng.js
 @@ -22,10 +22,40 @@ angular.module("socially").config(function ($urlRouterProvider, $stateProvider,
-       templateUrl: 'client/parties/views/party-details.ng.html',
+       templateUrl: 'client/parties/views/party-details.html',
        controller: 'PartyDetailsCtrl',
        resolve: {
 -        "currentUser": function ($meteor) {
@@ -6914,19 +6914,19 @@ index 66296a4..930c9f0 100644
 +    })
 +    .state('login', {
 +      url: '/login',
-+      templateUrl: 'client/users/views/login.ng.html',
++      templateUrl: 'client/users/views/login.html',
 +      controller: 'LoginCtrl',
 +      controllerAs: 'lc'
 +    })
 +    .state('register',{
 +      url: '/register',
-+      templateUrl: 'client/users/views/register.ng.html',
++      templateUrl: 'client/users/views/register.html',
 +      controller: 'RegisterCtrl',
 +      controllerAs: 'rc'
 +    })
 +    .state('resetpw', {
 +      url: '/resetpw',
-+      templateUrl: 'client/users/views/reset-password.ng.html',
++      templateUrl: 'client/users/views/reset-password.html',
 +      controller: 'ResetCtrl',
 +      controllerAs: 'rpc'
 +    })
@@ -6942,9 +6942,9 @@ index 66296a4..930c9f0 100644
 +        }
 +      }
      });
- 
+
    $urlRouterProvider.otherwise("/parties");
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -6988,7 +6988,7 @@ index 0000000..d1e4664
 +  }
 +]);
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -6998,15 +6998,15 @@ Date: Thu, 10 Sep 2015 18:51:31 +0300
 Subject: [PATCH 172/239] Step 18.16: Create login view
 
 ---
- client/users/views/login.ng.html | 33 +++++++++++++++++++++++++++++++++
+ client/users/views/login.html | 33 +++++++++++++++++++++++++++++++++
  1 file changed, 33 insertions(+)
- create mode 100644 client/users/views/login.ng.html
+ create mode 100644 client/users/views/login.html
 
-diff --git a/client/users/views/login.ng.html b/client/users/views/login.ng.html
+diff --git a/client/users/views/login.html b/client/users/views/login.html
 new file mode 100644
 index 0000000..2ad8a07
 --- /dev/null
-+++ b/client/users/views/login.ng.html
++++ b/client/users/views/login.html
 @@ -0,0 +1,33 @@
 +<md-content layout="row">
 +  <span flex></span>
@@ -7042,7 +7042,7 @@ index 0000000..2ad8a07
 +  <span flex></span>
 +</md-content>
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -7086,7 +7086,7 @@ index 0000000..f21b5f5
 +  }
 +]);
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -7096,15 +7096,15 @@ Date: Thu, 10 Sep 2015 18:53:37 +0300
 Subject: [PATCH 174/239] Step 18.18: Create register view
 
 ---
- client/users/views/register.ng.html | 32 ++++++++++++++++++++++++++++++++
+ client/users/views/register.html | 32 ++++++++++++++++++++++++++++++++
  1 file changed, 32 insertions(+)
- create mode 100644 client/users/views/register.ng.html
+ create mode 100644 client/users/views/register.html
 
-diff --git a/client/users/views/register.ng.html b/client/users/views/register.ng.html
+diff --git a/client/users/views/register.html b/client/users/views/register.html
 new file mode 100644
 index 0000000..2278c2f
 --- /dev/null
-+++ b/client/users/views/register.ng.html
++++ b/client/users/views/register.html
 @@ -0,0 +1,32 @@
 +<md-content layout="row">
 +  <span flex></span>
@@ -7139,7 +7139,7 @@ index 0000000..2278c2f
 +  <span flex></span>
 +</md-content>
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -7182,7 +7182,7 @@ index 0000000..56be12f
 +  }
 +]);
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -7192,15 +7192,15 @@ Date: Tue, 18 Aug 2015 17:02:39 +0300
 Subject: [PATCH 176/239] Step 18.20: Create reset view
 
 ---
- client/users/views/reset-password.ng.html | 27 +++++++++++++++++++++++++++
+ client/users/views/reset-password.html | 27 +++++++++++++++++++++++++++
  1 file changed, 27 insertions(+)
- create mode 100644 client/users/views/reset-password.ng.html
+ create mode 100644 client/users/views/reset-password.html
 
-diff --git a/client/users/views/reset-password.ng.html b/client/users/views/reset-password.ng.html
+diff --git a/client/users/views/reset-password.html b/client/users/views/reset-password.html
 new file mode 100644
 index 0000000..f365b52
 --- /dev/null
-+++ b/client/users/views/reset-password.ng.html
++++ b/client/users/views/reset-password.html
 @@ -0,0 +1,27 @@
 +<md-content layout="row">
 +  <span flex></span>
@@ -7230,7 +7230,7 @@ index 0000000..f365b52
 +  <span flex></span>
 +</md-content>
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -7296,7 +7296,7 @@ index ddc3766..881087f 100644
  random@1.0.4
  rate-limit@1.0.0
  reactive-dict@1.1.1
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -7331,7 +7331,7 @@ index 881087f..b7160e5 100644
  cfs:http-methods@0.0.30
  cfs:http-publish@0.0.13
  cfs:power-queue@0.9.11
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -7384,7 +7384,7 @@ index 0000000..5cec451
 +  });
 +}
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -7403,13 +7403,13 @@ index 9498791..469c299 100644
 +++ b/client/parties/controllers/partiesList.ng.js
 @@ -5,6 +5,7 @@ angular.module("socially").controller("PartiesListCtrl", function ($scope, $mete
    $scope.orderProperty = '1';
- 
+
    $scope.users = $meteor.collection(Meteor.users, false).subscribe('users');
 +  $scope.images = $meteor.collectionFS(Images, false, Images).subscribe('images');
- 
+
    $scope.parties = $meteor.collection(function() {
      return Parties.find({}, {
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -7444,7 +7444,7 @@ index b7160e5..7f03d8b 100644
  dburles:mongo-collection-instances@0.3.4
  ddp@1.2.2
  ddp-client@1.2.1
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -7470,9 +7470,9 @@ index 44c8b9b..c60b893 100644
 +  'ngMaterial',
 +  'ngFileUpload'
  ]);
- 
+
  var themeIcons = ['$mdIconProvider' , function ($mdIconProvider) {
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -7482,13 +7482,13 @@ Date: Fri, 11 Sep 2015 11:35:57 +0300
 Subject: [PATCH 183/239] Step 20.7: Add usage of file uploader
 
 ---
- client/parties/views/add-new-party-modal.ng.html | 24 ++++++++++++++++++++++--
+ client/parties/views/add-new-party-modal.html | 24 ++++++++++++++++++++++--
  1 file changed, 22 insertions(+), 2 deletions(-)
 
-diff --git a/client/parties/views/add-new-party-modal.ng.html b/client/parties/views/add-new-party-modal.ng.html
+diff --git a/client/parties/views/add-new-party-modal.html b/client/parties/views/add-new-party-modal.html
 index 464d006..e27ba83 100644
---- a/client/parties/views/add-new-party-modal.ng.html
-+++ b/client/parties/views/add-new-party-modal.ng.html
+--- a/client/parties/views/add-new-party-modal.html
++++ b/client/parties/views/add-new-party-modal.html
 @@ -1,4 +1,4 @@
 -<md-dialog aria-label="Mango (Fruit)">
 +<md-dialog>
@@ -7531,7 +7531,7 @@ index 464d006..e27ba83 100644
          <md-checkbox ng-model="newParty.public" id="public" aria-label="Public">
            Public
          </md-checkbox>
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -7562,7 +7562,7 @@ index 0000000..072392f
 +    $scope.close = $mdDialog.hide;
 +  }]);
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -7589,7 +7589,7 @@ index af25c36..25e890f 100644
      $scope.addNewParty = function () {
        if($scope.newParty.name){
          $scope.newParty.owner = $rootScope.currentUser._id;
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -7607,7 +7607,7 @@ index 0f7beb6..31cc3d1 100644
 --- a/client/parties/styles/parties.import.less
 +++ b/client/parties/styles/parties.import.less
 @@ -59,4 +59,23 @@
- 
+
          }
      }
 +}
@@ -7631,7 +7631,7 @@ index 0f7beb6..31cc3d1 100644
 +    border: 5px dashed red;
  }
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -7666,7 +7666,7 @@ index 7f03d8b..9e672a5 100644
  angular@1.0.2
  angular:angular@1.4.6
  angular:angular-animate@1.4.6
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -7691,9 +7691,9 @@ index c60b893..4fc1690 100644
 +  'ngFileUpload',
 +  'ngImgCrop'
  ]);
- 
+
  var themeIcons = ['$mdIconProvider' , function ($mdIconProvider) {
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -7737,7 +7737,7 @@ index 072392f..1df211d 100644
 -    $scope.close = $mdDialog.hide;
    }]);
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -7747,13 +7747,13 @@ Date: Fri, 11 Sep 2015 13:10:42 +0300
 Subject: [PATCH 190/239] Step 20.14: Add usage of ngImgCrop
 
 ---
- client/parties/views/add-new-party-modal.ng.html | 4 ++++
+ client/parties/views/add-new-party-modal.html | 4 ++++
  1 file changed, 4 insertions(+)
 
-diff --git a/client/parties/views/add-new-party-modal.ng.html b/client/parties/views/add-new-party-modal.ng.html
+diff --git a/client/parties/views/add-new-party-modal.html b/client/parties/views/add-new-party-modal.html
 index e27ba83..ff647a9 100644
---- a/client/parties/views/add-new-party-modal.ng.html
-+++ b/client/parties/views/add-new-party-modal.ng.html
+--- a/client/parties/views/add-new-party-modal.html
++++ b/client/parties/views/add-new-party-modal.html
 @@ -32,6 +32,10 @@
                    </div>
                    <div ng-show="dropAvailable">You can also drop image to here</div>
@@ -7765,7 +7765,7 @@ index e27ba83..ff647a9 100644
                </div>
              </div>
            </div>
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -7775,13 +7775,13 @@ Date: Fri, 11 Sep 2015 13:10:57 +0300
 Subject: [PATCH 191/239] Step 20.15: Add ng-hide to the uploader
 
 ---
- client/parties/views/add-new-party-modal.ng.html | 2 +-
+ client/parties/views/add-new-party-modal.html | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/client/parties/views/add-new-party-modal.ng.html b/client/parties/views/add-new-party-modal.ng.html
+diff --git a/client/parties/views/add-new-party-modal.html b/client/parties/views/add-new-party-modal.html
 index ff647a9..75cd7da 100644
---- a/client/parties/views/add-new-party-modal.ng.html
-+++ b/client/parties/views/add-new-party-modal.ng.html
+--- a/client/parties/views/add-new-party-modal.html
++++ b/client/parties/views/add-new-party-modal.html
 @@ -21,7 +21,7 @@
              <div flex>
                <h3>Add photos to your party!</h3>
@@ -7791,7 +7791,7 @@ index ff647a9..75cd7da 100644
                       ngf-change="addImages($files)"
                       ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box"
                       ngf-multiple="false" ngf-allow-dir="false" ngf-accept="'image/*'"
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -7809,7 +7809,7 @@ index 31cc3d1..facbb89 100644
 --- a/client/parties/styles/parties.import.less
 +++ b/client/parties/styles/parties.import.less
 @@ -78,4 +78,13 @@
- 
+
  .drop-box.dragover-err {
      border: 5px dashed red;
 -}
@@ -7824,7 +7824,7 @@ index 31cc3d1..facbb89 100644
 +.ng-crop-container {
 +    height: 350px;
 +}
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -7834,13 +7834,13 @@ Date: Fri, 11 Sep 2015 13:17:47 +0300
 Subject: [PATCH 193/239] Step 20.17: Add save button for the cropped image
 
 ---
- client/parties/views/add-new-party-modal.ng.html | 5 ++++-
+ client/parties/views/add-new-party-modal.html | 5 ++++-
  1 file changed, 4 insertions(+), 1 deletion(-)
 
-diff --git a/client/parties/views/add-new-party-modal.ng.html b/client/parties/views/add-new-party-modal.ng.html
+diff --git a/client/parties/views/add-new-party-modal.html b/client/parties/views/add-new-party-modal.html
 index 75cd7da..e3b3983 100644
---- a/client/parties/views/add-new-party-modal.ng.html
-+++ b/client/parties/views/add-new-party-modal.ng.html
+--- a/client/parties/views/add-new-party-modal.html
++++ b/client/parties/views/add-new-party-modal.html
 @@ -33,7 +33,10 @@
                    <div ng-show="dropAvailable">You can also drop image to here</div>
                  </div>
@@ -7853,7 +7853,7 @@ index 75cd7da..e3b3983 100644
                    <img-crop image="imgSrc" result-image="myCroppedImage" area-type="square"></img-crop>
                  </div>
                </div>
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -7886,7 +7886,7 @@ index 1df211d..f13361f 100644
 +    };
    }]);
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -7908,10 +7908,10 @@ index 25e890f..b4642a7 100644
      $scope.newParty = {};
      $scope.images = $meteor.collectionFS(Images, false, Images);
 +    $scope.newPartyImages = [];
- 
+
      $scope.addNewParty = function () {
        if($scope.newParty.name){
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -7921,13 +7921,13 @@ Date: Fri, 11 Sep 2015 13:29:01 +0300
 Subject: [PATCH 196/239] Step 20.20: Add the display of uploaded images
 
 ---
- client/parties/views/add-new-party-modal.ng.html | 6 ++++++
+ client/parties/views/add-new-party-modal.html | 6 ++++++
  1 file changed, 6 insertions(+)
 
-diff --git a/client/parties/views/add-new-party-modal.ng.html b/client/parties/views/add-new-party-modal.ng.html
+diff --git a/client/parties/views/add-new-party-modal.html b/client/parties/views/add-new-party-modal.html
 index e3b3983..ae8f7fd 100644
---- a/client/parties/views/add-new-party-modal.ng.html
-+++ b/client/parties/views/add-new-party-modal.ng.html
+--- a/client/parties/views/add-new-party-modal.html
++++ b/client/parties/views/add-new-party-modal.html
 @@ -40,6 +40,12 @@
                    <img-crop image="imgSrc" result-image="myCroppedImage" area-type="square"></img-crop>
                  </div>
@@ -7941,7 +7941,7 @@ index e3b3983..ae8f7fd 100644
              </div>
            </div>
          </md-whiteframe>
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -7976,7 +7976,7 @@ index 9e672a5..0950f1f 100644
 +vitalets:angular-xeditable@0.1.9
  webapp@1.2.2
  webapp-hashing@1.0.5
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -8001,9 +8001,9 @@ index 4fc1690..2a02121 100644
 +  'ngImgCrop',
 +  'xeditable'
  ]);
- 
+
  var themeIcons = ['$mdIconProvider' , function ($mdIconProvider) {
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -8013,13 +8013,13 @@ Date: Fri, 11 Sep 2015 13:32:23 +0300
 Subject: [PATCH 199/239] Step 20.23: Add usage of angular-xeditable
 
 ---
- client/parties/views/add-new-party-modal.ng.html | 4 ++--
+ client/parties/views/add-new-party-modal.html | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/client/parties/views/add-new-party-modal.ng.html b/client/parties/views/add-new-party-modal.ng.html
+diff --git a/client/parties/views/add-new-party-modal.html b/client/parties/views/add-new-party-modal.html
 index ae8f7fd..b7abd11 100644
---- a/client/parties/views/add-new-party-modal.ng.html
-+++ b/client/parties/views/add-new-party-modal.ng.html
+--- a/client/parties/views/add-new-party-modal.html
++++ b/client/parties/views/add-new-party-modal.html
 @@ -1,5 +1,4 @@
  <md-dialog>
 -  <form>
@@ -8042,7 +8042,7 @@ index ae8f7fd..b7abd11 100644
 -  </form>
  </md-dialog>
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -8076,7 +8076,7 @@ index b4642a7..761dcc5 100644
 +    };
    }]);
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -8086,13 +8086,13 @@ Date: Fri, 11 Sep 2015 13:38:38 +0300
 Subject: [PATCH 201/239] Step 20.25: Use div instead of form
 
 ---
- client/parties/views/add-new-party-modal.ng.html | 2 ++
+ client/parties/views/add-new-party-modal.html | 2 ++
  1 file changed, 2 insertions(+)
 
-diff --git a/client/parties/views/add-new-party-modal.ng.html b/client/parties/views/add-new-party-modal.ng.html
+diff --git a/client/parties/views/add-new-party-modal.html b/client/parties/views/add-new-party-modal.html
 index b7abd11..3c8347b 100644
---- a/client/parties/views/add-new-party-modal.ng.html
-+++ b/client/parties/views/add-new-party-modal.ng.html
+--- a/client/parties/views/add-new-party-modal.html
++++ b/client/parties/views/add-new-party-modal.html
 @@ -1,4 +1,5 @@
  <md-dialog>
 +  <div class="like-form">
@@ -8106,7 +8106,7 @@ index b7abd11..3c8347b 100644
 +  </div>
  </md-dialog>
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -8126,7 +8126,7 @@ index 438dc59..a964692 100644
 @@ -1,6 +1,16 @@
  html, body {
  }
- 
+
 +.like-form {
 +  display: -webkit-flex;
 +  display: -ms-flexbox;
@@ -8140,7 +8140,7 @@ index 438dc59..a964692 100644
  @import "../parties/styles/parties.import.less";
  @import "../parties/styles/party.details.import.less";
  @import "../parties/styles/navbar.import.less";
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -8176,7 +8176,7 @@ index 0950f1f..6476773 100644
  nmccready:angular-simple-logger@0.0.4
  npm-bcrypt@0.7.8_2
  npm-mongo@1.4.39_1
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -8202,9 +8202,9 @@ index 2a02121..ac6e9ef 100644
 +  'xeditable',
 +  'angular-sortable-view'
  ]);
- 
+
  var themeIcons = ['$mdIconProvider' , function ($mdIconProvider) {
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -8214,13 +8214,13 @@ Date: Fri, 11 Sep 2015 13:41:57 +0300
 Subject: [PATCH 205/239] Step 20.29: Add usage for angular-sortable
 
 ---
- client/parties/views/add-new-party-modal.ng.html | 6 +++---
+ client/parties/views/add-new-party-modal.html | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/client/parties/views/add-new-party-modal.ng.html b/client/parties/views/add-new-party-modal.ng.html
+diff --git a/client/parties/views/add-new-party-modal.html b/client/parties/views/add-new-party-modal.html
 index 3c8347b..51f6c0f 100644
---- a/client/parties/views/add-new-party-modal.ng.html
-+++ b/client/parties/views/add-new-party-modal.ng.html
+--- a/client/parties/views/add-new-party-modal.html
++++ b/client/parties/views/add-new-party-modal.html
 @@ -41,9 +41,9 @@
                  </div>
                </div>
@@ -8234,7 +8234,7 @@ index 3c8347b..51f6c0f 100644
                    <a href="#" editable-text="image.metadata.description"
                       onbeforesave="updateDescription($data, image)">{{ image.metadata.description || 'Click to add description' }}</a>
                  </div>
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -8244,13 +8244,13 @@ Date: Fri, 11 Sep 2015 13:42:21 +0300
 Subject: [PATCH 206/239] Step 20.30: Add indication for main image in the view
 
 ---
- client/parties/views/add-new-party-modal.ng.html | 1 +
+ client/parties/views/add-new-party-modal.html | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/client/parties/views/add-new-party-modal.ng.html b/client/parties/views/add-new-party-modal.ng.html
+diff --git a/client/parties/views/add-new-party-modal.html b/client/parties/views/add-new-party-modal.html
 index 51f6c0f..70d0469 100644
---- a/client/parties/views/add-new-party-modal.ng.html
-+++ b/client/parties/views/add-new-party-modal.ng.html
+--- a/client/parties/views/add-new-party-modal.html
++++ b/client/parties/views/add-new-party-modal.html
 @@ -43,6 +43,7 @@
                <br />
                <div layout="row" class="images-container-title" sv-root sv-part="newPartyImages">
@@ -8259,7 +8259,7 @@ index 51f6c0f..70d0469 100644
                    <img draggable="false" ng-src="{{ image.url() }}"/><br/>
                    <a href="#" editable-text="image.metadata.description"
                       onbeforesave="updateDescription($data, image)">{{ image.metadata.description || 'Click to add description' }}</a>
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -8306,7 +8306,7 @@ index facbb89..4470813 100644
 +    background-color: #f8f8f8;
 +}
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -8347,7 +8347,7 @@ index 761dcc5..7c82ada 100644
          $mdDialog.hide();
        }
      };
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -8357,13 +8357,13 @@ Date: Sat, 17 Oct 2015 20:01:47 +0300
 Subject: [PATCH 209/239] Step 20.33: Display the party's main image
 
 ---
- client/parties/views/parties-list.ng.html | 4 ++++
+ client/parties/views/parties-list.html | 4 ++++
  1 file changed, 4 insertions(+)
 
-diff --git a/client/parties/views/parties-list.ng.html b/client/parties/views/parties-list.ng.html
+diff --git a/client/parties/views/parties-list.html b/client/parties/views/parties-list.html
 index a389551..ea83c45 100644
---- a/client/parties/views/parties-list.ng.html
-+++ b/client/parties/views/parties-list.ng.html
+--- a/client/parties/views/parties-list.html
++++ b/client/parties/views/parties-list.html
 @@ -20,6 +20,10 @@
          <dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
          <div  dir-paginate="party in parties | itemsPerPage: perPage" total-items="partiesCount.count" class="ma-party">
@@ -8375,7 +8375,7 @@ index a389551..ea83c45 100644
              <md-card-content>
                <h2 class="md-title ma-name" style=""><a href="/parties/{{party._id}}">{{party.name}}</a></h2>
                <p class="ma-description" style="padding:0 10px;margin-bottom:35px;margin-top: 6px;">{{party.description}}</p>
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -8401,7 +8401,7 @@ index 469c299..18209c0 100644
 @@ -13,6 +13,16 @@ angular.module("socially").controller("PartiesListCtrl", function ($scope, $mete
      });
    });
- 
+
 +  $scope.getMainImage = function(images) {
 +    if (images && images.length && images[0] && images[0].id) {
 +      var url = $filter('filter')($scope.images, {_id: images[0].id})[0].url();
@@ -8415,7 +8415,7 @@ index 469c299..18209c0 100644
    $meteor.autorun($scope, function() {
      $meteor.subscribe('parties', {
        limit: parseInt($scope.getReactively('perPage')),
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -8444,7 +8444,7 @@ index 4470813..0e73444 100644
 +    height: 200px;
  }
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -8479,7 +8479,7 @@ index 6476773..be3b665 100644
  cfs:gridfs@0.0.33
  cfs:http-methods@0.0.30
  cfs:http-publish@0.0.13
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -8509,7 +8509,7 @@ index 5cec451..3b06d5f 100644
    ],
    filter: {
      allow: {
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -8519,13 +8519,13 @@ Date: Fri, 11 Sep 2015 14:13:50 +0300
 Subject: [PATCH 214/239] Step 20.38: Add thumbnails usage
 
 ---
- client/parties/views/add-new-party-modal.ng.html | 2 +-
+ client/parties/views/add-new-party-modal.html | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/client/parties/views/add-new-party-modal.ng.html b/client/parties/views/add-new-party-modal.ng.html
+diff --git a/client/parties/views/add-new-party-modal.html b/client/parties/views/add-new-party-modal.html
 index 70d0469..eed885c 100644
---- a/client/parties/views/add-new-party-modal.ng.html
-+++ b/client/parties/views/add-new-party-modal.ng.html
+--- a/client/parties/views/add-new-party-modal.html
++++ b/client/parties/views/add-new-party-modal.html
 @@ -44,7 +44,7 @@
                <div layout="row" class="images-container-title" sv-root sv-part="newPartyImages">
                  <div sv-element class="party-image-container" ng-repeat="image in newPartyImages">
@@ -8535,7 +8535,7 @@ index 70d0469..eed885c 100644
                    <a href="#" editable-text="image.metadata.description"
                       onbeforesave="updateDescription($data, image)">{{ image.metadata.description || 'Click to add description' }}</a>
                  </div>
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -8611,7 +8611,7 @@ index 0000000..9c9c1bd
 +
 +An example with the `controller as` syntax can be found in [this branch](https://github.com/Urigo/meteor-angular-socially/tree/step_12_controller_as_vm).
 +
-+# angular-meteor University! <a href="http://angularjs.meteor.com/"><img src="http://angularjs.meteor.com/images/logo-large.png" width="60" height="60" /></a>  
++# angular-meteor University! <a href="http://angularjs.meteor.com/"><img src="http://angularjs.meteor.com/images/logo-large.png" width="60" height="60" /></a>
 +
 +The angular-meteor university is a community learning experiment, we would like to create a similar experience to the [hueniversity](https://github.com/hueniverse/hueniversity)
 +
@@ -8650,14 +8650,14 @@ index 0000000..9c9c1bd
 +Add new steps to angular-meteor-socially tutorial.
 +Look for issues with a [help wanted label](https://github.com/Urigo/meteor-angular-socially/labels/help%20wanted) and help with those.
 +Randomly pick submitted Pull Request and review them, offering advice and helping others improve their skills.
-+Submit Pull Request or open issues with proposals for [angular-meteor](https://github.com/Urigo/angular-meteor) 
++Submit Pull Request or open issues with proposals for [angular-meteor](https://github.com/Urigo/angular-meteor)
 +
 +### Anything else?
 +[Open an issue](https://github.com/Urigo/meteor-angular-socially/issues/new), it's free.
 +
 +
 +
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -8679,7 +8679,7 @@ index efeba1b..81ae701 100644
  browser
 +ios
 +server
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -8750,7 +8750,7 @@ index 0000000..164ddd9
 +++ b/packages/socially-mobile/socially-mobile.js
 @@ -0,0 +1 @@
 +// Write your package code here!
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -8815,7 +8815,7 @@ index 164ddd9..0000000
 +++ /dev/null
 @@ -1 +0,0 @@
 -// Write your package code here!
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -8844,21 +8844,21 @@ index 01ea9c1..4df7c76 100644
 -  // To avoid submitting documentation, set this field to null.
    documentation: 'README.md'
  });
- 
+
  Package.onUse(function(api) {
    api.versionsFrom('1.2.0.1');
    api.use('ecmascript');
 -  api.addFiles('socially-mobile.js');
 +  api.use('angular');
  });
- 
+
  Package.onTest(function(api) {
    api.use('ecmascript');
    api.use('tinytest');
    api.use('socially-mobile');
 -  api.addFiles('socially-mobile-tests.js');
  });
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -8881,7 +8881,7 @@ index 0000000..f078654
 @@ -0,0 +1 @@
 +angular.module('socially.mobile', []);
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -8904,13 +8904,13 @@ index 0000000..f53a039
 +angular.module('socially.mobile').config(function($stateProvider) {
 +  $stateProvider.state('login', {
 +    url: '/login',
-+    templateUrl: '/packages/socially-mobile/client/users/views/login-mobile.ng.html',
++    templateUrl: '/packages/socially-mobile/client/users/views/login-mobile.html',
 +    controller: 'LoginCtrl',
 +    controllerAs: 'lc'
 +  });
 +});
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -8920,19 +8920,19 @@ Date: Sun, 25 Oct 2015 21:14:26 +0200
 Subject: [PATCH 222/239] Step 21.7: Add the mobile login page
 
 ---
- packages/socially-mobile/client/users/views/login-mobile.ng.html | 1 +
+ packages/socially-mobile/client/users/views/login-mobile.html | 1 +
  1 file changed, 1 insertion(+)
- create mode 100644 packages/socially-mobile/client/users/views/login-mobile.ng.html
+ create mode 100644 packages/socially-mobile/client/users/views/login-mobile.html
 
-diff --git a/packages/socially-mobile/client/users/views/login-mobile.ng.html b/packages/socially-mobile/client/users/views/login-mobile.ng.html
+diff --git a/packages/socially-mobile/client/users/views/login-mobile.html b/packages/socially-mobile/client/users/views/login-mobile.html
 new file mode 100644
 index 0000000..5b6a3f2
 --- /dev/null
-+++ b/packages/socially-mobile/client/users/views/login-mobile.ng.html
++++ b/packages/socially-mobile/client/users/views/login-mobile.html
 @@ -0,0 +1 @@
 +mobile login
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -8960,12 +8960,12 @@ index 4df7c76..64cd427 100644
 +  ], 'web.cordova');
 +
 +  api.addAssets([
-+    'client/users/views/login-mobile.ng.html'
++    'client/users/views/login-mobile.html'
 +  ], 'web.cordova');
  });
- 
+
  Package.onTest(function(api) {
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -8988,15 +8988,15 @@ index 930c9f0..0cf2cd6 100644
      })
 -    .state('login', {
 -      url: '/login',
--      templateUrl: 'client/users/views/login.ng.html',
+-      templateUrl: 'client/users/views/login.html',
 -      controller: 'LoginCtrl',
 -      controllerAs: 'lc'
 -    })
 +
      .state('register',{
        url: '/register',
-       templateUrl: 'client/users/views/register.ng.html',
--- 
+       templateUrl: 'client/users/views/register.html',
+--
 2.3.2 (Apple Git-55)
 
 
@@ -9031,10 +9031,10 @@ index ac6e9ef..77df245 100644
 +}
 +
 +angular.module('socially', modulesToLoad);
- 
+
  var themeIcons = ['$mdIconProvider' , function ($mdIconProvider) {
- 
--- 
+
+--
 2.3.2 (Apple Git-55)
 
 
@@ -9058,10 +9058,10 @@ index 77df245..0a5b2bc 100644
 +else {
 +  modulesToLoad = modulesToLoad.concat(['socially.browser']);
 +}
- 
+
  angular.module('socially', modulesToLoad);
- 
--- 
+
+--
 2.3.2 (Apple Git-55)
 
 
@@ -9101,7 +9101,7 @@ index 0000000..955ab5b
 +  ], 'web.browser');
 +
 +  api.addAssets([
-+    'client/users/views/login-browser.ng.html'
++    'client/users/views/login-browser.html'
 +  ], 'web.browser');
 +});
 +
@@ -9110,7 +9110,7 @@ index 0000000..955ab5b
 +  api.use('tinytest');
 +  api.use('socially-mobile');
 +});
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -9132,7 +9132,7 @@ index 0000000..b0d348f
 @@ -0,0 +1 @@
 +angular.module('socially.browser', []);
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -9155,13 +9155,13 @@ index 0000000..5301159
 +angular.module('socially.browser').config(function($stateProvider) {
 +  $stateProvider.state('login', {
 +    url: '/login',
-+    templateUrl: '/packages/socially-browser/client/users/views/login-browser.ng.html',
++    templateUrl: '/packages/socially-browser/client/users/views/login-browser.html',
 +    controller: 'LoginCtrl',
 +    controllerAs: 'lc'
 +  });
 +});
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -9171,19 +9171,19 @@ Date: Sun, 25 Oct 2015 21:19:45 +0200
 Subject: [PATCH 230/239] Step 21.15: Add the view for browser login
 
 ---
- packages/socially-browser/client/users/views/login-browser.ng.html | 1 +
+ packages/socially-browser/client/users/views/login-browser.html | 1 +
  1 file changed, 1 insertion(+)
- create mode 100644 packages/socially-browser/client/users/views/login-browser.ng.html
+ create mode 100644 packages/socially-browser/client/users/views/login-browser.html
 
-diff --git a/packages/socially-browser/client/users/views/login-browser.ng.html b/packages/socially-browser/client/users/views/login-browser.ng.html
+diff --git a/packages/socially-browser/client/users/views/login-browser.html b/packages/socially-browser/client/users/views/login-browser.html
 new file mode 100644
 index 0000000..100bb4c
 --- /dev/null
-+++ b/packages/socially-browser/client/users/views/login-browser.ng.html
++++ b/packages/socially-browser/client/users/views/login-browser.html
 @@ -0,0 +1 @@
 +browser login
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -9243,7 +9243,7 @@ index b51d1e0..7dcbd07 100644
  url@1.0.5
  vitalets:angular-xeditable@0.1.9
  webapp@1.2.2
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -9253,13 +9253,13 @@ Date: Sun, 25 Oct 2015 21:20:52 +0200
 Subject: [PATCH 232/239] Step 21.17: Add the actual view for browser login
 
 ---
- .../client/users/views/login-browser.ng.html       | 34 +++++++++++++++++++++-
+ .../client/users/views/login-browser.html       | 34 +++++++++++++++++++++-
  1 file changed, 33 insertions(+), 1 deletion(-)
 
-diff --git a/packages/socially-browser/client/users/views/login-browser.ng.html b/packages/socially-browser/client/users/views/login-browser.ng.html
+diff --git a/packages/socially-browser/client/users/views/login-browser.html b/packages/socially-browser/client/users/views/login-browser.html
 index 100bb4c..2ad8a07 100644
---- a/packages/socially-browser/client/users/views/login-browser.ng.html
-+++ b/packages/socially-browser/client/users/views/login-browser.ng.html
+--- a/packages/socially-browser/client/users/views/login-browser.html
++++ b/packages/socially-browser/client/users/views/login-browser.html
 @@ -1 +1,33 @@
 -browser login
 \ No newline at end of file
@@ -9297,7 +9297,7 @@ index 100bb4c..2ad8a07 100644
 +  <span flex></span>
 +</md-content>
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -9374,7 +9374,7 @@ index 0000000..6e8c9c9
 +  }
 +]);
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -9385,14 +9385,14 @@ Subject: [PATCH 234/239] Step 21.19: Remove old login view from the root
  project
 
 ---
- client/users/views/login.ng.html | 33 ---------------------------------
+ client/users/views/login.html | 33 ---------------------------------
  1 file changed, 33 deletions(-)
- delete mode 100644 client/users/views/login.ng.html
+ delete mode 100644 client/users/views/login.html
 
-diff --git a/client/users/views/login.ng.html b/client/users/views/login.ng.html
+diff --git a/client/users/views/login.html b/client/users/views/login.html
 deleted file mode 100644
 index 2ad8a07..0000000
---- a/client/users/views/login.ng.html
+--- a/client/users/views/login.html
 +++ /dev/null
 @@ -1,33 +0,0 @@
 -<md-content layout="row">
@@ -9429,7 +9429,7 @@ index 2ad8a07..0000000
 -  <span flex></span>
 -</md-content>
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -9448,16 +9448,16 @@ index 955ab5b..64b6fb0 100644
 --- a/packages/socially-browser/package.js
 +++ b/packages/socially-browser/package.js
 @@ -13,7 +13,8 @@ Package.onUse(function(api) {
- 
+
    api.addFiles([
      'client/lib/module.ng.js',
 -    'client/routes.ng.js'
 +    'client/routes.ng.js',
 +    'client/users/controllers/login.ng.js'
    ], 'web.browser');
- 
+
    api.addAssets([
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -9467,13 +9467,13 @@ Date: Sun, 25 Oct 2015 21:37:14 +0200
 Subject: [PATCH 236/239] Step 21.21: Add login mobile view
 
 ---
- .../client/users/views/login-mobile.ng.html        | 34 +++++++++++++++++++++-
+ .../client/users/views/login-mobile.html        | 34 +++++++++++++++++++++-
  1 file changed, 33 insertions(+), 1 deletion(-)
 
-diff --git a/packages/socially-mobile/client/users/views/login-mobile.ng.html b/packages/socially-mobile/client/users/views/login-mobile.ng.html
+diff --git a/packages/socially-mobile/client/users/views/login-mobile.html b/packages/socially-mobile/client/users/views/login-mobile.html
 index 5b6a3f2..033bd8d 100644
---- a/packages/socially-mobile/client/users/views/login-mobile.ng.html
-+++ b/packages/socially-mobile/client/users/views/login-mobile.ng.html
+--- a/packages/socially-mobile/client/users/views/login-mobile.html
++++ b/packages/socially-mobile/client/users/views/login-mobile.html
 @@ -1 +1,33 @@
 -mobile login
 \ No newline at end of file
@@ -9511,7 +9511,7 @@ index 5b6a3f2..033bd8d 100644
 +  <span flex></span>
 +</md-content>
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -9562,7 +9562,7 @@ index 7dcbd07..a5bccfb 100644
  url@1.0.5
  vitalets:angular-xeditable@0.1.9
  webapp@1.2.2
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -9610,7 +9610,7 @@ index 0000000..5712f84
 +  }
 +]);
 \ No newline at end of file
--- 
+--
 2.3.2 (Apple Git-55)
 
 
@@ -9628,15 +9628,15 @@ index 64cd427..78c95b4 100644
 --- a/packages/socially-mobile/package.js
 +++ b/packages/socially-mobile/package.js
 @@ -13,7 +13,8 @@ Package.onUse(function(api) {
- 
+
    api.addFiles([
      'client/lib/module.ng.js',
 -    'client/routes.ng.js'
 +    'client/routes.ng.js',
 +    'client/users/controllers/login.ng.js'
    ], 'web.cordova');
- 
+
    api.addAssets([
--- 
+--
 2.3.2 (Apple Git-55)
 

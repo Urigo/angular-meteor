@@ -111,7 +111,7 @@ See the <a href="/tutorial/step_08#authenticationwithrouters">“Authentication 
     $stateProvider
       .state('home', {
         url: '/',
-        templateUrl: 'client/views/home.ng.html',
+        templateUrl: 'client/views/home.html',
         controller: 'HomeController'
         resolve: {
           "currentUser": ["$meteor", function($meteor){
@@ -141,7 +141,7 @@ See the <a href="/tutorial/step_08#authenticationwithrouters">“Authentication 
     $stateProvider
       .state('home', {
         url: '/',
-        templateUrl: 'client/views/home.ng.html',
+        templateUrl: 'client/views/home.html',
         controller: 'HomeController'
         resolve: {
           "currentUser": ["$meteor", function($meteor){
@@ -184,7 +184,7 @@ The mandatory validator function will be called with the authenticated user as t
     $stateProvider
       .state('home', {
         url: '/',
-        templateUrl: 'client/views/home.ng.html',
+        templateUrl: 'client/views/home.html',
         controller: 'HomeController'
         resolve: {
           "currentUser": ["$meteor", function($meteor){
@@ -194,7 +194,7 @@ The mandatory validator function will be called with the authenticated user as t
        })
        .state('admin', {
          url: '/admin',
-         templateUrl: 'client/views/admin.ng.html',
+         templateUrl: 'client/views/admin.html',
          controller: 'AdminController'
          resolve: {
            "currentUser": ["$meteor", function($meteor){
@@ -206,7 +206,7 @@ The mandatory validator function will be called with the authenticated user as t
        })
        .state('admin2', {
          url: '/admin2',
-         templateUrl: 'client/views/admin2.ng.html',
+         templateUrl: 'client/views/admin2.html',
          controller: 'Admin2Controller'
          resolve: {
            "currentUser": ["$meteor", function($meteor){

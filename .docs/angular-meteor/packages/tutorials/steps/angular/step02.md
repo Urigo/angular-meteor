@@ -16,7 +16,7 @@ To start working on our todos list app, let's replace the code of the default st
 </head>
 
 <body ng-app="simple-todos"
-      ng-include="'todos-list.ng.html'"
+      ng-include="'todos-list.html'"
       ng-controller="TodosListCtrl">
 </body>
 ```
@@ -41,12 +41,12 @@ if (Meteor.isClient) {
 }
 ```
 
-To write Angular templates, we need to name our files with a `.ng.html` suffix.
+To write Angular templates, we need to name our files with a `.html` suffix.
 
-Create a new file named `todos-list.ng.html` and place it on the root folder:
+Create a new file named `todos-list.html` and place it on the root folder:
 
 ```html
-<!-- todos-list.ng.html -->
+<!-- todos-list.html -->
 <div class="container">
   <header>
     <h1>Todo List</h1>
@@ -69,9 +69,9 @@ Now let's find out what all these bits of code are doing!
 
 ### Angular templates in Meteor
 
-The [angular-meteor package](http://angular-meteor.com/) parses all of the `.ng.html` files in your app folder and puts them in Angular's template cache with the id of their full path.
+The [angular-meteor package](http://angular-meteor.com/) parses all of the `.html` files in your app folder and puts them in Angular's template cache with the id of their full path.
 
-So, for example, when a file is named `my-angular-template.ng.html` is placed in the `client` folder, it will be available for `ng-include` or `ui-router` with the name `client/my-angular-template.ng.html`.
+So, for example, when a file is named `my-angular-template.html` is placed in the `client` folder, it will be available for `ng-include` or `ui-router` with the name `client/my-angular-template.html`.
 
 ### Adding logic and data to templates
 

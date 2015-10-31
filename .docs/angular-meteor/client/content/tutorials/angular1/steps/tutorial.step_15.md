@@ -11,7 +11,7 @@ First, let's learn about [ng-show](https://docs.angularjs.org/api/ng/directive/n
 So one thing we want to hide and show is the form for creating a new party. If a user is not logged in, they can't create a party, so why displaying the form for them?
 If the user is not logged in, we want to display a message saying they need to log in to create a new party.
 
-In `parties-list.ng.html` add a ng-show directive to the form like that:
+In `parties-list.html` add a ng-show directive to the form like that:
 
 {{> DiffBox tutorialName="angular-meteor" step="15.1"}}
 
@@ -52,7 +52,7 @@ So let's use `ng-if` to hide the outstanding invitations from a party, if the pa
 
 # Assigning a function
 
-Now lets hide the 'Users to invite' inside `party-details.ng.html` in case the user is not logged in or can't invite to the party:
+Now lets hide the 'Users to invite' inside `party-details.html` in case the user is not logged in or can't invite to the party:
 
 To do that we will create a scope function that returns a boolean and associate it with `ng-show`:
 
@@ -60,7 +60,7 @@ Create a new function inside partyDetailsCtrl inside the `partyDetails.js` file 
 
 {{> DiffBox tutorialName="angular-meteor" step="15.7"}}
 
-and add the `ng-show` to the `ul` in `party-details.ng.html`, and lets add a `li` that tells the user that everyone is already invited, if that is the case:
+and add the `ng-show` to the `ul` in `party-details.html`, and lets add a `li` that tells the user that everyone is already invited, if that is the case:
 
 {{> DiffBox tutorialName="angular-meteor" step="15.8"}}
 

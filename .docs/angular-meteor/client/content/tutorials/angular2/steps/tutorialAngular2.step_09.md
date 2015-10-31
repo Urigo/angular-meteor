@@ -95,7 +95,7 @@ Either that the owner parameter exists and it's the current logged in user (whic
 
 So now let's add the `isPublic` flag to the parties and see how it affects the parties the client gets.
 
-Let's add a checkbox to the new party form in `parties-form.ng.html`:
+Let's add a checkbox to the new party form in `parties-form.html`:
 
 {{> DiffBox tutorialName="angular2-meteor" step="9.8"}}
 
@@ -105,7 +105,7 @@ Let's add a checkbox to the new party form in `parties-form.ng.html`:
 
 Notice how easy it is to bind a checkbox to a model with Angular 2!
 
-Let's add the same to the `party-details.ng.html` page:
+Let's add the same to the `party-details.html` page:
 
 {{> DiffBox tutorialName="angular2-meteor" step="9.9"}}
 
@@ -146,7 +146,7 @@ Now let's subscribe to that publish method in our PartyDetails component.
 
 Now let's add the list of users to the view to make sure it works.
 
-Add this ng-for list to the end of `parties-details.ng.html`. Don't forget to import `NgFor` and add it as a directive.
+Add this ng-for list to the end of `parties-details.html`. Don't forget to import `NgFor` and add it as a directive.
 
 {{> DiffBox tutorialName="angular2-meteor" step="9.13"}}
 
