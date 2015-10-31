@@ -121,6 +121,20 @@ describe('$meteorObject service', function () {
       var doc = TestCollection.findOne(id);
       expect(doc._id).toEqual(id);
     });
+
+    it('should save an object with a spliced array', function() {
+      meteorObject.d.splice(1, 1);
+      meteorObject.save();
+
+      var doc = TestCollection.findOne(id);
+
+      expect(doc).toDeepEqual({
+        _id: id,
+        a: 1,
+        b: 2,
+        d: [1, 3]
+      });
+    });
   });
 
   describe('#reset()', function () {
