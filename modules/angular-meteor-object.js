@@ -67,8 +67,22 @@ angularMeteorObject.factory('AngularMeteorObject', [
           collection.update(this.$$id, mods, createFulfill({action: 'updated'}));
         }
         else {
-          collection.update(this.$$id, mods);
-          collection.update(this.$$id, pullUpdate, createFulfill({action: 'updated'}))
+          (function() {
+            var done = _.after(2, function() {
+              createFulfill({action: 'updated'});
+            });
+
+            var next = function(err) {
+              if (err)
+                $meteorUtils.fulfill(deferred, err);
+              else
+                done();
+            };
+
+            // Performing in parallel so sync operations would be applied
+            collection.update(this.$$id, mods, next);
+            collection.update(this.$$id, pullUpdate, next);
+          }).call(this);
         }
       }
       // insert
