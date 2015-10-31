@@ -59,6 +59,7 @@ angularMeteorObject.factory('AngularMeteorObject', [
         var pullUpdate;
         if (mods.$pull) {
           pullUpdate = { $pull : mods.$pull };
+          mods = _.omit(mods,'$pull');
         }
 
         if (!pullUpdate) {
