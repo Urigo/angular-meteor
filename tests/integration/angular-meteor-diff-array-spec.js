@@ -230,6 +230,13 @@ describe('diffArray module', function() {
 
         expect(oldItem).toEqual(oldItemBefore);
       });
+
+      it('should splice removed elements from an array', function() {
+        var oldItem = {_id: 1, arr: [1, 2, 3]};
+        var newItem = {_id: 1, arr: [1, 2]};
+        deepCopyRemovals(oldItem, newItem);
+        expect(oldItem).toEqual(newItem);
+      });
     });
 
     describe('deepCopyChanges', function() {
