@@ -73,7 +73,7 @@ The function gets the party's id and the response ('yes', 'maybe' or 'no').
 Like the invite method, first we check for all kinds of validations, then we do the wanted logic.
 
 Now let's call that function from the partiesList.
-Add an rsvp scope function to the partiesListCtrl in `partiesList.js`:
+Add an rsvp scope function to the partiesListCtrl in `partiesList.ng.js`:
 
 {{> DiffBox tutorialName="angular-meteor" step="14.7"}}
 
@@ -85,20 +85,20 @@ Add this code into `parties-list.ng.html` inside the parties list itself (inside
 
 Now let's display for each party who is coming.
 
-Just after the code you just added (still inside the parties ng-repeat) add the following code:
+Just after the code you just added (still inside the parties dir-paginate) add the following code:
 
 {{> DiffBox tutorialName="angular-meteor" step="14.9"}}
 
 First, take a look at the use of filter with length to find how many people responded with each response type.
 
-Then, look at using ng-repeat inside an ng-repeat - ng-repeat on revps inside party from the parties ng-repeat.
+Then, look at using ng-repeat inside a dir-paginate - ng-repeat on RSVPs inside party from the parties dir-paginate.
 
 Now let's add a list of the users who haven't responded yet just below the code we just added:
 
 {{> DiffBox tutorialName="angular-meteor" step="14.10"}}
 
-Again, an ng-repeat inside an ng-repeat.  This time we are calling a function that will give us all the users who haven't responded to that specific party.
-Add that function inside the partiesListCtrl in the `partiesList.js` file:
+Again, an ng-repeat inside a dir-paginate.  This time we are calling a function that will give us all the users who haven't responded to that specific party.
+Add that function inside the partiesListCtrl in the `partiesList.ng.js` file:
 
 {{> DiffBox tutorialName="angular-meteor" step="14.11"}}
 
