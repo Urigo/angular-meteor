@@ -50,8 +50,6 @@ class HtmlScan {
         break;
       }
 
-      foundMatch = true;
-
       const matchToken = match[1];
       const matchTokenTagName =  match[3];
       const matchTokenComment = match[4];
@@ -70,6 +68,7 @@ class HtmlScan {
         if (! commentEnd)
           this.throwCompileError("unclosed HTML comment in template file");
         this.advance(commentEnd.index + commentEnd[0].length);
+        nonMatchingTagsFound = false;
         continue;
       }
 
@@ -82,11 +81,13 @@ class HtmlScan {
             this.throwCompileError(
               "Can't use '{{! }}' outside a template.  Use '<!-- -->'.");
         }
+        nonMatchingTagsFound = false;
 
         this.throwCompileError();
       }
 
       // otherwise, a <tag>
+      foundMatch = true;
       const tagName = matchTokenTagName.toLowerCase();
       const tagAttribs = {}; // bare name -> value dict
       const tagPartRegex = /^\s*((([a-zA-Z0-9:_-]+)\s*=\s*(["'])(.*?)\4)|(>))/;
