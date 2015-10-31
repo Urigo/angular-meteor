@@ -15,7 +15,7 @@ Let's change our template to be dynamic:
 
 We replaced the hard-coded party list with the [NgFor](https://angular.io/docs/js/latest/api/directives/NgFor-class.html) directive and two Angular expressions:
 
-* The `*ng-for="party of parties"` attribute in the `li` tag is an Angular repeater directive. The repeater tells Angular to create a `li` element for each party in the list using the `li` tag as the template.
+* The `*ng-for="#party of parties"` attribute in the `li` tag is an Angular repeater directive. The repeater tells Angular to create a `li` element for each party in the list using the `li` tag as the template.
 * The expressions wrapped in double-curly-braces ( `{{dstache}}party.name}}` and `{{dstache}}party.description}}` ) will be replaced by the value of the expressions.
 
 To get this to work, we'll have to import NgFor and tell Angular 2 we are using it in the template.

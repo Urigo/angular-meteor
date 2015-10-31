@@ -226,7 +226,7 @@ It happened because the TypeScript compiler is configured in the package with di
 the TypeScript compiler doesn't know anything about the location of the `angular2/angular2` module. To fix this, you will need
 to make use of TypeScript declaration files, which is a TypeScript way to inform the compiler about third-party API modules.
 
-After the first run, you will find tge `angular2-meteor.d.ts` file in the new folder called "typings".
+After the first run, you will find the `angular2-meteor.d.ts` file in the new folder called "typings".
 This file has been created by the package at start time and contains a special reference to Angular2 and Meteor declaration files.
 Link `app.ts` and `angular2-meteor.d.ts` by adding the next line at the top of `app.ts`:
 
