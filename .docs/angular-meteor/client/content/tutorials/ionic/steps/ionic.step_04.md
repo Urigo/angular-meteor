@@ -73,45 +73,48 @@ And the controller:
 
 {{> DiffBox tutorialName="ionic-tutorial" step="4.12"}}
 
-Don’t forget to update `index.html`: https://github.com/idanwe/ionic-cli-meteor-whatsapp-tutorial/commit/643e9924f5af3a33e043158b579652681263fe6d
+Don’t forget to update `index.html`: 
+
+{{> DiffBox tutorialName="ionic-tutorial" step="4.13"}}
 
 On the conformation controller we pass the phone number and the verification code to the `Accounts.verifyPhone` function and if successful, we redirect the user to his profile page.
 
 Let’s add the `profile` state to our `routes.js` file:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="4.13"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="4.14"}}
 
 The profile view where the user can update his name:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="4.14"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="4.15"}}
 
 And the controller:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="4.15"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="4.16"}}
 
 Don’t forget to update `index.html`:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="4.16"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="4.17"}}
 
 The profile controller is calling the `updateName` Meteor method so let’s create that:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="4.17"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="4.18"}}
 
 Now let’s add some styles to login:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="4.18"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="4.19"}}
 
 And profile:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="4.19"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="4.22"}}
 
 and import them to our main `sass` file:
-{{> DiffBox tutorialName="ionic-tutorial" step="4.20"}}
+
 {{> DiffBox tutorialName="ionic-tutorial" step="4.23" filename="scss/ionic.app.scss"}}
 
-{{tutorialImage 'ionic' '7.png' 500}}
 
 Now that we have a login process, we can stop unlogged users from going into the app.
+
+{{tutorialImage 'ionic' '7.png' 500}}
 
 `angular-meteor` provides us with the [requireUser](http://angular-meteor.com/api/auth) function that we can use in the `resolve` of ui-router to make sure unlogged user can’t go inside that route:
 
