@@ -201,6 +201,15 @@ ANGULAR1_TUT = [
   },
   {
     id: "22",
+    title: 'Ionic',
+    seoTitle: 'Add support for Ionic package with Meteor and angular-meteor.',
+    route: "tutorials.angular1.ionic",
+    path: "/tutorials/angular1/ionic",
+    contentTemplate: 'tutorial.step_22.md',
+    previousCodeStep: '21'
+  },
+  {
+    id: "23",
     title: 'Next Steps',
     seoTitle: 'Next Steps',
     route: "tutorials.angular1.next-steps",
