@@ -1,17 +1,17 @@
 {{#template name="tutorialAngular2.step_00.md"}}
 
-> Disclaimer: Angular 2 is not yet production ready. The API will change. For now, consider this tutorial for educational purposes.
+> Disclaimer: Angular 2 isn't stable yet, and the API might change. For now, consider this tutorial for educational purposes.
 
 Let's start building our Meteor Angular 2 Socially app.
 
-In this step, you will:
+In this step, we will:
 
-- Learn how to create a Meteor app 
+- Setup Meteor and create an app
 - Become familiar with the app's structure
-- Connect an Angular 2 FrontEnd
+- Connect an Angular 2 front end
 - Run the application in the browser
 
-## Meteor Setup
+# Meteor Setup
 
 First step — let's install Meteor!
 
@@ -19,13 +19,13 @@ Open your command line and paste this command:
 
     $ curl https://install.meteor.com/ | sh
 
-> If you are on a Windows machine, go [here](https://www.meteor.com/install) to install
+> If you are on a Windows machine, go [here](https://www.meteor.com/install) to install Meteor.
 
 Now let's create our app — write this in the command line:
 
     $ meteor create socially
 
-Now let's see what we've got. Go into the folder:
+Now let's see what we got. Go into the new folder:
 
     $ cd socially
 
@@ -41,7 +41,7 @@ Run the app like so:
 Now go to [http://localhost:3000/](http://localhost:3000/)
 and look at the amazing app that's running on your computer!
 
-So, as you can see, we have a full running app which includes a server and a client!
+We now have a fully functional app which includes both a server and a client!
 
 The default Meteor app starts life with three files, one `js`, one `html` and one `css` file. Each named with the application name you used in the `create` command above. In our case this is `socially`.
 
@@ -53,42 +53,44 @@ We are going to add our own files for this tutorial. So let's start by deleting 
 
 Now we can start building our app.
 
-Create a directory called `client`. It is important that the name is `client`. Meteor will run files inside this directory only on the client. More about that in step 7.
+Create a directory called `client`. It is important that the name is `client`, because Meteor will run files inside this directory only on the client. More about that in step 7.
 
-First, let's create a new `index.html` file and place this code inside. Then run the app again:
+Create a new `index.html` file in the client folder, and place this code inside. Then run the app again.
 
 {{> DiffBox tutorialName="angular2-tutorial" step="0.1"}}
 
-As you can see, there is no html tag, no head tag, very simple.
+Note that there is no `<html>` tag and no `<head>` tag - it's very simple.
 
-The reason for this is the way Meteor structures and serves files to the client.
+This is because of how Meteor structures and serves files to the client.
 
 Meteor scans all the HTML files in your application and concatenates them together.
-Concatenation means merging contents of appropriate `HTML`, `HEAD` and `BODY` tags,
-found inside these HTML files, together.
+
+Concatenation means merging the content of all `HTML`, `HEAD` and `BODY` tags found inside these HTML files together.
 
 So in our case, Meteor found our `index.html` file, recognized it was meant for the client only, found the `BODY` tag inside and added it's content to the `BODY` tag of the main generated file.
 
 > (right-click -> inspect element on the page to see the generated file)
 
-## Angular2 Package
+# Adding Angular 2
 
-Now it's time to add Angular 2 to our stack!
+It's time to add Angular 2 to our stack!
 
-First things first, let's add the Angular 2 package to Meteor (we will discuss more about Meteor packages later in this tutorial)
+First things first, let's add the Angular 2 package to Meteor (we will discuss Meteor packages later in this tutorial)
 
 Back in the command line, launch this command:
 
     $ meteor add urigo:angular2-meteor
 
-This package takes care of connecting Angular to Meteor and includes the latest Angular 2 library code into our app.
+This package takes care of connecting Angular 2 to Meteor and includes the latest Angular 2 library code into our app.
+
+That's it! Now we can use Angular 2's power in our Meteor app.
 
 ## HTML
 
 As you already know, Meteor processes all HTML files for you out of box.
 Files will be concatenated into one page.
 
-From other side, regular Angular (Angular 1.x or Angular2) apps have a modular structure, i.e.,
+From other side, regular Angular (Angular 1 or Angular2) apps have a modular structure, i.e.,
 consist of a set of template HTML files and JavaScript component files.
 Each template file might belong to some component, for example, to a custom directive.
 
@@ -226,7 +228,7 @@ It happened because the TypeScript compiler is configured in the package with di
 the TypeScript compiler doesn't know anything about the location of the `angular2/angular2` module. To fix this, you will need
 to make use of TypeScript declaration files, which is a TypeScript way to inform the compiler about third-party API modules.
 
-After the first run, you will find tge `angular2-meteor.d.ts` file in the new folder called "typings".
+After the first run, you will find the `angular2-meteor.d.ts` file in the new folder called "typings".
 This file has been created by the package at start time and contains a special reference to Angular2 and Meteor declaration files.
 Link `app.ts` and `angular2-meteor.d.ts` by adding the next line at the top of `app.ts`:
 

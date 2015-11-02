@@ -1,21 +1,21 @@
 {{#template name="tutorial.step_02.md"}}
 {{> downloadPreviousStep stepName="step_01"}}
 
-It's time to make our web app dynamic — with AngularJS.
+It's time to make our web app dynamic — with Angular 1.
 
-This step is focused on client side Angular tools. The next one will show you the power of Meteor.
+This step is focused on client side Angular 1 tools. The next one will show you the power of Meteor.
 
 # View and Template
 
-In Angular, the view is a projection of the model through the HTML template. This means that whenever the model changes, Angular refreshes the appropriate binding points, which updates the view.
+In Angular 1, the view is a projection of the model through the HTML template. This means that whenever the model changes, Angular 1 refreshes the appropriate binding points, which updates the view.
 
 Let's change our template to be dynamic:
 
 {{> DiffBox tutorialName="angular-meteor" step="2.1"}}
 
-We replaced the hard-coded party list with the [ngRepeat](https://docs.angularjs.org/api/ng/directive/ngRepeat) directive and two Angular expressions:
+We replaced the hard-coded party list with the [ngRepeat](https://docs.angularjs.org/api/ng/directive/ngRepeat) directive and two Angular 1 expressions:
 
-* The `ng-repeat="party in parties"` attribute in the `li` tag is an Angular repeater directive. The repeater tells Angular to create a `li` element for each party in the list using the `li` tag as the template.
+* The `ng-repeat="party in parties"` attribute in the `li` tag is an Angular 1 repeater directive. The repeater tells Angular 1 to create a `li` element for each party in the list using the `li` tag as the template.
 * The expressions wrapped in double-curly-braces ( `{{dstache}}party.name}}` and `{{dstache}}party.description}}` ) will be replaced by the value of the expressions.
 
 We have added a new directive, called `ng-controller`, which attaches the `PartiesListCtrl` controller to the `div` tag. At this point *the expressions in double-curly-braces are referring to our application model, which is set up in our `PartiesListCtrl` controller.*
@@ -27,7 +27,7 @@ To create our controller and model we start with `PartiesListCtrl` controller an
 
 {{> DiffBox tutorialName="angular-meteor" step="2.2"}}
 
-We declared a controller called `PartiesListCtrl` and registered it in our Angular module app - `socially`.
+We declared a controller called `PartiesListCtrl` and registered it in our Angular 1 module app - `socially`.
 
 The data model is now instantiated within the `PartiesListCtrl` controller.
 
@@ -45,7 +45,7 @@ As you can see, when we declared the controller, we used strings for [dependency
         // ...
     }]);
 
-There is a very popular Angular tool that's called [ng-annotate](https://github.com/olov/ng-annotate) that takes care of that for us so we can write regular code that won't get mangled in minification.
+There is a very popular Angular 1 tool that's called [ng-annotate](https://github.com/olov/ng-annotate) that takes care of that for us so we can write regular code that won't get mangled in minification.
 
 angular-meteor uses that process automatically. All you need to do is to change your `.js` files to end with `.ng.js`
 
@@ -53,7 +53,7 @@ So let's change `app.js` to `app.ng.js` and change the usage in our controller:
 
 {{> DiffBox tutorialName="angular-meteor" step="2.4"}}
 
-And from now on, each AngularJS file we will create will use the `ng.js` extension!
+And from now on, each Angular 1 file we will create will use the `ng.js` extension!
 
 # Summary
 

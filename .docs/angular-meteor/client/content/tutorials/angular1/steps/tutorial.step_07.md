@@ -5,7 +5,7 @@ OK, so we have a working app, but, like a tutorial, it's not well organized.
 
 It is really important to organize your app in a standard way, and in Meteor, the structure itself has meaning and implications.
 
-In this step, we are going to combine Meteor's and Angular's standard ways of structuring an app into one unified standard structure.
+In this step, we are going to combine Meteor's and Angular 1's standard ways of structuring an app into one unified standard structure.
 
 
 
@@ -55,9 +55,9 @@ Lastly, the Meteor server will serve any files under the public directory. This 
 * Finally, all files that match main.* are moved after everything else (preserving their order).
 
 
-# AngularJS folder structure
+# Angular 1 folder structure
 
-There are many ways to organize and structure an AngularJS app.
+There are many ways to organize and structure an Angular 1 app.
 
 The two main approaches are:
 
@@ -70,7 +70,7 @@ The second approach seems to work better for large scale applications.
 
 As we are working close with the Meteor collections, we believe a better approach will be based on functionality, which also correlates to the Meteor's collection structure.
 
-For more AngularJS structuring and best practices please read this amazing [style-guide](https://github.com/johnpapa/angularjs-styleguide#application-structure).
+For more Angular 1 structuring and best practices please read this amazing [style-guide](https://github.com/johnpapa/angularjs-styleguide#application-structure).
 
 
 
@@ -79,7 +79,7 @@ For more AngularJS structuring and best practices please read this amazing [styl
 So now let's re-structure our app (to see the end result and all the steps in git diff you can click [here](https://github.com/Urigo/meteor-angular-socially/compare/step_06...step_07)):
 
 1. Create a folder named `client` under the root folder.  This is where all the code inside `Meteor.isClient` will go (without the need of Meteor.isClient anymore)
-2. The first thing that needs to be loaded in the `client` folder is the Angular app declaration. After that, the rest of the client code can be loaded in any order. So create a `lib` folder inside the `client` folder and move `app.js` inside. Remove the unnecessary `if (Meteor.isClient)` condition from `app.js`. Everything in the `client` folder runs only on the browser.
+2. The first thing that needs to be loaded in the `client` folder is the Angular 1 app declaration. After that, the rest of the client code can be loaded in any order. So create a `lib` folder inside the `client` folder and move `app.js` inside. Remove the unnecessary `if (Meteor.isClient)` condition from `app.js`. Everything in the `client` folder runs only on the browser.
 
 {{> DiffBox tutorialName="angular-meteor" step="7.1"}}
 

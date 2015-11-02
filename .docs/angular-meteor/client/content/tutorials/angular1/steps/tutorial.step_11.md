@@ -4,11 +4,11 @@
 So far, we've been building our app and testing only in a web browser,
 but Meteor has been designed to work across different platforms - your socially website can become an iOS or Android app in just a few commands.
 
-## AngularJS initialization
+## Angular 1 initialization
 
-Before we set up PhoneGap (which is super simple with Meteor) we will need to make a small adjustment in our Angular app initialization:
+Before we set up PhoneGap (which is super simple with Meteor) we will need to make a small adjustment in our Angular 1 app initialization:
 
-In `app.js` file, we will manually bootstrap our AngularJS app according to the right platform:
+In `app.js` file, we will manually bootstrap our Angular 1 app according to the right platform:
 
 {{> DiffBox tutorialName="angular-meteor" step="11.1"}}
 

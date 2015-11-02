@@ -8,7 +8,7 @@ To implement the party details view we will use [$meteor.object](/api/meteorObje
 
 # Controller
 
-We'll expand the `PartyDetailsCtrl` by using the [$meteor.object](/api/meteorObject) service (add it with Angular's dependency injection) to bind the specific party:
+We'll expand the `PartyDetailsCtrl` by using the [$meteor.object](/api/meteorObject) service (add it with Angular 1's dependency injection) to bind the specific party:
 
 {{> DiffBox tutorialName="angular-meteor" step="6.1"}}
 
@@ -69,7 +69,7 @@ Simple and easy.
 
 # Summary
 
-We've seen the power of 3-way binding between the DOM, AngularJS and Meteor.  In collections and in objects.
+We've seen the power of 3-way binding between the DOM, Angular 1 and Meteor.  In collections and in objects.
 
 Let's move on to provide some order and structure in our application.
 

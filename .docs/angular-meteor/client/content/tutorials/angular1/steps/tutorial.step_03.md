@@ -37,9 +37,9 @@ Notice that this code runs outside of the `isClient` statement.
 
 That means that this collection and the actions on it will run both on the client (minimongo) and the server (Mongo), you only have to write it once, and Meteor will take care of syncing both of them.
 
-# Binding to Angular
+# Binding to Angular 1
 
-Now that we've created the collection, our client needs to subscribe to its changes and bind it to our parties Angular array.
+Now that we've created the collection, our client needs to subscribe to its changes and bind it to our parties array.
 
 To bind them we are going to use the built-in angular-meteor service called [$meteor.collection](/api/meteorCollection).
 

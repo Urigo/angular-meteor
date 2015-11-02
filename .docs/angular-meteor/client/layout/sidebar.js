@@ -1,7 +1,7 @@
 PAGES = [
   {
     id: "1",
-    title: "Angular",
+    title: "Angular 1",
     route: "tutorials.angular1",
     path: "/tutorials/angular1",
     pathRedirect: "/tutorials/angular1/bootstrapping",
@@ -14,7 +14,7 @@ PAGES = [
   },
   {
     id: "2",
-    title: "Angular 2.0",
+    title: "Angular 2",
     route: "tutorials.angular2",
     path: "/tutorials/angular2",
     pathRedirect: "/tutorials/angular2/bootstrapping",
@@ -49,7 +49,7 @@ Template.tutorialSelector.helpers({
   tutorialLink: function() {
     var route = Router.current().route.path(this) || 'angular';
 
-    if (route.indexOf('ionic') !== -1) {
+    if (route.indexOf('tutorials/ionic') !== -1) {
       return 'ionic-tutorial';
     }
     else {
@@ -59,7 +59,7 @@ Template.tutorialSelector.helpers({
   pages: function() {
     var route = Router.current().route.path(this) || 'angular';
 
-    if (route.indexOf('ionic') !== -1) {
+    if (route.indexOf('tutorials/ionic') !== -1) {
       return [];
     }
     else {
@@ -80,7 +80,7 @@ Template.sidebarDefault.helpers({
   pages: function() {
     var route = Router.current().route.path(this) || 'angular';
 
-    if (route.indexOf('ionic') !== -1) {
+    if (route.indexOf('tutorials/ionic') !== -1) {
       return IONIC_TUT;
     }
     else {

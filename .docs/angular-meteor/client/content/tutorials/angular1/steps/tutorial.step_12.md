@@ -12,8 +12,8 @@ The interesting thing about pagination is that it is dependent on the filters we
 For example, if we are in page 3, but we change how we sort the collection, we should get different results. 
 Same thing with search: if we start a search, there might not be enough results for 3 pages.
 
-For AngularJS developers this chapter will show how powerful Meteor is.
-In the official AngularJS tutorial, we added sorting and search that only worked on the client side, which in real world scenarios is not very helpful.
+For Angular 1 developers this chapter will show how powerful Meteor is.
+In the official Angular 1 tutorial, we added sorting and search that only worked on the client side, which in real world scenarios is not very helpful.
 Now, in this chapter we are going to perform a real-time search, sort and paginate that will run all the way to the server.
 
 # angular-meteor pagination support
@@ -70,7 +70,7 @@ To do that we are going to replace the `Parties` collection parameter with a [cu
 
 Now we need a UI to change pages and move between them.
 
-In AngularJS's eco system there are a lot of directives for handling pagination.
+In Angular 1's eco system there are a lot of directives for handling pagination.
 
 Our personal favorite is [angular-utils-pagination](https://github.com/michaelbromley/angularUtils/tree/master/src/directives/pagination).
 
@@ -144,7 +144,7 @@ This means that, when a [reactive variable](http://docs.meteor.com/#/full/reacti
 
 But Angular's scope variables are only watched by Angular and are not reactive vars for Meteor...
 
-For that, angular-meteor created [getReactively](/api/getReactively) - a way to make an Angular scope variable also a reactive variable.
+For that, angular-meteor created [getReactively](/api/getReactively) - a way to make an Angular 1 scope variable also a reactive variable.
 
 In order to make the subscription run each time something changes in one of the parameters, we need to place it inside an autorun block.
 
@@ -259,6 +259,6 @@ For more information check out the [$meteorSubscribe API](/api/subscribe).
 
 # Summary
 
-So now we have full pagination with search and sorting for client and server-side, with the help of Meteor's options and Angular's directives.
+So now we have full pagination with search and sorting for client and server-side, with the help of Meteor's options and Angular 1's directives.
 
 {{/template}}

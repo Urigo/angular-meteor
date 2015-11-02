@@ -49,11 +49,11 @@ Don’t forget to update `index.html`:
 
 And add it to chat’s list:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="5.13"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="5.9"}}
 
 And chat details:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="5.14"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="5.10"}}
 
 And let’s a chat picture of the users using it or a default picture in case they don’t have profile pictures:
 
@@ -65,11 +65,11 @@ Don’t forget to update `index.html`:
 
 And add it to chat’s list:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="5.12"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="5.13"}}
 
 And chat details:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="5.13"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="5.14"}}
 
 Add this svg file to the `www/img` folder as the default chat image:
 
@@ -92,14 +92,15 @@ In the Meteor command line type:
 
 Now let’s create a secure server method:
 
+{{> DiffBox tutorialName="ionic-tutorial" step="5.19"}}
 
 And an Optimistic UI one:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="5.19"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="5.20"}}
 
 And change the Chats controllers to use that method instead of the client side action:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="5.20"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="5.21"}}
 
 You can download a ZIP file with the project at this point [here](https://github.com/idanwe/ionic-cli-meteor-whatsapp-tutorial/archive/6bc532ea61616bdf691205da0f9a133e5147822d.zip).
 

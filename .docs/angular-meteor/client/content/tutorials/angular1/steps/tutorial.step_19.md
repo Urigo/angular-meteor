@@ -8,11 +8,11 @@ Parts of this tutorial are also relevant for users who uses only Meteor, without
 In this part of the tutorial we will show multiple solution for the same problem - using third-party libraries with Meteor and angular-meteor.
 
 
-Every AngularJS developer knows and uses third-party libraries (like angular-ui-bootstrap, ui-router, etc..), but because we do not have the ability to easily include the ".js" file on our "head" tag - we need another solutions.
+Every Angular 1 developer knows and uses third-party libraries (like angular-ui-bootstrap, ui-router, etc..), but because we do not have the ability to easily include the ".js" file on our "head" tag - we need another solutions.
 
 In order to add third-party libraries to your Meteor project - you can use the `meteor add PACKAGE_NAME` command to add the package.
 
-Also, for **most** of the AngularJS third-party libraries - there's already a Meteor package (which is an equivalent to bower or NPM).
+Also, for **most** of the Angular 1 third-party libraries - there's already a Meteor package (which is an equivalent to bower or NPM).
 
 You can search for those packages using the [Atmosphere](https://atmospherejs.com/) website.
 
@@ -20,14 +20,14 @@ For example, in order to use **[angular-ui-router](https://atmospherejs.com/angu
 ```
 meteor add angularui:angular-ui-router
 ```
-And then just use the angular-ui-router on your angular-meteor project, by adding it to the AngularJS module initialization:
+And then just use the angular-ui-router on your angular-meteor project, by adding it to the Angular 1 module initialization:
 ```
 angular.module('myModule', [
   'angular-meteor',
   'ui.router'
 ]);
 ```
-**But this is an easy one** - because angular-ui-router is one of the most common library for AngularJS.
+**But this is an easy one** - because angular-ui-router is one of the most common library for Angular 1.
 
 In some cases, we want to use some packages that does not have an Atmosphere package exists - you can use the following instructions to solve your problem.
 
@@ -61,7 +61,7 @@ var version = '0.2.14';
 Package.describe({
   name: packageName,
   version: version,
-  summary: 'angular-ui-router (official): Flexible routing with nested views in AngularJS',
+  summary: 'angular-ui-router (official): Flexible routing with nested views in Angular 1',
   git: 'git@github.com:angular-ui/ui-router.git',
   documentation: null
 });
@@ -123,7 +123,7 @@ So in our case, the final `package.js` file will look like that:
 var packageName = 'dotansimha:angularjs-dropdown-multiselect';
 var where = 'client'; // where to install: 'client' or 'server'. For both, pass nothing.
 var version = '1.5.2';
-var summary = 'AngularJS Dropdown Multiselect directive';
+var summary = 'Angular 1 Dropdown Multiselect directive';
 var gitLink = 'https://github.com/dotansimha/angularjs-dropdown-multiselect';
 var documentationFile = 'README.md';
 
@@ -192,7 +192,7 @@ For example, this is how the ngInfiniteScroll package will be published using th
   "destination": {
     "atmospherePackageName": "ng-infinite-scroll",
     "atmosphereOrganizationName": "srozegh",
-    "summary": "Infinite Scrolling for AngularJS",
+    "summary": "Infinite Scrolling for Angular 1",
     "git": "https://github.com/sroze/ngInfiniteScroll",
     "documentation": null,
     "versionsFrom": "METEOR@0.9.0.1",
