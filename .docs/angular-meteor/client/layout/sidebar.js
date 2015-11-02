@@ -49,7 +49,7 @@ Template.tutorialSelector.helpers({
   tutorialLink: function() {
     var route = Router.current().route.path(this) || 'angular';
 
-    if (route.indexOf('ionic') !== -1) {
+    if (route.indexOf('tutorials/ionic') !== -1) {
       return 'ionic-tutorial';
     }
     else {
@@ -59,7 +59,7 @@ Template.tutorialSelector.helpers({
   pages: function() {
     var route = Router.current().route.path(this) || 'angular';
 
-    if (route.indexOf('ionic') !== -1) {
+    if (route.indexOf('tutorials/ionic') !== -1) {
       return [];
     }
     else {
@@ -80,7 +80,7 @@ Template.sidebarDefault.helpers({
   pages: function() {
     var route = Router.current().route.path(this) || 'angular';
 
-    if (route.indexOf('ionic') !== -1) {
+    if (route.indexOf('tutorials/ionic') !== -1) {
       return IONIC_TUT;
     }
     else {
