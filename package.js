@@ -1,7 +1,7 @@
 Package.describe({
   name: "angular",
   summary: "Everything you need to use AngularJS in your Meteor app",
-  version: "1.0.4",
+  version: "1.2.0-rc.1",
   git: "https://github.com/Urigo/angular-meteor.git"
 });
 
@@ -13,11 +13,11 @@ Package.registerBuildPlugin({
     "plugin/ng-template-compiler.js"
   ],
   use: [
-    'caching-html-compiler',
-    'ecmascript',
-    'templating-tools',
-    'underscore',
-    'html-tools'
+    'caching-html-compiler@1.0.2',
+    'ecmascript@0.1.6',
+    'templating-tools@1.0.0',
+    'underscore@1.0.4',
+    'html-tools@1.0.5'
   ],
   npmDependencies : {
     'cheerio': '0.19.0',
@@ -37,17 +37,11 @@ Package.onUse(function (api) {
   api.use('minimongo@1.0.9');
   api.use('observe-sequence@1.0.7');
 
-  api.use('angular:angular@1.4.4', 'client');
-  // Since commit b3096e93661bc79bab73a63bae0e14643030a9a3, MongoId and
-  // diff-sequence are separate packages from minimongo.
-  // We need to use it for idParse, idStringify and diffQueryOrderedChanges
-  // in lib/diff-array.js
-  if (Package['diff-sequence']) {
-    api.use('diff-sequence');
-  }
-  if (Package['mongo-id']) {
-    api.use('mongo-id');
-  }
+  api.use('angular:angular@1.4.7', 'client');
+
+  api.use('diff-sequence');
+  api.use('mongo-id');
+
   api.use('dburles:mongo-collection-instances@0.3.4', 'client'); // For getCollectionByName
   api.use('isobuild:compiler-plugin@1.0.0'); // Used for compilers
 
@@ -78,7 +72,7 @@ Package.onTest(function(api) {
   api.use('session@1.1.1');
   api.use('mongo@1.1.1');
   api.use('sanjo:jasmine@0.19.0');
-  api.use('angular:angular-mocks@1.4.4');
+  api.use('angular:angular-mocks@1.4.7');
   api.use('mdg:camera@1.1.5');
   api.use('angular');
 
