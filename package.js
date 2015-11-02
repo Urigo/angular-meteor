@@ -1,7 +1,7 @@
 Package.describe({
   name: "angular",
   summary: "Everything you need to use AngularJS in your Meteor app",
-  version: "1.0.3",
+  version: "1.0.4",
   git: "https://github.com/Urigo/angular-meteor.git"
 });
 
@@ -29,7 +29,7 @@ Package.registerBuildPlugin({
 Package.on_use(function (api) {
   api.versionsFrom('METEOR@0.9.0.1');
 
-  api.use('angular:angular@1.4.4', 'client');
+  api.use('angular:angular@1.4.7', 'client');
   api.use('check', 'client');
   api.use('minimongo');
   // Since commit b3096e93661bc79bab73a63bae0e14643030a9a3, MongoId and

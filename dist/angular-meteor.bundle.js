@@ -1139,233 +1139,227 @@ var _ = Package.underscore._;
 var Tracker = Package.tracker.Tracker;
 var Deps = Package.tracker.Deps;
 var EJSON = Package.ejson.EJSON;
+var ECMAScript = Package.ecmascript.ECMAScript;
+var babelHelpers = Package['babel-runtime'].babelHelpers;
+var Symbol = Package['ecmascript-runtime'].Symbol;
+var Map = Package['ecmascript-runtime'].Map;
+var Set = Package['ecmascript-runtime'].Set;
+var Promise = Package.promise.Promise;
 
 /* Package-scope variables */
 var ReactiveDict;
 
 (function(){
 
-//////////////////////////////////////////////////////////////////////////////////
-//                                                                              //
-// packages/reactive-dict/reactive-dict.js                                      //
-//                                                                              //
-//////////////////////////////////////////////////////////////////////////////////
-                                                                                //
-// XXX come up with a serialization method which canonicalizes object key       // 1
-// order, which would allow us to use objects as values for equals.             // 2
-var stringify = function (value) {                                              // 3
-  if (value === undefined)                                                      // 4
-    return 'undefined';                                                         // 5
-  return EJSON.stringify(value);                                                // 6
-};                                                                              // 7
-var parse = function (serialized) {                                             // 8
-  if (serialized === undefined || serialized === 'undefined')                   // 9
-    return undefined;                                                           // 10
-  return EJSON.parse(serialized);                                               // 11
-};                                                                              // 12
-                                                                                // 13
-var changed = function (v) {                                                    // 14
-  v && v.changed();                                                             // 15
-};                                                                              // 16
-                                                                                // 17
-// XXX COMPAT WITH 0.9.1 : accept migrationData instead of dictName             // 18
-ReactiveDict = function (dictName) {                                            // 19
-  // this.keys: key -> value                                                    // 20
-  if (dictName) {                                                               // 21
-    if (typeof dictName === 'string') {                                         // 22
-      // the normal case, argument is a string name.                            // 23
-      // _registerDictForMigrate will throw an error on duplicate name.         // 24
-      ReactiveDict._registerDictForMigrate(dictName, this);                     // 25
-      this.keys = ReactiveDict._loadMigratedDict(dictName) || {};               // 26
-      this.name = dictName;                                                     // 27
-    } else if (typeof dictName === 'object') {                                  // 28
-      // back-compat case: dictName is actually migrationData                   // 29
-      this.keys = dictName;                                                     // 30
-    } else {                                                                    // 31
-      throw new Error("Invalid ReactiveDict argument: " + dictName);            // 32
-    }                                                                           // 33
-  } else {                                                                      // 34
-    // no name given; no migration will be performed                            // 35
-    this.keys = {};                                                             // 36
-  }                                                                             // 37
-                                                                                // 38
-  this.allDeps = new Tracker.Dependency;                                        // 39
-  this.keyDeps = {}; // key -> Dependency                                       // 40
-  this.keyValueDeps = {}; // key -> Dependency                                  // 41
-};                                                                              // 42
-                                                                                // 43
-_.extend(ReactiveDict.prototype, {                                              // 44
-  // set() began as a key/value method, but we are now overloading it           // 45
-  // to take an object of key/value pairs, similar to backbone                  // 46
-  // http://backbonejs.org/#Model-set                                           // 47
-                                                                                // 48
-  set: function (keyOrObject, value) {                                          // 49
-    var self = this;                                                            // 50
-                                                                                // 51
-    if ((typeof keyOrObject === 'object') && (value === undefined)) {           // 52
-      // Called as `dict.set({...})`                                            // 53
-      self._setObject(keyOrObject);                                             // 54
-      return;                                                                   // 55
-    }                                                                           // 56
-    // the input isn't an object, so it must be a key                           // 57
-    // and we resume with the rest of the function                              // 58
-    var key = keyOrObject;                                                      // 59
-                                                                                // 60
-    value = stringify(value);                                                   // 61
-                                                                                // 62
-    var keyExisted = _.has(self.keys, key);                                     // 63
-    var oldSerializedValue = keyExisted ? self.keys[key] : 'undefined';         // 64
-    var isNewValue = (value !== oldSerializedValue);                            // 65
-                                                                                // 66
-    self.keys[key] = value;                                                     // 67
-                                                                                // 68
-    if (isNewValue || !keyExisted) {                                            // 69
-      self.allDeps.changed();                                                   // 70
-    }                                                                           // 71
-                                                                                // 72
-    if (isNewValue) {                                                           // 73
-      changed(self.keyDeps[key]);                                               // 74
-      if (self.keyValueDeps[key]) {                                             // 75
-        changed(self.keyValueDeps[key][oldSerializedValue]);                    // 76
-        changed(self.keyValueDeps[key][value]);                                 // 77
-      }                                                                         // 78
-    }                                                                           // 79
-  },                                                                            // 80
-                                                                                // 81
-  setDefault: function (key, value) {                                           // 82
-    var self = this;                                                            // 83
-    if (! _.has(self.keys, key)) {                                              // 84
-      self.set(key, value);                                                     // 85
-    }                                                                           // 86
-  },                                                                            // 87
-                                                                                // 88
-  get: function (key) {                                                         // 89
-    var self = this;                                                            // 90
-    self._ensureKey(key);                                                       // 91
-    self.keyDeps[key].depend();                                                 // 92
-    return parse(self.keys[key]);                                               // 93
-  },                                                                            // 94
-                                                                                // 95
-  equals: function (key, value) {                                               // 96
-    var self = this;                                                            // 97
-                                                                                // 98
-    // Mongo.ObjectID is in the 'mongo' package                                 // 99
-    var ObjectID = null;                                                        // 100
-    if (Package.mongo) {                                                        // 101
-      ObjectID = Package.mongo.Mongo.ObjectID;                                  // 102
-    }                                                                           // 103
-                                                                                // 104
-    // We don't allow objects (or arrays that might include objects) for        // 105
-    // .equals, because JSON.stringify doesn't canonicalize object key          // 106
-    // order. (We can make equals have the right return value by parsing the    // 107
-    // current value and using EJSON.equals, but we won't have a canonical      // 108
-    // element of keyValueDeps[key] to store the dependency.) You can still use
-    // "EJSON.equals(reactiveDict.get(key), value)".                            // 110
-    //                                                                          // 111
-    // XXX we could allow arrays as long as we recursively check that there     // 112
-    // are no objects                                                           // 113
-    if (typeof value !== 'string' &&                                            // 114
-        typeof value !== 'number' &&                                            // 115
-        typeof value !== 'boolean' &&                                           // 116
-        typeof value !== 'undefined' &&                                         // 117
-        !(value instanceof Date) &&                                             // 118
-        !(ObjectID && value instanceof ObjectID) &&                             // 119
-        value !== null) {                                                       // 120
-      throw new Error("ReactiveDict.equals: value must be scalar");             // 121
-    }                                                                           // 122
-    var serializedValue = stringify(value);                                     // 123
-                                                                                // 124
-    if (Tracker.active) {                                                       // 125
-      self._ensureKey(key);                                                     // 126
-                                                                                // 127
-      if (! _.has(self.keyValueDeps[key], serializedValue))                     // 128
-        self.keyValueDeps[key][serializedValue] = new Tracker.Dependency;       // 129
-                                                                                // 130
-      var isNew = self.keyValueDeps[key][serializedValue].depend();             // 131
-      if (isNew) {                                                              // 132
-        Tracker.onInvalidate(function () {                                      // 133
-          // clean up [key][serializedValue] if it's now empty, so we don't     // 134
-          // use O(n) memory for n = values seen ever                           // 135
-          if (! self.keyValueDeps[key][serializedValue].hasDependents())        // 136
-            delete self.keyValueDeps[key][serializedValue];                     // 137
-        });                                                                     // 138
-      }                                                                         // 139
-    }                                                                           // 140
-                                                                                // 141
-    var oldValue = undefined;                                                   // 142
-    if (_.has(self.keys, key)) oldValue = parse(self.keys[key]);                // 143
-    return EJSON.equals(oldValue, value);                                       // 144
-  },                                                                            // 145
-                                                                                // 146
-  all: function() {                                                             // 147
-    this.allDeps.depend();                                                      // 148
-    var ret = {};                                                               // 149
-    _.each(this.keys, function(value, key) {                                    // 150
-      ret[key] = parse(value);                                                  // 151
-    });                                                                         // 152
-    return ret;                                                                 // 153
-  },                                                                            // 154
-                                                                                // 155
-  clear: function() {                                                           // 156
-    var self = this;                                                            // 157
-                                                                                // 158
-    var oldKeys = self.keys;                                                    // 159
-    self.keys = {};                                                             // 160
-                                                                                // 161
-    self.allDeps.changed();                                                     // 162
-                                                                                // 163
-    _.each(oldKeys, function(value, key) {                                      // 164
-      changed(self.keyDeps[key]);                                               // 165
-      changed(self.keyValueDeps[key][value]);                                   // 166
-      changed(self.keyValueDeps[key]['undefined']);                             // 167
-    });                                                                         // 168
-                                                                                // 169
-  },                                                                            // 170
-                                                                                // 171
-  delete: function(key) {                                                       // 172
-    var self = this;                                                            // 173
-    var didRemove = false;                                                      // 174
-                                                                                // 175
-    if (_.has(self.keys, key)) {                                                // 176
-      var oldValue = self.keys[key];                                            // 177
-      delete self.keys[key];                                                    // 178
-      changed(self.keyDeps[key]);                                               // 179
-      if (self.keyValueDeps[key]) {                                             // 180
-        changed(self.keyValueDeps[key][oldValue]);                              // 181
-        changed(self.keyValueDeps[key]['undefined']);                           // 182
-      }                                                                         // 183
-      self.allDeps.changed();                                                   // 184
-      didRemove = true;                                                         // 185
-    }                                                                           // 186
-                                                                                // 187
-    return didRemove;                                                           // 188
-  },                                                                            // 189
-                                                                                // 190
-  _setObject: function (object) {                                               // 191
-    var self = this;                                                            // 192
-                                                                                // 193
-    _.each(object, function (value, key){                                       // 194
-      self.set(key, value);                                                     // 195
-    });                                                                         // 196
-  },                                                                            // 197
-                                                                                // 198
-  _ensureKey: function (key) {                                                  // 199
-    var self = this;                                                            // 200
-    if (!(key in self.keyDeps)) {                                               // 201
-      self.keyDeps[key] = new Tracker.Dependency;                               // 202
-      self.keyValueDeps[key] = {};                                              // 203
-    }                                                                           // 204
-  },                                                                            // 205
-                                                                                // 206
-  // Get a JSON value that can be passed to the constructor to                  // 207
-  // create a new ReactiveDict with the same contents as this one               // 208
-  _getMigrationData: function () {                                              // 209
-    // XXX sanitize and make sure it's JSONible?                                // 210
-    return this.keys;                                                           // 211
-  }                                                                             // 212
-});                                                                             // 213
-                                                                                // 214
-//////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                //
+// packages/reactive-dict/reactive-dict.js                                                                        //
+//                                                                                                                //
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                  //
+// XXX come up with a serialization method which canonicalizes object key                                         //
+// order, which would allow us to use objects as values for equals.                                               //
+var stringify = function (value) {                                                                                // 3
+  if (value === undefined) return 'undefined';                                                                    // 4
+  return EJSON.stringify(value);                                                                                  // 6
+};                                                                                                                //
+var parse = function (serialized) {                                                                               // 8
+  if (serialized === undefined || serialized === 'undefined') return undefined;                                   // 9
+  return EJSON.parse(serialized);                                                                                 // 11
+};                                                                                                                //
+                                                                                                                  //
+var changed = function (v) {                                                                                      // 14
+  v && v.changed();                                                                                               // 15
+};                                                                                                                //
+                                                                                                                  //
+// XXX COMPAT WITH 0.9.1 : accept migrationData instead of dictName                                               //
+ReactiveDict = function (dictName) {                                                                              // 19
+  // this.keys: key -> value                                                                                      //
+  if (dictName) {                                                                                                 // 21
+    if (typeof dictName === 'string') {                                                                           // 22
+      // the normal case, argument is a string name.                                                              //
+      // _registerDictForMigrate will throw an error on duplicate name.                                           //
+      ReactiveDict._registerDictForMigrate(dictName, this);                                                       // 25
+      this.keys = ReactiveDict._loadMigratedDict(dictName) || {};                                                 // 26
+      this.name = dictName;                                                                                       // 27
+    } else if (typeof dictName === 'object') {                                                                    //
+      // back-compat case: dictName is actually migrationData                                                     //
+      this.keys = dictName;                                                                                       // 30
+    } else {                                                                                                      //
+      throw new Error("Invalid ReactiveDict argument: " + dictName);                                              // 32
+    }                                                                                                             //
+  } else {                                                                                                        //
+    // no name given; no migration will be performed                                                              //
+    this.keys = {};                                                                                               // 36
+  }                                                                                                               //
+                                                                                                                  //
+  this.allDeps = new Tracker.Dependency();                                                                        // 39
+  this.keyDeps = {}; // key -> Dependency                                                                         // 40
+  this.keyValueDeps = {}; // key -> Dependency                                                                    // 41
+};                                                                                                                //
+                                                                                                                  //
+_.extend(ReactiveDict.prototype, {                                                                                // 44
+  // set() began as a key/value method, but we are now overloading it                                             //
+  // to take an object of key/value pairs, similar to backbone                                                    //
+  // http://backbonejs.org/#Model-set                                                                             //
+                                                                                                                  //
+  set: function (keyOrObject, value) {                                                                            // 49
+    var self = this;                                                                                              // 50
+                                                                                                                  //
+    if (typeof keyOrObject === 'object' && value === undefined) {                                                 // 52
+      // Called as `dict.set({...})`                                                                              //
+      self._setObject(keyOrObject);                                                                               // 54
+      return;                                                                                                     // 55
+    }                                                                                                             //
+    // the input isn't an object, so it must be a key                                                             //
+    // and we resume with the rest of the function                                                                //
+    var key = keyOrObject;                                                                                        // 59
+                                                                                                                  //
+    value = stringify(value);                                                                                     // 61
+                                                                                                                  //
+    var keyExisted = _.has(self.keys, key);                                                                       // 63
+    var oldSerializedValue = keyExisted ? self.keys[key] : 'undefined';                                           // 64
+    var isNewValue = value !== oldSerializedValue;                                                                // 65
+                                                                                                                  //
+    self.keys[key] = value;                                                                                       // 67
+                                                                                                                  //
+    if (isNewValue || !keyExisted) {                                                                              // 69
+      self.allDeps.changed();                                                                                     // 70
+    }                                                                                                             //
+                                                                                                                  //
+    if (isNewValue) {                                                                                             // 73
+      changed(self.keyDeps[key]);                                                                                 // 74
+      if (self.keyValueDeps[key]) {                                                                               // 75
+        changed(self.keyValueDeps[key][oldSerializedValue]);                                                      // 76
+        changed(self.keyValueDeps[key][value]);                                                                   // 77
+      }                                                                                                           //
+    }                                                                                                             //
+  },                                                                                                              //
+                                                                                                                  //
+  setDefault: function (key, value) {                                                                             // 82
+    var self = this;                                                                                              // 83
+    if (!_.has(self.keys, key)) {                                                                                 // 84
+      self.set(key, value);                                                                                       // 85
+    }                                                                                                             //
+  },                                                                                                              //
+                                                                                                                  //
+  get: function (key) {                                                                                           // 89
+    var self = this;                                                                                              // 90
+    self._ensureKey(key);                                                                                         // 91
+    self.keyDeps[key].depend();                                                                                   // 92
+    return parse(self.keys[key]);                                                                                 // 93
+  },                                                                                                              //
+                                                                                                                  //
+  equals: function (key, value) {                                                                                 // 96
+    var self = this;                                                                                              // 97
+                                                                                                                  //
+    // Mongo.ObjectID is in the 'mongo' package                                                                   //
+    var ObjectID = null;                                                                                          // 100
+    if (Package.mongo) {                                                                                          // 101
+      ObjectID = Package.mongo.Mongo.ObjectID;                                                                    // 102
+    }                                                                                                             //
+                                                                                                                  //
+    // We don't allow objects (or arrays that might include objects) for                                          //
+    // .equals, because JSON.stringify doesn't canonicalize object key                                            //
+    // order. (We can make equals have the right return value by parsing the                                      //
+    // current value and using EJSON.equals, but we won't have a canonical                                        //
+    // element of keyValueDeps[key] to store the dependency.) You can still use                                   //
+    // "EJSON.equals(reactiveDict.get(key), value)".                                                              //
+    //                                                                                                            //
+    // XXX we could allow arrays as long as we recursively check that there                                       //
+    // are no objects                                                                                             //
+    if (typeof value !== 'string' && typeof value !== 'number' && typeof value !== 'boolean' && typeof value !== 'undefined' && !(value instanceof Date) && !(ObjectID && value instanceof ObjectID) && value !== null) {
+      throw new Error("ReactiveDict.equals: value must be scalar");                                               // 121
+    }                                                                                                             //
+    var serializedValue = stringify(value);                                                                       // 123
+                                                                                                                  //
+    if (Tracker.active) {                                                                                         // 125
+      self._ensureKey(key);                                                                                       // 126
+                                                                                                                  //
+      if (!_.has(self.keyValueDeps[key], serializedValue)) self.keyValueDeps[key][serializedValue] = new Tracker.Dependency();
+                                                                                                                  //
+      var isNew = self.keyValueDeps[key][serializedValue].depend();                                               // 131
+      if (isNew) {                                                                                                // 132
+        Tracker.onInvalidate(function () {                                                                        // 133
+          // clean up [key][serializedValue] if it's now empty, so we don't                                       //
+          // use O(n) memory for n = values seen ever                                                             //
+          if (!self.keyValueDeps[key][serializedValue].hasDependents()) delete self.keyValueDeps[key][serializedValue];
+        });                                                                                                       //
+      }                                                                                                           //
+    }                                                                                                             //
+                                                                                                                  //
+    var oldValue = undefined;                                                                                     // 142
+    if (_.has(self.keys, key)) oldValue = parse(self.keys[key]);                                                  // 143
+    return EJSON.equals(oldValue, value);                                                                         // 144
+  },                                                                                                              //
+                                                                                                                  //
+  all: function () {                                                                                              // 147
+    this.allDeps.depend();                                                                                        // 148
+    var ret = {};                                                                                                 // 149
+    _.each(this.keys, function (value, key) {                                                                     // 150
+      ret[key] = parse(value);                                                                                    // 151
+    });                                                                                                           //
+    return ret;                                                                                                   // 153
+  },                                                                                                              //
+                                                                                                                  //
+  clear: function () {                                                                                            // 156
+    var self = this;                                                                                              // 157
+                                                                                                                  //
+    var oldKeys = self.keys;                                                                                      // 159
+    self.keys = {};                                                                                               // 160
+                                                                                                                  //
+    self.allDeps.changed();                                                                                       // 162
+                                                                                                                  //
+    _.each(oldKeys, function (value, key) {                                                                       // 164
+      changed(self.keyDeps[key]);                                                                                 // 165
+      changed(self.keyValueDeps[key][value]);                                                                     // 166
+      changed(self.keyValueDeps[key]['undefined']);                                                               // 167
+    });                                                                                                           //
+  },                                                                                                              //
+                                                                                                                  //
+  'delete': function (key) {                                                                                      // 172
+    var self = this;                                                                                              // 173
+    var didRemove = false;                                                                                        // 174
+                                                                                                                  //
+    if (_.has(self.keys, key)) {                                                                                  // 176
+      var oldValue = self.keys[key];                                                                              // 177
+      delete self.keys[key];                                                                                      // 178
+      changed(self.keyDeps[key]);                                                                                 // 179
+      if (self.keyValueDeps[key]) {                                                                               // 180
+        changed(self.keyValueDeps[key][oldValue]);                                                                // 181
+        changed(self.keyValueDeps[key]['undefined']);                                                             // 182
+      }                                                                                                           //
+      self.allDeps.changed();                                                                                     // 184
+      didRemove = true;                                                                                           // 185
+    }                                                                                                             //
+                                                                                                                  //
+    return didRemove;                                                                                             // 188
+  },                                                                                                              //
+                                                                                                                  //
+  _setObject: function (object) {                                                                                 // 191
+    var self = this;                                                                                              // 192
+                                                                                                                  //
+    _.each(object, function (value, key) {                                                                        // 194
+      self.set(key, value);                                                                                       // 195
+    });                                                                                                           //
+  },                                                                                                              //
+                                                                                                                  //
+  _ensureKey: function (key) {                                                                                    // 199
+    var self = this;                                                                                              // 200
+    if (!(key in self.keyDeps)) {                                                                                 // 201
+      self.keyDeps[key] = new Tracker.Dependency();                                                               // 202
+      self.keyValueDeps[key] = {};                                                                                // 203
+    }                                                                                                             //
+  },                                                                                                              //
+                                                                                                                  //
+  // Get a JSON value that can be passed to the constructor to                                                    //
+  // create a new ReactiveDict with the same contents as this one                                                 //
+  _getMigrationData: function () {                                                                                // 209
+    // XXX sanitize and make sure it's JSONible?                                                                  //
+    return this.keys;                                                                                             // 211
+  }                                                                                                               //
+});                                                                                                               //
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }).call(this);
 
@@ -1376,50 +1370,45 @@ _.extend(ReactiveDict.prototype, {                                              
 
 (function(){
 
-//////////////////////////////////////////////////////////////////////////////////
-//                                                                              //
-// packages/reactive-dict/migration.js                                          //
-//                                                                              //
-//////////////////////////////////////////////////////////////////////////////////
-                                                                                //
-ReactiveDict._migratedDictData = {}; // name -> data                            // 1
-ReactiveDict._dictsToMigrate = {}; // name -> ReactiveDict                      // 2
-                                                                                // 3
-ReactiveDict._loadMigratedDict = function (dictName) {                          // 4
-  if (_.has(ReactiveDict._migratedDictData, dictName))                          // 5
-    return ReactiveDict._migratedDictData[dictName];                            // 6
-                                                                                // 7
-  return null;                                                                  // 8
-};                                                                              // 9
-                                                                                // 10
-ReactiveDict._registerDictForMigrate = function (dictName, dict) {              // 11
-  if (_.has(ReactiveDict._dictsToMigrate, dictName))                            // 12
-    throw new Error("Duplicate ReactiveDict name: " + dictName);                // 13
-                                                                                // 14
-  ReactiveDict._dictsToMigrate[dictName] = dict;                                // 15
-};                                                                              // 16
-                                                                                // 17
-if (Meteor.isClient && Package.reload) {                                        // 18
-  // Put old migrated data into ReactiveDict._migratedDictData,                 // 19
-  // where it can be accessed by ReactiveDict._loadMigratedDict.                // 20
-  var migrationData = Package.reload.Reload._migrationData('reactive-dict');    // 21
-  if (migrationData && migrationData.dicts)                                     // 22
-    ReactiveDict._migratedDictData = migrationData.dicts;                       // 23
-                                                                                // 24
-  // On migration, assemble the data from all the dicts that have been          // 25
-  // registered.                                                                // 26
-  Package.reload.Reload._onMigrate('reactive-dict', function () {               // 27
-    var dictsToMigrate = ReactiveDict._dictsToMigrate;                          // 28
-    var dataToMigrate = {};                                                     // 29
-                                                                                // 30
-    for (var dictName in dictsToMigrate)                                        // 31
-      dataToMigrate[dictName] = dictsToMigrate[dictName]._getMigrationData();   // 32
-                                                                                // 33
-    return [true, {dicts: dataToMigrate}];                                      // 34
-  });                                                                           // 35
-}                                                                               // 36
-                                                                                // 37
-//////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                //
+// packages/reactive-dict/migration.js                                                                            //
+//                                                                                                                //
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                  //
+ReactiveDict._migratedDictData = {}; // name -> data                                                              // 1
+ReactiveDict._dictsToMigrate = {}; // name -> ReactiveDict                                                        // 2
+                                                                                                                  //
+ReactiveDict._loadMigratedDict = function (dictName) {                                                            // 4
+  if (_.has(ReactiveDict._migratedDictData, dictName)) return ReactiveDict._migratedDictData[dictName];           // 5
+                                                                                                                  //
+  return null;                                                                                                    // 8
+};                                                                                                                //
+                                                                                                                  //
+ReactiveDict._registerDictForMigrate = function (dictName, dict) {                                                // 11
+  if (_.has(ReactiveDict._dictsToMigrate, dictName)) throw new Error("Duplicate ReactiveDict name: " + dictName);
+                                                                                                                  //
+  ReactiveDict._dictsToMigrate[dictName] = dict;                                                                  // 15
+};                                                                                                                //
+                                                                                                                  //
+if (Meteor.isClient && Package.reload) {                                                                          // 18
+  // Put old migrated data into ReactiveDict._migratedDictData,                                                   //
+  // where it can be accessed by ReactiveDict._loadMigratedDict.                                                  //
+  var migrationData = Package.reload.Reload._migrationData('reactive-dict');                                      // 21
+  if (migrationData && migrationData.dicts) ReactiveDict._migratedDictData = migrationData.dicts;                 // 22
+                                                                                                                  //
+  // On migration, assemble the data from all the dicts that have been                                            //
+  // registered.                                                                                                  //
+  Package.reload.Reload._onMigrate('reactive-dict', function () {                                                 // 27
+    var dictsToMigrate = ReactiveDict._dictsToMigrate;                                                            // 28
+    var dataToMigrate = {};                                                                                       // 29
+                                                                                                                  //
+    for (var dictName in babelHelpers.sanitizeForInObject(dictsToMigrate)) dataToMigrate[dictName] = dictsToMigrate[dictName]._getMigrationData();
+                                                                                                                  //
+    return [true, { dicts: dataToMigrate }];                                                                      // 34
+  });                                                                                                             //
+}                                                                                                                 //
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }).call(this);
 
@@ -1950,35 +1939,41 @@ module.factory('diffArray', ['getUpdates',                                      
         return subObj[k];                                                                                     // 156
       }, obj);                                                                                                // 157
                                                                                                               // 158
-      getDeep(obj, initialKeys)[lastKey] = v;                                                                 // 159
-      return v;                                                                                               // 160
-    };                                                                                                        // 161
-                                                                                                              // 162
-    var unsetDeep = function(obj, deepKey) {                                                                  // 163
-      var split = deepKey.split('.');                                                                         // 164
-      var initialKeys = _.initial(split);                                                                     // 165
-      var lastKey = _.last(split);                                                                            // 166
-      return delete getDeep(obj, initialKeys)[lastKey];                                                       // 167
-    };                                                                                                        // 168
+      var deepObj = getDeep(obj, initialKeys);                                                                // 159
+      deepObj[lastKey] = v;                                                                                   // 160
+      return v;                                                                                               // 161
+    };                                                                                                        // 162
+                                                                                                              // 163
+    var unsetDeep = function(obj, deepKey) {                                                                  // 164
+      var split = deepKey.split('.');                                                                         // 165
+      var initialKeys = _.initial(split);                                                                     // 166
+      var lastKey = _.last(split);                                                                            // 167
+      var deepObj = getDeep(obj, initialKeys);                                                                // 168
                                                                                                               // 169
-    var getDeep = function(obj, keys) {                                                                       // 170
-      return keys.reduce(function(subObj, k) {                                                                // 171
-        return subObj[k];                                                                                     // 172
-      }, obj);                                                                                                // 173
+      if (_.isArray(deepObj) && isNumStr(lastKey))                                                            // 170
+        return !!deepObj.splice(lastKey, 1);                                                                  // 171
+      else                                                                                                    // 172
+        return delete deepObj[lastKey];                                                                       // 173
     };                                                                                                        // 174
                                                                                                               // 175
-    var isHash = function(obj) {                                                                              // 176
-      return _.isObject(obj) &&                                                                               // 177
-             Object.getPrototypeOf(obj) === Object.prototype;                                                 // 178
-    };                                                                                                        // 179
-                                                                                                              // 180
-    var isNumStr = function(str) {                                                                            // 181
-      return str.match(/^\d+$/);                                                                              // 182
-    };                                                                                                        // 183
-                                                                                                              // 184
-    return diffArray;                                                                                         // 185
-}]);                                                                                                          // 186
-                                                                                                              // 187
+    var getDeep = function(obj, keys) {                                                                       // 176
+      return keys.reduce(function(subObj, k) {                                                                // 177
+        return subObj[k];                                                                                     // 178
+      }, obj);                                                                                                // 179
+    };                                                                                                        // 180
+                                                                                                              // 181
+    var isHash = function(obj) {                                                                              // 182
+      return _.isObject(obj) &&                                                                               // 183
+             Object.getPrototypeOf(obj) === Object.prototype;                                                 // 184
+    };                                                                                                        // 185
+                                                                                                              // 186
+    var isNumStr = function(str) {                                                                            // 187
+      return str.match(/^\d+$/);                                                                              // 188
+    };                                                                                                        // 189
+                                                                                                              // 190
+    return diffArray;                                                                                         // 191
+}]);                                                                                                          // 192
+                                                                                                              // 193
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }).call(this);
@@ -2840,158 +2835,173 @@ angularMeteorObject.factory('AngularMeteorObject', [                            
         var pullUpdate;                                                                                       // 59
         if (mods.$pull) {                                                                                     // 60
           pullUpdate = { $pull : mods.$pull };                                                                // 61
-        }                                                                                                     // 62
-                                                                                                              // 63
-        if (!pullUpdate) {                                                                                    // 64
-          // NOTE: do not use #upsert() method, since it does not exist in some collections                   // 65
-          collection.update(this.$$id, mods, createFulfill({action: 'updated'}));                             // 66
-        }                                                                                                     // 67
-        else {                                                                                                // 68
-          collection.update(this.$$id, mods);                                                                 // 69
-          collection.update(this.$$id, pullUpdate, createFulfill({action: 'updated'}))                        // 70
-        }                                                                                                     // 71
-      }                                                                                                       // 72
-      // insert                                                                                               // 73
-      else {                                                                                                  // 74
-        if (custom)                                                                                           // 75
-          mods = _.clone(custom);                                                                             // 76
-        else                                                                                                  // 77
-          mods = this.getRawObject();                                                                         // 78
-                                                                                                              // 79
-        mods._id = this.$$id;                                                                                 // 80
-        collection.insert(mods, createFulfill({ action: 'inserted' }));                                       // 81
-      }                                                                                                       // 82
-                                                                                                              // 83
-      return deferred.promise;                                                                                // 84
-    };                                                                                                        // 85
-                                                                                                              // 86
-    AngularMeteorObject.reset = function(keepClientProps) {                                                   // 87
-      var self = this;                                                                                        // 88
-      var options = this.$$options;                                                                           // 89
-      var id = this.$$id;                                                                                     // 90
-      var doc = this.$$collection.findOne(id, options);                                                       // 91
-                                                                                                              // 92
-      if (doc) {                                                                                              // 93
-        // extend SubObject                                                                                   // 94
-        var docKeys = _.keys(doc);                                                                            // 95
-        var docExtension = _.pick(doc, docKeys);                                                              // 96
-        var clientProps;                                                                                      // 97
+          mods = _.omit(mods,'$pull');                                                                        // 62
+        }                                                                                                     // 63
+                                                                                                              // 64
+        if (!pullUpdate) {                                                                                    // 65
+          // NOTE: do not use #upsert() method, since it does not exist in some collections                   // 66
+          collection.update(this.$$id, mods, createFulfill({action: 'updated'}));                             // 67
+        }                                                                                                     // 68
+        else {                                                                                                // 69
+          (function() {                                                                                       // 70
+            var done = _.after(2, function() {                                                                // 71
+              createFulfill({action: 'updated'});                                                             // 72
+            });                                                                                               // 73
+                                                                                                              // 74
+            var next = function(err) {                                                                        // 75
+              if (err)                                                                                        // 76
+                $meteorUtils.fulfill(deferred, err);                                                          // 77
+              else                                                                                            // 78
+                done();                                                                                       // 79
+            };                                                                                                // 80
+                                                                                                              // 81
+            // Performing in parallel so sync operations would be applied                                     // 82
+            collection.update(this.$$id, mods, next);                                                         // 83
+            collection.update(this.$$id, pullUpdate, next);                                                   // 84
+          }).call(this);                                                                                      // 85
+        }                                                                                                     // 86
+      }                                                                                                       // 87
+      // insert                                                                                               // 88
+      else {                                                                                                  // 89
+        if (custom)                                                                                           // 90
+          mods = _.clone(custom);                                                                             // 91
+        else                                                                                                  // 92
+          mods = this.getRawObject();                                                                         // 93
+                                                                                                              // 94
+        mods._id = this.$$id;                                                                                 // 95
+        collection.insert(mods, createFulfill({ action: 'inserted' }));                                       // 96
+      }                                                                                                       // 97
                                                                                                               // 98
-        angular.extend(Object.getPrototypeOf(self), Object.getPrototypeOf(doc));                              // 99
-        _.extend(self, docExtension);                                                                         // 100
-        _.extend(self._serverBackup, docExtension);                                                           // 101
-                                                                                                              // 102
-        if (keepClientProps) {                                                                                // 103
-          clientProps = _.intersection(_.keys(self), _.keys(self._serverBackup));                             // 104
-        } else {                                                                                              // 105
-          clientProps = _.keys(self);                                                                         // 106
-        }                                                                                                     // 107
-                                                                                                              // 108
-        var serverProps = _.keys(doc);                                                                        // 109
-        var removedKeys = _.difference(clientProps, serverProps, self.$$internalProps);                       // 110
-                                                                                                              // 111
-        removedKeys.forEach(function (prop) {                                                                 // 112
-          delete self[prop];                                                                                  // 113
-          delete self._serverBackup[prop];                                                                    // 114
-        });                                                                                                   // 115
-      }                                                                                                       // 116
+      return deferred.promise;                                                                                // 99
+    };                                                                                                        // 100
+                                                                                                              // 101
+    AngularMeteorObject.reset = function(keepClientProps) {                                                   // 102
+      var self = this;                                                                                        // 103
+      var options = this.$$options;                                                                           // 104
+      var id = this.$$id;                                                                                     // 105
+      var doc = this.$$collection.findOne(id, options);                                                       // 106
+                                                                                                              // 107
+      if (doc) {                                                                                              // 108
+        // extend SubObject                                                                                   // 109
+        var docKeys = _.keys(doc);                                                                            // 110
+        var docExtension = _.pick(doc, docKeys);                                                              // 111
+        var clientProps;                                                                                      // 112
+                                                                                                              // 113
+        angular.extend(Object.getPrototypeOf(self), Object.getPrototypeOf(doc));                              // 114
+        _.extend(self, docExtension);                                                                         // 115
+        _.extend(self._serverBackup, docExtension);                                                           // 116
                                                                                                               // 117
-      else {                                                                                                  // 118
-        _.keys(this.getRawObject()).forEach(function(prop) {                                                  // 119
-          delete self[prop];                                                                                  // 120
-        });                                                                                                   // 121
-                                                                                                              // 122
-        self._serverBackup = {};                                                                              // 123
-      }                                                                                                       // 124
-    };                                                                                                        // 125
+        if (keepClientProps) {                                                                                // 118
+          clientProps = _.intersection(_.keys(self), _.keys(self._serverBackup));                             // 119
+        } else {                                                                                              // 120
+          clientProps = _.keys(self);                                                                         // 121
+        }                                                                                                     // 122
+                                                                                                              // 123
+        var serverProps = _.keys(doc);                                                                        // 124
+        var removedKeys = _.difference(clientProps, serverProps, self.$$internalProps);                       // 125
                                                                                                               // 126
-    AngularMeteorObject.stop = function () {                                                                  // 127
-      if (this.unregisterAutoDestroy)                                                                         // 128
-        this.unregisterAutoDestroy();                                                                         // 129
-                                                                                                              // 130
-      if (this.unregisterAutoBind)                                                                            // 131
-        this.unregisterAutoBind();                                                                            // 132
-                                                                                                              // 133
-      if (this.autorunComputation && this.autorunComputation.stop)                                            // 134
-        this.autorunComputation.stop();                                                                       // 135
-    };                                                                                                        // 136
+        removedKeys.forEach(function (prop) {                                                                 // 127
+          delete self[prop];                                                                                  // 128
+          delete self._serverBackup[prop];                                                                    // 129
+        });                                                                                                   // 130
+      }                                                                                                       // 131
+                                                                                                              // 132
+      else {                                                                                                  // 133
+        _.keys(this.getRawObject()).forEach(function(prop) {                                                  // 134
+          delete self[prop];                                                                                  // 135
+        });                                                                                                   // 136
                                                                                                               // 137
-    return AngularMeteorObject;                                                                               // 138
-}]);                                                                                                          // 139
-                                                                                                              // 140
+        self._serverBackup = {};                                                                              // 138
+      }                                                                                                       // 139
+    };                                                                                                        // 140
                                                                                                               // 141
-angularMeteorObject.factory('$meteorObject', [                                                                // 142
-  '$rootScope', '$meteorUtils', 'getUpdates', 'AngularMeteorObject',                                          // 143
-  function($rootScope, $meteorUtils, getUpdates, AngularMeteorObject) {                                       // 144
-    function $meteorObject(collection, id, auto, options) {                                                   // 145
-      // Validate parameters                                                                                  // 146
-      if (!collection) {                                                                                      // 147
-        throw new TypeError("The first argument of $meteorObject is undefined.");                             // 148
-      }                                                                                                       // 149
-                                                                                                              // 150
-      if (!angular.isFunction(collection.findOne)) {                                                          // 151
+    AngularMeteorObject.stop = function () {                                                                  // 142
+      if (this.unregisterAutoDestroy)                                                                         // 143
+        this.unregisterAutoDestroy();                                                                         // 144
+                                                                                                              // 145
+      if (this.unregisterAutoBind)                                                                            // 146
+        this.unregisterAutoBind();                                                                            // 147
+                                                                                                              // 148
+      if (this.autorunComputation && this.autorunComputation.stop)                                            // 149
+        this.autorunComputation.stop();                                                                       // 150
+    };                                                                                                        // 151
+                                                                                                              // 152
+    return AngularMeteorObject;                                                                               // 153
+}]);                                                                                                          // 154
+                                                                                                              // 155
+                                                                                                              // 156
+angularMeteorObject.factory('$meteorObject', [                                                                // 157
+  '$rootScope', '$meteorUtils', 'getUpdates', 'AngularMeteorObject',                                          // 158
+  function($rootScope, $meteorUtils, getUpdates, AngularMeteorObject) {                                       // 159
+    function $meteorObject(collection, id, auto, options) {                                                   // 160
+      // Validate parameters                                                                                  // 161
+      if (!collection) {                                                                                      // 162
+        throw new TypeError("The first argument of $meteorObject is undefined.");                             // 163
+      }                                                                                                       // 164
+                                                                                                              // 165
+      if (!angular.isFunction(collection.findOne)) {                                                          // 166
         throw new TypeError("The first argument of $meteorObject must be a function or a have a findOne function property.");
-      }                                                                                                       // 153
-                                                                                                              // 154
-      var data = new AngularMeteorObject(collection, id, options);                                            // 155
-      data._auto = auto !== false; // Making auto default true - http://stackoverflow.com/a/15464208/1426570  // 156
-      angular.extend(data, $meteorObject);                                                                    // 157
-      data._setAutos();                                                                                       // 158
-      return data;                                                                                            // 159
-    }                                                                                                         // 160
-                                                                                                              // 161
-    $meteorObject._setAutos = function() {                                                                    // 162
-      var self = this;                                                                                        // 163
-                                                                                                              // 164
-      this.autorunComputation = $meteorUtils.autorun($rootScope, function() {                                 // 165
-        self.reset(true);                                                                                     // 166
-      });                                                                                                     // 167
-                                                                                                              // 168
-      // Deep watches the model and performs autobind                                                         // 169
-      this.unregisterAutoBind = this._auto && $rootScope.$watch(function(){                                   // 170
-        return self.getRawObject();                                                                           // 171
-      }, function (item, oldItem) {                                                                           // 172
-        if (item === oldItem) {                                                                               // 173
-          self.$$collection.update({_id: item._id}, self.getRawObject());                                     // 174
-          return;                                                                                             // 175
-        }                                                                                                     // 176
-                                                                                                              // 177
-        var id = item._id;                                                                                    // 178
-        delete item._id;                                                                                      // 179
-        delete oldItem._id;                                                                                   // 180
-                                                                                                              // 181
-        var updates = getUpdates(oldItem, item);                                                              // 182
-        if (_.isEmpty(updates)) return;                                                                       // 183
-        var pullUpdate;                                                                                       // 184
-                                                                                                              // 185
-        if (updates.$pull) {                                                                                  // 186
-          pullUpdate = { $pull : updates.$pull };                                                             // 187
-          delete updates.$pull;                                                                               // 188
-        }                                                                                                     // 189
-        self.$$collection.update({_id: id}, updates);                                                         // 190
-                                                                                                              // 191
-        if (pullUpdate) {                                                                                     // 192
-          self.$$collection.update({ _id : id}, pullUpdate);                                                  // 193
-        }                                                                                                     // 194
-      }, true);                                                                                               // 195
+      }                                                                                                       // 168
+                                                                                                              // 169
+      var data = new AngularMeteorObject(collection, id, options);                                            // 170
+      data._auto = auto !== false; // Making auto default true - http://stackoverflow.com/a/15464208/1426570  // 171
+      angular.extend(data, $meteorObject);                                                                    // 172
+      data._setAutos();                                                                                       // 173
+      return data;                                                                                            // 174
+    }                                                                                                         // 175
+                                                                                                              // 176
+    $meteorObject._setAutos = function() {                                                                    // 177
+      var self = this;                                                                                        // 178
+                                                                                                              // 179
+      this.autorunComputation = $meteorUtils.autorun($rootScope, function() {                                 // 180
+        self.reset(true);                                                                                     // 181
+      });                                                                                                     // 182
+                                                                                                              // 183
+      // Deep watches the model and performs autobind                                                         // 184
+      this.unregisterAutoBind = this._auto && $rootScope.$watch(function(){                                   // 185
+        return self.getRawObject();                                                                           // 186
+      }, function (item, oldItem) {                                                                           // 187
+        if (item === oldItem) {                                                                               // 188
+          self.$$collection.update({_id: item._id}, self.getRawObject());                                     // 189
+          return;                                                                                             // 190
+        }                                                                                                     // 191
+                                                                                                              // 192
+        var id = item._id;                                                                                    // 193
+        delete item._id;                                                                                      // 194
+        delete oldItem._id;                                                                                   // 195
                                                                                                               // 196
-      this.unregisterAutoDestroy = $rootScope.$on('$destroy', function() {                                    // 197
-        if (self && self.stop) {                                                                              // 198
-          self.stop();                                                                                        // 199
-        }                                                                                                     // 200
-      });                                                                                                     // 201
-    };                                                                                                        // 202
-                                                                                                              // 203
-    return $meteorObject;                                                                                     // 204
-}]);                                                                                                          // 205
+        var updates = getUpdates(oldItem, item);                                                              // 197
+        if (_.isEmpty(updates)) return;                                                                       // 198
+        var pullUpdate;                                                                                       // 199
+                                                                                                              // 200
+        if (updates.$pull) {                                                                                  // 201
+          pullUpdate = { $pull : updates.$pull };                                                             // 202
+          delete updates.$pull;                                                                               // 203
+        }                                                                                                     // 204
+        self.$$collection.update({_id: id}, updates);                                                         // 205
                                                                                                               // 206
-angularMeteorObject.run([                                                                                     // 207
-  '$rootScope', '$meteorObject', '$meteorStopper',                                                            // 208
-  function ($rootScope, $meteorObject, $meteorStopper) {                                                      // 209
-    var scopeProto = Object.getPrototypeOf($rootScope);                                                       // 210
-    scopeProto.$meteorObject = $meteorStopper($meteorObject);                                                 // 211
-}]);                                                                                                          // 212
-                                                                                                              // 213
+        if (pullUpdate) {                                                                                     // 207
+          self.$$collection.update({ _id : id}, pullUpdate);                                                  // 208
+        }                                                                                                     // 209
+      }, true);                                                                                               // 210
+                                                                                                              // 211
+      this.unregisterAutoDestroy = $rootScope.$on('$destroy', function() {                                    // 212
+        if (self && self.stop) {                                                                              // 213
+          self.stop();                                                                                        // 214
+        }                                                                                                     // 215
+      });                                                                                                     // 216
+    };                                                                                                        // 217
+                                                                                                              // 218
+    return $meteorObject;                                                                                     // 219
+}]);                                                                                                          // 220
+                                                                                                              // 221
+angularMeteorObject.run([                                                                                     // 222
+  '$rootScope', '$meteorObject', '$meteorStopper',                                                            // 223
+  function ($rootScope, $meteorObject, $meteorStopper) {                                                      // 224
+    var scopeProto = Object.getPrototypeOf($rootScope);                                                       // 225
+    scopeProto.$meteorObject = $meteorStopper($meteorObject);                                                 // 226
+}]);                                                                                                          // 227
+                                                                                                              // 228
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }).call(this);
@@ -3288,48 +3298,49 @@ angularMeteorUtils.service('$meteorUtils', [                                    
       if( !angular.isObject(data) ||                                                                          // 29
         data instanceof Date ||                                                                               // 30
         data instanceof File ||                                                                               // 31
-        (typeof FS === 'object' && data instanceof FS.File)) {                                                // 32
-        return data;                                                                                          // 33
-      }                                                                                                       // 34
-      var out = angular.isArray(data)? [] : {};                                                               // 35
-      angular.forEach(data, function(v,k) {                                                                   // 36
-        if(typeof k !== 'string' || k.charAt(0) !== '$') {                                                    // 37
-          out[k] = self.stripDollarPrefixedKeys(v);                                                           // 38
-        }                                                                                                     // 39
-      });                                                                                                     // 40
-      return out;                                                                                             // 41
-    };                                                                                                        // 42
-    // Returns a callback which fulfills promise                                                              // 43
-    this.fulfill = function(deferred, boundError, boundResult) {                                              // 44
-      return function(err, result) {                                                                          // 45
-        if (err)                                                                                              // 46
-          deferred.reject(boundError == null ? err : boundError);                                             // 47
-        else if (typeof boundResult == "function")                                                            // 48
-          deferred.resolve(boundResult == null ? result : boundResult(result));                               // 49
-        else                                                                                                  // 50
-          deferred.resolve(boundResult == null ? result : boundResult);                                       // 51
-      };                                                                                                      // 52
-    };                                                                                                        // 53
-    // creates a function which invokes method with the given arguments and returns a promise                 // 54
-    this.promissor = function(obj, method) {                                                                  // 55
-      return function() {                                                                                     // 56
-        var deferred = $q.defer();                                                                            // 57
-        var fulfill = self.fulfill(deferred);                                                                 // 58
-        var args = _.toArray(arguments).concat(fulfill);                                                      // 59
-        obj[method].apply(obj, args);                                                                         // 60
-        return deferred.promise;                                                                              // 61
-      };                                                                                                      // 62
-    };                                                                                                        // 63
-  }                                                                                                           // 64
-]);                                                                                                           // 65
-                                                                                                              // 66
-angularMeteorUtils.run(['$rootScope', '$meteorUtils',                                                         // 67
-  function($rootScope, $meteorUtils) {                                                                        // 68
-    Object.getPrototypeOf($rootScope).$meteorAutorun = function(fn) {                                         // 69
-      return $meteorUtils.autorun(this, fn);                                                                  // 70
-    };                                                                                                        // 71
-}]);                                                                                                          // 72
-                                                                                                              // 73
+        EJSON.toJSONValue(data).$type === 'oid' ||                                                            // 32
+        (typeof FS === 'object' && data instanceof FS.File)) {                                                // 33
+        return data;                                                                                          // 34
+      }                                                                                                       // 35
+      var out = angular.isArray(data)? [] : {};                                                               // 36
+      angular.forEach(data, function(v,k) {                                                                   // 37
+        if(typeof k !== 'string' || k.charAt(0) !== '$') {                                                    // 38
+          out[k] = self.stripDollarPrefixedKeys(v);                                                           // 39
+        }                                                                                                     // 40
+      });                                                                                                     // 41
+      return out;                                                                                             // 42
+    };                                                                                                        // 43
+    // Returns a callback which fulfills promise                                                              // 44
+    this.fulfill = function(deferred, boundError, boundResult) {                                              // 45
+      return function(err, result) {                                                                          // 46
+        if (err)                                                                                              // 47
+          deferred.reject(boundError == null ? err : boundError);                                             // 48
+        else if (typeof boundResult == "function")                                                            // 49
+          deferred.resolve(boundResult == null ? result : boundResult(result));                               // 50
+        else                                                                                                  // 51
+          deferred.resolve(boundResult == null ? result : boundResult);                                       // 52
+      };                                                                                                      // 53
+    };                                                                                                        // 54
+    // creates a function which invokes method with the given arguments and returns a promise                 // 55
+    this.promissor = function(obj, method) {                                                                  // 56
+      return function() {                                                                                     // 57
+        var deferred = $q.defer();                                                                            // 58
+        var fulfill = self.fulfill(deferred);                                                                 // 59
+        var args = _.toArray(arguments).concat(fulfill);                                                      // 60
+        obj[method].apply(obj, args);                                                                         // 61
+        return deferred.promise;                                                                              // 62
+      };                                                                                                      // 63
+    };                                                                                                        // 64
+  }                                                                                                           // 65
+]);                                                                                                           // 66
+                                                                                                              // 67
+angularMeteorUtils.run(['$rootScope', '$meteorUtils',                                                         // 68
+  function($rootScope, $meteorUtils) {                                                                        // 69
+    Object.getPrototypeOf($rootScope).$meteorAutorun = function(fn) {                                         // 70
+      return $meteorUtils.autorun(this, fn);                                                                  // 71
+    };                                                                                                        // 72
+}]);                                                                                                          // 73
+                                                                                                              // 74
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }).call(this);
