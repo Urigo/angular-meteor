@@ -79,7 +79,7 @@ Add an rsvp scope function to the partiesListCtrl in `partiesList.ng.js`:
 
 and let's add action buttons to call the right rsvp in the HTML.
 
-Add this code into `parties-list.html` inside the parties list itself (inside the ng-repeat):
+Add this code into `parties-list.ng.html` inside the parties list itself (inside the ng-repeat):
 
 {{> DiffBox tutorialName="angular-meteor" step="14.8"}}
 

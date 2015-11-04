@@ -7,7 +7,7 @@ In this step, we'll add an input field for users to add tasks to the list.
 First, let's add a form to our HTML:
 
 ```html
-<!-- todos-list.html -->
+<!-- todos-list.ng.html -->
 <header>
   <h1>Todo List</h1>
 

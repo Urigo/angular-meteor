@@ -14,7 +14,7 @@ Then let's define the module dependency in our app. go to `app.js` inside the `c
 
 {{> DiffBox tutorialName="angular-meteor" step="16.1"}}
 
-Now let's add a map the `party-details.html` , first add this HTML snippet to the end of the template:
+Now let's add a map the `party-details.ng.html` , first add this HTML snippet to the end of the template:
 
 {{> DiffBox tutorialName="angular-meteor" step="16.2"}}
 
@@ -34,7 +34,7 @@ Now run the app and go to the party details page. You should see a new Google Ma
 
 Let's add a marker that will be bound to the party's location.
 
-Inside `party-details.html`:
+Inside `party-details.ng.html`:
 
 {{> DiffBox tutorialName="angular-meteor" step="16.5"}}
 
@@ -67,13 +67,13 @@ Test it to see clicking and dragging works.
 
 Now let's add a map to the parties list to show all the parties on the map.
 
-So let's add the directives to `parties-list.html`:
+So let's add the directives to `parties-list.ng.html`:
 
 {{> DiffBox tutorialName="angular-meteor" step="16.7"}}
 
 Add it under the search and sorting div.
 
-You can see that the difference between the directive we used in `party-details.html` is that ui-gmap-markers is plural.
+You can see that the difference between the directive we used in `party-details.ng.html` is that ui-gmap-markers is plural.
 The attributes we use:
 
 * models - the scope array that the markers represent.

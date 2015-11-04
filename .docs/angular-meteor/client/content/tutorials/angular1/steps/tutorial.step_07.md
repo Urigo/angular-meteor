@@ -108,12 +108,12 @@ So now let's re-structure our app (to see the end result and all the steps in gi
 
 {{> DiffBox tutorialName="angular-meteor" step="7.7"}}
 
-10.Move `parties-list.html` and `party-details.html` into the `client->parties->views` folder.
+10.Move `parties-list.ng.html` and `party-details.ng.html` into the `client->parties->views` folder.
 
 {{> DiffBox tutorialName="angular-meteor" step="7.8"}}
 {{> DiffBox tutorialName="angular-meteor" step="7.9"}}
 
-11.Update the templateUrl in the routes to our templates to -  `templateUrl: 'client/parties/views/party-details.html'` and `templateUrl: 'client/parties/views/parties-list.html'`
+11.Update the templateUrl in the routes to our templates to -  `templateUrl: 'client/parties/views/party-details.ng.html'` and `templateUrl: 'client/parties/views/parties-list.ng.html'`
 
 {{> DiffBox tutorialName="angular-meteor" step="7.10"}}
 

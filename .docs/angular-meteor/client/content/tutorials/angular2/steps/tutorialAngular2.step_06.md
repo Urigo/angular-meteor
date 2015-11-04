@@ -61,7 +61,7 @@ Now we can take the loaded data, add it into it's own model, and save or cancel 
 
 Earlier we mentioned there are two kinds of forms in Angular 2: template-driven & model-driven.
 
-Let's change `party-details.html` to a form, so that we can edit the party details.
+Let's change `party-details.ng.html` to a form, so that we can edit the party details.
 
 If you completed the challenge in part 5, you should have a router-link button pointing to party-details, with a corresponding alias in the RouteConfig of `app.ts`.
 
@@ -93,7 +93,7 @@ Notices it updates automatically. You can contrast this to form Controls which o
 
 But unlike a form control, NgModel doesn't come with built in control or form validators. If you need to validate your form, you can still use the two input binding approaches together.
 
-__`client/party-details/party-details.html`:__
+__`client/party-details/party-details.ng.html`:__
 
     <form #f="form" [ng-form-model]="partyDetailsForm">
       <label for="name">Name</label>

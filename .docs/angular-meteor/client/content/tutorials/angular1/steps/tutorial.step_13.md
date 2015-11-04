@@ -42,7 +42,7 @@ is not already `_contains` (another underscore method) in the invited list.
 
 So now let's use our new filter
 
-Simply add the filter to the list of users and send the current party to the party parameter, inside `party-details.html`:
+Simply add the filter to the list of users and send the current party to the party parameter, inside `party-details.ng.html`:
 
 {{> DiffBox tutorialName="angular-meteor" step="13.2"}}
 
@@ -72,7 +72,7 @@ AngularJS can also display the return value of a function in the HTML.
 
 To demonstrate let's add to each party in the parties list the creator's name:
 
-Add a line that displays the user information to the parties list in `parties-list.html`,
+Add a line that displays the user information to the parties list in `parties-list.ng.html`,
 so it will look like this:
 
 {{> DiffBox tutorialName="angular-meteor" step="13.5"}}

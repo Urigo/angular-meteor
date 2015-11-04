@@ -65,7 +65,7 @@ It is also possible to add your subscriptions in your routing.js, you can move t
 
      .state('parties', {
         url: '/parties',
-        templateUrl: 'client/parties/views/parties-list.html',
+        templateUrl: 'client/parties/views/parties-list.ng.html',
         controller: 'PartiesListCtrl',
         resolve: {
           'subscribe': [
@@ -92,13 +92,13 @@ Either that the owner parameter exists and it's the current logged in user (whic
 
 So now let's add the public flag to the parties and see how it affects the parties the client gets.
 
-Let's add a checkbox to the new party form in `parties-list.html`:
+Let's add a checkbox to the new party form in `parties-list.ng.html`:
 
 {{> DiffBox tutorialName="angular-meteor" step="9.4"}}
 
 Notice how easy it is to bind a checkbox to a model with Angular 1!
 
-Let's add the same to the `party-details.html` page:
+Let's add the same to the `party-details.ng.html` page:
 
 {{> DiffBox tutorialName="angular-meteor" step="9.5"}}
 
@@ -147,7 +147,7 @@ This is because if we will get to this controller directly, the subscription in 
 
 Now let's add the list of users to the view to make sure it works.
 
-Add this ng-repeat list to the end of `party-details.html`:
+Add this ng-repeat list to the end of `party-details.ng.html`:
 
 {{> DiffBox tutorialName="angular-meteor" step="9.9"}}
 
