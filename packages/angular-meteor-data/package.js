@@ -54,7 +54,7 @@ Package.onTest(function(api) {
   api.use('sanjo:jasmine@0.19.0');
   api.use('angular:angular-mocks@1.4.7');
   api.use('mdg:camera@1.1.5');
-  api.use('angular@1.2.0-rc.2');
+  api.use('angular-meteor-data');
 
   // auxiliary
   api.addFiles([
