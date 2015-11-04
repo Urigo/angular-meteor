@@ -8,6 +8,8 @@
 ehthumbs.db
 Thumbs.db
 .build*
+.npm
+node_modules
 
 # IDE's #
 #########

@@ -2,7 +2,8 @@ Package.describe({
   name: "angular-templates",
   summary: "Compile angular templates into the template cache",
   version: "0.0.1",
-  git: "https://github.com/Urigo/angular-meteor.git"
+  git: "https://github.com/Urigo/angular-meteor.git",
+  documentation: null
 });
 
 Package.registerBuildPlugin({
