@@ -1,2 +1,2 @@
 cd packages/angular-meteor-data
-VELOCITY_TEST_PACKAGES=1 meteor test-packages --driver-package velocity:html-reporter --velocity ./
+VELOCITY_TEST_PACKAGES=1 meteor test-packages --velocity ./
