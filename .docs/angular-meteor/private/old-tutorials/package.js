@@ -34,12 +34,7 @@ Package.onUse(function (api) {
   api.addFiles([
     'generated/blaze-commits.js',
     'generated/angular-commits.js',
-    'generated/react-commits.js',
-    'routes/angular2Tut.js',
-    'routes/angular1Tut.js',
-    'routes/reactTut.js',
-    'routes/ionicTut.js',
-    'routes/tutorial-pages.js'
+    'generated/react-commits.js'
   ]);
 
   api.addFiles([

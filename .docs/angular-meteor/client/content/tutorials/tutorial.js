@@ -1,4 +1,4 @@
-Template.tutorials.helpers({
+Template.tutorial.helpers({
   tutorials: function () {
     return TUTORIALS;
   }

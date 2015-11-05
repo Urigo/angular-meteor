@@ -1,13 +1,11 @@
-ANGULAR2_TUT = [
+SOCIALLY_ANGULAR2 = [
   {
     id: "0",
     title: 'Bootstrapping',
     seoTitle: 'Bootstrapping',
     route: "tutorials.angular2.bootstrapping",
     path: "/tutorials/angular2/bootstrapping",
-    contentTemplate: 'tutorialAngular2.step_00.md',
-    video: '//www.youtube.com/embed/s2RWlIrkCaE?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd',
-    commitDiff: 'a00a945d0a503c99efaff1e9a20dfe6f9205821f'
+    contentTemplate: 'tutorialAngular2.step_00.md'
   },
   {
     id: "1",
@@ -15,8 +13,7 @@ ANGULAR2_TUT = [
     seoTitle: 'Static Template',
     route: "tutorials.angular2.static-template",
     path: "/tutorials/angular2/static-template",
-    contentTemplate: 'tutorialAngular2.step_01.md',
-    video: '//www.youtube.com/embed/xUod-yoDfEE?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd'
+    contentTemplate: 'tutorialAngular2.step_01.md'
   },
   {
     id: "2",
@@ -24,8 +21,7 @@ ANGULAR2_TUT = [
     seoTitle: 'Dynamic Template',
     route: "tutorials.angular2.dynamic-template",
     path: "/tutorials/angular2/dynamic-template",
-    contentTemplate: 'tutorialAngular2.step_02.md',
-    video: '//www.youtube.com/embed/xUod-yoDfEE?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd'
+    contentTemplate: 'tutorialAngular2.step_02.md'
   },
   {
     id: "3",
@@ -33,8 +29,7 @@ ANGULAR2_TUT = [
     seoTitle: '3-Way data binding',
     route: "tutorials.angular2.3-way-data-binding",
     path: "/tutorials/angular2/3-way-data-binding",
-    contentTemplate: 'tutorialAngular2.step_03.md',
-    video: '//www.youtube.com/embed/xUod-yoDfEE?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd'
+    contentTemplate: 'tutorialAngular2.step_03.md'
   },
   {
     id: "4",
@@ -42,8 +37,7 @@ ANGULAR2_TUT = [
     seoTitle: 'Adding/removing objects and Angular event handling',
     route: "tutorials.angular2.adding-removing-objects-and-angular-event-handling",
     path: "/tutorials/angular2/adding-removing-objects-and-angular-event-handling",
-    contentTemplate: 'tutorialAngular2.step_04.md',
-    video: '//www.youtube.com/embed/ijKsWglJI0k?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd'
+    contentTemplate: 'tutorialAngular2.step_04.md'
   },
   {
     id: "5",
@@ -51,8 +45,7 @@ ANGULAR2_TUT = [
     seoTitle: 'Routing and Multiple Views',
     route: "tutorials.angular2.routing-and-multiple-views",
     path: "/tutorials/angular2/routing-and-multiple-views",
-    contentTemplate: 'tutorialAngular2.step_05.md',
-    video: '//www.youtube.com/embed/oScHP7Vd7as?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd'
+    contentTemplate: 'tutorialAngular2.step_05.md'
   },
   {
     id: "6",
@@ -60,8 +53,7 @@ ANGULAR2_TUT = [
     seoTitle: 'Bind one object',
     route: "tutorials.angular2.bind-one-object",
     path: "/tutorials/angular2/bind-one-object",
-    contentTemplate: 'tutorialAngular2.step_06.md',
-    video: '//www.youtube.com/embed/kRen9GlR3K8?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd'
+    contentTemplate: 'tutorialAngular2.step_06.md'
   },
   {
     id: "7",
@@ -69,8 +61,7 @@ ANGULAR2_TUT = [
     seoTitle: 'Folder structure',
     route: "tutorials.angular2.folder-structure",
     path: "/tutorials/angular2/folder-structure",
-    contentTemplate: 'tutorialAngular2.step_07.md',
-    video: '//www.youtube.com/embed/l3nTv4GuJrY?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd'
+    contentTemplate: 'tutorialAngular2.step_07.md'
   },
   {
     id: "8",
@@ -78,8 +69,7 @@ ANGULAR2_TUT = [
     seoTitle: 'User accounts, authentication and permissions',
     route: "tutorials.angular2.user-accounts-authentication-and-permissions",
     path: "/tutorials/angular2/user-accounts-authentication-and-permissions",
-    contentTemplate: 'tutorialAngular2.step_08.md',
-    video: '//www.youtube.com/embed/PgS-IAMn9Ig?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd'
+    contentTemplate: 'tutorialAngular2.step_08.md'
   },
   {
     id: "9",
@@ -87,8 +77,7 @@ ANGULAR2_TUT = [
     seoTitle: 'Privacy and publish-subscribe functions',
     route: "tutorials.angular2.privacy-and-publish-subscribe-functions",
     path: "/tutorials/angular2/privacy-and-publish-subscribe-functions",
-    contentTemplate: 'tutorialAngular2.step_09.md',
-    video: '//www.youtube.com/embed/wAHi7ilDHko?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd'
+    contentTemplate: 'tutorialAngular2.step_09.md'
   },
   {
     id: "10",
@@ -96,8 +85,7 @@ ANGULAR2_TUT = [
     seoTitle: 'Deploying your app',
     route: "tutorials.angular2.deploying-your-app",
     path: "/tutorials/angular2/deploying-your-app",
-    contentTemplate: 'tutorialAngular2.step_10.md',
-    video: '//www.youtube.com/embed/2WnZBKv9H9o?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd'
+    contentTemplate: 'tutorialAngular2.step_10.md'
   },
   {
     id: "11",
@@ -105,8 +93,7 @@ ANGULAR2_TUT = [
     seoTitle: 'Running your app on Android or iOS with PhoneGap',
     route: "tutorials.angular2.running-your-app-on-android-or-ios-with-phoneGap",
     path: "/tutorials/angular2/running-your-app-on-android-or-ios-with-phoneGap",
-    contentTemplate: 'tutorialAngular2.step_11.md',
-    video: '//www.youtube.com/embed/5vZOI2fi13U?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd'
+    contentTemplate: 'tutorialAngular2.step_11.md'
   },
   {
     id: "12",
@@ -114,8 +101,7 @@ ANGULAR2_TUT = [
     seoTitle: 'Search, sort, pagination and reactive vars',
     route: "tutorials.angular2.search-sort-pagination-and-reactive-vars",
     path: "/tutorials/angular2/search-sort-pagination-and-reactive-vars",
-    contentTemplate: 'tutorialAngular2.step_12.md',
-    video: '//www.youtube.com/embed/8XQI2XpyH18?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd'
+    contentTemplate: 'tutorialAngular2.step_12.md'
   },
   {
     id: "13",
@@ -123,8 +109,7 @@ ANGULAR2_TUT = [
     seoTitle: 'Using and creating AngularJS filters',
     route: "tutorials.angular2.using-and-creating-angularjs-filters",
     path: "/tutorials/angular2/using-and-creating-angularjs-filters",
-    contentTemplate: 'tutorialAngular2.step_13.md',
-    video: '//www.youtube.com/embed/S049FI8TP4A?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd'
+    contentTemplate: 'tutorialAngular2.step_13.md'
   },
   {
     id: "14",
@@ -132,8 +117,7 @@ ANGULAR2_TUT = [
     seoTitle: 'Meteor methods with promises',
     route: "tutorials.angular2.meteor-methods-with-promises",
     path: "/tutorials/angular2/meteor-methods-with-promises",
-    contentTemplate: 'tutorialAngular2.step_14.md',
-    video: '//www.youtube.com/embed/qNUjZjfaYt8?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd'
+    contentTemplate: 'tutorialAngular2.step_14.md'
   },
   {
     id: "15",
@@ -141,8 +125,7 @@ ANGULAR2_TUT = [
     seoTitle: 'Conditional template directives with AngularJS',
     route: "tutorials.angular2.conditional-template-directives-with-angularjs",
     path: "/tutorials/angular2/conditional-template-directives-with-angularjs",
-    contentTemplate: 'tutorialAngular2.step_15.md',
-    video: '//www.youtube.com/embed/KSlVThsNCss?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd'
+    contentTemplate: 'tutorialAngular2.step_15.md'
   },
   {
     id: "16",
@@ -159,8 +142,7 @@ ANGULAR2_TUT = [
     seoTitle: 'CSS, LESS and Bootstrap',
     route: "tutorials.angular2.css-less-and-bootstrap",
     path: "/tutorials/angular2/css-less-and-bootstrap",
-    contentTemplate: 'tutorialAngular2.step_17.md',
-    video: '//www.youtube.com/embed/A6qsm_RDc9Y?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd'
+    contentTemplate: 'tutorialAngular2.step_17.md'
   },
   {
     id: "18",
@@ -168,8 +150,7 @@ ANGULAR2_TUT = [
     seoTitle: 'angular-material and custom Angular auth forms',
     route: "tutorials.angular2.angular-material-and-custom-angular-auth-forms",
     path: "/tutorials/angular2/angular-material-and-custom-angular-auth-forms",
-    contentTemplate: 'tutorialAngular2.step_18.md',
-    video: '//www.youtube.com/embed/A6qsm_RDc9Y?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd'
+    contentTemplate: 'tutorialAngular2.step_18.md'
   },
   {
     id: "19",
@@ -177,8 +158,7 @@ ANGULAR2_TUT = [
     seoTitle: '3rdParty Libraries',
     route: "tutorials.angular2.3rd-party-libraries",
     path: "/tutorials/angular2/3rd-party-libraries",
-    contentTemplate: 'tutorialAngular2.step_19.md',
-    video: '//www.youtube.com/embed/A6qsm_RDc9Y?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd'
+    contentTemplate: 'tutorialAngular2.step_19.md'
   },
   {
     id: "20",
@@ -186,9 +166,7 @@ ANGULAR2_TUT = [
     seoTitle: 'Handling Files with CollectionFS',
     route: "tutorials.angular2.handling-files-with-collectionfs",
     path: "/tutorials/angular2/handling-files-with-collectionfs",
-    contentTemplate: 'tutorialAngular2.step_20.md',
-    video: '//www.youtube.com/embed/A6qsm_RDc9Y?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd',
-    previousCodeStep: '18'
+    contentTemplate: 'tutorialAngular2.step_20.md'
   },
   {
     id: "21",

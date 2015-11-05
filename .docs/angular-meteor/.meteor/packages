@@ -6,7 +6,6 @@
 showdown
 meyerweb-reset
 http
-spiderable
 handlebars
 standard-app-packages
 my-moment
@@ -28,6 +27,6 @@ twbs:bootstrap
 fortawesome:fontawesome
 mdg:tutorial-diff-box
 mdg:tutorial-registry
-tutorials
 simple:markdown-templating@1.2.7
 mdg:tutorial-step-diff-compiler
+spiderable

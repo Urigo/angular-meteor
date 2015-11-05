@@ -53,7 +53,7 @@ Router.map(function () {
   //
 
   createSubRoutes(TUTORIALS);
-  redirect('/tutorials', '/tutorialIntro');
+  //redirect('/tutorials', '/tutorialIntro');
 
   // Redirect old link
   redirect('/tutorial', '/tutorialIntro');
@@ -78,6 +78,7 @@ Router.map(function () {
   redirect('/tutorial/step_18', '/tutorials/angular1/angular-material-and-custom-angular-auth-forms');
   redirect('/tutorial/step_19', '/tutorials/angular1/3rd-party-libraries');
   redirect('/tutorial/step_20', '/tutorials/angular1/handling-files-with-collectionfs');
+
 
   self.route('tutorialIntro', {
     path: '/tutorialIntro',

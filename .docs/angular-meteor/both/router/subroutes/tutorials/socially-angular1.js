@@ -1,4 +1,4 @@
-ANGULAR1_TUT = [
+SOCIALLY_ANGULAR1 = [
   {
     id: "0",
     title: 'Bootstrapping',
@@ -187,8 +187,7 @@ ANGULAR1_TUT = [
     route: "tutorials.angular1.handling-files-with-collectionfs",
     path: "/tutorials/angular1/handling-files-with-collectionfs",
     contentTemplate: 'tutorial.step_20.md',
-    video: '//www.youtube.com/embed/A6qsm_RDc9Y?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd',
-    previousCodeStep: '18'
+    video: '//www.youtube.com/embed/A6qsm_RDc9Y?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd'
   },
   {
     id: "21",
@@ -196,8 +195,7 @@ ANGULAR1_TUT = [
     seoTitle: 'Mobile support and AngularJS modules isolation using Meteor packages',
     route: "tutorials.angular1.mobile-support-and-packages-isolation",
     path: "/tutorials/angular1/mobile-support-and-packages-isolation",
-    contentTemplate: 'tutorial.step_21.md',
-    previousCodeStep: '20'
+    contentTemplate: 'tutorial.step_21.md'
   },
   {
     id: "22",
