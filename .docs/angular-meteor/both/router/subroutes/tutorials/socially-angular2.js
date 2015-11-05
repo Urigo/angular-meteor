@@ -133,8 +133,7 @@ SOCIALLY_ANGULAR2 = [
     seoTitle: 'Google Maps',
     route: "tutorials.angular2.google-maps",
     path: "/tutorials/angular2/google-maps",
-    contentTemplate: 'tutorialAngular2.step_16.md',
-    video: '//www.youtube.com/embed/A6qsm_RDc9Y?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd'
+    contentTemplate: 'tutorialAngular2.step_16.md'
   },
   {
     id: "17",
