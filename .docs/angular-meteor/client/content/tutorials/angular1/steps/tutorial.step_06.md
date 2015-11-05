@@ -28,7 +28,7 @@ as directed by the sort and skip options, exactly like Meteor's [collection.find
 
 # Template
 
-In `party-details.ng.html` let's replace the binding to the `partyId` with a binding to `party.name` and `party.description`:
+In `party-details.html` let's replace the binding to the `partyId` with a binding to `party.name` and `party.description`:
 
 {{> DiffBox tutorialName="angular-meteor" step="6.2"}}
 

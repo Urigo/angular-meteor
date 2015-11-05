@@ -60,7 +60,7 @@ So, now we have a link to Parties to the left, a span to fill all space, and a l
 Element layout flex grid is very simple and intuitive in angular-material and you can read all about it [here](https://material.angularjs.org/#/layout/grid).
 
 Next, we need to convert our parties list and party detail views to angular-material.
-First, replace the code in your `client/views/parties-list.ng.html` with this code:
+First, replace the code in your `client/views/parties-list.html` with this code:
 
 {{> DiffBox tutorialName="angular-meteor" step="18.8"}}
 
@@ -91,7 +91,7 @@ You can see in the view code above that to use icons you write:
 
 in the `md-svg-icon` attribute you list `<iconset>:<icon_name>` in our case `content:ic_clear_24px`.
 
-Now, replace the code in the `client/view/party-details.ng.html` with the following code:
+Now, replace the code in the `client/view/party-details.html` with the following code:
 
 {{> DiffBox tutorialName="angular-meteor" step="18.11"}}
 
@@ -156,7 +156,7 @@ Just as we did in the `logout` route, here we utilize an `angular-meteor` method
 
 It returns a promise, and on success we redirect the user `parties` state, or assign error message to our `vm.error` property of the controller.
 
-Now create a view file with login form in `client/users/views` folder and name it `login.ng.html`. Paste the following code:
+Now create a view file with login form in `client/users/views` folder and name it `login.html`. Paste the following code:
 
 {{> DiffBox tutorialName="angular-meteor" step="18.16"}}
 
@@ -171,7 +171,7 @@ The procedure is the same for the `register` and `resetpw` routes, so now you cr
 
 {{> DiffBox tutorialName="angular-meteor" step="18.17"}}
 
-Create a file `client/users/views/register.ng.html` and paste the following code into it:
+Create a file `client/users/views/register.html` and paste the following code into it:
 
 {{> DiffBox tutorialName="angular-meteor" step="18.18"}}
 
@@ -179,7 +179,7 @@ Create a file `client/users/controllers/reset.js` and paste the following code i
 
 {{> DiffBox tutorialName="angular-meteor" step="18.19"}}
 
-And, finally, create a corresponding view `client/users/views/reset-password.ng.html` and paste the following into it:
+And, finally, create a corresponding view `client/users/views/reset-password.html` and paste the following into it:
 
 {{> DiffBox tutorialName="angular-meteor" step="18.20"}}
 

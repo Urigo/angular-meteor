@@ -22,7 +22,7 @@ Now let's create a custom filter that will filter out users that are the owners 
 
 Create a new folder named `filters` under the `client->parties` folder.
 
-Under that folder create a new file named `uninvited.ng.js` and place that code inside:
+Under that folder create a new file named `uninvited.js` and place that code inside:
 
 {{> DiffBox tutorialName="angular-meteor" step="13.1"}}
 
@@ -42,7 +42,7 @@ is not already `_contains` (another underscore method) in the invited list.
 
 So now let's use our new filter
 
-Simply add the filter to the list of users and send the current party to the party parameter, inside `party-details.ng.html`:
+Simply add the filter to the list of users and send the current party to the party parameter, inside `party-details.html`:
 
 {{> DiffBox tutorialName="angular-meteor" step="13.2"}}
 
@@ -62,7 +62,7 @@ and that the filter `displayName` will handle to logic and display the user's na
 
 So let's create another custom filter `displayName`.
 
-Create a new file under the filters folder named `displayName.ng.js` and place that code inside:
+Create a new file under the filters folder named `displayName.js` and place that code inside:
 
 {{> DiffBox tutorialName="angular-meteor" step="13.4"}}
 
@@ -72,12 +72,12 @@ AngularJS can also display the return value of a function in the HTML.
 
 To demonstrate let's add to each party in the parties list the creator's name:
 
-Add a line that displays the user information to the parties list in `parties-list.ng.html`,
+Add a line that displays the user information to the parties list in `parties-list.html`,
 so it will look like this:
 
 {{> DiffBox tutorialName="angular-meteor" step="13.5"}}
 
-and define the creator scope function in the partiesListCtrl in `partiesList.ng.js`:
+and define the creator scope function in the partiesListCtrl in `partiesList.js`:
 
 {{> DiffBox tutorialName="angular-meteor" step="13.6"}}
 

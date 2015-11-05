@@ -65,7 +65,7 @@ It is also possible to add your subscriptions in your routing.js, you can move t
 
      .state('parties', {
         url: '/parties',
-        templateUrl: 'client/parties/views/parties-list.ng.html',
+        templateUrl: 'client/parties/views/parties-list.html',
         controller: 'PartiesListCtrl',
         resolve: {
           'subscribe': [
@@ -92,13 +92,13 @@ Either that the owner parameter exists and it's the current logged in user (whic
 
 So now let's add the public flag to the parties and see how it affects the parties the client gets.
 
-Let's add a checkbox to the new party form in `parties-list.ng.html`:
+Let's add a checkbox to the new party form in `parties-list.html`:
 
 {{> DiffBox tutorialName="angular-meteor" step="9.4"}}
 
 Notice how easy it is to bind a checkbox to a model with Angular 1!
 
-Let's add the same to the `party-details.ng.html` page:
+Let's add the same to the `party-details.html` page:
 
 {{> DiffBox tutorialName="angular-meteor" step="9.5"}}
 
@@ -130,7 +130,7 @@ So here again we use the Mongo API to return all the users (find with an empty o
 The emails field holds all the user's email addresses, and the profile might hold more optional information like the user's name
 (in our case, if the user logged in with the Facebook login, the accounts-facebook package puts the user's name from Facebook automatically into that field).
 
-Now let's subscribe to that publish Method.  In the `client->parties->controllers->partyDetails.ng.js` file add the following line inside the controller.
+Now let's subscribe to that publish Method.  In the `client->parties->controllers->partyDetails.js` file add the following line inside the controller.
 If you just add to the end you will get an uncaught reference $scope not defined:
 
 {{> DiffBox tutorialName="angular-meteor" step="9.7"}}
@@ -147,7 +147,7 @@ This is because if we will get to this controller directly, the subscription in 
 
 Now let's add the list of users to the view to make sure it works.
 
-Add this ng-repeat list to the end of `party-details.ng.html`:
+Add this ng-repeat list to the end of `party-details.html`:
 
 {{> DiffBox tutorialName="angular-meteor" step="9.9"}}
 

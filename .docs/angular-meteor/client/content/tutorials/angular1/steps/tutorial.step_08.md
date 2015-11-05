@@ -16,8 +16,7 @@ By removing that package the default behaviour is changed to deny all.
 
 Execute this command in the command line:
 
-    meteor remove insecure
-
+    $ meteor remove insecure
 
 Now let's try to change the parties array or a specific party.  Nothing's working.
 
@@ -26,25 +25,19 @@ Now, we will have to write an explicit security rule for each operation we want 
 So first, let's add the 'accounts-password' Meteor package.
 It's a very powerful package for all the user operations you can think of: Login, signup, change password, password recovery, email confirmation and more.
 
-     meteor add accounts-password
+    $ meteor add accounts-password
 
-Now we will also add the 'accounts-ui' package.  This package contains all the HTML and CSS we need for the user operation forms.
+Now we will also add the 'accounts-ui-angular' package.  This package contains all the HTML and CSS we need for the user operation forms.
 
 Later on in this tutorial we will replace those default account-ui forms with custom Angular 1 forms.
 
-    meteor add accounts-ui
+    $ meteor add dotansimha:accounts-ui-angular
 
-Now let's add the accounts-ui template ( <code ng-non-bindable>&#123;&#123;> loginButtons &#125;&#125;</code> ) into our app, into index.html.
+Now let's add dependency to `account.ui` module in our module definition:
 
-To add Meteor's templates into Angular 1 templates, angular-meteor provides us with the [blaze-template](/api/blaze-template) directive.
+{{> DiffBox tutorialName="angular-meteor" step="8.4"}}
 
-To start using, we need to add the `urigo:angular-blaze-template` [package](https://github.com/Urigo/angular-blaze-template):
-
-    meteor add urigo:angular-blaze-template
-
-So instead of adding <code ng-non-bindable>&#123;&#123;> loginButtons &#125;&#125;</code> like in Meteor we will add:
-
-    <blaze-template name="loginButtons"></blaze-template>
+Now let's add the accounts-ui directive (loginButtons) into our app, into index.html.
 
 So the `index.html` will look like this:
 
@@ -106,7 +99,7 @@ Every application has a single root scope. All other scopes are descendant scope
 To access $rootScope inside a controller you add it through the dependency injection.
 To access $rootScope in a template you simply write $root. and then the name of the property.
 
-Change the code for the add button in `parties-list.ng.html` to this:
+Change the code for the add button in `parties-list.html` to this:
 
 {{> DiffBox tutorialName="angular-meteor" step="8.7"}}
 

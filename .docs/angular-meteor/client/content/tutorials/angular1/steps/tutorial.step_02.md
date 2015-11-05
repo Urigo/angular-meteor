@@ -36,9 +36,9 @@ Although the controller is not yet doing very much, it plays a crucial role. By 
 * The ngController directive, located on the `div` tag, references the name of our controller, `PartiesListCtrl` (located in the JavaScript file `app.js`).
 * The `PartiesListCtrl` controller attaches the party data to the `$scope` that was injected into our controller function. This controller scope is available to all bindings located within the `div ng-controller="PartiesListCtrl">` tag.
 
-# ng-annotate and .ng.js
+# ng-annotate
 
-As you can see, when we declared the controller, we used strings for [dependency annotations](https://docs.angularjs.org/guide/di#dependency-annotation) that avoids minification problems:
+As you may know, when using AngularJS dependency injection, we used strings for [dependency annotations](https://docs.angularjs.org/guide/di#dependency-annotation) that avoids minification problems:
 
     angular.module('socially').controller('PartiesListCtrl', ['$scope',
       function($scope){
@@ -47,13 +47,7 @@ As you can see, when we declared the controller, we used strings for [dependency
 
 There is a very popular Angular 1 tool that's called [ng-annotate](https://github.com/olov/ng-annotate) that takes care of that for us so we can write regular code that won't get mangled in minification.
 
-angular-meteor uses that process automatically. All you need to do is to change your `.js` files to end with `.ng.js`
-
-So let's change `app.js` to `app.ng.js` and change the usage in our controller:
-
-{{> DiffBox tutorialName="angular-meteor" step="2.4"}}
-
-And from now on, each Angular 1 file we will create will use the `ng.js` extension!
+angular-meteor uses that process automatically so you do not need to add those extra definitions and just write your app without minification issues!
 
 # Summary
 
