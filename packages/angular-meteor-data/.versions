@@ -1,5 +1,4 @@
-angular@1.2.0-rc.1
-angular-meteor-data@0.0.1
+angular-meteor-data@0.0.2
 angular:angular@1.4.7
 angular:angular-mocks@1.4.7
 babel-compiler@5.8.24_1
@@ -31,7 +30,7 @@ id-map@1.0.4
 jquery@1.11.4
 lai:collection-extensions@0.1.4
 less@2.5.1
-local-test:angular-meteor-data@0.0.1
+local-test:angular-meteor-data@0.0.2
 logging@1.0.8
 mdg:camera@1.1.5
 meteor@1.1.10
