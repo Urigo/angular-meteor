@@ -10,7 +10,7 @@ To implement the party details view we will use [$meteor.object](/api/meteorObje
 
 We'll expand the `PartyDetailsCtrl` by using the [$meteor.object](/api/meteorObject) service (add it with Angular 1's dependency injection) to bind the specific party:
 
-{{> DiffBox tutorialName="angular-meteor" step="6.1"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="6.1"}}
 
 We are sending $meteor.object a Mongo collection and the Id of the object we want to bind to.
 
@@ -30,7 +30,7 @@ as directed by the sort and skip options, exactly like Meteor's [collection.find
 
 In `party-details.ng.html` let's replace the binding to the `partyId` with a binding to `party.name` and `party.description`:
 
-{{> DiffBox tutorialName="angular-meteor" step="6.2"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="6.2"}}
 
 Now, when you run the app, navigate into a party's page, and change the inputs, the server and all the clients update immediately.
 No save buttons, no round trips, it just works.
@@ -41,17 +41,17 @@ In case you don't want to use the live editing that angular-meteor provides and 
 
 First, let's change our template:
 
-{{> DiffBox tutorialName="angular-meteor" step="6.3"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="6.3"}}
 
 Now let's move to the controller.
 
 First, in the call to `$meteor.object` set the 3rd parameter to `false` so it won't auto-save the object on every change:
 
-{{> DiffBox tutorialName="angular-meteor" step="6.4"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="6.4"}}
 
 Now let's add the functions that handle the button clicks:
 
-{{> DiffBox tutorialName="angular-meteor" step="6.5"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="6.5"}}
 
 As you can see, $meteor.object returns an object from type [AngularMeteorObject](/api/meteorObject) which contains 2 functions - `save` and `reset`.
 
@@ -60,7 +60,7 @@ As you can see, $meteor.object returns an object from type [AngularMeteorObject]
 
 Your controller should look like this:
 
-{{> DiffBox tutorialName="angular-meteor" step="6.6"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="6.6"}}
 
 That's it!
 

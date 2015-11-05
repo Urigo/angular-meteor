@@ -31,7 +31,7 @@ Let's create a new file named `parties.js` inside the server folder.
 
 Inside the file insert this code:
 
-{{> DiffBox tutorialName="angular-meteor" step="9.2"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="9.2"}}
 
 Let's see what's happening here:
 
@@ -53,7 +53,7 @@ here just for syntactic sugar doesn't return a promise.
 
 Right now we don't need the promise, so let's use the second way:
 
-{{> DiffBox tutorialName="angular-meteor" step="9.3"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="9.3"}}
 
 It is the same as:
 
@@ -94,13 +94,13 @@ So now let's add the public flag to the parties and see how it affects the parti
 
 Let's add a checkbox to the new party form in `parties-list.ng.html`:
 
-{{> DiffBox tutorialName="angular-meteor" step="9.4"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="9.4"}}
 
 Notice how easy it is to bind a checkbox to a model with Angular 1!
 
 Let's add the same to the `party-details.ng.html` page:
 
-{{> DiffBox tutorialName="angular-meteor" step="9.5"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="9.5"}}
 
 Now let's run the app.
 
@@ -121,7 +121,7 @@ So let's start with defining our publish function.
 
 Create a new file under the `server` folder named `users.js` and place the following code in:
 
-{{> DiffBox tutorialName="angular-meteor" step="9.6"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="9.6"}}
 
 So here again we use the Mongo API to return all the users (find with an empty object) but we select to return only the emails and profile fields.
 
@@ -133,7 +133,7 @@ The emails field holds all the user's email addresses, and the profile might hol
 Now let's subscribe to that publish Method.  In the `client->parties->controllers->partyDetails.js` file add the following line inside the controller.
 If you just add to the end you will get an uncaught reference $scope not defined:
 
-{{> DiffBox tutorialName="angular-meteor" step="9.7"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="9.7"}}
 
 * We bind to the Meteor.users collection
 * Binding the result to $scope.users
@@ -143,13 +143,13 @@ If you just add to the end you will get an uncaught reference $scope not defined
 Also, let's add a subscription to the party in this controller as well.
 This is because if we will get to this controller directly, the subscription in the other controller won't be called and we will have no data at all.
 
-{{> DiffBox tutorialName="angular-meteor" step="9.8"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="9.8"}}
 
 Now let's add the list of users to the view to make sure it works.
 
 Add this ng-repeat list to the end of `party-details.ng.html`:
 
-{{> DiffBox tutorialName="angular-meteor" step="9.9"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="9.9"}}
 
 Run the app and see the list of all the users' emails that created a login and password and did not use a service to login.
 

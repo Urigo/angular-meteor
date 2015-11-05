@@ -5,7 +5,7 @@ Let's create a purely static HTML page and then examine how we can turn this HTM
 
 Add this template HTML to `index.ng.html`:
 
-{{> DiffBox tutorialName="angular-meteor" step="1.1"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="1.1"}}
 
 Next we'll dynamically generate the same list using Angular 1.
 

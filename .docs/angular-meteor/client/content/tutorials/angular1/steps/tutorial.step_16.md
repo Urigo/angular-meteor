@@ -12,23 +12,23 @@ First, let's add the angular-google-maps Meteor package:
 
 Then let's define the module dependency in our app. go to `app.js` inside the `client->lib` folder:
 
-{{> DiffBox tutorialName="angular-meteor" step="16.1"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="16.1"}}
 
 Now let's add a map the `party-details.ng.html` , first add this HTML snippet to the end of the template:
 
-{{> DiffBox tutorialName="angular-meteor" step="16.2"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="16.2"}}
 
 Here we created the google-map directive with attributes for binding the center, handling events and zoom of the map.
 So let's define those variables in our scope. Go to `partyDetails.js`.
 
 Inside we will create the $scope.map variable to hold the properties on the map:
 
-{{> DiffBox tutorialName="angular-meteor" step="16.3"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="16.3"}}
 
 To display a Google Map widget we have to define it's height and width. Let's do that now.
 Create a new file named parties.css inside a new folder called `styles` placed like this `client->parties->styles` and place to following CSS code inside:
 
-{{> DiffBox tutorialName="angular-meteor" step="16.4"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="16.4"}}
 
 Now run the app and go to the party details page. You should see a new Google Map widget, but it doesn't do anything yet.
 
@@ -36,7 +36,7 @@ Let's add a marker that will be bound to the party's location.
 
 Inside `party-details.ng.html`:
 
-{{> DiffBox tutorialName="angular-meteor" step="16.5"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="16.5"}}
 
 The ui-gmap-marker directive represents a marker inside the map. We use the following attributes:
 
@@ -49,7 +49,7 @@ Let's extend our $scope.map variable to include handling those options:
 
 Inside `partyDetails.js`:
 
-{{> DiffBox tutorialName="angular-meteor" step="16.6"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="16.6"}}
 
 What happened here:
 
@@ -69,7 +69,7 @@ Now let's add a map to the parties list to show all the parties on the map.
 
 So let's add the directives to `parties-list.ng.html`:
 
-{{> DiffBox tutorialName="angular-meteor" step="16.7"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="16.7"}}
 
 Add it under the search and sorting div.
 
@@ -85,7 +85,7 @@ The attributes we use:
 
 Now, inside `partiesList.js` let's add the following code to the parties subscription promise return:
 
-{{> DiffBox tutorialName="angular-meteor" step="16.8"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="16.8"}}
 
 * Adding to each party a function that handles a click event with the party's specific information
 * Initializing the map object
