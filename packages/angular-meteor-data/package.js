@@ -1,54 +1,29 @@
 Package.describe({
-  name: "angular",
+  name: "angular-meteor-data",
   summary: "Everything you need to use AngularJS in your Meteor app",
-  version: "1.0.4",
-  git: "https://github.com/Urigo/angular-meteor.git"
+  version: "0.0.1",
+  git: "https://github.com/Urigo/angular-meteor.git",
+  documentation: null
 });
 
-Package.registerBuildPlugin({
-  name: "compileAngularTemplates",
-  sources: [
-    "plugin/handler.js"
-  ],
-  use: ['html-tools@1.0.4'],
-  npmDependencies : {
-    'html-minifier' : '0.6.9'
-  }
-});
-
-Package.registerBuildPlugin({
-  name: 'ngAnnotate',
-  sources: [
-    'plugin/annotate.js'
-  ],
-  npmDependencies: {
-    'ng-annotate': '0.15.4'
-  }
-});
-
-Package.on_use(function (api) {
-  api.versionsFrom('METEOR@0.9.0.1');
+Package.onUse(function (api) {
+  api.versionsFrom('METEOR@1.2.0.1');
+  api.use('underscore@1.0.4');
+  api.use('tracker@1.0.8');
+  api.use('session@1.1.1');
+  api.use('mongo@1.1.1');
+  api.use('ejson@1.0.7');
+  api.use('check@1.0.6');
+  api.use('minimongo@1.0.9');
+  api.use('observe-sequence@1.0.7');
 
   api.use('angular:angular@1.4.7', 'client');
-  api.use('check', 'client');
-  api.use('minimongo');
-  // Since commit b3096e93661bc79bab73a63bae0e14643030a9a3, MongoId and
-  // diff-sequence are separate packages from minimongo.
-  // We need to use it for idParse, idStringify and diffQueryOrderedChanges
-  // in lib/diff-array.js
-  if (Package['diff-sequence']) {
-    api.use('diff-sequence');
-  }
-  if (Package['mongo-id']) {
-    api.use('mongo-id');
-  }
-  api.use('dburles:mongo-collection-instances@0.3.4', 'client'); // For getCollectionByName
 
-  api.use('ejson');
-  api.use('tracker@1.0.7');
-  api.use('underscore');
-  api.use('session');
-  api.use('mongo@1.1.0');
+  api.use('diff-sequence');
+  api.use('mongo-id');
+
+  api.use('dburles:mongo-collection-instances@0.3.4', 'client'); // For getCollectionByName
+  api.use('isobuild:compiler-plugin@1.0.0'); // Used for compilers
 
   // Files to load in Client only.
   api.add_files([
@@ -72,15 +47,14 @@ Package.on_use(function (api) {
 });
 
 Package.onTest(function(api) {
-  api.use('sanjo:jasmine@0.13.6');
-  api.use('angular');
-  api.use('angular:angular-mocks@1.4.4');
+  api.use('underscore@1.0.4');
+  api.use('tracker@1.0.8');
+  api.use('session@1.1.1');
+  api.use('mongo@1.1.1');
+  api.use('sanjo:jasmine@0.19.0');
+  api.use('angular:angular-mocks@1.4.7');
   api.use('mdg:camera@1.1.5');
-
-  api.use('underscore');
-  api.use('session');
-  api.use('mongo');
-  api.use('tracker');
+  api.use('angular-meteor-data');
 
   // auxiliary
   api.addFiles([

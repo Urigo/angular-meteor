@@ -4,6 +4,7 @@ var module = angular.module('diffArray', ['getUpdates']);
 
 module.factory('diffArray', ['getUpdates',
   function(getUpdates) {
+    var LocalCollection = Package['minimongo'].LocalCollection;
     var idStringify = LocalCollection._idStringify || Package['mongo-id'].MongoID.idStringify;
     var idParse = LocalCollection._idParse || Package['mongo-id'].MongoID.idParse;
 

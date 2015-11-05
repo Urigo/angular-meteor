@@ -3,8 +3,9 @@ customMatchers = {
     return {
       compare : function(actual, expected) {
         var result = {};
+        var actualArray = _.toArray(actual);
         var expectedArray = expected.find({}).fetch();
-        result.pass = util.equals(actual, expectedArray, customEqualityTesters);
+        result.pass = util.equals(actualArray, expectedArray, customEqualityTesters);
         return result;
       }
     };

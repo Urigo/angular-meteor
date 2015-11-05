@@ -8,13 +8,11 @@
 ehthumbs.db
 Thumbs.db
 .build*
+.npm
+node_modules
 
 # IDE's #
 #########
 .idea
 
-.meteor/local/bower
 .coverage
-node_modules
-bower_components
-.npm
