@@ -107,17 +107,9 @@ module.factory('diffArray', ['getUpdates',
         var newItem = seqArray[pos] || {};
         var oldItem = lastSeqArray[posOld[idString]];
         var updates = getUpdates(oldItem, newItem, preventNestedDiff);
-        var setDiff = updates.$set;
-        var unsetDiff = updates.$unset;
 
-        if (setDiff)
-          setDiff._id = newItem._id;
-
-        if (unsetDiff)
-          unsetDiff._id = newItem._id;
-
-        if (setDiff || unsetDiff)
-          callbacks.changedAt(id, setDiff, unsetDiff, pos, oldItem);
+        if (updates)
+          callbacks.changedAt(id, updates, pos, oldItem);
       });
     }
 
