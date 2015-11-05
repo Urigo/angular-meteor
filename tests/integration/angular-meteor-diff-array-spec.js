@@ -38,8 +38,10 @@ describe('diffArray module', function() {
 
       expect(changedAtSpy).toHaveBeenCalledWith(
         'b',
-        {_id: "b", "second.nestedInSecond": "a", "third": "hello"},
-        {_id: "b", "second.firstNested": true, willBeRemoved: true},
+        {
+          $set: {"second.nestedInSecond": "a", "third": "hello"},
+          $unset: {"second.firstNested": true, willBeRemoved: true}
+        },
         1,
         jasmine.any(Object));
     });
@@ -63,8 +65,10 @@ describe('diffArray module', function() {
 
       expect(changedAtSpy).toHaveBeenCalledWith(
         'b',
-        {_id: "b", "third": "hello"},
-        {_id: "b", willBeRemoved: true},
+        {
+          $set: {"third": "hello"},
+          $unset: {willBeRemoved: true}
+        },
         1,
         jasmine.any(Object));
     });
@@ -89,8 +93,10 @@ describe('diffArray module', function() {
       expect(addedAtSpy).toHaveBeenCalledWith(addedDoc._id, addedDoc, 2, jasmine.any(Object));
       expect(changedAtSpy).toHaveBeenCalledWith(
         'b',
-        {_id: "b", "second.nestedInSecond": "a", "third": "hello"},
-        {_id: "b", "second.firstNested": true, willBeRemoved: true},
+        {
+          $set: {"second.nestedInSecond": "a", "third": "hello"},
+          $unset: {"second.firstNested": true, willBeRemoved: true}
+        },
         1,
         jasmine.any(Object));
     });
@@ -100,7 +106,7 @@ describe('diffArray module', function() {
       var newCollection = [{_id: "a", simple: 2, nested: {}}];
       diffArray(oldCollection, newCollection, {changedAt: changedAtSpy});
       expect(changedAtSpy).toHaveBeenCalledWith(
-        'a', {_id: "a", simple: 2, nested: {}}, undefined, 0, _.clone(oldCollection[0]));
+        'a', {$set: {simple: 2, nested: {}}}, 0, _.clone(oldCollection[0]));
     });
 
     it('should detect transition from empty nested object to null', function() {
@@ -108,7 +114,7 @@ describe('diffArray module', function() {
       var newCollection = [{_id: "a", simple: 2, nested: null}];
       diffArray(oldCollection, newCollection, {changedAt: changedAtSpy});
       expect(changedAtSpy).toHaveBeenCalledWith(
-        'a', {_id: "a", simple: 2, nested: null}, undefined, 0, _.clone(oldCollection[0]));
+        'a', {$set: {simple: 2, nested: null}}, 0, _.clone(oldCollection[0]));
     });
 
     it('should detect transition from non-null to empty nested object', function() {
@@ -116,7 +122,7 @@ describe('diffArray module', function() {
       var newCollection = [{_id: "a", simple: 2, nested: {}}];
       diffArray(oldCollection, newCollection, {changedAt: changedAtSpy});
       expect(changedAtSpy).toHaveBeenCalledWith(
-        'a', {_id: "a", simple: 2, nested: {}}, undefined, 0, _.clone(oldCollection[0]));
+        'a', {$set: {simple: 2, nested: {}}}, 0, _.clone(oldCollection[0]));
     });
 
     it('should detect transition from empty nested object to non-null', function() {
@@ -124,7 +130,7 @@ describe('diffArray module', function() {
       var newCollection = [{_id: "a", simple: 2, nested: 1}];
       diffArray(oldCollection, newCollection, {changedAt: changedAtSpy}, true);
       expect(changedAtSpy).toHaveBeenCalledWith(
-        'a', {_id: "a", simple: 2, nested: 1}, undefined, 0, _.clone(oldCollection[0]));
+        'a', {$set: {simple: 2, nested: 1}}, 0, _.clone(oldCollection[0]));
     });
 
     it('should detect transition from null to empty array', function() {
@@ -132,7 +138,7 @@ describe('diffArray module', function() {
       var newCollection = [{_id: "a", simple: 2, nested: []}];
       diffArray(oldCollection, newCollection, {changedAt: changedAtSpy});
       expect(changedAtSpy).toHaveBeenCalledWith(
-        'a', {_id: "a", simple: 2, nested: []}, undefined, 0, _.clone(oldCollection[0]));
+        'a', {$set: {simple: 2, nested: []}}, 0, _.clone(oldCollection[0]));
     });
 
     it('should detect transition from empty array to null', function() {
@@ -140,7 +146,7 @@ describe('diffArray module', function() {
       var newCollection = [{_id: "a", simple: 2, nested: null}];
       diffArray(oldCollection, newCollection, {changedAt: changedAtSpy});
       expect(changedAtSpy).toHaveBeenCalledWith(
-        'a', {_id: "a", simple: 2, nested: null}, undefined, 0, _.clone(oldCollection[0]));
+        'a', {$set: {simple: 2, nested: null}}, 0, _.clone(oldCollection[0]));
     });
 
     it('should detect transition from non-null to empty array', function() {
@@ -148,7 +154,7 @@ describe('diffArray module', function() {
       var newCollection = [{_id: "a", simple: 2, nested: []}];
       diffArray(oldCollection, newCollection, {changedAt: changedAtSpy});
       expect(changedAtSpy).toHaveBeenCalledWith(
-        'a', {_id: "a", simple: 2, nested: []}, undefined, 0, _.clone(oldCollection[0]));
+        'a', {$set: {simple: 2, nested: []}}, 0, _.clone(oldCollection[0]));
     });
 
     it('should detect transition from empty array to non-null', function() {
@@ -156,7 +162,7 @@ describe('diffArray module', function() {
       var newCollection = [{_id: "a", simple: 2, nested: 1}];
       diffArray(oldCollection, newCollection, {changedAt: changedAtSpy});
       expect(changedAtSpy).toHaveBeenCalledWith(
-        'a', {_id: "a", simple: 2, nested: 1}, undefined, 0, _.clone(oldCollection[0]));
+        'a', {$set: {simple: 2, nested: 1}}, 0, _.clone(oldCollection[0]));
     });
 
     describe('when comparing two arrays with two different dates', function() {
@@ -172,8 +178,7 @@ describe('diffArray module', function() {
 
         expect(changedAtSpy).toHaveBeenCalledWith(
           'a',
-          {_id: "a", date: new Date(2222, 2, 2)},
-          undefined,
+          {$set: {date: new Date(2222, 2, 2)}},
           0,
           jasmine.any(Object));
       });
@@ -204,8 +209,7 @@ describe('diffArray module', function() {
 
         expect(changedAtSpy).toHaveBeenCalledWith(
           'b',
-          {checked: false, _id: "b"},
-          undefined,
+          {$set: {checked: false}},
           1,
           jasmine.any(Object));
       });

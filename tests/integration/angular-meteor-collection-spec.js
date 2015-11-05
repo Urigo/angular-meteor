@@ -270,6 +270,19 @@ describe('$meteorCollection service', function() {
       $rootScope.$apply();
       expect(meteorArray).toEqualCollection(MyCollection);
     });
+
+    it('should update the collection when a subarray is spliced', function() {
+      var obj = meteorArray[0];
+      var expectedObj = _.clone(obj);
+      obj.arr = [1, 2, 3];
+      expectedObj.arr = [1, 3];
+      $rootScope.$apply();
+
+      obj.arr.splice(1, 1);
+      $rootScope.$apply();
+
+      expect(obj).toDeepEqual(expectedObj);
+    });
   });
 
   describe('remove()', function() {
