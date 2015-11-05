@@ -137,7 +137,7 @@ Now let's add description to our images!
 ### Images Metadata & Description
 
 Using CollectionFS, we can also save metadata on the files we store.
-In order to to that, we just need to update the `metadata` property of the image object.
+In order to do that, we just need to update the `metadata` property of the image object.
 
 In order to do that with really nice and user-friendly ui, I used [angular-xeditable](https://github.com/vitalets/angular-xeditable).
 Lets add the angular-xeditable package to our project:
