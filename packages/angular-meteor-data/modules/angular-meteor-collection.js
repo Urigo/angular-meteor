@@ -301,24 +301,10 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
         this.remove(removeDocs);
       }
 
-      // Collects set and unset changes.
-      var setDocs = [], unsetDocs = [];
-      for (var itemInd = 0; itemInd < changes.changed.length; itemInd++) {
-        var change = changes.changed[itemInd];
-        if (change.setDiff) {
-          setDocs.push(change.setDiff);
-        }
-        if (change.unsetDiff) {
-          unsetDocs.push(change.unsetDiff);
-        }
-      }
-      // Then saves all changes in bulk.
-      if (setDocs.length) {
-        this.save(setDocs);
-      }
-      if (unsetDocs.length) {
-        this.save(unsetDocs, true);
-      }
+      // Updates all changed documents
+      changes.changed.forEach(function(update) {
+        this.$$collection.update(update.selector, update.modifier);
+      }, this);
     };
 
     return AngularMeteorCollection;
@@ -401,8 +387,8 @@ var collectionUtils = {
         changes.removed.push({item: item, index: index});
       },
 
-      changedAt: function(id, setDiff, unsetDiff, index, oldItem) {
-        changes.changed.push({setDiff: setDiff, unsetDiff: unsetDiff});
+      changedAt: function(id, updates, index, oldItem) {
+        changes.changed.push({selector: id, modifier: updates});
       },
 
       movedTo: function(id, item, fromIndex, toIndex) {
