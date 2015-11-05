@@ -81,7 +81,7 @@ Create the route's view; for now we will just use a placeholder that we will imp
 
 We need to tell our `package.js` to use the files that we created above. 
 - JS file will are declared using `api.addFiles` 
-- AngularJS template files (`.ng.html`) are declared using `api.addAssets`.
+- AngularJS template files (`.html`) are declared using `api.addAssets`.
 
 We also need to add the platform declaration, using the last argument of these functions.
 
@@ -93,7 +93,7 @@ The original route from the root project is no longer needed and can be removed:
 
 {{> DiffBox tutorialName="angular-meteor" step="21.9"}}
 
-Last, we want to load the `socially.mobile` module only in Cordova environment. We can update `app.ng.js` to load the module only when running inside Cordova (`Meteor.isCordova`):
+Last, we want to load the `socially.mobile` module only in Cordova environment. We can update `app.js` to load the module only when running inside Cordova (`Meteor.isCordova`):
 
 {{> DiffBox tutorialName="angular-meteor" step="21.10"}}
 
@@ -137,15 +137,15 @@ Add the browser package to our project:
 ### Angular Web Code  (reuse existing)
 
 We will use the existing code for our web login. That means 2 things: 
-- Copying the original login view file from `client/users/views/login.ng.html` to our package view (`login-browser.ng.html`):
+- Copying the original login view file from `client/users/views/login.html` to our package view (`login-browser.html`):
 
 {{> DiffBox tutorialName="angular-meteor" step="21.17"}}
 
-- Moving the current `LoginCtrl` from `client/users/controllers/login.ng.js` to our package, and update the module's name for this controller:
+- Moving the current `LoginCtrl` from `client/users/controllers/login.js` to our package, and update the module's name for this controller:
 
 {{> DiffBox tutorialName="angular-meteor" step="21.18"}}
 
-> We can also delete `client/users/views/login.ng.html` file. It is no longer needed!
+> We can also delete `client/users/views/login.html` file. It is no longer needed!
 
 We will load the `LoginCtrl` to our package definition:
 

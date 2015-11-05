@@ -41,6 +41,14 @@ and look at the amazing app that's running on your computer!
 
 We now have a fully functional app which includes both a server and a client!
 
+Because we decided to work with AngularJS in the client side, we need to remove the default UI package of Meteor, called Blaze.
+
+We also need to remove a package named `ecmascript` because Angular-Meteor uses a package named `angular-babel` in order to get both ECMAScript6 and AngularJS DI annotations.
+
+So let's remove it by running:
+    $ meteor remove blaze-html-templates
+    $ meteor remove ecmascript
+
 The default Meteor app starts life with three files, one `js`, one `html` and one `css` file. Each named with the application name you used in the `create` command above. In our case this is `socially`.
 
 We are going to add our own files for this tutorial. So let's start by deleting the following files:
@@ -53,7 +61,7 @@ Now we can start building our app.
 
 Create a new `index.html` file and place this code inside. Then run the app again.
 
-{{> DiffBox tutorialName="angular-meteor" step="0.3"}}
+{{> DiffBox tutorialName="angular-meteor" step="0.4"}}
 
 Note that there is no `<html>` tag and no `<head>` tag - it's very simple.
 
@@ -85,25 +93,23 @@ That's it! Now we can use Angular 1's power in our Meteor app.
 
 ## HTML
 
-To start simple, create a new file called `index.ng.html` under the main folder, this will be our main `HTML` template page.
-
-> We are using the `.ng.html` file extension so that Blaze - Meteor's templating system - won't compile and override our Angular 1 expressions.
+To start simple, create a new file called `main.html` under the main folder, this will be our main `HTML` template page.
 
 Then move the `p` tag into it:
 
-{{> DiffBox tutorialName="angular-meteor" step="0.5"}}
+{{> DiffBox tutorialName="angular-meteor" step="0.6"}}
 
 Now let's include that file into our main `index.html` file:
 
-{{> DiffBox tutorialName="angular-meteor" step="0.6"}}
+{{> DiffBox tutorialName="angular-meteor" step="0.7"}}
 
 But if you load this in your browser, **you won't see anything**. That's because we still need to **create the actual Angular app**, which we'll do next.
 
-> It's very important to note - the **paths are always absolute, not relative!**  so if `index.ng.html` was inside a folder named `client`, you would have to place the whole path from the route app, doesn't matter where you're calling the file from.
+> It's very important to note - the **paths are always absolute, not relative!**  so if `main.html` was inside a folder named `client`, you would have to place the whole path from the route app, doesn't matter where you're calling the file from.
 
-E.g. if `index.ng.html` was in a folder named `client` your include would look like:
+E.g. if `main.html` was in a folder named `client` your include would look like:
 
-    <div ng-include="'client/index.ng.html'"></div>
+    <div ng-include="'client/main.html'"></div>
 
 # Building The Angular 1 App
 
@@ -118,23 +124,23 @@ But we need Angular 1's power only in the client side, so how can we do that?
 
 There are a few ways to tell Meteor to run code only on the client/server/phone side, let's start with the simplest way - [Meteor.isClient](http://docs.meteor.com/#/full/meteor_isclient) variable.
 
-{{> DiffBox tutorialName="angular-meteor" step="0.7"}}
+{{> DiffBox tutorialName="angular-meteor" step="0.8"}}
 
 Now everything inside this `if` statement will only run on the client side.
 
 Let's continue defining our Angular 1 application module. Give it the name `socially` and add `angular-meteor` module as a dependency:
 
-{{> DiffBox tutorialName="angular-meteor" step="0.8"}}
+{{> DiffBox tutorialName="angular-meteor" step="0.9"}}
 
 And use the same application name in the `ng-app` directive in `index.html`:
 
-{{> DiffBox tutorialName="angular-meteor" step="0.9"}}
+{{> DiffBox tutorialName="angular-meteor" step="0.10"}}
 
 Now run the app.
 
-Everything is the same, so now inside our `index.ng.html` let's use Angular 1:
+Everything is the same, so now inside our `main.html` let's use Angular 1:
 
-{{> DiffBox tutorialName="angular-meteor" step="0.10"}}
+{{> DiffBox tutorialName="angular-meteor" step="0.11"}}
 
 Run the app again and the screen should look like this:
 
@@ -143,7 +149,7 @@ Run the app again and the screen should look like this:
 Angular 1 interpreted the expression like any other Angular 1 application.
 
 # Experiments
-Try adding a new expression to the index.ng.html that will do some math:
+Try adding a new expression to the `main.html` that will do some math:
 
     <p>1 + 2 = {{dstache}} 1 + 2 }}</p>
 

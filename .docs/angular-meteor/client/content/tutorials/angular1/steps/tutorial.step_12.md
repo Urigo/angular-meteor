@@ -82,7 +82,7 @@ Add it as a dependency to our Angular app in `app.js`:
 
 {{> DiffBox tutorialName="angular-meteor" step="12.7"}}
 
-Now let's add the directive in `parties-list.ng.html`, change the ng-repeat of parties to this:
+Now let's add the directive in `parties-list.html`, change the ng-repeat of parties to this:
 
 {{> DiffBox tutorialName="angular-meteor" step="12.8"}}
 
@@ -132,7 +132,7 @@ Let's save that in the `client/controllers/partiesList.js` file when the subscri
 
 {{> DiffBox tutorialName="angular-meteor" step="12.13"}}
 
-Now the partiesCount will hold the number of parties and will send it to the directive in `parties-list.ng.html` (which we've already defined earlier).
+Now the partiesCount will hold the number of parties and will send it to the directive in `parties-list.html` (which we've already defined earlier).
 
 But there is a problem: Try to create a few parties and then change pages...  the subscription won't run again!
 

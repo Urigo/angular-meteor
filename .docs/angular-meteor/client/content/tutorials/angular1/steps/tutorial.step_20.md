@@ -157,7 +157,7 @@ And, of course, implement `updateDescription` function on the parties list scope
 {{> DiffBox tutorialName="angular-meteor" step="20.24"}}
 
 Due to problem with open issue in [angular-xeditable](https://github.com/vitalets/angular-xeditable/issues/6) 
-We need to change the form on `add-new-party-modal.ng.html` into div to make the inline editing of `angular-xeditable` work.
+We need to change the form on `add-new-party-modal.html` into div to make the inline editing of `angular-xeditable` work.
 
 {{> DiffBox tutorialName="angular-meteor" step="20.25"}}
 

@@ -25,13 +25,13 @@ We will also add the nested view called `main` that will contain the actual page
 
 {{> DiffBox tutorialName="angular-meteor" step="22.2"}}
 
-Now our next step is to update the `route.ng.js` file of the `socially-browser` package.
+Now our next step is to update the `routes.js` file of the `socially-browser` package.
 
 We will add the main view as abstract view in order to set it as the base template, and we will create a view for the parties list.
 
 {{> DiffBox tutorialName="angular-meteor" step="22.3"}}
 
-And now let's update the `routes.ng.js` file of the root project, and use the base template we just create for the browser:
+And now let's update the `routes.js` file of the root project, and use the base template we just create for the browser:
 
 {{> DiffBox tutorialName="angular-meteor" step="22.4"}}
 
@@ -73,7 +73,7 @@ And just like any other new files, we need to add it in the `package.js` of our 
 
 {{> DiffBox tutorialName="angular-meteor" step="22.14"}}
 
-And of course, we need to add the routes to the `routes.ng.js` of the `socially-mobile` package.
+And of course, we need to add the routes to the `routes.js` of the `socially-mobile` package.
 
 We will add the basic view (`socially` abstract state) and add other states that extends it's view.
 
