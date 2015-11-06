@@ -108,7 +108,7 @@ module.factory('diffArray', ['getUpdates',
         var oldItem = lastSeqArray[posOld[idString]];
         var updates = getUpdates(oldItem, newItem, preventNestedDiff);
 
-        if (updates)
+        if (!_.isEmpty(updates))
           callbacks.changedAt(id, updates, pos, oldItem);
       });
     }
