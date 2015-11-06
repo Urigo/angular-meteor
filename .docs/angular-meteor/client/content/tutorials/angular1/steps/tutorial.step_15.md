@@ -13,7 +13,7 @@ If the user is not logged in, we want to display a message saying they need to l
 
 In `parties-list.html` add a ng-show directive to the form like that:
 
-{{> DiffBox tutorialName="angular-meteor" step="15.1"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="15.1"}}
 
 Note that `$root.currentUser` is the $rootScope variable that we use that is bound to the current logged-in user.
 
@@ -21,22 +21,22 @@ If it is undefined, this means that there is no logged-in user.  So only if '$ro
 
 Then right after the form, add this HTML:
 
-{{> DiffBox tutorialName="angular-meteor" step="15.2"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="15.2"}}
 
 That is exactly the opposite - if `$root.currentUser` exists or we're in the processing of logging in, hide that div. Note that this statement is equivalent to `ng-show="!$root.currentUser && !$root.loggingIn"`.
 
 Now add the same to the RSVP buttons:
 
-{{> DiffBox tutorialName="angular-meteor" step="15.3"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="15.3"}}
 
 Add let's add this the the end of the RSVP buttons:
 
-{{> DiffBox tutorialName="angular-meteor" step="15.4"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="15.4"}}
 
 Next thing we want to hide is the 'delete party' option, in case the logged-in user is not the party's owner.
 Lets add ng-show to the delete button like that:
 
-{{> DiffBox tutorialName="angular-meteor" step="15.5"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="15.5"}}
 
 In here you can see that `ng-show` can get a statement, in our case - the user exists (logged in) and is also the party's owner.
 
@@ -48,7 +48,7 @@ is that `ng-show` hides the element by changing the display css property and `ng
 
 So let's use `ng-if` to hide the outstanding invitations from a party, if the party is public (everyone is invited!):
 
-{{> DiffBox tutorialName="angular-meteor" step="15.6"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="15.6"}}
 
 # Assigning a function
 
@@ -58,11 +58,11 @@ To do that we will create a scope function that returns a boolean and associate 
 
 Create a new function inside partyDetailsCtrl inside the `partyDetails.js` file named `canInvite`:
 
-{{> DiffBox tutorialName="angular-meteor" step="15.7"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="15.7"}}
 
 and add the `ng-show` to the `ul` in `party-details.html`, and lets add a `li` that tells the user that everyone is already invited, if that is the case:
 
-{{> DiffBox tutorialName="angular-meteor" step="15.8"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="15.8"}}
 
 Here, we are taking the result of the uninvited users and checking for its length.
 
@@ -70,7 +70,7 @@ Here, we are taking the result of the uninvited users and checking for its lengt
 
 Now lets disable the partyDetails input fields in case the user doesn't have permission to change them (currently, the server is stopping the user, but there is no visual feedback aside from the server overriding the local edit immediately after):
 
-{{> DiffBox tutorialName="angular-meteor" step="15.9"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="15.9"}}
 
 # Summary
 

@@ -7,7 +7,7 @@ In this chapter you will add the ability to insert a new party and delete an exi
 
 First, let's create a simple form with a button that will add a new party, we will add it above the list, inside the "PartiesListCtrl" controller's div.
 
-{{> DiffBox tutorialName="angular-meteor" step="4.1"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="4.1"}}
 
 Now we need to make this form functional.
 
@@ -19,7 +19,7 @@ To do that we'll use the simple and powerful [ng-model](https://docs.angularjs.o
 
 Add `ng-model` to the form like this:
 
-{{> DiffBox tutorialName="angular-meteor" step="4.2"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="4.2"}}
 
 Now each time the user types inside these inputs, the value of the newParty scope variable will be automatically updated.  Conversely, if `$scope.newParty` is changed outside of the HTML, the input values will be updated accordingly.
 
@@ -27,7 +27,7 @@ Now each time the user types inside these inputs, the value of the newParty scop
 
 Now let's bind a click event to the add button with Angular 1's [ng-click](https://docs.angularjs.org/api/ng/directive/ngClick) directive.
 
-{{> DiffBox tutorialName="angular-meteor" step="4.3"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="4.3"}}
 
 `ng-click` binds the click event to an expression.
 So we take the parties scope array (when accessing scope variables in the HTML, there is no need to add $scope. before them) and push the newParty variable into it.
@@ -39,7 +39,7 @@ Now, let's add the ability to delete parties.
 
 Let's add an X button to each party:
 
-{{> DiffBox tutorialName="angular-meteor" step="4.4"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="4.4"}}
 
 This time we are binding ng-click to a scope function that gets the current party as a parameter.
 
@@ -47,7 +47,7 @@ Let's go into the controller and add that function.
 
 Add the function inside the PartiesListCtrl in `app.js`:
 
-{{> DiffBox tutorialName="angular-meteor" step="4.5"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="4.5"}}
 
 Now try to delete a few parties and also watch them being removed from other browser clients.
 
@@ -61,21 +61,21 @@ Let's try to use these helper functions instead of the current implementation.
 
 First let's replace our `push` with `save` in the add button action:
 
-{{> DiffBox tutorialName="angular-meteor" step="4.6"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="4.6"}}
 
 There isn't much difference here except a small performance improvement, but now let's change our remove function:
 
-{{> DiffBox tutorialName="angular-meteor" step="4.7"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="4.7"}}
 
 Much nicer, and gives better performance!
 
 Also let's add a button to remove all parties:
 
-{{> DiffBox tutorialName="angular-meteor" step="4.8"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="4.8"}}
 
 not forgetting to add this new function to the scope:
 
-{{> DiffBox tutorialName="angular-meteor" step="4.9"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="4.9"}}
 
 Again, very simple syntax.
 

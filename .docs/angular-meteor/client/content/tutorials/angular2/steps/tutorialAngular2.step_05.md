@@ -20,7 +20,7 @@ Let's import routing dependencies into our app. We'll need router providers,
 router directives and router configuration.
 The reason why we need all of them you'll know about a bit later.
 
-{{> DiffBox tutorialName="angular2-tutorial" step="5.1"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="5.1"}}
 
 # Multiple Views and Layout Template
 
@@ -46,15 +46,15 @@ to configure routes, which basically means to wire components to unique URLs tog
 
 Let's move the content of Socially out into a `PartiesList` component. Create a new file called `parties-list.ts` and put it in its own component folder.
 
-{{> DiffBox tutorialName="angular2-tutorial" step="5.2"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="5.2"}}
 
 Move `app.html` to the new `parties-list.html`:
 
-{{> DiffBox tutorialName="angular2-tutorial" step="5.3"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="5.3"}}
 
 Also, let's clean-up `app.ts` to prepare it for the next steps:
 
-{{> DiffBox tutorialName="angular2-tutorial" step="5.4"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="5.4"}}
 
 At this point app structure should look like this:
 
@@ -70,17 +70,17 @@ we are going to make only stubs.
 
 Ultimately it's expected to work like this: when you click on a party in the list, it should route to this `PartyDetails` component for more party information.
 
-{{> DiffBox tutorialName="angular2-tutorial" step="5.5"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="5.5"}}
 
 And add a template prepared for the party details:
 
-{{> DiffBox tutorialName="angular2-tutorial" step="5.6"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="5.6"}}
 
 # Configuring Routes
 
 Let's configure our routes. This is how we map url paths to components.
 
-{{> DiffBox tutorialName="angular2-tutorial" step="5.7"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="5.7"}}
 
 We've added multiple things here. Firstly, we've imported 
 our two main views `PartiesList` and `PartyDetails`,
@@ -134,11 +134,11 @@ There is special directive called `<router-link>` that will help us to compose e
 
 First we'll import the directive and specify it as a view directive in the `PartiesList`:
 
-{{> DiffBox tutorialName="angular2-tutorial" step="5.8"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="5.8"}}
 
 Now we can wrap our party in a `router-link` and pass in the `_id` as a parameter. Note that the id is auto-generated when an item is inserted into a Mongo Collection.
 
-{{> DiffBox tutorialName="angular2-tutorial" step="5.9"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="5.9"}}
 
 `router-link` takes an array of URL parts as it was defined in the configuration and 
 then composes a full URL. By the first `/PartiesList` item we instruct `router-link` to 
@@ -155,7 +155,7 @@ The next thing is to grab the `partyId` route parameter in order to load the cor
 
 In Angular 2, it's simple as passing `RouteParamer` argument to `PartyDetails` constructor:
 
-{{> DiffBox tutorialName="angular2-tutorial" step="5.10"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="5.10"}}
 
 Dependency injection is imployed heavily here by Angular 2 to do all the work behind the scene.
 TypeScript first compiles this class with the class metadata that says what argument types this class expects in the constructor (i.e. `RouteParams`),
@@ -170,11 +170,11 @@ If you are interested what class metadata is, proceed [here](http://blog.thought
 
 Let's now load a party instance using received ID parameter:
 
-{{> DiffBox tutorialName="angular2-tutorial" step="5.11"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="5.11"}}
 
 And render party details on the page:
 
-{{> DiffBox tutorialName="angular2-tutorial" step="5.12"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="5.12"}}
 
 # Challenge
 

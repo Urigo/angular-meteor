@@ -11,7 +11,7 @@ In Angular, the view is a projection of the model through the HTML template. Thi
 
 Let's change our template to be dynamic:
 
-{{> DiffBox tutorialName="angular2-tutorial" step="2.1"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="2.1"}}
 
 We replaced the hard-coded party list with the [NgFor](https://angular.io/docs/js/latest/api/directives/NgFor-class.html) directive and two Angular expressions:
 
@@ -20,7 +20,7 @@ We replaced the hard-coded party list with the [NgFor](https://angular.io/docs/j
 
 To get this to work, we'll have to import NgFor and tell Angular 2 we are using it in the template.
 
-{{> DiffBox tutorialName="angular2-tutorial" step="2.2"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="2.2"}}
 
 Just to be clear, make sure you:
 
@@ -42,7 +42,7 @@ This code will go inside of our Socially class [`constructor`](https://developer
 
 We can attach data with the context 'this', referring to the Socially class.
 
-{{> DiffBox tutorialName="angular2-tutorial" step="2.3"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="2.3"}}
 
 Run the app again.
 
@@ -58,7 +58,7 @@ create less error-prone JavaScript applications.
 This comes as a great benefit of choosing TypeScript as a primary language
 for our app. So lets define our `parties` property:
 
-{{> DiffBox tutorialName="angular2-tutorial" step="2.4"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="2.4"}}
 
 You'll see the data model, parties, is now instantiated within the Socially component.
 

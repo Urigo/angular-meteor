@@ -29,7 +29,7 @@ So first, let's define the parties collection that will store all our parties.
 
 Add:
 
-{{> DiffBox tutorialName="angular-meteor" step="3.1"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="3.1"}}
 
 to the beginning of the `app.js` file.
 
@@ -45,7 +45,7 @@ To bind them we are going to use the built-in angular-meteor service called [$me
 
 We are going to replace the declaration of `$scope.parties` with the following command inside the `PartiesListCtrl` controller:
 
-{{> DiffBox tutorialName="angular-meteor" step="3.2"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="3.2"}}
 
 This line declares a new `$scope.parties` variable (so we don't need to do something like `$scope.parties = [];` ) and then binds it to the Parties Mongo collection.
 
@@ -53,7 +53,7 @@ We also need to add the `$meteor` service to the controller with dependency inje
 
 Our `app.js` file should look like this:
 
-{{> DiffBox tutorialName="angular-meteor" step="3.3"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="3.3"}}
 
 Now every change that happens to the `$scope.parties` variable will automatically be saved to the local minimongo and synced to the MongoDB server DB and all the other clients in realtime!
 
@@ -61,7 +61,7 @@ But we still don't have data in that collection, so let's add some by initializi
 
 Let's create a file named `server.js`, and add this content:
 
-{{> DiffBox tutorialName="angular-meteor" step="3.4" filename="server.js"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="3.4" filename="server.js"}}
 
 > Note that we also moved the `Mongo.Collection` line from the `app.js` because we want this line to work in both client and server, and AngularJS files are loaded in the client side only.
 
