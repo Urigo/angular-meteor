@@ -45,7 +45,7 @@ This time we are binding ng-click to a scope function that gets the current part
 
 Let's go into the controller and add that function.
 
-Add the function inside the PartiesListCtrl in `app.js`:
+Add the function inside the PartiesListCtrl in `app.ng.js`:
 
 {{> DiffBox tutorialName="angular-meteor" step="4.5"}}
 
