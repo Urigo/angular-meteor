@@ -31,7 +31,7 @@ Add:
 
 {{> DiffBox tutorialName="angular-meteor" step="3.1"}}
 
-to the beginning of the `app.js` file.
+to the beginning of the `app.ng.js` file.
 
 Notice that this code runs outside of the `isClient` statement.
 
@@ -51,7 +51,7 @@ This line declares a new `$scope.parties` variable (so we don't need to do somet
 
 We also need to add the `$meteor` service to the controller with dependency injection.
 
-Our `app.js` file should look like this:
+Our `app.ng.js` file should look like this:
 
 {{> DiffBox tutorialName="angular-meteor" step="3.3"}}
 
