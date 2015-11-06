@@ -1,4 +1,4 @@
-angular@1.0.5
+angular@1.0.6
 angular:angular@1.4.7
 angular:angular-mocks@1.4.7
 babel-compiler@5.8.24_1
@@ -30,7 +30,7 @@ id-map@1.0.4
 jquery@1.11.4
 lai:collection-extensions@0.1.4
 less@2.5.1
-local-test:angular@1.0.5
+local-test:angular@1.0.6
 logging@1.0.8
 mdg:camera@1.1.5
 meteor@1.1.10
