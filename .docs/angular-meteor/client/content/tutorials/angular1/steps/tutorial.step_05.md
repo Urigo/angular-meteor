@@ -18,7 +18,7 @@ Type in the command line:
 
     meteor add angularui:angular-ui-router
 
-Then add the ui-router as a dependency to our angular app in `app.js`:
+Then add the ui-router as a dependency to our angular app in `app.ng.js`:
 
 {{> DiffBox tutorialName="angular-meteor" step="5.2"}}
 
@@ -76,7 +76,7 @@ This code can serve as a placeholder for now. We'll get back to filling out the 
 # Routes definition
 
 Now let's configure our routes.
-Add this config code in `app.js`, after the Angular 1 app has been defined:
+Add this config code in `app.ng.js`, after the Angular 1 app has been defined:
 
 {{> DiffBox tutorialName="angular-meteor" step="5.7"}}
 
