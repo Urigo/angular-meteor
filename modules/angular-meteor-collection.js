@@ -280,31 +280,26 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
     };
 
     AngularMeteorCollection._saveChanges = function(changes) {
-      // First applies changes to the collection itself.
-      var newDocs = [];
-      for (var itemInd = changes.added.length - 1; itemInd >= 0; itemInd--) {
-        this.splice(changes.added[itemInd].index, 1);
-        newDocs.push(changes.added[itemInd].item);
-      }
-      // Then saves all new docs in bulk.
-      if (newDocs.length) {
-        this.save(newDocs);
-      }
+      var self = this;
 
-      // Collects docs to remove.
-      var removeDocs = [];
-      for (var itemInd = 0; itemInd < changes.removed.length; itemInd++) {
-        removeDocs.push(changes.removed[itemInd].item);
-      }
-      // Removes docs in bulk.
-      if (removeDocs.length) {
-        this.remove(removeDocs);
-      }
+      // Saves added documents
+      // Using reversed iteration to prevent indexes from changing during splice
+      var addedDocs = changes.added.reverse().map(function(descriptor) {
+        self.splice(descriptor.index, 1);
+        return descriptor.item;
+      });
+      if (addedDocs.length) self.save(addedDocs);
 
-      // Updates all changed documents
-      changes.changed.forEach(function(update) {
-        this.$$collection.update(update.selector, update.modifier);
-      }, this);
+      // Removes deleted documents
+      var removedDocs = changes.removed.map(function(descriptor) {
+        return descriptor.item;
+      });
+      if (removedDocs.length) self.remove(removedDocs);
+
+      // Updates changed documents
+      changes.changed.forEach(function(descriptor) {
+        self.$$collection.update(descriptor.selector, descriptor.modifier);
+      });
     };
 
     return AngularMeteorCollection;

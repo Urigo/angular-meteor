@@ -6,6 +6,7 @@ describe('diffArray module', function() {
         deepCopyRemovals,
         deepCopyChanges,
         addedAtSpy,
+        removedAtSpy,
         changedAtSpy;
 
     beforeEach(angular.mock.inject(function(_diffArray_) {
@@ -16,6 +17,7 @@ describe('diffArray module', function() {
 
     beforeEach(function(){
       addedAtSpy = jasmine.createSpy('addedAt');
+      removedAtSpy = jasmine.createSpy('removedAt');
       changedAtSpy = jasmine.createSpy('changedAt');
     });
 
@@ -99,6 +101,25 @@ describe('diffArray module', function() {
         },
         1,
         jasmine.any(Object));
+    });
+
+    it('should not call any callback if no changes were made', function() {
+      var oldCollection;
+      var newCollection;
+      oldCollection = newCollection = [
+        {_id: "a", prop: "foo"},
+        {_id: "b", outer: {inner: "bar"}}
+      ];
+
+      diffArray(oldCollection, newCollection, {
+        addedAt: addedAtSpy,
+        removedAt: removedAtSpy,
+        changedAt: changedAtSpy
+      });
+
+      expect(addedAtSpy).not.toHaveBeenCalledWith();
+      expect(removedAtSpy).not.toHaveBeenCalledWith();
+      expect(changedAtSpy).not.toHaveBeenCalledWith();
     });
 
     it('should detect transition from null to empty nested object', function() {
