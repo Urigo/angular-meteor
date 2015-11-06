@@ -117,9 +117,9 @@ describe('diffArray module', function() {
         changedAt: changedAtSpy
       });
 
-      expect(addedAtSpy).not.toHaveBeenCalledWith();
-      expect(removedAtSpy).not.toHaveBeenCalledWith();
-      expect(changedAtSpy).not.toHaveBeenCalledWith();
+      expect(addedAtSpy).not.toHaveBeenCalled();
+      expect(removedAtSpy).not.toHaveBeenCalled();
+      expect(changedAtSpy).not.toHaveBeenCalled();
     });
 
     it('should detect transition from null to empty nested object', function() {
