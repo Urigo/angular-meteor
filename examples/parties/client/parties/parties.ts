@@ -37,7 +37,11 @@ export class PartiesCmp extends MeteorComponent {
   }
 
   searchLocation(location) {
-    this.subscribe('parties', location);
+    this.subscribe('parties', location, () => {
+      if (!this.parties.count()) {
+        alert('Nothing found');
+      }
+    });
     this.location.set(location);
   }
 }

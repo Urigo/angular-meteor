@@ -51,8 +51,6 @@ export class LoginForm extends MeteorComponent {
   }
 
   logout() {
-    this._accounts.logout().then(() => {
-      console.log(this.user);
-    });
+    this._accounts.logout();
   }
 }
