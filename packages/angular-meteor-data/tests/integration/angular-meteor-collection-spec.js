@@ -348,6 +348,37 @@ describe('$meteorCollection service', function() {
       $rootScope.$apply();
     });
 
+    describe('_updateParallel()', function() {
+      var Collection;
+      var ngCollection;
+
+      beforeEach(function() {
+        Collection = new Meteor.Collection(null);
+        ngCollection = $meteorCollection(Collection);
+        $timeout.flush();
+      });
+
+      it('should perform each operation individually in parallel', function(done) {
+        var id = 'id-01';
+        var obj = {_id: id, data: [1, 2, 3]};
+        // simulating obj.data.splice(1, 1);
+        var updates = {$set: {'data.1': 3}, $unset: {'data.2': true}, $pull: {'data': null}};
+
+        ngCollection.push(obj);
+        $rootScope.$apply();
+
+        ngCollection._updateParallel(id, updates, function(err, affectedDocsNum) {
+          if (err) return done(err);
+          expect(affectedDocsNum).toEqual(1);
+
+          var doc = Collection.findOne(id);
+          expect(doc).toDeepEqual({_id: id, data: [1, 3]});
+
+          done();
+        });
+      });
+    });
+
     it('should save multiple documents', function() {
       var doc1 = { _id: 'first-doc' };
       var doc2 = { _id: 'second-doc' };
