@@ -17,6 +17,9 @@ Template.navbar.helpers({
   },
   index: function () {
     return Number(this.id);
+  },
+  sociallyLinks: function() {
+    return ANGULAR1_TUT;
   }
 });
 
