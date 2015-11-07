@@ -3,13 +3,13 @@
 var angularMeteorObject = angular.module('angular-meteor.object', ['angular-meteor.utils', 'angular-meteor.subscribe', 'angular-meteor.collection', 'getUpdates', 'diffArray']);
 
 angularMeteorObject.factory('AngularMeteorObject', [
-  '$q', '$meteorSubscribe', '$meteorCollection', '$meteorUtils', 'diffArray', 'getUpdates',
-  function($q, $meteorSubscribe, $meteorCollection, $meteorUtils, diffArray, getUpdates) {
+  '$q', '$meteorSubscribe', '$meteorUtils', 'diffArray', 'getUpdates', 'AngularMeteorCollection',
+  function($q, $meteorSubscribe, $meteorUtils, diffArray, getUpdates, AngularMeteorCollection) {
     // A list of internals properties to not watch for, nor pass to the Document on update and etc.
     AngularMeteorObject.$$internalProps = [
       '$$collection', '$$options', '$$id', '$$hashkey', '$$internalProps', '$$scope',
       'save', 'reset', 'subscribe', 'stop', 'autorunComputation', 'unregisterAutoBind', 'unregisterAutoDestroy', 'getRawObject',
-      '_auto', '_setAutos', '_eventEmitter', '_serverBackup'
+      '_auto', '_setAutos', '_eventEmitter', '_serverBackup', '_updateParallel'
     ];
 
     function AngularMeteorObject (collection, id, options){
@@ -56,34 +56,8 @@ angularMeteorObject.factory('AngularMeteorObject', [
           }
         }
 
-        var pullUpdate;
-        if (mods.$pull) {
-          pullUpdate = { $pull : mods.$pull };
-          mods = _.omit(mods,'$pull');
-        }
-
-        if (!pullUpdate) {
-          // NOTE: do not use #upsert() method, since it does not exist in some collections
-          collection.update(this.$$id, mods, createFulfill({action: 'updated'}));
-        }
-        else {
-          (function() {
-            var done = _.after(2, function() {
-              createFulfill({action: 'updated'});
-            });
-
-            var next = function(err) {
-              if (err)
-                $meteorUtils.fulfill(deferred, err);
-              else
-                done();
-            };
-
-            // Performing in parallel so sync operations would be applied
-            collection.update(this.$$id, mods, next);
-            collection.update(this.$$id, pullUpdate, next);
-          }).call(this);
-        }
+        // NOTE: do not use #upsert() method, since it does not exist in some collections
+        return this._updateParallel(mods, createFulfill({ action: 'updated' }));
       }
       // insert
       else {
@@ -97,6 +71,11 @@ angularMeteorObject.factory('AngularMeteorObject', [
       }
 
       return deferred.promise;
+    };
+
+    AngularMeteorObject._updateParallel = function(modifier, callback) {
+      var selector = this.$$id;
+      AngularMeteorCollection._updateParallel.call(this, selector, modifier, callback);
     };
 
     AngularMeteorObject.reset = function(keepClientProps) {
