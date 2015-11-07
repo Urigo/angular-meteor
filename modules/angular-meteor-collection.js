@@ -82,10 +82,7 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
     AngularMeteorCollection._upsertDoc = function(doc, useUnsetModifier) {
       var deferred = $q.defer();
       var collection = this.$$collection;
-      var upsertResult = function(action, _id) {
-        return {_id: _id, action: action }
-      }
-      var fulfill, createFulfill;
+      var createFulfill = _.partial($meteorUtils.fulfill, deferred, null);
 
       // delete $$hashkey
       doc = $meteorUtils.stripDollarPrefixedKeys(doc);
@@ -98,18 +95,38 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
         // it can be $set using update.
         delete doc._id;
         var modifier = useUnsetModifier ? {$unset: doc} : {$set: doc};
-        createFulfill = _.partial(upsertResult, 'updated');
-        fulfill = $meteorUtils.fulfill(deferred, null, createFulfill);
         // NOTE: do not use #upsert() method, since it does not exist in some collections
-        collection.update(docId, modifier, fulfill);
+        collection.update(docId, modifier, createFulfill(function() {
+          return {_id: docId, action: 'updated'};
+        }));
+      } 
       // insert
-      } else {
-        createFulfill = _.partial(upsertResult, 'inserted');
-        fulfill = $meteorUtils.fulfill(deferred, null, createFulfill);
-        collection.insert(doc, fulfill);
+      else {
+        collection.insert(doc, createFulfill(function(id) {
+          return {_id: id, action: 'inserted'};
+        }));
       }
 
       return deferred.promise;
+    };
+
+    // performs each update operation induvidualy to prevent conflics like
+    AngularMeteorCollection._updateParallel = function(selector, modifier, callback) {
+      var self = this;
+      var operationsNames = _.keys(modifier);
+      callback = callback || angular.noop;
+
+      var done = _.after(operationsNames.length, callback);
+
+      var next = function(err, affectedDocsNum) {
+        if (err) return callback(err);
+        done(null, affectedDocsNum);
+      };
+
+      operationsNames.forEach(function(operationName) {
+        var contractedModifier = _.pick(modifier, operationName);
+        self.$$collection.update(selector, contractedModifier, next);
+      });
     };
 
     AngularMeteorCollection.remove = function(keyOrDocs) {
@@ -298,7 +315,7 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
 
       // Updates changed documents
       changes.changed.forEach(function(descriptor) {
-        self.$$collection.update(descriptor.selector, descriptor.modifier);
+        self._updateParallel(descriptor.selector, descriptor.modifier);
       });
     };
 

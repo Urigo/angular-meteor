@@ -165,6 +165,35 @@ describe('$meteorObject service', function () {
     });
   });
 
+  describe('#_updateParallel()', function() {
+    var Collection;
+    var ngObject;
+    var id;
+
+    beforeEach(function() {
+      id = 'id-01';
+      Collection = new Meteor.Collection(null);
+      ngObject = $meteorObject(Collection, id);
+    });
+
+    it('should perform each update operation individually in parallel', function(done) {
+      // simulating obj.data.splice(1, 1);
+      var updates = {$set: {'data.1': 3}, $unset: {'data.2': true}, $pull: {'data': null}};
+      _.extend(ngObject, {data: [1, 2, 3]});
+      ngObject.save();
+
+      ngObject._updateParallel(updates, function(err, affectedDocsNum) {
+        if (err) return done(err);
+        expect(affectedDocsNum).toEqual(1);
+
+        var doc = Collection.findOne(id);
+        expect(doc).toDeepEqual({_id: id, data: [1, 3]});
+
+        done();
+      });
+    });
+  });
+
   describe('#getRawObject()', function() {
     it('should return an object equal to doc', function() {
       var raw = meteorObject.getRawObject();
