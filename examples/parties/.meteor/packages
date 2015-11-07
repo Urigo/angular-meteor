@@ -11,3 +11,5 @@ mongo
 reactive-var
 standard-minifiers
 urigo:angular2-meteor
+barbatus:ng2-meteor-accounts
+accounts-password

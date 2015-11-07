@@ -32,5 +32,11 @@ export function loadTestData() {
         description: Fake.sentence(100)
       });
     }
+
+    Accounts.createUser({
+      username: 'party',
+      email: 'admin@socially.com',
+      password: 'admin'
+    });
   }
 }

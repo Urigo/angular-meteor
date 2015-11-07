@@ -1,5 +1,7 @@
 <header>
-  <h2>{{party.name}}</h2>
+  <div *ng-if="party">
+    <h2>{{party.name}}</h2>
 
-  <p>{{party.description}}</p>
+    <p>{{party.description}}</p>
+  </div>
 </header>

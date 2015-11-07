@@ -1,11 +1,14 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
 /// <reference path="../../typings/socially.d.ts" />
+/// <reference path="../../typings/meteor-accounts.d.ts" />
 
 import {Component, View, NgModel, NgFor} from 'angular2/angular2';
 
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 
 import {PartyForm} from 'client/party-form/party-form';
+
+import {LoginForm} from 'client/login-form/login-form';
 
 import {MeteorComponent} from 'angular2-meteor';
 
@@ -16,7 +19,7 @@ import {Parties} from 'collections/parties';
 })
 @View({
   templateUrl: 'client/parties/parties.html',
-  directives: [NgFor, ROUTER_DIRECTIVES, NgModel, PartyForm]
+  directives: [NgFor, ROUTER_DIRECTIVES, NgModel, PartyForm, LoginForm]
 })
 export class PartiesCmp extends MeteorComponent {
   parties: Mongo.Cursor<Party>;

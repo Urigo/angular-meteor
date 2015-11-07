@@ -1,7 +1,8 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
 /// <reference path="../../typings/socially.d.ts" />
+/// <reference path="../../typings/meteor-accounts.d.ts" />
 
-import {Component, View, Inject} from 'angular2/angular2';
+import {Component, View, NgIf} from 'angular2/angular2';
 
 import {RouteParams} from 'angular2/router';
 
@@ -13,10 +14,11 @@ import {Parties} from 'collections/parties';
   selector: 'party-details'
 })
 @View({
-  templateUrl: 'client/party-details/party-details.html'
+  templateUrl: 'client/party-details/party-details.html',
+  directives: [NgIf]
 })
 export class PartyDetailsCmp extends MeteorComponent {
-  party: Party = {name: ''};
+  party: Party;
 
   constructor(routeParams: RouteParams) {
     super();

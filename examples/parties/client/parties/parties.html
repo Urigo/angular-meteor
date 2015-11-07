@@ -1,10 +1,11 @@
-<header style="width: 1100px">
-  <party-form style="display: inline-block"></party-form>
-  <div style="float: right">
+<header>
+  <party-form></party-form>
+  <div>
     <input type="text" #searchtext value="Palo Alto">
     <input type="button" value="Search" (click)="searchLocation(searchtext.value)">
     (Palo Alto or Mountain View)
   </div>
+  <login-form></login-form>
 </header>
 <main>
   <ul>
