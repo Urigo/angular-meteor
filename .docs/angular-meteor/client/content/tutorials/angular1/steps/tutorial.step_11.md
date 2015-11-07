@@ -10,7 +10,7 @@ Before we set up PhoneGap (which is super simple with Meteor) we will need to ma
 
 In `app.js` file, we will manually bootstrap our Angular 1 app according to the right platform:
 
-{{> DiffBox tutorialName="angular-meteor" step="11.1"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="11.1"}}
 
 And then we will remove
 
@@ -18,7 +18,7 @@ And then we will remove
 
 from `index.html`:
 
-{{> DiffBox tutorialName="angular-meteor" step="11.2"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="11.2"}}
 
 ## PhoneGap
 

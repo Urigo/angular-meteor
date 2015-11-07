@@ -37,7 +37,7 @@ So first, let's define our first parties collection that will store all our part
 
 In a separate folder called "collections", add a file called "parties.ts". Include this:
 
-{{> DiffBox tutorialName="angular2-tutorial" step="3.1"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="3.1"}}
 
 We've just created not only a file called "parties.ts", but also a System.js module
 called "collections/parties". This work is done by the TypeScript compiler behind the scene.
@@ -56,7 +56,7 @@ one for client-side and one for server-side. This is often referred to as "isomo
 
 The last thing is, again, to add the declaration file reference to this file:
 
-  {{> DiffBox tutorialName="angular2-tutorial" step="3.2"}}
+  {{> DiffBox tutorialName="meteor-angular2-socially" step="3.2"}}
 
 # Simple Binding to Angular
 
@@ -68,17 +68,17 @@ Thus, we have at least one way to load our data model. Lets query all parties us
 
 But first, lets import our `Parties` collection:
 
-{{> DiffBox tutorialName="angular2-tutorial" step="3.3"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="3.3"}}
 
 Then, change `client/app.ts` to:
 
-{{> DiffBox tutorialName="angular2-tutorial" step="3.4"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="3.4"}}
 
 But what happens if the parties data changes on the server-side? How can we tell parties to update itself?
 
 For now, we can use Meteor [Tracker](https://www.meteor.com/tracker), a reactive wrapper that will run data when a change occurs. We will bind it to Angular's change detection system, [Zone.js](https://github.com/angular/zone.js).
 
-{{> DiffBox tutorialName="angular2-tutorial" step="3.5"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="3.5"}}
 
 The fat arrow syntax `=>` is also from ES2015, and tells the function to run in it's parents context. In other words, it tells `this` to be the context of the class Socially.
 
@@ -179,7 +179,7 @@ Lets change `bootstrap` from `angular2/angular2` to `bootstrap` from `angular2-m
 
 Now, change `app.ts` to:
 
-  {{> DiffBox tutorialName="angular2-tutorial" step="3.6"}}
+  {{> DiffBox tutorialName="meteor-angular2-socially" step="3.6"}}
 
 Run your app again and manipulate the documents in the Mongo console.
 You will see that it works as before — it loads the same data as before and all changes to the `this.parties` that
@@ -197,7 +197,7 @@ Create a new folder called 'server' and create a file called `load_parties.ts` i
 
 Add the following to the file:
 
-{{> DiffBox tutorialName="angular2-tutorial" step="3.7"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="3.7"}}
 
 It's worth mentioning that System.js modules work on the server side the same way as on the client.
 
@@ -207,7 +207,7 @@ On the client though, the main file is called `app.ts`.
 
 Let's create `main.ts` and call `loadParties` inside to load parties:
 
-{{> DiffBox tutorialName="angular2-tutorial" step="3.8"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="3.8"}}
 
 Now run the app and you should see the list of parties on the screen.
 

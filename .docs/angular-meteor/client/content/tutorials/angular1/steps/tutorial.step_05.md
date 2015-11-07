@@ -20,7 +20,7 @@ Type in the command line:
 
 Then add the ui-router as a dependency to our angular app in `app.js`:
 
-{{> DiffBox tutorialName="angular-meteor" step="5.2"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="5.2"}}
 
 # Multiple Views, Routing and Layout Template
 
@@ -47,7 +47,7 @@ This makes it a perfect fit for our `main.html` template.
 
 Let's create a new html file called `parties-list.html` and paste the existing list code from `main.html` into it:
 
-{{> DiffBox tutorialName="angular-meteor" step="5.3"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="5.3"}}
 
 The code is almost the same except for this two changes:
 
@@ -56,7 +56,7 @@ The code is almost the same except for this two changes:
 
 Now let's go back to `index.html` and replace the content with the `ui-view` directive:
 
-{{> DiffBox tutorialName="angular-meteor" step="5.4"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="5.4"}}
 
 Notice we did 3 things:
 
@@ -69,7 +69,7 @@ Now we can delete the `main.html` file, it's not used any more.
 Let's add a placeholder to the new party details page.
 Create a new html file called `party-details.html` and paste in the following code:
 
-{{> DiffBox tutorialName="angular-meteor" step="5.6"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="5.6"}}
 
 This code can serve as a placeholder for now. We'll get back to filling out the details later on.
 
@@ -78,7 +78,7 @@ This code can serve as a placeholder for now. We'll get back to filling out the 
 Now let's configure our routes.
 Add this config code in `app.js`, after the Angular 1 app has been defined:
 
-{{> DiffBox tutorialName="angular-meteor" step="5.7"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="5.7"}}
 
 Using the Angular 1 app's .config() method, we request the `$stateProvider` to be injected into our config function and use the state method to define our routes.
 
@@ -103,7 +103,7 @@ As you might have seen we removed the controller definition from the ng-controll
 But we still need to define our `PartyDetailsCtrl` controller.
 Add this code under the existing controller:
 
-{{> DiffBox tutorialName="angular-meteor" step="5.8"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="5.8"}}
 
 Now all is in place.  Run the app and you'll notice a few things:
 

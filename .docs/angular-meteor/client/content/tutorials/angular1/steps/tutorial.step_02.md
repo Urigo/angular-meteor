@@ -11,7 +11,7 @@ In Angular 1, the view is a projection of the model through the HTML template. T
 
 Let's change our template to be dynamic:
 
-{{> DiffBox tutorialName="angular-meteor" step="2.1"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="2.1"}}
 
 We replaced the hard-coded party list with the [ngRepeat](https://docs.angularjs.org/api/ng/directive/ngRepeat) directive and two Angular 1 expressions:
 
@@ -25,7 +25,7 @@ We have added a new directive, called `ng-controller`, which attaches the `Parti
 
 To create our controller and model we start with `PartiesListCtrl` controller and place data in it.
 
-{{> DiffBox tutorialName="angular-meteor" step="2.2"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="2.2"}}
 
 We declared a controller called `PartiesListCtrl` and registered it in our Angular 1 module app - `socially`.
 
@@ -47,7 +47,9 @@ As you may know, when using AngularJS dependency injection, we used strings for 
 
 There is a very popular Angular 1 tool that's called [ng-annotate](https://github.com/olov/ng-annotate) that takes care of that for us so we can write regular code that won't get mangled in minification.
 
+
 angular-meteor uses that process automatically so you do not need to add those extra definitions and just write your app without minification issues!
+
 
 # Summary
 

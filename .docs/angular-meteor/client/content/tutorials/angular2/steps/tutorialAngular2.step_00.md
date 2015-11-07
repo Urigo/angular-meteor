@@ -57,7 +57,7 @@ Create a directory called `client`. It is important that the name is `client`, b
 
 Create a new `index.html` file in the client folder, and place this code inside. Then run the app again.
 
-{{> DiffBox tutorialName="angular2-tutorial" step="0.1"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="0.1"}}
 
 Note that there is no `<html>` tag and no `<head>` tag - it's very simple.
 
@@ -172,7 +172,7 @@ Now you can see another example of Meteor's power and simplicity - no need to in
 
 Let's continue defining our Angular 2 application module.
 
-{{> DiffBox tutorialName="angular2-tutorial" step="0.5"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="0.5"}}
 
 First we're importing the dependencies we needed from `angular2/angular2`. This is not a folder and file in your directory, but a reference to a System.js module aliased as `angular2/angular2` and available in the `urigo:angular2-meteor` package.
 
@@ -198,7 +198,7 @@ As you've already learned, the package uses System.js to manage ES6 modules, but
 doesn't know anything about our `app` module.
 So lets manually import our `app` module and add `<app>` tag to the `index.html` as follows:
 
-{{> DiffBox tutorialName="angular2-tutorial" step="0.6"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="0.6"}}
 
 This will load HTML and JavaScript code necessary to launch our app.
 
@@ -232,7 +232,7 @@ After the first run, you will find the `angular2-meteor.d.ts` file in the new fo
 This file has been created by the package at start time and contains a special reference to Angular2 and Meteor declaration files.
 Link `app.ts` and `angular2-meteor.d.ts` by adding the next line at the top of `app.ts`:
 
-{{> DiffBox tutorialName="angular2-tutorial" step="0.8"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="0.8"}}
 
 > Note: if you just loaded your app from a repository, you'll need to re-start it once.
 > This is because Meteor's local hierarchy of files is not yet built at the time the TypeScript compiler accesses them.
@@ -242,11 +242,11 @@ Link `app.ts` and `angular2-meteor.d.ts` by adding the next line at the top of `
 
 Let's make one change. Create a new file called `app.html` under the 'client' folder, this will be our main `HTML` template page:
 
-{{> DiffBox tutorialName="angular2-tutorial" step="0.9"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="0.9"}}
 
 Change your template in `app.ts` to target `app.html`:
 
-{{> DiffBox tutorialName="angular2-tutorial" step="0.10"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="0.10"}}
    
 Now our component template will load from the given path.
 As you can see, we are using an Angular expression inside of `app.html` to check if it works:
