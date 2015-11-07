@@ -110,21 +110,21 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
       return deferred.promise;
     };
 
-    // performs each update operator induvidualy to prevent conflics like
+    // performs each update operation induvidualy to prevent conflics like
     AngularMeteorCollection._updateParallel = function(selector, modifier, callback) {
       var self = this;
-      var operatorsNames = _.keys(modifier);
+      var operationsNames = _.keys(modifier);
       callback = callback || angular.noop;
 
-      var done = _.after(operatorsNames.length, callback);
+      var done = _.after(operationsNames.length, callback);
 
       var next = function(err, affectedDocsNum) {
         if (err) return callback(err);
         done(null, affectedDocsNum);
       };
 
-      operatorsNames.forEach(function(operatorName) {
-        var contractedModifier = _.pick(modifier, operatorName);
+      operationsNames.forEach(function(operationName) {
+        var contractedModifier = _.pick(modifier, operationName);
         self.$$collection.update(selector, contractedModifier, next);
       });
     };
