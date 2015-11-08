@@ -3,7 +3,7 @@
 
 Now that we have full data binding from server to client, let's interact with the data and see the updates in action.
 
-In this chapter you are going to:
+In this chapter we are going to:
 
 - create new component to add or remove a party
 - learn what's model-driven forms and create one

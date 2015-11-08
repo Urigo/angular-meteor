@@ -1,7 +1,7 @@
 From 0331ca3acd1ab58116d85e3023b2e6212eff5f1c Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 16:57:38 +0300
-Subject: [PATCH 01/52] Creates tutorial app.
+Subject: [PATCH 01/57] Creates tutorial app.
 
 ---
  .meteor/.finished-upgraders | 12 +++++++++
@@ -169,7 +169,7 @@ index 0000000..e378b68
 From a2759654b831fdc60cf071096dd9ace110b38019 Mon Sep 17 00:00:00 2001
 From: Alex <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:01:41 +0300
-Subject: [PATCH 02/52] Create README.md
+Subject: [PATCH 02/57] Create README.md
 
 ---
  README.md | 2 ++
@@ -191,7 +191,7 @@ index 0000000..61fc3ee
 From 982577678528ecb16ccea76f9c4a178f09b8512f Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:03:11 +0300
-Subject: [PATCH 03/52] Step 0.1: add client/index.html
+Subject: [PATCH 03/57] Step 0.1: add client/index.html
 
 ---
  client/index.html | 3 +++
@@ -214,7 +214,7 @@ index 0000000..ef412ef
 From 32756437d6a3cd6144aaea879dee45187eaf6d01 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:08:36 +0300
-Subject: [PATCH 04/52] Step 0.2: add Angular2 package
+Subject: [PATCH 04/57] Step 0.2: add Angular2 package
 
 ---
  .meteor/packages | 1 +
@@ -236,7 +236,7 @@ index a9f8340..feb8272 100644
 From 8ae5857626a2964f179c35e501a301c539c94bb8 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:09:47 +0300
-Subject: [PATCH 05/52] Step 0.3: remove Blaze package
+Subject: [PATCH 05/57] Step 0.3: remove Blaze package
 
 ---
  .meteor/packages | 1 -
@@ -261,7 +261,7 @@ index feb8272..c70808e 100644
 From 0d456d718868498b1f3560d0c0e0a97d03bd9205 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:10:32 +0300
-Subject: [PATCH 06/52] Step 0.4: remove ecmascript package
+Subject: [PATCH 06/57] Step 0.4: remove ecmascript package
 
 ---
  .meteor/packages | 1 -
@@ -286,7 +286,7 @@ index c70808e..2f89e25 100644
 From e116f09c9f71facbcf6b247be9050262e7755bf9 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:12:43 +0300
-Subject: [PATCH 07/52] Step 0.5: create root component
+Subject: [PATCH 07/57] Step 0.5: create root component
 
 ---
  client/app.ts | 11 +++++++++++
@@ -317,7 +317,7 @@ index 0000000..5dd0b52
 From 67c4d2a7773cf9b48fc6696b07deec63018c4644 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:14:08 +0300
-Subject: [PATCH 08/52] Step 0.6: load root component
+Subject: [PATCH 08/57] Step 0.6: load root component
 
 ---
  client/index.html | 3 ++-
@@ -340,7 +340,7 @@ index ef412ef..19d3bf1 100644
 From e6aec95c3cebf33b6332c2af3e347e0cdd135a81 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:19:17 +0300
-Subject: [PATCH 09/52] Step 0.7: remove index.html
+Subject: [PATCH 09/57] Step 0.7: remove index.html
 
 ---
  client/index.html | 4 ----
@@ -364,7 +364,7 @@ index 19d3bf1..0000000
 From 0cef422be147d580b1609a8b3115bf6f689b258e Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:20:40 +0300
-Subject: [PATCH 10/52] Step 0.8: add reference to the declaration file
+Subject: [PATCH 10/57] Step 0.8: add reference to the declaration file
 
 ---
  client/app.ts | 2 ++
@@ -387,7 +387,7 @@ index 5dd0b52..b918366 100644
 From acfae5cd28420a60891d17807a08eb871f734e8d Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:21:40 +0300
-Subject: [PATCH 11/52] Step 0.9: create app.html template
+Subject: [PATCH 11/57] Step 0.9: create app.html template
 
 ---
  client/app.html | 1 +
@@ -408,7 +408,7 @@ index 0000000..a9c8ddc
 From e6beee76e2a6f52679e1d62549b8f6731d781bd5 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:22:33 +0300
-Subject: [PATCH 12/52] remove versions
+Subject: [PATCH 12/57] remove versions
 
 ---
  .meteor/versions | 66 --------------------------------------------------------
@@ -494,7 +494,7 @@ index e378b68..0000000
 From 7cc4934786f99e97fc678450b6d9d7f23f68666b Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:23:10 +0300
-Subject: [PATCH 13/52] Step 0.10: change inline template to templateUrl
+Subject: [PATCH 13/57] Step 0.10: change inline template to templateUrl
 
 ---
  client/app.ts | 2 +-
@@ -520,7 +520,7 @@ index b918366..2dcaa25 100644
 From 8a2ee0884b53e36678a74cb4e43cc3cc26fa29a7 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:29:40 +0300
-Subject: [PATCH 14/52] Step 1.1: add static HTML to the template
+Subject: [PATCH 14/57] Step 1.1: add static HTML to the template
 
 ---
  client/app.html | 15 ++++++++++++++-
@@ -553,7 +553,7 @@ index a9c8ddc..dd1ef68 100644
 From 2e2869532817fa04e7c4f31eafa84ea6f75569a2 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:30:49 +0300
-Subject: [PATCH 15/52] Step 2.1: use dynamic template with NgFor
+Subject: [PATCH 15/57] Step 2.1: use dynamic template with NgFor
 
 ---
  client/app.html | 23 +++++++++--------------
@@ -594,7 +594,7 @@ index dd1ef68..3197b77 100644
 From 5e617296e17f9f0f5b30d8b50571ac85ecdae9b8 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:32:31 +0300
-Subject: [PATCH 16/52] Step 2.2: load NgFor directive, add it to the View's
+Subject: [PATCH 16/57] Step 2.2: load NgFor directive, add it to the View's
  directives list
 
 ---
@@ -628,7 +628,7 @@ index 2dcaa25..30495cd 100644
 From 6f29facacb9ebd0db4838be3bf4176eda54b24a0 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:34:52 +0300
-Subject: [PATCH 17/52] Step 2.3: load parties data into the app
+Subject: [PATCH 17/57] Step 2.3: load parties data into the app
 
 ---
  client/app.ts | 19 ++++++++++++++++++-
@@ -670,7 +670,7 @@ index 30495cd..bce2d15 100644
 From b82cde4cace0d97260267ab2d09c63fac91702e6 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:36:13 +0300
-Subject: [PATCH 18/52] Step 2.4: define parties property
+Subject: [PATCH 18/57] Step 2.4: define parties property
 
 ---
  client/app.ts | 2 ++
@@ -696,7 +696,7 @@ index bce2d15..b52e219 100644
 From 58dc82a74e7366dd0cf9cf652de45c4e32600c09 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 18:30:37 +0300
-Subject: [PATCH 19/52] Step 3.1:  add the parties collection
+Subject: [PATCH 19/57] Step 3.1:  add the parties collection
 
 ---
  collections/parties.ts | 1 +
@@ -717,7 +717,7 @@ index 0000000..83fbd07
 From 45b2f239abdebb42a5f246702c8c25cb1a261f0b Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 18:36:20 +0300
-Subject: [PATCH 20/52] Step 3.2:  add reference to the declaration file
+Subject: [PATCH 20/57] Step 3.2:  add reference to the declaration file
 
 ---
  collections/parties.ts | 2 ++
@@ -738,7 +738,7 @@ index 83fbd07..d1ed853 100644
 From 417b8f831497e761aa9f0d131b8947830566f49c Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 18:36:56 +0300
-Subject: [PATCH 21/52] Step 3.3:  import the parties collection
+Subject: [PATCH 21/57] Step 3.3:  import the parties collection
 
 ---
  client/app.ts | 2 ++
@@ -764,7 +764,7 @@ index b52e219..061d6b6 100644
 From ce0ca1c92b91f4f4aff85454c2065107b2fc8111 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Mon, 19 Oct 2015 13:28:41 +0300
-Subject: [PATCH 22/52] Step 3.4: fetch parties
+Subject: [PATCH 22/57] Step 3.4: fetch parties
 
 ---
  client/app.ts | 15 +--------------
@@ -775,7 +775,7 @@ index 061d6b6..3506859 100644
 --- a/client/app.ts
 +++ b/client/app.ts
 @@ -15,20 +15,7 @@ class Socially {
-     parties: Array<Object>;
+     parties: Array&lt;Object>;
  
      constructor () {
 -        this.parties = [
@@ -803,7 +803,7 @@ index 061d6b6..3506859 100644
 From f72dac183559a25131430d0eafbd15f186123942 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 18:47:23 +0300
-Subject: [PATCH 23/52] Step 3.5:  fetch parties reactively
+Subject: [PATCH 23/57] Step 3.5:  fetch parties reactively
 
 ---
  client/app.ts | 8 +++++---
@@ -841,7 +841,7 @@ index 3506859..7903452 100644
 From d75d282ea7a0a144d589385ae0ae8ea7158dbe5f Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 8 Nov 2015 02:26:41 +0300
-Subject: [PATCH 24/52] Step 3.6: initialize collection on server side
+Subject: [PATCH 24/57] Step 3.6: initialize collection on server side
 
 ---
  server/main.ts | 1 +
@@ -862,7 +862,7 @@ index 0000000..64dbcb6
 From fe8feaff62c3292678a7ee7aab3afd5b94e7e6a5 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 14 Oct 2015 22:55:11 +0300
-Subject: [PATCH 25/52] Step 3.7: Blaze-like binding to Angular2
+Subject: [PATCH 25/57] Step 3.7: Blaze-like binding to Angular2
 
 ---
  client/app.ts | 12 ++++++------
@@ -908,7 +908,7 @@ index 7903452..d845cf7 100644
 From 3ad2af67cc7e92a5544e69492950914d829e4231 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 14 Oct 2015 23:21:31 +0300
-Subject: [PATCH 26/52] Step 3.8: load initial parties on server side
+Subject: [PATCH 26/57] Step 3.8: load initial parties on server side
 
 ---
  server/load_parties.ts | 28 ++++++++++++++++++++++++++++
@@ -956,7 +956,7 @@ index 0000000..65c914a
 From 726324de6b4bbe7b2505c63e69970e8404e5e6fe Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 14 Oct 2015 23:32:49 +0300
-Subject: [PATCH 27/52] Step 3.9: bootstrap server side
+Subject: [PATCH 27/57] Step 3.9: bootstrap server side
 
 ---
  server/main.ts | 4 +++-
@@ -978,7 +978,7 @@ index 64dbcb6..80ba2c9 100644
 From 580fb5a5bd9278c55a9cd5ad2fea264177d8b10b Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 17 Oct 2015 14:58:32 +0300
-Subject: [PATCH 28/52] Step 4.1:  create PartiesForm component
+Subject: [PATCH 28/57] Step 4.1:  create PartiesForm component
 
 ---
  client/parties-form/parties-form.ts | 11 +++++++++++
@@ -1009,7 +1009,7 @@ index 0000000..6b50b1e
 From cb4199a5e36de62daafeac611a6198e0631b7cb6 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 17 Oct 2015 15:48:01 +0300
-Subject: [PATCH 29/52] Step 4.2: add parties-form.html template
+Subject: [PATCH 29/57] Step 4.2: add parties-form.html template
 
 ---
  client/parties-form/parties-form.html | 9 +++++++++
@@ -1038,7 +1038,7 @@ index 0000000..df0bd89
 From 298af75ec4def6867d27bec5b9acac6c34a59ac9 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 17 Oct 2015 16:03:48 +0300
-Subject: [PATCH 30/52] Step 4.3: load the PartiesForm component
+Subject: [PATCH 30/57] Step 4.3: load the PartiesForm component
 
 ---
  client/app.html | 1 +
@@ -1061,7 +1061,7 @@ index 3197b77..3b7d5f2 100644
 From 1473fc6a0f18c1f79f14928951cfa3debb2616e7 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 17 Oct 2015 16:07:36 +0300
-Subject: [PATCH 31/52] Step 4.4:  import the PartiesForm component and link it
+Subject: [PATCH 31/57] Step 4.4:  import the PartiesForm component and link it
  with the Socially component
 
 ---
@@ -1087,7 +1087,7 @@ index d845cf7..e1ce3b9 100644
 +    directives: [NgFor, PartiesForm]
  })
  class Socially {
-     parties: Mongo.Cursor<Object>;
+     parties: Mongo.Cursor&lt;Object>;
 -- 
 2.4.9 (Apple Git-60)
 
@@ -1095,7 +1095,7 @@ index d845cf7..e1ce3b9 100644
 From 67dcba79ec8e050d9e5c186554197eb711d9923c Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 17 Oct 2015 17:32:28 +0300
-Subject: [PATCH 32/52] Step 4.5:  import dependencies and add form directives
+Subject: [PATCH 32/57] Step 4.5:  import dependencies and add form directives
  to the View
 
 ---
@@ -1128,7 +1128,7 @@ index 6b50b1e..7b5aa85 100644
 From b456beedfb638bff0956d2942cfe8d7214ebf515 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 17 Oct 2015 17:41:26 +0300
-Subject: [PATCH 33/52] Step 4.6:  build a form model
+Subject: [PATCH 33/57] Step 4.6:  build a form model
 
 ---
  client/parties-form/parties-form.ts | 13 ++++++++++++-
@@ -1162,7 +1162,7 @@ index 7b5aa85..fc535dd 100644
 From fb9dc517aadde7a0f4b3e4e7e4c556e0604302b6 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 17 Oct 2015 18:34:57 +0300
-Subject: [PATCH 34/52] Step 4.7:  add form validation
+Subject: [PATCH 34/57] Step 4.7:  add form validation
 
 ---
  client/parties-form/parties-form.ts | 4 ++--
@@ -1191,7 +1191,7 @@ index fc535dd..4b12b0a 100644
 From 289d973cc0960557a59d4d7d2be460af3a5658cc Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 17 Oct 2015 20:20:32 +0300
-Subject: [PATCH 35/52] Step 4.8:  link the form and its model together
+Subject: [PATCH 35/57] Step 4.8:  link the form and its model together
 
 ---
  client/parties-form/parties-form.html | 8 ++++----
@@ -1222,7 +1222,7 @@ index df0bd89..9f27831 100644
 From afa8739df4e5f7755794639bbf2ca0ed8ae06273 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 17 Oct 2015 20:33:32 +0300
-Subject: [PATCH 36/52] Step 4.9: add submit handler inside the template
+Subject: [PATCH 36/57] Step 4.9: add submit handler inside the template
 
 ---
  client/parties-form/parties-form.html | 2 +-
@@ -1245,7 +1245,7 @@ index 9f27831..ec3a114 100644
 From 6e3be30d30ea1b9f49fd8832b69c500fcdbc35f0 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 17 Oct 2015 20:34:52 +0300
-Subject: [PATCH 37/52] Step 4.10:  add addParty method inside the component
+Subject: [PATCH 37/57] Step 4.10:  add addParty method inside the component
 
 ---
  client/parties-form/parties-form.ts | 18 +++++++++++++++++-
@@ -1292,7 +1292,7 @@ index 4b12b0a..18dee47 100644
 From b41baf36b9e679bb70612312de9a002c73995e0b Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 17 Oct 2015 20:57:18 +0300
-Subject: [PATCH 38/52] Step 4.11:  Add a remove party button and click event
+Subject: [PATCH 38/57] Step 4.11:  Add a remove party button and click event
  handler
 
 ---
@@ -1318,7 +1318,7 @@ index 3b7d5f2..460dd4a 100644
 From 4e116ebb3149af1ceb5fb9a6a1103f469ed69eee Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 17 Oct 2015 20:59:18 +0300
-Subject: [PATCH 39/52] Step 4.12: Add removeParty method inside the component
+Subject: [PATCH 39/57] Step 4.12: Add removeParty method inside the component
 
 ---
  client/app.ts | 4 ++++
@@ -1346,7 +1346,7 @@ index e1ce3b9..3f5ce82 100644
 From d5111f9474c655b1a83684ac643dd86e31a59185 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 18 Oct 2015 01:47:04 +0300
-Subject: [PATCH 40/52] Step 5.1:  import routing components and add them to
+Subject: [PATCH 40/57] Step 5.1:  import routing components and add them to
  the app
 
 ---
@@ -1372,7 +1372,7 @@ index 3f5ce82..e975346 100644
 +    directives: [NgFor, PartiesForm, ROUTER_DIRECTIVES]
  })
  class Socially {
-     parties: Mongo.Cursor<Object>;
+     parties: Mongo.Cursor&lt;Object>;
 @@ -27,4 +29,4 @@ class Socially {
      }
  }
@@ -1386,7 +1386,7 @@ index 3f5ce82..e975346 100644
 From f345c870d0767b65060b9cdbccedf3450e41b5af Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 18 Oct 2015 01:49:04 +0300
-Subject: [PATCH 41/52] Step 5.2:  create PartiesList component
+Subject: [PATCH 41/57] Step 5.2:  create PartiesList component
 
 ---
  client/parties-list/parties-list.ts | 26 ++++++++++++++++++++++++++
@@ -1432,7 +1432,7 @@ index 0000000..5f574f2
 From 1d39e02f5dd1c5fa9d4511442546299d0b069675 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 18 Oct 2015 01:49:43 +0300
-Subject: [PATCH 42/52] Step 5.3:  add PartiesList template
+Subject: [PATCH 42/57] Step 5.3:  add PartiesList template
 
 ---
  client/parties-list/parties-list.html | 11 +++++++++++
@@ -1463,7 +1463,7 @@ index 0000000..460dd4a
 From a9ea7651d2ba5533ce5de8b524d79d34dfa8dab8 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 18 Oct 2015 01:59:44 +0300
-Subject: [PATCH 43/52] Removes app.html
+Subject: [PATCH 43/57] Removes app.html
 
 ---
  client/app.html | 11 -----------
@@ -1494,7 +1494,7 @@ index 460dd4a..0000000
 From c9222226b706654f128ef59afe5235389748e347 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 18 Oct 2015 02:03:06 +0300
-Subject: [PATCH 44/52] Step 5.4:  clean up Socally component
+Subject: [PATCH 44/57] Step 5.4:  clean up Socally component
 
 ---
  client/app.ts | 19 ++-----------------
@@ -1525,7 +1525,7 @@ index e975346..c70f06d 100644
 +    directives: [ROUTER_DIRECTIVES]
  })
 -class Socially {
--    parties: Mongo.Cursor<Object>;
+-    parties: Mongo.Cursor&lt;Object>;
 -
 -    constructor () {
 -        this.parties = Parties.find();
@@ -1545,7 +1545,7 @@ index e975346..c70f06d 100644
 From 5c5531b5c85753d7a27c6166bc15a23222a03c77 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 18 Oct 2015 02:14:40 +0300
-Subject: [PATCH 45/52] Step 5.5:  add PartyDetails component
+Subject: [PATCH 45/57] Step 5.5:  add PartyDetails component
 
 ---
  client/party-details/party-details.ts | 11 +++++++++++
@@ -1576,7 +1576,7 @@ index 0000000..0d21bb3
 From 08f0a5576beedc336f3e728d17a911f4a925a4a2 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 18 Oct 2015 02:15:46 +0300
-Subject: [PATCH 46/52] Step 5.6:  add PartyDetails template
+Subject: [PATCH 46/57] Step 5.6:  add PartyDetails template
 
 ---
  client/party-details/party-details.html | 5 +++++
@@ -1601,7 +1601,7 @@ index 0000000..63fdaea
 From 296a265a5833ab0bc6ccd4df00586169930c4d2d Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 18 Oct 2015 02:19:18 +0300
-Subject: [PATCH 47/52] Step 5.7:  configure routes
+Subject: [PATCH 47/57] Step 5.7:  configure routes
 
 ---
  client/app.ts | 15 ++++++++++++---
@@ -1648,7 +1648,7 @@ index c70f06d..6a32c1b 100644
 From 4b834e384eeb6acdd0ee822b0a8adbee62ab9c76 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 18 Oct 2015 03:17:25 +0300
-Subject: [PATCH 48/52] Step 5.8:  import RouterLink directive
+Subject: [PATCH 48/57] Step 5.8:  import RouterLink directive
 
 ---
  client/parties-list/parties-list.ts | 4 +++-
@@ -1673,7 +1673,7 @@ index 5f574f2..6971f05 100644
 +    directives: [NgFor, PartiesForm, RouterLink]
  })
  export class PartiesList {
-     parties: Mongo.Cursor<Object>;
+     parties: Mongo.Cursor&lt;Object>;
 -- 
 2.4.9 (Apple Git-60)
 
@@ -1681,7 +1681,7 @@ index 5f574f2..6971f05 100644
 From 721bb2f89680a4402199171f8b0bbd3060750206 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 18 Oct 2015 03:19:56 +0300
-Subject: [PATCH 49/52] Step 5.9:  add links to the parties list
+Subject: [PATCH 49/57] Step 5.9:  add links to the parties list
 
 ---
  client/parties-list/parties-list.html | 2 +-
@@ -1707,7 +1707,7 @@ index 460dd4a..c437199 100644
 From 3165db73f82cfb0f77136dddccbb20238f196a94 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 18 Oct 2015 20:11:55 +0300
-Subject: [PATCH 50/52] Step 5.10:  injecting route parameters
+Subject: [PATCH 50/57] Step 5.10:  injecting route parameters
 
 ---
  client/party-details/party-details.ts | 12 +++++++++---
@@ -1744,7 +1744,7 @@ index 0d21bb3..5ee40df 100644
 From 65ade49436c6c80d0384818965ed4b6441d55161 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 18 Oct 2015 20:44:54 +0300
-Subject: [PATCH 51/52] Step 5.11:  load party details
+Subject: [PATCH 51/57] Step 5.11:  load party details
 
 ---
  client/party-details/party-details.ts | 5 +++++
@@ -1781,7 +1781,7 @@ index 5ee40df..6232a7e 100644
 From cc5ba59441514db77ed78635bb6fedb07a4f9ac8 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 18 Oct 2015 20:45:51 +0300
-Subject: [PATCH 52/52] Step 5.12:  render party details
+Subject: [PATCH 52/57] Step 5.12:  render party details
 
 ---
  client/party-details/party-details.html | 6 ++++--
@@ -1804,4 +1804,172 @@ index 63fdaea..b88d435 100644
 -- 
 2.4.9 (Apple Git-60)
 
+
+From 035c86ed880861352a8717f828c9b06eb5741193 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sun, 8 Nov 2015 23:23:24 +0300
+Subject: [PATCH 53/57] Adds RouterLink dependency.
+
+---
+ client/party-details/party-details.ts | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/client/party-details/party-details.ts b/client/party-details/party-details.ts
+index 6232a7e..3dfd096 100644
+--- a/client/party-details/party-details.ts
++++ b/client/party-details/party-details.ts
+@@ -6,11 +6,14 @@ import {RouteParams} from 'angular2/router';
+ 
+ import {Parties} from 'collections/parties';
+ 
++import {RouterLink} from 'angular2/router';
++
+ @Component({
+     selector: 'party-details'
+ })
+ @View({
+-    templateUrl: 'client/party-details/party-details.html'
++    templateUrl: 'client/party-details/party-details.html',
++    directives: [RouterLink]
+ })
+ export class PartyDetails {
+     party: Object;
+-- 
+2.4.9 (Apple Git-60)
+
+
+From 6235172e1ee6ad8dbf1fb651d0c060d98f62743c Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sun, 8 Nov 2015 23:24:33 +0300
+Subject: [PATCH 54/57] Step 6.1: add party details form
+
+---
+ client/party-details/party-details.html | 16 +++++++++++-----
+ 1 file changed, 11 insertions(+), 5 deletions(-)
+
+diff --git a/client/party-details/party-details.html b/client/party-details/party-details.html
+index b88d435..3a07b4a 100644
+--- a/client/party-details/party-details.html
++++ b/client/party-details/party-details.html
+@@ -1,7 +1,13 @@
+-<header>
+-  <h2>{{party.name}}</h2>
++<form>
++  <label>Name</label>
++  <input type="text">
+ 
+-  <p>{{party.description}}</p>
++  <label>Description</label>
++  <input type="text">
+ 
+-  <p>{{party.location}}</p>
+-</header>
++  <label>Location</label>
++  <input type="text">
++
++  <button type="submit">Save</button>
++  <button [router-link]="['/PartiesList']">Cancel</button>
++</form>
+-- 
+2.4.9 (Apple Git-60)
+
+
+From 83aeeab04ca202e3092357a6fe5d72aaab39759d Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sun, 8 Nov 2015 23:30:58 +0300
+Subject: [PATCH 55/57] Step 6.2: add form directives
+
+---
+ client/party-details/party-details.ts | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/client/party-details/party-details.ts b/client/party-details/party-details.ts
+index 3dfd096..5bb40a0 100644
+--- a/client/party-details/party-details.ts
++++ b/client/party-details/party-details.ts
+@@ -1,6 +1,6 @@
+ /// &lt;reference path="../../typings/angular2-meteor.d.ts" />
+ 
+-import {Component, View} from 'angular2/angular2';
++import {FORM_DIRECTIVES, Component, View} from 'angular2/angular2';
+ 
+ import {RouteParams} from 'angular2/router';
+ 
+@@ -13,7 +13,7 @@ import {RouterLink} from 'angular2/router';
+ })
+ @View({
+     templateUrl: 'client/party-details/party-details.html',
+-    directives: [RouterLink]
++    directives: [RouterLink, FORM_DIRECTIVES]
+ })
+ export class PartyDetails {
+     party: Object;
+-- 
+2.4.9 (Apple Git-60)
+
+
+From 077895b8fe51c48db76405932b4257663bdcc9bf Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sun, 8 Nov 2015 23:44:19 +0300
+Subject: [PATCH 56/57] Step 6.3: bind party to form inputs
+
+---
+ client/party-details/party-details.html | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/client/party-details/party-details.html b/client/party-details/party-details.html
+index 3a07b4a..3258d93 100644
+--- a/client/party-details/party-details.html
++++ b/client/party-details/party-details.html
+@@ -1,12 +1,12 @@
+-<form>
++<form (submit)="saveParty(party)">
+   <label>Name</label>
+-  <input type="text">
++  <input type="text" [(ng-model)]="party.name">
+ 
+   <label>Description</label>
+-  <input type="text">
++  <input type="text" [(ng-model)]="party.description">
+ 
+   <label>Location</label>
+-  <input type="text">
++  <input type="text" [(ng-model)]="party.location">
+ 
+   <button type="submit">Save</button>
+   <button [router-link]="['/PartiesList']">Cancel</button>
+-- 
+2.4.9 (Apple Git-60)
+
+
+From 4316209a71f18e259b2454e48d451f7398797fe0 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sun, 8 Nov 2015 23:53:48 +0300
+Subject: [PATCH 57/57] Step 6.4: add submit event handler
+
+---
+ client/party-details/party-details.ts | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+diff --git a/client/party-details/party-details.ts b/client/party-details/party-details.ts
+index 5bb40a0..fe9702f 100644
+--- a/client/party-details/party-details.ts
++++ b/client/party-details/party-details.ts
+@@ -22,4 +22,14 @@ export class PartyDetails {
+         var partyId = params.get('partyId');
+         this.party = Parties.findOne(partyId);
+     }
++
++    saveParty(party) {
++      Parties.update(party._id, {
++        $set: {
++          name: party.name,
++          description: party.description,
++          location: party.location
++        }
++      });
++    }
+ }
+-- 
+2.4.9 (Apple Git-60)
 
