@@ -41,14 +41,6 @@ and look at the amazing app that's running on your computer!
 
 We now have a fully functional app which includes both a server and a client!
 
-Because we decided to work with AngularJS in the client side, we need to remove the default UI package of Meteor, called Blaze.
-
-We also need to remove a package named `ecmascript` because Angular-Meteor uses a package named `angular-babel` in order to get both ECMAScript6 and AngularJS DI annotations.
-
-So let's remove it by running:
-    $ meteor remove blaze-html-templates
-    $ meteor remove ecmascript
-
 The default Meteor app starts life with three files, one `js`, one `html` and one `css` file. Each named with the application name you used in the `create` command above. In our case this is `socially`.
 
 We are going to add our own files for this tutorial. So let's start by deleting the following files:
@@ -81,11 +73,16 @@ So in our case, Meteor found our `index.html` file, found the `BODY` tag inside 
 
 It's time to add Angular 1 to our stack!
 
-First things first, let's add the Angular 1 package to Meteor (we will discuss Meteor packages later in this tutorial)
+Because we decided to work with AngularJS in the client side, we need to remove the default UI package of Meteor, called `Blaze`.
 
+We also need to remove Meteor's default ECMAScript2015 package named `ecmascript` because Angular-Meteor uses a package named `angular-babel` in order to get both ECMAScript2015 and AngularJS DI annotations.
 
+So let's remove it by running:
 
-Back in the command line, launch this command:
+    $ meteor remove blaze-html-templates
+    $ meteor remove ecmascript
+
+Now let's add the Angular 1 package to Meteor, back in the command line, launch this command:
 
     $ meteor add angular
 
