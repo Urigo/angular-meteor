@@ -76,11 +76,23 @@ Then, change `client/app.ts` to:
 
 But what happens if the parties data changes on the server-side? How can we tell parties to update itself?
 
-For now, we can use Meteor [Tracker](https://www.meteor.com/tracker), a reactive wrapper that will run data when a change occurs. We will bind it to Angular's change detection system, [Zone.js](https://github.com/angular/zone.js).
+For now, we can use Meteor [Tracker](https://www.meteor.com/tracker), a reactive wrapper that will run data when a change occurs.
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="3.5"}}
 
-The fat arrow syntax `=>` is also from ES2015, and tells the function to run in it's parents context. In other words, it tells `this` to be the context of the class Socially.
+As you could have notice above, we made use not only `Tracker.autorun` but also we've added a new argument of `NgZone` type to the contructor and fetching parties inside
+of `zone.run` method. `NgZone` is part of Angular 2's change detection system,
+which has become more clever and faster in Angular 2.
+
+Think of `zone.run` for now as a equivalent of `scope.$apply()` syntax in Angular 1.
+Everything that happens in the zone will be checked by Angular 2 for changes, and if there are some
+they will be applied to the UI. You can read more info about
+Zone.js [here](https://github.com/angular/zone.js).
+
+`zone` parameter appears in the constructor via the dependency injection resolution mechanism, which 
+has got new look in Angular 2. Don't worry if it's murky how it works — you'll learn more about nuances in the next chapters.
+
+The fat arrow syntax `=>` is also a new syntax that comes in ES2015, and tells the function to run in it's parents context. In other words, it tells `this` to be the context of the class Socially.
 
 Our `app.ts` file should now look like this:
 
@@ -107,6 +119,22 @@ __`client/app.ts`:__
 
     bootstrap(Socially);
 
+Now every change what happens to the `this.parties` variable should automatically be saved to the local client-side minimongo DB and synced to the server-side MongoDB and all the other clients in realtime!
+
+# Intializing Collection on Server Side
+One thing is left before we can start manupilating data and be able to check if changes are reactive.
+
+We need to initialize `Parties` collection for the server side. Since collection file
+`collection/parties` is turned into a System.js module by Typescript, we'll need to import it manually in order to execute code inside.
+
+It's worth mentioning that System.js modules work on the server side the same way as on the client.
+There is one special case where the package helps you. Similar to the client's `app.ts`,
+if you call your main server file `main.ts`, a System.js module created out of this file will be loaded automatically.
+
+Let's create a new folder called "server" and add a file `main.ts` inside of it. As mentioned earlier, "server" is another special folder name in Meteor, it's contents will only run on the server.
+
+  {{> DiffBox tutorialName="meteor-angular2-socially" step="3.6"}}
+
 # Inserting Parties from the Console
 
 At this point we've implemented a rendering of a list of parties on the page.
@@ -128,7 +156,7 @@ You can see that we didn't have to write any code to connect the server-side dat
 
 Insert a few more parties from the database console with different text.
 
-Now let's do the same but with 'remove'. At the prompt, type the following command to look at all the parties and their properties:
+Now let's do the same but with "remove". At the prompt, type the following command to look at all the parties and their properties:
 
     db.parties.find({});
 
@@ -151,11 +179,11 @@ with Mongo collections.
 `Parties.find()` returns an instance of `Mongo.Cursor`, which can reactively provide all documents, that have been added, changed or removed, to every component. 
 But how can we teach Angular2 to understand Mongo cursors?
 
-Luckily, Angular2 comes with the concept of so-called 'differ classes' — classes that are used by 
+Luckily, Angular2 comes with the concept of so-called "differ classes" — classes that are used by 
 the `ng-for` directive to provide information about what has been changed in a collection to render 
 this collection efficiently.
 
-This concept is similar to 'dirty checking' in Angular 1.x but with some differences. 
+This concept is similar to "dirty checking" in Angular 1.x but with some differences. 
 Angular2 now computes the difference between two arrays much more efficiently, thanks to
 some advanced algorithms. We are not going to dive into those details in this tutorial. But you can
 read this [blog post](http://info.meteor.com/blog/comparing-performance-of-blaze-react-angular-meteor-and-angular-2-with-meteor),
@@ -179,11 +207,11 @@ Lets change `bootstrap` from `angular2/angular2` to `bootstrap` from `angular2-m
 
 Now, change `app.ts` to:
 
-  {{> DiffBox tutorialName="meteor-angular2-socially" step="3.6"}}
+  {{> DiffBox tutorialName="meteor-angular2-socially" step="3.7"}}
 
 Run your app again and manipulate the documents in the Mongo console.
 You will see that it works as before — it loads the same data as before and all changes to the `this.parties` that
-should happen reactively. At the same time, this code looks much simpler than before.
+should happen reactively happen reactively. At the same time, this code looks much simpler than before.
 
 Lets stick to this approach from now on.
 
@@ -193,21 +221,14 @@ Until now we've been inserting party documents to our collection using the Mongo
 It would be convenient though to have some initial data pre-loaded into our database. So,
 let's initialize our server with the same parties as we had before.
 
-Create a new folder called 'server' and create a file called `load_parties.ts` inside of it. As mentioned earlier, 'server' is another special folder name in Meteor, it's contents will only run on the server.
-
-Add the following to the file:
-
-{{> DiffBox tutorialName="meteor-angular2-socially" step="3.7"}}
-
-It's worth mentioning that System.js modules work on the server side the same way as on the client.
-
-There is one special case. Pretty much in the same style as on the client,
-if you call your main server file `main.ts`, a System.js module associated with this file will be loaded automatically.
-On the client though, the main file is called `app.ts`.
-
-Let's create `main.ts` and call `loadParties` inside to load parties:
+Let's add a file called `load_parties.ts` inside of "server" folder
+and implement `loadParties` method inside to load parties:
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="3.8"}}
+
+Then change `main.ts` to run this method on Meteor startup:
+
+{{> DiffBox tutorialName="meteor-angular2-socially" step="3.9"}}
 
 Now run the app and you should see the list of parties on the screen.
 
