@@ -108,7 +108,7 @@ __`client/app.ts`:__
     })
 
     @View({
-      templateUrl: 'client/app.html',
+      templateUrl: "client/app.html",
       directives: [NgFor]
     })
 
