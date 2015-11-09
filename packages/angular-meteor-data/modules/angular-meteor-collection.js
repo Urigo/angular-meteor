@@ -110,22 +110,35 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
       return deferred.promise;
     };
 
-    // performs each update operation induvidualy to prevent conflics like
-    AngularMeteorCollection._updateParallel = function(selector, modifier, callback) {
-      var self = this;
-      var operationsNames = _.keys(modifier);
+    // performs $pull operations parallely.
+    // used for handling splice operations returned from getUpdates() to prevent conflicts.
+    // see issue: https://github.com/Urigo/angular-meteor/issues/793
+    AngularMeteorCollection._updateDiff = function(selector, update, callback) {
       callback = callback || angular.noop;
+      var setters = _.omit(update, '$pull');
+      var updates = [setters];
 
-      var done = _.after(operationsNames.length, callback);
+      _.each(update.$pull, function(pull, prop) {
+        var puller = {};
+        puller[prop] = pull;
+        updates.push({ $pull: puller });
+      });
+
+      this._updateParallel(selector, updates, callback);
+    };
+
+    // performs each update operation parallely
+    AngularMeteorCollection._updateParallel = function(selector, updates, callback) {
+      var self = this;
+      var done = _.after(updates.length, callback);
 
       var next = function(err, affectedDocsNum) {
         if (err) return callback(err);
         done(null, affectedDocsNum);
       };
 
-      operationsNames.forEach(function(operationName) {
-        var contractedModifier = _.pick(modifier, operationName);
-        self.$$collection.update(selector, contractedModifier, next);
+      _.each(updates, function(update) {
+        self.$$collection.update(selector, update, next);
       });
     };
 
@@ -315,7 +328,7 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
 
       // Updates changed documents
       changes.changed.forEach(function(descriptor) {
-        self._updateParallel(descriptor.selector, descriptor.modifier);
+        self._updateDiff(descriptor.selector, descriptor.modifier);
       });
     };
 

@@ -355,14 +355,16 @@ describe('$meteorCollection service', function() {
       beforeEach(function() {
         Collection = new Meteor.Collection(null);
         ngCollection = $meteorCollection(Collection);
+        spyOn(Collection, 'update').and.callThrough();
         $timeout.flush();
       });
 
       it('should perform each operation individually in parallel', function(done) {
         var id = 'id-01';
         var obj = {_id: id, data: [1, 2, 3]};
-        // simulating obj.data.splice(1, 1);
-        var updates = {$set: {'data.1': 3}, $unset: {'data.2': true}, $pull: {'data': null}};
+        var update1 = {$set: {'data.1': 3}, $unset: {'data.2': true}};
+        var update2 = {$pull: {'data': null}};
+        var updates = [update1, update2];
 
         ngCollection.push(obj);
         $rootScope.$apply();
@@ -373,9 +375,36 @@ describe('$meteorCollection service', function() {
 
           var doc = Collection.findOne(id);
           expect(doc).toDeepEqual({_id: id, data: [1, 3]});
-
+          expect(Collection.update.calls.count()).toEqual(2);
+          expect(Collection.update.calls.argsFor(0)).toEqual([id, update1, jasmine.any(Function)]);
+          expect(Collection.update.calls.argsFor(1)).toEqual([id, update2, jasmine.any(Function)]);
           done();
         });
+      });
+    });
+
+    describe('_updateDiff()', function() {
+      var Collection;
+      var ngCollection;
+
+      beforeEach(function() {
+        Collection = new Meteor.Collection(null);
+        ngCollection = $meteorCollection(Collection);
+        spyOn(ngCollection, '_updateParallel');
+        $timeout.flush();
+      });
+
+      it('should seperate pull operations into different updates', function() {
+        var id = 'id-01';
+        var update = {$set: {'data.1': 3}, $unset: {'data.2': true}, $pull: {'data': null}};
+        var update1 = _.omit(update, '$pull');
+        var update2 = _.pick(update, '$pull');
+        var updates = [update1, update2];
+        var callback = function() {};
+
+        ngCollection._updateDiff(id, update, callback);
+        expect(ngCollection._updateParallel).toHaveBeenCalled();
+        expect(ngCollection._updateParallel.calls.argsFor(0)).toEqual([id, updates, callback]);
       });
     });
 
