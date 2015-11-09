@@ -1,6 +1,6 @@
 {{#template name="tutorialAngular2.step_03.md"}}
 {{> downloadPreviousStep stepName="step_02"}}
-    
+
 OK, so we have a nice client side application that creates and renders it's own data.
 
 So, if we were in any framework other than Meteor, we would likely start implementing a series of REST endpoints to connect the server to the client.
@@ -52,7 +52,7 @@ Meteor has a series of special folder names, including "client". All files withi
 Because this file is located outside of any special folder name, like "client" or "server", this collection and the actions on it will run both on the client (minimongo) and the server (Mongo).
 
 Though we only declared our model once, we have two modules that declare two versions of our parties collection:
-one for client-side and one for server-side. This is often referred to as "isomorphic javascript". All synchronization between these two versions of collections is handled by Meteor. 
+one for client-side and one for server-side. This is often referred to as "isomorphic javascript". All synchronization between these two versions of collections is handled by Meteor.
 
 The last thing is, again, to add the declaration file reference to this file:
 
@@ -89,7 +89,7 @@ Everything that happens in the zone will be checked by Angular 2 for changes, an
 they will be applied to the UI. You can read more info about
 Zone.js [here](https://github.com/angular/zone.js).
 
-`zone` parameter appears in the constructor via the dependency injection resolution mechanism, which 
+`zone` parameter appears in the constructor via the dependency injection resolution mechanism, which
 has got new look in Angular 2. Don't worry if it's murky how it works — you'll learn more about nuances in the next chapters.
 
 The fat arrow syntax `=>` is also a new syntax that comes in ES2015, and tells the function to run in it's parents context. In other words, it tells `this` to be the context of the class Socially.
@@ -98,26 +98,32 @@ Our `app.ts` file should now look like this:
 
 __`client/app.ts`:__
 
-    import {Component, View, NgFor, bootstrap} from 'angular2/angular2';
+    /// <reference path="../typings/angular2-meteor.d.ts" />
 
+    import {NgZone, Component, View, NgFor, bootstrap} from 'angular2/angular2';
     import {Parties} from 'collections/parties';
 
     @Component({
       selector: 'app'
     })
+
     @View({
-      templateUrl: "client/index.ng.html",
+      templateUrl: 'client/app.html',
       directives: [NgFor]
     })
+
     class Socially {
-      constructor () {
-        Tracker.autorun(zone.bind(() => {
+      parties: Array<Object>;
+
+      constructor (zone: NgZone) {
+        Tracker.autorun(() => zone.run(() => {
           this.parties = Parties.find().fetch();
         }));
       }
     }
 
     bootstrap(Socially);
+
 
 Now every change what happens to the `this.parties` variable should automatically be saved to the local client-side minimongo DB and synced to the server-side MongoDB and all the other clients in realtime!
 
@@ -176,19 +182,19 @@ But what if we assign `Parties.find()` to `this.parties`, the same way as we do 
 with Blaze (Blaze is the default frontend framework in Meteor, check the official Meteor [tutorial](https://www.meteor.com/tutorials/blaze/templates) out first), and Angular2 could understand how to handle it? That would be an ideal way to work
 with Mongo collections.
 
-`Parties.find()` returns an instance of `Mongo.Cursor`, which can reactively provide all documents, that have been added, changed or removed, to every component. 
+`Parties.find()` returns an instance of `Mongo.Cursor`, which can reactively provide all documents, that have been added, changed or removed, to every component.
 But how can we teach Angular2 to understand Mongo cursors?
 
-Luckily, Angular2 comes with the concept of so-called "differ classes" — classes that are used by 
-the `ng-for` directive to provide information about what has been changed in a collection to render 
+Luckily, Angular2 comes with the concept of so-called "differ classes" — classes that are used by
+the `ng-for` directive to provide information about what has been changed in a collection to render
 this collection efficiently.
 
-This concept is similar to "dirty checking" in Angular 1.x but with some differences. 
+This concept is similar to "dirty checking" in Angular 1.x but with some differences.
 Angular2 now computes the difference between two arrays much more efficiently, thanks to
 some advanced algorithms. We are not going to dive into those details in this tutorial. But you can
 read this [blog post](http://info.meteor.com/blog/comparing-performance-of-blaze-react-angular-meteor-and-angular-2-with-meteor),
-which compares speed of Angular1 vs Angular2 in Meteor. 
-One more advantage of differs in Angular2 is that customers can create their own differs for their own collection types. 
+which compares speed of Angular1 vs Angular2 in Meteor.
+One more advantage of differs in Angular2 is that customers can create their own differs for their own collection types.
 
 The Angular2-Meteor package implements a special differ class for Mongo cursors. All we need to do is to load it into our app.
 
