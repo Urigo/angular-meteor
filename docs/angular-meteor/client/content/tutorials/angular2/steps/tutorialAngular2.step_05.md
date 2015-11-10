@@ -13,8 +13,9 @@ when user clicks on a list item, app should navigate to the new page and show se
 Routing functionality in Angular traditionally goes in a separate library.
 In Angular 2, there is a separate module for this called `angular2/router` (read about routing API [here](https://angular.io/docs/js/latest/api/router/)).
 
-Luckily, Angular2-Meteor package contains `angular2/router` along with the core,
-so you can start importing it right out of the box.
+Angular2-Meteor package contains `angular2/router` along with the code, so you can start importing it right out of the box.
+Angular2 routing turns out to be a small fraction of all Angular2 source code (less than 100k uncompressed);
+it made sense to include it by default into the package.
 
 Let's import routing dependencies into our app. We'll need router providers,
 router directives and router configuration.
@@ -188,7 +189,5 @@ Let's list what we'done in this step:
 - configured routing to use these views and created a layout template
 - learned briefly how dependency injection works in Angular 2
 - injected route parameters and loaded party details with the ID parameter
-
-In the next unit we'll look at some advanced router features like **LifeCycle Hooks**.
 
 {{/template}}

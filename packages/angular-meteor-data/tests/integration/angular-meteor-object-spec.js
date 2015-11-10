@@ -174,7 +174,7 @@ describe('$meteorObject service', function () {
     });
   });
 
-  describe('#_updateParallel()', function() {
+  describe('_updateDiff()', function() {
     var Collection;
     var ngObject;
     var id;
@@ -183,23 +183,15 @@ describe('$meteorObject service', function () {
       id = 'id-01';
       Collection = new Meteor.Collection(null);
       ngObject = $meteorObject(Collection, id);
+      spyOn(AngularMeteorCollection, '_updateDiff');
     });
 
-    it('should perform each update operation individually in parallel', function(done) {
-      // simulating obj.data.splice(1, 1);
-      var updates = {$set: {'data.1': 3}, $unset: {'data.2': true}, $pull: {'data': null}};
-      _.extend(ngObject, {data: [1, 2, 3]});
-      ngObject.save();
-
-      ngObject._updateParallel(updates, function(err, affectedDocsNum) {
-        if (err) return done(err);
-        expect(affectedDocsNum).toEqual(1);
-
-        var doc = Collection.findOne(id);
-        expect(doc).toDeepEqual({_id: id, data: [1, 3]});
-
-        done();
-      });
+    it('should call collection\'s updateDiff() method with object\'s id', function() {
+      var update = {};
+      var callback = function() {};
+      ngObject._updateDiff(update, callback);
+      expect(AngularMeteorCollection._updateDiff).toHaveBeenCalled();
+      expect(AngularMeteorCollection._updateDiff.calls.argsFor(0)).toEqual([id, update, callback]);
     });
   });
 
@@ -226,14 +218,14 @@ describe('$meteorObject service', function () {
       $rootScope.$apply();
       doc = TestCollection.findOne(id);
       expect(meteorObject.getRawObject()).toDeepEqual(doc);
-      expect(TestCollection.update.calls.mostRecent().args[0]).toEqual({ _id: id });
+      expect(TestCollection.update.calls.mostRecent().args[0]).toEqual(id);
       expect(TestCollection.update.calls.mostRecent().args[1]).toEqual({ $set: { 'c.d': 'd' } });
 
       delete meteorObject.c.d;
       $rootScope.$apply();
       doc = TestCollection.findOne(id);
       expect(meteorObject.getRawObject()).toDeepEqual(doc);
-      expect(TestCollection.update.calls.mostRecent().args[0]).toEqual({ _id: id });
+      expect(TestCollection.update.calls.mostRecent().args[0]).toEqual(id);
       expect(TestCollection.update.calls.mostRecent().args[1]).toEqual({ $unset: { 'c.d': true } });
     });
 
