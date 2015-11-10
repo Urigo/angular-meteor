@@ -67,6 +67,15 @@ describe('$meteorObject service', function () {
   });
 
   describe('#save()', function() {
+    it('should not call save upon init', function() {
+      spyOn(TestCollection, 'update').and.callThrough();
+      // Watching changes (auto modifier not set to false)
+      $meteorObject(TestCollection, id);
+      $rootScope.$apply();
+
+      expect(TestCollection.update).not.toHaveBeenCalled();
+    });
+    
     it('should save updates specified', function() {
       meteorObject.save({
         c: 3
