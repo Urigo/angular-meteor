@@ -231,6 +231,11 @@ Then change `main.ts` to run this method on Meteor startup:
 {{> DiffBox tutorialName="meteor-angular2-socially" step="3.9"}}
 
 Now run the app and you should see the list of parties on the screen.
+If not, please, run 
+
+    meteor reset
+
+in order to remove all previous parties added before via the terminal.
 
 In the next step, we'll see how to add functionality to our app's UI so that we can add parties on the page.
 
