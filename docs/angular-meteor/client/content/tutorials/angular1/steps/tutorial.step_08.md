@@ -35,7 +35,7 @@ Later on in this tutorial we will replace those default account-ui forms with cu
 
 Now let's add dependency to `account.ui` module in our module definition:
 
-{{> DiffBox tutorialName="angular-meteor" step="8.4"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="8.4"}}
 
 Now let's add the accounts-ui directive (loginButtons) into our app, into index.html.
 
