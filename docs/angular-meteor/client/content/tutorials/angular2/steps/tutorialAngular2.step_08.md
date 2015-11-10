@@ -84,8 +84,8 @@ Let's take our current user's ID and set it as the owner id of the party we are 
 Mateor's base accounts package provides two reactive functions that we are going to
 use, `Meteor.user()` and `Meteor.userId()`.
 
-For now we are going to keep it simple in this app and allow every logged-in user to change a party.
-Change the code for the add button in `parties-form.ts` to also save user ID. Also,
+For now we are going to keep it simple in this app and allow every logged-in users to change a party.
+Change the code for the add button in `parties-form.ts` to save user ID as well. Also,
 it'd be useful to add an alert promting user to log in if she wants to add or update a party:
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="8.4"}}
