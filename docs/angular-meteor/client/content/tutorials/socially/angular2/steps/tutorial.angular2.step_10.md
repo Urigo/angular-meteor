@@ -1,4 +1,4 @@
-{{#template name="tutorialAngular2.step_10.md"}}
+{{#template name="tutorial.angular2.step_10.md"}}
 
 Now that we have a working app, we can go public!
 Meteor makes it really easy to put an app up on the internet where other people can use it.

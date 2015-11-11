@@ -1,4 +1,4 @@
-{{#template name="tutorial.step_19.md"}}
+{{#template name="tutorial.angular1.step_19.md"}}
 {{> downloadPreviousStep stepName="step_18"}}
 
 This part of the tutorial will cover the usage of third-party libraries with angular-meteor.

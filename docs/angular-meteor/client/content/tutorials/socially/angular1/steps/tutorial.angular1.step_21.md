@@ -1,4 +1,4 @@
-{{#template name="tutorial.step_21.md"}}
+{{#template name="tutorial.angular1.step_21.md"}}
 {{> downloadPreviousStep stepName="step_20"}}
 
 This step of the tutorial teaches us how to add mobile support for iOS and Android and how to elegantly reuse code using the Meteor packaging system.

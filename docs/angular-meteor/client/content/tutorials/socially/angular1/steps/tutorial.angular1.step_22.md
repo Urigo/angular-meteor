@@ -1,4 +1,4 @@
-{{#template name="tutorial.step_22.md"}}
+{{#template name="tutorial.angular1.step_22.md"}}
 {{> downloadPreviousStep stepName="step_21"}}
 
 Ionic is css and Javascript framework. It is highly recommended that before starting this step you will get yourself familar with its [documentation](http://ionicframework.com/docs/).

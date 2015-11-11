@@ -1,4 +1,4 @@
-{{#template name="tutorialAngular2.step_09.md"}}
+{{#template name="tutorial.angular2.step_09.md"}}
 {{> downloadPreviousStep stepName="step_08"}} 
   
 Right now our app has no privacy, every user can see all the parties on the screen.

@@ -1,4 +1,4 @@
-{{#template name="tutorialAngular2.step_00.md"}}
+{{#template name="tutorial.angular2.step_00.md"}}
 
 > Disclaimer: Angular 2 isn't stable yet, and the API might change. For now, consider this tutorial for educational purposes.
 

@@ -1,4 +1,4 @@
-{{#template name="tutorial.step_09.md"}}
+{{#template name="tutorial.angular1.step_09.md"}}
 {{> downloadPreviousStep stepName="step_08"}}
 
 

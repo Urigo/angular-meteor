@@ -214,6 +214,7 @@ SOCIALLY_ANGULAR1 = [
     seoTitle: 'Next Steps',
     route: "tutorials.angular1.next-steps",
     path: "/tutorials/angular1/next-steps",
-    contentTemplate: 'tutorial.angular1.step_23.md'
+    contentTemplate: 'tutorial.angular1.step_23.md',
+    previousCodeStep: '22'
   }
 ];

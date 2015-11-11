@@ -81,7 +81,7 @@ Router.map(function () {
 
   self.route('tutorialIntro', {
     path: '/tutorialIntro',
-    template: 'tutorial-intro',
+    template: 'sociallyTutorialIntro',
     seoTitle: 'Angular Meteor Tutorials'
   });
 

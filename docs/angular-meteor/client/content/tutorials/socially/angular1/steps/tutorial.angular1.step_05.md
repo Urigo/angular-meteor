@@ -1,4 +1,4 @@
-{{#template name="tutorial.step_05.md"}}
+{{#template name="tutorial.angular1.step_05.md"}}
 {{> downloadPreviousStep stepName="step_04"}}
 
 In this step, you will learn how to create a layout template and how to build an app that has multiple views by adding routing, using an Angular 1 module called `ui-router`.

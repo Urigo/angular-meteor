@@ -1,4 +1,4 @@
-{{#template name="tutorialAngular2.step_06.md"}}
+{{#template name="tutorial.angular2.step_06.md"}}
 {{> downloadPreviousStep stepName="step_05"}}  
 
 In this step we are going to add a form to the party details view and 

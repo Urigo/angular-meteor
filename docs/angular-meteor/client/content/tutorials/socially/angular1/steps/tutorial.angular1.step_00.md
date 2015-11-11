@@ -1,4 +1,4 @@
-{{#template name="tutorial.step_00.md"}}
+{{#template name="tutorial.angular1.step_00.md"}}
 
 Let's start building our Meteor Angular 1 Socially app.
 

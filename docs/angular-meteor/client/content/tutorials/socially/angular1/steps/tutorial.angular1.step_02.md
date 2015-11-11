@@ -1,4 +1,4 @@
-{{#template name="tutorial.step_02.md"}}
+{{#template name="tutorial.angular1.step_02.md"}}
 {{> downloadPreviousStep stepName="step_01"}}
 
 It's time to make our web app dynamic — with Angular 1.

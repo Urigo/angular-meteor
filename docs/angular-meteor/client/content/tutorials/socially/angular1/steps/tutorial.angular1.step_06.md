@@ -1,4 +1,4 @@
-{{#template name="tutorial.step_06.md"}}
+{{#template name="tutorial.angular1.step_06.md"}}
 {{> downloadPreviousStep stepName="step_05"}}
 
 In this step, we will implement the party details view, which is displayed when a user clicks on a party in the parties list.

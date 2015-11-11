@@ -1,4 +1,4 @@
-{{#template name="tutorial.step_13.md"}}
+{{#template name="tutorial.angular1.step_13.md"}}
 {{> downloadPreviousStep stepName="step_12"}}
 
 Our next mission is to invite users to private parties.

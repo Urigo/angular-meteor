@@ -1,4 +1,4 @@
-{{#template name="tutorial.step_11.md"}}
+{{#template name="tutorial.angular1.step_11.md"}}
 {{> downloadPreviousStep stepName="step_11"}}
 
 So far, we've been building our app and testing only in a web browser,
