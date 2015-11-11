@@ -3,6 +3,14 @@ Angular2 + Meteor integration.
 
 ##### Angular2 version: alpha-45.
 
+## Table of Contents
+* [Quick start](#quick-start)
+    * [Install package](#install-package)
+    * [Import Angular2 into your app](#import-angular2-into-your-app)
+    * [Start using Meteor in your Angular2 app](#start-using-meteor-in-your-angular2-app)
+* [Server Side](#server-side)
+* [TypeScript Support](#typescript-support)
+
 ## Quick start
 
 ### Install package:
@@ -107,7 +115,7 @@ Meteor.startup(() => {
 ))
 ````
 
-### TypeScript Compilation
+### TypeScript Support
 The package uses this TypeScript [compilers](https://github.com/barbatus/ts-compilers) to compile `.ts`-files. Please, read there how you can configure TypeScript, what options are available or how you can speed up just-in-time compilation.
 
 By default, compiler will curse on syntactic errors and will log out all missing modules and other semantic errors to the terminal.
