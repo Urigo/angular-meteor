@@ -59,7 +59,7 @@ angularMeteorObject.factory('AngularMeteorObject', [
         }
 
         // NOTE: do not use #upsert() method, since it does not exist in some collections
-        return this._updateDiff(mods, createFulfill({ action: 'updated' }));
+        this._updateDiff(mods, createFulfill({ action: 'updated' }));
       }
       // insert
       else {
