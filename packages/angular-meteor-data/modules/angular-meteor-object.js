@@ -1,6 +1,7 @@
 'use strict';
 
-var angularMeteorObject = angular.module('angular-meteor.object', ['angular-meteor.utils', 'angular-meteor.subscribe', 'angular-meteor.collection', 'getUpdates', 'diffArray']);
+var angularMeteorObject = angular.module('angular-meteor.object',
+  ['angular-meteor.utils', 'angular-meteor.subscribe', 'angular-meteor.collection', 'getUpdates', 'diffArray']);
 
 angularMeteorObject.factory('AngularMeteorObject', [
   '$q', '$meteorSubscribe', '$meteorUtils', 'diffArray', 'getUpdates', 'AngularMeteorCollection',
@@ -18,9 +19,9 @@ angularMeteorObject.factory('AngularMeteorObject', [
       var data = new function SubObject() {};
       var doc = collection.findOne(id, options);
       var collectionExtension = _.pick(AngularMeteorCollection, '_updateParallel');
-      angular.extend(data, doc);
-      angular.extend(data, AngularMeteorObject);
-      angular.extend(data, collectionExtension);
+      _.extend(data, doc);
+      _.extend(data, AngularMeteorObject);
+      _.extend(data, collectionExtension);
 
       data._serverBackup = doc || {};
       data.$$collection = collection;
@@ -92,7 +93,7 @@ angularMeteorObject.factory('AngularMeteorObject', [
         var docExtension = _.pick(doc, docKeys);
         var clientProps;
 
-        angular.extend(Object.getPrototypeOf(self), Object.getPrototypeOf(doc));
+        _.extend(Object.getPrototypeOf(self), Object.getPrototypeOf(doc));
         _.extend(self, docExtension);
         _.extend(self._serverBackup, docExtension);
 
@@ -149,8 +150,9 @@ angularMeteorObject.factory('$meteorObject', [
       }
 
       var data = new AngularMeteorObject(collection, id, options);
-      data._auto = auto !== false; // Making auto default true - http://stackoverflow.com/a/15464208/1426570
-      angular.extend(data, $meteorObject);
+      // Making auto default true - http://stackoverflow.com/a/15464208/1426570
+      data._auto = auto !== false;
+      _.extend(data, $meteorObject);
       data._setAutos();
       return data;
     }
@@ -170,9 +172,7 @@ angularMeteorObject.factory('$meteorObject', [
       }, true);
 
       this.unregisterAutoDestroy = $rootScope.$on('$destroy', function() {
-        if (self && self.stop) {
-          self.stop();
-        }
+        if (self && self.stop) self.pop();
       });
     };
 
