@@ -5,7 +5,7 @@ SOCIALLY_ANGULAR1 = [
     seoTitle: 'Bootstrapping',
     route: "tutorials.angular1.bootstrapping",
     path: "/tutorials/angular1/bootstrapping",
-    contentTemplate: 'tutorial.step_00.md',
+    contentTemplate: 'tutorial.angular1.step_00.md',
     video: '//www.youtube.com/embed/s2RWlIrkCaE?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd',
     commitDiff: 'a00a945d0a503c99efaff1e9a20dfe6f9205821f'
   },
@@ -15,7 +15,7 @@ SOCIALLY_ANGULAR1 = [
     seoTitle: 'Static Template',
     route: "tutorials.angular1.static-template",
     path: "/tutorials/angular1/static-template",
-    contentTemplate: 'tutorial.step_01.md',
+    contentTemplate: 'tutorial.angular1.step_01.md',
     video: '//www.youtube.com/embed/xUod-yoDfEE?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd'
   },
   {
@@ -24,7 +24,7 @@ SOCIALLY_ANGULAR1 = [
     seoTitle: 'Dynamic Template',
     route: "tutorials.angular1.dynamic-template",
     path: "/tutorials/angular1/dynamic-template",
-    contentTemplate: 'tutorial.step_02.md',
+    contentTemplate: 'tutorial.angular1.step_02.md',
     video: '//www.youtube.com/embed/xUod-yoDfEE?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd'
   },
   {
@@ -33,7 +33,7 @@ SOCIALLY_ANGULAR1 = [
     seoTitle: '3-Way data binding',
     route: "tutorials.angular1.3-way-data-binding",
     path: "/tutorials/angular1/3-way-data-binding",
-    contentTemplate: 'tutorial.step_03.md',
+    contentTemplate: 'tutorial.angular1.step_03.md',
     video: '//www.youtube.com/embed/xUod-yoDfEE?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd'
   },
   {
@@ -42,7 +42,7 @@ SOCIALLY_ANGULAR1 = [
     seoTitle: 'Adding/removing objects and Angular event handling',
     route: "tutorials.angular1.adding-removing-objects-and-angular-event-handling",
     path: "/tutorials/angular1/adding-removing-objects-and-angular-event-handling",
-    contentTemplate: 'tutorial.step_04.md',
+    contentTemplate: 'tutorial.angular1.step_04.md',
     video: '//www.youtube.com/embed/ijKsWglJI0k?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd'
   },
   {
@@ -51,7 +51,7 @@ SOCIALLY_ANGULAR1 = [
     seoTitle: 'Routing and Multiple Views',
     route: "tutorials.angular1.routing-and-multiple-views",
     path: "/tutorials/angular1/routing-and-multiple-views",
-    contentTemplate: 'tutorial.step_05.md',
+    contentTemplate: 'tutorial.angular1.step_05.md',
     video: '//www.youtube.com/embed/oScHP7Vd7as?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd'
   },
   {
@@ -60,7 +60,7 @@ SOCIALLY_ANGULAR1 = [
     seoTitle: 'Bind one object',
     route: "tutorials.angular1.bind-one-object",
     path: "/tutorials/angular1/bind-one-object",
-    contentTemplate: 'tutorial.step_06.md',
+    contentTemplate: 'tutorial.angular1.step_06.md',
     video: '//www.youtube.com/embed/kRen9GlR3K8?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd'
   },
   {
@@ -69,7 +69,7 @@ SOCIALLY_ANGULAR1 = [
     seoTitle: 'Folder structure',
     route: "tutorials.angular1.folder-structure",
     path: "/tutorials/angular1/folder-structure",
-    contentTemplate: 'tutorial.step_07.md',
+    contentTemplate: 'tutorial.angular1.step_07.md',
     video: '//www.youtube.com/embed/l3nTv4GuJrY?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd'
   },
   {
@@ -78,7 +78,7 @@ SOCIALLY_ANGULAR1 = [
     seoTitle: 'User accounts, authentication and permissions',
     route: "tutorials.angular1.user-accounts-authentication-and-permissions",
     path: "/tutorials/angular1/user-accounts-authentication-and-permissions",
-    contentTemplate: 'tutorial.step_08.md',
+    contentTemplate: 'tutorial.angular1.step_08.md',
     video: '//www.youtube.com/embed/PgS-IAMn9Ig?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd'
   },
   {
@@ -87,7 +87,7 @@ SOCIALLY_ANGULAR1 = [
     seoTitle: 'Privacy and publish-subscribe functions',
     route: "tutorials.angular1.privacy-and-publish-subscribe-functions",
     path: "/tutorials/angular1/privacy-and-publish-subscribe-functions",
-    contentTemplate: 'tutorial.step_09.md',
+    contentTemplate: 'tutorial.angular1.step_09.md',
     video: '//www.youtube.com/embed/wAHi7ilDHko?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd'
   },
   {
@@ -96,7 +96,7 @@ SOCIALLY_ANGULAR1 = [
     seoTitle: 'Deploying your app',
     route: "tutorials.angular1.deploying-your-app",
     path: "/tutorials/angular1/deploying-your-app",
-    contentTemplate: 'tutorial.step_10.md',
+    contentTemplate: 'tutorial.angular1.step_10.md',
     video: '//www.youtube.com/embed/2WnZBKv9H9o?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd'
   },
   {
@@ -105,7 +105,7 @@ SOCIALLY_ANGULAR1 = [
     seoTitle: 'Running your app on Android or iOS with PhoneGap',
     route: "tutorials.angular1.running-your-app-on-android-or-ios-with-phoneGap",
     path: "/tutorials/angular1/running-your-app-on-android-or-ios-with-phoneGap",
-    contentTemplate: 'tutorial.step_11.md',
+    contentTemplate: 'tutorial.angular1.step_11.md',
     video: '//www.youtube.com/embed/5vZOI2fi13U?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd'
   },
   {
@@ -114,7 +114,7 @@ SOCIALLY_ANGULAR1 = [
     seoTitle: 'Search, sort, pagination and reactive vars',
     route: "tutorials.angular1.search-sort-pagination-and-reactive-vars",
     path: "/tutorials/angular1/search-sort-pagination-and-reactive-vars",
-    contentTemplate: 'tutorial.step_12.md',
+    contentTemplate: 'tutorial.angular1.step_12.md',
     video: '//www.youtube.com/embed/8XQI2XpyH18?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd'
   },
   {
@@ -123,7 +123,7 @@ SOCIALLY_ANGULAR1 = [
     seoTitle: 'Using and creating AngularJS filters',
     route: "tutorials.angular1.using-and-creating-angularjs-filters",
     path: "/tutorials/angular1/using-and-creating-angularjs-filters",
-    contentTemplate: 'tutorial.step_13.md',
+    contentTemplate: 'tutorial.angular1.step_13.md',
     video: '//www.youtube.com/embed/S049FI8TP4A?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd'
   },
   {
@@ -132,7 +132,7 @@ SOCIALLY_ANGULAR1 = [
     seoTitle: 'Meteor methods with promises',
     route: "tutorials.angular1.meteor-methods-with-promises",
     path: "/tutorials/angular1/meteor-methods-with-promises",
-    contentTemplate: 'tutorial.step_14.md',
+    contentTemplate: 'tutorial.angular1.step_14.md',
     video: '//www.youtube.com/embed/qNUjZjfaYt8?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd'
   },
   {
@@ -141,7 +141,7 @@ SOCIALLY_ANGULAR1 = [
     seoTitle: 'Conditional template directives with AngularJS',
     route: "tutorials.angular1.conditional-template-directives-with-angularjs",
     path: "/tutorials/angular1/conditional-template-directives-with-angularjs",
-    contentTemplate: 'tutorial.step_15.md',
+    contentTemplate: 'tutorial.angular1.step_15.md',
     video: '//www.youtube.com/embed/KSlVThsNCss?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd'
   },
   {
@@ -150,7 +150,7 @@ SOCIALLY_ANGULAR1 = [
     seoTitle: 'Google Maps',
     route: "tutorials.angular1.google-maps",
     path: "/tutorials/angular1/google-maps",
-    contentTemplate: 'tutorial.step_16.md',
+    contentTemplate: 'tutorial.angular1.step_16.md',
     video: '//www.youtube.com/embed/A6qsm_RDc9Y?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd'
   },
   {
@@ -159,7 +159,7 @@ SOCIALLY_ANGULAR1 = [
     seoTitle: 'CSS, LESS and Bootstrap',
     route: "tutorials.angular1.css-less-and-bootstrap",
     path: "/tutorials/angular1/css-less-and-bootstrap",
-    contentTemplate: 'tutorial.step_17.md',
+    contentTemplate: 'tutorial.angular1.step_17.md',
     video: '//www.youtube.com/embed/A6qsm_RDc9Y?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd'
   },
   {
@@ -168,7 +168,7 @@ SOCIALLY_ANGULAR1 = [
     seoTitle: 'angular-material and custom Angular auth forms',
     route: "tutorials.angular1.angular-material-and-custom-angular-auth-forms",
     path: "/tutorials/angular1/angular-material-and-custom-angular-auth-forms",
-    contentTemplate: 'tutorial.step_18.md',
+    contentTemplate: 'tutorial.angular1.step_18.md',
     video: '//www.youtube.com/embed/A6qsm_RDc9Y?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd'
   },
   {
@@ -177,7 +177,7 @@ SOCIALLY_ANGULAR1 = [
     seoTitle: '3rdParty Libraries',
     route: "tutorials.angular1.3rd-party-libraries",
     path: "/tutorials/angular1/3rd-party-libraries",
-    contentTemplate: 'tutorial.step_19.md',
+    contentTemplate: 'tutorial.angular1.step_19.md',
     video: '//www.youtube.com/embed/A6qsm_RDc9Y?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd'
   },
   {
@@ -186,7 +186,7 @@ SOCIALLY_ANGULAR1 = [
     seoTitle: 'Handling Files with CollectionFS',
     route: "tutorials.angular1.handling-files-with-collectionfs",
     path: "/tutorials/angular1/handling-files-with-collectionfs",
-    contentTemplate: 'tutorial.step_20.md',
+    contentTemplate: 'tutorial.angular1.step_20.md',
     video: '//www.youtube.com/embed/A6qsm_RDc9Y?list=PLhCf3AUOg4PgQoY_A6xWDQ70yaNtPYtZd',
     previousCodeStep: '18'
   },
@@ -196,7 +196,7 @@ SOCIALLY_ANGULAR1 = [
     seoTitle: 'Mobile support and AngularJS modules isolation using Meteor packages',
     route: "tutorials.angular1.mobile-support-and-packages-isolation",
     path: "/tutorials/angular1/mobile-support-and-packages-isolation",
-    contentTemplate: 'tutorial.step_21.md',
+    contentTemplate: 'tutorial.angular1.step_21.md',
     previousCodeStep: '20'
   },
   {
@@ -205,7 +205,7 @@ SOCIALLY_ANGULAR1 = [
     seoTitle: 'Add support for Ionic package with Meteor and angular-meteor.',
     route: "tutorials.angular1.ionic",
     path: "/tutorials/angular1/ionic",
-    contentTemplate: 'tutorial.step_22.md',
+    contentTemplate: 'tutorial.angular1.step_22.md',
     previousCodeStep: '21'
   },
   {
@@ -214,6 +214,6 @@ SOCIALLY_ANGULAR1 = [
     seoTitle: 'Next Steps',
     route: "tutorials.angular1.next-steps",
     path: "/tutorials/angular1/next-steps",
-    contentTemplate: 'tutorial.next_steps.html'
+    contentTemplate: 'tutorial.angular1.step_23.md'
   }
 ];
