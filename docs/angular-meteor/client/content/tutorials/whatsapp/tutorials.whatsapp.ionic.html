@@ -1,0 +1,100 @@
+<template name="tutorials.whatsapp.intro">
+  <div class="container tutorial-container">
+    <div class="row">
+      <div class="col-md-12 main-content">
+        <div class="row">
+          <div class="col-md-12">
+            <a href="https://github.com/Urigo/angular-meteor/edit/master/.docs/angular-meteor/client/content/tutorials/tutorial-ionic.html"
+               class="btn btn-default btn-lg improve-button">
+              <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
+            </a>
+            <ul class="btn-group tutorial-nav first-get-started">
+              <a href="/tutorials/whatsapp/ionic/bootstrapping">
+                <li class="btn btn-primary">Get Started <i class="glyphicon glyphicon-step-forward"></i></li>
+              </a>
+            </ul>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+{{#markdown}}
+# Angular-Meteor & ionic
+
+{{tutorialImage 'ionic' '0.png' 500}}
+
+Facing your next mobile app project, you want to choose the best solutions to start fast while also
+solutions that will stay relevant when your project grows and scales.
+
+The two companies that took the concept of creating a platform with a complete set of tools for your
+development needs and not just another Framework to the furthest are Meteor and Ionic.
+
+**Ionic** - Ionic has become one of the most popular solutions to develop hybrid mobile apps fast across
+different platform.
+
+The Ionic platform includes solutions for prototyping, build, testing, deploying apps, a market of starter
+apps, plugins and themes, CLI integration and push notifications service. (Further writing by an Ionic
+person)
+
+**Meteor** - But your app needs a full stack solution.
+
+Meteor has become the only open source Javascript platform that supply the complete set of solutions you
+need to create a real time mobile connected apps.
+
+The Meteor platform is reliable, fast and easy to develop and deploy and it will also handle all the complexities of your app when it grows and scales with time.
+
+So which one should you choose?
+
+Your best option is to use them both!
+
+With angular-meteor, Meteor became the best backend for Angular and Ionic apps.
+
+Both companies made the steps needed to support each other:
+
+- [Meteor now has official support for Angular with it’s 3rd party libraries!](http://info.meteor.com/blog/official-angular-support-with-angular-meteor-1.0.0)
+- [Ionic added official support for Meteor’s packaging system](https://github.com/driftyco/ionic/pull/3133)
+
+So now you we can use the strengthnesses of each of those platform combined the create the ultimate stack
+for your mobile apps.
+
+In this post, we will create a full WhatsApp clone, using Angular and the Ionic Framework, using Meteor’s
+realtime collections for the chat and Meteor’s simple Authentication packages for SMS based
+authentication.
+
+Both platform has their own CLI and build process solutions.
+
+You can choose the CLI and build process that you prefer.
+
+So I’ve decided to create to two versions of that blog post, one, on Ionic’s blog, using the Ionic CLI and one, on Meteor’s blog, using the Meteor CLI and build process.
+
+Chapters:
+
+- Installing the platform and creating a base app
+- Layout, coding style and structure
+- Creating a realtime Meteor server and connect to our existing app
+- Chat view and send messages
+- Users and (SMS) authentication
+- Create and remove chats
+- Privacy and publish/subscribe
+
+For the full app please check out those two repositories:
+
+[Step by step commits](https://github.com/idanwe/ionic-cli-meteor-whatsapp-tutorial)
+
+[Commit per chapter](https://github.com/idanwe/ionic-whatsapp)
+
+Please send feedback and requests about this tutorial on the comments below or open Github issues on the repositories mentioned above.
+
+{{/markdown}}
+          </div>
+          <div class="col-md-12">
+            <ul class="btn-group tutorial-nav">
+              <a href="/tutorials/whatsapp/ionic/bootstrapping">
+                <li class="btn btn-primary">Get Started <i class="glyphicon glyphicon-step-forward"></i></li>
+              </a>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
