@@ -1,4 +1,4 @@
-ANGULAR1_TUT = [
+SOCIALLY_ANGULAR1 = [
   {
     id: "0",
     title: 'Bootstrapping',

@@ -10,7 +10,7 @@ PAGES = [
     seoTitlePrefix: "Angular Meteor Tutorial | ",
     subHead: "Build your first Angular Meteor app",
     stepbarHide: true,
-    pages: ANGULAR1_TUT
+    pages: SOCIALLY_ANGULAR1
   },
   {
     id: "2",
@@ -23,7 +23,7 @@ PAGES = [
     seoTitlePrefix: "Angular 2.0 Meteor Tutorial | ",
     subHead: "Angular 2.0 Meteor tutorial",
     stepbarHide: true,
-    pages: ANGULAR2_TUT
+    pages: SOCIALLY_ANGULAR2
   },
   {
     id: "3",
@@ -35,6 +35,6 @@ PAGES = [
     seoTitlePrefix: "Angular-Meteor and Ionic | ",
     subHead: "Angular-Meteor and Ionic",
     stepbarHide: true,
-    pages: IONIC_TUT
+    pages: WHATSAPP_IONIC
   }
 ];

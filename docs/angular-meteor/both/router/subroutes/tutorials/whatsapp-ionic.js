@@ -1,4 +1,4 @@
-IONIC_TUT = [
+WHATSAPP_IONIC = [
   {
     id: "0",
     title: 'Bootstrapping',

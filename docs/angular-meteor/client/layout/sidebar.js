@@ -40,10 +40,10 @@ Template.sidebarDefault.helpers({
     var route = Router.current().route.path(this) || 'angular';
 
     if (route.indexOf('tutorials/ionic') !== -1) {
-      return IONIC_TUT;
+      return WHATSAPP_IONIC;
     }
     else {
-      return ANGULAR1_TUT;
+      return SOCIALLY_ANGULAR1;
     }
   }
 });
