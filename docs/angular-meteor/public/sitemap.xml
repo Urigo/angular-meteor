@@ -6,181 +6,206 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorialIntro</loc>
+    <loc>http://angular-meteor.com/tutorials/socially</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular1/bootstrapping</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular1/bootstrapping</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular1/static-template</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular1/static-template</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular1/dynamic-template</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular1/dynamic-template</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular1/3-way-data-binding</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular1/3-way-data-binding</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular1/adding-removing-objects-and-angular-event-handling</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular1/adding-removing-objects-and-angular-event-handling</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular1/routing-and-multiple-views</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular1/routing-and-multiple-views</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular1/bind-one-object</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular1/bind-one-object</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular1/folder-structure</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular1/folder-structure</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular1/user-accounts-authentication-and-permissions</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular1/user-accounts-authentication-and-permissions</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular1/privacy-and-publish-subscribe-functions</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular1/privacy-and-publish-subscribe-functions</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular1/deploying-your-app</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular1/deploying-your-app</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular1/running-your-app-on-android-or-ios-with-phoneGap</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular1/running-your-app-on-android-or-ios-with-phoneGap</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular1/search-sort-pagination-and-reactive-vars</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular1/search-sort-pagination-and-reactive-vars</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular1/using-and-creating-angularjs-filters</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular1/using-and-creating-angularjs-filters</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular1/meteor-methods-with-promises</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular1/meteor-methods-with-promises</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular1/conditional-template-directives-with-angularjs</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular1/conditional-template-directives-with-angularjs</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular1/google-maps</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular1/google-maps</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular1/css-less-and-bootstrap</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular1/css-less-and-bootstrap</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular1/angular-material-and-custom-angular-auth-forms</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular1/angular-material-and-custom-angular-auth-forms</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular1/3rd-party-libraries</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular1/3rd-party-libraries</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular1/handling-files-with-collectionfs</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular1/handling-files-with-collectionfs</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular2/bootstrapping</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular1/mobile-support-and-packages-isolation</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular2/static-template</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular1/ionic</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular2/dynamic-template</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular1/next-steps</loc>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>http://angular-meteor.com/tutorials/socially/angular2/bootstrapping</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular2/3-way-data-binding</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular2/static-template</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular2/adding-removing-objects-and-angular-event-handling</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular2/dynamic-template</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular2/routing-and-multiple-views</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular2/3-way-data-binding</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular2/bind-one-object</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular2/adding-removing-objects-and-angular-event-handling</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular2/folder-structure</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular2/routing-and-multiple-views</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular2/user-accounts-authentication-and-permissions</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular2/bind-one-object</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular2/privacy-and-publish-subscribe-functions</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular2/folder-structure</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular2/deploying-your-app</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular2/user-accounts-authentication-and-permissions</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular2/running-your-app-on-android-or-ios-with-phoneGap</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular2/privacy-and-publish-subscribe-functions</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular2/search-sort-pagination-and-reactive-vars</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular2/deploying-your-app</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular2/using-and-creating-angularjs-filters</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular2/running-your-app-on-android-or-ios-with-phoneGap</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular2/meteor-methods-with-promises</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular2/search-sort-pagination-and-reactive-vars</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular2/conditional-template-directives-with-angularjs</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular2/using-and-creating-angularjs-filters</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular2/google-maps</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular2/meteor-methods-with-promises</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular2/css-less-and-bootstrap</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular2/conditional-template-directives-with-angularjs</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular2/angular-material-and-custom-angular-auth-forms</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular2/google-maps</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular2/3rd-party-libraries</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular2/css-less-and-bootstrap</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular2/handling-files-with-collectionfs</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular2/angular-material-and-custom-angular-auth-forms</loc>
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/angular1/next-steps</loc>
+    <loc>http://angular-meteor.com/tutorials/socially/angular2/3rd-party-libraries</loc>
     <priority>0.5</priority>
   </url>
+  <url>
+    <loc>http://angular-meteor.com/tutorials/socially/angular2/handling-files-with-collectionfs</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://angular-meteor.com/tutorials/socially/angular2/mobile-support-and-packages-isolation</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://angular-meteor.com/tutorials/socially/angular2/ionic</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>http://angular-meteor.com/tutorials/socially/angular2/next-steps</loc>
+    <priority>0.5</priority>
+  </url>
+
+
+
+
   <url>
     <loc>http://angular-meteor.com/about</loc>
     <priority>0.6</priority>
@@ -274,39 +299,39 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/ionic-tutorial</loc>
+    <loc>http://angular-meteor.com/tutorials/whatsapp</loc>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/ionic/bootstrapping</loc>
+    <loc>http://angular-meteor.com/tutorials/whatsapp/ionic/bootstrapping</loc>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/ionic/layout</loc>
+    <loc>http://angular-meteor.com/tutorials/whatsapp/ionic/layout</loc>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/ionic/server</loc>
+    <loc>http://angular-meteor.com/tutorials/whatsapp/ionic/server</loc>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/ionic/methods</loc>
+    <loc>http://angular-meteor.com/tutorials/whatsapp/ionic/methods</loc>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/ionic/authentication</loc>
+    <loc>http://angular-meteor.com/tutorials/whatsapp/ionic/authentication</loc>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/ionic/chats</loc>
+    <loc>http://angular-meteor.com/tutorials/whatsapp/ionic/chats</loc>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/ionic/privacy</loc>
+    <loc>http://angular-meteor.com/tutorials/whatsapp/ionic/privacy</loc>
     <priority>0.4</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/tutorials/ionic/summary</loc>
+    <loc>http://angular-meteor.com/tutorials/whatsapp/ionic/summary</loc>
     <priority>0.4</priority>
   </url>
 </urlset>

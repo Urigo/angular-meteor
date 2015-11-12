@@ -53,41 +53,42 @@ Router.map(function () {
   //
 
   createSubRoutes(TUTORIALS);
-  redirect('/tutorials', '/tutorialIntro');
+
+  redirect('/tutorials', '/tutorials/socially');
 
   // Redirect old link
   redirect('/tutorial', '/tutorialIntro');
-  redirect('/tutorial/step_00', '/tutorials/angular1/bootstrapping');
-  redirect('/tutorial/step_01', '/tutorials/angular1/static-template');
-  redirect('/tutorial/step_02', '/tutorials/angular1/dynamic-template');
-  redirect('/tutorial/step_03', '/tutorials/angular1/3-way-data-binding');
-  redirect('/tutorial/step_04', '/tutorials/angular1/adding-removing-objects-and-angular-event-handling');
-  redirect('/tutorial/step_05', '/tutorials/angular1/routing-and-multiple-views');
-  redirect('/tutorial/step_06', '/tutorials/angular1/bind-one-object');
-  redirect('/tutorial/step_07', '/tutorials/angular1/folder-structure');
-  redirect('/tutorial/step_08', '/tutorials/angular1/user-accounts-authentication-and-permissions');
-  redirect('/tutorial/step_09', '/tutorials/angular1/privacy-and-publish-subscribe-functions');
-  redirect('/tutorial/step_10', '/tutorials/angular1/deploying-your-app');
-  redirect('/tutorial/step_11', '/tutorials/angular1/running-your-app-on-android-or-ios-with-phoneGap');
-  redirect('/tutorial/step_12', '/tutorials/angular1/search-sort-pagination-and-reactive-vars');
-  redirect('/tutorial/step_13', '/tutorials/angular1/using-and-creating-angularjs-filters');
-  redirect('/tutorial/step_14', '/tutorials/angular1/meteor-methods-with-promises');
-  redirect('/tutorial/step_15', '/tutorials/angular1/conditional-template-directives-with-angularjs');
-  redirect('/tutorial/step_16', '/tutorials/angular1/google-maps');
-  redirect('/tutorial/step_17', '/tutorials/angular1/css-less-and-bootstrap');
-  redirect('/tutorial/step_18', '/tutorials/angular1/angular-material-and-custom-angular-auth-forms');
-  redirect('/tutorial/step_19', '/tutorials/angular1/3rd-party-libraries');
-  redirect('/tutorial/step_20', '/tutorials/angular1/handling-files-with-collectionfs');
+  redirect('/tutorial/step_00', '/tutorials/socially/angular1/bootstrapping');
+  redirect('/tutorial/step_01', '/tutorials/socially/angular1/static-template');
+  redirect('/tutorial/step_02', '/tutorials/socially/angular1/dynamic-template');
+  redirect('/tutorial/step_03', '/tutorials/socially/angular1/3-way-data-binding');
+  redirect('/tutorial/step_04', '/tutorials/socially/angular1/adding-removing-objects-and-angular-event-handling');
+  redirect('/tutorial/step_05', '/tutorials/socially/angular1/routing-and-multiple-views');
+  redirect('/tutorial/step_06', '/tutorials/socially/angular1/bind-one-object');
+  redirect('/tutorial/step_07', '/tutorials/socially/angular1/folder-structure');
+  redirect('/tutorial/step_08', '/tutorials/socially/angular1/user-accounts-authentication-and-permissions');
+  redirect('/tutorial/step_09', '/tutorials/socially/angular1/privacy-and-publish-subscribe-functions');
+  redirect('/tutorial/step_10', '/tutorials/socially/angular1/deploying-your-app');
+  redirect('/tutorial/step_11', '/tutorials/socially/angular1/running-your-app-on-android-or-ios-with-phoneGap');
+  redirect('/tutorial/step_12', '/tutorials/socially/angular1/search-sort-pagination-and-reactive-vars');
+  redirect('/tutorial/step_13', '/tutorials/socially/angular1/using-and-creating-angularjs-filters');
+  redirect('/tutorial/step_14', '/tutorials/socially/angular1/meteor-methods-with-promises');
+  redirect('/tutorial/step_15', '/tutorials/socially/angular1/conditional-template-directives-with-angularjs');
+  redirect('/tutorial/step_16', '/tutorials/socially/angular1/google-maps');
+  redirect('/tutorial/step_17', '/tutorials/socially/angular1/css-less-and-bootstrap');
+  redirect('/tutorial/step_18', '/tutorials/socially/angular1/angular-material-and-custom-angular-auth-forms');
+  redirect('/tutorial/step_19', '/tutorials/socially/angular1/3rd-party-libraries');
+  redirect('/tutorial/step_20', '/tutorials/socially/angular1/handling-files-with-collectionfs');
 
-  self.route('tutorialIntro', {
-    path: '/tutorialIntro',
-    template: 'tutorial-intro',
+  self.route('tutorials.socially', {
+    path: '/tutorials/socially',
+    template: 'tutorials.socially.intro',
     seoTitle: 'Angular Meteor Tutorials'
   });
 
-  self.route('ionic-tutorial', {
-    path: '/ionic-tutorial',
-    template: 'ionic-tutorial',
+  self.route('tutorials.whatsapp', {
+    path: '/tutorials/whatsapp',
+    template: 'tutorials.whatsapp.intro',
     seoTitle: 'Angular Meteor and Ionic tutorial'
   });
 
