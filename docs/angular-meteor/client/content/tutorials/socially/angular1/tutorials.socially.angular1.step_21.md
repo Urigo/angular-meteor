@@ -69,7 +69,7 @@ Here are the steps:
 
 Create the angualr module and name it `socially.mobile`:
 
-{{> DiffBox tutorialName="angular-meteor" step="21.5"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="21.5"}}
 
 Add a route for the login in the client side using the `$stateProvider` like we used to, and add only the login route.
 
