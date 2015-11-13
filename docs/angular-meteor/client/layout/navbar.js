@@ -19,7 +19,7 @@ Template.navbar.helpers({
     return Number(this.id);
   },
   sociallyLinks: function() {
-    return ANGULAR1_TUT;
+    return SOCIALLY_ANGULAR1;
   }
 });
 

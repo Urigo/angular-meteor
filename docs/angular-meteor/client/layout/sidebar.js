@@ -8,17 +8,17 @@ Template.tutorialSelector.helpers({
   tutorialLink: function() {
     var route = Router.current().route.path(this) || 'angular';
 
-    if (route.indexOf('tutorials/ionic') !== -1) {
-      return 'ionic-tutorial';
+    if (route.indexOf('tutorials/whatsapp/ionic') !== -1) {
+      return 'tutorials.whatsapp.intro';
     }
     else {
-      return 'tutorialIntro';
+      return 'tutorials.socially.intro';
     }
   },
   pages: function() {
     var route = Router.current().route.path(this) || 'angular';
 
-    if (route.indexOf('tutorials/ionic') !== -1) {
+    if (route.indexOf('tutorials/whatsapp/ionic') !== -1) {
       return [];
     }
     else {
@@ -39,11 +39,11 @@ Template.sidebarDefault.helpers({
   pages: function() {
     var route = Router.current().route.path(this) || 'angular';
 
-    if (route.indexOf('tutorials/ionic') !== -1) {
-      return IONIC_TUT;
+    if (route.indexOf('tutorials/whatsapp/ionic') !== -1) {
+      return WHATSAPP_IONIC;
     }
     else {
-      return ANGULAR1_TUT;
+      return SOCIALLY_ANGULAR1;
     }
   }
 });

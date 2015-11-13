@@ -9,7 +9,7 @@ angularMeteorObject.factory('AngularMeteorObject', [
     AngularMeteorObject.$$internalProps = [
       '$$collection', '$$options', '$$id', '$$hashkey', '$$internalProps', '$$scope',
       'save', 'reset', 'subscribe', 'stop', 'autorunComputation', 'unregisterAutoBind', 'unregisterAutoDestroy', 'getRawObject',
-      '_auto', '_setAutos', '_eventEmitter', '_serverBackup', '_updateParallel'
+      '_auto', '_setAutos', '_eventEmitter', '_serverBackup', '_updateDiff', '_updateParallel'
     ];
 
     function AngularMeteorObject (collection, id, options){
@@ -17,8 +17,10 @@ angularMeteorObject.factory('AngularMeteorObject', [
       // Collection Helpers and the like
       var data = new function SubObject() {};
       var doc = collection.findOne(id, options);
+      var collectionExtension = _.pick(AngularMeteorCollection, '_updateParallel');
       angular.extend(data, doc);
       angular.extend(data, AngularMeteorObject);
+      angular.extend(data, collectionExtension);
 
       data._serverBackup = doc || {};
       data.$$collection = collection;
@@ -57,7 +59,7 @@ angularMeteorObject.factory('AngularMeteorObject', [
         }
 
         // NOTE: do not use #upsert() method, since it does not exist in some collections
-        return this._updateParallel(mods, createFulfill({ action: 'updated' }));
+        this._updateDiff(mods, createFulfill({ action: 'updated' }));
       }
       // insert
       else {
@@ -73,9 +75,9 @@ angularMeteorObject.factory('AngularMeteorObject', [
       return deferred.promise;
     };
 
-    AngularMeteorObject._updateParallel = function(modifier, callback) {
+    AngularMeteorObject._updateDiff = function(update, callback) {
       var selector = this.$$id;
-      AngularMeteorCollection._updateParallel.call(this, selector, modifier, callback);
+      AngularMeteorCollection._updateDiff.call(this, selector, update, callback);
     };
 
     AngularMeteorObject.reset = function(keepClientProps) {
@@ -164,28 +166,7 @@ angularMeteorObject.factory('$meteorObject', [
       this.unregisterAutoBind = this._auto && $rootScope.$watch(function(){
         return self.getRawObject();
       }, function (item, oldItem) {
-        if (item === oldItem) {
-          self.$$collection.update({_id: item._id}, self.getRawObject());
-          return;
-        }
-
-        var id = item._id;
-        delete item._id;
-        delete oldItem._id;
-
-        var updates = getUpdates(oldItem, item);
-        if (_.isEmpty(updates)) return;
-        var pullUpdate;
-
-        if (updates.$pull) {
-          pullUpdate = { $pull : updates.$pull };
-          delete updates.$pull;
-        }
-        self.$$collection.update({_id: id}, updates);
-
-        if (pullUpdate) {
-          self.$$collection.update({ _id : id}, pullUpdate);
-        }
+        if (item !== oldItem) self.save();
       }, true);
 
       this.unregisterAutoDestroy = $rootScope.$on('$destroy', function() {

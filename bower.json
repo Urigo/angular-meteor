@@ -1,7 +1,7 @@
 {
   "name": "angular-meteor",
-  "main": "./.dist/angular-meteor.bundle.min.js",
-  "version": "1.2.0",
+  "main": "./dist/angular-meteor.bundle.min.js",
+  "version": "1.2.1",
   "homepage": "https://github.com/Urigo/angular-meteor",
   "authors": [
     "Uri Goldshtein <uri.goldshtein@gmail.com>"
