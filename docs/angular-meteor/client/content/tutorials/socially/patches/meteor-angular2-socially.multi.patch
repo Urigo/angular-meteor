@@ -1279,9 +1279,9 @@ index 4b12b0a..18dee47 100644
 +                location: party.location
 +            });
 +
-+            (<Control>this.partiesForm.controls['name']).updateValue('');
-+            (<Control>this.partiesForm.controls['description']).updateValue('');
-+            (<Control>this.partiesForm.controls['location']).updateValue('');
++            (&lt;Control>this.partiesForm.controls['name']).updateValue('');
++            (&lt;Control>this.partiesForm.controls['description']).updateValue('');
++            (&lt;Control>this.partiesForm.controls['location']).updateValue('');
 +        }
 +    }
  }
@@ -1630,7 +1630,7 @@ index c70f06d..6a32c1b 100644
      selector: 'app'
  })
  @View({
-+    template: '<router-outlet></router-outlet>',
++    template: '&lt;router-outlet></router-outlet>',
      directives: [ROUTER_DIRECTIVES]
  })
 +@RouteConfig([
@@ -2122,9 +2122,9 @@ index c4e7a4e..c656aeb 100644
 -                location: party.location
 -            });
 -
--            (<Control>this.partiesForm.controls['name']).updateValue('');
--            (<Control>this.partiesForm.controls['description']).updateValue('');
--            (<Control>this.partiesForm.controls['location']).updateValue('');
+-            (&lt;Control>this.partiesForm.controls['name']).updateValue('');
+-            (&lt;Control>this.partiesForm.controls['description']).updateValue('');
+-            (&lt;Control>this.partiesForm.controls['location']).updateValue('');
 +            if (Meteor.userId()) {
 +                Parties.insert({
 +                    name: party.name,
@@ -2133,9 +2133,9 @@ index c4e7a4e..c656aeb 100644
 +                    owner: Meteor.userId()
 +                });
 +
-+                (<Control>this.partiesForm.controls['name']).updateValue('');
-+                (<Control>this.partiesForm.controls['description']).updateValue('');
-+                (<Control>this.partiesForm.controls['location']).updateValue('');
++                (&lt;Control>this.partiesForm.controls['name']).updateValue('');
++                (&lt;Control>this.partiesForm.controls['description']).updateValue('');
++                (&lt;Control>this.partiesForm.controls['location']).updateValue('');
 +            } else {
 +                alert('Please log in to add a party');
 +            }
@@ -2424,10 +2424,10 @@ index c656aeb..d92d639 100644
                      owner: Meteor.userId()
                  });
  
-                 (<Control>this.partiesForm.controls['name']).updateValue('');
-                 (<Control>this.partiesForm.controls['description']).updateValue('');
-                 (<Control>this.partiesForm.controls['location']).updateValue('');
-+                (<Control>this.partiesForm.controls['public']).updateValue(false);
+                 (&lt;Control>this.partiesForm.controls['name']).updateValue('');
+                 (&lt;Control>this.partiesForm.controls['description']).updateValue('');
+                 (&lt;Control>this.partiesForm.controls['location']).updateValue('');
++                (&lt;Control>this.partiesForm.controls['public']).updateValue(false);
              } else {
                  alert('Please log in to add a party');
              }
