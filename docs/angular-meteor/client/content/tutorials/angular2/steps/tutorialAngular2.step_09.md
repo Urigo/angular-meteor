@@ -1,274 +1,177 @@
 {{#template name="tutorialAngular2.step_09.md"}}
-{{> downloadPreviousStep stepName="step_08"}} 
-  
-Right now our app has no privacy, every user can see all the parties on the screen.
+{{> downloadPreviousStep stepName="step_08"}}
 
-So let's add a `isPublic` flag on parties - if a party is public we will let anyone see it, but if a party is private, only the owner can see it.
+You may have noticed that all available parties were always shown on the page
+at the time, independently had they been added by a logged-in user or
+anonymously, for example.
+
+In future versions of our app, we'll probably want to have an RSVP feature for parties.
+Hence, it'll require to show simultaneously only public parties and parties current user has been invited to.
+
+In this step we are going to learn how we can restrict data flow from the server side
+to the client side for only desired data in Meteor based on
+what user currently logged-in and some other parameters.
 
 ## Autopublish
 
 First we need to remove the `autopublish` Meteor package.
 
-`autopublish` is added to any new Meteor project. It pushes a full copy of the database to each client.
+`autopublish` is added to any new Meteor project.
+Like it was mentioned before, it pushes a full copy of the database to each client.
 It helped us until now, but it's not so good for privacy...
 
 Write this command in the console:
 
     meteor remove autopublish
 
-Now run the app.   You can't see any parties.
-
-{{> DiffBox tutorialName="angular2-meteor" step="9.1"}}
+Now run the app. Oops, nothing on the page!
 
 ## Meteor.publish
 
-So now we need to tell Meteor what parties should it publish to the clients.
+Now we need to tell Meteor what parties we need to be transfered to the client side.
 
 To do that we will use Meteor's [publish function](http://docs.meteor.com/#/full/meteor_publish).
 
-Publish functions should go only in the server so the client won't have access to them.
+Publication functions are worth to be placed inside the "server" folder so clients won't have access to them.
 
-Let's create a new file named `parties.ts` inside the server folder.
+Let's create a new file named `parties.ts` insert this code inside the file:
 
-Inside the file insert this code:
+{{> DiffBox tutorialName="meteor-angular2-socially" step="9.1"}}
 
-{{> DiffBox tutorialName="angular2-meteor" step="9.2"}}
+As you can see, parameters of the Meteor.publish are self-explanatory:
+first one is a publication name, then there goes a function that returns
+a Mongo cursor, which represents a subset of the parties collection
+that server will transfer to the client. This function can take parameters as well, but
+we'll get to this in a minute.
 
-Let's see what's happening here:
+We've just created a System.js module, hence, as you already know, one necessary thing is left — to import it in the `main.ts` in order to execute code inside:
 
-- We have `Meteor.publish` - a function to define what to publish from the server to the client
-- The first parameter is the name of the subscription. the client will subscribe to that name
-- The second parameter is a function that defines what will be returned in the subscription
-
-That function will determine what data will be returned and the permissions needed.
+{{> DiffBox tutorialName="meteor-angular2-socially" step="9.2"}}
 
 ## Meteor.subscribe
 
-In our case the first name parameter is **"parties"**. So we will need to subscribe to the **"parties"** collection in the client.
+This function is an opposite of [Meteor.subscribe](http://docs.meteor.com/#/full/meteor_subscribe): the one we are goint to use on the client
+to get that data.
 
-Using [Meteor.subscribe](http://docs.meteor.com/#/full/meteor_subscribe) we can subscribe to our publications; which will then give us access to the published collections.
+In a regular Meteor app with Blaze, we'd add the following line to subscribe to the "parties" publications:
 
     Meteor.subscribe('parties');
 
-You can add this to our PartiesList component.
+It's very simple, isn't it. And when subscription is completed, we select parties from the collection:
 
-{{> DiffBox tutorialName="angular2-meteor" step="9.3"}}
+    Meteor.subscribe('parties', () => {
+      this.parties = Parties.find();
+    });
 
+But beyond that simplicity there go two little issues we'll need to solve.
+Each subscription means that Meteor will continue synchronize (or in Meteor terms, update reactively) particular set of data, we've just subscribed to, between server and client.
+If PartiesList components gets desctroyed, we need to inform Meteor to stop that synchronization, otherwise we'll get a memory leak.
+It especially makes sense for single page apps, that are most usually built with Meteor.
 
-Now let's limit the data sent to client.
+The second point is about informing Angular 2 to perform UI refresh when new data arrive.
+Or in other words, subscribe callback should run in the Angular 2's zone.
 
-{{> DiffBox tutorialName="angular2-meteor" step="9.4"}}
+These two points were a strong reason to add a new class called `MeteorComponent`
+to the Angular2-Meteor package. This class has two public methods: `subscribe` and `autorun`.
+If you inherit a component of this class and make use of these methods, you won't need to worry
+about cleanups — `MeteorComponent` will do them for you behind the hood when it's needed.
+These methods also has a convenient boolean parameter called `autoBind`, which goes the last.
+As its name suggests, we can tell `subscribe` to run the subscription callback in the change detection zone
+by setting the parameter to true.
 
-Our publish function can also take parameters.  In that case, we would also need to pass the parameters from the client.
+So, we are going to extend `PartiesList` component and make use of `this.subscribe`:
 
-Run the app again and you will see nothing. We have to change our data.
+{{> DiffBox tutorialName="meteor-angular2-socially" step="9.3"}}
 
-Reset the database from the console:
+Now run the app. Whoa, all parties are back!
+
+As it's mentioned earlier, it'd be nice for the app to implement a simple security and show parties based on who owns them. Let's do it.
+
+Firstly, we'll add a new `public` field to the party data schema in three steps: we'll update UI with new "Public" checkbox to the right of the "Location" input,
+then change the `PartiesForm` component and its `addParty` method particularly to reflect changes on the UI and, lastly, we'll change initial data on the server in `loadParties.td` to contain `public` field too:
+
+{{> DiffBox tutorialName="meteor-angular2-socially" step="9.4"}}
+
+{{> DiffBox tutorialName="meteor-angular2-socially" step="9.5"}}
+
+{{> DiffBox tutorialName="meteor-angular2-socially" step="9.6"}}
+
+Secondly, we are limiting data sent to the client. Simple check is to verify that 
+either the "owner" field exists and it equals to the currently logged-in user or that the party is public:
+
+{{> DiffBox tutorialName="meteor-angular2-socially" step="9.7"}}
+
+> `$or`, `$and` and `$exists` names are part of the MongoDB query syntax.
+> If you are not familiar with it, please, read about them here: [$or](http://docs.mongodb.org/manual/reference/operator/query/or/), [$and](http://docs.mongodb.org/manual/reference/operator/query/and/) and [$exists](http://docs.mongodb.org/manual/reference/operator/query/exists/).
+ 
+We also need to reset the database since schema of the parties inside is already invalid:
 
     meteor reset
 
-We'll add a different set of data in `loadParties.ts`:
-
-{{> DiffBox tutorialName="angular2-meteor" step="9.5"}}
-
-Run the app again, and you should see only two items. The third being `public: false` and hidden.
-
-Let's also update our IParty interface to include the new key: `isPublic`.
-
-{{> DiffBox tutorialName="angular2-meteor" step="9.6"}}
-
-## Meteor subscribe with params
-
-We can use these parameters to limit the items we are subscribing to.
-
-{{> DiffBox tutorialName="angular2-meteor" step="9.7"}}
-
-In the second parameter, our function uses the Mongo API to return the wanted documents (document are the JSON-style data structure of MongoDB).
-
-So we create a query - start with the find method on the Parties collection.
-
-Inside the find method we use the [$or](http://docs.mongodb.org/manual/reference/operator/query/or/), [$and](http://docs.mongodb.org/manual/reference/operator/query/and/) and [$exists](http://docs.mongodb.org/manual/reference/operator/query/exists/) Mongo operators to pull our wanted parties:
-
-Either that the owner parameter exists and it's the current logged in user (which we have access to with the command `this.userId`), or that the party's `isPublic` flag exists and it's set as true.
-
-> Note: `public` is a reserved future word in JavaScript, and also used in TypeScript. So we've instead named the property `isPublic`
-
-So now let's add the `isPublic` flag to the parties and see how it affects the parties the client gets.
-
-Let's add a checkbox to the new party form in `parties-form.ng.html`:
-
-{{> DiffBox tutorialName="angular2-meteor" step="9.8"}}
-
-{{> DiffBox tutorialName="angular2-meteor" step="9.9"}}
-
-> Checkbox currently not working. You can use `[checked]="isPublic" (click)="toggleCheck()"` for now if you need a work around.
-
-Notice how easy it is to bind a checkbox to a model with Angular 2!
-
-Let's add the same to the `party-details.ng.html` page:
-
-{{> DiffBox tutorialName="angular2-meteor" step="9.9"}}
-
-Now let's run the app.
+Run the app again, and you will see only two items. That's because we set the third party to be private.
 
 Log in with 2 different users in 2 different browsers.
 
-In each of the users create a few public parties and a few private ones.
+Try to create a couple of public parties and a couple of private ones.
 
-Now log out and see which user sees which parties.
+Now log out and check out what parties are shown. There should be only public ones!
 
+Now log in as one of these users and verify that a couple of private parties got to the page as well.
 
-In the next step, we will want to invite users to private parties. For that, we will need to get all the users, but only their emails without other data which will hurt their privacy.
+## Subscribe with params
 
-So let's create another publish method for getting only the needed data on the user.
+There is one page in our app where we'll need a parameterized publishing — it's the PartyDetails component's page.
+Besides that, let's add another one cool feature to the Socially — search by location.
 
-Notice the we don't need to create a new Meteor collection like we did with parties. **Meteor.users** is a pre-defined collection which is defined by the [meteor-accounts](http://docs.meteor.com/#accounts_api) package.
+As you already may know, the second parameter of Meteor.publish is a callback funtion that can take a variable number 
+of parameters, and they are parameters passed by the user to Meteor.subscribe on the client.
 
-So let's start with defining our publish function.
+Let's create a "party" publication on the server:
 
-Create a new file under the `server` folder named `users.ts` and place the following code in:
+{{> DiffBox tutorialName="meteor-angular2-socially" step="9.8"}}
 
-{{> DiffBox tutorialName="angular2-meteor" step="9.11"}}
+Looks like a lot of code! But it's a wrong perception. What has been done is that privacy query, we introduced above, was moved to a separate method called `buildQuery`.
+We'll need it for each parties query, hence, avoiding repeation is a sensible thing.
 
-So here again we use the Mongo API to return all the users (find with an empty object) but we select to return only the emails and profile fields.
+> Notice that we used `queryBuild.call(this)` calling syntax in order to make context of this method the same as in Meteor.publish
+> and be able to use `this.userId` inside that method.
 
-* Notice that each object (i.e. each user) will automatically contain its `_id` field.
+Let's subscribe to the new publication in the PartyDetails to load one specific party:
 
-The emails field holds all the user's email addresses, and the profile might hold more optional information like the user's name
-(in our case, if the user logged in with the Facebook login, the accounts-facebook package puts the user's name from Facebook automatically into that field).
+{{> DiffBox tutorialName="meteor-angular2-socially" step="9.9"}}
 
-Now let's subscribe to that publish method in our PartyDetails component.
+{{> DiffBox tutorialName="meteor-angular2-socially" step="9.10"}}
 
-{{> DiffBox tutorialName="angular2-meteor" step="9.12"}}
+Run the app and click on one of the party links. You'll see that party details page loads full data as before.
 
-* We bind to the Meteor.users collection
-* Binding the result to this.users
+Now is time for the parties search. Let's add search input and button to the right of "Add" button.
+We are going to extend PartiesList component since this features is related to the parties list itself:
 
-Now let's add the list of users to the view to make sure it works.
+{{> DiffBox tutorialName="meteor-angular2-socially" step="9.11"}}
 
-Add this ng-for list to the end of `parties-details.ng.html`. Don't forget to import `NgFor` and add it as a directive.
+As you may guess, the next thing is to process the button click event:
 
-{{> DiffBox tutorialName="angular2-meteor" step="9.13"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="9.12"}}
 
-{{> DiffBox tutorialName="angular2-meteor" step="9.14"}}
+Notice that we don't re-subscribe in the `search` method because we've loaded initially all parties available to
+the current user, so we just query the loaded collection.
 
-Run the app and see the list of all the users' emails that created a login and password and did not use a service to login.
-
-* The structure of the Users collection is different between regular email-password, Facebook, Google etc.
-
-The Document structure looks like this (notice where the email is in each one):
-
-__`Email-Password`:__
-
-    {
-    "_id" : "8qJt6dRSNDHBuqpXu",
-    "createdAt" : ISODate("2015-05-26T00:29:05.109-07:00"),
-    "services" : {
-      "password" : {
-        "bcrypt" : "$2a$10$oSykELjSzcoFWXZTwI5.lOl4BsB1EfcR8RbEm/KsS3zA4x5vlwne6"
-      },
-      "resume" : {
-        "loginTokens" : [
-          {
-            "when" : ISODate("2015-05-26T00:29:05.112-07:00"),
-            "hashedToken" : "6edmW0Wby2xheFxyiUOqDYYFZmOtYHg7VmtXUxEceHg="
-          }
-        ]
-        }
-      },
-      "emails" : [
-        {
-        "address" : "email@email.com",
-        "verified" : false
-        }
-      ]
-    }
-
-__`Facebook`:__
-
-    {
-    "_id" : "etKoiD8MxkQTjTQRY",
-    "createdAt" : ISODate("2015-05-25T17:42:16.850-07:00"),
-    "services" : {
-      "facebook" : {
-        "accessToken" : "CAAM10fSvI...",
-        "expiresAt" : 1437770457288.0000000000000000,
-        "id" : "10153317814289291",
-        "email" : "email@email.com",
-        "name" : "FirstName LastName",
-        "first_name" : "FirstName",
-        "last_name" : "LastName",
-        "link" : "https://www.facebook.com/app_scoped_user_id/foo"
-        "gender" : "male",
-        "locale" : "en_US"
-      },
-      "resume" : {
-        "loginTokens" : []
-      }
-    },
-    "profile" : {
-      "name" : "First Name LastName"
-      }
-    }
-
-__`Google`:__
-
-    {
-    "_id" : "337r4wwSRWe5B6CCw",
-    "createdAt" : ISODate("2015-05-25T22:53:32.172-07:00"),
-    "services" : {
-      "google" : {
-        "accessToken" : "ya29.fwHSzHvC...",
-        "idToken" : "eyJhbGciOiJSUzI1NiIs...",
-        "expiresAt" : 1432624691685.0000000000000000,
-        "id" : "107497376789285885122",
-        "email" : "email@email.com",
-        "verified_email" : true,
-        "name" : "FirstName LastName",
-        "given_name" : "FirstName",
-        "family_name" : "LastName",
-        "picture" : "https://lh5.googleusercontent.com/-foo.jpeg
-        "locale" : "en",
-        "gender" : "male"
-      },
-      "resume" : {
-        "loginTokens" : [
-        {
-        "when" : ISODate("2015-05-25T23:18:11.788-07:00"),
-        "hashedToken" : "NaKS2Zeermw+bPlMLhaihsNu6jPaW5+ucFDF2BXT4WQ="
-        }
-        ]
-      }
-    },
-    "profile" : {
-      "name" : "First Name LastName"
-      }
-    }
-
-
-Right now it means that the emails of the users that logged in with with email-password will be displayed.
-
-In the chapter of Angular filters we will change the display code to show all emails.
-
-
-# Understanding Meteor's Publish-Subscribe
+# Understanding Publish-Subscribe
 
 It is very important to understand Meteor's Publish-Subscribe mechanism so you don't get confused and use it to filter things in the view!
 
-Meteor accumulates all the data from the different subscription of a collection in the client, so adding a different subscription in a different
+Meteor accumulates all the data from the different subscriptions of the same collection in the client, so adding a different subscription in a different
 view won't delete the data that is already in the client.
 
-Please read more [here](http://www.meteorpedia.com/read/Understanding_Meteor_Publish_and_Subscribe).
+Please, read more [here](http://www.meteorpedia.com/read/Understanding_Meteor_Publish_and_Subscribe).
 
 # Summary
 
-We've added the support of privacy to our parties app.
+In this step it's been clearly seen how powerful Meteor and Angular 2 are and how they become even more
+powerful when used together. With rather few line of codes, we were able to add full privacy to the Socially plus
+we've added a parties search.
 
-We also learned how to use the `Meteor.publish` command to control permissions and the data sent to the client
-and how to subscribe to it with `Meteor.subscribe`.
-
-If you are not quite sure what is the difference between collection and publication - you may want to check this article on the [blog] (https://medium.com/angular-meteor/coll-pub-sub-with-angular-meteor-cb13fe48f570)
-
-In the next step we will learn how to filter the users list in the client side with Angular pipes and create a custom pipe for our own needs.
+Meanwhile, we've learned what is Publish-Subscribe mechanism in Meteor,
+how to query particular data from the database via server side and how important this mechanism is.
 
 {{/template}}
