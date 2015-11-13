@@ -1,46 +1,50 @@
 'use strict';
+
 var angularMeteorUtils = angular.module('angular-meteor.utils', []);
 
 angularMeteorUtils.service('$meteorUtils', [
   '$q', '$timeout',
   function ($q, $timeout) {
     var self = this;
-    this.getCollectionByName = function(string){
-      return Mongo.Collection.get(string);
-    };
+
     this.autorun = function(scope, fn) {
       // wrapping around Deps.autorun
       var comp = Tracker.autorun(function(c) {
         fn(c);
-
         // this is run immediately for the first call
         // but after that, we need to $apply to start Angular digest
         if (!c.firstRun) $timeout(angular.noop, 0);
       });
+
       // stop autorun when scope is destroyed
       scope.$on('$destroy', function() {
         comp.stop();
       });
+
       // return autorun object so that it can be stopped manually
       return comp;
     };
-    // Borrowed from angularFire - https://github.com/firebase/angularfire/blob/master/src/utils.js#L445-L454
+
+    // Borrowed from angularFire
+    // https://github.com/firebase/angularfire/blob/master/src/utils.js#L445-L454
     this.stripDollarPrefixedKeys = function (data) {
-      if( !angular.isObject(data) ||
-        data instanceof Date ||
-        data instanceof File ||
-        EJSON.toJSONValue(data).$type === 'oid' ||
-        (typeof FS === 'object' && data instanceof FS.File)) {
+      if (!_.isObject(data) ||
+          data instanceof Date ||
+          data instanceof File ||
+          EJSON.toJSONValue(data).$type === 'oid' ||
+          (typeof FS === 'object' && data instanceof FS.File))
         return data;
-      }
-      var out = angular.isArray(data)? [] : {};
-      angular.forEach(data, function(v,k) {
-        if(typeof k !== 'string' || k.charAt(0) !== '$') {
+
+      var out = _.isArray(data) ? [] : {};
+
+      _.each(data, function(v,k) {
+        if(typeof k !== 'string' || k.charAt(0) !== '$')
           out[k] = self.stripDollarPrefixedKeys(v);
-        }
       });
+
       return out;
     };
+
     // Returns a callback which fulfills promise
     this.fulfill = function(deferred, boundError, boundResult) {
       return function(err, result) {
@@ -52,6 +56,7 @@ angularMeteorUtils.service('$meteorUtils', [
           deferred.resolve(boundResult == null ? result : boundResult);
       };
     };
+
     // creates a function which invokes method with the given arguments and returns a promise
     this.promissor = function(obj, method) {
       return function() {
@@ -62,10 +67,36 @@ angularMeteorUtils.service('$meteorUtils', [
         return deferred.promise;
       };
     };
+
+    // creates a $q.all() promise and call digestion loop on fulfillment
+    this.promiseAll = function(promises) {
+      var allPromise = $q.all(promises);
+
+      allPromise.finally(function() {
+        // calls digestion loop with no conflicts
+        $timeout(angular.noop);
+      });
+
+      return allPromise;
+    };
+
+    this.getCollectionByName = function(string){
+      return Mongo.Collection.get(string);
+    };
+
+    this.findIndexById = function(collection, doc) {
+      var foundDoc = _.find(collection, function(colDoc) {
+        // EJSON.equals used to compare Mongo.ObjectIDs and Strings.
+        return EJSON.equals(colDoc._id, doc._id);
+      });
+
+      return _.indexOf(collection, foundDoc);
+    };
   }
 ]);
 
-angularMeteorUtils.run(['$rootScope', '$meteorUtils',
+angularMeteorUtils.run([
+  '$rootScope', '$meteorUtils',
   function($rootScope, $meteorUtils) {
     Object.getPrototypeOf($rootScope).$meteorAutorun = function(fn) {
       return $meteorUtils.autorun(this, fn);
