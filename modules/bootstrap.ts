@@ -8,16 +8,18 @@ import {defaultIterableDiffers} from 'angular2/change_detection';
 
 import {MongoCursorDifferFactory} from './mongo_cursor_differ';
 
-export function bootstrap(classFn, bindings) {
-  var newBindings = bindings || [];
-  if (_.isUndefined(bindings) || _.isArray(bindings)) {
-    var factories = defaultIterableDiffers.factories;
-    if (factories) {
-      factories.push(new MongoCursorDifferFactory());
-    }
-    newBindings.push(ng2.bind(ng2.IterableDiffers).toValue(
-      new ng2.IterableDiffers(factories)
-    ));
+export function bootstrap(appComponentType: any,
+                          providers: Array<Type | Provider | any[]> = null) {
+  var newProviders = [];
+  var factories = defaultIterableDiffers.factories;
+  if (factories) {
+    factories.push(new MongoCursorDifferFactory());
   }
-  ng2.bootstrap(classFn, newBindings);
+  newProviders.push(ng2.provide(ng2.IterableDiffers, {
+    useValue: new ng2.IterableDiffers(factories)
+  }));
+  if (providers) {
+    newProviders.push(providers);
+  }
+  ng2.bootstrap(appComponentType, newProviders);
 }

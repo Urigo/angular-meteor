@@ -10,6 +10,10 @@ export class AddChange {
   constructor(public index: number, public item: any) {}
 }
 
+export class UpdateChange {
+  constructor(public index: number, public item: any) { }
+}
+
 export class MoveChange {
   constructor(public fromIndex: number, public toIndex: number) {}
 }
@@ -67,6 +71,7 @@ export class MongoCursorObserver extends EventEmitter {
         } else {
           self._docs[index] = nDoc;
         }
+        self._updateAt(self._docs[index], index);
       },
 
       movedTo: function(doc, fromIndex, toIndex) {
@@ -77,6 +82,10 @@ export class MongoCursorObserver extends EventEmitter {
         self._removeAt(atIndex);
       }
     });
+  }
+
+  _updateAt(doc, index) {
+    this._changes.push(new UpdateChange(index, doc));
   }
 
   _addAt(doc, index) {

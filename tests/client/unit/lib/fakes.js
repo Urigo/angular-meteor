@@ -16,6 +16,10 @@ MongoCollectionObserverFake = function() {
   };
 
   this.destroy = function() {}
+
+  this.subscribe = function(generator) {
+    this._generators.push(generator);
+  };
 };
 
 ObserverFactoryFake = function(observer) {
