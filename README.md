@@ -135,7 +135,7 @@ Make sure that paths are relative to the app top folder.
 The package installs typings itself but doesn't overrides existing ones in the "typings" folder. So, if you've 
 updated package and started getting errors in the console, remove "angular2" folder and "angular2-meteor.d.ts" and re-start the app. New versions of them will be re-installed in the folder.
 
-# Contribution
+## Contribution
 If you know how to make integration of Angular 2 and Meteor better, you are welcome!
 
 For coding style guide, we use AirBnB [rules](https://github.com/airbnb/javascript) with TypeScript specifics and max line width set to 100 symbols. Rules are partly enforced by the tslint.json file in the root (if not familiar with TSLint, read more [here](https://github.com/palantir/tslint)). Please, check that your code conforms to rules before PR.
