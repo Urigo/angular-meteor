@@ -2,7 +2,7 @@
 
 'use strict';
 
-import {ChangeDetectorRef, bind} from 'angular2/angular2';
+import {ChangeDetectorRef} from 'angular2/angular2';
 import {DefaultIterableDifferFactory, CollectionChangeRecord} from 'angular2/change_detection';
 import {ObservableWrapper} from 'angular2/facade';
 
@@ -45,19 +45,19 @@ export class MongoCursorDiffer {
   }
 
   forEachAddedItem(fn: Function) {
-    for (var i = 0; i < this._inserted.length; i++) {
+    for (let i = 0; i < this._inserted.length; i++) {
       fn(this._inserted[i]);
     }
   }
 
   forEachMovedItem(fn: Function) {
-    for (var i = 0; i < this._moved.length; i++) {
+    for (let i = 0; i < this._moved.length; i++) {
       fn(this._moved[i]);
     }
   }
 
   forEachRemovedItem(fn: Function) {
-    for (var i = 0; i < this._removed.length; i++) {
+    for (let i = 0; i < this._removed.length; i++) {
       fn(this._removed[i]);
     }
   }
@@ -97,6 +97,7 @@ export class MongoCursorDiffer {
     if (this._subscription) {
       ObservableWrapper.dispose(this._subscription);
     }
+
     if (this._curObserver) {
       this._curObserver.destroy();
     }
@@ -114,10 +115,9 @@ export class MongoCursorDiffer {
     this._removed.length = 0;
   }
 
-  // Reset previous state of the differ
-  // by removing all currently shown documents.
+  // Reset previous state of the differ by removing all currently shown documents.
   _applyCleanup() {
-    for (var index = 0; index < this._listSize; index++) {
+    for (let index = 0; index < this._listSize; index++) {
       this._removed.push(this._createChangeRecord(
         null, index, null));
     }
@@ -125,16 +125,18 @@ export class MongoCursorDiffer {
   }
 
   _applyChanges(changes) {
-    for (var i = 0; i < changes.length; i++) {
+    for (let i = 0; i < changes.length; i++) {
       if (changes[i] instanceof AddChange) {
         this._inserted.push(this._createChangeRecord(
           changes[i].index, null, changes[i].item));
         this._listSize++;
       }
+
       if (changes[i] instanceof MoveChange) {
         this._moved.push(this._createChangeRecord(
           changes[i].toIndex, changes[i].fromIndex, changes[i].item));
       }
+
       if (changes[i] instanceof RemoveChange) {
         this._removed.push(this._createChangeRecord(
           null, changes[i].index, changes[i].item));
@@ -144,7 +146,7 @@ export class MongoCursorDiffer {
   }
 
   _createChangeRecord(currentIndex, prevIndex, item) {
-    var record = new CollectionChangeRecord(item);
+    let record = new CollectionChangeRecord(item);
     record.currentIndex = currentIndex;
     record.previousIndex = prevIndex;
     return record;

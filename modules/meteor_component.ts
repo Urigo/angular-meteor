@@ -3,9 +3,7 @@
 
 'use strict';
 
-import {OnDestroy, Inject, NgZone, PlatformRef, ApplicationRef, platform} from 'angular2/angular2';
-
-import {MongoCursorDifferFactory} from './mongo_cursor_differ';
+import {OnDestroy} from 'angular2/angular2';
 
 declare type CallbacksObject = {
   onReady?: Function;
@@ -22,12 +20,12 @@ export class MeteorComponent implements OnDestroy {
   autorun(func: Function, autoBind: boolean) {
     check(func, Function);
 
-    var hAutorun = Tracker.autorun(autoBind ? zone.bind(func) : func);
+    let hAutorun = Tracker.autorun(autoBind ? zone.bind(func) : func);
     this._hAutoruns.push(hAutorun);
   }
 
   subscribe(name: string, ...args /*, callback|callbacks, autobind*/) {
-    var lastParam = args[args.length - 1];
+    let lastParam = args[args.length - 1];
     let lastLastParam = args[args.length - 2];
 
     if (_.isBoolean(lastParam) && isMeteorCallbacks(lastLastParam)) {
@@ -36,20 +34,20 @@ export class MeteorComponent implements OnDestroy {
       if (autobind) {
         args[args.length - 2] = bindZone(callbacks);
       }
-      // Removes last params since its specific
-      // to MeteorComponent.
+      // Removes last params since its specific to MeteorComponent.
       args.pop();
     }
 
-    var hSubscribe = Meteor.subscribe(name, ...args);
+    let hSubscribe = Meteor.subscribe(name, ...args);
     this._hSubscribes.push(hSubscribe);
   }
 
   onDestroy() {
-    for (var hAutorun of this._hAutoruns) {
+    for (let hAutorun of this._hAutoruns) {
       hAutorun.stop();
     }
-    for (var hSubscribe of this._hSubscribes) {
+
+    for (let hSubscribe of this._hSubscribes) {
       hSubscribe.stop();
     }
 

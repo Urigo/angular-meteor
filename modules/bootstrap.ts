@@ -10,16 +10,19 @@ import {MongoCursorDifferFactory} from './mongo_cursor_differ';
 
 export function bootstrap(appComponentType: any,
                           providers: Array<Type | Provider | any[]> = null) {
-  var newProviders = [];
-  var factories = defaultIterableDiffers.factories;
+  let newProviders = [];
+  let factories = defaultIterableDiffers.factories;
   if (factories) {
     factories.push(new MongoCursorDifferFactory());
   }
+
   newProviders.push(ng2.provide(ng2.IterableDiffers, {
     useValue: new ng2.IterableDiffers(factories)
   }));
+
   if (providers) {
     newProviders.push(providers);
   }
+
   ng2.bootstrap(appComponentType, newProviders);
 }

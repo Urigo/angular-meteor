@@ -26,7 +26,6 @@ export class MongoCursorObserver extends EventEmitter {
   private _docs: Array<any> = [];
   private _changes: Array<any> = [];
   private _lastChanges: Array<any> = [];
-  private _cursorDefFunc: Function;
   private _hCursor: CursorHandle;
 
   constructor(cursor: Mongo.Cursor<any>) {
@@ -41,8 +40,8 @@ export class MongoCursorObserver extends EventEmitter {
   }
 
   _startCursor(cursor: Mongo.Cursor<any>): CursorHandle {
-    var hCurObserver = this._startCursorObserver(cursor);
-    var hAutoNotify = this._startAutoChangesNotify(cursor);
+    let hCurObserver = this._startCursorObserver(cursor);
+    let hAutoNotify = this._startAutoChangesNotify(cursor);
     return new CursorHandle(cursor, hAutoNotify, hCurObserver);
   }
 
@@ -58,14 +57,14 @@ export class MongoCursorObserver extends EventEmitter {
   }
 
   _startCursorObserver(cursor: Mongo.Cursor<any>): Meteor.LiveQueryHandle {
-    var self = this;
+    let self = this;
     return cursor.observe({
       addedAt: function(doc, index) {
         self._addAt(doc, index);
       },
 
       changedAt: function(nDoc, oDoc, index) {
-        var doc = self._docs[index];
+        let doc = self._docs[index];
         if (doc._id === nDoc._id) {
           Object.assign(self._docs[index], nDoc);
         } else {
