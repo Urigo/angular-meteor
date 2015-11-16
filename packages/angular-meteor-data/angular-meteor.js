@@ -11,6 +11,33 @@ var angularMeteor = angular.module('angular-meteor', [
   'angular-meteor.camera'
 ]);
 
+angularMeteor.config([
+  '$provide',
+  function ($provide) {
+    var templatesFileExtension = ['html', 'tpl', 'tmpl', 'template', 'view'];
+
+    $provide.decorator('$templateCache', function($delegate) {
+      var originalGet = $delegate.get;
+
+      $delegate.get = function(templatePath) {
+        var originalResult = originalGet(templatePath);
+
+        if (angular.isUndefined(originalResult)) {
+          var fileExtension = ((templatePath.split('.') || []).pop() || '').toLowerCase();
+
+          if (templatesFileExtension.indexOf(fileExtension) > -1) {
+            throw new Error('[angular-meteor][err][404] ' + templatePath + ' - HTML template does not exists!');
+          }
+        }
+
+        return originalResult;
+      };
+
+      return $delegate;
+    });
+  }
+]);
+
 angularMeteor.run(['$compile', '$document', '$rootScope', function ($compile, $document, $rootScope) {
     // Recompile after iron:router builds page
     if(Package['iron:router']) {
