@@ -16,7 +16,7 @@ angularMeteor.config([
   function ($provide) {
     var templatesFileExtension = ['html', 'tpl', 'tmpl', 'template', 'view'];
 
-    $provide.decorator('$templateCache', function($delegate) {
+    $provide.decorator('$templateCache', ['$delegate', function($delegate) {
       var originalGet = $delegate.get;
 
       $delegate.get = function(templatePath) {
@@ -34,7 +34,7 @@ angularMeteor.config([
       };
 
       return $delegate;
-    });
+    }]);
   }
 ]);
 
