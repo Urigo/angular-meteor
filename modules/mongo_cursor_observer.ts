@@ -65,7 +65,7 @@ export class MongoCursorObserver extends EventEmitter {
 
       changedAt: function(nDoc, oDoc, index) {
         let doc = self._docs[index];
-        if (doc._id === nDoc._id) {
+        if (EJSON.equals(doc._id, nDoc._id)) {
           Object.assign(self._docs[index], nDoc);
         } else {
           self._docs[index] = nDoc;
