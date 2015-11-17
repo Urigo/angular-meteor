@@ -56,7 +56,7 @@ Router.map(function () {
 
   redirect('/tutorials', '/tutorials/socially');
 
-  // Redirect old link
+  // Redirecting old links to Socially Angular 1
   redirect('/tutorial', '/tutorialIntro');
   redirect('/tutorial/step_00', '/tutorials/socially/angular1/bootstrapping');
   redirect('/tutorial/step_01', '/tutorials/socially/angular1/static-template');
@@ -79,6 +79,73 @@ Router.map(function () {
   redirect('/tutorial/step_18', '/tutorials/socially/angular1/angular-material-and-custom-angular-auth-forms');
   redirect('/tutorial/step_19', '/tutorials/socially/angular1/3rd-party-libraries');
   redirect('/tutorial/step_20', '/tutorials/socially/angular1/handling-files-with-collectionfs');
+
+  // Redirecting old links to Socially Angular 1
+  redirect('/tutorials/angular1', '/tutorials/socially/angular1');
+  redirect('/tutorials/angular1/bootstrapping', '/tutorials/socially/angular1/bootstrapping');
+  redirect('/tutorials/angular1/static-template', '/tutorials/socially/angular1/static-template');
+  redirect('/tutorials/angular1/dynamic-template', '/tutorials/socially/angular1/dynamic-template');
+  redirect('/tutorials/angular1/3-way-data-binding', '/tutorials/socially/angular1/3-way-data-binding');
+  redirect('/tutorials/angular1/adding-removing-objects-and-angular-event-handling', '/tutorials/socially/angular1/adding-removing-objects-and-angular-event-handling');
+  redirect('/tutorials/angular1/routing-and-multiple-views', '/tutorials/socially/angular1/routing-and-multiple-views');
+  redirect('/tutorials/angular1/bind-one-object', '/tutorials/socially/angular1/bind-one-object');
+  redirect('/tutorials/angular1/folder-structure', '/tutorials/socially/angular1/folder-structure');
+  redirect('/tutorials/angular1/user-accounts-authentication-and-permissions', '/tutorials/socially/angular1/user-accounts-authentication-and-permissions');
+  redirect('/tutorials/angular1/privacy-and-publish-subscribe-functions', '/tutorials/socially/angular1/privacy-and-publish-subscribe-functions');
+  redirect('/tutorials/angular1/deploying-your-app', '/tutorials/socially/angular1/deploying-your-app');
+  redirect('/tutorials/angular1/running-your-app-on-android-or-ios-with-phoneGap', '/tutorials/socially/angular1/running-your-app-on-android-or-ios-with-phoneGap');
+  redirect('/tutorials/angular1/search-sort-pagination-and-reactive-vars', '/tutorials/socially/angular1/search-sort-pagination-and-reactive-vars');
+  redirect('/tutorials/angular1/using-and-creating-angularjs-filters', '/tutorials/socially/angular1/using-and-creating-angularjs-filters');
+  redirect('/tutorials/angular1/meteor-methods-with-promises', '/tutorials/socially/angular1/meteor-methods-with-promises');
+  redirect('/tutorials/angular1/conditional-template-directives-with-angularjs', '/tutorials/socially/angular1/conditional-template-directives-with-angularjs');
+  redirect('/tutorials/angular1/google-maps', '/tutorials/socially/angular1/google-maps');
+  redirect('/tutorials/angular1/css-less-and-bootstrap', '/tutorials/socially/angular1/css-less-and-bootstrap');
+  redirect('/tutorials/angular1/angular-material-and-custom-angular-auth-forms', '/tutorials/socially/angular1/angular-material-and-custom-angular-auth-forms');
+  redirect('/tutorials/angular1/3rd-party-libraries', '/tutorials/socially/angular1/3rd-party-libraries');
+  redirect('/tutorials/angular1/handling-files-with-collectionfs', '/tutorials/socially/angular1/handling-files-with-collectionfs');
+  redirect('/tutorials/angular1/mobile-support-and-packages-isolation', '/tutorials/socially/angular1/mobile-support-and-packages-isolation');
+  redirect('/tutorials/angular1/ionic', '/tutorials/socially/angular1/ionic');
+  redirect('/tutorials/angular1/next-steps', '/tutorials/socially/angular1/next-steps');
+
+  // Redirecting old links to Socially Angular 2
+  redirect('/tutorials/angular2', '/tutorials/socially/angular2');
+  redirect('/tutorials/angular2/bootstrapping', '/tutorials/socially/angular2/bootstrapping');
+  redirect('/tutorials/angular2/static-template', '/tutorials/socially/angular2/static-template');
+  redirect('/tutorials/angular2/dynamic-template', '/tutorials/socially/angular2/dynamic-template');
+  redirect('/tutorials/angular2/3-way-data-binding', '/tutorials/socially/angular2/3-way-data-binding');
+  redirect('/tutorials/angular2/adding-removing-objects-and-angular-event-handling', '/tutorials/socially/angular2/adding-removing-objects-and-angular-event-handling');
+  redirect('/tutorials/angular2/routing-and-multiple-views', '/tutorials/socially/angular2/routing-and-multiple-views');
+  redirect('/tutorials/angular2/bind-one-object', '/tutorials/socially/angular2/bind-one-object');
+  redirect('/tutorials/angular2/folder-structure', '/tutorials/socially/angular2/folder-structure');
+  redirect('/tutorials/angular2/user-accounts-authentication-and-permissions', '/tutorials/socially/angular2/user-accounts-authentication-and-permissions');
+  redirect('/tutorials/angular2/privacy-and-publish-subscribe-functions', '/tutorials/socially/angular2/privacy-and-publish-subscribe-functions');
+  redirect('/tutorials/angular2/deploying-your-app', '/tutorials/socially/angular2/deploying-your-app');
+  redirect('/tutorials/angular2/running-your-app-on-android-or-ios-with-phoneGap', '/tutorials/socially/angular2/running-your-app-on-android-or-ios-with-phoneGap');
+  redirect('/tutorials/angular2/search-sort-pagination-and-reactive-vars', '/tutorials/socially/angular2/search-sort-pagination-and-reactive-vars');
+  redirect('/tutorials/angular2/using-and-creating-angularjs-filters', '/tutorials/socially/angular2/using-and-creating-angularjs-filters');
+  redirect('/tutorials/angular2/meteor-methods-with-promises', '/tutorials/socially/angular2/meteor-methods-with-promises');
+  redirect('/tutorials/angular2/conditional-template-directives-with-angularjs', '/tutorials/socially/angular2/conditional-template-directives-with-angularjs');
+  redirect('/tutorials/angular2/google-maps', '/tutorials/socially/angular2/google-maps');
+  redirect('/tutorials/angular2/css-less-and-bootstrap', '/tutorials/socially/angular2/css-less-and-bootstrap');
+  redirect('/tutorials/angular2/angular-material-and-custom-angular-auth-forms', '/tutorials/socially/angular2/angular-material-and-custom-angular-auth-forms');
+  redirect('/tutorials/angular2/3rd-party-libraries', '/tutorials/socially/angular2/3rd-party-libraries');
+  redirect('/tutorials/angular2/handling-files-with-collectionfs', '/tutorials/socially/angular2/handling-files-with-collectionfs');
+  redirect('/tutorials/angular2/mobile-support-and-packages-isolation', '/tutorials/socially/angular2/mobile-support-and-packages-isolation');
+  redirect('/tutorials/angular2/ionic', '/tutorials/socially/angular2/ionic');
+  redirect('/tutorials/angular2/next-steps', '/tutorials/socially/angular2/next-steps');
+
+  // Redirecting old links to WhatsApp Ionic
+  redirect('/tutorials/ionic', '/tutorials/whatsapp/ionic');
+  redirect('/tutorials/ionic/bootstrapping', '/tutorials/whatsapp/ionic/bootstrapping');
+  redirect('/tutorials/ionic/layout', '/tutorials/whatsapp/ionic/layout');
+  redirect('/tutorials/ionic/server', '/tutorials/whatsapp/ionic/server');
+  redirect('/tutorials/ionic/methods', '/tutorials/whatsapp/ionic/methods');
+  redirect('/tutorials/ionic/authentication', '/tutorials/whatsapp/ionic/authentication');
+  redirect('/tutorials/ionic/chats', '/tutorials/whatsapp/ionic/chats');
+  redirect('/tutorials/ionic/privacy', '/tutorials/whatsapp/ionic/privacy');
+  redirect('/tutorials/ionic/summary', '/tutorials/whatsapp/ionic/summary');
+
+
 
   self.route('tutorials.socially', {
     path: '/tutorials/socially',
