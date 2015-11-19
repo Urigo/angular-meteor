@@ -126,7 +126,7 @@ At this moment, you are ready to create awesome apps backed by the power of Angu
 Check out two demos for the quick how-to:
 
 * the Tutorial's [Socially app](https://github.com/Urigo/meteor-angular2.0-socially)
-* [Todos](https://github.com/Urigo/Meteor-Angular2/tree/master/examples/todos)  demo in the "examples" folder.
+* [Todos](https://github.com/Urigo/Meteor-Angular2/tree/master/examples/todos) demo (deployed http://ng2-todos.meteor.com).
 
 ### Server Side
 You can import TypeScript and System.js on the server side same way you can on the client side.
