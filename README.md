@@ -16,6 +16,7 @@ Angular2 + Meteor integration.
 ## Tutorial
 
 You can check out a 10-step Angular2+Meteor begginers [tutorial](http://www.angular-meteor.com/tutorials/socially/angular2).
+
 Please, indulge its typos and mistakes: it's still being refined.
 
 If you are already familiar with Meteor and Angular 1, proceed to the Quick Start.
@@ -120,7 +121,7 @@ Add Angular2 template file `client/parties.html` with a content as follows:
 At this moment, you are ready to create awesome apps backed by the power of Angular2 and Meteor!
 
 There are some details left though.
-For more information, please check Parties demo app.
+For more information, please check out the Tutorial's [Socially app](https://github.com/Urigo/meteor-angular2.0-socially) or [Todos](https://github.com/Urigo/Meteor-Angular2/tree/master/examples/todos)  demo in the "examples" folder.
 
 ### Server Side
 You can import TypeScript and System.js on the server side same way you can on the client side.
