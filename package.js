@@ -1,6 +1,6 @@
 Package.describe({
   name: 'urigo:angular2-meteor',
-  version: '0.2.6_2',
+  version: '0.2.7',
   summary: 'Angular2 and Meteor integration',
   git: 'https://github.com/Urigo/Meteor-Angular2',
   documentation: 'README.md'
@@ -13,7 +13,7 @@ Package.registerBuildPlugin({
   ],
   use: [
     'ecmascript@0.1.4',
-    'barbatus:ng2-compilers@0.1.0'
+    'barbatus:ng2-compilers@0.1.1'
   ]
 });
 
@@ -30,7 +30,7 @@ Package.onUse(function(api) {
     'mongo@1.1.1',
     'tracker@1.0.8',
     'underscore@1.0.4',
-    'barbatus:angular2@0.6.7'
+    'barbatus:angular2@0.6.7_1'
   ]);
 
   api.imply([
@@ -47,7 +47,6 @@ Package.onUse(function(api) {
   ], 'server');
 
   api.addFiles([
-    'default_layout.html',
     'main.ts',
     'modules/meteor_component.ts',
     'modules/cursor_handle.ts',

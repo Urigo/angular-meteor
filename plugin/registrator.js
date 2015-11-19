@@ -2,4 +2,4 @@
 
 Plugin.registerCompiler({
   extensions: ['html'],
-}, () => new HtmlCompiler());
+}, () => new HtmlCompiler('<app></app>'));
