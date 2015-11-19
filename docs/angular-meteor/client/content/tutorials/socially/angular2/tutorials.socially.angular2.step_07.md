@@ -1,155 +1,126 @@
 {{#template name="tutorials.socially.angular2.step_07.md"}}
 {{> downloadPreviousStep stepName="step_06"}}  
 
-In this article, we'll look at two things:
-
-- Meteor's file structure with Angular 2
-- Using TypeScript features
+In this step we will review briefly files structure our Socially app has so far,
+also we’ll look closely into TypeScript features since knowing better primary programming language of this package would be surely beneficial.
 
 # File Structure
 
-As we are using the ES2015 module loading, Meteor's file loading conventions don't have much effect.
+As you probably have noticed, our tutorial app has a strict modular structure at this point:
+there is no pure JavaScript files that are being bundled together and auto-executed, so Meteor's file loading conventions don't have effect.
+Even more, every .ts-file is being compiled into a separate System.j module, which we can then import whenever we need to.
 
-Instead, just keep in mind the power of a few folders:
-
-- client: on the client
-- server: on the server
-- anywhere else: both
-
-If your app grows in size, you may consider breaking it into smaller parts with these sections included inside. For example:
-
-    parties
-      \- client
-      \- server
-      \- model, etc.
-    events
-      \- client
-      \- server
-      \- model, etc
-
-Meteor will combine these together auto-magically.
+There is another one thing worth sounding once more. As you know, Meteor has two special folders: **client** and **server**  .
+We can benefit from them (and already done it in this app) too by allowing access to the client side modules from the client side only and, accordingly, to server side modules from the server side.
+Everything outside them will be available to both parts.
+It’s, no wonder, a recommended approach in Meteor, and this is how we’ve been doing it so far.
+Let's stick to it further.
 
 # TypeScript
 
-Earlier I mentioned that TypeScript has features which make it more powerful than ES2015 alone. We'll look at some of these.
+TypeScript is ather new language - it’s been around for 3 year only.
+Since then it’s been gaining [popularity](https://www.google.com/trends/explore#q=%2Fm%2F0n50hxv) due to various reasons. Among them are one of the fullest implementation of the ES2015 standard's features
+on the market including some of the experimental ones, pseudo type-checking and rich toolset developed by Microsoft and TypeScript community.
+It has already support in all major IDEs including Visual Studio, WebStorm, Sublime etc.
 
-We don't have time to cover the uses and benefits of types here in detail, but I'd encourage you to [learn more](http://www.typescriptlang.org/).
+One of the hottest questions in JavaScript, that has been around since the web 2.0 era started, was how to make JavaScript less bug-prone and
+suitable for big projects. In the OOP world, well-known solutions include modularity and strict type-checking. While OOP is available in JavaScript in some way,
+it turned out to be very hard to create a good type-checking due to, first of all, JavaScript's flexibility. One always needs to impose a certain number of rules to
+follow to make a JavaScript compiler effective. For many years, we’ve seen around a number of solutions including Closure Compiler and GWT from Google, a bunch of C#-to-JavaScript compilers and others.
 
-## TypeScript: Supported editors
+This was, for sure, one of the questions why TypeScript team were striving to solve: to create a language that would inherit flexibility of JavaScript while would have, at the same, effective type-checking with minimum amount of effort required from the user. There should have been some kind of [middle way](https://en.wikipedia.org/wiki/Middle_Way).
+They found it, having introduced type declaration files. These are files of special kind where you describe interfaces your classes expose along with signatures of the methods and types of the parameters they take, so that TypeScript will be able to refer to these files to verify correctness of your class's API.
+Of course, flexibility is still there which means if you don’t want to declare types you can skip them right away.
 
-TypesScript runs during development time, giving you better code completion and informing you of potential errors in your code.
+Usage of the declaration files was mentioned multiple time in this tutorial before with the `/// <reference path=".." />` syntax. By this way, we tell TypeScript what declaration files to check when it is compiling a particular .ts-file.
 
-To get the power of TypeScript, use a TypeScript friendly editor. These include:
+As you may have noticed, Angular2-Meteor package itself installs a number of these files into the **typings** folder.
+Some of them have names `angular2.d.ts` and `meteor.d.ts`, which, as you can guess, are used to verify that API of Meteor and Angular 2 are being used correctly in your code.
 
-* [Visual Studio or VS Code](https://www.visualstudio.com/)
-* [Webstorm](https://www.jetbrains.com/webstorm/)
-* [Atom](https://atom.io/packages/atom-typescript)
-* [Sublime Text](https://github.com/Microsoft/TypeScript-Sublime-Plugin)
-* [Eclipse](https://github.com/palantir/eclipse-typescript)
+But let’s create own declaration file to learn this type-checking better.
+Keep in mind, type-checking is not delivered in the outputted JavaScript. It is only extra sugar for your development environment, and adds no weight to the outputted .js file.
 
-Let's look at some of the features of TypeScript in brief detail.
+## Type Declaration Files
 
-## TypeScript: Types
+There is one definite place in our app where we could make use of it to avoid potential bugs.
+We are going to declare a `Party` type with already familiar to you properties: "name", "description" and "location". "Description" property will be optional.
 
-[Types](http://www.typescriptlang.org/Handbook#basic-types) help you find mistakes. For example, we can let the TypeScript compiler know that the `partyId` should be a string, and that routeParams should have the type of RouteParams. If partyId ever returns a number, or array, we know something went wrong right away. It will become highlighted by your IDE or text editor.
+Let's create `party.d.ts` file and place it inside “typings” folder with the following content:
 
-Keep in mind, type-checking is not delivered in the outputted JavaScript. It is only extra sugar for your development environment, and adds no weight to the outputted `.js` file.
+{{> DiffBox tutorialName="meteor-angular2-socially" step="7.1"}}
 
-{{> DiffBox tutorialName="angular2-meteor" step="7.1"}}
+One of the places where declared type can be used is a definition of the parties collection in `collections/parties.ts`.
+Let’s change the code to:
 
-## TypeScript: Interfaces
+{{> DiffBox tutorialName="meteor-angular2-socially" step="7.2"}}
 
-[Interfaces](http://www.typescriptlang.org/Handbook#interfaces) sound complicated, but I can assure you, they are very simple. They are just groups of types in an object.
+As you can see, we used a generic type `Mongo.Collection<>` with the class parameter set to `Party` instead of just basic
+`Mongo.Collection` class. We also referenced our new declaration file using `/// <reference.../>` syntax.
 
-We could declare a party as:
+Now let’s fiddle with it. Go to the `client/parties-form/parties-form.ts` file and change “location” property to, say,
+“newLocation”. Run the app. You should see in the console a warning saying in a nutshell: there is no “newLocation” property defined on the `Party` type.
 
-    party: {
-      name: string;
-      description: string;
-    }
+If you program in, say, Visual Studio or in Sublime with the official TypeScript plugin,
+you will see all that errors highlighted red instantaneously, which makes this TypeScript's type-cheking feature invaluable.
 
-But that would get repetitive. Instead, we can call it an interface once, and re-use the type. Let's call it IParty, I for interface.
+Let’s torture it more. Please, go to the `client/parties-list/parties-list.ts`.
+There you’ll see the `parties` property assigned to the `Mongo.Cursor<Object>` type. As you can see, TypeScript considers this construct acceptable even there is no `Party` type mentioned. That’s because Object type is the base class to all types available in JavaScript, so TypeScript doesn’t swear confronting to the OOP principles.
 
-Put IParty in a folder `typings/socially` and call it `socially.d.ts`. Now it can be shared across the app.
+But let’s change it to `Mongo.Cursor<string>`. Run the app and you will see it’s swearing again.
+TypeScript doesn’t know how to convert `Mongo.Cursor<string>` to `Mongo.Cursor<Party>`, so it considers the assigment to be wrong.
 
-{{> DiffBox tutorialName="angular2-meteor" step="7.2"}}
+Isn’t cool?! We’ve made our app to be bug persistent with only few changes!
 
-Note that `_id` is marked as optional, as parties won't get the id until they are passed into a Mongo collection.
+Finally, let’s change `Object` to `Party` in the `parties-list.ts` and `party-details.ts` files to make our code look right:
 
-We can use IParty to declare some types in our app. For example, in `party-details.ts` I've made several type declarations.
+{{> DiffBox tutorialName="meteor-angular2-socially" step="7.3"}}
 
-{{> DiffBox tutorialName="angular2-meteor" step="7.3"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="7.4"}}
 
-Identifying that both party & resetToParty should have strings for a name and description. Otherwise, the IDE or text editor should let me know something is wrong. Maybe I made a typo.
-
-We can also specify that any declaration of parties is an array of IParty.
-
-{{> DiffBox tutorialName="angular2-meteor" step="7.4"}}
-
-As well as on the server within Meteor. TypeScript works everywhere.
-
-{{> DiffBox tutorialName="angular2-meteor" step="7.5"}}
-
-This all keeps you notified about mistakes or typos. TypeScript's power is seen more and more as your project and team grow.
-
-## TypeScript: Declare
-
-You may have noticed that Meteor's global variables are being highlighted by your TypeScript checker. This is because we haven't yet declared them. Let's fix that.
-
-{{> DiffBox tutorialName="angular2-meteor" step="7.6"}}
-
-Declaring items let's TypeScript know that `Parties` is an accepted variable.
-
-## TypeScript: Type Definition Files
+## TSD
 
 [TSD](https://github.com/DefinitelyTyped/tsd) is a package manager for type definition files from [Definitely Typed](http://definitelytyped.org/).
 
     npm install tsd -g
 
-You can use `tsd query NAME` to search for a specific package NAME. For example:
+Many of us will use different third-party TypeScript libraries in projects, so
+TSD is worth to be mentioned. This tool allows to search, install and update
+declaration files from one global repository of declaration files being kept by the TypeScript community.
+
+For example, you can use `tsd query NAME` to search for a specific package NAME:
 
     tsd query angular2
     > - angular2 / angular2
 
-Let's install type definition files for Angular 2 & Meteor.
+To install Meteor declaration file, just type:
 
-    tsd install angular2
     tsd install meteor
 
-These files are loaded into the `typings` directory.
+All necessary files will be added into the "typings" directory.
 
-  - client
-  - server
-  - typings
-      \- socially
-      \- angular2
-      \- es6-promise
-      \- meteor
-      \- rx
+Angular 2's declaration files are delivered via the offial NPM, so 
+you won't be able to find it in the Definitely Typed repo.
 
-Now we will have the interfaces from these different frameworks.
+Don't worry though, Angular2-Meteor will update all necessary typings, you only need periocally
+to remove .d.ts-files in the "typings" folder, thus, letting the package know that
+the files need to be updated.
 
-* Note: The Angular 2 typescript files may not be currently up to date as the API is changing. *
+## TypeScript Configuration
 
-Let's specify that `Parties` is actually a Mongo collection, which will be picked up by TypeScript.
+TypeScript is generally configured by the special JSON file called ["tsconfig.json"](https://github.com/Microsoft/typescript/wiki/tsconfig.json).
 
-{{> DiffBox tutorialName="angular2-meteor" step="7.8"}}
+Angular2-Meteor packages uses a ts-compiler [package](https://github.com/barbatus/ts-compilers) that supports "tsconfig.json" file as well.
+Just create a file with this name in the root folder of your app, and start adding options you'd like.
+You can read about all possible options [here](https://github.com/Microsoft/TypeScript/wiki/Compiler-Options).
 
-Now if Parties is returning anything other than a valid Mongo Collection, we'll get an error.
-
-
-## TypeScript: Generics
-
-A [generic](http://www.typescriptlang.org/Handbook#generics) is a varable that can be passed into an interface. You can recognize it from the `<T>` syntax. Let's look back at `Parties` again.
-
-{{> DiffBox tutorialName="angular2-meteor" step="7.9"}}
-
-Now we've told TypeScript that Parties is a Mongo Collection made up of not just anything, but only IParty elements.
+Please, note, since Meteor environment has some specifics, some of the options don't have sense in Meteor.
+You can read about exceptions [here](https://github.com/barbatus/typescript#compiler-options).
+Additonal options available in the package are described [here](https://github.com/barbatus/ts-compilers#typescript-config)
 
 
-# Challenge
+# Summary
 
-- Add types, interfaces, generics, declarations & type Definition files to your project.
-- Or not, as mentioned previously, TypeScript features are optional. Without them, you're basically just writing ES2015 code and compiling it to ES5.
+In this step we discovered a new way to make TypeScript code less buggy by using TypeScript's type-checking.
+Meanwhile we declared a new type for the party object, thus, realized type-checking support in the Socially app.
   
 {{/template}}
