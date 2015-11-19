@@ -120,3 +120,12 @@ header .hide-completed {
     padding-bottom: 5px;
   }
 }
+
+task-list {
+  display: block;
+}
+
+task-list .loader {
+  padding-top: 10px;
+  text-align: center;
+}
