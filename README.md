@@ -16,7 +16,7 @@ Angular2 + Meteor integration.
 ## Tutorial
 
 You can check out a 10-step Angular2+Meteor begginers [tutorial](http://www.angular-meteor.com/tutorials/socially/angular2).
-Note that it's still being refined.
+Please, indulge its typos and mistakes: it's still being refined.
 
 If you are already familiar with Meteor and Angular 1, proceed to the Quick Start.
 
@@ -27,7 +27,7 @@ If you are already familiar with Meteor and Angular 1, proceed to the Quick Star
     meteor add urigo:angular2-meteor
 ````
 
-This package adds its HTML processor, so you'll also need to remove the standard HTML processor.
+This package adds own HTML processor, so you'll also need to remove the standard HTML processor:
 
 ````
    meteor remove blaze-html-templates
