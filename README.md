@@ -4,14 +4,14 @@ Angular2 + Meteor integration.
 ##### Angular2 version: alpha-46.
 
 ## Table of Contents
-* [Tutorial](#tutorial)
-* [Quick Start](#quick-start)
-    * [Install package](#install-package)
-    * [Import Angular2 into your app](#import-angular2-into-your-app)
-    * [Start using Meteor in your angular2 app](#start-using-meteor-in-your-angular2-app)
-* [Server Side](#server-side)
-* [TypeScript Support](#typescript-support)
-* [Contribution](#contribution)
+* [Tutorial](../../#tutorial)
+* [Quick Start](../../#quick-start)
+    * [Install package](../../#install-package)
+    * [Import Angular2 into your app](../../#import-angular2-into-your-app)
+    * [Start using Meteor in your angular2 app](../../#start-using-meteor-in-your-angular2-app)
+* [Server Side](../../#server-side)
+* [TypeScript Support](../../#typescript-support)
+* [Contribution](../../#contribution)
 
 ## Tutorial
 
