@@ -31,6 +31,7 @@ Package.onUse(function (api) {
     // Lib Files
     'lib/diff-array.js',
     'lib/get-updates.js',
+    'lib/jsondiffpatch.min.js',
     // Module Files
     'modules/angular-meteor-subscribe.js',
     'modules/angular-meteor-stopper.js',
