@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "am-git-patch-parser": {
-      "version": "0.2.1"
-    }
-  }
-}
