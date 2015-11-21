@@ -75,7 +75,7 @@ reactive.factory('$reactive', ['$rootScope', '$parse', ($rootScope, $parse) => {
     }
   }
 
-  return function(context) {
-    return new ReactiveContext(context);
+  return function(context, scope) {
+    return new ReactiveContext(context, scope);
   };
 }]);
