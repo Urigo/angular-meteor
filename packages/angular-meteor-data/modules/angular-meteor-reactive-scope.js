@@ -1,6 +1,8 @@
-var angularMeteorReactiveScope = angular.module('angular-meteor.reactive-scope', []);
+var angularMeteorReactiveScope = angular.module('angular-meteor.reactive-scope', [
+  'angular-meteor.reactive'
+]);
 
-angularMeteorReactiveScope.run(['$rootScope', '$parse', function ($rootScope, $parse) {
+angularMeteorReactiveScope.run(['$rootScope', '$parse', '$reactive', function ($rootScope, $parse, $reactive) {
   Object.getPrototypeOf($rootScope).getReactively = function (property, objectEquality) {
     let self = this;
     let getValue = $parse(property);
@@ -28,25 +30,12 @@ angularMeteorReactiveScope.run(['$rootScope', '$parse', function ($rootScope, $p
 
   Object.getPrototypeOf($rootScope).helpers = function (helpers) {
     var self = this;
-    angular.forEach(helpers, (func, name) => {
-      self.stopOnDestroy(Tracker.autorun(() => {
-        var newValue = func();
-        if (angular.isUndefined(self[name])) {
-          self[name] = angular.copy(newValue);
-        }
-        else {
-          if ((!_.isObject(newValue) && !_.isArray(newValue)) || (!_.isObject(self[name]) && !_.isArray(self[name]))) {
-            self[name] = newValue
-          }
-          else {
-            jsondiffpatch.patch(self[name], jsondiffpatch.diff(self[name], newValue));
-          }
-        }
 
-        if (!$rootScope.$$phase)
-          self.$digest();
-      }));
-    });
+    let reactiveScope = $reactive(self, self);
+
+    reactiveScope.properties(helpers);
+
+    self.stopOnDestroy(reactiveScope);
   };
 
   Object.getPrototypeOf($rootScope).stopOnDestroy = function (stoppable) {

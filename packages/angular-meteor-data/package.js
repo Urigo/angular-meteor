@@ -43,6 +43,7 @@ Package.onUse(function (api) {
     'modules/angular-meteor-reactive-scope.js',
     'modules/angular-meteor-utils.js',
     'modules/angular-meteor-camera.js',
+    'modules/reactive.js',
     // Finally load angular-meteor File
     'angular-meteor.js'
   ], 'client');
