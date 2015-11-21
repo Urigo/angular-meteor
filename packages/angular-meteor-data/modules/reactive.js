@@ -33,25 +33,27 @@ reactive.factory('$reactive', ['$rootScope', '$parse', ($rootScope, $parse) => {
           this._propertyChanged(name);
         }));
       });
+
+      return this;
     }
 
-    getReactively(propName, objectEquality) {
+    getReactively(property, objectEquality) {
       let scope = this.scope || $rootScope;
-      let getValue = $parse(propName);
+      let getValue = $parse(property);
       objectEquality = !!objectEquality;
 
-      if (!this.trackerDeps[propName]) {
-        this.trackerDeps[propName] = new Tracker.Dependency();
+      if (!this.trackerDeps[property]) {
+        this.trackerDeps[property] = new Tracker.Dependency();
 
         scope.$watch(() => getValue(this.context),
           (newVal, oldVal) => {
             if (newVal !== oldVal) {
-              this.trackerDeps[propName].changed();
+              this.trackerDeps[property].changed();
             }
           }, objectEquality);
       }
 
-      this.trackerDeps[propName].depend();
+      this.trackerDeps[property].depend();
 
       return getValue(this.context);
     }
