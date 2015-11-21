@@ -4,8 +4,7 @@ var angularMeteorReactiveScope = angular.module('angular-meteor.reactive-scope',
 
 angularMeteorReactiveScope.run(['$rootScope', '$parse', '$reactive', function ($rootScope, $parse, $reactive) {
   Object.getPrototypeOf($rootScope).getReactively = function (property, objectEquality) {
-    let self = this;
-    return $reactive(self, self).getReactively(property, objectEquality);
+    return $reactive(this, this).getReactively(property, objectEquality);
   };
 
   Object.getPrototypeOf($rootScope).helpers = function (helpers) {
