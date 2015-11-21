@@ -55,9 +55,10 @@ Router.map(function () {
   createSubRoutes(TUTORIALS);
 
   redirect('/tutorials', '/tutorials/socially');
-
+  redirect('/tutorial', '/tutorials/socially');
+  redirect('/tutorialIntro', '/tutorials/socially');
   // Redirecting old links to Socially Angular 1
-  redirect('/tutorial', '/tutorialIntro');
+  
   redirect('/tutorial/step_00', '/tutorials/socially/angular1/bootstrapping');
   redirect('/tutorial/step_01', '/tutorials/socially/angular1/static-template');
   redirect('/tutorial/step_02', '/tutorials/socially/angular1/dynamic-template');
@@ -135,7 +136,8 @@ Router.map(function () {
   redirect('/tutorials/angular2/next-steps', '/tutorials/socially/angular2/next-steps');
 
   // Redirecting old links to WhatsApp Ionic
-  redirect('/tutorials/ionic', '/tutorials/whatsapp/ionic');
+  redirect('/ionic-tutorial', '/tutorials/whatsapp');
+  redirect('/tutorials/ionic', '/tutorials/whatsapp');
   redirect('/tutorials/ionic/bootstrapping', '/tutorials/whatsapp/ionic/bootstrapping');
   redirect('/tutorials/ionic/layout', '/tutorials/whatsapp/ionic/layout');
   redirect('/tutorials/ionic/server', '/tutorials/whatsapp/ionic/server');
