@@ -1,12 +1,13 @@
 let reactive = angular.module('angular-meteor.reactive', []);
 
-reactive.factory('$reactive', ['$rootScope', ($rootScope) => {
+reactive.factory('$reactive', ['$rootScope', '$parse', ($rootScope, $parse) => {
   class ReactiveContext {
     constructor(context, scope) {
       this.context = context;
       this.scope = scope;
       this.computations = [];
       this.callbacks = [];
+      this.trackerDeps = {};
     }
 
     properties (props) {
@@ -32,6 +33,27 @@ reactive.factory('$reactive', ['$rootScope', ($rootScope) => {
           this._propertyChanged(name);
         }));
       });
+    }
+
+    getReactively(propName, objectEquality) {
+      let scope = this.scope || $rootScope;
+      let getValue = $parse(propName);
+      objectEquality = !!objectEquality;
+
+      if (!this.trackerDeps[property]) {
+        this.trackerDeps[property] = new Tracker.Dependency();
+
+        scope.$watch(() => getValue(self),
+          (newVal, oldVal) => {
+            if (newVal !== oldVal) {
+              this.trackerDeps[property].changed();
+            }
+          }, objectEquality);
+      }
+
+      this.trackerDeps[property].depend();
+
+      return getValue(this.context);
     }
 
     onPropertyChanged(cb) {

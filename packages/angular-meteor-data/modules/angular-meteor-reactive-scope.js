@@ -5,31 +5,11 @@ var angularMeteorReactiveScope = angular.module('angular-meteor.reactive-scope',
 angularMeteorReactiveScope.run(['$rootScope', '$parse', '$reactive', function ($rootScope, $parse, $reactive) {
   Object.getPrototypeOf($rootScope).getReactively = function (property, objectEquality) {
     let self = this;
-    let getValue = $parse(property);
-    objectEquality = !!objectEquality;
-
-    if (!self.hasOwnProperty('$$trackerDeps')) {
-      self.$$trackerDeps = {};
-    }
-
-    if (!self.$$trackerDeps[property]) {
-      self.$$trackerDeps[property] = new Tracker.Dependency();
-
-      self.$watch(() => getValue(self),
-        (newVal, oldVal) => {
-          if (newVal !== oldVal) {
-            self.$$trackerDeps[property].changed();
-          }
-        }, objectEquality);
-    }
-
-    self.$$trackerDeps[property].depend();
-
-    return getValue(self);
+    return $reactive(self, self).getReactively(property, objectEquality);
   };
 
   Object.getPrototypeOf($rootScope).helpers = function (helpers) {
-    var self = this;
+    let self = this;
 
     let reactiveScope = $reactive(self, self);
 
