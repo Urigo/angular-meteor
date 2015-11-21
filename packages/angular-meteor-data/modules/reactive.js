@@ -43,7 +43,7 @@ reactive.factory('$reactive', ['$rootScope', '$parse', ($rootScope, $parse) => {
       if (!this.trackerDeps[propName]) {
         this.trackerDeps[propName] = new Tracker.Dependency();
 
-        scope.$watch(() => getValue(context),
+        scope.$watch(() => getValue(this.context),
           (newVal, oldVal) => {
             if (newVal !== oldVal) {
               this.trackerDeps[propName].changed();
