@@ -17,8 +17,7 @@ Angular2 + Meteor integration.
 ## Tutorial
 
 You can check out a 10-step Angular2+Meteor begginers [tutorial](http://www.angular-meteor.com/tutorials/socially/angular2).
-
-Please, indulge its typos and mistakes: it's still being refined.
+(It may have some typos and mistakes since it's still being refined).
 
 If you are already familiar with Meteor and Angular 1, proceed to the Quick Start.
 
@@ -35,7 +34,7 @@ This package adds own HTML processor, so you'll also need to remove the standard
    meteor remove blaze-html-templates
 ````
 
-For the disclaimer, please, read "HTML" [paragraph](http://www.angular-meteor.com/tutorials/socially/angular2/bootstrapping) in the above mentioned tutorial.
+For the explanation, please, read "HTML" [paragraph](http://www.angular-meteor.com/tutorials/socially/angular2/bootstrapping) in the above mentioned tutorial.
 
 ### Import Angular2 into your app:
 Package supports TypeScript and Babel (.jsx file extension) as languages for development with Angular2.
