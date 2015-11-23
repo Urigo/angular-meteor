@@ -1,11 +1,11 @@
 Router.configure({
   layoutTemplate: 'layout',
   notFoundTemplate: 'notFound',
-  seoTitle:   'angular-meteor',
-  seoAuthor:  'Uri Goldshtein',
-  seoDesc:    'angular-meteor is a realtime full stack that combines the best frameworks. use your existing Angular applications with Meteor - the best backend framework for AngularJS applications.',
-  seoType:    'website',
-  seoImage:   'https://angular-meteor.com/images/logo-large.png',
+  seoTitle: 'angular-meteor',
+  seoAuthor: 'Uri Goldshtein',
+  seoDesc: 'angular-meteor is a realtime full stack that combines the best frameworks. use your existing Angular applications with Meteor - the best backend framework for AngularJS applications.',
+  seoType: 'website',
+  seoImage: 'https://angular-meteor.com/images/logo-large.png',
   seoTwitter: '@urigoldshtein'
 });
 
@@ -58,7 +58,7 @@ Router.map(function () {
   redirect('/tutorial', '/tutorials/socially');
   redirect('/tutorialIntro', '/tutorials/socially');
   // Redirecting old links to Socially Angular 1
-  
+
   redirect('/tutorial/step_00', '/tutorials/socially/angular1/bootstrapping');
   redirect('/tutorial/step_01', '/tutorials/socially/angular1/static-template');
   redirect('/tutorial/step_02', '/tutorials/socially/angular1/dynamic-template');
@@ -148,7 +148,6 @@ Router.map(function () {
   redirect('/tutorials/ionic/summary', '/tutorials/whatsapp/ionic/summary');
 
 
-
   self.route('tutorials.socially', {
     path: '/tutorials/socially',
     template: 'tutorials.socially.intro',
@@ -161,12 +160,11 @@ Router.map(function () {
     seoTitle: 'Angular Meteor and Ionic tutorial'
   });
 
-  // -------------------------------------------------------------------------
-  // API reference routes
-  //
-  createSubRoutes(API_REFERENCE);
-  redirect('/api', '/api/meteorCollection');
-  redirect('/api/meteor-include', '/api/blaze-template');
+  for (var apiKey in API_DEFINITION) {
+    createSubRoutes(API_DEFINITION[apiKey]);
+  }
+
+  redirect('/api', '/api/' + DEFAULT_API + '/meteorCollection');
 
   // -------------------------------------------------------------------------
   // Angular Server routes
