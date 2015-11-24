@@ -8,6 +8,19 @@
     <do-nothing>
       {{#markdown}}
 
+# ReactiveContext
+
+ReactiveContext is a class that manages the reactivity of a context, and manages the subscriptions and helpers.
+Instance of this class is returned from the `$reactive` service after using it.
+Using this object you can define:
+
+* Meteor Subscriptions - wraps `Meteor.subscribe` and provides the acknowledgment when the subscription updates.
+* View Helpers - you can define helpers and use them in your view, and Angular-Meteor will take care of your view reactivity.
+* Define view reactive variables - use `getReactively` to define reactive variables and attach them to your view.
+
+## Methods
+
+
       {{/markdown}}
     </do-nothing>
 

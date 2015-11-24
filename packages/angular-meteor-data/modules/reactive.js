@@ -17,7 +17,7 @@ angular.module('angular-meteor.reactive', []).factory('$reactive', ['$rootScope'
       this.trackerDeps = {};
     }
 
-    properties(props) {
+    helpers(props) {
       let isMeteorCursor = (obj) => {
         return obj instanceof Mongo.Collection.Cursor;
       };
