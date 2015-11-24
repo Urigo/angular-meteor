@@ -130,4 +130,4 @@ API_1_2_2 = function(version, basedOnTemplatesOf) {
       }
     ]
   }
-}
+};

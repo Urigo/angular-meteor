@@ -1,0 +1,66 @@
+<template name="api.1.3.0.reactive">
+  <div>
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/docs/angular-meteor/client/content/api-reference/1.3.0/api.reactive.html"
+       class="btn btn-default btn-lg improve-button">
+      <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
+    </a>
+
+    <do-nothing>
+      {{#markdown}}
+
+# $reactive
+
+A service that takes care of the reactivity of your Meteor data, and updates your AngularJS code.
+
+This service wraps context (can be used with `this` or `$scope`) - so you can use it with any context as you wish:
+
+* Use it with `$scope` when writing AngularJS 1.x.x code.
+
+* Use it with `this` when working with AngularJS 1.x.x with components code-style.
+
+* Use it with `this` when working with AngularJS 2 (or angular2now) with components.
+
+## Arguments
+
+<table class="variables-matrix input-arguments">
+  <thead>
+  <tr>
+    <th>Param</th>
+    <th>Type</th>
+    <th>Details</th>
+    <th>Required</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td><strong>context</strong></td>
+    <td>
+      Context (Scope or controller's "this" context)
+    </td>
+    <td>Context to set as reactive - this context will be used to hold the helpers lcoals.</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td>scope</td>
+    <td>AngularJS's Scope</td>
+    <td>A scope to set as reactive, if the `context` argument is already a scope, this argument is not required.<br /> If you use `controllerAs` or ES6 classes and components and you passed the controller's context as thr first argument - you need to pass the scope.</td>
+    <td>No</td>
+  </tr>
+  </tbody>
+</table>
+
+## Return Value
+
+This service return an instance of [ReactiveContext](/api/1.3.0/reactive-context) in order to provide ability to create subscriptions and helpers.
+
+### Usage example with AngularJS 1.x.x and `directive`
+
+### Usage example with AngularJS 1.x.x and `controllerAs`
+
+### Usage example with angular2now (components)
+
+      {{/markdown}}
+    </do-nothing>
+
+  </div>
+</template>

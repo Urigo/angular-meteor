@@ -1,10 +1,17 @@
-let reactive = angular.module('angular-meteor.reactive', []);
-
-reactive.factory('$reactive', ['$rootScope', '$parse', ($rootScope, $parse) => {
+angular.module('angular-meteor.reactive', []).factory('$reactive', ['$rootScope', '$parse', ($rootScope, $parse) => {
   class ReactiveContext {
     constructor(context, scope) {
+      if (!context || !angular.isObject(context)) {
+        throw '[angular-meteor][ReactiveContext] The context for ReactiveContext is required and must be an object!'
+      }
+
       this.context = context;
       this.scope = scope;
+
+      if (!this.scope && (this.context.constructor || angular.noop).toString().indexOf('Scope') > -1) {
+        this.scope = this.context;
+      }
+
       this.computations = [];
       this.callbacks = [];
       this.trackerDeps = {};

@@ -5,7 +5,7 @@ var angularMeteorReactiveScope = angular.module('angular-meteor.reactive-scope',
 angularMeteorReactiveScope.run(['$rootScope', '$reactive', function ($rootScope, $reactive) {
   class ReactiveScope {
     helpers (def) {
-      this.stopOnDestroy($reactive(this, this).properties(def));
+      this.stopOnDestroy($reactive(this).properties(def));
     }
 
     autorun(fn) {
@@ -19,7 +19,7 @@ angularMeteorReactiveScope.run(['$rootScope', '$reactive', function ($rootScope,
     }
 
     getReactively (property, objectEquality) {
-      return $reactive(this, this).getReactively(property, objectEquality);
+      return $reactive(this).getReactively(property, objectEquality);
     }
 
     stopOnDestroy(stoppable) {
