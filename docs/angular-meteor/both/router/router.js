@@ -1,11 +1,11 @@
 Router.configure({
   layoutTemplate: 'layout',
   notFoundTemplate: 'notFound',
-  seoTitle:   'angular-meteor',
-  seoAuthor:  'Uri Goldshtein',
-  seoDesc:    'angular-meteor is a realtime full stack that combines the best frameworks. use your existing Angular applications with Meteor - the best backend framework for AngularJS applications.',
-  seoType:    'website',
-  seoImage:   'https://angular-meteor.com/images/logo-large.png',
+  seoTitle: 'angular-meteor',
+  seoAuthor: 'Uri Goldshtein',
+  seoDesc: 'angular-meteor is a realtime full stack that combines the best frameworks. use your existing Angular applications with Meteor - the best backend framework for AngularJS applications.',
+  seoType: 'website',
+  seoImage: 'https://angular-meteor.com/images/logo-large.png',
   seoTwitter: '@urigoldshtein'
 });
 
@@ -55,9 +55,10 @@ Router.map(function () {
   createSubRoutes(TUTORIALS);
 
   redirect('/tutorials', '/tutorials/socially');
-
+  redirect('/tutorial', '/tutorials/socially');
+  redirect('/tutorialIntro', '/tutorials/socially');
   // Redirecting old links to Socially Angular 1
-  redirect('/tutorial', '/tutorialIntro');
+
   redirect('/tutorial/step_00', '/tutorials/socially/angular1/bootstrapping');
   redirect('/tutorial/step_01', '/tutorials/socially/angular1/static-template');
   redirect('/tutorial/step_02', '/tutorials/socially/angular1/dynamic-template');
@@ -135,7 +136,8 @@ Router.map(function () {
   redirect('/tutorials/angular2/next-steps', '/tutorials/socially/angular2/next-steps');
 
   // Redirecting old links to WhatsApp Ionic
-  redirect('/tutorials/ionic', '/tutorials/whatsapp/ionic');
+  redirect('/ionic-tutorial', '/tutorials/whatsapp');
+  redirect('/tutorials/ionic', '/tutorials/whatsapp');
   redirect('/tutorials/ionic/bootstrapping', '/tutorials/whatsapp/ionic/bootstrapping');
   redirect('/tutorials/ionic/layout', '/tutorials/whatsapp/ionic/layout');
   redirect('/tutorials/ionic/server', '/tutorials/whatsapp/ionic/server');
@@ -144,7 +146,6 @@ Router.map(function () {
   redirect('/tutorials/ionic/chats', '/tutorials/whatsapp/ionic/chats');
   redirect('/tutorials/ionic/privacy', '/tutorials/whatsapp/ionic/privacy');
   redirect('/tutorials/ionic/summary', '/tutorials/whatsapp/ionic/summary');
-
 
 
   self.route('tutorials.socially', {
@@ -159,12 +160,11 @@ Router.map(function () {
     seoTitle: 'Angular Meteor and Ionic tutorial'
   });
 
-  // -------------------------------------------------------------------------
-  // API reference routes
-  //
-  createSubRoutes(API_REFERENCE);
-  redirect('/api', '/api/meteorCollection');
-  redirect('/api/meteor-include', '/api/blaze-template');
+  for (var apiKey in API_DEFINITION) {
+    createSubRoutes(API_DEFINITION[apiKey]);
+  }
+
+  redirect('/api', '/api/' + DEFAULT_API + '/meteorCollection');
 
   // -------------------------------------------------------------------------
   // Angular Server routes

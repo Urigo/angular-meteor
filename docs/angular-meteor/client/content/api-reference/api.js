@@ -1,5 +1,8 @@
 Template.api.helpers({
   api: function () {
-    return API_REFERENCE;
+    var currentRoute = Router.current().route.path(this).split('/');
+    var currentAPI = currentRoute[2];
+
+    return API_DEFINITION[currentAPI];
   }
 });
