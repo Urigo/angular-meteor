@@ -4,12 +4,14 @@ describe('angular-meteor', function () {
   describe(testedModule, function() {
     beforeEach(angular.mock.module(testedModule));
 
+    var $compile;
     var $reactive;
     var $rootScope;
     var testScope;
     var context = {};
 
-    beforeEach(angular.mock.inject(function(_$reactive_, _$rootScope_) {
+    beforeEach(angular.mock.inject(function(_$compile_, _$reactive_, _$rootScope_) {
+      $compile = _$compile_;
       $reactive = _$reactive_;
       $rootScope = _$rootScope_;
       testScope = $rootScope.$new();
@@ -372,6 +374,48 @@ describe('angular-meteor', function () {
 
         expect(autorunSpy.calls.count()).toBe(1);
       });
+
+      it('Should have reactive properties available on the scope and in the view when using scope only', function() {
+        testScope = $rootScope.$new();
+        reactiveContextInstance = $reactive(testScope);
+
+        reactiveContextInstance.reactiveProperties({
+          prop: 20
+        });
+
+        var element = angular.element('<input type="text" ng-model="prop" /><span>{{ prop }}</span>');
+        $compile(element)(testScope);
+        testScope.$apply();
+
+        expect(element.get(1).innerHTML).toBe('20');
+      });
+
+      it('Should update reactive properties when using view and ngModel', function() {
+        testScope = $rootScope.$new();
+        reactiveContextInstance = $reactive(testScope);
+
+        reactiveContextInstance.reactiveProperties({
+          prop: 20
+        });
+
+        var element = angular.element('<input type="text" ng-model="prop" /><span>{{ prop }}</span>');
+        $compile(element)(testScope);
+        testScope.$apply();
+
+        expect(element.get(1).innerHTML).toBe('20');
+
+        var autorunSpy = jasmine.createSpy();
+        Meteor.autorun(autorunSpy);
+        var inputModel = angular.element(element.get(0)).controller('ngModel');
+        inputModel.$setViewValue('test');
+        testScope.$apply();
+        Tracker.flush();
+
+        expect(autorunSpy).toHaveBeenCalled();
+        expect(element.get(1).innerHTML).toBe('test');
+      });
+
+
     });
   });
 });
