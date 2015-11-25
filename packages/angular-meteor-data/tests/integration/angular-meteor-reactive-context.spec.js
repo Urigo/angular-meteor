@@ -359,25 +359,18 @@ describe('angular-meteor', function () {
         expect(subscribeSpy).toHaveBeenCalled();
       });
 
-      fit('Should call autorun methods when updating reactive property value', function() {
+      it('Should call autorun methods when updating reactive property value', function() {
         reactiveContextInstance.reactiveProperties({
           prop: 20
         });
 
-        var callCount = 0;
-        var obj = {
-          func : () => { callCount++ }
-        };
-
-        Meteor.autorun(() => {
-          obj.func();
-          console.log(context.prop);
-        });
+        var autorunSpy = jasmine.createSpy();
+        Meteor.autorun(autorunSpy);
 
         context.prop = 100;
         Tracker.flush();
 
-        expect(callCount).toBe(2);
+        expect(autorunSpy.calls.count()).toBe(1);
       });
     });
   });
