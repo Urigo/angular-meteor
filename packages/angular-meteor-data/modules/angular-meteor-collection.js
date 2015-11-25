@@ -10,6 +10,8 @@ var angularMeteorCollection = angular.module('angular-meteor.collection',
 angularMeteorCollection.factory('AngularMeteorCollection', [
   '$q', '$meteorSubscribe', '$meteorUtils', '$rootScope', '$timeout', 'diffArray',
   function($q, $meteorSubscribe, $meteorUtils, $rootScope, $timeout, diffArray) {
+    console.log('[angular-meteor.collection] Please note that this module is deprecated sine 1.3.0 and will be removed in 1.4.0!');
+
     function AngularMeteorCollection(curDefFunc, collection, diffArrayFunc, autoClientSave) {
       var data = [];
       // Server backup data to evaluate what changes come from client

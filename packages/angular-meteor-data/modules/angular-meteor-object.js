@@ -6,6 +6,8 @@ var angularMeteorObject = angular.module('angular-meteor.object',
 angularMeteorObject.factory('AngularMeteorObject', [
   '$q', '$meteorSubscribe', '$meteorUtils', 'diffArray', 'getUpdates', 'AngularMeteorCollection',
   function($q, $meteorSubscribe, $meteorUtils, diffArray, getUpdates, AngularMeteorCollection) {
+    console.log('[angular-meteor.object] Please note that this module is deprecated sine 1.3.0 and will be removed in 1.4.0!');
+
     // A list of internals properties to not watch for, nor pass to the Document on update and etc.
     AngularMeteorObject.$$internalProps = [
       '$$collection', '$$options', '$$id', '$$hashkey', '$$internalProps', '$$scope',

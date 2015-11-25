@@ -6,6 +6,7 @@ var angularMeteorCamera = angular.module('angular-meteor.camera', ['angular-mete
 angularMeteorCamera.service('$meteorCamera', [
   '$q', '$meteorUtils',
   function ($q, $meteorUtils) {
+    console.log('[angular-meteor.camera] Please note that this module is deprecated sine 1.3.0 and will be removed in 1.4.0!');
     var pack = Package['mdg:camera'];
     if (!pack) return;
 

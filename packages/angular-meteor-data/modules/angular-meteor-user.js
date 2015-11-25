@@ -6,6 +6,8 @@ var angularMeteorUser = angular.module('angular-meteor.user', ['angular-meteor.u
 angularMeteorUser.service('$meteorUser', [
   '$rootScope', '$meteorUtils', '$q',
   function($rootScope, $meteorUtils, $q){
+    console.log('[angular-meteor.user] Please note that this module is deprecated sine 1.3.0 and will be removed in 1.4.0!');
+
     var pack = Package['accounts-base'];
     if (!pack) return;
 

@@ -66,7 +66,7 @@ Using AngularJS 1.x.x and old-fashion `ng-controller`, we need to define the con
         $scope.age = 10;
 
         $scope.subscribe('users', () => [
-            $scope.getReactively('age')
+            $scope.track('age')
         ]);
 
         $scope.helpers({
@@ -98,7 +98,7 @@ Using AngularJS 1.x.x and `controllerAs`, we need to define the controller and u
         this.age = 10;
 
         reactiveContext.subscribe('users', () => [
-            $scope.getReactively('age')
+            $scope.track('age')
         ]);
 
         reactiveContext.helpers({
@@ -135,7 +135,7 @@ We can even make the code look better and use [https://github.com/pbastowski/ang
             this.age = 10;
 
             reactiveContext.subscribe('users', () => [
-                $scope.getReactively('age')
+                $scope.track('age')
             ]);
 
             reactiveContext.helpers({

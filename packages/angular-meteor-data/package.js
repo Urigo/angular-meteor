@@ -43,7 +43,7 @@ Package.onUse(function (api) {
     'modules/angular-meteor-reactive-scope.js',
     'modules/angular-meteor-utils.js',
     'modules/angular-meteor-camera.js',
-    'modules/reactive.js',
+    'modules/angular-meteor-reactive-context.js',
     // Finally load angular-meteor File
     'angular-meteor.js'
   ], 'client');
@@ -54,6 +54,7 @@ Package.onTest(function(api) {
   api.use('tracker@1.0.8');
   api.use('session@1.1.1');
   api.use('mongo@1.1.1');
+  api.use('insecure');
   api.use('sanjo:jasmine@0.19.0');
   api.use('angular:angular-mocks@1.4.7');
   api.use('mdg:camera@1.1.5');
@@ -65,20 +66,12 @@ Package.onTest(function(api) {
     'tests/integration/auxiliary/test_data.js'
   ]);
 
-  // spec files
   api.addFiles([
-    'tests/integration/angular-meteor-methods-spec.js',
-    'tests/integration/angular-meteor-session-spec.js',
-    'tests/integration/angular-meteor-stopper-spec.js',
-    'tests/integration/angular-meteor-camera-spec.js',
-    'tests/integration/angular-meteor-diff-array-spec.js',
-    'tests/integration/angular-meteor-get-updates-spec.js',
-    'tests/integration/angular-meteor-subscribe-spec.js',
-    'tests/integration/angular-meteor-collection-spec.js',
-    'tests/integration/angular-meteor-object-spec.js',
-    'tests/integration/angular-meteor-reactive-scope-spec.js',
-    'tests/integration/angular-meteor-utils-spec.js',
     'tests/integration/test_collections.js'
+  ], 'client');
+
+  api.addFiles([
+    'tests/integration/angular-meteor-reactive-context.spec.js'
   ], 'client');
 
   api.addFiles([

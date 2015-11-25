@@ -3,6 +3,8 @@ var angularMeteorSubscribe = angular.module('angular-meteor.subscribe', []);
 
 angularMeteorSubscribe.service('$meteorSubscribe', ['$q',
   function ($q) {
+    console.log('[angular-meteor.subscribe] Please note that this module is deprecated sine 1.3.0 and will be removed in 1.4.0!');
+
     var self = this;
 
     this._subscribe = function(scope, deferred, args) {
