@@ -122,6 +122,31 @@ describe('angular-meteor', function () {
         expect(reactiveContextInstance.context['myHelper'] instanceof Array).toEqual(true);
       });
 
+      it('Should register cursor and reset the data when cursor is invalidated', function() {
+        var cursor = bigCollection.find();
+
+        reactiveContextInstance.helpers({
+          myHelper: function() {
+            return cursor;
+          }
+        });
+
+        bigCollection.insert({
+          _id: testObjectId,
+          prop1: 'A'
+        });
+
+        expect(reactiveContextInstance.computations.length).toBe(1);
+        expect(reactiveContextInstance.context['myHelper'] instanceof Array).toEqual(true);
+        expect(reactiveContextInstance.context['myHelper'].length).toEqual(1);
+
+        reactiveContextInstance.computations[0].invalidate();
+
+        expect(reactiveContextInstance.computations.length).toBe(1);
+        expect(reactiveContextInstance.context['myHelper'] instanceof Array).toEqual(true);
+        expect(reactiveContextInstance.context['myHelper'].length).toEqual(0);
+      });
+
       it('Should register cursor fetch result helper as array', function() {
         reactiveContextInstance.helpers({
           myHelper: function() {
@@ -149,6 +174,120 @@ describe('angular-meteor', function () {
 
         expect(reactiveContextInstance.context['myHelper'].length).toBe(1);
         expect(reactiveContextInstance.context['myHelper'][0]).toEqual(data);
+      });
+
+      it('Should handle cursor - remove action', function() {
+        var data = {
+          _id: testObjectId,
+          prop1: 'T'
+        };
+
+        reactiveContextInstance.helpers({
+          myHelper: function() {
+            return bigCollection.find();
+          }
+        });
+
+        bigCollection.remove(testObjectId);
+
+        expect(reactiveContextInstance.context['myHelper'].length).toBe(0);
+        expect(reactiveContextInstance.context['myHelper'][0]).toBeUndefined();
+      });
+
+      it('Should handle cursor - update action', function() {
+        var data = {
+          _id: testObjectId,
+          prop1: 'T'
+        };
+
+        reactiveContextInstance.helpers({
+          myHelper: function() {
+            return bigCollection.find();
+          }
+        });
+
+        bigCollection.insert(data);
+        bigCollection.update({_id: testObjectId}, {$set: {prop1: 'B'}});
+
+        expect(reactiveContextInstance.context['myHelper'].length).toBe(1);
+        expect(reactiveContextInstance.context['myHelper'][0]).toBeDefined();
+        expect(reactiveContextInstance.context['myHelper'][0].prop1).toBe('B');
+      });
+
+      it('Should handle cursor - move action', function() {
+        var data1 = {
+          _id: testObjectId,
+          prop1: 'A'
+        };
+
+        var data2 = {
+          _id: 'OtherId',
+          prop1: 'B'
+        };
+
+        reactiveContextInstance.helpers({
+          myHelper: function() {
+            return bigCollection.find({}, {sort: {prop1: 1}});
+          }
+        });
+
+        bigCollection.insert(data2);
+
+        expect(reactiveContextInstance.context['myHelper'].length).toBe(1);
+        expect(reactiveContextInstance.context['myHelper'][0]).toBeDefined();
+        expect(reactiveContextInstance.context['myHelper'][0].prop1).toBe('B');
+
+        bigCollection.insert(data1);
+
+        expect(reactiveContextInstance.context['myHelper'].length).toBe(2);
+        expect(reactiveContextInstance.context['myHelper'][0]).toBeDefined();
+        expect(reactiveContextInstance.context['myHelper'][1]).toBeDefined();
+        expect(reactiveContextInstance.context['myHelper'][0].prop1).toBe('A');
+        expect(reactiveContextInstance.context['myHelper'][1].prop1).toBe('B');
+      });
+
+      it('Should trigger scope $digest when using scope and context', function() {
+        var data = {
+          _id: testObjectId,
+          prop1: 'T'
+        };
+
+        reactiveContextInstance.helpers({
+          myHelper: function() {
+            return bigCollection.find({});
+          }
+        });
+
+        var digestScopeSpy = spyOn(testScope, '$digest');
+
+        bigCollection.insert(data);
+
+        expect(digestScopeSpy).toHaveBeenCalled();
+        expect(digestScopeSpy.calls.count()).toBe(1);
+      });
+
+      it('Should trigger scope $digest when using scope only as context', function() {
+        testScope = $rootScope.$new();
+        reactiveContextInstance = $reactive(testScope);
+        bigCollection.remove(testObjectId);
+
+        var data = {
+          _id: testObjectId,
+          prop1: 'T'
+        };
+
+        reactiveContextInstance.helpers({
+          myHelper: function() {
+            return bigCollection.find({});
+          }
+        });
+
+        var digestScopeSpy = spyOn(testScope, '$digest');
+
+        bigCollection.insert(data);
+
+        expect(digestScopeSpy).toHaveBeenCalled();
+        expect(digestScopeSpy.calls.count()).toBe(1);
       });
     });
   });

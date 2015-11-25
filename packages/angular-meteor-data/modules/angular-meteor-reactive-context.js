@@ -83,10 +83,6 @@ angular.module('angular-meteor.reactive', []).factory('$reactive', ['$rootScope'
             this._handleNonCursor(data, name);
           }
 
-          if (this.scope && !$rootScope.$$phase) {
-            this.scope.$digest();
-          }
-
           this._propertyChanged(name);
         }));
       });
@@ -120,6 +116,10 @@ angular.module('angular-meteor.reactive', []).factory('$reactive', ['$rootScope'
     }
 
     _propertyChanged(propName) {
+      if (this.scope && !$rootScope.$$phase) {
+        this.scope.$digest();
+      }
+
       angular.forEach(this.callbacks, (cb) => {
         cb(propName);
       });
