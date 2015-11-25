@@ -14,12 +14,12 @@ angularMeteorReactiveScope.run(['$rootScope', '$reactive', function ($rootScope,
 
     subscribe (name, fn) {
       this.autorun(() => {
-        this.stopOnDestroy(Meteor.subscribe(name, ...fn()));
+        this.stopOnDestroy(Meteor.subscribe(name, ...(fn() || [])));
       })
     }
 
     getReactively (property, objectEquality) {
-      return $reactive(this).track(property, objectEquality);
+      return $reactive(this)._track(property, objectEquality);
     }
 
     stopOnDestroy(stoppable) {

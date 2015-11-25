@@ -289,6 +289,94 @@ describe('angular-meteor', function () {
         expect(digestScopeSpy).toHaveBeenCalled();
         expect(digestScopeSpy.calls.count()).toBe(1);
       });
+
+      it('Should call stop of all computations when stopping the reactivity of the context', function() {
+        reactiveContextInstance.helpers({
+          myHelper: function() {
+            return bigCollection.find({});
+          }
+        });
+
+        var computationSpy = spyOn(reactiveContextInstance.computations[0], 'stop');
+
+        reactiveContextInstance.stop();
+
+        expect(computationSpy).toHaveBeenCalled();
+      });
+
+      it('Should trigger the the property change when update values', function() {
+        var data = {
+          _id: testObjectId,
+          prop1: 'T'
+        };
+
+        reactiveContextInstance.helpers({
+          myHelper: function() {
+            return bigCollection.find({});
+          }
+        });
+
+        var cbSpy = jasmine.createSpy();
+
+        reactiveContextInstance.onPropertyChanged(cbSpy);
+
+        bigCollection.insert(data);
+
+        expect(cbSpy).toHaveBeenCalled();
+      });
+
+      it('Should defined reactive property on the context', function() {
+        reactiveContextInstance.reactiveProperties({
+          prop: 20
+        });
+
+        expect(context.prop).toBeDefined();
+        expect(context.prop).toBe(20);
+      });
+
+      it('Should defined reactive property on the context and update the value', function() {
+        reactiveContextInstance.reactiveProperties({
+          prop: 20
+        });
+
+        context.prop = 100;
+
+        expect(context.prop).toBeDefined();
+        expect(context.prop).toBe(100);
+      });
+
+      it('Should add subscription when call subscribe', function() {
+        reactiveContextInstance.reactiveProperties({
+          prop: 20
+        });
+
+        var subscribeSpy = spyOn(testScope, 'subscribe');
+
+        reactiveContextInstance.subscribe('users', function() {
+          return [];
+        });
+
+        expect(subscribeSpy).toHaveBeenCalled();
+      });
+
+      fit('Should call autorun methods when updating reactive property value', function() {
+        reactiveContextInstance.reactiveProperties({
+          prop: 20
+        });
+
+        var autorunSpy = jasmine.createSpy().and.callFake(function() {
+          console.log('sadasasdasd');
+        });
+
+        reactiveContextInstance.subscribe('users', function() {
+          return [
+          ]
+        });
+
+        context.prop = 100;
+
+        expect(autorunSpy).toHaveBeenCalled();
+      });
     });
   });
 });

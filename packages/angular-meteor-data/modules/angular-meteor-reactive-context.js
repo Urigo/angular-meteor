@@ -1,8 +1,8 @@
-angular.module('angular-meteor.reactive', []).factory('$reactive', ['$rootScope', '$parse', ($rootScope, $parse) => {
+angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).factory('$reactive', ['$rootScope', '$parse', ($rootScope, $parse) => {
   class ReactiveContext {
     constructor(context, scope) {
       if (!context || !angular.isObject(context)) {
-        throw '[angular-meteor][ReactiveContext] The context for ReactiveContext is required and must be an object!'
+        throw new Error('[angular-meteor][ReactiveContext] The context for ReactiveContext is required and must be an object!');
       }
 
       this.context = context;
@@ -13,6 +13,7 @@ angular.module('angular-meteor.reactive', []).factory('$reactive', ['$rootScope'
       }
 
       this.computations = [];
+      this.stoppables = [];
       this.callbacks = [];
       this.trackerDeps = {};
     }
@@ -58,15 +59,30 @@ angular.module('angular-meteor.reactive', []).factory('$reactive', ['$rootScope'
       }
     }
 
-    _isMeteorCursor (obj) {
+    _isMeteorCursor(obj) {
       return obj instanceof Mongo.Collection.Cursor;
     };
+
+    reactiveProperties(props) {
+      angular.forEach(props, (initialValue, propName) => {
+        let reactiveVariable = new ReactiveVar(initialValue);
+
+        Object.defineProperty(this.context, propName, {
+          get: function () {
+            return reactiveVariable.get();
+          },
+          set: function (newValue) {
+            reactiveVariable.set(newValue);
+          }
+        });
+      });
+    }
 
     helpers(props) {
       angular.forEach(props, (func, name) => {
         this.computations.push(Tracker.autorun((comp) => {
           if (!angular.isFunction(func)) {
-            throw '[angular-meteor][ReactiveContext] Helper ' + name + ' is not a function!';
+            throw new Error('[angular-meteor][ReactiveContext] Helper ' + name + ' is not a function!');
           }
 
           let data = func();
@@ -90,7 +106,7 @@ angular.module('angular-meteor.reactive', []).factory('$reactive', ['$rootScope'
       return this;
     }
 
-    track(property, objectEquality) {
+    _track(property, objectEquality) {
       let scope = this.scope || $rootScope;
       let getValue = $parse(property);
       objectEquality = !!objectEquality;
@@ -125,9 +141,33 @@ angular.module('angular-meteor.reactive', []).factory('$reactive', ['$rootScope'
       });
     }
 
+    subscribe(name, fn) {
+      if (this.scope) {
+        this.scope.subscribe(name, fn);
+      }
+      else {
+        this.autorun(() => {
+          this.stoppables.push(Meteor.subscribe(name, ...(fn() || [])));
+        });
+      }
+    }
+
+    autorun(fn) {
+      if (this.scope) {
+        this.scope.autorun(fn);
+      }
+      else {
+        this.stoppables.push(Meteor.autorun(fn));
+      }
+    }
+
     stop() {
       angular.forEach(this.computations, (comp) => {
         comp.stop();
+      });
+
+      angular.forEach(this.stoppables, (stoppable) => {
+        stoppable.stop();
       });
     }
   }
