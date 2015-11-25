@@ -364,18 +364,20 @@ describe('angular-meteor', function () {
           prop: 20
         });
 
-        var autorunSpy = jasmine.createSpy().and.callFake(function() {
-          console.log('sadasasdasd');
-        });
+        var callCount = 0;
+        var obj = {
+          func : () => { callCount++ }
+        };
 
-        reactiveContextInstance.subscribe('users', function() {
-          return [
-          ]
+        Meteor.autorun(() => {
+          obj.func();
+          console.log(context.prop);
         });
 
         context.prop = 100;
+        Tracker.flush();
 
-        expect(autorunSpy).toHaveBeenCalled();
+        expect(callCount).toBe(2);
       });
     });
   });
