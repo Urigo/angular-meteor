@@ -58,15 +58,6 @@ describe('angular-meteor', function () {
         bigCollection.remove(testObjectId);
       });
 
-      it('Should throw an exception when helper is not a function', function() {
-        expect(function() {
-          reactiveContextInstance.helpers({
-            myHelper: 10
-          });
-        }).toThrow();
-      });
-
-
       it('Should register primitive helper', function() {
         reactiveContextInstance.helpers({
           myHelper: function() {
@@ -74,7 +65,7 @@ describe('angular-meteor', function () {
           }
         });
 
-        expect(reactiveContextInstance.computations.length).toBe(1);
+        expect(reactiveContextInstance.stoppables.length).toBe(1);
         expect(reactiveContextInstance.context['myHelper']).toBe(10);
       });
 
@@ -85,7 +76,7 @@ describe('angular-meteor', function () {
           }
         });
 
-        expect(reactiveContextInstance.computations.length).toBe(1);
+        expect(reactiveContextInstance.stoppables.length).toBe(1);
         expect(reactiveContextInstance.context['myHelper']).toBe('Test');
       });
 
@@ -101,7 +92,7 @@ describe('angular-meteor', function () {
           }
         });
 
-        expect(reactiveContextInstance.computations.length).toBe(1);
+        expect(reactiveContextInstance.stoppables.length).toBe(1);
         expect(reactiveContextInstance.context['myHelper']).not.toBe(testObject);
         expect(reactiveContextInstance.context['myHelper']).toEqual(testObject);
       });
@@ -115,7 +106,7 @@ describe('angular-meteor', function () {
           }
         });
 
-        expect(reactiveContextInstance.computations.length).toBe(1);
+        expect(reactiveContextInstance.stoppables.length).toBe(1);
         expect(reactiveContextInstance.context['myHelper']).not.toBe(testArray);
         expect(reactiveContextInstance.context['myHelper']).toEqual(testArray);
       });
@@ -127,7 +118,7 @@ describe('angular-meteor', function () {
           }
         });
 
-        expect(reactiveContextInstance.computations.length).toBe(1);
+        expect(reactiveContextInstance.stoppables.length).toBe(1);
         expect(reactiveContextInstance.context['myHelper'] instanceof Array).toEqual(true);
       });
 
@@ -145,13 +136,13 @@ describe('angular-meteor', function () {
           prop1: 'A'
         });
 
-        expect(reactiveContextInstance.computations.length).toBe(1);
+        expect(reactiveContextInstance.stoppables.length).toBe(1);
         expect(reactiveContextInstance.context['myHelper'] instanceof Array).toEqual(true);
         expect(reactiveContextInstance.context['myHelper'].length).toEqual(1);
 
-        reactiveContextInstance.computations[0].invalidate();
+        reactiveContextInstance.stoppables[0].invalidate();
 
-        expect(reactiveContextInstance.computations.length).toBe(1);
+        expect(reactiveContextInstance.stoppables.length).toBe(1);
         expect(reactiveContextInstance.context['myHelper'] instanceof Array).toEqual(true);
         expect(reactiveContextInstance.context['myHelper'].length).toEqual(0);
       });
@@ -163,7 +154,7 @@ describe('angular-meteor', function () {
           }
         });
 
-        expect(reactiveContextInstance.computations.length).toBe(1);
+        expect(reactiveContextInstance.stoppables.length).toBe(1);
         expect(reactiveContextInstance.context['myHelper'] instanceof Array).toEqual(true);
       });
 
@@ -306,7 +297,7 @@ describe('angular-meteor', function () {
           }
         });
 
-        var computationSpy = spyOn(reactiveContextInstance.computations[0], 'stop');
+        var computationSpy = spyOn(reactiveContextInstance.stoppables[0], 'stop');
 
         reactiveContextInstance.stop();
 
@@ -335,7 +326,7 @@ describe('angular-meteor', function () {
       });
 
       it('Should defined reactive property on the context', function() {
-        reactiveContextInstance.reactiveProperties({
+        reactiveContextInstance.helpers({
           prop: 20
         });
 
@@ -344,7 +335,7 @@ describe('angular-meteor', function () {
       });
 
       it('Should defined reactive property on the context and update the value', function() {
-        reactiveContextInstance.reactiveProperties({
+        reactiveContextInstance.helpers({
           prop: 20
         });
 
@@ -355,7 +346,7 @@ describe('angular-meteor', function () {
       });
 
       it('Should add subscription when call subscribe', function() {
-        reactiveContextInstance.reactiveProperties({
+        reactiveContextInstance.helpers({
           prop: 20
         });
 
@@ -369,7 +360,7 @@ describe('angular-meteor', function () {
       });
 
       it('Should call autorun methods when updating reactive property value', function() {
-        reactiveContextInstance.reactiveProperties({
+        reactiveContextInstance.helpers({
           prop: 20
         });
 
@@ -386,7 +377,7 @@ describe('angular-meteor', function () {
         testScope = $rootScope.$new();
         reactiveContextInstance = $reactive(testScope);
 
-        reactiveContextInstance.reactiveProperties({
+        reactiveContextInstance.helpers({
           prop: 20
         });
 
@@ -401,7 +392,7 @@ describe('angular-meteor', function () {
         testScope = $rootScope.$new();
         reactiveContextInstance = $reactive(testScope);
 
-        reactiveContextInstance.reactiveProperties({
+        reactiveContextInstance.helpers({
           prop: 20
         });
 

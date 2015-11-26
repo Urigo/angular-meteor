@@ -6,7 +6,7 @@ describe('angular-meteor', function () {
     var $rootScope;
     var testScope;
 
-    var trackFuncSpy, helpersFuncSpy, autorunFuncSpy, subscribeFuncSpy, reactivePropertiesFuncSpy, attachFuncSpy, onPropertyChangedFuncSpy, stopFuncSpy;
+    var helpersFuncSpy, autorunFuncSpy, subscribeFuncSpy, reactivePropertiesFuncSpy, attachFuncSpy, onPropertyChangedFuncSpy, stopFuncSpy;
 
     beforeEach(angular.mock.module(testedModule, function($provide) {
       $provide.factory('$reactive', function() {
@@ -22,7 +22,6 @@ describe('angular-meteor', function () {
           subscribeFuncSpy = fakedReactiveClass.prototype.subscribe = jasmine.createSpy('subscribe');
           autorunFuncSpy = fakedReactiveClass.prototype.autorun = jasmine.createSpy('autorun');
           stopFuncSpy = fakedReactiveClass.prototype.stop = jasmine.createSpy('stop');
-          trackFuncSpy = fakedReactiveClass.prototype._track = jasmine.createSpy('_track');
 
           return new fakedReactiveClass(context);
         }
@@ -138,11 +137,6 @@ describe('angular-meteor', function () {
       expect(stoppableSpy).toHaveBeenCalled();
     });
 
-    it('Should use track function of $reactive when using getReactively', function() {
-      testScope.getReactively('t');
-      expect(trackFuncSpy).toHaveBeenCalled();
-    });
-
     it('Should register a handler for scope destroy when using stopOnDestory', function() {
       var stoppableSpy = jasmine.createSpy('stop');
       var scopeDestroySpy = spyOn(testScope, '$on');
@@ -150,6 +144,99 @@ describe('angular-meteor', function () {
       testScope.stopOnDestroy({stop: stoppableSpy});
 
       expect(scopeDestroySpy).toHaveBeenCalled();
+    });
+
+    it ('Should return the value from the scope when using getReactivley', function() {
+      testScope.myProp = 10;
+
+      expect(testScope.getReactively('myProp')).toBe(10);
+    });
+
+    it ('Should register a scope watch when using getReactivley', function() {
+      testScope.myProp = 10;
+
+      var watchSpy = spyOn(testScope, '$watch');
+
+      testScope.getReactively('myProp');
+
+      expect(watchSpy).toHaveBeenCalledWith('myProp', jasmine.any(Function), false);
+    });
+
+    it ('Should register a scope watch with custom equality function when using getReactivley', function() {
+      testScope.myProp = 10;
+      var customEquality = function() {};
+
+      var watchSpy = spyOn(testScope, '$watch');
+
+      testScope.getReactively('myProp', customEquality);
+
+      expect(watchSpy).toHaveBeenCalledWith('myProp', jasmine.any(Function), customEquality);
+    });
+
+    it ('Should register a scope watch with custom equality (deep) when using getReactivley', function() {
+      testScope.myProp = 10;
+
+      var watchSpy = spyOn(testScope, '$watch');
+
+      testScope.getReactively('myProp', true);
+
+      expect(watchSpy).toHaveBeenCalledWith('myProp', jasmine.any(Function), true);
+    });
+
+    it ('Should register a scope watch with custom equality (shallow) when using getReactivley', function() {
+      testScope.myProp = 10;
+
+      var watchSpy = spyOn(testScope, '$watch');
+
+      testScope.getReactively('myProp', false);
+
+      expect(watchSpy).toHaveBeenCalledWith('myProp', jasmine.any(Function), false);
+    });
+
+    it ('Should register a tracker dependency when using getReactivley', function() {
+      testScope.myProp = 10;
+
+      testScope.getReactively('myProp');
+
+      expect(testScope.$$trackerDeps).toBeDefined();
+      expect(testScope.$$trackerDeps['myProp']).toBeDefined();
+    });
+
+    it ('Should create a Dependency object for the reactive property', function() {
+      testScope.myProp = 10;
+
+      var depCtorSpy = spyOn(Tracker, 'Dependency').and.callFake(function() {
+        return {
+          depend: angular.noop,
+          changed: angular.noop
+        }
+      });
+
+      testScope.getReactively('myProp');
+
+      expect(depCtorSpy).toHaveBeenCalled();
+      expect(depCtorSpy.calls.count()).toBe(1);
+    });
+
+    it ('Should trigger the dependency logic when the watch callback is called', function() {
+      testScope.myProp = 10;
+
+      var changedSpy = jasmine.createSpy('changed');
+
+      spyOn(Tracker, 'Dependency').and.callFake(function() {
+        return {
+          depend: angular.noop,
+          changed: changedSpy
+        }
+      });
+
+      testScope.getReactively('myProp');
+      testScope.$apply();
+
+      testScope.myProp = 20;
+      testScope.$apply();
+
+      expect(changedSpy).toHaveBeenCalled();
     });
   });
 });
