@@ -1,7 +1,7 @@
 var testedModule = 'angular-meteor.reactive-scope';
 
 describe('angular-meteor', function () {
-  fdescribe(testedModule, function () {
+  describe(testedModule, function () {
     var $compile;
     var $rootScope;
     var testScope;
