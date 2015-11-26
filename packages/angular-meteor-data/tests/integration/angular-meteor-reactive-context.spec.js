@@ -18,14 +18,14 @@ describe('angular-meteor', function () {
     }));
 
     describe('$reactive', function() {
-      it('Should receive two param and pass them to the ReactiveContext class', function() {
+      it('Should receive one param and pass them to the ReactiveContext class without scope object', function() {
         var returnValue = $reactive(context);
 
         expect(returnValue.scope).toBeUndefined();
         expect(returnValue.context).toBe(context);
       });
 
-      it('Should receive two param and pass them to the ReactiveContext class', function() {
+      it('Should receive context param and attached scope and then and pass them to the ReactiveContext class', function() {
         var returnValue = $reactive(context).attach(testScope);
 
         expect(returnValue.scope).toBe(testScope);

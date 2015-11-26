@@ -179,7 +179,7 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
     }
   }
 
-  return function (context, scope) {
-    return new ReactiveContext(context, scope);
+  return function (context) {
+    return new ReactiveContext(context);
   };
 }]);

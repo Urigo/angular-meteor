@@ -72,7 +72,8 @@ Package.onTest(function(api) {
   ], 'client');
 
   api.addFiles([
-    'tests/integration/angular-meteor-reactive-context.spec.js'
+    'tests/integration/angular-meteor-reactive-context.spec.js',
+    'tests/integration/angular-meteor-reactive-scope.spec.js'
   ], 'client');
 
   api.addFiles([
