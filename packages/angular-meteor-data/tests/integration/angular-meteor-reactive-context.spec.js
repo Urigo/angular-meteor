@@ -19,7 +19,14 @@ describe('angular-meteor', function () {
 
     describe('$reactive', function() {
       it('Should receive two param and pass them to the ReactiveContext class', function() {
-        var returnValue = $reactive(context, testScope);
+        var returnValue = $reactive(context);
+
+        expect(returnValue.scope).toBeUndefined();
+        expect(returnValue.context).toBe(context);
+      });
+
+      it('Should receive two param and pass them to the ReactiveContext class', function() {
+        var returnValue = $reactive(context).attach(testScope);
 
         expect(returnValue.scope).toBe(testScope);
         expect(returnValue.context).toBe(context);
@@ -47,7 +54,7 @@ describe('angular-meteor', function () {
       beforeEach(function() {
         testScope = $rootScope.$new();
         context = {};
-        reactiveContextInstance = $reactive(context, testScope);
+        reactiveContextInstance = $reactive(context).attach(testScope);
         bigCollection.remove(testObjectId);
       });
 

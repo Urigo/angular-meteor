@@ -1,14 +1,13 @@
 angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).factory('$reactive', ['$rootScope', '$parse', ($rootScope, $parse) => {
   class ReactiveContext {
-    constructor(context, scope) {
+    constructor(context) {
       if (!context || !angular.isObject(context)) {
         throw new Error('[angular-meteor][ReactiveContext] The context for ReactiveContext is required and must be an object!');
       }
 
       this.context = context;
-      this.scope = scope;
 
-      if (!this.scope && (this.context.constructor || angular.noop).toString().indexOf('Scope') > -1) {
+      if ((this.context.constructor || angular.noop).toString().indexOf('Scope') > -1) {
         this.scope = this.context;
       }
 
@@ -16,6 +15,14 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
       this.stoppables = [];
       this.callbacks = [];
       this.trackerDeps = {};
+    }
+
+    attach(scope) {
+      if (!this.scope && (scope.constructor || angular.noop).toString().indexOf('Scope') > -1) {
+        this.scope = scope;
+      }
+
+      return this;
     }
 
     _handleCursor(cursor, name) {
