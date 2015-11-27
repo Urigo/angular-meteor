@@ -9,7 +9,7 @@ API_1_3_0 = function (version, basedOnTemplatesOf) {
         title: "",
         route: "api",
         path: urlBase,
-        redirectRoute: "api." + version + ".meteorCollection",
+        redirectRoute: "api." + version + ".reactive",
         template: "api",
         seoTitleSuffix: " | Angular Meteor API",
         seoDesc: "angular-meteor is a realtime full stack that combines the best frameworks. use your existing Angular applications with Meteor - the best backend framework for AngularJS applications.",

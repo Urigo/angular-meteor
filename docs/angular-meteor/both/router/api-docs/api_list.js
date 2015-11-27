@@ -5,4 +5,4 @@ API_DEFINITION = {
   '1.2.0': API_1_2_2('1.2.0', '1.2.2')
 };
 
-DEFAULT_API = '1.2.2';
+DEFAULT_API = '1.3.0';

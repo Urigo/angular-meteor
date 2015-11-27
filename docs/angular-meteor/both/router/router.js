@@ -164,7 +164,7 @@ Router.map(function () {
     createSubRoutes(API_DEFINITION[apiKey]);
   }
 
-  redirect('/api', '/api/' + DEFAULT_API + '/meteorCollection');
+  redirect('/api', '/api/' + DEFAULT_API + '/reactive');
 
   // -------------------------------------------------------------------------
   // Angular Server routes

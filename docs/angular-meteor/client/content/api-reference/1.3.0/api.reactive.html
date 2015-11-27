@@ -74,7 +74,7 @@ And our view will look like that:
 
     <div ng-controller="MyCtrl">
       <input type="number" ng-model="age">
-      Relevent Users: <br />
+      Relevant Users: <br />
       <ul>
         <li ng-repeat="user in users">{ { user.name } }</li>
       </ul>
@@ -106,7 +106,7 @@ And now the HTML will look like that:
 
     <div ng-controller="MyCtrl as vm">
       <input type="number" ng-model="vm.age">
-      Relevent Users: <br />
+      Relevant Users: <br />
       <ul>
         <li ng-repeat="user in vm.users">{ { user.name } }</li>
       </ul>
@@ -143,7 +143,7 @@ We can even make the code look better and use [https://github.com/pbastowski/ang
 And our view (inside the `users-list.html` file) will look like that:
 
     <input type="number" ng-model="usersList.age">
-    Relevent Users: <br />
+    Relevant Users: <br />
     <ul>
       <li ng-repeat="user in usersList.users">{ { user.name } }</li>
     </ul>
