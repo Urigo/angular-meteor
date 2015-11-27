@@ -130,6 +130,8 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
           this.stoppables.push(Meteor.subscribe(name, ...(fn() || [])));
         });
       }
+
+      return this;
     }
 
     autorun(fn) {
@@ -139,12 +141,18 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
       else {
         this.stoppables.push(Meteor.autorun(fn));
       }
+
+      return this;
     }
 
     stop() {
       angular.forEach(this.stoppables, (stoppable) => {
         stoppable.stop();
       });
+
+      this.stoppables = [];
+
+      return this;
     }
   }
 
