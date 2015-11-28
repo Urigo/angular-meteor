@@ -93,6 +93,9 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
           let reactiveVariable = new ReactiveVar(value);
 
           Object.defineProperty(this.context, name, {
+            configurable: true,
+            enumerable: true,
+
             get: function () {
               return reactiveVariable.get();
             },
