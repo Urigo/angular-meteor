@@ -1,4 +1,14 @@
 NgCachingHtmlCompiler = class NgCachingHtmlCompiler extends CachingHtmlCompiler {
+
+  getCacheKey(inputFile) {
+    // Note: we include the path for files that are renamed
+    return [
+      inputFile.getPackageName(),
+      inputFile.getPathInPackage(),
+      inputFile.getSourceHash()
+    ];
+  }
+  
   compileOneFile(inputFile) {
     const contents = inputFile.getContentsAsString();
     var packagePrefix = '';
