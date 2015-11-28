@@ -121,6 +121,8 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
     }
 
     subscribe(name, fn) {
+      fn = fn || angular.noop;
+
       if (this.scope) {
         this.scope.subscribe(name, fn);
       }
