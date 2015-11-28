@@ -13,7 +13,6 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
 
       this.stoppables = [];
       this.callbacks = [];
-      this.trackerDeps = {};
     }
 
     attach(scope) {
@@ -157,6 +156,15 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
   }
 
   return function (context) {
-    return new ReactiveContext(context);
+    let instance = new ReactiveContext(context);
+
+    context.helpers = instance.helpers.bind(instance);
+    context.attach = instance.attach.bind(instance);
+    context.stop = instance.stop.bind(instance);
+    context.autorun = instance.autorun.bind(instance);
+    context.subscribe = instance.subscribe.bind(instance);
+    context.onPropertyChanged = instance.onPropertyChanged.bind(instance);
+
+    return instance;
   };
 }]);
