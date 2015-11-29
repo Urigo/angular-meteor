@@ -345,6 +345,18 @@ describe('angular-meteor', function () {
         expect(context.prop).toBe(100);
       });
 
+      it('Should create a configurable and enumerable reactive property', function() {
+        reactiveContextInstance.helpers({
+          prop: 20
+        });
+
+        expect(Object.keys(context)).toContain("prop");
+
+        delete context.prop;
+
+        expect(context.prop).not.toBeDefined();
+      });
+
       it('Should add subscription when call subscribe', function() {
         reactiveContextInstance.helpers({
           prop: 20
@@ -412,8 +424,6 @@ describe('angular-meteor', function () {
         expect(autorunSpy).toHaveBeenCalled();
         expect(element.get(1).innerHTML).toBe('test');
       });
-
-
     });
   });
 });
