@@ -91,6 +91,7 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
         }
         else {
           let reactiveVariable = new ReactiveVar(value);
+          let stoppables = this.stoppables;
 
           Object.defineProperty(this.context, name, {
             get: function () {
@@ -98,8 +99,14 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
             },
             set: function (newValue) {
               reactiveVariable.set(newValue);
+
+              angular.forEach(stoppables, function(stoppable) {
+                stoppable.invalidate();
+              });
             }
           });
+
+          reactiveVariable.get();
         }
       });
 
@@ -124,7 +131,7 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
       fn = fn || angular.noop;
 
       if (this.scope) {
-        this.scope.subscribe(name, fn);
+        this.stoppables.push(this.scope.subscribe(name, fn));
       }
       else {
         this.autorun(() => {

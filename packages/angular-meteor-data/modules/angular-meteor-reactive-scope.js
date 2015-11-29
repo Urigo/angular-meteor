@@ -9,13 +9,13 @@ angularMeteorReactiveScope.run(['$rootScope', '$reactive', '$parse', function ($
     }
 
     autorun(fn) {
-      this.stopOnDestroy(Meteor.autorun(fn));
+      return this.stopOnDestroy(Meteor.autorun(fn));
     }
 
     subscribe (name, fn) {
-      this.autorun(() => {
+      return this.autorun(() => {
         this.stopOnDestroy(Meteor.subscribe(name, ...(fn() || [])));
-      })
+      });
     }
 
     getReactively (property, objectEquality) {
@@ -44,6 +44,8 @@ angularMeteorReactiveScope.run(['$rootScope', '$reactive', '$parse', function ($
 
     stopOnDestroy(stoppable) {
       this.$on('$destroy', () => stoppable.stop());
+
+      return stoppable;
     }
   }
 
