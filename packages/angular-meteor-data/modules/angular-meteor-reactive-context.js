@@ -105,8 +105,6 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
               });
             }
           });
-
-          reactiveVariable.get();
         }
       });
 
