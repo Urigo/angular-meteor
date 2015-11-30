@@ -110,10 +110,19 @@ describe('$meteorObject service', function () {
       });
     });
 
-    it('should create a new document if object does not exist and id is defined', function() {
+    it('should wrap the document if an explicit selector is used', function() {
+      var meteorObject = $meteorObject(TestCollection, { _id: id }, false);
+      expect(meteorObject.$$id).toEqual(id);
+    });
+
+    it('should ignore skip and limit selection options', function() {
+      var meteorObject = $meteorObject(TestCollection, { _id: id }, false, { skip: 1, limit: 1000 });
+      expect(meteorObject.$$id).toEqual(id);
+    });
+
+    it('should create a new document if object does not exist', function() {
       var id = 'test_2';
       var meteorObject = $meteorObject(TestCollection, id, false);
-      meteorObject._id = id;
       meteorObject.save();
 
       var doc = TestCollection.findOne(id);
