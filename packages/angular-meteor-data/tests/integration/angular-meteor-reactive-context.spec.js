@@ -304,7 +304,7 @@ describe('angular-meteor', function () {
         expect(computationSpy).toHaveBeenCalled();
       });
 
-      it('Should trigger the the property change when update values', function() {
+      it('Should trigger that the property change when update values', function() {
         var data = {
           _id: testObjectId,
           prop1: 'T'
@@ -323,6 +323,28 @@ describe('angular-meteor', function () {
         bigCollection.insert(data);
 
         expect(cbSpy).toHaveBeenCalled();
+      });
+
+      it('Should unregister specified change callbacks', function() {
+        var data = {
+          _id: testObjectId,
+          prop1: 'T'
+        };
+
+        reactiveContextInstance.helpers({
+          myHelper: function() {
+            return bigCollection.find({});
+          }
+        });
+
+        var cbSpy = jasmine.createSpy();
+
+        reactiveContextInstance.onPropertyChanged(cbSpy);
+        reactiveContextInstance.offPropertyChanged(cbSpy);
+
+        bigCollection.insert(data);
+
+        expect(cbSpy).not.toHaveBeenCalled();
       });
 
       it('Should defined reactive property on the context', function() {

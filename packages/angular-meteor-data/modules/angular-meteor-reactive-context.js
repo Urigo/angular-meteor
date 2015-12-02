@@ -7,7 +7,7 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
 
       this.context = context;
 
-      if ((this.context.constructor || angular.noop).toString().indexOf('Scope') > -1) {
+      if (this._isScope(this.context)) {
         this.scope = this.context;
       }
 
@@ -16,11 +16,15 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
     }
 
     attach(scope) {
-      if (!this.scope && (scope.constructor || angular.noop).toString().indexOf('Scope') > -1) {
+      if (!this.scope && this._isScope(scope)) {
         this.scope = scope;
       }
 
       return this;
+    }
+
+    _isScope(obj) {
+      return obj instanceof $rootScope.constructor;
     }
 
     _handleCursor(cursor, name) {
@@ -34,7 +38,8 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
           this._propertyChanged(name);
         },
         changedAt: (doc, oldDoc, atIndex) => {
-          jsondiffpatch.patch(this.context[name][atIndex], jsondiffpatch.diff(this.context[name][atIndex], doc));
+          let diff = jsondiffpatch.diff(this.context[name][atIndex], doc);
+          jsondiffpatch.patch(this.context[name][atIndex], diff);
           this._propertyChanged(name);
         },
         movedTo: (doc, fromIndex, toIndex) => {
@@ -47,7 +52,7 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
           this._propertyChanged(name);
         }
       });
-    };
+    }
 
     _handleNonCursor(data, name) {
       if (angular.isUndefined(this.context[name])) {
@@ -66,56 +71,68 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
 
     _isMeteorCursor(obj) {
       return obj instanceof Mongo.Collection.Cursor;
-    };
+    }
 
     helpers(props) {
-      _.map(props, (propValue, propName) => {
-        return {
-          key: propName,
-          value: propValue
-        }
-      }).sort((prop) => angular.isFunction(prop.value)).forEach((prop) => {
-        if (angular.isFunction(prop.value)) {
-          this.stoppables.push(Tracker.autorun((comp) => {
-            let data = prop.value();
+      let fns = {};
+      let vals = {};
 
-            if (this._isMeteorCursor(data)) {
-              let stoppableObservation = this._handleCursor(data, prop.key);
-
-              comp.onInvalidate(() => {
-                stoppableObservation.stop();
-                this.context[prop.key] = [];
-              });
-            }
-            else {
-              this._handleNonCursor(data, prop.key);
-            }
-
-            this._propertyChanged(prop.key);
-          }));
-        }
-        else {
-          let reactiveVariable = new ReactiveVar(prop.value);
-
-          Object.defineProperty(this.context, prop.key, {
-            configurable: true,
-            enumerable: true,
-
-            get: function () {
-              return reactiveVariable.get();
-            },
-            set: function (newValue) {
-              reactiveVariable.set(newValue);
-            }
-          });
-        }
+      _.each(props, (v, k) => {
+        if (_.isFunction(v))
+          fns[k] = v;
+        else
+          vals[k] = v;
       });
+
+      // note that function helpers are set before variable helpers
+      _.each(fns, this._setFnHelper.bind(this));
+      _.each(vals, this._setValHelper.bind(this));
 
       return this;
     }
 
+    _setFnHelper(fn, k) {
+      this.stoppables.push(Tracker.autorun((comp) => {
+        let data = fn();
+
+        if (this._isMeteorCursor(data)) {
+          let stoppableObservation = this._handleCursor(data, k);
+
+          comp.onInvalidate(() => {
+            stoppableObservation.stop();
+            this.context[k] = [];
+          });
+        }
+        else {
+          this._handleNonCursor(data, k);
+        }
+
+        this._propertyChanged(k);
+      }));
+    }
+
+    _setValHelper(v, k) {
+      let reactiveVar = new ReactiveVar(v);
+
+      Object.defineProperty(this.context, k, {
+        configurable: true,
+        enumerable: true,
+
+        get: function () {
+          return reactiveVar.get();
+        },
+        set: function (newValue) {
+          reactiveVar.set(newValue);
+        }
+      });
+    }
+
     onPropertyChanged(cb) {
       this.callbacks.push(cb);
+    }
+
+    offPropertyChanged(cb) {
+      this.callbacks = _.without(this.callbacks, cb);
     }
 
     _propertyChanged(propName) {
@@ -165,16 +182,14 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
     }
   }
 
-  return function (context) {
-    let instance = new ReactiveContext(context);
+  return (context) => {
+    let reactiveContext = new ReactiveContext(context);
 
-    context.helpers = instance.helpers.bind(instance);
-    context.attach = instance.attach.bind(instance);
-    context.stop = instance.stop.bind(instance);
-    context.autorun = instance.autorun.bind(instance);
-    context.subscribe = instance.subscribe.bind(instance);
-    context.onPropertyChanged = instance.onPropertyChanged.bind(instance);
+    // manipulates the original context so it could access reactive methods
+    _.keys(ReactiveContext.prototype)
+      .filter((k) => k.charAt(0) != '_')
+      .forEach((k) => context[k] = reactiveContext[k].bind(reactiveContext));
 
-    return instance;
+    return reactiveContext;
   };
 }]);
