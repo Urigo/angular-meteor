@@ -131,6 +131,10 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
       this.callbacks.push(cb);
     }
 
+    offPropertyChanged(cb) {
+      this.callbacks = _.without(this.callbacks, cb);
+    }
+
     _propertyChanged(propName) {
       if (this.scope && !$rootScope.$$phase) {
         this.scope.$digest();
@@ -178,16 +182,14 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
     }
   }
 
-  let wrapContext = (context) => {
+  return (context) => {
     let reactiveContext = new ReactiveContext(context);
 
     // manipulates the original context so it could access reactive methods
     _.keys(ReactiveContext.prototype)
       .filter((k) => k.charAt(0) != '_')
-      .each((k) => context[k] = reactiveContext[k].bind(reactiveContext));
+      .forEach((k) => context[k] = reactiveContext[k].bind(reactiveContext));
 
     return reactiveContext;
   };
-
-  return wrapContext;
 }]);
