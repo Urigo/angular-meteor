@@ -16,6 +16,8 @@ angularMeteorObject.factory('AngularMeteorObject', [
     ];
 
     function AngularMeteorObject (collection, id, options){
+      console.log('[angular-meteor.$meteorObject] Please note that this method is deprecated sine 1.3.0 and will be removed in 1.4.0!');
+
       // Make data not be an object so we can extend it to preserve
       // Collection Helpers and the like
       var data = new function SubObject() {};

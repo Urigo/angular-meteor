@@ -15,6 +15,7 @@ angularMeteorUser.service('$meteorUser', [
     var Accounts = pack.Accounts;
 
     this.waitForUser = function(){
+      console.log('[angular-meteor.waitForUser] Please note that this method is deprecated sine 1.3.0 and will be removed in 1.4.0!');
 
       var deferred = $q.defer();
 
@@ -27,6 +28,7 @@ angularMeteorUser.service('$meteorUser', [
     };
 
     this.requireUser = function(){
+      console.log('[angular-meteor.waitForUser] Please note that this method is deprecated sine 1.3.0 and will be removed in 1.4.0!');
 
       var deferred = $q.defer();
 
@@ -43,6 +45,8 @@ angularMeteorUser.service('$meteorUser', [
     };
 
     this.requireValidUser = function(validatorFn) {
+      console.log('[angular-meteor.waitForUser] Please note that this method is deprecated sine 1.3.0 and will be removed in 1.4.0!');
+
       return self.requireUser().then(function(user){
         var valid = validatorFn( user );
 
