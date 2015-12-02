@@ -6,6 +6,8 @@ angularMeteorMethods.service('$meteorMethods', [
   '$q', '$meteorUtils',
   function($q, $meteorUtils) {
     this.call = function(){
+      console.log('[angular-meteor.$meteor.call] Please note that this method is deprecated sine 1.3.0 and will be removed in 1.4.0!');
+
       var deferred = $q.defer();
       var fulfill = $meteorUtils.fulfill(deferred);
       var args = _.toArray(arguments).concat(fulfill);
