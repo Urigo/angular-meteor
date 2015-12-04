@@ -17,7 +17,6 @@ Angular2 + Meteor integration.
 ## Tutorial
 
 You can check out a 10-step Angular2+Meteor beginners [tutorial](http://www.angular-meteor.com/tutorials/socially/angular2).
-(It may have some typos and mistakes since it's still being refined).
 
 If you are already familiar with Meteor and Angular 1, proceed to the Quick Start.
 
