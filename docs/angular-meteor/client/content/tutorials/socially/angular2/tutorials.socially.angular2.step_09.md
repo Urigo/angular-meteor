@@ -5,12 +5,11 @@ You may have noticed that all available parties were always shown on the page
 at the time, independently had they been added by a logged-in user or
 anonymously, for example.
 
-In future versions of our app, we'll probably want to have an RSVP feature for parties.
-Hence, it'll require to show simultaneously only public parties and parties current user has been invited to.
+In future versions of our app, we'll probably want to have a RSVP feature for parties,
+which will require to show simultaneously only public parties and parties current user has been invited to.
 
 In this step we are going to learn how we can restrict data flow from the server side
-to the client side for only desired data in Meteor based on
-what user currently logged-in and some other parameters.
+to the client side for only desired data in Meteor, based on who currently logged-in and some other parameters.
 
 ## Autopublish
 
@@ -57,7 +56,7 @@ In a regular Meteor app with Blaze, we'd add the following line to subscribe to 
 
     Meteor.subscribe('parties');
 
-It's very simple, isn't it. And when subscription is completed, we select parties from the collection:
+It's very simple, isn't it? And when subscription is completed, we select parties from the collection:
 
     Meteor.subscribe('parties', () => {
       this.parties = Parties.find();
@@ -66,16 +65,16 @@ It's very simple, isn't it. And when subscription is completed, we select partie
 But beyond that simplicity there go two little issues we'll need to solve.
 Each subscription means that Meteor will continue synchronize (or in Meteor terms, update reactively) particular set of data, we've just subscribed to, between server and client.
 If PartiesList components gets desctroyed, we need to inform Meteor to stop that synchronization, otherwise we'll get a memory leak.
-It especially makes sense for single page apps, that are most usually built with Meteor.
+It especially makes sense for single page apps, the type of apps that are most usually built with Meteor.
 
 The second point is about informing Angular 2 to perform UI refresh when new data arrive.
-Or in other words, subscribe callback should run in the Angular 2's zone.
+In other words, subscribe callback should run in the Angular 2's zone.
 
 These two points were a strong reason to add a new class called `MeteorComponent`
 to the Angular2-Meteor package. This class has two public methods: `subscribe` and `autorun`.
 If you inherit a component of this class and make use of these methods, you won't need to worry
-about cleanups — `MeteorComponent` will do them for you behind the hood when it's needed.
-These methods also has a convenient boolean parameter called `autoBind`, which goes the last.
+about cleanups: `MeteorComponent` will do them for you behind the hood when it's needed.
+These methods also has a convenient boolean parameter called `autoBind`, which goes lastly.
 As its name suggests, we can tell `subscribe` to run the subscription callback in the change detection zone
 by setting the parameter to true.
 
@@ -83,7 +82,7 @@ So, we are going to extend `PartiesList` component and make use of `this.subscri
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="9.3"}}
 
-Now run the app. Whoa, all parties are back!
+Now run the app. Whoa, we've just made all the parties back with a simple trick!
 
 As it's mentioned earlier, it'd be nice for the app to implement a simple security and show parties based on who owns them. Let's do it.
 
@@ -120,17 +119,17 @@ Now log in as one of these users and verify that a couple of private parties got
 
 ## Subscribe with params
 
-There is one page in our app where we'll need a parameterized publishing — it's the PartyDetails component's page.
-Besides that, let's add another one cool feature to the Socially — search by location.
+There is one page in our app where we'll need a parameterized publishing — `PartyDetails` component's page.
+Besides that, let's add another one cool feature to the Socially, it's a search by party location.
 
-As you already may know, the second parameter of Meteor.publish is a callback funtion that can take a variable number 
+As you already know, the second parameter of Meteor.publish is a callback funtion that can take a variable number 
 of parameters, and they are parameters passed by the user to Meteor.subscribe on the client.
 
 Let's create a "party" publication on the server:
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="9.8"}}
 
-Looks like a lot of code! But it's a wrong perception. What has been done is that privacy query, we introduced above, was moved to a separate method called `buildQuery`.
+Looks like a lot of code! But it's a wrong perception. What has been done is that the privacy query, we introduced above, was moved to a separate method called `buildQuery`.
 We'll need it for each parties query, hence, avoiding repeation is a sensible thing.
 
 > Notice that we used `queryBuild.call(this)` calling syntax in order to make context of this method the same as in Meteor.publish
@@ -142,7 +141,7 @@ Let's subscribe to the new publication in the PartyDetails to load one specific 
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="9.10"}}
 
-Run the app and click on one of the party links. You'll see that party details page loads full data as before.
+Run the app and click on one of the party links. You'll see that party details page loads with full data as before.
 
 Now is time for the parties search. Let's add search input and button to the right of "Add" button.
 We are going to extend PartiesList component since this features is related to the parties list itself:
@@ -168,8 +167,8 @@ Please, read more [here](http://www.meteorpedia.com/read/Understanding_Meteor_Pu
 # Summary
 
 In this step it's been clearly seen how powerful Meteor and Angular 2 are and how they become even more
-powerful when used together. With rather few line of codes, we were able to add full privacy to the Socially plus
-we've added a parties search.
+powerful when used together. With rather few lines of code, we were able to add full privacy to the Socially plus
+we've added the parties search.
 
 Meanwhile, we've learned what is Publish-Subscribe mechanism in Meteor,
 how to query particular data from the database via server side and how important this mechanism is.
