@@ -15,21 +15,17 @@ import {MeteorComponent} from 'angular2-meteor';
 export class TaskView extends MeteorComponent {
   @Input('data') task: Task;
 
-  constructor() {
-    super();
-  }
-
   setChecked(checked) {
-    Meteor.call('setChecked', this.task._id,
+    this.call('setChecked', this.task._id,
       checked);
   }
 
   setAccess() {
-    Meteor.call('setPrivate', this.task._id,
+    this.call('setPrivate', this.task._id,
       !this.task.private);
   }
 
   deleteTask() {
-    Meteor.call('deleteTask', this.task._id);
+    this.call('deleteTask', this.task._id);
   }
 }

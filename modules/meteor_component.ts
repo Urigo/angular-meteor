@@ -24,12 +24,31 @@ export class MeteorComponent implements OnDestroy {
     this._hAutoruns.push(hAutorun);
   }
 
-  subscribe(name: string, ...args /*, callback|callbacks, autobind*/) {
-    let lastParam = args[args.length - 1];
-    let lastLastParam = args[args.length - 2];
+  /**
+   *  Method has the same notation as Meteor.subscribe:
+   *    subscribe(name, [args1, args2], [callbacks], [autobind])
+   *  except one additional last parameter,
+   *  which binds [callbacks] to the ng2 zone.
+   */
+  subscribe(name: string, ...args) {
+    let subArgs = this._prepMeteorArgs(args.slice());
 
-    if (_.isBoolean(lastParam) && isMeteorCallbacks(lastLastParam)) {
-      let callbacks = <MeteorCallbacks>lastLastParam;
+    let hSubscribe = Meteor.subscribe(name, ...subArgs);
+    this._hSubscribes.push(hSubscribe);
+  }
+
+  call(name: string, ...args) {
+    let callArgs = this._prepMeteorArgs(args.slice());
+
+    return Meteor.call(name, ...callArgs);
+  }
+
+  _prepMeteorArgs(args) {
+    let lastParam = args[args.length - 1];
+    let penultParam = args[args.length - 2];
+
+    if (_.isBoolean(lastParam) && isMeteorCallbacks(penultParam)) {
+      let callbacks = <MeteorCallbacks>penultParam;
       let autobind = <boolean>lastParam;
       if (autobind) {
         args[args.length - 2] = bindZone(callbacks);
@@ -38,8 +57,7 @@ export class MeteorComponent implements OnDestroy {
       args.pop();
     }
 
-    let hSubscribe = Meteor.subscribe(name, ...args);
-    this._hSubscribes.push(hSubscribe);
+    return args;
   }
 
   onDestroy() {
@@ -56,7 +74,7 @@ export class MeteorComponent implements OnDestroy {
   }
 }
 
-var subscribeEvents = ['onReady', 'onError', 'onStop'];
+const subscribeEvents = ['onReady', 'onError', 'onStop'];
 
 function bindZone(callbacks: MeteorCallbacks): MeteorCallbacks {
   var bind = zone.bind.bind(zone);
