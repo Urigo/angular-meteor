@@ -12,24 +12,24 @@ Even more, every .ts-file is being compiled into a separate System.j module, whi
 
 There is another one thing worth sounding once more. As you know, Meteor has two special folders: **client** and **server**  .
 We can benefit from them (and already done it in this app) too by allowing access to the client side modules from the client side only and, accordingly, to server side modules from the server side.
-Everything outside them will be available to both parts.
+Everything outside them will be available to the both parts.
 It’s, no wonder, a recommended approach in Meteor, and this is how we’ve been doing it so far.
 Let's stick to it further.
 
 # TypeScript
 
-TypeScript is ather new language - it’s been around for 3 year only.
+TypeScript is a rather new language that has been around for 3 years only.
 Since then it’s been gaining [popularity](https://www.google.com/trends/explore#q=%2Fm%2F0n50hxv) due to various reasons. Among them are one of the fullest implementation of the ES2015 standard's features
 on the market including some of the experimental ones, pseudo type-checking and rich toolset developed by Microsoft and TypeScript community.
-It has already support in all major IDEs including Visual Studio, WebStorm, Sublime etc.
+It has support already in all major IDEs including Visual Studio, WebStorm, Sublime etc.
 
-One of the hottest questions in JavaScript, that has been around since the web 2.0 era started, was how to make JavaScript less bug-prone and
+One of the hottest questions in JavaScript, that has been around since the Web 2.0 era started, was how to make JavaScript less bug-prone and
 suitable for big projects. In the OOP world, well-known solutions include modularity and strict type-checking. While OOP is available in JavaScript in some way,
 it turned out to be very hard to create a good type-checking due to, first of all, JavaScript's flexibility. One always needs to impose a certain number of rules to
 follow to make a JavaScript compiler effective. For many years, we’ve seen around a number of solutions including Closure Compiler and GWT from Google, a bunch of C#-to-JavaScript compilers and others.
 
-This was, for sure, one of the questions why TypeScript team were striving to solve: to create a language that would inherit flexibility of JavaScript while would have, at the same, effective type-checking with minimum amount of effort required from the user. There should have been some kind of [middle way](https://en.wikipedia.org/wiki/Middle_Way).
-They found it, having introduced type declaration files. These are files of special kind where you describe interfaces your classes expose along with signatures of the methods and types of the parameters they take, so that TypeScript will be able to refer to these files to verify correctness of your class's API.
+This was, for sure, one of the questions why TypeScript team were striving to solve: to create a language that would inherit flexibility of JavaScript while would have, at the same, effective type-checking with minimum amount of effort required from the user. There should have been some kind of the [middle way](https://en.wikipedia.org/wiki/Middle_Way).
+And they found it, having introduced the type declaration files. These are files of special kind where you describe interfaces your classes expose along with signatures of the methods and types of the parameters they take, so that TypeScript will be able to refer to these files to verify correctness of your class's API.
 Of course, flexibility is still there which means if you don’t want to declare types you can skip them right away.
 
 Usage of the declaration files was mentioned multiple time in this tutorial before with the `/// <reference path=".." />` syntax. By this way, we tell TypeScript what declaration files to check when it is compiling a particular .ts-file.
@@ -85,7 +85,7 @@ Finally, let’s change `Object` to `Party` in the `parties-list.ts` and `party-
 
 Many of us will use different third-party TypeScript libraries in projects, so
 TSD is worth to be mentioned. This tool allows to search, install and update
-declaration files from one global repository of declaration files being kept by the TypeScript community.
+declaration files from one global repository of declaration files kept by the TypeScript community.
 
 For example, you can use `tsd query NAME` to search for a specific package NAME:
 
@@ -113,14 +113,14 @@ Angular2-Meteor packages uses a ts-compiler [package](https://github.com/barbatu
 Just create a file with this name in the root folder of your app, and start adding options you'd like.
 You can read about all possible options [here](https://github.com/Microsoft/TypeScript/wiki/Compiler-Options).
 
-Please, note, since Meteor environment has some specifics, some of the options don't have sense in Meteor.
+Please note, since Meteor environment is quite specific, some of the options don't have sense in Meteor.
 You can read about exceptions [here](https://github.com/barbatus/typescript#compiler-options).
-Additonal options available in the package are described [here](https://github.com/barbatus/ts-compilers#typescript-config)
+Additonal options available in the package are described [here](https://github.com/barbatus/ts-compilers#typescript-config).
 
 
 # Summary
 
 In this step we discovered a new way to make TypeScript code less buggy by using TypeScript's type-checking.
-Meanwhile we declared a new type for the party object, thus, realized type-checking support in the Socially app.
+Meanwhile we declared a new type for the party object, thus, made the type-checking partially available in the Socially app.
   
 {{/template}}
