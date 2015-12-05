@@ -13,29 +13,29 @@ Out current list display is relevant for browser app only. For mobile applicatio
 
 Also, all the tags from the `index.html` file are based on angular-material and are only relevant for bowser code. We use the `ui-view` in the `body` tag to indicate that this is used as a view container for the other views. 
 
-{{> DiffBox tutorialName="angular-meteor" step="22.1"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="22.1"}}
 
 We will move the browser main page HTML to a new file, under the `socially-browser` package. Also, let's add a nested view called `main`, that will contain the actual page code that is relevant to the browser.
 
-{{> DiffBox tutorialName="angular-meteor" step="22.2"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="22.2"}}
 
 Next, we will update the `routes.js`file of the `socially-browser` package. We will add the main view as abstract view in order to set it as the base template, and create a view for the parties list.
 
-{{> DiffBox tutorialName="angular-meteor" step="22.3"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="22.3"}}
 
 Let's update the `routes.js` file of the root project, and use the base template we just created for the browser:
 
-{{> DiffBox tutorialName="angular-meteor" step="22.4"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="22.4"}}
 
 Now we just need to move the PartiesListCtrl from the root project to the browser project and update it's package name:
 
-{{> DiffBox tutorialName="angular-meteor" step="22.5"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="22.5"}}
 
 We changed the name of the states in the last steps, so we need to update it's usage anywhere we use states names, so update it in any file, you can see the full commit that made that change [here](https://github.com/Urigo/meteor-angular-socially/commit/df078be907d053cbd1ffa6071368a60c8f929b97).
 
 Then next step is to update our `package.js` file and include the files we moved to the package: 
 
-{{> DiffBox tutorialName="angular-meteor" step="22.8"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="22.8"}}
 
 And now our parties list and the main layout is loaded for the browser package only.
 
@@ -43,53 +43,53 @@ And now our parties list and the main layout is loaded for the browser package o
 
 Using ionic is pretty simple - first, we need to add a dependency in the `package.js` of our `socially-mobile`:
 
-{{> DiffBox tutorialName="angular-meteor" step="22.10"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="22.10"}}
 
 Ionic is based on AngularJS, therefore we also need to load the `ionic` as a module dependency in the `socially.mobile` module:
 
-{{> DiffBox tutorialName="angular-meteor" step="22.11"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="22.11"}}
 
 Here we create a new main page that contains the main layout of the mobile app. This is a simple navigation layout that is  copied & pasted from the Ionic documentation.
 
-{{> DiffBox tutorialName="angular-meteor" step="22.12"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="22.12"}}
 
 > The `ion-nav-view` tag is similar to the `ui-view` tag, so we can use the same view (`main`) here.
 
 We will create a layout base for our parties list and later we will implement the whole view.
 
-{{> DiffBox tutorialName="angular-meteor" step="22.13"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="22.13"}}
 
 As with any other file, this one also need to be added to the `package.js` file :
 
-{{> DiffBox tutorialName="angular-meteor" step="22.14"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="22.14"}}
 
 Not to forget to add the routes to the `routes.js` of the `socially-mobile` module.
 
 We will add the basic view (`socially` abstract state) and add other states that extend the view.
 
-{{> DiffBox tutorialName="angular-meteor" step="22.15"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="22.15"}}
 
 The partiesList controller does not contain all the funcitonality as in the browswr. So we will create a stripped down `PartiesListCtrl` for our mobile:
 
-{{> DiffBox tutorialName="angular-meteor" step="22.16"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="22.16"}}
 
 We will attach the new controller to our state:
 
-{{> DiffBox tutorialName="angular-meteor" step="22.17"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="22.17"}}
 
 Surely enough, include the new files in the `package.js`:
 
-{{> DiffBox tutorialName="angular-meteor" step="22.18"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="22.18"}}
 
 And now we need to create the view of the parties list for the mobile platform, using Ionic's directives and CSS.
 
 Now we add the content of the parties list. This is pretty straight forward using Angular directives and Ionic classes:
 
-{{> DiffBox tutorialName="angular-meteor" step="22.19"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="22.19"}}
 
 The `getMainImageUrl` method is used to retrieve the, well, main image of the party. It needs to be implemented in the controller:
 
-{{> DiffBox tutorialName="angular-meteor" step="22.20"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="22.20"}}
 
 And... we're done!
 
