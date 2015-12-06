@@ -29,7 +29,7 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
 
     _handleCursor(cursor, name) {
       if (angular.isUndefined(this.context[name])) {
-        this._setValHelper(cursor.fetch(), name);
+        this._setValHelper(name, cursor.fetch());
       }
       else {
         let diff = jsondiffpatch.diff(this.context[name], cursor.fetch());
@@ -66,7 +66,7 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
 
     _handleNonCursor(data, name) {
       if (angular.isUndefined(this.context[name])) {
-        this._setValHelper(data, name);
+        this._setValHelper(name, data);
       }
       else {
         if ((!_.isObject(data) && !_.isArray(data)) ||
@@ -82,24 +82,17 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
     }
 
     helpers(props) {
-      let fns = {};
-      let vals = {};
-
       _.each(props, (v, k) => {
         if (_.isFunction(v))
-          fns[k] = v;
+          this._setFnHelper(k, v);
         else
-          vals[k] = v;
+          this._setValHelper(k, v);
       });
-
-      // note that variable helpers are set before function helpers
-      _.each(vals, this._setValHelper.bind(this));
-      _.each(fns, this._setFnHelper.bind(this));
 
       return this;
     }
 
-    _setValHelper(v, k) {
+    _setValHelper(k, v) {
       this.propertiesTrackerDeps[k] = new Tracker.Dependency();
       v = _.clone(v);
 
@@ -118,7 +111,7 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
       });
     }
 
-    _setFnHelper(fn, k) {
+    _setFnHelper(k, fn) {
       this.stoppables.push(Tracker.autorun((comp) => {
         let data = fn.apply(this.context);
 
