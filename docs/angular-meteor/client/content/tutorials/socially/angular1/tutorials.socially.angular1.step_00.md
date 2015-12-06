@@ -96,7 +96,6 @@ To start simple, create a new file called `main.html` under the main folder, thi
 
 Then move the `p` tag into it:
 
-
 {{> DiffBox tutorialName="meteor-angular1-socially" step="0.6"}}
 
 Now let's include that file into our main `index.html` file:
@@ -125,26 +124,21 @@ But we need Angular 1's power only in the client side, so how can we do that?
 
 There are a few ways to tell Meteor to run code only on the client/server/phone side, let's start with the simplest way - [Meteor.isClient](http://docs.meteor.com/#/full/meteor_isclient) variable.
 
+Everything inside this `if` statement will only run on the client side.
+
+And let's continue defining our Angular 1 application module. Give it the name `socially` and add `angular-meteor` module as a dependency:
+
 {{> DiffBox tutorialName="meteor-angular1-socially" step="0.8"}}
-
-Now everything inside this `if` statement will only run on the client side.
-
-Let's continue defining our Angular 1 application module. Give it the name `socially` and add `angular-meteor` module as a dependency:
-
-{{> DiffBox tutorialName="meteor-angular1-socially" step="0.9"}}
 
 And use the same application name in the `ng-app` directive in `index.html`:
 
-{{> DiffBox tutorialName="meteor-angular1-socially" step="0.10"}}
-
+{{> DiffBox tutorialName="meteor-angular1-socially" step="0.9"}}
 
 Now run the app.
 
 Everything is the same, so now inside our `main.html` let's use Angular 1:
 
-
-{{> DiffBox tutorialName="meteor-angular1-socially" step="0.11"}}
-
+{{> DiffBox tutorialName="meteor-angular1-socially" step="0.10"}}
 
 Run the app again and the screen should look like this:
 
