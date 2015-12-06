@@ -53,8 +53,7 @@ Now we can start building our app.
 
 Create a new `index.html` file and place this code inside. Then run the app again.
 
-
-{{> DiffBox tutorialName="meteor-angular1-socially" step="0.4"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="0.3"}}
 
 
 Note that there is no `<html>` tag and no `<head>` tag - it's very simple.
@@ -68,6 +67,7 @@ Concatenation means merging the content of all `HTML`, `HEAD` and `BODY` tags fo
 So in our case, Meteor found our `index.html` file, found the `BODY` tag inside and added it's content to the `BODY` tag of the main generated file.
 
 > (right-click -> inspect element on the page to see the generated file)
+
 
 # Adding Angular 1
 
