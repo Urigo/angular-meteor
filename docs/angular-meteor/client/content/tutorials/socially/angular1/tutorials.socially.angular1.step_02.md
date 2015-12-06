@@ -11,7 +11,7 @@ In Angular 1, the view is a projection of the model through the HTML template. T
 
 Let's change our template to be dynamic:
 
-{{> DiffBox tutorialName="meteor-angular1-socially" step="2.1"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="2.1" filename="main.html"}}
 
 We replaced the hard-coded party list with the [ngRepeat](https://docs.angularjs.org/api/ng/directive/ngRepeat) directive and two Angular 1 expressions:
 
