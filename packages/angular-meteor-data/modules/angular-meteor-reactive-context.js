@@ -101,6 +101,7 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
 
     _setValHelper(v, k) {
       this.propertiesTrackerDeps[k] = new Tracker.Dependency();
+      v = _.clone(v);
 
       Object.defineProperty(this.context, k, {
         configurable: true,
@@ -127,9 +128,8 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
 
             comp.onInvalidate(() => {
               stoppableObservation.stop();
-              while (this.context[k].length > 0) {
-                this.context[k].pop();
-              }
+              // empty set once cursor is invalidated
+              this.context[k].splice(0);
             });
           }
           else {
