@@ -122,7 +122,7 @@ Add this ng-repeat list to the end of `party-details.html`:
 
 Run the app and see the list of all the users' emails that created a login and password and did not use a service to login.
 
-# Working with users in the client side
+# Working with Users collection in the client side
 
 Note that the structure of the Users collection is different between regular email-password, Facebook, Google etc.
 
