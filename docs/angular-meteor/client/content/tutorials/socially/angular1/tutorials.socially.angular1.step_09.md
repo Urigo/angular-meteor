@@ -43,43 +43,13 @@ You can find out more about MonngoDB `find()` method [here](http://docs.mongodb.
 
 That function will determine what data will be returned and the permissions needed.
 
-In our case the first name parameter is **"parties"**. So we will need to subscribe to the **"parties"** collection in the client.
-
-We have two ways of doing that:
-
-1. Using the [$meteor.subscribe](/api/subscribe) service that also returns a promise when the subscribing is done
-2. Using [AngularMeteorCollection's](/api/AngularMeteorCollection) subscribe function which is exactly the same, but it's
-here just for syntactic sugar doesn't return a promise.
-
-Right now we don't need the promise, so let's use the second way:
+In our case the first name parameter is **"parties"**. So we will need to subscribe to the **"parties"** collection in the client, so let's do it, using `this.subscribe` method:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="9.3"}}
 
-It is the same as:
-
-    $meteor.subscribe('parties');
-    $scope.parties = $meteor.collection(Parties);
-
-It is also possible to add your subscriptions in your routing.js, you can move them over like this 
-(but it's not best practice so we won't do that right now):
-
-     .state('parties', {
-        url: '/parties',
-        templateUrl: 'client/parties/views/parties-list.html',
-        controller: 'PartiesListCtrl',
-        resolve: {
-          'subscribe': [
-            '$meteor', function($meteor) {
-              return $meteor.subscribe('parties');
-            }
-          ]
-        }
-     });
-
 > Our publish function can also take parameters.  In that case, we would also need to pass the parameters from the client.
->
-> For more information about the `$meteor.subscribe` service [click here](/api/subscribe)
 
+> For more information about the `subscribe` service [click here](/api/reactive-context)
 
 In the second parameter, our function uses the Mongo API to return the wanted documents (document are the JSON-style data structure of MongoDB).
 
@@ -88,7 +58,6 @@ So we create a query - start with the find method on the Parties collection.
 Inside the find method we use the [$or](http://docs.mongodb.org/manual/reference/operator/query/or/), [$and](http://docs.mongodb.org/manual/reference/operator/query/and/) and [$exists](http://docs.mongodb.org/manual/reference/operator/query/exists/) Mongo operators to pull our wanted parties:
 
 Either that the owner parameter exists and it's the current logged in user (which we have access to with the command `this.userId`), or that the party's public flag exists and it's set as true.
-
 
 So now let's add the public flag to the parties and see how it affects the parties the client gets.
 
@@ -101,6 +70,10 @@ Notice how easy it is to bind a checkbox to a model with Angular 1!
 Let's add the same to the `party-details.html` page:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="9.5"}}
+
+And we will add the ability to set this flag when updating a party details:
+
+{{> DiffBox tutorialName="meteor-angular1-socially" step="9.6"}}
 
 Now let's run the app.
 
@@ -121,7 +94,7 @@ So let's start with defining our publish function.
 
 Create a new file under the `server` folder named `users.js` and place the following code in:
 
-{{> DiffBox tutorialName="meteor-angular1-socially" step="9.6"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="9.7"}}
 
 So here again we use the Mongo API to return all the users (find with an empty object) but we select to return only the emails and profile fields.
 
@@ -130,18 +103,14 @@ So here again we use the Mongo API to return all the users (find with an empty o
 The emails field holds all the user's email addresses, and the profile might hold more optional information like the user's name
 (in our case, if the user logged in with the Facebook login, the accounts-facebook package puts the user's name from Facebook automatically into that field).
 
-Now let's subscribe to that publish Method.  In the `client->parties->controllers->partyDetails.js` file add the following line inside the controller.
-If you just add to the end you will get an uncaught reference $scope not defined:
+Now let's subscribe to that publish Method.  In the `partyDetails` component file add the following line inside the controller:
 
-{{> DiffBox tutorialName="meteor-angular1-socially" step="9.7"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="9.8"}}
 
-* We bind to the Meteor.users collection
-* Binding the result to $scope.users
-* Notice that we pass `false` in the second parameter. That means that we don't want to update that collection from the client
-* Calling [AngularMeteorCollection's](/api/AngularMeteorCollection) subscribe function
+* We add function helper to the `users` collection
+* Also, we subscribed to the `users` publication
 
-Also, let's add a subscription to the party in this controller as well.
-This is because if we will get to this controller directly, the subscription in the other controller won't be called and we will have no data at all.
+Also, let's add a subscription to the `parties` in this controller as well:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="9.8"}}
 
@@ -153,7 +122,9 @@ Add this ng-repeat list to the end of `party-details.html`:
 
 Run the app and see the list of all the users' emails that created a login and password and did not use a service to login.
 
-* The structure of the Users collection is different between regular email-password, Facebook, Google etc.
+# Working with users in the client side
+
+Note that the structure of the Users collection is different between regular email-password, Facebook, Google etc.
 
 The Document structure looks like this (notice where the email is in each one):
 
