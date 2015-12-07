@@ -151,7 +151,7 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
     subscribe(name, fn) {
       fn = fn || angular.noop;
 
-      if (this.scope) {
+      if (this.scope && this.scope !== this.context) {
         this.stoppables.push(this.scope.subscribe(name, fn));
       }
       else {
@@ -164,7 +164,7 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
     }
 
     autorun(fn) {
-      if (this.scope) {
+      if (this.scope && this.scope !== this.context) {
         this.scope.autorun(fn);
       }
       else {
