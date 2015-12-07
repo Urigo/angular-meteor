@@ -112,13 +112,13 @@ Now let's subscribe to that publish Method.  In the `partyDetails` component fil
 
 Also, let's add a subscription to the `parties` in this controller as well:
 
-{{> DiffBox tutorialName="meteor-angular1-socially" step="9.8"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="9.9"}}
 
 Now let's add the list of users to the view to make sure it works.
 
 Add this ng-repeat list to the end of `party-details.html`:
 
-{{> DiffBox tutorialName="meteor-angular1-socially" step="9.9"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="9.10"}}
 
 Run the app and see the list of all the users' emails that created a login and password and did not use a service to login.
 
