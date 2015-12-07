@@ -97,7 +97,8 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
         }
         else {
           this.stoppables.push(Tracker.autorun((comp) => {
-            let data = prop.value();
+            let data = prop.value.apply(this.context);
+
             Tracker.nonreactive(() => {
               if (ReactiveContext._isMeteorCursor(data)) {
                 let stoppableObservation = this._handleCursor(data, prop.key);
