@@ -5,7 +5,7 @@ var angularMeteorUtils = angular.module('angular-meteor.utils', []);
 angularMeteorUtils.service('$meteorUtils', [
   '$q', '$timeout',
   function ($q, $timeout) {
-    console.log('[angular-meteor.utils] Please note that this module is deprecated sine 1.3.0 and will be removed in 1.4.0!');
+    console.warn('[angular-meteor.utils] Please note that this module is deprecated sine 1.3.0 and will be removed in 1.4.0!');
 
     var self = this;
 
