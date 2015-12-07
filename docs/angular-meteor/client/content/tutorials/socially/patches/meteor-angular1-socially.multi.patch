@@ -1,7 +1,7 @@
-From 976450256cfa541bf05dc95e0ed0aa7c13471393 Mon Sep 17 00:00:00 2001
+From ac2d617c3e1491864580511aa29cb1526b00901e Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 12:23:05 +0200
-Subject: [PATCH 001/244] Step 0.2: Remove all starter files
+Subject: [PATCH 001/245] Step 0.2: Remove all starter files
 
 ---
  socially.css  |  1 -
@@ -72,10 +72,10 @@ index 4f8c65d..0000000
 2.3.2 (Apple Git-55)
 
 
-From f96c67cc04589bad3d84665b1ba0c3a71d4c772d Mon Sep 17 00:00:00 2001
+From 88ca750297af6a81f3895bfdf1e0511d8e4d4846 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 12:24:02 +0200
-Subject: [PATCH 002/244] Step 0.3: Create empty index.html file
+Subject: [PATCH 002/245] Step 0.3: Create empty index.html file
 
 ---
  index.html | 3 +++
@@ -96,10 +96,10 @@ index 0000000..3887661
 2.3.2 (Apple Git-55)
 
 
-From 2f6db90320c5dcd8077948e39c7cb1b739cc0853 Mon Sep 17 00:00:00 2001
+From b31d16ceab6e238ccd4970d18e9881891c6c2ed8 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 12:27:26 +0200
-Subject: [PATCH 003/244] Step 0.4: Remove meteor default package for UI
+Subject: [PATCH 003/245] Step 0.4: Remove meteor default package for UI
  handling
 
 ---
@@ -129,10 +129,10 @@ index a9f8340..2f62174 100644
 2.3.2 (Apple Git-55)
 
 
-From be7d185bd0160251f72d2637addc70c140099e7b Mon Sep 17 00:00:00 2001
+From 8740fdd90db451a06e4709ce3b7c769d06393b09 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 12:32:15 +0200
-Subject: [PATCH 004/244] Step 0.5: Add angular package to the project
+Subject: [PATCH 004/245] Step 0.5: Add angular package to the project
 
 ---
  .meteor/packages | 1 +
@@ -203,10 +203,10 @@ index 17859ef..afda2d1 100644
 2.3.2 (Apple Git-55)
 
 
-From b6a5ce48c814cef1bfd68d9460ea6fef2dc2ecd2 Mon Sep 17 00:00:00 2001
+From 7e8bd77aad8c3402ce5ef0a97650cc5842ff32aa Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 12:36:22 +0200
-Subject: [PATCH 005/244] Step 0.6: Move the main content to a new file
+Subject: [PATCH 005/245] Step 0.6: Move the main content to a new file
 
 ---
  main.html | 1 +
@@ -225,10 +225,10 @@ index 0000000..c1e3c17
 2.3.2 (Apple Git-55)
 
 
-From 23f2c4d98f95c4fb38bcab2d8d924a798119c329 Mon Sep 17 00:00:00 2001
+From 3d68206f7ba70bbf1f0f4b5ca3c4a87bd798ba2a Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 12:42:12 +0200
-Subject: [PATCH 006/244] Step 0.7: Add `ng-include` that loads the main.html
+Subject: [PATCH 006/245] Step 0.7: Add `ng-include` that loads the main.html
  file
 
 ---
@@ -249,10 +249,10 @@ index 3887661..510c4b2 100644
 2.3.2 (Apple Git-55)
 
 
-From be385cd69c2a1106dcae125730e3c245b7429411 Mon Sep 17 00:00:00 2001
+From 039e0c4baa2169c5e69b343eabca37cbd4ef90f0 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 12:42:38 +0200
-Subject: [PATCH 007/244] Step 0.8: Add app.js with angular module
+Subject: [PATCH 007/245] Step 0.8: Add app.js with angular module
 
 ---
  app.js | 3 +++
@@ -273,10 +273,10 @@ index 0000000..cc85a07
 2.3.2 (Apple Git-55)
 
 
-From 58c5d468e000231a83f5104b76f21e5fc1fd6ec0 Mon Sep 17 00:00:00 2001
+From fe9787b6c25ef97f3a47ca8ecc3401241b782d18 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 12:42:55 +0200
-Subject: [PATCH 008/244] Step 0.9: Add usage of `ng-app` in our app
+Subject: [PATCH 008/245] Step 0.9: Add usage of `ng-app` in our app
 
 ---
  index.html | 2 +-
@@ -296,10 +296,10 @@ index 510c4b2..4300d5c 100644
 2.3.2 (Apple Git-55)
 
 
-From 53a2e932b951aa41805167e8a35a0a90bdfe2e68 Mon Sep 17 00:00:00 2001
+From 44cbcb126f5999d0b0c8c5a31d8ccdd533051e00 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 12:43:30 +0200
-Subject: [PATCH 009/244] Step 0.10: Add some AngularJS code !
+Subject: [PATCH 009/245] Step 0.10: Add some AngularJS code !
 
 ---
  main.html | 2 +-
@@ -318,10 +318,10 @@ index c1e3c17..ff611cc 100644
 2.3.2 (Apple Git-55)
 
 
-From 8a14640a96ca54c53fce100f0258fca1eb271d42 Mon Sep 17 00:00:00 2001
+From a7b941a54d49e01563d7589b79e2b5a649c48ddb Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 12:45:22 +0200
-Subject: [PATCH 010/244] Step 1.1: Add some static HTML the to main page
+Subject: [PATCH 010/245] Step 1.1: Add some static HTML the to main page
 
 ---
  main.html | 15 ++++++++++++++-
@@ -353,10 +353,10 @@ index ff611cc..9ea318e 100644
 2.3.2 (Apple Git-55)
 
 
-From 8c09d812e26cd82325d9d3ad94044f7029b25d72 Mon Sep 17 00:00:00 2001
+From 96f61304c3e48857250a27587277066ea64762b9 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 15:11:28 +0200
-Subject: [PATCH 011/244] Step 2.1: Use dynamic template instead of static
+Subject: [PATCH 011/245] Step 2.1: Use dynamic template instead of static
 
 ---
  .meteor/versions |  6 +++---
@@ -410,10 +410,10 @@ index 9ea318e..2838b47 100644
 2.3.2 (Apple Git-55)
 
 
-From 4fd7bf90d4e6814c382bef4e9a325cd8dc293b5d Mon Sep 17 00:00:00 2001
+From 2278fedb65fcb8754dbf735e5525eb436d17013c Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 15:11:47 +0200
-Subject: [PATCH 012/244] Step 2.2: Add the parties controller
+Subject: [PATCH 012/245] Step 2.2: Add the parties controller
 
 ---
  app.js | 17 +++++++++++++++++
@@ -449,10 +449,10 @@ index cc85a07..9cbfb86 100644
 2.3.2 (Apple Git-55)
 
 
-From 28c12ad932a0e7e4241c25d5d8ef21095fa21d8b Mon Sep 17 00:00:00 2001
+From e4b1bb8fe140c1aa9844dbfb2d5db99838fb90f8 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 15:14:09 +0200
-Subject: [PATCH 013/244] Step 2.3: Remove the DI manual decleration
+Subject: [PATCH 013/245] Step 2.3: Remove the DI manual decleration
 
 ---
  app.js | 4 ++--
@@ -483,10 +483,10 @@ index 9cbfb86..eaef6a3 100644
 2.3.2 (Apple Git-55)
 
 
-From fd7d291515c9c23d01904bea3c59911fdbaf11a5 Mon Sep 17 00:00:00 2001
+From 56c4b813bba52212c00f70184b5fa107a1b39e02 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 15:24:29 +0200
-Subject: [PATCH 014/244] Step 2.4: Add ng-strict-di directive to the ng-app
+Subject: [PATCH 014/245] Step 2.4: Add ng-strict-di directive to the ng-app
 
 ---
  index.html | 2 +-
@@ -506,10 +506,10 @@ index 4300d5c..78bfb0d 100644
 2.3.2 (Apple Git-55)
 
 
-From 28b0789fa633517643513fe8ca55ac8f332db2c7 Mon Sep 17 00:00:00 2001
+From 717055b76aa3bd161816eb4f2a7617c314ff9d37 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 15:25:16 +0200
-Subject: [PATCH 015/244] Step 3.1: Add the parties collection
+Subject: [PATCH 015/245] Step 3.1: Add the parties collection
 
 ---
  app.js | 2 ++
@@ -529,10 +529,10 @@ index eaef6a3..89788bb 100644
 2.3.2 (Apple Git-55)
 
 
-From 5dba4cbe9b195463fee6c3fe7bfb288b58f8e900 Mon Sep 17 00:00:00 2001
+From 182495ec554021bc1ce491a825f668636c5dbe4d Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 15:47:56 +0200
-Subject: [PATCH 016/244] Step 3.2: Add the parties collection helper
+Subject: [PATCH 016/245] Step 3.2: Add the parties collection helper
 
 ---
  app.js | 17 ++++-------------
@@ -571,10 +571,10 @@ index 89788bb..abadf15 100644
 2.3.2 (Apple Git-55)
 
 
-From 7c2e39b5b7fd1c9b4d197f787028c76e2d86b18a Mon Sep 17 00:00:00 2001
+From 74dd3376930a70328f7450bbab35cf578b1b209f Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 15:49:20 +0200
-Subject: [PATCH 017/244] Step 3.3: Add some data to the parties collection
+Subject: [PATCH 017/245] Step 3.3: Add some data to the parties collection
 
 ---
  server.js | 24 ++++++++++++++++++++++++
@@ -616,10 +616,10 @@ index 0000000..0e4439c
 2.3.2 (Apple Git-55)
 
 
-From 7834ce0ca6aa179877eb2a1b78a739b6df9db851 Mon Sep 17 00:00:00 2001
+From 4dd12b4370aea63251f7f8fb5f8f1d9490fb1c14 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 15:50:04 +0200
-Subject: [PATCH 018/244] Step 3.4: Change to use controllerAs syntax
+Subject: [PATCH 018/245] Step 3.4: Change to use controllerAs syntax
 
 ---
  main.html | 4 ++--
@@ -642,10 +642,10 @@ index 2838b47..5ffe156 100644
 2.3.2 (Apple Git-55)
 
 
-From d87c30af981380eed2d1d16c51445c0ead3d93e6 Mon Sep 17 00:00:00 2001
+From 8b2c6282776639791acff7b8d728800580c56a38 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 15:50:54 +0200
-Subject: [PATCH 019/244] Step 3.5: Change the parties controller to use
+Subject: [PATCH 019/245] Step 3.5: Change the parties controller to use
  $reactive and `this` instead of `$scope`
 
 ---
@@ -673,10 +673,10 @@ index abadf15..2dfdb11 100644
 2.3.2 (Apple Git-55)
 
 
-From 7db115bb940062ab7fb19efb66e4b6d1cb75ed9b Mon Sep 17 00:00:00 2001
+From e3d212e2928c08f911b4d150858740ba00b431d5 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 15:53:08 +0200
-Subject: [PATCH 020/244] Step 3.6: Change usage from controllerAs to
+Subject: [PATCH 020/245] Step 3.6: Change usage from controllerAs to
  components code-style - view
 
 ---
@@ -703,10 +703,10 @@ index 5ffe156..3acf339 100644
 2.3.2 (Apple Git-55)
 
 
-From 0851a001fa84a08023449fb1fccaf61cc818c68d Mon Sep 17 00:00:00 2001
+From b21d5ff5cc6990e90492f40e1acc25fcb100f894 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 16:00:32 +0200
-Subject: [PATCH 021/244] Step 3.7: Move the parties list to a different HTML
+Subject: [PATCH 021/245] Step 3.7: Move the parties list to a different HTML
  file
 
 ---
@@ -730,10 +730,10 @@ index 0000000..64ac441
 2.3.2 (Apple Git-55)
 
 
-From 57243ec669f654b6167d34a4711dfc62919a0c5a Mon Sep 17 00:00:00 2001
+From 8951f399509dd4e092090d14e635e102e178ff93 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 16:00:58 +0200
-Subject: [PATCH 022/244] Step 3.8: Change the PartiesListCtrl to use component
+Subject: [PATCH 022/245] Step 3.8: Change the PartiesListCtrl to use component
  code-style with directive
 
 ---
@@ -776,10 +776,10 @@ index 2dfdb11..95812d3 100644
 2.3.2 (Apple Git-55)
 
 
-From ad43367f07d7f39b5295b81c7e015e1da3153d12 Mon Sep 17 00:00:00 2001
+From d13f3e7c5c268bce2323c89e5071f7f90845d0b9 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 16:04:02 +0200
-Subject: [PATCH 023/244] Step 4.1: Add new party form to the parties list view
+Subject: [PATCH 023/245] Step 4.1: Add new party form to the parties list view
 
 ---
  parties-list.html | 7 +++++++
@@ -804,10 +804,10 @@ index 64ac441..dec4f1d 100644
 2.3.2 (Apple Git-55)
 
 
-From ceb6e250d21ed1d369530bff27a0b13dc1c1d5c3 Mon Sep 17 00:00:00 2001
+From 4ca1d9001989fe1dc0e00728d3d2acae7d2ee9b2 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 16:04:47 +0200
-Subject: [PATCH 024/244] Step 4.2: Add ng-model to the form inputs
+Subject: [PATCH 024/245] Step 4.2: Add ng-model to the form inputs
 
 ---
  parties-list.html | 4 ++--
@@ -832,10 +832,10 @@ index dec4f1d..3611d73 100644
 2.3.2 (Apple Git-55)
 
 
-From 96e3a2faaea08fddf2cb8cfec3376a62e0bfba63 Mon Sep 17 00:00:00 2001
+From 8eb9fd0f0002dd68cd60ca68a080a38d8cfc6c15 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 16:05:17 +0200
-Subject: [PATCH 025/244] Step 4.3: Add ng-click logic to the button
+Subject: [PATCH 025/245] Step 4.3: Add ng-click logic to the button
 
 ---
  parties-list.html | 2 +-
@@ -858,10 +858,10 @@ index 3611d73..e4f0227 100644
 2.3.2 (Apple Git-55)
 
 
-From a0cb7394b84633833d65850d121dc13975748c6a Mon Sep 17 00:00:00 2001
+From 0bb518cc0edbec010ebfcc2c01545d89ac6cc645 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 16:08:15 +0200
-Subject: [PATCH 026/244] Step 4.4: Add the code-behind to the controller
+Subject: [PATCH 026/245] Step 4.4: Add the code-behind to the controller
 
 ---
  app.js | 7 +++++++
@@ -894,10 +894,10 @@ index 95812d3..593c1c8 100644
 2.3.2 (Apple Git-55)
 
 
-From 4a1cc8a1b6491d24d8e9575209cb2af0040e2bcc Mon Sep 17 00:00:00 2001
+From 389979ce583caf985727875207b21aba54511b4d Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 16:10:31 +0200
-Subject: [PATCH 027/244] Step 4.5: Add X (delete button) to each party
+Subject: [PATCH 027/245] Step 4.5: Add X (delete button) to each party
 
 ---
  parties-list.html | 1 +
@@ -918,10 +918,10 @@ index e4f0227..7273bcb 100644
 2.3.2 (Apple Git-55)
 
 
-From 7218182b703f90a0f63c9373f26b367cce40c5c6 Mon Sep 17 00:00:00 2001
+From 6bae42848dc88f15979ecf9df7866b439bd644d8 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 16:13:38 +0200
-Subject: [PATCH 028/244] Step 4.6: Implement the removeParty method in the
+Subject: [PATCH 028/245] Step 4.6: Implement the removeParty method in the
  controller
 
 ---
@@ -947,10 +947,10 @@ index 593c1c8..9bc18e2 100644
 2.3.2 (Apple Git-55)
 
 
-From b4e58eebfa89f1f004771ec592e798d06598257c Mon Sep 17 00:00:00 2001
+From ea4f333c695079ed970eb7a7fc73584227d7dc59 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 16:15:56 +0200
-Subject: [PATCH 029/244] Step 5.1: Add angular-ui-router package
+Subject: [PATCH 029/245] Step 5.1: Add angular-ui-router package
 
 ---
  .meteor/packages | 1 +
@@ -982,10 +982,10 @@ index 3f53f36..d952ff2 100644
 2.3.2 (Apple Git-55)
 
 
-From b6eb4afbc96ca12c964ebb015add76f723dd0905 Mon Sep 17 00:00:00 2001
+From 8405baf33a4f4262848a0240e66639392882ab99 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 16:16:25 +0200
-Subject: [PATCH 030/244] Step 5.2: Add ui-router dependency
+Subject: [PATCH 030/245] Step 5.2: Add ui-router dependency
 
 ---
  app.js | 5 ++++-
@@ -1011,10 +1011,10 @@ index 9bc18e2..389f1bc 100644
 2.3.2 (Apple Git-55)
 
 
-From 847d5fb20c648623e0a5471768b1e125ca527fdd Mon Sep 17 00:00:00 2001
+From bf96fd767d5b5a7b97d1ef740d33ea799876455d Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 16:17:30 +0200
-Subject: [PATCH 031/244] Step 5.3: Add home button and add ui-view usage
+Subject: [PATCH 031/245] Step 5.3: Add home button and add ui-view usage
 
 ---
  index.html | 15 +++++++++++++--
@@ -1046,10 +1046,10 @@ index 78bfb0d..e5bf383 100644
 2.3.2 (Apple Git-55)
 
 
-From d35aa8ada8743e3c694b8d274fc68801d8a679ea Mon Sep 17 00:00:00 2001
+From afb3c812d049ac3942da8b1ad9e126b5a8e56d71 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 16:19:55 +0200
-Subject: [PATCH 032/244] Step 5.4: Add route definition for parties list
+Subject: [PATCH 032/245] Step 5.4: Add route definition for parties list
 
 ---
  app.js | 16 ++++++++++++++--
@@ -1090,10 +1090,10 @@ index 389f1bc..aeb26bc 100644
 2.3.2 (Apple Git-55)
 
 
-From e635d43d2f1a0d02ad93331acdc92fed9f0d4017 Mon Sep 17 00:00:00 2001
+From 401573c6d9ec26e18972c9d14fc6560f04404777 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 16:20:09 +0200
-Subject: [PATCH 033/244] Step 5.5: Remove main.html file
+Subject: [PATCH 033/245] Step 5.5: Remove main.html file
 
 ---
  main.html | 1 -
@@ -1112,10 +1112,10 @@ index 3acf339..0000000
 2.3.2 (Apple Git-55)
 
 
-From 42f491a2b498c17ecbc126600a90b86c519a2a4a Mon Sep 17 00:00:00 2001
+From c7b60f735ca197400e01375c778c34f6e874c056 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 17:06:45 +0200
-Subject: [PATCH 034/244] Step 5.6: Add party details state in the routes file
+Subject: [PATCH 034/245] Step 5.6: Add party details state in the routes file
 
 ---
  app.js | 4 ++++
@@ -1140,10 +1140,10 @@ index aeb26bc..ee0283e 100644
 2.3.2 (Apple Git-55)
 
 
-From 813b51cfac327bf339598653f50c6edfb8e12a06 Mon Sep 17 00:00:00 2001
+From 8601b16c57f0791742826a2a8feb8ccb7617e4f0 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 17:17:22 +0200
-Subject: [PATCH 035/244] Step 5.7: Add the party details component
+Subject: [PATCH 035/245] Step 5.7: Add the party details component
 
 ---
  app.js | 11 +++++++++++
@@ -1174,10 +1174,10 @@ index ee0283e..0533d71 100644
 2.3.2 (Apple Git-55)
 
 
-From 6da3f20d1b22e92062f79fe0713628d85d6ac8ed Mon Sep 17 00:00:00 2001
+From aced96141877bb18b70ab0d7a3aa0e537dbe82cd Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 17:17:32 +0200
-Subject: [PATCH 036/244] Step 5.8: Add the view of the party details component
+Subject: [PATCH 036/245] Step 5.8: Add the view of the party details component
 
 ---
  party-details.html | 1 +
@@ -1196,10 +1196,37 @@ index 0000000..b6fae63
 2.3.2 (Apple Git-55)
 
 
-From 96f459ff45dedb889d93ce601b0acf241fdf3741 Mon Sep 17 00:00:00 2001
+From a14a9b66b33aa363f06164440d02a40a1c904f40 Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Sun, 29 Nov 2015 20:36:43 +0200
+Subject: [PATCH 037/245] Step 5.9: Add link to the party details page in the
+ parties list
+
+---
+ parties-list.html | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/parties-list.html b/parties-list.html
+index 7273bcb..b0fd6bb 100644
+--- a/parties-list.html
++++ b/parties-list.html
+@@ -6,7 +6,7 @@
+   <button ng-click="partiesList.addParty()">Add Party!</button>
+ </form>
+ <ul>
+-  <li ng-repeat="party in partiesList.parties">
++  <li ui-sref="partyDetails({ partyId: party._id })" ng-repeat="party in partiesList.parties">
+     {{party.name}}
+     <p>{{party.description}}</p>
+     <button ng-click="partiesList.removeParty(party)">X</button>
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 027f50f61fd3f13b7fb9ad5339cd37f9e498cc0c Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 17:19:06 +0200
-Subject: [PATCH 037/244] Step 6.1: Add the implementation for the party
+Subject: [PATCH 038/245] Step 6.1: Add the implementation for the party
  details component
 
 ---
@@ -1231,10 +1258,10 @@ index 0533d71..e16d507 100644
 2.3.2 (Apple Git-55)
 
 
-From 3afd7456a2f6a96b3728e8fb3e30d3e013927126 Mon Sep 17 00:00:00 2001
+From b06cfa74cc67d1f58a73f2a57b9173ac5c491149 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 17:20:45 +0200
-Subject: [PATCH 038/244] Step 6.2: Add form with the party details to the
+Subject: [PATCH 039/245] Step 6.2: Add form with the party details to the
  party details page
 
 ---
@@ -1258,10 +1285,10 @@ index b6fae63..a5f77ca 100644
 2.3.2 (Apple Git-55)
 
 
-From 4656c097c6094da96f751187880231fe585ecc0e Mon Sep 17 00:00:00 2001
+From 51f6ac1dd2f576535a0240a877577e1e8a49e67b Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 17:23:26 +0200
-Subject: [PATCH 039/244] Step 6.3: Add save and back buttons to the view
+Subject: [PATCH 040/245] Step 6.3: Add save and back buttons to the view
 
 ---
  party-details.html | 4 +++-
@@ -1285,10 +1312,10 @@ index a5f77ca..d0cf4be 100644
 2.3.2 (Apple Git-55)
 
 
-From cee7cc5fe5bd4b32996d7507d67f8a9ba1adac32 Mon Sep 17 00:00:00 2001
+From 812fe8b0f8389b98b27c922e00786d345aa2ba27 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 17:24:50 +0200
-Subject: [PATCH 040/244] Step 6.4: Implement save button on the component
+Subject: [PATCH 041/245] Step 6.4: Implement save button on the component
  logic
 
 ---
@@ -1323,10 +1350,10 @@ index e16d507..0d65861 100644
 2.3.2 (Apple Git-55)
 
 
-From e3321adaf986f596165d7a675a839897d132e1dc Mon Sep 17 00:00:00 2001
+From 0e82723549e79f420b78d16ed86b492fc352c96a Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 17:28:40 +0200
-Subject: [PATCH 041/244] Step 6.5: Handle success and fail for data actions
+Subject: [PATCH 042/245] Step 6.5: Handle success and fail for data actions
 
 ---
  app.js | 7 +++++++
@@ -1354,37 +1381,10 @@ index 0d65861..bd703b2 100644
 2.3.2 (Apple Git-55)
 
 
-From 5184de27aa6f1a2abcb46a7e7f151409e4e0a486 Mon Sep 17 00:00:00 2001
-From: Dotan Simha <dotansimha@gmail.com>
-Date: Sun, 29 Nov 2015 20:36:43 +0200
-Subject: [PATCH 042/244] Step 6.6: Add link to the party details page in the
- parties list
-
----
- parties-list.html | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/parties-list.html b/parties-list.html
-index 7273bcb..b0fd6bb 100644
---- a/parties-list.html
-+++ b/parties-list.html
-@@ -6,7 +6,7 @@
-   <button ng-click="partiesList.addParty()">Add Party!</button>
- </form>
- <ul>
--  <li ng-repeat="party in partiesList.parties">
-+  <li ui-sref="partyDetails({ partyId: party._id })" ng-repeat="party in partiesList.parties">
-     {{party.name}}
-     <p>{{party.description}}</p>
-     <button ng-click="partiesList.removeParty(party)">X</button>
--- 
-2.3.2 (Apple Git-55)
-
-
-From 94f8777feeb15c4d56f48a86ff0d9ee87ba91c1e Mon Sep 17 00:00:00 2001
+From 43272b1cd1ba26554a4eda8e6a0daeb8b1eb9d91 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 18:07:03 +0200
-Subject: [PATCH 043/244] Step 7.1: client/lib/app.js
+Subject: [PATCH 043/245] Step 7.1: client/lib/app.js
 
 ---
  client/lib/app.js | 1 +
@@ -1403,10 +1403,10 @@ index 0000000..708551d
 2.3.2 (Apple Git-55)
 
 
-From 163b7a9fbda7e694ecb0ad244eeabdcf319361f2 Mon Sep 17 00:00:00 2001
+From b9088cd6919ed480b53dee287cad11c131499115 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 18:07:34 +0200
-Subject: [PATCH 044/244] Step 7.2: model/parties.js
+Subject: [PATCH 044/245] Step 7.2: model/parties.js
 
 ---
  model/parties.js | 1 +
@@ -1425,10 +1425,10 @@ index 0000000..dc0ccc3
 2.3.2 (Apple Git-55)
 
 
-From 7836462064821c40a5f064cfc89ef07045b49f1f Mon Sep 17 00:00:00 2001
+From 5384d9fca3e07e392c8fb462f3bd7a00ffa96fee Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 20:45:41 +0200
-Subject: [PATCH 045/244] Step 7.3: server/startup/loadParties.js
+Subject: [PATCH 045/245] Step 7.3: server/startup/loadParties.js
 
 ---
  server/startup/loadParties.js | 22 ++++++++++++++++++++++
@@ -1467,10 +1467,10 @@ index 0000000..e5af840
 2.3.2 (Apple Git-55)
 
 
-From b717ee6f94c55e3366515c6f3b5be807f44346c6 Mon Sep 17 00:00:00 2001
+From c284b84799323b1b3791e515e4735aee83303105 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 20:46:30 +0200
-Subject: [PATCH 046/244] Step 7.4: client/routes.js
+Subject: [PATCH 046/245] Step 7.4: client/routes.js
 
 ---
  client/routes.js | 15 +++++++++++++++
@@ -1503,10 +1503,10 @@ index 0000000..ee84b09
 2.3.2 (Apple Git-55)
 
 
-From 5b46038cf68167add5ba9ff34f2a488a8351027e Mon Sep 17 00:00:00 2001
+From bebeb0333f0a4b610e5522e2a191ddf3be8c5f5a Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 20:49:47 +0200
-Subject: [PATCH 047/244] Step 7.5:
+Subject: [PATCH 047/245] Step 7.5:
  client/parties/parties-list/parties-list.component.js
 
 ---
@@ -1552,10 +1552,10 @@ index 0000000..e11446d
 2.3.2 (Apple Git-55)
 
 
-From 23bceec804b4066f5a9439fc9ed806dfcf00c046 Mon Sep 17 00:00:00 2001
+From a1aa6efa3af52c93ef7051b75ece3d3f4a962630 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 20:50:12 +0200
-Subject: [PATCH 048/244] Step 7.6:
+Subject: [PATCH 048/245] Step 7.6:
  client/parties/parties-list/parties-list.html
 
 ---
@@ -1609,10 +1609,10 @@ index b0fd6bb..0000000
 2.3.2 (Apple Git-55)
 
 
-From 36896fe2811d559b5f39ee0b244a81acdfb2bf0e Mon Sep 17 00:00:00 2001
+From 2129408f324e22100fbab5d5e7d49899b129f090 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 20:51:16 +0200
-Subject: [PATCH 049/244] Step 7.7:
+Subject: [PATCH 049/245] Step 7.7:
  client/parties/party-details/party-details.component.js
 
 ---
@@ -1663,10 +1663,10 @@ index 0000000..0203ffb
 2.3.2 (Apple Git-55)
 
 
-From b1e9a63320abfcde8516a453c0768341f086ab9b Mon Sep 17 00:00:00 2001
+From 1526636540d3dbe488d52bdbc003066b907d44c0 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 20:51:48 +0200
-Subject: [PATCH 050/244] Step 7.8:
+Subject: [PATCH 050/245] Step 7.8:
  client/parties/party-details/party-details.html
 
 ---
@@ -1708,10 +1708,10 @@ index d0cf4be..0000000
 2.3.2 (Apple Git-55)
 
 
-From 57edbbda17bed9117074803dd97b6ecf06661adb Mon Sep 17 00:00:00 2001
+From ba9eb4ce3ae5de746c68c619de3ed301f55cb128 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 20:55:35 +0200
-Subject: [PATCH 051/244] Step 7.9: Update templateUrl path in the components
+Subject: [PATCH 051/245] Step 7.9: Update templateUrl path in the components
 
 ---
  client/parties/parties-list/parties-list.component.js   | 2 +-
@@ -1748,10 +1748,10 @@ index 0203ffb..f28307f 100644
 2.3.2 (Apple Git-55)
 
 
-From a7ff546b517c8cd229b87fde933c8bb31e538ea5 Mon Sep 17 00:00:00 2001
+From d758dd8963d5a9c9d3871baf599ce7e75268db2a Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 20:55:45 +0200
-Subject: [PATCH 052/244] Step 7.10: Delete old files
+Subject: [PATCH 052/245] Step 7.10: Delete old files
 
 ---
  app.js    | 85 ---------------------------------------------------------------
@@ -1887,10 +1887,10 @@ index 0e4439c..0000000
 2.3.2 (Apple Git-55)
 
 
-From 9042c51b9b08047d757d9fd236b370fb553d80a5 Mon Sep 17 00:00:00 2001
+From 0247c597f6c4d363efbfc9609115311cda834b10 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 21:05:44 +0200
-Subject: [PATCH 053/244] Step 8.1: Remove insecure package
+Subject: [PATCH 053/245] Step 8.1: Remove insecure package
 
 ---
  .meteor/packages | 1 -
@@ -1924,10 +1924,10 @@ index d952ff2..2f9d887 100644
 2.3.2 (Apple Git-55)
 
 
-From 15d7003ba3e31a96b806e40a291b2b5268a288b7 Mon Sep 17 00:00:00 2001
+From 7e27171e8617eecbcdbdec0b07f598f505aec292 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 21:06:23 +0200
-Subject: [PATCH 054/244] Step 8.2: Add accounts-password package
+Subject: [PATCH 054/245] Step 8.2: Add accounts-password package
 
 ---
  .meteor/packages |  1 +
@@ -2006,10 +2006,10 @@ index 2f9d887..3c4ad56 100644
 2.3.2 (Apple Git-55)
 
 
-From b6a49aeee80086e8bbe2095c98187fc318ee8d0b Mon Sep 17 00:00:00 2001
+From 899f031d765b317a57df2bdf230d144d948d5795 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 21:07:03 +0200
-Subject: [PATCH 055/244] Step 8.3: Add dotansimha:angular-accounts-ui package
+Subject: [PATCH 055/245] Step 8.3: Add dotansimha:angular-accounts-ui package
 
 ---
  .meteor/packages | 1 +
@@ -2073,10 +2073,10 @@ index 3c4ad56..cc04f49 100644
 2.3.2 (Apple Git-55)
 
 
-From 9c980b140d730a70e25e1be5ba8c32489c5d9c26 Mon Sep 17 00:00:00 2001
+From efeac89066a11221076d84b7bcf76c0f3f24f4bd Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 21:07:42 +0200
-Subject: [PATCH 056/244] Step 8.4: Add a dependecy for accounts-ui package
+Subject: [PATCH 056/245] Step 8.4: Add a dependecy for accounts-ui package
 
 ---
  client/lib/app.js | 6 +++++-
@@ -2099,10 +2099,10 @@ index 708551d..ab40ccc 100644
 2.3.2 (Apple Git-55)
 
 
-From fff59e673e711caa9c799d836cabeeae692d1904 Mon Sep 17 00:00:00 2001
+From 870137cdaff24f0ed8b4e57ccbc61411eba52954 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 21:08:16 +0200
-Subject: [PATCH 057/244] Step 8.5: Add usage for login-buttons directive
+Subject: [PATCH 057/245] Step 8.5: Add usage for login-buttons directive
 
 ---
  index.html | 1 +
@@ -2124,10 +2124,10 @@ index e5bf383..a64c26b 100644
 2.3.2 (Apple Git-55)
 
 
-From da04173687b8f5da943e07efbd69d9f897df9078 Mon Sep 17 00:00:00 2001
+From e13683a7df2f8f55e5fb71eec5e004ab95dc3d9b Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 21:09:02 +0200
-Subject: [PATCH 058/244] Step 8.6: Add allow logic to the model
+Subject: [PATCH 058/245] Step 8.6: Add allow logic to the model
 
 ---
  model/parties.js | 14 +++++++++++++-
@@ -2158,10 +2158,10 @@ index dc0ccc3..b793c1f 100644
 2.3.2 (Apple Git-55)
 
 
-From 1cd721716fc8da963176967b22638095df624795 Mon Sep 17 00:00:00 2001
+From 5ece25ef978929b96c4ae480078b1dbea17cbd68 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 21:11:40 +0200
-Subject: [PATCH 059/244] Step 8.7: Add current user to the new party
+Subject: [PATCH 059/245] Step 8.7: Add current user to the new party
 
 ---
  client/parties/parties-list/parties-list.component.js | 1 +
@@ -2183,10 +2183,10 @@ index 015de29..85b6d90 100644
 2.3.2 (Apple Git-55)
 
 
-From c0c48d42ee1bdb5f2d32453762594833dd2f33b0 Mon Sep 17 00:00:00 2001
+From dbe0904dd37ab29e452d16669739315b230dbc48 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 21:13:35 +0200
-Subject: [PATCH 060/244] Step 8.8: Add accounts-facebook and accounts-twitter
+Subject: [PATCH 060/245] Step 8.8: Add accounts-facebook and accounts-twitter
  packages
 
 ---
@@ -2247,10 +2247,10 @@ index cc04f49..b9b2985 100644
 2.3.2 (Apple Git-55)
 
 
-From d96fb5d194dfe00696fd6047431540bb641a3e01 Mon Sep 17 00:00:00 2001
+From 8fe2aefc69c6d70ff52fa933136db9529b57c690 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 21:46:31 +0200
-Subject: [PATCH 061/244] Step 8.9: Added permissions limit to the party
+Subject: [PATCH 061/245] Step 8.9: Added permissions limit to the party
  details page
 
 ---
@@ -2284,10 +2284,10 @@ index ee84b09..8ce70b3 100644
 2.3.2 (Apple Git-55)
 
 
-From 0cbc88f0a2e4f6e980ac043255afcc4bf6f48132 Mon Sep 17 00:00:00 2001
+From ce36081175e32198900c48fc6040fb2b37591bb2 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 21:48:35 +0200
-Subject: [PATCH 062/244] Step 8.10: Added the ability to detect if the user is
+Subject: [PATCH 062/245] Step 8.10: Added the ability to detect if the user is
  not logged in
 
 ---
@@ -2358,10 +2358,10 @@ index 8ce70b3..545a926 100644
 2.3.2 (Apple Git-55)
 
 
-From 631ad03eeb97afae2d8a141342998f33628fee0b Mon Sep 17 00:00:00 2001
+From f966e46f9f811af002386ae3d117b4ca902d4448 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 21:49:29 +0200
-Subject: [PATCH 063/244] Step 9.1: Remove autopublish package
+Subject: [PATCH 063/245] Step 9.1: Remove autopublish package
 
 ---
  .meteor/packages | 1 -
@@ -2396,10 +2396,10 @@ index b9b2985..8bcf116 100644
 2.3.2 (Apple Git-55)
 
 
-From e64f68e7bb8b162923f4c0d9ceeeb1fa9835c013 Mon Sep 17 00:00:00 2001
+From 9a813add745c57eb5221a9d13f6a86a02254fbb1 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 21:51:43 +0200
-Subject: [PATCH 064/244] Step 9.2: Add the 'parties' publication to the server
+Subject: [PATCH 064/245] Step 9.2: Add the 'parties' publication to the server
 
 ---
  server/parties.js | 18 ++++++++++++++++++
@@ -2435,10 +2435,10 @@ index 0000000..6aba8a3
 2.3.2 (Apple Git-55)
 
 
-From 6da59fe9908ec7d0b5a5dc87cb2389f28a90e75e Mon Sep 17 00:00:00 2001
+From a3fe1f40f80ce98c14816c36c0b80364d9c52b22 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 21:57:09 +0200
-Subject: [PATCH 065/244] Step 9.3: Add the `parties` subscription in the
+Subject: [PATCH 065/245] Step 9.3: Add the `parties` subscription in the
  client side
 
 ---
@@ -2462,10 +2462,10 @@ index 85b6d90..1c8d791 100644
 2.3.2 (Apple Git-55)
 
 
-From cb322dfb92c80d46803b3c93a140f5f90c1eebdf Mon Sep 17 00:00:00 2001
+From 4926c4a068a419d31fa571c5b024dd6708edf645 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 21:57:40 +0200
-Subject: [PATCH 066/244] Step 9.4: Add public party checkbox to the add new
+Subject: [PATCH 066/245] Step 9.4: Add public party checkbox to the add new
  party form
 
 ---
@@ -2489,10 +2489,10 @@ index b0fd6bb..bcff75b 100644
 2.3.2 (Apple Git-55)
 
 
-From 2b10b9d6e07b5493f235564428fd673fef27ae1d Mon Sep 17 00:00:00 2001
+From 67676dccce0d7741cdc37c77b280335bff12274a Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 22:01:21 +0200
-Subject: [PATCH 067/244] Step 9.5: Add is public checkbox to the party details
+Subject: [PATCH 067/245] Step 9.5: Add is public checkbox to the party details
  view
 
 ---
@@ -2516,10 +2516,10 @@ index d0cf4be..141f0c9 100644
 2.3.2 (Apple Git-55)
 
 
-From b784a8ea19e0af780065e939239f929faf6df25d Mon Sep 17 00:00:00 2001
+From 11fb373ddc56b453c8bfda603943f30e1f35a599 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 22:01:40 +0200
-Subject: [PATCH 068/244] Step 9.6: Add is public checkbox to the party details
+Subject: [PATCH 068/245] Step 9.6: Add is public checkbox to the party details
  component
 
 ---
@@ -2544,10 +2544,10 @@ index f28307f..7ae6989 100644
 2.3.2 (Apple Git-55)
 
 
-From 95e9ecc39a1901b800945a371600fa0db20daa34 Mon Sep 17 00:00:00 2001
+From 089a37ba13b5892f5f03a4f8b3c87637a7e70ed0 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 22:02:20 +0200
-Subject: [PATCH 069/244] Step 9.7: Create the users publication in the server
+Subject: [PATCH 069/245] Step 9.7: Create the users publication in the server
 
 ---
  server/users.js | 3 +++
@@ -2568,10 +2568,10 @@ index 0000000..f5becea
 2.3.2 (Apple Git-55)
 
 
-From 58f3d48d93f88e3d8d5a0246c1b4217c1333e20f Mon Sep 17 00:00:00 2001
+From c9d8ad2fe7cc7231ad0ca4790cc2c249d9245342 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 22:07:26 +0200
-Subject: [PATCH 070/244] Step 9.8: Add users subscription and helper
+Subject: [PATCH 070/245] Step 9.8: Add users subscription and helper
 
 ---
  client/parties/party-details/party-details.component.js | 5 +++++
@@ -2600,10 +2600,10 @@ index 7ae6989..288c9c2 100644
 2.3.2 (Apple Git-55)
 
 
-From 1f8b83b24656c92fb0e7843ed93d0289608fad14 Mon Sep 17 00:00:00 2001
+From c532654e0feb9bb544c0e581df701b5334e4af3d Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 22:07:38 +0200
-Subject: [PATCH 071/244] Step 9.9: Add subscription to parties
+Subject: [PATCH 071/245] Step 9.9: Add subscription to parties
 
 ---
  client/parties/party-details/party-details.component.js | 1 +
@@ -2625,10 +2625,10 @@ index 288c9c2..3ecea19 100644
 2.3.2 (Apple Git-55)
 
 
-From 21afc9fcf4ea3a353e38ba7f5b4038d9bcf8a8f5 Mon Sep 17 00:00:00 2001
+From 0dc79f1e52f27483db5a193a34f9befc1fc9ab52 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 22:08:26 +0200
-Subject: [PATCH 072/244] Step 9.10: Add the users list to the party details
+Subject: [PATCH 072/245] Step 9.10: Add the users list to the party details
  view
 
 ---
@@ -2658,10 +2658,10 @@ index 141f0c9..8b18a5f 100644
 2.3.2 (Apple Git-55)
 
 
-From 0f04c09d2690018763de2b3aefa250a47950466d Mon Sep 17 00:00:00 2001
+From e027544c1354b43f4224d759f568be6327a59d4d Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 22:15:04 +0200
-Subject: [PATCH 073/244] Step 11.1: Update the module initialization
+Subject: [PATCH 073/245] Step 11.1: Update the module initialization
 
 ---
  client/lib/app.js | 13 ++++++++++++-
@@ -2694,10 +2694,10 @@ index ab40ccc..01f6271 100644
 2.3.2 (Apple Git-55)
 
 
-From 66b682f24beee914783265a9e5421eab274a6a47 Mon Sep 17 00:00:00 2001
+From 086d61e7ce49a4d415c08026b9aeca514b3c8991 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 22:15:43 +0200
-Subject: [PATCH 074/244] Step 11.2: Remove the ng-app usage
+Subject: [PATCH 074/245] Step 11.2: Remove the ng-app usage
 
 ---
  index.html | 12 +++++-------
@@ -2731,10 +2731,10 @@ index a64c26b..ccecce2 100644
 2.3.2 (Apple Git-55)
 
 
-From e706e1cb4988f115a1d2e4718ac1dc4a3b8a35bd Mon Sep 17 00:00:00 2001
+From ffd57616911e2225a6b97ba6927bfe3d7f4df64a Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 22:17:36 +0200
-Subject: [PATCH 075/244] Step 12.1: Add options to the parties publish
+Subject: [PATCH 075/245] Step 12.1: Add options to the parties publish
 
 ---
  server/parties.js | 4 ++--
@@ -2762,10 +2762,10 @@ index 6aba8a3..a0d40a9 100644
 2.3.2 (Apple Git-55)
 
 
-From cf57f61c97f4a0820ef7be1bdb05f6e1c5562722 Mon Sep 17 00:00:00 2001
+From bd312bb10c5c4c9e8b63fcd9933f36017a3eb2c2 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 22:18:09 +0200
-Subject: [PATCH 076/244] Step 12.2: Add the pagination default params
+Subject: [PATCH 076/245] Step 12.2: Add the pagination default params
 
 ---
  client/parties/parties-list/parties-list.component.js | 5 +++++
@@ -2797,10 +2797,10 @@ index 1c8d791..ebfa3bc 100644
 2.3.2 (Apple Git-55)
 
 
-From b8a4b4a9cffa579956ce94f4a34f903514050d44 Mon Sep 17 00:00:00 2001
+From 88af8f3ae4bd5b8c3f35862108d54aaf67e5146e Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 22:20:10 +0200
-Subject: [PATCH 077/244] Step 12.3: Add the params to the subscription
+Subject: [PATCH 077/245] Step 12.3: Add the params to the subscription
 
 ---
  client/parties/parties-list/parties-list.component.js | 12 ++++++++++--
@@ -2840,10 +2840,10 @@ index ebfa3bc..4f58464 100644
 2.3.2 (Apple Git-55)
 
 
-From 7df855daf4a17b85cd5ea425905ba078c17c9d5e Mon Sep 17 00:00:00 2001
+From 9516724d263ecf7b789b43bf244d6d73ab5aed7f Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 22:21:16 +0200
-Subject: [PATCH 078/244] Step 12.4: Add the sort parameter to the collection
+Subject: [PATCH 078/245] Step 12.4: Add the sort parameter to the collection
  helper
 
 ---
@@ -2867,10 +2867,10 @@ index 4f58464..a40ac14 100644
 2.3.2 (Apple Git-55)
 
 
-From 215fe4ef6af4ee95c01ac987e86b0e7c54d26f8f Mon Sep 17 00:00:00 2001
+From 46c7c73cdd1e689035c28318f5aa51fe5f70c278 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 22:22:34 +0200
-Subject: [PATCH 079/244] Step 12.5: Add angularutils:pagination package
+Subject: [PATCH 079/245] Step 12.5: Add angularutils:pagination package
 
 ---
  .meteor/packages | 1 +
@@ -2902,10 +2902,10 @@ index 8bcf116..719fc34 100644
 2.3.2 (Apple Git-55)
 
 
-From 86242a63fe2826fa3de67d18e8976c1d03bc04d6 Mon Sep 17 00:00:00 2001
+From fe17a2c836bab3251d42cf3fa560085787f0f5ba Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 22:22:58 +0200
-Subject: [PATCH 080/244] Step 12.6: Add dependency to
+Subject: [PATCH 080/245] Step 12.6: Add dependency to
  angularUtils.directives.dirPagination
 
 ---
@@ -2930,10 +2930,10 @@ index 01f6271..a67eec8 100644
 2.3.2 (Apple Git-55)
 
 
-From d6386bbe194b581273af89e242ef29a6cfeca0e2 Mon Sep 17 00:00:00 2001
+From 97624dfbb72d6774a405356ed9bd87634e66bf29 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 22:23:49 +0200
-Subject: [PATCH 081/244] Step 12.7: Add usage to the dir-pagination directive
+Subject: [PATCH 081/245] Step 12.7: Add usage to the dir-pagination directive
 
 ---
  client/parties/parties-list/parties-list.html | 2 +-
@@ -2956,10 +2956,10 @@ index bcff75b..9b996e1 100644
 2.3.2 (Apple Git-55)
 
 
-From 91cfb852723df009ba59c08a0e70100f42a91cdf Mon Sep 17 00:00:00 2001
+From 700704ced8117ed368f5133229176679327d98c1 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 22:24:26 +0200
-Subject: [PATCH 082/244] Step 12.8: Add the pagination controls to the view
+Subject: [PATCH 082/245] Step 12.8: Add the pagination controls to the view
 
 ---
  client/parties/parties-list/parties-list.html | 1 +
@@ -2978,10 +2978,10 @@ index 9b996e1..2a6c244 100644
 2.3.2 (Apple Git-55)
 
 
-From d2f8116cc0db1cb1d69e712d70a4a2193a963392 Mon Sep 17 00:00:00 2001
+From 0cafea45ba91281c4a29fe42a77baecabfb42e77 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 22:25:11 +0200
-Subject: [PATCH 083/244] Step 12.9: Add the pageChanged method to the
+Subject: [PATCH 083/245] Step 12.9: Add the pageChanged method to the
  component
 
 ---
@@ -3010,10 +3010,10 @@ index a40ac14..02b7fc4 100644
 2.3.2 (Apple Git-55)
 
 
-From 8ced92a04e35c3cfff0e582ff91ae2d7dd40fd1e Mon Sep 17 00:00:00 2001
+From 635204e06c016b045712f30daa131e381d0b5e6b Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 22:25:52 +0200
-Subject: [PATCH 084/244] Step 12.10: Add tmeasday:publish-counts package
+Subject: [PATCH 084/245] Step 12.10: Add tmeasday:publish-counts package
 
 ---
  .meteor/packages | 1 +
@@ -3045,10 +3045,10 @@ index 719fc34..df2e395 100644
 2.3.2 (Apple Git-55)
 
 
-From 6817e40c08ef2b66cd604d78830af117dba2adaf Mon Sep 17 00:00:00 2001
+From bdfc8415bf1c02f9ad45d0c96eb794fd36a4a5b3 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 22:27:19 +0200
-Subject: [PATCH 085/244] Step 12.11: Add usage of Counts
+Subject: [PATCH 085/245] Step 12.11: Add usage of Counts
 
 ---
  server/parties.js | 11 +++++++----
@@ -3087,10 +3087,10 @@ index a0d40a9..461d1b6 100644
 2.3.2 (Apple Git-55)
 
 
-From 0d9267ccd727bc48cdc5162d0659a0bad7c42c39 Mon Sep 17 00:00:00 2001
+From 2b6a99c4a01559b1a4d77cc02982313b132cee06 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 28 Nov 2015 22:29:25 +0200
-Subject: [PATCH 086/244] Step 12.12: Add the Count usage in the component
+Subject: [PATCH 086/245] Step 12.12: Add the Count usage in the component
 
 ---
  client/parties/parties-list/parties-list.component.js | 3 +++
@@ -3114,10 +3114,10 @@ index 02b7fc4..dcbe6f0 100644
 2.3.2 (Apple Git-55)
 
 
-From 9ac85419f2483fb65f47ce335ce599dc93e9fd4a Mon Sep 17 00:00:00 2001
+From d9d0f8116ad0fdddd82c6717b774f59ae4483c0b Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sun, 29 Nov 2015 20:13:40 +0200
-Subject: [PATCH 087/244] Step 12.13: Changing the sort order reactively
+Subject: [PATCH 087/245] Step 12.13: Changing the sort order reactively
 
 ---
  client/parties/parties-list/parties-list.html | 7 +++++++
@@ -3145,10 +3145,10 @@ index 2a6c244..5107d89 100644
 2.3.2 (Apple Git-55)
 
 
-From b4d4971144764c0010ca1d1c4cd4e0625c8741c4 Mon Sep 17 00:00:00 2001
+From 0a4608fa024b04fe8d13b43659821302778397e5 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sun, 29 Nov 2015 20:13:52 +0200
-Subject: [PATCH 088/244] Step 12.14: Add order logic to the client
+Subject: [PATCH 088/245] Step 12.14: Add order logic to the client
 
 ---
  client/parties/parties-list/parties-list.component.js | 7 +++++++
@@ -3184,10 +3184,10 @@ index dcbe6f0..7a75d87 100644
 2.3.2 (Apple Git-55)
 
 
-From bf1d3dcf8ec15397203fa7108bb8a37a8e07c6f9 Mon Sep 17 00:00:00 2001
+From 510fe90958a4a672305c2dfba840202c41e48533 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sun, 29 Nov 2015 20:14:39 +0200
-Subject: [PATCH 089/244] Step 12.15: Add search string to the parties
+Subject: [PATCH 089/245] Step 12.15: Add search string to the parties
  publication
 
 ---
@@ -3208,10 +3208,10 @@ index 461d1b6..2efe8a9 100644
 2.3.2 (Apple Git-55)
 
 
-From bd7613420c749bba7ce15d2aa8ac9d529b70f732 Mon Sep 17 00:00:00 2001
+From 5cffc614be496f5ec65a53e58a0ebc748a18b770 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sun, 29 Nov 2015 20:15:42 +0200
-Subject: [PATCH 090/244] Step 12.16: Add the search logic
+Subject: [PATCH 090/245] Step 12.16: Add the search logic
 
 ---
  server/parties.js | 5 +++++
@@ -3236,10 +3236,10 @@ index 2efe8a9..ac93a84 100644
 2.3.2 (Apple Git-55)
 
 
-From e79b705f64f5a38e25d506137357b10a339ddc48 Mon Sep 17 00:00:00 2001
+From 7166777916318da6d1a052da8bb3ae747336f366 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sun, 29 Nov 2015 20:16:29 +0200
-Subject: [PATCH 091/244] Step 12.17: Add the search input to the view
+Subject: [PATCH 091/245] Step 12.17: Add the search input to the view
 
 ---
  client/parties/parties-list/parties-list.html | 1 +
@@ -3261,10 +3261,10 @@ index 5107d89..25e6cc8 100644
 2.3.2 (Apple Git-55)
 
 
-From 09cc8642d6fdbd791baa1a30bbd7ed7fb4a6cdcd Mon Sep 17 00:00:00 2001
+From cdf67ac97421c36cd53d9bc27af025d397683644 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sun, 29 Nov 2015 20:17:24 +0200
-Subject: [PATCH 092/244] Step 12.18: Add the helper and update the parties
+Subject: [PATCH 092/245] Step 12.18: Add the helper and update the parties
  subscription
 
 ---
@@ -3299,10 +3299,10 @@ index 7a75d87..c7de45f 100644
 2.3.2 (Apple Git-55)
 
 
-From 808c60702f8e0bff14d72bb16e659f0c1d24fd8a Mon Sep 17 00:00:00 2001
+From c77aee4f5bd2ba9f88956bee3509c86dff46dc08 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sun, 29 Nov 2015 20:19:02 +0200
-Subject: [PATCH 093/244] Step 13.1: Create the filter
+Subject: [PATCH 093/245] Step 13.1: Create the filter
 
 ---
  client/parties/filters/uninvited.js | 11 +++++++++++
@@ -3331,10 +3331,10 @@ index 0000000..45a5360
 2.3.2 (Apple Git-55)
 
 
-From f9d2949c01f1d10e04a9e6deac254d45d1d4628c Mon Sep 17 00:00:00 2001
+From 2c0d6719bcc1221531efc8ad5bfb16a780760c61 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sun, 29 Nov 2015 20:21:04 +0200
-Subject: [PATCH 094/244] Step 13.2: Use the filter in the users list on the
+Subject: [PATCH 094/245] Step 13.2: Use the filter in the users list on the
  party details view
 
 ---
@@ -3361,10 +3361,10 @@ index 8b18a5f..f1ab955 100644
 2.3.2 (Apple Git-55)
 
 
-From 0921f8e632d7011f251069d30660f140305c5fb2 Mon Sep 17 00:00:00 2001
+From 0092940d39ff4feb97953152bfbf28f06ac4fa09 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sun, 29 Nov 2015 20:23:28 +0200
-Subject: [PATCH 095/244] Step 13.3: Create the displayName filter
+Subject: [PATCH 095/245] Step 13.3: Create the displayName filter
 
 ---
  client/parties/filters/displayName.js | 17 +++++++++++++++++
@@ -3399,10 +3399,10 @@ index 0000000..279eec7
 2.3.2 (Apple Git-55)
 
 
-From c3cabd8b913cb4a0118d28da0b0d5d557437328e Mon Sep 17 00:00:00 2001
+From 093cf6358edbe86a0618b6a06deb6735dcb25685 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sun, 29 Nov 2015 20:24:05 +0200
-Subject: [PATCH 096/244] Step 13.4: Use the displayName filter
+Subject: [PATCH 096/245] Step 13.4: Use the displayName filter
 
 ---
  client/parties/party-details/party-details.html | 2 +-
@@ -3425,10 +3425,10 @@ index f1ab955..46cdb65 100644
 2.3.2 (Apple Git-55)
 
 
-From 71d2231bafdf070b123767e5403bf529eee13191 Mon Sep 17 00:00:00 2001
+From c4e5c72a1bbae6cc3f317b26bf211daf30c48f59 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sun, 29 Nov 2015 20:31:00 +0200
-Subject: [PATCH 097/244] Step 13.5: Add party owner details to the parties
+Subject: [PATCH 097/245] Step 13.5: Add party owner details to the parties
  list
 
 ---
@@ -3451,10 +3451,10 @@ index 25e6cc8..4e4706b 100644
 2.3.2 (Apple Git-55)
 
 
-From 1fcd758d08eb75a883ddecc9ef1c5ed63ecc3e5c Mon Sep 17 00:00:00 2001
+From 283eb109a3ea8b341d61e7e54d76f910a79a4cf4 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sun, 29 Nov 2015 20:31:25 +0200
-Subject: [PATCH 098/244] Step 13.6: Implement the getPartyCreator method
+Subject: [PATCH 098/245] Step 13.6: Implement the getPartyCreator method
 
 ---
  client/parties/parties-list/parties-list.component.js | 18 ++++++++++++++++++
@@ -3494,10 +3494,10 @@ index c7de45f..2a89c99 100644
 2.3.2 (Apple Git-55)
 
 
-From 2b87c25eb80576a0259b941041474af900a78072 Mon Sep 17 00:00:00 2001
+From 3631ae497c96301838d094203c4c6b6af124a858 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sun, 29 Nov 2015 20:31:42 +0200
-Subject: [PATCH 099/244] Step 13.7: Add the users subscription
+Subject: [PATCH 099/245] Step 13.7: Add the users subscription
 
 ---
  client/parties/parties-list/parties-list.component.js | 2 ++
@@ -3520,10 +3520,10 @@ index 2a89c99..4e5d33e 100644
 2.3.2 (Apple Git-55)
 
 
-From 9ce625b4150e1f58ec50ab9697e1337e1cbb8423 Mon Sep 17 00:00:00 2001
+From 4b0a9bdcf33e8c5872aaedf499591e8df3f02ab8 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sun, 29 Nov 2015 20:32:37 +0200
-Subject: [PATCH 100/244] Step 13.8: Add usage of displayName filter on the
+Subject: [PATCH 100/245] Step 13.8: Add usage of displayName filter on the
  creator
 
 ---
@@ -3547,10 +3547,10 @@ index 4e4706b..2006722 100644
 2.3.2 (Apple Git-55)
 
 
-From 15d5558df3d4c196a8f77d2d9ee7a3910c1de56c Mon Sep 17 00:00:00 2001
+From 62d034dd7888c30e330fc8882eb15aa5a57d7feb Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sun, 29 Nov 2015 20:42:23 +0200
-Subject: [PATCH 101/244] Step 14.1: Implement the invite method in the server
+Subject: [PATCH 101/245] Step 14.1: Implement the invite method in the server
 
 ---
  model/parties.js | 47 +++++++++++++++++++++++++++++++++++++++++++++++
@@ -3617,10 +3617,10 @@ index b793c1f..4ea9f9e 100644
 2.3.2 (Apple Git-55)
 
 
-From 6f5e25fd65e29f7a07eef5c0db0d1630f476377f Mon Sep 17 00:00:00 2001
+From 70ba6b46d7e2d68258dda8bd6d729bebd96a4519 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sun, 29 Nov 2015 20:43:03 +0200
-Subject: [PATCH 102/244] Step 14.2: Add the check package
+Subject: [PATCH 102/245] Step 14.2: Add the check package
 
 ---
  .meteor/packages | 1 +
@@ -3639,10 +3639,10 @@ index 6419b1b..d04b826 100644
 2.3.2 (Apple Git-55)
 
 
-From 2222c02b3e03715017fc2beed97f1fa03ac0a9b4 Mon Sep 17 00:00:00 2001
+From 7ebb7668fb0256aae18c947fa9cce7a96e4590c3 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sun, 29 Nov 2015 20:44:04 +0200
-Subject: [PATCH 103/244] Step 14.3: Add the email package
+Subject: [PATCH 103/245] Step 14.3: Add the email package
 
 ---
  .meteor/packages | 1 +
@@ -3661,10 +3661,10 @@ index d04b826..0a0fecf 100644
 2.3.2 (Apple Git-55)
 
 
-From 8c760dcf2fb8cb4e02b583a401bd57ee0c6249f1 Mon Sep 17 00:00:00 2001
+From 4ddbadb7321244baab60f523e7b20a7aba69ac8d Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sun, 29 Nov 2015 20:49:29 +0200
-Subject: [PATCH 104/244] Step 14.4: Implement the invite method on the client
+Subject: [PATCH 104/245] Step 14.4: Implement the invite method on the client
  side
 
 ---
@@ -3698,10 +3698,10 @@ index 3ecea19..7924457 100644
 2.3.2 (Apple Git-55)
 
 
-From d47c00efc1643132b2bc001efc16edc7f82e7d50 Mon Sep 17 00:00:00 2001
+From 2765b254d6949b8b5948f1033b42e96d9ac8b6c2 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sun, 29 Nov 2015 20:51:05 +0200
-Subject: [PATCH 105/244] Step 14.5: Add the invite button to the view
+Subject: [PATCH 105/245] Step 14.5: Add the invite button to the view
 
 ---
  client/parties/party-details/party-details.html | 1 +
@@ -3723,10 +3723,10 @@ index 46cdb65..3a5a42a 100644
 2.3.2 (Apple Git-55)
 
 
-From 0b729541194bd128e1205b8296040f44851cf4a4 Mon Sep 17 00:00:00 2001
+From 69318ef6b74c3874a3c91a00b033141257b03947 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sun, 29 Nov 2015 20:56:53 +0200
-Subject: [PATCH 106/244] Step 14.6: Update the parties subscription to include
+Subject: [PATCH 106/245] Step 14.6: Update the parties subscription to include
  invited
 
 ---
@@ -3754,10 +3754,10 @@ index ac93a84..f3559d0 100644
 2.3.2 (Apple Git-55)
 
 
-From e57c4e40cf7d06308251e49547218b22227d8be0 Mon Sep 17 00:00:00 2001
+From a4672e98d4936d27c34299fba3abc0c76420c816 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sun, 29 Nov 2015 20:59:41 +0200
-Subject: [PATCH 107/244] Step 14.7: Implement the rsvp method in the server
+Subject: [PATCH 107/245] Step 14.7: Implement the rsvp method in the server
  side
 
 ---
@@ -3839,10 +3839,10 @@ index 4ea9f9e..0ae7376 100644
 2.3.2 (Apple Git-55)
 
 
-From 6a4bf2df2097aa86cb6ec19ebbcaaf14f0fc2eec Mon Sep 17 00:00:00 2001
+From b4d36a92abfaabe5fe84115f8b4eb43cc2b8ce5d Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sun, 29 Nov 2015 21:02:52 +0200
-Subject: [PATCH 108/244] Step 14.8: Add the rsvp method to the client side
+Subject: [PATCH 108/245] Step 14.8: Add the rsvp method to the client side
 
 ---
  client/parties/parties-list/parties-list.component.js | 11 +++++++++++
@@ -3875,10 +3875,10 @@ index 4e5d33e..2644653 100644
 2.3.2 (Apple Git-55)
 
 
-From b4c55aed372ad86ac71f510889dc9cad66334db0 Mon Sep 17 00:00:00 2001
+From e9667112096c8ddab450b11e13e4b1c0188601db Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sun, 29 Nov 2015 21:03:03 +0200
-Subject: [PATCH 109/244] Step 14.9: Add the RSVP button to the view
+Subject: [PATCH 109/245] Step 14.9: Add the RSVP button to the view
 
 ---
  client/parties/parties-list/parties-list.html | 5 +++++
@@ -3904,10 +3904,10 @@ index 2006722..94728a5 100644
 2.3.2 (Apple Git-55)
 
 
-From 267e99841e2125f4fd753297dd5fdec6e312623b Mon Sep 17 00:00:00 2001
+From 5026ca4f6e81d4bdd1222207acab208fc0245668 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sun, 29 Nov 2015 21:05:05 +0200
-Subject: [PATCH 110/244] Step 14.10: Add the RSVP status to the view
+Subject: [PATCH 110/245] Step 14.10: Add the RSVP status to the view
 
 ---
  client/parties/parties-list/parties-list.html | 15 +++++++++++++++
@@ -3943,10 +3943,10 @@ index 94728a5..586eb0f 100644
 2.3.2 (Apple Git-55)
 
 
-From f9d1ca38493e900b295d0118f98337368d090c60 Mon Sep 17 00:00:00 2001
+From 622e6c65d5bd24739bf2648295a8449ec02cd2b4 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sun, 29 Nov 2015 21:06:12 +0200
-Subject: [PATCH 111/244] Step 14.11: Implement getUserById method
+Subject: [PATCH 111/245] Step 14.11: Implement getUserById method
 
 ---
  client/parties/parties-list/parties-list.component.js | 4 ++++
@@ -3972,10 +3972,10 @@ index 2644653..5788ba6 100644
 2.3.2 (Apple Git-55)
 
 
-From 8f42a16e91ccde135b975b4265a441869d565326 Mon Sep 17 00:00:00 2001
+From 1889423b5259ee90356be85d52243bcfb6051789 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sun, 29 Nov 2015 21:07:06 +0200
-Subject: [PATCH 112/244] Step 14.12: Add RSVP list to the view of users who
+Subject: [PATCH 112/245] Step 14.12: Add RSVP list to the view of users who
  not responded
 
 ---
@@ -4003,10 +4003,10 @@ index 586eb0f..da484e0 100644
 2.3.2 (Apple Git-55)
 
 
-From 68ad784e33f3f71e00cefe35a785b399cb11c0c2 Mon Sep 17 00:00:00 2001
+From d98624a9ea620e3f4873c7ff89a290d40169f204 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sun, 29 Nov 2015 21:08:24 +0200
-Subject: [PATCH 113/244] Step 14.13: Added logic to the controller
+Subject: [PATCH 113/245] Step 14.13: Added logic to the controller
 
 ---
  client/parties/parties-list/parties-list.component.js | 8 +++++++-
@@ -4036,10 +4036,10 @@ index 5788ba6..d93ea0d 100644
 2.3.2 (Apple Git-55)
 
 
-From 7347c049acae1b5a5047b013f7e92a44286af2c3 Mon Sep 17 00:00:00 2001
+From 8379505c3757456ae6eef6e1cae1b2124b03114d Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sun, 29 Nov 2015 21:09:13 +0200
-Subject: [PATCH 114/244] Step 14.14: Add the users collection
+Subject: [PATCH 114/245] Step 14.14: Add the users collection
 
 ---
  client/parties/parties-list/parties-list.component.js | 3 +++
@@ -4063,10 +4063,10 @@ index d93ea0d..e3779a6 100644
 2.3.2 (Apple Git-55)
 
 
-From 01b305e117fc6d2743c9e35111ba499dcb5ea82c Mon Sep 17 00:00:00 2001
+From 26e871ecfc10327b2442ce2bb91b7210a2722cef Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sun, 29 Nov 2015 21:10:53 +0200
-Subject: [PATCH 115/244] Step 15.1: Add usage of ng-show
+Subject: [PATCH 115/245] Step 15.1: Add usage of ng-show
 
 ---
  client/parties/parties-list/parties-list.html | 2 +-
@@ -4086,10 +4086,10 @@ index da484e0..4da2488 100644
 2.3.2 (Apple Git-55)
 
 
-From afef37bf78e3cc0d061172e0e08c5dec08721084 Mon Sep 17 00:00:00 2001
+From 865c30286f2fa172e2d751e9c5918e255695ba8f Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sun, 29 Nov 2015 21:11:11 +0200
-Subject: [PATCH 116/244] Step 15.2: Create a UI helper for isLoggedIn
+Subject: [PATCH 116/245] Step 15.2: Create a UI helper for isLoggedIn
 
 ---
  client/parties/parties-list/parties-list.component.js | 5 ++++-
@@ -4115,10 +4115,10 @@ index e3779a6..4d17df0 100644
 2.3.2 (Apple Git-55)
 
 
-From 5e5a9e7e5544cddc85528ebee49f5499369fd02b Mon Sep 17 00:00:00 2001
+From 5d97153468adf962092230a75589e66d8595f01c Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sun, 29 Nov 2015 21:12:12 +0200
-Subject: [PATCH 117/244] Step 15.3: Add usage for ng-hide
+Subject: [PATCH 117/245] Step 15.3: Add usage for ng-hide
 
 ---
  client/parties/parties-list/parties-list.html | 3 +++
@@ -4142,10 +4142,10 @@ index 4da2488..3996e8d 100644
 2.3.2 (Apple Git-55)
 
 
-From 51624aef0492a692a4a50d51cefd344c7aa762a6 Mon Sep 17 00:00:00 2001
+From 6c8fc57af0657a384c80fb2c71b1e53fa32ac4c8 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sun, 29 Nov 2015 21:54:26 +0200
-Subject: [PATCH 118/244] Step 15.4: Add ng-show to the RSVP buttons
+Subject: [PATCH 118/245] Step 15.4: Add ng-show to the RSVP buttons
 
 ---
  client/parties/parties-list/parties-list.html | 2 +-
@@ -4168,10 +4168,10 @@ index 3996e8d..bd73472 100644
 2.3.2 (Apple Git-55)
 
 
-From a5df3eb1a5eaa734ee5ea72703c857116986f7ed Mon Sep 17 00:00:00 2001
+From b0a7adf16288ff96495a97c67a8031b72c2f3e13 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sun, 29 Nov 2015 21:55:01 +0200
-Subject: [PATCH 119/244] Step 15.5: Add message for not-logged in users on the
+Subject: [PATCH 119/245] Step 15.5: Add message for not-logged in users on the
  RSVP buttons
 
 ---
@@ -4196,10 +4196,10 @@ index bd73472..51e4e1e 100644
 2.3.2 (Apple Git-55)
 
 
-From b1ee41dce9910c2df19560d659cb8835d6cdaa72 Mon Sep 17 00:00:00 2001
+From c701966a9c117e317fb89c322243eb8e3a394f52 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sun, 29 Nov 2015 22:58:16 +0200
-Subject: [PATCH 120/244] Step 15.6: Add ng-show for delete button
+Subject: [PATCH 120/245] Step 15.6: Add ng-show for delete button
 
 ---
  client/parties/parties-list/parties-list.html | 2 +-
@@ -4222,10 +4222,10 @@ index 51e4e1e..2c99dd3 100644
 2.3.2 (Apple Git-55)
 
 
-From d83a9b81229329e1224d36c32ff988e7eee00697 Mon Sep 17 00:00:00 2001
+From 560113aa9af4f332353feee7cf37b37ce150d94b Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sun, 29 Nov 2015 22:58:38 +0200
-Subject: [PATCH 121/244] Step 15.7: Add currentUserId helper
+Subject: [PATCH 121/245] Step 15.7: Add currentUserId helper
 
 ---
  client/parties/parties-list/parties-list.component.js | 3 +++
@@ -4249,10 +4249,10 @@ index 4d17df0..7b359d7 100644
 2.3.2 (Apple Git-55)
 
 
-From 220358909469e4139a173f9485738deb77d2b1b5 Mon Sep 17 00:00:00 2001
+From fb6877176c8f2007c924bb563e132ff8c71ea6d6 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sun, 29 Nov 2015 22:59:14 +0200
-Subject: [PATCH 122/244] Step 15.8: Add ng-if usage
+Subject: [PATCH 122/245] Step 15.8: Add ng-if usage
 
 ---
  client/parties/parties-list/parties-list.html | 5 ++++-
@@ -4283,10 +4283,10 @@ index 2c99dd3..ab4aa44 100644
 2.3.2 (Apple Git-55)
 
 
-From 3cf1e32532dee8b68e29b4f0aaa4ae9f193157cb Mon Sep 17 00:00:00 2001
+From f790233e3b37c153e87204320af3c87b57d51648 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sun, 29 Nov 2015 23:06:11 +0200
-Subject: [PATCH 123/244] Step 15.9: Add canInvite method to the component
+Subject: [PATCH 123/245] Step 15.9: Add canInvite method to the component
 
 ---
  client/parties/party-details/party-details.component.js | 7 +++++++
@@ -4315,10 +4315,10 @@ index 7924457..2c6425a 100644
 2.3.2 (Apple Git-55)
 
 
-From 53203002fa54693c21143e62942e0369010e44ac Mon Sep 17 00:00:00 2001
+From e3fc0ab1c58bef765e849079567cae87a28557ff Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sun, 29 Nov 2015 23:09:22 +0200
-Subject: [PATCH 124/244] Step 15.10: Added view usage with the canInvite
+Subject: [PATCH 124/245] Step 15.10: Added view usage with the canInvite
  method
 
 ---
@@ -4349,10 +4349,10 @@ index 3a5a42a..dbd8132 100644
 2.3.2 (Apple Git-55)
 
 
-From 691253834ec277710412dfac503837e306e23f88 Mon Sep 17 00:00:00 2001
+From 08b1a60336a2e806d641946d7a81e28e050b0fc9 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sun, 29 Nov 2015 23:14:30 +0200
-Subject: [PATCH 125/244] Step 15.11: Added isLoggedIn helper to the party
+Subject: [PATCH 125/245] Step 15.11: Added isLoggedIn helper to the party
  details component
 
 ---
@@ -4379,10 +4379,10 @@ index 2c6425a..71b9c8a 100644
 2.3.2 (Apple Git-55)
 
 
-From 0415ab1b5ccc2ca509bd7ca397db1c9fe2b48e58 Mon Sep 17 00:00:00 2001
+From f3e2b4f26d8f329e11e69f81b0070a7f7ae338d4 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sun, 29 Nov 2015 23:15:11 +0200
-Subject: [PATCH 126/244] Step 15.12: Added usage for ng-disabled
+Subject: [PATCH 126/245] Step 15.12: Added usage for ng-disabled
 
 ---
  client/parties/party-details/party-details.html | 6 +++---
@@ -4408,10 +4408,10 @@ index dbd8132..ee5b2be 100644
 2.3.2 (Apple Git-55)
 
 
-From 15b045acf5e5ea9249cf0af468f04019ba18dd03 Mon Sep 17 00:00:00 2001
+From 600ea1b1a5af63559e116530782381626c228dc4 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sun, 29 Nov 2015 23:15:51 +0200
-Subject: [PATCH 127/244] Step 16.1: Add angularui:angular-google-maps package
+Subject: [PATCH 127/245] Step 16.1: Add angularui:angular-google-maps package
 
 ---
  .meteor/packages | 1 +
@@ -4459,10 +4459,10 @@ index df2e395..c6f3c05 100644
 2.3.2 (Apple Git-55)
 
 
-From ea1599a40bac237d64727a882b6c661576c3c8e7 Mon Sep 17 00:00:00 2001
+From 5dea1d164d21a66516619191eb3bc858ed386060 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 30 Nov 2015 00:18:45 +0200
-Subject: [PATCH 128/244] Step 16.2: Add google maps module dependency
+Subject: [PATCH 128/245] Step 16.2: Add google maps module dependency
 
 ---
  client/lib/app.js | 3 ++-
@@ -4486,10 +4486,10 @@ index a67eec8..bd1083b 100644
 2.3.2 (Apple Git-55)
 
 
-From a2be974a4528071989f9bcfedaced41ac5d93f5e Mon Sep 17 00:00:00 2001
+From daa3ef29b3d629fb340b65396cc0155fc0e56428 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 30 Nov 2015 00:19:42 +0200
-Subject: [PATCH 129/244] Step 16.3: Add basic map to the view
+Subject: [PATCH 129/245] Step 16.3: Add basic map to the view
 
 ---
  client/parties/party-details/party-details.html | 10 +++++++++-
@@ -4519,10 +4519,10 @@ index ee5b2be..2850bae 100644
 2.3.2 (Apple Git-55)
 
 
-From 990cb5416312636e9e8be6e0f22ab75055b03b02 Mon Sep 17 00:00:00 2001
+From 380122fd26eafbec0e667e22095aec9bc82a8f35 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 30 Nov 2015 00:21:16 +0200
-Subject: [PATCH 130/244] Step 16.4: Add map params to the component
+Subject: [PATCH 130/245] Step 16.4: Add map params to the component
 
 ---
  client/parties/party-details/party-details.component.js | 11 ++++++++++-
@@ -4556,10 +4556,10 @@ index 71b9c8a..2883272 100644
 2.3.2 (Apple Git-55)
 
 
-From 37eb25e12af61df7b05d63827a144d38c89b099f Mon Sep 17 00:00:00 2001
+From fe24840c67fdd69daee080005788e78e7784c5b9 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 30 Nov 2015 00:21:57 +0200
-Subject: [PATCH 131/244] Step 16.5: Create basic CSS style with google map
+Subject: [PATCH 131/245] Step 16.5: Create basic CSS style with google map
  style
 
 ---
@@ -4582,10 +4582,10 @@ index 0000000..219ff39
 2.3.2 (Apple Git-55)
 
 
-From 37011f0d44eeb98c2e4358f053e40ca871626aee Mon Sep 17 00:00:00 2001
+From 9c79fbacb37336614a5789706ece833db0b176f8 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 30 Nov 2015 00:24:09 +0200
-Subject: [PATCH 132/244] Step 16.6: Add party marker to the map
+Subject: [PATCH 132/245] Step 16.6: Add party marker to the map
 
 ---
  client/parties/party-details/party-details.html | 13 +++++++------
@@ -4618,10 +4618,10 @@ index 2850bae..b9e4281 100644
 2.3.2 (Apple Git-55)
 
 
-From e5a2b7365b3a73e8d6a2d227dcb8235c8dc248b2 Mon Sep 17 00:00:00 2001
+From 6acd2ab7e234816bd9c63eeb537bee5f2e453342 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 30 Nov 2015 00:24:48 +0200
-Subject: [PATCH 133/244] Step 16.7: Add the marker creation logic to the
+Subject: [PATCH 133/245] Step 16.7: Add the marker creation logic to the
  controller
 
 ---
@@ -4670,10 +4670,10 @@ index 2883272..f1e1d87 100644
 2.3.2 (Apple Git-55)
 
 
-From bb4b1fd1ce1741954a601db7471782dc60f22053 Mon Sep 17 00:00:00 2001
+From 17ed38f403558dbde13e7e671f6552427890a286 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 30 Nov 2015 00:27:03 +0200
-Subject: [PATCH 134/244] Step 16.8: Add map to the parties list
+Subject: [PATCH 134/245] Step 16.8: Add map to the parties list
 
 ---
  client/parties/parties-list/parties-list.html | 7 +++++++
@@ -4699,10 +4699,10 @@ index ab4aa44..12d54e5 100644
 2.3.2 (Apple Git-55)
 
 
-From c9a108264d34134259f53b0b0b8f3ee5bee14c70 Mon Sep 17 00:00:00 2001
+From 6e1c5f4d0a70a4868ee944006c8cbe091e1cddbc Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 30 Nov 2015 00:27:24 +0200
-Subject: [PATCH 135/244] Step 16.9: Add map logic to the parties list
+Subject: [PATCH 135/245] Step 16.9: Add map logic to the parties list
  controller
 
 ---
@@ -4732,10 +4732,10 @@ index 7b359d7..e376e3a 100644
 2.3.2 (Apple Git-55)
 
 
-From 2d5c0f71eb0ceb954c7d656c26937f8c5fe268fd Mon Sep 17 00:00:00 2001
+From d6a94d6e5696931d7d912089e122615fd7ba4aff Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 30 Nov 2015 00:28:10 +0200
-Subject: [PATCH 136/244] Step 17.1: Add main CSS file
+Subject: [PATCH 136/245] Step 17.1: Add main CSS file
 
 ---
  client/styles/main.css | 3 +++
@@ -4756,10 +4756,10 @@ index 0000000..4397047
 2.3.2 (Apple Git-55)
 
 
-From c8afd5b6c0a3e2b6a4134f2e55edeca8dcff08af Mon Sep 17 00:00:00 2001
+From c809732e90d72868393b1a40a9bc6359db06b535 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 30 Nov 2015 00:28:57 +0200
-Subject: [PATCH 137/244] Step 17.2: Add twbs:bootstrap to the project
+Subject: [PATCH 137/245] Step 17.2: Add twbs:bootstrap to the project
 
 ---
  .meteor/packages | 1 +
@@ -4791,10 +4791,10 @@ index c6f3c05..96b875d 100644
 2.3.2 (Apple Git-55)
 
 
-From 67926697dc5e29b9c453a5b1b0e92d5b6e65980b Mon Sep 17 00:00:00 2001
+From ee17c1bb46df35fb5fbbe5986efc4ab3b71266e1 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 30 Nov 2015 00:29:54 +0200
-Subject: [PATCH 138/244] Step 17.3: Modify the main HTML file to use bootstrap
+Subject: [PATCH 138/245] Step 17.3: Modify the main HTML file to use bootstrap
 
 ---
  index.html | 19 +++++++++++++------
@@ -4834,10 +4834,10 @@ index ccecce2..4f52d8c 100644
 2.3.2 (Apple Git-55)
 
 
-From 9501dfd8b1e4b507334b0330ca9cae634cb372d3 Mon Sep 17 00:00:00 2001
+From f70216845cc03b2b8a5fd495bc18f7d94a14d65b Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 30 Nov 2015 00:30:48 +0200
-Subject: [PATCH 139/244] Step 17.4: Add less package to the project
+Subject: [PATCH 139/245] Step 17.4: Add less package to the project
 
 ---
  .meteor/packages | 1 +
@@ -4856,10 +4856,10 @@ index 658a573..8d6eb3a 100644
 2.3.2 (Apple Git-55)
 
 
-From 55db9c41cc6f697cb831a514452ff85a3aea2afa Mon Sep 17 00:00:00 2001
+From ec1afe08fcf2af64d2ad816ba2add85f348160f1 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 30 Nov 2015 00:31:22 +0200
-Subject: [PATCH 140/244] Step 17.5: Use LESS
+Subject: [PATCH 140/245] Step 17.5: Use LESS
 
 ---
  client/styles/main.css  | 3 ---
@@ -4897,10 +4897,10 @@ index 0000000..6acada4
 2.3.2 (Apple Git-55)
 
 
-From 308c012ea018991ef21c4430df034772ef998724 Mon Sep 17 00:00:00 2001
+From 1e1224ee67bcc8f9fd8af612d3b141083641975e Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 30 Nov 2015 00:32:37 +0200
-Subject: [PATCH 141/244] Step 17.6: Add angularui:angular-ui-bootstrap package
+Subject: [PATCH 141/245] Step 17.6: Add angularui:angular-ui-bootstrap package
 
 ---
  .meteor/packages | 1 +
@@ -4932,10 +4932,10 @@ index 96b875d..2c97683 100644
 2.3.2 (Apple Git-55)
 
 
-From 9cb370aa5e1483433cab7b7dab81d36ed426bacb Mon Sep 17 00:00:00 2001
+From 4311941bb34bc810a2b6a9e69e82940f908c6e0d Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 30 Nov 2015 00:33:35 +0200
-Subject: [PATCH 142/244] Step 17.7: Update the index.html style and tags
+Subject: [PATCH 142/245] Step 17.7: Update the index.html style and tags
 
 ---
  index.html | 25 ++++++++++++++-----------
@@ -4985,10 +4985,10 @@ index 4f52d8c..3b1f316 100644
 2.3.2 (Apple Git-55)
 
 
-From 8402b75ec40a80f8e59613d3349cf5fe99eae65a Mon Sep 17 00:00:00 2001
+From 46faf3ca77c9cd5fd03e00ce8c956f4330ed6e90 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 30 Nov 2015 00:34:33 +0200
-Subject: [PATCH 143/244] Step 17.8: Add dependency for ui-bootstrap
+Subject: [PATCH 143/245] Step 17.8: Add dependency for ui-bootstrap
 
 ---
  client/lib/app.js | 3 ++-
@@ -5012,10 +5012,10 @@ index bd1083b..8fd955a 100644
 2.3.2 (Apple Git-55)
 
 
-From ab2392ccab3b1450e31540952b22c79b018c0b12 Mon Sep 17 00:00:00 2001
+From d95a2c44e4ddbe30907127302e830e9b33b5589b Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 30 Nov 2015 00:56:21 +0200
-Subject: [PATCH 144/244] Step 17.9: Create the component for the modal
+Subject: [PATCH 144/245] Step 17.9: Create the component for the modal
 
 ---
  .../add-new-party-modal.component.js               | 25 ++++++++++++++++++++++
@@ -5058,10 +5058,10 @@ index 0000000..b224c7e
 2.3.2 (Apple Git-55)
 
 
-From d2382396a91c87209243e62755bfa5d3b71f9139 Mon Sep 17 00:00:00 2001
+From ed906ead3baded10dbd562069e79db2fcf5f7855 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 30 Nov 2015 00:56:37 +0200
-Subject: [PATCH 145/244] Step 17.10: Create the view for the modal
+Subject: [PATCH 145/245] Step 17.10: Create the view for the modal
 
 ---
  .../add-new-party-modal/add-new-party-modal.html   | 24 ++++++++++++++++++++++
@@ -5103,10 +5103,10 @@ index 0000000..69a1af3
 2.3.2 (Apple Git-55)
 
 
-From 5ca5729f27644fbac1c0013e86219420dce04405 Mon Sep 17 00:00:00 2001
+From ee4ee098e27dd029188b68075f6166c1ba5bd3b4 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 30 Nov 2015 00:57:01 +0200
-Subject: [PATCH 146/244] Step 17.11: Update the HTML and layout of the parties
+Subject: [PATCH 146/245] Step 17.11: Update the HTML and layout of the parties
  list
 
 ---
@@ -5294,10 +5294,10 @@ index 12d54e5..3179826 100644
 2.3.2 (Apple Git-55)
 
 
-From 3f1d53bba120b5e6d7a1e685921c5055116824c9 Mon Sep 17 00:00:00 2001
+From 819c453738d7c1c9e897479df0a47c515edca1ff Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 30 Nov 2015 00:59:59 +0200
-Subject: [PATCH 147/244] Step 17.12: Update the component, add the modal
+Subject: [PATCH 147/245] Step 17.12: Update the component, add the modal
  opening code and update the map theme
 
 ---
@@ -5409,10 +5409,10 @@ index e376e3a..90bd850 100644
 2.3.2 (Apple Git-55)
 
 
-From d6a9a3dd39abf81c140e4ae06ac88f8d48ba434d Mon Sep 17 00:00:00 2001
+From d5a4f63da0dfa3c986c016ea3d10fb76aeb78eb6 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 30 Nov 2015 01:00:50 +0200
-Subject: [PATCH 148/244] Step 17.13: Update the style colors in the main LESS
+Subject: [PATCH 148/245] Step 17.13: Update the style colors in the main LESS
  file
 
 ---
@@ -5465,10 +5465,10 @@ index 6acada4..e54157f 100644
 2.3.2 (Apple Git-55)
 
 
-From c7c6a491b98da5f51cd943c88bb936228adf9434 Mon Sep 17 00:00:00 2001
+From 302260e5fde426b7b600c4ca4d20e9b0cbbbfc72 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 30 Nov 2015 21:12:06 +0200
-Subject: [PATCH 149/244] Step 17.14: Update the view of party details
+Subject: [PATCH 149/245] Step 17.14: Update the view of party details
 
 ---
  client/parties/party-details/party-details.html | 77 +++++++++++++++++--------
@@ -5564,10 +5564,10 @@ index b9e4281..c82f24f 100644
 2.3.2 (Apple Git-55)
 
 
-From 151b58e0026f942fe67ca847476181137ed4fa94 Mon Sep 17 00:00:00 2001
+From 8b82ef27bbfc95cb8030efa57c3394124652c35f Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 30 Nov 2015 21:12:25 +0200
-Subject: [PATCH 150/244] Step 17.15: Add currentUserId to the party details
+Subject: [PATCH 150/245] Step 17.15: Add currentUserId to the party details
  component
 
 ---
@@ -5592,10 +5592,10 @@ index f1e1d87..1bf8eca 100644
 2.3.2 (Apple Git-55)
 
 
-From c3265b4c1ffdec539f45638161cf9b536e1b8d5b Mon Sep 17 00:00:00 2001
+From a261d7f1126cdde64194dc2fdcc7946940c9a56d Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 18:49:39 +0200
-Subject: [PATCH 151/244] Step 17.16: Add style for each component
+Subject: [PATCH 151/245] Step 17.16: Add style for each component
 
 ---
  .../add-new-party-modal.import.less                |  19 ++++
@@ -5841,10 +5841,10 @@ index 0000000..96a6b49
 2.3.2 (Apple Git-55)
 
 
-From a81ebd63df5c31079b997e7e2ab4210543dcd445 Mon Sep 17 00:00:00 2001
+From 9e2af1e171a02597b7906d058e2344f3c08b1f68 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 18:51:22 +0200
-Subject: [PATCH 152/244] Step 17.17: Use the new LESS files in the main.less
+Subject: [PATCH 152/245] Step 17.17: Use the new LESS files in the main.less
 
 ---
  client/styles/main.less | 24 +++++++++++++++---------
@@ -5900,10 +5900,10 @@ index e54157f..7eac7a1 100644
 2.3.2 (Apple Git-55)
 
 
-From 96121521ed108421ef83b84b9e997804f18eea98 Mon Sep 17 00:00:00 2001
+From c4195b3aa1df98d5a1eb15a0985d61faa2ed8581 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 30 Nov 2015 21:29:06 +0200
-Subject: [PATCH 153/244] Step 18.1: Remove twbs:bootstrap package
+Subject: [PATCH 153/245] Step 18.1: Remove twbs:bootstrap package
 
 ---
  .meteor/packages | 1 -
@@ -5937,10 +5937,10 @@ index 2c97683..56a9fe4 100644
 2.3.2 (Apple Git-55)
 
 
-From 855fee0ae05d171dd32090b1b12058f0ab3fdc78 Mon Sep 17 00:00:00 2001
+From e316abc7ec0e9bb73bd5574cee8539ec59872282 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 30 Nov 2015 21:30:05 +0200
-Subject: [PATCH 154/244] Step 18.2: Add angular:angular-material package
+Subject: [PATCH 154/245] Step 18.2: Add angular:angular-material package
 
 ---
  .meteor/packages | 1 +
@@ -5974,10 +5974,10 @@ index 56a9fe4..ced3741 100644
 2.3.2 (Apple Git-55)
 
 
-From 95d8508d1ce26a0ef7d5eb9eb4b6f47456cc59bd Mon Sep 17 00:00:00 2001
+From 9c38dc70670120073b14bfa4be8fba882b91d117 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 30 Nov 2015 21:30:32 +0200
-Subject: [PATCH 155/244] Step 18.3: Add ngMaterial dependency
+Subject: [PATCH 155/245] Step 18.3: Add ngMaterial dependency
 
 ---
  client/lib/app.js | 2 +-
@@ -6000,10 +6000,10 @@ index 8fd955a..d064ce2 100644
 2.3.2 (Apple Git-55)
 
 
-From 351abbe0a4817cba15d9df2d6584f1b78e0af6f2 Mon Sep 17 00:00:00 2001
+From 329e3b9bc0941b86c3d394779513c53b82df4ae9 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 30 Nov 2015 21:31:55 +0200
-Subject: [PATCH 156/244] Step 18.4: Replace $modal with $mdDialog
+Subject: [PATCH 156/245] Step 18.4: Replace $modal with $mdDialog
 
 ---
  client/parties/parties-list/parties-list.component.js | 12 ++++++------
@@ -6057,10 +6057,10 @@ index 90bd850..64406b8 100644
 2.3.2 (Apple Git-55)
 
 
-From 328fc8514b669ae69fb36f5dd8b8b5ddf9f3f189 Mon Sep 17 00:00:00 2001
+From 7220acb7ad8c0bf43828fc9e73f37283a634501c Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 30 Nov 2015 21:33:01 +0200
-Subject: [PATCH 157/244] Step 18.5: Replace the close button with $mdDialog's
+Subject: [PATCH 157/245] Step 18.5: Replace the close button with $mdDialog's
  hide
 
 ---
@@ -6099,10 +6099,10 @@ index b224c7e..0b605fa 100644
 2.3.2 (Apple Git-55)
 
 
-From 39a5d3c1cd3b0e39af56bf3f439f4d192aba1f9c Mon Sep 17 00:00:00 2001
+From 41fa678c5e1bd1aaba6efcb2c5123a256a126cf1 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Mon, 30 Nov 2015 21:34:26 +0200
-Subject: [PATCH 158/244] Step 18.6: Update index.html to use angular-material
+Subject: [PATCH 158/245] Step 18.6: Update index.html to use angular-material
  components
 
 ---
@@ -6153,10 +6153,10 @@ index 3b1f316..5d08d6f 100644
 2.3.2 (Apple Git-55)
 
 
-From 63bdb4ab3fbd0d0fdb22b24826dde12e278cde63 Mon Sep 17 00:00:00 2001
+From 0eb86d862ad703f5887fee3d558414ac14873a5c Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 19:06:21 +0200
-Subject: [PATCH 159/244] Step 18.7: Update the less files to use
+Subject: [PATCH 159/245] Step 18.7: Update the less files to use
  angular-material
 
 ---
@@ -6499,10 +6499,10 @@ index 96a6b49..3a4f13f 100644
 2.3.2 (Apple Git-55)
 
 
-From bcc1abce4a51156ee33ab8c47b34c8b635d3298e Mon Sep 17 00:00:00 2001
+From dc662763399826e1b563e29ebe033e20803bc869 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 19:07:04 +0200
-Subject: [PATCH 160/244] Step 18.8: Update the layout of parties list
+Subject: [PATCH 160/245] Step 18.8: Update the layout of parties list
 
 ---
  client/parties/parties-list/parties-list.html | 158 ++++++++++----------------
@@ -6689,10 +6689,10 @@ index 3179826..4f7a14f 100644
 2.3.2 (Apple Git-55)
 
 
-From e85da07ee489b905f057c48f80a64029d7d94a03 Mon Sep 17 00:00:00 2001
+From 074a713aff11e285dd25fdad46d8e202bdc60848 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 19:09:29 +0200
-Subject: [PATCH 161/244] Step 18.9: Add planettraining:material-design-icons
+Subject: [PATCH 161/245] Step 18.9: Add planettraining:material-design-icons
  package
 
 ---
@@ -6725,10 +6725,10 @@ index ced3741..fef35c8 100644
 2.3.2 (Apple Git-55)
 
 
-From 85141ea65dc9a736f14e937a1ea6c4e589244691 Mon Sep 17 00:00:00 2001
+From abffb5c0999c9eaa2ecd91d2ce700bb09950609e Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 19:10:43 +0200
-Subject: [PATCH 162/244] Step 18.10: Add angular material icons definitions
+Subject: [PATCH 162/245] Step 18.10: Add angular material icons definitions
 
 ---
  client/lib/app.js | 11 +++++++++++
@@ -6760,10 +6760,10 @@ index d064ce2..6a711c3 100644
 2.3.2 (Apple Git-55)
 
 
-From 9692d70915c1936c979a05528a9d31adae9f0ca9 Mon Sep 17 00:00:00 2001
+From b6b768324d2a062fdb4c4d3cdb1c17c832b058f3 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 19:18:02 +0200
-Subject: [PATCH 163/244] Step 18.11: Update the view of party details to use
+Subject: [PATCH 163/245] Step 18.11: Update the view of party details to use
  angular-material
 
 ---
@@ -6871,10 +6871,10 @@ index c82f24f..4024a14 100644
 2.3.2 (Apple Git-55)
 
 
-From fd8508a9e831f0fab89c2fe0b8d0d0ce749a721a Mon Sep 17 00:00:00 2001
+From 756cdaddcbc34e2411b912e2a2d4eee3152e9e41 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 19:24:28 +0200
-Subject: [PATCH 164/244] Step 18.12: Update the view of add new party modal to
+Subject: [PATCH 164/245] Step 18.12: Update the view of add new party modal to
  use angular-material
 
 ---
@@ -6964,10 +6964,10 @@ index 96f4c16..afa9aaa 100644
 2.3.2 (Apple Git-55)
 
 
-From 7125f71e7acf84e21e7679ae6d0dfff8ee959fb4 Mon Sep 17 00:00:00 2001
+From 1215087e4cee96d662f2e177dc6e18585331ae92 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 19:38:39 +0200
-Subject: [PATCH 165/244] Step 18.13: Replace the main HTML with component
+Subject: [PATCH 165/245] Step 18.13: Replace the main HTML with component
 
 ---
  index.html | 11 +----------
@@ -6998,10 +6998,10 @@ index 5d08d6f..de1bde8 100644
 2.3.2 (Apple Git-55)
 
 
-From a9e110e303fd402cbaa1fc3c8f876a5406540a35 Mon Sep 17 00:00:00 2001
+From b3a2ded70a13e3c8a339e6a866ce79ab089ccc81 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 19:38:57 +0200
-Subject: [PATCH 166/244] Step 18.14: Create the socially component view
+Subject: [PATCH 166/245] Step 18.14: Create the socially component view
 
 ---
  client/socially/socially.html | 10 ++++++++++
@@ -7029,10 +7029,10 @@ index 0000000..9411e27
 2.3.2 (Apple Git-55)
 
 
-From 59c58268faf136465707b41eb8c533c371212edf Mon Sep 17 00:00:00 2001
+From ae1c0b8f016302519bfb2e46c8ca0304c9347d48 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 19:41:21 +0200
-Subject: [PATCH 167/244] Step 18.15: Create the socially component
+Subject: [PATCH 167/245] Step 18.15: Create the socially component
 
 ---
  client/socially/socially.component.js | 19 +++++++++++++++++++
@@ -7069,10 +7069,10 @@ index 0000000..9f77880
 2.3.2 (Apple Git-55)
 
 
-From ca8693ed8fd286aadb05f467aebfd7c302344244 Mon Sep 17 00:00:00 2001
+From 42d8b96607827f5903c7f4a2fe4118a6389fbc83 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 19:43:20 +0200
-Subject: [PATCH 168/244] Step 18.16: Replace the login-buttons with custom
+Subject: [PATCH 168/245] Step 18.16: Replace the login-buttons with custom
  view
 
 ---
@@ -7100,10 +7100,10 @@ index 9411e27..2cfe056 100644
 2.3.2 (Apple Git-55)
 
 
-From 48376d974715788f53df2bd702c348cfa7cf616d Mon Sep 17 00:00:00 2001
+From 179707a06c965ceb289c91fda2c30926811ef055 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 19:43:41 +0200
-Subject: [PATCH 169/244] Step 18.17: Add custom auth states
+Subject: [PATCH 169/245] Step 18.17: Add custom auth states
 
 ---
  client/routes.js | 12 ++++++++++++
@@ -7136,10 +7136,10 @@ index 545a926..41a3743 100644
 2.3.2 (Apple Git-55)
 
 
-From f020432f4f6b7666b85e5b527f89df69a3a1081d Mon Sep 17 00:00:00 2001
+From 825af951ea1dfd4d4a17fe9f139b5411c5ffc5dd Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 19:50:48 +0200
-Subject: [PATCH 170/244] Fix less file
+Subject: [PATCH 170/245] Fix less file
 
 ---
  client/styles/main.less | 4 ++++
@@ -7164,10 +7164,10 @@ index afa9aaa..d4e20b2 100644
 2.3.2 (Apple Git-55)
 
 
-From 30b448f3be05ca0a17b54af8e98e5cf682385e22 Mon Sep 17 00:00:00 2001
+From 4aec5925273c23d36fae261de6226b1808c9b5fc Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 19:54:06 +0200
-Subject: [PATCH 171/244] Step 18.18: Create the login component
+Subject: [PATCH 171/245] Step 18.18: Create the login component
 
 ---
  client/auth/login/login.component.js | 28 ++++++++++++++++++++++++++++
@@ -7213,10 +7213,10 @@ index 0000000..7ee375b
 2.3.2 (Apple Git-55)
 
 
-From 5235645f6c42b7a6d31960917785837f4f9096ca Mon Sep 17 00:00:00 2001
+From bd8388b1b42b009458b4f4e51b966e19979c6130 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 19:54:18 +0200
-Subject: [PATCH 172/244] Step 18.19: Create the login view
+Subject: [PATCH 172/245] Step 18.19: Create the login view
 
 ---
  client/auth/login/login.html | 62 ++++++++++++++++++++++++++++++++++++++++++++
@@ -7296,10 +7296,10 @@ index 0000000..9b3c7d1
 2.3.2 (Apple Git-55)
 
 
-From 6ce9ce5c9e2bd30bebe3539d584bf2732ec89241 Mon Sep 17 00:00:00 2001
+From 8e7ef97ce17c436693db497146638745c7555374 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 19:54:32 +0200
-Subject: [PATCH 173/244] Step 18.20: Create the logout method
+Subject: [PATCH 173/245] Step 18.20: Create the logout method
 
 ---
  client/socially/socially.component.js | 4 ++++
@@ -7325,10 +7325,10 @@ index 9f77880..d3e7c60 100644
 2.3.2 (Apple Git-55)
 
 
-From b5f1dc14522fe113026e91e5717f4f13d08e0c53 Mon Sep 17 00:00:00 2001
+From 1a0341e8f9f356f9ba893c60083868f23280a5a0 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 19:59:38 +0200
-Subject: [PATCH 174/244] Step 18.21: Create the register component
+Subject: [PATCH 174/245] Step 18.21: Create the register component
 
 ---
  client/auth/register/register.component.js | 28 ++++++++++++++++++++++++++++
@@ -7374,10 +7374,10 @@ index 0000000..54a884c
 2.3.2 (Apple Git-55)
 
 
-From bd75ad8fcc4121c7bba338339babc20e71eccbce Mon Sep 17 00:00:00 2001
+From 453ebfba58abd639785e3db54b54f549aa9c3c4f Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 19:59:59 +0200
-Subject: [PATCH 175/244] Step 18.22: Create the register component view
+Subject: [PATCH 175/245] Step 18.22: Create the register component view
 
 ---
  client/auth/register/register.html | 63 ++++++++++++++++++++++++++++++++++++++
@@ -7458,10 +7458,10 @@ index 0000000..8100629
 2.3.2 (Apple Git-55)
 
 
-From da15e274038564cde3c81da104207f8fb369961a Mon Sep 17 00:00:00 2001
+From be14442d90198ebc26925caa7061da03b00bd311 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 20:03:47 +0200
-Subject: [PATCH 176/244] Step 18.23: Create the reset password component
+Subject: [PATCH 176/245] Step 18.23: Create the reset password component
 
 ---
  .../reset-password/reset-password.component.js     | 27 ++++++++++++++++++++++
@@ -7506,10 +7506,10 @@ index 0000000..241ae8a
 2.3.2 (Apple Git-55)
 
 
-From 8c106e1fbc26c71e2ada70a585d6bceb13300c97 Mon Sep 17 00:00:00 2001
+From e64ad76412aacd7052df9310cbfeb767a8c1c4f4 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 20:03:57 +0200
-Subject: [PATCH 177/244] Step 18.24: Create the reset password component view
+Subject: [PATCH 177/245] Step 18.24: Create the reset password component view
 
 ---
  client/auth/reset-password/reset-password.html | 40 ++++++++++++++++++++++++++
@@ -7567,10 +7567,10 @@ index 0000000..138ecf4
 2.3.2 (Apple Git-55)
 
 
-From 7f82b521f25e4fe63e8c3c41f34aafc628442723 Mon Sep 17 00:00:00 2001
+From f455b144be52ace5520f300e885d40f8142a224e Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 20:06:42 +0200
-Subject: [PATCH 178/244] Step 20.1: Add cfs:standard-packages package
+Subject: [PATCH 178/245] Step 20.1: Add cfs:standard-packages package
 
 ---
  .meteor/packages |  1 +
@@ -7633,10 +7633,10 @@ index fef35c8..66bb9d0 100644
 2.3.2 (Apple Git-55)
 
 
-From b4274610ca0cceb1a0333db912d26b4e97b57473 Mon Sep 17 00:00:00 2001
+From d7baba214fd4fafd1e2a75f65a496b9de9113b83 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 20:08:00 +0200
-Subject: [PATCH 179/244] Step 20.2: Add cfs:gridfs package
+Subject: [PATCH 179/245] Step 20.2: Add cfs:gridfs package
 
 ---
  .meteor/packages | 1 +
@@ -7668,10 +7668,10 @@ index 66bb9d0..1c9708c 100644
 2.3.2 (Apple Git-55)
 
 
-From c11123d7e2f70e8ac0ea141bcb1130fd46964de2 Mon Sep 17 00:00:00 2001
+From c301213621299d9ac21b9d26f8ba159b2f999a93 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 20:14:09 +0200
-Subject: [PATCH 180/244] Step 20.3: Create the Images collection and publish
+Subject: [PATCH 180/245] Step 20.3: Create the Images collection and publish
  it
 
 ---
@@ -7721,10 +7721,10 @@ index 0000000..5cec451
 2.3.2 (Apple Git-55)
 
 
-From b27662464a2205c0ffc50c314ba5bd1b80859826 Mon Sep 17 00:00:00 2001
+From 7f92d4e6a9466f99cac894da3ecc8a991d44e13f Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 20:16:04 +0200
-Subject: [PATCH 181/244] Step 20.4: Add subscription and images collection to
+Subject: [PATCH 181/245] Step 20.4: Add subscription and images collection to
  the parties list
 
 ---
@@ -7754,10 +7754,10 @@ index 64406b8..a9565c5 100644
 2.3.2 (Apple Git-55)
 
 
-From fe79739cd05b33c0e1441905cf1b2612c1460705 Mon Sep 17 00:00:00 2001
+From d29d7acf41b2884fe8a4f68cc03ad183e87874d0 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 20:17:20 +0200
-Subject: [PATCH 182/244] Step 20.5: Add danialfarid:ng-file-upload package
+Subject: [PATCH 182/245] Step 20.5: Add danialfarid:ng-file-upload package
 
 ---
  .meteor/packages | 1 +
@@ -7789,10 +7789,10 @@ index 1c9708c..74b0f82 100644
 2.3.2 (Apple Git-55)
 
 
-From 49bb172b22243b7e94b9741c91ccdcb92e84c3a4 Mon Sep 17 00:00:00 2001
+From 4f764035d8c8f3d59075b65ff2ed7803459f23de Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 20:17:46 +0200
-Subject: [PATCH 183/244] Step 20.6: Add dependency for ngFileUpload
+Subject: [PATCH 183/245] Step 20.6: Add dependency for ngFileUpload
 
 ---
  client/lib/app.js | 3 ++-
@@ -7816,10 +7816,10 @@ index 6a711c3..04eef2d 100644
 2.3.2 (Apple Git-55)
 
 
-From e31c36733d497996d1054dcf36dc6a8864bbb677 Mon Sep 17 00:00:00 2001
+From dcc8b546b2631fb56615e08e8d495a0f14225691 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 20:22:49 +0200
-Subject: [PATCH 184/244] Step 20.7: Use ngFileUpload in the view
+Subject: [PATCH 184/245] Step 20.7: Use ngFileUpload in the view
 
 ---
  .../add-new-party-modal/add-new-party-modal.html       | 18 ++++++++++++++++++
@@ -7858,10 +7858,10 @@ index 3b657f5..6da5f7b 100644
 2.3.2 (Apple Git-55)
 
 
-From ab6a266153b5bcac5f72778a0708e2a2ade601f6 Mon Sep 17 00:00:00 2001
+From fdd401475654166a558561452ba9f882a1a364a7 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 20:23:10 +0200
-Subject: [PATCH 185/244] Step 20.8: Add some style rules for the file upload
+Subject: [PATCH 185/245] Step 20.8: Add some style rules for the file upload
  box
 
 ---
@@ -7898,10 +7898,10 @@ index 0000000..cedf68b
 2.3.2 (Apple Git-55)
 
 
-From ea8ce87503d44f32fc22dd28a582a8c729c26850 Mon Sep 17 00:00:00 2001
+From e0cbce495cdb102663c82e9b6ac04268eccf69d3 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 20:23:22 +0200
-Subject: [PATCH 186/244] Step 20.9: Import the new LESS file
+Subject: [PATCH 186/245] Step 20.9: Import the new LESS file
 
 ---
  client/styles/main.less | 1 +
@@ -7920,10 +7920,10 @@ index d4e20b2..6c61f8e 100644
 2.3.2 (Apple Git-55)
 
 
-From b5ee146657c0a41700a27ca34fa255761dcb71ac Mon Sep 17 00:00:00 2001
+From ddcc7c004be2047b0a84188559472e2bec0ef2dd Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 20:24:38 +0200
-Subject: [PATCH 187/244] Step 20.10: Implement the actual image upload logic
+Subject: [PATCH 187/245] Step 20.10: Implement the actual image upload logic
 
 ---
  .../parties/add-new-party-modal/add-new-party-modal.component.js  | 8 +++++++-
@@ -7953,10 +7953,10 @@ index 0b605fa..836f564 100644
 2.3.2 (Apple Git-55)
 
 
-From 4e722b142b490c16eb2b578f44ba16b2bb875ea0 Mon Sep 17 00:00:00 2001
+From 5332153a89c3dab80385577487129433dfbc5beb Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 20:25:36 +0200
-Subject: [PATCH 188/244] Step 20.11: Add alexk111:ng-img-crop package
+Subject: [PATCH 188/245] Step 20.11: Add alexk111:ng-img-crop package
 
 ---
  .meteor/packages | 1 +
@@ -7988,10 +7988,10 @@ index 74b0f82..a2dbaf4 100644
 2.3.2 (Apple Git-55)
 
 
-From c6ee0252eed72920b397c0c9c549b088fac072e3 Mon Sep 17 00:00:00 2001
+From 31b4da0dcfca76a34e625d8d9ef54ce93a0817b0 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 20:26:18 +0200
-Subject: [PATCH 189/244] Step 20.12: Add dependency for ngImgCrop
+Subject: [PATCH 189/245] Step 20.12: Add dependency for ngImgCrop
 
 ---
  client/lib/app.js | 3 ++-
@@ -8015,10 +8015,10 @@ index 04eef2d..ccf221d 100644
 2.3.2 (Apple Git-55)
 
 
-From 4910c698ab41e7a4f391a50e8068a67fea4a4619 Mon Sep 17 00:00:00 2001
+From 7343e2d205a264812f236b2bf7f1f9403ee62afe Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 20:49:00 +0200
-Subject: [PATCH 190/244] Step 20.13: Add the image crop usage
+Subject: [PATCH 190/245] Step 20.13: Add the image crop usage
 
 ---
  client/parties/add-new-party-modal/add-new-party-modal.html | 6 +++++-
@@ -8052,10 +8052,10 @@ index 6da5f7b..c6183c1 100644
 2.3.2 (Apple Git-55)
 
 
-From c6d6e712af27dec87cde039543c77293e721b23a Mon Sep 17 00:00:00 2001
+From ae27d5dee19c4a96ca0378d067b05063f3df1eec Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 20:49:18 +0200
-Subject: [PATCH 191/244] Step 20.14: Added some CSS rules for the image crop
+Subject: [PATCH 191/245] Step 20.14: Added some CSS rules for the image crop
  container
 
 ---
@@ -8085,10 +8085,10 @@ index cedf68b..34965fb 100644
 2.3.2 (Apple Git-55)
 
 
-From e6dbf90ed053ffd49adcb5d084a13da4acef083c Mon Sep 17 00:00:00 2001
+From 288fd698dec9d3edede4b55b4cba595527ff4ee8 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 20:49:50 +0200
-Subject: [PATCH 192/244] Step 20.15: Implement the file read in the client
+Subject: [PATCH 192/245] Step 20.15: Implement the file read in the client
  side and use it in the crop directive
 
 ---
@@ -8124,10 +8124,10 @@ index 836f564..489298b 100644
 2.3.2 (Apple Git-55)
 
 
-From ac58be0bf39f1d41a249ab2604c7bee6e10e8d55 Mon Sep 17 00:00:00 2001
+From 4dfdbe7167e2b142add6f9fdc5152f0c29d2ad45 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 21:09:19 +0200
-Subject: [PATCH 193/244] Step 20.15: Add save button for the cropped image
+Subject: [PATCH 193/245] Step 20.15: Add save button for the cropped image
 
 ---
  client/parties/add-new-party-modal/add-new-party-modal.html | 5 ++++-
@@ -8153,10 +8153,10 @@ index c6183c1..62d1929 100644
 2.3.2 (Apple Git-55)
 
 
-From 880436ed3690586b293b937d08e1745e6d58698b Mon Sep 17 00:00:00 2001
+From bf9d4c26734c4adfb9d40287297cc777104d22b2 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 21:41:47 +0200
-Subject: [PATCH 194/244] Step 20.17: Add the logic for saving the cropped
+Subject: [PATCH 194/245] Step 20.17: Add the logic for saving the cropped
  image
 
 ---
@@ -8204,10 +8204,10 @@ index 489298b..af671df 100644
 2.3.2 (Apple Git-55)
 
 
-From a6aab03b4c37d68d53d1db6008c01fd52521cd9c Mon Sep 17 00:00:00 2001
+From e131f6e785be01f71f9ca15c6d713736054a260f Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 21:41:51 +0200
-Subject: [PATCH 195/244] Step 20.18: Add the display of the uploaded image
+Subject: [PATCH 195/245] Step 20.18: Add the display of the uploaded image
 
 ---
  client/parties/add-new-party-modal/add-new-party-modal.html | 6 ++++++
@@ -8234,10 +8234,10 @@ index 62d1929..8871380 100644
 2.3.2 (Apple Git-55)
 
 
-From 80ea928403013cedd3ac6e2572098ba65cf4b54c Mon Sep 17 00:00:00 2001
+From ec8dadc9a674828d185943aca36904be3c2444b5 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 21:43:22 +0200
-Subject: [PATCH 196/244] Step 20.19: Add vitalets:angular-xeditable package
+Subject: [PATCH 196/245] Step 20.19: Add vitalets:angular-xeditable package
 
 ---
  .meteor/packages | 1 +
@@ -8268,10 +8268,10 @@ index a2dbaf4..c272612 100644
 2.3.2 (Apple Git-55)
 
 
-From 74c352157c9de05a383d6fdd4aa7d995841cb2d6 Mon Sep 17 00:00:00 2001
+From a265719cf453af2e3540021e516bb822c8b83409 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 21:44:09 +0200
-Subject: [PATCH 197/244] Step 20.20: Add dependecy for xeditable
+Subject: [PATCH 197/245] Step 20.20: Add dependecy for xeditable
 
 ---
  client/lib/app.js | 3 ++-
@@ -8295,10 +8295,10 @@ index ccf221d..3bbefc9 100644
 2.3.2 (Apple Git-55)
 
 
-From 97c460649a21dc4795a684dacbcb4f17843b13a0 Mon Sep 17 00:00:00 2001
+From cc0136d82124c7e64cfd2ae2be8e8a2450d9f8f8 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 21:47:26 +0200
-Subject: [PATCH 198/244] Step 20.21: Add angular-xeditable usage
+Subject: [PATCH 198/245] Step 20.21: Add angular-xeditable usage
 
 ---
  client/parties/add-new-party-modal/add-new-party-modal.html | 6 ++++--
@@ -8336,10 +8336,10 @@ index 8871380..caf0962 100644
 2.3.2 (Apple Git-55)
 
 
-From 05d4cd699001196908e73028bd2770f014d1d814 Mon Sep 17 00:00:00 2001
+From 44f15625e0f878dd20e23435dba1d4ec4ac5807f Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 21:47:36 +0200
-Subject: [PATCH 199/244] Step 20.22: Implement updateDescription method
+Subject: [PATCH 199/245] Step 20.22: Implement updateDescription method
 
 ---
  client/parties/add-new-party-modal/add-new-party-modal.component.js | 4 ++++
@@ -8365,10 +8365,10 @@ index af671df..2a8809b 100644
 2.3.2 (Apple Git-55)
 
 
-From 520fcc41e28d6938c0d9b302892399c11087bd4c Mon Sep 17 00:00:00 2001
+From 57dfe8254a7232bcdadfcce26bcd56b64d4f83ea Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 21:49:30 +0200
-Subject: [PATCH 200/244] Step 20.23: Add netanelgilad:angular-sortable-view
+Subject: [PATCH 200/245] Step 20.23: Add netanelgilad:angular-sortable-view
  package
 
 ---
@@ -8401,10 +8401,10 @@ index c272612..c4c605f 100644
 2.3.2 (Apple Git-55)
 
 
-From fac8242aed82119ac4cd7b4c0699821a63556e57 Mon Sep 17 00:00:00 2001
+From cb2473bbc980db7624a4a546de81931a76df4743 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 21:49:54 +0200
-Subject: [PATCH 201/244] Step 20.24: Add angular-sortable-view dependency
+Subject: [PATCH 201/245] Step 20.24: Add angular-sortable-view dependency
 
 ---
  client/lib/app.js | 3 ++-
@@ -8428,10 +8428,10 @@ index 3bbefc9..1e6949b 100644
 2.3.2 (Apple Git-55)
 
 
-From fc584ab28c87f3cd106d4a8cf1b4cdd15717da52 Mon Sep 17 00:00:00 2001
+From 632067521dddb7b9251736a4dd6bbc10371c1fc6 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 21:54:33 +0200
-Subject: [PATCH 202/244] Step 20.25: Add sortable usage
+Subject: [PATCH 202/245] Step 20.25: Add sortable usage
 
 ---
  client/parties/add-new-party-modal/add-new-party-modal.html | 6 +++---
@@ -8458,10 +8458,10 @@ index caf0962..3a38027 100644
 2.3.2 (Apple Git-55)
 
 
-From b22d8dbc245c21a8a4b95cc741adc587e23de9da Mon Sep 17 00:00:00 2001
+From 46357df2e3ba550c9333d5f8566f78991ce39603 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 21:55:25 +0200
-Subject: [PATCH 203/244] Step 20.26: Add indication for the main image
+Subject: [PATCH 203/245] Step 20.26: Add indication for the main image
 
 ---
  client/parties/add-new-party-modal/add-new-party-modal.html | 1 +
@@ -8483,10 +8483,10 @@ index 3a38027..5cd2755 100644
 2.3.2 (Apple Git-55)
 
 
-From f995bd146d5e2cc99a5998ea76db9d2d1d414c8f Mon Sep 17 00:00:00 2001
+From 7cd1bd94fd1db2c9737efa37416db1baa7dccc56 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 21:55:40 +0200
-Subject: [PATCH 204/244] Step 20.27: Add style for the sortable list
+Subject: [PATCH 204/245] Step 20.27: Add style for the sortable list
 
 ---
  .../add-new-party-modal.import.less                | 26 ++++++++++++++++++++++
@@ -8532,10 +8532,10 @@ index 34965fb..b609f03 100644
 2.3.2 (Apple Git-55)
 
 
-From edcf0a3924e1c5c901dc046dcda533639902465f Mon Sep 17 00:00:00 2001
+From 7791bf489ee2e917fe9721c3e07561705f926041 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 23:04:31 +0200
-Subject: [PATCH 205/244] Step 20.28: Add the main image to the parties list
+Subject: [PATCH 205/245] Step 20.28: Add the main image to the parties list
  view
 
 ---
@@ -8561,10 +8561,10 @@ index 4f7a14f..15ca915 100644
 2.3.2 (Apple Git-55)
 
 
-From 3580997726701ee678601998b37d4176daaaaf95 Mon Sep 17 00:00:00 2001
+From 0205fa6ffd0252cd8a9d8022e29294dfb9f55c7c Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 23:04:54 +0200
-Subject: [PATCH 206/244] Step 20.29: Implement the getMainImage method
+Subject: [PATCH 206/245] Step 20.29: Implement the getMainImage method
 
 ---
  client/parties/parties-list/parties-list.component.js | 14 ++++++++++++--
@@ -8607,10 +8607,10 @@ index a9565c5..f9d5795 100644
 2.3.2 (Apple Git-55)
 
 
-From f075f2eaf281b64db5f43c8fe3bfad6e4493dade Mon Sep 17 00:00:00 2001
+From e01a31d4935885094d67270a1b7b498715202aa7 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 23:05:02 +0200
-Subject: [PATCH 207/244] Step 20.30: Add some CSS
+Subject: [PATCH 207/245] Step 20.30: Add some CSS
 
 ---
  client/parties/parties-list/parties-list.import.less | 6 ++++++
@@ -8637,10 +8637,10 @@ index ea78dfb..3ce0188 100644
 2.3.2 (Apple Git-55)
 
 
-From b7eb43e70ff1b8aa5c6789196e52c11f1b6a69b6 Mon Sep 17 00:00:00 2001
+From 438867479ea0d82ad07173299d67cf2bfd5ad28e Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 23:06:52 +0200
-Subject: [PATCH 208/244] Step 20.31: Add the thumbnails store
+Subject: [PATCH 208/245] Step 20.31: Add the thumbnails store
 
 ---
  model/images.js | 7 ++++++-
@@ -8667,10 +8667,10 @@ index 5cec451..3b06d5f 100644
 2.3.2 (Apple Git-55)
 
 
-From 44a6403a33859c236aaf4515175826c9f3fb013d Mon Sep 17 00:00:00 2001
+From cefbde6e04f9b2d12cbcd01c472aa6f10ca1a1fd Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 23:07:41 +0200
-Subject: [PATCH 209/244] Step 20.32: Use the thumbnails store
+Subject: [PATCH 209/245] Step 20.32: Use the thumbnails store
 
 ---
  client/parties/add-new-party-modal/add-new-party-modal.html | 2 +-
@@ -8693,10 +8693,10 @@ index 5cd2755..299d8ba 100644
 2.3.2 (Apple Git-55)
 
 
-From 9b2ac9ed0e7d5c0d62315043189e0d7c2c650b42 Mon Sep 17 00:00:00 2001
+From ccbd994e4bd6b0dbb88f07c0cf2a13f5854b5e85 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 23:11:05 +0200
-Subject: [PATCH 210/244] Step 21.1: Add mobile platform support
+Subject: [PATCH 210/245] Step 21.1: Add mobile platform support
 
 ---
  .meteor/packages  | 1 +
@@ -8738,10 +8738,10 @@ index c4c605f..2a107c0 100644
 2.3.2 (Apple Git-55)
 
 
-From 5ea018deec004fd98b9cdf8e94f3a5ba5c887839 Mon Sep 17 00:00:00 2001
+From 778cbca63541684388ea9899c919b67634fa84a8 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 23:12:36 +0200
-Subject: [PATCH 211/244] Step 21.2: Create the socially-mobile package
+Subject: [PATCH 211/245] Step 21.2: Create the socially-mobile package
 
 ---
  packages/socially-mobile/README.md                |  0
@@ -8809,10 +8809,10 @@ index 0000000..164ddd9
 2.3.2 (Apple Git-55)
 
 
-From f5f67353701ad73a2cbe8cd08a648e586a6dcfba Mon Sep 17 00:00:00 2001
+From 9499e1c0a2b5e90a87beaaad4cc0e8162037bfe1 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 23:13:22 +0200
-Subject: [PATCH 212/244] Step 21.3: Cleanup the base package
+Subject: [PATCH 212/245] Step 21.3: Cleanup the base package
 
 ---
  packages/socially-mobile/package.js               | 4 ----
@@ -8862,10 +8862,10 @@ index 164ddd9..0000000
 2.3.2 (Apple Git-55)
 
 
-From 54de099918925f3dea9a58739d87ffe4f567f953 Mon Sep 17 00:00:00 2001
+From 37810931ca972c5963b4b89e1627f68032e28c40 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 23:13:43 +0200
-Subject: [PATCH 213/244] Step 21.4: Add dependency for angular
+Subject: [PATCH 213/245] Step 21.4: Add dependency for angular
 
 ---
  packages/socially-mobile/package.js | 1 +
@@ -8887,10 +8887,10 @@ index fc1955a..c185b97 100644
 2.3.2 (Apple Git-55)
 
 
-From f73096b70051ca93665c33c7012f0d2c8db07fc8 Mon Sep 17 00:00:00 2001
+From 8efc313859b6e904b538a465dce5f37338b25470 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 23:14:19 +0200
-Subject: [PATCH 214/244] Step 21.5: Create the angular module for the mobile
+Subject: [PATCH 214/245] Step 21.5: Create the angular module for the mobile
  package
 
 ---
@@ -8910,10 +8910,10 @@ index 0000000..f078654
 2.3.2 (Apple Git-55)
 
 
-From 71677f6c0068034c9fab9bc22cc204c63d1719c3 Mon Sep 17 00:00:00 2001
+From 07fcd32f5fca0e28eba5f8b7a4b1a62d4ed3e882 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 23:17:15 +0200
-Subject: [PATCH 215/244] Step 21.6: Create the login component
+Subject: [PATCH 215/245] Step 21.6: Create the login component
 
 ---
  packages/socially-mobile/client/auth/login/login.component.js | 10 ++++++++++
@@ -8941,10 +8941,10 @@ index 0000000..7a2127e
 2.3.2 (Apple Git-55)
 
 
-From bf88997bb89fe1a565a0c4932d939fbc48a1d326 Mon Sep 17 00:00:00 2001
+From 52c8b05ba58a8ec769bc0ea086329f06c945e94e Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 23:17:39 +0200
-Subject: [PATCH 216/244] Step 21.7: Create the login component view
+Subject: [PATCH 216/245] Step 21.7: Create the login component view
 
 ---
  packages/socially-mobile/client/auth/login/login.html | 1 +
@@ -8963,10 +8963,10 @@ index 0000000..9fac81a
 2.3.2 (Apple Git-55)
 
 
-From 9ab60c605d6c72d449e20f396aba21335791acf3 Mon Sep 17 00:00:00 2001
+From 316ddd98c918103b7ab1468f6bc0ce41a1aca554 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 23:17:50 +0200
-Subject: [PATCH 217/244] Step 21.8: Update package.js with the new file
+Subject: [PATCH 217/245] Step 21.8: Update package.js with the new file
 
 ---
  packages/socially-mobile/package.js | 6 ++++++
@@ -8993,10 +8993,10 @@ index c185b97..56df1f5 100644
 2.3.2 (Apple Git-55)
 
 
-From 70cf7bec5f10033dfb3f8d8befa9969dd52e5f36 Mon Sep 17 00:00:00 2001
+From cea5784279ba36b71ba5bddacdf307b05cc351be Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 23:19:48 +0200
-Subject: [PATCH 218/244] Step 21.9: Add modules isolation
+Subject: [PATCH 218/245] Step 21.9: Add modules isolation
 
 ---
  client/lib/app.js | 10 ++++++++--
@@ -9031,10 +9031,10 @@ index 1e6949b..5fec315 100644
 2.3.2 (Apple Git-55)
 
 
-From f8322a497209e89c08af790a2aa04da73fd23de0 Mon Sep 17 00:00:00 2001
+From acfef7b0880db0d5f34a927ced909162a5249c5f Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 23:20:24 +0200
-Subject: [PATCH 219/244] Step 21.10: Add the socially browser package loading
+Subject: [PATCH 219/245] Step 21.10: Add the socially browser package loading
 
 ---
  client/lib/app.js | 3 +++
@@ -9058,10 +9058,10 @@ index 5fec315..b4488fb 100644
 2.3.2 (Apple Git-55)
 
 
-From 5f0f48201bd70c47c97b093ae21fda15d6ae45c8 Mon Sep 17 00:00:00 2001
+From 4f85dcab49f4e75e317f8a173aea99bb715a04db Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 23:25:16 +0200
-Subject: [PATCH 220/244] Step 21.11: Create socially-browser package
+Subject: [PATCH 220/245] Step 21.11: Create socially-browser package
 
 ---
  packages/socially-browser/README.md                |  0
@@ -9149,10 +9149,10 @@ index 0000000..50d5df4
 2.3.2 (Apple Git-55)
 
 
-From 3cc196aa48d529d450e3d99f637115126604485d Mon Sep 17 00:00:00 2001
+From 5e388b415116fd5a99a53176cc52d831b48f5764 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 23:25:26 +0200
-Subject: [PATCH 221/244] Step 21.12: Add the packges to the root project
+Subject: [PATCH 221/245] Step 21.12: Add the packges to the root project
 
 ---
  .meteor/packages | 2 ++
@@ -9186,10 +9186,10 @@ index 2a107c0..85916b6 100644
 2.3.2 (Apple Git-55)
 
 
-From af9d8681fb69b117627b0a66d50ac52517d3a6db Mon Sep 17 00:00:00 2001
+From bc4b65f0e59001e2dae2d084cfb042a5bd118527 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 23:40:26 +0200
-Subject: [PATCH 222/244] Step 21.13: Implement the actual browser login
+Subject: [PATCH 222/245] Step 21.13: Implement the actual browser login
  component
 
 ---
@@ -9235,10 +9235,10 @@ index dc7153b..ac29504 100644
 2.3.2 (Apple Git-55)
 
 
-From cd753a014e70e4b26915e327e1f8c82de4c951ec Mon Sep 17 00:00:00 2001
+From 5413dfc5e436689e07a3ba0d9c17efe9abe9b9b1 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 23:40:34 +0200
-Subject: [PATCH 223/244] Step 21.14: Implement the actual browser login
+Subject: [PATCH 223/245] Step 21.14: Implement the actual browser login
  component view
 
 ---
@@ -9319,10 +9319,10 @@ index aa99eeb..9b3c7d1 100644
 2.3.2 (Apple Git-55)
 
 
-From d4553ccebabff3f614eff414b6d6b6340c260e47 Mon Sep 17 00:00:00 2001
+From 74e10a67e63193cf0d387870e3d70c67b1db7cfd Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 23:40:48 +0200
-Subject: [PATCH 224/244] Step 21.15: Remove the old login component from the
+Subject: [PATCH 224/245] Step 21.15: Remove the old login component from the
  root project
 
 ---
@@ -9440,10 +9440,10 @@ index 9b3c7d1..0000000
 2.3.2 (Apple Git-55)
 
 
-From 19fcf7e0ddcc44ee382050cbb19d7b2405078ccd Mon Sep 17 00:00:00 2001
+From 06a7b237252000b31f18c9d06e49b3c99588a15e Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 5 Dec 2015 13:26:59 +0200
-Subject: [PATCH 225/244] Step 21.16: Add okland:accounts-phone package
+Subject: [PATCH 225/245] Step 21.16: Add okland:accounts-phone package
 
 ---
  .meteor/packages | 1 +
@@ -9475,10 +9475,10 @@ index 85916b6..2b69ad3 100644
 2.3.2 (Apple Git-55)
 
 
-From 1fc1df444ce27963f1f022a04635cee9cee64743 Mon Sep 17 00:00:00 2001
+From d0434445b940270830b2cb3f8ca8a1ebb9a07a75 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 23:47:36 +0200
-Subject: [PATCH 226/244] Step 21.17: Implement the mobile login component
+Subject: [PATCH 226/245] Step 21.17: Implement the mobile login component
 
 ---
  .../client/auth/login/login.component.js           | 23 +++++++++++++++++++++-
@@ -9526,10 +9526,10 @@ index 7a2127e..77510fb 100644
 2.3.2 (Apple Git-55)
 
 
-From b526187e5951afed35f81089c229242a4b4225c7 Mon Sep 17 00:00:00 2001
+From e74d920f08206fa5d9794226dcda8e4ced8d2474 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Wed, 2 Dec 2015 23:47:44 +0200
-Subject: [PATCH 227/244] Step 21.18: Implement the mobile login component view
+Subject: [PATCH 227/245] Step 21.18: Implement the mobile login component view
 
 ---
  .../socially-mobile/client/auth/login/login.html   | 34 +++++++++++++++++++++-
@@ -9580,10 +9580,10 @@ index 9fac81a..0f04865 100644
 2.3.2 (Apple Git-55)
 
 
-From b7ee11376c147815b6b15056e2ab7a3129772c56 Mon Sep 17 00:00:00 2001
+From 3b85a0f3871a7b79848967ca93e295248bde0271 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 5 Dec 2015 13:58:04 +0200
-Subject: [PATCH 228/244] Step 22.1: Move the socially directive to the browser
+Subject: [PATCH 228/245] Step 22.1: Move the socially directive to the browser
  package
 
 ---
@@ -9701,10 +9701,10 @@ index 0000000..2cfe056
 2.3.2 (Apple Git-55)
 
 
-From 1dee4bae21ac3e1304862c2070622dbbaf7cdb30 Mon Sep 17 00:00:00 2001
+From c178163601af5c08e675bd0ac870c6ff0b1039b9 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 5 Dec 2015 13:58:39 +0200
-Subject: [PATCH 229/244] Step 22.2: Update the package.js of the browser
+Subject: [PATCH 229/245] Step 22.2: Update the package.js of the browser
  package
 
 ---
@@ -9730,10 +9730,10 @@ index 50d5df4..4093c55 100644
 2.3.2 (Apple Git-55)
 
 
-From fb1b898bcbf85c6d762cfd717e215d44799d9962 Mon Sep 17 00:00:00 2001
+From 0da1ba7fe149748f0e8c25e78f62ddbe74a71fdb Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 5 Dec 2015 21:12:48 +0200
-Subject: [PATCH 230/244] Step 22.3: Move all browser components to
+Subject: [PATCH 230/245] Step 22.3: Move all browser components to
  socially-browser package
 
 ---
@@ -11737,10 +11737,10 @@ index 0000000..3a4f13f
 2.3.2 (Apple Git-55)
 
 
-From 7a2580dc158c504dc2537263a7b7fa1c873ac6b4 Mon Sep 17 00:00:00 2001
+From aac69b09804951378a2f1635355c8b106e0b433a Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 5 Dec 2015 21:13:02 +0200
-Subject: [PATCH 231/244] Step 22.4: Update the package.js of the brower
+Subject: [PATCH 231/245] Step 22.4: Update the package.js of the brower
  package
 
 ---
@@ -11787,10 +11787,10 @@ index 4093c55..0a27482 100644
 2.3.2 (Apple Git-55)
 
 
-From e95c138461d6124cf4848dcd6611d5ad960cdbe8 Mon Sep 17 00:00:00 2001
+From 0e3c54e5af81cc45d6a41b17ef3c250f83650d84 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 5 Dec 2015 21:13:11 +0200
-Subject: [PATCH 232/244] Step 22.5: Move the filters
+Subject: [PATCH 232/245] Step 22.5: Move the filters
 
 ---
  client/filters/displayName.js         | 17 +++++++++++++++++
@@ -11891,10 +11891,10 @@ index 45a5360..0000000
 2.3.2 (Apple Git-55)
 
 
-From e915771b6f88ca47fa0c65fbd2704fc9e1f46e7b Mon Sep 17 00:00:00 2001
+From edd79fcf74ac8e0d970be26cbfba05093745e52b Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 5 Dec 2015 21:13:58 +0200
-Subject: [PATCH 233/244] Step 22.6: Add driftyco:ionic package
+Subject: [PATCH 233/245] Step 22.6: Add driftyco:ionic package
 
 ---
  packages/socially-mobile/package.js | 1 +
@@ -11916,10 +11916,10 @@ index 56df1f5..a6b3946 100644
 2.3.2 (Apple Git-55)
 
 
-From d4d7d53d59ec2dca15936a6acd6d15c84041c0bb Mon Sep 17 00:00:00 2001
+From 6a8427da24ba077aa0571c8b767cb9c34fd33602 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 5 Dec 2015 21:14:20 +0200
-Subject: [PATCH 234/244] Step 22.7: Add dependency for ionic package
+Subject: [PATCH 234/245] Step 22.7: Add dependency for ionic package
 
 ---
  packages/socially-mobile/client/lib/module.js | 2 +-
@@ -11938,10 +11938,10 @@ index f078654..e87b1c4 100644
 2.3.2 (Apple Git-55)
 
 
-From 16e7ce60d18f806fcb4a080c677827244da2bf04 Mon Sep 17 00:00:00 2001
+From 19091b234afaa314383ba751c4f75b70132fba20 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 5 Dec 2015 21:16:12 +0200
-Subject: [PATCH 235/244] Step 22.8: Add the socially mobile component
+Subject: [PATCH 235/245] Step 22.8: Add the socially mobile component
 
 ---
  .../client/socially/socially.component.js          | 23 ++++++++++++++++++++++
@@ -11982,10 +11982,10 @@ index 0000000..915e63f
 2.3.2 (Apple Git-55)
 
 
-From ebb9070a2d4297efb2d6f7267dc58e0907216dc8 Mon Sep 17 00:00:00 2001
+From ae99737cafc9797090d8b11bc2e6a388e2ee27df Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 5 Dec 2015 21:16:36 +0200
-Subject: [PATCH 236/244] Step 22.9: Add the mobile socially component view
+Subject: [PATCH 236/245] Step 22.9: Add the mobile socially component view
 
 ---
  .meteor/versions                                       | 3 +++
@@ -12035,10 +12035,10 @@ index 0000000..3045103
 2.3.2 (Apple Git-55)
 
 
-From 3dd077dd010e106f64d6161c5fbdb15c5736e24b Mon Sep 17 00:00:00 2001
+From d181070a8bd31754f3b8f5295dcb6c1bb2c5b492 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 5 Dec 2015 21:21:17 +0200
-Subject: [PATCH 237/244] Step 22.10: Update mobile package.js
+Subject: [PATCH 237/245] Step 22.10: Update mobile package.js
 
 ---
  packages/socially-mobile/package.js | 3 ++-
@@ -12062,10 +12062,10 @@ index a6b3946..d6c81f6 100644
 2.3.2 (Apple Git-55)
 
 
-From 8b6802a75b75ecfc0768b9020fc098efd56ea3c3 Mon Sep 17 00:00:00 2001
+From 2770d36044e25bf3f7f156d0cbf1cd1d1fd40a16 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 5 Dec 2015 21:22:52 +0200
-Subject: [PATCH 238/244] Step 22.11: Share the socially component logic!
+Subject: [PATCH 238/245] Step 22.11: Share the socially component logic!
 
 ---
  client/socially/socially.component.js | 30 ++++++++++++++++++++++++++++++
@@ -12113,10 +12113,10 @@ index 0000000..1f263e4
 2.3.2 (Apple Git-55)
 
 
-From 005f819f5e0151cb16d032c7c1c510ac6ae5708f Mon Sep 17 00:00:00 2001
+From cad1b7a8c366e0c25c4bfc4fd7a10344317b6520 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 5 Dec 2015 21:23:18 +0200
-Subject: [PATCH 239/244] Step 22.12: Remove the socially logic from the
+Subject: [PATCH 239/245] Step 22.12: Remove the socially logic from the
  browser package
 
 ---
@@ -12139,10 +12139,10 @@ index 0a27482..2a10b3c 100644
 2.3.2 (Apple Git-55)
 
 
-From 48a93f64e81da0c731609fad4e3b4e8a71811276 Mon Sep 17 00:00:00 2001
+From c051c3bf569a4ee7a7cde9ec0c9c2c3580e57ede Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 5 Dec 2015 21:23:47 +0200
-Subject: [PATCH 240/244] Some cleanup
+Subject: [PATCH 240/245] Some cleanup
 
 ---
  .../client/socially/socially.component.js          | 23 ----------------------
@@ -12215,10 +12215,10 @@ index 915e63f..0000000
 2.3.2 (Apple Git-55)
 
 
-From 51707365864ad608c8165d78b640a12007190f3c Mon Sep 17 00:00:00 2001
+From 8e5b62dfcca3574ece903e613de54394c8bc541e Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 5 Dec 2015 21:46:31 +0200
-Subject: [PATCH 241/244] Step 22.13: Add mobile parties list view
+Subject: [PATCH 241/245] Step 22.13: Add mobile parties list view
 
 ---
  .../client/parties/parties-list/parties-list.html    | 20 ++++++++++++++++++++
@@ -12256,10 +12256,10 @@ index 0000000..7e42f5e
 2.3.2 (Apple Git-55)
 
 
-From 190fa4c6a593a05ff091b64ffdf4b51cc70ae238 Mon Sep 17 00:00:00 2001
+From d11cb504bbd4ddd77db5a7fc6b2b54844baffb35 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 5 Dec 2015 21:46:44 +0200
-Subject: [PATCH 242/244] Step 22.14: Update package.js
+Subject: [PATCH 242/245] Step 22.14: Update package.js
 
 ---
  packages/socially-mobile/package.js | 3 ++-
@@ -12283,10 +12283,10 @@ index d6c81f6..e74d15b 100644
 2.3.2 (Apple Git-55)
 
 
-From a185eaa75374c0c3395f8ac94ea37ce0609e552d Mon Sep 17 00:00:00 2001
+From a5bdc413998d03ad256ee39693e47d493b5abd33 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 5 Dec 2015 21:47:08 +0200
-Subject: [PATCH 243/244] Step 22.15: Move the parties list back to the root
+Subject: [PATCH 243/245] Step 22.15: Move the parties list back to the root
  project
 
 ---
@@ -12688,10 +12688,10 @@ index f7fffcb..0000000
 2.3.2 (Apple Git-55)
 
 
-From 2b4256b10c0d94b192df409bf5a3ff4355d13727 Mon Sep 17 00:00:00 2001
+From a730d5bfa93ae81206369f43910cce435a6803e5 Mon Sep 17 00:00:00 2001
 From: Dotan Simha <dotansimha@gmail.com>
 Date: Sat, 5 Dec 2015 21:47:22 +0200
-Subject: [PATCH 244/244] Step 22.16: Update browser package.js
+Subject: [PATCH 244/245] Step 22.16: Update browser package.js
 
 ---
  packages/socially-browser/package.js | 1 -
@@ -12709,6 +12709,34 @@ index 2a10b3c..2fc6dea 100644
      'client/parties/parties-list/parties-list.html',
      'client/parties/party-details/party-details.component.js',
      'client/parties/party-details/party-details.html',
+-- 
+2.3.2 (Apple Git-55)
+
+
+From 84654233b4d7fa02fe2f77997d6f982eaf4bff5d Mon Sep 17 00:00:00 2001
+From: Dotan Simha <dotansimha@gmail.com>
+Date: Mon, 7 Dec 2015 21:02:49 +0200
+Subject: [PATCH 245/245] Update versions
+
+---
+ .meteor/versions | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/.meteor/versions b/.meteor/versions
+index e99fc22..c707e4d 100644
+--- a/.meteor/versions
++++ b/.meteor/versions
+@@ -6,8 +6,8 @@ accounts-twitter@1.0.6
+ accounts-ui@1.1.6
+ accounts-ui-unstyled@1.1.8
+ alexk111:ng-img-crop@0.3.2
+-angular@1.3.0
+-angular-meteor-data@0.0.8
++angular@1.3.0-rc.3
++angular-meteor-data@0.0.7-rc.3
+ angular-templates@0.0.2
+ angular:angular@1.4.8
+ angular:angular-animate@1.4.8
 -- 
 2.3.2 (Apple Git-55)
 

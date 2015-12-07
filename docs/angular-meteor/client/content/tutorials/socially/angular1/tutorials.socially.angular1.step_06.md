@@ -4,72 +4,52 @@
 In this step, we will implement the party details view, which is displayed when a user clicks on a party in the parties list.
 The user will also be able to change the party's details.
 
-To implement the party details view we will use [$meteor.object](/api/meteorObject) to fetch our data, and update it back in realtime when the user changes it.
+To implement the party details view we will a feature from Angular-Meteor, called `helpers`.
 
-# Controller
+We used `helpers` in the previous component we implemented, but now we will demonstrate how to use it with a single object instead of a Mongo.Collection cursor.
 
-We'll expand the `PartyDetailsCtrl` by using the [$meteor.object](/api/meteorObject) service (add it with Angular 1's dependency injection) to bind the specific party:
+# Implement the component
+
+We'll expand the `partyDetails` by using `helpers` method, and we will use `findOne` method from the Mongo.Collection, which returns a single object.
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="6.1"}}
 
-We are sending $meteor.object a Mongo collection and the Id of the object we want to bind to.
+In our example we find our relevant party by it's id, and used a regular MongoDB syntax to create our `findOne` query, which explained in Meteor's [collection.findOne](http://docs.meteor.com/#/full/findone) documentation.
 
-$meteor.object returns an [AngularMeteorObject](/api/meteorObject) that contains the data.
+So after declaring this helpers, we can just use `this.party` in our component's controller, or `partyDetails.party` in our HTML view.
 
-$meteor.object accepts a selector as the second argument.
+# Component template
 
-That selector can be a Mongo Selector, Object ID, or String.
-
-In our example we used the Object's ID but it can also come in the form of `{field: query}`.
-
-$meteor.object will find the first document that matches the selector,
-as directed by the sort and skip options, exactly like Meteor's [collection.findOne](http://docs.meteor.com/#/full/findone)
-
-
-# Template
-
-In `party-details.html` let's replace the binding to the `partyId` with a binding to `party.name` and `party.description`:
+In `party-details.html` let's replace the binding to the `partyDetails.partyId` with a binding to `partyDetails.party.name` and `partyDetails.party.description`:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="6.2"}}
 
-Now, when you run the app, navigate into a party's page, and change the inputs, the server and all the clients update immediately.
-No save buttons, no round trips, it just works.
+We used `ng-model` and created a form with the party details, now we just missing the "Save" button!
 
-# Classic Save and Cancel buttons
+# Add Save logic
 
-In case you don't want to use the live editing that angular-meteor provides and want to present to your users a classic "Save" "Cancel" form, you can do that as well.
-
-First, let's change our template:
+First, let's add a button, and we will use `ng-click` with the name of the method that we will later implement:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="6.3"}}
 
-Now let's move to the controller.
+> We also added a "Back" button with uses `ui-sref` attribute, which is a shorthand for creating a link for a state.
 
-First, in the call to `$meteor.object` set the 3rd parameter to `false` so it won't auto-save the object on every change:
+And now let's implement the logic of the "Save" button on the controller:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="6.4"}}
 
-Now let's add the functions that handle the button clicks:
+We used `Parties.update` method which is a method that comes from the Mongo.Collection object, we first locate our party using it's id, just like we did with `findOne`, then we used `$set` to update the actual relevant fields.
+
+We can also handle success or fail when using `Parties.update` by adding a callback as the last argument, for example:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="6.5"}}
-
-As you can see, $meteor.object returns an object from type [AngularMeteorObject](/api/meteorObject) which contains 2 functions - `save` and `reset`.
-
-**save()** - saves the current value of the object to the server.
-**reset()** - resets the current value of the object from the server.
-
-Your controller should look like this:
-
-{{> DiffBox tutorialName="meteor-angular1-socially" step="6.6"}}
-
-That's it!
-
-Simple and easy.
 
 
 # Summary
 
-We've seen the power of 3-way binding between the DOM, Angular 1 and Meteor.  In collections and in objects.
+We've seen the power of using Meteor.Collection API and how we can get single object from the collections.
+
+We also learned how to update an object with the user's data!
 
 Let's move on to provide some order and structure in our application.
 
