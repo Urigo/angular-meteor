@@ -35,27 +35,27 @@ Don't forget to add the email package to your project in the command line:
 
 Now let's call that method from the client.
 
-Add a scope method called invite:
-
-{{> DiffBox tutorialName="meteor-angular1-socially" step="14.3"}}
-
-* Parameter 1 - Meteor method name
-* Parameter 2 and 3 - The Meteor method's arguments
-* Return value - A promise
-
-The promise we resolve with 'then' which defines 2 parameters:
-
-* Parameter 1 - A function that handles success
-* Parameter 2 - A function that handles failure
-
-Now let's add a button to invite each user we want. Edit the users lists in the partyDetails template to look like this:
+Add a method to the component called `invite`:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="14.4"}}
 
-Now that we have the invite function working, we also want to publish the parties to the invited users.
-Let's add that permission to the publish parties method (and the Counts!):
+We just used a regular Meteor API to call a method, inside our component.
+
+Note that we also used another parameter, a callback function that called when Meteor is done with our method.
+
+The callback have 2 parameters:
+
+* Parameter 1 - `error` - which is `undefined` when the call succeeded.
+* Parameter 2 - `result` - which is the return value from the server method.
+
+Now let's add a button to invite each user we want. Edit the users lists in the `partyDetails` component to look like this:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="14.5"}}
+
+Now that we have the invite function working, we also want to publish the parties to the invited users.
+Let's add that permission to the publish parties method:
+
+{{> DiffBox tutorialName="meteor-angular1-socially" step="14.6"}}
 
 Great!
 
@@ -64,55 +64,55 @@ Now test the app.  Create a private party with user1.  Then invite user2. Log in
 
 Now let's add the RSVP functionality so invited users can respond to invitations.
 
-First let's add a Meteor.method to `parties.js` in the model folder (remember to place it as a property inside the Meteor.methods object):
+First let's add a `Meteor.method   to `parties.js` in the model folder (remember to place it as a property inside the `Meteor.methods` object):
 
-{{> DiffBox tutorialName="meteor-angular1-socially" step="14.6"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="14.7"}}
 
 The function gets the party's id and the response ('yes', 'maybe' or 'no').
 
 Like the invite method, first we check for all kinds of validations, then we do the wanted logic.
 
-Now let's call that function from the partiesList.
-Add an rsvp scope function to the partiesListCtrl in `partiesList.js`:
+Now let's call that function from the `partiesList` component!
 
-{{> DiffBox tutorialName="meteor-angular1-socially" step="14.7"}}
-
-and let's add action buttons to call the right rsvp in the HTML.
-
-Add this code into `parties-list.html` inside the parties list itself (inside the ng-repeat):
+Add the `rsvp` method to the `partiesList` component:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="14.8"}}
 
-Now let's display for each party who is coming.
+and let's add action buttons to call the right rsvp in the HTML.
 
-Just after the code you just added (still inside the parties dir-paginate) add the following code:
+Add this code into `parties-list.html` inside the parties list itself (inside the `ng-repeat`):
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="14.9"}}
 
-First, take a look at the use of filter with length to find how many people responded with each response type.
+Now let's display for each party who is coming.
 
-Then, look at using ng-repeat inside a dir-paginate - ng-repeat on RSVPs inside party from the parties dir-paginate.
-
-Now let's add a list of the users who haven't responded yet just below the code we just added:
+Just after the code you just added (still inside the parties `dir-paginate`) add the following code:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="14.10"}}
 
-Again, an ng-repeat inside a dir-paginate.  This time we are calling a function that will give us all the users who haven't responded to that specific party.
-Add that function inside the partiesListCtrl in the `partiesList.js` file:
+And we will need to implement the `getUserById` method:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="14.11"}}
 
-Here we are using underscore's `_.filter`, `_.contains` and `_.findWhere` to extract the users who are invited to the party but are not exist in the rsvps array.
+First, take a look at the use of filter with length to find how many people responded with each response type.
 
-Notice we are doing this check on $scope.users but we haven't initialized it yet in this controller. So add this code as well:
+Then, look at using ng-repeat inside a `dir-paginate` - `ng-repeat` on RSVPs inside party from the parties `dir-paginate`.
 
-Change
-
-    $meteor.subscribe('users');
-
-With:
+Now let's add a list of the users who haven't responded yet just below the code we just added:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="14.12"}}
+
+Again, an `ng-repeat` inside a `dir-paginate`.  This time we are calling a function that will give us all the users who haven't responded to that specific party.
+
+Add that function inside the `partiesList` component:
+
+{{> DiffBox tutorialName="meteor-angular1-socially" step="14.13"}}
+
+Here we are using underscore's `_.filter`, `_.contains` and `_.findWhere` to extract the users who are invited to the party but are not exist in the rsvps array.
+
+And now let's add the users collection to the component:
+
+{{> DiffBox tutorialName="meteor-angular1-socially" step="14.14"}}
 
 # Summary
 
