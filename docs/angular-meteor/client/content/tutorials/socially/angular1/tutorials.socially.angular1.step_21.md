@@ -61,29 +61,27 @@ We make sure that AngularJS and angular-meteor are loaded before our package by 
 
 ### Angular Mobile Module 
 
-
 In this part we will create an Angular module that contains a login route and specific html for mobile. 
-We are preserving the same folder structure as we had in the main project, so the files will be located under `client/lib/`. 
+
+We are preserving the same folder structure as we had in the main project, so the files will be located under `client/lib/` inside our pagckage. 
+
 Here are the steps: 
 
-
-Create the angualr module and name it `socially.mobile`:
+Create the AngularJS module and name it `socially.mobile`:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="21.5"}}
 
-Add a route for the login in the client side using the `$stateProvider` like we used to, and add only the login route.
+Now let's create a new component for the `login`, under our package:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="21.6"}}
 
-Create the route's view; for now we will just use a placeholder that we will implement later.
+And it's view, just a dummy view for now:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="21.7"}}
 
 ### Add module's files to the package
 
-We need to tell our `package.js` to use the files that we created above. 
-- JS file will are declared using `api.addFiles` 
-- AngularJS template files (`.html`) are declared using `api.addAssets`.
+We need to tell our `package.js` to use the files that we created above, so we will use `api.addFiles`.
 
 We also need to add the platform declaration, using the last argument of these functions.
 
@@ -91,24 +89,21 @@ We also need to add the platform declaration, using the last argument of these f
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="21.8"}}
 
-The original route from the root project is no longer needed and can be removed:
-
-{{> DiffBox tutorialName="meteor-angular1-socially" step="21.9"}}
-
 Last, we want to load the `socially.mobile` module only in Cordova environment. We can update `app.js` to load the module only when running inside Cordova (`Meteor.isCordova`):
 
-{{> DiffBox tutorialName="meteor-angular1-socially" step="21.10"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="21.9"}}
 
 Let's try to run it inside an emulator (I used iOS Simulator on Mac OS X), it should look like that:
 
 {{tutorialImage 'angular1' 'step21_1.png' 500}}
 
-Great! Seems that it is working: 
+Great! Seems that it is working!
 
-### Angular Web Module 
+### Angular Browser Module 
+
 We will do a similar process to add support for browser package. The first step is to load another AngularJS module when we run in the browser:
 
-{{> DiffBox tutorialName="meteor-angular1-socially" step="21.11"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="21.10"}}
 
 We will create a package again, named `socially-browser`, and remove the default files:
 
@@ -116,66 +111,56 @@ We will create a package again, named `socially-browser`, and remove the default
 
 Make some modifications to the `package.js` file, very similar to the mobile package:
 
-{{> DiffBox tutorialName="meteor-angular1-socially" step="21.12"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="21.11" filename="packages/socially-browser/package.js"}}
 
 > Note that we load the files only in the `web.browser` platform.
 
 Create the `socially.browser` module:
 
-{{> DiffBox tutorialName="meteor-angular1-socially" step="21.13"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="21.11" filename="packages/socially-browser/client/lib/module.js"}}
 
-Add a routes file, which defines the routes that will load only in the browser:
+Add the browser login stub view:
 
-{{> DiffBox tutorialName="meteor-angular1-socially" step="21.14"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="21.11" filename="packages/socially-browser/client/auth/login/login.html"}}
 
-Add the web browser stub view:
+And the stub component:
 
-{{> DiffBox tutorialName="meteor-angular1-socially" step="21.15"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="21.11" filename="packages/socially-browser/client/auth/login/login.component.js"}}
 
 Add the browser package to our project:
 
   $ meteor add socially-browser
 
-### Angular Web Code  (reuse existing)
+### Implement Browser Login
 
 We will use the existing code for our web login. That means 2 things: 
-- Copying the original login view file from `client/users/views/login.html` to our package view (`login-browser.html`):
+- Copying the original login view file from `client/users/login/login.html` to our package view (`login.html`):
 
-{{> DiffBox tutorialName="meteor-angular1-socially" step="21.17"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="21.14"}}
 
-- Moving the current `LoginCtrl` from `client/users/controllers/login.js` to our package, and update the module's name for this controller:
+- Moving the current `login` component from `client/users/login/login.component.js` to our package, and update the module's name for this component:
 
-{{> DiffBox tutorialName="meteor-angular1-socially" step="21.18"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="21.13"}}
 
-> We can also delete `client/users/views/login.html` file. It is no longer needed!
+> We can also delete `client/users/login/login.html` and `client/users/login/login.component.js` files. It is no longer needed!
 
-We will load the `LoginCtrl` to our package definition:
-
-{{> DiffBox tutorialName="meteor-angular1-socially" step="21.20"}}
-
-### Angular Mobile Code 
+### Implement Mobile Login
 
 We need to take care of the login view for mobile only. We will add a view with two steps: 
 - Capture the user's phone number 
-- Enter the SMS code verification:
-
-{{> DiffBox tutorialName="meteor-angular1-socially" step="21.21"}}
+- Enter the SMS code verification
 
 We will use an external package that extends Meteor's Accounts, called `accounts-phone` that verifies phone number with SMS message, so let's add it:
 
-  `$ meteor add okland:accounts-phone`
+    $ meteor add okland:accounts-phone
 
-And now we will add a `LoginCtrl` that uses Accounts-Phone package to verify our phone number:
+And now we will add to the mobile package a `login` component logic that uses Accounts-Phone package to verify our phone number:
 
-{{> DiffBox tutorialName="meteor-angular1-socially" step="21.23"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="21.17"}}
 
 > Note that in development mode - the SMS will not sent - and the verification code will be printed to the Meteor log.
 
-Now we need to load the new `LoginCtrl` in the `package.js`:
-
-{{> DiffBox tutorialName="meteor-angular1-socially" step="21.24"}}
-
-And that's it! we got a different view, route and module for each platform!
+And that's it! we got a different component for each platform!
 
 ## Summary
 
