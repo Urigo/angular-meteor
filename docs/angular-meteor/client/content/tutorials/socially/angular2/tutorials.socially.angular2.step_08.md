@@ -102,7 +102,7 @@ wraps around all Meteor Accounts API (login with password and social logins feat
 and exports two services for the usage in Angular 2. Besides that, it has two convenient annotations: `InjectUser` and `RequireUser`.
 The second one we'll touch a bit a later, but the first one is exactly what we need.
 
-If you place `InjectUser` above the PartyDetails it will inject a new user property to it:
+If you place `InjectUser` above the PartiesForm it will inject a new user property:
 
 __`client/parties-form/parties-form.ts`__:
 
@@ -118,13 +118,16 @@ __`client/parties-form/parties-form.ts`__:
       directives: [FORM_DIRECTIVES, AccountsUI]
     })
     @InjectUser()
-    export class PartiesForm {
+    export class PartiesForm extends MeteorComponent {
       constructor() {
+        super();
         ...
         console.log(this.user);
       }
       ...
     }
+
+> Note: You'll have to extend `MeteorComponent` to make the user property reactive.
 
 Call `this.user` and you will see that, it returns same object as `Meteor.user()`.
 New property is reactive and can be used in any template, for example:
