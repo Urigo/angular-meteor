@@ -93,7 +93,6 @@ describe('angular-meteor', function () {
         });
 
         expect(reactiveContextInstance.stoppables.length).toBe(1);
-        expect(reactiveContextInstance.context['myHelper']).not.toBe(testObject);
         expect(reactiveContextInstance.context['myHelper']).toEqual(testObject);
       });
 
@@ -107,7 +106,6 @@ describe('angular-meteor', function () {
         });
 
         expect(reactiveContextInstance.stoppables.length).toBe(1);
-        expect(reactiveContextInstance.context['myHelper']).not.toBe(testArray);
         expect(reactiveContextInstance.context['myHelper']).toEqual(testArray);
       });
 
@@ -302,27 +300,6 @@ describe('angular-meteor', function () {
         reactiveContextInstance.stop();
 
         expect(computationSpy).toHaveBeenCalled();
-      });
-
-      it('Should trigger the the property change when update values', function() {
-        var data = {
-          _id: testObjectId,
-          prop1: 'T'
-        };
-
-        reactiveContextInstance.helpers({
-          myHelper: function() {
-            return bigCollection.find({});
-          }
-        });
-
-        var cbSpy = jasmine.createSpy();
-
-        reactiveContextInstance.onPropertyChanged(cbSpy);
-
-        bigCollection.insert(data);
-
-        expect(cbSpy).toHaveBeenCalled();
       });
 
       it('Should defined reactive property on the context', function() {

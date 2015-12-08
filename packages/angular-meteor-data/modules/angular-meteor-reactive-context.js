@@ -105,6 +105,9 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
 
                 comp.onInvalidate(() => {
                   stoppableObservation.stop();
+                  while (this.context[prop.key].length > 0) {
+                    this.context[prop.key].pop();
+                  }
                 });
               }
               else {
