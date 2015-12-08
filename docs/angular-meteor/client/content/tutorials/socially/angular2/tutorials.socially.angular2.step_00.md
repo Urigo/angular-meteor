@@ -202,6 +202,9 @@ So lets manually import our `app` module and add `<app>` tag to the `index.html`
 
 This will load HTML and JavaScript code necessary to launch our app.
 
+> Note that it's better to wrap this importing line of code in the `Meteor.start`, which
+> guarantees app loading at the appropriate time, when all necessary parts are ready.
+
 Importing root module every time looks like a repetitive task.
 Here comes good news — the Angular2 package recognizes the file named `app.ts`.
 If you have one in the app root folder, the package will import it for you without even having to ask.

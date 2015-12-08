@@ -2,12 +2,12 @@
 {{> downloadPreviousStep stepName="step_07"}} 
 
 In this section we'll look at how to implement security for an app
-using Meteor and Angular2 API together.
+using Meteor and Angular 2 API together.
 
 For the Socially app, we are going to add a simple login/password login in order to
 allow creation or updating parties for logged-in users only.
 Also, we are going to explore how we can restrict access to views based on
-user permissions using Angular2 routing API.
+user permissions using Angular 2 routing API.
 
 # User Accounts
 
