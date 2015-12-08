@@ -11,34 +11,39 @@ First, let's learn about [ng-show](https://docs.angularjs.org/api/ng/directive/n
 So one thing we want to hide and show is the form for creating a new party. If a user is not logged in, they can't create a party, so why displaying the form for them?
 If the user is not logged in, we want to display a message saying they need to log in to create a new party.
 
-In `parties-list.html` add a ng-show directive to the form like that:
+In `parties-list.html` add a `ng-show` directive to the form like that:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="15.1"}}
 
-Note that `$root.currentUser` is the $rootScope variable that we use that is bound to the current logged-in user.
-
-If it is undefined, this means that there is no logged-in user.  So only if '$root.currentUser' exists will the form will be shown.
-
-Then right after the form, add this HTML:
+Now, we need to add the ability to detect if there is a user logged in at the moment, so let's add a helper for that:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="15.2"}}
 
-That is exactly the opposite - if `$root.currentUser` exists or we're in the processing of logging in, hide that div. Note that this statement is equivalent to `ng-show="!$root.currentUser && !$root.loggingIn"`.
-
-Now add the same to the RSVP buttons:
+Then right after the form, add this HTML:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="15.3"}}
 
-Add let's add this the the end of the RSVP buttons:
+That is exactly the opposite - if `isLoggedIn` is true or we're in the processing of logging in, hide that div.
+
+Now add the same to the RSVP buttons:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="15.4"}}
 
-Next thing we want to hide is the 'delete party' option, in case the logged-in user is not the party's owner.
-Lets add ng-show to the delete button like that:
+Add let's add this the the end of the RSVP buttons:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="15.5"}}
 
+Next thing we want to hide is the 'delete party' option, in case the logged-in user is not the party's owner.
+
+Lets add ng-show to the delete button like that:
+
+{{> DiffBox tutorialName="meteor-angular1-socially" step="15.6"}}
+
 In here you can see that `ng-show` can get a statement, in our case - the user exists (logged in) and is also the party's owner.
+
+But we just missing the helper we used:
+
+{{> DiffBox tutorialName="meteor-angular1-socially" step="15.7"}}
 
 
 # ng-if
@@ -48,7 +53,7 @@ is that `ng-show` hides the element by changing the display css property and `ng
 
 So let's use `ng-if` to hide the outstanding invitations from a party, if the party is public (everyone is invited!):
 
-{{> DiffBox tutorialName="meteor-angular1-socially" step="15.6"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="15.8"}}
 
 # Assigning a function
 
@@ -56,26 +61,31 @@ Now lets hide the 'Users to invite' inside `party-details.html` in case the user
 
 To do that we will create a scope function that returns a boolean and associate it with `ng-show`:
 
-Create a new function inside partyDetailsCtrl inside the `partyDetails.js` file named `canInvite`:
+Create a new function inside `partyDetails` component, called `canInvite`:
 
-{{> DiffBox tutorialName="meteor-angular1-socially" step="15.7"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="15.9"}}
 
 and add the `ng-show` to the `ul` in `party-details.html`, and lets add a `li` that tells the user that everyone is already invited, if that is the case:
 
-{{> DiffBox tutorialName="meteor-angular1-socially" step="15.8"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="15.10"}}
 
 Here, we are taking the result of the uninvited users and checking for its length.
 
+But we are just missing the helpers in this component, so let's add it here as well:
+
+{{> DiffBox tutorialName="meteor-angular1-socially" step="15.11"}}
+
+
 # ng-disabled
 
-Now lets disable the partyDetails input fields in case the user doesn't have permission to change them (currently, the server is stopping the user, but there is no visual feedback aside from the server overriding the local edit immediately after):
+Now lets disable the `partyDetails` input fields in case the user doesn't have permission to change them (currently, the server is stopping the user, but there is no visual feedback aside from the server overriding the local edit immediately after):
 
-{{> DiffBox tutorialName="meteor-angular1-socially" step="15.9"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="15.12"}}
 
 # Summary
 
 So now our example looks much better after we hide things based on the current situation.
 
-In the next chapter we will add some CSS and styling to our app.
+In the next chapters we will add Google Maps and some CSS and styling to our app.
 
 {{/template}}
