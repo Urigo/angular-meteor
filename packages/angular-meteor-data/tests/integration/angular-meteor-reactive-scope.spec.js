@@ -127,6 +127,14 @@ describe('angular-meteor', function () {
       expect(meteorSubscribeSpy).toHaveBeenCalledWith('test', 'a', 'b', 10, 100);
     });
 
+    it('Should subscribe without subscribe function', function () {
+      var meteorSubscribeSpy = spyOn(Meteor, 'subscribe');
+
+      testScope.subscribe('test');
+
+      expect(meteorSubscribeSpy).toHaveBeenCalledWith('test');
+    })
+
     it('Should call stop method of autorun when destroying the scope', function() {
       var stoppableSpy = jasmine.createSpy('stop');
       spyOn(Meteor, 'autorun').and.returnValue({stop: stoppableSpy});
