@@ -10,13 +10,18 @@ Simply type in the command line of your app directory
 
 Once you answer all of the prompts and the upload completes, you can go to `http://myappname.meteor.com` and use your app from anywhere.
 
-Try opening the app on multiple devices such as your phone and your friend's computer.
-Add, remove, and invite some parties and you will see that the UI of your app is really fast.
-That's because Meteor doesn't wait for the server to respond before updating the interface - thanks to Meteor's latency compensation mechanism.
+Now try to play around with the deployed app on different devices.
+This might be in a browser on your mobile phone, a laptop or a stationary computer.
+
+Add, remove and change some parties and you will see that all opened versions of the app update
+almost simultaneously on different devices. UI updates of a Meteor app is fast, user-friendly and reliable,
+thanks to WebSockets and different complex concepts realized in Meteor, like Meteor Latency Compensation.
 
 # Summary
 
 Congratulations, you've made a working app that you can now use with your friends!
+
+You can download source code of the app up to this point [here](https://github.com/Urigo/meteor-angular2.0-socially/archive/step_10.zip).
 
 Now, we'll take a detour to see that while we were building a web app, we also created a pretty nice mobile app along the way.
 
