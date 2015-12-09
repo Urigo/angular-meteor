@@ -1,53 +1,54 @@
-/**
- * Created by netanel on 29/12/14.
- */
-var angularMeteorReactiveScope = angular.module('angular-meteor.reactive-scope', []);
+var angularMeteorReactiveScope = angular.module('angular-meteor.reactive-scope', [
+  'angular-meteor.reactive'
+]);
 
-angularMeteorReactiveScope.run(['$rootScope', '$parse', function($rootScope, $parse) {
-  Object.getPrototypeOf($rootScope).getReactively = function(property, objectEquality) {
-    var self = this;
-    var getValue = $parse(property);
-    objectEquality = !!objectEquality;
-
-    if (!self.hasOwnProperty('$$trackerDeps')) {
-      self.$$trackerDeps = {};
+angularMeteorReactiveScope.run(['$rootScope', '$reactive', '$parse', function ($rootScope, $reactive, $parse) {
+  class ReactiveScope {
+    helpers (def) {
+      this.stopOnDestroy($reactive(this).helpers(def));
     }
 
-    if (!self.$$trackerDeps[property]) {
-      self.$$trackerDeps[property] = new Tracker.Dependency();
-
-      self.$watch(function() {
-        return getValue(self)
-      }, function(newVal, oldVal) {
-        if (newVal !== oldVal) {
-          self.$$trackerDeps[property].changed();
-        }
-      }, objectEquality);
+    autorun(fn) {
+      return this.stopOnDestroy(Meteor.autorun(fn));
     }
 
-    self.$$trackerDeps[property].depend();
-
-    return getValue(self);
-  };
-  Object.getPrototypeOf($rootScope).getCollectionReactively = function(property) {
-    var self = this;
-    var getValue = $parse(property);
-
-
-    if (!self.hasOwnProperty('$$trackerDeps')) {
-      self.$$trackerDeps = {};
-    }
-
-    if (!self.$$trackerDeps[property]) {
-      self.$$trackerDeps[property] = new Tracker.Dependency();
-
-      self.$watchCollection(property, function() {
-        self.$$trackerDeps[property].changed();
+    subscribe (name, fn = angular.noop) {
+      return this.autorun(() => {
+        let args = fn() || [];
+        this.stopOnDestroy(Meteor.subscribe(name, ...args));
       });
     }
 
-    self.$$trackerDeps[property].depend();
+    getReactively (property, objectEquality) {
+      if (!this.$$trackerDeps) {
+        this.$$trackerDeps = {};
+      }
 
-    return getValue(self);
-  };
+      if (angular.isUndefined(objectEquality)) {
+        objectEquality = false;
+      }
+
+      if (!this.$$trackerDeps[property]) {
+        this.$$trackerDeps[property] = new Tracker.Dependency();
+
+        this.$watch(property, (newVal, oldVal) => {
+            if (newVal !== oldVal) {
+              this.$$trackerDeps[property].changed();
+            }
+          }, objectEquality);
+      }
+
+      this.$$trackerDeps[property].depend();
+
+      return $parse(property)(this);
+    }
+
+    stopOnDestroy(stoppable) {
+      this.$on('$destroy', () => stoppable.stop());
+
+      return stoppable;
+    }
+  }
+
+  angular.extend(Object.getPrototypeOf($rootScope), ReactiveScope.prototype);
 }]);

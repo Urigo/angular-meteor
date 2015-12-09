@@ -77,20 +77,19 @@ so it will look like this:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="13.5"}}
 
-and define the creator scope function in the partiesListCtrl in `partiesList.js`:
+And define `getPartyCreator` function in the `partiesList` component:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="13.6"}}
 
-* Remember to add `$rootScope` to the controller's dependency injection
-
 As you can see, we are using the `Meteor.users` collection here but we haven't made sure that we are subscribing to it
-(If we visited the partyDetails controller before getting here, partyDetails controller would subscribe to the Meteor.users collection,
+(If we visited the `partyDetails` controller before getting here, `partyDetails` controller would subscribe to the Meteor.users collection,
 but if we weren't, we would get an empty array in Meteor.users).
-So let's add a subscription to Meteor.users in the list controller as well:
+
+So let's add a subscription to `users` in the list component as well:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="13.7"}}
 
-Now we get the user object to the HTML. But we want his name, so let's put the displayName filter on that as well:
+Now we get the user object to the HTML. But we want his name, so let's put the `displayName` filter on that as well:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="13.8"}}
 

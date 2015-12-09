@@ -53,8 +53,7 @@ Now we can start building our app.
 
 Create a new `index.html` file and place this code inside. Then run the app again.
 
-
-{{> DiffBox tutorialName="meteor-angular1-socially" step="0.4"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="0.3"}}
 
 
 Note that there is no `<html>` tag and no `<head>` tag - it's very simple.
@@ -68,6 +67,7 @@ Concatenation means merging the content of all `HTML`, `HEAD` and `BODY` tags fo
 So in our case, Meteor found our `index.html` file, found the `BODY` tag inside and added it's content to the `BODY` tag of the main generated file.
 
 > (right-click -> inspect element on the page to see the generated file)
+
 
 # Adding Angular 1
 
@@ -95,7 +95,6 @@ That's it! Now we can use Angular 1's power in our Meteor app.
 To start simple, create a new file called `main.html` under the main folder, this will be our main `HTML` template page.
 
 Then move the `p` tag into it:
-
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="0.6"}}
 
@@ -125,26 +124,21 @@ But we need Angular 1's power only in the client side, so how can we do that?
 
 There are a few ways to tell Meteor to run code only on the client/server/phone side, let's start with the simplest way - [Meteor.isClient](http://docs.meteor.com/#/full/meteor_isclient) variable.
 
+Everything inside this `if` statement will only run on the client side.
+
+And let's continue defining our Angular 1 application module. Give it the name `socially` and add `angular-meteor` module as a dependency:
+
 {{> DiffBox tutorialName="meteor-angular1-socially" step="0.8"}}
-
-Now everything inside this `if` statement will only run on the client side.
-
-Let's continue defining our Angular 1 application module. Give it the name `socially` and add `angular-meteor` module as a dependency:
-
-{{> DiffBox tutorialName="meteor-angular1-socially" step="0.9"}}
 
 And use the same application name in the `ng-app` directive in `index.html`:
 
-{{> DiffBox tutorialName="meteor-angular1-socially" step="0.10"}}
-
+{{> DiffBox tutorialName="meteor-angular1-socially" step="0.9"}}
 
 Now run the app.
 
 Everything is the same, so now inside our `main.html` let's use Angular 1:
 
-
-{{> DiffBox tutorialName="meteor-angular1-socially" step="0.11"}}
-
+{{> DiffBox tutorialName="meteor-angular1-socially" step="0.10"}}
 
 Run the app again and the screen should look like this:
 

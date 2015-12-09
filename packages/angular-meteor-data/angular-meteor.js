@@ -8,7 +8,8 @@ var angularMeteor = angular.module('angular-meteor', [
   'angular-meteor.session',
   'angular-meteor.reactive-scope',
   'angular-meteor.utils',
-  'angular-meteor.camera'
+  'angular-meteor.camera',
+  'angular-meteor.reactive'
 ]);
 
 angularMeteor.config([

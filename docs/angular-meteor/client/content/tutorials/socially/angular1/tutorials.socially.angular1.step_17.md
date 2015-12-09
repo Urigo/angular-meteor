@@ -38,7 +38,7 @@ Let's add Bootstrap Meteor package to our project:
 
 Now let's start organizing by putting the Home link and the login buttons inside a navbar and the rest of the content inside a Bootstrap .container class.
 
-Inside `index.html` surround the H1 and the loginButton with a header like that:
+Inside `index.html` surround the `h1` and the `login-buttons` with a header like that:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="17.3"}}
 
@@ -59,19 +59,11 @@ Now go to `main.less` and add a different background color to the navbar:
 {{> DiffBox tutorialName="meteor-angular1-socially" step="17.5"}}
 
 
-Notice that we nested the .navbar inside the body. This is part of the [LESS syntax for nested rules](http://lesscss.org/features/#features-overview-feature-nested-rules).
+Notice that we nested the `.navbar` inside the body. This is part of the [LESS syntax for nested rules](http://lesscss.org/features/#features-overview-feature-nested-rules).
 
 # Designing the parties list
 
 Now we are going to design the parties list.
-
-Like the Javascript and HTML files, we want the specific styling of parties to be inside the 'client->parties' folder so create a folder named styles until the parties folder.
-
-Inside that folder create a new file named 'partiesList.less'.
-
-The first thing we need to do in a new LESS file is to import it from the main file:
-
-{{> DiffBox tutorialName="meteor-angular1-socially" step="17.7"}}
 
 Now we can start writing specific LESS code inside that file.
 
@@ -83,35 +75,45 @@ First, `angular-ui-bootstrap`, in order to to that, let's run this commands:
 
 Now, let's start with some cool fonts and some CSS changes to make the `index.html` look better:
 
-{{> DiffBox tutorialName="meteor-angular1-socially" step="17.9"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="17.7"}}
 
 And verify that we have `ui.bootstrap` dependency in the module definition, because we will use `$modal` service later.
 
+{{> DiffBox tutorialName="meteor-angular1-socially" step="17.8"}}
+
+Now, we will move the logic of new party creation into a new component, so lets create it first:
+
+{{> DiffBox tutorialName="meteor-angular1-socially" step="17.9"}}
+
+And it's view:
+
 {{> DiffBox tutorialName="meteor-angular1-socially" step="17.10"}}
 
-Now, we will move the logic of new party creation into a new service for better coding, so let's create a new controller named `AddNewPartyCtrl` and the HTML view for that. We will later add the logic to open this view inside a modal.
+Now we will make some changes in the `partiesList` component view in order to match the new structure with the `$modal`, and add some style to the Google Maps object.
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="17.11"}}
 
+Now, let's update the view of the parties list and match the new logic - we will use `$modal` to open the new party page, and change some of the layout using Bootstrap's grid system.
+
 {{> DiffBox tutorialName="meteor-angular1-socially" step="17.12"}}
 
-Now we will make some changes in the `PartiesCtrl` in order to match the new structure with the `$modal`, and add some style to the Google Maps object.
+I will add new some CSS rules to make all that new structure look better.
 
-{{> DiffBox tutorialName="meteor-angular1-socially" step="17.14"}}
-
-Now, let's update the view of the parties list and match the new logic - we will use `$modal` to open the new party page, and change some of the layout using Bootstrap's grid system.
+Now, let's add some variables to defined our colors in the `main.less` file:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="17.13"}}
 
-I will add new some CSS rules to make all that new structure look better.
-The style rules are located in `.less` files, and the actual changes that make are available in [this commit to view](https://github.com/Urigo/meteor-angular-socially/commit/c189d59bb71aac2a60a9fc5db4f2a00f0239c68b), because the CSS is not the most relevant part in this tutorial.
+Now let's make some changes in the party details view to use Bootstrap:
 
-And after creating those style, let's update the main `less` file to use those, and add some LESS variables to control the basic colors of the application.
+{{> DiffBox tutorialName="meteor-angular1-socially" step="17.14"}}
 
-{{> DiffBox tutorialName="meteor-angular1-socially" step="17.16"}}
+And let's add the missing `currentUserId` helper:
 
-So now we have a good looking page with some style, the only thing we need to do is to update the page with the party details.
-Let's modify the controller and the view to fit the new structure.
+{{> DiffBox tutorialName="meteor-angular1-socially" step="17.15"}}
+
+The style rules are located in `.less` files for each component, and the actual changes that make are available in [this commit to view](https://github.com/Urigo/meteor-angular-socially/commit/a261d7f1126cdde64194dc2fdcc7946940c9a56d), because the CSS is not the most relevant part in this tutorial.
+
+And now let's include those file in the `main.less`:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="17.17"}}
 
