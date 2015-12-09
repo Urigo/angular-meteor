@@ -5,7 +5,7 @@ You may have noticed that all available parties were always shown on the page
 at the time, independently had they been added by a logged-in user or
 anonymously, for example.
 
-In future versions of our app, we'll probably want to have a RSVP feature for parties,
+In the future versions of our app, we'll probably want to have a RSVP feature for parties,
 which will require to show simultaneously only public parties and parties current user has been invited to.
 
 In this step we are going to learn how we can restrict data flow from the server side
