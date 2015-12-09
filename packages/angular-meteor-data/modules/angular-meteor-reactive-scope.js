@@ -12,9 +12,10 @@ angularMeteorReactiveScope.run(['$rootScope', '$reactive', '$parse', function ($
       return this.stopOnDestroy(Meteor.autorun(fn));
     }
 
-    subscribe (name, fn) {
+    subscribe (name, fn = angular.noop) {
       return this.autorun(() => {
-        this.stopOnDestroy(Meteor.subscribe(name, ...(fn() || [])));
+        let args = fn() || [];
+        this.stopOnDestroy(Meteor.subscribe(name, ...args));
       });
     }
 
