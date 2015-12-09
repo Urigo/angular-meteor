@@ -30,4 +30,7 @@ Package.registerBuildPlugin({
 Package.onUse(function(api) {
   api.versionsFrom('METEOR@1.2.0.1');
   api.use('isobuild:compiler-plugin@1.0.0');
+  api.use('angular-meteor-data', { weak: true });
+
+  api.addFiles('templates-handler.js', 'client');
 });
