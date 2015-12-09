@@ -7,7 +7,6 @@ DIST_FOLDER=dist # The folder that the bundled files will be copy in to
 
 # run time variables
 PROJECT_ROOT=$(pwd)
-PROJECT_PARENT=$PROJECT_ROOT/..
 DIST_PATH=$PROJECT_ROOT/$DIST_FOLDER
 BUNDLER_TEMP="tmp-$NAME-bundler"
 BUNDLER_PATH=$DIST_PATH/$BUNDLER_TEMP
@@ -24,7 +23,7 @@ echo > .meteor/packages # Delete all default packages
 PACKAGE_DIRS="$PROJECT_ROOT/packages" meteor add $PACKAGE
 
 # Build the packages
-PACKAGE_DIRS=$PROJECT_PARENT meteor build --debug .
+PACKAGE_DIRS=$PROJECT_ROOT/packages meteor build --debug .
 tar -zxf $BUNDLER_TEMP.tar.gz
 
 OUTPUT_PATH="$DIST_PATH/$NAME-bundler-output"
@@ -47,6 +46,7 @@ cat "$PACKAGES_PATH/ecmascript-runtime.js" >> $OUTPUT_PATH/$NAME.bundle.js
 cat "$PACKAGES_PATH/promise.js" >> $OUTPUT_PATH/$NAME.bundle.js
 cat "$PACKAGES_PATH/reactive-dict.js" >> $OUTPUT_PATH/$NAME.bundle.js
 cat "$PACKAGES_PATH/session.js" >> $OUTPUT_PATH/$NAME.bundle.js
+cat "$PACKAGES_PATH/reactive-var.js" >> $OUTPUT_PATH/$NAME.bundle.js
 
 cat "$PACKAGES_PATH/lai_collection-extensions.js" >> $OUTPUT_PATH/$NAME.bundle.js
 cat "$PACKAGES_PATH/dburles_mongo-collection-instances.js" >> $OUTPUT_PATH/$NAME.bundle.js
