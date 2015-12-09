@@ -10,23 +10,25 @@ angularMeteorObject.factory('AngularMeteorObject', [
     AngularMeteorObject.$$internalProps = [
       '$$collection', '$$options', '$$id', '$$hashkey', '$$internalProps', '$$scope',
       'bind', 'save', 'reset', 'subscribe', 'stop', 'autorunComputation', 'unregisterAutoBind', 'unregisterAutoDestroy', 'getRawObject',
-      '_auto', '_setAutos', '_eventEmitter', '_serverBackup', '_updateDiff', '_updateParallel'
+      '_auto', '_setAutos', '_eventEmitter', '_serverBackup', '_updateDiff', '_updateParallel', '_getId'
     ];
 
-    function AngularMeteorObject (collection, id, options){
+    function AngularMeteorObject (collection, selector, options){
       // Make data not be an object so we can extend it to preserve
       // Collection Helpers and the like
-      var data = new function SubObject() {};
-      var doc = collection.findOne(id, options);
+      var helpers = collection._helpers;
+      var data = _.isFunction(helpers) ? Object.create(helpers.prototype) : {};
+      var doc = collection.findOne(selector, options);
       var collectionExtension = _.pick(AngularMeteorCollection, '_updateParallel');
       _.extend(data, doc);
       _.extend(data, AngularMeteorObject);
       _.extend(data, collectionExtension);
 
-      data._serverBackup = doc || {};
+      // Omit options that may spoil document finding
+      data.$$options = _.omit(options, 'skip', 'limit');
       data.$$collection = collection;
-      data.$$options = options;
-      data.$$id = id || new Mongo.ObjectID();
+      data.$$id = data._getId(selector);
+      data._serverBackup = doc || {};
 
       return data;
     }
@@ -69,7 +71,7 @@ angularMeteorObject.factory('AngularMeteorObject', [
         else
           mods = this.getRawObject();
 
-        mods._id = this.$$id;
+        mods._id = mods._id || this.$$id;
         collection.insert(mods, createFulfill({ action: 'inserted' }));
       }
 
@@ -93,7 +95,6 @@ angularMeteorObject.factory('AngularMeteorObject', [
         var docExtension = _.pick(doc, docKeys);
         var clientProps;
 
-        _.extend(Object.getPrototypeOf(self), Object.getPrototypeOf(doc));
         _.extend(self, docExtension);
         _.extend(self._serverBackup, docExtension);
 
@@ -130,6 +131,21 @@ angularMeteorObject.factory('AngularMeteorObject', [
 
       if (this.autorunComputation && this.autorunComputation.stop)
         this.autorunComputation.stop();
+    };
+
+    AngularMeteorObject._getId = function(selector) {
+      var options = _.extend({}, this.$$options, { 
+        fields: { _id: 1 },
+        reactive: false,
+        transform: null
+      });
+
+      var doc = this.$$collection.findOne(selector, options);
+
+      if (doc) return doc._id;
+      if (selector instanceof Mongo.ObjectID) return selector;
+      if (_.isString(selector)) return selector;
+      return new Mongo.ObjectID();
     };
 
     return AngularMeteorObject;
