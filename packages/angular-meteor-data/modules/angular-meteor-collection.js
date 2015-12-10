@@ -10,10 +10,10 @@ var angularMeteorCollection = angular.module('angular-meteor.collection',
 angularMeteorCollection.factory('AngularMeteorCollection', [
   '$q', '$meteorSubscribe', '$meteorUtils', '$rootScope', '$timeout', 'diffArray',
   function($q, $meteorSubscribe, $meteorUtils, $rootScope, $timeout, diffArray) {
-    console.warn('[angular-meteor.collection] Please note that this module is deprecated sine 1.3.0 and will be removed in 1.4.0!');
+    console.warn('[angular-meteor.collection] Please note that this module is deprecated since 1.3.0 and will be removed in 1.4.0!');
 
     function AngularMeteorCollection(curDefFunc, collection, diffArrayFunc, autoClientSave) {
-      console.warn('[angular-meteor.$meteorCollection] Please note that this method is deprecated sine 1.3.0 and will be removed in 1.4.0!');
+      console.warn('[angular-meteor.$meteorCollection] Please note that this method is deprecated since 1.3.0 and will be removed in 1.4.0!');
 
       var data = [];
       // Server backup data to evaluate what changes come from client
@@ -96,7 +96,7 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
         collection.update(docId, modifier, createFulfill(function() {
           return {_id: docId, action: 'updated'};
         }));
-      } 
+      }
       // insert
       else {
         collection.insert(doc, createFulfill(function(id) {
@@ -149,7 +149,7 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
       // remove docs
       else {
         keyOrDocs = [].concat(keyOrDocs);
- 
+
         keys = _.map(keyOrDocs, function(keyOrDoc) {
           return keyOrDoc._id || keyOrDoc;
         });
