@@ -79,8 +79,6 @@ describe('angular-meteor', function () {
           }
         });
 
-        // TODO: I don't know what should be the expected value here
-        // Does the helper should override the current one?
         expect(instance.stoppables.length).toBe(1);
         expect(instance.context['myHelper']).toBe(10);
       });
