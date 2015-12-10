@@ -80,7 +80,7 @@ But we are just missing the helpers in this component, so let's add it here as w
 
 Now lets disable the `partyDetails` input fields in case the user doesn't have permission to change them (currently, the server is stopping the user, but there is no visual feedback aside from the server overriding the local edit immediately after):
 
-{{> DiffBox tutorialName="meteor-angular1-socially" step="15.12"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="15.12" filename="client/parties/party-details/party-details.html"}}
 
 # Summary
 
