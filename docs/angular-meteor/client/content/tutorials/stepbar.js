@@ -100,11 +100,11 @@ Template.improveDoc.helpers({
   tutorialName: function () {
     var rData = Router.current().data();
     if (rData.parent.route == 'tutorials.socially.angular2') {
-      return 'angular2';
-    } else if (rData.parent.route == 'tutorials.ionic') {
-      return 'ionic'
+      return 'socially/angular2';
+    } else if (rData.parent.route == 'tutorials.whatsapp.ionic') {
+      return 'whatsapp/ionic'
     } else {
-      return 'angular1'
+      return 'socially/angular1'
     }
   }
 });
