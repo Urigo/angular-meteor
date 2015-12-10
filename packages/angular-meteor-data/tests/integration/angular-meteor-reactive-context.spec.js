@@ -69,6 +69,20 @@ describe('angular-meteor', function () {
         expect(reactiveContextInstance.context['myHelper']).toBe(10);
       });
 
+      it('should not explode when there is property on the context with the helper name', function () {
+        var scope = $rootScope.$new();
+
+        scope.myHelper = 'oops';
+        var instance = $reactive(scope).helpers({
+          myHelper: function() {
+            return 10;
+          }
+        });
+
+        expect(instance.stoppables.length).toBe(1);
+        expect(instance.context['myHelper']).toBe(10);
+      });
+
       it('Should register string helper', function() {
         reactiveContextInstance.helpers({
           myHelper: function() {

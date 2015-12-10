@@ -65,6 +65,12 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
     };
 
     _handleNonCursor(data, name) {
+      if (angular.isUndefined(this.propertiesTrackerDeps[name]) && angular.isDefined(this.context[name])) {
+        console.warn(`[angular-meteor][ReactiveContext] Your tried to create helper named '${name}' on your context, but there's already property with that name - angular-meteor will override it!`);
+
+        this.context[name] = undefined;
+      }
+
       if (angular.isUndefined(this.context[name])) {
         this._setValHelper(name, data);
       }
