@@ -3,7 +3,7 @@
 
 'use strict';
 
-import {OnDestroy} from 'angular2/angular2';
+import {OnDestroy} from 'angular2/core';
 
 declare type CallbacksObject = {
   onReady?: Function;

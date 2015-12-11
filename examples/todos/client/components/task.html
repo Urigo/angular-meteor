@@ -1,8 +1,8 @@
-<li [ng-class]="{checked: task.checked, private: task.private}">
+<li [ngClass]="{checked: task.checked, private: task.private}">
   <button class="delete" (click)="deleteTask()">&times;</button>
 
   <input type="checkbox" #cb
-    [ng-model]="task.checked"
+    [ngModel]="task.checked"
     (change)="setChecked(cb.checked)"
     class="toggle-checked" />
 

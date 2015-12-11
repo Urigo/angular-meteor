@@ -1,13 +1,13 @@
-<form (submit)="add($event)" [ng-form-model]="partyForm">
+<form (submit)="add($event)" [ngFormModel]="partyForm">
 
   <label for="name">Name</label>
-  <input type="text" id="name" ng-control="name">
+  <input type="text" id="name" ngControl="name">
 
   <label for="description">Description</label>
-  <input type="text" id="description" ng-control="description">
+  <input type="text" id="description" ngControl="description">
 
   <label for="location">Location</label>
-  <input type="text" id="location" ng-control="location">
+  <input type="text" id="location" ngControl="location">
 
   <button type="submit">Add</button>
 </form>

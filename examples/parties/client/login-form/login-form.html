@@ -1,10 +1,10 @@
-<form (submit)="login($event)" [ng-form-model]="loginForm">
-  <div *ng-if="!user">
-    <input type="text" placeholder="User" ng-control="user">
-    <input type="text" type="password" placeholder="Password" ng-control="pwd">
+<form (submit)="login($event)" [ngFormModel]="loginForm">
+  <div *ngIf="!user">
+    <input type="text" placeholder="User" ngControl="user">
+    <input type="text" type="password" placeholder="Password" ngControl="pwd">
     <button type="submit">LogIn</button>
   </div>
-  <div *ng-if="user">
+  <div *ngIf="user">
     <button type="button" (click)="logout()">LogOut</button>
   </div>
 </form>

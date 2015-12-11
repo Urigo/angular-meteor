@@ -1,6 +1,8 @@
 /// <reference path="../typings/angular2-meteor.d.ts" />
 
-import {Component, View, provide, FORM_DIRECTIVES} from 'angular2/angular2';
+import {Component, View, provide} from 'angular2/core';
+
+import {FORM_DIRECTIVES} from 'angular2/common';
 
 import {Tasks} from 'tasks';
 

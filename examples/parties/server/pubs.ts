@@ -3,8 +3,7 @@
 import {Parties} from 'collections/parties';
 
 Meteor.publish('parties', function(location: string) {
-  var selector = { location: location };
-  return Parties.find(selector);
+  return Parties.find({ location });
 });
 
 Meteor.publish('party', function(partyId: string) {

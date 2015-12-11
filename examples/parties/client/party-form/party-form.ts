@@ -2,8 +2,9 @@
 /// <reference path="../../typings/socially.d.ts" />
 /// <reference path="../../typings/meteor-accounts.d.ts" />
 
-import {Component, View} from 'angular2/angular2';
-import {FORM_DIRECTIVES, Control, FormBuilder, ControlGroup, Validators} from 'angular2/angular2';
+import {Component, View} from 'angular2/core';
+
+import {FORM_DIRECTIVES, Control, FormBuilder, ControlGroup, Validators} from 'angular2/common';
 
 import {InjectUser} from 'meteor-accounts';
 

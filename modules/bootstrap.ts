@@ -2,7 +2,9 @@
 
 'use strict';
 
-import * as ng2 from 'angular2/angular2';
+import {provide, Type, Provider, IterableDiffers} from 'angular2/core';
+
+import { bootstrap as ng2Bootstrap } from 'angular2/bootstrap';
 
 import {defaultIterableDiffers} from 'angular2/change_detection';
 
@@ -16,13 +18,13 @@ export function bootstrap(appComponentType: any,
     factories.push(new MongoCursorDifferFactory());
   }
 
-  newProviders.push(ng2.provide(ng2.IterableDiffers, {
-    useValue: new ng2.IterableDiffers(factories)
+  newProviders.push(provide(IterableDiffers, {
+    useValue: new IterableDiffers(factories)
   }));
 
   if (providers) {
     newProviders.push(providers);
   }
 
-  ng2.bootstrap(appComponentType, newProviders);
+  ng2Bootstrap(appComponentType, newProviders);
 }

@@ -2,7 +2,9 @@
 /// <reference path="../../typings/socially.d.ts" />
 /// <reference path="../../typings/meteor-accounts.d.ts" />
 
-import {Component, View, NgModel, NgFor} from 'angular2/angular2';
+import {Component, View} from 'angular2/core';
+
+import {NgModel, NgFor} from 'angular2/common';
 
 import {ROUTER_DIRECTIVES} from 'angular2/router';
 

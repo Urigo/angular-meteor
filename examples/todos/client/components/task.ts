@@ -1,7 +1,9 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
 /// <reference path="../../typings/task.d.ts" />
 
-import {Component, View, Input, NgClass} from 'angular2/angular2';
+import {Component, View, Input} from 'angular2/core';
+
+import {NgClass} from 'angular2/common';
 
 import {MeteorComponent} from 'angular2-meteor';
 

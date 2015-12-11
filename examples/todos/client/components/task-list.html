@@ -1,8 +1,8 @@
-<div *ng-if="!isLoading">
-  <ul *ng-for="#task of tasks">
+<div *ngIf="!isLoading">
+  <ul *ngFor="#task of tasks">
     <task [data]="task"></task>
   </ul>
 </div>
-<div *ng-if="isLoading" class="loader">
+<div *ngIf="isLoading" class="loader">
   <span>loading...</span>
 </div>

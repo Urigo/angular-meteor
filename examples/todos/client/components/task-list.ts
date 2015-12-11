@@ -1,7 +1,9 @@
 /// <reference path="../../typings/angular2-meteor.d.ts" />
 /// <reference path="../../typings/task.d.ts" />
 
-import {Component, View, NgFor, NgIf, Input, OnChanges} from 'angular2/angular2';
+import {Component, View, Input, OnChanges} from 'angular2/core';
+
+import {NgFor, NgIf} from 'angular2/common';
 
 import {TaskView} from './task';
 
@@ -29,7 +31,7 @@ export class TaskList extends MeteorComponent implements OnChanges {
     }, true);
   }
 
-  onChanges() {
+  ngOnChanges() {
     this.tasks = this._getTasks(this.hideCompleted);
   }
 

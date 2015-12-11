@@ -2,8 +2,10 @@
 
 'use strict';
 
-import {ChangeDetectorRef} from 'angular2/angular2';
+import {ChangeDetectorRef} from 'angular2/core';
+
 import {DefaultIterableDifferFactory, CollectionChangeRecord} from 'angular2/change_detection';
+
 import {ObservableWrapper} from 'angular2/facade';
 
 import {MongoCursorObserver, AddChange, MoveChange, RemoveChange} from './mongo_cursor_observer';
