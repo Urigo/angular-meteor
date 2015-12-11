@@ -1,7 +1,7 @@
 # Meteor-Angular2
 Angular2 + Meteor integration.
 
-##### Angular2 version: alpha-46.
+##### Angular2 version: alpha-52.
 
 ## Table of Contents
 * [Tutorial](../../#tutorial)
@@ -13,6 +13,11 @@ Angular2 + Meteor integration.
 * [Server Side](../../#server-side)
 * [TypeScript Support](../../#typescript-support)
 * [Contribution](../../#contribution)
+
+## Change Log
+
+* v0.3.0: Angular 2 seems to be on the finish line to the beta version. In the latest releases there appeared some **breaking** changes:
+ `angular2/angular2` namespace were divided into some new ones, mainly, `angular2/core`, `angular2/common`; also the dash symbol were removed in the selectors of the main directives, i.e., instead of `ng-if` you should use `ngIf` now. For more information about the latest API, please, refer to the official [docs](https://angular.io/docs/ts/latest/api).
 
 ## Tutorial
 
