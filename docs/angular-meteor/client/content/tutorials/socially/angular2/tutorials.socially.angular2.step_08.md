@@ -47,7 +47,7 @@ exports Blaze-based LoginButtons view as a Angular 2 component and, besides, doe
 
     meteor add barbatus:ng2-meteor-accounts-ui
 
-Let's add the `<accounts-ui>` component to the right of the party addition button in the PartiesForm template:
+Let's add the `<accounts-ui>` tag to the right of the party from in the PartiesList's template:
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="8.1"}}
 
@@ -89,6 +89,8 @@ Change the click handler of the "Add" button in the `parties-form.ts`, `addParty
 it'd be useful to add an alert promting user to log in if she wants to add or update a party:
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="8.4"}}
+
+> Notice that you'll need to update Party type in the `party.d.ts` definition file with the new property: `owner?: string`.
 
 Now, do the user check in the `party-details.ts`:
 
@@ -232,7 +234,7 @@ Amazing, only a few lines of code and we have a secure application!
 We've added two poweful features to our app:
 
 - "accounts-ui" package that comes with features like user login, logout, registration
-  and complete UI supporting them
-- restricted access to the party details page, with access available for logged-in users only
+  and complete UI supporting them;
+- restricted access to the party details page, with access available for logged-in users only.
 
 {{/template}}
