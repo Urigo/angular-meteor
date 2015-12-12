@@ -60,7 +60,7 @@ export class MeteorComponent implements OnDestroy {
     return args;
   }
 
-  onDestroy() {
+  ngOnDestroy() {
     for (let hAutorun of this._hAutoruns) {
       hAutorun.stop();
     }

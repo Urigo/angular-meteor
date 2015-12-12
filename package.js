@@ -1,6 +1,6 @@
 Package.describe({
   name: 'urigo:angular2-meteor',
-  version: '0.2.9',
+  version: '0.3.0_2',
   summary: 'Angular2 and Meteor integration',
   git: 'https://github.com/Urigo/Meteor-Angular2',
   documentation: 'README.md'
