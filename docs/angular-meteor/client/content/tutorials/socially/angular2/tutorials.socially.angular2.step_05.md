@@ -14,7 +14,7 @@ Routing functionality in Angular traditionally goes in a separate library.
 In Angular 2, there is a separate module for this called `angular2/router` (read about routing API [here](https://angular.io/docs/js/latest/api/router/)).
 
 Angular2-Meteor package contains `angular2/router` along with the code, so you can start importing it right out of the box.
-Angular2 routing turns out to be a small fraction of all Angular2 source code (less than 100k uncompressed);
+Angular 2 routing turns out to be a small fraction of all Angular 2 source code (less than 100k uncompressed);
 it made sense to include it by default into the package.
 
 Let's import routing dependencies into our app. We'll need router providers,
@@ -91,7 +91,7 @@ Notice also that we've added one line template:
 
     <router-outlet></router-outlet>
 
-This is going to be our "default layout" template. `<router-outlet>` directive will
+This is going to be our "default layout" template. `router-outlet` directive will
 render a view on the page based on the current URL.
 
 If `PartyDetails` view is targeted, with a `partyId` parameter, it will route to the `PartyDetails` component with access to that parameter.
@@ -121,28 +121,28 @@ We can use it in many situations. For example, if we have a constructor with a
 parameter of `BASE_APP_HREF` type, we can create an instance with 
 this parameter equalled to `/` value automatically inside the contructor.
 
-We are going to look closely at behind the scene in _Injecting Route Parameters_ section,
+We are going to look closely at behind the scene in the _Injecting Route Parameters_ section below,
 where we'll need route parameters in the `PartyDetails` component's contructor.
 
-# Router-Link
+# RouterLink
 
 The next thing we are going to add is links to the new router details view from
 the list of all parties. 
 
 As we've already seen, each party link consists of two parts: the base `PartyDetails` 
 URL and a party ID, represented by the `partyId` in the configuration.
-There is special directive called `<router-link>` that will help us to compose each URL.
+There is special directive called `routerLink` that will help us to compose each URL.
 
 First we'll import the directive and specify it as a view directive in the `PartiesList`:
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="5.8"}}
 
-Now we can wrap our party in a `router-link` and pass in the `_id` as a parameter. Note that the id is auto-generated when an item is inserted into a Mongo Collection.
+Now we can wrap our party in a `routerLink` and pass in the `_id` as a parameter. Note that the id is auto-generated when an item is inserted into a Mongo Collection.
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="5.9"}}
 
-`router-link` takes an array of URL parts as it was defined in the configuration and 
-then composes a full URL. By the first `/PartiesList` item we instruct `router-link` to 
+`routerLink` takes an array of URL parts as it was defined in the configuration and 
+then composes a full URL. By the first `/PartiesList` item we instruct `routerLink` to 
 find URL path to the `PartiesList` view in the root routing config.
 Since each component in Angular 2 can have own routing config,
 if we put `./PartiesList` there, the directive would resolve routes accordingly to
@@ -162,7 +162,7 @@ Dependency injection is imployed heavily here by Angular 2 to do all the work be
 TypeScript first compiles this class with the class metadata that says what argument types this class expects in the constructor (i.e. `RouteParams`),
 so Angular 2 knows what types to inject if asked to create an instance of this class.
 
-Then, when you click on a party details link, `<router-outlet>` directive will create an `RouteParams` provider that provides
+Then, when you click on a party details link, `router-outlet` directive will create an `RouteParams` provider that provides
 parameters of the current URL. Right after that moment if a `PartyDetails` instance is created by means of the dependency injection API,
 it's created with `RouteParams` injected and equalled to the current URL inside the constructor.
 

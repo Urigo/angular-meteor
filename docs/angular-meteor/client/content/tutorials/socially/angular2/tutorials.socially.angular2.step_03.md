@@ -16,9 +16,9 @@ Meteor makes writing distributed client code as simple as talking to a local dat
 
 Every Meteor client includes an in-memory database cache. To manage the client cache, the server publishes sets of JSON documents, and the client subscribes to these sets. As documents in a set change, the server patches each client's cache automatically.
 
-That introduces us to a new concept — **Full Stack Reactivity**.
+That introduces us to a new concept — *Full Stack Reactivity*.
 
-In an Angular-ish language we might call it **3 way data binding**.
+In an Angular-ish language we might call it *3 way data binding*.
 
 The way to handle data in Meteor is through the `Mongo.Collection` class. It is used to declare MongoDB collections and manipulate them.
 
@@ -47,7 +47,7 @@ a relative path of the file in the app.
 
 That's why we use the special word `export`. By this way, we tell System.js what this module is allowing to be exported to the outside world.
 
-Meteor has a series of special folder names, including "client". All files within "client" are loaded on the client only. Likewise, files in a folder called "server" are loaded on the server only.
+Meteor has a series of special folder names, including the "client" folder. All files within "client" are loaded on the client only. Likewise, files in a folder called "server" are loaded on the server only.
 
 Because this file is located outside of any special folder name, like "client" or "server", this collection and the actions on it will run both on the client (minimongo) and the server (Mongo).
 
@@ -61,7 +61,7 @@ The last thing is, again, to add the declaration file reference to this file:
 # Simple Binding to Angular
 
 Now that we've created the collection, our client needs to subscribe to it's changes and bind it to our `this.parties` array.
-Angular2's `ng-for` directive works by default with pure arrays, hence, we'll need to get an array of documents out of our Mongo collection.
+Angular 2's `ngFor` directive works by default with pure arrays, hence, we'll need to get an array of documents out of our Mongo collection.
 Since Mongo collections are full Mongo collections even on the client side (thanks to Meteor), we can query documents with the help of `find` or `findOne` API methods.
 
 Thus, we have at least one way to load our data model. Lets query all parties using `Parties.find()` and call fetch to retrieve them.
@@ -100,7 +100,12 @@ __`client/app.ts`:__
 
     /// <reference path="../typings/angular2-meteor.d.ts" />
 
-    import {NgZone, Component, View, NgFor, bootstrap} from 'angular2/angular2';
+    import {NgZone, Component, View} from 'angular2/core';
+
+    import {NgFor} from 'angular2/common';
+
+    import {bootstrap} from 'angular2/bootstrap';
+
     import {Parties} from 'collections/parties';
 
     @Component({
@@ -169,7 +174,7 @@ Now let's do the same but with "remove". At the prompt, type the following comma
 Now choose one party you want to remove and copy it's 'id' property.
 Then, remove it using that id (replace 'N4KzMEvtm4dYvk2TF' with your party's id value):
 
-    db.parties.remove( {"_id": "N4KzMEvtm4dYvk2TF"});
+    db.parties.remove({"_id": "N4KzMEvtm4dYvk2TF"});
 
 Again, you will see the UI of your app immediately updates with that party removed.
 
@@ -183,22 +188,22 @@ with Blaze (Blaze is the default frontend framework in Meteor, check the officia
 with Mongo collections.
 
 `Parties.find()` returns an instance of `Mongo.Cursor`, which can reactively provide all documents, that have been added, changed or removed, to every component.
-But how can we teach Angular2 to understand Mongo cursors?
+But how can we teach Angular 2 to understand Mongo cursors?
 
-Luckily, Angular2 comes with the concept of so-called "differ classes" — classes that are used by
-the `ng-for` directive to provide information about what has been changed in a collection to render
+Luckily, Angular 2 comes with the concept of so-called "differ classes" — classes that are used by
+the `ngFor` directive to provide information about what has been changed in a collection to render
 this collection efficiently.
 
 This concept is similar to "dirty checking" in Angular 1.x but with some differences.
-Angular2 now computes the difference between two arrays much more efficiently, thanks to
+Angular 2 now computes the difference between two arrays much more efficiently, thanks to
 some advanced algorithms. We are not going to dive into those details in this tutorial. But you can
 read this [blog post](http://info.meteor.com/blog/comparing-performance-of-blaze-react-angular-meteor-and-angular-2-with-meteor),
-which compares speed of Angular1 vs Angular2 in Meteor.
-One more advantage of differs in Angular2 is that customers can create their own differs for their own collection types.
+which compares speed of Angular 1 vs Angular 2 in Meteor.
+One more advantage of differs in Angular 2 is that customers can create their own differs for their own collection types.
 
 The Angular2-Meteor package implements a special differ class for Mongo cursors. All we need to do is to load it into our app.
 
-The Angular2-Meteor package has its own `bootstrap` that overrides the basic `angular2/angular2` bootstrap method and adds
+The Angular2-Meteor package has its own `bootstrap` that overrides the basic bootstrap method from `angular2/bootstrap` and adds
 some additional new providers. These include a provider for the differ class mentioned above.
 
 Lets change `bootstrap` from `angular2/angular2` to `bootstrap` from `angular2-meteor` as follows:
@@ -250,7 +255,7 @@ In the next step, we'll see how to add functionality to our app's UI so that we 
 In this chapter you saw how easy and fast it is:
 
 - to create a full connection between our client data and the server using Meteor
-- to create simple Angular2 UI and render Mongo collection on the page with the help of `Angular2-Meteor`
+- to create simple Angular 2 UI and render Mongo collection on the page with the help of `Angular2-Meteor`
 - to load initial parties on the server side
 - and how well-structured everything looks with the help of System.js modules
 
