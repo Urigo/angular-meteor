@@ -90,7 +90,7 @@ Add this code under the existing component:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="5.7"}}
 
-And we will also need to crete the view for this component:
+And we will also need to create the view for this component:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="5.8"}}
 
