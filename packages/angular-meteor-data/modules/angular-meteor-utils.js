@@ -5,11 +5,13 @@ var angularMeteorUtils = angular.module('angular-meteor.utils', []);
 angularMeteorUtils.service('$meteorUtils', [
   '$q', '$timeout',
   function ($q, $timeout) {
-    console.warn('[angular-meteor.utils] Please note that this module is deprecated since 1.3.0 and will be removed in 1.4.0!');
 
     var self = this;
 
     this.autorun = function(scope, fn) {
+
+      console.warn('[angular-meteor.utils.autorun] Please note that this module is deprecated since 1.3.0 and will be removed in 1.4.0! http://info.meteor.com/blog/angular-meteor-1.3');
+
       // wrapping around Deps.autorun
       var comp = Tracker.autorun(function(c) {
         fn(c);

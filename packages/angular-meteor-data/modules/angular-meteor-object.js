@@ -6,7 +6,6 @@ var angularMeteorObject = angular.module('angular-meteor.object',
 angularMeteorObject.factory('AngularMeteorObject', [
   '$q', '$meteorSubscribe', '$meteorUtils', 'diffArray', 'getUpdates', 'AngularMeteorCollection',
   function($q, $meteorSubscribe, $meteorUtils, diffArray, getUpdates, AngularMeteorCollection) {
-    console.warn('[angular-meteor.object] Please note that this module is deprecated since 1.3.0 and will be removed in 1.4.0!');
 
     // A list of internals properties to not watch for, nor pass to the Document on update and etc.
     AngularMeteorObject.$$internalProps = [
@@ -16,7 +15,7 @@ angularMeteorObject.factory('AngularMeteorObject', [
     ];
 
     function AngularMeteorObject (collection, selector, options){
-      console.warn('[angular-meteor.$meteorObject] Please note that this method is deprecated since 1.3.0 and will be removed in 1.4.0!');
+      console.warn('[angular-meteor.$meteorObject] Please note that this method is deprecated since 1.3.0 and will be removed in 1.4.0! http://info.meteor.com/blog/angular-meteor-1.3');
       // Make data not be an object so we can extend it to preserve
       // Collection Helpers and the like
       var helpers = collection._helpers;
