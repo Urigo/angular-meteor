@@ -80,7 +80,7 @@ This method returns `this`, which the the reactive context, in order to provide 
       });
 
       this.subscribe('users', () => {
-        return this.relevantId;
+        return [ this.relevantId ];
       });
 
       this.relevantId = 50; // This will cause the subscribe arguments method to run again
