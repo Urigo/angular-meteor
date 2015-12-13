@@ -90,8 +90,7 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
     reactiveProps(props) {
       _.each(props, (v, k) => {
         if (_.isFunction(v)) {
-          console.warn('[angular-meteor][ReactiveContext] You tried to create a function helper (' + k + ') using `reactiveProps`. Please consider replacing it with `helpers` instead.');
-          this._setFnHelper(k, v);
+          throw new Error(`[angular-meteor][ReactiveContext] You tried to create a function helper (${k}) using "reactiveProps", please use "helpers" instead!`);
         }
         else {
           this._setValHelper(k, v);
@@ -107,8 +106,7 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
           this._setFnHelper(k, v);
         }
         else {
-          console.warn('[angular-meteor][ReactiveContext] You tried to create a reactive property (' + k + ') using `helpers`. Please consider replacing it with `reactiveProps` instead.');
-          this._setValHelper(k, v);
+          throw new Error(`[angular-meteor][ReactiveContext] You tried to create a reactive property (${k}) using "helpers", please use "reactiveProps" instead!`);
         }
       });
 
