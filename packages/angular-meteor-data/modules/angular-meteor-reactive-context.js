@@ -1,4 +1,4 @@
-angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).factory('$reactive', ['$rootScope', '$parse', ($rootScope, $parse) => {
+angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).factory('$reactive', ['$rootScope', ($rootScope) => {
   class ReactiveContext {
     constructor(context) {
       if (!context || !angular.isObject(context)) {
@@ -80,7 +80,7 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
           this.context[name] = data;
         }
         else {
-          let diff = jsondiffpatch.diff(this.context[name], data)
+          let diff = jsondiffpatch.diff(this.context[name], data);
           jsondiffpatch.patch(this.context[name], diff);
           this._propertyChanged(name);
         }
