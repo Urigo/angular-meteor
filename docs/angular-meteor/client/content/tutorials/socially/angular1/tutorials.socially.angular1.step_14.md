@@ -1,10 +1,10 @@
 {{#template name="tutorials.socially.angular1.step_14.md"}}
 {{> downloadPreviousStep stepName="step_13"}}
 
-In this step we will learn how to use Meteor methods and how to use `Meteor.call` method from our AngularJS code.
+In this step we will learn how to use [Meteor methods](http://docs.meteor.com/#/full/meteor_methods) and how to use `Meteor.call` method from our AngularJS code.
 
-Meteor methods are a way to perform more complex logic than the allow method does.
-The Meteor methods are responsible for checking permissions, just like the allow method does.
+Meteor methods are a way to perform more complex logic than the direct Mongo.Collection API.
+The Meteor methods are also responsible for checking permissions, just like the allow method does.
 
 In our case, we will create an invite method that invites a user to a party.
 
@@ -64,7 +64,7 @@ Now test the app.  Create a private party with user1.  Then invite user2. Log in
 
 Now let's add the RSVP functionality so invited users can respond to invitations.
 
-First let's add a `Meteor.method   to `parties.js` in the model folder (remember to place it as a property inside the `Meteor.methods` object):
+First let's add a `Meteor.method` to `parties.js` in the model folder (remember to place it as a property inside the `Meteor.methods` object):
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="14.7"}}
 
@@ -84,7 +84,7 @@ Add this code into `parties-list.html` inside the parties list itself (inside th
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="14.9"}}
 
-Now let's display for each party who is coming.
+Now let's display who is coming for each party.
 
 Just after the code you just added (still inside the parties `dir-paginate`) add the following code:
 

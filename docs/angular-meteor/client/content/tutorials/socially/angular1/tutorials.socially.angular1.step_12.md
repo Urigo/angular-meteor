@@ -37,15 +37,17 @@ Let's get back to our client code. We now need to change our subscribe call with
 What are those parameters that we want to set on the options argument? In order to have pagination in our
 parties list we will need to save the current page, the number of parties per page and the sort order. So let's add these parameters to our component in `parties-list.component.js` file.
 
-We will add the `perPage` variable as a regular variable, but the `page` and `sort` variables will later effect our subscription, so we need to defined them with `helpers`:
+We will add the `perPage` variable as a regular variable, but the `page` and `sort` variables will later effect our subscription and we want the subscription to re-run every time one of them changes.
+
+Because of that, they will need to be [Reactive Vars](http://docs.meteor.com/#/full/reactivevar_pkg). To do that we need to defined them with `helpers`:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="12.2"}}
 
-That's cool, but let's do something more with these variables than just defining them. We want to use them when we call the subscribe method.
+That means that `$scope.perPage` won't be reactive and Meteor won't re-run anything based on that, but `$scope.page` and `$scope.sort` are reactive and Meteor will re-run the subscription every time one of them will change. 
 
-But right now, we just use `subscribe` without any parameters, but we need to provide some arguments to the subscriptions.
+Right now, we just use `subscribe` without any parameters, but we need to provide some arguments to the subscriptions.
 
-In order to do that, we will add a second parameter to the `subscribe` method, and we will provide a function that return an array of arguments for the subscription.
+In order to do that, we will add a second parameter to the `subscribe` method, and we will provide a function that returns an array of arguments for the subscription.
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="12.3"}}
 
@@ -97,6 +99,8 @@ On the `dir-pagination-controls` directive there is a method `on-page-change` an
 So we call the `pageChanged` function with the new selection as a parameter.
 
 Let's create the `pageChanged` function inside the `partiesList` component:
+
+{{> DiffBox tutorialName="meteor-angular1-socially" step="12.9"}}
 
 Now every time we change the page, the scope variable will change accordingly and update the bind method that watches it.
 
@@ -167,7 +171,7 @@ to make sure you have everything needed and can run the application.
 
 # Reactive Search
 
-Now that we have the basis for pagination, all we have left to do is add reactive server-side searching of parties. This means that we will be able to enter a search string, have the app search for parties that match that name in the server and return only the relevant results! This is pretty awesome, and we are going to do all that in only a few lines of code. So
+Now that we have the basis for pagination, all we have left to do is add reactive full stack searching of parties. This means that we will be able to enter a search string, have the app search for parties that match that name in the server and return only the relevant results! This is pretty awesome, and we are going to do all that in only a few lines of code. So
 let's get started!
 
 As before, let's add the server-side support. We need to add a new argument to our publish method which will hold the
@@ -175,7 +179,7 @@ requested search string. We will call it... `searchString`! Here it goes:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="12.15"}}
 
-Yep, that was simple. Now we are going to filter the correct results using mongo's regex ability. We are going to add this
+Now we are going to filter the correct results using mongo's regex ability. We are going to add this
 line in those two places where we are using `find`: in publish Counts and in the return of the parties cursor:
 
     'name' : { '$regex' : '.*' + searchString || '' + '.*', '$options' : 'i' },

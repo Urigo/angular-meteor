@@ -51,9 +51,9 @@ In our case the first name parameter is **"parties"**. So we will need to subscr
 
 > For more information about the `subscribe` service [click here](/api/reactive-context)
 
-In the second parameter, our function uses the Mongo API to return the wanted documents (document are the JSON-style data structure of MongoDB).
+In the second parameter of the publish function, we define a function uses the Mongo API to return the wanted documents (document are the JSON-style data structure of MongoDB).
 
-So we create a query - start with the find method on the Parties collection.
+So we create a query on the Parties collection.
 
 Inside the find method we use the [$or](http://docs.mongodb.org/manual/reference/operator/query/or/), [$and](http://docs.mongodb.org/manual/reference/operator/query/and/) and [$exists](http://docs.mongodb.org/manual/reference/operator/query/exists/) Mongo operators to pull our wanted parties:
 
@@ -107,18 +107,18 @@ Now let's subscribe to that publish Method.  In the `partyDetails` component fil
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="9.8"}}
 
-* We add function helper to the `users` collection
-* Also, we subscribed to the `users` publication
-
-Also, let's add a subscription to the `parties` in this controller as well:
-
-{{> DiffBox tutorialName="meteor-angular1-socially" step="9.9"}}
+* We subscribed to the `users` publication
+* We added a helper function to the `users` collection
 
 Now let's add the list of users to the view to make sure it works.
 
 Add this ng-repeat list to the end of `party-details.html`:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="9.10"}}
+
+Also, let's add a subscription to the `parties` in this Component as well, in case we will laod the app directly from this Component before loading the parties-list Component:
+
+{{> DiffBox tutorialName="meteor-angular1-socially" step="9.9"}}
 
 Run the app and see the list of all the users' emails that created a login and password and did not use a service to login.
 

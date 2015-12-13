@@ -68,19 +68,18 @@ The second approach seems to work better for large scale applications.
 
 As we are working close with the Meteor collections, we believe a better approach will be based on functionality, which also correlates to the Meteor's collection structure.
 
-For more Angular 1 structuring and best practices please read this amazing [style-guide](https://github.com/johnpapa/angularjs-styleguide#application-structure).
-
+For more Angular 1 structuring and best practices please read this amazing [style-guide](https://github.com/johnpapa/angularjs-styleguide#application-structure) and for best practices for Meteor apps read Meteor's [official guide](http://guide.meteor.com/).
 
 # Re-structuring our app
 
 So now let's re-structure our app (to see the end result and all the steps in git diff you can click [here](https://github.com/Urigo/meteor-angular-socially/compare/step_06...step_07)):
 
 1. Create a folder named `client` under the root folder.  This is where all the code inside `Meteor.isClient` will go (without the need of Meteor.isClient anymore)
-2. The first thing that needs to be loaded in the `client` folder is the Angular 1 app declaration. After that, the rest of the client code can be loaded in any order. So create a `lib` folder inside the `client` folder and move `app.js` inside. Remove the unnecessary `if (Meteor.isClient)` condition from `app.js`. Everything in the `client` folder runs only on the browser. We will put there only our module's declaration, because the rest of the code will have it's own file now.
+2. The first thing that needs to be loaded in the `client` folder is the Angular 1 app declaration. After that, the rest of the client code can be loaded in any order. So create a `lib` folder inside the `client` folder and create `app.js` file inside. Everything inside the `client` folder runs only on the browser so we don't need `if (Meteor.isClient)` conditions anymore.  Move the Angular module declaration to that `app.js`:
 {{> DiffBox tutorialName="meteor-angular1-socially" step="7.1"}}
-3. The parties Mongo collection needs to run on both client and server, so let's move it out of the `client` folder. Create a folder called `model` under the root folder. Inside create a file called `parties.js` and cut this line from `app.js` - `Parties = new Mongo.Collection("parties");` - and place it in `parties.js`.
+3. The parties Mongo collection needs to run on both client and server. Create a folder called `model` under the root folder. Inside create a file called `parties.js` and cut this line from `app.js` - `Parties = new Mongo.Collection("parties");` - and place it in `parties.js`.
 {{> DiffBox tutorialName="meteor-angular1-socially" step="7.2"}}
-4. Create a `server` folder under the root folder. Everything inside that folder will run only on the server. Now create a folder called `startup` under the `server` folder and create a file called `loadParties.js` under it. Now go to `app.js`, cut all the code inside the `if (Meteor.isServer)` statement and place it inside the `loadParties.js` file. Again, no need for the if statement anymore because all the code inside the `server` folder runs only on the server.
+4. Create a `server` folder under the root folder. Everything inside that folder will run only on the server. Now create a folder called `startup` under the `server` folder. Now move `server.js` under that folder and rename it to `loadParties.js`. Now remove the `if (Meteor.isServer)` statement because there is no need for the if statement anymore because all the code inside the `server` folder runs only on the server.
 {{> DiffBox tutorialName="meteor-angular1-socially" step="7.3"}}
 5. Create a file called `routes.js` under the `client` folder. Cut the `.config` code that defines the routes and paste it inside that file.
 {{> DiffBox tutorialName="meteor-angular1-socially" step="7.4"}}
@@ -93,9 +92,11 @@ So now let's re-structure our app (to see the end result and all the steps in gi
 {{> DiffBox tutorialName="meteor-angular1-socially" step="7.7"}}
 10. Now move `party-details.html` into `client/parties/party-details`.
 {{> DiffBox tutorialName="meteor-angular1-socially" step="7.8"}}
-11. Note update the `templateUrl` in our components, to support it's new path:
+11. We need to update the `templateUrl` in our components to support the new path, because that paths are absolute and not relative:
 {{> DiffBox tutorialName="meteor-angular1-socially" step="7.9" filename="client/parties/parties-list/parties-list.component.js"}}
 {{> DiffBox tutorialName="meteor-angular1-socially" step="7.9" filename="client/parties/party-details/party-details.component.js"}}
+13. Move `index.html` inside the client folder
+14. Don't forget to delete the original `app.js` files from the project's root folder.
 
 As you can see, everything is still working as before.
 We haven't needed to change any references in `index.html` like other frameworks. Meteor just takes care of all this.

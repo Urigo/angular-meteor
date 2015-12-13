@@ -18,9 +18,13 @@ Execute this command in the command line:
 
     $ meteor remove insecure
 
-Now let's try to change the parties array or a specific party.  Nothing's working.
+Now let's try to change the parties array or a specific party.  We get 
 
-Now, we will have to write an explicit security rule for each operation we want to make on the Mongo collection.
+    remove failed: Access denied
+    
+In the console because we don't have permissions to do that.    
+
+Now, we need to write an explicit security rule for each operation we want to allow the client to do on the Mongo collection.
 
 So first, let's add the `accounts-password` Meteor package.
 It's a very powerful package for all the user operations you can think of: login, sign-up, change password, password recovery, email confirmation and more.
@@ -33,7 +37,7 @@ Later on in this tutorial we will replace those default account-ui forms with cu
 
     $ meteor add dotansimha:accounts-ui-angular
 
-Now let's add dependency to `accounts.ui` module in our module definition:
+Now let's add dependency to the `accounts.ui` module in our module definition:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="8.4"}}
 

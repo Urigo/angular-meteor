@@ -38,9 +38,13 @@ And now let's implement the logic of the "Save" button on the controller:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="6.4"}}
 
-We used `Parties.update` method which is a method that comes from the Mongo.Collection object, we first locate our party using it's id, just like we did with `findOne`, then we used `$set` to update the actual relevant fields.
+We used [Parties.update](http://docs.meteor.com/#/full/update) method which is a method that comes from the Mongo.Collection object. 
 
-We can also handle success or fail when using `Parties.update` by adding a callback as the last argument, for example:
+The first parameter is the parties we want to update, in this case, we send the specific party's id, just like we did with `findOne`.
+
+In the second parameter we specify the action we want to perform, in our case we used the `$set` operator to update the actual relevant fields.
+
+We can also handle success or fail when using `Parties.update` by adding a callback as the third argument, for example:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="6.5"}}
 

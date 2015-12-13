@@ -56,7 +56,7 @@ But it's only in the display so its perfect for a filter.
 
 We want the list to simply look like this:
 
-{{> DiffBox tutorialName="meteor-angular1-socially" step="13.3"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="13.4"}}
 
 and that the filter `displayName` will handle to logic and display the user's name in the best way possible.
 
@@ -64,7 +64,7 @@ So let's create another custom filter `displayName`.
 
 Create a new file under the filters folder named `displayName.js` and place that code inside:
 
-{{> DiffBox tutorialName="meteor-angular1-socially" step="13.4"}}
+{{> DiffBox tutorialName="meteor-angular1-socially" step="13.3"}}
 
 Pretty simple logic but it's so much nicer to put it here and make the HTML shorter and more readable.
 
