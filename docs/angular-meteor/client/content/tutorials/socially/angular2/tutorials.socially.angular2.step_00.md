@@ -174,7 +174,7 @@ Let's continue defining our Angular 2 application module.
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="0.5"}}
 
-First we're importing the dependencies we needed from `angular2/angular2`. This is not a folder and file in your directory, but a reference to a System.js module aliased as `angular2/angular2` and available in the `urigo:angular2-meteor` package.
+First we're importing the dependencies we needed from `angular2/core` and `angular2/bootstrap`. This is not a folder and files in your directory, but a reference to System.js modules aliased as `angular2/core` and `angular2/bootstrap` and available in the `urigo:angular2-meteor` package.
 
 Notice the `@` syntax. In Angular 2, these are called Annotations. They are similar to a new feature coming to ES7 called Decorators.
 From consumers point of view, they are almost the same except Decorators are a proposed standard allowing us to add class metadata and Angular2's Annotations are 
@@ -225,10 +225,10 @@ So lets remove `index.html` for now and run the app:
 
 ## TypeScript Typings
 
-At this moment you've likely noticed a message in the console saying that `angular2/angular2` is not found.
+At this moment you've likely noticed a message in the console saying that `angular2/core` and `angular2/bootstrap` are not found.
 
 It happened because the TypeScript compiler is configured in the package with diagnostics messages turned on by default and
-the TypeScript compiler doesn't know anything about the location of the `angular2/angular2` module. To fix this, you will need
+the TypeScript compiler doesn't know anything about the location of the `angular2/core` and `angular2/bootstrap` modules. To fix this, you will need
 to make use of TypeScript declaration files, which is a TypeScript way to inform the compiler about third-party API modules.
 
 After the first run, you will find the `angular2-meteor.d.ts` file in the new folder called "typings".
