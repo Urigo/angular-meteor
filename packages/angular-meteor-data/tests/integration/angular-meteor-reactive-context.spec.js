@@ -416,7 +416,7 @@ describe('angular-meteor', function () {
         expect(element.get(1).innerHTML).toBe('test');
       });
 
-      it('Should trigger Autorun dependencies when using object and updating a sub property', function() {
+      it('Should trigger Autorun dependencies when using object and updating a sub property', function(done) {
         $reactive(context);
 
         var mySpy = jasmine.createSpy();
@@ -428,7 +428,9 @@ describe('angular-meteor', function () {
         });
 
         context.helpers({
-          myMethod: mySpy
+          myMethod: mySpy.and.callFake(() => {
+            var a = context.prop;
+          })
         });
 
         context.prop.mySubProp = 20;
@@ -438,10 +440,11 @@ describe('angular-meteor', function () {
         setTimeout(() => {
           expect(mySpy).toHaveBeenCalled();
           expect(mySpy.calls.count()).toBe(2);
+          done();
         }, 100);
       });
 
-      it('Should trigger Autorun dependencies when using object and adding a sub property', function() {
+      it('Should trigger Autorun dependencies when using object and adding a sub property', function(done) {
         $reactive(context);
 
         var mySpy = jasmine.createSpy();
@@ -453,7 +456,9 @@ describe('angular-meteor', function () {
         });
 
         context.helpers({
-          myMethod: mySpy
+          myMethod: mySpy.and.callFake(() => {
+            var a = context.prop;
+          })
         });
 
         context.prop.newProp = 20;
@@ -463,7 +468,71 @@ describe('angular-meteor', function () {
         setTimeout(() => {
           expect(mySpy).toHaveBeenCalled();
           expect(mySpy.calls.count()).toBe(2);
+          done();
         }, 100);
+      });
+
+      it('Should trigger Autorun dependencies when using object and depending on sub property', function(done) {
+        $reactive(context);
+
+        var mySpy = jasmine.createSpy();
+
+        context.reactiveProps({
+          prop: {
+            mySubProp: 10
+          }
+        });
+
+        context.helpers({
+          myMethod: mySpy.and.callFake(() => {
+            var a = context.prop.mySubProp;
+          })
+        });
+
+        context.prop.mySubProp = 20;
+
+        $rootScope.$apply();
+
+        setTimeout(() => {
+          expect(mySpy).toHaveBeenCalled();
+          expect(mySpy.calls.count()).toBe(2);
+          done();
+        }, 100);
+      });
+
+      it('Should remove and destroy custom scope if it was necessary to create it', function() {
+        var reactive = $reactive(context);
+
+        context.reactiveProps({
+          prop: {
+            mySubProp: 10
+          }
+        });
+
+        var destroySpy = spyOn(reactive.scope, '$destroy').and.callThrough();
+
+        reactive.stop();
+
+        expect(destroySpy).toHaveBeenCalled();
+        expect(reactive.scope).toBeUndefined();
+      });
+
+      it('Should NOT remove and destroy scope if the scope was attached', function() {
+        var reactive = $reactive(context);
+        reactive.attach(testScope);
+
+        context.reactiveProps({
+          prop: {
+            mySubProp: 10
+          }
+        });
+
+        var destroySpy = spyOn(reactive.scope, '$destroy').and.callThrough();
+
+        reactive.stop();
+
+        expect(destroySpy).not.toHaveBeenCalled();
+        expect(reactive.scope).toBeDefined();
       });
     });
   });
