@@ -4,6 +4,23 @@ Template.sidebarDesktopAPI.helpers({
   }
 });
 
+Template.sidebarDefaultAPI.events({
+  'change #api-selector': function(event) {
+    Router.go('/api/' + event.target.value);
+  }
+});
+
+Template.sidebarDefaultAPI.helpers({
+  apis: function() {
+    return _.keys(API_DEFINITION);
+  },
+  currentApi: function(api) {
+    var route = Router.current().data().route.replace('api.', '');
+
+    return route.substr(0, route.lastIndexOf('.')) === api;
+  }
+});
+
 Template.sidebarMobileAPI.helpers({
   selectedMobile: function () {
     return Router.current().data().route == this.route ? {selected: ""} : null;

@@ -9,7 +9,7 @@ API_1_2_2 = function(version, basedOnTemplatesOf) {
         title: "",
         route: "api",
         path: urlBase,
-        redirectRoute: "api." + version + ".meteorCollection",
+        redirectRoute: "/api/" + version + "/meteorCollection",
         template: "api",
         seoTitleSuffix: " | Angular Meteor API",
         seoDesc: "angular-meteor is a realtime full stack that combines the best frameworks. use your existing Angular applications with Meteor - the best backend framework for AngularJS applications.",
@@ -20,7 +20,8 @@ API_1_2_2 = function(version, basedOnTemplatesOf) {
             path: urlBase + "meteorCollection",
             title: "$meteor.collection",
             seoTitle: "$meteor.collection",
-            mdContent: "api." + templatePrefix + ".meteorCollection"
+            mdContent: "api." + templatePrefix + ".meteorCollection",
+            deprecated: '1.3.0', removedIn: '1.4.0'
           },
           {
             id: "02",
@@ -28,7 +29,8 @@ API_1_2_2 = function(version, basedOnTemplatesOf) {
             path: urlBase + "AngularMeteorCollection",
             title: "AngularMeteorCollection",
             seoTitle: "AngularMeteorCollection",
-            mdContent: "api." + templatePrefix + ".AngularMeteorCollection"
+            mdContent: "api." + templatePrefix + ".AngularMeteorCollection",
+            deprecated: '1.3.0', removedIn: '1.4.0'
           },
           {
             id: "03",
@@ -36,7 +38,8 @@ API_1_2_2 = function(version, basedOnTemplatesOf) {
             path: urlBase + "meteorObject",
             title: "$meteor.object",
             seoTitle: "$meteor.object",
-            mdContent: "api." + templatePrefix + ".meteorObject"
+            mdContent: "api." + templatePrefix + ".meteorObject",
+            deprecated: '1.3.0', removedIn: '1.4.0'
           },
           {
             id: "04",
@@ -44,7 +47,8 @@ API_1_2_2 = function(version, basedOnTemplatesOf) {
             path: urlBase + "AngularMeteorObject",
             title: "AngularMeteorObject",
             seoTitle: "AngularMeteorObject",
-            mdContent: "api." + templatePrefix + ".AngularMeteorObject"
+            mdContent: "api." + templatePrefix + ".AngularMeteorObject",
+            deprecated: '1.3.0', removedIn: '1.4.0'
           },
           {
             id: "05",
@@ -52,7 +56,8 @@ API_1_2_2 = function(version, basedOnTemplatesOf) {
             path: urlBase + "subscribe",
             title: "$meteor.subscribe",
             seoTitle: "$meteor.subscribe",
-            mdContent: "api." + templatePrefix + ".subscribe"
+            mdContent: "api." + templatePrefix + ".subscribe",
+            deprecated: '1.3.0', removedIn: '1.4.0'
           },
           {
             id: "06",
@@ -60,7 +65,8 @@ API_1_2_2 = function(version, basedOnTemplatesOf) {
             path: urlBase + "methods",
             title: "$meteor.call",
             seoTitle: "$meteor.call",
-            mdContent: "api." + templatePrefix + ".methods"
+            mdContent: "api." + templatePrefix + ".methods",
+            deprecated: '1.3.0', removedIn: '1.4.0'
           },
           {
             id: "07",
@@ -68,7 +74,8 @@ API_1_2_2 = function(version, basedOnTemplatesOf) {
             path: urlBase + "auth",
             title: "User Authentication",
             seoTitle: "User Authentication",
-            mdContent: "api." + templatePrefix + ".auth"
+            mdContent: "api." + templatePrefix + ".auth",
+            deprecated: '1.3.0', removedIn: '1.4.0'
           },
           {
             id: "08",
@@ -76,7 +83,8 @@ API_1_2_2 = function(version, basedOnTemplatesOf) {
             path: urlBase + "getReactively",
             title: "$scope.getReactively",
             seoTitle: "$scope.getReactively",
-            mdContent: "api." + templatePrefix + ".getReactively"
+            mdContent: "api." + templatePrefix + ".getReactively",
+            deprecated: '1.3.0', removedIn: '1.4.0'
           },
           {
             id: "09",
@@ -84,7 +92,8 @@ API_1_2_2 = function(version, basedOnTemplatesOf) {
             path: urlBase + "blaze-template",
             title: "blaze-template directive",
             seoTitle: "blaze-template directive",
-            mdContent: "api." + templatePrefix + ".blaze-template"
+            mdContent: "api." + templatePrefix + ".blaze-template",
+            deprecated: '1.3.0', removedIn: '1.4.0'
           },
           {
             id: "10",
@@ -92,7 +101,8 @@ API_1_2_2 = function(version, basedOnTemplatesOf) {
             path: urlBase + "files",
             title: "CollectionFS",
             seoTitle: "Files with CollectionFS",
-            mdContent: "api." + templatePrefix + ".collectionfs"
+            mdContent: "api." + templatePrefix + ".collectionfs",
+            deprecated: '1.3.0', removedIn: '1.4.0'
           },
           {
             id: "11",
@@ -100,7 +110,8 @@ API_1_2_2 = function(version, basedOnTemplatesOf) {
             path: urlBase + "utils",
             title: "$meteorUtils",
             seoTitle: "$meteorUtils",
-            mdContent: "api." + templatePrefix + ".utils"
+            mdContent: "api." + templatePrefix + ".utils",
+            deprecated: '1.3.0', removedIn: '1.4.0'
           },
           {
             id: "12",
@@ -108,7 +119,8 @@ API_1_2_2 = function(version, basedOnTemplatesOf) {
             path: urlBase + "camera",
             title: "$meteorCamera",
             seoTitle: "$meteorCamera",
-            mdContent: "api." + templatePrefix + ".camera"
+            mdContent: "api." + templatePrefix + ".camera",
+            deprecated: '1.3.0', removedIn: '1.4.0'
           },
           {
             id: "13",
@@ -116,7 +128,8 @@ API_1_2_2 = function(version, basedOnTemplatesOf) {
             path: urlBase + "session",
             title: "$meteor.session.bind",
             seoTitle: "$meteor.session",
-            mdContent: "api." + templatePrefix + ".session"
+            mdContent: "api." + templatePrefix + ".session",
+            deprecated: '1.3.0', removedIn: '1.4.0'
           },
           {
             id: "14",
@@ -124,7 +137,8 @@ API_1_2_2 = function(version, basedOnTemplatesOf) {
             path: urlBase + "ngFileExtension",
             title: "File Extensions",
             seoTitle: "File Extensions",
-            mdContent: "api." + templatePrefix + ".ngFileExtension"
+            mdContent: "api." + templatePrefix + ".ngFileExtension",
+            deprecated: '1.3.0', removedIn: '1.4.0'
           }
         ]
       }
