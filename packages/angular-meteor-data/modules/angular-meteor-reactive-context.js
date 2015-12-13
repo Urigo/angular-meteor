@@ -87,12 +87,29 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
       }
     }
 
+    reactiveProps(props) {
+      _.each(props, (v, k) => {
+        if (_.isFunction(v)) {
+          console.warn('[angular-meteor][ReactiveContext] You tried to create a function helper (' + k + ') using `reactiveProps`. Please consider replacing it with `helpers` instead.');
+          this._setFnHelper(k, v);
+        }
+        else {
+          this._setValHelper(k, v);
+        }
+      });
+
+      return this;
+    }
+
     helpers(props) {
       _.each(props, (v, k) => {
-        if (_.isFunction(v))
+        if (_.isFunction(v)) {
           this._setFnHelper(k, v);
-        else
+        }
+        else {
+          console.warn('[angular-meteor][ReactiveContext] You tried to create a reactive property (' + k + ') using `helpers`. Please consider replacing it with `reactiveProps` instead.');
           this._setValHelper(k, v);
+        }
       });
 
       return this;
@@ -190,7 +207,7 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
     }
   }
 
-  return function(context) {
+  return function (context) {
     let reactiveContext = new ReactiveContext(context);
 
     // manipulates the original context so it could access reactive methods

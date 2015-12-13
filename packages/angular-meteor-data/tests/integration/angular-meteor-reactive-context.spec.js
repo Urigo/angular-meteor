@@ -317,7 +317,7 @@ describe('angular-meteor', function () {
       });
 
       it('Should defined reactive property on the context', function() {
-        reactiveContextInstance.helpers({
+        reactiveContextInstance.reactiveProps({
           prop: 20
         });
 
@@ -326,7 +326,7 @@ describe('angular-meteor', function () {
       });
 
       it('Should defined reactive property on the context and update the value', function() {
-        reactiveContextInstance.helpers({
+        reactiveContextInstance.reactiveProps({
           prop: 20
         });
 
@@ -337,7 +337,7 @@ describe('angular-meteor', function () {
       });
 
       it('Should create a configurable and enumerable reactive property', function() {
-        reactiveContextInstance.helpers({
+        reactiveContextInstance.reactiveProps({
           prop: 20
         });
 
@@ -349,7 +349,7 @@ describe('angular-meteor', function () {
       });
 
       it('Should add subscription when call subscribe', function() {
-        reactiveContextInstance.helpers({
+        reactiveContextInstance.reactiveProps({
           prop: 20
         });
 
@@ -363,7 +363,7 @@ describe('angular-meteor', function () {
       });
 
       it('Should call autorun methods when updating reactive property value', function() {
-        reactiveContextInstance.helpers({
+        reactiveContextInstance.reactiveProps({
           prop: 20
         });
 
@@ -380,7 +380,7 @@ describe('angular-meteor', function () {
         testScope = $rootScope.$new();
         reactiveContextInstance = $reactive(testScope);
 
-        reactiveContextInstance.helpers({
+        reactiveContextInstance.reactiveProps({
           prop: 20
         });
 
@@ -395,7 +395,7 @@ describe('angular-meteor', function () {
         testScope = $rootScope.$new();
         reactiveContextInstance = $reactive(testScope);
 
-        reactiveContextInstance.helpers({
+        reactiveContextInstance.reactiveProps({
           prop: 20
         });
 
