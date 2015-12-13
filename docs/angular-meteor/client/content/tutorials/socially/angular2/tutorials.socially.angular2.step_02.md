@@ -31,7 +31,7 @@ Why so much work setting up a new dependency? Angular 2 is trying to avoid names
 
 # Component as a Controller
 
-One convenient way to think of a components role in Angular2 is as the role played by `ngController` in Angular 1.x.
+One convenient way to think of a component's role in Angular2 is as the role played by `ngController` in Angular 1.x.
 Each component defines it's own view via the `View` annotation and creates a data model that will be rendered in the view. 
 
 Everything else is done within event handlers and other code that controls data flow between the view and the user
