@@ -5,7 +5,7 @@ Now that we have full data binding from server to client, let's interact with th
 
 In this chapter you will add the ability to insert a new party and delete an existing one from the UI.
 
-First, let's create a simple form with a button that will add a new party, we will add it above the list, inside the `partiesList` directive view:
+First, let's create a simple form with a button that will add a new party, we will add it above the list, inside the `partiesList` Component view:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="4.1"}}
 
@@ -31,11 +31,13 @@ Now let's bind a click event to the add button with Angular 1's [ng-click](https
 
 `ng-click` binds the click event to an expression - we just call a method that we will implement soon on the `partiesList`!
 
-Now let's implement the logic on the controller of the directive:
+Now let's implement the logic on the controller of the Component:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="4.4"}}
 
-> Parties is a Mongo.Collection object, and `insert` method inserts a new object to the collection and assign an id for the new object.
+> Parties is a Mongo.Collection object, and the [insert method](http://docs.meteor.com/#/full/insert) inserts a new object to the collection and assign an id for the new object.
+
+> Meteor support Javascript ES2015 as default so we can take advantage of that and define our `addParty` function as an [Arrow Function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
 
 Open a different browser, click the button and see how the party is added on both clients. So simple!
 

@@ -27,7 +27,7 @@ Then add the ui-router as a dependency to our angular app in `app.js`:
 Our app is slowly growing and becoming more complex.
 Until now, the app provided our users with a single view (the list of all parties), and all of the template code was located in the `main.html` file.
 
-The next step in building the app is to add a view that will show detailed information about each of the parties in our list.
+The next step in building the app is to add a view that will show detailed information about each of the parties on our list.
 
 To add the detailed view, we could expand the `main.html` file to contain template code for both views, but that would get messy very quickly.
 
@@ -53,7 +53,7 @@ Notice we did 3 things:
 
 1. Replaced all the content with ui-view (this will be responsible for including the right content according to the current URL).
 2. Added a `h1` header with a link to the main parties page.
-3. We also added a `base` tag in the head (required when using HTML5 location mode).
+3. We also added a `base` tag in the head (required when using HTML5 location mode - would be explained a but further).
 
 > Note that you can remove `main.html` now, because it's no longer in use!
 
@@ -68,41 +68,39 @@ And we will also add a state for a new page that will display the party details:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="5.6"}}
 
-Using the Angular 1 app's .config() method, we request the `$stateProvider` to be injected into our config function and use the state method to define our routes.
-
 Our application routes are defined as follows:
 
-* **('/parties')**: The parties list view will be shown when the URL hash fragment is /parties. To construct this view, Angular 1 will use the parties-list.html template and the PartiesListCtrl controller.
-* **('/parties/:partyId')**: The party details view will be shown when the URL hash fragment matches '/parties/:partyId', where :partyId is a variable part of the URL. To construct the party details view, Angular will use the party-details component.
+* **('/parties')**: The parties list view will be shown when the URL hash fragment is /parties. To construct this view, Angular 1 will use the parties-list Component.
+* **('/parties/:partyId')**: The party details view will be shown when the URL hash fragment matches '/parties/:partyId', where `:partyId` is a variable part of the URL. To construct the party details view, Angular will use the party-details Component.
 * **$urlRouterProvider.otherwise('/parties')**: Triggers a redirection to /parties when the browser address doesn't match either of our routes.
 * **$locationProvider.html5Mode(true)**: Sets the URL to look like a regular one. more about it [here](https://docs.angularjs.org/guide/$location#hashbang-and-html5-modes).
 * Each template is just a regular usage of our components.
 
 Note the use of the `:partyId` parameter in the second route declaration.
 The $state service uses the route declaration — `/parties/:partyId` — as a template that is matched against the current URL.
-All variables defined with the : notation are extracted into the `$stateParams` object.
+All variables defined with the : notation are passed into the Component through the `$stateParams` object.
 
 # Components
 
 But we still need to define our `partyDetails` component.
 
-Add this code under the existing component:
+Add this new Component code under the existing component:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="5.7"}}
 
-And we will also need to crete the view for this component:
+And let's create the view for this Component in a new file:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="5.8"}}
+
+Now let's add a link from each party in the parties list to it's details page:
+
+{{> DiffBox tutorialName="meteor-angular1-socially" step="5.9"}}
 
 Now all is in place.  Run the app and you'll notice a few things:
 
 * Click on the link in the name of a party - notice that you moved into a different view and that the party's id appears in both the browser's url and in the template.
 * Click back - you are back to the main list, this is because of ui-router's integration with the browser's history.
-* Try to put arbitrary text in the URL - something like http://localhost:3000/strange-url.  You should to be automatically redirected to the main parties list.
-
-Now to sum up our new ability (party details and editing party), let's add a link from the parties list to our new page:
-
-{{> DiffBox tutorialName="meteor-angular1-socially" step="5.9"}}
+* Try to put arbitrary text in the URL - something like [http://localhost:3000/strange-url](http://localhost:3000/strange-url).  You should to be automatically redirected to the main parties list.
 
 # Summary
 

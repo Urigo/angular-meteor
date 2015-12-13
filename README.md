@@ -22,17 +22,16 @@
 ## Resources
 - [Getting started tutorial](https://angular-meteor.com/tutorial)
 - [Example application](https://github.com/Urigo/meteor-angular-socially) (Final version of the tutorial)
-- [angular-meteor University](https://github.com/Urigo/meteor-angular-socially#angular-meteor-university-)
 - Questions and help - [stack-overflow `angular-meteor` tag](http://stackoverflow.com/questions/tagged/angular-meteor)
-- Discussions - [Angular category on the Meteor Forum](https://forums.meteor.com/c/angular) and [![Join the chat at https://gitter.im/Urigo/angular-meteor](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Urigo/angular-meteor?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+- [Discussions - the Meteor Forum](https://forums.meteor.com/)
 - [Report issues](https://github.com/Urigo/angular-meteor/issues)
 - [Change Log, updates and breaking changes](https://github.com/Urigo/angular-meteor/releases)
-- [Roadmap - Trello board](https://trello.com/b/Wj9U0ulk/angular-meteor)
-- [angular-meteor Blog](https://medium.com/angular-meteor)
-- Starters - [angular-meteor Yeoman generator](https://github.com/ndxbxrme/generator-angular-meteor), [Angular-Meteor-Boilerplate with TypeScript](https://github.com/ShMcK/Angular-Meteor-Boilerplate)
+- [Meteor Blog](info.meteor.com/blog/)
 - [Meteor package - angular](https://atmospherejs.com/meteor/angular)
-- [Angular-Meteor Platform](https://github.com/planet-training/angular-meteor-platform) - No Blaze, plain HTML
+- [Official Meteor guide for best practices](http://guide.meteor.com/)
 - [Awesome Meteor](https://github.com/Urigo/awesome-meteor) - A curated, community driven list of awesome Meteor packages, libraries, resources and shiny thing
+- Starters - [Angular-Meteor Platform](https://github.com/planet-training/angular-meteor-platform), [angular-meteor Yeoman generator](https://github.com/ndxbxrme/generator-angular-meteor), [Angular-Meteor-Boilerplate with TypeScript](https://github.com/ShMcK/Angular-Meteor-Boilerplate)
+- [Roadmap - Trello board](https://trello.com/b/Wj9U0ulk/angular-meteor)
 
 ## Contributing
 We would love contributions in:
@@ -65,9 +64,7 @@ Create a `packages` directory under your project's root folder and link your for
 
 ```bash
 cd myProject
-mkdir packages
-cd packages
-ln -s ~/path_to_your_repos/angular
+ln -s ~/path_to_your_repos/angular/packages/
 ```
 
 Now you can start using your own copy of the `angular-meteor` project from `myProject`.

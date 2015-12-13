@@ -47,9 +47,15 @@ As you may know, when using AngularJS dependency injection, we used strings for 
 
 There is a very popular Angular 1 tool that's called [ng-annotate](https://github.com/olov/ng-annotate) that takes care of that for us so we can write regular code that won't get mangled in minification.
 
-
 angular-meteor uses that process automatically so you do not need to add those extra definitions and just write your app without minification issues!
 
+So let's change our code to the regular and shorter declaration way:
+
+{{> DiffBox tutorialName="meteor-angular1-socially" step="2.3"}}
+
+and let's add the `ng-strict-di` directive so that if case there is a minification problem, we will find in already in development and not only after minification in production:
+
+{{> DiffBox tutorialName="meteor-angular1-socially" step="2.4"}}
 
 # Summary
 

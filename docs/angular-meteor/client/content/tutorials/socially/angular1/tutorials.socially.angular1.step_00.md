@@ -34,7 +34,8 @@ Run the app like so:
     => Started proxy
     => Started MongoDB.
     => Started your app.
-    >=> App running at: http://localhost:3000/
+    
+    => App running at: http://localhost:3000/
 
 Now go to [http://localhost:3000/](http://localhost:3000/)
 and look at the amazing app that's running on your computer!
@@ -66,7 +67,7 @@ Concatenation means merging the content of all `HTML`, `HEAD` and `BODY` tags fo
 
 So in our case, Meteor found our `index.html` file, found the `BODY` tag inside and added it's content to the `BODY` tag of the main generated file.
 
-> (right-click -> inspect element on the page to see the generated file)
+> (right-click -> inspect element on the page of your Meteor app in the browser to see the generated file)
 
 
 # Adding Angular 1
@@ -75,7 +76,7 @@ It's time to add Angular 1 to our stack!
 
 Because we decided to work with AngularJS in the client side, we need to remove the default UI package of Meteor, called `Blaze`.
 
-We also need to remove Meteor's default ECMAScript2015 package named `ecmascript` because Angular-Meteor uses a package named `angular-babel` in order to get both ECMAScript2015 and AngularJS DI annotations.
+We also need to remove Meteor's default ECMAScript2015 package named `ecmascript` because Angular-Meteor uses a package named `angular-babel` in order to get both ECMAScript2015 and [AngularJS DI annotations](https://github.com/olov/ng-annotate).
 
 So let's remove it by running:
 
@@ -92,9 +93,9 @@ That's it! Now we can use Angular 1's power in our Meteor app.
 
 # HTML
 
-To start simple, create a new file called `main.html` under the main folder, this will be our main `HTML` template page.
+To start simple, create a new file called `main.html` under the project's root folder, this will be our main `HTML` template page.
 
-Then move the `p` tag into it:
+Then move the `p` tag from `index.html` into it:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="0.6"}}
 
@@ -107,7 +108,7 @@ But if you load this in your browser, **you won't see anything**. That's because
 
 > It's very important to note - the **paths are always absolute, not relative!**  so if `main.html` was inside a folder named `client`, you would have to place the whole path from the route app, doesn't matter where you're calling the file from.
 
-E.g. if `main.html` was in a folder named `client` your include would look like:
+> E.g. if `main.html` was in a folder named `client` your include would look like:
 
     <div ng-include="'client/main.html'"></div>
 
@@ -115,14 +116,14 @@ E.g. if `main.html` was in a folder named `client` your include would look like:
 
 Angular 1 apps are actually individual modules. So let's create our app module.
 
-Create a new `app.js` file.
+Create a new `app.js` file on the project's root folder.
 
-Here you see another example of Meteor's power and simplicity - no need to include this file anywhere. Meteor will take care of it by going through all the files in the `socially` folder and including them automatically.
+Here you see another example of Meteor's power and simplicity - no need to write boilerplate code to include that file anywhere. Meteor will take care of it by going through all the files in the `socially` folder and including them automatically.
 
 One of Meteor's goals is to break down the barrier between client and server, so the code you write can run everywhere! (more on that later).
 But we need Angular 1's power only in the client side, so how can we do that?
 
-There are a few ways to tell Meteor to run code only on the client/server/phone side, let's start with the simplest way - [Meteor.isClient](http://docs.meteor.com/#/full/meteor_isclient) variable.
+There are a few ways to tell Meteor to run code only on the client/server/mobile side, let's start with the simplest way - [Meteor.isClient](http://docs.meteor.com/#/full/meteor_isclient) variable.
 
 Everything inside this `if` statement will only run on the client side.
 
@@ -136,7 +137,7 @@ And use the same application name in the `ng-app` directive in `index.html`:
 
 Now run the app.
 
-Everything is the same, so now inside our `main.html` let's use Angular 1:
+Everything is the same, so now inside our `main.html` let's add an Angular 1 expression:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="0.10"}}
 

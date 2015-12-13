@@ -4,19 +4,19 @@
 In this step, we will implement the party details view, which is displayed when a user clicks on a party in the parties list.
 The user will also be able to change the party's details.
 
-To implement the party details view we will a feature from Angular-Meteor, called `helpers`.
+To implement the party details view we will use `helpers`.
 
-We used `helpers` in the previous component we implemented, but now we will demonstrate how to use it with a single object instead of a Mongo.Collection cursor.
+We used `helpers` in the previous Component we implemented, but now we will demonstrate how to use it with a single object instead of a Mongo.Collection cursor.
 
 # Implement the component
 
-We'll expand the `partyDetails` by using `helpers` method, and we will use `findOne` method from the Mongo.Collection, which returns a single object.
+We'll expand the `partyDetails` by using `helpers` method, and we will use [findOne](http://docs.meteor.com/#/full/findone) method from the Mongo.Collection, which returns a single object.
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="6.1"}}
 
 In our example we find our relevant party by it's id, and used a regular MongoDB syntax to create our `findOne` query, which explained in Meteor's [collection.findOne](http://docs.meteor.com/#/full/findone) documentation.
 
-So after declaring this helpers, we can just use `this.party` in our component's controller, or `partyDetails.party` in our HTML view.
+So after declaring this helper, we can just use `this.party` in our Component's Controller, or `partyDetails.party` in our HTML view.
 
 # Component template
 
