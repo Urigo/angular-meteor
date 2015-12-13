@@ -29,7 +29,7 @@ Now add the same to the RSVP buttons:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="15.4"}}
 
-Add let's add this the the end of the RSVP buttons:
+Add let's add this to the end of the RSVP buttons:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="15.5"}}
 

@@ -14,7 +14,7 @@ Then let's define the module dependency in our app. go to `app.js` inside the `c
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="16.2"}}
 
-Now let's add a map the `party-details.html` , first add this HTML snippet to the end of the template:
+Now let's add a map to `party-details.html` , first add this HTML snippet to the end of the template:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="16.3"}}
 
