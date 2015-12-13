@@ -47,7 +47,8 @@ ES6 modules are supported via SystemJS module loader library.
 
 To start, create `app.ts` file, import `Component` and `View` and then bootstrap the app:
 ````ts
-    import {Component, View, bootstrap} from 'angular2/angular2';
+    import {Component, View} from 'angular2/core';
+    import {bootstrap} from 'angular2-meteor';
 
     @Component({
       selector: 'socially'
