@@ -1,0 +1,93 @@
+<template name="api.1.3.1.subscribe">
+  <div>
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/docs/angular-meteor/client/content/api-reference/1.3.1/api.subscribe.html"
+       class="btn btn-default btn-lg improve-button">
+      <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
+    </a>
+
+    <do-nothing>
+      {{#markdown}}
+
+# subscribe
+
+The `subscribe` method is part of the `ReactiveContext`, and available on every `context` and `$scope`.
+
+The method expect the publication name (as defined in the server), function that return the arguments array, and result callback.
+
+The second argument is a function, which return an array of arguments as defined in the publication on the server side. This function will also depend on the `reactiveProps` it will use, and each change in these `helpers` will trigger the arguments method again and will update the subscription.
+
+> Tip: You can just use the first argument, the rest is optional.
+
+### Arguments
+
+<table class="variables-matrix input-arguments">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Type</th>
+    <th>Details</th>
+    <th>Required</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td><strong>Publication name</strong></td>
+    <td>
+      String
+    </td>
+    <td>The name of the publication, as defined in the server side using `Meteor.publish`.</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td>Arguments Function</td>
+    <td>
+      Function
+    </td>
+    <td>A function, which expected to return an array of arguments that will passed to the subscription.</td>
+    <td>No</td>
+  </tr>
+  <tr>
+    <td>Result Callback</td>
+    <td>
+      Function / Object
+    </td>
+    <td>May include `onStop` and `onReady` callbacks. If there is an error, it is passed as an argument to `onStop`. If a function is passed instead of an object, it is interpreted as an `onReady` callback.</td>
+    <td>No</td>
+  </tr>
+  </tbody>
+</table>
+
+### Return value
+
+This method returns `this`, which the the reactive context, in order to provide the ability to chain the logic.
+
+### Usage Example:
+
+    myModule.controller('MyCtrl', ['$scope', '$reactive', function($scope, $reactive) {
+      $reactive(this).attach($scope);
+
+      this.subscribe('users');
+    }]);
+
+
+### Example with `reactiveProps`:
+
+    myModule.controller('MyCtrl', ['$scope', '$reactive', function($scope, $reactive) {
+      $reactive(this).attach($scope);
+
+      this.reactiveProps({
+        relevantId: 10
+      });
+
+      this.subscribe('users', () => {
+        return this.relevantId;
+      });
+
+      this.relevantId = 50; // This will cause the subscribe arguments method to run again
+    }]);
+
+      {{/markdown}}
+    </do-nothing>
+
+  </div>
+</template>
