@@ -87,7 +87,7 @@ Each element of the form model is actually going to be an instance of `Control` 
 It's a special type, which binds to a form input element and can provide data validation
 in the model on demand.
 
-Form model itself is of `ControlGroup` [type](https://angular.io/docs/js/latest/api/core/NgControlGroup-class.html).
+Form model itself is of `ControlGroup` [type](https://angular.io/docs/js/latest/api/common/ControlGroup-class.html).
 As its name says, it groups provided controls together.
 
 Alternatively, we could write:
@@ -129,11 +129,14 @@ We can check `partiesForm.valid` property to determine if the form is valid:
     console.log(this.partiesForm.valid)
     > false
 
-Now let's bind form model to the form and its input elements.
+Now let's bind form model to the form and its input elements. Here we use special 
+from directives: `ngFormModel` and `ngControl`, that do all the magic by binding properies, that we
+just defined, to the DOM elements.
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="4.8"}}
 
-Now each time the user types inside these inputs, the value of the `partiesForm` and its controls will be automatically updated. Conversely, if `partiesForm` is changed outside of the HTML, the input values will be updated accordingly.
+Now each time the user types inside these inputs, the value of the `partiesForm` and its controls will be automatically updated.
+Conversely, if `partiesForm` is changed outside of the HTML, the input values will be updated accordingly.
 
 ## Event Handlers
 
@@ -151,7 +154,7 @@ For example, to add a party we'll need to take the
 current state of the form and pass into an event handler.
 Now we can take the form and print it inside template:
     
-    <form [ng-form-model]="partiesForm" #f="form">
+    <form [ngFormModel]="partiesForm" #f="ngForm">
         ...
         {{|f.value}}
     </form>
@@ -193,7 +196,7 @@ Add the method inside the Socially class in `app.ts`:
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="4.12"}}
 
-The Mongo Collection Parties has a method called 'remove'. We search for the relevant party by its identifier, `_id`, and delete it.
+The Mongo Collection Parties has a method called "remove". We search for the relevant party by its identifier, `_id`, and delete it.
 
 Now try to delete a few parties and also watch them being removed from other browser clients.
 

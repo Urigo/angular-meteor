@@ -15,8 +15,8 @@ Let's change our template to be dynamic:
 
 We replaced the hard-coded party list with the [NgFor](https://angular.io/docs/js/latest/api/directives/NgFor-class.html) directive and two Angular expressions:
 
-* The `*ng-for="#party of parties"` attribute in the `li` tag is an Angular repeater directive. The repeater tells Angular to create a `li` element for each party in the list using the `li` tag as the template.
-* The expressions wrapped in double-curly-braces ( `{{dstache}}party.name}}` and `{{dstache}}party.description}}` ) will be replaced by the value of the expressions.
+* The `*ngFor="#party of parties"` attribute in the `li` tag is an Angular repeater directive. The repeater tells Angular to create a `li` element for each party in the list using the `li` tag as the template.
+* The expressions wrapped in the double curly braces ( `{{dstache}}party.name}}` and `{{dstache}}party.description}}` ) will be replaced by the value of the expressions.
 
 To get this to work, we'll have to import NgFor and tell Angular 2 we are using it in the template.
 
@@ -31,8 +31,8 @@ Why so much work setting up a new dependency? Angular 2 is trying to avoid names
 
 # Component as a Controller
 
-One convenient way to think of a components role in Angular2 is as the role played by ````ngController```` in Angular 1.x.
-Each component defines it's own view via the ````View```` annotation and creates a data model that will be rendered in the view. 
+One convenient way to think of a components role in Angular2 is as the role played by `ngController` in Angular 1.x.
+Each component defines it's own view via the `View` annotation and creates a data model that will be rendered in the view. 
 
 Everything else is done within event handlers and other code that controls data flow between the view and the user
 and updates the data model accordingly.
@@ -40,7 +40,7 @@ and updates the data model accordingly.
 Now we are going to create out initial data model and render it in the view.
 This code will go inside of our Socially class [`constructor`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor). A constructor is a function run when a class is loaded, thus it loads the initial data for the class.
 
-We can attach data with the context 'this', referring to the Socially class.
+We can attach data with the context "this", referring to the Socially class.
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="2.3"}}
 
@@ -48,12 +48,11 @@ Run the app again.
 
     meteor
 
-At this moment you will see a message in the console: _Property 'parties' does not exist on type 'Socially'_.
+At this moment you will see a message in the console: _Property "parties" does not exist on type "Socially"_.
 These kind of messages can be annoying, but they do a great job — keep our code less buggy.
 
 It's so easy, for example, to misspell the name of a property in dynamic languages like JavaScript.
-Thanks to TypeScript, we can use this compilation diagnostics to
-create less error-prone JavaScript applications.
+Thanks to TypeScript, we can use this compilation diagnostics to create less bug-prone JavaScript applications.
 
 This comes as a great benefit of choosing TypeScript as a primary language
 for our app. So lets define our `parties` property:
@@ -73,7 +72,7 @@ Although the controller is not yet doing very much, it plays a crucial role. The
 
 You now have a dynamic app that features separate model, view and controller components.
 
-But, this is still all client side - which is nice for tutorials, but in a real application we need to persist the data on the server and sync all the clients with it.
+But, this is still all client side — which is nice for tutorials, but in a real application we need to persist the data on the server and sync all the clients with it.
 
 So, let's go to [step 3](/tutorial/step_03) to learn how to bind our application to the great power of Meteor.
 
