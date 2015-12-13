@@ -34,7 +34,7 @@ API_1_3_1 = function (version, basedOnTemplatesOf) {
             id: "03",
             route: "api." + version + ".helpers",
             path: urlBase + "helpers",
-            title: "Context Helpers",
+            title: "helpers",
             seoTitle: "Context Helpers",
             mdContent: "api." + version + ".helpers"
           },
@@ -42,7 +42,7 @@ API_1_3_1 = function (version, basedOnTemplatesOf) {
             id: "04",
             route: "api." + version + ".reactive-props",
             path: urlBase + "reactive-props",
-            title: "Reactive Properties",
+            title: "reactiveProps",
             seoTitle: "Reactive Properties",
             mdContent: "api." + version + ".reactive-props"
           },
@@ -50,7 +50,7 @@ API_1_3_1 = function (version, basedOnTemplatesOf) {
             id: "05",
             route: "api." + version + ".subscribe",
             path: urlBase + "subscribe",
-            title: "Subscribe",
+            title: "subscribe",
             seoTitle: "Subscribe",
             mdContent: "api." + version + ".subscribe"
           },
@@ -58,7 +58,7 @@ API_1_3_1 = function (version, basedOnTemplatesOf) {
             id: "06",
             route: "api." + version + ".autorun",
             path: urlBase + "autorun",
-            title: "Autorun",
+            title: "autorun",
             seoTitle: "Autorun",
             mdContent: "api." + version + ".autorun"
           }

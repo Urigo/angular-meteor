@@ -1,0 +1,54 @@
+<template name="api.1.3.1.helpers">
+  <div>
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/docs/angular-meteor/client/content/api-reference/1.3.1/api.helpers.html"
+       class="btn btn-default btn-lg improve-button">
+      <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
+    </a>
+
+    <do-nothing>
+      {{#markdown}}
+
+# helpers
+
+The `helpers` method is part of the `ReactiveContext`, and available on every `context` and `$scope`.
+
+These method are defined as Object, where each key is the name of the variable the will be available on the `context` we run, and each value is a function with a return value.
+
+Helpers are function which run and execute in each Autorun cycle of our app.
+
+Each helper function should return a value, which could be any value. Helpers also support handling [MongoDB Cursor](http://docs.meteor.com/#/full/mongo_cursor) and it will expose is as a normal array to the context.
+
+Helpers method can use and depend on [/api/1.3.1/reactive-props](reactiveProps), which also trigger the helper method in each change of the reactive-prop.
+
+### Usage Example:
+
+    myModule.controller('MyCtrl', ['$scope', '$reactive', function($scope, $reactive) {
+      $reactive(this).attach($scope);
+
+      this.helpers({
+        users: () => Users.find({}),
+      });
+    }]);
+
+> The example above will create a array on `this` context, with all the values that available from the Cursor that returned from `find` method,
+
+### Example with `reactiveProps`:
+
+    myModule.controller('MyCtrl', ['$scope', '$reactive', function($scope, $reactive) {
+      $reactive(this).attach($scope);
+
+      this.reactiveProps({
+        relevantId: 10
+      });
+
+      this.helpers({
+        users: () => Users.find({ _id: this.relevantId}),
+      });
+    }]);
+
+> In the following example, each change in `relevantId` variable, will trigger the helpers method again, and the objects returned in the cursor will be different.
+      {{/markdown}}
+    </do-nothing>
+
+  </div>
+</template>
