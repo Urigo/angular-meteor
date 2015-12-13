@@ -87,7 +87,15 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
       }
     }
 
+    _verifyScope() {
+      if (!this.scope) {
+        this.scope = $rootScope.$new(true);
+      }
+    }
+
     reactiveProps(props) {
+      this._verifyScope();
+
       _.each(props, (v, k) => {
         if (_.isFunction(v)) {
           throw new Error(`[angular-meteor][ReactiveContext] You tried to create a function helper (${k}) using "reactiveProps", please use "helpers" instead!`);
@@ -101,6 +109,8 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
     }
 
     helpers(props) {
+      this._verifyScope();
+
       _.each(props, (v, k) => {
         if (_.isFunction(v)) {
           this._setFnHelper(k, v);
@@ -130,6 +140,16 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
           this.propertiesTrackerDeps[k].changed();
         }
       });
+
+      if (angular.isObject(v)) {
+        this.scope[k] = this.context[k];
+
+        this.scope.$watch(k, (newValue, oldValue) => {
+          if (newValue !== oldValue) {
+            this.propertiesTrackerDeps[k].changed();
+          }
+        }, true);
+      }
     }
 
     _setFnHelper(k, fn) {
@@ -168,6 +188,8 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
     }
 
     subscribe(name, fn) {
+      this._verifyScope();
+
       fn = fn || angular.noop;
 
       if (this.scope && this.scope !== this.context) {
@@ -184,6 +206,8 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
     }
 
     autorun(fn) {
+      this._verifyScope();
+
       if (this.scope && this.scope !== this.context) {
         this.scope.autorun(fn);
       }

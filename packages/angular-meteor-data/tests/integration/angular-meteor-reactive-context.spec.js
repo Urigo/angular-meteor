@@ -415,6 +415,56 @@ describe('angular-meteor', function () {
         expect(autorunSpy).toHaveBeenCalled();
         expect(element.get(1).innerHTML).toBe('test');
       });
+
+      it('Should trigger Autorun dependencies when using object and updating a sub property', function() {
+        $reactive(context);
+
+        var mySpy = jasmine.createSpy();
+
+        context.reactiveProps({
+          prop: {
+            mySubProp: 10
+          }
+        });
+
+        context.helpers({
+          myMethod: mySpy
+        });
+
+        context.prop.mySubProp = 20;
+
+        $rootScope.$apply();
+
+        setTimeout(() => {
+          expect(mySpy).toHaveBeenCalled();
+          expect(mySpy.calls.count()).toBe(2);
+        }, 100);
+      });
+
+      it('Should trigger Autorun dependencies when using object and adding a sub property', function() {
+        $reactive(context);
+
+        var mySpy = jasmine.createSpy();
+
+        context.reactiveProps({
+          prop: {
+            mySubProp: 10
+          }
+        });
+
+        context.helpers({
+          myMethod: mySpy
+        });
+
+        context.prop.newProp = 20;
+
+        $rootScope.$apply();
+
+        setTimeout(() => {
+          expect(mySpy).toHaveBeenCalled();
+          expect(mySpy.calls.count()).toBe(2);
+        }, 100);
+      });
     });
   });
 });
