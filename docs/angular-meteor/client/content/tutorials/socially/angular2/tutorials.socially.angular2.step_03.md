@@ -206,9 +206,9 @@ The Angular2-Meteor package implements a special differ class for Mongo cursors.
 The Angular2-Meteor package has its own `bootstrap` that overrides the basic bootstrap method from `angular2/bootstrap` and adds
 some additional new providers. These include a provider for the differ class mentioned above.
 
-Lets change `bootstrap` from `angular2/angular2` to `bootstrap` from `angular2-meteor` as follows:
+Let's change `bootstrap` from `angular2/bootstrap` to `bootstrap` from `angular2-meteor` as follows:
 
-    import {Component, View, NgFor} from 'angular2/angular2';
+    import {Component, View, NgZone} from 'angular2/core';
 
     import {bootstrap} from 'angular2-meteor';
 
