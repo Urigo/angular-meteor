@@ -96,10 +96,6 @@ export class MongoCursorDiffer {
   }
 
   _destroyObserver() {
-    if (this._subscription) {
-      ObservableWrapper.dispose(this._subscription);
-    }
-
     if (this._curObserver) {
       this._curObserver.destroy();
     }

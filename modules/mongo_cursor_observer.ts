@@ -22,14 +22,32 @@ export class RemoveChange {
   constructor(public index: number) {}
 }
 
-export class MongoCursorObserver extends EventEmitter {
+class Subscription {
+  private _isUnsubscribed: boolean = false;
+
+  constructor(private _next: Function,
+              private _error: Function,
+              private _complete: Function) {}
+
+  onNext(value) {
+    if (!this._isUnsubscribed && this._next) {
+      this._next(value);
+    }
+  }
+
+  unsubscribe() {
+    this._isUnsubscribed = true;
+  }
+}
+
+export class MongoCursorObserver {
   private _docs: Array<any> = [];
   private _changes: Array<any> = [];
   private _lastChanges: Array<any> = [];
   private _hCursor: CursorHandle;
+  private _subscriptions: Array<Subscription> = [];
 
   constructor(cursor: Mongo.Cursor<any>) {
-    super();
     check(cursor, Mongo.Cursor);
 
     this._hCursor = this._startCursor(cursor);
@@ -37,6 +55,20 @@ export class MongoCursorObserver extends EventEmitter {
 
   get lastChanges() {
     return this._lastChanges;
+  }
+
+  subscribe({next, error, complete}) {
+    let subscription = new Subscription(next, error, complete);
+    this._subscriptions.push(subscription);
+    return subscription;
+  }
+
+  emit(value) {
+    if (this._subscriptions) {
+      for (let sub of this._subscriptions) {
+        sub.onNext(value);
+      }
+    }
   }
 
   _startCursor(cursor: Mongo.Cursor<any>): CursorHandle {
@@ -50,7 +82,7 @@ export class MongoCursorObserver extends EventEmitter {
       cursor.fetch();
       let lastChanges = this._changes.splice(0);
       if (lastChanges.length) {
-        this.next(lastChanges);
+        this.emit(lastChanges);
       }
       this._lastChanges = lastChanges;
     });
@@ -108,6 +140,7 @@ export class MongoCursorObserver extends EventEmitter {
       this._hCursor.stop();
     }
 
+    this._subscriptions = null;
     this._hCursor = null;
     this._docs = null;
     this._changes = null;

@@ -1,26 +1,31 @@
 describe('MeteorComponent', function() {
   var MeteorComponent;
-  var component;
-
+  var ngCore;
   beforeAll(function(done) {
-    System.import('angular2-meteor').then(function(ngMeteor2) {
-      MeteorComponent = ngMeteor2.MeteorComponent;
-      done();
+    System.import('angular2/core').then(function(ngCore_) {
+      ngCore = ngCore_;
+      System.import('angular2-meteor').then(function(ng2Meteor) {
+        MeteorComponent = ng2Meteor.MeteorComponent;
+        done();
+      });
     });
   });
 
+  var ngZone;
+  var component;
   beforeEach(function() {
-    component = new MeteorComponent();
+    ngZone = ngCore.createNgZone();
+    spyOn(ngZone, 'run').and.callThrough();
+    component = new MeteorComponent(ngZone);
   });
 
-  describe('MeteorComponent.subscribe', function() {
+  describe('subscribe', function() {
     beforeEach(function() {
       spyOn(Meteor, 'subscribe').and.returnValue({ stop: _.noop });
-      spyOn(zone, 'bind').and.callFake(function(fn) { return fn; });
     });
 
-    describe('given name', function() {
-      it('should call Meteor.subscribe with given name', function() {
+    describe('with only name', function() {
+      it('should call Meteor.subscribe with only name', function() {
         var args = ['collection'];
         component.subscribe.apply(component, args);
         expect(Meteor.subscribe.calls.count()).toEqual(1);
@@ -28,7 +33,7 @@ describe('MeteorComponent', function() {
       });
     });
 
-    describe('given name, args', function() {
+    describe('with args', function() {
       it('should call Meteor.subscribe with given name, args', function() {
         var args = ['collection', 'foo', 'bar'];
         component.subscribe.apply(component, args);
@@ -36,8 +41,8 @@ describe('MeteorComponent', function() {
         expect(Meteor.subscribe.calls.mostRecent().args).toEqual(args);
       });
 
-      describe('last arg is a boolean', function() {
-        it('should call Meteor, subscribe as usual', function() {
+      describe('and autoBind true', function() {
+        it('should call Meteor.subscribe as usual', function() {
           var args = ['collection', 'foo', 'bar', true];
           component.subscribe.apply(component, args);
           expect(Meteor.subscribe.calls.count()).toEqual(1);
@@ -46,8 +51,8 @@ describe('MeteorComponent', function() {
       });
     });
 
-    describe('given name, args, callback', function() {
-      it('should call Meteor.subscribe with the given name, args, callback', function() {
+    describe('with callback', function() {
+      it('should call Meteor.subscribe with name, args and callback', function() {
         var callback = jasmine.createSpy();
         var args = ['collection', 'foo', 'bar'];
         component.subscribe.apply(component, args.concat(callback));
@@ -59,8 +64,8 @@ describe('MeteorComponent', function() {
       });
     });
 
-    describe('given name, args, callbacks', function() {
-      it('should call Meteor.Subscribe with the given name, args, callbacks', function() {
+    describe('with Meteor callbacks object', function() {
+      it('should call Meteor.subscribe with name, args and callbacks object', function() {
         var callbacks = {
           onReady: jasmine.createSpy(),
           onStop: jasmine.createSpy(),
@@ -82,7 +87,7 @@ describe('MeteorComponent', function() {
       });
     });
 
-    describe('given name, args, callback, autobind', function() {
+    describe('with callback and autobind', function() {
       describe('autobind off', function() {
         it('should use callback as usual', function() {
           var callback = jasmine.createSpy();
@@ -93,12 +98,12 @@ describe('MeteorComponent', function() {
 
           _.last(Meteor.subscribe.calls.mostRecent().args).call();
           expect(callback.calls.count()).toEqual(1);
-          expect(zone.bind.calls.count()).toEqual(0);
+          expect(ngZone.run.calls.count()).toEqual(0);
         });
       });
 
       describe('autobind on', function() {
-        it('should use callback with zone.bind', function() {
+        it('should use callback with zone.run', function() {
           var callback = jasmine.createSpy();
           var args = ['collection', 'foo', 'bar'];
           component.subscribe.apply(component, args.concat(callback, true));
@@ -107,12 +112,12 @@ describe('MeteorComponent', function() {
 
           _.last(Meteor.subscribe.calls.mostRecent().args).call();
           expect(callback.calls.count()).toEqual(1);
-          expect(zone.bind.calls.count()).toEqual(1);
+          expect(ngZone.run.calls.count()).toEqual(1);
         });
       });
     });
 
-    describe('given name, args, callbacks, autobind', function() {
+    describe('with callbacks objects and autobind', function() {
       describe('autobind off', function() {
         it('should use callbacks as usual', function() {
           var callbacks = {
@@ -133,7 +138,7 @@ describe('MeteorComponent', function() {
           expect(callbacks.onReady.calls.count()).toEqual(1);
           expect(callbacks.onError.calls.count()).toEqual(1);
           expect(callbacks.onStop.calls.count()).toEqual(1);
-          expect(zone.bind.calls.count()).toEqual(0);
+          expect(ngZone.run.calls.count()).toEqual(0);
         });
       });
 
@@ -157,7 +162,7 @@ describe('MeteorComponent', function() {
           expect(callbacks.onReady.calls.count()).toEqual(1);
           expect(callbacks.onError.calls.count()).toEqual(1);
           expect(callbacks.onStop.calls.count()).toEqual(1);
-          expect(zone.bind.calls.count()).toEqual(3);
+          expect(ngZone.run.calls.count()).toEqual(3);
         });
       });
     });
@@ -166,7 +171,6 @@ describe('MeteorComponent', function() {
   describe('MeteorComponent.call', function() {
     beforeEach(function() {
       spyOn(Meteor, 'call');
-      spyOn(zone, 'bind').and.callFake(function(fn) { return fn; });
     });
 
     it('Meteor.call should be called with the same args', function() {
@@ -185,7 +189,7 @@ describe('MeteorComponent', function() {
 
       _.last(Meteor.call.calls.mostRecent().args).call();
       expect(callback.calls.count()).toEqual(1);
-      expect(zone.bind.calls.count()).toEqual(1);
+      expect(ngZone.run.calls.count()).toEqual(1);
     });
   });
 });

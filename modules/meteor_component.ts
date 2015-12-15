@@ -3,7 +3,7 @@
 
 'use strict';
 
-import {OnDestroy} from 'angular2/core';
+import {OnDestroy, NgZone, createNgZone} from 'angular2/core';
 
 declare type CallbacksObject = {
   onReady?: Function;
@@ -11,16 +11,34 @@ declare type CallbacksObject = {
   onStop?: Function;
 }
 
-declare type MeteorCallbacks = Function | CallbacksObject;
+declare type MeteorCallbacks = () => any | CallbacksObject;
+
+const subscribeEvents = ['onReady', 'onError', 'onStop'];
+
+function isMeteorCallbacks(callbacks: any): boolean {
+  return _.isFunction(callbacks) || isCallbacksObject(callbacks);
+}
+
+// Checks if callbacks of {@link CallbacksObject} type.
+function isCallbacksObject(callbacks: any): boolean {
+  return callbacks && subscribeEvents.some((event) => {
+    return _.isFunction(callbacks[event]);
+  });
+};
 
 export class MeteorComponent implements OnDestroy {
   private _hAutoruns: Array<Tracker.Computation> = [];
   private _hSubscribes: Array<Meteor.SubscriptionHandle> = [];
+  private _zone: NgZone;
 
-  autorun(func: Function, autoBind: boolean) {
+  constructor(zone?: NgZone) {
+    this._zone = zone || createNgZone();
+  }
+
+  autorun(func: () => any, autoBind: boolean) {
     check(func, Function);
 
-    let hAutorun = Tracker.autorun(autoBind ? zone.bind(func) : func);
+    let hAutorun = Tracker.autorun(autoBind ? this._bindToNgZone(func) : func);
     this._hAutoruns.push(hAutorun);
   }
 
@@ -51,7 +69,7 @@ export class MeteorComponent implements OnDestroy {
       let callbacks = <MeteorCallbacks>penultParam;
       let autobind = <boolean>lastParam;
       if (autobind) {
-        args[args.length - 2] = bindZone(callbacks);
+        args[args.length - 2] = this._bindToNgZone(callbacks);
       }
       // Removes last params since its specific to MeteorComponent.
       args.pop();
@@ -72,36 +90,23 @@ export class MeteorComponent implements OnDestroy {
     this._hAutoruns = null;
     this._hSubscribes = null;
   }
-}
 
-const subscribeEvents = ['onReady', 'onError', 'onStop'];
+  _bindToNgZone(callbacks: MeteorCallbacks): MeteorCallbacks {
+    if (_.isFunction(callbacks)) {
+      return () => this._zone.run(callbacks);
+    }
 
-function bindZone(callbacks: MeteorCallbacks): MeteorCallbacks {
-  var bind = zone.bind.bind(zone);
+    if (isCallbacksObject(callbacks)) {
+      // Bind zone for each event.
+      let newCallbacks = _.clone(callbacks);
+      subscribeEvents.forEach(event => {
+        if (newCallbacks[event]) {
+          newCallbacks[event] = () => this._zone.run(callbacks[event]);
+        }
+      });
+      return newCallbacks;
+    }
 
-  if (_.isFunction(callbacks)) {
-    return bind(callbacks);
+    return callbacks;
   }
-
-  if (isCallbacksObject(callbacks)) {
-    // Bind zone for each event.
-    subscribeEvents.forEach(event => {
-      if (callbacks[event]) {
-        callbacks[event] = bind(callbacks[event]);
-      }
-    });
-  }
-
-  return callbacks;
-};
-
-function isMeteorCallbacks(callbacks: any): boolean {
-  return _.isFunction(callbacks) || isCallbacksObject(callbacks);
 }
-
-// Checks if callbacks of {@link CallbacksObject} type.
-function isCallbacksObject(callbacks: any): boolean {
-  return callbacks && subscribeEvents.some((event) => {
-    return _.isFunction(callbacks[event]);
-  });
-};
