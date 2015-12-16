@@ -21,13 +21,15 @@ angularMeteorUser.service('$meteorUser', [
       $meteorUtils.autorun($rootScope, function(){
         if ( !Meteor.loggingIn() )
           deferred.resolve( Meteor.user() );
-      });
+      }, true);
 
       return deferred.promise;
     };
 
-    this.requireUser = function(){
-      console.warn('[angular-meteor.requireUser] Please note that this method is deprecated since 1.3.0 and will be removed in 1.4.0! http://info.meteor.com/blog/angular-meteor-1.3');
+    this.requireUser = function(ignoreDeprecation){
+      if (!ignoreDeprecation) {
+        console.warn('[angular-meteor.requireUser] Please note that this method is deprecated since 1.3.0 and will be removed in 1.4.0! http://info.meteor.com/blog/angular-meteor-1.3');
+      }
 
       var deferred = $q.defer();
 
@@ -38,7 +40,7 @@ angularMeteorUser.service('$meteorUser', [
           else
             deferred.resolve( Meteor.user() );
         }
-      });
+      }, true);
 
       return deferred.promise;
     };
@@ -46,7 +48,7 @@ angularMeteorUser.service('$meteorUser', [
     this.requireValidUser = function(validatorFn) {
       console.warn('[angular-meteor.requireValidUser] Please note that this method is deprecated since 1.3.0 and will be removed in 1.4.0! http://info.meteor.com/blog/angular-meteor-1.3');
 
-      return self.requireUser().then(function(user){
+      return self.requireUser(true).then(function(user){
         var valid = validatorFn( user );
 
         if ( valid === true )
@@ -83,6 +85,6 @@ angularMeteorUser.run([
       if (!Meteor.user) return;
       $rootScope.currentUser = Meteor.user();
       $rootScope.loggingIn = Meteor.loggingIn();
-    });
+    }, true);
   }
 ]);
