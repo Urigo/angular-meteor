@@ -159,8 +159,6 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
           this.propertiesTrackerDeps[k].changed();
         }
       });
-
-
     }
 
     _setFnHelper(k, fn) {
@@ -198,19 +196,20 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
       this.propertiesTrackerDeps[k].changed();
     }
 
-    subscribe(name, fn) {
+    subscribe(name, fn, resultCb) {
       if (!angular.isString(name)) {
         throw new Error(`[angular-meteor][ReactiveContext] The first argument of 'subscribe' method must be a string!`);
       }
 
       fn = fn || angular.noop;
+      resultCb = resultCb || angular.noop;
 
       if (!angular.isFunction(fn)) {
         throw new Error(`[angular-meteor][ReactiveContext] The second argument of 'subscribe' method must be a function!`);
       }
 
       if (this.scope && this.scope !== this.context) {
-        this.stoppables.push(this.scope.subscribe(name, fn));
+        this.stoppables.push(this.scope.subscribe(name, fn, resultCb));
       }
       else {
         this.autorun(() => {
@@ -220,7 +219,7 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
             throw new Error(`[angular-meteor][ReactiveContext] The return value of arguments function in subscribe must be an array! `);
           }
 
-          this.stoppables.push(Meteor.subscribe(name, ...args));
+          this.stoppables.push(Meteor.subscribe(name, ...args, resultCb));
         });
       }
 

@@ -12,7 +12,7 @@ angularMeteorReactiveScope.run(['$rootScope', '$reactive', '$parse', function ($
       return this.stopOnDestroy(Meteor.autorun(fn));
     }
 
-    subscribe (name, fn = angular.noop) {
+    subscribe (name, fn = angular.noop, resultCb) {
       return this.autorun(() => {
         let args = fn() || [];
 
@@ -20,7 +20,7 @@ angularMeteorReactiveScope.run(['$rootScope', '$reactive', '$parse', function ($
           throw new Error(`[angular-meteor][ReactiveContext] The return value of arguments function in subscribe must be an array! `);
         }
 
-        this.stopOnDestroy(Meteor.subscribe(name, ...args));
+        this.stopOnDestroy(Meteor.subscribe(name, ...args, resultCb));
       });
     }
 
