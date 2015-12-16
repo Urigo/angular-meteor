@@ -317,7 +317,7 @@ describe('angular-meteor', function () {
       });
 
       it('Should defined reactive property on the context', function() {
-        reactiveContextInstance.reactiveProps({
+        reactiveContextInstance.helpers({
           prop: 20
         });
 
@@ -326,7 +326,7 @@ describe('angular-meteor', function () {
       });
 
       it('Should defined reactive property on the context and update the value', function() {
-        reactiveContextInstance.reactiveProps({
+        reactiveContextInstance.helpers({
           prop: 20
         });
 
@@ -337,7 +337,7 @@ describe('angular-meteor', function () {
       });
 
       it('Should create a configurable and enumerable reactive property', function() {
-        reactiveContextInstance.reactiveProps({
+        reactiveContextInstance.helpers({
           prop: 20
         });
 
@@ -349,7 +349,7 @@ describe('angular-meteor', function () {
       });
 
       it('Should add subscription when call subscribe', function() {
-        reactiveContextInstance.reactiveProps({
+        reactiveContextInstance.helpers({
           prop: 20
         });
 
@@ -363,7 +363,7 @@ describe('angular-meteor', function () {
       });
 
       it('Should call autorun methods when updating reactive property value', function() {
-        reactiveContextInstance.reactiveProps({
+        reactiveContextInstance.helpers({
           prop: 20
         });
 
@@ -380,7 +380,7 @@ describe('angular-meteor', function () {
         testScope = $rootScope.$new();
         reactiveContextInstance = $reactive(testScope);
 
-        reactiveContextInstance.reactiveProps({
+        reactiveContextInstance.helpers({
           prop: 20
         });
 
@@ -395,7 +395,7 @@ describe('angular-meteor', function () {
         testScope = $rootScope.$new();
         reactiveContextInstance = $reactive(testScope);
 
-        reactiveContextInstance.reactiveProps({
+        reactiveContextInstance.helpers({
           prop: 20
         });
 
@@ -421,7 +421,7 @@ describe('angular-meteor', function () {
 
         var mySpy = jasmine.createSpy();
 
-        context.reactiveProps({
+        context.helpers({
           prop: {
             mySubProp: 10
           }
@@ -449,7 +449,7 @@ describe('angular-meteor', function () {
 
         var mySpy = jasmine.createSpy();
 
-        context.reactiveProps({
+        context.helpers({
           prop: {
             mySubProp: 10
           }
@@ -477,7 +477,7 @@ describe('angular-meteor', function () {
 
         var mySpy = jasmine.createSpy();
 
-        context.reactiveProps({
+        context.helpers({
           prop: {
             mySubProp: 10
           }
@@ -503,7 +503,7 @@ describe('angular-meteor', function () {
       it('Should remove and destroy custom scope if it was necessary to create it', function() {
         var reactive = $reactive(context);
 
-        context.reactiveProps({
+        context.helpers({
           prop: {
             mySubProp: 10
           }
@@ -521,7 +521,7 @@ describe('angular-meteor', function () {
         var reactive = $reactive(context);
         reactive.attach(testScope);
 
-        context.reactiveProps({
+        context.helpers({
           prop: {
             mySubProp: 10
           }
@@ -533,6 +533,57 @@ describe('angular-meteor', function () {
 
         expect(destroySpy).not.toHaveBeenCalled();
         expect(reactive.scope).toBeDefined();
+      });
+
+      it('Should get the value from the context when using getReactively - primitive', function() {
+        var reactive = $reactive(context);
+        reactive.attach(testScope);
+
+        context.myProp = 10;
+
+        var value = context.getReactively('myProp');
+
+        expect(value).toBe(10);
+      });
+
+      it('Should get the value from the context when using getReactively - object', function() {
+        var reactive = $reactive(context);
+        reactive.attach(testScope);
+
+        context.myProp = {
+          subProp: 10
+        };
+
+        var value = context.getReactively('myProp.subProp');
+
+        expect(value).toBe(10);
+      });
+
+      it('Should create a dependency when using subscription with getReactively', function(done) {
+        var reactive = $reactive(context);
+        reactive.attach(testScope);
+
+        context.myProp = {
+          subProp: 10
+        };
+
+        testScope.$apply();
+
+        var callCount = 0;
+
+        context.subscribe('t', function() {
+          callCount++;
+          return [context.getReactively('myProp.subProp')]
+        });
+
+        testScope.$apply();
+        context.myProp.subProp = 2;
+        testScope.$apply();
+
+        setTimeout(() => {
+          expect(callCount).toBe(2);
+          done();
+        }, 100);
       });
     });
   });

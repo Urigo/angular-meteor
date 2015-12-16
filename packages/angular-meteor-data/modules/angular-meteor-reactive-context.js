@@ -1,4 +1,4 @@
-angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).factory('$reactive', ['$rootScope', ($rootScope) => {
+angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).factory('$reactive', ['$rootScope', '$parse', ($rootScope, $parse) => {
   class ReactiveContext {
     constructor(context) {
       if (!context || !angular.isObject(context)) {
@@ -95,34 +95,55 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
       }
     }
 
-    reactiveProps(props) {
-      _.each(props, (v, k) => {
-        if (_.isFunction(v)) {
-          throw new Error(`[angular-meteor][ReactiveContext] You tried to create a function helper (${k}) using "reactiveProps", please use "helpers" instead! For further reading: http://www.angular-meteor.com/api/1.3.0/helpers`);
-        }
-        else {
-          this._setValHelper(k, v);
-        }
-      });
-
-      return this;
-    }
-
     helpers(props) {
       _.each(props, (v, k) => {
         if (_.isFunction(v)) {
           this._setFnHelper(k, v);
         }
         else {
-          throw new Error(`[angular-meteor][ReactiveContext] You tried to create a reactive property (${k}) using "helpers", please use "reactiveProps" instead! For further reading: http://www.angular-meteor.com/api/1.3.0/reactive-props`);
+          console.warn(`[angular-meteor][helpers] Your tried to create helper for primitive '${k}', please note that this feature will be deprecated in 1.4 in favor of using 'getReactively'!`);
+          this._setValHelper(k, v);
+
+          if (angular.isObject(v)) {
+            this.getReactively(k, true);
+          }
         }
       });
 
       return this;
     }
 
+    getReactively(k, objectEquality) {
+      let context = this.context;
+
+      if (angular.isUndefined(objectEquality)) {
+        objectEquality = false;
+      }
+
+      this._verifyScope();
+
+      if (!this.propertiesTrackerDeps[k]) {
+        this.propertiesTrackerDeps[k] = new Tracker.Dependency();
+
+        this.scope.$watch(() => {
+          return $parse(k)(context);
+        }, (newValue, oldValue) => {
+          if (newValue !== oldValue) {
+            this.propertiesTrackerDeps[k].changed();
+          }
+        }, objectEquality);
+      }
+
+      this.propertiesTrackerDeps[k].depend();
+
+      return $parse(k)(context);
+    }
+
     _setValHelper(k, v) {
+      this.getReactively(k, true);
+
       this.propertiesTrackerDeps[k] = new Tracker.Dependency();
+
       v = _.clone(v);
 
       Object.defineProperty(this.context, k, {
@@ -139,16 +160,7 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
         }
       });
 
-      if (angular.isObject(v)) {
-        this._verifyScope();
-        this.scope[k] = this.context[k];
 
-        this.scope.$watch(k, (newValue, oldValue) => {
-          if (newValue !== oldValue) {
-            this.propertiesTrackerDeps[k].changed();
-          }
-        }, true);
-      }
     }
 
     _setFnHelper(k, fn) {
