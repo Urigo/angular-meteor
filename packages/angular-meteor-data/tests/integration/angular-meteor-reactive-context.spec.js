@@ -418,6 +418,7 @@ describe('angular-meteor', function () {
         expect(element.get(1).innerHTML).toBe('test');
       });
 
+      /*
 
       it('Should trigger Autorun dependencies when using object and updating a sub property', function () {
         $reactive(context);
@@ -557,7 +558,7 @@ describe('angular-meteor', function () {
 
         expect(value).toBe(10);
       });
-/*
+
       it('Should create a dependency when using subscription with getReactively', function () {
         var reactive = $reactive(context);
         reactive.attach(testScope);
