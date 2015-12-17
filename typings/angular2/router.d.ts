@@ -1,4 +1,4 @@
-// Type definitions for Angular v2.0.0-local_sha.cf3ce17
+// Type definitions for Angular v2.0.0-local_sha.2a2f9a9
 // Project: http://angular.io/
 // Definitions by: angular team <https://github.com/angular/>
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
@@ -278,7 +278,8 @@ declare module ngRouter {
    * ### Example
    * 
    * ```
-   * import {bootstrap, Component} from 'angular2/angular2';
+   * import {Component} from 'angular2/core';
+   * import {bootstrap} from 'angular2/platform/browser';
    * import {Router, ROUTER_DIRECTIVES, ROUTER_PROVIDERS, RouteConfig} from 'angular2/router';
    * 
    * @Component({directives: [ROUTER_DIRECTIVES]})
@@ -317,7 +318,8 @@ declare module ngRouter {
    * ### Example
    * 
    * ```
-   * import {bootstrap, Component, View} from 'angular2/angular2';
+   * import {Component, View} from 'angular2/core';
+   * import {bootstrap} from 'angular2/platform/browser';
    * import {Router, ROUTER_DIRECTIVES, routerBindings, RouteConfig} from 'angular2/router';
    * 
    * @Component({...})
@@ -430,7 +432,7 @@ declare module ngRouter {
    * ### Example ([live demo](http://plnkr.co/edit/iRUP8B5OUbxCWQ3AcIDm))
    * 
    * ```
-   * import {Component} from 'angular2/angular2';
+   * import {Component} from 'angular2/core';
    * import {
    *   ROUTER_DIRECTIVES,
    *   ROUTER_PROVIDERS,
@@ -500,7 +502,7 @@ declare module ngRouter {
    * ### Example
    * 
    * ```
-   * import {Component} from 'angular2/angular2';
+   * import {Component} from 'angular2/core';
    * import {ROUTER_DIRECTIVES, ROUTER_PROVIDERS, RouteConfig} from 'angular2/router';
    * 
    * @Component({directives: [ROUTER_DIRECTIVES]})
@@ -534,7 +536,7 @@ declare module ngRouter {
    * ### Example
    * 
    * ```
-   * import {Component, provide} from 'angular2/angular2';
+   * import {Component, provide} from 'angular2/core';
    * import {
    *   ROUTER_DIRECTIVES,
    *   ROUTER_PROVIDERS,
@@ -603,7 +605,7 @@ declare module ngRouter {
    * ### Example
    * 
    * ```
-   * import {Component, provide} from 'angular2/angular2';
+   * import {Component, provide} from 'angular2/core';
    * import {
    *   APP_BASE_HREF
    *   ROUTER_DIRECTIVES,
@@ -670,7 +672,7 @@ declare module ngRouter {
    * ### Example
    * 
    * ```
-   * import {Component} from 'angular2/angular2';
+   * import {Component} from 'angular2/core';
    * import {
    *   ROUTER_DIRECTIVES,
    *   ROUTER_PROVIDERS,
@@ -909,7 +911,8 @@ declare module ngRouter {
    * ### Example
    * 
    * ```
-   * import {bootstrap, Component} from 'angular2/angular2';
+   * import {Component} from 'angular2/core';
+   * import {bootstrap} from 'angular2/platform/browser';
    * import {Router, ROUTER_DIRECTIVES, ROUTER_PROVIDERS, RouteConfig} from 'angular2/router';
    * 
    * @Component({directives: [ROUTER_DIRECTIVES]})
@@ -1039,7 +1042,7 @@ declare module ngRouter {
    * ### Example ([live demo](http://plnkr.co/edit/iRUP8B5OUbxCWQ3AcIDm))
    * 
    * ```
-   * import {Component} from 'angular2/angular2';
+   * import {Component} from 'angular2/core';
    * import {ROUTER_DIRECTIVES, ROUTER_PROVIDERS, RouteConfig} from 'angular2/router';
    * 
    * @Component({directives: [ROUTER_DIRECTIVES]})
@@ -1063,7 +1066,7 @@ declare module ngRouter {
    * ### Example ([live demo](http://plnkr.co/edit/iRUP8B5OUbxCWQ3AcIDm))
    * 
    * ```
-   * import {Component} from 'angular2/angular2';
+   * import {Component} from 'angular2/core';
    * import {
    *   ROUTER_DIRECTIVES,
    *   ROUTER_PROVIDERS,
@@ -1086,6 +1089,8 @@ declare module ngRouter {
 
     
   /**
+   * Use {@link ROUTER_PROVIDERS} instead.
+   * 
    * @deprecated
    */
   let ROUTER_BINDINGS: any;
@@ -1304,10 +1309,21 @@ declare module ngRouter {
   }
 
     
+  /**
+   * The `RouteConfig` decorator defines routes for a given component.
+   * 
+   * It takes an array of {@link RouteDefinition}s.
+   */
   var RouteConfig: (configs: RouteDefinition[]) => ClassDecorator;
   
 
     
+  /**
+   * Represents either a component type (`type` is `component`) or a loader function
+   * (`type` is `loader`).
+   * 
+   * See also {@link RouteDefinition}.
+   */
   interface ComponentDefinition {
     
     type: string;

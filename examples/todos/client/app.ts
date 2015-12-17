@@ -1,6 +1,6 @@
 /// <reference path="../typings/angular2-meteor.d.ts" />
 
-import {Component, View, provide} from 'angular2/core';
+import {Component, View, provide, enableProdMode} from 'angular2/core';
 
 import {FORM_DIRECTIVES} from 'angular2/common';
 
@@ -9,6 +9,8 @@ import {Tasks} from 'tasks';
 import {TaskList} from './components/task-list';
 
 import {bootstrap} from 'angular2-meteor';
+
+enableProdMode();
 
 @Component({
   selector: 'app'

@@ -1,6 +1,6 @@
 /// <reference path="../typings/angular2-meteor.d.ts" />
 
-import {Component, View, provide} from 'angular2/core';
+import {Component, View, provide, enableProdMode} from 'angular2/core';
 
 import {ROUTER_DIRECTIVES, RouteConfig} from 'angular2/router';
 
@@ -11,6 +11,8 @@ import {PartiesCmp} from './parties/parties';
 import {PartyDetailsCmp} from './party-details/party-details';
 
 import {bootstrap} from 'angular2-meteor';
+
+enableProdMode();
 
 @Component({
   selector: 'socially'

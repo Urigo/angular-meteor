@@ -1,4 +1,4 @@
-// Type definitions for Angular v2.0.0-local_sha.cf3ce17
+// Type definitions for Angular v2.0.0-local_sha.2a2f9a9
 // Project: http://angular.io/
 // Definitions by: angular team <https://github.com/angular/>
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
@@ -314,6 +314,13 @@ declare module common {
   }
 
     
+  /**
+   * A collection of Angular core pipes that are likely to be used in each and every
+   * application.
+   * 
+   * This collection can be used to quickly enumerate all the built-in pipes in the `pipes`
+   * property of the `@Component` or `@View` decorators.
+   */
   let COMMON_PIPES: any;
   
 
@@ -337,7 +344,8 @@ declare module common {
    * ### Example ([live demo](http://plnkr.co/edit/a4YdtmWywhJ33uqfpPPn?p=preview)):
    * 
    * ```
-   * import {Component, NgClass} from 'angular2/angular2';
+   * import {Component} from 'angular2/core';
+   * import {NgClass} from 'angular2/common';
    * 
    * @Component({
    *   selector: 'toggle-button',
@@ -499,7 +507,8 @@ declare module common {
    * ### Example ([live demo](http://plnkr.co/edit/YamGS6GkUh9GqWNQhCyM?p=preview)):
    * 
    * ```
-   * import {Component, NgStyle} from 'angular2/angular2';
+   * import {Component} from 'angular2/core';
+   * import {NgStyle} from 'angular2/common';
    * 
    * @Component({
    *  selector: 'ngStyle-example',
@@ -650,7 +659,7 @@ declare module common {
    * Instead of writing:
    * 
    * ```typescript
-   * import {NgClass, NgIf, NgFor, NgSwitch, NgSwitchWhen, NgSwitchDefault} from 'angular2/angular2';
+   * import {NgClass, NgIf, NgFor, NgSwitch, NgSwitchWhen, NgSwitchDefault} from 'angular2/common';
    * import {OtherDirective} from './myDirectives';
    * 
    * @Component({
@@ -665,7 +674,7 @@ declare module common {
    * one could import all the core directives at once:
    * 
    * ```typescript
-   * import {CORE_DIRECTIVES} from 'angular2/angular2';
+   * import {CORE_DIRECTIVES} from 'angular2/common';
    * import {OtherDirective} from './myDirectives';
    * 
    * @Component({
@@ -682,6 +691,10 @@ declare module common {
   
 
     
+  /**
+   * This module exists in Dart, but not in Typescript. This exported symbol
+   * is only here to help Typescript think this is a module.
+   */
   var workaround_empty_observable_list_diff: any;
   
 
@@ -1545,6 +1558,11 @@ declare module common {
   }
 
     
+  /**
+   * Used to provide a {@link ControlValueAccessor} for form controls.
+   * 
+   * See {@link DefaultValueAccessor} for how to implement one.
+   */
   let NG_VALUE_ACCESSOR: core.OpaqueToken;
   
 
@@ -1575,6 +1593,10 @@ declare module common {
   }
 
     
+  /**
+   * Directive automatically applied to Angular forms that sets CSS classes
+   * based on control status (valid/invalid/dirty/etc).
+   */
   class NgControlStatus {
     
     constructor(cd: NgControl);
@@ -1683,16 +1705,20 @@ declare module common {
    * 
    * ### Example
    * 
-   * ```typescript
-   * var providers = [
-   *   new Provider(NG_VALIDATORS, {useValue: myValidator, multi: true})
-   * ];
-   * ```
+   * {@example core/forms/ts/ng_validators/ng_validators.ts region='ng_validators'}
    */
   let NG_VALIDATORS: core.OpaqueToken;
   
 
     
+  /**
+   * Providers for asynchronous validators to be used for {@link Control}s
+   * in a form.
+   * 
+   * Provide this using `multi: true` to add validators.
+   * 
+   * See {@link NG_VALIDATORS} for more details.
+   */
   let NG_ASYNC_VALIDATORS: core.OpaqueToken;
   
 
@@ -1701,8 +1727,7 @@ declare module common {
    * Provides a set of validators used by form controls.
    * 
    * A validator is a function that processes a {@link Control} or collection of
-   * controls and returns a {@link StringMap} of errors. A null map means that
-   * validation has passed.
+   * controls and returns a map of errors. A null map means that validation has passed.
    * 
    * ### Example
    * 
@@ -1758,6 +1783,10 @@ declare module common {
   }
 
     
+  /**
+   * A directive which installs the {@link MinLengthValidator} for any `ngControl`,
+   * `ngFormControl`, or control with `ngModel` that also has a `minlength` attribute.
+   */
   class MinLengthValidator implements Validator {
     
     constructor(minLength: string);
@@ -1767,6 +1796,10 @@ declare module common {
   }
 
     
+  /**
+   * A directive which installs the {@link MaxLengthValidator} for any `ngControl, `ngFormControl`,
+   * or control with `ngModel` that also has a `maxlength` attribute.
+   */
   class MaxLengthValidator implements Validator {
     
     constructor(maxLength: string);
@@ -1879,6 +1912,8 @@ declare module common {
 
     
   /**
+   * See {@link FORM_PROVIDERS} instead.
+   * 
    * @deprecated
    */
   let FORM_BINDINGS: any;
@@ -1899,7 +1934,7 @@ declare module common {
    * 
    * ```typescript
    * import {NgClass, NgIf, NgFor, NgSwitch, NgSwitchWhen, NgSwitchDefault, NgModel, NgForm} from
-   * 'angular2/angular2';
+   * 'angular2/common';
    * import {OtherDirective} from './myDirectives';
    * 
    * @Component({
@@ -1915,7 +1950,7 @@ declare module common {
    * one could import all the common directives at once:
    * 
    * ```typescript
-   * import {COMMON_DIRECTIVES} from 'angular2/angular2';
+   * import {COMMON_DIRECTIVES} from 'angular2/common';
    * import {OtherDirective} from './myDirectives';
    * 
    * @Component({

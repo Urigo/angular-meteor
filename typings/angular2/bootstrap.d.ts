@@ -1,4 +1,4 @@
-// Type definitions for Angular v2.0.0-local_sha.cf3ce17
+// Type definitions for Angular v2.0.0-local_sha.2a2f9a9
 // Project: http://angular.io/
 // Definitions by: angular team <https://github.com/angular/>
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
@@ -51,23 +51,7 @@ declare module bootstrap {
    * 
    * We can use this script code:
    * 
-   * ```
-   * @Component({
-   *    selector: 'my-app',
-   *    template: 'Hello {{ name }}!'
-   * })
-   * class MyApp {
-   *   name:string;
-   * 
-   *   constructor() {
-   *     this.name = 'World';
-   *   }
-   * }
-   * 
-   * main() {
-   *   return bootstrap(MyApp);
-   * }
-   * ```
+   * {@example core/ts/bootstrap/bootstrap.ts region='bootstrap'}
    * 
    * When the app developer invokes `bootstrap()` with the root component `MyApp` as its
    * argument, Angular performs the following tasks:

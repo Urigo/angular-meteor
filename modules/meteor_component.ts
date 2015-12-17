@@ -31,8 +31,11 @@ export class MeteorComponent implements OnDestroy {
   private _hSubscribes: Array<Meteor.SubscriptionHandle> = [];
   private _zone: NgZone;
 
-  constructor(zone?: NgZone) {
-    this._zone = zone || createNgZone();
+  /**
+   * @param {NgZone} ngZone added for test purposes mostly.
+   */
+  constructor(ngZone?: NgZone) {
+    this._zone = ngZone || createNgZone();
   }
 
   autorun(func: () => any, autoBind: boolean) {

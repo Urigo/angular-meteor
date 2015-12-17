@@ -1,4 +1,4 @@
-// Type definitions for Angular v2.0.0-local_sha.cf3ce17
+// Type definitions for Angular v2.0.0-local_sha.2a2f9a9
 // Project: http://angular.io/
 // Definitions by: angular team <https://github.com/angular/>
 // Definitions: https://github.com/borisyankov/DefinitelyTyped
@@ -44,22 +44,47 @@ declare module browser {
   }
 
     
+  /**
+   * A set of providers to initialize the Angular platform in a web browser.
+   * 
+   * Used automatically by `bootstrap`, or can be passed to {@link platform}.
+   */
   let BROWSER_PROVIDERS: Array<any /*core.Type | Provider | any[]*/>;
   
 
     
+  /**
+   * Use {@link ELEMENT_PROBE_PROVIDERS}.
+   * 
+   * @deprecated
+   */
   let ELEMENT_PROBE_BINDINGS: any;
   
 
     
+  /**
+   * Providers which support debugging Angular applications (e.g. via `ng.probe`).
+   * 
+   * ## Example
+   * 
+   * {@example platform/dom/debug/ts/debug_element_view_listener/providers.ts region='providers'}
+   */
   let ELEMENT_PROBE_PROVIDERS: any[];
   
 
     
+  /**
+   * Returns a {@link core.DebugElement} for the given native DOM element, or
+   * null if the given native element does not have an Angular view associated
+   * with it.
+   */
   function inspectNativeElement(element: any): core.DebugElement;
   
 
     
+  /**
+   * A `DomAdapter` powered by full browser DOM APIs.
+   */
   class BrowserDomAdapter extends GenericBrowserDomAdapter {
     
     static makeCurrent(): void;
@@ -275,12 +300,36 @@ declare module browser {
   }
 
     
+  /**
+   * Predicates for use with {@link core.DebugElement}'s query functions.
+   */
   class By {
     
-    static all(): Function;
+    /**
+     * Match all elements.
+     * 
+     * ## Example
+     * 
+     * {@example platform/dom/debug/ts/by/by.ts region='by_all'}
+     */
+    static all(): Predicate<core.DebugElement>;
     
+    /**
+     * Match elements by the given CSS selector.
+     * 
+     * ## Example
+     * 
+     * {@example platform/dom/debug/ts/by/by.ts region='by_css'}
+     */
     static css(selector: string): Predicate<core.DebugElement>;
     
+    /**
+     * Match elements that have the given directive present.
+     * 
+     * ## Example
+     * 
+     * {@example platform/dom/debug/ts/by/by.ts region='by_directive'}
+     */
     static directive(type: core.Type): Predicate<core.DebugElement>;
     
   }
@@ -378,23 +427,7 @@ declare module browser {
    * 
    * We can use this script code:
    * 
-   * ```
-   * @Component({
-   *    selector: 'my-app',
-   *    template: 'Hello {{ name }}!'
-   * })
-   * class MyApp {
-   *   name:string;
-   * 
-   *   constructor() {
-   *     this.name = 'World';
-   *   }
-   * }
-   * 
-   * main() {
-   *   return bootstrap(MyApp);
-   * }
-   * ```
+   * {@example core/ts/bootstrap/bootstrap.ts region='bootstrap'}
    * 
    * When the app developer invokes `bootstrap()` with the root component `MyApp` as its
    * argument, Angular performs the following tasks:
