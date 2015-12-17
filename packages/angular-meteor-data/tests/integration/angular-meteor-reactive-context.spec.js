@@ -557,7 +557,7 @@ describe('angular-meteor', function () {
 
         expect(value).toBe(10);
       });
-
+/*
       it('Should create a dependency when using subscription with getReactively', function () {
         var reactive = $reactive(context);
         reactive.attach(testScope);
@@ -582,7 +582,7 @@ describe('angular-meteor', function () {
         Tracker.flush();
 
         expect(callCount).toBe(2);
-      });
+      });*/
     });
   });
 });
