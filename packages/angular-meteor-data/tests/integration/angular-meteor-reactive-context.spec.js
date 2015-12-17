@@ -418,7 +418,6 @@ describe('angular-meteor', function () {
         expect(element.get(1).innerHTML).toBe('test');
       });
 
-      /*
 
       it('Should trigger Autorun dependencies when using object and updating a sub property', function () {
         $reactive(context);
@@ -446,7 +445,10 @@ describe('angular-meteor', function () {
         expect(mySpy.calls.count()).toBe(2);
       });
 
-      it('Should trigger Autorun dependencies when using object and adding a sub property', function () {
+      /*
+
+
+       it('Should trigger Autorun dependencies when using object and adding a sub property', function () {
         $reactive(context);
 
         var mySpy = jasmine.createSpy();
