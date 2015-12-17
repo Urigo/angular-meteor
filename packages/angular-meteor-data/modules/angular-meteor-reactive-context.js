@@ -156,7 +156,7 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
         },
         set: (newValue) => {
           v = newValue;
-          this.propertiesTrackerDeps[k].changed();
+          this._propertyChanged(k);
         }
       });
     }
