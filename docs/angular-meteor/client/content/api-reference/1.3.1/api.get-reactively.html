@@ -14,8 +14,6 @@ The `getReactively` method is part of the `ReactiveContext`, and available on ev
 
 Use this method to get a context variable and watch it reactively, so each change of this variable causes the dependents (autorun, helper functions and subscriptions) to run again.
 
-> Tip: You can just use the first argument, the rest is optional.
-
 ### Arguments
 
 <table class="variables-matrix input-arguments">
@@ -29,9 +27,9 @@ Use this method to get a context variable and watch it reactively, so each chang
   </thead>
   <tbody>
   <tr>
-    <td><strong>Context variable name</strong></td>
+    <td><strong>variableName</strong></td>
     <td>
-      String
+      <a href="" class="label type-hint type-hint-string">String</a>
     </td>
     <td>The name of the context's variable to bind to</td>
     <td>Yes</td>
@@ -39,7 +37,8 @@ Use this method to get a context variable and watch it reactively, so each chang
   <tr>
     <td>objectEquality</td>
     <td>
-      Boolean / Function
+      <a href="" class="label type-hint type-hint-function">Function</a><br />
+      <a href="" class="label type-hint type-hint-boolean">Boolean</a>
     </td>
     <td>Use `true` to deep watch the object, or a function to provide custom equality function. The default value is `false`, which does a shallow / reference watch only.</td>
     <td>No</td>
