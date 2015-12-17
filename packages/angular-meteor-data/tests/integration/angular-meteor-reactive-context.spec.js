@@ -418,11 +418,11 @@ describe('angular-meteor', function () {
         expect(element.get(1).innerHTML).toBe('test');
       });
 
-
       it('Should trigger Autorun dependencies when using object and updating a sub property', function () {
         $reactive(context);
 
-        var mySpy = jasmine.createSpy();
+        //var mySpy = jasmine.createSpy();
+        var callCount = 0;
 
         context.helpers({
           prop: {
@@ -431,9 +431,9 @@ describe('angular-meteor', function () {
         });
 
         context.helpers({
-          myMethod: mySpy.and.callFake(() => {
-            var a = context.prop;
-          })
+          myMethod: function() {
+            callCount++;
+          }
         });
 
         context.prop.mySubProp = 20;
@@ -441,12 +441,10 @@ describe('angular-meteor', function () {
         $rootScope.$apply();
         Tracker.flush();
 
-        expect(mySpy).toHaveBeenCalled();
-        expect(mySpy.calls.count()).toBe(2);
+        expect(callCount).toBe(2);
       });
 
       /*
-
 
        it('Should trigger Autorun dependencies when using object and adding a sub property', function () {
         $reactive(context);
