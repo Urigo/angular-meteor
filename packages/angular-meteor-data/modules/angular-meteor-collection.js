@@ -12,7 +12,7 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
   function($q, $meteorSubscribe, $meteorUtils, $rootScope, $timeout, diffArray) {
 
     function AngularMeteorCollection(curDefFunc, collection, diffArrayFunc, autoClientSave) {
-      console.warn('[angular-meteor.$meteorCollection] Please note that this method is deprecated since 1.3.0 and will be removed in 1.4.0! http://info.meteor.com/blog/angular-meteor-1.3');
+      console.warn('[angular-meteor.$meteorCollection] Please note that this method is deprecated since 1.3.0 and will be removed in 1.4.0! Fro more info: http://www.angular-meteor.com/api/1.3.0/meteorCollection');
 
       var data = [];
       // Server backup data to evaluate what changes come from client
