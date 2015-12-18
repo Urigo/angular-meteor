@@ -3,10 +3,10 @@
 
 In this step, you will learn how to create a layout template and how to build an app that has multiple views by adding routing, using the new Angular router.
 
-The goals for this step is to add one more page to the app that shows details of the selected app.
+The goal for this step is to add one more page to the app that shows details of the selected app.
 
 By default we have a list of parties shown on the page, but
-when user clicks on a list item, app should navigate to the new page and show selected pary details.
+when user clicks on a list item, app should navigate to the new page and show selected party details.
 
 # Import Router Dependencies
 
@@ -36,7 +36,7 @@ To add the detailed view, we could expand the `app.html` file to contain templat
 Instead, we are going to turn the Socially component into what we call a "layout template". This is a template that is common for all views in our application.
 Other "partial templates" are then included into this layout template depending on the current "route" — the view that is currently displayed to the user.
 
-Another great features of the Angualar 2 routing is that we can route directly to a component.
+Another great feature of the Angular 2 routing is that we can route directly to a component.
 This type of routing is also known as _Component Routing_. And it makes really easy to configure routes.
 
 So, first, we are going to split our app into 2 main views (or pages): Parties List and Party Details. 
@@ -131,7 +131,7 @@ the list of all parties.
 
 As we've already seen, each party link consists of two parts: the base `PartyDetails` 
 URL and a party ID, represented by the `partyId` in the configuration.
-There is special directive called `routerLink` that will help us to compose each URL.
+There is a special directive called `routerLink` that will help us to compose each URL.
 
 First we'll import the directive and specify it as a view directive in the `PartiesList`:
 
@@ -142,10 +142,10 @@ Now we can wrap our party in a `routerLink` and pass in the `_id` as a parameter
 {{> DiffBox tutorialName="meteor-angular2-socially" step="5.9"}}
 
 `routerLink` takes an array of URL parts as it was defined in the configuration and 
-then composes a full URL. By the first `/PartiesList` item we instruct `routerLink` to 
-find URL path to the `PartiesList` view in the root routing config.
-Since each component in Angular 2 can have own routing config,
-if we put `./PartiesList` there, the directive would resolve routes accordingly to
+then composes a full URL. By the first `/PartiesDetails` item we instruct `routerLink` to 
+find URL path to the `PartiesDetails` view in the root routing config.
+Since each component in Angular 2 can have its own routing config,
+if we put `/PartiesList` there, the directive would resolve routes accordingly to
 `PartiesList` routing config if any.
 
 # Injecting Route Params
@@ -185,7 +185,7 @@ Add a link back to the `PartiesList` component from `PartyDetails`.
 
 Let's list what we'done in this step:
 
-- slit our app into two main views
+- split our app into two main views
 - configured routing to use these views and created a layout template
 - learned briefly how dependency injection works in Angular 2
 - injected route parameters and loaded party details with the ID parameter
