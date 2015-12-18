@@ -13,15 +13,22 @@ angularMeteorReactiveScope.run(['$rootScope', '$reactive', '$parse', function ($
     }
 
     subscribe (name, fn = angular.noop, resultCb) {
-      return this.autorun(() => {
+      let result = {};
+      let autorunComp = this.autorun(() => {
         let args = fn() || [];
-
         if (!angular.isArray(args)) {
           throw new Error(`[angular-meteor][ReactiveContext] The return value of arguments function in subscribe must be an array! `);
         }
 
-        this.stopOnDestroy(Meteor.subscribe(name, ...args, resultCb));
+        let subscriptionResult = Meteor.subscribe(name, ...args, resultCb);
+        this.stopOnDestroy(subscriptionResult);
+        result.ready = subscriptionResult.ready.bind(subscriptionResult);
+        result.subscriptionId  = subscriptionResult.subscriptionId;
       });
+
+      result.stop = autorunComp.stop.bind(autorunComp);
+
+      return result;
     }
 
     getReactively (property, objectEquality) {

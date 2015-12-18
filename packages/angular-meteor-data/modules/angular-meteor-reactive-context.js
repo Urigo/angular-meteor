@@ -189,7 +189,7 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
     }
 
     _propertyChanged(k) {
-      if (this.scope && !$rootScope.$$phase) {
+      if (this.scope && !this.scope.$$destroyed && !$rootScope.$$phase) {
         this.scope.$digest();
       }
 
@@ -201,6 +201,7 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
         throw new Error(`[angular-meteor][ReactiveContext] The first argument of 'subscribe' method must be a string!`);
       }
 
+      let result = {};
       fn = fn || angular.noop;
       resultCb = resultCb || angular.noop;
 
@@ -209,21 +210,27 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
       }
 
       if (this.scope && this.scope !== this.context) {
-        this.stoppables.push(this.scope.subscribe(name, fn, resultCb));
+        result = this.scope.subscribe(name, fn, resultCb);
+        this.stoppables.push(result);
       }
       else {
-        this.autorun(() => {
+        let autorunComp = this.autorun(() => {
           let args = fn() || [];
-
           if (!angular.isArray(args)) {
             throw new Error(`[angular-meteor][ReactiveContext] The return value of arguments function in subscribe must be an array! `);
           }
 
-          this.stoppables.push(Meteor.subscribe(name, ...args, resultCb));
+          let subscriptionResult = Meteor.subscribe(name, ...args, resultCb);
+          result.ready = subscriptionResult.ready.bind(subscriptionResult);
+          result.subscriptionId = subscriptionResult.subscriptionId;
         });
+
+        result.stop = autorunComp.comp.bind(autorunComp);
+
+        this.stoppables.push(autorunComp);
       }
 
-      return this;
+      return result;
     }
 
     autorun(fn) {
