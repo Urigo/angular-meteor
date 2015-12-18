@@ -1,0 +1,21 @@
+.pagination {
+  display: inline-block;
+  list-style-type: none;
+  margin: 20px 0;
+  border-radius: 4px;
+}
+
+.pagination>li {
+  display: inline;
+  padding: 0 5px;
+}
+
+.pagination>li.active>a {
+  text-decoration: none;
+  color: black;
+}
+
+.pagination>.disabled>a {
+  color: #777;
+  cursor: not-allowed;
+}

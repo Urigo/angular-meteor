@@ -1,0 +1,13 @@
+<ul class="pagination" role="navigation" aria-label="Pagination">
+    <li class="pagination-previous" [class.disabled]="getPage() === 1">
+        <a href="" (click)="setPage($event, getPage() - 1)" aria-label="Prev page">&lsaquo;</a>
+    </li>
+
+    <li [class.active]="getPage() === page.value" *ngFor="#page of pages">
+        <a href="" (click)="setPage($event, page.value)">{{ page.label }}</a>
+    </li>
+
+    <li class="pagination-next" [class.disabled]="getPage() === pages.length">
+        <a href="" (click)="setPage($event, getPage() + 1)" aria-label="Next page">&rsaquo;</a>
+    </li>
+</ul>
