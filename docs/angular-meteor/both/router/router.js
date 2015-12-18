@@ -161,7 +161,17 @@ Router.map(function () {
   });
 
   for (var apiKey in API_DEFINITION) {
-    createSubRoutes(API_DEFINITION[apiKey]);
+    var currentApi = API_DEFINITION[apiKey];
+    createSubRoutes(currentApi);
+
+    (function(routeUrl) {
+      if (routeUrl) {
+        Router.route('/api/' + apiKey, function () {
+          this.redirect(routeUrl);
+        });
+      }
+    })(currentApi.groups[0].redirectRoute);
+
   }
 
   redirect('/api', '/api/' + DEFAULT_API + '/reactive');

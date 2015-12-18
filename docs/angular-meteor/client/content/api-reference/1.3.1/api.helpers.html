@@ -1,0 +1,80 @@
+<template name="api.1.3.1.helpers">
+  <div>
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/docs/angular-meteor/client/content/api-reference/1.3.1/api.helpers.html"
+       class="btn btn-default btn-lg improve-button">
+      <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
+    </a>
+
+    <do-nothing>
+      {{#markdown}}
+
+# helpers
+
+The `helpers` method is part of the `ReactiveContext`, and available on every `context` and `$scope`.
+
+These method are defined as Object, where each key is the name of the variable the will be available on the `context` we run, and each value is a function with a return value.
+
+Helpers are function which run and execute in each Autorun cycle of our app.
+
+Each helper function should return a value, which could be any value. Helpers also support handling [MongoDB Cursor](http://docs.meteor.com/#/full/mongo_cursor) and it will expose is as a normal array to the context.
+
+Helpers method can use and depend on variables when getting them using [getReactively](/api/1.3.1/get-reactively), which also trigger the helper method in each change of the reactive variable.
+
+### Arguments
+
+<table class="variables-matrix input-arguments">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Type</th>
+    <th>Details</th>
+    <th>Required</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td><strong>definitions</strong></td>
+    <td>
+      <a href="" class="label type-hint type-hint-object">Object</a><br />
+      Helper Name => Function
+    </td>
+    <td>Object containing `name` => `function` definition, where each name is a string and each function is the helper function.</td>
+    <td>Yes</td>
+  </tr>
+  </tbody>
+</table>
+
+### Return value
+
+This method returns `this`, which the the reactive context, in order to provide the ability to chain the logic.
+
+### Usage Example:
+
+    myModule.controller('MyCtrl', ['$scope', '$reactive', function($scope, $reactive) {
+      $reactive(this).attach($scope);
+
+      this.helpers({
+        users: () => Users.find({}),
+      });
+    }]);
+
+> The example above will create an array on `this` context, with all the values that available from the Cursor that returned from `find` method,
+
+### Example with `getReactively`:
+
+    myModule.controller('MyCtrl', ['$scope', '$reactive', function($scope, $reactive) {
+      $reactive(this).attach($scope);
+
+      this.relevantId = 10;
+
+      this.helpers({
+        users: () => Users.find({ _id: this.getReactively('relevantId') }),
+      });
+    }]);
+
+> In the following example, each change in `relevantId` variable, will trigger the helpers method again, and the objects returned in the cursor will be different.
+      {{/markdown}}
+    </do-nothing>
+
+  </div>
+</template>

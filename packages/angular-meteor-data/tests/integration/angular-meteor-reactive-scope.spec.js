@@ -100,7 +100,7 @@ describe('angular-meteor', function () {
 
       testScope.subscribe('test', function() { return [] });
 
-      expect(meteorSubscribeSpy).toHaveBeenCalledWith('test');
+      expect(meteorSubscribeSpy).toHaveBeenCalledWith('test', undefined);
     });
 
     it('Should convert the subscription array to list of param - test with no return value', function() {
@@ -108,7 +108,7 @@ describe('angular-meteor', function () {
 
       testScope.subscribe('test', function() {  });
 
-      expect(meteorSubscribeSpy).toHaveBeenCalledWith('test');
+      expect(meteorSubscribeSpy).toHaveBeenCalledWith('test', undefined);
     });
 
     it('Should convert the subscription array to list of param - test with one param', function() {
@@ -116,7 +116,7 @@ describe('angular-meteor', function () {
 
       testScope.subscribe('test', function() { return ['a'] });
 
-      expect(meteorSubscribeSpy).toHaveBeenCalledWith('test', 'a');
+      expect(meteorSubscribeSpy).toHaveBeenCalledWith('test', 'a', undefined);
     });
 
     it('Should convert the subscription array to list of param - test with more than one param', function() {
@@ -124,7 +124,7 @@ describe('angular-meteor', function () {
 
       testScope.subscribe('test', function() { return ['a', 'b', 10, 100] });
 
-      expect(meteorSubscribeSpy).toHaveBeenCalledWith('test', 'a', 'b', 10, 100);
+      expect(meteorSubscribeSpy).toHaveBeenCalledWith('test', 'a', 'b', 10, 100, undefined);
     });
 
     it('Should subscribe without subscribe function', function () {
@@ -132,7 +132,7 @@ describe('angular-meteor', function () {
 
       testScope.subscribe('test');
 
-      expect(meteorSubscribeSpy).toHaveBeenCalledWith('test');
+      expect(meteorSubscribeSpy).toHaveBeenCalledWith('test', undefined);
     })
 
     it('Should call stop method of autorun when destroying the scope', function() {

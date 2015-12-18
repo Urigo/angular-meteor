@@ -3,44 +3,51 @@
 </template>
 
 <template name="sidebarDesktopAPI">
-    {{#if pages}}
-      {{> Template.dynamic template=sidebarType}}
-    {{/if}}
-    {{#if groups}}
-      {{#each groups}}
-        {{#if title}}
-          <h2>{{title}}</h2>
-        {{/if}}
-        {{> sidebarDesktopAPI}}
-        {{#if hr}}
-          <hr />
-        {{/if}}
-      {{/each}}
-    {{/if}}
+  {{#if pages}}
+    {{> Template.dynamic template=sidebarType}}
+  {{/if}}
+  {{#if groups}}
+    {{#each groups}}
+      {{#if title}}
+        <h2>{{title}}</h2>
+      {{/if}}
+      {{> sidebarDesktopAPI}}
+      {{#if hr}}
+        <hr/>
+      {{/if}}
+    {{/each}}
+  {{/if}}
 </template>
 
 <template name="sidebarMobileAPI">
   <select class="component-sidebar-mobile">
-  {{#if pages}}
-    {{#each pages}}
+    {{#if pages}}
+      {{#each pages}}
         <option value="{{route}}" class='sidebar-item-mobile' {{selectedMobile}}>{{title}}</option>
-    {{/each}}
-  {{/if}}
-  {{#if groups}}
-    {{#each groups}}
+      {{/each}}
+    {{/if}}
+    {{#if groups}}
+      {{#each groups}}
         <optgroup label="{{title}}">
           {{#each pages}}
             <option value="{{path}}" class='sidebar-item-mobile' {{selectedMobile}}>{{title}}</option>
           {{/each}}
         </optgroup>
-    {{/each}}
-  {{/if}}
+      {{/each}}
+    {{/if}}
   </select>
 </template>
 
 <template name="sidebarDefaultAPI">
   <div class="col-md-3 left-menu">
-    <h2><a href="/api">API</a></h2>
+    <h2>
+      <a href="/api">API</a>
+      <select id="api-selector">
+        {{#each apis}}
+          <option value="{{this}}" selected="{{currentApi this}}">{{this}}</option>
+        {{/each}}
+      </select>
+    </h2>
     <ul class="nav">
       {{#each pages}}
         <li id='{{id}}'>
