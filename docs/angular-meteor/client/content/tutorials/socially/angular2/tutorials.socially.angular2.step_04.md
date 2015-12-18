@@ -29,7 +29,7 @@ As a result, you'll be able to import `PartiesForm` in any other component as fo
     
     import {PartiesForm} from 'client/parties-form/parties-form';
 
-By exporting and importing different modules, you create a modular struture of your app in ES6,
+By exporting and importing different modules, you create a modular structure of your app in ES6,
 which is similar to the modules in other script languages like Python.
 This is what makes programming in ES6 really awesome since application structure comes out always rigid and clear.
 
@@ -57,7 +57,7 @@ Now let's get back to the form and make it functional.
 As you may know, two-way data binding is the default data exchange mechanism between
 components (controllers or directives) and views in Angular 1. In other words, if you bind an Angular 1 contoller's property to, say, a `<input>` element on some linked template,
 every change to the value of this input will update that property of the controller and
-vice verse.
+vice versa.
 
 In Angular 2, things have changed a bit. Two-way data binding is still available,
 but not already by default. We will take a close look at it in the 6th step.
@@ -170,7 +170,7 @@ This event will trigger if the button is clicked, or if the user presses enter o
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="4.9"}}
 
-In Angular 2, events are indicated by the round bracket () syntax. Here we are telling Angular to call a method `add` on submit and pass in the value of the form, `f`. Let's add the add method to our PartiesForm class.
+In Angular 2, events are indicated by the round bracket () syntax. Here we are telling Angular to call a method `addParty` on submit and pass in the value of the form, `f`. Let's add the addParty method to our PartiesForm class.
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="4.10"}}
 
