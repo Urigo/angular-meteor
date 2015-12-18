@@ -433,8 +433,13 @@ describe('angular-meteor', function () {
         context.helpers({
           myMethod: function() {
             callCount++;
+
+            return 'test';
           }
         });
+
+        $rootScope.$apply();
+        Tracker.flush();
 
         context.prop.mySubProp = 20;
 
@@ -497,6 +502,8 @@ describe('angular-meteor', function () {
         expect(mySpy).toHaveBeenCalled();
         expect(mySpy.calls.count()).toBe(2);
       });
+
+      */
 
 
       it('Should remove and destroy custom scope if it was necessary to create it', function () {
@@ -583,7 +590,7 @@ describe('angular-meteor', function () {
         Tracker.flush();
 
         expect(callCount).toBe(2);
-      });*/
+      });
     });
   });
 });
