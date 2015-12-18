@@ -12,7 +12,36 @@
 
 A service service which wraps up [Meteor.methods](http://docs.meteor.com/#/full/methods_header) with [AngularJS promises](https://docs.angularjs.org/api/ng/service/$q).
 
-----
+------------
+
+> `$meteor.call` has been deprecated in favor of of using regular [Meteor Methods](http://docs.meteor.com/#/full/meteor_methods) directly without any wrappers.
+
+> Just call `Meteor.call` directly and work with the callback instead of the promise. Working with callback gives you the ability to close the subscription before it’s prepared, which you can’t do right now with the current Promise API.
+
+> Here is an example for how to migrate:
+
+Old code:
+
+    $meteor.call('invite', $scope.party._id, user._id).then(
+      function(data){
+        console.log('success inviting', data);
+      },
+      function(err){
+        console.log('failed', err);
+      }
+    );
+
+New code:
+
+    Meteor.call('invite', $scope.party._id, user._id, function(error, result){
+      if (error) {
+        console.log('failed', err);
+      } else {
+        console.log('success inviting', data);
+      }
+    });
+
+------------
 
 ## Usage
 

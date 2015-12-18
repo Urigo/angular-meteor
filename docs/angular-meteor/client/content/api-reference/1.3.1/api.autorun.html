@@ -9,12 +9,19 @@
       {{#markdown}}
 
 # autorun
+<a class="src-code" href="https://github.com/Urigo/angular-meteor/blob/master/packages/angular-meteor-data/modules/angular-meteor-reactive-context.js#L229" target="_blank">
+  src: angular-meteor-data/modules/angular-meteor-reactive-context.js, line 229
+</a>
+
+This method is a wrapper of [Tracker.autorun](http://docs.meteor.com/#/full/tracker_autorun) and shares exactly the same API.
 
 The `autorun` method is part of the `ReactiveContext`, and available on every `context` and `$scope`.
 
-The argument of this method is a callback, which will be called each time Autorun will bu used.
+The argument of this method is a callback, which will be called each time Autorun will be used.
 
-This method is a wrapper of [Tracker.autorun](http://docs.meteor.com/#/full/tracker_autorun).
+The Autorun will stop automatically when when it's context ($scope) is destroyed.
+
+------
 
 ### Arguments
 
@@ -39,20 +46,7 @@ This method is a wrapper of [Tracker.autorun](http://docs.meteor.com/#/full/trac
   </tbody>
 </table>
 
-### Return value
-
-This method returns `this`, which the the reactive context, in order to provide the ability to chain the logic.
-
-### Usage Example:
-
-    myModule.controller('MyCtrl', ['$scope', '$reactive', function($scope, $reactive) {
-      $reactive(this).attach($scope);
-
-      this.autorun(() => {
-        console.log('Autorun!!');
-      });
-    }]);
-
+------
 
 ### Example with `getReactively`:
 
@@ -62,7 +56,7 @@ This method returns `this`, which the the reactive context, in order to provide 
       this.myVar = 10;
 
       this.autorun(() => {
-        console.log('Autorun!!');
+        console.log('Autorun!!', this.getReactively('myVar'));
       });
 
       this.myVar = 50; // This will cause the autorun function method to run again

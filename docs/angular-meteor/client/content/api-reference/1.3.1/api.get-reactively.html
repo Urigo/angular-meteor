@@ -9,10 +9,15 @@
       {{#markdown}}
 
 # getReactively
+<a class="src-code" href="https://github.com/Urigo/angular-meteor/blob/master/packages/angular-meteor-data/modules/angular-meteor-reactive-context.js#L116" target="_blank">
+  src: angular-meteor-data/modules/angular-meteor-reactive-context.js, line 116
+</a>
+
+Use this method to get a context variable and watch it reactively, so each change of this variable causes the dependents (autorun, helper functions and subscriptions) to run again.
 
 The `getReactively` method is part of the `ReactiveContext`, and available on every `context` and `$scope`.
 
-Use this method to get a context variable and watch it reactively, so each change of this variable causes the dependents (autorun, helper functions and subscriptions) to run again.
+-------
 
 ### Arguments
 
@@ -50,6 +55,8 @@ Use this method to get a context variable and watch it reactively, so each chang
 
 This method returns the current value of the reactive variable.
 
+-------
+
 ### Example with `subscribe`:
 
     myModule.controller('MyCtrl', ['$scope', '$reactive', function($scope, $reactive) {
@@ -78,6 +85,8 @@ This method returns the current value of the reactive variable.
           return Data.find({_id: this.getReactively('myUser.id')});
         }
       });
+
+      this.myUser.id = 29; // This will cause the helper to run again and update the view
     }]);
 
       {{/markdown}}
