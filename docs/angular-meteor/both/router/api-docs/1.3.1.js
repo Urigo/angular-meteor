@@ -16,22 +16,6 @@ API_1_3_1 = function (version, basedOnTemplatesOf) {
         pages: [
           {
             id: "01",
-            route: "api." + version + ".reactive",
-            path: urlBase + "reactive",
-            title: "$reactive",
-            seoTitle: "$reactive",
-            mdContent: "api." + version + ".reactive"
-          },
-          {
-            id: "02",
-            route: "api." + version + ".reactive-context",
-            path: urlBase + "reactive-context",
-            title: "ReactiveContext",
-            seoTitle: "ReactiveContext",
-            mdContent: "api." + version + ".reactive-context"
-          },
-          {
-            id: "03",
             route: "api." + version + ".helpers",
             path: urlBase + "helpers",
             title: "helpers",
@@ -39,7 +23,7 @@ API_1_3_1 = function (version, basedOnTemplatesOf) {
             mdContent: "api." + version + ".helpers"
           },
           {
-            id: "04",
+            id: "02",
             route: "api." + version + ".subscribe",
             path: urlBase + "subscribe",
             title: "subscribe",
@@ -47,7 +31,7 @@ API_1_3_1 = function (version, basedOnTemplatesOf) {
             mdContent: "api." + version + ".subscribe"
           },
           {
-            id: "05",
+            id: "03",
             route: "api." + version + ".autorun",
             path: urlBase + "autorun",
             title: "autorun",
@@ -55,12 +39,44 @@ API_1_3_1 = function (version, basedOnTemplatesOf) {
             mdContent: "api." + version + ".autorun"
           },
           {
-            id: "06",
+            id: "04",
             route: "api." + version + ".get-reactively",
             path: urlBase + "get-reactively",
             title: "getReactively",
             seoTitle: "getReactively",
             mdContent: "api." + version + ".get-reactively"
+          },
+          {
+            id: "05",
+            route: "api." + version + ".reactive-context",
+            path: urlBase + "reactive-context",
+            title: "ReactiveContext",
+            seoTitle: "ReactiveContext",
+            mdContent: "api." + version + ".reactive-context"
+          },
+          {
+            id: "06",
+            route: "api." + version + ".reactive",
+            path: urlBase + "reactive",
+            title: "$reactive",
+            seoTitle: "$reactive",
+            mdContent: "api." + version + ".reactive"
+          },
+          {
+            id: "07",
+            route: "api." + version + ".blaze-template",
+            path: urlBase + "blaze-template",
+            title: "blaze-template directive",
+            seoTitle: "blaze-template directive",
+            mdContent: "api." + templatePrefix + ".blaze-template"
+          },
+          {
+            id: "08",
+            route: "api." + version + ".ngFileExtension",
+            path: urlBase + "ngFileExtension",
+            title: "File Extensions",
+            seoTitle: "File Extensions",
+            mdContent: "api." + templatePrefix + ".ngFileExtension"
           }
         ]
       }

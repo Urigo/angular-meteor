@@ -8,7 +8,7 @@ angularMeteorSession.factory('$meteorSession', ['$meteorUtils', '$parse',
       return {
 
         bind: function(scope, model) {
-          console.warn('[angular-meteor.session.bind] Please note that this method is deprecated since 1.3.0 and will be removed in 1.4.0! http://info.meteor.com/blog/angular-meteor-1.3');
+          console.warn('[angular-meteor.session.bind] Please note that this method is deprecated since 1.3.0 and will be removed in 1.4.0! http://www.angular-meteor.com/api/1.3.0/session');
 
           var getter = $parse(model);
           var setter = getter.assign;

@@ -8,7 +8,7 @@ angularMeteorSubscribe.service('$meteorSubscribe', ['$q',
 
     this._subscribe = function(scope, deferred, args) {
 
-      console.warn('[angular-meteor.subscribe] Please note that this module is deprecated since 1.3.0 and will be removed in 1.4.0! http://info.meteor.com/blog/angular-meteor-1.3');
+      console.warn('[angular-meteor.subscribe] Please note that this module is deprecated since 1.3.0 and will be removed in 1.4.0! Replace it with the new syntax described here: http://www.angular-meteor.com/api/1.3.1/subscribe');
 
       var subscription = null;
       var lastArg = args[args.length - 1];

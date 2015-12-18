@@ -12,6 +12,27 @@
 
 An object that connects a [Meteor Object](http://docs.meteor.com/#/full/collections) to an AngularJS scope variable
 
+---------------
+
+> This module has been deprecated in favor of the new [helpers API](/api/1.3.1/helpers).
+
+> There is no need for `$meteor.object` anymore as we can use Mongo Collection’s [findOne function](http://docs.meteor.com/#/full/findone). Helpers will make sure to update Angular.
+> We also removed `autobind` because it's a bad practice and we gain much better performance and easier maintainability both for the library and the apps developed with it.
+
+> Here is an example for how to migrate:
+
+Old code:
+
+    $scope.party = $meteor.object(Parties, $stateParams.partyId);
+
+New Code:
+
+    $scope.helpers({
+      party() {
+        return Parties.findOne($stateParams.partyId);
+      }
+    });
+
 ----
 
 ## Usage

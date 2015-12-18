@@ -101,7 +101,7 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
           this._setFnHelper(k, v);
         }
         else {
-          console.warn(`[angular-meteor][helpers] Your tried to create helper for primitive '${k}', please note that this feature will be deprecated in 1.4 in favor of using 'getReactively'!`);
+          console.warn(`[angular-meteor][helpers] Your tried to create helper for primitive '${k}', please note that this feature will be deprecated in 1.4 in favor of using 'getReactively' - http://www.angular-meteor.com/api/1.3.1/get-reactively`);
           this._setValHelper(k, v);
 
           if (angular.isObject(v)) {

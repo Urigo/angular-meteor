@@ -10,9 +10,17 @@
 
 # $meteor.collection   /   $scope.$meteorCollection
 
+A service that wraps the [Meteor collections](http://docs.meteor.com/#/full/collections) to enable reactivity within Angular.
+
+This service binds between the Angular `$scope` variables and the meteor collection.
+
+---------------
+
 > This module has been deprecated in favor of the new [helpers API](/api/1.3.1/helpers).
+
 > There is no need for `$meteor.collection` anymore as with the helpers function we can use regular [Mongo.Collection](http://docs.meteor.com/#/full/mongo_collection) directly without any wrappers. Helpers will make sure to update Angular.
 > We also removed `autobind` because it's a bad practice and we gain much better performance and easier maintainability both for the library and the apps developed with it.
+
 > Here is an example for how to migrate:
 
 Old code:
@@ -38,10 +46,6 @@ New Code:
 
 
 ---------------
-
-A service that wraps the [Meteor collections](http://docs.meteor.com/#/full/collections) to enable reactivity within Angular.
-
-This service binds between the Angular `$scope` variables and the meteor collection.
 
 Service binding include 3 parts:
 
