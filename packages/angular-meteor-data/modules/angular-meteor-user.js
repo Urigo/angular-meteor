@@ -82,8 +82,8 @@ angularMeteorUser.service('$meteorUser', [
 angularMeteorUser.run([
   '$rootScope',
   function($rootScope){
+    console.warn('[angular-meteor.$rootScope.currentUser/loggingIn] Please note that this functionality has migrated to a separate package and will be deprecated in 1.4.0.  For more info: http://www.angular-meteor.com/api/1.3.0/auth');
     $rootScope.autorun(function(){
-      console.warn('[angular-meteor.$rootScope.currentUser/loggingIn] Please note that this functionality has migrated to a separate package and will be deprecated in 1.4.0.  For more info: http://www.angular-meteor.com/api/1.3.0/auth');
       if (!Meteor.user) return;
       $rootScope.currentUser = Meteor.user();
       $rootScope.loggingIn = Meteor.loggingIn();
