@@ -19,6 +19,12 @@ describe('MeteorComponent', function() {
     component = new MeteorComponent(ngZone);
   });
 
+  describe('implements', function() {
+    it('ngOnDestroy', function() {
+      expect(component.ngOnDestroy).toBeDefined();
+    });
+  });
+
   describe('subscribe', function() {
     beforeEach(function() {
       spyOn(Meteor, 'subscribe').and.returnValue({ stop: _.noop });

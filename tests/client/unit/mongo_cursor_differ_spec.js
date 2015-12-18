@@ -31,7 +31,7 @@ describe('MongoCursorDiffer', function() {
       new AddChange(5, {name: 'some doc'}),
       new RemoveChange(15),
       new MoveChange(10, 20)];
-    fakeObserver.next(changes);
+    fakeObserver.emit(changes);
     differ.diff();
 
     var forEachAddedItem = jasmine.createSpy().and.callFake(function(addChange) {
@@ -63,14 +63,14 @@ describe('MongoCursorDiffer', function() {
     var changes1 = [
       new AddChange(5, {name: 'cursor1 doc'})];
     // This is ideally should be done via the cursor.
-    differ.observer.next(changes1);
+    differ.observer.emit(changes1);
     differ.diff();
 
     var fakeCursor1 = new MongoCollectionCursorFake();
     differ.diff(fakeCursor1);
     var changes2 = [
       new AddChange(10, {name: 'cursor2 doc'})];
-    differ.observer.next(changes2);
+    differ.observer.emit(changes2);
     differ.diff();
 
     var forEachAddedItem = jasmine.createSpy().and.callFake(function(addChange) {

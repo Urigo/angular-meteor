@@ -5,7 +5,7 @@ MongoCollectionObserverFake = function() {
     this._generators.push(generator);
   };
 
-  this.next = function(value) {
+  this.emit = function(value) {
     for (var i = 0; i < this._generators.length; i++) {
       this._generators[i].next(value);
     }

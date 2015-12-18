@@ -40,12 +40,14 @@ class Subscription {
   }
 }
 
+declare type MongoDocChange = AddChange | MoveChange | UpdateChange | RemoveChange;
+
 export class MongoCursorObserver {
   private _docs: Array<any> = [];
-  private _changes: Array<any> = [];
-  private _lastChanges: Array<any> = [];
+  private _changes: Array<MongoDocChange> = [];
+  private _lastChanges: Array<MongoDocChange> = [];
   private _hCursor: CursorHandle;
-  private _subscriptions: Array<Subscription> = [];
+  private _subs: Array<Subscription> = [];
 
   constructor(cursor: Mongo.Cursor<any>) {
     check(cursor, Mongo.Cursor);
@@ -58,17 +60,75 @@ export class MongoCursorObserver {
   }
 
   subscribe({next, error, complete}) {
-    let subscription = new Subscription(next, error, complete);
-    this._subscriptions.push(subscription);
-    return subscription;
+    let sub = new Subscription(next, error, complete);
+    this._subs.push(sub);
+
+    // Emit last preserved changes if any for every new subscriber.
+    if (this.lastChanges.length) {
+      this._emitWithSub(sub, this.lastChanges);
+    }
+
+    return sub;
   }
 
   emit(value) {
-    if (this._subscriptions) {
-      for (let sub of this._subscriptions) {
+    if (this._subs) {
+      for (let sub of this._subs) {
         sub.onNext(value);
       }
     }
+  }
+
+  _emitWithSub(sub: Subscription, changes: Array<MongoDocChange>) {
+    sub.onNext(changes);
+  }
+
+  /**
+   * Splits changes with the help of {@link _splitChanges},
+   * and emits sequences of changes one by one.
+   * For example, if passed changes are
+   *
+   * [AddChange, AddChange, RemoveChange, AddChange],
+   *
+   * the final emitting sequence will be
+   *
+   * [AddChange, AddChange], [RemoveChange], [AddChange].
+   *
+   * This is done to guarantee consistency.
+   * Ng2 differ API doesn't provide way to apply difference changes consequently.
+   * Changes can be applied by types only, i.e. first remove changes, then inserts etc,
+   * which's what exactly done by the NgFor via a IterableDiffer instance.
+   */
+  _emitChanges(changes) {
+    let splitChanges = this._splitChanges(changes);
+    for (let changesOneType of splitChanges) {
+      this.emit(changesOneType);
+    }
+  }
+
+  /**
+   * Splits passed changes into multiple subarrays.
+   * One contigues sequence of changes is wrapped per array.
+   * See {@link _emitChanges} for the explanation why.
+   */
+  _splitChanges(changes) {
+    let splitChanges = [];
+    let changeType = changes[0].constructor.name;
+    let changesOneType = [];
+    for (let change of changes) {
+      if (changeType != change.constructor.name) {
+        changeType = change.constructor.name;
+        splitChanges.push(changesOneType);
+        changesOneType = [];
+      }
+      changesOneType.push(change);
+    }
+
+    if (changesOneType.length) {
+      splitChanges.push(changesOneType);
+    }
+
+    return splitChanges;
   }
 
   _startCursor(cursor: Mongo.Cursor<any>): CursorHandle {
@@ -79,12 +139,17 @@ export class MongoCursorObserver {
 
   _startAutoChangesNotify(cursor: Mongo.Cursor<any>): Tracker.Computation {
     return Tracker.autorun(() => {
+      /** 
+       * Fetch here to emit changes in bulk.
+       * Even though changes are not emitted all together
+       * (see {@link _emitChanges}),
+       * its more optimal than applying change by change.
+       */
       cursor.fetch();
-      let lastChanges = this._changes.splice(0);
-      if (lastChanges.length) {
-        this.emit(lastChanges);
+      if (this._changes.length) {
+        this._emitChanges(this._changes);
       }
-      this._lastChanges = lastChanges;
+      this._lastChanges = this._changes.splice(0);
     });
   }
 
@@ -140,7 +205,7 @@ export class MongoCursorObserver {
       this._hCursor.stop();
     }
 
-    this._subscriptions = null;
+    this._subs = null;
     this._hCursor = null;
     this._docs = null;
     this._changes = null;

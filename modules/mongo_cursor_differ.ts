@@ -75,7 +75,6 @@ export class MongoCursorDiffer {
         zone.bind(changes => {
           this._updateLatestValue(changes);
         }));
-      this._lastChanges = this._curObserver.lastChanges;
     }
 
     if (this._lastChanges) {
