@@ -2,7 +2,7 @@ Package.describe({
   name: 'barbatus:ng2-pagination',
   version: '0.1.0',
   summary: 'Angular2 Pagination Components',
-  git: 'https://github.com/michaelbromley/ng2-pagination',
+  git: 'https://github.com/Urigo/Meteor-Angular2/tree/master/packages/ng2-pagination',
   documentation: null
 });
 
