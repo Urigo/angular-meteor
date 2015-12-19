@@ -225,9 +225,7 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
           result.subscriptionId = subscriptionResult.subscriptionId;
         });
 
-        result.stop = autorunComp.comp.bind(autorunComp);
-
-        this.stoppables.push(autorunComp);
+        result.stop = autorunComp.stop.bind(autorunComp);
       }
 
       return result;
@@ -235,13 +233,14 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
 
     autorun(fn) {
       if (this.scope && this.scope !== this.context) {
-        this.scope.autorun(fn);
+        return this.scope.autorun(fn);
       }
       else {
-        this.stoppables.push(Meteor.autorun(fn));
-      }
+        let stoppable = Meteor.autorun(fn);
+        this.stoppables.push(stoppable);
 
-      return this;
+        return stoppable;
+      }
     }
 
     stop() {

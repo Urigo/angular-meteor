@@ -445,62 +445,62 @@ describe('angular-meteor', function () {
 
         expect(callCount).toBe(2);
       });
-      /*
 
-       it('Should trigger Autorun dependencies when using object and adding a sub property', function () {
+      it('Should NOT trigger Autorun dependencies when using object and adding a sub property', function () {
         $reactive(context);
 
-        var mySpy = jasmine.createSpy();
+        var callCount = 0;
+
+        context.prop = {
+          mySubProp: 10
+        };
 
         context.helpers({
-          prop: {
-            mySubProp: 10
+          myMethod: function() {
+            callCount++;
+
+            return context.getReactively('prop'); // Shallow
           }
         });
 
-        context.helpers({
-          myMethod: mySpy.and.callFake(() => {
-            var a = context.prop;
-          })
-        });
+        $rootScope.$apply();
+        Tracker.flush();
 
         context.prop.newProp = 20;
 
         $rootScope.$apply();
         Tracker.flush();
 
-        expect(mySpy).toHaveBeenCalled();
-        expect(mySpy.calls.count()).toBe(2);
+        expect(callCount).toBe(1);
       });
 
-      it('Should trigger Autorun dependencies when using object and depending on sub property', function () {
-        $reactive(context);
+       it('Should trigger Autorun dependencies when using object and adding a sub property and watching deep', function () {
+         $reactive(context);
 
-        var mySpy = jasmine.createSpy();
+         var callCount = 0;
 
-        context.helpers({
-          prop: {
-            mySubProp: 10
-          }
-        });
+         context.prop = {
+           mySubProp: 10
+         };
 
-        context.helpers({
-          myMethod: mySpy.and.callFake(() => {
-            var a = context.prop.mySubProp;
-          })
-        });
+         context.helpers({
+           myMethod: function() {
+             callCount++;
 
-        context.prop.mySubProp = 20;
+             return context.getReactively('prop', true);
+           }
+         });
 
-        $rootScope.$apply();
-        Tracker.flush();
+         $rootScope.$apply();
+         Tracker.flush();
 
-        expect(mySpy).toHaveBeenCalled();
-        expect(mySpy.calls.count()).toBe(2);
+         context.prop.newProp = 20;
+
+         $rootScope.$apply();
+         Tracker.flush();
+
+         expect(callCount).toBe(2);
       });
-
-      */
-
 
       it('Should remove and destroy custom scope if it was necessary to create it', function () {
         var reactive = $reactive(context);
@@ -586,6 +586,47 @@ describe('angular-meteor', function () {
         Tracker.flush();
 
         expect(callCount).toBe(2);
+      });
+
+      it('Should create a subscription without callback - NO scope', function() {
+        $reactive(context);
+
+        var subscribeSpy = spyOn(Meteor, 'subscribe').and.callThrough();
+
+        context.subscribe('test');
+
+        expect(subscribeSpy).toHaveBeenCalledWith('test', angular.noop);
+      });
+
+      it('Should create a subscription with no callback and args- NO scope', function() {
+        $reactive(context);
+
+        var subscribeSpy = spyOn(Meteor, 'subscribe').and.callThrough();
+
+        context.subscribe('test', () => {
+          return [
+            10,
+            20
+          ];
+        });
+
+        expect(subscribeSpy).toHaveBeenCalledWith('test', 10, 20, angular.noop);
+      });
+
+      it('Should create a subscription with callback and args- NO scope', function() {
+        $reactive(context);
+
+        var subscribeSpy = spyOn(Meteor, 'subscribe').and.callThrough();
+        var cb = function() {};
+
+        context.subscribe('test', () => {
+          return [
+            10,
+            20
+          ];
+        }, cb);
+
+        expect(subscribeSpy).toHaveBeenCalledWith('test', 10, 20, cb);
       });
     });
   });
