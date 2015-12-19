@@ -7,14 +7,16 @@ describe('angular-meteor', function () {
     var $compile;
     var $rootScope;
     var testScope;
+    var $auth;
 
-    beforeEach(angular.mock.inject(function (_$compile_, _$rootScope_) {
+    beforeEach(angular.mock.inject(function (_$compile_, _$rootScope_, _$auth_) {
       $compile = _$compile_;
       $rootScope = _$rootScope_;
       testScope = $rootScope.$new();
+      $auth = _$auth_;
     }));
 
-    beforeEach(function(done) {
+    afterEach(function(done) {
       Meteor.logout(function() {
         done();
       })
@@ -44,26 +46,39 @@ describe('angular-meteor', function () {
     });
 
     it('Should currentUser return empty value when there is no user logged in', function() {
-      expect($rootScope.currentUser).toBe(null);
+      expect($rootScope.$auth.currentUser).toBe(null);
     });
 
     it('Should loggingIn change when logging in', function(done) {
-      expect($rootScope.loggingIn).toBe(false);
+      expect($rootScope.$auth.loggingIn).toBe(false);
       Meteor.insecureUserLogin('tempUser', function() {
-        expect($rootScope.loggingIn).toBe(true);
+        expect($rootScope.$auth.loggingIn).toBe(true);
         done();
       });
     });
 
     it('Should loggingIn change when logging out', function(done) {
-      expect($rootScope.loggingIn).toBe(false);
+      expect($rootScope.$auth.loggingIn).toBe(false);
       Meteor.insecureUserLogin('tempUser', function() {
-        expect($rootScope.loggingIn).toBe(true);
+        expect($rootScope.$auth.loggingIn).toBe(true);
 
         Meteor.logout(function() {
-          expect($rootScope.loggingIn).toBe(false);
+          expect($rootScope.$auth.loggingIn).toBe(false);
           done();
         });
+      });
+    });
+
+    it('Should waitForUser return a promise and resolve it when user logs in', function(done) {
+      var promise = $auth.waitForUser();
+
+      promise.then(function() {
+        done();
+      });
+
+      Meteor.insecureUserLogin('tempUser', function() {
+        expect($rootScope.loggingIn).toBe(true);
+        $rootScope.$apply();
       });
     });
   });
