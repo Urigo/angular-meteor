@@ -49,7 +49,7 @@ We've just created a System.js module, hence, as you already know, one necessary
 
 ## Meteor.subscribe
 
-This function is an opposite of [Meteor.subscribe](http://docs.meteor.com/#/full/meteor_subscribe): the one we are goint to use on the client
+This function is an opposite of [Meteor.subscribe](http://docs.meteor.com/#/full/meteor_subscribe): the one we are going to use on the client
 to get that data.
 
 In a regular Meteor app with Blaze, we'd add the following line to subscribe to the "parties" publications:
@@ -62,9 +62,9 @@ It's very simple, isn't it? And when subscription is completed, we select partie
       this.parties = Parties.find();
     });
 
-But beyond that simplicity there go two little issues we'll need to solve.
-Each subscription means that Meteor will continue synchronize (or in Meteor terms, update reactively) particular set of data, we've just subscribed to, between server and client.
-If PartiesList components gets desctroyed, we need to inform Meteor to stop that synchronization, otherwise we'll get a memory leak.
+But beyond that simplicity there are two little issues we'll need to solve.
+Each subscription means that Meteor will continue synchronizing (or in Meteor terms, update reactively) the particular set of data, we've just subscribed to, between server and client.
+If PartiesList components gets destroyed, we need to inform Meteor to stop that synchronization, otherwise we'll get a memory leak.
 It especially makes sense for single page apps, the type of apps that are most usually built with Meteor.
 
 The second point is about informing Angular 2 to perform UI refresh when new data arrive.
