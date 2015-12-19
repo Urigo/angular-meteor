@@ -160,21 +160,36 @@ Router.map(function () {
     seoTitle: 'Angular Meteor and Ionic tutorial'
   });
 
+  var directedRouteNames = [];
   for (var apiKey in API_DEFINITION) {
     var currentApi = API_DEFINITION[apiKey];
+
+    for (var coreAPI in currentApi.groups[0].pages) {
+      var routeName = currentApi.groups[0].pages[coreAPI].route;
+      routeName = routeName.slice(routeName.lastIndexOf('.')+1);
+      var redirectFrom = '/api/' + routeName;
+      var redirectTo = '/api/' + apiKey + '/' + routeName;
+      if (!_.contains(directedRouteNames, routeName)){
+        redirect(redirectFrom, redirectTo);
+        directedRouteNames.push(routeName);
+      }
+    }
+
     createSubRoutes(currentApi);
 
     (function(routeUrl) {
       if (routeUrl) {
-        Router.route('/api/' + apiKey, function () {
-          this.redirect(routeUrl);
-        });
+        if (apiKey != DEFAULT_API) {
+          Router.route('/api/' + apiKey, function () {
+            this.redirect(routeUrl);
+          });
+        }
       }
     })(currentApi.groups[0].redirectRoute);
 
   }
 
-  redirect('/api', '/api/' + DEFAULT_API + '/reactive');
+  redirect('/api', '/api/' + DEFAULT_API + '/helpers');
 
   // -------------------------------------------------------------------------
   // Angular Server routes
