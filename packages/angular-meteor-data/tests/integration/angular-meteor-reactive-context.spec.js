@@ -418,25 +418,20 @@ describe('angular-meteor', function () {
         expect(element.get(1).innerHTML).toBe('test');
       });
 
-      /*
-
-       it('Should trigger Autorun dependencies when using object and updating a sub property', function () {
+       it('Should trigger Helpers dependencies when using object and updating a sub property', function () {
         $reactive(context);
 
-        //var mySpy = jasmine.createSpy();
         var callCount = 0;
 
-        context.helpers({
-          prop: {
-            mySubProp: 10
-          }
-        });
+        context.prop = {
+          mySubProp: 10
+        };
 
         context.helpers({
           myMethod: function() {
             callCount++;
 
-            return 'test';
+            return context.getReactively('prop.mySubProp');
           }
         });
 
@@ -450,6 +445,7 @@ describe('angular-meteor', function () {
 
         expect(callCount).toBe(2);
       });
+      /*
 
        it('Should trigger Autorun dependencies when using object and adding a sub property', function () {
         $reactive(context);
