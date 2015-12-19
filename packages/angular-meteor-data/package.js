@@ -1,9 +1,8 @@
 Package.describe({
   name: "angular-meteor-data",
   summary: "Everything you need to use AngularJS in your Meteor app",
-  version: "0.0.7",
-  git: "https://github.com/Urigo/angular-meteor.git",
-  documentation: null
+  version: "0.0.8",
+  git: "https://github.com/Urigo/angular-meteor.git"
 });
 
 Package.onUse(function (api) {
@@ -18,6 +17,7 @@ Package.onUse(function (api) {
   api.use('observe-sequence@1.0.7');
   api.use('ecmascript');
   api.use('reactive-var');
+  api.use('benjamine:jsondiffpatch@0.1.38_1');
 
   api.use('angular:angular@1.4.7', 'client');
 
@@ -32,7 +32,6 @@ Package.onUse(function (api) {
     // Lib Files
     'lib/diff-array.js',
     'lib/get-updates.js',
-    'lib/jsondiffpatch-full.min.js',
     // Module Files
     'modules/angular-meteor-subscribe.js',
     'modules/angular-meteor-stopper.js',

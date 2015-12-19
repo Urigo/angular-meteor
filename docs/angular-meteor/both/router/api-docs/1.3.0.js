@@ -9,7 +9,7 @@ API_1_3_0 = function (version, basedOnTemplatesOf) {
         title: "",
         route: "api",
         path: urlBase,
-        redirectRoute: "api." + version + ".reactive",
+        redirectRoute: "/api/" + version + "/reactive",
         template: "api",
         seoTitleSuffix: " | Angular Meteor API",
         seoDesc: "angular-meteor is a realtime full stack that combines the best frameworks. use your existing Angular applications with Meteor - the best backend framework for AngularJS applications.",
@@ -82,7 +82,8 @@ API_1_3_0 = function (version, basedOnTemplatesOf) {
             path: urlBase + "methods",
             title: "$meteor.call",
             seoTitle: "$meteor.call",
-            mdContent: "api." + templatePrefix + ".methods"
+            mdContent: "api." + templatePrefix + ".methods",
+            deprecated: '1.3.0', removedIn: '1.4.0'
           },
           {
             id: "09",
@@ -108,8 +109,7 @@ API_1_3_0 = function (version, basedOnTemplatesOf) {
             path: urlBase + "blaze-template",
             title: "blaze-template directive",
             seoTitle: "blaze-template directive",
-            mdContent: "api." + templatePrefix + ".blaze-template",
-            deprecated: '1.3.0', removedIn: '1.4.0'
+            mdContent: "api." + templatePrefix + ".blaze-template"
           },
           {
             id: "12",
@@ -153,8 +153,7 @@ API_1_3_0 = function (version, basedOnTemplatesOf) {
             path: urlBase + "ngFileExtension",
             title: "File Extensions",
             seoTitle: "File Extensions",
-            mdContent: "api." + templatePrefix + ".ngFileExtension",
-            deprecated: '1.3.0', removedIn: '1.4.0'
+            mdContent: "api." + templatePrefix + ".ngFileExtension"
           }
         ]
       }

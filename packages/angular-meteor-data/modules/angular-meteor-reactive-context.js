@@ -13,6 +13,7 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
 
       this.stoppables = [];
       this.propertiesTrackerDeps = {};
+      this.usingNewScope = false;
     }
 
     attach(scope) {
@@ -80,26 +81,69 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
           this.context[name] = data;
         }
         else {
-          let diff = jsondiffpatch.diff(this.context[name], data)
+          let diff = jsondiffpatch.diff(this.context[name], data);
           jsondiffpatch.patch(this.context[name], diff);
           this._propertyChanged(name);
         }
       }
     }
 
+    _verifyScope() {
+      if (!this.scope) {
+        this.usingNewScope = true;
+        this.scope = $rootScope.$new(true);
+      }
+    }
+
     helpers(props) {
       _.each(props, (v, k) => {
-        if (_.isFunction(v))
+        if (_.isFunction(v)) {
           this._setFnHelper(k, v);
-        else
+        }
+        else {
+          console.warn(`[angular-meteor][helpers] Your tried to create helper for primitive '${k}', please note that this feature will be deprecated in 1.4 in favor of using 'getReactively' - http://www.angular-meteor.com/api/1.3.1/get-reactively`);
           this._setValHelper(k, v);
+
+          if (angular.isObject(v)) {
+            this.getReactively(k, true);
+          }
+        }
       });
 
       return this;
     }
 
+    getReactively(k, objectEquality) {
+      let context = this.context;
+
+      if (angular.isUndefined(objectEquality)) {
+        objectEquality = false;
+      }
+
+      this._verifyScope();
+
+      if (!this.propertiesTrackerDeps[k]) {
+        this.propertiesTrackerDeps[k] = new Tracker.Dependency();
+
+        this.scope.$watch(() => {
+          return $parse(k)(context);
+        }, (newValue, oldValue) => {
+          if (newValue !== oldValue) {
+            this.propertiesTrackerDeps[k].changed();
+          }
+        }, objectEquality);
+      }
+
+      this.propertiesTrackerDeps[k].depend();
+
+      return $parse(k)(context);
+    }
+
     _setValHelper(k, v) {
+      this.getReactively(k, true);
+
       this.propertiesTrackerDeps[k] = new Tracker.Dependency();
+
       v = _.clone(v);
 
       Object.defineProperty(this.context, k, {
@@ -112,7 +156,7 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
         },
         set: (newValue) => {
           v = newValue;
-          this.propertiesTrackerDeps[k].changed();
+          this._propertyChanged(k);
         }
       });
     }
@@ -145,38 +189,58 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
     }
 
     _propertyChanged(k) {
-      if (this.scope && !$rootScope.$$phase) {
+      if (this.scope && !this.scope.$$destroyed && !$rootScope.$$phase) {
         this.scope.$digest();
       }
 
       this.propertiesTrackerDeps[k].changed();
     }
 
-    subscribe(name, fn) {
+    subscribe(name, fn, resultCb) {
+      if (!angular.isString(name)) {
+        throw new Error(`[angular-meteor][ReactiveContext] The first argument of 'subscribe' method must be a string!`);
+      }
+
+      let result = {};
       fn = fn || angular.noop;
+      resultCb = resultCb || angular.noop;
+
+      if (!angular.isFunction(fn)) {
+        throw new Error(`[angular-meteor][ReactiveContext] The second argument of 'subscribe' method must be a function!`);
+      }
 
       if (this.scope && this.scope !== this.context) {
-        this.stoppables.push(this.scope.subscribe(name, fn));
+        result = this.scope.subscribe(name, fn, resultCb);
+        this.stoppables.push(result);
       }
       else {
-        this.autorun(() => {
+        let autorunComp = this.autorun(() => {
           let args = fn() || [];
-          this.stoppables.push(Meteor.subscribe(name, ...args));
+          if (!angular.isArray(args)) {
+            throw new Error(`[angular-meteor][ReactiveContext] The return value of arguments function in subscribe must be an array! `);
+          }
+
+          let subscriptionResult = Meteor.subscribe(name, ...args, resultCb);
+          result.ready = subscriptionResult.ready.bind(subscriptionResult);
+          result.subscriptionId = subscriptionResult.subscriptionId;
         });
+
+        result.stop = autorunComp.stop.bind(autorunComp);
       }
 
-      return this;
+      return result;
     }
 
     autorun(fn) {
       if (this.scope && this.scope !== this.context) {
-        this.scope.autorun(fn);
+        return this.scope.autorun(fn);
       }
       else {
-        this.stoppables.push(Meteor.autorun(fn));
-      }
+        let stoppable = Meteor.autorun(fn);
+        this.stoppables.push(stoppable);
 
-      return this;
+        return stoppable;
+      }
     }
 
     stop() {
@@ -186,11 +250,16 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
 
       this.stoppables = [];
 
+      if (this.usingNewScope) {
+        this.scope.$destroy();
+        this.scope = undefined;
+      }
+
       return this;
     }
   }
 
-  return function(context) {
+  return function (context) {
     let reactiveContext = new ReactiveContext(context);
 
     // manipulates the original context so it could access reactive methods

@@ -61,14 +61,47 @@ describe('angular-meteor', function () {
     });
 
     it('Should use the Meteor subscribe function when using it', function() {
-      var meteorSubscribeSpy = spyOn(Meteor, 'subscribe');
+      var mockedResult = {
+        ready : jasmine.createSpy('ready'),
+        stop : jasmine.createSpy('stop'),
+        subscriptionId : '123'
+      };
+      var meteorSubscribeSpy = spyOn(Meteor, 'subscribe').and.returnValue(mockedResult);
       testScope.subscribe('', function() { return [] });
 
       expect(meteorSubscribeSpy).toHaveBeenCalled();
     });
 
+    it('Should stop the subscription when calling stop on the return value', function() {
+      var mockedResult = {
+        ready : jasmine.createSpy('ready'),
+        stop : jasmine.createSpy('stop'),
+        subscriptionId : '123'
+      };
+      spyOn(Meteor, 'subscribe').and.returnValue(mockedResult);
+      spyOn(Meteor, 'autorun').and.callFake(function(cb) {
+        cb();
+        return {
+          stop : function() { mockedResult.stop()}
+        }
+      });
+      var result = testScope.subscribe('', function(){ return []});
+
+      result.stop();
+      result.ready();
+
+      expect(mockedResult.stop).toHaveBeenCalled();
+      expect(result.subscriptionId).toEqual(mockedResult.subscriptionId);
+      expect(mockedResult.ready).toHaveBeenCalled();
+    });
+
     it('Should wrap the subscription with autorun context', function() {
-      var meteorSubscribeSpy = spyOn(Meteor, 'subscribe');
+      var mockedResult = {
+        ready : jasmine.createSpy('ready'),
+        stop : jasmine.createSpy('stop'),
+        subscriptionId : '123'
+      };
+      var meteorSubscribeSpy = spyOn(Meteor, 'subscribe').and.returnValue(mockedResult);
       var meteorAutorunSpy = spyOn(Meteor, 'autorun').and.callThrough();
 
       testScope.subscribe('test', function() { return [] });
@@ -96,43 +129,68 @@ describe('angular-meteor', function () {
     });
 
     it('Should convert the subscription array to list of param - test with no params', function() {
-      var meteorSubscribeSpy = spyOn(Meteor, 'subscribe');
+      var mockedResult = {
+        ready : jasmine.createSpy('ready'),
+        stop : jasmine.createSpy('stop'),
+        subscriptionId : '123'
+      };
+      var meteorSubscribeSpy = spyOn(Meteor, 'subscribe').and.returnValue(mockedResult);
 
       testScope.subscribe('test', function() { return [] });
 
-      expect(meteorSubscribeSpy).toHaveBeenCalledWith('test');
+      expect(meteorSubscribeSpy).toHaveBeenCalledWith('test', undefined);
     });
 
     it('Should convert the subscription array to list of param - test with no return value', function() {
-      var meteorSubscribeSpy = spyOn(Meteor, 'subscribe');
+      var mockedResult = {
+        ready : jasmine.createSpy('ready'),
+        stop : jasmine.createSpy('stop'),
+        subscriptionId : '123'
+      };
+      var meteorSubscribeSpy = spyOn(Meteor, 'subscribe').and.returnValue(mockedResult);
 
       testScope.subscribe('test', function() {  });
 
-      expect(meteorSubscribeSpy).toHaveBeenCalledWith('test');
+      expect(meteorSubscribeSpy).toHaveBeenCalledWith('test', undefined);
     });
 
     it('Should convert the subscription array to list of param - test with one param', function() {
-      var meteorSubscribeSpy = spyOn(Meteor, 'subscribe');
+      var mockedResult = {
+        ready : jasmine.createSpy('ready'),
+        stop : jasmine.createSpy('stop'),
+        subscriptionId : '123'
+      };
+      var meteorSubscribeSpy = spyOn(Meteor, 'subscribe').and.returnValue(mockedResult);
 
       testScope.subscribe('test', function() { return ['a'] });
 
-      expect(meteorSubscribeSpy).toHaveBeenCalledWith('test', 'a');
+      expect(meteorSubscribeSpy).toHaveBeenCalledWith('test', 'a', undefined);
     });
 
     it('Should convert the subscription array to list of param - test with more than one param', function() {
-      var meteorSubscribeSpy = spyOn(Meteor, 'subscribe');
+      var mockedResult = {
+        ready : jasmine.createSpy('ready'),
+        stop : jasmine.createSpy('stop'),
+        subscriptionId : '123'
+      };
+      var meteorSubscribeSpy = spyOn(Meteor, 'subscribe').and.returnValue(mockedResult);
 
       testScope.subscribe('test', function() { return ['a', 'b', 10, 100] });
 
-      expect(meteorSubscribeSpy).toHaveBeenCalledWith('test', 'a', 'b', 10, 100);
+      expect(meteorSubscribeSpy).toHaveBeenCalledWith('test', 'a', 'b', 10, 100, undefined);
     });
 
     it('Should subscribe without subscribe function', function () {
-      var meteorSubscribeSpy = spyOn(Meteor, 'subscribe');
+      var mockedResult = {
+        ready : jasmine.createSpy('ready'),
+        stop : jasmine.createSpy('stop'),
+        subscriptionId : '123'
+      };
+      var meteorSubscribeSpy = spyOn(Meteor, 'subscribe').and.returnValue(mockedResult);
 
       testScope.subscribe('test');
 
-      expect(meteorSubscribeSpy).toHaveBeenCalledWith('test');
+      expect(meteorSubscribeSpy).toHaveBeenCalledWith('test', undefined);
     })
 
     it('Should call stop method of autorun when destroying the scope', function() {

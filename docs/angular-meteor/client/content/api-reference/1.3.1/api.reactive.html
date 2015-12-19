@@ -1,0 +1,193 @@
+<template name="api.1.3.1.reactive">
+  <div>
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/docs/angular-meteor/client/content/api-reference/1.3.1/api.reactive.html"
+       class="btn btn-default btn-lg improve-button">
+      <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
+    </a>
+
+    <do-nothing>
+      {{#markdown}}
+
+# $reactive
+<a class="src-code" href="https://github.com/Urigo/angular-meteor/blob/master/packages/angular-meteor-data/modules/angular-meteor-reactive-context.js" target="_blank">
+  src: angular-meteor-data/modules/angular-meteor-reactive-context.js
+</a>
+
+A service that takes care of the reactivity of your Meteor data, and updates your AngularJS code.
+
+This service wraps context (can be used with `this` or `$scope`) - so you can use it with any context as you wish:
+
+* Use it with `$scope` when writing AngularJS 1.x.x code.
+
+* Use it with `this` when working with AngularJS 1.x.x with components code-style.
+
+* Use it with `this` when working with AngularJS 2 (or angular2now) with components.
+
+-----
+
+## Arguments
+
+<table class="variables-matrix input-arguments">
+  <thead>
+  <tr>
+    <th>Param</th>
+    <th>Type</th>
+    <th>Details</th>
+    <th>Required</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td><strong>context</strong></td>
+    <td>
+      <a href="" class="label type-hint type-hint-object">Object</a>
+    </td>
+    <td>Context to set as reactive - this context will be used to hold the helpers locals and handle subscriptions, this method accepts controller's `this` context, or `$scope`.</td>
+    <td>Yes</td>
+  </tr>
+  </tbody>
+</table>
+
+## Return Value
+
+This service return an instance of [ReactiveContext](/api/1.3.0/reactive-context) in order to provide ability to create subscriptions and helpers.
+
+------
+
+## Examples
+
+
+### Usage example with AngularJS 1.x.x and `ngController`
+
+Using AngularJS 1.x.x and old-fashion `ng-controller`, we need to define the controller, and use the `$scope` methods:
+
+    var myModule = angular.module('myApp', ['angular-meteor']);
+
+    myModule.controller('MyCtrl', ['$scope', function($scope) {
+      $scope.age = 10;
+
+      $scope.subscribe('users', () => [
+        $scope.getReactivley('age')
+      ]);
+
+      $scope.helpers({
+        users: () => Users.find({})
+      });
+    }]);
+
+And our view will look like that:
+
+    <div ng-controller="MyCtrl">
+      <input type="number" ng-model="age">
+      Relevant Users: <br />
+      <ul>
+        <li ng-repeat="user in users">{ { user.name } }</li>
+      </ul>
+    </div>
+
+
+
+### Usage example with AngularJS 1.x.x and `controllerAs`
+
+Using AngularJS 1.x.x and `controllerAs`, we need to define the controller and use the `this` context, along with injected `$scope`:
+
+    var myModule = angular.module('myApp', ['angular-meteor']);
+
+    myModule.controller('MyCtrl', ['$scope', '$reactive', function($scope, $reactive) {
+      $reactive(this).attach($scope);
+
+      this.age = 10;
+
+      this.subscribe('users', () => [
+        this.age
+      ]);
+
+      this.helpers({
+        users: () => Users.find({});
+      });
+    }]);
+
+And now the HTML will look like that:
+
+    <div ng-controller="MyCtrl as vm">
+      <input type="number" ng-model="vm.age">
+      Relevant Users: <br />
+      <ul>
+        <li ng-repeat="user in vm.users">{ { user.name } }</li>
+      </ul>
+    </div>
+
+
+
+### Usage example with angular2now and @Component
+
+We can even make the code look better and use [Angular2Now](https://github.com/pbastowski/angular2-now), so we define the controller as class, and add annotations to defined our component:
+
+    let {Component, Inject, View} = angular2now;
+
+    angular.module('myApp', ['angular-meteor']);
+
+    @Component({selector: 'users-list'})
+    @View({templateUrl: 'users-list.html'})
+    @Inject(['$scope', '$reactive'])
+    class usersList {
+      constructor($scope, $reactive) {
+        $reactive(this).attach($scope);
+        this.age = 10;
+
+        this.subscribe('users', () => [
+          this.age
+        ]);
+
+        this.helpers({
+          users: () => Users.find({});
+        });
+      }
+    }
+
+And our view (inside the `users-list.html` file) will look like that:
+
+    <input type="number" ng-model="usersList.age">
+    Relevant Users: <br />
+    <ul>
+      <li ng-repeat="user in usersList.users">{ { user.name } }</li>
+    </ul>
+
+
+
+### Usage example using `angular-reactive-component` package
+
+The `angular-reactive-component` is a Meteor package that extends Angular-Meteor and angular2now, and provides the ability to encapsulate the need to add the `$scope` injection to your component.
+
+So first add the package to your project:
+
+    $ meteor add dotansimha:angular-reactive-component
+
+And now we can improve the code of the previous example to this:
+
+    let {Component, Inject, View} = angular2now;
+
+    angular.module('myApp', ['angular-meteor'])
+
+    @Component({selector: 'users-list'})
+    @View({templateUrl: 'users-list.html'})
+    class usersList extends ReactiveComponent {
+      constructor() {
+        super(arguments);
+        this.age = 10;
+
+        this.subscribe('users', () => [
+          this.age
+        ]);
+
+        this.helpers({
+          users: () => Users.find({});
+        });
+      }
+    }
+
+      {{/markdown}}
+    </do-nothing>
+
+  </div>
+</template>

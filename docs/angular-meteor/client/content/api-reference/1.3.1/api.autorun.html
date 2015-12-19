@@ -1,0 +1,69 @@
+<template name="api.1.3.1.autorun">
+  <div>
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/docs/angular-meteor/client/content/api-reference/1.3.1/api.autorun.html"
+       class="btn btn-default btn-lg improve-button">
+      <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
+    </a>
+
+    <do-nothing>
+      {{#markdown}}
+
+# autorun
+<a class="src-code" href="https://github.com/Urigo/angular-meteor/blob/master/packages/angular-meteor-data/modules/angular-meteor-reactive-context.js#L229" target="_blank">
+  src: angular-meteor-data/modules/angular-meteor-reactive-context.js, line 229
+</a>
+
+This method is a wrapper of [Tracker.autorun](http://docs.meteor.com/#/full/tracker_autorun) and shares exactly the same API.
+
+The `autorun` method is part of the `ReactiveContext`, and available on every `context` and `$scope`.
+
+The argument of this method is a callback, which will be called each time Autorun will be used.
+
+The Autorun will stop automatically when when it's context ($scope) is destroyed.
+
+------
+
+### Arguments
+
+<table class="variables-matrix input-arguments">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Type</th>
+    <th>Details</th>
+    <th>Required</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td><strong>runFunc</strong></td>
+    <td>
+      <a href="" class="label type-hint type-hint-function">Function</a>
+    </td>
+    <td>The function to run. It receives one argument: the Computation object that will be returned.</td>
+    <td>Yes</td>
+  </tr>
+  </tbody>
+</table>
+
+------
+
+### Example with `getReactively`:
+
+    myModule.controller('MyCtrl', ['$scope', '$reactive', function($scope, $reactive) {
+      $reactive(this).attach($scope);
+
+      this.myVar = 10;
+
+      this.autorun(() => {
+        console.log('Autorun!!', this.getReactively('myVar'));
+      });
+
+      this.myVar = 50; // This will cause the autorun function method to run again
+    }]);
+
+      {{/markdown}}
+    </do-nothing>
+
+  </div>
+</template>

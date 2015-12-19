@@ -10,7 +10,7 @@ angularMeteorUtils.service('$meteorUtils', [
 
     this.autorun = function(scope, fn, ignoreDeprecation) {
       if (!ignoreDeprecation) {
-        console.warn('[angular-meteor.autorun] Please note that this method is deprecated since 1.3.0 and will be removed in 1.4.0! http://info.meteor.com/blog/angular-meteor-1.3');
+        console.warn('[angular-meteor.utils.autorun] Please note that this method is deprecated since 1.3.0 and will be removed in 1.4.0! For more info: http://www.angular-meteor.com/api/1.3.1/autorun');
       }
 
       // wrapping around Deps.autorun

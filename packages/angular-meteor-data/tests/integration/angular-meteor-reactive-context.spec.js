@@ -1,7 +1,7 @@
 var testedModule = 'angular-meteor.reactive';
 
 describe('angular-meteor', function () {
-  describe(testedModule, function() {
+  describe(testedModule, function () {
     beforeEach(angular.mock.module(testedModule));
 
     var $compile;
@@ -10,36 +10,36 @@ describe('angular-meteor', function () {
     var testScope;
     var context = {};
 
-    beforeEach(angular.mock.inject(function(_$compile_, _$reactive_, _$rootScope_) {
+    beforeEach(angular.mock.inject(function (_$compile_, _$reactive_, _$rootScope_) {
       $compile = _$compile_;
       $reactive = _$reactive_;
       $rootScope = _$rootScope_;
       testScope = $rootScope.$new();
     }));
 
-    describe('$reactive', function() {
-      it('Should receive one param and pass them to the ReactiveContext class without scope object', function() {
+    describe('$reactive', function () {
+      it('Should receive one param and pass them to the ReactiveContext class without scope object', function () {
         var returnValue = $reactive(context);
 
         expect(returnValue.scope).toBeUndefined();
         expect(returnValue.context).toBe(context);
       });
 
-      it('Should receive context param and attached scope and then and pass them to the ReactiveContext class', function() {
+      it('Should receive context param and attached scope and then and pass them to the ReactiveContext class', function () {
         var returnValue = $reactive(context).attach(testScope);
 
         expect(returnValue.scope).toBe(testScope);
         expect(returnValue.context).toBe(context);
       });
 
-      it('Should receive only context and do not use scope', function() {
+      it('Should receive only context and do not use scope', function () {
         var returnValue = $reactive(context);
 
         expect(returnValue.scope).toBeUndefined();
         expect(returnValue.context).toBe(context);
       });
 
-      it('Should receive only scope and use it as context', function() {
+      it('Should receive only scope and use it as context', function () {
         var returnValue = $reactive(testScope);
 
         expect(returnValue.scope).toBe(testScope);
@@ -47,20 +47,20 @@ describe('angular-meteor', function () {
       });
     });
 
-    describe('ReactiveContext', function() {
+    describe('ReactiveContext', function () {
       var reactiveContextInstance;
       var testObjectId = 'TempId';
 
-      beforeEach(function() {
+      beforeEach(function () {
         testScope = $rootScope.$new();
         context = {};
         reactiveContextInstance = $reactive(context).attach(testScope);
         bigCollection.remove(testObjectId);
       });
 
-      it('Should register primitive helper', function() {
+      it('Should register primitive helper', function () {
         reactiveContextInstance.helpers({
-          myHelper: function() {
+          myHelper: function () {
             return 10;
           }
         });
@@ -69,12 +69,12 @@ describe('angular-meteor', function () {
         expect(reactiveContextInstance.context['myHelper']).toBe(10);
       });
 
-      it('should not explode when there is property on the context with the helper name', function () {
+      it('Whould not explode when there is property on the context with the helper name', function () {
         var scope = $rootScope.$new();
 
         scope.myHelper = 'oops';
         var instance = $reactive(scope).helpers({
-          myHelper: function() {
+          myHelper: function () {
             return 10;
           }
         });
@@ -83,9 +83,9 @@ describe('angular-meteor', function () {
         expect(instance.context['myHelper']).toBe(10);
       });
 
-      it('Should register string helper', function() {
+      it('Should register string helper', function () {
         reactiveContextInstance.helpers({
-          myHelper: function() {
+          myHelper: function () {
             return 'Test';
           }
         });
@@ -94,14 +94,14 @@ describe('angular-meteor', function () {
         expect(reactiveContextInstance.context['myHelper']).toBe('Test');
       });
 
-      it('Should register object helper', function() {
+      it('Should register object helper', function () {
         var testObject = {
           prop1: '10',
           prop2: 'Test'
         };
 
         reactiveContextInstance.helpers({
-          myHelper: function() {
+          myHelper: function () {
             return testObject;
           }
         });
@@ -110,11 +110,11 @@ describe('angular-meteor', function () {
         expect(reactiveContextInstance.context['myHelper']).toEqual(testObject);
       });
 
-      it('Should register array helper', function() {
+      it('Should register array helper', function () {
         var testArray = [10, 20, 30];
 
         reactiveContextInstance.helpers({
-          myHelper: function() {
+          myHelper: function () {
             return testArray;
           }
         });
@@ -123,9 +123,9 @@ describe('angular-meteor', function () {
         expect(reactiveContextInstance.context['myHelper']).toEqual(testArray);
       });
 
-      it('Should register cursor helper as array', function() {
+      it('Should register cursor helper as array', function () {
         reactiveContextInstance.helpers({
-          myHelper: function() {
+          myHelper: function () {
             return bigCollection.find();
           }
         });
@@ -134,11 +134,11 @@ describe('angular-meteor', function () {
         expect(reactiveContextInstance.context['myHelper'] instanceof Array).toEqual(true);
       });
 
-      it('Should register cursor and reset the data when cursor is invalidated', function() {
+      it('Should register cursor and reset the data when cursor is invalidated', function () {
         var cursor = bigCollection.find();
 
         reactiveContextInstance.helpers({
-          myHelper: function() {
+          myHelper: function () {
             return cursor;
           }
         });
@@ -159,9 +159,9 @@ describe('angular-meteor', function () {
         expect(reactiveContextInstance.context['myHelper'].length).toEqual(0);
       });
 
-      it('Should register cursor fetch result helper as array', function() {
+      it('Should register cursor fetch result helper as array', function () {
         reactiveContextInstance.helpers({
-          myHelper: function() {
+          myHelper: function () {
             return bigCollection.find().fetch();
           }
         });
@@ -170,14 +170,14 @@ describe('angular-meteor', function () {
         expect(reactiveContextInstance.context['myHelper'] instanceof Array).toEqual(true);
       });
 
-      it('Should handle cursor - add action', function() {
+      it('Should handle cursor - add action', function () {
         var data = {
           _id: testObjectId,
           prop1: 'T'
         };
 
         reactiveContextInstance.helpers({
-          myHelper: function() {
+          myHelper: function () {
             return bigCollection.find();
           }
         });
@@ -188,14 +188,14 @@ describe('angular-meteor', function () {
         expect(reactiveContextInstance.context['myHelper'][0]).toEqual(data);
       });
 
-      it('Should handle cursor - remove action', function() {
+      it('Should handle cursor - remove action', function () {
         var data = {
           _id: testObjectId,
           prop1: 'T'
         };
 
         reactiveContextInstance.helpers({
-          myHelper: function() {
+          myHelper: function () {
             return bigCollection.find();
           }
         });
@@ -206,14 +206,14 @@ describe('angular-meteor', function () {
         expect(reactiveContextInstance.context['myHelper'][0]).toBeUndefined();
       });
 
-      it('Should handle cursor - update action', function() {
+      it('Should handle cursor - update action', function () {
         var data = {
           _id: testObjectId,
           prop1: 'T'
         };
 
         reactiveContextInstance.helpers({
-          myHelper: function() {
+          myHelper: function () {
             return bigCollection.find();
           }
         });
@@ -226,7 +226,7 @@ describe('angular-meteor', function () {
         expect(reactiveContextInstance.context['myHelper'][0].prop1).toBe('B');
       });
 
-      it('Should handle cursor - move action', function() {
+      it('Should handle cursor - move action', function () {
         var data1 = {
           _id: testObjectId,
           prop1: 'A'
@@ -238,7 +238,7 @@ describe('angular-meteor', function () {
         };
 
         reactiveContextInstance.helpers({
-          myHelper: function() {
+          myHelper: function () {
             return bigCollection.find({}, {sort: {prop1: 1}});
           }
         });
@@ -258,14 +258,14 @@ describe('angular-meteor', function () {
         expect(reactiveContextInstance.context['myHelper'][1].prop1).toBe('B');
       });
 
-      it('Should trigger scope $digest when using scope and context', function() {
+      it('Should trigger scope $digest when using scope and context', function () {
         var data = {
           _id: testObjectId,
           prop1: 'T'
         };
 
         reactiveContextInstance.helpers({
-          myHelper: function() {
+          myHelper: function () {
             return bigCollection.find({});
           }
         });
@@ -278,7 +278,8 @@ describe('angular-meteor', function () {
         expect(digestScopeSpy.calls.count()).toBe(1);
       });
 
-      it('Should trigger scope $digest when using scope only as context', function() {
+
+      it('Should trigger scope $digest when using scope only as context', function () {
         testScope = $rootScope.$new();
         reactiveContextInstance = $reactive(testScope);
         bigCollection.remove(testObjectId);
@@ -289,7 +290,7 @@ describe('angular-meteor', function () {
         };
 
         reactiveContextInstance.helpers({
-          myHelper: function() {
+          myHelper: function () {
             return bigCollection.find({});
           }
         });
@@ -302,9 +303,9 @@ describe('angular-meteor', function () {
         expect(digestScopeSpy.calls.count()).toBe(1);
       });
 
-      it('Should call stop of all computations when stopping the reactivity of the context', function() {
+      it('Should call stop of all computations when stopping the reactivity of the context', function () {
         reactiveContextInstance.helpers({
-          myHelper: function() {
+          myHelper: function () {
             return bigCollection.find({});
           }
         });
@@ -316,7 +317,7 @@ describe('angular-meteor', function () {
         expect(computationSpy).toHaveBeenCalled();
       });
 
-      it('Should defined reactive property on the context', function() {
+      it('Should define reactive property on the context', function () {
         reactiveContextInstance.helpers({
           prop: 20
         });
@@ -325,7 +326,7 @@ describe('angular-meteor', function () {
         expect(context.prop).toBe(20);
       });
 
-      it('Should defined reactive property on the context and update the value', function() {
+      it('Should defined reactive property on the context and update the value', function () {
         reactiveContextInstance.helpers({
           prop: 20
         });
@@ -336,7 +337,8 @@ describe('angular-meteor', function () {
         expect(context.prop).toBe(100);
       });
 
-      it('Should create a configurable and enumerable reactive property', function() {
+
+      it('Should create a configurable and enumerable reactive property', function () {
         reactiveContextInstance.helpers({
           prop: 20
         });
@@ -348,21 +350,21 @@ describe('angular-meteor', function () {
         expect(context.prop).not.toBeDefined();
       });
 
-      it('Should add subscription when call subscribe', function() {
+      it('Should add subscription when call subscribe', function () {
         reactiveContextInstance.helpers({
           prop: 20
         });
 
         var subscribeSpy = spyOn(testScope, 'subscribe');
 
-        reactiveContextInstance.subscribe('users', function() {
+        reactiveContextInstance.subscribe('users', function () {
           return [];
         });
 
         expect(subscribeSpy).toHaveBeenCalled();
       });
 
-      it('Should call autorun methods when updating reactive property value', function() {
+      it('Should call autorun methods when updating reactive property value', function () {
         reactiveContextInstance.helpers({
           prop: 20
         });
@@ -376,7 +378,7 @@ describe('angular-meteor', function () {
         expect(autorunSpy.calls.count()).toBe(1);
       });
 
-      it('Should have reactive properties available on the scope and in the view when using scope only', function() {
+      it('Should have reactive properties available on the scope and in the view when using scope only', function () {
         testScope = $rootScope.$new();
         reactiveContextInstance = $reactive(testScope);
 
@@ -391,7 +393,7 @@ describe('angular-meteor', function () {
         expect(element.get(1).innerHTML).toBe('20');
       });
 
-      it('Should update reactive properties when using view and ngModel', function() {
+      it('Should update reactive properties when using view and ngModel', function () {
         testScope = $rootScope.$new();
         reactiveContextInstance = $reactive(testScope);
 
@@ -414,6 +416,255 @@ describe('angular-meteor', function () {
 
         expect(autorunSpy).toHaveBeenCalled();
         expect(element.get(1).innerHTML).toBe('test');
+      });
+
+      it('Should trigger Helpers dependencies when using object and updating a sub property', function () {
+        $reactive(context);
+
+        var callCount = 0;
+
+        context.prop = {
+          mySubProp: 10
+        };
+
+        context.helpers({
+          myMethod: function () {
+            callCount++;
+
+            return 'a';
+          }
+        });
+
+        $rootScope.$apply();
+        Tracker.flush();
+
+        context.prop.mySubProp = 20;
+
+        $rootScope.$apply();
+        Tracker.flush();
+
+        //expect(callCount).toBe(2);
+      });
+
+      it('Should NOT trigger Autorun dependencies when using object and adding a sub property', function () {
+        $reactive(context);
+
+        var callCount = 0;
+
+        context.prop = {
+          mySubProp: 10
+        };
+
+        context.helpers({
+          myMethod: function () {
+            callCount++;
+
+            return context.getReactively('prop'); // Shallow
+          }
+        });
+
+        $rootScope.$apply();
+        Tracker.flush();
+
+        context.prop.newProp = 20;
+
+        $rootScope.$apply();
+        Tracker.flush();
+
+        expect(callCount).toBe(1);
+      });
+
+      it('Should trigger Autorun dependencies when using object and adding a sub property and watching deep', function () {
+        $reactive(context);
+
+        var callCount = 0;
+
+        context.prop = {
+          mySubProp: 10
+        };
+
+        context.helpers({
+          myMethod: function () {
+            callCount++;
+
+            return context.getReactively('prop', true);
+          }
+        });
+
+        $rootScope.$apply();
+        Tracker.flush();
+
+        context.prop.newProp = 20;
+
+        $rootScope.$apply();
+        Tracker.flush();
+
+        expect(callCount).toBe(2);
+      });
+
+      it('Should remove and destroy custom scope if it was necessary to create it', function () {
+        var reactive = $reactive(context);
+
+        context.helpers({
+          prop: {
+            mySubProp: 10
+          }
+        });
+
+        var destroySpy = spyOn(reactive.scope, '$destroy').and.callThrough();
+
+        reactive.stop();
+
+        expect(destroySpy).toHaveBeenCalled();
+        expect(reactive.scope).toBeUndefined();
+      });
+
+
+      it('Should NOT remove and destroy scope if the scope was attached', function () {
+        var reactive = $reactive(context);
+        reactive.attach(testScope);
+
+        context.helpers({
+          prop: {
+            mySubProp: 10
+          }
+        });
+
+        var destroySpy = spyOn(reactive.scope, '$destroy').and.callThrough();
+
+        reactive.stop();
+
+        expect(destroySpy).not.toHaveBeenCalled();
+        expect(reactive.scope).toBeDefined();
+      });
+
+      it('Should get the value from the context when using getReactively - primitive', function () {
+        var reactive = $reactive(context);
+        reactive.attach(testScope);
+
+        context.myProp = 10;
+
+        var value = context.getReactively('myProp');
+
+        expect(value).toBe(10);
+      });
+
+      it('Should get the value from the context when using getReactively - object', function () {
+        var reactive = $reactive(context);
+        reactive.attach(testScope);
+
+        context.myProp = {
+          subProp: 10
+        };
+
+        var value = context.getReactively('myProp.subProp');
+
+        expect(value).toBe(10);
+      });
+
+      it('Should create a dependency when using subscription with getReactively', function () {
+        var reactive = $reactive(context);
+        reactive.attach(testScope);
+
+        context.myProp = {
+          subProp: 10
+        };
+
+        testScope.$apply();
+
+        var callCount = 0;
+
+        context.subscribe('t', function () {
+          callCount++;
+          return [context.getReactively('myProp.subProp')]
+        });
+
+        testScope.$apply();
+        context.myProp.subProp = 2;
+        testScope.$apply();
+
+        Tracker.flush();
+
+        expect(callCount).toBe(2);
+      });
+
+
+      it('Should create a subscription without callback - NO scope', function () {
+        $reactive(context);
+
+        var subscribeSpy = spyOn(Meteor, 'subscribe').and.returnValue({
+          ready: angular.noop,
+          subscriptionId: 0
+        });
+
+        context.subscribe('test');
+
+        expect(subscribeSpy).toHaveBeenCalledWith('test', angular.noop);
+      });
+
+      it('Should create a subscription with no callback and args- NO scope', function () {
+        $reactive(context);
+
+        var subscribeSpy = spyOn(Meteor, 'subscribe').and.returnValue({
+          ready: angular.noop,
+          subscriptionId: 0
+        });
+
+        context.subscribe('test', function() {
+          return [
+            10,
+            20
+          ];
+        });
+
+        expect(subscribeSpy).toHaveBeenCalledWith('test', 10, 20, angular.noop);
+      });
+
+      it('Should create a subscription with callback and args- NO scope', function () {
+        $reactive(context);
+
+        var subscribeSpy = spyOn(Meteor, 'subscribe').and.returnValue({
+          ready: angular.noop,
+          subscriptionId: 0
+        });
+        var cb = function () {
+        };
+
+        context.subscribe('test', function () {
+          return [
+            10,
+            20
+          ];
+        }, cb);
+
+        expect(subscribeSpy).toHaveBeenCalledWith('test', 10, 20, cb);
+      });
+
+      it('Should create a subscription with callback and args- NO scope', function () {
+        $reactive(context);
+
+        var subscribeSpy = spyOn(Meteor, 'subscribe').and.returnValue({
+          ready: angular.noop,
+          subscriptionId: 0
+        });
+
+        var cb = {
+          onReady: function() {
+
+          },
+          onStop: function() {
+
+          }
+        };
+
+        context.subscribe('test', function () {
+          return [
+            10,
+            20
+          ];
+        }, cb);
+
+        expect(subscribeSpy).toHaveBeenCalledWith('test', 10, 20, cb);
       });
     });
   });
