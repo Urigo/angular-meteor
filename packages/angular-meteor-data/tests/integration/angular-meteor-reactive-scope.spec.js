@@ -79,13 +79,13 @@ describe('angular-meteor', function () {
         subscriptionId : '123'
       };
       spyOn(Meteor, 'subscribe').and.returnValue(mockedResult);
-      var oldAutorun = Meteor.autorun;
-      Meteor.autorun = function(cb) {
+      spyOn(Meteor, 'autorun').and.callFake(function(cb) {
         cb();
-        return {stop: function() {mockedResult.stop()}};
-      };
-      var result = testScope.subscribe('', () => []);
-      Meteor.autorun = oldAutorun;
+        return {
+          stop : function() { mockedResult.stop()}
+        }
+      });
+      var result = testScope.subscribe('', function(){ return []});
 
       result.stop();
       result.ready();
