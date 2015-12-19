@@ -243,6 +243,22 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>http://angular-meteor.com/api/helpers</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>http://angular-meteor.com/api/autorun</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>http://angular-meteor.com/api/reactive-context</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>http://angular-meteor.com/api/reactive</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>http://angular-meteor.com/api/meteorCollection</loc>
     <priority>0.6</priority>
   </url>
@@ -271,7 +287,7 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>http://angular-meteor.com/api/getReactively</loc>
+    <loc>http://angular-meteor.com/api/get-reactively</loc>
     <priority>0.6</priority>
   </url>
   <url>
