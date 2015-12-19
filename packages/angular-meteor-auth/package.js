@@ -43,8 +43,10 @@ Package.onTest(function(api) {
   api.use('angular:angular-mocks@1.4.7');
   api.use('angular-meteor-data');
   api.use('angular-meteor-auth');
+  api.use('mizzao:accounts-testing');
 
   api.addFiles([
-    'tests/integration/auth.spec.js'
+    'tests/integration/auth.spec.js',
+    'tests/test_collections.js'
   ], 'client');
 });
