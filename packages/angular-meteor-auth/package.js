@@ -18,6 +18,8 @@ Package.onUse(function (api) {
   api.use('observe-sequence@1.0.7');
   api.use('ecmascript');
   api.use('reactive-var');
+  api.use('accounts-base');
+  api.use('angular-meteor-data');
 
   api.use('angular:angular@1.4.7', 'client');
 
@@ -39,8 +41,8 @@ Package.onTest(function(api) {
   api.use('insecure');
   api.use('sanjo:jasmine@0.19.0');
   api.use('angular:angular-mocks@1.4.7');
-  api.use('mdg:camera@1.1.5');
   api.use('angular-meteor-data');
+  api.use('angular-meteor-auth');
 
   api.addFiles([
     'tests/integration/auth.spec.js'

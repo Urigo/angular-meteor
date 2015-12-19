@@ -10,7 +10,7 @@ angular
         }
       }
 
-      _autorun() {
+      _autorun(fn) {
         let comp = Tracker.autorun((c) => {
           fn(c);
           if (!c.firstRun) $timeout(angular.noop, 0);
@@ -71,14 +71,18 @@ angular
       }
     }
 
-    angular.extend(this, new AngularMeteorAuthentication());
+    let instance = new AngularMeteorAuthentication();
+
+    angular.extend(this, Object.getPrototypeOf(instance));
   })
 .run(($auth, $rootScope) => {
   $auth._autorun(() => {
     if (!Meteor.user) return;
 
-    $rootScope.currentUser = Meteor.user();
-    $rootScope.currentUserId = Meteor.userId();
-    $rootScope.loggingIn = Meteor.loggingIn();
+    Object.getPrototypeOf($rootScope).$auth = {
+      currentUser: Meteor.user(),
+      currentUserId: Meteor.userId(),
+      loggingIn: Meteor.loggingIn()
+    };
   });
 });
