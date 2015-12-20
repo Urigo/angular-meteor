@@ -15,9 +15,9 @@ Package.onUse(function(api) {
     'barbatus:angular2@0.7.1_1'
   ]);
 
-  // api.addFiles([
-  //   'typings/meteor-accounts.d.ts'
-  // ], 'server');
+  api.addFiles([
+    'typings/ng2-pagination.d.ts'
+  ], 'server');
 
   api.addAssets([
     'src/pagination-controls-cmp.html',

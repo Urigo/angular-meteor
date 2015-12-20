@@ -17,32 +17,32 @@ export interface IPage {
     selector: 'pagination-controls',
     templateUrl: '/packages/barbatus_ng2-pagination/src/pagination-controls-cmp.html'
 })
-export class PaginationControlsCmp {
-  @Input() private id: string;
+export class PaginationControlsCpm {
+  @Input() private _id: string;
 
-  @Output() change: EventEmitter<number> = new EventEmitter();
+  @Output() public change: EventEmitter<number> = new EventEmitter();
 
-  private changeSub: Subscription<string>;
+  protected pages: IPage[] = [];
 
-  private pages: IPage[] = [];
+  private _page: number = 1;
 
-  private _page: number = 0;
+  private _changeSub: Subscription<string>;
 
-  constructor(private service: PaginationService) {
-    this.id = this.id || this.service.defaultId;
+  constructor(private _service: PaginationService) {
+    this._id = this._id || this._service.defaultId;
 
-    this.changeSub = this.service.change
-      .filter(id => this.id === id)
-      .subscribe(() => {
-        let instance = this.service.getInstance(this.id);
-        this.pages = this._createPageArray(
-          instance.currentPage, instance.itemsPerPage, instance.totalItems);
-        this._setPage(instance.currentPage);
-      });
+    this._changeSub = this._service.change
+    .filter(id => this._id === id)
+    .subscribe(() => {
+      let instance = this._service.getInstance(this._id);
+      this.pages = this._createPageArray(instance.currentPage,
+        instance.itemsPerPage, instance.totalItems);
+      this._setPage(instance.currentPage);
+    });
   }
 
   private ngOnDestroy() {
-    this.changeSub.unsubscribe();
+    this._changeSub.unsubscribe();
   }
 
   /**
@@ -51,21 +51,21 @@ export class PaginationControlsCmp {
   public setPage(event, page: number) {
     event.preventDefault();
 
-    this.service.setCurrentPage(this.id, page);
-  }
-
-  private _setPage(page: number) {
-    if (this._page != page) {
-      this._page = page;
-      this.change.emit(page);
-    }
+    this._service.setCurrentPage(this._id, page);
   }
 
   /**
    * Get the current page number.
    */
   public getPage(): number {
-    return this.service.getCurrentPage(this.id);
+    return this._service.getCurrentPage(this._id);
+  }
+
+  public _setPage(page) {
+    if (this._page !== page) {
+      this._page = page;
+      this.change.emit({ page });
+    }
   }
 
   /**
@@ -73,15 +73,15 @@ export class PaginationControlsCmp {
    */
   private _createPageArray(currentPage: number, itemsPerPage: number,
                            totalItems: number, paginationRange: number = 5): IPage[] {
-    let pages = [];
     const totalPages = Math.ceil(totalItems / itemsPerPage);
     const halfWay = Math.ceil(paginationRange / 2);
 
     const isStart = currentPage <= halfWay;
     const isEnd = totalPages - halfWay < currentPage;
     const isMiddle = !isStart && !isEnd;
+    const ellipsesNeeded = paginationRange < totalPages;
 
-    let ellipsesNeeded = paginationRange < totalPages;
+    let pages = [];
     let page = 1;
     while (page <= totalPages && page <= paginationRange) {
       let pageNumber = this.calculatePageNumber(page, currentPage, paginationRange, totalPages);

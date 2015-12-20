@@ -38,11 +38,13 @@ export class MeteorComponent implements OnDestroy {
     this._zone = ngZone || createNgZone();
   }
 
-  autorun(func: () => any, autoBind: boolean) {
+  autorun(func: () => any, autoBind: boolean): Tracker.Computation {
     check(func, Function);
 
     let hAutorun = Tracker.autorun(autoBind ? this._bindToNgZone(func) : func);
     this._hAutoruns.push(hAutorun);
+
+    return hAutorun;
   }
 
   /**
@@ -51,11 +53,13 @@ export class MeteorComponent implements OnDestroy {
    *  except one additional last parameter,
    *  which binds [callbacks] to the ng2 zone.
    */
-  subscribe(name: string, ...args) {
+  subscribe(name: string, ...args): Meteor.SubscriptionHandle {
     let subArgs = this._prepMeteorArgs(args.slice());
 
     let hSubscribe = Meteor.subscribe(name, ...subArgs);
     this._hSubscribes.push(hSubscribe);
+
+    return hSubscribe;
   }
 
   call(name: string, ...args) {

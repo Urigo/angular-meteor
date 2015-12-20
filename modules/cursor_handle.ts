@@ -9,11 +9,11 @@ export class CursorHandle {
 
   constructor(
       cursor: Mongo.Cursor<any>,
-      hAutoNotify: Tracker.Computation,
-      hCurObserver: Meteor.LiveQueryHandle) {
+      hCurObserver: Meteor.LiveQueryHandle,
+      hAutoNotify?: Tracker.Computation) {
 
     check(cursor, Mongo.Cursor);
-    check(hAutoNotify, Tracker.Computation);
+    check(hAutoNotify, Match.Optional(Tracker.Computation));
     check(hCurObserver, Match.Where(function(observer) {
       return !!observer.stop;
     }));
@@ -24,7 +24,9 @@ export class CursorHandle {
   }
 
   stop() {
-    this._hAutoNotify.stop();
+    if (this._hAutoNotify) {
+      this._hAutoNotify.stop()
+    };
     this._hCurObserver.stop();
   }
 }

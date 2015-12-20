@@ -27,23 +27,23 @@ export interface IPaginationInstance {
    * to a single page returned by the server API.
    *
    * For in-memory paging, this property should not be set, as it
-   * will be automatically set to the value of  collection.length.
+   * will be automatically set to the value of collection.length.
    */
   totalItems?: number;
 }
+
+const DEFAULT_ID = 'ng2_pages';
 
 export class PaginationService {
   public change: EventEmitter<string> = new EventEmitter();
 
   private instances: { [id: string]: IPaginationInstance } = {};
 
-  private DEFAULT_ID = 'DEFAULT_PAGINATION_ID';
-
-  get defaultId() { return this.DEFAULT_ID }
+  get defaultId() { return DEFAULT_ID }
 
   public register(instance: IPaginationInstance) {
     if (!instance.id) {
-      instance.id = this.DEFAULT_ID;
+      instance.id = DEFAULT_ID;
     }
 
     this._checkNumberArg(instance.itemsPerPage,
@@ -57,7 +57,8 @@ export class PaginationService {
     this.change.emit(instance.id);
   }
 
-  public update(id: string, { itemsPerPage, totalItems }) {
+  public update(id: string, { itemsPerPage, totalItems }:
+                            { itemsPerPage: number, totalItems: number }) {
     this._checkPagination(id, 'update');
     this._checkNumberArg(itemsPerPage, 'itemsPerPage', 'update', true);
     this._checkNumberArg(totalItems, 'totalItems', 'update', true);
@@ -132,7 +133,7 @@ export class PaginationService {
   private _setTotalItems(id: string, totalItems: number) {
     const instance = this.instances[id];
     let maxPage = Math.ceil(totalItems / instance.itemsPerPage);
-    let realCurPage = Math.min(instance.currentPage, maxPage);
+    let realCurPage = Math.min(instance.currentPage, maxPage) || 1;
     instance.currentPage = realCurPage;
     instance.totalItems = totalItems;
   }
@@ -156,23 +157,10 @@ export class PaginationService {
    * Returns a clone of the pagination instance object matching the id. If no
    * id specified, returns the instance corresponding to the default id.
    */
-  public getInstance(id: string = this.DEFAULT_ID): IPaginationInstance {
+  public getInstance(id: string = DEFAULT_ID): IPaginationInstance {
     if (this.instances[id]) {
-      return this.clone(this.instances[id]);
+      return _.clone(this.instances[id]);
     }
-  }
-
-  /**
-   * Perform a shallow clone of an object.
-   */
-  private clone(obj: any): any {
-    let target = {};
-    for (let i in obj) {
-      if (obj.hasOwnProperty(i)) {
-        target[i] = obj[i];
-      }
-    }
-    return target;
   }
 
   _checkPagination(id: string, method: string) {
