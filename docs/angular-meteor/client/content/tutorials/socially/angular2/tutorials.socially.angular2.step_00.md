@@ -152,13 +152,13 @@ So lets learn how we are going use modules in our app.
 ES6 has a new module notation (`import` and `export` are part of it), which is a set of rules and syntax used to load separate modules.
 Since modern browsers don't support ES6 yet, the JS community has come up with different implementations of this convention in ES5.
 
-We are going to use System.js, which is supported out of box in the `urigo:angular2-meteor` package.
+We are going to use System.js, which is supported out of the box in the `urigo:angular2-meteor` package.
 
-Most of time you won't need to worry much about ES6 modules — TypeScript and System.js will do everything for you behind the scenes.
+Most of the time you won't need to worry much about ES6 modules — TypeScript and System.js will do everything for you behind the scenes.
 TypeScript will compile a `ts`-file into a separate System.js module by default in this package
 and System.js will load its dependencies and the module itself on demand.
 
-There is only one small thing that you'll need to potentially do to bootstrap your app. You'll also know what is it a bit later.
+There is only one small thing you'll need to potentially do to bootstrap your app. That will be explained a bit later.
 
 # Root Component
 
