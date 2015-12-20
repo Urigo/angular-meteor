@@ -87,10 +87,10 @@ That's it! Now we can use Angular 2's power in our Meteor app.
 
 ## HTML
 
-As you already know, Meteor processes all HTML files for you out of box.
+As you already know, Meteor processes all HTML files for you out of the box.
 Files will be concatenated into one page.
 
-From other side, regular Angular (Angular 1 or Angular2) apps have a modular structure, i.e.,
+From the other side, regular Angular (Angular 1 or Angular2) apps have a modular structure, i.e.,
 consist of a set of template HTML files and JavaScript component files.
 Each template file might belong to some component, for example, to a custom directive.
 
@@ -98,15 +98,15 @@ It means we would rather avoid concatenation all of them to let
 Angular2 components to load template files at the moment they need to.
 
 That's why `urigo:angular2-meteor` overrides standard Meteor HTML processor.
-Lets remove standard HTML processor by:
+Lets remove the standard HTML processor by:
 
     $ meteor remove blaze-html-templates
 
-This package has own HTML processor that recognizes two types of HTML files: one type — files that contain
+This package has its own HTML processor that recognizes two types of HTML files: one type — files that contain
 `<HEAD>` and `<BODY>` tags, everything else — considered as template files.
 
 If you have multiple HTML files with, say, `<BODY>` tags, they will be concatenated 
-all together into one file the same way as in case of the standard HTML processor.
+ together into one file in the same way as the standard HTML processor.
 
 At the same time, template files are not touched by the processor at all
 and won't appear on the page initially.
@@ -125,24 +125,24 @@ Why TypeScript?
 
 If you've chosen ES6 or TypeScript, it will need eventually to compile code into ES5 — the only language currently fully supported in modern browsers. ES6 can be compiled to ES5 using Babel or Traceur, while Typescript has it's own compiler.
 
-TypeScript is the recommended choice by the Angular team. This is due to some reasons, one of them is most advanced support of decorators in TypeScript among other compilers.
-Decorators are still considered as an experimental feature that will likely appear only in ES7, so most compiler
-don't have full support of them. What's decorators and how they are used in Angular2? You'll learn a bit more later.
+TypeScript is the recommended choice by the Angular team. This is due to several reasons, one of them being that TypeScript provides the most advanced support of decorators compared with other compilers.
+Decorators are still considered an experimental feature that will likely appear only in ES7, so most compilers
+don't fully support them. What are decorators and how they are used in Angular2? You'll learn a bit more later.
 
-Besides decorators reason, TypeScript has convenient built-in type-checking support via declaration files and richer toolkit in general
+Besides decorator support, TypeScript has convenient built-in type-checking support via declaration files, and a richer toolkit in general
 in comparison to other mentioned compilers.
 
-Angular2-Meteor packages come with a built-in TypeScript compiler plugin, which means
+The Angular2-Meteor packages comes with a built-in TypeScript compiler plugin, which means
 you don't need to worry about installing any other compiler packages.
 
-As of Meteor 1.2, Meteor supports ES6 by default, in order to avoid conflicts between
+As of Meteor 1.2, Meteor supports ES6 by default. In order to avoid conflicts between
 TypeScript and Meteor ECMAScript package, you'll need to remove it:
 
     $ meteor remove ecmascript
 
 As you already might know, there are new `import` and `export` statements that have arrived in ES6.
-They are part of a notation that is supposed to separate an app into isolated modules, thus, helping
-us to structure our app as we want.
+They are part of a notation that is supposed to separate an app into isolated modules, thus helping
+us structure our app as we want.
 
 TypeScript can compile each file into a separate module.
 So lets learn how we are going use modules in our app.
@@ -152,13 +152,13 @@ So lets learn how we are going use modules in our app.
 ES6 has a new module notation (`import` and `export` are part of it), which is a set of rules and syntax used to load separate modules.
 Since modern browsers don't support ES6 yet, the JS community has come up with different implementations of this convention in ES5.
 
-We are going to use System.js, which is supported out of box in the `urigo:angular2-meteor` package.
+We are going to use System.js, which is supported out of the box in the `urigo:angular2-meteor` package.
 
-Most of time you won't need to worry much about ES6 modules — TypeScript and System.js will do everything for you behind the scenes.
+Most of the time you won't need to worry much about ES6 modules — TypeScript and System.js will do everything for you behind the scenes.
 TypeScript will compile a `ts`-file into a separate System.js module by default in this package
 and System.js will load its dependencies and the module itself on demand.
 
-There is only one small thing that you'll need to potentially do to bootstrap your app. You'll also know what is it a bit later.
+There is only one small thing you'll need to potentially do to bootstrap your app. That will be explained a bit later.
 
 # Root Component
 
