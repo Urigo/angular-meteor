@@ -125,24 +125,24 @@ Why TypeScript?
 
 If you've chosen ES6 or TypeScript, it will need eventually to compile code into ES5 — the only language currently fully supported in modern browsers. ES6 can be compiled to ES5 using Babel or Traceur, while Typescript has it's own compiler.
 
-TypeScript is the recommended choice by the Angular team. This is due to some reasons, one of them is most advanced support of decorators in TypeScript among other compilers.
-Decorators are still considered as an experimental feature that will likely appear only in ES7, so most compiler
-don't have full support of them. What's decorators and how they are used in Angular2? You'll learn a bit more later.
+TypeScript is the recommended choice by the Angular team. This is due to several reasons, one of them being that TypeScript provides the most advanced support of decorators compared with other compilers.
+Decorators are still considered an experimental feature that will likely appear only in ES7, so most compilers
+don't fully support them. What are decorators and how they are used in Angular2? You'll learn a bit more later.
 
-Besides decorators reason, TypeScript has convenient built-in type-checking support via declaration files and richer toolkit in general
+Besides decorator support, TypeScript has convenient built-in type-checking support via declaration files, and a richer toolkit in general
 in comparison to other mentioned compilers.
 
-Angular2-Meteor packages come with a built-in TypeScript compiler plugin, which means
+The Angular2-Meteor packages comes with a built-in TypeScript compiler plugin, which means
 you don't need to worry about installing any other compiler packages.
 
-As of Meteor 1.2, Meteor supports ES6 by default, in order to avoid conflicts between
+As of Meteor 1.2, Meteor supports ES6 by default. In order to avoid conflicts between
 TypeScript and Meteor ECMAScript package, you'll need to remove it:
 
     $ meteor remove ecmascript
 
 As you already might know, there are new `import` and `export` statements that have arrived in ES6.
-They are part of a notation that is supposed to separate an app into isolated modules, thus, helping
-us to structure our app as we want.
+They are part of a notation that is supposed to separate an app into isolated modules, thus helping
+us structure our app as we want.
 
 TypeScript can compile each file into a separate module.
 So lets learn how we are going use modules in our app.
