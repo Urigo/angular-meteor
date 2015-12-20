@@ -87,10 +87,10 @@ That's it! Now we can use Angular 2's power in our Meteor app.
 
 ## HTML
 
-As you already know, Meteor processes all HTML files for you out of box.
+As you already know, Meteor processes all HTML files for you out of the box.
 Files will be concatenated into one page.
 
-From other side, regular Angular (Angular 1 or Angular2) apps have a modular structure, i.e.,
+From the other side, regular Angular (Angular 1 or Angular2) apps have a modular structure, i.e.,
 consist of a set of template HTML files and JavaScript component files.
 Each template file might belong to some component, for example, to a custom directive.
 
@@ -98,15 +98,15 @@ It means we would rather avoid concatenation all of them to let
 Angular2 components to load template files at the moment they need to.
 
 That's why `urigo:angular2-meteor` overrides standard Meteor HTML processor.
-Lets remove standard HTML processor by:
+Lets remove the standard HTML processor by:
 
     $ meteor remove blaze-html-templates
 
-This package has own HTML processor that recognizes two types of HTML files: one type — files that contain
+This package has its own HTML processor that recognizes two types of HTML files: one type — files that contain
 `<HEAD>` and `<BODY>` tags, everything else — considered as template files.
 
 If you have multiple HTML files with, say, `<BODY>` tags, they will be concatenated 
-all together into one file the same way as in case of the standard HTML processor.
+ together into one file in the same way as the standard HTML processor.
 
 At the same time, template files are not touched by the processor at all
 and won't appear on the page initially.
