@@ -18,17 +18,6 @@ We replaced the hard-coded party list with the [NgFor](https://angular.io/docs/j
 * The `*ngFor="#party of parties"` attribute in the `li` tag is an Angular repeater directive. The repeater tells Angular to create a `li` element for each party in the list using the `li` tag as the template.
 * The expressions wrapped in the double curly braces ( `{{dstache}}party.name}}` and `{{dstache}}party.description}}` ) will be replaced by the value of the expressions.
 
-To get this to work, we'll have to import NgFor and tell Angular 2 we are using it in the template.
-
-{{> DiffBox tutorialName="meteor-angular2-socially" step="2.2"}}
-
-Just to be clear, make sure you:
-
-- added `NgFor` to the `import` statement.
-- added `NgFor` as a directive in the view
-
-Why so much work setting up a new dependency? Angular 2 is trying to avoid namespace collisions, so dependencies are always imported and specified.
-
 # Component as a Controller
 
 One convenient way to think of a component's role in Angular2 is as the role played by `ngController` in Angular 1.x.
