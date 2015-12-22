@@ -7,7 +7,9 @@ import {TypeDecorator} from 'angular2/core';
 
 import {makeDecorator} from 'angular2/decorators';
 
-import {CanActivate, ComponentInstruction} from 'angular2/router';
+import {ComponentInstruction} from 'angular2/router';
+
+import {CanActivate} from 'angular2/router_dev';
 
 class InjectUserAnnotation {
   constructor(public propName: string = 'user') {}
@@ -42,9 +44,18 @@ export function InjectUser(propName: string): (cls: any) => any {
   return TypeDecorator;
 };
 
-class RequireUserAnnotation {
+/**
+ * Here CanActivate is an internal class (not present in the typings)
+ * defined at angular/modules/angular2/src/router/lifecycle_annotations_impl.ts.
+ * Each annotation designed to implement activation logic should extend it.
+ */
+class RequireUserAnnotation extends CanActivate {
+  constructor() {
+    super(this.canProceed.bind(this));
+  }
+
   canProceed(prev: ComponentInstruction,
-             next: ComponentInstruction) {
+    next: ComponentInstruction) {
     return !!Meteor.user();
   }
 }

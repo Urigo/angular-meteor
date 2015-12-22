@@ -1,8 +1,8 @@
 Package.describe({
   name: 'barbatus:ng2-meteor-accounts',
-  version: '0.1.3_2',
+  version: '0.1.4',
   summary: 'Meteor Accounts for Angular2',
-  git: 'https://github.com/barbatus/ng2-meteor-accounts',
+  git: 'https://github.com/Urigo/angular2-meteor/tree/master/packages/ng2-accounts',
   documentation: 'README.md'
 });
 
@@ -12,7 +12,7 @@ Package.onUse(function(api) {
   api.use([
     'accounts-base@1.2.1',
     'promise@0.4.8',
-    'barbatus:angular2@0.7.0'
+    'barbatus:angular2@0.7.3'
   ]);
 
   api.addFiles([
@@ -33,4 +33,9 @@ Package.onTest(function(api) {
     'sanjo:jasmine@0.18.0',
     'barbatus:ng2-meteor-accounts'
   ]);
+
+  api.addFiles([
+    'tests/client/unit/annotations_spec.js'
+  ], 'client');
 });
+

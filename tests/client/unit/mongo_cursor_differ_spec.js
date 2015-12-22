@@ -80,6 +80,4 @@ describe('MongoCursorDiffer', function() {
     differ.forEachAddedItem(forEachAddedItem);
     expect(forEachAddedItem).toHaveBeenCalled();
   });
-
-
 });

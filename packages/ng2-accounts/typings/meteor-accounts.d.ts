@@ -1,6 +1,6 @@
-/// <reference path="angular2.d.ts" />
-/// <reference path="meteor/meteor.d.ts" />
-/// <reference path="es6-promise/es6-promise.d.ts" />
+/// <reference path="../../../typings/angular2.d.ts" />
+/// <reference path="../../../typings/meteor/meteor.d.ts" />
+/// <reference path="../../../typings/es6-promise/es6-promise.d.ts" />
 
 declare module ngMeteorAccounts {
   class MeteorComponent {
