@@ -61,7 +61,7 @@ Now let’s fiddle with it. Go to the `client/parties-form/parties-form.ts` file
 “newLocation”. Run the app. You should see in the console a warning saying in a nutshell: there is no “newLocation” property defined on the `Party` type.
 
 If you program in, say, Visual Studio or in Sublime with the official TypeScript plugin,
-you will see all that errors highlighted red instantaneously, which makes this TypeScript's type-cheking feature invaluable.
+you will see all that errors highlighted red instantaneously, which makes this TypeScript's type-checking feature invaluable.
 
 Let’s torture it more. Please, go to the `client/parties-list/parties-list.ts`.
 There you’ll see the `parties` property assigned to the `Mongo.Cursor<Object>` type. As you can see, TypeScript considers this construct acceptable even there is no `Party` type mentioned. That’s because Object type is the base class to all types available in JavaScript, so TypeScript doesn’t swear confronting to the OOP principles.
@@ -101,7 +101,7 @@ All necessary files will be added into the "typings" directory.
 Angular 2's declaration files are delivered via the offial NPM, so 
 you won't be able to find it in the Definitely Typed repo.
 
-Don't worry though, Angular2-Meteor will update all necessary typings, you only need periocally
+Don't worry though, Angular2-Meteor will update all necessary typings, you only need periodically
 to remove .d.ts-files in the "typings" folder, thus, letting the package know that
 the files need to be updated.
 
@@ -109,7 +109,7 @@ the files need to be updated.
 
 TypeScript is generally configured by the special JSON file called ["tsconfig.json"](https://github.com/Microsoft/typescript/wiki/tsconfig.json).
 
-Angular2-Meteor packages uses a ts-compiler [package](https://github.com/barbatus/ts-compilers) that supports "tsconfig.json" file as well.
+Angular2-Meteor packages use a ts-compiler [package](https://github.com/barbatus/ts-compilers) that supports "tsconfig.json" file as well.
 Just create a file with this name in the root folder of your app, and start adding options you'd like.
 You can read about all possible options [here](https://github.com/Microsoft/TypeScript/wiki/Compiler-Options).
 
