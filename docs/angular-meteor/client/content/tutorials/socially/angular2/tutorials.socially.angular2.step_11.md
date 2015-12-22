@@ -1,5 +1,5 @@
 {{#template name="tutorials.socially.angular2.step_11.md"}}
-{{> downloadPreviousStep stepName="step_11"}}
+{{> downloadPreviousStep stepName="step_10"}}
 
 So far, we've been building our app and testing only in a web browser,
 but Meteor has been designed to work across different platforms — your socially website can become an iOS or Android app in just a few commands.
