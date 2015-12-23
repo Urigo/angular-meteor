@@ -471,7 +471,7 @@ describe('angular-meteor', function () {
         $rootScope.$apply();
         Tracker.flush();
 
-        expect(callCount).toBe(2);
+        expect(callCount).toBe(1);
       });
 
       it('Should trigger Autorun dependencies when using object and adding a sub property and watching deep', function () {
@@ -499,7 +499,7 @@ describe('angular-meteor', function () {
         $rootScope.$apply();
         Tracker.flush();
 
-        expect(callCount).toBe(3);
+        expect(callCount).toBe(2);
       });
 
       it('Should remove and destroy custom scope if it was necessary to create it', function () {
