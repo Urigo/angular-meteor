@@ -1,5 +1,5 @@
 {{#template name="tutorials.socially.angular2.step_11.md"}}
-{{> downloadPreviousStep stepName="step_10"}}
+{{> downloadPreviousStep stepName="step_09"}}
 
 So far, we've been building our app and testing only in a web browser,
 but Meteor has been designed to work across different platforms — your socially website can become an iOS or Android app in just a few commands.
@@ -16,7 +16,7 @@ After you deploy your app to the stores, once you update your code, all your app
 
 You can find more information about integration [here](https://github.com/meteor/meteor/wiki/Meteor-Cordova-Phonegap-integration).
 
-### Running on an Android emulator
+### Running on Android Emulator
 
 In the terminal, go to your app folder and type:
 
@@ -34,7 +34,7 @@ After you agree to the license terms, type:
 After some initialization, you will see an Android emulator pop up, running your app inside a native Android wrapper.
 The emulator can be somewhat slow, so if you want to see what it's really like using your app, you should run it on an actual device.
 
-### Running on an Android device
+### Running on Android Device
 
 First, complete all of the steps above to set up the Android tools on your system.
 Then, make sure you have USB Debugging enabled on your phone and the phone is plugged into your computer with a USB cable.

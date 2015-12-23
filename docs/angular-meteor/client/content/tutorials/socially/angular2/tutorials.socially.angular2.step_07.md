@@ -117,7 +117,6 @@ Please note, since Meteor environment is quite specific, some of the options don
 You can read about exceptions [here](https://github.com/barbatus/typescript#compiler-options).
 Additonal options available in the package are described [here](https://github.com/barbatus/ts-compilers#typescript-config).
 
-
 # Summary
 
 In this step we discovered a new way to make TypeScript code less buggy by using TypeScript's type-checking.
