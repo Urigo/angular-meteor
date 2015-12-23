@@ -47,7 +47,7 @@ exports Blaze-based LoginButtons view as a Angular 2 component and, besides, doe
 
     meteor add barbatus:ng2-meteor-accounts-ui
 
-Let's add the `<accounts-ui>` tag to the right of the party from in the PartiesList's template:
+Let's add the `<accounts-ui>` tag to the right of the party form in the PartiesList's template:
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="8.1"}}
 
@@ -86,7 +86,7 @@ use, `Meteor.user()` and `Meteor.userId()`.
 
 For now, we are going to keep it simple in this app and allow every logged-in users to change a party.
 Change the click handler of the "Add" button in the `parties-form.ts`, `addParty`, to save user ID as well. Also,
-it'd be useful to add an alert promting user to log in if she wants to add or update a party:
+it'd be useful to add an alert prompting user to log in if she wants to add or update a party:
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="8.4"}}
 
@@ -102,7 +102,7 @@ Not to say that there is no way to use these functions in the component template
 How can you simply life here? You can try out "barbatus:ng2-meteor-accounts" package, which
 wraps around all Meteor Accounts API (login with password and social logins features)
 and exports two services for the usage in Angular 2. Besides that, it has two convenient annotations: `InjectUser` and `RequireUser`.
-The second one we'll touch a bit a later, but the first one is exactly what we need.
+The second one we'll touch a bit later, but the first one is exactly what we need.
 
 If you place `InjectUser` above the PartiesForm it will inject a new user property:
 
