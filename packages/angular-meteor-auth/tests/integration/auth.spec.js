@@ -17,9 +17,11 @@ describe('angular-meteor', function () {
     }));
 
     afterEach(function(done) {
+      $rootScope.$destroy();
+
       Meteor.logout(function() {
         done();
-      })
+      });
     });
 
     it('Should put $auth on the rootScope for easy use', function() {
@@ -78,6 +80,18 @@ describe('angular-meteor', function () {
 
       Meteor.insecureUserLogin('tempUser', function() {
         expect($rootScope.loggingIn).toBe(true);
+        $rootScope.$apply();
+      });
+    });
+
+    it('Should requireUser return a promise and resolve it when user logs in', function(done) {
+      var promise = $auth.requireUser();
+
+      promise.then(function() {
+        done();
+      });
+
+      Meteor.insecureUserLogin('tempUser', function() {
         $rootScope.$apply();
       });
     });
