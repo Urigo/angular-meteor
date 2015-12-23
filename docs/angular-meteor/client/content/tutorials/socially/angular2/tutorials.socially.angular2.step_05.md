@@ -82,6 +82,7 @@ And add a template prepared for the party details:
 Let's configure our routes. This is how we map url paths to components.
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="5.7"}}
+ ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ Wrong line!
 
 We've added multiple things here. Firstly, we've imported 
 our two main views `PartiesList` and `PartyDetails`,
