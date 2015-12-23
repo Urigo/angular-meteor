@@ -145,7 +145,7 @@ As you can see, we've added a label "Please, login to change party" that is
 conditioned to be shown if `user` is not defined with help of `ng-if` attribute, and
 will disappear otherwise. Don't forget to import `NgIf` dependency in the component.
 
-# Social login
+# Social Login
 
 We also want to let users login with their Facebook and Twitter accounts.
 

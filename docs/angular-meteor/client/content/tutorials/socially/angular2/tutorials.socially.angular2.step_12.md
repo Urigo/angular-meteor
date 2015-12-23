@@ -1,5 +1,5 @@
 {{#template name="tutorials.socially.angular2.step_12.md"}}
-{{> downloadPreviousStep stepName="step_10"}}
+{{> downloadPreviousStep stepName="step_09"}}
 
 In this step we are going to add parties list pagination and sorting by party name, then
 move parties search by party location to the server side.
@@ -140,7 +140,7 @@ Now run the app. You should see a list of 10 parties shown initially and 3 pages
 Play around with the pagination: click on page links to go back and forth,
 then try to delete parties to check if the current page updates properly.
 
-# Getting total number of parties
+# Getting Total Number of Parties
 
 As was menionted previously, we need to know total number of parties in the storage
 in order to make pagination components work properly; at the same time, our parties
@@ -177,7 +177,7 @@ Run the app. There should be same three pages of parties. That's a must check.
 What's more interesting is to add a couple of new parties, thus, adding
 a new 4th page. By this way, we can prove that our new "total number" publication and pagination controls work properly in one rig.
 
-# Changing the sort order
+# Changing Sort Order
 
 It's time for a new cool feature Socially users will certainly like - sorting parties list by party name.
 At this moment, we know everything we need to implement it.

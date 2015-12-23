@@ -1003,7 +1003,7 @@ index 0000000..f9e7663
 +    selector: 'parties-form'
 +})
 +@View({
-+    templateUrl: 'client/parties-form/parties-form.html'
++    templateUrl: '/client/parties-form/parties-form.html'
 +})
 +export class PartiesForm { }
 -- 
@@ -1120,8 +1120,8 @@ index f9e7663..2f8e761 100644
      selector: 'parties-form'
  })
  @View({
--    templateUrl: 'client/parties-form/parties-form.html'
-+    templateUrl: 'client/parties-form/parties-form.html',
+-    templateUrl: '/client/parties-form/parties-form.html'
++    templateUrl: '/client/parties-form/parties-form.html',
 +    directives: [FORM_DIRECTIVES]
  })
  export class PartiesForm { }
@@ -1143,7 +1143,7 @@ index 2f8e761..b23c9c7 100644
 --- a/client/parties-form/parties-form.ts
 +++ b/client/parties-form/parties-form.ts
 @@ -11,4 +11,15 @@ import {FORM_DIRECTIVES, FormBuilder, ControlGroup, Validators} from 'angular2/c
-     templateUrl: 'client/parties-form/parties-form.html',
+     templateUrl: '/client/parties-form/parties-form.html',
      directives: [FORM_DIRECTIVES]
  })
 -export class PartiesForm { }
@@ -1414,10 +1414,10 @@ index 0000000..b8d3afb
 +import {PartiesForm} from 'client/parties-form/parties-form';
 +
 +@Component({
-+    selector: 'app'
++    selector: 'parties-list'
 +})
 +@View({
-+    templateUrl: 'client/parties-list/parties-list.html',
++    templateUrl: '/client/parties-list/parties-list.html',
 +    directives: [NgFor, PartiesForm]
 +})
 +export class PartiesList {
@@ -1638,7 +1638,7 @@ index b41be03..f359c4f 100644
      selector: 'app'
  })
  @View({
-+    template: '&lt;router-outlet>lt;/router-outlet>',
++    template: '&lt;router-outlet>&lt;/router-outlet>',
      directives: [ROUTER_DIRECTIVES]
  })
 +@RouteConfig([
@@ -1673,10 +1673,10 @@ index b8d3afb..2675530 100644
 +import {RouterLink} from 'angular2/router';
 +
  @Component({
-     selector: 'app'
+     selector: 'parties-list'
  })
  @View({
-     templateUrl: 'client/parties-list/parties-list.html',
+     templateUrl: '/client/parties-list/parties-list.html',
 -    directives: [NgFor, PartiesForm]
 +    directives: [NgFor, PartiesForm, RouterLink]
  })
@@ -1732,12 +1732,10 @@ index 0bac8f2..2ee5fe0 100644
 +import {RouteParams} from 'angular2/router';
 +
  @Component({
--  selector: 'party-details'
-+    selector: 'party-details'
+    selector: 'party-details'
  })
  @View({
--  templateUrl: '/client/party-details/party-details.html'
-+    templateUrl: '/client/party-details/party-details.html'
+    templateUrl: '/client/party-details/party-details.html'
  })
 -export class PartyDetails {}
 +export class PartyDetails {
@@ -2161,10 +2159,10 @@ index 5019fce..9c96e0f 100644
 +import {AccountsUI} from 'meteor-accounts-ui';
 +
  @Component({
-     selector: 'app'
+     selector: 'parties-list'
  })
  @View({
-     templateUrl: 'client/parties-list/parties-list.html',
+     templateUrl: '/client/parties-list/parties-list.html',
 -    directives: [NgFor, PartiesForm, RouterLink]
 +    directives: [NgFor, PartiesForm, RouterLink, AccountsUI]
  })
@@ -2455,10 +2453,10 @@ index 9c96e0f..845e462 100644
 +import {MeteorComponent} from 'angular2-meteor';
 +
  @Component({
-     selector: 'app'
+     selector: 'parties-list'
  })
 @@ -20,11 +22,14 @@ import {AccountsUI} from 'meteor-accounts-ui';
-     templateUrl: 'client/parties-list/parties-list.html',
+     templateUrl: '/client/parties-list/parties-list.html',
      directives: [NgFor, PartiesForm, RouterLink, AccountsUI]
  })
 -export class PartiesList {
@@ -2718,7 +2716,7 @@ index cbb7b21..5fe60cd 100644
 +        super();
          var partyId = params.get('partyId');
 -        this.party = Parties.findOne(partyId);
-+        this.subscribe('party', () => {
++        this.subscribe('party', partyId, () => {
 +            this.party = Parties.findOne(partyId);
 +        }, true);
      }
@@ -2915,10 +2913,10 @@ index 3115758..23eb959 100644
 +++ b/client/parties-list/parties-list.ts
 @@ -25,19 +25,21 @@ import {MeteorComponent} from 'angular2-meteor';
  export class PartiesList extends MeteorComponent {
-     parties: Mongo.Cursor<Party>;
+     parties: Mongo.Cursor&lt;Party>;
      pageSize: number = 10;
 -    curPage: number = 1;
-+    curPage: ReactiveVar<number> = new ReactiveVar<number>(1);
++    curPage: ReactiveVar&lt;number> = new ReactiveVar&lt;number>(1);
      nameOrder: number = -1;
  
      constructor() {
@@ -3019,12 +3017,12 @@ index 23eb959..ec8efe5 100644
 +import {PaginationService, PaginatePipe, PaginationControlsCpm} from 'ng2-pagination';
 +
  @Component({
--    selector: 'app'
-+    selector: 'app',
+-    selector: 'parties-list'
++    selector: 'parties-list',
 +    viewProviders: [PaginationService]
  })
  @View({
-     templateUrl: 'client/parties-list/parties-list.html',
+     templateUrl: '/client/parties-list/parties-list.html',
 -    directives: [NgFor, PartiesForm, RouterLink, AccountsUI]
 +    directives: [NgFor, PartiesForm, RouterLink, AccountsUI, PaginationControlsCpm],
 +    pipes: [PaginatePipe]
@@ -3211,7 +3209,7 @@ index 2a765b3..2124b82 100644
 @@ -24,10 +24,18 @@ import {MeteorComponent} from 'angular2-meteor';
  })
  export class PartiesList extends MeteorComponent {
-     parties: Mongo.Cursor<Party>;
+     parties: Mongo.Cursor&lt;Party>;
 +    pageSize: number = 10;
 +    curPage: number = 1;
 +    nameOrder: number = 1;
@@ -3274,10 +3272,10 @@ index 6b7b41e..ea8db0e 100644
 +++ b/client/parties-list/parties-list.ts
 @@ -25,19 +25,21 @@ import {MeteorComponent} from 'angular2-meteor';
  export class PartiesList extends MeteorComponent {
-     parties: Mongo.Cursor<Party>;
+     parties: Mongo.Cursor&lt;Party>;
      pageSize: number = 10;
 -    curPage: number = 1;
-+    curPage: ReactiveVar<number> = new ReactiveVar<number>(1);
++    curPage: ReactiveVar&lt;number> = new ReactiveVar&lt;number>(1);
      nameOrder: number = 1;
  
      constructor() {
@@ -3378,12 +3376,12 @@ index ea8db0e..0860077 100644
 +import {PaginationService, PaginatePipe, PaginationControlsCpm} from 'ng2-pagination';
 +
  @Component({
--    selector: 'app'
-+    selector: 'app',
+-    selector: 'parties-list'
++    selector: 'parties-list',
 +    viewProviders: [PaginationService]
  })
  @View({
-     templateUrl: 'client/parties-list/parties-list.html',
+     templateUrl: '/client/parties-list/parties-list.html',
 -    directives: [NgFor, PartiesForm, RouterLink, AccountsUI]
 +    directives: [NgFor, PartiesForm, RouterLink, AccountsUI, PaginationControlsCpm],
 +    pipes: [PaginatePipe]
@@ -3759,6 +3757,290 @@ index 3ad6509..711b980 100644
      }
  
      onPageChanged(page: number) {
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 49f9dcedab63bd87532f9f3e5bc9ce5ba839c2f3 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Wed, 23 Dec 2015 14:37:37 +0700
+Subject: [PATCH 103/107] Step 13.1: add uninvited users publication
+
+---
+ server/users.ts | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+ create mode 100644 server/users.ts
+
+diff --git a/server/users.ts b/server/users.ts
+new file mode 100644
+index 0000000..5063d26
+--- /dev/null
++++ b/server/users.ts
+@@ -0,0 +1,22 @@
++/// &lt;reference path="../typings/angular2-meteor.d.ts" />
++
++import {Parties} from 'collections/parties';
++
++Meteor.publish('uninvited', function(partyId) {
++    let party = Parties.findOne(partyId);
++
++    return Meteor.users.find({
++        $and: [
++            {
++                _id: {
++                    $nin: party.invited || []
++                }
++            },
++            {
++                owner: {
++                    $ne: this.userId
++                }
++            }
++        ]
++    });
++});
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 1b2fc1f8d229f52d25eaf2c499e2bc4381cdabf0 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Wed, 23 Dec 2015 14:45:37 +0700
+Subject: [PATCH 104/107] Step 13.2: import users publications on the server
+ start
+
+---
+ server/main.ts | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/server/main.ts b/server/main.ts
+index 534fa3b..ae87a88 100644
+--- a/server/main.ts
++++ b/server/main.ts
+@@ -1,4 +1,5 @@
+ import {loadParties} from './load_parties';
+ import './parties';
++import './users';
+ 
+ Meteor.startup(loadParties);
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 77273848536b33d1af1f25b86aace826f90caa44 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Wed, 23 Dec 2015 14:49:16 +0700
+Subject: [PATCH 105/107] Step 13.3: load uninvited users
+
+---
+ client/party-details/party-details.ts | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/client/party-details/party-details.ts b/client/party-details/party-details.ts
+index 5fe60cd..dc830d2 100644
+--- a/client/party-details/party-details.ts
++++ b/client/party-details/party-details.ts
+@@ -25,13 +25,18 @@ import {MeteorComponent} from 'angular2-meteor';
+ @RequireUser()
+ export class PartyDetails extends MeteorComponent {
+     party: Party;
++    users: Mongo.Cursor&lt;Object>;
+ 
+     constructor(params: RouteParams) {
+         super();
+         var partyId = params.get('partyId');
+         this.subscribe('party', partyId, () => {
+              this.party = Parties.findOne(partyId);
+         }, true);
++
++        this.subscribe('uninvited', partyId, () => {
++           this.users = Meteor.users.find();
++        }, true);
+     }
+ 
+     saveParty(party) {
+-- 
+2.5.4 (Apple Git-61)
+
+
+From fbdfd2c3e1d02339ef6c258be8f5c14b7a559c05 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Wed, 23 Dec 2015 14:49:53 +0700
+Subject: [PATCH 106/107] Add invited to the party definition
+
+---
+ typings/party.d.ts | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/typings/party.d.ts b/typings/party.d.ts
+index 1fedac3..23441c9 100644
+--- a/typings/party.d.ts
++++ b/typings/party.d.ts
+@@ -4,5 +4,6 @@ declare type Party = {
+   description?: string,
+   location: string,
+   owner?: string,
+-  public: boolean
++  public: boolean,
++  invited?: Array<string>
+ }
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 4a469c421e21f504ad333ada5457152839928cad Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Wed, 23 Dec 2015 14:52:39 +0700
+Subject: [PATCH 107/107] Step 13.4: render uninvited users
+
+---
+ client/party-details/party-details.html | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/client/party-details/party-details.html b/client/party-details/party-details.html
+index 58168fc..4ba0656 100644
+--- a/client/party-details/party-details.html
++++ b/client/party-details/party-details.html
+@@ -11,3 +11,10 @@
+   <button type="submit">Save</button>
+   <button [routerLink]="['/PartiesList']">Cancel</button>
+ </form>
++
++<ul>
++  Users to invite:
++  <li *ngFor="#user of users">
++    <div>{{ user.emails[0].address }}</div>
++  </li>
++</ul>
+-- 
+2.5.4 (Apple Git-61)
+
+
+From e3a3ba64179f49774a206d06c9acd808d576481b Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Wed, 23 Dec 2015 20:30:45 +0700
+Subject: [PATCH 108/111] Step 13.5: add a new pipe to render user name
+
+---
+ client/lib/pipes.ts | 24 ++++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
+ create mode 100644 client/lib/pipes.ts
+
+diff --git a/client/lib/pipes.ts b/client/lib/pipes.ts
+new file mode 100644
+index 0000000..511e713
+--- /dev/null
++++ b/client/lib/pipes.ts
+@@ -0,0 +1,24 @@
++/// &lt;reference path="../../typings/angular2-meteor.d.ts" />
++
++import {Pipe} from 'angular2/core';
++
++@Pipe({
++    name: 'displayName'
++})
++export class DisplayName {
++    transform(user: Meteor.User): string {
++        if (!user) {
++            return '';
++        }
++
++        if (user.username) {
++            return user.username;
++        }
++        
++        if (user.emails) {
++            return user.emails[0].address;
++        }
++        
++        return '';
++    }
++}
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 47a168c1ae6594fa1d3845df8aa5cc51e7ec05aa Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Wed, 23 Dec 2015 20:39:03 +0700
+Subject: [PATCH 109/111] Step 13.6: make use of the pipe in the template
+
+---
+ client/party-details/party-details.html | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/client/party-details/party-details.html b/client/party-details/party-details.html
+index 4ba0656..0a61451 100644
+--- a/client/party-details/party-details.html
++++ b/client/party-details/party-details.html
+@@ -15,6 +15,6 @@
+ <ul>
+   Users to invite:
+   <li *ngFor="#user of users">
+-    <div>{{ user.emails[0].address }}</div>
++    <div>{{ user | displayName }}</div>
+   </li>
+ </ul>
+-- 
+2.5.4 (Apple Git-61)
+
+
+From fc9916632e7b5c066485ca6f65f769c32d71f9e6 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Wed, 23 Dec 2015 20:40:13 +0700
+Subject: [PATCH 110/111] Step 13.7: import DisplayName pipe and add it to the
+ view
+
+---
+ client/party-details/party-details.ts | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/client/party-details/party-details.ts b/client/party-details/party-details.ts
+index dc830d2..04c76c0 100644
+--- a/client/party-details/party-details.ts
++++ b/client/party-details/party-details.ts
+@@ -15,10 +15,13 @@ import {RequireUser} from 'meteor-accounts';
+ 
+ import {MeteorComponent} from 'angular2-meteor';
+ 
++import {DisplayName} from 'client/lib/pipes';
++
+ @Component({
+     selector: 'party-details'
+ })
+ @View({
++    pipes: [DisplayName],
+     templateUrl: '/client/party-details/party-details.html',
+     directives: [RouterLink, FORM_DIRECTIVES, NgIf]
+ })
+-- 
+2.5.4 (Apple Git-61)
+
+
+From fe31b95ec75808d48c73621197e7b860017d532c Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Wed, 23 Dec 2015 21:34:51 +0700
+Subject: [PATCH 111/111] Step 13.8: configure accounts UI
+
+---
+ client/app.ts | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/client/app.ts b/client/app.ts
+index f359c4f..fa36ab0 100644
+--- a/client/app.ts
++++ b/client/app.ts
+@@ -12,6 +12,10 @@ import {PartiesList} from 'client/parties-list/parties-list';
+ 
+ import {PartyDetails} from 'client/party-details/party-details';
+ 
++Accounts.ui.config({
++  passwordSignupFields: 'USERNAME_AND_EMAIL'
++});
++
+ @Component({
+     selector: 'app'
+ })
 -- 
 2.5.4 (Apple Git-61)
 
