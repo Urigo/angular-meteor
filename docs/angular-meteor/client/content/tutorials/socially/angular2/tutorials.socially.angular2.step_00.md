@@ -183,7 +183,7 @@ You can read more about the differences between the two [here](http://blog.thoug
 
 For now, consider Annotations an elegant way to add metadata to classes.
 
-Also notice, the Component's selector matches the `<app>` tag we provided in `index.html`, and the View template creates the view.
+Also notice, the Component's selector matches the `<app>` tag we will provide in `index.html` below, and the View template creates the view.
 
 The class, Socially, inherits from `@Component` and `@View`.
 
