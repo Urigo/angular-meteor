@@ -123,15 +123,8 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
       this._verifyScope();
 
       if (!this.propertiesTrackerDeps[k]) {
-        this.propertiesTrackerDeps[k] = new Tracker.Dependency();
-
-        this.scope.$watch(() => {
-          return $parse(k)(context);
-        }, (newValue, oldValue) => {
-          if (newValue !== oldValue) {
-            this.propertiesTrackerDeps[k].changed();
-          }
-        }, objectEquality);
+        let dep = this.propertiesTrackerDeps[k] = new Tracker.Dependency();
+        this.scope.$watch(() => $parse(k)(context), dep.changed.bind(dep), objectEquality);
       }
 
       this.propertiesTrackerDeps[k].depend();
