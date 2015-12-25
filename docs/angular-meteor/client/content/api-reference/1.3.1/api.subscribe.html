@@ -98,6 +98,32 @@ The method returns exactly the same parameters as [Meteor.subscribe](http://docs
       this.numberOfUsers = 5; // This won't cause the subscribe arguments method to run again
     }]);
 
+### Example with subscription handle and callbacks:
+
+    myModule.controller('MyCtrl', ['$scope', '$reactive', function($scope, $reactive) {
+      $reactive(this).attach($scope);
+
+      this.numberOfParties = 3;
+
+      var subscriptionHandle = this.subscribe('parties', [this.numberOfParties], {
+        onReady: function () {
+          console.log("onReady And the Items actually Arrive", arguments);
+          subscriptionHandle.stop();  // Stopping the subscription, will cause onStop to fire
+        },
+        onStop: function (error) {
+          if (error) {
+            console.log('An error happened - ', error);
+          } else {
+            console.log('The subscription stopped');
+          }
+        }
+      });
+
+      console.log('subscription Handle',
+        subscriptionHandle); // Will include subscriptionId, ready() and stop()
+
+    }]);
+
       {{/markdown}}
     </do-nothing>
 

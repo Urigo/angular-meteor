@@ -1,7 +1,7 @@
 Package.describe({
   name: "angular-templates",
   summary: "Compile angular templates into the template cache",
-  version: "0.0.2",
+  version: "0.0.3",
   git: "https://github.com/Urigo/angular-meteor.git",
   documentation: null
 });
@@ -30,7 +30,7 @@ Package.registerBuildPlugin({
 Package.onUse(function(api) {
   api.versionsFrom('METEOR@1.2.0.1');
   api.use('isobuild:compiler-plugin@1.0.0');
-  api.use('angular-meteor-data', 'client', { weak: true });
+  api.use('angular-meteor-data@0.0.8', 'client', { weak: true });
 
   api.addFiles('templates-handler.js', 'client');
 });
