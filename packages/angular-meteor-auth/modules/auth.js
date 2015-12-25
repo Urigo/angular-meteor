@@ -6,7 +6,7 @@ angular
         this.accountsPackage = Package['accounts-base'];
 
         if (!this.accountsPackage) {
-          throw new Error('Oops, looks like Accounts-base package is missing!');
+          throw new Error('Oops, looks like Accounts-base package is missing! Please add it by running: meteor add accounts-base ');
         }
       }
 
