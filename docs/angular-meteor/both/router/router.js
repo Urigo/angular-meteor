@@ -166,10 +166,10 @@ Router.map(function () {
 
     for (var coreAPI in currentApi.groups[0].pages) {
       var routeName = currentApi.groups[0].pages[coreAPI].route;
-      routeName = routeName.slice(routeName.lastIndexOf('.')+1);
+      routeName = routeName.slice(routeName.lastIndexOf('.') + 1);
       var redirectFrom = '/api/' + routeName;
       var redirectTo = '/api/' + apiKey + '/' + routeName;
-      if (!_.contains(directedRouteNames, routeName)){
+      if (!_.contains(directedRouteNames, routeName)) {
         redirect(redirectFrom, redirectTo);
         directedRouteNames.push(routeName);
       }
@@ -177,16 +177,13 @@ Router.map(function () {
 
     createSubRoutes(currentApi);
 
-    (function(routeUrl) {
+    (function (routeUrl) {
       if (routeUrl) {
-        if (apiKey != DEFAULT_API) {
-          Router.route('/api/' + apiKey, function () {
-            this.redirect(routeUrl);
-          });
-        }
+        Router.route('/api/' + apiKey, function () {
+          this.redirect(routeUrl);
+        });
       }
     })(currentApi.groups[0].redirectRoute);
-
   }
 
   redirect('/api', '/api/' + DEFAULT_API + '/helpers');
