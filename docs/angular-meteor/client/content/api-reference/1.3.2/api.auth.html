@@ -1,0 +1,148 @@
+<template name="api.1.3.2.auth">
+  <div>
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/docs/angular-meteor/client/content/api-reference/1.3.2/api.auth.html"
+       class="btn btn-default btn-lg improve-button">
+      <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
+    </a>
+
+    <do-nothing>
+      {{#markdown}}
+
+# $auth
+<a class="src-code" href="https://github.com/Urigo/angular-meteor/blob/master/packages/angular-meteor-auth/modules/auth.js" target="_blank">
+  src: angular-meteor-auth/modules/auth.js
+</a>
+
+`$auth` service is a part of `angular` package (also included in `angular-with-blaze` package), and it located inside `angular-meteor.auth` AngularJS module.
+
+This service provides the functionality for authentication for your app.
+
+`$auth` wraps Meteor's API for ease of use with AngularJS applications, and also provides the ability to access Meteor's Accounts package from the UI.
+
+In order to use this service, you will need to add it's module as a dependency to your AngularJS app:
+
+    angular.module('myApp', [
+       'angular-meteor',
+       'angular-meteor.auth'
+    ]);
+
+## API Reference
+
+### waitForUser()
+
+`waitForUser` is a method of `$auth` which waits for any user to log in.
+
+It a wrapper for `Meteor.loggingIn` method, but it's return value is a promise which can be only resolved, when any user is done with the login process.
+
+It is useful when you want to run part of your code only after the user logs in.
+
+#### Usage example
+
+    angular.module('myApp').directive('myComponent', function() {
+      return {
+        link: function($auth) {
+          $auth.waitForUser().then(() => {
+            // Login is done!
+          });
+        }
+      };
+    });
+
+
+### requireUser()
+
+`requireUser` provides a useful functionality for performing a one-time login check, with a promise.
+
+It's very useful for `angular-ui-router`'s [resolve](https://github.com/angular-ui/ui-router/wiki#resolve) functionality.
+
+It's return value is a promise, which resolves when the login process is done, and the `Meteor.user()` is valid and not `null`.
+
+#### Usage example with angular-ui-router:
+
+    $stateProvider
+        .state({
+            template: '<my-component></my-component>',
+            resolve: {
+              user: ($auth) => {
+                return $auth.requireUser();
+              }
+            }
+        });
+
+### requireValidUser(validationMethod)
+
+`requireValidUser` uses `requireUser` method, but adding another custom check that provided by the user.
+
+It's return value is a promise, which resolves if the user is logged in and the custom validation method returns `true`.
+
+If the user validation message returns anything other than `true`, the promise will rejected and the promise failure argument will be the return value of the validation message.
+
+#### Usage example with angular-ui-router:
+
+In this example, we will allow only logged in users, with `firstName` equals to `Uri`.
+
+    $stateProvider
+      .state({
+        template: '<my-component></my-component>',
+        resolve: {
+          user: ($auth) => {
+            return $auth.requireValidUser((user) => {);
+              if (user.firstName === 'Uri') {
+                return true;
+              }
+              else {
+                return 'You are not Uri!';
+              }
+            }
+          }
+        }
+      });
+
+`$auth` service also provides two useful properties that are useful in views:
+
+### currentUser
+
+`$auth.currentUser` is a property of the `$auth` service, which contain the current logged in user in every time.
+
+It automatically changes when the user logs in or logs out, and it can be used from the view or the AngularJS controller/components.
+
+It's very useful for hiding / showing parts of the view depending on the login status.
+
+#### Usage example inside a view
+
+    <div ng-show="$auth.currentUser">I am visible only for logged in users!</div>
+    <div ng-hide="$auth.currentUser">I am visible only for guests!</div>
+
+#### Usage example inside a component
+
+    angular.module('myApp').directive('myComponent', function() {
+      return {
+        link: function($auth) {
+          $auth.waitForUser().then(() => {
+            let currentUser = $auth.currentUser;
+          });
+        }
+      };
+    });
+
+### loggingIn
+
+`$auth.loggingIn` is a property of the `$auth` service, which contain the current login status.
+
+It's a wrapper for [Meteor.loggingIn](http://docs.meteor.com/#/full/meteor_loggingin) method.
+
+It's value is `true` if a login method (such as `Meteor.loginWithPassword`, `Meteor.loginWithFacebook`, or `Accounts.createUser`) is currently in progress.
+
+> You can use this property in your view in order to display a spinner or a "Logging you in..." message!
+
+#### Usage example inside a view
+
+    <div ng-show="$auth.loggingIn">Logging in...</div>
+    <div ng-show="$auth.currentUser">I am visible only for logged in users!</div>
+    <div ng-hide="$auth.currentUser">I am visible only for guests!</div>
+
+      {{/markdown}}
+    </do-nothing>
+
+  </div>
+</template>
