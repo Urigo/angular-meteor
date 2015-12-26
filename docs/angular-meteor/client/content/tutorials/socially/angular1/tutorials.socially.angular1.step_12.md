@@ -37,21 +37,19 @@ Let's get back to our client code. We now need to change our subscribe call with
 What are those parameters that we want to set on the options argument? In order to have pagination in our
 parties list we will need to save the current page, the number of parties per page and the sort order. So let's add these parameters to our component in `parties-list.component.js` file.
 
-We will add the `perPage` variable as a regular variable, but the `page` and `sort` variables will later effect our subscription and we want the subscription to re-run every time one of them changes.
-
-Because of that, they will need to be [Reactive Vars](http://docs.meteor.com/#/full/reactivevar_pkg). To do that we need to defined them with `helpers`:
+We will `perPage`, `page` and `sort` variables will later effect our subscription and we want the subscription to re-run every time one of them changes.
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="12.2"}}
-
-That means that `$scope.perPage` won't be reactive and Meteor won't re-run anything based on that, but `$scope.page` and `$scope.sort` are reactive and Meteor will re-run the subscription every time one of them will change. 
 
 Right now, we just use `subscribe` without any parameters, but we need to provide some arguments to the subscriptions.
 
 In order to do that, we will add a second parameter to the `subscribe` method, and we will provide a function that returns an array of arguments for the subscription.
 
+We will use `getReactively` in order to get the current value, and this will also make them Reactive variables, and every change of them will effect the subscription parameters.
+
 {{> DiffBox tutorialName="meteor-angular1-socially" step="12.3"}}
 
-> Note that we also moved the `subscribe` to be after the `helpers`, because we use the variables that we defined in the `helpers` block, and we want them to be defined from the beginning.
+That means that `this.page` and `this.sort` are now reactive and Meteor will re-run the subscription every time one of them will change. 
 
 Now we've built an object that contains 3 properties:
 
@@ -63,7 +61,7 @@ Now we also need to add the sort modifier to the way we get the collection data 
 That is because the sorting is not saved when the data is sent from the server to the client.
 So to make sure our data is also sorted on the client, we need to define it again in the parties collection.
 
-To do that we are going to add the `this.sort` to the collection helper:
+To do that we are going to add the `sort` variable, and use it again with `getReactively`, in order to run the helper each time the `sort` changes:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="12.4"}}
 
