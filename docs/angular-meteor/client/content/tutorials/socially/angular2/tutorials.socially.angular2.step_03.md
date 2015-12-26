@@ -1,5 +1,5 @@
 {{#template name="tutorials.socially.angular2.step_03.md"}}
-{{> downloadPreviousStep stepName="step_02"}}
+{{> downloadPreviousStep stepName="step_2"}}
 
 OK, so we have a nice client side application that creates and renders it's own data.
 

@@ -1,5 +1,5 @@
 {{#template name="tutorials.socially.angular2.step_07.md"}}
-{{> downloadPreviousStep stepName="step_06"}}  
+{{> downloadPreviousStep stepName="step_6"}}  
 
 In this step we will review briefly files structure our Socially app has so far,
 also we’ll look closely into TypeScript features since knowing better primary programming language of this package would be surely beneficial.

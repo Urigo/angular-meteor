@@ -113,10 +113,10 @@ SOCIALLY_ANGULAR2 = [
   },
   {
     id: "14",
-    title: 'Meteor methods with promises',
-    seoTitle: 'Meteor methods with promises',
-    route: "tutorials.socially.angular2.meteor-methods-with-promises",
-    path: "/tutorials/socially/angular2/meteor-methods-with-promises",
+    title: 'Meteor methods',
+    seoTitle: 'Meteor methods',
+    route: "tutorials.socially.angular2.meteor-methods",
+    path: "/tutorials/socially/angular2/meteor-methods",
     contentTemplate: 'tutorials.socially.angular2.step_14.md'
   },
   {
