@@ -680,6 +680,15 @@ describe('angular-meteor', function () {
 
         expect(testScope.$$watchersCount).toBe(0);
       });
+
+      it('Should call the subscription method with the correct context', function (done) {
+        $reactive(context);
+
+        context.subscribe('test', function () {
+          expect(this).toBe(context);
+          done();
+        });
+      });
     });
   });
 });

@@ -1,5 +1,5 @@
 {{#template name="tutorials.socially.angular2.step_05.md"}}
-{{> downloadPreviousStep stepName="step_04"}}
+{{> downloadPreviousStep stepName="step_4"}}
 
 In this step, you will learn how to create a layout template and how to build an app that has multiple views by adding routing, using the new Angular router.
 
@@ -59,7 +59,7 @@ Also, let's clean-up `app.ts` to prepare it for the next steps:
 
 At this point app structure should look like this:
 
-    Socially
+    client
       \- PartiesList
       \- PartiesForm
 

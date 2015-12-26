@@ -218,7 +218,7 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
       }
       else {
         let autorunComp = this.autorun(() => {
-          let args = fn() || [];
+          let args = fn.apply(this.context) || [];
           if (!angular.isArray(args)) {
             throw new Error(`[angular-meteor][ReactiveContext] The return value of arguments function in subscribe must be an array! `);
           }
