@@ -30,7 +30,7 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
 
     _handleCursor(cursor, name) {
       if (angular.isUndefined(this.context[name])) {
-        this._setValHelper(name, cursor.fetch());
+        this._setValHelper(name, cursor.fetch(), false);
       }
       else {
         let diff = jsondiffpatch.diff(this.context[name], cursor.fetch());
@@ -140,8 +140,10 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
       return currentValue;
     }
 
-    _setValHelper(k, v) {
-      this.getReactively(k, true);
+    _setValHelper(k, v, addWatcher = true) {
+      if (addWatcher) {
+        this.getReactively(k, true);
+      }
 
       this.propertiesTrackerDeps[k] = new Tracker.Dependency();
 
