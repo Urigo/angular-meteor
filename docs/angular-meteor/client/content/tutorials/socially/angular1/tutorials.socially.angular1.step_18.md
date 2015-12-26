@@ -79,7 +79,7 @@ What did we do:
 
 One new thing we also have to add is usage of Material Design icon set. Google provides free icons for Material Design. You can install it by typing:
 
-    meteor add planettraining:material-design-icons
+    meteor add thoms:material-design-icons
 
 We have to define the `$mdIconProvider` in the `client/lib/app.js`. Insert these lines after the `angular.module` declaration:
 
