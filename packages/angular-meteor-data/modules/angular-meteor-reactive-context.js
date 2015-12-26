@@ -28,9 +28,19 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
       return obj instanceof Object.getPrototypeOf($rootScope).constructor;
     }
 
+    _cleanUpDocument(doc) {
+      if (window.FS && FS.File && doc instanceof FS.File) {
+        if (angular.isDefined(doc.getFileRecord) && angular.isFunction(doc.getFileRecord)) {
+          doc = doc.getFileRecord();
+        }
+      }
+
+      return doc;
+    }
+
     _handleCursor(cursor, name) {
       if (angular.isUndefined(this.context[name])) {
-        this._setValHelper(name, cursor.fetch());
+        this._setValHelper(name, cursor.fetch(), false);
       }
       else {
         let diff = jsondiffpatch.diff(this.context[name], cursor.fetch());
@@ -41,18 +51,18 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
       let handle = cursor.observe({
         addedAt: (doc, atIndex) => {
           if (!initial) {
-            this.context[name].splice(atIndex, 0, doc);
+            this.context[name].splice(atIndex, 0, this._cleanUpDocument(doc));
             this._propertyChanged(name);
           }
         },
         changedAt: (doc, oldDoc, atIndex) => {
-          let diff = jsondiffpatch.diff(this.context[name][atIndex], doc);
+          let diff = jsondiffpatch.diff(this.context[name][atIndex], this._cleanUpDocument(doc));
           jsondiffpatch.patch(this.context[name][atIndex], diff);
           this._propertyChanged(name);
         },
         movedTo: (doc, fromIndex, toIndex) => {
           this.context[name].splice(fromIndex, 1);
-          this.context[name].splice(toIndex, 0, doc);
+          this.context[name].splice(toIndex, 0, this._cleanUpDocument(doc));
           this._propertyChanged(name);
         },
         removedAt: (oldDoc, atIndex) => {
@@ -140,8 +150,10 @@ angular.module('angular-meteor.reactive', ['angular-meteor.reactive-scope']).fac
       return currentValue;
     }
 
-    _setValHelper(k, v) {
-      this.getReactively(k, true);
+    _setValHelper(k, v, addWatcher = true) {
+      if (addWatcher) {
+        this.getReactively(k, true);
+      }
 
       this.propertiesTrackerDeps[k] = new Tracker.Dependency();
 
