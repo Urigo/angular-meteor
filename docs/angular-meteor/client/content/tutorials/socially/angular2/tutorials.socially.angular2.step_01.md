@@ -1,5 +1,5 @@
 {{#template name="tutorials.socially.angular2.step_01.md"}}
-{{> downloadPreviousStep stepName="step_00"}}
+{{> downloadPreviousStep stepName="step_0"}}
 
 Let's create a purely static HTML page and then examine how we can turn this HTML code into a template that Angular will use to dynamically display the same result with any set of data.
 

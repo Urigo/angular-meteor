@@ -1,5 +1,5 @@
 {{#template name="tutorials.socially.angular2.step_09.md"}}
-{{> downloadPreviousStep stepName="step_08"}} 
+{{> downloadPreviousStep stepName="step_8"}} 
   
 You may have noticed that all available parties were always shown on the page
 at the time, independently had they been added by a logged-in user or

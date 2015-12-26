@@ -3685,3 +3685,592 @@ index f359c4f..fa36ab0 100644
  })
 -- 
 2.5.4 (Apple Git-61)
+
+
+From 4e45836c04a2d012f2e579a6b2afd608162c5401 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Fri, 25 Dec 2015 15:12:20 +0700
+Subject: [PATCH 112/119] Step 14.1: add a party invitation method
+
+---
+ collections/methods.ts | 47 +++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 47 insertions(+)
+ create mode 100644 collections/methods.ts
+
+diff --git a/collections/methods.ts b/collections/methods.ts
+new file mode 100644
+index 0000000..427eb70
+--- /dev/null
++++ b/collections/methods.ts
+@@ -0,0 +1,47 @@
++/// &lt;reference path="../typings/angular2-meteor.d.ts" />
++/// &lt;reference path="../typings/party.d.ts" />
++
++import {Parties} from './parties';
++
++function getContactEmail(user: Meteor.User): string {
++    if (user.emails && user.emails.length)
++        return user.emails[0].address;
++
++    return null;
++};
++
++Meteor.methods({
++    invite: function(partyId: string, userId: string) {
++        check(partyId, String);
++        check(userId, String);
++
++        let party = Parties.findOne(partyId);
++
++        if (!party)
++            throw new Meteor.Error('404', 'No such party!');
++
++        if (party.public)
++            throw new Meteor.Error('400', 'That party is public. No need to invite people.');
++
++        if (party.owner !== this.userId)
++            throw new Meteor.Error('403', 'No permissions!');
++
++        if (userId !== party.owner && (party.invited || []).indexOf(userId) == -1) {
++            Parties.update(partyId, { $addToSet: { invited: userId } });
++
++            let from = getContactEmail(Meteor.users.findOne(this.userId));
++            let to = getContactEmail(Meteor.users.findOne(userId));
++
++            if (Meteor.isServer && to) {
++                Email.send({
++                    from: 'noreply@socially.com',
++                    to: to,
++                    replyTo: from || undefined,
++                    subject: 'PARTY: ' + party.name,
++                    text: `Hi, I just invited you to ${party.name} on Socially.
++                        \n\nCome check it out: ${Meteor.absoluteUrl()}\n`
++                });
++            }
++        }
++    }
++});
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 8d93f3819d84982c294ae73ffe86a4a9ffdbd235 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Fri, 25 Dec 2015 15:43:08 +0700
+Subject: [PATCH 113/119] Step 14.2: import methods on the server side
+
+---
+ server/main.ts | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/server/main.ts b/server/main.ts
+index ae87a88..8fe6abf 100644
+--- a/server/main.ts
++++ b/server/main.ts
+@@ -1,5 +1,6 @@
+ import {loadParties} from './load_parties';
+ import './parties';
+ import './users';
++import 'collections/methods';
+ 
+ Meteor.startup(loadParties);
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 05bce4947b506649e229bf27804e7adf62dba411 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Fri, 25 Dec 2015 15:55:43 +0700
+Subject: [PATCH 114/119] Step 14.3: add "invite" button
+
+---
+ client/party-details/party-details.html | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/client/party-details/party-details.html b/client/party-details/party-details.html
+index 0a61451..b671ff0 100644
+--- a/client/party-details/party-details.html
++++ b/client/party-details/party-details.html
+@@ -16,5 +16,6 @@
+   Users to invite:
+   <li *ngFor="#user of users">
+     <div>{{ user | displayName }}</div>
++    <button (click)="invite(user)">Invite</button>
+   </li>
+ </ul>
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 3d69fccdb99bd46ebf432b454d6db55c96839a75 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Fri, 25 Dec 2015 15:56:51 +0700
+Subject: [PATCH 115/119] Step 14.4: add the click handler and call "invite"
+ method
+
+---
+ client/party-details/party-details.ts | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+
+diff --git a/client/party-details/party-details.ts b/client/party-details/party-details.ts
+index ba47699..6a92c13 100644
+--- a/client/party-details/party-details.ts
++++ b/client/party-details/party-details.ts
+@@ -55,4 +55,15 @@ export class PartyDetails extends MeteorComponent {
+         alert('Please log in to change this party');
+       }
+     }
++
++    invite(user) {
++      this.call('invite', this.party._id, user._id, (error) => {
++        if (error) {
++          alert(`Failed to invite due to ${error}`);
++          return;
++        }
++
++        alert('User successfully invited.');
++      });
++    }
+ }
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 10ef557b38dbb178020455a230893f65264d2e2d Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Fri, 25 Dec 2015 16:02:54 +0700
+Subject: [PATCH 116/119] Add check package
+
+---
+ .meteor/packages | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/.meteor/packages b/.meteor/packages
+index 9aa7932..c784804 100644
+--- a/.meteor/packages
++++ b/.meteor/packages
+@@ -21,3 +21,4 @@ barbatus:ng2-meteor-accounts
+ reactive-var
+ barbatus:ng2-pagination
+ tmeasday:publish-counts
++check
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 97aa9efead9b98024292d9afe9b71dadd22b9045 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Fri, 25 Dec 2015 16:08:08 +0700
+Subject: [PATCH 117/119] Add email package
+
+---
+ .meteor/packages | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/.meteor/packages b/.meteor/packages
+index c784804..e15a342 100644
+--- a/.meteor/packages
++++ b/.meteor/packages
+@@ -22,3 +22,4 @@ reactive-var
+ barbatus:ng2-pagination
+ tmeasday:publish-counts
+ check
++email
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 03aad08576cff5243f0ca2abcf91930152f9d3ce Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Fri, 25 Dec 2015 17:03:15 +0700
+Subject: [PATCH 118/119] Step 14.5: get the party reactively
+
+---
+ client/party-details/party-details.ts | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/client/party-details/party-details.ts b/client/party-details/party-details.ts
+index 6a92c13..403e220 100644
+--- a/client/party-details/party-details.ts
++++ b/client/party-details/party-details.ts
+@@ -34,8 +34,10 @@ export class PartyDetails extends MeteorComponent {
+         super();
+         var partyId = params.get('partyId');
+         this.subscribe('party', partyId, () => {
+-            this.party = Parties.findOne(partyId);
+-        }, true);
++            this.autorun(() => {
++                this.party = Parties.findOne(partyId);
++            },   true);
++        });
+ 
+         this.subscribe('uninvited', partyId, () => {
+           this.users = Meteor.users.find({_id: {$ne: Meteor.userId()}});
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 6813dec3ad023acf65fb5cae46169547c1ca7eb9 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Fri, 25 Dec 2015 17:08:47 +0700
+Subject: [PATCH 119/119] 14.6: update the users list reactively
+
+---
+ client/party-details/party-details.ts | 14 +++++++++++++-
+ 1 file changed, 13 insertions(+), 1 deletion(-)
+
+diff --git a/client/party-details/party-details.ts b/client/party-details/party-details.ts
+index 403e220..d8178a4 100644
+--- a/client/party-details/party-details.ts
++++ b/client/party-details/party-details.ts
+@@ -36,14 +36,26 @@ export class PartyDetails extends MeteorComponent {
+         this.subscribe('party', partyId, () => {
+             this.autorun(() => {
+                 this.party = Parties.findOne(partyId);
++                this.getUsers(this.party);
+             },   true);
+         });
+ 
+         this.subscribe('uninvited', partyId, () => {
+-          this.users = Meteor.users.find({_id: {$ne: Meteor.userId()}});
++            this.getUsers(this.party);
+         }, true);
+     }
+ 
++    getUsers(party) {
++        if (party) {
++            this.users = Meteor.users.find({
++                _id: {
++                    $nin: party.invited || [],
++                    $ne: Meteor.userId()
++                }
++            });
++        }
++    }
++
+     saveParty(party) {
+       if (Meteor.userId()) {
+         Parties.update(party._id, {
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 9f0bc0b36236dd11ea6cb0becacbd4e6796de4dc Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 26 Dec 2015 19:39:34 +0700
+Subject: [PATCH 120/127] 14.7: show private parties to invited and owners only
+
+---
+ server/parties.ts | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/server/parties.ts b/server/parties.ts
+index b9728c4..a735369 100644
+--- a/server/parties.ts
++++ b/server/parties.ts
+@@ -10,7 +10,13 @@ function buildQuery(partyId: string, location: string): Object {
+                 $and: [
+                     { owner: this.userId },
+                     { owner: { $exists: true } }
+-                ]
++                ],
++            },
++            {
++              $and: [
++                { invited: this.userId },
++                { invited: { $exists: true } }
++              ]
+             }
+         ]
+     };
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 89ca291ea5f2a168d6e3ed266d473b57802afe41 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 26 Dec 2015 20:10:46 +0700
+Subject: [PATCH 121/127] 14.9: update the party typings
+
+---
+ typings/party.d.ts | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/typings/party.d.ts b/typings/party.d.ts
+index 23441c9..82ac46a 100644
+--- a/typings/party.d.ts
++++ b/typings/party.d.ts
+@@ -5,5 +5,11 @@ declare type Party = {
+   location: string,
+   owner?: string,
+   public: boolean,
+-  invited?: Array&lt;string>
++  invited?: Array&lt;string>,
++  rsvps?: Array&lt;RSVP>
++}
++
++declare type RSVP = {
++  userId: string,
++  response: string
+ }
+-- 
+2.5.4 (Apple Git-61)
+
+
+From a1ff260caa1851936bdddf45c79af7ab1d631eed Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 26 Dec 2015 20:17:48 +0700
+Subject: [PATCH 122/127] 14.8: add a "reply" method
+
+---
+ collections/methods.ts | 45 +++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 45 insertions(+)
+
+diff --git a/collections/methods.ts b/collections/methods.ts
+index 427eb70..d548d06 100644
+--- a/collections/methods.ts
++++ b/collections/methods.ts
+@@ -43,5 +43,50 @@ Meteor.methods({
+                 });
+             }
+         }
++    },
++    reply: function(partyId, rsvp) {
++        check(partyId, String);
++        check(rsvp, String);
++
++        if (!this.userId)
++            throw new Meteor.Error('403', 'You must be logged-in to reply');
++
++        if (['yes', 'no', 'maybe'].indexOf(rsvp) === -1)
++            throw new Meteor.Error('400', 'Invalid RSVP');
++
++        let party = Parties.findOne({ _id: partyId });
++
++        if (!party)
++            throw new Meteor.Error('404', 'No such party');
++
++        if (party.owner === this.userId)
++            throw new Meteor.Error('500', 'You are the owner!');
++
++        if (!party.public && (!party.invited || party.invited.indexOf(this.userId) == -1))
++            throw new Meteor.Error('403', 'No such party'); // its private, but let's not tell this to the user
++ 
++        let rsvpIndex = party.rsvps ? party.rsvps.findIndex((rsvp) => rsvp.userId === this.userId) : -1;
++
++        if (rsvpIndex !== -1) {
++            // update existing rsvp entry
++            if (Meteor.isServer) {
++                // update the appropriate rsvp entry with $
++                Parties.update(
++                    { _id: partyId, 'rsvps.userId': this.userId },
++                    { $set: { 'rsvps.$.response': rsvp } });
++            } else {
++                // minimongo doesn't yet support $ in modifier. as a temporary
++                // workaround, make a modifier that uses an index. this is
++                // safe on the client since there's only one thread.
++                let modifier = { $set: {} };
++                modifier.$set['rsvps.' + rsvpIndex + '.response'] = rsvp;
++
++                Parties.update(partyId, modifier);
++            }
++        } else {
++            // add new rsvp entry
++            Parties.update(partyId,
++                { $push: { rsvps: { userId: this.userId, response: rsvp } } });
++        }
+     }
+ });
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 218de32462e9e9579dc4b874903bc0d2f19872c9 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 26 Dec 2015 20:33:48 +0700
+Subject: [PATCH 123/127] 14.10: update PartyDetails view with the three
+ response buttons
+
+---
+ client/party-details/party-details.html | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/client/party-details/party-details.html b/client/party-details/party-details.html
+index b671ff0..971a2d7 100644
+--- a/client/party-details/party-details.html
++++ b/client/party-details/party-details.html
+@@ -19,3 +19,10 @@
+     <button (click)="invite(user)">Invite</button>
+   </li>
+ </ul>
++
++<div>
++  <h2>Reply to the invitation</h2>
++  <input type="button" value="I'm going!" (click)="reply('yes')">
++  <input type="button" value="Maybe" (click)="reply('maybe')">
++  <input type="button" value="No" (click)="reply('no')">
++</div>
+-- 
+2.5.4 (Apple Git-61)
+
+
+From be081959257932f5e9370bcf018d569d6798c2c4 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 26 Dec 2015 20:37:05 +0700
+Subject: [PATCH 124/127] 14.11: handle reply events in the PartyDetails
+ component
+
+---
+ client/party-details/party-details.ts | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+
+diff --git a/client/party-details/party-details.ts b/client/party-details/party-details.ts
+index d8178a4..843405d 100644
+--- a/client/party-details/party-details.ts
++++ b/client/party-details/party-details.ts
+@@ -80,4 +80,15 @@ export class PartyDetails extends MeteorComponent {
+         alert('User successfully invited.');
+       });
+     }
++
++    reply(rsvp) {
++      this.call('reply', this.party._id, rsvp, (error) => {
++        if (error) {
++          alert(`Failed to reply due to ${error}`);
++        }
++        else {
++          alert('You successfully replied.');
++        }
++      });
++    }
+ }
+-- 
+2.5.4 (Apple Git-61)
+
+
+From b17913d7a1d62255f1d6500b99288506fea2cd15 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 26 Dec 2015 21:34:49 +0700
+Subject: [PATCH 125/127] 14.12: add a new response counting pipe
+
+---
+ client/lib/pipes.ts | 34 ++++++++++++++++++++++++++++++++++
+ 1 file changed, 34 insertions(+)
+
+diff --git a/client/lib/pipes.ts b/client/lib/pipes.ts
+index 511e713..131c595 100644
+--- a/client/lib/pipes.ts
++++ b/client/lib/pipes.ts
+@@ -2,6 +2,10 @@
+ 
+ import {Pipe} from 'angular2/core';
+ 
++import {Parties} from 'collections/parties';
++
++import {MeteorComponent} from 'angular2-meteor';
++
+ @Pipe({
+     name: 'displayName'
+ })
+@@ -22,3 +26,33 @@ export class DisplayName {
+         return '';
+     }
+ }
++
++@Pipe({
++    name: 'rsvp',
++    pure: false
++})
++export class RsvpPipe extends MeteorComponent {
++    init: boolean = false;
++    total: number = 0;
++
++    transform(party: Party, args: any[]): number {
++        let type = args[0];
++        if (!type) {
++            return 0;
++        }
++
++        if (!this.init) {
++            this.autorun(() => {
++                party = Parties.findOne(party._id);
++                if (party) {
++                    this.total = party.rsvps ?
++                        party.rsvps.filter(rsvp => rsvp.response === type).length : 0;
++                }
++            }, true);
++            this.init = true;
++        }
++                    
++        return this.total;
++    }
++}
++
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 3c381b5f9be72caf1f59b178f764672072fd24be Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 26 Dec 2015 21:35:28 +0700
+Subject: [PATCH 126/127] 14.13: display response statistics in the list
+
+---
+ client/parties-list/parties-list.html | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/client/parties-list/parties-list.html b/client/parties-list/parties-list.html
+index f8a5680..0a3acb6 100644
+--- a/client/parties-list/parties-list.html
++++ b/client/parties-list/parties-list.html
+@@ -16,6 +16,12 @@
+       <p>{{party.description}}</p>
+       <p>{{party.location}}</p>
+       <button (click)="removeParty(party)">X</button>
++      <div>
++        Who is coming:
++        Yes - {{party | rsvp:'yes'}}
++        Maybe - {{party | rsvp:'maybe'}}
++        No - {{party | rsvp:'no'}}
++      </div>
+     </li>
+   </ul>
+   <pagination-controls (change)="onPageChanged($event.page)"></pagination-controls>
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 7b129c082153931e94fc7f3824a3ad12bbf33f17 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 26 Dec 2015 21:36:23 +0700
+Subject: [PATCH 127/127] 14.14: import the RsvpPipe pipe
+
+---
+ client/parties-list/parties-list.ts | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/client/parties-list/parties-list.ts b/client/parties-list/parties-list.ts
+index 827521b..e4fd65a 100644
+--- a/client/parties-list/parties-list.ts
++++ b/client/parties-list/parties-list.ts
+@@ -18,6 +18,8 @@ import {MeteorComponent} from 'angular2-meteor';
+ 
+ import {PaginationService, PaginatePipe, PaginationControlsCpm} from 'ng2-pagination';
+ 
++import {RsvpPipe} from 'client/lib/pipes';
++
+ @Component({
+     selector: 'parties-list',
+     viewProviders: [PaginationService]
+@@ -25,7 +27,7 @@ import {PaginationService, PaginatePipe, PaginationControlsCpm} from 'ng2-pagina
+ @View({
+     templateUrl: '/client/parties-list/parties-list.html',
+     directives: [NgFor, PartiesForm, RouterLink, AccountsUI, PaginationControlsCpm],
+-    pipes: [PaginatePipe]
++    pipes: [PaginatePipe, RsvpPipe]
+ })
+ export class PartiesList extends MeteorComponent {
+     parties: Mongo.Cursor<Party>;
+-- 
+2.5.4 (Apple Git-61)
+

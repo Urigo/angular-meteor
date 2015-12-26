@@ -1,9 +1,8 @@
 {{#template name="tutorials.socially.angular2.step_13.md"}}
-{{> downloadPreviousStep stepName="step_12"}}
+{{> downloadPreviousStep stepName="step_012"}}
 
 In this and next steps we are going to implement
-one feature, which is essential for the social apps
-like ours, called [RSVP](https://en.wikipedia.org/wiki/RSVP_(invitations)).
+party invitations feature, which is essential for the social apps like ours.
 
 Particularly, in this step we'll be realizing mostly UI
 part of that feature, and will do it with the help of Angular 2 pipes.
