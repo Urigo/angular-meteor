@@ -59,7 +59,7 @@ Also, let's clean-up `app.ts` to prepare it for the next steps:
 
 At this point app structure should look like this:
 
-    Socially
+    client
       \- PartiesList
       \- PartiesForm
 
