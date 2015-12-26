@@ -666,6 +666,20 @@ describe('angular-meteor', function () {
 
         expect(subscribeSpy).toHaveBeenCalledWith('test', 10, 20, cb);
       });
+
+      it ('Should not run getReactively for cursors', function() {
+        $reactive(context).attach(testScope);
+
+        expect(testScope.$$watchersCount).toBe(0);
+
+        context.helpers({
+          myHelper: function() {
+            return bigCollection.find({});
+          }
+        });
+
+        expect(testScope.$$watchersCount).toBe(0);
+      });
     });
   });
 });
