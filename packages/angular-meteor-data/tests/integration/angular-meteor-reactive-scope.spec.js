@@ -191,7 +191,14 @@ describe('angular-meteor', function () {
       testScope.subscribe('test');
 
       expect(meteorSubscribeSpy).toHaveBeenCalledWith('test', undefined);
-    })
+    });
+
+    it('Should call the subscribe method with the correct context', function (done) {
+      testScope.subscribe('test', function() {
+        expect(this).toBe(testScope);
+        done();
+      });
+    });
 
     it('Should call stop method of autorun when destroying the scope', function() {
       var stoppableSpy = jasmine.createSpy('stop');
