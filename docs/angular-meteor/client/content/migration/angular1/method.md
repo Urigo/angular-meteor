@@ -6,7 +6,7 @@ When we migrate our app from blaze to angular, we can choose between two approac
 
 But first, Let's have a brief look at the `todos` app client design:
 
-![todos structure](../resources/todos.jpg)
+<img src="/migration-images/todos.jpg" style="height: 500px; width: auto"/>
 
 > It's not the whole app, only the main parts.
 
@@ -15,7 +15,7 @@ But first, Let's have a brief look at the `todos` app client design:
 This approach consists of two major stages. You will start the migration by putting your logic in angular components and
 make them work with blaze templates. Secondly, you will convert the blaze templates to angular templates.
 
-![steps_migration](../resources/steps.jpg)
+<img src="/migration-images/steps.jpg" style="height: 500px; width: auto"/>
 
 The checklist would be:
 
@@ -38,7 +38,7 @@ You will convert each component completely to angular (both logic and view) at a
 The order of witch components are being migrated is not important, but my recommendation is to follow the app components tree.
 Start with the leaves, and make your way up to the main branch:
 
-![bottom-up_migration](../resources/bottom-up.jpg)
+<img src="/migration-images/bottom-up.jpg" style="height: 500px; width: auto"/>
 
 The checklist would be:
 

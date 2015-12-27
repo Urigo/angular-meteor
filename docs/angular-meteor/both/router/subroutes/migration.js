@@ -27,7 +27,7 @@ MIGRATION = {
               title: 'Methods',
               route: "migration.angular1.methods",
               path: "/migration/angular1/methods",
-              contentTemplate: 'migration.angular1.methods.md'
+              contentTemplate: 'migration.angular1.method.md'
             },
             {
               id: "12",

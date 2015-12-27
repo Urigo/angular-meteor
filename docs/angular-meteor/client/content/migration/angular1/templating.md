@@ -52,9 +52,9 @@ When you insert the statement to elements, they produce a similar output:
 
 Spacebars:
 ```html
-{{#if something}}
+{{|#if something}}
   <p>It's true</p>
-{{/if}}
+{{|/if}}
 ```
 
 Angular:
@@ -66,11 +66,11 @@ Angular doesn't have an equivalent to the else statement, so in order to do if/e
 
 Spacebars:
 ```html
-{{#if something}}
+{{|#if something}}
   <p>It's true</p>
-{{else}}
+{{|else}}
   <p>It's false</p>
-{{/if}}
+{{|/if}}
 ```
 
 Angular:
@@ -80,10 +80,10 @@ Angular:
 ```
 
 Another difference is you can't insert `ngIf` to attributes.
-In Spacebars, you could do: `<div class="{{#if done}}done{{else}}notdone{{/if}}"></div>`.
+In Spacebars, you could do: `<div class="{{|#if done}}done{{|else}}notdone{{|/if}}"></div>`.
 
 However, In angular the syntax is quite different.
-you can insert an angular expression to the class attribute and use the ternary operator: `<div class="{{done ? 'done' : 'notdone'}}"></div>`.
+you can insert an angular expression to the class attribute and use the ternary operator: `<div class="{{|done ? 'done' : 'notdone'}}"></div>`.
 
 In addition, angular has special directives that support dynamic attributes such as `class`, `style` etc.
 So a better solution is to use the `ngClass` directive: `<div ng-class="done ? 'done' : 'notdone'"></div>`.
@@ -97,35 +97,35 @@ example:
 Spacebars:
 ```html
 <ul>
-{{#each people}}
-  <li>{{name}}</li>
-{{/each}}
+{{|#each people}}
+  <li>{{|name}}</li>
+{{|/each}}
 </ul>
 ```
 
 Angular:
 ```html
 <ul>
-    <li ng-repeat="person in people">{{person.name}}</li>
+    <li ng-repeat="person in people">{{|person.name}}</li>
 </ul>
 ```
 
 ### inclusion
 
-The angular equivalent for inclusion tag (``{{> template}}``) is the `ngInclude` directive.
+The angular equivalent for inclusion tag (``{{|> template}}``) is the `ngInclude` directive.
 
 example:
 
 Spacebars:
 ```html
 <template name="People">
-    {{#each people}}
-        {{> person}}
-    {{/each}}
+    {{|#each people}}
+        {{|> person}}
+    {{|/each}}
 </template>
 
 <template name="person">
-{{name}}
+{{|name}}
 </template>
 ```
 
@@ -136,7 +136,7 @@ Angular:
 </script>
 
 <script type="text/ng-template" id="person.html">
-  {{person.name}}
+  {{|person.name}}
 </script>
 
 ```
@@ -154,18 +154,18 @@ The right way it to create a **component** for each template and then you can do
 <person ng-repeat="person in people"></person>
 
 // person template
-{{person.name}}
+{{|person.name}}
 ```
 
 ### raw html
 
-In Spacebars you can insert raw html with triple brackets `{{{raw}}}`.
+In Spacebars you can insert raw html with triple brackets `{{{|raw}}}`.
 You can do the same with the `ngBindHtml` directive.
 
 Spacebars:
 ```html
 // rawHtml = 'this is raw html';....
-<p>{{{rawHtml}}</p>
+<p>{{{|rawHtml}}</p>
 ```
 
 Angular:
