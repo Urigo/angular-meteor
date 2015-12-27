@@ -50,6 +50,7 @@ cat "$PACKAGES_PATH/reactive-var.js" >> $OUTPUT_PATH/$NAME.bundle.js
 
 cat "$PACKAGES_PATH/lai_collection-extensions.js" >> $OUTPUT_PATH/$NAME.bundle.js
 cat "$PACKAGES_PATH/dburles_mongo-collection-instances.js" >> $OUTPUT_PATH/$NAME.bundle.js
+cat "$PACKAGES_PATH/benjamine_jsondiffpatch.js" >> $OUTPUT_PATH/$NAME.bundle.js
 
 cat "$PACKAGES_PATH/angular-meteor-data.js" >> $OUTPUT_PATH/$NAME.bundle.js
 
