@@ -19,7 +19,7 @@ Package.onUse(function (api) {
   api.use('ecmascript');
   api.use('reactive-var');
   api.use('accounts-base');
-  api.use('angular-meteor-data');
+  api.use('angular-meteor-data@0.0.9');
 
   api.use('angular:angular@1.4.7', 'client');
 
