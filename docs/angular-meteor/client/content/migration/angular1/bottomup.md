@@ -25,21 +25,7 @@ meteor add pbastowski:angular-babel pbastowski:angular2-now angular-with-blaze u
 
 The first coding step is to bootstrap our angular application:
 
-*client/app.js*
-```javascript
-
-'use strict';
-
-var {SetModule} = angular2now;
-
-SetModule('todos', ['angular-meteor']);
-
-angular.module('todos').run(function ($injector) {
-  window.ngInjector = $injector;
-});
-
-angular.bootstrap(document, ['todos']);
-```
+{{> DiffBox tutorialName="migration-angular1" step="0.1"}}
 
 Everything here is a normal angular application bootstrap, except for the `run` function.
 
@@ -55,30 +41,13 @@ Then we need to attach the new component to `list` template.
 
 Let's start with creating a new angular component:
 
-*client/components/todos-item/todos-item.js*
-```javascript
-"use strict";
-
-var {Component, View, Inject} = angular2now;
-
-@Component({selector: 'todos-item'})
-@View({templateUrl: 'client/components/todos-item/todos-item.ng.html'})
-@Inject('$scope', '$reactive', 'data')
-class TodosItem {
-  constructor($scope, $reactive, data) {}
-}
-
-window.TodosItem = TodosItem;
-```
+{{> DiffBox tutorialName="migration-angular1" step="1.1" filename="client/components/todos-item/todos-item.js"}}
 
 We will discuss later about all the pieces here and see how they are all connected.
 
 The class is stored in `window` for future access (like the injector).
 
-*client/components/todos-item/todos-item.ng.html*
-```html
-<div></div>
-```
+{{> DiffBox tutorialName="migration-angular1" step="1.1" filename="client/components/todos-item/todos-item.ng.html"}}
 
 The component above is a regular empty angular component. Nothing special yet.
 
@@ -106,12 +75,7 @@ Instead, we will use the `todos-item.html` template to be our connector to angul
 
 We will change `todos-item.html` to the following:
 
-*client/templates/todos-item.html*
-```html
-<template name="todosItem">
-  <removable></removable>
-</template>
-```
+{{> DiffBox tutorialName="migration-angular1" step="1.2"}}
 
 `removable` element will be our placeholder for the element we will create for our component later.
 
@@ -120,28 +84,7 @@ Another problem is that we need to instantiate the component manually.
 > when you write angular apps, angular does it for you. But since we want to instantiate it from blaze,
 we have to do it ourselves.
 
-*client/templates/todos-item.js*
-```javascript
-Template.todosItem.onRendered(function() {
-  var $rootScope = window.ngInjector.get('$rootScope');
-  var $templateCache = window.ngInjector.get('$templateCache');
-  var $compile = window.ngInjector.get('$compile');
-
-  this.scope = $rootScope.$new(true);
-
-  var controller = window.ngInjector.instantiate(window.TodosItem, {data: this.data, $scope: this.scope});
-
-  var template = $templateCache.get(window.TodosItem.templateUrl);
-
-  this.scope.todosItem = controller;
-
-  this.elem = $compile(template)(this.scope);
-
-  this.scope.$digest();
-
-  this.$('removable').replaceWith(this.elem);
-});
-```
+{{> DiffBox tutorialName="migration-angular1" step="1.3"}}
 
 We told blaze to instantiate the component whenever the `todos-item.html` template is rendered.
 
@@ -223,13 +166,7 @@ But, We did two things that blaze can't handle itself:
 So in order to create a proper lifecycle to our component, we will destroy the scope and remove the element from the DOM
 when the template is marked for destruction:
 
-*client/templates/todos-item.js*
-```javascript
-Template.todosItem.onDestroyed(function() {
-  this.scope.$destroy();
-  this.elem.remove();
-});
-```
+{{> DiffBox tutorialName="migration-angular1" step="1.4"}}
 
 Now we are ready to start our component implementation.
 We will follow the instructions in the templates section of this guide.
@@ -260,71 +197,25 @@ We need to extract the fields from the data and store them in our controller.
 
 > We injected the blaze data object to our controller for that reason.
 
-*client/components/todos-item/todos-item.js*
-```javascript
-constructor($scope, $reactive, data) {
-  this._id = data._id;
-  this.listId = data.listId;
-  this.checked = data.checked;
-  this.text = data.text;
-}
-```
+{{> DiffBox tutorialName="migration-angular1" step="1.5"}}
 
 But now we have a problem: `checked` and `text` can be changed remotely so we will store them as helpers:
 
-*client/components/todos-item/todos-item.js*
-```javascript
-constructor($scope, $reactive, data) {
-  this._id = data._id;
-  this.listId = data.listId;
-
-  this.helpers({
-    checked: () => Todos.findOne(data._id).checked,
-    text: () => Todos.findOne(data._id).text
-  });
-}
-```
+{{> DiffBox tutorialName="migration-angular1" step="1.6"}}
 
 And in order to make reactive possible we will attach the reactive context to our scope:
 
-*client/components/todos-item/todos-item.js*
-```javascript
-constructor($scope, $reactive, data) {
-  this._id = data._id;
-  this.listId = data.listId;
-
-  $reactive(this).attach($scope);
-
-  this.helpers({
-    checked: () => Todos.findOne(data._id).checked,
-    text: () => Todos.findOne(data._id).text
-  });
-}
-```
+{{> DiffBox tutorialName="migration-angular1" step="1.7"}}
 
 Now we'll construct the template:
 
-*client/components/todos-item/todos-item.ng.html*
-```html
-<div class="list-item">
-  <label class="checkbox">
-    <input type="checkbox" name="checked">
-    <span class="checkbox-custom"></span>
-  </label>
-
-  <input type="text" placeholder="Task name">
-  <a class="js-delete-item delete-item" href="#"><span class="icon-trash"></span></a>
-</div>
-```
+{{> DiffBox tutorialName="migration-angular1" step="1.8"}}
 
 This is the layout of our template, but it currently lacks the connection to the data and the events.
 
 ##### connecting the checked field (finish state)
 
-*client/components/todos-item/todos-item.ng.html*
-```html
-<input type="checkbox" name="checked" ng-model="listItem.checked">
-```
+{{> DiffBox tutorialName="migration-angular1" step="1.9"}}
 
 Now the input is linked to the task finish state and whenever it changes remotely, the helper will update the data and the
 input will automatically be updated as well.
@@ -332,29 +223,15 @@ input will automatically be updated as well.
 But if you try to change the state locally, the changes will be reflected to the local model
 but not remotely. We need to bound the local model to the remote model:
 
-*client/components/todos-item/todos-item.ng.html*
-```html
-<input type="checkbox" name="checked" ng-model="listItem.checked" ng-change="listItem.check()">
-```
+{{> DiffBox tutorialName="migration-angular1" step="1.10" filename="client/components/todos-item/todos-item.js"}}
 
-*client/components/todos-item/todos-item.js*
-```javascript
-check() {
-  Todos.update(this._id, {$set: {checked: this.checked}});
-  Lists.update(this.listId, {$inc: {incompleteCount: this.checked ? -1 : 1}});
-}
-```
-
-> we added a method for the `TodosItem` class.
+{{> DiffBox tutorialName="migration-angular1" step="1.10" filename="client/components/todos-item/todos-item.ng.html"}}
 
 We told angular to listen to the input changes and whenever there is a change, run the `check` method which updates the collection.
 
 Now let's change the template to update the classes when the task is finished:
 
-*client/components/todos-item/todos-item.ng.html*
-```html
-<div ng-class="['list-item', listItem.checked ? 'checked' : '']">
-```
+{{> DiffBox tutorialName="migration-angular1" step="1.11"}}
 
 We used the `ngClass` directive to update the class attribute when the model changes.
 
@@ -362,17 +239,10 @@ We used the `ngClass` directive to update the class attribute when the model cha
 
 We will do the same for the task title:
 
-*client/components/todos-item/todos-item.ng.html*
-```html
-<input type="text" placeholder="Task name" ng-model="listItem.text" ng-change="detectTitleChanges()">
-```
 
-*client/components/todos-item/todos-item.js*
-```javascript
-detectTitleChanges() {
-  Todos.update(this._id, {$set: {text: this.text}});
-}
-```
+{{> DiffBox tutorialName="migration-angular1" step="1.12" filename="client/components/todos-item/todos-item.js"}}
+
+{{> DiffBox tutorialName="migration-angular1" step="1.12" filename="client/components/todos-item/todos-item.ng.html"}}
 
 We used the way to detect the changes as we did before with the `checked` field. But now we have 2 problems:
 
@@ -384,116 +254,48 @@ So we are going to change this specific implementation to ease our lives:
 
 We will remove the `ngChange` directive from the `input` and add a watcher for the model changes:
 
-*client/components/todos-item/todos-item.ng.html*
-```html
-<input type="text" placeholder="Task name" ng-model="listItem.text">
-```
+{{> DiffBox tutorialName="migration-angular1" step="1.13" filename="client/components/todos-item/todos-item.js"}}
 
-*client/components/todos-item/todos-item.js*
-```javascript
-constructor($scope, $reactive, data) {
-  this._id = data._id;
-  this.listId = data.listId;
-
-  $reactive(this).attach($scope);
-
-  this.helpers({
-    checked: () => Todos.findOne(data._id).checked,
-    text: () => Todos.findOne(data._id).text
-  });
-
-  $scope.$watch("listItem.text", () => {
-    Todos.update(this._id, {$set: {text: this.text}});
-  });
-}
-```
-
-> We can remove `detectTitleChanges` method.
+{{> DiffBox tutorialName="migration-angular1" step="1.13" filename="client/components/todos-item/todos-item.ng.html"}}
 
 Let's add some validation to the title (Not on the original app):
 
-*client/components/todos-item/todos-item.ng.html*
-```html
-<input type="text" placeholder="Task name" ng-model="listItem.text" ng-minlength="5">
-```
+{{> DiffBox tutorialName="migration-angular1" step="1.14" filename="client/components/todos-item/todos-item.js"}}
+
+{{> DiffBox tutorialName="migration-angular1" step="1.14" filename="client/components/todos-item/todos-item.ng.html"}}
+
 
 Now you can see that you can't type a title shorter than 5 characters.
 
 We will use the `ngModelOptions` directive to handle the throttle:
 
-*client/components/todos-item/todos-item.ng.html*
-```html
-<input type="text" placeholder="Task name" ng-model="listItem.text" ng-minlength="5"
-   ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 300, 'blur': 0 } }">
-```
+{{> DiffBox tutorialName="migration-angular1" step="1.15"}}
 
 We told angular to update the model only when the user is typing (`default` event) and to throttle the model updates to 300ms.
 In addition, the model updates instantly whenever the input loses focus (`blur` event).
 
 ##### adding the editing state
 
-First we need to add the events to the title `input`:
+First we need to add the events to the title `input`, and then update the classes of the div:
 
-*client/components/todos-item/todos-item.ng.html*
-```html
-<input type="text" placeholder="Task name" ng-model="listItem.text" ng-minlength="5"
-  ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 300, 'blur': 0 } }" ng-focus="listItem.editing = true" ng-blur="listItem.editing = false">
-```
-
-And update the classes of the div:
-
-*client/components/todos-item/todos-item.ng.html*
-```html
-<div ng-class="['list-item', listItem.checked ? 'checked' : '', listItem.editing ? 'editing' : '']">
-```
+{{> DiffBox tutorialName="migration-angular1" step="1.16"}}
 
 ##### deleting a task
 
 First we add the method to the controller:
 
-*client/components/todos-item/todos-item.js*
-```javascript
-delete() {
-  Todos.remove(this._id);
-  if (!this.checked)
-    Lists.update(this.listId, {$inc: {incompleteCount: -1}});
-}
-```
+{{> DiffBox tutorialName="migration-angular1" step="1.17"}}
 
 Then attach it to the events (mousedown and click):
 
-*client/components/todos-item/todos-item.ng.html*
-```html
-<a class="js-delete-item delete-item" href="#" ng-click="listItem.delete()" ng-mousedown="listItem.delete()"><span class="icon-trash"></span></a>
-```
+{{> DiffBox tutorialName="migration-angular1" step="1.18"}}
 
 **Now we've completely converted the blaze component to angular.**
 
 But we have last change to make.
 When the template is destroyed the helpers will still be running. This will cause some issues so we need to stop the helpers.
 
-*client/components/todos-item/todos-item.js*
-```javascript
-constructor($scope, $reactive, data) {
-  this._id = data._id;
-  this.listId = data.listId;
-
-  $reactive(this).attach($scope);
-
-  this.helpers({
-    checked: () => Todos.findOne(data._id).checked,
-    text: () => Todos.findOne(data._id).text
-  });
-
-  $scope.$watch("listItem.text", () => {
-    Todos.update(this._id, {$set: {text: this.text}});
-  });
-
-  $scope.$on('$destroy', () => {
-    this.stop();
-  });
-}
-```
+{{> DiffBox tutorialName="migration-angular1" step="1.19"}}
 
 Before we told blaze to destroy the scope when the template is destroyed.
 We take this to our advantage and stop the helpers when the scope is destroyed.
@@ -525,7 +327,7 @@ class TodosItem extends ReactiveComponent {
 
 Now we can mark `todos-item` as finished and move on to the next component.
 
-> You can check out the [commits comparison](https://github.com/) for the full change list.
+> You can check out the [commits comparison](https://github.com/ozsay/blaze2angular/compare/128b0af7795b296ec8f554e8b5dac4830b4fc725...82e8af9bbebc4ebfa588fe852993853f8c06a249) for the full change list.
 
 We will use the same principles to convert the `list` component.
 Please follow [this commits comparison](https://github.com/) to check out the change list.
