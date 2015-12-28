@@ -174,7 +174,7 @@ Now let's do the same but with "remove". At the prompt, type the following comma
 Now choose one party you want to remove and copy it's 'id' property.
 Then, remove it using that id (replace 'N4KzMEvtm4dYvk2TF' with your party's id value):
 
-    db.parties.remove({"_id": "N4KzMEvtm4dYvk2TF"});
+    db.parties.remove({"_id": ObjectId("N4KzMEvtm4dYvk2TF")});
 
 Again, you will see the UI of your app immediately updates with that party removed.
 
