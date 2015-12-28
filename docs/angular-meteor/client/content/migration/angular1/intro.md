@@ -2,6 +2,8 @@
 
 ## Introduction to the guide
 
+This guide is not finished yet. It's still work in progress.
+
 ## Reasons why migrate to angular
 
 There are a few reasons why we want to write/migrate our apps in/to angular:

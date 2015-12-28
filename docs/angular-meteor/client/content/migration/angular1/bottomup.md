@@ -35,7 +35,7 @@ var {SetModule} = angular2now;
 SetModule('todos', ['angular-meteor']);
 
 angular.module('todos').run(function ($injector) {
-    window.ngInjector = $injector;
+  window.ngInjector = $injector;
 });
 
 angular.bootstrap(document, ['todos']);
@@ -48,7 +48,7 @@ In order to make it possible, we need to store the injector of our app in an acc
 
 Let's review again the **todos** app structure and our migration path in detail.
 
-![bottom-up_migration](../resources/bottom-up.jpg)
+<img src="/migration-images/bottom-up.jpg" style="height: 500px; width: auto"/>
 
 Our next step is to convert the `todos-item` logic and view to a full angular component.
 Then we need to attach the new component to `list` template.
@@ -65,7 +65,7 @@ var {Component, View, Inject} = angular2now;
 @View({templateUrl: 'client/components/todos-item/todos-item.ng.html'})
 @Inject('$scope', '$reactive', 'data')
 class TodosItem {
-    constructor($scope, $reactive, data) {}
+  constructor($scope, $reactive, data) {}
 }
 
 window.TodosItem = TodosItem;
@@ -96,9 +96,9 @@ You can't attach the component directly to the template:
 
 *list.html*
 ```html
-{{#each todos}}
-<todos-item></todos-item>
-{{/each}}
+{{|#each todos}}
+  <todos-item></todos-item>
+{{|/each}}
 ```
 
 This will not work because this template is out of the angular context.
@@ -109,7 +109,7 @@ We will change `todos-item.html` to the following:
 *client/templates/todos-item.html*
 ```html
 <template name="todosItem">
-    <removable></removable>
+  <removable></removable>
 </template>
 ```
 
@@ -148,15 +148,15 @@ We told blaze to instantiate the component whenever the `todos-item.html` templa
 Let's break this code to pieces to understand what is going on:
 
 ```javascript
-  var $rootScope = window.ngInjector.get('$rootScope');
-  var $templateCache = window.ngInjector.get('$templateCache');
-  var $compile = window.ngInjector.get('$compile');
+var $rootScope = window.ngInjector.get('$rootScope');
+var $templateCache = window.ngInjector.get('$templateCache');
+var $compile = window.ngInjector.get('$compile');
 ```
 
 We use the injector of our module that we stored in window to inject the required dependencies for our component instantiation.
 
 ```javascript
-  this.scope = $rootScope.$new(true);
+this.scope = $rootScope.$new(true);
 ```
 
 We create a new scope which is isolated. **Why isolated?** One of our next steps will be to create the `list` component.
@@ -166,7 +166,7 @@ So we mimic the future behavior. Though it's not really different now, it will h
 > My recommendation is to use isolated scope if your template is surrounded by `each` statement.
 
 ```javascript
-  var controller = window.ngInjector.instantiate(window.TodosItem, {data: this.data, $scope: this.scope});
+var controller = window.ngInjector.instantiate(window.TodosItem, {data: this.data, $scope: this.scope});
 ```
 
 We use the injector to instantiate our angular component.
@@ -176,7 +176,7 @@ We send to the instantiate method an object that will be injected to the compone
 > This is the reason why we stored The `TodosItem` class in window.
 
 ```javascript
-  var template = $templateCache.get(window.TodosItem.templateUrl);
+var template = $templateCache.get(window.TodosItem.templateUrl);
 ```
 
 Before we talked about `angular-meteor` angular templates compiler that handles `.ng.html` files.
@@ -185,28 +185,28 @@ What it does actually is wrap the template in javascript code that puts the temp
 So now we can use `$templateCache.get` to retrieve the template from the cache.
 
 ```javascript
-  this.scope.todosItem = controller;
+this.scope.todosItem = controller;
 ```
 
 This will help us use the new `controllerAs` style.
 We want this behavior because we want to reduce the `$scope` using to a minimum.
 
 ```javascript
-  this.elem = $compile(template)(this.scope);
+this.elem = $compile(template)(this.scope);
 ```
 
 Next, we will compile our template and link it to the scope we created before.
 This will create an element that can be attached to the DOM.
 
 ```javascript
-  this.scope.$digest();
+this.scope.$digest();
 ```
 
 We want that the scope will be digested at least once before we attach the component to the DOM.
 Any watchers that were added will run and perform their actions.
 
 ```javascript
-  this.$('removable').replaceWith(this.elem);
+this.$('removable').replaceWith(this.elem);
 ```
 
 Our last step is to attach the element to the DOM. We replace the placeholder element with our element.
@@ -262,44 +262,44 @@ We need to extract the fields from the data and store them in our controller.
 
 *client/components/todos-item/todos-item.js*
 ```javascript
-    constructor($scope, $reactive, data) {
-        this._id = data._id;
-        this.listId = data.listId;
-        this.checked = data.checked;
-        this.text = data.text;
-    }
+constructor($scope, $reactive, data) {
+  this._id = data._id;
+  this.listId = data.listId;
+  this.checked = data.checked;
+  this.text = data.text;
+}
 ```
 
 But now we have a problem: `checked` and `text` can be changed remotely so we will store them as helpers:
 
 *client/components/todos-item/todos-item.js*
 ```javascript
-    constructor($scope, $reactive, data) {
-        this._id = data._id;
-        this.listId = data.listId;
+constructor($scope, $reactive, data) {
+  this._id = data._id;
+  this.listId = data.listId;
 
-        this.helpers({
-            checked: () => Todos.findOne(data._id).checked,
-            text: () => Todos.findOne(data._id).text
-        });
-    }
+  this.helpers({
+    checked: () => Todos.findOne(data._id).checked,
+    text: () => Todos.findOne(data._id).text
+  });
+}
 ```
 
 And in order to make reactive possible we will attach the reactive context to our scope:
 
 *client/components/todos-item/todos-item.js*
 ```javascript
-    constructor($scope, $reactive, data) {
-        this._id = data._id;
-        this.listId = data.listId;
+constructor($scope, $reactive, data) {
+  this._id = data._id;
+  this.listId = data.listId;
 
-        $reactive(this).attach($scope);
+  $reactive(this).attach($scope);
 
-        this.helpers({
-            checked: () => Todos.findOne(data._id).checked,
-            text: () => Todos.findOne(data._id).text
-        });
-    }
+  this.helpers({
+    checked: () => Todos.findOne(data._id).checked,
+    text: () => Todos.findOne(data._id).text
+  });
+}
 ```
 
 Now we'll construct the template:
@@ -307,13 +307,13 @@ Now we'll construct the template:
 *client/components/todos-item/todos-item.ng.html*
 ```html
 <div class="list-item">
-    <label class="checkbox">
-        <input type="checkbox" name="checked">
-        <span class="checkbox-custom"></span>
-    </label>
+  <label class="checkbox">
+    <input type="checkbox" name="checked">
+    <span class="checkbox-custom"></span>
+  </label>
 
-    <input type="text" placeholder="Task name">
-    <a class="js-delete-item delete-item" href="#"><span class="icon-trash"></span></a>
+  <input type="text" placeholder="Task name">
+  <a class="js-delete-item delete-item" href="#"><span class="icon-trash"></span></a>
 </div>
 ```
 
@@ -323,7 +323,7 @@ This is the layout of our template, but it currently lacks the connection to the
 
 *client/components/todos-item/todos-item.ng.html*
 ```html
-    <input type="checkbox" name="checked" ng-model="listItem.checked">
+<input type="checkbox" name="checked" ng-model="listItem.checked">
 ```
 
 Now the input is linked to the task finish state and whenever it changes remotely, the helper will update the data and the
@@ -334,15 +334,15 @@ but not remotely. We need to bound the local model to the remote model:
 
 *client/components/todos-item/todos-item.ng.html*
 ```html
-    <input type="checkbox" name="checked" ng-model="listItem.checked" ng-change="listItem.check()">
+<input type="checkbox" name="checked" ng-model="listItem.checked" ng-change="listItem.check()">
 ```
 
 *client/components/todos-item/todos-item.js*
 ```javascript
-    check() {
-        Todos.update(this._id, {$set: {checked: this.checked}});
-        Lists.update(this.listId, {$inc: {incompleteCount: this.checked ? -1 : 1}});
-    }
+check() {
+  Todos.update(this._id, {$set: {checked: this.checked}});
+  Lists.update(this.listId, {$inc: {incompleteCount: this.checked ? -1 : 1}});
+}
 ```
 
 > we added a method for the `TodosItem` class.
@@ -353,7 +353,7 @@ Now let's change the template to update the classes when the task is finished:
 
 *client/components/todos-item/todos-item.ng.html*
 ```html
-    <div ng-class="['list-item', listItem.checked ? 'checked' : '']">
+<div ng-class="['list-item', listItem.checked ? 'checked' : '']">
 ```
 
 We used the `ngClass` directive to update the class attribute when the model changes.
@@ -364,14 +364,14 @@ We will do the same for the task title:
 
 *client/components/todos-item/todos-item.ng.html*
 ```html
-    <input type="text" placeholder="Task name" ng-model="listItem.text" ng-change="detectTitleChanges()">
+<input type="text" placeholder="Task name" ng-model="listItem.text" ng-change="detectTitleChanges()">
 ```
 
 *client/components/todos-item/todos-item.js*
 ```javascript
-    detectTitleChanges() {
-      Todos.update(this._id, {$set: {text: this.text}});
-    }
+detectTitleChanges() {
+  Todos.update(this._id, {$set: {text: this.text}});
+}
 ```
 
 We used the way to detect the changes as we did before with the `checked` field. But now we have 2 problems:
@@ -386,26 +386,26 @@ We will remove the `ngChange` directive from the `input` and add a watcher for t
 
 *client/components/todos-item/todos-item.ng.html*
 ```html
-    <input type="text" placeholder="Task name" ng-model="listItem.text">
+<input type="text" placeholder="Task name" ng-model="listItem.text">
 ```
 
 *client/components/todos-item/todos-item.js*
 ```javascript
-    constructor($scope, $reactive, data) {
-        this._id = data._id;
-        this.listId = data.listId;
+constructor($scope, $reactive, data) {
+  this._id = data._id;
+  this.listId = data.listId;
 
-        $reactive(this).attach($scope);
+  $reactive(this).attach($scope);
 
-        this.helpers({
-            checked: () => Todos.findOne(data._id).checked,
-            text: () => Todos.findOne(data._id).text
-        });
+  this.helpers({
+    checked: () => Todos.findOne(data._id).checked,
+    text: () => Todos.findOne(data._id).text
+  });
 
-        $scope.$watch("listItem.text", () => {
-            Todos.update(this._id, {$set: {text: this.text}});
-        });
-    }
+  $scope.$watch("listItem.text", () => {
+    Todos.update(this._id, {$set: {text: this.text}});
+  });
+}
 ```
 
 > We can remove `detectTitleChanges` method.
@@ -414,7 +414,7 @@ Let's add some validation to the title (Not on the original app):
 
 *client/components/todos-item/todos-item.ng.html*
 ```html
-    <input type="text" placeholder="Task name" ng-model="listItem.text" ng-minlength="5">
+<input type="text" placeholder="Task name" ng-model="listItem.text" ng-minlength="5">
 ```
 
 Now you can see that you can't type a title shorter than 5 characters.
@@ -423,8 +423,8 @@ We will use the `ngModelOptions` directive to handle the throttle:
 
 *client/components/todos-item/todos-item.ng.html*
 ```html
-    <input type="text" placeholder="Task name" ng-model="listItem.text" ng-minlength="5"
-               ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 300, 'blur': 0 } }">
+<input type="text" placeholder="Task name" ng-model="listItem.text" ng-minlength="5"
+   ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 300, 'blur': 0 } }">
 ```
 
 We told angular to update the model only when the user is typing (`default` event) and to throttle the model updates to 300ms.
@@ -436,15 +436,15 @@ First we need to add the events to the title `input`:
 
 *client/components/todos-item/todos-item.ng.html*
 ```html
-    <input type="text" placeholder="Task name" ng-model="listItem.text" ng-minlength="5"
-               ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 300, 'blur': 0 } }" ng-focus="listItem.editing = true" ng-blur="listItem.editing = false">
+<input type="text" placeholder="Task name" ng-model="listItem.text" ng-minlength="5"
+  ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 300, 'blur': 0 } }" ng-focus="listItem.editing = true" ng-blur="listItem.editing = false">
 ```
 
 And update the classes of the div:
 
 *client/components/todos-item/todos-item.ng.html*
 ```html
-    <div ng-class="['list-item', listItem.checked ? 'checked' : '', listItem.editing ? 'editing' : '']">
+<div ng-class="['list-item', listItem.checked ? 'checked' : '', listItem.editing ? 'editing' : '']">
 ```
 
 ##### deleting a task
@@ -453,18 +453,18 @@ First we add the method to the controller:
 
 *client/components/todos-item/todos-item.js*
 ```javascript
-    delete() {
-        Todos.remove(this._id);
-        if (!this.checked)
-            Lists.update(this.listId, {$inc: {incompleteCount: -1}});
-    }
+delete() {
+  Todos.remove(this._id);
+  if (!this.checked)
+    Lists.update(this.listId, {$inc: {incompleteCount: -1}});
+}
 ```
 
 Then attach it to the events (mousedown and click):
 
 *client/components/todos-item/todos-item.ng.html*
 ```html
-    <a class="js-delete-item delete-item" href="#" ng-click="listItem.delete()" ng-mousedown="listItem.delete()"><span class="icon-trash"></span></a>
+<a class="js-delete-item delete-item" href="#" ng-click="listItem.delete()" ng-mousedown="listItem.delete()"><span class="icon-trash"></span></a>
 ```
 
 **Now we've completely converted the blaze component to angular.**
@@ -474,25 +474,25 @@ When the template is destroyed the helpers will still be running. This will caus
 
 *client/components/todos-item/todos-item.js*
 ```javascript
-    constructor($scope, $reactive, data) {
-        this._id = data._id;
-        this.listId = data.listId;
+constructor($scope, $reactive, data) {
+  this._id = data._id;
+  this.listId = data.listId;
 
-        $reactive(this).attach($scope);
+  $reactive(this).attach($scope);
 
-        this.helpers({
-            checked: () => Todos.findOne(data._id).checked,
-            text: () => Todos.findOne(data._id).text
-        });
+  this.helpers({
+    checked: () => Todos.findOne(data._id).checked,
+    text: () => Todos.findOne(data._id).text
+  });
 
-        $scope.$watch("listItem.text", () => {
-            Todos.update(this._id, {$set: {text: this.text}});
-        });
+  $scope.$watch("listItem.text", () => {
+    Todos.update(this._id, {$set: {text: this.text}});
+  });
 
-        $scope.$on('$destroy', () => {
-            this.stop();
-        });
-    }
+  $scope.$on('$destroy', () => {
+    this.stop();
+  });
+}
 ```
 
 Before we told blaze to destroy the scope when the template is destroyed.
@@ -506,20 +506,20 @@ We will use it and replace the code we wrote:
 *client/components/todos-item/todos-item.js*
 ```javascript
 class TodosItem extends ReactiveComponent {
-    constructor($scope, $reactive, data) {
-        super(arguments);
-        this._id = data._id;
-        this.listId = data.listId;
+  constructor($scope, $reactive, data) {
+    super(arguments);
+    this._id = data._id;
+    this.listId = data.listId;
 
-        this.helpers({
-            checked: () => Todos.findOne(data._id).checked,
-            text: () => Todos.findOne(data._id).text
-        });
+    this.helpers({
+      checked: () => Todos.findOne(data._id).checked,
+      text: () => Todos.findOne(data._id).text
+    });
 
-        $scope.$watch("listItem.text", () => {
-            Todos.update(this._id, {$set: {text: this.text}});
-        });
-    }
+    $scope.$watch("listItem.text", () => {
+      Todos.update(this._id, {$set: {text: this.text}});
+    });
+  }
 }
 ```
 
