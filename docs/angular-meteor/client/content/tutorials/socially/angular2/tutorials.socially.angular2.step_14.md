@@ -124,7 +124,7 @@ system to check this pipe on changes too, i.e., in the same way as any other
 component.
 
 It's worth to mention the second parameter. This `args` parameter
-bears a list of configuration arguments we can provide this pipe with,
+bears a list of configurational arguments we can provide this pipe with,
 separated by comma. We are going to pass only a RSVP response, hence, are taking the first
 value in the list.
 
@@ -150,15 +150,15 @@ the party's statistics on the first page with the parties list should duly updat
 Here is one important thing that we missed. Besides the party invitation
 statistics, each user would like to know if she has already responded, in case she forgot,
 to a particular invitation. This step's challenge will be to add this status
-information onto the PartyDetails's view, and update it reactively.
+information onto the PartyDetails's view and make it update reactively.
 
 > Hint: In order to make it reactive, you'll need to add one more handler into
-> the party `autorun`, like `getUsers` in the this step above.
+> the party `autorun`, like the `getUsers` method in the this step above.
 
 # Summary
 
 We've just finished the invitation feature in this step, having added bunch of new stuff.
-Socially looks now much mature with that feature loaded on. We can give themselves
+Socially looks now much more mature with that feature on board. We can give themselves
 a big thumbs-up for that!
 
 Though, some places in the app can certantly be improved. For example,
