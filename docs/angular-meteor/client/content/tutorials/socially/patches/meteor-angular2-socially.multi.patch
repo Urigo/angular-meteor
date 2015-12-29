@@ -2750,7 +2750,7 @@ index 61fda60..58168fc 100644
 2.5.4 (Apple Git-61)
 
 
-From 7eef154da77d18c9539ad7422a894273c684bb25 Mon Sep 17 00:00:00 2001
+From 431e31350749c30012372ff13766bafc9ef4f081 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 13 Nov 2015 19:36:06 +0300
 Subject: [PATCH 79/80] Step 9.11: add search inputs
@@ -2766,7 +2766,7 @@ index 21c7ea8..e420ac9 100644
 @@ -1,5 +1,7 @@
  <div>
 -  <parties-form></parties-form>
-+  <parties-form style="display: inline-block"></parties-form>
++  <parties-form style="float: left"></parties-form>
 +  <input type="text" #searchtext placeholder="Search by Location">
 +  <button type="button" (click)="search(searchtext.value)">Search</button>
    <accounts-ui></accounts-ui>
@@ -4274,3 +4274,260 @@ index 827521b..e4fd65a 100644
 -- 
 2.5.4 (Apple Git-61)
 
+
+From 12939158bbfd08a1a469e0625922414a4157389a Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Mon, 28 Dec 2015 17:42:26 +0700
+Subject: [PATCH 128/133] Step 15.1: inject Meteor user and add isOwner method
+
+---
+ client/parties-list/parties-list.ts | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+
+diff --git a/client/parties-list/parties-list.ts b/client/parties-list/parties-list.ts
+index e4fd65a..d02bbad 100644
+--- a/client/parties-list/parties-list.ts
++++ b/client/parties-list/parties-list.ts
+@@ -1,6 +1,7 @@
+ /// &lt;reference path="../../typings/angular2-meteor.d.ts" />
+ /// &lt;reference path="../../typings/meteor-accounts-ui.d.ts" />
+ /// &lt;reference path="../../typings/ng2-pagination.d.ts" />
++/// &lt;reference path="../../typings/meteor-accounts.d.ts" />
+ 
+ import {Component, View} from 'angular2/core';
+ 
+@@ -14,6 +15,8 @@ import {RouterLink} from 'angular2/router';
+ 
+ import {AccountsUI} from 'meteor-accounts-ui';
+ 
++import {InjectUser} from 'meteor-accounts';
++
+ import {MeteorComponent} from 'angular2-meteor';
+ 
+ import {PaginationService, PaginatePipe, PaginationControlsCpm} from 'ng2-pagination';
+@@ -29,6 +32,7 @@ import {RsvpPipe} from 'client/lib/pipes';
+     directives: [NgFor, PartiesForm, RouterLink, AccountsUI, PaginationControlsCpm],
+     pipes: [PaginatePipe, RsvpPipe]
+ })
++@InjectUser()
+ export class PartiesList extends MeteorComponent {
+     parties: Mongo.Cursor&lt;Party>;
+     pageSize: number = 10;
+@@ -36,6 +40,7 @@ export class PartiesList extends MeteorComponent {
+     nameOrder: ReactiveVar<number> = new ReactiveVar<number>(1);
+     partiesSize: number = 0;
+     location: ReactiveVar<string> = new ReactiveVar<string>(null);
++    user: Meteor.User;
+ 
+     constructor() {
+         super();
+@@ -71,4 +76,12 @@ export class PartiesList extends MeteorComponent {
+     changeSortOrder(nameOrder) {
+         this.nameOrder.set(parseInt(nameOrder));
+     }
++
++    isOwner(party) {
++        if (this.user) {
++            return this.user._id === party.owner;
++        }
++
++        return false;
++    }
+ }
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 64165ac151c3e3542b993921d759cedcfa2cf639 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Mon, 28 Dec 2015 17:46:08 +0700
+Subject: [PATCH 129/133] Step 15.2: use the hidden attribute in the
+ PartiesList template
+
+---
+ client/parties-list/parties-list.html | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/client/parties-list/parties-list.html b/client/parties-list/parties-list.html
+index bf63448..f87d7d0 100644
+--- a/client/parties-list/parties-list.html
++++ b/client/parties-list/parties-list.html
+@@ -1,5 +1,5 @@
+ <div>
+-  <parties-form style="float: left"></parties-form>
++  <parties-form [hidden]="!user" style="float: left"></parties-form>
+   <input type="text" #searchtext placeholder="Search by Location">
+   <button type="button" (click)="search(searchtext.value)">Search</button>
+   <accounts-ui></accounts-ui>
+@@ -15,7 +15,7 @@
+       <a [routerLink]="['/PartyDetails', {partyId: party._id}]">{{party.name}}</a>
+       <p>{{party.description}}</p>
+       <p>{{party.location}}</p>
+-      <button (click)="removeParty(party)">X</button>
++      <button [hidden]="!isOwner(party)" (click)="removeParty(party)">X</button>
+       <div>
+         Who is coming:
+         Yes - {{party | rsvp:'yes'}}
+-- 
+2.5.4 (Apple Git-61)
+
+
+From ce064a6484959dc5c0a53d805e1eda67e46dabf5 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Mon, 28 Dec 2015 18:48:33 +0700
+Subject: [PATCH 130/133] Step 15.3: add isOwner property into the PartyDetails
+
+---
+ client/party-details/party-details.ts | 12 +++++++++++-
+ 1 file changed, 11 insertions(+), 1 deletion(-)
+
+diff --git a/client/party-details/party-details.ts b/client/party-details/party-details.ts
+index 843405d..037508d 100644
+--- a/client/party-details/party-details.ts
++++ b/client/party-details/party-details.ts
+@@ -11,7 +11,7 @@ import {Parties} from 'collections/parties';
+ 
+ import {RouterLink} from 'angular2/router';
+ 
+-import {RequireUser} from 'meteor-accounts';
++import {RequireUser, InjectUser} from 'meteor-accounts';
+ 
+ import {MeteorComponent} from 'angular2-meteor';
+ 
+@@ -26,9 +26,11 @@ import {DisplayName} from 'client/lib/pipes';
+     directives: [RouterLink, FORM_DIRECTIVES, NgIf]
+ })
+ @RequireUser()
++@InjectUser()
+ export class PartyDetails extends MeteorComponent {
+     party: Party;
+     users: Mongo.Cursor<Object>;
++    user: Meteor.User;
+ 
+     constructor(params: RouteParams) {
+         super();
+@@ -91,4 +93,12 @@ export class PartyDetails extends MeteorComponent {
+         }
+       });
+     }
++
++    get isOwner() {
++        if (this.party && this.user) {
++            return this.user._id === this.party.owner;
++        }
++
++        return false;
++    }
+ }
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 832ad275b21e2cd1d7100222a73009c776b6f0e2 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Mon, 28 Dec 2015 18:49:13 +0700
+Subject: [PATCH 131/133] Step 15.4: add disable attribute bindings
+
+---
+ client/party-details/party-details.html | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/client/party-details/party-details.html b/client/party-details/party-details.html
+index 971a2d7..95e6e57 100644
+--- a/client/party-details/party-details.html
++++ b/client/party-details/party-details.html
+@@ -1,14 +1,14 @@
+ <form (submit)="saveParty(party)" *ngIf="party">
+   <label>Name</label>
+-  <input type="text" [(ngModel)]="party.name">
++  <input [disabled]="!isOwner" type="text" [(ngModel)]="party.name">
+ 
+   <label>Description</label>
+-  <input type="text" [(ngModel)]="party.description">
++  <input [disabled]="!isOwner" type="text" [(ngModel)]="party.description">
+ 
+   <label>Location</label>
+-  <input type="text" [(ngModel)]="party.location">
++  <input [disabled]="!isOwner" type="text" [(ngModel)]="party.location">
+ 
+-  <button type="submit">Save</button>
++  <button [disabled]="!isOwner" type="submit">Save</button>
+   <button [routerLink]="['/PartiesList']">Cancel</button>
+ </form>
+ 
+-- 
+2.5.4 (Apple Git-61)
+
+
+From c4278b7fdb2488b8589ecaba5247e8782e5f2ec8 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Mon, 28 Dec 2015 19:40:08 +0700
+Subject: [PATCH 132/133] Step 15.5: add isPublic and isInvited properties
+
+---
+ client/party-details/party-details.ts | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+
+diff --git a/client/party-details/party-details.ts b/client/party-details/party-details.ts
+index 78d6870..1dfc1bd 100644
+--- a/client/party-details/party-details.ts
++++ b/client/party-details/party-details.ts
+@@ -101,4 +101,21 @@ export class PartyDetails extends MeteorComponent {
+ 
+         return false;
+     }
++
++    get isPublic() {
++        if (this.party) {
++            return this.party.public;
++        }
++
++        return false;
++    }
++
++    get isInvited() {
++        if (this.party && this.user) {
++            let invited = this.party.invited || [];
++            return invited.indexOf(this.user._id) !== -1;
++        }
++
++        return false;
++    }
+ }
+-- 
+2.5.4 (Apple Git-61)
+
+
+From d3890889a71c0542773eedfc75cc905201c187c2 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Mon, 28 Dec 2015 19:40:32 +0700
+Subject: [PATCH 133/133] Step 15.6: make use of the properties in the template
+
+---
+ client/party-details/party-details.html | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/client/party-details/party-details.html b/client/party-details/party-details.html
+index 95e6e57..1301c19 100644
+--- a/client/party-details/party-details.html
++++ b/client/party-details/party-details.html
+@@ -12,7 +12,7 @@
+   <button [routerLink]="['/PartiesList']">Cancel</button>
+ </form>
+ 
+-<ul>
++<ul *ngIf="isOwner || isPublic">
+   Users to invite:
+   <li *ngFor="#user of users">
+     <div>{{ user | displayName }}</div>
+@@ -20,7 +20,7 @@
+   </li>
+ </ul>
+ 
+-<div>
++<div *ngIf="isInvited">
+   <h2>Reply to the invitation</h2>
+   <input type="button" value="I'm going!" (click)="reply('yes')">
+   <input type="button" value="Maybe" (click)="reply('maybe')">
+-- 
+2.5.4 (Apple Git-61)
