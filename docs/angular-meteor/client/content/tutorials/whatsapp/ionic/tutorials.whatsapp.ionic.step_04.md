@@ -116,57 +116,69 @@ Now that we have a login process, we can stop unlogged users from going into the
 
 {{tutorialImage 'ionic' '7.png' 500}}
 
-`angular-meteor` provides us with the [requireUser](http://angular-meteor.com/api/auth) function that we can use in the `resolve` of ui-router to make sure unlogged user can’t go inside that route:
+`angular-meteor-auth` provides us with the [$auth.requireUser](http://www.angular-meteor.com/api/auth) function that we can use in the `resolve` of ui-router to make sure unlogged user can’t go inside that route:
+
+Update the `angular-meteor-auth` bundle dependency in the `index.html` file:
 
 {{> DiffBox tutorialName="ionic-tutorial" step="4.24"}}
+
+and add the `angular-meteor.auth` dependency to our Angular app:
+
+{{> DiffBox tutorialName="ionic-tutorial" step="4.25"}}
+
+Resolve the user at the routes:
+
+{{> DiffBox tutorialName="ionic-tutorial" step="4.26"}}
 
 And let’s handle those unlogged users and redirect them to the `login` state.
 
 Create an `auth.js` file and place this code inside:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="4.25"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="4.27"}}
 
 And don’t forget to update `index.html`:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="4.26"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="4.28"}}
 
 But of course that client side authentication is not enough and we need to protect our server as well.
 
 Let’s add security checks inside our server methods:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="4.27"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="4.29"}}
 
 Also, now that we know the logged-in user we can distinguish the message he sent and the messages others has sent.
 
+We will use `$auth.currentUser` an `angular-meteor-auth` extension to the `$rootScope`.
+
 Let’s update the chat-details view to handle that:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="4.30"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="4.32"}}
 
 and add that information to our messages in the “newMessage” method:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="4.28"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="4.30"}}
 
 and the Optimistic UI one as well:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="4.29"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="4.31"}}
 
 One last things for this chapter - the ability to Logout.
 
 Let’s add a settings view inside a new file called `tab-settings.html` inside the `www/templates/` folder:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="4.31"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="4.33"}}
 
 Add a state for it:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="4.32"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="4.34"}}
 
-A controller that simple call the `$meteor.logout` function by `angular-meteor`:
+A controller that simple call the `Meteor.logout`:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="4.33"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="4.35"}}
 
 Don’t forget to update `index.html`:
 
-{{> DiffBox tutorialName="ionic-tutorial" step="4.34"}}
+{{> DiffBox tutorialName="ionic-tutorial" step="4.36"}}
 
 {{tutorialImage 'ionic' '8.png' 500}}
 
