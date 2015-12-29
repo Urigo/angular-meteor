@@ -13,14 +13,16 @@
   src: angular-meteor-auth/modules/auth.js
 </a>
 
-`$auth` service is a part of `angular` package (also included in `angular-with-blaze` package), and it located inside `angular-meteor.auth` AngularJS module.
+`$auth` service is a part of `angular-meteor-auth` package, and it located inside `angular-meteor.auth` AngularJS module.
 
 This service provides the functionality for authentication for your app.
 
 `$auth` wraps Meteor's API for ease of use with AngularJS applications, and also provides the ability to access Meteor's Accounts package from the UI.
 
-In order to use this service, you will need to add it's module as a dependency to your AngularJS app:
+In order to use this service, you will need to add the package to your project and add it's module as a dependency to your AngularJS app:
 
+    meteor add angular-meteor-auth
+    
     angular.module('myApp', [
        'angular-meteor',
        'angular-meteor.auth'
