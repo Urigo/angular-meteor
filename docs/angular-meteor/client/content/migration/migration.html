@@ -1,0 +1,21 @@
+<template name="migration">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 left-menu">
+                <h2>Blaze to</h2>
+                <a href="#" class="prev-button btn btn-default tutorials-nav-button {{currentFramework "angular1"}}">Angular 1</a>
+                <a href="#" class="prev-button btn btn-default tutorials-nav-button {{currentFramework "angular2"}}">Angular 2</a>
+                <ul class="nav">
+                    {{#each pages}}
+                      <li><a href="{{path}}">{{title}}</a></li>
+                    {{/each}}
+                </ul>
+            </div>
+            <div class="col-md-9 main-content">
+                <div class="body">
+                  {{> Template.dynamic template=contentTemplate}}
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
