@@ -61,7 +61,7 @@ angular.module('angular-meteor.auth', ['angular-meteor']);                      
 //                                                                                           //
 ///////////////////////////////////////////////////////////////////////////////////////////////
                                                                                              //
-angular.module('angular-meteor.auth').service('$auth', function ($q, $rootScope, $timeout) {
+angular.module('angular-meteor.auth').service('$auth', ['$q', '$rootScope', '$timeout', function ($q, $rootScope, $timeout) {
   var AngularMeteorAuthentication = (function () {                                           //
     function AngularMeteorAuthentication() {                                                 // 5
       babelHelpers.classCallCheck(this, AngularMeteorAuthentication);                        //
@@ -152,7 +152,7 @@ angular.module('angular-meteor.auth').service('$auth', function ($q, $rootScope,
   var instance = new AngularMeteorAuthentication();                                          // 74
                                                                                              //
   angular.extend(this, Object.getPrototypeOf(instance));                                     // 76
-}).run(function ($auth, $rootScope) {                                                        //
+}]).run(['$auth', '$rootScope', function ($auth, $rootScope) {                                                        //
   $auth._autorun(function () {                                                               // 79
     if (!Meteor.user) return;                                                                // 80
                                                                                              //
@@ -162,7 +162,7 @@ angular.module('angular-meteor.auth').service('$auth', function ($q, $rootScope,
       loggingIn: Meteor.loggingIn()                                                          // 85
     };                                                                                       //
   });                                                                                        //
-});                                                                                          //
+}]);                                                                                          //
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
 }).call(this);
