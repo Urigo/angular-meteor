@@ -55,8 +55,6 @@ Let’s do that inside the NewChat controller to subscribe to the users we can a
 
 {{> DiffBox tutorialName="ionic-tutorial" step="6.6"}}
 
-Notice that the `[$meteorSubscribe](http://angular-meteor.com/api/subscribe)` function resolve a promise when the data arrives so you know when you can use it.
-
 You can download a ZIP file with the project at this point [here](https://github.com/idanwe/ionic-cli-meteor-whatsapp-tutorial/archive/dbb4b9cc0e3e98ef8e431f9fcc2c0c78d499fc8e.zip).
 
 {{/template}}
