@@ -188,10 +188,12 @@ Router.map(function () {
 
   redirect('/api', '/api/' + DEFAULT_API + '/helpers');
 
-  self.route('migration', {
-    path: '/migration',
-    template: 'migration'
-  });
+  // -------------------------------------------------------------------------
+  // Migration routes
+  //
+
+  redirect('/migration', '/migration/angular1/intro');
+
   createSubRoutes(MIGRATION);
 
   // -------------------------------------------------------------------------
