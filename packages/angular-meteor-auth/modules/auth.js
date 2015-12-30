@@ -1,6 +1,6 @@
 angular
   .module('angular-meteor.auth')
-  .service('$auth', function ($q, $rootScope, $timeout) {
+  .service('$auth',['$q', '$rootScope', '$timeout', function ($q, $rootScope, $timeout) {
     class AngularMeteorAuthentication {
       constructor() {
         this.accountsPackage = Package['accounts-base'];
@@ -74,8 +74,8 @@ angular
     let instance = new AngularMeteorAuthentication();
 
     angular.extend(this, Object.getPrototypeOf(instance));
-  })
-.run(($auth, $rootScope) => {
+  }])
+.run(['$auth', '$rootScope', function($auth, $rootScope) {
   $auth._autorun(() => {
     if (!Meteor.user) return;
 
@@ -85,4 +85,4 @@ angular
       loggingIn: Meteor.loggingIn()
     };
   });
-});
+}]);
