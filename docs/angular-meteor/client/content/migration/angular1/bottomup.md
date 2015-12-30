@@ -7,18 +7,18 @@ This migration approach lets you migrate full component (both logic and view) at
 The first step that we need to do is add the required packages for our project.
 
 ```bash
-meteor add pbastowski:angular-babel
-meteor add pbastowski:angular2-now
-meteor add angular-with-blaze
-meteor add urigo:angular-blaze-template
-meteor add angularui:angular-ui-router
-meteor add dotansimha:angular-reactive-component
+meteor add pbastowski:angular-babel@1.0.7
+meteor add pbastowski:angular2-now@1.0.2
+meteor add angular-with-blaze@1.3.2
+meteor add urigo:angular-blaze-template@0.3.0
+meteor add angularui:angular-ui-router@0.2.15
+meteor add dotansimha:angular-reactive-component@0.0.4
 ```
 
 or in one command
 
 ```bash
-meteor add pbastowski:angular-babel pbastowski:angular2-now angular-with-blaze urigo:angular-blaze-template angularui:angular-ui-router dotansimha:angular-reactive-component
+meteor add pbastowski:angular-babel@1.0.7 pbastowski:angular2-now@1.0.2 angular-with-blaze@1.3.2 urigo:angular-blaze-template@0.3.0 angularui:angular-ui-router@0.2.15 dotansimha:angular-reactive-component@0.0.4
 ```
 
 > Please make sure that the installed angular package is newer than 1.3.1. If it's not, change the version in `.meteor/versions` file.
@@ -99,14 +99,10 @@ var $compile = window.ngInjector.get('$compile');
 We use the injector of our module that we stored in window to inject the required dependencies for our component instantiation.
 
 ```javascript
-this.scope = $rootScope.$new(true);
+this.scope = $rootScope.$new();
 ```
 
-We create a new scope which is isolated. **Why isolated?** One of our next steps will be to create the `list` component.
-In this step, we will use the `ngRepeat` directive to create each todos item. Foreach item, `ngRepeat` will create an isolated scope.
-So we mimic the future behavior. Though it's not really different now, it will help us avoiding any problems later.
-
-> My recommendation is to use isolated scope if your template is surrounded by `each` statement.
+We create a new scope for the component.
 
 ```javascript
 var controller = window.ngInjector.instantiate(window.TodosItem, {data: this.data, $scope: this.scope});
@@ -327,7 +323,7 @@ class TodosItem extends ReactiveComponent {
 
 Now we can mark `todos-item` as finished and move on to the next component.
 
-> You can check out the [commits comparison](https://github.com/ozsay/blaze2angular/compare/128b0af7795b296ec8f554e8b5dac4830b4fc725...82e8af9bbebc4ebfa588fe852993853f8c06a249) for the full change list.
+> You can check out the [commits comparison](https://github.com/ozsay/blaze2angular/compare/f4b898519a4d5783d86439afb0e191e7a8fc03a3...628923d5be3b321d69aafa9b989630a3bdf2f0ff) for the full change list.
 
 We will use the same principles to convert the `list` component.
 Please follow [this commits comparison](https://github.com/) to check out the change list.

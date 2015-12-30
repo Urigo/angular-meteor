@@ -1,7 +1,7 @@
 From b1deae40e129c070dbb74aa033e7c4aebeface79 Mon Sep 17 00:00:00 2001
 From: Oz <ozsayag@gmail.com>
 Date: Mon, 28 Dec 2015 11:04:27 +0200
-Subject: [PATCH 01/22] create the todos example meteor app
+Subject: [PATCH 01/24] create the todos example meteor app
 
 ---
  .meteor/.finished-upgraders                        |  20 +
@@ -8357,7 +8357,7 @@ index 0000000..eaf699c
 From 64d3119f020d935c92a7bc63cc7a579df644efb9 Mon Sep 17 00:00:00 2001
 From: Oz <ozsayag@gmail.com>
 Date: Mon, 28 Dec 2015 11:26:39 +0200
-Subject: [PATCH 02/22] Add required packages to project
+Subject: [PATCH 02/24] Add required packages to project
 
 ---
  .meteor/packages |  7 +++++++
@@ -8449,7 +8449,7 @@ index 04d84d1..0fc3603 100644
 From 128b0af7795b296ec8f554e8b5dac4830b4fc725 Mon Sep 17 00:00:00 2001
 From: Oz <ozsayag@gmail.com>
 Date: Mon, 28 Dec 2015 11:49:33 +0200
-Subject: [PATCH 03/22] Step 0.1: Bootstrap the angular application
+Subject: [PATCH 03/24] Step 0.1: Bootstrap the angular application
 
 ---
  client/lib/app.js | 11 +++++++++++
@@ -8480,7 +8480,7 @@ index 0000000..e7f3a3b
 From f4b898519a4d5783d86439afb0e191e7a8fc03a3 Mon Sep 17 00:00:00 2001
 From: Oz <ozsayag@gmail.com>
 Date: Mon, 28 Dec 2015 11:52:04 +0200
-Subject: [PATCH 04/22] Step 1.1: Create the todos-item component
+Subject: [PATCH 04/24] Step 1.1: Create the todos-item component
 
 ---
  client/components/todos-item/todos-item.js      | 12 ++++++++++++
@@ -8521,7 +8521,7 @@ index 0000000..7c89b54
 From d8366ac3dcafeaf34ce4ecfb3cb105b3b660a2e4 Mon Sep 17 00:00:00 2001
 From: Oz <ozsayag@gmail.com>
 Date: Mon, 28 Dec 2015 11:54:54 +0200
-Subject: [PATCH 05/22] Step 1.2: Set a placeholder of the component
+Subject: [PATCH 05/24] Step 1.2: Set a placeholder of the component
 
 ---
  client/templates/todos-item.html | 12 ++----------
@@ -8550,17 +8550,17 @@ index dd52546..939f0e8 100644
 2.5.4 (Apple Git-61)
 
 
-From 7752d0d24909acbf2ec55643a416b6c7896df1c1 Mon Sep 17 00:00:00 2001
+From 066b139ac3dc6890cb40064c96ab006db262a937 Mon Sep 17 00:00:00 2001
 From: Oz <ozsayag@gmail.com>
 Date: Mon, 28 Dec 2015 11:56:12 +0200
-Subject: [PATCH 06/22] Step 1.3: Attach the component to list blaze template
+Subject: [PATCH 06/24] Step 1.3: Attach the component to list blaze template
 
 ---
  client/templates/todos-item.js | 65 +++++++++++-------------------------------
  1 file changed, 17 insertions(+), 48 deletions(-)
 
 diff --git a/client/templates/todos-item.js b/client/templates/todos-item.js
-index 23b9db9..ea81982 100644
+index 23b9db9..a01c3ac 100644
 --- a/client/templates/todos-item.js
 +++ b/client/templates/todos-item.js
 @@ -1,50 +1,19 @@
@@ -8578,7 +8578,7 @@ index 23b9db9..ea81982 100644
 -    return Session.equals(EDITING_KEY, this._id) && 'editing';
 -  }
 -});
-+  this.scope = $rootScope.$new(true);
++  this.scope = $rootScope.$new();
 +
 +  var controller = window.ngInjector.instantiate(window.TodosItem, {data: this.data, $scope: this.scope});
 +
@@ -8636,17 +8636,17 @@ index 23b9db9..ea81982 100644
 2.5.4 (Apple Git-61)
 
 
-From 42c23c856c70181cee1f90f5d4947dd4c07441be Mon Sep 17 00:00:00 2001
+From 8d7d6bb7caca256c5481ffec9f84b0949afe58dd Mon Sep 17 00:00:00 2001
 From: Oz <ozsayag@gmail.com>
 Date: Mon, 28 Dec 2015 11:58:05 +0200
-Subject: [PATCH 07/22] Step 1.4: Destruct the component
+Subject: [PATCH 07/24] Step 1.4: Destruct the component
 
 ---
  client/templates/todos-item.js | 5 +++++
  1 file changed, 5 insertions(+)
 
 diff --git a/client/templates/todos-item.js b/client/templates/todos-item.js
-index ea81982..72730a1 100644
+index a01c3ac..f4afd43 100644
 --- a/client/templates/todos-item.js
 +++ b/client/templates/todos-item.js
 @@ -17,3 +17,8 @@ Template.todosItem.onRendered(function() {
@@ -8662,10 +8662,10 @@ index ea81982..72730a1 100644
 2.5.4 (Apple Git-61)
 
 
-From e566779fb7233a2ff54a452704d698c810fabb36 Mon Sep 17 00:00:00 2001
+From 1f6c2fa2bcc77c57d1ad284aa36a226ac57b62d9 Mon Sep 17 00:00:00 2001
 From: Oz <ozsayag@gmail.com>
 Date: Mon, 28 Dec 2015 11:59:24 +0200
-Subject: [PATCH 08/22] Step 1.5: Extract fields to controller
+Subject: [PATCH 08/24] Step 1.5: Extract fields to controller
 
 ---
  client/components/todos-item/todos-item.js | 7 ++++++-
@@ -8693,10 +8693,10 @@ index 919e441..d2395be 100644
 2.5.4 (Apple Git-61)
 
 
-From 35c9f689e5fb704810e5d5c925e32ee83e352527 Mon Sep 17 00:00:00 2001
+From 28aea9b3832b07ed242774e5d26b7d08cfaf7f8d Mon Sep 17 00:00:00 2001
 From: Oz <ozsayag@gmail.com>
 Date: Mon, 28 Dec 2015 12:01:13 +0200
-Subject: [PATCH 09/22] Step 1.6: Store reactive data as helpers
+Subject: [PATCH 09/24] Step 1.6: Store reactive data as helpers
 
 ---
  client/components/todos-item/todos-item.js | 7 +++++--
@@ -8724,10 +8724,10 @@ index d2395be..3eb3de4 100644
 2.5.4 (Apple Git-61)
 
 
-From 5c814013b10999bd3c6b4cdbe3999298c08b8314 Mon Sep 17 00:00:00 2001
+From f79ae26e60eb3c928a37a5e88e95f11511173015 Mon Sep 17 00:00:00 2001
 From: Oz <ozsayag@gmail.com>
 Date: Mon, 28 Dec 2015 12:02:18 +0200
-Subject: [PATCH 10/22] Step 1.7: Attach the reactive context to the scope
+Subject: [PATCH 10/24] Step 1.7: Attach the reactive context to the scope
 
 ---
  client/components/todos-item/todos-item.js | 2 ++
@@ -8750,10 +8750,10 @@ index 3eb3de4..233a99a 100644
 2.5.4 (Apple Git-61)
 
 
-From e461eef1014dc70c7f5350e9aec2de6b842c5d5a Mon Sep 17 00:00:00 2001
+From a3beec16228d4c83bed196096f98c6b20b6ec08e Mon Sep 17 00:00:00 2001
 From: Oz <ozsayag@gmail.com>
 Date: Mon, 28 Dec 2015 12:04:02 +0200
-Subject: [PATCH 11/22] Step 1.8: Add the basic component template layout
+Subject: [PATCH 11/24] Step 1.8: Add the basic component template layout
 
 ---
  client/components/todos-item/todos-item.ng.html | 10 +++++++++-
@@ -8778,10 +8778,10 @@ index 7c89b54..fd3b547 100644
 2.5.4 (Apple Git-61)
 
 
-From cc8cd7b1265767b298a0c423533c9d62213fb9a9 Mon Sep 17 00:00:00 2001
+From 323612991b773ab78800a9572c591de32907ebdc Mon Sep 17 00:00:00 2001
 From: Oz <ozsayag@gmail.com>
 Date: Mon, 28 Dec 2015 12:12:32 +0200
-Subject: [PATCH 12/22] Step 1.9: Link the finish state to the model
+Subject: [PATCH 12/24] Step 1.9: Link the finish state to the model
 
 ---
  client/components/todos-item/todos-item.ng.html | 2 +-
@@ -8803,10 +8803,10 @@ index fd3b547..b87e59d 100644
 2.5.4 (Apple Git-61)
 
 
-From 8bb1317add2797c1ee1b97a996febad1ee1656cf Mon Sep 17 00:00:00 2001
+From 7279bd35c5f192c160b8f70d9f0fac90b0c5b82a Mon Sep 17 00:00:00 2001
 From: Oz <ozsayag@gmail.com>
 Date: Mon, 28 Dec 2015 12:15:41 +0200
-Subject: [PATCH 13/22] Step 1.10: Update the collections
+Subject: [PATCH 13/24] Step 1.10: Update the collections
 
 ---
  client/components/todos-item/todos-item.js      | 5 +++++
@@ -8845,10 +8845,10 @@ index b87e59d..27b30cc 100644
 2.5.4 (Apple Git-61)
 
 
-From 73d9d915bdb94b7e63fecf985f1556cab78e4448 Mon Sep 17 00:00:00 2001
+From 040e39b4664efdff2cd453bd1647c8b9ca1a63ab Mon Sep 17 00:00:00 2001
 From: Oz <ozsayag@gmail.com>
 Date: Mon, 28 Dec 2015 12:17:26 +0200
-Subject: [PATCH 14/22] Step 1.11: Attach the finish state to the item class
+Subject: [PATCH 14/24] Step 1.11: Attach the finish state to the item class
 
 ---
  client/components/todos-item/todos-item.ng.html | 2 +-
@@ -8868,10 +8868,10 @@ index 27b30cc..59152f8 100644
 2.5.4 (Apple Git-61)
 
 
-From b1b899c8ac793cd87801679c8ee7f36604566c91 Mon Sep 17 00:00:00 2001
+From 18a00c1bbf31b658899ac61dcc283fb607496797 Mon Sep 17 00:00:00 2001
 From: Oz <ozsayag@gmail.com>
 Date: Mon, 28 Dec 2015 12:19:38 +0200
-Subject: [PATCH 15/22] Step 1.12: Link the todo title to the model
+Subject: [PATCH 15/24] Step 1.12: Link the todo title to the model
 
 ---
  client/components/todos-item/todos-item.js      | 4 ++++
@@ -8909,10 +8909,10 @@ index 59152f8..042fc34 100644
 2.5.4 (Apple Git-61)
 
 
-From 1a33cebf88bae6adac6e287b48dc1dba68eaba06 Mon Sep 17 00:00:00 2001
+From 2927f805b386476dcccd25b6ad0b37e270dd0dba Mon Sep 17 00:00:00 2001
 From: Oz <ozsayag@gmail.com>
 Date: Mon, 28 Dec 2015 12:22:52 +0200
-Subject: [PATCH 16/22] Step 1.13: Better way to link the title changes
+Subject: [PATCH 16/24] Step 1.13: Better way to link the title changes
 
 ---
  client/components/todos-item/todos-item.js      | 8 ++++----
@@ -8960,10 +8960,10 @@ index 042fc34..ca8cc42 100644
 2.5.4 (Apple Git-61)
 
 
-From 42ae9d2937bc9ad93e44efde86922929b84625c1 Mon Sep 17 00:00:00 2001
+From 629d06ce94958948e679fba4059002f981831a04 Mon Sep 17 00:00:00 2001
 From: Oz <ozsayag@gmail.com>
 Date: Mon, 28 Dec 2015 12:31:06 +0200
-Subject: [PATCH 17/22] Step 1.14: Add validation to the title
+Subject: [PATCH 17/24] Step 1.14: Add validation to the title
 
 ---
  client/components/todos-item/todos-item.js      | 4 +++-
@@ -9001,10 +9001,10 @@ index ca8cc42..b1334c4 100644
 2.5.4 (Apple Git-61)
 
 
-From 4f7c3ccffb4e4a93bbf1f5efee75ecd3eecfa073 Mon Sep 17 00:00:00 2001
+From 8744dc8945622c758f03d70872d3277445f9e0f0 Mon Sep 17 00:00:00 2001
 From: Oz <ozsayag@gmail.com>
 Date: Mon, 28 Dec 2015 12:32:47 +0200
-Subject: [PATCH 18/22] Step 1.15: Add throttle to the title model changes
+Subject: [PATCH 18/24] Step 1.15: Add throttle to the title model changes
 
 ---
  client/components/todos-item/todos-item.ng.html | 3 ++-
@@ -9027,10 +9027,10 @@ index b1334c4..eed04b4 100644
 2.5.4 (Apple Git-61)
 
 
-From fc4c78be465900e58f94faec8f1159edd829a7db Mon Sep 17 00:00:00 2001
+From 61522fd1d729e125c5210deed3ee5a79a5586d77 Mon Sep 17 00:00:00 2001
 From: Oz <ozsayag@gmail.com>
 Date: Mon, 28 Dec 2015 12:34:41 +0200
-Subject: [PATCH 19/22] Step 1.16: Attach the editing state
+Subject: [PATCH 19/24] Step 1.16: Attach the editing state
 
 ---
  client/components/todos-item/todos-item.ng.html | 5 +++--
@@ -9058,10 +9058,10 @@ index eed04b4..993d79b 100644
 2.5.4 (Apple Git-61)
 
 
-From 9c4b175ebc62541903ee0ecd9214f70d02544d64 Mon Sep 17 00:00:00 2001
+From 306ed40210f97d746d07787437d8ba58e49fb08c Mon Sep 17 00:00:00 2001
 From: Oz <ozsayag@gmail.com>
 Date: Mon, 28 Dec 2015 12:35:26 +0200
-Subject: [PATCH 20/22] Step 1.17: Add the delete task method
+Subject: [PATCH 20/24] Step 1.17: Add the delete task method
 
 ---
  client/components/todos-item/todos-item.js | 6 ++++++
@@ -9088,10 +9088,10 @@ index d6121fd..b72d526 100644
 2.5.4 (Apple Git-61)
 
 
-From ddc02c0c198cbefa252cd0ed123b185d525c2c63 Mon Sep 17 00:00:00 2001
+From 6fde0494ed1264d4d180067d6dffaa4f1e2c0703 Mon Sep 17 00:00:00 2001
 From: Oz <ozsayag@gmail.com>
 Date: Mon, 28 Dec 2015 12:36:44 +0200
-Subject: [PATCH 21/22] Step 1.18: Link the delete method to the events
+Subject: [PATCH 21/24] Step 1.18: Link the delete method to the events
 
 ---
  client/components/todos-item/todos-item.ng.html | 2 +-
@@ -9112,10 +9112,10 @@ index 993d79b..ef305f8 100644
 2.5.4 (Apple Git-61)
 
 
-From 82e8af9bbebc4ebfa588fe852993853f8c06a249 Mon Sep 17 00:00:00 2001
+From 628923d5be3b321d69aafa9b989630a3bdf2f0ff Mon Sep 17 00:00:00 2001
 From: Oz <ozsayag@gmail.com>
 Date: Mon, 28 Dec 2015 12:37:56 +0200
-Subject: [PATCH 22/22] Step 1.19: Stop helpers when the scope is destroyed
+Subject: [PATCH 22/24] Step 1.19: Stop helpers when the scope is destroyed
 
 ---
  client/components/todos-item/todos-item.js | 4 ++++
@@ -9136,6 +9136,366 @@ index b72d526..2529cf7 100644
      }
  
      check() {
+-- 
+2.5.4 (Apple Git-61)
+
+
+From aec937abc2583006cb69f726e7f515e7602ad8e8 Mon Sep 17 00:00:00 2001
+From: Oz <ozsayag@gmail.com>
+Date: Tue, 29 Dec 2015 13:38:55 +0200
+Subject: [PATCH 23/24] Step 2.1: Create the lists-show component and attach it
+ to blaze
+
+---
+ client/components/lists-show/lists-show.js      |  18 +++
+ client/components/lists-show/lists-show.ng.html |   3 +
+ client/templates/lists-show.html                |  74 +----------
+ client/templates/lists-show.js                  | 165 ++----------------------
+ 4 files changed, 36 insertions(+), 224 deletions(-)
+ create mode 100644 client/components/lists-show/lists-show.js
+ create mode 100644 client/components/lists-show/lists-show.ng.html
+
+diff --git a/client/components/lists-show/lists-show.js b/client/components/lists-show/lists-show.js
+new file mode 100644
+index 0000000..abb0fa1
+--- /dev/null
++++ b/client/components/lists-show/lists-show.js
+@@ -0,0 +1,18 @@
++'use strict';
++
++var {Component, View, Inject} = angular2now;
++
++@Component({selector: 'lists-show'})
++@View({templateUrl: 'client/components/lists-show/lists-show.ng.html'})
++@Inject('$scope', '$reactive', 'data')
++class ListsShow {
++    constructor($scope, $reactive, data) {
++        $reactive(this).attach($scope);
++
++        $scope.$on('$destroy', () => {
++            this.stop();
++        });
++    }
++}
++
++window.ListsShow = ListsShow;
+diff --git a/client/components/lists-show/lists-show.ng.html b/client/components/lists-show/lists-show.ng.html
+new file mode 100644
+index 0000000..b80e6e0
+--- /dev/null
++++ b/client/components/lists-show/lists-show.ng.html
+@@ -0,0 +1,3 @@
++<div>
++
++</div>
+diff --git a/client/templates/lists-show.html b/client/templates/lists-show.html
+index e76c2d4..7c58942 100644
+--- a/client/templates/lists-show.html
++++ b/client/templates/lists-show.html
+@@ -1,75 +1,3 @@
+ <template name="listsShow">
+-  <div class="page lists-show">
+-    <nav class="js-title-nav">
+-      {{#if editing}}
+-        <form class="js-edit-form list-edit-form">
+-          <input type="text" name="name" value="{{name}}">
+-          <div class="nav-group right">
+-            <a href="#" class="js-cancel nav-item"><span class="icon-close js-cancel" title="Cancel"></span></a>
+-          </div>
+-        </form>
+-      {{else}}
+-        <div class="nav-group">
+-          <a href="#" class="js-menu nav-item"><span class="icon-list-unordered" title="Show menu"></span></a>
+-        </div>
+-
+-        <h1 class="js-edit-list title-page"><span class="title-wrapper">{{name}}</span> <span class="count-list">{{incompleteCount}}</span></h1>
+-
+-        <div class="nav-group right">
+-          <div class="nav-item options-mobile">
+-            <select class="list-edit">
+-              <option disabled selected>Select an action</option>
+-              {{#if userId}}
+-                <option value="public">Make Public</option>
+-              {{else}}
+-                <option value="private">Make Private</option>
+-              {{/if}}
+-              <option value="delete">Delete</option>
+-            </select>
+-            <span class="icon-cog"></span>
+-          </div>
+-          <div class="options-web">
+-            <a class="js-toggle-list-privacy nav-item">
+-              {{#if userId}}
+-                <span class="icon-lock" title="Make list public"></span>
+-              {{else}}
+-                <span class="icon-unlock" title="Make list private"></span>
+-              {{/if}}
+-            </a>
+-
+-            <a class="js-delete-list nav-item">
+-              <span class="icon-trash" title="Delete list"></span>
+-            </a>
+-          </div>
+-        </div>
+-      {{/if}}
+-
+-      <form class="js-todo-new todo-new input-symbol">
+-        <input type="text" placeholder="Type to add new tasks">
+-        <span class="icon-add js-todo-add"></span>
+-      </form>
+-    </nav>
+-
+-
+-    <div class="content-scrollable list-items">
+-      {{#if todosReady}}
+-        {{#with _id}} {{! Establish new data context with only the '_id'
+-                          field. This way, when the 'incompleteCount' field
+-                          changes, we don't re-render the list contents }}
+-          {{#each todos this}}
+-            {{> todosItem}}
+-          {{else}}
+-            <div class="wrapper-message">
+-              <div class="title-message">No tasks here</div>
+-              <div class="subtitle-message">Add new tasks using the field above</div>
+-            </div>
+-          {{/each}}
+-        {{/with}}
+-      {{else}}
+-          <div class="wrapper-message">
+-            <div class="title-message">Loading tasks...</div>
+-          </div>
+-      {{/if}}
+-    </div>
+-  </div>
++    <removable></removable>
+ </template>
+diff --git a/client/templates/lists-show.js b/client/templates/lists-show.js
+index 2959414..836a180 100644
+--- a/client/templates/lists-show.js
++++ b/client/templates/lists-show.js
+@@ -1,6 +1,3 @@
+-var EDITING_KEY = 'editingList';
+-Session.setDefault(EDITING_KEY, false);
+-
+ // Track if this is the first time the list template is rendered
+ var firstRender = true;
+ var listRenderHold = LaunchScreen.hold();
+@@ -16,160 +13,26 @@ Template.listsShow.onRendered(function() {
+ 
+     firstRender = false;
+   }
++  var $rootScope = window.ngInjector.get('$rootScope');
++  var $templateCache = window.ngInjector.get('$templateCache');
++  var $compile = window.ngInjector.get('$compile');
+ 
+-  this.find('.js-title-nav')._uihooks = {
+-    insertElement: function(node, next) {
+-      $(node)
+-        .hide()
+-        .insertBefore(next)
+-        .fadeIn();
+-    },
+-    removeElement: function(node) {
+-      $(node).fadeOut(function() {
+-        this.remove();
+-      });
+-    }
+-  };
+-});
+-
+-Template.listsShow.helpers({
+-  editing: function() {
+-    return Session.get(EDITING_KEY);
+-  },
+-
+-  todosReady: function() {
+-    return Router.current().todosHandle.ready();
+-  },
++  this.scope = $rootScope.$new(true);
+ 
+-  todos: function(listId) {
+-    return Todos.find({listId: listId}, {sort: {createdAt : -1}});
+-  }
+-});
++  var controller = window.ngInjector.instantiate(window.ListsShow, {data: this.data, $scope: this.scope});
+ 
+-var editList = function(list, template) {
+-  Session.set(EDITING_KEY, true);
++  var template = $templateCache.get(window.ListsShow.templateUrl);
+ 
+-  // force the template to redraw based on the reactive change
+-  Tracker.flush();
+-  template.$('.js-edit-form input[type=text]').focus();
+-};
++  this.scope.listsShow = controller;
+ 
+-var saveList = function(list, template) {
+-  Session.set(EDITING_KEY, false);
+-  Lists.update(list._id, {$set: {name: template.$('[name=name]').val()}});
+-}
+-
+-var deleteList = function(list) {
+-  // ensure the last public list cannot be deleted.
+-  if (! list.userId && Lists.find({userId: {$exists: false}}).count() === 1) {
+-    return alert("Sorry, you cannot delete the final public list!");
+-  }
++  this.elem = $compile(template)(this.scope);
+ 
+-  var message = "Are you sure you want to delete the list " + list.name + "?";
+-  if (confirm(message)) {
+-    // we must remove each item individually from the client
+-    Todos.find({listId: list._id}).forEach(function(todo) {
+-      Todos.remove(todo._id);
+-    });
+-    Lists.remove(list._id);
+-
+-    Router.go('home');
+-    return true;
+-  } else {
+-    return false;
+-  }
+-};
+-
+-var toggleListPrivacy = function(list) {
+-  if (! Meteor.user()) {
+-    return alert("Please sign in or create an account to make private lists.");
+-  }
+-
+-  if (list.userId) {
+-    Lists.update(list._id, {$unset: {userId: true}});
+-  } else {
+-    // ensure the last public list cannot be made private
+-    if (Lists.find({userId: {$exists: false}}).count() === 1) {
+-      return alert("Sorry, you cannot make the final public list private!");
+-    }
+-
+-    Lists.update(list._id, {$set: {userId: Meteor.userId()}});
+-  }
+-};
++  this.scope.$digest();
+ 
+-Template.listsShow.events({
+-  'click .js-cancel': function() {
+-    Session.set(EDITING_KEY, false);
+-  },
+-
+-  'keydown input[type=text]': function(event) {
+-    // ESC
+-    if (27 === event.which) {
+-      event.preventDefault();
+-      $(event.target).blur();
+-    }
+-  },
+-
+-  'blur input[type=text]': function(event, template) {
+-    // if we are still editing (we haven't just clicked the cancel button)
+-    if (Session.get(EDITING_KEY))
+-      saveList(this, template);
+-  },
+-
+-  'submit .js-edit-form': function(event, template) {
+-    event.preventDefault();
+-    saveList(this, template);
+-  },
+-
+-  // handle mousedown otherwise the blur handler above will swallow the click
+-  // on iOS, we still require the click event so handle both
+-  'mousedown .js-cancel, click .js-cancel': function(event) {
+-    event.preventDefault();
+-    Session.set(EDITING_KEY, false);
+-  },
+-
+-  'change .list-edit': function(event, template) {
+-    if ($(event.target).val() === 'edit') {
+-      editList(this, template);
+-    } else if ($(event.target).val() === 'delete') {
+-      deleteList(this, template);
+-    } else {
+-      toggleListPrivacy(this, template);
+-    }
+-
+-    event.target.selectedIndex = 0;
+-  },
+-
+-  'click .js-edit-list': function(event, template) {
+-    editList(this, template);
+-  },
+-
+-  'click .js-toggle-list-privacy': function(event, template) {
+-    toggleListPrivacy(this, template);
+-  },
+-
+-  'click .js-delete-list': function(event, template) {
+-    deleteList(this, template);
+-  },
+-
+-  'click .js-todo-add': function(event, template) {
+-    template.$('.js-todo-new input').focus();
+-  },
+-
+-  'submit .js-todo-new': function(event) {
+-    event.preventDefault();
+-
+-    var $input = $(event.target).find('[type=text]');
+-    if (! $input.val())
+-      return;
++  this.$('removable').replaceWith(this.elem);
++});
+ 
+-    Todos.insert({
+-      listId: this._id,
+-      text: $input.val(),
+-      checked: false,
+-      createdAt: new Date()
+-    });
+-    Lists.update(this._id, {$inc: {incompleteCount: 1}});
+-    $input.val('');
+-  }
++Template.listsShow.onDestroyed(function() {
++  this.scope.$destroy();
++  this.elem.remove();
+ });
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 53a68aecff8aaf8242f92cb94bba7903ede9259d Mon Sep 17 00:00:00 2001
+From: Oz <ozsayag@gmail.com>
+Date: Tue, 29 Dec 2015 14:22:41 +0200
+Subject: [PATCH 24/24] Step 2.2: Adding the required angular-meteor-auth
+ package
+
+This is required by the implementation of the todos app, not the common
+migration path.
+---
+ .meteor/packages | 1 +
+ .meteor/versions | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/.meteor/packages b/.meteor/packages
+index 966178b..9b47872 100644
+--- a/.meteor/packages
++++ b/.meteor/packages
+@@ -21,6 +21,7 @@ check
+ pbastowski:angular-babel@1.0.7
+ pbastowski:angular2-now@1.0.2
+ angular-with-blaze@1.3.2
++angular-meteor-auth@0.0.1
+ urigo:angular-blaze-template@0.3.0
+ angularui:angular-ui-router@0.2.15
+ dotansimha:angular-reactive-component@0.0.4
+diff --git a/.meteor/versions b/.meteor/versions
+index 0fc3603..1e2cdf5 100644
+--- a/.meteor/versions
++++ b/.meteor/versions
+@@ -2,6 +2,7 @@ accounts-base@1.2.2
+ accounts-password@1.1.4
+ angular@1.3.2
+ angular-blaze-templates-compiler@0.0.1
++angular-meteor-auth@0.0.1
+ angular-meteor-data@0.0.9
+ angular-templates@0.0.3
+ angular-with-blaze@1.3.2
 -- 
 2.5.4 (Apple Git-61)
 
