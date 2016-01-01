@@ -1,5 +1,5 @@
 {{#template name="tutorials.socially.angular2.step_13.md"}}
-{{> downloadPreviousStep stepName="step_012"}}
+{{> downloadPreviousStep stepName="step_12"}}
 
 In this and next steps we are going to implement
 party invitations feature, which is essential for the social apps like ours.

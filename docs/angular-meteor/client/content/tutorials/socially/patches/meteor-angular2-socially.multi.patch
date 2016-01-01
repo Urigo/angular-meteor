@@ -3777,11 +3777,36 @@ index ae87a88..8fe6abf 100644
 -- 
 2.5.4 (Apple Git-61)
 
+From 0307333f7837ff99889b750f8e54aeadf707c941 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Fri, 1 Jan 2016 19:14:20 +0700
+Subject: [PATCH 114/134] Step 14.3: import methods on the client
+
+---
+ client/app.ts | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/client/app.ts b/client/app.ts
+index fa36ab0..ee8de3e 100644
+--- a/client/app.ts
++++ b/client/app.ts
+@@ -12,6 +12,8 @@ import {PartiesList} from 'client/parties-list/parties-list';
+ 
+ import {PartyDetails} from 'client/party-details/party-details';
+ 
++import 'collections/methods';
++
+ Accounts.ui.config({
+   passwordSignupFields: 'USERNAME_AND_EMAIL'
+ });
+-- 
+2.5.4 (Apple Git-61)
+
 
 From 05bce4947b506649e229bf27804e7adf62dba411 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 25 Dec 2015 15:55:43 +0700
-Subject: [PATCH 114/119] Step 14.3: add "invite" button
+Subject: [PATCH 114/119] Step 14.4: add "invite" button
 
 ---
  client/party-details/party-details.html | 1 +
@@ -3805,7 +3830,7 @@ index 0a61451..b671ff0 100644
 From 3d69fccdb99bd46ebf432b454d6db55c96839a75 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 25 Dec 2015 15:56:51 +0700
-Subject: [PATCH 115/119] Step 14.4: add the click handler and call "invite"
+Subject: [PATCH 115/119] Step 14.5: add the click handler and call "invite"
  method
 
 ---
@@ -3883,7 +3908,7 @@ index c784804..e15a342 100644
 From 03aad08576cff5243f0ca2abcf91930152f9d3ce Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 25 Dec 2015 17:03:15 +0700
-Subject: [PATCH 118/119] Step 14.5: get the party reactively
+Subject: [PATCH 118/119] Step 14.6: get the party reactively
 
 ---
  client/party-details/party-details.ts | 6 ++++--
@@ -3913,7 +3938,7 @@ index 6a92c13..403e220 100644
 From 6813dec3ad023acf65fb5cae46169547c1ca7eb9 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 25 Dec 2015 17:08:47 +0700
-Subject: [PATCH 119/119] 14.6: update the users list reactively
+Subject: [PATCH 119/119] 14.7: update the users list reactively
 
 ---
  client/party-details/party-details.ts | 14 +++++++++++++-
@@ -3958,7 +3983,7 @@ index 403e220..d8178a4 100644
 From 9f0bc0b36236dd11ea6cb0becacbd4e6796de4dc Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Dec 2015 19:39:34 +0700
-Subject: [PATCH 120/127] 14.7: show private parties to invited and owners only
+Subject: [PATCH 120/127] 14.8: show private parties to invited and owners only
 
 ---
  server/parties.ts | 8 +++++++-
@@ -3987,40 +4012,10 @@ index b9728c4..a735369 100644
 2.5.4 (Apple Git-61)
 
 
-From 89ca291ea5f2a168d6e3ed266d473b57802afe41 Mon Sep 17 00:00:00 2001
-From: barbatus <alex.borodach@gmail.com>
-Date: Sat, 26 Dec 2015 20:10:46 +0700
-Subject: [PATCH 121/127] 14.9: update the party typings
-
----
- typings/party.d.ts | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
-
-diff --git a/typings/party.d.ts b/typings/party.d.ts
-index 23441c9..82ac46a 100644
---- a/typings/party.d.ts
-+++ b/typings/party.d.ts
-@@ -5,5 +5,11 @@ declare type Party = {
-   location: string,
-   owner?: string,
-   public: boolean,
--  invited?: Array&lt;string>
-+  invited?: Array&lt;string>,
-+  rsvps?: Array&lt;RSVP>
-+}
-+
-+declare type RSVP = {
-+  userId: string,
-+  response: string
- }
--- 
-2.5.4 (Apple Git-61)
-
-
 From a1ff260caa1851936bdddf45c79af7ab1d631eed Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Dec 2015 20:17:48 +0700
-Subject: [PATCH 122/127] 14.8: add a "reply" method
+Subject: [PATCH 122/127] 14.9: add a "reply" method
 
 ---
  collections/methods.ts | 45 +++++++++++++++++++++++++++++++++++++++++++++
@@ -4085,10 +4080,40 @@ index 427eb70..d548d06 100644
 2.5.4 (Apple Git-61)
 
 
+From 89ca291ea5f2a168d6e3ed266d473b57802afe41 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 26 Dec 2015 20:10:46 +0700
+Subject: [PATCH 121/127] 14.10: update the party typings
+
+---
+ typings/party.d.ts | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/typings/party.d.ts b/typings/party.d.ts
+index 23441c9..82ac46a 100644
+--- a/typings/party.d.ts
++++ b/typings/party.d.ts
+@@ -5,5 +5,11 @@ declare type Party = {
+   location: string,
+   owner?: string,
+   public: boolean,
+-  invited?: Array&lt;string>
++  invited?: Array&lt;string>,
++  rsvps?: Array&lt;RSVP>
++}
++
++declare type RSVP = {
++  userId: string,
++  response: string
+ }
+-- 
+2.5.4 (Apple Git-61)
+
+
 From 218de32462e9e9579dc4b874903bc0d2f19872c9 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Dec 2015 20:33:48 +0700
-Subject: [PATCH 123/127] 14.10: update PartyDetails view with the three
+Subject: [PATCH 123/127] 14.11: update PartyDetails view with the three
  response buttons
 
 ---
@@ -4117,7 +4142,7 @@ index b671ff0..971a2d7 100644
 From be081959257932f5e9370bcf018d569d6798c2c4 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Dec 2015 20:37:05 +0700
-Subject: [PATCH 124/127] 14.11: handle reply events in the PartyDetails
+Subject: [PATCH 124/127] 14.12: handle reply events in the PartyDetails
  component
 
 ---
@@ -4151,7 +4176,7 @@ index d8178a4..843405d 100644
 From b17913d7a1d62255f1d6500b99288506fea2cd15 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Dec 2015 21:34:49 +0700
-Subject: [PATCH 125/127] 14.12: add a new response counting pipe
+Subject: [PATCH 125/127] 14.13: add a new response counting pipe
 
 ---
  client/lib/pipes.ts | 34 ++++++++++++++++++++++++++++++++++
@@ -4213,7 +4238,7 @@ index 511e713..131c595 100644
 From 3c381b5f9be72caf1f59b178f764672072fd24be Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Dec 2015 21:35:28 +0700
-Subject: [PATCH 126/127] 14.13: display response statistics in the list
+Subject: [PATCH 126/127] 14.14: display response statistics in the list
 
 ---
  client/parties-list/parties-list.html | 6 ++++++
@@ -4243,7 +4268,7 @@ index f8a5680..0a3acb6 100644
 From 7b129c082153931e94fc7f3824a3ad12bbf33f17 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Dec 2015 21:36:23 +0700
-Subject: [PATCH 127/127] 14.14: import the RsvpPipe pipe
+Subject: [PATCH 127/127] 14.15: import the RsvpPipe pipe
 
 ---
  client/parties-list/parties-list.ts | 4 +++-
@@ -4423,7 +4448,7 @@ index 843405d..037508d 100644
 2.5.4 (Apple Git-61)
 
 
-From 832ad275b21e2cd1d7100222a73009c776b6f0e2 Mon Sep 17 00:00:00 2001
+From 86f72d86deba5d87af26c6058ad7b65bbe4042da Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Mon, 28 Dec 2015 18:49:13 +0700
 Subject: [PATCH 131/133] Step 15.4: add disable attribute bindings
@@ -4459,7 +4484,7 @@ index 971a2d7..95e6e57 100644
 2.5.4 (Apple Git-61)
 
 
-From c4278b7fdb2488b8589ecaba5247e8782e5f2ec8 Mon Sep 17 00:00:00 2001
+From 92f05ea6041ef96e0e17722a53c9815d4ded2b78 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Mon, 28 Dec 2015 19:40:08 +0700
 Subject: [PATCH 132/133] Step 15.5: add isPublic and isInvited properties
@@ -4498,7 +4523,7 @@ index 78d6870..1dfc1bd 100644
 2.5.4 (Apple Git-61)
 
 
-From d3890889a71c0542773eedfc75cc905201c187c2 Mon Sep 17 00:00:00 2001
+From 5a03faa1ae358b946944d3ba601c92579fa1225f Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Mon, 28 Dec 2015 19:40:32 +0700
 Subject: [PATCH 133/133] Step 15.6: make use of the properties in the template
