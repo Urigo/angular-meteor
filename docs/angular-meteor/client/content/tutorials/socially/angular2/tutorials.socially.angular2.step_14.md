@@ -83,6 +83,10 @@ Go to the party: you should see a list of all users including
 just created ones. Invite several of them — each items in the list 
 should disappear after successful invitation.
 
+What's import here to notice is that each user item in the users list
+disappears right after the click, even before the message about
+the invitation was successfully sent. That's the latency compensation in work!
+
 # User Reply
 
 Here we are going to implement a part that is
