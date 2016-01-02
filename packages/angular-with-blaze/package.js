@@ -1,7 +1,7 @@
 Package.describe({
   name: "angular-with-blaze",
   summary: "Everything you need to use both AngularJS and Blaze templates in your Meteor app",
-  version: "1.3.2",
+  version: "1.3.3",
   git: "https://github.com/Urigo/angular-meteor.git",
   documentation: "../../README.md"
 });

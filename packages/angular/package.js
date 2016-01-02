@@ -1,7 +1,7 @@
 Package.describe({
   name: "angular",
   summary: "Everything you need to use AngularJS in your Meteor app",
-  version: "1.3.2",
+  version: "1.3.3",
   git: "https://github.com/Urigo/angular-meteor.git",
   documentation: "../../README.md"
 });
@@ -12,6 +12,6 @@ Package.onUse(function (api) {
   api.imply([
     'angular-meteor-data@0.0.9',
     'angular-templates@0.0.3',
-    'pbastowski:angular-babel@1.0.7'
+    'pbastowski:angular-babel@1.0.8'
   ])
 });

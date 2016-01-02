@@ -22,14 +22,6 @@ var EJSON, EJSONTest;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                                   //
-// packages/ejson/packages/ejson.js                                                                                  //
-//                                                                                                                   //
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                                                     //
-(function(){                                                                                                         // 1
-                                                                                                                     // 2
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                                   //
 // packages/ejson/ejson.js                                                                                           //
 //                                                                                                                   //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -552,16 +544,16 @@ EJSON.clone = function (v) {                                                    
 EJSON.newBinary = Base64.newBinary;                                                                                  // 516
                                                                                                                      // 517
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                                                     // 527
-}).call(this);                                                                                                       // 528
-                                                                                                                     // 529
-                                                                                                                     // 530
-                                                                                                                     // 531
-                                                                                                                     // 532
-                                                                                                                     // 533
-                                                                                                                     // 534
-(function(){                                                                                                         // 535
-                                                                                                                     // 536
+
+}).call(this);
+
+
+
+
+
+
+(function(){
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //                                                                                                                   //
 // packages/ejson/stringify.js                                                                                       //
@@ -688,10 +680,6 @@ EJSON._canonicalStringify = function (value, options) {                         
 };                                                                                                                   // 118
                                                                                                                      // 119
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                                                     // 663
-}).call(this);                                                                                                       // 664
-                                                                                                                     // 665
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }).call(this);
 
@@ -727,29 +715,21 @@ var MongoID;
 
 (function(){
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                          //
-// packages/mongo-id/packages/mongo-id.js                                                                   //
-//                                                                                                          //
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                                            //
-(function(){                                                                                                // 1
-                                                                                                            // 2
-////////////////////////////////////////////////////////////////////////////////////////////////////////    // 3
-//                                                                                                    //    // 4
-// packages/mongo-id/id.js                                                                            //    // 5
-//                                                                                                    //    // 6
-////////////////////////////////////////////////////////////////////////////////////////////////////////    // 7
-                                                                                                      //    // 8
-MongoID = {};                                                                                         // 1  // 9
-                                                                                                      // 2  // 10
-MongoID._looksLikeObjectID = function (str) {                                                         // 3  // 11
-  return str.length === 24 && str.match(/^[0-9a-f]*$/);                                               // 4  // 12
-};                                                                                                    // 5  // 13
-                                                                                                      // 6  // 14
-MongoID.ObjectID = function (hexString) {                                                             // 7  // 15
-  //random-based impl of Mongo ObjectID                                                               // 8  // 16
-  var self = this;                                                                                    // 9  // 17
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                    //
+// packages/mongo-id/id.js                                                                            //
+//                                                                                                    //
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                      //
+MongoID = {};                                                                                         // 1
+                                                                                                      // 2
+MongoID._looksLikeObjectID = function (str) {                                                         // 3
+  return str.length === 24 && str.match(/^[0-9a-f]*$/);                                               // 4
+};                                                                                                    // 5
+                                                                                                      // 6
+MongoID.ObjectID = function (hexString) {                                                             // 7
+  //random-based impl of Mongo ObjectID                                                               // 8
+  var self = this;                                                                                    // 9
   if (hexString) {                                                                                    // 10
     hexString = hexString.toLowerCase();                                                              // 11
     if (!MongoID._looksLikeObjectID(hexString)) {                                                     // 12
@@ -805,7 +785,7 @@ MongoID.idStringify = function (id) {                                           
     } else if (id.substr(0, 1) === "-" || // escape previously dashed strings                         // 62
                id.substr(0, 1) === "~" || // escape escaped numbers, true, false                      // 63
                MongoID._looksLikeObjectID(id) || // escape object-id-form strings                     // 64
-               id.substr(0, 1) === '{') { // escape object-form strings, for maybe implementing later       // 73
+               id.substr(0, 1) === '{') { // escape object-form strings, for maybe implementing later
       return "-" + id;                                                                                // 66
     } else {                                                                                          // 67
       return id; // other strings go through unchanged.                                               // 68
@@ -837,11 +817,7 @@ MongoID.idParse = function (id) {                                               
 };                                                                                                    // 94
                                                                                                       // 95
                                                                                                       // 96
-////////////////////////////////////////////////////////////////////////////////////////////////////////    // 105
-                                                                                                            // 106
-}).call(this);                                                                                              // 107
-                                                                                                            // 108
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }).call(this);
 
@@ -875,119 +851,111 @@ var DiffSequence;
 
 (function(){
 
-////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                        //
-// packages/diff-sequence/packages/diff-sequence.js                                       //
-//                                                                                        //
-////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                          //
-(function(){                                                                              // 1
-                                                                                          // 2
-/////////////////////////////////////////////////////////////////////////////////////     // 3
-//                                                                                 //     // 4
-// packages/diff-sequence/diff.js                                                  //     // 5
-//                                                                                 //     // 6
-/////////////////////////////////////////////////////////////////////////////////////     // 7
-                                                                                   //     // 8
-DiffSequence = {};                                                                 // 1   // 9
-                                                                                   // 2   // 10
-// ordered: bool.                                                                  // 3   // 11
-// old_results and new_results: collections of documents.                          // 4   // 12
-//    if ordered, they are arrays.                                                 // 5   // 13
-//    if unordered, they are IdMaps                                                // 6   // 14
-DiffSequence.diffQueryChanges = function (ordered, oldResults, newResults,         // 7   // 15
-                                              observer, options) {                 // 8   // 16
-  if (ordered)                                                                     // 9   // 17
-    DiffSequence.diffQueryOrderedChanges(                                          // 10  // 18
-      oldResults, newResults, observer, options);                                  // 11  // 19
-  else                                                                             // 12  // 20
-    DiffSequence.diffQueryUnorderedChanges(                                        // 13  // 21
-      oldResults, newResults, observer, options);                                  // 14  // 22
-};                                                                                 // 15  // 23
-                                                                                   // 16  // 24
-DiffSequence.diffQueryUnorderedChanges = function (oldResults, newResults,         // 17  // 25
-                                                       observer, options) {        // 18  // 26
-  options = options || {};                                                         // 19  // 27
-  var projectionFn = options.projectionFn || EJSON.clone;                          // 20  // 28
-                                                                                   // 21  // 29
-  if (observer.movedBefore) {                                                      // 22  // 30
-    throw new Error("_diffQueryUnordered called with a movedBefore observer!");    // 23  // 31
-  }                                                                                // 24  // 32
-                                                                                   // 25  // 33
-  newResults.forEach(function (newDoc, id) {                                       // 26  // 34
-    var oldDoc = oldResults.get(id);                                               // 27  // 35
-    if (oldDoc) {                                                                  // 28  // 36
-      if (observer.changed && !EJSON.equals(oldDoc, newDoc)) {                     // 29  // 37
-        var projectedNew = projectionFn(newDoc);                                   // 30  // 38
-        var projectedOld = projectionFn(oldDoc);                                   // 31  // 39
-        var changedFields =                                                        // 32  // 40
-              DiffSequence.makeChangedFields(projectedNew, projectedOld);          // 33  // 41
-        if (! _.isEmpty(changedFields)) {                                          // 34  // 42
-          observer.changed(id, changedFields);                                     // 35  // 43
-        }                                                                          // 36  // 44
-      }                                                                            // 37  // 45
-    } else if (observer.added) {                                                   // 38  // 46
-      var fields = projectionFn(newDoc);                                           // 39  // 47
-      delete fields._id;                                                           // 40  // 48
-      observer.added(newDoc._id, fields);                                          // 41  // 49
-    }                                                                              // 42  // 50
-  });                                                                              // 43  // 51
-                                                                                   // 44  // 52
-  if (observer.removed) {                                                          // 45  // 53
-    oldResults.forEach(function (oldDoc, id) {                                     // 46  // 54
-      if (!newResults.has(id))                                                     // 47  // 55
-        observer.removed(id);                                                      // 48  // 56
-    });                                                                            // 49  // 57
-  }                                                                                // 50  // 58
-};                                                                                 // 51  // 59
-                                                                                   // 52  // 60
-                                                                                   // 53  // 61
-DiffSequence.diffQueryOrderedChanges = function (old_results, new_results,         // 54  // 62
-                                                     observer, options) {          // 55  // 63
-  options = options || {};                                                         // 56  // 64
-  var projectionFn = options.projectionFn || EJSON.clone;                          // 57  // 65
-                                                                                   // 58  // 66
-  var new_presence_of_id = {};                                                     // 59  // 67
-  _.each(new_results, function (doc) {                                             // 60  // 68
-    if (new_presence_of_id[doc._id])                                               // 61  // 69
-      Meteor._debug("Duplicate _id in new_results");                               // 62  // 70
-    new_presence_of_id[doc._id] = true;                                            // 63  // 71
-  });                                                                              // 64  // 72
-                                                                                   // 65  // 73
-  var old_index_of_id = {};                                                        // 66  // 74
-  _.each(old_results, function (doc, i) {                                          // 67  // 75
-    if (doc._id in old_index_of_id)                                                // 68  // 76
-      Meteor._debug("Duplicate _id in old_results");                               // 69  // 77
-    old_index_of_id[doc._id] = i;                                                  // 70  // 78
-  });                                                                              // 71  // 79
-                                                                                   // 72  // 80
-  // ALGORITHM:                                                                    // 73  // 81
-  //                                                                               // 74  // 82
-  // To determine which docs should be considered "moved" (and which               // 75  // 83
-  // merely change position because of other docs moving) we run                   // 76  // 84
-  // a "longest common subsequence" (LCS) algorithm.  The LCS of the               // 77  // 85
-  // old doc IDs and the new doc IDs gives the docs that should NOT be             // 78  // 86
-  // considered moved.                                                             // 79  // 87
-                                                                                   // 80  // 88
-  // To actually call the appropriate callbacks to get from the old state to the   // 81  // 89
-  // new state:                                                                    // 82  // 90
-                                                                                   // 83  // 91
-  // First, we call removed() on all the items that only appear in the old         // 84  // 92
-  // state.                                                                        // 85  // 93
-                                                                                   // 86  // 94
-  // Then, once we have the items that should not move, we walk through the new    // 87  // 95
-  // results array group-by-group, where a "group" is a set of items that have     // 88  // 96
-  // moved, anchored on the end by an item that should not move.  One by one, we   // 89  // 97
-  // move each of those elements into place "before" the anchoring end-of-group    // 90  // 98
-  // item, and fire changed events on them if necessary.  Then we fire a changed   // 91  // 99
-  // event on the anchor, and move on to the next group.  There is always at       // 92  // 100
-  // least one group; the last group is anchored by a virtual "null" id at the     // 93  // 101
-  // end.                                                                          // 94  // 102
-                                                                                   // 95  // 103
-  // Asymptotically: O(N k) where k is number of ops, or potentially               // 96  // 104
-  // O(N log N) if inner loop of LCS were made to be binary search.                // 97  // 105
-                                                                                   // 98  // 106
-                                                                                   // 99  // 107
+/////////////////////////////////////////////////////////////////////////////////////
+//                                                                                 //
+// packages/diff-sequence/diff.js                                                  //
+//                                                                                 //
+/////////////////////////////////////////////////////////////////////////////////////
+                                                                                   //
+DiffSequence = {};                                                                 // 1
+                                                                                   // 2
+// ordered: bool.                                                                  // 3
+// old_results and new_results: collections of documents.                          // 4
+//    if ordered, they are arrays.                                                 // 5
+//    if unordered, they are IdMaps                                                // 6
+DiffSequence.diffQueryChanges = function (ordered, oldResults, newResults,         // 7
+                                              observer, options) {                 // 8
+  if (ordered)                                                                     // 9
+    DiffSequence.diffQueryOrderedChanges(                                          // 10
+      oldResults, newResults, observer, options);                                  // 11
+  else                                                                             // 12
+    DiffSequence.diffQueryUnorderedChanges(                                        // 13
+      oldResults, newResults, observer, options);                                  // 14
+};                                                                                 // 15
+                                                                                   // 16
+DiffSequence.diffQueryUnorderedChanges = function (oldResults, newResults,         // 17
+                                                       observer, options) {        // 18
+  options = options || {};                                                         // 19
+  var projectionFn = options.projectionFn || EJSON.clone;                          // 20
+                                                                                   // 21
+  if (observer.movedBefore) {                                                      // 22
+    throw new Error("_diffQueryUnordered called with a movedBefore observer!");    // 23
+  }                                                                                // 24
+                                                                                   // 25
+  newResults.forEach(function (newDoc, id) {                                       // 26
+    var oldDoc = oldResults.get(id);                                               // 27
+    if (oldDoc) {                                                                  // 28
+      if (observer.changed && !EJSON.equals(oldDoc, newDoc)) {                     // 29
+        var projectedNew = projectionFn(newDoc);                                   // 30
+        var projectedOld = projectionFn(oldDoc);                                   // 31
+        var changedFields =                                                        // 32
+              DiffSequence.makeChangedFields(projectedNew, projectedOld);          // 33
+        if (! _.isEmpty(changedFields)) {                                          // 34
+          observer.changed(id, changedFields);                                     // 35
+        }                                                                          // 36
+      }                                                                            // 37
+    } else if (observer.added) {                                                   // 38
+      var fields = projectionFn(newDoc);                                           // 39
+      delete fields._id;                                                           // 40
+      observer.added(newDoc._id, fields);                                          // 41
+    }                                                                              // 42
+  });                                                                              // 43
+                                                                                   // 44
+  if (observer.removed) {                                                          // 45
+    oldResults.forEach(function (oldDoc, id) {                                     // 46
+      if (!newResults.has(id))                                                     // 47
+        observer.removed(id);                                                      // 48
+    });                                                                            // 49
+  }                                                                                // 50
+};                                                                                 // 51
+                                                                                   // 52
+                                                                                   // 53
+DiffSequence.diffQueryOrderedChanges = function (old_results, new_results,         // 54
+                                                     observer, options) {          // 55
+  options = options || {};                                                         // 56
+  var projectionFn = options.projectionFn || EJSON.clone;                          // 57
+                                                                                   // 58
+  var new_presence_of_id = {};                                                     // 59
+  _.each(new_results, function (doc) {                                             // 60
+    if (new_presence_of_id[doc._id])                                               // 61
+      Meteor._debug("Duplicate _id in new_results");                               // 62
+    new_presence_of_id[doc._id] = true;                                            // 63
+  });                                                                              // 64
+                                                                                   // 65
+  var old_index_of_id = {};                                                        // 66
+  _.each(old_results, function (doc, i) {                                          // 67
+    if (doc._id in old_index_of_id)                                                // 68
+      Meteor._debug("Duplicate _id in old_results");                               // 69
+    old_index_of_id[doc._id] = i;                                                  // 70
+  });                                                                              // 71
+                                                                                   // 72
+  // ALGORITHM:                                                                    // 73
+  //                                                                               // 74
+  // To determine which docs should be considered "moved" (and which               // 75
+  // merely change position because of other docs moving) we run                   // 76
+  // a "longest common subsequence" (LCS) algorithm.  The LCS of the               // 77
+  // old doc IDs and the new doc IDs gives the docs that should NOT be             // 78
+  // considered moved.                                                             // 79
+                                                                                   // 80
+  // To actually call the appropriate callbacks to get from the old state to the   // 81
+  // new state:                                                                    // 82
+                                                                                   // 83
+  // First, we call removed() on all the items that only appear in the old         // 84
+  // state.                                                                        // 85
+                                                                                   // 86
+  // Then, once we have the items that should not move, we walk through the new    // 87
+  // results array group-by-group, where a "group" is a set of items that have     // 88
+  // moved, anchored on the end by an item that should not move.  One by one, we   // 89
+  // move each of those elements into place "before" the anchoring end-of-group    // 90
+  // item, and fire changed events on them if necessary.  Then we fire a changed   // 91
+  // event on the anchor, and move on to the next group.  There is always at       // 92
+  // least one group; the last group is anchored by a virtual "null" id at the     // 93
+  // end.                                                                          // 94
+                                                                                   // 95
+  // Asymptotically: O(N k) where k is number of ops, or potentially               // 96
+  // O(N log N) if inner loop of LCS were made to be binary search.                // 97
+                                                                                   // 98
+                                                                                   // 99
   //////// LCS (longest common sequence, with respect to _id)                      // 100
   // (see Wikipedia article on Longest Increasing Subsequence,                     // 101
   // where the LIS is taken of the sequence of old indices of the                  // 102
@@ -1061,7 +1029,7 @@ DiffSequence.diffQueryOrderedChanges = function (old_results, new_results,      
       if (!_.has(old_index_of_id, newDoc._id)) {                                   // 170
         fields = projectionFn(newDoc);                                             // 171
         delete fields._id;                                                         // 172
-        observer.addedBefore && observer.addedBefore(newDoc._id, fields, groupId);        // 181
+        observer.addedBefore && observer.addedBefore(newDoc._id, fields, groupId);
         observer.added && observer.added(newDoc._id, fields);                      // 174
       } else {                                                                     // 175
         // moved                                                                   // 176
@@ -1141,11 +1109,7 @@ DiffSequence.applyChanges = function (doc, changeFields) {                      
 };                                                                                 // 250
                                                                                    // 251
                                                                                    // 252
-/////////////////////////////////////////////////////////////////////////////////////     // 261
-                                                                                          // 262
-}).call(this);                                                                            // 263
-                                                                                          // 264
-////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////
 
 }).call(this);
 
@@ -1183,119 +1147,111 @@ var ObserveSequence, seqChangedToEmpty, seqChangedToArray, seqChangedToCursor;
 
 (function(){
 
-//////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                      //
-// packages/observe-sequence/packages/observe-sequence.js                               //
-//                                                                                      //
-//////////////////////////////////////////////////////////////////////////////////////////
-                                                                                        //
-(function(){                                                                            // 1
-                                                                                        // 2
-///////////////////////////////////////////////////////////////////////////////////     // 3
-//                                                                               //     // 4
-// packages/observe-sequence/observe_sequence.js                                 //     // 5
-//                                                                               //     // 6
-///////////////////////////////////////////////////////////////////////////////////     // 7
-                                                                                 //     // 8
-var warn = function () {                                                         // 1   // 9
-  if (ObserveSequence._suppressWarnings) {                                       // 2   // 10
-    ObserveSequence._suppressWarnings--;                                         // 3   // 11
-  } else {                                                                       // 4   // 12
-    if (typeof console !== 'undefined' && console.warn)                          // 5   // 13
-      console.warn.apply(console, arguments);                                    // 6   // 14
-                                                                                 // 7   // 15
-    ObserveSequence._loggedWarnings++;                                           // 8   // 16
-  }                                                                              // 9   // 17
-};                                                                               // 10  // 18
-                                                                                 // 11  // 19
-var idStringify = MongoID.idStringify;                                           // 12  // 20
-var idParse = MongoID.idParse;                                                   // 13  // 21
-                                                                                 // 14  // 22
-ObserveSequence = {                                                              // 15  // 23
-  _suppressWarnings: 0,                                                          // 16  // 24
-  _loggedWarnings: 0,                                                            // 17  // 25
-                                                                                 // 18  // 26
-  // A mechanism similar to cursor.observe which receives a reactive             // 19  // 27
-  // function returning a sequence type and firing appropriate callbacks         // 20  // 28
-  // when the value changes.                                                     // 21  // 29
-  //                                                                             // 22  // 30
-  // @param sequenceFunc {Function} a reactive function returning a              // 23  // 31
-  //     sequence type. The currently supported sequence types are:              // 24  // 32
-  //     Array, Cursor, and null.                                                // 25  // 33
-  //                                                                             // 26  // 34
-  // @param callbacks {Object} similar to a specific subset of                   // 27  // 35
-  //     callbacks passed to `cursor.observe`                                    // 28  // 36
-  //     (http://docs.meteor.com/#observe), with minor variations to             // 29  // 37
-  //     support the fact that not all sequences contain objects with            // 30  // 38
-  //     _id fields.  Specifically:                                              // 31  // 39
-  //                                                                             // 32  // 40
-  //     * addedAt(id, item, atIndex, beforeId)                                  // 33  // 41
-  //     * changedAt(id, newItem, oldItem, atIndex)                              // 34  // 42
-  //     * removedAt(id, oldItem, atIndex)                                       // 35  // 43
-  //     * movedTo(id, item, fromIndex, toIndex, beforeId)                       // 36  // 44
-  //                                                                             // 37  // 45
-  // @returns {Object(stop: Function)} call 'stop' on the return value           // 38  // 46
-  //     to stop observing this sequence function.                               // 39  // 47
-  //                                                                             // 40  // 48
-  // We don't make any assumptions about our ability to compare sequence         // 41  // 49
-  // elements (ie, we don't assume EJSON.equals works; maybe there is extra      // 42  // 50
-  // state/random methods on the objects) so unlike cursor.observe, we may       // 43  // 51
-  // sometimes call changedAt() when nothing actually changed.                   // 44  // 52
-  // XXX consider if we *can* make the stronger assumption and avoid             // 45  // 53
-  //     no-op changedAt calls (in some cases?)                                  // 46  // 54
-  //                                                                             // 47  // 55
-  // XXX currently only supports the callbacks used by our                       // 48  // 56
-  // implementation of {{#each}}, but this can be expanded.                      // 49  // 57
-  //                                                                             // 50  // 58
-  // XXX #each doesn't use the indices (though we'll eventually need             // 51  // 59
-  // a way to get them when we support `@index`), but calling                    // 52  // 60
-  // `cursor.observe` causes the index to be calculated on every                 // 53  // 61
-  // callback using a linear scan (unless you turn it off by passing             // 54  // 62
-  // `_no_indices`).  Any way to avoid calculating indices on a pure             // 55  // 63
-  // cursor observe like we used to?                                             // 56  // 64
-  observe: function (sequenceFunc, callbacks) {                                  // 57  // 65
-    var lastSeq = null;                                                          // 58  // 66
-    var activeObserveHandle = null;                                              // 59  // 67
-                                                                                 // 60  // 68
-    // 'lastSeqArray' contains the previous value of the sequence                // 61  // 69
-    // we're observing. It is an array of objects with '_id' and                 // 62  // 70
-    // 'item' fields.  'item' is the element in the array, or the                // 63  // 71
-    // document in the cursor.                                                   // 64  // 72
-    //                                                                           // 65  // 73
-    // '_id' is whichever of the following is relevant, unless it has            // 66  // 74
-    // already appeared -- in which case it's randomly generated.                // 67  // 75
-    //                                                                           // 68  // 76
-    // * if 'item' is an object:                                                 // 69  // 77
-    //   * an '_id' field, if present                                            // 70  // 78
-    //   * otherwise, the index in the array                                     // 71  // 79
-    //                                                                           // 72  // 80
-    // * if 'item' is a number or string, use that value                         // 73  // 81
-    //                                                                           // 74  // 82
-    // XXX this can be generalized by allowing {{#each}} to accept a             // 75  // 83
-    // general 'key' argument which could be a function, a dotted                // 76  // 84
-    // field name, or the special @index value.                                  // 77  // 85
-    var lastSeqArray = []; // elements are objects of form {_id, item}           // 78  // 86
-    var computation = Tracker.autorun(function () {                              // 79  // 87
-      var seq = sequenceFunc();                                                  // 80  // 88
-                                                                                 // 81  // 89
-      Tracker.nonreactive(function () {                                          // 82  // 90
-        var seqArray; // same structure as `lastSeqArray` above.                 // 83  // 91
-                                                                                 // 84  // 92
-        if (activeObserveHandle) {                                               // 85  // 93
-          // If we were previously observing a cursor, replace lastSeqArray with        // 94
-          // more up-to-date information.  Then stop the old observe.            // 87  // 95
-          lastSeqArray = _.map(lastSeq.fetch(), function (doc) {                 // 88  // 96
-            return {_id: doc._id, item: doc};                                    // 89  // 97
-          });                                                                    // 90  // 98
-          activeObserveHandle.stop();                                            // 91  // 99
-          activeObserveHandle = null;                                            // 92  // 100
-        }                                                                        // 93  // 101
-                                                                                 // 94  // 102
-        if (!seq) {                                                              // 95  // 103
-          seqArray = seqChangedToEmpty(lastSeqArray, callbacks);                 // 96  // 104
-        } else if (seq instanceof Array) {                                       // 97  // 105
-          seqArray = seqChangedToArray(lastSeqArray, seq, callbacks);            // 98  // 106
-        } else if (isStoreCursor(seq)) {                                         // 99  // 107
+///////////////////////////////////////////////////////////////////////////////////
+//                                                                               //
+// packages/observe-sequence/observe_sequence.js                                 //
+//                                                                               //
+///////////////////////////////////////////////////////////////////////////////////
+                                                                                 //
+var warn = function () {                                                         // 1
+  if (ObserveSequence._suppressWarnings) {                                       // 2
+    ObserveSequence._suppressWarnings--;                                         // 3
+  } else {                                                                       // 4
+    if (typeof console !== 'undefined' && console.warn)                          // 5
+      console.warn.apply(console, arguments);                                    // 6
+                                                                                 // 7
+    ObserveSequence._loggedWarnings++;                                           // 8
+  }                                                                              // 9
+};                                                                               // 10
+                                                                                 // 11
+var idStringify = MongoID.idStringify;                                           // 12
+var idParse = MongoID.idParse;                                                   // 13
+                                                                                 // 14
+ObserveSequence = {                                                              // 15
+  _suppressWarnings: 0,                                                          // 16
+  _loggedWarnings: 0,                                                            // 17
+                                                                                 // 18
+  // A mechanism similar to cursor.observe which receives a reactive             // 19
+  // function returning a sequence type and firing appropriate callbacks         // 20
+  // when the value changes.                                                     // 21
+  //                                                                             // 22
+  // @param sequenceFunc {Function} a reactive function returning a              // 23
+  //     sequence type. The currently supported sequence types are:              // 24
+  //     Array, Cursor, and null.                                                // 25
+  //                                                                             // 26
+  // @param callbacks {Object} similar to a specific subset of                   // 27
+  //     callbacks passed to `cursor.observe`                                    // 28
+  //     (http://docs.meteor.com/#observe), with minor variations to             // 29
+  //     support the fact that not all sequences contain objects with            // 30
+  //     _id fields.  Specifically:                                              // 31
+  //                                                                             // 32
+  //     * addedAt(id, item, atIndex, beforeId)                                  // 33
+  //     * changedAt(id, newItem, oldItem, atIndex)                              // 34
+  //     * removedAt(id, oldItem, atIndex)                                       // 35
+  //     * movedTo(id, item, fromIndex, toIndex, beforeId)                       // 36
+  //                                                                             // 37
+  // @returns {Object(stop: Function)} call 'stop' on the return value           // 38
+  //     to stop observing this sequence function.                               // 39
+  //                                                                             // 40
+  // We don't make any assumptions about our ability to compare sequence         // 41
+  // elements (ie, we don't assume EJSON.equals works; maybe there is extra      // 42
+  // state/random methods on the objects) so unlike cursor.observe, we may       // 43
+  // sometimes call changedAt() when nothing actually changed.                   // 44
+  // XXX consider if we *can* make the stronger assumption and avoid             // 45
+  //     no-op changedAt calls (in some cases?)                                  // 46
+  //                                                                             // 47
+  // XXX currently only supports the callbacks used by our                       // 48
+  // implementation of {{#each}}, but this can be expanded.                      // 49
+  //                                                                             // 50
+  // XXX #each doesn't use the indices (though we'll eventually need             // 51
+  // a way to get them when we support `@index`), but calling                    // 52
+  // `cursor.observe` causes the index to be calculated on every                 // 53
+  // callback using a linear scan (unless you turn it off by passing             // 54
+  // `_no_indices`).  Any way to avoid calculating indices on a pure             // 55
+  // cursor observe like we used to?                                             // 56
+  observe: function (sequenceFunc, callbacks) {                                  // 57
+    var lastSeq = null;                                                          // 58
+    var activeObserveHandle = null;                                              // 59
+                                                                                 // 60
+    // 'lastSeqArray' contains the previous value of the sequence                // 61
+    // we're observing. It is an array of objects with '_id' and                 // 62
+    // 'item' fields.  'item' is the element in the array, or the                // 63
+    // document in the cursor.                                                   // 64
+    //                                                                           // 65
+    // '_id' is whichever of the following is relevant, unless it has            // 66
+    // already appeared -- in which case it's randomly generated.                // 67
+    //                                                                           // 68
+    // * if 'item' is an object:                                                 // 69
+    //   * an '_id' field, if present                                            // 70
+    //   * otherwise, the index in the array                                     // 71
+    //                                                                           // 72
+    // * if 'item' is a number or string, use that value                         // 73
+    //                                                                           // 74
+    // XXX this can be generalized by allowing {{#each}} to accept a             // 75
+    // general 'key' argument which could be a function, a dotted                // 76
+    // field name, or the special @index value.                                  // 77
+    var lastSeqArray = []; // elements are objects of form {_id, item}           // 78
+    var computation = Tracker.autorun(function () {                              // 79
+      var seq = sequenceFunc();                                                  // 80
+                                                                                 // 81
+      Tracker.nonreactive(function () {                                          // 82
+        var seqArray; // same structure as `lastSeqArray` above.                 // 83
+                                                                                 // 84
+        if (activeObserveHandle) {                                               // 85
+          // If we were previously observing a cursor, replace lastSeqArray with
+          // more up-to-date information.  Then stop the old observe.            // 87
+          lastSeqArray = _.map(lastSeq.fetch(), function (doc) {                 // 88
+            return {_id: doc._id, item: doc};                                    // 89
+          });                                                                    // 90
+          activeObserveHandle.stop();                                            // 91
+          activeObserveHandle = null;                                            // 92
+        }                                                                        // 93
+                                                                                 // 94
+        if (!seq) {                                                              // 95
+          seqArray = seqChangedToEmpty(lastSeqArray, callbacks);                 // 96
+        } else if (seq instanceof Array) {                                       // 97
+          seqArray = seqChangedToArray(lastSeqArray, seq, callbacks);            // 98
+        } else if (isStoreCursor(seq)) {                                         // 99
           var result /* [seqArray, activeObserveHandle] */ =                     // 100
                 seqChangedToCursor(lastSeqArray, seq, callbacks);                // 101
           seqArray = result[0];                                                  // 102
@@ -1418,7 +1374,7 @@ var diffArray = function (lastSeqArray, seqArray, callbacks) {                  
       // There are two cases:                                                    // 219
       //   1. The element is moved forward. Then all the positions in between    // 220
       //   are moved back.                                                       // 221
-      //   2. The element is moved back. Then the positions in between *and* the        // 230
+      //   2. The element is moved back. Then the positions in between *and* the
       //   element that is currently standing on the moved element's future      // 223
       //   position are moved forward.                                           // 224
       _.each(posCur, function (elCurPosition, id) {                              // 225
@@ -1545,11 +1501,7 @@ seqChangedToCursor = function (lastSeqArray, cursor, callbacks) {               
   return [seqArray, observeHandle];                                              // 346
 };                                                                               // 347
                                                                                  // 348
-///////////////////////////////////////////////////////////////////////////////////     // 357
-                                                                                        // 358
-}).call(this);                                                                          // 359
-                                                                                        // 360
-//////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////
 
 }).call(this);
 
@@ -1608,119 +1560,111 @@ var babelHelpers;
 
 (function(){
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                                //
-// packages/babel-runtime/packages/babel-runtime.js                                                               //
-//                                                                                                                //
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                                                  //
-(function(){                                                                                                      // 1
-                                                                                                                  // 2
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////     // 3
-//                                                                                                         //     // 4
-// packages/babel-runtime/babel-runtime.js                                                                 //     // 5
-//                                                                                                         //     // 6
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////     // 7
-                                                                                                           //     // 8
-var hasOwn = Object.prototype.hasOwnProperty;                                                              // 1   // 9
-                                                                                                           // 2   // 10
-function canDefineNonEnumerableProperties() {                                                              // 3   // 11
-  var testObj = {};                                                                                        // 4   // 12
-  var testPropName = "t";                                                                                  // 5   // 13
-                                                                                                           // 6   // 14
-  try {                                                                                                    // 7   // 15
-    Object.defineProperty(testObj, testPropName, {                                                         // 8   // 16
-      enumerable: false,                                                                                   // 9   // 17
-      value: testObj                                                                                       // 10  // 18
-    });                                                                                                    // 11  // 19
-                                                                                                           // 12  // 20
-    for (var k in testObj) {                                                                               // 13  // 21
-      if (k === testPropName) {                                                                            // 14  // 22
-        return false;                                                                                      // 15  // 23
-      }                                                                                                    // 16  // 24
-    }                                                                                                      // 17  // 25
-  } catch (e) {                                                                                            // 18  // 26
-    return false;                                                                                          // 19  // 27
-  }                                                                                                        // 20  // 28
-                                                                                                           // 21  // 29
-  return testObj[testPropName] === testObj;                                                                // 22  // 30
-}                                                                                                          // 23  // 31
-                                                                                                           // 24  // 32
-// The name `babelHelpers` is hard-coded in Babel.  Otherwise we would make it                             // 25  // 33
-// something capitalized and more descriptive, like `BabelRuntime`.                                        // 26  // 34
-babelHelpers = {                                                                                           // 27  // 35
-  // Meteor-specific runtime helper for wrapping the object of for-in                                      // 28  // 36
-  // loops, so that inherited Array methods defined by es5-shim can be                                     // 29  // 37
-  // ignored in browsers where they cannot be defined as non-enumerable.                                   // 30  // 38
-  sanitizeForInObject: canDefineNonEnumerableProperties()                                                  // 31  // 39
-    ? function (value) { return value; }                                                                   // 32  // 40
-    : function (obj) {                                                                                     // 33  // 41
-      if (Array.isArray(obj)) {                                                                            // 34  // 42
-        var newObj = {};                                                                                   // 35  // 43
-        var keys = Object.keys(obj);                                                                       // 36  // 44
-        var keyCount = keys.length;                                                                        // 37  // 45
-        for (var i = 0; i < keyCount; ++i) {                                                               // 38  // 46
-          var key = keys[i];                                                                               // 39  // 47
-          newObj[key] = obj[key];                                                                          // 40  // 48
-        }                                                                                                  // 41  // 49
-        return newObj;                                                                                     // 42  // 50
-      }                                                                                                    // 43  // 51
-                                                                                                           // 44  // 52
-      return obj;                                                                                          // 45  // 53
-    },                                                                                                     // 46  // 54
-                                                                                                           // 47  // 55
-  // es6.templateLiterals                                                                                  // 48  // 56
-  // Constructs the object passed to the tag function in a tagged                                          // 49  // 57
-  // template literal.                                                                                     // 50  // 58
-  taggedTemplateLiteralLoose: function (strings, raw) {                                                    // 51  // 59
-    // Babel's own version of this calls Object.freeze on `strings` and                                    // 52  // 60
-    // `strings.raw`, but it doesn't seem worth the compatibility and                                      // 53  // 61
-    // performance concerns.  If you're writing code against this helper,                                  // 54  // 62
-    // don't add properties to these objects.                                                              // 55  // 63
-    strings.raw = raw;                                                                                     // 56  // 64
-    return strings;                                                                                        // 57  // 65
-  },                                                                                                       // 58  // 66
-                                                                                                           // 59  // 67
-  // es6.classes                                                                                           // 60  // 68
-  // Checks that a class constructor is being called with `new`, and throws                                // 61  // 69
-  // an error if it is not.                                                                                // 62  // 70
-  classCallCheck: function (instance, Constructor) {                                                       // 63  // 71
-    if (!(instance instanceof Constructor)) {                                                              // 64  // 72
-      throw new TypeError("Cannot call a class as a function");                                            // 65  // 73
-    }                                                                                                      // 66  // 74
-  },                                                                                                       // 67  // 75
-                                                                                                           // 68  // 76
-  // es6.classes                                                                                           // 69  // 77
-  inherits: function (subClass, superClass) {                                                              // 70  // 78
-    if (typeof superClass !== "function" && superClass !== null) {                                         // 71  // 79
-      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);        // 80
-    }                                                                                                      // 73  // 81
-                                                                                                           // 74  // 82
-    if (superClass) {                                                                                      // 75  // 83
-      if (Object.create) {                                                                                 // 76  // 84
-        // All but IE 8                                                                                    // 77  // 85
-        subClass.prototype = Object.create(superClass.prototype, {                                         // 78  // 86
-          constructor: {                                                                                   // 79  // 87
-            value: subClass,                                                                               // 80  // 88
-            enumerable: false,                                                                             // 81  // 89
-            writable: true,                                                                                // 82  // 90
-            configurable: true                                                                             // 83  // 91
-          }                                                                                                // 84  // 92
-        });                                                                                                // 85  // 93
-      } else {                                                                                             // 86  // 94
-        // IE 8 path.  Slightly worse for modern browsers, because `constructor`                           // 87  // 95
-        // is enumerable and shows up in the inspector unnecessarily.                                      // 88  // 96
-        // It's not an "own" property of any instance though.                                              // 89  // 97
-        //                                                                                                 // 90  // 98
-        // For correctness when writing code,                                                              // 91  // 99
-        // don't enumerate all the own-and-inherited properties of an instance                             // 92  // 100
-        // of a class and expect not to find `constructor` (but who does that?).                           // 93  // 101
-        var F = function () {                                                                              // 94  // 102
-          this.constructor = subClass;                                                                     // 95  // 103
-        };                                                                                                 // 96  // 104
-        F.prototype = superClass.prototype;                                                                // 97  // 105
-        subClass.prototype = new F();                                                                      // 98  // 106
-      }                                                                                                    // 99  // 107
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                         //
+// packages/babel-runtime/babel-runtime.js                                                                 //
+//                                                                                                         //
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                           //
+var hasOwn = Object.prototype.hasOwnProperty;                                                              // 1
+                                                                                                           // 2
+function canDefineNonEnumerableProperties() {                                                              // 3
+  var testObj = {};                                                                                        // 4
+  var testPropName = "t";                                                                                  // 5
+                                                                                                           // 6
+  try {                                                                                                    // 7
+    Object.defineProperty(testObj, testPropName, {                                                         // 8
+      enumerable: false,                                                                                   // 9
+      value: testObj                                                                                       // 10
+    });                                                                                                    // 11
+                                                                                                           // 12
+    for (var k in testObj) {                                                                               // 13
+      if (k === testPropName) {                                                                            // 14
+        return false;                                                                                      // 15
+      }                                                                                                    // 16
+    }                                                                                                      // 17
+  } catch (e) {                                                                                            // 18
+    return false;                                                                                          // 19
+  }                                                                                                        // 20
+                                                                                                           // 21
+  return testObj[testPropName] === testObj;                                                                // 22
+}                                                                                                          // 23
+                                                                                                           // 24
+// The name `babelHelpers` is hard-coded in Babel.  Otherwise we would make it                             // 25
+// something capitalized and more descriptive, like `BabelRuntime`.                                        // 26
+babelHelpers = {                                                                                           // 27
+  // Meteor-specific runtime helper for wrapping the object of for-in                                      // 28
+  // loops, so that inherited Array methods defined by es5-shim can be                                     // 29
+  // ignored in browsers where they cannot be defined as non-enumerable.                                   // 30
+  sanitizeForInObject: canDefineNonEnumerableProperties()                                                  // 31
+    ? function (value) { return value; }                                                                   // 32
+    : function (obj) {                                                                                     // 33
+      if (Array.isArray(obj)) {                                                                            // 34
+        var newObj = {};                                                                                   // 35
+        var keys = Object.keys(obj);                                                                       // 36
+        var keyCount = keys.length;                                                                        // 37
+        for (var i = 0; i < keyCount; ++i) {                                                               // 38
+          var key = keys[i];                                                                               // 39
+          newObj[key] = obj[key];                                                                          // 40
+        }                                                                                                  // 41
+        return newObj;                                                                                     // 42
+      }                                                                                                    // 43
+                                                                                                           // 44
+      return obj;                                                                                          // 45
+    },                                                                                                     // 46
+                                                                                                           // 47
+  // es6.templateLiterals                                                                                  // 48
+  // Constructs the object passed to the tag function in a tagged                                          // 49
+  // template literal.                                                                                     // 50
+  taggedTemplateLiteralLoose: function (strings, raw) {                                                    // 51
+    // Babel's own version of this calls Object.freeze on `strings` and                                    // 52
+    // `strings.raw`, but it doesn't seem worth the compatibility and                                      // 53
+    // performance concerns.  If you're writing code against this helper,                                  // 54
+    // don't add properties to these objects.                                                              // 55
+    strings.raw = raw;                                                                                     // 56
+    return strings;                                                                                        // 57
+  },                                                                                                       // 58
+                                                                                                           // 59
+  // es6.classes                                                                                           // 60
+  // Checks that a class constructor is being called with `new`, and throws                                // 61
+  // an error if it is not.                                                                                // 62
+  classCallCheck: function (instance, Constructor) {                                                       // 63
+    if (!(instance instanceof Constructor)) {                                                              // 64
+      throw new TypeError("Cannot call a class as a function");                                            // 65
+    }                                                                                                      // 66
+  },                                                                                                       // 67
+                                                                                                           // 68
+  // es6.classes                                                                                           // 69
+  inherits: function (subClass, superClass) {                                                              // 70
+    if (typeof superClass !== "function" && superClass !== null) {                                         // 71
+      throw new TypeError("Super expression must either be null or a function, not " + typeof superClass);
+    }                                                                                                      // 73
+                                                                                                           // 74
+    if (superClass) {                                                                                      // 75
+      if (Object.create) {                                                                                 // 76
+        // All but IE 8                                                                                    // 77
+        subClass.prototype = Object.create(superClass.prototype, {                                         // 78
+          constructor: {                                                                                   // 79
+            value: subClass,                                                                               // 80
+            enumerable: false,                                                                             // 81
+            writable: true,                                                                                // 82
+            configurable: true                                                                             // 83
+          }                                                                                                // 84
+        });                                                                                                // 85
+      } else {                                                                                             // 86
+        // IE 8 path.  Slightly worse for modern browsers, because `constructor`                           // 87
+        // is enumerable and shows up in the inspector unnecessarily.                                      // 88
+        // It's not an "own" property of any instance though.                                              // 89
+        //                                                                                                 // 90
+        // For correctness when writing code,                                                              // 91
+        // don't enumerate all the own-and-inherited properties of an instance                             // 92
+        // of a class and expect not to find `constructor` (but who does that?).                           // 93
+        var F = function () {                                                                              // 94
+          this.constructor = subClass;                                                                     // 95
+        };                                                                                                 // 96
+        F.prototype = superClass.prototype;                                                                // 97
+        subClass.prototype = new F();                                                                      // 98
+      }                                                                                                    // 99
                                                                                                            // 100
       // For modern browsers, this would be `subClass.__proto__ = superClass`,                             // 101
       // but IE <=10 don't support `__proto__`, and in this case the difference                            // 102
@@ -1877,11 +1821,7 @@ babelHelpers = {                                                                
   slice: Array.prototype.slice                                                                             // 253
 };                                                                                                         // 254
                                                                                                            // 255
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////     // 264
-                                                                                                                  // 265
-}).call(this);                                                                                                    // 266
-                                                                                                                  // 267
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }).call(this);
 
@@ -5418,29 +5358,21 @@ var Session;
 
 (function(){
 
-///////////////////////////////////////////////////////////////////////////////////////
-//                                                                                   //
-// packages/session/packages/session.js                                              //
-//                                                                                   //
-///////////////////////////////////////////////////////////////////////////////////////
-                                                                                     //
-(function(){                                                                         // 1
-                                                                                     // 2
-/////////////////////////////////////////////////////////////////////////////////    // 3
-//                                                                             //    // 4
-// packages/session/session.js                                                 //    // 5
-//                                                                             //    // 6
-/////////////////////////////////////////////////////////////////////////////////    // 7
-                                                                               //    // 8
-Session = new ReactiveDict('session');                                         // 1  // 9
-                                                                               // 2  // 10
-// Documentation here is really awkward because the methods are defined        // 3  // 11
-// elsewhere                                                                   // 4  // 12
-                                                                               // 5  // 13
-/**                                                                            // 6  // 14
- * @memberOf Session                                                           // 7  // 15
- * @method set                                                                 // 8  // 16
- * @summary Set a variable in the session. Notify any listeners that the value       // 17
+/////////////////////////////////////////////////////////////////////////////////
+//                                                                             //
+// packages/session/session.js                                                 //
+//                                                                             //
+/////////////////////////////////////////////////////////////////////////////////
+                                                                               //
+Session = new ReactiveDict('session');                                         // 1
+                                                                               // 2
+// Documentation here is really awkward because the methods are defined        // 3
+// elsewhere                                                                   // 4
+                                                                               // 5
+/**                                                                            // 6
+ * @memberOf Session                                                           // 7
+ * @method set                                                                 // 8
+ * @summary Set a variable in the session. Notify any listeners that the value
  * has changed (eg: redraw templates, and rerun any                            // 10
  * [`Tracker.autorun`](#tracker_autorun) computations, that called             // 11
  * [`Session.get`](#session_get) on this `key`.)                               // 12
@@ -5484,11 +5416,7 @@ Session = new ReactiveDict('session');                                         /
  * test against                                                                // 50
  */                                                                            // 51
                                                                                // 52
-/////////////////////////////////////////////////////////////////////////////////    // 61
-                                                                                     // 62
-}).call(this);                                                                       // 63
-                                                                                     // 64
-///////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////
 
 }).call(this);
 
@@ -5522,29 +5450,21 @@ var ReactiveVar;
 
 (function(){
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                                    //
-// packages/reactive-var/packages/reactive-var.js                                                                     //
-//                                                                                                                    //
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                                                      //
-(function(){                                                                                                          // 1
-                                                                                                                      // 2
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////    // 3
-//                                                                                                              //    // 4
-// packages/reactive-var/reactive-var.js                                                                        //    // 5
-//                                                                                                              //    // 6
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////    // 7
-                                                                                                                //    // 8
-/*                                                                                                              // 1  // 9
- * ## [new] ReactiveVar(initialValue, [equalsFunc])                                                             // 2  // 10
- *                                                                                                              // 3  // 11
- * A ReactiveVar holds a single value that can be get and set,                                                  // 4  // 12
- * such that calling `set` will invalidate any Computations that                                                // 5  // 13
- * called `get`, according to the usual contract for reactive                                                   // 6  // 14
- * data sources.                                                                                                // 7  // 15
- *                                                                                                              // 8  // 16
- * A ReactiveVar is much like a Session variable -- compare `foo.get()`                                         // 9  // 17
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                              //
+// packages/reactive-var/reactive-var.js                                                                        //
+//                                                                                                              //
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                //
+/*                                                                                                              // 1
+ * ## [new] ReactiveVar(initialValue, [equalsFunc])                                                             // 2
+ *                                                                                                              // 3
+ * A ReactiveVar holds a single value that can be get and set,                                                  // 4
+ * such that calling `set` will invalidate any Computations that                                                // 5
+ * called `get`, according to the usual contract for reactive                                                   // 6
+ * data sources.                                                                                                // 7
+ *                                                                                                              // 8
+ * A ReactiveVar is much like a Session variable -- compare `foo.get()`                                         // 9
  * to `Session.get("foo")` -- but it doesn't have a global name and isn't                                       // 10
  * automatically migrated across hot code pushes.  Also, while Session                                          // 11
  * variables can only hold JSON or EJSON, ReactiveVars can hold any value.                                      // 12
@@ -5569,7 +5489,7 @@ var ReactiveVar;
  * @instanceName reactiveVar                                                                                    // 31
  * @summary Constructor for a ReactiveVar, which represents a single reactive variable.                         // 32
  * @locus Client                                                                                                // 33
- * @param {Any} initialValue The initial value to set.  `equalsFunc` is ignored when setting the initial value.       // 42
+ * @param {Any} initialValue The initial value to set.  `equalsFunc` is ignored when setting the initial value.
  * @param {Function} [equalsFunc] Optional.  A function of two arguments, called on the old value and the new value whenever the ReactiveVar is set.  If it returns true, no set is performed.  If omitted, the default `equalsFunc` returns true if its arguments are `===` and are of type number, boolean, string, undefined, or null.
  */                                                                                                             // 36
 ReactiveVar = function (initialValue, equalsFunc) {                                                             // 37
@@ -5633,11 +5553,7 @@ ReactiveVar.prototype._numListeners = function() {                              
   return count;                                                                                                 // 95
 };                                                                                                              // 96
                                                                                                                 // 97
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////    // 106
-                                                                                                                      // 107
-}).call(this);                                                                                                        // 108
-                                                                                                                      // 109
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }).call(this);
 
