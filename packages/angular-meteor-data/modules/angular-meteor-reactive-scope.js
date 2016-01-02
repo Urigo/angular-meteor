@@ -1,23 +1,33 @@
-angular.module('angular-meteor.reactive-scope', ['angular-meteor.reactive-context'])
+angular.module('angular-meteor.reactive-scope', [
+  'angular-meteor.reactive-utils',
+  'angular-meteor.reactive-context'
+])
 
-.service('$$ReactiveScope', function ($rootScope, $parse, $$ReactiveContext) {
-  this.helpers = function(props = {}) {
+.service('$$ReactiveScope', function($rootScope, $parse, $$ReactiveUtils, $$ReactiveContext) {
+  let utils = $$ReactiveUtils;
+
+  this.helpers = function(props) {
     let reactiveContext = new $$ReactiveContext(this, this);
     reactiveContext.helpers(props);
   };
 
   this.autorun = function(fn, options = {}) {
+    fn = this._bind(fn);
+
     if (!_.isFunction(fn))
       throw Error('argument 1 must be a function')
     if (!_.isObject(options))
       throw Error('argument 2 must be an object');
 
-    let compution = Meteor.autorun(fn.bind(this), options);
+    let compution = Meteor.autorun(fn, options);
     this._autoStop(compution);
     return compution;
   };
 
-  this.subscribe = function(name, fn = angular.noop, cb = angular.noop) {
+  this.subscribe = function(name, fn = angular.noop, cb) {
+    fn = this._bind(fn);
+    cb = cb ? this._bind(cb) : angular.noop;
+
     if (!_.isString(name))
       throw Error('argument 1 must be a string');
     if (!_.isFunction(fn))
@@ -28,7 +38,7 @@ angular.module('angular-meteor.reactive-scope', ['angular-meteor.reactive-contex
     let result = {};
 
     let compution = this.autorun(() => {
-      let args = fn.call(this) || [];
+      let args = fn() || [];
 
       if (!_.isArray(args))
         throw Error("reactive function's return value must be an array");
@@ -86,6 +96,18 @@ angular.module('angular-meteor.reactive-scope', ['angular-meteor.reactive-contex
 
   this._autoStop = function(stoppable) {
     this.$on('$destroy', stoppable.stop.bind(stoppable));
+  };
+
+  this._throttledDigest = function() {
+    let isDigestable =
+      !this.$$destroyed &&
+      !$rootScope.$$phase;
+
+    if (isDigestable) this.$digest();
+  };
+
+  this._bind = function(fn) {
+    return utils.bind(fn, this, this._throttledDigest);
   };
 })
 

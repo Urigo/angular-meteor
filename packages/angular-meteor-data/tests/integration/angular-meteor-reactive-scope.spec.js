@@ -79,6 +79,18 @@ describe('angular-meteor', function () {
           $scope._autoStop({stop: stoppableSpy});
           expect(scopeDestroySpy).toHaveBeenCalled();
         });
+
+        it('should call autorun function using $scope as thisArg', function() {
+          $scope.autorun(function() {
+            expect(this).toEqual($scope);
+          });
+        });
+
+        it('should call digestion at the end of autorun function', function() {
+          $scope.$digest = jasmine.createSpy('digest');
+          $scope.autorun(angular.noop);
+          expect($scope.$digest).toHaveBeenCalled();
+        });
       });
 
       describe('subscribe()', function() {
@@ -205,10 +217,61 @@ describe('angular-meteor', function () {
           expect(meteorSubscribeSpy).toHaveBeenCalledWith('test', jasmine.any(Function));
         });
 
-        it('should call the subscribe method with the correct context', function (done) {
-          $scope.subscribe('test', function() {
-            expect(this).toBe($scope);
+        it('should call subscription arguments function using context as thisArg', function (done) {
+          $scope.subscribe('test', function () {
+            expect(this).toEqual($scope);
             done();
+          });
+        });
+
+        it('should call subscription callback function using context as thisArg', function(done) {
+          spyOn(Meteor, 'subscribe').and.callFake(function(name, cb) {
+            cb();
+          });
+
+          $scope.subscribe('test', angular.noop, function() {
+            expect(this).toEqual($scope);
+            done();
+          });
+        });
+
+        it('should call subscription callbacks object using context as thisArg', function(done) {
+          var next = _.after(2, done);
+
+          spyOn(Meteor, 'subscribe').and.callFake(function(name, cb) {
+            cb.onStop();
+            cb.onReady();
+          });
+
+          $scope.subscribe('test', angular.noop, {
+            onStop: function() {
+              expect(this).toEqual($scope);
+              next();
+            },
+
+            onReady: function() {
+              expect(this).toEqual($scope);
+              next();
+            }
+          });
+        });
+
+        it('should call digestion loop after subscription arguments function', function(done) {
+          $scope.$digest = jasmine.createSpy('digest');
+
+          $scope.subscribe('test', function() {
+            $scope.$digest = done;
+            return [];
+          });
+        });
+
+        it('should call digestion loop after subscribtion callback', function(done) {
+          spyOn(Meteor, 'subscribe').and.callFake(function(name, cb) {
+            cb();
+          });
+
+          $scope.subscribe('test', angular.noop, function() {
+            $scope.$digest = done;
           });
         });
       });
