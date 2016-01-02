@@ -1,66 +1,95 @@
-var angularMeteorReactiveScope = angular.module('angular-meteor.reactive-scope', [
-  'angular-meteor.reactive'
-]);
+angular.module('angular-meteor.reactive-scope', ['angular-meteor.reactive-context'])
 
-angularMeteorReactiveScope.run(['$rootScope', '$reactive', '$parse', function ($rootScope, $reactive, $parse) {
-  class ReactiveScope {
-    helpers (def) {
-      this.stopOnDestroy($reactive(this).helpers(def));
+.service('$$ReactiveScope', function ($rootScope, $parse, $$ReactiveContext) {
+  this.helpers = function(props = {}) {
+    let reactiveContext = new $$ReactiveContext(this, this);
+    reactiveContext.helpers(props);
+  };
+
+  this.autorun = function(fn, options = {}) {
+    if (!_.isFunction(fn))
+      throw Error('argument 1 must be a function')
+    if (!_.isObject(options))
+      throw Error('argument 2 must be an object');
+
+    let compution = Meteor.autorun(fn.bind(this), options);
+    this._autoStop(compution);
+    return compution;
+  };
+
+  this.subscribe = function(name, fn = angular.noop, cb = angular.noop) {
+    if (!_.isString(name))
+      throw Error('argument 1 must be a string');
+    if (!_.isFunction(fn))
+      throw Error('argument 2 must be a function');
+    if (!_.isFunction(cb) && !_.isObject(cb))
+      throw Error('argument 3 must be a function or an object');
+
+    let result = {};
+
+    let compution = this.autorun(() => {
+      let args = fn.call(this) || [];
+
+      if (!_.isArray(args))
+        throw Error("reactive function's return value must be an array");
+
+      let subscription = Meteor.subscribe(name, ...args, cb);
+      this._autoStop(subscription);
+
+      result.ready = subscription.ready.bind(subscription);
+      result.subscriptionId  = subscription.subscriptionId;
+    });
+
+    result.stop = compution.stop.bind(compution);
+    return result;
+  };
+
+  this.getReactively = function(...args) {
+    let context, k, isDeep;
+
+    if (_.isObject(args[0]))
+      [context, k, isDeep] = args;
+    else
+      [k, isDeep] = args;
+
+    if (angular.isUndefined(context)) context = this;
+    if (angular.isUndefined(isDeep)) isDeep = false;
+
+    if (!_.isString(k))
+      throw Error("'key' must be a string");
+    if (!_.isBoolean(isDeep))
+      throw Error("'isDeep' must be a boolean");
+
+    context._dependencies = context._dependencies || {};
+
+    if (!context._dependencies[k]) {
+      context._dependencies[k] = new Tracker.Dependency();
+      this._watchModel(context, k, isDeep);
     }
 
-    autorun(fn) {
-      return this.stopOnDestroy(Meteor.autorun(fn));
-    }
+    context._dependencies[k].depend();
+    return $parse(k)(context);
+  };
 
-    subscribe (name, fn = angular.noop, resultCb) {
-      let result = {};
-      let autorunComp = this.autorun(() => {
-        let args = fn.apply(this) || [];
-        if (!angular.isArray(args)) {
-          throw new Error(`[angular-meteor][ReactiveContext] The return value of arguments function in subscribe must be an array! `);
-        }
+  this._watchModel = function(context, k, isDeep) {
+    let getVal = _.partial($parse(k), context);
+    let initialVal = getVal();
 
-        let subscriptionResult = Meteor.subscribe(name, ...args, resultCb);
-        this.stopOnDestroy(subscriptionResult);
-        result.ready = subscriptionResult.ready.bind(subscriptionResult);
-        result.subscriptionId  = subscriptionResult.subscriptionId;
-      });
+    this.$watch(getVal, (val, oldVal) => {
+      let hasChanged =
+        val !== initialVal ||
+        val !== oldVal
 
-      result.stop = autorunComp.stop.bind(autorunComp);
+      if (hasChanged) context._dependencies[k].changed();
+    }, isDeep);
+  };
 
-      return result;
-    }
+  this._autoStop = function(stoppable) {
+    this.$on('$destroy', stoppable.stop.bind(stoppable));
+  };
+})
 
-    getReactively (property, objectEquality) {
-      if (!this.$$trackerDeps) {
-        this.$$trackerDeps = {};
-      }
-
-      if (angular.isUndefined(objectEquality)) {
-        objectEquality = false;
-      }
-
-      if (!this.$$trackerDeps[property]) {
-        this.$$trackerDeps[property] = new Tracker.Dependency();
-
-        this.$watch(property, (newVal, oldVal) => {
-            if (newVal !== oldVal) {
-              this.$$trackerDeps[property].changed();
-            }
-          }, objectEquality);
-      }
-
-      this.$$trackerDeps[property].depend();
-
-      return $parse(property)(this);
-    }
-
-    stopOnDestroy(stoppable) {
-      this.$on('$destroy', () => stoppable.stop());
-
-      return stoppable;
-    }
-  }
-
-  angular.extend(Object.getPrototypeOf($rootScope), ReactiveScope.prototype);
-}]);
+.run(function($rootScope, $$ReactiveScope) {
+  let ScopeProto = Object.getPrototypeOf($rootScope);
+  _.extend(ScopeProto, $$ReactiveScope);
+});

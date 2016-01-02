@@ -9,7 +9,7 @@ var angularMeteor = angular.module('angular-meteor', [
   'angular-meteor.reactive-scope',
   'angular-meteor.utils',
   'angular-meteor.camera',
-  'angular-meteor.reactive'
+  'angular-meteor.reactive-context'
 ]);
 
 angularMeteor.run(['$compile', '$document', '$rootScope', function ($compile, $document, $rootScope) {

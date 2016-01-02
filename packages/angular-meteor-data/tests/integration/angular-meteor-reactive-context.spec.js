@@ -1,693 +1,626 @@
-var testedModule = 'angular-meteor.reactive';
+var testedModule = 'angular-meteor.reactive-context';
 
 describe('angular-meteor', function () {
   describe(testedModule, function () {
     beforeEach(angular.mock.module(testedModule));
 
-    var $compile;
+    var $$ReactiveContext;
     var $reactive;
+    var $compile;
     var $rootScope;
-    var testScope;
-    var context = {};
+    var Scope;
 
-    beforeEach(angular.mock.inject(function (_$compile_, _$reactive_, _$rootScope_) {
-      $compile = _$compile_;
+    beforeEach(angular.mock.inject(function (_$compile_, _$rootScope_, _$$ReactiveContext_, _$reactive_) {
+      $$ReactiveContext = _$$ReactiveContext_;
       $reactive = _$reactive_;
+      $compile = _$compile_;
       $rootScope = _$rootScope_;
-      testScope = $rootScope.$new();
+      Scope = Object.getPrototypeOf($rootScope).constructor;
     }));
 
-    describe('$reactive', function () {
-      it('Should receive one param and pass them to the ReactiveContext class without scope object', function () {
-        var returnValue = $reactive(context);
+    describe('$$ReactiveContext', function () {
+      var testId = 'test-id';
+      var $scope;
+      var context;
+      var reactiveContext;
 
-        expect(returnValue.scope).toBeUndefined();
-        expect(returnValue.context).toBe(context);
+      beforeEach(function() {
+        $scope = $rootScope.$new();
+        context = {};
+        reactiveContext = new $$ReactiveContext(context, $scope);
+        bigCollection.remove(testId);
       });
 
-      it('Should receive context param and attached scope and then and pass them to the ReactiveContext class', function () {
-        var returnValue = $reactive(context).attach(testScope);
-
-        expect(returnValue.scope).toBe(testScope);
-        expect(returnValue.context).toBe(context);
+      it('should set the given context and scope', function () {
+        expect(reactiveContext._scope).toEqual($scope);
+        expect(reactiveContext._context).toEqual(context);
       });
 
-      it('Should receive only context and do not use scope', function () {
-        var returnValue = $reactive(context);
-
-        expect(returnValue.scope).toBeUndefined();
-        expect(returnValue.context).toBe(context);
+      it('should set a new scope if not specified', function () {
+        reactiveContext = new $$ReactiveContext(context);
+        expect(reactiveContext._scope).toEqual(jasmine.any(Scope));
+        expect(reactiveContext._context).toEqual(context);
       });
 
-      it('Should receive only scope and use it as context', function () {
-        var returnValue = $reactive(testScope);
+      describe('helpers()', function() {
+        it('should register a number helper', function () {
+          reactiveContext.helpers({
+            myHelper: function () {
+              return 10;
+            }
+          });
 
-        expect(returnValue.scope).toBe(testScope);
-        expect(returnValue.context).toBe(testScope);
+          expect(context['myHelper']).toBe(10);
+        });
+
+        it('should override a pre-defined helper', function () {
+          context['myHelper'] = 'oops';
+
+          reactiveContext.helpers({
+            myHelper: function () {
+              return 10;
+            }
+          });
+
+          expect(context['myHelper']).toBe(10);
+        });
+
+        it('should register a string helper', function () {
+          reactiveContext.helpers({
+            myHelper: function () {
+              return 'Test';
+            }
+          });
+
+          expect(context['myHelper']).toBe('Test');
+        });
+
+        it('should register an object helper', function () {
+          var obj = {
+            prop1: '10',
+            prop2: 'Test'
+          };
+
+          reactiveContext.helpers({
+            myHelper: function () {
+              return obj;
+            }
+          });
+
+          expect(context['myHelper']).toEqual(obj);
+        });
+
+        it('should register an array helper', function () {
+          var arr = [10, 20, 30];
+
+          reactiveContext.helpers({
+            myHelper: function () {
+              return arr;
+            }
+          });
+
+          expect(context['myHelper']).toEqual(arr);
+        });
+
+        it('should register cursor helper as an array', function () {
+          reactiveContext.helpers({
+            myHelper: function () {
+              return bigCollection.find();
+            }
+          });
+
+          expect(context['myHelper']).toEqual(jasmine.any(Array));
+        });
+
+        it('should update cursor helper as collection gets updated', function () {
+          var cursor = bigCollection.find();
+
+          reactiveContext.helpers({
+            myHelper: function () {
+              return cursor;
+            }
+          });
+
+          bigCollection.insert({
+            _id: testId,
+            prop1: 'A'
+          });
+
+          expect(context['myHelper']).toEqual(jasmine.any(Array));
+          expect(context['myHelper'].length).toEqual(1);
+
+          bigCollection.remove({_id: testId});
+          expect(context['myHelper']).toEqual(jasmine.any(Array));
+          expect(context['myHelper'].length).toEqual(0);
+        });
+
+        it('should register cursor fetch result helper as array', function () {
+          reactiveContext.helpers({
+            myHelper: function () {
+              return bigCollection.find().fetch();
+            }
+          });
+
+          expect(context['myHelper']).toEqual(jasmine.any(Array));
+        });
+
+        it('should update cursor helper once a new document is added', function () {
+          var data = {
+            _id: testId,
+            prop1: 'T'
+          };
+
+          reactiveContext.helpers({
+            myHelper: function () {
+              return bigCollection.find();
+            }
+          });
+
+          bigCollection.insert(data);
+          expect(context['myHelper'].length).toBe(1);
+          expect(context['myHelper'][0]).toEqual(data);
+        });
+
+        it('should update cursor helper once a document is removed', function () {
+          var data = {
+            _id: testId,
+            prop1: 'T'
+          };
+
+          reactiveContext.helpers({
+            myHelper: function () {
+              return bigCollection.find();
+            }
+          });
+
+          bigCollection.remove(testId);
+          expect(context['myHelper'].length).toBe(0);
+          expect(context['myHelper'][0]).toBeUndefined();
+        });
+
+        it('sshould update cursor helper once a document is removed', function () {
+          var data = {
+            _id: testId,
+            prop1: 'T'
+          };
+
+          reactiveContext.helpers({
+            myHelper: function () {
+              return bigCollection.find();
+            }
+          });
+
+          bigCollection.insert(data);
+          bigCollection.update({_id: testId}, {$set: {prop1: 'B'}});
+
+          expect(context['myHelper'].length).toBe(1);
+          expect(context['myHelper'][0]).toBeDefined();
+          expect(context['myHelper'][0].prop1).toBe('B');
+        });
+
+        it('should update cursor helper once the collection is rearranged', function () {
+          var data1 = {
+            _id: testId,
+            prop1: 'A'
+          };
+
+          var data2 = {
+            _id: 'OtherId',
+            prop1: 'B'
+          };
+
+          reactiveContext.helpers({
+            myHelper: function () {
+              return bigCollection.find({}, {sort: {prop1: 1}});
+            }
+          });
+
+          bigCollection.insert(data2);
+
+          expect(context['myHelper'].length).toBe(1);
+          expect(context['myHelper'][0]).toBeDefined();
+          expect(context['myHelper'][0].prop1).toBe('B');
+
+          bigCollection.insert(data1);
+
+          expect(context['myHelper'].length).toBe(2);
+          expect(context['myHelper'][0]).toBeDefined();
+          expect(context['myHelper'][1]).toBeDefined();
+          expect(context['myHelper'][0].prop1).toBe('A');
+          expect(context['myHelper'][1].prop1).toBe('B');
+        });
+
+        it('should digest scope once collection is updated', function () {
+          var data = {
+            _id: testId,
+            prop1: 'T'
+          };
+
+          reactiveContext.helpers({
+            myHelper: function () {
+              return bigCollection.find({});
+            }
+          });
+
+          var digestScopeSpy = spyOn($scope, '$digest');
+          bigCollection.insert(data);
+          expect(digestScopeSpy).toHaveBeenCalled();
+          expect(digestScopeSpy.calls.count()).toBe(1);
+        });
+
+
+        it('should digest scope used as context once collection is updated', function () {
+          reactiveContext = new $$ReactiveContext($scope, $scope);
+          bigCollection.remove(testId);
+
+          var data = {
+            _id: testId,
+            prop1: 'T'
+          };
+
+          reactiveContext.helpers({
+            myHelper: function () {
+              return bigCollection.find({});
+            }
+          });
+
+          var digestScopeSpy = spyOn($scope, '$digest');
+          bigCollection.insert(data);
+          expect(digestScopeSpy).toHaveBeenCalled();
+          expect(digestScopeSpy.calls.count()).toBe(1);
+        });
+
+        it('should define reactive property on the context', function () {
+          reactiveContext.helpers({
+            prop: 20
+          });
+
+          expect(context.prop).toBeDefined();
+          expect(context.prop).toBe(20);
+        });
+
+        it('should define reactive property on the context and update the value', function () {
+          reactiveContext.helpers({
+            prop: 20
+          });
+
+          context.prop = 100;
+          expect(context.prop).toBeDefined();
+          expect(context.prop).toBe(100);
+        });
+
+
+        it('should create a configurable and enumerable reactive property', function () {
+          reactiveContext.helpers({
+            prop: 20
+          });
+
+          expect(Object.keys(context)).toContain("prop");
+          delete context.prop;
+          expect(context.prop).not.toBeDefined();
+        });
+
+        it('should have reactive properties available on the scope and in the view when using scope only', function () {
+          reactiveContext = new $$ReactiveContext($scope, $scope);
+
+          reactiveContext.helpers({
+            prop: 20
+          });
+
+          var element = angular.element('<input type="text" ng-model="prop" /><span>{{ prop }}</span>');
+          $compile(element)($scope);
+          $scope.$apply();
+
+          expect(element.get(1).innerHTML).toBe('20');
+        });
+
+        it('should update reactive properties when using view and ngModel', function () {
+          reactiveContext = new $$ReactiveContext($scope, $scope);
+
+          reactiveContext.helpers({
+            prop: 20
+          });
+
+          var element = angular.element('<input type="text" ng-model="prop" /><span>{{ prop }}</span>');
+          $compile(element)($scope);
+          $scope.$apply();
+
+          expect(element.get(1).innerHTML).toBe('20');
+
+          var autorunSpy = jasmine.createSpy();
+          Meteor.autorun(autorunSpy);
+          var inputModel = angular.element(element.get(0)).controller('ngModel');
+          inputModel.$setViewValue('test');
+          $scope.$apply();
+          Tracker.flush();
+
+          expect(autorunSpy).toHaveBeenCalled();
+          expect(element.get(1).innerHTML).toBe('test');
+        });
+
+        it('should trigger helpers dependencies when using object and updating a sub property', function () {
+          reactiveContext.helpers({
+            foo: {}
+          });
+
+          $rootScope.$apply();
+          Tracker.flush();
+          expect(context._dependencies.foo).toBeDefined();
+
+          var depend = jasmine.createSpy('depend');
+          context._dependencies['foo'].depend = depend;
+          context.foo.bar = 'newbar';
+
+          $rootScope.$apply();
+          Tracker.flush();
+          expect(depend.calls.count()).toEqual(1);
+        });
+
+        it('should NOT trigger autorun dependencies when using object and adding a sub property', function () {
+          var callCount = 0;
+
+          context.prop = {
+            mySubProp: 10
+          };
+
+          reactiveContext.helpers({
+            myMethod: function () {
+              callCount++;
+              return reactiveContext.getReactively('prop');
+            }
+          });
+
+          $rootScope.$apply();
+          Tracker.flush();
+          expect(callCount).toBe(1);
+
+          context.prop.newProp = 20;
+          $rootScope.$apply();
+          Tracker.flush();
+
+          expect(callCount).toBe(1);
+        });
+
+        it('should trigger autorun dependencies when using object and adding a sub property while watching deep', function () {
+          var callCount = 0;
+
+          context.prop = {
+            mySubProp: 10
+          };
+
+          reactiveContext.helpers({
+            myMethod: function () {
+              callCount++;
+              return reactiveContext.getReactively('prop', true);
+            }
+          });
+
+          $rootScope.$apply();
+          Tracker.flush();
+          expect(callCount).toBe(1);
+
+          context.prop.newProp = 20;
+          $rootScope.$apply();
+          Tracker.flush();
+
+          expect(callCount).toBe(2);
+        });
+
+        it ('should not run getReactively() for cursors', function() {
+          expect($scope.$$watchersCount).toBe(0);
+
+          reactiveContext.helpers({
+            myHelper: function() {
+              return bigCollection.find({});
+            }
+          });
+
+          expect($scope.$$watchersCount).toBe(0);
+        });
+      });
+
+      describe('autorun()', function() {
+        it('should call Scope.autorun()', function() {
+          $scope.autorun = jasmine.createSpy('autorun');
+
+          var fn = angular.noop;
+          var options = {};
+
+          reactiveContext.autorun(fn, options);
+          expect($scope.autorun).toHaveBeenCalledWith(jasmine.any(Function), options);
+        });
+
+        it('should call the autorun method with current context', function (done) {
+          $scope.autorun = jasmine.createSpy('autorun').and.callFake(function(fn) {
+            return fn();
+          });
+
+          reactiveContext.autorun(function() {
+            expect(this).toBe(context);
+            done();
+          });
+        });
+      });
+  
+      describe('getReactively()', function() {
+        it('should call Scope.getReactively() with context', function() {
+          $scope.getReactively = jasmine.createSpy('getReactively');
+          reactiveContext.getReactively('myProp');
+          expect($scope.getReactively).toHaveBeenCalledWith(context, 'myProp');
+        });
+
+        it('should get the value from the context when using getReactively on a primitive', function () {
+          context.myProp = 10;
+          var value = reactiveContext.getReactively('myProp');
+          expect(value).toBe(10);
+        });
+
+        it('should get the value from the context when using getReactively on an object', function () {
+          context.myProp = {
+            subProp: 10
+          };
+          var value = reactiveContext.getReactively('myProp.subProp');
+          expect(value).toBe(10);
+        });
+      });
+
+      describe('subscribe()', function() {
+        it('should call Scope.subscribe()', function() {
+          $scope.subscribe = jasmine.createSpy('subscribe');
+          reactiveContext.subscribe(1, 2, 3);
+          expect($scope.subscribe).toHaveBeenCalledWith(1, 2, 3);
+        });
+
+        it('should create a dependency when using subscription with getReactively()', function () {
+          context.myProp = {
+            subProp: 10
+          };
+
+          $scope.$apply();
+
+          var callCount = 0;
+
+          reactiveContext.subscribe('t', function () {
+            callCount++;
+            return [reactiveContext.getReactively('myProp.subProp')];
+          });
+
+          $scope.$apply();
+          context.myProp.subProp = 2;
+          $scope.$apply();
+
+          Tracker.flush();
+
+          expect(callCount).toBe(2);
+        });
+
+
+        it('should create a subscription without callback - NO scope', function () {
+          var subscribeSpy = spyOn(Meteor, 'subscribe').and.returnValue({
+            stop: angular.noop,
+            ready: angular.noop,
+            subscriptionId: 0
+          });
+
+          reactiveContext.subscribe('test');
+
+          expect(subscribeSpy).toHaveBeenCalledWith('test', angular.noop);
+        });
+
+        it('should create a subscription with no callback and args- NO scope', function () {
+          var subscribeSpy = spyOn(Meteor, 'subscribe').and.returnValue({
+            stop: angular.noop,
+            ready: angular.noop,
+            subscriptionId: 0
+          });
+
+          reactiveContext.subscribe('test', function() {
+            return [10, 20];
+          });
+
+          expect(subscribeSpy).toHaveBeenCalledWith('test', 10, 20, angular.noop);
+        });
+
+        it('should create a subscription with callback and args - NO scope', function () {
+          var subscribeSpy = spyOn(Meteor, 'subscribe').and.returnValue({
+            stop: angular.noop,
+            ready: angular.noop,
+            subscriptionId: 0
+          });
+
+          var cb = function () {};
+
+          reactiveContext.subscribe('test', function () {
+            return [10, 20];
+          }, cb);
+
+          expect(subscribeSpy).toHaveBeenCalledWith('test', 10, 20, cb);
+        });
+
+        it('should create a subscription with callback and args - NO scope', function () {
+          var subscribeSpy = spyOn(Meteor, 'subscribe').and.returnValue({
+            stop: angular.noop,
+            ready: angular.noop,
+            subscriptionId: 0
+          });
+
+          var cb = {
+            onReady: function() {},
+            onStop: function() {}
+          };
+
+          reactiveContext.subscribe('test', function () {
+            return [10, 20];
+          }, cb);
+
+          expect(subscribeSpy).toHaveBeenCalledWith('test', 10, 20, cb);
+        });
+
+        it('should call the subscription method with current context', function (done) {
+          reactiveContext.subscribe('test', function () {
+            expect(this).toBe(context);
+            done();
+          });
+        });
+      });
+
+      describe('subscribe()', function() {
+        it('should stop all subscriptions and autocomputions', function() {
+          var autorun = reactiveContext.autorun(angular.noop);
+          var subscription = reactiveContext.subscribe('dummy');
+          autorun.stop = jasmine.createSpy('autorunStop');
+          subscription.stop = jasmine.createSpy('subscriptionStop');
+
+          reactiveContext.stop();
+          expect(autorun.stop).toHaveBeenCalled();
+          expect(subscription.stop).toHaveBeenCalled();
+        });
       });
     });
 
-    describe('ReactiveContext', function () {
-      var reactiveContextInstance;
-      var testObjectId = 'TempId';
+    describe('$reactive', function() {
+      var $scope;
+      var context;
 
-      beforeEach(function () {
-        testScope = $rootScope.$new();
+      beforeEach(function() {
+        $$ReactiveContext.prototype.helpers = jasmine.createSpy('helpers');
+        $$ReactiveContext.prototype.autorun = jasmine.createSpy('autorun');
+        $$ReactiveContext.prototype.subscribe = jasmine.createSpy('subscribe');
+        $$ReactiveContext.prototype.getReactively = jasmine.createSpy('getReactively');
+        $$ReactiveContext.prototype.stop = jasmine.createSpy('stop');
+
+        $scope = $rootScope.$new();
         context = {};
-        reactiveContextInstance = $reactive(context).attach(testScope);
-        bigCollection.remove(testObjectId);
       });
 
-      it('Should register primitive helper', function () {
-        reactiveContextInstance.helpers({
-          myHelper: function () {
-            return 10;
-          }
-        });
+      it('should call ReactiveContext()', function() {
+        $reactive(context).attach($scope);
+        reactiveContext = context._reactiveContext;
 
-        expect(reactiveContextInstance.stoppables.length).toBe(1);
-        expect(reactiveContextInstance.context['myHelper']).toBe(10);
+        expect(reactiveContext).toBeDefined();
+        expect(reactiveContext._context).toEqual(context);
+        expect(reactiveContext._scope).toEqual($scope);
       });
 
-      it('Whould not explode when there is property on the context with the helper name', function () {
-        var scope = $rootScope.$new();
-
-        scope.myHelper = 'oops';
-        var instance = $reactive(scope).helpers({
-          myHelper: function () {
-            return 10;
-          }
-        });
-
-        expect(instance.stoppables.length).toBe(1);
-        expect(instance.context['myHelper']).toBe(10);
+      it('should return the context', function() {
+        var vm = $reactive(context).attach($scope);
+        expect(vm).toEqual(context);
       });
 
-      it('Should register string helper', function () {
-        reactiveContextInstance.helpers({
-          myHelper: function () {
-            return 'Test';
-          }
-        });
-
-        expect(reactiveContextInstance.stoppables.length).toBe(1);
-        expect(reactiveContextInstance.context['myHelper']).toBe('Test');
-      });
-
-      it('Should register object helper', function () {
-        var testObject = {
-          prop1: '10',
-          prop2: 'Test'
-        };
-
-        reactiveContextInstance.helpers({
-          myHelper: function () {
-            return testObject;
-          }
-        });
-
-        expect(reactiveContextInstance.stoppables.length).toBe(1);
-        expect(reactiveContextInstance.context['myHelper']).toEqual(testObject);
-      });
-
-      it('Should register array helper', function () {
-        var testArray = [10, 20, 30];
-
-        reactiveContextInstance.helpers({
-          myHelper: function () {
-            return testArray;
-          }
-        });
-
-        expect(reactiveContextInstance.stoppables.length).toBe(1);
-        expect(reactiveContextInstance.context['myHelper']).toEqual(testArray);
-      });
-
-      it('Should register cursor helper as array', function () {
-        reactiveContextInstance.helpers({
-          myHelper: function () {
-            return bigCollection.find();
-          }
-        });
-
-        expect(reactiveContextInstance.stoppables.length).toBe(1);
-        expect(reactiveContextInstance.context['myHelper'] instanceof Array).toEqual(true);
-      });
-
-      it('Should register cursor and reset the data when cursor is invalidated', function () {
-        var cursor = bigCollection.find();
-
-        reactiveContextInstance.helpers({
-          myHelper: function () {
-            return cursor;
-          }
-        });
-
-        bigCollection.insert({
-          _id: testObjectId,
-          prop1: 'A'
-        });
-
-        expect(reactiveContextInstance.stoppables.length).toBe(1);
-        expect(reactiveContextInstance.context['myHelper'] instanceof Array).toEqual(true);
-        expect(reactiveContextInstance.context['myHelper'].length).toEqual(1);
-
-        reactiveContextInstance.stoppables[0].invalidate();
-
-        expect(reactiveContextInstance.stoppables.length).toBe(1);
-        expect(reactiveContextInstance.context['myHelper'] instanceof Array).toEqual(true);
-        expect(reactiveContextInstance.context['myHelper'].length).toEqual(0);
-      });
-
-      it('Should register cursor fetch result helper as array', function () {
-        reactiveContextInstance.helpers({
-          myHelper: function () {
-            return bigCollection.find().fetch();
-          }
-        });
-
-        expect(reactiveContextInstance.stoppables.length).toBe(1);
-        expect(reactiveContextInstance.context['myHelper'] instanceof Array).toEqual(true);
-      });
-
-      it('Should handle cursor - add action', function () {
-        var data = {
-          _id: testObjectId,
-          prop1: 'T'
-        };
-
-        reactiveContextInstance.helpers({
-          myHelper: function () {
-            return bigCollection.find();
-          }
-        });
-
-        bigCollection.insert(data);
-
-        expect(reactiveContextInstance.context['myHelper'].length).toBe(1);
-        expect(reactiveContextInstance.context['myHelper'][0]).toEqual(data);
-      });
-
-      it('Should handle cursor - remove action', function () {
-        var data = {
-          _id: testObjectId,
-          prop1: 'T'
-        };
-
-        reactiveContextInstance.helpers({
-          myHelper: function () {
-            return bigCollection.find();
-          }
-        });
-
-        bigCollection.remove(testObjectId);
-
-        expect(reactiveContextInstance.context['myHelper'].length).toBe(0);
-        expect(reactiveContextInstance.context['myHelper'][0]).toBeUndefined();
-      });
-
-      it('Should handle cursor - update action', function () {
-        var data = {
-          _id: testObjectId,
-          prop1: 'T'
-        };
-
-        reactiveContextInstance.helpers({
-          myHelper: function () {
-            return bigCollection.find();
-          }
-        });
-
-        bigCollection.insert(data);
-        bigCollection.update({_id: testObjectId}, {$set: {prop1: 'B'}});
-
-        expect(reactiveContextInstance.context['myHelper'].length).toBe(1);
-        expect(reactiveContextInstance.context['myHelper'][0]).toBeDefined();
-        expect(reactiveContextInstance.context['myHelper'][0].prop1).toBe('B');
-      });
-
-      it('Should handle cursor - move action', function () {
-        var data1 = {
-          _id: testObjectId,
-          prop1: 'A'
-        };
-
-        var data2 = {
-          _id: 'OtherId',
-          prop1: 'B'
-        };
-
-        reactiveContextInstance.helpers({
-          myHelper: function () {
-            return bigCollection.find({}, {sort: {prop1: 1}});
-          }
-        });
-
-        bigCollection.insert(data2);
-
-        expect(reactiveContextInstance.context['myHelper'].length).toBe(1);
-        expect(reactiveContextInstance.context['myHelper'][0]).toBeDefined();
-        expect(reactiveContextInstance.context['myHelper'][0].prop1).toBe('B');
-
-        bigCollection.insert(data1);
-
-        expect(reactiveContextInstance.context['myHelper'].length).toBe(2);
-        expect(reactiveContextInstance.context['myHelper'][0]).toBeDefined();
-        expect(reactiveContextInstance.context['myHelper'][1]).toBeDefined();
-        expect(reactiveContextInstance.context['myHelper'][0].prop1).toBe('A');
-        expect(reactiveContextInstance.context['myHelper'][1].prop1).toBe('B');
-      });
-
-      it('Should trigger scope $digest when using scope and context', function () {
-        var data = {
-          _id: testObjectId,
-          prop1: 'T'
-        };
-
-        reactiveContextInstance.helpers({
-          myHelper: function () {
-            return bigCollection.find({});
-          }
-        });
-
-        var digestScopeSpy = spyOn(testScope, '$digest');
-
-        bigCollection.insert(data);
-
-        expect(digestScopeSpy).toHaveBeenCalled();
-        expect(digestScopeSpy.calls.count()).toBe(1);
-      });
-
-
-      it('Should trigger scope $digest when using scope only as context', function () {
-        testScope = $rootScope.$new();
-        reactiveContextInstance = $reactive(testScope);
-        bigCollection.remove(testObjectId);
-
-        var data = {
-          _id: testObjectId,
-          prop1: 'T'
-        };
-
-        reactiveContextInstance.helpers({
-          myHelper: function () {
-            return bigCollection.find({});
-          }
-        });
-
-        var digestScopeSpy = spyOn(testScope, '$digest');
-
-        bigCollection.insert(data);
-
-        expect(digestScopeSpy).toHaveBeenCalled();
-        expect(digestScopeSpy.calls.count()).toBe(1);
-      });
-
-      it('Should call stop of all computations when stopping the reactivity of the context', function () {
-        reactiveContextInstance.helpers({
-          myHelper: function () {
-            return bigCollection.find({});
-          }
-        });
-
-        var computationSpy = spyOn(reactiveContextInstance.stoppables[0], 'stop');
-
-        reactiveContextInstance.stop();
-
-        expect(computationSpy).toHaveBeenCalled();
-      });
-
-      it('Should define reactive property on the context', function () {
-        reactiveContextInstance.helpers({
-          prop: 20
-        });
-
-        expect(context.prop).toBeDefined();
-        expect(context.prop).toBe(20);
-      });
-
-      it('Should defined reactive property on the context and update the value', function () {
-        reactiveContextInstance.helpers({
-          prop: 20
-        });
-
-        context.prop = 100;
-
-        expect(context.prop).toBeDefined();
-        expect(context.prop).toBe(100);
-      });
-
-
-      it('Should create a configurable and enumerable reactive property', function () {
-        reactiveContextInstance.helpers({
-          prop: 20
-        });
-
-        expect(Object.keys(context)).toContain("prop");
-
-        delete context.prop;
-
-        expect(context.prop).not.toBeDefined();
-      });
-
-      it('Should add subscription when call subscribe', function () {
-        reactiveContextInstance.helpers({
-          prop: 20
-        });
-
-        var subscribeSpy = spyOn(testScope, 'subscribe');
-
-        reactiveContextInstance.subscribe('users', function () {
-          return [];
-        });
-
-        expect(subscribeSpy).toHaveBeenCalled();
-      });
-
-      it('Should call autorun methods when updating reactive property value', function () {
-        reactiveContextInstance.helpers({
-          prop: 20
-        });
-
-        var autorunSpy = jasmine.createSpy();
-        Meteor.autorun(autorunSpy);
-
-        context.prop = 100;
-        Tracker.flush();
-
-        expect(autorunSpy.calls.count()).toBe(1);
-      });
-
-      it('Should have reactive properties available on the scope and in the view when using scope only', function () {
-        testScope = $rootScope.$new();
-        reactiveContextInstance = $reactive(testScope);
-
-        reactiveContextInstance.helpers({
-          prop: 20
-        });
-
-        var element = angular.element('<input type="text" ng-model="prop" /><span>{{ prop }}</span>');
-        $compile(element)(testScope);
-        testScope.$apply();
-
-        expect(element.get(1).innerHTML).toBe('20');
-      });
-
-      it('Should update reactive properties when using view and ngModel', function () {
-        testScope = $rootScope.$new();
-        reactiveContextInstance = $reactive(testScope);
-
-        reactiveContextInstance.helpers({
-          prop: 20
-        });
-
-        var element = angular.element('<input type="text" ng-model="prop" /><span>{{ prop }}</span>');
-        $compile(element)(testScope);
-        testScope.$apply();
-
-        expect(element.get(1).innerHTML).toBe('20');
-
-        var autorunSpy = jasmine.createSpy();
-        Meteor.autorun(autorunSpy);
-        var inputModel = angular.element(element.get(0)).controller('ngModel');
-        inputModel.$setViewValue('test');
-        testScope.$apply();
-        Tracker.flush();
-
-        expect(autorunSpy).toHaveBeenCalled();
-        expect(element.get(1).innerHTML).toBe('test');
-      });
-
-      it('Should trigger Helpers dependencies when using object and updating a sub property', function () {
-        $reactive(context);
-
-        var callCount = 0;
-
-        context.prop = {
-          mySubProp: 10
-        };
-
-        context.helpers({
-          myMethod: function () {
-            callCount++;
-
-            return 'a';
-          }
-        });
-
-        $rootScope.$apply();
-        Tracker.flush();
-
-        context.prop.mySubProp = 20;
-
-        $rootScope.$apply();
-        Tracker.flush();
-
-        //expect(callCount).toBe(2);
-      });
-
-      it('Should NOT trigger Autorun dependencies when using object and adding a sub property', function () {
-        $reactive(context);
-
-        var callCount = 0;
-
-        context.prop = {
-          mySubProp: 10
-        };
-
-        context.helpers({
-          myMethod: function () {
-            callCount++;
-
-            return context.getReactively('prop'); // Shallow
-          }
-        });
-
-        $rootScope.$apply();
-        Tracker.flush();
-
-        context.prop.newProp = 20;
-
-        $rootScope.$apply();
-        Tracker.flush();
-
-        expect(callCount).toBe(1);
-      });
-
-      it('Should trigger Autorun dependencies when using object and adding a sub property and watching deep', function () {
-        $reactive(context);
-
-        var callCount = 0;
-
-        context.prop = {
-          mySubProp: 10
-        };
-
-        context.helpers({
-          myMethod: function () {
-            callCount++;
-
-            return context.getReactively('prop', true);
-          }
-        });
-
-        $rootScope.$apply();
-        Tracker.flush();
-
-        context.prop.newProp = 20;
-
-        $rootScope.$apply();
-        Tracker.flush();
-
-        expect(callCount).toBe(2);
-      });
-
-      it('Should remove and destroy custom scope if it was necessary to create it', function () {
-        var reactive = $reactive(context);
-
-        context.helpers({
-          prop: {
-            mySubProp: 10
-          }
-        });
-
-        var destroySpy = spyOn(reactive.scope, '$destroy').and.callThrough();
-
-        reactive.stop();
-
-        expect(destroySpy).toHaveBeenCalled();
-        expect(reactive.scope).toBeUndefined();
-      });
-
-
-      it('Should NOT remove and destroy scope if the scope was attached', function () {
-        var reactive = $reactive(context);
-        reactive.attach(testScope);
-
-        context.helpers({
-          prop: {
-            mySubProp: 10
-          }
-        });
-
-        var destroySpy = spyOn(reactive.scope, '$destroy').and.callThrough();
-
-        reactive.stop();
-
-        expect(destroySpy).not.toHaveBeenCalled();
-        expect(reactive.scope).toBeDefined();
-      });
-
-      it('Should get the value from the context when using getReactively - primitive', function () {
-        var reactive = $reactive(context);
-        reactive.attach(testScope);
-
-        context.myProp = 10;
-
-        var value = context.getReactively('myProp');
-
-        expect(value).toBe(10);
-      });
-
-      it('Should get the value from the context when using getReactively - object', function () {
-        var reactive = $reactive(context);
-        reactive.attach(testScope);
-
-        context.myProp = {
-          subProp: 10
-        };
-
-        var value = context.getReactively('myProp.subProp');
-
-        expect(value).toBe(10);
-      });
-
-      it('Should create a dependency when using subscription with getReactively', function () {
-        var reactive = $reactive(context);
-        reactive.attach(testScope);
-
-        context.myProp = {
-          subProp: 10
-        };
-
-        testScope.$apply();
-
-        var callCount = 0;
-
-        context.subscribe('t', function () {
-          callCount++;
-          return [context.getReactively('myProp.subProp')]
-        });
-
-        testScope.$apply();
-        context.myProp.subProp = 2;
-        testScope.$apply();
-
-        Tracker.flush();
-
-        expect(callCount).toBe(2);
-      });
-
-
-      it('Should create a subscription without callback - NO scope', function () {
-        $reactive(context);
-
-        var subscribeSpy = spyOn(Meteor, 'subscribe').and.returnValue({
-          ready: angular.noop,
-          subscriptionId: 0
-        });
-
-        context.subscribe('test');
-
-        expect(subscribeSpy).toHaveBeenCalledWith('test', angular.noop);
-      });
-
-      it('Should create a subscription with no callback and args- NO scope', function () {
-        $reactive(context);
-
-        var subscribeSpy = spyOn(Meteor, 'subscribe').and.returnValue({
-          ready: angular.noop,
-          subscriptionId: 0
-        });
-
-        context.subscribe('test', function() {
-          return [
-            10,
-            20
-          ];
-        });
-
-        expect(subscribeSpy).toHaveBeenCalledWith('test', 10, 20, angular.noop);
-      });
-
-      it('Should create a subscription with callback and args- NO scope', function () {
-        $reactive(context);
-
-        var subscribeSpy = spyOn(Meteor, 'subscribe').and.returnValue({
-          ready: angular.noop,
-          subscriptionId: 0
-        });
-        var cb = function () {
-        };
-
-        context.subscribe('test', function () {
-          return [
-            10,
-            20
-          ];
-        }, cb);
-
-        expect(subscribeSpy).toHaveBeenCalledWith('test', 10, 20, cb);
-      });
-
-      it('Should create a subscription with callback and args- NO scope', function () {
-        $reactive(context);
-
-        var subscribeSpy = spyOn(Meteor, 'subscribe').and.returnValue({
-          ready: angular.noop,
-          subscriptionId: 0
-        });
-
-        var cb = {
-          onReady: function() {
-
-          },
-          onStop: function() {
-
-          }
-        };
-
-        context.subscribe('test', function () {
-          return [
-            10,
-            20
-          ];
-        }, cb);
-
-        expect(subscribeSpy).toHaveBeenCalledWith('test', 10, 20, cb);
-      });
-
-      it ('Should not run getReactively for cursors', function() {
-        $reactive(context).attach(testScope);
-
-        expect(testScope.$$watchersCount).toBe(0);
-
-        context.helpers({
-          myHelper: function() {
-            return bigCollection.find({});
-          }
-        });
-
-        expect(testScope.$$watchersCount).toBe(0);
-      });
-
-      it('Should call the subscription method with the correct context', function (done) {
-        $reactive(context);
-
-        context.subscribe('test', function () {
-          expect(this).toBe(context);
-          done();
-        });
+      it('should attach reactive functions to context', function() {
+        $reactive(context).attach($scope);
+
+        context.helpers();
+        context.autorun();
+        context.subscribe();
+        context.getReactively();
+        context.stop();
+
+        expect($$ReactiveContext.prototype.helpers).toHaveBeenCalled();
+        expect($$ReactiveContext.prototype.autorun).toHaveBeenCalled();
+        expect($$ReactiveContext.prototype.subscribe).toHaveBeenCalled();
+        expect($$ReactiveContext.prototype.getReactively).toHaveBeenCalled();
+        expect($$ReactiveContext.prototype.stop).toHaveBeenCalled();
       });
     });
   });
