@@ -74,6 +74,17 @@ Run the following line to add this package:
 
     meteor add barbatus:ng2-pagination
 
+> This package's pagination mark-up follows the structure of
+> the Bootstrap's [one](http://www.w3schools.com/bootstrap/bootstrap_pagination.asp),
+> so you can change its look simply by using proper CSS styles.
+> It's worth to note, though, that this package has been created
+> with the idea to be used in this tutorial only.
+> It misses a lot of features that would be quite useful
+> in the real world, for example, custom templates.
+> In the future, this package will be replaced by the
+> pagination [library](https://github.com/michaelbromley/ng2-pagination) from the author of the Angular 1 pagination [angularutils:pagination](https://github.com/michaelbromley/angularUtils-pagination/) when
+> it gets martured enough.
+
 It consists of three main parts: pagination controls, a pagination service
 and a pagination pipe. Pagination controls will simply render what is mentioned above —
 a list of page links to switch between.
@@ -155,12 +166,21 @@ Let's add it:
     meteor add tmeasday:publish-counts
 
 This package exports `Counts` object with all API methods we are going
-to use. Let's publish total number of parties as follows:
+to use. 
+
+> Notice that you'll see a TypeScript warning in the terminal
+> saying that "Counts" is not defined, when you start using the API.
+> That's because "tmeasday:publish-counts" is a regular meteor package,
+> which doesn't know anything about TypeScript and it doesn't add any definition files.
+> If you want to get rid of this message, you are welcome to create own definition file,
+> which is quite easy if you read the 7th step. 
+
+Let's publish total number of parties as follows:
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="12.9"}}
 
 > Notice that we are passing `{ noReady: true }` in the last argument so
-> that the publication will be ready only after our main cursor is ready - readiness.
+> that the publication will be ready only after our main cursor is ready — readiness.
 
 We've just created new _numberOfParties_ publication.
 Let's get it reactively on the client side using `Counts` object, and, at the same time,
@@ -218,7 +238,7 @@ to a new value when user clicks on the search button:
 {{> DiffBox tutorialName="meteor-angular2-socially" step="12.15"}}
 
 > Notice that we don't know what size of the search to expect
-> that's why we are re-setting current page to 0.
+> that's why we are re-setting current page to 1.
 
 That's it! We are done with all features we wanted to implement.
 Let's check it out now that everything works properly altogether: pagination, search, sorting,

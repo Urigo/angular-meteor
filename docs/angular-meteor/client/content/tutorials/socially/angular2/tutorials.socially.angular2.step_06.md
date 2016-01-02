@@ -1,5 +1,5 @@
 {{#template name="tutorials.socially.angular2.step_06.md"}}
-{{> downloadPreviousStep stepName="step_5"}}  
+{{> downloadPreviousStep stepName="step_05"}}  
 
 In this step we are going to add a form to the party details view and 
 bind a party object to it, so that we'll be able to change party details and

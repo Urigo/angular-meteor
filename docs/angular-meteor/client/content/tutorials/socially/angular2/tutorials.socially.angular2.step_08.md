@@ -1,5 +1,5 @@
 {{#template name="tutorials.socially.angular2.step_08.md"}}
-{{> downloadPreviousStep stepName="step_7"}} 
+{{> downloadPreviousStep stepName="step_07"}} 
 
 In this section we'll look at how to implement security for an app
 using Meteor and Angular 2 API together.

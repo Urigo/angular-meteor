@@ -1,5 +1,5 @@
 {{#template name="tutorials.socially.angular2.step_02.md"}}
-{{> downloadPreviousStep stepName="step_1"}}
+{{> downloadPreviousStep stepName="step_01"}}
     
 Now it's time to make the web page dynamic — with Angular 2.
 
