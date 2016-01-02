@@ -1,7 +1,7 @@
 Package.describe({
   name: "angular-meteor-auth",
   summary: "Angular-Meteor authentication module",
-  version: "0.0.1",
+  version: "0.0.2",
   git: "https://github.com/Urigo/angular-meteor.git",
   documentation: null
 });

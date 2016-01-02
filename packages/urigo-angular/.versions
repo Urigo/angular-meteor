@@ -1,4 +1,4 @@
-angular@1.3.3
+angular@1.3.4
 angular-meteor-data@0.0.9
 angular-templates@0.0.3
 angular:angular@1.4.7
@@ -53,6 +53,6 @@ templating-tools@1.0.0
 tracker@1.0.9
 ui@1.0.8
 underscore@1.0.4
-urigo:angular@1.3.3
+urigo:angular@1.3.4
 webapp@1.2.3
 webapp-hashing@1.0.5
