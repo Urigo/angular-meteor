@@ -76,7 +76,7 @@ This method returns `this`, which the the reactive context, in order to provide 
       this.relevantId = 10;
 
       this.helpers({
-        users: () => Users.find({ _id: this.getReactively('relevantId') }),
+        users: () => Users.find({ _id: this.getReactively('relevantId') })
       });
     }]);
 
