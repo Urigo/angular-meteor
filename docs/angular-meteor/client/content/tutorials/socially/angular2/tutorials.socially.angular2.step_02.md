@@ -18,16 +18,12 @@ We replaced the hard-coded party list with the [NgFor](https://angular.io/docs/j
 * The `*ngFor="#party of parties"` attribute in the `li` tag is an Angular repeater directive. The repeater tells Angular to create a `li` element for each party in the list using the `li` tag as the template.
 * The expressions wrapped in the double curly braces ( `{{dstache}}party.name}}` and `{{dstache}}party.description}}` ) will be replaced by the value of the expressions.
 
-To get this to work, we'll have to import NgFor and tell Angular 2 we are using it in the template.
-
-{{> DiffBox tutorialName="meteor-angular2-socially" step="2.2"}}
-
-Just to be clear, make sure you:
-
-- added `NgFor` to the `import` statement.
-- added `NgFor` as a directive in the view
-
-Why so much work setting up a new dependency? Angular 2 is trying to avoid namespace collisions, so dependencies are always imported and specified.
+It's worth to mentione that `ngFor` is a core attribute in Angular 2, and along with some other 
+directives, like `ngIf`, `ngClass` etc, including as well _form_ directives (which will be heavily used on the 4th step), like `ngForm`, it constitutes so called _common_ attributes.
+You can check out them [here](https://angular.io/docs/js/latest/api/common/COMMON_DIRECTIVES-let.html).
+The main point about them is that they are globally available in every component template, which means you don't need
+to import them manually into the component's view, in comparison to a custom directive or routing directives.
+We'll be creating own components, as well as use routing in the next steps, so you'll have hands on everything you need. 
 
 # Component as a Controller
 
@@ -42,7 +38,7 @@ This code will go inside of our Socially class [`constructor`](https://developer
 
 We can attach data with the context "this", referring to the Socially class.
 
-{{> DiffBox tutorialName="meteor-angular2-socially" step="2.3"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="2.2"}}
 
 Run the app again.
 
@@ -57,7 +53,7 @@ Thanks to TypeScript, we can use this compilation diagnostics to create less bug
 This comes as a great benefit of choosing TypeScript as a primary language
 for our app. So lets define our `parties` property:
 
-{{> DiffBox tutorialName="meteor-angular2-socially" step="2.4"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="2.3"}}
 
 You'll see the data model, parties, is now instantiated within the Socially component.
 

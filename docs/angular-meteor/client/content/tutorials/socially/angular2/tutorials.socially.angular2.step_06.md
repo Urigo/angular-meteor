@@ -23,18 +23,12 @@ Since we have a routerLink button on the page that redirects back to the list (t
 
 ## ngModel
 
-[ngModel](https://angular.io/docs/js/latest/api/common/NgModel-directive.html) binds a view form to the component's model, which can be an object of any type, in comparison to
-Model-Driven binding where `ControlGroup` is used. Let's setup the dependencies and look at an example.
+[ngModel](https://angular.io/docs/js/latest/api/common/NgModel-directive.html) binds a HTML form to the component's model, which can be an object of any type, in comparison to
+the Model-Driven binding where `ControlGroup` instance is used.
 
-The `NgModel` directive can be found in the `FORM_DIRECTIVES`. First, import it and add it to your list of View directives.
+The syntax looks a bit different: `[(ngModel)]`. `ngModel` binds to the party properties and fill out the inputs, and vice versa:
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="6.2"}}
-
-Now that Angular knows about NgModel, we can use it in our template.
-
-The syntax looks a bit different: `[(ngModel)]`. NgModel binds to `this.party` and the data should fill out the inputs.
-
-{{> DiffBox tutorialName="meteor-angular2-socially" step="6.3"}}
 
 Let's do a little test to see how form controls and events work in Angular 2. Bind to `party.name` below the input, then change the input text.
 
@@ -70,7 +64,7 @@ But let's keep party details view simple for now, without using form Controls.
 
 Lastly, let's add a submit event handler that saves the current party:
 
-{{> DiffBox tutorialName="meteor-angular2-socially" step="6.4"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="6.3"}}
 
 # Summary
 

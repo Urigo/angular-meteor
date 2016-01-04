@@ -139,6 +139,12 @@ Let's subscribe to the new publication in the PartyDetails to load one specific 
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="9.9"}}
 
+As you can see above, the `party` property is undefined initially, which 
+means at the moment when template is being rendered it's undefined too.
+Angular 2 rendering engine doesn't check availability of the template variables while rendering, which differs
+from how Blaze works. We are supposed to do it themselves, that's what
+`ngIf` directive exists for, which is a core directive and available globally:
+
 {{> DiffBox tutorialName="meteor-angular2-socially" step="9.10"}}
 
 Run the app and click on one of the party links. You'll see that party details page loads with full data as before.

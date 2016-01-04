@@ -555,7 +555,7 @@ index a9c8ddc..dd1ef68 100644
 From 2894de2dfc599395f98b965244f8abe49093bcee Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:30:49 +0300
-Subject: [PATCH 15/80] Step 2.1: use dynamic template with NgFor
+Subject: [PATCH 015/133] Step 2.1: use dynamic template with NgFor
 
 ---
  client/app.html | 23 +++++++++--------------
@@ -593,58 +593,22 @@ index dd1ef68..d5876ba 100644
 2.5.4 (Apple Git-61)
 
 
-From 97172c0d170fb96c36e779fcf993ae3faf2d33f9 Mon Sep 17 00:00:00 2001
-From: barbatus <alex.borodach@gmail.com>
-Date: Sat, 26 Sep 2015 17:32:31 +0300
-Subject: [PATCH 16/80] Step 2.2: load NgFor directive, add it to the View's
- directives list
-
----
- client/app.ts | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
-
-diff --git a/client/app.ts b/client/app.ts
-index 6bf00fa..4886bf7 100644
---- a/client/app.ts
-+++ b/client/app.ts
-@@ -2,13 +2,16 @@
- 
- import {Component, View} from 'angular2/core';
- 
-+import {NgFor} from 'angular2/common';
-+
- import {bootstrap} from 'angular2/bootstrap';
- 
- @Component({
-     selector: 'app'
- })
- @View({
--    templateUrl: 'client/app.html'
-+    templateUrl: 'client/app.html',
-+    directives: [NgFor]
- })
- class Socially { }
- 
--- 
-2.5.4 (Apple Git-61)
-
-
-From 6a06c0a980507dafbecbed07edaf5b494bf3b021 Mon Sep 17 00:00:00 2001
+From a45f0e97e0fab66ef9bee686a54036cd7514ead5 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:34:52 +0300
-Subject: [PATCH 17/80] Step 2.3: load parties data into the app
+Subject: [PATCH 016/133] Step 2.2: load parties data into the app
 
 ---
  client/app.ts | 19 ++++++++++++++++++-
  1 file changed, 18 insertions(+), 1 deletion(-)
 
 diff --git a/client/app.ts b/client/app.ts
-index 4886bf7..e314898 100644
+index 6bf00fa..4a44bbe 100644
 --- a/client/app.ts
 +++ b/client/app.ts
-@@ -13,6 +13,23 @@ import {bootstrap} from 'angular2/bootstrap';
-     templateUrl: 'client/app.html',
-     directives: [NgFor]
+@@ -10,6 +10,23 @@ import {bootstrap} from 'angular2/bootstrap';
+ @View({
+     templateUrl: 'client/app.html'
  })
 -class Socially { }
 +class Socially {
@@ -671,21 +635,21 @@ index 4886bf7..e314898 100644
 2.5.4 (Apple Git-61)
 
 
-From 6db48a1fbc764f52abd3ea69e95d5551b59aa3f8 Mon Sep 17 00:00:00 2001
+From c4260d9eef333fe29946e5b1ba2af4966298912b Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:36:13 +0300
-Subject: [PATCH 18/80] Step 2.4: define parties property
+Subject: [PATCH 017/133] Step 2.3: define parties property
 
 ---
  client/app.ts | 2 ++
  1 file changed, 2 insertions(+)
 
 diff --git a/client/app.ts b/client/app.ts
-index e314898..be942b2 100644
+index 4a44bbe..e5fc57c 100644
 --- a/client/app.ts
 +++ b/client/app.ts
-@@ -14,6 +14,8 @@ import {bootstrap} from 'angular2/bootstrap';
-     directives: [NgFor]
+@@ -11,6 +11,8 @@ import {bootstrap} from 'angular2/bootstrap';
+     templateUrl: 'client/app.html'
  })
  class Socially {
 +    parties: Array&lt;Object>;
@@ -697,10 +661,10 @@ index e314898..be942b2 100644
 2.5.4 (Apple Git-61)
 
 
-From 50671c8b8c7b87d09bd964f84659ab6a6389190e Mon Sep 17 00:00:00 2001
+From 00433b2bc271f5411e142519da0e9690e6e31327 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 18:30:37 +0300
-Subject: [PATCH 19/80] Step 3.1:  add the parties collection
+Subject: [PATCH 018/133] Step 3.1:  add the parties collection
 
 ---
  collections/parties.ts | 1 +
@@ -718,10 +682,10 @@ index 0000000..83fbd07
 2.5.4 (Apple Git-61)
 
 
-From cc135f0d8aa5cef6c984e40766377427cde5f7cb Mon Sep 17 00:00:00 2001
+From 5e318ea8230025c9d2cad8e32c68517687bd5f7e Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 18:36:20 +0300
-Subject: [PATCH 20/80] Step 3.2:  add reference to the declaration file
+Subject: [PATCH 019/133] Step 3.2:  add reference to the declaration file
 
 ---
  collections/parties.ts | 2 ++
@@ -739,20 +703,20 @@ index 83fbd07..d1ed853 100644
 2.5.4 (Apple Git-61)
 
 
-From 0a563905987e091c9fdc41b80d5ef2e703c10a79 Mon Sep 17 00:00:00 2001
+From 64d64402f125091dcf825fc7f2b6f14bab98f833 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 18:36:56 +0300
-Subject: [PATCH 21/80] Step 3.3:  import the parties collection
+Subject: [PATCH 020/133] Step 3.3:  import the parties collection
 
 ---
  client/app.ts | 2 ++
  1 file changed, 2 insertions(+)
 
 diff --git a/client/app.ts b/client/app.ts
-index be942b2..7cd294a 100644
+index e5fc57c..929d632 100644
 --- a/client/app.ts
 +++ b/client/app.ts
-@@ -6,6 +6,8 @@ import {NgFor} from 'angular2/common';
+@@ -4,6 +4,8 @@ import {Component, View} from 'angular2/core';
  
  import {bootstrap} from 'angular2/bootstrap';
  
@@ -765,20 +729,20 @@ index be942b2..7cd294a 100644
 2.5.4 (Apple Git-61)
 
 
-From 9f4e576e2bd90f9a584b4b256c1cbe46d0440b3a Mon Sep 17 00:00:00 2001
+From c6fe10df769bcddf25d8b75a6537311bac220dc4 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Mon, 19 Oct 2015 13:28:41 +0300
-Subject: [PATCH 22/80] Step 3.4: fetch parties
+Subject: [PATCH 021/133] Step 3.4: fetch parties
 
 ---
  client/app.ts | 15 +--------------
  1 file changed, 1 insertion(+), 14 deletions(-)
 
 diff --git a/client/app.ts b/client/app.ts
-index 7cd294a..3248d7f 100644
+index 929d632..a7d0c82 100644
 --- a/client/app.ts
 +++ b/client/app.ts
-@@ -19,20 +19,7 @@ class Socially {
+@@ -16,20 +16,7 @@ class Socially {
      parties: Array&lt;Object>;
  
      constructor () {
@@ -804,17 +768,17 @@ index 7cd294a..3248d7f 100644
 2.5.4 (Apple Git-61)
 
 
-From f1ddcdaaf4dd118944d485edc1c8b831c52a2ee2 Mon Sep 17 00:00:00 2001
+From 71ed8ece690351ce601f8929569e071a9f7c590e Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 18:47:23 +0300
-Subject: [PATCH 23/80] Step 3.5:  fetch parties reactively
+Subject: [PATCH 022/133] Step 3.5:  fetch parties reactively
 
 ---
  client/app.ts | 8 +++++---
  1 file changed, 5 insertions(+), 3 deletions(-)
 
 diff --git a/client/app.ts b/client/app.ts
-index 3248d7f..2a6cb6d 100644
+index a7d0c82..a4caf39 100644
 --- a/client/app.ts
 +++ b/client/app.ts
 @@ -1,6 +1,6 @@
@@ -823,9 +787,9 @@ index 3248d7f..2a6cb6d 100644
 -import {Component, View} from 'angular2/core';
 +import {Component, View, NgZone} from 'angular2/core';
  
- import {NgFor} from 'angular2/common';
+ import {bootstrap} from 'angular2/bootstrap';
  
-@@ -18,8 +18,10 @@ import {Parties} from 'collections/parties';
+@@ -15,8 +15,10 @@ import {Parties} from 'collections/parties';
  class Socially {
      parties: Array&lt;Object>;
  
@@ -842,10 +806,10 @@ index 3248d7f..2a6cb6d 100644
 2.5.4 (Apple Git-61)
 
 
-From 0530d10109421c9794e7edf3ed5481e207a0dead Mon Sep 17 00:00:00 2001
+From e6eef9f7bf9cdbeb33d91df2bf2960f681d388e6 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 8 Nov 2015 02:26:41 +0300
-Subject: [PATCH 24/80] Step 3.6: initialize collection on server side
+Subject: [PATCH 023/133] Step 3.6: initialize collection on server side
 
 ---
  server/main.ts | 1 +
@@ -863,22 +827,22 @@ index 0000000..64dbcb6
 2.5.4 (Apple Git-61)
 
 
-From 713e0414777450643ce1a61ec7b49d6e921d3831 Mon Sep 17 00:00:00 2001
+From 367a433870393378c15ca279de124d09fe6a49b6 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 14 Oct 2015 22:55:11 +0300
-Subject: [PATCH 25/80] Step 3.7: Blaze-like binding to Angular2
+Subject: [PATCH 024/133] Step 3.7: Blaze-like binding to Angular2
 
 ---
  client/app.ts | 12 +++++-------
  1 file changed, 5 insertions(+), 7 deletions(-)
 
 diff --git a/client/app.ts b/client/app.ts
-index 2a6cb6d..eb8fa3d 100644
+index a4caf39..7dfaf3e 100644
 --- a/client/app.ts
 +++ b/client/app.ts
-@@ -4,10 +4,10 @@ import {Component, View, NgZone} from 'angular2/core';
+@@ -2,10 +2,10 @@
  
- import {NgFor} from 'angular2/common';
+ import {Component, View, NgZone} from 'angular2/core';
  
 -import {bootstrap} from 'angular2/bootstrap';
 -
@@ -889,8 +853,8 @@ index 2a6cb6d..eb8fa3d 100644
  @Component({
      selector: 'app'
  })
-@@ -16,12 +16,10 @@ import {Parties} from 'collections/parties';
-     directives: [NgFor]
+@@ -13,12 +13,10 @@ import {Parties} from 'collections/parties';
+     templateUrl: 'client/app.html'
  })
  class Socially {
 -    parties: Array&lt;Object>;
@@ -979,10 +943,10 @@ index 64dbcb6..80ba2c9 100644
 2.5.4 (Apple Git-61)
 
 
-From fe1d2fcd94792cba3844d802c6542a26ed662e1a Mon Sep 17 00:00:00 2001
+From f55559f4ba0117e5ad6fef1ecd161b0ac18e5daa Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 17 Oct 2015 14:58:32 +0300
-Subject: [PATCH 28/80] Step 4.1:  create PartiesForm component
+Subject: [PATCH 027/132] Step 4.1:  create PartiesForm component
 
 ---
  client/parties-form/parties-form.ts | 11 +++++++++++
@@ -991,7 +955,7 @@ Subject: [PATCH 28/80] Step 4.1:  create PartiesForm component
 
 diff --git a/client/parties-form/parties-form.ts b/client/parties-form/parties-form.ts
 new file mode 100644
-index 0000000..f9e7663
+index 0000000..6e02b99
 --- /dev/null
 +++ b/client/parties-form/parties-form.ts
 @@ -0,0 +1,11 @@
@@ -1010,10 +974,10 @@ index 0000000..f9e7663
 2.5.4 (Apple Git-61)
 
 
-From a747ded713849727339b8b9c09030b8284e4923f Mon Sep 17 00:00:00 2001
+From 0ae27c955a5bca70df1407ac1de69fe025817711 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 17 Oct 2015 15:48:01 +0300
-Subject: [PATCH 29/80] Step 4.2: add parties-form.html template
+Subject: [PATCH 028/132] Step 4.2: add parties-form.html template
 
 ---
  client/parties-form/parties-form.html | 9 +++++++++
@@ -1039,10 +1003,10 @@ index 0000000..df0bd89
 2.5.4 (Apple Git-61)
 
 
-From 11c7a8c6d54bb6f20119a1633331d99d82af9cd0 Mon Sep 17 00:00:00 2001
+From e70c32219d9cf17a957e642ec698108aecc55036 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 17 Oct 2015 16:03:48 +0300
-Subject: [PATCH 30/80] Step 4.3: load the PartiesForm component
+Subject: [PATCH 029/132] Step 4.3: load the PartiesForm component
 
 ---
  client/app.html | 1 +
@@ -1062,21 +1026,21 @@ index d5876ba..2f7c3e3 100644
 2.5.4 (Apple Git-61)
 
 
-From f3f8840e29fb051bbc4504b7ca804976d571e048 Mon Sep 17 00:00:00 2001
+From 7af4ba673ec662074f10753ae88519a7ac045c63 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 17 Oct 2015 16:07:36 +0300
-Subject: [PATCH 31/80] Step 4.4:  import the PartiesForm component and link it
- with the Socially component
+Subject: [PATCH 030/132] Step 4.4:  import the PartiesForm component and link
+ it with the Socially component
 
 ---
- client/app.ts | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ client/app.ts | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
 
 diff --git a/client/app.ts b/client/app.ts
-index eb8fa3d..ae88324 100644
+index 7dfaf3e..9847f48 100644
 --- a/client/app.ts
 +++ b/client/app.ts
-@@ -8,12 +8,14 @@ import {Parties} from 'collections/parties';
+@@ -6,11 +6,14 @@ import {Parties} from 'collections/parties';
  
  import {bootstrap} from 'angular2-meteor';
  
@@ -1086,9 +1050,9 @@ index eb8fa3d..ae88324 100644
      selector: 'app'
  })
  @View({
-     templateUrl: 'client/app.html',
--    directives: [NgFor]
-+    directives: [NgFor, PartiesForm]
+-    templateUrl: 'client/app.html'
++    templateUrl: 'client/app.html',
++    directives: [PartiesForm]
  })
  class Socially {
      parties: Mongo.Cursor&lt;Object>;
@@ -1096,55 +1060,30 @@ index eb8fa3d..ae88324 100644
 2.5.4 (Apple Git-61)
 
 
-From 0a4cbb80b5598bac2f6d6ebba8af864d2bb00870 Mon Sep 17 00:00:00 2001
+From 478f44874fbbcbbae871f1b4d434f9af2d1b5a9a Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
-Date: Sat, 17 Oct 2015 17:32:28 +0300
-Subject: [PATCH 32/80] Step 4.5:  import dependencies and add form directives
- to the View
+Date: Sat, 17 Oct 2015 17:41:26 +0300
+Subject: [PATCH 031/132] Step 4.5: build a form model
 
 ---
- client/parties-form/parties-form.ts | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+ client/parties-form/parties-form.ts | 15 ++++++++++++++-
+ 1 file changed, 14 insertions(+), 1 deletion(-)
 
 diff --git a/client/parties-form/parties-form.ts b/client/parties-form/parties-form.ts
-index f9e7663..2f8e761 100644
+index 6e02b99..e44ab8d 100644
 --- a/client/parties-form/parties-form.ts
 +++ b/client/parties-form/parties-form.ts
-@@ -2,10 +2,13 @@
+@@ -2,10 +2,23 @@
  
  import {Component, View} from 'angular2/core';
  
-+import {FORM_DIRECTIVES, FormBuilder, ControlGroup, Validators} from 'angular2/common';
++import {FormBuilder, ControlGroup, Validators} from 'angular2/common';
 +
  @Component({
      selector: 'parties-form'
  })
  @View({
--    templateUrl: '/client/parties-form/parties-form.html'
-+    templateUrl: '/client/parties-form/parties-form.html',
-+    directives: [FORM_DIRECTIVES]
- })
- export class PartiesForm { }
--- 
-2.5.4 (Apple Git-61)
-
-
-From d61c9553e01c54a89b14b135a7e016a6d963382d Mon Sep 17 00:00:00 2001
-From: barbatus <alex.borodach@gmail.com>
-Date: Sat, 17 Oct 2015 17:41:26 +0300
-Subject: [PATCH 33/80] Step 4.6:  build a form model
-
----
- client/parties-form/parties-form.ts | 13 ++++++++++++-
- 1 file changed, 12 insertions(+), 1 deletion(-)
-
-diff --git a/client/parties-form/parties-form.ts b/client/parties-form/parties-form.ts
-index 2f8e761..b23c9c7 100644
---- a/client/parties-form/parties-form.ts
-+++ b/client/parties-form/parties-form.ts
-@@ -11,4 +11,15 @@ import {FORM_DIRECTIVES, FormBuilder, ControlGroup, Validators} from 'angular2/c
-     templateUrl: '/client/parties-form/parties-form.html',
-     directives: [FORM_DIRECTIVES]
+     templateUrl: '/client/parties-form/parties-form.html'
  })
 -export class PartiesForm { }
 +export class PartiesForm {
@@ -1163,20 +1102,20 @@ index 2f8e761..b23c9c7 100644
 2.5.4 (Apple Git-61)
 
 
-From 7b80a62979e8b35fbfb067bd22953010d075c78f Mon Sep 17 00:00:00 2001
+From 78aa1971277ca3b2e934539b222e1995389096e3 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 17 Oct 2015 18:34:57 +0300
-Subject: [PATCH 34/80] Step 4.7:  add form validation
+Subject: [PATCH 032/132] Step 4.6: add form validation
 
 ---
  client/parties-form/parties-form.ts | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/client/parties-form/parties-form.ts b/client/parties-form/parties-form.ts
-index b23c9c7..bea604b 100644
+index e44ab8d..f7f193a 100644
 --- a/client/parties-form/parties-form.ts
 +++ b/client/parties-form/parties-form.ts
-@@ -17,9 +17,9 @@ export class PartiesForm {
+@@ -16,9 +16,9 @@ export class PartiesForm {
      constructor() {
          var fb = new FormBuilder();
          this.partiesForm = fb.group({
@@ -1192,10 +1131,10 @@ index b23c9c7..bea604b 100644
 2.5.4 (Apple Git-61)
 
 
-From fe388c8b8ca6a20201f9a7657f88c4bd46c35817 Mon Sep 17 00:00:00 2001
+From 14ec04dacadb92897ccf9df31235a07899b0fa03 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 17 Oct 2015 20:20:32 +0300
-Subject: [PATCH 35/80] Step 4.8:  link the form and its model together
+Subject: [PATCH 033/132] Step 4.7: link the form and its model together
 
 ---
  client/parties-form/parties-form.html | 8 ++++----
@@ -1223,10 +1162,10 @@ index df0bd89..dffc0aa 100644
 2.5.4 (Apple Git-61)
 
 
-From 17f8b06e677fee2d1f1c743ebed0df062717b5c9 Mon Sep 17 00:00:00 2001
+From 7688db5e82137ecca3645252fe55f917c1ba576b Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 17 Oct 2015 20:33:32 +0300
-Subject: [PATCH 36/80] Step 4.9: add submit handler inside the template
+Subject: [PATCH 034/132] Step 4.8: add submit handler inside the template
 
 ---
  client/parties-form/parties-form.html | 2 +-
@@ -1246,31 +1185,31 @@ index dffc0aa..da869fb 100644
 2.5.4 (Apple Git-61)
 
 
-From 2587547c0dfb42676ca3bb5d248dd343128b05c9 Mon Sep 17 00:00:00 2001
+From a20c7d7f865e3b09203fee9017eb61b436d84dd0 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
-Date: Sat, 17 Oct 2015 20:34:52 +0300
-Subject: [PATCH 37/80] Step 4.10:  add addParty method inside the component
+Date: Mon, 4 Jan 2016 13:21:15 +0700
+Subject: [PATCH 035/132] Step 4.9: add addParty method into the component
 
 ---
  client/parties-form/parties-form.ts | 18 +++++++++++++++++-
  1 file changed, 17 insertions(+), 1 deletion(-)
 
 diff --git a/client/parties-form/parties-form.ts b/client/parties-form/parties-form.ts
-index bea604b..69ae0a3 100644
+index f7f193a..569e21d 100644
 --- a/client/parties-form/parties-form.ts
 +++ b/client/parties-form/parties-form.ts
 @@ -2,7 +2,9 @@
  
  import {Component, View} from 'angular2/core';
  
--import {FORM_DIRECTIVES, FormBuilder, ControlGroup, Validators} from 'angular2/common';
-+import {FORM_DIRECTIVES, FormBuilder, Control, ControlGroup, Validators} from 'angular2/common';
+-import {FormBuilder, ControlGroup, Validators} from 'angular2/common';
++import {FormBuilder, Control, ControlGroup, Validators} from 'angular2/common';
 +
 +import {Parties} from 'collections/parties';
  
  @Component({
      selector: 'parties-form'
-@@ -22,4 +24,18 @@ export class PartiesForm {
+@@ -21,4 +23,18 @@ export class PartiesForm {
              location: ['', Validators.required]
          });
      }
@@ -1293,10 +1232,10 @@ index bea604b..69ae0a3 100644
 2.5.4 (Apple Git-61)
 
 
-From ed66a0fad1e94772cb5f4ceeefb45129e0d8eb29 Mon Sep 17 00:00:00 2001
+From b11d0b8144956263df73e9e42cf081ed07d0f3fc Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 17 Oct 2015 20:57:18 +0300
-Subject: [PATCH 38/80] Step 4.11:  Add a remove party button and click event
+Subject: [PATCH 036/132] Step 4.10: add a remove party button and click event
  handler
 
 ---
@@ -1319,20 +1258,21 @@ index 2f7c3e3..b3ec969 100644
 2.5.4 (Apple Git-61)
 
 
-From b4202389311092cdc79e6d8427815fa6164c2c8e Mon Sep 17 00:00:00 2001
+From 6d0c1d0f97c398bdc11934bf4ff1a2a322dfa2b4 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 17 Oct 2015 20:59:18 +0300
-Subject: [PATCH 39/80] Step 4.12: Add removeParty method inside the component
+Subject: [PATCH 037/132] Step 4.11: Add removeParty method inside the
+ component
 
 ---
  client/app.ts | 4 ++++
  1 file changed, 4 insertions(+)
 
 diff --git a/client/app.ts b/client/app.ts
-index ae88324..6c0de6e 100644
+index 9847f48..b9ede85 100644
 --- a/client/app.ts
 +++ b/client/app.ts
-@@ -23,6 +23,10 @@ class Socially {
+@@ -21,6 +21,10 @@ class Socially {
      constructor () {
          this.parties = Parties.find();
      }
@@ -1347,10 +1287,10 @@ index ae88324..6c0de6e 100644
 2.5.4 (Apple Git-61)
 
 
-From c9ec3a143c10062a3a23762e39a39ee84063ef70 Mon Sep 17 00:00:00 2001
+From bc8f130ed6a86b5e8d5dec91373e4d15cf05386f Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 18 Oct 2015 01:47:04 +0300
-Subject: [PATCH 40/80] Step 5.1:  import routing components and add them to
+Subject: [PATCH 038/132] Step 5.1:  import routing components and add them to
  the app
 
 ---
@@ -1358,10 +1298,10 @@ Subject: [PATCH 40/80] Step 5.1:  import routing components and add them to
  1 file changed, 4 insertions(+), 2 deletions(-)
 
 diff --git a/client/app.ts b/client/app.ts
-index 6c0de6e..b4d836c 100644
+index b9ede85..12dbe26 100644
 --- a/client/app.ts
 +++ b/client/app.ts
-@@ -10,12 +10,14 @@ import {bootstrap} from 'angular2-meteor';
+@@ -8,12 +8,14 @@ import {bootstrap} from 'angular2-meteor';
  
  import {PartiesForm} from 'client/parties-form/parties-form';
  
@@ -1372,12 +1312,12 @@ index 6c0de6e..b4d836c 100644
  })
  @View({
      templateUrl: 'client/app.html',
--    directives: [NgFor, PartiesForm]
-+    directives: [NgFor, PartiesForm, ROUTER_DIRECTIVES]
+-    directives: [PartiesForm]
++    directives: [PartiesForm, ROUTER_DIRECTIVES]
  })
  class Socially {
      parties: Mongo.Cursor&lt;Object>;
-@@ -29,4 +31,4 @@ class Socially {
+@@ -27,4 +29,4 @@ class Socially {
      }
  }
  
@@ -1387,27 +1327,25 @@ index 6c0de6e..b4d836c 100644
 2.5.4 (Apple Git-61)
 
 
-From 6827b950c4f6daa57e5f4ff64251485ed761c595 Mon Sep 17 00:00:00 2001
+From 54d9a0a1adbabc49e5073eb64716aee8d0bfdb56 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 18 Oct 2015 01:49:04 +0300
-Subject: [PATCH 41/80] Step 5.2:  create PartiesList component
+Subject: [PATCH 039/132] Step 5.2:  create PartiesList component
 
 ---
- client/parties-list/parties-list.ts | 28 ++++++++++++++++++++++++++++
- 1 file changed, 28 insertions(+)
+ client/parties-list/parties-list.ts | 26 ++++++++++++++++++++++++++
+ 1 file changed, 26 insertions(+)
  create mode 100644 client/parties-list/parties-list.ts
 
 diff --git a/client/parties-list/parties-list.ts b/client/parties-list/parties-list.ts
 new file mode 100644
-index 0000000..b8d3afb
+index 0000000..3bebb49
 --- /dev/null
 +++ b/client/parties-list/parties-list.ts
-@@ -0,0 +1,28 @@
+@@ -0,0 +1,26 @@
 +/// &lt;reference path="../../typings/angular2-meteor.d.ts" />
 +
 +import {Component, View} from 'angular2/core';
-+
-+import {NgFor} from 'angular2/common';
 +
 +import {Parties} from 'collections/parties';
 +
@@ -1418,7 +1356,7 @@ index 0000000..b8d3afb
 +})
 +@View({
 +    templateUrl: '/client/parties-list/parties-list.html',
-+    directives: [NgFor, PartiesForm]
++    directives: [PartiesForm]
 +})
 +export class PartiesList {
 +    parties: Mongo.Cursor&lt;Object>;
@@ -1435,10 +1373,10 @@ index 0000000..b8d3afb
 2.5.4 (Apple Git-61)
 
 
-From 60a15fc976bf8dd99d36451fb65abf66be3061d9 Mon Sep 17 00:00:00 2001
+From b754fbf015c540f684e729b2d9592d1ba4dab438 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 18 Oct 2015 01:49:43 +0300
-Subject: [PATCH 42/80] Step 5.3:  add PartiesList template
+Subject: [PATCH 040/132] Step 5.3:  add PartiesList template
 
 ---
  client/parties-list/parties-list.html | 11 +++++++++++
@@ -1466,10 +1404,10 @@ index 0000000..b3ec969
 2.5.4 (Apple Git-61)
 
 
-From 8a9e98d0af8d766c35cd24998d543abed287d808 Mon Sep 17 00:00:00 2001
+From 5a8907cf9e55e3c61b9a1ffaeb0e314106b49ba0 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 18 Oct 2015 01:59:44 +0300
-Subject: [PATCH 43/80] Removes app.html
+Subject: [PATCH 041/132] Removes app.html
 
 ---
  client/app.html | 11 -----------
@@ -1497,22 +1435,22 @@ index b3ec969..0000000
 2.5.4 (Apple Git-61)
 
 
-From 7348b92334bc76059add57188d585d8d33b7d377 Mon Sep 17 00:00:00 2001
+From fa4164ba06affc4398c004967007b94e544f3d44 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 18 Oct 2015 02:03:06 +0300
-Subject: [PATCH 44/80] Step 5.4:  clean up Socally component
+Subject: [PATCH 042/132] Step 5.4:  clean up Socally component
 
 ---
  client/app.ts | 19 ++-----------------
  1 file changed, 2 insertions(+), 17 deletions(-)
 
 diff --git a/client/app.ts b/client/app.ts
-index b4d836c..b41be03 100644
+index 12dbe26..38268c5 100644
 --- a/client/app.ts
 +++ b/client/app.ts
-@@ -4,31 +4,16 @@ import {Component, View, NgZone} from 'angular2/core';
+@@ -2,31 +2,16 @@
  
- import {NgFor} from 'angular2/common';
+ import {Component, View, NgZone} from 'angular2/core';
  
 -import {Parties} from 'collections/parties';
 -
@@ -1527,7 +1465,7 @@ index b4d836c..b41be03 100644
  })
  @View({
 -    templateUrl: 'client/app.html',
--    directives: [NgFor, PartiesForm, ROUTER_DIRECTIVES]
+-    directives: [PartiesForm, ROUTER_DIRECTIVES]
 +    directives: [ROUTER_DIRECTIVES]
  })
 -class Socially {
@@ -1548,10 +1486,10 @@ index b4d836c..b41be03 100644
 2.5.4 (Apple Git-61)
 
 
-From fbbf45c2448173ef244d5fde3f3c29917e6f3800 Mon Sep 17 00:00:00 2001
+From dfaa8903fcd68697176559e5f3e68b3e5700422c Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 18 Oct 2015 02:14:40 +0300
-Subject: [PATCH 45/80] Step 5.5:  add PartyDetails component
+Subject: [PATCH 043/132] Step 5.5:  add PartyDetails component
 
 ---
  client/party-details/party-details.ts | 11 +++++++++++
@@ -1579,10 +1517,10 @@ index 0000000..0bac8f2
 2.5.4 (Apple Git-61)
 
 
-From 7d690e2816bf845709a47736203972e2e03eef2b Mon Sep 17 00:00:00 2001
+From c42449582f7ffc54e4e8f5752934ea4152cf3638 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 18 Oct 2015 02:15:46 +0300
-Subject: [PATCH 46/80] Step 5.6:  add PartyDetails template
+Subject: [PATCH 044/132] Step 5.6:  add PartyDetails template
 
 ---
  client/party-details/party-details.html | 5 +++++
@@ -1604,26 +1542,24 @@ index 0000000..63fdaea
 2.5.4 (Apple Git-61)
 
 
-From 4c9c00ff49898f6dfda344543a7d56f6edc0461f Mon Sep 17 00:00:00 2001
+From c0bdff5e7ac5ba97a9e0f6f6b11226db3c3e4d03 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 18 Oct 2015 02:19:18 +0300
-Subject: [PATCH 47/80] Step 5.7:  configure routes
+Subject: [PATCH 045/132] Step 5.7:  configure routes
 
 ---
  client/app.ts | 15 ++++++++++++---
  1 file changed, 12 insertions(+), 3 deletions(-)
 
 diff --git a/client/app.ts b/client/app.ts
-index b41be03..f359c4f 100644
+index 38268c5..b537b76 100644
 --- a/client/app.ts
 +++ b/client/app.ts
-@@ -1,19 +1,28 @@
+@@ -1,17 +1,26 @@
  /// &lt;reference path="../typings/angular2-meteor.d.ts" />
  
 -import {Component, View, NgZone} from 'angular2/core';
 +import {Component, View, NgZone, provide} from 'angular2/core';
- 
- import {NgFor} from 'angular2/common';
  
  import {bootstrap} from 'angular2-meteor';
  
@@ -1653,20 +1589,20 @@ index b41be03..f359c4f 100644
 2.5.4 (Apple Git-61)
 
 
-From 210642004868434e7f5d8c2ba36ce7638636a726 Mon Sep 17 00:00:00 2001
+From cf072cb2bffd6d2a360bc45cfdfd0f250edfbd9a Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 18 Oct 2015 03:17:25 +0300
-Subject: [PATCH 48/81] Step 5.8:  import RouterLink directive
+Subject: [PATCH 046/132] Step 5.8:  import RouterLink directive
 
 ---
  client/parties-list/parties-list.ts | 4 +++-
  1 file changed, 3 insertions(+), 1 deletion(-)
 
 diff --git a/client/parties-list/parties-list.ts b/client/parties-list/parties-list.ts
-index b8d3afb..2675530 100644
+index 3bebb49..be99f44 100644
 --- a/client/parties-list/parties-list.ts
 +++ b/client/parties-list/parties-list.ts
-@@ -8,12 +8,14 @@ import {Parties} from 'collections/parties';
+@@ -6,12 +6,14 @@ import {Parties} from 'collections/parties';
  
  import {PartiesForm} from 'client/parties-form/parties-form';
  
@@ -1677,8 +1613,8 @@ index b8d3afb..2675530 100644
  })
  @View({
      templateUrl: '/client/parties-list/parties-list.html',
--    directives: [NgFor, PartiesForm]
-+    directives: [NgFor, PartiesForm, RouterLink]
+-    directives: [PartiesForm]
++    directives: [PartiesForm, RouterLink]
  })
  export class PartiesList {
      parties: Mongo.Cursor&lt;Object>;
@@ -1686,10 +1622,10 @@ index b8d3afb..2675530 100644
 2.5.4 (Apple Git-61)
 
 
-From 427c7aa4d818031bd16a2b0d9ffe81b949a6bfb3 Mon Sep 17 00:00:00 2001
+From 86f66f7ef9144f70638c46de9ff5f0f2a579420c Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 12 Dec 2015 17:06:34 +0300
-Subject: [PATCH 49/81] Step 5.9: add links to the parties list
+Subject: [PATCH 047/132] Step 5.9: add links to the parties list
 
 ---
  client/parties-list/parties-list.html | 2 +-
@@ -1712,10 +1648,10 @@ index b3ec969..03c9607 100644
 2.5.4 (Apple Git-61)
 
 
-From 22f8bf1f6dc03d7f7100ba1e88fb532b2aa90f11 Mon Sep 17 00:00:00 2001
+From 3145326008444e69b626f520c7431afee8451f85 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 18 Oct 2015 20:11:55 +0300
-Subject: [PATCH 49/80] Step 5.10:  injecting route parameters
+Subject: [PATCH 048/132] Step 5.10:  injecting route parameters
 
 ---
  client/party-details/party-details.ts | 12 +++++++++---
@@ -1732,10 +1668,12 @@ index 0bac8f2..2ee5fe0 100644
 +import {RouteParams} from 'angular2/router';
 +
  @Component({
-    selector: 'party-details'
+-  selector: 'party-details'
++    selector: 'party-details'
  })
  @View({
-    templateUrl: '/client/party-details/party-details.html'
+-  templateUrl: '/client/party-details/party-details.html'
++    templateUrl: '/client/party-details/party-details.html'
  })
 -export class PartyDetails {}
 +export class PartyDetails {
@@ -1747,10 +1685,10 @@ index 0bac8f2..2ee5fe0 100644
 2.5.4 (Apple Git-61)
 
 
-From a7552c332b2ea70fbc9915b04a1563e35c0725cb Mon Sep 17 00:00:00 2001
+From ddc1e5a7cd9c305b7c8b098337c0fe97ae893e85 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 18 Oct 2015 20:44:54 +0300
-Subject: [PATCH 50/80] Step 5.11:  load party details
+Subject: [PATCH 049/132] Step 5.11:  load party details
 
 ---
  client/party-details/party-details.ts | 5 +++++
@@ -1784,10 +1722,10 @@ index 2ee5fe0..b831db7 100644
 2.5.4 (Apple Git-61)
 
 
-From 3279d169bcf69b00d6ae19604599df655ba9cba1 Mon Sep 17 00:00:00 2001
+From a0858580411c6422c2c3261ce8a9e1798d44972e Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 18 Oct 2015 20:45:51 +0300
-Subject: [PATCH 51/80] Step 5.12:  render party details
+Subject: [PATCH 050/132] Step 5.12:  render party details
 
 ---
  client/party-details/party-details.html | 6 ++++--
@@ -1844,10 +1782,10 @@ index b831db7..48895c5 100644
 2.5.4 (Apple Git-61)
 
 
-From 934cd3a412b377b5cb54219c3e177c3f263f2a4a Mon Sep 17 00:00:00 2001
+From 005c3b05536136331d9464e97edac98b89ee2381 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 8 Nov 2015 23:24:33 +0300
-Subject: [PATCH 54/82] Step 6.1: add party details form
+Subject: [PATCH 052/131] Step 6.1: add party details form
 
 ---
  client/party-details/party-details.html | 16 +++++++++++-----
@@ -1880,45 +1818,10 @@ index b88d435..a9aaa4d 100644
 2.5.4 (Apple Git-61)
 
 
-From 478bfc5e2a00fa5c5cb2f339d9d75c9d1322f372 Mon Sep 17 00:00:00 2001
-From: barbatus <alex.borodach@gmail.com>
-Date: Sat, 12 Dec 2015 17:21:28 +0300
-Subject: [PATCH 55/82] Step 6.2: add form directives
-
----
- client/party-details/party-details.ts | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
-
-diff --git a/client/party-details/party-details.ts b/client/party-details/party-details.ts
-index 48895c5..12df8b4 100644
---- a/client/party-details/party-details.ts
-+++ b/client/party-details/party-details.ts
-@@ -2,6 +2,8 @@
- 
- import {Component, View} from 'angular2/core';
- 
-+import {FORM_DIRECTIVES} from 'angular2/common';
-+
- import {RouteParams} from 'angular2/router';
- 
- import {Parties} from 'collections/parties';
-@@ -13,7 +15,7 @@ import {RouterLink} from 'angular2/router';
- })
- @View({
-     templateUrl: '/client/party-details/party-details.html',
--    directives: [RouterLink]
-+    directives: [RouterLink, FORM_DIRECTIVES]
- })
- export class PartyDetails {
-     party: Object;
--- 
-2.5.4 (Apple Git-61)
-
-
-From 95612c8bdd9480a32d8a0305089ef71b190e8dd0 Mon Sep 17 00:00:00 2001
+From 68b2448bd2ece41ff2ec1a85bc911d73c31512bc Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 8 Nov 2015 23:44:19 +0300
-Subject: [PATCH 54/80] Step 6.3: bind party to form inputs
+Subject: [PATCH 053/131] Step 6.2: bind party to form inputs
 
 ---
  client/party-details/party-details.html | 8 ++++----
@@ -1949,20 +1852,20 @@ index a9aaa4d..61fda60 100644
 2.5.4 (Apple Git-61)
 
 
-From 67528528a2187e5b49d7c3e8b1e8be0e48b16503 Mon Sep 17 00:00:00 2001
+From d066f33c46cfcb27127800c2fef2c781b8ea0261 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 8 Nov 2015 23:53:48 +0300
-Subject: [PATCH 55/80] Step 6.4: add submit event handler
+Subject: [PATCH 054/131] Step 6.3: add submit event handler
 
 ---
  client/party-details/party-details.ts | 10 ++++++++++
  1 file changed, 10 insertions(+)
 
 diff --git a/client/party-details/party-details.ts b/client/party-details/party-details.ts
-index 12df8b4..a0bd47a 100644
+index 48895c5..da73453 100644
 --- a/client/party-details/party-details.ts
 +++ b/client/party-details/party-details.ts
-@@ -24,4 +24,14 @@ export class PartyDetails {
+@@ -22,4 +22,14 @@ export class PartyDetails {
          var partyId = params.get('partyId');
          this.party = Parties.findOne(partyId);
      }
@@ -1981,10 +1884,10 @@ index 12df8b4..a0bd47a 100644
 2.5.4 (Apple Git-61)
 
 
-From 891d703ed62a162973aa95c58e28d576590873d4 Mon Sep 17 00:00:00 2001
+From de88014b6436649324d441d7e20ed3134eb014ac Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 17 Nov 2015 19:24:23 +0300
-Subject: [PATCH 058/102] Step 7.1: declare Party type
+Subject: [PATCH 055/131] Step 7.1: declare Party type
 
 ---
  typings/party.d.ts | 6 ++++++
@@ -2007,10 +1910,10 @@ index 0000000..fbafc08
 2.5.4 (Apple Git-61)
 
 
-From de9a9a74f6ad8e4458e3d03d4312dd03ebd22e40 Mon Sep 17 00:00:00 2001
+From 65993d5c1c22c003d88d7fde6b0aaae3a93fc115 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 17 Nov 2015 19:37:25 +0300
-Subject: [PATCH 059/102] Step 7.2: define parties collection with Party type
+Subject: [PATCH 056/131] Step 7.2: define parties collection with Party type
 
 ---
  collections/parties.ts | 3 ++-
@@ -2025,15 +1928,15 @@ index d1ed853..dd07460 100644
 +/// &lt;reference path="../typings/party.d.ts" />
  
 -export var Parties = new Mongo.Collection('parties');
-+export var Parties = new Mongo.Collection<Party>('parties');
++export var Parties = new Mongo.Collection&lt;Party>('parties');
 -- 
 2.5.4 (Apple Git-61)
 
 
-From 40b2baaa35edc1d717823f4482056ee22d4ad7f3 Mon Sep 17 00:00:00 2001
+From bf659ba1469502568468805ae914999bc95923bf Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 17 Nov 2015 20:17:12 +0300
-Subject: [PATCH 060/102] Step 7.3: correct parties cursor to be of the exact
+Subject: [PATCH 057/131] Step 7.3: correct parties cursor to be of the exact
  type
 
 ---
@@ -2041,15 +1944,15 @@ Subject: [PATCH 060/102] Step 7.3: correct parties cursor to be of the exact
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/client/parties-list/parties-list.ts b/client/parties-list/parties-list.ts
-index 2675530..5019fce 100644
+index be99f44..e7bb019 100644
 --- a/client/parties-list/parties-list.ts
 +++ b/client/parties-list/parties-list.ts
-@@ -18,7 +18,7 @@ import {RouterLink} from 'angular2/router';
-     directives: [NgFor, PartiesForm, RouterLink]
+@@ -16,7 +16,7 @@ import {RouterLink} from 'angular2/router';
+     directives: [PartiesForm, RouterLink]
  })
  export class PartiesList {
--    parties: Mongo.Cursor<Object>;
-+    parties: Mongo.Cursor<Party>;
+-    parties: Mongo.Cursor&lt;Object>;
++    parties: Mongo.Cursor&lt;Party>;
  
      constructor() {
          this.parties = Parties.find();
@@ -2057,21 +1960,21 @@ index 2675530..5019fce 100644
 2.5.4 (Apple Git-61)
 
 
-From 536265c38b25b42cd10b8dcafadccf90ad2283d7 Mon Sep 17 00:00:00 2001
+From ca52e6fad1c1b3c0a27a8b7f0381ba2aaa98215c Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 17 Nov 2015 20:18:03 +0300
-Subject: [PATCH 061/102] Step 7.4: correct party property to be of Party type
+Subject: [PATCH 058/131] Step 7.4: correct party property to be of Party type
 
 ---
  client/party-details/party-details.ts | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/client/party-details/party-details.ts b/client/party-details/party-details.ts
-index a0bd47a..8b33823 100644
+index da73453..ae15934 100644
 --- a/client/party-details/party-details.ts
 +++ b/client/party-details/party-details.ts
-@@ -18,7 +18,7 @@ import {RouterLink} from 'angular2/router';
-     directives: [RouterLink, FORM_DIRECTIVES]
+@@ -16,7 +16,7 @@ import {RouterLink} from 'angular2/router';
+     directives: [RouterLink]
  })
  export class PartyDetails {
 -    party: Object;
@@ -2108,11 +2011,11 @@ index 2f89e25..6160a20 100644
 2.5.4 (Apple Git-61)
 
 
-From 2505322e24be78c4c06c3572fb100f4989d2d4eb Mon Sep 17 00:00:00 2001
+From ebd73d8ff08ed7051536209c54322ebe842f6f5e Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 10 Nov 2015 17:45:50 +0300
-Subject: [PATCH 61/80] Step 8.1: add Accounts UI component to the PartiesList
- template
+Subject: [PATCH 060/131] Step 8.1: add Accounts UI component to the
+ PartiesList template
 
 ---
  client/parties-list/parties-list.html | 1 +
@@ -2133,17 +2036,17 @@ index 03c9607..21c7ea8 100644
 2.5.4 (Apple Git-61)
 
 
-From 013d632569e48c96e18afa49c93a94b9f6ca4d5f Mon Sep 17 00:00:00 2001
+From e942f6bb99dea21db9c6e61fc21bdff835d223a0 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 10 Nov 2015 17:47:00 +0300
-Subject: [PATCH 62/80] Step 8.2: import dependencies
+Subject: [PATCH 061/131] Step 8.2: import dependencies
 
 ---
  client/parties-list/parties-list.ts | 5 ++++-
  1 file changed, 4 insertions(+), 1 deletion(-)
 
 diff --git a/client/parties-list/parties-list.ts b/client/parties-list/parties-list.ts
-index 5019fce..9c96e0f 100644
+index e7bb019..f676dd8 100644
 --- a/client/parties-list/parties-list.ts
 +++ b/client/parties-list/parties-list.ts
 @@ -1,4 +1,5 @@
@@ -2152,7 +2055,7 @@ index 5019fce..9c96e0f 100644
  
  import {Component, View} from 'angular2/core';
  
-@@ -10,12 +11,14 @@ import {PartiesForm} from 'client/parties-form/parties-form';
+@@ -8,12 +9,14 @@ import {PartiesForm} from 'client/parties-form/parties-form';
  
  import {RouterLink} from 'angular2/router';
  
@@ -2163,8 +2066,8 @@ index 5019fce..9c96e0f 100644
  })
  @View({
      templateUrl: '/client/parties-list/parties-list.html',
--    directives: [NgFor, PartiesForm, RouterLink]
-+    directives: [NgFor, PartiesForm, RouterLink, AccountsUI]
+-    directives: [PartiesForm, RouterLink]
++    directives: [PartiesForm, RouterLink, AccountsUI]
  })
  export class PartiesList {
      parties: Mongo.Cursor&lt;Party>;
@@ -2172,10 +2075,10 @@ index 5019fce..9c96e0f 100644
 2.5.4 (Apple Git-61)
 
 
-From b1ccb1fb2252ac9de7f61ae1e3f9c5c590850ff5 Mon Sep 17 00:00:00 2001
+From f16c43c939b41593add9094c2dc87030ca6f88e2 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 10 Nov 2015 18:13:17 +0300
-Subject: [PATCH 63/80] Step 8.3: add parties collection security
+Subject: [PATCH 062/131] Step 8.3: add parties collection security
 
 ---
  collections/parties.ts | 15 +++++++++++++++
@@ -2188,7 +2091,7 @@ index dd07460..5939f6f 100644
 @@ -2,3 +2,18 @@
  /// &lt;reference path="../typings/party.d.ts" />
  
- export var Parties = new Mongo.Collection<Party>('parties');
+ export var Parties = new Mongo.Collection&lt;Party>('parties');
 +
 +Parties.allow({
 +  insert: function(party: Object) {
@@ -2208,21 +2111,20 @@ index dd07460..5939f6f 100644
 2.5.4 (Apple Git-61)
 
 
-From 2677c79797431a8830f3e1d48b63f19f8041e759 Mon Sep 17 00:00:00 2001
+From 9d0a9b12ab663221e81f3d2b571f43adf162e970 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 10 Nov 2015 18:34:06 +0300
-Subject: [PATCH 64/80] Step 8.4: check access and add party owner ID along
- with other data
+Subject: [PATCH 063/131] Step 8.4: check access and add party owner ID
 
 ---
  client/parties-form/parties-form.ts | 21 +++++++++++++--------
  1 file changed, 13 insertions(+), 8 deletions(-)
 
 diff --git a/client/parties-form/parties-form.ts b/client/parties-form/parties-form.ts
-index 69ae0a3..896f772 100644
+index 569e21d..85166b8 100644
 --- a/client/parties-form/parties-form.ts
 +++ b/client/parties-form/parties-form.ts
-@@ -27,15 +27,20 @@ export class PartiesForm {
+@@ -26,15 +26,20 @@ export class PartiesForm {
  
      addParty(party) {
          if (this.partiesForm.valid) {
@@ -2255,20 +2157,20 @@ index 69ae0a3..896f772 100644
 2.5.4 (Apple Git-61)
 
 
-From 1c627bd864d54ac4c150b694dd5d3f93cb788852 Mon Sep 17 00:00:00 2001
+From f540cacd890e627feef901fe50cd7e236e74ee79 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 10 Nov 2015 18:35:51 +0300
-Subject: [PATCH 65/80] Step 8.5: check access to change party
+Subject: [PATCH 064/131] Step 8.5: check access to change party
 
 ---
  client/party-details/party-details.ts | 18 +++++++++++-------
  1 file changed, 11 insertions(+), 7 deletions(-)
 
 diff --git a/client/party-details/party-details.ts b/client/party-details/party-details.ts
-index 8b33823..388bcd2 100644
+index ae15934..894652a 100644
 --- a/client/party-details/party-details.ts
 +++ b/client/party-details/party-details.ts
-@@ -26,12 +26,16 @@ export class PartyDetails {
+@@ -24,12 +24,16 @@ export class PartyDetails {
      }
  
      saveParty(party) {
@@ -2296,10 +2198,10 @@ index 8b33823..388bcd2 100644
 2.5.4 (Apple Git-61)
 
 
-From db2acdfb0d791666aef5011ce74f03166ae3c830 Mon Sep 17 00:00:00 2001
+From fcc1cb0385f9525c2652c1bdc4d515c7daafde4e Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 10 Nov 2015 19:23:11 +0300
-Subject: [PATCH 66/80] Adds base Accounts package
+Subject: [PATCH 065/131] Adds base Accounts package
 
 ---
  .meteor/packages | 1 +
@@ -2318,17 +2220,17 @@ index 6160a20..a1a7442 100644
 2.5.4 (Apple Git-61)
 
 
-From 5e6701ebecb0487f03a920a1553238924e6a7424 Mon Sep 17 00:00:00 2001
+From 735edbe1883d95b7606655ab81a69916b8bcd111 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 10 Nov 2015 19:23:40 +0300
-Subject: [PATCH 67/80] Step 8.6: require user to access PartyDetails
+Subject: [PATCH 066/131] Step 8.6: require user to access PartyDetails
 
 ---
  client/party-details/party-details.ts | 4 ++++
  1 file changed, 4 insertions(+)
 
 diff --git a/client/party-details/party-details.ts b/client/party-details/party-details.ts
-index 388bcd2..cbb7b21 100644
+index 894652a..98290b7 100644
 --- a/client/party-details/party-details.ts
 +++ b/client/party-details/party-details.ts
 @@ -1,4 +1,5 @@
@@ -2337,7 +2239,7 @@ index 388bcd2..cbb7b21 100644
  
  import {Component, View} from 'angular2/core';
  
-@@ -10,6 +11,8 @@ import {Parties} from 'collections/parties';
+@@ -8,6 +9,8 @@ import {Parties} from 'collections/parties';
  
  import {RouterLink} from 'angular2/router';
  
@@ -2346,9 +2248,9 @@ index 388bcd2..cbb7b21 100644
  @Component({
      selector: 'party-details'
  })
-@@ -17,6 +20,7 @@ import {RouterLink} from 'angular2/router';
+@@ -15,6 +18,7 @@ import {RouterLink} from 'angular2/router';
      templateUrl: '/client/party-details/party-details.html',
-     directives: [RouterLink, FORM_DIRECTIVES]
+     directives: [RouterLink]
  })
 +@RequireUser()
  export class PartyDetails {
@@ -2358,10 +2260,10 @@ index 388bcd2..cbb7b21 100644
 2.5.4 (Apple Git-61)
 
 
-From 4cd5bbb894ddad7d5d35fc7132f1e8eaba42c777 Mon Sep 17 00:00:00 2001
+From afa7e81e806ff2280cbe92e285f9b0b26057ef3a Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 13 Nov 2015 16:54:07 +0300
-Subject: [PATCH 68/80] Removes autopublish
+Subject: [PATCH 067/131] Removes autopublish
 
 ---
  .meteor/packages | 1 -
@@ -2383,10 +2285,35 @@ index a1a7442..cd3ad8c 100644
 2.5.4 (Apple Git-61)
 
 
-From 304701fcc32936ef8659de6c271a16fb866aed9b Mon Sep 17 00:00:00 2001
+From 0a75c6ca1dfe9c607b06da82e413428c6ba12fd3 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 12 Dec 2015 18:21:49 +0300
+Subject: [PATCH 068/131] Corrects Party type in the party.d.ts definition file
+
+---
+ typings/party.d.ts | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/typings/party.d.ts b/typings/party.d.ts
+index fbafc08..c9d3c61 100644
+--- a/typings/party.d.ts
++++ b/typings/party.d.ts
+@@ -2,5 +2,6 @@ declare type Party = {
+   _id?: string,
+   name: string,
+   description?: string,
+-  location: string
++  location: string,
++  owner?: string
+ }
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 8ac8fa3b47fc3c10c565711c977896be2ba99245 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 13 Nov 2015 16:54:32 +0300
-Subject: [PATCH 69/80] Step 9.1: publish parties collection
+Subject: [PATCH 069/131] Step 9.1: publish parties collection
 
 ---
  server/parties.ts | 7 +++++++
@@ -2410,10 +2337,10 @@ index 0000000..b477b43
 2.5.4 (Apple Git-61)
 
 
-From 7cba1035a41020797ba0522193abea868e8d8880 Mon Sep 17 00:00:00 2001
+From cc5230a9ef91fd62b463dc82c8bcfbb0ef2439dd Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 13 Nov 2015 16:56:16 +0300
-Subject: [PATCH 70/80] Step 9.2: import parties publications on the server
+Subject: [PATCH 070/131] Step 9.2: import parties publications on the server
 
 ---
  server/main.ts | 1 +
@@ -2432,21 +2359,21 @@ index 80ba2c9..534fa3b 100644
 2.5.4 (Apple Git-61)
 
 
-From ce44df73e36f5d136eea42e6790ec406e9e1460f Mon Sep 17 00:00:00 2001
+From 60a3d4b1b2e954446d3bcf452767b65960f4ad13 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 13 Nov 2015 17:12:19 +0300
-Subject: [PATCH 71/80] Step 9.3: extend PartiesList and make use of subscribe
- method
+Subject: [PATCH 071/131] Step 9.3: extend PartiesList and make use of
+ subscribe method
 
 ---
  client/parties-list/parties-list.ts | 9 +++++++--
  1 file changed, 7 insertions(+), 2 deletions(-)
 
 diff --git a/client/parties-list/parties-list.ts b/client/parties-list/parties-list.ts
-index 9c96e0f..845e462 100644
+index f676dd8..dacd95c 100644
 --- a/client/parties-list/parties-list.ts
 +++ b/client/parties-list/parties-list.ts
-@@ -13,6 +13,8 @@ import {RouterLink} from 'angular2/router';
+@@ -11,6 +11,8 @@ import {RouterLink} from 'angular2/router';
  
  import {AccountsUI} from 'meteor-accounts-ui';
  
@@ -2455,9 +2382,9 @@ index 9c96e0f..845e462 100644
  @Component({
      selector: 'parties-list'
  })
-@@ -20,11 +22,14 @@ import {AccountsUI} from 'meteor-accounts-ui';
+@@ -18,11 +20,14 @@ import {AccountsUI} from 'meteor-accounts-ui';
      templateUrl: '/client/parties-list/parties-list.html',
-     directives: [NgFor, PartiesForm, RouterLink, AccountsUI]
+     directives: [PartiesForm, RouterLink, AccountsUI]
  })
 -export class PartiesList {
 +export class PartiesList extends MeteorComponent {
@@ -2476,10 +2403,10 @@ index 9c96e0f..845e462 100644
 2.5.4 (Apple Git-61)
 
 
-From 88a90753bb4cc76331b2fd8d45ebfbd6d6533996 Mon Sep 17 00:00:00 2001
+From e58d666064c505d542658c757cb042bde4d00635 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 13 Nov 2015 17:23:21 +0300
-Subject: [PATCH 72/80] Step 9.4: add "Public" checkbox
+Subject: [PATCH 072/131] Step 9.4: add "Public" checkbox
 
 ---
  client/parties-form/parties-form.html | 2 ++
@@ -2501,20 +2428,20 @@ index da869fb..54cc2c8 100644
 2.5.4 (Apple Git-61)
 
 
-From ad33ef80dfaa3f7ed68d09a58987e5876103cecb Mon Sep 17 00:00:00 2001
+From 8abc4d57018fa730e3a431e0d8a929f842f5752a Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 13 Nov 2015 17:50:21 +0300
-Subject: [PATCH 73/80] Step 9.5: update PartiesForm component
+Subject: [PATCH 073/131] Step 9.5: update PartiesForm component
 
 ---
  client/parties-form/parties-form.ts | 5 ++++-
  1 file changed, 4 insertions(+), 1 deletion(-)
 
 diff --git a/client/parties-form/parties-form.ts b/client/parties-form/parties-form.ts
-index 896f772..5506a29 100644
+index 85166b8..0314bf2 100644
 --- a/client/parties-form/parties-form.ts
 +++ b/client/parties-form/parties-form.ts
-@@ -21,7 +21,8 @@ export class PartiesForm {
+@@ -20,7 +20,8 @@ export class PartiesForm {
          this.partiesForm = fb.group({
              name: ['', Validators.required],
              description: [''],
@@ -2524,7 +2451,7 @@ index 896f772..5506a29 100644
          });
      }
  
-@@ -32,12 +33,14 @@ export class PartiesForm {
+@@ -31,12 +32,14 @@ export class PartiesForm {
                      name: party.name,
                      description: party.description,
                      location: party.location,
@@ -2543,10 +2470,10 @@ index 896f772..5506a29 100644
 2.5.4 (Apple Git-61)
 
 
-From 792cede3cd44bb049852a7bbd17008875e11306a Mon Sep 17 00:00:00 2001
+From 805a17581ee0846ce042f163e505e0d5c26e3bb2 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 13 Nov 2015 17:51:40 +0300
-Subject: [PATCH 74/80] Step 9.6: add public field to the initial parties
+Subject: [PATCH 074/131] Step 9.6: add public field to the initial parties
 
 ---
  server/load_parties.ts | 9 ++++++---
@@ -2584,10 +2511,10 @@ index 65c914a..51bdd88 100644
 2.5.4 (Apple Git-61)
 
 
-From 659bbe701f3ff5c6aad26c0241c92d376c996bec Mon Sep 17 00:00:00 2001
+From 0e34a0d32208d9ca85b04f219a7a3a8ab74e7eb6 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 13 Nov 2015 18:13:29 +0300
-Subject: [PATCH 75/80] Step 9.7: limit data sent to the client
+Subject: [PATCH 075/131] Step 9.7: limit data sent to the client
 
 ---
  server/parties.ts | 12 +++++++++++-
@@ -2618,10 +2545,10 @@ index b477b43..2db5c15 100644
 2.5.4 (Apple Git-61)
 
 
-From 749e8a0cfe5fcb8e9ba58e8dce07bf650b096ee6 Mon Sep 17 00:00:00 2001
+From 8ce67187015c11a69f92643f480df59167628d4e Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 13 Nov 2015 18:36:07 +0300
-Subject: [PATCH 76/80] Step 9.8: add "party" publication
+Subject: [PATCH 076/131] Step 9.8: add "party" publication
 
 ---
  server/parties.ts | 24 +++++++++++++++++++-----
@@ -2671,29 +2598,20 @@ index 2db5c15..2f17143 100644
 2.5.4 (Apple Git-61)
 
 
-From c9f8a5f441b3f0ae9e213188838624cacfb901f0 Mon Sep 17 00:00:00 2001
+From 62fc8aac3279533cf423cc177f94e7fc64449ea3 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 13 Nov 2015 18:51:42 +0300
-Subject: [PATCH 79/82] Step 9.9: subscribe to "party" publication
+Subject: [PATCH 077/131] Step 9.9: subscribe to "party" publication
 
 ---
- client/party-details/party-details.ts | 13 +++++++++----
- 1 file changed, 9 insertions(+), 4 deletions(-)
+ client/party-details/party-details.ts | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
 
 diff --git a/client/party-details/party-details.ts b/client/party-details/party-details.ts
-index cbb7b21..5fe60cd 100644
+index 98290b7..e9e9f72 100644
 --- a/client/party-details/party-details.ts
 +++ b/client/party-details/party-details.ts
-@@ -3,7 +3,7 @@
- 
- import {Component, View} from 'angular2/core';
- 
--import {FORM_DIRECTIVES} from 'angular2/common';
-+import {FORM_DIRECTIVES, NgIf} from 'angular2/common';
- 
- import {RouteParams} from 'angular2/router';
- 
-@@ -13,20 +13,25 @@ import {RouterLink} from 'angular2/router';
+@@ -11,6 +11,8 @@ import {RouterLink} from 'angular2/router';
  
  import {RequireUser} from 'meteor-accounts';
  
@@ -2702,10 +2620,8 @@ index cbb7b21..5fe60cd 100644
  @Component({
      selector: 'party-details'
  })
- @View({
-     templateUrl: '/client/party-details/party-details.html',
--    directives: [RouterLink, FORM_DIRECTIVES]
-+    directives: [RouterLink, FORM_DIRECTIVES, NgIf]
+@@ -19,12 +21,15 @@ import {RequireUser} from 'meteor-accounts';
+     directives: [RouterLink]
  })
  @RequireUser()
 -export class PartyDetails {
@@ -2726,10 +2642,10 @@ index cbb7b21..5fe60cd 100644
 2.5.4 (Apple Git-61)
 
 
-From a3215dd67d52aa00cbad2d5d5f4432db5e888ee1 Mon Sep 17 00:00:00 2001
+From f831090596f3823dfba911af06e89448c3df216d Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 13 Nov 2015 18:52:51 +0300
-Subject: [PATCH 78/80] Step 9.10: update PartyDetails form to be shown when
+Subject: [PATCH 078/131] Step 9.10: update PartyDetails form to be shown when
  party is loaded
 
 ---
@@ -2750,17 +2666,17 @@ index 61fda60..58168fc 100644
 2.5.4 (Apple Git-61)
 
 
-From 431e31350749c30012372ff13766bafc9ef4f081 Mon Sep 17 00:00:00 2001
+From 9d7288dbd361e536a280beb81229710d4d2b4f6d Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 13 Nov 2015 19:36:06 +0300
-Subject: [PATCH 79/80] Step 9.11: add search inputs
+Subject: [PATCH 079/131] Step 9.11: add search inputs
 
 ---
  client/parties-list/parties-list.html | 4 +++-
  1 file changed, 3 insertions(+), 1 deletion(-)
 
 diff --git a/client/parties-list/parties-list.html b/client/parties-list/parties-list.html
-index 21c7ea8..e420ac9 100644
+index 21c7ea8..7dd6c7e 100644
 --- a/client/parties-list/parties-list.html
 +++ b/client/parties-list/parties-list.html
 @@ -1,5 +1,7 @@
@@ -2776,21 +2692,20 @@ index 21c7ea8..e420ac9 100644
 2.5.4 (Apple Git-61)
 
 
-From be52696ac9b33cd2984be9d5f2ffbfba37e6d6ee Mon Sep 17 00:00:00 2001
+From 69f35970dd023e8f30447e3e18ced2a846ddf1b5 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 13 Nov 2015 19:36:32 +0300
-Subject: [PATCH 80/80] Step 9.12: add search event handler
+Subject: [PATCH 080/131] Step 9.12: add search event handler
 
 ---
- client/parties-list/parties-list.ts   | 8 ++++++++
- client/party-details/party-details.ts | 4 ++--
- 2 files changed, 10 insertions(+), 2 deletions(-)
+ client/parties-list/parties-list.ts | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
 diff --git a/client/parties-list/parties-list.ts b/client/parties-list/parties-list.ts
-index 845e462..2a765b3 100644
+index dacd95c..49dc1b8 100644
 --- a/client/parties-list/parties-list.ts
 +++ b/client/parties-list/parties-list.ts
-@@ -35,4 +35,12 @@ export class PartiesList extends MeteorComponent {
+@@ -33,4 +33,12 @@ export class PartiesList extends MeteorComponent {
      removeParty(party) {
          Parties.remove(party._id);
      }
@@ -2803,12 +2718,39 @@ index 845e462..2a765b3 100644
 +        }
 +    }
  }
+-- 
+2.5.4 (Apple Git-61)
 
 
-From 559f022213cd91619abf3928a8ad3a5700bbf643 Mon Sep 17 00:00:00 2001
+From 45665d19ae1e47daa247d6a6b14da321b78ba95a Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 12 Dec 2015 18:26:23 +0300
+Subject: [PATCH 081/131] Corrects Party type in the party.d.ts definition file
+
+---
+ typings/party.d.ts | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/typings/party.d.ts b/typings/party.d.ts
+index c9d3c61..1fedac3 100644
+--- a/typings/party.d.ts
++++ b/typings/party.d.ts
+@@ -3,5 +3,6 @@ declare type Party = {
+   name: string,
+   description?: string,
+   location: string,
+-  owner?: string
++  owner?: string,
++  public: boolean
+ }
+-- 
+2.5.4 (Apple Git-61)
+
+
+From a5194fb4804548abb020b690ec1e54a97b7db491 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 19 Dec 2015 22:16:23 +0300
-Subject: [PATCH 085/100] Step 12.1: add options to the parties publication
+Subject: [PATCH 082/131] Step 12.1: add options to the parties publication
 
 ---
  server/parties.ts | 4 ++--
@@ -2833,10 +2775,10 @@ index 2f17143..8fa668e 100644
 2.5.4 (Apple Git-61)
 
 
-From 4bbe0f32bc4b8b412bb13b64fc6c3d85828a396b Mon Sep 17 00:00:00 2001
+From 57dfc525648a64c00912a8e262e2f2cc131c5c9e Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 19 Dec 2015 22:30:59 +0300
-Subject: [PATCH 086/100] Step 12.2: create options and add them to the parties
+Subject: [PATCH 083/131] Step 12.2: create options and add them to the parties
  subscription
 
 ---
@@ -2844,10 +2786,10 @@ Subject: [PATCH 086/100] Step 12.2: create options and add them to the parties
  1 file changed, 9 insertions(+), 1 deletion(-)
 
 diff --git a/client/parties-list/parties-list.ts b/client/parties-list/parties-list.ts
-index 2a765b3..2124b82 100644
+index 49dc1b8..25f0045 100644
 --- a/client/parties-list/parties-list.ts
 +++ b/client/parties-list/parties-list.ts
-@@ -24,10 +24,18 @@ import {MeteorComponent} from 'angular2-meteor';
+@@ -22,10 +22,18 @@ import {MeteorComponent} from 'angular2-meteor';
  })
  export class PartiesList extends MeteorComponent {
      parties: Mongo.Cursor&lt;Party>;
@@ -2871,20 +2813,20 @@ index 2a765b3..2124b82 100644
 2.5.4 (Apple Git-61)
 
 
-From aa88782773e88d0344dc5485c2fe2332de98902d Mon Sep 17 00:00:00 2001
+From aabcb62f738b66f31a9fbf5e16cd1a7586dd4541 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 19 Dec 2015 22:41:56 +0300
-Subject: [PATCH 087/100] Step 12.3: add sorting by party name to PartiesList
+Subject: [PATCH 084/131] Step 12.3: add sorting by party name to PartiesList
 
 ---
  client/parties-list/parties-list.ts | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/client/parties-list/parties-list.ts b/client/parties-list/parties-list.ts
-index 2124b82..6b7b41e 100644
+index 25f0045..1818ca6 100644
 --- a/client/parties-list/parties-list.ts
 +++ b/client/parties-list/parties-list.ts
-@@ -36,7 +36,7 @@ export class PartiesList extends MeteorComponent {
+@@ -34,7 +34,7 @@ export class PartiesList extends MeteorComponent {
              sort: { name: this.nameOrder }
          }
          this.subscribe('parties', options, () => {
@@ -2897,10 +2839,10 @@ index 2124b82..6b7b41e 100644
 2.5.4 (Apple Git-61)
 
 
-From a3408786dbb011f9f8807709d3997a7fe7da691a Mon Sep 17 00:00:00 2001
+From f6a212cd95a0653aaea236c631fa77b43df079bb Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 19 Dec 2015 22:44:38 +0300
-Subject: [PATCH 088/100] Step 12.4: re-subscribe on current page changes
+Subject: [PATCH 085/131] Step 12.4: re-subscribe on current page changes
  reactively
 
 ---
@@ -2908,10 +2850,10 @@ Subject: [PATCH 088/100] Step 12.4: re-subscribe on current page changes
  1 file changed, 11 insertions(+), 9 deletions(-)
 
 diff --git a/client/parties-list/parties-list.ts b/client/parties-list/parties-list.ts
-index 6b7b41e..ea8db0e 100644
+index 1818ca6..e5b43ed 100644
 --- a/client/parties-list/parties-list.ts
 +++ b/client/parties-list/parties-list.ts
-@@ -25,19 +25,21 @@ import {MeteorComponent} from 'angular2-meteor';
+@@ -23,19 +23,21 @@ import {MeteorComponent} from 'angular2-meteor';
  export class PartiesList extends MeteorComponent {
      parties: Mongo.Cursor&lt;Party>;
      pageSize: number = 10;
@@ -2946,10 +2888,10 @@ index 6b7b41e..ea8db0e 100644
 2.5.4 (Apple Git-61)
 
 
-From c8f01eac847e7fb3f0f79a4af9bf0f29f282f758 Mon Sep 17 00:00:00 2001
+From ac2dee98bafdd28bf7040b7b942b83dc5734ab21 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 19 Dec 2015 23:01:40 +0300
-Subject: [PATCH 089/100] Add reactive-var package
+Subject: [PATCH 086/131] Add reactive-var package
 
 ---
  .meteor/packages | 1 +
@@ -2968,10 +2910,10 @@ index cd3ad8c..75b83f7 100644
 2.5.4 (Apple Git-61)
 
 
-From 1aab2b7483cf0f68fc0d1f5341e490dcb5a44a46 Mon Sep 17 00:00:00 2001
+From 7bfdbc08c095eb01828cbf8aeb8c432634714b59 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 20 Dec 2015 00:19:46 +0300
-Subject: [PATCH 090/100] Add n2-pagination package
+Subject: [PATCH 087/131] Add n2-pagination package
 
 ---
  .meteor/packages | 1 +
@@ -2990,17 +2932,17 @@ index 75b83f7..bcc99e0 100644
 2.5.4 (Apple Git-61)
 
 
-From afdbabf2690672f5c1631dab889b53bbb0b3a500 Mon Sep 17 00:00:00 2001
+From 39f06c1fd648dc7e58994bd4b74c15c4929ac684 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 20 Dec 2015 00:44:19 +0300
-Subject: [PATCH 091/100] Step 12.5: import and set up pagination components
+Subject: [PATCH 088/131] Step 12.5: import and set up pagination components
 
 ---
  client/parties-list/parties-list.ts | 9 +++++++--
  1 file changed, 7 insertions(+), 2 deletions(-)
 
 diff --git a/client/parties-list/parties-list.ts b/client/parties-list/parties-list.ts
-index ea8db0e..0860077 100644
+index e5b43ed..07dfe45 100644
 --- a/client/parties-list/parties-list.ts
 +++ b/client/parties-list/parties-list.ts
 @@ -1,5 +1,6 @@
@@ -3010,7 +2952,7 @@ index ea8db0e..0860077 100644
  
  import {Component, View} from 'angular2/core';
  
-@@ -15,12 +16,16 @@ import {AccountsUI} from 'meteor-accounts-ui';
+@@ -13,12 +14,16 @@ import {AccountsUI} from 'meteor-accounts-ui';
  
  import {MeteorComponent} from 'angular2-meteor';
  
@@ -3023,20 +2965,20 @@ index ea8db0e..0860077 100644
  })
  @View({
      templateUrl: '/client/parties-list/parties-list.html',
--    directives: [NgFor, PartiesForm, RouterLink, AccountsUI]
-+    directives: [NgFor, PartiesForm, RouterLink, AccountsUI, PaginationControlsCpm],
+-    directives: [PartiesForm, RouterLink, AccountsUI]
++    directives: [PartiesForm, RouterLink, AccountsUI, PaginationControlsCpm],
 +    pipes: [PaginatePipe]
  })
  export class PartiesList extends MeteorComponent {
-     parties: Mongo.Cursor<Party>;
+     parties: Mongo.Cursor&lt;Party>;
 -- 
 2.5.4 (Apple Git-61)
 
 
-From ff13d0f41937d4c718ea1f8c2aff80cbe100bbb0 Mon Sep 17 00:00:00 2001
+From 021a6659be09b5c5f77b68405dbc89cd9c019034 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 20 Dec 2015 00:53:27 +0300
-Subject: [PATCH 092/100] Step 12.6: add pagination markup to the PartiesList's
+Subject: [PATCH 089/131] Step 12.6: add pagination markup to the PartiesList's
  template
 
 ---
@@ -3044,7 +2986,7 @@ Subject: [PATCH 092/100] Step 12.6: add pagination markup to the PartiesList's
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/client/parties-list/parties-list.html b/client/parties-list/parties-list.html
-index e420ac9..8a969d6 100644
+index 7dd6c7e..a5f16df 100644
 --- a/client/parties-list/parties-list.html
 +++ b/client/parties-list/parties-list.html
 @@ -4,11 +4,12 @@
@@ -3065,10 +3007,10 @@ index e420ac9..8a969d6 100644
 2.5.4 (Apple Git-61)
 
 
-From f5fbdb1beb6ce2147ca8ff34ba983a4ffb807e9f Mon Sep 17 00:00:00 2001
+From 1f1ae640a111295e6ad2665397a5efd2bd62e5a4 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 20 Dec 2015 12:27:40 +0300
-Subject: [PATCH 093/100] Step 12.7: handle page changed event of the
+Subject: [PATCH 090/131] Step 12.7: handle page changed event of the
  pagination controls
 
 ---
@@ -3076,7 +3018,7 @@ Subject: [PATCH 093/100] Step 12.7: handle page changed event of the
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/client/parties-list/parties-list.html b/client/parties-list/parties-list.html
-index 8a969d6..28a6a13 100644
+index a5f16df..dcca4f3 100644
 --- a/client/parties-list/parties-list.html
 +++ b/client/parties-list/parties-list.html
 @@ -11,5 +11,5 @@
@@ -3090,10 +3032,10 @@ index 8a969d6..28a6a13 100644
 2.5.4 (Apple Git-61)
 
 
-From 8f1884e5f286ded4d48f1a94d33901b1b6b9e95d Mon Sep 17 00:00:00 2001
+From 2f7c3ccdab15554ea695226c2aee678edd23215b Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 20 Dec 2015 12:28:52 +0300
-Subject: [PATCH 094/100] Step 12.8: add page changed event handler to the
+Subject: [PATCH 091/131] Step 12.8: add page changed event handler to the
  component
 
 ---
@@ -3101,10 +3043,10 @@ Subject: [PATCH 094/100] Step 12.8: add page changed event handler to the
  1 file changed, 4 insertions(+)
 
 diff --git a/client/parties-list/parties-list.ts b/client/parties-list/parties-list.ts
-index 0860077..7067357 100644
+index 07dfe45..4b27d3d 100644
 --- a/client/parties-list/parties-list.ts
 +++ b/client/parties-list/parties-list.ts
-@@ -58,4 +58,8 @@ export class PartiesList extends MeteorComponent {
+@@ -56,4 +56,8 @@ export class PartiesList extends MeteorComponent {
              this.parties = Parties.find();
          }
      }
@@ -3117,10 +3059,10 @@ index 0860077..7067357 100644
 2.5.4 (Apple Git-61)
 
 
-From 02b96ac9d91b2a1770e7dfd473b9c0e0d40c06cf Mon Sep 17 00:00:00 2001
+From 0edfb01088a2315872663794deedfa36806052bc Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 20 Dec 2015 13:09:27 +0300
-Subject: [PATCH 095/100] Add tmeasday:publish-counts package
+Subject: [PATCH 092/131] Add tmeasday:publish-counts package
 
 ---
  .meteor/packages | 1 +
@@ -3139,10 +3081,10 @@ index bcc99e0..9aa7932 100644
 2.5.4 (Apple Git-61)
 
 
-From a16409d446c96a9da6fdd07b10268d1d4d1964bf Mon Sep 17 00:00:00 2001
+From f3e28b0775eeb2af050779325f5fb45f608b812d Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 20 Dec 2015 13:09:54 +0300
-Subject: [PATCH 096/100] Step 12.9: publish total number of parties
+Subject: [PATCH 093/131] Step 12.9: publish total number of parties
 
 ---
  server/parties.ts | 1 +
@@ -3164,10 +3106,10 @@ index 8fa668e..013b111 100644
 2.5.4 (Apple Git-61)
 
 
-From 765eb5bb7029f52ef8882a4fbad5fb13d8bf9217 Mon Sep 17 00:00:00 2001
+From 171a97543c1958c9f87151448cc96c016fe8603a Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 20 Dec 2015 13:13:52 +0300
-Subject: [PATCH 097/100] Step 12.10: handle reactive updates of the parties
+Subject: [PATCH 094/131] Step 12.10: handle reactive updates of the parties
  total number
 
 ---
@@ -3175,10 +3117,10 @@ Subject: [PATCH 097/100] Step 12.10: handle reactive updates of the parties
  1 file changed, 5 insertions(+)
 
 diff --git a/client/parties-list/parties-list.ts b/client/parties-list/parties-list.ts
-index 7067357..448b3d8 100644
+index 4b27d3d..4c2b1ba 100644
 --- a/client/parties-list/parties-list.ts
 +++ b/client/parties-list/parties-list.ts
-@@ -32,6 +32,7 @@ export class PartiesList extends MeteorComponent {
+@@ -30,6 +30,7 @@ export class PartiesList extends MeteorComponent {
      pageSize: number = 10;
      curPage: ReactiveVar&lt;number> = new ReactiveVar&lt;number>(1);
      nameOrder: number = 1;
@@ -3186,7 +3128,7 @@ index 7067357..448b3d8 100644
  
      constructor() {
          super();
-@@ -45,6 +46,10 @@ export class PartiesList extends MeteorComponent {
+@@ -43,6 +44,10 @@ export class PartiesList extends MeteorComponent {
                  this.parties = Parties.find({}, { sort: { name: this.nameOrder } });
              }, true);
          });
@@ -3201,10 +3143,10 @@ index 7067357..448b3d8 100644
 2.5.4 (Apple Git-61)
 
 
-From 773e2e2bca4457a79cddfa64d5d6811042d6331f Mon Sep 17 00:00:00 2001
+From 29bef890bda814b36e80d1a8d8427549068195a3 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 20 Dec 2015 13:19:49 +0300
-Subject: [PATCH 098/100] Step 12.11: add parties total number var in the
+Subject: [PATCH 095/131] Step 12.11: add parties total number var in the
  template
 
 ---
@@ -3212,7 +3154,7 @@ Subject: [PATCH 098/100] Step 12.11: add parties total number var in the
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/client/parties-list/parties-list.html b/client/parties-list/parties-list.html
-index 28a6a13..45caf51 100644
+index dcca4f3..f983878 100644
 --- a/client/parties-list/parties-list.html
 +++ b/client/parties-list/parties-list.html
 @@ -4,7 +4,7 @@
@@ -3228,17 +3170,17 @@ index 28a6a13..45caf51 100644
 2.5.4 (Apple Git-61)
 
 
-From 0443c3f609a07ba4f05faefc838170b33e36433f Mon Sep 17 00:00:00 2001
+From e44cf457dc29f4d036c2aa23d2db765578045466 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 20 Dec 2015 13:51:53 +0300
-Subject: [PATCH 099/100] Step 12.12: add a sort order dropdown
+Subject: [PATCH 096/131] Step 12.12: add a sort order dropdown
 
 ---
  client/parties-list/parties-list.html | 7 +++++++
  1 file changed, 7 insertions(+)
 
 diff --git a/client/parties-list/parties-list.html b/client/parties-list/parties-list.html
-index 45caf51..f8a5680 100644
+index f983878..5a78db8 100644
 --- a/client/parties-list/parties-list.html
 +++ b/client/parties-list/parties-list.html
 @@ -3,6 +3,13 @@
@@ -3259,10 +3201,10 @@ index 45caf51..f8a5680 100644
 2.5.4 (Apple Git-61)
 
 
-From 69f7093d82d351b4723f449774fb5d06eedb68c1 Mon Sep 17 00:00:00 2001
+From 3b87decf6ea9e721fffe8b6c29975ee017a34517 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 20 Dec 2015 13:52:45 +0300
-Subject: [PATCH 100/100] Step 12.13: re-subscribe reactively when sort order
+Subject: [PATCH 097/131] Step 12.13: re-subscribe reactively when sort order
  changes
 
 ---
@@ -3270,10 +3212,10 @@ Subject: [PATCH 100/100] Step 12.13: re-subscribe reactively when sort order
  1 file changed, 7 insertions(+), 3 deletions(-)
 
 diff --git a/client/parties-list/parties-list.ts b/client/parties-list/parties-list.ts
-index 448b3d8..3ad6509 100644
+index 4c2b1ba..5187e4e 100644
 --- a/client/parties-list/parties-list.ts
 +++ b/client/parties-list/parties-list.ts
-@@ -31,7 +31,7 @@ export class PartiesList extends MeteorComponent {
+@@ -29,7 +29,7 @@ export class PartiesList extends MeteorComponent {
      parties: Mongo.Cursor&lt;Party>;
      pageSize: number = 10;
      curPage: ReactiveVar&lt;number> = new ReactiveVar&lt;number>(1);
@@ -3282,7 +3224,7 @@ index 448b3d8..3ad6509 100644
      partiesSize: number = 0;
  
      constructor() {
-@@ -40,10 +40,10 @@ export class PartiesList extends MeteorComponent {
+@@ -38,10 +38,10 @@ export class PartiesList extends MeteorComponent {
              let options = {
                  limit: this.pageSize,
                  skip: (this.curPage.get() - 1) * this.pageSize,
@@ -3295,7 +3237,7 @@ index 448b3d8..3ad6509 100644
              }, true);
          });
  
-@@ -67,4 +67,8 @@ export class PartiesList extends MeteorComponent {
+@@ -65,4 +65,8 @@ export class PartiesList extends MeteorComponent {
      onPageChanged(page: number) {
          this.curPage.set(page);
      }
@@ -3307,10 +3249,11 @@ index 448b3d8..3ad6509 100644
 -- 
 2.5.4 (Apple Git-61)
 
-From 952d5e383feca1a94b26fd0268ff6fcadc9a9b2e Mon Sep 17 00:00:00 2001
+
+From 5de58aba42aa59f3463205a248c387b7714ddc7b Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 20 Dec 2015 20:52:38 +0300
-Subject: [PATCH 101/102] Step 12.14: add search by the party location using
+Subject: [PATCH 098/131] Step 12.14: add search by the party location using
  Mongo regex
 
 ---
@@ -3354,10 +3297,10 @@ index 013b111..b9728c4 100644
 2.5.4 (Apple Git-61)
 
 
-From 394bda396482e5534fff1dc5c60ee217878ed1cf Mon Sep 17 00:00:00 2001
+From 8b0baa79f179aa013a93133ffea9e6130d95963c Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 20 Dec 2015 21:13:58 +0300
-Subject: [PATCH 102/111] Step 12.15: add reactive search by the location on
+Subject: [PATCH 099/131] Step 12.15: add reactive search by the location on
  the client
 
 ---
@@ -3365,10 +3308,10 @@ Subject: [PATCH 102/111] Step 12.15: add reactive search by the location on
  1 file changed, 4 insertions(+), 6 deletions(-)
 
 diff --git a/client/parties-list/parties-list.ts b/client/parties-list/parties-list.ts
-index 3ad6509..3b32a49 100644
+index 5187e4e..c89f4b4 100644
 --- a/client/parties-list/parties-list.ts
 +++ b/client/parties-list/parties-list.ts
-@@ -33,6 +33,7 @@ export class PartiesList extends MeteorComponent {
+@@ -31,6 +31,7 @@ export class PartiesList extends MeteorComponent {
      curPage: ReactiveVar&lt;number> = new ReactiveVar&lt;number>(1);
      nameOrder: ReactiveVar&lt;number> = new ReactiveVar&lt;number>(1);
      partiesSize: number = 0;
@@ -3376,7 +3319,7 @@ index 3ad6509..3b32a49 100644
  
      constructor() {
          super();
-@@ -42,7 +43,7 @@ export class PartiesList extends MeteorComponent {
+@@ -40,7 +41,7 @@ export class PartiesList extends MeteorComponent {
                  skip: (this.curPage.get() - 1) * this.pageSize,
                  sort: { name: this.nameOrder.get() }
              };
@@ -3385,7 +3328,7 @@ index 3ad6509..3b32a49 100644
                  this.parties = Parties.find({}, { sort: { name: this.nameOrder.get() } });
              }, true);
          });
-@@ -57,11 +58,8 @@ export class PartiesList extends MeteorComponent {
+@@ -55,11 +56,8 @@ export class PartiesList extends MeteorComponent {
      }
  
      search(value) {
@@ -3403,22 +3346,22 @@ index 3ad6509..3b32a49 100644
 2.5.4 (Apple Git-61)
 
 
-From e3305bef94afa17399aadef9f06e460e97b2cdeb Mon Sep 17 00:00:00 2001
+From 271e0f1a465e0bf9308b138311f2980d988c6844 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 23 Dec 2015 14:37:37 +0700
-Subject: [PATCH 103/111] Step 13.1: add uninvited users publication
+Subject: [PATCH 100/131] Step 13.1: add uninvited users publication
 
 ---
- server/users.ts | 22 ++++++++++++++++++++++
- 1 file changed, 22 insertions(+)
+ server/users.ts | 14 ++++++++++++++
+ 1 file changed, 14 insertions(+)
  create mode 100644 server/users.ts
 
 diff --git a/server/users.ts b/server/users.ts
 new file mode 100644
-index 0000000..5063d26
+index 0000000..f9c21e6
 --- /dev/null
 +++ b/server/users.ts
-@@ -0,0 +1,22 @@
+@@ -0,0 +1,14 @@
 +/// &lt;reference path="../typings/angular2-meteor.d.ts" />
 +
 +import {Parties} from 'collections/parties';
@@ -3427,35 +3370,27 @@ index 0000000..5063d26
 +    let party = Parties.findOne(partyId);
 +
 +    return Meteor.users.find({
-+        $and: [
-+            {
-+                _id: {
-+                    $nin: party.invited || []
-+                }
-+            },
-+            {
-+                owner: {
-+                    $ne: this.userId
-+                }
-+            }
-+        ]
++        _id: {
++            $nin: party.invited || [],
++            $ne: this.userId
++        }
 +    });
 +});
 -- 
 2.5.4 (Apple Git-61)
 
 
-From a28bf93f47fb2444f08e2a7b1b7d50406bb1e6d6 Mon Sep 17 00:00:00 2001
+From db87405ace62e9ba5b748639ccd4d3fe441a1e39 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 23 Dec 2015 14:45:37 +0700
-Subject: [PATCH 104/111] Step 13.2: import users publications on the server
+Subject: [PATCH 101/131] Step 13.2: import users publications on the server
  start
 
 ---
  server/main.ts | 1 +
  1 file changed, 1 insertion(+)
 
-diff --git a/server/main.ts b/server/main.tss
+diff --git a/server/main.ts b/server/main.ts
 index 534fa3b..ae87a88 100644
 --- a/server/main.ts
 +++ b/server/main.ts
@@ -3469,20 +3404,20 @@ index 534fa3b..ae87a88 100644
 2.5.4 (Apple Git-61)
 
 
-From 6729e14abd02984f6e0fac792e0e99081ff5dc40 Mon Sep 17 00:00:00 2001
+From d2d1474c94a102f97ed6f7aef02fcb296d160ff9 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 23 Dec 2015 14:49:16 +0700
-Subject: [PATCH 105/111] Step 13.3: load uninvited users
+Subject: [PATCH 102/131] Step 13.3: load uninvited users
 
 ---
  client/party-details/party-details.ts | 5 +++++
  1 file changed, 5 insertions(+)
 
 diff --git a/client/party-details/party-details.ts b/client/party-details/party-details.ts
-index 150ae0a..dc830d2 100644
+index e9e9f72..6d3b8d2 100644
 --- a/client/party-details/party-details.ts
 +++ b/client/party-details/party-details.ts
-@@ -25,6 +25,7 @@ import {MeteorComponent} from 'angular2-meteor';
+@@ -23,6 +23,7 @@ import {MeteorComponent} from 'angular2-meteor';
  @RequireUser()
  export class PartyDetails extends MeteorComponent {
      party: Party;
@@ -3490,13 +3425,13 @@ index 150ae0a..dc830d2 100644
  
      constructor(params: RouteParams) {
          super();
-@@ -32,6 +33,10 @@ export class PartyDetails extends MeteorComponent {
+@@ -30,6 +31,10 @@ export class PartyDetails extends MeteorComponent {
          this.subscribe('party', partyId, () => {
              this.party = Parties.findOne(partyId);
          }, true);
 +
 +        this.subscribe('uninvited', partyId, () => {
-+          this.users = Meteor.users.find();
++          this.users = Meteor.users.find({_id: {$ne: Meteor.userId()}});
 +        }, true);
      }
  
@@ -3505,10 +3440,10 @@ index 150ae0a..dc830d2 100644
 2.5.4 (Apple Git-61)
 
 
-From 675ff1e82575c4323cf609cd7d1404ba12776f7b Mon Sep 17 00:00:00 2001
+From 2631ec792989c1323e3e32e9fffb08e7ab24fe80 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 23 Dec 2015 14:49:53 +0700
-Subject: [PATCH 106/111] Add invited to the party definition
+Subject: [PATCH 103/131] Add invited to the party definition
 
 ---
  typings/party.d.ts | 3 ++-
@@ -3524,16 +3459,16 @@ index 1fedac3..23441c9 100644
    owner?: string,
 -  public: boolean
 +  public: boolean,
-+  invited?: Array<string>
++  invited?: Array&lt;string>
  }
 -- 
 2.5.4 (Apple Git-61)
 
 
-From 15637ce5c5778dccd749f5bc5c7e45a851dafee8 Mon Sep 17 00:00:00 2001
+From f61aa00b28c1904da170c0508d0d1cc76c13688d Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 23 Dec 2015 14:52:39 +0700
-Subject: [PATCH 107/111] Step 13.4: render uninvited users
+Subject: [PATCH 104/131] Step 13.4: render uninvited users
 
 ---
  client/party-details/party-details.html | 7 +++++++
@@ -3558,10 +3493,10 @@ index 58168fc..4ba0656 100644
 2.5.4 (Apple Git-61)
 
 
-From a6e0bf4a27b19e2d1b9870379adee29873effdb4 Mon Sep 17 00:00:00 2001
+From ae79aba68c15f42b189b43dcf88b87ca139e9791 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 23 Dec 2015 20:30:45 +0700
-Subject: [PATCH 108/111] Step 13.5: add a new pipe to render user name
+Subject: [PATCH 105/131] Step 13.5: add a new pipe to render user name
 
 ---
  client/lib/pipes.ts | 24 ++++++++++++++++++++++++
@@ -3602,10 +3537,10 @@ index 0000000..511e713
 2.5.4 (Apple Git-61)
 
 
-From 4da8428118534352f47a66f60d9759ff1aa3aad0 Mon Sep 17 00:00:00 2001
+From 1aa3ddac5fdf4cde03a7ccabdebd71c7eedc4dd2 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 23 Dec 2015 20:39:03 +0700
-Subject: [PATCH 109/111] Step 13.6: make use of the pipe in the template
+Subject: [PATCH 106/131] Step 13.6: make use of the pipe in the template
 
 ---
  client/party-details/party-details.html | 2 +-
@@ -3627,10 +3562,10 @@ index 4ba0656..0a61451 100644
 2.5.4 (Apple Git-61)
 
 
-From e2bc30eb5e0eb2f45648603a85702e9e807c4d49 Mon Sep 17 00:00:00 2001
+From 8e303df60245903144595cddb5363c20df2c9d64 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 23 Dec 2015 20:40:13 +0700
-Subject: [PATCH 110/111] Step 13.7: import DisplayName pipe and add it to the
+Subject: [PATCH 107/131] Step 13.7: import DisplayName pipe and add it to the
  view
 
 ---
@@ -3638,10 +3573,10 @@ Subject: [PATCH 110/111] Step 13.7: import DisplayName pipe and add it to the
  1 file changed, 3 insertions(+)
 
 diff --git a/client/party-details/party-details.ts b/client/party-details/party-details.ts
-index dc830d2..04c76c0 100644
+index 6d3b8d2..0758465 100644
 --- a/client/party-details/party-details.ts
 +++ b/client/party-details/party-details.ts
-@@ -15,10 +15,13 @@ import {RequireUser} from 'meteor-accounts';
+@@ -13,10 +13,13 @@ import {RequireUser} from 'meteor-accounts';
  
  import {MeteorComponent} from 'angular2-meteor';
  
@@ -3653,26 +3588,26 @@ index dc830d2..04c76c0 100644
  @View({
 +    pipes: [DisplayName],
      templateUrl: '/client/party-details/party-details.html',
-     directives: [RouterLink, FORM_DIRECTIVES, NgIf]
+     directives: [RouterLink]
  })
 -- 
 2.5.4 (Apple Git-61)
 
 
-From 7c3e450ceea0a322dbc54de22f984d8b82837630 Mon Sep 17 00:00:00 2001
+From 3be835cf573731273d49d449e912bbe4d98a263f Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 23 Dec 2015 21:34:51 +0700
-Subject: [PATCH 111/111] Step 13.8: configure accounts UI
+Subject: [PATCH 108/131] Step 13.8: configure accounts UI
 
 ---
  client/app.ts | 4 ++++
  1 file changed, 4 insertions(+)
 
 diff --git a/client/app.ts b/client/app.ts
-index f359c4f..fa36ab0 100644
+index b537b76..81cc5e0 100644
 --- a/client/app.ts
 +++ b/client/app.ts
-@@ -12,6 +12,10 @@ import {PartiesList} from 'client/parties-list/parties-list';
+@@ -10,6 +10,10 @@ import {PartiesList} from 'client/parties-list/parties-list';
  
  import {PartyDetails} from 'client/party-details/party-details';
  
@@ -3687,10 +3622,10 @@ index f359c4f..fa36ab0 100644
 2.5.4 (Apple Git-61)
 
 
-From 4e45836c04a2d012f2e579a6b2afd608162c5401 Mon Sep 17 00:00:00 2001
+From 59271b009259c8314be988573899c4d771e8731e Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 25 Dec 2015 15:12:20 +0700
-Subject: [PATCH 112/119] Step 14.1: add a party invitation method
+Subject: [PATCH 109/131] Step 14.1: add a party invitation method
 
 ---
  collections/methods.ts | 47 +++++++++++++++++++++++++++++++++++++++++++++++
@@ -3754,10 +3689,10 @@ index 0000000..427eb70
 2.5.4 (Apple Git-61)
 
 
-From 8d93f3819d84982c294ae73ffe86a4a9ffdbd235 Mon Sep 17 00:00:00 2001
+From cc06370c4f89d4a02adedb78af48c07c7e861926 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 25 Dec 2015 15:43:08 +0700
-Subject: [PATCH 113/119] Step 14.2: import methods on the server side
+Subject: [PATCH 110/131] Step 14.2: import methods on the server side
 
 ---
  server/main.ts | 1 +
@@ -3777,20 +3712,21 @@ index ae87a88..8fe6abf 100644
 -- 
 2.5.4 (Apple Git-61)
 
-From 0307333f7837ff99889b750f8e54aeadf707c941 Mon Sep 17 00:00:00 2001
+
+From b2e8606cfca4b9e6523c382f8d181c9c8917e7c6 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 1 Jan 2016 19:14:20 +0700
-Subject: [PATCH 114/134] Step 14.3: import methods on the client
+Subject: [PATCH 111/131] Step 14.3: import methods on the client
 
 ---
  client/app.ts | 2 ++
  1 file changed, 2 insertions(+)
 
 diff --git a/client/app.ts b/client/app.ts
-index fa36ab0..ee8de3e 100644
+index 81cc5e0..82239b5 100644
 --- a/client/app.ts
 +++ b/client/app.ts
-@@ -12,6 +12,8 @@ import {PartiesList} from 'client/parties-list/parties-list';
+@@ -10,6 +10,8 @@ import {PartiesList} from 'client/parties-list/parties-list';
  
  import {PartyDetails} from 'client/party-details/party-details';
  
@@ -3803,10 +3739,10 @@ index fa36ab0..ee8de3e 100644
 2.5.4 (Apple Git-61)
 
 
-From 05bce4947b506649e229bf27804e7adf62dba411 Mon Sep 17 00:00:00 2001
+From 27735799e14007717c765d617ad991fd40452f2a Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 25 Dec 2015 15:55:43 +0700
-Subject: [PATCH 114/119] Step 14.4: add "invite" button
+Subject: [PATCH 112/131] Step 14.4: add "invite" button
 
 ---
  client/party-details/party-details.html | 1 +
@@ -3827,10 +3763,10 @@ index 0a61451..b671ff0 100644
 2.5.4 (Apple Git-61)
 
 
-From 3d69fccdb99bd46ebf432b454d6db55c96839a75 Mon Sep 17 00:00:00 2001
+From 07ef06cb69d74d9245959d81a2c11d516dc83847 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 25 Dec 2015 15:56:51 +0700
-Subject: [PATCH 115/119] Step 14.5: add the click handler and call "invite"
+Subject: [PATCH 113/131] Step 14.5: add the click handler and call "invite"
  method
 
 ---
@@ -3838,10 +3774,10 @@ Subject: [PATCH 115/119] Step 14.5: add the click handler and call "invite"
  1 file changed, 11 insertions(+)
 
 diff --git a/client/party-details/party-details.ts b/client/party-details/party-details.ts
-index ba47699..6a92c13 100644
+index 0758465..bd846e8 100644
 --- a/client/party-details/party-details.ts
 +++ b/client/party-details/party-details.ts
-@@ -55,4 +55,15 @@ export class PartyDetails extends MeteorComponent {
+@@ -53,4 +53,15 @@ export class PartyDetails extends MeteorComponent {
          alert('Please log in to change this party');
        }
      }
@@ -3861,10 +3797,10 @@ index ba47699..6a92c13 100644
 2.5.4 (Apple Git-61)
 
 
-From 10ef557b38dbb178020455a230893f65264d2e2d Mon Sep 17 00:00:00 2001
+From 02ac38f14d9e987b5990d5fdaf8a22c35c4fcb9c Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 25 Dec 2015 16:02:54 +0700
-Subject: [PATCH 116/119] Add check package
+Subject: [PATCH 114/131] Add check package
 
 ---
  .meteor/packages | 1 +
@@ -3883,10 +3819,10 @@ index 9aa7932..c784804 100644
 2.5.4 (Apple Git-61)
 
 
-From 97aa9efead9b98024292d9afe9b71dadd22b9045 Mon Sep 17 00:00:00 2001
+From 9c6efbeb2476dde614433780a9f98cd11e897771 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 25 Dec 2015 16:08:08 +0700
-Subject: [PATCH 117/119] Add email package
+Subject: [PATCH 115/131] Add email package
 
 ---
  .meteor/packages | 1 +
@@ -3905,20 +3841,20 @@ index c784804..e15a342 100644
 2.5.4 (Apple Git-61)
 
 
-From 03aad08576cff5243f0ca2abcf91930152f9d3ce Mon Sep 17 00:00:00 2001
+From 7e412243519f61a093a2c32c6f7fe012c3ef8701 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 25 Dec 2015 17:03:15 +0700
-Subject: [PATCH 118/119] Step 14.6: get the party reactively
+Subject: [PATCH 116/131] Step 14.6: get the party reactively
 
 ---
  client/party-details/party-details.ts | 6 ++++--
  1 file changed, 4 insertions(+), 2 deletions(-)
 
 diff --git a/client/party-details/party-details.ts b/client/party-details/party-details.ts
-index 6a92c13..403e220 100644
+index bd846e8..ecdc0f8 100644
 --- a/client/party-details/party-details.ts
 +++ b/client/party-details/party-details.ts
-@@ -34,8 +34,10 @@ export class PartyDetails extends MeteorComponent {
+@@ -32,8 +32,10 @@ export class PartyDetails extends MeteorComponent {
          super();
          var partyId = params.get('partyId');
          this.subscribe('party', partyId, () => {
@@ -3935,20 +3871,20 @@ index 6a92c13..403e220 100644
 2.5.4 (Apple Git-61)
 
 
-From 6813dec3ad023acf65fb5cae46169547c1ca7eb9 Mon Sep 17 00:00:00 2001
+From 3efbce497ba7eb209d3c3b1ced4f16a49997c27c Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 25 Dec 2015 17:08:47 +0700
-Subject: [PATCH 119/119] 14.7: update the users list reactively
+Subject: [PATCH 117/131] Step 14.7: update the users list reactively
 
 ---
  client/party-details/party-details.ts | 14 +++++++++++++-
  1 file changed, 13 insertions(+), 1 deletion(-)
 
 diff --git a/client/party-details/party-details.ts b/client/party-details/party-details.ts
-index 403e220..d8178a4 100644
+index ecdc0f8..e490aab 100644
 --- a/client/party-details/party-details.ts
 +++ b/client/party-details/party-details.ts
-@@ -36,14 +36,26 @@ export class PartyDetails extends MeteorComponent {
+@@ -34,14 +34,26 @@ export class PartyDetails extends MeteorComponent {
          this.subscribe('party', partyId, () => {
              this.autorun(() => {
                  this.party = Parties.findOne(partyId);
@@ -3980,10 +3916,11 @@ index 403e220..d8178a4 100644
 2.5.4 (Apple Git-61)
 
 
-From 9f0bc0b36236dd11ea6cb0becacbd4e6796de4dc Mon Sep 17 00:00:00 2001
+From 86ec74f4cdea8c1209aae8b4fd02d013ea496e93 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Dec 2015 19:39:34 +0700
-Subject: [PATCH 120/127] 14.8: show private parties to invited and owners only
+Subject: [PATCH 118/131] Step 14.8: show private parties to the invited and
+ owners only
 
 ---
  server/parties.ts | 8 +++++++-
@@ -4012,10 +3949,10 @@ index b9728c4..a735369 100644
 2.5.4 (Apple Git-61)
 
 
-From a1ff260caa1851936bdddf45c79af7ab1d631eed Mon Sep 17 00:00:00 2001
+From 86ec1cf99e58aeb1ecbfa26fe578b1c986e5224f Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Dec 2015 20:17:48 +0700
-Subject: [PATCH 122/127] 14.9: add a "reply" method
+Subject: [PATCH 119/131] Step 14.9: add a "reply" method
 
 ---
  collections/methods.ts | 45 +++++++++++++++++++++++++++++++++++++++++++++
@@ -4080,10 +4017,10 @@ index 427eb70..d548d06 100644
 2.5.4 (Apple Git-61)
 
 
-From 89ca291ea5f2a168d6e3ed266d473b57802afe41 Mon Sep 17 00:00:00 2001
+From 84347d5a337447d8dd1f526b26b7e6931a9d8f3b Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Dec 2015 20:10:46 +0700
-Subject: [PATCH 121/127] 14.10: update the party typings
+Subject: [PATCH 120/131] Step 14.10: update the party typings
 
 ---
  typings/party.d.ts | 8 +++++++-
@@ -4110,10 +4047,10 @@ index 23441c9..82ac46a 100644
 2.5.4 (Apple Git-61)
 
 
-From 218de32462e9e9579dc4b874903bc0d2f19872c9 Mon Sep 17 00:00:00 2001
+From 8d964d665f58eb008f04f0e0ad9925e296f57ea2 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Dec 2015 20:33:48 +0700
-Subject: [PATCH 123/127] 14.11: update PartyDetails view with the three
+Subject: [PATCH 121/131] Step 14.11: update PartyDetails view with the three
  response buttons
 
 ---
@@ -4139,10 +4076,10 @@ index b671ff0..971a2d7 100644
 2.5.4 (Apple Git-61)
 
 
-From be081959257932f5e9370bcf018d569d6798c2c4 Mon Sep 17 00:00:00 2001
+From 1c4988ef4e7260673bd36f3603116ae5cb0e0223 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Dec 2015 20:37:05 +0700
-Subject: [PATCH 124/127] 14.12: handle reply events in the PartyDetails
+Subject: [PATCH 122/131] Step 14.12: handle reply events in the PartyDetails
  component
 
 ---
@@ -4150,10 +4087,10 @@ Subject: [PATCH 124/127] 14.12: handle reply events in the PartyDetails
  1 file changed, 11 insertions(+)
 
 diff --git a/client/party-details/party-details.ts b/client/party-details/party-details.ts
-index d8178a4..843405d 100644
+index e490aab..76c9f34 100644
 --- a/client/party-details/party-details.ts
 +++ b/client/party-details/party-details.ts
-@@ -80,4 +80,15 @@ export class PartyDetails extends MeteorComponent {
+@@ -78,4 +78,15 @@ export class PartyDetails extends MeteorComponent {
          alert('User successfully invited.');
        });
      }
@@ -4173,10 +4110,10 @@ index d8178a4..843405d 100644
 2.5.4 (Apple Git-61)
 
 
-From b17913d7a1d62255f1d6500b99288506fea2cd15 Mon Sep 17 00:00:00 2001
+From ec3ca63cd637ae0feffce7a9fbb813d737c19830 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Dec 2015 21:34:49 +0700
-Subject: [PATCH 125/127] 14.13: add a new response counting pipe
+Subject: [PATCH 123/131] Step 14.13: add a new response counting pipe
 
 ---
  client/lib/pipes.ts | 34 ++++++++++++++++++++++++++++++++++
@@ -4235,17 +4172,17 @@ index 511e713..131c595 100644
 2.5.4 (Apple Git-61)
 
 
-From 3c381b5f9be72caf1f59b178f764672072fd24be Mon Sep 17 00:00:00 2001
+From 98d90e824afba5f56bff15853fb8f18c736e909b Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Dec 2015 21:35:28 +0700
-Subject: [PATCH 126/127] 14.14: display response statistics in the list
+Subject: [PATCH 124/131] Step 14.14: display response statistics in the list
 
 ---
  client/parties-list/parties-list.html | 6 ++++++
  1 file changed, 6 insertions(+)
 
 diff --git a/client/parties-list/parties-list.html b/client/parties-list/parties-list.html
-index f8a5680..0a3acb6 100644
+index 5a78db8..bf63448 100644
 --- a/client/parties-list/parties-list.html
 +++ b/client/parties-list/parties-list.html
 @@ -16,6 +16,12 @@
@@ -4265,20 +4202,20 @@ index f8a5680..0a3acb6 100644
 2.5.4 (Apple Git-61)
 
 
-From 7b129c082153931e94fc7f3824a3ad12bbf33f17 Mon Sep 17 00:00:00 2001
+From 5048a057bf0b6302fafefdd379a7a96e9ec83faf Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Dec 2015 21:36:23 +0700
-Subject: [PATCH 127/127] 14.15: import the RsvpPipe pipe
+Subject: [PATCH 125/131] Step 14.15: import the RsvpPipe pipe
 
 ---
  client/parties-list/parties-list.ts | 4 +++-
  1 file changed, 3 insertions(+), 1 deletion(-)
 
 diff --git a/client/parties-list/parties-list.ts b/client/parties-list/parties-list.ts
-index 827521b..e4fd65a 100644
+index c89f4b4..44ac226 100644
 --- a/client/parties-list/parties-list.ts
 +++ b/client/parties-list/parties-list.ts
-@@ -18,6 +18,8 @@ import {MeteorComponent} from 'angular2-meteor';
+@@ -16,6 +16,8 @@ import {MeteorComponent} from 'angular2-meteor';
  
  import {PaginationService, PaginatePipe, PaginationControlsCpm} from 'ng2-pagination';
  
@@ -4287,30 +4224,31 @@ index 827521b..e4fd65a 100644
  @Component({
      selector: 'parties-list',
      viewProviders: [PaginationService]
-@@ -25,7 +27,7 @@ import {PaginationService, PaginatePipe, PaginationControlsCpm} from 'ng2-pagina
+@@ -23,7 +25,7 @@ import {PaginationService, PaginatePipe, PaginationControlsCpm} from 'ng2-pagina
  @View({
      templateUrl: '/client/parties-list/parties-list.html',
-     directives: [NgFor, PartiesForm, RouterLink, AccountsUI, PaginationControlsCpm],
+     directives: [PartiesForm, RouterLink, AccountsUI, PaginationControlsCpm],
 -    pipes: [PaginatePipe]
 +    pipes: [PaginatePipe, RsvpPipe]
  })
  export class PartiesList extends MeteorComponent {
-     parties: Mongo.Cursor<Party>;
+     parties: Mongo.Cursor&lt;Party>;
 -- 
 2.5.4 (Apple Git-61)
 
 
-From 12939158bbfd08a1a469e0625922414a4157389a Mon Sep 17 00:00:00 2001
+From 0006a8a5476a7e29ee985de57bd49647788ed3f5 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Mon, 28 Dec 2015 17:42:26 +0700
-Subject: [PATCH 128/133] Step 15.1: inject Meteor user and add isOwner method
+Subject: [PATCH 126/131] Step 15.1: inject Meteor user and add isOwner method
+ into the PartiesList
 
 ---
  client/parties-list/parties-list.ts | 13 +++++++++++++
  1 file changed, 13 insertions(+)
 
 diff --git a/client/parties-list/parties-list.ts b/client/parties-list/parties-list.ts
-index e4fd65a..d02bbad 100644
+index 44ac226..549445d 100644
 --- a/client/parties-list/parties-list.ts
 +++ b/client/parties-list/parties-list.ts
 @@ -1,6 +1,7 @@
@@ -4321,7 +4259,7 @@ index e4fd65a..d02bbad 100644
  
  import {Component, View} from 'angular2/core';
  
-@@ -14,6 +15,8 @@ import {RouterLink} from 'angular2/router';
+@@ -12,6 +13,8 @@ import {RouterLink} from 'angular2/router';
  
  import {AccountsUI} from 'meteor-accounts-ui';
  
@@ -4330,23 +4268,23 @@ index e4fd65a..d02bbad 100644
  import {MeteorComponent} from 'angular2-meteor';
  
  import {PaginationService, PaginatePipe, PaginationControlsCpm} from 'ng2-pagination';
-@@ -29,6 +32,7 @@ import {RsvpPipe} from 'client/lib/pipes';
-     directives: [NgFor, PartiesForm, RouterLink, AccountsUI, PaginationControlsCpm],
+@@ -27,6 +30,7 @@ import {RsvpPipe} from 'client/lib/pipes';
+     directives: [PartiesForm, RouterLink, AccountsUI, PaginationControlsCpm],
      pipes: [PaginatePipe, RsvpPipe]
  })
 +@InjectUser()
  export class PartiesList extends MeteorComponent {
      parties: Mongo.Cursor&lt;Party>;
      pageSize: number = 10;
-@@ -36,6 +40,7 @@ export class PartiesList extends MeteorComponent {
-     nameOrder: ReactiveVar<number> = new ReactiveVar<number>(1);
+@@ -34,6 +38,7 @@ export class PartiesList extends MeteorComponent {
+     nameOrder: ReactiveVar&lt;number> = new ReactiveVar&lt;number>(1);
      partiesSize: number = 0;
-     location: ReactiveVar<string> = new ReactiveVar<string>(null);
+     location: ReactiveVar&lt;string> = new ReactiveVar&lt;string>(null);
 +    user: Meteor.User;
  
      constructor() {
          super();
-@@ -71,4 +76,12 @@ export class PartiesList extends MeteorComponent {
+@@ -69,4 +74,12 @@ export class PartiesList extends MeteorComponent {
      changeSortOrder(nameOrder) {
          this.nameOrder.set(parseInt(nameOrder));
      }
@@ -4363,10 +4301,10 @@ index e4fd65a..d02bbad 100644
 2.5.4 (Apple Git-61)
 
 
-From 64165ac151c3e3542b993921d759cedcfa2cf639 Mon Sep 17 00:00:00 2001
+From 6ebe14c7e6d576d5c1054953af265ccce7b91c0e Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Mon, 28 Dec 2015 17:46:08 +0700
-Subject: [PATCH 129/133] Step 15.2: use the hidden attribute in the
+Subject: [PATCH 127/131] Step 15.2: use the hidden attribute in the
  PartiesList template
 
 ---
@@ -4397,20 +4335,20 @@ index bf63448..f87d7d0 100644
 2.5.4 (Apple Git-61)
 
 
-From ce064a6484959dc5c0a53d805e1eda67e46dabf5 Mon Sep 17 00:00:00 2001
+From 3d59383ce844eb48b2756b6238595cc2ccce6a0c Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Mon, 28 Dec 2015 18:48:33 +0700
-Subject: [PATCH 130/133] Step 15.3: add isOwner property into the PartyDetails
+Subject: [PATCH 128/131] Step 15.3: add isOwner property into the PartyDetails
 
 ---
  client/party-details/party-details.ts | 12 +++++++++++-
  1 file changed, 11 insertions(+), 1 deletion(-)
 
 diff --git a/client/party-details/party-details.ts b/client/party-details/party-details.ts
-index 843405d..037508d 100644
+index 76c9f34..28c1936 100644
 --- a/client/party-details/party-details.ts
 +++ b/client/party-details/party-details.ts
-@@ -11,7 +11,7 @@ import {Parties} from 'collections/parties';
+@@ -9,7 +9,7 @@ import {Parties} from 'collections/parties';
  
  import {RouterLink} from 'angular2/router';
  
@@ -4419,19 +4357,19 @@ index 843405d..037508d 100644
  
  import {MeteorComponent} from 'angular2-meteor';
  
-@@ -26,9 +26,11 @@ import {DisplayName} from 'client/lib/pipes';
-     directives: [RouterLink, FORM_DIRECTIVES, NgIf]
+@@ -24,9 +24,11 @@ import {DisplayName} from 'client/lib/pipes';
+     directives: [RouterLink]
  })
  @RequireUser()
 +@InjectUser()
  export class PartyDetails extends MeteorComponent {
      party: Party;
-     users: Mongo.Cursor<Object>;
+     users: Mongo.Cursor&lt;Object>;
 +    user: Meteor.User;
  
      constructor(params: RouteParams) {
          super();
-@@ -91,4 +93,12 @@ export class PartyDetails extends MeteorComponent {
+@@ -89,4 +91,12 @@ export class PartyDetails extends MeteorComponent {
          }
        });
      }
@@ -4448,10 +4386,10 @@ index 843405d..037508d 100644
 2.5.4 (Apple Git-61)
 
 
-From 86f72d86deba5d87af26c6058ad7b65bbe4042da Mon Sep 17 00:00:00 2001
+From 0561d0143069005370b772096d64cc50553437ef Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Mon, 28 Dec 2015 18:49:13 +0700
-Subject: [PATCH 131/133] Step 15.4: add disable attribute bindings
+Subject: [PATCH 129/131] Step 15.4: add disable attribute bindings
 
 ---
  client/party-details/party-details.html | 8 ++++----
@@ -4484,20 +4422,20 @@ index 971a2d7..95e6e57 100644
 2.5.4 (Apple Git-61)
 
 
-From 92f05ea6041ef96e0e17722a53c9815d4ded2b78 Mon Sep 17 00:00:00 2001
+From 45f6e606b76f775bd221ee5f78ab7590cc727396 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Mon, 28 Dec 2015 19:40:08 +0700
-Subject: [PATCH 132/133] Step 15.5: add isPublic and isInvited properties
+Subject: [PATCH 130/131] Step 15.5: add isPublic and isInvited properties
 
 ---
  client/party-details/party-details.ts | 17 +++++++++++++++++
  1 file changed, 17 insertions(+)
 
 diff --git a/client/party-details/party-details.ts b/client/party-details/party-details.ts
-index 78d6870..1dfc1bd 100644
+index 28c1936..e6c922f 100644
 --- a/client/party-details/party-details.ts
 +++ b/client/party-details/party-details.ts
-@@ -101,4 +101,21 @@ export class PartyDetails extends MeteorComponent {
+@@ -99,4 +99,21 @@ export class PartyDetails extends MeteorComponent {
  
          return false;
      }
@@ -4523,10 +4461,10 @@ index 78d6870..1dfc1bd 100644
 2.5.4 (Apple Git-61)
 
 
-From 5a03faa1ae358b946944d3ba601c92579fa1225f Mon Sep 17 00:00:00 2001
+From e2b5f4f29b9b16de1ae40b1bb3f68e7b7005f3e6 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Mon, 28 Dec 2015 19:40:32 +0700
-Subject: [PATCH 133/133] Step 15.6: make use of the properties in the template
+Subject: [PATCH 131/131] Step 15.6: make use of the properties in the template
 
 ---
  client/party-details/party-details.html | 4 ++--
@@ -4556,3 +4494,4 @@ index 95e6e57..1301c19 100644
    <input type="button" value="Maybe" (click)="reply('maybe')">
 -- 
 2.5.4 (Apple Git-61)
+
