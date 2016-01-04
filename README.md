@@ -1,4 +1,4 @@
-# Meteor-Angular2
+# Angular2-Meteor
 Angular2 + Meteor integration.
 
 ##### Angular2 version: beta-0.
