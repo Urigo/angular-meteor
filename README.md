@@ -171,10 +171,10 @@ A preliminary version of the package roadmap might look like this:
 - 0.6v With upcoming Meteor 1.3, make direct use of the Angular 2 NPM deprecating Angular 2 package
 - 0.7v Meteor-aware routing (e.g. Fast-Render support)
 - 0.8v GraphQL support
-- 0.9v Implement various auxiliary but potentially useful in Meteor features, for example, [template transforms for Minimongo queries] (https://github.com/Urigo/angular2-meteor/issues/21), custom template exceptions handling (similar to the Blaze one), support of the reactive variables in the templates etc
+- 0.9v Implement various auxiliary but potentially useful in Meteor features, for example, [template transforms for Minimongo queries] (https://github.com/Urigo/angular2-meteor/issues/21), custom template exceptions handling (similar to the Blaze's one), support of the reactive variables in the templates etc
 - 1.0v Increase test coverage, fixes of the important issues on the way to the first release
 
-It's subject to change, since we are still figuring out patterns and features of the integration that might become popular in the future.
+It's subject to change, since we are still figuring out best patterns and features of the integration that might become popular in the future.
 
 ## Contribution
 If you know how to make integration of Angular 2 and Meteor better, you are welcome!
