@@ -118,7 +118,7 @@ For example, change `client/app.ts` to:
 
 Add Angular2 template file `client/parties.html` with a content as follows:
 ````html
-    <div *ng-for="#party of parties">
+    <div *ngFor="#party of parties">
       <p>Name: {{party.name}}</p>
     </div>
 ````
