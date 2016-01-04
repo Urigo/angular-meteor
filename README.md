@@ -7,10 +7,10 @@
 
 ## Getting started with Angular Meteor
 
-[Getting started tutorial](https://angular-meteor.com/tutorial)
+[Getting started tutorial](http://angular-meteor.com/tutorial)
 
 ## Documentation
-- [Official website](https://angular-meteor.com)
+- [Official website](http://angular-meteor.com)
 - [Example application](https://github.com/Urigo/meteor-angular-socially) (Final version of the tutorial)
 - Questions and help - [stack-overflow `angular-meteor` tag](http://stackoverflow.com/questions/tagged/angular-meteor)
 - [Discussions - the Meteor Forum](https://forums.meteor.com/)
@@ -40,7 +40,7 @@ We would love contributions in:
 1. Code - We would love to get your pull requests, just don't forget the tests..
 2. [Tutorial](http://angular-meteor.com/tutorial) - our goal with the tutorial is to add as many common use cases as possible. If you want to create and add your own chapter we would be happy to help you writing and adding it. Also if you want to record a video for a chapter we would love to help you.
 3. [Roadmap](https://trello.com/b/Wj9U0ulk/angular-meteor) - you can add a card about what you want to see in the library or in the tutorial.
-4. I ([Urigo](https://github.com/urigo)) live around the world with one small bag, so another way of contributing can be by offering me a place to sleep somewhere interesting around the world that I have to see :) 
+4. I ([Urigo](https://github.com/urigo)) live around the world with one small bag, so another way of contributing can be by offering me a place to sleep somewhere interesting around the world that I have to see :)
 
 If you want to contribute and need help or don't know what should you do, you can [contact me directly](https://github.com/urigo)
 
