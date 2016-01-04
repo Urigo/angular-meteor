@@ -1,26 +1,26 @@
 {{#template name="tutorials.socially.angular2.step_07.md"}}
 {{> downloadPreviousStep stepName="step_06"}}  
 
-In this step we will review briefly files structure our Socially app has so far,
-also we’ll look closely into TypeScript features since knowing better primary programming language of this package would be surely beneficial.
+In this step we will briefly review the file structure our Socially app has so far,
+also we’ll look closely into certain TypeScript features since having a better understanding of the primary programming language of this package would be surely beneficial.
 
 # File Structure
 
-As you probably have noticed, our tutorial app has a strict modular structure at this point:
-there is no pure JavaScript files that are being bundled together and auto-executed, so Meteor's file loading conventions don't have effect.
+As you have probably noticed, our tutorial app has a strict modular structure at this point:
+there are no pure JavaScript files that are being bundled together and auto-executed, so Meteor's file loading conventions doesn't have an effect.
 Even more, every .ts-file is being compiled into a separate System.j module, which we can then import whenever we need to.
 
-There is another one thing worth sounding once more. As you know, Meteor has two special folders: **client** and **server**  .
-We can benefit from them (and already done it in this app) too by allowing access to the client side modules from the client side only and, accordingly, to server side modules from the server side.
-Everything outside them will be available to the both parts.
-It’s, no wonder, a recommended approach in Meteor, and this is how we’ve been doing it so far.
+There is another thing worth mentioning once more. As you know, Meteor has two special folders: **client** and **server**.
+We can benefit from them (and have already done so in this app) by allowing access to the client side modules from the client side only and, accordingly, to server side modules from the server side.
+Everything outside of those folders will be available to the both client and server.
+It’s no wonder why this is a recommended approach in Meteor, and this is why we’ve been doing it so far.
 Let's stick to it further.
 
 # TypeScript
 
 TypeScript is a rather new language that has been around for 3 years only.
-Since then it’s been gaining [popularity](https://www.google.com/trends/explore#q=%2Fm%2F0n50hxv) due to various reasons. Among them are one of the fullest implementation of the ES2015 standard's features
-on the market including some of the experimental ones, pseudo type-checking and rich toolset developed by Microsoft and TypeScript community.
+Since then it’s been gaining [popularity](https://www.google.com/trends/explore#q=%2Fm%2F0n50hxv) due to various reasons. Among them is one of the fullest implementations of ES2015 features
+on the market: including some of the experimental ones, pseudo type-checking and a rich toolset developed by Microsoft and the TypeScript community.
 It has support already in all major IDEs including Visual Studio, WebStorm, Sublime etc.
 
 One of the hottest questions in JavaScript, that has been around since the Web 2.0 era started, was how to make JavaScript less bug-prone and
@@ -28,16 +28,16 @@ suitable for big projects. In the OOP world, well-known solutions include modula
 it turned out to be very hard to create a good type-checking due to, first of all, JavaScript's flexibility. One always needs to impose a certain number of rules to
 follow to make a JavaScript compiler effective. For many years, we’ve seen around a number of solutions including Closure Compiler and GWT from Google, a bunch of C#-to-JavaScript compilers and others.
 
-This was, for sure, one of the questions why TypeScript team were striving to solve: to create a language that would inherit flexibility of JavaScript while would have, at the same, effective type-checking with minimum amount of effort required from the user. There should have been some kind of the [middle way](https://en.wikipedia.org/wiki/Middle_Way).
-And they found it, having introduced the type declaration files. These are files of special kind where you describe interfaces your classes expose along with signatures of the methods and types of the parameters they take, so that TypeScript will be able to refer to these files to verify correctness of your class's API.
-Of course, flexibility is still there which means if you don’t want to declare types you can skip them right away.
+This was, for sure, one of the problems the TypeScript team were striving to solve: to create a language that would inherit the flexibility of JavaScript while, at the same time, having effective type-checking with minimum effort required from the user. There should have been some kind of [middle way](https://en.wikipedia.org/wiki/Middle_Way).
+And they found it, having introduced the type declaration files. These are files of a special kind where you describe interfaces your classes expose along with signatures of the methods and types of the parameters they take, so that TypeScript will be able to refer to these files to verify the correctness of your class's API.
+Of course, the flexibility is still there which means if you don’t want to declare types you can skip them right away.
 
-Usage of the declaration files was mentioned multiple time in this tutorial before with the `/// <reference path=".." />` syntax. By this way, we tell TypeScript what declaration files to check when it is compiling a particular .ts-file.
+Usage of the declaration files was mentioned multiple times in this tutorial with the `/// <reference path=".." />` syntax. By this way, we tell TypeScript what declaration files to check when it is compiling a particular .ts-file.
 
 As you may have noticed, Angular2-Meteor package itself installs a number of these files into the **typings** folder.
 Some of them have names `angular2.d.ts` and `meteor.d.ts`, which, as you can guess, are used to verify that API of Meteor and Angular 2 are being used correctly in your code.
 
-But let’s create own declaration file to learn this type-checking better.
+But let’s create our own declaration file in order to learn this type-checking better.
 Keep in mind, type-checking is not delivered in the outputted JavaScript. It is only extra sugar for your development environment, and adds no weight to the outputted .js file.
 
 ## Type Declaration Files
@@ -49,7 +49,7 @@ Let's create `party.d.ts` file and place it inside “typings” folder with the
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="7.1"}}
 
-One of the places where declared type can be used is a definition of the parties collection in `collections/parties.ts`.
+One of the places where the declared type can be used is in the definition of the parties collection in `collections/parties.ts`.
 Let’s change the code to:
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="7.2"}}
@@ -69,7 +69,7 @@ There you’ll see the `parties` property assigned to the `Mongo.Cursor<Object>`
 But let’s change it to `Mongo.Cursor<string>`. Run the app and you will see it’s swearing again.
 TypeScript doesn’t know how to convert `Mongo.Cursor<string>` to `Mongo.Cursor<Party>`, so it considers the assigment to be wrong.
 
-Isn’t cool?! We’ve made our app to be bug persistent with only few changes!
+Isn’t it cool?! We’ve made our app to be bug persistent with only few changes!
 
 Finally, let’s change `Object` to `Party` in the `parties-list.ts` and `party-details.ts` files to make our code look right:
 
