@@ -145,6 +145,8 @@ Meteor.startup(() => {
 ### TypeScript Support
 The package uses this TypeScript [compilers](https://github.com/barbatus/ts-compilers) to compile `.ts`-files. Please, read there how you can configure TypeScript, what options are available or how you can speed up just-in-time compilation.
 
+TypeScript configuration file a.k.a. `tsconfig.json` is supported as well. Place a file with this name at the root folder and start adding any available TypeScript options you want. Read about the structure [here] (https://github.com/Microsoft/TypeScript/wiki/tsconfig.json). "files" property works only for the declaration files in the "typings" folder.
+
 By default, compiler will curse on syntactic errors and will log out all missing modules and other semantic errors to the terminal.
 So, if you have code like this:
 ````ts
@@ -152,18 +154,19 @@ So, if you have code like this:
 ````
 It will likely curse that `Mongo` is undefined. Luckily, the package adds Angular2 and Meteor declaration files, which means you'll need only to reference them in your TypeScript files to fix errors.
 
-After the first run of your app, Angular2-Meteor will create declaration (or typings) files (one of them is `typings/angular2-meteor.d.ts`) in the "typings" folder.
-There are two ways to include it into the app:
+After the first run of your app, Angular2-Meteor will create declaration  files (one of them is `typings/angular2-meteor.d.ts`) in the "typings" folder.
+There are two ways to include them into the app:
 
-- you can directly add a reference to `typings/angular2-meteor.d.ts` in every TypeScript file that uses Meteor or Angular2 API as follows:
+- you can directly add a reference to, for example, `typings/angular2-meteor.d.ts` in every TypeScript file that uses Meteor or Angular2 API as follows:
 
 ````ts
 /// <reference path="../typings/angular2-meteor.d.ts" />
 ````
-- or you can add a custon TypeScript config at the root with "files"
+- or you can add a custom TypeScript config at the root with "files"
   property set to contain "typings/angular2-meteor.d.ts" path.
   As soon as you've done this, TypeScript compiler will compiler
-  every .ts-file along with `angular2-meteor.d.ts`.
+  every .ts-file along with `angular2-meteor.d.ts`, thus, recognizing 
+  Meteor and Mongo API. See, the parties demo (example/parties) for the details.
 
 Make sure that paths are relative to the app top folder.
 
@@ -178,7 +181,7 @@ A preliminary version of the package roadmap might look like this:
 - 0.4.5v Update Babel support (including a Babel demo);
 - 0.5v Blaze templates->Angular 2 components transition path;
 - 0.6v With upcoming Meteor 1.3, make direct use of the Angular 2 NPM, deprecate Angular 2 package
-  and replace SystemJS with CommmonJS;
+  and replace SystemJS with CommonJS;
 - 0.7v Meteor-aware routing (e.g. FastRender support);
 - 0.8v GraphQL support;
 - 0.9v Implement various auxiliary but potentially useful in Meteor features, for example, [template transforms for Minimongo queries] (https://github.com/Urigo/angular2-meteor/issues/21), custom template exceptions handling (similar to the Blaze's one), support of the reactive variables in the templates etc;
