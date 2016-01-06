@@ -102,8 +102,6 @@ __`client/app.ts`:__
 
     import {NgZone, Component, View} from 'angular2/core';
 
-    import {NgFor} from 'angular2/common';
-
     import {bootstrap} from 'angular2/bootstrap';
 
     import {Parties} from 'collections/parties';
@@ -113,8 +111,7 @@ __`client/app.ts`:__
     })
 
     @View({
-      templateUrl: "client/app.html",
-      directives: [NgFor]
+      templateUrl: "client/app.html"
     })
 
     class Socially {

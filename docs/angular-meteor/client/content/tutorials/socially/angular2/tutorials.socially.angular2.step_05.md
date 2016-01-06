@@ -14,12 +14,17 @@ Routing functionality in Angular traditionally goes in a separate library.
 In Angular 2, there is a separate module for this called `angular2/router` (read about routing API [here](https://angular.io/docs/js/latest/api/router/)).
 
 Angular2-Meteor package contains `angular2/router` along with the code, so you can start importing it right out of the box.
-Angular 2 routing turns out to be a small fraction of all Angular 2 source code (less than 100k uncompressed);
-it made sense to include it by default into the package.
+Angular 2 routing turns out to be a rather small module in comparison to other major Angular 2 modules, besides,
+it's expected that Angular 2 NPM will be used directly in the future versions of Meteor (1.3).
+These were two main reason to make routing a part of this package.
 
 Let's import routing dependencies into our app. We'll need router providers,
 router directives and router configuration.
 The reason why we need all of them you'll know about a bit later.
+There are two special arrays that contain all available routing directives and
+providers correspondly: `ROUTER_DIRECTIVES` and `ROUTER_PROVIDERS`.
+We also add `ROUTER_DIRECTIVES` to the View decorator itself to import all
+directive dependencies into the template:
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="5.1"}}
 
@@ -167,7 +172,7 @@ parameters of the current URL. Right after that moment if a `PartyDetails` insta
 it's created with `RouteParams` injected and equalled to the current URL inside the constructor.
 
 If you want to read more about dependency injection in Angular 2, you can find excessive overview in this [article](http://blog.thoughtram.io/angular/2015/05/18/dependency-injection-in-angular-2.html).
-If you are interested what class metadata is, proceed [here](http://blog.thoughtram.io/angular/2015/09/17/resolve-service-dependencies-in-angular-2.html)
+If you are interested what class metadata is, proceed [here](http://blog.thoughtram.io/angular/2015/09/17/resolve-service-dependencies-in-angular-2.html).
 
 Let's now load a party instance using received ID parameter:
 

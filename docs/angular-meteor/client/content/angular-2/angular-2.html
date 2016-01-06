@@ -5,7 +5,7 @@
         <h1 class="title">A Clear Migration Path to Angular 2.0</h1>
         <img src="/images/angular-2-shield-large.png"/>
         <p>Together with our community members, we have been working on getting Angular-Meteor working with Angular 2.</p>
-        <p>We think we created a good solution for working with Angular 2.0 and migrating to it.</p>
+        <p>We think we've created a good solution to work with Angular 2.0 and to migrate to it.</p>
       </div>
       <div class="row">
         <div class="col-sm-6 angular-2-now">
@@ -170,10 +170,10 @@ class PartiesList {
         </div>
         <div class="col-sm-6 angular-2-alpha">
           <div class="angular-2-option">
-            <h2>Angular 2.0.0-alpha</h2>
+            <h2>Angular 2.0.0-beta</h2>
             <p>
-              An angular2-meteor package with all the dependencies (TypeScript, System.js, etc...) so you can start writing Angular 2.0 code right away.
-              written by - <a href="https://github.com/barbatus"><i class="fa fa-github"></i> @barbatus</a>, <a href="https://github.com/netanelgilad"><i class="fa fa-github"></i> @netanelgilad</a> and <a href="https://github.com/ShMcK"><i class="fa fa-github"></i> @ShMcK</a>.
+              An angular2-meteor package with all the dependencies (TypeScript, System.js, etc...), so you can start writing Angular 2.0 code right away.
+              Written by -- <a href="https://github.com/barbatus"><i class="fa fa-github"></i> @barbatus</a>, <a href="https://github.com/netanelgilad"><i class="fa fa-github"></i> @netanelgilad</a> and <a href="https://github.com/ShMcK"><i class="fa fa-github"></i> @ShMcK</a>.
             </p>
           </div>
           <div class="ctas">
@@ -200,7 +200,7 @@ class PartiesList {
 ```
 /// <reference path="../typings/angular2-meteor.d.ts" />
 
-import {Component, View, NgFor} from 'angular2/angular2';
+import {Component, View} from 'angular2/core';
 
 import {Parties} from 'collections/parties';
 
@@ -210,8 +210,7 @@ import {bootstrap} from 'angular2-meteor';
   selector: 'app'
 })
 @View({
-  templateUrl: 'client/app.html',
-  directives: [NgFor]
+  templateUrl: 'client/app.html'
 })
 class Socially {
   parties: Mongo.Cursor<Object>;

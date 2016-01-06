@@ -117,7 +117,7 @@ __`client/parties-form/parties-form.ts`__:
     })
     @View({
       templateUrl: 'client/parties-form/parties-form.html',
-      directives: [FORM_DIRECTIVES, AccountsUI]
+      directives: [AccountsUI]
     })
     @InjectUser()
     export class PartiesForm extends MeteorComponent {
@@ -210,7 +210,7 @@ And then pass it in `@CanActivate` attribute:
     })
     @View({
         templateUrl: 'client/party-details/party-details.html',
-        directives: [RouterLink, FORM_DIRECTIVES]
+        directives: [RouterLink]
     })
     @CanActivate(checkPermissions)
     export class PartyDetails {
