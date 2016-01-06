@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "diagnostics": true,
+    "noResolve": false
+  },
+  "meteorCompilerOptions": {
+    "alwaysThrow": false,
+    "useCache": true
+  }
+}

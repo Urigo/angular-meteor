@@ -1,4 +1,4 @@
-/// <reference path="../typings/angular2-meteor.d.ts" />
+'use strict';
 
 import {Parties} from 'collections/parties';
 

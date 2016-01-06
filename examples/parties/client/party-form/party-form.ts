@@ -1,10 +1,8 @@
-/// <reference path="../../typings/angular2-meteor.d.ts" />
-/// <reference path="../../typings/socially.d.ts" />
-/// <reference path="../../typings/meteor-accounts.d.ts" />
+'use strict';
 
 import {Component, View} from 'angular2/core';
 
-import {FORM_DIRECTIVES, Control, FormBuilder, ControlGroup, Validators} from 'angular2/common';
+import {Control, FormBuilder, ControlGroup, Validators} from 'angular2/common';
 
 import {InjectUser} from 'meteor-accounts';
 
@@ -16,8 +14,7 @@ import {Parties} from 'collections/parties';
   selector: 'party-form'
 })
 @View({
-  templateUrl: 'client/party-form/party-form.html',
-  directives: [FORM_DIRECTIVES],
+  templateUrl: 'client/party-form/party-form.html'
 })
 @InjectUser()
 export class PartyForm extends MeteorComponent {

@@ -87,11 +87,11 @@ export class MongoCursorDiffer {
      * If either last changes or new cursor is true, then
      * return "this" to notify Angular2 to re-build views.
      * If last changes or new cursor are true simultaneously
-     * means Mongo cursor has been changed and, expected,
-     * that last changes of the new cursor are additions only
-     * (in either case it won't likely work).
+     * means that Mongo cursor has been changed and it's expected
+     * that last changes (if any) of that cursor are additions only
+     * (otherwise it won't likely work).
      * So removals of the previous cursor and additions of
-     * the new one will happen at the same time.
+     * the new one will processed at the same time.
      */
     if (this._lastChanges || newCursor) {
       this._lastChanges = null;

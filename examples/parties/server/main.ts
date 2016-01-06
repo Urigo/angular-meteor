@@ -1,3 +1,4 @@
+'use strict';
 
 import {loadTestData} from './test_data';
 export * from './pubs';

@@ -1,10 +1,8 @@
-/// <reference path="../../typings/angular2-meteor.d.ts" />
-/// <reference path="../../typings/socially.d.ts" />
-/// <reference path="../../typings/meteor-accounts.d.ts" />
+'use strict';
 
-import {Component, View, ElementRef} from 'angular2/core';
+import {Component, View, ElementRef, Inject} from 'angular2/core';
 
-import {NgIf, FORM_DIRECTIVES, Control, FormBuilder, ControlGroup, Validators} from 'angular2/common';
+import {Control, FormBuilder, ControlGroup, Validators} from 'angular2/common';
 
 import {AccountsService, InjectUser} from 'meteor-accounts';
 
@@ -15,8 +13,7 @@ import {MeteorComponent} from 'angular2-meteor';
   providers: [AccountsService]
 })
 @View({
-  templateUrl: 'client/login-form/login-form.html',
-  directives: [FORM_DIRECTIVES, NgIf],
+  templateUrl: 'client/login-form/login-form.html'
 })
 @InjectUser()
 export class LoginForm extends MeteorComponent {
@@ -37,7 +34,6 @@ export class LoginForm extends MeteorComponent {
   login(event) {
     event.preventDefault();
 
-    console.log(this.loginForm.valid);
     if (this.loginForm.valid) {
       var login = this.loginForm.value;
       this._accounts.login(login.user, login.pwd)

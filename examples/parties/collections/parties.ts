@@ -1,5 +1,4 @@
-/// <reference path="../typings/angular2-meteor.d.ts" />
-/// <reference path="../typings/socially.d.ts" />
+'use strict';
 
 export var Parties = new Mongo.Collection<Party>('parties');
 

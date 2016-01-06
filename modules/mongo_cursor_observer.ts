@@ -63,9 +63,9 @@ export class MongoCursorObserver {
    /**
     * Subcribes to the Mongo cursor changes.
     *
-    * Since it's possible situation where some changes were collected
-    * before someone subscribes to the observer, we emit collected changes,
-    * but only to the first ever subscriber.
+    * Since it's possible that some changes that been already collected
+    * before the moment someone subscribes to the observer,
+    * we emit these changes, but only to the first ever subscriber.
     */
   subscribe({next, error, complete}) {
     let subscription = new Subscription(next, error, complete);

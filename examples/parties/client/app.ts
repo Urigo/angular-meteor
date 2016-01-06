@@ -1,4 +1,4 @@
-/// <reference path="../typings/angular2-meteor.d.ts" />
+'use strict';
 
 import {Component, View, provide, enableProdMode} from 'angular2/core';
 
