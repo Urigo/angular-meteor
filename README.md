@@ -152,10 +152,19 @@ So, if you have code like this:
 ````
 It will likely curse that `Mongo` is undefined. Luckily, the package adds Angular2 and Meteor declaration files, which means you'll need only to reference them in your TypeScript files to fix errors.
 
-After the first run of your app, Angular2-Meteor will create declaration (or typings) files (one of them is `typings/angular2-meteor.d.ts`) in the "typings" folder. Add references to `typings/angular2-meteor.d.ts` in every TypeScript file that uses Meteor or Angular2 API as follows:
+After the first run of your app, Angular2-Meteor will create declaration (or typings) files (one of them is `typings/angular2-meteor.d.ts`) in the "typings" folder.
+There are two ways to include it into the app:
+
+- you can directly add a reference to `typings/angular2-meteor.d.ts` in every TypeScript file that uses Meteor or Angular2 API as follows:
+
 ````ts
 /// <reference path="../typings/angular2-meteor.d.ts" />
 ````
+- or you can add a custon TypeScript config at the root with "files"
+  property set to contain "typings/angular2-meteor.d.ts" path.
+  As soon as you've done this, TypeScript compiler will compiler
+  every .ts-file along with `angular2-meteor.d.ts`.
+
 Make sure that paths are relative to the app top folder.
 
 The package installs typings itself but doesn't overrides existing ones in the "typings" folder. So, if you've 
@@ -165,14 +174,15 @@ updated package and started getting errors in the console, remove "angular2" fol
 
 A preliminary version of the package roadmap might look like this:
 
-- 0.4v Remove direct referencing of the declaration files and further TypeScript improvements
-- 0.4.5v Update Babel support (including a Babel demo)
-- 0.5v Blaze templates->Angular 2 components transition path
-- 0.6v With upcoming Meteor 1.3, make direct use of the Angular 2 NPM deprecating Angular 2 package
-- 0.7v Meteor-aware routing (e.g. Fast-Render support)
-- 0.8v GraphQL support
-- 0.9v Implement various auxiliary but potentially useful in Meteor features, for example, [template transforms for Minimongo queries] (https://github.com/Urigo/angular2-meteor/issues/21), custom template exceptions handling (similar to the Blaze's one), support of the reactive variables in the templates etc
-- 1.0v Increase test coverage, fixes of the important issues on the way to the first release
+- 0.4v Remove direct referencing of the declaration files and further TypeScript improvements;
+- 0.4.5v Update Babel support (including a Babel demo);
+- 0.5v Blaze templates->Angular 2 components transition path;
+- 0.6v With upcoming Meteor 1.3, make direct use of the Angular 2 NPM, deprecate Angular 2 package
+  and replace SystemJS with CommmonJS;
+- 0.7v Meteor-aware routing (e.g. FastRender support);
+- 0.8v GraphQL support;
+- 0.9v Implement various auxiliary but potentially useful in Meteor features, for example, [template transforms for Minimongo queries] (https://github.com/Urigo/angular2-meteor/issues/21), custom template exceptions handling (similar to the Blaze's one), support of the reactive variables in the templates etc;
+- 1.0v Increase test coverage, fixes of the important issues on the way to the first release.
 
 It's subject to change, since we are still figuring out best patterns and features of the integration that might become popular in the future.
 
