@@ -6,9 +6,10 @@ var angularMeteor = angular.module('angular-meteor', [
   'angular-meteor.user',
   'angular-meteor.methods',
   'angular-meteor.session',
-  'angular-meteor.reactive-scope',
   'angular-meteor.utils',
   'angular-meteor.camera',
+  'angular-meteor.reactive-utils',
+  'angular-meteor.reactive-scope',
   'angular-meteor.reactive-context'
 ]);
 

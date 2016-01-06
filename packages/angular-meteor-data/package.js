@@ -40,9 +40,10 @@ Package.onUse(function (api) {
     'modules/angular-meteor-user.js',
     'modules/angular-meteor-methods.js',
     'modules/angular-meteor-session.js',
-    'modules/angular-meteor-reactive-scope.js',
     'modules/angular-meteor-utils.js',
     'modules/angular-meteor-camera.js',
+    'modules/angular-meteor-reactive-utils.js',
+    'modules/angular-meteor-reactive-scope.js',
     'modules/angular-meteor-reactive-context.js',
     // Finally load angular-meteor File
     'angular-meteor.js'
