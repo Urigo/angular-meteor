@@ -23,6 +23,6 @@ Congratulations, you've made a working app that you can now use with your friend
 
 You can download source code of the app up to this point [here](https://github.com/Urigo/meteor-angular2.0-socially/archive/step_09.zip).
 
-Now, we'll take a detour to see that while we were building a web app, we also created a pretty nice mobile app along the way.
+On the next step, we'll take a detour to see that while we were building a web app, we also created a pretty nice mobile app along the way.
 
 {{/template}}

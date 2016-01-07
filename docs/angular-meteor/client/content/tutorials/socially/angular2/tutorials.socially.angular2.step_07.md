@@ -10,7 +10,7 @@ As you have probably noticed, our tutorial app has a strict modular structure at
 there are no pure JavaScript files that are being bundled together and auto-executed, so Meteor's file loading conventions doesn't have an effect.
 Even more, every .ts-file is being compiled into a separate System.j module, which we can then import whenever we need to.
 
-There is another thing worth mentioning once more. As you know, Meteor has two special folders: **client** and **server**.
+There is another thing worth mentioning once more. As you know, Meteor has two special folders: _client_ and _server_.
 We can benefit from them (and have already done so in this app) by allowing access to the client side modules from the client side only and, accordingly, to server side modules from the server side.
 Everything outside of those folders will be available to the both client and server.
 It’s no wonder why this is a recommended approach in Meteor, and this is why we’ve been doing it so far.
@@ -32,50 +32,55 @@ This was, for sure, one of the problems the TypeScript team were striving to sol
 And they found it, having introduced the type declaration files. These are files of a special kind where you describe interfaces your classes expose along with signatures of the methods and types of the parameters they take, so that TypeScript will be able to refer to these files to verify the correctness of your class's API.
 Of course, the flexibility is still there which means if you don’t want to declare types you can skip them right away.
 
-Usage of the declaration files was mentioned multiple times in this tutorial with the `/// <reference path=".." />` syntax. By this way, we tell TypeScript what declaration files to check when it is compiling a particular .ts-file.
-
-As you may have noticed, Angular2-Meteor package itself installs a number of these files into the **typings** folder.
+As you may have noticed, Angular2-Meteor package itself installs a number of these files into the _typings_ folder.
 Some of them have names `angular2.d.ts` and `meteor.d.ts`, which, as you can guess, are used to verify that API of Meteor and Angular 2 are being used correctly in your code.
+But as you remember, we've mentioned so far only one declaration file `angular2-meteor.d.ts` and used it in the TypeScript config (on the first step), that's thanks to a special TypeScript syntax construction that can link
+together one declaration files with other declaration files as well as TypeScript files. If you look inside of `angular2-meteor.d.ts` you'll see 
+Angular 2 and Meteor declaration files are linked there by:
+
+    /// <reference path="angular2.d.ts" />
+    /// <reference path="meteor/meteor.d.ts" />
 
 But let’s create our own declaration file in order to learn this type-checking better.
 Keep in mind, type-checking is not delivered in the outputted JavaScript. It is only extra sugar for your development environment, and adds no weight to the outputted .js file.
 
-## Type Declaration Files
+## Custom Type Declaration File
 
 There is one definite place in our app where we could make use of it to avoid potential bugs.
 We are going to declare a `Party` type with already familiar to you properties: "name", "description" and "location". "Description" property will be optional.
 
-Let's create `party.d.ts` file and place it inside “typings” folder with the following content:
+Let's create `party.d.ts` file and place it inside _typings_ folder with the following content:
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="7.1"}}
+
+Then, we add this file to the app's _tsconfig.json_ to be compiled along with other TypeScript file:
+
+{{> DiffBox tutorialName="meteor-angular2-socially" step="7.2"}}
 
 One of the places where the declared type can be used is in the definition of the parties collection in `collections/parties.ts`.
 Let’s change the code to:
 
-{{> DiffBox tutorialName="meteor-angular2-socially" step="7.2"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="7.3"}}
 
 As you can see, we used a generic type `Mongo.Collection<>` with the class parameter set to `Party` instead of just basic
-`Mongo.Collection` class. We also referenced our new declaration file using `/// <reference.../>` syntax.
+`Mongo.Collection` class.
 
-Now let’s fiddle with it. Go to the `client/parties-form/parties-form.ts` file and change “location” property to, say,
+Now let’s fiddle with it. Go to the _client/parties-form/parties-form.ts_ file and change “location” property to, say,
 “newLocation”. Run the app. You should see in the console a warning saying in a nutshell: there is no “newLocation” property defined on the `Party` type.
 
-If you program in, say, Visual Studio or in Sublime with the official TypeScript plugin,
-you will see all that errors highlighted red instantaneously, which makes this TypeScript's type-checking feature invaluable.
-
-Let’s torture it more. Please, go to the `client/parties-list/parties-list.ts`.
-There you’ll see the `parties` property assigned to the `Mongo.Cursor<Object>` type. As you can see, TypeScript considers this construct acceptable even there is no `Party` type mentioned. That’s because Object type is the base class to all types available in JavaScript, so TypeScript doesn’t swear confronting to the OOP principles.
+Let’s torture it more. Please, go to the _client/parties-list/parties-list.ts_.
+There you’ll see the "parties" property assigned to the `Mongo.Cursor<Object>` type. As you can see, TypeScript considers this construct acceptable even there is no `Party` type mentioned. That’s because Object type is the base class to all types available in JavaScript, so TypeScript doesn’t swear confronting to the OOP principles.
 
 But let’s change it to `Mongo.Cursor<string>`. Run the app and you will see it’s swearing again.
 TypeScript doesn’t know how to convert `Mongo.Cursor<string>` to `Mongo.Cursor<Party>`, so it considers the assigment to be wrong.
 
 Isn’t it cool?! We’ve made our app to be bug persistent with only few changes!
 
-Finally, let’s change `Object` to `Party` in the `parties-list.ts` and `party-details.ts` files to make our code look right:
-
-{{> DiffBox tutorialName="meteor-angular2-socially" step="7.3"}}
+Finally, let’s change `Object` to `Party` in the `PartiesList` and `PartyDetails` components to make our code look right:
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="7.4"}}
+
+{{> DiffBox tutorialName="meteor-angular2-socially" step="7.5"}}
 
 ## TSD
 
@@ -96,26 +101,46 @@ To install Meteor declaration file, just type:
 
     tsd install meteor
 
-All necessary files will be added into the "typings" directory.
+All necessary files will be added into the _typings_ directory.
 
 Angular 2's declaration files are delivered via the offial NPM, so 
 you won't be able to find it in the Definitely Typed repo.
 
 Don't worry though, Angular2-Meteor will update all necessary typings, you only need periodically
-to remove .d.ts-files in the "typings" folder, thus, letting the package know that
+to remove .d.ts-files in the _typings_ folder, thus, letting the package know that
 the files need to be updated.
 
-## TypeScript Configuration
+## TypeScript Configuration and IDEs
 
-TypeScript is generally configured by the special JSON file called ["tsconfig.json"](https://github.com/Microsoft/typescript/wiki/tsconfig.json).
+As you already know from the bootstrapping step,
+TypeScript is generally configured by the special JSON file called [_tsconfig.json_](https://github.com/Microsoft/typescript/wiki/tsconfig.json).
 
-Angular2-Meteor packages use a ts-compiler [package](https://github.com/barbatus/ts-compilers) that supports "tsconfig.json" file as well.
-Just create a file with this name in the root folder of your app, and start adding options you'd like.
-You can read about all possible options [here](https://github.com/Microsoft/TypeScript/wiki/Compiler-Options).
+TypeScript language today has development plugins in many popular IDEs, including Visual Studio, WebStorm, Sublime etc.
+These plugins work in same style as it's become de facto today — compile, using TypeScript shell command, .ts-files behind the scene as you change them.
+With that, if you've configured your project right and has declaration files in place you'll get bunch of invaluable features such as instantaneous highlighting of
+the compilation errors and code completion.
 
-Please note, since Meteor environment is quite specific, some of the options don't have sense in Meteor.
-You can read about exceptions [here](https://github.com/barbatus/typescript#compiler-options).
-Additonal options available in the package are described [here](https://github.com/barbatus/ts-compilers#typescript-config).
+If you use one of the mentioned IDEs, you've likely noticed that bunch of the code lines
+are now marked in red, which means TypeScript plugins don't work right; at the time we don't see any errors in the teminal.
+That's because most of the plugins recognize _tsconfig.json_ as well if it's placed in the root folder,
+but so far our _tsconfig.json_ contains only "files" property, which is certantly not enough for
+a general compilation. At the same time, Angular2-Meteor's TypeScript compiler, defaults most of the
+compilation options internally to fit our needs. To fix plugins, let's set up _tsconfig.json_
+with the options that will make plugins understand our needs and the structure of our app.
+
+We are going to point out that we are using System.js and decorators, also
+we'll need to include entry point files of the client and server sides to let plugins know what to compile:
+
+{{> DiffBox tutorialName="meteor-angular2-socially" step="7.6"}}
+
+Now, let's go to any of the .ts-files and check out that all that annoying redness has been gone.
+
+> Note: you may need to reload you IDE to pick up the lastest changes to the config.
+
+Please note, since Meteor environment is quite specific, some of the options are not making sense in Meteor.
+You can read about the exceptions [here](https://github.com/barbatus/typescript#compiler-options).
+TypeScipt compiler of this package supports some additional options that might be useful in the Meteor environment.
+They can be included in the "meteorCompilerOptions" section of _tsconfig.json_ and described [here](https://github.com/barbatus/ts-compilers#typescript-config).
 
 # Summary
 

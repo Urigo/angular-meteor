@@ -233,7 +233,28 @@ to make use of TypeScript declaration files, which is a TypeScript way to inform
 
 After the first run, you will find the `angular2-meteor.d.ts` file in the new folder called "typings".
 This file has been created by the package at start time and contains a special reference to Angular2 and Meteor declaration files.
-Link `app.ts` and `angular2-meteor.d.ts` by adding the next line at the top of `app.ts`:
+There are two ways to link `app.ts` and `angular2-meteor.d.ts` together:
+
+ - one way is to directly reference `angular2-meteor.d.ts` using special sugar syntax at the top of `app.ts` as follows:
+
+        /// <reference path="../typings/angular2-meteor.d.ts" />
+
+        import {Component, View} from 'angular2/core';
+
+        import {bootstrap} from 'angular2/bootstrap';
+
+ - another way is to create a custom TypeScript configuration file
+   with the "files" property set to include all required typings files.
+
+This configuration file should be called `tsconfig.json` and placed at 
+the app root folder. More about the file structure you can read [here](https://github.com/Microsoft/TypeScript/wiki/tsconfig.json).
+We'll also take a close look at the configuration itself on the "Folder Structure"
+step, including how to configure TypeScript properly in different IDEs.
+
+Let's make use of the typings in the second way. Angular 2 and Meteor API will be
+used in pretty much every file of our app, so adding each time declaration files manually might become weary.
+
+Now create `tsconfig.json` and add path to `angular2-meteor.d.ts` as follows:
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="0.8"}}
 
