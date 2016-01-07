@@ -19,7 +19,7 @@ These method are defined as Object, where each key is the name of the variable t
 
 Under the hood, each helper starts a new [Tracker.autorun](http://docs.meteor.com/#/full/tracker_autorun). When its reactive dependencies change, the helper is rerun.
 
-To trigger a rerun every time an specific Angular variable change, use getReactively](/api/1.3.1/get-reactively) to make your Angular variable reactive inside the helper its used in.
+To trigger a rerun every time an specific Angular variable change, use [getReactively](/api/1.3.1/get-reactively) to make your Angular variable reactive inside the helper its used in.
 
 Each helper function should return a [MongoDB Cursor](http://docs.meteor.com/#/full/mongo_cursor) and the helpers will expose it as a normal array to the context.
 

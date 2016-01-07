@@ -495,7 +495,7 @@ describe('angular-meteor', function () {
         });
 
 
-        it('should create a subscription without callback - NO scope', function () {
+        it('should create a subscription with no callback or arguments provided', function () {
           var subscribeSpy = spyOn(Meteor, 'subscribe').and.returnValue({
             stop: angular.noop,
             ready: angular.noop,
@@ -507,7 +507,7 @@ describe('angular-meteor', function () {
           expect(subscribeSpy).toHaveBeenCalledWith('test', angular.noop);
         });
 
-        it('should create a subscription with no callback and args- NO scope', function () {
+        it('should create a subscription with no callback provided', function () {
           var subscribeSpy = spyOn(Meteor, 'subscribe').and.returnValue({
             stop: angular.noop,
             ready: angular.noop,
@@ -521,7 +521,7 @@ describe('angular-meteor', function () {
           expect(subscribeSpy).toHaveBeenCalledWith('test', 10, 20, angular.noop);
         });
 
-        it('should create a subscription with callback and args - NO scope', function () {
+        it('should create a subscription with a callback function provided', function () {
           var subscribeSpy = spyOn(Meteor, 'subscribe').and.returnValue({
             stop: angular.noop,
             ready: angular.noop,
@@ -534,10 +534,10 @@ describe('angular-meteor', function () {
             return [10, 20];
           }, cb);
 
-          expect(subscribeSpy).toHaveBeenCalledWith('test', 10, 20, cb);
+          expect(subscribeSpy).toHaveBeenCalledWith('test', 10, 20, jasmine.any(Function));
         });
 
-        it('should create a subscription with callback and args - NO scope', function () {
+        it('should create a subscription with callbacks object provided', function () {
           var subscribeSpy = spyOn(Meteor, 'subscribe').and.returnValue({
             stop: angular.noop,
             ready: angular.noop,
@@ -553,13 +553,45 @@ describe('angular-meteor', function () {
             return [10, 20];
           }, cb);
 
-          expect(subscribeSpy).toHaveBeenCalledWith('test', 10, 20, cb);
+          expect(subscribeSpy).toHaveBeenCalledWith('test', 10, 20, jasmine.any(Object));
         });
 
-        it('should call the subscription method with current context', function (done) {
+        it('should call subscription arguments function using context as thisArg', function (done) {
           reactiveContext.subscribe('test', function () {
-            expect(this).toBe(context);
+            expect(this).toEqual(context);
             done();
+          });
+        });
+
+        it('should call subscription callback function using context as thisArg', function(done) {
+          $scope.subscribe = function(name, fn, cb) {
+            cb();
+          };
+
+          reactiveContext.subscribe('test', angular.noop, function() {
+            expect(this).toEqual(context);
+            done();
+          });
+        });
+
+        it('should call subscription callbacks object using context as thisArg', function(done) {
+          var next = _.after(2, done);
+
+          $scope.subscribe = function(name, fn, cb) {
+            cb.onStop();
+            cb.onReady();
+          };
+
+          reactiveContext.subscribe('test', angular.noop,{
+            onStop: function() {
+              expect(this).toEqual(context);
+              next();
+            },
+
+            onReady: function() {
+              expect(this).toEqual(context);
+              next();
+            }
           });
         });
       });

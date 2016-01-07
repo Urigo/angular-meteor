@@ -57,6 +57,18 @@ Let's add that permission to the publish parties method:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="14.6"}}
 
+### Serve Email
+
+NOTE: If you want to test email functionality locally with your own gmail account, create a new file called `environments.js` in the `server/startup/` directory. Add the following lines substituting [YOUR_EMAIL] and [YOUR_PASSWORD].  
+
+    Meteor.startup(function () {
+        process.env.MAIL_URL="smtp://[YOUR_EMAIL]@gmail.com:[YOUR_PASSWORD]@smtp.gmail.com:465/";
+    })
+
+You may need to set your gmail account to use [Less Secure Apps](https://www.google.com/settings/u/2/security/lesssecureapps).
+
+In production you could use a service like Mandrill with this [Meteor Mandrill Package](https://atmospherejs.com/wylio/mandrill).
+
 Great!
 
 Now test the app.  Create a private party with user1.  Then invite user2. Log in as user2 and check if he can see the party in his own parties list.

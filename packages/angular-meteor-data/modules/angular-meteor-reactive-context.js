@@ -1,13 +1,18 @@
-angular.module('angular-meteor.reactive-context', ['angular-meteor.reactive-scope'])
+angular.module('angular-meteor.reactive-context', [
+  'angular-meteor.reactive-utils',
+  'angular-meteor.reactive-scope'
+])
 
-.factory('$$ReactiveContext', function($rootScope) {
+.factory('$$ReactiveContext', function($rootScope, $$ReactiveUtils) {
+  let utils = $$ReactiveUtils;
+
   class $$ReactiveContext {
     constructor(context, $scope) {
       $scope = $scope || $rootScope.$new(true);
 
       if (!_.isObject(context))
         throw Error('argument 1 must be an object');
-      if (!this._isScope($scope))
+      if (!utils.isScope($scope))
         throw Error('argument 2 must be a scope');
 
       this._stoppables = [];
@@ -33,7 +38,7 @@ angular.module('angular-meteor.reactive-context', ['angular-meteor.reactive-scop
     }
 
     autorun(fn, options) {
-      if (_.isFunction(fn)) fn = fn.bind(this._context);
+      fn = this._bind(fn);
 
       let compution = this._scope.autorun(fn, options);
       this._stoppables.push(compution);
@@ -41,7 +46,8 @@ angular.module('angular-meteor.reactive-context', ['angular-meteor.reactive-scop
     }
 
     subscribe(name, fn, cb) {
-      if (_.isFunction(fn)) fn = fn.bind(this._context);
+      fn = this._bind(fn);
+      cb = this._bind(cb);
 
       let subscription = this._scope.subscribe(name, fn, cb);
       this._stoppables.push(subscription);
@@ -61,7 +67,7 @@ angular.module('angular-meteor.reactive-context', ['angular-meteor.reactive-scop
         let model = fn.apply(this._context);
 
         Tracker.nonreactive(() => {
-          if (this._isCursor(model)) {
+          if (utils.isCursor(model)) {
             let observation = this._handleCursor(k, model);
 
             compution.onInvalidate(() => {
@@ -151,7 +157,7 @@ angular.module('angular-meteor.reactive-context', ['angular-meteor.reactive-scop
       if (angular.isUndefined(v)) {
         return this._setValHelper(k, data);
       }
-      else if (this._areSiblings(v, data)) {
+      else if (utils.areSiblings(v, data)) {
         let diff = jsondiffpatch.diff(v, data);
         jsondiffpatch.patch(v, diff);
         this._changed(k);
@@ -166,32 +172,12 @@ angular.module('angular-meteor.reactive-context', ['angular-meteor.reactive-scop
     }
 
     _changed(k) {
-      this._digest();
+      this._scope._throttledDigest();
       this._dependencies[k].changed();
     }
 
-    _digest() {
-      let isDigestable =
-        this._scope &&
-        !this._scope.$$destroyed &&
-        !$rootScope.$$phase
-
-      if (isDigestable) this._scope.$digest();
-    }
-
-    _areSiblings(obj1, obj2) {
-      return 
-        _.isObject(obj1) && _.isObject(obj2) &&
-        Object.getPrototypeOf(obj1) === Object.getPrototypeOf(obj2);
-    }
-
-    _isScope(obj) {
-      let Scope = Object.getPrototypeOf($rootScope).constructor;
-      return obj instanceof Scope;
-    }
-
-    _isCursor(obj) {
-      return obj instanceof Mongo.Collection.Cursor;
+    _bind(fn) {
+      return utils.bind(fn, this._context);
     }
   }
 
