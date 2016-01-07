@@ -54,10 +54,6 @@ Because this file is located outside of any special folder name, like "client" o
 Though we only declared our model once, we have two modules that declare two versions of our parties collection:
 one for client-side and one for server-side. This is often referred to as "isomorphic javascript". All synchronization between these two versions of collections is handled by Meteor.
 
-The last thing is, again, to add the declaration file reference to this file:
-
-  {{> DiffBox tutorialName="meteor-angular2-socially" step="3.2"}}
-
 # Simple Binding to Angular
 
 Now that we've created the collection, our client needs to subscribe to it's changes and bind it to our `this.parties` array.
@@ -68,17 +64,17 @@ Thus, we have at least one way to load our data model. Lets query all parties us
 
 But first, lets import our `Parties` collection:
 
-{{> DiffBox tutorialName="meteor-angular2-socially" step="3.3"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="3.2"}}
 
 Then, change `client/app.ts` to:
 
-{{> DiffBox tutorialName="meteor-angular2-socially" step="3.4"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="3.3"}}
 
 But what happens if the parties data changes on the server-side? How can we tell parties to update itself?
 
-For now, we can use Meteor [Tracker](https://www.meteor.com/tracker), a reactive wrapper that will run data when a change occurs.
+For now, we can use Meteor [Tracker](https://www.meteor.com/tracker), a reactive wrapper that will run data when a change occurs:
 
-{{> DiffBox tutorialName="meteor-angular2-socially" step="3.5"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="3.4"}}
 
 As you could have notice above, we made use not only `Tracker.autorun` but also we've added a new argument of `NgZone` type to the contructor and fetching parties inside
 of `zone.run` method. `NgZone` is part of Angular 2's change detection system,
@@ -97,8 +93,6 @@ The fat arrow syntax `=>` is also a new syntax that comes in ES2015, and tells t
 Our `app.ts` file should now look like this:
 
 __`client/app.ts`:__
-
-    /// <reference path="../typings/angular2-meteor.d.ts" />
 
     import {NgZone, Component, View} from 'angular2/core';
 
@@ -141,7 +135,7 @@ if you call your main server file `main.ts`, a System.js module created out of t
 
 Let's create a new folder called "server" and add a file `main.ts` inside of it. As mentioned earlier, "server" is another special folder name in Meteor, it's contents will only run on the server.
 
-  {{> DiffBox tutorialName="meteor-angular2-socially" step="3.6"}}
+  {{> DiffBox tutorialName="meteor-angular2-socially" step="3.5"}}
 
 # Inserting Parties from the Console
 
@@ -215,7 +209,7 @@ Let's change `bootstrap` from `angular2/bootstrap` to `bootstrap` from `angular2
 
 Now, change `app.ts` to:
 
-  {{> DiffBox tutorialName="meteor-angular2-socially" step="3.7"}}
+  {{> DiffBox tutorialName="meteor-angular2-socially" step="3.6"}}
 
 Run your app again and manipulate the documents in the Mongo console.
 You will see that it works as before — it loads the same data as before and all changes to the `this.parties` that
@@ -232,11 +226,11 @@ let's initialize our server with the same parties as we had before.
 Let's add a file called `load_parties.ts` inside of "server" folder
 and implement `loadParties` method inside to load parties:
 
-{{> DiffBox tutorialName="meteor-angular2-socially" step="3.8"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="3.7"}}
 
 Then change `main.ts` to run this method on Meteor startup:
 
-{{> DiffBox tutorialName="meteor-angular2-socially" step="3.9"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="3.8"}}
 
 Now run the app and you should see the list of parties on the screen.
 If not, please, run 

@@ -51,7 +51,7 @@ It's so easy, for example, to misspell the name of a property in dynamic languag
 Thanks to TypeScript, we can use this compilation diagnostics to create less bug-prone JavaScript applications.
 
 This comes as a great benefit of choosing TypeScript as a primary language
-for our app. So lets define our `parties` property:
+for our app. So lets define our `parties` property as a generic type array:
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="2.3"}}
 

@@ -63,7 +63,7 @@ in any other component.
 You are likely familiar with Angular 2 pipes if
 you read the previous step. If not — you are welcome to know more about them [here](https://angular.io/docs/ts/latest/guide/pipes.html).
 
-Let's add a new folder "client/lib" and place there a new file `lib/pipes.ts`
+Let's add a new folder "client/lib" and place there a new file `pipes.ts`
 with the content as follows:
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="13.5"}}

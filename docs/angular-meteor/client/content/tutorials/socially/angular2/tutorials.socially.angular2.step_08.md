@@ -51,9 +51,13 @@ Let's add the `<accounts-ui>` tag to the right of the party form in the PartiesL
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="8.1"}}
 
-Then import all dependencies:
+Then, import dependencies:
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="8.2"}}
+
+And typings:
+
+{{> DiffBox tutorialName="meteor-angular2-socially" step="8.3"}}
 
 Now run the code, you'll see a login link to the right of the "Add" button. Click on the link and create an account,
 then try to log in and log out.
@@ -66,7 +70,7 @@ Now that we have our account system, we can start defining our security rules fo
 
 Let's go to the "collection" folder and change the file to look like this:
 
-{{> DiffBox tutorialName="meteor-angular2-socially" step="8.3"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="8.4"}}
 
 What we did is we've just added security to our app using only 10 lines of code.
 
@@ -88,16 +92,20 @@ For now, we are going to keep it simple in this app and allow every logged-in us
 Change the click handler of the "Add" button in the `parties-form.ts`, `addParty`, to save user ID as well. Also,
 it'd be useful to add an alert prompting user to log in if she wants to add or update a party:
 
-{{> DiffBox tutorialName="meteor-angular2-socially" step="8.4"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="8.5"}}
 
 > Notice that you'll need to update Party type in the `party.d.ts` definition file with the new property: `owner?: string`.
 
-Now, do the user check in the `party-details.ts`:
+Let's do the user check in the `party-details.ts`:
 
-{{> DiffBox tutorialName="meteor-angular2-socially" step="8.5"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="8.6"}}
 
-Calling each time `Meteor.user()` or `Meteor.userId()` might seems bulky.
-Not to say that there is no way to use these functions in the component templates currently.
+Lastly, update tsconfig.json to include the declaration file:
+
+{{> DiffBox tutorialName="meteor-angular2-socially" step="8.7"}}
+
+Typing each time `Meteor.user()` or `Meteor.userId()` might seems tedious.
+Not to mention that there is no way to use these functions in the component templates currently.
 
 How can you simply life here? You can try out "barbatus:ng2-meteor-accounts" package, which
 wraps around all Meteor Accounts API (login with password and social logins features)

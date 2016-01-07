@@ -52,7 +52,7 @@ Don't forget to add _barbatus:ng2-meteor-accounts_ package to make it work.
 Now run the app. Party addition form and "remove" buttons
 should disapper if you are not logged-in. Try to log in: everything should be back now.
 
-> Note that CSS's "display" property has priority over the `hidden`.
+> Note: CSS's "display" property has priority over the `hidden`.
 > So that if one of the CSS classes of any element has this property set,
 > _hidden_ won't work. In this case, you'll have to wrap the element into
 > some container element and assign CSS classes with the "display" on that parent container.

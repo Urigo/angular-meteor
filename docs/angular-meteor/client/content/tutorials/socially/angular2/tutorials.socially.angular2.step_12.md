@@ -103,9 +103,13 @@ set up them to be available in the component's view as follows:
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="12.5"}}
 
-Second, change `parties-list.html` template to:
+Don't forget to include typings added by the pagination package:
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="12.6"}}
+
+Second, change `parties-list.html` template to:
+
+{{> DiffBox tutorialName="meteor-angular2-socially" step="12.7"}}
 
 As you can see, we've just added the pagination controls tag and applied pagination to the parties cursor
 with the help of the pagination pipe. In the pipe definition, we provided the current page number,
@@ -121,13 +125,13 @@ The final part is to handle user clicks on the page links. The pagination contro
 fires a special event when the user clicks on a page link, and current page changes.
 Let's handle this event in the tempalte first and then in the `PartiesList` component itself:
 
-{{> DiffBox tutorialName="meteor-angular2-socially" step="12.7"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="12.8"}}
 
 As you can see, the pagination controls component fires page changed event with
 special event object that contains new page number to set,
 so we pass it in our event handler to process. 
 
-{{> DiffBox tutorialName="meteor-angular2-socially" step="12.8"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="12.9"}}
 
 At this moment, when we have almost everything in place, let's check whether everything works at all.
 We are going to add a lot of parties to have, at least, a couple of pages.
@@ -177,7 +181,7 @@ to use.
 
 Let's publish total number of parties as follows:
 
-{{> DiffBox tutorialName="meteor-angular2-socially" step="12.9"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="12.10"}}
 
 > Notice that we are passing `{ noReady: true }` in the last argument so
 > that the publication will be ready only after our main cursor is ready — readiness.
@@ -186,11 +190,11 @@ We've just created new _numberOfParties_ publication.
 Let's get it reactively on the client side using `Counts` object, and, at the same time,
 introduce a new "partiesSize" property in the `PartiesList` component:
 
-{{> DiffBox tutorialName="meteor-angular2-socially" step="12.10"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="12.11"}}
 
 Then, we use this new property in the template to set up pagination properly:
 
-{{> DiffBox tutorialName="meteor-angular2-socially" step="12.11"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="12.12"}}
 
 Now, let's verify that the Socially works same as before.
 Run the app. There should be same three pages of parties. That's a must check.
@@ -205,13 +209,13 @@ At this moment, we know everything we need to implement it.
 New dropdown with two orders to change, ascending and descending, will be our UI control for
 the sorting feature. Let's add it in the front of our parties list:
 
-{{> DiffBox tutorialName="meteor-angular2-socially" step="12.12"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="12.13"}}
 
 In the `PartiesList` component, we change `nameOrder` property to
 be a reactive variable and add `changeSortOrder` event handler, where we set
 new sort order:
 
-{{> DiffBox tutorialName="meteor-angular2-socially" step="12.13"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="12.14"}}
 
 That's just it! Run the app and change the sort order back and forth.
 What's important here is that pagination updates properly, i.e. according to a new sort order.
@@ -230,12 +234,12 @@ Having that fixed, it should work properly in accordance with the added paginati
 So, let's add filtering parties by the location with help of Mongo's regex API.
 It is going to look like this:
 
-{{> DiffBox tutorialName="meteor-angular2-socially" step="12.14"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="12.15"}}
 
 On the client side, we are going to add a new reactive variable and set it every time
 to a new value when user clicks on the search button:
 
-{{> DiffBox tutorialName="meteor-angular2-socially" step="12.15"}}
+{{> DiffBox tutorialName="meteor-angular2-socially" step="12.16"}}
 
 > Notice that we don't know what size of the search to expect
 > that's why we are re-setting current page to 1.
