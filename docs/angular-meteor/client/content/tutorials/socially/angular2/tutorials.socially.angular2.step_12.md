@@ -8,9 +8,9 @@ Pagination simply means delivering and showing parties to the client on the page
 where each page has a predefined size.
 
 Besides client side logic, it usually includes querying a specific page of parties on
-the server side to deliver up to the client as well. By reducing number of documents to be trasferred at one time,
+the server side to deliver up to the client as well. By reducing number of documents to be transferred at one time,
 we not only increase usability of the user interface if there are too many documents in the storage,
-but also decrease page load time, which plays crucial role today.
+but also decrease page load time, which plays a crucial role today.
 
 # Pagination
 First off, we'll add pagination on the server side. Thanks to the simplicity of the
@@ -32,14 +32,14 @@ add `options` parameter to the subscription method, and then pass it to the
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="12.1"}}
 
-On the client side, we are going to define tree additional variables in the `PartiesList` component our pagination will depend on:
+On the client side, we are going to define three additional variables in the `PartiesList` component our pagination will depend on:
 page size, current page number and name sort order.
-Second, we'll create, based on values of that variables, a special _options_ object and pass it to the parties subscription:
+Secondly, we'll create, based on values of that variables, a special _options_ object and pass it to the parties subscription:
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="12.2"}}
 
 `nameOrder` is going to contain two values, 1 and -1, to express ascending and descending orders
-correspondingly. Then, as you can see, we assign it to a party property (currently, `name`) we want to sort.
+respectively. Then, as you can see, we assign it to a party property (currently, `name`) we want to sort.
 
 As was said before, we also need to query `Parties` on the client side with same parameters and options as we use on the server, i.e., parameters and options we pass to the server side.
 In reality, though, we don't need _skip_ and _limit_ options in this case, since, due to the result of the subscription,
@@ -75,7 +75,7 @@ Run the following line to add this package:
     meteor add barbatus:ng2-pagination
 
 > This package's pagination mark-up follows the structure of
-> the Bootstrap's [one](http://www.w3schools.com/bootstrap/bootstrap_pagination.asp),
+> the Bootstrap's [one](http://getbootstrap.com/components/#pagination),
 > so you can change its look simply by using proper CSS styles.
 > It's worth to note, though, that this package has been created
 > with the idea to be used in this tutorial only.
