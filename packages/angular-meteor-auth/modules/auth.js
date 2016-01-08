@@ -1,88 +1,79 @@
-angular
-  .module('angular-meteor.auth')
-  .service('$auth',['$q', '$rootScope', '$timeout', function ($q, $rootScope, $timeout) {
-    class AngularMeteorAuthentication {
-      constructor() {
-        this.accountsPackage = Package['accounts-base'];
+angular.module('angular-meteor.auth')
 
-        if (!this.accountsPackage) {
-          throw new Error('Oops, looks like Accounts-base package is missing! Please add it by running: meteor add accounts-base ');
-        }
-      }
 
-      _autorun(fn) {
-        let comp = Tracker.autorun((c) => {
-          fn(c);
-          if (!c.firstRun) $timeout(angular.noop, 0);
-        });
+.service('$auth', [
+  '$rootScope',
+  '$q', 
 
-        $rootScope.$on('$destroy', () => {
-          comp.stop();
-        });
+function ($rootScope, $q) {
+  if (!Package['accounts-base'])
+    throw Error(
+      'Oops, looks like Accounts-base package is missing!' +
+      'Please add it by running: meteor add accounts-base'
+    );
 
-        return comp;
-      }
+  this.waitForUser = () => {
+    let deferred = $q.defer();
 
-      waitForUser() {
-        let deferred = $q.defer();
+    $rootScope.autorun(() => {
+      if (!Meteor.loggingIn()) deferred.resolve(Meteor.user());
+    });
 
-        this._autorun(() => {
-          if (!Meteor.loggingIn()) {
-            deferred.resolve(Meteor.user());
-          }
-        });
+    return deferred.promise;
+  };
 
-        return deferred.promise;
-      }
+  this.requireUser = () => {
+    let deferred = $q.defer();
 
-      requireUser() {
-        let deferred = $q.defer();
+    $rootScope.autorun(() => {
+      if (Meteor.loggingIn()) return;
+      let currentUser = Meteor.user();
 
-        this._autorun(() => {
-          if (!Meteor.loggingIn()) {
-            if (Meteor.user() == null) {
-              deferred.reject("AUTH_REQUIRED");
-            }
-            else {
-              deferred.resolve(Meteor.user());
-            }
-          }
-        });
+      if (currentUser)
+        deferred.resolve(currentUser);
+      else
+        deferred.reject("AUTH_REQUIRED");
+    });
 
-        return deferred.promise;
-      }
+    return deferred.promise;
+  };
 
-      requireValidUser(validatorFn) {
-        validatorFn = validatorFn || angular.noop;
+  this.requireValidUser = (validate = angular.noop) => {
+    if (!_.isFunction(validate))
+      throw Error('argument 1 must be a function');
 
-        return this.requireUser().then((user) => {
-          let valid = validatorFn(user);
+    return this.requireUser().then((user) => {
+      let isValid = validate(user);
 
-          if (valid === true) {
-            return user;
-          }
-          else if (angular.isString(valid)) {
-            return $q.reject(valid);
-          }
-          else {
-            return $q.reject("FORBIDDEN");
-          }
-        });
-      }
-    }
+      if (isValid === true) 
+        return $q.resolve(user);
+      if (_.isString(isValid))
+        return $q.reject(isValid);
 
-    let instance = new AngularMeteorAuthentication();
+      return $q.reject(isValid);
+    });
+  };
 
-    angular.extend(this, Object.getPrototypeOf(instance));
-  }])
-.run(['$auth', '$rootScope', function($auth, $rootScope) {
-  $auth._autorun(() => {
-    if (!Meteor.user) return;
-
-    Object.getPrototypeOf($rootScope).$auth = {
+  this.getUserInfo = () => {
+    return {
       currentUser: Meteor.user(),
       currentUserId: Meteor.userId(),
       loggingIn: Meteor.loggingIn()
     };
+  };
+}])
+
+
+.run([
+  '$rootScope',
+  '$auth',
+  '$reactive',
+
+function($rootScope, $auth, Reactive) {
+  $rootScope.autorun(() => {
+    let scopeProto = Object.getPrototypeOf($rootScope);
+    let userInfo = $auth.getUserInfo();
+    _.extend(scopeProto, { $auth: userInfo });
+    _.extend(Reactive, { auth: userInfo });
   });
 }]);

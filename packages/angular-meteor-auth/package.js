@@ -41,9 +41,28 @@ Package.onTest(function(api) {
   api.use('insecure');
   api.use('sanjo:jasmine@0.19.0');
   api.use('angular:angular-mocks@1.4.7');
-  api.use('angular-meteor-data');
   api.use('angular-meteor-auth');
   api.use('mizzao:accounts-testing');
+  api.use('ecmascript');
+
+  // Load local version of angular-meteor, so modifications would be available
+  api.addFiles([
+    '../angular-meteor-data/lib/diff-array.js',
+    '../angular-meteor-data/lib/get-updates.js',
+    '../angular-meteor-data/modules/angular-meteor-subscribe.js',
+    '../angular-meteor-data/modules/angular-meteor-stopper.js',
+    '../angular-meteor-data/modules/angular-meteor-collection.js',
+    '../angular-meteor-data/modules/angular-meteor-object.js',
+    '../angular-meteor-data/modules/angular-meteor-user.js',
+    '../angular-meteor-data/modules/angular-meteor-methods.js',
+    '../angular-meteor-data/modules/angular-meteor-session.js',
+    '../angular-meteor-data/modules/angular-meteor-utils.js',
+    '../angular-meteor-data/modules/angular-meteor-camera.js',
+    '../angular-meteor-data/modules/angular-meteor-reactive-utils.js',
+    '../angular-meteor-data/modules/angular-meteor-reactive-scope.js',
+    '../angular-meteor-data/modules/angular-meteor-reactive-context.js',
+    '../angular-meteor-data/angular-meteor.js'
+  ], 'client');
 
   api.addFiles([
     'tests/integration/auth.spec.js',
