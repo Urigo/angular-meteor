@@ -190,7 +190,7 @@ Let's add package and then implement restricted access:
 
     meteor add barbatus:ng2-meteor-accounts
 
-  {{> DiffBox tutorialName="meteor-angular2-socially" step="8.6"}}
+  {{> DiffBox tutorialName="meteor-angular2-socially" step="8.8"}}
 
 Now log out and try to click on any party link. See, links don't work!
 
