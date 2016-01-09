@@ -6,14 +6,16 @@ describe('angular-meteor', function () {
 
     var $compile;
     var $rootScope;
-    var testScope;
+    var $reactive
     var $auth;
+    var testScope;
 
-    beforeEach(angular.mock.inject(function (_$compile_, _$rootScope_, _$auth_) {
+    beforeEach(angular.mock.inject(function (_$compile_, _$rootScope_, _$reactive_, _$auth_) {
       $compile = _$compile_;
       $rootScope = _$rootScope_;
-      testScope = $rootScope.$new();
+      $reactive = _$reactive_;
       $auth = _$auth_;
+      testScope = $rootScope.$new();
     }));
 
     afterEach(function (done) {
@@ -45,6 +47,14 @@ describe('angular-meteor', function () {
       expect(newScope.$auth.currentUser).toBeDefined();
       expect(newScope.$auth.currentUserId).toBeDefined();
       expect(newScope.$auth.loggingIn).toBeDefined();
+    });
+
+    it('Should put auth on every reactive context created', function() {
+      var context = $reactive({});
+      expect(context.auth).toBeDefined();
+      expect(context.auth.currentUser).toBeDefined();
+      expect(context.auth.currentUserId).toBeDefined();
+      expect(context.auth.loggingIn).toBeDefined();
     });
 
     it('Should currentUser return empty value when there is no user logged in', function () {

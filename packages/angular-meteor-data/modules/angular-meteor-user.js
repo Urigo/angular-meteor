@@ -89,6 +89,6 @@ angularMeteorUser.run([
       if (!Meteor.user) return;
       $rootScope.currentUser = Meteor.user();
       $rootScope.loggingIn = Meteor.loggingIn();
-    }, true);
+    });
   }
 ]);

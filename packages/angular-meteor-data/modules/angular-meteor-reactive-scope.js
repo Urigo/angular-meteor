@@ -3,11 +3,16 @@ angular.module('angular-meteor.reactive-scope', [
   'angular-meteor.reactive-context'
 ])
 
-.service('$$ReactiveScope', function($rootScope, $parse, $$ReactiveUtils, $$ReactiveContext) {
-  let utils = $$ReactiveUtils;
 
+.service('$$ReactiveScope', [ 
+  '$rootScope',
+  '$parse',
+  '$$ReactiveContext',
+  '$$ReactiveUtils',
+
+function($rootScope, $parse, ReactiveContext, utils) {
   this.helpers = function(props) {
-    let reactiveContext = new $$ReactiveContext(this, this);
+    let reactiveContext = new ReactiveContext(this, this);
     reactiveContext.helpers(props);
   };
 
@@ -109,9 +114,14 @@ angular.module('angular-meteor.reactive-scope', [
   this._bind = function(fn) {
     return utils.bind(fn, this, this._throttledDigest);
   };
-})
+}])
 
-.run(function($rootScope, $$ReactiveScope) {
+
+.run([
+  '$rootScope',
+  '$$ReactiveScope',
+
+function($rootScope, ReactiveScope) {
   let ScopeProto = Object.getPrototypeOf($rootScope);
-  _.extend(ScopeProto, $$ReactiveScope);
-});
+  _.extend(ScopeProto, ReactiveScope);
+}]);

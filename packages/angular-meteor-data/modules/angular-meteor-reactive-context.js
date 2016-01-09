@@ -3,10 +3,13 @@ angular.module('angular-meteor.reactive-context', [
   'angular-meteor.reactive-scope'
 ])
 
-.factory('$$ReactiveContext', function($rootScope, $$ReactiveUtils) {
-  let utils = $$ReactiveUtils;
 
-  class $$ReactiveContext {
+.factory('$$ReactiveContext', [
+  '$rootScope',
+  '$$ReactiveUtils',
+
+function($rootScope, utils) {
+  class ReactiveContext {
     constructor(context, $scope) {
       $scope = $scope || $rootScope.$new(true);
 
@@ -181,30 +184,40 @@ angular.module('angular-meteor.reactive-context', [
     }
   }
 
-  return $$ReactiveContext;
-})
+  return ReactiveContext;
+}])
 
-.factory('$reactive', function($$ReactiveContext) {
-  let reactiveContextAPI = ['helpers', 'autorun', 'subscribe', 'getReactively', 'stop'];
 
-  function $reactive(context) {
-    return _.extend(context, $reactive);
+.factory('$reactive', [
+  '$$ReactiveContext',
+
+function(ReactiveContext) {
+  let reactiveAPI = [
+    'helpers',
+    'autorun',
+    'subscribe',
+    'getReactively',
+    'stop'
+  ];
+
+  function Reactive(context) {
+    return _.extend(context, Reactive);
   }
 
-  $reactive.attach = function($scope) {
+  Reactive.attach = function($scope) {
     this._reactiveContext =
       this._reactiveContext ||
-      new $$ReactiveContext(this, $scope);
+      new ReactiveContext(this, $scope);
 
     return this;
   };
 
-  reactiveContextAPI.forEach((method) => {
-    $reactive[method] = function(...args) {
+  reactiveAPI.forEach((method) => {
+    Reactive[method] = function(...args) {
       this.attach();
       return this._reactiveContext[method](...args);
     };
   });
 
-  return $reactive;
-});
+  return Reactive;
+}]);

@@ -1,6 +1,10 @@
 angular.module('angular-meteor.reactive-utils', [])
 
-.service('$$ReactiveUtils', function($rootScope) {
+
+.service('$$ReactiveUtils', [
+  '$rootScope', 
+
+function($rootScope) {
   this.isCursor = (obj) => {
     return obj instanceof Meteor.Collection.Cursor;
   };
@@ -35,4 +39,4 @@ angular.module('angular-meteor.reactive-utils', [])
       return bound;
     }, {});
   };
-});
+}]);
