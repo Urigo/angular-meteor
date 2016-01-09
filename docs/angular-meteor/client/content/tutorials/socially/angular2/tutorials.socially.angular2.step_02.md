@@ -1,6 +1,6 @@
 {{#template name="tutorials.socially.angular2.step_02.md"}}
 {{> downloadPreviousStep stepName="step_01"}}
-    
+
 Now it's time to make the web page dynamic — with Angular 2.
 
 This step will still be focusing on client side Angular tools. The next one will show you how to get the power of Meteor.
@@ -18,25 +18,21 @@ We replaced the hard-coded party list with the [NgFor](https://angular.io/docs/j
 * The `*ngFor="#party of parties"` attribute in the `li` tag is an Angular repeater directive. The repeater tells Angular to create a `li` element for each party in the list using the `li` tag as the template.
 * The expressions wrapped in the double curly braces ( `{{dstache}}party.name}}` and `{{dstache}}party.description}}` ) will be replaced by the value of the expressions.
 
-It's worth to mentione that `ngFor` is a core attribute in Angular 2, and along with some other 
-directives, like `ngIf`, `ngClass` etc, including as well _form_ directives (which will be heavily used on the 4th step), like `ngForm`, it constitutes so called _common_ attributes.
-You can check out them [here](https://angular.io/docs/js/latest/api/common/COMMON_DIRECTIVES-let.html).
-The main point about them is that they are globally available in every component template, which means you don't need
-to import them manually into the component's view, in comparison to a custom directive or routing directives.
-We'll be creating own components, as well as use routing in the next steps, so you'll have hands on everything you need. 
+Angular 2 has _common_ directives that provide additional functionality to HTML. These include `ngFor`, `ngIf`, `ngClass`, _form_ directives (which will be heavily used on the 4th step) and more found in the [`angular2/common`](https://angular.io/docs/ts/latest/api/common/) package. The main point about them is that they are globally available in every component template, which means you don't need to import them manually into the component's view, in comparison to a custom directive or routing directives.
+
+We'll be creating own components, as well as use routing in the next steps, so you'll learn hands on everything you need.
 
 # Component as a Controller
 
-One convenient way to think of a component's role in Angular2 is as the role played by `ngController` in Angular 1.x.
-Each component defines it's own view via the `View` annotation and creates a data model that will be rendered in the view. 
+Each component defines it's own view via the `View` annotation and creates a data model that will be rendered in the view. One convenient way to think of a component's role in Angular2 is as the role played by `ngController` in Angular 1.x.
 
 Everything else is done within event handlers and other code that controls data flow between the view and the user
 and updates the data model accordingly.
 
 Now we are going to create out initial data model and render it in the view.
-This code will go inside of our Socially class [`constructor`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor). A constructor is a function run when a class is loaded, thus it loads the initial data for the class.
+This code will go inside of our Socially class [`constructor`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/constructor). A constructor is a function that runs when a class is loaded, thus it loads the initial data for the class.
 
-We can attach data with the context "this", referring to the Socially class.
+We can attach data with the context `this`, referring to the Socially class.
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="2.2"}}
 
@@ -45,13 +41,13 @@ Run the app again.
     meteor
 
 At this moment you will see a message in the console: _Property "parties" does not exist on type "Socially"_.
-These kind of messages can be annoying, but they do a great job — keep our code less buggy.
+These kind of messages can be annoying, but they provide important information that can help keep our code less buggy.
 
-It's so easy, for example, to misspell the name of a property in dynamic languages like JavaScript.
-Thanks to TypeScript, we can use this compilation diagnostics to create less bug-prone JavaScript applications.
+It's so easy to unknowingly misspell the name of a property in dynamic languages like JavaScript.
+Thanks to TypeScript, we can use compilation diagnostics to create less bug-prone JavaScript applications.
 
 This comes as a great benefit of choosing TypeScript as a primary language
-for our app. So lets define our `parties` property as a generic type array:
+for our app. So lets define our `parties` property as it is, a [type](http://www.typescriptlang.org/Handbook#basic-types) of array made up of [generic](http://www.typescriptlang.org/Handbook#generics) Objects.:
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="2.3"}}
 
