@@ -192,7 +192,7 @@ Add the method inside the Socially class in `app.ts`:
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="4.11"}}
 
-The Mongo Collection Parties has a method called [`remove`](https://docs.mongodb.org/manual/tutorial/remove-documents/). We search for the relevant party by its identifier, `_id`, and delete it.
+The Mongo Collection Parties has a method called "remove". We search for the relevant party by its identifier, `_id`, and delete it.
 
 Now try to delete a few parties. Since Meteor syncs data between clients, you can also watch them being removed from other browser clients.
 
@@ -202,6 +202,6 @@ Now try to delete a few parties. Since Meteor syncs data between clients, you ca
 In this chapter we've seen:
 
 - how easy it is to create a form and access its data using Angular 2's power
-- how easy it is to save that data in storage using Meteor's power
+- how easy it is to save that data to the storage using Meteor's power
 
 {{/template}}
