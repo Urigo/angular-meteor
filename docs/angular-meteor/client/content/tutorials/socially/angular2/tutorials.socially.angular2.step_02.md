@@ -24,7 +24,7 @@ We'll be creating own components, as well as use routing in the next steps, so y
 
 # Component as a Controller
 
-Each component defines it's own view via the `View` annotation and creates a data model that will be rendered in the view. One convenient way to think of a component's role in Angular2 is as the role played by `ngController` in Angular 1.x.
+Each component defines it's own view via the `View` annotation and creates a data model that will be rendered in the view. One convenient way to think of a component's role in Angular 2 is as the role played by `ngController` in Angular 1.x.
 
 Everything else is done within event handlers and other code that controls data flow between the view and the user
 and updates the data model accordingly.

@@ -171,11 +171,11 @@ Feel free to try running more actions like updating an object from the console, 
 
 In the _Simple Binding to Angular_ section above we were loading a list of documents in the most straightforward way.
 But what if we assign `Parties.find()` to `this.parties`, the same way as we do in a regular Meteor app
-with [Blaze](https://www.meteor.com/blaze). Blaze is the default frontend framework in Meteor (check the official Meteor [tutorial](https://www.meteor.com/tutorials/blaze/templates) for more). If Angular2 could understand Mongo methods, we would have an ideal way of dealing with Mongo collections.
+with [Blaze](https://www.meteor.com/blaze). Blaze is the default frontend framework in Meteor (check the official Meteor [tutorial](https://www.meteor.com/tutorials/blaze/templates) for more). If Angular 2 could understand Mongo methods, we would have an ideal way of dealing with Mongo collections.
 
 `Parties.find()` returns an instance of `Mongo.Cursor`, which can reactively provide all documents, that have been added, changed or removed, to every component. But how can we teach Angular 2 to understand Mongo cursors?
 
-Luckily, Angular2 comes with the concept of so-called "differ classes" — classes that are used by
+Luckily, Angular 2 comes with the concept of so-called "differ classes" — classes that are used by
 the `ngFor` directive to provide information about what has been changed in a collection to render
 this collection efficiently.
 

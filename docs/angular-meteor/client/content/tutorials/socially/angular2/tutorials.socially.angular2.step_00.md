@@ -89,9 +89,9 @@ That's it! Now we can use Angular 2's power in our Meteor app.
 
 As you already know, Meteor processes all HTML files for you out of the box. Files will be concatenated into one page.
 
-From the other side, regular Angular (Angular 1 or Angular2) apps have a modular structure, i.e., consist of a set of template HTML files and JavaScript component files. Each template file might belong to some component, for example, to a custom directive.
+From the other side, regular Angular (Angular 1 or Angular 2) apps have a modular structure, i.e., consist of a set of template HTML files and JavaScript component files. Each template file might belong to some component, for example, to a custom directive.
 
-It means we would rather avoid concatenating all of them to let Angular2 components to load template files at the moment they need to.
+It means we would rather avoid concatenating all of them to let Angular 2 components to load template files at the moment they need to.
 
 That's why `urigo:angular2-meteor` overrides standard Meteor HTML processor.
 Lets remove the standard HTML processor by:
@@ -104,7 +104,7 @@ If you have multiple HTML files with, say, `<BODY>` tags, they will be concatena
 
 At the same time, template files are not touched by the processor at all and won't appear on the page initially.
 
-They will be loaded by appropriate Angular2 components at the time they are going to be rendered on the page.
+They will be loaded by appropriate Angular 2 components at the time they are going to be rendered on the page.
 
 ## TypeScript
 
@@ -117,7 +117,7 @@ An Angular 2 app can be written in regular JavaScript (ES5), the new JavaScript 
 If you've chosen ES6 or TypeScript, it will eventually need to compile code into ES5 — the only language currently fully supported in modern browsers (see the [ES6 compatibility table](https://kangax.github.io/compat-table/es6/)). ES6 can be compiled to ES5 using [Babel](https://babeljs.io/) or [Traceur](https://github.com/google/traceur-compiler/wiki/Getting-Started), while Typescript has it's own compiler.
 
 TypeScript is the recommended choice by the Angular team. This is due to several reasons, one of them being that TypeScript provides the most advanced support of [decorators](http://rbuckton.github.io/ReflectDecorators/typescript.html) compared with other compilers. Decorators are still considered an experimental feature that will likely appear only in ES7, so most compilers
-don't fully support them. What are decorators and how are they used in Angular2? You'll learn more a bit later.
+don't fully support them. What are decorators and how are they used in Angular 2? You'll learn more a bit later.
 
 Besides decorator and ES6 support, TypeScript offers an opt-in type system with type-checking handled at run-time or through one of several [Typescript editor plugins](https://github.com/Microsoft/TypeScript/wiki/TypeScript-Editor-Support).
 
@@ -159,7 +159,7 @@ Let's continue defining our Angular 2 application module.
 First we're importing the dependencies we needed from `angular2/core` and `angular2/bootstrap`. This is not a folder and files in your directory, but a reference to System.js modules aliased as `angular2/core` and `angular2/bootstrap` and available in the `urigo:angular2-meteor` package.
 
 Notice the `@` syntax. In Angular 2, these are called Annotations. They are similar to a new feature coming to ES7 called Decorators.
-From a consumers point of view, they are almost the same except Decorators are a proposed standard allowing us to add class metadata while Angular2's Annotations are a realization of that metadata, implemented with the help of Decorators in TypeScript.
+From a consumers point of view, they are almost the same except Decorators are a proposed standard allowing us to add class metadata while Angular 2's Annotations are a realization of that metadata, implemented with the help of Decorators in TypeScript.
 You can read more about the differences between the two [here](http://blog.thoughtram.io/angular/2015/05/03/the-difference-between-annotations-and-decorators.html).
 
 For now, consider Annotations an elegant way to add metadata to classes.
@@ -187,7 +187,7 @@ This will load HTML and JavaScript code necessary to launch our app.
 > guarantees app loading at the appropriate time, when all necessary parts are ready.
 
 Importing the root module every time looks like a repetitive task.
-Here comes some good news — the Angular2 package recognizes the file named `app.ts`.
+Here comes some good news — the Angular 2 package recognizes the file named `app.ts`.
 If you have one in the app root folder, the package will import it for you without even having to ask.
 
 Even more, if you called your app selector — `app`, you can get rid of `index.html` altogether.
@@ -212,7 +212,7 @@ It occurs because the TypeScript compiler is configured in the package with diag
 the TypeScript compiler doesn't know anything about the location of the `angular2/core` and `angular2/bootstrap` modules. To fix this, you will need to make use of TypeScript declaration files, which is a TypeScript way to inform the compiler about third-party API modules.
 
 After the first run, you will find the `angular2-meteor.d.ts` file in the new folder called "typings".
-This file has been created by the package at start time and contains a special reference to Angular2 and Meteor declaration files.
+This file has been created by the package at start time and contains a special reference to Angular 2 and Meteor declaration files.
 There are two ways to link `app.ts` and `angular2-meteor.d.ts` together:
 
  - one way is to directly reference `angular2-meteor.d.ts` using a special sugared syntax at the top of `app.ts` as follows:
