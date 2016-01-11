@@ -2,19 +2,21 @@
 {{> downloadPreviousStep stepName="step_09"}}
 
 So far, we've been building our app and testing only in a web browser,
-but Meteor has been designed to work across different platforms — your socially website can become an iOS or Android app in just a few commands.
+however Meteor has been designed to work across different platforms — your socially website can become an iOS or Android app with just a few commands.
 
 ## Cordova
 
-Meteor uses Cordova [framework](https://cordova.apache.org) to build and run Web apps on iOS or Android mobile devices.
+Meteor uses an open-sourced framework called [Cordova](https://cordova.apache.org) to build and run Web apps on iOS or Android mobile devices.
 
-"Meteor uses" actually means something more — it has Cordova integrated with its toolkit, which means you won't need anything more than `meteor` command in the terminal to build mobile Web apps, except
-two necessary dependencies to install: Android emulator for Android and XCode for iOS.
+Cordova is integrated with Meteor's toolkit, which means you won't need anything more than the `meteor` command in the terminal to build mobile Web apps. You will, however, require two necessary dependencies to install:
 
-One of the great features of Meteor that is especially useful for mobile apps — hot code pushes.
-After you deploy your app to the stores, once you update your code, all your apps are instantly updated; no need to go through the stores update process! 
+- an Android emulator for Android
+- XCode for iOS.
 
-You can find more information about integration [here](https://github.com/meteor/meteor/wiki/Meteor-Cordova-Phonegap-integration).
+In addition, Meteor has an especially useful feature for mobile apps: [hot code pushes](http://info.meteor.com/blog/meteor-hot-code-push).
+After you deploy your app to the stores, once you update your code, all your apps are instantly updated; no need to go through the app/play store update process!
+
+You can find more information about Cordova integration with Meteor [here](https://github.com/meteor/meteor/wiki/Meteor-Cordova-Phonegap-integration).
 
 ### Running on Android Emulator
 
@@ -31,16 +33,14 @@ After you agree to the license terms, type:
 
     meteor run android
 
-After some initialization, you will see an Android emulator pop up, running your app inside a native Android wrapper.
-The emulator can be somewhat slow, so if you want to see what it's really like using your app, you should run it on an actual device.
+After some initialization, you will see an Android emulator pop up, running your app inside of a native Android wrapper. The emulator can be somewhat slow, [Geny Motion](https://www.genymotion.com/) is a popular Android emulator alternative. However, if you want to see what it's really like using your app, you should run it on an actual device.
 
-### Running on Android Device
+### Running on an Android Device
 
 First, complete all of the steps above to set up the Android tools on your system.
-Then, make sure you have USB Debugging enabled on your phone and the phone is plugged into your computer with a USB cable.
-Also, you must quit the Android emulator before running on a device.
+Then, make sure you have USB Debugging enabled on your phone and the phone is plugged into your computer with a USB cable. You must also quit the Android emulator before running your app on a device.
 
-Then, run the following command:
+Run the following command:
 
     meteor run android-device
 
@@ -63,7 +63,9 @@ This will run you through the setup necessary to build an iOS app from your proj
 
 You will see the iOS simulator pop up with your app running inside.
 
-### Running on an iPhone or iPad (Mac Only; requires Apple developer account)
+### Running on an iPhone or iPad (Mac Only)
+
+> Requires an Apple developer account
 
 If you have an Apple developer account, you can also run your app on an iOS device. Run the following command:
 
@@ -71,11 +73,9 @@ If you have an Apple developer account, you can also run your app on an iOS devi
 
 This will open Xcode with a project for your iOS app. You can use Xcode to then launch the app on any device or simulator that Xcode supports.
 
-If you want to point your app at the previously deployed server, run:
+If you want to point your app to the previously deployed server, run:
 
     meteor run ios-device --mobile-server my_app_name.meteor.com
-
-Now that we have seen how easy it is to deploy our app and run it on mobile, let's get to adding some more features.
 
 ### Submit your Android app to the Play Store:
 
@@ -84,5 +84,9 @@ Now that we have seen how easy it is to deploy our app and run it on mobile, let
 ### Submit your iOS app to the App Store:
 
 [https://github.com/meteor/meteor/wiki/How-to-submit-your-iOS-app-to-App-Store](https://github.com/meteor/meteor/wiki/How-to-submit-your-iOS-app-to-App-Store)
+
+# Summary
+
+Now that we have seen how easy it is to deploy our app and run it on mobile, let's get to adding some more features. In the next step we'll look at adding party sorting and pagination.
 
 {{/template}}
