@@ -1,48 +1,49 @@
 {{#template name="tutorials.socially.angular2.step_06.md"}}
 {{> downloadPreviousStep stepName="step_05"}}  
 
-In this step we are going to add a form to the party details view and 
-bind a party object to it, so that we'll be able to change party details and
-then save changes to the storage.
+In this step we are going to:
+
+- add a form to the party details view
+- bind a party object to the view, so that we'll be able to change party details and
+then save changes to the storage
 
 # Two-Way Data Binding
 
 As we've already explored on the 3rd step, data can be bound to the HTML input elements
-with the help of a group of the special Angular 2 Control objects, or otherwise called a form model.
-We called this approach — Model-Driven approach.
+with the help of a group of special Angular 2 Control objects, otherwise called a form model.
+We called this approach the _Model-Driven approach_.
 
-Also, it was mentioned that Angular 2 has support of very well familiar to Angular 1 developers two-way data binding
-through a special attribute. It has the same name as in Angular 1 but it's used with a bit
-different syntax. We'll get to it in a second.
+Also, it was mentioned that Angular 2 has support of two-way data binding
+through a special attribute, though with different syntax from Angular 1. We'll get to this shortly.
 
-Now let's change `party-details.html` to a form, so that we can edit the party details:
+Let's change `party-details.html` into a form, so that we can edit the party details:
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="6.1"}}
 
-Since we have a routerLink button on the page that redirects back to the list (that was previous step's challenge), don't forget to add all required dependencies.
+Notice we have a routerLink button on the page that redirects back to the list (from our previous step's challenge). Don't forget to load all required dependencies.
 
 ## ngModel
 
 [ngModel](https://angular.io/docs/js/latest/api/common/NgModel-directive.html) binds a HTML form to the component's model, which can be an object of any type, in comparison to
-the Model-Driven binding where `ControlGroup` instance is used.
+the Model-Driven binding where the `ControlGroup` instance is used.
 
-The syntax looks a bit different: `[(ngModel)]`. `ngModel` binds to the party properties and fill out the inputs, and vice versa:
+The syntax looks a bit different, using both square and rounded brackets: `[(ngModel)]`. `ngModel` binds to the party properties and fills out the inputs, and vice versa:
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="6.2"}}
 
-Let's do a little test to see how form controls and events work in Angular 2. Bind to `party.name` below the input, then change the input text.
+Let's do a little test to see how form controls and events work in Angular 2. Start by binding to `party.name` below the input, then experiment by changing the input's text.
 
     <label for="name">Name</label>
     <input type="text" [(ngModel)]="party.name">
 
     <p>{{dstache}}party.name}}</p>
 
-Notice that it updates automatically. You can contrast this to form Controls which we need to update manually on events to reach this functionality.
-if you look inside of the NgModel, you'll see that it inherits NgModel directive and extends it with
-emitting an event when the input element's value has been changed.
+Notice that it updates automatically on changes. You can contrast this to form Controls which we need to update manually using events to reach this functionality.
+
+If you look inside of [NgModel](https://github.com/angular/angular/blob/9e44dd85ada181b11be869841da2c157b095ee07/modules/angular2/src/common/forms/directives/ng_model.ts), you'll see that it inherits the NgControl directive and extends it by emitting an event when the input element's value has been changed.
 
 But unlike a form Control, NgModel has some limitations, e.g., it doesn't support form validators.
-But if we need to validate your form, we can still combine `ngModel` directives with a form model assigned to the `ngFormModel` directive, like this:
+If you need to validate your form, you can still combine `ngModel` directives with a form model assigned to the `ngFormModel` directive, like this:
 
     <form #f="ngForm" [ngFormModel]="partyForm">
       <label for="name">Name</label>
@@ -58,19 +59,19 @@ But if we need to validate your form, we can still combine `ngModel` directives 
       <button [routerLink]="['/PartiesList']">Cancel</button>
     </form>
 
-To get this to work, you'll also have to make use of `FormBuilder` inside of the component and build a form model, as we already did for the `PartiesForm` view on the 4th step.
+To get this to work, you'll also have to make use of `FormBuilder` inside of the component and build a form model, as we already did for the `PartiesForm` view in the 4th step.
 
-But let's keep party details view simple for now, without using form Controls.
+But let's keep the party details view simple for now, without using form controls.
 
-Lastly, let's add a submit event handler that saves the current party:
+As a finishing touch, let's add a submit event handler that saves the current party:
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="6.3"}}
 
 # Summary
 
-In this step:
+In this step, we learned:
 
-- we touched briefly how two-way data binding works in Angular 2;
-- we extended PartyDetails view to contain a form that allows us to make changes to the party and save changes to the storage.
+- how two-way data binding works in Angular 2 using `[(ngModel)]`
+- how to bind inputs to the view and save the data
 
 {{/template}}
