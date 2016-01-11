@@ -1,0 +1,3 @@
+[submodule "packages/ng2-maps/angular2-google-maps"]
+	path = packages/ng2-maps/angular2-google-maps
+	url = https://github.com/SebastianM/angular2-google-maps
