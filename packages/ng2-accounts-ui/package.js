@@ -1,8 +1,8 @@
 Package.describe({
   name: 'barbatus:ng2-meteor-accounts-ui',
-  version: '0.1.2_3',
+  version: '0.1.2_4',
   summary: 'Meteor Accounts UI for Angular2',
-  git: 'https://github.com/barbatus/ng2-meteor-accounts-ui',
+  git: 'https://github.com/Urigo/angular2-meteor/tree/master/packages/ng2-accounts-ui',
   documentation: 'README.md'
 });
 
@@ -12,7 +12,7 @@ Package.onUse(function(api) {
   api.use([
     'accounts-ui@1.1.6',
     'templating',
-    'barbatus:angular2@0.7.3'
+    'barbatus:angular2@0.7.5'
   ]);
 
   api.addFiles([
