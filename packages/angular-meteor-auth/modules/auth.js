@@ -5,7 +5,7 @@ angular.module('angular-meteor.auth')
   '$rootScope',
   '$q', 
 
-function ($rootScope, $q) {
+function($rootScope, $q) {
   if (!Package['accounts-base'])
     throw Error(
       'Oops, looks like Accounts-base package is missing!' +
@@ -15,43 +15,57 @@ function ($rootScope, $q) {
   this.waitForUser = () => {
     let deferred = $q.defer();
 
-    $rootScope.autorun(() => {
-      if (!Meteor.loggingIn()) deferred.resolve(Meteor.user());
+    let promise = deferred.promise.finally(() => {
+      $rootScope._throttledDigest();
     });
 
-    return deferred.promise;
+    var c = Meteor.autorun((c) => {
+      if (Meteor.loggingIn()) return;
+
+      c.stop();
+      deferred.resolve(Meteor.user());
+      $rootScope._throttledDigest();
+    });
+
+    promise.stop = c.stop.bind(c);
+    return promise;
   };
 
-  this.requireUser = () => {
-    let deferred = $q.defer();
+  this.requireUser = (c) => {
+    let waiting = this.waitForUser();
 
-    $rootScope.autorun(() => {
-      if (Meteor.loggingIn()) return;
-      let currentUser = Meteor.user();
-
+    let promise = waiting.then((currentUser) => {
       if (currentUser)
-        deferred.resolve(currentUser);
-      else
-        deferred.reject("AUTH_REQUIRED");
+        return $q.resolve(currentUser);
+
+      return $q.reject('AUTH_REQUIRED');
     });
 
-    return deferred.promise;
+    promise.stop = waiting.stop;
+    return promise;
   };
 
   this.requireValidUser = (validate = angular.noop) => {
     if (!_.isFunction(validate))
       throw Error('argument 1 must be a function');
 
-    return this.requireUser().then((user) => {
+    let requiring = this.requireUser();
+
+    let promise = requiring.then((user) => {
+      if (user === 'AUTH_REQUIRED')
+        return $q.reject(user);
+
       let isValid = validate(user);
 
-      if (isValid === true) 
+      if (isValid === true)
         return $q.resolve(user);
-      if (_.isString(isValid))
-        return $q.reject(isValid);
 
+      isValid = _.isString(isValid) ? isValid : "FORBIDDEN";
       return $q.reject(isValid);
     });
+
+    promise.stop = requiring.stop;
+    return promise;
   };
 
   this.getUserInfo = () => {
@@ -70,7 +84,7 @@ function ($rootScope, $q) {
   '$reactive',
 
 function($rootScope, $auth, Reactive) {
-  $rootScope.autorun(() => {
+  Tracker.autorun(() => {
     let scopeProto = Object.getPrototypeOf($rootScope);
     let userInfo = $auth.getUserInfo();
     _.extend(scopeProto, { $auth: userInfo });

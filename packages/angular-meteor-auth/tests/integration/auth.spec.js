@@ -2,54 +2,51 @@ var testedModule = 'angular-meteor.auth';
 
 describe('angular-meteor', function () {
   describe(testedModule, function () {
-    beforeEach(angular.mock.module(testedModule));
-
     var $compile;
     var $rootScope;
     var $reactive
     var $auth;
-    var testScope;
+
+    beforeEach(angular.mock.module(testedModule));
 
     beforeEach(angular.mock.inject(function (_$compile_, _$rootScope_, _$reactive_, _$auth_) {
       $compile = _$compile_;
       $rootScope = _$rootScope_;
       $reactive = _$reactive_;
       $auth = _$auth_;
-      testScope = $rootScope.$new();
+
+      spyOn(Tracker.Computation.prototype, 'stop').and.callThrough();
     }));
 
     afterEach(function (done) {
       $rootScope.$destroy();
-
-      Meteor.logout(function () {
-        done();
-      });
+      Meteor.logout(done);
     });
 
-    it('Should put $auth on the rootScope for easy use', function () {
+    it('Should define $auth on rootScope', function () {
       expect($rootScope.$auth).toBeDefined();
       expect($rootScope.$auth.currentUser).toBeDefined();
       expect($rootScope.$auth.currentUserId).toBeDefined();
       expect($rootScope.$auth.loggingIn).toBeDefined();
     });
 
-    it('Should $auth be available on every scope created', function () {
-      var newScope = $rootScope.$new();
-      expect(newScope.$auth).toBeDefined();
-      expect(newScope.$auth.currentUser).toBeDefined();
-      expect(newScope.$auth.currentUserId).toBeDefined();
-      expect(newScope.$auth.loggingIn).toBeDefined();
+    it('Should define $auth on child scopes', function () {
+      var $scope = $rootScope.$new();
+      expect($scope.$auth).toBeDefined();
+      expect($scope.$auth.currentUser).toBeDefined();
+      expect($scope.$auth.currentUserId).toBeDefined();
+      expect($scope.$auth.loggingIn).toBeDefined();
     });
 
-    it('Should $auth be available on every isolated scope created', function () {
-      var newScope = $rootScope.$new(true);
-      expect(newScope.$auth).toBeDefined();
-      expect(newScope.$auth.currentUser).toBeDefined();
-      expect(newScope.$auth.currentUserId).toBeDefined();
-      expect(newScope.$auth.loggingIn).toBeDefined();
+    it('Should define $auth on isolated child scopes', function () {
+      var $scope = $rootScope.$new(true);
+      expect($scope.$auth).toBeDefined();
+      expect($scope.$auth.currentUser).toBeDefined();
+      expect($scope.$auth.currentUserId).toBeDefined();
+      expect($scope.$auth.loggingIn).toBeDefined();
     });
 
-    it('Should put auth on every reactive context created', function() {
+    it('Should define auth on reactive contexts', function() {
       var context = $reactive({});
       expect(context.auth).toBeDefined();
       expect(context.auth.currentUser).toBeDefined();
@@ -57,95 +54,141 @@ describe('angular-meteor', function () {
       expect(context.auth.loggingIn).toBeDefined();
     });
 
-    it('Should currentUser return empty value when there is no user logged in', function () {
-      expect($rootScope.$auth.currentUser).toBe(null);
-    });
-
-    it('Should loggingIn change when logging in', function (done) {
-      expect($rootScope.$auth.loggingIn).toBe(false);
-      Meteor.insecureUserLogin('tempUser', function () {
-        expect($rootScope.$auth.loggingIn).toBe(true);
-        done();
+    describe('currentUser', function() {
+      it('Should return null if logged out', function () {
+        expect($rootScope.$auth.currentUser).toBe(null);
       });
     });
 
-    it('Should loggingIn change when logging out', function (done) {
-      expect($rootScope.$auth.loggingIn).toBe(false);
-      Meteor.insecureUserLogin('tempUser', function () {
-        expect($rootScope.$auth.loggingIn).toBe(true);
+    describe('currentUserId', function() {
+      it('Should return null if logged out', function () {
+        expect($rootScope.$auth.currentUserId).toBe(null);
+      });
+    });
+      
+    describe('loggingIn', function() {
+      it('Should change when logging in', function (done) {
+        expect($rootScope.$auth.loggingIn).toBe(false);
 
-        Meteor.logout(function () {
-          expect($rootScope.$auth.loggingIn).toBe(false);
+        Meteor.login('tempUser', function () {
+          expect(Meteor.loggingIn()).toBe(true);  
+          expect($rootScope.$auth.loggingIn).toBe(true);
           done();
+        });
+      });
+
+      it('Should change when logging out', function (done) {
+        expect($rootScope.$auth.loggingIn).toBe(false);
+
+        Meteor.login('tempUser', function () {          
+          expect($rootScope.$auth.loggingIn).toBe(true);
+
+          Meteor.logout(function () {            
+            expect($rootScope.$auth.loggingIn).toBe(false);
+            done();
+          });
         });
       });
     });
 
-    it('Should waitForUser return a promise and resolve it when user logs in', function (done) {
-      var promise = $auth.waitForUser();
+    describe('waitForUser()', function() {
+      it('Should return a promise and resolve it once user logs in', function (done) {
+        Meteor.login('tempUser', function () {
+          expect($rootScope.loggingIn).toBe(true);
 
-      promise.then(function () {
-        done();
+          $auth.waitForUser().then(function (user) {
+            expect(Tracker.Computation.prototype.stop).toHaveBeenCalled()
+            expect($rootScope.loggingIn).toBe(false);
+            done();
+          });
+        });
       });
 
-      Meteor.insecureUserLogin('tempUser', function () {
-        expect($rootScope.loggingIn).toBe(true);
-        $rootScope.$apply();
+      it('Should not fulfill promise once auto computation has been stopped', function () {
+        var promise = $auth.waitForUser();
+        expect(Tracker.Computation.prototype.stop).toHaveBeenCalled();
+        promise.stop();
       });
-    });
+    })
 
-    it('Should requireUser return a promise and reject it immediately when user is not logged in', function (done) {
-      var promise = $auth.requireUser();
-
-      promise.then(angular.noop, function () {
-        done();
+    describe('requireUser()', function() {
+      it('Should return a promise and resolve it once user is logged in', function (done) {
+        Meteor.login('tempUser', function () {         
+          $auth.requireUser().then(function (user) {
+            expect(Tracker.Computation.prototype.stop).toHaveBeenCalled();
+            expect(user.username).toEqual('tempUser');
+            done();
+          });
+        });
       });
 
-      $rootScope.$apply();
-    });
-
-    it('Should requireUser return a promise and resolve it immediately when user is logged in', function (done) {
-      Meteor.insecureUserLogin('tempUser', function () {
-        $rootScope.$apply();
-
-        var promise = $auth.requireUser();
-
-        promise.then(function () {
+      it('Should return a promise and reject it once user is not logged in', function (done) {
+        $auth.requireUser().catch(function (err) {
+          expect(Tracker.Computation.prototype.stop).toHaveBeenCalled();
+          expect(err).toEqual('AUTH_REQUIRED');
           done();
         });
 
         $rootScope.$apply();
       });
-    });
 
-    it('Should requireValidUser return a promise and resolve it immediately when user is logged in with the validation method', function (done) {
-      Meteor.insecureUserLogin('tempUser', function () {
-        $rootScope.$apply();
-
-        var spy = jasmine.createSpy().and.returnValue(true);
-        var promise = $auth.requireValidUser(spy);
-
-        promise.then(function () {
-          expect(spy).toHaveBeenCalled();
-          done();
-        });
-
-        $rootScope.$apply();
+      it('Should not fulfill promise once auto computation has been stopped', function () {
+        var promise = $auth.waitForUser();
+        expect(Tracker.Computation.prototype.stop).toHaveBeenCalled();
+        promise.stop();
       });
     });
 
-    it('Should requireValidUser return a promise and reject it immediately when user is logged in and validation method return false', function (done) {
-      Meteor.insecureUserLogin('tempUser', function () {
-        $rootScope.$apply();
+    describe('requireValidUser()', function() {
+      it('Should return a promise and resolve it once a valid user is logged in', function (done) {
+        Meteor.login('tempUser', function () {        
+          var spy = jasmine.createSpy().and.returnValue(true);
 
-        var spy = jasmine.createSpy().and.returnValue(false);
-        var promise = $auth.requireValidUser(spy);
+          $auth.requireValidUser(spy).then(function (user) {
+            expect(Tracker.Computation.prototype.stop).toHaveBeenCalled();
+            expect(spy).toHaveBeenCalled();
+            expect(user.username).toEqual('tempUser');
+            done();
+          });
 
-        promise.then(angular.noop, function () {
-          done();
+          $rootScope.$apply();
         });
+      });
 
-        $rootScope.$apply();
+      it('Should return a promise and reject it once an invalid user is logged in', function (done) {
+        Meteor.login('tempUser', function () {
+          var spy = jasmine.createSpy().and.returnValue(false);
+
+          $auth.requireValidUser(spy).catch(function (err) {
+            expect(Tracker.Computation.prototype.stop).toHaveBeenCalled();
+            expect(spy).toHaveBeenCalled();
+            expect(err).toEqual('FORBIDDEN');
+            done();
+          });
+
+          $rootScope.$apply();
+        });
+      });
+
+      it('Should return a custom validation error if validation method returns a string', function (done) {
+        Meteor.login('tempUser', function () {
+          var spy = jasmine.createSpy().and.returnValue('NOT_ALLOWED');
+
+          $auth.requireValidUser(spy).catch(function (err) {
+            expect(Tracker.Computation.prototype.stop).toHaveBeenCalled();
+            expect(spy).toHaveBeenCalled();
+            expect(err).toEqual('NOT_ALLOWED');
+            done();
+          });
+
+          $rootScope.$apply();
+        });
+      });
+
+      it('Should not fulfill promise once auto computation has been stopped', function () {
+        var promise = $auth.waitForUser();
+        expect(Tracker.Computation.prototype.stop).toHaveBeenCalled();
+        promise.stop();
       });
     });
   });
