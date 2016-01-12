@@ -16,7 +16,7 @@
 - [Discussions - the Meteor Forum](https://forums.meteor.com/)
 - [Report issues](https://github.com/Urigo/angular-meteor/issues)
 - [Change Log, updates and breaking changes](https://github.com/Urigo/angular-meteor/releases)
-- [Meteor Blog](http://info.meteor.com/blog)
+- [Meteor Blog](https://info.meteor.com/blog)
 - [Official Meteor guide for best practices](http://guide.meteor.com/)
 - [Awesome Meteor](https://github.com/Urigo/awesome-meteor) - A curated, community driven list of awesome Meteor packages, libraries, resources and shiny thing
 - Starters - [Angular-Meteor Platform](https://github.com/planet-training/angular-meteor-platform), [angular-meteor Yeoman generator](https://github.com/ndxbxrme/generator-angular-meteor), [Angular-Meteor-Boilerplate with TypeScript](https://github.com/ShMcK/Angular-Meteor-Boilerplate)
