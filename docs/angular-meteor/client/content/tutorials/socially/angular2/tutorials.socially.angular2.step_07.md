@@ -170,6 +170,6 @@ In this step we discovered how to make our TypeScript code less buggy with:
 - TSD for loading declaration files easily
 - creating a `tsconfig.json` file for loading files and specifying compiler options
 
-In the next step we'll look at creating user accounts and securing server data access.
+In the [next step](/tutorials/angular2/user-accounts-authentication-and-permissions) we'll look at creating user accounts and securing server data access.
 
 {{/template}}

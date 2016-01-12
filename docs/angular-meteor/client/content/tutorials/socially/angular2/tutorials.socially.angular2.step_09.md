@@ -194,6 +194,6 @@ Meanwhile, we've learned about:
 - the Publish-Subscribe mechanism in Meteor;
 - how to query particular data from the database via the server side.
 
-In the next step, we'll look at how quick and easy it is to deploy your Meteor app.
+In the [next step](/tutorials/angular2/deploying-your-app), we'll look at how quick and easy it is to deploy your Meteor app.
 
 {{/template}}

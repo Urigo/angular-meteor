@@ -87,6 +87,6 @@ If you want to point your app to the previously deployed server, run:
 
 # Summary
 
-Now that we have seen how easy it is to deploy our app and run it on mobile, let's get to adding some more features. In the next step we'll look at adding party sorting and pagination.
+Now that we have seen how easy it is to deploy our app and run it on mobile, let's get to adding some more features. In the [next step](/tutorials/angular2/search-sort-pagination-and-reactive-vars) we'll look at adding party sorting and pagination.
 
 {{/template}}

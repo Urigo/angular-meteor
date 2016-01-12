@@ -288,6 +288,6 @@ This step covered a lot. We looked at:
 - establishing the total number of results with `tmeasday:publish-counts`
 - enabling server-side searching across an entire collection
 
-In the next step we'll look at sending out our party invitations and look deeper into pipes.
+In the [next step](/tutorials/angular2/using-and-creating-angularjs-filters) we'll look at sending out our party invitations and look deeper into pipes.
 
 {{/template}}
