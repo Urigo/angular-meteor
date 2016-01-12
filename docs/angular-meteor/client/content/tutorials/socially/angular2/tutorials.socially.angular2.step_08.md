@@ -5,7 +5,8 @@ In this section we'll look at how to:
 
 - implement security for an app using Meteor and Angular 2 API together.
 - setup user accounts in meteor using a login and password
-- restrict access to views based on user permissions and the Angular 2 router
+- setup OAuth login for Facebook & Twitter
+- restrict access to views based on user permissions
 
 # Removing Insecure
 
@@ -120,7 +121,8 @@ If you place `@InjectUser` above the PartiesForm it will inject a new user prope
 __`client/parties-form/parties-form.ts`__:
 
     ...
-
+    import {MeteorComponent} from 'angular2-meteor';
+    import {AccountsUI} from 'meteor-accounts-ui'
     import {InjectUser} from 'meteor-accounts';
 
     @Component({
@@ -140,14 +142,14 @@ __`client/parties-form/parties-form.ts`__:
       ...
     }
 
-> Note: You'll have to extend `MeteorComponent` to make the user property reactive.
+> Note: You'll have to extend `MeteorComponent` to make the user property reactive. We'll learn more about MeteorComponent later in this tutorial.
 
-Call `this.user` and you will see that, it returns the same object as `Meteor.user()`.
+Call `this.user` and you will see that it returns the same object as `Meteor.user()`.
 The new property is reactive and can be used in any template, for example:
 
 __`client/parties-form/parties-form.html`__:
 
-    <div *ng-if="!user">Please, log in to change party</div>
+    <div *ngIf="!user">Please, log in to change party</div>
     <form [ng-form-model]="partiesForm" #f="form" (submit)="addParty(f.value)">
       ...
     </form>
@@ -155,6 +157,11 @@ __`client/parties-form/parties-form.html`__:
 As you can see, we've added a label "Please, login to change party" that is
 conditioned to be shown if `user` is not defined with help of an `ng-if` attribute, and
 will be hidden otherwise. Don't forget to import the `NgIf` dependency in the component.
+
+__`client/parties-form/parties-form.ts`__:
+
+    import {NgIf} from 'angular2/common';
+
 
 # Social Login
 
@@ -183,13 +190,12 @@ There are additional social login services you can use:
 
 Let's imagine now that we allow to see and change party details only for logged-in users.
 An ideal way to implement this would be to restrict redirecting to the party details page when
-someone clicks on a party link. In this case,
-we don't need to check access manually in the party details component itself because the route request is denied early on.
+someone clicks on a party link. In this case, we don't need to check access manually in the party details component itself because the route request is denied early on.
 
 This can be easily done again with help of "barbatus:ng2-meteor-accounts" package
-that has simple `RequireUser` annotation. Just place it above `PartyDetails`
-and you will see that, if a user is not logged-in to the system, she won't be able to access that route.
-Let's add package and then implement restricted access:
+that has a simple `RequireUser` annotation. Just place it above `PartyDetails`
+and you will see if a user is not logged-in to the system, that user won't be able to access the route.
+Let's add the package and then implement restricted access:
 
     meteor add barbatus:ng2-meteor-accounts
 
@@ -197,14 +203,15 @@ Let's add package and then implement restricted access:
 
 Now log out and try to click on any party link. See, links don't work!
 
-But what about more sophisticated access? Say, let's prevent from going into the PartyDetails view for those
+But what about more sophisticated access? Say, let's prevent access into the PartyDetails view for those
 who don't own that particular party.
 
-It's easy implement in Angular 2 as well using `@CanActivate` annotation
+It's easy to implement in Angular 2 as well using [`@CanActivate`](https://angular.io/docs/ts/latest/api/router/CanActivate-decorator.html) annotation
 (BTW, `RequireUser` itself is just a simple inheritor of `@CanActivate`).
-Let's add `checkPermissions` function, where we get the current route's `partyId` parameter
-and check if the corresponding party's owner is the same as currently logged-in user.
-And then pass it in `@CanActivate` attribute:
+
+Let's add a `checkPermissions` function, where we get the current route's `partyId` parameter
+and check if the corresponding party's owner is the same as the currently logged-in user.
+And then pass the partyId into the `@CanActivate` attribute:
 
   __`client/party-details/party-details.ts`__:
 
@@ -228,23 +235,23 @@ And then pass it in `@CanActivate` attribute:
       ...
     }
 
-Now log in, then add new party, log out and click on the party link.
-Nothing happens meaning that access is restricted.
+Now log in, then add a new party, log out and click on the party link.
+Nothing happens meaning that access is restricted to party owners.
 
-> Please note it is possible for someone with malicious intent to override your routing restrictions on the client.
-> You should never restrict access to sensitive data, sensitive areas, using the client router only.
+Please note it is possible for someone with malicious intent to override your routing restrictions on the client.
+You should never restrict access to sensitive data, sensitive areas, using the client router only.
 
-> This is the reason we also made restrictions on the server using the allow/deny functionality, so even if someone gets in they cannot make updates.
-> While this prevents writes from happening from unintended sources, reads can still be an issue.
-> The next step will take care of privacy, not showing users parties they are not allowed to see.
+This is the reason we also made restrictions on the server using the allow/deny functionality, so even if someone gets in they cannot make updates.
+While this prevents writes from happening from unintended sources, reads can still be an issue.
+The next step will take care of privacy, not showing users parties they are not allowed to see.
 
 # Summary
 
-Amazing, only a few lines of code and we have a secure application!
+Amazing, only a few lines of code and we have a much more secure application!
 
 We've added two powerful features to our app:
 
-- "accounts-ui" package that comes with features like user login, logout, registration
+- the "accounts-ui" package that comes with features like user login, logout, registration
   and complete UI supporting them;
 - restricted access to the party details page, with access available for logged-in users only.
 

@@ -66,6 +66,6 @@ You now have a dynamic app that features separate model, view and controller com
 
 But, this is still all client side — which is nice for tutorials, but in a real application we need to persist the data on the server and sync all the clients with it.
 
-So, let's go to [step 3](/tutorial/step_03) to learn how to bind our application to the great power of Meteor.
+So, let's go to [step 3](/tutorials/angular2/3-way-data-binding) to learn how to bind our application to the great power of Meteor.
 
 {{/template}}
