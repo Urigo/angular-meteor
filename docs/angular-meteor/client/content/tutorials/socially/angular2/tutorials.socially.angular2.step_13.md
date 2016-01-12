@@ -10,7 +10,7 @@ In this and next steps we are going to:
 
 We'll start by working on the `PartyDetails` component. Each party owner should be able to invite multiple guests to a party, hence, the user needs to be able to manipulate the data on the party details page.
 
-First of all, we'll need to render a list of all users to invite on the page. Since we've made the app secure during step 8 by removing the _insecure_ package, to get a list of users -- the same as for the parties -- we'll need to create a new publication, and then subscribe to load the user collection.
+First of all, we'll need to render a list of all users to invite on the page. Since we've made the app secure during step 8 by removing the _insecure_ package, to get a list of users — the same as for the parties — we'll need to create a new publication, and then subscribe to load the user collection.
 
 Let's create a new file `server/users.ts` and add a new publication there. We can start by finding all uninvited users, specifically, users who are not invited and not the current user.
 
@@ -25,7 +25,7 @@ Next, import the users publication to be defined on the server during startup:
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="13.2"}}
 
-As you can see above, we've introduced a new party property -- "uninvited", which is going to be an array of all uninvited user IDs.
+As you can see above, we've introduced a new party property — "uninvited", which is going to be an array of all uninvited user IDs.
 
 Don't forget to update your `party.d.ts` declaration file to reflect changes of the Party.
 
@@ -41,7 +41,7 @@ Then, render the uninvited users on the `PartyDetails`'s page:
 
 In the previous section we rendered a list of user emails. In Meteor's [accounts package](http://docs.meteor.com/#/full/accounts_api) an email is considered a primary user ID by default. At the same time, everything is configurable, which means there is way for a user to set a custom username to be identified with during the registration. Considering usernames are more visually appealing than emails, let's render them instead of emails in that list of uninvited users checking if the name is set for each user.
 
-For that purpose we could create a private component method and call it each time in the template to get the right display name, i.e., username or email. Instead, we'll implement a special pipe that handles this, at the same time, we'll learn how to create stateless pipes. One of the advantages of this approach in comparison to class methods is that we can use the same pipe in any component. You are likely familiar with Angular 2 pipes if you read the previous step. If not -- you are welcome to know more about them [here](https://angular.io/docs/ts/latest/guide/pipes.html).
+For that purpose we could create a private component method and call it each time in the template to get the right display name, i.e., username or email. Instead, we'll implement a special pipe that handles this, at the same time, we'll learn how to create stateless pipes. One of the advantages of this approach in comparison to class methods is that we can use the same pipe in any component. You are likely familiar with Angular 2 pipes if you read the previous step. If not — you are welcome to know more about them [here](https://angular.io/docs/ts/latest/guide/pipes.html).
 
 Let's add a new folder "client/lib" and place a new file `pipes.ts`. We'll add our new `displayName` pipe inside of it:
 
@@ -83,7 +83,6 @@ In this step, we learned about:
 - how to implement pipes in Angular 2, and how they differ filters in Angular 1
 - configuring our accounts-ui package
 - some Mongo query operators like `$nin` & `$ne`
-- extending interfaces in TypeScript
 
 In the next step we'll look at using Meteor methods as a way to securely verify client-side data changes on the server.
 
