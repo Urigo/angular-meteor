@@ -265,11 +265,13 @@ Angular interpreted the expression like any other Angular application.
 > Learn [how to disable caching during development](https://developer.chrome.com/devtools/docs/settings) in Chrome.
 
 # Experiments
+
 Try adding a new expression to the `app.html` that will do some math:
 
     <p>1 + 2 = {{dstache}} 1 + 2 }}</p>
 
 # Summary
+
 Let's continue to [step 1](/tutorials/angular2/static-template) and add some content to our application.
 
 {{/template}}

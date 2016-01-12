@@ -1,6 +1,7 @@
 {{#template name="tutorials.socially.angular2.step_13.md"}} {{> downloadPreviousStep stepName="step_12"}}
 
 In this and next steps we are going to:
+
 - add party invitations;
 - filter data with Angular2 pipes
 - learn about Meteor methods
@@ -26,15 +27,7 @@ Next, import the users publication to be defined on the server during startup:
 
 As you can see above, we've introduced a new party property -- "uninvited", which is going to be an array of all uninvited user IDs.
 
-Don't forget to update your `party.d.ts` declaration file to reflect changes of the User type. You can do this by [extending](http://www.typescriptlang.org/Handbook#interfaces-extending-interfaces) the "ng2-meteor-accounts" interface and specifying the property `invited` should be an [array type](http://www.typescriptlang.org/Handbook#basic-types-array) `[]` of `string`.
-
-**\typings\party.d.ts**:
-
-```ts
-interface User extends ngMeteorAccounts.AccountDetails {
-  invited: string[];
-}
-```
+Don't forget to update your `party.d.ts` declaration file to reflect changes of the Party.
 
 Now, let's load the uninvited users of a particular party into the `PartyDetails` component:
 

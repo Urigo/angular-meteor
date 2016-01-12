@@ -117,9 +117,10 @@ __`client/app.ts`:__
     bootstrap(Socially);
 
 
-Every change that happens to the `this.parties` variable will automatically be saved to the local client-side minimongo DB and synced to the server-side MongoDB and all the other clients in realtime!
+Every change that happens to the `this.parties` variable will automatically be saved to the local client-side Minimongo DB and synced to the server-side MongoDB and all the other clients in realtime!
 
-# Initializing a Collection on Server Side
+# Initializing a Collection on the Server
+
 One thing is left before we can start manipulating data and be able to check if changes are reactive.
 
 We need to initialize the `Parties` collection for the server side. Since our collection file
