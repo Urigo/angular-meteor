@@ -129,9 +129,36 @@ Now, let's go to any of the `.ts` files and check if all that annoying redness h
 
 > Note: you may need to reload you IDE to pick up the latest changes to the config.
 
-Please note, since the Meteor environment is quite specific, some of the tsconfig options won't make sense in Meteor. You can read about the exceptions [here](https://github.com/barbatus/typescript#compiler-options).
+Please note, since the Meteor environment is quite specific, some of the `tsconfig.json` options won't make sense in Meteor. You can read about the exceptions [here](https://github.com/barbatus/typescript#compiler-options).
 TypeScript compiler of this package supports some additional options that might be useful in the Meteor environment.
 They can be included in the "meteorCompilerOptions" section of _tsconfig.json_ and described [here](https://github.com/barbatus/ts-compilers#typescript-config).
+
+### IDE Specific Configurations
+
+##### Atom
+
+If you are using [Atom](atom.io) as your editor with the [Atom-TypeScript plugin](https://github.com/TypeStrong/atom-typescript), use the following configuration to automatically generate your `tsconfig.json` file:
+
+```js
+{
+ "atom": {
+    "rewriteTsconfig": true
+  },
+  "compileOnSave": false,
+  "buildOnSave": false,
+  "compilerOptions": {
+    "target": "es5",
+    "module": "system",
+    "moduleResolution": "classic",
+    "experimentalDecorators": true
+  },
+  "filesGlob": [
+    "**/*.ts"
+  ],
+  "files": [],
+}
+```
+
 
 # Summary
 
