@@ -215,7 +215,7 @@ Until now we've been inserting party documents to our collection using the Mongo
 It would be convenient though to have some initial data pre-loaded into our database. So,
 let's initialize our server with the same parties as we had before.
 
-Let's add a file called `load_parties.ts` inside of "server" folder
+Let's add a file called `load-parties.ts` inside of "server" folder
 and implement `loadParties` method inside to load parties:
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="3.7"}}
