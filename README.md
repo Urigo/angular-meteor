@@ -17,9 +17,7 @@ Angular2 + Meteor integration.
 
 ## Change Log
 
-* v0.3.2: Angular 2 upgraded to the first beta version. 
-* v0.3.0: Angular 2 seems to be on the finish line to a beta version. In the latest releases (alpha-50 and up) there appeared some **breaking** changes:
- `angular2/angular2` namespace were divided into some new ones, mainly, `angular2/core`, `angular2/common`; also the dash symbol were removed in the selectors of the main directives, i.e., instead of `ng-if` you should use `ngIf` now. For more information about the latest API, please, refer to the official [docs](https://angular.io/docs/ts/latest/api). To get new definition files, you'll need to remove `typings\angular2` folder and `typings\angular2.d.ts` file.
+Find out change log of the package [here](CHANGELOG.md).
 
 ## Tutorial
 
