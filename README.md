@@ -175,19 +175,7 @@ updated package and started getting errors in the console, remove "angular2" fol
 
 ## Roadmap
 
-A preliminary version of the package roadmap might look like this:
-
-- 0.4v Remove direct referencing of the declaration files and further TypeScript improvements;
-- 0.4.5v Update Babel support (including a Babel demo);
-- 0.5v Blaze templates->Angular 2 components transition path;
-- 0.6v With upcoming Meteor 1.3, make direct use of the Angular 2 NPM, deprecate Angular 2 package
-  and replace SystemJS with CommonJS;
-- 0.7v Meteor-aware routing (e.g. FastRender support);
-- 0.8v GraphQL support;
-- 0.9v Implement various auxiliary but potentially useful in Meteor features, for example, [template transforms for Minimongo queries] (https://github.com/Urigo/angular2-meteor/issues/21), custom template exceptions handling (similar to the Blaze's one), support of the reactive variables in the templates etc;
-- 1.0v Increase test coverage, fixes of the important issues on the way to the first release.
-
-It's subject to change, since we are still figuring out best patterns and features of the integration that might become popular in the future.
+You can find out the package's roadmap and its status [here](https://trello.com/b/kSa6JNCk/angular2-tutorial).
 
 ## Contribution
 If you know how to make integration of Angular 2 and Meteor better, you are welcome!
