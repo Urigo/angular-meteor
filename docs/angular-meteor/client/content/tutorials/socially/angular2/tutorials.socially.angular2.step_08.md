@@ -21,7 +21,7 @@ The first thing we should do is to remove the "insecure" package. By removing th
 Execute this command in the command line:
 
     meteor remove insecure
-    > insecure  removed from your project
+    > insecure removed from your project
 
 Let's try to change the parties array or a specific party. Nothing's working.
 
@@ -142,7 +142,9 @@ __`client/parties-form/parties-form.ts`__:
       ...
     }
 
-> Note: You'll have to extend `MeteorComponent` to make the user property reactive. We'll learn more about MeteorComponent later in this tutorial.
+> Notice that you have to extend `PartiesForm` with `MeteorComponent` to make the user property reactive.
+> That's because this class adds a few Meteor specific methods to a child inheritor, used to implement reactivity (as above) or Meteor's pub/sub data transfer.
+> We'll learn more about MeteorComponent later on the next step, where we'll be subscribing to server publications.
 
 Call `this.user` and you will see that it returns the same object as `Meteor.user()`.
 The new property is reactive and can be used in any template, for example:
@@ -150,18 +152,13 @@ The new property is reactive and can be used in any template, for example:
 __`client/parties-form/parties-form.html`__:
 
     <div *ngIf="!user">Please, log in to change party</div>
-    <form [ng-form-model]="partiesForm" #f="form" (submit)="addParty(f.value)">
+    <form [ngFormModel]="partiesForm" #f="form" (submit)="addParty(f.value)">
       ...
     </form>
 
 As you can see, we've added a label "Please, login to change party" that is
-conditioned to be shown if `user` is not defined with help of an `ng-if` attribute, and
-will be hidden otherwise. Don't forget to import the `NgIf` dependency in the component.
-
-__`client/parties-form/parties-form.ts`__:
-
-    import {NgIf} from 'angular2/common';
-
+conditioned to be shown if `user` is not defined with help of an `ngIf` attribute, and
+will be hidden otherwise.
 
 # Social Login
 
