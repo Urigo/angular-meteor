@@ -13,6 +13,11 @@ Package.onUse(function(api) {
     'barbatus:angular2@0.7.4_5'
   ]);
 
+  // Installs typings.
+  api.addFiles([
+    'typings/ng2-google-maps/ng2-google-maps.d.ts'
+  ], 'server');
+
   api.addFiles([
     // Directives.
     'angular2-google-maps/src/directives/google-map-marker.ts',
