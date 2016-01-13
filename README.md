@@ -17,7 +17,7 @@ Angular2 + Meteor integration.
 
 ## Change Log
 
-Find out change log of the package [here](CHANGELOG.md).
+Check out change log of the package [here](CHANGELOG.md).
 
 ## Tutorial
 
@@ -173,7 +173,7 @@ updated package and started getting errors in the console, remove "angular2" fol
 
 ## Roadmap
 
-You can find out the package's roadmap and its status [here](https://trello.com/b/kSa6JNCk/angular2-tutorial).
+You can check out the package's roadmap and its status [here](https://trello.com/b/kSa6JNCk/angular2-tutorial).
 
 ## Contribution
 If you know how to make integration of Angular 2 and Meteor better, you are welcome!
