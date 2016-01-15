@@ -65,7 +65,8 @@ Package.onTest(function(api) {
   ], 'client');
 
   api.addFiles([
-    'tests/integration/auth.spec.js',
-    'tests/test_collections.js'
+    'tests/test_mocks.js',
+    'tests/test_collections.js',
+    'tests/integration/auth.spec.js'
   ], 'client');
 });
