@@ -26,8 +26,9 @@ makes an element hidden. With the presence of the `hidden` attribute and direct 
 binding, it seems there is no further need for attribute directives like `ng-hide`.
 There is one exception, though.
 
-> The DOM property `hidden` is rather new, and not supported by older versions of Internet Explorer (<11).
-If you need to support older browsers, you must implement a new directive attribute similar to the `ng-hide` yourself or make use of an already existing directive. There are sure to be solutions in the future.
+> The DOM property `hidden` is rather new, and not supported by older versions of Internet Explorer (less than 11).
+> If you need to support older browsers, you must implement a new directive attribute similar to the `ng-hide`
+> yourself or make use of an already existing directive. There are sure to be solutions in the future.
 
 A user who hasn't logged-in does not have all the same permissions; we can hide functionality that anonymous users cannot access such as the "add party" form and the "remove" button for each party in the parties list.
 
@@ -47,14 +48,12 @@ Then, change the template to use the `hidden` attribute:
 
 Now run the app. Make sure you have added _barbatus:ng2-meteor-accounts_ for it to work.
 
-The "add party" form and "remove" buttons
-should disappear if you are not logged-in. Try to log in: everything should be visible again.
+The "add party" form and "remove" buttons should disappear if you are not logged-in. Try to log in: everything should be visible again.
 
 > Note: CSS's `display` property has priority over the `hidden` property.
 > If one of the CSS classes of any element has this property set,
 > `hidden` gets over-ruled. In this case, you'll have to wrap the element into
-> a container element such as a <div> and assign CSS classes
-> with the "display" on that parent container.
+> a container element such as a <div> and assign CSS classes with the "display" on that parent container.
 
 ### [disabled]
 
