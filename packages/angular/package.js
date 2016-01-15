@@ -12,6 +12,6 @@ Package.onUse(function (api) {
   api.imply([
     'angular-meteor-data@0.0.9',
     'angular-templates@0.0.3',
-    'pbastowski:angular-babel@1.0.8'
+    'pbastowski:angular-babel@1.0.9'
   ])
 });
