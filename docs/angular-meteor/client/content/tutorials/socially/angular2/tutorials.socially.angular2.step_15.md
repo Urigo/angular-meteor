@@ -53,7 +53,7 @@ The "add party" form and "remove" buttons should disappear if you are not logged
 > Note: CSS's `display` property has priority over the `hidden` property.
 > If one of the CSS classes of any element has this property set,
 > `hidden` gets over-ruled. In this case, you'll have to wrap the element into
-> a container element such as a <div> and assign CSS classes with the "display" on that parent container.
+> a container element such as a `<div>` and assign CSS classes with the "display" on that parent container.
 
 ### [disabled]
 
