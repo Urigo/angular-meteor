@@ -5,5 +5,5 @@ It will create in the dist folder:
   * `angular-meteor.bundle.js`, `angular-meteor.bundle.min.js` 
   * `angular-meteor-auth.bundle.js`, `angular-meteor-auth.bundle.min.js` 
 
-and you can run seperatly `./angular-meteor-data-bundle-min.sh` or `./angular-meteor-auth-bundle-min.sh`
+and you can run separately `./angular-meteor-data-bundle-min.sh` or `./angular-meteor-auth-bundle-min.sh`
 

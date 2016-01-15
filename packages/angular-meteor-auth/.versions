@@ -1,7 +1,7 @@
 accounts-base@1.2.2
 accounts-ui@1.1.6
 accounts-ui-unstyled@1.1.8
-angular-meteor-auth@0.0.2
+angular-meteor-auth@0.1.0
 angular-meteor-data@0.0.9
 angular:angular@1.4.8
 angular:angular-mocks@1.4.8
@@ -37,7 +37,7 @@ insecure@1.0.4
 jquery@1.11.4
 lai:collection-extensions@0.1.4
 less@2.5.1
-local-test:angular-meteor-auth@0.0.2
+local-test:angular-meteor-auth@0.1.0
 localstorage@1.0.5
 logging@1.0.8
 meteor@1.1.10

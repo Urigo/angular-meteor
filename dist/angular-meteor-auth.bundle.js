@@ -37,14 +37,14 @@ var Promise = Package.promise.Promise;
 
 (function(){
 
-//////////////////////////////////////////////////////////////////////////////
-//                                                                          //
-// packages/angular-meteor-auth/angular-meteor-auth.js                      //
-//                                                                          //
-//////////////////////////////////////////////////////////////////////////////
-                                                                            //
-angular.module('angular-meteor.auth', ['angular-meteor']);                  // 1
-//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                      //
+// packages/angular-meteor-auth/angular-meteor-auth.js                                                  //
+//                                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                        //
+angular.module('angular-meteor.auth', ['angular-meteor']);                                              // 1
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }).call(this);
 
@@ -55,115 +55,87 @@ angular.module('angular-meteor.auth', ['angular-meteor']);                  // 1
 
 (function(){
 
-//////////////////////////////////////////////////////////////////////////////
-//                                                                          //
-// packages/angular-meteor-auth/modules/auth.js                             //
-//                                                                          //
-//////////////////////////////////////////////////////////////////////////////
-                                                                            //
-angular.module('angular-meteor.auth').service('$auth', ['$q', '$rootScope', '$timeout', function ($q, $rootScope, $timeout) {
-  var AngularMeteorAuthentication = (function () {                          //
-    function AngularMeteorAuthentication() {                                // 5
-      babelHelpers.classCallCheck(this, AngularMeteorAuthentication);       //
-                                                                            //
-      this.accountsPackage = Package['accounts-base'];                      // 6
-                                                                            //
-      if (!this.accountsPackage) {                                          // 8
-        throw new Error('Oops, looks like Accounts-base package is missing! Please add it by running: meteor add accounts-base ');
-      }                                                                     //
-    }                                                                       //
-                                                                            //
-    AngularMeteorAuthentication.prototype._autorun = (function () {         // 4
-      function _autorun(fn) {                                               // 13
-        var comp = Tracker.autorun(function (c) {                           // 14
-          fn(c);                                                            // 15
-          if (!c.firstRun) $timeout(angular.noop, 0);                       // 16
-        });                                                                 //
-                                                                            //
-        $rootScope.$on('$destroy', function () {                            // 19
-          comp.stop();                                                      // 20
-        });                                                                 //
-                                                                            //
-        return comp;                                                        // 23
-      }                                                                     //
-                                                                            //
-      return _autorun;                                                      //
-    })();                                                                   //
-                                                                            //
-    AngularMeteorAuthentication.prototype.waitForUser = (function () {      // 4
-      function waitForUser() {                                              // 26
-        var deferred = $q.defer();                                          // 27
-                                                                            //
-        this._autorun(function () {                                         // 29
-          if (!Meteor.loggingIn()) {                                        // 30
-            deferred.resolve(Meteor.user());                                // 31
-          }                                                                 //
-        });                                                                 //
-                                                                            //
-        return deferred.promise;                                            // 35
-      }                                                                     //
-                                                                            //
-      return waitForUser;                                                   //
-    })();                                                                   //
-                                                                            //
-    AngularMeteorAuthentication.prototype.requireUser = (function () {      // 4
-      function requireUser() {                                              // 38
-        var deferred = $q.defer();                                          // 39
-                                                                            //
-        this._autorun(function () {                                         // 41
-          if (!Meteor.loggingIn()) {                                        // 42
-            if (Meteor.user() == null) {                                    // 43
-              deferred.reject("AUTH_REQUIRED");                             // 44
-            } else {                                                        //
-              deferred.resolve(Meteor.user());                              // 47
-            }                                                               //
-          }                                                                 //
-        });                                                                 //
-                                                                            //
-        return deferred.promise;                                            // 52
-      }                                                                     //
-                                                                            //
-      return requireUser;                                                   //
-    })();                                                                   //
-                                                                            //
-    AngularMeteorAuthentication.prototype.requireValidUser = (function () {
-      function requireValidUser(validatorFn) {                              // 55
-        validatorFn = validatorFn || angular.noop;                          // 56
-                                                                            //
-        return this.requireUser().then(function (user) {                    // 58
-          var valid = validatorFn(user);                                    // 59
-                                                                            //
-          if (valid === true) {                                             // 61
-            return user;                                                    // 62
-          } else if (angular.isString(valid)) {                             //
-            return $q.reject(valid);                                        // 65
-          } else {                                                          //
-            return $q.reject("FORBIDDEN");                                  // 68
-          }                                                                 //
-        });                                                                 //
-      }                                                                     //
-                                                                            //
-      return requireValidUser;                                              //
-    })();                                                                   //
-                                                                            //
-    return AngularMeteorAuthentication;                                     //
-  })();                                                                     //
-                                                                            //
-  var instance = new AngularMeteorAuthentication();                         // 74
-                                                                            //
-  angular.extend(this, Object.getPrototypeOf(instance));                    // 76
-}]).run(['$auth', '$rootScope', function ($auth, $rootScope) {              //
-  $auth._autorun(function () {                                              // 79
-    if (!Meteor.user) return;                                               // 80
-                                                                            //
-    Object.getPrototypeOf($rootScope).$auth = {                             // 82
-      currentUser: Meteor.user(),                                           // 83
-      currentUserId: Meteor.userId(),                                       // 84
-      loggingIn: Meteor.loggingIn()                                         // 85
-    };                                                                      //
-  });                                                                       //
-}]);                                                                        //
-//////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                      //
+// packages/angular-meteor-auth/modules/auth.js                                                         //
+//                                                                                                      //
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                        //
+angular.module('angular-meteor.auth').service('$auth', ['$rootScope', '$q', function ($rootScope, $q) {
+  var _this = this;                                                                                     //
+                                                                                                        //
+  if (!Package['accounts-base']) throw Error('Oops, looks like Accounts-base package is missing!' + 'Please add it by running: meteor add accounts-base');
+                                                                                                        //
+  this.waitForUser = function () {                                                                      // 15
+    var deferred = $q.defer();                                                                          // 16
+                                                                                                        //
+    var promise = deferred.promise['finally'](function () {                                             // 18
+      $rootScope._throttledDigest();                                                                    // 19
+    });                                                                                                 //
+                                                                                                        //
+    var c = Meteor.autorun(function (c) {                                                               // 22
+      if (Meteor.loggingIn()) return;                                                                   // 23
+                                                                                                        //
+      c.stop();                                                                                         // 25
+      deferred.resolve(Meteor.user());                                                                  // 26
+      $rootScope._throttledDigest();                                                                    // 27
+    });                                                                                                 //
+                                                                                                        //
+    promise.stop = c.stop.bind(c);                                                                      // 30
+    return promise;                                                                                     // 31
+  };                                                                                                    //
+                                                                                                        //
+  this.requireUser = function (c) {                                                                     // 34
+    var waiting = _this.waitForUser();                                                                  // 35
+                                                                                                        //
+    var promise = waiting.then(function (currentUser) {                                                 // 37
+      if (currentUser) return $q.resolve(currentUser);                                                  // 38
+                                                                                                        //
+      return $q.reject('AUTH_REQUIRED');                                                                // 41
+    });                                                                                                 //
+                                                                                                        //
+    promise.stop = waiting.stop;                                                                        // 44
+    return promise;                                                                                     // 45
+  };                                                                                                    //
+                                                                                                        //
+  this.requireValidUser = function () {                                                                 // 48
+    var validate = arguments.length <= 0 || arguments[0] === undefined ? angular.noop : arguments[0];   //
+                                                                                                        //
+    if (!_.isFunction(validate)) throw Error('argument 1 must be a function');                          // 49
+                                                                                                        //
+    var requiring = _this.requireUser();                                                                // 52
+                                                                                                        //
+    var promise = requiring.then(function (user) {                                                      // 54
+      if (user === 'AUTH_REQUIRED') return $q.reject(user);                                             // 55
+                                                                                                        //
+      var isValid = validate(user);                                                                     // 58
+                                                                                                        //
+      if (isValid === true) return $q.resolve(user);                                                    // 60
+                                                                                                        //
+      isValid = _.isString(isValid) ? isValid : "FORBIDDEN";                                            // 63
+      return $q.reject(isValid);                                                                        // 64
+    });                                                                                                 //
+                                                                                                        //
+    promise.stop = requiring.stop;                                                                      // 67
+    return promise;                                                                                     // 68
+  };                                                                                                    //
+                                                                                                        //
+  this.getUserInfo = function () {                                                                      // 71
+    return {                                                                                            // 72
+      currentUser: Meteor.user(),                                                                       // 73
+      currentUserId: Meteor.userId(),                                                                   // 74
+      loggingIn: Meteor.loggingIn()                                                                     // 75
+    };                                                                                                  //
+  };                                                                                                    //
+}]).run(['$rootScope', '$auth', '$reactive', function ($rootScope, $auth, Reactive) {                   //
+  Tracker.autorun(function () {                                                                         // 87
+    var scopeProto = Object.getPrototypeOf($rootScope);                                                 // 88
+    var userInfo = $auth.getUserInfo();                                                                 // 89
+    _.extend(scopeProto, { $auth: userInfo });                                                          // 90
+    _.extend(Reactive, { auth: userInfo });                                                             // 91
+  });                                                                                                   //
+}]);                                                                                                    //
+//////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }).call(this);
 
