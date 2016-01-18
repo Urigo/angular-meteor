@@ -1,4 +1,6 @@
-Meteor.users.allow({
+DummyCollection = new Meteor.Collection(null);
+
+DummyCollection.allow({
   remove: function() {
     return true;
   },

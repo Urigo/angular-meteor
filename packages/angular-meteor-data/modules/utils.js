@@ -1,8 +1,8 @@
-angular.module('angular-meteor.reactive-utils', [])
+angular.module('angular-meteor.utils', [])
 
 
-.service('$$ReactiveUtils', [
-  '$rootScope', 
+.service('$$utils', [
+  '$rootScope',
 
 function($rootScope) {
   this.isCursor = (obj) => {
@@ -10,8 +10,7 @@ function($rootScope) {
   };
 
   this.isScope = (obj) => {
-    let Scope = Object.getPrototypeOf($rootScope).constructor;
-    return obj instanceof Scope;
+    return obj instanceof $rootScope.constructor;
   };
 
   this.areSiblings = (obj1, obj2) => {
