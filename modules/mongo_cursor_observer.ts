@@ -60,18 +60,18 @@ export class MongoCursorObserver {
     return this._lastChanges;
   }
 
-   /**
-    * Subcribes to the Mongo cursor changes.
-    *
-    * Since it's possible that some changes that been already collected
-    * before the moment someone subscribes to the observer,
-    * we emit these changes, but only to the first ever subscriber.
-    */
+  /**
+   * Subcribes to the Mongo cursor changes.
+   *
+   * Since it's possible that some changes that been already collected
+   * before the moment someone subscribes to the observer,
+   * we emit these changes, but only to the first ever subscriber.
+   */
   subscribe({next, error, complete}) {
     let subscription = new Subscription(next, error, complete);
     this._subs.push(subscription);
 
-    // If no subscriber has subscribed ever. 
+    // If no subscriber has subscribed ever.
     if (!this._isSubscribed) {
       this._isSubscribed = true;
 

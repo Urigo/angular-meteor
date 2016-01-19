@@ -1,12 +1,13 @@
 /// <reference path="../typings/angular2-meteor.d.ts" />
+/// <reference path="../typings/angular2.d.ts" />
 
 'use strict';
 
 import {ChangeDetectorRef} from 'angular2/core';
 
-import {DefaultIterableDifferFactory, CollectionChangeRecord} from 'angular2/change_detection';
+import {DefaultIterableDifferFactory, CollectionChangeRecord} from 'angular2/src/core/change_detection/differs/default_iterable_differ';
 
-import {ObservableWrapper} from 'angular2/facade';
+import {ObservableWrapper} from 'angular2/src/facade/async';
 
 import {MongoCursorObserver, AddChange, MoveChange, RemoveChange} from './mongo_cursor_observer';
 
@@ -27,7 +28,7 @@ export class MongoCursorDifferFactory extends DefaultIterableDifferFactory {
   supports(obj: Object): boolean { return obj instanceof Mongo.Cursor; }
 
   create(cdRef: ChangeDetectorRef): MongoCursorDiffer {
-      return new MongoCursorDiffer(cdRef, new MongoCursorObserverFactory());
+    return new MongoCursorDiffer(cdRef, new MongoCursorObserverFactory());
   }
 }
 
@@ -74,9 +75,9 @@ export class MongoCursorDiffer {
       this._cursor = cursor;
       this._curObserver = <MongoCursorObserver>this._obsFactory.create(cursor);
       this._subscription = ObservableWrapper.subscribe(this._curObserver,
-        zone.bind(changes => {
-          this._updateLatestValue(changes);
-        }));
+          zone.bind(changes => {
+            this._updateLatestValue(changes);
+          }));
     }
 
     if (this._lastChanges) {
@@ -131,7 +132,7 @@ export class MongoCursorDiffer {
   _applyCleanup() {
     for (let index = 0; index < this._listSize; index++) {
       this._removed.push(this._createChangeRecord(
-        null, index, null));
+          null, index, null));
     }
     this._listSize = 0;
   }
@@ -140,18 +141,18 @@ export class MongoCursorDiffer {
     for (let i = 0; i < changes.length; i++) {
       if (changes[i] instanceof AddChange) {
         this._inserted.push(this._createChangeRecord(
-          changes[i].index, null, changes[i].item));
+            changes[i].index, null, changes[i].item));
         this._listSize++;
       }
 
       if (changes[i] instanceof MoveChange) {
         this._moved.push(this._createChangeRecord(
-          changes[i].toIndex, changes[i].fromIndex, changes[i].item));
+            changes[i].toIndex, changes[i].fromIndex, changes[i].item));
       }
 
       if (changes[i] instanceof RemoveChange) {
         this._removed.push(this._createChangeRecord(
-          null, changes[i].index, changes[i].item));
+            null, changes[i].index, changes[i].item));
         this._listSize--;
       }
     }
