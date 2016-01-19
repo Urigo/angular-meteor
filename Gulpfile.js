@@ -12,7 +12,7 @@ gulp.task('build', function () {
       typescript: require('typescript'),
       emitDecoratorMetadata: true
     }))
-    .pipe(gulp.dest('./build/'));
+    .pipe(gulp.dest('./'));
 });
 
 gulp.task('default', ['build']);

@@ -5,7 +5,8 @@
   "author": "Angular2-Meteor (https://github.com/Urigo/angular2-meteor)",
   "license": "ISC",
   "scripts": {
-    "pre"
+    "postinstall": "tsd reinstall --overwrite --clean",
+    "build": "gulp build"
   },
   "dependencies": {
     "angular2": "2.0.0-beta.1",
@@ -15,6 +16,7 @@
     "gulp-typescript": "^2.10.0",
     "reflect-metadata": "^0.1.2",
     "rxjs": "^5.0.0-beta.0",
+    "tsd": "^0.6.5",
     "typescript": "^1.7.5",
     "zone.js": "^0.5.10"
   }
