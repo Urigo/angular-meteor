@@ -6,7 +6,7 @@
   "license": "ISC",
   "scripts": {
     "postinstall": "tsd reinstall --overwrite --clean",
-    "build": "gulp build"
+    "install": "gulp build"
   },
   "dependencies": {
     "angular2": "2.0.0-beta.1",
