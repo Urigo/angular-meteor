@@ -1,9 +1,12 @@
 {
-  "name": "angular2-meteor-data",
+  "name": "angular2-meteor",
   "version": "0.3.3",
-  "description": "",
-  "author": "Dotan Simha <dotansimha@gmail.com> (http://github.com/dotansimha/)",
+  "description": "Angular 2.0 and Meteor - the perfect stack http://www.angular-meteor.com/",
+  "author": "Angular2-Meteor (https://github.com/Urigo/angular2-meteor)",
   "license": "ISC",
+  "scripts": {
+    "pre"
+  },
   "dependencies": {
     "angular2": "2.0.0-beta.1",
     "es6-promise": "^3.0.2",
