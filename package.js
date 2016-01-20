@@ -30,7 +30,7 @@ Package.onUse(function(api) {
     'mongo@1.1.1',
     'tracker@1.0.8',
     'underscore@1.0.4',
-    'barbatus:angular2@0.7.5'
+    'barbatus:angular2@0.8.0'
   ]);
 
   api.imply([

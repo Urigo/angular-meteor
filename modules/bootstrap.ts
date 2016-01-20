@@ -4,27 +4,29 @@
 
 import {provide, Type, Provider, IterableDiffers} from 'angular2/core';
 
-import { bootstrap as ng2Bootstrap } from 'angular2/bootstrap';
+import { bootstrap as ng2Bootstrap } from 'angular2/platform/browser';
 
-import {defaultIterableDiffers} from 'angular2/change_detection';
+import {defaultIterableDiffers} from 'angular2/src/core/change_detection/change_detection';
 
 import {MongoCursorDifferFactory} from './mongo_cursor_differ';
 
-export function bootstrap(appComponentType: any,
-                          providers: Array<Type | Provider | any[]> = null) {
-  let newProviders = [];
+function meteorProviders() {
+  let providers = [];
+
   let factories = defaultIterableDiffers.factories;
   if (factories) {
     factories.push(new MongoCursorDifferFactory());
   }
-
-  newProviders.push(provide(IterableDiffers, {
+  providers.push(provide(IterableDiffers, {
     useValue: new IterableDiffers(factories)
   }));
 
-  if (providers) {
-    newProviders.push(providers);
-  }
+  return providers;
+}
 
-  ng2Bootstrap(appComponentType, newProviders);
+export const METEOR_PROVIDERS = meteorProviders();
+
+export function bootstrap(appComponentType: any,
+                          providers: Array<Type | Provider | any[]> = null) {
+  ng2Bootstrap(appComponentType, [].concat(METEOR_PROVIDERS, providers || []));
 }
