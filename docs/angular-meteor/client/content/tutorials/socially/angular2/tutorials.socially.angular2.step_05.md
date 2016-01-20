@@ -6,7 +6,7 @@ In this step, you will learn:
 -  how to create a layout template
 -  how to build an app that has multiple views with the new Angular router.
 
-The goal for this step is to add one more page to the app that shows the details of the selected app.
+The goal for this step is to add one more page to the app that shows the details of the selected party.
 
 By default we have a list of parties shown on the page, but when a user clicks on a list item, the app should navigate to the new page and show selected party details.
 
