@@ -4,12 +4,10 @@
 'use strict';
 
 import {ChangeDetectorRef} from 'angular2/core';
-
 import {DefaultIterableDifferFactory, CollectionChangeRecord} from 'angular2/src/core/change_detection/differs/default_iterable_differ';
-
 import {ObservableWrapper} from 'angular2/src/facade/async';
-
 import {MongoCursorObserver, AddChange, MoveChange, RemoveChange} from './mongo_cursor_observer';
+import 'zone.js/dist/zone';
 
 export interface ObserverFactory {
   create(cursor: Object): Object;
