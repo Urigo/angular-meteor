@@ -5,7 +5,6 @@
   "author": "Angular2-Meteor (https://github.com/Urigo/angular2-meteor)",
   "license": "ISC",
   "scripts": {
-    "postinstall": "tsd reinstall --overwrite --clean",
     "install": "./node_modules/.bin/gulp build && cp modules/* ."
   },
   "dependencies": {

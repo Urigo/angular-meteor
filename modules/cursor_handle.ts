@@ -1,7 +1,3 @@
-/// <reference path="../typings/angular2-meteor.d.ts" />
-
-'use strict';
-
 export class CursorHandle {
   private _cursor: Mongo.Cursor<any>;
   private _hAutoNotify: Tracker.Computation;

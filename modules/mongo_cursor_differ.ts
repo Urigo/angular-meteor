@@ -1,8 +1,5 @@
-/// <reference path="../typings/angular2-meteor.d.ts" />
-/// <reference path="../typings/angular2/angular2.d.ts" />
+/// <reference path="../typings/meteor/meteor.d.ts" />
 /// <reference path="../typings/zone/zone.d.ts" />
-
-'use strict';
 
 import {ChangeDetectorRef, IterableDifferFactory} from 'angular2/core';
 import {CollectionChangeRecord} from 'angular2/src/core/change_detection/differs/default_iterable_differ';

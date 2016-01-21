@@ -1,9 +1,4 @@
-/// <reference path="../typings/angular2-meteor.d.ts" />
-
-'use strict';
-
 import {EventEmitter} from 'angular2/core';
-
 import {CursorHandle} from './cursor_handle';
 
 export class AddChange {

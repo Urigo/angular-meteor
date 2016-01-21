@@ -9,10 +9,11 @@
     "emitDecoratorMetadata": true,
     "sourceMap": true
   },
-  "files": [
-    "typings/angular2-meteor.d.ts"
+  "filesGlob": [
+    "modules/**/*.ts"
   ],
-  "exclude": [
-    "node_modules"
+  "typings": [
+    "typings/angular2-meteor.d.ts",
+    "typings/meteor/meteor.d.ts"
   ]
 }

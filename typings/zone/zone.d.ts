@@ -1,5 +1,3 @@
-/// <reference path="../es6-shim/es6-shim.d.ts" />
-
 declare class Zone {
     constructor(parentZone: Zone, data: any);
 
