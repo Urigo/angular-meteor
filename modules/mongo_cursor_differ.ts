@@ -77,7 +77,7 @@ export class MongoCursorDiffer {
       this._cursor = cursor;
       this._curObserver = <MongoCursorObserver>this._obsFactory.create(cursor);
       this._subscription = ObservableWrapper.subscribe(this._curObserver,
-          Zone.bind(changes => {
+          zone.bind(changes => {
             this._updateLatestValue(changes);
           }));
     }
