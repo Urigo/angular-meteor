@@ -152,7 +152,7 @@ Now we can take the form and print it inside the template:
 
     <form [ngFormModel]="partiesForm" #f="ngForm">
         ...
-        {{f.value}}
+        {{|f.value}}
     </form>
 
 you'll see something like:
