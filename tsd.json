@@ -11,9 +11,6 @@
     "underscore/underscore.d.ts": {
       "commit": "93bae1bb4c887c1375a4c1f0c3bb849ff06b8ac6"
     },
-    "angular2/angular2.d.ts": {
-      "commit": "93bae1bb4c887c1375a4c1f0c3bb849ff06b8ac6"
-    },
     "es6-promise/es6-promise.d.ts": {
       "commit": "93bae1bb4c887c1375a4c1f0c3bb849ff06b8ac6"
     },

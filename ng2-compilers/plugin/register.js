@@ -6,4 +6,4 @@ Plugin.registerCompiler({
 
 Plugin.registerCompiler({
   extensions: ['ts']
-}, () => new TsBatchCompiler());
+}, () => new TsCompiler());

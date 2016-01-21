@@ -1,10 +1,11 @@
 /// <reference path="../typings/angular2-meteor.d.ts" />
-/// <reference path="../typings/angular2.d.ts" />
+/// <reference path="../typings/angular2/angular2.d.ts" />
+/// <reference path="../typings/zone/zone.d.ts" />
 
 'use strict';
 
-import {ChangeDetectorRef} from 'angular2/core';
-import {DefaultIterableDifferFactory, CollectionChangeRecord} from 'angular2/src/core/change_detection/differs/default_iterable_differ';
+import {ChangeDetectorRef, IterableDifferFactory} from 'angular2/core';
+import {CollectionChangeRecord} from 'angular2/src/core/change_detection/differs/default_iterable_differ';
 import {ObservableWrapper} from 'angular2/src/facade/async';
 import {MongoCursorObserver, AddChange, MoveChange, RemoveChange} from './mongo_cursor_observer';
 import 'zone.js/dist/zone';
@@ -18,12 +19,15 @@ class MongoCursorObserverFactory implements ObserverFactory {
     if (cursor instanceof Mongo.Cursor) {
       return new MongoCursorObserver(cursor);
     }
+
     return null;
   }
 }
 
-export class MongoCursorDifferFactory extends DefaultIterableDifferFactory {
-  supports(obj: Object): boolean { return obj instanceof Mongo.Cursor; }
+export class MongoCursorDifferFactory implements IterableDifferFactory {
+  supports(obj: Object): boolean {
+    return obj instanceof Mongo.Cursor;
+  }
 
   create(cdRef: ChangeDetectorRef): MongoCursorDiffer {
     return new MongoCursorDiffer(cdRef, new MongoCursorObserverFactory());
@@ -73,7 +77,7 @@ export class MongoCursorDiffer {
       this._cursor = cursor;
       this._curObserver = <MongoCursorObserver>this._obsFactory.create(cursor);
       this._subscription = ObservableWrapper.subscribe(this._curObserver,
-          zone.bind(changes => {
+          Zone.bind(changes => {
             this._updateLatestValue(changes);
           }));
     }

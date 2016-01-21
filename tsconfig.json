@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "module": "system",
+    "target": "es5",
+    "noImplicitAny": false,
+    "suppressImplicitAnyIndexErrors": true,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "sourceMap": true
+  },
+  "files": [
+    "typings/angular2-meteor.d.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
