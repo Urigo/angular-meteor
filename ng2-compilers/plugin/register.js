@@ -5,5 +5,5 @@ Plugin.registerCompiler({
 }, () => new HtmlCompiler('<app></app>'));
 
 Plugin.registerCompiler({
-  extensions: ['ts']
+  extensions: ['ts'],
 }, () => new TsCompiler());
