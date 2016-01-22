@@ -59,7 +59,7 @@ As soon as it's done, the imported component's directive becomes available in th
 Now let's get back to the form and make it functional.
 
 As you may know, two-way data binding is the default data exchange mechanism between
-components (controllers or directives) and views in Angular 1. In other words, if you bind an Angular 1 contoller's property to, say, an `<input>` element on some linked template,
+components (controllers or directives) and views in Angular 1. In other words, if you bind an Angular 1 controller's property to, say, an `<input>` element on some linked template,
 every change to the value of this input will update that property of the controller and
 vice versa.
 
