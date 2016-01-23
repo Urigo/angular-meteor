@@ -29,14 +29,21 @@ If you are new to Angular 2, we recommend to check out our 15-steps Angular2+Met
 ## Quick Start
 
 ### Install package:
+
 ````
-    meteor add urigo:angular2-meteor
+    npm install angular2-meteor --save
 ````
 
-This package adds own HTML processor, so you'll also need to remove the standard HTML processor:
+This package adds own HTML processor and TypeScript support, so you'll also need to remove the standard HTML processor:
 
 ````
    meteor remove blaze-html-templates
+````
+
+And add Angular2 compilers package:
+
+````
+   meteor add barbatus:ng2-compilers
 ````
 
 For the explanation, please, read "HTML" [paragraph](http://www.angular-meteor.com/tutorials/socially/angular2/bootstrapping) in the above mentioned tutorial.
@@ -44,7 +51,7 @@ For the explanation, please, read "HTML" [paragraph](http://www.angular-meteor.c
 ### Import Angular2 into your app:
 Package supports TypeScript and Babel (.jsx file extension) as languages for development with Angular2.
 
-ES6 modules are supported via SystemJS module loader library.
+ES6 modules are supported via CommonsJS (starting in Meteor 1.3) module loader library.
 
 To start, create `app.ts` file, import `Component` and `View` and then bootstrap the app:
 ````ts
@@ -87,19 +94,23 @@ Meteor.startup(() => {
 
 ### Start using Meteor in your Angular2 app:
 This package comes with some modules that makes it easy to use Meteor in Angular2.
-To load that modules, you will need to bootsrap your app with the help of the package's bootstraper.
 
-To do that, import `bootstrap` from Meteor-Angular2 package and remove previous one imported from `angular2/angular2`:
+You can use Meteor collections in the same way as you would do in a regular Meteor app with Blaze, you just need add the `viewProviders` to your `@Component` definition:
 
-````ts
-    import {bootstrap} from 'angular2-meteor';
-
-    ....
-
-    bootstrap(Socially);
+````js
+@Component({
+    selector: 'socially',
+    viewProviders: [
+        IterableDiffers.extend([new MongoCursorDifferFactory()])
+    ]
+})
 ````
 
-After that, you can use Meteor collections in the same way as you would do in a regular Meteor app with Blaze.
+And import it to your file:
+
+````js
+import {MongoCursorDifferFactory} from 'angular2-meteor/mongo_cursor_differ';
+````
 
 For example, change `client/app.ts` to:
 ````ts
