@@ -1,4 +1,4 @@
-MongoCollectionObserverFake = function() {
+export var MongoCollectionObserverFake = function() {
   this._generators = [];
 
   this.observer = function(generator) {
@@ -22,7 +22,7 @@ MongoCollectionObserverFake = function() {
   };
 };
 
-ObserverFactoryFake = function(observer) {
+export var ObserverFactoryFake = function(observer) {
   this._observer = observer;
 
   var self = this;
@@ -33,11 +33,11 @@ ObserverFactoryFake = function(observer) {
   };
 };
 
-ObserveHandleFake = function() {
+export var ObserveHandleFake = function() {
   this.stop = function() {};
 };
 
-MongoCollectionCursorFake = function() {
+export var MongoCollectionCursorFake = function() {
   this._generators = [];
   this.handle = new ObserveHandleFake();
 

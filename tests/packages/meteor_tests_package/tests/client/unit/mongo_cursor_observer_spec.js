@@ -1,11 +1,8 @@
+import {MongoCursorObserver} from 'angular2-meteor/mongo_cursor_observer';
+import * as fakes from './lib/fakes.js';
+
 describe('MongoCursorObserver', function() {
-  // TODO(barbatus): change to make use SystemJS with Jasmine
-  // in a proper way.
-  beforeAll(function(done) {
-    System.import('angular2-meteor').then(function(ng2) {
-      MongoCursorObserver = ng2.MongoCursorObserver;
-      done();
-    });
+  beforeAll(function() {
     spyOn(Meteor, 'setTimeout').and.callFake(function(func) {
       func();
     });
@@ -13,7 +10,7 @@ describe('MongoCursorObserver', function() {
 
   var fakeCursor;
   beforeEach(function() {
-    fakeCursor = new MongoCollectionCursorFake();
+    fakeCursor = new fakes.MongoCollectionCursorFake();
   });
 
   it('start observing cursor', function() {

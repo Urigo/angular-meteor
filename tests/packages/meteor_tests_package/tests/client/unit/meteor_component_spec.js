@@ -1,18 +1,11 @@
-describe('MeteorComponent', function() {
-  var MeteorComponent;
-  var ngCore;
-  beforeAll(function(done) {
-    System.import('angular2/core').then(function(ngCore_) {
-      ngCore = ngCore_;
-      System.import('angular2-meteor').then(function(ng2Meteor) {
-        MeteorComponent = ng2Meteor.MeteorComponent;
-        done();
-      });
-    });
-  });
+import 'reflect-metadata';
+import * as ngCore from 'angular2/core';
+import {MeteorComponent} from 'angular2-meteor/meteor_component.js';
 
+describe('MeteorComponent', function() {
   var ngZone;
   var component;
+
   beforeEach(function() {
     ngZone = ngCore.createNgZone();
     spyOn(ngZone, 'run').and.callThrough();

@@ -1,22 +1,18 @@
-describe('MongoCursorDiffer', function() {
-  // TODO(barbatus): change to make use SystemJS with Jasmine
-  // in a proper way.
-  beforeAll(function(done) {
-    System.import('angular2-meteor').then(function(ng2) {
-      MongoCursorDiffer = ng2.MongoCursorDiffer;
-      AddChange = ng2.AddChange;
-      RemoveChange = ng2.RemoveChange;
-      MoveChange = ng2.MoveChange;
-      done();
-    });
-  });
+import 'reflect-metadata';
+import * as ngCore from 'angular2/core';
+import {MongoCursorDiffer} from 'angular2-meteor/mongo_cursor_differ.js';
+import {AddChange, RemoveChange, MoveChange} from 'angular2-meteor/mongo_cursor_observer.js';
+import * as fakes from './lib/fakes.js';
 
+describe('MongoCursorDiffer', function() {
   var fakeFactory;
   var fakeObserver;
+  var fakeCursor;
+
   beforeEach(function() {
-    fakeCursor = new MongoCollectionCursorFake();
-    fakeObserver = new MongoCollectionObserverFake(fakeCursor);
-    fakeFactory = new ObserverFactoryFake(fakeObserver);
+    fakeCursor = new fakes.MongoCollectionCursorFake();
+    fakeObserver = new fakes.MongoCollectionObserverFake(fakeCursor);
+    fakeFactory = new fakes.ObserverFactoryFake(fakeObserver);
   });
 
   it('should return null if no changes', function() {
@@ -56,7 +52,7 @@ describe('MongoCursorDiffer', function() {
   });
 
   it('new cursor being handled properly', function() {
-    var emptyFakeFactory = new ObserverFactoryFake();
+    var emptyFakeFactory = new fakes.ObserverFactoryFake();
 
     var differ = new MongoCursorDiffer(null /*cdRef*/, emptyFakeFactory);
     differ.diff(fakeCursor);
@@ -66,7 +62,7 @@ describe('MongoCursorDiffer', function() {
     differ.observer.emit(changes1);
     differ.diff();
 
-    var fakeCursor1 = new MongoCollectionCursorFake();
+    var fakeCursor1 = new fakes.MongoCollectionCursorFake();
     differ.diff(fakeCursor1);
     var changes2 = [
       new AddChange(10, {name: 'cursor2 doc'})];
