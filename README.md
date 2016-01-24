@@ -180,4 +180,17 @@ If you know how to make integration of Angular 2 and Meteor better, you are welc
 
 For the coding style guide, we use AirBnB [rules](https://github.com/airbnb/javascript) with TypeScript specifics and max line width set to 100 symbols. Rules are partly enforced by the tslint.json file in the root (if you are not familiar with TSLint, read more [here](https://github.com/palantir/tslint)). Please, check that your code conforms with the rules before PR.
 
+### Commit message format
 
+This project follows the `angular` project git commit message format.
+Please refer to the [official documentation](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#-git-commit-guidelines).
+
+### Setup repository
+
+There is a git hook that needed to be installed manually.
+
+```bash
+git clone https://github.com/<Your Username>/angular2-meteor.git
+cd angular2-meteor
+ln -s ../../validate-commit-msg.js .git/hooks/commit-msg
+```
