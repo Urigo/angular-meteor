@@ -6,11 +6,11 @@ import {ObservableWrapper} from 'angular2/src/facade/async';
 import {MongoCursorObserver, AddChange, MoveChange, RemoveChange} from './mongo_cursor_observer';
 
 export interface ObserverFactory {
-  create(cursor: Object): Object;
+  create(cursor:Object): Object;
 }
 
 class MongoCursorObserverFactory implements ObserverFactory {
-  create(cursor: Object): Object {
+  create(cursor:Object):Object {
     if (cursor instanceof Mongo.Cursor) {
       return new MongoCursorObserver(cursor);
     }
@@ -20,49 +20,51 @@ class MongoCursorObserverFactory implements ObserverFactory {
 }
 
 export class MongoCursorDifferFactory implements IterableDifferFactory {
-  supports(obj: Object): boolean {
+  supports(obj:Object):boolean {
     return obj instanceof Mongo.Cursor;
   }
 
-  create(cdRef: ChangeDetectorRef): MongoCursorDiffer {
+  create(cdRef:ChangeDetectorRef):MongoCursorDiffer {
     return new MongoCursorDiffer(cdRef, new MongoCursorObserverFactory());
   }
 }
 
 export class MongoCursorDiffer {
-  private _inserted: Array<CollectionChangeRecord> = [];
-  private _removed: Array<CollectionChangeRecord> = [];
-  private _moved: Array<CollectionChangeRecord> = [];
-  private _curObserver: MongoCursorObserver;
-  private _lastChanges: Array<AddChange | MoveChange | RemoveChange>;
-  private _listSize: number = 0;
-  private _cursor: Mongo.Cursor<any>;
-  private _obsFactory: ObserverFactory;
-  private _subscription: Object;
+  private _inserted:Array<CollectionChangeRecord> = [];
+  private _removed:Array<CollectionChangeRecord> = [];
+  private _moved:Array<CollectionChangeRecord> = [];
+  private _curObserver:MongoCursorObserver;
+  private _lastChanges:Array<AddChange | MoveChange | RemoveChange>;
+  private _listSize:number = 0;
+  private _cursor:Mongo.Cursor<any>;
+  private _obsFactory:ObserverFactory;
+  private _subscription:Object;
 
-  constructor(cdRef: ChangeDetectorRef, obsFactory: ObserverFactory) {
+  constructor(cdRef:ChangeDetectorRef, obsFactory:ObserverFactory) {
     this._obsFactory = obsFactory;
   }
 
-  forEachAddedItem(fn: Function) {
+  forEachAddedItem(fn:Function) {
     for (let i = 0; i < this._inserted.length; i++) {
       fn(this._inserted[i]);
     }
   }
 
-  forEachMovedItem(fn: Function) {
+  forEachMovedItem(fn:Function) {
     for (let i = 0; i < this._moved.length; i++) {
       fn(this._moved[i]);
     }
   }
 
-  forEachRemovedItem(fn: Function) {
+  forEachRemovedItem(fn:Function) {
     for (let i = 0; i < this._removed.length; i++) {
       fn(this._removed[i]);
     }
   }
 
-  diff(cursor: Mongo.Cursor<any>) {
+  diff(cursor:Mongo.Cursor<any>) {
+    let zone : any = global['zone'] || window['zone'];
+
     this._reset();
 
     let newCursor = false;
@@ -72,9 +74,9 @@ export class MongoCursorDiffer {
       this._cursor = cursor;
       this._curObserver = <MongoCursorObserver>this._obsFactory.create(cursor);
       this._subscription = ObservableWrapper.subscribe(this._curObserver,
-          zone.bind(changes => {
-            this._updateLatestValue(changes);
-          }));
+        zone.bind(changes => {
+          this._updateLatestValue(changes);
+        }));
     }
 
     if (this._lastChanges) {
@@ -129,7 +131,7 @@ export class MongoCursorDiffer {
   _applyCleanup() {
     for (let index = 0; index < this._listSize; index++) {
       this._removed.push(this._createChangeRecord(
-          null, index, null));
+        null, index, null));
     }
     this._listSize = 0;
   }
@@ -138,18 +140,18 @@ export class MongoCursorDiffer {
     for (let i = 0; i < changes.length; i++) {
       if (changes[i] instanceof AddChange) {
         this._inserted.push(this._createChangeRecord(
-            changes[i].index, null, changes[i].item));
+          changes[i].index, null, changes[i].item));
         this._listSize++;
       }
 
       if (changes[i] instanceof MoveChange) {
         this._moved.push(this._createChangeRecord(
-            changes[i].toIndex, changes[i].fromIndex, changes[i].item));
+          changes[i].toIndex, changes[i].fromIndex, changes[i].item));
       }
 
       if (changes[i] instanceof RemoveChange) {
         this._removed.push(this._createChangeRecord(
-            null, changes[i].index, changes[i].item));
+          null, changes[i].index, changes[i].item));
         this._listSize--;
       }
     }
