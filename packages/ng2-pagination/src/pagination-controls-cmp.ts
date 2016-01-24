@@ -4,7 +4,7 @@
 
 import {Component, Input, Output, EventEmitter} from 'angular2/core';
 
-import {Subscription} from 'rxjs';
+import {Subscription} from 'rxjs/Rx';
 
 import {PaginationService} from "./pagination-service";
 
@@ -32,13 +32,14 @@ export class PaginationControlsCpm {
     this._id = this._id || this._service.defaultId;
 
     this._changeSub = this._service.change
-    .filter(id => this._id === id)
-    .subscribe(() => {
-      let instance = this._service.getInstance(this._id);
-      this.pages = this._createPageArray(instance.currentPage,
-        instance.itemsPerPage, instance.totalItems);
-      this._setPage(instance.currentPage);
-    });
+      .subscribe(id => {
+        if (this._id !== id) return;
+
+        let instance = this._service.getInstance(this._id);
+        this.pages = this._createPageArray(instance.currentPage,
+          instance.itemsPerPage, instance.totalItems);
+        this._setPage(instance.currentPage);
+      });
   }
 
   private ngOnDestroy() {

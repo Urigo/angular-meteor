@@ -12,7 +12,7 @@ Package.onUse(function(api) {
   api.use([
     'accounts-ui@1.1.6',
     'templating',
-    'barbatus:angular2@0.7.5'
+    'barbatus:angular2@0.8.1'
   ]);
 
   api.addFiles([

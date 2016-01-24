@@ -1,6 +1,6 @@
 Package.describe({
   name: 'barbatus:ng2-google-maps',
-  version: '0.5.0',
+  version: '0.6.0',
   summary: 'Google Maps for Angular2',
   git: 'https://github.com/Urigo/angular2-meteor/tree/master/packages/ng2-google-maps',
   documentation: null
@@ -10,7 +10,7 @@ Package.onUse(function(api) {
   api.versionsFrom('1.2.0.1');
 
   api.use([
-    'barbatus:angular2@0.7.4_5'
+    'barbatus:angular2@0.8.1'
   ]);
 
   // Installs typings.

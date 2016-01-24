@@ -1,6 +1,6 @@
 Package.describe({
   name: 'urigo:angular2-meteor',
-  version: '0.3.7',
+  version: '0.3.9',
   summary: 'Angular2 and Meteor integration',
   git: 'https://github.com/Urigo/Meteor-Angular2',
   documentation: 'README.md'
@@ -30,7 +30,7 @@ Package.onUse(function(api) {
     'mongo@1.1.1',
     'tracker@1.0.8',
     'underscore@1.0.4',
-    'barbatus:angular2@0.8.0'
+    'barbatus:angular2@0.8.1'
   ]);
 
   api.imply([
