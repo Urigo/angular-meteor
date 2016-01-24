@@ -1,3 +1,9 @@
 language: node_js
+
+node_js:
+  - "0.10"
+
+services:
+  - mongodb
+
 install: curl https://install.meteor.com | /bin/sh
-script: ./run_tests_ci.sh
