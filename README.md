@@ -44,7 +44,22 @@ We would love contributions in:
 
 If you want to contribute and need help or don't know what should you do, you can [contact me directly](https://github.com/urigo)
 
+### Commit message format
+
+This project follows the `angular` project git commit message format.
+Please refer to the [official documentation](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#-git-commit-guidelines).
+
 ## Contributor Developer Setup
+
+### Setup repository
+
+There is a git hook that needed to be installed manually.
+
+```bash
+git clone https://github.com/<Your Username>/angular-meteor.git
+cd angular-meteor
+ln -s ../../validate-commit-msg.js .git/hooks/commit-msg
+```
 
 ### Run local angular-meteor in your project
 
