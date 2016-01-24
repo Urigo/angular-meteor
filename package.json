@@ -7,6 +7,13 @@
   "scripts": {
     "install": "./node_modules/.bin/gulp build && cp modules/* ."
   },
+  "dependencies": {
+    "gulp": "^3.9.0",
+    "gulp-typescript": "^2.10.0",
+    "gulp-util": "^3.0.7",
+    "typescript": "^1.7.5",
+    "tsd": "^0.6.5"
+  },
   "peerDependencies": {
     "angular2": "2.0.0-beta.1",
     "es6-promise": "^3.0.2",
@@ -16,10 +23,5 @@
     "zone.js": "^0.5.10"
   },
   "devDependencies": {
-    "gulp": "^3.9.0",
-    "gulp-typescript": "^2.10.0",
-    "gulp-util": "^3.0.7",
-    "typescript": "^1.7.5",
-    "tsd": "^0.6.5"
   }
 }
