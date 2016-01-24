@@ -7,3 +7,5 @@ services:
   - mongodb
 
 install: curl https://install.meteor.com | /bin/sh
+
+script: ./run_tests_ci.sh
