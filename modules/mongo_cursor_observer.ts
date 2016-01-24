@@ -17,7 +17,7 @@ export class RemoveChange {
   constructor(public index: number) {}
 }
 
-class Subscription {
+export class Subscription {
   private _isUnsubscribed: boolean = false;
 
   constructor(private _next: Function,
@@ -62,7 +62,7 @@ export class MongoCursorObserver {
    * before the moment someone subscribes to the observer,
    * we emit these changes, but only to the first ever subscriber.
    */
-  subscribe({next, error, complete}) {
+  subscribe({next, error, complete}) : Subscription {
     let subscription = new Subscription(next, error, complete);
     this._subs.push(subscription);
 

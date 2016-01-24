@@ -2,13 +2,13 @@
 
 import {OnDestroy, NgZone, createNgZone} from 'angular2/core';
 
-declare type CallbacksObject = {
+declare export type CallbacksObject = {
   onReady?: Function;
   onError?: Function;
   onStop?: Function;
 }
 
-declare type MeteorCallbacks = () => any | CallbacksObject;
+declare export type MeteorCallbacks = () => any | CallbacksObject;
 
 const subscribeEvents = ['onReady', 'onError', 'onStop'];
 

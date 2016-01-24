@@ -5,17 +5,16 @@
   "author": "Angular2-Meteor (https://github.com/Urigo/angular2-meteor)",
   "license": "ISC",
   "scripts": {
-    "install": "gulp build && cp modules/* ."
+    "install": "node node_modules/gulp/bin/gulp build && cp modules/* ."
   },
   "dependencies": {
     "gulp": "^3.9.0",
     "gulp-typescript": "^2.10.0",
     "gulp-util": "^3.0.7",
-    "typescript": "^1.7.5",
-    "tsd": "^0.6.5"
+    "merge2": "^1.0.0",
+    "tsd": "^0.6.5",
+    "typescript": "^1.7.5"
   },
-  "peerDependencies": {
-  },
-  "devDependencies": {
-  }
+  "peerDependencies": {},
+  "devDependencies": {}
 }
