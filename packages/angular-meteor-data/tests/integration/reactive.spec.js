@@ -1,0 +1,400 @@
+var testedModule = 'angular-meteor.reactive';
+
+describe(testedModule, function() {
+  beforeEach(angular.mock.module(testedModule));
+
+  var $rootScope;
+
+  beforeEach(angular.mock.inject(function(_$rootScope_) {
+    $rootScope = _$rootScope_;
+  }));
+
+  describe('$$Reactive', function() {
+    afterEach(function() {
+      DummyCollection.remove({});
+    });
+
+    it('should extend child scope', function() {
+      var scope = $rootScope.$new();
+      expect($rootScope.$helpers).toEqual(jasmine.any(Function));
+      expect($rootScope.$reactivate).toEqual(jasmine.any(Function));
+    });
+
+    it('should extend view model', function() {
+      var scope = $rootScope.$new();
+      var vm = scope.$viewModel({});
+      expect($rootScope.$helpers).toEqual(jasmine.any(Function));
+      expect($rootScope.$reactivate).toEqual(jasmine.any(Function));
+    });
+
+    describe('$helpers()', function() {
+      var scope;
+      var vm;
+
+      beforeEach(function() {
+        scope = $rootScope.$new();
+        vm = scope.$viewModel({});
+      });
+
+      afterEach(function() {
+        scope.$destroy();
+      });
+
+      it('should register a number helper', function () {
+        vm.$helpers({
+          helper: function () {
+            return 10;
+          }
+        });
+
+        expect(vm.helper).toEqual(10);
+      });
+
+      it('should register a string helper', function () {
+        vm.$helpers({
+          helper: function () {
+            return 'str';
+          }
+        });
+
+        expect(vm.helper).toEqual('str');
+      });
+
+      it('should register an object helper', function () {
+        var obj = {
+          foo: 'foo',
+          bar: 'bar'
+        };
+
+        vm.$helpers({
+          helper: function () {
+            return obj;
+          }
+        });
+
+        expect(vm.helper).toEqual(obj);
+      });
+
+      it('should register an array helper', function () {
+        var arr = [1, 2, 3];
+
+        vm.$helpers({
+          helper: function () {
+            return arr;
+          }
+        });
+
+        expect(vm.helper).toEqual(arr);
+      });
+
+      it('should override a pre-defined helper', function () {
+        vm.helper = 'foo';
+
+        vm.$helpers({
+          helper: function () {
+            return 'bar';
+          }
+        });
+
+        expect(vm.helper).toEqual('bar');
+      });
+
+      it('should register cursor helper as an array', function () {
+        vm.$helpers({
+          helper: function () {
+            return DummyCollection.find();
+          }
+        });
+
+        expect(vm.helper).toEqual(jasmine.any(Array));
+      });
+
+      it('should update cursor helper as collection gets updated', function () {
+        var cursor = DummyCollection.find();
+
+        vm.$helpers({
+          helper: function () {
+            return cursor;
+          }
+        });
+
+        DummyCollection.insert({
+          _id: 'my-doc'
+        });
+
+        expect(vm.helper).toEqual(jasmine.any(Array));
+        expect(vm.helper.length).toEqual(1);
+
+        DummyCollection.remove({_id: 'my-doc'});
+        expect(vm.helper).toEqual(jasmine.any(Array));
+        expect(vm.helper.length).toEqual(0);
+      });
+
+      it('should register fetch result helper as an array', function () {
+        vm.$helpers({
+          helper: function () {
+            return DummyCollection.find().fetch();
+          }
+        });
+
+        expect(vm.helper).toEqual(jasmine.any(Array));
+      });
+
+      it('should update cursor helper once a new document is added', function () {
+        vm.$helpers({
+          helper: function () {
+            return DummyCollection.find();
+          }
+        });
+
+        var doc = { _id: 'my-doc' }
+        DummyCollection.insert(doc);
+        expect(vm.helper.length).toEqual(1);
+        expect(vm.helper[0]).toEqual(doc);
+      });
+
+      it('should update cursor helper once a document is removed', function () {
+        vm.$helpers({
+          helper: function () {
+            return DummyCollection.find();
+          }
+        });
+
+        var doc = { _id: 'my-doc' }
+        DummyCollection.insert(doc);
+        DummyCollection.remove(doc);
+        expect(vm.helper.length).toEqual(0);
+      });
+
+      it('should update cursor helper once a document is updated', function () {
+        vm.$helpers({
+          helper: function () {
+            return DummyCollection.find();
+          }
+        });
+
+        var doc = {
+          _id: 'my-doc',
+          prop: 'foo'
+        };
+
+        DummyCollection.insert(doc);
+        DummyCollection.update({ _id: 'my-doc' }, { $set: { prop: 'bar' } });
+
+        expect(vm.helper.length).toEqual(1);
+        expect(vm.helper[0]).toBeDefined();
+        expect(vm.helper[0].prop).toEqual('bar');
+      });
+
+      it('should update cursor helper in the right order', function () {
+        vm.$helpers({
+          helper: function () {
+            return DummyCollection.find({}, { sort: { prop: 1 } });
+          }
+        });
+
+        DummyCollection.insert({
+          _id: 'my-doc#1',
+          prop: 'B'
+        });
+
+        expect(vm.helper.length).toEqual(1);
+        expect(vm.helper[0]).toBeDefined();
+        expect(vm.helper[0].prop).toEqual('B');
+
+        DummyCollection.insert({
+          _id: 'my-doc#2',
+          prop: 'A'
+        });
+
+        expect(vm.helper.length).toEqual(2);
+        expect(vm.helper[0]).toBeDefined();
+        expect(vm.helper[1]).toBeDefined();
+        expect(vm.helper[0].prop).toEqual('A');
+        expect(vm.helper[1].prop).toEqual('B');
+      });
+
+      it('should digest once collection is updated', function () {
+        var digest = spyOn(scope, '$digest').and.callThrough();
+
+        vm.$helpers({
+          helper: function () {
+            return DummyCollection.find({});
+          }
+        });
+
+        DummyCollection.insert({});
+        expect(digest).toHaveBeenCalled();
+      });
+
+      it('should use view model as context for helpers', function() {
+        vm.$helpers({
+          helper: function() {
+            return this;
+          }
+        });
+
+        expect(vm.helper).toEqual(vm);
+      });
+
+      it('should not trigger autorun dependencies when using object and adding a sub property', function () {
+        var calls = 0;
+
+        vm.prop = {
+          subProp: 10
+        };
+
+        vm.$helpers({
+          helper: function () {
+            calls++;
+            return vm.$reactivate('prop');
+          }
+        });
+
+        scope.$$throttledDigest();
+        Tracker.flush();
+
+        expect(calls).toEqual(1);
+        vm.prop.newSubProp = 20;
+
+        scope.$$throttledDigest();
+        Tracker.flush();
+
+        expect(calls).toEqual(1);
+      });
+
+      it('should trigger autorun dependencies when using object and adding a sub property while watching deep', function () {
+        var calls = 0;
+
+        vm.prop = {
+          subProp: 10
+        };
+
+        vm.$helpers({
+          helper: function () {
+            calls++;
+            return vm.$reactivate('prop', true);
+          }
+        });
+
+        scope.$$throttledDigest();
+        Tracker.flush();
+
+        expect(calls).toEqual(1);
+        vm.prop.newSubProp = 20;
+
+        scope.$$throttledDigest();
+        Tracker.flush();
+
+        expect(calls).toEqual(2);
+      });
+
+      it('should not reactivate cursors', function() {
+        expect(scope.$$watchersCount).toEqual(0);
+
+        vm.$helpers({
+          helper: function() {
+            return DummyCollection.find({});
+          }
+        });
+
+        expect(scope.$$watchersCount).toEqual(0);
+      });
+    });
+
+    describe('$reactivate()', function() {
+      var scope;
+      var vm;
+
+      beforeEach(function() {
+        scope = $rootScope.$new();
+        vm = scope.$viewModel({});
+      });
+
+      afterEach(function() {
+        scope.$destroy();
+      });
+
+      it('should return model', function() {
+        vm.myProp = 10;
+        expect(vm.$reactivate('myProp')).toEqual(10);
+      });
+
+      it('should register a scope watcher', function() {
+        vm.myProp = 'myProp';
+        var watch = spyOn(scope, '$watch');
+
+        vm.$reactivate('myProp');
+        expect(watch).toHaveBeenCalledWith(jasmine.any(Function), jasmine.any(Function), false);
+
+        var args = watch.calls.argsFor(0);
+        expect(args[0]()).toEqual('myProp');
+      });
+
+      it('should register a scope watch with deep equality', function() {
+        vm.myProp = 'myProp';
+        var watch = spyOn(scope, '$watch');
+
+        vm.$reactivate('myProp', true);
+        expect(watch).toHaveBeenCalledWith(jasmine.any(Function), jasmine.any(Function), true);
+
+        var args = watch.calls.argsFor(0);
+        expect(args[0]()).toEqual('myProp');
+      });
+
+      it('should register a scope watch with shallow equality', function() {
+        vm.myProp = 'myProp';
+        var watch = spyOn(scope, '$watch');
+
+        vm.$reactivate('myProp', false);
+        expect(watch).toHaveBeenCalledWith(jasmine.any(Function), jasmine.any(Function), false);
+
+        var args = watch.calls.argsFor(0);
+        expect(args[0]()).toEqual('myProp');
+      });
+
+      it('should register a tracker dependency', function() {
+        vm.myProp = 10;
+
+        vm.$reactivate('myProp');
+        expect(vm.$$dependencies).toBeDefined();
+        expect(vm.$$dependencies['myProp']).toBeDefined();
+      });
+
+      it('should create a dependency object for the reactive property', function() {
+        vm.myProp = 10;
+
+        var depCtorSpy = spyOn(Tracker, 'Dependency').and.callFake(function() {
+          return {
+            depend: angular.noop,
+            changed: angular.noop
+          };
+        });
+
+        vm.$reactivate('myProp');
+        expect(depCtorSpy).toHaveBeenCalled();
+        expect(depCtorSpy.calls.count()).toEqual(1);
+      });
+
+      it('should trigger the dependency logic when the watch callback is called', function() {
+        vm.myProp = 10;
+        var changedSpy = jasmine.createSpy('changed');
+
+        spyOn(Tracker, 'Dependency').and.callFake(function() {
+          return {
+            depend: angular.noop,
+            changed: changedSpy
+          };
+        });
+
+        vm.$reactivate('myProp');
+        scope.$$throttledDigest();
+
+        vm.myProp = 20;
+        scope.$$throttledDigest();
+
+        expect(changedSpy).toHaveBeenCalled();
+      });
+    });
+  });
+});
