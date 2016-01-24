@@ -1,7 +1,6 @@
 angular.module('angular-meteor.view-model', [
   'angular-meteor.utils',
-  'angular-meteor.mixer',
-  'angular-meteor.scope'
+  'angular-meteor.mixer'
 ])
 
 
@@ -30,13 +29,4 @@ function($$utils, $$Mixer) {
   };
 
   return $$ViewModel;
-}])
-
-
-.run([
-  '$$Mixer',
-  '$$ViewModel',
-
-function($$Mixer, $$ViewModel) {
-  $$Mixer.mixin($$ViewModel);
 }]);

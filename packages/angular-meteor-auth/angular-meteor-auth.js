@@ -1,8 +1,7 @@
 angular.module('angular-meteor.auth', [
   'angular-meteor.mixer',
-  'angular-meteor.core',
-  'angular-meteor.scope',
   'angular-meteor.view-model',
+  'angular-meteor.core',
   'angular-meteor.reactive'
 ])
 
@@ -11,7 +10,7 @@ angular.module('angular-meteor.auth', [
   '$q',
 
 function($q) {
-  let Accounts = (Package['accounts-base'] || {}).Accounts;
+  const Accounts = (Package['accounts-base'] || {}).Accounts;
 
   if (!Accounts) throw Error(
     '`angular-meteor.auth` module requires `accounts-base` package, ' +
@@ -59,11 +58,7 @@ function($q) {
       deferred.reject(error);
     });
 
-    let promise = deferred.promise.finally(() => {
-      this.$$throttledDigest();
-      computation.stop();
-    });
-
+    let promise = deferred.promise.finally(this.$$throttledDigest.bind(this));
     promise.stop = computation.stop.bind(computation);
     return promise;
   };

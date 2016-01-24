@@ -9,6 +9,7 @@ angular.module('angular-meteor.mixer', [])
       throw Error('argument 1 must be an object');
 
     this.mixins = _.union(this.mixins, [mixin]);
+    return this;
   };
 
   this.mixout = (mixin) => {
@@ -16,6 +17,7 @@ angular.module('angular-meteor.mixer', [])
       throw Error('argument 1 must be an object');
 
     this.mixins = _.without(this.mixins, mixin);
+    return this;
   };
 
   this.construct = (context, ...args) => {
@@ -31,7 +33,7 @@ angular.module('angular-meteor.mixer', [])
 
   this.extend = (Klass) => {
     if (!_.isFunction(Klass))
-      throw Error('argument 1 must be an function');
+      throw Error('argument 1 must be a function');
 
     return _.extend(Klass.prototype, ...this.mixins);
   };

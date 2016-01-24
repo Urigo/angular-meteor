@@ -1,7 +1,5 @@
-var testedModule = 'angular-meteor.core';
-
-describe(testedModule, function() {
-  beforeEach(angular.mock.module(testedModule));
+describe('angular-meteor.core', function() {
+  beforeEach(angular.mock.module('angular-meteor'));
 
   var $rootScope;
 

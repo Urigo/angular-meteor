@@ -1,7 +1,5 @@
-var testedModule = 'angular-meteor.scope';
-
-describe(testedModule, function () {
-  beforeEach(angular.mock.module(testedModule));
+describe('angular-meteor.mixer', function() {
+  beforeEach(angular.mock.module('angular-meteor'));
 
   var $rootScope;
   var $$Mixer;
@@ -11,7 +9,7 @@ describe(testedModule, function () {
     $$Mixer = _$$Mixer_;
   }));
 
-  describe('Scope', function() {
+  describe('$$Mixer', function() {
     var scope;
     var Mixin;
 

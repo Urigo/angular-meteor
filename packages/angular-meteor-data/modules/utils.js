@@ -18,13 +18,14 @@ function($rootScope) {
       Object.getPrototypeOf(obj1) === Object.getPrototypeOf(obj2);
   };
 
-  this.bind = (fn, context, tap = angular.noop) => {
-    if (_.isFunction(fn)) return this._bindFn(fn, context, tap);
-    if (_.isObject(fn)) return this._bindObj(fn, context, tap);
+  this.bind = (fn, context, tap) => {
+    tap = _.isFunction(tap) ? tap : angular.noop;
+    if (_.isFunction(fn)) return bindFn(fn, context, tap);
+    if (_.isObject(fn)) return bindObj(fn, context, tap);
     return fn;
   };
 
-  this._bindFn = (fn, context, tap) => {
+  let bindFn = (fn, context, tap) => {
     return (...args) => {
       let result = fn.apply(context, args);
       tap.call(context, {result, args});
@@ -32,7 +33,7 @@ function($rootScope) {
     };
   };
 
-  this._bindObj = (obj, context, tap) => {
+  let bindObj = (obj, context, tap) => {
     return _.keys(obj).reduce((bound, k) => {
       bound[k] = this.bind(obj[k], context, tap);
       return bound;

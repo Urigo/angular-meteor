@@ -1,8 +1,8 @@
 angular.module('angular-meteor.reactive', [
   'angular-meteor.utils',
   'angular-meteor.mixer',
-  'angular-meteor.core',
-  'angular-meteor.view-model'
+  'angular-meteor.view-model',
+  'angular-meteor.core'
 ])
 
 
@@ -167,13 +167,4 @@ function($parse, $$utils) {
   };
 
   return $$Reactive;
-}])
-
-
-.run([
-  '$$Mixer',
-  '$$Reactive',
-
-function($$Mixer, $$Reactive) {
-  $$Mixer.mixin($$Reactive);
 }]);

@@ -33,11 +33,12 @@ Package.onTest(function(api) {
 
   // Load local version of angular-meteor, so modifications would be available
   api.addFiles([
+    '../angular-meteor-data/modules/router.js',
     '../angular-meteor-data/modules/utils.js',
     '../angular-meteor-data/modules/mixer.js',
     '../angular-meteor-data/modules/scope.js',
-    '../angular-meteor-data/modules/core.js',
     '../angular-meteor-data/modules/view-model.js',
+    '../angular-meteor-data/modules/core.js',
     '../angular-meteor-data/modules/reactive.js',
     '../angular-meteor-data/angular-meteor.js'
   ], 'client');

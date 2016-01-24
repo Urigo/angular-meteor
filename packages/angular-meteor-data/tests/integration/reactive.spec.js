@@ -1,7 +1,5 @@
-var testedModule = 'angular-meteor.reactive';
-
-describe(testedModule, function() {
-  beforeEach(angular.mock.module(testedModule));
+describe('angular-meteor.reactive', function() {
+  beforeEach(angular.mock.module('angular-meteor'));
 
   var $rootScope;
 

@@ -1,7 +1,6 @@
-var testedModule = 'angular-meteor.auth';
-
-describe(testedModule, function() {
-  beforeEach(angular.mock.module(testedModule));
+describe('angular-meteor.auth', function() {
+  beforeEach(angular.mock.module('angular-meteor'));
+  beforeEach(angular.mock.module('angular-meteor.auth'));
 
   var Accounts = Package['accounts-base'].Accounts;
   var $rootScope;

@@ -1,5 +1,5 @@
 angular.module('angular-meteor.scope', [
-  'angular-meteor.mixer',
+  'angular-meteor.mixer'
 ])
 
 
