@@ -1,6 +1,6 @@
 Package.describe({
   name: 'barbatus:ng2-compilers',
-  version: '0.2.0-beta.0',
+  version: '0.2.0-beta.1',
   summary: 'Angular2 template, HTML, JSX, TypeScript Compilers for Meteor',
   git: 'https://github.com/barbatus/ng2-compilers',
   documentation: null
