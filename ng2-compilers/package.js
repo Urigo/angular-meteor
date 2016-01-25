@@ -31,6 +31,8 @@ Package.onUse(function(api) {
 
   // Required in order to register plugins
   api.use('isobuild:compiler-plugin@1.0.0');
+
+  api.imply('check@1.1.0');
 });
 
 Package.onTest(function(api) {
