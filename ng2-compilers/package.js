@@ -32,7 +32,13 @@ Package.onUse(function(api) {
   // Required in order to register plugins
   api.use('isobuild:compiler-plugin@1.0.0');
 
-  api.imply('check@1.1.0');
+  api.imply([
+    'check@1.1.0',
+    'ejson@1.0.7',
+    'mongo@1.1.3',
+    'tracker@1.0.9',
+    'underscore@1.0.4'
+  ]);
 });
 
 Package.onTest(function(api) {
