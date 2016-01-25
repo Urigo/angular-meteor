@@ -6,10 +6,11 @@
   "author": "Angular2-Meteor (https://github.com/Urigo/angular2-meteor)",
   "license": "ISC",
   "scripts": {
-    "postinstall": "gulp build && cp modules/* ."
+    "postinstall": "gulp build"
   },
   "dependencies": {
     "gulp": "^3.9.0",
+    "gulp-flatten": "^0.2.0",
     "gulp-typescript": "^2.10.0",
     "gulp-util": "^3.0.7",
     "merge2": "^1.0.0",
