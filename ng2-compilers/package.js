@@ -1,6 +1,6 @@
 Package.describe({
   name: 'barbatus:ng2-compilers',
-  version: '0.1.2',
+  version: '0.2.0-beta.0',
   summary: 'Angular2 template, HTML, JSX, TypeScript Compilers for Meteor',
   git: 'https://github.com/barbatus/ng2-compilers',
   documentation: null
@@ -18,7 +18,7 @@ Package.registerBuildPlugin({
   ],
   use: [
     'caching-compiler@1.0.0',
-    'mrt:cheerio',
+    'mrt:cheerio@0.3.2',
     'barbatus:ts-compilers@0.2.5',
     'ecmascript@0.3.1-modules.4',
     'check@1.0.5',
