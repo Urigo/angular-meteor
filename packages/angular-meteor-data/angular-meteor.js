@@ -16,6 +16,7 @@ angular.module('angular-meteor', [
   '$$Reactive',
 
 function($$Mixer, $$ViewModel, $$Core, $$Reactive) {
+  // Load all mixins
   $$Mixer
     .mixin($$ViewModel)
     .mixin($$Core)

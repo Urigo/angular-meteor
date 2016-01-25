@@ -152,14 +152,15 @@ describe('angular-meteor.reactive', function() {
       });
 
       it('should update cursor helper once a document is removed', function () {
+        var doc = { _id: 'my-doc' }
+        DummyCollection.insert(doc);
+
         vm.$helpers({
           helper: function () {
             return DummyCollection.find();
           }
         });
 
-        var doc = { _id: 'my-doc' }
-        DummyCollection.insert(doc);
         DummyCollection.remove(doc);
         expect(vm.helper.length).toEqual(0);
       });

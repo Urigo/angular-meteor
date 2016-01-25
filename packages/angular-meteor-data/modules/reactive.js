@@ -6,15 +6,21 @@ angular.module('angular-meteor.reactive', [
 ])
 
 
+/*
+  A mixin which provides us with reactive functions
+ */
 .factory('$$Reactive', [
   '$parse',
   '$$utils',
 
 function($parse, $$utils) {
   function $$Reactive(vm = this) {
+    // Helps us track changes made in the view model
     vm.$$dependencies = {};
   }
 
+  // Gets an object containing functions and define their results as reactive properties.
+  // Once a return value has been changed the property will be reset.
   $$Reactive.$helpers = function(props = {}) {
     if (!_.isObject(props))
       throw Error('argument 1 must be an object');
@@ -24,12 +30,14 @@ function($parse, $$utils) {
         throw Error(`helper ${i + 1} must be a function`);
 
       if (!this.$$vm.$$dependencies[k])
+        // Registers a new dependency to the specified helper
         this.$$vm.$$dependencies[k] = new Tracker.Dependency();
 
       this.$$setFnHelper(k, v);
     });
   };
 
+  // Gets a property reactively, and once it has been changed the computation will be recomputed
   $$Reactive.$reactivate = function(k, isDeep = false) {
     if (!_.isString(k))
       throw Error('arguments 1 must be a string');
@@ -45,24 +53,32 @@ function($parse, $$utils) {
     return $parse(k)(this.$$vm);
   };
 
+  // Watches for changes in the view model, and if so will notify a change
   $$Reactive.$$watchModel = function(k, isDeep) {
+    // Gets a deep property from the view model
     let getVal = _.partial($parse(k), this.$$vm);
     let initialVal = getVal();
 
+    // Watches for changes in the view model
     this.$watch(getVal, (val, oldVal) => {
       let hasChanged =
         val !== initialVal ||
         val !== oldVal
 
-      if (hasChanged) this.$$vm.$$dependencies[k].changed();
+      // Notify if a change has been detected
+      if (hasChanged) this.$$changed(k);
     }, isDeep);
   };
 
+  // Invokes a function and sets the return value as a property
   $$Reactive.$$setFnHelper = function(k, fn) {
     this.$autorun((computation) => {
+      // Invokes the reactive functon
       let model = fn.apply(this.$$vm);
 
+      // Ignore notifications made by the following handler
       Tracker.nonreactive(() => {
+        // If a cursor, observe its changes and update acoordingly
         if ($$utils.isCursor(model)) {
           let observation = this.$$handleCursor(k, model);
 
@@ -75,12 +91,15 @@ function($parse, $$utils) {
           this.$$handleNonCursor(k, model);
         }
 
+        // Notify change and update the view model
         this.$$changed(k);
       });
     });
   };
 
+  // Sets a value helper as a setter and a getter which will notify computations once used
   $$Reactive.$$setValHelper = function(k, v, watch = true) {
+    // If set, reactives property
     if (watch) {
       let isDeep = _.isObject(v);
       this.$reactivate(k, isDeep);
@@ -101,15 +120,19 @@ function($parse, $$utils) {
     });
   };
 
+  // Fetching a cursor and updates properties once the result set has been changed
   $$Reactive.$$handleCursor = function(k, cursor) {
+    // If not defined set it
     if (angular.isUndefined(this.$$vm[k])) {
       this.$$setValHelper(k, cursor.fetch(), false);
     }
+    // If defined update it
     else {
       let diff = jsondiffpatch.diff(this.$$vm[k], cursor.fetch());
       jsondiffpatch.patch(this.$$vm[k], diff);
     }
 
+    // Observe changes made in the result set
     let observation = cursor.observe({
       addedAt: (doc, atIndex) => {
         if (!observation) return;
@@ -147,6 +170,7 @@ function($parse, $$utils) {
     if (angular.isUndefined(v)) {
       this.$$setValHelper(k, data);
     }
+    // Update property if the new value is from the same type
     else if ($$utils.areSiblings(v, data)) {
       let diff = jsondiffpatch.diff(v, data);
       jsondiffpatch.patch(v, diff);
@@ -157,10 +181,12 @@ function($parse, $$utils) {
     }
   };
 
+  // Notifies dependency in view model
   $$Reactive.$$depend = function(k) {
     this.$$vm.$$dependencies[k].depend();
   };
 
+  // Notifies change in view model
   $$Reactive.$$changed = function(k) {
     this.$$throttledDigest();
     this.$$vm.$$dependencies[k].changed();

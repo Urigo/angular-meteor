@@ -12,6 +12,7 @@ function ($compile, $document, $rootScope) {
 
   let isLoaded = false;
 
+  // Recompile after iron:router builds page
   Router.onAfterAction((req, res, next) => {
     Tracker.afterFlush(() => {
       if (isLoaded) return;
