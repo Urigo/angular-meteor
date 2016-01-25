@@ -26,7 +26,7 @@ HtmlCompiler = class HtmlCompiler extends NgCompiler {
         throw Error(errorMsg);
       }
 
-      if (isHtml) {
+      if (isHtml > 0) {
         htmlFiles.push(file);
       } else {
         templateFiles.push(file);
@@ -36,11 +36,16 @@ HtmlCompiler = class HtmlCompiler extends NgCompiler {
     // If there is no html then add provided boostrap html
     // to the body. It raises the issue though:
     // if no html at all the boostrap won't be added.
-    if (!htmlFiles.length) {
-      templateFiles[0].addHtml({
-        data: this._bootstrapHtml,
-        section: 'body'
-      });
+    if (htmlFiles.length == 0) {
+      try {
+        templateFiles[0].addHtml({
+          data: this._bootstrapHtml,
+          section: 'body'
+        });
+      }
+      catch (e) {
+        // Not sure what to do in this case... the exception is: Document sections can only be emitted to web targets
+      }
     }
 
     this._htmlCompiler.processFilesForTarget(htmlFiles);
