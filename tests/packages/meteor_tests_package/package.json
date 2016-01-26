@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "angular2-meteor": "^0.3.3",
+    "angular2-meteor": "git://github.com/Urigo/angular2-meteor.git#5367797a2d5042bf57fbd030e92a107cc9beec84",
     "es6-shim": "^0.33.13",
     "angular2": "^2.0.0-beta.1",
     "es6-promise": "^3.0.2",
