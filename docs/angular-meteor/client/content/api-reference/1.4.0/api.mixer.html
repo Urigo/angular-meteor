@@ -1,0 +1,67 @@
+<template name="api.1.4.0.mixer">
+  <div>
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/docs/angular-meteor/client/content/api-reference/1.4.0/api.mixer.html"
+       class="btn btn-default btn-lg improve-button">
+      <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
+    </a>
+
+    <do-nothing>
+      {{#markdown}}
+
+# Mixer
+<a class="src-code" href="https://github.com/Urigo/angular-meteor/blob/master/packages/angular-meteor-data/modules/angular-meteor-mixer.js" target="_blank">
+  src: angular-meteor-data/modules/mixer.js
+</a>
+
+A service which lets us apply mixins into the `ChildScope` prototype. The flow is simple. Once we define a mixin, it will be stored in the `$Mixer`, and any time a `ChildScope` prototype is created it will be extended by the `$Mixer`. This concept is good because it keeps our code clean and simple, and easy to extend. So any time we would like to define a new behaviour to our scope, we will just use the `$Mixer` service.
+
+As for now, `angular-meteor` consists of 4 mixins,
+ [$$ViewModel](api/1.4.0/viewmodel),
+ [$$Core](api/1.4.0/core),
+ [$$Reactive](api/1.4.0/reactive) and
+ [$$Auth](api/1.4.0/auth).
+As you can probably notice these mixins has a notation of a '$$' sequence since noramlly they should not be exposed as part of our API but they are still making for a convinient way to seperate our logic into different segments.
+
+If you would like to create your own mixin follow the methods below, or you can take a look at [angular-meteor-auth](https://github.com/Urigo/angular-meteor/blob/master/packages/angular-meteor-auth/angular-meteor-auth.js) module as an example.
+
+## Methods
+
+### mixin
+
+Applies a new mixin into `$Mixer`.
+
+------
+
+#### Arguments
+
+<table class="variables-matrix input-arguments">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Type</th>
+    <th>Details</th>
+    <th>Required</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td><strong>mixin</strong></td>
+    <td>
+      <a href="" class="label type-hint type-hint-function">Function</a>
+      <a href="" class="label type-hint type-hint-object">Object</a>
+    </td>
+    <td>The mixin function / object. The properties defined on the object will applied as an extension to the `ChildScope` prototype. If the object is a function, it will be used as the constructor once a scope is created. Note that properties which does not start with a single '$' will be filtered by the <a href="/api/1.4.0/viewModel" >$$ViewModel</a>.</td>
+    <td>Yes</td>
+  </tr>
+  </tbody>
+</table>
+
+#### Return value
+
+The `$Mixer`, for a serial mixins chaining.
+
+      {{/markdown}}
+    </do-nothing>
+
+  </div>
+</template>
