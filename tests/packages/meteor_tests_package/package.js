@@ -22,6 +22,7 @@ Package.onTest(function(api) {
   ]);
 
   api.addFiles([
+    'tests/client/unit/lib/imports.js',
     'tests/client/unit/lib/fakes.js',
     'tests/client/unit/meteor_component_spec.js',
     'tests/client/unit/mongo_cursor_differ_spec.js',
