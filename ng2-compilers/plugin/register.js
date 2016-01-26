@@ -7,4 +7,4 @@ Plugin.registerCompiler({
 Plugin.registerCompiler({
   extensions: ['ts'],
   filenames: ['tsconfig.json']
-}, () => new TsBatchCompiler());
+}, () => new TsCompiler());
