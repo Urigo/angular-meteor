@@ -4965,3 +4965,559 @@ index 8bca042..8938eb4 100644
    ]
 -- 
 2.5.4 (Apple Git-61)
+
+
+From 10cc68c55aad6521b4510dece70b9f44e8feccae Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Tue, 26 Jan 2016 20:47:08 +0700
+Subject: [PATCH 148/157] Step 21.1: add a new package called "socially-mobile"
+
+---
+ packages/socially-mobile/package.js | 24 ++++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
+ create mode 100644 packages/socially-mobile/package.js
+
+diff --git a/packages/socially-mobile/package.js b/packages/socially-mobile/package.js
+new file mode 100644
+index 0000000..079cecc
+--- /dev/null
++++ b/packages/socially-mobile/package.js
+@@ -0,0 +1,24 @@
++Package.describe({
++  name: 'socially-mobile',
++  version: '0.0.1',
++  // Brief, one-line summary of the package.
++  summary: '',
++  // URL to the Git repository containing the source code for this package.
++  git: '',
++  // By default, Meteor will default to using README.md for documentation.
++  // To avoid submitting documentation, set this field to null.
++  documentation: 'README.md'
++});
++
++Package.onUse(function(api) {
++  api.versionsFrom('1.2.1');
++  api.use('ecmascript');
++  api.addFiles('socially-mobile.js');
++});
++
++Package.onTest(function(api) {
++  api.use('ecmascript');
++  api.use('tinytest');
++  api.use('socially-mobile');
++  api.addFiles('socially-mobile-tests.js');
++});
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 225c7bf1313607d317f7b3a7585522e853a20921 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Tue, 26 Jan 2016 20:51:25 +0700
+Subject: [PATCH 149/157] Step 21.2: clean up and add dependencies in the
+ mobile package
+
+---
+ packages/socially-mobile/package.js | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
+
+diff --git a/packages/socially-mobile/package.js b/packages/socially-mobile/package.js
+index 079cecc..af0575f 100644
+--- a/packages/socially-mobile/package.js
++++ b/packages/socially-mobile/package.js
+@@ -12,13 +12,11 @@ Package.describe({
+ 
+ Package.onUse(function(api) {
+   api.versionsFrom('1.2.1');
+-  api.use('ecmascript');
+-  api.addFiles('socially-mobile.js');
++  api.use('urigo:angular2-meteor');
+ });
+ 
+ Package.onTest(function(api) {
+-  api.use('ecmascript');
++  api.use('urigo:angular2-meteor');
+   api.use('tinytest');
+   api.use('socially-mobile');
+-  api.addFiles('socially-mobile-tests.js');
+ });
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 59c8a8929869adb6d2008b7e2606c47cb060af7b Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Tue, 26 Jan 2016 20:54:48 +0700
+Subject: [PATCH 150/157] Add new package called "socially-browser"
+
+---
+ packages/socially-browser/package.js | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+ create mode 100644 packages/socially-browser/package.js
+
+diff --git a/packages/socially-browser/package.js b/packages/socially-browser/package.js
+new file mode 100644
+index 0000000..bf81803
+--- /dev/null
++++ b/packages/socially-browser/package.js
+@@ -0,0 +1,22 @@
++Package.describe({
++  name: 'socially-browser',
++  version: '0.0.1',
++  // Brief, one-line summary of the package.
++  summary: '',
++  // URL to the Git repository containing the source code for this package.
++  git: '',
++  // By default, Meteor will default to using README.md for documentation.
++  // To avoid submitting documentation, set this field to null.
++  documentation: 'README.md'
++});
++
++Package.onUse(function(api) {
++  api.versionsFrom('1.2.1');
++  api.use('urigo:angular2-meteor');
++});
++
++Package.onTest(function(api) {
++  api.use('urigo:angular2-meteor');
++  api.use('tinytest');
++  api.use('socially-browser');
++});
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 0ed38fc619d2d1bb3f0e89f50abceb47d35675ce Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Tue, 26 Jan 2016 20:55:47 +0700
+Subject: [PATCH 151/157] Add packages to the app
+
+---
+ .meteor/packages | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/.meteor/packages b/.meteor/packages
+index 119cd68..813486d 100644
+--- a/.meteor/packages
++++ b/.meteor/packages
+@@ -24,3 +24,5 @@ tmeasday:publish-counts
+ check
+ email
+ barbatus:ng2-google-maps
++socially-mobile
++socially-browser
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 41ee71cb03b4461890c673a40d9752bbf0901af7 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Tue, 26 Jan 2016 22:17:25 +0700
+Subject: [PATCH 152/157] Step 21.3: add login template
+
+---
+ packages/socially-browser/client/login/login.html | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 packages/socially-browser/client/login/login.html
+
+diff --git a/packages/socially-browser/client/login/login.html b/packages/socially-browser/client/login/login.html
+new file mode 100644
+index 0000000..ca253cc
+--- /dev/null
++++ b/packages/socially-browser/client/login/login.html
+@@ -0,0 +1 @@
++<accounts-ui></accounts-ui>
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 245259ff35ac2f1188d759a495b85062690b0358 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Tue, 26 Jan 2016 22:17:54 +0700
+Subject: [PATCH 153/157] Step 21.4: add login component
+
+---
+ packages/socially-browser/client/login/login.ts | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+ create mode 100644 packages/socially-browser/client/login/login.ts
+
+diff --git a/packages/socially-browser/client/login/login.ts b/packages/socially-browser/client/login/login.ts
+new file mode 100644
+index 0000000..8daee63
+--- /dev/null
++++ b/packages/socially-browser/client/login/login.ts
+@@ -0,0 +1,13 @@
++
++import {Component, View} from 'angular2/core';
++
++import {MeteorComponent} from 'angular2-meteor';
++
++import {AccountsUI} from 'meteor-accounts-ui';
++
++@Component({
++  selector: 'login',
++  templateUrl: '/packages/socially-browser/client/login/login.html',
++  directives: [AccountsUI]
++})
++export class Login {}
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 0d4caa70e0152f2cf924e859e3b3e3c82847ac03 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Tue, 26 Jan 2016 22:36:54 +0700
+Subject: [PATCH 154/157] Step 21.5: register SystemJS module
+
+---
+ packages/socially-browser/system_config.js | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+ create mode 100644 packages/socially-browser/system_config.js
+
+diff --git a/packages/socially-browser/system_config.js b/packages/socially-browser/system_config.js
+new file mode 100644
+index 0000000..aa0e70c
+--- /dev/null
++++ b/packages/socially-browser/system_config.js
+@@ -0,0 +1,11 @@
++System.config({
++  packages: {
++    'socially': {
++      main: 'client/login/login',
++      format: 'register',
++      map: {
++        '.': System.normalizeSync('{socially-browser}')
++      }
++    }
++  }
++});
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 8be4cca436749d7858b4ae0856053695c8892f85 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Tue, 26 Jan 2016 22:40:08 +0700
+Subject: [PATCH 155/157] Step 21.6: add component files to the package
+
+---
+ packages/socially-browser/package.js | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/packages/socially-browser/package.js b/packages/socially-browser/package.js
+index bf81803..b7a3a62 100644
+--- a/packages/socially-browser/package.js
++++ b/packages/socially-browser/package.js
+@@ -13,6 +13,13 @@ Package.describe({
+ Package.onUse(function(api) {
+   api.versionsFrom('1.2.1');
+   api.use('urigo:angular2-meteor');
++  api.use('barbatus:ng2-meteor-accounts-ui', 'web.browser');
++
++  api.addFiles([
++    'client/login/login.html',
++    'client/login/login.ts',
++    'system_config.js'
++  ], 'web.browser');
+ });
+ 
+ Package.onTest(function(api) {
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 31da857b360193a95055c808f78629c147daad49 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Tue, 26 Jan 2016 22:57:19 +0700
+Subject: [PATCH 156/157] Step 21.7: import Login component from "socially"
+ module
+
+---
+ client/parties-list/parties-list.ts | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/client/parties-list/parties-list.ts b/client/parties-list/parties-list.ts
+index 9f35eb9..fbf02c3 100644
+--- a/client/parties-list/parties-list.ts
++++ b/client/parties-list/parties-list.ts
+@@ -18,13 +18,15 @@ import {RsvpPipe} from 'client/lib/pipes';
+ 
+ import {ANGULAR2_GOOGLE_MAPS_DIRECTIVES} from 'ng2-google-maps/core';
+ 
++import {Login} from 'socially';
++
+ @Component({
+     selector: 'parties-list',
+     viewProviders: [PaginationService]
+ })
+ @View({
+     templateUrl: '/client/parties-list/parties-list.html',
+-    directives: [ANGULAR2_GOOGLE_MAPS_DIRECTIVES, PartiesForm, RouterLink, AccountsUI, PaginationControlsCpm],
++    directives: [ANGULAR2_GOOGLE_MAPS_DIRECTIVES, PartiesForm, RouterLink, Login, PaginationControlsCpm],
+     pipes: [PaginatePipe, RsvpPipe]
+ })
+ @InjectUser()
+-- 
+2.5.4 (Apple Git-61)
+
+
+From cf1c327d1da7ee11c619d1dca317a56e4cc3df1a Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Tue, 26 Jan 2016 22:58:01 +0700
+Subject: [PATCH 157/157] Step 21.8: change PartiesList template to contain
+ "login" directive
+
+---
+ client/parties-list/parties-list.html | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/client/parties-list/parties-list.html b/client/parties-list/parties-list.html
+index b69e41a..53cad56 100644
+--- a/client/parties-list/parties-list.html
++++ b/client/parties-list/parties-list.html
+@@ -2,7 +2,7 @@
+   <parties-form [hidden]="!user" style="float: left"></parties-form>
+   <input type="text" #searchtext placeholder="Search by Location">
+   <button type="button" (click)="search(searchtext.value)">Search</button>
+-  <accounts-ui></accounts-ui>
++  <login></login>
+   <h1>Parties:</h1>
+   <div>
+     <select #sort (change)="changeSortOrder(sort.value)">
+-- 
+2.5.4 (Apple Git-61)
+
+From 331e6472fc6728ad5c7fcd58e6b9adb9dadb6a51 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Wed, 27 Jan 2016 00:27:52 +0700
+Subject: [PATCH 158/163] Step 21.9: add login component's template
+
+---
+ packages/socially-mobile/client/login/login.html | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 packages/socially-mobile/client/login/login.html
+
+diff --git a/packages/socially-mobile/client/login/login.html b/packages/socially-mobile/client/login/login.html
+new file mode 100644
+index 0000000..37c8acd
+--- /dev/null
++++ b/packages/socially-mobile/client/login/login.html
+@@ -0,0 +1 @@
++<a [routerLink]="['/LoginPage']">Login</a>
+-- 
+2.5.4 (Apple Git-61)
+
+
+From a556df52b68c3f04e89e0b338fb9e5753c34ac4a Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Wed, 27 Jan 2016 00:28:44 +0700
+Subject: [PATCH 159/163] Step 21.10: add login component
+
+---
+ packages/socially-mobile/client/login/login.ts | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+ create mode 100644 packages/socially-mobile/client/login/login.ts
+
+diff --git a/packages/socially-mobile/client/login/login.ts b/packages/socially-mobile/client/login/login.ts
+new file mode 100644
+index 0000000..2d3b84b
+--- /dev/null
++++ b/packages/socially-mobile/client/login/login.ts
+@@ -0,0 +1,15 @@
++
++import {Component} from 'angular2/core';
++
++import {ROUTER_DIRECTIVES} from 'angular2/router';
++
++import {MeteorComponent} from 'angular2-meteor';
++
++export * from './login-page';
++
++@Component({
++  selector: 'login',
++  templateUrl: '/packages/socially-mobile/client/login/login.html',
++  directives: [ROUTER_DIRECTIVES]
++})
++export class Login {}
+-- 
+2.5.4 (Apple Git-61)
+
+
+From fc6f0b44c639daeb84287d2194bbf3fb44466e0c Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Wed, 27 Jan 2016 00:38:02 +0700
+Subject: [PATCH 160/163] Step 21.11: add login page component's template
+
+---
+ packages/socially-mobile/client/login/login-page.html | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+ create mode 100644 packages/socially-mobile/client/login/login-page.html
+
+diff --git a/packages/socially-mobile/client/login/login-page.html b/packages/socially-mobile/client/login/login-page.html
+new file mode 100644
+index 0000000..ea5e8e0
+--- /dev/null
++++ b/packages/socially-mobile/client/login/login-page.html
+@@ -0,0 +1,9 @@
++<div *ngIf="phoneStage">
++  <input type="text" placeholder="Phone Number" [(ngModel)]="phoneNumber">
++  <button (click)="requestVerification">Send</button>
++</div>
++
++<div *ngIf="!phoneStage">
++  <input type="text" placeholder="Enter Code" [(ngModel)]="verCode">
++  <button (click)="verifyPhone">Verify</button>
++</div>
+-- 
+2.5.4 (Apple Git-61)
+
+
+From f068aa40474136a3036656bdccdac32e90946fb6 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Wed, 27 Jan 2016 00:39:02 +0700
+Subject: [PATCH 161/163] Step 21.12: add login page component
+
+---
+ .../socially-mobile/client/login/login-page.ts     | 29 ++++++++++++++++++++++
+ 1 file changed, 29 insertions(+)
+ create mode 100644 packages/socially-mobile/client/login/login-page.ts
+
+diff --git a/packages/socially-mobile/client/login/login-page.ts b/packages/socially-mobile/client/login/login-page.ts
+new file mode 100644
+index 0000000..561abac
+--- /dev/null
++++ b/packages/socially-mobile/client/login/login-page.ts
+@@ -0,0 +1,29 @@
++
++import {Component} from 'angular2/core';
++
++import {Router} from 'angular2/router';
++
++@Component({
++  selector: 'login-page',
++  templateUrl: '/packages/socially-mobile/client/login/login-page.html'
++})
++export class LoginPage {
++  phoneNumber: string;
++  verCode: string;
++  phoneStage: boolean = true;
++
++  constructor(private router: Router) {}
++
++  requestVerification() {
++    Accounts.requestPhoneVerification(this.phoneNumber);
++    this.phoneStage = false;
++  }
++
++  verifyPhone() {
++    Accounts.verifyPhone(this.phoneNumber, this.verCode, (err) => {
++      if (!err) {
++        this.router.navigateByUrl('/');
++      }
++    });
++  }
++}
+-- 
+2.5.4 (Apple Git-61)
+
+
+From c8f8d8da8e1f90b4bd390c54a34ceb9a87770b0c Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Wed, 27 Jan 2016 00:41:59 +0700
+Subject: [PATCH 162/163] Step 21.13: register SystemJS module for the mobile
+ package
+
+---
+ packages/socially-mobile/system_config.js | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+ create mode 100644 packages/socially-mobile/system_config.js
+
+diff --git a/packages/socially-mobile/system_config.js b/packages/socially-mobile/system_config.js
+new file mode 100644
+index 0000000..097cd14
+--- /dev/null
++++ b/packages/socially-mobile/system_config.js
+@@ -0,0 +1,11 @@
++System.config({
++  packages: {
++    'socially': {
++      main: 'client/login/login',
++      format: 'register',
++      map: {
++        '.': System.normalizeSync('{socially-mobile}')
++      }
++    }
++  }
++});
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 948ee358eae40dd790c6cfb7ebcf5ce188a4a4f3 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Wed, 27 Jan 2016 00:43:37 +0700
+Subject: [PATCH 163/163] Step 21.14: add component files to the mobile package
+
+---
+ packages/socially-mobile/package.js | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff --git a/packages/socially-mobile/package.js b/packages/socially-mobile/package.js
+index af0575f..0ea1138 100644
+--- a/packages/socially-mobile/package.js
++++ b/packages/socially-mobile/package.js
+@@ -13,6 +13,15 @@ Package.describe({
+ Package.onUse(function(api) {
+   api.versionsFrom('1.2.1');
+   api.use('urigo:angular2-meteor');
++  api.use('okland:accounts-phone', 'web.cordova');
++
++  api.addFiles([
++    'client/login/login.html',
++    'client/login/login.ts',
++    'client/login/login-page.html',
++    'client/login/login-page.ts',
++    'system_config.js'
++    ], 'web.cordova');
+ });
+ 
+ Package.onTest(function(api) {
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 28a04588e6eff76eba3c55705b23ab7d507412e9 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Wed, 27 Jan 2016 01:01:27 +0700
+Subject: [PATCH 164/164] Step 21.15: add new login route to the app
+
+---
+ client/app.ts | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/client/app.ts b/client/app.ts
+index 607f9f1..9051558 100644
+--- a/client/app.ts
++++ b/client/app.ts
+@@ -12,6 +12,8 @@ import 'collections/methods';
+ 
+ import {ANGULAR2_GOOGLE_MAPS_PROVIDERS} from 'ng2-google-maps/core';
+ 
++import {LoginPage, Login} from 'socially'; 
++
+ Accounts.ui.config({
+   passwordSignupFields: 'USERNAME_AND_EMAIL'
+ });
+@@ -25,7 +27,8 @@ Accounts.ui.config({
+ })
+ @RouteConfig([
+     { path: '/', as: 'PartiesList', component: PartiesList },
+-    { path: '/party/:partyId', as: 'PartyDetails', component: PartyDetails }
++    { path: '/party/:partyId', as: 'PartyDetails', component: PartyDetails },
++    { path: '/login', as: 'LoginPage', component: LoginPage || Login }
+ ])
+ class Socially {}
+ 
+-- 
+2.5.4 (Apple Git-61)
+
