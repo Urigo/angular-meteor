@@ -11,9 +11,9 @@ angular.module('angular-meteor.view-model', [
  */
 .factory('$$ViewModel', [
   '$$utils',
-  '$$Mixer',
+  '$Mixer',
 
-function($$utils, $$Mixer) {
+function($$utils, $Mixer) {
   function $$ViewModel(vm = this) {
     // Defines the view model on the scope.
     this.$$vm = vm;
@@ -25,7 +25,7 @@ function($$utils, $$Mixer) {
       throw Error('argument 1 must be an object');
 
     // Apply mixin functions
-    $$Mixer.mixins.forEach((mixin) => {
+    $Mixer._mixins.forEach((mixin) => {
       // Filter only the methods which start with a single $
       let keys = _.keys(mixin).filter(k => k.match(/^\$[^\$]*$/));
       let proto = _.pick(mixin, keys);
@@ -36,7 +36,7 @@ function($$utils, $$Mixer) {
     });
 
     // Apply mixin constructors on the view model
-    $$Mixer.construct(this, vm);
+    $Mixer._construct(this, vm);
     return vm;
   };
 

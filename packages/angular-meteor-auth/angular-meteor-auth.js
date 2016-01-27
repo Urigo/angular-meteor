@@ -79,9 +79,9 @@ function($q) {
 
 
 .run([
-  '$$Mixer',
+  '$Mixer',
   '$$Auth',
 
-function($$Mixer, $$Auth) {
-  $$Mixer.mixin($$Auth);
+function($Mixer, $$Auth) {
+  $Mixer.mixin($$Auth);
 }]);

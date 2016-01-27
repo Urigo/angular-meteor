@@ -2,14 +2,14 @@ describe('angular-meteor.mixer', function() {
   beforeEach(angular.mock.module('angular-meteor'));
 
   var $rootScope;
-  var $$Mixer;
+  var $Mixer;
 
-  beforeEach(angular.mock.inject(function (_$rootScope_, _$$Mixer_) {
+  beforeEach(angular.mock.inject(function (_$rootScope_, _$Mixer_) {
     $rootScope = _$rootScope_;
-    $$Mixer = _$$Mixer_;
+    $Mixer = _$Mixer_;
   }));
 
-  describe('$$Mixer', function() {
+  describe('$Mixer', function() {
     var scope;
     var Mixin;
 
@@ -20,13 +20,13 @@ describe('angular-meteor.mixer', function() {
 
       Mixin.$method = angular.noop;
 
-      $$Mixer.mixin(Mixin);
+      $Mixer.mixin(Mixin);
       scope = $rootScope.$new();
     });
 
     afterEach(function() {
       delete $rootScope.$$ChildScope;
-      $$Mixer.mixout(Mixin);
+      $Mixer._mixout(Mixin);
       scope.$destroy();
     });
 

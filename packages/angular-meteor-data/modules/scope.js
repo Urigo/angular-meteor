@@ -5,9 +5,9 @@ angular.module('angular-meteor.scope', [
 
 .run([
   '$rootScope',
-  '$$Mixer',
+  '$Mixer',
 
-function($rootScope, $$Mixer) {
+function($rootScope, $Mixer) {
   let Scope = $rootScope.constructor;
   let $new = $rootScope.$new;
 
@@ -21,8 +21,8 @@ function($rootScope, $$Mixer) {
 
     // In case it's a child scope construct it and extend it's prototype if needed
     if (!isolate) {
-      if (shouldExtend) $$Mixer.extend(this.$$ChildScope);
-      $$Mixer.construct(scope);
+      if (shouldExtend) $Mixer._extend(this.$$ChildScope);
+      $Mixer._construct(scope);
     }
 
     return scope;

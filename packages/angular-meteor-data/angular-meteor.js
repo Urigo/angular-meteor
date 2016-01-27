@@ -10,14 +10,14 @@ angular.module('angular-meteor', [
 
 
 .run([
-  '$$Mixer',
+  '$Mixer',
   '$$ViewModel',
   '$$Core',
   '$$Reactive',
 
-function($$Mixer, $$ViewModel, $$Core, $$Reactive) {
+function($Mixer, $$ViewModel, $$Core, $$Reactive) {
   // Load all mixins
-  $$Mixer
+  $Mixer
     .mixin($$ViewModel)
     .mixin($$Core)
     .mixin($$Reactive);
