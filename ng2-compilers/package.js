@@ -20,14 +20,14 @@ Package.registerBuildPlugin({
     'caching-compiler@1.0.0',
     'mrt:cheerio@0.3.2',
     'barbatus:ts-compilers@0.2.5',
-    'ecmascript@0.3.1-modules.4',
+    'ecmascript@0.3.1-modules.5',
     'check@1.1.0',
     'underscore@1.0.4'
   ]
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.2.0.1');
+  api.versionsFrom('1.3-modules-beta.5');
 
   // Required in order to register plugins
   api.use('isobuild:compiler-plugin@1.0.0');
