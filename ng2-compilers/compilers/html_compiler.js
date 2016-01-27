@@ -37,7 +37,6 @@ HtmlCompiler = class HtmlCompiler extends NgCompiler {
     // to the body. It raises the issue though:
     // if no html at all the bootstrap won't be added.
     if (htmlFiles.length == 0) {
-      console.log('Compiling <app> tag as main component');
       try {
         templateFiles[0].addHtml({
           data: this._bootstrapHtml,
@@ -64,7 +63,7 @@ class NgHtmlCompiler extends NgCachingCompiler {
   }
 
   compileOneFile(file) {
-    console.log('Compiling HTML app file: ' + file.getPathInPackage());
+    console.log('Compiling main app HTML file: ' + file.getPathInPackage());
 
     var $contents = $(file.getContentsAsString());
     var $head = $contents.closest('head');
@@ -99,7 +98,9 @@ NgTemplateCompiler = class NgTemplateCompiler extends NgCachingCompiler {
   }
 
   compileOneFile(file) {
-    console.log('Compiling HTML template: ' + file.getPathInPackage());
+    if (file.getPathInPackage() != 'stub/stub.html')
+      console.log('Compiling HTML template: ' + file.getPathInPackage());
+
     return file.getContentsAsString();
   }
 
