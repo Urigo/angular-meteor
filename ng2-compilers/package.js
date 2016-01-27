@@ -39,6 +39,8 @@ Package.onUse(function(api) {
     'tracker@1.0.9',
     'underscore@1.0.4'
   ]);
+
+  api.addFiles('stub/stub.html');
 });
 
 Package.onTest(function(api) {
