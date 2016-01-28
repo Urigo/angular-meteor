@@ -16,7 +16,7 @@ Package.onUse(function(api) {
   ]);
 
   api.addFiles([
-    'typings/meteor-accounts.d.ts'
+    'typings/ng2-meteor-accounts.d.ts'
   ], 'server');
 
   api.addFiles([

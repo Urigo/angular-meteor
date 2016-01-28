@@ -1,9 +1,7 @@
-/// <reference path="../../typings/angular2-meteor.d.ts" />
+/// <reference path="../../typings/angular2-meteor/angular2-meteor.d.ts" />
 /// <reference path="../../typings/task.d.ts" />
 
 import {Component, View, Input} from 'angular2/core';
-
-import {NgClass} from 'angular2/common';
 
 import {MeteorComponent} from 'angular2-meteor';
 
@@ -11,8 +9,7 @@ import {MeteorComponent} from 'angular2-meteor';
   selector: 'task'
 })
 @View({
-    templateUrl: 'client/components/task.html',
-  directives: [NgClass]
+  templateUrl: 'client/components/task.html',
 })
 export class TaskView extends MeteorComponent {
   @Input('data') task: Task;

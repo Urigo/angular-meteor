@@ -17,7 +17,7 @@ Angular2 + Meteor integration.
 
 ## Change Log
 
-Check out change log of the package [here](CHANGELOG.md).
+Check out package change log [here](CHANGELOG.md).
 
 ## Tutorial
 
@@ -46,7 +46,7 @@ ES6 modules are supported via SystemJS module loader library.
 To start, create `app.ts` file, import `Component` and `View` and then bootstrap the app:
 ````ts
     import {Component, View} from 'angular2/core';
-    import {bootstrap} from 'angular2/bootstrap';
+    import {bootstrap} from 'angular2/platform/browser';
 
     @Component({
       selector: 'socially'
@@ -173,7 +173,7 @@ updated package and started getting errors in the console, remove "angular2" fol
 
 ## Roadmap
 
-You can check out the package's roadmap and its status [here](https://trello.com/b/kSa6JNCk/angular2-tutorial).
+This package's roadmap and its status [here](https://trello.com/b/kSa6JNCk/angular2-tutorial).
 
 ## Contribution
 If you know how to make integration of Angular 2 and Meteor better, you are welcome!

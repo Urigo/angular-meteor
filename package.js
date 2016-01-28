@@ -1,6 +1,6 @@
 Package.describe({
   name: 'urigo:angular2-meteor',
-  version: '0.3.9',
+  version: '0.4.0',
   summary: 'Angular2 and Meteor integration',
   git: 'https://github.com/Urigo/Meteor-Angular2',
   documentation: 'README.md'
@@ -30,7 +30,7 @@ Package.onUse(function(api) {
     'mongo@1.1.1',
     'tracker@1.0.8',
     'underscore@1.0.4',
-    'barbatus:angular2@0.8.1'
+    'barbatus:angular2@0.8.3'
   ]);
 
   api.imply([
@@ -43,7 +43,7 @@ Package.onUse(function(api) {
 
   // Adds TS typings.
   api.addFiles([
-    'typings/angular2-meteor.d.ts'
+    'typings/angular2-meteor/angular2-meteor.d.ts'
   ], 'server');
 
   api.addFiles([

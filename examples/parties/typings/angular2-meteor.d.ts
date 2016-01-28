@@ -4,8 +4,8 @@
 
 declare module ngMeteor {
   class MeteorComponent {
-    subscribe(name: string, ...rest: any[]);
-    autorun(runFunc: Function, autoBind?: boolean): void;
+    subscribe(name: string, ...rest: any[]): Meteor.SubscriptionHandle;
+    autorun(runFunc: Function, autoBind?: boolean): Tracker.Computation;
     call(name: string, ...rest: any[]);
   }
 

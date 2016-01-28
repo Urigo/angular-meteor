@@ -1,8 +1,6 @@
-/// <reference path="../typings/angular2-meteor.d.ts" />
+/// <reference path="../typings/angular2-meteor/angular2-meteor.d.ts" />
 
 import {Component, View, provide, enableProdMode} from 'angular2/core';
-
-import {FORM_DIRECTIVES} from 'angular2/common';
 
 import {Tasks} from 'tasks';
 
@@ -17,7 +15,7 @@ enableProdMode();
 })
 @View({
   templateUrl: 'client/app.html',
-  directives: [FORM_DIRECTIVES, TaskList]
+  directives: [TaskList]
 })
 export class Todos {
   addTask(text) {
