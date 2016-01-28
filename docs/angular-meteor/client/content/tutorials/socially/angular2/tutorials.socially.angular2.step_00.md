@@ -156,7 +156,11 @@ Let's continue defining our Angular 2 application module.
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="0.5"}}
 
-First we're importing the dependencies we needed from `angular2/core` and `angular2/bootstrap`. This is not a folder and files in your directory, but a reference to System.js modules aliased as `angular2/core` and `angular2/bootstrap` and available in the `urigo:angular2-meteor` package.
+First we're importing the dependencies we needed from `angular2/core` and `angular2/platform/browser`. This is not a folder and files in your directory, but a reference to System.js modules aliased as `angular2/core` and `angular2/platform/browser`.
+They are some of the Angular 2 main modules that are available as part of the `urigo:angular2-meteor` package.
+
+One of the great architectural innovation of Angular 2 is that an app written with Angular 2 can run on different
+platforms. As you can see in our case, we are bootstrapping using the bootstrap from the "browser" platform since our app is a regular Web app to run in a browser.
 
 Notice the `@` syntax. In Angular 2, these are called Annotations. They are similar to a new feature coming to ES7 called Decorators.
 From a consumers point of view, they are almost the same except Decorators are a proposed standard allowing us to add class metadata while Angular 2's Annotations are a realization of that metadata, implemented with the help of Decorators in TypeScript.
