@@ -1,4 +1,4 @@
-# Angular2-Meteor [![bitHound Overall Score](https://www.bithound.io/github/Urigo/angular2-meteor/badges/score.svg)](https://www.bithound.io/github/Urigo/angular2-meteor)
+# Angular2-Meteor [![bitHound Overall Score](https://www.bithound.io/github/Urigo/angular2-meteor/badges/score.svg)](https://www.bithound.io/github/Urigo/angular2-meteor) [![Build Status](https://travis-ci.org/Urigo/angular2-meteor.svg?branch=master)](https://travis-ci.org/Urigo/angular2-meteor)
 Angular2 + Meteor integration.
 
 ##### Angular2 version: beta-1.
