@@ -27,8 +27,8 @@ Package.registerBuildPlugin({
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.3-modules-beta.5');
-
+  api.versionsFrom('1.3-modules-beta.4');
+Fix version constraints
   // Required in order to register plugins
   api.use('isobuild:compiler-plugin@1.0.0');
 
