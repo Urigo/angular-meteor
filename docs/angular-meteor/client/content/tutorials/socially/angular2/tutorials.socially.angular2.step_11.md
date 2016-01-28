@@ -20,11 +20,8 @@ You can find more information about Cordova integration with Meteor [here](https
 
 ### Running on Android Emulator
 
-In the terminal, go to your app folder and type:
+Follow this [instruction](https://github.com/meteor/meteor/wiki/Mobile-Development-Install:-Android-on-Mac) to install all of the necessary tools to build an Android app from your project.
 
-    meteor install-sdk android
-
-This will help you install all of the necessary tools to build an Android app from your project.
 When you are done installing everything, type:
 
     meteor add-platform android
@@ -52,11 +49,9 @@ The app will be built and installed on your device. If you want to point your ap
 
 If you have a Mac, you can run your app inside the iOS simulator.
 
-Go to your app folder and type:
+Follow this [instruction](https://github.com/meteor/meteor/wiki/Mobile-Development-Install:-iOS-on-Mac) to run you through the setup necessary to build an iOS app from your project.
 
-    meteor install-sdk ios
-
-This will run you through the setup necessary to build an iOS app from your project. When you're done, type:
+When you're done, type:
 
     meteor add-platform ios
     meteor run ios
