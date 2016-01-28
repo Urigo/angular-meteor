@@ -1,3 +1,4 @@
 language: node_js
+sudo: required
 install: curl https://install.meteor.com | /bin/sh
 script: ./run_tests_ci.sh
