@@ -1,8 +1,8 @@
 angular.module('angular-meteor.reactive', [
   'angular-meteor.utils',
   'angular-meteor.mixer',
-  'angular-meteor.view-model',
-  'angular-meteor.core'
+  'angular-meteor.core',
+  'angular-meteor.view-model'
 ])
 
 

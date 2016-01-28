@@ -16,8 +16,8 @@
 A service which lets us apply mixins into the `ChildScope` prototype. The flow is simple. Once we define a mixin, it will be stored in the `$Mixer`, and any time a `ChildScope` prototype is created it will be extended by the `$Mixer`. This concept is good because it keeps our code clean and simple, and easy to extend. So any time we would like to define a new behaviour to our scope, we will just use the `$Mixer` service.
 
 As for now, `angular-meteor` consists of 4 mixins,
- [$$ViewModel](api/1.4.0/viewmodel),
  [$$Core](api/1.4.0/core),
+ [$$ViewModel](api/1.4.0/viewmodel),
  [$$Reactive](api/1.4.0/reactive) and
  [$$Auth](api/1.4.0/auth).
 As you can probably notice these mixins has a notation of a '$$' sequence since noramlly they should not be exposed as part of our API but they are still making for a convinient way to seperate our logic into different segments.

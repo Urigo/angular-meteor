@@ -1,7 +1,6 @@
 angular.module('angular-meteor.core', [
   'angular-meteor.utils',
-  'angular-meteor.mixer',
-  'angular-meteor.view-model'
+  'angular-meteor.mixer'
 ])
 
 
@@ -95,10 +94,9 @@ function($q, $$utils) {
     return deferred;
   };
 
-  // Binds an object or a function to the scope to the view model and digest it once
-  // it is invoked
+  // Binds an object or a function to the scope to the view model and digest it once it is invoked
   $$Core.$$bind = function(fn) {
-    return $$utils.bind(fn, this.$$vm, this.$$throttledDigest.bind(this));
+    return $$utils.bind(fn, this, this.$$throttledDigest.bind(this));
   };
 
   return $$Core;

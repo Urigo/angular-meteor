@@ -1,7 +1,7 @@
 angular.module('angular-meteor.auth', [
   'angular-meteor.mixer',
-  'angular-meteor.view-model',
   'angular-meteor.core',
+  'angular-meteor.view-model',
   'angular-meteor.reactive'
 ])
 

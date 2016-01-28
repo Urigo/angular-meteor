@@ -1,6 +1,7 @@
 angular.module('angular-meteor.view-model', [
   'angular-meteor.utils',
-  'angular-meteor.mixer'
+  'angular-meteor.mixer',
+  'angular-meteor.core'
 ])
 
 
@@ -38,6 +39,11 @@ function($$utils, $Mixer) {
     // Apply mixin constructors on the view model
     $Mixer._construct(this, vm);
     return vm;
+  };
+
+  // Override $$Core.$$bind() to be bound to view model instead of scope
+  $$ViewModel.$$bind = function(fn) {
+    return $$utils.bind(fn, this.$$vm, this.$$throttledDigest.bind(this));
   };
 
   return $$ViewModel;

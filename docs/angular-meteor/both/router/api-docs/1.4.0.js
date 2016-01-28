@@ -24,19 +24,19 @@ API_1_4_0 = function (version, basedOnTemplatesOf) {
           },
           {
             id: "02",
-            route: "api." + version + ".viewModel",
-            path: urlBase + "viewModel",
-            title: "$$ViewModel",
-            seoTitle: "$$ViewModel",
-            mdContent: "api." + templatePrefix + ".viewModel"
-          },
-          {
-            id: "03",
             route: "api." + version + ".core",
             path: urlBase + "core",
             title: "$$Core",
             seoTitle: "$$Core",
             mdContent: "api." + templatePrefix + ".core"
+          },
+          {
+            id: "03",
+            route: "api." + version + ".viewModel",
+            path: urlBase + "viewModel",
+            title: "$$ViewModel",
+            seoTitle: "$$ViewModel",
+            mdContent: "api." + templatePrefix + ".viewModel"
           },
           {
             id: "04",
