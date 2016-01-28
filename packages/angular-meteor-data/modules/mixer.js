@@ -2,8 +2,11 @@ angular.module('angular-meteor.mixer', [])
 
 
 /*
-  A service which stores mixins which can be appended later on by their decleration order.
-  Mainly used to extend ChildScope prototypes.
+  A service which lets us apply mixins into the `ChildScope` prototype. The flow is simple. Once
+  we define a mixin, it will be stored in the `$Mixer`, and any time a `ChildScope` prototype is
+  created it will be extended by the `$Mixer`. This concept is good because it keeps our code
+  clean and simple, and easy to extend. So any time we would like to define a new behaviour to our
+  scope, we will just use the `$Mixer` service.
  */
 .service('$Mixer', function() {
   this._mixins = [];

@@ -5,9 +5,9 @@ angular.module('angular-meteor.view-model', [
 
 
 /*
-  A mixin which gives us the ability to wrap an object with scope functions bounded to the scope.
-  Mainly used on controllers which are also used as the view models. Note that only a single
-  view model can be bounded to a scope, otherwise it will have an unexpected behaviour.
+  A mixin which lets us bind a view model into a scope. Note that only a single view model can be bound,
+  otherwise the scope might behave unexpectedly. Mainly used to define the controller as the view model,
+  and very useful when wanting to use Angular's `controllerAs` syntax.
  */
 .factory('$$ViewModel', [
   '$$utils',

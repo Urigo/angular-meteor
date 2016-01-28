@@ -271,5 +271,64 @@ describe('angular-meteor.core', function() {
         });
       });
     });
+
+    describe('$call()',function() {
+      var scope;
+
+      beforeEach(function() {
+        scope = $rootScope.$new();
+      });
+
+      afterEach(function() {
+        scope.$destroy();
+      });
+
+      it('should call Meteor.call() and digest once called back', function(done) {
+        var digest = scope.$digest;
+
+        spyOn(Meteor, 'call').and.callFake(function(name, arg1, arg2, cb) {
+          expect(name).toEqual('method');
+          expect(arg1).toEqual('foo');
+          expect(arg2).toEqual('bar');
+          cb();
+        });
+
+        scope.$digest = function() {
+         digest.apply(this, arguments);
+         done()
+        };
+
+        scope.$call('method', 'foo', 'bar', angular.noop);
+      });
+    });
+
+    describe('$apply()',function() {
+      var scope;
+
+      beforeEach(function() {
+        scope = $rootScope.$new();
+      });
+
+      afterEach(function() {
+        scope.$destroy();
+      });
+
+      it('should call Meteor.apply() and digest once called back', function(done) {
+        var digest = scope.$digest;
+
+        spyOn(Meteor, 'apply').and.callFake(function(name, args, cb) {
+          expect(name).toEqual('method');
+          expect(args).toEqual(['foo', 'bar']);
+          cb();
+        });
+
+        scope.$digest = function() {
+         digest.apply(this, arguments);
+         done()
+        };
+
+        scope.$apply('method', ['foo', 'bar'], angular.noop);
+      });
+    });
   });
 });

@@ -9,9 +9,10 @@ angular.module('angular-meteor.core', [
   A mixin which provides us with core Meteor functions.
  */
 .factory('$$Core', [
+  '$q',
   '$$utils',
 
-function($$utils) {
+function($q, $$utils) {
   function $$Core() {}
 
   // Calls Meteor.autorun() which will be digested after each run and automatically destroyed
@@ -59,6 +60,20 @@ function($$utils) {
     return result;
   };
 
+  // Calls Meteor.call() wrapped by a digestion cycle
+  $$Core.$call = function(...args) {
+    let fn = args.pop();
+    if (_.isFunction(fn)) fn = this.$$bind(fn);
+    return Meteor.call(...args, fn);
+  };
+
+  // Calls Meteor.apply() wrapped by a digestion cycle
+  $$Core.$apply = function(...args) {
+    let fn = args.pop();
+    if (_.isFunction(fn)) fn = this.$$bind(fn);
+    return Meteor.apply(...args, fn);
+  };
+
   $$Core.$$autoStop = function(stoppable) {
     this.$on('$destroy', stoppable.stop.bind(stoppable));
   };
@@ -70,6 +85,14 @@ function($$utils) {
       !this.$$phase;
 
     if (isDigestable) this.$digest();
+  };
+
+  // Creates a promise only that the digestion cycle will be called at its fulfillment
+  $$Core.$$defer = function() {
+    let deferred = $q.defer();
+    // Once promise has been fulfilled, digest
+    deferred.promise = deferred.promise.finally(this.$$throttledDigest.bind(this));
+    return deferred;
   };
 
   // Binds an object or a function to the scope to the view model and digest it once

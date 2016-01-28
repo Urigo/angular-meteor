@@ -7,7 +7,8 @@ angular.module('angular-meteor.reactive', [
 
 
 /*
-  A mixin which provides us with reactive functions
+  A mixin which enhance our reactive abilities by providing methods that are capable of updating
+  our scope reactively.
  */
 .factory('$$Reactive', [
   '$parse',

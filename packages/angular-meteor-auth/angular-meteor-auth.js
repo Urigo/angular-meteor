@@ -7,12 +7,11 @@ angular.module('angular-meteor.auth', [
 
 
 /*
-  A mixin which is provided with authentication related properties and methods
+  A mixin which provides us with authentication related methods and properties.
+  This mixin comes in a seperate package called `angular-meteor-auth`. Note that `accounts-base`
+  package needs to be installed in order for this module to work, otherwise an error will be thrown.
  */
-.service('$$Auth', [
-  '$q',
-
-function($q) {
+.service('$$Auth', function() {
   const Accounts = (Package['accounts-base'] || {}).Accounts;
 
   if (!Accounts) throw Error(
@@ -44,7 +43,7 @@ function($q) {
     if (!_.isFunction(validate))
       throw Error('argument 1 must be a function');
 
-    let deferred = $q.defer();
+    let deferred = this.$$defer();
 
     let computation = this.$autorun((computation) => {
       if (this.$reactivate('isLoggingIn')) return;
@@ -68,14 +67,13 @@ function($q) {
       deferred.reject(error);
     });
 
-    // Once promise has been fulfilled, digest
-    let promise = deferred.promise.finally(this.$$throttledDigest.bind(this));
+    let promise = deferred.promise;
     promise.stop = computation.stop.bind(computation);
     return promise;
   };
 
   return $$Auth;
-}])
+})
 
 
 .run([
