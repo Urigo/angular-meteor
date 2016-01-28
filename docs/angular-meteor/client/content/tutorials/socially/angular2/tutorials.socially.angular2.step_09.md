@@ -143,7 +143,7 @@ Let's elaborate our "party" publication on the server. We want to publish both a
 
 Looks like a lot of code, but it does something powerful. The privacy query, we introduced above, was moved to a separate method called `buildQuery`. We'll need this function to avoid repetition with each different parties query.
 
-> Notice that we used `queryBuild.call(this)` calling syntax in order to make context of this method the same as in Meteor.publish and be able to use `this.userId` inside that method.
+> Notice that we used `buildQuery.call(this)` calling syntax in order to make context of this method the same as in Meteor.publish and be able to use `this.userId` inside that method.
 
 Let's subscribe to the new publication in the PartyDetails to load one specific party:
 
