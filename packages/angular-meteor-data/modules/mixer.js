@@ -36,7 +36,7 @@ angular.module('angular-meteor.mixer', [])
   };
 
   // Extend prototype with the defined mixins
-  this._extend = (Klass) => {
-    return _.extend(Klass.prototype, ...this._mixins);
+  this._extend = (obj) => {
+    return _.extend(obj, ...this._mixins);
   };
 });

@@ -22,15 +22,6 @@ describe('angular-meteor.auth', function() {
       expect(scope.$awaitUser).toEqual(jasmine.any(Function));
     });
 
-    it('should extend view model', function() {
-      var scope = $rootScope.$new();
-      var vm = scope.$viewModel({});
-      expect(vm.currentUser).toBeDefined();
-      expect(vm.currentUserId).toBeDefined();
-      expect(vm.isLoggingIn).toBeDefined();
-      expect(vm.$awaitUser).toEqual(jasmine.any(Function));
-    });
-
     describe('currentUser', function() {
       var scope;
 

@@ -14,13 +14,6 @@ describe('angular-meteor.core', function() {
       expect(scope.$autorun).toEqual(jasmine.any(Function));
     });
 
-    it('should extend view model', function() {
-      var scope = $rootScope.$new();
-      var vm = scope.$viewModel({});
-      expect(vm.$subscribe).toEqual(jasmine.any(Function));
-      expect(vm.$autorun).toEqual(jasmine.any(Function));
-    });
-
     describe('$autorun()', function() {
       var scope;
 

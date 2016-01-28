@@ -14,15 +14,8 @@ describe('angular-meteor.reactive', function() {
 
     it('should extend child scope', function() {
       var scope = $rootScope.$new();
-      expect($rootScope.$helpers).toEqual(jasmine.any(Function));
-      expect($rootScope.$reactivate).toEqual(jasmine.any(Function));
-    });
-
-    it('should extend view model', function() {
-      var scope = $rootScope.$new();
-      var vm = scope.$viewModel({});
-      expect($rootScope.$helpers).toEqual(jasmine.any(Function));
-      expect($rootScope.$reactivate).toEqual(jasmine.any(Function));
+      expect(scope.$helpers).toEqual(jasmine.any(Function));
+      expect(scope.$reactivate).toEqual(jasmine.any(Function));
     });
 
     describe('$helpers()', function() {

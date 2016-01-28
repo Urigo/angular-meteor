@@ -1,6 +1,7 @@
 describe('angular-meteor.mixer', function() {
   beforeEach(angular.mock.module('angular-meteor'));
 
+  var $compile;
   var $rootScope;
   var $Mixer;
 
@@ -10,7 +11,6 @@ describe('angular-meteor.mixer', function() {
   }));
 
   describe('$Mixer', function() {
-    var scope;
     var Mixin;
 
     beforeEach(function() {
@@ -21,18 +21,30 @@ describe('angular-meteor.mixer', function() {
       Mixin.$method = angular.noop;
 
       $Mixer.mixin(Mixin);
-      scope = $rootScope.$new();
     });
 
     afterEach(function() {
       delete $rootScope.$$ChildScope;
       $Mixer._mixout(Mixin);
-      scope.$destroy();
+    });
+
+    it('should leave root scope as is', function() {
+      expect($rootScope.prop).toBeUndefined();
+      expect($rootScope.$method).toBeUndefined();
     });
 
     it('should extend child scope', function() {
+      var scope = $rootScope.$new();
       expect(scope.prop).toEqual('prop');
       expect(scope.$method).toEqual(jasmine.any(Function));
+      scope.$destroy();
+    });
+
+    it('should extend isolated scope', function() {
+      var scope = $rootScope.$new(true);
+      expect(scope.prop).toEqual('prop');
+      expect(scope.$method).toEqual(jasmine.any(Function));
+      scope.$destroy();
     });
   });
 });
