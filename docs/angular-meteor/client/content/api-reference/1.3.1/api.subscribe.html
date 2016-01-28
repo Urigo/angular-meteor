@@ -105,7 +105,7 @@ The method returns exactly the same parameters as [Meteor.subscribe](http://docs
 
       this.numberOfParties = 3;
 
-      var subscriptionHandle = this.subscribe('parties', [this.numberOfParties], {
+      var subscriptionHandle = this.subscribe('parties', () => [this.numberOfParties], {
         onReady: function () {
           console.log("onReady And the Items actually Arrive", arguments);
           subscriptionHandle.stop();  // Stopping the subscription, will cause onStop to fire
