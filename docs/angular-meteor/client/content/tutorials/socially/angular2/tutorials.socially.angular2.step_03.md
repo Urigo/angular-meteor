@@ -1,7 +1,7 @@
 {{#template name="tutorials.socially.angular2.step_03.md"}}
 {{> downloadPreviousStep stepName="step_02"}}
 
-Now have a client side application that creates and renders it's own data.
+Now we have a client side application that creates and renders it's own data.
 
 So, if we were in any framework other than Meteor, we would likely start implementing a series of REST endpoints to connect the server to the client.
 We would also need to create a database and functions to connect to it.
