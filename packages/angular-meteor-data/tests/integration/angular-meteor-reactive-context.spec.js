@@ -406,6 +406,77 @@ describe('angular-meteor', function () {
           expect(callCount).toBe(2);
         });
 
+        it('should NOT trigger autorun dependencies when using array and adding an element sub property while watching as a collection', function () {
+          var callCount = 0;
+
+          context.prop = [{
+            mySubProp: 10
+          }];
+
+          reactiveContext.helpers({
+            myMethod: function () {
+              callCount++;
+              return reactiveContext.getCollectionReactively('prop');
+            }
+          });
+
+          $rootScope.$apply();
+          Tracker.flush();
+          expect(callCount).toBe(1);
+
+          context.prop[0].newProp = 20;
+          $rootScope.$apply();
+          Tracker.flush();
+
+          expect(callCount).toBe(1);
+        });
+
+        it('should trigger autorun dependencies when using array and replacing an element while watching as a collection', function () {
+          var callCount = 0;
+
+          context.prop = [10];
+
+          reactiveContext.helpers({
+            myMethod: function () {
+              callCount++;
+              return reactiveContext.getCollectionReactively('prop', true);
+            }
+          });
+
+          $rootScope.$apply();
+          Tracker.flush();
+          expect(callCount).toBe(1);
+
+          context.prop[0] = 20;
+          $rootScope.$apply();
+          Tracker.flush();
+
+          expect(callCount).toBe(2);
+        });
+
+        it('should trigger autorun dependencies when using array and adding an element while watching as a collection', function () {
+          var callCount = 0;
+
+          context.prop = [10];
+
+          reactiveContext.helpers({
+            myMethod: function () {
+              callCount++;
+              return reactiveContext.getCollectionReactively('prop', true);
+            }
+          });
+
+          $rootScope.$apply();
+          Tracker.flush();
+          expect(callCount).toBe(1);
+
+          context.prop.push(20);
+          $rootScope.$apply();
+          Tracker.flush();
+
+          expect(callCount).toBe(2);
+        });
+
         it ('should not run getReactively() for cursors', function() {
           expect($scope.$$watchersCount).toBe(0);
 
@@ -464,6 +535,28 @@ describe('angular-meteor', function () {
         });
       });
 
+      describe('getCollectionReactively()', function() {
+        it('should call Scope.getCollectionReactively() with context', function() {
+          $scope.getCollectionReactively = jasmine.createSpy('getCollectionReactively');
+          reactiveContext.getCollectionReactively('myProp');
+          expect($scope.getCollectionReactively).toHaveBeenCalledWith(context, 'myProp');
+        });
+
+        it('should get the value from the context when using getCollectionReactively on a primitive', function () {
+          context.myProp = [10];
+          var value = reactiveContext.getCollectionReactively('myProp');
+          expect(value).toEqual([10]);
+        });
+
+        it('should get the value from the context when using getCollectionReactively on an object', function () {
+          context.myProp = {
+            subProp: [10]
+          };
+          var value = reactiveContext.getCollectionReactively('myProp.subProp');
+          expect(value).toEqual([10]);
+        });
+      });
+
       describe('subscribe()', function() {
         it('should call Scope.subscribe()', function() {
           $scope.subscribe = jasmine.createSpy('subscribe');
@@ -494,6 +587,28 @@ describe('angular-meteor', function () {
           expect(callCount).toBe(2);
         });
 
+        it('should create a dependency when using subscription with getCollectionReactively()', function () {
+          context.myProp = {
+            subProp: [10]
+          };
+
+          $scope.$apply();
+
+          var callCount = 0;
+
+          reactiveContext.subscribe('t', function () {
+            callCount++;
+            return [reactiveContext.getCollectionReactively('myProp.subProp')];
+          });
+
+          $scope.$apply();
+          context.myProp.subProp.push(2);
+          $scope.$apply();
+
+          Tracker.flush();
+
+          expect(callCount).toBe(2);
+        });
 
         it('should create a subscription with no callback or arguments provided', function () {
           var subscribeSpy = spyOn(Meteor, 'subscribe').and.returnValue({

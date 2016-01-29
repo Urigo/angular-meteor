@@ -59,6 +59,23 @@ function($rootScope, $parse, ReactiveContext, utils) {
     return result;
   };
 
+  this._getReactively = function(context, k, watcher) {
+    if (angular.isUndefined(context)) context = this;
+
+    if (!_.isString(k))
+      throw Error("'key' must be a string");
+
+    context._dependencies = context._dependencies || {};
+
+    if (!context._dependencies[k]) {
+      context._dependencies[k] = new Tracker.Dependency();
+      watcher.call(this, context, k);
+    }
+
+    context._dependencies[k].depend();
+    return $parse(k)(context);
+  };
+
   this.getReactively = function(...args) {
     let context, k, isDeep;
 
@@ -67,36 +84,42 @@ function($rootScope, $parse, ReactiveContext, utils) {
     else
       [k, isDeep] = args;
 
-    if (angular.isUndefined(context)) context = this;
     if (angular.isUndefined(isDeep)) isDeep = false;
 
-    if (!_.isString(k))
-      throw Error("'key' must be a string");
     if (!_.isBoolean(isDeep))
       throw Error("'isDeep' must be a boolean");
 
-    context._dependencies = context._dependencies || {};
-
-    if (!context._dependencies[k]) {
-      context._dependencies[k] = new Tracker.Dependency();
-      this._watchModel(context, k, isDeep);
-    }
-
-    context._dependencies[k].depend();
-    return $parse(k)(context);
+    return this._getReactively(context, k, (...args) => this._watchModel(...args, isDeep || false));
   };
 
-  this._watchModel = function(context, k, isDeep) {
+  this.getCollectionReactively = function(...args) {
+    let context, k;
+    if (_.isObject(args[0]))
+      [context, k] = args;
+    else
+      [k] = args;
+    return this._getReactively(context, k, this._watchCollection);
+  };
+
+  this._watch = function(context, k, watcher) {
     let getVal = _.partial($parse(k), context);
     let initialVal = getVal();
 
-    this.$watch(getVal, (val, oldVal) => {
+    watcher.call(this, getVal, (val, oldVal) => {
       let hasChanged =
         val !== initialVal ||
         val !== oldVal
 
       if (hasChanged) context._dependencies[k].changed();
-    }, isDeep);
+    });
+  };
+
+  this._watchModel = function(context, k, isDeep) {
+    this._watch(context, k, (...args) => this.$watch(...args, isDeep));
+  };
+
+  this._watchCollection = function(context, k) {
+    this._watch(context, k, this.$watchCollection);
   };
 
   this._autoStop = function(stoppable) {
