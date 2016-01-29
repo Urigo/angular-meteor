@@ -39,7 +39,7 @@ Add to the beginning of the `app.js` file:
 
 Now that we've created the collection, our client needs to subscribe to its changes and bind it to our parties array.
 
-To bind them we are going to use the built-in angular-meteor feature called [helpers](/api/1.3.0/helpers). 
+To bind them we are going to use the built-in angular-meteor feature called [helpers](/api/1.3.2/helpers). 
 
 Those of you who used Meteor before, should be familiar with the concept of Helpers - these are definitions that will be available in the view, and will also have [reactive](http://docs.meteor.com/#/full/reactivity).
  
@@ -105,7 +105,7 @@ Try running more actions like updating an object from the console and so on. Che
 
 # Upgrading to controllerAs syntax
 
-As a best practice, and as preparation to the future Angular 2.0, we recommend use `controllerAs` syntax, you can find more information about why and how to use it in [JhonPapa's styleguide](https://github.com/johnpapa/angular-styleguide#style-y030)
+As a best practice, and as preparation to the future Angular 2.0, we recommend use `controllerAs` syntax, you can find more information about why and how to use it in [JohnPapa's styleguide](https://github.com/johnpapa/angular-styleguide#style-y030)
 
 So first, let's give a name to our controller in the view:
 
@@ -115,7 +115,7 @@ Great, now we need to make some changes in the implementation of the controller 
 
 We also need to call [$reactive](/api/1.3.0/reactive) now and attach the `$scope` in order to declare and extend the controller, and turn it to Reactive controller.
 
-> You do not need to do this when using just `$scope` without `controllerAs` because Angular-Meteor does this for.
+> You do not need to do this when using just `$scope` without `controllerAs` because Angular-Meteor does this for you.
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="3.5"}}
 
@@ -129,9 +129,9 @@ A Component is a regular directive, with controller and with specific logic that
 
 This is a better pattern that let's you reuse code more easily but you can continue using your current way of writing Angular apps because the controller code stays the same.
 
-You can find some more information about with approach [here](http://teropa.info/blog/2015/10/18/refactoring-angular-apps-to-components.html).
+You can find some more information about this approach [here](http://teropa.info/blog/2015/10/18/refactoring-angular-apps-to-components.html).
 
-First,let's convert our Controller into a Component:
+First, let's convert our Controller into a Component:
 
 {{> DiffBox tutorialName="meteor-angular1-socially" step="3.8"}}
 
