@@ -210,10 +210,10 @@ So lets remove `index.html` for now and run the app:
 
 ## TypeScript Typings
 
-At this moment you've likely noticed a message in the console saying that `angular2/core` and `angular2/bootstrap` are not found.
+At this moment you've likely noticed a message in the console saying that `angular2/core` and `angular2/platform/browser` are not found.
 
 It occurs because the TypeScript compiler is configured in the package with diagnostics messages turned on by default and
-the TypeScript compiler doesn't know anything about the location of the `angular2/core` and `angular2/bootstrap` modules. To fix this, you will need to make use of TypeScript declaration files, which is a TypeScript way to inform the compiler about third-party API modules.
+the TypeScript compiler doesn't know anything about the location of the `angular2/core` and `angular2/platform/browser` modules. To fix this, you will need to make use of TypeScript declaration files, which is a TypeScript way to inform the compiler about third-party API modules.
 
 After the first run, you will find the `angular2-meteor.d.ts` file in the new folder called "typings".
 This file has been created by the package at start time and contains a special reference to Angular 2 and Meteor declaration files.
@@ -225,7 +225,7 @@ There are two ways to link `app.ts` and `angular2-meteor.d.ts` together:
 
         import {Component, View} from 'angular2/core';
 
-        import {bootstrap} from 'angular2/bootstrap';
+        import {bootstrap} from 'angular2/platform/browser';
 
  - another way is to create a custom [TypeScript configuration file](https://github.com/Microsoft/TypeScript/wiki/tsconfig.json) with the "files" property set to include all required typings files.
 
