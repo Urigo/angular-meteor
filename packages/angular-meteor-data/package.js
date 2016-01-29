@@ -19,12 +19,14 @@ Package.onUse(function (api) {
   api.use('isobuild:compiler-plugin@1.0.0');
 
   api.add_files([
+    'modules/router.js',
     'modules/utils.js',
     'modules/mixer.js',
     'modules/scope.js',
-    'modules/core.js',
     'modules/view-model.js',
-    'modules/reactive.js'
+    'modules/core.js',
+    'modules/reactive.js',
+    'angular-meteor.js'
   ], 'client');
 });
 
@@ -37,7 +39,7 @@ Package.onTest(function(api) {
   api.use('angular-meteor-data');
 
   api.addFiles([
-    'tests/integration/scope.spec.js',
+    'tests/integration/mixer.spec.js',
     'tests/integration/view-model.spec.js',
     'tests/integration/core.spec.js',
     'tests/integration/reactive.spec.js'

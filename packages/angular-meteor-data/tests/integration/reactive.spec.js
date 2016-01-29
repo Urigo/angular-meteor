@@ -1,7 +1,5 @@
-var testedModule = 'angular-meteor.reactive';
-
-describe(testedModule, function() {
-  beforeEach(angular.mock.module(testedModule));
+describe('angular-meteor.reactive', function() {
+  beforeEach(angular.mock.module('angular-meteor'));
 
   var $rootScope;
 
@@ -16,15 +14,8 @@ describe(testedModule, function() {
 
     it('should extend child scope', function() {
       var scope = $rootScope.$new();
-      expect($rootScope.$helpers).toEqual(jasmine.any(Function));
-      expect($rootScope.$reactivate).toEqual(jasmine.any(Function));
-    });
-
-    it('should extend view model', function() {
-      var scope = $rootScope.$new();
-      var vm = scope.$viewModel({});
-      expect($rootScope.$helpers).toEqual(jasmine.any(Function));
-      expect($rootScope.$reactivate).toEqual(jasmine.any(Function));
+      expect(scope.$helpers).toEqual(jasmine.any(Function));
+      expect(scope.$reactivate).toEqual(jasmine.any(Function));
     });
 
     describe('$helpers()', function() {
@@ -154,14 +145,15 @@ describe(testedModule, function() {
       });
 
       it('should update cursor helper once a document is removed', function () {
+        var doc = { _id: 'my-doc' }
+        DummyCollection.insert(doc);
+
         vm.$helpers({
           helper: function () {
             return DummyCollection.find();
           }
         });
 
-        var doc = { _id: 'my-doc' }
-        DummyCollection.insert(doc);
         DummyCollection.remove(doc);
         expect(vm.helper.length).toEqual(0);
       });

@@ -1,7 +1,5 @@
-var testedModule = 'angular-meteor.core';
-
-describe(testedModule, function() {
-  beforeEach(angular.mock.module(testedModule));
+describe('angular-meteor.core', function() {
+  beforeEach(angular.mock.module('angular-meteor'));
 
   var $rootScope;
 
@@ -14,13 +12,6 @@ describe(testedModule, function() {
       var scope = $rootScope.$new();
       expect(scope.$subscribe).toEqual(jasmine.any(Function));
       expect(scope.$autorun).toEqual(jasmine.any(Function));
-    });
-
-    it('should extend view model', function() {
-      var scope = $rootScope.$new();
-      var vm = scope.$viewModel({});
-      expect(vm.$subscribe).toEqual(jasmine.any(Function));
-      expect(vm.$autorun).toEqual(jasmine.any(Function));
     });
 
     describe('$autorun()', function() {
@@ -271,6 +262,65 @@ describe(testedModule, function() {
           scope.$subscribe('test', function() { return ['a', 'b', 10, 100]; });
           expect(subscribe).toHaveBeenCalledWith('test', 'a', 'b', 10, 100, jasmine.any(Function));
         });
+      });
+    });
+
+    describe('$call()',function() {
+      var scope;
+
+      beforeEach(function() {
+        scope = $rootScope.$new();
+      });
+
+      afterEach(function() {
+        scope.$destroy();
+      });
+
+      it('should call Meteor.call() and digest once called back', function(done) {
+        var digest = scope.$digest;
+
+        spyOn(Meteor, 'call').and.callFake(function(name, arg1, arg2, cb) {
+          expect(name).toEqual('method');
+          expect(arg1).toEqual('foo');
+          expect(arg2).toEqual('bar');
+          cb();
+        });
+
+        scope.$digest = function() {
+         digest.apply(this, arguments);
+         done()
+        };
+
+        scope.$call('method', 'foo', 'bar', angular.noop);
+      });
+    });
+
+    describe('$apply()',function() {
+      var scope;
+
+      beforeEach(function() {
+        scope = $rootScope.$new();
+      });
+
+      afterEach(function() {
+        scope.$destroy();
+      });
+
+      it('should call Meteor.apply() and digest once called back', function(done) {
+        var digest = scope.$digest;
+
+        spyOn(Meteor, 'apply').and.callFake(function(name, args, cb) {
+          expect(name).toEqual('method');
+          expect(args).toEqual(['foo', 'bar']);
+          cb();
+        });
+
+        scope.$digest = function() {
+         digest.apply(this, arguments);
+         done()
+        };
+
+        scope.$apply('method', ['foo', 'bar'], angular.noop);
       });
     });
   });
