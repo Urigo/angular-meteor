@@ -57,7 +57,7 @@ Although the controller is not yet doing very much, it plays a crucial role. The
 
 - The selector 'app', located on the `body` tag, references the name of our class, `Socially` (located in the JavaScript file `app.js` which is compiled automatically from `app.ts`).
 - The class Socially references the View using the templateUrl path to `client/app.html`
-- The Socially class constructor loads the data into properties of the component class itself, thus proving the data model for the view.
+- The Socially class constructor loads the data into properties of the component class itself, thus providing the data model for the view.
 - The template, `app.html` accesses `parties` using the Socially class context
 
 # Summary
