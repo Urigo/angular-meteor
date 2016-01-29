@@ -41,9 +41,9 @@ function($parse, $$utils) {
   // Gets a property reactively, and once it has been changed the computation will be recomputed
   $$Reactive.$reactivate = function(k, isDeep = false) {
     if (!_.isString(k))
-      throw Error('arguments 1 must be a string');
+      throw Error('argument 1 must be a string');
     if (!_.isBoolean(isDeep))
-      throw Error('arguments 2 must be a boolean');
+      throw Error('argument 2 must be a boolean');
 
     if (!this.$$vm.$$dependencies[k]) {
       this.$$vm.$$dependencies[k] = new Tracker.Dependency();

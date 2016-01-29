@@ -26,15 +26,8 @@ function($rootScope, $Mixer) {
     // without affection the root scope
     else if (firstChild) {
       // Creating a middle layer where all the extensions are gonna be applied to
-      let proto = $Mixer._extend(Object.create(this));
-      this.$$ChildScope.prototype = proto;
-
-      // The old deprecated way of setting a prototype
-      if (scope.__proto__)
-        scope.__proto__ = proto;
-      // The new way, not yet supported in all browsers
-      else
-        Object.setPrototypeOf(scope, proto);
+      scope.__proto__ = this.$$ChildScope.prototype =
+        $Mixer._extend(Object.create(this));
     }
 
     return $Mixer._construct(scope);
