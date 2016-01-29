@@ -61,6 +61,10 @@ function($rootScope, utils) {
       return this._scope.getReactively(this._context, ...args);
     }
 
+    getCollectionReactively(...args) {
+      return this._scope.getCollectionReactively(this._context, ...args);
+    }
+
     stop() {
       _.invoke(this._stoppables, 'stop');
     }

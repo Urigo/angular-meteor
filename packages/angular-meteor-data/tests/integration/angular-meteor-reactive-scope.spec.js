@@ -28,6 +28,7 @@ describe('angular-meteor', function () {
       expect(typeof $rootScope.autorun).toBe('function');
       expect(typeof $rootScope.subscribe).toBe('function');
       expect(typeof $rootScope.getReactively).toBe('function');
+      expect(typeof $rootScope.getCollectionReactively).toBe('function');
     });
 
     describe('$$ReactiveScope', function() {
@@ -310,6 +311,17 @@ describe('angular-meteor', function () {
 
           $scope.getReactively('myProp', false);
           expect(watchSpy).toHaveBeenCalledWith(jasmine.any(Function), jasmine.any(Function), false);
+
+          var args = watchSpy.calls.argsFor(0);
+          expect(args[0]()).toEqual('myProp');
+        });
+
+        it ('should register a scope watch with custom watcher (collection)', function() {
+          $scope.myProp = 'myProp';
+          var watchSpy = spyOn($scope, '$watchCollection');
+
+          $scope.getCollectionReactively('myProp', false);
+          expect(watchSpy).toHaveBeenCalledWith(jasmine.any(Function), jasmine.any(Function));
 
           var args = watchSpy.calls.argsFor(0);
           expect(args[0]()).toEqual('myProp');
