@@ -87,7 +87,7 @@ Each helper function should return a [MongoDB Cursor](http://docs.meteor.com/#/f
 
 ### $reactivate
 
-Gets a property from the `$scope` or the `view model` if set, and will notify once changed.
+Gets a model from the `$scope` or the `view model` if set, and will notify once changed.
 
 -------
 
@@ -108,7 +108,7 @@ Gets a property from the `$scope` or the `view model` if set, and will notify on
     <td>
       <a href="" class="label type-hint type-hint-string">String</a>
     </td>
-    <td>The name of the context's variable to bind to</td>
+    <td>The name of the property we would like to reactiate</td>
     <td>Yes</td>
   </tr>
   <tr>
@@ -160,6 +160,37 @@ This method returns the current value of the reactive variable.
 
       this.myUser.id = 29; // This will cause the helper to run again and update the view
     }]);
+
+------
+
+### $reactivateCollection
+
+Gets a collection from the `$scope` or the `view model` if set, and will notify once changed.
+
+-------
+
+### Arguments
+
+<table class="variables-matrix input-arguments">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Type</th>
+    <th>Details</th>
+    <th>Required</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td><strong>variableName</strong></td>
+    <td>
+      <a href="" class="label type-hint type-hint-string">String</a>
+    </td>
+    <td>The name of the property we would like to reactiate</td>
+    <td>Yes</td>
+  </tr>
+  </tbody>
+</table>
 
       {{/markdown}}
     </do-nothing>
