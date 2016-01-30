@@ -4,9 +4,10 @@ describe('angular-meteor.view-model', function() {
   var $rootScope;
   var $Mixer;
 
-  beforeEach(angular.mock.inject(function (_$rootScope_, _$Mixer_) {
+  beforeEach(angular.mock.inject(function (_$rootScope_, _$Mixer_, _$reactive_) {
     $rootScope = _$rootScope_;
     $Mixer = _$Mixer_;
+    $reactive = _$reactive_;
   }));
 
   describe('$$ViewModel', function() {
@@ -50,6 +51,27 @@ describe('angular-meteor.view-model', function() {
       vm.$method();
 
       expect(Mixin.$method.calls.mostRecent().object).toEqual(scope);
+    })
+  });
+
+  describe('$reactive', function() {
+    var scope;
+
+    beforeEach(function() {
+      scope = $rootScope.$new();
+    });
+
+    afterEach(function() {
+      scope.$destroy();
+    })
+
+    it('should call scope.viewModel()', function() {
+      var vm = {};
+
+      spyOn(scope, 'viewModel');
+      $reactive(vm).attach(scope);
+
+      expect(scope.viewModel).toHaveBeenCalledWith(vm);
     })
   });
 });

@@ -47,4 +47,38 @@ function($$utils, $Mixer) {
   };
 
   return $$ViewModel;
+}])
+
+
+/*
+  Illustrates the old API where a view model is created using $reactive service
+ */
+.service('$reactive', [
+  '$$utils',
+
+function($$utils) {
+  class Reactive {
+    constructor(vm) {
+      if (!_.isObject(vm))
+        throw Error('argument 1 must be an object');
+
+      _.defer(() => {
+        if (!this._attached)
+          console.warn('view model was not attached to any scope');
+      });
+
+      this._vm = vm;
+    }
+
+    attach(scope) {
+      this._attached = true;
+
+      if (!$$utils.isScope(scope))
+        throw Error('argument 1 must be a scope');
+
+      return scope.viewModel(this._vm);
+    }
+  }
+
+  return vm => new Reactive(vm);
 }]);
