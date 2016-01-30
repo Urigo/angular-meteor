@@ -62,6 +62,8 @@ As everything in Angular 2 now is based on the dependency injection's providers,
 this package is not an exception, and has some providers that make sense to install
 globally.
 
+Don't forget to add `"typings/ng2-google-maps/ng2-google-maps.d.ts"` to the tsconfig.json file.
+
 Setting up global dependencies:
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="16.5"}}
