@@ -21,7 +21,7 @@ function($$utils, $Mixer) {
   }
 
   // Gets an object, wraps it with scope functions and returns it
-  $$ViewModel.$viewModel = function(vm) {
+  $$ViewModel.viewModel = function(vm) {
     if (!_.isObject(vm))
       throw Error('argument 1 must be an object');
 

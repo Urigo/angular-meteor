@@ -15,7 +15,7 @@ function($q, $$utils) {
   function $$Core() {}
 
   // Calls Meteor.autorun() which will be digested after each run and automatically destroyed
-  $$Core.$autorun = function(fn, options = {}) {
+  $$Core.autorun = function(fn, options = {}) {
     fn = this.$$bind(fn);
 
     if (!_.isFunction(fn))
@@ -29,7 +29,7 @@ function($q, $$utils) {
   };
 
   // Calls Meteor.subscribe() which will be digested after each invokation and automatically destroyed
-  $$Core.$subscribe = function(name, fn = angular.noop, cb) {
+  $$Core.subscribe = function(name, fn = angular.noop, cb) {
     fn = this.$$bind(fn);
     cb = cb ? this.$$bind(cb) : angular.noop;
 
@@ -42,7 +42,7 @@ function($q, $$utils) {
 
     let result = {};
 
-    let computation = this.$autorun(() => {
+    let computation = this.autorun(() => {
       let args = fn();
       if (angular.isUndefined(args)) args = [];
 
@@ -60,14 +60,14 @@ function($q, $$utils) {
   };
 
   // Calls Meteor.call() wrapped by a digestion cycle
-  $$Core.$callMethod = function(...args) {
+  $$Core.callMethod = function(...args) {
     let fn = args.pop();
     if (_.isFunction(fn)) fn = this.$$bind(fn);
     return Meteor.call(...args, fn);
   };
 
   // Calls Meteor.apply() wrapped by a digestion cycle
-  $$Core.$applyMethod = function(...args) {
+  $$Core.applyMethod = function(...args) {
     let fn = args.pop();
     if (_.isFunction(fn)) fn = this.$$bind(fn);
     return Meteor.apply(...args, fn);

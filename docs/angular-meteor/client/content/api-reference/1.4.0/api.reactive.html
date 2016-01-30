@@ -17,7 +17,7 @@ A mixin which enhance our reactive abilities by providing methods that are capab
 
 ## Methods
 
-### $helpers
+### helpers
 
 Lets you define reactive properties on the `$scope` or the `view model` if set.
 
@@ -25,7 +25,7 @@ Gets a hash of reactive functions which will be rerunned any time their return v
 
 Under the hood, each helper starts a newc[Tracker.autorun](http://docs.meteor.com/#/full/tracker_autorun). When its reactive dependencies change, the helper is rerunned.
 
-To trigger a rerun every time in specific Angular variable change, use `$reactivate` to make your Angular variable reactive inside the helper its used in.
+To trigger a rerun every time in specific Angular variable change, use `getReactively` to make your Angular variable reactive inside the helper its used in.
 
 Each helper function should return a [MongoDB Cursor](http://docs.meteor.com/#/full/mongo_cursor) and the helpers will expose it as a normal array to the context.
 
@@ -60,24 +60,24 @@ Each helper function should return a [MongoDB Cursor](http://docs.meteor.com/#/f
 #### Usage Example:
 
     myModule.controller('MyCtrl', ['$scope', function($scope) {
-      $scope.$viewModel(this);
+      $scope.viewModel(this);
 
-      this.$helpers({
+      this.helpers({
         users: () => Users.find({})
       });
     }]);
 
 > In this example we create an array on the view model, with all the values that are available from the returned Cursor.
 
-#### Example with `$reactivate`:
+#### Example with `getReactively`:
 
     myModule.controller('MyCtrl', ['$scope', function($scope) {
-      $scope.$viewModel(this);
+      $scope.viewModel(this);
 
       this.relevantId = 10;
 
-      this.$helpers({
-        users: () => Users.find({ _id: this.$reactivate('relevantId') })
+      this.helpers({
+        users: () => Users.find({ _id: this.getReactively('relevantId') })
       });
     }]);
 
@@ -85,7 +85,7 @@ Each helper function should return a [MongoDB Cursor](http://docs.meteor.com/#/f
 
 ------
 
-### $reactivate
+### getReactively
 
 Gets a model from the `$scope` or the `view model` if set, and will notify once changed.
 
@@ -129,32 +129,32 @@ This method returns the current value of the reactive variable.
 
 -------
 
-#### Example with `$subscribe`:
+#### Example with `subscribe`:
 
     myModule.controller('MyCtrl', ['$scope', function($scope) {
-      $scope.$viewModel(this);
+      $scope.viewModel(this);
 
       this.relevantId = 10;
 
-      this.$subscribe('users', () => {
-        return [ this.$reactivate('relevantId') ];
+      this.subscribe('users', () => {
+        return [ this.getReactively('relevantId') ];
       });
 
       this.relevantId = 50; // This will cause the subscribe arguments method to run again
     }]);
 
-#### Example with `$helpers`:
+#### Example with `helpers`:
 
     myModule.controller('MyCtrl', ['$scope', function($scope) {
-      $scope.$viewModel(this);
+      $scope.viewModel(this);
 
       this.myUser = {
         id: 10
       };
 
-      this.$helpers({
+      this.helpers({
         myData: () => {
-          return Data.find({_id: this.$reactivate('myUser.id')});
+          return Data.find({_id: this.getReactively('myUser.id')});
         }
       });
 
@@ -163,7 +163,7 @@ This method returns the current value of the reactive variable.
 
 ------
 
-### $reactivateCollection
+### getCollectionReactively
 
 Gets a collection from the `$scope` or the `view model` if set, and will notify once changed.
 

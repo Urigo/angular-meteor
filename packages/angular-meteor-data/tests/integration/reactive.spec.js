@@ -14,18 +14,18 @@ describe('angular-meteor.reactive', function() {
 
     it('should extend child scope', function() {
       var scope = $rootScope.$new();
-      expect(scope.$helpers).toEqual(jasmine.any(Function));
-      expect(scope.$reactivate).toEqual(jasmine.any(Function));
-      expect(scope.$reactivateCollection).toEqual(jasmine.any(Function));
+      expect(scope.helpers).toEqual(jasmine.any(Function));
+      expect(scope.getReactively).toEqual(jasmine.any(Function));
+      expect(scope.getCollectionReactively).toEqual(jasmine.any(Function));
     });
 
-    describe('$helpers()', function() {
+    describe('helpers()', function() {
       var scope;
       var vm;
 
       beforeEach(function() {
         scope = $rootScope.$new();
-        vm = scope.$viewModel({});
+        vm = scope.viewModel({});
       });
 
       afterEach(function() {
@@ -33,7 +33,7 @@ describe('angular-meteor.reactive', function() {
       });
 
       it('should register a number helper', function () {
-        vm.$helpers({
+        vm.helpers({
           helper: function () {
             return 10;
           }
@@ -43,7 +43,7 @@ describe('angular-meteor.reactive', function() {
       });
 
       it('should register a string helper', function () {
-        vm.$helpers({
+        vm.helpers({
           helper: function () {
             return 'str';
           }
@@ -58,7 +58,7 @@ describe('angular-meteor.reactive', function() {
           bar: 'bar'
         };
 
-        vm.$helpers({
+        vm.helpers({
           helper: function () {
             return obj;
           }
@@ -70,7 +70,7 @@ describe('angular-meteor.reactive', function() {
       it('should register an array helper', function () {
         var arr = [1, 2, 3];
 
-        vm.$helpers({
+        vm.helpers({
           helper: function () {
             return arr;
           }
@@ -82,7 +82,7 @@ describe('angular-meteor.reactive', function() {
       it('should override a pre-defined helper', function () {
         vm.helper = 'foo';
 
-        vm.$helpers({
+        vm.helpers({
           helper: function () {
             return 'bar';
           }
@@ -92,7 +92,7 @@ describe('angular-meteor.reactive', function() {
       });
 
       it('should register cursor helper as an array', function () {
-        vm.$helpers({
+        vm.helpers({
           helper: function () {
             return DummyCollection.find();
           }
@@ -104,7 +104,7 @@ describe('angular-meteor.reactive', function() {
       it('should update cursor helper as collection gets updated', function () {
         var cursor = DummyCollection.find();
 
-        vm.$helpers({
+        vm.helpers({
           helper: function () {
             return cursor;
           }
@@ -123,7 +123,7 @@ describe('angular-meteor.reactive', function() {
       });
 
       it('should register fetch result helper as an array', function () {
-        vm.$helpers({
+        vm.helpers({
           helper: function () {
             return DummyCollection.find().fetch();
           }
@@ -133,7 +133,7 @@ describe('angular-meteor.reactive', function() {
       });
 
       it('should update cursor helper once a new document is added', function () {
-        vm.$helpers({
+        vm.helpers({
           helper: function () {
             return DummyCollection.find();
           }
@@ -149,7 +149,7 @@ describe('angular-meteor.reactive', function() {
         var doc = { _id: 'my-doc' }
         DummyCollection.insert(doc);
 
-        vm.$helpers({
+        vm.helpers({
           helper: function () {
             return DummyCollection.find();
           }
@@ -160,7 +160,7 @@ describe('angular-meteor.reactive', function() {
       });
 
       it('should update cursor helper once a document is updated', function () {
-        vm.$helpers({
+        vm.helpers({
           helper: function () {
             return DummyCollection.find();
           }
@@ -180,7 +180,7 @@ describe('angular-meteor.reactive', function() {
       });
 
       it('should update cursor helper in the right order', function () {
-        vm.$helpers({
+        vm.helpers({
           helper: function () {
             return DummyCollection.find({}, { sort: { prop: 1 } });
           }
@@ -210,7 +210,7 @@ describe('angular-meteor.reactive', function() {
       it('should digest once collection is updated', function () {
         var digest = spyOn(scope, '$digest').and.callThrough();
 
-        vm.$helpers({
+        vm.helpers({
           helper: function () {
             return DummyCollection.find({});
           }
@@ -221,7 +221,7 @@ describe('angular-meteor.reactive', function() {
       });
 
       it('should use view model as context for helpers', function() {
-        vm.$helpers({
+        vm.helpers({
           helper: function() {
             return this;
           }
@@ -237,10 +237,10 @@ describe('angular-meteor.reactive', function() {
           subProp: 10
         };
 
-        vm.$helpers({
+        vm.helpers({
           helper: function () {
             calls++;
-            return vm.$reactivate('prop');
+            return vm.getReactively('prop');
           }
         });
 
@@ -263,10 +263,10 @@ describe('angular-meteor.reactive', function() {
           subProp: 10
         };
 
-        vm.$helpers({
+        vm.helpers({
           helper: function () {
             calls++;
-            return vm.$reactivate('prop', true);
+            return vm.getReactively('prop', true);
           }
         });
 
@@ -285,7 +285,7 @@ describe('angular-meteor.reactive', function() {
       it('should NOT reactivate cursors', function() {
         expect(scope.$$watchersCount).toEqual(0);
 
-        vm.$helpers({
+        vm.helpers({
           helper: function() {
             return DummyCollection.find({});
           }
@@ -301,10 +301,10 @@ describe('angular-meteor.reactive', function() {
           mySubProp: 10
         }];
 
-        vm.$helpers({
+        vm.helpers({
           myMethod: function () {
             callCount++;
-            return vm.$reactivateCollection('prop');
+            return vm.getCollectionReactively('prop');
           }
         });
 
@@ -324,10 +324,10 @@ describe('angular-meteor.reactive', function() {
 
         vm.prop = [10];
 
-        vm.$helpers({
+        vm.helpers({
           myMethod: function () {
             callCount++;
-            return vm.$reactivateCollection('prop');
+            return vm.getCollectionReactively('prop');
           }
         });
 
@@ -347,10 +347,10 @@ describe('angular-meteor.reactive', function() {
 
         vm.prop = [10];
 
-        vm.$helpers({
+        vm.helpers({
           myMethod: function () {
             callCount++;
-            return vm.$reactivateCollection('prop');
+            return vm.getCollectionReactively('prop');
           }
         });
 
@@ -366,13 +366,13 @@ describe('angular-meteor.reactive', function() {
       });
     });
 
-    describe('$reactivate()', function() {
+    describe('getReactively()', function() {
       var scope;
       var vm;
 
       beforeEach(function() {
         scope = $rootScope.$new();
-        vm = scope.$viewModel({});
+        vm = scope.viewModel({});
       });
 
       afterEach(function() {
@@ -381,14 +381,14 @@ describe('angular-meteor.reactive', function() {
 
       it('should return model', function() {
         vm.myProp = 10;
-        expect(vm.$reactivate('myProp')).toEqual(10);
+        expect(vm.getReactively('myProp')).toEqual(10);
       });
 
       it('should register a scope watcher', function() {
         vm.myProp = 'myProp';
         var watch = spyOn(scope, '$watch');
 
-        vm.$reactivate('myProp');
+        vm.getReactively('myProp');
         expect(watch).toHaveBeenCalledWith(jasmine.any(Function), jasmine.any(Function), false);
 
         var args = watch.calls.argsFor(0);
@@ -399,7 +399,7 @@ describe('angular-meteor.reactive', function() {
         vm.myProp = 'myProp';
         var watch = spyOn(scope, '$watch');
 
-        vm.$reactivate('myProp', true);
+        vm.getReactively('myProp', true);
         expect(watch).toHaveBeenCalledWith(jasmine.any(Function), jasmine.any(Function), true);
 
         var args = watch.calls.argsFor(0);
@@ -410,7 +410,7 @@ describe('angular-meteor.reactive', function() {
         vm.myProp = 'myProp';
         var watch = spyOn(scope, '$watch');
 
-        vm.$reactivate('myProp', false);
+        vm.getReactively('myProp', false);
         expect(watch).toHaveBeenCalledWith(jasmine.any(Function), jasmine.any(Function), false);
 
         var args = watch.calls.argsFor(0);
@@ -420,7 +420,7 @@ describe('angular-meteor.reactive', function() {
       it('should register a tracker dependency', function() {
         vm.myProp = 10;
 
-        vm.$reactivate('myProp');
+        vm.getReactively('myProp');
         expect(vm.$$dependencies).toBeDefined();
         expect(vm.$$dependencies['myProp']).toBeDefined();
       });
@@ -435,7 +435,7 @@ describe('angular-meteor.reactive', function() {
           };
         });
 
-        vm.$reactivate('myProp');
+        vm.getReactively('myProp');
         expect(depCtorSpy).toHaveBeenCalled();
         expect(depCtorSpy.calls.count()).toEqual(1);
       });
@@ -451,7 +451,7 @@ describe('angular-meteor.reactive', function() {
           };
         });
 
-        vm.$reactivate('myProp');
+        vm.getReactively('myProp');
         scope.$$throttledDigest();
 
         vm.myProp = 20;
@@ -461,13 +461,13 @@ describe('angular-meteor.reactive', function() {
       });
     });
 
-    describe('$reactivateCollection()', function() {
+    describe('getCollectionReactively()', function() {
       var scope;
       var vm;
 
       beforeEach(function() {
         scope = $rootScope.$new();
-        vm = scope.$viewModel({});
+        vm = scope.viewModel({});
       });
 
       afterEach(function() {
@@ -476,14 +476,14 @@ describe('angular-meteor.reactive', function() {
 
       it('should return model', function() {
         vm.myProp = 10;
-        expect(vm.$reactivateCollection('myProp')).toEqual(10);
+        expect(vm.getCollectionReactively('myProp')).toEqual(10);
       });
 
       it ('should register a scope collection watcher', function() {
         vm.myProp = 'myProp';
         var watchSpy = spyOn(scope, '$watchCollection');
 
-        vm.$reactivateCollection('myProp', false);
+        vm.getCollectionReactively('myProp', false);
         expect(watchSpy).toHaveBeenCalledWith(jasmine.any(Function), jasmine.any(Function));
 
         var args = watchSpy.calls.argsFor(0);

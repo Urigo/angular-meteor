@@ -66,7 +66,7 @@ Without any validation function, and timeout:
 
 ```js
 myModule.controller(function($scope, $timeout) {
-  $scope.$viewModel(this);
+  $scope.viewModel(this);
 
   let waiting = this.$awaitUser().then((user) => {
     console.log(`user ${user._id} has just logged in`);
@@ -87,7 +87,7 @@ Different scenarios of the validation function:
 
 ```js
 myModule.$controller(function($scope) {
-  $scope.$viewModel(this);
+  $scope.viewModel(this);
 
   let falsyValidation = user => false;
   let stringValidation = user => 'AUTH_FAILED';

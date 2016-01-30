@@ -8967,7 +8967,7 @@ angular.module('angular-meteor.view-model', ['angular-meteor.utils', 'angular-me
   }                                                                                                                  //
                                                                                                                      //
   // Gets an object, wraps it with scope functions and returns it                                                    //
-  $$ViewModel.$viewModel = function (vm) {                                                                           // 24
+  $$ViewModel.viewModel = function (vm) {                                                                           // 24
     var _this = this;                                                                                                //
                                                                                                                      //
     if (!_.isObject(vm)) throw Error('argument 1 must be an object');                                                // 25
@@ -9023,7 +9023,7 @@ angular.module('angular-meteor.core', ['angular-meteor.utils', 'angular-meteor.m
   function $$Core() {}                                                                                               // 15
                                                                                                                      //
   // Calls Meteor.autorun() which will be digested after each run and automatically destroyed                        //
-  $$Core.$autorun = function (fn) {                                                                                  // 18
+  $$Core.autorun = function (fn) {                                                                                  // 18
     var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];                           //
                                                                                                                      //
     fn = this.$$bind(fn);                                                                                            // 19
@@ -9037,7 +9037,7 @@ angular.module('angular-meteor.core', ['angular-meteor.utils', 'angular-meteor.m
   };                                                                                                                 //
                                                                                                                      //
   // Calls Meteor.subscribe() which will be digested after each invokation and automatically destroyed               //
-  $$Core.$subscribe = function (name, fn, cb) {                                                                      // 32
+  $$Core.subscribe = function (name, fn, cb) {                                                                      // 32
     if (fn === undefined) fn = angular.noop;                                                                         //
                                                                                                                      //
     fn = this.$$bind(fn);                                                                                            // 33
@@ -9049,7 +9049,7 @@ angular.module('angular-meteor.core', ['angular-meteor.utils', 'angular-meteor.m
                                                                                                                      //
     var result = {};                                                                                                 // 43
                                                                                                                      //
-    var computation = this.$autorun(function () {                                                                    // 45
+    var computation = this.autorun(function () {                                                                    // 45
       var _Meteor;                                                                                                   //
                                                                                                                      //
       var args = fn();                                                                                               // 46
@@ -9152,7 +9152,7 @@ angular.module('angular-meteor.reactive', ['angular-meteor.utils', 'angular-mete
                                                                                                                      //
   // Gets an object containing functions and define their results as reactive properties.                            //
   // Once a return value has been changed the property will be reset.                                                //
-  $$Reactive.$helpers = function () {                                                                                // 25
+  $$Reactive.helpers = function () {                                                                                // 25
     var _this = this;                                                                                                //
                                                                                                                      //
     var props = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];                             //
@@ -9171,7 +9171,7 @@ angular.module('angular-meteor.reactive', ['angular-meteor.utils', 'angular-mete
   };                                                                                                                 //
                                                                                                                      //
   // Gets a property reactively, and once it has been changed the computation will be recomputed                     //
-  $$Reactive.$reactivate = function (k) {                                                                            // 42
+  $$Reactive.getReactively = function (k) {                                                                            // 42
     var isDeep = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];                         //
                                                                                                                      //
     if (!_.isString(k)) throw Error('arguments 1 must be a string');                                                 // 43
@@ -9207,7 +9207,7 @@ angular.module('angular-meteor.reactive', ['angular-meteor.utils', 'angular-mete
   $$Reactive.$$setFnHelper = function (k, fn) {                                                                      // 75
     var _this3 = this;                                                                                               //
                                                                                                                      //
-    this.$autorun(function (computation) {                                                                           // 76
+    this.autorun(function (computation) {                                                                           // 76
       // Invokes the reactive functon                                                                                //
       var model = fn.apply(_this3.$$vm);                                                                             // 78
                                                                                                                      //
@@ -9242,7 +9242,7 @@ angular.module('angular-meteor.reactive', ['angular-meteor.utils', 'angular-mete
     // If set, reactives property                                                                                    //
     if (watch) {                                                                                                     // 104
       var isDeep = _.isObject(v);                                                                                    // 105
-      this.$reactivate(k, isDeep);                                                                                   // 106
+      this.getReactively(k, isDeep);                                                                                   // 106
     }                                                                                                                //
                                                                                                                      //
     Object.defineProperty(this.$$vm, k, {                                                                            // 109

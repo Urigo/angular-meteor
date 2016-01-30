@@ -34,11 +34,11 @@ describe('angular-meteor.view-model', function() {
     });
 
     it('should extend child scope', function() {
-      expect(scope.$viewModel).toEqual(jasmine.any(Function));
+      expect(scope.viewModel).toEqual(jasmine.any(Function));
     });
 
     it('should extend view model', function() {
-      var vm = scope.$viewModel({});
+      var vm = scope.viewModel({});
       expect(vm.vmProp).toEqual('vmProp');
       expect(vm.scopeProp).toBeUndefined();
       expect(vm.$method).toEqual(jasmine.any(Function));
@@ -46,7 +46,7 @@ describe('angular-meteor.view-model', function() {
     });
 
     it('should bind methods to scope', function() {
-      var vm = scope.$viewModel({});
+      var vm = scope.viewModel({});
       vm.$method();
 
       expect(Mixin.$method.calls.mostRecent().object).toEqual(scope);

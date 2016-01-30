@@ -17,7 +17,7 @@ A mixin which provides us with core `Meteor` functions.
 
 ## Methods
 
-### $autorun
+### autorun
 
 shares the same API as [Tracker.autorun](http://docs.meteor.com/#/full/tracker_autorun).
 
@@ -53,12 +53,12 @@ The computation will be automatically stopped once the scope has been destroyed.
 #### Example
 
     myModule.controller('MyCtrl', ['$scope', function($scope) {
-      $scope.$viewModel(this);
+      $scope.viewModel(this);
 
       this.myVar = 10;
 
-      this.$autorun(() => {
-        console.log('Autorun!!', this.$reactivate('myVar'));
+      this.autorun(() => {
+        console.log('Autorun!!', this.getReactively('myVar'));
       });
 
       this.myVar = 50; // This will cause the autorun function method to run again
@@ -66,7 +66,7 @@ The computation will be automatically stopped once the scope has been destroyed.
 
 ------
 
-### $subscribe
+### subscribe
 
 shares the same API as [Meteor.subscribe](http://docs.meteor.com/#/full/meteor_subscribe).
 
@@ -124,22 +124,22 @@ The method returns exactly the same parameters as [Meteor.subscribe](http://docs
 #### Usage Example:
 
     myModule.controller('MyCtrl', ['$scope', function($scope) {
-      $scope.$viewModel(this);
+      $scope.viewModel(this);
 
-      this.$subscribe('users');
+      this.subscribe('users');
     }]);
 
 
-#### Example with `$reactivate`:
+#### Example with `getReactively`:
 
     myModule.controller('MyCtrl', ['$scope', function($scope) {
-      $scope.$viewModel(this);
+      $scope.viewModel(this);
 
       this.relevantId = 10;
       this.numberOfUsers = 3;
 
-      this.$subscribe('users', () => {
-        return [ numberOfUsers, this.$reactivate('relevantId') ];
+      this.subscribe('users', () => {
+        return [ numberOfUsers, this.getReactively('relevantId') ];
       });
 
       this.relevantId = 50; // This will cause the subscribe arguments method to run again
@@ -149,11 +149,11 @@ The method returns exactly the same parameters as [Meteor.subscribe](http://docs
 #### Example with subscription handle and callbacks:
 
     myModule.controller('MyCtrl', ['$scope', function($scope) {
-      $scope.$viewModel(this);
+      $scope.viewModel(this);
 
       this.numberOfParties = 3;
 
-      var subscriptionHandle = this.$subscribe('parties', [this.numberOfParties], {
+      var subscriptionHandle = this.subscribe('parties', [this.numberOfParties], {
         onReady: function () {
           console.log("onReady And the Items actually Arrive", arguments);
           subscriptionHandle.stop();  // Stopping the subscription, will cause onStop to fire
@@ -174,7 +174,7 @@ The method returns exactly the same parameters as [Meteor.subscribe](http://docs
 
 ------
 
-### $callMethod
+### callMethod
 
 Calls [Meteor.call](http://docs.meteor.com/#/full/methods_call) wrapped by a digestion cycle.
 
@@ -219,7 +219,7 @@ Calls [Meteor.call](http://docs.meteor.com/#/full/methods_call) wrapped by a dig
 
 
     this.invite = (partyId, userId) => {
-      this.$callMethod('invite', partyId, userId, (err, data) => {
+      this.callMethod('invite', partyId, userId, (err, data) => {
         if (err) throw err;
         console.log('success inviting', data.userId);
       });
@@ -227,7 +227,7 @@ Calls [Meteor.call](http://docs.meteor.com/#/full/methods_call) wrapped by a dig
 
 ------
 
-### $applyMethod
+### applyMethod
 
 Calls [Meteor.apply](http://docs.meteor.com/#/full/methods_apply) wrapped by a digestion cycle.
 
@@ -272,7 +272,7 @@ Calls [Meteor.apply](http://docs.meteor.com/#/full/methods_apply) wrapped by a d
 
 
     this.invite = (...params) => {
-      this.$applyMethod('invite', params, (err, data) => {
+      this.applyMethod('invite', params, (err, data) => {
         if (err) throw err;
         console.log('success inviting', data.userId);
       });

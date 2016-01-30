@@ -22,7 +22,7 @@ function($parse, $$utils) {
 
   // Gets an object containing functions and define their results as reactive properties.
   // Once a return value has been changed the property will be reset.
-  $$Reactive.$helpers = function(props = {}) {
+  $$Reactive.helpers = function(props = {}) {
     if (!_.isObject(props))
       throw Error('argument 1 must be an object');
 
@@ -39,7 +39,7 @@ function($parse, $$utils) {
   };
 
   // Gets a model reactively
-  $$Reactive.$reactivate = function(k, isDeep = false) {
+  $$Reactive.getReactively = function(k, isDeep = false) {
     if (!_.isBoolean(isDeep))
       throw Error('argument 2 must be a boolean');
 
@@ -47,7 +47,7 @@ function($parse, $$utils) {
   };
 
   // Gets a collection reactively
-  $$Reactive.$reactivateCollection = function(k) {
+  $$Reactive.getCollectionReactively = function(k) {
     return this.$$reactivateEntity(k, this.$watchCollection);
   };
 
@@ -84,7 +84,7 @@ function($parse, $$utils) {
 
   // Invokes a function and sets the return value as a property
   $$Reactive.$$setFnHelper = function(k, fn) {
-    this.$autorun((computation) => {
+    this.autorun((computation) => {
       // Invokes the reactive functon
       let model = fn.apply(this.$$vm);
 
@@ -114,7 +114,7 @@ function($parse, $$utils) {
     // If set, reactives property
     if (watch) {
       let isDeep = _.isObject(v);
-      this.$reactivate(k, isDeep);
+      this.getReactively(k, isDeep);
     }
 
     Object.defineProperty(this.$$vm, k, {

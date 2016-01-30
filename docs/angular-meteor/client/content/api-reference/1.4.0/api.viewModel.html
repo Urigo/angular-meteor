@@ -19,12 +19,12 @@ and very useful when wanting to use Angular's `controllerAs` syntax.
 
 ## Methods
 
-### $viewModel
+### viewModel
 
 Gets an object and binds it into a `$scope` as the view model. This means that from now on any method
 invoked by the scope will be actually affecting the view model, not the scope. The provided view model
 will also be wrapped with public mixin methods (starts with a single '$' sign) bounded to the scope which
-will give us easy access for useful functions like `$helpers` of `$subscribe`.
+will give us easy access for useful functions like `helpers` of `subscribe`.
 
 -------
 
@@ -60,14 +60,14 @@ The view model.
 #### Usage Example:
 
     myModule.controller('MyCtrl', ['$scope', function($scope) {
-      $scope.$viewModel(this);
+      $scope.viewModel(this);
 
-      this.$helpers({
+      this.helpers({
         users: () => Users.find({})
       });
     }]);
 
-> As you can see the `$helpers` method is defined on the controller we just wrapped.
+> As you can see the `helpers` method is defined on the controller we just wrapped.
 
       {{/markdown}}
     </do-nothing>
