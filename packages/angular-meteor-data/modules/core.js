@@ -60,14 +60,14 @@ function($q, $$utils) {
   };
 
   // Calls Meteor.call() wrapped by a digestion cycle
-  $$Core.$call = function(...args) {
+  $$Core.$callMethod = function(...args) {
     let fn = args.pop();
     if (_.isFunction(fn)) fn = this.$$bind(fn);
     return Meteor.call(...args, fn);
   };
 
   // Calls Meteor.apply() wrapped by a digestion cycle
-  $$Core.$apply = function(...args) {
+  $$Core.$applyMethod = function(...args) {
     let fn = args.pop();
     if (_.isFunction(fn)) fn = this.$$bind(fn);
     return Meteor.apply(...args, fn);

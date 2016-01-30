@@ -27,8 +27,8 @@ function($$utils, $Mixer) {
 
     // Apply mixin functions
     $Mixer._mixins.forEach((mixin) => {
-      // Filter only the methods which start with a single $
-      let keys = _.keys(mixin).filter(k => k.match(/^\$[^\$]*$/));
+      // Reject methods which starts with double $
+      let keys = _.keys(mixin).filter(k => k.match(/^(?!\$\$).*$/));
       let proto = _.pick(mixin, keys);
       // Bind all the methods to the prototype
       let boundProto = $$utils.bind(proto, this);
