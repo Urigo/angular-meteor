@@ -265,7 +265,7 @@ describe('angular-meteor.core', function() {
       });
     });
 
-    describe('$call()',function() {
+    describe('$callMethod()',function() {
       var scope;
 
       beforeEach(function() {
@@ -291,11 +291,11 @@ describe('angular-meteor.core', function() {
          done()
         };
 
-        scope.$call('method', 'foo', 'bar', angular.noop);
+        scope.$callMethod('method', 'foo', 'bar', angular.noop);
       });
     });
 
-    describe('$apply()',function() {
+    describe('$applyMethod()',function() {
       var scope;
 
       beforeEach(function() {
@@ -320,7 +320,7 @@ describe('angular-meteor.core', function() {
          done()
         };
 
-        scope.$apply('method', ['foo', 'bar'], angular.noop);
+        scope.$applyMethod('method', ['foo', 'bar'], angular.noop);
       });
     });
   });

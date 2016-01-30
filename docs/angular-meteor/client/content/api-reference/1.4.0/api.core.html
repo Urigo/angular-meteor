@@ -174,7 +174,7 @@ The method returns exactly the same parameters as [Meteor.subscribe](http://docs
 
 ------
 
-### $call
+### $callMethod
 
 Calls [Meteor.call](http://docs.meteor.com/#/full/methods_call) wrapped by a digestion cycle.
 
@@ -219,7 +219,7 @@ Calls [Meteor.call](http://docs.meteor.com/#/full/methods_call) wrapped by a dig
 
 
     this.invite = (partyId, userId) => {
-      this.$call('invite', partyId, userId, (err, data) => {
+      this.$callMethod('invite', partyId, userId, (err, data) => {
         if (err) throw err;
         console.log('success inviting', data.userId);
       });
@@ -227,7 +227,7 @@ Calls [Meteor.call](http://docs.meteor.com/#/full/methods_call) wrapped by a dig
 
 ------
 
-### $apply
+### $applyMethod
 
 Calls [Meteor.apply](http://docs.meteor.com/#/full/methods_apply) wrapped by a digestion cycle.
 
@@ -272,7 +272,7 @@ Calls [Meteor.apply](http://docs.meteor.com/#/full/methods_apply) wrapped by a d
 
 
     this.invite = (...params) => {
-      this.$apply('invite', params, (err, data) => {
+      this.$applyMethod('invite', params, (err, data) => {
         if (err) throw err;
         console.log('success inviting', data.userId);
       });
