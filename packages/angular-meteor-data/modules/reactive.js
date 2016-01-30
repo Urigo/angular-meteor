@@ -38,16 +38,27 @@ function($parse, $$utils) {
     });
   };
 
-  // Gets a property reactively, and once it has been changed the computation will be recomputed
+  // Gets a model reactively
   $$Reactive.$reactivate = function(k, isDeep = false) {
-    if (!_.isString(k))
-      throw Error('argument 1 must be a string');
     if (!_.isBoolean(isDeep))
       throw Error('argument 2 must be a boolean');
 
+    return this.$$reactivateEntity(k, this.$watch, isDeep);
+  };
+
+  // Gets a collection reactively
+  $$Reactive.$reactivateCollection = function(k) {
+    return this.$$reactivateEntity(k, this.$watchCollection);
+  };
+
+  // Gets an entity reactively, and once it has been changed the computation will be recomputed
+  $$Reactive.$$reactivateEntity = function(k, watcher, ...watcherArgs) {
+    if (!_.isString(k))
+      throw Error('argument 1 must be a string');
+
     if (!this.$$vm.$$dependencies[k]) {
       this.$$vm.$$dependencies[k] = new Tracker.Dependency();
-      this.$$watchModel(k, isDeep);
+      this.$$watchEntity(k, watcher, ...watcherArgs);
     }
 
     this.$$vm.$$dependencies[k].depend();
@@ -55,20 +66,20 @@ function($parse, $$utils) {
   };
 
   // Watches for changes in the view model, and if so will notify a change
-  $$Reactive.$$watchModel = function(k, isDeep) {
+  $$Reactive.$$watchEntity = function(k, watcher, ...watcherArgs) {
     // Gets a deep property from the view model
     let getVal = _.partial($parse(k), this.$$vm);
     let initialVal = getVal();
 
     // Watches for changes in the view model
-    this.$watch(getVal, (val, oldVal) => {
+    watcher.call(this, getVal, (val, oldVal) => {
       let hasChanged =
         val !== initialVal ||
         val !== oldVal
 
       // Notify if a change has been detected
       if (hasChanged) this.$$changed(k);
-    }, isDeep);
+    }, ...watcherArgs);
   };
 
   // Invokes a function and sets the return value as a property

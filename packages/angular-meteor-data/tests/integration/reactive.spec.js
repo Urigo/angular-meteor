@@ -16,6 +16,7 @@ describe('angular-meteor.reactive', function() {
       var scope = $rootScope.$new();
       expect(scope.$helpers).toEqual(jasmine.any(Function));
       expect(scope.$reactivate).toEqual(jasmine.any(Function));
+      expect(scope.$reactivateCollection).toEqual(jasmine.any(Function));
     });
 
     describe('$helpers()', function() {
@@ -229,7 +230,7 @@ describe('angular-meteor.reactive', function() {
         expect(vm.helper).toEqual(vm);
       });
 
-      it('should not trigger autorun dependencies when using object and adding a sub property', function () {
+      it('should NOT trigger autorun dependencies when using object and adding a sub property', function () {
         var calls = 0;
 
         vm.prop = {
@@ -281,7 +282,7 @@ describe('angular-meteor.reactive', function() {
         expect(calls).toEqual(2);
       });
 
-      it('should not reactivate cursors', function() {
+      it('should NOT reactivate cursors', function() {
         expect(scope.$$watchersCount).toEqual(0);
 
         vm.$helpers({
@@ -291,6 +292,77 @@ describe('angular-meteor.reactive', function() {
         });
 
         expect(scope.$$watchersCount).toEqual(0);
+      });
+
+      it('should NOT trigger autorun dependencies when using array and adding an element sub property while watching as a collection', function () {
+        var callCount = 0;
+
+        vm.prop = [{
+          mySubProp: 10
+        }];
+
+        vm.$helpers({
+          myMethod: function () {
+            callCount++;
+            return vm.$reactivateCollection('prop');
+          }
+        });
+
+        scope.$apply();
+        Tracker.flush();
+        expect(callCount).toBe(1);
+
+        vm.prop[0].newProp = 20;
+        scope.$apply();
+        Tracker.flush();
+
+        expect(callCount).toBe(1);
+      });
+
+      it('should trigger autorun dependencies when using array and replacing an element while watching as a collection', function () {
+        var callCount = 0;
+
+        vm.prop = [10];
+
+        vm.$helpers({
+          myMethod: function () {
+            callCount++;
+            return vm.$reactivateCollection('prop');
+          }
+        });
+
+        scope.$apply();
+        Tracker.flush();
+        expect(callCount).toBe(1);
+
+        vm.prop[0] = 20;
+        scope.$apply();
+        Tracker.flush();
+
+        expect(callCount).toBe(2);
+      });
+
+      it('should trigger autorun dependencies when using array and adding an element while watching as a collection', function () {
+        var callCount = 0;
+
+        vm.prop = [10];
+
+        vm.$helpers({
+          myMethod: function () {
+            callCount++;
+            return vm.$reactivateCollection('prop');
+          }
+        });
+
+        scope.$apply();
+        Tracker.flush();
+        expect(callCount).toBe(1);
+
+        vm.prop.push(20);
+        scope.$apply();
+        Tracker.flush();
+
+        expect(callCount).toBe(2);
       });
     });
 
@@ -323,7 +395,7 @@ describe('angular-meteor.reactive', function() {
         expect(args[0]()).toEqual('myProp');
       });
 
-      it('should register a scope watch with deep equality', function() {
+      it('should register a scope watcher with deep equality', function() {
         vm.myProp = 'myProp';
         var watch = spyOn(scope, '$watch');
 
@@ -334,7 +406,7 @@ describe('angular-meteor.reactive', function() {
         expect(args[0]()).toEqual('myProp');
       });
 
-      it('should register a scope watch with shallow equality', function() {
+      it('should register a scope watcher with shallow equality', function() {
         vm.myProp = 'myProp';
         var watch = spyOn(scope, '$watch');
 
@@ -386,6 +458,36 @@ describe('angular-meteor.reactive', function() {
         scope.$$throttledDigest();
 
         expect(changedSpy).toHaveBeenCalled();
+      });
+    });
+
+    describe('$reactivateCollection()', function() {
+      var scope;
+      var vm;
+
+      beforeEach(function() {
+        scope = $rootScope.$new();
+        vm = scope.$viewModel({});
+      });
+
+      afterEach(function() {
+        scope.$destroy();
+      });
+
+      it('should return model', function() {
+        vm.myProp = 10;
+        expect(vm.$reactivateCollection('myProp')).toEqual(10);
+      });
+
+      it ('should register a scope collection watcher', function() {
+        vm.myProp = 'myProp';
+        var watchSpy = spyOn(scope, '$watchCollection');
+
+        vm.$reactivateCollection('myProp', false);
+        expect(watchSpy).toHaveBeenCalledWith(jasmine.any(Function), jasmine.any(Function));
+
+        var args = watchSpy.calls.argsFor(0);
+        expect(args[0]()).toEqual('myProp');
       });
     });
   });
