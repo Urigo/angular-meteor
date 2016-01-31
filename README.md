@@ -3,6 +3,11 @@ Angular2 + Meteor integration.
 
 ##### Angular2 version: beta-1.
 
+Track Roadmap here:
+- [angular2-meteor milestones](https://github.com/Urigo/angular2-meteor/milestones)
+- [meteor-angular2.0-socially milestones](https://github.com/Urigo/meteor-angular2.0-socially/milestones)
+
+
 ## Table of Contents
 * [Tutorial](../../#tutorial)
 * [Quick Start](../../#quick-start)
