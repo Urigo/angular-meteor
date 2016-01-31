@@ -215,13 +215,14 @@ At this moment you've likely noticed a message in the console saying that `angul
 It occurs because the TypeScript compiler is configured in the package with diagnostics messages turned on by default and
 the TypeScript compiler doesn't know anything about the location of the `angular2/core` and `angular2/platform/browser` modules. To fix this, you will need to make use of TypeScript declaration files, which is a TypeScript way to inform the compiler about third-party API modules.
 
-After the first run, you will find the `angular2-meteor.d.ts` file in the new folder called "typings".
+After the first run, you will find the `angular2-meteor.d.ts` file in the new folder called "typings". This file is actually located
+in its own folder with the same name. This is how declaration files are laid out due to the convention followed by TypeScript community.
 This file has been created by the package at start time and contains a special reference to Angular 2 and Meteor declaration files.
 There are two ways to link `app.ts` and `angular2-meteor.d.ts` together:
 
  - one way is to directly reference `angular2-meteor.d.ts` using a special sugared syntax at the top of `app.ts` as follows:
 
-        /// <reference path="../typings/angular2-meteor.d.ts" />
+        /// <reference path="typings/angular2-meteor/angular2-meteor.d.ts" />
 
         import {Component, View} from 'angular2/core';
 
@@ -230,8 +231,8 @@ There are two ways to link `app.ts` and `angular2-meteor.d.ts` together:
  - another way is to create a custom [TypeScript configuration file](https://github.com/Microsoft/TypeScript/wiki/tsconfig.json) with the "files" property set to include all required typings files.
 
 This configuration file should be called `tsconfig.json` and placed at
-the app root folder. We'll also take a close look at the configuration itself during the "Folder Structure"
-step, including how to configure TypeScript properly to automatically generate your `tsconfig.json` file in different IDEs.
+the app root folder. We'll also take a close look at the configuration itself during
+step 7, including how to configure TypeScript properly to automatically generate your `tsconfig.json` file in different IDEs.
 
 Let's make use of the typings in the second way. Angular 2 and the Meteor API will be
 used in pretty much every file of our app, so adding declaration files manually might become repetitive.
@@ -240,9 +241,26 @@ Now create `tsconfig.json` and add path to `angular2-meteor.d.ts` as follows:
 
 {{> DiffBox tutorialName="meteor-angular2-socially" step="0.8"}}
 
-> Note: if you just loaded your app from a repository, you'll need to re-start it once.
-> This is because Meteor's local hierarchy of files is not yet built at the time the TypeScript compiler accesses them.
+Angular2-Meteor package adds not only its own declaration file but also Angular 2 declaration files it depends on to the typings folder. 
+This is due to these files are distributed via the Angular 2 NPM package and Angular2-Meteor uses that NPM internally.
+From other side, declaration files for other dependencies like Meteor, ES6 Promise etc are available
+in the global repository of all typings called [DefinitelyTyped](http://definitelytyped.org/). So
+it's preferable to install them directly from this repo.
+In order to do that and thus add full type-checking support at this stage, you'll need to run tree commands:
 
+        npm install tsd -g
+
+        tsd install meteor
+
+        tsd install es6-promise
+
+        tsd install es6-shim
+
+Briefly, it installs a special utility to work with that repo and add three main dependencies our
+app and Angular 2 depend on.
+
+As it's mentioned above, step 7 provides a lot of details of how TypeScript and type-checking work,
+so you will learn everything needed later or you can go there now and read about TSD utility.
 
 # Templates
 
