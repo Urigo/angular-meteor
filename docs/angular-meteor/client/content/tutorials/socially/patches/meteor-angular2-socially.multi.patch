@@ -363,10 +363,10 @@ index 19d3bf1..0000000
 2.5.4 (Apple Git-61)
 
 
-From 71b31fd9e53c07247e343b5d8a5b3321ab3e902e Mon Sep 17 00:00:00 2001
+From 71487d1366f7ce2c2d0b442551a5fbca1fffa0c2 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 6 Jan 2016 17:14:37 +0700
-Subject: [PATCH 010/165] Step 0.8: add tsconfig.json with the typings
+Subject: [PATCH 010/173] Step 0.8: add tsconfig.json with the typings
 
 ---
  tsconfig.json | 5 +++++
@@ -375,13 +375,13 @@ Subject: [PATCH 010/165] Step 0.8: add tsconfig.json with the typings
 
 diff --git a/tsconfig.json b/tsconfig.json
 new file mode 100644
-index 0000000..ccc1ef1
+index 0000000..45aafe9
 --- /dev/null
 +++ b/tsconfig.json
 @@ -0,0 +1,5 @@
 +{
 +  "files": [
-+    "typings/angular2-meteor.d.ts"
++    "typings/angular2-meteor/angular2-meteor.d.ts"
 +  ]
 +}
 -- 
@@ -1876,24 +1876,24 @@ index 0000000..deb86df
 2.5.4 (Apple Git-61)
 
 
-From abdfd9c6cd955198837fb05d83729e10baf0baf9 Mon Sep 17 00:00:00 2001
+From 80696f37b4dae4c210091fe8aa75c2e7d07b8b3d Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Thu, 7 Jan 2016 13:15:51 +0700
-Subject: [PATCH 055/165] Step 7.2: add party declaration file to the tsconfig
+Subject: [PATCH 055/173] Step 7.2: add party declaration file to the tsconfig
 
 ---
  tsconfig.json | 3 ++-
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/tsconfig.json b/tsconfig.json
-index ccc1ef1..4c95bdd 100644
+index 45aafe9..97fc4fd 100644
 --- a/tsconfig.json
 +++ b/tsconfig.json
 @@ -1,5 +1,6 @@
  {
    "files": [
--    "typings/angular2-meteor.d.ts"
-+    "typings/angular2-meteor.d.ts",
+-    "typings/angular2-meteor/angular2-meteor.d.ts"
++    "typings/angular2-meteor/angular2-meteor.d.ts",
 +    "typings/party.d.ts"
    ]
  }
@@ -1974,10 +1974,10 @@ index 40be530..3dacd0a 100644
 2.5.4 (Apple Git-61)
 
 
-From 0e5d1c5c66a686d4acfe35ed8b9b07df9da18091 Mon Sep 17 00:00:00 2001
+From 46657b1c1c82585f9536c775258305ddea9e37ed Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Thu, 7 Jan 2016 14:38:05 +0700
-Subject: [PATCH 059/165] Step 7.6: add new TypeScript options to configure
+Subject: [PATCH 059/173] Step 7.6: add new TypeScript options to configure
  plugins
 
 ---
@@ -1985,7 +1985,7 @@ Subject: [PATCH 059/165] Step 7.6: add new TypeScript options to configure
  1 file changed, 8 insertions(+), 1 deletion(-)
 
 diff --git a/tsconfig.json b/tsconfig.json
-index 4c95bdd..a82844e 100644
+index 97fc4fd..848662f 100644
 --- a/tsconfig.json
 +++ b/tsconfig.json
 @@ -1,6 +1,13 @@
@@ -1996,7 +1996,7 @@ index 4c95bdd..a82844e 100644
 +    "target": "es5"
 +  },
    "files": [
-     "typings/angular2-meteor.d.ts",
+     "typings/angular2-meteor/angular2-meteor.d.ts",
 -    "typings/party.d.ts"
 +    "typings/party.d.ts",
 +    "client/app.ts",
@@ -2090,27 +2090,27 @@ index b29e580..9444cba 100644
 2.5.4 (Apple Git-61)
 
 
-From 07b5880beb2a40b568edcdd69d2a9e9b45534a96 Mon Sep 17 00:00:00 2001
+From cc727c2929175cc7ad60658b688deb3d7db01252 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Thu, 7 Jan 2016 15:16:00 +0700
-Subject: [PATCH 063/165] Step 8.3: add typings to the tsconfig
+Subject: [PATCH 063/173] Step 8.3: add typings to the tsconfig
 
 ---
  tsconfig.json | 1 +
  1 file changed, 1 insertion(+)
 
 diff --git a/tsconfig.json b/tsconfig.json
-index a82844e..b749b07 100644
+index 848662f..85cf989 100644
 --- a/tsconfig.json
 +++ b/tsconfig.json
-@@ -7,6 +7,7 @@
+@@ -6,6 +6,7 @@
+   },
    "files": [
-     "typings/angular2-meteor.d.ts",
+     "typings/angular2-meteor/angular2-meteor.d.ts",
++    "typings/meteor-accounts-ui/meteor-accounts-ui.d.ts",
      "typings/party.d.ts",
-+    "typings/meteor-accounts-ui.d.ts",
      "client/app.ts",
      "server/main.ts"
-   ]
 -- 
 2.5.4 (Apple Git-61)
 
@@ -2258,27 +2258,27 @@ index 6160a20..a1a7442 100644
 2.5.4 (Apple Git-61)
 
 
-From e27b47b44f6cb7892539ea59009f2232cdb8efd0 Mon Sep 17 00:00:00 2001
+From 92a52636ecf19da0e0b54aab10124b0ffa1b7396 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Thu, 7 Jan 2016 15:18:33 +0700
-Subject: [PATCH 068/165] Step 8.7: add typings to the tsconfig
+Subject: [PATCH 068/173] Step 8.7: add typings to the tsconfig
 
 ---
  tsconfig.json | 1 +
  1 file changed, 1 insertion(+)
 
 diff --git a/tsconfig.json b/tsconfig.json
-index b749b07..1ab4d3d 100644
+index 85cf989..c009240 100644
 --- a/tsconfig.json
 +++ b/tsconfig.json
-@@ -8,6 +8,7 @@
-     "typings/angular2-meteor.d.ts",
+@@ -7,6 +7,7 @@
+   "files": [
+     "typings/angular2-meteor/angular2-meteor.d.ts",
+     "typings/meteor-accounts-ui/meteor-accounts-ui.d.ts",
++    "typings/meteor-accounts/meteor-accounts.d.ts",
      "typings/party.d.ts",
-     "typings/meteor-accounts-ui.d.ts",
-+    "typings/meteor-accounts.d.ts",
      "client/app.ts",
      "server/main.ts"
-   ]
 -- 
 2.5.4 (Apple Git-61)
 
@@ -3019,27 +3019,27 @@ index e676414..e8c9ca8 100644
 2.5.4 (Apple Git-61)
 
 
-From b589c41c8b999e2508806b5c2c2d227604835079 Mon Sep 17 00:00:00 2001
+From 69b82a4abd198c04f6b4bd1a830c8f75f0b8862d Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Thu, 7 Jan 2016 16:04:26 +0700
-Subject: [PATCH 092/165] Step 12.6: add pagination typings
+Subject: [PATCH 092/173] Step 12.6: add pagination typings
 
 ---
  tsconfig.json | 1 +
  1 file changed, 1 insertion(+)
 
 diff --git a/tsconfig.json b/tsconfig.json
-index 1ab4d3d..8bca042 100644
+index c009240..6463596 100644
 --- a/tsconfig.json
 +++ b/tsconfig.json
-@@ -9,6 +9,7 @@
+@@ -8,6 +8,7 @@
+     "typings/angular2-meteor/angular2-meteor.d.ts",
+     "typings/meteor-accounts-ui/meteor-accounts-ui.d.ts",
+     "typings/meteor-accounts/meteor-accounts.d.ts",
++    "typings/ng2-pagination/ng2-pagination.d.ts",
      "typings/party.d.ts",
-     "typings/meteor-accounts-ui.d.ts",
-     "typings/meteor-accounts.d.ts",
-+    "typings/ng2-pagination.d.ts",
      "client/app.ts",
      "server/main.ts"
-   ]
 -- 
 2.5.4 (Apple Git-61)
 
@@ -4546,10 +4546,10 @@ index 95e6e57..1301c19 100644
 2.5.4 (Apple Git-61)
 
 
-From 2ac2737ab0b44ce77afdc2fba9e282adfd3c9f25 Mon Sep 17 00:00:00 2001
+From 1dbc178657cd2d9839cadba617110c38f5da3b9f Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 12 Jan 2016 22:53:12 +0700
-Subject: [PATCH 136/165] Step 16.1: extend party location with lat and lng
+Subject: [PATCH 136/173] Step 16.1: extend party location with lat and lng
  coordinates
 
 ---
@@ -4557,7 +4557,7 @@ Subject: [PATCH 136/165] Step 16.1: extend party location with lat and lng
  1 file changed, 5 insertions(+), 1 deletion(-)
 
 diff --git a/typings/party.d.ts b/typings/party.d.ts
-index ea07831..50fb3ce 100644
+index ea07831..22d54b2 100644
 --- a/typings/party.d.ts
 +++ b/typings/party.d.ts
 @@ -2,7 +2,11 @@ interface Party {
@@ -4566,9 +4566,9 @@ index ea07831..50fb3ce 100644
    description?: string;
 -  location: string;
 +  location: {
-+    name: string,
-+    lat?: number,
-+    lng?: number
++    name: string;
++    lat?: number;
++    lng?: number;
 +  };
    owner?: string;
    public: boolean;
