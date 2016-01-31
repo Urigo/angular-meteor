@@ -64,7 +64,7 @@ every change to the value of this input will update that property of the control
 vice versa.
 
 In Angular 2, things have changed a bit. Two-way data binding is still available,
-but by default. We will take a close look at two-way binding during the 6th step of the tutorial.
+but it is not the default behavior. We will take a close look at two-way binding during the 6th step of the tutorial.
 
 In this chapter, we are going to explore a new way to bind a form input element to a component in Angular 2.
 
