@@ -475,8 +475,8 @@ describe('angular-meteor.reactive', function() {
       });
 
       it('should return model', function() {
-        vm.myProp = 10;
-        expect(vm.$reactivateCollection('myProp')).toEqual(10);
+        vm.myProp = [10];
+        expect(vm.$reactivateCollection('myProp')).toEqual([10]);
       });
 
       it ('should register a scope collection watcher', function() {
