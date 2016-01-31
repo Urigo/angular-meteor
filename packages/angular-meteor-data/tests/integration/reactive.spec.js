@@ -483,7 +483,7 @@ describe('angular-meteor.reactive', function() {
         vm.myProp = 'myProp';
         var watchSpy = spyOn(scope, '$watchCollection');
 
-        vm.$reactivateCollection('myProp', false);
+        vm.$reactivateCollection('myProp');
         expect(watchSpy).toHaveBeenCalledWith(jasmine.any(Function), jasmine.any(Function));
 
         var args = watchSpy.calls.argsFor(0);
