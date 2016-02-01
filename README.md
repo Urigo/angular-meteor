@@ -6,6 +6,7 @@ Angular2 + Meteor integration.
 Track Roadmap here:
 - [angular2-meteor milestones](https://github.com/Urigo/angular2-meteor/milestones)
 - [meteor-angular2.0-socially milestones](https://github.com/Urigo/meteor-angular2.0-socially/milestones)
+- [Meteor issues related to Angular](https://github.com/meteor/meteor/labels/Project%3AAngular)
 
 
 ## Table of Contents
