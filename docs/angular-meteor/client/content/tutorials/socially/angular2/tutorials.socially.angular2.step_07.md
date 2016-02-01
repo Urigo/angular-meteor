@@ -36,8 +36,8 @@ Some of the typings files have names `angular2.d.ts` and `meteor.d.ts`, which, a
 
 But as you remember, we've mentioned so far only one declaration file `angular2-meteor.d.ts` and used it in the TypeScript config (on the first step), that's thanks to a special TypeScript syntax construction that can link together one declaration files with other declaration files as well as TypeScript files. If you look inside of `angular2-meteor.d.ts` you'll see Angular 2 and Meteor declaration files are linked there by:
 
-    /// <reference path="angular2.d.ts" />
-    /// <reference path="meteor/meteor.d.ts" />
+    /// <reference path="../angular2/angular2.d.ts" />
+    /// <reference path="../meteor/meteor.d.ts" />
 
 Let’s create our own declaration file for our project in order to learn this type-checking better.
 
