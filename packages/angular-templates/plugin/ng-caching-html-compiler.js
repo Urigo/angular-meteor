@@ -8,7 +8,7 @@ NgCachingHtmlCompiler = class NgCachingHtmlCompiler extends CachingHtmlCompiler 
       inputFile.getSourceHash()
     ];
   }
-  
+
   compileOneFile(inputFile) {
     const contents = inputFile.getContentsAsString();
     var packagePrefix = '';
@@ -38,4 +38,4 @@ NgCachingHtmlCompiler = class NgCachingHtmlCompiler extends CachingHtmlCompiler 
       }
     }
   }
-}
+};
