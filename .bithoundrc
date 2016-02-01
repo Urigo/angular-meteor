@@ -3,7 +3,8 @@
     "**/node_modules/**",
     "bower_components/**",
     "**/.*",
-    "docs/**"
+    "docs/**",
+    "dist/**"
   ],
   "test": [
     "**/test/**",
