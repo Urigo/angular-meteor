@@ -41,11 +41,6 @@ Package.onUse(function(api) {
     'system_config.js'
   ]);
 
-  // Adds TS typings.
-  api.addFiles([
-    'typings/angular2-meteor/angular2-meteor.d.ts'
-  ], 'server');
-
   api.addFiles([
     'main.ts',
     'plugin/bootstub.html',

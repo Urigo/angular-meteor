@@ -1,6 +1,6 @@
 Package.describe({
   name: 'barbatus:ng2-pagination',
-  version: '0.1.2',
+  version: '0.1.3',
   summary: 'Angular2 Pagination Components',
   git: 'https://github.com/Urigo/Meteor-Angular2/tree/master/packages/ng2-pagination',
   documentation: null
@@ -12,7 +12,7 @@ Package.onUse(function(api) {
   api.use([
     'check@1.0.5',
     'underscore@1.0.4',
-    'barbatus:angular2@0.8.1'
+    'barbatus:angular2@0.8.2'
   ]);
 
   api.addFiles([
