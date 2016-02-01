@@ -195,7 +195,7 @@ describe('diffArray module', function() {
           _id: "a", date: new Date(2222, 2, 2)
         }];
 
-        expect(function(){diffArray(oldCollection, newCollection, { changedAt: changedAtSpy })}).not.toThrow();
+        expect(function(){diffArray(oldCollection, newCollection, { changedAt: changedAtSpy });}).not.toThrow();
 
         expect(changedAtSpy).toHaveBeenCalledWith(
           'a',
@@ -226,7 +226,7 @@ describe('diffArray module', function() {
           _id: "c", date: new Date(2222, 2, 2), checked: true
         }];
 
-        expect(function(){diffArray(oldCollection, newCollection, { changedAt: changedAtSpy })}).not.toThrow();
+        expect(function(){diffArray(oldCollection, newCollection, { changedAt: changedAtSpy });}).not.toThrow();
 
         expect(changedAtSpy).toHaveBeenCalledWith(
           'b',

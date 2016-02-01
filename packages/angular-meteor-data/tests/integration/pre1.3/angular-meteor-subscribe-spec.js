@@ -141,5 +141,5 @@ describe('$meteorSubscribe service', function () {
       expect($subscriptionHandleMock.stop.calls.count()).toEqual(1);
       expect(onStopSpy.calls.count()).toEqual(0);
     });
-  })
+  });
 });

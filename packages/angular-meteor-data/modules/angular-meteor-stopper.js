@@ -1,3 +1,7 @@
+/*global
+ angular
+ */
+
 'use strict';
 
 var angularMeteorStopper = angular.module('angular-meteor.stopper',
