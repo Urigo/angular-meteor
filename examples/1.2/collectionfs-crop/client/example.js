@@ -2,7 +2,7 @@ angular.module('example', ['angular-meteor', 'ngFileUpload', 'xeditable', 'angul
 
 angular.module('example').controller('ExampleCtrl', ['$scope', function ($scope) {
   $scope.images = $scope.$meteorCollectionFS(function() {
-    return Images.find({}, {sort: [['metadata.order', 'asc']]})
+    return Images.find({}, {sort: [['metadata.order', 'asc']]});
   }, false, Images);
 
   $scope.addImages = function (files) {
@@ -13,7 +13,7 @@ angular.module('example').controller('ExampleCtrl', ['$scope', function ($scope)
         $scope.$apply(function() {
           $scope.imgSrc = e.target.result;
           $scope.myCroppedImage = '';
-        })
+        });
       };
 
       reader.readAsDataURL(files[0]);
@@ -25,7 +25,7 @@ angular.module('example').controller('ExampleCtrl', ['$scope', function ($scope)
 
   $scope.saveCroppedImage = function() {
     if ($scope.myCroppedImage !== '') {
-      $scope.images.save($scope.myCroppedImage)
+      $scope.images.save($scope.myCroppedImage);
     }
   };
 

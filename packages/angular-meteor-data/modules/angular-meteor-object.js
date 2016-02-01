@@ -1,5 +1,5 @@
 /*global
-  angular, _
+  angular, _, Mongo
 */
 
 'use strict';
