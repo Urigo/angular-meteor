@@ -1,3 +1,7 @@
+/*global
+ angular, _, Meteor
+ */
+
 'use strict';
 
 var angularMeteorMethods = angular.module('angular-meteor.methods', ['angular-meteor.utils']);

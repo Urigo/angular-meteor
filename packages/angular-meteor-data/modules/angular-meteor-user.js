@@ -1,3 +1,7 @@
+/*global
+ angular, _, Package, Meteor
+ */
+
 'use strict';
 
 var angularMeteorUser = angular.module('angular-meteor.user', [
@@ -38,7 +42,7 @@ angularMeteorUser.service('$meteorUser', [
 
       $meteorUtils.autorun($rootScope, function(){
         if ( !Meteor.loggingIn() ) {
-          if ( Meteor.user() == null)
+          if ( Meteor.user() === null)
             deferred.reject("AUTH_REQUIRED");
           else
             deferred.resolve( Meteor.user() );

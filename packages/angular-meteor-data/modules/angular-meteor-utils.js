@@ -1,3 +1,7 @@
+/*global
+ angular, _, Tracker, EJSON, FS, Mongo
+ */
+
 'use strict';
 
 var angularMeteorUtils = angular.module('angular-meteor.utils', []);
@@ -54,11 +58,11 @@ angularMeteorUtils.service('$meteorUtils', [
     this.fulfill = function(deferred, boundError, boundResult) {
       return function(err, result) {
         if (err)
-          deferred.reject(boundError == null ? err : boundError);
+          deferred.reject(boundError === null ? err : boundError);
         else if (typeof boundResult == "function")
-          deferred.resolve(boundResult == null ? result : boundResult(result));
+          deferred.resolve(boundResult === null ? result : boundResult(result));
         else
-          deferred.resolve(boundResult == null ? result : boundResult);
+          deferred.resolve(boundResult === null ? result : boundResult);
       };
     };
 

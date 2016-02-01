@@ -29,7 +29,7 @@
             deps.userId.changed();
             deps.loggingIn.changed();
           });
-        })
+        });
       });
     };
 

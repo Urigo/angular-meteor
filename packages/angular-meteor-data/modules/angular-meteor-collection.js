@@ -1,3 +1,7 @@
+/*global
+ angular, _, Tracker, check, Match, Mongo
+ */
+
 'use strict';
 
 var angularMeteorCollection = angular.module('angular-meteor.collection',
@@ -353,8 +357,8 @@ angularMeteorCollection.factory('$meteorCollection', [
 
       if (!(angular.isFunction(reactiveFunc) || angular.isFunction(reactiveFunc.find))) {
         throw new TypeError(
-          'The first argument of $meteorCollection must be a function or\
-            a have a find function property.');
+          'The first argument of $meteorCollection must be a function or ' +
+            'a have a find function property.');
       }
 
       if (!angular.isFunction(reactiveFunc)) {

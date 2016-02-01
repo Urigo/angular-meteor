@@ -1,10 +1,14 @@
+/*global
+ angular, _, Package
+ */
+
 'use strict';
 
-var module = angular.module('diffArray', ['getUpdates']);
+var _module = angular.module('diffArray', ['getUpdates']);
 
-module.factory('diffArray', ['getUpdates',
+_module.factory('diffArray', ['getUpdates',
   function(getUpdates) {
-    var LocalCollection = Package['minimongo'].LocalCollection;
+    var LocalCollection = Package.minimongo.LocalCollection;
     var idStringify = LocalCollection._idStringify || Package['mongo-id'].MongoID.idStringify;
     var idParse = LocalCollection._idParse || Package['mongo-id'].MongoID.idParse;
 
@@ -167,11 +171,11 @@ module.factory('diffArray', ['getUpdates',
         var nextKey = split[i + 1];
 
         if (isNumStr(nextKey)) {
-          if (subObj[k] == null) subObj[k] = [];
+          if (subObj[k] === null) subObj[k] = [];
           if (subObj[k].length == parseInt(nextKey)) subObj[k].push(null);
         }
 
-        else if (subObj[k] == null || !isHash(subObj[k])) {
+        else if (subObj[k] === null || !isHash(subObj[k])) {
           subObj[k] = {};
         }
 

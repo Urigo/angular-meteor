@@ -4,7 +4,7 @@ describe('angular-meteor', function () {
   describe(testedModule, function () {
     var $compile;
     var $rootScope;
-    var $reactive
+    var $reactive;
     var $auth;
 
     beforeEach(angular.mock.module(testedModule));
@@ -65,13 +65,13 @@ describe('angular-meteor', function () {
         expect($rootScope.$auth.currentUserId).toBe(null);
       });
     });
-      
+
     describe('loggingIn', function() {
       it('Should change when logging in', function (done) {
         expect($rootScope.$auth.loggingIn).toBe(false);
 
         Meteor.login('tempUser', function () {
-          expect(Meteor.loggingIn()).toBe(true);  
+          expect(Meteor.loggingIn()).toBe(true);
           expect($rootScope.$auth.loggingIn).toBe(true);
           done();
         });
@@ -80,10 +80,10 @@ describe('angular-meteor', function () {
       it('Should change when logging out', function (done) {
         expect($rootScope.$auth.loggingIn).toBe(false);
 
-        Meteor.login('tempUser', function () {          
+        Meteor.login('tempUser', function () {
           expect($rootScope.$auth.loggingIn).toBe(true);
 
-          Meteor.logout(function () {            
+          Meteor.logout(function () {
             expect($rootScope.$auth.loggingIn).toBe(false);
             done();
           });
@@ -97,7 +97,7 @@ describe('angular-meteor', function () {
           expect($rootScope.loggingIn).toBe(true);
 
           $auth.waitForUser().then(function (user) {
-            expect(Tracker.Computation.prototype.stop).toHaveBeenCalled()
+            expect(Tracker.Computation.prototype.stop).toHaveBeenCalled();
             expect($rootScope.loggingIn).toBe(false);
             done();
           });
@@ -109,11 +109,11 @@ describe('angular-meteor', function () {
         expect(Tracker.Computation.prototype.stop).toHaveBeenCalled();
         promise.stop();
       });
-    })
+    });
 
     describe('requireUser()', function() {
       it('Should return a promise and resolve it once user is logged in', function (done) {
-        Meteor.login('tempUser', function () {         
+        Meteor.login('tempUser', function () {
           $auth.requireUser().then(function (user) {
             expect(Tracker.Computation.prototype.stop).toHaveBeenCalled();
             expect(user.username).toEqual('tempUser');
@@ -141,7 +141,7 @@ describe('angular-meteor', function () {
 
     describe('requireValidUser()', function() {
       it('Should return a promise and resolve it once a valid user is logged in', function (done) {
-        Meteor.login('tempUser', function () {        
+        Meteor.login('tempUser', function () {
           var spy = jasmine.createSpy().and.returnValue(true);
 
           $auth.requireValidUser(spy).then(function (user) {

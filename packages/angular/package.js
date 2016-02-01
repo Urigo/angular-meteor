@@ -13,5 +13,5 @@ Package.onUse(function (api) {
     'angular-meteor-data@0.1.0',
     'angular-templates@0.0.3',
     'pbastowski:angular-babel@1.0.9'
-  ])
+  ]);
 });

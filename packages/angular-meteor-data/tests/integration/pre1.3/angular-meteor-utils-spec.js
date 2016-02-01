@@ -30,7 +30,7 @@ describe('$meteorUtils service', function () {
     it('should return "undefined" when called with a non-existing collection', function () {
       var output = $meteorUtils.getCollectionByName('myCollectionFake');
       expect(output).toBeUndefined();
-    })
+    });
   });
 
   describe('autorun', function () {
@@ -130,20 +130,20 @@ describe('$meteorUtils service', function () {
       expect(deferred.reject.calls.count()).toEqual(1);
       expect(deferred.reject.calls.mostRecent().args[0]).toEqual(err);
     });
-    
+
     it('should return bound result of an async callback from an arbitrary function', function() {
       var fn = function(action, _id) {
-        return {_id: _id, action: action }
-      }
-      var createFulfill = _.partial(fn, 'inserted')
+        return {_id: _id, action: action };
+      };
+      var createFulfill = _.partial(fn, 'inserted');
       var fulfill = $meteorUtils.fulfill(deferred, err, result);
       var err = Error();
       var result = '_id';
-    
+
       fulfill(null, createFulfill(result));
       expect(deferred.resolve.calls.count()).toEqual(1);
       expect(deferred.resolve.calls.mostRecent().args[0]).toEqual({ _id: result, action: 'inserted' });
-    
+
       fulfill(Error());
       expect(deferred.reject.calls.count()).toEqual(1);
       expect(deferred.reject.calls.mostRecent().args[0]).toEqual(err);

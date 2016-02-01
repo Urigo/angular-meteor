@@ -16,7 +16,7 @@ function compileTagsToStaticHtml(tags) {
   });
 
   return handler.getResults();
-};
+}
 
 class StaticHtmlTagHandler {
   constructor() {

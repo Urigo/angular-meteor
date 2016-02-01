@@ -14,5 +14,5 @@ Package.onUse(function (api) {
     'blaze-html-templates',
     'angular-meteor-data@0.0.9',
     'angular-blaze-templates-compiler@0.0.1'
-  ])
+  ]);
 });
