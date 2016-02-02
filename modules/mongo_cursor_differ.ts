@@ -1,5 +1,3 @@
-/// <reference path="../typings/meteor/meteor.d.ts" />
-
 import {ChangeDetectorRef, IterableDifferFactory} from 'angular2/core';
 import {CollectionChangeRecord} from 'angular2/src/core/change_detection/differs/default_iterable_differ';
 import {ObservableWrapper} from 'angular2/src/facade/async';

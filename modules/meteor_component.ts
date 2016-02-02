@@ -1,5 +1,3 @@
-/// <reference path="../typings/underscore/underscore.d.ts" />
-
 import {OnDestroy, NgZone, createNgZone} from 'angular2/core';
 
 export declare type CallbacksObject = {
