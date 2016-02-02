@@ -2,7 +2,7 @@ angular.module('example', ['angular-meteor', 'ngFileUpload', 'xeditable', 'angul
 
 angular.module('example').controller('ExampleCtrl', ['$scope', '$meteor', function ($scope, $meteor) {
   $scope.images = $scope.$meteorCollectionFS(function() {
-    return Images.find({}, {sort: [['metadata.order', 'asc']]})
+    return Images.find({}, {sort: [['metadata.order', 'asc']]});
   }, false);
 
   $scope.addImages = function (files) {

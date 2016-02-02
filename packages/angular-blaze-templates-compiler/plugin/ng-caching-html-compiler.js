@@ -28,4 +28,4 @@ NgCachingHtmlCompiler = class NgCachingHtmlCompiler extends CachingHtmlCompiler 
       }
     }
   }
-}
+};
