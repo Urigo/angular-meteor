@@ -1,0 +1,112 @@
+<template name="api.1.4.0.auth">
+  <div>
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/docs/angular-meteor/client/content/api-reference/1.4.0/api.auth.html"
+       class="btn btn-default btn-lg improve-button">
+      <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
+    </a>
+
+    <do-nothing>
+      {{#markdown}}
+
+# Auth
+<a class="src-code" href="https://github.com/Urigo/angular-meteor/blob/master/packages/angular-meteor-auth/angular-meteor-auth.js" target="_blank">
+  src: angular-meteor-auth/angular-meteor-auth.js
+</a>
+
+A mixin which provides us with authentication related methods and properties. This mixin comes in a seperate package called `angular-meteor-auth`. Note that `accounts-base`package needs to be installed in order for this module to work, otherwise an error will be thrown.
+
+## Properties
+
+The following properties will be added to the `$scope` / `$$ViewModel` during initialization and will be updated reactively:
+
+- currentUser - The current user logged in. Reactivated by [Accounts.user](http://docs.meteor.com/#/full/meteor_user).
+- currentUserId - The current user's id. Reactivated by [Accounts.userId](http://docs.meteor.com/#/full/meteor_userid).
+- isLoggingIn - Inticates whenever we try to log in. Reactivated by [Accounts.loggingIn](http://docs.meteor.com/#/full/meteor_loggingin).
+
+## Methods
+
+### $awaitUser
+
+Waits for the user to finish the login process. Our waiting can be stopped manualy or automatically once our `$scope` has been destroyed.
+
+------
+
+#### Arguments
+
+<table class="variables-matrix input-arguments">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Type</th>
+    <th>Details</th>
+    <th>Required</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>validationFn</td>
+    <td>
+      <a href="" class="label type-hint type-hint-function">Function</a>
+    </td>
+    <td>A validation function which will be invoked with the user once the login process has been succedded. If the returned value is `true` then the returned promised will be resolved. Else, if the returned value is 'false' the returned promise will be rejected with 'FORBIDDEN'. Else, if the returned value is a string or an error they be rejected by the promise as is.</td>
+    <td>No</td>
+  </tr>
+  </tbody>
+</table>
+
+#### Return value
+
+Returns a promise which will be fulfilled accordingly. If the login process has been failed the promise will be rejected with 'AUTH_REQUIRED'. Else, the validation function will be invoked with the logged in user, and if the user is valid the promise will be resolved with the logged in user. Also, a 'stop' method is defined on the promise in case we would like to stop our waiting.
+
+------
+
+#### Examples
+
+Without any validation function, and timeout:
+
+```js
+myModule.controller(function($scope, $timeout) {
+  $scope.viewModel(this);
+
+  let waiting = this.$awaitUser().then((user) => {
+    console.log(`user ${user._id} has just logged in`);
+  }).catch((err) => {
+    assert(err === 'AUTH_REQUIRED');
+    console.log('log in has been failed');
+  });
+
+  $timeout(() => {
+    waiting.stop();
+    console.log('login timed out');
+  }, 5000);
+});
+```
+---
+
+Different scenarios of the validation function:
+
+```js
+myModule.$controller(function($scope) {
+  $scope.viewModel(this);
+
+  let falsyValidation = user => false;
+  let stringValidation = user => 'AUTH_FAILED';
+  let errorValidation = user => Error('AUTH_FAILED');
+
+  this.$awaitUser(falsyValidation).catch((message) => {
+    assert(message === 'FORBIDDEN');
+    return this.$awaitUser(stringValidation);
+  }).catch((message) => {
+    assert(message === 'AUTH_FAILED');
+    return this.$awaitUser(errorValidation);
+  }).catch((err) => {
+    assert(err instanceof Error);
+  });
+});
+```
+
+      {{/markdown}}
+    </do-nothing>
+
+  </div>
+</template>
