@@ -1,6 +1,6 @@
 Package.describe({
   name: 'angular2-compilers',
-  version: '0.1.0-beta.0',
+  version: '0.5.0-beta.1',
   summary: 'Angular 2 Templates, HTML and TypeScript compilers for Meteor',
   git: 'https://github.com/Urigo/angular2-meteor/',
   documentation: 'README.md'
@@ -15,7 +15,7 @@ Package.registerBuildPlugin({
     // Uses an external packages to get the actual compilers
     'barbatus:ts-compilers@0.2.5',
     'ecmascript@0.3.1-modules.5',
-    'angular2-templates-compiler@0.1.0-beta.0'
+    'angular2-templates-compiler@0.5.0-beta.1'
   ]
 });
 

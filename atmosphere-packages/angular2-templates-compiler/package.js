@@ -1,6 +1,6 @@
 Package.describe({
   name: 'angular2-templates-compiler',
-  version: '0.1.0-beta.0',
+  version: '0.5.0-beta.1',
   summary: 'Angular 2 HTML templates compiler for Meteor',
   git: 'https://github.com/Urigo/angular2-meteor/',
   documentation: 'README.md'
