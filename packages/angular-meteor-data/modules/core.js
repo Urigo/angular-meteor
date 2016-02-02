@@ -19,7 +19,7 @@ function($q, $$utils) {
     fn = this.$$bind(fn);
 
     if (!_.isFunction(fn))
-      throw Error('argument 1 must be a function')
+      throw Error('argument 1 must be a function');
     if (!_.isObject(options))
       throw Error('argument 2 must be an object');
 
@@ -81,7 +81,8 @@ function($q, $$utils) {
   $$Core.$$throttledDigest = function() {
     let isDigestable =
       !this.$$destroyed &&
-      !this.$$phase;
+      !this.$$phase &&
+      !this.$root.$$phase;
 
     if (isDigestable) this.$digest();
   };
