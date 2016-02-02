@@ -1,7 +1,7 @@
-From 0331ca3acd1ab58116d85e3023b2e6212eff5f1c Mon Sep 17 00:00:00 2001
+From 25e919cb653a7379a2891b4856925c72e7068ffd Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 16:57:38 +0300
-Subject: [PATCH 001/165] Creates tutorial app.
+Subject: [PATCH 001/166] Creates tutorial app.
 
 ---
  .meteor/.finished-upgraders | 12 +++++++++
@@ -85,11 +85,11 @@ index 0000000..efeba1b
 +browser
 diff --git a/.meteor/release b/.meteor/release
 new file mode 100644
-index 0000000..238bbcc
+index 0000000..3a05e0a
 --- /dev/null
 +++ b/.meteor/release
 @@ -0,0 +1 @@
-+METEOR@1.2.0.1
++METEOR@1.2.1
 diff --git a/.meteor/versions b/.meteor/versions
 new file mode 100644
 index 0000000..e378b68
@@ -166,10 +166,10 @@ index 0000000..e378b68
 2.5.4 (Apple Git-61)
 
 
-From a2759654b831fdc60cf071096dd9ace110b38019 Mon Sep 17 00:00:00 2001
+From 379c8ad86a432ce76828dbbbb1704562539b900a Mon Sep 17 00:00:00 2001
 From: Alex <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:01:41 +0300
-Subject: [PATCH 002/165] Create README.md
+Subject: [PATCH 002/166] Create README.md
 
 ---
  README.md | 2 ++
@@ -188,10 +188,10 @@ index 0000000..61fc3ee
 2.5.4 (Apple Git-61)
 
 
-From 982577678528ecb16ccea76f9c4a178f09b8512f Mon Sep 17 00:00:00 2001
+From abbfd6305db554c8a0a92a6c37ad4f1420fc2fef Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:03:11 +0300
-Subject: [PATCH 003/165] Step 0.1: add client/index.html
+Subject: [PATCH 003/166] Step 0.1: add client/index.html
 
 ---
  client/index.html | 3 +++
@@ -211,10 +211,10 @@ index 0000000..ef412ef
 2.5.4 (Apple Git-61)
 
 
-From 32756437d6a3cd6144aaea879dee45187eaf6d01 Mon Sep 17 00:00:00 2001
+From b2a89ee6e4b5d8ee867e1ecd9742148ac6956d06 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:08:36 +0300
-Subject: [PATCH 004/165] Step 0.2: add Angular2 package
+Subject: [PATCH 004/166] Step 0.2: add Angular2 package
 
 ---
  .meteor/packages | 1 +
@@ -233,10 +233,10 @@ index a9f8340..feb8272 100644
 2.5.4 (Apple Git-61)
 
 
-From 8ae5857626a2964f179c35e501a301c539c94bb8 Mon Sep 17 00:00:00 2001
+From 544c87066bf4a3209bd57361dc054c1f0e8fcc57 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:09:47 +0300
-Subject: [PATCH 005/165] Step 0.3: remove Blaze package
+Subject: [PATCH 005/166] Step 0.3: remove Blaze package
 
 ---
  .meteor/packages | 1 -
@@ -258,10 +258,10 @@ index feb8272..c70808e 100644
 2.5.4 (Apple Git-61)
 
 
-From 0d456d718868498b1f3560d0c0e0a97d03bd9205 Mon Sep 17 00:00:00 2001
+From 4d40e0b1787b59da598fc752d1426fefa0173015 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:10:32 +0300
-Subject: [PATCH 006/165] Step 0.4: remove ecmascript package
+Subject: [PATCH 006/166] Step 0.4: remove ecmascript package
 
 ---
  .meteor/packages | 1 -
@@ -283,10 +283,10 @@ index c70808e..2f89e25 100644
 2.5.4 (Apple Git-61)
 
 
-From 879b81043e3c9e50a20f91ea28a7e02381185afa Mon Sep 17 00:00:00 2001
+From 1e7db5b17c10b2f0992ac3d911948fd3d0d5d138 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:12:43 +0300
-Subject: [PATCH 007/165] Step 0.5: create root component
+Subject: [PATCH 007/166] Step 0.5: create root component
 
 ---
  client/app.ts | 13 +++++++++++++
@@ -316,10 +316,10 @@ index 0000000..687ed8d
 2.5.4 (Apple Git-61)
 
 
-From 8f0f045921564136e4f62ea2be90b2321ef69811 Mon Sep 17 00:00:00 2001
+From 32228ff47c46b3a47289811cd3c964161890bacc Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:14:08 +0300
-Subject: [PATCH 008/165] Step 0.6: load root component
+Subject: [PATCH 008/166] Step 0.6: load root component
 
 ---
  client/index.html | 3 ++-
@@ -339,10 +339,10 @@ index ef412ef..19d3bf1 100644
 2.5.4 (Apple Git-61)
 
 
-From a95d2591703ef134a7ccc5f3cb2fcc7b70f7a867 Mon Sep 17 00:00:00 2001
+From 80969a0f781449fa529c8e2b32eba34f62a93525 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:19:17 +0300
-Subject: [PATCH 009/165] Step 0.7: remove index.html
+Subject: [PATCH 009/166] Step 0.7: remove index.html
 
 ---
  client/index.html | 4 ----
@@ -363,10 +363,10 @@ index 19d3bf1..0000000
 2.5.4 (Apple Git-61)
 
 
-From 71487d1366f7ce2c2d0b442551a5fbca1fffa0c2 Mon Sep 17 00:00:00 2001
+From 35060d963627ce8dce2f5cb3842f6db6309aaf44 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 6 Jan 2016 17:14:37 +0700
-Subject: [PATCH 010/173] Step 0.8: add tsconfig.json with the typings
+Subject: [PATCH 010/166] Step 0.8: add tsconfig.json with the typings
 
 ---
  tsconfig.json | 5 +++++
@@ -388,10 +388,34 @@ index 0000000..45aafe9
 2.5.4 (Apple Git-61)
 
 
-From c78b53848c45ccf3c541a901be13cc59ea16ecd1 Mon Sep 17 00:00:00 2001
+From d552367dc3b6ac0a0d91814c81d341485559e1b2 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Tue, 2 Feb 2016 15:46:45 +0700
+Subject: [PATCH 011/166] Step 0.9: add main.d.ts to the config
+
+---
+ tsconfig.json | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/tsconfig.json b/tsconfig.json
+index 45aafe9..d32f0a4 100644
+--- a/tsconfig.json
++++ b/tsconfig.json
+@@ -1,5 +1,6 @@
+ {
+   "files": [
++    "typings/main.d.ts",
+     "typings/angular2-meteor/angular2-meteor.d.ts"
+   ]
+ }
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 1dafe592edbd3870007c2f30a40239f2272307e7 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:21:40 +0300
-Subject: [PATCH 011/165] Step 0.9: create app.html template
+Subject: [PATCH 012/166] Step 0.10: create app.html template
 
 ---
  client/app.html | 1 +
@@ -409,10 +433,10 @@ index 0000000..a9c8ddc
 2.5.4 (Apple Git-61)
 
 
-From e1e9eca98ab0b6319d95ac02ad552e3baadf757e Mon Sep 17 00:00:00 2001
+From 58d1e1aa42f6580ac066a389af2ec017e18afe79 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:22:33 +0300
-Subject: [PATCH 012/165] remove versions
+Subject: [PATCH 013/166] remove versions
 
 ---
  .meteor/versions | 66 --------------------------------------------------------
@@ -495,10 +519,10 @@ index e378b68..0000000
 2.5.4 (Apple Git-61)
 
 
-From e0f32f89d69c16d83c3221d5bc3fb43210de79fe Mon Sep 17 00:00:00 2001
+From 039e9e2cb898831cd767f6473c9a32e30b00b877 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:23:10 +0300
-Subject: [PATCH 013/165] Step 0.10: change inline template to templateUrl
+Subject: [PATCH 014/166] Step 0.11: change inline template to templateUrl
 
 ---
  client/app.ts | 2 +-
@@ -521,10 +545,10 @@ index 687ed8d..341baa5 100644
 2.5.4 (Apple Git-61)
 
 
-From d12dd2fb9b82ca6c8c123b419fe9e07f7b26c1aa Mon Sep 17 00:00:00 2001
+From 9bb97fc61b2feb0a8f44f36a8961f99672e69627 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:29:40 +0300
-Subject: [PATCH 014/165] Step 1.1: add static HTML to the template
+Subject: [PATCH 015/166] Step 1.1: add static HTML to the template
 
 ---
  client/app.html | 15 ++++++++++++++-
@@ -554,10 +578,10 @@ index a9c8ddc..dd1ef68 100644
 2.5.4 (Apple Git-61)
 
 
-From 6ffd4aea529c2795d486b6082139e761003866d3 Mon Sep 17 00:00:00 2001
+From 5f635c40e9f6a0a84f9cb75ce2b45aee9ead26ca Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:30:49 +0300
-Subject: [PATCH 015/165] Step 2.1: use dynamic template with NgFor
+Subject: [PATCH 016/166] Step 2.1: use dynamic template with NgFor
 
 ---
  client/app.html | 23 +++++++++--------------
@@ -595,10 +619,10 @@ index dd1ef68..d5876ba 100644
 2.5.4 (Apple Git-61)
 
 
-From f21e3ac32f7d64f5f9a87e3fac0ee11cd63a0b34 Mon Sep 17 00:00:00 2001
+From b1723e3c754cd30e34887008bdb25590548b1745 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:34:52 +0300
-Subject: [PATCH 016/165] Step 2.2: load parties data into the app
+Subject: [PATCH 017/166] Step 2.2: load parties data into the app
 
 ---
  client/app.ts | 19 ++++++++++++++++++-
@@ -637,10 +661,10 @@ index 341baa5..df3913d 100644
 2.5.4 (Apple Git-61)
 
 
-From 8ac227f90db74cb1e68b28d87f80382462a4ad21 Mon Sep 17 00:00:00 2001
+From fae2b179702a89bc931548e308ccb1b6026420cb Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 17:36:13 +0300
-Subject: [PATCH 017/165] Step 2.3: define parties property
+Subject: [PATCH 018/166] Step 2.3: define parties property
 
 ---
  client/app.ts | 2 ++
@@ -663,10 +687,10 @@ index df3913d..4b840f0 100644
 2.5.4 (Apple Git-61)
 
 
-From fe1f8b36554f9bef7ca134400a26cf5163e2a5f4 Mon Sep 17 00:00:00 2001
+From 6e23ab48e98531a735c0edc904d0cb853b19ffb6 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 18:30:37 +0300
-Subject: [PATCH 018/165] Step 3.1: add the parties collection
+Subject: [PATCH 019/166] Step 3.1: add the parties collection
 
 ---
  collections/parties.ts | 1 +
@@ -684,10 +708,10 @@ index 0000000..83fbd07
 2.5.4 (Apple Git-61)
 
 
-From 0c1013641dcd5bd79b3ce1c7b29d99a582fc94be Mon Sep 17 00:00:00 2001
+From 16f606ec0f0edd842dfeffbbebfd57a146360aee Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 18:36:56 +0300
-Subject: [PATCH 019/165] Step 3.2: import the parties collection
+Subject: [PATCH 020/166] Step 3.2: import the parties collection
 
 ---
  client/app.ts | 2 ++
@@ -710,10 +734,10 @@ index 4b840f0..8a6ea55 100644
 2.5.4 (Apple Git-61)
 
 
-From 42eaa10c4b7dcd5285f024ae130c7ea42280381d Mon Sep 17 00:00:00 2001
+From 2af195c92bd238ad22db486f4443ed6a18f842df Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Mon, 19 Oct 2015 13:28:41 +0300
-Subject: [PATCH 020/165] Step 3.3: fetch parties
+Subject: [PATCH 021/166] Step 3.3: fetch parties
 
 ---
  client/app.ts | 15 +--------------
@@ -749,10 +773,10 @@ index 8a6ea55..ed7730b 100644
 2.5.4 (Apple Git-61)
 
 
-From b4def00485fe709060df71870e916c9653e4b52d Mon Sep 17 00:00:00 2001
+From 2bf071f7c62aea7c69ddf8a9f81fab2c6648cfb4 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Sep 2015 18:47:23 +0300
-Subject: [PATCH 021/165] Step 3.4: fetch parties reactively
+Subject: [PATCH 022/166] Step 3.4: fetch parties reactively
 
 ---
  client/app.ts | 8 +++++---
@@ -785,10 +809,10 @@ index ed7730b..eee15c8 100644
 2.5.4 (Apple Git-61)
 
 
-From 61ece62526f0bae2dbe31eabc32aa003b5adc706 Mon Sep 17 00:00:00 2001
+From 733f79c5e36b807fe6afe520fe7aea39a83839c1 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 8 Nov 2015 02:26:41 +0300
-Subject: [PATCH 022/165] Step 3.5: initialize collection on server side
+Subject: [PATCH 023/166] Step 3.5: initialize collection on server side
 
 ---
  server/main.ts | 1 +
@@ -806,10 +830,10 @@ index 0000000..64dbcb6
 2.5.4 (Apple Git-61)
 
 
-From 8699e8a8db0064c61f4947811e3c3db10e21109d Mon Sep 17 00:00:00 2001
+From 6c4cfa8e3a2ab5a43bd439e75d50f48d62db675e Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 14 Oct 2015 22:55:11 +0300
-Subject: [PATCH 023/165] Step 3.6: Blaze-like binding to Angular2
+Subject: [PATCH 024/166] Step 3.6: Blaze-like binding to Angular2
 
 ---
  client/app.ts | 12 +++++-------
@@ -851,10 +875,10 @@ index eee15c8..570d3bf 100644
 2.5.4 (Apple Git-61)
 
 
-From 2bb92f352f70a1aa164e4b6473f26b4a48e44a9c Mon Sep 17 00:00:00 2001
+From 5efab185d08d9ec7dc70ae0d112ddd16862f0ae2 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 14 Oct 2015 23:21:31 +0300
-Subject: [PATCH 024/165] Step 3.7: load initial parties on server side
+Subject: [PATCH 025/166] Step 3.7: load initial parties on server side
 
 ---
  server/load-parties.ts | 28 ++++++++++++++++++++++++++++
@@ -899,10 +923,10 @@ index 0000000..65c914a
 2.5.4 (Apple Git-61)
 
 
-From b844ea21a86d99236f8ad23a7f083f1d16598cda Mon Sep 17 00:00:00 2001
+From 292ec4fb8cb00722309078ea8b023d927ed39766 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 14 Oct 2015 23:32:49 +0300
-Subject: [PATCH 025/165] Step 3.8: bootstrap server side
+Subject: [PATCH 026/166] Step 3.8: bootstrap server side
 
 ---
  server/main.ts | 4 +++-
@@ -921,10 +945,10 @@ index 64dbcb6..3e7deac 100644
 2.5.4 (Apple Git-61)
 
 
-From 0d820df59844bda901b55e138d223c5d04f3b4d4 Mon Sep 17 00:00:00 2001
+From 9dc144b55dac89ca8b6a4f788471b3cb1e663c66 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 17 Oct 2015 14:58:32 +0300
-Subject: [PATCH 026/165] Step 4.1:  create PartiesForm component
+Subject: [PATCH 027/166] Step 4.1:  create PartiesForm component
 
 ---
  client/parties-form/parties-form.ts | 9 +++++++++
@@ -950,10 +974,10 @@ index 0000000..be24a51
 2.5.4 (Apple Git-61)
 
 
-From ebc9871765425aa95ccb5c5f6a50bc305fce8794 Mon Sep 17 00:00:00 2001
+From 7847fee6a4d11109e3bf7b5663195104da4e19a9 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 17 Oct 2015 15:48:01 +0300
-Subject: [PATCH 027/165] Step 4.2: add parties-form.html template
+Subject: [PATCH 028/166] Step 4.2: add parties-form.html template
 
 ---
  client/parties-form/parties-form.html | 9 +++++++++
@@ -979,10 +1003,10 @@ index 0000000..df0bd89
 2.5.4 (Apple Git-61)
 
 
-From 492201fc90645bb11f72ab0eddb3a9477d65fafd Mon Sep 17 00:00:00 2001
+From b4218a43fe1269ccc826edac9f161e5f540429ac Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 17 Oct 2015 16:03:48 +0300
-Subject: [PATCH 028/165] Step 4.3: load the PartiesForm component
+Subject: [PATCH 029/166] Step 4.3: load the PartiesForm component
 
 ---
  client/app.html | 1 +
@@ -1002,10 +1026,10 @@ index d5876ba..2f7c3e3 100644
 2.5.4 (Apple Git-61)
 
 
-From 4d080eeca3287cf66d6e74d79b685c81bf872664 Mon Sep 17 00:00:00 2001
+From 8acb228e1e26d5e0d441d407b4de8f94d97b2745 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 17 Oct 2015 16:07:36 +0300
-Subject: [PATCH 029/165] Step 4.4: import the PartiesForm component and link
+Subject: [PATCH 030/166] Step 4.4: import the PartiesForm component and link
  it with the Socially component
 
 ---
@@ -1036,10 +1060,10 @@ index 570d3bf..0005b9d 100644
 2.5.4 (Apple Git-61)
 
 
-From 57a762907f5c22f079fb9ff697ff288ff32ae07b Mon Sep 17 00:00:00 2001
+From 8e2f0cfbf4f4f02cd25f95546b6585f1797a31ba Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 17 Oct 2015 17:41:26 +0300
-Subject: [PATCH 030/165] Step 4.5: build a form model
+Subject: [PATCH 031/166] Step 4.5: build a form model
 
 ---
  client/parties-form/parties-form.ts | 15 ++++++++++++++-
@@ -1077,10 +1101,10 @@ index be24a51..7bf421e 100644
 2.5.4 (Apple Git-61)
 
 
-From ebd3777fc0dcab2a8d162bfc71bbd1b7fc0a3299 Mon Sep 17 00:00:00 2001
+From fe3cc9d71ace413c311f5215598bdc4f4659f17b Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 17 Oct 2015 18:34:57 +0300
-Subject: [PATCH 031/165] Step 4.6: add form validation
+Subject: [PATCH 032/166] Step 4.6: add form validation
 
 ---
  client/parties-form/parties-form.ts | 4 ++--
@@ -1106,10 +1130,10 @@ index 7bf421e..d531eec 100644
 2.5.4 (Apple Git-61)
 
 
-From ef94c9e7684e7eb01a60170db0443ffa9a162baf Mon Sep 17 00:00:00 2001
+From 312600028f072280ba6e7b524c871ba896a9942a Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 17 Oct 2015 20:20:32 +0300
-Subject: [PATCH 032/165] Step 4.7: link the form and its model together
+Subject: [PATCH 033/166] Step 4.7: link the form and its model together
 
 ---
  client/parties-form/parties-form.html | 8 ++++----
@@ -1137,10 +1161,10 @@ index df0bd89..dffc0aa 100644
 2.5.4 (Apple Git-61)
 
 
-From d255144f35b65296644e76372235abd0b98c95b7 Mon Sep 17 00:00:00 2001
+From fa178b2469f7759fb6a5dc74310cc880f01fb55d Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 17 Oct 2015 20:33:32 +0300
-Subject: [PATCH 033/165] Step 4.8: add submit handler inside the template
+Subject: [PATCH 034/166] Step 4.8: add submit handler inside the template
 
 ---
  client/parties-form/parties-form.html | 2 +-
@@ -1160,10 +1184,10 @@ index dffc0aa..da869fb 100644
 2.5.4 (Apple Git-61)
 
 
-From ffd25d303d2e72558e42fceb3ddc97c0adc492d5 Mon Sep 17 00:00:00 2001
+From 345c25db3beda30a532200082d874d7ad6e64cca Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Mon, 4 Jan 2016 13:21:15 +0700
-Subject: [PATCH 034/165] Step 4.9: add addParty method into the component
+Subject: [PATCH 035/166] Step 4.9: add addParty method into the component
 
 ---
  client/parties-form/parties-form.ts | 18 +++++++++++++++++-
@@ -1206,10 +1230,10 @@ index d531eec..b83612c 100644
 2.5.4 (Apple Git-61)
 
 
-From 4c4a23435893ed62275c20df77c7ca618fa9a253 Mon Sep 17 00:00:00 2001
+From 5f9239397c3a28679e252334db0b626e7da0956b Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 17 Oct 2015 20:57:18 +0300
-Subject: [PATCH 035/165] Step 4.10: add a remove party button and click event
+Subject: [PATCH 036/166] Step 4.10: add a remove party button and click event
  handler
 
 ---
@@ -1232,10 +1256,10 @@ index 2f7c3e3..b3ec969 100644
 2.5.4 (Apple Git-61)
 
 
-From 4235a47843849e04c327803fe79aea090864a893 Mon Sep 17 00:00:00 2001
+From 681a3d9f22d54f8d192ced9afa15b6f78cd33de9 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 17 Oct 2015 20:59:18 +0300
-Subject: [PATCH 036/165] Step 4.11: add removeParty method inside the
+Subject: [PATCH 037/166] Step 4.11: add removeParty method inside the
  component
 
 ---
@@ -1261,10 +1285,10 @@ index 0005b9d..1b8092e 100644
 2.5.4 (Apple Git-61)
 
 
-From e078ee09abab600fc8c4e6d156595a3d673f2c2d Mon Sep 17 00:00:00 2001
+From ecdeb3bb3c2c21a07aaa950a26dc284fac94b52a Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 18 Oct 2015 01:47:04 +0300
-Subject: [PATCH 037/165] Step 5.1:  import routing components and add them to
+Subject: [PATCH 038/166] Step 5.1:  import routing components and add them to
  the app
 
 ---
@@ -1301,10 +1325,10 @@ index 1b8092e..9365b34 100644
 2.5.4 (Apple Git-61)
 
 
-From 821f9c8f5984023661057bfe67b4bba541327258 Mon Sep 17 00:00:00 2001
+From b0b6d3ac5b9a0bab26df9316e216c5a181b08cc2 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 18 Oct 2015 01:49:04 +0300
-Subject: [PATCH 038/165] Step 5.2:  create PartiesList component
+Subject: [PATCH 039/166] Step 5.2:  create PartiesList component
 
 ---
  client/parties-list/parties-list.ts | 24 ++++++++++++++++++++++++
@@ -1345,10 +1369,10 @@ index 0000000..9154299
 2.5.4 (Apple Git-61)
 
 
-From 45c21aaf46149883fd2cef3e82cb2519b390e5e3 Mon Sep 17 00:00:00 2001
+From 72fb27d5932a562c8aa1c52a1394a65ce3e87b84 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 18 Oct 2015 01:49:43 +0300
-Subject: [PATCH 039/165] Step 5.3: add PartiesList template
+Subject: [PATCH 040/166] Step 5.3: add PartiesList template
 
 ---
  client/parties-list/parties-list.html | 11 +++++++++++
@@ -1376,10 +1400,10 @@ index 0000000..b3ec969
 2.5.4 (Apple Git-61)
 
 
-From 72b7b349067df03e3d42ad37c6d9372b876499ef Mon Sep 17 00:00:00 2001
+From b39e6ccb30d0731af856f05e0315e6765b71b60d Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 18 Oct 2015 01:59:44 +0300
-Subject: [PATCH 040/165] Removes app.html
+Subject: [PATCH 041/166] Removes app.html
 
 ---
  client/app.html | 11 -----------
@@ -1407,10 +1431,10 @@ index b3ec969..0000000
 2.5.4 (Apple Git-61)
 
 
-From 655b82fee0c619db4836328c0b4359048cfb2a07 Mon Sep 17 00:00:00 2001
+From 5543e09100f46e0169dfde52b876cff071c68f6b Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 18 Oct 2015 02:03:06 +0300
-Subject: [PATCH 041/165] Step 5.4: clean up Socally component
+Subject: [PATCH 042/166] Step 5.4: clean up Socally component
 
 ---
  client/app.ts | 19 ++-----------------
@@ -1457,10 +1481,10 @@ index 9365b34..67c02f4 100644
 2.5.4 (Apple Git-61)
 
 
-From 56617d7f4f096bac5e136bf111cad6a50e172571 Mon Sep 17 00:00:00 2001
+From 94824330ee919de20db9f5165457cbdd90e33b65 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 18 Oct 2015 02:14:40 +0300
-Subject: [PATCH 042/165] Step 5.5: add PartyDetails component
+Subject: [PATCH 043/166] Step 5.5: add PartyDetails component
 
 ---
  client/party-details/party-details.ts | 9 +++++++++
@@ -1486,10 +1510,10 @@ index 0000000..856623d
 2.5.4 (Apple Git-61)
 
 
-From 3fadeb388fce5efa7c82b67ba6a8eac29d57e015 Mon Sep 17 00:00:00 2001
+From eb98b53eb63300a2f04b65bc5275f705eeae6506 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 18 Oct 2015 02:15:46 +0300
-Subject: [PATCH 043/165] Step 5.6: add PartyDetails template
+Subject: [PATCH 044/166] Step 5.6: add PartyDetails template
 
 ---
  client/party-details/party-details.html | 5 +++++
@@ -1511,10 +1535,10 @@ index 0000000..63fdaea
 2.5.4 (Apple Git-61)
 
 
-From 69c22affa6aba765ed79177cece6f5e5e483e890 Mon Sep 17 00:00:00 2001
+From 43f4e7cc4f8cd35ef274cdc6a224d8be6330d803 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 18 Oct 2015 02:19:18 +0300
-Subject: [PATCH 044/165] Step 5.7: configure routes
+Subject: [PATCH 045/166] Step 5.7: configure routes
 
 ---
  client/app.ts | 15 ++++++++++++---
@@ -1541,7 +1565,7 @@ index 67c02f4..19eb1de 100644
      selector: 'app'
  })
  @View({
-+    template: '&lt;router-outlet></router-outlet>',
++    template: '<router-outlet></router-outlet>',
      directives: [ROUTER_DIRECTIVES]
  })
 +@RouteConfig([
@@ -1556,10 +1580,10 @@ index 67c02f4..19eb1de 100644
 2.5.4 (Apple Git-61)
 
 
-From 7b1499aca3e15971bc95af54bbf8a28b930dd5dd Mon Sep 17 00:00:00 2001
+From 3169282b2ace5087da3c05cdd068d7556e19d256 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 18 Oct 2015 03:17:25 +0300
-Subject: [PATCH 045/165] Step 5.8: import RouterLink directive
+Subject: [PATCH 046/166] Step 5.8: import RouterLink directive
 
 ---
  client/parties-list/parties-list.ts | 4 +++-
@@ -1589,10 +1613,10 @@ index 9154299..39ba461 100644
 2.5.4 (Apple Git-61)
 
 
-From 3c85fbb8e3375dc48ca78f7b87bee5b14624b0f5 Mon Sep 17 00:00:00 2001
+From 56dfed0ca2fb60be8f3d834524ec7b17c47eb1a8 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 12 Dec 2015 17:06:34 +0300
-Subject: [PATCH 046/165] Step 5.9: add links to the parties list
+Subject: [PATCH 047/166] Step 5.9: add links to the parties list
 
 ---
  client/parties-list/parties-list.html | 2 +-
@@ -1615,10 +1639,10 @@ index b3ec969..03c9607 100644
 2.5.4 (Apple Git-61)
 
 
-From 9bb1d15a574a24b64ce794fdbcc555cbc4427e02 Mon Sep 17 00:00:00 2001
+From 82eb32d1ca4a3acc60d168194de519ccd50684dd Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 18 Oct 2015 20:11:55 +0300
-Subject: [PATCH 047/165] Step 5.10: inject route parameters
+Subject: [PATCH 048/166] Step 5.10: inject route parameters
 
 ---
  client/party-details/party-details.ts | 12 +++++++++---
@@ -1651,10 +1675,10 @@ index 856623d..effb90b 100644
 2.5.4 (Apple Git-61)
 
 
-From fc4907c8b246f62792b024931961486a0f0e1180 Mon Sep 17 00:00:00 2001
+From c03ecb9bd199347321f1528ad9768409ca9be97d Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 18 Oct 2015 20:44:54 +0300
-Subject: [PATCH 048/165] Step 5.11: load party details
+Subject: [PATCH 049/166] Step 5.11: load party details
 
 ---
  client/party-details/party-details.ts | 5 +++++
@@ -1688,10 +1712,10 @@ index effb90b..c9cee74 100644
 2.5.4 (Apple Git-61)
 
 
-From 9f1a7d26b5bd85109ccabd071dbc556723c0ea83 Mon Sep 17 00:00:00 2001
+From b21a3c8d17d7ea9e4589b78f1833f84de8f78158 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 18 Oct 2015 20:45:51 +0300
-Subject: [PATCH 049/165] Step 5.12: render party details
+Subject: [PATCH 050/166] Step 5.12: render party details
 
 ---
  client/party-details/party-details.html | 6 ++++--
@@ -1715,10 +1739,10 @@ index 63fdaea..b88d435 100644
 2.5.4 (Apple Git-61)
 
 
-From 4c41fc61e547cc20f59f810d67e76f404b26c431 Mon Sep 17 00:00:00 2001
+From dc9e092713fe6b0a15fc27464ce7984b15ebde22 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 8 Nov 2015 23:23:24 +0300
-Subject: [PATCH 050/165] Adds RouterLink dependency.
+Subject: [PATCH 051/166] Adds RouterLink dependency.
 
 ---
  client/party-details/party-details.ts | 5 ++++-
@@ -1748,10 +1772,10 @@ index c9cee74..32f8d70 100644
 2.5.4 (Apple Git-61)
 
 
-From f6ba579a0ec87eca22bf3668037b2e532831fc75 Mon Sep 17 00:00:00 2001
+From 5e716cf5831e6f29c79b94021f8608a8c8de5785 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 8 Nov 2015 23:24:33 +0300
-Subject: [PATCH 051/165] Step 6.1: add party details form
+Subject: [PATCH 052/166] Step 6.1: add party details form
 
 ---
  client/party-details/party-details.html | 16 +++++++++++-----
@@ -1784,10 +1808,10 @@ index b88d435..a9aaa4d 100644
 2.5.4 (Apple Git-61)
 
 
-From b0f7ef4162c2da9f13450a97eca4a6e3c310142c Mon Sep 17 00:00:00 2001
+From a2b064ec8f7a1d77b5d173797dca77044100385a Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 8 Nov 2015 23:44:19 +0300
-Subject: [PATCH 052/165] Step 6.2: bind party to form inputs
+Subject: [PATCH 053/166] Step 6.2: bind party to form inputs
 
 ---
  client/party-details/party-details.html | 8 ++++----
@@ -1818,10 +1842,10 @@ index a9aaa4d..61fda60 100644
 2.5.4 (Apple Git-61)
 
 
-From 9888e22b8f43a89b1b12eb6ccd7df29ca2fbe078 Mon Sep 17 00:00:00 2001
+From 3a877ab576a7ed33c2fb603f4903fc83b95c0687 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 8 Nov 2015 23:53:48 +0300
-Subject: [PATCH 053/165] Step 6.3: add submit event handler
+Subject: [PATCH 054/166] Step 6.3: add submit event handler
 
 ---
  client/party-details/party-details.ts | 10 ++++++++++
@@ -1850,10 +1874,10 @@ index 32f8d70..40be530 100644
 2.5.4 (Apple Git-61)
 
 
-From d47161e8dc1866aad8ee15168caec90e9e77171b Mon Sep 17 00:00:00 2001
+From 28c057c452ed1c3ffc3cab285bf400963762ced4 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 17 Nov 2015 19:24:23 +0300
-Subject: [PATCH 054/165] Step 7.1: declare Party type
+Subject: [PATCH 055/166] Step 7.1: declare Party type
 
 ---
  typings/party.d.ts | 6 ++++++
@@ -1876,22 +1900,23 @@ index 0000000..deb86df
 2.5.4 (Apple Git-61)
 
 
-From 80696f37b4dae4c210091fe8aa75c2e7d07b8b3d Mon Sep 17 00:00:00 2001
+From 656729c3fb9bab28d674e5b7b4eabf32a7972297 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Thu, 7 Jan 2016 13:15:51 +0700
-Subject: [PATCH 055/173] Step 7.2: add party declaration file to the tsconfig
+Subject: [PATCH 056/166] Step 7.2: add party declaration file to the tsconfig
 
 ---
  tsconfig.json | 3 ++-
  1 file changed, 2 insertions(+), 1 deletion(-)
 
 diff --git a/tsconfig.json b/tsconfig.json
-index 45aafe9..97fc4fd 100644
+index d32f0a4..f27eed2 100644
 --- a/tsconfig.json
 +++ b/tsconfig.json
-@@ -1,5 +1,6 @@
+@@ -1,6 +1,7 @@
  {
    "files": [
+     "typings/main.d.ts",
 -    "typings/angular2-meteor/angular2-meteor.d.ts"
 +    "typings/angular2-meteor/angular2-meteor.d.ts",
 +    "typings/party.d.ts"
@@ -1901,10 +1926,10 @@ index 45aafe9..97fc4fd 100644
 2.5.4 (Apple Git-61)
 
 
-From 514b65c163e9c5c31bbf6449fbe801ddafd3bcd9 Mon Sep 17 00:00:00 2001
+From 9a3a3fc199aeea57d7b19888709946cb405e22a0 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 17 Nov 2015 19:37:25 +0300
-Subject: [PATCH 056/165] Step 7.3: define parties collection with Party type
+Subject: [PATCH 057/166] Step 7.3: define parties collection with Party type
 
 ---
  collections/parties.ts | 2 +-
@@ -1921,10 +1946,10 @@ index 83fbd07..9c37117 100644
 2.5.4 (Apple Git-61)
 
 
-From c5a2041e210a4dca9739049dcd099fe2cc3eb56a Mon Sep 17 00:00:00 2001
+From 26f682a152b12b694baaf90f9f594974127ad24f Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 17 Nov 2015 20:17:12 +0300
-Subject: [PATCH 057/165] Step 7.4: correct parties cursor to be of the exact
+Subject: [PATCH 058/166] Step 7.4: correct parties cursor to be of the exact
  type
 
 ---
@@ -1948,10 +1973,10 @@ index 39ba461..b29e580 100644
 2.5.4 (Apple Git-61)
 
 
-From 7c34e1099e7143056387577e08e99446537dcf41 Mon Sep 17 00:00:00 2001
+From efdfdae8fff7a9527083e440505fc54368a43faa Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 17 Nov 2015 20:18:03 +0300
-Subject: [PATCH 058/165] Step 7.5: correct party property to be of Party type
+Subject: [PATCH 059/166] Step 7.5: correct party property to be of Party type
 
 ---
  client/party-details/party-details.ts | 2 +-
@@ -1974,10 +1999,10 @@ index 40be530..3dacd0a 100644
 2.5.4 (Apple Git-61)
 
 
-From 46657b1c1c82585f9536c775258305ddea9e37ed Mon Sep 17 00:00:00 2001
+From 2c47fef6fcb95997bb0358024a3ac6c4f49eb5e0 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Thu, 7 Jan 2016 14:38:05 +0700
-Subject: [PATCH 059/173] Step 7.6: add new TypeScript options to configure
+Subject: [PATCH 060/166] Step 7.6: add new TypeScript options to configure
  plugins
 
 ---
@@ -1985,10 +2010,10 @@ Subject: [PATCH 059/173] Step 7.6: add new TypeScript options to configure
  1 file changed, 8 insertions(+), 1 deletion(-)
 
 diff --git a/tsconfig.json b/tsconfig.json
-index 97fc4fd..848662f 100644
+index f27eed2..3293c49 100644
 --- a/tsconfig.json
 +++ b/tsconfig.json
-@@ -1,6 +1,13 @@
+@@ -1,7 +1,14 @@
  {
 +  "compilerOptions": {
 +    "experimentalDecorators": true,
@@ -1996,6 +2021,7 @@ index 97fc4fd..848662f 100644
 +    "target": "es5"
 +  },
    "files": [
+     "typings/main.d.ts",
      "typings/angular2-meteor/angular2-meteor.d.ts",
 -    "typings/party.d.ts"
 +    "typings/party.d.ts",
@@ -2007,10 +2033,10 @@ index 97fc4fd..848662f 100644
 2.5.4 (Apple Git-61)
 
 
-From 572b8c3709e95fd504fd80be36f9f2a4ce70e80d Mon Sep 17 00:00:00 2001
+From c8b3a4610d9cfa53c5f8648f7ccad40bc1452b16 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 10 Nov 2015 17:40:30 +0300
-Subject: [PATCH 060/165] Removes insecure, adds Accounts UI package
+Subject: [PATCH 061/166] Removes insecure, adds Accounts UI package
 
 ---
  .meteor/packages | 3 ++-
@@ -2032,10 +2058,10 @@ index 2f89e25..6160a20 100644
 2.5.4 (Apple Git-61)
 
 
-From 3a1dae2c0a4e5f41869f3794e594664951f66267 Mon Sep 17 00:00:00 2001
+From 213d0ac5ec7690902b0b8dd6e0aa897ca40a4c34 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 10 Nov 2015 17:45:50 +0300
-Subject: [PATCH 061/165] Step 8.1: add Accounts UI component to the
+Subject: [PATCH 062/166] Step 8.1: add Accounts UI component to the
  PartiesList template
 
 ---
@@ -2057,10 +2083,10 @@ index 03c9607..21c7ea8 100644
 2.5.4 (Apple Git-61)
 
 
-From ea8f2055355955194a681317d93e843573d9943a Mon Sep 17 00:00:00 2001
+From f3f3719d0f668f4d3ee7003f5d454475a01ff2b1 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 10 Nov 2015 17:47:00 +0300
-Subject: [PATCH 062/165] Step 8.2: import dependencies
+Subject: [PATCH 063/166] Step 8.2: import dependencies
 
 ---
  client/parties-list/parties-list.ts | 4 +++-
@@ -2090,24 +2116,24 @@ index b29e580..9444cba 100644
 2.5.4 (Apple Git-61)
 
 
-From cc727c2929175cc7ad60658b688deb3d7db01252 Mon Sep 17 00:00:00 2001
+From 3e1bc21948b3e0e834581f5fc243cd62d8b2483d Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Thu, 7 Jan 2016 15:16:00 +0700
-Subject: [PATCH 063/173] Step 8.3: add typings to the tsconfig
+Subject: [PATCH 064/166] Step 8.3: add typings to the tsconfig
 
 ---
  tsconfig.json | 1 +
  1 file changed, 1 insertion(+)
 
 diff --git a/tsconfig.json b/tsconfig.json
-index 848662f..85cf989 100644
+index 3293c49..d970f1c 100644
 --- a/tsconfig.json
 +++ b/tsconfig.json
-@@ -6,6 +6,7 @@
-   },
+@@ -7,6 +7,7 @@
    "files": [
+     "typings/main.d.ts",
      "typings/angular2-meteor/angular2-meteor.d.ts",
-+    "typings/meteor-accounts-ui/meteor-accounts-ui.d.ts",
++    "typings/ng2-meteor-accounts-ui/ng2-meteor-accounts-ui.d.ts",
      "typings/party.d.ts",
      "client/app.ts",
      "server/main.ts"
@@ -2115,10 +2141,10 @@ index 848662f..85cf989 100644
 2.5.4 (Apple Git-61)
 
 
-From e75454956152e838ca4de7aae26b1e06aaee2055 Mon Sep 17 00:00:00 2001
+From dccf7857300e885ce1397099da91bd3c9d00e9e7 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 10 Nov 2015 18:13:17 +0300
-Subject: [PATCH 064/165] Step 8.4: add parties collection security
+Subject: [PATCH 065/166] Step 8.4: add parties collection security
 
 ---
  collections/parties.ts | 15 +++++++++++++++
@@ -2149,10 +2175,10 @@ index 9c37117..bc33b70 100644
 2.5.4 (Apple Git-61)
 
 
-From 57cd5f62cb28579abe9a9df4c44eedb73c871eaf Mon Sep 17 00:00:00 2001
+From ab8ee65d0c728b3feeeaa0be4d3a89b50e079a95 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 10 Nov 2015 18:34:06 +0300
-Subject: [PATCH 065/165] Step 8.5: check access and add party owner ID
+Subject: [PATCH 066/166] Step 8.5: check access and add party owner ID
 
 ---
  client/parties-form/parties-form.ts | 21 +++++++++++++--------
@@ -2195,10 +2221,10 @@ index b83612c..b0428ec 100644
 2.5.4 (Apple Git-61)
 
 
-From 432ccb4cbc8fe9a228db6d0b8db909ed5c8d1c61 Mon Sep 17 00:00:00 2001
+From 0f88b8fb1f9a3feb97b7d63b38a4737e4ed01129 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 10 Nov 2015 18:35:51 +0300
-Subject: [PATCH 066/165] Step 8.6: check access to change party
+Subject: [PATCH 067/166] Step 8.6: check access to change party
 
 ---
  client/party-details/party-details.ts | 18 +++++++++++-------
@@ -2236,10 +2262,10 @@ index 3dacd0a..486c3a2 100644
 2.5.4 (Apple Git-61)
 
 
-From e4f2826199aed59264e2c99d8829939e49cd7343 Mon Sep 17 00:00:00 2001
+From 41d8e6456af28c1551e361dd08fa96b84edbe910 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 10 Nov 2015 19:23:11 +0300
-Subject: [PATCH 067/165] Adds base Accounts package
+Subject: [PATCH 068/166] Adds base Accounts package
 
 ---
  .meteor/packages | 1 +
@@ -2258,24 +2284,24 @@ index 6160a20..a1a7442 100644
 2.5.4 (Apple Git-61)
 
 
-From 92a52636ecf19da0e0b54aab10124b0ffa1b7396 Mon Sep 17 00:00:00 2001
+From 5e5489feec203064685c8808d78eb835b15100de Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Thu, 7 Jan 2016 15:18:33 +0700
-Subject: [PATCH 068/173] Step 8.7: add typings to the tsconfig
+Subject: [PATCH 069/166] Step 8.7: add typings to the tsconfig
 
 ---
  tsconfig.json | 1 +
  1 file changed, 1 insertion(+)
 
 diff --git a/tsconfig.json b/tsconfig.json
-index 85cf989..c009240 100644
+index d970f1c..ee0dc8b 100644
 --- a/tsconfig.json
 +++ b/tsconfig.json
-@@ -7,6 +7,7 @@
-   "files": [
+@@ -8,6 +8,7 @@
+     "typings/main.d.ts",
      "typings/angular2-meteor/angular2-meteor.d.ts",
-     "typings/meteor-accounts-ui/meteor-accounts-ui.d.ts",
-+    "typings/meteor-accounts/meteor-accounts.d.ts",
+     "typings/ng2-meteor-accounts-ui/ng2-meteor-accounts-ui.d.ts",
++    "typings/ng2-meteor-accounts/ng2-meteor-accounts.d.ts",
      "typings/party.d.ts",
      "client/app.ts",
      "server/main.ts"
@@ -2283,10 +2309,10 @@ index 85cf989..c009240 100644
 2.5.4 (Apple Git-61)
 
 
-From a9f3d77844492c532477166e48028447fc0bcc94 Mon Sep 17 00:00:00 2001
+From e1361767e887359b1c8ed815ea009665727b1678 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 10 Nov 2015 19:23:40 +0300
-Subject: [PATCH 069/165] Step 8.8: require user to access PartyDetails
+Subject: [PATCH 070/166] Step 8.8: require user to access PartyDetails
 
 ---
  client/party-details/party-details.ts | 3 +++
@@ -2317,10 +2343,10 @@ index 486c3a2..ec2230a 100644
 2.5.4 (Apple Git-61)
 
 
-From d753e33660fa3487d775f3f9fff49ea8142fc036 Mon Sep 17 00:00:00 2001
+From 88ab8ca4cc6eea555a9b26e59181313527097538 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 12 Dec 2015 18:21:49 +0300
-Subject: [PATCH 070/165] Corrects Party interface in the party.d.ts definition
+Subject: [PATCH 071/166] Corrects Party interface in the party.d.ts definition
  file
 
 ---
@@ -2341,10 +2367,10 @@ index deb86df..c57fd4a 100644
 2.5.4 (Apple Git-61)
 
 
-From 85b17e4fca3c8e2605861052735bebf653ef96b1 Mon Sep 17 00:00:00 2001
+From e8c051d8241784eb8ca7b096726dec47f862ff22 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 13 Nov 2015 16:54:07 +0300
-Subject: [PATCH 071/165] Removes autopublish
+Subject: [PATCH 072/166] Removes autopublish
 
 ---
  .meteor/packages | 1 -
@@ -2366,10 +2392,10 @@ index a1a7442..cd3ad8c 100644
 2.5.4 (Apple Git-61)
 
 
-From 4661f18e8c696d5a52898bb228415f537f43c350 Mon Sep 17 00:00:00 2001
+From fa3e2dfc7b2c47159fc83fb5a81d455288e40170 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 13 Nov 2015 16:54:32 +0300
-Subject: [PATCH 072/165] Step 9.1: publish parties collection
+Subject: [PATCH 073/166] Step 9.1: publish parties collection
 
 ---
  server/parties.ts | 5 +++++
@@ -2391,10 +2417,10 @@ index 0000000..4a0580a
 2.5.4 (Apple Git-61)
 
 
-From 555b598c0a54d54eee073d8b648dcbe5620a5d68 Mon Sep 17 00:00:00 2001
+From 1ca1d89100c567b30eddc4ccde0640abce2925aa Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 13 Nov 2015 16:56:16 +0300
-Subject: [PATCH 073/165] Step 9.2: import parties publications on the server
+Subject: [PATCH 074/166] Step 9.2: import parties publications on the server
 
 ---
  server/main.ts | 1 +
@@ -2413,10 +2439,10 @@ index 3e7deac..f735195 100644
 2.5.4 (Apple Git-61)
 
 
-From 60a3cbd346c24f6e85e626a0962f6061c765b709 Mon Sep 17 00:00:00 2001
+From d984b37d9faae57e4197d847b0b148efeb0bfde5 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 13 Nov 2015 17:12:19 +0300
-Subject: [PATCH 074/165] Step 9.3: extend PartiesList and make use of
+Subject: [PATCH 075/166] Step 9.3: extend PartiesList and make use of
  subscribe method
 
 ---
@@ -2457,10 +2483,10 @@ index 9444cba..3631c29 100644
 2.5.4 (Apple Git-61)
 
 
-From c2ae2498d318206c7fd417556cf044ad14998535 Mon Sep 17 00:00:00 2001
+From 208bd810aa1560a3dbee061ab9fc52014496443a Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 13 Nov 2015 17:23:21 +0300
-Subject: [PATCH 075/165] Step 9.4: add "Public" checkbox
+Subject: [PATCH 076/166] Step 9.4: add "Public" checkbox
 
 ---
  client/parties-form/parties-form.html | 2 ++
@@ -2482,10 +2508,10 @@ index da869fb..54cc2c8 100644
 2.5.4 (Apple Git-61)
 
 
-From a5fd89d3ca1cc1a9082a18b5a245c86c2f0ccabc Mon Sep 17 00:00:00 2001
+From dc852c0cb67ddff74b3e41b0754816cc73e7fa36 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 13 Nov 2015 17:50:21 +0300
-Subject: [PATCH 076/165] Step 9.5: update PartiesForm component
+Subject: [PATCH 077/166] Step 9.5: update PartiesForm component
 
 ---
  client/parties-form/parties-form.ts | 5 ++++-
@@ -2524,10 +2550,10 @@ index b0428ec..f76b3fd 100644
 2.5.4 (Apple Git-61)
 
 
-From 42286955845ea8ac15bdbdc2662753d18bdd2c10 Mon Sep 17 00:00:00 2001
+From 390cbc8d31ef4b229e010a7f0bb96aa1bc7597b9 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 13 Nov 2015 17:51:40 +0300
-Subject: [PATCH 077/165] Step 9.6: add public field to the initial parties
+Subject: [PATCH 078/166] Step 9.6: add public field to the initial parties
 
 ---
  server/load-parties.ts | 9 ++++++---
@@ -2565,10 +2591,10 @@ index 65c914a..51bdd88 100644
 2.5.4 (Apple Git-61)
 
 
-From 4afe9957fb488dd4a211916c3bcd94d9815436bf Mon Sep 17 00:00:00 2001
+From dabb46c5bbfcbf5cc8d4f10614777df662cf633a Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 13 Nov 2015 18:13:29 +0300
-Subject: [PATCH 078/165] Step 9.7: limit data sent to the client
+Subject: [PATCH 079/166] Step 9.7: limit data sent to the client
 
 ---
  server/parties.ts | 12 +++++++++++-
@@ -2599,10 +2625,10 @@ index 4a0580a..471c61f 100644
 2.5.4 (Apple Git-61)
 
 
-From 560e6f1121c357e1b1615480d1f8373f0cfedb85 Mon Sep 17 00:00:00 2001
+From cab0b01c2113c1f1d6ccad649ab51311e4eedf31 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 13 Nov 2015 18:36:07 +0300
-Subject: [PATCH 079/165] Step 9.8: add "party" publication
+Subject: [PATCH 080/166] Step 9.8: add "party" publication
 
 ---
  server/parties.ts | 24 +++++++++++++++++++-----
@@ -2651,10 +2677,10 @@ index 471c61f..bde5a59 100644
 2.5.4 (Apple Git-61)
 
 
-From bc9dabb79050e8d1968f69faf9305e320700663a Mon Sep 17 00:00:00 2001
+From a789a1acae23ecb9f6e58dff844b4576931e02b1 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 13 Nov 2015 18:51:42 +0300
-Subject: [PATCH 080/165] Step 9.9: subscribe to the "party" publication
+Subject: [PATCH 081/166] Step 9.9: subscribe to the "party" publication
 
 ---
  client/party-details/party-details.ts | 9 +++++++--
@@ -2695,10 +2721,10 @@ index ec2230a..c8b9a2c 100644
 2.5.4 (Apple Git-61)
 
 
-From aa17da5bd222e28ce047bb0336095d04efd3f700 Mon Sep 17 00:00:00 2001
+From dfbc46212117b43af4bc123fc41479b2e8a375fd Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 13 Nov 2015 18:52:51 +0300
-Subject: [PATCH 081/165] Step 9.10: show PartyDetails when the party is loaded
+Subject: [PATCH 082/166] Step 9.10: show PartyDetails when the party is loaded
 
 ---
  client/party-details/party-details.html | 2 +-
@@ -2718,10 +2744,10 @@ index 61fda60..58168fc 100644
 2.5.4 (Apple Git-61)
 
 
-From 9e5df952ce4308456a690befb7ce00e86d4b20fe Mon Sep 17 00:00:00 2001
+From 976e002035926335d815c407044b75c18e824768 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 13 Nov 2015 19:36:06 +0300
-Subject: [PATCH 082/165] Step 9.11: add search inputs
+Subject: [PATCH 083/166] Step 9.11: add search inputs
 
 ---
  client/parties-list/parties-list.html | 4 +++-
@@ -2744,10 +2770,10 @@ index 21c7ea8..7dd6c7e 100644
 2.5.4 (Apple Git-61)
 
 
-From bbd928e322e08324152114d581d3c944fa882f3d Mon Sep 17 00:00:00 2001
+From 7d19d4bf22b631a158eff61d531f021bfd0d2b31 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 13 Nov 2015 19:36:32 +0300
-Subject: [PATCH 083/165] Step 9.12: add search click event handler
+Subject: [PATCH 084/166] Step 9.12: add search click event handler
 
 ---
  client/parties-list/parties-list.ts | 8 ++++++++
@@ -2774,10 +2800,10 @@ index 3631c29..2b75742 100644
 2.5.4 (Apple Git-61)
 
 
-From f7b33d1d64f9c20166c34658dc34367452f75d38 Mon Sep 17 00:00:00 2001
+From 108039672c3a981404d81cd7f90942eedfba9d2d Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 12 Dec 2015 18:26:23 +0300
-Subject: [PATCH 084/165] Corrects Party interface in the party.d.ts definition
+Subject: [PATCH 085/166] Corrects Party interface in the party.d.ts definition
  file
 
 ---
@@ -2798,10 +2824,10 @@ index c57fd4a..bd9cd0c 100644
 2.5.4 (Apple Git-61)
 
 
-From a61f616928199dd34f50564b8d60393f0d2370b5 Mon Sep 17 00:00:00 2001
+From bec67147c3e27ea25d9aacdee931eb1398b787e1 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 19 Dec 2015 22:16:23 +0300
-Subject: [PATCH 085/165] Step 12.1: add options to the parties publication
+Subject: [PATCH 086/166] Step 12.1: add options to the parties publication
 
 ---
  server/parties.ts | 4 ++--
@@ -2826,10 +2852,10 @@ index bde5a59..6adc3ef 100644
 2.5.4 (Apple Git-61)
 
 
-From ee226eb1133062b71e81bb608c83f83a97bdb1a5 Mon Sep 17 00:00:00 2001
+From 13b8c4fb30fd686ceba85960ee0ba423778fecb1 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 19 Dec 2015 22:30:59 +0300
-Subject: [PATCH 086/165] Step 12.2: create options and add them to the parties
+Subject: [PATCH 087/166] Step 12.2: create options and add them to the parties
  subscription
 
 ---
@@ -2864,10 +2890,10 @@ index 2b75742..690e4f6 100644
 2.5.4 (Apple Git-61)
 
 
-From e431684f804cb2d3f4ce277c5401891f2c340a2c Mon Sep 17 00:00:00 2001
+From 1cf4e33e637c92fe756b11b126fbdffe992b0679 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 19 Dec 2015 22:41:56 +0300
-Subject: [PATCH 087/165] Step 12.3: add sorting by party name to PartiesList
+Subject: [PATCH 088/166] Step 12.3: add sorting by party name to PartiesList
 
 ---
  client/parties-list/parties-list.ts | 2 +-
@@ -2890,10 +2916,10 @@ index 690e4f6..dd694ea 100644
 2.5.4 (Apple Git-61)
 
 
-From a943c4ce35a42e05bcfd9d4a76dd7f7ffc727dc2 Mon Sep 17 00:00:00 2001
+From d8d6c2c1d4228e9046529f202c5d1298719cad8e Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 19 Dec 2015 22:44:38 +0300
-Subject: [PATCH 088/165] Step 12.4: re-subscribe on current page changes
+Subject: [PATCH 089/166] Step 12.4: re-subscribe on current page changes
  reactively
 
 ---
@@ -2939,10 +2965,10 @@ index dd694ea..e676414 100644
 2.5.4 (Apple Git-61)
 
 
-From 0032b81ee6af8be8d0d9a154358834758d7ca53c Mon Sep 17 00:00:00 2001
+From 14fd13e14f6d1e17976e33f5d0dfd856fb5b006f Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 19 Dec 2015 23:01:40 +0300
-Subject: [PATCH 089/165] Add reactive-var package
+Subject: [PATCH 090/166] Add reactive-var package
 
 ---
  .meteor/packages | 1 +
@@ -2961,10 +2987,10 @@ index cd3ad8c..75b83f7 100644
 2.5.4 (Apple Git-61)
 
 
-From c42638dd0b8461083d360d6d1d2e282c8453b5f4 Mon Sep 17 00:00:00 2001
+From d1d5ba80cf05a9f1ccb8d05fe2e5ca8f2b4c044f Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 20 Dec 2015 00:19:46 +0300
-Subject: [PATCH 090/165] Add n2-pagination package
+Subject: [PATCH 091/166] Add n2-pagination package
 
 ---
  .meteor/packages | 1 +
@@ -2983,10 +3009,10 @@ index 75b83f7..bcc99e0 100644
 2.5.4 (Apple Git-61)
 
 
-From 67ee175de68544b633f63f21476acdaba80b802f Mon Sep 17 00:00:00 2001
+From 65d49ac71207aee045d99b7fafb05b8d2a2bce36 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 20 Dec 2015 00:44:19 +0300
-Subject: [PATCH 091/165] Step 12.5: import and set up pagination components
+Subject: [PATCH 092/166] Step 12.5: import and set up pagination components
 
 ---
  client/parties-list/parties-list.ts | 8 ++++++--
@@ -3019,23 +3045,23 @@ index e676414..e8c9ca8 100644
 2.5.4 (Apple Git-61)
 
 
-From 69b82a4abd198c04f6b4bd1a830c8f75f0b8862d Mon Sep 17 00:00:00 2001
+From c058b6aec71f66496e1429216d4d1b5cabf96174 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Thu, 7 Jan 2016 16:04:26 +0700
-Subject: [PATCH 092/173] Step 12.6: add pagination typings
+Subject: [PATCH 093/166] Step 12.6: add pagination typings
 
 ---
  tsconfig.json | 1 +
  1 file changed, 1 insertion(+)
 
 diff --git a/tsconfig.json b/tsconfig.json
-index c009240..6463596 100644
+index ee0dc8b..316379a 100644
 --- a/tsconfig.json
 +++ b/tsconfig.json
-@@ -8,6 +8,7 @@
+@@ -9,6 +9,7 @@
      "typings/angular2-meteor/angular2-meteor.d.ts",
-     "typings/meteor-accounts-ui/meteor-accounts-ui.d.ts",
-     "typings/meteor-accounts/meteor-accounts.d.ts",
+     "typings/ng2-meteor-accounts-ui/ng2-meteor-accounts-ui.d.ts",
+     "typings/ng2-meteor-accounts/ng2-meteor-accounts.d.ts",
 +    "typings/ng2-pagination/ng2-pagination.d.ts",
      "typings/party.d.ts",
      "client/app.ts",
@@ -3044,10 +3070,10 @@ index c009240..6463596 100644
 2.5.4 (Apple Git-61)
 
 
-From bdc35b7871be6838aee15eec83ca26949a4179d3 Mon Sep 17 00:00:00 2001
+From d81da3737565a1603fc4072ebbf5800262881e0f Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 20 Dec 2015 00:53:27 +0300
-Subject: [PATCH 093/165] Step 12.7: add pagination markup to the PartiesList's
+Subject: [PATCH 094/166] Step 12.7: add pagination markup to the PartiesList's
  template
 
 ---
@@ -3076,10 +3102,10 @@ index 7dd6c7e..a5f16df 100644
 2.5.4 (Apple Git-61)
 
 
-From 40c20d4d99769153eea19f10f08676e88c56578e Mon Sep 17 00:00:00 2001
+From 587e8d1394b193e3ccd54558bca846fed00880c0 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 20 Dec 2015 12:27:40 +0300
-Subject: [PATCH 094/165] Step 12.8: handle page changed event of the
+Subject: [PATCH 095/166] Step 12.8: handle page changed event of the
  pagination controls
 
 ---
@@ -3101,10 +3127,10 @@ index a5f16df..dcca4f3 100644
 2.5.4 (Apple Git-61)
 
 
-From 521999a3560bc50ed1860c7e19f05633ca2362da Mon Sep 17 00:00:00 2001
+From d169bf44fb702dec2d325f01eb6afd8a01ac16fe Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 20 Dec 2015 12:28:52 +0300
-Subject: [PATCH 095/165] Step 12.9: add page changed event handler to the
+Subject: [PATCH 096/166] Step 12.9: add page changed event handler to the
  component
 
 ---
@@ -3128,10 +3154,10 @@ index e8c9ca8..9103f57 100644
 2.5.4 (Apple Git-61)
 
 
-From 9c34917ecfbc61a0fdf87010a460182da8911add Mon Sep 17 00:00:00 2001
+From 10d0afc789f521f1f8aa6aeaa46d6e5d2b88525f Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 20 Dec 2015 13:09:27 +0300
-Subject: [PATCH 096/165] Add tmeasday:publish-counts package
+Subject: [PATCH 097/166] Add tmeasday:publish-counts package
 
 ---
  .meteor/packages | 1 +
@@ -3150,10 +3176,10 @@ index bcc99e0..9aa7932 100644
 2.5.4 (Apple Git-61)
 
 
-From fe2fe801b4a96280da6bc1d775f645c0e085b821 Mon Sep 17 00:00:00 2001
+From ff7117c86f91166670ddef57a0c01e5c0a8b2b8e Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 20 Dec 2015 13:09:54 +0300
-Subject: [PATCH 097/165] Step 12.10: publish total number of parties
+Subject: [PATCH 098/166] Step 12.10: publish total number of parties
 
 ---
  server/parties.ts | 1 +
@@ -3175,10 +3201,10 @@ index 6adc3ef..c5396cf 100644
 2.5.4 (Apple Git-61)
 
 
-From deb34f8953ee7ee9c3208733f6ffd8120472c20d Mon Sep 17 00:00:00 2001
+From d3d72cccd6c0efeae189b14813bc578e94306248 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 20 Dec 2015 13:13:52 +0300
-Subject: [PATCH 098/165] Step 12.11: handle reactive updates of the parties
+Subject: [PATCH 099/166] Step 12.11: handle reactive updates of the parties
  total number
 
 ---
@@ -3212,10 +3238,10 @@ index 9103f57..d129261 100644
 2.5.4 (Apple Git-61)
 
 
-From 74387660c599c40faff01f9d5871cef6cfe4c2cd Mon Sep 17 00:00:00 2001
+From b963d1899fd7090189940d22fa2055b6b5541d91 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 20 Dec 2015 13:19:49 +0300
-Subject: [PATCH 099/165] Step 12.12: add parties total number var in the
+Subject: [PATCH 100/166] Step 12.12: add parties total number var in the
  template
 
 ---
@@ -3239,10 +3265,10 @@ index dcca4f3..f983878 100644
 2.5.4 (Apple Git-61)
 
 
-From b337b4cf7a55327f3c0184e26c930124c512b388 Mon Sep 17 00:00:00 2001
+From 1e1f1e20227435a9ec6f76cfeaeb1b567f466978 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 20 Dec 2015 13:51:53 +0300
-Subject: [PATCH 100/165] Step 12.13: add a sort order dropdown
+Subject: [PATCH 101/166] Step 12.13: add a sort order dropdown
 
 ---
  client/parties-list/parties-list.html | 7 +++++++
@@ -3270,10 +3296,10 @@ index f983878..5a78db8 100644
 2.5.4 (Apple Git-61)
 
 
-From 8b507c2b7e545432f9b764a7f08bda7910be2c63 Mon Sep 17 00:00:00 2001
+From e47a949da6a266ca79222a64be22d394e480c90a Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 20 Dec 2015 13:52:45 +0300
-Subject: [PATCH 101/165] Step 12.14: re-subscribe reactively when sort order
+Subject: [PATCH 102/166] Step 12.14: re-subscribe reactively when sort order
  changes
 
 ---
@@ -3319,10 +3345,10 @@ index d129261..96d74f7 100644
 2.5.4 (Apple Git-61)
 
 
-From 3a7b9198c3e9450a60590c040755959f85e2d5ae Mon Sep 17 00:00:00 2001
+From 3dafc8c01ad9c91373f7bfc57974af20bd06ad91 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 20 Dec 2015 20:52:38 +0300
-Subject: [PATCH 102/165] Step 12.15: add search by the party location using
+Subject: [PATCH 103/166] Step 12.15: add search by the party location using
  Mongo regex
 
 ---
@@ -3365,10 +3391,10 @@ index c5396cf..3b2e497 100644
 2.5.4 (Apple Git-61)
 
 
-From 95f7edcf33da8c3f9ca6b56058d2c2c970b2d9a8 Mon Sep 17 00:00:00 2001
+From c162a9403d8c0dde3e8fb82b31d2ba19207e67cd Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sun, 20 Dec 2015 21:13:58 +0300
-Subject: [PATCH 103/165] Step 12.16: add reactive search by the location on
+Subject: [PATCH 104/166] Step 12.16: add reactive search by the location on
  the client
 
 ---
@@ -3414,10 +3440,10 @@ index 96d74f7..23af89e 100644
 2.5.4 (Apple Git-61)
 
 
-From b5c8e2377bd43948ceaebd6d2262b2779bdf199f Mon Sep 17 00:00:00 2001
+From 9db96154f01dcf64217e840e0ceccff98df216db Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 23 Dec 2015 14:37:37 +0700
-Subject: [PATCH 104/165] Step 13.1: add uninvited users publication
+Subject: [PATCH 105/166] Step 13.1: add uninvited users publication
 
 ---
  server/users.ts | 15 +++++++++++++++
@@ -3449,10 +3475,10 @@ index 0000000..9365f30
 2.5.4 (Apple Git-61)
 
 
-From 15cc69554d03d13f4bcdc09a60207cd30175f014 Mon Sep 17 00:00:00 2001
+From d2f9e62bdf79efdc02cc8e37d224691e485d59ee Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 23 Dec 2015 14:45:37 +0700
-Subject: [PATCH 105/165] Step 13.2: import users publications on the server
+Subject: [PATCH 106/166] Step 13.2: import users publications on the server
  start
 
 ---
@@ -3473,10 +3499,10 @@ index f735195..ebfe211 100644
 2.5.4 (Apple Git-61)
 
 
-From 0084b454e12ec69dc8c32b865bc0f022d62453a3 Mon Sep 17 00:00:00 2001
+From 19419f2afbbe2e210493b4152e050bba49d3b35a Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 23 Dec 2015 14:49:16 +0700
-Subject: [PATCH 106/165] Step 13.3: load uninvited users
+Subject: [PATCH 107/166] Step 13.3: load uninvited users
 
 ---
  client/party-details/party-details.ts | 5 +++++
@@ -3509,10 +3535,10 @@ index c8b9a2c..c04158a 100644
 2.5.4 (Apple Git-61)
 
 
-From 7ecd5c622d968e7e8accd154149bed83df1d1262 Mon Sep 17 00:00:00 2001
+From 79e8a3a9696f5b47c4de63f4775302ce935d3582 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 23 Dec 2015 14:49:53 +0700
-Subject: [PATCH 107/165] Add invited to the party definition
+Subject: [PATCH 108/166] Add invited to the party definition
 
 ---
  typings/party.d.ts | 1 +
@@ -3532,10 +3558,10 @@ index bd9cd0c..bb48676 100644
 2.5.4 (Apple Git-61)
 
 
-From 4b104907cba4eb88ff81d55c7b47a754a421d888 Mon Sep 17 00:00:00 2001
+From 009e1bfbd0d46155851867c3e503f52617bdec6e Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 23 Dec 2015 14:52:39 +0700
-Subject: [PATCH 108/165] Step 13.4: render uninvited users
+Subject: [PATCH 109/166] Step 13.4: render uninvited users
 
 ---
  client/party-details/party-details.html | 7 +++++++
@@ -3560,10 +3586,10 @@ index 58168fc..4ba0656 100644
 2.5.4 (Apple Git-61)
 
 
-From b2b62da30c722f426198a50567742fa6edef89b3 Mon Sep 17 00:00:00 2001
+From ebb542dc3c8297b00475b24a35a6b8326241c859 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 23 Dec 2015 20:30:45 +0700
-Subject: [PATCH 109/165] Step 13.5: add new pipe to render user name
+Subject: [PATCH 110/166] Step 13.5: add new pipe to render user name
 
 ---
  client/lib/pipes.ts | 22 ++++++++++++++++++++++
@@ -3602,10 +3628,10 @@ index 0000000..12c051f
 2.5.4 (Apple Git-61)
 
 
-From de0c743086a977d833908b2382ddc8d3df642a1a Mon Sep 17 00:00:00 2001
+From 81e9d99dc41330963a64147ad90df4b89054e9a2 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 23 Dec 2015 20:39:03 +0700
-Subject: [PATCH 110/165] Step 13.6: make use of the pipe in the template
+Subject: [PATCH 111/166] Step 13.6: make use of the pipe in the template
 
 ---
  client/party-details/party-details.html | 2 +-
@@ -3627,10 +3653,10 @@ index 4ba0656..0a61451 100644
 2.5.4 (Apple Git-61)
 
 
-From 8b828edda2d3a3496d6fd2f7cbe7ca34d544efc5 Mon Sep 17 00:00:00 2001
+From bfd3736b4b3e138794a8a9c8f03cfcd174b89c7a Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 23 Dec 2015 20:40:13 +0700
-Subject: [PATCH 111/165] Step 13.7: import DisplayName pipe and add it to the
+Subject: [PATCH 112/166] Step 13.7: import DisplayName pipe and add it to the
  view
 
 ---
@@ -3659,10 +3685,10 @@ index c04158a..42357a0 100644
 2.5.4 (Apple Git-61)
 
 
-From 7d7550d0f26393dc324e1b98874ce36bbe3ae7ea Mon Sep 17 00:00:00 2001
+From df587d63bcdcca2d83f190cce6dbb98ea01e742f Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 23 Dec 2015 21:34:51 +0700
-Subject: [PATCH 112/165] Step 13.8: configure accounts UI
+Subject: [PATCH 113/166] Step 13.8: configure accounts UI
 
 ---
  client/app.ts | 4 ++++
@@ -3687,10 +3713,10 @@ index 19eb1de..f73bb62 100644
 2.5.4 (Apple Git-61)
 
 
-From 366174af7f90862175a6ae3f8b1e1e9e7d756142 Mon Sep 17 00:00:00 2001
+From 8fb12e534bcef390011a21ae612d3b83e26c1e39 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 25 Dec 2015 15:12:20 +0700
-Subject: [PATCH 113/165] Step 14.1: add a party invitation method
+Subject: [PATCH 114/166] Step 14.1: add a party invitation method
 
 ---
  collections/methods.ts | 44 ++++++++++++++++++++++++++++++++++++++++++++
@@ -3751,10 +3777,10 @@ index 0000000..c1aa134
 2.5.4 (Apple Git-61)
 
 
-From d5fd2942c536967e6c9ce6a81210e937667ae52e Mon Sep 17 00:00:00 2001
+From a613d612982b8d2635b25cc171d2548ecdc86c16 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 25 Dec 2015 15:43:08 +0700
-Subject: [PATCH 114/165] Step 14.2: import methods on the server side
+Subject: [PATCH 115/166] Step 14.2: import methods on the server side
 
 ---
  server/main.ts | 1 +
@@ -3775,10 +3801,10 @@ index ebfe211..a463eea 100644
 2.5.4 (Apple Git-61)
 
 
-From dc45e06a63fc8e57547848899114adc59ee14513 Mon Sep 17 00:00:00 2001
+From 1e5509d96a5cb5bc2d26d82fd5f7ee2b90c53e3d Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 1 Jan 2016 19:14:20 +0700
-Subject: [PATCH 115/165] Step 14.3: import methods on the client
+Subject: [PATCH 116/166] Step 14.3: import methods on the client
 
 ---
  client/app.ts | 2 ++
@@ -3801,10 +3827,10 @@ index f73bb62..9321620 100644
 2.5.4 (Apple Git-61)
 
 
-From 280d24b1a8c29d2710c8c9d17f4bc4a8517f156f Mon Sep 17 00:00:00 2001
+From 9f2161978966a97127eb93eca26f73fad059e1b1 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 25 Dec 2015 15:55:43 +0700
-Subject: [PATCH 116/165] Step 14.4: add "invite" button
+Subject: [PATCH 117/166] Step 14.4: add "invite" button
 
 ---
  client/party-details/party-details.html | 1 +
@@ -3825,10 +3851,10 @@ index 0a61451..b671ff0 100644
 2.5.4 (Apple Git-61)
 
 
-From 62ab622ff75066da21fde9d7f7b75d25c2984366 Mon Sep 17 00:00:00 2001
+From 9500615114a763718569c2d26dbb4435d310d3d5 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 25 Dec 2015 15:56:51 +0700
-Subject: [PATCH 117/165] Step 14.5: add the click handler and call "invite"
+Subject: [PATCH 118/166] Step 14.5: add the click handler and call "invite"
  method
 
 ---
@@ -3859,10 +3885,10 @@ index 42357a0..51916d2 100644
 2.5.4 (Apple Git-61)
 
 
-From 9b002947fe54dd212c7ce76d5800259ae3370c62 Mon Sep 17 00:00:00 2001
+From 4ea7de62733a31ff33436a791aabc294b84eb795 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 25 Dec 2015 16:02:54 +0700
-Subject: [PATCH 118/165] Add check package
+Subject: [PATCH 119/166] Add check package
 
 ---
  .meteor/packages | 1 +
@@ -3881,10 +3907,10 @@ index 9aa7932..c784804 100644
 2.5.4 (Apple Git-61)
 
 
-From b610551967b6b626d1d053f9a5ec6437d476d353 Mon Sep 17 00:00:00 2001
+From 11daa1e2f130f922d8dc5a69136fc4df9ea48b42 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 25 Dec 2015 16:08:08 +0700
-Subject: [PATCH 119/165] Add email package
+Subject: [PATCH 120/166] Add email package
 
 ---
  .meteor/packages | 1 +
@@ -3903,10 +3929,10 @@ index c784804..e15a342 100644
 2.5.4 (Apple Git-61)
 
 
-From 82d41e9806ee350452d793ccb4a1adc68b194535 Mon Sep 17 00:00:00 2001
+From a44ee41c3d5d90311c77bc937a60e178df828598 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 25 Dec 2015 17:03:15 +0700
-Subject: [PATCH 120/165] Step 14.6: get the party reactively
+Subject: [PATCH 121/166] Step 14.6: get the party reactively
 
 ---
  client/party-details/party-details.ts | 6 ++++--
@@ -3933,10 +3959,10 @@ index 51916d2..f1056c6 100644
 2.5.4 (Apple Git-61)
 
 
-From 287ae2d0609bef05e470ae714cc36ee00c513df8 Mon Sep 17 00:00:00 2001
+From 0715ce0f6c409d3ce3cc5700a84223ed2ef01589 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Fri, 25 Dec 2015 17:08:47 +0700
-Subject: [PATCH 121/165] Step 14.7: update the users list reactively
+Subject: [PATCH 122/166] Step 14.7: update the users list reactively
 
 ---
  client/party-details/party-details.ts | 14 +++++++++++++-
@@ -3978,10 +4004,10 @@ index f1056c6..7c4a050 100644
 2.5.4 (Apple Git-61)
 
 
-From 4313928f3eb58edab6dfa2aeb62ab1402686f86c Mon Sep 17 00:00:00 2001
+From 89937e900aa007779a005a5d43f0675c089a63f8 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Dec 2015 19:39:34 +0700
-Subject: [PATCH 122/165] Step 14.8: show private parties to the invited and
+Subject: [PATCH 123/166] Step 14.8: show private parties to the invited and
  owners only
 
 ---
@@ -4011,10 +4037,10 @@ index 3b2e497..70e1e07 100644
 2.5.4 (Apple Git-61)
 
 
-From 1b38b4e736b867ad0dc1ab40d8b7565ec1a92def Mon Sep 17 00:00:00 2001
+From e8c40343b6ce630cd58c6809e8615a43f33081f1 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Dec 2015 20:17:48 +0700
-Subject: [PATCH 123/165] Step 14.9: add a "reply" method
+Subject: [PATCH 124/166] Step 14.9: add a "reply" method
 
 ---
  collections/methods.ts | 45 +++++++++++++++++++++++++++++++++++++++++++++
@@ -4079,10 +4105,10 @@ index c1aa134..fc9f58e 100644
 2.5.4 (Apple Git-61)
 
 
-From 2d69b749134454633ede801b9974a6f0a1cc605f Mon Sep 17 00:00:00 2001
+From 91024c7d297671f245c3cf5a048f38b631b4793d Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Dec 2015 20:10:46 +0700
-Subject: [PATCH 124/165] Step 14.10: update the party typings
+Subject: [PATCH 125/166] Step 14.10: update the party typings
 
 ---
  typings/party.d.ts | 6 ++++++
@@ -4107,10 +4133,10 @@ index bb48676..ea07831 100644
 2.5.4 (Apple Git-61)
 
 
-From 5034e74caa16f12090e4a4c27b6b8b03cb64697c Mon Sep 17 00:00:00 2001
+From 92f73d2de58ea74926c6a765375bcc290baae39e Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Dec 2015 20:33:48 +0700
-Subject: [PATCH 125/165] Step 14.11: update PartyDetails view with the three
+Subject: [PATCH 126/166] Step 14.11: update PartyDetails view with the three
  response buttons
 
 ---
@@ -4136,10 +4162,10 @@ index b671ff0..971a2d7 100644
 2.5.4 (Apple Git-61)
 
 
-From ef1dd9a778f03702999fc963df7715f83bf174b4 Mon Sep 17 00:00:00 2001
+From e82e9bfb5071eb30a89a3f2b7e53021b254e8abd Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Dec 2015 20:37:05 +0700
-Subject: [PATCH 126/165] Step 14.12: handle reply events in the PartyDetails
+Subject: [PATCH 127/166] Step 14.12: handle reply events in the PartyDetails
  component
 
 ---
@@ -4170,10 +4196,10 @@ index 7c4a050..bcf3d7d 100644
 2.5.4 (Apple Git-61)
 
 
-From 45d1af16306f8818a421e2df4a7213cb813b091d Mon Sep 17 00:00:00 2001
+From f59b0c1c183b9bc8c6fbf82f1eb42e3d4ec5ba67 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Dec 2015 21:34:49 +0700
-Subject: [PATCH 127/165] Step 14.13: add a new response counting pipe
+Subject: [PATCH 128/166] Step 14.13: add a new response counting pipe
 
 ---
  client/lib/pipes.ts | 34 ++++++++++++++++++++++++++++++++++
@@ -4231,10 +4257,10 @@ index 12c051f..dd4da11 100644
 2.5.4 (Apple Git-61)
 
 
-From 92c300c0a5aeee3f0871e3131aae5b460ab85b05 Mon Sep 17 00:00:00 2001
+From 7d0368126f63db6b2ac1af48f5b377e161fe83aa Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Dec 2015 21:35:28 +0700
-Subject: [PATCH 128/165] Step 14.14: display response statistics in the list
+Subject: [PATCH 129/166] Step 14.14: display response statistics in the list
 
 ---
  client/parties-list/parties-list.html | 6 ++++++
@@ -4261,10 +4287,10 @@ index 5a78db8..bf63448 100644
 2.5.4 (Apple Git-61)
 
 
-From d6fd2562805504f13b86c772f71a983a0d97cd8a Mon Sep 17 00:00:00 2001
+From 2cc1899f680b837cd30bf4339c3f893c345e8e29 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Sat, 26 Dec 2015 21:36:23 +0700
-Subject: [PATCH 129/165] Step 14.15: import the RsvpPipe pipe
+Subject: [PATCH 130/166] Step 14.15: import the RsvpPipe pipe
 
 ---
  client/parties-list/parties-list.ts | 4 +++-
@@ -4296,10 +4322,10 @@ index 23af89e..336efce 100644
 2.5.4 (Apple Git-61)
 
 
-From 19cfd421178a66ed2154299f9132817efa5b412f Mon Sep 17 00:00:00 2001
+From 430f5086f270ed904f01a59ec30c797601198f6c Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Mon, 28 Dec 2015 17:42:26 +0700
-Subject: [PATCH 130/165] Step 15.1: inject Meteor user and add isOwner method
+Subject: [PATCH 131/166] Step 15.1: inject Meteor user and add isOwner method
 
 ---
  client/parties-list/parties-list.ts | 12 ++++++++++++
@@ -4351,10 +4377,10 @@ index 336efce..c3ae7eb 100644
 2.5.4 (Apple Git-61)
 
 
-From 53be11d90d19e45e4ffab54ff477b40b139d33ae Mon Sep 17 00:00:00 2001
+From 2a27b3256259f9e203867f8f9f28aba8bc261499 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Mon, 28 Dec 2015 17:46:08 +0700
-Subject: [PATCH 131/165] Step 15.2: use the hidden attribute in the
+Subject: [PATCH 132/166] Step 15.2: use the hidden attribute in the
  PartiesList template
 
 ---
@@ -4385,10 +4411,10 @@ index bf63448..f87d7d0 100644
 2.5.4 (Apple Git-61)
 
 
-From 58db00667e4b88805c741e3c81bcd53ff978af8f Mon Sep 17 00:00:00 2001
+From dcb4894ccc48dee18d9b69d5b13b2883e415ec20 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Mon, 28 Dec 2015 18:48:33 +0700
-Subject: [PATCH 132/165] Step 15.3: add isOwner property into the PartyDetails
+Subject: [PATCH 133/166] Step 15.3: add isOwner property into the PartyDetails
 
 ---
  client/party-details/party-details.ts | 12 +++++++++++-
@@ -4436,10 +4462,10 @@ index bcf3d7d..d3a411b 100644
 2.5.4 (Apple Git-61)
 
 
-From 9b2807200fadc6898ff580b71e3dd76dc5d871b1 Mon Sep 17 00:00:00 2001
+From c4f7d5b5ab8a56077e6c834ad3212963447d766a Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Mon, 28 Dec 2015 18:49:13 +0700
-Subject: [PATCH 133/165] Step 15.4: add disable attribute bindings
+Subject: [PATCH 134/166] Step 15.4: add disable attribute bindings
 
 ---
  client/party-details/party-details.html | 8 ++++----
@@ -4472,10 +4498,10 @@ index 971a2d7..95e6e57 100644
 2.5.4 (Apple Git-61)
 
 
-From d10bc4d8244be2bfab43a88f36a0572bdd70e97a Mon Sep 17 00:00:00 2001
+From c758379c36bfe5c3e8b48d3e3a4758318dc0cfcb Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Mon, 28 Dec 2015 19:40:08 +0700
-Subject: [PATCH 134/165] Step 15.5: add isPublic and isInvited properties
+Subject: [PATCH 135/166] Step 15.5: add isPublic and isInvited properties
 
 ---
  client/party-details/party-details.ts | 17 +++++++++++++++++
@@ -4511,10 +4537,10 @@ index d3a411b..5518440 100644
 2.5.4 (Apple Git-61)
 
 
-From c8848cd487d0c6ba72cd553f38244edbd5dd6353 Mon Sep 17 00:00:00 2001
+From 19648ed9400737756166c590524bebe8442ff868 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Mon, 28 Dec 2015 19:40:32 +0700
-Subject: [PATCH 135/165] Step 15.6: make use of the properties in the template
+Subject: [PATCH 136/166] Step 15.6: make use of the properties in the template
 
 ---
  client/party-details/party-details.html | 4 ++--
@@ -4546,10 +4572,10 @@ index 95e6e57..1301c19 100644
 2.5.4 (Apple Git-61)
 
 
-From 1dbc178657cd2d9839cadba617110c38f5da3b9f Mon Sep 17 00:00:00 2001
+From ac5255cbe67b0587e13082b1b9238a7f008683d3 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 12 Jan 2016 22:53:12 +0700
-Subject: [PATCH 136/173] Step 16.1: extend party location with lat and lng
+Subject: [PATCH 137/166] Step 16.1: extend party location with lat and lng
  coordinates
 
 ---
@@ -4577,10 +4603,10 @@ index ea07831..22d54b2 100644
 2.5.4 (Apple Git-61)
 
 
-From 4aa1e00b683fec39ea4dcaa6d49cdf593eb3a802 Mon Sep 17 00:00:00 2001
+From 6c551468898af9876484369e6fd22b68cc5eb16d Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 12 Jan 2016 22:56:15 +0700
-Subject: [PATCH 137/165] Step 16.2: change initial parties accordingly
+Subject: [PATCH 138/166] Step 16.2: change initial parties accordingly
 
 ---
  server/load-parties.ts | 12 +++++++++---
@@ -4623,10 +4649,10 @@ index 51bdd88..ea27211 100644
 2.5.4 (Apple Git-61)
 
 
-From 6ac6c504de18f697d8af41cd4e3fb16db7034731 Mon Sep 17 00:00:00 2001
+From 62916fefbd71b9879da11fc06edaec6fc44fa158 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 12 Jan 2016 22:58:29 +0700
-Subject: [PATCH 138/165] Step 16.3: change party creation component
+Subject: [PATCH 139/166] Step 16.3: change party creation component
 
 ---
  client/parties-form/parties-form.ts | 4 +++-
@@ -4651,10 +4677,10 @@ index f76b3fd..7089ca8 100644
 2.5.4 (Apple Git-61)
 
 
-From e50329678aa1d7d148989ae36eef7eeeafa475c7 Mon Sep 17 00:00:00 2001
+From f4e123995959699d332244a35b2b3bbc46f1962d Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 12 Jan 2016 23:04:28 +0700
-Subject: [PATCH 139/165] Step 16.4: reflect type changes in the parties search
+Subject: [PATCH 140/166] Step 16.4: reflect type changes in the parties search
 
 ---
  server/parties.ts | 2 +-
@@ -4677,10 +4703,10 @@ index 70e1e07..415e710 100644
 2.5.4 (Apple Git-61)
 
 
-From 504ca99082b1db9e0ae030c18e5cd01f6e3bcb2e Mon Sep 17 00:00:00 2001
+From 1e39e8f0806965cdef86a224a14d361af56e1aba Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 13 Jan 2016 12:58:44 +0700
-Subject: [PATCH 140/165] Step 16.5: import and install maps providers globally
+Subject: [PATCH 141/166] Step 16.5: import and install maps providers globally
 
 ---
  client/app.ts | 4 +++-
@@ -4709,10 +4735,10 @@ index 9321620..607f9f1 100644
 2.5.4 (Apple Git-61)
 
 
-From c61335dd11e03578bc01c82847991c15620d326e Mon Sep 17 00:00:00 2001
+From 89be73cd0c94939945584f6cf55212d6dbb6280c Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 13 Jan 2016 13:02:02 +0700
-Subject: [PATCH 141/165] Step 16.6: add maps markup to the PartyDetails
+Subject: [PATCH 142/166] Step 16.6: add maps markup to the PartyDetails
  template
 
 ---
@@ -4752,10 +4778,10 @@ index 1301c19..3bda50c 100644
 2.5.4 (Apple Git-61)
 
 
-From e2a57d3db63a196394c3f713559117ef9d340d3b Mon Sep 17 00:00:00 2001
+From bce8e47788fad426ed8bef415b23b4a761e82786 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 13 Jan 2016 13:12:12 +0700
-Subject: [PATCH 142/165] Step 16.7: add maps logic to the PartyDetails
+Subject: [PATCH 143/166] Step 16.7: add maps logic to the PartyDetails
  component
 
 ---
@@ -4816,10 +4842,10 @@ index 5518440..7ef3e34 100644
 2.5.4 (Apple Git-61)
 
 
-From 6c629467f523abd05fb7b675fda832eb2eacf6fc Mon Sep 17 00:00:00 2001
+From 0985f8ffe372a03c1ac8b4237867517ebb751b3d Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 13 Jan 2016 13:16:37 +0700
-Subject: [PATCH 143/165] Step 16.8: create main CSS file and add maps styles
+Subject: [PATCH 144/166] Step 16.8: create main CSS file and add maps styles
  there
 
 ---
@@ -4841,10 +4867,10 @@ index 0000000..1484170
 2.5.4 (Apple Git-61)
 
 
-From a358522381898d22c8f79fd4a41019c67d6b4a83 Mon Sep 17 00:00:00 2001
+From afa970fd93cf14d9dd9b711de45c22f04aa8de7a Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 13 Jan 2016 13:24:03 +0700
-Subject: [PATCH 144/165] Step 16.9: add all parties locations on the map
+Subject: [PATCH 145/166] Step 16.9: add all parties locations on the map
 
 ---
  client/parties-list/parties-list.html | 14 +++++++++++++-
@@ -4885,10 +4911,10 @@ index f87d7d0..b69e41a 100644
 2.5.4 (Apple Git-61)
 
 
-From 6101607f87f58b78280f9b7913c7c8f740a0cbeb Mon Sep 17 00:00:00 2001
+From 6a3168cddf4cc04c2cb3253a10139ea9023bc424 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 13 Jan 2016 13:25:02 +0700
-Subject: [PATCH 145/165] Step 16.10: import maps dependencies in the
+Subject: [PATCH 146/166] Step 16.10: import maps dependencies in the
  PartiesList
 
 ---
@@ -4920,10 +4946,10 @@ index c3ae7eb..9f35eb9 100644
 2.5.4 (Apple Git-61)
 
 
-From d15eaa478b3db07da8142d7dbb924a95d86a09c1 Mon Sep 17 00:00:00 2001
+From 147b40a1e52765ec0f0e51bb0d048502bbed9b87 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 13 Jan 2016 13:43:37 +0700
-Subject: [PATCH 146/165] Add Angular 2 Google Maps package
+Subject: [PATCH 147/166] Add Angular 2 Google Maps package
 
 ---
  .meteor/packages | 1 +
@@ -4942,35 +4968,35 @@ index e15a342..119cd68 100644
 2.5.4 (Apple Git-61)
 
 
-From 0b6124e349383a57397ff962c272f307c78c5a11 Mon Sep 17 00:00:00 2001
+From 4c76a4c6fe39fc4fc9521ad0155bed2d2bf3bd8e Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 13 Jan 2016 18:08:25 +0700
-Subject: [PATCH 147/165] Add maps package's typings to the config
+Subject: [PATCH 148/166] Add maps package's typings to the config
 
 ---
  tsconfig.json | 1 +
  1 file changed, 1 insertion(+)
 
 diff --git a/tsconfig.json b/tsconfig.json
-index 8bca042..8938eb4 100644
+index 316379a..43c347d 100644
 --- a/tsconfig.json
 +++ b/tsconfig.json
 @@ -10,6 +10,7 @@
-     "typings/meteor-accounts-ui.d.ts",
-     "typings/meteor-accounts.d.ts",
-     "typings/ng2-pagination.d.ts",
+     "typings/ng2-meteor-accounts-ui/ng2-meteor-accounts-ui.d.ts",
+     "typings/ng2-meteor-accounts/ng2-meteor-accounts.d.ts",
+     "typings/ng2-pagination/ng2-pagination.d.ts",
 +    "typings/ng2-google-maps/ng2-google-maps.d.ts",
+     "typings/party.d.ts",
      "client/app.ts",
      "server/main.ts"
-   ]
 -- 
 2.5.4 (Apple Git-61)
 
 
-From 080615d749c167bdcf40741c551b79db45801e7c Mon Sep 17 00:00:00 2001
+From a55e54fbedae7b7e35a0c32ea9556f9223da13dc Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 26 Jan 2016 20:47:08 +0700
-Subject: [PATCH 148/165] Step 21.1: add a new package called "socially-mobile"
+Subject: [PATCH 149/166] Step 21.1: add a new package called "socially-mobile"
 
 ---
  packages/socially-mobile/package.js | 24 ++++++++++++++++++++++++
@@ -5011,10 +5037,10 @@ index 0000000..079cecc
 2.5.4 (Apple Git-61)
 
 
-From 33eecfc7bace72be18eda183b69d50e3ec7f8e50 Mon Sep 17 00:00:00 2001
+From 81af582bd01defd9d582962acc6d0899286eaa66 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 26 Jan 2016 20:51:25 +0700
-Subject: [PATCH 149/165] Step 21.2: clean up and add dependencies in the
+Subject: [PATCH 150/166] Step 21.2: clean up and add dependencies in the
  mobile package
 
 ---
@@ -5045,10 +5071,10 @@ index 079cecc..af0575f 100644
 2.5.4 (Apple Git-61)
 
 
-From de87fdcf6bca4e3714800e1b2b24c889b52e140b Mon Sep 17 00:00:00 2001
+From 357ca70e311a338bc9f1808db15d449538ddc83f Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 26 Jan 2016 20:54:48 +0700
-Subject: [PATCH 150/165] Add new package called "socially-browser"
+Subject: [PATCH 151/166] Add new package called "socially-browser"
 
 ---
  packages/socially-browser/package.js | 22 ++++++++++++++++++++++
@@ -5087,10 +5113,10 @@ index 0000000..bf81803
 2.5.4 (Apple Git-61)
 
 
-From 201dff9f6b11911aff599e75a0de751885eb9609 Mon Sep 17 00:00:00 2001
+From b6c38887fe5fe5d55fd0a1ff0533aa56d5d4d2c0 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 26 Jan 2016 20:55:47 +0700
-Subject: [PATCH 151/165] Add packages to the app
+Subject: [PATCH 152/166] Add packages to the app
 
 ---
  .meteor/packages | 2 ++
@@ -5110,10 +5136,10 @@ index 119cd68..813486d 100644
 2.5.4 (Apple Git-61)
 
 
-From 397a630d9cf5d7212c782165d9926bd7bbe5320c Mon Sep 17 00:00:00 2001
+From 2ab0fc9ed0db6fd67ae750a37f41e9a8e60f1049 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 26 Jan 2016 22:17:25 +0700
-Subject: [PATCH 152/165] Step 21.3: add login template
+Subject: [PATCH 153/166] Step 21.3: add login template
 
 ---
  packages/socially-browser/client/login/login.html | 1 +
@@ -5131,10 +5157,10 @@ index 0000000..ca253cc
 2.5.4 (Apple Git-61)
 
 
-From 247ddf079a8c9f148e2171595c7b40eca71a08f3 Mon Sep 17 00:00:00 2001
+From e97501c15ff52a1c5d75aaa6ec89c483aaad4acb Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 26 Jan 2016 22:17:54 +0700
-Subject: [PATCH 153/165] Step 21.4: add login component
+Subject: [PATCH 154/166] Step 21.4: add login component
 
 ---
  packages/socially-browser/client/login/login.ts | 13 +++++++++++++
@@ -5164,10 +5190,10 @@ index 0000000..8daee63
 2.5.4 (Apple Git-61)
 
 
-From 74cde5e7972b195761be8e284b63655db1064279 Mon Sep 17 00:00:00 2001
+From 34ed466f617fbab184f7be7ecfb50a43a32fb52a Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 26 Jan 2016 22:36:54 +0700
-Subject: [PATCH 154/165] Step 21.5: register SystemJS module
+Subject: [PATCH 155/166] Step 21.5: register SystemJS module
 
 ---
  packages/socially-browser/system_config.js | 11 +++++++++++
@@ -5195,10 +5221,10 @@ index 0000000..aa0e70c
 2.5.4 (Apple Git-61)
 
 
-From bb5485e7c72f5f259c8d770fee962a49ba8ed22e Mon Sep 17 00:00:00 2001
+From 2dc26d03f267889ebd9fa8ad81c738087fe10ba4 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 26 Jan 2016 22:40:08 +0700
-Subject: [PATCH 155/165] Step 21.6: add component files to the package
+Subject: [PATCH 156/166] Step 21.6: add component files to the package
 
 ---
  packages/socially-browser/package.js | 7 +++++++
@@ -5226,10 +5252,10 @@ index bf81803..b7a3a62 100644
 2.5.4 (Apple Git-61)
 
 
-From de7c26c5ef39a803fc8801e4b64fe093cc8d202e Mon Sep 17 00:00:00 2001
+From 76413b6eefea4331b9109e58f7d0d6712d34e009 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 26 Jan 2016 22:57:19 +0700
-Subject: [PATCH 156/165] Step 21.7: import Login component from "socially"
+Subject: [PATCH 157/166] Step 21.7: import Login component from "socially"
  module
 
 ---
@@ -5261,10 +5287,10 @@ index 9f35eb9..fbf02c3 100644
 2.5.4 (Apple Git-61)
 
 
-From b88468c1e8bbe9d9fbffc66fa9531875e7791e81 Mon Sep 17 00:00:00 2001
+From c03fc9caad57568a324fd677fa74e379e4216275 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 26 Jan 2016 22:58:01 +0700
-Subject: [PATCH 157/165] Step 21.8: change PartiesList template to contain
+Subject: [PATCH 158/166] Step 21.8: change PartiesList template to contain
  "login" directive
 
 ---
@@ -5288,10 +5314,10 @@ index b69e41a..53cad56 100644
 2.5.4 (Apple Git-61)
 
 
-From 3f6d13e2f340d7dcce597d67bab6c7f117a2b035 Mon Sep 17 00:00:00 2001
+From c4aed31fa8af9d525bde5568d02536c03b6a2b75 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 27 Jan 2016 00:27:52 +0700
-Subject: [PATCH 158/165] Step 21.9: add login component's template
+Subject: [PATCH 159/166] Step 21.9: add login component's template
 
 ---
  packages/socially-mobile/client/login/login.html | 1 +
@@ -5309,10 +5335,10 @@ index 0000000..37c8acd
 2.5.4 (Apple Git-61)
 
 
-From 89cf4f1e1769528a9a5a7172042fbccbef4c3797 Mon Sep 17 00:00:00 2001
+From eac8c7b444e5fd171bb35db0509c2cff9df21ebf Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 27 Jan 2016 00:28:44 +0700
-Subject: [PATCH 159/165] Step 21.10: add login component
+Subject: [PATCH 160/166] Step 21.10: add login component
 
 ---
  packages/socially-mobile/client/login/login.ts | 15 +++++++++++++++
@@ -5344,10 +5370,10 @@ index 0000000..2d3b84b
 2.5.4 (Apple Git-61)
 
 
-From ac08989388e89fad11800b34f919fdc1c112469c Mon Sep 17 00:00:00 2001
+From 58e6cd5b3ff3fd2688dec8f7d9df09075ecf502e Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 27 Jan 2016 00:38:02 +0700
-Subject: [PATCH 160/165] Step 21.11: add login page component's template
+Subject: [PATCH 161/166] Step 21.11: add login page component's template
 
 ---
  packages/socially-mobile/client/login/login-page.html | 9 +++++++++
@@ -5373,10 +5399,10 @@ index 0000000..ea5e8e0
 2.5.4 (Apple Git-61)
 
 
-From 6c22c3a61d667e79625e52c7242afd8e51df03ea Mon Sep 17 00:00:00 2001
+From 7332fadc1b25b72afcf57faf5e6ff118ca97bd46 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 27 Jan 2016 00:39:02 +0700
-Subject: [PATCH 161/165] Step 21.12: add login page component
+Subject: [PATCH 162/166] Step 21.12: add login page component
 
 ---
  .../socially-mobile/client/login/login-page.ts     | 29 ++++++++++++++++++++++
@@ -5422,10 +5448,10 @@ index 0000000..561abac
 2.5.4 (Apple Git-61)
 
 
-From baf192464f0f312885a10f7d648c07ef7b3aa7ce Mon Sep 17 00:00:00 2001
+From 062c903b2691f39efffa8b08a5a381b8037ee669 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 27 Jan 2016 00:41:59 +0700
-Subject: [PATCH 162/165] Step 21.13: register SystemJS module for the mobile
+Subject: [PATCH 163/166] Step 21.13: register SystemJS module for the mobile
  package
 
 ---
@@ -5454,10 +5480,10 @@ index 0000000..097cd14
 2.5.4 (Apple Git-61)
 
 
-From a56a246d0d04689842887adedfb7ef37239f6e29 Mon Sep 17 00:00:00 2001
+From d80080c5be82708a8d32675ed45167d4d7e58d91 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 27 Jan 2016 00:43:37 +0700
-Subject: [PATCH 163/165] Step 21.14: add component files to the mobile package
+Subject: [PATCH 164/166] Step 21.14: add component files to the mobile package
 
 ---
  packages/socially-mobile/package.js | 9 +++++++++
@@ -5487,10 +5513,10 @@ index af0575f..0ea1138 100644
 2.5.4 (Apple Git-61)
 
 
-From 3dc97dfad5e2329e67096d928905182196838e44 Mon Sep 17 00:00:00 2001
+From 9116df6c90163db0c6512dcd006307b1394eab3f Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 27 Jan 2016 01:01:27 +0700
-Subject: [PATCH 164/165] Step 21.15: add new login route to the app
+Subject: [PATCH 165/166] Step 21.15: add new login route to the app
 
 ---
  client/app.ts | 5 ++++-
@@ -5523,10 +5549,10 @@ index 607f9f1..9051558 100644
 2.5.4 (Apple Git-61)
 
 
-From 8fefc9ca18b776d3ba4518a8486f4d88bc91280b Mon Sep 17 00:00:00 2001
+From 8ec97067ccde99d8204485ce15607fe51bee30da Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Thu, 28 Jan 2016 13:38:51 +0700
-Subject: [PATCH 165/165] Add iOS platform
+Subject: [PATCH 166/166] Add iOS platform
 
 ---
  .meteor/platforms | 3 ++-
@@ -5543,4 +5569,3 @@ index efeba1b..81ae701 100644
 +server
 -- 
 2.5.4 (Apple Git-61)
-
