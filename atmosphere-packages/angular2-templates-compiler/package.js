@@ -20,7 +20,6 @@ Package.onUse(function(api) {
 
   api.addFiles([
     'utils/file_mixin.js',
-    'utils/mixin.js',
     'compilers/ng_compiler.js',
     'compilers/ng_caching_compiler.js',
     'compilers/html_compiler.js'
