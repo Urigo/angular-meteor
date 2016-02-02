@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import * as ngCore from 'angular2/core';
-import {MeteorComponent} from 'angular2-meteor/meteor_component.js';
+import {MeteorComponent} from 'angular2-meteor/meteor_component';
 
 describe('MeteorComponent', function() {
   var ngZone;
