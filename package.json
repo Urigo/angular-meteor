@@ -41,6 +41,6 @@
     "zone.js": ">=0.5.10",
     "ts-loader": "^0.8.0",
     "typescript": "^1.7.5",
-    "webpack": "^1.12.12",
+    "webpack": "^1.12.12"
   }
 }
