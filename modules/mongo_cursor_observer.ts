@@ -1,5 +1,6 @@
 import {EventEmitter} from 'angular2/core';
 import {CursorHandle} from './cursor_handle';
+import {EJSON} from 'ejson';
 
 export class AddChange {
   constructor(public index: number, public item: any) {}
