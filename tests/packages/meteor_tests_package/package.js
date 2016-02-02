@@ -7,7 +7,7 @@ Package.describe({
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.3-modules-beta.4');
+  api.versionsFrom('1.3-modules-beta.5');
 });
 
 Package.onTest(function(api) {
@@ -18,7 +18,7 @@ Package.onTest(function(api) {
     'underscore@1.0.4',
     'check',
     'tracker',
-    'ecmascript@0.3.1-modules.4'
+    'ecmascript@0.3.1-modules.5'
   ]);
 
   api.addFiles([
