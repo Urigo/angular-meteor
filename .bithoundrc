@@ -1,7 +1,16 @@
 {
   "ignore": [
-    "build",
-    "typings",
-    "node_modules"
-  ]
+    "**/build/**/*",
+    "**/typings/**",
+    "**/node_modules/**",
+    "**/**-min-**",
+    "**/**-min.**",
+    "**/**.min.**"
+  ],
+  "test": [
+    "**/test/**",
+    "**/tests/**",
+    "**/spec/**",
+    "**/specs/**"
+  ],
 }
