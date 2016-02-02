@@ -1,5 +1,3 @@
-'use strict';
-
 NgCachingCompiler = class NgCachingCompiler extends CachingCompiler {
   constructor(compilerName) {
     super({
@@ -13,6 +11,8 @@ NgCachingCompiler = class NgCachingCompiler extends CachingCompiler {
   }
 
   processFilesForTarget(files) {
+    // This mixin is required in order to extend the File object that Meteor provides
+    // The FileMixin adds methods that make the work with the files much simpler
     files.forEach((file) => mixin(file, FileMixin));
     super.processFilesForTarget(files);
   }

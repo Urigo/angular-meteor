@@ -2,7 +2,7 @@
 
 Plugin.registerCompiler({
   extensions: ['html']
-}, () => new HtmlCompiler('<app></app>'));
+}, () => new HtmlCompiler());
 
 Plugin.registerCompiler({
   extensions: ['ts'],

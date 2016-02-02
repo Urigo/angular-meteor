@@ -1,20 +1,24 @@
-var $ = cheerio;
+var $ = Npm.require('cheerio');
 
 HtmlCompiler = class HtmlCompiler extends NgCompiler {
-  constructor(bootstrapHtml) {
+  constructor() {
     super();
 
-    this._bootstrapHtml = bootstrapHtml;
+    // Create TWO compilers, one for each possible HTML file type:
+    // htmlCompiler is for the main HTML file that contains `head` or `body` tags
+    // ngTemplateCompiler is for the templates file that does not use as main files
     this._htmlCompiler = new NgHtmlCompiler();
     this._ngTemplateCompiler = new NgTemplateCompiler();
   }
 
   processFilesForTarget(files) {
+    // Call the super method in order to enrich the files with the FileMixin
     super.processFilesForTarget(files);
 
     var htmlFiles = [];
     var templateFiles = [];
 
+    // Iterate all the files that needs to compile and split them to HTML files and templates files
     files.forEach((file) => {
       var $contents = $(file.getContentsAsString());
       var isHtml = $contents.closest('head,body').length;
@@ -33,27 +37,14 @@ HtmlCompiler = class HtmlCompiler extends NgCompiler {
       }
     });
 
-    // If there is no html then add provided bootstrap html
-    // to the body. It raises the issue though:
-    // if no html at all the bootstrap won't be added.
-    if (htmlFiles.length == 0) {
-      try {
-        templateFiles[0].addHtml({
-          data: this._bootstrapHtml,
-          section: 'body'
-        });
-      }
-      catch (e) {
-        // Not sure what to do in this case... the exception is: Document sections can only be emitted to web targets
-      }
-    }
-
+    // Use each compiler with it's files and compile them
     this._htmlCompiler.processFilesForTarget(htmlFiles);
     this._ngTemplateCompiler.processFilesForTarget(templateFiles);
   }
 };
 
-class NgHtmlCompiler extends NgCachingCompiler {
+// HTML compiler for main HTML file of the application
+NgHtmlCompiler = class NgHtmlCompiler extends NgCachingCompiler {
   constructor() {
     super('html-extension-compiler');
   }
@@ -88,6 +79,7 @@ class NgHtmlCompiler extends NgCachingCompiler {
   }
 };
 
+// Templates compiler that compiles template files
 NgTemplateCompiler = class NgTemplateCompiler extends NgCachingCompiler {
   constructor() {
     super('ng-template-compiler');
@@ -98,16 +90,16 @@ NgTemplateCompiler = class NgTemplateCompiler extends NgCachingCompiler {
   }
 
   compileOneFile(file) {
-    if (file.getPathInPackage() != 'stub/stub.html')
-      console.log('Compiling HTML template: ' + file.getPathInPackage());
+    console.log('Compiling HTML template: ' + file.getPathInPackage());
 
+    // Just pass through the file, without any modifications, we do not need to modify it at all at the moment.
     return file.getContentsAsString();
   }
 
   addCompileResult(file, result) {
     file.addAsset({
       data: result,
-      path: file.getPathInPackage()
+      path: file.getPathInPackage() // the path is the full path if the file comes from a package
     });
   }
 };
