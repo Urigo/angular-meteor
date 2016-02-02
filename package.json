@@ -4,7 +4,7 @@
   "repository": "https://github.com/Urigo/angular2-meteor/",
   "description": "Angular 2.0 and Meteor - the perfect stack http://www.angular-meteor.com/",
   "author": "Angular2-Meteor (https://github.com/Urigo/angular2-meteor)",
-  "license": "ISC",
+  "license": "MIT",
   "scripts": {
     "postinstall": "gulp build"
   },

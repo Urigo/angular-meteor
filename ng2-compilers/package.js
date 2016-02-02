@@ -20,7 +20,7 @@ Package.registerBuildPlugin({
     'caching-compiler@1.0.0',
     'mrt:cheerio@0.3.2',
     'barbatus:ts-compilers@0.2.5',
-    'ecmascript@0.3.1-modules.5',
+    'ecmascript@0.3.1-modules.4',
     'check@1.1.0',
     'underscore@1.0.4'
   ]
