@@ -1,4 +1,4 @@
-import {OnDestroy, NgZone, createNgZone} from 'angular2/core';
+import {OnDestroy, NgZone, createNgZone} from "angular2/core";
 
 export declare type CallbacksObject = {
   onReady?: Function;

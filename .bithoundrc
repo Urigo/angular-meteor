@@ -1,0 +1,7 @@
+{
+  "ignore": [
+    "build",
+    "typings",
+    "node_modules"
+  ]
+}

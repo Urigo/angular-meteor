@@ -15,7 +15,7 @@ export var MongoCollectionObserverFake = function() {
     this._generators.length = 0;
   };
 
-  this.destroy = function() {}
+  this.destroy = function() {};
 
   this.subscribe = function(generator) {
     this._generators.push(generator);
