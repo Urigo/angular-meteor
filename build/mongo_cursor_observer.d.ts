@@ -1,4 +1,4 @@
-import { CursorHandle } from './cursor_handle';
+import { CursorHandle } from "./cursor_handle";
 export declare class AddChange {
     index: number;
     item: any;

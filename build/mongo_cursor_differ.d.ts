@@ -1,6 +1,5 @@
-import { ChangeDetectorRef, IterableDifferFactory } from 'angular2/core';
-import { CollectionChangeRecord } from 'angular2/src/core/change_detection/differs/default_iterable_differ';
-import { MongoCursorObserver } from './mongo_cursor_observer';
+import { ChangeDetectorRef, IterableDifferFactory } from "angular2/core";
+import { MongoCursorObserver } from "./mongo_cursor_observer";
 export interface ObserverFactory {
     create(cursor: Object): Object;
 }
@@ -30,5 +29,5 @@ export declare class MongoCursorDiffer {
     _reset(): void;
     _applyCleanup(): void;
     _applyChanges(changes: any): void;
-    _createChangeRecord(currentIndex: any, prevIndex: any, item: any): CollectionChangeRecord;
+    _createChangeRecord(currentIndex: any, prevIndex: any, item: any): any;
 }

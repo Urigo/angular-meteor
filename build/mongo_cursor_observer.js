@@ -45,7 +45,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var cursor_handle_1 = __webpack_require__(5);
-	__webpack_require__(6);
+	var EJSON = __webpack_require__(6);
 	var AddChange = (function () {
 	    function AddChange(index, item) {
 	        this.index = index;
