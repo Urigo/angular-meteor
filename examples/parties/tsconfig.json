@@ -10,9 +10,10 @@
     "useCache": true
   },
   "files": [
-    "typings/angular2-meteor.d.ts",
-    "typings/meteor-accounts.d.ts",
-    "typings/meteor-accounts-ui.d.ts",
+    "typings/main.d.ts",
+    "typings/angular2-meteor/angular2-meteor.d.ts",
+    "typings/ng2-meteor-accounts/ng2-meteor-accounts.d.ts",
+    "typings/ng2-meteor-accounts-ui/ng2-meteor-accounts-ui.d.ts",
     "typings/socially.d.ts",
     "typings/fake.d.ts",
     "client/app.ts",

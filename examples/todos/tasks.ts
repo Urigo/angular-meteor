@@ -1,3 +1,4 @@
+/// <reference path="./typings/main.d.ts" />
 /// <reference path="./typings/angular2-meteor/angular2-meteor.d.ts" />
 /// <reference path="./typings/task.d.ts" />
 
