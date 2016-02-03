@@ -1,4 +1,4 @@
-import * as core from "angular2/core";
+/// <reference path="../angular2/angular2.d.ts" />
 
 declare namespace ngMeteor {
   class MeteorComponent {
@@ -11,4 +11,6 @@ declare namespace ngMeteor {
   function bootstrap(appComponentType: /*Type*/ any, bindings?: Array<core.Type | core.Provider | any[]>): Promise<core.ApplicationRef>;
 }
 
-export = ngMeteor;
+declare module "angular2-meteor" {
+  export = ngMeteor;
+}
