@@ -1,5 +1,5 @@
 #!/bin/sh
-npm install --dev
+npm install --only=dev
 webpack
 mv ./build/modules/*.d.ts ./build/
 rm -rf ./build/modules
