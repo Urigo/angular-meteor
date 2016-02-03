@@ -13,7 +13,7 @@ Package.registerBuildPlugin({
   ],
   use: [
     // Uses an external packages to get the actual compilers
-    'barbatus:ts-compilers@0.2.8',
+    'barbatus:ts-compilers@0.2.8_4',
     'ecmascript@0.3.1-modules.5',
     'angular2-templates-compiler@0.5.0-beta.1'
   ]
