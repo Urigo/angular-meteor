@@ -1,5 +1,3 @@
-/// <reference path="../typings/angular2-meteor.d.ts" />
-
 'use strict';
 
 import {ChangeDetectorRef} from 'angular2/core';

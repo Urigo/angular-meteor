@@ -1,8 +1,3 @@
-/// <reference path="../../typings/angular2.d.ts" />
-/// <reference path="../../typings/meteor/meteor.d.ts" />
-/// <reference path="../../typings/es6-promise/es6-promise.d.ts" />
-/// <reference path="../../typings/underscore/underscore.d.ts" />
-
 'use strict';
 
 import {Injectable} from 'angular2/core';

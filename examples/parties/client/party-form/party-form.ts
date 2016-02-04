@@ -52,6 +52,8 @@ export class PartyForm extends MeteorComponent {
       (<Control>this.partyForm.controls['name']).updateValue('');
       (<Control>this.partyForm.controls['description']).updateValue('');
       (<Control>this.partyForm.controls['location']).updateValue('');
+    } else {
+      alert('Form is not valid');
     }
   }
 }

@@ -1,8 +1,6 @@
-/// <reference path="../typings/angular2-meteor.d.ts" />
-
 'use strict';
 
-import {provide, Type, Provider, IterableDiffers} from 'angular2/core';
+import {Component, provide, Type, Provider, IterableDiffers} from 'angular2/core';
 
 import { bootstrap as ng2Bootstrap } from 'angular2/platform/browser';
 
@@ -26,7 +24,27 @@ function meteorProviders() {
 
 export const METEOR_PROVIDERS = meteorProviders();
 
+
+// Bootstrap with Meteor providers.
 export function bootstrap(appComponentType: any,
                           providers: Array<Type | Provider | any[]> = null) {
   ng2Bootstrap(appComponentType, [].concat(METEOR_PROVIDERS, providers || []));
+}
+
+export function MeteorApp(args: any={}) {
+  return function(cls) {
+    let annotations = Reflect.getMetadata('annotations', cls) || [];
+
+    if (!args.selector) args.selector = 'app';
+
+    // Create @Component.
+    annotations.push(new Component(args));
+
+    // Define metadata with added annotations.
+    Reflect.defineMetadata('annotations', annotations, cls);
+
+    bootstrap(cls, args.providers);
+
+    return cls;
+  }
 }

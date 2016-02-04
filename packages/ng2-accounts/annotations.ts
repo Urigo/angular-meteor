@@ -1,5 +1,4 @@
-/// <reference path="../../typings/angular2.d.ts" />
-/// <reference path="../../typings/meteor/meteor.d.ts" />
+
 
 'use strict';
 
@@ -26,11 +25,9 @@ export function InjectUser(propName: string): (cls: any) => any {
         if (!this[injected]) {
           this[fieldName] = Meteor.user();
           if (this.autorun) {
-            Meteor.setTimeout(() => {
-              this.autorun(() => {
-                this[fieldName] = Meteor.user();
-              }, true)
-            }, 0);
+            this.autorun(() => {
+              this[fieldName] = Meteor.user();
+            }, true);
           }
           this[injected] = true;
         }

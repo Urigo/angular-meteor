@@ -1,6 +1,3 @@
-/// <reference path="../typings/angular2-meteor.d.ts" />
-/// <reference path="../typings/underscore/underscore.d.ts" />
-
 'use strict';
 
 import {OnDestroy, NgZone, createNgZone} from 'angular2/core';

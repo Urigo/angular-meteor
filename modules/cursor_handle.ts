@@ -1,5 +1,3 @@
-/// <reference path="../typings/angular2-meteor.d.ts" />
-
 'use strict';
 
 export class CursorHandle {

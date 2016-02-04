@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "es5"
+  },
+  "files": [
+    "typings/main.d.ts",
+    "modules/bootstrap.ts",
+    "modules/meteor_component.ts"
+  ]
+}
