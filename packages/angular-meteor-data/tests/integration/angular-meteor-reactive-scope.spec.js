@@ -28,6 +28,7 @@ describe('angular-meteor', function () {
       expect(typeof $rootScope.autorun).toBe('function');
       expect(typeof $rootScope.subscribe).toBe('function');
       expect(typeof $rootScope.getReactively).toBe('function');
+      expect(typeof $rootScope.getCollectionReactively).toBe('function');
     });
 
     describe('$$ReactiveScope', function() {
@@ -315,6 +316,17 @@ describe('angular-meteor', function () {
           expect(args[0]()).toEqual('myProp');
         });
 
+        it ('should register a scope watch with custom watcher (collection)', function() {
+          $scope.myProp = 'myProp';
+          var watchSpy = spyOn($scope, '$watchCollection');
+
+          $scope.getCollectionReactively('myProp', false);
+          expect(watchSpy).toHaveBeenCalledWith(jasmine.any(Function), jasmine.any(Function));
+
+          var args = watchSpy.calls.argsFor(0);
+          expect(args[0]()).toEqual('myProp');
+        });
+
         it('should register a custom context watch', function() {
           var context = {};
           context.myProp = 'myProp';
@@ -332,7 +344,7 @@ describe('angular-meteor', function () {
 
           $scope.getReactively('myProp');
           expect($scope._dependencies).toBeDefined();
-          expect($scope._dependencies['myProp']).toBeDefined();
+          expect($scope._dependencies.myProp).toBeDefined();
         });
 
         it('should register a tracker dependency on a custom context', function() {
@@ -341,7 +353,7 @@ describe('angular-meteor', function () {
 
           $scope.getReactively(context, 'myProp');
           expect(context._dependencies).toBeDefined();
-          expect(context._dependencies['myProp']).toBeDefined();
+          expect(context._dependencies.myProp).toBeDefined();
         });
 
         it ('should create a dependency object for the reactive property', function() {

@@ -1,3 +1,7 @@
+/*global
+ angular, _
+ */
+
 'use strict';
 
 // https://github.com/DAB0mB/get-updates

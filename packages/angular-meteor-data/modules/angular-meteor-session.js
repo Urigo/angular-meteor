@@ -1,3 +1,7 @@
+/*global
+ angular, Session
+ */
+
 'use strict';
 var angularMeteorSession = angular.module('angular-meteor.session', ['angular-meteor.utils']);
 
@@ -22,7 +26,7 @@ angularMeteorSession.factory('$meteorSession', ['$meteorUtils', '$parse',
 
         }
       };
-    }
+    };
   }
 ]);
 

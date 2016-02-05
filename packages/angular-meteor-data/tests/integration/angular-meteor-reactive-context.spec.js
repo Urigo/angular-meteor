@@ -50,11 +50,11 @@ describe('angular-meteor', function () {
             }
           });
 
-          expect(context['myHelper']).toBe(10);
+          expect(context.myHelper).toBe(10);
         });
 
         it('should override a pre-defined helper', function () {
-          context['myHelper'] = 'oops';
+          context.myHelper = 'oops';
 
           reactiveContext.helpers({
             myHelper: function () {
@@ -62,7 +62,7 @@ describe('angular-meteor', function () {
             }
           });
 
-          expect(context['myHelper']).toBe(10);
+          expect(context.myHelper).toBe(10);
         });
 
         it('should register a string helper', function () {
@@ -72,7 +72,7 @@ describe('angular-meteor', function () {
             }
           });
 
-          expect(context['myHelper']).toBe('Test');
+          expect(context.myHelper).toBe('Test');
         });
 
         it('should register an object helper', function () {
@@ -87,7 +87,7 @@ describe('angular-meteor', function () {
             }
           });
 
-          expect(context['myHelper']).toEqual(obj);
+          expect(context.myHelper).toEqual(obj);
         });
 
         it('should register an array helper', function () {
@@ -99,7 +99,7 @@ describe('angular-meteor', function () {
             }
           });
 
-          expect(context['myHelper']).toEqual(arr);
+          expect(context.myHelper).toEqual(arr);
         });
 
         it('should register cursor helper as an array', function () {
@@ -109,7 +109,7 @@ describe('angular-meteor', function () {
             }
           });
 
-          expect(context['myHelper']).toEqual(jasmine.any(Array));
+          expect(context.myHelper).toEqual(jasmine.any(Array));
         });
 
         it('should update cursor helper as collection gets updated', function () {
@@ -126,12 +126,12 @@ describe('angular-meteor', function () {
             prop1: 'A'
           });
 
-          expect(context['myHelper']).toEqual(jasmine.any(Array));
-          expect(context['myHelper'].length).toEqual(1);
+          expect(context.myHelper).toEqual(jasmine.any(Array));
+          expect(context.myHelper.length).toEqual(1);
 
           bigCollection.remove({_id: testId});
-          expect(context['myHelper']).toEqual(jasmine.any(Array));
-          expect(context['myHelper'].length).toEqual(0);
+          expect(context.myHelper).toEqual(jasmine.any(Array));
+          expect(context.myHelper.length).toEqual(0);
         });
 
         it('should register cursor fetch result helper as array', function () {
@@ -141,7 +141,7 @@ describe('angular-meteor', function () {
             }
           });
 
-          expect(context['myHelper']).toEqual(jasmine.any(Array));
+          expect(context.myHelper).toEqual(jasmine.any(Array));
         });
 
         it('should update cursor helper once a new document is added', function () {
@@ -157,8 +157,8 @@ describe('angular-meteor', function () {
           });
 
           bigCollection.insert(data);
-          expect(context['myHelper'].length).toBe(1);
-          expect(context['myHelper'][0]).toEqual(data);
+          expect(context.myHelper.length).toBe(1);
+          expect(context.myHelper[0]).toEqual(data);
         });
 
         it('should update cursor helper once a document is removed', function () {
@@ -174,8 +174,8 @@ describe('angular-meteor', function () {
           });
 
           bigCollection.remove(testId);
-          expect(context['myHelper'].length).toBe(0);
-          expect(context['myHelper'][0]).toBeUndefined();
+          expect(context.myHelper.length).toBe(0);
+          expect(context.myHelper[0]).toBeUndefined();
         });
 
         it('sshould update cursor helper once a document is removed', function () {
@@ -193,9 +193,9 @@ describe('angular-meteor', function () {
           bigCollection.insert(data);
           bigCollection.update({_id: testId}, {$set: {prop1: 'B'}});
 
-          expect(context['myHelper'].length).toBe(1);
-          expect(context['myHelper'][0]).toBeDefined();
-          expect(context['myHelper'][0].prop1).toBe('B');
+          expect(context.myHelper.length).toBe(1);
+          expect(context.myHelper[0]).toBeDefined();
+          expect(context.myHelper[0].prop1).toBe('B');
         });
 
         it('should update cursor helper once the collection is rearranged', function () {
@@ -217,17 +217,17 @@ describe('angular-meteor', function () {
 
           bigCollection.insert(data2);
 
-          expect(context['myHelper'].length).toBe(1);
-          expect(context['myHelper'][0]).toBeDefined();
-          expect(context['myHelper'][0].prop1).toBe('B');
+          expect(context.myHelper.length).toBe(1);
+          expect(context.myHelper[0]).toBeDefined();
+          expect(context.myHelper[0].prop1).toBe('B');
 
           bigCollection.insert(data1);
 
-          expect(context['myHelper'].length).toBe(2);
-          expect(context['myHelper'][0]).toBeDefined();
-          expect(context['myHelper'][1]).toBeDefined();
-          expect(context['myHelper'][0].prop1).toBe('A');
-          expect(context['myHelper'][1].prop1).toBe('B');
+          expect(context.myHelper.length).toBe(2);
+          expect(context.myHelper[0]).toBeDefined();
+          expect(context.myHelper[1]).toBeDefined();
+          expect(context.myHelper[0].prop1).toBe('A');
+          expect(context.myHelper[1].prop1).toBe('B');
         });
 
         it('should digest scope once collection is updated', function () {
@@ -348,7 +348,7 @@ describe('angular-meteor', function () {
           expect(context._dependencies.foo).toBeDefined();
 
           var depend = jasmine.createSpy('depend');
-          context._dependencies['foo'].depend = depend;
+          context._dependencies.foo.depend = depend;
           context.foo.bar = 'newbar';
 
           $rootScope.$apply();
@@ -406,6 +406,77 @@ describe('angular-meteor', function () {
           expect(callCount).toBe(2);
         });
 
+        it('should NOT trigger autorun dependencies when using array and adding an element sub property while watching as a collection', function () {
+          var callCount = 0;
+
+          context.prop = [{
+            mySubProp: 10
+          }];
+
+          reactiveContext.helpers({
+            myMethod: function () {
+              callCount++;
+              return reactiveContext.getCollectionReactively('prop');
+            }
+          });
+
+          $rootScope.$apply();
+          Tracker.flush();
+          expect(callCount).toBe(1);
+
+          context.prop[0].newProp = 20;
+          $rootScope.$apply();
+          Tracker.flush();
+
+          expect(callCount).toBe(1);
+        });
+
+        it('should trigger autorun dependencies when using array and replacing an element while watching as a collection', function () {
+          var callCount = 0;
+
+          context.prop = [10];
+
+          reactiveContext.helpers({
+            myMethod: function () {
+              callCount++;
+              return reactiveContext.getCollectionReactively('prop', true);
+            }
+          });
+
+          $rootScope.$apply();
+          Tracker.flush();
+          expect(callCount).toBe(1);
+
+          context.prop[0] = 20;
+          $rootScope.$apply();
+          Tracker.flush();
+
+          expect(callCount).toBe(2);
+        });
+
+        it('should trigger autorun dependencies when using array and adding an element while watching as a collection', function () {
+          var callCount = 0;
+
+          context.prop = [10];
+
+          reactiveContext.helpers({
+            myMethod: function () {
+              callCount++;
+              return reactiveContext.getCollectionReactively('prop', true);
+            }
+          });
+
+          $rootScope.$apply();
+          Tracker.flush();
+          expect(callCount).toBe(1);
+
+          context.prop.push(20);
+          $rootScope.$apply();
+          Tracker.flush();
+
+          expect(callCount).toBe(2);
+        });
+
         it ('should not run getReactively() for cursors', function() {
           expect($scope.$$watchersCount).toBe(0);
 
@@ -441,7 +512,7 @@ describe('angular-meteor', function () {
           });
         });
       });
-  
+
       describe('getReactively()', function() {
         it('should call Scope.getReactively() with context', function() {
           $scope.getReactively = jasmine.createSpy('getReactively');
@@ -461,6 +532,28 @@ describe('angular-meteor', function () {
           };
           var value = reactiveContext.getReactively('myProp.subProp');
           expect(value).toBe(10);
+        });
+      });
+
+      describe('getCollectionReactively()', function() {
+        it('should call Scope.getCollectionReactively() with context', function() {
+          $scope.getCollectionReactively = jasmine.createSpy('getCollectionReactively');
+          reactiveContext.getCollectionReactively('myProp');
+          expect($scope.getCollectionReactively).toHaveBeenCalledWith(context, 'myProp');
+        });
+
+        it('should get the value from the context when using getCollectionReactively on a primitive', function () {
+          context.myProp = [10];
+          var value = reactiveContext.getCollectionReactively('myProp');
+          expect(value).toEqual([10]);
+        });
+
+        it('should get the value from the context when using getCollectionReactively on an object', function () {
+          context.myProp = {
+            subProp: [10]
+          };
+          var value = reactiveContext.getCollectionReactively('myProp.subProp');
+          expect(value).toEqual([10]);
         });
       });
 
@@ -494,6 +587,28 @@ describe('angular-meteor', function () {
           expect(callCount).toBe(2);
         });
 
+        it('should create a dependency when using subscription with getCollectionReactively()', function () {
+          context.myProp = {
+            subProp: [10]
+          };
+
+          $scope.$apply();
+
+          var callCount = 0;
+
+          reactiveContext.subscribe('t', function () {
+            callCount++;
+            return [reactiveContext.getCollectionReactively('myProp.subProp')];
+          });
+
+          $scope.$apply();
+          context.myProp.subProp.push(2);
+          $scope.$apply();
+
+          Tracker.flush();
+
+          expect(callCount).toBe(2);
+        });
 
         it('should create a subscription with no callback or arguments provided', function () {
           var subscribeSpy = spyOn(Meteor, 'subscribe').and.returnValue({
