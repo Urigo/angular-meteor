@@ -139,14 +139,14 @@ describe('angular-meteor.reactive', function() {
           }
         });
 
-        var doc = { _id: 'my-doc' }
+        var doc = { _id: 'my-doc' };
         DummyCollection.insert(doc);
         expect(vm.helper.length).toEqual(1);
         expect(vm.helper[0]).toEqual(doc);
       });
 
       it('should update cursor helper once a document is removed', function () {
-        var doc = { _id: 'my-doc' }
+        var doc = { _id: 'my-doc' };
         DummyCollection.insert(doc);
 
         vm.helpers({
@@ -422,7 +422,7 @@ describe('angular-meteor.reactive', function() {
 
         vm.getReactively('myProp');
         expect(vm.$$dependencies).toBeDefined();
-        expect(vm.$$dependencies['myProp']).toBeDefined();
+        expect(vm.$$dependencies.myProp).toBeDefined();
       });
 
       it('should create a dependency object for the reactive property', function() {

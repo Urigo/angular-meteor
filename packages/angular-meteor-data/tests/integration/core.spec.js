@@ -224,7 +224,7 @@ describe('angular-meteor.core', function() {
           };
 
           cbs.onReady();
-          cbs.onStop()
+          cbs.onStop();
           return { ready: angular.noop };
         });
 
@@ -288,7 +288,7 @@ describe('angular-meteor.core', function() {
 
         scope.$digest = function() {
          digest.apply(this, arguments);
-         done()
+         done();
         };
 
         scope.callMethod('method', 'foo', 'bar', angular.noop);
@@ -317,7 +317,7 @@ describe('angular-meteor.core', function() {
 
         scope.$digest = function() {
          digest.apply(this, arguments);
-         done()
+         done();
         };
 
         scope.applyMethod('method', ['foo', 'bar'], angular.noop);

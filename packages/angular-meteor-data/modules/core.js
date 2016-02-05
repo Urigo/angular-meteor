@@ -29,8 +29,8 @@ function($q, $$utils) {
   };
 
   // Calls Meteor.subscribe() which will be digested after each invokation and automatically destroyed
-  $$Core.subscribe = function(name, fn = angular.noop, cb) {
-    fn = this.$$bind(fn);
+  $$Core.subscribe = function(name, fn, cb) {
+    fn = this.$$bind(fn || angular.noop);
     cb = cb ? this.$$bind(cb) : angular.noop;
 
     if (!_.isString(name))

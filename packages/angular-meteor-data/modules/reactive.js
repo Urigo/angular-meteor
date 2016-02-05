@@ -75,7 +75,7 @@ function($parse, $$utils) {
     watcher.call(this, getVal, (val, oldVal) => {
       let hasChanged =
         val !== initialVal ||
-        val !== oldVal
+        val !== oldVal;
 
       // Notify if a change has been detected
       if (hasChanged) this.$$changed(k);

@@ -51,7 +51,7 @@ describe('angular-meteor.view-model', function() {
       vm.$method();
 
       expect(Mixin.$method.calls.mostRecent().object).toEqual(scope);
-    })
+    });
   });
 
   describe('$reactive', function() {
@@ -63,7 +63,7 @@ describe('angular-meteor.view-model', function() {
 
     afterEach(function() {
       scope.$destroy();
-    })
+    });
 
     it('should call scope.viewModel()', function() {
       var vm = {};
@@ -72,6 +72,6 @@ describe('angular-meteor.view-model', function() {
       $reactive(vm).attach(scope);
 
       expect(scope.viewModel).toHaveBeenCalledWith(vm);
-    })
+    });
   });
 });
