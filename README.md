@@ -168,15 +168,15 @@ typings es6-promise --ambient
 typings es6-shil --ambient
 ````
 
-There are two ways to link up typigns with the app:
+There are two ways to link up typings with the app:
 
-- you can directly add a reference to, for example, `typings/angular2-meteo/angular2-meteor.d.ts` in every TypeScript file that uses  Angular2-Meteor and Angular 2 API as follows:
+- you can directly add a reference to, for example, `typings/angular2-meteo/angular2-meteor.d.ts` in every TypeScript file that uses  
+  Angular2-Meteor and Angular 2 API as follows:
 
-````ts
-/// <reference path="typings/angular2-meteor/angular2-meteor.d.ts" />
-````
-
-To add Meteor API, you'll need to reference `typings/main.d.ts`, a definition that links together all other definitions installed by `typings` tool.
+  ````ts
+   /// <reference path="typings/angular2-meteor/angular2-meteor.d.ts" />
+  ````
+  To add Meteor API, you'll need to reference `typings/main.d.ts`, a definition that links together all other definitions installed by     `typings` tool.
 - or you can add a custom TypeScript config at the root with "files"
   property set to contain `typings/angular2-meteor/angular2-meteor.d.ts` path.
   As soon as you've done this, TypeScript compiler will compiler
