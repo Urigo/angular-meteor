@@ -144,6 +144,8 @@ We will use the existing code for our web login. That means 2 things:
 
 > We can also delete `client/users/login/login.html` and `client/users/login/login.component.js` files. It is no longer needed!
 
+> **A note on package name prefixing**: It is important to note that if you include a prefix in the declaration of your package name (as seen in `21.11  Create socially-browser package`) then you should remember to include this prefix in absolute path references elsewhere. E.g. if package name is declared as `name: 'my-prefix:socially-browser'` then the templateUrl in the above code snippet would need to read `templateUrl: '/packages/my-prefix:socially-browser/client/auth/login/login.html'`
+
 ### Implement Mobile Login
 
 We need to take care of the login view for mobile only. We will add a view with two steps: 
