@@ -1,7 +1,7 @@
 # Angular2-Meteor [![bitHound Overall Score](https://www.bithound.io/github/Urigo/angular2-meteor/badges/score.svg)](https://www.bithound.io/github/Urigo/angular2-meteor) [![Build Status](https://travis-ci.org/Urigo/angular2-meteor.svg?branch=master)](https://travis-ci.org/Urigo/angular2-meteor)
 Angular2 + Meteor integration.
 
-##### Angular2 version: beta-1.
+##### Angular2 version: beta-3.
 
 Track Roadmap here:
 - [angular2-meteor milestones](https://github.com/Urigo/angular2-meteor/milestones)
@@ -158,16 +158,27 @@ So, if you have code like this:
 ````
 It will likely curse that `Mongo` is undefined. Luckily, the package adds Angular2 and Meteor declaration files, which means you'll need only to reference them in your TypeScript files to fix errors.
 
-After the first run of your app, Angular2-Meteor will create declaration  files (one of them is `typings/angular2-meteor.d.ts`) in the "typings" folder.
-There are two ways to include them into the app:
+After the first run of your app, Angular2-Meteor will create a  definition file for the package API,  `typings/angular2-meteor/angular2-meteor.d.ts`, and Angular 2 definition files (since they are available only in the Angular2 NPM) in the "typings" folder. All other typings dependencies should be installed using `typigns` tool:
+   
+````
+npm install typings -g
 
-- you can directly add a reference to, for example, `typings/angular2-meteor.d.ts` in every TypeScript file that uses Meteor or Angular2 API as follows:
+typings meteor --ambient
+typings es6-promise --ambient
+typings es6-shil --ambient
+````
+
+There are two ways to link up typigns with the app:
+
+- you can directly add a reference to, for example, `typings/angular2-meteo/angular2-meteor.d.ts` in every TypeScript file that uses  Angular2-Meteor and Angular 2 API as follows:
 
 ````ts
-/// <reference path="../typings/angular2-meteor.d.ts" />
+/// <reference path="typings/angular2-meteor/angular2-meteor.d.ts" />
 ````
+
+To add Meteor API, you'll need to reference `typings/main.d.ts`, a definition that links together all other definitions installed by `typings` tool.
 - or you can add a custom TypeScript config at the root with "files"
-  property set to contain "typings/angular2-meteor.d.ts" path.
+  property set to contain `typings/angular2-meteor/angular2-meteor.d.ts` path.
   As soon as you've done this, TypeScript compiler will compiler
   every .ts-file along with `angular2-meteor.d.ts`, thus, recognizing 
   Meteor and Mongo API. See, the parties demo (example/parties) for the details.
