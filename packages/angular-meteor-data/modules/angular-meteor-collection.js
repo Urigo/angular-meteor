@@ -337,7 +337,7 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
 
 angularMeteorCollection.factory('$meteorCollectionFS', [
   '$meteorCollection', 'diffArray', '$angularMeteorSettings',
-  function($meteorCollection, diffArray) {
+  function($meteorCollection, diffArray, $angularMeteorSettings) {
     function $meteorCollectionFS(reactiveFunc, autoClientSave, collection) {
 
       if (!$angularMeteorSettings.suppressWarnings)

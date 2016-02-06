@@ -6,7 +6,7 @@
 var angularMeteorSubscribe = angular.module('angular-meteor.subscribe', []);
 
 angularMeteorSubscribe.service('$meteorSubscribe', ['$q', '$angularMeteorSettings',
-  function ($q) {
+  function ($q, $angularMeteorSettings) {
 
     var self = this;
 

@@ -12,7 +12,7 @@ var angularMeteorUser = angular.module('angular-meteor.user', [
 // requires package 'accounts-password'
 angularMeteorUser.service('$meteorUser', [
   '$rootScope', '$meteorUtils', '$q', '$angularMeteorSettings',
-  function($rootScope, $meteorUtils, $q){
+  function($rootScope, $meteorUtils, $q, $angularMeteorSettings){
 
     var pack = Package['accounts-base'];
     if (!pack) return;

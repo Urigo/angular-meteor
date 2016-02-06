@@ -8,7 +8,7 @@ var angularMeteorUtils = angular.module('angular-meteor.utils', []);
 
 angularMeteorUtils.service('$meteorUtils', [
   '$q', '$timeout', '$angularMeteorSettings',
-  function ($q, $timeout) {
+  function ($q, $timeout, $angularMeteorSettings) {
 
     var self = this;
 
