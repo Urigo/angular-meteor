@@ -13,8 +13,9 @@ angular.module('angular-meteor.reactive', [
 .factory('$$Reactive', [
   '$parse',
   '$$utils',
+  '$angularMeteorSettings',
 
-function($parse, $$utils) {
+function($parse, $$utils, $angularMeteorSettings) {
   function $$Reactive(vm = this) {
     // Helps us track changes made in the view model
     vm.$$dependencies = {};
@@ -174,7 +175,8 @@ function($parse, $$utils) {
     let v = this.$$vm[k];
 
     if (angular.isDefined(v)) {
-      console.warn(`overriding '${k}' helper`);
+      if (!$angularMeteorSettings.suppressWarnings)
+        console.warn(`overriding '${k}' helper`);
       delete this.$$vm[k];
       v = null;
     }

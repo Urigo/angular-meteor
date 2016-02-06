@@ -8,16 +8,18 @@ var angularMeteorCamera = angular.module('angular-meteor.camera', ['angular-mete
 
 // requires package 'mdg:camera'
 angularMeteorCamera.service('$meteorCamera', [
-  '$q', '$meteorUtils',
-  function ($q, $meteorUtils) {
-    console.warn('[angular-meteor.camera] Please note that this module has moved to a separate package and is deprecated since 1.3.0 and will be removed in 1.4.0! For more info: http://www.angular-meteor.com/api/1.3.0/camera');
+  '$q', '$meteorUtils', '$angularMeteorSettings',
+  function ($q, $meteorUtils, $angularMeteorSettings) {
+    if (!$angularMeteorSettings.suppressWarnings)
+      console.warn('[angular-meteor.camera] Please note that this module has moved to a separate package and is deprecated since 1.3.0 and will be removed in 1.4.0! For more info: http://www.angular-meteor.com/api/1.3.0/camera');
     var pack = Package['mdg:camera'];
     if (!pack) return;
 
     var MeteorCamera = pack.MeteorCamera;
 
     this.getPicture = function(options){
-      console.warn('[angular-meteor.camera] Please note that this module has moved to a separate package and is deprecated since 1.3.0 and will be removed in 1.4.0! For more info: http://www.angular-meteor.com/api/1.3.0/camera');
+      if (!$angularMeteorSettings.suppressWarnings)
+        console.warn('[angular-meteor.camera] Please note that this module has moved to a separate package and is deprecated since 1.3.0 and will be removed in 1.4.0! For more info: http://www.angular-meteor.com/api/1.3.0/camera');
 
       options = options || {};
       var deferred = $q.defer();
