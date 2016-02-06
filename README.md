@@ -3,14 +3,8 @@ Angular2 + Meteor integration.
 
 ##### Angular2 version: beta-3.
 
-Track Roadmap here:
-- [angular2-meteor milestones](https://github.com/Urigo/angular2-meteor/milestones)
-- [meteor-angular2.0-socially milestones](https://github.com/Urigo/meteor-angular2.0-socially/milestones)
-- [Meteor issues related to Angular](https://github.com/meteor/meteor/labels/Project%3AAngular)
-
-
 ## Table of Contents
-* [Tutorial](../../#tutorial)
+* [Documentation](../../#Documentation)
 * [Quick Start](../../#quick-start)
     * [Install package](../../#install-package)
     * [Import Angular2 into your app](../../#import-angular2-into-your-app)
@@ -25,9 +19,20 @@ Track Roadmap here:
 
 Check out package change log [here](CHANGELOG.md).
 
-## Tutorial
-
-If you are new to Angular 2, we recommend to check out our 15-steps Angular2+Meteor [tutorial](http://www.angular-meteor.com/tutorials/socially/angular2).
+## Documentation
+- [Tutorial](http://www.angular-meteor.com/tutorials/socially/angular2/bootstrapping)
+- [Official website](http://angular-meteor.com)
+- [Example application](https://github.com/Urigo/meteor-angular2.0-socially) (Final version of the tutorial)
+- Questions and help - [stack-overflow `angular2-meteor` tag](http://stackoverflow.com/questions/tagged/angular2-meteor)
+- [Discussions - the Meteor Forum](https://forums.meteor.com/)
+- [Report issues](https://github.com/Urigo/angular2-meteor/issues)
+- [Change Log, updates and breaking changes](https://github.com/Urigo/angular2-meteor/releases)
+- [Meteor Blog](https://info.meteor.com/blog)
+- [Official Meteor guide for best practices](http://guide.meteor.com/)
+- Track Roadmap here:
+- [angular2-meteor milestones](https://github.com/Urigo/angular2-meteor/milestones)
+- [meteor-angular2.0-socially milestones](https://github.com/Urigo/meteor-angular2.0-socially/milestones)
+- [Meteor issues related to Angular](https://github.com/meteor/meteor/labels/Project%3AAngular)
 
 ## Quick Start
 
