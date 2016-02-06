@@ -4996,7 +4996,7 @@ index 316379a..43c347d 100644
 From a55e54fbedae7b7e35a0c32ea9556f9223da13dc Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 26 Jan 2016 20:47:08 +0700
-Subject: [PATCH 149/166] Step 21.1: add a new package called "socially-mobile"
+Subject: [PATCH 149/208] Step 21.1: add a new package called "socially-mobile"
 
 ---
  packages/socially-mobile/package.js | 24 ++++++++++++++++++++++++
@@ -5040,7 +5040,7 @@ index 0000000..079cecc
 From 81af582bd01defd9d582962acc6d0899286eaa66 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 26 Jan 2016 20:51:25 +0700
-Subject: [PATCH 150/166] Step 21.2: clean up and add dependencies in the
+Subject: [PATCH 150/208] Step 21.2: clean up and add dependencies in the
  mobile package
 
 ---
@@ -5074,7 +5074,7 @@ index 079cecc..af0575f 100644
 From 357ca70e311a338bc9f1808db15d449538ddc83f Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 26 Jan 2016 20:54:48 +0700
-Subject: [PATCH 151/166] Add new package called "socially-browser"
+Subject: [PATCH 151/208] Add new package called "socially-browser"
 
 ---
  packages/socially-browser/package.js | 22 ++++++++++++++++++++++
@@ -5116,7 +5116,7 @@ index 0000000..bf81803
 From b6c38887fe5fe5d55fd0a1ff0533aa56d5d4d2c0 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 26 Jan 2016 20:55:47 +0700
-Subject: [PATCH 152/166] Add packages to the app
+Subject: [PATCH 152/208] Add packages to the app
 
 ---
  .meteor/packages | 2 ++
@@ -5139,7 +5139,7 @@ index 119cd68..813486d 100644
 From 2ab0fc9ed0db6fd67ae750a37f41e9a8e60f1049 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 26 Jan 2016 22:17:25 +0700
-Subject: [PATCH 153/166] Step 21.3: add login template
+Subject: [PATCH 153/208] Step 21.3: add login template
 
 ---
  packages/socially-browser/client/login/login.html | 1 +
@@ -5160,7 +5160,7 @@ index 0000000..ca253cc
 From e97501c15ff52a1c5d75aaa6ec89c483aaad4acb Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 26 Jan 2016 22:17:54 +0700
-Subject: [PATCH 154/166] Step 21.4: add login component
+Subject: [PATCH 154/208] Step 21.4: add login component
 
 ---
  packages/socially-browser/client/login/login.ts | 13 +++++++++++++
@@ -5193,7 +5193,7 @@ index 0000000..8daee63
 From 34ed466f617fbab184f7be7ecfb50a43a32fb52a Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 26 Jan 2016 22:36:54 +0700
-Subject: [PATCH 155/166] Step 21.5: register SystemJS module
+Subject: [PATCH 155/208] Step 21.5: register SystemJS module
 
 ---
  packages/socially-browser/system_config.js | 11 +++++++++++
@@ -5224,7 +5224,7 @@ index 0000000..aa0e70c
 From 2dc26d03f267889ebd9fa8ad81c738087fe10ba4 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 26 Jan 2016 22:40:08 +0700
-Subject: [PATCH 156/166] Step 21.6: add component files to the package
+Subject: [PATCH 156/208] Step 21.6: add component files to the package
 
 ---
  packages/socially-browser/package.js | 7 +++++++
@@ -5255,7 +5255,7 @@ index bf81803..b7a3a62 100644
 From 76413b6eefea4331b9109e58f7d0d6712d34e009 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 26 Jan 2016 22:57:19 +0700
-Subject: [PATCH 157/166] Step 21.7: import Login component from "socially"
+Subject: [PATCH 157/208] Step 21.7: import Login component from "socially"
  module
 
 ---
@@ -5290,7 +5290,7 @@ index 9f35eb9..fbf02c3 100644
 From c03fc9caad57568a324fd677fa74e379e4216275 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Tue, 26 Jan 2016 22:58:01 +0700
-Subject: [PATCH 158/166] Step 21.8: change PartiesList template to contain
+Subject: [PATCH 158/208] Step 21.8: change PartiesList template to contain
  "login" directive
 
 ---
@@ -5317,7 +5317,7 @@ index b69e41a..53cad56 100644
 From c4aed31fa8af9d525bde5568d02536c03b6a2b75 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 27 Jan 2016 00:27:52 +0700
-Subject: [PATCH 159/166] Step 21.9: add login component's template
+Subject: [PATCH 159/208] Step 21.9: add login component's template
 
 ---
  packages/socially-mobile/client/login/login.html | 1 +
@@ -5338,7 +5338,7 @@ index 0000000..37c8acd
 From eac8c7b444e5fd171bb35db0509c2cff9df21ebf Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 27 Jan 2016 00:28:44 +0700
-Subject: [PATCH 160/166] Step 21.10: add login component
+Subject: [PATCH 160/208] Step 21.10: add login component
 
 ---
  packages/socially-mobile/client/login/login.ts | 15 +++++++++++++++
@@ -5373,7 +5373,7 @@ index 0000000..2d3b84b
 From 58e6cd5b3ff3fd2688dec8f7d9df09075ecf502e Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 27 Jan 2016 00:38:02 +0700
-Subject: [PATCH 161/166] Step 21.11: add login page component's template
+Subject: [PATCH 161/208] Step 21.11: add login page component's template
 
 ---
  packages/socially-mobile/client/login/login-page.html | 9 +++++++++
@@ -5402,7 +5402,7 @@ index 0000000..ea5e8e0
 From 7332fadc1b25b72afcf57faf5e6ff118ca97bd46 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 27 Jan 2016 00:39:02 +0700
-Subject: [PATCH 162/166] Step 21.12: add login page component
+Subject: [PATCH 162/208] Step 21.12: add login page component
 
 ---
  .../socially-mobile/client/login/login-page.ts     | 29 ++++++++++++++++++++++
@@ -5451,7 +5451,7 @@ index 0000000..561abac
 From 062c903b2691f39efffa8b08a5a381b8037ee669 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 27 Jan 2016 00:41:59 +0700
-Subject: [PATCH 163/166] Step 21.13: register SystemJS module for the mobile
+Subject: [PATCH 163/208] Step 21.13: register SystemJS module for the mobile
  package
 
 ---
@@ -5483,7 +5483,7 @@ index 0000000..097cd14
 From d80080c5be82708a8d32675ed45167d4d7e58d91 Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 27 Jan 2016 00:43:37 +0700
-Subject: [PATCH 164/166] Step 21.14: add component files to the mobile package
+Subject: [PATCH 164/208] Step 21.14: add component files to the mobile package
 
 ---
  packages/socially-mobile/package.js | 9 +++++++++
@@ -5516,7 +5516,7 @@ index af0575f..0ea1138 100644
 From 9116df6c90163db0c6512dcd006307b1394eab3f Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Wed, 27 Jan 2016 01:01:27 +0700
-Subject: [PATCH 165/166] Step 21.15: add new login route to the app
+Subject: [PATCH 165/208] Step 21.15: add new login route to the app
 
 ---
  client/app.ts | 5 ++++-
@@ -5552,7 +5552,7 @@ index 607f9f1..9051558 100644
 From 8ec97067ccde99d8204485ce15607fe51bee30da Mon Sep 17 00:00:00 2001
 From: barbatus <alex.borodach@gmail.com>
 Date: Thu, 28 Jan 2016 13:38:51 +0700
-Subject: [PATCH 166/166] Add iOS platform
+Subject: [PATCH 166/208] Add iOS platform
 
 ---
  .meteor/platforms | 3 ++-
@@ -5567,5 +5567,2592 @@ index efeba1b..81ae701 100644
  browser
 +ios
 +server
+-- 
+2.5.4 (Apple Git-61)
+
+
+From ca24ec17b928f17d78f5352d8c63309129d9017b Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Fri, 29 Jan 2016 18:47:37 +0700
+Subject: [PATCH 167/208] Add new package's package.js
+
+---
+ packages/socially-client/package.js | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
+ create mode 100644 packages/socially-client/package.js
+
+diff --git a/packages/socially-client/package.js b/packages/socially-client/package.js
+new file mode 100644
+index 0000000..b024117
+--- /dev/null
++++ b/packages/socially-client/package.js
+@@ -0,0 +1,21 @@
++Package.describe({
++  name: 'socially-client',
++  version: '0.0.1',
++  // Brief, one-line summary of the package.
++  summary: '',
++  // URL to the Git repository containing the source code for this package.
++  git: '',
++  // By default, Meteor will default to using README.md for documentation.
++  // To avoid submitting documentation, set this field to null.
++  documentation: 'README.md'
++});
++
++Package.onUse(function(api) {
++  api.versionsFrom('1.2.1');
++  api.use('urigo:angular2-meteor');
++});
++
++Package.onTest(function(api) {
++  api.use('urigo:angular2-meteor');
++  api.use('tinytest');
++});
+-- 
+2.5.4 (Apple Git-61)
+
+
+From f37ec78e068f1eadf8cbf7226d6a1a015160ec6b Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 6 Feb 2016 12:41:34 +0700
+Subject: [PATCH 168/208] Move PartyDetails to the client package
+
+---
+ client/party-details/party-details.ts              | 135 ---------------------
+ .../socially-client/party-details/party-details.ts | 135 +++++++++++++++++++++
+ 2 files changed, 135 insertions(+), 135 deletions(-)
+ delete mode 100644 client/party-details/party-details.ts
+ create mode 100644 packages/socially-client/party-details/party-details.ts
+
+diff --git a/client/party-details/party-details.ts b/client/party-details/party-details.ts
+deleted file mode 100644
+index 7ef3e34..0000000
+--- a/client/party-details/party-details.ts
++++ /dev/null
+@@ -1,135 +0,0 @@
+-import {Component, View} from 'angular2/core';
+-
+-import {RouteParams} from 'angular2/router';
+-
+-import {Parties} from 'collections/parties';
+-
+-import {RouterLink} from 'angular2/router';
+-
+-import {RequireUser, InjectUser} from 'meteor-accounts';
+-
+-import {MeteorComponent} from 'angular2-meteor';
+-
+-import {DisplayName} from 'client/lib/pipes';
+-
+-import {ANGULAR2_GOOGLE_MAPS_DIRECTIVES, MapMouseEvent} from 'ng2-google-maps/core';
+-
+-@Component({
+-    selector: 'party-details'
+-})
+-@View({
+-    pipes: [DisplayName],
+-    templateUrl: '/client/party-details/party-details.html',
+-    directives: [RouterLink, ANGULAR2_GOOGLE_MAPS_DIRECTIVES]
+-})
+-@RequireUser()
+-@InjectUser()
+-export class PartyDetails extends MeteorComponent {
+-    party: Party;
+-    users: Mongo.Cursor<Object>;
+-    user: Meteor.User;
+-
+-    // Default center Palo Alto coordinates.
+-    centerLat: Number = 37.4292; 
+-    centerLng: Number = -122.1381;
+-
+-    constructor(params: RouteParams) {
+-        super();
+-        var partyId = params.get('partyId');
+-        this.subscribe('party', partyId, () => {
+-            this.autorun(() => {
+-                this.party = Parties.findOne(partyId);
+-                this.getUsers(this.party);
+-            },   true);
+-        });
+-
+-        this.subscribe('uninvited', partyId, () => {
+-            this.getUsers(this.party);
+-        }, true);
+-    }
+-
+-    getUsers(party: Party) {
+-        if (party) {
+-            this.users = Meteor.users.find({
+-                _id: {
+-                    $nin: party.invited || [],
+-                    $ne: Meteor.userId()
+-                }
+-            });
+-        }
+-    }
+-
+-    saveParty(party) {
+-      if (Meteor.userId()) {
+-        Parties.update(party._id, {
+-          $set: {
+-            name: party.name,
+-            description: party.description,
+-            location: party.location
+-          }
+-        });
+-      } else {
+-        alert('Please log in to change this party');
+-      }
+-    }
+-
+-    invite(user: Meteor.User) {
+-      this.call('invite', this.party._id, user._id, (error) => {
+-        if (error) {
+-          alert(`Failed to invite due to ${error}`);
+-          return;
+-        }
+-
+-        alert('User successfully invited.');
+-      });
+-    }
+-
+-    reply(rsvp: string) {
+-      this.call('reply', this.party._id, rsvp, (error) => {
+-        if (error) {
+-          alert(`Failed to reply due to ${error}`);
+-        }
+-        else {
+-          alert('You successfully replied.');
+-        }
+-      });
+-    }
+-
+-    get isOwner(): boolean {
+-        if (this.party && this.user) {
+-            return this.user._id === this.party.owner;
+-        }
+-
+-        return false;
+-    }
+-
+-    get isPublic(): boolean {
+-        if (this.party) {
+-            return this.party.public;
+-        }
+-
+-        return false;
+-    }
+-
+-    get isInvited(): boolean {
+-        if (this.party && this.user) {
+-            let invited = this.party.invited || [];
+-            return invited.indexOf(this.user._id) !== -1;
+-        }
+-
+-        return false;
+-    }
+-
+-    get lat(): Number {
+-        return this.party && this.party.location.lat;
+-    }
+-
+-    get lng(): Number {
+-        return this.party && this.party.location.lng;
+-    }
+-
+-    mapClicked($event: MapMouseEvent) {
+-        this.party.location.lat = $event.coords.lat;
+-        this.party.location.lng = $event.coords.lng;
+-    }
+-}
+diff --git a/packages/socially-client/party-details/party-details.ts b/packages/socially-client/party-details/party-details.ts
+new file mode 100644
+index 0000000..7ef3e34
+--- /dev/null
++++ b/packages/socially-client/party-details/party-details.ts
+@@ -0,0 +1,135 @@
++import {Component, View} from 'angular2/core';
++
++import {RouteParams} from 'angular2/router';
++
++import {Parties} from 'collections/parties';
++
++import {RouterLink} from 'angular2/router';
++
++import {RequireUser, InjectUser} from 'meteor-accounts';
++
++import {MeteorComponent} from 'angular2-meteor';
++
++import {DisplayName} from 'client/lib/pipes';
++
++import {ANGULAR2_GOOGLE_MAPS_DIRECTIVES, MapMouseEvent} from 'ng2-google-maps/core';
++
++@Component({
++    selector: 'party-details'
++})
++@View({
++    pipes: [DisplayName],
++    templateUrl: '/client/party-details/party-details.html',
++    directives: [RouterLink, ANGULAR2_GOOGLE_MAPS_DIRECTIVES]
++})
++@RequireUser()
++@InjectUser()
++export class PartyDetails extends MeteorComponent {
++    party: Party;
++    users: Mongo.Cursor<Object>;
++    user: Meteor.User;
++
++    // Default center Palo Alto coordinates.
++    centerLat: Number = 37.4292; 
++    centerLng: Number = -122.1381;
++
++    constructor(params: RouteParams) {
++        super();
++        var partyId = params.get('partyId');
++        this.subscribe('party', partyId, () => {
++            this.autorun(() => {
++                this.party = Parties.findOne(partyId);
++                this.getUsers(this.party);
++            },   true);
++        });
++
++        this.subscribe('uninvited', partyId, () => {
++            this.getUsers(this.party);
++        }, true);
++    }
++
++    getUsers(party: Party) {
++        if (party) {
++            this.users = Meteor.users.find({
++                _id: {
++                    $nin: party.invited || [],
++                    $ne: Meteor.userId()
++                }
++            });
++        }
++    }
++
++    saveParty(party) {
++      if (Meteor.userId()) {
++        Parties.update(party._id, {
++          $set: {
++            name: party.name,
++            description: party.description,
++            location: party.location
++          }
++        });
++      } else {
++        alert('Please log in to change this party');
++      }
++    }
++
++    invite(user: Meteor.User) {
++      this.call('invite', this.party._id, user._id, (error) => {
++        if (error) {
++          alert(`Failed to invite due to ${error}`);
++          return;
++        }
++
++        alert('User successfully invited.');
++      });
++    }
++
++    reply(rsvp: string) {
++      this.call('reply', this.party._id, rsvp, (error) => {
++        if (error) {
++          alert(`Failed to reply due to ${error}`);
++        }
++        else {
++          alert('You successfully replied.');
++        }
++      });
++    }
++
++    get isOwner(): boolean {
++        if (this.party && this.user) {
++            return this.user._id === this.party.owner;
++        }
++
++        return false;
++    }
++
++    get isPublic(): boolean {
++        if (this.party) {
++            return this.party.public;
++        }
++
++        return false;
++    }
++
++    get isInvited(): boolean {
++        if (this.party && this.user) {
++            let invited = this.party.invited || [];
++            return invited.indexOf(this.user._id) !== -1;
++        }
++
++        return false;
++    }
++
++    get lat(): Number {
++        return this.party && this.party.location.lat;
++    }
++
++    get lng(): Number {
++        return this.party && this.party.location.lng;
++    }
++
++    mapClicked($event: MapMouseEvent) {
++        this.party.location.lat = $event.coords.lat;
++        this.party.location.lng = $event.coords.lng;
++    }
++}
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 827e832687391cb0183167f86822ee132117189d Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 6 Feb 2016 12:48:27 +0700
+Subject: [PATCH 169/208] Step 22.1: update PartyDetails of "socially-client"
+ package
+
+---
+ .../socially-client/party-details/party-details.ts | 32 ++--------------------
+ 1 file changed, 2 insertions(+), 30 deletions(-)
+
+diff --git a/packages/socially-client/party-details/party-details.ts b/packages/socially-client/party-details/party-details.ts
+index 7ef3e34..afae205 100644
+--- a/packages/socially-client/party-details/party-details.ts
++++ b/packages/socially-client/party-details/party-details.ts
+@@ -1,41 +1,18 @@
+-import {Component, View} from 'angular2/core';
+-
+-import {RouteParams} from 'angular2/router';
+-
+ import {Parties} from 'collections/parties';
+ 
+-import {RouterLink} from 'angular2/router';
+-
+-import {RequireUser, InjectUser} from 'meteor-accounts';
+-
+ import {MeteorComponent} from 'angular2-meteor';
+ 
+-import {DisplayName} from 'client/lib/pipes';
+-
+-import {ANGULAR2_GOOGLE_MAPS_DIRECTIVES, MapMouseEvent} from 'ng2-google-maps/core';
+-
+-@Component({
+-    selector: 'party-details'
+-})
+-@View({
+-    pipes: [DisplayName],
+-    templateUrl: '/client/party-details/party-details.html',
+-    directives: [RouterLink, ANGULAR2_GOOGLE_MAPS_DIRECTIVES]
+-})
+-@RequireUser()
+-@InjectUser()
+ export class PartyDetails extends MeteorComponent {
+     party: Party;
+-    users: Mongo.Cursor<Object>;
++    users: Mongo.Cursor;
+     user: Meteor.User;
+ 
+     // Default center Palo Alto coordinates.
+     centerLat: Number = 37.4292; 
+     centerLng: Number = -122.1381;
+ 
+-    constructor(params: RouteParams) {
++    constructor(partyId: number) {
+         super();
+-        var partyId = params.get('partyId');
+         this.subscribe('party', partyId, () => {
+             this.autorun(() => {
+                 this.party = Parties.findOne(partyId);
+@@ -127,9 +104,4 @@ export class PartyDetails extends MeteorComponent {
+     get lng(): Number {
+         return this.party && this.party.location.lng;
+     }
+-
+-    mapClicked($event: MapMouseEvent) {
+-        this.party.location.lat = $event.coords.lat;
+-        this.party.location.lng = $event.coords.lng;
+-    }
+ }
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 547b32851ba59a8987cf453b0a13e648d4271656 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Fri, 29 Jan 2016 18:04:53 +0700
+Subject: [PATCH 170/208] Move PartiesList logic to the client package
+
+---
+ .../socially-client/parties-list/parties-list.ts   | 57 ++++++++++++++++++++++
+ 1 file changed, 57 insertions(+)
+ create mode 100644 packages/socially-client/parties-list/parties-list.ts
+
+diff --git a/packages/socially-client/parties-list/parties-list.ts b/packages/socially-client/parties-list/parties-list.ts
+new file mode 100644
+index 0000000..c7583c3
+--- /dev/null
++++ b/packages/socially-client/parties-list/parties-list.ts
+@@ -0,0 +1,57 @@
++
++import {Parties} from 'collections/parties';
++
++import {MeteorComponent} from 'angular2-meteor';
++
++export class PartiesList extends MeteorComponent {
++    parties: Mongo.Cursor<Party>;
++    pageSize: number = 10;
++    curPage: ReactiveVar<number> = new ReactiveVar<number>(1);
++    nameOrder: ReactiveVar<number> = new ReactiveVar<number>(1);
++    partiesSize: number = 0;
++    location: ReactiveVar<string> = new ReactiveVar<string>(null);
++    user: Meteor.User;
++
++    constructor() {
++        super();
++        this.autorun(() => {
++            let options = {
++                limit: this.pageSize,
++                skip: (this.curPage.get() - 1) * this.pageSize,
++                sort: { name: this.nameOrder.get() }
++            };
++            this.subscribe('parties', options, this.location.get(), () => {
++                this.parties = Parties.find({}, { sort: { name: this.nameOrder.get() } });
++            }, true);
++        });
++
++        this.autorun(() => {
++            this.partiesSize = Counts.get('numberOfParties');
++        }, true);
++    }
++
++    removeParty(party) {
++        Parties.remove(party._id);
++    }
++
++    search(value: string) {
++        this.curPage.set(1);
++        this.location.set(value);
++    }
++
++    onPageChanged(page: number) {
++        this.curPage.set(page);
++    }
++
++    changeSortOrder(nameOrder: string) {
++        this.nameOrder.set(parseInt(nameOrder));
++    }
++
++    isOwner(party: Party): boolean {
++        if (this.user) {
++            return this.user._id === party.owner;
++        }
++
++        return false;
++    }
++}
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 3b32203e9dcc44f2228afe683675741356d32ead Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Fri, 29 Jan 2016 18:06:04 +0700
+Subject: [PATCH 171/208] Move PartiesForm logic to the client package
+
+---
+ .../socially-client/parties-form/parties-form.ts   | 41 ++++++++++++++++++++++
+ 1 file changed, 41 insertions(+)
+ create mode 100644 packages/socially-client/parties-form/parties-form.ts
+
+diff --git a/packages/socially-client/parties-form/parties-form.ts b/packages/socially-client/parties-form/parties-form.ts
+new file mode 100644
+index 0000000..ba40f48
+--- /dev/null
++++ b/packages/socially-client/parties-form/parties-form.ts
+@@ -0,0 +1,41 @@
++
++import {FormBuilder, Control, ControlGroup, Validators} from 'angular2/common';
++
++import {Parties} from 'collections/parties';
++
++export class PartiesForm {
++    partiesForm: ControlGroup;
++
++    constructor() {
++        var fb = new FormBuilder();
++        this.partiesForm = fb.group({
++            name: ['', Validators.required],
++            description: [''],
++            location: ['', Validators.required],
++            public: [false]
++        });
++    }
++
++    addParty(party) {
++        if (this.partiesForm.valid) {
++            if (Meteor.userId()) {
++                Parties.insert({
++                    name: party.name,
++                    description: party.description,
++                    location: {
++                        name: party.location
++                    },
++                    public: party.public,
++                    owner: Meteor.userId()
++                });
++
++                (<Control>this.partiesForm.controls['name']).updateValue('');
++                (<Control>this.partiesForm.controls['description']).updateValue('');
++                (<Control>this.partiesForm.controls['location']).updateValue('');
++                (<Control>this.partiesForm.controls['public']).updateValue(false);
++            } else {
++                alert('Please log in to add a party');
++            }
++        }
++    }
++}
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 9e60b82bfc4dd0aeecd1c8bacdb084ffc43d961e Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Fri, 29 Jan 2016 18:08:18 +0700
+Subject: [PATCH 172/208] Move pipes to the client package
+
+---
+ packages/socially-client/lib/pipes.ts | 56 +++++++++++++++++++++++++++++++++++
+ 1 file changed, 56 insertions(+)
+ create mode 100644 packages/socially-client/lib/pipes.ts
+
+diff --git a/packages/socially-client/lib/pipes.ts b/packages/socially-client/lib/pipes.ts
+new file mode 100644
+index 0000000..dd4da11
+--- /dev/null
++++ b/packages/socially-client/lib/pipes.ts
+@@ -0,0 +1,56 @@
++import {Pipe} from 'angular2/core';
++
++import {Parties} from 'collections/parties';
++
++import {MeteorComponent} from 'angular2-meteor';
++
++@Pipe({
++    name: 'displayName'
++})
++export class DisplayName {
++    transform(user: Meteor.User): string {
++        if (!user) {
++            return '';
++        }
++
++        if (user.username) {
++            return user.username;
++        }
++        
++        if (user.emails) {
++            return user.emails[0].address;
++        }
++        
++        return '';
++    }
++}
++
++@Pipe({
++    name: 'rsvp',
++    pure: false
++})
++export class RsvpPipe extends MeteorComponent {
++    init: boolean = false;
++    total: number = 0;
++
++    transform(party: Party, args: any[]): number {
++        let type = args[0];
++        if (!type) {
++            return 0;
++        }
++
++        if (!this.init) {
++            this.autorun(() => {
++                party = Parties.findOne(party._id);
++                if (party) {
++                    this.total = party.rsvps ?
++                        party.rsvps.filter(rsvp => rsvp.response === type).length : 0;
++                }
++            }, true);
++            this.init = true;
++        }
++                    
++        return this.total;
++    }
++}
++
+-- 
+2.5.4 (Apple Git-61)
+
+
+From ad8f1242d225fa3490ea3a4c929050f6f67479a8 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Fri, 29 Jan 2016 18:10:16 +0700
+Subject: [PATCH 173/208] Step 22.2: add main module file
+
+---
+ packages/socially-client/main.ts | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+ create mode 100644 packages/socially-client/main.ts
+
+diff --git a/packages/socially-client/main.ts b/packages/socially-client/main.ts
+new file mode 100644
+index 0000000..e86a22a
+--- /dev/null
++++ b/packages/socially-client/main.ts
+@@ -0,0 +1,8 @@
++
++export * from './lib/pipes';
++
++export * from './parties-form/parties-form';
++
++export * from './parties-list/parties-list';
++
++export * from './party-details/party-details';
+-- 
+2.5.4 (Apple Git-61)
+
+
+From a5ba6c45dc3f2e9a31f275dbdf0576c71dae86ae Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Fri, 29 Jan 2016 18:13:43 +0700
+Subject: [PATCH 174/208] Step 22.3: register main SystemJS module
+
+---
+ packages/socially-client/system_config.js | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+ create mode 100644 packages/socially-client/system_config.js
+
+diff --git a/packages/socially-client/system_config.js b/packages/socially-client/system_config.js
+new file mode 100644
+index 0000000..ebebb99
+--- /dev/null
++++ b/packages/socially-client/system_config.js
+@@ -0,0 +1,11 @@
++System.config({
++  packages: {
++    'socially-client': {
++      main: 'main',
++      format: 'register',
++      map: {
++        '.': System.normalizeSync('{socially-client}')
++      }
++    }
++  }
++});
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 167b6dee6e5b1ceddd67ccf97a85fbb02c79d6c3 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Fri, 29 Jan 2016 18:14:55 +0700
+Subject: [PATCH 175/208] Step 22.4: change package.js to contain new files
+
+---
+ packages/socially-client/package.js | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+diff --git a/packages/socially-client/package.js b/packages/socially-client/package.js
+index b024117..4cafb90 100644
+--- a/packages/socially-client/package.js
++++ b/packages/socially-client/package.js
+@@ -13,9 +13,19 @@ Package.describe({
+ Package.onUse(function(api) {
+   api.versionsFrom('1.2.1');
+   api.use('urigo:angular2-meteor');
++
++  api.addFiles([
++    'lib/pipes.ts',
++    'parties-form/parties-form.ts',
++    'parties-list/parties-list.ts',
++    'party-details/party-details.ts',
++    'main.ts',
++    'system_config.js'
++  ], 'client');
+ });
+ 
+ Package.onTest(function(api) {
+   api.use('urigo:angular2-meteor');
+   api.use('tinytest');
++  api.use('socially-client');
+ });
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 8935ebf8d67876c002f3edd30a8f85193720bec3 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Wed, 3 Feb 2016 18:51:24 +0700
+Subject: [PATCH 176/208] Add PartyDetails template to the browser package
+
+---
+ .../client/party-details/party-details.html        | 40 ++++++++++++++++++++++
+ 1 file changed, 40 insertions(+)
+ create mode 100644 packages/socially-browser/client/party-details/party-details.html
+
+diff --git a/packages/socially-browser/client/party-details/party-details.html b/packages/socially-browser/client/party-details/party-details.html
+new file mode 100644
+index 0000000..3bda50c
+--- /dev/null
++++ b/packages/socially-browser/client/party-details/party-details.html
+@@ -0,0 +1,40 @@
++<form (submit)="saveParty(party)" *ngIf="party">
++  <label>Name</label>
++  <input [disabled]="!isOwner" type="text" [(ngModel)]="party.name">
++
++  <label>Description</label>
++  <input [disabled]="!isOwner" type="text" [(ngModel)]="party.description">
++
++  <label>Location</label>
++  <input [disabled]="!isOwner" type="text" [(ngModel)]="party.location.name">
++
++  <button [disabled]="!isOwner" type="submit">Save</button>
++  <button [routerLink]="['/PartiesList']">Cancel</button>
++</form>
++
++<ul *ngIf="isOwner || isPublic">
++  Users to invite:
++  <li *ngFor="#user of users">
++    <div>{{ user | displayName }}</div>
++    <button (click)="invite(user)">Invite</button>
++  </li>
++</ul>
++
++<div *ngIf="isInvited">
++  <h2>Reply to the invitation</h2>
++  <input type="button" value="I'm going!" (click)="reply('yes')">
++  <input type="button" value="Maybe" (click)="reply('maybe')">
++  <input type="button" value="No" (click)="reply('no')">
++</div>
++
++<sebm-google-map 
++  [latitude]="lat || centerLat"
++  [longitude]="lng || centerLng"
++  [zoom]="8"
++  (mapClick)="mapClicked($event)">
++  <sebm-google-map-marker
++    *ngIf="lat && lng"
++    [latitude]="lat"
++    [longitude]="lng">
++  </sebm-google-map-marker>
++</sebm-google-map>
+-- 
+2.5.4 (Apple Git-61)
+
+
+From c01ea96743a4ce2ca44cdb3ac761e2dcd8ae2f86 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Wed, 3 Feb 2016 18:53:08 +0700
+Subject: [PATCH 177/208] Step 22.5: add PartyDetails to the browser package
+
+---
+ .../client/party-details/party-details.ts          | 32 ++++++++++++++++++++++
+ 1 file changed, 32 insertions(+)
+ create mode 100644 packages/socially-browser/client/party-details/party-details.ts
+
+diff --git a/packages/socially-browser/client/party-details/party-details.ts b/packages/socially-browser/client/party-details/party-details.ts
+new file mode 100644
+index 0000000..9055e34
+--- /dev/null
++++ b/packages/socially-browser/client/party-details/party-details.ts
+@@ -0,0 +1,32 @@
++import {Component, View} from 'angular2/core';
++
++import {RouteParams} from 'angular2/router';
++
++import {Parties} from 'collections/parties';
++
++import {RouterLink} from 'angular2/router';
++
++import {RequireUser, InjectUser} from 'meteor-accounts';
++
++import {MeteorComponent} from 'angular2-meteor';
++
++import {DisplayName} from 'client/lib/pipes';
++
++import {ANGULAR2_GOOGLE_MAPS_DIRECTIVES, MapMouseEvent} from 'ng2-google-maps/core';
++
++@Component({
++    selector: 'party-details'
++})
++@View({
++    pipes: [DisplayName],
++    templateUrl: '/packages/socially-browser/client/party-details/party-details.html',
++    directives: [RouterLink, ANGULAR2_GOOGLE_MAPS_DIRECTIVES]
++})
++@RequireUser()
++@InjectUser()
++export class PartyDetails extends MeteorComponent {
++    mapClicked($event: MapMouseEvent) {
++        this.party.location.lat = $event.coords.lat;
++        this.party.location.lng = $event.coords.lng;
++    }
++}
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 4b5e01f90d44267e9d175089e15928b44482e6ca Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Wed, 3 Feb 2016 19:08:42 +0700
+Subject: [PATCH 178/208] Step 22.6: prepare PartyDetails to be used from the
+ browser package
+
+---
+ .../client/party-details/party-details.ts                | 16 +++++++++-------
+ 1 file changed, 9 insertions(+), 7 deletions(-)
+
+diff --git a/packages/socially-browser/client/party-details/party-details.ts b/packages/socially-browser/client/party-details/party-details.ts
+index 9055e34..84f9a4f 100644
+--- a/packages/socially-browser/client/party-details/party-details.ts
++++ b/packages/socially-browser/client/party-details/party-details.ts
+@@ -2,18 +2,14 @@ import {Component, View} from 'angular2/core';
+ 
+ import {RouteParams} from 'angular2/router';
+ 
+-import {Parties} from 'collections/parties';
+-
+ import {RouterLink} from 'angular2/router';
+ 
+ import {RequireUser, InjectUser} from 'meteor-accounts';
+ 
+-import {MeteorComponent} from 'angular2-meteor';
+-
+-import {DisplayName} from 'client/lib/pipes';
+-
+ import {ANGULAR2_GOOGLE_MAPS_DIRECTIVES, MapMouseEvent} from 'ng2-google-maps/core';
+ 
++import {DisplayName, PartyDetails as PartyDetailsBase} from 'socially-client';
++
+ @Component({
+     selector: 'party-details'
+ })
+@@ -24,7 +20,13 @@ import {ANGULAR2_GOOGLE_MAPS_DIRECTIVES, MapMouseEvent} from 'ng2-google-maps/co
+ })
+ @RequireUser()
+ @InjectUser()
+-export class PartyDetails extends MeteorComponent {
++export class PartyDetails extends PartyDetailsBase {
++
++    constructor(params: RouteParams) {
++        var partyId = params.get('partyId');
++        super(partyId);
++    }
++
+     mapClicked($event: MapMouseEvent) {
+         this.party.location.lat = $event.coords.lat;
+         this.party.location.lng = $event.coords.lng;
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 839f83ab7c3261a7f8c2d5e5d45ec6627a3ddf6e Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Wed, 3 Feb 2016 19:17:55 +0700
+Subject: [PATCH 179/208] Step 22.7: update package.js to contain new files
+
+---
+ packages/socially-browser/package.js | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/packages/socially-browser/package.js b/packages/socially-browser/package.js
+index b7a3a62..5b5b503 100644
+--- a/packages/socially-browser/package.js
++++ b/packages/socially-browser/package.js
+@@ -18,6 +18,8 @@ Package.onUse(function(api) {
+   api.addFiles([
+     'client/login/login.html',
+     'client/login/login.ts',
++    'client/party-details/party-details.html',
++    'client/party-details/party-details.ts',
+     'system_config.js'
+   ], 'web.browser');
+ });
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 83077643319396e031c751463fe9b1727e85b7d8 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Wed, 3 Feb 2016 19:22:35 +0700
+Subject: [PATCH 180/208] Add party form component to the browser package
+
+---
+ .../socially-browser/client/parties-form/parties-form.html    | 11 +++++++++++
+ packages/socially-browser/client/parties-form/parties-form.ts | 11 +++++++++++
+ packages/socially-browser/package.js                          |  2 ++
+ 3 files changed, 24 insertions(+)
+ create mode 100644 packages/socially-browser/client/parties-form/parties-form.html
+ create mode 100644 packages/socially-browser/client/parties-form/parties-form.ts
+
+diff --git a/packages/socially-browser/client/parties-form/parties-form.html b/packages/socially-browser/client/parties-form/parties-form.html
+new file mode 100644
+index 0000000..54cc2c8
+--- /dev/null
++++ b/packages/socially-browser/client/parties-form/parties-form.html
+@@ -0,0 +1,11 @@
++<form [ngFormModel]="partiesForm" #f="ngForm" (submit)="addParty(f.value)">
++  <label>Name</label>
++  <input type="text" ngControl="name">
++  <label>Description</label>
++  <input type="text" ngControl="description">
++  <label>Location</label>
++  <input type="text" ngControl="location">
++  <label>Public</label>
++  <input type="checkbox" ngControl="public">
++  <button>Add</button>
++</form>
+diff --git a/packages/socially-browser/client/parties-form/parties-form.ts b/packages/socially-browser/client/parties-form/parties-form.ts
+new file mode 100644
+index 0000000..9ead81c
+--- /dev/null
++++ b/packages/socially-browser/client/parties-form/parties-form.ts
+@@ -0,0 +1,11 @@
++import {Component, View} from 'angular2/core';
++
++import {PartiesForm as PartiesFormBase} from 'socially-client';
++
++@Component({
++  selector: 'parties-form'
++})
++@View({
++  templateUrl: '/packages/socially-browser/client/parties-form/parties-form.html'
++})
++export class PartiesForm extends PartiesFormBase {}
+diff --git a/packages/socially-browser/package.js b/packages/socially-browser/package.js
+index 5b5b503..e5cd999 100644
+--- a/packages/socially-browser/package.js
++++ b/packages/socially-browser/package.js
+@@ -20,6 +20,8 @@ Package.onUse(function(api) {
+     'client/login/login.ts',
+     'client/party-details/party-details.html',
+     'client/party-details/party-details.ts',
++    'client/parties-form/parties-form.html',
++    'client/parties-form/parties-form.ts',
+     'system_config.js'
+   ], 'web.browser');
+ });
+-- 
+2.5.4 (Apple Git-61)
+
+
+From fc7991ba7e04f548e22583a00102cd5f13240b91 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Wed, 3 Feb 2016 19:23:26 +0700
+Subject: [PATCH 181/208] Add parties list component to the browser package
+
+---
+ .../client/parties-list/parties-list.html          | 40 ++++++++++++++++++++++
+ .../client/parties-list/parties-list.ts            | 29 ++++++++++++++++
+ packages/socially-browser/package.js               |  2 ++
+ 3 files changed, 71 insertions(+)
+ create mode 100644 packages/socially-browser/client/parties-list/parties-list.html
+ create mode 100644 packages/socially-browser/client/parties-list/parties-list.ts
+
+diff --git a/packages/socially-browser/client/parties-list/parties-list.html b/packages/socially-browser/client/parties-list/parties-list.html
+new file mode 100644
+index 0000000..53cad56
+--- /dev/null
++++ b/packages/socially-browser/client/parties-list/parties-list.html
+@@ -0,0 +1,40 @@
++<div>
++  <parties-form [hidden]="!user" style="float: left"></parties-form>
++  <input type="text" #searchtext placeholder="Search by Location">
++  <button type="button" (click)="search(searchtext.value)">Search</button>
++  <login></login>
++  <h1>Parties:</h1>
++  <div>
++    <select #sort (change)="changeSortOrder(sort.value)">
++      <option value="1" selected>Ascending</option>
++      <option value="-1">Descending</option>
++    </select>
++  </div>
++  <ul>
++    <li *ngFor="#party of parties | paginate:{currentPage: 1, itemsPerPage: pageSize, totalItems: partiesSize}">
++      <a [routerLink]="['/PartyDetails', {partyId: party._id}]">{{party.name}}</a>
++      <p>{{party.description}}</p>
++      <p>{{party.location.name}}</p>
++      <button [hidden]="!isOwner(party)" (click)="removeParty(party)">X</button>
++      <div>
++        Who is coming:
++        Yes - {{party | rsvp:'yes'}}
++        Maybe - {{party | rsvp:'maybe'}}
++        No - {{party | rsvp:'no'}}
++      </div>
++    </li>
++  </ul>
++  <sebm-google-map 
++    [latitude]="0"
++    [longitude]="0"
++    [zoom]="1">
++    <div *ngFor="#party of parties">
++      <sebm-google-map-marker
++        *ngIf="party.location.lat"
++        [latitude]="party.location.lat"
++        [longitude]="party.location.lng">
++      </sebm-google-map-marker>
++    </div>
++  </sebm-google-map>
++  <pagination-controls (change)="onPageChanged($event.page)"></pagination-controls>
++</div>
+diff --git a/packages/socially-browser/client/parties-list/parties-list.ts b/packages/socially-browser/client/parties-list/parties-list.ts
+new file mode 100644
+index 0000000..f62a045
+--- /dev/null
++++ b/packages/socially-browser/client/parties-list/parties-list.ts
+@@ -0,0 +1,29 @@
++import {Component, View} from 'angular2/core';
++
++import {RouterLink} from 'angular2/router';
++
++import {AccountsUI} from 'meteor-accounts-ui';
++
++import {InjectUser} from 'meteor-accounts';
++
++import {PaginationService, PaginatePipe, PaginationControlsCpm} from 'ng2-pagination';
++
++import {ANGULAR2_GOOGLE_MAPS_DIRECTIVES} from 'ng2-google-maps/core';
++
++import {PartiesForm} from './../parties-form/parties-form';
++
++import {Login} from './../login/login';
++
++import {RsvpPipe, PartiesList as PartiesListBase} from 'socially-client';
++
++@Component({
++    selector: 'parties-list',
++    viewProviders: [PaginationService]
++})
++@View({
++    templateUrl: '/packages/socially-browser/client/parties-list/parties-list.html',
++    directives: [ANGULAR2_GOOGLE_MAPS_DIRECTIVES, PartiesForm, RouterLink, Login, PaginationControlsCpm],
++    pipes: [PaginatePipe, RsvpPipe]
++})
++@InjectUser()
++export class PartiesList extends PartiesListBase {}
+diff --git a/packages/socially-browser/package.js b/packages/socially-browser/package.js
+index e5cd999..d8e7869 100644
+--- a/packages/socially-browser/package.js
++++ b/packages/socially-browser/package.js
+@@ -22,6 +22,8 @@ Package.onUse(function(api) {
+     'client/party-details/party-details.ts',
+     'client/parties-form/parties-form.html',
+     'client/parties-form/parties-form.ts',
++    'client/parties-list/parties-list.html',
++    'client/parties-list/parties-list.ts',
+     'system_config.js'
+   ], 'web.browser');
+ });
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 6004bbe3e5bf940a3b59835b67c70ab7db289898 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Wed, 3 Feb 2016 20:04:23 +0700
+Subject: [PATCH 182/208] Move styles to the browser package
+
+---
+ packages/socially-browser/client/css/main.css | 4 ++++
+ packages/socially-browser/package.js          | 2 ++
+ 2 files changed, 6 insertions(+)
+ create mode 100644 packages/socially-browser/client/css/main.css
+
+diff --git a/packages/socially-browser/client/css/main.css b/packages/socially-browser/client/css/main.css
+new file mode 100644
+index 0000000..1484170
+--- /dev/null
++++ b/packages/socially-browser/client/css/main.css
+@@ -0,0 +1,4 @@
++.sebm-google-map-container {
++  width: 400px;
++  height: 400px;
++}
+diff --git a/packages/socially-browser/package.js b/packages/socially-browser/package.js
+index d8e7869..d0b38f4 100644
+--- a/packages/socially-browser/package.js
++++ b/packages/socially-browser/package.js
+@@ -26,6 +26,8 @@ Package.onUse(function(api) {
+     'client/parties-list/parties-list.ts',
+     'system_config.js'
+   ], 'web.browser');
++
++  api.addFiles(['client/css/main.css'], 'web.browser');
+ });
+ 
+ Package.onTest(function(api) {
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 033b7628c4d721c3373c9924bdbf20687feaed5e Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Wed, 3 Feb 2016 19:33:07 +0700
+Subject: [PATCH 183/208] Step 22.8: export package components
+
+---
+ packages/socially-browser/main.ts | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+ create mode 100644 packages/socially-browser/main.ts
+
+diff --git a/packages/socially-browser/main.ts b/packages/socially-browser/main.ts
+new file mode 100644
+index 0000000..31a8019
+--- /dev/null
++++ b/packages/socially-browser/main.ts
+@@ -0,0 +1,8 @@
++
++export * from './client/login/login';
++
++export * from './client/parties-form/parties-form';
++
++export * from './client/parties-list/parties-list';
++
++export * from './client/party-details/party-details';
+-- 
+2.5.4 (Apple Git-61)
+
+
+From d2fec71f1690d6e9aef6de88ab793524209d7a0f Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Wed, 3 Feb 2016 19:44:39 +0700
+Subject: [PATCH 184/208] Step 22.9: update package.js to include main.ts
+
+---
+ packages/socially-browser/package.js | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/packages/socially-browser/package.js b/packages/socially-browser/package.js
+index d0b38f4..f9a49ef 100644
+--- a/packages/socially-browser/package.js
++++ b/packages/socially-browser/package.js
+@@ -24,7 +24,8 @@ Package.onUse(function(api) {
+     'client/parties-form/parties-form.ts',
+     'client/parties-list/parties-list.html',
+     'client/parties-list/parties-list.ts',
+-    'system_config.js'
++    'system_config.js',
++    'main.ts'
+   ], 'web.browser');
+ 
+   api.addFiles(['client/css/main.css'], 'web.browser');
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 110a002f48b771b12ce89d3f020bdd197e68b6f1 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Wed, 3 Feb 2016 19:46:26 +0700
+Subject: [PATCH 185/208] Step 22.10: update system_config.js to include "main"
+ module
+
+---
+ packages/socially-browser/system_config.js | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/packages/socially-browser/system_config.js b/packages/socially-browser/system_config.js
+index aa0e70c..c250e1e 100644
+--- a/packages/socially-browser/system_config.js
++++ b/packages/socially-browser/system_config.js
+@@ -1,7 +1,7 @@
+ System.config({
+   packages: {
+     'socially': {
+-      main: 'client/login/login',
++      main: 'main',
+       format: 'register',
+       map: {
+         '.': System.normalizeSync('{socially-browser}')
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 1cbfd804f837cbeda04e5083e79895cfb8aae579 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Wed, 3 Feb 2016 21:17:52 +0700
+Subject: [PATCH 186/208] Step 22.11: import every component from
+ "socially-browser"
+
+---
+ client/app.ts | 6 +-----
+ 1 file changed, 1 insertion(+), 5 deletions(-)
+
+diff --git a/client/app.ts b/client/app.ts
+index 9051558..71ccf95 100644
+--- a/client/app.ts
++++ b/client/app.ts
+@@ -4,15 +4,11 @@ import {bootstrap} from 'angular2-meteor';
+ 
+ import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig, APP_BASE_HREF} from 'angular2/router';
+ 
+-import {PartiesList} from 'client/parties-list/parties-list';
+-
+-import {PartyDetails} from 'client/party-details/party-details';
+-
+ import 'collections/methods';
+ 
+ import {ANGULAR2_GOOGLE_MAPS_PROVIDERS} from 'ng2-google-maps/core';
+ 
+-import {LoginPage, Login} from 'socially'; 
++import {LoginPage, Login, PartiesList, PartyDetails} from 'socially'; 
+ 
+ Accounts.ui.config({
+   passwordSignupFields: 'USERNAME_AND_EMAIL'
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 5a942800b49eba058cca5ace20f500d99f4a5c56 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Wed, 3 Feb 2016 20:02:46 +0700
+Subject: [PATCH 187/208] Step 22.12: add browser specific and
+ "socially-client" packages
+
+---
+ packages/socially-browser/package.js | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/packages/socially-browser/package.js b/packages/socially-browser/package.js
+index f9a49ef..53da4c5 100644
+--- a/packages/socially-browser/package.js
++++ b/packages/socially-browser/package.js
+@@ -14,6 +14,9 @@ Package.onUse(function(api) {
+   api.versionsFrom('1.2.1');
+   api.use('urigo:angular2-meteor');
+   api.use('barbatus:ng2-meteor-accounts-ui', 'web.browser');
++  api.use('barbatus:ng2-pagination', 'web.browser');
++  api.use('barbatus:ng2-google-maps', 'web.browser');
++  api.use('socially-client');
+ 
+   api.addFiles([
+     'client/login/login.html',
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 63dc69122b8da83dd2252175db0acfabc102da85 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Wed, 3 Feb 2016 21:16:42 +0700
+Subject: [PATCH 188/208] Clean the app up from the old components
+
+---
+ client/css/main.css                     |  4 --
+ client/lib/pipes.ts                     | 56 ----------------------
+ client/parties-form/parties-form.html   | 11 -----
+ client/parties-form/parties-form.ts     | 48 -------------------
+ client/parties-list/parties-list.html   | 40 ----------------
+ client/parties-list/parties-list.ts     | 84 ---------------------------------
+ client/party-details/party-details.html | 40 ----------------
+ 7 files changed, 283 deletions(-)
+ delete mode 100644 client/css/main.css
+ delete mode 100644 client/lib/pipes.ts
+ delete mode 100644 client/parties-form/parties-form.html
+ delete mode 100644 client/parties-form/parties-form.ts
+ delete mode 100644 client/parties-list/parties-list.html
+ delete mode 100644 client/parties-list/parties-list.ts
+ delete mode 100644 client/party-details/party-details.html
+
+diff --git a/client/css/main.css b/client/css/main.css
+deleted file mode 100644
+index 1484170..0000000
+--- a/client/css/main.css
++++ /dev/null
+@@ -1,4 +0,0 @@
+-.sebm-google-map-container {
+-  width: 400px;
+-  height: 400px;
+-}
+diff --git a/client/lib/pipes.ts b/client/lib/pipes.ts
+deleted file mode 100644
+index dd4da11..0000000
+--- a/client/lib/pipes.ts
++++ /dev/null
+@@ -1,56 +0,0 @@
+-import {Pipe} from 'angular2/core';
+-
+-import {Parties} from 'collections/parties';
+-
+-import {MeteorComponent} from 'angular2-meteor';
+-
+-@Pipe({
+-    name: 'displayName'
+-})
+-export class DisplayName {
+-    transform(user: Meteor.User): string {
+-        if (!user) {
+-            return '';
+-        }
+-
+-        if (user.username) {
+-            return user.username;
+-        }
+-        
+-        if (user.emails) {
+-            return user.emails[0].address;
+-        }
+-        
+-        return '';
+-    }
+-}
+-
+-@Pipe({
+-    name: 'rsvp',
+-    pure: false
+-})
+-export class RsvpPipe extends MeteorComponent {
+-    init: boolean = false;
+-    total: number = 0;
+-
+-    transform(party: Party, args: any[]): number {
+-        let type = args[0];
+-        if (!type) {
+-            return 0;
+-        }
+-
+-        if (!this.init) {
+-            this.autorun(() => {
+-                party = Parties.findOne(party._id);
+-                if (party) {
+-                    this.total = party.rsvps ?
+-                        party.rsvps.filter(rsvp => rsvp.response === type).length : 0;
+-                }
+-            }, true);
+-            this.init = true;
+-        }
+-                    
+-        return this.total;
+-    }
+-}
+-
+diff --git a/client/parties-form/parties-form.html b/client/parties-form/parties-form.html
+deleted file mode 100644
+index 54cc2c8..0000000
+--- a/client/parties-form/parties-form.html
++++ /dev/null
+@@ -1,11 +0,0 @@
+-<form [ngFormModel]="partiesForm" #f="ngForm" (submit)="addParty(f.value)">
+-  <label>Name</label>
+-  <input type="text" ngControl="name">
+-  <label>Description</label>
+-  <input type="text" ngControl="description">
+-  <label>Location</label>
+-  <input type="text" ngControl="location">
+-  <label>Public</label>
+-  <input type="checkbox" ngControl="public">
+-  <button>Add</button>
+-</form>
+diff --git a/client/parties-form/parties-form.ts b/client/parties-form/parties-form.ts
+deleted file mode 100644
+index 7089ca8..0000000
+--- a/client/parties-form/parties-form.ts
++++ /dev/null
+@@ -1,48 +0,0 @@
+-import {Component, View} from 'angular2/core';
+-
+-import {FormBuilder, Control, ControlGroup, Validators} from 'angular2/common';
+-
+-import {Parties} from 'collections/parties';
+-
+-@Component({
+-    selector: 'parties-form'
+-})
+-@View({
+-    templateUrl: '/client/parties-form/parties-form.html'
+-})
+-export class PartiesForm {
+-    partiesForm: ControlGroup;
+-
+-    constructor() {
+-        var fb = new FormBuilder();
+-        this.partiesForm = fb.group({
+-            name: ['', Validators.required],
+-            description: [''],
+-            location: ['', Validators.required],
+-            public: [false]
+-        });
+-    }
+-
+-    addParty(party) {
+-        if (this.partiesForm.valid) {
+-            if (Meteor.userId()) {
+-                Parties.insert({
+-                    name: party.name,
+-                    description: party.description,
+-                    location: {
+-                        name: party.location
+-                    },
+-                    public: party.public,
+-                    owner: Meteor.userId()
+-                });
+-
+-                (<Control>this.partiesForm.controls['name']).updateValue('');
+-                (<Control>this.partiesForm.controls['description']).updateValue('');
+-                (<Control>this.partiesForm.controls['location']).updateValue('');
+-                (<Control>this.partiesForm.controls['public']).updateValue(false);
+-            } else {
+-                alert('Please log in to add a party');
+-            }
+-        }
+-    }
+-}
+diff --git a/client/parties-list/parties-list.html b/client/parties-list/parties-list.html
+deleted file mode 100644
+index 53cad56..0000000
+--- a/client/parties-list/parties-list.html
++++ /dev/null
+@@ -1,40 +0,0 @@
+-<div>
+-  <parties-form [hidden]="!user" style="float: left"></parties-form>
+-  <input type="text" #searchtext placeholder="Search by Location">
+-  <button type="button" (click)="search(searchtext.value)">Search</button>
+-  <login></login>
+-  <h1>Parties:</h1>
+-  <div>
+-    <select #sort (change)="changeSortOrder(sort.value)">
+-      <option value="1" selected>Ascending</option>
+-      <option value="-1">Descending</option>
+-    </select>
+-  </div>
+-  <ul>
+-    <li *ngFor="#party of parties | paginate:{currentPage: 1, itemsPerPage: pageSize, totalItems: partiesSize}">
+-      <a [routerLink]="['/PartyDetails', {partyId: party._id}]">{{party.name}}</a>
+-      <p>{{party.description}}</p>
+-      <p>{{party.location.name}}</p>
+-      <button [hidden]="!isOwner(party)" (click)="removeParty(party)">X</button>
+-      <div>
+-        Who is coming:
+-        Yes - {{party | rsvp:'yes'}}
+-        Maybe - {{party | rsvp:'maybe'}}
+-        No - {{party | rsvp:'no'}}
+-      </div>
+-    </li>
+-  </ul>
+-  <sebm-google-map 
+-    [latitude]="0"
+-    [longitude]="0"
+-    [zoom]="1">
+-    <div *ngFor="#party of parties">
+-      <sebm-google-map-marker
+-        *ngIf="party.location.lat"
+-        [latitude]="party.location.lat"
+-        [longitude]="party.location.lng">
+-      </sebm-google-map-marker>
+-    </div>
+-  </sebm-google-map>
+-  <pagination-controls (change)="onPageChanged($event.page)"></pagination-controls>
+-</div>
+diff --git a/client/parties-list/parties-list.ts b/client/parties-list/parties-list.ts
+deleted file mode 100644
+index fbf02c3..0000000
+--- a/client/parties-list/parties-list.ts
++++ /dev/null
+@@ -1,84 +0,0 @@
+-import {Component, View} from 'angular2/core';
+-
+-import {Parties} from 'collections/parties';
+-
+-import {PartiesForm} from 'client/parties-form/parties-form';
+-
+-import {RouterLink} from 'angular2/router';
+-
+-import {AccountsUI} from 'meteor-accounts-ui';
+-
+-import {InjectUser} from 'meteor-accounts';
+-
+-import {MeteorComponent} from 'angular2-meteor';
+-
+-import {PaginationService, PaginatePipe, PaginationControlsCpm} from 'ng2-pagination';
+-
+-import {RsvpPipe} from 'client/lib/pipes';
+-
+-import {ANGULAR2_GOOGLE_MAPS_DIRECTIVES} from 'ng2-google-maps/core';
+-
+-import {Login} from 'socially';
+-
+-@Component({
+-    selector: 'parties-list',
+-    viewProviders: [PaginationService]
+-})
+-@View({
+-    templateUrl: '/client/parties-list/parties-list.html',
+-    directives: [ANGULAR2_GOOGLE_MAPS_DIRECTIVES, PartiesForm, RouterLink, Login, PaginationControlsCpm],
+-    pipes: [PaginatePipe, RsvpPipe]
+-})
+-@InjectUser()
+-export class PartiesList extends MeteorComponent {
+-    parties: Mongo.Cursor<Party>;
+-    pageSize: number = 10;
+-    curPage: ReactiveVar<number> = new ReactiveVar<number>(1);
+-    nameOrder: ReactiveVar<number> = new ReactiveVar<number>(1);
+-    partiesSize: number = 0;
+-    location: ReactiveVar<string> = new ReactiveVar<string>(null);
+-    user: Meteor.User;
+-
+-    constructor() {
+-        super();
+-        this.autorun(() => {
+-            let options = {
+-                limit: this.pageSize,
+-                skip: (this.curPage.get() - 1) * this.pageSize,
+-                sort: { name: this.nameOrder.get() }
+-            };
+-            this.subscribe('parties', options, this.location.get(), () => {
+-                this.parties = Parties.find({}, { sort: { name: this.nameOrder.get() } });
+-            }, true);
+-        });
+-
+-        this.autorun(() => {
+-            this.partiesSize = Counts.get('numberOfParties');
+-        }, true);
+-    }
+-
+-    removeParty(party) {
+-        Parties.remove(party._id);
+-    }
+-
+-    search(value: string) {
+-        this.curPage.set(1);
+-        this.location.set(value);
+-    }
+-
+-    onPageChanged(page: number) {
+-        this.curPage.set(page);
+-    }
+-
+-    changeSortOrder(nameOrder: string) {
+-        this.nameOrder.set(parseInt(nameOrder));
+-    }
+-
+-    isOwner(party: Party): boolean {
+-        if (this.user) {
+-            return this.user._id === party.owner;
+-        }
+-
+-        return false;
+-    }
+-}
+diff --git a/client/party-details/party-details.html b/client/party-details/party-details.html
+deleted file mode 100644
+index 3bda50c..0000000
+--- a/client/party-details/party-details.html
++++ /dev/null
+@@ -1,40 +0,0 @@
+-<form (submit)="saveParty(party)" *ngIf="party">
+-  <label>Name</label>
+-  <input [disabled]="!isOwner" type="text" [(ngModel)]="party.name">
+-
+-  <label>Description</label>
+-  <input [disabled]="!isOwner" type="text" [(ngModel)]="party.description">
+-
+-  <label>Location</label>
+-  <input [disabled]="!isOwner" type="text" [(ngModel)]="party.location.name">
+-
+-  <button [disabled]="!isOwner" type="submit">Save</button>
+-  <button [routerLink]="['/PartiesList']">Cancel</button>
+-</form>
+-
+-<ul *ngIf="isOwner || isPublic">
+-  Users to invite:
+-  <li *ngFor="#user of users">
+-    <div>{{ user | displayName }}</div>
+-    <button (click)="invite(user)">Invite</button>
+-  </li>
+-</ul>
+-
+-<div *ngIf="isInvited">
+-  <h2>Reply to the invitation</h2>
+-  <input type="button" value="I'm going!" (click)="reply('yes')">
+-  <input type="button" value="Maybe" (click)="reply('maybe')">
+-  <input type="button" value="No" (click)="reply('no')">
+-</div>
+-
+-<sebm-google-map 
+-  [latitude]="lat || centerLat"
+-  [longitude]="lng || centerLng"
+-  [zoom]="8"
+-  (mapClick)="mapClicked($event)">
+-  <sebm-google-map-marker
+-    *ngIf="lat && lng"
+-    [latitude]="lat"
+-    [longitude]="lng">
+-  </sebm-google-map-marker>
+-</sebm-google-map>
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 53d29f31f0e5860f6c42d7a2e0311b80ca0ae256 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Wed, 3 Feb 2016 23:14:39 +0700
+Subject: [PATCH 189/208] Remove browser specific dependencies from the app
+
+---
+ .meteor/packages | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/.meteor/packages b/.meteor/packages
+index 813486d..065d373 100644
+--- a/.meteor/packages
++++ b/.meteor/packages
+@@ -16,13 +16,10 @@ es5-shim                # ECMAScript 5 compatibility for older browsers.
+ 
+ urigo:angular2-meteor
+ accounts-password
+-barbatus:ng2-meteor-accounts-ui
+ barbatus:ng2-meteor-accounts
+ reactive-var
+-barbatus:ng2-pagination
+ tmeasday:publish-counts
+ check
+ email
+-barbatus:ng2-google-maps
+ socially-mobile
+ socially-browser
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 3289982ce20965a586f00c6c615e5798a5b5c6ee Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Thu, 4 Feb 2016 22:16:53 +0700
+Subject: [PATCH 190/208] Step 22.13: add app layout template to the mobile
+ package
+
+---
+ packages/socially-mobile/client/app.html | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+ create mode 100644 packages/socially-mobile/client/app.html
+
+diff --git a/packages/socially-mobile/client/app.html b/packages/socially-mobile/client/app.html
+new file mode 100644
+index 0000000..e18a38d
+--- /dev/null
++++ b/packages/socially-mobile/client/app.html
+@@ -0,0 +1,16 @@
++<ion-menu [content]="content">
++  <ion-toolbar>
++    <ion-title>
++      Socially
++    </ion-title>
++  </ion-toolbar>
++  <ion-content>
++    <ion-list>
++      <button ion-item (click)="openPage(login)" menuClose>
++        Login
++      </button>
++    </ion-list>
++  </ion-content>
++</ion-menu>
++
++<ion-nav id="nav" #content [root]="partiesList"></ion-nav>
+-- 
+2.5.4 (Apple Git-61)
+
+
+From bf45ab4ef78b7df7a1dcfdfcf0600f39ac0b4ab2 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Thu, 4 Feb 2016 22:32:24 +0700
+Subject: [PATCH 191/208] Step 22.14: add party details template to the mobile
+ package
+
+---
+ .../client/party-details/party-details.html        | 58 ++++++++++++++++++++++
+ 1 file changed, 58 insertions(+)
+ create mode 100644 packages/socially-mobile/client/party-details/party-details.html
+
+diff --git a/packages/socially-mobile/client/party-details/party-details.html b/packages/socially-mobile/client/party-details/party-details.html
+new file mode 100644
+index 0000000..c43aaa7
+--- /dev/null
++++ b/packages/socially-mobile/client/party-details/party-details.html
+@@ -0,0 +1,58 @@
++<ion-navbar *navbar>
++  <ion-title>
++    Party Details
++  </ion-title>
++</ion-navbar>
++
++<ion-content #content>
++
++  <form (submit)="saveParty(party)" *ngIf="party">
++    <ion-list>
++      <ion-item>
++        <ion-label fixed>Name</ion-label>
++        <ion-input [disabled]="!isOwner" type="text" [(ngModel)]="party.name"></ion-input>
++      </ion-item>
++
++      <ion-item>
++        <ion-label fixed>Description</ion-label>
++        <ion-input [disabled]="!isOwner" type="text" [(ngModel)]="party.description"></ion-input>
++      </ion-item>
++
++      <ion-item>
++        <ion-label fixed>Location</ion-label>
++        <ion-input [disabled]="!isOwner" type="text" [(ngModel)]="party.location.name"></ion-input>
++      </ion-item>
++    </ion-list>
++
++    <div padding>
++      <button [disabled]="!isOwner" block type="submit">Save</button>
++    </div>
++  </form>
++
++  <ion-list *ngIf="isOwner && !isPublic">
++    <ion-list-header>
++      Users to invite
++    </ion-list-header>
++    <ion-item *ngFor="#user of users">
++      <div>{{ user | displayName }}</div>
++      <button (click)="invite(user)" outline item-right>
++        Invite
++      </button>
++    </ion-item>
++  </ion-list>
++
++  <ion-list *ngIf="isInvited" inset>
++    <ion-list-header>
++      Reply to the invitation
++    </ion-list-header>
++    <button (click)="reply('yes')" small outline>
++      I'm going!
++    </button>
++    <button (click)="reply('maybe')" small outline>
++      Maybe
++    </button>
++    <button (click)="reply('no')" small outline>
++      No
++    </button>
++  </ion-list>
++</ion-content>
+-- 
+2.5.4 (Apple Git-61)
+
+
+From f008771919ddeb32c9f461d937350d7aa79c5414 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 6 Feb 2016 12:50:55 +0700
+Subject: [PATCH 192/208] Step 22.15: add party details component
+
+---
+ .../client/party-details/party-details.ts              | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+ create mode 100644 packages/socially-mobile/client/party-details/party-details.ts
+
+diff --git a/packages/socially-mobile/client/party-details/party-details.ts b/packages/socially-mobile/client/party-details/party-details.ts
+new file mode 100644
+index 0000000..826fb77
+--- /dev/null
++++ b/packages/socially-mobile/client/party-details/party-details.ts
+@@ -0,0 +1,18 @@
++import {Page, NavController, NavParams} from 'ionic/ionic';
++
++import {RequireUser, InjectUser} from 'meteor-accounts';
++
++import {DisplayName, PartyDetails as PartyDetailsBase} from 'socially-client';
++
++@Page({
++    pipes: [DisplayName],
++    templateUrl: '/packages/socially-mobile/client/party-details/party-details.html',
++})
++@RequireUser()
++@InjectUser()
++export class PartyDetails extends PartyDetailsBase {
++    constructor(params: NavParams) {
++        let partyId = params.get('partyId');
++        super(partyId);
++    }
++}
+-- 
+2.5.4 (Apple Git-61)
+
+
+From a6847121b2f9cf728aaa17d5ee6995a037594303 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Thu, 4 Feb 2016 22:34:28 +0700
+Subject: [PATCH 193/208] Add Ionic 2 party form component and its template
+
+---
+ .../client/party-form/party-form.html              | 33 ++++++++++++++++++++++
+ .../client/party-form/party-form.ts                |  8 ++++++
+ 2 files changed, 41 insertions(+)
+ create mode 100644 packages/socially-mobile/client/party-form/party-form.html
+ create mode 100644 packages/socially-mobile/client/party-form/party-form.ts
+
+diff --git a/packages/socially-mobile/client/party-form/party-form.html b/packages/socially-mobile/client/party-form/party-form.html
+new file mode 100644
+index 0000000..a493edf
+--- /dev/null
++++ b/packages/socially-mobile/client/party-form/party-form.html
+@@ -0,0 +1,33 @@
++<ion-navbar *navbar>
++  <ion-title>
++    Create Party
++  </ion-title>
++</ion-navbar>
++
++<ion-content #content>
++  <form [ngFormModel]="partiesForm" #f="ngForm" (submit)="addParty(f.value)">
++    <ion-list>
++      <ion-item>
++        <ion-label fixed>Name</ion-label>
++        <ion-input type="text" ngControl="name"></ion-input>
++      </ion-item>
++      <ion-item>
++        <ion-label fixed>Description</ion-label>
++        <ion-input type="text" ngControl="description"></ion-input>
++      </ion-item>
++      <ion-item>
++        <ion-label fixed>Location</ion-label>
++        <ion-input type="text" ngControl="location"></ion-input>
++      </ion-item>
++      <ion-item>
++        <ion-label>Public</ion-label>
++        <ion-checkbox ngControl="public">
++        </ion-checkbox>
++      </ion-item>
++
++      <div padding>
++        <button block>Create</button>
++      </div>
++    </ion-list>
++  </form>
++</ion-content>
+diff --git a/packages/socially-mobile/client/party-form/party-form.ts b/packages/socially-mobile/client/party-form/party-form.ts
+new file mode 100644
+index 0000000..89b4845
+--- /dev/null
++++ b/packages/socially-mobile/client/party-form/party-form.ts
+@@ -0,0 +1,8 @@
++import {Page, NavController} from 'ionic/ionic';
++
++import {PartiesForm as PartiesFormBase} from 'socially-client';
++
++@Page({
++    templateUrl: '/packages/socially-mobile/client/party-form/party-form.html'
++})
++export class PartiesForm extends PartiesFormBase {}
+-- 
+2.5.4 (Apple Git-61)
+
+
+From b30e929f973aa0a492bf9eb17ba21bdf189762ec Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Thu, 4 Feb 2016 22:34:58 +0700
+Subject: [PATCH 194/208] Step 22.16: add Ionic 2 parties list template
+
+---
+ .../client/parties-list/parties-list.html          | 57 ++++++++++++++++++++++
+ 1 file changed, 57 insertions(+)
+ create mode 100644 packages/socially-mobile/client/parties-list/parties-list.html
+
+diff --git a/packages/socially-mobile/client/parties-list/parties-list.html b/packages/socially-mobile/client/parties-list/parties-list.html
+new file mode 100644
+index 0000000..2f07b7e
+--- /dev/null
++++ b/packages/socially-mobile/client/parties-list/parties-list.html
+@@ -0,0 +1,57 @@
++<ion-navbar *navbar>
++  <ion-buttons start>
++    <button menuToggle>
++      <ion-icon name='menu'></ion-icon>
++    </button>
++  </ion-buttons>
++
++  <ion-title>
++    Parties
++  </ion-title>
++
++  <ion-buttons end>
++    <button (click)="addParty()">
++      <ion-icon name='add'></ion-icon>
++    </button>
++  </ion-buttons>
++</ion-navbar>
++
++<ion-content #content>
++  <ion-list inset>
++    <ion-item *ngFor="#party of parties">
++      {{party.name}}
++      <div item-right class="stats">
++        <ion-row center>
++          <ion-col>Yes</ion-col>
++          <ion-col>Maybe</ion-col>
++          <ion-col>No</ion-col>
++        </ion-row>
++        <ion-row center>
++          <ion-col>
++            <ion-badge light>
++              {{party | rsvp:'yes'}}
++            </ion-badge>
++          </ion-col>
++          <ion-col>
++            <ion-badge light>
++              {{party | rsvp:'maybe'}}
++            </ion-badge>
++          </ion-col>
++          <ion-col>
++            <ion-badge light>
++              {{party | rsvp:'no'}}
++            </ion-badge>
++          </ion-col>
++        </ion-row>
++      </div>
++      <button [hidden]="!isOwner(party)" clear item-right danger (click)="removeParty(party)">
++        <ion-icon name="close-circle">
++        </ion-icon>
++      </button>
++      <button clear item-right [navPush]="partyDetails" [navParams]="{partyId: party._id}">
++        <ion-icon name="arrow-forward">
++        </ion-icon>
++      </button>
++    </ion-item>
++  </ion-list>
++</ion-content>
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 342343fcedc4aecc70fa86117f6ace46e1848c30 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Thu, 4 Feb 2016 22:35:13 +0700
+Subject: [PATCH 195/208] Step 22.17: add Ionic 2 parties list component
+
+---
+ .../client/parties-list/parties-list.ts            | 30 ++++++++++++++++++++++
+ 1 file changed, 30 insertions(+)
+ create mode 100644 packages/socially-mobile/client/parties-list/parties-list.ts
+
+diff --git a/packages/socially-mobile/client/parties-list/parties-list.ts b/packages/socially-mobile/client/parties-list/parties-list.ts
+new file mode 100644
+index 0000000..da02a23
+--- /dev/null
++++ b/packages/socially-mobile/client/parties-list/parties-list.ts
+@@ -0,0 +1,30 @@
++
++import {Type} from 'angular2/core';
++
++import {Page, NavController} from 'ionic/ionic';
++
++import {InjectUser} from 'meteor-accounts';
++
++import {PartiesForm} from './../party-form/party-form';
++
++import {PartyDetails} from './../party-details/party-details';
++
++import {RsvpPipe, PartiesList as PartiesListBase} from 'socially-client';
++
++@Page({
++    pipes: [RsvpPipe],
++    templateUrl: '/packages/socially-mobile/client/parties-list/parties-list.html',
++})
++@InjectUser()
++export class PartiesList extends PartiesListBase {
++    partyDetails: Type;
++
++    constructor(private nav: NavController) {
++        super();
++        this.partyDetails = PartyDetails;
++    }
++
++    addParty() {
++        this.nav.push(PartiesForm);
++    }
++}
+-- 
+2.5.4 (Apple Git-61)
+
+
+From b3e943e205789717cd4e4ee715cde08d3c84f398 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Fri, 5 Feb 2016 14:29:09 +0700
+Subject: [PATCH 196/208] Delete Login component from the mobile package
+
+---
+ packages/socially-mobile/client/login/login.html |  1 -
+ packages/socially-mobile/client/login/login.ts   | 15 ---------------
+ 2 files changed, 16 deletions(-)
+ delete mode 100644 packages/socially-mobile/client/login/login.html
+ delete mode 100644 packages/socially-mobile/client/login/login.ts
+
+diff --git a/packages/socially-mobile/client/login/login.html b/packages/socially-mobile/client/login/login.html
+deleted file mode 100644
+index 37c8acd..0000000
+--- a/packages/socially-mobile/client/login/login.html
++++ /dev/null
+@@ -1 +0,0 @@
+-<a [routerLink]="['/LoginPage']">Login</a>
+diff --git a/packages/socially-mobile/client/login/login.ts b/packages/socially-mobile/client/login/login.ts
+deleted file mode 100644
+index 2d3b84b..0000000
+--- a/packages/socially-mobile/client/login/login.ts
++++ /dev/null
+@@ -1,15 +0,0 @@
+-
+-import {Component} from 'angular2/core';
+-
+-import {ROUTER_DIRECTIVES} from 'angular2/router';
+-
+-import {MeteorComponent} from 'angular2-meteor';
+-
+-export * from './login-page';
+-
+-@Component({
+-  selector: 'login',
+-  templateUrl: '/packages/socially-mobile/client/login/login.html',
+-  directives: [ROUTER_DIRECTIVES]
+-})
+-export class Login {}
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 9f6f199abf104706a9c77e7be4271d71b78372bb Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Fri, 5 Feb 2016 14:29:30 +0700
+Subject: [PATCH 197/208] Step 22.18: add Ionic 2 login page template
+
+---
+ .../socially-mobile/client/login/login-page.html   | 34 +++++++++++++++++-----
+ 1 file changed, 26 insertions(+), 8 deletions(-)
+
+diff --git a/packages/socially-mobile/client/login/login-page.html b/packages/socially-mobile/client/login/login-page.html
+index ea5e8e0..d7dd7a4 100644
+--- a/packages/socially-mobile/client/login/login-page.html
++++ b/packages/socially-mobile/client/login/login-page.html
+@@ -1,9 +1,27 @@
+-<div *ngIf="phoneStage">
+-  <input type="text" placeholder="Phone Number" [(ngModel)]="phoneNumber">
+-  <button (click)="requestVerification">Send</button>
+-</div>
++<ion-navbar *navbar>
++  <ion-title>
++    Login
++  </ion-title>
++</ion-navbar>
+ 
+-<div *ngIf="!phoneStage">
+-  <input type="text" placeholder="Enter Code" [(ngModel)]="verCode">
+-  <button (click)="verifyPhone">Verify</button>
+-</div>
++<ion-content #content>
++  <ion-list *ngIf="!user">
++    <ion-item *ngIf="phoneStage">
++      <ion-label floating>Phone Number</ion-label>
++      <ion-input type="text" [(ngModel)]="phoneNumber"></ion-input>
++    </ion-item>
++    <ion-item *ngIf="!phoneStage">
++      <ion-label floating>Enter Code</ion-label>
++      <ion-input type="text" [(ngModel)]="verCode"></ion-input>
++    </ion-item>
++  </ion-list>
++
++  <div *ngIf="!user" padding>
++    <button *ngIf="phoneStage" (click)="requestVerification" block>Send</button>
++    <button *ngIf="!phoneStage" (click)="verifyPhone" block>Verify</button>
++  </div>
++
++  <div *ngIf="user" padding>
++    <button type="button" block (click)="logout()">LogOut</button>
++  </div>
++</ion-content>
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 686090a7d269316b74c1b5b6d17fed68d8222359 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Fri, 5 Feb 2016 14:35:38 +0700
+Subject: [PATCH 198/208] Step 22.19: convert login page component to Ionic 2
+
+---
+ packages/socially-mobile/client/login/login-page.ts | 19 ++++++++++++++-----
+ 1 file changed, 14 insertions(+), 5 deletions(-)
+
+diff --git a/packages/socially-mobile/client/login/login-page.ts b/packages/socially-mobile/client/login/login-page.ts
+index 561abac..2442956 100644
+--- a/packages/socially-mobile/client/login/login-page.ts
++++ b/packages/socially-mobile/client/login/login-page.ts
+@@ -1,18 +1,23 @@
+ 
++import {NavController, Page} from 'ionic/ionic';
++
+ import {Component} from 'angular2/core';
+ 
+ import {Router} from 'angular2/router';
+ 
+-@Component({
+-  selector: 'login-page',
+-  templateUrl: '/packages/socially-mobile/client/login/login-page.html'
++import {AccountsService, InjectUser} from 'meteor-accounts';
++
++@Page({
++  templateUrl: '/packages/socially-mobile/client/login/login-page.html',
++  providers: [AccountsService]
+ })
+ export class LoginPage {
+   phoneNumber: string;
+   verCode: string;
+   phoneStage: boolean = true;
+ 
+-  constructor(private router: Router) {}
++  constructor(private nav: NavController,
++              private accounts: AccountsService) {}
+ 
+   requestVerification() {
+     Accounts.requestPhoneVerification(this.phoneNumber);
+@@ -22,8 +27,12 @@ export class LoginPage {
+   verifyPhone() {
+     Accounts.verifyPhone(this.phoneNumber, this.verCode, (err) => {
+       if (!err) {
+-        this.router.navigateByUrl('/');
++        this.nav.pop();
+       }
+     });
+   }
++
++  logout() {
++    this.accounts.logout();
++  }
+ }
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 65da2b2f8832ac470121a9f4a9b16f82ea5ca13d Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Fri, 5 Feb 2016 14:43:22 +0700
+Subject: [PATCH 199/208] Add main.ts to define package exports
+
+---
+ packages/socially-mobile/main.ts | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+ create mode 100644 packages/socially-mobile/main.ts
+
+diff --git a/packages/socially-mobile/main.ts b/packages/socially-mobile/main.ts
+new file mode 100644
+index 0000000..5a955c0
+--- /dev/null
++++ b/packages/socially-mobile/main.ts
+@@ -0,0 +1,8 @@
++
++export * from './client/login/login-page';
++
++export * from './client/party-form/party-form';
++
++export * from './client/parties-list/parties-list';
++
++export * from './client/party-details/party-details';
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 3daf8075a232e9f108ec71ca31636f8e6baba97e Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Fri, 5 Feb 2016 14:45:56 +0700
+Subject: [PATCH 200/208] Step 22.20: update mobile package.js
+
+---
+ packages/socially-mobile/package.js | 14 ++++++++++----
+ 1 file changed, 10 insertions(+), 4 deletions(-)
+
+diff --git a/packages/socially-mobile/package.js b/packages/socially-mobile/package.js
+index 0ea1138..e3e3e1e 100644
+--- a/packages/socially-mobile/package.js
++++ b/packages/socially-mobile/package.js
+@@ -12,15 +12,21 @@ Package.describe({
+ 
+ Package.onUse(function(api) {
+   api.versionsFrom('1.2.1');
+-  api.use('urigo:angular2-meteor');
++  api.use('barbatus:ionic2-meteor', 'web.cordova');
+   api.use('okland:accounts-phone', 'web.cordova');
++  api.use('socially-client');
+ 
+   api.addFiles([
+-    'client/login/login.html',
+-    'client/login/login.ts',
+     'client/login/login-page.html',
+     'client/login/login-page.ts',
+-    'system_config.js'
++    'client/party-details/party-details.html',
++    'client/party-details/party-details.ts',
++    'client/party-form/party-form.html',
++    'client/party-form/party-form.ts',
++    'client/parties-list/parties-list.html',
++    'client/parties-list/parties-list.ts',
++    'system_config.js',
++    'main.ts'
+     ], 'web.cordova');
+ });
+ 
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 17f090f6f4020828b19a18852b421cac1afff9e4 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Fri, 5 Feb 2016 14:46:26 +0700
+Subject: [PATCH 201/208] Update mobile system_config.js
+
+---
+ packages/socially-mobile/system_config.js | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/packages/socially-mobile/system_config.js b/packages/socially-mobile/system_config.js
+index 097cd14..0b59e39 100644
+--- a/packages/socially-mobile/system_config.js
++++ b/packages/socially-mobile/system_config.js
+@@ -1,7 +1,7 @@
+ System.config({
+   packages: {
+     'socially': {
+-      main: 'client/login/login',
++      main: 'main',
+       format: 'register',
+       map: {
+         '.': System.normalizeSync('{socially-mobile}')
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 32468d2f32a88adc99090f98eda0d0f0c9a0c92d Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 6 Feb 2016 14:52:40 +0700
+Subject: [PATCH 202/208] Add CSS styles
+
+---
+ packages/socially-mobile/client/css/main.css | 13 +++++++++++++
+ packages/socially-mobile/package.js          |  1 +
+ 2 files changed, 14 insertions(+)
+ create mode 100644 packages/socially-mobile/client/css/main.css
+
+diff --git a/packages/socially-mobile/client/css/main.css b/packages/socially-mobile/client/css/main.css
+new file mode 100644
+index 0000000..9d64880
+--- /dev/null
++++ b/packages/socially-mobile/client/css/main.css
+@@ -0,0 +1,13 @@
++.stats ion-row {
++  padding: 0
++}
++
++.stats ion-row:first-child {
++  font-size: 8px;
++  white-space: nowrap;
++  text-align: center;
++}
++
++.stats ion-badge {
++  font-size: 10px;
++}
+diff --git a/packages/socially-mobile/package.js b/packages/socially-mobile/package.js
+index e3e3e1e..7384fb3 100644
+--- a/packages/socially-mobile/package.js
++++ b/packages/socially-mobile/package.js
+@@ -25,6 +25,7 @@ Package.onUse(function(api) {
+     'client/party-form/party-form.ts',
+     'client/parties-list/parties-list.html',
+     'client/parties-list/parties-list.ts',
++    'client/css/main.css',
+     'system_config.js',
+     'main.ts'
+     ], 'web.cordova');
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 5bda58d993df504a0ef759c358023f86f48352e3 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Fri, 5 Feb 2016 16:56:55 +0700
+Subject: [PATCH 203/208] Step 22.21: customize MeteorApp decorator and add
+ base app class
+
+---
+ packages/socially-browser/app.ts | 47 ++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 47 insertions(+)
+ create mode 100644 packages/socially-browser/app.ts
+
+diff --git a/packages/socially-browser/app.ts b/packages/socially-browser/app.ts
+new file mode 100644
+index 0000000..7af5e2d
+--- /dev/null
++++ b/packages/socially-browser/app.ts
+@@ -0,0 +1,47 @@
++import {Injectable, Component, View, provide} from 'angular2/core';
++
++import {MeteorApp as MeteorAppBase} from 'angular2-meteor';
++
++import {Router, ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig, APP_BASE_HREF} from 'angular2/router';
++
++import {ANGULAR2_GOOGLE_MAPS_PROVIDERS} from 'ng2-google-maps/core';
++
++import {PartiesList} from './client/parties-list/parties-list'; 
++
++import {PartyDetails} from './client/party-details/party-details'; 
++
++Accounts.ui.config({
++  passwordSignupFields: 'USERNAME_AND_EMAIL'
++});
++
++@Injectable()
++export class NavProvider {
++    router: Router;
++
++    constructor(router: Router) {
++        this.router = router;
++    }
++
++    get(): Router {
++        return this.router;
++    }
++}
++
++export function MeteorApp() {
++    return MeteorAppBase({
++        template: '<router-outlet></router-outlet>',
++        directives: [ROUTER_DIRECTIVES],
++        providers: [NavProvider, ROUTER_PROVIDERS, ANGULAR2_GOOGLE_MAPS_PROVIDERS, provide(APP_BASE_HREF, { useValue: '/' })]
++    });
++}
++
++export class App {
++    constructor(navProvider: NavProvider) {
++        let router = navProvider.get();
++        router.config([
++            {path: '/', component: PartiesList},
++            {path: '/party/:partyId', as: 'PartyDetails', component: PartyDetails}
++        ]);
++    }
++}
++
+-- 
+2.5.4 (Apple Git-61)
+
+
+From c2355bb4f4b555302879e91be746bb05c56950c2 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Fri, 5 Feb 2016 16:58:01 +0700
+Subject: [PATCH 204/208] Step 22.22: export app.ts
+
+---
+ packages/socially-browser/main.ts | 8 +-------
+ 1 file changed, 1 insertion(+), 7 deletions(-)
+
+diff --git a/packages/socially-browser/main.ts b/packages/socially-browser/main.ts
+index 31a8019..5428f6e 100644
+--- a/packages/socially-browser/main.ts
++++ b/packages/socially-browser/main.ts
+@@ -1,8 +1,2 @@
+ 
+-export * from './client/login/login';
+-
+-export * from './client/parties-form/parties-form';
+-
+-export * from './client/parties-list/parties-list';
+-
+-export * from './client/party-details/party-details';
++export * from './app';
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 2e5107aca2c1a28ab83868d183c20e3bd71ca828 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 6 Feb 2016 13:44:26 +0700
+Subject: [PATCH 205/208] Add app.ts to the package.js
+
+---
+ packages/socially-browser/package.js | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/packages/socially-browser/package.js b/packages/socially-browser/package.js
+index 53da4c5..dce954b 100644
+--- a/packages/socially-browser/package.js
++++ b/packages/socially-browser/package.js
+@@ -28,7 +28,8 @@ Package.onUse(function(api) {
+     'client/parties-list/parties-list.html',
+     'client/parties-list/parties-list.ts',
+     'system_config.js',
+-    'main.ts'
++    'main.ts',
++    'app.ts'
+   ], 'web.browser');
+ 
+   api.addFiles(['client/css/main.css'], 'web.browser');
+-- 
+2.5.4 (Apple Git-61)
+
+
+From dcc7dc2f9d5db19c124e6bb433204a03d1b7a9d2 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Fri, 5 Feb 2016 17:01:26 +0700
+Subject: [PATCH 206/208] Step 22.23: update Socially class to the final
+ version
+
+---
+ client/app.ts | 36 +++++++-----------------------------
+ 1 file changed, 7 insertions(+), 29 deletions(-)
+
+diff --git a/client/app.ts b/client/app.ts
+index 71ccf95..4a3cfb2 100644
+--- a/client/app.ts
++++ b/client/app.ts
+@@ -1,31 +1,9 @@
+-import {Component, View, NgZone, provide} from 'angular2/core';
++import {MeteorApp, App, NavProvider} from 'socially'; 
+ 
+-import {bootstrap} from 'angular2-meteor';
++@MeteorApp()
++class Socially extends App {
++    constructor(navProvider: NavProvider) {
++        super(navProvider);
++    }
++}
+ 
+-import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, RouteConfig, APP_BASE_HREF} from 'angular2/router';
+-
+-import 'collections/methods';
+-
+-import {ANGULAR2_GOOGLE_MAPS_PROVIDERS} from 'ng2-google-maps/core';
+-
+-import {LoginPage, Login, PartiesList, PartyDetails} from 'socially'; 
+-
+-Accounts.ui.config({
+-  passwordSignupFields: 'USERNAME_AND_EMAIL'
+-});
+-
+-@Component({
+-    selector: 'app'
+-})
+-@View({
+-    template: '<router-outlet></router-outlet>',
+-    directives: [ROUTER_DIRECTIVES]
+-})
+-@RouteConfig([
+-    { path: '/', as: 'PartiesList', component: PartiesList },
+-    { path: '/party/:partyId', as: 'PartyDetails', component: PartyDetails },
+-    { path: '/login', as: 'LoginPage', component: LoginPage || Login }
+-])
+-class Socially {}
+-
+-bootstrap(Socially, [ROUTER_PROVIDERS, ANGULAR2_GOOGLE_MAPS_PROVIDERS, provide(APP_BASE_HREF, { useValue: '/' })]);
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 11d7885ec572e80cbbd7dabf72a4d8b0df1b6318 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 6 Feb 2016 13:54:04 +0700
+Subject: [PATCH 207/208] Step 22.24: add app.ts to the mobile package
+
+---
+ packages/socially-mobile/app.ts | 43 +++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 43 insertions(+)
+ create mode 100644 packages/socially-mobile/app.ts
+
+diff --git a/packages/socially-mobile/app.ts b/packages/socially-mobile/app.ts
+new file mode 100644
+index 0000000..a4034c1
+--- /dev/null
++++ b/packages/socially-mobile/app.ts
+@@ -0,0 +1,43 @@
++
++import {Injectable, Type} from 'angular2/core';
++
++import {NavController, IonicApp} from 'ionic/ionic';
++
++import {MeteorApp as MeteorAppBase} from 'ionic2-meteor';
++
++import {PartiesList} from './client/parties-list/parties-list';
++
++import {LoginPage} from './client/login/login-page';
++
++@Injectable()
++export class NavProvider {
++    constructor(private app: IonicApp) {}
++
++    get(): NavController {
++        return this.app.getComponent('nav');;
++    }
++}
++
++export function MeteorApp() {
++    return MeteorAppBase({
++        templateUrl: '/packages/socially-mobile/client/app.html',
++        providers: [NavProvider]
++    });
++}
++
++export class App {
++    partiesList: Type;
++    login: Type;
++    navProvider: NavProvider;
++
++    constructor(navProvider: NavProvider) {
++        this.navProvider = navProvider;
++        this.login = LoginPage;
++        this.partiesList = PartiesList;
++    }
++
++    openPage(page) {
++        let nav = this.navProvider.get();
++        nav.push(page);
++    }
++}
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 9a6c7a9aa44d268cd093506f5615ddfccbdc9114 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Sat, 6 Feb 2016 14:00:41 +0700
+Subject: [PATCH 208/208] Export app.ts and update package.js
+
+---
+ packages/socially-mobile/main.ts    | 8 +-------
+ packages/socially-mobile/package.js | 4 +++-
+ 2 files changed, 4 insertions(+), 8 deletions(-)
+
+diff --git a/packages/socially-mobile/main.ts b/packages/socially-mobile/main.ts
+index 5a955c0..63a0aee 100644
+--- a/packages/socially-mobile/main.ts
++++ b/packages/socially-mobile/main.ts
+@@ -1,8 +1,2 @@
+ 
+-export * from './client/login/login-page';
+-
+-export * from './client/party-form/party-form';
+-
+-export * from './client/parties-list/parties-list';
+-
+-export * from './client/party-details/party-details';
++export * from './app'
+diff --git a/packages/socially-mobile/package.js b/packages/socially-mobile/package.js
+index 7384fb3..e546839 100644
+--- a/packages/socially-mobile/package.js
++++ b/packages/socially-mobile/package.js
+@@ -27,7 +27,9 @@ Package.onUse(function(api) {
+     'client/parties-list/parties-list.ts',
+     'client/css/main.css',
+     'system_config.js',
+-    'main.ts'
++    'main.ts',
++    'client/app.html',
++    'app.ts'
+     ], 'web.cordova');
+ });
+ 
 -- 
 2.5.4 (Apple Git-61)
