@@ -7,6 +7,15 @@ Package.describe({
 
 Package.onUse(function (api) {
   api.versionsFrom('METEOR@1.2.0.1');
+
+  // legacy
+  api.use('session@1.1.1');
+  api.use('ejson@1.0.7');
+  api.use('check@1.0.6');
+  api.use('diff-sequence');
+  api.use('mongo-id');
+  api.use('dburles:mongo-collection-instances@0.3.4', 'client'); // For getCollectionByName
+
   api.use('underscore@1.0.4');
   api.use('tracker@1.0.8');
   api.use('mongo@1.1.1');
@@ -17,6 +26,23 @@ Package.onUse(function (api) {
   api.use('benjamine:jsondiffpatch@0.1.38_1');
   api.use('angular:angular@1.4.7', 'client');
   api.use('isobuild:compiler-plugin@1.0.0');
+
+  // legacy
+  api.add_files([
+    // Lib Files
+    'lib/diff-array.js',
+    'lib/get-updates.js',
+    // Module Files
+    'modules/angular-meteor-subscribe.js',
+    'modules/angular-meteor-stopper.js',
+    'modules/angular-meteor-collection.js',
+    'modules/angular-meteor-object.js',
+    'modules/angular-meteor-user.js',
+    'modules/angular-meteor-methods.js',
+    'modules/angular-meteor-session.js',
+    'modules/angular-meteor-utils.js',
+    'modules/angular-meteor-camera.js'
+    ], 'client');
 
   api.add_files([
     'modules/router.js',

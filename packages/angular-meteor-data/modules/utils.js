@@ -1,4 +1,4 @@
-angular.module('angular-meteor.utils', [])
+angular.module('angular-meteor.utilities', [])
 
 
 /*

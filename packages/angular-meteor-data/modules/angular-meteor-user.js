@@ -6,7 +6,7 @@
 
 var angularMeteorUser = angular.module('angular-meteor.user', [
   'angular-meteor.utils',
-  'angular-meteor.reactive-scope'
+  'angular-meteor.core'
 ]);
 
 // requires package 'accounts-password'
@@ -86,9 +86,12 @@ angularMeteorUser.service('$meteorUser', [
 ]);
 
 angularMeteorUser.run([
-  '$rootScope',
-  function($rootScope){
+  '$rootScope', '$$Core',
+  function($rootScope, $$Core){
     console.warn('[angular-meteor.$rootScope.currentUser/loggingIn] Please note that this functionality has migrated to a separate package and will be deprecated in 1.4.0.  For more info: http://www.angular-meteor.com/api/1.3.2/auth');
+
+    let ScopeProto = Object.getPrototypeOf($rootScope);
+    _.extend(ScopeProto, $$Core);
     $rootScope.autorun(function(){
       if (!Meteor.user) return;
       $rootScope.currentUser = Meteor.user();

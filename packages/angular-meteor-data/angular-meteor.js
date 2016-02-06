@@ -1,11 +1,23 @@
 angular.module('angular-meteor', [
+  // new
+  'angular-meteor.utilities',
   'angular-meteor.router',
-  'angular-meteor.utils',
   'angular-meteor.mixer',
   'angular-meteor.scope',
   'angular-meteor.core',
   'angular-meteor.view-model',
-  'angular-meteor.reactive'
+  'angular-meteor.reactive',
+
+  // legacy
+  'angular-meteor.utils',
+  'angular-meteor.subscribe',
+  'angular-meteor.collection',
+  'angular-meteor.object',
+  'angular-meteor.user',
+  'angular-meteor.methods',
+  'angular-meteor.session',
+  'angular-meteor.camera'
+
 ])
 
 
