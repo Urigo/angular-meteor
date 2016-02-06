@@ -76,7 +76,13 @@ function($$utils) {
       if (!$$utils.isScope(scope))
         throw Error('argument 1 must be a scope');
 
-      return scope.viewModel(this._vm);
+      var viewModel = scope.viewModel(this._vm);
+
+      // Similar to the old/Meteor API
+      viewModel.call = viewModel.callMethod;
+      viewModel.apply = viewModel.applyMethod;
+
+      return viewModel;
     }
   }
 
