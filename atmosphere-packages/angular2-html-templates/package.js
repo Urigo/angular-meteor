@@ -11,12 +11,12 @@ Npm.depends({
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.3-modules-beta.6');
+  api.versionsFrom('1.3-modules-beta.8');
 
   api.use('caching-compiler@1.0.0', 'server'); // Needed in order to extend the CachingCompiler
-  api.use('ecmascript@0.3.1-modules.6', 'server'); // Needed in order to write ES6 code in compilers code
+  api.use('ecmascript@0.3.1-modules.8', 'server'); // Needed in order to write ES6 code in compilers code
   api.use('check@1.0.5', 'server');
-  api.use('underscore@1.0.5-modules.6', 'server');
+  api.use('underscore@1.0.5-modules.8', 'server');
 
   api.addFiles([
     'utils/file_mixin.js',
