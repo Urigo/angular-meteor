@@ -15,12 +15,12 @@ Package.registerBuildPlugin({
     // Uses an external packages to get the actual compilers
     'barbatus:ts-compilers@0.2.8_4',
     'ecmascript@0.3.1-modules.5',
-    'angular2-templates-compiler@0.5.0-beta.1'
+    'angular2-html-templates@0.5.0-beta.1'
   ]
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.3-modules-beta.5');
+  api.versionsFrom('1.3-modules-beta.6');
 
   // Required in order to register plugins
   api.use('isobuild:compiler-plugin@1.0.0');
