@@ -67,15 +67,21 @@ NgHtmlCompiler = class NgHtmlCompiler extends NgCachingCompiler {
   }
 
   addCompileResult(file, result) {
-    file.addHtml({
-      data: result.head,
-      section: 'head'
-    });
+    // TODO: Fix this, related: https://github.com/meteor/meteor/issues/6174
+    try {
+      file.addHtml({
+        data: result.head,
+        section: 'head'
+      });
 
-    file.addHtml({
-      data: result.body,
-      section: 'body'
-    });
+      file.addHtml({
+        data: result.body,
+        section: 'body'
+      });
+    }
+    catch (e) {
+
+    }
   }
 };
 
