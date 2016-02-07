@@ -1,0 +1,87 @@
+<template name="api.1.3.6.get-collection-reactively">
+  <div>
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/docs/angular-meteor/client/content/api-reference/1.3.6/api.get-collection-reactively.html"
+       class="btn btn-default btn-lg improve-button">
+      <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
+    </a>
+
+    <do-nothing>
+      {{#markdown}}
+
+# getCollectionReactively
+<a class="src-code" href="https://github.com/Urigo/angular-meteor/blob/master/packages/angular-meteor-data/modules/angular-meteor-reactive-context.js#L116" target="_blank">
+  src: angular-meteor-data/modules/angular-meteor-reactive-context.js, line 116
+</a>
+
+Use this method to get a context collection variable and watch it reactively, so each change in this collection causes the dependents (autorun, helper functions and subscriptions) to run again.
+
+The `getCollectionReactively` method is part of the `ReactiveContext`, and available on every `context` and `$scope`.
+
+-------
+
+### Arguments
+
+<table class="variables-matrix input-arguments">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Type</th>
+    <th>Details</th>
+    <th>Required</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td><strong>collectionName</strong></td>
+    <td>
+      <a href="" class="label type-hint type-hint-string">String</a>
+    </td>
+    <td>The name of the context's collection variable to bind to</td>
+    <td>Yes</td>
+  </tr>
+  </tbody>
+</table>
+
+### Return value
+
+This method returns the current value of the reactive collection variable.
+
+-------
+
+### Example with `subscribe`:
+
+    myModule.controller('MyCtrl', ['$scope', '$reactive', function($scope, $reactive) {
+      $reactive(this).attach($scope);
+
+      this.relevantIds = [10,11,12];
+
+      this.subscribe('users', () => {
+        return [ this.getCollectionReactively('relevantIds') ];
+      });
+
+      this.relevantIds[0] = 50; // This will cause the subscribe arguments method to run again
+    }]);
+
+### Example with `helpers`:
+
+    myModule.controller('MyCtrl', ['$scope', '$reactive', function($scope, $reactive) {
+      $reactive(this).attach($scope);
+
+      this.myUser: {
+        messages: ['message1', 'message2']
+      };
+
+      this.helpers({
+        myData: () => {
+          return Data.find({_id: this.getCollectionReactively('myUser.messages')});
+        }
+      });
+
+      this.myUser.messages.push('message3'); // This will cause the helper to run again and update the view
+    }]);
+
+      {{/markdown}}
+    </do-nothing>
+
+  </div>
+</template>

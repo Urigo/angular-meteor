@@ -48,46 +48,14 @@ API_1_3_6 = function (version, basedOnTemplatesOf) {
           },
           {
             id: "05",
-            route: "api." + version + ".reactive-context",
-            path: urlBase + "reactive-context",
-            title: "ReactiveContext",
-            seoTitle: "ReactiveContext",
-            mdContent: "api." + templatePrefix + ".reactive-context"
+            route: "api." + version + ".get-collection-reactively",
+            path: urlBase + "get-collection-reactively",
+            title: "getCollectionReactively",
+            seoTitle: "getCollectionReactively",
+            mdContent: "api." + version + ".get-collection-reactively"
           },
           {
             id: "06",
-            route: "api." + version + ".reactive",
-            path: urlBase + "reactive",
-            title: "$reactive",
-            seoTitle: "$reactive",
-            mdContent: "api." + templatePrefix + ".reactive"
-          },
-          {
-            id: "07",
-            route: "api." + version + ".auth",
-            path: urlBase + "auth",
-            title: "$auth",
-            seoTitle: "$auth",
-            mdContent: "api." + version + ".auth"
-          },
-          {
-            id: "08",
-            route: "api." + version + ".blaze-template",
-            path: urlBase + "blaze-template",
-            title: "blaze-template directive",
-            seoTitle: "blaze-template directive",
-            mdContent: "api." + templatePrefix + ".blaze-template"
-          },
-          {
-            id: "09",
-            route: "api." + version + ".ngFileExtension",
-            path: urlBase + "ngFileExtension",
-            title: "File Extensions",
-            seoTitle: "File Extensions",
-            mdContent: "api." + templatePrefix + ".ngFileExtension"
-          },
-          {
-            id: "10",
             route: "api." + version + ".call",
             path: urlBase + "call",
             title: "call",
@@ -95,7 +63,7 @@ API_1_3_6 = function (version, basedOnTemplatesOf) {
             mdContent: "api." + version + ".call"
           },
           {
-            id: "11",
+            id: "07",
             route: "api." + version + ".apply",
             path: urlBase + "apply",
             title: "apply",
@@ -103,7 +71,47 @@ API_1_3_6 = function (version, basedOnTemplatesOf) {
             mdContent: "api." + version + ".apply"
           },
           {
+            id: "08",
+            route: "api." + version + ".reactive-context",
+            path: urlBase + "reactive-context",
+            title: "ReactiveContext",
+            seoTitle: "ReactiveContext",
+            mdContent: "api." + version + ".reactive-context"
+          },
+          {
+            id: "09",
+            route: "api." + version + ".reactive",
+            path: urlBase + "reactive",
+            title: "$reactive",
+            seoTitle: "$reactive",
+            mdContent: "api." + templatePrefix + ".reactive"
+          },
+          {
+            id: "10",
+            route: "api." + version + ".auth",
+            path: urlBase + "auth",
+            title: "$auth",
+            seoTitle: "$auth",
+            mdContent: "api." + version + ".auth"
+          },
+          {
+            id: "11",
+            route: "api." + version + ".blaze-template",
+            path: urlBase + "blaze-template",
+            title: "blaze-template directive",
+            seoTitle: "blaze-template directive",
+            mdContent: "api." + templatePrefix + ".blaze-template"
+          },
+          {
             id: "12",
+            route: "api." + version + ".ngFileExtension",
+            path: urlBase + "ngFileExtension",
+            title: "File Extensions",
+            seoTitle: "File Extensions",
+            mdContent: "api." + templatePrefix + ".ngFileExtension"
+          },
+          {
+            id: "13",
             route: "api." + version + ".settings",
             path: urlBase + "settings",
             title: "$angularMeteorSettings",
