@@ -344,7 +344,7 @@ describe('angular-meteor', function () {
 
           $scope.getReactively('myProp');
           expect($scope._dependencies).toBeDefined();
-          expect($scope._dependencies['myProp']).toBeDefined();
+          expect($scope._dependencies.myProp).toBeDefined();
         });
 
         it('should register a tracker dependency on a custom context', function() {
@@ -353,7 +353,7 @@ describe('angular-meteor', function () {
 
           $scope.getReactively(context, 'myProp');
           expect(context._dependencies).toBeDefined();
-          expect(context._dependencies['myProp']).toBeDefined();
+          expect(context._dependencies.myProp).toBeDefined();
         });
 
         it ('should create a dependency object for the reactive property', function() {

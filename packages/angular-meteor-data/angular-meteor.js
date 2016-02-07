@@ -24,7 +24,7 @@ angularMeteor.run(['$compile', '$document', '$rootScope', function ($compile, $d
             if (!$rootScope.$$phase) $rootScope.$apply();
             appLoaded = true;
           }
-        })
+        });
       });
     }
   }]);

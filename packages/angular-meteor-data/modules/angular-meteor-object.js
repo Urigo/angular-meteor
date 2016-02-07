@@ -1,3 +1,7 @@
+/*global
+  angular, _, Mongo
+*/
+
 'use strict';
 
 var angularMeteorObject = angular.module('angular-meteor.object',

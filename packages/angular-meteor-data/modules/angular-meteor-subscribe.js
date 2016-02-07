@@ -1,3 +1,7 @@
+/*global
+ angular, Meteor
+ */
+
 'use strict';
 var angularMeteorSubscribe = angular.module('angular-meteor.subscribe', []);
 

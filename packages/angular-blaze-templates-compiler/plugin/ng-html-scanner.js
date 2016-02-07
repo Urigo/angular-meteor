@@ -74,12 +74,15 @@ class HtmlScan {
 
       if (matchTokenUnsupported) {
         switch (matchTokenUnsupported.toLowerCase()) {
-          case '<!doctype':
+          case '<!doctype': {
             this.throwCompileError(
               "Can't set DOCTYPE here.  (Meteor sets <!DOCTYPE html> for you)");
-          case '{{!':
+            break;
+          }
+          case '{{!': {
             this.throwCompileError(
               "Can't use '{{! }}' outside a template.  Use '<!-- -->'.");
+          }
         }
         nonMatchingTagsFound = false;
 
@@ -159,7 +162,7 @@ class HtmlScan {
         tagStartIndex: 1,
         fileContents: this.contents,
         sourceName: this.sourceName
-      })
+      });
     }
     else if (nonMatchingTagsFound) {
       console.log('WARNING: ' + this.sourceName + ' A tag that is not of ' + tagNames.join(', ') + ' was found in a file that contains at least one of those, and will be ignored');

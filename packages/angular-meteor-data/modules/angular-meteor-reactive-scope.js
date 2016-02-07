@@ -4,7 +4,7 @@ angular.module('angular-meteor.reactive-scope', [
 ])
 
 
-.service('$$ReactiveScope', [ 
+.service('$$ReactiveScope', [
   '$rootScope',
   '$parse',
   '$$ReactiveContext',
@@ -20,7 +20,7 @@ function($rootScope, $parse, ReactiveContext, utils) {
     fn = this._bind(fn);
 
     if (!_.isFunction(fn))
-      throw Error('argument 1 must be a function')
+      throw Error('argument 1 must be a function');
     if (!_.isObject(options))
       throw Error('argument 2 must be an object');
 
@@ -29,8 +29,8 @@ function($rootScope, $parse, ReactiveContext, utils) {
     return compution;
   };
 
-  this.subscribe = function(name, fn = angular.noop, cb) {
-    fn = this._bind(fn);
+  this.subscribe = function(name, fn, cb) {
+    fn = this._bind(fn || angular.noop);
     cb = cb ? this._bind(cb) : angular.noop;
 
     if (!_.isString(name))
@@ -108,7 +108,7 @@ function($rootScope, $parse, ReactiveContext, utils) {
     watcher.call(this, getVal, (val, oldVal) => {
       let hasChanged =
         val !== initialVal ||
-        val !== oldVal
+        val !== oldVal;
 
       if (hasChanged) context._dependencies[k].changed();
     });

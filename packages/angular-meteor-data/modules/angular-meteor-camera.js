@@ -1,3 +1,7 @@
+/*global
+ angular, Package
+ */
+
 'use strict';
 
 var angularMeteorCamera = angular.module('angular-meteor.camera', ['angular-meteor.utils']);
