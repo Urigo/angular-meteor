@@ -68,7 +68,7 @@ describe('angular-meteor.view-model', function() {
     it('should call scope.viewModel()', function() {
       var vm = {};
 
-      spyOn(scope, 'viewModel');
+      spyOn(scope, 'viewModel').and.callThrough();
       $reactive(vm).attach(scope);
 
       expect(scope.viewModel).toHaveBeenCalledWith(vm);
