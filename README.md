@@ -23,6 +23,7 @@
 - Track Roadmap here:
 - [angular-meteor milestones](https://github.com/Urigo/angular-meteor/milestones)
 - [Meteor issues related to Angular](https://github.com/meteor/meteor/labels/Project%3AAngular)
+- [Angular Meteor Stickers](https://www.stickermule.com/marketplace/9686-angular-meteor-sticker)
 
 ### Meteor Project
 1. Install [Meteor](http://docs.meteor.com/#quickstart) `$ curl https://install.meteor.com | /bin/sh`
