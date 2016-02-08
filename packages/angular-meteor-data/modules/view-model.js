@@ -41,8 +41,8 @@ function($$utils, $Mixer) {
     return vm;
   };
 
-  // Override $$Core.$$bind() to be bound to view model instead of scope
-  $$ViewModel.$$bind = function(fn) {
+  // Override $$Core.$bindToContext to be bound to view model instead of scope
+  $$ViewModel.$bindToContext = function(fn) {
     return $$utils.bind(fn, this.$$vm, this.$$throttledDigest.bind(this));
   };
 

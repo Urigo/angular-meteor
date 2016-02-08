@@ -104,6 +104,49 @@ You can find more information about this API feature [here](/api/1.3.6/call).
 ### apply
 
 You can find more information about this API feature [here](/api/1.3.6/apply).
+
+### $bindToContext
+
+This method binds the function to the reactive context. Any change in the function to the reactive context will be updated
+in the view accordingly.
+
+<table class="variables-matrix input-arguments">
+    <thead>
+    <tr>
+        <th>Param</th>
+        <th>Type</th>
+        <th>Details</th>
+        <th>Required</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><strong>fn</strong></td>
+        <td>
+            Function
+        </td>
+        <td>Function that will run in the angular scope</td>
+        <td>Yes</td>
+    </tr>
+    </tbody>
+</table>
+
+#### Usage example
+
+We want to create a user and then update the view that the user created successfully
+
+    angular.module('myApp', []).controller('MyCtrl', ['$scope', '$reactive', function($scope, $reactive)
+    {
+      $reactive(this).attach($scope);
+
+      Accounts.createUser({username: "name", password: "123456"}, this.$bindToContext((err) => {
+        if (!err)
+          this.userCreateSuccess = true;
+      }));
+    }]);
+
+> Without $bindToContext the view will not be updated
+
 ### stop
 
 This method takes care of stopping every `subscribe`, `autorun` and `helpers` registration you created.

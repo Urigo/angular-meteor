@@ -16,7 +16,7 @@ function($q, $$utils) {
 
   // Calls Meteor.autorun() which will be digested after each run and automatically destroyed
   $$Core.autorun = function(fn, options = {}) {
-    fn = this.$$bind(fn);
+    fn = this.$bindToContext(fn);
 
     if (!_.isFunction(fn))
       throw Error('argument 1 must be a function');
@@ -30,8 +30,8 @@ function($q, $$utils) {
 
   // Calls Meteor.subscribe() which will be digested after each invokation and automatically destroyed
   $$Core.subscribe = function(name, fn, cb) {
-    fn = this.$$bind(fn || angular.noop);
-    cb = cb ? this.$$bind(cb) : angular.noop;
+    fn = this.$bindToContext(fn || angular.noop);
+    cb = cb ? this.$bindToContext(cb) : angular.noop;
 
     if (!_.isString(name))
       throw Error('argument 1 must be a string');
@@ -62,14 +62,14 @@ function($q, $$utils) {
   // Calls Meteor.call() wrapped by a digestion cycle
   $$Core.callMethod = function(...args) {
     let fn = args.pop();
-    if (_.isFunction(fn)) fn = this.$$bind(fn);
+    if (_.isFunction(fn)) fn = this.$bindToContext(fn);
     return Meteor.call(...args, fn);
   };
 
   // Calls Meteor.apply() wrapped by a digestion cycle
   $$Core.applyMethod = function(...args) {
     let fn = args.pop();
-    if (_.isFunction(fn)) fn = this.$$bind(fn);
+    if (_.isFunction(fn)) fn = this.$bindToContext(fn);
     return Meteor.apply(...args, fn);
   };
 
@@ -96,7 +96,7 @@ function($q, $$utils) {
   };
 
   // Binds an object or a function to the scope to the view model and digest it once it is invoked
-  $$Core.$$bind = function(fn) {
+  $$Core.$bindToContext = function(fn) {
     return $$utils.bind(fn, this, this.$$throttledDigest.bind(this));
   };
 
