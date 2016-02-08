@@ -17,7 +17,7 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
 
     function AngularMeteorCollection(curDefFunc, collection, diffArrayFunc, autoClientSave) {
       if (!$angularMeteorSettings.suppressWarnings)
-        console.warn('[angular-meteor.$meteorCollection] Please note that this method is deprecated since 1.3.0 and will be removed in 1.4.0! For more info: http://www.angular-meteor.com/api/1.3.0/meteorCollection');
+        console.warn('[angular-meteor.$meteorCollection] Please note that this method is deprecated since 1.3.0 and will be removed in 1.4.0! For more info: http://www.angular-meteor.com/api/1.3.0/meteorCollection. You can disable this warning by following this guide http://www.angular-meteor.com/api/1.3.6/settings');
 
       var data = [];
       // Server backup data to evaluate what changes come from client
@@ -341,7 +341,7 @@ angularMeteorCollection.factory('$meteorCollectionFS', [
     function $meteorCollectionFS(reactiveFunc, autoClientSave, collection) {
 
       if (!$angularMeteorSettings.suppressWarnings)
-        console.warn('[angular-meteor.$meteorCollectionFS] Please note that this method is deprecated since 1.3.0 and will be removed in 1.4.0! For more info: http://www.angular-meteor.com/api/1.3.0/files');
+        console.warn('[angular-meteor.$meteorCollectionFS] Please note that this method is deprecated since 1.3.0 and will be removed in 1.4.0! For more info: http://www.angular-meteor.com/api/1.3.0/files. You can disable this warning by following this guide http://www.angular-meteor.com/api/1.3.6/settings');
       return new $meteorCollection(reactiveFunc, autoClientSave, collection, diffArray.shallow);
     }
 

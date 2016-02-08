@@ -20,7 +20,7 @@ angularMeteorObject.factory('AngularMeteorObject', [
 
     function AngularMeteorObject (collection, selector, options){
       if (!$angularMeteorSettings.suppressWarnings)
-        console.warn('[angular-meteor.$meteorObject] Please note that this method is deprecated since 1.3.0 and will be removed in 1.4.0! For more info: http://www.angular-meteor.com/api/1.3.0/meteorObject');
+        console.warn('[angular-meteor.$meteorObject] Please note that this method is deprecated since 1.3.0 and will be removed in 1.4.0! For more info: http://www.angular-meteor.com/api/1.3.0/meteorObject. You can disable this warning by following this guide http://www.angular-meteor.com/api/1.3.6/settings');
       // Make data not be an object so we can extend it to preserve
       // Collection Helpers and the like
       var helpers = collection._helpers;

@@ -22,7 +22,7 @@ angularMeteorUser.service('$meteorUser', [
 
     this.waitForUser = function(){
       if (!$angularMeteorSettings.suppressWarnings)
-        console.warn('[angular-meteor.waitForUser] Please note that this method is deprecated since 1.3.0 and will be removed in 1.4.0! http://info.meteor.com/blog/angular-meteor-1.3');
+        console.warn('[angular-meteor.waitForUser] Please note that this method is deprecated since 1.3.0 and will be removed in 1.4.0! http://info.meteor.com/blog/angular-meteor-1.3. You can disable this warning by following this guide http://www.angular-meteor.com/api/1.3.6/settings');
 
       var deferred = $q.defer();
 
@@ -36,7 +36,7 @@ angularMeteorUser.service('$meteorUser', [
 
     this.requireUser = function(){
       if (!$angularMeteorSettings.suppressWarnings) {
-        console.warn('[angular-meteor.requireUser] Please note that this method is deprecated since 1.3.0 and will be removed in 1.4.0! http://info.meteor.com/blog/angular-meteor-1.3');
+        console.warn('[angular-meteor.requireUser] Please note that this method is deprecated since 1.3.0 and will be removed in 1.4.0! http://info.meteor.com/blog/angular-meteor-1.3. You can disable this warning by following this guide http://www.angular-meteor.com/api/1.3.6/settings');
       }
 
       var deferred = $q.defer();
@@ -55,7 +55,7 @@ angularMeteorUser.service('$meteorUser', [
 
     this.requireValidUser = function(validatorFn) {
       if (!$angularMeteorSettings.suppressWarnings)
-        console.warn('[angular-meteor.requireValidUser] Please note that this method is deprecated since 1.3.0 and will be removed in 1.4.0! http://info.meteor.com/blog/angular-meteor-1.3');
+        console.warn('[angular-meteor.requireValidUser] Please note that this method is deprecated since 1.3.0 and will be removed in 1.4.0! http://info.meteor.com/blog/angular-meteor-1.3. You can disable this warning by following this guide http://www.angular-meteor.com/api/1.3.6/settings');
 
       return self.requireUser(true).then(function(user){
         var valid = validatorFn( user );
@@ -91,7 +91,7 @@ angularMeteorUser.run([
   '$rootScope', '$angularMeteorSettings', '$$Core',
   function($rootScope, $angularMeteorSettings, $$Core){
     if (!$angularMeteorSettings.suppressWarnings)
-      console.warn('[angular-meteor.$rootScope.currentUser/loggingIn] Please note that this functionality has migrated to a separate package and will be deprecated in 1.4.0.  For more info: http://www.angular-meteor.com/api/1.3.2/auth');
+      console.warn('[angular-meteor.$rootScope.currentUser/loggingIn] Please note that this functionality has migrated to a separate package and will be deprecated in 1.4.0.  For more info: http://www.angular-meteor.com/api/1.3.2/auth. You can disable this warning by following this guide http://www.angular-meteor.com/api/1.3.6/settings');
 
     let ScopeProto = Object.getPrototypeOf($rootScope);
     _.extend(ScopeProto, $$Core);
