@@ -1565,7 +1565,7 @@ index 67c02f4..19eb1de 100644
      selector: 'app'
  })
  @View({
-+    template: '<router-outlet></router-outlet>',
++    template: '&lt;router-outlet></router-outlet>',
      directives: [ROUTER_DIRECTIVES]
  })
 +@RouteConfig([
@@ -7921,7 +7921,7 @@ index 0000000..7af5e2d
 +
 +export function MeteorApp() {
 +    return MeteorAppBase({
-+        template: '<router-outlet></router-outlet>',
++        template: '&lt;router-outlet></router-outlet>',
 +        directives: [ROUTER_DIRECTIVES],
 +        providers: [NavProvider, ROUTER_PROVIDERS, ANGULAR2_GOOGLE_MAPS_PROVIDERS, provide(APP_BASE_HREF, { useValue: '/' })]
 +    });
@@ -8037,7 +8037,7 @@ index 71ccf95..4a3cfb2 100644
 -    selector: 'app'
 -})
 -@View({
--    template: '<router-outlet></router-outlet>',
+-    template: '&lt;router-outlet></router-outlet>',
 -    directives: [ROUTER_DIRECTIVES]
 -})
 -@RouteConfig([
@@ -8154,5 +8154,37 @@ index 7384fb3..e546839 100644
      ], 'web.cordova');
  });
  
+-- 
+2.5.4 (Apple Git-61)
+
+From 3accbe461dc7efe10c4f5991721fb3f683e92804 Mon Sep 17 00:00:00 2001
+From: barbatus <alex.borodach@gmail.com>
+Date: Tue, 9 Feb 2016 17:43:40 +0700
+Subject: [PATCH 211/211] Step 22.25: add new typings to the tsconfig.json
+
+---
+ tsconfig.json | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/tsconfig.json b/tsconfig.json
+index 8e951fb..de8aa63 100644
+--- a/tsconfig.json
++++ b/tsconfig.json
+@@ -11,9 +11,14 @@
+     "typings/ng2-meteor-accounts/ng2-meteor-accounts.d.ts",
+     "typings/ng2-pagination/ng2-pagination.d.ts",
+     "typings/ng2-google-maps/ng2-google-maps.d.ts",
++    "typings/ionic2-meteor/ionic2-meteor.d.ts",
+     "typings/party.d.ts",
+     "typings/Counts.d.ts",
++    "typings/socially.d.ts",
+     "client/app.ts",
+-    "server/main.ts"
++    "server/main.ts",
++    "packages/socially-browser/main.ts",
++    "packages/socially-client/main.ts",
++    "packages/socially-mobile/main.ts"
+   ]
+ }
 -- 
 2.5.4 (Apple Git-61)
