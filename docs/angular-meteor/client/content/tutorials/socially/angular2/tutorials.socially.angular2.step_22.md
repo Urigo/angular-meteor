@@ -329,9 +329,9 @@ in a browser running at `http://localhost:4000`. So that we have two apps runnin
 > These files need to be taken into account as well.
 
 > There were two new main namespaces introduced in the app: `socially` and `socially-client`.
-> To fix type-cheking for them as well, you'll need to
+> To fix type-checking for them as well, you'll need to
 > describe components of these namespaces in a new definition file.
-> Or you can just copy it from here.
+> Or you can just copy it from [here](https://github.com/Urigo/meteor-angular2.0-socially/commit/1865c6246bf322c7c88e14925d0683ad6733779c).
 
 > All new changes of the `tsconfig.json` combined looks like:
 
