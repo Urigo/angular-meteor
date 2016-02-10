@@ -1,5 +1,5 @@
 angular.module('angular-meteor.core', [
-  'angular-meteor.utils',
+  'angular-meteor.utilities',
   'angular-meteor.mixer'
 ])
 

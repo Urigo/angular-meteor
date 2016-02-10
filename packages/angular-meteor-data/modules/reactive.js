@@ -1,5 +1,5 @@
 angular.module('angular-meteor.reactive', [
-  'angular-meteor.utils',
+  'angular-meteor.utilities',
   'angular-meteor.mixer',
   'angular-meteor.core',
   'angular-meteor.view-model'
