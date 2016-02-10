@@ -68,14 +68,14 @@ It's very simple, isn't it? And when the subscription is completed, we select pa
       this.parties = Parties.find();
     });
 
-But beyond that simplicity there are two small issues we'll need to solve.
+But beyond that simplicity there are two small issues we'll need to solve:
 
-1. Ending a subscription.
+1) Ending a subscription.
 
 Each subscription means that Meteor will continue synchronizing (or in Meteor terms, updating reactively) the particular set of data, we've just subscribed to, between server and client.
 If the PartiesList component gets destroyed, we need to inform Meteor to stop that synchronization, otherwise we'll produce a memory leak.
 
-2. Updating Angular 2's UI
+2) Updating Angular 2's UI
 
 We must inform Angular 2 to perform a UI refresh when new data arrives. In other words, we should setup a subscribe callback to run in Angular 2's zone.
 
@@ -129,7 +129,7 @@ Log in with 2 different users in 2 different browsers. Try to create a couple of
 
 Now log in as a party owner user and verify that a couple of private parties got to the page as well.
 
-## Subscribe with params
+## Subscribe with Params
 
 There is one page in our app so far where we'll need parameterized publishing — the `PartyDetails` component's page.
 Besides that, let's add another cool feature to Socially, party search by location.
