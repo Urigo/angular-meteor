@@ -95,6 +95,7 @@ angularMeteorUser.run([
 
     let ScopeProto = Object.getPrototypeOf($rootScope);
     _.extend(ScopeProto, $$Core);
+
     $rootScope.autorun(function(){
       if (!Meteor.user) return;
       $rootScope.currentUser = Meteor.user();
