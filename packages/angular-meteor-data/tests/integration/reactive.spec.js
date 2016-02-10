@@ -7,6 +7,30 @@ describe('angular-meteor.reactive', function() {
     $rootScope = _$rootScope_;
   }));
 
+  it('should not depend outside of computation', function() {
+    DummyCollection.remove({});
+
+    scope = $rootScope.$new();
+    vm = scope.viewModel({});
+
+    var c = vm.autorun(function() {
+    });
+
+    vm.helpers({
+      parties: function() {
+        return DummyCollection.find({});
+      }
+    });
+
+    scope.$watch("$$vm.parties", function() {});
+
+    c.invalidate();
+
+    Tracker.flush();
+
+    expect(vm.$$dependencies.parties._dependentsById[c._id]).toBe(undefined);
+  });
+
   describe('$$Reactive', function() {
     afterEach(function() {
       DummyCollection.remove({});
