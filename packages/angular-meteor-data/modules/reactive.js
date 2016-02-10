@@ -123,7 +123,6 @@ function($parse, $$utils, $angularMeteorSettings) {
       enumerable: true,
 
       get: () => {
-        this.$$depend(k);
         return v;
       },
       set: (newVal) => {
