@@ -8,7 +8,7 @@ Template.tutorialSelector.helpers({
   tutorialLink: function() {
     var route = Router.current().route.path(this) || 'angular';
 
-    if (route.indexOf('tutorials/whatsapp/ionic') !== -1) {
+    if (route.indexOf('tutorials/whatsapp/ionic') !== -1 || route.indexOf('tutorials/whatsapp/meteor') !== -1) {
       return 'tutorials.whatsapp.intro';
     }
     else {
@@ -18,7 +18,7 @@ Template.tutorialSelector.helpers({
   pages: function() {
     var route = Router.current().route.path(this) || 'angular';
 
-    if (route.indexOf('tutorials/whatsapp/ionic') !== -1) {
+    if (route.indexOf('tutorials/whatsapp/ionic') !== -1 || route.indexOf('tutorials/whatsapp/meteor') !== -1) {
       return [];
     }
     else {
