@@ -174,46 +174,48 @@ Note that this method is called automatically when using `$scope` with your reac
   </tbody>
 </table>
 
-
 ## Usage examples
 
-The core of the usage with this object, is the `subscribe` and `helpers` methods.
+The core of the usage with this object, is the `subscribe`, `helpers` and `autorun` methods.
 
-For example, let's create a reactive variable:
+`helpers` are used to set reactive **collection**s:
 
-    angular.module('myApp', []).controller('MyCtrl', ['$scope', '$reactive', function($scope, $reactive)
-    {
-      let reactiveContext = $reactive(this).attach($scope);
-
-      reactiveContext.helpers({
-        myName: 'Dotan'
-      });
-
-      // This will print your actual value, and you can use it also in your view!
-      console.log(this.myName);
-    }]);
-
-And when you will modify the value of `this.myName`, it will cause `Tracker.Autorun` to invalidate and run your reactive logic again.
-
-Also, it is possible to create a collection helpers that returns MongoDB cursor, using `helpers`:
+For example, let's create a reactive collection:
 
     angular.module('myApp', []).controller('MyCtrl', ['$scope', '$reactive', function($scope, $reactive)
     {
-      let reactiveContext = $reactive(this).attach($scope);
+      $reactive(this).attach($scope);
 
-      reactiveContext.helpers({
-        allUsers: function() {
-          return Users.find({});
-        }
+      this.helpers({
+        items: () => Items.find({})
       });
 
-      // This will print the whole collection, as a normal JavaScript array!
-      console.log(this.allUsers);
     }]);
 
+Whenever the `Items` collection changes, `angular-meteor` will update context and the view according to the change.
 
+> The method that you set on each helper must return a Mongo.Cursor
 
-* subscribe - Use this to subscribe to data from your Meteor server side - you need to provide the name of the subscription and a function that will return an array with the subscription arguments (as defined in the publication in the server side).
+We will use `autorun` to set reactive variables that aren't collections:
+
+    angular.module('myApp', []).controller('MyCtrl', ['$scope', '$reactive', function($scope, $reactive)
+    {
+      $reactive(this).attach($scope);
+
+      this.autorun(() => {
+        this.itemsCount = Items.find({}).count();
+
+        this.id = Meteor.userId();
+
+        this.myFirstItem = Items.findOne({owner: this.getReactively("id")});
+      });
+
+    }]);
+
+> `itemsCount` will be updated whenever `Items` collection length changes. `id` will be updated when a user will
+  login/logout from the app. `myFirstItem` will be updated when `Items` collection changes or when the user login/logout.
+
+`subscribe` - Use this to subscribe to data from your Meteor server side - you need to provide the name of the subscription and a function that will return an array with the subscription arguments (as defined in the publication in the server side).
 
 Using `subscribe` you can register to data, it wraps `Meteor.subscribe`, but it also makes sure to make you view reactive when there are changes.
 
@@ -221,9 +223,9 @@ This is an example for registering to subscription named `relevant_users` with s
 
     angular.module('myApp', []).controller('MyCtrl', ['$scope', '$reactive', function($scope, $reactive)
     {
-      let reactiveContext = $reactive(this).attach($scope);
+      $reactive(this).attach($scope);
 
-      reactiveContext.subscribe('relevant_users', () => {
+      this.subscribe('relevant_users', () => {
         return [
           'example' // This is an arguments that will be used in the subscription
         ]
@@ -235,16 +237,16 @@ Combining both of the feature we just explained, we can create a reactive view w
 
     angular.module('myApp', []).controller('MyCtrl', ['$scope', '$reactive', function($scope, $reactive)
     {
-      let reactiveContext = $reactive(this).attach($scope);
+      $reactive(this).attach($scope);
 
-      reactiveContext.helpers({
+      this.helpers({
         searchText: '',
         users: function() {
           return Users.find({});
         }
       });
 
-      reactiveContext.subscribe('relevant_users', () => {
+      this.subscribe('relevant_users', () => {
         return [
           this.searchText
         ];
