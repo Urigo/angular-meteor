@@ -12,7 +12,14 @@ Template.sidebarDefaultAPI.events({
 
 Template.sidebarDefaultAPI.helpers({
   apis: function () {
-    return _.keys(ANGULAR1_API_DEFINITION);
+    var route = Router.current().route.path(this);
+    var apis = ANGULAR1_API_DEFINITION;
+
+    if (route.indexOf('api/angular2') > -1) {
+      apis = ANGULAR2_API_DEFINITION;
+    }
+
+    return _.keys(apis);
   },
   currentApi: function (api) {
     var route = Router.current().data().route.replace('api.', '');
