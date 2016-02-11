@@ -1,0 +1,4524 @@
+From 2f220afab41a20b12e44dab15606a1eba156b6a4 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Thu, 10 Dec 2015 23:30:20 +0200
+Subject: [PATCH 01/98] Step 1.1: Setup base packages
+
+---
+ .meteor/packages |  4 ++--
+ .meteor/versions | 14 ++++++++++++--
+ 2 files changed, 14 insertions(+), 4 deletions(-)
+
+diff --git a/.meteor/packages b/.meteor/packages
+index a9f8340..7c87fba 100644
+--- a/.meteor/packages
++++ b/.meteor/packages
+@@ -7,14 +7,14 @@
+ meteor-base             # Packages every Meteor app needs to have
+ mobile-experience       # Packages for a great mobile UX
+ mongo                   # The database Meteor supports right now
+-blaze-html-templates    # Compile .html files into Meteor Blaze views
+ session                 # Client-side reactive dictionary for your app
+ jquery                  # Helpful client-side library
+ tracker                 # Meteor's client-side reactive programming library
+ 
+ standard-minifiers      # JS/CSS minifiers run for production mode
+ es5-shim                # ECMAScript 5 compatibility for older browsers.
+-ecmascript              # Enable ECMAScript2015+ syntax in app code
+ 
+ autopublish             # Publish all data to the clients (for prototyping)
+ insecure                # Allow all DB writes from clients (for prototyping)
++angular@1.3.0
++driftyco:ionic
+diff --git a/.meteor/versions b/.meteor/versions
+index 17859ef..28a102c 100644
+--- a/.meteor/versions
++++ b/.meteor/versions
+@@ -1,3 +1,10 @@
++angular@1.3.0
++angular-meteor-data@0.0.7
++angular-templates@0.0.2
++angular:angular@1.4.8
++angular:angular-animate@1.4.8
++angular:angular-sanitize@1.4.8
++angularui:angular-ui-router@0.2.15
+ autopublish@1.0.4
+ autoupdate@1.2.4
+ babel-compiler@5.8.24_1
+@@ -5,19 +12,20 @@ babel-runtime@0.1.4
+ base64@1.0.4
+ binary-heap@1.0.4
+ blaze@2.1.3
+-blaze-html-templates@1.0.1
+ blaze-tools@1.0.4
+ boilerplate-generator@1.0.4
+ caching-compiler@1.0.0
+ caching-html-compiler@1.0.2
+ callback-hook@1.0.4
+ check@1.1.0
++dburles:mongo-collection-instances@0.3.4
+ ddp@1.2.2
+ ddp-client@1.2.1
+ ddp-common@1.2.2
+ ddp-server@1.2.2
+ deps@1.0.9
+ diff-sequence@1.0.1
++driftyco:ionic@1.1.0_2
+ ecmascript@0.1.6
+ ecmascript-runtime@0.2.6
+ ejson@1.0.7
+@@ -31,6 +39,7 @@ http@1.1.1
+ id-map@1.0.4
+ insecure@1.0.4
+ jquery@1.11.4
++lai:collection-extensions@0.1.4
+ launch-screen@1.0.4
+ livedata@1.0.15
+ logging@1.0.8
+@@ -45,6 +54,7 @@ mongo-id@1.0.1
+ npm-mongo@1.4.39_1
+ observe-sequence@1.0.7
+ ordered-dict@1.0.4
++pbastowski:angular-babel@1.0.7
+ promise@0.5.1
+ random@1.0.5
+ reactive-dict@1.1.3
+@@ -56,11 +66,11 @@ session@1.1.1
+ spacebars@1.0.7
+ spacebars-compiler@1.0.7
+ standard-minifiers@1.0.2
+-templating@1.1.5
+ templating-tools@1.0.0
+ tracker@1.0.9
+ ui@1.0.8
+ underscore@1.0.4
++urigo:cancel-fastclick@0.0.2
+ url@1.0.5
+ webapp@1.2.3
+ webapp-hashing@1.0.5
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 08e9dde4de48781b21299efa5a8065eec072d5c3 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Thu, 10 Dec 2015 23:42:16 +0200
+Subject: [PATCH 02/98] Step 1.2: Create index.html
+
+---
+ client/index.html | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+ create mode 100644 client/index.html
+
+diff --git a/client/index.html b/client/index.html
+new file mode 100644
+index 0000000..a27b518
+--- /dev/null
++++ b/client/index.html
+@@ -0,0 +1,22 @@
++<head>
++  <meta charset="utf-8">
++  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
++  <title>Whatsapp Meteor</title>
++</head>
++
++<body>
++<!--
++  The nav bar that will be updated as we navigate between views.
++-->
++<ion-nav-bar class="bar-stable">
++  <ion-nav-back-button>
++  </ion-nav-back-button>
++</ion-nav-bar>
++<!--
++  The views will be rendered in the <ion-nav-view> directive below
++  Templates are in the /templates folder (but you could also
++  have templates inline in this html file if you'd like).
++-->
++<ion-nav-view></ion-nav-view>
++
++</body>
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From d4227b1516878819c3f4bb5efbe64c9bcef090d2 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Thu, 10 Dec 2015 23:43:18 +0200
+Subject: [PATCH 03/98] Step 1.3: Create app.js file with the module
+ initialization
+
+---
+ client/scripts/lib/app.js | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+ create mode 100644 client/scripts/lib/app.js
+
+diff --git a/client/scripts/lib/app.js b/client/scripts/lib/app.js
+new file mode 100644
+index 0000000..5bd91a1
+--- /dev/null
++++ b/client/scripts/lib/app.js
+@@ -0,0 +1,16 @@
++angular
++  .module('Whatsapp', [
++    'angular-meteor',
++    'ionic'
++  ]);
++
++if (Meteor.isCordova) {
++  angular.element(document).on('deviceready', onReady);
++}
++else {
++  angular.element(document).ready(onReady);
++}
++
++function onReady() {
++  angular.bootstrap(document, ['Whatsapp']);
++} 
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 0544f831b9992518376d54a0a097b9c47ed81ec1 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Thu, 10 Dec 2015 23:46:22 +0200
+Subject: [PATCH 04/98] Step 1.4: Create the routes file and define basic
+ routes
+
+---
+ client/scripts/routes.js | 22 ++++++++++++++++++++++
+ 1 file changed, 22 insertions(+)
+ create mode 100644 client/scripts/routes.js
+
+diff --git a/client/scripts/routes.js b/client/scripts/routes.js
+new file mode 100644
+index 0000000..6875ef0
+--- /dev/null
++++ b/client/scripts/routes.js
+@@ -0,0 +1,22 @@
++angular
++  .module('Whatsapp')
++  .config(config);
++
++function config($stateProvider, $urlRouterProvider) {
++  $stateProvider
++    .state('tab', {
++      url: '/tab',
++      abstract: true,
++      templateUrl: 'client/templates/tabs.html'
++    })
++    .state('tab.chats', {
++      url: '/chats',
++      views: {
++        'tab-chats': {
++          templateUrl: 'client/templates/chats.html'
++        }
++      }
++    });
++
++  $urlRouterProvider.otherwise('tab/chats');
++}
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 855f42c894717d3a374959a5a0f4784fc2107da4 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Thu, 10 Dec 2015 23:47:32 +0200
+Subject: [PATCH 05/98] Step 1.5: Create the tabs view using ionic's tabs
+
+---
+ client/templates/tabs.html | 23 +++++++++++++++++++++++
+ 1 file changed, 23 insertions(+)
+ create mode 100644 client/templates/tabs.html
+
+diff --git a/client/templates/tabs.html b/client/templates/tabs.html
+new file mode 100644
+index 0000000..14ec5fb
+--- /dev/null
++++ b/client/templates/tabs.html
+@@ -0,0 +1,23 @@
++<ion-tabs class="tabs-stable tabs-icon-top tabs-color-positive" ng-cloak>
++
++  <ion-tab title="Favorites" icon-on="ion-ios-star" icon-off="ion-ios-star-outline" href="#/tab/favorites">
++    <ion-nav-view name="tab-favorites"></ion-nav-view>
++  </ion-tab>
++
++  <ion-tab title="Recents" icon-on="ion-ios-clock" icon-off="ion-ios-clock-outline" href="#/tab/recents">
++    <ion-nav-view name="tab-recents"></ion-nav-view>
++  </ion-tab>
++
++  <ion-tab title="Contacts" icon-on="ion-ios-person" icon-off="ion-ios-person-outline" href="#/tab/contacts">
++    <ion-nav-view name="tab-contacts"></ion-nav-view>
++  </ion-tab>
++
++  <ion-tab title="Chats" icon-on="ion-ios-chatbubble" icon-off="ion-ios-chatbubble-outline" href="#/tab/chats">
++    <ion-nav-view name="tab-chats"></ion-nav-view>
++  </ion-tab>
++
++  <ion-tab title="Settings" icon-on="ion-ios-cog" icon-off="ion-ios-cog-outline" href="#/tab/settings">
++    <ion-nav-view name="tab-settings"></ion-nav-view>
++  </ion-tab>
++
++</ion-tabs>
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From f25f05b38dae095daa45cc1a4c8dfee05bb709fb Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Thu, 10 Dec 2015 23:48:57 +0200
+Subject: [PATCH 06/98] Step 1.6: Create basic view for the chats list
+
+---
+ client/templates/chats.html | 5 +++++
+ 1 file changed, 5 insertions(+)
+ create mode 100644 client/templates/chats.html
+
+diff --git a/client/templates/chats.html b/client/templates/chats.html
+new file mode 100644
+index 0000000..b1d926f
+--- /dev/null
++++ b/client/templates/chats.html
+@@ -0,0 +1,5 @@
++<ion-view view-title="Chats">
++  <ion-content>
++
++  </ion-content>
++</ion-view>
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From e3ee52c61c71d5b23b974c22ac4bf59e08229a55 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Thu, 10 Dec 2015 23:50:13 +0200
+Subject: [PATCH 07/98] Step 1.7: Add meteor platform for running on iOS
+ emulator
+
+---
+ .meteor/platforms | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/.meteor/platforms b/.meteor/platforms
+index efeba1b..7f24822 100644
+--- a/.meteor/platforms
++++ b/.meteor/platforms
+@@ -1,2 +1,3 @@
+-server
+ browser
++ios
++server
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 16a4a0b7ccf36bf5ad5641b73ef1077cd6237b4a Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Thu, 10 Dec 2015 23:51:21 +0200
+Subject: [PATCH 08/98] Step 1.8: Create ChatsCtrl
+
+---
+ client/scripts/controllers/chats.controller.js | 7 +++++++
+ 1 file changed, 7 insertions(+)
+ create mode 100644 client/scripts/controllers/chats.controller.js
+
+diff --git a/client/scripts/controllers/chats.controller.js b/client/scripts/controllers/chats.controller.js
+new file mode 100644
+index 0000000..068d404
+--- /dev/null
++++ b/client/scripts/controllers/chats.controller.js
+@@ -0,0 +1,7 @@
++angular
++  .module('Whatsapp')
++  .controller('ChatsCtrl', ChatsCtrl);
++
++function ChatsCtrl ($scope, $reactive) {
++  $reactive(this).attach($scope);
++}
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 654a214a41b1209289b7619536dba7744be5b41d Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Thu, 10 Dec 2015 23:52:05 +0200
+Subject: [PATCH 09/98] Step 1.9: Add moment package
+
+---
+ .meteor/packages | 1 +
+ .meteor/versions | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/.meteor/packages b/.meteor/packages
+index 7c87fba..8b71ed1 100644
+--- a/.meteor/packages
++++ b/.meteor/packages
+@@ -18,3 +18,4 @@ autopublish             # Publish all data to the clients (for prototyping)
+ insecure                # Allow all DB writes from clients (for prototyping)
+ angular@1.3.0
+ driftyco:ionic
++momentjs:moment
+diff --git a/.meteor/versions b/.meteor/versions
+index 28a102c..712ab1c 100644
+--- a/.meteor/versions
++++ b/.meteor/versions
+@@ -49,6 +49,7 @@ minifiers@1.1.7
+ minimongo@1.0.10
+ mobile-experience@1.0.1
+ mobile-status-bar@1.0.6
++momentjs:moment@2.10.6
+ mongo@1.1.3
+ mongo-id@1.0.1
+ npm-mongo@1.4.39_1
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 29a1a5761acb9eb1a921b9b05d64075ff3429f47 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Thu, 10 Dec 2015 23:55:42 +0200
+Subject: [PATCH 10/98] Step 1.10: Add stub data to the ChatsCtrl to enrich the
+ view
+
+---
+ client/scripts/controllers/chats.controller.js | 48 ++++++++++++++++++++++++++
+ 1 file changed, 48 insertions(+)
+
+diff --git a/client/scripts/controllers/chats.controller.js b/client/scripts/controllers/chats.controller.js
+index 068d404..d263e4e 100644
+--- a/client/scripts/controllers/chats.controller.js
++++ b/client/scripts/controllers/chats.controller.js
+@@ -4,4 +4,52 @@ angular
+ 
+ function ChatsCtrl ($scope, $reactive) {
+   $reactive(this).attach($scope);
++
++  this.data = [
++    {
++      _id: 0,
++      name: 'Ethan Gonzalez',
++      picture: 'https://randomuser.me/api/portraits/thumb/men/1.jpg',
++      lastMessage: {
++        text: 'You on your way?',
++        timestamp: moment().subtract(1, 'hours').toDate()
++      }
++    },
++    {
++      _id: 1,
++      name: 'Bryan Wallace',
++      picture: 'https://randomuser.me/api/portraits/thumb/lego/1.jpg',
++      lastMessage: {
++        text: 'Hey, it\'s me',
++        timestamp: moment().subtract(2, 'hours').toDate()
++      }
++    },
++    {
++      _id: 2,
++      name: 'Avery Stewart',
++      picture: 'https://randomuser.me/api/portraits/thumb/women/1.jpg',
++      lastMessage: {
++        text: 'I should buy a boat',
++        timestamp: moment().subtract(1, 'days').toDate()
++      }
++    },
++    {
++      _id: 3,
++      name: 'Katie Peterson',
++      picture: 'https://randomuser.me/api/portraits/thumb/women/2.jpg',
++      lastMessage: {
++        text: 'Look at my mukluks!',
++        timestamp: moment().subtract(4, 'days').toDate()
++      }
++    },
++    {
++      _id: 4,
++      name: 'Ray Edwards',
++      picture: 'https://randomuser.me/api/portraits/thumb/men/2.jpg',
++      lastMessage: {
++        text: 'This is wicked good ice cream.',
++        timestamp: moment().subtract(2, 'weeks').toDate()
++      }
++    }
++  ];
+ }
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 73060a11dc0df8cf8766552f41c04957c4819dca Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Thu, 10 Dec 2015 23:57:06 +0200
+Subject: [PATCH 11/98] Step 1.11: Connect the controller to the Chats view
+
+---
+ client/scripts/routes.js | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/client/scripts/routes.js b/client/scripts/routes.js
+index 6875ef0..71d9479 100644
+--- a/client/scripts/routes.js
++++ b/client/scripts/routes.js
+@@ -13,7 +13,8 @@ function config($stateProvider, $urlRouterProvider) {
+       url: '/chats',
+       views: {
+         'tab-chats': {
+-          templateUrl: 'client/templates/chats.html'
++          templateUrl: 'client/templates/chats.html',
++          controller: 'ChatsCtrl as chats'
+         }
+       }
+     });
+-- 
+2.5.4 (Apple Git-61)
+
+
+From ae3d7fa6589b51ae679f3c3192d16b915c01078c Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 00:00:18 +0200
+Subject: [PATCH 12/98] Step 1.12: Create the chats list with some stub details
+
+---
+ client/templates/chats.html | 13 ++++++++++++-
+ 1 file changed, 12 insertions(+), 1 deletion(-)
+
+diff --git a/client/templates/chats.html b/client/templates/chats.html
+index b1d926f..bf0d40d 100644
+--- a/client/templates/chats.html
++++ b/client/templates/chats.html
+@@ -1,5 +1,16 @@
+ <ion-view view-title="Chats">
+   <ion-content>
+-
++    <ion-list>
++      <ion-item
++              ng-repeat="chat in chats.data | orderBy:'-lastMessage.timestamp'"
++              class="item-chat item-remove-animate item-avatar item-icon-right"
++              type="item-text-wrap">
++        <img ng-src="{{chat.picture}}">
++        <h2>{{chat.name}}</h2>
++        <p>{{chat.lastMessage.text}}</p>
++        <span class="last-message-timestamp">{{chat.lastMessage.timestamp}}</span>
++        <i class="icon ion-chevron-right icon-accessory"></i>
++      </ion-item>
++    </ion-list>
+   </ion-content>
+ </ion-view>
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 442714eda2427c4e7e60421f5c5d41749a0580f8 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 00:04:05 +0200
+Subject: [PATCH 13/98] Step 1.13: Create calendar filter
+
+---
+ client/scripts/filters/calendar.filter.js | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+ create mode 100644 client/scripts/filters/calendar.filter.js
+
+diff --git a/client/scripts/filters/calendar.filter.js b/client/scripts/filters/calendar.filter.js
+new file mode 100644
+index 0000000..645d510
+--- /dev/null
++++ b/client/scripts/filters/calendar.filter.js
+@@ -0,0 +1,16 @@
++angular
++  .module('Whatsapp')
++  .filter('calendar', calendar);
++
++function calendar () {
++  return function (time) {
++    if (!time) return;
++
++    return moment(time).calendar(null, {
++      lastDay : '[Yesterday]',
++      sameDay : 'LT',
++      lastWeek : 'dddd',
++      sameElse : 'DD/MM/YY'
++    });
++  };
++}
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 5eeb35abc7b8bad82a1601073746ce82bb33ffca Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 00:05:08 +0200
+Subject: [PATCH 14/98] Step 1.14: Use calendar filter inside the chats list
+
+---
+ client/templates/chats.html | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/client/templates/chats.html b/client/templates/chats.html
+index bf0d40d..80fe960 100644
+--- a/client/templates/chats.html
++++ b/client/templates/chats.html
+@@ -8,7 +8,7 @@
+         <img ng-src="{{chat.picture}}">
+         <h2>{{chat.name}}</h2>
+         <p>{{chat.lastMessage.text}}</p>
+-        <span class="last-message-timestamp">{{chat.lastMessage.timestamp}}</span>
++        <span class="last-message-timestamp">{{chat.lastMessage.timestamp | calendar}}</span>
+         <i class="icon ion-chevron-right icon-accessory"></i>
+       </ion-item>
+     </ion-list>
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 23fef3e3d00c553befc0d8a54e0f52b09af89246 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 00:06:26 +0200
+Subject: [PATCH 15/98] Step 1.15: Add delete button to the chats list view
+
+---
+ client/templates/chats.html | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/client/templates/chats.html b/client/templates/chats.html
+index 80fe960..976b45c 100644
+--- a/client/templates/chats.html
++++ b/client/templates/chats.html
+@@ -10,6 +10,9 @@
+         <p>{{chat.lastMessage.text}}</p>
+         <span class="last-message-timestamp">{{chat.lastMessage.timestamp | calendar}}</span>
+         <i class="icon ion-chevron-right icon-accessory"></i>
++        <ion-option-button class="button-assertive" ng-click="chats.remove(chat)">
++          Delete
++        </ion-option-button>
+       </ion-item>
+     </ion-list>
+   </ion-content>
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 6c569f11c9eadd72b7c97601b9d3ec1a766c18b2 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 00:07:58 +0200
+Subject: [PATCH 16/98] Step 1.16: Add delete button logic into the controller
+
+---
+ client/scripts/controllers/chats.controller.js | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/client/scripts/controllers/chats.controller.js b/client/scripts/controllers/chats.controller.js
+index d263e4e..cad710b 100644
+--- a/client/scripts/controllers/chats.controller.js
++++ b/client/scripts/controllers/chats.controller.js
+@@ -5,6 +5,8 @@ angular
+ function ChatsCtrl ($scope, $reactive) {
+   $reactive(this).attach($scope);
+ 
++  this.remove = remove;
++
+   this.data = [
+     {
+       _id: 0,
+@@ -52,4 +54,10 @@ function ChatsCtrl ($scope, $reactive) {
+       }
+     }
+   ];
++
++  ////////////
++
++  function remove (chat) {
++    this.data.splice(this.data.indexOf(chat), 1);
++  }
+ }
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 0433295941388d11cf727b5b80012e5bf9378622 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 00:08:48 +0200
+Subject: [PATCH 17/98] Step 1.17: Add SASS package to the project
+
+---
+ .meteor/packages | 1 +
+ .meteor/versions | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/.meteor/packages b/.meteor/packages
+index 8b71ed1..dc2aa28 100644
+--- a/.meteor/packages
++++ b/.meteor/packages
+@@ -19,3 +19,4 @@ insecure                # Allow all DB writes from clients (for prototyping)
+ angular@1.3.0
+ driftyco:ionic
+ momentjs:moment
++fourseven:scss
+diff --git a/.meteor/versions b/.meteor/versions
+index 712ab1c..e70c8cd 100644
+--- a/.meteor/versions
++++ b/.meteor/versions
+@@ -31,6 +31,7 @@ ecmascript-runtime@0.2.6
+ ejson@1.0.7
+ es5-shim@4.1.14
+ fastclick@1.0.7
++fourseven:scss@3.4.1
+ geojson-utils@1.0.4
+ hot-code-push@1.0.0
+ html-tools@1.0.5
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 579c61660a89c42ff51c37e6b39db678d1bc0487 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 00:10:53 +0200
+Subject: [PATCH 18/98] Step 1.18: Create chats.scss file and add some style to
+ the chats list
+
+---
+ client/styles/chats.scss | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+ create mode 100644 client/styles/chats.scss
+
+diff --git a/client/styles/chats.scss b/client/styles/chats.scss
+new file mode 100644
+index 0000000..7c1b8d5
+--- /dev/null
++++ b/client/styles/chats.scss
+@@ -0,0 +1,9 @@
++.item-chat {
++  .last-message-timestamp {
++    position: absolute;
++    top: 16px;
++    right: 38px;
++    font-size: 14px;
++    color: #9A9898;
++  }
++}
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From a42871858d5a786064350b7bf4006c7bfc6fb030 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 00:14:16 +0200
+Subject: [PATCH 19/98] Step 2.1: Add Meteor collections for handling chats and
+ messages
+
+---
+ lib/collections.js | 2 ++
+ 1 file changed, 2 insertions(+)
+ create mode 100644 lib/collections.js
+
+diff --git a/lib/collections.js b/lib/collections.js
+new file mode 100644
+index 0000000..b08a877
+--- /dev/null
++++ b/lib/collections.js
+@@ -0,0 +1,2 @@
++Chats = new Mongo.Collection('chats');
++Messages = new Mongo.Collection('messages');
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From a44697d8eaea3e82001fe57e6cfdebcb7027af1c Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 00:18:47 +0200
+Subject: [PATCH 20/98] Step 2.2: Create the server's bootstrap file
+
+---
+ server/bootstrap.js | 3 +++
+ 1 file changed, 3 insertions(+)
+ create mode 100644 server/bootstrap.js
+
+diff --git a/server/bootstrap.js b/server/bootstrap.js
+new file mode 100644
+index 0000000..4fb6ca4
+--- /dev/null
++++ b/server/bootstrap.js
+@@ -0,0 +1,3 @@
++Meteor.startup(function () {
++
++});
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From e7559731c204b6d8634be0d37f569f01abb06e71 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 00:21:27 +0200
+Subject: [PATCH 21/98] Step 2.3: Add the stub data to the server
+
+---
+ server/bootstrap.js | 59 +++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 59 insertions(+)
+
+diff --git a/server/bootstrap.js b/server/bootstrap.js
+index 4fb6ca4..0a8579f 100644
+--- a/server/bootstrap.js
++++ b/server/bootstrap.js
+@@ -1,3 +1,62 @@
+ Meteor.startup(function () {
++  if (Chats.find().count() !== 0) return;
+ 
++  Messages.remove({});
++   
++  let messages = [
++    {
++      text: 'You on your way?',
++      timestamp: moment().subtract(1, 'hours').toDate()
++    },
++    {
++      text: 'Hey, it\'s me',
++      timestamp: moment().subtract(2, 'hours').toDate()
++    },
++    {
++      text: 'I should buy a boat',
++      timestamp: moment().subtract(1, 'days').toDate()
++    },
++    {
++      text: 'Look at my mukluks!',
++      timestamp: moment().subtract(4, 'days').toDate()
++    },
++    {
++      text: 'This is wicked good ice cream.',
++      timestamp: moment().subtract(2, 'weeks').toDate()
++    }
++  ];
++
++  messages.forEach((m) => {
++    Messages.insert(m);
++  });
++
++  let chats = [
++    {
++      name: 'Ethan Gonzalez',
++      picture: 'https://randomuser.me/api/portraits/thumb/men/1.jpg'
++    },
++    {
++      name: 'Bryan Wallace',
++      picture: 'https://randomuser.me/api/portraits/thumb/lego/1.jpg'
++    },
++    {
++      name: 'Avery Stewart',
++      picture: 'https://randomuser.me/api/portraits/thumb/women/1.jpg'
++    },
++    {
++      name: 'Katie Peterson',
++      picture: 'https://randomuser.me/api/portraits/thumb/women/2.jpg'
++    },
++    {
++      name: 'Ray Edwards',
++      picture: 'https://randomuser.me/api/portraits/thumb/men/2.jpg'
++    }
++  ];
++
++  chats.forEach((chat) => {
++    let message = Messages.findOne({chatId: {$exists: false}});
++    chat.lastMessage = message;
++    let chatId = Chats.insert(chat);
++    Messages.update(message._id, {$set: {chatId: chatId}})
++  });
+ });
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From eb0f1e1fcf3ff5a7931da07ebf996d59bb3e09e0 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 00:30:36 +0200
+Subject: [PATCH 22/98] Step 2.4: Use angular-meteor collection to fetch the
+ data from the server
+
+---
+ client/scripts/controllers/chats.controller.js | 50 +++-----------------------
+ 1 file changed, 4 insertions(+), 46 deletions(-)
+
+diff --git a/client/scripts/controllers/chats.controller.js b/client/scripts/controllers/chats.controller.js
+index cad710b..5ec3b22 100644
+--- a/client/scripts/controllers/chats.controller.js
++++ b/client/scripts/controllers/chats.controller.js
+@@ -7,53 +7,11 @@ function ChatsCtrl ($scope, $reactive) {
+ 
+   this.remove = remove;
+ 
+-  this.data = [
+-    {
+-      _id: 0,
+-      name: 'Ethan Gonzalez',
+-      picture: 'https://randomuser.me/api/portraits/thumb/men/1.jpg',
+-      lastMessage: {
+-        text: 'You on your way?',
+-        timestamp: moment().subtract(1, 'hours').toDate()
+-      }
+-    },
+-    {
+-      _id: 1,
+-      name: 'Bryan Wallace',
+-      picture: 'https://randomuser.me/api/portraits/thumb/lego/1.jpg',
+-      lastMessage: {
+-        text: 'Hey, it\'s me',
+-        timestamp: moment().subtract(2, 'hours').toDate()
+-      }
+-    },
+-    {
+-      _id: 2,
+-      name: 'Avery Stewart',
+-      picture: 'https://randomuser.me/api/portraits/thumb/women/1.jpg',
+-      lastMessage: {
+-        text: 'I should buy a boat',
+-        timestamp: moment().subtract(1, 'days').toDate()
+-      }
+-    },
+-    {
+-      _id: 3,
+-      name: 'Katie Peterson',
+-      picture: 'https://randomuser.me/api/portraits/thumb/women/2.jpg',
+-      lastMessage: {
+-        text: 'Look at my mukluks!',
+-        timestamp: moment().subtract(4, 'days').toDate()
+-      }
+-    },
+-    {
+-      _id: 4,
+-      name: 'Ray Edwards',
+-      picture: 'https://randomuser.me/api/portraits/thumb/men/2.jpg',
+-      lastMessage: {
+-        text: 'This is wicked good ice cream.',
+-        timestamp: moment().subtract(2, 'weeks').toDate()
+-      }
++  this.helpers({
++    data() {
++      return Chats.find();
+     }
+-  ];
++  });
+ 
+   ////////////
+ 
+-- 
+2.5.4 (Apple Git-61)
+
+
+From a8586b7c1796a93c20fe3e343bfc75918c25ee3c Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 00:38:08 +0200
+Subject: [PATCH 23/98] Step 2.5: Update logic of delete chat function to use
+ angular-meteor collection API
+
+---
+ client/scripts/controllers/chats.controller.js | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/client/scripts/controllers/chats.controller.js b/client/scripts/controllers/chats.controller.js
+index 5ec3b22..b4dca9b 100644
+--- a/client/scripts/controllers/chats.controller.js
++++ b/client/scripts/controllers/chats.controller.js
+@@ -16,6 +16,6 @@ function ChatsCtrl ($scope, $reactive) {
+   ////////////
+ 
+   function remove (chat) {
+-    this.data.splice(this.data.indexOf(chat), 1);
++    this.data.remove(chat);
+   }
+ }
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 867f80f4aa95299f00a2f2347803ed4b7ee89d15 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 00:39:38 +0200
+Subject: [PATCH 24/98] Step 3.1: Add state and route for chat view
+
+---
+ client/scripts/routes.js | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff --git a/client/scripts/routes.js b/client/scripts/routes.js
+index 71d9479..3fe0d1b 100644
+--- a/client/scripts/routes.js
++++ b/client/scripts/routes.js
+@@ -17,6 +17,15 @@ function config($stateProvider, $urlRouterProvider) {
+           controller: 'ChatsCtrl as chats'
+         }
+       }
++    })
++    .state('tab.chat', {
++      url: '/chats/:chatId',
++      views: {
++        'tab-chats': {
++          templateUrl: 'client/templates/chat.html',
++          controller: 'ChatCtrl as chat'
++        }
++      }
+     });
+ 
+   $urlRouterProvider.otherwise('tab/chats');
+-- 
+2.5.4 (Apple Git-61)
+
+
+From fc241a744eded6081322ff01aa435cbfeb98c57c Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 00:41:16 +0200
+Subject: [PATCH 25/98] Step 3.2: Add chat basic view with some info
+
+---
+ client/templates/chat.html | 5 +++++
+ 1 file changed, 5 insertions(+)
+ create mode 100644 client/templates/chat.html
+
+diff --git a/client/templates/chat.html b/client/templates/chat.html
+new file mode 100644
+index 0000000..a2c5625
+--- /dev/null
++++ b/client/templates/chat.html
+@@ -0,0 +1,5 @@
++<ion-view title="{{chat.data.name}}">
++  <ion-nav-buttons side="right">
++    <button class="button button-clear"><img class="header-picture" ng-src="{{chat.data.picture}}"></button>
++  </ion-nav-buttons>
++</ion-view>
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From e8738592bf1b401d5be75d467ee6590e90617efb Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 00:45:17 +0200
+Subject: [PATCH 26/98] Step 3.3: Add ChatCtrl
+
+---
+ client/scripts/controllers/chat.controller.js | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+ create mode 100644 client/scripts/controllers/chat.controller.js
+
+diff --git a/client/scripts/controllers/chat.controller.js b/client/scripts/controllers/chat.controller.js
+new file mode 100644
+index 0000000..bb70d00
+--- /dev/null
++++ b/client/scripts/controllers/chat.controller.js
+@@ -0,0 +1,15 @@
++angular
++  .module('Whatsapp')
++  .controller('ChatCtrl', ChatCtrl);
++
++function ChatCtrl ($scope, $reactive, $stateParams) {
++  $reactive(this).attach($scope);
++
++  let chatId = $stateParams.chatId;
++
++  this.helpers({
++    data() {
++      return Chats.findOne(chatId);
++    }
++  });
++}
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 8618d212bdf7e99d550a0909132fefb77341dfd2 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 00:47:02 +0200
+Subject: [PATCH 27/98] Step 3.4: Add link from the chats list view to the chat
+ details view
+
+---
+ client/templates/chats.html | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/client/templates/chats.html b/client/templates/chats.html
+index 976b45c..6ed2537 100644
+--- a/client/templates/chats.html
++++ b/client/templates/chats.html
+@@ -4,7 +4,8 @@
+       <ion-item
+               ng-repeat="chat in chats.data | orderBy:'-lastMessage.timestamp'"
+               class="item-chat item-remove-animate item-avatar item-icon-right"
+-              type="item-text-wrap">
++              type="item-text-wrap"
++              href="#/tab/chats/{{chat._id}}">
+         <img ng-src="{{chat.picture}}">
+         <h2>{{chat.name}}</h2>
+         <p>{{chat.lastMessage.text}}</p>
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 4ed612fb45f086cdd34d6b6e7c3a9a517dee2620 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 00:47:58 +0200
+Subject: [PATCH 28/98] Step 3.5: Add some CSS styles to make the view look
+ better
+
+---
+ client/styles/chat.scss | 7 +++++++
+ 1 file changed, 7 insertions(+)
+ create mode 100644 client/styles/chat.scss
+
+diff --git a/client/styles/chat.scss b/client/styles/chat.scss
+new file mode 100644
+index 0000000..2637ff1
+--- /dev/null
++++ b/client/styles/chat.scss
+@@ -0,0 +1,7 @@
++.header-picture {
++  max-width: 33px;
++  max-height: 33px;
++  width: 100%;
++  height: 100%;
++  border-radius: 50%;
++}
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From e59598fa4b7fe380d444cd296c7e7d86ad850914 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 00:49:21 +0200
+Subject: [PATCH 29/98] Step 3.6: Add the chat messages collection on the
+ ChatCtrl
+
+---
+ client/scripts/controllers/chat.controller.js | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/client/scripts/controllers/chat.controller.js b/client/scripts/controllers/chat.controller.js
+index bb70d00..365f8b4 100644
+--- a/client/scripts/controllers/chat.controller.js
++++ b/client/scripts/controllers/chat.controller.js
+@@ -8,8 +8,11 @@ function ChatCtrl ($scope, $reactive, $stateParams) {
+   let chatId = $stateParams.chatId;
+ 
+   this.helpers({
++    messages() {
++      return Messages.find({ chatId: chatId });
++    },
+     data() {
+       return Chats.findOne(chatId);
+-    }
++    },
+   });
+ }
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 21fae1d035944c45f4dde7c41f6c26e4f09000b2 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 00:51:25 +0200
+Subject: [PATCH 30/98] Step 3.7: Add the view of the chat messages
+
+---
+ client/templates/chat.html | 14 ++++++++++++--
+ 1 file changed, 12 insertions(+), 2 deletions(-)
+
+diff --git a/client/templates/chat.html b/client/templates/chat.html
+index a2c5625..139aeae 100644
+--- a/client/templates/chat.html
++++ b/client/templates/chat.html
+@@ -1,5 +1,15 @@
+-<ion-view title="{{chat.data.name}}">
++<ion-view title="{{ chat.data.name }}">
+   <ion-nav-buttons side="right">
+-    <button class="button button-clear"><img class="header-picture" ng-src="{{chat.data.picture}}"></button>
++    <button class="button button-clear"><img class="header-picture" ng-src="{{ chat.data.picture }}"></button>
+   </ion-nav-buttons>
++  <ion-content class="chat" delegate-handle="chatScroll">
++    <div class="message-list">
++      <div ng-repeat="message in chat.messages" class="message-wrapper">
++        <div class="message" ng-class-even="'message-mine'" ng-class-odd="'message-other'">
++          <div class="message-text">{{ message.text }}</div>
++          <span class="message-timestamp">{{ message.timestamp }}</span>
++        </div>
++      </div>
++    </div>
++  </ion-content>
+ </ion-view>
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From d0bf6434aa9d18d00a3bc5642fee269ee2ee5343 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 00:53:05 +0200
+Subject: [PATCH 31/98] Step 3.8: Add CSS rules to the chat view
+
+---
+ client/styles/chat.scss | 79 +++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 79 insertions(+)
+
+diff --git a/client/styles/chat.scss b/client/styles/chat.scss
+index 2637ff1..aefef95 100644
+--- a/client/styles/chat.scss
++++ b/client/styles/chat.scss
+@@ -4,4 +4,83 @@
+   width: 100%;
+   height: 100%;
+   border-radius: 50%;
++}
++
++.chat {
++  background-image: url(/chat-background.jpg);
++  background-color: #E0DAD6;
++  background-repeat: no-repeat;
++  background-size: 100%;
++}
++
++.message-list {
++  margin-top: 12px;
++  padding: 0 5%;
++}
++
++.message-wrapper {
++  margin-bottom: 9px;
++
++  &::after {
++    content: "";
++    display: table;
++    clear: both;
++  }
++}
++
++.message {
++  display: inline-block;
++  position: relative;
++  max-width: 236px;
++  border-radius: 7px;
++  box-shadow: 0 1px 2px rgba(0, 0, 0, .15);
++
++  &.message-mine {
++    float: right;
++    background-color: #DCF8C6;
++  }
++
++  &.message-other {
++    float: left;
++    background-color: #FFF;
++  }
++
++  &.message-other::before, &.message-mine::before, {
++    content: "";
++    position: absolute;
++    bottom: 3px;
++    width: 12px;
++    height: 19px;
++    background-position: 50% 50%;
++    background-repeat: no-repeat;
++    background-size: contain;
++  }
++
++  &.message-other::before {
++    left: -11px;
++    background-image: url(/message-other.png)
++  }
++
++  &.message-mine::before {
++    right: -11px;
++    background-image: url(/message-mine.png)
++  }
++
++  .message-text {
++    padding: 5px 7px;
++    word-wrap: break-word;
++
++    &::after {
++      content: " \00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0\00a0";
++      display: inline;
++    }
++  }
++
++  .message-timestamp {
++    position: absolute;
++    bottom: 2px;
++    right: 7px;
++    color: gray;
++    font-size: 12px;
++  }
+ }
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 1e19d9f8164d216be10cf31e01f1e6f156fa9335 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 00:54:15 +0200
+Subject: [PATCH 32/98] Step 3.9: Add image to get WhatsApp look and feel
+
+---
+ public/chat-background.jpg | Bin 0 -> 29275 bytes
+ public/message-mine.png    | Bin 0 -> 564 bytes
+ public/message-other.png   | Bin 0 -> 500 bytes
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 public/chat-background.jpg
+ create mode 100644 public/message-mine.png
+ create mode 100644 public/message-other.png
+
+diff --git a/public/chat-background.jpg b/public/chat-background.jpg
+new file mode 100644
+index 0000000000000000000000000000000000000000..12cf45ccbab1e100d50efcd26272036456dc90fe
+GIT binary patch
+literal 29275
+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
+
+literal 0
+HcmV?d00001
+
+diff --git a/public/message-mine.png b/public/message-mine.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..a5503eb98d97eaef8d3d24fc6fcc43e6c52d4aff
+GIT binary patch
+literal 564
+zcmV-40?Yl0P)<h;3K|Lk000e1NJLTq000;O001Tk1^@s6-UnMH0005|Nkl<ZcmciD
+zPe{{Y9LMqZwzM=e45aBH2s}u18P&yOMMsaFIx0kTi>T<ZLj*x5E9j7@wM#S_(I2Ym
+zHq%^gK3n0$_D?4?ESVddL`2x1pCI3Z$k6sYe&Ka}-hB8?WPT<7H(ORKKno^rM*?$Y
+z_0wozO-F~b)q-vk=(%|Aum#;DaJsvz9k8MIc5uPXzH3K}F7Un`I%702Hv94d;4l_Y
+zx!@h3&R8H>m{dT6vA|p<zUsbp<&XuPB(Nql^P(59>tC>Lb}1YH>Wu~FDzV>QfB$j7
+zraK@KU&p<`E&~Bs@h703o|F|D10r3FrusbYW(&327!ZkX6GMRA!~!v$A9G7Yb3h~(
+z-(Q!A=79LTH2GjKG`PpYHf<#!A3pXeKk5Q(+82mQ{8zddxvLi5wOQDLZ3RTO9Q%=4
+zj^0l!PMnZMIu>jmQ#0w3x;m_e_gmPg)_};Aq7lHMdx6MS)OVoSNFY<1`tmCLxCdy`
+z7RZ!TQRPAppZNQ`ola*fuotk`6i5{!xvBY)0pF<SZ0E7gHeer6U-d7&%1?1MS@@7r
+zx!|LbnD4y%_NAl10ibEKN2>;=^W(4M3&DYK^34su^7VS2-#g{%a<v03@*p_=>wiRY
+zIg$Ym0u8`!piUmsae<G|E(492y7iCcz~D7v@csc+7*{a0)2RCZ0000<MNUMnLSTY$
+Cwg*`N
+
+literal 0
+HcmV?d00001
+
+diff --git a/public/message-other.png b/public/message-other.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..a9477becb1931badfe6fdf6e409f9cc60dbae35d
+GIT binary patch
+literal 500
+zcmV<Q0So?#P)<h;3K|Lk000e1NJLTq000;O001Tk1^@s6-UnMH0000PbVXQnQ*UN;
+zcVTj606}DLVr3vnZDD6+Qe|Oed2z{QJOBUzmPtfGRCwC7m%mEGP!xxIV@Whx&?STT
+zXAlH+EDk<^E|ST)kU?<B>gp!=2o4T{3T_#E2p>R*!7kcC9HroprfH79Kq4{5rcLho
+z;E)h<?{|}PbMJ{DqDG1kq9F@PI#wFYum~`Cja2}2Zb6G%FyI#O<{$`yc~*g<C~Mq;
+zP3|0QXFrOckVO<l&y*ltfPPjegY;K~(I4iGQl9{V$LteG6`+q@${|&N(Lb;W(Efl5
+zkRm|a7UGpffOZ0LPyZl8a6x0JB|w{VDxs19_s$}2Xac4dBy;_VCS+nkvc_B@LYjh7
+z0j}?jMx!eneX2mA0Ow2S^bALjY9fkCM_hA%Z5lQBBS@;UFGQ22bcAH!`~EQ&t`Au|
+zP*IYFX_~s{d1k-gze7GgtLC6=7R5<vT9&og?RJkKyAH$fP3knw%Mf#p<81YMy%Pv;
+zQDnW0`!+<4ACNeIGqJSO>9lOy-Z2bgL)Z0nP1BZDRb9pTzRVp>q(X$+Znt&h?wzGB
+qN*NA^r>p|kbr%HJPhiTo00RK`eVB$<^o=V30000<MNUMnLSTZ-*wiHe
+
+literal 0
+HcmV?d00001
+
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 472e5010bef127f20157930ef87673a9af841e4b Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 00:55:11 +0200
+Subject: [PATCH 33/98] Step 3.10: Add angular-moment package
+
+---
+ .meteor/packages | 1 +
+ .meteor/versions | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/.meteor/packages b/.meteor/packages
+index dc2aa28..13b9b9b 100644
+--- a/.meteor/packages
++++ b/.meteor/packages
+@@ -20,3 +20,4 @@ angular@1.3.0
+ driftyco:ionic
+ momentjs:moment
+ fourseven:scss
++jasonaibrahim:angular-moment
+diff --git a/.meteor/versions b/.meteor/versions
+index e70c8cd..4452946 100644
+--- a/.meteor/versions
++++ b/.meteor/versions
+@@ -39,6 +39,7 @@ htmljs@1.0.5
+ http@1.1.1
+ id-map@1.0.4
+ insecure@1.0.4
++jasonaibrahim:angular-moment@0.10.2
+ jquery@1.11.4
+ lai:collection-extensions@0.1.4
+ launch-screen@1.0.4
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 05b13b839a7926d2a05c6fdf614c2313edbe6768 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 00:56:17 +0200
+Subject: [PATCH 34/98] Step 3.11: Add angularMoment dependency
+
+---
+ client/scripts/lib/app.js | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/client/scripts/lib/app.js b/client/scripts/lib/app.js
+index 5bd91a1..6f9364d 100644
+--- a/client/scripts/lib/app.js
++++ b/client/scripts/lib/app.js
+@@ -1,7 +1,8 @@
+ angular
+   .module('Whatsapp', [
+     'angular-meteor',
+-    'ionic'
++    'ionic',
++    'angularMoment'
+   ]);
+ 
+ if (Meteor.isCordova) {
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 76ac0d017bf250af2a258939fe293e9dc71a054d Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 00:57:05 +0200
+Subject: [PATCH 35/98] Step 3.12: Add usage of angular-moment filter to the
+ chat details view
+
+---
+ client/templates/chat.html | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/client/templates/chat.html b/client/templates/chat.html
+index 139aeae..f35bd17 100644
+--- a/client/templates/chat.html
++++ b/client/templates/chat.html
+@@ -7,7 +7,7 @@
+       <div ng-repeat="message in chat.messages" class="message-wrapper">
+         <div class="message" ng-class-even="'message-mine'" ng-class-odd="'message-other'">
+           <div class="message-text">{{ message.text }}</div>
+-          <span class="message-timestamp">{{ message.timestamp }}</span>
++          <span class="message-timestamp">{{ message.timestamp | amDateFormat: 'HH:MM' }}</span>
+         </div>
+       </div>
+     </div>
+-- 
+2.5.4 (Apple Git-61)
+
+
+From f745197c6933cb04ee3e13c64a8f3e07883d9694 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 00:59:51 +0200
+Subject: [PATCH 36/98] Step 3.13: Add send new message view and input
+
+---
+ client/templates/chat.html | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
+
+diff --git a/client/templates/chat.html b/client/templates/chat.html
+index f35bd17..f344481 100644
+--- a/client/templates/chat.html
++++ b/client/templates/chat.html
+@@ -12,4 +12,23 @@
+       </div>
+     </div>
+   </ion-content>
++  <ion-footer-bar keyboard-attach class="bar-stable footer-chat item-input-inset">
++    <button class="button button-clear button-icon button-positive icon ion-ios-upload-outline"></button>
++
++    <label class="item-input-wrapper">
++      <input
++              ng-model="chat.message"
++              dir="auto"
++              type="text"/>
++    </label>
++
++    <span ng-if="chat.message.length > 0">
++      <button ng-click="chat.sendMessage()" class="button button-clear button-positive">Send</button>
++    </span>
++    <span ng-if="!chat.message || chat.message.length === 0">
++      <button class="button button-clear button-icon button-positive icon ion-ios-camera-outline"></button>
++      <i class="buttons-seperator icon ion-android-more-vertical"></i>
++      <button class="button button-clear button-icon button-positive icon ion-ios-mic-outline"></button>
++    </span>
++  </ion-footer-bar>
+ </ion-view>
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From aaa3fb34a53ce8077a877bb1269428c7b8462f99 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 01:02:36 +0200
+Subject: [PATCH 37/98] Step 3.14: Add logic to the controller
+
+---
+ client/scripts/controllers/chat.controller.js | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/client/scripts/controllers/chat.controller.js b/client/scripts/controllers/chat.controller.js
+index 365f8b4..132289e 100644
+--- a/client/scripts/controllers/chat.controller.js
++++ b/client/scripts/controllers/chat.controller.js
+@@ -6,6 +6,7 @@ function ChatCtrl ($scope, $reactive, $stateParams) {
+   $reactive(this).attach($scope);
+ 
+   let chatId = $stateParams.chatId;
++  this.sendMessage = sendMessage;
+ 
+   this.helpers({
+     messages() {
+@@ -15,4 +16,10 @@ function ChatCtrl ($scope, $reactive, $stateParams) {
+       return Chats.findOne(chatId);
+     },
+   });
++
++  ////////////
++
++  function sendMessage () {
++    // TODO: implement
++  }
+ }
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 04376c9a73e081909f47070757afc3b6bed2f2bb Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 01:14:43 +0200
+Subject: [PATCH 38/98] Step 3.15: Add the input directive to get move events
+ and better mobile experience
+
+---
+ client/scripts/directives/input.directive.js | 53 ++++++++++++++++++++++++++++
+ 1 file changed, 53 insertions(+)
+ create mode 100644 client/scripts/directives/input.directive.js
+
+diff --git a/client/scripts/directives/input.directive.js b/client/scripts/directives/input.directive.js
+new file mode 100644
+index 0000000..aeb7f2f
+--- /dev/null
++++ b/client/scripts/directives/input.directive.js
+@@ -0,0 +1,53 @@
++angular
++  .module('Whatsapp')
++  .directive('input', input);
++
++// The directive enable sending message when tapping return
++// and expose the focus and blur events to adjust the view
++// when the keyboard opens and closes
++function input ($timeout) {
++  return {
++    restrict: 'E',
++    scope: {
++      'returnClose': '=',
++      'onReturn': '&',
++      'onFocus': '&',
++      'onBlur': '&'
++    },
++    link: link
++  };
++
++  ////////////
++
++  function link (scope, element, attrs) {
++    element.bind('focus', function (e) {
++      if (!scope.onFocus) return;
++
++      $timeout(function () {
++        scope.onFocus();
++      });
++    });
++
++    element.bind('blur', function (e) {
++      if (!scope.onBlur) return;
++
++      $timeout(function () {
++        scope.onBlur();
++      });
++    });
++
++    element.bind('keydown', function (e) {
++      if (e.which != 13) return;
++
++      if (scope.returnClose) {
++        element[0].blur();
++      }
++
++      if (scope.onReturn) {
++        $timeout(function () {
++          scope.onReturn();
++        });
++      }
++    });
++  }
++}
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 436fe52a2d04a33655d59ecca773ecccd2c2202f Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 01:36:27 +0200
+Subject: [PATCH 39/98] Step 3.16: Add usage of input directive events to the
+ view
+
+---
+ client/templates/chat.html | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/client/templates/chat.html b/client/templates/chat.html
+index f344481..2185326 100644
+--- a/client/templates/chat.html
++++ b/client/templates/chat.html
+@@ -19,7 +19,10 @@
+       <input
+               ng-model="chat.message"
+               dir="auto"
+-              type="text"/>
++              type="text"
++              on-return="chat.sendMessage(); chat.closeKeyboard()"
++              on-focus="chat.inputUp()"
++              on-blur="chat.inputDown()"/>
+     </label>
+ 
+     <span ng-if="chat.message.length > 0">
+-- 
+2.5.4 (Apple Git-61)
+
+
+From deecbe864f11edb180f1dcbb4716e12ab1ea340a Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 01:39:04 +0200
+Subject: [PATCH 40/98] Step 3.17: Add logic in the ChatCtrl for better
+ experience
+
+---
+ client/scripts/controllers/chat.controller.js | 29 ++++++++++++++++++++++++++-
+ 1 file changed, 28 insertions(+), 1 deletion(-)
+
+diff --git a/client/scripts/controllers/chat.controller.js b/client/scripts/controllers/chat.controller.js
+index 132289e..97246f0 100644
+--- a/client/scripts/controllers/chat.controller.js
++++ b/client/scripts/controllers/chat.controller.js
+@@ -2,11 +2,16 @@ angular
+   .module('Whatsapp')
+   .controller('ChatCtrl', ChatCtrl);
+ 
+-function ChatCtrl ($scope, $reactive, $stateParams) {
++function ChatCtrl ($scope, $reactive, $stateParams, $ionicScrollDelegate, $timeout) {
+   $reactive(this).attach($scope);
+ 
+   let chatId = $stateParams.chatId;
++  let isIOS = ionic.Platform.isWebView() && ionic.Platform.isIOS();
++
+   this.sendMessage = sendMessage;
++  this.inputUp = inputUp;
++  this.inputDown = inputDown;
++  this.closeKeyboard = closeKeyboard;
+ 
+   this.helpers({
+     messages() {
+@@ -22,4 +27,26 @@ function ChatCtrl ($scope, $reactive, $stateParams) {
+   function sendMessage () {
+     // TODO: implement
+   }
++
++  function inputUp () {
++    if (isIOS) {
++      this.keyboardHeight = 216;
++    }
++
++    $timeout(function() {
++      $ionicScrollDelegate.$getByHandle('chatScroll').scrollBottom(true);
++    }, 300);
++  }
++
++  function inputDown () {
++    if (isIOS) {
++      this.keyboardHeight = 0;
++    }
++
++    $ionicScrollDelegate.$getByHandle('chatScroll').resize();
++  }
++
++  function closeKeyboard () {
++    // cordova.plugins.Keyboard.close();
++  }
+ }
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From b6d7b85a290554ea646cd07db421e32bf31d6087 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 01:42:00 +0200
+Subject: [PATCH 41/98] Step 3.18: Add CSS rules to make the footer look better
+
+---
+ client/styles/chat.scss | 16 ++++++++++++++++
+ 1 file changed, 16 insertions(+)
+
+diff --git a/client/styles/chat.scss b/client/styles/chat.scss
+index aefef95..8d1226a 100644
+--- a/client/styles/chat.scss
++++ b/client/styles/chat.scss
+@@ -83,4 +83,20 @@
+     color: gray;
+     font-size: 12px;
+   }
++}
++
++.footer-chat {
++  .item-input-wrapper {
++    background-color: #FFF;
++  }
++
++  .button.button-icon {
++    margin: 0 10px;
++  }
++
++  .buttons-seperator {
++    color: gray;
++    font-size: 18px;
++    line-height: 32px;
++  }
+ }
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 9d745c306166b8bc690a07995d1c4db4e5a0908d Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 01:43:13 +0200
+Subject: [PATCH 42/98] Step 3.19: Add client logic for sending messages
+
+---
+ client/scripts/controllers/chat.controller.js | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
+
+diff --git a/client/scripts/controllers/chat.controller.js b/client/scripts/controllers/chat.controller.js
+index 97246f0..7bcc5ba 100644
+--- a/client/scripts/controllers/chat.controller.js
++++ b/client/scripts/controllers/chat.controller.js
+@@ -25,7 +25,15 @@ function ChatCtrl ($scope, $reactive, $stateParams, $ionicScrollDelegate, $timeo
+   ////////////
+ 
+   function sendMessage () {
+-    // TODO: implement
++    if (_.isEmpty(this.message)) return;
++
++    Meteor.call('newMessage', {
++      text: this.message,
++      type: 'text',
++      chatId: chatId
++    });
++
++    delete this.message;
+   }
+ 
+   function inputUp () {
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 38f578c1d1f965ae9ac535a26ab72090c27a1021 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 01:45:02 +0200
+Subject: [PATCH 43/98] Step 3.20: Add sendMessage method to the server
+
+---
+ lib/methods.js | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+ create mode 100644 lib/methods.js
+
+diff --git a/lib/methods.js b/lib/methods.js
+new file mode 100644
+index 0000000..b2b0064
+--- /dev/null
++++ b/lib/methods.js
+@@ -0,0 +1,10 @@
++Meteor.methods({
++  newMessage (message) {
++    message.timestamp = new Date();
++
++    let messageId = Messages.insert(message);
++    Chats.update(message.chatId, { $set: { lastMessage: message } });
++
++    return messageId;
++  }
++});
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 755636de2c9db8fcb6d7ab17c20393192cd8f659 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 15:24:22 +0200
+Subject: [PATCH 44/98] Step 3.21: Add check package to the project
+
+---
+ .meteor/packages | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/.meteor/packages b/.meteor/packages
+index 13b9b9b..6507abe 100644
+--- a/.meteor/packages
++++ b/.meteor/packages
+@@ -21,3 +21,4 @@ driftyco:ionic
+ momentjs:moment
+ fourseven:scss
+ jasonaibrahim:angular-moment
++check
+-- 
+2.5.4 (Apple Git-61)
+
+
+From e5ceeec2a4bfb83aef2e1bc320b8241edcc9afc2 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 15:25:04 +0200
+Subject: [PATCH 45/98] Step 3.22: Add usage of check package to the newMessage
+ method
+
+---
+ lib/methods.js | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/lib/methods.js b/lib/methods.js
+index b2b0064..cbec6d9 100644
+--- a/lib/methods.js
++++ b/lib/methods.js
+@@ -1,5 +1,10 @@
+ Meteor.methods({
+   newMessage (message) {
++    check(message, {
++      text: String,
++      chatId: String
++    });
++
+     message.timestamp = new Date();
+ 
+     let messageId = Messages.insert(message);
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 781ead3970b235341a524f6c929d5c06dc5bc64b Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 01:45:57 +0200
+Subject: [PATCH 46/98] Step 4.1: Add Meteor's Accounts to the project
+
+---
+ .meteor/packages |  1 +
+ .meteor/versions | 10 ++++++++++
+ 2 files changed, 11 insertions(+)
+
+diff --git a/.meteor/packages b/.meteor/packages
+index 6507abe..1ca9b1e 100644
+--- a/.meteor/packages
++++ b/.meteor/packages
+@@ -22,3 +22,4 @@ momentjs:moment
+ fourseven:scss
+ jasonaibrahim:angular-moment
+ check
++okland:accounts-phone
+diff --git a/.meteor/versions b/.meteor/versions
+index 4452946..fbd5c3a 100644
+--- a/.meteor/versions
++++ b/.meteor/versions
+@@ -1,3 +1,4 @@
++accounts-base@1.2.2
+ angular@1.3.0
+ angular-meteor-data@0.0.7
+ angular-templates@0.0.2
+@@ -22,6 +23,7 @@ dburles:mongo-collection-instances@0.3.4
+ ddp@1.2.2
+ ddp-client@1.2.1
+ ddp-common@1.2.2
++ddp-rate-limiter@1.0.0
+ ddp-server@1.2.2
+ deps@1.0.9
+ diff-sequence@1.0.1
+@@ -29,6 +31,7 @@ driftyco:ionic@1.1.0_2
+ ecmascript@0.1.6
+ ecmascript-runtime@0.2.6
+ ejson@1.0.7
++email@1.0.8
+ es5-shim@4.1.14
+ fastclick@1.0.7
+ fourseven:scss@3.4.1
+@@ -44,6 +47,7 @@ jquery@1.11.4
+ lai:collection-extensions@0.1.4
+ launch-screen@1.0.4
+ livedata@1.0.15
++localstorage@1.0.5
+ logging@1.0.8
+ meteor@1.1.10
+ meteor-base@1.0.1
+@@ -54,20 +58,26 @@ mobile-status-bar@1.0.6
+ momentjs:moment@2.10.6
+ mongo@1.1.3
+ mongo-id@1.0.1
++npm-bcrypt@0.7.8_2
+ npm-mongo@1.4.39_1
+ observe-sequence@1.0.7
++okland:accounts-phone@0.0.21
+ ordered-dict@1.0.4
+ pbastowski:angular-babel@1.0.7
+ promise@0.5.1
+ random@1.0.5
++rate-limit@1.0.0
+ reactive-dict@1.1.3
+ reactive-var@1.0.6
+ reload@1.1.4
+ retry@1.0.4
+ routepolicy@1.0.6
++service-configuration@1.0.5
+ session@1.1.1
++sha@1.0.4
+ spacebars@1.0.7
+ spacebars-compiler@1.0.7
++srp@1.0.4
+ standard-minifiers@1.0.2
+ templating-tools@1.0.0
+ tracker@1.0.9
+-- 
+2.5.4 (Apple Git-61)
+
+
+From c93c626cb905ae3c41132ec4bc72e65734c56474 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 01:46:42 +0200
+Subject: [PATCH 47/98] Step 4.2: Add SMS configuration for Accounts-Phone
+ package
+
+---
+ server/sms.js | 4 ++++
+ 1 file changed, 4 insertions(+)
+ create mode 100644 server/sms.js
+
+diff --git a/server/sms.js b/server/sms.js
+new file mode 100644
+index 0000000..db3cf5d
+--- /dev/null
++++ b/server/sms.js
+@@ -0,0 +1,4 @@
++if (Meteor.settings && Meteor.settings.ACCOUNTS_PHONE) {
++  Accounts._options.adminPhoneNumbers = Meteor.settings.ACCOUNTS_PHONE.ADMIN_NUMBERS;
++  Accounts._options.phoneVerificationMasterCode = Meteor.settings.ACCOUNTS_PHONE.MASTER_CODE;
++}
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 36d1681a1e39f740d2c2e90e327c9e82c5de9a98 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 01:54:09 +0200
+Subject: [PATCH 48/98] Step 4.3: Create states and routes for the
+ authentication flow
+
+---
+ client/scripts/routes.js | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+
+diff --git a/client/scripts/routes.js b/client/scripts/routes.js
+index 3fe0d1b..54dc648 100644
+--- a/client/scripts/routes.js
++++ b/client/scripts/routes.js
+@@ -26,6 +26,21 @@ function config($stateProvider, $urlRouterProvider) {
+           controller: 'ChatCtrl as chat'
+         }
+       }
++    })
++    .state('login', {
++      url: '/login',
++      templateUrl: 'client/templates/login.html',
++      controller: 'LoginCtrl as logger'
++    })
++    .state('confirmation', {
++      url: '/confirmation/:phone',
++      templateUrl: 'client/templates/confirmation.html',
++      controller: 'ConfirmationCtrl as confirmation'
++    })
++    .state('profile', {
++      url: '/profile',
++      templateUrl: 'client/templates/profile.html',
++      controller: 'ProfileCtrl as profile'
+     });
+ 
+   $urlRouterProvider.otherwise('tab/chats');
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 0e0c5371f761c2afd618717851853371e06643b7 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 01:55:14 +0200
+Subject: [PATCH 49/98] Step 4.4: Create the login view
+
+---
+ client/templates/login.html | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+ create mode 100644 client/templates/login.html
+
+diff --git a/client/templates/login.html b/client/templates/login.html
+new file mode 100644
+index 0000000..c9758d0
+--- /dev/null
++++ b/client/templates/login.html
+@@ -0,0 +1,15 @@
++<ion-view title="Your phone number">
++  <ion-nav-buttons side="right">
++    <button ng-click="logger.login()" ng-disabled="!logger.phone || logger.phone.length === 0" class="button button-clear button-positive">Done</button>
++  </ion-nav-buttons>
++  <ion-content class="login">
++    <div class="text-center instructions">
++      Please confirm your country code and enter your phone number
++    </div>
++    <div class="list">
++      <label class="item item-input">
++        <input ng-model="logger.phone" on-return="logger.login()" type="text" placeholder="Your phone number">
++      </label>
++    </div>
++  </ion-content>
++</ion-view>
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From f5c075f9f8f9a05b7cf27d35198eefa4dcfb6740 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 02:01:13 +0200
+Subject: [PATCH 50/98] Step 4.5: Add the login controller with Accounts API
+ usages and
+
+---
+ client/scripts/controllers/login.controller.js | 53 ++++++++++++++++++++++++++
+ 1 file changed, 53 insertions(+)
+ create mode 100644 client/scripts/controllers/login.controller.js
+
+diff --git a/client/scripts/controllers/login.controller.js b/client/scripts/controllers/login.controller.js
+new file mode 100644
+index 0000000..205c8e4
+--- /dev/null
++++ b/client/scripts/controllers/login.controller.js
+@@ -0,0 +1,53 @@
++angular
++  .module('Whatsapp')
++  .controller('LoginCtrl', LoginCtrl);
++
++function LoginCtrl($scope, $reactive, $state, $ionicLoading, $ionicPopup, $log) {
++  $reactive(this).attach($scope);
++
++  this.login = login;
++
++  ////////////
++
++  function login() {
++    if (_.isEmpty(this.phone)) return;
++
++    let confirmPopup = $ionicPopup.confirm({
++      title: 'Number confirmation',
++      template: '<div>' + this.phone + '</div><div>Is your phone number above correct?</div>',
++      cssClass: 'text-center',
++      okText: 'Yes',
++      okType: 'button-positive button-clear',
++      cancelText: 'edit',
++      cancelType: 'button-dark button-clear'
++    });
++
++    confirmPopup.then((res) => {
++      if (!res) return;
++
++      $ionicLoading.show({
++        template: 'Sending verification code...'
++      });
++
++      Accounts.requestPhoneVerification(this.phone, (err) => {
++        $ionicLoading.hide();
++
++        if (err) {
++          return handleError(err);
++        }
++
++        $state.go('confirmation', {phone: this.phone});
++      });
++    });
++  }
++
++  function handleError(err) {
++    $log.error('Login error ', err);
++
++    $ionicPopup.alert({
++      title: err.reason || 'Login failed',
++      template: 'Please try again',
++      okType: 'button-positive button-clear'
++    });
++  }
++}
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From c1791839c42f41689ad3e475bffd900f0c22be7d Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 15:07:14 +0200
+Subject: [PATCH 51/98] Step 4.6: Add a requirement for user to be logged in
+
+---
+ client/scripts/routes.js | 23 +++++++++++++++++++++--
+ 1 file changed, 21 insertions(+), 2 deletions(-)
+
+diff --git a/client/scripts/routes.js b/client/scripts/routes.js
+index 54dc648..9f070ea 100644
+--- a/client/scripts/routes.js
++++ b/client/scripts/routes.js
+@@ -7,7 +7,10 @@ function config($stateProvider, $urlRouterProvider) {
+     .state('tab', {
+       url: '/tab',
+       abstract: true,
+-      templateUrl: 'client/templates/tabs.html'
++      templateUrl: 'client/templates/tabs.html',
++      resolve: {
++        user: isAuthorized
++      }
+     })
+     .state('tab.chats', {
+       url: '/chats',
+@@ -40,8 +43,24 @@ function config($stateProvider, $urlRouterProvider) {
+     .state('profile', {
+       url: '/profile',
+       templateUrl: 'client/templates/profile.html',
+-      controller: 'ProfileCtrl as profile'
++      controller: 'ProfileCtrl as profile',
++      resolve: {
++        user: isAuthorized
++      }
+     });
+ 
+   $urlRouterProvider.otherwise('tab/chats');
++
++  ////////////
++
++  function isAuthorized($q) {
++    let deferred = $q.defer();
++
++    if (_.isEmpty(Meteor.user()))
++      deferred.reject('AUTH_REQUIRED');
++    else
++      deferred.resolve();
++
++    return deferred.promise;
++  }
+ }
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From bd434959cd1c496d85e8724dd47404bdfcbc62ee Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 15:08:29 +0200
+Subject: [PATCH 52/98] Step 4.7: Add to transition to the login view in case
+ the user is not logged in
+
+---
+ client/scripts/auth.js | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+ create mode 100644 client/scripts/auth.js
+
+diff --git a/client/scripts/auth.js b/client/scripts/auth.js
+new file mode 100644
+index 0000000..9bb4205
+--- /dev/null
++++ b/client/scripts/auth.js
+@@ -0,0 +1,13 @@
++angular
++  .module('Whatsapp')
++  .run(run);
++
++function run($rootScope, $state) {
++  $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
++    // We can catch the error thrown when the $requireUser promise is rejected
++    // and redirect the user back to the main page
++    if (error === 'AUTH_REQUIRED') {
++      $state.go('login');
++    }
++  });
++}
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 152f67b6dd08f58737cab0fd4003c4d250932585 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 15:09:31 +0200
+Subject: [PATCH 53/98] Step 4.8: Add some CSS for better login view
+
+---
+ client/styles/login.scss | 6 ++++++
+ 1 file changed, 6 insertions(+)
+ create mode 100644 client/styles/login.scss
+
+diff --git a/client/styles/login.scss b/client/styles/login.scss
+new file mode 100644
+index 0000000..a6c2a96
+--- /dev/null
++++ b/client/styles/login.scss
+@@ -0,0 +1,6 @@
++.login {
++  .instructions {
++    margin: 50px 0;
++    padding: 0 15px;
++  }
++}
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From c86d41a2b1e9f93f214fd178945a3605930f047f Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 15:11:08 +0200
+Subject: [PATCH 54/98] Step 4.9: Add the account confirmation view
+
+---
+ client/templates/confirmation.html | 20 ++++++++++++++++++++
+ 1 file changed, 20 insertions(+)
+ create mode 100644 client/templates/confirmation.html
+
+diff --git a/client/templates/confirmation.html b/client/templates/confirmation.html
+new file mode 100644
+index 0000000..aca3c67
+--- /dev/null
++++ b/client/templates/confirmation.html
+@@ -0,0 +1,20 @@
++<ion-view title="{{confirmation.phone}}">
++  <ion-nav-buttons side="right">
++    <button ng-click="confirmation.confirm()" ng-disabled="!confirmation.code || confirmation.code.length === 0" class="button button-clear button-positive">Done</button>
++  </ion-nav-buttons>
++
++  <ion-content>
++    <div class="text-center padding">
++      We have sent you an SMS with a code to the number above
++    </div>
++    <div class="text-center padding">
++      To complete your phone number verification WhatsApp, please enter the 4-digit activation code.
++    </div>
++
++    <div class="list padding-top">
++      <label class="item item-input">
++        <input ng-model="confirmation.code" on-return="confirmation.confirm()" type="text" placeholder="Code">
++      </label>
++    </div>
++  </ion-content>
++</ion-view>
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 768098a801e371e31a99c756b53dae96393ba855 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 15:12:57 +0200
+Subject: [PATCH 55/98] Step 4.10: Add the user confirmation controller
+
+---
+ .../scripts/controllers/confirmation.controller.js | 31 ++++++++++++++++++++++
+ 1 file changed, 31 insertions(+)
+ create mode 100644 client/scripts/controllers/confirmation.controller.js
+
+diff --git a/client/scripts/controllers/confirmation.controller.js b/client/scripts/controllers/confirmation.controller.js
+new file mode 100644
+index 0000000..9f35a43
+--- /dev/null
++++ b/client/scripts/controllers/confirmation.controller.js
+@@ -0,0 +1,31 @@
++angular
++  .module('Whatsapp')
++  .controller('ConfirmationCtrl', ConfirmationCtrl);
++
++function ConfirmationCtrl($scope, $reactive, $state, $ionicPopup, $log) {
++  $reactive(this).attach($scope);
++
++  this.phone = $state.params.phone;
++  this.confirm = confirm;
++
++  ////////////
++
++  function confirm() {
++    if (_.isEmpty(this.code)) return;
++
++    Accounts.verifyPhone(this.phone, this.code, function (err) {
++      if (err) return handleError(err);
++      $state.go('profile');
++    });
++  }
++
++  function handleError(err) {
++    $log.error('Verfication error ', err);
++
++    $ionicPopup.alert({
++      title: err.reason || 'Verfication failed',
++      template: 'Please try again',
++      okType: 'button-positive button-clear'
++    });
++  }
++}
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From e687c3b27fc002001c6c9cf58d62c46b0f2a2baf Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 15:17:59 +0200
+Subject: [PATCH 56/98] Step 4.11: Add the profile settings view
+
+---
+ client/templates/profile.html | 23 +++++++++++++++++++++++
+ 1 file changed, 23 insertions(+)
+ create mode 100644 client/templates/profile.html
+
+diff --git a/client/templates/profile.html b/client/templates/profile.html
+new file mode 100644
+index 0000000..c18fe20
+--- /dev/null
++++ b/client/templates/profile.html
+@@ -0,0 +1,23 @@
++<ion-view title="Profile">
++  <ion-nav-buttons side="right">
++    <button ng-click="profile.updateName()" ng-disabled="!profile.name || profile.name.length === 0" class="button button-clear button-positive">Done</button>
++  </ion-nav-buttons>
++
++  <ion-content class="profile">
++    <a class="profile-picture positive">
++      <div class="upload-placehoder">
++        Add photo
++      </div>
++    </a>
++
++    <div class="instructions">
++      Enter your name and add an optional profile picture
++    </div>
++
++    <div class="list profile-name">
++      <label class="item item-input">
++        <input ng-model="profile.name" on-return="profile.updateName()" type="text" placeholder="Your name">
++      </label>
++    </div>
++  </ion-content>
++</ion-view>
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From cc7fa62607e9e161e1e52d0b80d47baeb43eafd6 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 15:16:23 +0200
+Subject: [PATCH 57/98] Step 4.12: Add profile settings controller
+
+---
+ client/scripts/controllers/profile.controller.js | 34 ++++++++++++++++++++++++
+ 1 file changed, 34 insertions(+)
+ create mode 100644 client/scripts/controllers/profile.controller.js
+
+diff --git a/client/scripts/controllers/profile.controller.js b/client/scripts/controllers/profile.controller.js
+new file mode 100644
+index 0000000..ffe585d
+--- /dev/null
++++ b/client/scripts/controllers/profile.controller.js
+@@ -0,0 +1,34 @@
++angular
++  .module('Whatsapp')
++  .controller('ProfileCtrl', ProfileCtrl);
++
++function ProfileCtrl ($scope, $reactive, $state, $ionicPopup, $log) {
++  $reactive(this).attach($scope);
++
++  let user = Meteor.user();
++  let name = user && user.profile ? user.profile.name : '';
++
++  this.name = name;
++  this.updateName = updateName;
++
++  ////////////
++
++  function updateName () {
++    if (_.isEmpty(this.name)) return;
++
++    Meteor.call('updateName', this.name, (err) => {
++      if (err) return handleError(err);
++      $state.go('tab.chats');
++    });
++  }
++
++  function handleError (err) {
++    $log.error('profile save error ', err);
++
++    $ionicPopup.alert({
++      title: err.reason || 'Save failed',
++      template: 'Please try again',
++      okType: 'button-positive button-clear'
++    });
++  }
++}
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 66b7ce7fb2e9f06fe264b5d9b9490e18666a16f8 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 15:19:48 +0200
+Subject: [PATCH 58/98] Step 4.13: Add CSS for the profile settings view
+
+---
+ client/styles/profile.scss | 40 ++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 40 insertions(+)
+ create mode 100644 client/styles/profile.scss
+
+diff --git a/client/styles/profile.scss b/client/styles/profile.scss
+new file mode 100644
+index 0000000..c7f082f
+--- /dev/null
++++ b/client/styles/profile.scss
+@@ -0,0 +1,40 @@
++.profile {
++  padding-top: 20px;
++
++  .profile-picture {
++    position: absolute;
++    top: 0;
++    left: 20px;
++    text-align: center;
++
++    img {
++      display: block;
++      max-width: 50px;
++      max-height: 50px;
++      width: 100%;
++      height: 100%;
++      border-radius: 50%;
++    }
++
++    .upload-placehoder {
++      width: 50px;
++      height: 50px;
++      padding: 5px;
++      border: 1px solid #808080;
++      border-radius: 50%;
++      line-height: 18px;
++      font-size: 12px;
++    }
++  }
++
++  .instructions {
++    min-height: 60px;
++    padding: 10px 20px 20px 90px;
++    font-size: 14px;
++    color: gray;
++  }
++
++  .profile-name {
++    margin-top: 20px;
++  }
++} 
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 08c4e85dd2b2c65deaa03a343553411c2b4d2ded Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 15:20:42 +0200
+Subject: [PATCH 59/98] Step 4.14: Add updateName method to the server
+
+---
+ lib/methods.js | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+
+diff --git a/lib/methods.js b/lib/methods.js
+index cbec6d9..a30d606 100644
+--- a/lib/methods.js
++++ b/lib/methods.js
+@@ -11,5 +11,18 @@ Meteor.methods({
+     Chats.update(message.chatId, { $set: { lastMessage: message } });
+ 
+     return messageId;
++  },
++  updateName(name) {
++    if (!this.userId) {
++      throw new Meteor.Error('not-logged-in',
++        'Must be logged in to update his name.');
++    }
++
++    check(name, String);
++    if (name.length === 0) {
++      throw Meteor.Error('name-required', 'Must proive user name');
++    }
++
++    return Meteor.users.update(this.userId, { $set: { 'profile.name': name } });
+   }
+ });
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 08f26f6351bd542b490a6075cd640d6e098a42c2 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 15:27:46 +0200
+Subject: [PATCH 60/98] Step 4.15: Verify and add userId for each message that
+ sent
+
+---
+ lib/methods.js | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/lib/methods.js b/lib/methods.js
+index a30d606..082eba5 100644
+--- a/lib/methods.js
++++ b/lib/methods.js
+@@ -1,11 +1,17 @@
+ Meteor.methods({
+   newMessage (message) {
++    if (! this.userId) {
++      throw new Meteor.Error('not-logged-in',
++        'Must be logged in to send message.');
++    }
++
+     check(message, {
+       text: String,
+       chatId: String
+     });
+ 
+     message.timestamp = new Date();
++    message.userId = this.userId;
+ 
+     let messageId = Messages.insert(message);
+     Chats.update(message.chatId, { $set: { lastMessage: message } });
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 9b4600de078c4f9dbc33a73f4870246d91ee7d84 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 15:29:55 +0200
+Subject: [PATCH 61/98] Step 4.16: Add settings route definition
+
+---
+ client/scripts/routes.js | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff --git a/client/scripts/routes.js b/client/scripts/routes.js
+index 9f070ea..92f2657 100644
+--- a/client/scripts/routes.js
++++ b/client/scripts/routes.js
+@@ -47,6 +47,15 @@ function config($stateProvider, $urlRouterProvider) {
+       resolve: {
+         user: isAuthorized
+       }
++    })
++    .state('tab.settings', {
++      url: '/settings',
++      views: {
++        'tab-settings': {
++          templateUrl: 'client/templates/settings.html',
++          controller: 'SettingsCtrl as settings',
++        }
++      }
+     });
+ 
+   $urlRouterProvider.otherwise('tab/chats');
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 9210bd4529a152d1d3fc98aee5f382b3d8155f3e Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 15:32:11 +0200
+Subject: [PATCH 62/98] Step 4.17: Add settings view with logout button
+
+---
+ client/templates/settings.html | 7 +++++++
+ 1 file changed, 7 insertions(+)
+ create mode 100644 client/templates/settings.html
+
+diff --git a/client/templates/settings.html b/client/templates/settings.html
+new file mode 100644
+index 0000000..eadaf50
+--- /dev/null
++++ b/client/templates/settings.html
+@@ -0,0 +1,7 @@
++<ion-view view-title="Settings">
++  <ion-content>
++    <div class="padding text-center">
++      <button ng-click="settings.logout()" class="button button-clear button-assertive">Logout</button>
++    </div>
++  </ion-content>
++</ion-view>
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From b273622b304f56d89d261648f33409961a8b9eff Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 15:33:13 +0200
+Subject: [PATCH 63/98] Step 4.18: Add settings controller with logout login
+
+---
+ client/scripts/controllers/settings.controller.js | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+ create mode 100644 client/scripts/controllers/settings.controller.js
+
+diff --git a/client/scripts/controllers/settings.controller.js b/client/scripts/controllers/settings.controller.js
+new file mode 100644
+index 0000000..237e8fe
+--- /dev/null
++++ b/client/scripts/controllers/settings.controller.js
+@@ -0,0 +1,17 @@
++angular
++  .module('Whatsapp')
++  .controller('SettingsCtrl', SettingsCtrl);
++
++function SettingsCtrl($scope, $reactive, $state) {
++  $reactive(this).attach($scope);
++
++  this.logout = logout;
++
++  ////////////
++
++  function logout() {
++    Meteor.logout((err) => {
++      $state.go('login');
++    });
++  }
++}
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From f340596279644adc080bca9b97103bbb1e488a0c Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 15:34:39 +0200
+Subject: [PATCH 64/98] Step 4.19: Update user's identity when viewing messages
+
+---
+ client/templates/chat.html | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/client/templates/chat.html b/client/templates/chat.html
+index 2185326..1d11276 100644
+--- a/client/templates/chat.html
++++ b/client/templates/chat.html
+@@ -5,9 +5,9 @@
+   <ion-content class="chat" delegate-handle="chatScroll">
+     <div class="message-list">
+       <div ng-repeat="message in chat.messages" class="message-wrapper">
+-        <div class="message" ng-class-even="'message-mine'" ng-class-odd="'message-other'">
+-          <div class="message-text">{{ message.text }}</div>
+-          <span class="message-timestamp">{{ message.timestamp | amDateFormat: 'HH:MM' }}</span>
++        <div class="message" ng-class="message.userId === $root.currentUser._id ? 'message-mine' : 'message-other'">
++          <div class="message-text">{{message.text}}</div>
++          <span class="message-timestamp">{{message.timestamp | amDateFormat: 'HH:MM'}}</span>
+         </div>
+       </div>
+     </div>
+-- 
+2.5.4 (Apple Git-61)
+
+
+From d223d2ea4a3bf67ec552f71b5aa277da03ab4964 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 15:35:56 +0200
+Subject: [PATCH 65/98] Step 4.20: Add auto scroll when new messages arrives
+
+---
+ client/scripts/controllers/chat.controller.js | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/client/scripts/controllers/chat.controller.js b/client/scripts/controllers/chat.controller.js
+index 7bcc5ba..24e92e2 100644
+--- a/client/scripts/controllers/chat.controller.js
++++ b/client/scripts/controllers/chat.controller.js
+@@ -22,6 +22,11 @@ function ChatCtrl ($scope, $reactive, $stateParams, $ionicScrollDelegate, $timeo
+     },
+   });
+ 
++  $scope.$watchCollection('chat.messages', (oldVal, newVal) => {
++    let animate = oldVal.length !== newVal.length;
++    $ionicScrollDelegate.$getByHandle('chatScroll').scrollBottom(animate);
++  });
++
+   ////////////
+ 
+   function sendMessage () {
+-- 
+2.5.4 (Apple Git-61)
+
+
+From c756b7eeddb1f7bc0cecce6cc1a09e4dcea6bcb7 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 15:37:22 +0200
+Subject: [PATCH 66/98] Step 5.1: Add button for opening the users list modal
+
+---
+ client/templates/chats.html | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/client/templates/chats.html b/client/templates/chats.html
+index 6ed2537..d2f8aca 100644
+--- a/client/templates/chats.html
++++ b/client/templates/chats.html
+@@ -1,4 +1,8 @@
+ <ion-view view-title="Chats">
++  <ion-nav-buttons side="right">
++    <button ng-click="chats.showNewChatModal()" class="button button-clear button-positive button-icon ion-ios-compose-outline"></button>
++  </ion-nav-buttons>
++
+   <ion-content>
+     <ion-list>
+       <ion-item
+-- 
+2.5.4 (Apple Git-61)
+
+
+From ca44a66afb3e0fed2084da92293df2a5d32621df Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 15:40:33 +0200
+Subject: [PATCH 67/98] Step 5.2: Add logic for opening the modal
+
+---
+ client/scripts/controllers/chats.controller.js | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/client/scripts/controllers/chats.controller.js b/client/scripts/controllers/chats.controller.js
+index b4dca9b..e5e0806 100644
+--- a/client/scripts/controllers/chats.controller.js
++++ b/client/scripts/controllers/chats.controller.js
+@@ -2,9 +2,10 @@ angular
+   .module('Whatsapp')
+   .controller('ChatsCtrl', ChatsCtrl);
+ 
+-function ChatsCtrl ($scope, $reactive) {
++function ChatsCtrl ($scope, $reactive, NewChat) {
+   $reactive(this).attach($scope);
+ 
++  this.showNewChatModal = showNewChatModal;
+   this.remove = remove;
+ 
+   this.helpers({
+@@ -15,6 +16,10 @@ function ChatsCtrl ($scope, $reactive) {
+ 
+   ////////////
+ 
++  function showNewChatModal() {
++    NewChat.showModal();
++  }
++
+   function remove (chat) {
+     this.data.remove(chat);
+   }
+-- 
+2.5.4 (Apple Git-61)
+
+
+From a127ff0215848d0765a98993874f92b970f6e16a Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 15:42:01 +0200
+Subject: [PATCH 68/98] Step 5.3: Add the view of the new chat modal
+
+---
+ client/templates/new-chat.html | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
+ create mode 100644 client/templates/new-chat.html
+
+diff --git a/client/templates/new-chat.html b/client/templates/new-chat.html
+new file mode 100644
+index 0000000..a571aa7
+--- /dev/null
++++ b/client/templates/new-chat.html
+@@ -0,0 +1,19 @@
++<ion-modal-view ng-controller="NewChatCtrl as chat">
++  <ion-header-bar>
++    <h1 class="title">New Chat</h1>
++    <div class="buttons">
++      <button class="button button-clear button-positive" ng-click="chat.hideNewChatModal()">Cancel</button>
++    </div>
++  </ion-header-bar>
++
++  <ion-content>
++    <div class="list">
++      <a ng-repeat="user in chat.users" ng-click="chat.newChat(user._id)" class="item">
++        <h2>{{user.profile.name}}</h2>
++        <p>
++          Hey there! I am using meteor-Whatsapp with meteor.
++        </p>
++      </a>
++    </div>
++  </ion-content>
++</ion-modal-view>
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From d82f6a809382a0a2db231f2d5eacc05eb92da78f Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 15:43:37 +0200
+Subject: [PATCH 69/98] Step 5.4: Add NewChat service
+
+---
+ client/scripts/services/new-chat.service.js | 28 ++++++++++++++++++++++++++++
+ 1 file changed, 28 insertions(+)
+ create mode 100644 client/scripts/services/new-chat.service.js
+
+diff --git a/client/scripts/services/new-chat.service.js b/client/scripts/services/new-chat.service.js
+new file mode 100644
+index 0000000..0937d8e
+--- /dev/null
++++ b/client/scripts/services/new-chat.service.js
+@@ -0,0 +1,28 @@
++angular
++  .module('Whatsapp')
++  .service('NewChat', NewChat);
++
++function NewChat($rootScope, $ionicModal) {
++  let templateUrl = 'client/templates/new-chat.html';
++
++  this.showModal = showModal;
++  this.hideModal = hideModal;
++
++  ////////////
++
++  function showModal () {
++    this._scope = $rootScope.$new();
++
++    $ionicModal.fromTemplateUrl(templateUrl, {
++      scope: this._scope
++    }).then((modal) => {
++      this._modal = modal;
++      modal.show();
++    });
++  }
++
++  function hideModal () {
++    this._scope.$destroy();
++    this._modal.remove();
++  }
++}
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From d52bb21871c7a371cfc5c2a19bc9b30136e72a80 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 15:44:57 +0200
+Subject: [PATCH 70/98] Step 5.5: Add NewChatCtrl controller
+
+---
+ client/scripts/controllers/new-chat.controller.js | 36 +++++++++++++++++++++++
+ 1 file changed, 36 insertions(+)
+ create mode 100644 client/scripts/controllers/new-chat.controller.js
+
+diff --git a/client/scripts/controllers/new-chat.controller.js b/client/scripts/controllers/new-chat.controller.js
+new file mode 100644
+index 0000000..0a51726
+--- /dev/null
++++ b/client/scripts/controllers/new-chat.controller.js
+@@ -0,0 +1,36 @@
++angular
++  .module('Whatsapp')
++  .controller('NewChatCtrl', NewChatCtrl);
++
++function NewChatCtrl($scope, $reactive, $state, NewChat) {
++  $reactive(this).attach($scope);
++
++  this.hideNewChatModal = hideNewChatModal;
++  this.newChat = newChat;
++
++  this.helpers({
++    users() {
++      return Meteor.users.find({ _id: { $ne: Meteor.userId() } });
++    }
++  });
++
++  ////////////
++
++  function hideNewChatModal() {
++    NewChat.hideModal();
++  }
++
++  function newChat(userId) {
++    let chat = Chats.findOne({ type: 'chat', userIds: { $all: [Meteor.userId(), userId] } });
++    if (chat) {
++      return goToChat(chat._id);
++    }
++
++    Meteor.call('newChat', userId, goToChat);
++  }
++
++  function goToChat(chatId) {
++    hideNewChatModal();
++    return $state.go('tab.chat', { chatId: chatId });
++  }
++}
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From f03c3e59cefe1feb3a2ef2099e919be6afe2879e Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 15:48:38 +0200
+Subject: [PATCH 71/98] Step 5.6: Add server side logic for creating new chat
+
+---
+ lib/methods.js | 23 +++++++++++++++++++++++
+ 1 file changed, 23 insertions(+)
+
+diff --git a/lib/methods.js b/lib/methods.js
+index 082eba5..85630e3 100644
+--- a/lib/methods.js
++++ b/lib/methods.js
+@@ -30,5 +30,28 @@ Meteor.methods({
+     }
+ 
+     return Meteor.users.update(this.userId, { $set: { 'profile.name': name } });
++  },
++  newChat(otherId) {
++    if (!this.userId) {
++      throw new Meteor.Error('not-logged-in',
++        'Must be logged to create a chat.');
++    }
++
++    check(otherId, String);
++
++    let otherUser = Meteor.users.findOne(otherId);
++    if (! otherUser) {
++      throw new Meteor.Error('user-not-exists',
++        'Chat\'s user not exists');
++    }
++
++    let chat = {
++      userIds: [this.userId, otherId],
++      createdAt: new Date()
++    };
++
++    let chatId = Chats.insert(chat);
++
++    return chatId;
+   }
+ });
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 4de45fecb6893adcefeb7f835ecdd39fe8ebef9b Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 15:52:25 +0200
+Subject: [PATCH 72/98] Step 5.7: Change the logic of client side removeChat
+
+---
+ client/scripts/controllers/chats.controller.js | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/client/scripts/controllers/chats.controller.js b/client/scripts/controllers/chats.controller.js
+index e5e0806..01f6d68 100644
+--- a/client/scripts/controllers/chats.controller.js
++++ b/client/scripts/controllers/chats.controller.js
+@@ -21,6 +21,6 @@ function ChatsCtrl ($scope, $reactive, NewChat) {
+   }
+ 
+   function remove (chat) {
+-    this.data.remove(chat);
++    Meteor.call('removeChat', chat._id);
+   }
+ }
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From ad6e694da3c61dd800c11ed9a404aec523cf9d8b Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 15:54:16 +0200
+Subject: [PATCH 73/98] Step 5.8: Add server side logic for removing chats
+
+---
+ lib/methods.js | 18 ++++++++++++++++++
+ 1 file changed, 18 insertions(+)
+
+diff --git a/lib/methods.js b/lib/methods.js
+index 85630e3..47237ac 100644
+--- a/lib/methods.js
++++ b/lib/methods.js
+@@ -53,5 +53,23 @@ Meteor.methods({
+     let chatId = Chats.insert(chat);
+ 
+     return chatId;
++  },
++  removeChat(chatId) {
++    if (!this.userId) {
++      throw new Meteor.Error('not-logged-in',
++        'Must be logged to create a chat.');
++    }
++
++    check(chatId, String);
++
++    let chat = Chats.findOne(chatId);
++    if (!chat || !_.include(chat.userIds, this.userId)) {
++      throw new Meteor.Error('chat-not-exists',
++        'Chat not exists');
++    }
++
++    Messages.remove({ chatId: chatId });
++
++    return Chats.remove({ _id: chatId });
+   }
+ });
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From c24496e256a6514b91d7c284dd9a814381a40596 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 15:55:41 +0200
+Subject: [PATCH 74/98] Step 5.9: Add filter to get the user information by its
+ id
+
+---
+ client/scripts/filters/chat-name.filter.js | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+ create mode 100644 client/scripts/filters/chat-name.filter.js
+
+diff --git a/client/scripts/filters/chat-name.filter.js b/client/scripts/filters/chat-name.filter.js
+new file mode 100644
+index 0000000..53c8136
+--- /dev/null
++++ b/client/scripts/filters/chat-name.filter.js
+@@ -0,0 +1,15 @@
++angular
++  .module('Whatsapp')
++  .filter('chatName', chatName);
++
++function chatName() {
++  return function (chat) {
++    if (!chat) return;
++
++    let otherId = _.without(chat.userIds, Meteor.userId())[0];
++    let otherUser = Meteor.users.findOne(otherId);
++    let hasName = otherUser && otherUser.profile && otherUser.profile.name;
++
++    return hasName ? otherUser.profile.name : chat.name || 'NO NAME';
++  };
++}
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 3ed9e7da1c80333d8a3da5348caecadd89c0f220 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 15:56:42 +0200
+Subject: [PATCH 75/98] Step 5.10: Add filter to get the user image by its id
+
+---
+ client/scripts/filters/chat-picture.filter.js | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+ create mode 100644 client/scripts/filters/chat-picture.filter.js
+
+diff --git a/client/scripts/filters/chat-picture.filter.js b/client/scripts/filters/chat-picture.filter.js
+new file mode 100644
+index 0000000..2834ca6
+--- /dev/null
++++ b/client/scripts/filters/chat-picture.filter.js
+@@ -0,0 +1,15 @@
++angular
++  .module('Whatsapp')
++  .filter('chatPicture', chatPicture);
++
++function chatPicture () {
++  return function (chat) {
++    if (!chat) return;
++
++    let otherId = _.without(chat.userIds, Meteor.userId())[0];
++    let otherUser = Meteor.users.findOne(otherId);
++    let hasPicture = otherUser && otherUser.profile && otherUser.profile.picture;
++
++    return hasPicture ? otherUser.profile.picture : chat.picture || '/user-default.svg';
++  };
++}
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 372e42f4de563c0a4c078f3c47bc7d6f9faeb7e1 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 15:57:46 +0200
+Subject: [PATCH 76/98] Step 5.11: Add filters usage in the chats list
+
+---
+ client/templates/chats.html | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/client/templates/chats.html b/client/templates/chats.html
+index d2f8aca..2218128 100644
+--- a/client/templates/chats.html
++++ b/client/templates/chats.html
+@@ -10,8 +10,8 @@
+               class="item-chat item-remove-animate item-avatar item-icon-right"
+               type="item-text-wrap"
+               href="#/tab/chats/{{chat._id}}">
+-        <img ng-src="{{chat.picture}}">
+-        <h2>{{chat.name}}</h2>
++        <img ng-src="{{chat | chatPicture}}">
++        <h2>{{chat | chatName}}</h2>
+         <p>{{chat.lastMessage.text}}</p>
+         <span class="last-message-timestamp">{{chat.lastMessage.timestamp | calendar}}</span>
+         <i class="icon ion-chevron-right icon-accessory"></i>
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 308e6d886d876851a6be9daea57c1c4d873e159d Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 15:59:41 +0200
+Subject: [PATCH 77/98] Step 5.12: Add filters usage in the chat details view
+
+---
+ client/templates/chat.html | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/client/templates/chat.html b/client/templates/chat.html
+index 1d11276..e197bbc 100644
+--- a/client/templates/chat.html
++++ b/client/templates/chat.html
+@@ -1,6 +1,6 @@
+-<ion-view title="{{ chat.data.name }}">
++<ion-view title="{{ chat.data | chatName }}">
+   <ion-nav-buttons side="right">
+-    <button class="button button-clear"><img class="header-picture" ng-src="{{ chat.data.picture }}"></button>
++    <button class="button button-clear"><img class="header-picture" ng-src="{{ chat.data | chatPicture }}"></button>
+   </ion-nav-buttons>
+   <ion-content class="chat" delegate-handle="chatScroll">
+     <div class="message-list">
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 6cd78828d0727b9ded4d68883b01f0b2d787c4da Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 16:01:21 +0200
+Subject: [PATCH 78/98] Step 5.13: Change the server bootstrap to create real
+ users objects
+
+---
+ server/bootstrap.js | 68 ++++++++++++-----------------------------------------
+ 1 file changed, 15 insertions(+), 53 deletions(-)
+
+diff --git a/server/bootstrap.js b/server/bootstrap.js
+index 0a8579f..bc3a3c7 100644
+--- a/server/bootstrap.js
++++ b/server/bootstrap.js
+@@ -1,62 +1,24 @@
+ Meteor.startup(function () {
+-  if (Chats.find().count() !== 0) return;
++  if (Meteor.users.find().count() != 0) return;
+ 
+-  Messages.remove({});
+-   
+-  let messages = [
+-    {
+-      text: 'You on your way?',
+-      timestamp: moment().subtract(1, 'hours').toDate()
+-    },
+-    {
+-      text: 'Hey, it\'s me',
+-      timestamp: moment().subtract(2, 'hours').toDate()
+-    },
+-    {
+-      text: 'I should buy a boat',
+-      timestamp: moment().subtract(1, 'days').toDate()
+-    },
+-    {
+-      text: 'Look at my mukluks!',
+-      timestamp: moment().subtract(4, 'days').toDate()
+-    },
+-    {
+-      text: 'This is wicked good ice cream.',
+-      timestamp: moment().subtract(2, 'weeks').toDate()
++  Accounts.createUserWithPhone({
++    phone: '+972501234567',
++    profile: {
++      name: 'My friend 1'
+     }
+-  ];
+-
+-  messages.forEach((m) => {
+-    Messages.insert(m);
+   });
+ 
+-  let chats = [
+-    {
+-      name: 'Ethan Gonzalez',
+-      picture: 'https://randomuser.me/api/portraits/thumb/men/1.jpg'
+-    },
+-    {
+-      name: 'Bryan Wallace',
+-      picture: 'https://randomuser.me/api/portraits/thumb/lego/1.jpg'
+-    },
+-    {
+-      name: 'Avery Stewart',
+-      picture: 'https://randomuser.me/api/portraits/thumb/women/1.jpg'
+-    },
+-    {
+-      name: 'Katie Peterson',
+-      picture: 'https://randomuser.me/api/portraits/thumb/women/2.jpg'
+-    },
+-    {
+-      name: 'Ray Edwards',
+-      picture: 'https://randomuser.me/api/portraits/thumb/men/2.jpg'
++  Accounts.createUserWithPhone({
++    phone: '+972501234568',
++    profile: {
++      name: 'My friend 2'
+     }
+-  ];
++  });
+ 
+-  chats.forEach((chat) => {
+-    let message = Messages.findOne({chatId: {$exists: false}});
+-    chat.lastMessage = message;
+-    let chatId = Chats.insert(chat);
+-    Messages.update(message._id, {$set: {chatId: chatId}})
++  Accounts.createUserWithPhone({
++    phone: '+972501234569',
++    profile: {
++      name: 'My friend 3'
++    }
+   });
+ });
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From f702d1d7d4efe870f2e1f72a3172de459300a0d1 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 16:02:08 +0200
+Subject: [PATCH 79/98] Step 5.14: remove insecure package
+
+---
+ .meteor/packages | 1 -
+ .meteor/versions | 1 -
+ 2 files changed, 2 deletions(-)
+
+diff --git a/.meteor/packages b/.meteor/packages
+index 1ca9b1e..a03e236 100644
+--- a/.meteor/packages
++++ b/.meteor/packages
+@@ -15,7 +15,6 @@ standard-minifiers      # JS/CSS minifiers run for production mode
+ es5-shim                # ECMAScript 5 compatibility for older browsers.
+ 
+ autopublish             # Publish all data to the clients (for prototyping)
+-insecure                # Allow all DB writes from clients (for prototyping)
+ angular@1.3.0
+ driftyco:ionic
+ momentjs:moment
+diff --git a/.meteor/versions b/.meteor/versions
+index fbd5c3a..3ff50d6 100644
+--- a/.meteor/versions
++++ b/.meteor/versions
+@@ -41,7 +41,6 @@ html-tools@1.0.5
+ htmljs@1.0.5
+ http@1.1.1
+ id-map@1.0.4
+-insecure@1.0.4
+ jasonaibrahim:angular-moment@0.10.2
+ jquery@1.11.4
+ lai:collection-extensions@0.1.4
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 1f2abd3c3e667228383d26cc94f783d0dee239f6 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 16:03:18 +0200
+Subject: [PATCH 80/98] Step 6.1: remove autopublish package
+
+---
+ .meteor/packages | 1 -
+ .meteor/versions | 1 -
+ 2 files changed, 2 deletions(-)
+
+diff --git a/.meteor/packages b/.meteor/packages
+index a03e236..d3fb6c4 100644
+--- a/.meteor/packages
++++ b/.meteor/packages
+@@ -14,7 +14,6 @@ tracker                 # Meteor's client-side reactive programming library
+ standard-minifiers      # JS/CSS minifiers run for production mode
+ es5-shim                # ECMAScript 5 compatibility for older browsers.
+ 
+-autopublish             # Publish all data to the clients (for prototyping)
+ angular@1.3.0
+ driftyco:ionic
+ momentjs:moment
+diff --git a/.meteor/versions b/.meteor/versions
+index 3ff50d6..1f71335 100644
+--- a/.meteor/versions
++++ b/.meteor/versions
+@@ -6,7 +6,6 @@ angular:angular@1.4.8
+ angular:angular-animate@1.4.8
+ angular:angular-sanitize@1.4.8
+ angularui:angular-ui-router@0.2.15
+-autopublish@1.0.4
+ autoupdate@1.2.4
+ babel-compiler@5.8.24_1
+ babel-runtime@0.1.4
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 414daa7efa8c7b2192cf770fb13e22a62d6a3e8a Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 16:04:07 +0200
+Subject: [PATCH 81/98] Step 6.2: Add publish-composite to the project
+
+---
+ .meteor/packages | 1 +
+ .meteor/versions | 1 +
+ 2 files changed, 2 insertions(+)
+
+diff --git a/.meteor/packages b/.meteor/packages
+index d3fb6c4..b2a490c 100644
+--- a/.meteor/packages
++++ b/.meteor/packages
+@@ -21,3 +21,4 @@ fourseven:scss
+ jasonaibrahim:angular-moment
+ check
+ okland:accounts-phone
++reywood:publish-composite
+diff --git a/.meteor/versions b/.meteor/versions
+index 1f71335..75a46f2 100644
+--- a/.meteor/versions
++++ b/.meteor/versions
+@@ -69,6 +69,7 @@ reactive-dict@1.1.3
+ reactive-var@1.0.6
+ reload@1.1.4
+ retry@1.0.4
++reywood:publish-composite@1.4.2
+ routepolicy@1.0.6
+ service-configuration@1.0.5
+ session@1.1.1
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 3601cfdfd21d42b3e7ca9062b674c43425ae9f4e Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 16:05:35 +0200
+Subject: [PATCH 82/98] Step 6.3: Add publication to the users
+
+---
+ server/publications.js | 3 +++
+ 1 file changed, 3 insertions(+)
+ create mode 100644 server/publications.js
+
+diff --git a/server/publications.js b/server/publications.js
+new file mode 100644
+index 0000000..f70f7cf
+--- /dev/null
++++ b/server/publications.js
+@@ -0,0 +1,3 @@
++Meteor.publish('users', function () {
++  return Meteor.users.find({}, { fields: { profile: 1 } });
++});
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 291dfda8d36226f1f34ffc189c7df3108b3683d6 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 16:09:37 +0200
+Subject: [PATCH 83/98] Step 6.4: Subscribe to users in the new chat modal
+
+---
+ client/scripts/controllers/new-chat.controller.js | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/client/scripts/controllers/new-chat.controller.js b/client/scripts/controllers/new-chat.controller.js
+index 0a51726..545cf3c 100644
+--- a/client/scripts/controllers/new-chat.controller.js
++++ b/client/scripts/controllers/new-chat.controller.js
+@@ -8,6 +8,8 @@ function NewChatCtrl($scope, $reactive, $state, NewChat) {
+   this.hideNewChatModal = hideNewChatModal;
+   this.newChat = newChat;
+ 
++  this.subscribe('users');
++
+   this.helpers({
+     users() {
+       return Meteor.users.find({ _id: { $ne: Meteor.userId() } });
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 41a2e3accb8a15556fb7a5847bc5e86514e08d7d Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 16:10:37 +0200
+Subject: [PATCH 84/98] Step 6.5: Add publication to chats and messages data
+
+---
+ server/publications.js | 25 +++++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
+
+diff --git a/server/publications.js b/server/publications.js
+index f70f7cf..bac6201 100644
+--- a/server/publications.js
++++ b/server/publications.js
+@@ -1,3 +1,28 @@
+ Meteor.publish('users', function () {
+   return Meteor.users.find({}, { fields: { profile: 1 } });
++});
++
++Meteor.publishComposite('chats', function () {
++  if (! this.userId) return;
++
++  return {
++    find() {
++      return Chats.find({ userIds: this.userId });
++    },
++    children: [
++      {
++        find(chat) {
++          return Messages.find({ chatId: chat._id });
++        }
++      },
++      {
++        find(chat) {
++          let query = { _id: { $in: chat.userIds } };
++          let options = { fields: { profile: 1 } };
++
++          return Meteor.users.find(query, options);
++        }
++      }
++    ]
++  };
+ });
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From c2ef87beea5d6ca9fc2997c85d6374ab4da65b78 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 16:11:30 +0200
+Subject: [PATCH 85/98] Step 6.6: Add subscription to the chats and messages in
+ the client side
+
+---
+ client/scripts/routes.js | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/client/scripts/routes.js b/client/scripts/routes.js
+index 92f2657..2b43a85 100644
+--- a/client/scripts/routes.js
++++ b/client/scripts/routes.js
+@@ -9,7 +9,10 @@ function config($stateProvider, $urlRouterProvider) {
+       abstract: true,
+       templateUrl: 'client/templates/tabs.html',
+       resolve: {
+-        user: isAuthorized
++        user: isAuthorized,
++        chats() {
++          return Meteor.subscribe('chats');
++        }
+       }
+     })
+     .state('tab.chats', {
+-- 
+2.5.4 (Apple Git-61)
+
+
+From fd02121f354c04363709005d59f030a5c060c45a Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 16:12:18 +0200
+Subject: [PATCH 86/98] Step 7.1: Add camera-ui package to the project
+
+---
+ .meteor/packages | 1 +
+ .meteor/versions | 4 ++++
+ 2 files changed, 5 insertions(+)
+
+diff --git a/.meteor/packages b/.meteor/packages
+index b2a490c..7927a3f 100644
+--- a/.meteor/packages
++++ b/.meteor/packages
+@@ -22,3 +22,4 @@ jasonaibrahim:angular-moment
+ check
+ okland:accounts-phone
+ reywood:publish-composite
++okland:camera-ui
+diff --git a/.meteor/versions b/.meteor/versions
+index 75a46f2..7459822 100644
+--- a/.meteor/versions
++++ b/.meteor/versions
+@@ -44,9 +44,11 @@ jasonaibrahim:angular-moment@0.10.2
+ jquery@1.11.4
+ lai:collection-extensions@0.1.4
+ launch-screen@1.0.4
++less@2.5.1
+ livedata@1.0.15
+ localstorage@1.0.5
+ logging@1.0.8
++mdg:camera@1.1.5
+ meteor@1.1.10
+ meteor-base@1.0.1
+ minifiers@1.1.7
+@@ -60,6 +62,7 @@ npm-bcrypt@0.7.8_2
+ npm-mongo@1.4.39_1
+ observe-sequence@1.0.7
+ okland:accounts-phone@0.0.21
++okland:camera-ui@0.0.2
+ ordered-dict@1.0.4
+ pbastowski:angular-babel@1.0.7
+ promise@0.5.1
+@@ -78,6 +81,7 @@ spacebars@1.0.7
+ spacebars-compiler@1.0.7
+ srp@1.0.4
+ standard-minifiers@1.0.2
++templating@1.1.5
+ templating-tools@1.0.0
+ tracker@1.0.9
+ ui@1.0.8
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 165abf8ad92fe39f15ede3dba84b90603471eb08 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 16:13:45 +0200
+Subject: [PATCH 87/98] Step 7.2: Add updatePicture method to the server
+
+---
+ lib/methods.js | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+diff --git a/lib/methods.js b/lib/methods.js
+index 47237ac..fb001c7 100644
+--- a/lib/methods.js
++++ b/lib/methods.js
+@@ -71,5 +71,15 @@ Meteor.methods({
+     Messages.remove({ chatId: chatId });
+ 
+     return Chats.remove({ _id: chatId });
++  },
++  updatePicture(data) {
++    if (!this.userId) {
++      throw new Meteor.Error('not-logged-in',
++        'Must be logged in to update his picture.');
++    }
++
++    check(data, String);
++
++    return Meteor.users.update(this.userId, { $set: { 'profile.picture': data } });
+   }
+ });
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From fa5090bf13f7a756200cbfea3b4f560aa3296467 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 16:18:05 +0200
+Subject: [PATCH 88/98] Step 7.3: Update profile creation page to use camera
+
+---
+ client/templates/profile.html | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/client/templates/profile.html b/client/templates/profile.html
+index c18fe20..2cbd896 100644
+--- a/client/templates/profile.html
++++ b/client/templates/profile.html
+@@ -4,8 +4,12 @@
+   </ion-nav-buttons>
+ 
+   <ion-content class="profile">
+-    <a class="profile-picture positive">
+-      <div class="upload-placehoder">
++    <a class="profile-picture positive" ng-click="profile.updatePicture()">
++      <div ng-if="profile.currentUser.profile.picture">
++        <img ng-src="{{ profile.currentUser.profile.picture }}" alt="profile picture">
++        edit
++      </div>
++      <div ng-if="!profile.currentUser.profile.picture" class="upload-placehoder">
+         Add photo
+       </div>
+     </a>
+-- 
+2.5.4 (Apple Git-61)
+
+
+From b9a92fd47bb50ae08ebb675622b81f7624584327 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 16:19:31 +0200
+Subject: [PATCH 89/98] Step 7.4: Add controller logic for uploading and
+ updating user image
+
+---
+ client/scripts/controllers/profile.controller.js | 24 +++++++++++++++++++++++-
+ 1 file changed, 23 insertions(+), 1 deletion(-)
+
+diff --git a/client/scripts/controllers/profile.controller.js b/client/scripts/controllers/profile.controller.js
+index ffe585d..6d51c54 100644
+--- a/client/scripts/controllers/profile.controller.js
++++ b/client/scripts/controllers/profile.controller.js
+@@ -2,7 +2,7 @@ angular
+   .module('Whatsapp')
+   .controller('ProfileCtrl', ProfileCtrl);
+ 
+-function ProfileCtrl ($scope, $reactive, $state, $ionicPopup, $log) {
++function ProfileCtrl ($scope, $reactive, $state, $ionicPopup, $log, $ionicLoading) {
+   $reactive(this).attach($scope);
+ 
+   let user = Meteor.user();
+@@ -10,9 +10,31 @@ function ProfileCtrl ($scope, $reactive, $state, $ionicPopup, $log) {
+ 
+   this.name = name;
+   this.updateName = updateName;
++  this.updatePicture = updatePicture;
+ 
+   ////////////
+ 
++  function updatePicture () {
++    MeteorCameraUI.getPicture({ width: 60, height: 60 }, function (err, data) {
++      if (err && err.error == 'cancel') {
++        return;
++      }
++
++      if (err) {
++        return handleError(err);
++      }
++
++      $ionicLoading.show({
++        template: 'Updating picture...'
++      });
++
++      Meteor.call('updatePicture', data, (err) => {
++        $ionicLoading.hide();
++        handleError(err);
++      });
++    });
++  }
++
+   function updateName () {
+     if (_.isEmpty(this.name)) return;
+ 
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 0220b3f0736c5ec3e48fbc6bd504f79b82095537 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 16:20:40 +0200
+Subject: [PATCH 90/98] Step 7.5: Add some CSS style to the profile page
+
+---
+ client/styles/profile.scss | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/client/styles/profile.scss b/client/styles/profile.scss
+index c7f082f..6ffc54f 100644
+--- a/client/styles/profile.scss
++++ b/client/styles/profile.scss
+@@ -11,6 +11,8 @@
+       display: block;
+       max-width: 50px;
+       max-height: 50px;
++      min-width: 50px;
++      min-height: 50px;
+       width: 100%;
+       height: 100%;
+       border-radius: 50%;
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 7b66a8e63c4659a62ba494651c3e0d643065ef78 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 16:22:20 +0200
+Subject: [PATCH 91/98] Step 7.6: Add link to the profile page from the
+ settings page
+
+---
+ client/templates/settings.html | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/client/templates/settings.html b/client/templates/settings.html
+index eadaf50..12604a1 100644
+--- a/client/templates/settings.html
++++ b/client/templates/settings.html
+@@ -3,5 +3,11 @@
+     <div class="padding text-center">
+       <button ng-click="settings.logout()" class="button button-clear button-assertive">Logout</button>
+     </div>
++    <ion-list>
++      <ion-item href="#/profile" class="item-icon-right">
++        Profile
++        <i class="icon ion-chevron-right icon-accessory"></i>
++      </ion-item>
++    </ion-list>
+   </ion-content>
+ </ion-view>
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From a71f35a88f0adac2035b7c98214125f2dd772e2f Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Tue, 5 Jan 2016 23:58:08 +0200
+Subject: [PATCH 92/98] Step 7.7: Add default profile picture
+
+---
+ public/user-default.svg | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 public/user-default.svg
+
+diff --git a/public/user-default.svg b/public/user-default.svg
+new file mode 100644
+index 0000000..64093ae
+--- /dev/null
++++ b/public/user-default.svg
+@@ -0,0 +1 @@
++<?xml version="1.0" ?><!DOCTYPE svg  PUBLIC '-//W3C//DTD SVG 1.1//EN'  'http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd'><svg enable-background="new 0 0 512 512" height="512px" id="Layer_1" version="1.1" viewBox="0 0 512 512" width="512px" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M257.107,5C118.473,5,6.109,117.365,6.109,255.998C6.109,394.631,118.473,507,257.107,507  s250.998-112.37,250.998-251.002C508.105,117.365,395.74,5,257.107,5z M257.107,25.917c126.868,0,230.082,103.214,230.082,230.082  c0,55.815-19.997,107.043-53.19,146.926c-22.939-9.58-77.089-28.372-110.609-38.269c-2.859-0.898-3.309-1.042-3.309-12.94  c0-9.826,4.044-19.721,7.987-28.096c4.269-9.1,9.334-24.399,11.153-38.126c5.086-5.904,12.01-17.547,16.463-39.739  c3.901-19.559,2.083-26.677-0.51-33.357c-0.266-0.705-0.552-1.399-0.756-2.094c-0.981-4.586,0.367-28.413,3.718-46.899  c2.308-12.685-0.593-39.658-18.057-61.972c-11.03-14.105-32.131-31.416-70.675-33.826l-21.141,0.02  c-37.891,2.391-59.012,19.701-70.042,33.806c-17.464,22.315-20.364,49.288-18.056,61.963c3.37,18.495,4.698,42.322,3.738,46.816  c-0.204,0.786-0.49,1.481-0.776,2.186c-2.574,6.68-4.412,13.798-0.49,33.357c4.432,22.192,11.357,33.836,16.463,39.739  c1.798,13.726,6.864,29.026,11.153,38.126c3.125,6.659,4.596,15.718,4.596,28.525c0,11.898-0.45,12.042-3.126,12.889  c-34.663,10.234-89.834,30.17-110.404,39.178c-33.846-40.066-54.293-91.785-54.293-148.212  C27.025,129.13,130.239,25.917,257.107,25.917z M96.474,420.516c23.552-9.615,70.512-26.365,101.355-35.475  c17.935-5.658,17.935-20.763,17.935-32.896c0-10.06-0.694-24.89-6.577-37.431c-4.045-8.589-8.662-23.317-9.682-34.847  c-0.225-2.696-1.491-5.188-3.534-6.965c-2.962-2.595-8.988-12.093-12.828-31.252c-3.043-15.167-1.756-18.486-0.51-21.693  c0.531-1.369,1.042-2.717,1.451-4.239c2.512-9.181-0.287-39.341-3.33-56.07c-1.327-7.272,0.347-27.933,13.951-45.337  c12.194-15.595,30.659-24.287,54.211-25.788l19.834-0.021c24.185,1.522,42.65,10.214,54.865,25.809  c13.604,17.404,15.259,38.065,13.93,45.346c-3.023,16.72-5.842,46.879-3.33,56.05c0.43,1.532,0.919,2.88,1.451,4.249  c1.247,3.206,2.533,6.526-0.49,21.693c-3.839,19.16-9.886,28.658-12.848,31.252c-2.022,1.777-3.288,4.269-3.534,6.965  c-1.001,11.53-5.617,26.258-9.661,34.847c-4.637,9.856-9.968,22.98-9.968,37.002c0,12.134,0,27.239,18.118,32.948  c29.516,8.722,76.701,24.93,101.621,34.73c-41.608,41.199-98.781,66.691-161.797,66.691  C194.664,486.084,137.981,461.042,96.474,420.516z" fill="#37404D"/></svg>
+\ No newline at end of file
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 683dcf7306487dc9abde607c4439f05ed9ee169c Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 16:24:21 +0200
+Subject: [PATCH 93/98] Step 8.1: Add logic for sending image message
+
+---
+ client/scripts/controllers/chat.controller.js | 25 ++++++++++++++++++++++++-
+ 1 file changed, 24 insertions(+), 1 deletion(-)
+
+diff --git a/client/scripts/controllers/chat.controller.js b/client/scripts/controllers/chat.controller.js
+index 24e92e2..41932d9 100644
+--- a/client/scripts/controllers/chat.controller.js
++++ b/client/scripts/controllers/chat.controller.js
+@@ -2,7 +2,7 @@ angular
+   .module('Whatsapp')
+   .controller('ChatCtrl', ChatCtrl);
+ 
+-function ChatCtrl ($scope, $reactive, $stateParams, $ionicScrollDelegate, $timeout) {
++function ChatCtrl ($scope, $reactive, $stateParams, $ionicScrollDelegate, $timeout, $ionicPopup, $log) {
+   $reactive(this).attach($scope);
+ 
+   let chatId = $stateParams.chatId;
+@@ -12,6 +12,7 @@ function ChatCtrl ($scope, $reactive, $stateParams, $ionicScrollDelegate, $timeo
+   this.inputUp = inputUp;
+   this.inputDown = inputDown;
+   this.closeKeyboard = closeKeyboard;
++  this.sendPicture = sendPicture;
+ 
+   this.helpers({
+     messages() {
+@@ -29,6 +30,28 @@ function ChatCtrl ($scope, $reactive, $stateParams, $ionicScrollDelegate, $timeo
+ 
+   ////////////
+ 
++  function sendPicture () {
++    MeteorCameraUI.getPicture({}, (err, data) => {
++      if (err && err.error == 'cancel') return;
++      if (err) return handleError(err);
++
++      Meteor.call('newMessage', {
++        picture: data,
++        type: 'picture',
++        chatId: chatId
++      });
++    });
++  }
++
++  function handleError (err) {
++    $log.error('profile save error ', err);
++    $ionicPopup.alert({
++      title: err.reason || 'Save failed',
++      template: 'Please try again',
++      okType: 'button-positive button-clear'
++    });
++  }
++
+   function sendMessage () {
+     if (_.isEmpty(this.message)) return;
+ 
+-- 
+2.5.4 (Apple Git-61)
+
+
+From fcf5a76af69f65efd5a10db191eb7577e2f5f499 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 16:25:22 +0200
+Subject: [PATCH 94/98] Step 8.2: Add ng-click for the image button on the view
+
+---
+ client/templates/chat.html | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/client/templates/chat.html b/client/templates/chat.html
+index e197bbc..1c3551e 100644
+--- a/client/templates/chat.html
++++ b/client/templates/chat.html
+@@ -29,7 +29,7 @@
+       <button ng-click="chat.sendMessage()" class="button button-clear button-positive">Send</button>
+     </span>
+     <span ng-if="!chat.message || chat.message.length === 0">
+-      <button class="button button-clear button-icon button-positive icon ion-ios-camera-outline"></button>
++      <button ng-click="chat.sendPicture()" class="button button-clear button-icon button-positive icon ion-ios-camera-outline"></button>
+       <i class="buttons-seperator icon ion-android-more-vertical"></i>
+       <button class="button button-clear button-icon button-positive icon ion-ios-mic-outline"></button>
+     </span>
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 90608b64161d468eeafd8d0ce3c2f3357c1ec2bc Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 16:26:19 +0200
+Subject: [PATCH 95/98] Step 8.3: Add validation for image messages in the
+ sendMessage method
+
+---
+ lib/methods.js | 16 ++++++++++++----
+ 1 file changed, 12 insertions(+), 4 deletions(-)
+
+diff --git a/lib/methods.js b/lib/methods.js
+index fb001c7..df0180c 100644
+--- a/lib/methods.js
++++ b/lib/methods.js
+@@ -5,10 +5,18 @@ Meteor.methods({
+         'Must be logged in to send message.');
+     }
+ 
+-    check(message, {
+-      text: String,
+-      chatId: String
+-    });
++    check(message, Match.OneOf(
++      {
++        text: String,
++        type: String,
++        chatId: String
++      },
++      {
++        picture: String,
++        type: String,
++        chatId: String
++      }
++    ));
+ 
+     message.timestamp = new Date();
+     message.userId = this.userId;
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 4a6f7dc486fa95f9a439a8cddb86e5e6f2b267fd Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 16:27:46 +0200
+Subject: [PATCH 96/98] Step 8.4: Add image message view to the chat detail
+ page
+
+---
+ client/templates/chat.html | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/client/templates/chat.html b/client/templates/chat.html
+index 1c3551e..5d9cfe3 100644
+--- a/client/templates/chat.html
++++ b/client/templates/chat.html
+@@ -6,7 +6,12 @@
+     <div class="message-list">
+       <div ng-repeat="message in chat.messages" class="message-wrapper">
+         <div class="message" ng-class="message.userId === $root.currentUser._id ? 'message-mine' : 'message-other'">
+-          <div class="message-text">{{message.text}}</div>
++          <ng-switch on="message.type">
++            <div ng-switch-when="text" class="text">{{message.text}}</div>
++            <div ng-switch-when="picture" class="picture">
++              <img ng-src="{{message.picture}}">
++            </div>
++          </ng-switch>
+           <span class="message-timestamp">{{message.timestamp | amDateFormat: 'HH:MM'}}</span>
+         </div>
+       </div>
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 01e9fc544a3474bb0a3784b99b5ed4df8e496edc Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 16:29:32 +0200
+Subject: [PATCH 97/98] Step 8.5: Add some CSS style for image messages
+
+---
+ client/styles/chat.scss | 12 +++++++++++-
+ 1 file changed, 11 insertions(+), 1 deletion(-)
+
+diff --git a/client/styles/chat.scss b/client/styles/chat.scss
+index 8d1226a..d0b5362 100644
+--- a/client/styles/chat.scss
++++ b/client/styles/chat.scss
+@@ -66,7 +66,7 @@
+     background-image: url(/message-mine.png)
+   }
+ 
+-  .message-text {
++  .text {
+     padding: 5px 7px;
+     word-wrap: break-word;
+ 
+@@ -76,6 +76,16 @@
+     }
+   }
+ 
++  .picture {
++    padding: 4px 4px 0;
++
++    img {
++      width: 220px;
++      height: 130px;
++      border-radius: 6px;
++    }
++  }
++
+   .message-timestamp {
+     position: absolute;
+     bottom: 2px;
+-- 
+2.5.4 (Apple Git-61)
+
+
+From 0fe0578a783e75171db5f8896d5aae5297262cd6 Mon Sep 17 00:00:00 2001
+From: DAB0mB <emanor6@gmail.com>
+Date: Fri, 11 Dec 2015 16:30:31 +0200
+Subject: [PATCH 98/98] Step 8.6: Add indication for image message in the chats
+ list
+
+---
+ client/templates/chats.html | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/client/templates/chats.html b/client/templates/chats.html
+index 2218128..8eb0ba6 100644
+--- a/client/templates/chats.html
++++ b/client/templates/chats.html
+@@ -12,7 +12,10 @@
+               href="#/tab/chats/{{chat._id}}">
+         <img ng-src="{{chat | chatPicture}}">
+         <h2>{{chat | chatName}}</h2>
+-        <p>{{chat.lastMessage.text}}</p>
++        <ng-switch on="chat.lastMessage.type">
++          <p ng-switch-when="text">{{chat.lastMessage.text}}</p>
++          <p ng-switch-when="picture">image</p>
++        </ng-switch>
+         <span class="last-message-timestamp">{{chat.lastMessage.timestamp | calendar}}</span>
+         <i class="icon ion-chevron-right icon-accessory"></i>
+         <ion-option-button class="button-assertive" ng-click="chats.remove(chat)">
+-- 
+2.5.4 (Apple Git-61)
+
