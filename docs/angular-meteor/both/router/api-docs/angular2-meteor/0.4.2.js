@@ -21,6 +21,14 @@ ANGULAR2_API_0_4_2 = function(version, basedOnTemplatesOf) {
             title: "MeteorComponent",
             seoTitle: "MeteorComponent",
             mdContent: "api.angular2." + templatePrefix + ".meteorComponent"
+          },
+          {
+            id: "02",
+            route: "api.angular2." + version + ".bootstrap",
+            path: urlBase + "bootstrap",
+            title: "bootstrap",
+            seoTitle: "bootstrap",
+            mdContent: "api.angular2." + templatePrefix + ".bootstrap"
           }
         ]
       }
