@@ -36,5 +36,17 @@ PAGES = [
     subHead: "Angular-Meteor and Ionic",
     stepbarHide: true,
     pages: WHATSAPP_IONIC
+  },
+  {
+    id: "4",
+    title: "WhatsApp clone with Meteor CLI",
+    route: "tutorials.whatsapp.meteor",
+    path: "/tutorials/whatsapp/meteor",
+    pathRedirect: "/tutorials/whatsapp/meteor/bootstrapping",
+    ghRepoName: "https://github.com/DAB0mB/angular-meteor-whatsapp",
+    seoTitlePrefix: "Angular-Meteor and Ionic with Meteor CLI | ",
+    subHead: "Angular-Meteor and Ionic with Meteor CLI",
+    stepbarHide: true,
+    pages: WHATSAPP_METEOR
   }
 ];
