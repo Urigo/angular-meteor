@@ -3,6 +3,6 @@ Template.api.helpers({
     var currentRoute = Router.current().route.path(this).split('/');
     var currentAPI = currentRoute[2];
 
-    return API_DEFINITION[currentAPI];
+    return ANGULAR1_API_DEFINITION[currentAPI];
   }
 });
