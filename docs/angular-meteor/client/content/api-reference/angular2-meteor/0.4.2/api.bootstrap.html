@@ -8,7 +8,31 @@
     <do-nothing>
         {{#markdown}}
 
-Bootstrap
+# bootstrap
+
+`bootstrap` method provides the basic application bootstrap process, it also adds support for iterating `Mongo.Cursor` object withing `ngFor`.
+
+This is a wrapper for Angular2 `bootstrap`, which documented [here](https://angular.io/docs/ts/latest/api/platform/browser/bootstrap-function.html).
+
+When working with TypeScript, import `bootstrap` method from `angular2-meteor` package, as follow:
+
+    import {bootstrap} from 'angular2-meteor';
+
+And use it with your main application class,
+
+    @Component({
+        selector: 'app'
+    })
+    @View({
+        template: 'Hello World!'
+    })
+    class App {
+
+    }
+
+    bootstrap(App);
+
+
 
         {{/markdown}}
 
