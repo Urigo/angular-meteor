@@ -1,0 +1,212 @@
+<template name="api.angular2.0.4.2.meteorComponent">
+  <div>
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/docs/angular-meteor/client/content/api-reference/angular2-meteor/0.4.2/api.meteorComponent.html"
+       class="btn btn-default btn-lg improve-button">
+      <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
+    </a>
+
+    <do-nothing>
+        {{#markdown}}
+
+# MeteorComponent
+
+MeteorComponent is a class to extend, you should extend this class by your implemented `@Component`s.
+
+This class provides the ability to use Meteor along with Angular 2.0 - you can use Meteor abilities with the required environment configuration for Angular 2.0.
+
+This basic component also handles the cleanup and destroy process that Angular 2.0 provides.
+
+When using TypeScript, import this component as `MeteorComponent`, from `angular2-meteor` module:
+
+    import {MeteorComponent} from 'angular2-meteor';
+
+#### Usage example
+
+    @Component({
+        selector: 'my-component'
+    })
+    @View({
+        template: 'Hello World!'
+    })
+    class MyComponent extends MeteorComponent {
+      constructor() {
+        super();
+
+        // Wrapper for Meteor.autorun
+        this.autorun(() => {
+          // Meteor dependant code
+        });
+
+        // Wrapper for Meteor.call
+        this.call('myServerMethod');
+
+        // Wrapper for Meteor.subscribe
+        this.subscribe('mySubscription');
+      }
+    }
+
+## API Reference
+
+### autorun
+
+This method is a wrapper of [Tracker.autorun](http://docs.meteor.com/#/full/tracker_autorun).
+
+The first argument of this method is a callback, which will be called each time Autorun will be triggered.
+
+The Autorun will stop automatically when when it's component is destroyed.
+
+<table class="variables-matrix input-arguments">
+  <thead>
+  <tr>
+    <th>Argument Name</th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Default Value</th>
+    <th>Required</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td><strong>runFunc</strong></td>
+    <td>
+      <a href="" class="label type-hint type-hint-function">function</a>
+    </td>
+    <td><p> The function to run. It receives one argument: the Computation object that will be returned.	</p>
+    </td>
+    <td></td>
+    <td><a href="" class="label type-hint type-hint-object">Yes</a></td>
+  </tr>
+  <tr>
+    <td>autoBind</td>
+    <td>
+      <a href="" class="label type-hint type-hint-boolean">boolean</a>
+    </td>
+    <td><p> Boolean that specify if to bind the callback to the NgZone of the component. </p>
+    </td>
+    <td>false</td>
+    <td><a href="" class="label type-hint type-hint-object">No</a></td>
+  </tr>
+  </tbody>
+</table>
+
+### subscribe
+
+This method is a wrapper of [Tracker.subscribe](http://docs.meteor.com/#/full/meteor_subscribe).
+
+The method expect the publication name (as defined in the server), subscription arguments, result callback and boolean that indicates that auto-bind feature.
+
+The subscription will stop automatically when when it's component is destroyed.
+
+<table class="variables-matrix input-arguments">
+  <thead>
+  <tr>
+    <th>Argument Name</th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Default Value</th>
+    <th>Required</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td><strong>publication</strong></td>
+    <td>
+      <a href="" class="label type-hint type-hint-string">string</a>
+    </td>
+    <td><p> The name of the publication, as defined in the server side using `Meteor.publish`.	</p>
+    </td>
+    <td></td>
+    <td><a href="" class="label type-hint type-hint-object">Yes</a></td>
+  </tr>
+  <tr>
+    <td>arguments...</td>
+    <td>
+      <a href="" class="label type-hint">Any</a>
+    </td>
+    <td><p> Argument that will be passed to the publication method. </p>
+    </td>
+    <td></td>
+    <td><a href="" class="label type-hint type-hint-object">No</a></td>
+  </tr>
+  <tr>
+    <td>resultCallback</td>
+    <td>
+      <a href="" class="label type-hint type-hint-object">object</a> /
+      <a href="" class="label type-hint type-hint-function">function</a>
+    </td>
+    <td><p> May include `onStop` and `onReady` callbacks. If there is an error, it is passed as an argument to `onStop`. If a function is passed instead of an object, it is interpreted as an `onReady` callback. </p>
+    </td>
+    <td></td>
+    <td><a href="" class="label type-hint type-hint-object">No</a></td>
+  </tr>
+  <tr>
+    <td>autoBind</td>
+    <td>
+      <a href="" class="label type-hint type-hint-boolean">boolean</a>
+    </td>
+    <td><p> Boolean that specify if to bind the callback to the NgZone of the component. </p>
+    </td>
+    <td>false</td>
+    <td><a href="" class="label type-hint type-hint-object">No</a></td>
+  </tr>
+  </tbody>
+</table>
+
+### call
+
+This method is a wrapper of [Meteor.call](http://docs.meteor.com/#/full/meteor_call).
+
+This method invokes a method passing any number of arguments.
+
+<table class="variables-matrix input-arguments">
+  <thead>
+  <tr>
+    <th>Argument Name</th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Default Value</th>
+    <th>Required</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td><strong>name</strong></td>
+    <td>
+      <a href="" class="label type-hint type-hint-string">string</a>
+    </td>
+    <td><p> The name of the Meteor method to run on the server side.</p>
+    </td>
+    <td></td>
+    <td><a href="" class="label type-hint type-hint-object">Yes</a></td>
+  </tr>
+  <tr>
+    <td>arguments...</td>
+    <td>
+      <a href="" class="label type-hint">Any</a>
+    </td>
+    <td><p> Argument that will be passed to the method. </p>
+    </td>
+    <td></td>
+    <td><a href="" class="label type-hint type-hint-object">No</a></td>
+  </tr>
+  <tr>
+    <td>resultCallback</td>
+    <td>
+      <a href="" class="label type-hint type-hint-function">function</a>
+    </td>
+    <td><p> Optional callback, which is called asynchronously with the error or result after the method is complete. If not provided, the method runs synchronously if possible (see below).
+    </p>
+    </td>
+    <td></td>
+    <td><a href="" class="label type-hint type-hint-object">No</a></td>
+  </tr>
+  </tbody>
+</table>
+
+
+        {{/markdown}}
+
+    </do-nothing>
+
+  </div>
+</template>

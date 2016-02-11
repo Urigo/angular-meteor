@@ -1,0 +1,80 @@
+<template name="api.angular2.0.4.2.bootstrap">
+  <div>
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/docs/angular-meteor/client/content/api-reference/angular2-meteor/0.4.2/api.bootstrap.html"
+       class="btn btn-default btn-lg improve-button">
+      <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
+    </a>
+
+    <do-nothing>
+        {{#markdown}}
+
+# bootstrap
+
+`bootstrap` method provides the basic application bootstrap process, it also adds support for iterating `Mongo.Cursor` object withing `ngFor`.
+
+This is a wrapper for Angular2 `bootstrap`, which documented [here](https://angular.io/docs/ts/latest/api/platform/browser/bootstrap-function.html).
+
+#### Usage Example
+
+When working with TypeScript, import `bootstrap` method from `angular2-meteor` package, as follow:
+
+    import {bootstrap} from 'angular2-meteor';
+
+And use it with your main application class,
+
+    @Component({
+        selector: 'app'
+    })
+    @View({
+        template: 'Hello World!'
+    })
+    class App {
+
+    }
+
+    bootstrap(App);
+
+
+## API Reference
+
+<table class="variables-matrix input-arguments">
+  <thead>
+  <tr>
+    <th>Argument Name</th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Default Value</th>
+    <th>Required</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td><strong>appComponentType</strong></td>
+    <td>
+      <a href="" class="label type-hint type-hint-class">class</a>
+    </td>
+    <td><p> The root component which should act as the application.</p>
+
+    </td>
+    <td><a href="" class="label type-hint type-hint-object">Yes</a></td>
+  </tr>
+  <tr>
+    <td>customProviders</td>
+    <td>
+      <a href="" class="label type-hint type-hint-array">array</a>
+    </td>
+    <td><p> An additional set of providers that can be added to the app injector to override default injection behavior. </p>
+
+    </td>
+    <td></td>
+    <td><a href="" class="label type-hint type-hint-object">No</a></td>
+  </tr>
+  </tbody>
+</table>
+
+        {{/markdown}}
+
+    </do-nothing>
+
+  </div>
+</template>
