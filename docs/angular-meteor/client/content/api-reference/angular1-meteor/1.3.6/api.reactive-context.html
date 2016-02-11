@@ -238,9 +238,9 @@ Combining both of the feature we just explained, we can create a reactive view w
     angular.module('myApp', []).controller('MyCtrl', ['$scope', '$reactive', function($scope, $reactive)
     {
       $reactive(this).attach($scope);
+      this.searchText = '';
 
       this.helpers({
-        searchText: '',
         users: function() {
           return Users.find({});
         }
@@ -248,7 +248,7 @@ Combining both of the feature we just explained, we can create a reactive view w
 
       this.subscribe('relevant_users', () => {
         return [
-          this.searchText
+          this.getReactively("searchText")
         ];
       });
     }]);
