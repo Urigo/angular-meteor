@@ -45,7 +45,7 @@
 </template>
 
 <template name="apiSelector">
-  <h2><a href="/{{tutorialLink}}">API Reference</a></h2>
+  <h2>API Reference</h2>
   {{#each angularVersions}}
     {{#angularVersionLink}}
       <h4>{{title}}</h4>
@@ -55,13 +55,15 @@
 
 <template name="sidebarDefaultAPI">
   <div class="col-md-3 left-menu">
-    {{> apiSelector }} <br />
-    API Version:
-    <select id="api-selector">
-      {{#each apis}}
-        <option value="{{this}}" selected="{{currentApi this}}">{{this}}</option>
-      {{/each}}
-    </select>
+    {{> apiSelector }} <br/>
+    <div class="version-selector">
+      API Version:
+      <select id="api-selector">
+        {{#each apis}}
+          <option value="{{this}}" selected="{{currentApi this}}">{{this}}</option>
+        {{/each}}
+      </select>
+    </div>
     <ul class="nav">
       {{#each pages}}
         <li id='{{id}}'>
