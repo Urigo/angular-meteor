@@ -42,6 +42,9 @@ Template.sidebarDefault.helpers({
     if (route.indexOf('tutorials/whatsapp/ionic') !== -1) {
       return WHATSAPP_IONIC;
     }
+    if (route.indexOf('tutorials/whatsapp/meteor') !== -1) {
+      return WHATSAPP_METEOR;
+    }
     else {
       return SOCIALLY_ANGULAR1;
     }
