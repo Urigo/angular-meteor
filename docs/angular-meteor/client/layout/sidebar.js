@@ -9,10 +9,10 @@ Template.tutorialSelector.helpers({
     var route = Router.current().route.path(this) || 'angular';
 
     if (route.indexOf('tutorials/whatsapp/ionic') !== -1 || route.indexOf('tutorials/whatsapp/meteor') !== -1) {
-      return 'tutorials.whatsapp.intro';
+      return 'tutorials/whatsapp';
     }
     else {
-      return 'tutorials.socially.intro';
+      return 'tutorials/socially';
     }
   },
   pages: function() {
