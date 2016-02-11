@@ -14,6 +14,8 @@
 
 This is a wrapper for Angular2 `bootstrap`, which documented [here](https://angular.io/docs/ts/latest/api/platform/browser/bootstrap-function.html).
 
+#### Usage Example
+
 When working with TypeScript, import `bootstrap` method from `angular2-meteor` package, as follow:
 
     import {bootstrap} from 'angular2-meteor';
@@ -33,6 +35,42 @@ And use it with your main application class,
     bootstrap(App);
 
 
+## API Reference
+
+<table class="variables-matrix input-arguments">
+  <thead>
+  <tr>
+    <th>Argument Name</th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Default Value</th>
+    <th>Required</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td><strong>appComponentType</strong></td>
+    <td>
+      <a href="" class="label type-hint type-hint-class">class</a>
+    </td>
+    <td><p> The root component which should act as the application.</p>
+
+    </td>
+    <td><a href="" class="label type-hint type-hint-object">Yes</a></td>
+  </tr>
+  <tr>
+    <td>customProviders</td>
+    <td>
+      <a href="" class="label type-hint type-hint-array">array</a>
+    </td>
+    <td><p> An additional set of providers that can be added to the app injector to override default injection behavior. </p>
+
+    </td>
+    <td></td>
+    <td><a href="" class="label type-hint type-hint-object">No</a></td>
+  </tr>
+  </tbody>
+</table>
 
         {{/markdown}}
 
