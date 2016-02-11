@@ -38,16 +38,32 @@
   </select>
 </template>
 
+<template name="angularVersionLink">
+  <a href="{{apiPath}}" class="prev-button btn btn-default tutorials-nav-button {{selected}}">
+    {{> UI.contentBlock}}
+  </a>
+</template>
+
+<template name="apiSelector">
+  <h2>API Reference</h2>
+  {{#each angularVersions}}
+    {{#angularVersionLink}}
+      <h4>{{title}}</h4>
+    {{/angularVersionLink}}
+  {{/each}}
+</template>
+
 <template name="sidebarDefaultAPI">
   <div class="col-md-3 left-menu">
-    <h2>
-      <a href="/api">API</a>
+    {{> apiSelector }} <br/>
+    <div class="version-selector">
+      API Version:
       <select id="api-selector">
         {{#each apis}}
           <option value="{{this}}" selected="{{currentApi this}}">{{this}}</option>
         {{/each}}
       </select>
-    </h2>
+    </div>
     <ul class="nav">
       {{#each pages}}
         <li id='{{id}}'>

@@ -161,32 +161,39 @@ Router.map(function () {
   });
 
   var directedRouteNames = [];
-  for (var apiKey in API_DEFINITION) {
-    var currentApi = API_DEFINITION[apiKey];
 
-    for (var coreAPI in currentApi.groups[0].pages) {
-      var routeName = currentApi.groups[0].pages[coreAPI].route;
-      routeName = routeName.slice(routeName.lastIndexOf('.') + 1);
-      var redirectFrom = '/api/' + routeName;
-      var redirectTo = '/api/' + apiKey + '/' + routeName;
-      if (!_.contains(directedRouteNames, routeName)) {
-        redirect(redirectFrom, redirectTo);
-        directedRouteNames.push(routeName);
+  var createApiRoutes = function(apisDefs, appendToLinks){
+    for (var apiKey in apisDefs) {
+      var currentApi = apisDefs[apiKey];
+
+      for (var coreAPI in currentApi.groups[0].pages) {
+        var routeName = currentApi.groups[0].pages[coreAPI].route;
+        routeName = routeName.slice(routeName.lastIndexOf('.') + 1);
+        var redirectFrom = '/api/' + appendToLinks + routeName;
+        var redirectTo = '/api/' + appendToLinks + apiKey + '/' + routeName;
+        if (!_.contains(directedRouteNames, routeName)) {
+          redirect(redirectFrom, redirectTo);
+          directedRouteNames.push(routeName);
+        }
       }
+
+      createSubRoutes(currentApi);
+
+      (function (routeUrl) {
+        if (routeUrl) {
+          Router.route('/api/' + appendToLinks + apiKey, function () {
+            this.redirect(routeUrl);
+          });
+        }
+      })(currentApi.groups[0].redirectRoute);
     }
+  };
 
-    createSubRoutes(currentApi);
+  createApiRoutes(ANGULAR1_API_DEFINITION, '');
+  createApiRoutes(ANGULAR2_API_DEFINITION, 'angular2');
 
-    (function (routeUrl) {
-      if (routeUrl) {
-        Router.route('/api/' + apiKey, function () {
-          this.redirect(routeUrl);
-        });
-      }
-    })(currentApi.groups[0].redirectRoute);
-  }
-
-  redirect('/api', '/api/' + DEFAULT_API + '/helpers');
+  redirect('/api', '/api/' + ANGULAR1_DEFAULT_API + '/helpers');
+  redirect('/api/angular2', '/api/angular2/' + ANGULAR2_DEFAULT_API + '/meteorComponent');
 
   // -------------------------------------------------------------------------
   // Migration routes

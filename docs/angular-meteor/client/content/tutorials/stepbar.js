@@ -53,6 +53,9 @@ Template.stepbarLiveDemo.helpers({
     if (route.indexOf('tutorials/whatsapp/ionic') !== -1) {
       return 'http://dotansimha.github.io/ionic-meteor-whatsapp-clone-step-' + zeroToStep + self.id;
     }
+    else if (route.indexOf('tutorials/whatsapp/meteor') !== -1) {
+      return '';
+    }
     else {
       return 'http://socially-step' + zeroToStep + self.id + '.meteor.com/';
     }
