@@ -90,8 +90,6 @@ angularMeteorUser.service('$meteorUser', [
 angularMeteorUser.run([
   '$rootScope', '$angularMeteorSettings', '$$Core',
   function($rootScope, $angularMeteorSettings, $$Core){
-    if (!$angularMeteorSettings.suppressWarnings)
-      console.warn('[angular-meteor.$rootScope.currentUser/loggingIn] Please note that this functionality has migrated to a separate package and will be deprecated in 1.4.0.  For more info: http://www.angular-meteor.com/api/1.3.2/auth. You can disable this warning by following this guide http://www.angular-meteor.com/api/1.3.6/settings');
 
     let ScopeProto = Object.getPrototypeOf($rootScope);
     _.extend(ScopeProto, $$Core);
