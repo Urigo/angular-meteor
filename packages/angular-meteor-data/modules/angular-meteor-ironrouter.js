@@ -1,4 +1,4 @@
-angular.module('angular-meteor.router', [])
+angular.module('angular-meteor.ironrouter', [])
 
 
 .run([

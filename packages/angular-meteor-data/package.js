@@ -37,6 +37,7 @@ Package.onUse(function (api) {
     'modules/angular-meteor-stopper.js',
     'modules/angular-meteor-collection.js',
     'modules/angular-meteor-object.js',
+    'modules/angular-meteor-ironrouter.js',
     'modules/angular-meteor-user.js',
     'modules/angular-meteor-methods.js',
     'modules/angular-meteor-session.js',
@@ -45,7 +46,6 @@ Package.onUse(function (api) {
     ], 'client');
 
   api.add_files([
-    'modules/router.js',
     'modules/utils.js',
     'modules/mixer.js',
     'modules/scope.js',
