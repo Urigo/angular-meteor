@@ -12,7 +12,7 @@ angularMeteorSubscribe.service('$meteorSubscribe', ['$q', '$angularMeteorSetting
 
     this._subscribe = function(scope, deferred, args) {
       if (!$angularMeteorSettings.suppressWarnings)
-        console.warn('[angular-meteor.subscribe] Please note that this module is deprecated since 1.3.0 and will be removed in 1.4.0! Replace it with the new syntax described here: http://www.angular-meteor.com/api/1.3.1/subscribe. You can disable this warning by following this guide http://www.angular-meteor.com/api/1.3.6/settings');
+        console.warn('[angular-meteor.subscribe] Please note that this module is deprecated since 1.3.0 and will be removed in 1.4.0! Replace it with the new syntax described here: http://www.angular-meteor.com/api/1.3.6/subscribe. You can disable this warning by following this guide http://www.angular-meteor.com/api/1.3.6/settings');
 
       var subscription = null;
       var lastArg = args[args.length - 1];
