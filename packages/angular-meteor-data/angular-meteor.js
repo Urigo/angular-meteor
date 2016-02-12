@@ -1,36 +1,46 @@
-// Define angular-meteor and its dependencies
-var angularMeteor = angular.module('angular-meteor', [
+angular.module('angular-meteor', [
+  // new
+  'angular-meteor.utilities',
+  'angular-meteor.mixer',
+  'angular-meteor.scope',
+  'angular-meteor.core',
+  'angular-meteor.view-model',
+  'angular-meteor.reactive',
+
+  // legacy
+  'angular-meteor.ironrouter',
+  'angular-meteor.utils',
   'angular-meteor.subscribe',
   'angular-meteor.collection',
   'angular-meteor.object',
   'angular-meteor.user',
   'angular-meteor.methods',
   'angular-meteor.session',
-  'angular-meteor.utils',
-  'angular-meteor.camera',
-  'angular-meteor.reactive-utils',
-  'angular-meteor.reactive-scope',
-  'angular-meteor.reactive-context'
-]);
+  'angular-meteor.camera'
 
-angularMeteor.run(['$compile', '$document', '$rootScope', function ($compile, $document, $rootScope) {
-    // Recompile after iron:router builds page
-    if(Package['iron:router']) {
-      var appLoaded = false;
-      Package['iron:router'].Router.onAfterAction(function(req, res, next) {
-        Tracker.afterFlush(function() {
-          if (!appLoaded) {
-            $compile($document)($rootScope);
-            if (!$rootScope.$$phase) $rootScope.$apply();
-            appLoaded = true;
-          }
-        });
-      });
-    }
-  }]);
+])
 
+.constant('$angularMeteorSettings', {
+  suppressWarnings: false
+})
+
+.run([
+  '$Mixer',
+  '$$Core',
+  '$$ViewModel',
+  '$$Reactive',
+
+function($Mixer, $$Core, $$ViewModel, $$Reactive) {
+  // Load all mixins
+  $Mixer
+    .mixin($$Core)
+    .mixin($$ViewModel)
+    .mixin($$Reactive);
+}])
+
+// legacy
 // Putting all services under $meteor service for syntactic sugar
-angularMeteor.service('$meteor', ['$meteorCollection', '$meteorCollectionFS', '$meteorObject', '$meteorMethods', '$meteorSession', '$meteorSubscribe', '$meteorUtils', '$meteorCamera', '$meteorUser',
+.service('$meteor', ['$meteorCollection', '$meteorCollectionFS', '$meteorObject', '$meteorMethods', '$meteorSession', '$meteorSubscribe', '$meteorUtils', '$meteorCamera', '$meteorUser',
   function($meteorCollection, $meteorCollectionFS, $meteorObject, $meteorMethods, $meteorSession, $meteorSubscribe, $meteorUtils, $meteorCamera, $meteorUser){
     this.collection = $meteorCollection;
     this.collectionFS = $meteorCollectionFS;

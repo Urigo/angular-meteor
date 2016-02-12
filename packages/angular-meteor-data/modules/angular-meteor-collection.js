@@ -12,11 +12,12 @@ var angularMeteorCollection = angular.module('angular-meteor.collection',
 // http://perfectionkills.com/how-ecmascript-5-still-does-not-allow-to-subclass-an-array/
 // We went with the direct extensions approach.
 angularMeteorCollection.factory('AngularMeteorCollection', [
-  '$q', '$meteorSubscribe', '$meteorUtils', '$rootScope', '$timeout', 'diffArray',
-  function($q, $meteorSubscribe, $meteorUtils, $rootScope, $timeout, diffArray) {
+  '$q', '$meteorSubscribe', '$meteorUtils', '$rootScope', '$timeout', 'diffArray', '$angularMeteorSettings',
+  function($q, $meteorSubscribe, $meteorUtils, $rootScope, $timeout, diffArray, $angularMeteorSettings) {
 
     function AngularMeteorCollection(curDefFunc, collection, diffArrayFunc, autoClientSave) {
-      console.warn('[angular-meteor.$meteorCollection] Please note that this method is deprecated since 1.3.0 and will be removed in 1.4.0! For more info: http://www.angular-meteor.com/api/1.3.0/meteorCollection');
+      if (!$angularMeteorSettings.suppressWarnings)
+        console.warn('[angular-meteor.$meteorCollection] Please note that this method is deprecated since 1.3.0 and will be removed in 1.4.0! For more info: http://www.angular-meteor.com/api/1.3.0/meteorCollection. You can disable this warning by following this guide http://www.angular-meteor.com/api/1.3.6/settings');
 
       var data = [];
       // Server backup data to evaluate what changes come from client
@@ -335,11 +336,12 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
 }]);
 
 angularMeteorCollection.factory('$meteorCollectionFS', [
-  '$meteorCollection', 'diffArray',
-  function($meteorCollection, diffArray) {
+  '$meteorCollection', 'diffArray', '$angularMeteorSettings',
+  function($meteorCollection, diffArray, $angularMeteorSettings) {
     function $meteorCollectionFS(reactiveFunc, autoClientSave, collection) {
 
-      console.warn('[angular-meteor.$meteorCollectionFS] Please note that this method is deprecated since 1.3.0 and will be removed in 1.4.0! For more info: http://www.angular-meteor.com/api/1.3.0/files');
+      if (!$angularMeteorSettings.suppressWarnings)
+        console.warn('[angular-meteor.$meteorCollectionFS] Please note that this method is deprecated since 1.3.0 and will be removed in 1.4.0! For more info: http://www.angular-meteor.com/api/1.3.0/files. You can disable this warning by following this guide http://www.angular-meteor.com/api/1.3.6/settings');
       return new $meteorCollection(reactiveFunc, autoClientSave, collection, diffArray.shallow);
     }
 
