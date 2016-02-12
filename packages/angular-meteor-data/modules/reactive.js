@@ -174,8 +174,6 @@ function($parse, $$utils, $angularMeteorSettings) {
     let v = this.$$vm[k];
 
     if (angular.isDefined(v)) {
-      if (!$angularMeteorSettings.suppressWarnings)
-        console.warn(`overriding '${k}' helper. You can disable this warning by following this guide http://www.angular-meteor.com/api/1.3.6/settings`);
       delete this.$$vm[k];
       v = null;
     }
