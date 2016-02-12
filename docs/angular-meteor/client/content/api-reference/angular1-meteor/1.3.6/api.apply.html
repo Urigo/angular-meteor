@@ -11,7 +11,8 @@
     src: angular-meteor-data/modules/angular-meteor-reactive-context.js, line 98
 </a>
 
-This method wraps `Meteor.apply` method to run it's callback in a digestion cycle.
+This method wraps [`Meteor.apply`](http://docs.meteor.com/#/full/meteor_apply) method to run it's callback in a digestion
+cycle so angular will detect the changes and update the views accordingly.
 
 ### Arguments
 
@@ -26,7 +27,7 @@ This method wraps `Meteor.apply` method to run it's callback in a digestion cycl
     </thead>
     <tbody>
     <tr>
-        <td><strong>name<strong/></td>
+        <td><strong>name</strong></td>
         <td><a href="" class="label type-hint type-hint-string">String</a></td>
         <td><p>Name of method to invoke</p></td>
         <td>Yes</td>

@@ -13,9 +13,19 @@
   src: angular-meteor-data/modules/angular-meteor-reactive-context.js, line 116
 </a>
 
-Use this method to get a context collection variable and watch it reactively, so each change in this collection causes the dependents (autorun, helper functions and subscriptions) to run again.
+This method is used to get a context collection variable and watch it reactively, so changes in this collection
+causes the dependents (autorun, helper functions and subscriptions) to run again.
 
-The `getCollectionReactively` method is part of the `ReactiveContext`, and available on every `context` and `$scope`.
+Please note that `getCollectionReactively` will **not** deep watch the collection. That means that if you have a
+collection of objects and you change a property of one of them, it will not be detected as a change. For a deep watch
+please use `getReactively` and set `isDeep` argument to true.
+
+This method is primarily used to detect collection length changes: when you change the collection itself, like adding or
+removing elements. For these scenarios it has a performance boost over `getReactively`.
+
+The `getCollectionReactively` method is part of the `ReactiveContext` and available on every `context` and `$scope`.
+It's bound to the context since the argument for it is the name of a collection that available on the context.
+When the context is destroyed, the watcher will be stopped.
 
 -------
 
@@ -59,7 +69,7 @@ This method returns the current value of the reactive collection variable.
         return [ this.getCollectionReactively('relevantIds') ];
       });
 
-      this.relevantIds[0] = 50; // This will cause the subscribe arguments method to run again
+      this.relevantIds.push(13); // This will cause the subscribe arguments method to run again
     }]);
 
 ### Example with `helpers`:

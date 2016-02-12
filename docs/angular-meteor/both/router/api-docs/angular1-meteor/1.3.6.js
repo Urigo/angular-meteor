@@ -20,7 +20,7 @@ API_1_3_6 = function (version, basedOnTemplatesOf) {
             path: urlBase + "helpers",
             title: "helpers",
             seoTitle: "Context Helpers",
-            mdContent: "api." + templatePrefix + ".helpers"
+            mdContent: "api." + version + ".helpers"
           },
           {
             id: "02",
@@ -28,7 +28,7 @@ API_1_3_6 = function (version, basedOnTemplatesOf) {
             path: urlBase + "subscribe",
             title: "subscribe",
             seoTitle: "Subscribe",
-            mdContent: "api." + templatePrefix + ".subscribe"
+            mdContent: "api." + version + ".subscribe"
           },
           {
             id: "03",
@@ -36,7 +36,7 @@ API_1_3_6 = function (version, basedOnTemplatesOf) {
             path: urlBase + "autorun",
             title: "autorun",
             seoTitle: "Autorun",
-            mdContent: "api." + templatePrefix + ".autorun"
+            mdContent: "api." + version + ".autorun"
           },
           {
             id: "04",
@@ -48,14 +48,6 @@ API_1_3_6 = function (version, basedOnTemplatesOf) {
           },
           {
             id: "05",
-            route: "api." + version + ".get-collection-reactively",
-            path: urlBase + "get-collection-reactively",
-            title: "getCollectionReactively",
-            seoTitle: "getCollectionReactively",
-            mdContent: "api." + version + ".get-collection-reactively"
-          },
-          {
-            id: "06",
             route: "api." + version + ".call",
             path: urlBase + "call",
             title: "call",
@@ -63,12 +55,20 @@ API_1_3_6 = function (version, basedOnTemplatesOf) {
             mdContent: "api." + version + ".call"
           },
           {
-            id: "07",
+            id: "06",
             route: "api." + version + ".apply",
             path: urlBase + "apply",
             title: "apply",
             seoTitle: "apply",
             mdContent: "api." + version + ".apply"
+          },
+          {
+            id: "07",
+            route: "api." + version + ".auth",
+            path: urlBase + "auth",
+            title: "$auth",
+            seoTitle: "$auth",
+            mdContent: "api." + version + ".auth"
           },
           {
             id: "08",
@@ -88,14 +88,6 @@ API_1_3_6 = function (version, basedOnTemplatesOf) {
           },
           {
             id: "10",
-            route: "api." + version + ".auth",
-            path: urlBase + "auth",
-            title: "$auth",
-            seoTitle: "$auth",
-            mdContent: "api." + version + ".auth"
-          },
-          {
-            id: "11",
             route: "api." + version + ".blaze-template",
             path: urlBase + "blaze-template",
             title: "blaze-template directive",
@@ -103,7 +95,7 @@ API_1_3_6 = function (version, basedOnTemplatesOf) {
             mdContent: "api." + templatePrefix + ".blaze-template"
           },
           {
-            id: "12",
+            id: "11",
             route: "api." + version + ".ngFileExtension",
             path: urlBase + "ngFileExtension",
             title: "File Extensions",
@@ -111,12 +103,20 @@ API_1_3_6 = function (version, basedOnTemplatesOf) {
             mdContent: "api." + templatePrefix + ".ngFileExtension"
           },
           {
-            id: "13",
+            id: "12",
             route: "api." + version + ".settings",
             path: urlBase + "settings",
             title: "$angularMeteorSettings",
             seoTitle: "$angularMeteorSettings",
             mdContent: "api." + version + ".settings"
+          },
+          {
+            id: "13",
+            route: "api." + version + ".get-collection-reactively",
+            path: urlBase + "get-collection-reactively",
+            title: "getCollectionReactively",
+            seoTitle: "getCollectionReactively",
+            mdContent: "api." + version + ".get-collection-reactively"
           }
         ]
       }
