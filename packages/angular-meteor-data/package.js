@@ -1,7 +1,7 @@
 Package.describe({
   name: 'angular-meteor-data',
   summary: 'Everything you need to use AngularJS in your Meteor app',
-  version: '0.1.0',
+  version: '0.2.0-beta.1',
   git: 'https://github.com/Urigo/angular-meteor.git'
 });
 
@@ -24,7 +24,7 @@ Package.onUse(function (api) {
   api.use('ecmascript');
   api.use('reactive-var');
   api.use('benjamine:jsondiffpatch@0.1.38_1');
-  api.use('angular:angular@1.4.7', 'client');
+  api.use('angular:angular@1.4.8', 'client');
   api.use('isobuild:compiler-plugin@1.0.0');
 
   // legacy
