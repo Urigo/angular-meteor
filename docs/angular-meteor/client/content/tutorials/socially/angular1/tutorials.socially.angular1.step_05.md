@@ -53,7 +53,7 @@ Notice we did 3 things:
 
 1. Replaced all the content with ui-view (this will be responsible for including the right content according to the current URL).
 2. Added a `h1` header with a link to the main parties page.
-3. We also added a `base` tag in the head (required when using HTML5 location mode - would be explained a but further).
+3. We also added a `base` tag in the head (required when using HTML5 location mode - would be explained a bit further).
 
 > Note that you can remove `main.html` now, because it's no longer in use!
 
