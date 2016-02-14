@@ -1,12 +1,12 @@
-describe('$meteorUtils service', function () {
+describe('$meteorUtils service', function() {
 
   var $meteorUtils, $scope, $rootScope;
 
-  beforeEach(function () {
+  beforeEach(function() {
 
     angular.mock.module('angular-meteor.utils');
     // Injecting Services to use
-    angular.mock.inject(function (_$meteorUtils_, _$rootScope_) {
+    angular.mock.inject(function(_$meteorUtils_, _$rootScope_) {
       $meteorUtils = _$meteorUtils_;
       $rootScope = _$rootScope_;
       // Creates a new child scope.
@@ -15,9 +15,9 @@ describe('$meteorUtils service', function () {
 
   });
 
-  describe('autorun', function () {
+  describe('autorun', function() {
 
-    it('should return a stoppable computation handle', function () {
+    it('should return a stoppable computation handle', function() {
       var dependency = new Tracker.Dependency();
       var computationSpy = jasmine.createSpy('computationSpy').and.callFake(function() {
         dependency.depend();
@@ -46,17 +46,18 @@ describe('$meteorUtils service', function () {
     }));
 
     it('should stop the computation when the collection is destroyed', function() {
-      var handle = $meteorUtils.autorun($scope, function fn() {});
+      var handle = $meteorUtils.autorun($scope, function fn() {
+      });
       spyOn(handle, 'stop');
       $scope.$destroy();
       expect(handle.stop).toHaveBeenCalled();
     });
   });
-  describe('stripDollarPrefixedKeys', function () {
+  describe('stripDollarPrefixedKeys', function() {
 
-    it('should remove keys with $ prefix', function(){
+    it('should remove keys with $ prefix', function() {
 
-      var result = $meteorUtils.stripDollarPrefixedKeys({'$foo': 1, '$$baz': 3, bar : 2});
+      var result = $meteorUtils.stripDollarPrefixedKeys({'$foo': 1, '$$baz': 3, bar: 2});
       expect(result.hasOwnProperty('$foo')).toBe(false);
       expect(result.hasOwnProperty('$$baz')).toBe(false);
       expect(result.bar).toEqual(2);
@@ -64,7 +65,7 @@ describe('$meteorUtils service', function () {
     });
 
 
-    it('should ignore Date instances', function(){
+    it('should ignore Date instances', function() {
 
       var input = new Date();
       var result = $meteorUtils.stripDollarPrefixedKeys(input);
@@ -76,8 +77,10 @@ describe('$meteorUtils service', function () {
 
   describe('fulfill()', function() {
     var deferred = {
-      resolve: function() {},
-      reject: function() {}
+      resolve: function() {
+      },
+      reject: function() {
+      }
     };
 
     beforeEach(function() {
@@ -115,7 +118,7 @@ describe('$meteorUtils service', function () {
 
     it('should return bound result of an async callback from an arbitrary function', function() {
       var fn = function(action, _id) {
-        return {_id: _id, action: action };
+        return {_id: _id, action: action};
       };
       var createFulfill = _.partial(fn, 'inserted');
       var fulfill = $meteorUtils.fulfill(deferred, err, result);
@@ -124,7 +127,7 @@ describe('$meteorUtils service', function () {
 
       fulfill(null, createFulfill(result));
       expect(deferred.resolve.calls.count()).toEqual(1);
-      expect(deferred.resolve.calls.mostRecent().args[0]).toEqual({ _id: result, action: 'inserted' });
+      expect(deferred.resolve.calls.mostRecent().args[0]).toEqual({_id: result, action: 'inserted'});
 
       fulfill(Error());
       expect(deferred.reject.calls.count()).toEqual(1);
@@ -135,7 +138,10 @@ describe('$meteorUtils service', function () {
   describe('promissor', function() {
     it('should create a function which invokes method with the given arguments and returns a promise', function(done) {
       var next = _.after(2, done);
-      var obj = { method: function() {} };
+      var obj = {
+        method: function() {
+        }
+      };
       var promissor = $meteorUtils.promissor(obj, 'method');
 
       spyOn(obj, 'method');
