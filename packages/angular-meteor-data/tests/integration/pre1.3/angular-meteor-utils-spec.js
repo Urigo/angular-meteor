@@ -15,24 +15,6 @@ describe('$meteorUtils service', function () {
 
   });
 
-  describe('getCollectionByName', function () {
-
-    it('should return the mongo collection when called with an existing collection', function () {
-      var collectionName = 'aCollection';
-      new Mongo.Collection(collectionName);
-
-      var coll = $meteorUtils.getCollectionByName('aCollection');
-
-      expect(coll).toEqual(jasmine.any(Mongo.Collection));
-      expect(coll._name).toEqual(collectionName);
-    });
-
-    it('should return "undefined" when called with a non-existing collection', function () {
-      var output = $meteorUtils.getCollectionByName('myCollectionFake');
-      expect(output).toBeUndefined();
-    });
-  });
-
   describe('autorun', function () {
 
     it('should return a stoppable computation handle', function () {

@@ -89,10 +89,6 @@ angularMeteorUtils.service('$meteorUtils', [
       return allPromise;
     };
 
-    this.getCollectionByName = function(string){
-      return Mongo.Collection.get(string);
-    };
-
     this.findIndexById = function(collection, doc) {
       var foundDoc = _.find(collection, function(colDoc) {
         // EJSON.equals used to compare Mongo.ObjectIDs and Strings.

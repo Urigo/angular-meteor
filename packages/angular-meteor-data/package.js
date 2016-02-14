@@ -14,7 +14,6 @@ Package.onUse(function (api) {
   api.use('check@1.0.6');
   api.use('diff-sequence');
   api.use('mongo-id');
-  api.use('dburles:mongo-collection-instances@0.3.4', 'client'); // For getCollectionByName
 
   api.use('underscore@1.0.4');
   api.use('tracker@1.0.8');
