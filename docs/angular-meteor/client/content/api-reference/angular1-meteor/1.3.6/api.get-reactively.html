@@ -1,0 +1,96 @@
+<template name="api.1.3.6.get-reactively">
+  <div>
+    <a href="https://github.com/Urigo/angular-meteor/edit/master/docs/angular-meteor/client/content/api-reference/angular1-meteor/1.3.6/api.get-reactively.html"
+       class="btn btn-default btn-lg improve-button">
+      <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
+    </a>
+
+    <do-nothing>
+      {{#markdown}}
+
+# getReactively
+<a class="src-code" href="https://github.com/Urigo/angular-meteor/blob/master/packages/angular-meteor-data/modules/reactive.js#L43" target="_blank">
+  src: angular-meteor-data/modules/reactive.js, line 43
+</a>
+
+Use this method to get a context variable and watch it reactively, so each change of this variable causes the dependents (autorun, helper functions and subscriptions) to run again.
+
+The `getReactively` method is part of the `ReactiveContext`, and available on every `context` and `$scope`.
+
+-------
+
+### Arguments
+
+<table class="variables-matrix input-arguments">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Type</th>
+    <th>Details</th>
+    <th>Required</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td><strong>variableName</strong></td>
+    <td>
+      <a href="" class="label type-hint type-hint-string">String</a>
+    </td>
+    <td>The name of the context's variable to bind to</td>
+    <td>Yes</td>
+  </tr>
+  <tr>
+    <td>objectEquality</td>
+    <td>
+      <a href="" class="label type-hint type-hint-function">Function</a><br />
+      <a href="" class="label type-hint type-hint-boolean">Boolean</a>
+    </td>
+    <td>Use `true` to deep watch the object, or a function to provide custom equality function. The default value is `false`, which does a shallow / reference watch only.</td>
+    <td>No</td>
+  </tr>
+  </tbody>
+</table>
+
+### Return value
+
+This method returns the current value of the reactive variable.
+
+-------
+
+### Example with `subscribe`:
+
+    myModule.controller('MyCtrl', ['$scope', '$reactive', function($scope, $reactive) {
+      $reactive(this).attach($scope);
+
+      this.relevantId = 10;
+
+      this.subscribe('users', () => {
+        return [ this.getReactively('relevantId') ];
+      });
+
+      this.relevantId = 50; // This will cause the subscribe arguments method to run again
+    }]);
+
+### Example with `helpers`:
+
+    myModule.controller('MyCtrl', ['$scope', '$reactive', function($scope, $reactive) {
+      $reactive(this).attach($scope);
+
+      this.myUser: {
+        id: 10
+      };
+
+      this.helpers({
+        myData: () => {
+          return Data.find({_id: this.getReactively('myUser.id')});
+        }
+      });
+
+      this.myUser.id = 29; // This will cause the helper to run again and update the view
+    }]);
+
+      {{/markdown}}
+    </do-nothing>
+
+  </div>
+</template>
