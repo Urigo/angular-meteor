@@ -97,7 +97,7 @@ In this example, we will allow only logged in users, with `firstName` equals to 
         template: '<my-component></my-component>',
         resolve: {
         user: ($auth) => {
-          return $auth.requireValidUser((user) => {);
+          return $auth.requireValidUser((user) => {
             if (user.firstName === 'Uri') {
               return true;
             }
