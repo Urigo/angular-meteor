@@ -44,7 +44,7 @@ API_1_3_6 = function (version, basedOnTemplatesOf) {
             path: urlBase + "get-reactively",
             title: "getReactively",
             seoTitle: "getReactively",
-            mdContent: "api." + templatePrefix + ".get-reactively"
+            mdContent: "api." + version + ".get-reactively"
           },
           {
             id: "05",
@@ -84,7 +84,7 @@ API_1_3_6 = function (version, basedOnTemplatesOf) {
             path: urlBase + "reactive",
             title: "$reactive",
             seoTitle: "$reactive",
-            mdContent: "api." + templatePrefix + ".reactive"
+            mdContent: "api." + version + ".reactive"
           },
           {
             id: "10",
