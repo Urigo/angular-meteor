@@ -131,7 +131,7 @@ If you are using [Atom](atom.io) as your editor with the [Atom-TypeScript plugin
   "filesGlob": [
     "**/*.ts"
   ],
-  "files": [],
+  "files": []
 }
 ```
 
