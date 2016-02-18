@@ -1,0 +1,8 @@
+.github
+dist
+docs
+examples
+meteor
+tests
+webpack
+validate-commit-msg.js
