@@ -25,6 +25,8 @@ Package.onTest(function(api) {
   api.use('angular:angular@1.4.8', 'client');
   api.use('isobuild:compiler-plugin@1.0.0');
 
+  api.use('mdg:camera@1.1.5');
+
   api.addFiles([
     '../dist/angular-meteor.js'
   ], 'client');
@@ -39,4 +41,14 @@ Package.onTest(function(api) {
   api.addFiles([
     'collections.js'
   ], 'client', 'server');
+
+  // legacy
+  api.addFiles([
+    // auxiliary
+    'integration/auxiliary/test_data.js',
+    'integration/auxiliary/matchers.js',
+    // modules
+    'integration/pre1.3/angular-meteor-get-updates-spec.js',
+    'integration/pre1.3/angular-meteor-diff-array-spec.js'
+  ], 'client');
 });
