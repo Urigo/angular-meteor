@@ -2,6 +2,13 @@
 # Angular Meteor community team Weekly Meeting
 (format copied from the Angular team)
 
+### Date - 2/17/16
+* Angular1-Meteor 1.3.6 released with many fixes
+* Meteor 1.3 support for Angular 1.x in version 1.3.7
+    * [PR](https://github.com/Urigo/angular-meteor/pull/1239) is after review and almost done
+* Typescript
+    * The new [merged](https://github.com/urigo/angular2-meteor/issues?utf8=%E2%9C%93&q=label%3A%22component%3A+build%3Atypescript%22+) Typescript package is out in beta - `barbatus:typescript@0.2.0-beta.4`.  [Source code](https://github.com/barbatus/typescript)
+* As usual, anyone who wants to help - my email in on my [Github profile page](https://github.com/urigo/)
 
 ### Date - 2/10/16
 * First Weekly community team meeting with open meeting notes!
