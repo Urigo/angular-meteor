@@ -1,0 +1,8 @@
+lib
+src
+tests
+webpack
+.eslintignore
+.eslintrc
+.versions
+package.js

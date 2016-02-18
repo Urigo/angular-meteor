@@ -1,20 +1,26 @@
-angular.module('angular-meteor.mixer', [])
+export const module = 'angular-meteor.mixer';
+export const Mixer = '$Mixer';
 
+angular.module(module, [])
 
 /*
-  A service which lets us apply mixins into the `ChildScope` prototype. The flow is simple. Once
-  we define a mixin, it will be stored in the `$Mixer`, and any time a `ChildScope` prototype is
-  created it will be extended by the `$Mixer`. This concept is good because it keeps our code
-  clean and simple, and easy to extend. So any time we would like to define a new behaviour to our
-  scope, we will just use the `$Mixer` service.
+  A service which lets us apply mixins into the `ChildScope` prototype.
+  The flow is simple. Once we define a mixin, it will be stored in the `$Mixer`,
+  and any time a `ChildScope` prototype is created
+  it will be extended by the `$Mixer`.
+  This concept is good because it keeps our code
+  clean and simple, and easy to extend.
+  So any time we would like to define a new behaviour to our scope,
+  we will just use the `$Mixer` service.
  */
-.service('$Mixer', function() {
+.service(Mixer, function() {
   this._mixins = [];
 
   // Adds a new mixin
   this.mixin = (mixin) => {
-    if (!_.isObject(mixin))
+    if (!_.isObject(mixin)) {
       throw Error('argument 1 must be an object');
+    }
 
     this._mixins = _.union(this._mixins, [mixin]);
     return this;

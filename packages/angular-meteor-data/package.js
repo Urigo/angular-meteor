@@ -27,33 +27,8 @@ Package.onUse(function (api) {
   api.use('angular:angular@1.4.8', 'client');
   api.use('isobuild:compiler-plugin@1.0.0');
 
-  // legacy
   api.add_files([
-    // Lib Files
-    'lib/diff-array.js',
-    'lib/get-updates.js',
-    // Module Files
-    'modules/angular-meteor-settings.js',
-    'modules/angular-meteor-subscribe.js',
-    'modules/angular-meteor-stopper.js',
-    'modules/angular-meteor-collection.js',
-    'modules/angular-meteor-object.js',
-    'modules/angular-meteor-ironrouter.js',
-    'modules/angular-meteor-user.js',
-    'modules/angular-meteor-methods.js',
-    'modules/angular-meteor-session.js',
-    'modules/angular-meteor-utils.js',
-    'modules/angular-meteor-camera.js'
-    ], 'client');
-
-  api.add_files([
-    'modules/utils.js',
-    'modules/mixer.js',
-    'modules/scope.js',
-    'modules/view-model.js',
-    'modules/core.js',
-    'modules/reactive.js',
-    'angular-meteor.js'
+    'dist/angular-meteor.js'
   ], 'client');
 });
 
