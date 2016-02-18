@@ -3,6 +3,8 @@ dist
 docs
 examples
 meteor
+src/lib
+src/modules/angular-meteor-*.js
 tests
 webpack
 validate-commit-msg.js
