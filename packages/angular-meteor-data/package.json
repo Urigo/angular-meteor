@@ -24,6 +24,7 @@
     "eslint": "^1.10.3",
     "eslint-config-airbnb": "^4.0.0",
     "eslint-loader": "^1.2.1",
+    "eslint-plugin-import": "^0.13.0",
     "lodash": "^3.10.1",
     "parallelshell": "^2.0.0",
     "velocity-cli": "^0.4.3",
