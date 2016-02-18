@@ -31,8 +31,6 @@ Package.onUse(function (api) {
   api.use('angular:angular@1.4.8', 'client');
   api.use('isobuild:compiler-plugin@1.0.0');
 
-  api.use('mdg:camera@1.1.5');
-
   api.add_files([
     '.npm/package/node_modules/angular-meteor/dist/angular-meteor.js'
   ], 'client', {
