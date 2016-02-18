@@ -2,9 +2,7 @@
   "name": "angular-meteor",
   "version": "1.3.7-beta.1",
   "private": true,
-  "main": [
-    "dist/angular-meteor.js"
-  ],
+  "main": "dist/angular-meteor.js",
   "scripts": {
     "lint": "eslint .",
     "pretest": "npm run build:dist",
