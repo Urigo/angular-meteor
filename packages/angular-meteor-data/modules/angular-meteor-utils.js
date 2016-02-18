@@ -8,7 +8,7 @@ var angularMeteorUtils = angular.module('angular-meteor.utils', []);
 
 angularMeteorUtils.service('$meteorUtils', [
   '$q', '$timeout', '$angularMeteorSettings',
-  function ($q, $timeout, $angularMeteorSettings) {
+  function($q, $timeout, $angularMeteorSettings) {
 
     var self = this;
 
@@ -36,7 +36,7 @@ angularMeteorUtils.service('$meteorUtils', [
 
     // Borrowed from angularFire
     // https://github.com/firebase/angularfire/blob/master/src/utils.js#L445-L454
-    this.stripDollarPrefixedKeys = function (data) {
+    this.stripDollarPrefixedKeys = function(data) {
       if (!_.isObject(data) ||
           data instanceof Date ||
           data instanceof File ||
@@ -46,8 +46,8 @@ angularMeteorUtils.service('$meteorUtils', [
 
       var out = _.isArray(data) ? [] : {};
 
-      _.each(data, function(v,k) {
-        if(typeof k !== 'string' || k.charAt(0) !== '$')
+      _.each(data, function(v, k) {
+        if (typeof k !== 'string' || k.charAt(0) !== '$')
           out[k] = self.stripDollarPrefixedKeys(v);
       });
 
@@ -89,10 +89,6 @@ angularMeteorUtils.service('$meteorUtils', [
       return allPromise;
     };
 
-    this.getCollectionByName = function(string){
-      return Mongo.Collection.get(string);
-    };
-
     this.findIndexById = function(collection, doc) {
       var foundDoc = _.find(collection, function(colDoc) {
         // EJSON.equals used to compare Mongo.ObjectIDs and Strings.
@@ -110,4 +106,4 @@ angularMeteorUtils.run([
     Object.getPrototypeOf($rootScope).$meteorAutorun = function(fn) {
       return $meteorUtils.autorun(this, fn);
     };
-}]);
+  }]);

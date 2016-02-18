@@ -66,7 +66,7 @@ function($Mixer, $$Core, $$ViewModel, $$Reactive) {
     this.logout = $meteorUser.logout;
     this.logoutOtherClients = $meteorUser.logoutOtherClients;
     this.session = $meteorSession;
+    this.session = $meteorSession;
     this.autorun = $meteorUtils.autorun;
-    this.getCollectionByName = $meteorUtils.getCollectionByName;
     this.getPicture = $meteorCamera.getPicture;
 }]);

@@ -5,7 +5,7 @@
 'use strict';
 
 var angularMeteorCollection = angular.module('angular-meteor.collection',
-  ['angular-meteor.stopper', 'angular-meteor.subscribe', 'angular-meteor.utils', 'diffArray']);
+    ['angular-meteor.stopper', 'angular-meteor.subscribe', 'angular-meteor.utils', 'diffArray']);
 
 // The reason angular meteor collection is a factory function and not something
 // that inherit from array comes from here:
@@ -34,12 +34,7 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
       // (autorun for cursor.fetch).
       data._hDataAutorun = null;
 
-      if (angular.isDefined(collection)) {
-        data.$$collection = collection;
-      } else {
-        var cursor = curDefFunc();
-        data.$$collection = $meteorUtils.getCollectionByName(cursor.collection.name);
-      }
+      data.$$collection = collection;
 
       _.extend(data, AngularMeteorCollection);
       data._startCurAutorun(curDefFunc, autoClientSave);
@@ -122,7 +117,7 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
       _.each(update.$pull, function(pull, prop) {
         var puller = {};
         puller[prop] = pull;
-        updates.push({ $pull: puller });
+        updates.push({$pull: puller});
       });
 
       this._updateParallel(selector, updates, callback);
@@ -172,7 +167,7 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
     AngularMeteorCollection._removeDoc = function(id) {
       var deferred = $q.defer();
       var collection = this.$$collection;
-      var fulfill = $meteorUtils.fulfill(deferred, null, { _id: id, action: 'removed' });
+      var fulfill = $meteorUtils.fulfill(deferred, null, {_id: id, action: 'removed'});
       collection.remove(id, fulfill);
       return deferred.promise;
     };
@@ -333,7 +328,7 @@ angularMeteorCollection.factory('AngularMeteorCollection', [
     };
 
     return AngularMeteorCollection;
-}]);
+  }]);
 
 angularMeteorCollection.factory('$meteorCollectionFS', [
   '$meteorCollection', 'diffArray', '$angularMeteorSettings',
@@ -346,7 +341,7 @@ angularMeteorCollection.factory('$meteorCollectionFS', [
     }
 
     return $meteorCollectionFS;
-}]);
+  }]);
 
 angularMeteorCollection.factory('$meteorCollection', [
   'AngularMeteorCollection', '$rootScope', 'diffArray',
@@ -359,7 +354,7 @@ angularMeteorCollection.factory('$meteorCollection', [
 
       if (!(angular.isFunction(reactiveFunc) || angular.isFunction(reactiveFunc.find))) {
         throw new TypeError(
-          'The first argument of $meteorCollection must be a function or ' +
+            'The first argument of $meteorCollection must be a function or ' +
             'a have a find function property.');
       }
 
@@ -375,7 +370,7 @@ angularMeteorCollection.factory('$meteorCollection', [
     }
 
     return $meteorCollection;
-}]);
+  }]);
 
 angularMeteorCollection.run([
   '$rootScope', '$meteorCollection', '$meteorCollectionFS', '$meteorStopper',
@@ -383,4 +378,4 @@ angularMeteorCollection.run([
     var scopeProto = Object.getPrototypeOf($rootScope);
     scopeProto.$meteorCollection = $meteorStopper($meteorCollection);
     scopeProto.$meteorCollectionFS = $meteorStopper($meteorCollectionFS);
-}]);
+  }]);
