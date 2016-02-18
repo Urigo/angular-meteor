@@ -477,20 +477,20 @@ describe('$meteorCollection service', function() {
 
     // Cleaning up after each test.
     beforeEach(function() {
-      bigCollection.find({}).forEach(function(doc) {
-        bigCollection.remove(doc._id);
+      DummyCollection.find({}).forEach(function(doc) {
+        DummyCollection.remove(doc._id);
       });
       for (var i = 0; i < 100; i++) {
-        bigCollection.insert({count: i});
+        DummyCollection.insert({count: i});
       }
     });
 
     it('$apply executed twice', function() {
-      var $ngCol = $meteorCollection(bigCollection);
+      var $ngCol = $meteorCollection(DummyCollection);
       $timeout.flush();
 
       expect($rootScope.$apply).toHaveBeenCalled();
-      expect($ngCol).toEqualCollection(bigCollection);
+      expect($ngCol).toEqualCollection(DummyCollection);
       // No matter how much elements MyCollection contains
       // $rootScope.$apply should be called twice.
       expect($rootScope.$apply.calls.count()).toEqual(2);
@@ -499,8 +499,8 @@ describe('$meteorCollection service', function() {
     it('push updates from client handled correctly', function() {
       $rootScope.limit = 10;
       var $ngCol = $meteorCollection(function() {
-        return bigCollection.find({}, {
-          limit: $rootScope.getReactively('limit')
+        return DummyCollection.find({}, {
+          limit: $rootScope.getReactively('limit') // TODO is not a function
         });
       });
       spyOn($ngCol, 'save');
@@ -519,8 +519,8 @@ describe('$meteorCollection service', function() {
     it('remove updates from client handled correctly', function() {
       $rootScope.limit = 10;
       var $ngCol = $meteorCollection(function() {
-        return bigCollection.find({}, {
-          limit: $rootScope.getReactively('limit')
+        return DummyCollection.find({}, {
+          limit: $rootScope.getReactively('limit') // TODO is not a function
         });
       });
       spyOn($ngCol, 'remove').and.callThrough();
