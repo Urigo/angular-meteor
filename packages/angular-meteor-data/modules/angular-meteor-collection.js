@@ -5,7 +5,7 @@
 'use strict';
 
 var angularMeteorCollection = angular.module('angular-meteor.collection',
-  ['angular-meteor.stopper', 'angular-meteor.subscribe', 'angular-meteor.utils', 'diffArray']);
+  ['angular-meteor.stopper', 'angular-meteor.subscribe', 'angular-meteor.utils', 'diffArray', 'angular-meteor.settings']);
 
 // The reason angular meteor collection is a factory function and not something
 // that inherit from array comes from here:

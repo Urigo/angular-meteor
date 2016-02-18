@@ -3,7 +3,7 @@
  */
 
 'use strict';
-var angularMeteorSession = angular.module('angular-meteor.session', ['angular-meteor.utils']);
+var angularMeteorSession = angular.module('angular-meteor.session', ['angular-meteor.utils', 'angular-meteor.settings']);
 
 angularMeteorSession.factory('$meteorSession', ['$meteorUtils', '$parse', '$angularMeteorSettings',
   function ($meteorUtils, $parse, $angularMeteorSettings) {
@@ -30,4 +30,3 @@ angularMeteorSession.factory('$meteorSession', ['$meteorUtils', '$parse', '$angu
     };
   }
 ]);
-

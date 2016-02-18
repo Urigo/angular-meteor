@@ -13,9 +13,8 @@ angular.module('angular-meteor.reactive', [
 .factory('$$Reactive', [
   '$parse',
   '$$utils',
-  '$angularMeteorSettings',
 
-function($parse, $$utils, $angularMeteorSettings) {
+function($parse, $$utils) {
   function $$Reactive(vm = this) {
     // Helps us track changes made in the view model
     vm.$$dependencies = {};

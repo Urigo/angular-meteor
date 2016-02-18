@@ -4,7 +4,7 @@
 
 'use strict';
 
-var angularMeteorCamera = angular.module('angular-meteor.camera', ['angular-meteor.utils']);
+var angularMeteorCamera = angular.module('angular-meteor.camera', ['angular-meteor.utils', 'angular-meteor.settings']);
 
 // requires package 'mdg:camera'
 angularMeteorCamera.service('$meteorCamera', [
