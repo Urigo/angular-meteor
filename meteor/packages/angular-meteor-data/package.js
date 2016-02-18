@@ -5,6 +5,10 @@ Package.describe({
   git: 'https://github.com/Urigo/angular-meteor.git'
 });
 
+Npm.depends({
+  'angular-meteor': '1.3.6'
+});
+
 Package.onUse(function (api) {
   api.versionsFrom('METEOR@1.2.0.1');
 
@@ -28,7 +32,7 @@ Package.onUse(function (api) {
   api.use('isobuild:compiler-plugin@1.0.0');
 
   api.add_files([
-    'dist/angular-meteor.js'
+    '.npm/package/node_modules/angular-meteor/dist/angular-meteor.js'
   ], 'client', {
     transpile: false
   });
