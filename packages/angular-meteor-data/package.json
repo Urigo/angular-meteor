@@ -1,0 +1,32 @@
+{
+  "name": "angular-meteor",
+  "version": "1.3.7-beta.1",
+  "private": true,
+  "main": [
+    "dist/angular-meteor.js"
+  ],
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run build:dist",
+    "test": "velocity test-packages ./ --ci",
+    "test:watch": "parallelshell \"npm run watch\" \"velocity test-packages ./\"",
+    "watch": "webpack --watch --progress --config webpack/dist.js",
+    "build:dist": "webpack --progress --config webpack/dist.js",
+    "build:prod": "webpack --progress --config webpack/prod.js --optimize-minimize",
+    "build": "npm run build:dist && npm run build:prod"
+  },
+  "devDependencies": {
+    "babel": "^6.3.26 ",
+    "babel-core": "^6.4.5",
+    "babel-eslint": "^4.1.6",
+    "babel-loader": "^6.2.1",
+    "babel-preset-es2015": "^6.3.13",
+    "eslint": "^1.10.3",
+    "eslint-config-airbnb": "^4.0.0",
+    "eslint-loader": "^1.2.1",
+    "lodash": "^3.10.1",
+    "parallelshell": "^2.0.0",
+    "velocity-cli": "^0.4.3",
+    "webpack": "^1.12.9"
+  }
+}
