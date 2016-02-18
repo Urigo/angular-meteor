@@ -2,14 +2,12 @@
   "extends": "airbnb/base",
   "parser": "babel-eslint",
   "env": {
-    "browser": true
+    "browser": true,
+    "meteor": true
   },
   "globals": {
     "angular": false,
     "_": false,
-    "Meteor": false,
-    "Package": false,
-    "Tracker": false,
     "jsondiffpatch": false
   },
   "rules": {
