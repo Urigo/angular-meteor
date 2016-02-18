@@ -29,7 +29,9 @@ Package.onUse(function (api) {
 
   api.add_files([
     'dist/angular-meteor.js'
-  ], 'client');
+  ], 'client', {
+    transpile: false
+  });
 });
 
 Package.onTest(function(api) {
