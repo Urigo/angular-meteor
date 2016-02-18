@@ -2,7 +2,7 @@
 dist
 docs
 examples
-meteor
+packages
 src/lib
 src/modules/angular-meteor-*.js
 tests
