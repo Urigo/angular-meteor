@@ -2,6 +2,7 @@
 import './lib/get-updates';
 import './lib/diff-array';
 // legacy
+import './modules/angular-meteor-settings';
 import './modules/angular-meteor-ironrouter';
 import './modules/angular-meteor-utils';
 import './modules/angular-meteor-subscribe';
@@ -45,10 +46,6 @@ angular.module(module, [
   'angular-meteor.camera'
 
 ])
-
-.constant('$angularMeteorSettings', {
-  suppressWarnings: false
-})
 
 .run([
   Mixer,
