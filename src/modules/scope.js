@@ -1,16 +1,14 @@
 import { module as mixerModule, Mixer } from './mixer';
 
-export const module = 'angular-meteor.scope'
+export const module = 'angular-meteor.scope';
 
 angular.module(module, [
   mixerModule
 ])
 
-
 .run([
   '$rootScope',
   Mixer,
-
   function($rootScope, $Mixer) {
     const Scope = $rootScope.constructor;
     const $new = $rootScope.$new;
