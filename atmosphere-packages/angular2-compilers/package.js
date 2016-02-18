@@ -13,7 +13,6 @@ Package.registerBuildPlugin({
   ],
   use: [
     // Uses an external packages to get the actual compilers
-    'barbatus:ts-compilers@0.2.8_4',
     'ecmascript@0.3.1-modules.8',
     'angular2-html-templates@0.5.0-beta.1'
   ]
@@ -27,6 +26,7 @@ Package.onUse(function(api) {
 
   // Those implies are required by Angular2-Meteor and here in order to make sure that you have them in your project.
   api.imply([
+    'barbatus:typescript@0.2.0-beta.4',
     'check@1.1.0',
     'tracker@1.0.9',
     'underscore@1.0.4'
