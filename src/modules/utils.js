@@ -10,6 +10,8 @@ angular.module(module, [])
   '$rootScope',
 
   function($rootScope) {
+    const self = this;
+
     // Checks if an object is a cursor
     this.isCursor = (obj) => {
       return obj instanceof Meteor.Collection.Cursor;
@@ -36,7 +38,7 @@ angular.module(module, [])
       return fn;
     };
 
-    const bindFn = (fn, context, tap) => {
+    function bindFn(fn, context, tap) {
       return (...args) => {
         const result = fn.apply(context, args);
         tap.call(context, {
@@ -45,13 +47,13 @@ angular.module(module, [])
         });
         return result;
       };
-    };
+    }
 
-    const bindObj = (obj, context, tap) => {
+    function bindObj(obj, context, tap) {
       return _.keys(obj).reduce((bound, k) => {
-        bound[k] = this.bind(obj[k], context, tap);
+        bound[k] = self.bind(obj[k], context, tap);
         return bound;
       }, {});
-    };
+    }
   }
 ]);
