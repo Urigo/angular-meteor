@@ -8,8 +8,8 @@
   "scripts": {
     "lint": "eslint .",
     "pretest": "npm run build:dist",
-    "test": "velocity test-packages ./ --ci",
-    "test:watch": "parallelshell \"npm run watch\" \"velocity test-packages ./\"",
+    "test": "velocity test-packages ./tests --ci",
+    "test:watch": "parallelshell \"npm run watch\" \"velocity test-packages ./tests\"",
     "watch": "webpack --watch --progress --config webpack/dist.js",
     "build:dist": "webpack --progress --config webpack/dist.js",
     "build:prod": "webpack --progress --config webpack/prod.js --optimize-minimize",
