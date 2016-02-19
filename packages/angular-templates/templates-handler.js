@@ -1,3 +1,8 @@
+if (Package['modules-runtime']) {
+  var require = Package['modules-runtime'].meteorInstall();
+  require('angular');
+}
+
 angular.module('angular-templates', []).config([
   '$provide',
   function ($provide) {
