@@ -13,6 +13,9 @@
     "build:prod": "webpack --progress --config webpack/prod.js --optimize-minimize",
     "build": "npm run build:dist && npm run build:prod"
   },
+  "peerDependencies": {
+    "angular": "^1.4.0"
+  },
   "devDependencies": {
     "babel": "^6.3.26 ",
     "babel-core": "^6.4.5",
