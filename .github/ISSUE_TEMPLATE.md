@@ -1,4 +1,4 @@
-Before you open up an issue, please check if the issue already exists or have been closed before.
+Before you open up an issue, please check if the issue already exists or has been closed before.
 
 ### When reporting a bug, please be sure to include the following:
 - [ ] An *isolated* way to reproduce the behavior
