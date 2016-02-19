@@ -18,6 +18,7 @@
   },
   "rules": {
     "quotes": [2, "single"],
+    "no-proto": 1,
     "comma-dangle": 0,
     "func-names": 0,
     "no-param-reassign": 1,
