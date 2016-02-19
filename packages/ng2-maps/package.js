@@ -10,7 +10,7 @@ Package.onUse(function(api) {
   api.versionsFrom('1.2.0.1');
 
   api.use([
-    'barbatus:angular2@0.8.3'
+    'barbatus:angular2@0.8.6'
   ]);
 
   // Installs typings.

@@ -12,7 +12,7 @@ Package.onUse(function(api) {
   api.use([
     'accounts-base@1.2.1',
     'promise@0.4.8',
-    'barbatus:angular2@0.8.3'
+    'barbatus:angular2@0.8.6'
   ]);
 
   api.addFiles([

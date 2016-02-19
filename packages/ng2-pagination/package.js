@@ -12,7 +12,7 @@ Package.onUse(function(api) {
   api.use([
     'check@1.0.5',
     'underscore@1.0.4',
-    'barbatus:angular2@0.8.2'
+    'barbatus:angular2@0.8.6'
   ]);
 
   api.addFiles([
