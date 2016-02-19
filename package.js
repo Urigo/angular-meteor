@@ -60,7 +60,7 @@ Package.onTest(function(api) {
   api.use([
     'tinytest',
     'ecmascript',
-    'sanjo:jasmine',
+    'sanjo:jasmine@0.18.0',
     'mongo',
     'tracker',
     'underscore',
