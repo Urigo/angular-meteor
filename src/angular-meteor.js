@@ -21,11 +21,11 @@ import { module as scopeModule } from './modules/scope';
 import { module as coreModule, Core } from './modules/core';
 import { module as viewModelModule, ViewModel } from './modules/view-model';
 import { module as reactiveModule, Reactive } from './modules/reactive';
+import { module as templatesModule } from './modules/templates';
 
-const module = 'angular-meteor';
-export default module;
+export const name = 'angular-meteor';
 
-angular.module(module, [
+angular.module(name, [
   // new
   utilsModule,
   mixerModule,
@@ -33,6 +33,7 @@ angular.module(module, [
   coreModule,
   viewModelModule,
   reactiveModule,
+  templatesModule,
 
   // legacy
   'angular-meteor.ironrouter',
