@@ -1,7 +1,7 @@
-export const module = 'angular-templates';
+export const name = 'angular-templates';
 
 try {
-  angular.module(module);
+  angular.module(name);
 } catch (e) {
-  angular.module(module, []);
+  angular.module(name, []);
 }

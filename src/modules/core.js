@@ -1,12 +1,12 @@
-import { module as utilsModule, utils } from './utils';
-import { module as mixerModule } from './mixer';
+import { name as utilsName, utils } from './utils';
+import { name as mixerName } from './mixer';
 
-export const module = 'angular-meteor.core';
+export const name = 'angular-meteor.core';
 export const Core = '$$Core';
 
-angular.module(module, [
-  utilsModule,
-  mixerModule
+angular.module(name, [
+  utilsName,
+  mixerName
 ])
 
 
@@ -38,11 +38,11 @@ angular.module(module, [
 
     // Calls Meteor.subscribe() which will be digested after each invokation
     // and automatically destroyed
-    $$Core.subscribe = function(name, fn, cb) {
+    $$Core.subscribe = function(subName, fn, cb) {
       fn = this.$bindToContext(fn || angular.noop);
       cb = cb ? this.$bindToContext(cb) : angular.noop;
 
-      if (!_.isString(name)) {
+      if (!_.isString(subName)) {
         throw Error('argument 1 must be a string');
       }
       if (!_.isFunction(fn)) {
@@ -62,7 +62,7 @@ angular.module(module, [
           throw Error(`reactive function's return value must be an array`);
         }
 
-        const subscription = Meteor.subscribe(name, ...args, cb);
+        const subscription = Meteor.subscribe(subName, ...args, cb);
         result.ready = subscription.ready.bind(subscription);
         result.subscriptionId = subscription.subscriptionId;
       });

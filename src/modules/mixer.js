@@ -1,7 +1,7 @@
-export const module = 'angular-meteor.mixer';
+export const name = 'angular-meteor.mixer';
 export const Mixer = '$Mixer';
 
-angular.module(module, [])
+angular.module(name, [])
 
 /*
   A service which lets us apply mixins into the `ChildScope` prototype.

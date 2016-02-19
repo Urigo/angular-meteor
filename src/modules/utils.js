@@ -1,7 +1,7 @@
-export const module = 'angular-meteor.utilities';
+export const name = 'angular-meteor.utilities';
 export const utils = '$$utils';
 
-angular.module(module, [])
+angular.module(name, [])
 
 /*
   A utility service which is provided with general utility functions

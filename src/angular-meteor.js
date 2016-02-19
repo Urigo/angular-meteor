@@ -15,25 +15,25 @@ import './modules/angular-meteor-camera';
 import './modules/angular-meteor-stopper';
 
 // new
-import { module as utilsModule } from './modules/utils';
-import { module as mixerModule, Mixer } from './modules/mixer';
-import { module as scopeModule } from './modules/scope';
-import { module as coreModule, Core } from './modules/core';
-import { module as viewModelModule, ViewModel } from './modules/view-model';
-import { module as reactiveModule, Reactive } from './modules/reactive';
-import { module as templatesModule } from './modules/templates';
+import { name as utilsName } from './modules/utils';
+import { name as mixerName, Mixer } from './modules/mixer';
+import { name as scopeName } from './modules/scope';
+import { name as coreName, Core } from './modules/core';
+import { name as viewModelName, ViewModel } from './modules/view-model';
+import { name as reactiveName, Reactive } from './modules/reactive';
+import { name as templatesName } from './modules/templates';
 
 export const name = 'angular-meteor';
 
 angular.module(name, [
   // new
-  utilsModule,
-  mixerModule,
-  scopeModule,
-  coreModule,
-  viewModelModule,
-  reactiveModule,
-  templatesModule,
+  utilsName,
+  mixerName,
+  scopeName,
+  coreName,
+  viewModelName,
+  reactiveName,
+  templatesName,
 
   // legacy
   'angular-meteor.ironrouter',

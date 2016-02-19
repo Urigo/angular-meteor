@@ -11,8 +11,7 @@ var common = {
   },
   output: {
     // point to root directory so we can avoid using ../../
-    path: path.join(__dirname, '../'),
-    libraryTarget: 'commonjs'
+    path: path.join(__dirname, '../')
   },
   // global variables
   externals: {

@@ -50,6 +50,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.name = undefined;
 
 	__webpack_require__(1);
 
@@ -75,36 +76,35 @@
 
 	__webpack_require__(12);
 
-	var _utils = __webpack_require__(13);
+	__webpack_require__(13);
 
-	var _mixer = __webpack_require__(14);
+	var _utils = __webpack_require__(14);
 
-	var _scope = __webpack_require__(15);
+	var _mixer = __webpack_require__(15);
 
-	var _core = __webpack_require__(16);
+	var _scope = __webpack_require__(16);
 
-	var _viewModel = __webpack_require__(17);
+	var _core = __webpack_require__(17);
 
-	var _reactive = __webpack_require__(18);
+	var _viewModel = __webpack_require__(18);
 
-	// new
+	var _reactive = __webpack_require__(19);
+
+	var _templates = __webpack_require__(20);
 
 	// legacy
 	// lib
+	var name = exports.name = 'angular-meteor';
 
-
-	var _module = 'angular-meteor';
-	exports.default = _module;
-
-
-	angular.module(_module, [
 	// new
-	_utils.module, _mixer.module, _scope.module, _core.module, _viewModel.module, _reactive.module,
+
+
+	angular.module(name, [
+	// new
+	_utils.name, _mixer.name, _scope.name, _core.name, _viewModel.name, _reactive.name, _templates.name,
 
 	// legacy
-	'angular-meteor.ironrouter', 'angular-meteor.utils', 'angular-meteor.subscribe', 'angular-meteor.collection', 'angular-meteor.object', 'angular-meteor.user', 'angular-meteor.methods', 'angular-meteor.session', 'angular-meteor.camera']).constant('$angularMeteorSettings', {
-	  suppressWarnings: false
-	}).run([_mixer.Mixer, _core.Core, _viewModel.ViewModel, _reactive.Reactive, function ($Mixer, $$Core, $$ViewModel, $$Reactive) {
+	'angular-meteor.ironrouter', 'angular-meteor.utils', 'angular-meteor.subscribe', 'angular-meteor.collection', 'angular-meteor.object', 'angular-meteor.user', 'angular-meteor.methods', 'angular-meteor.session', 'angular-meteor.camera']).run([_mixer.Mixer, _core.Core, _viewModel.ViewModel, _reactive.Reactive, function ($Mixer, $$Core, $$ViewModel, $$Reactive) {
 	  // Load all mixins
 	  $Mixer.mixin($$Core).mixin($$ViewModel).mixin($$Reactive);
 	}])
@@ -520,6 +520,16 @@
 
 	'use strict';
 
+	angular.module('angular-meteor.settings', []).constant('$angularMeteorSettings', {
+	  suppressWarnings: false
+	});
+
+/***/ },
+/* 4 */
+/***/ function(module, exports) {
+
+	'use strict';
+
 	angular.module('angular-meteor.ironrouter', []).run(['$compile', '$document', '$rootScope', function ($compile, $document, $rootScope) {
 	  var Router = (Package['iron:router'] || {}).Router;
 	  if (!Router) return;
@@ -538,7 +548,7 @@
 	}]);
 
 /***/ },
-/* 4 */
+/* 5 */
 /***/ function(module, exports) {
 
 	/*global
@@ -549,7 +559,7 @@
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
-	var angularMeteorUtils = angular.module('angular-meteor.utils', []);
+	var angularMeteorUtils = angular.module('angular-meteor.utils', ['angular-meteor.settings']);
 
 	angularMeteorUtils.service('$meteorUtils', ['$q', '$timeout', '$angularMeteorSettings', function ($q, $timeout, $angularMeteorSettings) {
 
@@ -640,7 +650,7 @@
 	}]);
 
 /***/ },
-/* 5 */
+/* 6 */
 /***/ function(module, exports) {
 
 	/*global
@@ -649,7 +659,7 @@
 
 	'use strict';
 
-	var angularMeteorSubscribe = angular.module('angular-meteor.subscribe', []);
+	var angularMeteorSubscribe = angular.module('angular-meteor.subscribe', ['angular-meteor.settings']);
 
 	angularMeteorSubscribe.service('$meteorSubscribe', ['$q', '$angularMeteorSettings', function ($q, $angularMeteorSettings) {
 
@@ -716,7 +726,7 @@
 	}]);
 
 /***/ },
-/* 6 */
+/* 7 */
 /***/ function(module, exports) {
 
 	/*global
@@ -725,7 +735,7 @@
 
 	'use strict';
 
-	var angularMeteorCollection = angular.module('angular-meteor.collection', ['angular-meteor.stopper', 'angular-meteor.subscribe', 'angular-meteor.utils', 'diffArray']);
+	var angularMeteorCollection = angular.module('angular-meteor.collection', ['angular-meteor.stopper', 'angular-meteor.subscribe', 'angular-meteor.utils', 'diffArray', 'angular-meteor.settings']);
 
 	// The reason angular meteor collection is a factory function and not something
 	// that inherit from array comes from here:
@@ -1093,7 +1103,7 @@
 	}]);
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports) {
 
 	/*global
@@ -1102,7 +1112,7 @@
 
 	'use strict';
 
-	var angularMeteorObject = angular.module('angular-meteor.object', ['angular-meteor.utils', 'angular-meteor.subscribe', 'angular-meteor.collection', 'getUpdates', 'diffArray']);
+	var angularMeteorObject = angular.module('angular-meteor.object', ['angular-meteor.utils', 'angular-meteor.subscribe', 'angular-meteor.collection', 'getUpdates', 'diffArray', 'angular-meteor.settings']);
 
 	angularMeteorObject.factory('AngularMeteorObject', ['$q', '$meteorSubscribe', '$meteorUtils', 'diffArray', 'getUpdates', 'AngularMeteorCollection', '$angularMeteorSettings', function ($q, $meteorSubscribe, $meteorUtils, diffArray, getUpdates, AngularMeteorCollection, $angularMeteorSettings) {
 
@@ -1285,7 +1295,7 @@
 	}]);
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports) {
 
 	/*global
@@ -1294,7 +1304,7 @@
 
 	'use strict';
 
-	var angularMeteorUser = angular.module('angular-meteor.user', ['angular-meteor.utils', 'angular-meteor.core']);
+	var angularMeteorUser = angular.module('angular-meteor.user', ['angular-meteor.utils', 'angular-meteor.core', 'angular-meteor.settings']);
 
 	// requires package 'accounts-password'
 	angularMeteorUser.service('$meteorUser', ['$rootScope', '$meteorUtils', '$q', '$angularMeteorSettings', function ($rootScope, $meteorUtils, $q, $angularMeteorSettings) {
@@ -1373,7 +1383,7 @@
 	}]);
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports) {
 
 	/*global
@@ -1382,7 +1392,7 @@
 
 	'use strict';
 
-	var angularMeteorMethods = angular.module('angular-meteor.methods', ['angular-meteor.utils']);
+	var angularMeteorMethods = angular.module('angular-meteor.methods', ['angular-meteor.utils', 'angular-meteor.settings']);
 
 	angularMeteorMethods.service('$meteorMethods', ['$q', '$meteorUtils', '$angularMeteorSettings', function ($q, $meteorUtils, $angularMeteorSettings) {
 	  this.call = function () {
@@ -1397,7 +1407,7 @@
 	}]);
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports) {
 
 	/*global
@@ -1406,7 +1416,7 @@
 
 	'use strict';
 
-	var angularMeteorSession = angular.module('angular-meteor.session', ['angular-meteor.utils']);
+	var angularMeteorSession = angular.module('angular-meteor.session', ['angular-meteor.utils', 'angular-meteor.settings']);
 
 	angularMeteorSession.factory('$meteorSession', ['$meteorUtils', '$parse', '$angularMeteorSettings', function ($meteorUtils, $parse, $angularMeteorSettings) {
 	  return function (session) {
@@ -1431,7 +1441,7 @@
 	}]);
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports) {
 
 	/*global
@@ -1440,7 +1450,7 @@
 
 	'use strict';
 
-	var angularMeteorCamera = angular.module('angular-meteor.camera', ['angular-meteor.utils']);
+	var angularMeteorCamera = angular.module('angular-meteor.camera', ['angular-meteor.utils', 'angular-meteor.settings']);
 
 	// requires package 'mdg:camera'
 	angularMeteorCamera.service('$meteorCamera', ['$q', '$meteorUtils', '$angularMeteorSettings', function ($q, $meteorUtils, $angularMeteorSettings) {
@@ -1461,7 +1471,7 @@
 	}]);
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports) {
 
 	/*global
@@ -1500,7 +1510,7 @@
 	}]);
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1508,17 +1518,16 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	var _module = 'angular-meteor.utilities';
-	exports.module = _module;
+	var name = exports.name = 'angular-meteor.utilities';
 	var utils = exports.utils = '$$utils';
 
-	angular.module(_module, [])
+	angular.module(name, [])
 
 	/*
 	  A utility service which is provided with general utility functions
 	 */
 	.service(utils, ['$rootScope', function ($rootScope) {
-	  var _this = this;
+	  var self = this;
 
 	  // Checks if an object is a cursor
 	  this.isCursor = function (obj) {
@@ -1545,7 +1554,7 @@
 	    return fn;
 	  };
 
-	  var bindFn = function bindFn(fn, context, tap) {
+	  function bindFn(fn, context, tap) {
 	    return function () {
 	      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
 	        args[_key] = arguments[_key];
@@ -1558,18 +1567,18 @@
 	      });
 	      return result;
 	    };
-	  };
+	  }
 
-	  var bindObj = function bindObj(obj, context, tap) {
+	  function bindObj(obj, context, tap) {
 	    return _.keys(obj).reduce(function (bound, k) {
-	      bound[k] = _this.bind(obj[k], context, tap);
+	      bound[k] = self.bind(obj[k], context, tap);
 	      return bound;
 	    }, {});
-	  };
+	  }
 	}]);
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -1580,11 +1589,10 @@
 
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-	var _module = 'angular-meteor.mixer';
-	exports.module = _module;
+	var name = exports.name = 'angular-meteor.mixer';
 	var Mixer = exports.Mixer = '$Mixer';
 
-	angular.module(_module, [])
+	angular.module(name, [])
 
 	/*
 	  A service which lets us apply mixins into the `ChildScope` prototype.
@@ -1639,7 +1647,7 @@
 	});
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1647,14 +1655,13 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.module = undefined;
+	exports.name = undefined;
 
-	var _mixer = __webpack_require__(14);
+	var _mixer = __webpack_require__(15);
 
-	var _module = 'angular-meteor.scope';
+	var name = exports.name = 'angular-meteor.scope';
 
-	exports.module = _module;
-	angular.module(_module, [_mixer.module]).run(['$rootScope', _mixer.Mixer, function ($rootScope, $Mixer) {
+	angular.module(name, [_mixer.name]).run(['$rootScope', _mixer.Mixer, function ($rootScope, $Mixer) {
 	  var Scope = $rootScope.constructor;
 	  var $new = $rootScope.$new;
 
@@ -1681,7 +1688,7 @@
 	}]);
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1689,19 +1696,18 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.Core = exports.module = undefined;
+	exports.Core = exports.name = undefined;
 
-	var _utils = __webpack_require__(13);
+	var _utils = __webpack_require__(14);
 
-	var _mixer = __webpack_require__(14);
+	var _mixer = __webpack_require__(15);
 
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
-	var _module = 'angular-meteor.core';
-	exports.module = _module;
+	var name = exports.name = 'angular-meteor.core';
 	var Core = exports.Core = '$$Core';
 
-	angular.module(_module, [_utils.module, _mixer.module])
+	angular.module(name, [_utils.name, _mixer.name])
 
 	/*
 	  A mixin which provides us with core Meteor functions.
@@ -1729,11 +1735,11 @@
 
 	  // Calls Meteor.subscribe() which will be digested after each invokation
 	  // and automatically destroyed
-	  $$Core.subscribe = function (name, fn, cb) {
+	  $$Core.subscribe = function (subName, fn, cb) {
 	    fn = this.$bindToContext(fn || angular.noop);
 	    cb = cb ? this.$bindToContext(cb) : angular.noop;
 
-	    if (!_.isString(name)) {
+	    if (!_.isString(subName)) {
 	      throw Error('argument 1 must be a string');
 	    }
 	    if (!_.isFunction(fn)) {
@@ -1755,7 +1761,7 @@
 	        throw Error('reactive function\'s return value must be an array');
 	      }
 
-	      var subscription = (_Meteor = Meteor).subscribe.apply(_Meteor, [name].concat(_toConsumableArray(args), [cb]));
+	      var subscription = (_Meteor = Meteor).subscribe.apply(_Meteor, [subName].concat(_toConsumableArray(args), [cb]));
 	      result.ready = subscription.ready.bind(subscription);
 	      result.subscriptionId = subscription.subscriptionId;
 	    });
@@ -1820,7 +1826,7 @@
 	}]);
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1828,24 +1834,23 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.reactive = exports.ViewModel = exports.module = undefined;
+	exports.reactive = exports.ViewModel = exports.name = undefined;
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _utils = __webpack_require__(13);
+	var _utils = __webpack_require__(14);
 
-	var _mixer = __webpack_require__(14);
+	var _mixer = __webpack_require__(15);
 
-	var _core = __webpack_require__(16);
+	var _core = __webpack_require__(17);
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-	var _module = 'angular-meteor.view-model';
-	exports.module = _module;
+	var name = exports.name = 'angular-meteor.view-model';
 	var ViewModel = exports.ViewModel = '$$ViewModel';
 	var reactive = exports.reactive = '$reactive';
 
-	angular.module(_module, [_utils.module, _mixer.module, _core.module])
+	angular.module(name, [_utils.name, _mixer.name, _core.name])
 
 	/*
 	  A mixin which lets us bind a view model into a scope.
@@ -1947,7 +1952,7 @@
 	}]);
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1955,27 +1960,26 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.Reactive = exports.module = undefined;
+	exports.Reactive = exports.name = undefined;
 
-	var _utils = __webpack_require__(13);
+	var _utils = __webpack_require__(14);
 
-	var _mixer = __webpack_require__(14);
+	var _mixer = __webpack_require__(15);
 
-	var _core = __webpack_require__(16);
+	var _core = __webpack_require__(17);
 
-	var _viewModel = __webpack_require__(17);
+	var _viewModel = __webpack_require__(18);
 
-	var _module = 'angular-meteor.reactive';
-	exports.module = _module;
+	var name = exports.name = 'angular-meteor.reactive';
 	var Reactive = exports.Reactive = '$$Reactive';
 
-	angular.module(_module, [_utils.module, _mixer.module, _core.module, _viewModel.module])
+	angular.module(name, [_utils.name, _mixer.name, _core.name, _viewModel.name])
 
 	/*
 	  A mixin which enhance our reactive abilities by providing methods
 	  that are capable of updating our scope reactively.
 	 */
-	.factory(Reactive, ['$parse', _utils.utils, '$angularMeteorSettings', function ($parse, $$utils, $angularMeteorSettings) {
+	.factory(Reactive, ['$parse', _utils.utils, function ($parse, $$utils) {
 	  function $$Reactive() {
 	    var vm = arguments.length <= 0 || arguments[0] === undefined ? this : arguments[0];
 
@@ -2196,6 +2200,23 @@
 
 	  return $$Reactive;
 	}]);
+
+/***/ },
+/* 20 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	var name = exports.name = 'angular-templates';
+
+	try {
+	  angular.module(name);
+	} catch (e) {
+	  angular.module(name, []);
+	}
 
 /***/ }
 /******/ ]);
