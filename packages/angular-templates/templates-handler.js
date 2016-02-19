@@ -1,4 +1,4 @@
-angular.module('angular-meteor').config([
+angular.module('angular-templates', []).config([
   '$provide',
   function ($provide) {
     var templatesFileExtension = ['html', 'tpl', 'tmpl', 'template', 'view'];
