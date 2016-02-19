@@ -20,10 +20,6 @@ angular.module('angular-meteor', [
 
 ])
 
-.constant('$angularMeteorSettings', {
-  suppressWarnings: false
-})
-
 .run([
   '$Mixer',
   '$$Core',

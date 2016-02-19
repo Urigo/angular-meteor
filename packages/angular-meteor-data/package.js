@@ -33,6 +33,7 @@ Package.onUse(function (api) {
     'lib/diff-array.js',
     'lib/get-updates.js',
     // Module Files
+    'modules/angular-meteor-settings.js',
     'modules/angular-meteor-subscribe.js',
     'modules/angular-meteor-stopper.js',
     'modules/angular-meteor-collection.js',

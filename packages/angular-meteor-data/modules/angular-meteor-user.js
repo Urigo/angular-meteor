@@ -6,7 +6,8 @@
 
 var angularMeteorUser = angular.module('angular-meteor.user', [
   'angular-meteor.utils',
-  'angular-meteor.core'
+  'angular-meteor.core',
+  'angular-meteor.settings'
 ]);
 
 // requires package 'accounts-password'

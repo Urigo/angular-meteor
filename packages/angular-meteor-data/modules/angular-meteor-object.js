@@ -5,7 +5,7 @@
 'use strict';
 
 var angularMeteorObject = angular.module('angular-meteor.object',
-  ['angular-meteor.utils', 'angular-meteor.subscribe', 'angular-meteor.collection', 'getUpdates', 'diffArray']);
+  ['angular-meteor.utils', 'angular-meteor.subscribe', 'angular-meteor.collection', 'getUpdates', 'diffArray', 'angular-meteor.settings']);
 
 angularMeteorObject.factory('AngularMeteorObject', [
   '$q', '$meteorSubscribe', '$meteorUtils', 'diffArray', 'getUpdates', 'AngularMeteorCollection', '$angularMeteorSettings',

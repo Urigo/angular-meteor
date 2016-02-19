@@ -4,7 +4,7 @@
 
 'use strict';
 
-var angularMeteorMethods = angular.module('angular-meteor.methods', ['angular-meteor.utils']);
+var angularMeteorMethods = angular.module('angular-meteor.methods', ['angular-meteor.utils', 'angular-meteor.settings']);
 
 angularMeteorMethods.service('$meteorMethods', [
   '$q', '$meteorUtils', '$angularMeteorSettings',

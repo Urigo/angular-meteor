@@ -3,7 +3,7 @@
  */
 
 'use strict';
-var angularMeteorSubscribe = angular.module('angular-meteor.subscribe', []);
+var angularMeteorSubscribe = angular.module('angular-meteor.subscribe', ['angular-meteor.settings']);
 
 angularMeteorSubscribe.service('$meteorSubscribe', ['$q', '$angularMeteorSettings',
   function ($q, $angularMeteorSettings) {
