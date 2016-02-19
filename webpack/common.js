@@ -31,12 +31,12 @@ var common = {
     failOnError: true
   },
   module: {
-    /*preLoaders: [{
+    preLoaders: [{
       // linting check
       test: /\.js?$/,
       exclude: /node_modules/,
       loader: 'eslint'
-    }],*/
+    }],
     loaders: [{
       // use babel on js files
       test: /\.js$/,
