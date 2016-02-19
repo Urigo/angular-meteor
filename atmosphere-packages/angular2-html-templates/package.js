@@ -11,12 +11,12 @@ Npm.depends({
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.3-modules-beta.8');
+  api.versionsFrom('1.3-beta.11');
 
   api.use([
-    'caching-compiler@1.0.1-modules.8',
-    'ecmascript@0.3.1-modules.8',
-    'underscore@1.0.5-modules.8',
+    'caching-compiler@1.0.1-beta.11',
+    'ecmascript@0.3.1-beta.11',
+    'underscore@1.0.5-beta.11',
     'check@1.0.5'
   ]);
 

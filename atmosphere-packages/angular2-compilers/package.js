@@ -13,13 +13,13 @@ Package.registerBuildPlugin({
   ],
   use: [
     // Uses an external packages to get the actual compilers
-    'ecmascript@0.3.1-modules.8',
+    'ecmascript@0.3.1-beta.11',
     'angular2-html-templates@0.5.0-beta.1'
   ]
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.3-modules-beta.8');
+  api.versionsFrom('1.3-beta.11');
 
   // Required in order to register plugins
   api.use('isobuild:compiler-plugin@1.0.0');
