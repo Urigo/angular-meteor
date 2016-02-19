@@ -8,7 +8,7 @@ declare type CallbacksObject = {
   onStop?: Function;
 }
 
-declare type MeteorCallbacks = () => any | CallbacksObject;
+declare type MeteorCallbacks = (...args) => any | CallbacksObject;
 
 const subscribeEvents = ['onReady', 'onError', 'onStop'];
 
@@ -35,9 +35,7 @@ export class MeteorComponent implements OnDestroy {
     this._zone = ngZone || createNgZone();
   }
 
-  autorun(func: () => any, autoBind: boolean): Tracker.Computation {
-    check(func, Function);
-
+  autorun(func: (c: Tracker.Computation) => any, autoBind: boolean): Tracker.Computation {
     let hAutorun = Tracker.autorun(autoBind ? this._bindToNgZone(func) : func);
     this._hAutoruns.push(hAutorun);
 
@@ -96,8 +94,12 @@ export class MeteorComponent implements OnDestroy {
   }
 
   _bindToNgZone(callbacks: MeteorCallbacks): MeteorCallbacks {
+    const self = this;
+
     if (_.isFunction(callbacks)) {
-      return () => this._zone.run(callbacks);
+      return function(...args) {
+        self._zone.run(() => callbacks.apply(self._zone, args));
+      }
     }
 
     if (isCallbacksObject(callbacks)) {
@@ -105,7 +107,9 @@ export class MeteorComponent implements OnDestroy {
       let newCallbacks = _.clone(callbacks);
       subscribeEvents.forEach(event => {
         if (newCallbacks[event]) {
-          newCallbacks[event] = () => this._zone.run(callbacks[event]);
+          newCallbacks[event] = function(...args) {
+            self._zone.run(() => callbacks[event].apply(self._zone, args));
+          }
         }
       });
       return newCallbacks;

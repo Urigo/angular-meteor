@@ -1,6 +1,8 @@
 /// <reference path="../angular2/angular2.d.ts" />
 
-declare namespace ngMeteor {
+declare module "angular2-meteor" {
+  import * as core from 'angular2/core';
+
   class MeteorComponent {
     subscribe(name: string, ...rest: any[]): Meteor.SubscriptionHandle;
     autorun(runFunc: Function, autoBind?: boolean): Tracker.Computation;
@@ -10,8 +12,4 @@ declare namespace ngMeteor {
   }
 
   function bootstrap(appComponentType: /*Type*/ any, bindings?: Array<core.Type | core.Provider | any[]>): Promise<core.ApplicationRef>;
-}
-
-declare module "angular2-meteor" {
-  export = ngMeteor;
 }

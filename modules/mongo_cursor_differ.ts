@@ -1,12 +1,21 @@
 'use strict';
 
-import {ChangeDetectorRef} from 'angular2/core';
+import {ChangeDetectorRef, IterableDiffer} from 'angular2/core';
 
-import {DefaultIterableDifferFactory, CollectionChangeRecord} from 'angular2/src/core/change_detection/differs/default_iterable_differ';
+import {
+  DefaultIterableDifferFactory,
+  CollectionChangeRecord
+} from 'angular2/src/core/change_detection/differs/default_iterable_differ';
 
 import {ObservableWrapper} from 'angular2/src/facade/async';
 
-import {MongoCursorObserver, AddChange, MoveChange, RemoveChange} from './mongo_cursor_observer';
+import {
+  MongoCursorObserver,
+  AddChange,
+  MoveChange,
+  RemoveChange,
+  UpdateChange
+} from './mongo_cursor_observer';
 
 export interface ObserverFactory {
   create(cursor: Object): Object;
@@ -29,10 +38,11 @@ export class MongoCursorDifferFactory extends DefaultIterableDifferFactory {
   }
 }
 
-export class MongoCursorDiffer {
+export class MongoCursorDiffer implements IterableDiffer {
   private _inserted: Array<CollectionChangeRecord> = [];
   private _removed: Array<CollectionChangeRecord> = [];
   private _moved: Array<CollectionChangeRecord> = [];
+  private _updated: Array<CollectionChangeRecord> = [];
   private _curObserver: MongoCursorObserver;
   private _lastChanges: Array<AddChange | MoveChange | RemoveChange>;
   private _listSize: number = 0;
@@ -59,6 +69,12 @@ export class MongoCursorDiffer {
   forEachRemovedItem(fn: Function) {
     for (let i = 0; i < this._removed.length; i++) {
       fn(this._removed[i]);
+    }
+  }
+
+  forEachIdentityChange(fn: Function) {
+    for (let i = 0; i < this._updated.length; i++) {
+      fn(this._updated[i]);
     }
   }
 
@@ -151,6 +167,11 @@ export class MongoCursorDiffer {
         this._removed.push(this._createChangeRecord(
           null, changes[i].index, changes[i].item));
         this._listSize--;
+      }
+
+      if (changes[i] instanceof UpdateChange) {
+        this._updated.push(this._createChangeRecord(
+          changes[i].index, null, changes[i].item));
       }
     }
   }

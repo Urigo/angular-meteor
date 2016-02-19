@@ -1,6 +1,6 @@
 Package.describe({
   name: 'urigo:angular2-meteor',
-  version: '0.4.2',
+  version: '0.4.4',
   summary: 'Angular2 and Meteor integration',
   git: 'https://github.com/Urigo/Meteor-Angular2',
   documentation: 'README.md'
@@ -25,12 +25,12 @@ Package.onUse(function(api) {
   ], 'server');
 
   api.use([
-    'ejson@1.0.7',
-    'check@1.0.5',
-    'mongo@1.1.1',
-    'tracker@1.0.8',
-    'underscore@1.0.4',
-    'barbatus:angular2@0.8.5_2'
+    'ejson',
+    'check',
+    'mongo',
+    'tracker',
+    'underscore',
+    'barbatus:angular2@0.8.6'
   ]);
 
   api.imply([
@@ -59,9 +59,11 @@ Package.onUse(function(api) {
 Package.onTest(function(api) {
   api.use([
     'tinytest',
-    'sanjo:jasmine@0.18.0',
-    'mongo@1.1.1',
-    'underscore@1.0.4',
+    'ecmascript',
+    'sanjo:jasmine',
+    'mongo',
+    'tracker',
+    'underscore',
     'urigo:angular2-meteor'
   ]);
 
