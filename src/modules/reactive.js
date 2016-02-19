@@ -1,16 +1,16 @@
-import { module as utilsModule, utils } from './utils';
-import { module as mixerModule } from './mixer';
-import { module as coreModule } from './core';
-import { module as viewModelModule } from './view-model';
+import { name as utilsName, utils } from './utils';
+import { name as mixerName } from './mixer';
+import { name as coreName } from './core';
+import { name as viewModelName } from './view-model';
 
-export const module = 'angular-meteor.reactive';
+export const name = 'angular-meteor.reactive';
 export const Reactive = '$$Reactive';
 
-angular.module(module, [
-  utilsModule,
-  mixerModule,
-  coreModule,
-  viewModelModule
+angular.module(name, [
+  utilsName,
+  mixerName,
+  coreName,
+  viewModelName
 ])
 
 

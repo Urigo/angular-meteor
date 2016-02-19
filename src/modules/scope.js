@@ -1,9 +1,9 @@
-import { module as mixerModule, Mixer } from './mixer';
+import { name as mixerName, Mixer } from './mixer';
 
-export const module = 'angular-meteor.scope';
+export const name = 'angular-meteor.scope';
 
-angular.module(module, [
-  mixerModule
+angular.module(name, [
+  mixerName
 ])
 
 .run([
