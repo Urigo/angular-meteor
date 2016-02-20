@@ -51,7 +51,7 @@ Package.onTest(function(api) {
     'integration/pre1.3/angular-meteor-get-updates-spec.js',
     'integration/pre1.3/angular-meteor-diff-array-spec.js',
     'integration/pre1.3/angular-meteor-camera-spec.js',
-    // 'integration/pre1.3/angular-meteor-collection-spec.js' // contains two failing tests (check todo)
+    'integration/pre1.3/angular-meteor-collection-spec.js',
     'integration/pre1.3/angular-meteor-methods-spec.js',
     'integration/pre1.3/angular-meteor-object-spec.js',
     'integration/pre1.3/angular-meteor-session-spec.js',
