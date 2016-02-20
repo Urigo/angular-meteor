@@ -56,7 +56,7 @@ Package.onTest(function(api) {
     'integration/pre1.3/angular-meteor-object-spec.js',
     'integration/pre1.3/angular-meteor-session-spec.js',
     'integration/pre1.3/angular-meteor-stopper-spec.js',
-    'integration/pre1.3/angular-meteor-subscribe-spec.js'
-    // 'integration/pre1.3/angular-meteor-utils-spec.js' // contains three failing tests
+    'integration/pre1.3/angular-meteor-subscribe-spec.js',
+    'integration/pre1.3/angular-meteor-utils-spec.js'
   ], 'client');
 });
