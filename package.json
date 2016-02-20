@@ -4,6 +4,7 @@
   "private": true,
   "main": "dist/angular-meteor.js",
   "scripts": {
+    "commit": "git-cz",
     "commitmsg": "validate-commit-msg",
     "lint": "eslint .",
     "pretest": "npm run build:dist",
@@ -14,6 +15,11 @@
     "build:prod": "webpack --progress --config webpack/prod.js --optimize-minimize",
     "build": "npm run build:dist && npm run build:prod"
   },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  },
   "peerDependencies": {
     "angular": "^1.4.0"
   },
@@ -23,6 +29,8 @@
     "babel-eslint": "^4.1.6",
     "babel-loader": "^6.2.1",
     "babel-preset-es2015": "^6.3.13",
+    "commitizen": "^2.5.0",
+    "cz-conventional-changelog": "^1.1.5",
     "eslint": "^1.10.3",
     "eslint-config-airbnb": "^4.0.0",
     "eslint-loader": "^1.2.1",
