@@ -497,12 +497,14 @@ describe('$meteorCollection service', function() {
     });
 
     it('push updates from client handled correctly', function() {
-      $rootScope.limit = 10;
+      var $scope = $rootScope.$new();
+      $scope.limit = 10;
       var $ngCol = $meteorCollection(function() {
         return DummyCollection.find({}, {
-          limit: $rootScope.getReactively('limit') // TODO is not a function
+          limit: $scope.getReactively('limit')
         });
-      });
+      // A collection with no name can't be found so we'll need to pass it
+      }, false, DummyCollection);
       spyOn($ngCol, 'save');
 
       // Adds docs on the client.
@@ -517,12 +519,14 @@ describe('$meteorCollection service', function() {
     });
 
     it('remove updates from client handled correctly', function() {
-      $rootScope.limit = 10;
+      var $scope = $rootScope.$new();
+      $scope.limit = 10;
       var $ngCol = $meteorCollection(function() {
         return DummyCollection.find({}, {
-          limit: $rootScope.getReactively('limit') // TODO is not a function
+          limit: $scope.getReactively('limit')
         });
-      });
+      // A collection with no name can't be found so we'll need to pass it
+      }, false, DummyCollection);
       spyOn($ngCol, 'remove').and.callThrough();
 
       // Removes last two docs on the client.

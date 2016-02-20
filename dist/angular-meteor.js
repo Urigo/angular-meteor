@@ -602,7 +602,7 @@
 	  // Returns a callback which fulfills promise
 	  this.fulfill = function (deferred, boundError, boundResult) {
 	    return function (err, result) {
-	      if (err) deferred.reject(boundError === null ? err : boundError);else if (typeof boundResult == "function") deferred.resolve(boundResult === null ? result : boundResult(result));else deferred.resolve(boundResult === null ? result : boundResult);
+	      if (err) deferred.reject(boundError == null ? err : boundError);else if (typeof boundResult == "function") deferred.resolve(boundResult == null ? result : boundResult(result));else deferred.resolve(boundResult == null ? result : boundResult);
 	    };
 	  };
 
