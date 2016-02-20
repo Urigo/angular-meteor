@@ -19,7 +19,7 @@ function isCallbacksObject(callbacks: any): boolean {
   return callbacks && subscribeEvents.some((event) => {
     return _.isFunction(callbacks[event]);
   });
-};
+}
 
 export class MeteorComponent implements OnDestroy {
   private _hAutoruns: Array<Tracker.Computation> = [];
@@ -36,7 +36,7 @@ export class MeteorComponent implements OnDestroy {
   autorun(func: () => any, autoBind: boolean): Tracker.Computation {
     check(func, Function);
 
-    let hAutorun = Tracker.autorun.bind(this).(autoBind ? this._bindToNgZone(func) : func);
+    let hAutorun = Tracker.autorun(autoBind ? this._bindToNgZone(func) : func);
     this._hAutoruns.push(hAutorun);
 
     return hAutorun;
@@ -51,7 +51,7 @@ export class MeteorComponent implements OnDestroy {
   subscribe(name: string, ...args): Meteor.SubscriptionHandle {
     let subArgs = this._prepMeteorArgs(args.slice());
 
-    let hSubscribe = Meteor.subscribe.bind(this).(name, ...subArgs);
+    let hSubscribe = Meteor.subscribe(name, ...subArgs);
     this._hSubscribes.push(hSubscribe);
 
     return hSubscribe;

@@ -11,12 +11,12 @@ Npm.depends({
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.3-beta.11');
+  api.versionsFrom('1.2.1');
 
   api.use([
-    'caching-compiler@1.0.1-beta.11',
-    'ecmascript@0.3.1-beta.11',
-    'underscore@1.0.5-beta.11',
+    'caching-compiler@1.0.0',
+    'ecmascript@0.1.4',
+    'underscore@1.0.4',
     'check@1.0.5'
   ]);
 
@@ -32,5 +32,4 @@ Package.onUse(function(api) {
 
 Package.onTest(function(api) {
   api.use('tinytest');
-  api.use('angular2-templates-compiler');
 });
