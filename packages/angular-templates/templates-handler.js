@@ -1,4 +1,9 @@
-angular.module('angular-meteor').config([
+if (Package['modules-runtime']) {
+  var require = Package['modules-runtime'].meteorInstall();
+  require('angular');
+}
+
+angular.module('angular-templates', []).config([
   '$provide',
   function ($provide) {
     var templatesFileExtension = ['html', 'tpl', 'tmpl', 'template', 'view'];

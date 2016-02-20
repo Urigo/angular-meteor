@@ -1,0 +1,35 @@
+{
+  "extends": [
+    "airbnb/base"
+  ],
+  "parser": "babel-eslint",
+  "root": true,
+  "env": {
+    "browser": true,
+    "meteor": true
+  },
+  "plugins": [
+    "import"
+  ],
+  "globals": {
+    "angular": false,
+    "_": false,
+    "jsondiffpatch": false
+  },
+  "rules": {
+    "quotes": [2, "single"],
+    "no-proto": 1,
+    "comma-dangle": 0,
+    "func-names": 0,
+    "no-param-reassign": 1,
+    "arrow-body-style": 0,
+    "space-before-function-paren": 0,
+    "no-use-before-define": [2, "nofunc"],
+    "brace-style": [1, "1tbs"],
+    "import/no-unresolved": 2,
+    "import/export": 2,
+    "import/named": 2,
+    "import/namespace": 2,
+    "import/default": 2
+  }
+}

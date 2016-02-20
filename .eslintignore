@@ -1,0 +1,10 @@
+.github
+dist
+docs
+examples
+packages
+src/lib
+src/modules/angular-meteor-*.js
+tests
+webpack
+validate-commit-msg.js
