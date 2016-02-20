@@ -1,0 +1,19 @@
+.github
+docs
+examples
+packages
+src
+tests
+webpack
+.bithoundrc
+.coveralls.yml
+.editorconfig
+.eslintignore
+.eslintrc.json
+.gitattributes
+.gitignore
+.travis.yml
+Angular Meteor Weekly Meetings.md
+bower.json
+bundle-min.sh
+validate-commit-msg.js
