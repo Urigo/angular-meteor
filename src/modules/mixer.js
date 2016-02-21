@@ -4,7 +4,7 @@ export const Mixer = '$Mixer';
 angular.module(name, [])
 
 /*
-  A service which lets us apply mixins into the `ChildScope` prototype.
+  A service which lets us apply mixins into Scope.prototype.
   The flow is simple. Once we define a mixin, it will be stored in the `$Mixer`,
   and any time a `ChildScope` prototype is created
   it will be extended by the `$Mixer`.
@@ -15,6 +15,9 @@ angular.module(name, [])
  */
 .service(Mixer, function() {
   this._mixins = [];
+  // Apply mixins automatically on specified contexts
+  this._autoExtend = [];
+  this._autoConstruct = [];
 
   // Adds a new mixin
   this.mixin = (mixin) => {
@@ -23,6 +26,9 @@ angular.module(name, [])
     }
 
     this._mixins = _.union(this._mixins, [mixin]);
+    // Apply mixins to stored contexts
+    this._autoExtend.forEach(context => this._extend(context));
+    this._autoConstruct.forEach(context => this._construct(context));
     return this;
   };
 
