@@ -6,7 +6,7 @@ Package.describe({
 });
 
 Npm.depends({
-  'angular2-meteor': 'https://github.com/Urigo/angular2-meteor/tarball/24fa5613977ca41b1091690d53d4324881e37db6',
+  'angular2-meteor': 'https://github.com/Urigo/angular2-meteor/tarball/5a6aa7b72535d5ca4d32100dfdc7e40e5b098525',
   'angular2-meteor-auto-bootstrap': 'https://github.com/Urigo/angular2-meteor-auto-bootstrap/tarball/9e312370199e7e9de5be249209c2578a8a439730'
 });
 
@@ -34,7 +34,6 @@ Package.onUse(function (api) {
     '.npm/package/node_modules/angular2-meteor/modules/mongo_cursor_observer.ts',
     '.npm/package/node_modules/angular2-meteor/modules/mongo_cursor_differ.ts',
     '.npm/package/node_modules/angular2-meteor/modules/meteor_component.ts',
-    '.npm/package/node_modules/angular2-meteor/node_modules/ejson/index.js',
     '.npm/package/node_modules/angular2-meteor-auto-bootstrap/modules/bootstrap.ts'
   ], 'client');
 });
