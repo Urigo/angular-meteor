@@ -33,6 +33,14 @@ git clone https://github.com/[your_username]/angular-meteor.git angular
 This project follows the `angular` project git commit message format.
 Please refer to the [official documentation](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#-git-commit-guidelines).
 
+You can commit changes in interactive mode by running:
+
+```
+npm run commit
+```
+
+It is a step by step process.
+
 ## Run local angular-meteor in your project
 
 Create your Meteor Project
