@@ -1595,7 +1595,7 @@
 	angular.module(name, [])
 
 	/*
-	  A service which lets us apply mixins into the `ChildScope` prototype.
+	  A service which lets us apply mixins into Scope.prototype.
 	  The flow is simple. Once we define a mixin, it will be stored in the `$Mixer`,
 	  and any time a `ChildScope` prototype is created
 	  it will be extended by the `$Mixer`.
@@ -1608,6 +1608,9 @@
 	  var _this = this;
 
 	  this._mixins = [];
+	  // Apply mixins automatically on specified contexts
+	  this._autoExtend = [];
+	  this._autoConstruct = [];
 
 	  // Adds a new mixin
 	  this.mixin = function (mixin) {
@@ -1616,6 +1619,13 @@
 	    }
 
 	    _this._mixins = _.union(_this._mixins, [mixin]);
+	    // Apply mixins to stored contexts
+	    _this._autoExtend.forEach(function (context) {
+	      return _this._extend(context);
+	    });
+	    _this._autoConstruct.forEach(function (context) {
+	      return _this._construct(context);
+	    });
 	    return _this;
 	  };
 
@@ -1665,24 +1675,15 @@
 	  var Scope = $rootScope.constructor;
 	  var $new = $rootScope.$new;
 
-	  // Extends and constructs every newly created scope without affecting the root scope
-	  Scope.prototype.$new = function (isolate, parent) {
-	    var firstChild = this === $rootScope && !this.$$ChildScope;
-	    var scope = $new.call(this, isolate, parent);
+	  // Apply extensions whether a mixin in defined.
+	  // Note that this way mixins which are initialized later
+	  // can be applied on rootScope.
+	  $Mixer._autoExtend.push(Scope.prototype);
+	  $Mixer._autoConstruct.push($rootScope);
 
-	    // If the scope is isolated we would like to extend it aswell
-	    if (isolate) {
-	      // The scope is the prototype of its upcomming child scopes, so the methods would
-	      // be accessable to them as well
-	      $Mixer._extend(scope);
-	    }
-	    // Else, if this is the first child of the root scope we would like to apply the extensions
-	    // without affection the root scope
-	    else if (firstChild) {
-	        // Creating a middle layer where all the extensions are gonna be applied to
-	        scope.__proto__ = this.$$ChildScope.prototype = $Mixer._extend(Object.create(this));
-	      }
-
+	  Scope.prototype.$new = function () {
+	    var scope = $new.apply(this, arguments);
+	    // Apply constructors to newly created scopes
 	    return $Mixer._construct(scope);
 	  };
 	}]);

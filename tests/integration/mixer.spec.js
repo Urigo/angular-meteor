@@ -24,13 +24,12 @@ describe('angular-meteor.mixer', function() {
     });
 
     afterEach(function() {
-      delete $rootScope.$$ChildScope;
       $Mixer._mixout(Mixin);
     });
 
-    it('should leave root scope as is', function() {
-      expect($rootScope.prop).toBeUndefined();
-      expect($rootScope.$method).toBeUndefined();
+    it('should extend root scope', function() {
+      expect($rootScope.prop).toEqual('prop');
+      expect($rootScope.$method).toEqual(jasmine.any(Function));
     });
 
     it('should extend child scope', function() {
