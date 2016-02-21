@@ -1,12 +1,12 @@
 # Roadmap
 
-We manage the project roadmap in Github issues and milestones. There is a [public Waffle board](https://waffle.io/Urigo/angular-meteor) 
+We manage the project roadmap in Github issues and milestones. There is a [public Waffle board](https://waffle.io/Urigo/angular-meteor)
 dedicated to `angular-meteor`. You can add an issue about what you want to see in the library or in the tutorial.
 
 # [Tutorial](http://angular-meteor.com/tutorial)
 
-Our goal with the tutorial is to add as many common use cases as possible. If you want to create and add your own 
-chapter we would be happy to help you writing and adding it. 
+Our goal with the tutorial is to add as many common use cases as possible. If you want to create and add your own
+chapter we would be happy to help you writing and adding it.
 
 Also if you want to record a video for a chapter we would love to help you.
 
@@ -26,13 +26,6 @@ Fork angular-meteor and clone the angular-meteor library to another directory na
 ```
 mkdir angular
 git clone https://github.com/[your_username]/angular-meteor.git angular
-```
-
-There is a git hook that needed to be installed manually.
-
-```bash
-cd angular
-ln -s ../../validate-commit-msg.js .git/hooks/commit-msg
 ```
 
 ## Commit message format
