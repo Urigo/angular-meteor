@@ -39,7 +39,7 @@
 
 ## Contributing
 
-Please read the contributing instructions at [the contributing page](https://github.com/Urigo/angular-meteor/blob/master/CONTRIBUTING.md).
+Please read the contributing instructions at [the contributing page](https://github.com/Urigo/angular-meteor/blob/master/.github/CONTRIBUTING.md).
 
 ## Usage
 

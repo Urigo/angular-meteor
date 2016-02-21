@@ -1,12 +1,12 @@
 # Roadmap
 
-We manage the project roadmap in Github issues and milestones. There is a [public Waffle board](https://waffle.io/Urigo/angular-meteor) 
+We manage the project roadmap in Github issues and milestones. There is a [public Waffle board](https://waffle.io/Urigo/angular-meteor)
 dedicated to `angular-meteor`. You can add an issue about what you want to see in the library or in the tutorial.
 
 # [Tutorial](http://angular-meteor.com/tutorial)
 
-Our goal with the tutorial is to add as many common use cases as possible. If you want to create and add your own 
-chapter we would be happy to help you writing and adding it. 
+Our goal with the tutorial is to add as many common use cases as possible. If you want to create and add your own
+chapter we would be happy to help you writing and adding it.
 
 Also if you want to record a video for a chapter we would love to help you.
 
@@ -28,17 +28,18 @@ mkdir angular
 git clone https://github.com/[your_username]/angular-meteor.git angular
 ```
 
-There is a git hook that needed to be installed manually.
-
-```bash
-cd angular
-ln -s ../../validate-commit-msg.js .git/hooks/commit-msg
-```
-
 ## Commit message format
 
 This project follows the `angular` project git commit message format.
 Please refer to the [official documentation](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#-git-commit-guidelines).
+
+You can commit changes in interactive mode by running:
+
+```
+npm run commit
+```
+
+It is a step by step process.
 
 ## Run local angular-meteor in your project
 
@@ -62,7 +63,7 @@ Now you can start using your own copy of the `angular-meteor` project from `myPr
 
 In the command line
 ```
-. run_tests.sh
+npm run test:watch
 ```
 
 Then go to `localhost:3000` in your browser
