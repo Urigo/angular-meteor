@@ -55,7 +55,7 @@ Now you can start using your own copy of the `angular-meteor` project from `myPr
 
 In the command line
 ```
-. run_tests.sh
+npm run test:watch
 ```
 
 Then go to `localhost:3000` in your browser
