@@ -1,6 +1,6 @@
 import {EventEmitter} from "angular2/core";
 import {CursorHandle} from "./cursor_handle";
-import * as EJSON from "ejson";
+import {EJSON} from "meteor/ejson";
 
 export class AddChange {
   constructor(public index: number, public item: any) {}

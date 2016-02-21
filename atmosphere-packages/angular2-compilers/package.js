@@ -29,7 +29,8 @@ Package.onUse(function(api) {
     'barbatus:typescript@0.2.0-beta.4',
     'check@1.1.0',
     'tracker@1.0.9',
-    'underscore@1.0.4'
+    'underscore@1.0.4',
+    'ejson'
   ]);
 });
 
