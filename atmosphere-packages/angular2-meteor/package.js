@@ -6,8 +6,8 @@ Package.describe({
 });
 
 Npm.depends({
-  'angular2-meteor': 'https://github.com/Urigo/angular2-meteor/tarball/5a6aa7b72535d5ca4d32100dfdc7e40e5b098525',
-  'angular2-meteor-auto-bootstrap': 'https://github.com/Urigo/angular2-meteor-auto-bootstrap/tarball/9e312370199e7e9de5be249209c2578a8a439730'
+  'angular2-meteor': 'https://github.com/Urigo/angular2-meteor/tarball/7e6785471aff38a241addd45183959f7037b03a7',
+  'angular2-meteor-auto-bootstrap': 'https://github.com/Urigo/angular2-meteor-auto-bootstrap/tarball/e09ba84d36ecf31c289fe2b71d32d181bd8bde57'
 });
 
 Package.onUse(function (api) {
