@@ -1,26 +1,60 @@
-# Roadmap
+# Contributing to Angular Meteor
+
+We'd love for you to contribute to our source code and to make Angular Meteor even better than it is
+today! Here are the guidelines we'd like you to follow:
+
+ - [Code of Conduct](#coc)
+ - [Question or Problem?](#question)
+ - [Issues and Bugs](#issue)
+ - [Feature Requests](#feature)
+ - [Submission Guidelines](#submit)
+ - [Contribution Setup](#setup)
+ - [Commit Message Guidelines](#commit)
+
+## <a name="coc"></a> Code of Conduct
+I love the Angular community so let's just use thier [Code of Conduct][https://github.com/angular/code-of-conduct/blob/master/CODE_OF_CONDUCT.md].
+
+If you are subject to or witness unacceptable behavior, or have any other concerns, please email me at uri.goldshtein@gmail.com.
+
+## <a name="question"></a> Got a Question or Problem?
+
+If you have questions about how to use Angular Meteor, please direct these to [StackOverflow][http://stackoverflow.com/questions/tagged/angular-meteor] or the [Meteor forums](https://forums.meteor.com/).
+
+## <a name="issue"></a> Found an Issue?
+If you find a bug in the source code or a mistake in the documentation, you can help us by
+submitting an issue to our [GitHub Repository][https://github.com/urigo/angular-meteor/]. Even better you can submit a Pull Request
+with a fix.
+
+## <a name="feature"></a> Want a Feature?
+
+### Submitting an Issue
+[Guidelines](https://github.com/Urigo/angular-meteor/blob/master/.github/ISSUE_TEMPLATE.md)
+
+### Roadmap
 
 We manage the project roadmap in Github issues and milestones. There is a [public Waffle board](https://waffle.io/Urigo/angular-meteor)
 dedicated to `angular-meteor`. You can add an issue about what you want to see in the library or in the tutorial.
 
-# [Tutorial](http://angular-meteor.com/tutorial)
+#### [Tutorial](http://angular-meteor.com/tutorial)
 
 Our goal with the tutorial is to add as many common use cases as possible. If you want to create and add your own
 chapter we would be happy to help you writing and adding it.
 
 Also if you want to record a video for a chapter we would love to help you.
 
-# Code
+## <a name="submit"></a> Submission Guidelines
 
-We would love to get your pull requests. At any case, please make sure there is an issue for the thing you are trying to solve.
+### Submitting an Issue
+[Guidelines](https://github.com/Urigo/angular-meteor/blob/master/.github/ISSUE_TEMPLATE.md)
 
-Your code should contain tests relevant for the problem you are solving.
+### Submitting a Pull Request
+[Guidelines](https://github.com/Urigo/angular-meteor/blob/master/.github/PULL_REQUEST_TEMPLATE.md)
 
 If you want to contribute and need help or don't know what should you do, you can [contact me directly](https://github.com/urigo)
 
-# Contribution setup
+## <a name="setup"></a> Contribution Setup
 
-## Setup repository
+### Setup repository
 
 Fork angular-meteor and clone the angular-meteor library to another directory named `angular`
 ```
@@ -28,7 +62,9 @@ mkdir angular
 git clone https://github.com/[your_username]/angular-meteor.git angular
 ```
 
-## Commit message format
+## <a name="commit"></a> Git Commit Guidelines
+
+### Commit message format
 
 This project follows the `angular` project git commit message format.
 Please refer to the [official documentation](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#-git-commit-guidelines).
