@@ -2,4 +2,5 @@
 
 Plugin.registerCompiler({
   extensions: ['html'],
+  archMatching: 'web'
 }, () => new HtmlCompiler('<app></app>'));
