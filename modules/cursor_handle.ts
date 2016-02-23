@@ -4,12 +4,15 @@ export class CursorHandle {
   private _hCurObserver: Meteor.LiveQueryHandle;
 
   constructor(
-      cursor: Mongo.Cursor<any>,
-      hCurObserver: Meteor.LiveQueryHandle,
-      hAutoNotify?: Tracker.Computation) {
+    cursor: Mongo.Cursor<any>,
+    hCurObserver: Meteor.LiveQueryHandle,
+    hAutoNotify?: Tracker.Computation) {
+
     check(cursor, Mongo.Cursor);
     check(hAutoNotify, Match.Optional(Tracker.Computation));
-    check(hCurObserver, Match.Where((observer) => !!observer.stop));
+    check(hCurObserver, Match.Where(function(observer) {
+      return !!observer.stop;
+    }));
 
     this._cursor = cursor;
     this._hAutoNotify = hAutoNotify;
@@ -18,9 +21,8 @@ export class CursorHandle {
 
   stop() {
     if (this._hAutoNotify) {
-      this._hAutoNotify.stop();
-    }
-
+      this._hAutoNotify.stop()
+    };
     this._hCurObserver.stop();
   }
 }

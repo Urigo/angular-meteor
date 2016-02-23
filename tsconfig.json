@@ -10,10 +10,7 @@
     "sourceMap": true,
     "declaration": true
   },
-  "files": [
-    "./modules/cursor_handle.ts",
-    "./modules/mongo_cursor_differ.ts",
-    "./modules/mongo_cursor_observer.ts",
-    "./modules/meteor_component.ts"
+  "exclude": [
+    "examples"
   ]
 }

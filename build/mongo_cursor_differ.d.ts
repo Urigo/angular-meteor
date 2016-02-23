@@ -1,16 +1,17 @@
-import { ChangeDetectorRef, IterableDifferFactory } from "angular2/core";
+import { ChangeDetectorRef, IterableDifferFactory, IterableDiffer } from "angular2/core";
 import { MongoCursorObserver } from "./mongo_cursor_observer";
 export interface ObserverFactory {
     create(cursor: Object): Object;
 }
-export declare class MongoCursorDifferFactory implements IterableDifferFactory {
+export declare class MongoCursorDifferFactory extends IterableDifferFactory {
     supports(obj: Object): boolean;
     create(cdRef: ChangeDetectorRef): MongoCursorDiffer;
 }
-export declare class MongoCursorDiffer {
+export declare class MongoCursorDiffer implements IterableDiffer {
     private _inserted;
     private _removed;
     private _moved;
+    private _updated;
     private _curObserver;
     private _lastChanges;
     private _listSize;
@@ -21,6 +22,7 @@ export declare class MongoCursorDiffer {
     forEachAddedItem(fn: Function): void;
     forEachMovedItem(fn: Function): void;
     forEachRemovedItem(fn: Function): void;
+    forEachIdentityChange(fn: Function): void;
     diff(cursor: Mongo.Cursor<any>): this;
     onDestroy(): void;
     observer: MongoCursorObserver;

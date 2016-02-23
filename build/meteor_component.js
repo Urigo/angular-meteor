@@ -44,6 +44,7 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
 	var core_1 = __webpack_require__(1);
 	var subscribeEvents = ['onReady', 'onError', 'onStop'];
 	function isMeteorCallbacks(callbacks) {
@@ -55,7 +56,6 @@
 	        return _.isFunction(callbacks[event]);
 	    });
 	}
-	;
 	var MeteorComponent = (function () {
 	    /**
 	     * @param {NgZone} ngZone added for test purposes mostly.
@@ -66,7 +66,6 @@
 	        this._zone = ngZone || core_1.createNgZone();
 	    }
 	    MeteorComponent.prototype.autorun = function (func, autoBind) {
-	        check(func, Function);
 	        var hAutorun = Tracker.autorun(autoBind ? this._bindToNgZone(func) : func);
 	        this._hAutoruns.push(hAutorun);
 	        return hAutorun;
@@ -122,24 +121,36 @@
 	        this._hSubscribes = null;
 	    };
 	    MeteorComponent.prototype._bindToNgZone = function (callbacks) {
-	        var _this = this;
+	        var self = this;
 	        if (_.isFunction(callbacks)) {
-	            return function () { return _this._zone.run(callbacks); };
+	            return function () {
+	                var args = [];
+	                for (var _i = 0; _i < arguments.length; _i++) {
+	                    args[_i - 0] = arguments[_i];
+	                }
+	                self._zone.run(function () { return callbacks.apply(self._zone, args); });
+	            };
 	        }
 	        if (isCallbacksObject(callbacks)) {
 	            // Bind zone for each event.
-	            var newCallbacks = _.clone(callbacks);
+	            var newCallbacks_1 = _.clone(callbacks);
 	            subscribeEvents.forEach(function (event) {
-	                if (newCallbacks[event]) {
-	                    newCallbacks[event] = function () { return _this._zone.run(callbacks[event]); };
+	                if (newCallbacks_1[event]) {
+	                    newCallbacks_1[event] = function () {
+	                        var args = [];
+	                        for (var _i = 0; _i < arguments.length; _i++) {
+	                            args[_i - 0] = arguments[_i];
+	                        }
+	                        self._zone.run(function () { return callbacks[event].apply(self._zone, args); });
+	                    };
 	                }
 	            });
-	            return newCallbacks;
+	            return newCallbacks_1;
 	        }
 	        return callbacks;
 	    };
 	    return MeteorComponent;
-	})();
+	}());
 	exports.MeteorComponent = MeteorComponent;
 
 

@@ -44,7 +44,13 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(global) {var default_iterable_differ_1 = __webpack_require__(2);
+	"use strict";
+	var __extends = (this && this.__extends) || function (d, b) {
+	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+	    function __() { this.constructor = d; }
+	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+	};
+	var default_iterable_differ_1 = __webpack_require__(2);
 	var async_1 = __webpack_require__(3);
 	var mongo_cursor_observer_1 = __webpack_require__(4);
 	var MongoCursorObserverFactory = (function () {
@@ -57,24 +63,25 @@
 	        return null;
 	    };
 	    return MongoCursorObserverFactory;
-	})();
-	var MongoCursorDifferFactory = (function () {
+	}());
+	var MongoCursorDifferFactory = (function (_super) {
+	    __extends(MongoCursorDifferFactory, _super);
 	    function MongoCursorDifferFactory() {
+	        _super.apply(this, arguments);
 	    }
-	    MongoCursorDifferFactory.prototype.supports = function (obj) {
-	        return obj instanceof Mongo.Cursor;
-	    };
+	    MongoCursorDifferFactory.prototype.supports = function (obj) { return obj instanceof Mongo.Cursor; };
 	    MongoCursorDifferFactory.prototype.create = function (cdRef) {
 	        return new MongoCursorDiffer(cdRef, new MongoCursorObserverFactory());
 	    };
 	    return MongoCursorDifferFactory;
-	})();
+	}(IterableDifferFactory));
 	exports.MongoCursorDifferFactory = MongoCursorDifferFactory;
 	var MongoCursorDiffer = (function () {
 	    function MongoCursorDiffer(cdRef, obsFactory) {
 	        this._inserted = [];
 	        this._removed = [];
 	        this._moved = [];
+	        this._updated = [];
 	        this._listSize = 0;
 	        this._obsFactory = obsFactory;
 	    }
@@ -93,9 +100,13 @@
 	            fn(this._removed[i]);
 	        }
 	    };
+	    MongoCursorDiffer.prototype.forEachIdentityChange = function (fn) {
+	        for (var i = 0; i < this._updated.length; i++) {
+	            fn(this._updated[i]);
+	        }
+	    };
 	    MongoCursorDiffer.prototype.diff = function (cursor) {
 	        var _this = this;
-	        var zone = global['zone'] || window['zone'];
 	        this._reset();
 	        var newCursor = false;
 	        if (cursor && this._cursor !== cursor) {
@@ -170,6 +181,9 @@
 	                this._removed.push(this._createChangeRecord(null, changes[i].index, changes[i].item));
 	                this._listSize--;
 	            }
+	            if (changes[i] instanceof mongo_cursor_observer_1.UpdateChange) {
+	                this._updated.push(this._createChangeRecord(changes[i].index, null, changes[i].item));
+	            }
 	        }
 	    };
 	    MongoCursorDiffer.prototype._createChangeRecord = function (currentIndex, prevIndex, item) {
@@ -179,10 +193,9 @@
 	        return record;
 	    };
 	    return MongoCursorDiffer;
-	})();
+	}());
 	exports.MongoCursorDiffer = MongoCursorDiffer;
 
-	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
 /* 1 */,

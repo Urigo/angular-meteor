@@ -62,7 +62,7 @@ export class MongoCursorObserver {
    * before the moment someone subscribes to the observer,
    * we emit these changes, but only to the first ever subscriber.
    */
-  subscribe({next, error, complete}) : Subscription {
+  subscribe({next, error, complete}) {
     let subscription = new Subscription(next, error, complete);
     this._subs.push(subscription);
 

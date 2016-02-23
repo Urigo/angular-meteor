@@ -4,7 +4,7 @@ export declare type CallbacksObject = {
     onError?: Function;
     onStop?: Function;
 };
-export declare type MeteorCallbacks = () => any | CallbacksObject;
+export declare type MeteorCallbacks = (...args) => any | CallbacksObject;
 export declare class MeteorComponent implements OnDestroy {
     private _hAutoruns;
     private _hSubscribes;
@@ -13,7 +13,7 @@ export declare class MeteorComponent implements OnDestroy {
      * @param {NgZone} ngZone added for test purposes mostly.
      */
     constructor(ngZone?: NgZone);
-    autorun(func: () => any, autoBind: boolean): Tracker.Computation;
+    autorun(func: (c: Tracker.Computation) => any, autoBind: boolean): Tracker.Computation;
     /**
      *  Method has the same notation as Meteor.subscribe:
      *    subscribe(name, [args1, args2], [callbacks], [autobind])
