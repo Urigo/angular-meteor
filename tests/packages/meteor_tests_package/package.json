@@ -1,0 +1,13 @@
+{
+  "name": "angular2-meteor-tests-packages",
+  "version": "1.0.0",
+  "description": "",
+  "dependencies": {
+    "angular2-meteor": "git://github.com/Urigo/angular2-meteor.git#feature/meteor1.3"
+  },
+  "engines": {
+    "npm": "~3.5.3"
+  },
+  "devDependencies": {},
+  "license": "MIT"
+}

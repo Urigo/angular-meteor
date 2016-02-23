@@ -1,8 +1,5 @@
-'use strict';
-
-import {EventEmitter} from 'angular2/core';
-
-import {CursorHandle} from './cursor_handle';
+import {EventEmitter} from "angular2/core";
+import {CursorHandle} from "./cursor_handle";
 
 export class AddChange {
   constructor(public index: number, public item: any) {}
@@ -20,7 +17,7 @@ export class RemoveChange {
   constructor(public index: number) {}
 }
 
-class Subscription {
+export class Subscription {
   private _isUnsubscribed: boolean = false;
 
   constructor(private _next: Function,
@@ -58,18 +55,18 @@ export class MongoCursorObserver {
     return this._lastChanges;
   }
 
-   /**
-    * Subcribes to the Mongo cursor changes.
-    *
-    * Since it's possible that some changes that been already collected
-    * before the moment someone subscribes to the observer,
-    * we emit these changes, but only to the first ever subscriber.
-    */
-  subscribe({next, error, complete}) {
+  /**
+   * Subcribes to the Mongo cursor changes.
+   *
+   * Since it's possible that some changes that been already collected
+   * before the moment someone subscribes to the observer,
+   * we emit these changes, but only to the first ever subscriber.
+   */
+  subscribe({next, error, complete}) : Subscription {
     let subscription = new Subscription(next, error, complete);
     this._subs.push(subscription);
 
-    // If no subscriber has subscribed ever. 
+    // If no subscriber has subscribed ever.
     if (!this._isSubscribed) {
       this._isSubscribed = true;
 

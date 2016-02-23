@@ -1,0 +1,207 @@
+(function(e, a) { for(var i in a) e[i] = a[i]; }(exports, /******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
+
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+
+
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(global) {var default_iterable_differ_1 = __webpack_require__(2);
+	var async_1 = __webpack_require__(3);
+	var mongo_cursor_observer_1 = __webpack_require__(4);
+	var MongoCursorObserverFactory = (function () {
+	    function MongoCursorObserverFactory() {
+	    }
+	    MongoCursorObserverFactory.prototype.create = function (cursor) {
+	        if (cursor instanceof Mongo.Cursor) {
+	            return new mongo_cursor_observer_1.MongoCursorObserver(cursor);
+	        }
+	        return null;
+	    };
+	    return MongoCursorObserverFactory;
+	})();
+	var MongoCursorDifferFactory = (function () {
+	    function MongoCursorDifferFactory() {
+	    }
+	    MongoCursorDifferFactory.prototype.supports = function (obj) {
+	        return obj instanceof Mongo.Cursor;
+	    };
+	    MongoCursorDifferFactory.prototype.create = function (cdRef) {
+	        return new MongoCursorDiffer(cdRef, new MongoCursorObserverFactory());
+	    };
+	    return MongoCursorDifferFactory;
+	})();
+	exports.MongoCursorDifferFactory = MongoCursorDifferFactory;
+	var MongoCursorDiffer = (function () {
+	    function MongoCursorDiffer(cdRef, obsFactory) {
+	        this._inserted = [];
+	        this._removed = [];
+	        this._moved = [];
+	        this._listSize = 0;
+	        this._obsFactory = obsFactory;
+	    }
+	    MongoCursorDiffer.prototype.forEachAddedItem = function (fn) {
+	        for (var i = 0; i < this._inserted.length; i++) {
+	            fn(this._inserted[i]);
+	        }
+	    };
+	    MongoCursorDiffer.prototype.forEachMovedItem = function (fn) {
+	        for (var i = 0; i < this._moved.length; i++) {
+	            fn(this._moved[i]);
+	        }
+	    };
+	    MongoCursorDiffer.prototype.forEachRemovedItem = function (fn) {
+	        for (var i = 0; i < this._removed.length; i++) {
+	            fn(this._removed[i]);
+	        }
+	    };
+	    MongoCursorDiffer.prototype.diff = function (cursor) {
+	        var _this = this;
+	        var zone = global['zone'] || window['zone'];
+	        this._reset();
+	        var newCursor = false;
+	        if (cursor && this._cursor !== cursor) {
+	            newCursor = true;
+	            this._destroyObserver();
+	            this._cursor = cursor;
+	            this._curObserver = this._obsFactory.create(cursor);
+	            this._subscription = async_1.ObservableWrapper.subscribe(this._curObserver, zone.bind(function (changes) {
+	                _this._updateLatestValue(changes);
+	            }));
+	        }
+	        if (this._lastChanges) {
+	            this._applyChanges(this._lastChanges);
+	        }
+	        /**
+	         * If either last changes or new cursor is true, then
+	         * return "this" to notify Angular2 to re-build views.
+	         * If last changes or new cursor are true simultaneously
+	         * means that Mongo cursor has been changed and it's expected
+	         * that last changes (if any) of that cursor are additions only
+	         * (otherwise it won't likely work).
+	         * So removals of the previous cursor and additions of
+	         * the new one will processed at the same time.
+	         */
+	        if (this._lastChanges || newCursor) {
+	            this._lastChanges = null;
+	            return this;
+	        }
+	        return null;
+	    };
+	    MongoCursorDiffer.prototype.onDestroy = function () {
+	        this._destroyObserver();
+	    };
+	    Object.defineProperty(MongoCursorDiffer.prototype, "observer", {
+	        get: function () {
+	            return this._curObserver;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
+	    MongoCursorDiffer.prototype._destroyObserver = function () {
+	        if (this._curObserver) {
+	            this._curObserver.destroy();
+	        }
+	        this._applyCleanup();
+	    };
+	    MongoCursorDiffer.prototype._updateLatestValue = function (changes) {
+	        this._lastChanges = changes;
+	    };
+	    MongoCursorDiffer.prototype._reset = function () {
+	        this._inserted.length = 0;
+	        this._moved.length = 0;
+	        this._removed.length = 0;
+	    };
+	    // Reset previous state of the differ by removing all currently shown documents.
+	    MongoCursorDiffer.prototype._applyCleanup = function () {
+	        for (var index = 0; index < this._listSize; index++) {
+	            this._removed.push(this._createChangeRecord(null, index, null));
+	        }
+	        this._listSize = 0;
+	    };
+	    MongoCursorDiffer.prototype._applyChanges = function (changes) {
+	        for (var i = 0; i < changes.length; i++) {
+	            if (changes[i] instanceof mongo_cursor_observer_1.AddChange) {
+	                this._inserted.push(this._createChangeRecord(changes[i].index, null, changes[i].item));
+	                this._listSize++;
+	            }
+	            if (changes[i] instanceof mongo_cursor_observer_1.MoveChange) {
+	                this._moved.push(this._createChangeRecord(changes[i].toIndex, changes[i].fromIndex, changes[i].item));
+	            }
+	            if (changes[i] instanceof mongo_cursor_observer_1.RemoveChange) {
+	                this._removed.push(this._createChangeRecord(null, changes[i].index, changes[i].item));
+	                this._listSize--;
+	            }
+	        }
+	    };
+	    MongoCursorDiffer.prototype._createChangeRecord = function (currentIndex, prevIndex, item) {
+	        var record = new default_iterable_differ_1.CollectionChangeRecord(item);
+	        record.currentIndex = currentIndex;
+	        record.previousIndex = prevIndex;
+	        return record;
+	    };
+	    return MongoCursorDiffer;
+	})();
+	exports.MongoCursorDiffer = MongoCursorDiffer;
+
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
+
+/***/ },
+/* 1 */,
+/* 2 */
+/***/ function(module, exports) {
+
+	module.exports = require("angular2/src/core/change_detection/differs/default_iterable_differ");
+
+/***/ },
+/* 3 */
+/***/ function(module, exports) {
+
+	module.exports = require("angular2/src/facade/async");
+
+/***/ },
+/* 4 */
+/***/ function(module, exports) {
+
+	module.exports = require("./mongo_cursor_observer");
+
+/***/ }
+/******/ ])));

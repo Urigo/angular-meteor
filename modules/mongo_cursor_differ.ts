@@ -1,84 +1,68 @@
-'use strict';
-
-import {ChangeDetectorRef, IterableDiffer} from 'angular2/core';
-
-import {
-  DefaultIterableDifferFactory,
-  CollectionChangeRecord
-} from 'angular2/src/core/change_detection/differs/default_iterable_differ';
-
-import {ObservableWrapper} from 'angular2/src/facade/async';
-
-import {
-  MongoCursorObserver,
-  AddChange,
-  MoveChange,
-  RemoveChange,
-  UpdateChange
-} from './mongo_cursor_observer';
+import {ChangeDetectorRef, IterableDifferFactory} from "angular2/core";
+import {CollectionChangeRecord} from "angular2/src/core/change_detection/differs/default_iterable_differ";
+import {ObservableWrapper} from "angular2/src/facade/async";
+import {MongoCursorObserver, AddChange, MoveChange, RemoveChange} from "./mongo_cursor_observer";
 
 export interface ObserverFactory {
-  create(cursor: Object): Object;
+  create(cursor:Object): Object;
 }
 
 class MongoCursorObserverFactory implements ObserverFactory {
-  create(cursor: Object): Object {
+  create(cursor:Object):Object {
     if (cursor instanceof Mongo.Cursor) {
       return new MongoCursorObserver(cursor);
     }
+
     return null;
   }
 }
 
-export class MongoCursorDifferFactory extends DefaultIterableDifferFactory {
-  supports(obj: Object): boolean { return obj instanceof Mongo.Cursor; }
+export class MongoCursorDifferFactory implements IterableDifferFactory {
+  supports(obj:Object):boolean {
+    return obj instanceof Mongo.Cursor;
+  }
 
-  create(cdRef: ChangeDetectorRef): MongoCursorDiffer {
-      return new MongoCursorDiffer(cdRef, new MongoCursorObserverFactory());
+  create(cdRef:ChangeDetectorRef):MongoCursorDiffer {
+    return new MongoCursorDiffer(cdRef, new MongoCursorObserverFactory());
   }
 }
 
-export class MongoCursorDiffer implements IterableDiffer {
-  private _inserted: Array<CollectionChangeRecord> = [];
-  private _removed: Array<CollectionChangeRecord> = [];
-  private _moved: Array<CollectionChangeRecord> = [];
-  private _updated: Array<CollectionChangeRecord> = [];
-  private _curObserver: MongoCursorObserver;
-  private _lastChanges: Array<AddChange | MoveChange | RemoveChange>;
-  private _listSize: number = 0;
-  private _cursor: Mongo.Cursor<any>;
-  private _obsFactory: ObserverFactory;
-  private _subscription: Object;
+export class MongoCursorDiffer {
+  private _inserted:Array<CollectionChangeRecord> = [];
+  private _removed:Array<CollectionChangeRecord> = [];
+  private _moved:Array<CollectionChangeRecord> = [];
+  private _curObserver:MongoCursorObserver;
+  private _lastChanges:Array<AddChange | MoveChange | RemoveChange>;
+  private _listSize:number = 0;
+  private _cursor:Mongo.Cursor<any>;
+  private _obsFactory:ObserverFactory;
+  private _subscription:Object;
 
-  constructor(cdRef: ChangeDetectorRef, obsFactory: ObserverFactory) {
+  constructor(cdRef:ChangeDetectorRef, obsFactory:ObserverFactory) {
     this._obsFactory = obsFactory;
   }
 
-  forEachAddedItem(fn: Function) {
+  forEachAddedItem(fn:Function) {
     for (let i = 0; i < this._inserted.length; i++) {
       fn(this._inserted[i]);
     }
   }
 
-  forEachMovedItem(fn: Function) {
+  forEachMovedItem(fn:Function) {
     for (let i = 0; i < this._moved.length; i++) {
       fn(this._moved[i]);
     }
   }
 
-  forEachRemovedItem(fn: Function) {
+  forEachRemovedItem(fn:Function) {
     for (let i = 0; i < this._removed.length; i++) {
       fn(this._removed[i]);
     }
   }
 
-  forEachIdentityChange(fn: Function) {
-    for (let i = 0; i < this._updated.length; i++) {
-      fn(this._updated[i]);
-    }
-  }
+  diff(cursor:Mongo.Cursor<any>) {
+    let zone : any = global['zone'] || window['zone'];
 
-  diff(cursor: Mongo.Cursor<any>) {
     this._reset();
 
     let newCursor = false;
@@ -167,11 +151,6 @@ export class MongoCursorDiffer implements IterableDiffer {
         this._removed.push(this._createChangeRecord(
           null, changes[i].index, changes[i].item));
         this._listSize--;
-      }
-
-      if (changes[i] instanceof UpdateChange) {
-        this._updated.push(this._createChangeRecord(
-          changes[i].index, null, changes[i].item));
       }
     }
   }

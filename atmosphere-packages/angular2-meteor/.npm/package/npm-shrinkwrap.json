@@ -1,0 +1,38 @@
+{
+  "dependencies": {
+    "angular2": {
+      "version": "2.0.0-beta.7"
+    },
+    "angular2-meteor": {
+      "version": "https://github.com/Urigo/angular2-meteor/tarball/24fa5613977ca41b1091690d53d4324881e37db6",
+      "dependencies": {
+        "ejson": {
+          "version": "2.1.2",
+          "dependencies": {
+            "underscore": {
+              "version": "1.8.3"
+            }
+          }
+        }
+      }
+    },
+    "angular2-meteor-auto-bootstrap": {
+      "version": "https://github.com/Urigo/angular2-meteor-auto-bootstrap/tarball/9e312370199e7e9de5be249209c2578a8a439730"
+    },
+    "es6-promise": {
+      "version": "3.1.2"
+    },
+    "es6-shim": {
+      "version": "0.33.13"
+    },
+    "reflect-metadata": {
+      "version": "0.1.2"
+    },
+    "rxjs": {
+      "version": "5.0.0-beta.2"
+    },
+    "zone.js": {
+      "version": "0.5.15"
+    }
+  }
+}

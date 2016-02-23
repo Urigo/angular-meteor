@@ -1,10 +1,13 @@
-# Angular2-Meteor [![bitHound Overall Score](https://www.bithound.io/github/Urigo/angular2-meteor/badges/score.svg)](https://www.bithound.io/github/Urigo/angular2-meteor) [![Build Status](https://travis-ci.org/Urigo/angular2-meteor.svg?branch=master)](https://travis-ci.org/Urigo/angular2-meteor)
+// TODO: Update this.
+
+
+# Angular2-Meteor [![Build Status](https://travis-ci.org/Urigo/angular2-meteor.svg?branch=feature%2Fmeteor1.3)](https://travis-ci.org/Urigo/angular2-meteor)
 Angular2 + Meteor integration.
 
-##### Angular2 version: beta-6.
+##### Angular2 version: beta-1.
 
 ## Table of Contents
-* [Documentation](../../#Documentation)
+* [Tutorial](../../#tutorial)
 * [Quick Start](../../#quick-start)
     * [Install package](../../#install-package)
     * [Import Angular2 into your app](../../#import-angular2-into-your-app)
@@ -17,34 +20,30 @@ Angular2 + Meteor integration.
 
 ## Change Log
 
-Check out package change log [here](CHANGELOG.md).
+Check out change log of the package [here](CHANGELOG.md).
 
-## Documentation
-- [Tutorial](http://www.angular-meteor.com/tutorials/socially/angular2/bootstrapping)
-- [Official website](http://angular-meteor.com)
-- [Example application](https://github.com/Urigo/meteor-angular2.0-socially) (Final version of the tutorial)
-- Questions and help - [stack-overflow `angular2-meteor` tag](http://stackoverflow.com/questions/tagged/angular2-meteor)
-- [Discussions - the Meteor Forum](https://forums.meteor.com/)
-- [Report issues](https://github.com/Urigo/angular2-meteor/issues)
-- [Change Log, updates and breaking changes](https://github.com/Urigo/angular2-meteor/releases)
-- [Meteor Blog](https://info.meteor.com/blog)
-- [Official Meteor guide for best practices](http://guide.meteor.com/)
-- Track Roadmap here:
-- [angular2-meteor milestones](https://github.com/Urigo/angular2-meteor/milestones)
-- [meteor-angular2.0-socially milestones](https://github.com/Urigo/meteor-angular2.0-socially/milestones)
-- [Meteor issues related to Angular](https://github.com/meteor/meteor/labels/Project%3AAngular)
+## Tutorial
+
+If you are new to Angular 2, we recommend to check out our 15-steps Angular2+Meteor [tutorial](http://www.angular-meteor.com/tutorials/socially/angular2).
 
 ## Quick Start
 
 ### Install package:
+
 ````
-    meteor add urigo:angular2-meteor
+    npm install angular2-meteor --save
 ````
 
-This package adds own HTML processor, so you'll also need to remove the standard HTML processor:
+This package adds own HTML processor and TypeScript support, so you'll also need to remove the standard HTML processor:
 
 ````
    meteor remove blaze-html-templates
+````
+
+And add Angular2 compilers package:
+
+````
+   meteor add barbatus:ng2-compilers
 ````
 
 For the explanation, please, read "HTML" [paragraph](http://www.angular-meteor.com/tutorials/socially/angular2/bootstrapping) in the above mentioned tutorial.
@@ -52,12 +51,12 @@ For the explanation, please, read "HTML" [paragraph](http://www.angular-meteor.c
 ### Import Angular2 into your app:
 Package supports TypeScript and Babel (.jsx file extension) as languages for development with Angular2.
 
-ES6 modules are supported via SystemJS module loader library.
+ES6 modules are supported via CommonsJS (starting in Meteor 1.3) module loader library.
 
 To start, create `app.ts` file, import `Component` and `View` and then bootstrap the app:
 ````ts
     import {Component, View} from 'angular2/core';
-    import {bootstrap} from 'angular2/platform/browser';
+    import {bootstrap} from 'angular2/bootstrap';
 
     @Component({
       selector: 'socially'
@@ -95,19 +94,23 @@ Meteor.startup(() => {
 
 ### Start using Meteor in your Angular2 app:
 This package comes with some modules that makes it easy to use Meteor in Angular2.
-To load that modules, you will need to bootsrap your app with the help of the package's bootstraper.
 
-To do that, import `bootstrap` from Meteor-Angular2 package and remove previous one imported from `angular2/angular2`:
+You can use Meteor collections in the same way as you would do in a regular Meteor app with Blaze, you just need add the `viewProviders` to your `@Component` definition:
 
-````ts
-    import {bootstrap} from 'angular2-meteor';
-
-    ....
-
-    bootstrap(Socially);
+````js
+@Component({
+    selector: 'socially',
+    viewProviders: [
+        IterableDiffers.extend([new MongoCursorDifferFactory()])
+    ]
+})
 ````
 
-After that, you can use Meteor collections in the same way as you would do in a regular Meteor app with Blaze.
+And import it to your file:
+
+````js
+import {MongoCursorDifferFactory} from 'angular2-meteor/mongo_cursor_differ';
+````
 
 For example, change `client/app.ts` to:
 ````ts
@@ -163,27 +166,16 @@ So, if you have code like this:
 ````
 It will likely curse that `Mongo` is undefined. Luckily, the package adds Angular2 and Meteor declaration files, which means you'll need only to reference them in your TypeScript files to fix errors.
 
-After the first run of your app, Angular2-Meteor will create a  definition file for the package API,  `typings/angular2-meteor/angular2-meteor.d.ts`, and Angular 2 definition files (since they are available only in the Angular2 NPM) in the "typings" folder. All other typings dependencies should be installed using `typigns` tool:
-   
+After the first run of your app, Angular2-Meteor will create declaration  files (one of them is `typings/angular2-meteor.d.ts`) in the "typings" folder.
+There are two ways to include them into the app:
+
+- you can directly add a reference to, for example, `typings/angular2-meteor.d.ts` in every TypeScript file that uses Meteor or Angular2 API as follows:
+
+````ts
+/// <reference path="../typings/angular2-meteor.d.ts" />
 ````
-npm install typings -g
-
-typings meteor --ambient
-typings es6-promise --ambient
-typings es6-shil --ambient
-````
-
-There are two ways to link up typings with the app:
-
-- you can directly add a reference to, for example, `typings/angular2-meteo/angular2-meteor.d.ts` in every TypeScript file that uses  
-  Angular2-Meteor and Angular 2 API as follows:
-
-  ````ts
-   /// <reference path="typings/angular2-meteor/angular2-meteor.d.ts" />
-  ````
-  To add Meteor API, you'll need to reference `typings/main.d.ts`, a definition that links together all other definitions installed by     `typings` tool.
 - or you can add a custom TypeScript config at the root with "files"
-  property set to contain `typings/angular2-meteor/angular2-meteor.d.ts` path.
+  property set to contain "typings/angular2-meteor.d.ts" path.
   As soon as you've done this, TypeScript compiler will compiler
   every .ts-file along with `angular2-meteor.d.ts`, thus, recognizing 
   Meteor and Mongo API. See, the parties demo (example/parties) for the details.
@@ -195,24 +187,11 @@ updated package and started getting errors in the console, remove "angular2" fol
 
 ## Roadmap
 
-This package's roadmap and its status [here](https://trello.com/b/kSa6JNCk/angular2-tutorial).
+You can check out the package's roadmap and its status [here](https://trello.com/b/kSa6JNCk/angular2-tutorial).
 
 ## Contribution
 If you know how to make integration of Angular 2 and Meteor better, you are welcome!
 
 For the coding style guide, we use AirBnB [rules](https://github.com/airbnb/javascript) with TypeScript specifics and max line width set to 100 symbols. Rules are partly enforced by the tslint.json file in the root (if you are not familiar with TSLint, read more [here](https://github.com/palantir/tslint)). Please, check that your code conforms with the rules before PR.
 
-### Commit message format
 
-This project follows the `angular` project git commit message format.
-Please refer to the [official documentation](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#-git-commit-guidelines).
-
-### Setup repository
-
-There is a git hook that needed to be installed manually.
-
-```bash
-git clone https://github.com/<Your Username>/angular2-meteor.git
-cd angular2-meteor
-ln -s ../../validate-commit-msg.js .git/hooks/commit-msg
-```

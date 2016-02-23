@@ -1,0 +1,36 @@
+{
+  "name": "angular2-meteor",
+  "version": "0.5.0-beta.1",
+  "keywords": [
+    "angular",
+    "angular2",
+    "angular2-meteor",
+    "meteor",
+    "mongo",
+    "typescript",
+    "html-templates"
+  ],
+  "bugs": {
+    "url": "https://github.com/Urigo/angular2-meteor/issues"
+  },
+  "homepage": "http://www.angular-meteor.com",
+  "repository": "https://github.com/Urigo/angular2-meteor/",
+  "description": "Angular 2.0 and Meteor - the perfect stack http://www.angular-meteor.com/",
+  "author": "Angular2-Meteor (https://github.com/Urigo/angular2-meteor)",
+  "license": "MIT",
+  "scripts": {
+    "install": "mv ./build/* ./"
+  },
+  "dependencies": {
+    "ejson": ">=2.1.2"
+  },
+  "peerDependencies": {
+    "angular2": "^2.0.0-beta.6"
+  },
+  "devDependencies": {
+    "angular2": "^2.0.0-beta.6",
+    "ts-loader": "^0.8.0",
+    "typescript": "^1.7.5",
+    "webpack": "^1.12.12"
+  }
+}

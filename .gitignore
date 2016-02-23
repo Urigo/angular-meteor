@@ -1,7 +1,3 @@
-.idea
 node_modules
-.npm
-typings/main
-typings/browser
-main.d.ts
-browser.d.ts
+.idea
+
