@@ -158,119 +158,166 @@ It's value is `true` if a login method (such as `Meteor.loginWithPassword`, `Met
         </div>
         <div role="tabpanel" class="tab-pane" id="auth1-0-0">
 {{#markdown}}
+
 # $auth 1.0.0
 
-<a class="src-code" href="https://github.com/ozsay/angular-meteor-auth/blob/master/angular-meteor-auth.js" target="_blank">
-    src: angular-meteor-auth.js
+<a class="src-code" href="https://github.com/Urigo/angular-meteor-auth/blob/master/angular-meteor-auth.js" target="_blank">
+  src: angular-meteor-auth/angular-meteor-auth.js
 </a>
 
-`$auth` is a part of `angular-meteor-auth` package, and it located inside `angular-meteor.auth` AngularJS module.
-
-This module adds the functionality of meteor auth to your app for an easy access within angular.
-
-It will automatically extend your reactive contexts with the auth functionality.
+An extension which comes in a seperate package called `angular-meteor-auth` which provides us with authentication related methods and properties. Note that `accounts-base`package needs to be installed in order for this module to work, otherwise an error will be thrown.
 
 ## Installation
 
 You will need to add the package to your project and add it's module as a dependency to your AngularJS app:
 
-    meteor add angular-meteor-auth
+```js
+meteor add angular-meteor-auth
 
-    angular.module('myApp', [
-    'angular-meteor',
-    'angular-meteor.auth'
-    ]);
+angular.module('myApp', [
+'angular-meteor',
+'angular-meteor.auth'
+]);
+```
 
-## API Reference
+## Properties
+
+The following properties will be added to the `$scope` / `view model` during initialization and will be updated reactively:
+
+- currentUser - The current user logged in. Reactivated by [Accounts.user](http://docs.meteor.com/#/full/meteor_user).
+- currentUserId - The current user's id. Reactivated by [Accounts.userId](http://docs.meteor.com/#/full/meteor_userid).
+- isLoggingIn - Inticates whenever we try to log in. Reactivated by [Accounts.loggingIn](http://docs.meteor.com/#/full/meteor_loggingin).
+
+#### Example
+
+```html
+<div ng-show="ctx.isLoggingIn">Logging in...</div>
+<div ng-show="ctx.currentUser">I am visible only for logged in users!</div>
+<div ng-hide="ctx.currentUser">I am visible only for guests!</div>
+```
+
+## Methods
 
 ### $awaitUser
 
-Waits for a user to login.
+Waits for the user to finish the login process. Our waiting can be stopped manually or automatically once our `$scope` has been destroyed. For syntactic sugar, you may also call `awaitUser` in a service called `$auth` which is an alias for `$rootScope.$awaitUser`.
 
-This method is useful when you want to run part of your code only after the user logs in.
-
-This method returns a promise which fulfills when the user logged in successfully or rejects when the user failed to login.
-
-In addition you send an user validation function that will run against the logged in user and rejects if the user is not
-validated.
+------
 
 #### Arguments
 
 <table class="variables-matrix input-arguments">
-    <thead>
-    <tr>
-        <th>Param</th>
-        <th>Type</th>
-        <th>Details</th>
-        <th>Required</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td><strong>validation</strong></td>
-        <td><a href="" class="label type-hint type-hint-function">Function</a></td>
-        <td><p>An user validation function</p></td>
-        <td>No</td>
-    </tr>
-    </tbody>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Type</th>
+    <th>Details</th>
+    <th>Required</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>validationFn</td>
+    <td>
+      <a href="" class="label type-hint type-hint-function">Function</a>
+    </td>
+    <td>A validation function which will be invoked with the user once the login process has been succedded. If the returned value is `true` then the returned promised will be resolved. Else, if the returned value is 'false' the returned promise will be rejected with 'FORBIDDEN'. Else, if the returned value is a string or an error they will be rejected by the promise as is.</td>
+    <td>No</td>
+  </tr>
+  </tbody>
 </table>
 
-#### Usage examples
+#### Return value
 
-Waiting for a regular user
+Returns a promise which will be fulfilled accordingly. If the login process has been failed the promise will be rejected with 'AUTH_REQUIRED'. Else, the validation function will be invoked with the logged in user, and if the user is valid the promise will be resolved with the logged in user. Also, a 'stop' method is defined on the promise in case we would like to stop our waiting.
 
-    myModule.controller('MyCtrl', ['$scope', '$reactive', function($scope, $reactive) {
-      $reactive(this).attach($scope);
+------
 
-      this.$awaitUser().then((user) => {
-        console.log('The user has logged in successfully!', user);
-      }, (err) => {
-        console.log('There was an error in login process', err);
+#### Examples
+
+Running a piece of code only once logged in:
+
+```js
+angular.module('myApp').directive('myComponent', function() {
+  return {
+    link: function($scope) {
+      $scope.awaitUser().then(() => {
+        let currentUser = $scope.currentUser;
       });
-    }]);
+    }
+  };
+});
+```
 
-Waiting for an admin
+Usage with $auth service:
 
-    myModule.controller('MyCtrl', ['$scope', '$reactive', function($scope, $reactive) {
-      $reactive(this).attach($scope);
+```js
+$stateProvider
+  .state({
+      template: '<my-component></my-component>',
+      resolve: {
+        user: ($auth) => {
+          return $auth.awaitUser();
+        }
+      }
+  });
+```
 
-      this.$awaitUser((user) => {
-        return user.role === "Admin";
-      }).then((admin) => {
-        console.log('An admin has logged in successfully!', admin);
-      }, (err) => {
-        if (err === "AUTH_REQUIRED")
-          console.log('There was an error in login process');
-        else if (err === "FORBIDDEN")
-          console.log('A user has logged in who isn\'t an admin');
-      });
-    }]);
+Usage with validation method:
 
-> Please note, that `$awaitUser` is intended to be invoked within the login process and will not work properly before
-  it has begun.
+```js
+$stateProvider
+  .state({
+    template: '<my-component></my-component>',
+    resolve: {
+      user: ($auth) => {
+        return $auth.awaitUser((user) => {
+          if (user.firstName === 'Uri') {
+            return true;
+          }
+          else {
+            return 'You are not Uri!';
+          }
+        }
+      }
+    }
+  });
+```
 
-### currentUser
+Waiting for a regular user:
 
-Keeps the current user object (`Meteor.user()`)
+```js
+myModule.controller('MyCtrl', ['$scope', '$reactive', function($scope, $reactive) {
+  $reactive(this).attach($scope);
 
-### currentUserId
+  this.$awaitUser().then((user) => {
+    console.log('The user has logged in successfully!', user);
+  }, (err) => {
+    console.log('There was an error in login process', err);
+  });
+}]);
+```
 
-Keeps the current user id (`Meteor.userId()`)
+Waiting for an admin:
 
-### isLoggingIn
+```js
+myModule.controller('MyCtrl', ['$scope', '$reactive', function($scope, $reactive) {
+  $reactive(this).attach($scope);
 
-Keeps the current user object (`Meteor.loggingIn()`)
+  this.$awaitUser((user) => {
+    return user.role === "Admin";
+  }).then((admin) => {
+    console.log('An admin has logged in successfully!', admin);
+  }, (err) => {
+    if (err === "AUTH_REQUIRED")
+      console.log('There was an error in login process');
+    else if (err === "FORBIDDEN")
+      console.log('A user has logged in who isn\'t an admin');
+  });
+}]);
+```
 
-
-These are all reactive properties which are added to the contexts.
-
-### Usage example inside a view
-
-    <div ng-show="ctx.isLoggingIn">Logging in...</div>
-    <div ng-show="ctx.currentUser">I am visible only for logged in users!</div>
-    <div ng-hide="ctx.currentUser">I am visible only for guests!</div>
-
-{{/markdown}}
+      {{/markdown}}
         </div>
     </div>
 </div>
