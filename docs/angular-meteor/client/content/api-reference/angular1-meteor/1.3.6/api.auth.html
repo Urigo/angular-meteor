@@ -12,15 +12,13 @@
                 <span class="caret"></span>
             </a>
             <ul class="dropdown-menu" aria-labelledby="authVersion" id="authVersion-contents">
+                <li class="active"><a href="#auth0-3-0" aria-controls="auth0-3-0" role="tab" data-toggle="tab">auth 0.3.0</a></li>
                 <li><a href="#auth0-2-0" aria-controls="auth0-2-0" role="tab" data-toggle="tab">auth 0.2.0</a></li>
-              <!--
-                <li class="active"><a href="#auth0-2-0" aria-controls="auth0-2-0" role="tab" data-toggle="tab">auth 0.2.0</a></li>
-                -->
             </ul>
         </li>
     </ul>
     <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="auth0-2-0">
+        <div role="tabpanel" class="tab-pane" id="auth0-2-0">
   {{#markdown}}
 # $auth 0.2.0
 
@@ -156,29 +154,34 @@ It's value is `true` if a login method (such as `Meteor.loginWithPassword`, `Met
 
   {{/markdown}}
         </div>
-        <div role="tabpanel" class="tab-pane" id="auth1-0-0">
+        <div role="tabpanel" class="tab-pane active" id="auth0-3-0">
 {{#markdown}}
 
-# $auth 1.0.0
+# $auth 0.3.0
 
 <a class="src-code" href="https://github.com/Urigo/angular-meteor-auth/blob/master/angular-meteor-auth.js" target="_blank">
   src: angular-meteor-auth/angular-meteor-auth.js
 </a>
 
-An extension which comes in a seperate package called `angular-meteor-auth` which provides us with authentication related methods and properties. Note that `accounts-base`package needs to be installed in order for this module to work, otherwise an error will be thrown.
+An extension for the scope which comes in a seperate package called `angular-meteor-auth` and provides us with authentication related methods and properties. For syntactic sugar, you may also use the `$auth` service, e.g. `$auth.awaitUser()` which is equivalent to `$rootScope.$awaitUser()`.
 
 ## Installation
 
 You will need to add the package to your project and add it's module as a dependency to your AngularJS app:
 
-```js
+```bash
+meteor add accounts-base
 meteor add angular-meteor-auth
+```
 
+```js
 angular.module('myApp', [
-'angular-meteor',
-'angular-meteor.auth'
+  'angular-meteor',
+  'angular-meteor.auth'
 ]);
 ```
+
+Note that `accounts-base`package needs to be installed in order for this module to work, otherwise an error will be thrown.
 
 ## Properties
 
@@ -191,16 +194,18 @@ The following properties will be added to the `$scope` / `view model` during ini
 #### Example
 
 ```html
-<div ng-show="ctx.isLoggingIn">Logging in...</div>
-<div ng-show="ctx.currentUser">I am visible only for logged in users!</div>
-<div ng-hide="ctx.currentUser">I am visible only for guests!</div>
+<div ng-show="vm.isLoggingIn">Logging in...</div>
+<div ng-show="vm.currentUser">I am visible only for logged in users!</div>
+<div ng-hide="vm.currentUser">I am visible only for guests!</div>
 ```
 
 ## Methods
 
+As an addition to the methods below, `$auth 0.2.0` methods are also available (See <a id="pane-activator" pane-target="#auth0-2-0">reference</a>).
+
 ### $awaitUser
 
-Waits for the user to finish the login process. Our waiting can be stopped manually or automatically once our `$scope` has been destroyed. For syntactic sugar, you may also call `awaitUser` in a service called `$auth` which is an alias for `$rootScope.$awaitUser`.
+Waits for the user to finish the login process. Our waiting can be stopped manually or automatically once our `$scope` has been destroyed.
 
 ------
 
