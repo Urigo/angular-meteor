@@ -39,7 +39,7 @@ Let's see what's happening here:
 * The first parameter is the name of the subscription. The client will subscribe to that name
 * The second parameter is a function that defines what will be returned in the subscription
 
-You can find out more about MonngoDB `find()` method [here](http://docs.mongodb.org/manual/reference/method/db.collection.find/)
+You can find out more about MongoDB `find()` method [here](http://docs.mongodb.org/manual/reference/method/db.collection.find/)
 
 That function will determine what data will be returned and the permissions needed.
 
