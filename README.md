@@ -244,13 +244,9 @@ In order to work with this package locally when using Meteor 1.3 project, follow
 4. Now you have two options, you can specify the local copy in the `package.json` of your project, as follow:
    ````json
    {
-      // ...
-
       "dependencies": {
          "angular2-meteor": "./local-work/angular2-meteor"
       }
-
-      // ...
    }
    ````
 
