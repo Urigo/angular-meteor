@@ -4,9 +4,8 @@
         <div>
           {{#markdown}}
 # call
-<a class="src-code" href="https://github.com/Urigo/angular-meteor/blob/master/packages/angular-meteor-data/modules/core.js#L63" target="_blank">
-    src: angular-meteor-data/modules/core.js, line 63
-</a>
+
+{{> srcRef root="angular-meteor/blob/master/packages" src="angular-meteor-data/modules/core.js#L63"}}
 
 This method wraps [`Meteor.call`](http://docs.meteor.com/#/full/meteor_call) method to run it's callback in a digestion
 cycle so angular will detect the changes and update the views accordingly.
