@@ -1,17 +1,13 @@
 <template name="api.1.3.6.reactive-context">
   <div>
-    <a href="https://github.com/Urigo/angular-meteor/edit/master/docs/angular-meteor/client/content/api-reference/angular1-meteor/1.3.6/api.reactive-context.html"
-       class="btn btn-default btn-lg improve-button">
-      <i class="glyphicon glyphicon-edit">&nbsp;</i>Improve this doc
-    </a>
+    {{> improveBtn href="https://github.com/Urigo/angular-meteor/edit/master/docs/angular-meteor/client/content/api-reference/angular1-meteor/1.3.6/api.reactive-context.html"}}
 
     <do-nothing>
       {{#markdown}}
 
 # ReactiveContext
-<a class="src-code" href="https://github.com/Urigo/angular-meteor/blob/master/packages/angular-meteor-data/modules/reactive.js" target="_blank">
-  src: angular-meteor-data/modules/reactive.js
-</a>
+
+{{> srcRef root="angular-meteor/blob/master/packages" src="angular-meteor-data/modules/reactive.js"}}
 
 ReactiveContext is a class that manages the reactivity of a context, and manages the subscriptions and helpers.
 Instance of this class is returned from the `$reactive` service after using it.
