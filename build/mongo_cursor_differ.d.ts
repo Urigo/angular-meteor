@@ -1,9 +1,10 @@
-import { ChangeDetectorRef, IterableDifferFactory, IterableDiffer } from "angular2/core";
+import { ChangeDetectorRef, IterableDiffer } from "angular2/core";
+import { DefaultIterableDifferFactory } from "angular2/src/core/change_detection/differs/default_iterable_differ";
 import { MongoCursorObserver } from "./mongo_cursor_observer";
 export interface ObserverFactory {
     create(cursor: Object): Object;
 }
-export declare class MongoCursorDifferFactory extends IterableDifferFactory {
+export declare class MongoCursorDifferFactory extends DefaultIterableDifferFactory {
     supports(obj: Object): boolean;
     create(cdRef: ChangeDetectorRef): MongoCursorDiffer;
 }

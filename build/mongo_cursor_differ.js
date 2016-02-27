@@ -74,7 +74,7 @@
 	        return new MongoCursorDiffer(cdRef, new MongoCursorObserverFactory());
 	    };
 	    return MongoCursorDifferFactory;
-	}(IterableDifferFactory));
+	}(default_iterable_differ_1.DefaultIterableDifferFactory));
 	exports.MongoCursorDifferFactory = MongoCursorDifferFactory;
 	var MongoCursorDiffer = (function () {
 	    function MongoCursorDiffer(cdRef, obsFactory) {
