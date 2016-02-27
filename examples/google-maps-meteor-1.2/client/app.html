@@ -1,0 +1,19 @@
+Hello Angular2.0 Meteor with Google maps!
+
+<sebm-google-map
+        [latitude]="lat"
+        [longitude]="lng"
+        [zoom]="zoom"
+        [disableDefaultUI]="false"
+        (mapClick)="mapClicked($event)">
+
+  <sebm-google-map-marker
+          *ngFor="#m of markers; #i = index"
+          (markerClick)="clickedMarker(m.label, i)"
+          [latitude]="m.lat"
+          [longitude]="m.lng"
+          [label]="m.label"
+          [markerDraggable]="m.draggable"
+          (dragEnd)="markerDragEnd(m, $event)"></sebm-google-map-marker>
+
+</sebm-google-map>

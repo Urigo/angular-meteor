@@ -1,0 +1,27 @@
+{
+  "dependencies": {
+    "angular2-google-maps": {
+      "version": "https://github.com/SebastianM/angular2-google-maps/tarball/e4ca50b05a052b6a824dcb6e68b0a80539b47452",
+      "dependencies": {
+        "angular2": {
+          "version": "2.0.0-beta.7"
+        },
+        "es6-promise": {
+          "version": "3.1.2"
+        },
+        "es6-shim": {
+          "version": "0.33.13"
+        },
+        "reflect-metadata": {
+          "version": "0.1.2"
+        },
+        "rxjs": {
+          "version": "5.0.0-beta.2"
+        },
+        "zone.js": {
+          "version": "0.5.15"
+        }
+      }
+    }
+  }
+}

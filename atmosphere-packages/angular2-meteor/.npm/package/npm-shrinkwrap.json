@@ -4,7 +4,7 @@
       "version": "2.0.0-beta.7"
     },
     "angular2-meteor": {
-      "version": "https://github.com/Urigo/angular2-meteor/tarball/24fa5613977ca41b1091690d53d4324881e37db6",
+      "version": "https://github.com/Urigo/angular2-meteor/tarball/0c07434635eedd347854ec05ab3fc20ecfe732a0",
       "dependencies": {
         "ejson": {
           "version": "2.1.2",
@@ -17,7 +17,7 @@
       }
     },
     "angular2-meteor-auto-bootstrap": {
-      "version": "https://github.com/Urigo/angular2-meteor-auto-bootstrap/tarball/9e312370199e7e9de5be249209c2578a8a439730"
+      "version": "https://github.com/Urigo/angular2-meteor-auto-bootstrap/tarball/e09ba84d36ecf31c289fe2b71d32d181bd8bde57"
     },
     "es6-promise": {
       "version": "3.1.2"
