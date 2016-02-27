@@ -136,6 +136,38 @@ Add Angular2 template file `client/parties.html` with a content as follows:
 
 At this moment, you are ready to create awesome apps backed by the power of Angular2 and Meteor!
 
+To use Meteor features, make sure that your components extends `MeteorComponent`, and you can feature that comes from Meteor:
+
+````ts
+    import {Component, View} from 'angular2/core';
+    import {bootstrap} from 'angular2-meteor-auto-bootstrap';
+    import {MeteorComponent} from 'angular2-meteor';
+    import {MyCollection} form '../model/my-collection.ts';
+
+    @Component({
+      selector: 'socially'
+    })
+    @View({
+      template: "<p>Hello World!</p>"
+    })
+    class Socially extends MeteorComponent {
+      myData : Mongo.Cursor<any>;
+    
+      constructor() {
+         this.myData = MyCollection.find({});
+         this.subscribe('my-subscription'); // Wraps Meteor.subscribe
+      }
+      
+      doSomething() {
+         this.call('server-method'); // Wraps Meteor.call
+      }
+    }
+
+    bootstrap(Socially);
+````
+
+You can find more examples in the full tutorial!
+
 ## Demos
 
 Check out two demos for the quick how-to:
