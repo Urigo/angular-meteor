@@ -1,4 +1,4 @@
-/*! angular-meteor v1.3.7-beta.1 */
+/*! angular-meteor v1.3.7 */
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};

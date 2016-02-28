@@ -9369,7 +9369,7 @@ var Promise = Package.promise.Promise;
 //                                                                                                                 //
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                                                                                                                    //
-/*! angular-meteor v1.3.7-beta.1 */                                                                                // 1
+/*! angular-meteor v1.3.7 */                                                                                       // 1
 /******/ (function(modules) { // webpackBootstrap                                                                  // 2
 /******/ 	// The module cache                                                                                      // 3
 /******/ 	var installedModules = {};                                                                               // 4
