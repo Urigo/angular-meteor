@@ -109,6 +109,6 @@ Then go to `localhost:3000` in your browser
 Whether it's a typo, some clarification, or a whole new feature - here's how to get started:
 
 1. Clone angular-meteor on your local machine
-2. Go to the docs directory at `cd docs/angular-meteor`
+2. Clone the docs repository at `https://github.com/urigo/angular-meteor-docs`
 3. Run the app for the documentation `meteor`
 4. Start tweaking and updating!
