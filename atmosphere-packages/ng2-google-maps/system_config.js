@@ -4,7 +4,7 @@ System.config({
       main: 'core',
       format: 'register',
       map: {
-        '.': System.normalizeSync('{barbatus:ng2-google-maps}')
+        '.': System.normalizeSync('barbatus_ng2-google-maps')
       }
     }
   }

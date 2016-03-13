@@ -8,7 +8,7 @@ import {makeDecorator} from 'angular2/src/core/util/decorators';
 
 import {ComponentInstruction} from 'angular2/router';
 
-import {CanActivate} from 'angular2/src/router/lifecycle_annotations_impl';
+import {CanActivate} from 'angular2/src/router/lifecycle/lifecycle_annotations_impl';
 
 class InjectUserAnnotation {
   constructor(public propName: string = 'user') {}

@@ -26,7 +26,7 @@ Package.onUse(function(api) {
 
   // Those implies are required by Angular2-Meteor and here in order to make sure that you have them in your project.
   api.imply([
-    'barbatus:typescript@0.2.0-beta.4',
+    'barbatus:typescript@0.2.0-beta.8',
     'check@1.1.0',
     'tracker@1.0.9',
     'underscore@1.0.4',
