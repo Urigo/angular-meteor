@@ -1,6 +1,6 @@
 System.config({
   packages: {
-    'angular2-google-maps': {
+    'ng2-google-maps': {
       main: 'core',
       format: 'register',
       map: {
