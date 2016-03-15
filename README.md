@@ -175,12 +175,12 @@ Check out two demos for the quick how-to:
 * the Tutorial's [Socially app](https://github.com/Urigo/meteor-angular2.0-socially)
 * [Todos](https://github.com/Urigo/Meteor-Angular2/tree/master/examples/todos) demo (deployed http://ng2-todos.meteor.com).
 
-### Server Side
+## Server Side
 You can use TypeScript also in the server side, so you can share you interfaces with both client and server!
 
 Similar to the client's main module `app` file, Meteor checks for the existence of the `main` file in the server folder and, in case of success, will import it for you.
 
-### TypeScript
+## TypeScript
 The package uses [TypeScript for Meteor](https://github.com/barbatus/ts-compilers) to compile (transpile) `.ts`-files.
 
 TypeScript configuration file a.k.a. `tsconfig.json` is supported as well. Place a file with this name at the root folder and start adding any available TypeScript options you want. You can read about all available compiler options [here] (https://github.com/Microsoft/TypeScript/wiki/tsconfig.json).
@@ -213,7 +213,7 @@ For the Meteor 1.2 version:
 }
 ````
 
-## Typings
+### Typings
 
 To add declaration files of any global 3-party JavaScript library including Meteor itself (so called ambient typings), we recommend to use [`typings`](https://github.com/typings/typings) utility, which is specially designed to be used for typigns management with access to global registries of common 3-party libraries.
 
@@ -224,7 +224,7 @@ As for Angular 2's typings and typings of the related packages, if you plan to u
 You can check out the package's roadmap and its status under this repository's issues.
 
 ## Contribution
-If you know how to make integration of Angular 2 and Meteor better, you are welcome!
+If you know how to make integration of Angular 2 and Meteor better, you are very welcome!
 
 For the coding style guide, we use AirBnB [rules](https://github.com/airbnb/javascript) with TypeScript specifics and max line width set to 100 symbols. Rules are partly enforced by the tslint.json file in the root (if you are not familiar with TSLint, read more [here](https://github.com/palantir/tslint)). Please, check that your code conforms with the rules before PR.
 
