@@ -60,7 +60,7 @@ Notes:
 - Meteor 1.2 does not have modules loader, so you need to use SystemJS as modules loader (comes with this package!)
 
 ### Import Angular2 into your app:
-Package supports TypeScript and Babel (.jsx file extension) as languages for development with Angular2.
+Package supports TypeScript and Babel (.jsx file extension) as languages for development with Angular 2.
 
 ES6 modules are supported via CommonsJS (starting in Meteor 1.3) module loader library.
 
@@ -101,7 +101,7 @@ Also, if you name your main client component is `app.ts`, the package will impor
 
 ### Start using Meteor in your Angular2 app:
 
-This package comes with some modules that makes it easy to use Meteor in Angular2.
+This package comes with some modules that makes it easy to use Meteor in Angular 2.
 
 You can use Meteor collections in the same way as you would do in a regular Meteor app with Blaze, you just need to use another `bootstrap` method, instead of the one the comes with Angular2:
 
@@ -134,7 +134,7 @@ Add Angular2 template file `client/parties.html` with a content as follows:
     </div>
 ````
 
-At this moment, you are ready to create awesome apps backed by the power of Angular2 and Meteor!
+At this moment, you are ready to create awesome apps backed by the power of Angular 2 and Meteor!
 
 To use Meteor features, make sure that your components extends `MeteorComponent`, and you can feature that comes from Meteor:
 
@@ -185,7 +185,7 @@ The package uses [TypeScript for Meteor](https://github.com/barbatus/ts-compiler
 
 TypeScript configuration file a.k.a. `tsconfig.json` is supported as well. Place a file with this name at the root folder and start adding any available TypeScript options you want. You can read about all available compiler options [here] (https://github.com/Microsoft/TypeScript/wiki/tsconfig.json).
 
-Preset TypeScript options of the Meteor 1.3 version of this package are the following:
+Preset (i.e., they can't be overriden in the config) TypeScript options of the Meteor 1.3 version of this package are the following:
 ````json
 {
   "compilerOptions": {
