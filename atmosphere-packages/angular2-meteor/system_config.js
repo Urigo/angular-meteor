@@ -11,6 +11,12 @@ System.config({
       map: {
         '.': System.normalizeSync('{urigo:angular2-meteor}')
       }
+    },
+    'angular2-meteor-auto-bootstrap': {
+      format: 'register',
+      map: {
+        '.': System.normalizeSync('{urigo:angular2-meteor}/.npm/package/node_modules/angular2-meteor-auto-bootstrap/modules')
+      }
     }
   }
 });

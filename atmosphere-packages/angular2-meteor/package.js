@@ -1,7 +1,7 @@
 Package.describe({
   name: 'urigo:angular2-meteor',
   summary: 'Everything you need to use AngularJS 2.0 in your Meteor app',
-  version: '0.4.5-beta.2',
+  version: '0.4.5_1',
   git: 'https://github.com/Urigo/angular-meteor.git',
   documentation: '../../README.md'
 });
@@ -27,7 +27,7 @@ Package.onUse(function (api) {
 
   api.use([
     'isobuild:compiler-plugin@1.0.0',
-    'barbatus:angular2@0.9.0-beta.6'
+    'barbatus:angular2@0.9.0'
   ]);
 
   // Some of the packages are used by Angular2-Meteor NPM.
