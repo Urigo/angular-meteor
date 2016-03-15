@@ -1,6 +1,6 @@
 Package.describe({
   name: 'barbatus:ng2-meteor-accounts-ui',
-  version: '0.1.4',
+  version: '0.1.4_1',
   summary: 'Meteor Accounts UI for Angular2',
   git: 'https://github.com/Urigo/angular2-meteor/tree/master/packages/ng2-accounts-ui',
   documentation: 'README.md'

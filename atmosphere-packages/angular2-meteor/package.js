@@ -43,6 +43,8 @@ Package.onUse(function (api) {
     'system_config.js'
   ]);
 
+  api.addFiles(['app.html'], 'client');
+
   api.addFiles([
     '.npm/package/node_modules/angular2-meteor/modules/cursor_handle.ts',
     '.npm/package/node_modules/angular2-meteor/modules/mongo_cursor_observer.ts',

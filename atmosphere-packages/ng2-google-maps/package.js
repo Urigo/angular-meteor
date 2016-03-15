@@ -1,6 +1,6 @@
 Package.describe({
   name: 'barbatus:ng2-google-maps',
-  version: '0.6.2_1',
+  version: '0.6.2_2',
   summary: 'Google Maps for Angular2',
   git: 'https://github.com/Urigo/angular2-meteor/tree/master/packages/ng2-google-maps',
   documentation: null
