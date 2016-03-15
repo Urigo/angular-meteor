@@ -180,29 +180,44 @@ You can use TypeScript also in the server side, so you can share you interfaces 
 
 Similar to the client's main module `app` file, Meteor checks for the existence of the `main` file in the server folder and, in case of success, will import it for you.
 
-### TypeScript Support
-The package uses this TypeScript [compilers](https://github.com/barbatus/ts-compilers) to compile `.ts`-files. Please, read there how you can configure TypeScript, what options are available or how you can speed up just-in-time compilation.
+### TypeScript
+The package uses [TypeScript for Meteor](https://github.com/barbatus/ts-compilers) to compile (transpile) `.ts`-files.
 
-TypeScript configuration file a.k.a. `tsconfig.json` is supported as well. Place a file with this name at the root folder and start adding any available TypeScript options you want. Read about the structure [here] (https://github.com/Microsoft/TypeScript/wiki/tsconfig.json). "files" property works only for the declaration files in the "typings" folder.
+TypeScript configuration file a.k.a. `tsconfig.json` is supported as well. Place a file with this name at the root folder and start adding any available TypeScript options you want. You can read about all available compiler options [here] (https://github.com/Microsoft/TypeScript/wiki/tsconfig.json).
 
-We recommend to use something like this default config file:
+Preset TypeScript options of the Meteor 1.3 version of this package are the following:
 ````json
 {
   "compilerOptions": {
     "experimentalDecorators": true,
     "module": "commonjs",
-    "target": "es5",
-    "isolatedModules": false,
+    "target": "es3",
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
-    "removeComments": false,
-    "noImplicitAny": false,
     "sourceMap": true
   }
 }
 ````
 
-By default, all modules from `node_modules` are included so you do not need to handle typings when you first create an app.
+For the Meteor 1.2 version:
+````json
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "module": "system",
+    "target": "es3",
+    "moduleResolution": "classic",
+    "emitDecoratorMetadata": true,
+    "sourceMap": true
+  }
+}
+````
+
+## Typings
+
+To add declaration files of any global 3-party JavaScript library including Meteor itself (so called ambient typings), we recommend to use [`typings`](https://github.com/typings/typings) utility, which is specially designed to be used for typigns management with access to global registries of common 3-party libraries.
+
+As for Angular 2's typings and typings of the related packages, if you plan to use Meteor 1.3 and NPM packages you don't need to worry about them at all, as most of declaration files are provided in NPMs (at least for Angular 2 itself). If you plan to use Meteor 1.2  and Atmosphere packages, all required typigns will be installed (copied) automatically into the "typings" folder during the first run.
 
 ## Roadmap
 
