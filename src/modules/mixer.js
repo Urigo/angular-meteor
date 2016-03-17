@@ -14,6 +14,9 @@ angular.module(name, [])
   we will just use the `$Mixer` service.
  */
 .service(Mixer, function() {
+  // Used to store method's caller
+  let caller;
+
   this._mixins = [];
   // Apply mixins automatically on specified contexts
   this._autoExtend = [];
@@ -48,7 +51,51 @@ angular.module(name, [])
   };
 
   // Extend prototype with the defined mixins
-  this._extend = (obj) => {
-    return _.extend(obj, ...this._mixins);
+  this._extend = (obj, options) => {
+    const { pattern, context } = _.defaults({}, options, {
+      pattern: /.*/, // The patterns of the keys which will be filtered
+    });
+
+    const mixins = this._mixins.map((mixin) => {
+      // Filtering the keys by the specified pattern
+      const keys = _.keys(mixin)
+        .filter(k => k.match(pattern))
+        .filter(k => _.isFunction(mixin[k]));
+
+      return keys.reduce((boundMixin, methodName) => {
+        const methodHandler = mixin[methodName];
+
+        // Note that this is not an arrow function so we can conserve the conetxt
+        boundMixin[methodName] = function(...args) {
+          // Storing original caller so we will know who actually called the
+          // method event though it is bound to another context
+          const methodContext = context || this;
+          const recentCaller = caller;
+          caller = this;
+
+          try {
+            return methodHandler.apply(methodContext, args);
+          }
+          finally {
+            // No matter what happens, restore variable to the previous one
+            caller = recentCaller;
+          }
+        };
+
+        return boundMixin;
+      }, {});
+    });
+
+    return _.extend(obj, ...mixins);
   };
+
+  // Caller property can not be set
+  Object.defineProperty(this, 'caller', {
+    configurable: true,
+    enumerable: true,
+
+    get: () => {
+      return caller;
+    }
+  });
 });

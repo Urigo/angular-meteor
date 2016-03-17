@@ -483,6 +483,23 @@ describe('angular-meteor.reactive', function() {
 
         expect(changedSpy).toHaveBeenCalled();
       });
+
+      it('should be able to get properties reactively of both view model and scope at the same time', function() {
+        var actualValue;
+        scope.myProp = 'initial';
+
+        vm.autorun(() => {
+          actualValue = scope.getReactively('myProp');
+        });
+
+        expect(actualValue).toEqual('initial');
+
+        scope.myProp = 'changed';
+        scope.$$throttledDigest();
+        Tracker.flush();
+
+        expect(actualValue).toEqual('changed');
+      });
     });
 
     describe('getCollectionReactively()', function() {

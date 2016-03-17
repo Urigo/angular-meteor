@@ -1607,6 +1607,9 @@
 	.service(Mixer, function () {
 	  var _this = this;
 
+	  // Used to store method's caller
+	  var caller = void 0;
+
 	  this._mixins = [];
 	  // Apply mixins automatically on specified contexts
 	  this._autoExtend = [];
@@ -1649,11 +1652,64 @@
 	  };
 
 	  // Extend prototype with the defined mixins
-	  this._extend = function (obj) {
+	  this._extend = function (obj, options) {
 	    var _ref;
 
-	    return (_ref = _).extend.apply(_ref, [obj].concat(_toConsumableArray(_this._mixins)));
+	    var _$defaults = _.defaults({}, options, {
+	      pattern: /.*/ });
+
+	    var pattern = _$defaults.pattern;
+	    var context = _$defaults.context;
+	    // The patterns of the keys which will be filtered
+
+
+	    var mixins = _this._mixins.map(function (mixin) {
+	      // Filtering the keys by the specified pattern
+	      var keys = _.keys(mixin).filter(function (k) {
+	        return k.match(pattern);
+	      }).filter(function (k) {
+	        return _.isFunction(mixin[k]);
+	      });
+
+	      return keys.reduce(function (boundMixin, methodName) {
+	        var methodHandler = mixin[methodName];
+
+	        // Note that this is not an arrow function so we can conserve the conetxt
+	        boundMixin[methodName] = function () {
+	          // Storing original caller so we will know who actually called the
+	          // method event though it is bound to another context
+	          var methodContext = context || this;
+	          var recentCaller = caller;
+	          caller = this;
+
+	          try {
+	            for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+	              args[_key2] = arguments[_key2];
+	            }
+
+	            return methodHandler.apply(methodContext, args);
+	          } finally {
+	            // No matter what happens, restore variable to the previous one
+	            caller = recentCaller;
+	          }
+	        };
+
+	        return boundMixin;
+	      }, {});
+	    });
+
+	    return (_ref = _).extend.apply(_ref, [obj].concat(_toConsumableArray(mixins)));
 	  };
+
+	  // Caller property can not be set
+	  Object.defineProperty(this, 'caller', {
+	    configurable: true,
+	    enumerable: true,
+
+	    get: function get() {
+	      return caller;
+	    }
+	  });
 	});
 
 /***/ },
@@ -1870,26 +1926,17 @@
 
 	  // Gets an object, wraps it with scope functions and returns it
 	  $$ViewModel.viewModel = function (vm) {
-	    var _this = this;
-
 	    if (!_.isObject(vm)) {
 	      throw Error('argument 1 must be an object');
 	    }
 
-	    // Apply mixin functions
-	    $Mixer._mixins.forEach(function (mixin) {
-	      // Reject methods which starts with double $
-	      var keys = _.keys(mixin).filter(function (k) {
-	        return k.match(/^(?!\$\$).*$/);
-	      });
-	      var proto = _.pick(mixin, keys);
-	      // Bind all the methods to the prototype
-	      var boundProto = $$utils.bind(proto, _this);
-	      // Add the methods to the view model
-	      _.extend(vm, boundProto);
+	    // Apply extend view model with mixin functions
+	    $Mixer._extend(vm, {
+	      pattern: /^(?!\$\$).*$/,
+	      context: this
 	    });
 
-	    // Apply mixin constructors on the view model
+	    // Apply mixin constructors on scope with view model
 	    $Mixer._construct(this, vm);
 	    return vm;
 	  };
@@ -1908,7 +1955,7 @@
 	.service(reactive, [_utils.utils, function ($$utils) {
 	  var Reactive = function () {
 	    function Reactive(vm) {
-	      var _this2 = this;
+	      var _this = this;
 
 	      _classCallCheck(this, Reactive);
 
@@ -1917,7 +1964,7 @@
 	      }
 
 	      _.defer(function () {
-	        if (!_this2._attached) {
+	        if (!_this._attached) {
 	          console.warn('view model was not attached to any scope');
 	        }
 	      });
@@ -1980,7 +2027,7 @@
 	  A mixin which enhance our reactive abilities by providing methods
 	  that are capable of updating our scope reactively.
 	 */
-	.factory(Reactive, ['$parse', _utils.utils, function ($parse, $$utils) {
+	.factory(Reactive, ['$parse', _utils.utils, _mixer.Mixer, function ($parse, $$utils, $Mixer) {
 	  function $$Reactive() {
 	    var vm = arguments.length <= 0 || arguments[0] === undefined ? this : arguments[0];
 
@@ -2021,16 +2068,16 @@
 	      throw Error('argument 2 must be a boolean');
 	    }
 
-	    return this.$$reactivateEntity(k, this.$watch, isDeep);
+	    return this.$$reactivateEntity($Mixer.caller, k, this.$watch, isDeep);
 	  };
 
 	  // Gets a collection reactively
 	  $$Reactive.getCollectionReactively = function (k) {
-	    return this.$$reactivateEntity(k, this.$watchCollection);
+	    return this.$$reactivateEntity($Mixer.caller, k, this.$watchCollection);
 	  };
 
 	  // Gets an entity reactively, and once it has been changed the computation will be recomputed
-	  $$Reactive.$$reactivateEntity = function (k, watcher) {
+	  $$Reactive.$$reactivateEntity = function (context, k, watcher) {
 	    if (!_.isString(k)) {
 	      throw Error('argument 1 must be a string');
 	    }
@@ -2038,29 +2085,29 @@
 	    if (!this.$$vm.$$dependencies[k]) {
 	      this.$$vm.$$dependencies[k] = new Tracker.Dependency();
 
-	      for (var _len = arguments.length, watcherArgs = Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
-	        watcherArgs[_key - 2] = arguments[_key];
+	      for (var _len = arguments.length, watcherArgs = Array(_len > 3 ? _len - 3 : 0), _key = 3; _key < _len; _key++) {
+	        watcherArgs[_key - 3] = arguments[_key];
 	      }
 
-	      this.$$watchEntity.apply(this, [k, watcher].concat(watcherArgs));
+	      this.$$watchEntity.apply(this, [context, k, watcher].concat(watcherArgs));
 	    }
 
 	    this.$$vm.$$dependencies[k].depend();
-	    return $parse(k)(this.$$vm);
+	    return $parse(k)(context);
 	  };
 
 	  // Watches for changes in the view model, and if so will notify a change
-	  $$Reactive.$$watchEntity = function (k, watcher) {
+	  $$Reactive.$$watchEntity = function (context, k, watcher) {
 	    var _this2 = this;
 
-	    // Gets a deep property from the view model
-	    var getVal = _.partial($parse(k), this.$$vm);
+	    // Gets a deep property from the caller
+	    var getVal = _.partial($parse(k), context);
 	    var initialVal = getVal();
 
 	    // Watches for changes in the view model
 
-	    for (var _len2 = arguments.length, watcherArgs = Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
-	      watcherArgs[_key2 - 2] = arguments[_key2];
+	    for (var _len2 = arguments.length, watcherArgs = Array(_len2 > 3 ? _len2 - 3 : 0), _key2 = 3; _key2 < _len2; _key2++) {
+	      watcherArgs[_key2 - 3] = arguments[_key2];
 	    }
 
 	    watcher.call.apply(watcher, [this, getVal, function (val, oldVal) {

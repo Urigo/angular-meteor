@@ -1,5 +1,5 @@
 import { name as utilsName, utils } from './utils';
-import { name as mixerName } from './mixer';
+import { name as mixerName, Mixer } from './mixer';
 import { name as coreName } from './core';
 import { name as viewModelName } from './view-model';
 
@@ -21,8 +21,9 @@ angular.module(name, [
 .factory(Reactive, [
   '$parse',
   utils,
+  Mixer,
 
-  function($parse, $$utils) {
+  function($parse, $$utils, $Mixer) {
     function $$Reactive(vm = this) {
       // Helps us track changes made in the view model
       vm.$$dependencies = {};
@@ -55,33 +56,33 @@ angular.module(name, [
         throw Error('argument 2 must be a boolean');
       }
 
-      return this.$$reactivateEntity(k, this.$watch, isDeep);
+      return this.$$reactivateEntity($Mixer.caller, k, this.$watch, isDeep);
     };
 
     // Gets a collection reactively
     $$Reactive.getCollectionReactively = function(k) {
-      return this.$$reactivateEntity(k, this.$watchCollection);
+      return this.$$reactivateEntity($Mixer.caller, k, this.$watchCollection);
     };
 
     // Gets an entity reactively, and once it has been changed the computation will be recomputed
-    $$Reactive.$$reactivateEntity = function(k, watcher, ...watcherArgs) {
+    $$Reactive.$$reactivateEntity = function(context, k, watcher, ...watcherArgs) {
       if (!_.isString(k)) {
         throw Error('argument 1 must be a string');
       }
 
       if (!this.$$vm.$$dependencies[k]) {
         this.$$vm.$$dependencies[k] = new Tracker.Dependency();
-        this.$$watchEntity(k, watcher, ...watcherArgs);
+        this.$$watchEntity(context, k, watcher, ...watcherArgs);
       }
 
       this.$$vm.$$dependencies[k].depend();
-      return $parse(k)(this.$$vm);
+      return $parse(k)(context);
     };
 
     // Watches for changes in the view model, and if so will notify a change
-    $$Reactive.$$watchEntity = function(k, watcher, ...watcherArgs) {
-      // Gets a deep property from the view model
-      const getVal = _.partial($parse(k), this.$$vm);
+    $$Reactive.$$watchEntity = function(context, k, watcher, ...watcherArgs) {
+      // Gets a deep property from the caller
+      const getVal = _.partial($parse(k), context);
       const initialVal = getVal();
 
       // Watches for changes in the view model
