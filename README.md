@@ -42,13 +42,14 @@ This package adds own HTML processor and TypeScript support, so you'll also need
 And add Angular2 compilers package:
 
 ````
-   meteor add barbatus:ng2-compilers
+   meteor add angular2-compilers
 ````
 
 For the explanation, please, read "HTML" [paragraph](http://www.angular-meteor.com/tutorials/socially/angular2/bootstrapping) in the above mentioned tutorial.
 
 Notes:
 - Meteor 1.3 uses CommonJS implementation for modules loading so you do not need to use SystemJS or any other loader!
+- You'll have to have an index.html (can be any other name) even if your app template consists of one tag, e.g., `<body><app></app></body>`.
 
 #### With Meteor 1.2
 ````
