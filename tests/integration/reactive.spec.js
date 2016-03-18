@@ -388,6 +388,30 @@ describe('angular-meteor.reactive', function() {
 
         expect(callCount).toBe(2);
       });
+
+      it('should be able to register view model and scope helpers at the same time', function() {
+        scope.helpers({
+          parties() { return DummyCollection.find({}); }
+        });
+
+        vm.helpers({
+          meetings() { return DummyCollection.find({}); }
+        });
+
+        expect(scope.parties).toBeDefined();
+        expect(vm.parties).not.toBeDefined();
+        expect(vm.meetings).toBeDefined();
+        expect(scope.meetings).not.toBeDefined();
+      });
+
+      it('should register helpers on the specified context', function() {
+        scope.helpers(vm, {
+          parties() { return DummyCollection.find({}); }
+        });
+
+        expect(vm.parties).toBeDefined();
+        expect(scope.parties).not.toBeDefined();
+      });
     });
 
     describe('getReactively()', function() {
@@ -482,6 +506,40 @@ describe('angular-meteor.reactive', function() {
         scope.$$throttledDigest();
 
         expect(changedSpy).toHaveBeenCalled();
+      });
+
+      it('should be able to get properties reactively of both view model and scope at the same time', function() {
+        var actualValue;
+        scope.myProp = 'initial';
+
+        vm.autorun(() => {
+          actualValue = scope.getReactively('myProp');
+        });
+
+        expect(actualValue).toEqual('initial');
+
+        scope.myProp = 'changed';
+        scope.$$throttledDigest();
+        Tracker.flush();
+
+        expect(actualValue).toEqual('changed');
+      });
+
+      it('should get properties reactively from a specified context', function() {
+        var actualValue;
+        vm.myProp = 'initial';
+
+        vm.autorun(() => {
+          actualValue = scope.getReactively(vm, 'myProp');
+        });
+
+        expect(actualValue).toEqual('initial');
+
+        vm.myProp = 'changed';
+        scope.$$throttledDigest();
+        Tracker.flush();
+
+        expect(actualValue).toEqual('changed');
       });
     });
 

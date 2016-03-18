@@ -1,5 +1,5 @@
 import { name as utilsName, utils } from './utils';
-import { name as mixerName } from './mixer';
+import { name as mixerName, Mixer } from './mixer';
 
 export const name = 'angular-meteor.core';
 export const Core = '$$Core';
@@ -16,13 +16,14 @@ angular.module(name, [
 .factory(Core, [
   '$q',
   utils,
+  Mixer,
 
-  function($q, $$utils) {
+  function($q, $$utils, $Mixer) {
     function $$Core() {}
 
     // Calls Meteor.autorun() which will be digested after each run and automatically destroyed
     $$Core.autorun = function(fn, options = {}) {
-      fn = this.$bindToContext(fn);
+      fn = this.$bindToContext($Mixer.caller, fn);
 
       if (!_.isFunction(fn)) {
         throw Error('argument 1 must be a function');
@@ -39,8 +40,8 @@ angular.module(name, [
     // Calls Meteor.subscribe() which will be digested after each invokation
     // and automatically destroyed
     $$Core.subscribe = function(subName, fn, cb) {
-      fn = this.$bindToContext(fn || angular.noop);
-      cb = cb ? this.$bindToContext(cb) : angular.noop;
+      fn = this.$bindToContext($Mixer.caller, fn || angular.noop);
+      cb = cb ? this.$bindToContext($Mixer.caller, cb) : angular.noop;
 
       if (!_.isString(subName)) {
         throw Error('argument 1 must be a string');
@@ -76,14 +77,14 @@ angular.module(name, [
     // Calls Meteor.call() wrapped by a digestion cycle
     $$Core.callMethod = function(...args) {
       let fn = args.pop();
-      if (_.isFunction(fn)) fn = this.$bindToContext(fn);
+      if (_.isFunction(fn)) fn = this.$bindToContext($Mixer.caller, fn);
       return Meteor.call(...args, fn);
     };
 
     // Calls Meteor.apply() wrapped by a digestion cycle
     $$Core.applyMethod = function(...args) {
       let fn = args.pop();
-      if (_.isFunction(fn)) fn = this.$bindToContext(fn);
+      if (_.isFunction(fn)) fn = this.$bindToContext($Mixer.caller, fn);
       return Meteor.apply(...args, fn);
     };
 
@@ -108,9 +109,9 @@ angular.module(name, [
       return deferred;
     };
 
-    // Binds an object or a function to the scope to the view model and digest it once it is invoked
-    $$Core.$bindToContext = function(fn) {
-      return $$utils.bind(fn, this, this.$$throttledDigest.bind(this));
+    // Binds an object or a function to the provided context and digest it once it is invoked
+    $$Core.$bindToContext = function(context, fn) {
+      return $$utils.bind(fn, context, this.$$throttledDigest.bind(this));
     };
 
     return $$Core;

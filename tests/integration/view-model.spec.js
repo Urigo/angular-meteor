@@ -21,7 +21,10 @@ describe('angular-meteor.view-model', function() {
         this.scopeProp = 'scopeProp';
       };
 
-      Mixin.$method = jasmine.createSpy();
+      Mixin.$method = jasmine.createSpy(function(fn) {
+        if (_.isFunction(fn)) return fn();
+      });
+
       Mixin.$$hidden = jasmine.createSpy();
 
       $Mixer.mixin(Mixin);
@@ -48,9 +51,11 @@ describe('angular-meteor.view-model', function() {
 
     it('should bind methods to scope', function() {
       var vm = scope.viewModel({});
-      vm.$method();
 
-      expect(Mixin.$method.calls.mostRecent().object).toEqual(scope);
+      vm.$method(function() {
+        expect(this).toEqual(scope);
+        expect($Mixer.caller).toEqual(vm);
+      });
     });
   });
 

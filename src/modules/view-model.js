@@ -24,10 +24,7 @@ angular.module(name, [
   Mixer,
 
   function($$utils, $Mixer) {
-    function $$ViewModel(vm = this) {
-      // Defines the view model on the scope.
-      this.$$vm = vm;
-    }
+    function $$ViewModel() {}
 
     // Gets an object, wraps it with scope functions and returns it
     $$ViewModel.viewModel = function(vm) {
@@ -35,25 +32,15 @@ angular.module(name, [
         throw Error('argument 1 must be an object');
       }
 
-      // Apply mixin functions
-      $Mixer._mixins.forEach((mixin) => {
-        // Reject methods which starts with double $
-        const keys = _.keys(mixin).filter(k => k.match(/^(?!\$\$).*$/));
-        const proto = _.pick(mixin, keys);
-        // Bind all the methods to the prototype
-        const boundProto = $$utils.bind(proto, this);
-        // Add the methods to the view model
-        _.extend(vm, boundProto);
+      // Extend view model with mixin functions
+      $Mixer._extend(vm, {
+        pattern: /^(?!\$\$).*$/, // Omitting methods which start with a $$ notation
+        context: this // Binding methods to scope
       });
 
-      // Apply mixin constructors on the view model
+      // Apply mixin constructors on scope with view model
       $Mixer._construct(this, vm);
       return vm;
-    };
-
-    // Override $$Core.$bindToContext to be bound to view model instead of scope
-    $$ViewModel.$bindToContext = function(fn) {
-      return $$utils.bind(fn, this.$$vm, this.$$throttledDigest.bind(this));
     };
 
     return $$ViewModel;

@@ -1539,6 +1539,11 @@
 	    return obj instanceof $rootScope.constructor;
 	  };
 
+	  // Checks if an object is a view model
+	  this.isViewModel = function (obj) {
+	    return _.isObject(obj) && obj.$$dependencies;
+	  };
+
 	  // Checks if two objects are siblings
 	  this.areSiblings = function (obj1, obj2) {
 	    return _.isObject(obj1) && _.isObject(obj2) && Object.getPrototypeOf(obj1) === Object.getPrototypeOf(obj2);
@@ -1607,6 +1612,9 @@
 	.service(Mixer, function () {
 	  var _this = this;
 
+	  // Used to store method's caller
+	  var caller = void 0;
+
 	  this._mixins = [];
 	  // Apply mixins automatically on specified contexts
 	  this._autoExtend = [];
@@ -1649,11 +1657,64 @@
 	  };
 
 	  // Extend prototype with the defined mixins
-	  this._extend = function (obj) {
+	  this._extend = function (obj, options) {
 	    var _ref;
 
-	    return (_ref = _).extend.apply(_ref, [obj].concat(_toConsumableArray(_this._mixins)));
+	    var _$defaults = _.defaults({}, options, {
+	      pattern: /.*/ });
+
+	    var pattern = _$defaults.pattern;
+	    var context = _$defaults.context;
+	    // The patterns of the keys which will be filtered
+
+
+	    var mixins = _this._mixins.map(function (mixin) {
+	      // Filtering the keys by the specified pattern
+	      var keys = _.keys(mixin).filter(function (k) {
+	        return k.match(pattern);
+	      }).filter(function (k) {
+	        return _.isFunction(mixin[k]);
+	      });
+
+	      return keys.reduce(function (boundMixin, methodName) {
+	        var methodHandler = mixin[methodName];
+
+	        // Note that this is not an arrow function so we can conserve the conetxt
+	        boundMixin[methodName] = function () {
+	          // Storing original caller so we will know who actually called the
+	          // method event though it is bound to another context
+	          var methodContext = context || this;
+	          var recentCaller = caller;
+	          caller = this;
+
+	          try {
+	            for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+	              args[_key2] = arguments[_key2];
+	            }
+
+	            return methodHandler.apply(methodContext, args);
+	          } finally {
+	            // No matter what happens, restore variable to the previous one
+	            caller = recentCaller;
+	          }
+	        };
+
+	        return boundMixin;
+	      }, {});
+	    });
+
+	    return (_ref = _).extend.apply(_ref, [obj].concat(_toConsumableArray(mixins)));
 	  };
+
+	  // Caller property can not be set
+	  Object.defineProperty(this, 'caller', {
+	    configurable: true,
+	    enumerable: true,
+
+	    get: function get() {
+	      return caller;
+	    }
+	  });
 	});
 
 /***/ },
@@ -1713,14 +1774,14 @@
 	/*
 	  A mixin which provides us with core Meteor functions.
 	 */
-	.factory(Core, ['$q', _utils.utils, function ($q, $$utils) {
+	.factory(Core, ['$q', _utils.utils, _mixer.Mixer, function ($q, $$utils, $Mixer) {
 	  function $$Core() {}
 
 	  // Calls Meteor.autorun() which will be digested after each run and automatically destroyed
 	  $$Core.autorun = function (fn) {
 	    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
 
-	    fn = this.$bindToContext(fn);
+	    fn = this.$bindToContext($Mixer.caller, fn);
 
 	    if (!_.isFunction(fn)) {
 	      throw Error('argument 1 must be a function');
@@ -1737,8 +1798,8 @@
 	  // Calls Meteor.subscribe() which will be digested after each invokation
 	  // and automatically destroyed
 	  $$Core.subscribe = function (subName, fn, cb) {
-	    fn = this.$bindToContext(fn || angular.noop);
-	    cb = cb ? this.$bindToContext(cb) : angular.noop;
+	    fn = this.$bindToContext($Mixer.caller, fn || angular.noop);
+	    cb = cb ? this.$bindToContext($Mixer.caller, cb) : angular.noop;
 
 	    if (!_.isString(subName)) {
 	      throw Error('argument 1 must be a string');
@@ -1782,7 +1843,7 @@
 	    }
 
 	    var fn = args.pop();
-	    if (_.isFunction(fn)) fn = this.$bindToContext(fn);
+	    if (_.isFunction(fn)) fn = this.$bindToContext($Mixer.caller, fn);
 	    return (_Meteor2 = Meteor).call.apply(_Meteor2, args.concat([fn]));
 	  };
 
@@ -1795,7 +1856,7 @@
 	    }
 
 	    var fn = args.pop();
-	    if (_.isFunction(fn)) fn = this.$bindToContext(fn);
+	    if (_.isFunction(fn)) fn = this.$bindToContext($Mixer.caller, fn);
 	    return (_Meteor3 = Meteor).apply.apply(_Meteor3, args.concat([fn]));
 	  };
 
@@ -1818,9 +1879,9 @@
 	    return deferred;
 	  };
 
-	  // Binds an object or a function to the scope to the view model and digest it once it is invoked
-	  $$Core.$bindToContext = function (fn) {
-	    return $$utils.bind(fn, this, this.$$throttledDigest.bind(this));
+	  // Binds an object or a function to the provided context and digest it once it is invoked
+	  $$Core.$bindToContext = function (context, fn) {
+	    return $$utils.bind(fn, context, this.$$throttledDigest.bind(this));
 	  };
 
 	  return $$Core;
@@ -1861,42 +1922,23 @@
 	  and very useful when wanting to use Angular's `controllerAs` syntax.
 	 */
 	.factory(ViewModel, [_utils.utils, _mixer.Mixer, function ($$utils, $Mixer) {
-	  function $$ViewModel() {
-	    var vm = arguments.length <= 0 || arguments[0] === undefined ? this : arguments[0];
-
-	    // Defines the view model on the scope.
-	    this.$$vm = vm;
-	  }
+	  function $$ViewModel() {}
 
 	  // Gets an object, wraps it with scope functions and returns it
 	  $$ViewModel.viewModel = function (vm) {
-	    var _this = this;
-
 	    if (!_.isObject(vm)) {
 	      throw Error('argument 1 must be an object');
 	    }
 
-	    // Apply mixin functions
-	    $Mixer._mixins.forEach(function (mixin) {
-	      // Reject methods which starts with double $
-	      var keys = _.keys(mixin).filter(function (k) {
-	        return k.match(/^(?!\$\$).*$/);
-	      });
-	      var proto = _.pick(mixin, keys);
-	      // Bind all the methods to the prototype
-	      var boundProto = $$utils.bind(proto, _this);
-	      // Add the methods to the view model
-	      _.extend(vm, boundProto);
+	    // Extend view model with mixin functions
+	    $Mixer._extend(vm, {
+	      pattern: /^(?!\$\$).*$/, // Omitting methods which start with a $$ notation
+	      context: this // Binding methods to scope
 	    });
 
-	    // Apply mixin constructors on the view model
+	    // Apply mixin constructors on scope with view model
 	    $Mixer._construct(this, vm);
 	    return vm;
-	  };
-
-	  // Override $$Core.$bindToContext to be bound to view model instead of scope
-	  $$ViewModel.$bindToContext = function (fn) {
-	    return $$utils.bind(fn, this.$$vm, this.$$throttledDigest.bind(this));
 	  };
 
 	  return $$ViewModel;
@@ -1908,7 +1950,7 @@
 	.service(reactive, [_utils.utils, function ($$utils) {
 	  var Reactive = function () {
 	    function Reactive(vm) {
-	      var _this2 = this;
+	      var _this = this;
 
 	      _classCallCheck(this, Reactive);
 
@@ -1917,7 +1959,7 @@
 	      }
 
 	      _.defer(function () {
-	        if (!_this2._attached) {
+	        if (!_this._attached) {
 	          console.warn('view model was not attached to any scope');
 	        }
 	      });
@@ -1980,7 +2022,7 @@
 	  A mixin which enhance our reactive abilities by providing methods
 	  that are capable of updating our scope reactively.
 	 */
-	.factory(Reactive, ['$parse', _utils.utils, function ($parse, $$utils) {
+	.factory(Reactive, ['$parse', _utils.utils, _mixer.Mixer, function ($parse, $$utils, $Mixer) {
 	  function $$Reactive() {
 	    var vm = arguments.length <= 0 || arguments[0] === undefined ? this : arguments[0];
 
@@ -1990,130 +2032,164 @@
 
 	  // Gets an object containing functions and define their results as reactive properties.
 	  // Once a return value has been changed the property will be reset.
-	  $$Reactive.helpers = function () {
+	  $$Reactive.helpers = function (vm, props) {
 	    var _this = this;
 
-	    var props = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+	    if ($$utils.isViewModel(vm)) {
+	      if (!_.isObject(props)) {
+	        throw Error('argument 2 must be an object');
+	      }
+	    } else {
+	      props = vm;
+	      vm = $Mixer.caller;
 
-	    if (!_.isObject(props)) {
-	      throw Error('argument 1 must be an object');
+	      if (!_.isObject(props)) {
+	        throw Error('argument 1 must be an object');
+	      }
 	    }
 
-	    _.each(props, function (v, k, i) {
+	    _.each(props, function (v, k) {
 	      if (!_.isFunction(v)) {
-	        throw Error('helper ' + (i + 1) + ' must be a function');
+	        throw Error('helper \'' + k + '\' must be a function');
 	      }
+	    });
 
-	      if (!_this.$$vm.$$dependencies[k]) {
+	    _.each(props, function (v, k) {
+	      if (!vm.$$dependencies[k]) {
 	        // Registers a new dependency to the specified helper
-	        _this.$$vm.$$dependencies[k] = new Tracker.Dependency();
+	        vm.$$dependencies[k] = new Tracker.Dependency();
 	      }
 
-	      _this.$$setFnHelper(k, v);
+	      _this.$$setFnHelper(vm, k, v);
 	    });
 	  };
 
 	  // Gets a model reactively
-	  $$Reactive.getReactively = function (k) {
-	    var isDeep = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];
+	  $$Reactive.getReactively = function (vm, k, isDeep) {
+	    if ($$utils.isViewModel(vm)) {
+	      if (angular.isUndefined(isDeep)) isDeep = false;
 
-	    if (!_.isBoolean(isDeep)) {
-	      throw Error('argument 2 must be a boolean');
+	      if (!_.isString(k)) {
+	        throw Error('argument 2 must be a string');
+	      }
+	      if (!_.isBoolean(isDeep)) {
+	        throw Error('argument 3 must be a boolean');
+	      }
+	    } else {
+	      isDeep = angular.isDefined(k) ? k : false;
+	      k = vm;
+	      vm = $Mixer.caller;
+
+	      if (!_.isString(k)) {
+	        throw Error('argument 1 must be a string');
+	      }
+	      if (!_.isBoolean(isDeep)) {
+	        throw Error('argument 2 must be a boolean');
+	      }
 	    }
 
-	    return this.$$reactivateEntity(k, this.$watch, isDeep);
+	    return this.$$reactivateEntity(vm, k, this.$watch, isDeep);
 	  };
 
 	  // Gets a collection reactively
-	  $$Reactive.getCollectionReactively = function (k) {
-	    return this.$$reactivateEntity(k, this.$watchCollection);
+	  $$Reactive.getCollectionReactively = function (vm, k) {
+	    if ($$utils.isViewModel(vm)) {
+	      if (!_.isString(k)) {
+	        throw Error('argument 2 must be a string');
+	      }
+	    } else {
+	      k = vm;
+	      vm = $Mixer.caller;
+
+	      if (!_.isString(k)) {
+	        throw Error('argument 1 must be a string');
+	      }
+	    }
+
+	    return this.$$reactivateEntity(vm, k, this.$watchCollection);
 	  };
 
 	  // Gets an entity reactively, and once it has been changed the computation will be recomputed
-	  $$Reactive.$$reactivateEntity = function (k, watcher) {
-	    if (!_.isString(k)) {
-	      throw Error('argument 1 must be a string');
-	    }
+	  $$Reactive.$$reactivateEntity = function (vm, k, watcher) {
+	    if (!vm.$$dependencies[k]) {
+	      vm.$$dependencies[k] = new Tracker.Dependency();
 
-	    if (!this.$$vm.$$dependencies[k]) {
-	      this.$$vm.$$dependencies[k] = new Tracker.Dependency();
-
-	      for (var _len = arguments.length, watcherArgs = Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
-	        watcherArgs[_key - 2] = arguments[_key];
+	      for (var _len = arguments.length, watcherArgs = Array(_len > 3 ? _len - 3 : 0), _key = 3; _key < _len; _key++) {
+	        watcherArgs[_key - 3] = arguments[_key];
 	      }
 
-	      this.$$watchEntity.apply(this, [k, watcher].concat(watcherArgs));
+	      this.$$watchEntity.apply(this, [vm, k, watcher].concat(watcherArgs));
 	    }
 
-	    this.$$vm.$$dependencies[k].depend();
-	    return $parse(k)(this.$$vm);
+	    vm.$$dependencies[k].depend();
+	    return $parse(k)(vm);
 	  };
 
 	  // Watches for changes in the view model, and if so will notify a change
-	  $$Reactive.$$watchEntity = function (k, watcher) {
+	  $$Reactive.$$watchEntity = function (vm, k, watcher) {
 	    var _this2 = this;
 
-	    // Gets a deep property from the view model
-	    var getVal = _.partial($parse(k), this.$$vm);
+	    // Gets a deep property from the caller
+	    var getVal = _.partial($parse(k), vm);
 	    var initialVal = getVal();
 
 	    // Watches for changes in the view model
 
-	    for (var _len2 = arguments.length, watcherArgs = Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
-	      watcherArgs[_key2 - 2] = arguments[_key2];
+	    for (var _len2 = arguments.length, watcherArgs = Array(_len2 > 3 ? _len2 - 3 : 0), _key2 = 3; _key2 < _len2; _key2++) {
+	      watcherArgs[_key2 - 3] = arguments[_key2];
 	    }
 
 	    watcher.call.apply(watcher, [this, getVal, function (val, oldVal) {
 	      var hasChanged = val !== initialVal || val !== oldVal;
 
 	      // Notify if a change has been detected
-	      if (hasChanged) _this2.$$changed(k);
+	      if (hasChanged) _this2.$$changed(vm, k);
 	    }].concat(watcherArgs));
 	  };
 
 	  // Invokes a function and sets the return value as a property
-	  $$Reactive.$$setFnHelper = function (k, fn) {
+	  $$Reactive.$$setFnHelper = function (vm, k, fn) {
 	    var _this3 = this;
 
 	    this.autorun(function (computation) {
 	      // Invokes the reactive functon
-	      var model = fn.apply(_this3.$$vm);
+	      var model = fn.apply(vm);
 
 	      // Ignore notifications made by the following handler
 	      Tracker.nonreactive(function () {
 	        // If a cursor, observe its changes and update acoordingly
 	        if ($$utils.isCursor(model)) {
 	          (function () {
-	            var observation = _this3.$$handleCursor(k, model);
+	            var observation = _this3.$$handleCursor(vm, k, model);
 
 	            computation.onInvalidate(function () {
 	              observation.stop();
-	              _this3.$$vm[k].splice(0);
+	              vm[k].splice(0);
 	            });
 	          })();
 	        } else {
-	          _this3.$$handleNonCursor(k, model);
+	          _this3.$$handleNonCursor(vm, k, model);
 	        }
 
 	        // Notify change and update the view model
-	        _this3.$$changed(k);
+	        _this3.$$changed(vm, k);
 	      });
 	    });
 	  };
 
 	  // Sets a value helper as a setter and a getter which will notify computations once used
-	  $$Reactive.$$setValHelper = function (k, v) {
+	  $$Reactive.$$setValHelper = function (vm, k, v) {
 	    var _this4 = this;
 
-	    var watch = arguments.length <= 2 || arguments[2] === undefined ? true : arguments[2];
+	    var watch = arguments.length <= 3 || arguments[3] === undefined ? true : arguments[3];
 
 	    // If set, reactives property
 	    if (watch) {
 	      var isDeep = _.isObject(v);
-	      this.getReactively(k, isDeep);
+	      this.getReactively(vm, k, isDeep);
 	    }
 
-	    Object.defineProperty(this.$$vm, k, {
+	    Object.defineProperty(vm, k, {
 	      configurable: true,
 	      enumerable: true,
 
@@ -2122,81 +2198,81 @@
 	      },
 	      set: function set(newVal) {
 	        v = newVal;
-	        _this4.$$changed(k);
+	        _this4.$$changed(vm, k);
 	      }
 	    });
 	  };
 
 	  // Fetching a cursor and updates properties once the result set has been changed
-	  $$Reactive.$$handleCursor = function (k, cursor) {
+	  $$Reactive.$$handleCursor = function (vm, k, cursor) {
 	    var _this5 = this;
 
 	    // If not defined set it
-	    if (angular.isUndefined(this.$$vm[k])) {
-	      this.$$setValHelper(k, cursor.fetch(), false);
+	    if (angular.isUndefined(vm[k])) {
+	      this.$$setValHelper(vm, k, cursor.fetch(), false);
 	    }
 	    // If defined update it
 	    else {
-	        var diff = jsondiffpatch.diff(this.$$vm[k], cursor.fetch());
-	        jsondiffpatch.patch(this.$$vm[k], diff);
+	        var diff = jsondiffpatch.diff(vm[k], cursor.fetch());
+	        jsondiffpatch.patch(vm[k], diff);
 	      }
 
 	    // Observe changes made in the result set
 	    var observation = cursor.observe({
 	      addedAt: function addedAt(doc, atIndex) {
 	        if (!observation) return;
-	        _this5.$$vm[k].splice(atIndex, 0, doc);
-	        _this5.$$changed(k);
+	        vm[k].splice(atIndex, 0, doc);
+	        _this5.$$changed(vm, k);
 	      },
 	      changedAt: function changedAt(doc, oldDoc, atIndex) {
-	        var diff = jsondiffpatch.diff(_this5.$$vm[k][atIndex], doc);
-	        jsondiffpatch.patch(_this5.$$vm[k][atIndex], diff);
-	        _this5.$$changed(k);
+	        var diff = jsondiffpatch.diff(vm[k][atIndex], doc);
+	        jsondiffpatch.patch(vm[k][atIndex], diff);
+	        _this5.$$changed(vm, k);
 	      },
 	      movedTo: function movedTo(doc, fromIndex, toIndex) {
-	        _this5.$$vm[k].splice(fromIndex, 1);
-	        _this5.$$vm[k].splice(toIndex, 0, doc);
-	        _this5.$$changed(k);
+	        vm[k].splice(fromIndex, 1);
+	        vm[k].splice(toIndex, 0, doc);
+	        _this5.$$changed(vm, k);
 	      },
 	      removedAt: function removedAt(oldDoc, atIndex) {
-	        _this5.$$vm[k].splice(atIndex, 1);
-	        _this5.$$changed(k);
+	        vm[k].splice(atIndex, 1);
+	        _this5.$$changed(vm, k);
 	      }
 	    });
 
 	    return observation;
 	  };
 
-	  $$Reactive.$$handleNonCursor = function (k, data) {
-	    var v = this.$$vm[k];
+	  $$Reactive.$$handleNonCursor = function (vm, k, data) {
+	    var v = vm[k];
 
 	    if (angular.isDefined(v)) {
-	      delete this.$$vm[k];
+	      delete vm[k];
 	      v = null;
 	    }
 
 	    if (angular.isUndefined(v)) {
-	      this.$$setValHelper(k, data);
+	      this.$$setValHelper(vm, k, data);
 	    }
 	    // Update property if the new value is from the same type
 	    else if ($$utils.areSiblings(v, data)) {
 	        var diff = jsondiffpatch.diff(v, data);
 	        jsondiffpatch.patch(v, diff);
-	        this.$$changed(k);
+	        this.$$changed(vm, k);
 	      } else {
-	        this.$$vm[k] = data;
+	        vm[k] = data;
 	      }
 	  };
 
 	  // Notifies dependency in view model
-	  $$Reactive.$$depend = function (k) {
-	    this.$$vm.$$dependencies[k].depend();
+	  $$Reactive.$$depend = function (vm, k) {
+	    vm.$$dependencies[k].depend();
 	  };
 
 	  // Notifies change in view model
-	  $$Reactive.$$changed = function (k) {
+	  $$Reactive.$$changed = function (vm, k) {
 	    this.$$throttledDigest();
-	    this.$$vm.$$dependencies[k].changed();
+	    vm.$$dependencies[k].changed();
 	  };
 
 	  return $$Reactive;
