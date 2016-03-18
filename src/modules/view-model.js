@@ -24,10 +24,7 @@ angular.module(name, [
   Mixer,
 
   function($$utils, $Mixer) {
-    function $$ViewModel(vm = this) {
-      // Defines the view model on the scope.
-      this.$$vm = vm;
-    }
+    function $$ViewModel() {}
 
     // Gets an object, wraps it with scope functions and returns it
     $$ViewModel.viewModel = function(vm) {
@@ -44,11 +41,6 @@ angular.module(name, [
       // Apply mixin constructors on scope with view model
       $Mixer._construct(this, vm);
       return vm;
-    };
-
-    // Override $$Core.$bindToContext to be bound to view model instead of scope
-    $$ViewModel.$bindToContext = function(fn) {
-      return $$utils.bind(fn, this.$$vm, this.$$throttledDigest.bind(this));
     };
 
     return $$ViewModel;

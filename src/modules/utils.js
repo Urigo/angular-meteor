@@ -22,6 +22,11 @@ angular.module(name, [])
       return obj instanceof $rootScope.constructor;
     };
 
+    // Checks if an object is a view model
+    this.isViewModel = (obj) => {
+      return _.isObject(obj) && obj.$$dependencies;
+    };
+
     // Checks if two objects are siblings
     this.areSiblings = (obj1, obj2) => {
       return _.isObject(obj1) && _.isObject(obj2) &&
