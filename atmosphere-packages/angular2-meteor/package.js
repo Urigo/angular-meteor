@@ -53,4 +53,9 @@ Package.onUse(function (api) {
     '.npm/package/node_modules/angular2-meteor-auto-bootstrap/modules/bootstrap.ts',
     'main.ts'
   ], 'client');
+
+  // Add typings.
+  api.addFiles([
+    'typings/angular2-meteor.d.ts'
+  ], 'server');
 });
