@@ -412,6 +412,84 @@ describe('angular-meteor.reactive', function() {
         expect(vm.parties).toBeDefined();
         expect(scope.parties).not.toBeDefined();
       });
+
+      describe('should compare data between cursors', function() {
+        let calls;
+        const jsondiffpatchCopy = _.clone(jsondiffpatch);
+
+        beforeEach(() => {
+          DummyCollection.insert({
+            type: 1,
+            name: 'foo'
+          });
+          DummyCollection.insert({
+            type: 1,
+            name: 'bar'
+          });
+          DummyCollection.insert({
+            type: 2,
+            name: 'baz'
+          });
+
+          // because of jasmine keeps an arguments as a references
+          // instead of a copies and jsondiffpatch.patch changes first argument
+          // which is lastModelData
+          // we cannot check first argument's value of jsondiffpatch.diff
+          // so we have to use some sort of wrapper
+          // Instead of tracking whole arrays we can just track their lengths
+          calls = {
+            diff: [],
+            patch: []
+          };
+
+          spyOn(jsondiffpatch, 'diff').and.callFake((lastModelData, modelData) => {
+            // save lengths of arguments
+            calls.diff.push([
+              lastModelData.length,
+              modelData.length
+            ]);
+            return jsondiffpatchCopy.diff(lastModelData, modelData);
+          });
+          spyOn(jsondiffpatch, 'patch').and.callFake((lastModelData, diff) => {
+            // save length of only first argument
+            calls.patch.push(lastModelData.length);
+            return jsondiffpatchCopy.patch(lastModelData, diff);
+          });
+
+          vm.type = 1;
+          vm.helpers({
+            parties() {
+              return DummyCollection.find({
+                type: vm.getReactively('type')
+              });
+            }
+          });
+
+          scope.$apply();
+          Tracker.flush();
+        });
+
+        it('should not compare on initial data', function() {
+          expect(jsondiffpatch.patch).not.toHaveBeenCalled();
+          expect(jsondiffpatch.diff).not.toHaveBeenCalled();
+          // also check actual result:
+          // 2 docs with type:1
+          expect(vm.parties.length).toEqual(2);
+        });
+
+        it('should compare old data with new data on cursor change', function() {
+          vm.type = 2;
+          scope.$apply();
+          Tracker.flush();
+
+          expect(calls.diff[0][0]).toEqual(2);
+          expect(calls.diff[0][1]).toEqual(1);
+          expect(calls.patch[0]).toEqual(2);
+          // also check actual result:
+          // 1 doc with type:2
+          expect(vm.parties.length).toEqual(1);
+        });
+      });
     });
 
     describe('getReactively()', function() {
