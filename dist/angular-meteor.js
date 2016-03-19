@@ -2151,7 +2151,11 @@
 	  $$Reactive.$$setFnHelper = function (vm, k, fn) {
 	    var _this3 = this;
 
-	    this.autorun(function (computation) {
+	    var activeObservation = null;
+	    var lastModel = null;
+	    var lastModelData = [];
+
+	    this.autorun(function () /* computation */{
 	      // Invokes the reactive functon
 	      var model = fn.apply(vm);
 
@@ -2159,17 +2163,35 @@
 	      Tracker.nonreactive(function () {
 	        // If a cursor, observe its changes and update acoordingly
 	        if ($$utils.isCursor(model)) {
-	          (function () {
-	            var observation = _this3.$$handleCursor(vm, k, model);
+	          var modelData = void 0;
 
-	            computation.onInvalidate(function () {
-	              observation.stop();
-	              vm[k].splice(0);
-	            });
-	          })();
+	          if (angular.isUndefined(vm[k])) {
+	            _this3.$$setValHelper(vm, k, [], false);
+	          }
+
+	          if (activeObservation) {
+	            lastModelData = lastModel.fetch();
+	            activeObservation.stop();
+	            activeObservation = null;
+	          }
+
+	          var handle = _this3.$$handleCursor(vm, k, model);
+
+	          activeObservation = handle.observation;
+	          modelData = handle.data;
+
+	          var diff = jsondiffpatch.diff(lastModelData, modelData);
+	          vm[k] = jsondiffpatch.patch(lastModelData, diff);
+
+	          lastModel = model;
+	          lastModelData = modelData;
+
+	          /* computation.onInvalidate(() => {
+	            activeObservation.stop();
+	          });*/
 	        } else {
-	          _this3.$$handleNonCursor(vm, k, model);
-	        }
+	            _this3.$$handleNonCursor(vm, k, model);
+	          }
 
 	        // Notify change and update the view model
 	        _this3.$$changed(vm, k);
@@ -2207,20 +2229,14 @@
 	  $$Reactive.$$handleCursor = function (vm, k, cursor) {
 	    var _this5 = this;
 
-	    // If not defined set it
-	    if (angular.isUndefined(vm[k])) {
-	      this.$$setValHelper(vm, k, cursor.fetch(), false);
-	    }
-	    // If defined update it
-	    else {
-	        var diff = jsondiffpatch.diff(vm[k], cursor.fetch());
-	        jsondiffpatch.patch(vm[k], diff);
-	      }
-
+	    var data = [];
 	    // Observe changes made in the result set
 	    var observation = cursor.observe({
 	      addedAt: function addedAt(doc, atIndex) {
-	        if (!observation) return;
+	        if (!observation) {
+	          data.push(doc);
+	          return;
+	        }
 	        vm[k].splice(atIndex, 0, doc);
 	        _this5.$$changed(vm, k);
 	      },
@@ -2240,7 +2256,10 @@
 	      }
 	    });
 
-	    return observation;
+	    return {
+	      observation: observation,
+	      data: data
+	    };
 	  };
 
 	  $$Reactive.$$handleNonCursor = function (vm, k, data) {

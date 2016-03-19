@@ -36,8 +36,7 @@ angular.module(name, [
         if (!_.isObject(props)) {
           throw Error('argument 2 must be an object');
         }
-      }
-      else {
+      } else {
         props = vm;
         vm = $Mixer.caller;
 
@@ -54,7 +53,7 @@ angular.module(name, [
 
       _.each(props, (v, k) => {
         if (!vm.$$dependencies[k]) {
-        // Registers a new dependency to the specified helper
+          // Registers a new dependency to the specified helper
           vm.$$dependencies[k] = new Tracker.Dependency();
         }
 
@@ -73,8 +72,7 @@ angular.module(name, [
         if (!_.isBoolean(isDeep)) {
           throw Error('argument 3 must be a boolean');
         }
-      }
-      else {
+      } else {
         isDeep = angular.isDefined(k) ? k : false;
         k = vm;
         vm = $Mixer.caller;
@@ -96,8 +94,7 @@ angular.module(name, [
         if (!_.isString(k)) {
           throw Error('argument 2 must be a string');
         }
-      }
-      else {
+      } else {
         k = vm;
         vm = $Mixer.caller;
 
@@ -139,7 +136,11 @@ angular.module(name, [
 
     // Invokes a function and sets the return value as a property
     $$Reactive.$$setFnHelper = function(vm, k, fn) {
-      this.autorun((computation) => {
+      let activeObservation = null;
+      let lastModel = null;
+      let lastModelData = [];
+
+      this.autorun((/* computation */) => {
         // Invokes the reactive functon
         const model = fn.apply(vm);
 
@@ -147,12 +148,32 @@ angular.module(name, [
         Tracker.nonreactive(() => {
           // If a cursor, observe its changes and update acoordingly
           if ($$utils.isCursor(model)) {
-            const observation = this.$$handleCursor(vm, k, model);
+            let modelData;
 
-            computation.onInvalidate(() => {
-              observation.stop();
-              vm[k].splice(0);
-            });
+            if (angular.isUndefined(vm[k])) {
+              this.$$setValHelper(vm, k, [], false);
+            }
+
+            if (activeObservation) {
+              lastModelData = lastModel.fetch();
+              activeObservation.stop();
+              activeObservation = null;
+            }
+
+            const handle = this.$$handleCursor(vm, k, model);
+
+            activeObservation = handle.observation;
+            modelData = handle.data;
+
+            const diff = jsondiffpatch.diff(lastModelData, modelData);
+            vm[k] = jsondiffpatch.patch(lastModelData, diff);
+
+            lastModel = model;
+            lastModelData = modelData;
+
+            /* computation.onInvalidate(() => {
+              activeObservation.stop();
+            });*/
           } else {
             this.$$handleNonCursor(vm, k, model);
           }
@@ -187,20 +208,14 @@ angular.module(name, [
 
     // Fetching a cursor and updates properties once the result set has been changed
     $$Reactive.$$handleCursor = function(vm, k, cursor) {
-      // If not defined set it
-      if (angular.isUndefined(vm[k])) {
-        this.$$setValHelper(vm, k, cursor.fetch(), false);
-      }
-      // If defined update it
-      else {
-        const diff = jsondiffpatch.diff(vm[k], cursor.fetch());
-        jsondiffpatch.patch(vm[k], diff);
-      }
-
+      const data = [];
       // Observe changes made in the result set
       const observation = cursor.observe({
         addedAt: (doc, atIndex) => {
-          if (!observation) return;
+          if (!observation) {
+            data.push(doc);
+            return;
+          }
           vm[k].splice(atIndex, 0, doc);
           this.$$changed(vm, k);
         },
@@ -220,7 +235,10 @@ angular.module(name, [
         }
       });
 
-      return observation;
+      return {
+        observation,
+        data
+      };
     };
 
     $$Reactive.$$handleNonCursor = function(vm, k, data) {
