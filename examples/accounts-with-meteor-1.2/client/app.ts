@@ -1,5 +1,5 @@
 import {Component, View} from 'angular2/core';
-import {bootstrap} from 'angular2-meteor-auto-bootstrap/bootstrap';
+import {bootstrap} from 'angular2-meteor';
 import {AccountsUI} from 'meteor-accounts-ui';
 
 @Component({

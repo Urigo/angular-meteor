@@ -1,5 +1,5 @@
 import {Component, View} from 'angular2/core';
-import {bootstrap} from 'angular2-meteor-auto-bootstrap/bootstrap';
+import {bootstrap} from 'angular2-meteor';
 
 import {
   MapsAPILoader,
@@ -7,7 +7,7 @@ import {
   MouseEvent,
   ANGULAR2_GOOGLE_MAPS_PROVIDERS,
   ANGULAR2_GOOGLE_MAPS_DIRECTIVES
-} from 'angular2-google-maps/core';
+} from 'ng2-google-maps/core';
 
 interface marker {
   lat: number;
