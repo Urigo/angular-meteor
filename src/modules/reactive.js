@@ -165,8 +165,12 @@ angular.module(name, [
             activeObservation = handle.observation;
             modelData = handle.data;
 
-            const diff = jsondiffpatch.diff(lastModelData, modelData);
-            vm[k] = jsondiffpatch.patch(lastModelData, diff);
+            if (lastModelData.length !== 0) {
+              const diff = jsondiffpatch.diff(lastModelData, modelData);
+              vm[k] = jsondiffpatch.patch(lastModelData, diff);
+            } else {
+              vm[k] = modelData;
+            }
 
             lastModel = model;
             lastModelData = modelData;
