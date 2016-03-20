@@ -19,8 +19,8 @@ var common = {
   // global variables
   externals: {
     angular: 'angular',
-    underscore: '_',
     jsondiffpatch: 'jsondiffpatch',
+    '_': 'underscore',
     Meteor: 'Meteor',
     Package: 'Package',
     Tracker: 'Tracker'
@@ -50,7 +50,11 @@ var common = {
   },
   plugins: [
     // add information about name and version of angular-meteor package
-    new webpack.BannerPlugin(pkg.name + ' v' + pkg.version)
+    new webpack.BannerPlugin(pkg.name + ' v' + pkg.version),
+    new webpack.ProvidePlugin({
+      '_': 'underscore',
+      'jsondiffpatch': 'jsondiffpatch'
+    })
   ],
   resolve: {
     extensions: ['', '.js']
