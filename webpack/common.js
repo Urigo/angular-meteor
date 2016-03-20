@@ -11,8 +11,11 @@ var common = {
   },
   output: {
     // point to root directory so we can avoid using ../../
-    path: path.join(__dirname, '../')
+    path: path.join(__dirname, '../'),
+    library: 'angularMeteor',
+    libraryTarget: 'umd'
   },
+  target: 'web',
   // global variables
   externals: {
     angular: 'angular',
@@ -24,7 +27,8 @@ var common = {
   },
   // global configuration of babel loader
   babel: {
-    presets: ['es2015']
+    presets: ['es2015'],
+    plugins: ['add-module-exports']
   },
   eslint: {
     quiet: true,

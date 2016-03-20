@@ -23,7 +23,8 @@ import { name as viewModelName, ViewModel } from './modules/view-model';
 import { name as reactiveName, Reactive } from './modules/reactive';
 import { name as templatesName } from './modules/templates';
 
-export const name = 'angular-meteor';
+const name = 'angular-meteor';
+export default name;
 
 angular.module(name, [
   // new
