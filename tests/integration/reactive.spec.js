@@ -389,6 +389,29 @@ describe('angular-meteor.reactive', function() {
         expect(callCount).toBe(2);
       });
 
+      it('should NOT invoke the reactive function when internal observation updates', function () {
+        let callCount = 0;
+        vm.helpers({
+          parties() {
+            callCount++;
+            return DummyCollection.find({});
+          }
+        });
+
+        scope.$apply();
+        Tracker.flush();
+
+        DummyCollection.insert({
+          name: 'foo'
+        });
+
+        scope.$apply();
+        Tracker.flush();
+
+        expect(callCount).toEqual(1);
+        expect(vm.parties.length).toEqual(1);
+      });
+
       it('should be able to register view model and scope helpers at the same time', function() {
         scope.helpers({
           parties() { return DummyCollection.find({}); }
