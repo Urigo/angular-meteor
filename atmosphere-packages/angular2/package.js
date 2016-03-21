@@ -2,7 +2,7 @@ Package.describe({
   name: 'barbatus:angular2',
   version: '0.9.0',
   summary: 'Angular2 Npm packaged for Meteor',
-  git: 'https://github.com/barbatus/angular2',
+  git: 'https://github.com/Urigo/angular2/tree/master/atmosphere-packages',
   documentation: 'README.md'
 });
 
@@ -26,24 +26,17 @@ Package.onUse(function(api) {
 
   api.use([
     'underscore',
-    // This is important, i.e., adding it here
-    // (before Angular2 itself) makes Angular2
-    // to patch Meteor promise properly.
-    'promise@0.4.8',
+    'barbatus:angular2-runtime@0.1.0',
     'systemjs:systemjs@0.18.4'
   ]);
 
   api.imply([
-    // Add ES6 polyfills.
-    'babel-runtime',
+    'barbatus:angular2-runtime',
     'systemjs:systemjs',
-    'promise',
     'barbatus:typescript-runtime@0.1.0-beta.1'
   ]);
 
   api.addFiles([
-    'dist/angular2_deps.js',
-    'node_modules/angular2/bundles/angular2-polyfills.js',
     'node_modules/angular2/bundles/angular2.js',
     'node_modules/angular2/bundles/http.js',
     'node_modules/angular2/bundles/router.js',

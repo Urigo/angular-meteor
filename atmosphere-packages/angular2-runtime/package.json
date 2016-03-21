@@ -1,0 +1,12 @@
+{
+  "license": "MIT",
+  "devDependencies": {
+    "angular2": "2.0.0-beta.9",
+    "core-js": "^2.0.3",
+    "grunt": "^0.4.5",
+    "grunt-npm-install": "^0.2.0",
+    "grunt-shell": "^1.1.2",
+    "grunt-webpack": "^1.0.11",
+    "webpack": "~1.11.0"
+  }
+}
