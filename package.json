@@ -23,7 +23,9 @@
     "install": "mv ./build/* ./"
   },
   "dependencies": {
-    "ejson": ">=2.1.2",
+    "ejson": ">=2.1.2"
+  },
+  "peerDependencies": {
     "angular2": "2.0.0-beta.9"
   },
   "devDependencies": {
