@@ -1,17 +1,17 @@
 Package.describe({
-  name: "angular-templates",
-  summary: "Compile angular templates into the template cache",
-  version: "1.0.0",
-  git: "https://github.com/Urigo/angular-meteor.git",
+  name: 'angular-templates',
+  summary: 'Compile angular templates into the template cache',
+  version: '1.0.0',
+  git: 'https://github.com/Urigo/angular-meteor.git',
   documentation: null
 });
 
 Package.registerBuildPlugin({
-  name: "compileNGTemplate",
+  name: 'compileNGTemplate',
   sources: [
-    "plugin/ng-caching-html-compiler.js",
-    "plugin/ng-html-scanner.js",
-    "plugin/ng-template-compiler.js"
+    'plugin/ng-caching-html-compiler.js',
+    'plugin/ng-html-scanner.js',
+    'plugin/ng-template-compiler.js'
   ],
   use: [
     'caching-html-compiler@1.0.2',
