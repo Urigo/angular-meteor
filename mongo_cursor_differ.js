@@ -44,12 +44,13 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	var __extends = (this && this.__extends) || function (d, b) {
 	    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
+	var core_1 = __webpack_require__(1);
 	var default_iterable_differ_1 = __webpack_require__(2);
 	var async_1 = __webpack_require__(3);
 	var mongo_cursor_observer_1 = __webpack_require__(4);
@@ -76,13 +77,17 @@
 	    return MongoCursorDifferFactory;
 	}(default_iterable_differ_1.DefaultIterableDifferFactory));
 	exports.MongoCursorDifferFactory = MongoCursorDifferFactory;
-	var MongoCursorDiffer = (function () {
+	var trackById = function (index, item) { return item._id; };
+	var MongoCursorDiffer = (function (_super) {
+	    __extends(MongoCursorDiffer, _super);
 	    function MongoCursorDiffer(cdRef, obsFactory) {
+	        _super.call(this, trackById);
 	        this._inserted = [];
 	        this._removed = [];
 	        this._moved = [];
 	        this._updated = [];
 	        this._listSize = 0;
+	        this._zone = core_1.createNgZone();
 	        this._obsFactory = obsFactory;
 	    }
 	    MongoCursorDiffer.prototype.forEachAddedItem = function (fn) {
@@ -114,9 +119,11 @@
 	            this._destroyObserver();
 	            this._cursor = cursor;
 	            this._curObserver = this._obsFactory.create(cursor);
-	            this._subscription = async_1.ObservableWrapper.subscribe(this._curObserver, zone.bind(function (changes) {
-	                _this._updateLatestValue(changes);
-	            }));
+	            this._subscription = async_1.ObservableWrapper.subscribe(this._curObserver, function (changes) {
+	                // Run it outside Angular2 zone to cause running diff one more time
+	                // and apply changes.
+	                _this._zone.runOutsideAngular(function () { return _this._updateLatestValue(changes); });
+	            });
 	        }
 	        if (this._lastChanges) {
 	            this._applyChanges(this._lastChanges);
@@ -187,18 +194,23 @@
 	        }
 	    };
 	    MongoCursorDiffer.prototype._createChangeRecord = function (currentIndex, prevIndex, item) {
-	        var record = new default_iterable_differ_1.CollectionChangeRecord(item);
+	        var record = new default_iterable_differ_1.CollectionChangeRecord(item, trackById);
 	        record.currentIndex = currentIndex;
 	        record.previousIndex = prevIndex;
 	        return record;
 	    };
 	    return MongoCursorDiffer;
-	}());
+	}(default_iterable_differ_1.DefaultIterableDiffer));
 	exports.MongoCursorDiffer = MongoCursorDiffer;
 
 
 /***/ },
-/* 1 */,
+/* 1 */
+/***/ function(module, exports) {
+
+	module.exports = require("angular2/core");
+
+/***/ },
 /* 2 */
 /***/ function(module, exports) {
 

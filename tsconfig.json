@@ -10,7 +10,10 @@
     "sourceMap": true,
     "declaration": true
   },
+  "files": ["typings/main.d.ts"],
   "exclude": [
-    "examples"
+    "examples",
+    "node_modules",
+    "atmosphere-packages"
   ]
 }

@@ -44,7 +44,7 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	var core_1 = __webpack_require__(1);
 	var subscribeEvents = ['onReady', 'onError', 'onStop'];
 	function isMeteorCallbacks(callbacks) {
@@ -56,6 +56,7 @@
 	        return _.isFunction(callbacks[event]);
 	    });
 	}
+	;
 	var MeteorComponent = (function () {
 	    /**
 	     * @param {NgZone} ngZone added for test purposes mostly.

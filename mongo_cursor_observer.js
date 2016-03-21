@@ -45,7 +45,7 @@
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	var cursor_handle_1 = __webpack_require__(5);
 	var AddChange = (function () {
 	    function AddChange(index, item) {
@@ -124,7 +124,7 @@
 	        var next = _a.next, error = _a.error, complete = _a.complete;
 	        var subscription = new Subscription(next, error, complete);
 	        this._subs.push(subscription);
-	        // If no subscriber has subscribed ever.
+	        // If no subscriber has subscribed ever. 
 	        if (!this._isSubscribed) {
 	            this._isSubscribed = true;
 	            if (this._added.length) {

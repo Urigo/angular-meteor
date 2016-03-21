@@ -1,12 +1,14 @@
-import {EventEmitter} from "angular2/core";
-import {CursorHandle} from "./cursor_handle";
+'use strict';
+
+import {EventEmitter} from 'angular2/core';
+import {CursorHandle} from './cursor_handle';
 
 export class AddChange {
   constructor(public index: number, public item: any) {}
 }
 
 export class UpdateChange {
-  constructor(public index: number, public item: any) { }
+  constructor(public index: number, public item: any) {}
 }
 
 export class MoveChange {
@@ -21,8 +23,8 @@ export class Subscription {
   private _isUnsubscribed: boolean = false;
 
   constructor(private _next: Function,
-              private _error: Function,
-              private _complete: Function) {}
+    private _error: Function,
+    private _complete: Function) { }
 
   onNext(value) {
     if (!this._isUnsubscribed && this._next) {
@@ -66,7 +68,7 @@ export class MongoCursorObserver {
     let subscription = new Subscription(next, error, complete);
     this._subs.push(subscription);
 
-    // If no subscriber has subscribed ever.
+    // If no subscriber has subscribed ever. 
     if (!this._isSubscribed) {
       this._isSubscribed = true;
 

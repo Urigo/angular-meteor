@@ -1,4 +1,6 @@
-import {OnDestroy, NgZone, createNgZone} from "angular2/core";
+'use strict';
+
+import {OnDestroy, NgZone, createNgZone} from 'angular2/core';
 
 export declare type CallbacksObject = {
   onReady?: Function;
@@ -10,30 +12,30 @@ export declare type MeteorCallbacks = (...args) => any | CallbacksObject;
 
 const subscribeEvents = ['onReady', 'onError', 'onStop'];
 
-function isMeteorCallbacks(callbacks:any):boolean {
+function isMeteorCallbacks(callbacks: any): boolean {
   return _.isFunction(callbacks) || isCallbacksObject(callbacks);
 }
 
 // Checks if callbacks of {@link CallbacksObject} type.
-function isCallbacksObject(callbacks:any):boolean {
+function isCallbacksObject(callbacks: any): boolean {
   return callbacks && subscribeEvents.some((event) => {
-      return _.isFunction(callbacks[event]);
-    });
-}
+    return _.isFunction(callbacks[event]);
+  });
+};
 
 export class MeteorComponent implements OnDestroy {
-  private _hAutoruns:Array<Tracker.Computation> = [];
-  private _hSubscribes:Array<Meteor.SubscriptionHandle> = [];
-  private _zone:NgZone;
+  private _hAutoruns: Array<Tracker.Computation> = [];
+  private _hSubscribes: Array<Meteor.SubscriptionHandle> = [];
+  private _zone: NgZone;
 
   /**
    * @param {NgZone} ngZone added for test purposes mostly.
    */
-  constructor(ngZone?:NgZone) {
+  constructor(ngZone?: NgZone) {
     this._zone = ngZone || createNgZone();
   }
 
-  autorun(func:(c:Tracker.Computation) => any, autoBind:boolean):Tracker.Computation {
+  autorun(func: (c: Tracker.Computation) => any, autoBind: boolean): Tracker.Computation {
     let hAutorun = Tracker.autorun(autoBind ? this._bindToNgZone(func) : func);
     this._hAutoruns.push(hAutorun);
 
@@ -46,7 +48,7 @@ export class MeteorComponent implements OnDestroy {
    *  except one additional last parameter,
    *  which binds [callbacks] to the ng2 zone.
    */
-  subscribe(name:string, ...args):Meteor.SubscriptionHandle {
+  subscribe(name: string, ...args): Meteor.SubscriptionHandle {
     let subArgs = this._prepMeteorArgs(args.slice());
 
     let hSubscribe = Meteor.subscribe(name, ...subArgs);
@@ -55,7 +57,7 @@ export class MeteorComponent implements OnDestroy {
     return hSubscribe;
   }
 
-  call(name:string, ...args) {
+  call(name: string, ...args) {
     let callArgs = this._prepMeteorArgs(args.slice());
 
     return Meteor.call(name, ...callArgs);
@@ -91,11 +93,11 @@ export class MeteorComponent implements OnDestroy {
     this._hSubscribes = null;
   }
 
-  _bindToNgZone(callbacks:MeteorCallbacks):MeteorCallbacks {
+  _bindToNgZone(callbacks: MeteorCallbacks): MeteorCallbacks {
     const self = this;
 
     if (_.isFunction(callbacks)) {
-      return function (...args) {
+      return function(...args) {
         self._zone.run(() => callbacks.apply(self._zone, args));
       }
     }
@@ -105,7 +107,7 @@ export class MeteorComponent implements OnDestroy {
       let newCallbacks = _.clone(callbacks);
       subscribeEvents.forEach(event => {
         if (newCallbacks[event]) {
-          newCallbacks[event] = function (...args) {
+          newCallbacks[event] = function(...args) {
             self._zone.run(() => callbacks[event].apply(self._zone, args));
           }
         }

@@ -44,7 +44,7 @@
 /* 0 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
 	var CursorHandle = (function () {
 	    function CursorHandle(cursor, hCurObserver, hAutoNotify) {
 	        check(cursor, Mongo.Cursor);

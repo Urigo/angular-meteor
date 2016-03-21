@@ -1,7 +1,22 @@
-import {ChangeDetectorRef, IterableDiffer} from "angular2/core";
-import {CollectionChangeRecord, DefaultIterableDifferFactory} from "angular2/src/core/change_detection/differs/default_iterable_differ";
-import {ObservableWrapper} from "angular2/src/facade/async";
-import {MongoCursorObserver, AddChange, MoveChange, RemoveChange, UpdateChange} from "./mongo_cursor_observer";
+'use strict';
+
+import {ChangeDetectorRef, IterableDiffer, createNgZone} from 'angular2/core';
+
+import {
+  DefaultIterableDifferFactory,
+  CollectionChangeRecord,
+  DefaultIterableDiffer
+} from 'angular2/src/core/change_detection/differs/default_iterable_differ';
+
+import {ObservableWrapper} from 'angular2/src/facade/async';
+
+import {
+  MongoCursorObserver,
+  AddChange,
+  MoveChange,
+  RemoveChange,
+  UpdateChange
+} from './mongo_cursor_observer';
 
 export interface ObserverFactory {
   create(cursor: Object): Object;
@@ -24,7 +39,9 @@ export class MongoCursorDifferFactory extends DefaultIterableDifferFactory {
   }
 }
 
-export class MongoCursorDiffer implements IterableDiffer {
+const trackById = (index, item) => item._id;
+
+export class MongoCursorDiffer extends DefaultIterableDiffer {
   private _inserted: Array<CollectionChangeRecord> = [];
   private _removed: Array<CollectionChangeRecord> = [];
   private _moved: Array<CollectionChangeRecord> = [];
@@ -35,8 +52,10 @@ export class MongoCursorDiffer implements IterableDiffer {
   private _cursor: Mongo.Cursor<any>;
   private _obsFactory: ObserverFactory;
   private _subscription: Object;
+  private _zone = createNgZone();
 
   constructor(cdRef: ChangeDetectorRef, obsFactory: ObserverFactory) {
+    super(trackById);
     this._obsFactory = obsFactory;
   }
 
@@ -74,9 +93,11 @@ export class MongoCursorDiffer implements IterableDiffer {
       this._cursor = cursor;
       this._curObserver = <MongoCursorObserver>this._obsFactory.create(cursor);
       this._subscription = ObservableWrapper.subscribe(this._curObserver,
-        zone.bind(changes => {
-          this._updateLatestValue(changes);
-        }));
+        changes => {
+          // Run it outside Angular2 zone to cause running diff one more time
+          // and apply changes.
+          this._zone.runOutsideAngular(() => this._updateLatestValue(changes));
+        });
     }
 
     if (this._lastChanges) {
@@ -163,7 +184,7 @@ export class MongoCursorDiffer implements IterableDiffer {
   }
 
   _createChangeRecord(currentIndex, prevIndex, item) {
-    let record = new CollectionChangeRecord(item);
+    let record = new CollectionChangeRecord(item, trackById);
     record.currentIndex = currentIndex;
     record.previousIndex = prevIndex;
     return record;

@@ -19,7 +19,8 @@
   "author": "Angular2-Meteor (https://github.com/Urigo/angular2-meteor)",
   "license": "MIT",
   "scripts": {
-    "install": "mv ./build/* ./"
+    "install": "./build.sh",
+    "prepublish": "mv ./build/* ./"
   },
   "dependencies": {
     "ejson": ">=2.1.2"
@@ -31,6 +32,7 @@
     "angular2": "^2.0.0-beta.6",
     "ts-loader": "^0.8.0",
     "typescript": "^1.7.5",
-    "webpack": "^1.12.12"
+    "webpack": "^1.12.12",
+    "typings": "^0.7.7"
   }
 }
