@@ -2,6 +2,8 @@
  angular, _, Tracker, check, Match, Mongo
  */
 
+import _ from '../lib/underscore';
+
 'use strict';
 
 var angularMeteorCollection = angular.module('angular-meteor.collection',

@@ -2,6 +2,8 @@
  angular, _
  */
 
+import _ from './underscore';
+
 'use strict';
 
 // https://github.com/DAB0mB/get-updates

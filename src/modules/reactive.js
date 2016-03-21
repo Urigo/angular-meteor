@@ -1,3 +1,5 @@
+import jsondiffpatch from 'jsondiffpatch';
+import _ from '../lib/underscore';
 import { name as utilsName, utils } from './utils';
 import { name as mixerName, Mixer } from './mixer';
 import { name as coreName } from './core';

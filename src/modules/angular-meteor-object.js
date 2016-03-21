@@ -2,6 +2,8 @@
   angular, _, Mongo
 */
 
+import _ from '../lib/underscore';
+
 'use strict';
 
 var angularMeteorObject = angular.module('angular-meteor.object',

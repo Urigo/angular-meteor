@@ -2,6 +2,8 @@
  angular, _, Meteor
  */
 
+import _ from '../lib/underscore';
+
 'use strict';
 
 var angularMeteorMethods = angular.module('angular-meteor.methods', ['angular-meteor.utils', 'angular-meteor.settings']);
