@@ -50,10 +50,10 @@
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var core_1 = __webpack_require__(1);
-	var default_iterable_differ_1 = __webpack_require__(2);
-	var async_1 = __webpack_require__(3);
-	var mongo_cursor_observer_1 = __webpack_require__(4);
+	var core_1 = __webpack_require__(4);
+	var default_iterable_differ_1 = __webpack_require__(5);
+	var async_1 = __webpack_require__(6);
+	var mongo_cursor_observer_1 = __webpack_require__(1);
 	var MongoCursorObserverFactory = (function () {
 	    function MongoCursorObserverFactory() {
 	    }
@@ -208,25 +208,27 @@
 /* 1 */
 /***/ function(module, exports) {
 
+	module.exports = require("./mongo_cursor_observer");
+
+/***/ },
+/* 2 */,
+/* 3 */,
+/* 4 */
+/***/ function(module, exports) {
+
 	module.exports = require("angular2/core");
 
 /***/ },
-/* 2 */
+/* 5 */
 /***/ function(module, exports) {
 
 	module.exports = require("angular2/src/core/change_detection/differs/default_iterable_differ");
 
 /***/ },
-/* 3 */
+/* 6 */
 /***/ function(module, exports) {
 
 	module.exports = require("angular2/src/facade/async");
-
-/***/ },
-/* 4 */
-/***/ function(module, exports) {
-
-	module.exports = require("./mongo_cursor_observer");
 
 /***/ }
 /******/ ])));

@@ -5,7 +5,8 @@ module.exports = {
     'meteor_component': './modules/meteor_component.ts',
     'mongo_cursor_differ': './modules/mongo_cursor_differ.ts',
     'mongo_cursor_observer': './modules/mongo_cursor_observer.ts',
-    'cursor_handle': './modules/cursor_handle.ts'
+    'cursor_handle': './modules/cursor_handle.ts',
+    'index': './modules/index.ts'
   },
   output: {
     // We use CommonJS because of Meteor 1.3 specification that uses it
