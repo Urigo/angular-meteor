@@ -12,17 +12,17 @@ today! Here are the guidelines we'd like you to follow:
  - [Commit Message Guidelines](#commit)
 
 ## <a name="coc"></a> Code of Conduct
-I love the Angular community so let's just use thier [Code of Conduct][https://github.com/angular/code-of-conduct/blob/master/CODE_OF_CONDUCT.md].
+I love the Angular community so let's just use thier [Code of Conduct](https://github.com/angular/code-of-conduct/blob/master/CODE_OF_CONDUCT.md).
 
 If you are subject to or witness unacceptable behavior, or have any other concerns, please email me at uri.goldshtein@gmail.com.
 
 ## <a name="question"></a> Got a Question or Problem?
 
-If you have questions about how to use Angular Meteor, please direct these to [StackOverflow][http://stackoverflow.com/questions/tagged/angular-meteor] or the [Meteor forums](https://forums.meteor.com/).
+If you have questions about how to use Angular Meteor, please direct these to [StackOverflow](http://stackoverflow.com/questions/tagged/angular-meteor) or the [Meteor forums](https://forums.meteor.com/).
 
 ## <a name="issue"></a> Found an Issue?
 If you find a bug in the source code or a mistake in the documentation, you can help us by
-submitting an issue to our [GitHub Repository][https://github.com/urigo/angular-meteor/]. Even better you can submit a Pull Request
+submitting an issue to our [GitHub Repository](https://github.com/urigo/angular-meteor/). Even better you can submit a Pull Request
 with a fix.
 
 ## <a name="feature"></a> Want a Feature?
@@ -79,18 +79,44 @@ It is a step by step process.
 
 ## Run local angular-meteor in your project
 
-Create your Meteor Project
+### Meteor 1.2
 
 ```bash
 meteor create myProject
-cd myProject
 ```
 
 Create a `packages` directory under your project's root folder and link your forked repo
 
 ```bash
 cd myProject
-ln -s ~/path_to_your_repos/angular/packages/
+ln -s ~/path_to_your_repos/angular-meteor/packages/
+```
+
+The `angular-meteor-data` package uses a node module.
+
+All you have to do is to change it in `package.js`:
+
+```javascript
+api.add_files([
+  // '.npm/package/node_modules/angular-meteor/dist/angular-meteor.js'
+  'angular-meteor.js'
+], 'client', {
+  transpile: false
+});
+```
+
+As you can see, there is no `angular-meteor.js` file.
+
+You can build this file by running:
+
+```bash
+npm run build:dev
+```
+
+If you don’t want to manually recompile after every change you can use watch mode.
+
+```bash
+npm run watch:dev
 ```
 
 Now you can start using your own copy of the `angular-meteor` project from `myProject`.
@@ -98,6 +124,7 @@ Now you can start using your own copy of the `angular-meteor` project from `myPr
 ## Running tests
 
 In the command line
+
 ```
 npm run test:watch
 ```
