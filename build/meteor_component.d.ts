@@ -13,7 +13,7 @@ export declare class MeteorComponent implements OnDestroy {
      * @param {NgZone} ngZone added for test purposes mostly.
      */
     constructor(ngZone?: NgZone);
-    autorun(func: (c: Tracker.Computation) => any, autoBind: boolean): Tracker.Computation;
+    autorun(func: (c: Tracker.Computation) => any, autoBind?: boolean): Tracker.Computation;
     /**
      *  Method has the same notation as Meteor.subscribe:
      *    subscribe(name, [args1, args2], [callbacks], [autobind])

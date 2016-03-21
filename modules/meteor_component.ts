@@ -35,7 +35,7 @@ export class MeteorComponent implements OnDestroy {
     this._zone = ngZone || createNgZone();
   }
 
-  autorun(func: (c: Tracker.Computation) => any, autoBind: boolean): Tracker.Computation {
+  autorun(func: (c: Tracker.Computation) => any, autoBind?: boolean): Tracker.Computation {
     let hAutorun = Tracker.autorun(autoBind ? this._bindToNgZone(func) : func);
     this._hAutoruns.push(hAutorun);
 
