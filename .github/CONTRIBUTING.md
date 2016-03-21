@@ -79,6 +79,45 @@ It is a step by step process.
 
 ## Run local angular-meteor in your project
 
+### Meteor 1.3
+
+```bash
+meteor create myProject
+```
+
+Install `angular-meteor` for your application.
+
+```bash
+npm install angular-meteor --save
+```
+
+Create a globally-installed symbolic link to your forked repository.
+
+```bash
+cd /path_to_your_repos/angular-meteor/
+npm link
+```
+
+Now create a symlink from the local node_modules folder to the global symlink
+
+```bash
+cd myProject
+npm link angular-meteor
+```
+
+You can compile `angular-meteor` by running:
+
+```bash
+npm run build
+```
+
+If you don’t want to manually recompile after every change you can use watch mode.
+
+```bash
+npm run watch
+```
+
+
 ### Meteor 1.2
 
 ```bash
