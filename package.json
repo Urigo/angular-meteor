@@ -31,12 +31,10 @@
       "path": "node_modules/cz-conventional-changelog"
     }
   },
-  "dependencies": {
+  "peerDependencies": {
+    "angular": "^1.4.0",
     "jsondiffpatch": "^0.1.38",
     "underscore": "^1.0.4"
-  },
-  "peerDependencies": {
-    "angular": "^1.4.0"
   },
   "devDependencies": {
     "babel": "^6.3.26",
