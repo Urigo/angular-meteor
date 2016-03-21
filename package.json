@@ -19,7 +19,9 @@
     "test": "velocity test-packages ./tests --ci",
     "test:watch": "parallelshell \"npm run watch\" \"velocity test-packages ./tests\"",
     "watch": "webpack --watch --progress --config webpack/dist.js",
+    "watch:dev": "webpack --watch --progress --config webpack/dev.js",
     "build:dist": "webpack --progress --config webpack/dist.js",
+    "build:dev": "webpack --progress --config webpack/dev.js",
     "build:prod": "webpack --progress --config webpack/prod.js --optimize-minimize",
     "build": "npm run build:dist && npm run build:prod",
     "prepublish": "npm run build"
