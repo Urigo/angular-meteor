@@ -22,6 +22,7 @@ Check out change log of the package [here](CHANGELOG.md).
 ## Tutorial
 
 If you are new to Angular 2, we recommend to check out our 15-steps Angular2+Meteor [tutorial](http://www.angular-meteor.com/tutorials/socially/angular2/bootstrapping).
+> Please note that this tutorial is based on the Meteor 1.2 version, while this README focuses more on the version for Meteor 1.3.
 
 ## Quick Start
 
@@ -49,7 +50,8 @@ For the explanation, please, read "HTML" [paragraph](http://www.angular-meteor.c
 
 Notes:
 - Meteor 1.3 uses CommonJS implementation for modules loading so you do not need to use SystemJS or any other loader!
-- You'll have to have an index.html (can be any other name) even if your app template consists of one tag, e.g., `<body><app></app></body>`.
+- You'll have to add an index.html (can have any other name) even if your app template consists of one tag,
+  e.g.,  `<body><app></app></body>`
 
 #### With Meteor 1.2
 ````
@@ -57,15 +59,15 @@ Notes:
 ````   
 
 Notes:
-- The compilers are part of this package.
+- The compilers are part of this package
 - Meteor 1.2 does not have modules loader, so you need to use SystemJS as modules loader (comes with this package!)
 
 ### Import Angular2 into your app:
-Package supports TypeScript and Babel (.jsx file extension) as languages for development with Angular 2.
+Package assumes TypeScript as the main language for development with Angular 2.
 
 ES6 modules are supported via CommonsJS (starting in Meteor 1.3) module loader library.
 
-To start, create `app.ts` file, import `Component` and `View` and then bootstrap the app:
+To start, create `client/app.ts` file, import `Component` and `View` and then bootstrap the app:
 ````ts
     import {Component, View} from 'angular2/core';
     import {bootstrap} from 'angular2/bootstrap';
@@ -98,7 +100,7 @@ If you have an HTML file in the app root folder with `body` or `head` tag (`inde
 
 Also, if you name your main client component is `app.ts`, the package will import `client/app` it automatically.
 
-( Note that if you use Meteor 1.2, you need to use SystemJS imports to load your main file!)
+(Note that if you use Meteor 1.2, you need to use SystemJS imports to load your main file!)
 
 ### Start using Meteor in your Angular2 app:
 
@@ -173,7 +175,7 @@ You can find more examples in the full tutorial!
 
 Check out two demos for the quick how-to:
 
-* the Tutorial's [Socially app](https://github.com/Urigo/meteor-angular2.0-socially)
+* the Tutorial's [Socially app](https://github.com/Urigo/meteor-angular2.0-socially) (For Meteor 1.2)
 * [Todos](https://github.com/Urigo/Meteor-Angular2/tree/master/examples/todos) demo (deployed http://ng2-todos.meteor.com).
 
 ## Server Side
@@ -186,7 +188,7 @@ The package uses [TypeScript for Meteor](https://github.com/barbatus/ts-compiler
 
 TypeScript configuration file a.k.a. `tsconfig.json` is supported as well. Place a file with this name at the root folder and start adding any available TypeScript options you want. You can read about all available compiler options [here] (https://github.com/Microsoft/TypeScript/wiki/tsconfig.json).
 
-Preset (i.e., they can't be overriden in the config) TypeScript options of the Meteor 1.3 version of this package are the following:
+Preset (i.e., can't be overriden in the config) TypeScript options of the Meteor 1.3 version of this package are as follows:
 ````json
 {
   "compilerOptions": {
@@ -234,7 +236,8 @@ For the coding style guide, we use AirBnB [rules](https://github.com/airbnb/java
 In order to work with this package locally when using Meteor 1.3 project, follow these instructions:
 
 1. Clone this repository to any folder. 
-   Note that if you clone into Meteor project directory - you need to put the cloned folder inside a hidden file so Meteor     wont try to build it! just create a folder that starts with `.` under your project root, it should look like that:
+   Note that if you clone into Meteor project directory - you need to put the cloned folder inside a hidden file, so Meteor won't try to
+   build it! Just create a folder that starts with `.` under your project root, it should look like that:
    ````
    MyProject
       .local-work
@@ -245,17 +248,17 @@ In order to work with this package locally when using Meteor 1.3 project, follow
       public
    ````
 
-2. Make sure that you already have `node_modules` directory under your root - if not - create it:
+2. Make sure that you already have `node_modules` directory under your root, if not — create it:
    ````
    $ mkdir node_modules
    ````
 
-   Also, make sure that you have a NPM project initialized in your directory (you should have `package.json`), if not, use:
+   Also, make sure that you have a NPM project initialized in your directory (you should have `package.json`), if not — use:
    ````
    $ npm init
    ````
 
-3. Make sure that you do not have angular2-meteor already - check under `node_modules` - if you do, delete it.
+3. Make sure that you do not have angular2-meteor already - check under `node_modules` — if you do, delete it.
 
 4. Now you have two options, you can specify the local copy in the `package.json` of your project, as follow:
    ````json
@@ -287,7 +290,7 @@ In order to use your local copy of Angular2-Meteor, you have two options:
    ````
    
 2. Or, you can keep the same code you have now, but you will need to build Angular2-Meteor source code each change you perform, by using the `build.sh` script inside the `node_modules/angular2-meteor` directory. 
-The build proccess uses Webpack in order to perform the build, using `ts-loader`, so make sure that you have `webpack` package installed from NPM.
+The build proccess uses Webpack in order to perform the build, using `ts-loader`, so make sure that you have `webpack` and `typings` NPMs installed globally.
 
 ### Troubleshoot
 
