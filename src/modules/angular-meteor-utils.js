@@ -2,6 +2,8 @@
  angular, _, Tracker, EJSON, FS, Mongo
  */
 
+import _ from '../lib/underscore';
+
 'use strict';
 
 var angularMeteorUtils = angular.module('angular-meteor.utils', ['angular-meteor.settings']);

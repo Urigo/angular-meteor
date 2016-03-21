@@ -2,6 +2,8 @@
  angular, _, Package
  */
 
+import _ from './underscore';
+
 'use strict';
 
 var _module = angular.module('diffArray', ['getUpdates']);

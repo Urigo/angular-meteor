@@ -20,7 +20,12 @@ var common = {
   externals: {
     angular: 'angular',
     jsondiffpatch: 'jsondiffpatch',
-    '_': 'underscore',
+    underscore: {
+      root: '_',
+      amd: 'underscore',
+      commonjs2: 'underscore',
+      commonjs: 'underscore'
+    },
     Meteor: 'Meteor',
     Package: 'Package',
     Tracker: 'Tracker'
@@ -50,11 +55,7 @@ var common = {
   },
   plugins: [
     // add information about name and version of angular-meteor package
-    new webpack.BannerPlugin(pkg.name + ' v' + pkg.version),
-    new webpack.ProvidePlugin({
-      '_': 'underscore',
-      'jsondiffpatch': 'jsondiffpatch'
-    })
+    new webpack.BannerPlugin(pkg.name + ' v' + pkg.version)
   ],
   resolve: {
     extensions: ['', '.js']

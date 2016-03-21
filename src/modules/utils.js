@@ -1,3 +1,5 @@
+import _ from '../lib/underscore';
+
 export const name = 'angular-meteor.utilities';
 export const utils = '$$utils';
 

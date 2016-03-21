@@ -1,3 +1,5 @@
+import _ from '../lib/underscore';
+
 export const name = 'angular-meteor.mixer';
 export const Mixer = '$Mixer';
 

@@ -2,6 +2,8 @@
  angular, _, Package, Meteor
  */
 
+import _ from '../lib/underscore';
+
 'use strict';
 
 var angularMeteorUser = angular.module('angular-meteor.user', [
