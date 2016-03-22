@@ -7,7 +7,7 @@ Package.describe({
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.3-modules-beta.5');
+  api.versionsFrom('1.3-rc.6');
 });
 
 Package.onTest(function(api) {
@@ -18,14 +18,15 @@ Package.onTest(function(api) {
     'underscore@1.0.4',
     'check',
     'tracker',
-    'ecmascript@0.3.1-modules.5'
+    'angular2-compilers@0.5.1',
+    'ecmascript@0.4.1-rc.4'
   ]);
 
   api.addFiles([
-    'tests/client/unit/lib/imports.js',
-    'tests/client/unit/lib/fakes.js',
-    'tests/client/unit/meteor_component_spec.js',
-    'tests/client/unit/mongo_cursor_differ_spec.js',
-    'tests/client/unit/mongo_cursor_observer_spec.js'
+    //'tests/client/unit/lib/imports.ts',
+    'tests/client/unit/lib/fakes.ts',
+    'tests/client/unit/meteor_component_spec.ts',
+    'tests/client/unit/mongo_cursor_differ_spec.ts',
+    'tests/client/unit/mongo_cursor_observer_spec.ts'
   ], 'client');
 });

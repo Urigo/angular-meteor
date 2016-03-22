@@ -1,4 +1,4 @@
-import {MongoCursorObserver} from 'angular2-meteor/mongo_cursor_observer';
+import {MongoCursorObserver} from 'angular2-meteor';
 import * as fakes from './lib/fakes';
 
 describe('MongoCursorObserver', function() {

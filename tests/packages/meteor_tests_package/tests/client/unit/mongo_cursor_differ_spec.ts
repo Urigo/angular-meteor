@@ -1,7 +1,6 @@
-import 'reflect-metadata';
 import * as ngCore from 'angular2/core';
-import {MongoCursorDiffer} from 'angular2-meteor/mongo_cursor_differ';
-import {AddChange, RemoveChange, MoveChange} from 'angular2-meteor/mongo_cursor_observer';
+import {MongoCursorDiffer} from 'angular2-meteor';
+import {AddChange, RemoveChange, MoveChange} from 'angular2-meteor';
 import * as fakes from './lib/fakes';
 
 describe('MongoCursorDiffer', function() {
