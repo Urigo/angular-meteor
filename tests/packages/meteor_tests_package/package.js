@@ -7,7 +7,7 @@ Package.describe({
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.3-rc.6');
+  api.versionsFrom('1.3-beta.10');
 });
 
 Package.onTest(function(api) {
@@ -19,7 +19,7 @@ Package.onTest(function(api) {
     'check',
     'tracker',
     'angular2-compilers@0.5.1',
-    'ecmascript@0.4.1-rc.4'
+    'ecmascript@0.4.0-beta.10'
   ]);
 
   api.addFiles([
