@@ -46,6 +46,8 @@ And add Angular2 compilers package:
    meteor add angular2-compilers
 ````
 
+> Note that this package contains now `angular2-runtime` package which adds all polyfills required by Angular 2, so that you don't need to import polyfills like `reflect-metadata` etc directly. Please, make sure you have latest `angular2-compilers`.
+
 For the explanation, please, read "HTML" [paragraph](http://www.angular-meteor.com/tutorials/socially/angular2/bootstrapping) in the above mentioned tutorial.
 
 Notes:
