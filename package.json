@@ -19,7 +19,7 @@
   "author": "Angular2-Meteor (https://github.com/Urigo/angular2-meteor)",
   "license": "MIT",
   "scripts": {
-    "start": "./build.sh", 
+    "build": "./build.sh", 
     "install": "node install.js"
   },
   "dependencies": {
@@ -27,12 +27,7 @@
     "fs.extra": "^1.3.2"
   },
   "peerDependencies": {
-    "angular2": "2.0.0-beta.9",
-    "es6-shim": "^0.33.3",
-    "zone.js": "0.5.15",
-    "es6-promise": "^3.0.2",
-    "rxjs": "5.0.0-beta.2",
-    "reflect-metadata": "0.1.2"
+    "angular2": "2.0.0-beta.9"
   },
   "devDependencies": {
     "ts-loader": "^0.8.0",

@@ -13,7 +13,7 @@ Package.onUse(function(api) {
 Package.onTest(function(api) {
   api.use([
     'tinytest',
-    'sanjo:jasmine@0.18.0',
+    'sanjo:jasmine@0.21.0',
     'mongo@1.1.1',
     'underscore@1.0.4',
     'check',
