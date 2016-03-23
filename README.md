@@ -1,7 +1,7 @@
 # Angular2-Meteor [![Build Status](https://travis-ci.org/Urigo/angular2-meteor.svg?branch=master)](https://travis-ci.org/Urigo/angular2-meteor)
 Angular2 + Meteor integration.
 
-##### Angular2 version: beta-9.
+##### Angular2 version: beta-11.
 
 ## Table of Contents
 * [Tutorial](../../#tutorial)
