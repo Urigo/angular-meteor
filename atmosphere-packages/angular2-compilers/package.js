@@ -1,6 +1,6 @@
 Package.describe({
   name: 'angular2-compilers',
-  version: '0.5.2',
+  version: '0.5.3',
   summary: 'Angular 2 Templates, HTML and TypeScript compilers for Meteor',
   git: 'https://github.com/Urigo/angular2-meteor/',
   documentation: 'README.md'
@@ -28,7 +28,7 @@ Package.onUse(function(api) {
   // Make sure we have them in this package.
   api.imply([
     'barbatus:angular2-runtime@0.2.1',
-    'barbatus:typescript@0.2.0-beta.12',
+    'barbatus:typescript@0.2.0-beta.13',
     'check@1.1.0',
     'tracker@1.0.9',
     'underscore@1.0.4',
