@@ -30,8 +30,8 @@ If you are new to Angular 2, we recommend to check out our 15-steps Angular2+Met
 
 #### With Meteor 1.3:
 ````
-    npm install https://github.com/Urigo/angular2-meteor --save
-    npm install https://github.com/Urigo/angular2-meteor-auto-bootstrap --save
+    npm install angular2-meteor --save
+    npm install angular2-meteor-auto-bootstrap --save
 ````
 
 This package adds own HTML processor and TypeScript support, so you'll also need to remove the standard HTML processor:
