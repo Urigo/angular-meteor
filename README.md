@@ -69,15 +69,13 @@ Package assumes TypeScript as the main language for development with Angular 2.
 
 ES6 modules are supported via CommonsJS (starting in Meteor 1.3) module loader library.
 
-To start, create `client/app.ts` file, import `Component` and `View` and then bootstrap the app:
+To start, create `client/app.ts` file, import `Component` and then bootstrap the app:
 ````ts
-    import {Component, View} from 'angular2/core';
+    import {Component} from 'angular2/core';
     import {bootstrap} from 'angular2/bootstrap';
 
     @Component({
-      selector: 'socially'
-    })
-    @View({
+      selector: 'socially',
       template: "<p>Hello World!</p>"
     })
     class Socially {}
@@ -120,7 +118,7 @@ For example, change `client/app.ts` to:
 ````ts
     // ....
 
-    @View({
+    @Component({
       templateUrl: 'client/parties.html'
     })
     class Socially {
@@ -144,15 +142,13 @@ At this moment, you are ready to create awesome apps backed by the power of Angu
 To use Meteor features, make sure that your components extends `MeteorComponent`, and you can feature that comes from Meteor:
 
 ````ts
-    import {Component, View} from 'angular2/core';
+    import {Component} from 'angular2/core';
     import {bootstrap} from 'angular2-meteor-auto-bootstrap';
     import {MeteorComponent} from 'angular2-meteor';
     import {MyCollection} form '../model/my-collection.ts';
 
     @Component({
       selector: 'socially'
-    })
-    @View({
       template: "<p>Hello World!</p>"
     })
     class Socially extends MeteorComponent {
