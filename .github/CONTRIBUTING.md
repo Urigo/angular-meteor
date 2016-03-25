@@ -131,22 +131,15 @@ cd myProject
 ln -s ~/path_to_your_repos/angular-meteor/packages/
 ```
 
-The `angular-meteor-data` package uses a node module.
+The `angular-meteor-data` package uses the main file of `angular-meteor` node module.
 
-All you have to do is to change it in `package.js`:
+To start using a local file you should run:
 
-```javascript
-api.add_files([
-  // '.npm/package/node_modules/angular-meteor/dist/angular-meteor.js'
-  'angular-meteor.js'
-], 'client', {
-  transpile: false
-});
+```bash
+npm run dev:start
 ```
 
-As you can see, there is no `angular-meteor.js` file.
-
-You can build this file by running:
+To compile new file for `angular-meteor-data` package you can run:
 
 ```bash
 npm run build:dev
@@ -158,7 +151,17 @@ If you don’t want to manually recompile after every change you can use watch m
 npm run watch:dev
 ```
 
+Both above commands run `npm run dev:start` automaticaly, so you don't have to trigger it by yourself.
+
 Now you can start using your own copy of the `angular-meteor` project from `myProject`.
+
+**You should remember one thing**.
+
+Since `angular-meteor-data` package uses main file of `angular-meteor` npm package and you've already changed it using above commands, you should somehow restore that state. It's easy, just use this command:
+
+```bash
+npm run dev:stop
+```
 
 ## Running tests
 
