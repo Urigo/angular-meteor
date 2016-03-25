@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "angular2-meteor": "^0.5.0",
+    "angular2-meteor-auto-bootstrap": "^0.5.0"
+  },
+  "license": "MIT"
+}

@@ -27,7 +27,7 @@
     "fs.extra": "^1.3.2"
   },
   "peerDependencies": {
-    "angular2": "2.0.0-beta.9"
+    "angular2": "2.0.0-beta.12"
   },
   "devDependencies": {
     "ts-loader": "^0.8.0",

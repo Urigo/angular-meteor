@@ -146,6 +146,7 @@ export class MongoCursorDiffer extends DefaultIterableDiffer {
     this._inserted.length = 0;
     this._moved.length = 0;
     this._removed.length = 0;
+    this._updated.length = 0;
   }
 
   // Reset previous state of the differ by removing all currently shown documents.

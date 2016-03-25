@@ -1,6 +1,6 @@
 Package.describe({
   name: 'barbatus:angular2-runtime',
-  version: '0.2.1',
+  version: '0.2.2',
   summary: 'Angular2 Dependencies and Polyfills Packaged for Meteor',
   git: 'https://github.com/Urigo/angular2-meteor/tree/master/atmosphere-packages',
   documentation: null
@@ -14,7 +14,7 @@ Package.onUse(function(api) {
     // This is important, i.e., adding it here
     // (before Angular2 itself) makes Angular2
     // to patch Meteor promise properly.
-    'promise@0.4.8'
+    'promise'
   ]);
 
   api.imply([
