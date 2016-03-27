@@ -287,8 +287,8 @@ In order to use your local copy of Angular2-Meteor, you have two options:
    import {MeteorComponent} from 'angular2-meteor/modules/meteor_component.ts';
    ````
    
-2. Or, you can keep the same code you have now, but you will need to build Angular2-Meteor source code each change you perform, by using the `build.sh` script inside the `node_modules/angular2-meteor` directory. 
-The build proccess uses Webpack in order to perform the build, using `ts-loader`, so make sure that you have `webpack` and `typings` NPMs installed globally.
+2. Or, you can keep the same code you have now, but you will need to build Angular2-Meteor source code each change you perform, by
+   running `gulp build`.
 
 ### Troubleshoot
 
