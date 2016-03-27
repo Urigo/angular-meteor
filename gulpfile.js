@@ -7,8 +7,8 @@ var filenames = require("gulp-filenames");
 var print = require("gulp-print");
 var filter = require("gulp-filter");
 var gulpTypings = require("gulp-typings");
-var git = require('gulp-git');
-var fs = require('fs');
+var git = require("gulp-git");
+var fs = require("fs");
  
 // Install typings.
 gulp.task("typings",function(){
@@ -29,6 +29,16 @@ gulp.task("webpack", function() {
   return merge(build, move);
 });
 
+gulp.task("lint", function() {
+  var tslint = require("gulp-tslint");
+  return gulp.src(["modules/*.ts"])
+      .pipe(tslint({
+        tslint: require("tslint").default,
+        configuration: require("./tslint.json")
+      }))
+      .pipe(tslint.report("prose", {emitError: true}));
+});
+
 gulp.task("build-clean", function() {
   return gulp.src("build/modules")
     .pipe(clean());
@@ -40,7 +50,7 @@ gulp.task("git-add", function(){
 });
 
 gulp.task("build", function(callback) {
-  runSequence("typings", "webpack", "build-clean", "git-add", callback);
+  runSequence("typings", "lint", "webpack", "build-clean", "git-add", callback);
 });
 
 // Move files from build/ to ./ before NPM publish.

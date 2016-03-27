@@ -1,6 +1,6 @@
 'use strict';
 
-import {ChangeDetectorRef, IterableDiffer, createNgZone} from 'angular2/core';
+import {ChangeDetectorRef, createNgZone} from 'angular2/core';
 
 import {
   DefaultIterableDifferFactory,
@@ -94,8 +94,7 @@ export class MongoCursorDiffer extends DefaultIterableDiffer {
       this._curObserver = <MongoCursorObserver>this._obsFactory.create(cursor);
       this._subscription = ObservableWrapper.subscribe(this._curObserver,
         changes => {
-          // Run it outside Angular2 zone to cause running diff one more time
-          // and apply changes.
+          // Run it outside Angular2 zone to cause running diff one more time and apply changes.
           this._zone.runOutsideAngular(() => this._updateLatestValue(changes));
         });
     }

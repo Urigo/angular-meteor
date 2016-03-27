@@ -99,7 +99,7 @@ export class MeteorComponent implements OnDestroy {
     if (_.isFunction(callbacks)) {
       return function(...args) {
         self._zone.run(() => callbacks.apply(self._zone, args));
-      }
+      };
     }
 
     if (isCallbacksObject(callbacks)) {
@@ -109,7 +109,7 @@ export class MeteorComponent implements OnDestroy {
         if (newCallbacks[event]) {
           newCallbacks[event] = function(...args) {
             self._zone.run(() => callbacks[event].apply(self._zone, args));
-          }
+          };
         }
       });
       return newCallbacks;

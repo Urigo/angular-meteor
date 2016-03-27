@@ -23,7 +23,7 @@ export class CursorHandle {
 
   stop() {
     if (this._hAutoNotify) {
-      this._hAutoNotify.stop()
+      this._hAutoNotify.stop();
     };
     this._hCurObserver.stop();
   }
