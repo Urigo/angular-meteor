@@ -1,3 +1,26 @@
+<a name="1.3.8"></a>
+## [1.3.8](https://github.com/Urigo/angular-meteor/compare/1.3.7...v1.3.8) (2016-03-28)
+
+
+### Bug Fixes
+
+* **reactive:** empty collection on cursor change ([252d2d4](https://github.com/Urigo/angular-meteor/commit/252d2d4))
+* **viewmodel:** Scope and view model logics can now be used all together ([c78c507](https://github.com/Urigo/angular-meteor/commit/c78c507))
+* **viewmodel:** View model and scope can both use 'getReactively' ([dc0eb88](https://github.com/Urigo/angular-meteor/commit/dc0eb88))
+* commonjs support for es6 modules ([67a218f](https://github.com/Urigo/angular-meteor/commit/67a218f))
+* fix missing dependencies in npm ([ccf5eec](https://github.com/Urigo/angular-meteor/commit/ccf5eec))
+
+### Features
+
+* meteor 1.3 compatible ([39cc970](https://github.com/Urigo/angular-meteor/commit/39cc970))
+* **$angularMeteorSettings:** suppress warnings ([a787c1d](https://github.com/Urigo/angular-meteor/commit/a787c1d))
+
+### Performance Improvements
+
+* **reactive:** skip comparing on initial data ([21a1805](https://github.com/Urigo/angular-meteor/commit/21a1805))
+
+
+
 <a name="1.3.7"></a>
 ## [1.3.7](https://github.com/Urigo/angular-meteor/compare/1.3.6...v1.3.7) (2016-02-28)
 

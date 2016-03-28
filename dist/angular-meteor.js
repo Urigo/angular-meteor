@@ -1,5 +1,15 @@
-/*! angular-meteor v1.3.7 */
-/******/ (function(modules) { // webpackBootstrap
+/*! angular-meteor v1.3.9 */
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory(require("underscore"), require("jsondiffpatch"));
+	else if(typeof define === 'function' && define.amd)
+		define(["underscore", "jsondiffpatch"], factory);
+	else if(typeof exports === 'object')
+		exports["angularMeteor"] = factory(require("underscore"), require("jsondiffpatch"));
+	else
+		root["angularMeteor"] = factory(root["_"], root["jsondiffpatch"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_22__) {
+return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 
@@ -50,13 +60,8 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.name = undefined;
 
 	__webpack_require__(1);
-
-	__webpack_require__(2);
-
-	__webpack_require__(3);
 
 	__webpack_require__(4);
 
@@ -78,25 +83,33 @@
 
 	__webpack_require__(13);
 
-	var _utils = __webpack_require__(14);
+	__webpack_require__(14);
 
-	var _mixer = __webpack_require__(15);
+	__webpack_require__(15);
 
-	var _scope = __webpack_require__(16);
+	var _utils = __webpack_require__(16);
 
-	var _core = __webpack_require__(17);
+	var _mixer = __webpack_require__(17);
 
-	var _viewModel = __webpack_require__(18);
+	var _scope = __webpack_require__(18);
 
-	var _reactive = __webpack_require__(19);
+	var _core = __webpack_require__(19);
 
-	var _templates = __webpack_require__(20);
+	var _viewModel = __webpack_require__(20);
+
+	var _reactive = __webpack_require__(21);
+
+	var _templates = __webpack_require__(23);
 
 	// legacy
 	// lib
-	var name = exports.name = 'angular-meteor';
+
+
+	var name = 'angular-meteor';
 
 	// new
+
+	exports.default = name;
 
 
 	angular.module(name, [
@@ -129,18 +142,26 @@
 	    _this[method] = $meteorUser[method];
 	  });
 	}]);
+	module.exports = exports['default'];
 
 /***/ },
 /* 1 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	/*global
-	 angular, _
-	 */
+	'use strict';
+
+	var _underscore = __webpack_require__(2);
+
+	var _underscore2 = _interopRequireDefault(_underscore);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	'use strict';
 
 	// https://github.com/DAB0mB/get-updates
+	/*global
+	 angular, _
+	 */
 
 	(function () {
 	  var module = angular.module('getUpdates', []);
@@ -149,8 +170,8 @@
 	    var rip = function rip(obj, level) {
 	      if (level < 1) return {};
 
-	      return _.reduce(obj, function (clone, v, k) {
-	        v = _.isObject(v) ? rip(v, --level) : v;
+	      return _underscore2.default.reduce(obj, function (clone, v, k) {
+	        v = _underscore2.default.isObject(v) ? rip(v, --level) : v;
 	        clone[k] = v;
 	        return clone;
 	      }, {});
@@ -159,27 +180,27 @@
 	    var toPaths = function toPaths(obj) {
 	      var keys = getKeyPaths(obj);
 	      var values = getDeepValues(obj);
-	      return _.object(keys, values);
+	      return _underscore2.default.object(keys, values);
 	    };
 
 	    var getKeyPaths = function getKeyPaths(obj) {
-	      var keys = _.keys(obj).map(function (k) {
+	      var keys = _underscore2.default.keys(obj).map(function (k) {
 	        var v = obj[k];
-	        if (!_.isObject(v) || _.isEmpty(v) || _.isArray(v)) return k;
+	        if (!_underscore2.default.isObject(v) || _underscore2.default.isEmpty(v) || _underscore2.default.isArray(v)) return k;
 
 	        return getKeyPaths(v).map(function (subKey) {
 	          return k + '.' + subKey;
 	        });
 	      });
 
-	      return _.flatten(keys);
+	      return _underscore2.default.flatten(keys);
 	    };
 
 	    var getDeepValues = function getDeepValues(obj, arr) {
 	      arr = arr || [];
 
-	      _.values(obj).forEach(function (v) {
-	        if (!_.isObject(v) || _.isEmpty(v) || _.isArray(v)) arr.push(v);else getDeepValues(v, arr);
+	      _underscore2.default.values(obj).forEach(function (v) {
+	        if (!_underscore2.default.isObject(v) || _underscore2.default.isEmpty(v) || _underscore2.default.isArray(v)) arr.push(v);else getDeepValues(v, arr);
 	      });
 
 	      return arr;
@@ -187,14 +208,14 @@
 
 	    var flatten = function flatten(arr) {
 	      return arr.reduce(function (flattened, v, i) {
-	        if (_.isArray(v) && !_.isEmpty(v)) flattened.push.apply(flattened, flatten(v));else flattened.push(v);
+	        if (_underscore2.default.isArray(v) && !_underscore2.default.isEmpty(v)) flattened.push.apply(flattened, flatten(v));else flattened.push(v);
 
 	        return flattened;
 	      }, []);
 	    };
 
 	    var setFilled = function setFilled(obj, k, v) {
-	      if (!_.isEmpty(v)) obj[k] = v;
+	      if (!_underscore2.default.isEmpty(v)) obj[k] = v;
 	    };
 
 	    var assert = function assert(result, msg) {
@@ -231,20 +252,20 @@
 	    };
 
 	    var compare = function compare(src, dst) {
-	      var srcKeys = _.keys(src);
-	      var dstKeys = _.keys(dst);
+	      var srcKeys = _underscore2.default.keys(src);
+	      var dstKeys = _underscore2.default.keys(dst);
 
-	      var keys = _.chain([]).concat(srcKeys).concat(dstKeys).uniq().without('$$hashKey').value();
+	      var keys = _underscore2.default.chain([]).concat(srcKeys).concat(dstKeys).uniq().without('$$hashKey').value();
 
 	      return keys.reduce(function (diff, k) {
 	        var srcValue = src[k];
 	        var dstValue = dst[k];
 
-	        if (_.isDate(srcValue) && _.isDate(dstValue)) {
+	        if (_underscore2.default.isDate(srcValue) && _underscore2.default.isDate(dstValue)) {
 	          if (srcValue.getTime() != dstValue.getTime()) diff[k] = dstValue;
 	        }
 
-	        if (_.isObject(srcValue) && _.isObject(dstValue)) {
+	        if (_underscore2.default.isObject(srcValue) && _underscore2.default.isObject(dstValue)) {
 	          var valueDiff = getDifference(srcValue, dstValue);
 	          utils.setFilled(diff, k, valueDiff);
 	        } else if (srcValue !== dstValue) {
@@ -260,8 +281,8 @@
 
 	  var getUpdates = function () {
 	    var getUpdates = function getUpdates(src, dst, isShallow) {
-	      utils.assert(_.isObject(src), 'first argument must be an object');
-	      utils.assert(_.isObject(dst), 'second argument must be an object');
+	      utils.assert(_underscore2.default.isObject(src), 'first argument must be an object');
+	      utils.assert(_underscore2.default.isObject(dst), 'second argument must be an object');
 
 	      var diff = getDifference(src, dst, isShallow);
 	      var paths = utils.toPaths(diff);
@@ -280,35 +301,35 @@
 
 	    var createSet = function createSet(paths) {
 	      var undefinedKeys = getUndefinedKeys(paths);
-	      return _.omit(paths, undefinedKeys);
+	      return _underscore2.default.omit(paths, undefinedKeys);
 	    };
 
 	    var createUnset = function createUnset(paths) {
 	      var undefinedKeys = getUndefinedKeys(paths);
-	      var unset = _.pick(paths, undefinedKeys);
+	      var unset = _underscore2.default.pick(paths, undefinedKeys);
 
-	      return _.reduce(unset, function (result, v, k) {
+	      return _underscore2.default.reduce(unset, function (result, v, k) {
 	        result[k] = true;
 	        return result;
 	      }, {});
 	    };
 
 	    var createPull = function createPull(unset) {
-	      var arrKeyPaths = _.keys(unset).map(function (k) {
+	      var arrKeyPaths = _underscore2.default.keys(unset).map(function (k) {
 	        var split = k.match(/(.*)\.\d+$/);
 	        return split && split[1];
 	      });
 
-	      return _.compact(arrKeyPaths).reduce(function (pull, k) {
+	      return _underscore2.default.compact(arrKeyPaths).reduce(function (pull, k) {
 	        pull[k] = null;
 	        return pull;
 	      }, {});
 	    };
 
 	    var getUndefinedKeys = function getUndefinedKeys(obj) {
-	      return _.keys(obj).filter(function (k) {
+	      return _underscore2.default.keys(obj).filter(function (k) {
 	        var v = obj[k];
-	        return _.isUndefined(v);
+	        return _underscore2.default.isUndefined(v);
 	      });
 	    };
 
@@ -320,13 +341,50 @@
 
 /***/ },
 /* 2 */
-/***/ function(module, exports) {
-
-	/*global
-	 angular, _, Package
-	 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _underscore = __webpack_require__(3);
+
+	var _underscore2 = _interopRequireDefault(_underscore);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	if (typeof _underscore2.default === 'undefined') {
+	  if (typeof Package.underscore === 'undefined') {
+	    throw new Error('underscore is missing');
+	  }
+	}
+
+	exports.default = _underscore2.default || Package.underscore._;
+	module.exports = exports['default'];
+
+/***/ },
+/* 3 */
+/***/ function(module, exports) {
+
+	module.exports = __WEBPACK_EXTERNAL_MODULE_3__;
+
+/***/ },
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	var _underscore = __webpack_require__(2);
+
+	var _underscore2 = _interopRequireDefault(_underscore);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	'use strict'; /*global
+	               angular, _, Package
+	               */
 
 	var _module = angular.module('diffArray', ['getUpdates']);
 
@@ -353,12 +411,12 @@
 	    var posCur = {};
 	    var lengthCur = lastSeqArray.length;
 
-	    _.each(seqArray, function (doc, i) {
+	    _underscore2.default.each(seqArray, function (doc, i) {
 	      newObjIds.push({ _id: doc._id });
 	      posNew[idStringify(doc._id)] = i;
 	    });
 
-	    _.each(lastSeqArray, function (doc, i) {
+	    _underscore2.default.each(lastSeqArray, function (doc, i) {
 	      oldObjIds.push({ _id: doc._id });
 	      posOld[idStringify(doc._id)] = i;
 	      posCur[idStringify(doc._id)] = i;
@@ -372,7 +430,7 @@
 	      addedBefore: function addedBefore(id, doc, before) {
 	        var position = before ? posCur[idStringify(before)] : lengthCur;
 
-	        _.each(posCur, function (pos, id) {
+	        _underscore2.default.each(posCur, function (pos, id) {
 	          if (pos >= position) posCur[id]++;
 	        });
 
@@ -386,7 +444,7 @@
 	        var prevPosition = posCur[idStringify(id)];
 	        var position = before ? posCur[idStringify(before)] : lengthCur - 1;
 
-	        _.each(posCur, function (pos, id) {
+	        _underscore2.default.each(posCur, function (pos, id) {
 	          if (pos >= prevPosition && pos <= position) posCur[id]--;else if (pos <= prevPosition && pos >= position) posCur[id]++;
 	        });
 
@@ -397,7 +455,7 @@
 	      removed: function removed(id) {
 	        var prevPosition = posCur[idStringify(id)];
 
-	        _.each(posCur, function (pos, id) {
+	        _underscore2.default.each(posCur, function (pos, id) {
 	          if (pos >= prevPosition) posCur[id]--;
 	        });
 
@@ -408,15 +466,15 @@
 	      }
 	    });
 
-	    _.each(posNew, function (pos, idString) {
-	      if (!_.has(posOld, idString)) return;
+	    _underscore2.default.each(posNew, function (pos, idString) {
+	      if (!_underscore2.default.has(posOld, idString)) return;
 
 	      var id = idParse(idString);
 	      var newItem = seqArray[pos] || {};
 	      var oldItem = lastSeqArray[posOld[idString]];
 	      var updates = getUpdates(oldItem, newItem, preventNestedDiff);
 
-	      if (!_.isEmpty(updates)) callbacks.changedAt(id, updates, pos, oldItem);
+	      if (!_underscore2.default.isEmpty(updates)) callbacks.changedAt(id, updates, pos, oldItem);
 	    });
 	  }
 
@@ -427,7 +485,7 @@
 	  diffArray.deepCopyChanges = function (oldItem, newItem) {
 	    var setDiff = getUpdates(oldItem, newItem).$set;
 
-	    _.each(setDiff, function (v, deepKey) {
+	    _underscore2.default.each(setDiff, function (v, deepKey) {
 	      setDeep(oldItem, deepKey, v);
 	    });
 	  };
@@ -435,7 +493,7 @@
 	  diffArray.deepCopyRemovals = function (oldItem, newItem) {
 	    var unsetDiff = getUpdates(oldItem, newItem).$unset;
 
-	    _.each(unsetDiff, function (v, deepKey) {
+	    _underscore2.default.each(unsetDiff, function (v, deepKey) {
 	      unsetDeep(oldItem, deepKey);
 	    });
 	  };
@@ -467,8 +525,8 @@
 
 	  var setDeep = function setDeep(obj, deepKey, v) {
 	    var split = deepKey.split('.');
-	    var initialKeys = _.initial(split);
-	    var lastKey = _.last(split);
+	    var initialKeys = _underscore2.default.initial(split);
+	    var lastKey = _underscore2.default.last(split);
 
 	    initialKeys.reduce(function (subObj, k, i) {
 	      var nextKey = split[i + 1];
@@ -490,11 +548,11 @@
 
 	  var unsetDeep = function unsetDeep(obj, deepKey) {
 	    var split = deepKey.split('.');
-	    var initialKeys = _.initial(split);
-	    var lastKey = _.last(split);
+	    var initialKeys = _underscore2.default.initial(split);
+	    var lastKey = _underscore2.default.last(split);
 	    var deepObj = getDeep(obj, initialKeys);
 
-	    if (_.isArray(deepObj) && isNumStr(lastKey)) return !!deepObj.splice(lastKey, 1);else return delete deepObj[lastKey];
+	    if (_underscore2.default.isArray(deepObj) && isNumStr(lastKey)) return !!deepObj.splice(lastKey, 1);else return delete deepObj[lastKey];
 	  };
 
 	  var getDeep = function getDeep(obj, keys) {
@@ -504,7 +562,7 @@
 	  };
 
 	  var isHash = function isHash(obj) {
-	    return _.isObject(obj) && Object.getPrototypeOf(obj) === Object.prototype;
+	    return _underscore2.default.isObject(obj) && Object.getPrototypeOf(obj) === Object.prototype;
 	  };
 
 	  var isNumStr = function isNumStr(str) {
@@ -515,17 +573,17 @@
 	}]);
 
 /***/ },
-/* 3 */
+/* 5 */
 /***/ function(module, exports) {
 
 	'use strict';
 
 	angular.module('angular-meteor.settings', []).constant('$angularMeteorSettings', {
-	  suppressWarnings: false
+	  suppressWarnings: true
 	});
 
 /***/ },
-/* 4 */
+/* 6 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -548,16 +606,22 @@
 	}]);
 
 /***/ },
-/* 5 */
-/***/ function(module, exports) {
-
-	/*global
-	 angular, _, Tracker, EJSON, FS, Mongo
-	 */
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; }; /*global
+	                                                                                                                                                                                                                                                   angular, _, Tracker, EJSON, FS, Mongo
+	                                                                                                                                                                                                                                                   */
+
+	var _underscore = __webpack_require__(2);
+
+	var _underscore2 = _interopRequireDefault(_underscore);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	'use strict';
 
 	var angularMeteorUtils = angular.module('angular-meteor.utils', ['angular-meteor.settings']);
 
@@ -588,11 +652,11 @@
 	  // Borrowed from angularFire
 	  // https://github.com/firebase/angularfire/blob/master/src/utils.js#L445-L454
 	  this.stripDollarPrefixedKeys = function (data) {
-	    if (!_.isObject(data) || data instanceof Date || data instanceof File || EJSON.toJSONValue(data).$type === 'oid' || (typeof FS === 'undefined' ? 'undefined' : _typeof(FS)) === 'object' && data instanceof FS.File) return data;
+	    if (!_underscore2.default.isObject(data) || data instanceof Date || data instanceof File || EJSON.toJSONValue(data).$type === 'oid' || (typeof FS === 'undefined' ? 'undefined' : _typeof(FS)) === 'object' && data instanceof FS.File) return data;
 
-	    var out = _.isArray(data) ? [] : {};
+	    var out = _underscore2.default.isArray(data) ? [] : {};
 
-	    _.each(data, function (v, k) {
+	    _underscore2.default.each(data, function (v, k) {
 	      if (typeof k !== 'string' || k.charAt(0) !== '$') out[k] = self.stripDollarPrefixedKeys(v);
 	    });
 
@@ -611,7 +675,7 @@
 	    return function () {
 	      var deferred = $q.defer();
 	      var fulfill = self.fulfill(deferred);
-	      var args = _.toArray(arguments).concat(fulfill);
+	      var args = _underscore2.default.toArray(arguments).concat(fulfill);
 	      obj[method].apply(obj, args);
 	      return deferred.promise;
 	    };
@@ -634,12 +698,12 @@
 	  };
 
 	  this.findIndexById = function (collection, doc) {
-	    var foundDoc = _.find(collection, function (colDoc) {
+	    var foundDoc = _underscore2.default.find(collection, function (colDoc) {
 	      // EJSON.equals used to compare Mongo.ObjectIDs and Strings.
 	      return EJSON.equals(colDoc._id, doc._id);
 	    });
 
-	    return _.indexOf(collection, foundDoc);
+	    return _underscore2.default.indexOf(collection, foundDoc);
 	  };
 	}]);
 
@@ -650,7 +714,7 @@
 	}]);
 
 /***/ },
-/* 6 */
+/* 8 */
 /***/ function(module, exports) {
 
 	/*global
@@ -726,14 +790,20 @@
 	}]);
 
 /***/ },
-/* 7 */
-/***/ function(module, exports) {
-
-	/*global
-	 angular, _, Tracker, check, Match, Mongo
-	 */
+/* 9 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+
+	var _underscore = __webpack_require__(2);
+
+	var _underscore2 = _interopRequireDefault(_underscore);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	'use strict'; /*global
+	               angular, _, Tracker, check, Match, Mongo
+	               */
 
 	var angularMeteorCollection = angular.module('angular-meteor.collection', ['angular-meteor.stopper', 'angular-meteor.subscribe', 'angular-meteor.utils', 'diffArray', 'angular-meteor.settings']);
 
@@ -768,7 +838,7 @@
 	      data.$$collection = $meteorUtils.getCollectionByName(cursor.collection.name);
 	    }
 
-	    _.extend(data, AngularMeteorCollection);
+	    _underscore2.default.extend(data, AngularMeteorCollection);
 	    data._startCurAutorun(curDefFunc, autoClientSave);
 
 	    return data;
@@ -810,7 +880,7 @@
 	  AngularMeteorCollection._upsertDoc = function (doc, useUnsetModifier) {
 	    var deferred = $q.defer();
 	    var collection = this.$$collection;
-	    var createFulfill = _.partial($meteorUtils.fulfill, deferred, null);
+	    var createFulfill = _underscore2.default.partial($meteorUtils.fulfill, deferred, null);
 
 	    // delete $$hashkey
 	    doc = $meteorUtils.stripDollarPrefixedKeys(doc);
@@ -843,10 +913,10 @@
 	  // see issue: https://github.com/Urigo/angular-meteor/issues/793
 	  AngularMeteorCollection._updateDiff = function (selector, update, callback) {
 	    callback = callback || angular.noop;
-	    var setters = _.omit(update, '$pull');
+	    var setters = _underscore2.default.omit(update, '$pull');
 	    var updates = [setters];
 
-	    _.each(update.$pull, function (pull, prop) {
+	    _underscore2.default.each(update.$pull, function (pull, prop) {
 	      var puller = {};
 	      puller[prop] = pull;
 	      updates.push({ $pull: puller });
@@ -858,14 +928,14 @@
 	  // performs each update operation parallely
 	  AngularMeteorCollection._updateParallel = function (selector, updates, callback) {
 	    var self = this;
-	    var done = _.after(updates.length, callback);
+	    var done = _underscore2.default.after(updates.length, callback);
 
 	    var next = function next(err, affectedDocsNum) {
 	      if (err) return callback(err);
 	      done(null, affectedDocsNum);
 	    };
 
-	    _.each(updates, function (update) {
+	    _underscore2.default.each(updates, function (update) {
 	      self.$$collection.update(selector, update, next);
 	    });
 	  };
@@ -875,13 +945,13 @@
 
 	    // remove whole collection
 	    if (!keyOrDocs) {
-	      keys = _.pluck(this, '_id');
+	      keys = _underscore2.default.pluck(this, '_id');
 	    }
 	    // remove docs
 	    else {
 	        keyOrDocs = [].concat(keyOrDocs);
 
-	        keys = _.map(keyOrDocs, function (keyOrDoc) {
+	        keys = _underscore2.default.map(keyOrDocs, function (keyOrDoc) {
 	          return keyOrDoc._id || keyOrDoc;
 	        });
 	      }
@@ -1084,7 +1154,7 @@
 
 	    if (!angular.isFunction(reactiveFunc)) {
 	      collection = angular.isDefined(collection) ? collection : reactiveFunc;
-	      reactiveFunc = _.bind(reactiveFunc.find, reactiveFunc);
+	      reactiveFunc = _underscore2.default.bind(reactiveFunc.find, reactiveFunc);
 	    }
 
 	    // By default auto save - true.
@@ -1103,14 +1173,20 @@
 	}]);
 
 /***/ },
-/* 8 */
-/***/ function(module, exports) {
-
-	/*global
-	  angular, _, Mongo
-	*/
+/* 10 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+
+	var _underscore = __webpack_require__(2);
+
+	var _underscore2 = _interopRequireDefault(_underscore);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	'use strict'; /*global
+	                angular, _, Mongo
+	              */
 
 	var angularMeteorObject = angular.module('angular-meteor.object', ['angular-meteor.utils', 'angular-meteor.subscribe', 'angular-meteor.collection', 'getUpdates', 'diffArray', 'angular-meteor.settings']);
 
@@ -1124,15 +1200,15 @@
 	    // Make data not be an object so we can extend it to preserve
 	    // Collection Helpers and the like
 	    var helpers = collection._helpers;
-	    var data = _.isFunction(helpers) ? Object.create(helpers.prototype) : {};
+	    var data = _underscore2.default.isFunction(helpers) ? Object.create(helpers.prototype) : {};
 	    var doc = collection.findOne(selector, options);
-	    var collectionExtension = _.pick(AngularMeteorCollection, '_updateParallel');
-	    _.extend(data, doc);
-	    _.extend(data, AngularMeteorObject);
-	    _.extend(data, collectionExtension);
+	    var collectionExtension = _underscore2.default.pick(AngularMeteorCollection, '_updateParallel');
+	    _underscore2.default.extend(data, doc);
+	    _underscore2.default.extend(data, AngularMeteorObject);
+	    _underscore2.default.extend(data, collectionExtension);
 
 	    // Omit options that may spoil document finding
-	    data.$$options = _.omit(options, 'skip', 'limit');
+	    data.$$options = _underscore2.default.omit(options, 'skip', 'limit');
 	    data.$$collection = collection;
 	    data.$$id = data._getId(selector);
 	    data._serverBackup = doc || {};
@@ -1141,7 +1217,7 @@
 	  }
 
 	  AngularMeteorObject.getRawObject = function () {
-	    return angular.copy(_.omit(this, this.$$internalProps));
+	    return angular.copy(_underscore2.default.omit(this, this.$$internalProps));
 	  };
 
 	  AngularMeteorObject.subscribe = function () {
@@ -1152,7 +1228,7 @@
 	  AngularMeteorObject.save = function (custom) {
 	    var deferred = $q.defer();
 	    var collection = this.$$collection;
-	    var createFulfill = _.partial($meteorUtils.fulfill, deferred, null);
+	    var createFulfill = _underscore2.default.partial($meteorUtils.fulfill, deferred, null);
 	    var oldDoc = collection.findOne(this.$$id);
 	    var mods;
 
@@ -1161,7 +1237,7 @@
 	      if (custom) mods = { $set: custom };else {
 	        mods = getUpdates(oldDoc, this.getRawObject());
 	        // If there are no updates, there is nothing to do here, returning
-	        if (_.isEmpty(mods)) {
+	        if (_underscore2.default.isEmpty(mods)) {
 	          return $q.when({ action: 'updated' });
 	        }
 	      }
@@ -1171,7 +1247,7 @@
 	    }
 	    // insert
 	    else {
-	        if (custom) mods = _.clone(custom);else mods = this.getRawObject();
+	        if (custom) mods = _underscore2.default.clone(custom);else mods = this.getRawObject();
 
 	        mods._id = mods._id || this.$$id;
 	        collection.insert(mods, createFulfill({ action: 'inserted' }));
@@ -1193,28 +1269,28 @@
 
 	    if (doc) {
 	      // extend SubObject
-	      var docKeys = _.keys(doc);
-	      var docExtension = _.pick(doc, docKeys);
+	      var docKeys = _underscore2.default.keys(doc);
+	      var docExtension = _underscore2.default.pick(doc, docKeys);
 	      var clientProps;
 
-	      _.extend(self, docExtension);
-	      _.extend(self._serverBackup, docExtension);
+	      _underscore2.default.extend(self, docExtension);
+	      _underscore2.default.extend(self._serverBackup, docExtension);
 
 	      if (keepClientProps) {
-	        clientProps = _.intersection(_.keys(self), _.keys(self._serverBackup));
+	        clientProps = _underscore2.default.intersection(_underscore2.default.keys(self), _underscore2.default.keys(self._serverBackup));
 	      } else {
-	        clientProps = _.keys(self);
+	        clientProps = _underscore2.default.keys(self);
 	      }
 
-	      var serverProps = _.keys(doc);
-	      var removedKeys = _.difference(clientProps, serverProps, self.$$internalProps);
+	      var serverProps = _underscore2.default.keys(doc);
+	      var removedKeys = _underscore2.default.difference(clientProps, serverProps, self.$$internalProps);
 
 	      removedKeys.forEach(function (prop) {
 	        delete self[prop];
 	        delete self._serverBackup[prop];
 	      });
 	    } else {
-	      _.keys(this.getRawObject()).forEach(function (prop) {
+	      _underscore2.default.keys(this.getRawObject()).forEach(function (prop) {
 	        delete self[prop];
 	      });
 
@@ -1231,7 +1307,7 @@
 	  };
 
 	  AngularMeteorObject._getId = function (selector) {
-	    var options = _.extend({}, this.$$options, {
+	    var options = _underscore2.default.extend({}, this.$$options, {
 	      fields: { _id: 1 },
 	      reactive: false,
 	      transform: null
@@ -1241,7 +1317,7 @@
 
 	    if (doc) return doc._id;
 	    if (selector instanceof Mongo.ObjectID) return selector;
-	    if (_.isString(selector)) return selector;
+	    if (_underscore2.default.isString(selector)) return selector;
 	    return new Mongo.ObjectID();
 	  };
 
@@ -1262,7 +1338,7 @@
 	    var data = new AngularMeteorObject(collection, id, options);
 	    // Making auto default true - http://stackoverflow.com/a/15464208/1426570
 	    data._auto = auto !== false;
-	    _.extend(data, $meteorObject);
+	    _underscore2.default.extend(data, $meteorObject);
 	    data._setAutos();
 	    return data;
 	  }
@@ -1295,14 +1371,20 @@
 	}]);
 
 /***/ },
-/* 9 */
-/***/ function(module, exports) {
-
-	/*global
-	 angular, _, Package, Meteor
-	 */
+/* 11 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+
+	var _underscore = __webpack_require__(2);
+
+	var _underscore2 = _interopRequireDefault(_underscore);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	'use strict'; /*global
+	               angular, _, Package, Meteor
+	               */
 
 	var angularMeteorUser = angular.module('angular-meteor.user', ['angular-meteor.utils', 'angular-meteor.core', 'angular-meteor.settings']);
 
@@ -1373,7 +1455,7 @@
 	angularMeteorUser.run(['$rootScope', '$angularMeteorSettings', '$$Core', function ($rootScope, $angularMeteorSettings, $$Core) {
 
 	  var ScopeProto = Object.getPrototypeOf($rootScope);
-	  _.extend(ScopeProto, $$Core);
+	  _underscore2.default.extend(ScopeProto, $$Core);
 
 	  $rootScope.autorun(function () {
 	    if (!Meteor.user) return;
@@ -1383,14 +1465,20 @@
 	}]);
 
 /***/ },
-/* 10 */
-/***/ function(module, exports) {
-
-	/*global
-	 angular, _, Meteor
-	 */
+/* 12 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
+
+	var _underscore = __webpack_require__(2);
+
+	var _underscore2 = _interopRequireDefault(_underscore);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	'use strict'; /*global
+	               angular, _, Meteor
+	               */
 
 	var angularMeteorMethods = angular.module('angular-meteor.methods', ['angular-meteor.utils', 'angular-meteor.settings']);
 
@@ -1400,14 +1488,14 @@
 
 	    var deferred = $q.defer();
 	    var fulfill = $meteorUtils.fulfill(deferred);
-	    var args = _.toArray(arguments).concat(fulfill);
+	    var args = _underscore2.default.toArray(arguments).concat(fulfill);
 	    Meteor.call.apply(this, args);
 	    return deferred.promise;
 	  };
 	}]);
 
 /***/ },
-/* 11 */
+/* 13 */
 /***/ function(module, exports) {
 
 	/*global
@@ -1441,7 +1529,7 @@
 	}]);
 
 /***/ },
-/* 12 */
+/* 14 */
 /***/ function(module, exports) {
 
 	/*global
@@ -1471,7 +1559,7 @@
 	}]);
 
 /***/ },
-/* 13 */
+/* 15 */
 /***/ function(module, exports) {
 
 	/*global
@@ -1510,14 +1598,22 @@
 	}]);
 
 /***/ },
-/* 14 */
-/***/ function(module, exports) {
+/* 16 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.utils = exports.name = undefined;
+
+	var _underscore = __webpack_require__(2);
+
+	var _underscore2 = _interopRequireDefault(_underscore);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 	var name = exports.name = 'angular-meteor.utilities';
 	var utils = exports.utils = '$$utils';
 
@@ -1541,21 +1637,21 @@
 
 	  // Checks if an object is a view model
 	  this.isViewModel = function (obj) {
-	    return _.isObject(obj) && obj.$$dependencies;
+	    return _underscore2.default.isObject(obj) && obj.$$dependencies;
 	  };
 
 	  // Checks if two objects are siblings
 	  this.areSiblings = function (obj1, obj2) {
-	    return _.isObject(obj1) && _.isObject(obj2) && Object.getPrototypeOf(obj1) === Object.getPrototypeOf(obj2);
+	    return _underscore2.default.isObject(obj1) && _underscore2.default.isObject(obj2) && Object.getPrototypeOf(obj1) === Object.getPrototypeOf(obj2);
 	  };
 
 	  // Binds function into a scpecified context. If an object is provided, will bind every
 	  // value in the object which is a function. If a tap function is provided, it will be
 	  // called right after the function has been invoked.
 	  this.bind = function (fn, context, tap) {
-	    tap = _.isFunction(tap) ? tap : angular.noop;
-	    if (_.isFunction(fn)) return bindFn(fn, context, tap);
-	    if (_.isObject(fn)) return bindObj(fn, context, tap);
+	    tap = _underscore2.default.isFunction(tap) ? tap : angular.noop;
+	    if (_underscore2.default.isFunction(fn)) return bindFn(fn, context, tap);
+	    if (_underscore2.default.isObject(fn)) return bindObj(fn, context, tap);
 	    return fn;
 	  };
 
@@ -1575,7 +1671,7 @@
 	  }
 
 	  function bindObj(obj, context, tap) {
-	    return _.keys(obj).reduce(function (bound, k) {
+	    return _underscore2.default.keys(obj).reduce(function (bound, k) {
 	      bound[k] = self.bind(obj[k], context, tap);
 	      return bound;
 	    }, {});
@@ -1583,14 +1679,21 @@
 	}]);
 
 /***/ },
-/* 15 */
-/***/ function(module, exports) {
+/* 17 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
+	exports.Mixer = exports.name = undefined;
+
+	var _underscore = __webpack_require__(2);
+
+	var _underscore2 = _interopRequireDefault(_underscore);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -1613,7 +1716,7 @@
 	  var _this = this;
 
 	  // Used to store method's caller
-	  var caller = void 0;
+	  var caller = undefined;
 
 	  this._mixins = [];
 	  // Apply mixins automatically on specified contexts
@@ -1622,11 +1725,11 @@
 
 	  // Adds a new mixin
 	  this.mixin = function (mixin) {
-	    if (!_.isObject(mixin)) {
+	    if (!_underscore2.default.isObject(mixin)) {
 	      throw Error('argument 1 must be an object');
 	    }
 
-	    _this._mixins = _.union(_this._mixins, [mixin]);
+	    _this._mixins = _underscore2.default.union(_this._mixins, [mixin]);
 	    // Apply mixins to stored contexts
 	    _this._autoExtend.forEach(function (context) {
 	      return _this._extend(context);
@@ -1639,7 +1742,7 @@
 
 	  // Removes a mixin. Useful mainly for test purposes
 	  this._mixout = function (mixin) {
-	    _this._mixins = _.without(_this._mixins, mixin);
+	    _this._mixins = _underscore2.default.without(_this._mixins, mixin);
 	    return _this;
 	  };
 
@@ -1649,7 +1752,7 @@
 	      args[_key - 1] = arguments[_key];
 	    }
 
-	    _this._mixins.filter(_.isFunction).forEach(function (mixin) {
+	    _this._mixins.filter(_underscore2.default.isFunction).forEach(function (mixin) {
 	      mixin.call.apply(mixin, [context].concat(args));
 	    });
 
@@ -1658,9 +1761,7 @@
 
 	  // Extend prototype with the defined mixins
 	  this._extend = function (obj, options) {
-	    var _ref;
-
-	    var _$defaults = _.defaults({}, options, {
+	    var _$defaults = _underscore2.default.defaults({}, options, {
 	      pattern: /.*/ });
 
 	    var pattern = _$defaults.pattern;
@@ -1670,10 +1771,10 @@
 
 	    var mixins = _this._mixins.map(function (mixin) {
 	      // Filtering the keys by the specified pattern
-	      var keys = _.keys(mixin).filter(function (k) {
+	      var keys = _underscore2.default.keys(mixin).filter(function (k) {
 	        return k.match(pattern);
 	      }).filter(function (k) {
-	        return _.isFunction(mixin[k]);
+	        return _underscore2.default.isFunction(mixin[k]);
 	      });
 
 	      return keys.reduce(function (boundMixin, methodName) {
@@ -1703,7 +1804,7 @@
 	      }, {});
 	    });
 
-	    return (_ref = _).extend.apply(_ref, [obj].concat(_toConsumableArray(mixins)));
+	    return _underscore2.default.extend.apply(_underscore2.default, [obj].concat(_toConsumableArray(mixins)));
 	  };
 
 	  // Caller property can not be set
@@ -1718,7 +1819,7 @@
 	});
 
 /***/ },
-/* 16 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1728,7 +1829,7 @@
 	});
 	exports.name = undefined;
 
-	var _mixer = __webpack_require__(15);
+	var _mixer = __webpack_require__(17);
 
 	var name = exports.name = 'angular-meteor.scope';
 
@@ -1750,7 +1851,7 @@
 	}]);
 
 /***/ },
-/* 17 */
+/* 19 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1760,9 +1861,15 @@
 	});
 	exports.Core = exports.name = undefined;
 
-	var _utils = __webpack_require__(14);
+	var _underscore = __webpack_require__(2);
 
-	var _mixer = __webpack_require__(15);
+	var _underscore2 = _interopRequireDefault(_underscore);
+
+	var _utils = __webpack_require__(16);
+
+	var _mixer = __webpack_require__(17);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
@@ -1783,10 +1890,10 @@
 
 	    fn = this.$bindToContext($Mixer.caller, fn);
 
-	    if (!_.isFunction(fn)) {
+	    if (!_underscore2.default.isFunction(fn)) {
 	      throw Error('argument 1 must be a function');
 	    }
-	    if (!_.isObject(options)) {
+	    if (!_underscore2.default.isObject(options)) {
 	      throw Error('argument 2 must be an object');
 	    }
 
@@ -1801,13 +1908,13 @@
 	    fn = this.$bindToContext($Mixer.caller, fn || angular.noop);
 	    cb = cb ? this.$bindToContext($Mixer.caller, cb) : angular.noop;
 
-	    if (!_.isString(subName)) {
+	    if (!_underscore2.default.isString(subName)) {
 	      throw Error('argument 1 must be a string');
 	    }
-	    if (!_.isFunction(fn)) {
+	    if (!_underscore2.default.isFunction(fn)) {
 	      throw Error('argument 2 must be a function');
 	    }
-	    if (!_.isFunction(cb) && !_.isObject(cb)) {
+	    if (!_underscore2.default.isFunction(cb) && !_underscore2.default.isObject(cb)) {
 	      throw Error('argument 3 must be a function or an object');
 	    }
 
@@ -1819,7 +1926,7 @@
 	      var args = fn();
 	      if (angular.isUndefined(args)) args = [];
 
-	      if (!_.isArray(args)) {
+	      if (!_underscore2.default.isArray(args)) {
 	        throw Error('reactive function\'s return value must be an array');
 	      }
 
@@ -1843,7 +1950,7 @@
 	    }
 
 	    var fn = args.pop();
-	    if (_.isFunction(fn)) fn = this.$bindToContext($Mixer.caller, fn);
+	    if (_underscore2.default.isFunction(fn)) fn = this.$bindToContext($Mixer.caller, fn);
 	    return (_Meteor2 = Meteor).call.apply(_Meteor2, args.concat([fn]));
 	  };
 
@@ -1856,7 +1963,7 @@
 	    }
 
 	    var fn = args.pop();
-	    if (_.isFunction(fn)) fn = this.$bindToContext($Mixer.caller, fn);
+	    if (_underscore2.default.isFunction(fn)) fn = this.$bindToContext($Mixer.caller, fn);
 	    return (_Meteor3 = Meteor).apply.apply(_Meteor3, args.concat([fn]));
 	  };
 
@@ -1888,7 +1995,7 @@
 	}]);
 
 /***/ },
-/* 18 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -1900,11 +2007,17 @@
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _utils = __webpack_require__(14);
+	var _underscore = __webpack_require__(2);
 
-	var _mixer = __webpack_require__(15);
+	var _underscore2 = _interopRequireDefault(_underscore);
 
-	var _core = __webpack_require__(17);
+	var _utils = __webpack_require__(16);
+
+	var _mixer = __webpack_require__(17);
+
+	var _core = __webpack_require__(19);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -1926,7 +2039,7 @@
 
 	  // Gets an object, wraps it with scope functions and returns it
 	  $$ViewModel.viewModel = function (vm) {
-	    if (!_.isObject(vm)) {
+	    if (!_underscore2.default.isObject(vm)) {
 	      throw Error('argument 1 must be an object');
 	    }
 
@@ -1954,11 +2067,11 @@
 
 	      _classCallCheck(this, Reactive);
 
-	      if (!_.isObject(vm)) {
+	      if (!_underscore2.default.isObject(vm)) {
 	        throw Error('argument 1 must be an object');
 	      }
 
-	      _.defer(function () {
+	      _underscore2.default.defer(function () {
 	        if (!_this._attached) {
 	          console.warn('view model was not attached to any scope');
 	        }
@@ -1995,7 +2108,7 @@
 	}]);
 
 /***/ },
-/* 19 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -2005,13 +2118,23 @@
 	});
 	exports.Reactive = exports.name = undefined;
 
-	var _utils = __webpack_require__(14);
+	var _jsondiffpatch = __webpack_require__(22);
 
-	var _mixer = __webpack_require__(15);
+	var _jsondiffpatch2 = _interopRequireDefault(_jsondiffpatch);
 
-	var _core = __webpack_require__(17);
+	var _underscore = __webpack_require__(2);
 
-	var _viewModel = __webpack_require__(18);
+	var _underscore2 = _interopRequireDefault(_underscore);
+
+	var _utils = __webpack_require__(16);
+
+	var _mixer = __webpack_require__(17);
+
+	var _core = __webpack_require__(19);
+
+	var _viewModel = __webpack_require__(20);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var name = exports.name = 'angular-meteor.reactive';
 	var Reactive = exports.Reactive = '$$Reactive';
@@ -2036,25 +2159,25 @@
 	    var _this = this;
 
 	    if ($$utils.isViewModel(vm)) {
-	      if (!_.isObject(props)) {
+	      if (!_underscore2.default.isObject(props)) {
 	        throw Error('argument 2 must be an object');
 	      }
 	    } else {
 	      props = vm;
 	      vm = $Mixer.caller;
 
-	      if (!_.isObject(props)) {
+	      if (!_underscore2.default.isObject(props)) {
 	        throw Error('argument 1 must be an object');
 	      }
 	    }
 
-	    _.each(props, function (v, k) {
-	      if (!_.isFunction(v)) {
+	    _underscore2.default.each(props, function (v, k) {
+	      if (!_underscore2.default.isFunction(v)) {
 	        throw Error('helper \'' + k + '\' must be a function');
 	      }
 	    });
 
-	    _.each(props, function (v, k) {
+	    _underscore2.default.each(props, function (v, k) {
 	      if (!vm.$$dependencies[k]) {
 	        // Registers a new dependency to the specified helper
 	        vm.$$dependencies[k] = new Tracker.Dependency();
@@ -2069,10 +2192,10 @@
 	    if ($$utils.isViewModel(vm)) {
 	      if (angular.isUndefined(isDeep)) isDeep = false;
 
-	      if (!_.isString(k)) {
+	      if (!_underscore2.default.isString(k)) {
 	        throw Error('argument 2 must be a string');
 	      }
-	      if (!_.isBoolean(isDeep)) {
+	      if (!_underscore2.default.isBoolean(isDeep)) {
 	        throw Error('argument 3 must be a boolean');
 	      }
 	    } else {
@@ -2080,10 +2203,10 @@
 	      k = vm;
 	      vm = $Mixer.caller;
 
-	      if (!_.isString(k)) {
+	      if (!_underscore2.default.isString(k)) {
 	        throw Error('argument 1 must be a string');
 	      }
-	      if (!_.isBoolean(isDeep)) {
+	      if (!_underscore2.default.isBoolean(isDeep)) {
 	        throw Error('argument 2 must be a boolean');
 	      }
 	    }
@@ -2094,14 +2217,14 @@
 	  // Gets a collection reactively
 	  $$Reactive.getCollectionReactively = function (vm, k) {
 	    if ($$utils.isViewModel(vm)) {
-	      if (!_.isString(k)) {
+	      if (!_underscore2.default.isString(k)) {
 	        throw Error('argument 2 must be a string');
 	      }
 	    } else {
 	      k = vm;
 	      vm = $Mixer.caller;
 
-	      if (!_.isString(k)) {
+	      if (!_underscore2.default.isString(k)) {
 	        throw Error('argument 1 must be a string');
 	      }
 	    }
@@ -2130,7 +2253,7 @@
 	    var _this2 = this;
 
 	    // Gets a deep property from the caller
-	    var getVal = _.partial($parse(k), vm);
+	    var getVal = _underscore2.default.partial($parse(k), vm);
 	    var initialVal = getVal();
 
 	    // Watches for changes in the view model
@@ -2163,7 +2286,7 @@
 	      Tracker.nonreactive(function () {
 	        // If a cursor, observe its changes and update acoordingly
 	        if ($$utils.isCursor(model)) {
-	          var modelData = void 0;
+	          var modelData = undefined;
 
 	          if (angular.isUndefined(vm[k])) {
 	            _this3.$$setValHelper(vm, k, [], false);
@@ -2180,8 +2303,12 @@
 	          activeObservation = handle.observation;
 	          modelData = handle.data;
 
-	          var diff = jsondiffpatch.diff(lastModelData, modelData);
-	          vm[k] = jsondiffpatch.patch(lastModelData, diff);
+	          if (lastModelData.length !== 0) {
+	            var diff = _jsondiffpatch2.default.diff(lastModelData, modelData);
+	            vm[k] = _jsondiffpatch2.default.patch(lastModelData, diff);
+	          } else {
+	            vm[k] = modelData;
+	          }
 
 	          lastModel = model;
 	          lastModelData = modelData;
@@ -2207,7 +2334,7 @@
 
 	    // If set, reactives property
 	    if (watch) {
-	      var isDeep = _.isObject(v);
+	      var isDeep = _underscore2.default.isObject(v);
 	      this.getReactively(vm, k, isDeep);
 	    }
 
@@ -2241,8 +2368,8 @@
 	        _this5.$$changed(vm, k);
 	      },
 	      changedAt: function changedAt(doc, oldDoc, atIndex) {
-	        var diff = jsondiffpatch.diff(vm[k][atIndex], doc);
-	        jsondiffpatch.patch(vm[k][atIndex], diff);
+	        var diff = _jsondiffpatch2.default.diff(vm[k][atIndex], doc);
+	        _jsondiffpatch2.default.patch(vm[k][atIndex], diff);
 	        _this5.$$changed(vm, k);
 	      },
 	      movedTo: function movedTo(doc, fromIndex, toIndex) {
@@ -2275,8 +2402,8 @@
 	    }
 	    // Update property if the new value is from the same type
 	    else if ($$utils.areSiblings(v, data)) {
-	        var diff = jsondiffpatch.diff(v, data);
-	        jsondiffpatch.patch(v, diff);
+	        var diff = _jsondiffpatch2.default.diff(v, data);
+	        _jsondiffpatch2.default.patch(v, diff);
 	        this.$$changed(vm, k);
 	      } else {
 	        vm[k] = data;
@@ -2298,7 +2425,13 @@
 	}]);
 
 /***/ },
-/* 20 */
+/* 22 */
+/***/ function(module, exports) {
+
+	module.exports = __WEBPACK_EXTERNAL_MODULE_22__;
+
+/***/ },
+/* 23 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -2315,4 +2448,6 @@
 	}
 
 /***/ }
-/******/ ]);
+/******/ ])
+});
+;

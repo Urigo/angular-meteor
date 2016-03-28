@@ -9363,2236 +9363,2466 @@ var Promise = Package.promise.Promise;
 
 (function(){
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-//                                                                                                                 //
-// packages/angular-meteor-data/.npm/package/node_modules/angular-meteor/dist/angular-meteor.js                    //
-//                                                                                                                 //
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                                                                                                                   //
-/*! angular-meteor v1.3.7 */                                                                                       // 1
-/******/ (function(modules) { // webpackBootstrap                                                                  // 2
-/******/ 	// The module cache                                                                                      // 3
-/******/ 	var installedModules = {};                                                                               // 4
-                                                                                                                   // 5
-/******/ 	// The require function                                                                                  // 6
-/******/ 	function __webpack_require__(moduleId) {                                                                 // 7
-                                                                                                                   // 8
-/******/ 		// Check if module is in cache                                                                          // 9
-/******/ 		if(installedModules[moduleId])                                                                          // 10
-/******/ 			return installedModules[moduleId].exports;                                                             // 11
-                                                                                                                   // 12
-/******/ 		// Create a new module (and put it into the cache)                                                      // 13
-/******/ 		var module = installedModules[moduleId] = {                                                             // 14
-/******/ 			exports: {},                                                                                           // 15
-/******/ 			id: moduleId,                                                                                          // 16
-/******/ 			loaded: false                                                                                          // 17
-/******/ 		};                                                                                                      // 18
-                                                                                                                   // 19
-/******/ 		// Execute the module function                                                                          // 20
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);                    // 21
-                                                                                                                   // 22
-/******/ 		// Flag the module as loaded                                                                            // 23
-/******/ 		module.loaded = true;                                                                                   // 24
-                                                                                                                   // 25
-/******/ 		// Return the exports of the module                                                                     // 26
-/******/ 		return module.exports;                                                                                  // 27
-/******/ 	}                                                                                                        // 28
-                                                                                                                   // 29
-                                                                                                                   // 30
-/******/ 	// expose the modules object (__webpack_modules__)                                                       // 31
-/******/ 	__webpack_require__.m = modules;                                                                         // 32
-                                                                                                                   // 33
-/******/ 	// expose the module cache                                                                               // 34
-/******/ 	__webpack_require__.c = installedModules;                                                                // 35
-                                                                                                                   // 36
-/******/ 	// __webpack_public_path__                                                                               // 37
-/******/ 	__webpack_require__.p = "";                                                                              // 38
-                                                                                                                   // 39
-/******/ 	// Load entry module and return exports                                                                  // 40
-/******/ 	return __webpack_require__(0);                                                                           // 41
-/******/ })                                                                                                        // 42
-/************************************************************************/                                         // 43
-/******/ ([                                                                                                        // 44
-/* 0 */                                                                                                            // 45
-/***/ function(module, exports, __webpack_require__) {                                                             // 46
-                                                                                                                   // 47
-	'use strict';                                                                                                     // 48
-                                                                                                                   // 49
-	Object.defineProperty(exports, "__esModule", {                                                                    // 50
-	  value: true                                                                                                     // 51
-	});                                                                                                               // 52
-	exports.name = undefined;                                                                                         // 53
-                                                                                                                   // 54
-	__webpack_require__(1);                                                                                           // 55
-                                                                                                                   // 56
-	__webpack_require__(2);                                                                                           // 57
-                                                                                                                   // 58
-	__webpack_require__(3);                                                                                           // 59
-                                                                                                                   // 60
-	__webpack_require__(4);                                                                                           // 61
-                                                                                                                   // 62
-	__webpack_require__(5);                                                                                           // 63
-                                                                                                                   // 64
-	__webpack_require__(6);                                                                                           // 65
-                                                                                                                   // 66
-	__webpack_require__(7);                                                                                           // 67
-                                                                                                                   // 68
-	__webpack_require__(8);                                                                                           // 69
-                                                                                                                   // 70
-	__webpack_require__(9);                                                                                           // 71
-                                                                                                                   // 72
-	__webpack_require__(10);                                                                                          // 73
-                                                                                                                   // 74
-	__webpack_require__(11);                                                                                          // 75
-                                                                                                                   // 76
-	__webpack_require__(12);                                                                                          // 77
-                                                                                                                   // 78
-	__webpack_require__(13);                                                                                          // 79
-                                                                                                                   // 80
-	var _utils = __webpack_require__(14);                                                                             // 81
-                                                                                                                   // 82
-	var _mixer = __webpack_require__(15);                                                                             // 83
-                                                                                                                   // 84
-	var _scope = __webpack_require__(16);                                                                             // 85
-                                                                                                                   // 86
-	var _core = __webpack_require__(17);                                                                              // 87
-                                                                                                                   // 88
-	var _viewModel = __webpack_require__(18);                                                                         // 89
-                                                                                                                   // 90
-	var _reactive = __webpack_require__(19);                                                                          // 91
-                                                                                                                   // 92
-	var _templates = __webpack_require__(20);                                                                         // 93
-                                                                                                                   // 94
-	// legacy                                                                                                         // 95
-	// lib                                                                                                            // 96
-	var name = exports.name = 'angular-meteor';                                                                       // 97
-                                                                                                                   // 98
-	// new                                                                                                            // 99
-                                                                                                                   // 100
-                                                                                                                   // 101
-	angular.module(name, [                                                                                            // 102
-	// new                                                                                                            // 103
-	_utils.name, _mixer.name, _scope.name, _core.name, _viewModel.name, _reactive.name, _templates.name,              // 104
-                                                                                                                   // 105
-	// legacy                                                                                                         // 106
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//                                                                                                                    //
+// packages/angular-meteor-data/.npm/package/node_modules/angular-meteor/dist/angular-meteor.js                       //
+//                                                                                                                    //
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                      //
+/*! angular-meteor v1.3.9 */                                                                                          // 1
+(function webpackUniversalModuleDefinition(root, factory) {                                                           // 2
+	if(typeof exports === 'object' && typeof module === 'object')                                                        // 3
+		module.exports = factory(require("underscore"), require("jsondiffpatch"));                                          // 4
+	else if(typeof define === 'function' && define.amd)                                                                  // 5
+		define(["underscore", "jsondiffpatch"], factory);                                                                   // 6
+	else if(typeof exports === 'object')                                                                                 // 7
+		exports["angularMeteor"] = factory(require("underscore"), require("jsondiffpatch"));                                // 8
+	else                                                                                                                 // 9
+		root["angularMeteor"] = factory(root["_"], root["jsondiffpatch"]);                                                  // 10
+})(this, function(__WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_22__) {                                    // 11
+return /******/ (function(modules) { // webpackBootstrap                                                              // 12
+/******/ 	// The module cache                                                                                         // 13
+/******/ 	var installedModules = {};                                                                                  // 14
+                                                                                                                      // 15
+/******/ 	// The require function                                                                                     // 16
+/******/ 	function __webpack_require__(moduleId) {                                                                    // 17
+                                                                                                                      // 18
+/******/ 		// Check if module is in cache                                                                             // 19
+/******/ 		if(installedModules[moduleId])                                                                             // 20
+/******/ 			return installedModules[moduleId].exports;                                                                // 21
+                                                                                                                      // 22
+/******/ 		// Create a new module (and put it into the cache)                                                         // 23
+/******/ 		var module = installedModules[moduleId] = {                                                                // 24
+/******/ 			exports: {},                                                                                              // 25
+/******/ 			id: moduleId,                                                                                             // 26
+/******/ 			loaded: false                                                                                             // 27
+/******/ 		};                                                                                                         // 28
+                                                                                                                      // 29
+/******/ 		// Execute the module function                                                                             // 30
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);                       // 31
+                                                                                                                      // 32
+/******/ 		// Flag the module as loaded                                                                               // 33
+/******/ 		module.loaded = true;                                                                                      // 34
+                                                                                                                      // 35
+/******/ 		// Return the exports of the module                                                                        // 36
+/******/ 		return module.exports;                                                                                     // 37
+/******/ 	}                                                                                                           // 38
+                                                                                                                      // 39
+                                                                                                                      // 40
+/******/ 	// expose the modules object (__webpack_modules__)                                                          // 41
+/******/ 	__webpack_require__.m = modules;                                                                            // 42
+                                                                                                                      // 43
+/******/ 	// expose the module cache                                                                                  // 44
+/******/ 	__webpack_require__.c = installedModules;                                                                   // 45
+                                                                                                                      // 46
+/******/ 	// __webpack_public_path__                                                                                  // 47
+/******/ 	__webpack_require__.p = "";                                                                                 // 48
+                                                                                                                      // 49
+/******/ 	// Load entry module and return exports                                                                     // 50
+/******/ 	return __webpack_require__(0);                                                                              // 51
+/******/ })                                                                                                           // 52
+/************************************************************************/                                            // 53
+/******/ ([                                                                                                           // 54
+/* 0 */                                                                                                               // 55
+/***/ function(module, exports, __webpack_require__) {                                                                // 56
+                                                                                                                      // 57
+	'use strict';                                                                                                        // 58
+                                                                                                                      // 59
+	Object.defineProperty(exports, "__esModule", {                                                                       // 60
+	  value: true                                                                                                        // 61
+	});                                                                                                                  // 62
+                                                                                                                      // 63
+	__webpack_require__(1);                                                                                              // 64
+                                                                                                                      // 65
+	__webpack_require__(4);                                                                                              // 66
+                                                                                                                      // 67
+	__webpack_require__(5);                                                                                              // 68
+                                                                                                                      // 69
+	__webpack_require__(6);                                                                                              // 70
+                                                                                                                      // 71
+	__webpack_require__(7);                                                                                              // 72
+                                                                                                                      // 73
+	__webpack_require__(8);                                                                                              // 74
+                                                                                                                      // 75
+	__webpack_require__(9);                                                                                              // 76
+                                                                                                                      // 77
+	__webpack_require__(10);                                                                                             // 78
+                                                                                                                      // 79
+	__webpack_require__(11);                                                                                             // 80
+                                                                                                                      // 81
+	__webpack_require__(12);                                                                                             // 82
+                                                                                                                      // 83
+	__webpack_require__(13);                                                                                             // 84
+                                                                                                                      // 85
+	__webpack_require__(14);                                                                                             // 86
+                                                                                                                      // 87
+	__webpack_require__(15);                                                                                             // 88
+                                                                                                                      // 89
+	var _utils = __webpack_require__(16);                                                                                // 90
+                                                                                                                      // 91
+	var _mixer = __webpack_require__(17);                                                                                // 92
+                                                                                                                      // 93
+	var _scope = __webpack_require__(18);                                                                                // 94
+                                                                                                                      // 95
+	var _core = __webpack_require__(19);                                                                                 // 96
+                                                                                                                      // 97
+	var _viewModel = __webpack_require__(20);                                                                            // 98
+                                                                                                                      // 99
+	var _reactive = __webpack_require__(21);                                                                             // 100
+                                                                                                                      // 101
+	var _templates = __webpack_require__(23);                                                                            // 102
+                                                                                                                      // 103
+	// legacy                                                                                                            // 104
+	// lib                                                                                                               // 105
+                                                                                                                      // 106
+                                                                                                                      // 107
+	var name = 'angular-meteor';                                                                                         // 108
+                                                                                                                      // 109
+	// new                                                                                                               // 110
+                                                                                                                      // 111
+	exports.default = name;                                                                                              // 112
+                                                                                                                      // 113
+                                                                                                                      // 114
+	angular.module(name, [                                                                                               // 115
+	// new                                                                                                               // 116
+	_utils.name, _mixer.name, _scope.name, _core.name, _viewModel.name, _reactive.name, _templates.name,                 // 117
+                                                                                                                      // 118
+	// legacy                                                                                                            // 119
 	'angular-meteor.ironrouter', 'angular-meteor.utils', 'angular-meteor.subscribe', 'angular-meteor.collection', 'angular-meteor.object', 'angular-meteor.user', 'angular-meteor.methods', 'angular-meteor.session', 'angular-meteor.camera']).run([_mixer.Mixer, _core.Core, _viewModel.ViewModel, _reactive.Reactive, function ($Mixer, $$Core, $$ViewModel, $$Reactive) {
-	  // Load all mixins                                                                                              // 108
-	  $Mixer.mixin($$Core).mixin($$ViewModel).mixin($$Reactive);                                                      // 109
-	}])                                                                                                               // 110
-                                                                                                                   // 111
-	// legacy                                                                                                         // 112
-	// Putting all services under $meteor service for syntactic sugar                                                 // 113
+	  // Load all mixins                                                                                                 // 121
+	  $Mixer.mixin($$Core).mixin($$ViewModel).mixin($$Reactive);                                                         // 122
+	}])                                                                                                                  // 123
+                                                                                                                      // 124
+	// legacy                                                                                                            // 125
+	// Putting all services under $meteor service for syntactic sugar                                                    // 126
 	.service('$meteor', ['$meteorCollection', '$meteorCollectionFS', '$meteorObject', '$meteorMethods', '$meteorSession', '$meteorSubscribe', '$meteorUtils', '$meteorCamera', '$meteorUser', function ($meteorCollection, $meteorCollectionFS, $meteorObject, $meteorMethods, $meteorSession, $meteorSubscribe, $meteorUtils, $meteorCamera, $meteorUser) {
-	  var _this = this;                                                                                               // 115
-                                                                                                                   // 116
-	  this.collection = $meteorCollection;                                                                            // 117
-	  this.collectionFS = $meteorCollectionFS;                                                                        // 118
-	  this.object = $meteorObject;                                                                                    // 119
-	  this.subscribe = $meteorSubscribe.subscribe;                                                                    // 120
-	  this.call = $meteorMethods.call;                                                                                // 121
-	  this.session = $meteorSession;                                                                                  // 122
-	  this.autorun = $meteorUtils.autorun;                                                                            // 123
-	  this.getCollectionByName = $meteorUtils.getCollectionByName;                                                    // 124
-	  this.getPicture = $meteorCamera.getPicture;                                                                     // 125
-                                                                                                                   // 126
-	  // $meteorUser                                                                                                  // 127
+	  var _this = this;                                                                                                  // 128
+                                                                                                                      // 129
+	  this.collection = $meteorCollection;                                                                               // 130
+	  this.collectionFS = $meteorCollectionFS;                                                                           // 131
+	  this.object = $meteorObject;                                                                                       // 132
+	  this.subscribe = $meteorSubscribe.subscribe;                                                                       // 133
+	  this.call = $meteorMethods.call;                                                                                   // 134
+	  this.session = $meteorSession;                                                                                     // 135
+	  this.autorun = $meteorUtils.autorun;                                                                               // 136
+	  this.getCollectionByName = $meteorUtils.getCollectionByName;                                                       // 137
+	  this.getPicture = $meteorCamera.getPicture;                                                                        // 138
+                                                                                                                      // 139
+	  // $meteorUser                                                                                                     // 140
 	  ['loginWithPassword', 'requireUser', 'requireValidUser', 'waitForUser', 'createUser', 'changePassword', 'forgotPassword', 'resetPassword', 'verifyEmail', 'loginWithMeteorDeveloperAccount', 'loginWithFacebook', 'loginWithGithub', 'loginWithGoogle', 'loginWithMeetup', 'loginWithTwitter', 'loginWithWeibo', 'logout', 'logoutOtherClients'].forEach(function (method) {
-	    _this[method] = $meteorUser[method];                                                                          // 129
-	  });                                                                                                             // 130
-	}]);                                                                                                              // 131
-                                                                                                                   // 132
-/***/ },                                                                                                           // 133
-/* 1 */                                                                                                            // 134
-/***/ function(module, exports) {                                                                                  // 135
-                                                                                                                   // 136
-	/*global                                                                                                          // 137
-	 angular, _                                                                                                       // 138
-	 */                                                                                                               // 139
-                                                                                                                   // 140
-	'use strict';                                                                                                     // 141
-                                                                                                                   // 142
-	// https://github.com/DAB0mB/get-updates                                                                          // 143
-                                                                                                                   // 144
-	(function () {                                                                                                    // 145
-	  var module = angular.module('getUpdates', []);                                                                  // 146
-                                                                                                                   // 147
-	  var utils = function () {                                                                                       // 148
-	    var rip = function rip(obj, level) {                                                                          // 149
-	      if (level < 1) return {};                                                                                   // 150
-                                                                                                                   // 151
-	      return _.reduce(obj, function (clone, v, k) {                                                               // 152
-	        v = _.isObject(v) ? rip(v, --level) : v;                                                                  // 153
-	        clone[k] = v;                                                                                             // 154
-	        return clone;                                                                                             // 155
-	      }, {});                                                                                                     // 156
-	    };                                                                                                            // 157
-                                                                                                                   // 158
-	    var toPaths = function toPaths(obj) {                                                                         // 159
-	      var keys = getKeyPaths(obj);                                                                                // 160
-	      var values = getDeepValues(obj);                                                                            // 161
-	      return _.object(keys, values);                                                                              // 162
-	    };                                                                                                            // 163
-                                                                                                                   // 164
-	    var getKeyPaths = function getKeyPaths(obj) {                                                                 // 165
-	      var keys = _.keys(obj).map(function (k) {                                                                   // 166
-	        var v = obj[k];                                                                                           // 167
-	        if (!_.isObject(v) || _.isEmpty(v) || _.isArray(v)) return k;                                             // 168
-                                                                                                                   // 169
-	        return getKeyPaths(v).map(function (subKey) {                                                             // 170
-	          return k + '.' + subKey;                                                                                // 171
-	        });                                                                                                       // 172
-	      });                                                                                                         // 173
-                                                                                                                   // 174
-	      return _.flatten(keys);                                                                                     // 175
-	    };                                                                                                            // 176
-                                                                                                                   // 177
-	    var getDeepValues = function getDeepValues(obj, arr) {                                                        // 178
-	      arr = arr || [];                                                                                            // 179
-                                                                                                                   // 180
-	      _.values(obj).forEach(function (v) {                                                                        // 181
-	        if (!_.isObject(v) || _.isEmpty(v) || _.isArray(v)) arr.push(v);else getDeepValues(v, arr);               // 182
-	      });                                                                                                         // 183
-                                                                                                                   // 184
-	      return arr;                                                                                                 // 185
-	    };                                                                                                            // 186
-                                                                                                                   // 187
-	    var flatten = function flatten(arr) {                                                                         // 188
-	      return arr.reduce(function (flattened, v, i) {                                                              // 189
-	        if (_.isArray(v) && !_.isEmpty(v)) flattened.push.apply(flattened, flatten(v));else flattened.push(v);    // 190
-                                                                                                                   // 191
-	        return flattened;                                                                                         // 192
-	      }, []);                                                                                                     // 193
-	    };                                                                                                            // 194
-                                                                                                                   // 195
-	    var setFilled = function setFilled(obj, k, v) {                                                               // 196
-	      if (!_.isEmpty(v)) obj[k] = v;                                                                              // 197
-	    };                                                                                                            // 198
-                                                                                                                   // 199
-	    var assert = function assert(result, msg) {                                                                   // 200
-	      if (!result) throwErr(msg);                                                                                 // 201
-	    };                                                                                                            // 202
-                                                                                                                   // 203
-	    var throwErr = function throwErr(msg) {                                                                       // 204
-	      throw Error('get-updates error - ' + msg);                                                                  // 205
-	    };                                                                                                            // 206
-                                                                                                                   // 207
-	    return {                                                                                                      // 208
-	      rip: rip,                                                                                                   // 209
-	      toPaths: toPaths,                                                                                           // 210
-	      getKeyPaths: getKeyPaths,                                                                                   // 211
-	      getDeepValues: getDeepValues,                                                                               // 212
-	      setFilled: setFilled,                                                                                       // 213
-	      assert: assert,                                                                                             // 214
-	      throwErr: throwErr                                                                                          // 215
-	    };                                                                                                            // 216
-	  }();                                                                                                            // 217
-                                                                                                                   // 218
-	  var getDifference = function () {                                                                               // 219
-	    var getDifference = function getDifference(src, dst, isShallow) {                                             // 220
-	      var level;                                                                                                  // 221
-                                                                                                                   // 222
-	      if (isShallow > 1) level = isShallow;else if (isShallow) level = 1;                                         // 223
-                                                                                                                   // 224
-	      if (level) {                                                                                                // 225
-	        src = utils.rip(src, level);                                                                              // 226
-	        dst = utils.rip(dst, level);                                                                              // 227
-	      }                                                                                                           // 228
-                                                                                                                   // 229
-	      return compare(src, dst);                                                                                   // 230
-	    };                                                                                                            // 231
-                                                                                                                   // 232
-	    var compare = function compare(src, dst) {                                                                    // 233
-	      var srcKeys = _.keys(src);                                                                                  // 234
-	      var dstKeys = _.keys(dst);                                                                                  // 235
-                                                                                                                   // 236
-	      var keys = _.chain([]).concat(srcKeys).concat(dstKeys).uniq().without('$$hashKey').value();                 // 237
-                                                                                                                   // 238
-	      return keys.reduce(function (diff, k) {                                                                     // 239
-	        var srcValue = src[k];                                                                                    // 240
-	        var dstValue = dst[k];                                                                                    // 241
-                                                                                                                   // 242
-	        if (_.isDate(srcValue) && _.isDate(dstValue)) {                                                           // 243
-	          if (srcValue.getTime() != dstValue.getTime()) diff[k] = dstValue;                                       // 244
-	        }                                                                                                         // 245
-                                                                                                                   // 246
-	        if (_.isObject(srcValue) && _.isObject(dstValue)) {                                                       // 247
-	          var valueDiff = getDifference(srcValue, dstValue);                                                      // 248
-	          utils.setFilled(diff, k, valueDiff);                                                                    // 249
-	        } else if (srcValue !== dstValue) {                                                                       // 250
-	          diff[k] = dstValue;                                                                                     // 251
-	        }                                                                                                         // 252
-                                                                                                                   // 253
-	        return diff;                                                                                              // 254
-	      }, {});                                                                                                     // 255
-	    };                                                                                                            // 256
-                                                                                                                   // 257
-	    return getDifference;                                                                                         // 258
-	  }();                                                                                                            // 259
-                                                                                                                   // 260
-	  var getUpdates = function () {                                                                                  // 261
-	    var getUpdates = function getUpdates(src, dst, isShallow) {                                                   // 262
-	      utils.assert(_.isObject(src), 'first argument must be an object');                                          // 263
-	      utils.assert(_.isObject(dst), 'second argument must be an object');                                         // 264
-                                                                                                                   // 265
-	      var diff = getDifference(src, dst, isShallow);                                                              // 266
-	      var paths = utils.toPaths(diff);                                                                            // 267
-                                                                                                                   // 268
-	      var set = createSet(paths);                                                                                 // 269
-	      var unset = createUnset(paths);                                                                             // 270
-	      var pull = createPull(unset);                                                                               // 271
-                                                                                                                   // 272
-	      var updates = {};                                                                                           // 273
-	      utils.setFilled(updates, '$set', set);                                                                      // 274
-	      utils.setFilled(updates, '$unset', unset);                                                                  // 275
-	      utils.setFilled(updates, '$pull', pull);                                                                    // 276
-                                                                                                                   // 277
-	      return updates;                                                                                             // 278
-	    };                                                                                                            // 279
-                                                                                                                   // 280
-	    var createSet = function createSet(paths) {                                                                   // 281
-	      var undefinedKeys = getUndefinedKeys(paths);                                                                // 282
-	      return _.omit(paths, undefinedKeys);                                                                        // 283
-	    };                                                                                                            // 284
-                                                                                                                   // 285
-	    var createUnset = function createUnset(paths) {                                                               // 286
-	      var undefinedKeys = getUndefinedKeys(paths);                                                                // 287
-	      var unset = _.pick(paths, undefinedKeys);                                                                   // 288
-                                                                                                                   // 289
-	      return _.reduce(unset, function (result, v, k) {                                                            // 290
-	        result[k] = true;                                                                                         // 291
-	        return result;                                                                                            // 292
-	      }, {});                                                                                                     // 293
-	    };                                                                                                            // 294
-                                                                                                                   // 295
-	    var createPull = function createPull(unset) {                                                                 // 296
-	      var arrKeyPaths = _.keys(unset).map(function (k) {                                                          // 297
-	        var split = k.match(/(.*)\.\d+$/);                                                                        // 298
-	        return split && split[1];                                                                                 // 299
-	      });                                                                                                         // 300
-                                                                                                                   // 301
-	      return _.compact(arrKeyPaths).reduce(function (pull, k) {                                                   // 302
-	        pull[k] = null;                                                                                           // 303
-	        return pull;                                                                                              // 304
-	      }, {});                                                                                                     // 305
-	    };                                                                                                            // 306
-                                                                                                                   // 307
-	    var getUndefinedKeys = function getUndefinedKeys(obj) {                                                       // 308
-	      return _.keys(obj).filter(function (k) {                                                                    // 309
-	        var v = obj[k];                                                                                           // 310
-	        return _.isUndefined(v);                                                                                  // 311
-	      });                                                                                                         // 312
-	    };                                                                                                            // 313
-                                                                                                                   // 314
-	    return getUpdates;                                                                                            // 315
-	  }();                                                                                                            // 316
-                                                                                                                   // 317
-	  module.value('getUpdates', getUpdates);                                                                         // 318
-	})();                                                                                                             // 319
-                                                                                                                   // 320
-/***/ },                                                                                                           // 321
-/* 2 */                                                                                                            // 322
-/***/ function(module, exports) {                                                                                  // 323
-                                                                                                                   // 324
-	/*global                                                                                                          // 325
-	 angular, _, Package                                                                                              // 326
-	 */                                                                                                               // 327
-                                                                                                                   // 328
-	'use strict';                                                                                                     // 329
-                                                                                                                   // 330
-	var _module = angular.module('diffArray', ['getUpdates']);                                                        // 331
-                                                                                                                   // 332
-	_module.factory('diffArray', ['getUpdates', function (getUpdates) {                                               // 333
-	  var LocalCollection = Package.minimongo.LocalCollection;                                                        // 334
-	  var idStringify = LocalCollection._idStringify || Package['mongo-id'].MongoID.idStringify;                      // 335
-	  var idParse = LocalCollection._idParse || Package['mongo-id'].MongoID.idParse;                                  // 336
-                                                                                                                   // 337
-	  // Calculates the differences between `lastSeqArray` and                                                        // 338
-	  // `seqArray` and calls appropriate functions from `callbacks`.                                                 // 339
-	  // Reuses Minimongo's diff algorithm implementation.                                                            // 340
-	  // XXX Should be replaced with the original diffArray function here:                                            // 341
-	  // https://github.com/meteor/meteor/blob/devel/packages/observe-sequence/observe_sequence.js#L152               // 342
-	  // When it will become nested as well, tracking here: https://github.com/meteor/meteor/issues/3764              // 343
-	  function diffArray(lastSeqArray, seqArray, callbacks, preventNestedDiff) {                                      // 344
-	    preventNestedDiff = !!preventNestedDiff;                                                                      // 345
-                                                                                                                   // 346
+	    _this[method] = $meteorUser[method];                                                                             // 142
+	  });                                                                                                                // 143
+	}]);                                                                                                                 // 144
+	module.exports = exports['default'];                                                                                 // 145
+                                                                                                                      // 146
+/***/ },                                                                                                              // 147
+/* 1 */                                                                                                               // 148
+/***/ function(module, exports, __webpack_require__) {                                                                // 149
+                                                                                                                      // 150
+	'use strict';                                                                                                        // 151
+                                                                                                                      // 152
+	var _underscore = __webpack_require__(2);                                                                            // 153
+                                                                                                                      // 154
+	var _underscore2 = _interopRequireDefault(_underscore);                                                              // 155
+                                                                                                                      // 156
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }                      // 157
+                                                                                                                      // 158
+	'use strict';                                                                                                        // 159
+                                                                                                                      // 160
+	// https://github.com/DAB0mB/get-updates                                                                             // 161
+	/*global                                                                                                             // 162
+	 angular, _                                                                                                          // 163
+	 */                                                                                                                  // 164
+                                                                                                                      // 165
+	(function () {                                                                                                       // 166
+	  var module = angular.module('getUpdates', []);                                                                     // 167
+                                                                                                                      // 168
+	  var utils = function () {                                                                                          // 169
+	    var rip = function rip(obj, level) {                                                                             // 170
+	      if (level < 1) return {};                                                                                      // 171
+                                                                                                                      // 172
+	      return _underscore2.default.reduce(obj, function (clone, v, k) {                                               // 173
+	        v = _underscore2.default.isObject(v) ? rip(v, --level) : v;                                                  // 174
+	        clone[k] = v;                                                                                                // 175
+	        return clone;                                                                                                // 176
+	      }, {});                                                                                                        // 177
+	    };                                                                                                               // 178
+                                                                                                                      // 179
+	    var toPaths = function toPaths(obj) {                                                                            // 180
+	      var keys = getKeyPaths(obj);                                                                                   // 181
+	      var values = getDeepValues(obj);                                                                               // 182
+	      return _underscore2.default.object(keys, values);                                                              // 183
+	    };                                                                                                               // 184
+                                                                                                                      // 185
+	    var getKeyPaths = function getKeyPaths(obj) {                                                                    // 186
+	      var keys = _underscore2.default.keys(obj).map(function (k) {                                                   // 187
+	        var v = obj[k];                                                                                              // 188
+	        if (!_underscore2.default.isObject(v) || _underscore2.default.isEmpty(v) || _underscore2.default.isArray(v)) return k;
+                                                                                                                      // 190
+	        return getKeyPaths(v).map(function (subKey) {                                                                // 191
+	          return k + '.' + subKey;                                                                                   // 192
+	        });                                                                                                          // 193
+	      });                                                                                                            // 194
+                                                                                                                      // 195
+	      return _underscore2.default.flatten(keys);                                                                     // 196
+	    };                                                                                                               // 197
+                                                                                                                      // 198
+	    var getDeepValues = function getDeepValues(obj, arr) {                                                           // 199
+	      arr = arr || [];                                                                                               // 200
+                                                                                                                      // 201
+	      _underscore2.default.values(obj).forEach(function (v) {                                                        // 202
+	        if (!_underscore2.default.isObject(v) || _underscore2.default.isEmpty(v) || _underscore2.default.isArray(v)) arr.push(v);else getDeepValues(v, arr);
+	      });                                                                                                            // 204
+                                                                                                                      // 205
+	      return arr;                                                                                                    // 206
+	    };                                                                                                               // 207
+                                                                                                                      // 208
+	    var flatten = function flatten(arr) {                                                                            // 209
+	      return arr.reduce(function (flattened, v, i) {                                                                 // 210
+	        if (_underscore2.default.isArray(v) && !_underscore2.default.isEmpty(v)) flattened.push.apply(flattened, flatten(v));else flattened.push(v);
+                                                                                                                      // 212
+	        return flattened;                                                                                            // 213
+	      }, []);                                                                                                        // 214
+	    };                                                                                                               // 215
+                                                                                                                      // 216
+	    var setFilled = function setFilled(obj, k, v) {                                                                  // 217
+	      if (!_underscore2.default.isEmpty(v)) obj[k] = v;                                                              // 218
+	    };                                                                                                               // 219
+                                                                                                                      // 220
+	    var assert = function assert(result, msg) {                                                                      // 221
+	      if (!result) throwErr(msg);                                                                                    // 222
+	    };                                                                                                               // 223
+                                                                                                                      // 224
+	    var throwErr = function throwErr(msg) {                                                                          // 225
+	      throw Error('get-updates error - ' + msg);                                                                     // 226
+	    };                                                                                                               // 227
+                                                                                                                      // 228
+	    return {                                                                                                         // 229
+	      rip: rip,                                                                                                      // 230
+	      toPaths: toPaths,                                                                                              // 231
+	      getKeyPaths: getKeyPaths,                                                                                      // 232
+	      getDeepValues: getDeepValues,                                                                                  // 233
+	      setFilled: setFilled,                                                                                          // 234
+	      assert: assert,                                                                                                // 235
+	      throwErr: throwErr                                                                                             // 236
+	    };                                                                                                               // 237
+	  }();                                                                                                               // 238
+                                                                                                                      // 239
+	  var getDifference = function () {                                                                                  // 240
+	    var getDifference = function getDifference(src, dst, isShallow) {                                                // 241
+	      var level;                                                                                                     // 242
+                                                                                                                      // 243
+	      if (isShallow > 1) level = isShallow;else if (isShallow) level = 1;                                            // 244
+                                                                                                                      // 245
+	      if (level) {                                                                                                   // 246
+	        src = utils.rip(src, level);                                                                                 // 247
+	        dst = utils.rip(dst, level);                                                                                 // 248
+	      }                                                                                                              // 249
+                                                                                                                      // 250
+	      return compare(src, dst);                                                                                      // 251
+	    };                                                                                                               // 252
+                                                                                                                      // 253
+	    var compare = function compare(src, dst) {                                                                       // 254
+	      var srcKeys = _underscore2.default.keys(src);                                                                  // 255
+	      var dstKeys = _underscore2.default.keys(dst);                                                                  // 256
+                                                                                                                      // 257
+	      var keys = _underscore2.default.chain([]).concat(srcKeys).concat(dstKeys).uniq().without('$$hashKey').value();
+                                                                                                                      // 259
+	      return keys.reduce(function (diff, k) {                                                                        // 260
+	        var srcValue = src[k];                                                                                       // 261
+	        var dstValue = dst[k];                                                                                       // 262
+                                                                                                                      // 263
+	        if (_underscore2.default.isDate(srcValue) && _underscore2.default.isDate(dstValue)) {                        // 264
+	          if (srcValue.getTime() != dstValue.getTime()) diff[k] = dstValue;                                          // 265
+	        }                                                                                                            // 266
+                                                                                                                      // 267
+	        if (_underscore2.default.isObject(srcValue) && _underscore2.default.isObject(dstValue)) {                    // 268
+	          var valueDiff = getDifference(srcValue, dstValue);                                                         // 269
+	          utils.setFilled(diff, k, valueDiff);                                                                       // 270
+	        } else if (srcValue !== dstValue) {                                                                          // 271
+	          diff[k] = dstValue;                                                                                        // 272
+	        }                                                                                                            // 273
+                                                                                                                      // 274
+	        return diff;                                                                                                 // 275
+	      }, {});                                                                                                        // 276
+	    };                                                                                                               // 277
+                                                                                                                      // 278
+	    return getDifference;                                                                                            // 279
+	  }();                                                                                                               // 280
+                                                                                                                      // 281
+	  var getUpdates = function () {                                                                                     // 282
+	    var getUpdates = function getUpdates(src, dst, isShallow) {                                                      // 283
+	      utils.assert(_underscore2.default.isObject(src), 'first argument must be an object');                          // 284
+	      utils.assert(_underscore2.default.isObject(dst), 'second argument must be an object');                         // 285
+                                                                                                                      // 286
+	      var diff = getDifference(src, dst, isShallow);                                                                 // 287
+	      var paths = utils.toPaths(diff);                                                                               // 288
+                                                                                                                      // 289
+	      var set = createSet(paths);                                                                                    // 290
+	      var unset = createUnset(paths);                                                                                // 291
+	      var pull = createPull(unset);                                                                                  // 292
+                                                                                                                      // 293
+	      var updates = {};                                                                                              // 294
+	      utils.setFilled(updates, '$set', set);                                                                         // 295
+	      utils.setFilled(updates, '$unset', unset);                                                                     // 296
+	      utils.setFilled(updates, '$pull', pull);                                                                       // 297
+                                                                                                                      // 298
+	      return updates;                                                                                                // 299
+	    };                                                                                                               // 300
+                                                                                                                      // 301
+	    var createSet = function createSet(paths) {                                                                      // 302
+	      var undefinedKeys = getUndefinedKeys(paths);                                                                   // 303
+	      return _underscore2.default.omit(paths, undefinedKeys);                                                        // 304
+	    };                                                                                                               // 305
+                                                                                                                      // 306
+	    var createUnset = function createUnset(paths) {                                                                  // 307
+	      var undefinedKeys = getUndefinedKeys(paths);                                                                   // 308
+	      var unset = _underscore2.default.pick(paths, undefinedKeys);                                                   // 309
+                                                                                                                      // 310
+	      return _underscore2.default.reduce(unset, function (result, v, k) {                                            // 311
+	        result[k] = true;                                                                                            // 312
+	        return result;                                                                                               // 313
+	      }, {});                                                                                                        // 314
+	    };                                                                                                               // 315
+                                                                                                                      // 316
+	    var createPull = function createPull(unset) {                                                                    // 317
+	      var arrKeyPaths = _underscore2.default.keys(unset).map(function (k) {                                          // 318
+	        var split = k.match(/(.*)\.\d+$/);                                                                           // 319
+	        return split && split[1];                                                                                    // 320
+	      });                                                                                                            // 321
+                                                                                                                      // 322
+	      return _underscore2.default.compact(arrKeyPaths).reduce(function (pull, k) {                                   // 323
+	        pull[k] = null;                                                                                              // 324
+	        return pull;                                                                                                 // 325
+	      }, {});                                                                                                        // 326
+	    };                                                                                                               // 327
+                                                                                                                      // 328
+	    var getUndefinedKeys = function getUndefinedKeys(obj) {                                                          // 329
+	      return _underscore2.default.keys(obj).filter(function (k) {                                                    // 330
+	        var v = obj[k];                                                                                              // 331
+	        return _underscore2.default.isUndefined(v);                                                                  // 332
+	      });                                                                                                            // 333
+	    };                                                                                                               // 334
+                                                                                                                      // 335
+	    return getUpdates;                                                                                               // 336
+	  }();                                                                                                               // 337
+                                                                                                                      // 338
+	  module.value('getUpdates', getUpdates);                                                                            // 339
+	})();                                                                                                                // 340
+                                                                                                                      // 341
+/***/ },                                                                                                              // 342
+/* 2 */                                                                                                               // 343
+/***/ function(module, exports, __webpack_require__) {                                                                // 344
+                                                                                                                      // 345
+	'use strict';                                                                                                        // 346
+                                                                                                                      // 347
+	Object.defineProperty(exports, "__esModule", {                                                                       // 348
+	  value: true                                                                                                        // 349
+	});                                                                                                                  // 350
+                                                                                                                      // 351
+	var _underscore = __webpack_require__(3);                                                                            // 352
+                                                                                                                      // 353
+	var _underscore2 = _interopRequireDefault(_underscore);                                                              // 354
+                                                                                                                      // 355
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }                      // 356
+                                                                                                                      // 357
+	if (typeof _underscore2.default === 'undefined') {                                                                   // 358
+	  if (typeof Package.underscore === 'undefined') {                                                                   // 359
+	    throw new Error('underscore is missing');                                                                        // 360
+	  }                                                                                                                  // 361
+	}                                                                                                                    // 362
+                                                                                                                      // 363
+	exports.default = _underscore2.default || Package.underscore._;                                                      // 364
+	module.exports = exports['default'];                                                                                 // 365
+                                                                                                                      // 366
+/***/ },                                                                                                              // 367
+/* 3 */                                                                                                               // 368
+/***/ function(module, exports) {                                                                                     // 369
+                                                                                                                      // 370
+	module.exports = __WEBPACK_EXTERNAL_MODULE_3__;                                                                      // 371
+                                                                                                                      // 372
+/***/ },                                                                                                              // 373
+/* 4 */                                                                                                               // 374
+/***/ function(module, exports, __webpack_require__) {                                                                // 375
+                                                                                                                      // 376
+	'use strict';                                                                                                        // 377
+                                                                                                                      // 378
+	var _underscore = __webpack_require__(2);                                                                            // 379
+                                                                                                                      // 380
+	var _underscore2 = _interopRequireDefault(_underscore);                                                              // 381
+                                                                                                                      // 382
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }                      // 383
+                                                                                                                      // 384
+	'use strict'; /*global                                                                                               // 385
+	               angular, _, Package                                                                                   // 386
+	               */                                                                                                    // 387
+                                                                                                                      // 388
+	var _module = angular.module('diffArray', ['getUpdates']);                                                           // 389
+                                                                                                                      // 390
+	_module.factory('diffArray', ['getUpdates', function (getUpdates) {                                                  // 391
+	  var LocalCollection = Package.minimongo.LocalCollection;                                                           // 392
+	  var idStringify = LocalCollection._idStringify || Package['mongo-id'].MongoID.idStringify;                         // 393
+	  var idParse = LocalCollection._idParse || Package['mongo-id'].MongoID.idParse;                                     // 394
+                                                                                                                      // 395
+	  // Calculates the differences between `lastSeqArray` and                                                           // 396
+	  // `seqArray` and calls appropriate functions from `callbacks`.                                                    // 397
+	  // Reuses Minimongo's diff algorithm implementation.                                                               // 398
+	  // XXX Should be replaced with the original diffArray function here:                                               // 399
+	  // https://github.com/meteor/meteor/blob/devel/packages/observe-sequence/observe_sequence.js#L152                  // 400
+	  // When it will become nested as well, tracking here: https://github.com/meteor/meteor/issues/3764                 // 401
+	  function diffArray(lastSeqArray, seqArray, callbacks, preventNestedDiff) {                                         // 402
+	    preventNestedDiff = !!preventNestedDiff;                                                                         // 403
+                                                                                                                      // 404
 	    var diffFn = Package.minimongo.LocalCollection._diffQueryOrderedChanges || Package['diff-sequence'].DiffSequence.diffQueryOrderedChanges;
-                                                                                                                   // 348
-	    var oldObjIds = [];                                                                                           // 349
-	    var newObjIds = [];                                                                                           // 350
-	    var posOld = {}; // maps from idStringify'd ids                                                               // 351
-	    var posNew = {}; // ditto                                                                                     // 352
-	    var posCur = {};                                                                                              // 353
-	    var lengthCur = lastSeqArray.length;                                                                          // 354
-                                                                                                                   // 355
-	    _.each(seqArray, function (doc, i) {                                                                          // 356
-	      newObjIds.push({ _id: doc._id });                                                                           // 357
-	      posNew[idStringify(doc._id)] = i;                                                                           // 358
-	    });                                                                                                           // 359
-                                                                                                                   // 360
-	    _.each(lastSeqArray, function (doc, i) {                                                                      // 361
-	      oldObjIds.push({ _id: doc._id });                                                                           // 362
-	      posOld[idStringify(doc._id)] = i;                                                                           // 363
-	      posCur[idStringify(doc._id)] = i;                                                                           // 364
-	    });                                                                                                           // 365
-                                                                                                                   // 366
-	    // Arrays can contain arbitrary objects. We don't diff the                                                    // 367
-	    // objects. Instead we always fire 'changedAt' callback on every                                              // 368
-	    // object. The consumer of `observe-sequence` should deal with                                                // 369
-	    // it appropriately.                                                                                          // 370
-	    diffFn(oldObjIds, newObjIds, {                                                                                // 371
-	      addedBefore: function addedBefore(id, doc, before) {                                                        // 372
-	        var position = before ? posCur[idStringify(before)] : lengthCur;                                          // 373
-                                                                                                                   // 374
-	        _.each(posCur, function (pos, id) {                                                                       // 375
-	          if (pos >= position) posCur[id]++;                                                                      // 376
-	        });                                                                                                       // 377
-                                                                                                                   // 378
-	        lengthCur++;                                                                                              // 379
-	        posCur[idStringify(id)] = position;                                                                       // 380
-                                                                                                                   // 381
-	        callbacks.addedAt(id, seqArray[posNew[idStringify(id)]], position, before);                               // 382
-	      },                                                                                                          // 383
-                                                                                                                   // 384
-	      movedBefore: function movedBefore(id, before) {                                                             // 385
-	        var prevPosition = posCur[idStringify(id)];                                                               // 386
-	        var position = before ? posCur[idStringify(before)] : lengthCur - 1;                                      // 387
-                                                                                                                   // 388
-	        _.each(posCur, function (pos, id) {                                                                       // 389
+                                                                                                                      // 406
+	    var oldObjIds = [];                                                                                              // 407
+	    var newObjIds = [];                                                                                              // 408
+	    var posOld = {}; // maps from idStringify'd ids                                                                  // 409
+	    var posNew = {}; // ditto                                                                                        // 410
+	    var posCur = {};                                                                                                 // 411
+	    var lengthCur = lastSeqArray.length;                                                                             // 412
+                                                                                                                      // 413
+	    _underscore2.default.each(seqArray, function (doc, i) {                                                          // 414
+	      newObjIds.push({ _id: doc._id });                                                                              // 415
+	      posNew[idStringify(doc._id)] = i;                                                                              // 416
+	    });                                                                                                              // 417
+                                                                                                                      // 418
+	    _underscore2.default.each(lastSeqArray, function (doc, i) {                                                      // 419
+	      oldObjIds.push({ _id: doc._id });                                                                              // 420
+	      posOld[idStringify(doc._id)] = i;                                                                              // 421
+	      posCur[idStringify(doc._id)] = i;                                                                              // 422
+	    });                                                                                                              // 423
+                                                                                                                      // 424
+	    // Arrays can contain arbitrary objects. We don't diff the                                                       // 425
+	    // objects. Instead we always fire 'changedAt' callback on every                                                 // 426
+	    // object. The consumer of `observe-sequence` should deal with                                                   // 427
+	    // it appropriately.                                                                                             // 428
+	    diffFn(oldObjIds, newObjIds, {                                                                                   // 429
+	      addedBefore: function addedBefore(id, doc, before) {                                                           // 430
+	        var position = before ? posCur[idStringify(before)] : lengthCur;                                             // 431
+                                                                                                                      // 432
+	        _underscore2.default.each(posCur, function (pos, id) {                                                       // 433
+	          if (pos >= position) posCur[id]++;                                                                         // 434
+	        });                                                                                                          // 435
+                                                                                                                      // 436
+	        lengthCur++;                                                                                                 // 437
+	        posCur[idStringify(id)] = position;                                                                          // 438
+                                                                                                                      // 439
+	        callbacks.addedAt(id, seqArray[posNew[idStringify(id)]], position, before);                                  // 440
+	      },                                                                                                             // 441
+                                                                                                                      // 442
+	      movedBefore: function movedBefore(id, before) {                                                                // 443
+	        var prevPosition = posCur[idStringify(id)];                                                                  // 444
+	        var position = before ? posCur[idStringify(before)] : lengthCur - 1;                                         // 445
+                                                                                                                      // 446
+	        _underscore2.default.each(posCur, function (pos, id) {                                                       // 447
 	          if (pos >= prevPosition && pos <= position) posCur[id]--;else if (pos <= prevPosition && pos >= position) posCur[id]++;
-	        });                                                                                                       // 391
-                                                                                                                   // 392
-	        posCur[idStringify(id)] = position;                                                                       // 393
-                                                                                                                   // 394
-	        callbacks.movedTo(id, seqArray[posNew[idStringify(id)]], prevPosition, position, before);                 // 395
-	      },                                                                                                          // 396
-	      removed: function removed(id) {                                                                             // 397
-	        var prevPosition = posCur[idStringify(id)];                                                               // 398
-                                                                                                                   // 399
-	        _.each(posCur, function (pos, id) {                                                                       // 400
-	          if (pos >= prevPosition) posCur[id]--;                                                                  // 401
-	        });                                                                                                       // 402
-                                                                                                                   // 403
-	        delete posCur[idStringify(id)];                                                                           // 404
-	        lengthCur--;                                                                                              // 405
-                                                                                                                   // 406
-	        callbacks.removedAt(id, lastSeqArray[posOld[idStringify(id)]], prevPosition);                             // 407
-	      }                                                                                                           // 408
-	    });                                                                                                           // 409
-                                                                                                                   // 410
-	    _.each(posNew, function (pos, idString) {                                                                     // 411
-	      if (!_.has(posOld, idString)) return;                                                                       // 412
-                                                                                                                   // 413
-	      var id = idParse(idString);                                                                                 // 414
-	      var newItem = seqArray[pos] || {};                                                                          // 415
-	      var oldItem = lastSeqArray[posOld[idString]];                                                               // 416
-	      var updates = getUpdates(oldItem, newItem, preventNestedDiff);                                              // 417
-                                                                                                                   // 418
-	      if (!_.isEmpty(updates)) callbacks.changedAt(id, updates, pos, oldItem);                                    // 419
-	    });                                                                                                           // 420
-	  }                                                                                                               // 421
-                                                                                                                   // 422
-	  diffArray.shallow = function (lastSeqArray, seqArray, callbacks) {                                              // 423
-	    return diffArray(lastSeqArray, seqArray, callbacks, true);                                                    // 424
-	  };                                                                                                              // 425
-                                                                                                                   // 426
-	  diffArray.deepCopyChanges = function (oldItem, newItem) {                                                       // 427
-	    var setDiff = getUpdates(oldItem, newItem).$set;                                                              // 428
-                                                                                                                   // 429
-	    _.each(setDiff, function (v, deepKey) {                                                                       // 430
-	      setDeep(oldItem, deepKey, v);                                                                               // 431
-	    });                                                                                                           // 432
-	  };                                                                                                              // 433
-                                                                                                                   // 434
-	  diffArray.deepCopyRemovals = function (oldItem, newItem) {                                                      // 435
-	    var unsetDiff = getUpdates(oldItem, newItem).$unset;                                                          // 436
-                                                                                                                   // 437
-	    _.each(unsetDiff, function (v, deepKey) {                                                                     // 438
-	      unsetDeep(oldItem, deepKey);                                                                                // 439
-	    });                                                                                                           // 440
-	  };                                                                                                              // 441
-                                                                                                                   // 442
-	  // Finds changes between two collections                                                                        // 443
-	  diffArray.getChanges = function (newCollection, oldCollection, diffMethod) {                                    // 444
-	    var changes = { added: [], removed: [], changed: [] };                                                        // 445
-                                                                                                                   // 446
-	    diffMethod(oldCollection, newCollection, {                                                                    // 447
-	      addedAt: function addedAt(id, item, index) {                                                                // 448
-	        changes.added.push({ item: item, index: index });                                                         // 449
-	      },                                                                                                          // 450
-                                                                                                                   // 451
-	      removedAt: function removedAt(id, item, index) {                                                            // 452
-	        changes.removed.push({ item: item, index: index });                                                       // 453
-	      },                                                                                                          // 454
-                                                                                                                   // 455
-	      changedAt: function changedAt(id, updates, index, oldItem) {                                                // 456
-	        changes.changed.push({ selector: id, modifier: updates });                                                // 457
-	      },                                                                                                          // 458
-                                                                                                                   // 459
-	      movedTo: function movedTo(id, item, fromIndex, toIndex) {                                                   // 460
-	        // XXX do we need this?                                                                                   // 461
-	      }                                                                                                           // 462
-	    });                                                                                                           // 463
-                                                                                                                   // 464
-	    return changes;                                                                                               // 465
-	  };                                                                                                              // 466
-                                                                                                                   // 467
-	  var setDeep = function setDeep(obj, deepKey, v) {                                                               // 468
-	    var split = deepKey.split('.');                                                                               // 469
-	    var initialKeys = _.initial(split);                                                                           // 470
-	    var lastKey = _.last(split);                                                                                  // 471
-                                                                                                                   // 472
-	    initialKeys.reduce(function (subObj, k, i) {                                                                  // 473
-	      var nextKey = split[i + 1];                                                                                 // 474
-                                                                                                                   // 475
-	      if (isNumStr(nextKey)) {                                                                                    // 476
-	        if (subObj[k] === null) subObj[k] = [];                                                                   // 477
-	        if (subObj[k].length == parseInt(nextKey)) subObj[k].push(null);                                          // 478
-	      } else if (subObj[k] === null || !isHash(subObj[k])) {                                                      // 479
-	        subObj[k] = {};                                                                                           // 480
-	      }                                                                                                           // 481
-                                                                                                                   // 482
-	      return subObj[k];                                                                                           // 483
-	    }, obj);                                                                                                      // 484
-                                                                                                                   // 485
-	    var deepObj = getDeep(obj, initialKeys);                                                                      // 486
-	    deepObj[lastKey] = v;                                                                                         // 487
-	    return v;                                                                                                     // 488
-	  };                                                                                                              // 489
-                                                                                                                   // 490
-	  var unsetDeep = function unsetDeep(obj, deepKey) {                                                              // 491
-	    var split = deepKey.split('.');                                                                               // 492
-	    var initialKeys = _.initial(split);                                                                           // 493
-	    var lastKey = _.last(split);                                                                                  // 494
-	    var deepObj = getDeep(obj, initialKeys);                                                                      // 495
-                                                                                                                   // 496
-	    if (_.isArray(deepObj) && isNumStr(lastKey)) return !!deepObj.splice(lastKey, 1);else return delete deepObj[lastKey];
-	  };                                                                                                              // 498
-                                                                                                                   // 499
-	  var getDeep = function getDeep(obj, keys) {                                                                     // 500
-	    return keys.reduce(function (subObj, k) {                                                                     // 501
-	      return subObj[k];                                                                                           // 502
-	    }, obj);                                                                                                      // 503
-	  };                                                                                                              // 504
-                                                                                                                   // 505
-	  var isHash = function isHash(obj) {                                                                             // 506
-	    return _.isObject(obj) && Object.getPrototypeOf(obj) === Object.prototype;                                    // 507
-	  };                                                                                                              // 508
-                                                                                                                   // 509
-	  var isNumStr = function isNumStr(str) {                                                                         // 510
-	    return str.match(/^\d+$/);                                                                                    // 511
-	  };                                                                                                              // 512
-                                                                                                                   // 513
-	  return diffArray;                                                                                               // 514
-	}]);                                                                                                              // 515
-                                                                                                                   // 516
-/***/ },                                                                                                           // 517
-/* 3 */                                                                                                            // 518
-/***/ function(module, exports) {                                                                                  // 519
-                                                                                                                   // 520
-	'use strict';                                                                                                     // 521
-                                                                                                                   // 522
-	angular.module('angular-meteor.settings', []).constant('$angularMeteorSettings', {                                // 523
-	  suppressWarnings: false                                                                                         // 524
-	});                                                                                                               // 525
-                                                                                                                   // 526
-/***/ },                                                                                                           // 527
-/* 4 */                                                                                                            // 528
-/***/ function(module, exports) {                                                                                  // 529
-                                                                                                                   // 530
-	'use strict';                                                                                                     // 531
-                                                                                                                   // 532
+	        });                                                                                                          // 449
+                                                                                                                      // 450
+	        posCur[idStringify(id)] = position;                                                                          // 451
+                                                                                                                      // 452
+	        callbacks.movedTo(id, seqArray[posNew[idStringify(id)]], prevPosition, position, before);                    // 453
+	      },                                                                                                             // 454
+	      removed: function removed(id) {                                                                                // 455
+	        var prevPosition = posCur[idStringify(id)];                                                                  // 456
+                                                                                                                      // 457
+	        _underscore2.default.each(posCur, function (pos, id) {                                                       // 458
+	          if (pos >= prevPosition) posCur[id]--;                                                                     // 459
+	        });                                                                                                          // 460
+                                                                                                                      // 461
+	        delete posCur[idStringify(id)];                                                                              // 462
+	        lengthCur--;                                                                                                 // 463
+                                                                                                                      // 464
+	        callbacks.removedAt(id, lastSeqArray[posOld[idStringify(id)]], prevPosition);                                // 465
+	      }                                                                                                              // 466
+	    });                                                                                                              // 467
+                                                                                                                      // 468
+	    _underscore2.default.each(posNew, function (pos, idString) {                                                     // 469
+	      if (!_underscore2.default.has(posOld, idString)) return;                                                       // 470
+                                                                                                                      // 471
+	      var id = idParse(idString);                                                                                    // 472
+	      var newItem = seqArray[pos] || {};                                                                             // 473
+	      var oldItem = lastSeqArray[posOld[idString]];                                                                  // 474
+	      var updates = getUpdates(oldItem, newItem, preventNestedDiff);                                                 // 475
+                                                                                                                      // 476
+	      if (!_underscore2.default.isEmpty(updates)) callbacks.changedAt(id, updates, pos, oldItem);                    // 477
+	    });                                                                                                              // 478
+	  }                                                                                                                  // 479
+                                                                                                                      // 480
+	  diffArray.shallow = function (lastSeqArray, seqArray, callbacks) {                                                 // 481
+	    return diffArray(lastSeqArray, seqArray, callbacks, true);                                                       // 482
+	  };                                                                                                                 // 483
+                                                                                                                      // 484
+	  diffArray.deepCopyChanges = function (oldItem, newItem) {                                                          // 485
+	    var setDiff = getUpdates(oldItem, newItem).$set;                                                                 // 486
+                                                                                                                      // 487
+	    _underscore2.default.each(setDiff, function (v, deepKey) {                                                       // 488
+	      setDeep(oldItem, deepKey, v);                                                                                  // 489
+	    });                                                                                                              // 490
+	  };                                                                                                                 // 491
+                                                                                                                      // 492
+	  diffArray.deepCopyRemovals = function (oldItem, newItem) {                                                         // 493
+	    var unsetDiff = getUpdates(oldItem, newItem).$unset;                                                             // 494
+                                                                                                                      // 495
+	    _underscore2.default.each(unsetDiff, function (v, deepKey) {                                                     // 496
+	      unsetDeep(oldItem, deepKey);                                                                                   // 497
+	    });                                                                                                              // 498
+	  };                                                                                                                 // 499
+                                                                                                                      // 500
+	  // Finds changes between two collections                                                                           // 501
+	  diffArray.getChanges = function (newCollection, oldCollection, diffMethod) {                                       // 502
+	    var changes = { added: [], removed: [], changed: [] };                                                           // 503
+                                                                                                                      // 504
+	    diffMethod(oldCollection, newCollection, {                                                                       // 505
+	      addedAt: function addedAt(id, item, index) {                                                                   // 506
+	        changes.added.push({ item: item, index: index });                                                            // 507
+	      },                                                                                                             // 508
+                                                                                                                      // 509
+	      removedAt: function removedAt(id, item, index) {                                                               // 510
+	        changes.removed.push({ item: item, index: index });                                                          // 511
+	      },                                                                                                             // 512
+                                                                                                                      // 513
+	      changedAt: function changedAt(id, updates, index, oldItem) {                                                   // 514
+	        changes.changed.push({ selector: id, modifier: updates });                                                   // 515
+	      },                                                                                                             // 516
+                                                                                                                      // 517
+	      movedTo: function movedTo(id, item, fromIndex, toIndex) {                                                      // 518
+	        // XXX do we need this?                                                                                      // 519
+	      }                                                                                                              // 520
+	    });                                                                                                              // 521
+                                                                                                                      // 522
+	    return changes;                                                                                                  // 523
+	  };                                                                                                                 // 524
+                                                                                                                      // 525
+	  var setDeep = function setDeep(obj, deepKey, v) {                                                                  // 526
+	    var split = deepKey.split('.');                                                                                  // 527
+	    var initialKeys = _underscore2.default.initial(split);                                                           // 528
+	    var lastKey = _underscore2.default.last(split);                                                                  // 529
+                                                                                                                      // 530
+	    initialKeys.reduce(function (subObj, k, i) {                                                                     // 531
+	      var nextKey = split[i + 1];                                                                                    // 532
+                                                                                                                      // 533
+	      if (isNumStr(nextKey)) {                                                                                       // 534
+	        if (subObj[k] === null) subObj[k] = [];                                                                      // 535
+	        if (subObj[k].length == parseInt(nextKey)) subObj[k].push(null);                                             // 536
+	      } else if (subObj[k] === null || !isHash(subObj[k])) {                                                         // 537
+	        subObj[k] = {};                                                                                              // 538
+	      }                                                                                                              // 539
+                                                                                                                      // 540
+	      return subObj[k];                                                                                              // 541
+	    }, obj);                                                                                                         // 542
+                                                                                                                      // 543
+	    var deepObj = getDeep(obj, initialKeys);                                                                         // 544
+	    deepObj[lastKey] = v;                                                                                            // 545
+	    return v;                                                                                                        // 546
+	  };                                                                                                                 // 547
+                                                                                                                      // 548
+	  var unsetDeep = function unsetDeep(obj, deepKey) {                                                                 // 549
+	    var split = deepKey.split('.');                                                                                  // 550
+	    var initialKeys = _underscore2.default.initial(split);                                                           // 551
+	    var lastKey = _underscore2.default.last(split);                                                                  // 552
+	    var deepObj = getDeep(obj, initialKeys);                                                                         // 553
+                                                                                                                      // 554
+	    if (_underscore2.default.isArray(deepObj) && isNumStr(lastKey)) return !!deepObj.splice(lastKey, 1);else return delete deepObj[lastKey];
+	  };                                                                                                                 // 556
+                                                                                                                      // 557
+	  var getDeep = function getDeep(obj, keys) {                                                                        // 558
+	    return keys.reduce(function (subObj, k) {                                                                        // 559
+	      return subObj[k];                                                                                              // 560
+	    }, obj);                                                                                                         // 561
+	  };                                                                                                                 // 562
+                                                                                                                      // 563
+	  var isHash = function isHash(obj) {                                                                                // 564
+	    return _underscore2.default.isObject(obj) && Object.getPrototypeOf(obj) === Object.prototype;                    // 565
+	  };                                                                                                                 // 566
+                                                                                                                      // 567
+	  var isNumStr = function isNumStr(str) {                                                                            // 568
+	    return str.match(/^\d+$/);                                                                                       // 569
+	  };                                                                                                                 // 570
+                                                                                                                      // 571
+	  return diffArray;                                                                                                  // 572
+	}]);                                                                                                                 // 573
+                                                                                                                      // 574
+/***/ },                                                                                                              // 575
+/* 5 */                                                                                                               // 576
+/***/ function(module, exports) {                                                                                     // 577
+                                                                                                                      // 578
+	'use strict';                                                                                                        // 579
+                                                                                                                      // 580
+	angular.module('angular-meteor.settings', []).constant('$angularMeteorSettings', {                                   // 581
+	  suppressWarnings: true                                                                                             // 582
+	});                                                                                                                  // 583
+                                                                                                                      // 584
+/***/ },                                                                                                              // 585
+/* 6 */                                                                                                               // 586
+/***/ function(module, exports) {                                                                                     // 587
+                                                                                                                      // 588
+	'use strict';                                                                                                        // 589
+                                                                                                                      // 590
 	angular.module('angular-meteor.ironrouter', []).run(['$compile', '$document', '$rootScope', function ($compile, $document, $rootScope) {
-	  var Router = (Package['iron:router'] || {}).Router;                                                             // 534
-	  if (!Router) return;                                                                                            // 535
-                                                                                                                   // 536
-	  var isLoaded = false;                                                                                           // 537
-                                                                                                                   // 538
-	  // Recompile after iron:router builds page                                                                      // 539
-	  Router.onAfterAction(function (req, res, next) {                                                                // 540
-	    Tracker.afterFlush(function () {                                                                              // 541
-	      if (isLoaded) return;                                                                                       // 542
-	      $compile($document)($rootScope);                                                                            // 543
-	      if (!$rootScope.$$phase) $rootScope.$apply();                                                               // 544
-	      isLoaded = true;                                                                                            // 545
-	    });                                                                                                           // 546
-	  });                                                                                                             // 547
-	}]);                                                                                                              // 548
-                                                                                                                   // 549
-/***/ },                                                                                                           // 550
-/* 5 */                                                                                                            // 551
-/***/ function(module, exports) {                                                                                  // 552
-                                                                                                                   // 553
-	/*global                                                                                                          // 554
-	 angular, _, Tracker, EJSON, FS, Mongo                                                                            // 555
-	 */                                                                                                               // 556
-                                                                                                                   // 557
-	'use strict';                                                                                                     // 558
-                                                                                                                   // 559
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
-                                                                                                                   // 561
-	var angularMeteorUtils = angular.module('angular-meteor.utils', ['angular-meteor.settings']);                     // 562
-                                                                                                                   // 563
+	  var Router = (Package['iron:router'] || {}).Router;                                                                // 592
+	  if (!Router) return;                                                                                               // 593
+                                                                                                                      // 594
+	  var isLoaded = false;                                                                                              // 595
+                                                                                                                      // 596
+	  // Recompile after iron:router builds page                                                                         // 597
+	  Router.onAfterAction(function (req, res, next) {                                                                   // 598
+	    Tracker.afterFlush(function () {                                                                                 // 599
+	      if (isLoaded) return;                                                                                          // 600
+	      $compile($document)($rootScope);                                                                               // 601
+	      if (!$rootScope.$$phase) $rootScope.$apply();                                                                  // 602
+	      isLoaded = true;                                                                                               // 603
+	    });                                                                                                              // 604
+	  });                                                                                                                // 605
+	}]);                                                                                                                 // 606
+                                                                                                                      // 607
+/***/ },                                                                                                              // 608
+/* 7 */                                                                                                               // 609
+/***/ function(module, exports, __webpack_require__) {                                                                // 610
+                                                                                                                      // 611
+	'use strict';                                                                                                        // 612
+                                                                                                                      // 613
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; }; /*global
+	                                                                                                                                                                                                                                                   angular, _, Tracker, EJSON, FS, Mongo
+	                                                                                                                                                                                                                                                   */
+                                                                                                                      // 617
+	var _underscore = __webpack_require__(2);                                                                            // 618
+                                                                                                                      // 619
+	var _underscore2 = _interopRequireDefault(_underscore);                                                              // 620
+                                                                                                                      // 621
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }                      // 622
+                                                                                                                      // 623
+	'use strict';                                                                                                        // 624
+                                                                                                                      // 625
+	var angularMeteorUtils = angular.module('angular-meteor.utils', ['angular-meteor.settings']);                        // 626
+                                                                                                                      // 627
 	angularMeteorUtils.service('$meteorUtils', ['$q', '$timeout', '$angularMeteorSettings', function ($q, $timeout, $angularMeteorSettings) {
-                                                                                                                   // 565
-	  var self = this;                                                                                                // 566
-                                                                                                                   // 567
-	  this.autorun = function (scope, fn) {                                                                           // 568
+                                                                                                                      // 629
+	  var self = this;                                                                                                   // 630
+                                                                                                                      // 631
+	  this.autorun = function (scope, fn) {                                                                              // 632
 	    if (!$angularMeteorSettings.suppressWarnings) console.warn('[angular-meteor.utils.autorun] Please note that this method is deprecated since 1.3.0 and will be removed in 1.4.0! For more info: http://www.angular-meteor.com/api/1.3.6/autorun. You can disable this warning by following this guide http://www.angular-meteor.com/api/1.3.6/settings');
-                                                                                                                   // 570
-	    // wrapping around Deps.autorun                                                                               // 571
-	    var comp = Tracker.autorun(function (c) {                                                                     // 572
-	      fn(c);                                                                                                      // 573
-	      // this is run immediately for the first call                                                               // 574
-	      // but after that, we need to $apply to start Angular digest                                                // 575
-	      if (!c.firstRun) $timeout(angular.noop, 0);                                                                 // 576
-	    });                                                                                                           // 577
-                                                                                                                   // 578
-	    // stop autorun when scope is destroyed                                                                       // 579
-	    scope.$on('$destroy', function () {                                                                           // 580
-	      comp.stop();                                                                                                // 581
-	    });                                                                                                           // 582
-                                                                                                                   // 583
-	    // return autorun object so that it can be stopped manually                                                   // 584
-	    return comp;                                                                                                  // 585
-	  };                                                                                                              // 586
-                                                                                                                   // 587
-	  // Borrowed from angularFire                                                                                    // 588
-	  // https://github.com/firebase/angularfire/blob/master/src/utils.js#L445-L454                                   // 589
-	  this.stripDollarPrefixedKeys = function (data) {                                                                // 590
-	    if (!_.isObject(data) || data instanceof Date || data instanceof File || EJSON.toJSONValue(data).$type === 'oid' || (typeof FS === 'undefined' ? 'undefined' : _typeof(FS)) === 'object' && data instanceof FS.File) return data;
-                                                                                                                   // 592
-	    var out = _.isArray(data) ? [] : {};                                                                          // 593
-                                                                                                                   // 594
-	    _.each(data, function (v, k) {                                                                                // 595
-	      if (typeof k !== 'string' || k.charAt(0) !== '$') out[k] = self.stripDollarPrefixedKeys(v);                 // 596
-	    });                                                                                                           // 597
-                                                                                                                   // 598
-	    return out;                                                                                                   // 599
-	  };                                                                                                              // 600
-                                                                                                                   // 601
-	  // Returns a callback which fulfills promise                                                                    // 602
-	  this.fulfill = function (deferred, boundError, boundResult) {                                                   // 603
-	    return function (err, result) {                                                                               // 604
+                                                                                                                      // 634
+	    // wrapping around Deps.autorun                                                                                  // 635
+	    var comp = Tracker.autorun(function (c) {                                                                        // 636
+	      fn(c);                                                                                                         // 637
+	      // this is run immediately for the first call                                                                  // 638
+	      // but after that, we need to $apply to start Angular digest                                                   // 639
+	      if (!c.firstRun) $timeout(angular.noop, 0);                                                                    // 640
+	    });                                                                                                              // 641
+                                                                                                                      // 642
+	    // stop autorun when scope is destroyed                                                                          // 643
+	    scope.$on('$destroy', function () {                                                                              // 644
+	      comp.stop();                                                                                                   // 645
+	    });                                                                                                              // 646
+                                                                                                                      // 647
+	    // return autorun object so that it can be stopped manually                                                      // 648
+	    return comp;                                                                                                     // 649
+	  };                                                                                                                 // 650
+                                                                                                                      // 651
+	  // Borrowed from angularFire                                                                                       // 652
+	  // https://github.com/firebase/angularfire/blob/master/src/utils.js#L445-L454                                      // 653
+	  this.stripDollarPrefixedKeys = function (data) {                                                                   // 654
+	    if (!_underscore2.default.isObject(data) || data instanceof Date || data instanceof File || EJSON.toJSONValue(data).$type === 'oid' || (typeof FS === 'undefined' ? 'undefined' : _typeof(FS)) === 'object' && data instanceof FS.File) return data;
+                                                                                                                      // 656
+	    var out = _underscore2.default.isArray(data) ? [] : {};                                                          // 657
+                                                                                                                      // 658
+	    _underscore2.default.each(data, function (v, k) {                                                                // 659
+	      if (typeof k !== 'string' || k.charAt(0) !== '$') out[k] = self.stripDollarPrefixedKeys(v);                    // 660
+	    });                                                                                                              // 661
+                                                                                                                      // 662
+	    return out;                                                                                                      // 663
+	  };                                                                                                                 // 664
+                                                                                                                      // 665
+	  // Returns a callback which fulfills promise                                                                       // 666
+	  this.fulfill = function (deferred, boundError, boundResult) {                                                      // 667
+	    return function (err, result) {                                                                                  // 668
 	      if (err) deferred.reject(boundError == null ? err : boundError);else if (typeof boundResult == "function") deferred.resolve(boundResult == null ? result : boundResult(result));else deferred.resolve(boundResult == null ? result : boundResult);
-	    };                                                                                                            // 606
-	  };                                                                                                              // 607
-                                                                                                                   // 608
-	  // creates a function which invokes method with the given arguments and returns a promise                       // 609
-	  this.promissor = function (obj, method) {                                                                       // 610
-	    return function () {                                                                                          // 611
-	      var deferred = $q.defer();                                                                                  // 612
-	      var fulfill = self.fulfill(deferred);                                                                       // 613
-	      var args = _.toArray(arguments).concat(fulfill);                                                            // 614
-	      obj[method].apply(obj, args);                                                                               // 615
-	      return deferred.promise;                                                                                    // 616
-	    };                                                                                                            // 617
-	  };                                                                                                              // 618
-                                                                                                                   // 619
-	  // creates a $q.all() promise and call digestion loop on fulfillment                                            // 620
-	  this.promiseAll = function (promises) {                                                                         // 621
-	    var allPromise = $q.all(promises);                                                                            // 622
-                                                                                                                   // 623
-	    allPromise.finally(function () {                                                                              // 624
-	      // calls digestion loop with no conflicts                                                                   // 625
-	      $timeout(angular.noop);                                                                                     // 626
-	    });                                                                                                           // 627
-                                                                                                                   // 628
-	    return allPromise;                                                                                            // 629
-	  };                                                                                                              // 630
-                                                                                                                   // 631
-	  this.getCollectionByName = function (string) {                                                                  // 632
-	    return Mongo.Collection.get(string);                                                                          // 633
-	  };                                                                                                              // 634
-                                                                                                                   // 635
-	  this.findIndexById = function (collection, doc) {                                                               // 636
-	    var foundDoc = _.find(collection, function (colDoc) {                                                         // 637
-	      // EJSON.equals used to compare Mongo.ObjectIDs and Strings.                                                // 638
-	      return EJSON.equals(colDoc._id, doc._id);                                                                   // 639
-	    });                                                                                                           // 640
-                                                                                                                   // 641
-	    return _.indexOf(collection, foundDoc);                                                                       // 642
-	  };                                                                                                              // 643
-	}]);                                                                                                              // 644
-                                                                                                                   // 645
-	angularMeteorUtils.run(['$rootScope', '$meteorUtils', function ($rootScope, $meteorUtils) {                       // 646
-	  Object.getPrototypeOf($rootScope).$meteorAutorun = function (fn) {                                              // 647
-	    return $meteorUtils.autorun(this, fn);                                                                        // 648
-	  };                                                                                                              // 649
-	}]);                                                                                                              // 650
-                                                                                                                   // 651
-/***/ },                                                                                                           // 652
-/* 6 */                                                                                                            // 653
-/***/ function(module, exports) {                                                                                  // 654
-                                                                                                                   // 655
-	/*global                                                                                                          // 656
-	 angular, Meteor                                                                                                  // 657
-	 */                                                                                                               // 658
-                                                                                                                   // 659
-	'use strict';                                                                                                     // 660
-                                                                                                                   // 661
-	var angularMeteorSubscribe = angular.module('angular-meteor.subscribe', ['angular-meteor.settings']);             // 662
-                                                                                                                   // 663
+	    };                                                                                                               // 670
+	  };                                                                                                                 // 671
+                                                                                                                      // 672
+	  // creates a function which invokes method with the given arguments and returns a promise                          // 673
+	  this.promissor = function (obj, method) {                                                                          // 674
+	    return function () {                                                                                             // 675
+	      var deferred = $q.defer();                                                                                     // 676
+	      var fulfill = self.fulfill(deferred);                                                                          // 677
+	      var args = _underscore2.default.toArray(arguments).concat(fulfill);                                            // 678
+	      obj[method].apply(obj, args);                                                                                  // 679
+	      return deferred.promise;                                                                                       // 680
+	    };                                                                                                               // 681
+	  };                                                                                                                 // 682
+                                                                                                                      // 683
+	  // creates a $q.all() promise and call digestion loop on fulfillment                                               // 684
+	  this.promiseAll = function (promises) {                                                                            // 685
+	    var allPromise = $q.all(promises);                                                                               // 686
+                                                                                                                      // 687
+	    allPromise.finally(function () {                                                                                 // 688
+	      // calls digestion loop with no conflicts                                                                      // 689
+	      $timeout(angular.noop);                                                                                        // 690
+	    });                                                                                                              // 691
+                                                                                                                      // 692
+	    return allPromise;                                                                                               // 693
+	  };                                                                                                                 // 694
+                                                                                                                      // 695
+	  this.getCollectionByName = function (string) {                                                                     // 696
+	    return Mongo.Collection.get(string);                                                                             // 697
+	  };                                                                                                                 // 698
+                                                                                                                      // 699
+	  this.findIndexById = function (collection, doc) {                                                                  // 700
+	    var foundDoc = _underscore2.default.find(collection, function (colDoc) {                                         // 701
+	      // EJSON.equals used to compare Mongo.ObjectIDs and Strings.                                                   // 702
+	      return EJSON.equals(colDoc._id, doc._id);                                                                      // 703
+	    });                                                                                                              // 704
+                                                                                                                      // 705
+	    return _underscore2.default.indexOf(collection, foundDoc);                                                       // 706
+	  };                                                                                                                 // 707
+	}]);                                                                                                                 // 708
+                                                                                                                      // 709
+	angularMeteorUtils.run(['$rootScope', '$meteorUtils', function ($rootScope, $meteorUtils) {                          // 710
+	  Object.getPrototypeOf($rootScope).$meteorAutorun = function (fn) {                                                 // 711
+	    return $meteorUtils.autorun(this, fn);                                                                           // 712
+	  };                                                                                                                 // 713
+	}]);                                                                                                                 // 714
+                                                                                                                      // 715
+/***/ },                                                                                                              // 716
+/* 8 */                                                                                                               // 717
+/***/ function(module, exports) {                                                                                     // 718
+                                                                                                                      // 719
+	/*global                                                                                                             // 720
+	 angular, Meteor                                                                                                     // 721
+	 */                                                                                                                  // 722
+                                                                                                                      // 723
+	'use strict';                                                                                                        // 724
+                                                                                                                      // 725
+	var angularMeteorSubscribe = angular.module('angular-meteor.subscribe', ['angular-meteor.settings']);                // 726
+                                                                                                                      // 727
 	angularMeteorSubscribe.service('$meteorSubscribe', ['$q', '$angularMeteorSettings', function ($q, $angularMeteorSettings) {
-                                                                                                                   // 665
-	  var self = this;                                                                                                // 666
-                                                                                                                   // 667
-	  this._subscribe = function (scope, deferred, args) {                                                            // 668
+                                                                                                                      // 729
+	  var self = this;                                                                                                   // 730
+                                                                                                                      // 731
+	  this._subscribe = function (scope, deferred, args) {                                                               // 732
 	    if (!$angularMeteorSettings.suppressWarnings) console.warn('[angular-meteor.subscribe] Please note that this module is deprecated since 1.3.0 and will be removed in 1.4.0! Replace it with the new syntax described here: http://www.angular-meteor.com/api/1.3.6/subscribe. You can disable this warning by following this guide http://www.angular-meteor.com/api/1.3.6/settings');
-                                                                                                                   // 670
-	    var subscription = null;                                                                                      // 671
-	    var lastArg = args[args.length - 1];                                                                          // 672
-                                                                                                                   // 673
-	    // User supplied onStop callback                                                                              // 674
-	    // save it for later use and remove                                                                           // 675
-	    // from subscription arguments                                                                                // 676
-	    if (angular.isObject(lastArg) && angular.isFunction(lastArg.onStop)) {                                        // 677
-	      var _onStop = lastArg.onStop;                                                                               // 678
-                                                                                                                   // 679
-	      args.pop();                                                                                                 // 680
-	    }                                                                                                             // 681
-                                                                                                                   // 682
-	    args.push({                                                                                                   // 683
-	      onReady: function onReady() {                                                                               // 684
-	        deferred.resolve(subscription);                                                                           // 685
-	      },                                                                                                          // 686
-	      onStop: function onStop(err) {                                                                              // 687
-	        if (!deferred.promise.$$state.status) {                                                                   // 688
+                                                                                                                      // 734
+	    var subscription = null;                                                                                         // 735
+	    var lastArg = args[args.length - 1];                                                                             // 736
+                                                                                                                      // 737
+	    // User supplied onStop callback                                                                                 // 738
+	    // save it for later use and remove                                                                              // 739
+	    // from subscription arguments                                                                                   // 740
+	    if (angular.isObject(lastArg) && angular.isFunction(lastArg.onStop)) {                                           // 741
+	      var _onStop = lastArg.onStop;                                                                                  // 742
+                                                                                                                      // 743
+	      args.pop();                                                                                                    // 744
+	    }                                                                                                                // 745
+                                                                                                                      // 746
+	    args.push({                                                                                                      // 747
+	      onReady: function onReady() {                                                                                  // 748
+	        deferred.resolve(subscription);                                                                              // 749
+	      },                                                                                                             // 750
+	      onStop: function onStop(err) {                                                                                 // 751
+	        if (!deferred.promise.$$state.status) {                                                                      // 752
 	          if (err) deferred.reject(err);else deferred.reject(new Meteor.Error("Subscription Stopped", "Subscription stopped by a call to stop method. Either by the client or by the server."));
-	        } else if (_onStop)                                                                                       // 690
-	          // After promise was resolved or rejected                                                               // 691
-	          // call user supplied onStop callback.                                                                  // 692
-	          _onStop.apply(this, Array.prototype.slice.call(arguments));                                             // 693
-	      }                                                                                                           // 694
-	    });                                                                                                           // 695
-                                                                                                                   // 696
-	    subscription = Meteor.subscribe.apply(scope, args);                                                           // 697
-                                                                                                                   // 698
-	    return subscription;                                                                                          // 699
-	  };                                                                                                              // 700
-                                                                                                                   // 701
-	  this.subscribe = function () {                                                                                  // 702
-	    var deferred = $q.defer();                                                                                    // 703
-	    var args = Array.prototype.slice.call(arguments);                                                             // 704
-	    var subscription = null;                                                                                      // 705
-                                                                                                                   // 706
-	    self._subscribe(this, deferred, args);                                                                        // 707
-                                                                                                                   // 708
-	    return deferred.promise;                                                                                      // 709
-	  };                                                                                                              // 710
-	}]);                                                                                                              // 711
-                                                                                                                   // 712
-	angularMeteorSubscribe.run(['$rootScope', '$q', '$meteorSubscribe', function ($rootScope, $q, $meteorSubscribe) {
-	  Object.getPrototypeOf($rootScope).$meteorSubscribe = function () {                                              // 714
-	    var deferred = $q.defer();                                                                                    // 715
-	    var args = Array.prototype.slice.call(arguments);                                                             // 716
-                                                                                                                   // 717
-	    var subscription = $meteorSubscribe._subscribe(this, deferred, args);                                         // 718
-                                                                                                                   // 719
-	    this.$on('$destroy', function () {                                                                            // 720
-	      subscription.stop();                                                                                        // 721
-	    });                                                                                                           // 722
-                                                                                                                   // 723
-	    return deferred.promise;                                                                                      // 724
-	  };                                                                                                              // 725
-	}]);                                                                                                              // 726
-                                                                                                                   // 727
-/***/ },                                                                                                           // 728
-/* 7 */                                                                                                            // 729
-/***/ function(module, exports) {                                                                                  // 730
-                                                                                                                   // 731
-	/*global                                                                                                          // 732
-	 angular, _, Tracker, check, Match, Mongo                                                                         // 733
-	 */                                                                                                               // 734
-                                                                                                                   // 735
-	'use strict';                                                                                                     // 736
-                                                                                                                   // 737
+	        } else if (_onStop)                                                                                          // 754
+	          // After promise was resolved or rejected                                                                  // 755
+	          // call user supplied onStop callback.                                                                     // 756
+	          _onStop.apply(this, Array.prototype.slice.call(arguments));                                                // 757
+	      }                                                                                                              // 758
+	    });                                                                                                              // 759
+                                                                                                                      // 760
+	    subscription = Meteor.subscribe.apply(scope, args);                                                              // 761
+                                                                                                                      // 762
+	    return subscription;                                                                                             // 763
+	  };                                                                                                                 // 764
+                                                                                                                      // 765
+	  this.subscribe = function () {                                                                                     // 766
+	    var deferred = $q.defer();                                                                                       // 767
+	    var args = Array.prototype.slice.call(arguments);                                                                // 768
+	    var subscription = null;                                                                                         // 769
+                                                                                                                      // 770
+	    self._subscribe(this, deferred, args);                                                                           // 771
+                                                                                                                      // 772
+	    return deferred.promise;                                                                                         // 773
+	  };                                                                                                                 // 774
+	}]);                                                                                                                 // 775
+                                                                                                                      // 776
+	angularMeteorSubscribe.run(['$rootScope', '$q', '$meteorSubscribe', function ($rootScope, $q, $meteorSubscribe) {    // 777
+	  Object.getPrototypeOf($rootScope).$meteorSubscribe = function () {                                                 // 778
+	    var deferred = $q.defer();                                                                                       // 779
+	    var args = Array.prototype.slice.call(arguments);                                                                // 780
+                                                                                                                      // 781
+	    var subscription = $meteorSubscribe._subscribe(this, deferred, args);                                            // 782
+                                                                                                                      // 783
+	    this.$on('$destroy', function () {                                                                               // 784
+	      subscription.stop();                                                                                           // 785
+	    });                                                                                                              // 786
+                                                                                                                      // 787
+	    return deferred.promise;                                                                                         // 788
+	  };                                                                                                                 // 789
+	}]);                                                                                                                 // 790
+                                                                                                                      // 791
+/***/ },                                                                                                              // 792
+/* 9 */                                                                                                               // 793
+/***/ function(module, exports, __webpack_require__) {                                                                // 794
+                                                                                                                      // 795
+	'use strict';                                                                                                        // 796
+                                                                                                                      // 797
+	var _underscore = __webpack_require__(2);                                                                            // 798
+                                                                                                                      // 799
+	var _underscore2 = _interopRequireDefault(_underscore);                                                              // 800
+                                                                                                                      // 801
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }                      // 802
+                                                                                                                      // 803
+	'use strict'; /*global                                                                                               // 804
+	               angular, _, Tracker, check, Match, Mongo                                                              // 805
+	               */                                                                                                    // 806
+                                                                                                                      // 807
 	var angularMeteorCollection = angular.module('angular-meteor.collection', ['angular-meteor.stopper', 'angular-meteor.subscribe', 'angular-meteor.utils', 'diffArray', 'angular-meteor.settings']);
-                                                                                                                   // 739
-	// The reason angular meteor collection is a factory function and not something                                   // 740
-	// that inherit from array comes from here:                                                                       // 741
-	// http://perfectionkills.com/how-ecmascript-5-still-does-not-allow-to-subclass-an-array/                         // 742
-	// We went with the direct extensions approach.                                                                   // 743
+                                                                                                                      // 809
+	// The reason angular meteor collection is a factory function and not something                                      // 810
+	// that inherit from array comes from here:                                                                          // 811
+	// http://perfectionkills.com/how-ecmascript-5-still-does-not-allow-to-subclass-an-array/                            // 812
+	// We went with the direct extensions approach.                                                                      // 813
 	angularMeteorCollection.factory('AngularMeteorCollection', ['$q', '$meteorSubscribe', '$meteorUtils', '$rootScope', '$timeout', 'diffArray', '$angularMeteorSettings', function ($q, $meteorSubscribe, $meteorUtils, $rootScope, $timeout, diffArray, $angularMeteorSettings) {
-                                                                                                                   // 745
-	  function AngularMeteorCollection(curDefFunc, collection, diffArrayFunc, autoClientSave) {                       // 746
+                                                                                                                      // 815
+	  function AngularMeteorCollection(curDefFunc, collection, diffArrayFunc, autoClientSave) {                          // 816
 	    if (!$angularMeteorSettings.suppressWarnings) console.warn('[angular-meteor.$meteorCollection] Please note that this method is deprecated since 1.3.0 and will be removed in 1.4.0! For more info: http://www.angular-meteor.com/api/1.3.0/meteorCollection. You can disable this warning by following this guide http://www.angular-meteor.com/api/1.3.6/settings');
-                                                                                                                   // 748
-	    var data = [];                                                                                                // 749
-	    // Server backup data to evaluate what changes come from client                                               // 750
-	    // after each server update.                                                                                  // 751
-	    data._serverBackup = [];                                                                                      // 752
-	    // Array differ function.                                                                                     // 753
-	    data._diffArrayFunc = diffArrayFunc;                                                                          // 754
-	    // Handler of the cursor observer.                                                                            // 755
-	    data._hObserve = null;                                                                                        // 756
-	    // On new cursor autorun handler                                                                              // 757
-	    // (autorun for reactive variables).                                                                          // 758
-	    data._hNewCurAutorun = null;                                                                                  // 759
-	    // On new data autorun handler                                                                                // 760
-	    // (autorun for cursor.fetch).                                                                                // 761
-	    data._hDataAutorun = null;                                                                                    // 762
-                                                                                                                   // 763
-	    if (angular.isDefined(collection)) {                                                                          // 764
-	      data.$$collection = collection;                                                                             // 765
-	    } else {                                                                                                      // 766
-	      var cursor = curDefFunc();                                                                                  // 767
-	      data.$$collection = $meteorUtils.getCollectionByName(cursor.collection.name);                               // 768
-	    }                                                                                                             // 769
-                                                                                                                   // 770
-	    _.extend(data, AngularMeteorCollection);                                                                      // 771
-	    data._startCurAutorun(curDefFunc, autoClientSave);                                                            // 772
-                                                                                                                   // 773
-	    return data;                                                                                                  // 774
-	  }                                                                                                               // 775
-                                                                                                                   // 776
-	  AngularMeteorCollection._startCurAutorun = function (curDefFunc, autoClientSave) {                              // 777
-	    var self = this;                                                                                              // 778
-                                                                                                                   // 779
-	    self._hNewCurAutorun = Tracker.autorun(function () {                                                          // 780
-	      // When the reactive func gets recomputated we need to stop any previous                                    // 781
-	      // observeChanges.                                                                                          // 782
-	      Tracker.onInvalidate(function () {                                                                          // 783
-	        self._stopCursor();                                                                                       // 784
-	      });                                                                                                         // 785
-                                                                                                                   // 786
-	      if (autoClientSave) self._setAutoClientSave();                                                              // 787
-	      self._updateCursor(curDefFunc(), autoClientSave);                                                           // 788
-	    });                                                                                                           // 789
-	  };                                                                                                              // 790
-                                                                                                                   // 791
-	  AngularMeteorCollection.subscribe = function () {                                                               // 792
-	    $meteorSubscribe.subscribe.apply(this, arguments);                                                            // 793
-	    return this;                                                                                                  // 794
-	  };                                                                                                              // 795
-                                                                                                                   // 796
-	  AngularMeteorCollection.save = function (docs, useUnsetModifier) {                                              // 797
-	    // save whole collection                                                                                      // 798
-	    if (!docs) docs = this;                                                                                       // 799
-	    // save single doc                                                                                            // 800
-	    docs = [].concat(docs);                                                                                       // 801
-                                                                                                                   // 802
-	    var promises = docs.map(function (doc) {                                                                      // 803
-	      return this._upsertDoc(doc, useUnsetModifier);                                                              // 804
-	    }, this);                                                                                                     // 805
-                                                                                                                   // 806
-	    return $meteorUtils.promiseAll(promises);                                                                     // 807
-	  };                                                                                                              // 808
-                                                                                                                   // 809
-	  AngularMeteorCollection._upsertDoc = function (doc, useUnsetModifier) {                                         // 810
-	    var deferred = $q.defer();                                                                                    // 811
-	    var collection = this.$$collection;                                                                           // 812
-	    var createFulfill = _.partial($meteorUtils.fulfill, deferred, null);                                          // 813
-                                                                                                                   // 814
-	    // delete $$hashkey                                                                                           // 815
-	    doc = $meteorUtils.stripDollarPrefixedKeys(doc);                                                              // 816
-	    var docId = doc._id;                                                                                          // 817
-	    var isExist = collection.findOne(docId);                                                                      // 818
-                                                                                                                   // 819
-	    // update                                                                                                     // 820
-	    if (isExist) {                                                                                                // 821
-	      // Deletes _id property (from the copy) so that                                                             // 822
-	      // it can be $set using update.                                                                             // 823
-	      delete doc._id;                                                                                             // 824
-	      var modifier = useUnsetModifier ? { $unset: doc } : { $set: doc };                                          // 825
-	      // NOTE: do not use #upsert() method, since it does not exist in some collections                           // 826
-	      collection.update(docId, modifier, createFulfill(function () {                                              // 827
-	        return { _id: docId, action: 'updated' };                                                                 // 828
-	      }));                                                                                                        // 829
-	    }                                                                                                             // 830
-	    // insert                                                                                                     // 831
-	    else {                                                                                                        // 832
-	        collection.insert(doc, createFulfill(function (id) {                                                      // 833
-	          return { _id: id, action: 'inserted' };                                                                 // 834
-	        }));                                                                                                      // 835
-	      }                                                                                                           // 836
-                                                                                                                   // 837
-	    return deferred.promise;                                                                                      // 838
-	  };                                                                                                              // 839
-                                                                                                                   // 840
-	  // performs $pull operations parallely.                                                                         // 841
-	  // used for handling splice operations returned from getUpdates() to prevent conflicts.                         // 842
-	  // see issue: https://github.com/Urigo/angular-meteor/issues/793                                                // 843
-	  AngularMeteorCollection._updateDiff = function (selector, update, callback) {                                   // 844
-	    callback = callback || angular.noop;                                                                          // 845
-	    var setters = _.omit(update, '$pull');                                                                        // 846
-	    var updates = [setters];                                                                                      // 847
-                                                                                                                   // 848
-	    _.each(update.$pull, function (pull, prop) {                                                                  // 849
-	      var puller = {};                                                                                            // 850
-	      puller[prop] = pull;                                                                                        // 851
-	      updates.push({ $pull: puller });                                                                            // 852
-	    });                                                                                                           // 853
-                                                                                                                   // 854
-	    this._updateParallel(selector, updates, callback);                                                            // 855
-	  };                                                                                                              // 856
-                                                                                                                   // 857
-	  // performs each update operation parallely                                                                     // 858
-	  AngularMeteorCollection._updateParallel = function (selector, updates, callback) {                              // 859
-	    var self = this;                                                                                              // 860
-	    var done = _.after(updates.length, callback);                                                                 // 861
-                                                                                                                   // 862
-	    var next = function next(err, affectedDocsNum) {                                                              // 863
-	      if (err) return callback(err);                                                                              // 864
-	      done(null, affectedDocsNum);                                                                                // 865
-	    };                                                                                                            // 866
-                                                                                                                   // 867
-	    _.each(updates, function (update) {                                                                           // 868
-	      self.$$collection.update(selector, update, next);                                                           // 869
-	    });                                                                                                           // 870
-	  };                                                                                                              // 871
-                                                                                                                   // 872
-	  AngularMeteorCollection.remove = function (keyOrDocs) {                                                         // 873
-	    var keys;                                                                                                     // 874
-                                                                                                                   // 875
-	    // remove whole collection                                                                                    // 876
-	    if (!keyOrDocs) {                                                                                             // 877
-	      keys = _.pluck(this, '_id');                                                                                // 878
-	    }                                                                                                             // 879
-	    // remove docs                                                                                                // 880
-	    else {                                                                                                        // 881
-	        keyOrDocs = [].concat(keyOrDocs);                                                                         // 882
-                                                                                                                   // 883
-	        keys = _.map(keyOrDocs, function (keyOrDoc) {                                                             // 884
-	          return keyOrDoc._id || keyOrDoc;                                                                        // 885
-	        });                                                                                                       // 886
-	      }                                                                                                           // 887
-                                                                                                                   // 888
-	    // Checks if all keys are correct.                                                                            // 889
-	    check(keys, [Match.OneOf(String, Mongo.ObjectID)]);                                                           // 890
-                                                                                                                   // 891
-	    var promises = keys.map(function (key) {                                                                      // 892
-	      return this._removeDoc(key);                                                                                // 893
-	    }, this);                                                                                                     // 894
-                                                                                                                   // 895
-	    return $meteorUtils.promiseAll(promises);                                                                     // 896
-	  };                                                                                                              // 897
-                                                                                                                   // 898
-	  AngularMeteorCollection._removeDoc = function (id) {                                                            // 899
-	    var deferred = $q.defer();                                                                                    // 900
-	    var collection = this.$$collection;                                                                           // 901
-	    var fulfill = $meteorUtils.fulfill(deferred, null, { _id: id, action: 'removed' });                           // 902
-	    collection.remove(id, fulfill);                                                                               // 903
-	    return deferred.promise;                                                                                      // 904
-	  };                                                                                                              // 905
-                                                                                                                   // 906
-	  AngularMeteorCollection._updateCursor = function (cursor, autoClientSave) {                                     // 907
-	    var self = this;                                                                                              // 908
-	    // XXX - consider adding an option for a non-orderd result for faster performance                             // 909
-	    if (self._hObserve) self._stopObserving();                                                                    // 910
-                                                                                                                   // 911
-	    self._hObserve = cursor.observe({                                                                             // 912
-	      addedAt: function addedAt(doc, atIndex) {                                                                   // 913
-	        self.splice(atIndex, 0, doc);                                                                             // 914
-	        self._serverBackup.splice(atIndex, 0, doc);                                                               // 915
-	        self._setServerUpdateMode();                                                                              // 916
-	      },                                                                                                          // 917
-                                                                                                                   // 918
-	      changedAt: function changedAt(doc, oldDoc, atIndex) {                                                       // 919
-	        diffArray.deepCopyChanges(self[atIndex], doc);                                                            // 920
-	        diffArray.deepCopyRemovals(self[atIndex], doc);                                                           // 921
-	        self._serverBackup[atIndex] = self[atIndex];                                                              // 922
-	        self._setServerUpdateMode();                                                                              // 923
-	      },                                                                                                          // 924
-                                                                                                                   // 925
-	      movedTo: function movedTo(doc, fromIndex, toIndex) {                                                        // 926
-	        self.splice(fromIndex, 1);                                                                                // 927
-	        self.splice(toIndex, 0, doc);                                                                             // 928
-	        self._serverBackup.splice(fromIndex, 1);                                                                  // 929
-	        self._serverBackup.splice(toIndex, 0, doc);                                                               // 930
-	        self._setServerUpdateMode();                                                                              // 931
-	      },                                                                                                          // 932
-                                                                                                                   // 933
-	      removedAt: function removedAt(oldDoc) {                                                                     // 934
-	        var removedIndex = $meteorUtils.findIndexById(self, oldDoc);                                              // 935
-                                                                                                                   // 936
-	        if (removedIndex != -1) {                                                                                 // 937
-	          self.splice(removedIndex, 1);                                                                           // 938
-	          self._serverBackup.splice(removedIndex, 1);                                                             // 939
-	          self._setServerUpdateMode();                                                                            // 940
-	        } else {                                                                                                  // 941
-	          // If it's been removed on client then it's already not in collection                                   // 942
-	          // itself but still is in the _serverBackup.                                                            // 943
-	          removedIndex = $meteorUtils.findIndexById(self._serverBackup, oldDoc);                                  // 944
-                                                                                                                   // 945
-	          if (removedIndex != -1) {                                                                               // 946
-	            self._serverBackup.splice(removedIndex, 1);                                                           // 947
-	          }                                                                                                       // 948
-	        }                                                                                                         // 949
-	      }                                                                                                           // 950
-	    });                                                                                                           // 951
-                                                                                                                   // 952
-	    self._hDataAutorun = Tracker.autorun(function () {                                                            // 953
-	      cursor.fetch();                                                                                             // 954
-	      if (self._serverMode) self._unsetServerUpdateMode(autoClientSave);                                          // 955
-	    });                                                                                                           // 956
-	  };                                                                                                              // 957
-                                                                                                                   // 958
-	  AngularMeteorCollection._stopObserving = function () {                                                          // 959
-	    this._hObserve.stop();                                                                                        // 960
-	    this._hDataAutorun.stop();                                                                                    // 961
-	    delete this._serverMode;                                                                                      // 962
-	    delete this._hUnsetTimeout;                                                                                   // 963
-	  };                                                                                                              // 964
-                                                                                                                   // 965
-	  AngularMeteorCollection._setServerUpdateMode = function (name) {                                                // 966
-	    this._serverMode = true;                                                                                      // 967
-	    // To simplify server update logic, we don't follow                                                           // 968
-	    // updates from the client at the same time.                                                                  // 969
-	    this._unsetAutoClientSave();                                                                                  // 970
-	  };                                                                                                              // 971
-                                                                                                                   // 972
-	  // Here we use $timeout to combine multiple updates that go                                                     // 973
-	  // each one after another.                                                                                      // 974
-	  AngularMeteorCollection._unsetServerUpdateMode = function (autoClientSave) {                                    // 975
-	    var self = this;                                                                                              // 976
-                                                                                                                   // 977
-	    if (self._hUnsetTimeout) {                                                                                    // 978
-	      $timeout.cancel(self._hUnsetTimeout);                                                                       // 979
-	      self._hUnsetTimeout = null;                                                                                 // 980
-	    }                                                                                                             // 981
-                                                                                                                   // 982
-	    self._hUnsetTimeout = $timeout(function () {                                                                  // 983
-	      self._serverMode = false;                                                                                   // 984
-	      // Finds updates that was potentially done from the client side                                             // 985
-	      // and saves them.                                                                                          // 986
-	      var changes = diffArray.getChanges(self, self._serverBackup, self._diffArrayFunc);                          // 987
-	      self._saveChanges(changes);                                                                                 // 988
-	      // After, continues following client updates.                                                               // 989
-	      if (autoClientSave) self._setAutoClientSave();                                                              // 990
-	    }, 0);                                                                                                        // 991
-	  };                                                                                                              // 992
-                                                                                                                   // 993
-	  AngularMeteorCollection.stop = function () {                                                                    // 994
-	    this._stopCursor();                                                                                           // 995
-	    this._hNewCurAutorun.stop();                                                                                  // 996
-	  };                                                                                                              // 997
-                                                                                                                   // 998
-	  AngularMeteorCollection._stopCursor = function () {                                                             // 999
-	    this._unsetAutoClientSave();                                                                                  // 1000
-                                                                                                                   // 1001
-	    if (this._hObserve) {                                                                                         // 1002
-	      this._hObserve.stop();                                                                                      // 1003
-	      this._hDataAutorun.stop();                                                                                  // 1004
-	    }                                                                                                             // 1005
-                                                                                                                   // 1006
-	    this.splice(0);                                                                                               // 1007
-	    this._serverBackup.splice(0);                                                                                 // 1008
-	  };                                                                                                              // 1009
-                                                                                                                   // 1010
-	  AngularMeteorCollection._unsetAutoClientSave = function (name) {                                                // 1011
-	    if (this._hRegAutoBind) {                                                                                     // 1012
-	      this._hRegAutoBind();                                                                                       // 1013
-	      this._hRegAutoBind = null;                                                                                  // 1014
-	    }                                                                                                             // 1015
-	  };                                                                                                              // 1016
-                                                                                                                   // 1017
-	  AngularMeteorCollection._setAutoClientSave = function () {                                                      // 1018
-	    var self = this;                                                                                              // 1019
-                                                                                                                   // 1020
-	    // Always unsets auto save to keep only one $watch handler.                                                   // 1021
-	    self._unsetAutoClientSave();                                                                                  // 1022
-                                                                                                                   // 1023
-	    self._hRegAutoBind = $rootScope.$watch(function () {                                                          // 1024
-	      return self;                                                                                                // 1025
-	    }, function (nItems, oItems) {                                                                                // 1026
-	      if (nItems === oItems) return;                                                                              // 1027
-                                                                                                                   // 1028
-	      var changes = diffArray.getChanges(self, oItems, self._diffArrayFunc);                                      // 1029
-	      self._unsetAutoClientSave();                                                                                // 1030
-	      self._saveChanges(changes);                                                                                 // 1031
-	      self._setAutoClientSave();                                                                                  // 1032
-	    }, true);                                                                                                     // 1033
-	  };                                                                                                              // 1034
-                                                                                                                   // 1035
-	  AngularMeteorCollection._saveChanges = function (changes) {                                                     // 1036
-	    var self = this;                                                                                              // 1037
-                                                                                                                   // 1038
-	    // Saves added documents                                                                                      // 1039
-	    // Using reversed iteration to prevent indexes from changing during splice                                    // 1040
-	    var addedDocs = changes.added.reverse().map(function (descriptor) {                                           // 1041
-	      self.splice(descriptor.index, 1);                                                                           // 1042
-	      return descriptor.item;                                                                                     // 1043
-	    });                                                                                                           // 1044
-                                                                                                                   // 1045
-	    if (addedDocs.length) self.save(addedDocs);                                                                   // 1046
-                                                                                                                   // 1047
-	    // Removes deleted documents                                                                                  // 1048
-	    var removedDocs = changes.removed.map(function (descriptor) {                                                 // 1049
-	      return descriptor.item;                                                                                     // 1050
-	    });                                                                                                           // 1051
-                                                                                                                   // 1052
-	    if (removedDocs.length) self.remove(removedDocs);                                                             // 1053
-                                                                                                                   // 1054
-	    // Updates changed documents                                                                                  // 1055
-	    changes.changed.forEach(function (descriptor) {                                                               // 1056
-	      self._updateDiff(descriptor.selector, descriptor.modifier);                                                 // 1057
-	    });                                                                                                           // 1058
-	  };                                                                                                              // 1059
-                                                                                                                   // 1060
-	  return AngularMeteorCollection;                                                                                 // 1061
-	}]);                                                                                                              // 1062
-                                                                                                                   // 1063
+                                                                                                                      // 818
+	    var data = [];                                                                                                   // 819
+	    // Server backup data to evaluate what changes come from client                                                  // 820
+	    // after each server update.                                                                                     // 821
+	    data._serverBackup = [];                                                                                         // 822
+	    // Array differ function.                                                                                        // 823
+	    data._diffArrayFunc = diffArrayFunc;                                                                             // 824
+	    // Handler of the cursor observer.                                                                               // 825
+	    data._hObserve = null;                                                                                           // 826
+	    // On new cursor autorun handler                                                                                 // 827
+	    // (autorun for reactive variables).                                                                             // 828
+	    data._hNewCurAutorun = null;                                                                                     // 829
+	    // On new data autorun handler                                                                                   // 830
+	    // (autorun for cursor.fetch).                                                                                   // 831
+	    data._hDataAutorun = null;                                                                                       // 832
+                                                                                                                      // 833
+	    if (angular.isDefined(collection)) {                                                                             // 834
+	      data.$$collection = collection;                                                                                // 835
+	    } else {                                                                                                         // 836
+	      var cursor = curDefFunc();                                                                                     // 837
+	      data.$$collection = $meteorUtils.getCollectionByName(cursor.collection.name);                                  // 838
+	    }                                                                                                                // 839
+                                                                                                                      // 840
+	    _underscore2.default.extend(data, AngularMeteorCollection);                                                      // 841
+	    data._startCurAutorun(curDefFunc, autoClientSave);                                                               // 842
+                                                                                                                      // 843
+	    return data;                                                                                                     // 844
+	  }                                                                                                                  // 845
+                                                                                                                      // 846
+	  AngularMeteorCollection._startCurAutorun = function (curDefFunc, autoClientSave) {                                 // 847
+	    var self = this;                                                                                                 // 848
+                                                                                                                      // 849
+	    self._hNewCurAutorun = Tracker.autorun(function () {                                                             // 850
+	      // When the reactive func gets recomputated we need to stop any previous                                       // 851
+	      // observeChanges.                                                                                             // 852
+	      Tracker.onInvalidate(function () {                                                                             // 853
+	        self._stopCursor();                                                                                          // 854
+	      });                                                                                                            // 855
+                                                                                                                      // 856
+	      if (autoClientSave) self._setAutoClientSave();                                                                 // 857
+	      self._updateCursor(curDefFunc(), autoClientSave);                                                              // 858
+	    });                                                                                                              // 859
+	  };                                                                                                                 // 860
+                                                                                                                      // 861
+	  AngularMeteorCollection.subscribe = function () {                                                                  // 862
+	    $meteorSubscribe.subscribe.apply(this, arguments);                                                               // 863
+	    return this;                                                                                                     // 864
+	  };                                                                                                                 // 865
+                                                                                                                      // 866
+	  AngularMeteorCollection.save = function (docs, useUnsetModifier) {                                                 // 867
+	    // save whole collection                                                                                         // 868
+	    if (!docs) docs = this;                                                                                          // 869
+	    // save single doc                                                                                               // 870
+	    docs = [].concat(docs);                                                                                          // 871
+                                                                                                                      // 872
+	    var promises = docs.map(function (doc) {                                                                         // 873
+	      return this._upsertDoc(doc, useUnsetModifier);                                                                 // 874
+	    }, this);                                                                                                        // 875
+                                                                                                                      // 876
+	    return $meteorUtils.promiseAll(promises);                                                                        // 877
+	  };                                                                                                                 // 878
+                                                                                                                      // 879
+	  AngularMeteorCollection._upsertDoc = function (doc, useUnsetModifier) {                                            // 880
+	    var deferred = $q.defer();                                                                                       // 881
+	    var collection = this.$$collection;                                                                              // 882
+	    var createFulfill = _underscore2.default.partial($meteorUtils.fulfill, deferred, null);                          // 883
+                                                                                                                      // 884
+	    // delete $$hashkey                                                                                              // 885
+	    doc = $meteorUtils.stripDollarPrefixedKeys(doc);                                                                 // 886
+	    var docId = doc._id;                                                                                             // 887
+	    var isExist = collection.findOne(docId);                                                                         // 888
+                                                                                                                      // 889
+	    // update                                                                                                        // 890
+	    if (isExist) {                                                                                                   // 891
+	      // Deletes _id property (from the copy) so that                                                                // 892
+	      // it can be $set using update.                                                                                // 893
+	      delete doc._id;                                                                                                // 894
+	      var modifier = useUnsetModifier ? { $unset: doc } : { $set: doc };                                             // 895
+	      // NOTE: do not use #upsert() method, since it does not exist in some collections                              // 896
+	      collection.update(docId, modifier, createFulfill(function () {                                                 // 897
+	        return { _id: docId, action: 'updated' };                                                                    // 898
+	      }));                                                                                                           // 899
+	    }                                                                                                                // 900
+	    // insert                                                                                                        // 901
+	    else {                                                                                                           // 902
+	        collection.insert(doc, createFulfill(function (id) {                                                         // 903
+	          return { _id: id, action: 'inserted' };                                                                    // 904
+	        }));                                                                                                         // 905
+	      }                                                                                                              // 906
+                                                                                                                      // 907
+	    return deferred.promise;                                                                                         // 908
+	  };                                                                                                                 // 909
+                                                                                                                      // 910
+	  // performs $pull operations parallely.                                                                            // 911
+	  // used for handling splice operations returned from getUpdates() to prevent conflicts.                            // 912
+	  // see issue: https://github.com/Urigo/angular-meteor/issues/793                                                   // 913
+	  AngularMeteorCollection._updateDiff = function (selector, update, callback) {                                      // 914
+	    callback = callback || angular.noop;                                                                             // 915
+	    var setters = _underscore2.default.omit(update, '$pull');                                                        // 916
+	    var updates = [setters];                                                                                         // 917
+                                                                                                                      // 918
+	    _underscore2.default.each(update.$pull, function (pull, prop) {                                                  // 919
+	      var puller = {};                                                                                               // 920
+	      puller[prop] = pull;                                                                                           // 921
+	      updates.push({ $pull: puller });                                                                               // 922
+	    });                                                                                                              // 923
+                                                                                                                      // 924
+	    this._updateParallel(selector, updates, callback);                                                               // 925
+	  };                                                                                                                 // 926
+                                                                                                                      // 927
+	  // performs each update operation parallely                                                                        // 928
+	  AngularMeteorCollection._updateParallel = function (selector, updates, callback) {                                 // 929
+	    var self = this;                                                                                                 // 930
+	    var done = _underscore2.default.after(updates.length, callback);                                                 // 931
+                                                                                                                      // 932
+	    var next = function next(err, affectedDocsNum) {                                                                 // 933
+	      if (err) return callback(err);                                                                                 // 934
+	      done(null, affectedDocsNum);                                                                                   // 935
+	    };                                                                                                               // 936
+                                                                                                                      // 937
+	    _underscore2.default.each(updates, function (update) {                                                           // 938
+	      self.$$collection.update(selector, update, next);                                                              // 939
+	    });                                                                                                              // 940
+	  };                                                                                                                 // 941
+                                                                                                                      // 942
+	  AngularMeteorCollection.remove = function (keyOrDocs) {                                                            // 943
+	    var keys;                                                                                                        // 944
+                                                                                                                      // 945
+	    // remove whole collection                                                                                       // 946
+	    if (!keyOrDocs) {                                                                                                // 947
+	      keys = _underscore2.default.pluck(this, '_id');                                                                // 948
+	    }                                                                                                                // 949
+	    // remove docs                                                                                                   // 950
+	    else {                                                                                                           // 951
+	        keyOrDocs = [].concat(keyOrDocs);                                                                            // 952
+                                                                                                                      // 953
+	        keys = _underscore2.default.map(keyOrDocs, function (keyOrDoc) {                                             // 954
+	          return keyOrDoc._id || keyOrDoc;                                                                           // 955
+	        });                                                                                                          // 956
+	      }                                                                                                              // 957
+                                                                                                                      // 958
+	    // Checks if all keys are correct.                                                                               // 959
+	    check(keys, [Match.OneOf(String, Mongo.ObjectID)]);                                                              // 960
+                                                                                                                      // 961
+	    var promises = keys.map(function (key) {                                                                         // 962
+	      return this._removeDoc(key);                                                                                   // 963
+	    }, this);                                                                                                        // 964
+                                                                                                                      // 965
+	    return $meteorUtils.promiseAll(promises);                                                                        // 966
+	  };                                                                                                                 // 967
+                                                                                                                      // 968
+	  AngularMeteorCollection._removeDoc = function (id) {                                                               // 969
+	    var deferred = $q.defer();                                                                                       // 970
+	    var collection = this.$$collection;                                                                              // 971
+	    var fulfill = $meteorUtils.fulfill(deferred, null, { _id: id, action: 'removed' });                              // 972
+	    collection.remove(id, fulfill);                                                                                  // 973
+	    return deferred.promise;                                                                                         // 974
+	  };                                                                                                                 // 975
+                                                                                                                      // 976
+	  AngularMeteorCollection._updateCursor = function (cursor, autoClientSave) {                                        // 977
+	    var self = this;                                                                                                 // 978
+	    // XXX - consider adding an option for a non-orderd result for faster performance                                // 979
+	    if (self._hObserve) self._stopObserving();                                                                       // 980
+                                                                                                                      // 981
+	    self._hObserve = cursor.observe({                                                                                // 982
+	      addedAt: function addedAt(doc, atIndex) {                                                                      // 983
+	        self.splice(atIndex, 0, doc);                                                                                // 984
+	        self._serverBackup.splice(atIndex, 0, doc);                                                                  // 985
+	        self._setServerUpdateMode();                                                                                 // 986
+	      },                                                                                                             // 987
+                                                                                                                      // 988
+	      changedAt: function changedAt(doc, oldDoc, atIndex) {                                                          // 989
+	        diffArray.deepCopyChanges(self[atIndex], doc);                                                               // 990
+	        diffArray.deepCopyRemovals(self[atIndex], doc);                                                              // 991
+	        self._serverBackup[atIndex] = self[atIndex];                                                                 // 992
+	        self._setServerUpdateMode();                                                                                 // 993
+	      },                                                                                                             // 994
+                                                                                                                      // 995
+	      movedTo: function movedTo(doc, fromIndex, toIndex) {                                                           // 996
+	        self.splice(fromIndex, 1);                                                                                   // 997
+	        self.splice(toIndex, 0, doc);                                                                                // 998
+	        self._serverBackup.splice(fromIndex, 1);                                                                     // 999
+	        self._serverBackup.splice(toIndex, 0, doc);                                                                  // 1000
+	        self._setServerUpdateMode();                                                                                 // 1001
+	      },                                                                                                             // 1002
+                                                                                                                      // 1003
+	      removedAt: function removedAt(oldDoc) {                                                                        // 1004
+	        var removedIndex = $meteorUtils.findIndexById(self, oldDoc);                                                 // 1005
+                                                                                                                      // 1006
+	        if (removedIndex != -1) {                                                                                    // 1007
+	          self.splice(removedIndex, 1);                                                                              // 1008
+	          self._serverBackup.splice(removedIndex, 1);                                                                // 1009
+	          self._setServerUpdateMode();                                                                               // 1010
+	        } else {                                                                                                     // 1011
+	          // If it's been removed on client then it's already not in collection                                      // 1012
+	          // itself but still is in the _serverBackup.                                                               // 1013
+	          removedIndex = $meteorUtils.findIndexById(self._serverBackup, oldDoc);                                     // 1014
+                                                                                                                      // 1015
+	          if (removedIndex != -1) {                                                                                  // 1016
+	            self._serverBackup.splice(removedIndex, 1);                                                              // 1017
+	          }                                                                                                          // 1018
+	        }                                                                                                            // 1019
+	      }                                                                                                              // 1020
+	    });                                                                                                              // 1021
+                                                                                                                      // 1022
+	    self._hDataAutorun = Tracker.autorun(function () {                                                               // 1023
+	      cursor.fetch();                                                                                                // 1024
+	      if (self._serverMode) self._unsetServerUpdateMode(autoClientSave);                                             // 1025
+	    });                                                                                                              // 1026
+	  };                                                                                                                 // 1027
+                                                                                                                      // 1028
+	  AngularMeteorCollection._stopObserving = function () {                                                             // 1029
+	    this._hObserve.stop();                                                                                           // 1030
+	    this._hDataAutorun.stop();                                                                                       // 1031
+	    delete this._serverMode;                                                                                         // 1032
+	    delete this._hUnsetTimeout;                                                                                      // 1033
+	  };                                                                                                                 // 1034
+                                                                                                                      // 1035
+	  AngularMeteorCollection._setServerUpdateMode = function (name) {                                                   // 1036
+	    this._serverMode = true;                                                                                         // 1037
+	    // To simplify server update logic, we don't follow                                                              // 1038
+	    // updates from the client at the same time.                                                                     // 1039
+	    this._unsetAutoClientSave();                                                                                     // 1040
+	  };                                                                                                                 // 1041
+                                                                                                                      // 1042
+	  // Here we use $timeout to combine multiple updates that go                                                        // 1043
+	  // each one after another.                                                                                         // 1044
+	  AngularMeteorCollection._unsetServerUpdateMode = function (autoClientSave) {                                       // 1045
+	    var self = this;                                                                                                 // 1046
+                                                                                                                      // 1047
+	    if (self._hUnsetTimeout) {                                                                                       // 1048
+	      $timeout.cancel(self._hUnsetTimeout);                                                                          // 1049
+	      self._hUnsetTimeout = null;                                                                                    // 1050
+	    }                                                                                                                // 1051
+                                                                                                                      // 1052
+	    self._hUnsetTimeout = $timeout(function () {                                                                     // 1053
+	      self._serverMode = false;                                                                                      // 1054
+	      // Finds updates that was potentially done from the client side                                                // 1055
+	      // and saves them.                                                                                             // 1056
+	      var changes = diffArray.getChanges(self, self._serverBackup, self._diffArrayFunc);                             // 1057
+	      self._saveChanges(changes);                                                                                    // 1058
+	      // After, continues following client updates.                                                                  // 1059
+	      if (autoClientSave) self._setAutoClientSave();                                                                 // 1060
+	    }, 0);                                                                                                           // 1061
+	  };                                                                                                                 // 1062
+                                                                                                                      // 1063
+	  AngularMeteorCollection.stop = function () {                                                                       // 1064
+	    this._stopCursor();                                                                                              // 1065
+	    this._hNewCurAutorun.stop();                                                                                     // 1066
+	  };                                                                                                                 // 1067
+                                                                                                                      // 1068
+	  AngularMeteorCollection._stopCursor = function () {                                                                // 1069
+	    this._unsetAutoClientSave();                                                                                     // 1070
+                                                                                                                      // 1071
+	    if (this._hObserve) {                                                                                            // 1072
+	      this._hObserve.stop();                                                                                         // 1073
+	      this._hDataAutorun.stop();                                                                                     // 1074
+	    }                                                                                                                // 1075
+                                                                                                                      // 1076
+	    this.splice(0);                                                                                                  // 1077
+	    this._serverBackup.splice(0);                                                                                    // 1078
+	  };                                                                                                                 // 1079
+                                                                                                                      // 1080
+	  AngularMeteorCollection._unsetAutoClientSave = function (name) {                                                   // 1081
+	    if (this._hRegAutoBind) {                                                                                        // 1082
+	      this._hRegAutoBind();                                                                                          // 1083
+	      this._hRegAutoBind = null;                                                                                     // 1084
+	    }                                                                                                                // 1085
+	  };                                                                                                                 // 1086
+                                                                                                                      // 1087
+	  AngularMeteorCollection._setAutoClientSave = function () {                                                         // 1088
+	    var self = this;                                                                                                 // 1089
+                                                                                                                      // 1090
+	    // Always unsets auto save to keep only one $watch handler.                                                      // 1091
+	    self._unsetAutoClientSave();                                                                                     // 1092
+                                                                                                                      // 1093
+	    self._hRegAutoBind = $rootScope.$watch(function () {                                                             // 1094
+	      return self;                                                                                                   // 1095
+	    }, function (nItems, oItems) {                                                                                   // 1096
+	      if (nItems === oItems) return;                                                                                 // 1097
+                                                                                                                      // 1098
+	      var changes = diffArray.getChanges(self, oItems, self._diffArrayFunc);                                         // 1099
+	      self._unsetAutoClientSave();                                                                                   // 1100
+	      self._saveChanges(changes);                                                                                    // 1101
+	      self._setAutoClientSave();                                                                                     // 1102
+	    }, true);                                                                                                        // 1103
+	  };                                                                                                                 // 1104
+                                                                                                                      // 1105
+	  AngularMeteorCollection._saveChanges = function (changes) {                                                        // 1106
+	    var self = this;                                                                                                 // 1107
+                                                                                                                      // 1108
+	    // Saves added documents                                                                                         // 1109
+	    // Using reversed iteration to prevent indexes from changing during splice                                       // 1110
+	    var addedDocs = changes.added.reverse().map(function (descriptor) {                                              // 1111
+	      self.splice(descriptor.index, 1);                                                                              // 1112
+	      return descriptor.item;                                                                                        // 1113
+	    });                                                                                                              // 1114
+                                                                                                                      // 1115
+	    if (addedDocs.length) self.save(addedDocs);                                                                      // 1116
+                                                                                                                      // 1117
+	    // Removes deleted documents                                                                                     // 1118
+	    var removedDocs = changes.removed.map(function (descriptor) {                                                    // 1119
+	      return descriptor.item;                                                                                        // 1120
+	    });                                                                                                              // 1121
+                                                                                                                      // 1122
+	    if (removedDocs.length) self.remove(removedDocs);                                                                // 1123
+                                                                                                                      // 1124
+	    // Updates changed documents                                                                                     // 1125
+	    changes.changed.forEach(function (descriptor) {                                                                  // 1126
+	      self._updateDiff(descriptor.selector, descriptor.modifier);                                                    // 1127
+	    });                                                                                                              // 1128
+	  };                                                                                                                 // 1129
+                                                                                                                      // 1130
+	  return AngularMeteorCollection;                                                                                    // 1131
+	}]);                                                                                                                 // 1132
+                                                                                                                      // 1133
 	angularMeteorCollection.factory('$meteorCollectionFS', ['$meteorCollection', 'diffArray', '$angularMeteorSettings', function ($meteorCollection, diffArray, $angularMeteorSettings) {
-	  function $meteorCollectionFS(reactiveFunc, autoClientSave, collection) {                                        // 1065
-                                                                                                                   // 1066
+	  function $meteorCollectionFS(reactiveFunc, autoClientSave, collection) {                                           // 1135
+                                                                                                                      // 1136
 	    if (!$angularMeteorSettings.suppressWarnings) console.warn('[angular-meteor.$meteorCollectionFS] Please note that this method is deprecated since 1.3.0 and will be removed in 1.4.0! For more info: http://www.angular-meteor.com/api/1.3.0/files. You can disable this warning by following this guide http://www.angular-meteor.com/api/1.3.6/settings');
-	    return new $meteorCollection(reactiveFunc, autoClientSave, collection, diffArray.shallow);                    // 1068
-	  }                                                                                                               // 1069
-                                                                                                                   // 1070
-	  return $meteorCollectionFS;                                                                                     // 1071
-	}]);                                                                                                              // 1072
-                                                                                                                   // 1073
+	    return new $meteorCollection(reactiveFunc, autoClientSave, collection, diffArray.shallow);                       // 1138
+	  }                                                                                                                  // 1139
+                                                                                                                      // 1140
+	  return $meteorCollectionFS;                                                                                        // 1141
+	}]);                                                                                                                 // 1142
+                                                                                                                      // 1143
 	angularMeteorCollection.factory('$meteorCollection', ['AngularMeteorCollection', '$rootScope', 'diffArray', function (AngularMeteorCollection, $rootScope, diffArray) {
-	  function $meteorCollection(reactiveFunc, autoClientSave, collection, diffFn) {                                  // 1075
-	    // Validate parameters                                                                                        // 1076
-	    if (!reactiveFunc) {                                                                                          // 1077
-	      throw new TypeError('The first argument of $meteorCollection is undefined.');                               // 1078
-	    }                                                                                                             // 1079
-                                                                                                                   // 1080
-	    if (!(angular.isFunction(reactiveFunc) || angular.isFunction(reactiveFunc.find))) {                           // 1081
+	  function $meteorCollection(reactiveFunc, autoClientSave, collection, diffFn) {                                     // 1145
+	    // Validate parameters                                                                                           // 1146
+	    if (!reactiveFunc) {                                                                                             // 1147
+	      throw new TypeError('The first argument of $meteorCollection is undefined.');                                  // 1148
+	    }                                                                                                                // 1149
+                                                                                                                      // 1150
+	    if (!(angular.isFunction(reactiveFunc) || angular.isFunction(reactiveFunc.find))) {                              // 1151
 	      throw new TypeError('The first argument of $meteorCollection must be a function or ' + 'a have a find function property.');
-	    }                                                                                                             // 1083
-                                                                                                                   // 1084
-	    if (!angular.isFunction(reactiveFunc)) {                                                                      // 1085
-	      collection = angular.isDefined(collection) ? collection : reactiveFunc;                                     // 1086
-	      reactiveFunc = _.bind(reactiveFunc.find, reactiveFunc);                                                     // 1087
-	    }                                                                                                             // 1088
-                                                                                                                   // 1089
-	    // By default auto save - true.                                                                               // 1090
-	    autoClientSave = angular.isDefined(autoClientSave) ? autoClientSave : true;                                   // 1091
-	    diffFn = diffFn || diffArray;                                                                                 // 1092
-	    return new AngularMeteorCollection(reactiveFunc, collection, diffFn, autoClientSave);                         // 1093
-	  }                                                                                                               // 1094
-                                                                                                                   // 1095
-	  return $meteorCollection;                                                                                       // 1096
-	}]);                                                                                                              // 1097
-                                                                                                                   // 1098
+	    }                                                                                                                // 1153
+                                                                                                                      // 1154
+	    if (!angular.isFunction(reactiveFunc)) {                                                                         // 1155
+	      collection = angular.isDefined(collection) ? collection : reactiveFunc;                                        // 1156
+	      reactiveFunc = _underscore2.default.bind(reactiveFunc.find, reactiveFunc);                                     // 1157
+	    }                                                                                                                // 1158
+                                                                                                                      // 1159
+	    // By default auto save - true.                                                                                  // 1160
+	    autoClientSave = angular.isDefined(autoClientSave) ? autoClientSave : true;                                      // 1161
+	    diffFn = diffFn || diffArray;                                                                                    // 1162
+	    return new AngularMeteorCollection(reactiveFunc, collection, diffFn, autoClientSave);                            // 1163
+	  }                                                                                                                  // 1164
+                                                                                                                      // 1165
+	  return $meteorCollection;                                                                                          // 1166
+	}]);                                                                                                                 // 1167
+                                                                                                                      // 1168
 	angularMeteorCollection.run(['$rootScope', '$meteorCollection', '$meteorCollectionFS', '$meteorStopper', function ($rootScope, $meteorCollection, $meteorCollectionFS, $meteorStopper) {
-	  var scopeProto = Object.getPrototypeOf($rootScope);                                                             // 1100
-	  scopeProto.$meteorCollection = $meteorStopper($meteorCollection);                                               // 1101
-	  scopeProto.$meteorCollectionFS = $meteorStopper($meteorCollectionFS);                                           // 1102
-	}]);                                                                                                              // 1103
-                                                                                                                   // 1104
-/***/ },                                                                                                           // 1105
-/* 8 */                                                                                                            // 1106
-/***/ function(module, exports) {                                                                                  // 1107
-                                                                                                                   // 1108
-	/*global                                                                                                          // 1109
-	  angular, _, Mongo                                                                                               // 1110
-	*/                                                                                                                // 1111
-                                                                                                                   // 1112
-	'use strict';                                                                                                     // 1113
-                                                                                                                   // 1114
+	  var scopeProto = Object.getPrototypeOf($rootScope);                                                                // 1170
+	  scopeProto.$meteorCollection = $meteorStopper($meteorCollection);                                                  // 1171
+	  scopeProto.$meteorCollectionFS = $meteorStopper($meteorCollectionFS);                                              // 1172
+	}]);                                                                                                                 // 1173
+                                                                                                                      // 1174
+/***/ },                                                                                                              // 1175
+/* 10 */                                                                                                              // 1176
+/***/ function(module, exports, __webpack_require__) {                                                                // 1177
+                                                                                                                      // 1178
+	'use strict';                                                                                                        // 1179
+                                                                                                                      // 1180
+	var _underscore = __webpack_require__(2);                                                                            // 1181
+                                                                                                                      // 1182
+	var _underscore2 = _interopRequireDefault(_underscore);                                                              // 1183
+                                                                                                                      // 1184
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }                      // 1185
+                                                                                                                      // 1186
+	'use strict'; /*global                                                                                               // 1187
+	                angular, _, Mongo                                                                                    // 1188
+	              */                                                                                                     // 1189
+                                                                                                                      // 1190
 	var angularMeteorObject = angular.module('angular-meteor.object', ['angular-meteor.utils', 'angular-meteor.subscribe', 'angular-meteor.collection', 'getUpdates', 'diffArray', 'angular-meteor.settings']);
-                                                                                                                   // 1116
+                                                                                                                      // 1192
 	angularMeteorObject.factory('AngularMeteorObject', ['$q', '$meteorSubscribe', '$meteorUtils', 'diffArray', 'getUpdates', 'AngularMeteorCollection', '$angularMeteorSettings', function ($q, $meteorSubscribe, $meteorUtils, diffArray, getUpdates, AngularMeteorCollection, $angularMeteorSettings) {
-                                                                                                                   // 1118
-	  // A list of internals properties to not watch for, nor pass to the Document on update and etc.                 // 1119
+                                                                                                                      // 1194
+	  // A list of internals properties to not watch for, nor pass to the Document on update and etc.                    // 1195
 	  AngularMeteorObject.$$internalProps = ['$$collection', '$$options', '$$id', '$$hashkey', '$$internalProps', '$$scope', 'bind', 'save', 'reset', 'subscribe', 'stop', 'autorunComputation', 'unregisterAutoBind', 'unregisterAutoDestroy', 'getRawObject', '_auto', '_setAutos', '_eventEmitter', '_serverBackup', '_updateDiff', '_updateParallel', '_getId'];
-                                                                                                                   // 1121
-	  function AngularMeteorObject(collection, selector, options) {                                                   // 1122
+                                                                                                                      // 1197
+	  function AngularMeteorObject(collection, selector, options) {                                                      // 1198
 	    if (!$angularMeteorSettings.suppressWarnings) console.warn('[angular-meteor.$meteorObject] Please note that this method is deprecated since 1.3.0 and will be removed in 1.4.0! For more info: http://www.angular-meteor.com/api/1.3.0/meteorObject. You can disable this warning by following this guide http://www.angular-meteor.com/api/1.3.6/settings');
-	    // Make data not be an object so we can extend it to preserve                                                 // 1124
-	    // Collection Helpers and the like                                                                            // 1125
-	    var helpers = collection._helpers;                                                                            // 1126
-	    var data = _.isFunction(helpers) ? Object.create(helpers.prototype) : {};                                     // 1127
-	    var doc = collection.findOne(selector, options);                                                              // 1128
-	    var collectionExtension = _.pick(AngularMeteorCollection, '_updateParallel');                                 // 1129
-	    _.extend(data, doc);                                                                                          // 1130
-	    _.extend(data, AngularMeteorObject);                                                                          // 1131
-	    _.extend(data, collectionExtension);                                                                          // 1132
-                                                                                                                   // 1133
-	    // Omit options that may spoil document finding                                                               // 1134
-	    data.$$options = _.omit(options, 'skip', 'limit');                                                            // 1135
-	    data.$$collection = collection;                                                                               // 1136
-	    data.$$id = data._getId(selector);                                                                            // 1137
-	    data._serverBackup = doc || {};                                                                               // 1138
-                                                                                                                   // 1139
-	    return data;                                                                                                  // 1140
-	  }                                                                                                               // 1141
-                                                                                                                   // 1142
-	  AngularMeteorObject.getRawObject = function () {                                                                // 1143
-	    return angular.copy(_.omit(this, this.$$internalProps));                                                      // 1144
-	  };                                                                                                              // 1145
-                                                                                                                   // 1146
-	  AngularMeteorObject.subscribe = function () {                                                                   // 1147
-	    $meteorSubscribe.subscribe.apply(this, arguments);                                                            // 1148
-	    return this;                                                                                                  // 1149
-	  };                                                                                                              // 1150
-                                                                                                                   // 1151
-	  AngularMeteorObject.save = function (custom) {                                                                  // 1152
-	    var deferred = $q.defer();                                                                                    // 1153
-	    var collection = this.$$collection;                                                                           // 1154
-	    var createFulfill = _.partial($meteorUtils.fulfill, deferred, null);                                          // 1155
-	    var oldDoc = collection.findOne(this.$$id);                                                                   // 1156
-	    var mods;                                                                                                     // 1157
-                                                                                                                   // 1158
-	    // update                                                                                                     // 1159
-	    if (oldDoc) {                                                                                                 // 1160
-	      if (custom) mods = { $set: custom };else {                                                                  // 1161
-	        mods = getUpdates(oldDoc, this.getRawObject());                                                           // 1162
-	        // If there are no updates, there is nothing to do here, returning                                        // 1163
-	        if (_.isEmpty(mods)) {                                                                                    // 1164
-	          return $q.when({ action: 'updated' });                                                                  // 1165
-	        }                                                                                                         // 1166
-	      }                                                                                                           // 1167
-                                                                                                                   // 1168
-	      // NOTE: do not use #upsert() method, since it does not exist in some collections                           // 1169
-	      this._updateDiff(mods, createFulfill({ action: 'updated' }));                                               // 1170
-	    }                                                                                                             // 1171
-	    // insert                                                                                                     // 1172
-	    else {                                                                                                        // 1173
-	        if (custom) mods = _.clone(custom);else mods = this.getRawObject();                                       // 1174
-                                                                                                                   // 1175
-	        mods._id = mods._id || this.$$id;                                                                         // 1176
-	        collection.insert(mods, createFulfill({ action: 'inserted' }));                                           // 1177
-	      }                                                                                                           // 1178
-                                                                                                                   // 1179
-	    return deferred.promise;                                                                                      // 1180
-	  };                                                                                                              // 1181
-                                                                                                                   // 1182
-	  AngularMeteorObject._updateDiff = function (update, callback) {                                                 // 1183
-	    var selector = this.$$id;                                                                                     // 1184
-	    AngularMeteorCollection._updateDiff.call(this, selector, update, callback);                                   // 1185
-	  };                                                                                                              // 1186
-                                                                                                                   // 1187
-	  AngularMeteorObject.reset = function (keepClientProps) {                                                        // 1188
-	    var self = this;                                                                                              // 1189
-	    var options = this.$$options;                                                                                 // 1190
-	    var id = this.$$id;                                                                                           // 1191
-	    var doc = this.$$collection.findOne(id, options);                                                             // 1192
-                                                                                                                   // 1193
-	    if (doc) {                                                                                                    // 1194
-	      // extend SubObject                                                                                         // 1195
-	      var docKeys = _.keys(doc);                                                                                  // 1196
-	      var docExtension = _.pick(doc, docKeys);                                                                    // 1197
-	      var clientProps;                                                                                            // 1198
-                                                                                                                   // 1199
-	      _.extend(self, docExtension);                                                                               // 1200
-	      _.extend(self._serverBackup, docExtension);                                                                 // 1201
-                                                                                                                   // 1202
-	      if (keepClientProps) {                                                                                      // 1203
-	        clientProps = _.intersection(_.keys(self), _.keys(self._serverBackup));                                   // 1204
-	      } else {                                                                                                    // 1205
-	        clientProps = _.keys(self);                                                                               // 1206
-	      }                                                                                                           // 1207
-                                                                                                                   // 1208
-	      var serverProps = _.keys(doc);                                                                              // 1209
-	      var removedKeys = _.difference(clientProps, serverProps, self.$$internalProps);                             // 1210
-                                                                                                                   // 1211
-	      removedKeys.forEach(function (prop) {                                                                       // 1212
-	        delete self[prop];                                                                                        // 1213
-	        delete self._serverBackup[prop];                                                                          // 1214
-	      });                                                                                                         // 1215
-	    } else {                                                                                                      // 1216
-	      _.keys(this.getRawObject()).forEach(function (prop) {                                                       // 1217
-	        delete self[prop];                                                                                        // 1218
-	      });                                                                                                         // 1219
-                                                                                                                   // 1220
-	      self._serverBackup = {};                                                                                    // 1221
-	    }                                                                                                             // 1222
-	  };                                                                                                              // 1223
-                                                                                                                   // 1224
-	  AngularMeteorObject.stop = function () {                                                                        // 1225
-	    if (this.unregisterAutoDestroy) this.unregisterAutoDestroy();                                                 // 1226
-                                                                                                                   // 1227
-	    if (this.unregisterAutoBind) this.unregisterAutoBind();                                                       // 1228
-                                                                                                                   // 1229
-	    if (this.autorunComputation && this.autorunComputation.stop) this.autorunComputation.stop();                  // 1230
-	  };                                                                                                              // 1231
-                                                                                                                   // 1232
-	  AngularMeteorObject._getId = function (selector) {                                                              // 1233
-	    var options = _.extend({}, this.$$options, {                                                                  // 1234
-	      fields: { _id: 1 },                                                                                         // 1235
-	      reactive: false,                                                                                            // 1236
-	      transform: null                                                                                             // 1237
-	    });                                                                                                           // 1238
-                                                                                                                   // 1239
-	    var doc = this.$$collection.findOne(selector, options);                                                       // 1240
-                                                                                                                   // 1241
-	    if (doc) return doc._id;                                                                                      // 1242
-	    if (selector instanceof Mongo.ObjectID) return selector;                                                      // 1243
-	    if (_.isString(selector)) return selector;                                                                    // 1244
-	    return new Mongo.ObjectID();                                                                                  // 1245
-	  };                                                                                                              // 1246
-                                                                                                                   // 1247
-	  return AngularMeteorObject;                                                                                     // 1248
-	}]);                                                                                                              // 1249
-                                                                                                                   // 1250
+	    // Make data not be an object so we can extend it to preserve                                                    // 1200
+	    // Collection Helpers and the like                                                                               // 1201
+	    var helpers = collection._helpers;                                                                               // 1202
+	    var data = _underscore2.default.isFunction(helpers) ? Object.create(helpers.prototype) : {};                     // 1203
+	    var doc = collection.findOne(selector, options);                                                                 // 1204
+	    var collectionExtension = _underscore2.default.pick(AngularMeteorCollection, '_updateParallel');                 // 1205
+	    _underscore2.default.extend(data, doc);                                                                          // 1206
+	    _underscore2.default.extend(data, AngularMeteorObject);                                                          // 1207
+	    _underscore2.default.extend(data, collectionExtension);                                                          // 1208
+                                                                                                                      // 1209
+	    // Omit options that may spoil document finding                                                                  // 1210
+	    data.$$options = _underscore2.default.omit(options, 'skip', 'limit');                                            // 1211
+	    data.$$collection = collection;                                                                                  // 1212
+	    data.$$id = data._getId(selector);                                                                               // 1213
+	    data._serverBackup = doc || {};                                                                                  // 1214
+                                                                                                                      // 1215
+	    return data;                                                                                                     // 1216
+	  }                                                                                                                  // 1217
+                                                                                                                      // 1218
+	  AngularMeteorObject.getRawObject = function () {                                                                   // 1219
+	    return angular.copy(_underscore2.default.omit(this, this.$$internalProps));                                      // 1220
+	  };                                                                                                                 // 1221
+                                                                                                                      // 1222
+	  AngularMeteorObject.subscribe = function () {                                                                      // 1223
+	    $meteorSubscribe.subscribe.apply(this, arguments);                                                               // 1224
+	    return this;                                                                                                     // 1225
+	  };                                                                                                                 // 1226
+                                                                                                                      // 1227
+	  AngularMeteorObject.save = function (custom) {                                                                     // 1228
+	    var deferred = $q.defer();                                                                                       // 1229
+	    var collection = this.$$collection;                                                                              // 1230
+	    var createFulfill = _underscore2.default.partial($meteorUtils.fulfill, deferred, null);                          // 1231
+	    var oldDoc = collection.findOne(this.$$id);                                                                      // 1232
+	    var mods;                                                                                                        // 1233
+                                                                                                                      // 1234
+	    // update                                                                                                        // 1235
+	    if (oldDoc) {                                                                                                    // 1236
+	      if (custom) mods = { $set: custom };else {                                                                     // 1237
+	        mods = getUpdates(oldDoc, this.getRawObject());                                                              // 1238
+	        // If there are no updates, there is nothing to do here, returning                                           // 1239
+	        if (_underscore2.default.isEmpty(mods)) {                                                                    // 1240
+	          return $q.when({ action: 'updated' });                                                                     // 1241
+	        }                                                                                                            // 1242
+	      }                                                                                                              // 1243
+                                                                                                                      // 1244
+	      // NOTE: do not use #upsert() method, since it does not exist in some collections                              // 1245
+	      this._updateDiff(mods, createFulfill({ action: 'updated' }));                                                  // 1246
+	    }                                                                                                                // 1247
+	    // insert                                                                                                        // 1248
+	    else {                                                                                                           // 1249
+	        if (custom) mods = _underscore2.default.clone(custom);else mods = this.getRawObject();                       // 1250
+                                                                                                                      // 1251
+	        mods._id = mods._id || this.$$id;                                                                            // 1252
+	        collection.insert(mods, createFulfill({ action: 'inserted' }));                                              // 1253
+	      }                                                                                                              // 1254
+                                                                                                                      // 1255
+	    return deferred.promise;                                                                                         // 1256
+	  };                                                                                                                 // 1257
+                                                                                                                      // 1258
+	  AngularMeteorObject._updateDiff = function (update, callback) {                                                    // 1259
+	    var selector = this.$$id;                                                                                        // 1260
+	    AngularMeteorCollection._updateDiff.call(this, selector, update, callback);                                      // 1261
+	  };                                                                                                                 // 1262
+                                                                                                                      // 1263
+	  AngularMeteorObject.reset = function (keepClientProps) {                                                           // 1264
+	    var self = this;                                                                                                 // 1265
+	    var options = this.$$options;                                                                                    // 1266
+	    var id = this.$$id;                                                                                              // 1267
+	    var doc = this.$$collection.findOne(id, options);                                                                // 1268
+                                                                                                                      // 1269
+	    if (doc) {                                                                                                       // 1270
+	      // extend SubObject                                                                                            // 1271
+	      var docKeys = _underscore2.default.keys(doc);                                                                  // 1272
+	      var docExtension = _underscore2.default.pick(doc, docKeys);                                                    // 1273
+	      var clientProps;                                                                                               // 1274
+                                                                                                                      // 1275
+	      _underscore2.default.extend(self, docExtension);                                                               // 1276
+	      _underscore2.default.extend(self._serverBackup, docExtension);                                                 // 1277
+                                                                                                                      // 1278
+	      if (keepClientProps) {                                                                                         // 1279
+	        clientProps = _underscore2.default.intersection(_underscore2.default.keys(self), _underscore2.default.keys(self._serverBackup));
+	      } else {                                                                                                       // 1281
+	        clientProps = _underscore2.default.keys(self);                                                               // 1282
+	      }                                                                                                              // 1283
+                                                                                                                      // 1284
+	      var serverProps = _underscore2.default.keys(doc);                                                              // 1285
+	      var removedKeys = _underscore2.default.difference(clientProps, serverProps, self.$$internalProps);             // 1286
+                                                                                                                      // 1287
+	      removedKeys.forEach(function (prop) {                                                                          // 1288
+	        delete self[prop];                                                                                           // 1289
+	        delete self._serverBackup[prop];                                                                             // 1290
+	      });                                                                                                            // 1291
+	    } else {                                                                                                         // 1292
+	      _underscore2.default.keys(this.getRawObject()).forEach(function (prop) {                                       // 1293
+	        delete self[prop];                                                                                           // 1294
+	      });                                                                                                            // 1295
+                                                                                                                      // 1296
+	      self._serverBackup = {};                                                                                       // 1297
+	    }                                                                                                                // 1298
+	  };                                                                                                                 // 1299
+                                                                                                                      // 1300
+	  AngularMeteorObject.stop = function () {                                                                           // 1301
+	    if (this.unregisterAutoDestroy) this.unregisterAutoDestroy();                                                    // 1302
+                                                                                                                      // 1303
+	    if (this.unregisterAutoBind) this.unregisterAutoBind();                                                          // 1304
+                                                                                                                      // 1305
+	    if (this.autorunComputation && this.autorunComputation.stop) this.autorunComputation.stop();                     // 1306
+	  };                                                                                                                 // 1307
+                                                                                                                      // 1308
+	  AngularMeteorObject._getId = function (selector) {                                                                 // 1309
+	    var options = _underscore2.default.extend({}, this.$$options, {                                                  // 1310
+	      fields: { _id: 1 },                                                                                            // 1311
+	      reactive: false,                                                                                               // 1312
+	      transform: null                                                                                                // 1313
+	    });                                                                                                              // 1314
+                                                                                                                      // 1315
+	    var doc = this.$$collection.findOne(selector, options);                                                          // 1316
+                                                                                                                      // 1317
+	    if (doc) return doc._id;                                                                                         // 1318
+	    if (selector instanceof Mongo.ObjectID) return selector;                                                         // 1319
+	    if (_underscore2.default.isString(selector)) return selector;                                                    // 1320
+	    return new Mongo.ObjectID();                                                                                     // 1321
+	  };                                                                                                                 // 1322
+                                                                                                                      // 1323
+	  return AngularMeteorObject;                                                                                        // 1324
+	}]);                                                                                                                 // 1325
+                                                                                                                      // 1326
 	angularMeteorObject.factory('$meteorObject', ['$rootScope', '$meteorUtils', 'getUpdates', 'AngularMeteorObject', function ($rootScope, $meteorUtils, getUpdates, AngularMeteorObject) {
-	  function $meteorObject(collection, id, auto, options) {                                                         // 1252
-	    // Validate parameters                                                                                        // 1253
-	    if (!collection) {                                                                                            // 1254
-	      throw new TypeError("The first argument of $meteorObject is undefined.");                                   // 1255
-	    }                                                                                                             // 1256
-                                                                                                                   // 1257
-	    if (!angular.isFunction(collection.findOne)) {                                                                // 1258
+	  function $meteorObject(collection, id, auto, options) {                                                            // 1328
+	    // Validate parameters                                                                                           // 1329
+	    if (!collection) {                                                                                               // 1330
+	      throw new TypeError("The first argument of $meteorObject is undefined.");                                      // 1331
+	    }                                                                                                                // 1332
+                                                                                                                      // 1333
+	    if (!angular.isFunction(collection.findOne)) {                                                                   // 1334
 	      throw new TypeError("The first argument of $meteorObject must be a function or a have a findOne function property.");
-	    }                                                                                                             // 1260
-                                                                                                                   // 1261
-	    var data = new AngularMeteorObject(collection, id, options);                                                  // 1262
-	    // Making auto default true - http://stackoverflow.com/a/15464208/1426570                                     // 1263
-	    data._auto = auto !== false;                                                                                  // 1264
-	    _.extend(data, $meteorObject);                                                                                // 1265
-	    data._setAutos();                                                                                             // 1266
-	    return data;                                                                                                  // 1267
-	  }                                                                                                               // 1268
-                                                                                                                   // 1269
-	  $meteorObject._setAutos = function () {                                                                         // 1270
-	    var self = this;                                                                                              // 1271
-                                                                                                                   // 1272
-	    this.autorunComputation = $meteorUtils.autorun($rootScope, function () {                                      // 1273
-	      self.reset(true);                                                                                           // 1274
-	    });                                                                                                           // 1275
-                                                                                                                   // 1276
-	    // Deep watches the model and performs autobind                                                               // 1277
-	    this.unregisterAutoBind = this._auto && $rootScope.$watch(function () {                                       // 1278
-	      return self.getRawObject();                                                                                 // 1279
-	    }, function (item, oldItem) {                                                                                 // 1280
-	      if (item !== oldItem) self.save();                                                                          // 1281
-	    }, true);                                                                                                     // 1282
-                                                                                                                   // 1283
-	    this.unregisterAutoDestroy = $rootScope.$on('$destroy', function () {                                         // 1284
-	      if (self && self.stop) self.pop();                                                                          // 1285
-	    });                                                                                                           // 1286
-	  };                                                                                                              // 1287
-                                                                                                                   // 1288
-	  return $meteorObject;                                                                                           // 1289
-	}]);                                                                                                              // 1290
-                                                                                                                   // 1291
+	    }                                                                                                                // 1336
+                                                                                                                      // 1337
+	    var data = new AngularMeteorObject(collection, id, options);                                                     // 1338
+	    // Making auto default true - http://stackoverflow.com/a/15464208/1426570                                        // 1339
+	    data._auto = auto !== false;                                                                                     // 1340
+	    _underscore2.default.extend(data, $meteorObject);                                                                // 1341
+	    data._setAutos();                                                                                                // 1342
+	    return data;                                                                                                     // 1343
+	  }                                                                                                                  // 1344
+                                                                                                                      // 1345
+	  $meteorObject._setAutos = function () {                                                                            // 1346
+	    var self = this;                                                                                                 // 1347
+                                                                                                                      // 1348
+	    this.autorunComputation = $meteorUtils.autorun($rootScope, function () {                                         // 1349
+	      self.reset(true);                                                                                              // 1350
+	    });                                                                                                              // 1351
+                                                                                                                      // 1352
+	    // Deep watches the model and performs autobind                                                                  // 1353
+	    this.unregisterAutoBind = this._auto && $rootScope.$watch(function () {                                          // 1354
+	      return self.getRawObject();                                                                                    // 1355
+	    }, function (item, oldItem) {                                                                                    // 1356
+	      if (item !== oldItem) self.save();                                                                             // 1357
+	    }, true);                                                                                                        // 1358
+                                                                                                                      // 1359
+	    this.unregisterAutoDestroy = $rootScope.$on('$destroy', function () {                                            // 1360
+	      if (self && self.stop) self.pop();                                                                             // 1361
+	    });                                                                                                              // 1362
+	  };                                                                                                                 // 1363
+                                                                                                                      // 1364
+	  return $meteorObject;                                                                                              // 1365
+	}]);                                                                                                                 // 1366
+                                                                                                                      // 1367
 	angularMeteorObject.run(['$rootScope', '$meteorObject', '$meteorStopper', function ($rootScope, $meteorObject, $meteorStopper) {
-	  var scopeProto = Object.getPrototypeOf($rootScope);                                                             // 1293
-	  scopeProto.$meteorObject = $meteorStopper($meteorObject);                                                       // 1294
-	}]);                                                                                                              // 1295
-                                                                                                                   // 1296
-/***/ },                                                                                                           // 1297
-/* 9 */                                                                                                            // 1298
-/***/ function(module, exports) {                                                                                  // 1299
-                                                                                                                   // 1300
-	/*global                                                                                                          // 1301
-	 angular, _, Package, Meteor                                                                                      // 1302
-	 */                                                                                                               // 1303
-                                                                                                                   // 1304
-	'use strict';                                                                                                     // 1305
-                                                                                                                   // 1306
+	  var scopeProto = Object.getPrototypeOf($rootScope);                                                                // 1369
+	  scopeProto.$meteorObject = $meteorStopper($meteorObject);                                                          // 1370
+	}]);                                                                                                                 // 1371
+                                                                                                                      // 1372
+/***/ },                                                                                                              // 1373
+/* 11 */                                                                                                              // 1374
+/***/ function(module, exports, __webpack_require__) {                                                                // 1375
+                                                                                                                      // 1376
+	'use strict';                                                                                                        // 1377
+                                                                                                                      // 1378
+	var _underscore = __webpack_require__(2);                                                                            // 1379
+                                                                                                                      // 1380
+	var _underscore2 = _interopRequireDefault(_underscore);                                                              // 1381
+                                                                                                                      // 1382
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }                      // 1383
+                                                                                                                      // 1384
+	'use strict'; /*global                                                                                               // 1385
+	               angular, _, Package, Meteor                                                                           // 1386
+	               */                                                                                                    // 1387
+                                                                                                                      // 1388
 	var angularMeteorUser = angular.module('angular-meteor.user', ['angular-meteor.utils', 'angular-meteor.core', 'angular-meteor.settings']);
-                                                                                                                   // 1308
-	// requires package 'accounts-password'                                                                           // 1309
+                                                                                                                      // 1390
+	// requires package 'accounts-password'                                                                              // 1391
 	angularMeteorUser.service('$meteorUser', ['$rootScope', '$meteorUtils', '$q', '$angularMeteorSettings', function ($rootScope, $meteorUtils, $q, $angularMeteorSettings) {
-                                                                                                                   // 1311
-	  var pack = Package['accounts-base'];                                                                            // 1312
-	  if (!pack) return;                                                                                              // 1313
-                                                                                                                   // 1314
-	  var self = this;                                                                                                // 1315
-	  var Accounts = pack.Accounts;                                                                                   // 1316
-                                                                                                                   // 1317
-	  this.waitForUser = function () {                                                                                // 1318
+                                                                                                                      // 1393
+	  var pack = Package['accounts-base'];                                                                               // 1394
+	  if (!pack) return;                                                                                                 // 1395
+                                                                                                                      // 1396
+	  var self = this;                                                                                                   // 1397
+	  var Accounts = pack.Accounts;                                                                                      // 1398
+                                                                                                                      // 1399
+	  this.waitForUser = function () {                                                                                   // 1400
 	    if (!$angularMeteorSettings.suppressWarnings) console.warn('[angular-meteor.waitForUser] Please note that this method is deprecated since 1.3.0 and will be removed in 1.4.0! http://info.meteor.com/blog/angular-meteor-1.3. You can disable this warning by following this guide http://www.angular-meteor.com/api/1.3.6/settings');
-                                                                                                                   // 1320
-	    var deferred = $q.defer();                                                                                    // 1321
-                                                                                                                   // 1322
-	    $meteorUtils.autorun($rootScope, function () {                                                                // 1323
-	      if (!Meteor.loggingIn()) deferred.resolve(Meteor.user());                                                   // 1324
-	    }, true);                                                                                                     // 1325
-                                                                                                                   // 1326
-	    return deferred.promise;                                                                                      // 1327
-	  };                                                                                                              // 1328
-                                                                                                                   // 1329
-	  this.requireUser = function () {                                                                                // 1330
-	    if (!$angularMeteorSettings.suppressWarnings) {                                                               // 1331
+                                                                                                                      // 1402
+	    var deferred = $q.defer();                                                                                       // 1403
+                                                                                                                      // 1404
+	    $meteorUtils.autorun($rootScope, function () {                                                                   // 1405
+	      if (!Meteor.loggingIn()) deferred.resolve(Meteor.user());                                                      // 1406
+	    }, true);                                                                                                        // 1407
+                                                                                                                      // 1408
+	    return deferred.promise;                                                                                         // 1409
+	  };                                                                                                                 // 1410
+                                                                                                                      // 1411
+	  this.requireUser = function () {                                                                                   // 1412
+	    if (!$angularMeteorSettings.suppressWarnings) {                                                                  // 1413
 	      console.warn('[angular-meteor.requireUser] Please note that this method is deprecated since 1.3.0 and will be removed in 1.4.0! http://info.meteor.com/blog/angular-meteor-1.3. You can disable this warning by following this guide http://www.angular-meteor.com/api/1.3.6/settings');
-	    }                                                                                                             // 1333
-                                                                                                                   // 1334
-	    var deferred = $q.defer();                                                                                    // 1335
-                                                                                                                   // 1336
-	    $meteorUtils.autorun($rootScope, function () {                                                                // 1337
-	      if (!Meteor.loggingIn()) {                                                                                  // 1338
-	        if (Meteor.user() === null) deferred.reject("AUTH_REQUIRED");else deferred.resolve(Meteor.user());        // 1339
-	      }                                                                                                           // 1340
-	    }, true);                                                                                                     // 1341
-                                                                                                                   // 1342
-	    return deferred.promise;                                                                                      // 1343
-	  };                                                                                                              // 1344
-                                                                                                                   // 1345
-	  this.requireValidUser = function (validatorFn) {                                                                // 1346
+	    }                                                                                                                // 1415
+                                                                                                                      // 1416
+	    var deferred = $q.defer();                                                                                       // 1417
+                                                                                                                      // 1418
+	    $meteorUtils.autorun($rootScope, function () {                                                                   // 1419
+	      if (!Meteor.loggingIn()) {                                                                                     // 1420
+	        if (Meteor.user() === null) deferred.reject("AUTH_REQUIRED");else deferred.resolve(Meteor.user());           // 1421
+	      }                                                                                                              // 1422
+	    }, true);                                                                                                        // 1423
+                                                                                                                      // 1424
+	    return deferred.promise;                                                                                         // 1425
+	  };                                                                                                                 // 1426
+                                                                                                                      // 1427
+	  this.requireValidUser = function (validatorFn) {                                                                   // 1428
 	    if (!$angularMeteorSettings.suppressWarnings) console.warn('[angular-meteor.requireValidUser] Please note that this method is deprecated since 1.3.0 and will be removed in 1.4.0! http://info.meteor.com/blog/angular-meteor-1.3. You can disable this warning by following this guide http://www.angular-meteor.com/api/1.3.6/settings');
-                                                                                                                   // 1348
-	    return self.requireUser(true).then(function (user) {                                                          // 1349
-	      var valid = validatorFn(user);                                                                              // 1350
-                                                                                                                   // 1351
+                                                                                                                      // 1430
+	    return self.requireUser(true).then(function (user) {                                                             // 1431
+	      var valid = validatorFn(user);                                                                                 // 1432
+                                                                                                                      // 1433
 	      if (valid === true) return user;else if (typeof valid === "string") return $q.reject(valid);else return $q.reject("FORBIDDEN");
-	    });                                                                                                           // 1353
-	  };                                                                                                              // 1354
-                                                                                                                   // 1355
-	  this.loginWithPassword = $meteorUtils.promissor(Meteor, 'loginWithPassword');                                   // 1356
-	  this.createUser = $meteorUtils.promissor(Accounts, 'createUser');                                               // 1357
-	  this.changePassword = $meteorUtils.promissor(Accounts, 'changePassword');                                       // 1358
-	  this.forgotPassword = $meteorUtils.promissor(Accounts, 'forgotPassword');                                       // 1359
-	  this.resetPassword = $meteorUtils.promissor(Accounts, 'resetPassword');                                         // 1360
-	  this.verifyEmail = $meteorUtils.promissor(Accounts, 'verifyEmail');                                             // 1361
-	  this.logout = $meteorUtils.promissor(Meteor, 'logout');                                                         // 1362
-	  this.logoutOtherClients = $meteorUtils.promissor(Meteor, 'logoutOtherClients');                                 // 1363
-	  this.loginWithFacebook = $meteorUtils.promissor(Meteor, 'loginWithFacebook');                                   // 1364
-	  this.loginWithTwitter = $meteorUtils.promissor(Meteor, 'loginWithTwitter');                                     // 1365
-	  this.loginWithGoogle = $meteorUtils.promissor(Meteor, 'loginWithGoogle');                                       // 1366
-	  this.loginWithGithub = $meteorUtils.promissor(Meteor, 'loginWithGithub');                                       // 1367
-	  this.loginWithMeteorDeveloperAccount = $meteorUtils.promissor(Meteor, 'loginWithMeteorDeveloperAccount');       // 1368
-	  this.loginWithMeetup = $meteorUtils.promissor(Meteor, 'loginWithMeetup');                                       // 1369
-	  this.loginWithWeibo = $meteorUtils.promissor(Meteor, 'loginWithWeibo');                                         // 1370
-	}]);                                                                                                              // 1371
-                                                                                                                   // 1372
+	    });                                                                                                              // 1435
+	  };                                                                                                                 // 1436
+                                                                                                                      // 1437
+	  this.loginWithPassword = $meteorUtils.promissor(Meteor, 'loginWithPassword');                                      // 1438
+	  this.createUser = $meteorUtils.promissor(Accounts, 'createUser');                                                  // 1439
+	  this.changePassword = $meteorUtils.promissor(Accounts, 'changePassword');                                          // 1440
+	  this.forgotPassword = $meteorUtils.promissor(Accounts, 'forgotPassword');                                          // 1441
+	  this.resetPassword = $meteorUtils.promissor(Accounts, 'resetPassword');                                            // 1442
+	  this.verifyEmail = $meteorUtils.promissor(Accounts, 'verifyEmail');                                                // 1443
+	  this.logout = $meteorUtils.promissor(Meteor, 'logout');                                                            // 1444
+	  this.logoutOtherClients = $meteorUtils.promissor(Meteor, 'logoutOtherClients');                                    // 1445
+	  this.loginWithFacebook = $meteorUtils.promissor(Meteor, 'loginWithFacebook');                                      // 1446
+	  this.loginWithTwitter = $meteorUtils.promissor(Meteor, 'loginWithTwitter');                                        // 1447
+	  this.loginWithGoogle = $meteorUtils.promissor(Meteor, 'loginWithGoogle');                                          // 1448
+	  this.loginWithGithub = $meteorUtils.promissor(Meteor, 'loginWithGithub');                                          // 1449
+	  this.loginWithMeteorDeveloperAccount = $meteorUtils.promissor(Meteor, 'loginWithMeteorDeveloperAccount');          // 1450
+	  this.loginWithMeetup = $meteorUtils.promissor(Meteor, 'loginWithMeetup');                                          // 1451
+	  this.loginWithWeibo = $meteorUtils.promissor(Meteor, 'loginWithWeibo');                                            // 1452
+	}]);                                                                                                                 // 1453
+                                                                                                                      // 1454
 	angularMeteorUser.run(['$rootScope', '$angularMeteorSettings', '$$Core', function ($rootScope, $angularMeteorSettings, $$Core) {
-                                                                                                                   // 1374
-	  var ScopeProto = Object.getPrototypeOf($rootScope);                                                             // 1375
-	  _.extend(ScopeProto, $$Core);                                                                                   // 1376
-                                                                                                                   // 1377
-	  $rootScope.autorun(function () {                                                                                // 1378
-	    if (!Meteor.user) return;                                                                                     // 1379
-	    $rootScope.currentUser = Meteor.user();                                                                       // 1380
-	    $rootScope.loggingIn = Meteor.loggingIn();                                                                    // 1381
-	  });                                                                                                             // 1382
-	}]);                                                                                                              // 1383
-                                                                                                                   // 1384
-/***/ },                                                                                                           // 1385
-/* 10 */                                                                                                           // 1386
-/***/ function(module, exports) {                                                                                  // 1387
-                                                                                                                   // 1388
-	/*global                                                                                                          // 1389
-	 angular, _, Meteor                                                                                               // 1390
-	 */                                                                                                               // 1391
-                                                                                                                   // 1392
-	'use strict';                                                                                                     // 1393
-                                                                                                                   // 1394
+                                                                                                                      // 1456
+	  var ScopeProto = Object.getPrototypeOf($rootScope);                                                                // 1457
+	  _underscore2.default.extend(ScopeProto, $$Core);                                                                   // 1458
+                                                                                                                      // 1459
+	  $rootScope.autorun(function () {                                                                                   // 1460
+	    if (!Meteor.user) return;                                                                                        // 1461
+	    $rootScope.currentUser = Meteor.user();                                                                          // 1462
+	    $rootScope.loggingIn = Meteor.loggingIn();                                                                       // 1463
+	  });                                                                                                                // 1464
+	}]);                                                                                                                 // 1465
+                                                                                                                      // 1466
+/***/ },                                                                                                              // 1467
+/* 12 */                                                                                                              // 1468
+/***/ function(module, exports, __webpack_require__) {                                                                // 1469
+                                                                                                                      // 1470
+	'use strict';                                                                                                        // 1471
+                                                                                                                      // 1472
+	var _underscore = __webpack_require__(2);                                                                            // 1473
+                                                                                                                      // 1474
+	var _underscore2 = _interopRequireDefault(_underscore);                                                              // 1475
+                                                                                                                      // 1476
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }                      // 1477
+                                                                                                                      // 1478
+	'use strict'; /*global                                                                                               // 1479
+	               angular, _, Meteor                                                                                    // 1480
+	               */                                                                                                    // 1481
+                                                                                                                      // 1482
 	var angularMeteorMethods = angular.module('angular-meteor.methods', ['angular-meteor.utils', 'angular-meteor.settings']);
-                                                                                                                   // 1396
+                                                                                                                      // 1484
 	angularMeteorMethods.service('$meteorMethods', ['$q', '$meteorUtils', '$angularMeteorSettings', function ($q, $meteorUtils, $angularMeteorSettings) {
-	  this.call = function () {                                                                                       // 1398
+	  this.call = function () {                                                                                          // 1486
 	    if (!$angularMeteorSettings.suppressWarnings) console.warn('[angular-meteor.$meteor.call] Please note that this method is deprecated since 1.3.0 and will be removed in 1.4.0! For more info: http://www.angular-meteor.com/api/1.3.0/methods. You can disable this warning by following this guide http://www.angular-meteor.com/api/1.3.6/settings');
-                                                                                                                   // 1400
-	    var deferred = $q.defer();                                                                                    // 1401
-	    var fulfill = $meteorUtils.fulfill(deferred);                                                                 // 1402
-	    var args = _.toArray(arguments).concat(fulfill);                                                              // 1403
-	    Meteor.call.apply(this, args);                                                                                // 1404
-	    return deferred.promise;                                                                                      // 1405
-	  };                                                                                                              // 1406
-	}]);                                                                                                              // 1407
-                                                                                                                   // 1408
-/***/ },                                                                                                           // 1409
-/* 11 */                                                                                                           // 1410
-/***/ function(module, exports) {                                                                                  // 1411
-                                                                                                                   // 1412
-	/*global                                                                                                          // 1413
-	 angular, Session                                                                                                 // 1414
-	 */                                                                                                               // 1415
-                                                                                                                   // 1416
-	'use strict';                                                                                                     // 1417
-                                                                                                                   // 1418
+                                                                                                                      // 1488
+	    var deferred = $q.defer();                                                                                       // 1489
+	    var fulfill = $meteorUtils.fulfill(deferred);                                                                    // 1490
+	    var args = _underscore2.default.toArray(arguments).concat(fulfill);                                              // 1491
+	    Meteor.call.apply(this, args);                                                                                   // 1492
+	    return deferred.promise;                                                                                         // 1493
+	  };                                                                                                                 // 1494
+	}]);                                                                                                                 // 1495
+                                                                                                                      // 1496
+/***/ },                                                                                                              // 1497
+/* 13 */                                                                                                              // 1498
+/***/ function(module, exports) {                                                                                     // 1499
+                                                                                                                      // 1500
+	/*global                                                                                                             // 1501
+	 angular, Session                                                                                                    // 1502
+	 */                                                                                                                  // 1503
+                                                                                                                      // 1504
+	'use strict';                                                                                                        // 1505
+                                                                                                                      // 1506
 	var angularMeteorSession = angular.module('angular-meteor.session', ['angular-meteor.utils', 'angular-meteor.settings']);
-                                                                                                                   // 1420
+                                                                                                                      // 1508
 	angularMeteorSession.factory('$meteorSession', ['$meteorUtils', '$parse', '$angularMeteorSettings', function ($meteorUtils, $parse, $angularMeteorSettings) {
-	  return function (session) {                                                                                     // 1422
-                                                                                                                   // 1423
-	    return {                                                                                                      // 1424
-                                                                                                                   // 1425
-	      bind: function bind(scope, model) {                                                                         // 1426
+	  return function (session) {                                                                                        // 1510
+                                                                                                                      // 1511
+	    return {                                                                                                         // 1512
+                                                                                                                      // 1513
+	      bind: function bind(scope, model) {                                                                            // 1514
 	        if (!$angularMeteorSettings.suppressWarnings) console.warn('[angular-meteor.session.bind] Please note that this method is deprecated since 1.3.0 and will be removed in 1.4.0! http://www.angular-meteor.com/api/1.3.0/session. You can disable this warning by following this guide http://www.angular-meteor.com/api/1.3.6/settings');
-                                                                                                                   // 1428
-	        var getter = $parse(model);                                                                               // 1429
-	        var setter = getter.assign;                                                                               // 1430
-	        $meteorUtils.autorun(scope, function () {                                                                 // 1431
-	          setter(scope, Session.get(session));                                                                    // 1432
-	        });                                                                                                       // 1433
-                                                                                                                   // 1434
-	        scope.$watch(model, function (newItem, oldItem) {                                                         // 1435
-	          Session.set(session, getter(scope));                                                                    // 1436
-	        }, true);                                                                                                 // 1437
-	      }                                                                                                           // 1438
-	    };                                                                                                            // 1439
-	  };                                                                                                              // 1440
-	}]);                                                                                                              // 1441
-                                                                                                                   // 1442
-/***/ },                                                                                                           // 1443
-/* 12 */                                                                                                           // 1444
-/***/ function(module, exports) {                                                                                  // 1445
-                                                                                                                   // 1446
-	/*global                                                                                                          // 1447
-	 angular, Package                                                                                                 // 1448
-	 */                                                                                                               // 1449
-                                                                                                                   // 1450
-	'use strict';                                                                                                     // 1451
-                                                                                                                   // 1452
+                                                                                                                      // 1516
+	        var getter = $parse(model);                                                                                  // 1517
+	        var setter = getter.assign;                                                                                  // 1518
+	        $meteorUtils.autorun(scope, function () {                                                                    // 1519
+	          setter(scope, Session.get(session));                                                                       // 1520
+	        });                                                                                                          // 1521
+                                                                                                                      // 1522
+	        scope.$watch(model, function (newItem, oldItem) {                                                            // 1523
+	          Session.set(session, getter(scope));                                                                       // 1524
+	        }, true);                                                                                                    // 1525
+	      }                                                                                                              // 1526
+	    };                                                                                                               // 1527
+	  };                                                                                                                 // 1528
+	}]);                                                                                                                 // 1529
+                                                                                                                      // 1530
+/***/ },                                                                                                              // 1531
+/* 14 */                                                                                                              // 1532
+/***/ function(module, exports) {                                                                                     // 1533
+                                                                                                                      // 1534
+	/*global                                                                                                             // 1535
+	 angular, Package                                                                                                    // 1536
+	 */                                                                                                                  // 1537
+                                                                                                                      // 1538
+	'use strict';                                                                                                        // 1539
+                                                                                                                      // 1540
 	var angularMeteorCamera = angular.module('angular-meteor.camera', ['angular-meteor.utils', 'angular-meteor.settings']);
-                                                                                                                   // 1454
-	// requires package 'mdg:camera'                                                                                  // 1455
+                                                                                                                      // 1542
+	// requires package 'mdg:camera'                                                                                     // 1543
 	angularMeteorCamera.service('$meteorCamera', ['$q', '$meteorUtils', '$angularMeteorSettings', function ($q, $meteorUtils, $angularMeteorSettings) {
 	  if (!$angularMeteorSettings.suppressWarnings) console.warn('[angular-meteor.camera] Please note that this module has moved to a separate package and is deprecated since 1.3.0 and will be removed in 1.4.0! For more info: http://www.angular-meteor.com/api/1.3.0/camera. You can disable this warning by following this guide http://www.angular-meteor.com/api/1.3.6/settings');
-	  var pack = Package['mdg:camera'];                                                                               // 1458
-	  if (!pack) return;                                                                                              // 1459
-                                                                                                                   // 1460
-	  var MeteorCamera = pack.MeteorCamera;                                                                           // 1461
-                                                                                                                   // 1462
-	  this.getPicture = function (options) {                                                                          // 1463
+	  var pack = Package['mdg:camera'];                                                                                  // 1546
+	  if (!pack) return;                                                                                                 // 1547
+                                                                                                                      // 1548
+	  var MeteorCamera = pack.MeteorCamera;                                                                              // 1549
+                                                                                                                      // 1550
+	  this.getPicture = function (options) {                                                                             // 1551
 	    if (!$angularMeteorSettings.suppressWarnings) console.warn('[angular-meteor.camera] Please note that this module has moved to a separate package and is deprecated since 1.3.0 and will be removed in 1.4.0! For more info: http://www.angular-meteor.com/api/1.3.0/camera. You can disable this warning by following this guide http://www.angular-meteor.com/api/1.3.6/settings');
-                                                                                                                   // 1465
-	    options = options || {};                                                                                      // 1466
-	    var deferred = $q.defer();                                                                                    // 1467
-	    MeteorCamera.getPicture(options, $meteorUtils.fulfill(deferred));                                             // 1468
-	    return deferred.promise;                                                                                      // 1469
-	  };                                                                                                              // 1470
-	}]);                                                                                                              // 1471
-                                                                                                                   // 1472
-/***/ },                                                                                                           // 1473
-/* 13 */                                                                                                           // 1474
-/***/ function(module, exports) {                                                                                  // 1475
-                                                                                                                   // 1476
-	/*global                                                                                                          // 1477
-	 angular                                                                                                          // 1478
-	 */                                                                                                               // 1479
-                                                                                                                   // 1480
-	'use strict';                                                                                                     // 1481
-                                                                                                                   // 1482
-	var angularMeteorStopper = angular.module('angular-meteor.stopper', ['angular-meteor.subscribe']);                // 1483
-                                                                                                                   // 1484
-	angularMeteorStopper.factory('$meteorStopper', ['$q', '$meteorSubscribe', function ($q, $meteorSubscribe) {       // 1485
-	  function $meteorStopper($meteorEntity) {                                                                        // 1486
-	    return function () {                                                                                          // 1487
-	      var args = Array.prototype.slice.call(arguments);                                                           // 1488
-	      var meteorEntity = $meteorEntity.apply(this, args);                                                         // 1489
-                                                                                                                   // 1490
-	      angular.extend(meteorEntity, $meteorStopper);                                                               // 1491
-	      meteorEntity.$$scope = this;                                                                                // 1492
-                                                                                                                   // 1493
-	      this.$on('$destroy', function () {                                                                          // 1494
-	        meteorEntity.stop();                                                                                      // 1495
-	        if (meteorEntity.subscription) meteorEntity.subscription.stop();                                          // 1496
-	      });                                                                                                         // 1497
-                                                                                                                   // 1498
-	      return meteorEntity;                                                                                        // 1499
-	    };                                                                                                            // 1500
-	  }                                                                                                               // 1501
-                                                                                                                   // 1502
-	  $meteorStopper.subscribe = function () {                                                                        // 1503
-	    var args = Array.prototype.slice.call(arguments);                                                             // 1504
-	    this.subscription = $meteorSubscribe._subscribe(this.$$scope, $q.defer(), args);                              // 1505
-	    return this;                                                                                                  // 1506
-	  };                                                                                                              // 1507
-                                                                                                                   // 1508
-	  return $meteorStopper;                                                                                          // 1509
-	}]);                                                                                                              // 1510
-                                                                                                                   // 1511
-/***/ },                                                                                                           // 1512
-/* 14 */                                                                                                           // 1513
-/***/ function(module, exports) {                                                                                  // 1514
-                                                                                                                   // 1515
-	'use strict';                                                                                                     // 1516
-                                                                                                                   // 1517
-	Object.defineProperty(exports, "__esModule", {                                                                    // 1518
-	  value: true                                                                                                     // 1519
-	});                                                                                                               // 1520
-	var name = exports.name = 'angular-meteor.utilities';                                                             // 1521
-	var utils = exports.utils = '$$utils';                                                                            // 1522
-                                                                                                                   // 1523
-	angular.module(name, [])                                                                                          // 1524
-                                                                                                                   // 1525
-	/*                                                                                                                // 1526
-	  A utility service which is provided with general utility functions                                              // 1527
-	 */                                                                                                               // 1528
-	.service(utils, ['$rootScope', function ($rootScope) {                                                            // 1529
-	  var self = this;                                                                                                // 1530
-                                                                                                                   // 1531
-	  // Checks if an object is a cursor                                                                              // 1532
-	  this.isCursor = function (obj) {                                                                                // 1533
-	    return obj instanceof Meteor.Collection.Cursor;                                                               // 1534
-	  };                                                                                                              // 1535
-                                                                                                                   // 1536
-	  // Cheecks if an object is a scope                                                                              // 1537
-	  this.isScope = function (obj) {                                                                                 // 1538
-	    return obj instanceof $rootScope.constructor;                                                                 // 1539
-	  };                                                                                                              // 1540
-                                                                                                                   // 1541
-	  // Checks if two objects are siblings                                                                           // 1542
-	  this.areSiblings = function (obj1, obj2) {                                                                      // 1543
-	    return _.isObject(obj1) && _.isObject(obj2) && Object.getPrototypeOf(obj1) === Object.getPrototypeOf(obj2);   // 1544
-	  };                                                                                                              // 1545
-                                                                                                                   // 1546
-	  // Binds function into a scpecified context. If an object is provided, will bind every                          // 1547
-	  // value in the object which is a function. If a tap function is provided, it will be                           // 1548
-	  // called right after the function has been invoked.                                                            // 1549
-	  this.bind = function (fn, context, tap) {                                                                       // 1550
-	    tap = _.isFunction(tap) ? tap : angular.noop;                                                                 // 1551
-	    if (_.isFunction(fn)) return bindFn(fn, context, tap);                                                        // 1552
-	    if (_.isObject(fn)) return bindObj(fn, context, tap);                                                         // 1553
-	    return fn;                                                                                                    // 1554
-	  };                                                                                                              // 1555
-                                                                                                                   // 1556
-	  function bindFn(fn, context, tap) {                                                                             // 1557
-	    return function () {                                                                                          // 1558
-	      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {                      // 1559
-	        args[_key] = arguments[_key];                                                                             // 1560
-	      }                                                                                                           // 1561
-                                                                                                                   // 1562
-	      var result = fn.apply(context, args);                                                                       // 1563
-	      tap.call(context, {                                                                                         // 1564
-	        result: result,                                                                                           // 1565
-	        args: args                                                                                                // 1566
-	      });                                                                                                         // 1567
-	      return result;                                                                                              // 1568
-	    };                                                                                                            // 1569
-	  }                                                                                                               // 1570
-                                                                                                                   // 1571
-	  function bindObj(obj, context, tap) {                                                                           // 1572
-	    return _.keys(obj).reduce(function (bound, k) {                                                               // 1573
-	      bound[k] = self.bind(obj[k], context, tap);                                                                 // 1574
-	      return bound;                                                                                               // 1575
-	    }, {});                                                                                                       // 1576
-	  }                                                                                                               // 1577
-	}]);                                                                                                              // 1578
-                                                                                                                   // 1579
-/***/ },                                                                                                           // 1580
-/* 15 */                                                                                                           // 1581
-/***/ function(module, exports) {                                                                                  // 1582
-                                                                                                                   // 1583
-	'use strict';                                                                                                     // 1584
-                                                                                                                   // 1585
-	Object.defineProperty(exports, "__esModule", {                                                                    // 1586
-	  value: true                                                                                                     // 1587
-	});                                                                                                               // 1588
-                                                                                                                   // 1589
+                                                                                                                      // 1553
+	    options = options || {};                                                                                         // 1554
+	    var deferred = $q.defer();                                                                                       // 1555
+	    MeteorCamera.getPicture(options, $meteorUtils.fulfill(deferred));                                                // 1556
+	    return deferred.promise;                                                                                         // 1557
+	  };                                                                                                                 // 1558
+	}]);                                                                                                                 // 1559
+                                                                                                                      // 1560
+/***/ },                                                                                                              // 1561
+/* 15 */                                                                                                              // 1562
+/***/ function(module, exports) {                                                                                     // 1563
+                                                                                                                      // 1564
+	/*global                                                                                                             // 1565
+	 angular                                                                                                             // 1566
+	 */                                                                                                                  // 1567
+                                                                                                                      // 1568
+	'use strict';                                                                                                        // 1569
+                                                                                                                      // 1570
+	var angularMeteorStopper = angular.module('angular-meteor.stopper', ['angular-meteor.subscribe']);                   // 1571
+                                                                                                                      // 1572
+	angularMeteorStopper.factory('$meteorStopper', ['$q', '$meteorSubscribe', function ($q, $meteorSubscribe) {          // 1573
+	  function $meteorStopper($meteorEntity) {                                                                           // 1574
+	    return function () {                                                                                             // 1575
+	      var args = Array.prototype.slice.call(arguments);                                                              // 1576
+	      var meteorEntity = $meteorEntity.apply(this, args);                                                            // 1577
+                                                                                                                      // 1578
+	      angular.extend(meteorEntity, $meteorStopper);                                                                  // 1579
+	      meteorEntity.$$scope = this;                                                                                   // 1580
+                                                                                                                      // 1581
+	      this.$on('$destroy', function () {                                                                             // 1582
+	        meteorEntity.stop();                                                                                         // 1583
+	        if (meteorEntity.subscription) meteorEntity.subscription.stop();                                             // 1584
+	      });                                                                                                            // 1585
+                                                                                                                      // 1586
+	      return meteorEntity;                                                                                           // 1587
+	    };                                                                                                               // 1588
+	  }                                                                                                                  // 1589
+                                                                                                                      // 1590
+	  $meteorStopper.subscribe = function () {                                                                           // 1591
+	    var args = Array.prototype.slice.call(arguments);                                                                // 1592
+	    this.subscription = $meteorSubscribe._subscribe(this.$$scope, $q.defer(), args);                                 // 1593
+	    return this;                                                                                                     // 1594
+	  };                                                                                                                 // 1595
+                                                                                                                      // 1596
+	  return $meteorStopper;                                                                                             // 1597
+	}]);                                                                                                                 // 1598
+                                                                                                                      // 1599
+/***/ },                                                                                                              // 1600
+/* 16 */                                                                                                              // 1601
+/***/ function(module, exports, __webpack_require__) {                                                                // 1602
+                                                                                                                      // 1603
+	'use strict';                                                                                                        // 1604
+                                                                                                                      // 1605
+	Object.defineProperty(exports, "__esModule", {                                                                       // 1606
+	  value: true                                                                                                        // 1607
+	});                                                                                                                  // 1608
+	exports.utils = exports.name = undefined;                                                                            // 1609
+                                                                                                                      // 1610
+	var _underscore = __webpack_require__(2);                                                                            // 1611
+                                                                                                                      // 1612
+	var _underscore2 = _interopRequireDefault(_underscore);                                                              // 1613
+                                                                                                                      // 1614
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }                      // 1615
+                                                                                                                      // 1616
+	var name = exports.name = 'angular-meteor.utilities';                                                                // 1617
+	var utils = exports.utils = '$$utils';                                                                               // 1618
+                                                                                                                      // 1619
+	angular.module(name, [])                                                                                             // 1620
+                                                                                                                      // 1621
+	/*                                                                                                                   // 1622
+	  A utility service which is provided with general utility functions                                                 // 1623
+	 */                                                                                                                  // 1624
+	.service(utils, ['$rootScope', function ($rootScope) {                                                               // 1625
+	  var self = this;                                                                                                   // 1626
+                                                                                                                      // 1627
+	  // Checks if an object is a cursor                                                                                 // 1628
+	  this.isCursor = function (obj) {                                                                                   // 1629
+	    return obj instanceof Meteor.Collection.Cursor;                                                                  // 1630
+	  };                                                                                                                 // 1631
+                                                                                                                      // 1632
+	  // Cheecks if an object is a scope                                                                                 // 1633
+	  this.isScope = function (obj) {                                                                                    // 1634
+	    return obj instanceof $rootScope.constructor;                                                                    // 1635
+	  };                                                                                                                 // 1636
+                                                                                                                      // 1637
+	  // Checks if an object is a view model                                                                             // 1638
+	  this.isViewModel = function (obj) {                                                                                // 1639
+	    return _underscore2.default.isObject(obj) && obj.$$dependencies;                                                 // 1640
+	  };                                                                                                                 // 1641
+                                                                                                                      // 1642
+	  // Checks if two objects are siblings                                                                              // 1643
+	  this.areSiblings = function (obj1, obj2) {                                                                         // 1644
+	    return _underscore2.default.isObject(obj1) && _underscore2.default.isObject(obj2) && Object.getPrototypeOf(obj1) === Object.getPrototypeOf(obj2);
+	  };                                                                                                                 // 1646
+                                                                                                                      // 1647
+	  // Binds function into a scpecified context. If an object is provided, will bind every                             // 1648
+	  // value in the object which is a function. If a tap function is provided, it will be                              // 1649
+	  // called right after the function has been invoked.                                                               // 1650
+	  this.bind = function (fn, context, tap) {                                                                          // 1651
+	    tap = _underscore2.default.isFunction(tap) ? tap : angular.noop;                                                 // 1652
+	    if (_underscore2.default.isFunction(fn)) return bindFn(fn, context, tap);                                        // 1653
+	    if (_underscore2.default.isObject(fn)) return bindObj(fn, context, tap);                                         // 1654
+	    return fn;                                                                                                       // 1655
+	  };                                                                                                                 // 1656
+                                                                                                                      // 1657
+	  function bindFn(fn, context, tap) {                                                                                // 1658
+	    return function () {                                                                                             // 1659
+	      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {                         // 1660
+	        args[_key] = arguments[_key];                                                                                // 1661
+	      }                                                                                                              // 1662
+                                                                                                                      // 1663
+	      var result = fn.apply(context, args);                                                                          // 1664
+	      tap.call(context, {                                                                                            // 1665
+	        result: result,                                                                                              // 1666
+	        args: args                                                                                                   // 1667
+	      });                                                                                                            // 1668
+	      return result;                                                                                                 // 1669
+	    };                                                                                                               // 1670
+	  }                                                                                                                  // 1671
+                                                                                                                      // 1672
+	  function bindObj(obj, context, tap) {                                                                              // 1673
+	    return _underscore2.default.keys(obj).reduce(function (bound, k) {                                               // 1674
+	      bound[k] = self.bind(obj[k], context, tap);                                                                    // 1675
+	      return bound;                                                                                                  // 1676
+	    }, {});                                                                                                          // 1677
+	  }                                                                                                                  // 1678
+	}]);                                                                                                                 // 1679
+                                                                                                                      // 1680
+/***/ },                                                                                                              // 1681
+/* 17 */                                                                                                              // 1682
+/***/ function(module, exports, __webpack_require__) {                                                                // 1683
+                                                                                                                      // 1684
+	'use strict';                                                                                                        // 1685
+                                                                                                                      // 1686
+	Object.defineProperty(exports, "__esModule", {                                                                       // 1687
+	  value: true                                                                                                        // 1688
+	});                                                                                                                  // 1689
+	exports.Mixer = exports.name = undefined;                                                                            // 1690
+                                                                                                                      // 1691
+	var _underscore = __webpack_require__(2);                                                                            // 1692
+                                                                                                                      // 1693
+	var _underscore2 = _interopRequireDefault(_underscore);                                                              // 1694
+                                                                                                                      // 1695
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }                      // 1696
+                                                                                                                      // 1697
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-                                                                                                                   // 1591
-	var name = exports.name = 'angular-meteor.mixer';                                                                 // 1592
-	var Mixer = exports.Mixer = '$Mixer';                                                                             // 1593
-                                                                                                                   // 1594
-	angular.module(name, [])                                                                                          // 1595
-                                                                                                                   // 1596
-	/*                                                                                                                // 1597
-	  A service which lets us apply mixins into Scope.prototype.                                                      // 1598
-	  The flow is simple. Once we define a mixin, it will be stored in the `$Mixer`,                                  // 1599
-	  and any time a `ChildScope` prototype is created                                                                // 1600
-	  it will be extended by the `$Mixer`.                                                                            // 1601
-	  This concept is good because it keeps our code                                                                  // 1602
-	  clean and simple, and easy to extend.                                                                           // 1603
-	  So any time we would like to define a new behaviour to our scope,                                               // 1604
-	  we will just use the `$Mixer` service.                                                                          // 1605
-	 */                                                                                                               // 1606
-	.service(Mixer, function () {                                                                                     // 1607
-	  var _this = this;                                                                                               // 1608
-                                                                                                                   // 1609
-	  this._mixins = [];                                                                                              // 1610
-	  // Apply mixins automatically on specified contexts                                                             // 1611
-	  this._autoExtend = [];                                                                                          // 1612
-	  this._autoConstruct = [];                                                                                       // 1613
-                                                                                                                   // 1614
-	  // Adds a new mixin                                                                                             // 1615
-	  this.mixin = function (mixin) {                                                                                 // 1616
-	    if (!_.isObject(mixin)) {                                                                                     // 1617
-	      throw Error('argument 1 must be an object');                                                                // 1618
-	    }                                                                                                             // 1619
-                                                                                                                   // 1620
-	    _this._mixins = _.union(_this._mixins, [mixin]);                                                              // 1621
-	    // Apply mixins to stored contexts                                                                            // 1622
-	    _this._autoExtend.forEach(function (context) {                                                                // 1623
-	      return _this._extend(context);                                                                              // 1624
-	    });                                                                                                           // 1625
-	    _this._autoConstruct.forEach(function (context) {                                                             // 1626
-	      return _this._construct(context);                                                                           // 1627
-	    });                                                                                                           // 1628
-	    return _this;                                                                                                 // 1629
-	  };                                                                                                              // 1630
-                                                                                                                   // 1631
-	  // Removes a mixin. Useful mainly for test purposes                                                             // 1632
-	  this._mixout = function (mixin) {                                                                               // 1633
-	    _this._mixins = _.without(_this._mixins, mixin);                                                              // 1634
-	    return _this;                                                                                                 // 1635
-	  };                                                                                                              // 1636
-                                                                                                                   // 1637
-	  // Invoke function mixins with the provided context and arguments                                               // 1638
-	  this._construct = function (context) {                                                                          // 1639
-	    for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {     // 1640
-	      args[_key - 1] = arguments[_key];                                                                           // 1641
-	    }                                                                                                             // 1642
-                                                                                                                   // 1643
-	    _this._mixins.filter(_.isFunction).forEach(function (mixin) {                                                 // 1644
-	      mixin.call.apply(mixin, [context].concat(args));                                                            // 1645
-	    });                                                                                                           // 1646
-                                                                                                                   // 1647
-	    return context;                                                                                               // 1648
-	  };                                                                                                              // 1649
-                                                                                                                   // 1650
-	  // Extend prototype with the defined mixins                                                                     // 1651
-	  this._extend = function (obj) {                                                                                 // 1652
-	    var _ref;                                                                                                     // 1653
-                                                                                                                   // 1654
-	    return (_ref = _).extend.apply(_ref, [obj].concat(_toConsumableArray(_this._mixins)));                        // 1655
-	  };                                                                                                              // 1656
-	});                                                                                                               // 1657
-                                                                                                                   // 1658
-/***/ },                                                                                                           // 1659
-/* 16 */                                                                                                           // 1660
-/***/ function(module, exports, __webpack_require__) {                                                             // 1661
-                                                                                                                   // 1662
-	'use strict';                                                                                                     // 1663
-                                                                                                                   // 1664
-	Object.defineProperty(exports, "__esModule", {                                                                    // 1665
-	  value: true                                                                                                     // 1666
-	});                                                                                                               // 1667
-	exports.name = undefined;                                                                                         // 1668
-                                                                                                                   // 1669
-	var _mixer = __webpack_require__(15);                                                                             // 1670
-                                                                                                                   // 1671
-	var name = exports.name = 'angular-meteor.scope';                                                                 // 1672
-                                                                                                                   // 1673
-	angular.module(name, [_mixer.name]).run(['$rootScope', _mixer.Mixer, function ($rootScope, $Mixer) {              // 1674
-	  var Scope = $rootScope.constructor;                                                                             // 1675
-	  var $new = $rootScope.$new;                                                                                     // 1676
-                                                                                                                   // 1677
-	  // Apply extensions whether a mixin in defined.                                                                 // 1678
-	  // Note that this way mixins which are initialized later                                                        // 1679
-	  // can be applied on rootScope.                                                                                 // 1680
-	  $Mixer._autoExtend.push(Scope.prototype);                                                                       // 1681
-	  $Mixer._autoConstruct.push($rootScope);                                                                         // 1682
-                                                                                                                   // 1683
-	  Scope.prototype.$new = function () {                                                                            // 1684
-	    var scope = $new.apply(this, arguments);                                                                      // 1685
-	    // Apply constructors to newly created scopes                                                                 // 1686
-	    return $Mixer._construct(scope);                                                                              // 1687
-	  };                                                                                                              // 1688
-	}]);                                                                                                              // 1689
-                                                                                                                   // 1690
-/***/ },                                                                                                           // 1691
-/* 17 */                                                                                                           // 1692
-/***/ function(module, exports, __webpack_require__) {                                                             // 1693
-                                                                                                                   // 1694
-	'use strict';                                                                                                     // 1695
-                                                                                                                   // 1696
-	Object.defineProperty(exports, "__esModule", {                                                                    // 1697
-	  value: true                                                                                                     // 1698
-	});                                                                                                               // 1699
-	exports.Core = exports.name = undefined;                                                                          // 1700
-                                                                                                                   // 1701
-	var _utils = __webpack_require__(14);                                                                             // 1702
-                                                                                                                   // 1703
-	var _mixer = __webpack_require__(15);                                                                             // 1704
-                                                                                                                   // 1705
+                                                                                                                      // 1699
+	var name = exports.name = 'angular-meteor.mixer';                                                                    // 1700
+	var Mixer = exports.Mixer = '$Mixer';                                                                                // 1701
+                                                                                                                      // 1702
+	angular.module(name, [])                                                                                             // 1703
+                                                                                                                      // 1704
+	/*                                                                                                                   // 1705
+	  A service which lets us apply mixins into Scope.prototype.                                                         // 1706
+	  The flow is simple. Once we define a mixin, it will be stored in the `$Mixer`,                                     // 1707
+	  and any time a `ChildScope` prototype is created                                                                   // 1708
+	  it will be extended by the `$Mixer`.                                                                               // 1709
+	  This concept is good because it keeps our code                                                                     // 1710
+	  clean and simple, and easy to extend.                                                                              // 1711
+	  So any time we would like to define a new behaviour to our scope,                                                  // 1712
+	  we will just use the `$Mixer` service.                                                                             // 1713
+	 */                                                                                                                  // 1714
+	.service(Mixer, function () {                                                                                        // 1715
+	  var _this = this;                                                                                                  // 1716
+                                                                                                                      // 1717
+	  // Used to store method's caller                                                                                   // 1718
+	  var caller = undefined;                                                                                            // 1719
+                                                                                                                      // 1720
+	  this._mixins = [];                                                                                                 // 1721
+	  // Apply mixins automatically on specified contexts                                                                // 1722
+	  this._autoExtend = [];                                                                                             // 1723
+	  this._autoConstruct = [];                                                                                          // 1724
+                                                                                                                      // 1725
+	  // Adds a new mixin                                                                                                // 1726
+	  this.mixin = function (mixin) {                                                                                    // 1727
+	    if (!_underscore2.default.isObject(mixin)) {                                                                     // 1728
+	      throw Error('argument 1 must be an object');                                                                   // 1729
+	    }                                                                                                                // 1730
+                                                                                                                      // 1731
+	    _this._mixins = _underscore2.default.union(_this._mixins, [mixin]);                                              // 1732
+	    // Apply mixins to stored contexts                                                                               // 1733
+	    _this._autoExtend.forEach(function (context) {                                                                   // 1734
+	      return _this._extend(context);                                                                                 // 1735
+	    });                                                                                                              // 1736
+	    _this._autoConstruct.forEach(function (context) {                                                                // 1737
+	      return _this._construct(context);                                                                              // 1738
+	    });                                                                                                              // 1739
+	    return _this;                                                                                                    // 1740
+	  };                                                                                                                 // 1741
+                                                                                                                      // 1742
+	  // Removes a mixin. Useful mainly for test purposes                                                                // 1743
+	  this._mixout = function (mixin) {                                                                                  // 1744
+	    _this._mixins = _underscore2.default.without(_this._mixins, mixin);                                              // 1745
+	    return _this;                                                                                                    // 1746
+	  };                                                                                                                 // 1747
+                                                                                                                      // 1748
+	  // Invoke function mixins with the provided context and arguments                                                  // 1749
+	  this._construct = function (context) {                                                                             // 1750
+	    for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {        // 1751
+	      args[_key - 1] = arguments[_key];                                                                              // 1752
+	    }                                                                                                                // 1753
+                                                                                                                      // 1754
+	    _this._mixins.filter(_underscore2.default.isFunction).forEach(function (mixin) {                                 // 1755
+	      mixin.call.apply(mixin, [context].concat(args));                                                               // 1756
+	    });                                                                                                              // 1757
+                                                                                                                      // 1758
+	    return context;                                                                                                  // 1759
+	  };                                                                                                                 // 1760
+                                                                                                                      // 1761
+	  // Extend prototype with the defined mixins                                                                        // 1762
+	  this._extend = function (obj, options) {                                                                           // 1763
+	    var _$defaults = _underscore2.default.defaults({}, options, {                                                    // 1764
+	      pattern: /.*/ });                                                                                              // 1765
+                                                                                                                      // 1766
+	    var pattern = _$defaults.pattern;                                                                                // 1767
+	    var context = _$defaults.context;                                                                                // 1768
+	    // The patterns of the keys which will be filtered                                                               // 1769
+                                                                                                                      // 1770
+                                                                                                                      // 1771
+	    var mixins = _this._mixins.map(function (mixin) {                                                                // 1772
+	      // Filtering the keys by the specified pattern                                                                 // 1773
+	      var keys = _underscore2.default.keys(mixin).filter(function (k) {                                              // 1774
+	        return k.match(pattern);                                                                                     // 1775
+	      }).filter(function (k) {                                                                                       // 1776
+	        return _underscore2.default.isFunction(mixin[k]);                                                            // 1777
+	      });                                                                                                            // 1778
+                                                                                                                      // 1779
+	      return keys.reduce(function (boundMixin, methodName) {                                                         // 1780
+	        var methodHandler = mixin[methodName];                                                                       // 1781
+                                                                                                                      // 1782
+	        // Note that this is not an arrow function so we can conserve the conetxt                                    // 1783
+	        boundMixin[methodName] = function () {                                                                       // 1784
+	          // Storing original caller so we will know who actually called the                                         // 1785
+	          // method event though it is bound to another context                                                      // 1786
+	          var methodContext = context || this;                                                                       // 1787
+	          var recentCaller = caller;                                                                                 // 1788
+	          caller = this;                                                                                             // 1789
+                                                                                                                      // 1790
+	          try {                                                                                                      // 1791
+	            for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {             // 1792
+	              args[_key2] = arguments[_key2];                                                                        // 1793
+	            }                                                                                                        // 1794
+                                                                                                                      // 1795
+	            return methodHandler.apply(methodContext, args);                                                         // 1796
+	          } finally {                                                                                                // 1797
+	            // No matter what happens, restore variable to the previous one                                          // 1798
+	            caller = recentCaller;                                                                                   // 1799
+	          }                                                                                                          // 1800
+	        };                                                                                                           // 1801
+                                                                                                                      // 1802
+	        return boundMixin;                                                                                           // 1803
+	      }, {});                                                                                                        // 1804
+	    });                                                                                                              // 1805
+                                                                                                                      // 1806
+	    return _underscore2.default.extend.apply(_underscore2.default, [obj].concat(_toConsumableArray(mixins)));        // 1807
+	  };                                                                                                                 // 1808
+                                                                                                                      // 1809
+	  // Caller property can not be set                                                                                  // 1810
+	  Object.defineProperty(this, 'caller', {                                                                            // 1811
+	    configurable: true,                                                                                              // 1812
+	    enumerable: true,                                                                                                // 1813
+                                                                                                                      // 1814
+	    get: function get() {                                                                                            // 1815
+	      return caller;                                                                                                 // 1816
+	    }                                                                                                                // 1817
+	  });                                                                                                                // 1818
+	});                                                                                                                  // 1819
+                                                                                                                      // 1820
+/***/ },                                                                                                              // 1821
+/* 18 */                                                                                                              // 1822
+/***/ function(module, exports, __webpack_require__) {                                                                // 1823
+                                                                                                                      // 1824
+	'use strict';                                                                                                        // 1825
+                                                                                                                      // 1826
+	Object.defineProperty(exports, "__esModule", {                                                                       // 1827
+	  value: true                                                                                                        // 1828
+	});                                                                                                                  // 1829
+	exports.name = undefined;                                                                                            // 1830
+                                                                                                                      // 1831
+	var _mixer = __webpack_require__(17);                                                                                // 1832
+                                                                                                                      // 1833
+	var name = exports.name = 'angular-meteor.scope';                                                                    // 1834
+                                                                                                                      // 1835
+	angular.module(name, [_mixer.name]).run(['$rootScope', _mixer.Mixer, function ($rootScope, $Mixer) {                 // 1836
+	  var Scope = $rootScope.constructor;                                                                                // 1837
+	  var $new = $rootScope.$new;                                                                                        // 1838
+                                                                                                                      // 1839
+	  // Apply extensions whether a mixin in defined.                                                                    // 1840
+	  // Note that this way mixins which are initialized later                                                           // 1841
+	  // can be applied on rootScope.                                                                                    // 1842
+	  $Mixer._autoExtend.push(Scope.prototype);                                                                          // 1843
+	  $Mixer._autoConstruct.push($rootScope);                                                                            // 1844
+                                                                                                                      // 1845
+	  Scope.prototype.$new = function () {                                                                               // 1846
+	    var scope = $new.apply(this, arguments);                                                                         // 1847
+	    // Apply constructors to newly created scopes                                                                    // 1848
+	    return $Mixer._construct(scope);                                                                                 // 1849
+	  };                                                                                                                 // 1850
+	}]);                                                                                                                 // 1851
+                                                                                                                      // 1852
+/***/ },                                                                                                              // 1853
+/* 19 */                                                                                                              // 1854
+/***/ function(module, exports, __webpack_require__) {                                                                // 1855
+                                                                                                                      // 1856
+	'use strict';                                                                                                        // 1857
+                                                                                                                      // 1858
+	Object.defineProperty(exports, "__esModule", {                                                                       // 1859
+	  value: true                                                                                                        // 1860
+	});                                                                                                                  // 1861
+	exports.Core = exports.name = undefined;                                                                             // 1862
+                                                                                                                      // 1863
+	var _underscore = __webpack_require__(2);                                                                            // 1864
+                                                                                                                      // 1865
+	var _underscore2 = _interopRequireDefault(_underscore);                                                              // 1866
+                                                                                                                      // 1867
+	var _utils = __webpack_require__(16);                                                                                // 1868
+                                                                                                                      // 1869
+	var _mixer = __webpack_require__(17);                                                                                // 1870
+                                                                                                                      // 1871
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }                      // 1872
+                                                                                                                      // 1873
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-                                                                                                                   // 1707
-	var name = exports.name = 'angular-meteor.core';                                                                  // 1708
-	var Core = exports.Core = '$$Core';                                                                               // 1709
-                                                                                                                   // 1710
-	angular.module(name, [_utils.name, _mixer.name])                                                                  // 1711
-                                                                                                                   // 1712
-	/*                                                                                                                // 1713
-	  A mixin which provides us with core Meteor functions.                                                           // 1714
-	 */                                                                                                               // 1715
-	.factory(Core, ['$q', _utils.utils, function ($q, $$utils) {                                                      // 1716
-	  function $$Core() {}                                                                                            // 1717
-                                                                                                                   // 1718
-	  // Calls Meteor.autorun() which will be digested after each run and automatically destroyed                     // 1719
-	  $$Core.autorun = function (fn) {                                                                                // 1720
-	    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];                        // 1721
-                                                                                                                   // 1722
-	    fn = this.$bindToContext(fn);                                                                                 // 1723
-                                                                                                                   // 1724
-	    if (!_.isFunction(fn)) {                                                                                      // 1725
-	      throw Error('argument 1 must be a function');                                                               // 1726
-	    }                                                                                                             // 1727
-	    if (!_.isObject(options)) {                                                                                   // 1728
-	      throw Error('argument 2 must be an object');                                                                // 1729
-	    }                                                                                                             // 1730
-                                                                                                                   // 1731
-	    var computation = Tracker.autorun(fn, options);                                                               // 1732
-	    this.$$autoStop(computation);                                                                                 // 1733
-	    return computation;                                                                                           // 1734
-	  };                                                                                                              // 1735
-                                                                                                                   // 1736
-	  // Calls Meteor.subscribe() which will be digested after each invokation                                        // 1737
-	  // and automatically destroyed                                                                                  // 1738
-	  $$Core.subscribe = function (subName, fn, cb) {                                                                 // 1739
-	    fn = this.$bindToContext(fn || angular.noop);                                                                 // 1740
-	    cb = cb ? this.$bindToContext(cb) : angular.noop;                                                             // 1741
-                                                                                                                   // 1742
-	    if (!_.isString(subName)) {                                                                                   // 1743
-	      throw Error('argument 1 must be a string');                                                                 // 1744
-	    }                                                                                                             // 1745
-	    if (!_.isFunction(fn)) {                                                                                      // 1746
-	      throw Error('argument 2 must be a function');                                                               // 1747
-	    }                                                                                                             // 1748
-	    if (!_.isFunction(cb) && !_.isObject(cb)) {                                                                   // 1749
-	      throw Error('argument 3 must be a function or an object');                                                  // 1750
-	    }                                                                                                             // 1751
-                                                                                                                   // 1752
-	    var result = {};                                                                                              // 1753
-                                                                                                                   // 1754
-	    var computation = this.autorun(function () {                                                                  // 1755
-	      var _Meteor;                                                                                                // 1756
-                                                                                                                   // 1757
-	      var args = fn();                                                                                            // 1758
-	      if (angular.isUndefined(args)) args = [];                                                                   // 1759
-                                                                                                                   // 1760
-	      if (!_.isArray(args)) {                                                                                     // 1761
-	        throw Error('reactive function\'s return value must be an array');                                        // 1762
-	      }                                                                                                           // 1763
-                                                                                                                   // 1764
+                                                                                                                      // 1875
+	var name = exports.name = 'angular-meteor.core';                                                                     // 1876
+	var Core = exports.Core = '$$Core';                                                                                  // 1877
+                                                                                                                      // 1878
+	angular.module(name, [_utils.name, _mixer.name])                                                                     // 1879
+                                                                                                                      // 1880
+	/*                                                                                                                   // 1881
+	  A mixin which provides us with core Meteor functions.                                                              // 1882
+	 */                                                                                                                  // 1883
+	.factory(Core, ['$q', _utils.utils, _mixer.Mixer, function ($q, $$utils, $Mixer) {                                   // 1884
+	  function $$Core() {}                                                                                               // 1885
+                                                                                                                      // 1886
+	  // Calls Meteor.autorun() which will be digested after each run and automatically destroyed                        // 1887
+	  $$Core.autorun = function (fn) {                                                                                   // 1888
+	    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];                           // 1889
+                                                                                                                      // 1890
+	    fn = this.$bindToContext($Mixer.caller, fn);                                                                     // 1891
+                                                                                                                      // 1892
+	    if (!_underscore2.default.isFunction(fn)) {                                                                      // 1893
+	      throw Error('argument 1 must be a function');                                                                  // 1894
+	    }                                                                                                                // 1895
+	    if (!_underscore2.default.isObject(options)) {                                                                   // 1896
+	      throw Error('argument 2 must be an object');                                                                   // 1897
+	    }                                                                                                                // 1898
+                                                                                                                      // 1899
+	    var computation = Tracker.autorun(fn, options);                                                                  // 1900
+	    this.$$autoStop(computation);                                                                                    // 1901
+	    return computation;                                                                                              // 1902
+	  };                                                                                                                 // 1903
+                                                                                                                      // 1904
+	  // Calls Meteor.subscribe() which will be digested after each invokation                                           // 1905
+	  // and automatically destroyed                                                                                     // 1906
+	  $$Core.subscribe = function (subName, fn, cb) {                                                                    // 1907
+	    fn = this.$bindToContext($Mixer.caller, fn || angular.noop);                                                     // 1908
+	    cb = cb ? this.$bindToContext($Mixer.caller, cb) : angular.noop;                                                 // 1909
+                                                                                                                      // 1910
+	    if (!_underscore2.default.isString(subName)) {                                                                   // 1911
+	      throw Error('argument 1 must be a string');                                                                    // 1912
+	    }                                                                                                                // 1913
+	    if (!_underscore2.default.isFunction(fn)) {                                                                      // 1914
+	      throw Error('argument 2 must be a function');                                                                  // 1915
+	    }                                                                                                                // 1916
+	    if (!_underscore2.default.isFunction(cb) && !_underscore2.default.isObject(cb)) {                                // 1917
+	      throw Error('argument 3 must be a function or an object');                                                     // 1918
+	    }                                                                                                                // 1919
+                                                                                                                      // 1920
+	    var result = {};                                                                                                 // 1921
+                                                                                                                      // 1922
+	    var computation = this.autorun(function () {                                                                     // 1923
+	      var _Meteor;                                                                                                   // 1924
+                                                                                                                      // 1925
+	      var args = fn();                                                                                               // 1926
+	      if (angular.isUndefined(args)) args = [];                                                                      // 1927
+                                                                                                                      // 1928
+	      if (!_underscore2.default.isArray(args)) {                                                                     // 1929
+	        throw Error('reactive function\'s return value must be an array');                                           // 1930
+	      }                                                                                                              // 1931
+                                                                                                                      // 1932
 	      var subscription = (_Meteor = Meteor).subscribe.apply(_Meteor, [subName].concat(_toConsumableArray(args), [cb]));
-	      result.ready = subscription.ready.bind(subscription);                                                       // 1766
-	      result.subscriptionId = subscription.subscriptionId;                                                        // 1767
-	    });                                                                                                           // 1768
-                                                                                                                   // 1769
-	    // Once the computation has been stopped,                                                                     // 1770
-	    // any subscriptions made inside will be stopped as well                                                      // 1771
-	    result.stop = computation.stop.bind(computation);                                                             // 1772
-	    return result;                                                                                                // 1773
-	  };                                                                                                              // 1774
-                                                                                                                   // 1775
-	  // Calls Meteor.call() wrapped by a digestion cycle                                                             // 1776
-	  $$Core.callMethod = function () {                                                                               // 1777
-	    var _Meteor2;                                                                                                 // 1778
-                                                                                                                   // 1779
-	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {                        // 1780
-	      args[_key] = arguments[_key];                                                                               // 1781
-	    }                                                                                                             // 1782
-                                                                                                                   // 1783
-	    var fn = args.pop();                                                                                          // 1784
-	    if (_.isFunction(fn)) fn = this.$bindToContext(fn);                                                           // 1785
-	    return (_Meteor2 = Meteor).call.apply(_Meteor2, args.concat([fn]));                                           // 1786
-	  };                                                                                                              // 1787
-                                                                                                                   // 1788
-	  // Calls Meteor.apply() wrapped by a digestion cycle                                                            // 1789
-	  $$Core.applyMethod = function () {                                                                              // 1790
-	    var _Meteor3;                                                                                                 // 1791
-                                                                                                                   // 1792
-	    for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {                  // 1793
-	      args[_key2] = arguments[_key2];                                                                             // 1794
-	    }                                                                                                             // 1795
-                                                                                                                   // 1796
-	    var fn = args.pop();                                                                                          // 1797
-	    if (_.isFunction(fn)) fn = this.$bindToContext(fn);                                                           // 1798
-	    return (_Meteor3 = Meteor).apply.apply(_Meteor3, args.concat([fn]));                                          // 1799
-	  };                                                                                                              // 1800
-                                                                                                                   // 1801
-	  $$Core.$$autoStop = function (stoppable) {                                                                      // 1802
-	    this.$on('$destroy', stoppable.stop.bind(stoppable));                                                         // 1803
-	  };                                                                                                              // 1804
-                                                                                                                   // 1805
-	  // Digests scope only if there is no phase at the moment                                                        // 1806
-	  $$Core.$$throttledDigest = function () {                                                                        // 1807
-	    var isDigestable = !this.$$destroyed && !this.$$phase && !this.$root.$$phase;                                 // 1808
-                                                                                                                   // 1809
-	    if (isDigestable) this.$digest();                                                                             // 1810
-	  };                                                                                                              // 1811
-                                                                                                                   // 1812
-	  // Creates a promise only that the digestion cycle will be called at its fulfillment                            // 1813
-	  $$Core.$$defer = function () {                                                                                  // 1814
-	    var deferred = $q.defer();                                                                                    // 1815
-	    // Once promise has been fulfilled, digest                                                                    // 1816
-	    deferred.promise = deferred.promise.finally(this.$$throttledDigest.bind(this));                               // 1817
-	    return deferred;                                                                                              // 1818
-	  };                                                                                                              // 1819
-                                                                                                                   // 1820
-	  // Binds an object or a function to the scope to the view model and digest it once it is invoked                // 1821
-	  $$Core.$bindToContext = function (fn) {                                                                         // 1822
-	    return $$utils.bind(fn, this, this.$$throttledDigest.bind(this));                                             // 1823
-	  };                                                                                                              // 1824
-                                                                                                                   // 1825
-	  return $$Core;                                                                                                  // 1826
-	}]);                                                                                                              // 1827
-                                                                                                                   // 1828
-/***/ },                                                                                                           // 1829
-/* 18 */                                                                                                           // 1830
-/***/ function(module, exports, __webpack_require__) {                                                             // 1831
-                                                                                                                   // 1832
-	'use strict';                                                                                                     // 1833
-                                                                                                                   // 1834
-	Object.defineProperty(exports, "__esModule", {                                                                    // 1835
-	  value: true                                                                                                     // 1836
-	});                                                                                                               // 1837
-	exports.reactive = exports.ViewModel = exports.name = undefined;                                                  // 1838
-                                                                                                                   // 1839
+	      result.ready = subscription.ready.bind(subscription);                                                          // 1934
+	      result.subscriptionId = subscription.subscriptionId;                                                           // 1935
+	    });                                                                                                              // 1936
+                                                                                                                      // 1937
+	    // Once the computation has been stopped,                                                                        // 1938
+	    // any subscriptions made inside will be stopped as well                                                         // 1939
+	    result.stop = computation.stop.bind(computation);                                                                // 1940
+	    return result;                                                                                                   // 1941
+	  };                                                                                                                 // 1942
+                                                                                                                      // 1943
+	  // Calls Meteor.call() wrapped by a digestion cycle                                                                // 1944
+	  $$Core.callMethod = function () {                                                                                  // 1945
+	    var _Meteor2;                                                                                                    // 1946
+                                                                                                                      // 1947
+	    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {                           // 1948
+	      args[_key] = arguments[_key];                                                                                  // 1949
+	    }                                                                                                                // 1950
+                                                                                                                      // 1951
+	    var fn = args.pop();                                                                                             // 1952
+	    if (_underscore2.default.isFunction(fn)) fn = this.$bindToContext($Mixer.caller, fn);                            // 1953
+	    return (_Meteor2 = Meteor).call.apply(_Meteor2, args.concat([fn]));                                              // 1954
+	  };                                                                                                                 // 1955
+                                                                                                                      // 1956
+	  // Calls Meteor.apply() wrapped by a digestion cycle                                                               // 1957
+	  $$Core.applyMethod = function () {                                                                                 // 1958
+	    var _Meteor3;                                                                                                    // 1959
+                                                                                                                      // 1960
+	    for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {                     // 1961
+	      args[_key2] = arguments[_key2];                                                                                // 1962
+	    }                                                                                                                // 1963
+                                                                                                                      // 1964
+	    var fn = args.pop();                                                                                             // 1965
+	    if (_underscore2.default.isFunction(fn)) fn = this.$bindToContext($Mixer.caller, fn);                            // 1966
+	    return (_Meteor3 = Meteor).apply.apply(_Meteor3, args.concat([fn]));                                             // 1967
+	  };                                                                                                                 // 1968
+                                                                                                                      // 1969
+	  $$Core.$$autoStop = function (stoppable) {                                                                         // 1970
+	    this.$on('$destroy', stoppable.stop.bind(stoppable));                                                            // 1971
+	  };                                                                                                                 // 1972
+                                                                                                                      // 1973
+	  // Digests scope only if there is no phase at the moment                                                           // 1974
+	  $$Core.$$throttledDigest = function () {                                                                           // 1975
+	    var isDigestable = !this.$$destroyed && !this.$$phase && !this.$root.$$phase;                                    // 1976
+                                                                                                                      // 1977
+	    if (isDigestable) this.$digest();                                                                                // 1978
+	  };                                                                                                                 // 1979
+                                                                                                                      // 1980
+	  // Creates a promise only that the digestion cycle will be called at its fulfillment                               // 1981
+	  $$Core.$$defer = function () {                                                                                     // 1982
+	    var deferred = $q.defer();                                                                                       // 1983
+	    // Once promise has been fulfilled, digest                                                                       // 1984
+	    deferred.promise = deferred.promise.finally(this.$$throttledDigest.bind(this));                                  // 1985
+	    return deferred;                                                                                                 // 1986
+	  };                                                                                                                 // 1987
+                                                                                                                      // 1988
+	  // Binds an object or a function to the provided context and digest it once it is invoked                          // 1989
+	  $$Core.$bindToContext = function (context, fn) {                                                                   // 1990
+	    return $$utils.bind(fn, context, this.$$throttledDigest.bind(this));                                             // 1991
+	  };                                                                                                                 // 1992
+                                                                                                                      // 1993
+	  return $$Core;                                                                                                     // 1994
+	}]);                                                                                                                 // 1995
+                                                                                                                      // 1996
+/***/ },                                                                                                              // 1997
+/* 20 */                                                                                                              // 1998
+/***/ function(module, exports, __webpack_require__) {                                                                // 1999
+                                                                                                                      // 2000
+	'use strict';                                                                                                        // 2001
+                                                                                                                      // 2002
+	Object.defineProperty(exports, "__esModule", {                                                                       // 2003
+	  value: true                                                                                                        // 2004
+	});                                                                                                                  // 2005
+	exports.reactive = exports.ViewModel = exports.name = undefined;                                                     // 2006
+                                                                                                                      // 2007
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-                                                                                                                   // 1841
-	var _utils = __webpack_require__(14);                                                                             // 1842
-                                                                                                                   // 1843
-	var _mixer = __webpack_require__(15);                                                                             // 1844
-                                                                                                                   // 1845
-	var _core = __webpack_require__(17);                                                                              // 1846
-                                                                                                                   // 1847
+                                                                                                                      // 2009
+	var _underscore = __webpack_require__(2);                                                                            // 2010
+                                                                                                                      // 2011
+	var _underscore2 = _interopRequireDefault(_underscore);                                                              // 2012
+                                                                                                                      // 2013
+	var _utils = __webpack_require__(16);                                                                                // 2014
+                                                                                                                      // 2015
+	var _mixer = __webpack_require__(17);                                                                                // 2016
+                                                                                                                      // 2017
+	var _core = __webpack_require__(19);                                                                                 // 2018
+                                                                                                                      // 2019
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }                      // 2020
+                                                                                                                      // 2021
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-                                                                                                                   // 1849
-	var name = exports.name = 'angular-meteor.view-model';                                                            // 1850
-	var ViewModel = exports.ViewModel = '$$ViewModel';                                                                // 1851
-	var reactive = exports.reactive = '$reactive';                                                                    // 1852
-                                                                                                                   // 1853
-	angular.module(name, [_utils.name, _mixer.name, _core.name])                                                      // 1854
-                                                                                                                   // 1855
-	/*                                                                                                                // 1856
-	  A mixin which lets us bind a view model into a scope.                                                           // 1857
-	  Note that only a single view model can be bound,                                                                // 1858
-	  otherwise the scope might behave unexpectedly.                                                                  // 1859
-	  Mainly used to define the controller as the view model,                                                         // 1860
-	  and very useful when wanting to use Angular's `controllerAs` syntax.                                            // 1861
-	 */                                                                                                               // 1862
-	.factory(ViewModel, [_utils.utils, _mixer.Mixer, function ($$utils, $Mixer) {                                     // 1863
-	  function $$ViewModel() {                                                                                        // 1864
-	    var vm = arguments.length <= 0 || arguments[0] === undefined ? this : arguments[0];                           // 1865
-                                                                                                                   // 1866
-	    // Defines the view model on the scope.                                                                       // 1867
-	    this.$$vm = vm;                                                                                               // 1868
-	  }                                                                                                               // 1869
-                                                                                                                   // 1870
-	  // Gets an object, wraps it with scope functions and returns it                                                 // 1871
-	  $$ViewModel.viewModel = function (vm) {                                                                         // 1872
-	    var _this = this;                                                                                             // 1873
-                                                                                                                   // 1874
-	    if (!_.isObject(vm)) {                                                                                        // 1875
-	      throw Error('argument 1 must be an object');                                                                // 1876
-	    }                                                                                                             // 1877
-                                                                                                                   // 1878
-	    // Apply mixin functions                                                                                      // 1879
-	    $Mixer._mixins.forEach(function (mixin) {                                                                     // 1880
-	      // Reject methods which starts with double $                                                                // 1881
-	      var keys = _.keys(mixin).filter(function (k) {                                                              // 1882
-	        return k.match(/^(?!\$\$).*$/);                                                                           // 1883
-	      });                                                                                                         // 1884
-	      var proto = _.pick(mixin, keys);                                                                            // 1885
-	      // Bind all the methods to the prototype                                                                    // 1886
-	      var boundProto = $$utils.bind(proto, _this);                                                                // 1887
-	      // Add the methods to the view model                                                                        // 1888
-	      _.extend(vm, boundProto);                                                                                   // 1889
-	    });                                                                                                           // 1890
-                                                                                                                   // 1891
-	    // Apply mixin constructors on the view model                                                                 // 1892
-	    $Mixer._construct(this, vm);                                                                                  // 1893
-	    return vm;                                                                                                    // 1894
-	  };                                                                                                              // 1895
-                                                                                                                   // 1896
-	  // Override $$Core.$bindToContext to be bound to view model instead of scope                                    // 1897
-	  $$ViewModel.$bindToContext = function (fn) {                                                                    // 1898
-	    return $$utils.bind(fn, this.$$vm, this.$$throttledDigest.bind(this));                                        // 1899
-	  };                                                                                                              // 1900
-                                                                                                                   // 1901
-	  return $$ViewModel;                                                                                             // 1902
-	}])                                                                                                               // 1903
-                                                                                                                   // 1904
-	/*                                                                                                                // 1905
-	  Illustrates the old API where a view model is created using $reactive service                                   // 1906
-	 */                                                                                                               // 1907
-	.service(reactive, [_utils.utils, function ($$utils) {                                                            // 1908
-	  var Reactive = function () {                                                                                    // 1909
-	    function Reactive(vm) {                                                                                       // 1910
-	      var _this2 = this;                                                                                          // 1911
-                                                                                                                   // 1912
-	      _classCallCheck(this, Reactive);                                                                            // 1913
-                                                                                                                   // 1914
-	      if (!_.isObject(vm)) {                                                                                      // 1915
-	        throw Error('argument 1 must be an object');                                                              // 1916
-	      }                                                                                                           // 1917
-                                                                                                                   // 1918
-	      _.defer(function () {                                                                                       // 1919
-	        if (!_this2._attached) {                                                                                  // 1920
-	          console.warn('view model was not attached to any scope');                                               // 1921
-	        }                                                                                                         // 1922
-	      });                                                                                                         // 1923
-                                                                                                                   // 1924
-	      this._vm = vm;                                                                                              // 1925
-	    }                                                                                                             // 1926
-                                                                                                                   // 1927
-	    _createClass(Reactive, [{                                                                                     // 1928
-	      key: 'attach',                                                                                              // 1929
-	      value: function attach(scope) {                                                                             // 1930
-	        this._attached = true;                                                                                    // 1931
-                                                                                                                   // 1932
-	        if (!$$utils.isScope(scope)) {                                                                            // 1933
-	          throw Error('argument 1 must be a scope');                                                              // 1934
-	        }                                                                                                         // 1935
-                                                                                                                   // 1936
-	        var viewModel = scope.viewModel(this._vm);                                                                // 1937
-                                                                                                                   // 1938
-	        // Similar to the old/Meteor API                                                                          // 1939
-	        viewModel.call = viewModel.callMethod;                                                                    // 1940
-	        viewModel.apply = viewModel.applyMethod;                                                                  // 1941
-                                                                                                                   // 1942
-	        return viewModel;                                                                                         // 1943
-	      }                                                                                                           // 1944
-	    }]);                                                                                                          // 1945
-                                                                                                                   // 1946
-	    return Reactive;                                                                                              // 1947
-	  }();                                                                                                            // 1948
-                                                                                                                   // 1949
-	  return function (vm) {                                                                                          // 1950
-	    return new Reactive(vm);                                                                                      // 1951
-	  };                                                                                                              // 1952
-	}]);                                                                                                              // 1953
-                                                                                                                   // 1954
-/***/ },                                                                                                           // 1955
-/* 19 */                                                                                                           // 1956
-/***/ function(module, exports, __webpack_require__) {                                                             // 1957
-                                                                                                                   // 1958
-	'use strict';                                                                                                     // 1959
-                                                                                                                   // 1960
-	Object.defineProperty(exports, "__esModule", {                                                                    // 1961
-	  value: true                                                                                                     // 1962
-	});                                                                                                               // 1963
-	exports.Reactive = exports.name = undefined;                                                                      // 1964
-                                                                                                                   // 1965
-	var _utils = __webpack_require__(14);                                                                             // 1966
-                                                                                                                   // 1967
-	var _mixer = __webpack_require__(15);                                                                             // 1968
-                                                                                                                   // 1969
-	var _core = __webpack_require__(17);                                                                              // 1970
-                                                                                                                   // 1971
-	var _viewModel = __webpack_require__(18);                                                                         // 1972
-                                                                                                                   // 1973
-	var name = exports.name = 'angular-meteor.reactive';                                                              // 1974
-	var Reactive = exports.Reactive = '$$Reactive';                                                                   // 1975
-                                                                                                                   // 1976
-	angular.module(name, [_utils.name, _mixer.name, _core.name, _viewModel.name])                                     // 1977
-                                                                                                                   // 1978
-	/*                                                                                                                // 1979
-	  A mixin which enhance our reactive abilities by providing methods                                               // 1980
-	  that are capable of updating our scope reactively.                                                              // 1981
-	 */                                                                                                               // 1982
-	.factory(Reactive, ['$parse', _utils.utils, function ($parse, $$utils) {                                          // 1983
-	  function $$Reactive() {                                                                                         // 1984
-	    var vm = arguments.length <= 0 || arguments[0] === undefined ? this : arguments[0];                           // 1985
-                                                                                                                   // 1986
-	    // Helps us track changes made in the view model                                                              // 1987
-	    vm.$$dependencies = {};                                                                                       // 1988
-	  }                                                                                                               // 1989
-                                                                                                                   // 1990
-	  // Gets an object containing functions and define their results as reactive properties.                         // 1991
-	  // Once a return value has been changed the property will be reset.                                             // 1992
-	  $$Reactive.helpers = function () {                                                                              // 1993
-	    var _this = this;                                                                                             // 1994
-                                                                                                                   // 1995
-	    var props = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];                          // 1996
-                                                                                                                   // 1997
-	    if (!_.isObject(props)) {                                                                                     // 1998
-	      throw Error('argument 1 must be an object');                                                                // 1999
-	    }                                                                                                             // 2000
-                                                                                                                   // 2001
-	    _.each(props, function (v, k, i) {                                                                            // 2002
-	      if (!_.isFunction(v)) {                                                                                     // 2003
-	        throw Error('helper ' + (i + 1) + ' must be a function');                                                 // 2004
-	      }                                                                                                           // 2005
-                                                                                                                   // 2006
-	      if (!_this.$$vm.$$dependencies[k]) {                                                                        // 2007
-	        // Registers a new dependency to the specified helper                                                     // 2008
-	        _this.$$vm.$$dependencies[k] = new Tracker.Dependency();                                                  // 2009
-	      }                                                                                                           // 2010
-                                                                                                                   // 2011
-	      _this.$$setFnHelper(k, v);                                                                                  // 2012
-	    });                                                                                                           // 2013
-	  };                                                                                                              // 2014
-                                                                                                                   // 2015
-	  // Gets a model reactively                                                                                      // 2016
-	  $$Reactive.getReactively = function (k) {                                                                       // 2017
-	    var isDeep = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];                      // 2018
-                                                                                                                   // 2019
-	    if (!_.isBoolean(isDeep)) {                                                                                   // 2020
-	      throw Error('argument 2 must be a boolean');                                                                // 2021
-	    }                                                                                                             // 2022
-                                                                                                                   // 2023
-	    return this.$$reactivateEntity(k, this.$watch, isDeep);                                                       // 2024
-	  };                                                                                                              // 2025
-                                                                                                                   // 2026
-	  // Gets a collection reactively                                                                                 // 2027
-	  $$Reactive.getCollectionReactively = function (k) {                                                             // 2028
-	    return this.$$reactivateEntity(k, this.$watchCollection);                                                     // 2029
-	  };                                                                                                              // 2030
-                                                                                                                   // 2031
-	  // Gets an entity reactively, and once it has been changed the computation will be recomputed                   // 2032
-	  $$Reactive.$$reactivateEntity = function (k, watcher) {                                                         // 2033
-	    if (!_.isString(k)) {                                                                                         // 2034
-	      throw Error('argument 1 must be a string');                                                                 // 2035
-	    }                                                                                                             // 2036
-                                                                                                                   // 2037
-	    if (!this.$$vm.$$dependencies[k]) {                                                                           // 2038
-	      this.$$vm.$$dependencies[k] = new Tracker.Dependency();                                                     // 2039
-                                                                                                                   // 2040
-	      for (var _len = arguments.length, watcherArgs = Array(_len > 2 ? _len - 2 : 0), _key = 2; _key < _len; _key++) {
-	        watcherArgs[_key - 2] = arguments[_key];                                                                  // 2042
-	      }                                                                                                           // 2043
-                                                                                                                   // 2044
-	      this.$$watchEntity.apply(this, [k, watcher].concat(watcherArgs));                                           // 2045
-	    }                                                                                                             // 2046
-                                                                                                                   // 2047
-	    this.$$vm.$$dependencies[k].depend();                                                                         // 2048
-	    return $parse(k)(this.$$vm);                                                                                  // 2049
-	  };                                                                                                              // 2050
-                                                                                                                   // 2051
-	  // Watches for changes in the view model, and if so will notify a change                                        // 2052
-	  $$Reactive.$$watchEntity = function (k, watcher) {                                                              // 2053
-	    var _this2 = this;                                                                                            // 2054
-                                                                                                                   // 2055
-	    // Gets a deep property from the view model                                                                   // 2056
-	    var getVal = _.partial($parse(k), this.$$vm);                                                                 // 2057
-	    var initialVal = getVal();                                                                                    // 2058
-                                                                                                                   // 2059
-	    // Watches for changes in the view model                                                                      // 2060
-                                                                                                                   // 2061
-	    for (var _len2 = arguments.length, watcherArgs = Array(_len2 > 2 ? _len2 - 2 : 0), _key2 = 2; _key2 < _len2; _key2++) {
-	      watcherArgs[_key2 - 2] = arguments[_key2];                                                                  // 2063
-	    }                                                                                                             // 2064
-                                                                                                                   // 2065
-	    watcher.call.apply(watcher, [this, getVal, function (val, oldVal) {                                           // 2066
-	      var hasChanged = val !== initialVal || val !== oldVal;                                                      // 2067
-                                                                                                                   // 2068
-	      // Notify if a change has been detected                                                                     // 2069
-	      if (hasChanged) _this2.$$changed(k);                                                                        // 2070
-	    }].concat(watcherArgs));                                                                                      // 2071
-	  };                                                                                                              // 2072
-                                                                                                                   // 2073
-	  // Invokes a function and sets the return value as a property                                                   // 2074
-	  $$Reactive.$$setFnHelper = function (k, fn) {                                                                   // 2075
-	    var _this3 = this;                                                                                            // 2076
-                                                                                                                   // 2077
-	    this.autorun(function (computation) {                                                                         // 2078
-	      // Invokes the reactive functon                                                                             // 2079
-	      var model = fn.apply(_this3.$$vm);                                                                          // 2080
-                                                                                                                   // 2081
-	      // Ignore notifications made by the following handler                                                       // 2082
-	      Tracker.nonreactive(function () {                                                                           // 2083
-	        // If a cursor, observe its changes and update acoordingly                                                // 2084
-	        if ($$utils.isCursor(model)) {                                                                            // 2085
-	          (function () {                                                                                          // 2086
-	            var observation = _this3.$$handleCursor(k, model);                                                    // 2087
-                                                                                                                   // 2088
-	            computation.onInvalidate(function () {                                                                // 2089
-	              observation.stop();                                                                                 // 2090
-	              _this3.$$vm[k].splice(0);                                                                           // 2091
-	            });                                                                                                   // 2092
-	          })();                                                                                                   // 2093
-	        } else {                                                                                                  // 2094
-	          _this3.$$handleNonCursor(k, model);                                                                     // 2095
-	        }                                                                                                         // 2096
-                                                                                                                   // 2097
-	        // Notify change and update the view model                                                                // 2098
-	        _this3.$$changed(k);                                                                                      // 2099
-	      });                                                                                                         // 2100
-	    });                                                                                                           // 2101
-	  };                                                                                                              // 2102
-                                                                                                                   // 2103
-	  // Sets a value helper as a setter and a getter which will notify computations once used                        // 2104
-	  $$Reactive.$$setValHelper = function (k, v) {                                                                   // 2105
-	    var _this4 = this;                                                                                            // 2106
-                                                                                                                   // 2107
-	    var watch = arguments.length <= 2 || arguments[2] === undefined ? true : arguments[2];                        // 2108
-                                                                                                                   // 2109
-	    // If set, reactives property                                                                                 // 2110
-	    if (watch) {                                                                                                  // 2111
-	      var isDeep = _.isObject(v);                                                                                 // 2112
-	      this.getReactively(k, isDeep);                                                                              // 2113
-	    }                                                                                                             // 2114
-                                                                                                                   // 2115
-	    Object.defineProperty(this.$$vm, k, {                                                                         // 2116
-	      configurable: true,                                                                                         // 2117
-	      enumerable: true,                                                                                           // 2118
-                                                                                                                   // 2119
-	      get: function get() {                                                                                       // 2120
-	        return v;                                                                                                 // 2121
-	      },                                                                                                          // 2122
-	      set: function set(newVal) {                                                                                 // 2123
-	        v = newVal;                                                                                               // 2124
-	        _this4.$$changed(k);                                                                                      // 2125
-	      }                                                                                                           // 2126
-	    });                                                                                                           // 2127
-	  };                                                                                                              // 2128
-                                                                                                                   // 2129
-	  // Fetching a cursor and updates properties once the result set has been changed                                // 2130
-	  $$Reactive.$$handleCursor = function (k, cursor) {                                                              // 2131
-	    var _this5 = this;                                                                                            // 2132
-                                                                                                                   // 2133
-	    // If not defined set it                                                                                      // 2134
-	    if (angular.isUndefined(this.$$vm[k])) {                                                                      // 2135
-	      this.$$setValHelper(k, cursor.fetch(), false);                                                              // 2136
-	    }                                                                                                             // 2137
-	    // If defined update it                                                                                       // 2138
-	    else {                                                                                                        // 2139
-	        var diff = jsondiffpatch.diff(this.$$vm[k], cursor.fetch());                                              // 2140
-	        jsondiffpatch.patch(this.$$vm[k], diff);                                                                  // 2141
-	      }                                                                                                           // 2142
-                                                                                                                   // 2143
-	    // Observe changes made in the result set                                                                     // 2144
-	    var observation = cursor.observe({                                                                            // 2145
-	      addedAt: function addedAt(doc, atIndex) {                                                                   // 2146
-	        if (!observation) return;                                                                                 // 2147
-	        _this5.$$vm[k].splice(atIndex, 0, doc);                                                                   // 2148
-	        _this5.$$changed(k);                                                                                      // 2149
-	      },                                                                                                          // 2150
-	      changedAt: function changedAt(doc, oldDoc, atIndex) {                                                       // 2151
-	        var diff = jsondiffpatch.diff(_this5.$$vm[k][atIndex], doc);                                              // 2152
-	        jsondiffpatch.patch(_this5.$$vm[k][atIndex], diff);                                                       // 2153
-	        _this5.$$changed(k);                                                                                      // 2154
-	      },                                                                                                          // 2155
-	      movedTo: function movedTo(doc, fromIndex, toIndex) {                                                        // 2156
-	        _this5.$$vm[k].splice(fromIndex, 1);                                                                      // 2157
-	        _this5.$$vm[k].splice(toIndex, 0, doc);                                                                   // 2158
-	        _this5.$$changed(k);                                                                                      // 2159
-	      },                                                                                                          // 2160
-	      removedAt: function removedAt(oldDoc, atIndex) {                                                            // 2161
-	        _this5.$$vm[k].splice(atIndex, 1);                                                                        // 2162
-	        _this5.$$changed(k);                                                                                      // 2163
-	      }                                                                                                           // 2164
-	    });                                                                                                           // 2165
-                                                                                                                   // 2166
-	    return observation;                                                                                           // 2167
-	  };                                                                                                              // 2168
-                                                                                                                   // 2169
-	  $$Reactive.$$handleNonCursor = function (k, data) {                                                             // 2170
-	    var v = this.$$vm[k];                                                                                         // 2171
-                                                                                                                   // 2172
-	    if (angular.isDefined(v)) {                                                                                   // 2173
-	      delete this.$$vm[k];                                                                                        // 2174
-	      v = null;                                                                                                   // 2175
-	    }                                                                                                             // 2176
-                                                                                                                   // 2177
-	    if (angular.isUndefined(v)) {                                                                                 // 2178
-	      this.$$setValHelper(k, data);                                                                               // 2179
-	    }                                                                                                             // 2180
-	    // Update property if the new value is from the same type                                                     // 2181
-	    else if ($$utils.areSiblings(v, data)) {                                                                      // 2182
-	        var diff = jsondiffpatch.diff(v, data);                                                                   // 2183
-	        jsondiffpatch.patch(v, diff);                                                                             // 2184
-	        this.$$changed(k);                                                                                        // 2185
-	      } else {                                                                                                    // 2186
-	        this.$$vm[k] = data;                                                                                      // 2187
-	      }                                                                                                           // 2188
-	  };                                                                                                              // 2189
-                                                                                                                   // 2190
-	  // Notifies dependency in view model                                                                            // 2191
-	  $$Reactive.$$depend = function (k) {                                                                            // 2192
-	    this.$$vm.$$dependencies[k].depend();                                                                         // 2193
-	  };                                                                                                              // 2194
-                                                                                                                   // 2195
-	  // Notifies change in view model                                                                                // 2196
-	  $$Reactive.$$changed = function (k) {                                                                           // 2197
-	    this.$$throttledDigest();                                                                                     // 2198
-	    this.$$vm.$$dependencies[k].changed();                                                                        // 2199
-	  };                                                                                                              // 2200
-                                                                                                                   // 2201
-	  return $$Reactive;                                                                                              // 2202
-	}]);                                                                                                              // 2203
-                                                                                                                   // 2204
-/***/ },                                                                                                           // 2205
-/* 20 */                                                                                                           // 2206
-/***/ function(module, exports) {                                                                                  // 2207
-                                                                                                                   // 2208
-	'use strict';                                                                                                     // 2209
-                                                                                                                   // 2210
-	Object.defineProperty(exports, "__esModule", {                                                                    // 2211
-	  value: true                                                                                                     // 2212
-	});                                                                                                               // 2213
-	var name = exports.name = 'angular-templates';                                                                    // 2214
-                                                                                                                   // 2215
-	try {                                                                                                             // 2216
-	  angular.module(name);                                                                                           // 2217
-	} catch (e) {                                                                                                     // 2218
-	  angular.module(name, []);                                                                                       // 2219
-	}                                                                                                                 // 2220
-                                                                                                                   // 2221
-/***/ }                                                                                                            // 2222
-/******/ ]);                                                                                                       // 2223
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                                                                                      // 2023
+	var name = exports.name = 'angular-meteor.view-model';                                                               // 2024
+	var ViewModel = exports.ViewModel = '$$ViewModel';                                                                   // 2025
+	var reactive = exports.reactive = '$reactive';                                                                       // 2026
+                                                                                                                      // 2027
+	angular.module(name, [_utils.name, _mixer.name, _core.name])                                                         // 2028
+                                                                                                                      // 2029
+	/*                                                                                                                   // 2030
+	  A mixin which lets us bind a view model into a scope.                                                              // 2031
+	  Note that only a single view model can be bound,                                                                   // 2032
+	  otherwise the scope might behave unexpectedly.                                                                     // 2033
+	  Mainly used to define the controller as the view model,                                                            // 2034
+	  and very useful when wanting to use Angular's `controllerAs` syntax.                                               // 2035
+	 */                                                                                                                  // 2036
+	.factory(ViewModel, [_utils.utils, _mixer.Mixer, function ($$utils, $Mixer) {                                        // 2037
+	  function $$ViewModel() {}                                                                                          // 2038
+                                                                                                                      // 2039
+	  // Gets an object, wraps it with scope functions and returns it                                                    // 2040
+	  $$ViewModel.viewModel = function (vm) {                                                                            // 2041
+	    if (!_underscore2.default.isObject(vm)) {                                                                        // 2042
+	      throw Error('argument 1 must be an object');                                                                   // 2043
+	    }                                                                                                                // 2044
+                                                                                                                      // 2045
+	    // Extend view model with mixin functions                                                                        // 2046
+	    $Mixer._extend(vm, {                                                                                             // 2047
+	      pattern: /^(?!\$\$).*$/, // Omitting methods which start with a $$ notation                                    // 2048
+	      context: this // Binding methods to scope                                                                      // 2049
+	    });                                                                                                              // 2050
+                                                                                                                      // 2051
+	    // Apply mixin constructors on scope with view model                                                             // 2052
+	    $Mixer._construct(this, vm);                                                                                     // 2053
+	    return vm;                                                                                                       // 2054
+	  };                                                                                                                 // 2055
+                                                                                                                      // 2056
+	  return $$ViewModel;                                                                                                // 2057
+	}])                                                                                                                  // 2058
+                                                                                                                      // 2059
+	/*                                                                                                                   // 2060
+	  Illustrates the old API where a view model is created using $reactive service                                      // 2061
+	 */                                                                                                                  // 2062
+	.service(reactive, [_utils.utils, function ($$utils) {                                                               // 2063
+	  var Reactive = function () {                                                                                       // 2064
+	    function Reactive(vm) {                                                                                          // 2065
+	      var _this = this;                                                                                              // 2066
+                                                                                                                      // 2067
+	      _classCallCheck(this, Reactive);                                                                               // 2068
+                                                                                                                      // 2069
+	      if (!_underscore2.default.isObject(vm)) {                                                                      // 2070
+	        throw Error('argument 1 must be an object');                                                                 // 2071
+	      }                                                                                                              // 2072
+                                                                                                                      // 2073
+	      _underscore2.default.defer(function () {                                                                       // 2074
+	        if (!_this._attached) {                                                                                      // 2075
+	          console.warn('view model was not attached to any scope');                                                  // 2076
+	        }                                                                                                            // 2077
+	      });                                                                                                            // 2078
+                                                                                                                      // 2079
+	      this._vm = vm;                                                                                                 // 2080
+	    }                                                                                                                // 2081
+                                                                                                                      // 2082
+	    _createClass(Reactive, [{                                                                                        // 2083
+	      key: 'attach',                                                                                                 // 2084
+	      value: function attach(scope) {                                                                                // 2085
+	        this._attached = true;                                                                                       // 2086
+                                                                                                                      // 2087
+	        if (!$$utils.isScope(scope)) {                                                                               // 2088
+	          throw Error('argument 1 must be a scope');                                                                 // 2089
+	        }                                                                                                            // 2090
+                                                                                                                      // 2091
+	        var viewModel = scope.viewModel(this._vm);                                                                   // 2092
+                                                                                                                      // 2093
+	        // Similar to the old/Meteor API                                                                             // 2094
+	        viewModel.call = viewModel.callMethod;                                                                       // 2095
+	        viewModel.apply = viewModel.applyMethod;                                                                     // 2096
+                                                                                                                      // 2097
+	        return viewModel;                                                                                            // 2098
+	      }                                                                                                              // 2099
+	    }]);                                                                                                             // 2100
+                                                                                                                      // 2101
+	    return Reactive;                                                                                                 // 2102
+	  }();                                                                                                               // 2103
+                                                                                                                      // 2104
+	  return function (vm) {                                                                                             // 2105
+	    return new Reactive(vm);                                                                                         // 2106
+	  };                                                                                                                 // 2107
+	}]);                                                                                                                 // 2108
+                                                                                                                      // 2109
+/***/ },                                                                                                              // 2110
+/* 21 */                                                                                                              // 2111
+/***/ function(module, exports, __webpack_require__) {                                                                // 2112
+                                                                                                                      // 2113
+	'use strict';                                                                                                        // 2114
+                                                                                                                      // 2115
+	Object.defineProperty(exports, "__esModule", {                                                                       // 2116
+	  value: true                                                                                                        // 2117
+	});                                                                                                                  // 2118
+	exports.Reactive = exports.name = undefined;                                                                         // 2119
+                                                                                                                      // 2120
+	var _jsondiffpatch = __webpack_require__(22);                                                                        // 2121
+                                                                                                                      // 2122
+	var _jsondiffpatch2 = _interopRequireDefault(_jsondiffpatch);                                                        // 2123
+                                                                                                                      // 2124
+	var _underscore = __webpack_require__(2);                                                                            // 2125
+                                                                                                                      // 2126
+	var _underscore2 = _interopRequireDefault(_underscore);                                                              // 2127
+                                                                                                                      // 2128
+	var _utils = __webpack_require__(16);                                                                                // 2129
+                                                                                                                      // 2130
+	var _mixer = __webpack_require__(17);                                                                                // 2131
+                                                                                                                      // 2132
+	var _core = __webpack_require__(19);                                                                                 // 2133
+                                                                                                                      // 2134
+	var _viewModel = __webpack_require__(20);                                                                            // 2135
+                                                                                                                      // 2136
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }                      // 2137
+                                                                                                                      // 2138
+	var name = exports.name = 'angular-meteor.reactive';                                                                 // 2139
+	var Reactive = exports.Reactive = '$$Reactive';                                                                      // 2140
+                                                                                                                      // 2141
+	angular.module(name, [_utils.name, _mixer.name, _core.name, _viewModel.name])                                        // 2142
+                                                                                                                      // 2143
+	/*                                                                                                                   // 2144
+	  A mixin which enhance our reactive abilities by providing methods                                                  // 2145
+	  that are capable of updating our scope reactively.                                                                 // 2146
+	 */                                                                                                                  // 2147
+	.factory(Reactive, ['$parse', _utils.utils, _mixer.Mixer, function ($parse, $$utils, $Mixer) {                       // 2148
+	  function $$Reactive() {                                                                                            // 2149
+	    var vm = arguments.length <= 0 || arguments[0] === undefined ? this : arguments[0];                              // 2150
+                                                                                                                      // 2151
+	    // Helps us track changes made in the view model                                                                 // 2152
+	    vm.$$dependencies = {};                                                                                          // 2153
+	  }                                                                                                                  // 2154
+                                                                                                                      // 2155
+	  // Gets an object containing functions and define their results as reactive properties.                            // 2156
+	  // Once a return value has been changed the property will be reset.                                                // 2157
+	  $$Reactive.helpers = function (vm, props) {                                                                        // 2158
+	    var _this = this;                                                                                                // 2159
+                                                                                                                      // 2160
+	    if ($$utils.isViewModel(vm)) {                                                                                   // 2161
+	      if (!_underscore2.default.isObject(props)) {                                                                   // 2162
+	        throw Error('argument 2 must be an object');                                                                 // 2163
+	      }                                                                                                              // 2164
+	    } else {                                                                                                         // 2165
+	      props = vm;                                                                                                    // 2166
+	      vm = $Mixer.caller;                                                                                            // 2167
+                                                                                                                      // 2168
+	      if (!_underscore2.default.isObject(props)) {                                                                   // 2169
+	        throw Error('argument 1 must be an object');                                                                 // 2170
+	      }                                                                                                              // 2171
+	    }                                                                                                                // 2172
+                                                                                                                      // 2173
+	    _underscore2.default.each(props, function (v, k) {                                                               // 2174
+	      if (!_underscore2.default.isFunction(v)) {                                                                     // 2175
+	        throw Error('helper \'' + k + '\' must be a function');                                                      // 2176
+	      }                                                                                                              // 2177
+	    });                                                                                                              // 2178
+                                                                                                                      // 2179
+	    _underscore2.default.each(props, function (v, k) {                                                               // 2180
+	      if (!vm.$$dependencies[k]) {                                                                                   // 2181
+	        // Registers a new dependency to the specified helper                                                        // 2182
+	        vm.$$dependencies[k] = new Tracker.Dependency();                                                             // 2183
+	      }                                                                                                              // 2184
+                                                                                                                      // 2185
+	      _this.$$setFnHelper(vm, k, v);                                                                                 // 2186
+	    });                                                                                                              // 2187
+	  };                                                                                                                 // 2188
+                                                                                                                      // 2189
+	  // Gets a model reactively                                                                                         // 2190
+	  $$Reactive.getReactively = function (vm, k, isDeep) {                                                              // 2191
+	    if ($$utils.isViewModel(vm)) {                                                                                   // 2192
+	      if (angular.isUndefined(isDeep)) isDeep = false;                                                               // 2193
+                                                                                                                      // 2194
+	      if (!_underscore2.default.isString(k)) {                                                                       // 2195
+	        throw Error('argument 2 must be a string');                                                                  // 2196
+	      }                                                                                                              // 2197
+	      if (!_underscore2.default.isBoolean(isDeep)) {                                                                 // 2198
+	        throw Error('argument 3 must be a boolean');                                                                 // 2199
+	      }                                                                                                              // 2200
+	    } else {                                                                                                         // 2201
+	      isDeep = angular.isDefined(k) ? k : false;                                                                     // 2202
+	      k = vm;                                                                                                        // 2203
+	      vm = $Mixer.caller;                                                                                            // 2204
+                                                                                                                      // 2205
+	      if (!_underscore2.default.isString(k)) {                                                                       // 2206
+	        throw Error('argument 1 must be a string');                                                                  // 2207
+	      }                                                                                                              // 2208
+	      if (!_underscore2.default.isBoolean(isDeep)) {                                                                 // 2209
+	        throw Error('argument 2 must be a boolean');                                                                 // 2210
+	      }                                                                                                              // 2211
+	    }                                                                                                                // 2212
+                                                                                                                      // 2213
+	    return this.$$reactivateEntity(vm, k, this.$watch, isDeep);                                                      // 2214
+	  };                                                                                                                 // 2215
+                                                                                                                      // 2216
+	  // Gets a collection reactively                                                                                    // 2217
+	  $$Reactive.getCollectionReactively = function (vm, k) {                                                            // 2218
+	    if ($$utils.isViewModel(vm)) {                                                                                   // 2219
+	      if (!_underscore2.default.isString(k)) {                                                                       // 2220
+	        throw Error('argument 2 must be a string');                                                                  // 2221
+	      }                                                                                                              // 2222
+	    } else {                                                                                                         // 2223
+	      k = vm;                                                                                                        // 2224
+	      vm = $Mixer.caller;                                                                                            // 2225
+                                                                                                                      // 2226
+	      if (!_underscore2.default.isString(k)) {                                                                       // 2227
+	        throw Error('argument 1 must be a string');                                                                  // 2228
+	      }                                                                                                              // 2229
+	    }                                                                                                                // 2230
+                                                                                                                      // 2231
+	    return this.$$reactivateEntity(vm, k, this.$watchCollection);                                                    // 2232
+	  };                                                                                                                 // 2233
+                                                                                                                      // 2234
+	  // Gets an entity reactively, and once it has been changed the computation will be recomputed                      // 2235
+	  $$Reactive.$$reactivateEntity = function (vm, k, watcher) {                                                        // 2236
+	    if (!vm.$$dependencies[k]) {                                                                                     // 2237
+	      vm.$$dependencies[k] = new Tracker.Dependency();                                                               // 2238
+                                                                                                                      // 2239
+	      for (var _len = arguments.length, watcherArgs = Array(_len > 3 ? _len - 3 : 0), _key = 3; _key < _len; _key++) {
+	        watcherArgs[_key - 3] = arguments[_key];                                                                     // 2241
+	      }                                                                                                              // 2242
+                                                                                                                      // 2243
+	      this.$$watchEntity.apply(this, [vm, k, watcher].concat(watcherArgs));                                          // 2244
+	    }                                                                                                                // 2245
+                                                                                                                      // 2246
+	    vm.$$dependencies[k].depend();                                                                                   // 2247
+	    return $parse(k)(vm);                                                                                            // 2248
+	  };                                                                                                                 // 2249
+                                                                                                                      // 2250
+	  // Watches for changes in the view model, and if so will notify a change                                           // 2251
+	  $$Reactive.$$watchEntity = function (vm, k, watcher) {                                                             // 2252
+	    var _this2 = this;                                                                                               // 2253
+                                                                                                                      // 2254
+	    // Gets a deep property from the caller                                                                          // 2255
+	    var getVal = _underscore2.default.partial($parse(k), vm);                                                        // 2256
+	    var initialVal = getVal();                                                                                       // 2257
+                                                                                                                      // 2258
+	    // Watches for changes in the view model                                                                         // 2259
+                                                                                                                      // 2260
+	    for (var _len2 = arguments.length, watcherArgs = Array(_len2 > 3 ? _len2 - 3 : 0), _key2 = 3; _key2 < _len2; _key2++) {
+	      watcherArgs[_key2 - 3] = arguments[_key2];                                                                     // 2262
+	    }                                                                                                                // 2263
+                                                                                                                      // 2264
+	    watcher.call.apply(watcher, [this, getVal, function (val, oldVal) {                                              // 2265
+	      var hasChanged = val !== initialVal || val !== oldVal;                                                         // 2266
+                                                                                                                      // 2267
+	      // Notify if a change has been detected                                                                        // 2268
+	      if (hasChanged) _this2.$$changed(vm, k);                                                                       // 2269
+	    }].concat(watcherArgs));                                                                                         // 2270
+	  };                                                                                                                 // 2271
+                                                                                                                      // 2272
+	  // Invokes a function and sets the return value as a property                                                      // 2273
+	  $$Reactive.$$setFnHelper = function (vm, k, fn) {                                                                  // 2274
+	    var _this3 = this;                                                                                               // 2275
+                                                                                                                      // 2276
+	    var activeObservation = null;                                                                                    // 2277
+	    var lastModel = null;                                                                                            // 2278
+	    var lastModelData = [];                                                                                          // 2279
+                                                                                                                      // 2280
+	    this.autorun(function () /* computation */{                                                                      // 2281
+	      // Invokes the reactive functon                                                                                // 2282
+	      var model = fn.apply(vm);                                                                                      // 2283
+                                                                                                                      // 2284
+	      // Ignore notifications made by the following handler                                                          // 2285
+	      Tracker.nonreactive(function () {                                                                              // 2286
+	        // If a cursor, observe its changes and update acoordingly                                                   // 2287
+	        if ($$utils.isCursor(model)) {                                                                               // 2288
+	          var modelData = undefined;                                                                                 // 2289
+                                                                                                                      // 2290
+	          if (angular.isUndefined(vm[k])) {                                                                          // 2291
+	            _this3.$$setValHelper(vm, k, [], false);                                                                 // 2292
+	          }                                                                                                          // 2293
+                                                                                                                      // 2294
+	          if (activeObservation) {                                                                                   // 2295
+	            lastModelData = lastModel.fetch();                                                                       // 2296
+	            activeObservation.stop();                                                                                // 2297
+	            activeObservation = null;                                                                                // 2298
+	          }                                                                                                          // 2299
+                                                                                                                      // 2300
+	          var handle = _this3.$$handleCursor(vm, k, model);                                                          // 2301
+                                                                                                                      // 2302
+	          activeObservation = handle.observation;                                                                    // 2303
+	          modelData = handle.data;                                                                                   // 2304
+                                                                                                                      // 2305
+	          if (lastModelData.length !== 0) {                                                                          // 2306
+	            var diff = _jsondiffpatch2.default.diff(lastModelData, modelData);                                       // 2307
+	            vm[k] = _jsondiffpatch2.default.patch(lastModelData, diff);                                              // 2308
+	          } else {                                                                                                   // 2309
+	            vm[k] = modelData;                                                                                       // 2310
+	          }                                                                                                          // 2311
+                                                                                                                      // 2312
+	          lastModel = model;                                                                                         // 2313
+	          lastModelData = modelData;                                                                                 // 2314
+                                                                                                                      // 2315
+	          /* computation.onInvalidate(() => {                                                                        // 2316
+	            activeObservation.stop();                                                                                // 2317
+	          });*/                                                                                                      // 2318
+	        } else {                                                                                                     // 2319
+	            _this3.$$handleNonCursor(vm, k, model);                                                                  // 2320
+	          }                                                                                                          // 2321
+                                                                                                                      // 2322
+	        // Notify change and update the view model                                                                   // 2323
+	        _this3.$$changed(vm, k);                                                                                     // 2324
+	      });                                                                                                            // 2325
+	    });                                                                                                              // 2326
+	  };                                                                                                                 // 2327
+                                                                                                                      // 2328
+	  // Sets a value helper as a setter and a getter which will notify computations once used                           // 2329
+	  $$Reactive.$$setValHelper = function (vm, k, v) {                                                                  // 2330
+	    var _this4 = this;                                                                                               // 2331
+                                                                                                                      // 2332
+	    var watch = arguments.length <= 3 || arguments[3] === undefined ? true : arguments[3];                           // 2333
+                                                                                                                      // 2334
+	    // If set, reactives property                                                                                    // 2335
+	    if (watch) {                                                                                                     // 2336
+	      var isDeep = _underscore2.default.isObject(v);                                                                 // 2337
+	      this.getReactively(vm, k, isDeep);                                                                             // 2338
+	    }                                                                                                                // 2339
+                                                                                                                      // 2340
+	    Object.defineProperty(vm, k, {                                                                                   // 2341
+	      configurable: true,                                                                                            // 2342
+	      enumerable: true,                                                                                              // 2343
+                                                                                                                      // 2344
+	      get: function get() {                                                                                          // 2345
+	        return v;                                                                                                    // 2346
+	      },                                                                                                             // 2347
+	      set: function set(newVal) {                                                                                    // 2348
+	        v = newVal;                                                                                                  // 2349
+	        _this4.$$changed(vm, k);                                                                                     // 2350
+	      }                                                                                                              // 2351
+	    });                                                                                                              // 2352
+	  };                                                                                                                 // 2353
+                                                                                                                      // 2354
+	  // Fetching a cursor and updates properties once the result set has been changed                                   // 2355
+	  $$Reactive.$$handleCursor = function (vm, k, cursor) {                                                             // 2356
+	    var _this5 = this;                                                                                               // 2357
+                                                                                                                      // 2358
+	    var data = [];                                                                                                   // 2359
+	    // Observe changes made in the result set                                                                        // 2360
+	    var observation = cursor.observe({                                                                               // 2361
+	      addedAt: function addedAt(doc, atIndex) {                                                                      // 2362
+	        if (!observation) {                                                                                          // 2363
+	          data.push(doc);                                                                                            // 2364
+	          return;                                                                                                    // 2365
+	        }                                                                                                            // 2366
+	        vm[k].splice(atIndex, 0, doc);                                                                               // 2367
+	        _this5.$$changed(vm, k);                                                                                     // 2368
+	      },                                                                                                             // 2369
+	      changedAt: function changedAt(doc, oldDoc, atIndex) {                                                          // 2370
+	        var diff = _jsondiffpatch2.default.diff(vm[k][atIndex], doc);                                                // 2371
+	        _jsondiffpatch2.default.patch(vm[k][atIndex], diff);                                                         // 2372
+	        _this5.$$changed(vm, k);                                                                                     // 2373
+	      },                                                                                                             // 2374
+	      movedTo: function movedTo(doc, fromIndex, toIndex) {                                                           // 2375
+	        vm[k].splice(fromIndex, 1);                                                                                  // 2376
+	        vm[k].splice(toIndex, 0, doc);                                                                               // 2377
+	        _this5.$$changed(vm, k);                                                                                     // 2378
+	      },                                                                                                             // 2379
+	      removedAt: function removedAt(oldDoc, atIndex) {                                                               // 2380
+	        vm[k].splice(atIndex, 1);                                                                                    // 2381
+	        _this5.$$changed(vm, k);                                                                                     // 2382
+	      }                                                                                                              // 2383
+	    });                                                                                                              // 2384
+                                                                                                                      // 2385
+	    return {                                                                                                         // 2386
+	      observation: observation,                                                                                      // 2387
+	      data: data                                                                                                     // 2388
+	    };                                                                                                               // 2389
+	  };                                                                                                                 // 2390
+                                                                                                                      // 2391
+	  $$Reactive.$$handleNonCursor = function (vm, k, data) {                                                            // 2392
+	    var v = vm[k];                                                                                                   // 2393
+                                                                                                                      // 2394
+	    if (angular.isDefined(v)) {                                                                                      // 2395
+	      delete vm[k];                                                                                                  // 2396
+	      v = null;                                                                                                      // 2397
+	    }                                                                                                                // 2398
+                                                                                                                      // 2399
+	    if (angular.isUndefined(v)) {                                                                                    // 2400
+	      this.$$setValHelper(vm, k, data);                                                                              // 2401
+	    }                                                                                                                // 2402
+	    // Update property if the new value is from the same type                                                        // 2403
+	    else if ($$utils.areSiblings(v, data)) {                                                                         // 2404
+	        var diff = _jsondiffpatch2.default.diff(v, data);                                                            // 2405
+	        _jsondiffpatch2.default.patch(v, diff);                                                                      // 2406
+	        this.$$changed(vm, k);                                                                                       // 2407
+	      } else {                                                                                                       // 2408
+	        vm[k] = data;                                                                                                // 2409
+	      }                                                                                                              // 2410
+	  };                                                                                                                 // 2411
+                                                                                                                      // 2412
+	  // Notifies dependency in view model                                                                               // 2413
+	  $$Reactive.$$depend = function (vm, k) {                                                                           // 2414
+	    vm.$$dependencies[k].depend();                                                                                   // 2415
+	  };                                                                                                                 // 2416
+                                                                                                                      // 2417
+	  // Notifies change in view model                                                                                   // 2418
+	  $$Reactive.$$changed = function (vm, k) {                                                                          // 2419
+	    this.$$throttledDigest();                                                                                        // 2420
+	    vm.$$dependencies[k].changed();                                                                                  // 2421
+	  };                                                                                                                 // 2422
+                                                                                                                      // 2423
+	  return $$Reactive;                                                                                                 // 2424
+	}]);                                                                                                                 // 2425
+                                                                                                                      // 2426
+/***/ },                                                                                                              // 2427
+/* 22 */                                                                                                              // 2428
+/***/ function(module, exports) {                                                                                     // 2429
+                                                                                                                      // 2430
+	module.exports = __WEBPACK_EXTERNAL_MODULE_22__;                                                                     // 2431
+                                                                                                                      // 2432
+/***/ },                                                                                                              // 2433
+/* 23 */                                                                                                              // 2434
+/***/ function(module, exports) {                                                                                     // 2435
+                                                                                                                      // 2436
+	'use strict';                                                                                                        // 2437
+                                                                                                                      // 2438
+	Object.defineProperty(exports, "__esModule", {                                                                       // 2439
+	  value: true                                                                                                        // 2440
+	});                                                                                                                  // 2441
+	var name = exports.name = 'angular-templates';                                                                       // 2442
+                                                                                                                      // 2443
+	try {                                                                                                                // 2444
+	  angular.module(name);                                                                                              // 2445
+	} catch (e) {                                                                                                        // 2446
+	  angular.module(name, []);                                                                                          // 2447
+	}                                                                                                                    // 2448
+                                                                                                                      // 2449
+/***/ }                                                                                                               // 2450
+/******/ ])                                                                                                           // 2451
+});                                                                                                                   // 2452
+;                                                                                                                     // 2453
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }).call(this);
 
