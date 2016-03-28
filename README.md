@@ -186,13 +186,13 @@ The package uses [TypeScript for Meteor](https://github.com/barbatus/ts-compiler
 
 TypeScript configuration file a.k.a. `tsconfig.json` is supported as well. Place a file with this name at the root folder and start adding any available TypeScript options you want. You can read about all available compiler options [here] (https://github.com/Microsoft/TypeScript/wiki/tsconfig.json).
 
-Preset (i.e., can't be overriden in the config) TypeScript options of the Meteor 1.3 version of this package are as follows:
+Preset (i.e., no overridable in the config) TypeScript options of the Meteor 1.3 version of this package are as follows:
 ````json
 {
   "compilerOptions": {
     "experimentalDecorators": true,
     "module": "commonjs",
-    "target": "es3",
+    "target": "es5",
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "sourceMap": true
@@ -200,16 +200,12 @@ Preset (i.e., can't be overriden in the config) TypeScript options of the Meteor
 }
 ````
 
-For the Meteor 1.2 version:
+For the Meteor 1.2 version, options are the same as above except two ones:
 ````json
 {
   "compilerOptions": {
-    "experimentalDecorators": true,
     "module": "system",
-    "target": "es3",
-    "moduleResolution": "classic",
-    "emitDecoratorMetadata": true,
-    "sourceMap": true
+    "moduleResolution": "classic"
   }
 }
 ````
