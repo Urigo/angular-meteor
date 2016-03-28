@@ -1,14 +1,14 @@
 Package.describe({
   name: 'urigo:angular2-meteor',
   summary: 'Everything you need to use AngularJS 2.0 in your Meteor app',
-  version: '0.5.0',
+  version: '0.5.1',
   git: 'https://github.com/Urigo/angular-meteor.git',
   documentation: '../../README.md'
 });
 
 Npm.depends({
-  'angular2-meteor': '0.5.1',
-  'angular2-meteor-auto-bootstrap': '0.5.0'
+  'angular2-meteor': '0.5.2',
+  'angular2-meteor-auto-bootstrap': '0.5.1'
 });
 
 Package.registerBuildPlugin({
