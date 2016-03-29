@@ -1,7 +1,7 @@
 Package.describe({
   name: 'angular-meteor-data',
   summary: 'Everything you need to use AngularJS in your Meteor app',
-  version: '1.3.9_1',
+  version: '1.3.9_2',
   git: 'https://github.com/Urigo/angular-meteor.git'
 });
 
