@@ -1,3 +1,5 @@
+// TODO: why this is required by Travis?
+import 'reflect-metadata';
 import * as ngCore from 'angular2/core';
 import {MeteorComponent} from 'angular2-meteor';
 import {chai} from 'meteor/practicalmeteor:chai';

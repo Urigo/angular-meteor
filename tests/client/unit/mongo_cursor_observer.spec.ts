@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import {MongoCursorObserver} from 'angular2-meteor';
 import * as fakes from './lib/fakes';
 import {chai} from 'meteor/practicalmeteor:chai';
