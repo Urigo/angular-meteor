@@ -1,4 +1,4 @@
 #!/bin/sh
-cd tests/packages/meteor_tests_package
+cd tests
 npm install
-VELOCITY_TEST_PACKAGES=1 meteor test-packages --driver-package=velocity:html-reporter ./
+meteor test --driver-package=avital:mocha

@@ -1,4 +1,4 @@
 #!/bin/sh
-cd tests/packages/meteor_tests_package
+cd tests
 npm install
-VELOCITY_TEST_PACKAGES=1 meteor test-packages --velocity ./
+meteor test --once --driver-package dispatch:mocha-phantomjs

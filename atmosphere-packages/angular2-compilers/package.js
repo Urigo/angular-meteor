@@ -28,7 +28,7 @@ Package.onUse(function(api) {
   // Make sure we have them in this package.
   api.imply([
     'barbatus:angular2-runtime@0.2.2',
-    'barbatus:typescript@0.2.0-beta.13',
+    'barbatus:typescript@0.2.0',
     'check@1.1.0',
     'tracker@1.0.9',
     'underscore@1.0.4',

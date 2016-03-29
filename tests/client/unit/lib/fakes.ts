@@ -28,7 +28,7 @@ export var ObserverFactoryFake = function(observer) {
   var self = this;
   this.create = function(cursor) {
     self.observer = self._observer ||
-      new MongoCollectionObserverFake(cursor);
+      new MongoCollectionObserverFake();
     return self.observer;
   };
 };
@@ -47,6 +47,6 @@ export var MongoCollectionCursorFake = function() {
   };
 
   this.fetch = function() {};
-
-  MongoCollectionCursorFake.prototype = Object.create(Mongo.Cursor.prototype);
 };
+
+MongoCollectionCursorFake.prototype = Object.create(Mongo.Cursor.prototype);
