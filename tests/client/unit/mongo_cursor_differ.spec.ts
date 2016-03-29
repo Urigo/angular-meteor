@@ -1,4 +1,3 @@
-import 'reflect-metadata';
 import * as ngCore from 'angular2/core';
 import {MongoCursorDiffer} from 'angular2-meteor';
 import {AddChange, RemoveChange, MoveChange} from 'angular2-meteor';
