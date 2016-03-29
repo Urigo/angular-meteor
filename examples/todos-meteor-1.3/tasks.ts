@@ -1,7 +1,7 @@
 export let Tasks = new Mongo.Collection<Task>('tasks');
 
 Meteor.methods({
-  addTask: function(text) {
+  'tasks.addTask': function(text) {
     Tasks.insert({
       text: text,
       checked: false,
@@ -9,18 +9,18 @@ Meteor.methods({
     });
   },
 
-  deleteTask: function(taskId) {
+  'tasks.deleteTask': function(taskId) {
     Tasks.remove(taskId);
   },
 
-  setChecked: function(taskId, setChecked) {
+  'tasks.setChecked': function(taskId, setChecked) {
     let task = Tasks.findOne(taskId);
     Tasks.update(taskId, {
       $set: {checked: setChecked}
     });
   },
 
-  setPrivate: function(taskId, setToPrivate) {
+  'tasks.setPrivate': function(taskId, setToPrivate) {
     let task = Tasks.findOne(taskId);
     Tasks.update(taskId, {
       $set: {private: setToPrivate}
