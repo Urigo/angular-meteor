@@ -8,6 +8,8 @@
     "angular2": "2.0.0-beta.12",
     "es6-shim": "^0.35.0",
     "zone.js": "^0.6.6",
+    "reflect-metadata": "0.1.2",
+    "rxjs": "5.0.0-beta.2",
     "angular2-meteor": "^0.5.0",
     "coffee-script": "^1.10.0",
     "less": "^2.6.1",
