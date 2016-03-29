@@ -10,16 +10,16 @@ export class TaskView extends MeteorComponent {
   @Input('data') task: Task;
 
   setChecked(checked) {
-    this.call('setChecked', this.task._id,
+    this.call('tasks.setChecked', this.task._id,
       checked);
   }
 
   setAccess() {
-    this.call('setPrivate', this.task._id,
+    this.call('tasks.setPrivate', this.task._id,
       !this.task.private);
   }
 
   deleteTask() {
-    this.call('deleteTask', this.task._id);
+    this.call('tasks.deleteTask', this.task._id);
   }
 }

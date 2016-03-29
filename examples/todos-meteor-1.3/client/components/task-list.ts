@@ -19,7 +19,7 @@ export class TaskList extends MeteorComponent implements OnChanges {
   constructor() {
     super();
     this.isLoading = true;
-    this.subscribe('tasks', () => {
+    this.subscribe('tasks.public', () => {
       this.isLoading = false;
     }, true);
   }
