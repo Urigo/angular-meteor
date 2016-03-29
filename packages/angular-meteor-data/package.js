@@ -1,12 +1,8 @@
 Package.describe({
   name: 'angular-meteor-data',
   summary: 'Everything you need to use AngularJS in your Meteor app',
-  version: '1.3.9',
+  version: '1.3.9_1',
   git: 'https://github.com/Urigo/angular-meteor.git'
-});
-
-Npm.depends({
-  'angular-meteor': '1.3.9'
 });
 
 Package.onUse(function (api) {
@@ -32,7 +28,7 @@ Package.onUse(function (api) {
   api.use('isobuild:compiler-plugin@1.0.0');
 
   api.add_files([
-    '.npm/package/node_modules/angular-meteor/dist/angular-meteor.js'
+    'angular-meteor.js'
   ], 'client', {
     transpile: false
   });

@@ -1,13 +1,6 @@
 /*! angular-meteor v1.3.9 */
 (function webpackUniversalModuleDefinition(root, factory) {
-	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("underscore"), require("jsondiffpatch"));
-	else if(typeof define === 'function' && define.amd)
-		define(["underscore", "jsondiffpatch"], factory);
-	else if(typeof exports === 'object')
-		exports["angularMeteor"] = factory(require("underscore"), require("jsondiffpatch"));
-	else
-		root["angularMeteor"] = factory(root["_"], root["jsondiffpatch"]);
+  root["angularMeteor"] = factory(Package.underscore._, root["jsondiffpatch"]);
 })(this, function(__WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_22__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
