@@ -1,6 +1,12 @@
 #!/usr/bin/env node
 var replace = require('replace-in-file');
 var fs = require('fs');
+
+function wrapInQuotes(file) {
+  return '\'' + file + '\'';
+}
+
+// look up for --stop flag
 var isStop = process.argv.slice(2).indexOf('--stop') !== -1;
 
 // path to angular-meteor-data package
@@ -14,8 +20,8 @@ var devFile = 'angular-meteor.js';
 // replace options
 var options = {
   files: packageFile,
-  replace: isStop ? devFile : npmFile,
-  with: isStop ? npmFile : devFile
+  replace: wrapInQuotes(isStop ? devFile : npmFile),
+  with: wrapInQuotes(isStop ? npmFile : devFile)
 };
 
 // clean up first
