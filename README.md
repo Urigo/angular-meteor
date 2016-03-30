@@ -29,28 +29,44 @@ If you are new to Angular 2, we recommend to check out our 15-steps Angular2+Met
 ### Install package:
 
 #### With Meteor 1.3:
+
+Before installing any Angular2-Meteor's NPMs, we recommend to have Angular 2 NPM and 
+its peer dependencies added in your `package.json`. The list you can find here.
+It makes the change to get "unmet peer dependency" warning is minimum for future packages updates.
+
+Then, install Angular2-Meteor's NPMs:
 ````
     npm install angular2-meteor --save
     npm install angular2-meteor-auto-bootstrap --save
 ````
 
-This package adds own HTML processor and TypeScript support, so you'll also need to remove the standard HTML processor:
+These NMPs work with another one useful Meteor package - `angular2-compilers`.
+This package adds own HTML processor and TypeScript compiler to a Meteor app.
+TypeScript is a language that makes development with Angular 2 really easy, and the only one
+fully supported by this project currently. So one of the prerequisites is to run:
+````
+   meteor add angular2-compilers
+````
+
+Please note that you'll have to remove the standard Meteor HTML processor if you have it installed.
+The reason is that Meteor doesn't allow more then two processor for one extension:
 
 ````
    meteor remove blaze-html-templates
 ````
 
-And add Angular2 compilers package:
+Angular 2 heavily relies on some polyfills and dependencies.
+For example, in order to make it work, you'll need to make sure that `reclect-metatada` and `zone.js` sctipts loaded before (imported)
+before you import and then use a component from `angular2` itself.
 
-````
-   meteor add angular2-compilers
-````
+There is another way to overcome that inconvenience (i.e., importing dependencies manually):
+you can install `barbatus:angular2-runtime`, a package that adds all required dependencies.
+Since it's a package, it's loaded by Meteor before any user code.
 
-> Note that this package contains now `angular2-runtime` package which adds all polyfills required by Angular 2, so that you don't need to import polyfills like `reflect-metadata` etc directly. Please, make sure you have latest `angular2-compilers`.
+> Note that current version of `barbatus:angular2-runtime` supports `beta-12` only.
+> There is no guarantee that it'll work for newer versions.
 
-For the explanation, please, read "HTML" [paragraph](http://www.angular-meteor.com/tutorials/socially/angular2/bootstrapping) in the above mentioned tutorial.
-
-Notes:
+Other notes:
 - Meteor 1.3 uses CommonJS implementation for modules loading so you do not need to use SystemJS or any other loader!
 - You'll have to add an index.html (can have any other name) even if your app template consists of one tag,
   e.g.,  `<body><app></app></body>`
