@@ -31,19 +31,19 @@ If you are new to Angular 2, we recommend to check out our 15-steps Angular2+Met
 #### With Meteor 1.3:
 
 Before installing any Angular2-Meteor's NPMs, we recommend to have Angular 2 NPM and 
-its peer dependencies added in your `package.json`. The list you can find here.
-It makes the change to get "unmet peer dependency" warning is minimum for future packages updates.
+its peer dependencies added in your `package.json`. The list you can find [here](https://github.com/Urigo/angular2-meteor/blob/master/package.json#L25).
+It makes the chance to get "unmet peer dependency" warning is minimum for the future package updates.
 
-Then, install Angular2-Meteor's NPMs:
+After, you are ready to install Angular2-Meteor's NPMs:
 ````
     npm install angular2-meteor --save
     npm install angular2-meteor-auto-bootstrap --save
 ````
 
-These NMPs work with another one useful Meteor package - `angular2-compilers`.
+You'd likely prefer to install another one Meteor package as well  — `angular2-compilers`.
 This package adds own HTML processor and TypeScript compiler to a Meteor app.
 TypeScript is a language that makes development with Angular 2 really easy, and the only one
-fully supported by this project currently. So one of the prerequisites is to run:
+fully supported by the Angular2-Meteor currently. So one of the prerequisites will be to run:
 ````
    meteor add angular2-compilers
 ````
@@ -56,15 +56,15 @@ The reason is that Meteor doesn't allow more then two processor for one extensio
 ````
 
 Angular 2 heavily relies on some polyfills and dependencies.
-For example, in order to make it work, you'll need to make sure that `reclect-metatada` and `zone.js` sctipts loaded before (imported)
-before you import and then use a component from `angular2` itself.
+For example, in order to make it work, you'll need to load (import) `reclect-metatada` and `zone.js`
+before you can use any component from `angular2` itself.
 
-There is another way to overcome that inconvenience (i.e., importing dependencies manually):
+There is a way to overcome that inconvenience (i.e., importing dependencies manually):
 you can install `barbatus:angular2-runtime`, a package that adds all required dependencies.
 Since it's a package, it's loaded by Meteor before any user code.
 
 > Note that current version of `barbatus:angular2-runtime` supports `beta-12` only.
-> There is no guarantee that it'll work for newer versions.
+> There is no guarantee that it'll work for newer versions of Angular 2.
 
 Other notes:
 - Meteor 1.3 uses CommonJS implementation for modules loading so you do not need to use SystemJS or any other loader!
