@@ -1,4 +1,4 @@
-# Angular2-Meteor [![Build Status](https://travis-ci.org/Urigo/angular2-meteor.svg?branch=master)](https://travis-ci.org/Urigo/angular2-meteor)
+# Angular2-Meteor [![NPM version][npm-version-image]][npm-url] [![NPM downloads][npm-downloads-image]][npm-url] [![Build Status](https://travis-ci.org/Urigo/angular2-meteor.svg?branch=master)](https://travis-ci.org/Urigo/angular2-meteor)
 Angular2 + Meteor integration.
 
 ##### Angular2 version: beta-12.
@@ -306,3 +306,7 @@ In order to use your local copy of Angular2-Meteor, you have two options:
 
 When working with local package, note that you should never have two local packages of `angular2` package, you should have it only under `node_modules/angular2` of the root directory. 
 In case of weird errors regarding missing direcrtives - make sure that you do not have a copy of `angular2` package under `node_modules/angular2-meteor/node_modules/angular2`!
+
+[npm-downloads-image]: http://img.shields.io/npm/dm/angular2-meteor.svg?style=flat
+[npm-version-image]: http://img.shields.io/npm/v/angular2-meteor.svg?style=flat
+[npm-url]: https://npmjs.org/package/angular2-meteor
