@@ -80,6 +80,7 @@ Notes:
 - The compilers are part of this package
 - Meteor 1.2 does not have modules loader, so you need to use SystemJS as modules loader (comes with this package!)
 
+## Usage
 ### Import Angular2 into your app:
 Package assumes TypeScript as the main language for development with Angular 2.
 
@@ -231,6 +232,32 @@ For the Meteor 1.2 version, options are the same as above except two ones:
 To add declaration files of any global 3-party JavaScript library including Meteor itself (so called ambient typings), we recommend to use [`typings`](https://github.com/typings/typings) utility, which is specially designed to be used for typigns management with access to global registries of common 3-party libraries.
 
 As for Angular 2's typings and typings of the related packages, if you plan to use Meteor 1.3 and NPM packages you don't need to worry about them at all, as most of declaration files are provided in NPMs (at least for Angular 2 itself). If you plan to use Meteor 1.2  and Atmosphere packages, all required typigns will be installed (copied) automatically into the "typings" folder during the first run.
+
+## Commong Issues and Troubleshoot
+
+### Upgrading to Meteor 1.3
+
+If you want to upgrade to Meteor 1.3 and use CommonJS modules,
+but at the same time have some of the Atmosphere packages related to Angular 2 (like `barbatus:g2-google-maps`, `barbatus:ng2-meteor-accounts-ui` etc) installed, you’ll need to remove them.
+The reason is they are based on SystemJS, which won’t work with Meteor 1.3 and `modules` package any more.
+Use NPM equivalents instead since most of that atmosphere packages were anyways converted from NPMs.
+
+For example, check out Angular2 Maps [here](https://www.npmjs.com/package/angular2-google-maps).
+a NPM version of the Meteor Accounts UI for Angular 2 is currently under development.
+You can find out some preliminary version [here](https://github.com/Urigo/angular2-meteor-accounts-ui).
+
+### It works fine locally but fails to run in the production
+
+This UglifyJS minification [issue]((https://github.com/angular/angular/issues/6380)) is likely to blame.
+Read this [comment](https://github.com/angular/angular/issues/6380#issuecomment-203247147) to find out more info.
+
+As a temporary solution, you could install `barbarous:ng2-minifier-js`, which
+configures UglifyJS to skip renaming (mangling). So you’ll need:
+
+````
+meteor remove standard-minifier-js
+meteor add  barbarous:ng2-minifier-js
+````
 
 ## Roadmap
 
