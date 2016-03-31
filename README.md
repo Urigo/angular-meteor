@@ -205,7 +205,7 @@ The package uses [TypeScript for Meteor](https://github.com/barbatus/ts-compiler
 
 TypeScript configuration file a.k.a. `tsconfig.json` is supported as well. Place a file with this name at the root folder and start adding any available TypeScript options you want. You can read about all available compiler options [here] (https://github.com/Microsoft/TypeScript/wiki/tsconfig.json).
 
-Preset (i.e., no overridable in the config) TypeScript options of the Meteor 1.3 version of this package are as follows:
+Default TypeScript options for Meteor 1.3 are as follows:
 ````json
 {
   "compilerOptions": {
@@ -219,7 +219,7 @@ Preset (i.e., no overridable in the config) TypeScript options of the Meteor 1.3
 }
 ````
 
-For the Meteor 1.2 version, options are the same as above except two ones:
+For Meteor 1.2, options are the same as above except:
 ````json
 {
   "compilerOptions": {
