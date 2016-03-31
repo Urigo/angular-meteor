@@ -258,7 +258,7 @@ configures UglifyJS to skip renaming (mangling). So you’ll need:
 
 ````
 meteor remove standard-minifier-js
-meteor add  barbarous:ng2-minifier-js
+meteor add  barbartus:ng2-minifier-js
 ````
 
 ## Roadmap
