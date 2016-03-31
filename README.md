@@ -189,8 +189,8 @@ You can find more examples in the full tutorial!
 
 Check out two demos for the quick how-to:
 
-* For Meter 1.2: the Tutorial's [Socially app](https://github.com/Urigo/meteor-angular2.0-socially) (For Meteor 1.2)
-* For Meteor 1.3: [Todos](https://github.com/Urigo/Meteor-Angular2/tree/master/examples/todos-meteor-1.3) demo.
+* For Meter 1.2: the Tutorial's [Socially app](https://github.com/Urigo/meteor-angular2.0-socially)
+* For Meteor 1.3: [Todos](https://github.com/Urigo/Meteor-Angular2/tree/master/examples/todos-meteor-1.3) demo
 
 ## Server Side
 You can use TypeScript also in the server side, so you can share you interfaces with both client and server!
