@@ -20,7 +20,7 @@ Angular2 + Meteor integration.
 Check out change log of the package [here](CHANGELOG.md).
 
 If you suddenly started facing issues or want to upgrade,
-please check out common issues and troubleshoot [section](https://github.com/Urigo/angular2-meteor#commong-issues-and-troubleshoot) first.
+please check out common issues and troubleshoot [section](../../#commong-issues-and-troubleshoot) first.
 ## Tutorial
 
 If you are new to Angular 2, we recommend to check out our 15-steps Angular2+Meteor [tutorial](http://www.angular-meteor.com/tutorials/socially/angular2/bootstrapping).
@@ -250,7 +250,7 @@ You can find out some preliminary version [here](https://github.com/Urigo/angula
 
 ### It works fine locally but fails to run in the production
 
-This UglifyJS minification [issue]((https://github.com/angular/angular/issues/6380) is likely to blame.
+This UglifyJS minification [issue](https://github.com/angular/angular/issues/6380) is likely to blame.
 Read this [comment](https://github.com/angular/angular/issues/6380#issuecomment-203247147) to find out more info.
 
 As a temporary solution, you could install `barbarous:ng2-minifier-js`, which
