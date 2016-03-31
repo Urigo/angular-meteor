@@ -1,6 +1,6 @@
 Package.describe({
   name: 'barbatus:angular2',
-  version: '0.9.0',
+  version: '0.9.1',
   summary: 'Angular2 Npm packaged for Meteor',
   git: 'https://github.com/Urigo/angular2/tree/master/atmosphere-packages',
   documentation: 'README.md'
@@ -13,7 +13,7 @@ Package.registerBuildPlugin({
   ],
   use: [
     'ecmascript@0.1.4',
-    'barbatus:ng2-typescript-compiler@0.5.0-beta.5'
+    'barbatus:ng2-typescript-compiler@0.5.0'
   ]
 });
 
@@ -33,7 +33,7 @@ Package.onUse(function(api) {
   api.imply([
     'barbatus:angular2-runtime',
     'systemjs:systemjs',
-    'barbatus:typescript-runtime@0.1.0-beta.1'
+    'barbatus:typescript-runtime@0.1.0'
   ]);
 
   api.addFiles([
