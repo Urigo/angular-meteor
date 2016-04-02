@@ -3,6 +3,7 @@
     "build",
     "build/**",
     "**/build/**",
+    "**/dist/**",
     "**/typings/**",
     "**/node_modules/**",
     "**/**-min-**",
