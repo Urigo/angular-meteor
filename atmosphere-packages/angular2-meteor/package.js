@@ -8,6 +8,7 @@ Package.describe({
 
 Npm.depends({
   'angular2-meteor': '0.5.2',
+  'angular2': '2.0.0-beta.12',
   'angular2-meteor-auto-bootstrap': '0.5.1'
 });
 
@@ -27,7 +28,7 @@ Package.onUse(function (api) {
 
   api.use([
     'isobuild:compiler-plugin@1.0.0',
-    'barbatus:angular2@0.9.1'
+    'barbatus:angular2@0.9.2'
   ]);
 
   // Some of the packages are used by Angular2-Meteor NPM.

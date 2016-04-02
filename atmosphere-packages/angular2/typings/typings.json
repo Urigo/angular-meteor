@@ -1,8 +1,0 @@
-{
-  "name": "angular2",
-  "main": "main.d.ts",
-  "ambientDependencies": {
-    "es6-promise": "github:typings/typed-es6-promise",
-    "es6-shim": "github:DefinitelyTyped/DefinitelyTyped/es6-shim/es6-shim.d.ts"
-  }
-}
