@@ -26,7 +26,8 @@ describe('angular-meteor.core', function() {
       });
 
       it('should call Tracker.autorun()', function() {
-        var stoppable = { stop: jasmine.createSpy('stop') };
+        var stop = jasmine.createSpy('stop');
+        var stoppable = { stop: stop };
         spyOn(Tracker, 'autorun').and.returnValue(stoppable);
 
         scope.autorun(function() {});
@@ -34,23 +35,25 @@ describe('angular-meteor.core', function() {
       });
 
       it('should autostop computation', function() {
-        var stoppable = { stop: jasmine.createSpy('stop') };
+        var stop = jasmine.createSpy('stop');
+        var stoppable = { stop: stop };
         spyOn(Tracker, 'autorun').and.returnValue(stoppable);
 
         scope.autorun(angular.noop);
         scope.$destroy();
 
-        expect(stoppable.stop).toHaveBeenCalled();
+        expect(stop).toHaveBeenCalled();
       });
 
       it('should stop computation manually', function() {
-        var stoppable = { stop: jasmine.createSpy('stop') };
+        var stop = jasmine.createSpy('stop');
+        var stoppable = { stop: stop };
         spyOn(Tracker, 'autorun').and.returnValue(stoppable);
 
         var computation = scope.autorun(angular.noop);
         computation.stop();
 
-        expect(stoppable.stop).toHaveBeenCalled();
+        expect(stop).toHaveBeenCalled();
       });
 
       it('should call autorun function using view model as context', function() {
@@ -65,6 +68,18 @@ describe('angular-meteor.core', function() {
         scope.$digest = jasmine.createSpy('digest');
         scope.autorun(angular.noop);
         expect(scope.$digest).toHaveBeenCalled();
+      });
+
+      it('should remove the destroy event listener once the computation has been stopped', function() {
+        var stop = jasmine.createSpy('stop');
+        var stoppable = { stop: stop };
+        spyOn(Tracker, 'autorun').and.returnValue(stoppable);
+
+        var computation = scope.autorun(angular.noop);
+        computation.stop();
+        scope.$destroy();
+
+        expect(stop.calls.count()).toEqual(1);
       });
     });
 
@@ -87,23 +102,25 @@ describe('angular-meteor.core', function() {
       });
 
       it('should autostop subscription', function() {
-        var stoppable = { stop: jasmine.createSpy('stop') };
+        var stop = jasmine.createSpy('stop');
+        var stoppable = { stop: stop };
         spyOn(Tracker, 'autorun').and.returnValue(stoppable);
 
         scope.subscribe('test');
         scope.$destroy();
 
-        expect(stoppable.stop).toHaveBeenCalled();
+        expect(stop).toHaveBeenCalled();
       });
 
       it('should stop subscription manually', function() {
-        var stoppable = { stop: jasmine.createSpy('stop') };
+        var stop = jasmine.createSpy('stop');
+        var stoppable = { stop: stop };
         spyOn(Tracker, 'autorun').and.returnValue(stoppable);
 
         var subscription = scope.subscribe('test');
         subscription.stop();
 
-        expect(stoppable.stop).toHaveBeenCalled();
+        expect(stop).toHaveBeenCalled();
       });
 
       it('should return subscription ready and subscriptionId properties', function(done) {
