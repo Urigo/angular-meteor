@@ -34,7 +34,8 @@ angular.module(name, [
       }
 
       const computation = Tracker.autorun(fn, options);
-      this.$$autoStop(computation);
+      // Reset to a function that will also stop the listener we just added
+      computation.stop = this.$$autoStop(computation);
       return computation;
     };
 
@@ -89,8 +90,20 @@ angular.module(name, [
       return Meteor.apply(...args, fn);
     };
 
+    // Stops a process once the scope has been destroyed
     $$Core.$$autoStop = function(stoppable) {
-      this.$on('$destroy', stoppable.stop.bind(stoppable));
+      let removeListener;
+      const baseStop = stoppable.stop.bind(stoppable);
+
+      // Once the process has been stopped the destroy event listener will be removed
+      // to avoid memory leaks and unexpected behaviours
+      const stop = (...args) => {
+        removeListener();
+        return baseStop(...args);
+      };
+
+      removeListener = this.$on('$destroy', stop);
+      return stop;
     };
 
     // Digests scope only if there is no phase at the moment
