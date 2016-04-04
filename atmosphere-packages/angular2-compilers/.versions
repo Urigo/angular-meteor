@@ -1,11 +1,10 @@
-angular2-compilers@0.5.4
+angular2-compilers@0.5.5_1
 angular2-html-templates@0.5.0
 babel-compiler@5.8.24_1
 babel-runtime@0.1.4
-barbatus:angular2-runtime@0.2.2
-barbatus:typescript@0.2.0-beta.13
-barbatus:typescript-compiler@0.5.0-beta.14
-barbatus:typescript-runtime@0.1.0-beta.1
+barbatus:typescript@0.2.2
+barbatus:typescript-compiler@0.5.1
+barbatus:typescript-runtime@0.1.0
 base64@1.0.4
 binary-heap@1.0.4
 blaze@2.1.3
@@ -28,7 +27,7 @@ html-tools@1.0.5
 htmljs@1.0.5
 id-map@1.0.4
 jquery@1.11.4
-local-test:angular2-compilers@0.5.4
+local-test:angular2-compilers@0.5.5_1
 logging@1.0.8
 meteor@1.1.10
 minimongo@1.0.10
