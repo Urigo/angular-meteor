@@ -23,8 +23,8 @@ If you suddenly started facing issues or want to upgrade,
 please check out common issues and troubleshoot [section](../../#commong-issues-and-troubleshoot) first.
 ## Tutorial
 
-If you are new to Angular 2, we recommend to check out our 15-steps Angular2+Meteor [tutorial](http://www.angular-meteor.com/tutorials/socially/angular2/bootstrapping).
-> Please note, the tutorial above is about Angular2-Meteor version for Meteor 1.2, while current README focuses more on the version for Meteor 1.3. New version is in active development now.
+For full tutorial, please check out our 23-steps Angular2-Meteor [tutorial](http://www.angular-meteor.com/tutorials/socially/angular2/bootstrapping).
+> Please note, the tutorial above is about Angular2-Meteor version for Meteor 1.3.
 
 ## Quick Start
 
