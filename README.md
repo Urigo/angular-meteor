@@ -58,7 +58,7 @@ The reason is that Meteor doesn't allow more then two processor for one extensio
 ````
 
 Angular 2 heavily relies on some polyfills and dependencies.
-For example, in order to make it work, you'll need to load (import) `reclect-metatada` and `zone.js`
+For example, in order to make it work, you'll need to load (import) `reflect-metatada` and `zone.js`
 before you can use any component from `angular2` itself.
 
 There is a way to overcome that inconvenience (i.e., importing dependencies manually):
