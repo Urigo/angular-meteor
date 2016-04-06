@@ -235,7 +235,7 @@ To add declaration files of any global 3-party JavaScript library including Mete
 
 As for Angular 2's typings and typings of the related packages, if you plan to use Meteor 1.3 and NPM packages you don't need to worry about them at all, as most of declaration files are provided in NPMs (at least for Angular 2 itself). If you plan to use Meteor 1.2  and Atmosphere packages, all required typigns will be installed (copied) automatically into the "typings" folder during the first run.
 
-## Commong Issues and Troubleshoot
+## Common Issues and Troubleshoot
 
 ### Upgrading to Meteor 1.3
 
@@ -253,7 +253,7 @@ You can find out some preliminary version [here](https://github.com/Urigo/angula
 This UglifyJS minification [issue](https://github.com/angular/angular/issues/6380) is likely to blame.
 Read this [comment](https://github.com/angular/angular/issues/6380#issuecomment-203247147) to find out more info.
 
-As a temporary solution, you could install `barbarous:ng2-minifier-js`, which
+As a temporary solution, you could install `barbatus:ng2-minifier-js`, which
 configures UglifyJS to skip renaming (mangling). So you’ll need:
 
 ````
