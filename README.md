@@ -14,6 +14,7 @@
 - [Example application](https://github.com/Urigo/meteor-angular-socially) (Final version of the tutorial)
 - Questions and help - [stack-overflow `angular-meteor` tag](http://stackoverflow.com/questions/tagged/angular-meteor)
 - [Discussions - the Meteor Forum](https://forums.meteor.com/)
+- [Gitter](https://gitter.im/Urigo/angular-meteor)
 - [Report issues](https://github.com/Urigo/angular-meteor/issues)
 - [Change Log, updates and breaking changes](https://github.com/Urigo/angular-meteor/releases)
 - [Meteor Blog](https://info.meteor.com/blog)
