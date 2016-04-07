@@ -21,6 +21,7 @@
 - [Awesome Meteor](https://github.com/Urigo/awesome-meteor) - A curated, community driven list of awesome Meteor packages, libraries, resources and shiny thing
 - Starters - [Angular-Meteor Platform](https://github.com/planet-training/angular-meteor-platform), [angular-meteor Yeoman generator](https://github.com/ndxbxrme/generator-angular-meteor), [Angular-Meteor-Boilerplate with TypeScript](https://github.com/ShMcK/Angular-Meteor-Boilerplate)
 - Track Roadmap here:
+- [Trello](https://trello.com/b/Wj9U0ulk/angular-meteor)
 - [angular-meteor milestones](https://github.com/Urigo/angular-meteor/milestones)
 - [Meteor issues related to Angular](https://github.com/meteor/meteor/labels/Project%3AAngular)
 - [Angular Meteor Stickers](https://www.stickermule.com/marketplace/9686-angular-meteor-sticker)
