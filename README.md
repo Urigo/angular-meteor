@@ -1,7 +1,9 @@
 <a href="http://angular-meteor.com/"><img src="http://angular-meteor.com/images/logo-large.png" width="60" height="60" /></a>  [angular-meteor](http://angular-meteor.com/tutorial) [![Build Status](https://travis-ci.org/Urigo/angular-meteor.svg?branch=master)](https://travis-ci.org/Urigo/angular-meteor) [![Bower version](https://badge.fury.io/bo/angular-meteor.svg)](http://badge.fury.io/bo/angular-meteor) [![bitHound Overall Score](https://www.bithound.io/github/Urigo/angular-meteor/badges/score.svg)](https://www.bithound.io/github/Urigo/angular-meteor)
 ======================================================
 
-> The power of Meteor and the simplicity and eco-system of AngularJS
+> This github is mainly for angular1-meteor, please comes [here](https://github.com/Urigo/angular2-meteor) for angular2-meteor.
+
+#### The power of Meteor and the simplicity and eco-system of AngularJS
 
 [![ng-conf](http://img.youtube.com/vi/_mu6BWsnaPM/0.jpg)](https://www.youtube.com/watch?v=_mu6BWsnaPM)
 
