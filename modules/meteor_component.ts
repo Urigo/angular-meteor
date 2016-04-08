@@ -51,8 +51,27 @@ export class MeteorComponent implements OnDestroy {
   subscribe(name: string, ...args): Meteor.SubscriptionHandle {
     let subArgs = this._prepMeteorArgs(args.slice());
 
+    if (!Meteor.subscribe) {
+      throw new Error(
+        'Meteor.subscribe is not defined on the server side');
+    };
+
     let hSubscribe = Meteor.subscribe(name, ...subArgs);
     this._hSubscribes.push(hSubscribe);
+
+    if (Meteor.isClient) {
+      this._hSubscribes.push(hSubscribe);
+    };
+
+    if (Meteor.isServer) {
+      let callback = subArgs[subArgs.length - 1];
+      if (_.isFunction(callback)) {
+        callback();
+      }
+      if (isCallbacksObject(callback)) {
+        callback.onReady();
+      }
+    }
 
     return hSubscribe;
   }
