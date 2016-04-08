@@ -10,6 +10,7 @@ Thumbs.db
 .build*
 .npm
 node_modules
+npm-debug.log
 
 # IDE's #
 #########

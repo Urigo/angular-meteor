@@ -340,5 +340,42 @@ describe('angular-meteor.core', function() {
         scope.applyMethod('method', ['foo', 'bar'], angular.noop);
       });
     });
+
+    describe('$bindToContext()', function() {
+      var scope;
+
+      beforeEach(function() {
+        scope = $rootScope.$new();
+      });
+
+      afterEach(function() {
+        scope.$destroy();
+      });
+
+      it('should bind a function to scope and digest once invoked', function() {
+        var fn = jasmine.createSpy('function');
+        scope.$digest = jasmine.createSpy('digest');
+
+        var boundFn = scope.$bindToContext(fn);
+        boundFn(1, 2, 3);
+
+        expect(fn).toHaveBeenCalled();
+        expect(fn.calls.mostRecent().object).toEqual(scope);
+        expect(fn.calls.mostRecent().args).toEqual([1, 2, 3]);
+      });
+
+      it('should bind the function to a custom scope if specified', function() {
+        var fn = jasmine.createSpy('function');
+        scope.$digest = jasmine.createSpy('digest');
+
+        var context = {};
+        var boundFn = scope.$bindToContext(context, fn);
+        boundFn(1, 2, 3);
+
+        expect(fn).toHaveBeenCalled();
+        expect(fn.calls.mostRecent().object).toEqual(context);
+        expect(fn.calls.mostRecent().args).toEqual([1, 2, 3]);
+      });
+    });
   });
 });

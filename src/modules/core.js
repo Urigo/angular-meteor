@@ -125,6 +125,11 @@ angular.module(name, [
 
     // Binds an object or a function to the provided context and digest it once it is invoked
     $$Core.$bindToContext = function(context, fn) {
+      if (_.isFunction(context)) {
+        fn = context;
+        context = this;
+      }
+
       return $$utils.bind(fn, context, this.$$throttledDigest.bind(this));
     };
 
