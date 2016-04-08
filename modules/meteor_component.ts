@@ -57,7 +57,6 @@ export class MeteorComponent implements OnDestroy {
     };
 
     let hSubscribe = Meteor.subscribe(name, ...subArgs);
-    this._hSubscribes.push(hSubscribe);
 
     if (Meteor.isClient) {
       this._hSubscribes.push(hSubscribe);
