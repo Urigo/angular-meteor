@@ -89,7 +89,6 @@
 	        }
 	        ;
 	        var hSubscribe = Meteor.subscribe.apply(Meteor, [name].concat(subArgs));
-	        this._hSubscribes.push(hSubscribe);
 	        if (Meteor.isClient) {
 	            this._hSubscribes.push(hSubscribe);
 	        }
