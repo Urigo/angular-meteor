@@ -18,15 +18,23 @@ gulp.task("typings",function(){
 });
 
 // Build TypeScript.
-gulp.task("webpack", function() {
+gulp.task("webpack", function(callback) {
   var build = gulp.src("modules/*")
     .pipe(webpack(require("./webpack.config.js")))
     .pipe(gulp.dest("build/"));
 
+  return build;
+});
+
+gulp.task("movedts", function(callback) {
   var move = gulp.src("build/modules/*")
     .pipe(gulp.dest("build/"));
 
-  return merge(build, move);
+  return move;
+});
+
+gulp.task("tsbuild", function(callback) {
+  return runSequence("webpack", "movedts", callback);
 });
 
 gulp.task("lint", function() {
@@ -50,7 +58,7 @@ gulp.task("git-add", function(){
 });
 
 gulp.task("build", function(callback) {
-  runSequence("typings", "lint", "webpack", "build-clean", "git-add", callback);
+  runSequence("typings", "lint", "tsbuild", "build-clean", "git-add", callback);
 });
 
 // Move files from build/ to ./ before NPM publish.

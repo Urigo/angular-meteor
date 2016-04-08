@@ -22,17 +22,27 @@ export interface ObserverFactory {
   create(cursor: Object): Object;
 }
 
+let _cursorType = null;
+function checkIfMongoCursor(cursor): boolean {
+  if (!_cursorType && Mongo.Collection) {
+    let col = new Mongo.Collection(null);
+    _cursorType = col.find({}).constructor;
+  }
+
+  return cursor instanceof _cursorType;
+}
+
 class MongoCursorObserverFactory implements ObserverFactory {
   create(cursor: Object): Object {
-    if (cursor instanceof Mongo.Cursor) {
-      return new MongoCursorObserver(cursor);
+    if (checkIfMongoCursor(cursor)) {
+      return new MongoCursorObserver(<Mongo.Cursor<any>>cursor);
     }
     return null;
   }
 }
 
 export class MongoCursorDifferFactory extends DefaultIterableDifferFactory {
-  supports(obj: Object): boolean { return obj instanceof Mongo.Cursor; }
+  supports(obj: Object): boolean { return checkIfMongoCursor(obj); }
 
   create(cdRef: ChangeDetectorRef): MongoCursorDiffer {
     return new MongoCursorDiffer(cdRef, new MongoCursorObserverFactory());

@@ -46,13 +46,11 @@
 
 	'use strict';
 	var CursorHandle = (function () {
-	    function CursorHandle(cursor, hCurObserver, hAutoNotify) {
-	        check(cursor, Mongo.Cursor);
+	    function CursorHandle(hCurObserver, hAutoNotify) {
 	        check(hAutoNotify, Match.Optional(Tracker.Computation));
 	        check(hCurObserver, Match.Where(function (observer) {
 	            return !!observer.stop;
 	        }));
-	        this._cursor = cursor;
 	        this._hAutoNotify = hAutoNotify;
 	        this._hCurObserver = hCurObserver;
 	    }

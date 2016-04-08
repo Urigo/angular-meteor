@@ -89,7 +89,7 @@ export class MongoCursorObserver {
 
   _startCursor(cursor: Mongo.Cursor<any>): CursorHandle {
     let hCurObserver = this._startCursorObserver(cursor);
-    return new CursorHandle(cursor, hCurObserver);
+    return new CursorHandle(hCurObserver);
   }
 
   _startCursorObserver(cursor: Mongo.Cursor<any>): Meteor.LiveQueryHandle {

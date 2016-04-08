@@ -1,4 +1,5 @@
 var path = require('path');
+var ExternalsPlugin = require('webpack-externals-plugin');
 
 module.exports = {
   entry: {
@@ -14,6 +15,12 @@ module.exports = {
     path: path.join(__dirname, "build"),
     filename: "[name].js"
   },
+  plugins: [
+    new ExternalsPlugin({
+      type: 'commonjs',
+      include: __dirname + '/node_modules',
+    })
+  ],
   externals: [
     {
       // We ignore the same file we compile so we wont get circular dependency
@@ -21,12 +28,7 @@ module.exports = {
       './cursor_handle': './cursor_handle',
       './mongo_cursor_differ': './mongo_cursor_differ',
       './meteor_component': './meteor_component',
-      './mongo_cursor_observer': './mongo_cursor_observer',
-      // Angular files from the source code will be available from the NPM package
-      // No need to bundle them inside
-      'angular2/core': 'angular2/core',
-      'angular2/src/core/change_detection/differs/default_iterable_differ': 'angular2/src/core/change_detection/differs/default_iterable_differ',
-      'angular2/src/facade/async': 'angular2/src/facade/async'
+      './mongo_cursor_observer': './mongo_cursor_observer'
     }
   ],
   resolve: {

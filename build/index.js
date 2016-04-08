@@ -51,6 +51,7 @@
 	__export(__webpack_require__(1));
 	__export(__webpack_require__(2));
 	__export(__webpack_require__(3));
+	__export(__webpack_require__(4));
 
 
 /***/ },
@@ -70,6 +71,47 @@
 /***/ function(module, exports) {
 
 	module.exports = require("./meteor_component");
+
+/***/ },
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	var core_1 = __webpack_require__(5);
+	var mongo_cursor_differ_1 = __webpack_require__(2);
+	var change_detection_1 = __webpack_require__(6);
+	var lang_1 = __webpack_require__(7);
+	function meteorProviders() {
+	    var providers = [];
+	    var factories = change_detection_1.defaultIterableDiffers.factories;
+	    if (factories) {
+	        factories.push(new mongo_cursor_differ_1.MongoCursorDifferFactory());
+	    }
+	    providers.push(core_1.provide(core_1.IterableDiffers, {
+	        useValue: new core_1.IterableDiffers(factories)
+	    }));
+	    return providers;
+	}
+	exports.METEOR_PROVIDERS = lang_1.CONST_EXPR(meteorProviders());
+
+
+/***/ },
+/* 5 */
+/***/ function(module, exports) {
+
+	module.exports = require("angular2/core");
+
+/***/ },
+/* 6 */
+/***/ function(module, exports) {
+
+	module.exports = require("angular2/src/core/change_detection/change_detection");
+
+/***/ },
+/* 7 */
+/***/ function(module, exports) {
+
+	module.exports = require("angular2/src/facade/lang");
 
 /***/ }
 /******/ ])));

@@ -46,7 +46,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var cursor_handle_1 = __webpack_require__(7);
+	var cursor_handle_1 = __webpack_require__(10);
 	var AddChange = (function () {
 	    function AddChange(index, item) {
 	        this.index = index;
@@ -143,7 +143,7 @@
 	    };
 	    MongoCursorObserver.prototype._startCursor = function (cursor) {
 	        var hCurObserver = this._startCursorObserver(cursor);
-	        return new cursor_handle_1.CursorHandle(cursor, hCurObserver);
+	        return new cursor_handle_1.CursorHandle(hCurObserver);
 	    };
 	    MongoCursorObserver.prototype._startCursorObserver = function (cursor) {
 	        var self = this;
@@ -209,7 +209,7 @@
 
 /***/ },
 
-/***/ 7:
+/***/ 10:
 /***/ function(module, exports) {
 
 	module.exports = require("./cursor_handle");

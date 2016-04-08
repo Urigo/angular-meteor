@@ -1,5 +1,5 @@
 import * as ngCore from 'angular2/core';
-import {MongoCursorDiffer} from 'angular2-meteor';
+import {MongoCursorDifferFactory, MongoCursorDiffer} from 'angular2-meteor';
 import {AddChange, RemoveChange, MoveChange} from 'angular2-meteor';
 import * as fakes from './lib/fakes';
 import {chai} from 'meteor/practicalmeteor:chai';
@@ -78,5 +78,10 @@ describe('MongoCursorDiffer', function() {
     });
     differ.forEachAddedItem(forEachAddedItem);
     expect(forEachAddedItem.calledOnce).to.equal(true);
+  });
+
+  it('factory should recognize Mongo.Cursor', function() {
+    let factory = new MongoCursorDifferFactory();
+    expect(factory.supports(fakeCursor)).to.equal(true);
   });
 });

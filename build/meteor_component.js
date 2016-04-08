@@ -40,12 +40,13 @@
 /******/ 	return __webpack_require__(0);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */
+/******/ ({
+
+/***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var core_1 = __webpack_require__(4);
+	var core_1 = __webpack_require__(5);
 	var subscribeEvents = ['onReady', 'onError', 'onStop'];
 	function isMeteorCallbacks(callbacks) {
 	    return _.isFunction(callbacks) || isCallbacksObject(callbacks);
@@ -156,13 +157,12 @@
 
 
 /***/ },
-/* 1 */,
-/* 2 */,
-/* 3 */,
-/* 4 */
+
+/***/ 5:
 /***/ function(module, exports) {
 
 	module.exports = require("angular2/core");
 
 /***/ }
-/******/ ])));
+
+/******/ })));

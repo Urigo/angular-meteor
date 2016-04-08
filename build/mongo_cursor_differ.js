@@ -50,15 +50,23 @@
 	    function __() { this.constructor = d; }
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
-	var core_1 = __webpack_require__(4);
-	var default_iterable_differ_1 = __webpack_require__(5);
-	var async_1 = __webpack_require__(6);
+	var core_1 = __webpack_require__(5);
+	var default_iterable_differ_1 = __webpack_require__(8);
+	var async_1 = __webpack_require__(9);
 	var mongo_cursor_observer_1 = __webpack_require__(1);
+	var _cursorType = null;
+	function checkIfMongoCursor(cursor) {
+	    if (!_cursorType && Mongo.Collection) {
+	        var col = new Mongo.Collection(null);
+	        _cursorType = col.find({}).constructor;
+	    }
+	    return cursor instanceof _cursorType;
+	}
 	var MongoCursorObserverFactory = (function () {
 	    function MongoCursorObserverFactory() {
 	    }
 	    MongoCursorObserverFactory.prototype.create = function (cursor) {
-	        if (cursor instanceof Mongo.Cursor) {
+	        if (checkIfMongoCursor(cursor)) {
 	            return new mongo_cursor_observer_1.MongoCursorObserver(cursor);
 	        }
 	        return null;
@@ -70,7 +78,7 @@
 	    function MongoCursorDifferFactory() {
 	        _super.apply(this, arguments);
 	    }
-	    MongoCursorDifferFactory.prototype.supports = function (obj) { return obj instanceof Mongo.Cursor; };
+	    MongoCursorDifferFactory.prototype.supports = function (obj) { return checkIfMongoCursor(obj); };
 	    MongoCursorDifferFactory.prototype.create = function (cdRef) {
 	        return new MongoCursorDiffer(cdRef, new MongoCursorObserverFactory());
 	    };
@@ -213,19 +221,22 @@
 /***/ },
 /* 2 */,
 /* 3 */,
-/* 4 */
+/* 4 */,
+/* 5 */
 /***/ function(module, exports) {
 
 	module.exports = require("angular2/core");
 
 /***/ },
-/* 5 */
+/* 6 */,
+/* 7 */,
+/* 8 */
 /***/ function(module, exports) {
 
 	module.exports = require("angular2/src/core/change_detection/differs/default_iterable_differ");
 
 /***/ },
-/* 6 */
+/* 9 */
 /***/ function(module, exports) {
 
 	module.exports = require("angular2/src/facade/async");
