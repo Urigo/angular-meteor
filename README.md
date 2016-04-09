@@ -20,7 +20,7 @@ Angular2 + Meteor integration.
 Check out change log of the package [here](CHANGELOG.md).
 
 If you suddenly started facing issues or want to upgrade,
-please check out common issues and troubleshoot [section](../../#commong-issues-and-troubleshoot) first.
+please check out common issues and troubleshoot [section](../../#common-issues-and-troubleshoot) first.
 ## Tutorial
 
 For full tutorial, please check out our 23-steps Angular2-Meteor [tutorial](http://www.angular-meteor.com/tutorials/socially/angular2/bootstrapping).
