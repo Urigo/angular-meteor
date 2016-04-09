@@ -2,7 +2,9 @@
 
 ======================================================
 
-> The power of Meteor and the simplicity and eco-system of AngularJS
+> This github is mainly for angular1-meteor, please comes [here](https://github.com/Urigo/angular2-meteor) for angular2-meteor.
+
+#### The power of Meteor and the simplicity and eco-system of AngularJS
 
 [![ng-conf](http://img.youtube.com/vi/_mu6BWsnaPM/0.jpg)](https://www.youtube.com/watch?v=_mu6BWsnaPM)
 
