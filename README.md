@@ -5,6 +5,7 @@ Angular2 + Meteor integration.
 
 ## Table of Contents
 * [Tutorial](../../#tutorial)
+* [Questions](../../#questions)
 * [Quick Start](../../#quick-start)
     * [Install package](../../#install-package)
     * [Import Angular2 into your app](../../#import-angular2-into-your-app)
@@ -21,11 +22,18 @@ Check out change log of the package [here](CHANGELOG.md).
 
 If you suddenly started facing issues or want to upgrade,
 please check out common issues and troubleshoot [section](../../#common-issues-and-troubleshoot) first.
+
 ## Tutorial
 
 For full tutorial, please check out our 23-steps Angular2-Meteor [tutorial](http://www.angular-meteor.com/tutorials/socially/angular2/bootstrapping).
 > Please note, the tutorial above is about Angular2-Meteor version for Meteor 1.3.
 
+## Questions
+- Ask questions: [Stack Overflow `angular2-meteor` tag](http://stackoverflow.com/questions/tagged/angular2-meteor)
+- [Meteor forum](https://forums.meteor.com/c/angular)
+- [Gitter](https://gitter.im/Urigo/angular-meteor)
+- [Report issues](https://github.com/Urigo/angular-meteor/issues)
+ 
 ## Quick Start
 
 ### Install package:
