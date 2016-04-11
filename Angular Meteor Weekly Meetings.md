@@ -2,7 +2,7 @@
 # Angular Meteor community team Weekly Meeting
 (format copied from the Angular team)
 
-### Date - 3/30/16
+### Date - 3/30/16 (updated after the 4/6/16)
 * Meteor 1.3 [has been released](http://info.meteor.com/blog/announcing-meteor-1.3)!!!  
     * Many exciting features for Angular developers:
         * ES2015 Modules
@@ -15,10 +15,10 @@
         * Angular 1.x - I (Uri) recommend the [Upgrading from 1.x article](https://angular.io/docs/ts/latest/guide/upgrade.html) as the best practice guide. With Meteor 1.3 it's much easier to use those recommendations
         * Tutorials update to Meteor 1.3 and the new Angular best practices
             * [simple-todos-angular](https://www.meteor.com/tutorials/angular/creating-an-app) has been updated
-            * [Socially 1.0](http://www.angular-meteor.com/tutorials/socially/angular1/bootstrapping) and [Socially 2.0](http://www.angular-meteor.com/tutorials/socially/angular2/bootstrapping) will be updated by the end of this week
-            * [Whatsapp clones](http://www.angular-meteor.com/tutorials/whatsapp/) will be updated next week
+            * [Socially 1.0](http://www.angular-meteor.com/tutorials/socially/angular1/bootstrapping) and [Socially 2.0](http://www.angular-meteor.com/tutorials/socially/angular2/bootstrapping) has been updated
+            * [Whatsapp clones](http://www.angular-meteor.com/tutorials/whatsapp/) has been updated
 * Angular1 Meteor 
-    * Current latest version - `1.3.9_2`
+    * Current latest version - `1.3.10`
     * [changelog](https://github.com/Urigo/angular-meteor/blob/master/CHANGELOG.md)
     * Support for both Meteor 1.2 and 1.3
     * Many many fixes - probably the most solid version to date.
@@ -30,10 +30,10 @@
     * Updated to Angular 2.0 latest beta
     * Many fixes and docs
 * Typescript
-    * [Work](https://github.com/Urigo/angular2-meteor/issues/102) for the official Meteor `typescript` package is at it's latest stages
-    * Latest version can be used with the `barbatus:typescript` version `0.2.0`
+    * The official Meteor `typescript` package has been released
+    * Latest version can be used with the [barbatus:typescript](https://github.com/barbatus/typescript) package version `0.2.2`
     * `meteortypescript:compiler` package as been changed to simply imply the latest `barbatus:typescript` package
-    * We will rename `barbatus:typescript` to `typescript` in the middle of next week
+    * We might rename `barbatus:typescript` to `typescript` at some point
     * Also looking for help writing a chapter on Typescript to the [Meteor guide](http://guide.meteor.com/)
 * Biggest next things we want help with:
     * Angular 1.x to Angular 2.0 migration on top of Meteor
