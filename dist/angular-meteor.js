@@ -1,6 +1,13 @@
-/*! angular-meteor v1.3.9 */
+/*! angular-meteor v1.3.10 */
 (function webpackUniversalModuleDefinition(root, factory) {
-  root["angularMeteor"] = factory(Package.underscore._, root["jsondiffpatch"]);
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory(require("underscore"), require("jsondiffpatch"));
+	else if(typeof define === 'function' && define.amd)
+		define(["underscore", "jsondiffpatch"], factory);
+	else if(typeof exports === 'object')
+		exports["angularMeteor"] = factory(require("underscore"), require("jsondiffpatch"));
+	else
+		root["angularMeteor"] = factory(root["_"], root["jsondiffpatch"]);
 })(this, function(__WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_22__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -1891,7 +1898,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    var computation = Tracker.autorun(fn, options);
-	    this.$$autoStop(computation);
+	    // Reset to a function that will also stop the listener we just added
+	    computation.stop = this.$$autoStop(computation);
 	    return computation;
 	  };
 
@@ -1960,8 +1968,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	    return (_Meteor3 = Meteor).apply.apply(_Meteor3, args.concat([fn]));
 	  };
 
+	  // Stops a process once the scope has been destroyed
 	  $$Core.$$autoStop = function (stoppable) {
-	    this.$on('$destroy', stoppable.stop.bind(stoppable));
+	    var removeListener = undefined;
+	    var baseStop = stoppable.stop.bind(stoppable);
+
+	    // Once the process has been stopped the destroy event listener will be removed
+	    // to avoid memory leaks and unexpected behaviours
+	    var stop = function stop() {
+	      removeListener();
+	      return baseStop.apply(undefined, arguments);
+	    };
+
+	    removeListener = this.$on('$destroy', stop);
+	    return stop;
 	  };
 
 	  // Digests scope only if there is no phase at the moment
@@ -1981,6 +2001,11 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  // Binds an object or a function to the provided context and digest it once it is invoked
 	  $$Core.$bindToContext = function (context, fn) {
+	    if (_underscore2.default.isFunction(context)) {
+	      fn = context;
+	      context = this;
+	    }
+
 	    return $$utils.bind(fn, context, this.$$throttledDigest.bind(this));
 	  };
 

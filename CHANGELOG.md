@@ -1,3 +1,14 @@
+<a name="1.3.10"></a>
+## [1.3.10](https://github.com/Urigo/angular-meteor/compare/1.3.9...v1.3.10) (2016-04-11)
+
+
+### Bug Fixes
+
+* **#1309:** Scope.bindToContext() will be applied on scope if no context is specified, and a ([210f16a](https://github.com/Urigo/angular-meteor/commit/210f16a))
+* **autorun:** destroy event listener once autorun has been stopped ([2ae0c22](https://github.com/Urigo/angular-meteor/commit/2ae0c22))
+
+
+
 <a name="1.3.8"></a>
 ## [1.3.8](https://github.com/Urigo/angular-meteor/compare/1.3.7...v1.3.8) (2016-03-28)
 
