@@ -84,8 +84,24 @@
 	            args[_i - 1] = arguments[_i];
 	        }
 	        var subArgs = this._prepMeteorArgs(args.slice());
+	        if (!Meteor.subscribe) {
+	            throw new Error('Meteor.subscribe is not defined on the server side');
+	        }
+	        ;
 	        var hSubscribe = Meteor.subscribe.apply(Meteor, [name].concat(subArgs));
-	        this._hSubscribes.push(hSubscribe);
+	        if (Meteor.isClient) {
+	            this._hSubscribes.push(hSubscribe);
+	        }
+	        ;
+	        if (Meteor.isServer) {
+	            var callback = subArgs[subArgs.length - 1];
+	            if (_.isFunction(callback)) {
+	                callback();
+	            }
+	            if (isCallbacksObject(callback)) {
+	                callback.onReady();
+	            }
+	        }
 	        return hSubscribe;
 	    };
 	    MeteorComponent.prototype.call = function (name) {
