@@ -1,10 +1,5 @@
 import { OnDestroy, NgZone } from 'angular2/core';
-export declare type CallbacksObject = {
-    onReady?: Function;
-    onError?: Function;
-    onStop?: Function;
-};
-export declare type MeteorCallbacks = (...args) => any | CallbacksObject;
+import { MeteorCallbacks } from './utils';
 export declare class MeteorComponent implements OnDestroy {
     private _hAutoruns;
     private _hSubscribes;

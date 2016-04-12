@@ -46,7 +46,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var cursor_handle_1 = __webpack_require__(10);
+	var cursor_handle_1 = __webpack_require__(12);
 	var AddChange = (function () {
 	    function AddChange(index, item) {
 	        this.index = index;
@@ -209,7 +209,7 @@
 
 /***/ },
 
-/***/ 10:
+/***/ 12:
 /***/ function(module, exports) {
 
 	module.exports = require("./cursor_handle");

@@ -51,8 +51,8 @@
 	    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 	};
 	var core_1 = __webpack_require__(5);
-	var default_iterable_differ_1 = __webpack_require__(8);
-	var async_1 = __webpack_require__(9);
+	var default_iterable_differ_1 = __webpack_require__(10);
+	var async_1 = __webpack_require__(11);
 	var mongo_cursor_observer_1 = __webpack_require__(1);
 	var _cursorType = null;
 	function checkIfMongoCursor(cursor) {
@@ -230,13 +230,15 @@
 /***/ },
 /* 6 */,
 /* 7 */,
-/* 8 */
+/* 8 */,
+/* 9 */,
+/* 10 */
 /***/ function(module, exports) {
 
 	module.exports = require("angular2/src/core/change_detection/differs/default_iterable_differ");
 
 /***/ },
-/* 9 */
+/* 11 */
 /***/ function(module, exports) {
 
 	module.exports = require("angular2/src/facade/async");

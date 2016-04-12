@@ -1,27 +1,9 @@
 'use strict';
 
 import {OnDestroy, NgZone, createNgZone} from 'angular2/core';
-
-export declare type CallbacksObject = {
-  onReady?: Function;
-  onError?: Function;
-  onStop?: Function;
-}
-
-export declare type MeteorCallbacks = (...args) => any | CallbacksObject;
-
-const subscribeEvents = ['onReady', 'onError', 'onStop'];
-
-function isMeteorCallbacks(callbacks: any): boolean {
-  return _.isFunction(callbacks) || isCallbacksObject(callbacks);
-}
-
-// Checks if callbacks of {@link CallbacksObject} type.
-function isCallbacksObject(callbacks: any): boolean {
-  return callbacks && subscribeEvents.some((event) => {
-    return _.isFunction(callbacks[event]);
-  });
-};
+import {MeteorCallbacks, isMeteorCallbacks,
+        isCallbacksObject, subscribeEvents} from './utils';
+import {PromiseHelper} from './promise_helper';
 
 export class MeteorComponent implements OnDestroy {
   private _hAutoruns: Array<Tracker.Computation> = [];
@@ -36,7 +18,7 @@ export class MeteorComponent implements OnDestroy {
   }
 
   autorun(func: (c: Tracker.Computation) => any, autoBind?: boolean): Tracker.Computation {
-    let hAutorun = Tracker.autorun(autoBind ? this._bindToNgZone(func) : func);
+    let hAutorun = Tracker.autorun(autoBind ? <() => void>this._bindToNgZone(func) : func);
     this._hAutoruns.push(hAutorun);
 
     return hAutorun;
@@ -67,6 +49,7 @@ export class MeteorComponent implements OnDestroy {
       if (_.isFunction(callback)) {
         callback();
       }
+
       if (isCallbacksObject(callback)) {
         callback.onReady();
       }
@@ -93,6 +76,10 @@ export class MeteorComponent implements OnDestroy {
       }
       // Removes last params since its specific to MeteorComponent.
       args.pop();
+    }
+
+    if (isMeteorCallbacks(args[args.length - 1])) {
+      args[args.length - 1] = PromiseHelper.wrap(args[args.length - 1]);
     }
 
     return args;

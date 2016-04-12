@@ -40,24 +40,14 @@
 /******/ 	return __webpack_require__(0);
 /******/ })
 /************************************************************************/
-/******/ ({
-
-/***/ 0:
+/******/ ([
+/* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	var core_1 = __webpack_require__(5);
-	var subscribeEvents = ['onReady', 'onError', 'onStop'];
-	function isMeteorCallbacks(callbacks) {
-	    return _.isFunction(callbacks) || isCallbacksObject(callbacks);
-	}
-	// Checks if callbacks of {@link CallbacksObject} type.
-	function isCallbacksObject(callbacks) {
-	    return callbacks && subscribeEvents.some(function (event) {
-	        return _.isFunction(callbacks[event]);
-	    });
-	}
-	;
+	var utils_1 = __webpack_require__(9);
+	var promise_helper_1 = __webpack_require__(8);
 	var MeteorComponent = (function () {
 	    /**
 	     * @param {NgZone} ngZone added for test purposes mostly.
@@ -98,7 +88,7 @@
 	            if (_.isFunction(callback)) {
 	                callback();
 	            }
-	            if (isCallbacksObject(callback)) {
+	            if (utils_1.isCallbacksObject(callback)) {
 	                callback.onReady();
 	            }
 	        }
@@ -115,7 +105,7 @@
 	    MeteorComponent.prototype._prepMeteorArgs = function (args) {
 	        var lastParam = args[args.length - 1];
 	        var penultParam = args[args.length - 2];
-	        if (_.isBoolean(lastParam) && isMeteorCallbacks(penultParam)) {
+	        if (_.isBoolean(lastParam) && utils_1.isMeteorCallbacks(penultParam)) {
 	            var callbacks = penultParam;
 	            var autobind = lastParam;
 	            if (autobind) {
@@ -123,6 +113,9 @@
 	            }
 	            // Removes last params since its specific to MeteorComponent.
 	            args.pop();
+	        }
+	        if (utils_1.isMeteorCallbacks(args[args.length - 1])) {
+	            args[args.length - 1] = promise_helper_1.PromiseHelper.wrap(args[args.length - 1]);
 	        }
 	        return args;
 	    };
@@ -149,10 +142,10 @@
 	                self._zone.run(function () { return callbacks.apply(self._zone, args); });
 	            };
 	        }
-	        if (isCallbacksObject(callbacks)) {
+	        if (utils_1.isCallbacksObject(callbacks)) {
 	            // Bind zone for each event.
 	            var newCallbacks_1 = _.clone(callbacks);
-	            subscribeEvents.forEach(function (event) {
+	            utils_1.subscribeEvents.forEach(function (event) {
 	                if (newCallbacks_1[event]) {
 	                    newCallbacks_1[event] = function () {
 	                        var args = [];
@@ -173,12 +166,28 @@
 
 
 /***/ },
-
-/***/ 5:
+/* 1 */,
+/* 2 */,
+/* 3 */,
+/* 4 */,
+/* 5 */
 /***/ function(module, exports) {
 
 	module.exports = require("angular2/core");
 
-/***/ }
+/***/ },
+/* 6 */,
+/* 7 */,
+/* 8 */
+/***/ function(module, exports) {
 
-/******/ })));
+	module.exports = require("./promise_helper");
+
+/***/ },
+/* 9 */
+/***/ function(module, exports) {
+
+	module.exports = require("./utils");
+
+/***/ }
+/******/ ])));
