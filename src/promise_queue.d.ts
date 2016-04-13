@@ -1,6 +1,7 @@
 import { MeteorCallbacks } from './utils';
-export declare class PromiseHelper {
+export declare class PromiseQueue {
     private static _promises;
     static wrap(callbacks: MeteorCallbacks): MeteorCallbacks;
-    static onDone(done: any): void;
+    static onResolve(resolve: any): void;
+    static len(): number;
 }

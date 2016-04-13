@@ -47,56 +47,60 @@
 
 	"use strict";
 	var utils_1 = __webpack_require__(9);
-	var PromiseHelper = (function () {
-	    function PromiseHelper() {
+	var PromiseQueue = (function () {
+	    function PromiseQueue() {
 	    }
-	    PromiseHelper.wrap = function (callbacks) {
+	    PromiseQueue.wrap = function (callbacks) {
+	        check(callbacks, Match.Where(utils_1.isMeteorCallbacks));
 	        if (utils_1.isCallbacksObject(callbacks)) {
 	            var calObject_1 = callbacks;
 	            var object_1 = {};
-	            var promise_1 = new Promise(function (resolve, reject) {
+	            var promise_1 = utils_1.newPromise(function (resolve, reject) {
 	                object_1.onReady = function (result) {
 	                    calObject_1.onReady(result);
-	                    resolve(result);
+	                    resolve({ result: result });
 	                };
 	                object_1.onError = function (err) {
 	                    calObject_1.onError(err);
-	                    resolve(err);
+	                    resolve({ err: err });
 	                };
 	                object_1.onStop = function (err) {
 	                    calObject_1.onStop(err);
-	                    resolve(err);
+	                    resolve({ err: err });
 	                };
-	                var index = PromiseHelper._promises.indexOf(promise_1);
+	                var index = PromiseQueue._promises.indexOf(promise_1);
 	                if (index !== -1) {
-	                    PromiseHelper._promises.splice(index, 1);
+	                    PromiseQueue._promises.splice(index, 1);
 	                }
 	            });
-	            PromiseHelper._promises.push(promise_1);
+	            PromiseQueue._promises.push(promise_1);
 	            return object_1;
 	        }
 	        var newCallback;
-	        var promise = new Promise(function (resolve, reject) {
+	        var promise = utils_1.newPromise(function (resolve, reject) {
 	            var callback = callbacks;
 	            newCallback = function (err, result) {
 	                callback(err, result);
 	                resolve({ err: err, result: result });
-	                var index = PromiseHelper._promises.indexOf(promise);
+	                var index = PromiseQueue._promises.indexOf(promise);
 	                if (index !== -1) {
-	                    PromiseHelper._promises.splice(index, 1);
+	                    PromiseQueue._promises.splice(index, 1);
 	                }
 	            };
 	        });
-	        PromiseHelper._promises.push(promise);
+	        PromiseQueue._promises.push(promise);
 	        return newCallback;
 	    };
-	    PromiseHelper.onDone = function (done) {
-	        Promise.all(PromiseHelper._promises).then(done);
+	    PromiseQueue.onResolve = function (resolve) {
+	        Promise.all(PromiseQueue._promises).then(resolve);
 	    };
-	    PromiseHelper._promises = [];
-	    return PromiseHelper;
+	    PromiseQueue.len = function () {
+	        return PromiseQueue._promises.length;
+	    };
+	    PromiseQueue._promises = [];
+	    return PromiseQueue;
 	}());
-	exports.PromiseHelper = PromiseHelper;
+	exports.PromiseQueue = PromiseQueue;
 
 
 /***/ },

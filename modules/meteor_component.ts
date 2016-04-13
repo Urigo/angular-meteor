@@ -3,7 +3,7 @@
 import {OnDestroy, NgZone, createNgZone} from 'angular2/core';
 import {MeteorCallbacks, isMeteorCallbacks,
         isCallbacksObject, subscribeEvents} from './utils';
-import {PromiseHelper} from './promise_helper';
+import {PromiseQueue} from './promise_queue';
 
 export class MeteorComponent implements OnDestroy {
   private _hAutoruns: Array<Tracker.Computation> = [];
@@ -79,7 +79,7 @@ export class MeteorComponent implements OnDestroy {
     }
 
     if (isMeteorCallbacks(args[args.length - 1])) {
-      args[args.length - 1] = PromiseHelper.wrap(args[args.length - 1]);
+      args[args.length - 1] = PromiseQueue.wrap(args[args.length - 1]);
     }
 
     return args;

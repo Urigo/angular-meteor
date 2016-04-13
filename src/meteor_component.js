@@ -47,7 +47,7 @@
 	'use strict';
 	var core_1 = __webpack_require__(5);
 	var utils_1 = __webpack_require__(9);
-	var promise_helper_1 = __webpack_require__(8);
+	var promise_queue_1 = __webpack_require__(8);
 	var MeteorComponent = (function () {
 	    /**
 	     * @param {NgZone} ngZone added for test purposes mostly.
@@ -115,7 +115,7 @@
 	            args.pop();
 	        }
 	        if (utils_1.isMeteorCallbacks(args[args.length - 1])) {
-	            args[args.length - 1] = promise_helper_1.PromiseHelper.wrap(args[args.length - 1]);
+	            args[args.length - 1] = promise_queue_1.PromiseQueue.wrap(args[args.length - 1]);
 	        }
 	        return args;
 	    };
@@ -181,7 +181,7 @@
 /* 8 */
 /***/ function(module, exports) {
 
-	module.exports = require("./promise_helper");
+	module.exports = require("./promise_queue");
 
 /***/ },
 /* 9 */

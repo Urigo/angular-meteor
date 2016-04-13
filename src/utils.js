@@ -44,7 +44,7 @@
 /* 0 */
 /***/ function(module, exports) {
 
-	'use strict';
+	/* WEBPACK VAR INJECTION */(function(global) {'use strict';
 	exports.subscribeEvents = ['onReady', 'onError', 'onStop'];
 	function isMeteorCallbacks(callbacks) {
 	    return _.isFunction(callbacks) || isCallbacksObject(callbacks);
@@ -58,7 +58,20 @@
 	}
 	exports.isCallbacksObject = isCallbacksObject;
 	;
+	function newPromise() {
+	    var args = [];
+	    for (var _i = 0; _i < arguments.length; _i++) {
+	        args[_i - 0] = arguments[_i];
+	    }
+	    var constructor = Promise || (global && global.Promise);
+	    if (constructor) {
+	        return new constructor(args[0]);
+	    }
+	    throw new Error('Promise is not defined');
+	}
+	exports.newPromise = newPromise;
 
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ }
 /******/ ])));
