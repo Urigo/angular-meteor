@@ -13,8 +13,8 @@
   "bugs": {
     "url": "https://github.com/Urigo/angular2-meteor/issues"
   },
-  "main": "src/index.js",
-  "typings": "src/index.d.ts",
+  "main": "build/index.js",
+  "typings": "build/index.d.ts",
   "homepage": "http://www.angular-meteor.com",
   "repository": "https://github.com/Urigo/angular2-meteor/",
   "description": "Angular 2.0 and Meteor - the perfect stack http://www.angular-meteor.com/",

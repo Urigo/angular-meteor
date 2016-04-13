@@ -20,14 +20,14 @@ gulp.task("typings",function(){
 gulp.task("webpack", function(callback) {
   var build = gulp.src("modules/*")
     .pipe(webpack(require("./webpack.config.js")))
-    .pipe(gulp.dest("src/"));
+    .pipe(gulp.dest("build/"));
 
   return build;
 });
 
 gulp.task("movedts", function(callback) {
   var move = gulp.src("src/modules/*")
-    .pipe(gulp.dest("src/"));
+    .pipe(gulp.dest("build/"));
 
   return move;
 });
@@ -47,12 +47,12 @@ gulp.task("lint", function() {
 });
 
 gulp.task("build-clean", function() {
-  return gulp.src("src/modules")
+  return gulp.src("build/modules")
     .pipe(clean());
 });
 
 gulp.task("git-add", function(){
-  return gulp.src("src/*")
+  return gulp.src("build/*")
     .pipe(git.add());
 });
 
