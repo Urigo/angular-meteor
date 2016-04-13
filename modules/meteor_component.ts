@@ -79,7 +79,7 @@ export class MeteorComponent implements OnDestroy {
     }
 
     if (isMeteorCallbacks(args[args.length - 1])) {
-      args[args.length - 1] = PromiseQueue.wrap(args[args.length - 1]);
+      args[args.length - 1] = PromiseQueue.wrapPush(args[args.length - 1]);
     }
 
     return args;

@@ -115,7 +115,7 @@
 	            args.pop();
 	        }
 	        if (utils_1.isMeteorCallbacks(args[args.length - 1])) {
-	            args[args.length - 1] = promise_queue_1.PromiseQueue.wrap(args[args.length - 1]);
+	            args[args.length - 1] = promise_queue_1.PromiseQueue.wrapPush(args[args.length - 1]);
 	        }
 	        return args;
 	    };

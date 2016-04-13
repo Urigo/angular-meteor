@@ -1,65 +1,72 @@
 import {CallbacksObject, MeteorCallbacks,
-  isMeteorCallbacks, isCallbacksObject, newPromise} from './utils';
+  isMeteorCallbacks, isCallbacksObject} from './utils';
+import {PromiseWrapper, PromiseCompleter} from 'angular2/src/facade/promise';
+
+declare const global;
+
+Promise = Promise || (global && global.Promise);
 
 export class PromiseQueue {
   private static _promises: Array<Promise<any>> = [];
 
-  static wrap(callbacks: MeteorCallbacks): MeteorCallbacks {
+  static wrapPush(callbacks: MeteorCallbacks): MeteorCallbacks {
     check(callbacks, Match.Where(isMeteorCallbacks));
 
-    if (isCallbacksObject(callbacks)) {
-      let calObject = <CallbacksObject>callbacks;
-      let object = <CallbacksObject>{};
-      let promise = newPromise<any>((resolve, reject) => {
-        object.onReady = (result) => {
-          calObject.onReady(result);
-          resolve({ result });
-        };
-
-        object.onError = (err) => {
-          calObject.onError(err);
-          resolve({ err });
-        };
-
-        object.onStop = (err) => {
-          calObject.onStop(err);
-          resolve({ err });
-        };
-
-        let index = PromiseQueue._promises.indexOf(promise);
-        if (index !== -1) {
-          PromiseQueue._promises.splice(index, 1);
-        }
-      });
-
+    const completer: PromiseCompleter<any> = PromiseWrapper.completer();
+    const dequeue = (promise) => {
+      let index = PromiseQueue._promises.indexOf(promise);
+      if (index !== -1) {
+        PromiseQueue._promises.splice(index, 1);
+      }
+    };
+    const queue = (promise) => {
       PromiseQueue._promises.push(promise);
+    };
+
+    const promise = completer.promise;
+    if (isCallbacksObject(callbacks)) {
+      let origin = <CallbacksObject>callbacks;
+      let object = <CallbacksObject>{
+        onError: (err) => {
+          origin.onError(err);
+          completer.resolve({ err });
+          dequeue(promise);
+        },
+
+        onReady: (result) => {
+          origin.onReady(result);
+          completer.resolve({ result });
+          dequeue(promise);
+        },
+
+        onStop: (err) => {
+          origin.onStop(err);
+          completer.resolve({ err });
+          dequeue(promise);
+        }
+      };
+
+      queue(promise);
 
       return object;
     }
 
-    let newCallback;
-    let promise = newPromise<any>((resolve, reject) => {
-      let callback = <Function>callbacks;
-      newCallback = (err, result) => {
-        callback(err, result);
-        resolve({ err, result });
-        let index = PromiseQueue._promises.indexOf(promise);
-        if (index !== -1) {
-          PromiseQueue._promises.splice(index, 1);
-        }
-      };
-    });
+    let newCallback = (err, result) => {
+      (<Function>callbacks)(err, result);
+      completer.resolve({ err, result });
+      dequeue(promise);
+    };
 
-    PromiseQueue._promises.push(promise);
+    queue(promise);
 
     return newCallback;
   }
 
-  static onResolve(resolve) {
+  static onResolve(resolve): void {
     Promise.all(PromiseQueue._promises).then(resolve);
   }
 
-  static len() {
+  static len(): number {
     return PromiseQueue._promises.length;
   }
 }

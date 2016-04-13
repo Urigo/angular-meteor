@@ -20,15 +20,3 @@ export function isCallbacksObject(callbacks: any): boolean {
     return _.isFunction(callbacks[event]);
   });
 };
-
-declare const global;
-
-export function newPromise<T>(...args): Promise<T> {
-  let constructor = Promise || (global && global.Promise);
-
-  if (constructor) {
-    return new constructor(args[0]);
-  }
-
-  throw new Error('Promise is not defined');
-}

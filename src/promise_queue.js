@@ -45,50 +45,54 @@
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	/* WEBPACK VAR INJECTION */(function(global) {"use strict";
 	var utils_1 = __webpack_require__(9);
+	var promise_1 = __webpack_require__(13);
+	Promise = Promise || (global && global.Promise);
 	var PromiseQueue = (function () {
 	    function PromiseQueue() {
 	    }
-	    PromiseQueue.wrap = function (callbacks) {
+	    PromiseQueue.wrapPush = function (callbacks) {
 	        check(callbacks, Match.Where(utils_1.isMeteorCallbacks));
+	        var completer = promise_1.PromiseWrapper.completer();
+	        var dequeue = function (promise) {
+	            var index = PromiseQueue._promises.indexOf(promise);
+	            if (index !== -1) {
+	                PromiseQueue._promises.splice(index, 1);
+	            }
+	        };
+	        var queue = function (promise) {
+	            PromiseQueue._promises.push(promise);
+	        };
+	        var promise = completer.promise;
 	        if (utils_1.isCallbacksObject(callbacks)) {
-	            var calObject_1 = callbacks;
-	            var object_1 = {};
-	            var promise_1 = utils_1.newPromise(function (resolve, reject) {
-	                object_1.onReady = function (result) {
-	                    calObject_1.onReady(result);
-	                    resolve({ result: result });
-	                };
-	                object_1.onError = function (err) {
-	                    calObject_1.onError(err);
-	                    resolve({ err: err });
-	                };
-	                object_1.onStop = function (err) {
-	                    calObject_1.onStop(err);
-	                    resolve({ err: err });
-	                };
-	                var index = PromiseQueue._promises.indexOf(promise_1);
-	                if (index !== -1) {
-	                    PromiseQueue._promises.splice(index, 1);
-	                }
-	            });
-	            PromiseQueue._promises.push(promise_1);
-	            return object_1;
-	        }
-	        var newCallback;
-	        var promise = utils_1.newPromise(function (resolve, reject) {
-	            var callback = callbacks;
-	            newCallback = function (err, result) {
-	                callback(err, result);
-	                resolve({ err: err, result: result });
-	                var index = PromiseQueue._promises.indexOf(promise);
-	                if (index !== -1) {
-	                    PromiseQueue._promises.splice(index, 1);
+	            var origin_1 = callbacks;
+	            var object = {
+	                onError: function (err) {
+	                    origin_1.onError(err);
+	                    completer.resolve({ err: err });
+	                    dequeue(promise);
+	                },
+	                onReady: function (result) {
+	                    origin_1.onReady(result);
+	                    completer.resolve({ result: result });
+	                    dequeue(promise);
+	                },
+	                onStop: function (err) {
+	                    origin_1.onStop(err);
+	                    completer.resolve({ err: err });
+	                    dequeue(promise);
 	                }
 	            };
-	        });
-	        PromiseQueue._promises.push(promise);
+	            queue(promise);
+	            return object;
+	        }
+	        var newCallback = function (err, result) {
+	            callbacks(err, result);
+	            completer.resolve({ err: err, result: result });
+	            dequeue(promise);
+	        };
+	        queue(promise);
 	        return newCallback;
 	    };
 	    PromiseQueue.onResolve = function (resolve) {
@@ -102,6 +106,7 @@
 	}());
 	exports.PromiseQueue = PromiseQueue;
 
+	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
 
@@ -109,6 +114,13 @@
 /***/ function(module, exports) {
 
 	module.exports = require("./utils");
+
+/***/ },
+
+/***/ 13:
+/***/ function(module, exports) {
+
+	module.exports = require("angular2/src/facade/promise");
 
 /***/ }
 
