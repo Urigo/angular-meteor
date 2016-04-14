@@ -54,13 +54,8 @@
 	var default_iterable_differ_1 = __webpack_require__(10);
 	var async_1 = __webpack_require__(11);
 	var mongo_cursor_observer_1 = __webpack_require__(1);
-	var _cursorType = null;
 	function checkIfMongoCursor(cursor) {
-	    if (!_cursorType && Mongo.Collection) {
-	        var col = new Mongo.Collection(null);
-	        _cursorType = col.find({}).constructor;
-	    }
-	    return cursor instanceof _cursorType;
+	    return mongo_cursor_observer_1.MongoCursorObserver.isCursor(cursor);
 	}
 	var MongoCursorObserverFactory = (function () {
 	    function MongoCursorObserverFactory() {

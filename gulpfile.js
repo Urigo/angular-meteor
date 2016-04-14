@@ -26,7 +26,7 @@ gulp.task("webpack", function(callback) {
 });
 
 gulp.task("movedts", function(callback) {
-  var move = gulp.src("src/modules/*")
+  var move = gulp.src("build/modules/*")
     .pipe(gulp.dest("build/"));
 
   return move;

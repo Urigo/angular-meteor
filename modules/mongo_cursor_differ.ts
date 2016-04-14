@@ -22,14 +22,8 @@ export interface ObserverFactory {
   create(cursor: Object): Object;
 }
 
-let _cursorType = null;
 function checkIfMongoCursor(cursor): boolean {
-  if (!_cursorType && Mongo.Collection) {
-    let col = new Mongo.Collection(null);
-    _cursorType = col.find({}).constructor;
-  }
-
-  return cursor instanceof _cursorType;
+  return MongoCursorObserver.isCursor(cursor);
 }
 
 class MongoCursorObserverFactory implements ObserverFactory {

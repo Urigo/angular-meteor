@@ -103,9 +103,12 @@
 	        this._lastChanges = [];
 	        this._subs = [];
 	        this._isSubscribed = false;
-	        check(cursor, Mongo.Cursor);
+	        check(cursor, Match.Where(MongoCursorObserver.isCursor));
 	        this._hCursor = this._startCursor(cursor);
 	    }
+	    MongoCursorObserver.isCursor = function (cursor) {
+	        return cursor && !!cursor.observe;
+	    };
 	    Object.defineProperty(MongoCursorObserver.prototype, "lastChanges", {
 	        get: function () {
 	            return this._lastChanges;
