@@ -2,7 +2,6 @@ var gulp = require("gulp");
 var webpack = require("gulp-webpack");
 var clean = require("gulp-clean");
 var runSequence = require("run-sequence");
-var merge = require("merge-stream");
 var filenames = require("gulp-filenames");
 var print = require("gulp-print");
 var filter = require("gulp-filter");
@@ -59,26 +58,4 @@ gulp.task("git-add", function(){
 
 gulp.task("build", function(callback) {
   runSequence("typings", "lint", "tsbuild", "build-clean", "git-add", callback);
-});
-
-// Move files from build/ to ./ before NPM publish.
-gulp.task("pre-publish", function() {
-  return gulp.src("build/*")
-    .pipe(gulp.dest("./"));
-});
-
-// Get file names in build/
-gulp.task("get-names", function() {
-  return gulp.src("build/*")
-    .pipe(filenames("build"));
-});
-
-// Remove files from ./ after NPM publish.
-gulp.task("publish-clean", function() {
-  return gulp.src(filenames.get("build"))
-    .pipe(clean());
-});
-
-gulp.task("post-publish", function(callback) {
-  runSequence("get-names", "publish-clean", callback);
 });

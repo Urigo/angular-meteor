@@ -52,6 +52,7 @@
 	__export(__webpack_require__(2));
 	__export(__webpack_require__(3));
 	__export(__webpack_require__(4));
+	__export(__webpack_require__(8));
 
 
 /***/ },
@@ -112,6 +113,12 @@
 /***/ function(module, exports) {
 
 	module.exports = require("angular2/src/facade/lang");
+
+/***/ },
+/* 8 */
+/***/ function(module, exports) {
+
+	module.exports = require("./promise_queue");
 
 /***/ }
 /******/ ])));

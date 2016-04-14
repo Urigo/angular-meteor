@@ -35,6 +35,7 @@ export declare class MongoCursorObserver {
     private _subs;
     private _isSubscribed;
     constructor(cursor: Mongo.Cursor<any>);
+    static isCursor(cursor: any): boolean;
     lastChanges: (AddChange | MoveChange | UpdateChange | RemoveChange)[];
     /**
      * Subcribes to the Mongo cursor changes.

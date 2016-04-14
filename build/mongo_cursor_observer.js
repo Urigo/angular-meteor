@@ -46,7 +46,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	var cursor_handle_1 = __webpack_require__(10);
+	var cursor_handle_1 = __webpack_require__(12);
 	var AddChange = (function () {
 	    function AddChange(index, item) {
 	        this.index = index;
@@ -103,9 +103,12 @@
 	        this._lastChanges = [];
 	        this._subs = [];
 	        this._isSubscribed = false;
-	        check(cursor, Mongo.Cursor);
+	        check(cursor, Match.Where(MongoCursorObserver.isCursor));
 	        this._hCursor = this._startCursor(cursor);
 	    }
+	    MongoCursorObserver.isCursor = function (cursor) {
+	        return cursor && !!cursor.observe;
+	    };
 	    Object.defineProperty(MongoCursorObserver.prototype, "lastChanges", {
 	        get: function () {
 	            return this._lastChanges;
@@ -209,7 +212,7 @@
 
 /***/ },
 
-/***/ 10:
+/***/ 12:
 /***/ function(module, exports) {
 
 	module.exports = require("./cursor_handle");
