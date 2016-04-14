@@ -1,9 +1,9 @@
 {
   "license": "MIT",
   "devDependencies": {
-    "angular2": "2.0.0-beta.12",
+    "angular2": "2.0.0-beta.15",
     "es6-shim": "^0.35.0",
-    "zone.js": "^0.6.6",
+    "zone.js": "^0.6.10",
     "core-js": "^2.0.3",
     "grunt": "^0.4.5",
     "grunt-npm-install": "^0.2.0",
