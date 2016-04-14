@@ -40,6 +40,8 @@ cat "$PACKAGES_PATH/mongo-id.js" >> $OUTPUT_PATH/$NAME.bundle.js
 cat "$PACKAGES_PATH/diff-sequence.js" >> $OUTPUT_PATH/$NAME.bundle.js
 cat "$PACKAGES_PATH/observe-sequence.js" >> $OUTPUT_PATH/$NAME.bundle.js
 
+cat "$PACKAGES_PATH/modules-runtime.js" >> $OUTPUT_PATH/$NAME.bundle.js
+cat "$PACKAGES_PATH/modules.js" >> $OUTPUT_PATH/$NAME.bundle.js
 cat "$PACKAGES_PATH/ecmascript.js" >> $OUTPUT_PATH/$NAME.bundle.js
 cat "$PACKAGES_PATH/babel-runtime.js" >> $OUTPUT_PATH/$NAME.bundle.js
 cat "$PACKAGES_PATH/ecmascript-runtime.js" >> $OUTPUT_PATH/$NAME.bundle.js
