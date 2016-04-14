@@ -13,13 +13,13 @@ Package.registerBuildPlugin({
   ],
   use: [
     // Uses an external packages to get the actual compilers
-    'ecmascript@0.1.4',
+    'ecmascript@0.1.6',
     'angular2-html-templates@0.5.0'
   ]
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.2.1');
+  api.versionsFrom('1.3.1');
 
   // Required in order to register plugins
   api.use('isobuild:compiler-plugin@1.0.0');
@@ -27,7 +27,7 @@ Package.onUse(function(api) {
   // These packages are required by Angular2-Meteor NPM.
   // Make sure we have them in this package.
   api.imply([
-    'barbatus:typescript@0.2.3',
+    'barbatus:typescript@0.2.6',
     'check@1.1.0',
     'tracker@1.0.9',
     'underscore@1.0.4',
