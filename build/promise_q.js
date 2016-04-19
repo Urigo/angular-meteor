@@ -49,20 +49,21 @@
 	var utils_1 = __webpack_require__(9);
 	var promise_1 = __webpack_require__(13);
 	Promise = Promise || (global && global.Promise);
-	var PromiseQueue = (function () {
-	    function PromiseQueue() {
+	var PromiseQ = (function () {
+	    function PromiseQ() {
 	    }
-	    PromiseQueue.wrapPush = function (callbacks) {
+	    PromiseQ.wrapPush = function (callbacks) {
+	        var _this = this;
 	        check(callbacks, Match.Where(utils_1.isMeteorCallbacks));
 	        var completer = promise_1.PromiseWrapper.completer();
 	        var dequeue = function (promise) {
-	            var index = PromiseQueue._promises.indexOf(promise);
+	            var index = _this._promises.indexOf(promise);
 	            if (index !== -1) {
-	                PromiseQueue._promises.splice(index, 1);
+	                _this._promises.splice(index, 1);
 	            }
 	        };
 	        var queue = function (promise) {
-	            PromiseQueue._promises.push(promise);
+	            _this._promises.push(promise);
 	        };
 	        var promise = completer.promise;
 	        if (utils_1.isCallbacksObject(callbacks)) {
@@ -95,16 +96,16 @@
 	        queue(promise);
 	        return newCallback;
 	    };
-	    PromiseQueue.onResolve = function (resolve) {
-	        Promise.all(PromiseQueue._promises).then(resolve);
+	    PromiseQ.onAll = function (resolve) {
+	        Promise.all(this._promises).then(resolve);
 	    };
-	    PromiseQueue.len = function () {
-	        return PromiseQueue._promises.length;
+	    PromiseQ.len = function () {
+	        return this._promises.length;
 	    };
-	    PromiseQueue._promises = [];
-	    return PromiseQueue;
+	    PromiseQ._promises = [];
+	    return PromiseQ;
 	}());
-	exports.PromiseQueue = PromiseQueue;
+	exports.PromiseQ = PromiseQ;
 
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 

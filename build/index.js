@@ -118,7 +118,7 @@
 /* 8 */
 /***/ function(module, exports) {
 
-	module.exports = require("./promise_queue");
+	module.exports = require("./promise_q");
 
 /***/ }
 /******/ ])));

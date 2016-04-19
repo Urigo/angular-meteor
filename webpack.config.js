@@ -8,7 +8,7 @@ module.exports = {
     'mongo_cursor_observer': './modules/mongo_cursor_observer.ts',
     'cursor_handle': './modules/cursor_handle.ts',
     'utils': './modules/utils.ts',
-    'promise_queue': './modules/promise_queue.ts',
+    'promise_q': './modules/promise_q.ts',
     'index': './modules/index.ts'
   },
   output: {
@@ -31,7 +31,7 @@ module.exports = {
       './mongo_cursor_differ': './mongo_cursor_differ',
       './meteor_component': './meteor_component',
       './mongo_cursor_observer': './mongo_cursor_observer',
-      './promise_queue': './promise_queue',
+      './promise_q': './promise_q',
       './utils': './utils'
     }
   ],
