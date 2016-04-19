@@ -1,6 +1,5 @@
 'use strict';
 
 Plugin.registerCompiler({
-  extensions: ['html'],
-  archMatching: 'web'
+  extensions: ['html']
 }, () => new HtmlCompiler());

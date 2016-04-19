@@ -6,7 +6,7 @@ declare const global;
 
 Promise = Promise || (global && global.Promise);
 
-export class PromiseQueue {
+export class PromiseQ {
   private static _promises: Array<Promise<any>> = [];
 
   static wrapPush(callbacks: MeteorCallbacks): MeteorCallbacks {
@@ -14,13 +14,13 @@ export class PromiseQueue {
 
     const completer: PromiseCompleter<any> = PromiseWrapper.completer();
     const dequeue = (promise) => {
-      let index = PromiseQueue._promises.indexOf(promise);
+      let index = this._promises.indexOf(promise);
       if (index !== -1) {
-        PromiseQueue._promises.splice(index, 1);
+        this._promises.splice(index, 1);
       }
     };
     const queue = (promise) => {
-      PromiseQueue._promises.push(promise);
+      this._promises.push(promise);
     };
 
     const promise = completer.promise;
@@ -62,11 +62,11 @@ export class PromiseQueue {
     return newCallback;
   }
 
-  static onResolve(resolve): void {
-    Promise.all(PromiseQueue._promises).then(resolve);
+  static onAll(resolve): void {
+    Promise.all(this._promises).then(resolve);
   }
 
   static len(): number {
-    return PromiseQueue._promises.length;
+    return this._promises.length;
   }
 }
