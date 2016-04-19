@@ -16,5 +16,10 @@ FileMixin = {
   getModuleName() {
     return this.getPathInPackage().replace(
       '.' + this.getExtension(), '');
+  },
+
+  isFromNPM() {
+    return !!this.getPathInPackage()
+      .startsWith('node_modules');
   }
 };

@@ -1,4 +1,4 @@
-var $ = Npm.require('cheerio');
+const $ = Npm.require('cheerio');
 
 HtmlCompiler = class HtmlCompiler extends NgCompiler {
   constructor() {
@@ -15,18 +15,20 @@ HtmlCompiler = class HtmlCompiler extends NgCompiler {
     // Call the super method in order to enrich the files with the FileMixin
     super.processFilesForTarget(files);
 
+    files = files.filter(file => !file.isFromNPM());
+
     var htmlFiles = [];
     var templateFiles = [];
 
     // Iterate all the files that needs to compile and split them to HTML files and templates files
     files.forEach((file) => {
-      var $contents = $(file.getContentsAsString());
-      var isHtml = $contents.closest('head,body').length;
-      var isTemplate = $contents.closest(':not(head,body)').length;
+      const $contents = $(file.getContentsAsString());
+      const isHtml = $contents.closest('head,body').length;
+      const isTemplate = $contents.closest(':not(head,body)').length;
 
       if (isHtml && isTemplate) {
-        var fileName = file.getBasename();
-        var errorMsg = `${fileName} has wrong layout`;
+        const fileName = file.getBasename();
+        const errorMsg = `${fileName} has wrong layout`;
         throw Error(errorMsg);
       }
 
@@ -56,9 +58,9 @@ NgHtmlCompiler = class NgHtmlCompiler extends NgCachingCompiler {
   compileOneFile(file) {
     console.log('Compiling main app HTML file: ' + file.getPathInPackage());
 
-    var $contents = $(file.getContentsAsString());
-    var $head = $contents.closest('head');
-    var $body = $contents.closest('body');
+    const $contents = $(file.getContentsAsString());
+    const $head = $contents.closest('head');
+    const $body = $contents.closest('body');
 
     return {
       head: $head.html() || '',
@@ -67,7 +69,6 @@ NgHtmlCompiler = class NgHtmlCompiler extends NgCachingCompiler {
   }
 
   addCompileResult(file, result) {
-    // TODO: Fix this, related: https://github.com/meteor/meteor/issues/6174
     try {
       file.addHtml({
         data: result.head,
@@ -98,14 +99,15 @@ NgTemplateCompiler = class NgTemplateCompiler extends NgCachingCompiler {
   compileOneFile(file) {
     console.log('Compiling HTML template: ' + file.getPathInPackage());
 
-    // Just pass through the file, without any modifications, we do not need to modify it at all at the moment.
+    // Just pass through the file, without any modifications,
+    // we do not need to modify it at all at the moment.
     return file.getContentsAsString();
   }
 
   addCompileResult(file, result) {
     file.addAsset({
       data: result,
-      path: file.getPathInPackage() // the path is the full path if the file comes from a package
+      path: file.getPathInPackage()
     });
   }
 };

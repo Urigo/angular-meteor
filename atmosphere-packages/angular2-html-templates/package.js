@@ -1,6 +1,6 @@
 Package.describe({
   name: 'angular2-html-templates',
-  version: '0.5.0',
+  version: '0.5.1',
   summary: 'Angular 2 HTML templates compiler for Meteor',
   git: 'https://github.com/Urigo/angular2-meteor/tree/master/atmosphere-packages/angular2-html-templates',
   documentation: 'README.md'
@@ -14,8 +14,8 @@ Package.onUse(function(api) {
   api.versionsFrom('1.2.1');
 
   api.use([
-    'caching-compiler@1.0.0',
-    'ecmascript@0.1.4',
+    'caching-compiler@1.0.4',
+    'ecmascript@0.1.6',
     'underscore@1.0.4',
     'check@1.0.5'
   ]);
