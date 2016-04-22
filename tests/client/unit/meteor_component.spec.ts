@@ -1,5 +1,5 @@
 import * as ngCore from 'angular2/core';
-import {MeteorComponent} from 'angular2-meteor';
+import {MeteorComponent, PromiseQ} from 'angular2-meteor';
 import {chai} from 'meteor/practicalmeteor:chai';
 import {sinon} from 'meteor/practicalmeteor:sinon';
 
@@ -15,6 +15,9 @@ describe('MeteorComponent', function() {
     ngZone = ngCore.createNgZone();
     zoneSpy = sinon.spy(ngZone, 'run');
     component = new MeteorComponent(ngZone);
+    // global.Promise is only defined in the context,
+    // but pure Promise itself, hence, failing tests.
+    PromiseQ.wrapPush = cb => cb;
   });
 
   afterEach(function() {
