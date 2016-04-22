@@ -4,18 +4,12 @@ import {OnDestroy, NgZone, createNgZone} from 'angular2/core';
 import {MeteorCallbacks, isMeteorCallbacks,
         isCallbacksObject, subscribeEvents} from './utils';
 import {PromiseQ} from './promise_q';
+import {MeteorApp} from './meteor_app';
 
 export class MeteorComponent implements OnDestroy {
   private _hAutoruns: Array<Tracker.Computation> = [];
   private _hSubscribes: Array<Meteor.SubscriptionHandle> = [];
-  private _zone: NgZone;
-
-  /**
-   * @param {NgZone} ngZone added for test purposes mostly.
-   */
-  constructor(ngZone?: NgZone) {
-    this._zone = ngZone || createNgZone();
-  }
+  private _zone: NgZone = MeteorApp.ngZone || createNgZone();
 
   autorun(func: (c: Tracker.Computation) => any, autoBind?: boolean): Tracker.Computation {
     let hAutorun = Tracker.autorun(autoBind ? <() => void>this._bindToNgZone(func) : func);

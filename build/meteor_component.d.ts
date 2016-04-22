@@ -1,13 +1,9 @@
-import { OnDestroy, NgZone } from 'angular2/core';
+import { OnDestroy } from 'angular2/core';
 import { MeteorCallbacks } from './utils';
 export declare class MeteorComponent implements OnDestroy {
     private _hAutoruns;
     private _hSubscribes;
     private _zone;
-    /**
-     * @param {NgZone} ngZone added for test purposes mostly.
-     */
-    constructor(ngZone?: NgZone);
     autorun(func: (c: Tracker.Computation) => any, autoBind?: boolean): Tracker.Computation;
     /**
      *  Method has the same notation as Meteor.subscribe:

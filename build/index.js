@@ -7,3 +7,4 @@ __export(require('./mongo_cursor_differ'));
 __export(require('./meteor_component'));
 __export(require('./providers'));
 __export(require('./promise_q'));
+__export(require('./meteor_app'));

@@ -2,14 +2,12 @@
 var core_1 = require('angular2/core');
 var utils_1 = require('./utils');
 var promise_q_1 = require('./promise_q');
+var meteor_app_1 = require('./meteor_app');
 var MeteorComponent = (function () {
-    /**
-     * @param {NgZone} ngZone added for test purposes mostly.
-     */
-    function MeteorComponent(ngZone) {
+    function MeteorComponent() {
         this._hAutoruns = [];
         this._hSubscribes = [];
-        this._zone = ngZone || core_1.createNgZone();
+        this._zone = meteor_app_1.MeteorApp.ngZone || core_1.createNgZone();
     }
     MeteorComponent.prototype.autorun = function (func, autoBind) {
         var hAutorun = Tracker.autorun(autoBind ? this._bindToNgZone(func) : func);

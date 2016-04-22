@@ -50,5 +50,9 @@
     "webpack": "^1.12.12",
     "webpack-externals-plugin": "^1.0.0",
     "zone.js": "^0.6.10"
+  },
+  "dependencies": {
+    "meteor-promise": "^0.6.3",
+    "meteor-node-stubs": "^0.2.3"
   }
 }

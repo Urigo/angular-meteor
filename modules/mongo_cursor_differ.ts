@@ -1,6 +1,7 @@
 'use strict';
 
 import {ChangeDetectorRef, createNgZone} from 'angular2/core';
+import {MeteorApp} from './meteor_app';
 
 import {
   DefaultIterableDifferFactory,
@@ -56,7 +57,7 @@ export class MongoCursorDiffer extends DefaultIterableDiffer {
   private _cursor: Mongo.Cursor<any>;
   private _obsFactory: ObserverFactory;
   private _subscription: Object;
-  private _zone = createNgZone();
+  private _zone = MeteorApp.ngZone || createNgZone();
 
   constructor(cdRef: ChangeDetectorRef, obsFactory: ObserverFactory) {
     super(trackById);

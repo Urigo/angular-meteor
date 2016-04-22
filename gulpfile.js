@@ -19,7 +19,7 @@ gulp.task("tsbuild", function(callback) {
   exec("tsc", function (err, stdout, stderr) {
     console.log(stdout);
     console.log(stderr);
-    callback(err);
+    callback();
   });
 });
 
