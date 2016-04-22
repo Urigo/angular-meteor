@@ -1,9 +1,10 @@
 import { OnDestroy } from 'angular2/core';
-import { MeteorCallbacks } from './utils';
 export declare class MeteorComponent implements OnDestroy {
     private _hAutoruns;
     private _hSubscribes;
     private _zone;
+    private _inZone;
+    constructor();
     autorun(func: (c: Tracker.Computation) => any, autoBind?: boolean): Tracker.Computation;
     /**
      *  Method has the same notation as Meteor.subscribe:
@@ -13,7 +14,8 @@ export declare class MeteorComponent implements OnDestroy {
      */
     subscribe(name: string, ...args: any[]): Meteor.SubscriptionHandle;
     call(name: string, ...args: any[]): any;
-    _prepMeteorArgs(args: any): any;
     ngOnDestroy(): void;
-    _bindToNgZone(callbacks: MeteorCallbacks): MeteorCallbacks;
+    private _prepMeteorArgs(args);
+    private _runInZone(f);
+    private _bindToNgZone(callbacks);
 }

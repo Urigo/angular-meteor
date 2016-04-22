@@ -10,6 +10,12 @@ export class MeteorComponent implements OnDestroy {
   private _hAutoruns: Array<Tracker.Computation> = [];
   private _hSubscribes: Array<Meteor.SubscriptionHandle> = [];
   private _zone: NgZone = MeteorApp.ngZone || createNgZone();
+  private _inZone: boolean;
+
+  constructor() {
+    this._zone.onUnstable.subscribe(() => this._inZone = true);
+    this._zone.onMicrotaskEmpty.subscribe(() => this._inZone = false);
+  }
 
   autorun(func: (c: Tracker.Computation) => any, autoBind?: boolean): Tracker.Computation {
     let hAutorun = Tracker.autorun(autoBind ? <() => void>this._bindToNgZone(func) : func);
@@ -58,7 +64,20 @@ export class MeteorComponent implements OnDestroy {
     return Meteor.call(name, ...callArgs);
   }
 
-  _prepMeteorArgs(args) {
+  ngOnDestroy() {
+    for (let hAutorun of this._hAutoruns) {
+      hAutorun.stop();
+    }
+
+    for (let hSubscribe of this._hSubscribes) {
+      hSubscribe.stop();
+    }
+
+    this._hAutoruns = null;
+    this._hSubscribes = null;
+  }
+
+  private _prepMeteorArgs(args) {
     let lastParam = args[args.length - 1];
     let penultParam = args[args.length - 2];
 
@@ -79,25 +98,18 @@ export class MeteorComponent implements OnDestroy {
     return args;
   }
 
-  ngOnDestroy() {
-    for (let hAutorun of this._hAutoruns) {
-      hAutorun.stop();
+  private _runInZone(f) {
+    if (!this._inZone) {
+      this._zone.run(f);
     }
-
-    for (let hSubscribe of this._hSubscribes) {
-      hSubscribe.stop();
-    }
-
-    this._hAutoruns = null;
-    this._hSubscribes = null;
   }
 
-  _bindToNgZone(callbacks: MeteorCallbacks): MeteorCallbacks {
+  private _bindToNgZone(callbacks: MeteorCallbacks): MeteorCallbacks {
     const self = this;
 
     if (_.isFunction(callbacks)) {
       return function(...args) {
-        self._zone.run(() => callbacks.apply(self._zone, args));
+        self._runInZone(callbacks.bind(self._zone, args));
       };
     }
 
@@ -107,7 +119,7 @@ export class MeteorComponent implements OnDestroy {
       subscribeEvents.forEach(event => {
         if (newCallbacks[event]) {
           newCallbacks[event] = function(...args) {
-            self._zone.run(() => callbacks[event].apply(self._zone, args));
+            self._runInZone(callbacks[event].bind(self._zone, args));
           };
         }
       });
