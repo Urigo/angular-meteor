@@ -7,14 +7,13 @@
     "suppressImplicitAnyIndexErrors": true,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
-    "sourceMap": true,
-    "declaration": true
+    "sourceMap": false,
+    "declaration": true,
+    "outDir": "./build",
+    "rootDir": "./modules"
   },
   "files": [
-    "modules/cursor_handle.ts",
-    "modules/meteor_component.ts",
-    "modules/mongo_cursor_differ.ts",
-    "modules/mongo_cursor_observer.ts",
+    "modules/index.ts",
     "typings/main.d.ts"
   ],
   "exclude": [

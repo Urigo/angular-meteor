@@ -1,10 +1,6 @@
 import {CallbacksObject, MeteorCallbacks,
   isMeteorCallbacks, isCallbacksObject} from './utils';
-import {PromiseWrapper, PromiseCompleter} from 'angular2/src/facade/promise';
-
-declare const global;
-
-Promise = Promise || (global && global.Promise);
+import {PromiseWrapper, PromiseCompleter} from 'angular2/src/facade/async';
 
 export class PromiseQ {
   private static _promises: Array<Promise<any>> = [];
