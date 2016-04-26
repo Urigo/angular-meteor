@@ -7,6 +7,7 @@ export declare class MeteorApp {
     constructor(appRef: ApplicationRef);
     static launch(appRef: ApplicationRef, bootstrap: Promise<ComponentRef>): Promise<ComponentRef>;
     static bootstrap(component: Type, platProviders: Providers, appProviders: Providers, providers: Providers): Promise<ComponentRef>;
-    static current: any;
-    static ngZone: NgZone;
+    ngZone: NgZone;
+    static current(): any;
+    static ngZone(): NgZone;
 }

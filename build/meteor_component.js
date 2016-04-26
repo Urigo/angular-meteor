@@ -8,7 +8,7 @@ var MeteorComponent = (function () {
         var _this = this;
         this._hAutoruns = [];
         this._hSubscribes = [];
-        this._zone = meteor_app_1.MeteorApp.ngZone || core_1.createNgZone();
+        this._zone = meteor_app_1.MeteorApp.ngZone() || core_1.createNgZone();
         this._zone.onUnstable.subscribe(function () { return _this._inZone = true; });
         this._zone.onMicrotaskEmpty.subscribe(function () { return _this._inZone = false; });
     }

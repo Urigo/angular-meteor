@@ -38,12 +38,16 @@ export class MeteorApp {
     return this.launch(appRef, () => appRef.bootstrap(component, providers));
   }
 
-  static get current() {
+  get ngZone(): NgZone {
+    return this.appRef.injector.get(NgZone);
+  }
+
+  static current() {
     return this.ENV.get();
   }
 
-  static get ngZone(): NgZone {
-    const app = MeteorApp.current;
-    return app && app.appRef.injector.get(NgZone);
+  static ngZone(): NgZone {
+    const app = MeteorApp.current();
+    return app && app.ngZone;
   }
 }

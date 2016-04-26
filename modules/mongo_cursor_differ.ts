@@ -57,7 +57,7 @@ export class MongoCursorDiffer extends DefaultIterableDiffer {
   private _cursor: Mongo.Cursor<any>;
   private _obsFactory: ObserverFactory;
   private _subscription: Object;
-  private _zone = MeteorApp.ngZone || createNgZone();
+  private _zone = MeteorApp.ngZone() || createNgZone();
 
   constructor(cdRef: ChangeDetectorRef, obsFactory: ObserverFactory) {
     super(trackById);

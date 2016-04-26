@@ -45,7 +45,7 @@ var MongoCursorDiffer = (function (_super) {
         this._moved = [];
         this._updated = [];
         this._listSize = 0;
-        this._zone = meteor_app_1.MeteorApp.ngZone || core_1.createNgZone();
+        this._zone = meteor_app_1.MeteorApp.ngZone() || core_1.createNgZone();
         this._obsFactory = obsFactory;
     }
     MongoCursorDiffer.prototype.forEachAddedItem = function (fn) {

@@ -20,21 +20,20 @@ var MeteorApp = (function () {
         var appRef = platRef.application(appProviders);
         return this.launch(appRef, function () { return appRef.bootstrap(component, providers); });
     };
-    Object.defineProperty(MeteorApp, "current", {
+    Object.defineProperty(MeteorApp.prototype, "ngZone", {
         get: function () {
-            return this.ENV.get();
+            return this.appRef.injector.get(core_1.NgZone);
         },
         enumerable: true,
         configurable: true
     });
-    Object.defineProperty(MeteorApp, "ngZone", {
-        get: function () {
-            var app = MeteorApp.current;
-            return app && app.appRef.injector.get(core_1.NgZone);
-        },
-        enumerable: true,
-        configurable: true
-    });
+    MeteorApp.current = function () {
+        return this.ENV.get();
+    };
+    MeteorApp.ngZone = function () {
+        var app = MeteorApp.current();
+        return app && app.ngZone;
+    };
     MeteorApp.ENV = new Meteor.EnvironmentVariable();
     return MeteorApp;
 }());

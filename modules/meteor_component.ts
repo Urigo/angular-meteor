@@ -9,7 +9,7 @@ import {MeteorApp} from './meteor_app';
 export class MeteorComponent implements OnDestroy {
   private _hAutoruns: Array<Tracker.Computation> = [];
   private _hSubscribes: Array<Meteor.SubscriptionHandle> = [];
-  private _zone: NgZone = MeteorApp.ngZone || createNgZone();
+  private _zone: NgZone = MeteorApp.ngZone() || createNgZone();
   private _inZone: boolean;
 
   constructor() {
