@@ -1,12 +1,14 @@
 'use strict';
 var core_1 = require('angular2/core');
+var core_2 = require('angular2/core');
+var lang_1 = require('angular2/src/facade/lang');
 var Promise = require('meteor-promise');
 var MeteorApp = (function () {
-    function MeteorApp(appRef) {
-        this.appRef = appRef;
+    function MeteorApp(appInjector) {
+        this.appInjector = appInjector;
     }
-    MeteorApp.launch = function (appRef, bootstrap) {
-        var newApp = new MeteorApp(appRef);
+    MeteorApp.launch = function (appInjector, bootstrap) {
+        var newApp = new MeteorApp(appInjector);
         return new Promise(function (resolve, reject) {
             Meteor.startup(function () {
                 MeteorApp.ENV.withValue(newApp, function () {
@@ -16,13 +18,21 @@ var MeteorApp = (function () {
         });
     };
     MeteorApp.bootstrap = function (component, platProviders, appProviders, providers) {
-        var platRef = core_1.platform(platProviders);
-        var appRef = platRef.application(appProviders);
-        return this.launch(appRef, function () { return appRef.bootstrap(component, providers); });
+        var platRef = core_2.createPlatform(core_2.ReflectiveInjector.resolveAndCreate(platProviders));
+        appProviders = lang_1.isPresent(providers) ? [appProviders, providers] : appProviders;
+        var appInjector = core_2.ReflectiveInjector.resolveAndCreate(appProviders, platRef.injector);
+        return this.launch(appInjector, function () { return core_2.coreLoadAndBootstrap(appInjector, component); });
     };
     Object.defineProperty(MeteorApp.prototype, "ngZone", {
         get: function () {
-            return this.appRef.injector.get(core_1.NgZone);
+            return this.appInjector.get(core_1.NgZone);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(MeteorApp.prototype, "appRef", {
+        get: function () {
+            return this.appInjector.get(core_1.ApplicationRef);
         },
         enumerable: true,
         configurable: true

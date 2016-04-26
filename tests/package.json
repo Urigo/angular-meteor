@@ -5,12 +5,12 @@
     "start": "meteor run"
   },
   "dependencies": {
-    "angular2": ">=2.0.0-beta.12",
+    "angular2": "^2.0.0-beta.16",
     "es6-shim": "^0.35.0",
     "zone.js": "^0.6.10",
     "reflect-metadata": "0.1.2",
     "rxjs": "5.0.0-beta.2",
-    "angular2-meteor": "https://github.com/Urigo/angular2-meteor",
+    "angular2-meteor": "https://github.com/barbatus/angular2-meteor",
     "meteor-promise": "^0.6.3",
     "meteor-node-stubs": "^0.2.3"
   }
