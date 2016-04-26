@@ -1,8 +1,6 @@
 # Angular2-Meteor [![NPM version][npm-version-image]][npm-url] [![NPM downloads][npm-downloads-image]][npm-url] [![Build Status](https://travis-ci.org/Urigo/angular2-meteor.svg?branch=master)](https://travis-ci.org/Urigo/angular2-meteor)  [![Join the chat at https://gitter.im/Reactive-Extensions/RxJS](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Urigo/angular-meteor)
 Angular2 + Meteor integration.
 
-##### Angular2 version: beta-12.
-
 ## Table of Contents
 * [Tutorial](../../#tutorial)
 * [Questions and Issues](../../#questions-and-issues)
@@ -12,14 +10,14 @@ Angular2 + Meteor integration.
     * [Start using Meteor in your angular2 app](../../#start-using-meteor-in-your-angular2-app)
 * [Demos](../../#demos)
 * [Server Side](../../#server-side)
-* [TypeScript Support](../../#typescript-support)
+* [TypeScript](../../#typescript)
 * [Roadmap](../../#roadmap)
 * [Contribution](../../#contribution)
 
 ## Tutorial
 
 If you are new to Angular2 and/or Meteor but want to learn them quickly, 
-please, check out our 23-steps Angular2-Meteor [tutorial](http://www.angular-meteor.com/tutorials/socially/angular2/bootstrapping).
+please check out our 23-steps Angular2-Meteor [tutorial](http://www.angular-meteor.com/tutorials/socially/angular2/bootstrapping).
 
 ## Questions and Issues
 
@@ -33,7 +31,7 @@ The chances to get a quick response there may be quite higher than posting a new
 
 If you've decided that it's likely a real issue, please consider going through the following list at first:
 - Check out common issues and troubleshoot [section](../../#common-issues-and-troubleshoot);
-- Check quickly recently created/closed issues: chances are high that
+- Check quickly recently [created](https://github.com/Urigo/angular2-meteor/issues)/[closed](https://github.com/Urigo/angular2-meteor/issues?q=is%3Aissue+is%3Aclosed) issues: chances are high that
   someone's already created a similar one or similar issue's been resolved;
 - If your issue looks nontrivial, we would approciate a small demo to reproduce it.
   You will also get a response much faster.
@@ -169,26 +167,27 @@ To use Meteor features, make sure that your components extends `MeteorComponent`
 
     bootstrap(Socially);
 ````
-
-You can find more examples in the tutorial!
+You read more about `MeteorComponent` in the [tutorial section] (http://www.angular-meteor.com/tutorials/socially/angular2/privacy-and-publish-subscribe-functions)!
 
 ## Demos
 
 Check out two demos for the quick how-to:
 
-* For Meter 1.2: the Tutorial's [Socially app](https://github.com/Urigo/meteor-angular2.0-socially)
-* For Meteor 1.3: [Todos](https://github.com/Urigo/Meteor-Angular2/tree/master/examples/todos-meteor-1.3) demo
+* the Tutorial's [Socially app](https://github.com/Urigo/meteor-angular2.0-socially)
+* Simple [Todos](https://github.com/Urigo/Meteor-Angular2/tree/master/examples/todos-meteor-1.3) demo
 
 ## Server Side
 One of the big advantages of Meteor is that you can use TypeScript and CommonJS on the server side as well.
-So you can easily share your code between client and server!
+
+It means that you can easily share your code between client and server!
 
 ## TypeScript
 The package uses [TypeScript for Meteor](https://github.com/barbatus/typescript) to compile (transpile) `.ts`-files.
 
 TypeScript configuration file a.k.a. `tsconfig.json` is supported as well.
+
 Please note that `tsconfig.json` is not required, but if you want to configure TypeScript
-in your IDE or add more options, place `tsconfig.json` at the root folder of your app.
+in your IDE or add more options, place `tsconfig.json` in the root folder of your app.
 You can read about all available compiler options [here](https://github.com/Microsoft/TypeScript/wiki/tsconfig.json).
 
 Default TypeScript options for Meteor 1.3 are as follows:
@@ -209,19 +208,26 @@ Default TypeScript options for Meteor 1.3 are as follows:
 
 To add declaration files of any global 3-party JavaScript library including Meteor itself (so called ambient typings), we recommend to use the [`typings`](https://github.com/typings/typings) utility, which is specially designed to be used for typings management with access to global registries of common 3-party libraries.
 
-As for Angular 2's typings and typings of the related packages, if you plan to use Meteor 1.3 and NPM packages you don't need to worry about them at all, as most of declaration files are provided in NPMs (at least for Angular 2 itself).
+For example, to install Meteor declaration file run:
+````
+npm install typings -g
+
+typings install meteor --ambient
+````
+
+Please note that you don't need to worry about Angular 2's typings and typings of the related packages!
+TypeScript finds and checkes them in NPMs automatically.
 
 ## Common Issues and Troubleshoot
 
 ### Upgrading to Meteor 1.3
 
-If you want to upgrade to Meteor 1.3 and use CommonJS modules,
-but at the same time have some of the Atmosphere packages related to Angular 2 (like `barbatus:g2-google-maps`, `barbatus:ng2-meteor-accounts-ui` etc) installed, you’ll need to remove them.
+Please don't use Atmosphere packages related to Angular 2 with Meteor 1.3, use NPM equivalents instead;
+most of these atmosphere packages were anyways converted from NPMs.
 The reason is they are based on SystemJS, which won’t work with Meteor 1.3 and `modules` package any more.
-Use NPM equivalents instead since most of that atmosphere packages were anyways converted from NPMs.
 
 For example, check out Angular2 Maps [here](https://www.npmjs.com/package/angular2-google-maps).
-a NPM version of the Meteor Accounts UI for Angular 2 is currently under development.
+Angular 2 version of the Meteor Accounts UI is currently under development.
 You can find out some preliminary version [here](https://github.com/Urigo/angular2-meteor-accounts-ui).
 
 ### It works fine locally but fails to run in the production
@@ -239,7 +245,7 @@ meteor add  barbatus:ng2-minifier-js
 
 ## Change Log
 
-Check out change log of the package [here](CHANGELOG.md).
+Change log of the package is located [here](CHANGELOG.md).
 
 ## Roadmap
 
@@ -247,6 +253,7 @@ You can check out the package's roadmap and its status under this repository's i
 
 ## Contribution
 If you know how to make integration of Angular 2 and Meteor better, you are very welcome!
+
 Check out [CONTRIBUTION.md](CONTRIBUTION.md) for more info.
 
 [npm-downloads-image]: http://img.shields.io/npm/dm/angular2-meteor.svg?style=flat
