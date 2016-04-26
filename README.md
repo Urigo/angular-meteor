@@ -27,12 +27,12 @@ If you have rather a question than an issue, please consider the following resou
 - [Gitter](https://gitter.im/Urigo/angular-meteor)
 - [Report issues](https://github.com/Urigo/angular-meteor/issues)
 
-The chances to get a quick response there may be quite higher than posting a new issue here.
+The chances to get a quick response there is higher than posting a new issue here.
 
 If you've decided that it's likely a real issue, please consider going through the following list at first:
 - Check out common issues and troubleshoot [section](../../#common-issues-and-troubleshoot);
-- Check quickly recently [created](https://github.com/Urigo/angular2-meteor/issues)/[closed](https://github.com/Urigo/angular2-meteor/issues?q=is%3Aissue+is%3Aclosed) issues: chances are high that
-  someone's already created a similar one or similar issue's been resolved;
+- Check quickly recently [created](https://github.com/Urigo/angular2-meteor/issues)/[closed](https://github.com/Urigo/angular2-meteor/issues?q=is%3Aissue+is%3Aclosed) issues: chances are high that someone's already created a similar one
+  or similar issue's been resolved;
 - If your issue looks nontrivial, we would approciate a small demo to reproduce it.
   You will also get a response much faster.
  
@@ -140,7 +140,7 @@ Add Angular2 template file `client/parties.html` with a content as follows:
 
 At this moment, you are ready to create awesome apps backed by the power of Angular 2 and Meteor!
 
-To use Meteor features, make sure that your components extends `MeteorComponent`, and you can feature that comes from Meteor:
+To use Meteor features, make sure that your components extends `MeteorComponent`:
 
 ````ts
     import {Component} from 'angular2/core';
@@ -167,7 +167,7 @@ To use Meteor features, make sure that your components extends `MeteorComponent`
 
     bootstrap(Socially);
 ````
-You read more about `MeteorComponent` in the [tutorial section] (http://www.angular-meteor.com/tutorials/socially/angular2/privacy-and-publish-subscribe-functions)!
+You can read more about `MeteorComponent` in the [tutorial section] (http://www.angular-meteor.com/tutorials/socially/angular2/privacy-and-publish-subscribe-functions)!
 
 ## Demos
 
@@ -224,11 +224,12 @@ TypeScript finds and checkes them in NPMs automatically.
 
 Please don't use Atmosphere packages related to Angular 2 with Meteor 1.3, use NPM equivalents instead;
 most of these atmosphere packages were anyways converted from NPMs.
-The reason is they are based on SystemJS, which won’t work with Meteor 1.3 and `modules` package any more.
+The reason is that they are based on SystemJS, which won’t work with Meteor 1.3 and `modules` package any more.
 
 For example, check out Angular2 Maps [here](https://www.npmjs.com/package/angular2-google-maps).
-Angular 2 version of the Meteor Accounts UI is currently under development.
-You can find out some preliminary version [here](https://github.com/Urigo/angular2-meteor-accounts-ui).
+
+Or, you may be interested in Angular 2 version of the Meteor Accounts UI.
+You can find out a preliminary version [here](https://github.com/Urigo/angular2-meteor-accounts-ui).
 
 ### It works fine locally but fails to run in the production
 
