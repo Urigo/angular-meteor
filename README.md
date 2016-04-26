@@ -22,10 +22,9 @@ please check out our 23-steps Angular2-Meteor [tutorial](http://www.angular-mete
 ## Questions and Issues
 
 If you have rather a question than an issue, please consider the following resources at first:
+- [Gitter](https://gitter.im/Urigo/angular-meteor)
 - [Stack Overflow `angular2-meteor` tag](http://stackoverflow.com/questions/tagged/angular2-meteor)
 - [Meteor forum](https://forums.meteor.com/c/angular)
-- [Gitter](https://gitter.im/Urigo/angular-meteor)
-- [Report issues](https://github.com/Urigo/angular-meteor/issues)
 
 The chances to get a quick response there is higher than posting a new issue here.
 
@@ -35,7 +34,7 @@ If you've decided that it's likely a real issue, please consider going through t
   or similar issue's been resolved;
 - If your issue looks nontrivial, we would approciate a small demo to reproduce it.
   You will also get a response much faster.
- 
+
 ## Quick Start
 
 ### Install package:
