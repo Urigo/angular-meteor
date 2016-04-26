@@ -2,14 +2,15 @@
 var core_1 = require('angular2/core');
 var utils_1 = require('./utils');
 var promise_q_1 = require('./promise_q');
+var meteor_app_1 = require('./meteor_app');
 var MeteorComponent = (function () {
-    /**
-     * @param {NgZone} ngZone added for test purposes mostly.
-     */
-    function MeteorComponent(ngZone) {
+    function MeteorComponent() {
+        var _this = this;
         this._hAutoruns = [];
         this._hSubscribes = [];
-        this._zone = ngZone || core_1.createNgZone();
+        this._zone = meteor_app_1.MeteorApp.ngZone() || core_1.createNgZone();
+        this._zone.onUnstable.subscribe(function () { return _this._inZone = true; });
+        this._zone.onMicrotaskEmpty.subscribe(function () { return _this._inZone = false; });
     }
     MeteorComponent.prototype.autorun = function (func, autoBind) {
         var hAutorun = Tracker.autorun(autoBind ? this._bindToNgZone(func) : func);
@@ -56,6 +57,18 @@ var MeteorComponent = (function () {
         var callArgs = this._prepMeteorArgs(args.slice());
         return Meteor.call.apply(Meteor, [name].concat(callArgs));
     };
+    MeteorComponent.prototype.ngOnDestroy = function () {
+        for (var _i = 0, _a = this._hAutoruns; _i < _a.length; _i++) {
+            var hAutorun = _a[_i];
+            hAutorun.stop();
+        }
+        for (var _b = 0, _c = this._hSubscribes; _b < _c.length; _b++) {
+            var hSubscribe = _c[_b];
+            hSubscribe.stop();
+        }
+        this._hAutoruns = null;
+        this._hSubscribes = null;
+    };
     MeteorComponent.prototype._prepMeteorArgs = function (args) {
         var lastParam = args[args.length - 1];
         var penultParam = args[args.length - 2];
@@ -73,17 +86,10 @@ var MeteorComponent = (function () {
         }
         return args;
     };
-    MeteorComponent.prototype.ngOnDestroy = function () {
-        for (var _i = 0, _a = this._hAutoruns; _i < _a.length; _i++) {
-            var hAutorun = _a[_i];
-            hAutorun.stop();
+    MeteorComponent.prototype._runInZone = function (f) {
+        if (!this._inZone) {
+            this._zone.run(f);
         }
-        for (var _b = 0, _c = this._hSubscribes; _b < _c.length; _b++) {
-            var hSubscribe = _c[_b];
-            hSubscribe.stop();
-        }
-        this._hAutoruns = null;
-        this._hSubscribes = null;
     };
     MeteorComponent.prototype._bindToNgZone = function (callbacks) {
         var self = this;
@@ -93,7 +99,7 @@ var MeteorComponent = (function () {
                 for (var _i = 0; _i < arguments.length; _i++) {
                     args[_i - 0] = arguments[_i];
                 }
-                self._zone.run(function () { return callbacks.apply(self._zone, args); });
+                self._runInZone(callbacks.bind(self._zone, args));
             };
         }
         if (utils_1.isCallbacksObject(callbacks)) {
@@ -106,7 +112,7 @@ var MeteorComponent = (function () {
                         for (var _i = 0; _i < arguments.length; _i++) {
                             args[_i - 0] = arguments[_i];
                         }
-                        self._zone.run(function () { return callbacks[event].apply(self._zone, args); });
+                        self._runInZone(callbacks[event].bind(self._zone, args));
                     };
                 }
             });

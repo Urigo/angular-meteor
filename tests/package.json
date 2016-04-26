@@ -5,21 +5,13 @@
     "start": "meteor run"
   },
   "dependencies": {
-    "angular2": ">=2.0.0-beta.12",
+    "angular2": "^2.0.0-beta.16",
     "es6-shim": "^0.35.0",
     "zone.js": "^0.6.10",
     "reflect-metadata": "0.1.2",
     "rxjs": "5.0.0-beta.2",
-    "angular2-meteor": "^0.5.0",
-    "coffee-script": "^1.10.0",
-    "less": "^2.6.1",
-    "markdown": "^0.5.0",
-    "markdown-js": "0.0.3",
-    "marked": "^0.3.5",
-    "meteor-node-stubs": "~0.2.0",
-    "sass": "^0.5.0",
-    "stylus": "^0.54.2",
-    "base64-js": "^1.1.2",
-    "ieee754": "^1.1.6"
+    "angular2-meteor": "https://github.com/barbatus/angular2-meteor",
+    "meteor-promise": "^0.6.3",
+    "meteor-node-stubs": "^0.2.3"
   }
 }

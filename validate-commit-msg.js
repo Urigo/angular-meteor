@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+#!/usr/local/bin/node
 
 /**
  * Git COMMIT-MSG hook for validating commit message
