@@ -41,25 +41,25 @@ For full tutorial, please check out our 23-steps Angular2-Meteor [tutorial](http
 #### With Meteor 1.3:
 
 Before installing any Angular2-Meteor's NPMs, we recommend to have Angular 2 NPM and 
-its peer dependencies added in your `package.json`. The list you can find [here](https://github.com/Urigo/angular2-meteor/blob/master/package.json#L25).
-It makes the chance to get "unmet peer dependency" warning is minimum for the future package updates.
+its peer dependencies added in your `package.json`. You can find such a list [here](https://github.com/Urigo/angular2-meteor/blob/master/package.json#L25).
+It minimizes the chance to get "unmet peer dependency" warnings in the future package updates.
 
-After, you are ready to install Angular2-Meteor's NPMs:
+After that, you are ready to install Angular2-Meteor's NPMs:
 ````
     npm install angular2-meteor --save
     npm install angular2-meteor-auto-bootstrap --save
 ````
 
-You'd likely prefer to install another one Meteor package as well  — `angular2-compilers`.
-This package adds own HTML processor and TypeScript compiler to a Meteor app.
-TypeScript is a language that makes development with Angular 2 really easy, and the only one
-fully supported by the Angular2-Meteor currently. So one of the prerequisites will be to run:
+You'd likely prefer to install another Meteor package as well  — `angular2-compilers`.
+This package adds our own HTML processor and TypeScript compiler to a Meteor app.
+TypeScript is a language that makes development with Angular 2 really easy, and currently the only one
+fully supported by the Angular2-Meteor. So one of the prerequisites will be to run:
 ````
    meteor add angular2-compilers
 ````
 
 Please note that you'll have to remove the standard Meteor HTML processor if you have it installed.
-The reason is that Meteor doesn't allow more then two processor for one extension:
+The reason is that Meteor doesn't allow more than two processor for one extension:
 
 ````
    meteor remove blaze-html-templates
@@ -70,7 +70,7 @@ For example, in order to make it work, you'll need to load (import) `reflect-met
 before you can use any component from `angular2` itself.
 
 There is a way to overcome that inconvenience (i.e., importing dependencies manually):
-you can install `barbatus:angular2-runtime`, a package that adds all required dependencies.
+you can install `barbatus:angular2-runtime`, a package that adds all the required dependencies.
 Since it's a package, it's loaded by Meteor before any user code.
 
 > Note that current version of `barbatus:angular2-runtime` supports `beta-12` only.
@@ -78,7 +78,7 @@ Since it's a package, it's loaded by Meteor before any user code.
 
 Other notes:
 - Meteor 1.3 uses CommonJS implementation for modules loading so you do not need to use SystemJS or any other loader!
-- You'll have to add an index.html (can have any other name) even if your app template consists of one tag,
+- You'll have to add an index.html (can have any other name) even if your app template consists of one single tag,
   e.g.,  `<body><app></app></body>`
 
 #### With Meteor 1.2
@@ -92,9 +92,9 @@ Notes:
 
 ## Usage
 ### Import Angular2 into your app:
-Package assumes TypeScript as the main language for development with Angular 2.
+This package assumes TypeScript as the main language for development with Angular 2.
 
-ES6 modules are supported via CommonsJS (starting in Meteor 1.3) module loader library.
+ES6 modules are supported via CommonsJS (introduced in Meteor 1.3) module loader library.
 
 To start, create `client/app.ts` file, import `Component` and then bootstrap the app:
 ````ts
@@ -110,13 +110,13 @@ To start, create `client/app.ts` file, import `Component` and then bootstrap the
     bootstrap(Socially);
 ````
 
-Add `index.html` file to the app top folder:
+Add `index.html` file to the app root folder:
 ````html
     <body>
        <socially></socially>
     </body>
 ````
-At this point you should see app working and showing "Hello word".
+At this point you should see the app working and showing "Hello word".
 
 If you have an HTML file in the app root folder with `body` or `head` tag (`index.html` in our case), the package will recognize it as your master HTML file and will skip inserting a default layout. Otherwise, it'll insert bootstrap HTML as follows:
 ````html
@@ -239,7 +239,7 @@ For Meteor 1.2, options are the same as above except:
 
 ### Typings
 
-To add declaration files of any global 3-party JavaScript library including Meteor itself (so called ambient typings), we recommend to use [`typings`](https://github.com/typings/typings) utility, which is specially designed to be used for typings management with access to global registries of common 3-party libraries.
+To add declaration files of any global 3-party JavaScript library including Meteor itself (so called ambient typings), we recommend to use the [`typings`](https://github.com/typings/typings) utility, which is specially designed to be used for typings management with access to global registries of common 3-party libraries.
 
 As for Angular 2's typings and typings of the related packages, if you plan to use Meteor 1.3 and NPM packages you don't need to worry about them at all, as most of declaration files are provided in NPMs (at least for Angular 2 itself). If you plan to use Meteor 1.2  and Atmosphere packages, all required typings will be installed (copied) automatically into the "typings" folder during the first run.
 
