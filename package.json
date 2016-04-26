@@ -21,6 +21,7 @@
   "author": "Angular2-Meteor (https://github.com/Urigo/angular2-meteor)",
   "license": "MIT",
   "scripts": {
+    "init": "ln -s ../../validate-commit-msg.js .git/hooks/commit-msg",
     "build": "gulp build",
     "test": "./run_tests.sh"
   },
@@ -34,7 +35,6 @@
   "devDependencies": {
     "angular2": "^2.0.0-beta.16",
     "es6-shim": "^0.35.0",
-    "ghooks": "^1.2.1",
     "gulp": "^3.9.1",
     "gulp-clean": "^0.3.2",
     "gulp-git": "^1.7.0",
@@ -49,7 +49,6 @@
     "tslint": "^3.6.0",
     "typescript": "^1.7.5",
     "typings": "^0.7.7",
-    "validate-commit-msg": "^2.6.1",
     "webpack": "^1.12.12",
     "webpack-externals-plugin": "^1.0.0",
     "zone.js": "^0.6.10"
@@ -57,10 +56,5 @@
   "dependencies": {
     "meteor-promise": "^0.6.3",
     "meteor-node-stubs": "^0.2.3"
-  },
-  "config": {
-    "ghooks": {
-      "commit-msg": "validate-commit-msg"
-    }
   }
 }
