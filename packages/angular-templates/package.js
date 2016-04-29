@@ -14,11 +14,7 @@ Package.registerBuildPlugin({
   ],
   use: [
     'angular-templates-runtime@0.0.1'
-  ],
-  npmDependencies : {
-    'cheerio': '0.19.0',
-    'uglify-js': '2.4.24'
-  }
+  ]
 });
 
 Package.onUse(function(api) {
