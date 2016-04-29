@@ -11,10 +11,10 @@ NgCachingHtmlCompiler = class NgCachingHtmlCompiler extends CachingHtmlCompiler 
 
   compileOneFile(inputFile) {
     const contents = inputFile.getContentsAsString();
-    var packagePrefix = '';
+    let packagePrefix = '';
 
     if (inputFile.getPackageName()) {
-      packagePrefix += '/packages/' + inputFile.getPackageName() + '/';
+      packagePrefix += `/packages/${inputFile.getPackageName()}/`;
     }
 
     const inputPath = packagePrefix + inputFile.getPathInPackage();
@@ -22,7 +22,7 @@ NgCachingHtmlCompiler = class NgCachingHtmlCompiler extends CachingHtmlCompiler 
       const tags = this.tagScannerFunc({
         sourceName: inputPath,
         contents: contents,
-        tagNames: ["body", "head", "template"]
+        tagNames: ['body', 'head', 'template']
       });
 
       return this.tagHandlerFunc(tags);
