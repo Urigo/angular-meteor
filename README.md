@@ -232,16 +232,8 @@ You can find out a preliminary version [here](https://github.com/Urigo/angular2-
 
 ### It works fine locally but fails to run in the production
 
-This UglifyJS minification [issue](https://github.com/angular/angular/issues/6380) is likely to blame.
-Read this [comment](https://github.com/angular/angular/issues/6380#issuecomment-203247147) to find out more info.
-
-As a temporary solution, you could install `barbatus:ng2-minifier-js`, which
-configures UglifyJS to skip renaming (mangling). So you’ll need:
-
-````
-meteor remove standard-minifier-js
-meteor add  barbatus:ng2-minifier-js
-````
+This UglifyJS minification [issue](https://github.com/angular/angular/issues/6380) is likely to blame, which
+is fixed in Angular2 beta-16.
 
 ## Change Log
 
