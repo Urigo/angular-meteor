@@ -45,6 +45,12 @@ angular.module(name, [
       fn = this.$bindToContext($Mixer.caller, fn || angular.noop);
       cb = cb ? this.$bindToContext($Mixer.caller, cb) : angular.noop;
 
+      // Additional callbacks specific for this library
+      // onStart - right after Meteor.subscribe()
+      const hooks = {
+        onStart: angular.noop
+      };
+
       if (!_.isString(subName)) {
         throw Error('argument 1 must be a string');
       }
@@ -53,6 +59,16 @@ angular.module(name, [
       }
       if (!_.isFunction(cb) && !_.isObject(cb)) {
         throw Error('argument 3 must be a function or an object');
+      }
+
+      if (_.isObject(cb)) {
+        for (const hook in hooks) {
+          if (hooks.hasOwnProperty(hook) && cb[hook]) {
+            // Don't use any of additional callbacks in Meteor.subscribe
+            hooks[hook] = cb[hook];
+            delete cb[hook];
+          }
+        }
       }
 
       const result = {};
@@ -66,6 +82,9 @@ angular.module(name, [
         }
 
         const subscription = Meteor.subscribe(subName, ...args, cb);
+
+        hooks.onStart();
+
         result.ready = subscription.ready.bind(subscription);
         result.subscriptionId = subscription.subscriptionId;
       });

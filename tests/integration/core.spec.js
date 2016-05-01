@@ -180,7 +180,7 @@ describe('angular-meteor.core', function() {
       it('should call subscription callbacks object using view model as context', function(done) {
         var vm = scope.viewModel({});
 
-        var next = _.after(2, done);
+        var next = _.after(3, done);
 
         spyOn(Meteor, 'subscribe').and.callFake(function(name, cbs) {
           cbs.onReady();
@@ -197,6 +197,26 @@ describe('angular-meteor.core', function() {
           onReady: function() {
             expect(this).toEqual(vm);
             next();
+          },
+
+          onStart: function() {
+            expect(this).toEqual(vm);
+            next();
+          }
+        });
+      });
+
+      it('should call onStart callback after Meteor.subscribe has been called', function(done) {
+        var vm = scope.viewModel({});
+
+        spyOn(Meteor, 'subscribe').and.callFake(function() {
+          return { ready: angular.noop };
+        });
+
+        vm.subscribe('test', angular.noop, {
+          onStart: function() {
+            expect(Meteor.subscribe).toHaveBeenCalled();
+            done();
           }
         });
       });
