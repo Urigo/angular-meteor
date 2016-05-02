@@ -22,10 +22,9 @@ please check out our 23-steps Angular2-Meteor [tutorial](http://www.angular-mete
 ## Questions and Issues
 
 If you have rather a question than an issue, please consider the following resources at first:
+- [Gitter](https://gitter.im/Urigo/angular-meteor)
 - [Stack Overflow `angular2-meteor` tag](http://stackoverflow.com/questions/tagged/angular2-meteor)
 - [Meteor forum](https://forums.meteor.com/c/angular)
-- [Gitter](https://gitter.im/Urigo/angular-meteor)
-- [Report issues](https://github.com/Urigo/angular-meteor/issues)
 
 The chances to get a quick response there is higher than posting a new issue here.
 
@@ -35,7 +34,7 @@ If you've decided that it's likely a real issue, please consider going through t
   or similar issue's been resolved;
 - If your issue looks nontrivial, we would approciate a small demo to reproduce it.
   You will also get a response much faster.
- 
+
 ## Quick Start
 
 ### Install package:
@@ -233,16 +232,8 @@ You can find out a preliminary version [here](https://github.com/Urigo/angular2-
 
 ### It works fine locally but fails to run in the production
 
-This UglifyJS minification [issue](https://github.com/angular/angular/issues/6380) is likely to blame.
-Read this [comment](https://github.com/angular/angular/issues/6380#issuecomment-203247147) to find out more info.
-
-As a temporary solution, you could install `barbatus:ng2-minifier-js`, which
-configures UglifyJS to skip renaming (mangling). So you’ll need:
-
-````
-meteor remove standard-minifier-js
-meteor add  barbatus:ng2-minifier-js
-````
+This UglifyJS minification [issue](https://github.com/angular/angular/issues/6380) is likely to blame, which
+is fixed in Angular2 beta-16.
 
 ## Change Log
 
