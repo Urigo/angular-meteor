@@ -211,7 +211,7 @@ For example, to install Meteor declaration file run:
 ````
 npm install typings -g
 
-typings install meteor --ambient
+typings install registry:env/meteor --ambient
 ````
 
 Please note that you don't need to worry about Angular 2's typings and typings of the related packages!
