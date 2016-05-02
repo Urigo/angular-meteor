@@ -6,6 +6,8 @@ import {MeteorComponent} from 'angular2-meteor';
 
 import {Tasks} from '../../tasks';
 
+import {Mongo} from "meteor/mongo";
+
 @Component({
   selector: 'task-list',
   templateUrl: 'client/components/task-list.html',

@@ -1,5 +1,4 @@
 var gulp = require("gulp");
-var webpack = require("gulp-webpack");
 var clean = require("gulp-clean");
 var runSequence = require("run-sequence");
 var gulpTypings = require("gulp-typings");
@@ -9,9 +8,8 @@ var fs = require("fs");
  
 // Install typings.
 gulp.task("typings",function(){
-  return ! fs.existsSync("./typings") ?
-    gulp.src("./typings.json")
-      .pipe(gulpTypings()) : null;
+  return  gulp.src("./typings.json")
+    .pipe(gulpTypings());
 });
 
 // Build TypeScript.

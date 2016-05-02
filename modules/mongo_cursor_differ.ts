@@ -1,6 +1,8 @@
 'use strict';
 
 import {ChangeDetectorRef, createNgZone} from 'angular2/core';
+import {Mongo} from 'meteor/mongo';
+
 import {MeteorApp} from './meteor_app';
 
 import {

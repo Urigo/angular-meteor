@@ -1,5 +1,8 @@
+'use strict';
+
 import {provide, IterableDiffers} from 'angular2/core';
 import {MongoCursorDifferFactory} from './mongo_cursor_differ';
+
 import {defaultIterableDiffers} from 'angular2/src/core/change_detection/change_detection';
 import {CONST_EXPR} from 'angular2/src/facade/lang';
 

@@ -1,3 +1,5 @@
+import { Meteor } from 'meteor/meteor';
+import { Tracker } from 'meteor/tracker';
 export declare class CursorHandle {
     private _hAutoNotify;
     private _hCurObserver;

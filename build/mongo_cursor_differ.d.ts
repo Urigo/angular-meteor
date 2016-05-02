@@ -1,4 +1,5 @@
 import { ChangeDetectorRef } from 'angular2/core';
+import { Mongo } from 'meteor/mongo';
 import { DefaultIterableDifferFactory, CollectionChangeRecord, DefaultIterableDiffer } from 'angular2/src/core/change_detection/differs/default_iterable_differ';
 import { MongoCursorObserver } from './mongo_cursor_observer';
 export interface ObserverFactory {

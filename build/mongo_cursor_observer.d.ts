@@ -1,3 +1,5 @@
+import { Meteor } from 'meteor/meteor';
+import { Mongo } from 'meteor/mongo';
 import { CursorHandle } from './cursor_handle';
 export declare class AddChange {
     index: number;

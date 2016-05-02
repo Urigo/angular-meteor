@@ -1,5 +1,7 @@
 'use strict';
 var core_1 = require('angular2/core');
+var meteor_1 = require('meteor/meteor');
+var tracker_1 = require('meteor/tracker');
 var utils_1 = require('./utils');
 var promise_q_1 = require('./promise_q');
 var meteor_app_1 = require('./meteor_app');
@@ -13,7 +15,7 @@ var MeteorComponent = (function () {
         this._zone.onMicrotaskEmpty.subscribe(function () { return _this._inZone = false; });
     }
     MeteorComponent.prototype.autorun = function (func, autoBind) {
-        var hAutorun = Tracker.autorun(autoBind ? this._bindToNgZone(func) : func);
+        var hAutorun = tracker_1.Tracker.autorun(autoBind ? this._bindToNgZone(func) : func);
         this._hAutoruns.push(hAutorun);
         return hAutorun;
     };
@@ -29,16 +31,16 @@ var MeteorComponent = (function () {
             args[_i - 1] = arguments[_i];
         }
         var subArgs = this._prepMeteorArgs(args.slice());
-        if (!Meteor.subscribe) {
+        if (!meteor_1.Meteor.subscribe) {
             throw new Error('Meteor.subscribe is not defined on the server side');
         }
         ;
-        var hSubscribe = Meteor.subscribe.apply(Meteor, [name].concat(subArgs));
-        if (Meteor.isClient) {
+        var hSubscribe = meteor_1.Meteor.subscribe.apply(meteor_1.Meteor, [name].concat(subArgs));
+        if (meteor_1.Meteor.isClient) {
             this._hSubscribes.push(hSubscribe);
         }
         ;
-        if (Meteor.isServer) {
+        if (meteor_1.Meteor.isServer) {
             var callback = subArgs[subArgs.length - 1];
             if (_.isFunction(callback)) {
                 callback();
@@ -55,7 +57,7 @@ var MeteorComponent = (function () {
             args[_i - 1] = arguments[_i];
         }
         var callArgs = this._prepMeteorArgs(args.slice());
-        return Meteor.call.apply(Meteor, [name].concat(callArgs));
+        return meteor_1.Meteor.call.apply(meteor_1.Meteor, [name].concat(callArgs));
     };
     MeteorComponent.prototype.ngOnDestroy = function () {
         for (var _i = 0, _a = this._hAutoruns; _i < _a.length; _i++) {

@@ -2,6 +2,7 @@
 var core_1 = require('angular2/core');
 var core_2 = require('angular2/core');
 var lang_1 = require('angular2/src/facade/lang');
+var meteor_1 = require('meteor/meteor');
 var Promise = require('meteor-promise');
 var MeteorApp = (function () {
     function MeteorApp(appInjector) {
@@ -10,7 +11,7 @@ var MeteorApp = (function () {
     MeteorApp.launch = function (appInjector, bootstrap) {
         var newApp = new MeteorApp(appInjector);
         return new Promise(function (resolve, reject) {
-            Meteor.startup(function () {
+            meteor_1.Meteor.startup(function () {
                 MeteorApp.ENV.withValue(newApp, function () {
                     bootstrap().then(resolve, reject);
                 });
@@ -44,7 +45,7 @@ var MeteorApp = (function () {
         var app = MeteorApp.current();
         return app && app.ngZone;
     };
-    MeteorApp.ENV = new Meteor.EnvironmentVariable();
+    MeteorApp.ENV = new meteor_1.Meteor.EnvironmentVariable();
     return MeteorApp;
 }());
 exports.MeteorApp = MeteorApp;

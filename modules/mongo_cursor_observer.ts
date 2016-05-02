@@ -1,5 +1,10 @@
 'use strict';
 
+import {Meteor} from 'meteor/meteor';
+import {Mongo} from 'meteor/mongo';
+import {Match, check} from 'meteor/check';
+import {EJSON} from 'meteor/ejson';
+
 import {CursorHandle} from './cursor_handle';
 
 export class AddChange {
@@ -38,8 +43,12 @@ export class Subscription {
 
 declare type MongoDocChange = AddChange | MoveChange | UpdateChange | RemoveChange;
 
+declare interface MongoItem {
+  _id: EJSONable;
+}
+
 export class MongoCursorObserver {
-  private _docs: Array<any> = [];
+  private _docs: Array<MongoItem> = [];
   private _added: Array<AddChange> = [];
   private _lastChanges: Array<MongoDocChange> = [];
   private _hCursor: CursorHandle;
@@ -106,10 +115,11 @@ export class MongoCursorObserver {
 
       changedAt: function(nDoc, oDoc, index) {
         let doc = self._docs[index];
-        if (EJSON.equals(doc._id, nDoc._id)) {
-          Object.assign(self._docs[index], nDoc);
+        let mDoc = <MongoItem>nDoc;
+        if (EJSON.equals(doc._id, mDoc._id)) {
+          Object.assign(self._docs[index], mDoc);
         } else {
-          self._docs[index] = nDoc;
+          self._docs[index] = mDoc;
         }
         let change = self._updateAt(self._docs[index], index);
         self.emit([change]);

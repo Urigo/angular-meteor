@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 var core_1 = require('angular2/core');
 var mongo_cursor_differ_1 = require('./mongo_cursor_differ');
 var change_detection_1 = require('angular2/src/core/change_detection/change_detection');

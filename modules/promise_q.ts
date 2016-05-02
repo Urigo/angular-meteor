@@ -1,6 +1,10 @@
+'use strict';
+
+import {Match, check} from 'meteor/check';
+import {PromiseWrapper, PromiseCompleter} from 'angular2/src/facade/async';
+
 import {CallbacksObject, MeteorCallbacks,
   isMeteorCallbacks, isCallbacksObject} from './utils';
-import {PromiseWrapper, PromiseCompleter} from 'angular2/src/facade/async';
 
 export class PromiseQ {
   private static _promises: Array<Promise<any>> = [];

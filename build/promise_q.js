@@ -1,12 +1,13 @@
-"use strict";
-var utils_1 = require('./utils');
+'use strict';
+var check_1 = require('meteor/check');
 var async_1 = require('angular2/src/facade/async');
+var utils_1 = require('./utils');
 var PromiseQ = (function () {
     function PromiseQ() {
     }
     PromiseQ.wrapPush = function (callbacks) {
         var _this = this;
-        check(callbacks, Match.Where(utils_1.isMeteorCallbacks));
+        check_1.check(callbacks, check_1.Match.Where(utils_1.isMeteorCallbacks));
         var completer = async_1.PromiseWrapper.completer();
         var dequeue = function (promise) {
             var index = _this._promises.indexOf(promise);
