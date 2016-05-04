@@ -102,8 +102,9 @@ var minifyHtml = function(html) {
 };
 
 function wrapAngularTemplate(id, contents) {
-  return "angular.module('angular-templates').run(['$templateCache', function($templateCache) { $templateCache.put('" +
-    id + "'," + JSON.stringify(contents) + ");}]);";
+  return "var templateUrl = '" + id + "';" +
+    "angular.module('angular-templates').run(['$templateCache', function($templateCache) { $templateCache.put(templateUrl," + JSON.stringify(contents) + ");}]);" +
+    "exports.default = templateUrl";
 }
 
 StaticHtmlTagHandler.init = function(tags) {
