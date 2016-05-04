@@ -8,8 +8,7 @@ Package.describe({
 
 Npm.depends({
   'html-minifier' : '0.6.9',
-  'uglify-js': '2.4.24',
-  'cheerio': '0.19.0' // why do we keep it?
+  'uglify-js': '2.4.24'
 });
 
 Package.onUse(function(api) {
