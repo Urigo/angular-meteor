@@ -1,6 +1,5 @@
 'use strict';
 
-import {Match, check} from 'meteor/check';
 import {PromiseWrapper, PromiseCompleter} from 'angular2/src/facade/async';
 
 import {CallbacksObject, MeteorCallbacks,

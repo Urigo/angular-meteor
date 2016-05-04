@@ -1,10 +1,8 @@
 'use strict';
-var tracker_1 = require('meteor/tracker');
-var check_1 = require('meteor/check');
 var CursorHandle = (function () {
     function CursorHandle(hCurObserver, hAutoNotify) {
-        check_1.check(hAutoNotify, check_1.Match.Optional(tracker_1.Tracker.Computation));
-        check_1.check(hCurObserver, check_1.Match.Where(function (observer) {
+        check(hAutoNotify, Match.Optional(Tracker.Computation));
+        check(hCurObserver, Match.Where(function (observer) {
             return !!observer.stop;
         }));
         this._hAutoNotify = hAutoNotify;

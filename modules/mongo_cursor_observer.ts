@@ -1,10 +1,5 @@
 'use strict';
 
-import {Meteor} from 'meteor/meteor';
-import {Mongo} from 'meteor/mongo';
-import {Match, check} from 'meteor/check';
-import {EJSON} from 'meteor/ejson';
-
 import {CursorHandle} from './cursor_handle';
 
 export class AddChange {

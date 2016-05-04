@@ -1,9 +1,5 @@
 'use strict';
 
-import {Meteor} from 'meteor/meteor';
-import {Tracker} from 'meteor/tracker';
-import {Match, check} from 'meteor/check';
-
 export class CursorHandle {
   private _hAutoNotify: Tracker.Computation;
   private _hCurObserver: Meteor.LiveQueryHandle;
