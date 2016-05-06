@@ -10,8 +10,9 @@ angular.module(name, [])
  */
 .service(utils, [
   '$rootScope',
+  '$exceptionHandler',
 
-  function($rootScope) {
+  function($rootScope, $exceptionHandler) {
     const self = this;
 
     // Checks if an object is a cursor
@@ -47,11 +48,20 @@ angular.module(name, [])
 
     function bindFn(fn, context, tap) {
       return (...args) => {
-        const result = fn.apply(context, args);
-        tap.call(context, {
-          result,
-          args
-        });
+        let result;
+
+        try {
+          result = fn.apply(context, args);
+
+          tap.call(context, {
+            result,
+            args
+          });
+        }
+        catch (e) {
+          $exceptionHandler(e);
+        }
+
         return result;
       };
     }
