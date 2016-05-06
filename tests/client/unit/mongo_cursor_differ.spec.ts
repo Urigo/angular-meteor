@@ -1,4 +1,4 @@
-import * as ngCore from 'angular2/core';
+import * as ngCore from '@angular/core';
 import {MongoCursorDifferFactory, MongoCursorDiffer} from 'angular2-meteor';
 import {AddChange, RemoveChange, MoveChange} from 'angular2-meteor';
 import * as fakes from './lib/fakes';

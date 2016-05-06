@@ -1,4 +1,4 @@
-import * as ngCore from 'angular2/core';
+import * as ngCore from '@angular/core';
 import {MeteorComponent, PromiseQ, MeteorApp} from 'angular2-meteor';
 import {chai} from 'meteor/practicalmeteor:chai';
 import {sinon} from 'meteor/practicalmeteor:sinon';

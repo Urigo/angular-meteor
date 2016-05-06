@@ -4,10 +4,10 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var core_1 = require('angular2/core');
+var core_1 = require('@angular/core');
 var meteor_app_1 = require('./meteor_app');
-var default_iterable_differ_1 = require('angular2/src/core/change_detection/differs/default_iterable_differ');
-var async_1 = require('angular2/src/facade/async');
+var default_iterable_differ_1 = require('@angular/core/src/change_detection/differs/default_iterable_differ');
+var async_1 = require('@angular/core/src/facade/async');
 var mongo_cursor_observer_1 = require('./mongo_cursor_observer');
 function checkIfMongoCursor(cursor) {
     return mongo_cursor_observer_1.MongoCursorObserver.isCursor(cursor);

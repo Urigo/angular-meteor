@@ -1,6 +1,6 @@
 'use strict';
 
-import {ChangeDetectorRef, createNgZone} from 'angular2/core';
+import {ChangeDetectorRef, createNgZone} from '@angular/core';
 import {Mongo} from 'meteor/mongo';
 
 import {MeteorApp} from './meteor_app';
@@ -9,9 +9,9 @@ import {
   DefaultIterableDifferFactory,
   CollectionChangeRecord,
   DefaultIterableDiffer
-} from 'angular2/src/core/change_detection/differs/default_iterable_differ';
+} from '@angular/core/src/change_detection/differs/default_iterable_differ';
 
-import {ObservableWrapper} from 'angular2/src/facade/async';
+import {ObservableWrapper} from '@angular/core/src/facade/async';
 
 import {
   MongoCursorObserver,

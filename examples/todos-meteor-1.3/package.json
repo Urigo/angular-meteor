@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "angular2": "^2.0.0-beta.17",
+    "@angular/core": "2.0.0-rc.1",
     "angular2-meteor": "https://github.com/Urigo/angular2-meteor",
     "angular2-meteor-auto-bootstrap": "https://github.com/Urigo/angular2-meteor-auto-bootstrap",
     "es6-shim": "^0.35.0",

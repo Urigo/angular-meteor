@@ -1,5 +1,5 @@
 'use strict';
-var core_1 = require('angular2/core');
+var core_1 = require('@angular/core');
 var meteor_1 = require('meteor/meteor');
 var tracker_1 = require('meteor/tracker');
 var utils_1 = require('./utils');

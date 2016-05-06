@@ -1,10 +1,9 @@
 'use strict';
 
-import {provide, IterableDiffers} from 'angular2/core';
+import {provide, IterableDiffers} from '@angular/core';
 import {MongoCursorDifferFactory} from './mongo_cursor_differ';
 
-import {defaultIterableDiffers} from 'angular2/src/core/change_detection/change_detection';
-import {CONST_EXPR} from 'angular2/src/facade/lang';
+import {defaultIterableDiffers} from '@angular/core/src/change_detection/change_detection';
 
 function meteorProviders() {
   let providers = [];
@@ -20,4 +19,4 @@ function meteorProviders() {
   return providers;
 }
 
-export const METEOR_PROVIDERS: Array<any> = CONST_EXPR(meteorProviders());
+export const METEOR_PROVIDERS: Array<any> = meteorProviders();

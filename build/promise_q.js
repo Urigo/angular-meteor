@@ -1,6 +1,6 @@
 'use strict';
 var check_1 = require('meteor/check');
-var async_1 = require('angular2/src/facade/async');
+var async_1 = require('@angular/core/src/facade/async');
 var utils_1 = require('./utils');
 var PromiseQ = (function () {
     function PromiseQ() {

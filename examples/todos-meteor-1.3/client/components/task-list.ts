@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges} from 'angular2/core';
+import {Component, Input, OnChanges} from '@angular/core';
 
 import {TaskView} from './task';
 
@@ -6,7 +6,7 @@ import {MeteorComponent} from 'angular2-meteor';
 
 import {Tasks} from '../../tasks';
 
-import {Mongo} from "meteor/mongo";
+import {Mongo} from 'meteor/mongo';
 
 @Component({
   selector: 'task-list',

@@ -1,9 +1,9 @@
 'use strict';
 
-import {ApplicationRef, NgZone, Type, Provider} from 'angular2/core';
+import {ApplicationRef, NgZone, Type, Provider} from '@angular/core';
 import {ComponentRef, createPlatform, ReflectiveInjector,
-  Injector, coreLoadAndBootstrap} from 'angular2/core';
-import {isPresent} from 'angular2/src/facade/lang';
+  coreLoadAndBootstrap} from '@angular/core';
+import {isPresent} from '@angular/core/src/facade/lang';
 import {Meteor} from 'meteor/meteor';
 import * as Promise from 'meteor-promise';
 
@@ -12,15 +12,9 @@ export type Providers = Array<Type | Provider | any[]>;
 export class MeteorApp {
   private static ENV: Meteor.EnvironmentVariable = new Meteor.EnvironmentVariable();
 
-  private appInjector: Injector;
-
-  constructor(appInjector: Injector) {
-    this.appInjector = appInjector;
-  }
-
-  static launch(appInjector: Injector,
+  static launch(appRef: ApplicationRef,
                 bootstrap: Promise<ComponentRef>): Promise<ComponentRef> {
-    const newApp = new MeteorApp(appInjector);
+    const newApp = new MeteorApp(appRef);
 
     return new Promise<ComponentRef>(function(resolve, reject) {
       Meteor.startup(() => {
@@ -38,18 +32,11 @@ export class MeteorApp {
 
     const platRef = createPlatform(ReflectiveInjector.resolveAndCreate(platProviders));
     appProviders = isPresent(providers) ? [appProviders, providers] : appProviders;
-    var appInjector = ReflectiveInjector.resolveAndCreate(
+    const appInjector = ReflectiveInjector.resolveAndCreate(
       appProviders, platRef.injector);
+    const appRef = appInjector.get(ApplicationRef);
 
-    return this.launch(appInjector, () => coreLoadAndBootstrap(appInjector, component));
-  }
-
-  get ngZone(): NgZone {
-    return this.appInjector.get(NgZone);
-  }
-
-  get appRef(): ApplicationRef {
-    return this.appInjector.get(ApplicationRef);
+    return this.launch(appRef, () => coreLoadAndBootstrap(appInjector, component));
   }
 
   static current() {
@@ -59,5 +46,11 @@ export class MeteorApp {
   static ngZone(): NgZone {
     const app = MeteorApp.current();
     return app && app.ngZone;
+  }
+
+  constructor(public appRef: ApplicationRef) {}
+
+  get ngZone(): NgZone {
+    return this.appRef.injector.get(NgZone);
   }
 }

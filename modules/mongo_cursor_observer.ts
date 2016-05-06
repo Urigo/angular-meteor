@@ -55,14 +55,14 @@ export class MongoCursorObserver {
   private _subs: Array<Subscription> = [];
   private _isSubscribed: boolean = false;
 
+  static isCursor(cursor: any): boolean {
+    return cursor && !!cursor.observe;
+  }
+
   constructor(cursor: Mongo.Cursor<any>) {
     check(cursor, Match.Where(MongoCursorObserver.isCursor));
 
     this._hCursor = this._startCursor(cursor);
-  }
-
-  static isCursor(cursor: any): boolean {
-    return cursor && !!cursor.observe;
   }
 
   get lastChanges() {
