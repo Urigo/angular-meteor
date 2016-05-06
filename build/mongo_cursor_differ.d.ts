@@ -1,6 +1,6 @@
 import { ChangeDetectorRef } from '@angular/core';
 import { Mongo } from 'meteor/mongo';
-import { DefaultIterableDifferFactory, DefaultIterableDiffer } from '@angular/core/src/change_detection/differs/default_iterable_differ';
+import { DefaultIterableDifferFactory, CollectionChangeRecord, DefaultIterableDiffer } from '@angular/core/src/change_detection/differs/default_iterable_differ';
 import { MongoCursorObserver } from './mongo_cursor_observer';
 export interface ObserverFactory {
     create(cursor: Object): Object;
@@ -34,5 +34,5 @@ export declare class MongoCursorDiffer extends DefaultIterableDiffer {
     _reset(): void;
     _applyCleanup(): void;
     _applyChanges(changes: any): void;
-    _createChangeRecord(currentIndex: any, prevIndex: any, item: any): any;
+    _createChangeRecord(currentIndex: any, prevIndex: any, item: any): CollectionChangeRecord;
 }
