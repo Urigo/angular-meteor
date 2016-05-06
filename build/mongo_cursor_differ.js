@@ -80,9 +80,8 @@ var MongoCursorDiffer = (function (_super) {
             this._subscription = async_1.ObservableWrapper.subscribe(this._curObserver, function (changes) {
                 // Run it outside Angular2 zone to cause running diff one more time and apply changes.
                 _this._zone.runOutsideAngular(function () {
-                    setTimeout(function () {
-                        _this._updateLatestValue(changes);
-                    }, 0);
+                    _this._updateLatestValue(changes);
+                    _this._zone.run(function () { return undefined; });
                 });
             });
         }
