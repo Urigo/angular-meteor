@@ -1,5 +1,5 @@
 <div *ngIf="!isLoading">
-  <ul *ngFor="#task of tasks">
+  <ul *ngFor="let task of tasks">
     <task [data]="task"></task>
   </ul>
 </div>
