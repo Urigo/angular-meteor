@@ -100,7 +100,7 @@ Add `index.html` file to the app root folder:
        <socially></socially>
     </body>
 ````
-At this point you should see the app working and showing "Hello word".
+At this point you should see the app working and showing "Hello World!".
 
 ### Start using Meteor in your Angular2 app:
 
