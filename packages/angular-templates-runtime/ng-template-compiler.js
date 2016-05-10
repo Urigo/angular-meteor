@@ -101,9 +101,16 @@ var minifyHtml = function(html) {
   });
 };
 
-function wrapAngularTemplate(id, contents) {
-  return "angular.module('angular-templates').run(['$templateCache', function($templateCache) { $templateCache.put('" +
-    id + "'," + JSON.stringify(contents) + ");}]);";
+function wrapAngularTemplate(templateUrl, contents) {
+  return `
+  angular.module('angular-templates')
+    .run(['$templateCache', function($templateCache) {
+      $templateCache.put('${templateUrl}', ${JSON.stringify(contents)});
+    }]);
+  if (typeof module !== 'undefined' && module.exports) {
+    module.exports = "${templateUrl}";
+  }
+  `;
 }
 
 StaticHtmlTagHandler.init = function(tags) {
