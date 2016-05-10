@@ -109,5 +109,20 @@ NgTemplateCompiler = class NgTemplateCompiler extends NgCachingCompiler {
       data: result,
       path: file.getPathInPackage()
     });
+
+    const packageName = file.getPackageName();
+    const packagePrefix = packageName ? `packages/${packageName}/` : '';
+    const templateUrl = packagePrefix + file.getPathInPackage();
+
+    const moduleTemplate = `
+      if (typeof exports !== 'undefined') {
+        exports.default = "${templateUrl}";
+      }
+    `;
+
+    file.addJavaScript({
+      data: moduleTemplate,
+      path: file.getPathInPackage(),
+    });
   }
 };
