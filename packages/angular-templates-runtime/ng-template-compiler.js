@@ -103,12 +103,14 @@ var minifyHtml = function(html) {
 
 function wrapAngularTemplate(templateUrl, contents) {
   return `
+  var templateUrl = "${templateUrl}";
   angular.module('angular-templates')
     .run(['$templateCache', function($templateCache) {
-      $templateCache.put('${templateUrl}', ${JSON.stringify(contents)});
+      $templateCache.put(templateUrl, ${JSON.stringify(contents)});
     }]);
-  if (typeof module !== 'undefined' && module.exports) {
-    module.exports = "${templateUrl}";
+  if (typeof exports !== 'undefined') {
+    exports.__esModule = true;
+    exports.default = templateUrl;
   }
   `;
 }
