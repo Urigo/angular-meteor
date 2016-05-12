@@ -1,4 +1,5 @@
-angular-templates@1.0.2
+angular-templates@1.0.3
+angular-templates-runtime@0.0.1
 babel-compiler@5.8.24_1
 babel-runtime@0.1.4
 base64@1.0.4
