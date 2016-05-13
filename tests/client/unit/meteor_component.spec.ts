@@ -32,7 +32,6 @@ describe('MeteorComponent', function() {
     });
 
     it('should call Meteor.subscribe with the same args', function() {
-      this.timeout(0);
       var callback = sinon.spy();
       var args = ['collection', 'foo', 'bar'];
       component.subscribe.apply(component, args.concat(callback));
@@ -45,7 +44,6 @@ describe('MeteorComponent', function() {
   });
   
   describe('MeteorComponent.call', function() {
-    this.timeout(0);
     var meteorCall;
     beforeEach(function() {
       meteorCall = sinon.stub(Meteor, 'call');
