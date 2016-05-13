@@ -15,20 +15,23 @@ describe('Meteor patching', function() {
   });
 
   afterEach(function() {
-    gZone.run.restore();
+    zoneSpy.restore();
   });
 
   describe('methods', function() {
-    let ngZoneSpy;
-    let ngZone;
-    let sandbox;
-    beforeEach(function() {
-      ngZone = global.Zone.current.fork({name: 'angular'});
-      ngZoneSpy = sinon.spy(ngZone, 'run');
-    });
-
     function testMethod(name, MeteorMethod, params) {
       describe(name, function() {
+        let ngZoneSpy;
+        let ngZone;
+        beforeEach(function() {
+          ngZone = gZone.fork({ name: 'angular' });
+          ngZoneSpy = sinon.spy(ngZone, 'run');
+        });
+
+        afterEach(function() {
+          ngZoneSpy.restore();
+        });
+
         it('callback executed in global zone', function(done) {
           let callback = () => {
             expect(zoneSpy.calledOnce).to.equal(true);
