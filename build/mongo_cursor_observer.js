@@ -1,4 +1,5 @@
 'use strict';
+var meteor_1 = require('meteor/meteor');
 var check_1 = require('meteor/check');
 var ejson_1 = require('meteor/ejson');
 var cursor_handle_1 = require('./cursor_handle');
@@ -59,7 +60,7 @@ var MongoCursorObserver = (function () {
         this._subs = [];
         this._isSubscribed = false;
         check_1.check(cursor, check_1.Match.Where(MongoCursorObserver.isCursor));
-        this._hCursor = this._startCursor(cursor);
+        this._hCursor = this._processCursor(cursor);
     }
     MongoCursorObserver.isCursor = function (cursor) {
         return cursor && !!cursor.observe;
@@ -99,7 +100,27 @@ var MongoCursorObserver = (function () {
             }
         }
     };
-    MongoCursorObserver.prototype._startCursor = function (cursor) {
+    MongoCursorObserver.prototype.destroy = function () {
+        if (this._hCursor) {
+            this._hCursor.stop();
+        }
+        this._hCursor = null;
+        this._docs = null;
+        this._added = null;
+        this._subs = null;
+    };
+    MongoCursorObserver.prototype._processCursor = function (cursor) {
+        // On the server side fetch data, don't observe.
+        if (meteor_1.Meteor.isServer) {
+            var changes = [];
+            var index = 0;
+            for (var _i = 0, _a = cursor.fetch(); _i < _a.length; _i++) {
+                var doc = _a[_i];
+                changes.push(this._addAt(doc, index++));
+            }
+            this.emit(changes);
+            return null;
+        }
         var hCurObserver = this._startCursorObserver(cursor);
         return new cursor_handle_1.CursorHandle(hCurObserver);
     };
@@ -151,15 +172,6 @@ var MongoCursorObserver = (function () {
     MongoCursorObserver.prototype._removeAt = function (index) {
         this._docs.splice(index, 1);
         return new RemoveChange(index);
-    };
-    MongoCursorObserver.prototype.destroy = function () {
-        if (this._hCursor) {
-            this._hCursor.stop();
-        }
-        this._hCursor = null;
-        this._docs = null;
-        this._added = null;
-        this._subs = null;
     };
     return MongoCursorObserver;
 }());

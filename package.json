@@ -52,10 +52,6 @@
     "typescript": "^1.7.5",
     "typings": "^0.7.7"
   },
-  "dependencies": {
-    "meteor-promise": "^0.6.3",
-    "meteor-node-stubs": "^0.2.3"
-  },
   "config": {
     "ghooks": {
       "commit-msg": "validate-commit-msg"

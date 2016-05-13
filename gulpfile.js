@@ -39,3 +39,7 @@ gulp.task("git-add", function(){
 gulp.task("build", function(callback) {
   runSequence("typings", "lint", "tsbuild", "git-add", callback);
 });
+
+gulp.task("dev-build", function(callback) {
+  runSequence("typings", "tsbuild", callback);
+});

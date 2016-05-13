@@ -4,7 +4,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var core_1 = require('@angular/core');
 var meteor_app_1 = require('./meteor_app');
 var default_iterable_differ_1 = require('@angular/core/src/change_detection/differs/default_iterable_differ');
 var async_1 = require('@angular/core/src/facade/async');
@@ -45,7 +44,7 @@ var MongoCursorDiffer = (function (_super) {
         this._moved = [];
         this._updated = [];
         this._listSize = 0;
-        this._zone = meteor_app_1.MeteorApp.ngZone() || core_1.createNgZone();
+        this._zone = meteor_app_1.MeteorApp.ngZone();
         this._obsFactory = obsFactory;
     }
     MongoCursorDiffer.prototype.forEachAddedItem = function (fn) {
@@ -78,11 +77,7 @@ var MongoCursorDiffer = (function (_super) {
             this._cursor = cursor;
             this._curObserver = this._obsFactory.create(cursor);
             this._subscription = async_1.ObservableWrapper.subscribe(this._curObserver, function (changes) {
-                // Run it outside Angular2 zone to cause running diff one more time and apply changes.
-                _this._zone.runOutsideAngular(function () {
-                    _this._updateLatestValue(changes);
-                    _this._zone.run(function () { return undefined; });
-                });
+                _this._zone.run(function () { _this._updateLatestValue(changes); });
             });
         }
         if (this._lastChanges) {

@@ -3,7 +3,7 @@ var core_1 = require('@angular/core');
 var core_2 = require('@angular/core');
 var lang_1 = require('@angular/core/src/facade/lang');
 var meteor_1 = require('meteor/meteor');
-var Promise = require('meteor-promise');
+var utils_1 = require('./utils');
 var MeteorApp = (function () {
     function MeteorApp(appRef) {
         this.appRef = appRef;
@@ -19,7 +19,10 @@ var MeteorApp = (function () {
         });
     };
     MeteorApp.bootstrap = function (component, platProviders, appProviders, providers) {
-        var platRef = core_2.createPlatform(core_2.ReflectiveInjector.resolveAndCreate(platProviders));
+        var platRef = core_1.getPlatform();
+        if (lang_1.isBlank(platRef)) {
+            platRef = core_2.createPlatform(core_2.ReflectiveInjector.resolveAndCreate(platProviders));
+        }
         appProviders = lang_1.isPresent(providers) ? [appProviders, providers] : appProviders;
         var appInjector = core_2.ReflectiveInjector.resolveAndCreate(appProviders, platRef.injector);
         var appRef = appInjector.get(core_1.ApplicationRef);
@@ -30,7 +33,7 @@ var MeteorApp = (function () {
     };
     MeteorApp.ngZone = function () {
         var app = MeteorApp.current();
-        return app && app.ngZone;
+        return app ? app.ngZone : utils_1.g.Zone.current;
     };
     Object.defineProperty(MeteorApp.prototype, "ngZone", {
         get: function () {

@@ -62,7 +62,7 @@ export class MongoCursorObserver {
   constructor(cursor: Mongo.Cursor<any>) {
     check(cursor, Match.Where(MongoCursorObserver.isCursor));
 
-    this._hCursor = this._startCursor(cursor);
+    this._hCursor = this._processCursor(cursor);
   }
 
   get lastChanges() {
@@ -100,12 +100,34 @@ export class MongoCursorObserver {
     }
   }
 
-  _startCursor(cursor: Mongo.Cursor<any>): CursorHandle {
+  destroy() {
+    if (this._hCursor) {
+      this._hCursor.stop();
+    }
+
+    this._hCursor = null;
+    this._docs = null;
+    this._added = null;
+    this._subs = null;
+  }
+
+  private _processCursor(cursor: Mongo.Cursor<any>): CursorHandle {
+    // On the server side fetch data, don't observe.
+    if (Meteor.isServer) {
+      let changes = [];
+      let index = 0;
+      for (let doc of cursor.fetch()) {
+        changes.push(this._addAt(doc, index++));
+      }
+      this.emit(changes);
+      return null;
+    }
+
     let hCurObserver = this._startCursorObserver(cursor);
     return new CursorHandle(hCurObserver);
   }
 
-  _startCursorObserver(cursor: Mongo.Cursor<any>): Meteor.LiveQueryHandle {
+  private _startCursorObserver(cursor: Mongo.Cursor<any>): Meteor.LiveQueryHandle {
     let self = this;
     return cursor.observe({
       addedAt: function(doc, index) {
@@ -137,11 +159,11 @@ export class MongoCursorObserver {
     });
   }
 
-  _updateAt(doc, index) {
+  private _updateAt(doc, index) {
     return new UpdateChange(index, doc);
   }
 
-  _addAt(doc, index) {
+  private _addAt(doc, index) {
     this._docs.splice(index, 0, doc);
     let change = new AddChange(index, doc);
     if (!this._isSubscribed) {
@@ -150,25 +172,14 @@ export class MongoCursorObserver {
     return change;
   }
 
-  _moveTo(doc, fromIndex, toIndex) {
+  private _moveTo(doc, fromIndex, toIndex) {
     this._docs.splice(fromIndex, 1);
     this._docs.splice(toIndex, 0, doc);
     return new MoveChange(fromIndex, toIndex);
   }
 
-  _removeAt(index) {
+  private _removeAt(index) {
     this._docs.splice(index, 1);
     return new RemoveChange(index);
-  }
-
-  destroy() {
-    if (this._hCursor) {
-      this._hCursor.stop();
-    }
-
-    this._hCursor = null;
-    this._docs = null;
-    this._added = null;
-    this._subs = null;
   }
 }

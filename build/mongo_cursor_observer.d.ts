@@ -1,6 +1,4 @@
-import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
-import { CursorHandle } from './cursor_handle';
 export declare class AddChange {
     index: number;
     item: any;
@@ -52,11 +50,11 @@ export declare class MongoCursorObserver {
         complete: any;
     }): Subscription;
     emit(value: any): void;
-    _startCursor(cursor: Mongo.Cursor<any>): CursorHandle;
-    _startCursorObserver(cursor: Mongo.Cursor<any>): Meteor.LiveQueryHandle;
-    _updateAt(doc: any, index: any): UpdateChange;
-    _addAt(doc: any, index: any): AddChange;
-    _moveTo(doc: any, fromIndex: any, toIndex: any): MoveChange;
-    _removeAt(index: any): RemoveChange;
     destroy(): void;
+    private _processCursor(cursor);
+    private _startCursorObserver(cursor);
+    private _updateAt(doc, index);
+    private _addAt(doc, index);
+    private _moveTo(doc, fromIndex, toIndex);
+    private _removeAt(index);
 }
