@@ -9,7 +9,6 @@ const expect = chai.expect;
 describe('Meteor patching', function() {
   var gZone = global.Zone.current;
   var zoneSpy;
-  let ngZoneSpy;
 
   beforeEach(function() {
     zoneSpy = sinon.spy(gZone, 'run');

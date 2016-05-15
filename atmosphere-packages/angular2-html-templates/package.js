@@ -27,7 +27,8 @@ Package.onUse(function(api) {
     'compilers/html_compiler.js'
   ], 'server');
 
-  api.export(['HtmlCompiler'], 'server'); // Export in order to provide other packages the ability to register the build plugin
+  // Export in order to provide other packages the ability to register the build plugin.
+  api.export(['HtmlCompiler'], 'server');
 });
 
 Package.onTest(function(api) {

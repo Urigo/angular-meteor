@@ -27,9 +27,9 @@ Package.onUse(function(api) {
   // These packages are required by Angular2-Meteor NPM.
   // Make sure we have them in this package.
   api.imply([
-    'barbatus:typescript@0.2.8',
+    'barbatus:typescript@0.3.1',
     'check@1.1.0',
-    'tracker@1.0.9',
+    'tracker@1.0.13',
     'underscore@1.0.4',
     'ejson'
   ]);
