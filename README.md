@@ -82,8 +82,8 @@ ES6 modules are supported via CommonsJS (introduced in Meteor 1.3) module loader
 
 To start, create `client/app.ts` file, import `Component` and then bootstrap the app:
 ````ts
-    import {Component} from 'angular2/core';
-    import {bootstrap} from 'angular2/bootstrap';
+    import {Component} from '@angular/core';
+    import {bootstrap} from '@angular/platform-browser-dynamic';
 
     @Component({
       selector: 'socially',
@@ -142,7 +142,7 @@ At this moment, you are ready to create awesome apps backed by the power of Angu
 To use Meteor features, make sure that your components extends `MeteorComponent`:
 
 ````ts
-    import {Component} from 'angular2/core';
+    import {Component} from '@angular/core';
     import {bootstrap} from 'angular2-meteor-auto-bootstrap';
     import {MeteorComponent} from 'angular2-meteor';
     import {MyCollection} form '../model/my-collection.ts';
