@@ -9,6 +9,11 @@ import {g} from './utils';
 
 export type Providers = Array<Type | Provider | any[]>;
 
+/**
+ * To be used to access current Angular2 zone and 
+ * ApplicationRef instances in any place of Meteor environment,
+ * i.e., where deps injection is not available.
+ */
 export class MeteorApp {
   private static ENV: Meteor.EnvironmentVariable = new Meteor.EnvironmentVariable();
 

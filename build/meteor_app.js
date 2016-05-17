@@ -4,6 +4,11 @@ var core_2 = require('@angular/core');
 var lang_1 = require('@angular/core/src/facade/lang');
 var meteor_1 = require('meteor/meteor');
 var utils_1 = require('./utils');
+/**
+ * To be used to access current Angular2 zone and
+ * ApplicationRef instances in any place of Meteor environment,
+ * i.e., where deps injection is not available.
+ */
 var MeteorApp = (function () {
     function MeteorApp(appRef) {
         this.appRef = appRef;

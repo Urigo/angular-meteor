@@ -1,6 +1,11 @@
 import { ApplicationRef, NgZone, Type, Provider } from '@angular/core';
 import { ComponentRef } from '@angular/core';
 export declare type Providers = Array<Type | Provider | any[]>;
+/**
+ * To be used to access current Angular2 zone and
+ * ApplicationRef instances in any place of Meteor environment,
+ * i.e., where deps injection is not available.
+ */
 export declare class MeteorApp {
     appRef: ApplicationRef;
     private static ENV;
