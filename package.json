@@ -1,6 +1,6 @@
 {
   "name": "angular-meteor",
-  "version": "1.3.10",
+  "version": "1.3.11-rc.1",
   "main": "dist/angular-meteor.js",
   "description": "Combining the simplicity and power of AngularJS and Meteor",
   "keywords": [
