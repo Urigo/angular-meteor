@@ -1,3 +1,7 @@
+## Import template url
+
+* In the new version of `angular-templates` (1.0.3) you can import the template url with an import statement - you can read about it [here](http://www.angular-meteor.com/api/1.3.11/templates).
+
 <a name="1.3.10"></a>
 ## [1.3.10](https://github.com/Urigo/angular-meteor/compare/1.3.9...v1.3.10) (2016-04-11)
 
