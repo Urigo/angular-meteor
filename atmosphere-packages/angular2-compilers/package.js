@@ -14,7 +14,8 @@ Package.registerBuildPlugin({
   use: [
     // Uses an external packages to get the actual compilers
     'ecmascript@0.1.6',
-    'angular2-html-templates@0.5.3'
+    'angular2-html-templates@0.5.3',
+    'angular2-css@0.1.0'
   ]
 });
 
@@ -23,6 +24,7 @@ Package.onUse(function(api) {
 
   // Required in order to register plugins
   api.use('isobuild:compiler-plugin@1.0.0');
+  api.use('isobuild:linter-plugin@1.0.0');
 
   // These packages are required by Angular2-Meteor NPM.
   // Make sure we have them in this package.

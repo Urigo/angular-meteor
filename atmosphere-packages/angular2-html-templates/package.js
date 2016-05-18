@@ -11,13 +11,14 @@ Npm.depends({
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.2.1');
+  api.versionsFrom('1.3');
 
   api.use([
     'caching-compiler@1.0.0',
-    'ecmascript@0.1.6',
-    'underscore@1.0.4',
-    'check@1.0.5'
+    'ecmascript@0.4.3',
+    'underscore@1.0.8',
+    'check@1.2.1',
+    'babel-compiler@6.6.4'
   ]);
 
   api.addFiles([
@@ -27,7 +28,6 @@ Package.onUse(function(api) {
     'compilers/html_compiler.js'
   ], 'server');
 
-  // Export in order to provide other packages the ability to register the build plugin.
   api.export(['HtmlCompiler'], 'server');
 });
 

@@ -31,7 +31,7 @@ gulp.task("lint", function() {
       .pipe(tslint.report("prose", {emitError: true}));
 });
 
-gulp.task("git-add", function(){
+gulp.task("git-add", function() {
   return gulp.src("build/*")
     .pipe(git.add());
 });
