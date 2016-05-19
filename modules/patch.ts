@@ -11,9 +11,7 @@
  */
 
 import {noop, isPresent} from '@angular/core/src/facade/lang';
-import {Meteor} from 'meteor/meteor';
-import {Tracker} from 'meteor/tracker';
-import {Mongo} from 'meteor/mongo';
+
 import {isMeteorCallbacks, g, gZone, Zone} from './utils';
 
 let tHandler = null;

@@ -1,10 +1,13 @@
 'use strict';
 
 import {ApplicationRef, NgZone, Type, Provider, getPlatform} from '@angular/core';
-import {ComponentRef, createPlatform, ReflectiveInjector,
-  coreLoadAndBootstrap} from '@angular/core';
+import {
+  ComponentRef,
+  createPlatform,
+  ReflectiveInjector,
+  coreLoadAndBootstrap
+} from '@angular/core';
 import {isPresent, isBlank} from '@angular/core/src/facade/lang';
-import {Meteor} from 'meteor/meteor';
 import {g} from './utils';
 
 export type Providers = Array<Type | Provider | any[]>;

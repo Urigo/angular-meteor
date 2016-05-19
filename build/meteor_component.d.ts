@@ -1,6 +1,4 @@
 import { OnDestroy } from '@angular/core';
-import { Meteor } from 'meteor/meteor';
-import { Tracker } from 'meteor/tracker';
 export declare class MeteorComponent implements OnDestroy {
     private _hAutoruns;
     private _hSubscribes;

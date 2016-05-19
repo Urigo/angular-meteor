@@ -10,9 +10,12 @@
     "zone.js": "^0.6.12",
     "reflect-metadata": "0.1.2",
     "rxjs": "5.0.0-beta.6",
-    "angular2-meteor": "file:.."
+    "angular2-meteor": "file:..",
+    "meteor-node-stubs": "0.2.3",
+    "angular2-meteor-auto-bootstrap": "https://github.com/Urigo/angular2-meteor-auto-bootstrap"
   },
   "devDependencies": {
-    "linklocal": "^2.6.0" 
+    "linklocal": "^2.6.0",
+    "faker": "^3.0.1"
   }
 }

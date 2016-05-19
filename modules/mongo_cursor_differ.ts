@@ -1,7 +1,6 @@
 'use strict';
 
 import {ChangeDetectorRef} from '@angular/core';
-import {Mongo} from 'meteor/mongo';
 
 import {MeteorApp} from './meteor_app';
 

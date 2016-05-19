@@ -1,7 +1,4 @@
 'use strict';
-var meteor_1 = require('meteor/meteor');
-var check_1 = require('meteor/check');
-var ejson_1 = require('meteor/ejson');
 var cursor_handle_1 = require('./cursor_handle');
 var AddChange = (function () {
     function AddChange(index, item) {
@@ -59,7 +56,7 @@ var MongoCursorObserver = (function () {
         this._lastChanges = [];
         this._subs = [];
         this._isSubscribed = false;
-        check_1.check(cursor, check_1.Match.Where(MongoCursorObserver.isCursor));
+        check(cursor, Match.Where(MongoCursorObserver.isCursor));
         this._hCursor = this._processCursor(cursor);
     }
     MongoCursorObserver.isCursor = function (cursor) {
@@ -111,7 +108,7 @@ var MongoCursorObserver = (function () {
     };
     MongoCursorObserver.prototype._processCursor = function (cursor) {
         // On the server side fetch data, don't observe.
-        if (meteor_1.Meteor.isServer) {
+        if (Meteor.isServer) {
             var changes = [];
             var index = 0;
             for (var _i = 0, _a = cursor.fetch(); _i < _a.length; _i++) {
@@ -134,7 +131,7 @@ var MongoCursorObserver = (function () {
             changedAt: function (nDoc, oDoc, index) {
                 var doc = self._docs[index];
                 var mDoc = nDoc;
-                if (ejson_1.EJSON.equals(doc._id, mDoc._id)) {
+                if (EJSON.equals(doc._id, mDoc._id)) {
                     Object.assign(self._docs[index], mDoc);
                 }
                 else {

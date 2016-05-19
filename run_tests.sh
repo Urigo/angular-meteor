@@ -7,3 +7,4 @@ mv -f node_modules .node_modules
 cd tests
 linklocal
 meteor test --driver-package=avital:mocha
+#meteor test --full-app --driver-package practicalmeteor:mocha

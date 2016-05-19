@@ -1,4 +1,3 @@
-import { Mongo } from 'meteor/mongo';
 export declare class AddChange {
     index: number;
     item: any;

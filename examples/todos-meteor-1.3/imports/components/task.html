@@ -4,7 +4,7 @@
   <input type="checkbox" #cb
     [ngModel]="task.checked"
     (change)="setChecked(cb.checked)"
-    class="toggle-checked" />
+    class='toggle-checked' />
 
   <button class="toggle-private" (click)="setAccess()">
     {{task.private ? "Private" : "Public"}}

@@ -9,9 +9,6 @@
  * since multiple callbacks can be run near the same time.
  */
 var lang_1 = require('@angular/core/src/facade/lang');
-var meteor_1 = require('meteor/meteor');
-var tracker_1 = require('meteor/tracker');
-var mongo_1 = require('meteor/mongo');
 var utils_1 = require('./utils');
 var tHandler = null;
 var zones = [];
@@ -66,11 +63,11 @@ function wrapCallback(callback, context) {
     return callback;
 }
 // Save original methods.
-var trackerAutorun = tracker_1.Tracker.autorun;
-var meteorSubscribe = meteor_1.Meteor.subscribe;
-var meteorCall = meteor_1.Meteor.call;
-var mongoObserve = mongo_1.Mongo.Cursor.prototype.observe;
-var mongoObserveChanges = mongo_1.Mongo.Cursor.prototype.observeChanges;
+var trackerAutorun = Tracker.autorun;
+var meteorSubscribe = Meteor.subscribe;
+var meteorCall = Meteor.call;
+var mongoObserve = Mongo.Cursor.prototype.observe;
+var mongoObserveChanges = Mongo.Cursor.prototype.observeChanges;
 function patchTrackerAutorun(autorun) {
     return function (runFunc, options) {
         runFunc = wrapCallback(runFunc, this);
@@ -125,20 +122,20 @@ function patchCursorObserveChanges(observeChanges) {
 }
 exports.patchCursorObserveChanges = patchCursorObserveChanges;
 function patchMeteor() {
-    tracker_1.Tracker.autorun = patchTrackerAutorun(tracker_1.Tracker.autorun);
-    meteor_1.Meteor.subscribe = patchMeteorSubscribe(meteor_1.Meteor.subscribe);
-    meteor_1.Meteor.call = patchMeteorCall(meteor_1.Meteor.call);
-    mongo_1.Mongo.Cursor.prototype.observe = patchCursorObserve(mongo_1.Mongo.Cursor.prototype.observe);
-    mongo_1.Mongo.Cursor.prototype.observeChanges = patchCursorObserveChanges(mongo_1.Mongo.Cursor.prototype.observeChanges);
+    Tracker.autorun = patchTrackerAutorun(Tracker.autorun);
+    Meteor.subscribe = patchMeteorSubscribe(Meteor.subscribe);
+    Meteor.call = patchMeteorCall(Meteor.call);
+    Mongo.Cursor.prototype.observe = patchCursorObserve(Mongo.Cursor.prototype.observe);
+    Mongo.Cursor.prototype.observeChanges = patchCursorObserveChanges(Mongo.Cursor.prototype.observeChanges);
 }
 exports.patchMeteor = patchMeteor;
 ;
 function unpatchMeteor() {
-    tracker_1.Tracker.autorun = trackerAutorun;
-    meteor_1.Meteor.subscribe = meteorSubscribe;
-    meteor_1.Meteor.call = meteorCall;
-    mongo_1.Mongo.Cursor.prototype.observe = mongoObserve;
-    mongo_1.Mongo.Cursor.prototype.observeChanges = mongoObserveChanges;
+    Tracker.autorun = trackerAutorun;
+    Meteor.subscribe = meteorSubscribe;
+    Meteor.call = meteorCall;
+    Mongo.Cursor.prototype.observe = mongoObserve;
+    Mongo.Cursor.prototype.observeChanges = mongoObserveChanges;
 }
 exports.unpatchMeteor = unpatchMeteor;
 ;

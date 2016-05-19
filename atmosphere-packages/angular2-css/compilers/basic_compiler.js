@@ -27,8 +27,13 @@ BasicCompiler = class BasicCompiler {
       path: cssPath
     });
 
-    // Or imported via:
-    // import style from 'path/to/style.css'
+    // Export current template as a JS-module, which
+    // means constructions as follows now make sense:
+    //   import style from 'path/to/style.css'
+    //
+    // JS-module is being added as 'lazy', which
+    // means it'll appear on the client only if it's
+    // explicitly imported somewhere in the code base.
     let css = Babel.compile(`
       const css = \`${result.css}\`;
       exports.default = css;`

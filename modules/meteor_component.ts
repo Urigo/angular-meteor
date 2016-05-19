@@ -1,8 +1,6 @@
 'use strict';
 
 import {OnDestroy} from '@angular/core';
-import {Meteor} from 'meteor/meteor';
-import {Tracker} from 'meteor/tracker';
 
 import {isMeteorCallbacks, isCallbacksObject} from './utils';
 import {PromiseQ} from './promise_q';

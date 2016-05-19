@@ -1,6 +1,4 @@
 'use strict';
-var meteor_1 = require('meteor/meteor');
-var tracker_1 = require('meteor/tracker');
 var utils_1 = require('./utils');
 var promise_q_1 = require('./promise_q');
 var MeteorComponent = (function () {
@@ -9,7 +7,7 @@ var MeteorComponent = (function () {
         this._hSubscribes = [];
     }
     MeteorComponent.prototype.autorun = function (func) {
-        var hAutorun = tracker_1.Tracker.autorun(func);
+        var hAutorun = Tracker.autorun(func);
         this._hAutoruns.push(hAutorun);
         return hAutorun;
     };
@@ -23,16 +21,16 @@ var MeteorComponent = (function () {
             args[_i - 1] = arguments[_i];
         }
         var subArgs = this._prepArgs(args);
-        if (!meteor_1.Meteor.subscribe) {
+        if (!Meteor.subscribe) {
             throw new Error('Meteor.subscribe is not defined on the server side');
         }
         ;
-        var hSubscribe = meteor_1.Meteor.subscribe.apply(meteor_1.Meteor, [name].concat(subArgs));
-        if (meteor_1.Meteor.isClient) {
+        var hSubscribe = Meteor.subscribe.apply(Meteor, [name].concat(subArgs));
+        if (Meteor.isClient) {
             this._hSubscribes.push(hSubscribe);
         }
         ;
-        if (meteor_1.Meteor.isServer) {
+        if (Meteor.isServer) {
             var callback = subArgs[subArgs.length - 1];
             if (_.isFunction(callback)) {
                 callback();
@@ -49,7 +47,7 @@ var MeteorComponent = (function () {
             args[_i - 1] = arguments[_i];
         }
         var callArgs = this._prepArgs(args);
-        return meteor_1.Meteor.call.apply(meteor_1.Meteor, [name].concat(callArgs));
+        return Meteor.call.apply(Meteor, [name].concat(callArgs));
     };
     MeteorComponent.prototype.ngOnDestroy = function () {
         for (var _i = 0, _a = this._hAutoruns; _i < _a.length; _i++) {

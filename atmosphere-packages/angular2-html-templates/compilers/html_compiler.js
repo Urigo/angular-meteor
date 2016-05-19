@@ -105,20 +105,13 @@ NgTemplateCompiler = class NgTemplateCompiler extends NgCachingCompiler {
       path: htmlPath
     });
 
-    // Export current template as a JS-module, which
-    // means constructions as follows now make sense:
-    //   import template from 'path/to/template.html'
-    //
-    // JS-module is being added as 'lazy', which
-    // means it'll appear on the client only if it's
-    // explicitly imported somewhere in the code base.
-    let template = Babel.compile(`
-      const html = \`${result}\`;
-      exports.default = html;`
-    );
+    // Export template URL in JS-module.
+    // Issue - 275#issuecomment-220114345
+    let templateUrl =
+      `exports.default = '/${htmlPath}';`
 
     file.addJavaScript({
-      data: template.code,
+      data: templateUrl,
       path: htmlPath,
       lazy: true
     });

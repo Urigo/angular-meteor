@@ -2,7 +2,6 @@
 var core_1 = require('@angular/core');
 var core_2 = require('@angular/core');
 var lang_1 = require('@angular/core/src/facade/lang');
-var meteor_1 = require('meteor/meteor');
 var utils_1 = require('./utils');
 /**
  * To be used to access current Angular2 zone and
@@ -16,7 +15,7 @@ var MeteorApp = (function () {
     MeteorApp.launch = function (appRef, bootstrap) {
         var newApp = new MeteorApp(appRef);
         return new Promise(function (resolve, reject) {
-            meteor_1.Meteor.startup(function () {
+            Meteor.startup(function () {
                 MeteorApp.ENV.withValue(newApp, function () {
                     bootstrap().then(resolve, reject);
                 });
@@ -47,7 +46,7 @@ var MeteorApp = (function () {
         enumerable: true,
         configurable: true
     });
-    MeteorApp.ENV = new meteor_1.Meteor.EnvironmentVariable();
+    MeteorApp.ENV = new Meteor.EnvironmentVariable();
     return MeteorApp;
 }());
 exports.MeteorApp = MeteorApp;

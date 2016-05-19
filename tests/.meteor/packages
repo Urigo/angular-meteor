@@ -19,7 +19,9 @@ ecmascript              # Enable ECMAScript2015+ syntax in app code
 insecure                # Allow all DB writes from clients (for prototyping)
 angular2-compilers
 barbatus:angular2-runtime
-avital:mocha
+practicalmeteor:mocha@2.1.1-rc.1
 practicalmeteor:sinon
 practicalmeteor:chai
 dispatch:mocha-phantomjs
+dburles:factory
+xolvio:cleaner
