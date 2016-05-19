@@ -7,33 +7,32 @@ Processes styles and makes them accessible in the ways styles are used in Angula
 
 ### Usage
 
-If a style is placed in the `client` folder, it'll be processed as 
-a regular Meteor style file, i.e., bundled together with other files.
+If a style file is placed in the `client` folder, it'll be processed as 
+a regular Meteor style file, i.e., bundled together with other style files.
 
-But if it's placed in the `imports` folder of your app, there become available
-two other ways to ass styles to a Angular2 component.
+But if it's placed in the `imports` folder of your app, then there become available
+two other ways to access styles for a Angular 2 component.
 
- - One way is to access them by URL using `styleUrls` property.
-   If you a component named Foo, and you want it to download own styles file
-   `./foo.less` (i.e., placed in the same folder with component),
-   then the following snippet will do it:
+ - One way is to access them via URL using `styleUrls` property.
+   If there is a component named Foo, and you want it to download own styles file
+   `./foo.less` (i.e., placed in the same folder with component) from the server,
+   then the following snippet will do the job:
 
-  ```ts
+   ```ts
 
     @Component({
       selector: 'foo',
       styleUrls: ['imports/foo.less.css']
     })
     class Foo {
-
     }
 
-  ```
+   ```
   
-  - Another way is to have styles delivered to the client along with the component itself.
-    In this way, you'll need to use `styles` property, i.e.:
+ - Another way is to have styles delivered to the client along with the component itself.
+   In this way, you'll need to import the style file explicitly and use `styles` property, i.e.:
 
-  ```ts
+   ```ts
 
     import style from `./foo.less.css`
 
@@ -42,7 +41,11 @@ two other ways to ass styles to a Angular2 component.
       styles: [style]
     })
     class Foo {
-
     }
 
-  ```
+   ```
+  
+### Examples
+ 
+Check out [TODO demo](https://github.com/Urigo/angular2-meteor/tree/master/examples/todos-meteor-1.3) and its `imports` folder particularly for more info.
+ 
