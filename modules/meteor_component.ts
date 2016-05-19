@@ -2,8 +2,10 @@
 
 import {OnDestroy} from '@angular/core';
 
+import {noop} from '@angular/core/src/facade/lang';
+
 import {isMeteorCallbacks, isCallbacksObject} from './utils';
-import {PromiseQ} from './promise_q';
+import {DataObserver} from './data_observer';
 
 export class MeteorComponent implements OnDestroy {
   private _hAutoruns: Array<Tracker.Computation> = [];
@@ -79,8 +81,11 @@ export class MeteorComponent implements OnDestroy {
 
     lastParam = args[args.length - 1];
     if (isMeteorCallbacks(lastParam)) {
-      args[args.length - 1] = PromiseQ.wrapPush(lastParam);
+      args[args.length - 1] = DataObserver.pushCb(lastParam);
+    } else {
+      args.push(DataObserver.pushCb(noop));
     }
+
 
     return args;
   }

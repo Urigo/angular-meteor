@@ -9,10 +9,10 @@ import {
   isCallbacksObject
 } from './utils';
 
-export class PromiseQ {
+export class DataObserver {
   private static _promises: Array<Promise<any>> = [];
 
-  static wrapPush(callbacks: MeteorCallbacks): MeteorCallbacks {
+  static pushCb(callbacks: MeteorCallbacks): MeteorCallbacks {
     check(callbacks, Match.Where(isMeteorCallbacks));
 
     const completer: PromiseCompleter<any> = PromiseWrapper.completer();
@@ -65,11 +65,10 @@ export class PromiseQ {
     return newCallback;
   }
 
-  static onAll(resolve): void {
+  static onReady(resolve): void {
     Promise.all(this._promises).then(resolve);
   }
-
-  static len(): number {
+  static cbLen(): number {
     return this._promises.length;
   }
 }

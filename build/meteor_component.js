@@ -1,6 +1,7 @@
 'use strict';
+var lang_1 = require('@angular/core/src/facade/lang');
 var utils_1 = require('./utils');
-var promise_q_1 = require('./promise_q');
+var data_observer_1 = require('./data_observer');
 var MeteorComponent = (function () {
     function MeteorComponent() {
         this._hAutoruns = [];
@@ -71,7 +72,10 @@ var MeteorComponent = (function () {
         }
         lastParam = args[args.length - 1];
         if (utils_1.isMeteorCallbacks(lastParam)) {
-            args[args.length - 1] = promise_q_1.PromiseQ.wrapPush(lastParam);
+            args[args.length - 1] = data_observer_1.DataObserver.pushCb(lastParam);
+        }
+        else {
+            args.push(data_observer_1.DataObserver.pushCb(lang_1.noop));
         }
         return args;
     };

@@ -39,11 +39,7 @@ If you've decided that it's likely a real issue, please consider going through t
 
 ### Install package:
 
-Before installing any Angular2-Meteor's NPMs, we recommend to have Angular 2 NPM and 
-its peer dependencies added in your `package.json`. You can find such a list [here](https://github.com/Urigo/angular2-meteor/blob/master/package.json#L28).
-It minimizes the chance to get "unmet peer dependency" warnings in the future package updates.
-
-After that, you are ready to install Angular2-Meteor's NPMs:
+To install Angular2-Meteor's NPMs:
 ````
     npm install angular2-meteor --save
     npm install angular2-meteor-auto-bootstrap --save

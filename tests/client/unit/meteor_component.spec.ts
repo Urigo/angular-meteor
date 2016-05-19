@@ -1,5 +1,5 @@
 import * as ngCore from '@angular/core';
-import {MeteorComponent, PromiseQ} from 'angular2-meteor';
+import {MeteorComponent, DataObserver} from 'angular2-meteor';
 import {chai} from 'meteor/practicalmeteor:chai';
 import {sinon} from 'meteor/practicalmeteor:sinon';
 
@@ -7,12 +7,16 @@ const should = chai.should();
 const expect = chai.expect;
 
 describe('MeteorComponent', function() {
-  var component;
-  var zoneSpy;
+  let component;
+  let zoneSpy;
 
   beforeEach(function() {
     component = new MeteorComponent();
-    PromiseQ.wrapPush = cb => cb;
+    sinon.stub(DataObserver, 'pushCb').returnsArg(0);
+  });
+
+  afterEach(() => {
+    DataObserver.pushCb.restore();
   });
 
   describe('implements', function() {
