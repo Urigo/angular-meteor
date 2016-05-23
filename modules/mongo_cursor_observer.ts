@@ -42,6 +42,11 @@ declare interface MongoItem {
   _id: EJSONable;
 }
 
+/**
+ * Class that does a background work of observing
+ * Mongo collection changes (through a cursor)
+ * and notifying subscribers about them.
+ */
 export class MongoCursorObserver {
   private _docs: Array<MongoItem> = [];
   private _added: Array<AddChange> = [];

@@ -7,6 +7,13 @@ import {noop} from '@angular/core/src/facade/lang';
 import {isMeteorCallbacks, isCallbacksObject} from './utils';
 import {DataObserver} from './data_observer';
 
+/**
+ * A class to extend in Angular 2 components.
+ * Contains wrappers over main Meteor methods,
+ * that does some maintenance work behind the scene.
+ * For example, it destroys subscription handles
+ * when the component is being destroyed itself.
+ */
 export class MeteorComponent implements OnDestroy {
   private _hAutoruns: Array<Tracker.Computation> = [];
   private _hSubscribes: Array<Meteor.SubscriptionHandle> = [];
@@ -81,6 +88,9 @@ export class MeteorComponent implements OnDestroy {
 
     lastParam = args[args.length - 1];
     if (isMeteorCallbacks(lastParam)) {
+      // Push callback to the observer, so
+      // that we can use onReady to know when
+      // data is loaded. 
       args[args.length - 1] = DataObserver.pushCb(lastParam);
     } else {
       args.push(DataObserver.pushCb(noop));

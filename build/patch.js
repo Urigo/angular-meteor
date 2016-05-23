@@ -10,37 +10,68 @@
  */
 var lang_1 = require('@angular/core/src/facade/lang');
 var utils_1 = require('./utils');
-var tHandler = null;
-var zones = [];
-var runZonesTask = null;
-function runZones() {
-    for (var _i = 0, zones_1 = zones; _i < zones_1.length; _i++) {
-        var zone = zones_1[_i];
-        zone.run(lang_1.noop);
+var ZoneRunScheduler = (function () {
+    function ZoneRunScheduler() {
+        this._zoneTasks = new Map();
+        this._onRunCbs = new Map();
     }
-    zones = [];
-}
-exports.runZones = runZones;
-function saveZone() {
-    if (utils_1.g.Zone.current !== utils_1.gZone &&
-        zones.indexOf(utils_1.g.Zone.current) === -1) {
-        zones.push(utils_1.g.Zone.current);
-    }
-}
-function scheduleZonesRun() {
-    if (runZonesTask) {
-        runZonesTask.cancelFn();
-        runZonesTask = null;
-    }
-    runZonesTask = utils_1.gZone.scheduleMacroTask('runZones', runZones, null, function (task) {
-        tHandler = setTimeout(task.invoke);
-    }, function () {
-        clearTimeout(tHandler);
-        runZonesTask = null;
-    });
-}
+    ZoneRunScheduler.prototype.zoneRun = function (zone) {
+        var _this = this;
+        return function () {
+            zone.run(lang_1.noop);
+            _this._runAfterRunCbs(zone);
+            _this._zoneTasks.delete(zone);
+        };
+    };
+    ZoneRunScheduler.prototype.runZones = function () {
+        this._zoneTasks.forEach(function (task, zone) {
+            task.invoke();
+        });
+    };
+    ZoneRunScheduler.prototype._runAfterRunCbs = function (zone) {
+        if (this._onRunCbs.has(zone)) {
+            var cbs = this._onRunCbs.get(zone);
+            while (cbs.length !== 0) {
+                (cbs.pop())();
+            }
+            this._onRunCbs.delete(zone);
+        }
+    };
+    ZoneRunScheduler.prototype.scheduleRun = function (zone) {
+        if (zone === utils_1.gZone) {
+            return;
+        }
+        var runTask = this._zoneTasks.get(zone);
+        if (runTask) {
+            runTask.cancelFn(runTask);
+            this._zoneTasks.delete(zone);
+        }
+        runTask = utils_1.gZone.scheduleMacroTask('runZones', this.zoneRun(zone), zone, function (task) {
+            task._tHandler = setTimeout(task.invoke);
+        }, function (task) {
+            clearTimeout(task._tHandler);
+        });
+        this._zoneTasks.set(zone, runTask);
+    };
+    ZoneRunScheduler.prototype.onAfterRun = function (zone, cb) {
+        check(cb, Function);
+        if (!this._zoneTasks.has(zone)) {
+            cb();
+            return;
+        }
+        var cbs = this._onRunCbs.get(zone);
+        if (!cbs) {
+            cbs = [];
+            this._onRunCbs.set(zone, cbs);
+        }
+        cbs.push(cb);
+    };
+    return ZoneRunScheduler;
+}());
+exports.ZoneRunScheduler = ZoneRunScheduler;
+exports.zoneRunScheduler = new ZoneRunScheduler();
 function wrapInZone(method, context) {
-    saveZone();
+    var zone = utils_1.g.Zone.current;
     return function () {
         var args = [];
         for (var _i = 0; _i < arguments.length; _i++) {
@@ -49,7 +80,7 @@ function wrapInZone(method, context) {
         utils_1.gZone.run(function () {
             method.apply(context, args);
         });
-        scheduleZonesRun();
+        exports.zoneRunScheduler.scheduleRun(zone);
     };
 }
 function wrapCallback(callback, context) {

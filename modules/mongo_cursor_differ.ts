@@ -2,8 +2,6 @@
 
 import {ChangeDetectorRef} from '@angular/core';
 
-import {MeteorApp} from './meteor_app';
-
 import {
   DefaultIterableDifferFactory,
   CollectionChangeRecord,
@@ -47,6 +45,12 @@ export class MongoCursorDifferFactory extends DefaultIterableDifferFactory {
 
 const trackById = (index, item) => item._id;
 
+
+/**
+ * A class that implements Angular 2's concept of differs for ngFor.
+ * API consists mainly of diff method and methods like forEachAddedItem
+ * that is being run on each change detection cycle to apply new changes if any.
+ */
 export class MongoCursorDiffer extends DefaultIterableDiffer {
   private _inserted: Array<CollectionChangeRecord> = [];
   private _removed: Array<CollectionChangeRecord> = [];
@@ -58,7 +62,7 @@ export class MongoCursorDiffer extends DefaultIterableDiffer {
   private _cursor: Mongo.Cursor<any>;
   private _obsFactory: ObserverFactory;
   private _subscription: Object;
-  private _zone = MeteorApp.ngZone();
+  private _zone = Zone.current;
 
   constructor(cdRef: ChangeDetectorRef, obsFactory: ObserverFactory) {
     super(trackById);

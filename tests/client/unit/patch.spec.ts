@@ -5,7 +5,7 @@ import {
   patchTrackerAutorun,
   unpatchMeteor,
   patchMeteor,
-  runZones
+  zoneRunScheduler
 } from 'angular2-meteor';
 import {chai} from 'meteor/practicalmeteor:chai';
 import {sinon} from 'meteor/practicalmeteor:sinon';
@@ -61,9 +61,10 @@ describe('Meteor patching', function() {
       function callback() {
         count++;
         if (count == 2) {
-          runZones();
-          expect(ngZoneSpy.calledTwice).to.equal(true);
-          done();
+          zoneRunScheduler.onAfterRun(ngZone, () => {
+            expect(ngZoneSpy.calledTwice).to.equal(true);
+            done();
+          });
         }
       }
 
@@ -104,9 +105,10 @@ describe('Meteor patching', function() {
       function callback() {
         count++;
         if (count == 2) {
-          runZones();
-          expect(ngZoneSpy.calledTwice).to.equal(true);
-          done();
+          zoneRunScheduler.onAfterRun(ngZone, () => {
+            expect(ngZoneSpy.calledTwice).to.equal(true);
+            done();
+          });
         }
       }
 
@@ -147,9 +149,10 @@ describe('Meteor patching', function() {
       function callback() {
         count++;
         if (count == 2) {
-          runZones();
-          expect(ngZoneSpy.calledTwice).to.equal(true);
-          done();
+          zoneRunScheduler.onAfterRun(ngZone, () => {
+            expect(ngZoneSpy.calledTwice).to.equal(true);
+            done();
+          });
         }
       }
 

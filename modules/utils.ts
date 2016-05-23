@@ -21,13 +21,6 @@ export function isCallbacksObject(callbacks: any): boolean {
   });
 };
 
-export declare interface Zone {
-  current: Zone;
-  run(f: Function): any;
-  scheduleMacroTask(name: string, callback: Function, data: any,
-    customSchedule: Function, customCancel: Function);
-};
-
 declare const global;
 export const g =
   typeof global === 'object' ? global :

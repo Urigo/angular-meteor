@@ -12,48 +12,85 @@
 
 import {noop, isPresent} from '@angular/core/src/facade/lang';
 
-import {isMeteorCallbacks, g, gZone, Zone} from './utils';
+import {isMeteorCallbacks, g, gZone} from './utils';
 
-let tHandler = null;
-let zones: Zone[] = [];
-let runZonesTask = null;
+export class ZoneRunScheduler {
+  private _zoneTasks = new Map<Zone, Task>();
+  private _onRunCbs = new Map<Zone, Function[]>();
 
-export function runZones() {
-  for (let zone of zones) {
-    zone.run(noop);
-  }
-  zones = [];
-}
-
-function saveZone() {
-  if (g.Zone.current !== gZone &&
-      zones.indexOf(g.Zone.current) === -1) {
-    zones.push(g.Zone.current);
-  }
-}
-
-function scheduleZonesRun() {
-  if (runZonesTask) {
-    runZonesTask.cancelFn();
-    runZonesTask = null;
+  zoneRun(zone: Zone): Function {
+    return () => {
+      zone.run(noop);
+      this._runAfterRunCbs(zone);
+      this._zoneTasks.delete(zone);
+    };
   }
 
-  runZonesTask = gZone.scheduleMacroTask('runZones', runZones, null,
-    task => {
-      tHandler = setTimeout(task.invoke);
-    }, () => {
-      clearTimeout(tHandler);
-      runZonesTask = null;
+  runZones() {
+    this._zoneTasks.forEach((task, zone) => {
+      task.invoke();
     });
+  }
+
+  _runAfterRunCbs(zone: Zone) {
+    if (this._onRunCbs.has(zone)) {
+      let cbs = this._onRunCbs.get(zone);
+      while (cbs.length !== 0) {
+        (cbs.pop())();
+      }
+      this._onRunCbs.delete(zone);
+    }
+  }
+
+  scheduleRun(zone: Zone) {
+    if (zone === gZone) {
+      return;
+    }
+
+    let runTask = this._zoneTasks.get(zone);
+
+    if (runTask) {
+      runTask.cancelFn(runTask);
+      this._zoneTasks.delete(zone);
+    }
+
+    runTask = gZone.scheduleMacroTask('runZones',
+      this.zoneRun(zone), zone,
+      task => {
+        task._tHandler = setTimeout(task.invoke);
+      },
+      task => {
+        clearTimeout(task._tHandler);
+      });
+    this._zoneTasks.set(zone, runTask);
+  }
+
+  onAfterRun(zone: Zone, cb: Function) {
+    check(cb, Function);
+
+    if (!this._zoneTasks.has(zone)) {
+      cb();
+      return;
+    }
+
+    let cbs = this._onRunCbs.get(zone);
+    if (!cbs) {
+      cbs = [];
+      this._onRunCbs.set(zone, cbs);
+    }
+    cbs.push(cb);
+  }
 }
+
+export const zoneRunScheduler = new ZoneRunScheduler();
 
 function wrapInZone(method: Function, context: any) {
-  saveZone();
+  let zone = g.Zone.current;
   return function(...args) {
     gZone.run(() => {
       method.apply(context, args);
     });
-    scheduleZonesRun();
+    zoneRunScheduler.scheduleRun(zone);
   };
 }
 

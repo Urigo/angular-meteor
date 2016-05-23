@@ -4,7 +4,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var meteor_app_1 = require('./meteor_app');
 var default_iterable_differ_1 = require('@angular/core/src/change_detection/differs/default_iterable_differ');
 var async_1 = require('@angular/core/src/facade/async');
 var mongo_cursor_observer_1 = require('./mongo_cursor_observer');
@@ -44,7 +43,7 @@ var MongoCursorDiffer = (function (_super) {
         this._moved = [];
         this._updated = [];
         this._listSize = 0;
-        this._zone = meteor_app_1.MeteorApp.ngZone();
+        this._zone = Zone.current;
         this._obsFactory = obsFactory;
     }
     MongoCursorDiffer.prototype.forEachAddedItem = function (fn) {

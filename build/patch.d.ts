@@ -1,4 +1,13 @@
-export declare function runZones(): void;
+export declare class ZoneRunScheduler {
+    private _zoneTasks;
+    private _onRunCbs;
+    zoneRun(zone: Zone): Function;
+    runZones(): void;
+    _runAfterRunCbs(zone: Zone): void;
+    scheduleRun(zone: Zone): void;
+    onAfterRun(zone: Zone, cb: Function): void;
+}
+export declare const zoneRunScheduler: ZoneRunScheduler;
 export declare function patchTrackerAutorun(autorun: any): (runFunc: (computation: Tracker.Computation) => void, options?: {
     onError?: Function;
 }) => Tracker.Computation;
