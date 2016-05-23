@@ -22,10 +22,7 @@ import {DataObserver} from './data_observer';
 
 export type Providers = Array<Type | Provider | any[]>;
 
-/**
- * Makes it possible to take an app instance by DOM element
- * of the main component.
- */
+// Makes it possible to take an app instance by DOM element of the main component.
 export class MeteorAppRegistry {
   private _apps = new Map<any, MeteorApp>();
 
@@ -44,10 +41,7 @@ export class MeteorAppRegistry {
 
 export let appRegistry = new MeteorAppRegistry();
 
-/**
- * Contains utility methods which
- * may be useful for the integration. 
- */
+// Contains utility methods which may be useful for the integration. 
 @Injectable()
 export class MeteorApp {
   private _appCycles: AppCycles;
@@ -119,10 +113,7 @@ export class MeteorApp {
   }
 }
 
-/**
- * To be used to detect an app's
- * change detection cycles.
- */
+// To be used to detect an Angular 2 app's change detection cycles.
 export class AppCycles {
   private _ngZone: NgZone;
   private _isZoneStable: boolean = true;

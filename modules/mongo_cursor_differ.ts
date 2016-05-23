@@ -26,6 +26,8 @@ function checkIfMongoCursor(cursor): boolean {
   return MongoCursorObserver.isCursor(cursor);
 }
 
+// Creates an MongoCursorObserver instance for a Mongo.Cursor instance.
+// Add one more level of abstraction, but currently is not really needed.
 class MongoCursorObserverFactory implements ObserverFactory {
   create(cursor: Object): Object {
     if (checkIfMongoCursor(cursor)) {
@@ -35,6 +37,10 @@ class MongoCursorObserverFactory implements ObserverFactory {
   }
 }
 
+// An instance of this factory (see providers.ts) is registered globally
+// as one of the providers of collection differs.
+// These providers are being checked by an ngFor instance to find out which
+// differ it needs to create and use for the current collection.
 export class MongoCursorDifferFactory extends DefaultIterableDifferFactory {
   supports(obj: Object): boolean { return checkIfMongoCursor(obj); }
 

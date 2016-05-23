@@ -11,10 +11,9 @@ import {
 
 /**
  * A helper class for data loading events. 
- * For example, used in @MeteorComponent
- * to wrap callbacks of the Meteor methods
- * to know when requested data is available
- * on the client.
+ * For example, used in @MeteorComponent to wrap callbacks
+ * of the Meteor methods whic allows us to know when
+ * requested data is available on the client.
  */
 export class DataObserver {
   private static _promises: Array<Promise<any>> = [];
