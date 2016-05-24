@@ -5,18 +5,13 @@ export declare class MeteorAppRegistry {
     private _apps;
     register(token: Element, app: MeteorApp): void;
     unregister(token: Element): void;
-    get(token: any): MeteorApp;
+    get(token: Element): MeteorApp;
 }
 export declare let appRegistry: MeteorAppRegistry;
-/**
- * To be used to access current Angular2 zone and
- * ApplicationRef instances in any place of Meteor environment,
- * i.e., where deps injection is not available.
- */
 export declare class MeteorApp {
     appRef: ApplicationRef;
     private _appCycles;
-    static bootstrap(component: Type, platProviders: Providers, appProviders: Providers, providers: Providers): Promise<ComponentRef<any>>;
+    static bootstrap(component: Type, platProviders: Providers, appProviders: Providers, providers?: Providers): Promise<ComponentRef<any>>;
     constructor(appRef: ApplicationRef);
     onRendered(cb: Function): void;
     onStable(cb: Function): void;

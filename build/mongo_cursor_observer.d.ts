@@ -26,6 +26,11 @@ export declare class Subscription {
     onNext(value: any): void;
     unsubscribe(): void;
 }
+/**
+ * Class that does a background work of observing
+ * Mongo collection changes (through a cursor)
+ * and notifying subscribers about them.
+ */
 export declare class MongoCursorObserver {
     private _docs;
     private _added;

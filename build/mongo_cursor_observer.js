@@ -49,6 +49,11 @@ var Subscription = (function () {
     return Subscription;
 }());
 exports.Subscription = Subscription;
+/**
+ * Class that does a background work of observing
+ * Mongo collection changes (through a cursor)
+ * and notifying subscribers about them.
+ */
 var MongoCursorObserver = (function () {
     function MongoCursorObserver(cursor) {
         this._docs = [];

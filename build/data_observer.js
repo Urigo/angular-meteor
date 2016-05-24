@@ -1,6 +1,12 @@
 'use strict';
 var async_1 = require('@angular/core/src/facade/async');
 var utils_1 = require('./utils');
+/**
+ * A helper class for data loading events.
+ * For example, used in @MeteorComponent to wrap callbacks
+ * of the Meteor methods whic allows us to know when
+ * requested data is available on the client.
+ */
 var DataObserver = (function () {
     function DataObserver() {
     }
@@ -48,8 +54,20 @@ var DataObserver = (function () {
         queue(promise);
         return newCallback;
     };
-    DataObserver.onReady = function (resolve) {
-        Promise.all(this._promises).then(resolve);
+    DataObserver.onSubsReady = function (cb) {
+        check(cb, Function);
+        return new Promise(function (resolve, reject) {
+            var poll = Meteor.setInterval(function () {
+                if (DDP._allSubscriptionsReady()) {
+                    Meteor.clearInterval(poll);
+                    resolve();
+                }
+            }, 100);
+        }).then(function () { return cb(); });
+    };
+    DataObserver.onReady = function (cb) {
+        check(cb, Function);
+        Promise.all(this._promises).then(function () { return cb(); });
     };
     DataObserver.cbLen = function () {
         return this._promises.length;

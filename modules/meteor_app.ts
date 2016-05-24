@@ -41,7 +41,7 @@ export class MeteorAppRegistry {
 
 export let appRegistry = new MeteorAppRegistry();
 
-// Contains utility methods which may be useful for the integration. 
+// Contains utility methods useful for the integration. 
 @Injectable()
 export class MeteorApp {
   private _appCycles: AppCycles;
@@ -49,12 +49,12 @@ export class MeteorApp {
   static bootstrap(component: Type,
                    platProviders: Providers,
                    appProviders: Providers,
-                   providers: Providers): Promise<ComponentRef<any>> {
+                   providers?: Providers): Promise<ComponentRef<any>> {
     let platRef = getPlatform();
     if (isBlank(platRef)) {
       platRef = createPlatform(ReflectiveInjector.resolveAndCreate(platProviders));
     }
-    appProviders = isPresent(providers) ? [appProviders, providers] : appProviders || [];
+    appProviders = isPresent(providers) ? [appProviders, providers] : appProviders;
     appProviders.push(provide(MeteorApp, {
       deps: [ApplicationRef],
       useFactory: appRef => {

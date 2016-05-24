@@ -8,6 +8,11 @@ export declare class MongoCursorDifferFactory extends DefaultIterableDifferFacto
     supports(obj: Object): boolean;
     create(cdRef: ChangeDetectorRef): MongoCursorDiffer;
 }
+/**
+ * A class that implements Angular 2's concept of differs for ngFor.
+ * API consists mainly of diff method and methods like forEachAddedItem
+ * that is being run on each change detection cycle to apply new changes if any.
+ */
 export declare class MongoCursorDiffer extends DefaultIterableDiffer {
     private _inserted;
     private _removed;

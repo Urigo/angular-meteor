@@ -13,6 +13,7 @@ var core_2 = require('@angular/core');
 var lang_1 = require('@angular/core/src/facade/lang');
 var async_1 = require('@angular/core/src/facade/async');
 var data_observer_1 = require('./data_observer');
+// Makes it possible to take an app instance by DOM element of the main component.
 var MeteorAppRegistry = (function () {
     function MeteorAppRegistry() {
         this._apps = new Map();
@@ -30,11 +31,7 @@ var MeteorAppRegistry = (function () {
 }());
 exports.MeteorAppRegistry = MeteorAppRegistry;
 exports.appRegistry = new MeteorAppRegistry();
-/**
- * To be used to access current Angular2 zone and
- * ApplicationRef instances in any place of Meteor environment,
- * i.e., where deps injection is not available.
- */
+// Contains utility methods useful for the integration. 
 var MeteorApp = (function () {
     function MeteorApp(appRef) {
         this.appRef = appRef;
@@ -45,7 +42,7 @@ var MeteorApp = (function () {
         if (lang_1.isBlank(platRef)) {
             platRef = core_2.createPlatform(core_2.ReflectiveInjector.resolveAndCreate(platProviders));
         }
-        appProviders = lang_1.isPresent(providers) ? [appProviders, providers] : appProviders || [];
+        appProviders = lang_1.isPresent(providers) ? [appProviders, providers] : appProviders;
         appProviders.push(core_1.provide(MeteorApp, {
             deps: [core_1.ApplicationRef],
             useFactory: function (appRef) {
@@ -60,6 +57,8 @@ var MeteorApp = (function () {
             Meteor.startup(function () {
                 return core_2.coreLoadAndBootstrap(appInjector, component)
                     .then(function (compRef) {
+                    // It's ok since one app can bootstrap
+                    // one component currently.
                     appRef._rootCompRef = compRef;
                     var elem = compRef.location.nativeElement;
                     exports.appRegistry.register(elem, newApp);
@@ -78,7 +77,7 @@ var MeteorApp = (function () {
         check(cb, Function);
         this._appCycles.onStable(function () {
             data_observer_1.DataObserver.onReady(function () {
-                // No way to get ngZone inner zone,
+                // No way to get ngZone's inner zone,
                 // so make one more run to insure
                 // data rendered.
                 _this.ngZone.run(function () { return cb(); });
@@ -102,6 +101,7 @@ var MeteorApp = (function () {
     return MeteorApp;
 }());
 exports.MeteorApp = MeteorApp;
+// To be used to detect an Angular 2 app's change detection cycles.
 var AppCycles = (function () {
     function AppCycles(_appRef) {
         this._appRef = _appRef;

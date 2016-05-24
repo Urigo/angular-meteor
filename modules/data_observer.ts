@@ -71,9 +71,25 @@ export class DataObserver {
     return newCallback;
   }
 
-  static onReady(resolve): void {
-    Promise.all(this._promises).then(resolve);
+  static onSubsReady(cb: Function) {
+    check(cb, Function);
+
+    return new Promise((resolve, reject) => {
+      const poll = Meteor.setInterval(() => {
+        if (DDP._allSubscriptionsReady()) {
+          Meteor.clearInterval(poll);
+          resolve();
+        }
+      }, 100);
+    }).then(() => cb());
   }
+
+  static onReady(cb: Function): void {
+    check(cb, Function);
+
+    Promise.all(this._promises).then(() => cb());
+  }
+
   static cbLen(): number {
     return this._promises.length;
   }

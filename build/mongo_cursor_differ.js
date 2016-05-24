@@ -10,6 +10,8 @@ var mongo_cursor_observer_1 = require('./mongo_cursor_observer');
 function checkIfMongoCursor(cursor) {
     return mongo_cursor_observer_1.MongoCursorObserver.isCursor(cursor);
 }
+// Creates an MongoCursorObserver instance for a Mongo.Cursor instance.
+// Add one more level of abstraction, but currently is not really needed.
 var MongoCursorObserverFactory = (function () {
     function MongoCursorObserverFactory() {
     }
@@ -21,6 +23,10 @@ var MongoCursorObserverFactory = (function () {
     };
     return MongoCursorObserverFactory;
 }());
+// An instance of this factory (see providers.ts) is registered globally
+// as one of the providers of collection differs.
+// These providers are being checked by an ngFor instance to find out which
+// differ it needs to create and use for the current collection.
 var MongoCursorDifferFactory = (function (_super) {
     __extends(MongoCursorDifferFactory, _super);
     function MongoCursorDifferFactory() {
@@ -34,6 +40,11 @@ var MongoCursorDifferFactory = (function (_super) {
 }(default_iterable_differ_1.DefaultIterableDifferFactory));
 exports.MongoCursorDifferFactory = MongoCursorDifferFactory;
 var trackById = function (index, item) { return item._id; };
+/**
+ * A class that implements Angular 2's concept of differs for ngFor.
+ * API consists mainly of diff method and methods like forEachAddedItem
+ * that is being run on each change detection cycle to apply new changes if any.
+ */
 var MongoCursorDiffer = (function (_super) {
     __extends(MongoCursorDiffer, _super);
     function MongoCursorDiffer(cdRef, obsFactory) {

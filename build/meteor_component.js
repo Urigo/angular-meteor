@@ -2,6 +2,13 @@
 var lang_1 = require('@angular/core/src/facade/lang');
 var utils_1 = require('./utils');
 var data_observer_1 = require('./data_observer');
+/**
+ * A class to extend in Angular 2 components.
+ * Contains wrappers over main Meteor methods,
+ * that does some maintenance work behind the scene.
+ * For example, it destroys subscription handles
+ * when the component is being destroyed itself.
+ */
 var MeteorComponent = (function () {
     function MeteorComponent() {
         this._hAutoruns = [];
@@ -72,6 +79,9 @@ var MeteorComponent = (function () {
         }
         lastParam = args[args.length - 1];
         if (utils_1.isMeteorCallbacks(lastParam)) {
+            // Push callback to the observer, so
+            // that we can use onReady to know when
+            // data is loaded. 
             args[args.length - 1] = data_observer_1.DataObserver.pushCb(lastParam);
         }
         else {

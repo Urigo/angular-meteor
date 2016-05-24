@@ -1,4 +1,11 @@
 import { OnDestroy } from '@angular/core';
+/**
+ * A class to extend in Angular 2 components.
+ * Contains wrappers over main Meteor methods,
+ * that does some maintenance work behind the scene.
+ * For example, it destroys subscription handles
+ * when the component is being destroyed itself.
+ */
 export declare class MeteorComponent implements OnDestroy {
     private _hAutoruns;
     private _hSubscribes;
