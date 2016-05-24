@@ -56,7 +56,7 @@ var DataObserver = (function () {
     };
     DataObserver.onSubsReady = function (cb) {
         check(cb, Function);
-        return new Promise(function (resolve, reject) {
+        new Promise(function (resolve, reject) {
             var poll = Meteor.setInterval(function () {
                 if (DDP._allSubscriptionsReady()) {
                     Meteor.clearInterval(poll);

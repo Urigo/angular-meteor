@@ -8,7 +8,7 @@ import { MeteorCallbacks } from './utils';
 export declare class DataObserver {
     private static _promises;
     static pushCb(callbacks: MeteorCallbacks): MeteorCallbacks;
-    static onSubsReady(cb: Function): Promise<any>;
+    static onSubsReady(cb: Function): void;
     static onReady(cb: Function): void;
     static cbLen(): number;
 }

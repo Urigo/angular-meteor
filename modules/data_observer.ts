@@ -71,10 +71,10 @@ export class DataObserver {
     return newCallback;
   }
 
-  static onSubsReady(cb: Function) {
+  static onSubsReady(cb: Function): void {
     check(cb, Function);
 
-    return new Promise((resolve, reject) => {
+    new Promise((resolve, reject) => {
       const poll = Meteor.setInterval(() => {
         if (DDP._allSubscriptionsReady()) {
           Meteor.clearInterval(poll);
