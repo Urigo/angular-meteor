@@ -32,8 +32,10 @@
 ### Meteor Project
 1. Install [Meteor](http://docs.meteor.com/#quickstart) `$ curl https://install.meteor.com | /bin/sh`
 2. Create a new meteor app using `$ meteor create myapp` or navigate to the root of your existing app
-3. Install Angular `$ meteor add angular`
-4. Remove unneeded packages `$ meteor remove blaze-html-templates ecmascript`
+3. Remove unneeded packages `$ meteor remove blaze-html-templates ecmascript`
+4. Install Angular and Angular Meteor `$ meteor npm install --save angular angular-meteor`
+5. Add compiler packages `$ meteor add angular-templates pbastowski:angular-babel`
+
 
 ### Meteor client side - with Bower
 > Use Meteor as a service in your existing non Meteor angular application
