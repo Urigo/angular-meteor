@@ -1,6 +1,15 @@
-## Import template url
+<a name="1.3.11"></a>
+## [1.3.11](https://github.com/Urigo/angular-meteor/compare/1.3.10...v1.3.11) (2016-05-18)
 
-* In the new version of `angular-templates` (1.0.3) you can import the template url with an import statement - you can read about it [here](http://www.angular-meteor.com/api/1.3.11/templates).
+
+### Features
+
+* **Core:** onStart callback ([802356c](https://github.com/Urigo/angular-meteor/commit/802356c))
+* **templates:** exports templateUrl ([d687049](https://github.com/Urigo/angular-meteor/commit/d687049)), closes [#1313](https://github.com/Urigo/angular-meteor/issues/1313)
+* **templates:** optional error and warning of missing template ([5657db4](https://github.com/Urigo/angular-meteor/commit/5657db4)), closes [#1274](https://github.com/Urigo/angular-meteor/issues/1274)
+
+* In templates, the best practice is to move away from `angular-templates` package and to import the template's content with the [urigo:static-templates](https://github.com/urigo/meteor-static-templates) package. This is not a breaking change but you can start migrating if you want.
+
 
 <a name="1.3.10"></a>
 ## [1.3.10](https://github.com/Urigo/angular-meteor/compare/1.3.9...v1.3.10) (2016-04-11)
@@ -52,6 +61,3 @@
 
 * support for new angular-templates ([5ab8fe7](https://github.com/Urigo/angular-meteor/commit/5ab8fe7))
 * **templates:** make compatible with modules ([fefa70c](https://github.com/Urigo/angular-meteor/commit/fefa70c))
-
-
-
