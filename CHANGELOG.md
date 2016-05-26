@@ -1,5 +1,5 @@
-<a name="1.3.11-rc.1"></a>
-## [1.3.11-rc.1](https://github.com/Urigo/angular-meteor/compare/1.3.10...v1.3.11-rc.1) (2016-05-18)
+<a name="1.3.11"></a>
+## [1.3.11](https://github.com/Urigo/angular-meteor/compare/1.3.10...v1.3.11) (2016-05-18)
 
 
 ### Features
@@ -8,6 +8,7 @@
 * **templates:** exports templateUrl ([d687049](https://github.com/Urigo/angular-meteor/commit/d687049)), closes [#1313](https://github.com/Urigo/angular-meteor/issues/1313)
 * **templates:** optional error and warning of missing template ([5657db4](https://github.com/Urigo/angular-meteor/commit/5657db4)), closes [#1274](https://github.com/Urigo/angular-meteor/issues/1274)
 
+* In templates, the best practice is to move away from `angular-templates` package and to import the template's content with the [urigo:static-templates](https://github.com/urigo/meteor-static-templates) package. This is not a breaking change but you can start migrating if you want.
 
 
 <a name="1.3.10"></a>
