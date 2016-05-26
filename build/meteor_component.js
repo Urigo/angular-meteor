@@ -14,11 +14,22 @@ var MeteorComponent = (function () {
         this._hAutoruns = [];
         this._hSubscribes = [];
     }
+    /**
+     * Method has the same notation as Meteor.autorun
+     * except the last parameter.
+     * @param func Callback to be executed when
+     *   current computation is invalidated.
+     * @param autoBind Determine whether Angular 2 zone will run
+     *   after @param func to initiate change detection.
+     */
     MeteorComponent.prototype.autorun = function (func, autoBind) {
         if (autoBind === void 0) { autoBind = true; }
         var autorunCall = function () {
             return Tracker.autorun(func);
         };
+        // If autoBind is set to false then
+        // we run Meteor method in the global zone
+        // instead of the current Angular 2 zone.
         var hAutorun = autoBind ? autorunCall() :
             utils_1.gZone.run(autorunCall);
         this._hAutoruns.push(hAutorun);
@@ -27,9 +38,7 @@ var MeteorComponent = (function () {
     /**
      *  Method has the same notation as Meteor.subscribe:
      *    subscribe(name, [args1, args2], [callbacks], [autoBind])
-     *  except the last param which could be a boolean, and means
-     *  whether Angular 2 zone will run after the callback
-     *  to initiate a change detection cycle.
+     *  except the last autoBind param (see autorun above).
      */
     MeteorComponent.prototype.subscribe = function (name) {
         var args = [];
@@ -44,9 +53,6 @@ var MeteorComponent = (function () {
         var subscribeCall = function () {
             return Meteor.subscribe.apply(Meteor, [name].concat(subArgs.args));
         };
-        // If autoBind is set to false then
-        // we run Meteor method in the global zone
-        // instead of the current Angular 2 zone.
         var hSubscribe = subArgs.autoBind ? subscribeCall() :
             utils_1.gZone.run(subscribeCall);
         if (Meteor.isClient) {

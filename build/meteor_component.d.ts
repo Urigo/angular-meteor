@@ -9,13 +9,19 @@ import { OnDestroy } from '@angular/core';
 export declare class MeteorComponent implements OnDestroy {
     private _hAutoruns;
     private _hSubscribes;
+    /**
+     * Method has the same notation as Meteor.autorun
+     * except the last parameter.
+     * @param func Callback to be executed when
+     *   current computation is invalidated.
+     * @param autoBind Determine whether Angular 2 zone will run
+     *   after @param func to initiate change detection.
+     */
     autorun(func: (c: Tracker.Computation) => any, autoBind?: Boolean): Tracker.Computation;
     /**
      *  Method has the same notation as Meteor.subscribe:
      *    subscribe(name, [args1, args2], [callbacks], [autoBind])
-     *  except the last param which could be a boolean, and means
-     *  whether Angular 2 zone will run after the callback
-     *  to initiate a change detection cycle.
+     *  except the last autoBind param (see autorun above).
      */
     subscribe(name: string, ...args: any[]): Meteor.SubscriptionHandle;
     call(name: string, ...args: any[]): any;
