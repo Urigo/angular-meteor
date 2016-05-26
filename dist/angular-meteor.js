@@ -1,4 +1,4 @@
-/*! angular-meteor v1.3.10 */
+/*! angular-meteor v1.3.11 */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory(require("underscore"), require("jsondiffpatch"));
@@ -1909,6 +1909,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    fn = this.$bindToContext($Mixer.caller, fn || angular.noop);
 	    cb = cb ? this.$bindToContext($Mixer.caller, cb) : angular.noop;
 
+	    // Additional callbacks specific for this library
+	    // onStart - right after Meteor.subscribe()
+	    var hooks = {
+	      onStart: angular.noop
+	    };
+
 	    if (!_underscore2.default.isString(subName)) {
 	      throw Error('argument 1 must be a string');
 	    }
@@ -1917,6 +1923,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 	    if (!_underscore2.default.isFunction(cb) && !_underscore2.default.isObject(cb)) {
 	      throw Error('argument 3 must be a function or an object');
+	    }
+
+	    if (_underscore2.default.isObject(cb)) {
+	      for (var hook in hooks) {
+	        if (hooks.hasOwnProperty(hook) && cb[hook]) {
+	          // Don't use any of additional callbacks in Meteor.subscribe
+	          hooks[hook] = cb[hook];
+	          delete cb[hook];
+	        }
+	      }
 	    }
 
 	    var result = {};
@@ -1932,6 +1948,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 
 	      var subscription = (_Meteor = Meteor).subscribe.apply(_Meteor, [subName].concat(_toConsumableArray(args), [cb]));
+
+	      hooks.onStart();
+
 	      result.ready = subscription.ready.bind(subscription);
 	      result.subscriptionId = subscription.subscriptionId;
 	    });
