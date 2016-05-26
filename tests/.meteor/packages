@@ -26,3 +26,4 @@ dburles:factory
 xolvio:cleaner
 sanjo:jasmine
 velocity:html-reporter
+avital:mocha

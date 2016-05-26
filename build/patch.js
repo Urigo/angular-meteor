@@ -46,7 +46,7 @@ var ZoneRunScheduler = (function () {
             runTask.cancelFn(runTask);
             this._zoneTasks.delete(zone);
         }
-        runTask = utils_1.gZone.scheduleMacroTask('runZones', this.zoneRun(zone), zone, function (task) {
+        runTask = utils_1.gZone.scheduleMacroTask('runZones', this.zoneRun(zone), { isPeriodic: true }, function (task) {
             task._tHandler = setTimeout(task.invoke);
         }, function (task) {
             clearTimeout(task._tHandler);

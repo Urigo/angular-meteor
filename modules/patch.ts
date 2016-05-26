@@ -55,7 +55,7 @@ export class ZoneRunScheduler {
     }
 
     runTask = gZone.scheduleMacroTask('runZones',
-      this.zoneRun(zone), zone,
+      this.zoneRun(zone), { isPeriodic: true },
       task => {
         task._tHandler = setTimeout(task.invoke);
       },

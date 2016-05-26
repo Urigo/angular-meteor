@@ -62,6 +62,9 @@ describe('Meteor patching', function() {
         count++;
         if (count == 2) {
           zoneRunScheduler.onAfterRun(ngZone, () => {
+            // Twice because of we run method in ngZone.run
+            // and also one run for two calls of trackerAutorun,
+            // which means throttling.
             expect(ngZoneSpy.calledTwice).to.equal(true);
             done();
           });

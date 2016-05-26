@@ -4,7 +4,7 @@ import {OnDestroy} from '@angular/core';
 
 import {noop} from '@angular/core/src/facade/lang';
 
-import {isMeteorCallbacks, isCallbacksObject} from './utils';
+import {isMeteorCallbacks, isCallbacksObject, gZone} from './utils';
 import {DataObserver} from './data_observer';
 
 /**
@@ -18,8 +18,26 @@ export class MeteorComponent implements OnDestroy {
   private _hAutoruns: Array<Tracker.Computation> = [];
   private _hSubscribes: Array<Meteor.SubscriptionHandle> = [];
 
-  autorun(func: (c: Tracker.Computation) => any): Tracker.Computation {
-    let hAutorun = Tracker.autorun(func);
+  /**
+   * Method has the same notation as Meteor.autorun
+   * except the last parameter.
+   * @param func Callback to be executed when
+   *   current computation is invalidated.
+   * @param autoBind Determine whether Angular 2 zone will run
+   *   after @param func to initiate change detection.
+   */
+  autorun(func: (c: Tracker.Computation) => any,
+          autoBind: Boolean = true): Tracker.Computation {
+    let autorunCall = () => {
+      return Tracker.autorun(func);
+    };
+
+    // If autoBind is set to false then
+    // we run Meteor method in the global zone
+    // instead of the current Angular 2 zone.
+    let hAutorun = autoBind ? autorunCall() :
+      gZone.run(autorunCall);
+
     this._hAutoruns.push(hAutorun);
 
     return hAutorun;
@@ -27,7 +45,8 @@ export class MeteorComponent implements OnDestroy {
 
   /**
    *  Method has the same notation as Meteor.subscribe:
-   *    subscribe(name, [args1, args2], [callbacks])
+   *    subscribe(name, [args1, args2], [callbacks], [autoBind])
+   *  except the last autoBind param (see autorun above).
    */
   subscribe(name: string, ...args: any[]): Meteor.SubscriptionHandle {
     let subArgs = this._prepArgs(args);
@@ -37,14 +56,19 @@ export class MeteorComponent implements OnDestroy {
         'Meteor.subscribe is not defined on the server side');
     };
 
-    let hSubscribe = Meteor.subscribe(name, ...subArgs);
+    let subscribeCall = () => {
+      return Meteor.subscribe(name, ...subArgs.args);
+    };
+
+    let hSubscribe = subArgs.autoBind ? subscribeCall() :
+      gZone.run(subscribeCall);
 
     if (Meteor.isClient) {
       this._hSubscribes.push(hSubscribe);
     };
 
     if (Meteor.isServer) {
-      let callback = subArgs[subArgs.length - 1];
+      let callback = subArgs[subArgs.args.length - 1];
       if (_.isFunction(callback)) {
         callback();
       }
@@ -57,10 +81,18 @@ export class MeteorComponent implements OnDestroy {
     return hSubscribe;
   }
 
-  call(name: string, ...args) {
+  call(name: string, ...args: any[]) {
     let callArgs = this._prepArgs(args);
 
-    return Meteor.call(name, ...callArgs);
+    let meteorCall = () => {
+      Meteor.call(name, ...callArgs.args);
+    };
+
+    if (!callArgs.autoBind) {
+      return gZone.run(meteorCall);
+    }
+
+    return meteorCall();
   }
 
   ngOnDestroy() {
@@ -76,14 +108,15 @@ export class MeteorComponent implements OnDestroy {
     this._hSubscribes = null;
   }
 
-  private _prepArgs(args) {
+  private _prepArgs(args): { args: any[], autoBind: boolean} {
     let lastParam = args[args.length - 1];
     let penultParam = args[args.length - 2];
+    let autoBind = true;
 
-    // To be backward compatible.
     if (_.isBoolean(lastParam) &&
         isMeteorCallbacks(penultParam)) {
       args.pop();
+      autoBind = lastParam !== false;
     }
 
     lastParam = args[args.length - 1];
@@ -96,7 +129,6 @@ export class MeteorComponent implements OnDestroy {
       args.push(DataObserver.pushCb(noop));
     }
 
-
-    return args;
+    return { args, autoBind };
   }
 }
