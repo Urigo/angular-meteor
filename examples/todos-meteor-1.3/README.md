@@ -1,10 +1,10 @@
 ## Typings
 
-Before running, install Meteor typings as follows:
+Before running, save `typings.json` and install Meteor typings as follows:
 
 ```
 npm install typings -g
 
-typings install meteor --ambient
+typings install
 
 ```

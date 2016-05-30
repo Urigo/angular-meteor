@@ -24,7 +24,7 @@ export class MeteorComponent implements OnDestroy {
    * @param func Callback to be executed when
    *   current computation is invalidated.
    * @param autoBind Determine whether Angular 2 zone will run
-   *   after @param func to initiate change detection.
+   *   after the func call to initiate change detection.
    */
   autorun(func: (c: Tracker.Computation) => any,
           autoBind: Boolean = true): Tracker.Computation {
