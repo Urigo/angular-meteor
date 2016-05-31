@@ -45,22 +45,22 @@ var MeteorComponent = (function () {
         for (var _i = 1; _i < arguments.length; _i++) {
             args[_i - 1] = arguments[_i];
         }
-        var subArgs = this._prepArgs(args);
+        var _a = this._prepArgs(args), pargs = _a.pargs, autoBind = _a.autoBind;
         if (!Meteor.subscribe) {
             throw new Error('Meteor.subscribe is not defined on the server side');
         }
         ;
         var subscribeCall = function () {
-            return Meteor.subscribe.apply(Meteor, [name].concat(subArgs.args));
+            return Meteor.subscribe.apply(Meteor, [name].concat(pargs));
         };
-        var hSubscribe = subArgs.autoBind ? subscribeCall() :
+        var hSubscribe = autoBind ? subscribeCall() :
             utils_1.gZone.run(subscribeCall);
         if (Meteor.isClient) {
             this._hSubscribes.push(hSubscribe);
         }
         ;
         if (Meteor.isServer) {
-            var callback = subArgs[subArgs.args.length - 1];
+            var callback = pargs[pargs.length - 1];
             if (_.isFunction(callback)) {
                 callback();
             }
@@ -75,11 +75,11 @@ var MeteorComponent = (function () {
         for (var _i = 1; _i < arguments.length; _i++) {
             args[_i - 1] = arguments[_i];
         }
-        var callArgs = this._prepArgs(args);
+        var _a = this._prepArgs(args), pargs = _a.pargs, autoBind = _a.autoBind;
         var meteorCall = function () {
-            Meteor.call.apply(Meteor, [name].concat(callArgs.args));
+            Meteor.call.apply(Meteor, [name].concat(pargs));
         };
-        if (!callArgs.autoBind) {
+        if (!autoBind) {
             return utils_1.gZone.run(meteorCall);
         }
         return meteorCall();
@@ -115,7 +115,7 @@ var MeteorComponent = (function () {
         else {
             args.push(data_observer_1.DataObserver.pushCb(lang_1.noop));
         }
-        return { args: args, autoBind: autoBind };
+        return { pargs: args, autoBind: autoBind };
     };
     return MeteorComponent;
 }());

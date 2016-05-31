@@ -49,7 +49,7 @@ export class MeteorComponent implements OnDestroy {
    *  except the last autoBind param (see autorun above).
    */
   subscribe(name: string, ...args: any[]): Meteor.SubscriptionHandle {
-    let subArgs = this._prepArgs(args);
+    let { pargs, autoBind } = this._prepArgs(args);
 
     if (!Meteor.subscribe) {
       throw new Error(
@@ -57,10 +57,10 @@ export class MeteorComponent implements OnDestroy {
     };
 
     let subscribeCall = () => {
-      return Meteor.subscribe(name, ...subArgs.args);
+      return Meteor.subscribe(name, ...pargs);
     };
 
-    let hSubscribe = subArgs.autoBind ? subscribeCall() :
+    let hSubscribe = autoBind ? subscribeCall() :
       gZone.run(subscribeCall);
 
     if (Meteor.isClient) {
@@ -68,7 +68,7 @@ export class MeteorComponent implements OnDestroy {
     };
 
     if (Meteor.isServer) {
-      let callback = subArgs[subArgs.args.length - 1];
+      let callback = pargs[pargs.length - 1];
       if (_.isFunction(callback)) {
         callback();
       }
@@ -82,13 +82,13 @@ export class MeteorComponent implements OnDestroy {
   }
 
   call(name: string, ...args: any[]) {
-    let callArgs = this._prepArgs(args);
+    let { pargs, autoBind } = this._prepArgs(args);
 
     let meteorCall = () => {
-      Meteor.call(name, ...callArgs.args);
+      Meteor.call(name, ...pargs);
     };
 
-    if (!callArgs.autoBind) {
+    if (!autoBind) {
       return gZone.run(meteorCall);
     }
 
@@ -108,7 +108,7 @@ export class MeteorComponent implements OnDestroy {
     this._hSubscribes = null;
   }
 
-  private _prepArgs(args): { args: any[], autoBind: boolean} {
+  private _prepArgs(args) {
     let lastParam = args[args.length - 1];
     let penultParam = args[args.length - 2];
     let autoBind = true;
@@ -129,6 +129,6 @@ export class MeteorComponent implements OnDestroy {
       args.push(DataObserver.pushCb(noop));
     }
 
-    return { args, autoBind };
+    return { pargs: args, autoBind };
   }
 }
