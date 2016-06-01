@@ -201,7 +201,7 @@ Default TypeScript options for Meteor 1.3 are as follows:
 
 ### Typings
 
-To add declaration files of any global 3-party JavaScript library including Meteor itself (so called ambient typings), we recommend to use the [`typings`](https://github.com/typings/typings) utility, which is specially designed to be used for typings management with access to global registries of common 3-party libraries.
+To add declaration files of any global 3-party JavaScript library including Meteor itself (so called ambient typings), we recommend to use the [`typings`](https://github.com/typings/typings) utility, which is designed to search across and install typings from `DefinitelyTyped` and own typings registries.
 
 For example, to install Meteor declaration file run:
 ````
@@ -210,7 +210,9 @@ npm install typings -g
 typings install registry:env/meteor --ambient
 ````
 
-Please note that you don't need to worry about Angular 2's typings and typings of the related packages!
+For more information on Meteor typings, please read [here](https://github.com/meteor-typings/meteor).
+
+Please note that you don't need to worry about Angular 2's typings and typings of the related NPMs!
 TypeScript finds and checkes them in NPMs automatically.
 
 ## Common Issues and Troubleshoot
