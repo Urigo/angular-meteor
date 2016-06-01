@@ -13,7 +13,8 @@
   "bugs": {
     "url": "https://github.com/Urigo/angular2-meteor/issues"
   },
-  "main": "build/index.js",
+  "main": "build/main.js",
+  "browser": "build/index.js",
   "typings": "build/index.d.ts",
   "homepage": "http://www.angular-meteor.com",
   "repository": "https://github.com/Urigo/angular2-meteor/",
@@ -26,6 +27,9 @@
   },
   "peerDependencies": {
     "@angular/core": "2.0.0-rc.1"
+  },
+  "dependencies": {
+    "angular2-meteor-polyfills": "^0.1.1"
   },
   "devDependencies": {
     "@angular/core": "2.0.0-rc.1",

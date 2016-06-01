@@ -14,11 +14,13 @@ Package.onUse(function(api) {
     'ecmascript'
   ]);
 
+  api.imply([
+    'babel-runtime'
+  ]);
+
   api.addFiles(['client_deps.js'], 'client', {
     lazy: false
   });
-
-  api.addFiles(['server_deps.js'], 'server');
 });
 
 Package.onTest(function(api) {
