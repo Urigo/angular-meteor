@@ -69,7 +69,7 @@ you can install `barbatus:angular2-runtime`, a package that adds all the require
 Since it's a package, it's loaded by Meteor before any user code.
 
 If you prefer to install polyfills manually for some reason,
-you can try `angular2-meteor-polyfills` NPM. Import polyfills (whether on the client or server) by `import 'angular2-meteor-polyfills/browser'`.
+you can try `angular2-meteor-polyfills` NPM. Import polyfills (whether on the client or server) by `import 'angular2-meteor-polyfills'`.
 
 Please don't forget to add a main HTML file (can be `index.html` or with any other name) even if your app template consists of one single tag,
 e.g., `<body><app></app></body>`.
