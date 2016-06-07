@@ -68,6 +68,11 @@ There is a way to overcome that inconvenience (i.e., importing dependencies manu
 you can install `barbatus:angular2-runtime`, a package that adds all the required dependencies.
 Since it's a package, it's loaded by Meteor before any user code.
 
+If you prefer to install polyfills manually for some reason,
+you could try `angular2-meteor-polyfills` NPM. On the client side, import them
+by `import 'angular2-meteor-polyfills/browser'`, on the server - 
+`import 'angular2-meteor-polyfills'`.
+
 Please don't forget to add a main HTML file (can be `index.html` or with any other name) even if your app template consists of one single tag,
 e.g., `<body><app></app></body>`.
 
@@ -226,7 +231,14 @@ For example, check out Angular2 Maps [here](https://www.npmjs.com/package/angula
 Or, you may be interested in Angular 2 version of the Meteor Accounts UI.
 You can find out a preliminary version [here](https://github.com/Urigo/angular2-meteor-accounts-ui).
 
-### It works fine locally but fails to run in the production
+### `Maximum call stack size exceeded` exception
+
+This error is likely caused by incompatibility of the currently
+installed version of zone.js and Angular 2.
+
+If you are using `barbatus:angular2-runtime`, update to the 
+`0.5.0` version.
+
 
 This UglifyJS minification [issue](https://github.com/angular/angular/issues/6380) is likely to blame, which
 is fixed in Angular2 beta-16.

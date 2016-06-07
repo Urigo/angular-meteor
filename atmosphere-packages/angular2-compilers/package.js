@@ -24,12 +24,11 @@ Package.onUse(function(api) {
 
   // Required in order to register plugins
   api.use('isobuild:compiler-plugin@1.0.0');
-  api.use('isobuild:linter-plugin@1.0.0');
 
   // These packages are required by Angular2-Meteor NPM.
   // Make sure we have them in this package.
   api.imply([
-    'barbatus:typescript@0.3.1',
+    'barbatus:typescript@0.3.3',
     'check@1.1.0',
     'tracker@1.0.13',
     'underscore@1.0.4',

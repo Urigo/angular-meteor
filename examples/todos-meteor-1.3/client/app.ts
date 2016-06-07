@@ -14,7 +14,7 @@ enableProdMode();
   directives: [TaskList]
 })
 export class Todos {
-  addTask(text) {
+  addTask(text: string) {
     Tasks.insert({
       text: text,
       checked: false,

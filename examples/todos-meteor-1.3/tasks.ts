@@ -4,7 +4,7 @@ import {Mongo} from "meteor/mongo";
 export let Tasks = new Mongo.Collection<Task>('tasks');
 
 Meteor.methods({
-  'tasks.addTask': function(text) {
+  'tasks.addTask': function(text: string) {
     Tasks.insert({
       text: text,
       checked: false,
