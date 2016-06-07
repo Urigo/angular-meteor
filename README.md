@@ -69,9 +69,7 @@ you can install `barbatus:angular2-runtime`, a package that adds all the require
 Since it's a package, it's loaded by Meteor before any user code.
 
 If you prefer to install polyfills manually for some reason,
-you could try `angular2-meteor-polyfills` NPM. On the client side, import them
-by `import 'angular2-meteor-polyfills/browser'`, on the server - 
-`import 'angular2-meteor-polyfills'`.
+you can try `angular2-meteor-polyfills` NPM. Import polyfills on the client by `import 'angular2-meteor-polyfills/browser'`, on the server by just `import 'angular2-meteor-polyfills'`.
 
 Please don't forget to add a main HTML file (can be `index.html` or with any other name) even if your app template consists of one single tag,
 e.g., `<body><app></app></body>`.
@@ -240,10 +238,6 @@ installed version of zone.js and Angular 2.
 
 If you are using `barbatus:angular2-runtime`, update to the 
 `0.5.0` version.
-
-
-This UglifyJS minification [issue](https://github.com/angular/angular/issues/6380) is likely to blame, which
-is fixed in Angular2 beta-16.
 
 ## Change Log
 
