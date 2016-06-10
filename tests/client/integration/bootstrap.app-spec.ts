@@ -65,7 +65,7 @@ describe('bootstrap', () => {
         onStable(ngZone, () => {
           DataObserver.onReady(() => {
             onStable(ngZone, () => {
-              expect($('.task', el).size()).toBe(10);
+              expect($('.task', el).size()).to.equal(10);
               done();
             });
           })

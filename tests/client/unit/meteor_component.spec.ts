@@ -78,7 +78,7 @@ describe('MeteorComponent', function() {
     });
   });
   
-  describe('MeteorComponent.call', function() {
+  describe('MeteorComponent.call', () => {
     var meteorCall;
     beforeEach(function() {
       meteorCall = sinon.stub(Meteor, 'call');
@@ -88,15 +88,25 @@ describe('MeteorComponent', function() {
       Meteor.call.restore();
     });
 
-    it('should call Meteor.call with the same args', function() {
-      var callback = sinon.spy();
-      var args = ['method', 'foo1', 'foo2'];
-      component.call.apply(component, args.concat(callback));
-      expect(meteorCall.calledOnce).to.equal(true);
-      expect(_.initial(meteorCall.args[0])).to.deep.equal(args);
+    describe('should call Meteor.call with the same args', () => {
+      it('straight', function() {
+        var callback = sinon.spy();
+        var args = ['method', 'foo1', 'foo2', callback];
+        component.call.apply(component, args);
+        expect(meteorCall.calledOnce).to.equal(true);
+        expect(meteorCall.args[0]).to.deep.equal(args);
 
-      _.last(meteorCall.args[0]).call();
-      expect(callback.calledOnce).to.equal(true);
+        _.last(meteorCall.args[0]).call();
+        expect(callback.calledOnce).to.equal(true);
+      });
+
+      it('with autoBind', function() {
+        var callback = sinon.spy();
+        var args = ['method', 'foo1', 'foo2', callback, true];
+        component.call.apply(component, args);
+        expect(meteorCall.calledOnce).to.equal(true);
+        expect(meteorCall.args[0]).to.deep.equal(_.initial(args));
+      });
     });
   });
 });
