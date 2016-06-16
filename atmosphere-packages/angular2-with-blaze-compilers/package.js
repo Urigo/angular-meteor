@@ -1,7 +1,7 @@
 Package.describe({
   name: 'angular2-with-blaze-compilers',
   version: '0.5.7',
-  summary: 'Angular 2 Templates, HTML and TypeScript compilers for Meteor applications with Blaze for',
+  summary: 'Angular 2 Templates, HTML and TypeScript compilers for Meteor applications with Blaze',
   git: 'https://github.com/Urigo/angular2-meteor/',
   documentation: 'README.md'
 });
