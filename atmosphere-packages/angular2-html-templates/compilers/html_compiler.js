@@ -98,7 +98,8 @@ NgTemplateCompiler = class NgTemplateCompiler extends NgCachingCompiler {
   }
 
   addCompileResult(file, result) {
-    const htmlPath = file.getPathInPackage();
+    let htmlPath = file.getPathInPackage();
+    htmlPath = htmlPath.replace(".ng2.html", ".html");
 
     file.addAsset({
       data: result,
@@ -107,8 +108,7 @@ NgTemplateCompiler = class NgTemplateCompiler extends NgCachingCompiler {
 
     // Export template URL in JS-module.
     // Issue - 275#issuecomment-220114345
-    let templateUrl =
-      `exports.default = '/${htmlPath}';`
+    let templateUrl = `exports.default = '/${htmlPath}';`;
 
     file.addJavaScript({
       data: templateUrl,
