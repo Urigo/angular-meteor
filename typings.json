@@ -1,7 +1,7 @@
 {
-  "ambientDependencies": {
+  "globalDependencies": {
     "es6-shim": "registry:dt/es6-shim#0.31.2+20160317120654",
-    "meteor": "github:meteor-typings/meteor/1.3#f63c5e15a2b39a60a938851a657a51dcd9429b73",
+    "meteor": "github:meteor-typings/meteor/1.3#955b89a4e2af892d1736bc570b490a97e860d5b7",
     "mocha": "registry:dt/mocha#2.2.5+20160317120654",
     "underscore": "registry:dt/underscore#1.7.0+20160412141459",
     "zone.js": "npm:zone.js"

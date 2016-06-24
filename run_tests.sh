@@ -2,7 +2,7 @@
 # renaming node_modules is required,
 # otherwise Meteor throws errors.
 mv -f .node_modules node_modules
-gulp 'build'
+npm run build
 mv -f node_modules .node_modules
 cd tests
 linklocal
