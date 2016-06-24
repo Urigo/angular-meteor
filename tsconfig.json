@@ -9,7 +9,7 @@
     "emitDecoratorMetadata": true,
     "sourceMap": false,
     "declaration": true,
-    "outDir": "./build",
+    "outDir": "./dist",
     "rootDir": "./modules"
   },
   "files": [

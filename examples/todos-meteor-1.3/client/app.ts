@@ -6,6 +6,8 @@ import {TaskList} from './components/task-list';
 
 import {bootstrap} from 'angular2-meteor-auto-bootstrap';
 
+import {disableDeprecatedForms, provideForms} from '@angular/forms';
+
 enableProdMode();
 
 @Component({
@@ -26,7 +28,7 @@ export class Todos {
     return Tasks.find({
       checked: false
     }).count();
-  };
+  }
 }
 
-bootstrap(Todos);
+bootstrap(Todos, [disableDeprecatedForms(), provideForms()]);

@@ -13,9 +13,9 @@
   "bugs": {
     "url": "https://github.com/Urigo/angular2-meteor/issues"
   },
-  "main": "build/main.js",
-  "browser": "build/index.js",
-  "typings": "build/index.d.ts",
+  "main": "dist/main.js",
+  "browser": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "homepage": "http://www.angular-meteor.com",
   "repository": "https://github.com/Urigo/angular2-meteor/",
   "description": "Angular 2.0 and Meteor - the perfect stack http://www.angular-meteor.com/",
@@ -23,18 +23,17 @@
   "license": "MIT",
   "scripts": {
     "build": "gulp build",
-    "test": "./run_tests.sh"
+    "test": "./run_tests.sh",
+    "prepublish": "npm run build"
   },
   "peerDependencies": {
-    "@angular/core": "^2.0.0-rc.1"
-  },
-  "dependencies": {
+    "@angular/core": "^2.0.0-rc.2",
     "angular2-meteor-polyfills": "^0.1.1"
   },
   "devDependencies": {
-    "@angular/core": "^2.0.0-rc.1",
-    "@angular/common": "^2.0.0-rc.1",
-    "@angular/compiler": "^2.0.0-rc.1",
+    "@angular/core": "^2.0.0-rc.2",
+    "@angular/common": "^2.0.0-rc.2",
+    "@angular/compiler": "^2.0.0-rc.2",
     "es6-shim": "^0.35.0",
     "zone.js": "^0.6.12",
     "rxjs": "5.0.0-beta.6",

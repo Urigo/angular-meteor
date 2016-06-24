@@ -3,12 +3,12 @@
     <h1>Todo List ({{todoCount}})</h1>
 
     <label class="hide-completed">
-      <input type="checkbox" [(ngModel)]="hideCompleted"/>
+      <input type="checkbox" [(ngModel)]="hideCompleted" name="hide"/>
         Hide Completed Tasks
     </label>
 
     <form class="new-task" (submit)="addTask(newTask); newTask = null;">
-      <input [(ngModel)]="newTask" type="text" placeholder="Type to add new tasks" />
+      <input [(ngModel)]="newTask" name="name" type="text" placeholder="Type to add new tasks" />
     </form>
   </header>
 

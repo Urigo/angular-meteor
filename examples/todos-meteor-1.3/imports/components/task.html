@@ -3,6 +3,7 @@
 
   <input type="checkbox" #cb
     [ngModel]="task.checked"
+    name="name"
     (change)="setChecked(cb.checked)"
     class='toggle-checked' />
 

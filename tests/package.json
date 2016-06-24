@@ -5,7 +5,9 @@
     "start": "meteor run"
   },
   "dependencies": {
-    "@angular/core": "2.0.0-rc.1",
+    "@angular/core": "^2.0.0-rc.3",
+    "@angular/common": "^2.0.0-rc.3",
+    "angular2-meteor-polyfills": "^0.1.1",
     "es6-shim": "^0.35.0",
     "zone.js": "^0.6.12",
     "reflect-metadata": "0.1.2",

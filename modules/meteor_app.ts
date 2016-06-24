@@ -54,7 +54,7 @@ export class MeteorApp {
     if (isBlank(platRef)) {
       platRef = createPlatform(ReflectiveInjector.resolveAndCreate(platProviders));
     }
-    appProviders = isPresent(providers) ? [appProviders, providers] : appProviders;
+    appProviders = isPresent(providers) ? [...appProviders, ...providers] : appProviders;
     appProviders.push(provide(MeteorApp, {
       deps: [ApplicationRef],
       useFactory: appRef => {
@@ -69,7 +69,7 @@ export class MeteorApp {
 
     return new Promise<ComponentRef<any>>(function(resolve, reject) {
       Meteor.startup(() => {
-        return coreLoadAndBootstrap(appInjector, component)
+        return coreLoadAndBootstrap(component, appInjector)
           .then(compRef => {
             // It's ok since one app can bootstrap
             // one component currently.

@@ -24,7 +24,7 @@ Meteor.methods({
   }
 });
 
-export let generateData = Promise.denodeify((cb) => {
+export let generateData = () => new Promise((resolve) => {
   const testConnection = Meteor.connect(Meteor.absoluteUrl());
-  testConnection.call('tasks', cb);
+  testConnection.call('tasks', () => resolve());
 });
