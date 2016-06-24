@@ -23,8 +23,7 @@
   "license": "MIT",
   "scripts": {
     "build": "gulp build",
-    "test": "./run_tests.sh",
-    "prepublish": "npm run build"
+    "test": "./run_tests.sh"
   },
   "peerDependencies": {
     "@angular/core": "^2.0.0-rc.2",
