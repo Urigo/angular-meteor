@@ -17,11 +17,7 @@ enableProdMode();
 })
 export class Todos {
   addTask(text: string) {
-    Tasks.insert({
-      text: text,
-      checked: false,
-      private: false
-    });
+    Meteor.call('tasks.addTask', text);
   }
 
   get todoCount() {

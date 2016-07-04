@@ -1,5 +1,9 @@
 {
-  "ambientDependencies": {
+  "globalDependencies": {
     "meteor": "github:meteor-typings/meteor/1.3#f63c5e15a2b39a60a938851a657a51dcd9429b73"
+  },
+  "resolution": {
+    "main": "typings/main",
+    "browser": "typings/browser"
   }
 }

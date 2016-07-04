@@ -8,7 +8,8 @@ Meteor.methods({
     Tasks.insert({
       text: text,
       checked: false,
-      private: false
+      private: false,
+      createdAt: new Date()
     });
   },
 

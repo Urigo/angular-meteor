@@ -4,5 +4,6 @@ declare type Task = {
   checked: boolean,
   private: boolean,
   username?: string,
-  owner?: string
+  owner?: string,
+  createdAt?: Date
 }
