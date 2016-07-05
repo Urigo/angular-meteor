@@ -8,6 +8,12 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true
   },
+  "files": [
+    "client/app.ts",
+    "typings/main/index.d.ts",
+    "typings/browser/index.d.ts",
+    "typings/task.d.ts"
+  ],
   "exclude": [
     "node_modules"
   ]

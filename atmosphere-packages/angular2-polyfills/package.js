@@ -1,5 +1,5 @@
 Package.describe({
-  name: 'barbatus:angular2-runtime',
+  name: 'barbatus:angular2-polyfills',
   version: '0.5.0',
   summary: 'Polyfills for Angular2',
   git: 'https://github.com/Urigo/angular2-meteor/tree/master/atmosphere-packages',

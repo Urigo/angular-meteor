@@ -8,13 +8,13 @@
 BasicCompiler = class BasicCompiler {
   addCompileResult(inputFile, result) {
     const ex = inputFile.getExtension();
-    const path = inputFile.getPathInPackage();
-    const cssPath = ex !== 'css' ? path + '.css' : path;
-
-    if (!cssPath.startsWith('imports')) {
+    const sourcePath = inputFile.getPathInPackage();
+    const targetPath = ex !== 'css' ? sourcePath + '.css' : sourcePath;
+ 
+    if (!sourcePath.startsWith('imports')) {
       inputFile.addStylesheet({
         data: result.css,
-        path: cssPath,
+        path: targetPath,
         sourceMap: result.sourceMap
       });
       return;
@@ -24,24 +24,35 @@ BasicCompiler = class BasicCompiler {
     // can be downloaded as server assets.
     inputFile.addAsset({
       data: result.css,
-      path: cssPath
+      path: sourcePath
+    });
+
+    // Export URL of the template as a JS-module, which
+    // means imports as follows now make sense:
+    //   import styleUrl from 'path/to/style.css!url'
+    let urlCode = `
+      var url = '${sourcePath}?hash=${inputFile.getSourceHash()}';
+      exports.default = url;`;
+    const urlPath = sourcePath + '!url';      
+    inputFile.addJavaScript({
+      data: urlCode,
+      path: urlPath
     });
 
     // Export current template as a JS-module, which
-    // means constructions as follows now make sense:
+    // means imports as follows now make sense:
     //   import style from 'path/to/style.css'
     //
-    // JS-module is being added as 'lazy', which
-    // means it'll appear on the client only if it's
+    // JS-module is being added as 'lazy', i.e.
+    // it'll appear on the client only if it's
     // explicitly imported somewhere in the code base.
     let css = Babel.compile(`
       const css = \`${result.css}\`;
       exports.default = css;`
     );
-
     inputFile.addJavaScript({
       data: css.code,
-      path: cssPath,
+      path: sourcePath,
       lazy: true
     });
   }
