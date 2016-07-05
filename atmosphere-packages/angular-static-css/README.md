@@ -20,7 +20,7 @@ two other ways to access styles for a Angular 2 component.
 
    ```ts
 
-    import styleUrl from 'imports/foo.less!url';
+    import styleUrl from './foo.less!url';
 
     @Component({
       selector: 'foo',
@@ -48,17 +48,16 @@ two other ways to access styles for a Angular 2 component.
    ```
 
 > Please note the only way currently to get rid of TypeScript warnigns that modules `./foo.less` and
-> 'imports/foo.less!url' are not found is to use `require` directly, i.e.:
+> `imports/foo.less!url` are not found is to use `require` directly, i.e.:
   ```ts
     @Component({
       selector: 'foo',
       styles: [require('./foo.less')]
     })
-    class Foo {
-    }
+    class Foo {}
   ```
-> In the near future when TypeScript@2.0 is released, you'll be able to define wildcard modules - e.g.,
-`declare module '*.less'` - to get rid of those warnigns.
+> In the near future when TypeScript@2.0 is released, you'll be able to define wildcard modules — e.g.,
+`declare module '*.less'` — to get rid of those warnigns.
   
 ### Examples
  
