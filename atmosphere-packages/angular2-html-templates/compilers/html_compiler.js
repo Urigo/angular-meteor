@@ -99,19 +99,38 @@ NgTemplateCompiler = class NgTemplateCompiler extends NgCachingCompiler {
 
   addCompileResult(file, result) {
     let htmlPath = file.getPathInPackage();
-    htmlPath = htmlPath.replace(".ng2.html", ".html");
+    htmlPath = htmlPath.replace('.ng2.html', '.html');
 
     file.addAsset({
       data: result,
       path: htmlPath
     });
 
-    // Export template URL in JS-module.
-    // Issue - 275#issuecomment-220114345
-    let templateUrl = `exports.default = '/${htmlPath}';`;
-
+    // Export content of the template as a JS-module, which
+    // means constructions as follows now make sense:
+    //   import template from 'path/to/template.html!raw'
+    //
+    // JS-module is being added as 'lazy', which
+    // means it'll appear on the client only if it's
+    // explicitly imported somewhere in the code base.
+    let template = Babel.compile(`
+      const html = \`${result}\`;
+      exports.default = html;`
+    );
     file.addJavaScript({
-      data: templateUrl,
+      data: template.code,
+      path: htmlPath + '!raw',
+      lazy: true
+    });
+
+    // Export URL of the template as a JS-module, which
+    // means imports as follows now make sense:
+    //   import htmlUrl from 'path/to/style.html'
+    let urlCode = `
+      var url = '/${htmlPath}?hash=${file.getSourceHash()}';
+      module.exports.default = url;`;
+    file.addJavaScript({
+      data: urlCode,
       path: htmlPath,
       lazy: true
     });

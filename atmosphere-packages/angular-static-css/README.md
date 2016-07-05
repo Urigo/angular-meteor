@@ -24,7 +24,7 @@ two other ways to access styles for a Angular 2 component.
 
     @Component({
       selector: 'foo',
-      styleUrls: ['imports/foo.less.css']
+      styleUrls: [styleUrl]
     })
     class Foo {
     }
@@ -52,7 +52,7 @@ two other ways to access styles for a Angular 2 component.
   ```ts
     @Component({
       selector: 'foo',
-      styles: [require('./foo.less')]
+      styles: [require.default('./foo.less')]
     })
     class Foo {
     }

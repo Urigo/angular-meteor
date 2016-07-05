@@ -31,7 +31,7 @@ BasicCompiler = class BasicCompiler {
     // means imports as follows now make sense:
     //   import styleUrl from 'path/to/style.css!url'
     let urlCode = `
-      var url = '${sourcePath}?hash=${inputFile.getSourceHash()}';
+      var url = '/${sourcePath}?hash=${inputFile.getSourceHash()}';
       exports.default = url;`;
     const urlPath = sourcePath + '!url';      
     inputFile.addJavaScript({
@@ -48,7 +48,7 @@ BasicCompiler = class BasicCompiler {
     // explicitly imported somewhere in the code base.
     let css = Babel.compile(`
       const css = \`${result.css}\`;
-      exports.default = css;`
+      module.exports.default = css;`
     );
     inputFile.addJavaScript({
       data: css.code,

@@ -8,11 +8,13 @@ import {bootstrap} from 'angular2-meteor-auto-bootstrap';
 
 import {disableDeprecatedForms, provideForms} from '@angular/forms';
 
+import templateUrl from './app.html';
+
 enableProdMode();
 
 @Component({
   selector: 'app',
-  templateUrl: 'client/app.html',
+  templateUrl: templateUrl,
   directives: [TaskList]
 })
 export class Todos {

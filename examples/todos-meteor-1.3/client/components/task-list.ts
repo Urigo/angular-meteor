@@ -8,9 +8,11 @@ import {Tasks} from '../../tasks';
 
 import {Mongo} from 'meteor/mongo';
 
+import templateUrl from './task-list.html';
+
 @Component({
   selector: 'task-list',
-  templateUrl: 'client/components/task-list.html',
+  templateUrl: templateUrl,
   directives: [TaskView]
 })
 export class TaskList extends MeteorComponent implements OnChanges {
