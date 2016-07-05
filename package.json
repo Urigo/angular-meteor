@@ -22,7 +22,11 @@
   "author": "Angular2-Meteor (https://github.com/Urigo/angular2-meteor)",
   "license": "MIT",
   "scripts": {
-    "build": "gulp build",
+    "typings": "typings i",
+    "prebuild": "npm run typings && npm run lint",
+    "build": "npm run build-only",
+    "build-only": "tsc",
+    "lint": "tslint modules/*.ts",
     "test": "./run_tests.sh"
   },
   "peerDependencies": {
@@ -39,16 +43,10 @@
     "reflect-metadata": "^0.1.2",
     "ghooks": "^1.2.1",
     "validate-commit-msg": "^2.6.1",
-    "gulp": "^3.9.1",
-    "gulp-clean": "^0.3.2",
-    "gulp-git": "^1.7.0",
-    "gulp-tslint": "^4.3.4",
-    "gulp-typings": "^1.3.0",
-    "run-sequence": "^1.1.5",
     "tsc": "^1.20150623.0",
     "tslint": "^3.6.0",
-    "typescript": "^1.7.5",
-    "typings": "^0.7.7"
+    "typescript": "^1.8.0",
+    "typings": "^1.3.0"
   },
   "config": {
     "ghooks": {
