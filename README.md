@@ -54,7 +54,7 @@ The reason is that Meteor doesn't allow more than two processor for one extensio
 
 Angular 2 heavily relies on some polyfills (`zone.js`, `reflect-metadata` etc).
 There are two ways to add them:
-- Add `import 'angular2-meteor-polyfills'` in every file that needs polyfills;
+- Add `import 'angular2-meteor-polyfills'` at the top of every file that imports Angular 2;
 - Add `barbatus:angular2-polyfills` package. Since it's a package, it's loaded by Meteor before any user code.
 
 Please, don't forget to add a main HTML file (can be `index.html` or with any other name) even if your app template consists of one single tag,
@@ -73,9 +73,11 @@ import {bootstrap} from 'angular2-meteor-auto-bootstrap';
 
 And now you can iterate `Mongo.Cursor` objects with Angular 2.0 ngFor!
 
-For example, change `client/app.ts` to:
+Below is a valid Angular 2 component used in a Meteor app:
+
+`client/app.ts`
 ````ts
-    // ....
+    const Parties = new Mongo.Collection('parties');
 
     @Component({
       templateUrl: 'client/parties.html'
@@ -85,11 +87,9 @@ For example, change `client/app.ts` to:
           this.parties = Parties.find();
         }
     }
-
-    // ....
 ````
 
-Add Angular2 template file `client/parties.html` with a content as follows:
+`client/parties.html`
 ````html
     <div *ngFor="let party of parties">
       <p>Name: {{party.name}}</p>
@@ -98,9 +98,7 @@ Add Angular2 template file `client/parties.html` with a content as follows:
 
 At this moment, you are ready to create awesome apps backed by the power of Angular 2 and Meteor!
 
-Other one feature is to extend a component with `MeteorComponent`. `MeteorComponent` wraps major Meteor
-methods and does some work behind the scene (such as cleanup) for you to make sure your component
-stays ok:
+Another part of this package's API is a basic component class called `MeteorComponent`. `MeteorComponent` wraps major Meteor methods, and does some work behind the scene (such as cleanup) for a component that extends it:
 
 ````ts
     import {bootstrap} from 'angular2-meteor-auto-bootstrap';
