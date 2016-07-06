@@ -3,13 +3,10 @@ Angular2 + Meteor integration.
 
 ## Table of Contents
 * [Tutorial](../../#tutorial)
-* [Questions and Issues](../../#questions-and-issues)
 * [Quick Start](../../#quick-start)
     * [Install package](../../#install-package)
-    * [Import Angular2 into your app](../../#import-angular2-into-your-app)
-    * [Start using Meteor in your angular2 app](../../#start-using-meteor-in-your-angular2-app)
+    * [Using Meteor in your angular2 app](../../#using-meteor-in-your-angular2-app)
 * [Demos](../../#demos)
-* [Server Side](../../#server-side)
 * [TypeScript](../../#typescript)
 * [Roadmap](../../#roadmap)
 * [Contribution](../../#contribution)
@@ -29,7 +26,6 @@ If you have rather a question than an issue, please consider the following resou
 The chances to get a quick response there is higher than posting a new issue here.
 
 If you've decided that it's likely a real issue, please consider going through the following list at first:
-- Check out common issues and troubleshoot [section](../../#common-issues-and-troubleshoot);
 - Check quickly recently [created](https://github.com/Urigo/angular2-meteor/issues)/[closed](https://github.com/Urigo/angular2-meteor/issues?q=is%3Aissue+is%3Aclosed) issues: chances are high that someone's already created a similar one
   or similar issue's been resolved;
 - If your issue looks nontrivial, we would approciate a small demo to reproduce it.
@@ -45,61 +41,31 @@ To install Angular2-Meteor's NPMs:
     npm install angular2-meteor-auto-bootstrap --save
 ````
 
-You'd likely prefer to install another Meteor package as well  — `angular2-compilers`.
-This package adds our own HTML processor and TypeScript compiler to a Meteor app.
-TypeScript is a language that makes development with Angular 2 really easy, and currently the only one
-fully supported by the Angular2-Meteor. So one of the prerequisites will be to run:
-````
-   meteor add angular2-compilers
-````
+Second step is to add ` angular2-compilers` package — `meteor add angular2-compilers`.
+This package adds custom HTML processor, LESS and TypeScript compilers.
+Custom HTML processor and LESS compiler make sure that static resources are used
+in the way that Angular 2 requires, and TypeScript is a recommended JS-superset to develop with Angular 2.
 
-Please note that you'll have to remove the standard Meteor HTML processor if you have it installed.
+Please note that you'll have to remove the standard Meteor HTML processor (and LESS package).
 The reason is that Meteor doesn't allow more than two processor for one extension:
-
 ````
    meteor remove blaze-html-templates
 ````
 
-Angular 2 heavily relies on some polyfills. To add them,
-one can use `angular2-meteor-polyfills` NPM importing it manually in each file that requires
-polyfills. To avoid manual imports though, you can try `barbatus:angular2-polyfills`.
-Since it's a package, it's loaded by Meteor before any user code.
+Angular 2 heavily relies on some polyfills (`zone.js`, `reflect-metadata` etc).
+There are two ways to add them:
+- Add `import 'angular2-meteor-polyfills'` in every file that needs polyfills;
+- Add `barbatus:angular2-polyfills` package. Since it's a package, it's loaded by Meteor before any user code.
 
 Please, don't forget to add a main HTML file (can be `index.html` or with any other name) even if your app template consists of one single tag,
 e.g., `<body><app></app></body>`.
 
-### Import Angular2 into your app:
-This package assumes TypeScript as the main language for development with Angular 2.
+### Using Meteor in your Angular 2 app:
 
-ES6 modules are supported via CommonsJS (introduced in Meteor 1.3) module loader library.
+This package contains modules that simplify development of a Meteor app with Angular 2.
 
-To start, create `client/app.ts` file, import `Component` and then bootstrap the app:
-````ts
-    import {Component} from '@angular/core';
-    import {bootstrap} from '@angular/platform-browser-dynamic';
-
-    @Component({
-      selector: 'socially',
-      template: "<p>Hello World!</p>"
-    })
-    class Socially {}
-
-    bootstrap(Socially);
-````
-
-Add `index.html` file to the app root folder:
-````html
-    <body>
-       <socially></socially>
-    </body>
-````
-At this point you should see the app working and showing "Hello World!".
-
-### Start using Meteor in your Angular2 app:
-
-This package comes with some modules that makes it easy to use Meteor in Angular 2.
-
-You can use Meteor collections in the same way as you would do in a regular Meteor app with Blaze, you just need to use another `bootstrap` method, instead of the one the comes with Angular2:
+You can use Meteor collections in the same way as you would do in a regular Meteor app with Blaze,
+the only thing required is to make use of the `bootstrap` method from `angular2-meteor-auto-bootstrap`:
 
 ````js
 import {bootstrap} from 'angular2-meteor-auto-bootstrap';
@@ -132,10 +98,11 @@ Add Angular2 template file `client/parties.html` with a content as follows:
 
 At this moment, you are ready to create awesome apps backed by the power of Angular 2 and Meteor!
 
-To use Meteor features, make sure that your components extends `MeteorComponent`:
+Other one feature is to extend a component with `MeteorComponent`. `MeteorComponent` wraps major Meteor
+methods and does some work behind the scene (such as cleanup) for you to make sure your component
+stays ok:
 
 ````ts
-    import {Component} from '@angular/core';
     import {bootstrap} from 'angular2-meteor-auto-bootstrap';
     import {MeteorComponent} from 'angular2-meteor';
     import {MyCollection} form '../model/my-collection.ts';
@@ -168,11 +135,6 @@ Check out two demos for the quick how-to:
 * the Tutorial's [Socially app](https://github.com/Urigo/meteor-angular2.0-socially)
 * Simple [Todos](https://github.com/Urigo/Meteor-Angular2/tree/master/examples/todos-meteor-1.3) demo
 
-## Server Side
-One of the big advantages of Meteor is that you can use TypeScript and CommonJS on the server side as well.
-
-It means that you can easily share your code between client and server!
-
 ## TypeScript
 The package uses [TypeScript for Meteor](https://github.com/barbatus/typescript) to compile (transpile) `.ts`-files.
 
@@ -204,34 +166,13 @@ For example, to install Meteor declaration file run:
 ````
 npm install typings -g
 
-typings install registry:env/meteor --ambient
+typings install registry:env/meteor --global
 ````
 
 For more information on Meteor typings, please read [here](https://github.com/meteor-typings/meteor).
 
 Please note that you don't need to worry about Angular 2's typings and typings of the related NPMs!
 TypeScript finds and checkes them in NPMs automatically.
-
-## Common Issues and Troubleshoot
-
-### Upgrading to Meteor 1.3
-
-Please don't use Atmosphere packages related to Angular 2 with Meteor 1.3, use NPM equivalents instead;
-most of these atmosphere packages were anyways converted from NPMs.
-The reason is that they are based on SystemJS, which won’t work with Meteor 1.3 and `modules` package any more.
-
-For example, check out Angular2 Maps [here](https://www.npmjs.com/package/angular2-google-maps).
-
-Or, you may be interested in Angular 2 version of the Meteor Accounts UI.
-You can find out a preliminary version [here](https://github.com/Urigo/angular2-meteor-accounts-ui).
-
-### `Maximum call stack size exceeded` exception
-
-This error is likely caused by incompatibility of the currently
-installed version of zone.js and Angular 2.
-
-If you are using `barbatus:angular2-runtime`, update to the 
-`0.5.0` version.
 
 ## Change Log
 
