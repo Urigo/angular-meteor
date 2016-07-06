@@ -3,9 +3,9 @@
 This package combines three compilers required to develop with Angular 2.0 in Meteor.
 
 The compilers are: 
-* [HTML processor](https://github.com/Urigo/meteor-static-html-compiler);
-* [LESS compiler](https://github.com/Urigo/angular2-meteor/tree/master/atmosphere-packages/css-compiler);
-* [TypeScript compiler](https://github.com/barbatus/typescript).
+* [HTML processor](https://github.com/Urigo/meteor-static-html-compiler)
+* [LESS compiler](https://github.com/Urigo/angular2-meteor/tree/master/atmosphere-packages/css-compiler)
+* [TypeScript compiler](https://github.com/barbatus/typescript)
 
 ### Installing the compilers
 
@@ -23,4 +23,4 @@ $ meteor add angular2-compilers
 ### How to use those compilers?
 
 So you do not have to do anything else besides adding the compilers to your project. 
-The compilers will automatically compiles every `.ts` file, `.html` or `.less` file you add to your project.
+The compilers will automatically compiles every `.ts`, `.html` or `.less` file you add to your project.
