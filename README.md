@@ -5,7 +5,7 @@ Angular2 + Meteor integration.
 * [Tutorial](../../#tutorial)
 * [Quick Start](../../#quick-start)
     * [Install package](../../#install-package)
-    * [Using Meteor in your angular2 app](../../#using-meteor-in-your-angular2-app)
+    * [Using Angular 2 in a Meteor app](../../#using-angular-2-in-a-meteor-app)
 * [Demos](../../#demos)
 * [TypeScript](../../#typescript)
 * [Roadmap](../../#roadmap)
@@ -60,7 +60,7 @@ There are two ways to add them:
 Please, don't forget to add a main HTML file (can be `index.html` or with any other name) even if your app template consists of one single tag,
 e.g., `<body><app></app></body>`.
 
-### Using Meteor in your Angular 2 app:
+### Using Angular 2 in a Meteor app:
 
 This package contains modules that simplify development of a Meteor app with Angular 2.
 
