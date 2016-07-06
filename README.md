@@ -60,18 +60,12 @@ The reason is that Meteor doesn't allow more than two processor for one extensio
    meteor remove blaze-html-templates
 ````
 
-Angular 2 heavily relies on some polyfills and dependencies.
-For example, in order to make it work, you'll need to load (import) `reflect-metatada` and `zone.js`
-before you can use any component from `angular2` itself.
-
-There is a way to overcome that inconvenience (i.e., importing dependencies manually):
-you can install `barbatus:angular2-runtime`, a package that adds all the required dependencies.
+Angular 2 heavily relies on some polyfills. To add them,
+one can use `angular2-meteor-polyfills` NPM importing it manually in each file that requires
+polyfills. To avoid manual imports though, you can try `barbatus:angular2-polyfills`.
 Since it's a package, it's loaded by Meteor before any user code.
 
-If you prefer to install polyfills manually for some reason,
-you can try `angular2-meteor-polyfills` NPM. Import polyfills (whether on the client or server) by `import 'angular2-meteor-polyfills'`.
-
-Please don't forget to add a main HTML file (can be `index.html` or with any other name) even if your app template consists of one single tag,
+Please, don't forget to add a main HTML file (can be `index.html` or with any other name) even if your app template consists of one single tag,
 e.g., `<body><app></app></body>`.
 
 ### Import Angular2 into your app:

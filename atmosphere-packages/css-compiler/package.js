@@ -1,5 +1,5 @@
 Package.describe({
-  name: 'barbatus:angular-static-css',
+  name: 'barbatus:css-compiler',
   version: '0.2.0',
   summary: 'Angular 2 CSS compiler for Meteor',
   git: 'https://github.com/Urigo/angular2-meteor/tree/master/atmosphere-packages/angular2-static-css',
@@ -11,7 +11,7 @@ Npm.depends({
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.3');
+  api.versionsFrom('1.3.1');
 
   api.use([
     'caching-compiler@1.0.0',
