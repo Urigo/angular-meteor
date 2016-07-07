@@ -18,14 +18,16 @@ Package.onUse(function(api) {
     'ecmascript@0.4.3',
     'underscore@1.0.8',
     'check@1.2.1',
-    'babel-compiler@6.6.4'
+    'babel-compiler@6.6.4',
+    'barbatus:scss-compiler@3.8.1_1'
   ]);
 
   api.addFiles([
     'compilers/basic_compiler.js',
     'compilers/css_compiler.js',
     'compilers/less_compiler.js',
-    'compilers/style_compiler.js'
+    'compilers/style_compiler.js',
+    'compilers/sass_compiler.js'
   ], 'server');
 
   api.export(['StyleCompiler'], 'server');

@@ -14,7 +14,7 @@ Package.registerBuildPlugin({
   use: [
     // Uses an external packages to get the actual compilers
     'ecmascript@0.4.3',
-    'angular2-html-templates@0.5.4',
+    'urigo:static-html-compiler@0.0.5',
     'barbatus:css-compiler@0.2.0'
   ]
 });

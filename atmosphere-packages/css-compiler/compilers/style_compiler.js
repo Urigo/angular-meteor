@@ -5,9 +5,12 @@
  */
 StyleCompiler = class StyleCompiler {
   constructor() {
+    let scss = new SassCompilerExtended();
     this.compilers = {
       css: new CssCompiler(),
-      less: new LessCompiler()
+      less: new LessCompiler(),
+      scss: scss,
+      sass: scss
     };
   }
 

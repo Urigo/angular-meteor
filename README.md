@@ -42,8 +42,8 @@ To install Angular2-Meteor's NPMs:
 ````
 
 Second step is to add ` angular2-compilers` package — `meteor add angular2-compilers`.
-This package adds custom HTML processor, LESS and TypeScript compilers.
-Custom HTML processor and LESS compiler make sure that static resources are used
+This package adds custom HTML processor, LESS, SASS and TypeScript compilers.
+Custom HTML processor and Style compilers make sure that static resources can be used
 in the way that Angular 2 requires, and TypeScript is a recommended JS-superset to develop with Angular 2.
 
 Please note that you'll have to remove the standard Meteor HTML processor (and LESS package).
@@ -132,6 +132,23 @@ Check out two demos for the quick how-to:
 
 * the Tutorial's [Socially app](https://github.com/Urigo/meteor-angular2.0-socially)
 * Simple [Todos](https://github.com/Urigo/Meteor-Angular2/tree/master/examples/todos-meteor-1.3) demo
+
+## Static Resources
+
+Angular 2 allows to define a component's template and styles in two ways: using template content directly
+or using template URL. We recommend to use string content directly.
+
+For that purpose, `angular2-compilers`'s HTML, LESS, and SASS compilers process associated files and
+add a Node JS-module for each one that exports associated string content outside.
+After, one can import a template content in ES6 style:
+```
+  import template from  './foo.html';
+
+  import style from './foo.less';
+```
+
+For more information, please check out [css-compiler](https://github.com/Urigo/angular2-meteor/tree/master/atmosphere-packages/css-compiler)
+and (static-html-compiler)[https://github.com/Urigo/meteor-static-html-compiler].
 
 ## TypeScript
 The package uses [TypeScript for Meteor](https://github.com/barbatus/typescript) to compile (transpile) `.ts`-files.

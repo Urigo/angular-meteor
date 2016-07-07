@@ -1,10 +1,12 @@
 ## Angular 2 HTML templates compiler for Meteor
 
-This package provides an HTML compiler that required in order to write Angular 2.0 code inside Meteor application.
-
-The HTML compiler is based on two compilers:
-* HTML compiler which compiles the main endpoint of your application - that means the only file that contain `<head>` and `<body>` tags.
-* Templates compiler - those are HTML files that used as templates, the **must not** contain any `<head>` or `<body>` tags.
+This package exports an HTML processor that processes HTML files as follows:
+* Checks whether your app contains a main HTML file(s), i.e. a file with `<head>` and `<body>` tags.
+  If there are mutiple of them, it combines them together;
+* HTML files that don't contain `<head>` or `<body>` tags are treated as resources, i.e. they are
+  become available on the server as static resources (i.e., added with `Meteor.addAsset`);
+* Adds two Node JS-modules for each template's HTML content and template URL to be able to import them in ES6 style:
+  `import contentUrl from './foo.html'`, `import content from './foo.html!raw'`.
 
 ### Installing the compiler
 

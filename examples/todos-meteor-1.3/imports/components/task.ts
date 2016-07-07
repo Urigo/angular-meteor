@@ -3,7 +3,7 @@ import {Component, Input} from '@angular/core';
 import {MeteorComponent} from 'angular2-meteor';
 
 import style from './task.less';
-import template from './task.html!raw';
+import template from './task.html';
 
 @Component({
   selector: 'task',
