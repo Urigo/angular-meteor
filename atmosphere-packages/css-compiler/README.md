@@ -2,8 +2,8 @@
 
 Processes styles and makes them accessible in the ways styles are used in Angular 2.
 
-> Currenly only `less` styles are supported.
-> Make sure to remove `less` (if installed) package to avoid conflicts.
+> Currenly simple CSS files are not supported, only LESS and SASS ones.
+> Make sure to remove `less` and `sass` (if installed) packages to avoid conflicts.
 
 ### Usage
 
