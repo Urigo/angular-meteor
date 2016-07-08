@@ -5,7 +5,7 @@ This package exports an HTML processor that processes HTML files as follows:
   If there are mutiple of them, it combines them together;
 * HTML files that don't contain `<head>` or `<body>` tags are treated as resources, i.e. they are
   become available on the server as static resources (i.e., added with `Meteor.addAsset`);
-* Adds two Node JS-modules for each template's HTML content and template URL to be able to import them in ES6 style:
+* Adds two Node JS-modules for each template's HTML content and template URL, so user can import them in ES6 style:
   `import contentUrl from './foo.html'`, `import content from './foo.html!raw'`.
 
 ### Installing the compiler

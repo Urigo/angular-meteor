@@ -136,10 +136,10 @@ Check out two demos for the quick how-to:
 ## Static Resources
 
 Angular 2 allows to define a component's template and styles in two ways: using template content directly
-or using template URL. We recommend to use string content directly.
+or using template URL. We recommend to use template content directly.
 
 For that purpose, `angular2-compilers`'s HTML, LESS, and SASS compilers process associated files and
-add a Node JS-module for each one that exports associated string content outside.
+add Node JS-modules that export string file contents outside.
 After, one can import a template content in ES6 style:
 ```
   import template from  './foo.html';
@@ -148,7 +148,7 @@ After, one can import a template content in ES6 style:
 ```
 
 For more information, please check out [css-compiler](https://github.com/Urigo/angular2-meteor/tree/master/atmosphere-packages/css-compiler)
-and (static-html-compiler)[https://github.com/Urigo/meteor-static-html-compiler].
+and [static-templates](https://github.com/Urigo/meteor-static-templates).
 
 ## TypeScript
 The package uses [TypeScript for Meteor](https://github.com/barbatus/typescript) to compile (transpile) `.ts`-files.
