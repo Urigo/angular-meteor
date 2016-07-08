@@ -148,7 +148,7 @@ After, one can import a template content in ES6 style:
 ```
 
 For more information, please check out [css-compiler](https://github.com/Urigo/angular2-meteor/tree/master/atmosphere-packages/css-compiler)
-and [static-html-compiler](https://github.com/Urigo/meteor-static-html-compiler).
+and [static-templates](https://github.com/Urigo/meteor-static-templates).
 
 ## TypeScript
 The package uses [TypeScript for Meteor](https://github.com/barbatus/typescript) to compile (transpile) `.ts`-files.
