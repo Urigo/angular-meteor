@@ -46,4 +46,4 @@ angular.module('angular-templates', []).config([
 ]).constant('$angularTemplatesSettings', {
   error: true,
   warning: true
-});;
+});

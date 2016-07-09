@@ -9,11 +9,11 @@ Package.describe({
 Package.registerBuildPlugin({
   name: 'compileNGTemplate',
   sources: [
-    'plugin/ng-caching-html-compiler.js',
-    'plugin/ng-template-compiler.js'
+    'plugin.js'
   ],
   use: [
-    'angular-templates-runtime@0.0.1'
+    'urigo:static-html-compiler@0.1.4',
+    'ecmascript@0.2.0'
   ]
 });
 
