@@ -1,5 +1,40 @@
-<a name="0.5.6"></a>
-## 0.5.6 (2016-07-08)
+<a name="0.6.0"></a>
+## 0.6.0 (2016-07-09)
+
+### Features
+
+#### templates (breaking change - first update to angular2-compilers@0.5.8, read this, and only then update to angular2-compilers@0.6.0)
+
+The best practice it to import content of the template, so we released [urigo:static-templates](https://github.com/Urigo/meteor-static-templates) for that.
+
+In order to provide an easy migration, we've added the possibility to export content also in the latest [angular2-html-templates@0.5.8](https://github.com/Urigo/angular2-meteor/tree/master/atmosphere-packages/angular2-html-templates) with the `!raw` suffix:
+
+- Add '!raw' suffix [PR #8](https://github.com/Urigo/meteor-static-html-compiler/pull/8)
+
+```
+import template from  './foo.html!raw';
+
+@Component({
+  template: template
+})
+```
+
+And then we've released `angular2-compilers@0.6.0` that drops `angular2-html-compilers` in favor of `urigo:static-templates`:
+
+* **angular2-compilers:** v0.1.4 of urigo:static-html-compiler ([a0d28d3](https://github.com/Urigo/angular2-meteor/commit/a0d28d3))
+
+`urigo:static-templates` also supports the `!raw` suffix but you don't need it because it support raw by default.
+We added it so the when you update to `angular2-compilers@0.6.0` all your raw imports will work and only then you can remove it.
+
+```
+import template from  './foo.html';
+
+@Component({
+  template: template
+})
+```
+
+* **index.js, Angular2:** add index.js to the NPM, add direct Angular2 dependency to the package.json ([7ef35eb](https://github.com/Urigo/angular2-meteor/commit/7ef35eb))
 
 
 ### Bug Fixes
@@ -25,14 +60,6 @@
 * typos in common issues and troubleshoot ([d9b9402](https://github.com/Urigo/angular2-meteor/commit/d9b9402))
 * **unit tests:** change to a 1.3 beta version that works ok with the jasmine ([27b4d5c](https://github.com/Urigo/angular2-meteor/commit/27b4d5c))
 * **unit tests:** correct angular2-meteor URL, add additional layer of testing by converting .js files to .ts ones, update Meteor to 1.3-rc.4 ([c0c23cd](https://github.com/Urigo/angular2-meteor/commit/c0c23cd))
-
-
-### Features
-
-* **index.js, Angular2:** add index.js to the NPM, add direct Angular2 dependency to the package.json ([7ef35eb](https://github.com/Urigo/angular2-meteor/commit/7ef35eb))
-* **templates:** exports templateUrl ([5f2c42c](https://github.com/Urigo/angular2-meteor/commit/5f2c42c))
-
-
 
 ## 0.3.3
 
