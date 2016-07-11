@@ -3,16 +3,17 @@
 
 ### Breaking Changes
 
-Importing URLs of the component templates in a way as `import url from './foo.html'` will be deprecated from `angular2-compilers@0.6.0` in favor of the inline templates. That means the expression above will become equivalent to `import template from './foo.html'`.
-For the migration, we've added to `angular2-compilers@0.5.8` a special JS-module that exports template content as well but with a special suffix added to the URL, i.e., `!raw` and the whole path - `./foo.html!raw`. Pathes like `./foo.html!raw` are supported by `angular2-compilers@0.6.0` as well allowing you to transit easily.
+Importing URLs of the component templates in a way as `import url from './foo.html'` will be deprecated from `angular2-compilers@0.6.0` in favor of the inline templates. That means the expression above will become now `import template from './foo.html'`.
+
+For the migration, we've added a special JS-module to `angular2-compilers@0.5.8` that exports template content as well but with a special suffix added to the URL, i.e., `!raw` and the whole path is `./foo.html!raw`. URLs like `./foo.html!raw` are supported by `angular2-compilers@0.6.0` as well allowing you to transit easily.
 
 `angular2-compilers@0.6.0` is based on `urigo:static-html-compiler@0.1.4` ([a0d28d3](https://github.com/Urigo/angular2-meteor/commit/a0d28d3)).
 
 ### Features
 
-- Main Meteor methods are now patched to run ngZone after the callback executions [2145847](https://github.com/Urigo/angular2-meteor/commit/2145847). In other words, `autoBind` param of the `MeteorComponent` wrappers is set to true by default. Fixes this [issue] (https://github.com/Urigo/angular2-meteor/issues/140) (thanks @staekefor the idea and discussion)
+- Main Meteor methods are now patched to run ngZone after the callback executions [(2145847)](https://github.com/Urigo/angular2-meteor/commit/2145847). In other words, `autoBind` param of the `MeteorComponent` wrappers is set to true by default. Fixes this [issue](https://github.com/Urigo/angular2-meteor/issues/140) (thanks @staeke for the idea and discussion)
 - `MeteorComponent` is improved to support server side rendering. One can use `angular2-meteor` on the server along with [`angular2-meteor-universal`](https://github.com/barbatus/angular2-meteor-universal)
-- LESS and SASS compilers are added to `angular2-compilers@0.6.0`. Angular2 components can start importing styles in ES6 style (as templates), if styles are located in the root `imports` folder
+- LESS and SASS compilers are added to `angular2-compilers@0.6.0`. Angular2 components can start importing styles in the ES6 style (as templates), if styles are located in the root `imports` folder
 
 ### Bug Fixes
 
