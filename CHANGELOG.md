@@ -1,65 +1,30 @@
 <a name="0.6.0"></a>
 ## 0.6.0 (2016-07-09)
 
+### Breaking Changes
+
+Importing URLs of the component templates in a way as `import url from './foo.html'` will be deprecated from `angular2-compilers@0.6.0` in favor of the inline templates. That means the expression above will become now `import template from './foo.html'`.
+
+For the migration, we've added a special JS-module to `angular2-compilers@0.5.8` that exports template content as well but with a special suffix added to the URL, i.e., `!raw` and the whole path is `./foo.html!raw`. URLs like `./foo.html!raw` are supported by `angular2-compilers@0.6.0` as well allowing you to transit easily.
+
+`angular2-compilers@0.6.0` is based on `urigo:static-html-compiler@0.1.4` ([a0d28d3](https://github.com/Urigo/angular2-meteor/commit/a0d28d3)).
+
 ### Features
 
-#### templates (breaking change - first update to angular2-compilers@0.5.8, read this, and only then update to angular2-compilers@0.6.0)
-
-The best practice it to import content of the template, so we released [urigo:static-templates](https://github.com/Urigo/meteor-static-templates) for that.
-
-In order to provide an easy migration, we've added the possibility to export content also in the latest [angular2-html-templates@0.5.8](https://github.com/Urigo/angular2-meteor/tree/master/atmosphere-packages/angular2-html-templates) with the `!raw` suffix:
-
-- Add '!raw' suffix [PR #8](https://github.com/Urigo/meteor-static-html-compiler/pull/8)
-
-```
-import template from  './foo.html!raw';
-
-@Component({
-  template: template
-})
-```
-
-And then we've released `angular2-compilers@0.6.0` that drops `angular2-html-compilers` in favor of `urigo:static-templates`:
-
-* **angular2-compilers:** v0.1.4 of urigo:static-html-compiler ([a0d28d3](https://github.com/Urigo/angular2-meteor/commit/a0d28d3))
-
-`urigo:static-templates` also supports the `!raw` suffix but you don't need it because it support raw by default.
-We added it so the when you update to `angular2-compilers@0.6.0` all your raw imports will work and only then you can remove it.
-
-```
-import template from  './foo.html';
-
-@Component({
-  template: template
-})
-```
-
-* **index.js, Angular2:** add index.js to the NPM, add direct Angular2 dependency to the package.json ([7ef35eb](https://github.com/Urigo/angular2-meteor/commit/7ef35eb))
-
+- Main Meteor methods are now patched to run ngZone after the callback executions [(2145847)](https://github.com/Urigo/angular2-meteor/commit/2145847). In other words, `autoBind` param of the `MeteorComponent` wrappers is set to true by default. Fixes this [issue](https://github.com/Urigo/angular2-meteor/issues/140) (thanks @staeke for the idea and discussion)
+- `MeteorComponent` is improved to support server side rendering. One can use `angular2-meteor` on the server along with [`angular2-meteor-universal`](https://github.com/barbatus/angular2-meteor-universal)
+- LESS and SASS compilers are added to `angular2-compilers@0.6.0`. Angular2 components can start importing styles in the ES6 style (as templates), if styles are located in the root `imports` folder
 
 ### Bug Fixes
 
-* **Angular2:** add Angular2 peer dependencies to be installed with this NPM ([4be1f6a](https://github.com/Urigo/angular2-meteor/commit/4be1f6a))
-* **build:** add output (js, d.ts) files back to the build folder and change package.json accordantly ([254a758](https://github.com/Urigo/angular2-meteor/commit/254a758))
-* **build:** move build.sh to Gulp, fix https://github.com/Urigo/angular2-meteor/issues/186 ([a73cd16](https://github.com/Urigo/angular2-meteor/commit/a73cd16))
-* **Default template:** add default app template to Angular2-Meteor ([652c138](https://github.com/Urigo/angular2-meteor/commit/652c138))
-* **MeteorComponent:** fix https://github.com/Urigo/angular2-meteor/issues/132 ([4d7a40e](https://github.com/Urigo/angular2-meteor/commit/4d7a40e))
-* **MeteorComponent.autorun:** #149 ([d049759](https://github.com/Urigo/angular2-meteor/commit/d049759))
-* **NgZone:** patch main Meteor methods ([2145847](https://github.com/Urigo/angular2-meteor/commit/2145847))
-* **npm install for Windows:** https://github.com/Urigo/angular2-meteor/issues/185 ([6660ca3](https://github.com/Urigo/angular2-meteor/commit/6660ca3))
-* **Promises:** fix https://github.com/Urigo/angular2-meteor/issues/238, ([a611ed8](https://github.com/Urigo/angular2-meteor/commit/a611ed8))
-* **README:** fix #129 ([e33880c](https://github.com/Urigo/angular2-meteor/commit/e33880c)), closes [#129](https://github.com/Urigo/angular2-meteor/issues/129)
-* **reruns of the ngzone:** tackle https://github.com/Urigo/angular2-meteor/issues/140 ([f79289f](https://github.com/Urigo/angular2-meteor/commit/f79289f))
-* **typings:** https://github.com/Urigo/angular2-meteor/issues/176 ([d66ea8f](https://github.com/Urigo/angular2-meteor/commit/d66ea8f))
-* **unit tests:** beta.10 is unknowingly not downloadable on the travis ([b99cdba](https://github.com/Urigo/angular2-meteor/commit/b99cdba))
-* bithound ([32abda1](https://github.com/Urigo/angular2-meteor/commit/32abda1))
-* tests ([3b25feb](https://github.com/Urigo/angular2-meteor/commit/3b25feb))
-* tests ([cdf0d5a](https://github.com/Urigo/angular2-meteor/commit/cdf0d5a))
-* tests ([482461b](https://github.com/Urigo/angular2-meteor/commit/482461b))
-* typo in the typings section ([fd94185](https://github.com/Urigo/angular2-meteor/commit/fd94185))
-* typos in common issues and troubleshoot ([d9b9402](https://github.com/Urigo/angular2-meteor/commit/d9b9402))
-* **unit tests:** change to a 1.3 beta version that works ok with the jasmine ([27b4d5c](https://github.com/Urigo/angular2-meteor/commit/27b4d5c))
-* **unit tests:** correct angular2-meteor URL, add additional layer of testing by converting .js files to .ts ones, update Meteor to 1.3-rc.4 ([c0c23cd](https://github.com/Urigo/angular2-meteor/commit/c0c23cd))
+- MeteorComponent.autorun: #149 ([d049759](https://github.com/Urigo/angular2-meteor/commit/d049759))
+- Issue with promises: #238 ([a611ed8](https://github.com/Urigo/angular2-meteor/commit/a611ed8))
+
+### Other
+
+- Angular2-Meteor for Meteor 1.2 based on SystemJS have been deprecated (old code can be found in the `legacy` branch)
+- Usage Gulp in the build have been deprecated in favor of NPM scripts
+- Tests have been moved to be based on Mocha and Chai (Meteor 1.3 style)
 
 ## 0.3.3
 
