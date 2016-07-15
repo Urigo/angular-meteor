@@ -25,56 +25,85 @@ describe('MeteorComponent', function() {
     });
   });
 
-  describe('subscribe', function() {
-    let meteorSub;
+  describe('subscribe', () => {
     let zoneSpy;
     let gZone;
     beforeEach(function() {
       gZone = Zone.current;
-      meteorSub = sinon.stub(Meteor, 'subscribe').yields();
       zoneSpy = sinon.spy(Zone.current, 'run');
     });
 
     afterEach(function() {
-      meteorSub.restore();
       zoneSpy.restore();
     });
 
-    it('should call Meteor.subscribe with the same args', () => {
-      var callback = sinon.spy();
-      var args = ['collection', 'foo', 'bar'];
-      component.subscribe.apply(component, args.concat(callback));
-      expect(meteorSub.calledOnce).to.equal(true);
-      expect(_.initial(meteorSub.args[0])).to.deep.equal(args);
-
-      expect(callback.calledOnce).to.equal(true);
-    });
-
-    it('if autoBind is false should call Meteor.subscribe in global zone', (done) => {
-      var args = ['collection', () => {
-        expect(gZone).to.equal(Zone.current);
-        done();
-      }, false];
-
-      component.subscribe.apply(component, args);
-
-      expect(zoneSpy.calledOnce).to.equal(true);
-    });
-
-    it('should call Meteor.subscribe in the current zone', (done) => {
-      let ngZone = Zone.current.fork({ name: 'angular' });
-      let ngZoneSpy = sinon.spy(ngZone, 'run');
-
-      var args = ['collection', () => {
-        expect(ngZone).to.equal(Zone.current);
-        done();
-      }];
-
-      ngZone.run(() => {
-        component.subscribe.apply(component, args);
+    describe('with callback', () => {
+      let meteorSub;
+      beforeEach(function() {
+        meteorSub = sinon.stub(Meteor, 'subscribe').yields();
       });
 
-      expect(zoneSpy.calledOnce).to.equal(false);
+      afterEach(function() {
+        meteorSub.restore();
+      });
+
+      it('should call Meteor.subscribe with the same args', () => {
+        var callback = sinon.spy();
+        var args = ['collection', 'foo', 'bar'];
+        component.subscribe.apply(component, args.concat(callback));
+        expect(meteorSub.calledOnce).to.equal(true);
+        expect(_.initial(meteorSub.args[0])).to.deep.equal(args);
+
+        expect(callback.calledOnce).to.equal(true);
+      });
+
+      it('if autoBind is false should call Meteor.subscribe in global zone', (done) => {
+        var args = ['collection', () => {
+          expect(gZone).to.equal(Zone.current);
+          done();
+        }, false];
+
+        component.subscribe.apply(component, args);
+
+        expect(zoneSpy.calledOnce).to.equal(true);
+      });
+
+      it('should call Meteor.subscribe in the current zone', (done) => {
+        let ngZone = Zone.current.fork({ name: 'angular' });
+        let ngZoneSpy = sinon.spy(ngZone, 'run');
+
+        var args = ['collection', () => {
+          expect(ngZone).to.equal(Zone.current);
+          done();
+        }];
+
+        ngZone.run(() => {
+          let component = new MeteorComponent();
+          component.subscribe.apply(component, args);
+        });
+
+        expect(zoneSpy.calledOnce).to.equal(false);
+      });
+    });
+
+    describe('with callback object', () => {
+      let meteorSub;
+
+      beforeEach(function() {
+        meteorSub = sinon.stub(Meteor, 'subscribe');
+      });
+
+      afterEach(function() {
+        meteorSub.restore();
+      });
+
+      it('onReady works as expected', (done) => {
+        var args = ['collection', { onReady: () => done() }];
+
+        let component = new MeteorComponent();
+        component.subscribe.apply(component, args);
+        meteorSub.args[0][1].onReady();
+      });
     });
   });
   

@@ -82,7 +82,8 @@ describe('Meteor patching', function() {
     let meteorCall;
     beforeEach(function() {
       meteorCall = patchMeteorCall(function(...args) {
-        args[args.length - 1]();
+        let param = args[args.length - 2];
+        args[args.length - 1](param);
       });
     });
 
@@ -94,11 +95,12 @@ describe('Meteor patching', function() {
     });
 
     it('callback executed in global zone', function(done) {
-      let callback = () => {
+      let callback = (err) => {
         expect(zoneSpy.calledOnce).to.equal(true);
+        expect(err).to.equal('err');
         done();
       };
-      meteorCall(callback);
+      meteorCall('err', callback);
     });
 
     it('calls to ngZone.run throttled', function(done) {

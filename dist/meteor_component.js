@@ -13,6 +13,7 @@ var MeteorComponent = (function () {
     function MeteorComponent() {
         this._hAutoruns = [];
         this._hSubscribes = [];
+        this._ngZone = utils_1.g.Zone.current;
     }
     /**
      * Method has the same notation as Meteor.autorun
@@ -30,8 +31,8 @@ var MeteorComponent = (function () {
         // If autoBind is set to false then
         // we run Meteor method in the global zone
         // instead of the current Angular 2 zone.
-        var hAutorun = autoBind ? autorunCall() :
-            utils_1.gZone.run(autorunCall);
+        var zone = autoBind ? this._ngZone : utils_1.gZone;
+        var hAutorun = zone.run(autorunCall);
         this._hAutoruns.push(hAutorun);
         return hAutorun;
     };
@@ -53,8 +54,8 @@ var MeteorComponent = (function () {
         var subscribeCall = function () {
             return Meteor.subscribe.apply(Meteor, [name].concat(pargs));
         };
-        var hSubscribe = autoBind ? subscribeCall() :
-            utils_1.gZone.run(subscribeCall);
+        var zone = autoBind ? this._ngZone : utils_1.gZone;
+        var hSubscribe = zone.run(subscribeCall);
         if (Meteor.isClient) {
             this._hSubscribes.push(hSubscribe);
         }
@@ -79,10 +80,8 @@ var MeteorComponent = (function () {
         var meteorCall = function () {
             Meteor.call.apply(Meteor, [name].concat(pargs));
         };
-        if (!autoBind) {
-            return utils_1.gZone.run(meteorCall);
-        }
-        return meteorCall();
+        var zone = autoBind ? this._ngZone : utils_1.gZone;
+        return zone.run(meteorCall);
     };
     MeteorComponent.prototype.ngOnDestroy = function () {
         for (var _i = 0, _a = this._hAutoruns; _i < _a.length; _i++) {

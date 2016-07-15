@@ -4,7 +4,7 @@ import {OnDestroy} from '@angular/core';
 
 import {noop} from '@angular/core/src/facade/lang';
 
-import {isMeteorCallbacks, isCallbacksObject, gZone} from './utils';
+import {isMeteorCallbacks, isCallbacksObject, gZone, g} from './utils';
 import {DataObserver} from './data_observer';
 
 /**
@@ -17,6 +17,7 @@ import {DataObserver} from './data_observer';
 export class MeteorComponent implements OnDestroy {
   private _hAutoruns: Array<Tracker.Computation> = [];
   private _hSubscribes: Array<Meteor.SubscriptionHandle> = [];
+  private _ngZone = g.Zone.current;
 
   /**
    * Method has the same notation as Meteor.autorun
@@ -35,8 +36,8 @@ export class MeteorComponent implements OnDestroy {
     // If autoBind is set to false then
     // we run Meteor method in the global zone
     // instead of the current Angular 2 zone.
-    let hAutorun = autoBind ? autorunCall() :
-      gZone.run(autorunCall);
+    let zone = autoBind ? this._ngZone : gZone;
+    let hAutorun = zone.run(autorunCall);
 
     this._hAutoruns.push(hAutorun);
 
@@ -60,8 +61,8 @@ export class MeteorComponent implements OnDestroy {
       return Meteor.subscribe(name, ...pargs);
     };
 
-    let hSubscribe = autoBind ? subscribeCall() :
-      gZone.run(subscribeCall);
+    let zone = autoBind ? this._ngZone : gZone;
+    let hSubscribe = zone.run(subscribeCall);
 
     if (Meteor.isClient) {
       this._hSubscribes.push(hSubscribe);
@@ -88,11 +89,8 @@ export class MeteorComponent implements OnDestroy {
       Meteor.call(name, ...pargs);
     };
 
-    if (!autoBind) {
-      return gZone.run(meteorCall);
-    }
-
-    return meteorCall();
+    let zone = autoBind ? this._ngZone : gZone;
+    return zone.run(meteorCall);
   }
 
   ngOnDestroy() {

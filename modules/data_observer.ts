@@ -37,19 +37,25 @@ export class DataObserver {
       let origin = <CallbacksObject>callbacks;
       let object = <CallbacksObject>{
         onError: (err) => {
-          origin.onError(err);
+          if (origin.onError) {
+            origin.onError(err);
+          }
           completer.resolve({ err });
           dequeue(promise);
         },
 
         onReady: (result) => {
-          origin.onReady(result);
+          if (origin.onReady) {
+            origin.onReady(result);
+          }
           completer.resolve({ result });
           dequeue(promise);
         },
 
         onStop: (err) => {
-          origin.onStop(err);
+          if (origin.onStop) {
+            origin.onStop(err);
+          }
           completer.resolve({ err });
           dequeue(promise);
         }

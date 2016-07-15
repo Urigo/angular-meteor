@@ -28,17 +28,23 @@ var DataObserver = (function () {
             var origin_1 = callbacks;
             var object = {
                 onError: function (err) {
-                    origin_1.onError(err);
+                    if (origin_1.onError) {
+                        origin_1.onError(err);
+                    }
                     completer.resolve({ err: err });
                     dequeue(promise);
                 },
                 onReady: function (result) {
-                    origin_1.onReady(result);
+                    if (origin_1.onReady) {
+                        origin_1.onReady(result);
+                    }
                     completer.resolve({ result: result });
                     dequeue(promise);
                 },
                 onStop: function (err) {
-                    origin_1.onStop(err);
+                    if (origin_1.onStop) {
+                        origin_1.onStop(err);
+                    }
                     completer.resolve({ err: err });
                     dequeue(promise);
                 }

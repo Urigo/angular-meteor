@@ -9,6 +9,7 @@ import { OnDestroy } from '@angular/core';
 export declare class MeteorComponent implements OnDestroy {
     private _hAutoruns;
     private _hSubscribes;
+    private _ngZone;
     /**
      * Method has the same notation as Meteor.autorun
      * except the last parameter.
