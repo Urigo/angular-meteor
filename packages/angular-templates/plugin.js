@@ -56,6 +56,7 @@ class AngularTemplatesCompiler extends TemplateHtmlCompiler {
     // import template from './path.html';
     file.addJavaScript({
       path: path + '!raw',
+      sourcePath: path + '!raw',
       data: this.htmlContent(file, result),
       lazy: true,
     });
@@ -63,6 +64,7 @@ class AngularTemplatesCompiler extends TemplateHtmlCompiler {
     // import templateUrl from './path.html';
     file.addJavaScript({
       path,
+      sourcePath: path,
       data: this.urlContent(file, result),
       lazy: isPackage ? false : true,
     });
