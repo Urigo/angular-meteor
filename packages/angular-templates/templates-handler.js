@@ -13,15 +13,22 @@ angular.module('angular-templates', []).config([
   '$provide',
   function ($provide) {
     var templatesFileExtension = ['html', 'tpl', 'tmpl', 'template', 'view'];
+    var forwardSlash = /^\//;
 
     $provide.decorator('$templateCache', ['$delegate', '$angularTemplatesSettings',
       function($delegate, $angularTemplatesSettings) {
         var originalGet = $delegate.get;
 
         $delegate.get = function(templatePath) {
-          var originalResult = originalGet(templatePath);
+          var result = originalGet(templatePath);
 
-          if (angular.isUndefined(originalResult)) {
+          if (angular.isUndefined(result)) {
+            if (forwardSlash.test(templatePath) === false) {
+              result = originalGet('/' + templatePath);
+            }
+          }
+
+          if (angular.isUndefined(result)) {
             var fileExtension = ((templatePath.split('.') || []).pop() || '').toLowerCase();
 
             if (templatesFileExtension.indexOf(fileExtension) > -1) {
@@ -37,7 +44,7 @@ angular.module('angular-templates', []).config([
             }
           }
 
-          return originalResult;
+          return result;
         };
 
         return $delegate;
