@@ -2,7 +2,7 @@ import {Component, provide, enableProdMode} from '@angular/core';
 
 import {Tasks} from '../tasks';
 
-import {TaskList} from './components/task-list';
+import {TaskList} from '/client/components';
 
 import {bootstrap} from 'angular2-meteor-auto-bootstrap';
 
