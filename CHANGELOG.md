@@ -1,3 +1,13 @@
+<a name="0.6.2"></a>
+## [0.6.2](https://github.com/Urigo/angular2-meteor/compare/0.6.0...v0.6.2) (2016-07-20)
+
+
+### Bug Fixes
+
+* **MeteorComponent:** fix #337 ([63f95b6](https://github.com/Urigo/angular2-meteor/commit/63f95b6)), closes [#337](https://github.com/Urigo/angular2-meteor/issues/337) [#323](https://github.com/Urigo/angular2-meteor/issues/323)
+
+
+
 <a name="0.6.0"></a>
 ## 0.6.0 (2016-07-09)
 
