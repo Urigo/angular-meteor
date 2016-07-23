@@ -52,10 +52,11 @@ two other ways to access styles for a Angular 2 component.
   ```ts
     @Component({
       selector: 'foo',
-      styles: [require.default('./foo.less')]
+      styles: [require('./foo.less').default]
     })
     class Foo {}
   ```
+> You'll also need to run `typings install dt~node --global` to add the definition of `require`. 
 > In the near future when TypeScript@2.0 is released, you'll be able to define wildcard modules — e.g.,
 `declare module '*.less'` — to get rid of those warnigns.
   
