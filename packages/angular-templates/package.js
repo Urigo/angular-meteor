@@ -1,7 +1,7 @@
 Package.describe({
   name: 'angular-templates',
   summary: 'Compile angular templates into the template cache',
-  version: '1.0.7',
+  version: '1.0.8_1',
   git: 'https://github.com/Urigo/angular-meteor.git',
   documentation: null
 });
@@ -12,7 +12,7 @@ Package.registerBuildPlugin({
     'plugin.js'
   ],
   use: [
-    'urigo:static-html-compiler@0.1.6_1',
+    'urigo:static-html-compiler@0.1.7',
     'ecmascript@0.2.0'
   ]
 });
