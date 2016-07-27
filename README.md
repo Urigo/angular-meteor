@@ -150,8 +150,11 @@ After, one can import a template content in ES6 style:
 For more information, please check out [css-compiler](https://github.com/Urigo/angular2-meteor/tree/master/atmosphere-packages/css-compiler)
 and [static-templates](https://github.com/Urigo/meteor-static-templates).
 
-> To get of rid of the `module './foo.html' not found` warnigns,
-> add typings by `typings install github:meteor-typings/angular2-compilers#c2ca3d3036b08f04a22b98ed16ff17377499e1e7 --global`
+> To get rid of the `module './foo.html' not found` warnigns,
+> run 
+```
+typings install github:meteor-typings/angular2-compilers#c2ca3d3036b08f04a22b98ed16ff17377499e1e7 --global
+```
 
 ## TypeScript
 The package uses [TypeScript for Meteor](https://github.com/barbatus/typescript) to compile (transpile) `.ts`-files.
