@@ -18,3 +18,4 @@ insecure                # Allow all DB writes from clients (for prototyping)
 angular2-compilers
 standard-minifier-js
 barbatus:angular2-polyfills
+barbatus:typescript@0.4.0
