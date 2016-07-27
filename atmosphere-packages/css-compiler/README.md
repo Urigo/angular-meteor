@@ -47,19 +47,6 @@ two other ways to access styles for a Angular 2 component.
 
    ```
 
-> Please note the only way currently to get rid of TypeScript warnigns that modules `./foo.less` and
-> `imports/foo.less!url` are not found is to use `require` directly, i.e.:
-  ```ts
-    @Component({
-      selector: 'foo',
-      styles: [require('./foo.less').default]
-    })
-    class Foo {}
-  ```
-> You'll also need to run `typings install dt~node --global` to add the definition of `require`. 
-> In the near future when TypeScript@2.0 is released, you'll be able to define wildcard modules — e.g.,
-`declare module '*.less'` — to get rid of those warnigns.
-  
 ### Examples
  
 Check out [TODO demo](https://github.com/Urigo/angular2-meteor/tree/master/examples/todos-meteor-1.3) and its `imports` folder particularly for more info.

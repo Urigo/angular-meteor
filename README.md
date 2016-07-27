@@ -150,6 +150,9 @@ After, one can import a template content in ES6 style:
 For more information, please check out [css-compiler](https://github.com/Urigo/angular2-meteor/tree/master/atmosphere-packages/css-compiler)
 and [static-templates](https://github.com/Urigo/meteor-static-templates).
 
+> To get of rid of the `module './foo.html' not found` warnigns,
+> add typings by `typings install github:meteor-typings/angular2-compilers#c2ca3d3036b08f04a22b98ed16ff17377499e1e7 --global`
+
 ## TypeScript
 The package uses [TypeScript for Meteor](https://github.com/barbatus/typescript) to compile (transpile) `.ts`-files.
 
@@ -188,6 +191,29 @@ For more information on Meteor typings, please read [here](https://github.com/me
 
 Please note that you don't need to worry about Angular 2's typings and typings of the related NPMs!
 TypeScript finds and checkes them in NPMs automatically.
+
+## Babel
+
+It's possibly to use Angular2 with Babel as a primary language.
+
+To make development as convenient as it would be if you chose TypeScript,
+there exist special Babel plugins. So you'll need to install them:
+
+```
+  npm i babel-plugin-angular2-annotations babel-plugin-transform-decorators-legacy babel-plugin-transform-class-properties babel-plugin-transform-flow-strip-types --save-dev
+```
+
+Then add `.babelrc` as follows:
+```json
+{
+  "plugins": [
+    "angular2-annotations",
+    "transform-decorators-legacy",
+    "transform-class-properties",
+    "transform-flow-strip-types"
+  ]
+}
+```
 
 ## Change Log
 
