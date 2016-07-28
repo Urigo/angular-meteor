@@ -37,7 +37,6 @@ export class MeteorObservable {
         {
           onReady: () => {
             observer.next();
-            observer.complete();
           },
           onError: (error : Meteor.Error) => {
             observer.error(error);
@@ -48,7 +47,12 @@ export class MeteorObservable {
 
       return () => {
         if (handle && handle.stop) {
-          handle.stop();
+          try {
+            handle.stop();
+          }
+          catch(e) {
+
+          }
         }
       };
     });
