@@ -22,6 +22,19 @@ export var MongoCollectionObserverFake = function() {
   };
 };
 
+export class MongoCollectionFake {
+  allow() {}
+  deny() {}
+  insert() {}
+  rawCollection() {}
+  rawDatabase() {}
+  remove() {}
+  update() {}
+  upsert() {}
+  find() {}
+  findOne() {}
+}
+
 export var ObserverFactoryFake = function(observer) {
   this._observer = observer;
 
