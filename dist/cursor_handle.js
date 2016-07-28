@@ -12,7 +12,6 @@ var CursorHandle = (function () {
         if (this._hAutoNotify) {
             this._hAutoNotify.stop();
         }
-        ;
         this._hCurObserver.stop();
     };
     return CursorHandle;

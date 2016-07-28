@@ -4,3 +4,4 @@ function __export(m) {
 }
 __export(require("./observable-collection"));
 __export(require("./to-observable"));
+__export(require("./meteor-observable-call"));
