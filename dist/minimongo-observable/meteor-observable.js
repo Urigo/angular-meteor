@@ -42,7 +42,6 @@ var MeteorObservable = (function () {
                 {
                     onReady: function () {
                         observer.next();
-                        observer.complete();
                     },
                     onError: function (error) {
                         observer.error(error);
@@ -52,7 +51,11 @@ var MeteorObservable = (function () {
             ]));
             return function () {
                 if (handle && handle.stop) {
-                    handle.stop();
+                    try {
+                        handle.stop();
+                    }
+                    catch (e) {
+                    }
                 }
             };
         });
