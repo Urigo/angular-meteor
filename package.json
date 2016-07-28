@@ -54,5 +54,8 @@
     "ghooks": {
       "commit-msg": "validate-commit-msg"
     }
+  },
+  "dependencies": {
+    "lodash": "^4.14.0"
   }
 }

@@ -5,3 +5,4 @@ export * from './meteor_component';
 export * from './providers';
 export * from './data_observer';
 export * from './meteor_app';
+export * from './minimongo-observable/index';

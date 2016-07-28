@@ -5,5 +5,8 @@
     "mocha": "registry:dt/mocha#2.2.5+20160317120654",
     "underscore": "registry:dt/underscore#1.7.0+20160412141459",
     "zone.js": "npm:zone.js"
+  },
+  "dependencies": {
+    "lodash": "registry:npm/lodash#4.0.0+20160723033700"
   }
 }
