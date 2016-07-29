@@ -1,11 +1,10 @@
 "use strict";
-var mongo_1 = require('meteor/mongo');
 var to_observable_1 = require("./to-observable");
 var MongoObservable;
 (function (MongoObservable) {
     var Collection = (function () {
         function Collection(name, options) {
-            this.collection = new mongo_1.Mongo.Collection(name, options);
+            this.collection = new Mongo.Collection(name, options);
         }
         Collection.prototype.allow = function (options) {
             return this.collection.allow.apply(this.collection, arguments);

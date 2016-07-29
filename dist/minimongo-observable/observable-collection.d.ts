@@ -1,5 +1,4 @@
 import { Observable } from "rxjs/Rx";
-import { Mongo } from 'meteor/mongo';
 import Selector = Mongo.Selector;
 import ObjectID = Mongo.ObjectID;
 import SortSpecifier = Mongo.SortSpecifier;
