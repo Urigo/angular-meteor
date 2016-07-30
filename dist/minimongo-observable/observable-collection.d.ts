@@ -1,4 +1,4 @@
-import { Observable } from "rxjs/Rx";
+import { Observable } from 'rxjs/Rx';
 import Selector = Mongo.Selector;
 import ObjectID = Mongo.ObjectID;
 import SortSpecifier = Mongo.SortSpecifier;

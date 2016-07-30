@@ -1,12 +1,14 @@
-import {Observable} from "rxjs/Rx";
+import {Observable} from 'rxjs/Rx';
 import Selector = Mongo.Selector;
 import ObjectID = Mongo.ObjectID;
 import SortSpecifier = Mongo.SortSpecifier;
 import FieldSpecifier = Mongo.FieldSpecifier;
 import Modifier = Mongo.Modifier;
-import {toObservable} from "./to-observable";
+import {toObservable} from './to-observable';
 
 export module MongoObservable {
+  'use strict';
+
   export interface ConstructorOptions {
     connection ? : Object;
     idGeneration ? : string;
@@ -56,18 +58,27 @@ export module MongoObservable {
       return this.collection.remove.apply(this.collection, arguments);
     }
 
-    update(selector: Selector | ObjectID | string, modifier: Modifier, options ? : {
-      multi ? : boolean;
-      upsert ? : boolean;
-    }, callback ? : Function): number {
+    update(
+      selector: Selector | ObjectID | string,
+      modifier: Modifier,
+      options ? : {
+        multi ? : boolean;
+        upsert ? : boolean;
+      },
+      callback ? : Function): number {
       return this.collection.update.apply(this.collection, arguments);
     }
 
-    upsert(selector: Selector | ObjectID | string, modifier: Modifier, options ? : {
-      multi ? : boolean;
-    }, callback ? : Function): {
-      numberAffected ? : number;insertedId ? : string;
-    } {
+    upsert(
+      selector: Selector | ObjectID | string,
+      modifier: Modifier,
+      options ? : {
+        multi ? : boolean;
+      },
+      callback ? : Function): {
+        numberAffected ? : number;
+        insertedId ? : string;
+      } {
       return this.collection.upsert.apply(this.collection, arguments);
     }
 

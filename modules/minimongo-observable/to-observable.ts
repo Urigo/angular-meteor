@@ -1,4 +1,4 @@
-import {Observable, Subscriber} from "rxjs/Rx";
+import {Observable, Subscriber} from 'rxjs/Rx';
 
 export function toObservable<T>(cursor : Mongo.Cursor<T>) : Observable<Array<T>> {
   return Observable.create((observer : Subscriber<Array<T>>) => {
@@ -14,6 +14,6 @@ export function toObservable<T>(cursor : Mongo.Cursor<T>) : Observable<Array<T>>
 
     return () => {
       handler.stop();
-    }
-  })
+    };
+  });
 }

@@ -1,7 +1,8 @@
 "use strict";
-var to_observable_1 = require("./to-observable");
+var to_observable_1 = require('./to-observable');
 var MongoObservable;
 (function (MongoObservable) {
+    'use strict';
     var Collection = (function () {
         function Collection(name, options) {
             this.collection = new Mongo.Collection(name, options);

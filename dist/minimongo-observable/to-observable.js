@@ -1,5 +1,5 @@
 "use strict";
-var Rx_1 = require("rxjs/Rx");
+var Rx_1 = require('rxjs/Rx');
 function toObservable(cursor) {
     return Rx_1.Observable.create(function (observer) {
         var handleChange = function () {
