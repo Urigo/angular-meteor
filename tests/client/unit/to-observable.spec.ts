@@ -1,4 +1,4 @@
-import {toObservable} from 'angular2-meteor';
+import {toObservable, ObservableCursor} from 'angular2-meteor';
 import {chai} from 'meteor/practicalmeteor:chai';
 import {sinon} from 'meteor/practicalmeteor:sinon';
 import {Observable} from "rxjs";
@@ -8,7 +8,7 @@ const expect = chai.expect;
 describe('toObservable', function() {
   let collection : Mongo.Collection;
   let cursor : Mongo.Cursor;
-  let observable : Observable;
+  let observable : ObservableCursor;
 
   beforeEach(function() {
     collection = new Mongo.Collection(null);
@@ -23,6 +23,7 @@ describe('toObservable', function() {
         return true;
       }
     });
+
     cursor = collection.find({});
     observable = toObservable(cursor);
   });
@@ -129,5 +130,47 @@ describe('toObservable', function() {
 
     expect(stopSpy.callCount).to.equal(1);
     spy.restore();
+  });
+
+  it ("Should NOT trigger subscription callback when adding data to the non-reactive collection", function() {
+    let spy = sinon.spy();
+    let observable2 = toObservable(cursor);
+    let subscriptionHandler = observable2.nonReactive().subscribe(spy);
+    collection.insert({test: true});
+    collection.insert({test: true});
+    expect(spy.callCount).to.equal(1);
+    subscriptionHandler.unsubscribe();
+  });
+
+  it ("Should isReactive return false when calling nonReactive", function() {
+    let spy = sinon.spy();
+    let observable2 = toObservable(cursor);
+    let subscriptionHandler = observable2.nonReactive().subscribe(spy);
+    expect(observable2.isReactive()).to.equal(false);
+    subscriptionHandler.unsubscribe();
+  });
+
+  it ("Should isReactive return true when not calling nonReactive", function() {
+    let spy = sinon.spy();
+    let observable2 = toObservable(cursor);
+    let subscriptionHandler = observable2.subscribe(spy);
+    expect(observable2.isReactive()).to.equal(true);
+    subscriptionHandler.unsubscribe();
+  });
+
+  it ("Should trigger subscription callback when adding data to the non-reactive collection and calling reload", function() {
+    let spy = sinon.spy();
+    let observable2 = toObservable(cursor);
+    let subscriptionHandler = observable2.nonReactive().subscribe(spy);
+    collection.insert({test: true});
+    collection.insert({test: true});
+    collection.insert({test: true});
+    collection.insert({test: true});
+    collection.insert({test: true});
+    collection.insert({test: true});
+    collection.insert({test: true});
+    observable2.reload();
+    expect(spy.callCount).to.equal(2);
+    subscriptionHandler.unsubscribe();
   });
 });

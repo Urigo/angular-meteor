@@ -1,9 +1,9 @@
-import { Observable } from 'rxjs/Rx';
 import Selector = Mongo.Selector;
 import ObjectID = Mongo.ObjectID;
 import SortSpecifier = Mongo.SortSpecifier;
 import FieldSpecifier = Mongo.FieldSpecifier;
 import Modifier = Mongo.Modifier;
+import { ObservableCursor } from './observable-cursor';
 export declare module MongoObservable {
     interface ConstructorOptions {
         connection?: Object;
@@ -44,7 +44,7 @@ export declare module MongoObservable {
             fields?: FieldSpecifier;
             reactive?: boolean;
             transform?: Function;
-        }): Observable<Array<T>>;
+        }): ObservableCursor<Array<T>>;
         findOne(selector?: Selector | ObjectID | string, options?: {
             sort?: SortSpecifier;
             skip?: number;

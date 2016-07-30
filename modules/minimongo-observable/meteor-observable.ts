@@ -1,4 +1,5 @@
-import {Observable, Subscriber} from 'rxjs/Rx';
+import {Observable, Subscriber} from 'rxjs';
+import {ObservableMeteorSubscription} from './observable-subscription';
 import * as _ from 'lodash';
 
 export class MeteorObservable {
@@ -28,7 +29,7 @@ export class MeteorObservable {
     });
   }
 
-  public static subscribe<T>(name: string, ...args: any[]): Observable<T> {
+  public static subscribe<T>(name: string, ...args: any[]): ObservableMeteorSubscription<T> {
     const argumentsArray: Array<any> = Array.prototype.slice.call(arguments);
     const lastParam = argumentsArray[argumentsArray.length - 1];
 
@@ -39,7 +40,8 @@ export class MeteorObservable {
         please remove it and use ".subscribe" of the Observable!`);
     }
 
-    return Observable.create((observer: Subscriber<Meteor.Error | T>) => {
+    const observable =
+      ObservableMeteorSubscription.create((observer: Subscriber<Meteor.Error | T>) => {
       let handle = Meteor.subscribe.apply(Meteor, argumentsArray.concat([
         {
           onError: (error: Meteor.Error) => {
@@ -52,6 +54,8 @@ export class MeteorObservable {
         }
       ]));
 
+      observable._meteorSubscriptionRef = handle;
+
       return () => {
         if (handle && handle.stop) {
           try {
@@ -62,5 +66,7 @@ export class MeteorObservable {
         }
       };
     });
+
+    return <ObservableMeteorSubscription<T>>observable;
   }
 }

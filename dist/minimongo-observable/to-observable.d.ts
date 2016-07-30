@@ -1,2 +1,2 @@
-import { Observable } from 'rxjs/Rx';
-export declare function toObservable<T>(cursor: Mongo.Cursor<T>): Observable<Array<T>>;
+import { ObservableCursor } from './observable-cursor';
+export declare function toObservable<T>(cursor: Mongo.Cursor<T>): ObservableCursor<Array<T>>;

@@ -1,5 +1,6 @@
 "use strict";
-var Rx_1 = require('rxjs/Rx');
+var rxjs_1 = require('rxjs');
+var observable_subscription_1 = require('./observable-subscription');
 var _ = require('lodash');
 var MeteorObservable = (function () {
     function MeteorObservable() {
@@ -14,7 +15,7 @@ var MeteorObservable = (function () {
         if (lastParam && _.isFunction(lastParam)) {
             throw new Error("Invalid MeteorObservable.call arguments:\n         Your last param can't be a callback function, \n         please remove it and use \".subscribe\" of the Observable!");
         }
-        return Rx_1.Observable.create(function (observer) {
+        return rxjs_1.Observable.create(function (observer) {
             Meteor.call.apply(Meteor, argumentsArray.concat([
                 function (error, result) {
                     if (error) {
@@ -39,7 +40,7 @@ var MeteorObservable = (function () {
         if (lastParam && _.isObject(lastParam) && (lastParam.onReady || lastParam.onError)) {
             throw new Error("Invalid MeteorObservable.subscribe arguments: \n        your last param can't be a callbacks object, \n        please remove it and use \".subscribe\" of the Observable!");
         }
-        return Rx_1.Observable.create(function (observer) {
+        var observable = observable_subscription_1.ObservableMeteorSubscription.create(function (observer) {
             var handle = Meteor.subscribe.apply(Meteor, argumentsArray.concat([
                 {
                     onError: function (error) {
@@ -51,6 +52,7 @@ var MeteorObservable = (function () {
                     }
                 }
             ]));
+            observable._meteorSubscriptionRef = handle;
             return function () {
                 if (handle && handle.stop) {
                     try {
@@ -61,6 +63,7 @@ var MeteorObservable = (function () {
                 }
             };
         });
+        return observable;
     };
     return MeteorObservable;
 }());
