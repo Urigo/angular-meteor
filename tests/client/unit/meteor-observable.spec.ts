@@ -1,6 +1,6 @@
 import {chai} from 'meteor/practicalmeteor:chai';
 import {sinon} from 'meteor/practicalmeteor:sinon';
-import {MeteorObservable} from "angular2-meteor";
+import {MeteorObservable, ObservableMeteorSubscription} from "angular2-meteor";
 import {Observable} from "rxjs";
 
 const expect = chai.expect;
@@ -93,17 +93,6 @@ describe('MeteorObservable', function () {
       });
     });
 
-    it("Should call RxJS Observable 'complete' callback when subscription is ready", function(done) {
-      let spy = sinon.spy();
-
-      let subscriptionHandler = MeteorObservable.subscribe("test").subscribe(function() {}, function() {}, () => {
-        spy();
-        expect(spy.callCount).to.equal(1);
-        subscriptionHandler.unsubscribe();
-        done();
-      });
-    });
-
     it("Should stop the Meteor subscription when unsubscribing to the RxJS Observable", function(done) {
       function getSubscriptionsCount() {
         return Object.keys((<any>Meteor).default_connection._subscriptions).length;
@@ -114,6 +103,23 @@ describe('MeteorObservable', function () {
       let subscriptionHandler = MeteorObservable.subscribe("test").subscribe(() => {
         expect(getSubscriptionsCount()).to.equal(baseSubscriptionsCount + 1);
         subscriptionHandler.unsubscribe();
+        expect(getSubscriptionsCount()).to.equal(baseSubscriptionsCount);
+        done();
+      });
+    });
+
+
+    it("Should stop the Meteor subscription when calling stop of the Observable", function(done) {
+      function getSubscriptionsCount() {
+        return Object.keys((<any>Meteor).default_connection._subscriptions).length;
+      }
+
+      let baseSubscriptionsCount = getSubscriptionsCount();
+
+      let obs : ObservableMeteorSubscription<any> = MeteorObservable.subscribe("test");
+      let subscriptionHandler = obs.subscribe(() => {
+        expect(getSubscriptionsCount()).to.equal(baseSubscriptionsCount + 1);
+        obs.stop();
         expect(getSubscriptionsCount()).to.equal(baseSubscriptionsCount);
         done();
       });

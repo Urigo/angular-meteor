@@ -1,10 +1,10 @@
-import {Observable} from 'rxjs/Rx';
 import Selector = Mongo.Selector;
 import ObjectID = Mongo.ObjectID;
 import SortSpecifier = Mongo.SortSpecifier;
 import FieldSpecifier = Mongo.FieldSpecifier;
 import Modifier = Mongo.Modifier;
 import {toObservable} from './to-observable';
+import {ObservableCursor} from './observable-cursor';
 
 export module MongoObservable {
   'use strict';
@@ -89,7 +89,7 @@ export module MongoObservable {
       fields ? : FieldSpecifier;
       reactive ? : boolean;
       transform ? : Function;
-    }) : Observable<Array<T>> {
+    }) : ObservableCursor<Array<T>> {
       const cursor = this.collection.find.apply(this.collection, arguments);
 
       return toObservable<T>(cursor);
