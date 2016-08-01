@@ -4,9 +4,8 @@ var _ = require('lodash');
 var COLLECTION_EVENTS_DEBOUNCE_TIMEFRAME = 100;
 function toObservable(cursor) {
     var observable = observable_cursor_1.ObservableCursor.create(function (observer) {
-        var handleChange = _.debounce(function () {
-            observer.next(cursor.fetch());
-        }, COLLECTION_EVENTS_DEBOUNCE_TIMEFRAME);
+        var rawHandleChange = function () { return Zone.current.run(function () { return observer.next(cursor.fetch()); }); };
+        var handleChange = _.throttle(rawHandleChange, COLLECTION_EVENTS_DEBOUNCE_TIMEFRAME, { trailing: true });
         var handler;
         var isReactive = observable.isReactive();
         observable._cursorRef = cursor;

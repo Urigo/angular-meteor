@@ -7,9 +7,11 @@ const COLLECTION_EVENTS_DEBOUNCE_TIMEFRAME = 100;
 export function toObservable<T>(cursor : Mongo.Cursor<T>) : ObservableCursor<Array<T>> {
   const observable =
       ObservableCursor.create((observer : Subscriber<Array<T>>) => {
-    const handleChange = _.debounce(() => {
-      observer.next(cursor.fetch());
-    }, COLLECTION_EVENTS_DEBOUNCE_TIMEFRAME);
+    const rawHandleChange = () => Zone.current.run(() => observer.next(cursor.fetch()));
+    const handleChange = _.throttle(
+      rawHandleChange,
+      COLLECTION_EVENTS_DEBOUNCE_TIMEFRAME,
+      {trailing: true});
 
     let handler;
     let isReactive = observable.isReactive();
