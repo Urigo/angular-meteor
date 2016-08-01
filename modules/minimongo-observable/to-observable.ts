@@ -2,7 +2,7 @@ import {Subscriber} from 'rxjs/Rx';
 import {ObservableCursor} from './observable-cursor';
 import * as _ from 'lodash';
 
-const COLLECTION_EVENTS_DEBOUNCE_TIMEFRAME = 100;
+const COLLECTION_EVENTS_DEBOUNCE_TIMEFRAME = 16;
 
 export function toObservable<T>(cursor : Mongo.Cursor<T>) : ObservableCursor<Array<T>> {
   const observable =
