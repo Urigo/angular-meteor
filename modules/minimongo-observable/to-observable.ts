@@ -1,12 +1,15 @@
 import {Subscriber} from 'rxjs/Rx';
 import {ObservableCursor} from './observable-cursor';
+import * as _ from 'lodash';
+
+const COLLECTION_EVENTS_DEBOUNCE_TIMEFRAME : number = 100;
 
 export function toObservable<T>(cursor : Mongo.Cursor<T>) : ObservableCursor<Array<T>> {
   const observable =
       ObservableCursor.create((observer : Subscriber<Array<T>>) => {
-    const handleChange = () => {
+    const handleChange = _.debounce(() => {
       observer.next(cursor.fetch());
-    };
+    }, COLLECTION_EVENTS_DEBOUNCE_TIMEFRAME);
 
     let handler;
     let isReactive = observable.isReactive();
