@@ -12,7 +12,7 @@
 
 import {noop, isPresent} from '@angular/core/src/facade/lang';
 
-import {isMeteorCallbacks, g, gZone} from './utils';
+import {isMeteorCallbacks, g, gZone, check} from './utils';
 
 export class ZoneRunScheduler {
   private _zoneTasks = new Map<Zone, Task>();

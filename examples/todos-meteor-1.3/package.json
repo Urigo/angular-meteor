@@ -1,9 +1,9 @@
 {
   "private": true,
   "dependencies": {
-    "@angular/core": "^2.0.0-rc.2",
-    "@angular/common": "^2.0.0-rc.2",
-    "@angular/forms": "^0.1.1",
+    "@angular/core": "^2.0.0-rc.3",
+    "@angular/common": "^2.0.0-rc.3",
+    "@angular/forms": "^0.2.0",
     "angular2-meteor-polyfills": "^0.1.1",
     "angular2-meteor": "file:../..",
     "angular2-meteor-auto-bootstrap": "https://github.com/Urigo/angular2-meteor-auto-bootstrap",

@@ -11,7 +11,8 @@ BasicCompiler = class BasicCompiler {
     const sourcePath = inputFile.getPathInPackage();
     const targetPath = ex !== 'css' ? sourcePath + '.css' : sourcePath;
  
-    if (!sourcePath.startsWith('imports')) {
+  // Combine all styles from other than imports folders.
+    if (sourcePath.indexOf('imports') === -1) {
       inputFile.addStylesheet({
         data: result.css,
         path: targetPath,

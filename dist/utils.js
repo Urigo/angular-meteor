@@ -16,3 +16,5 @@ exports.g = typeof global === 'object' ? global :
     typeof window === 'object' ? window :
         typeof self === 'object' ? self : this;
 exports.gZone = exports.g.Zone.current;
+exports.EJSON = Package['ejson'].EJSON;
+exports.check = Package['check'].check;

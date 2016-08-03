@@ -12,7 +12,7 @@ var DataObserver = (function () {
     }
     DataObserver.pushCb = function (callbacks) {
         var _this = this;
-        check(callbacks, Match.Where(utils_1.isMeteorCallbacks));
+        utils_1.check(callbacks, Match.Where(utils_1.isMeteorCallbacks));
         var completer = async_1.PromiseWrapper.completer();
         var dequeue = function (promise) {
             var index = _this._promises.indexOf(promise);
@@ -61,7 +61,7 @@ var DataObserver = (function () {
         return newCallback;
     };
     DataObserver.onSubsReady = function (cb) {
-        check(cb, Function);
+        utils_1.check(cb, Function);
         new Promise(function (resolve, reject) {
             var poll = Meteor.setInterval(function () {
                 if (DDP._allSubscriptionsReady()) {
@@ -72,7 +72,7 @@ var DataObserver = (function () {
         }).then(function () { return cb(); });
     };
     DataObserver.onReady = function (cb) {
-        check(cb, Function);
+        utils_1.check(cb, Function);
         Promise.all(this._promises).then(function () { return cb(); });
     };
     DataObserver.cbLen = function () {

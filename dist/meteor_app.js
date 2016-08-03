@@ -12,6 +12,7 @@ var core_1 = require('@angular/core');
 var core_2 = require('@angular/core');
 var lang_1 = require('@angular/core/src/facade/lang');
 var async_1 = require('@angular/core/src/facade/async');
+var utils_1 = require('./utils');
 var data_observer_1 = require('./data_observer');
 // Makes it possible to take an app instance by DOM element of the main component.
 var MeteorAppRegistry = (function () {
@@ -74,7 +75,7 @@ var MeteorApp = (function () {
     };
     MeteorApp.prototype.onRendered = function (cb) {
         var _this = this;
-        check(cb, Function);
+        utils_1.check(cb, Function);
         this._appCycles.onStable(function () {
             data_observer_1.DataObserver.onReady(function () {
                 // No way to get ngZone's inner zone,
@@ -114,7 +115,7 @@ var AppCycles = (function () {
         return this._isZoneStable && !this._ngZone.hasPendingMacrotasks;
     };
     AppCycles.prototype.onStable = function (cb) {
-        check(cb, Function);
+        utils_1.check(cb, Function);
         this._onStableCb.push(cb);
         this._runIfStable();
     };

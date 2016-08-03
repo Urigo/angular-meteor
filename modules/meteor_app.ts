@@ -18,6 +18,8 @@ import {
 import {isPresent, isBlank, scheduleMicroTask} from '@angular/core/src/facade/lang';
 import {ObservableWrapper} from '@angular/core/src/facade/async';
 
+import {check} from './utils';
+
 import {DataObserver} from './data_observer';
 
 export type Providers = Array<Type | Provider | any[]>;

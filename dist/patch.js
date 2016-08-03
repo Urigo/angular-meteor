@@ -54,7 +54,7 @@ var ZoneRunScheduler = (function () {
         this._zoneTasks.set(zone, runTask);
     };
     ZoneRunScheduler.prototype.onAfterRun = function (zone, cb) {
-        check(cb, Function);
+        utils_1.check(cb, Function);
         if (!this._zoneTasks.has(zone)) {
             cb();
             return;

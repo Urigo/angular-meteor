@@ -2,6 +2,8 @@
 
 import {CursorHandle} from './cursor_handle';
 
+import {EJSON, check} from './utils';
+
 export class AddChange {
   constructor(public index: number, public item: any) {}
 }

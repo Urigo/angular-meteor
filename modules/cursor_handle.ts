@@ -1,5 +1,7 @@
 'use strict';
 
+import {check} from './utils';
+
 export class CursorHandle {
   private _hAutoNotify: Tracker.Computation;
   private _hCurObserver: Meteor.LiveQueryHandle;

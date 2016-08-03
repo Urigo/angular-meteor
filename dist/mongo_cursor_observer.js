@@ -1,5 +1,6 @@
 'use strict';
 var cursor_handle_1 = require('./cursor_handle');
+var utils_1 = require('./utils');
 var AddChange = (function () {
     function AddChange(index, item) {
         this.index = index;
@@ -61,7 +62,7 @@ var MongoCursorObserver = (function () {
         this._lastChanges = [];
         this._subs = [];
         this._isSubscribed = false;
-        check(cursor, Match.Where(MongoCursorObserver.isCursor));
+        utils_1.check(cursor, Match.Where(MongoCursorObserver.isCursor));
         this._hCursor = this._processCursor(cursor);
     }
     MongoCursorObserver.isCursor = function (cursor) {
@@ -136,7 +137,7 @@ var MongoCursorObserver = (function () {
             changedAt: function (nDoc, oDoc, index) {
                 var doc = self._docs[index];
                 var mDoc = nDoc;
-                if (EJSON.equals(doc._id, mDoc._id)) {
+                if (utils_1.EJSON.equals(doc._id, mDoc._id)) {
                     Object.assign(self._docs[index], mDoc);
                 }
                 else {

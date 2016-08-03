@@ -6,7 +6,8 @@ import {
   CallbacksObject,
   MeteorCallbacks,
   isMeteorCallbacks,
-  isCallbacksObject
+  isCallbacksObject,
+  check
 } from './utils';
 
 /**
