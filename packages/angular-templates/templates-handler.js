@@ -33,7 +33,7 @@ angular.module('angular-templates', []).config([
 
             if (templatesFileExtension.indexOf(fileExtension) > -1) {
               function getMsg(type) {
-                return '[angular-meteor][err][404] ' + templatePath + ' - HTML template does not exists! You can disable this ' + type + ' by following this guide http://www.angular-meteor.com/api/1.3.11/templates';
+                return '[angular-meteor][err][404] ' + templatePath + ' - HTML template does not exist! You can disable this ' + type + ' by following this guide http://www.angular-meteor.com/api/1.3.11/templates';
               }
 
               if ($angularTemplatesSettings.error === true) {
