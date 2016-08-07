@@ -21,10 +21,15 @@ BasicCompiler = class BasicCompiler {
       return;
     }
 
+    let resultCss = result.css;
+    if (!Meteor.isDevelopment) {
+      resultCss = CssTools.minifyCss(result.css)[0];
+    }
+
     // CSS files that comes from `imports` folder
     // can be downloaded as server assets.
     inputFile.addAsset({
-      data: result.css,
+      data: resultCss,
       path: sourcePath
     });
 
@@ -48,7 +53,7 @@ BasicCompiler = class BasicCompiler {
     // it'll appear on the client only if it's
     // explicitly imported somewhere in the code base.
     let css = Babel.compile(`
-      const css = \`${result.css}\`;
+      const css = \`${resultCss}\`;
       module.exports.default = css;`
     );
     inputFile.addJavaScript({

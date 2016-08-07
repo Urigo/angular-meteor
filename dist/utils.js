@@ -18,3 +18,4 @@ exports.g = typeof global === 'object' ? global :
 exports.gZone = exports.g.Zone.current;
 exports.EJSON = Package['ejson'].EJSON;
 exports.check = Package['check'].check;
+exports.Match = Package['check'].Match;

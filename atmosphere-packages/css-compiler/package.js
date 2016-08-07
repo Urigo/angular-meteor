@@ -19,7 +19,8 @@ Package.onUse(function(api) {
     'underscore@1.0.8',
     'check@1.2.1',
     'babel-compiler@6.6.4',
-    'barbatus:scss-compiler@3.8.1_1'
+    'barbatus:scss-compiler@3.8.1_1',
+    'minifier-css'
   ]);
 
   api.addFiles([

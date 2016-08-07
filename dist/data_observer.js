@@ -12,7 +12,7 @@ var DataObserver = (function () {
     }
     DataObserver.pushCb = function (callbacks) {
         var _this = this;
-        utils_1.check(callbacks, Match.Where(utils_1.isMeteorCallbacks));
+        utils_1.check(callbacks, utils_1.Match.Where(utils_1.isMeteorCallbacks));
         var completer = async_1.PromiseWrapper.completer();
         var dequeue = function (promise) {
             var index = _this._promises.indexOf(promise);

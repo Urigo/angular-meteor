@@ -32,3 +32,5 @@ export const gZone = g.Zone.current;
 export const EJSON = Package['ejson'].EJSON;
 
 export const check = Package['check'].check;
+
+export const Match = Package['check'].Match;

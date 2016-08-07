@@ -11,3 +11,4 @@ export declare const g: any;
 export declare const gZone: any;
 export declare const EJSON: any;
 export declare const check: any;
+export declare const Match: any;
