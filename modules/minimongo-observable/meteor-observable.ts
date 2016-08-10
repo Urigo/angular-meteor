@@ -4,6 +4,7 @@ import * as _ from 'lodash';
 
 export class MeteorObservable {
   public static call<T>(name: string, ...args: any[]): Observable<T> {
+    const currentZone = Zone.current;
     const argumentsArray: Array<any> = Array.prototype.slice.call(arguments);
     const lastParam = argumentsArray[argumentsArray.length - 1];
 
@@ -18,11 +19,14 @@ export class MeteorObservable {
       Meteor.call.apply(Meteor, argumentsArray.concat([
         (error: Meteor.Error, result: T) => {
           if (error) {
-            observer.error(error);
-            observer.complete();
+            currentZone.run(() => {
+              observer.error(error);
+              observer.complete();
+            });
           } else {
-            observer.next(result);
-            observer.complete();
+            currentZone.run(() => {
+              observer.next(result);
+            });
           }
         }
       ]));
@@ -34,6 +38,7 @@ export class MeteorObservable {
   }
 
   public static subscribe<T>(name: string, ...args: any[]): ObservableMeteorSubscription<T> {
+    const currentZone = Zone.current;
     const argumentsArray: Array<any> = Array.prototype.slice.call(arguments);
     const lastParam = argumentsArray[argumentsArray.length - 1];
 
@@ -49,11 +54,13 @@ export class MeteorObservable {
       let handle = Meteor.subscribe.apply(Meteor, argumentsArray.concat([
         {
           onError: (error: Meteor.Error) => {
-            observer.error(error);
-            observer.complete();
+            currentZone.run(() => {
+              observer.error(error);
+              observer.complete();
+            });
           },
           onReady: () => {
-            observer.next();
+            currentZone.run(observer.next);
           }
         }
       ]));
