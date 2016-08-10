@@ -26,9 +26,7 @@ var MeteorObservable = (function () {
                         });
                     }
                     else {
-                        currentZone.run(function () {
-                            observer.next(result);
-                        });
+                        currentZone.run(function () { return observer.next(result); });
                     }
                 }
             ]));
@@ -57,7 +55,7 @@ var MeteorObservable = (function () {
                         });
                     },
                     onReady: function () {
-                        currentZone.run(observer.next);
+                        currentZone.run(function () { return observer.next(); });
                     }
                 }
             ]));

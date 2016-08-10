@@ -24,9 +24,7 @@ export class MeteorObservable {
               observer.complete();
             });
           } else {
-            currentZone.run(() => {
-              observer.next(result);
-            });
+            currentZone.run(() => observer.next(result));
           }
         }
       ]));
@@ -60,7 +58,7 @@ export class MeteorObservable {
             });
           },
           onReady: () => {
-            currentZone.run(observer.next);
+            currentZone.run(() => observer.next());
           }
         }
       ]));
