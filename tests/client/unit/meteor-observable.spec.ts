@@ -39,16 +39,6 @@ describe('MeteorObservable', function () {
       });
     });
 
-    it("Should trigger the RxJS Observable 'complete' callback when got the server response", function(done) {
-      let spy = sinon.spy();
-      let subscriptionHandler = MeteorObservable.call("testMethod").subscribe(function() {}, function() {}, () => {
-        spy();
-        expect(spy.callCount).to.equal(1);
-        subscriptionHandler.unsubscribe();
-        done();
-      });
-    });
-
     it("Should trigger the RxJS Observable 'error' callback when got the server error", function(done) {
       let spy = sinon.spy();
       let subscriptionHandler = MeteorObservable.call("NON_EXISTING_METHOD").subscribe(function() {}, (e) => {
