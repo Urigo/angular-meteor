@@ -1,7 +1,7 @@
 import {toObservable, ObservableCursor} from 'angular2-meteor';
 import {chai} from 'meteor/practicalmeteor:chai';
 import {sinon} from 'meteor/practicalmeteor:sinon';
-import {Observable} from "rxjs";
+import {Observable} from 'rxjs';
 
 const expect = chai.expect;
 
@@ -16,10 +16,10 @@ describe('toObservable', function () {
       insert: function () {
         return true;
       },
-      update: function () {
+      remove: function () {
         return true;
       },
-      remove: function () {
+      update: function () {
         return true;
       }
     });
@@ -28,18 +28,18 @@ describe('toObservable', function () {
     observable = toObservable(cursor);
   });
 
-  it("Should wrap the Mongo.Cursor and return RxJS Observable", function () {
+  it('Should wrap the Mongo.Cursor and return RxJS Observable', function () {
     expect(observable instanceof Observable).to.equal(true);
   });
 
-  it("Should not use the actual Cursor 'observe' method without Observable subscription", function () {
-    let spy = sinon.spy(cursor, "observe");
+  it('Should not use the actual Cursor "observe" method without Observable subscription', function () {
+    let spy = sinon.spy(cursor, 'observe');
     expect(spy.called).to.equal(false);
     spy.restore();
   });
 
-  it("Should use the actual Cursor 'observe' after using Observable subscription", function () {
-    let spy = sinon.spy(cursor, "observe");
+  it('Should use the actual Cursor "observe" after using Observable subscription', function () {
+    let spy = sinon.spy(cursor, 'observe');
     let subscriptionHandler = observable.subscribe(() => {
     });
     expect(spy.calledOnce).to.equal(true);
@@ -47,14 +47,14 @@ describe('toObservable', function () {
     subscriptionHandler.unsubscribe();
   });
 
-  it("Should not trigger subscription callback when creating the subscription", function () {
+  it('Should not trigger subscription callback when creating the subscription', function () {
     let spy = sinon.spy();
     let subscriptionHandler = observable.subscribe(spy);
     expect(spy.called).to.equal(false);
     subscriptionHandler.unsubscribe();
   });
 
-  it("Should trigger subscription callback when adding data to the collection", function (done) {
+  it('Should trigger subscription callback when adding data to the collection', function (done) {
     let spy = sinon.spy();
     let subscriptionHandler = observable.subscribe(spy);
     collection.insert({test: true});
@@ -67,7 +67,7 @@ describe('toObservable', function () {
 
   });
 
-  it("Should trigger subscription callback when removing data to the collection", function (done) {
+  it('Should trigger subscription callback when removing data to the collection', function (done) {
     let spy = sinon.spy();
     let subscriptionHandler = observable.subscribe(spy);
     let idToRemove = collection.insert({test: true});
@@ -80,7 +80,7 @@ describe('toObservable', function () {
     }, 100);
   });
 
-  it("Should trigger subscription callback when updating data on the collection", function (done) {
+  it('Should trigger subscription callback when updating data on the collection', function (done) {
     let spy = sinon.spy();
     let subscriptionHandler = observable.subscribe(spy);
 
@@ -94,7 +94,7 @@ describe('toObservable', function () {
     }, 100);
   });
 
-  it("Should trigger the subscription callback multiple times when inserting multiple objects", function (done) {
+  it('Should trigger the subscription callback multiple times when inserting multiple objects', function (done) {
     let spy = sinon.spy();
     let subscriptionHandler = observable.subscribe(spy);
 
@@ -109,7 +109,7 @@ describe('toObservable', function () {
     }, 100);
   });
 
-  it("Should NOT trigger the subscription callback when trying to update non-existing object", function (done) {
+  it('Should NOT trigger the subscription callback when trying to update non-existing object', function (done) {
     let spy = sinon.spy();
     let subscriptionHandler = observable.subscribe(spy);
 
@@ -123,12 +123,12 @@ describe('toObservable', function () {
     }, 100);
   });
 
-  it("Should NOT trigger the subscription callback when trying to remove non-existing object", function (done) {
+  it('Should NOT trigger the subscription callback when trying to remove non-existing object', function (done) {
     let spy = sinon.spy();
     let subscriptionHandler = observable.subscribe(spy);
 
     collection.insert({test: 1});
-    collection.remove({_id: "test"});
+    collection.remove({_id: 'test'});
 
     setTimeout(() => {
       expect(spy.callCount).to.equal(1);
@@ -137,9 +137,9 @@ describe('toObservable', function () {
     }, 100);
   });
 
-  it("Should stop the observation of the Mongo.Collection when disposing the Observable", function () {
+  it('Should stop the observation of the Mongo.Collection when disposing the Observable', function () {
     let stopSpy = sinon.spy();
-    let spy = sinon.stub(cursor, "observe", function () {
+    let spy = sinon.stub(cursor, 'observe', function () {
       return {
         stop: stopSpy
       }
@@ -152,7 +152,7 @@ describe('toObservable', function () {
     spy.restore();
   });
 
-  it("Should NOT trigger subscription callback when adding data to the non-reactive collection", function (done) {
+  it('Should NOT trigger subscription callback when adding data to the non-reactive collection', function (done) {
     let spy = sinon.spy();
     let observable2 = toObservable(cursor);
     let subscriptionHandler = observable2.nonReactive().subscribe(spy);
@@ -166,7 +166,7 @@ describe('toObservable', function () {
     }, 100);
   });
 
-  it("Should isReactive return false when calling nonReactive", function () {
+  it('Should isReactive return false when calling nonReactive', function () {
     let spy = sinon.spy();
     let observable2 = toObservable(cursor);
     let subscriptionHandler = observable2.nonReactive().subscribe(spy);
@@ -174,7 +174,7 @@ describe('toObservable', function () {
     subscriptionHandler.unsubscribe();
   });
 
-  it("Should isReactive return true when not calling nonReactive", function () {
+  it('Should isReactive return true when not calling nonReactive', function () {
     let spy = sinon.spy();
     let observable2 = toObservable(cursor);
     let subscriptionHandler = observable2.subscribe(spy);
@@ -182,7 +182,7 @@ describe('toObservable', function () {
     subscriptionHandler.unsubscribe();
   });
 
-  it("Should trigger subscription callback when adding data to the non-reactive collection and calling reload", function (done) {
+  it('Should trigger subscription callback when adding data to the non-reactive collection and calling reload', function (done) {
     let spy = sinon.spy();
     let observable2 = toObservable(cursor);
     let subscriptionHandler = observable2.nonReactive().subscribe(spy);
