@@ -10,6 +10,7 @@ var MeteorObservable = (function () {
         for (var _i = 1; _i < arguments.length; _i++) {
             args[_i - 1] = arguments[_i];
         }
+        var currentZone = Zone.current;
         var argumentsArray = Array.prototype.slice.call(arguments);
         var lastParam = argumentsArray[argumentsArray.length - 1];
         if (lastParam && _.isFunction(lastParam)) {
@@ -19,12 +20,15 @@ var MeteorObservable = (function () {
             Meteor.call.apply(Meteor, argumentsArray.concat([
                 function (error, result) {
                     if (error) {
-                        observer.error(error);
-                        observer.complete();
+                        currentZone.run(function () {
+                            observer.error(error);
+                            observer.complete();
+                        });
                     }
                     else {
-                        observer.next(result);
-                        observer.complete();
+                        currentZone.run(function () {
+                            observer.next(result);
+                        });
                     }
                 }
             ]));
@@ -37,6 +41,7 @@ var MeteorObservable = (function () {
         for (var _i = 1; _i < arguments.length; _i++) {
             args[_i - 1] = arguments[_i];
         }
+        var currentZone = Zone.current;
         var argumentsArray = Array.prototype.slice.call(arguments);
         var lastParam = argumentsArray[argumentsArray.length - 1];
         if (lastParam && _.isObject(lastParam) && (lastParam.onReady || lastParam.onError)) {
@@ -46,11 +51,13 @@ var MeteorObservable = (function () {
             var handle = Meteor.subscribe.apply(Meteor, argumentsArray.concat([
                 {
                     onError: function (error) {
-                        observer.error(error);
-                        observer.complete();
+                        currentZone.run(function () {
+                            observer.error(error);
+                            observer.complete();
+                        });
                     },
                     onReady: function () {
-                        observer.next();
+                        currentZone.run(observer.next);
                     }
                 }
             ]));
