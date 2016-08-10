@@ -14,7 +14,7 @@ export class MeteorObservable {
          please remove it and use ".subscribe" of the Observable!`);
     }
 
-    return Observable.create((observer: Subscriber<Meteor.Error | T>) => {
+    const obs = Observable.create((observer: Subscriber<Meteor.Error | T>) => {
       Meteor.call.apply(Meteor, argumentsArray.concat([
         (error: Meteor.Error, result: T) => {
           if (error) {
@@ -27,6 +27,10 @@ export class MeteorObservable {
         }
       ]));
     });
+
+    obs.publish();
+
+    return obs;
   }
 
   public static subscribe<T>(name: string, ...args: any[]): ObservableMeteorSubscription<T> {

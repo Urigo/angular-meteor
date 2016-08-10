@@ -15,7 +15,7 @@ var MeteorObservable = (function () {
         if (lastParam && _.isFunction(lastParam)) {
             throw new Error("Invalid MeteorObservable.call arguments:\n         Your last param can't be a callback function, \n         please remove it and use \".subscribe\" of the Observable!");
         }
-        return rxjs_1.Observable.create(function (observer) {
+        var obs = rxjs_1.Observable.create(function (observer) {
             Meteor.call.apply(Meteor, argumentsArray.concat([
                 function (error, result) {
                     if (error) {
@@ -29,6 +29,8 @@ var MeteorObservable = (function () {
                 }
             ]));
         });
+        obs.publish();
+        return obs;
     };
     MeteorObservable.subscribe = function (name) {
         var args = [];
