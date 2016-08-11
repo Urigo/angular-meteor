@@ -397,5 +397,72 @@ describe('angular-meteor.core', function() {
         expect(fn.calls.mostRecent().args).toEqual([1, 2, 3]);
       });
     });
+
+    describe('$$autoPromise()', function() {
+      var scope;
+      var dependency;
+
+      beforeEach(function() {
+        scope = $rootScope.$new();
+        dependency = new Tracker.Dependency();
+      });
+
+      afterEach(function() {
+        scope.$destroy();
+      });
+
+      it('should be able to resolve promise', function(done) {
+        var promise = scope.$$autoPromise(function(deferred, c) {
+          c.stop()
+          deferred.resolve();
+        });
+
+        promise.then(done);
+      });
+
+      it('should be able to reject promise', function(done) {
+        var promise = scope.$$autoPromise(function(deferred, c) {
+          c.stop()
+          deferred.reject();
+        });
+
+        promise.catch(done);
+      });
+
+      it('should keep autorunning once an outer computation has stopped', function(done) {
+        var c = Tracker.autorun(function(c) {
+          Tracker.onInvalidate(function() {
+            c.stop();
+          });
+
+          var promise = scope.$$autoPromise(function(deferred, c) {
+            c.stop();
+            dependency.depend();
+            deferred.resolve();
+          });
+
+          promise.then(done);
+        });
+
+        c.invalidate();
+        dependency.changed();
+      });
+
+      it('should not autorun once stopped', function(done) {
+        var autorun = Tracker.autorun;
+        Tracker.autorun = done.fail;
+
+        var promise = scope.$$autoPromise(function(c) {
+          c.stop();
+          dependency.depend();
+        });
+
+        Tracker.autorun = autorun;
+        dependency.changed();
+
+        promise.stop();
+        setTimeout(done);
+      });
+    });
   });
 });

@@ -125,6 +125,54 @@ angular.module(name, [
       return stop;
     };
 
+    // Autoruns function except it is invoked with an extra deferred object as the
+    // first argument. Returns the promise assosiated with the deferred object.
+    // The promise also has a stop method which will stop the computation.
+    // Originally implemented for `$$Auth.$awaitUser()`.
+    $$Core.$$autoPromise = function(fn, options) {
+      const deferred = this.$$defer();
+      const promise = deferred.promise;
+
+      // Note the promise is being fulfilled in the next event loop to avoid
+      // nested computations, otherwise the outer computation will cancel the
+      // inner one once the scope has been destroyed which will lead to subscription
+      // failures. Happens mainly after resolving a route.
+      deferred.resolve = this.$$afterFlush.bind(this, deferred.resolve);
+      deferred.reject = this.$$afterFlush.bind(this, deferred.reject);
+      fn = _.partial(fn, deferred);
+
+      // Checks if there are some invalidate callbacks on the current computation
+      const someInvalidateCallbacks = Tracker.active &&
+        !!Tracker.currentComputation._onInvalidateCallbacks.length;
+
+      // There might be a case where an invalidate callback will stop the computation in
+      // which case we want to autorun the function after that callback has been invoked
+      const whenAvailable = someInvalidateCallbacks ? Tracker.afterFlush : setTimeout;
+
+      let stopped = false;
+      promise.stop = () => stopped = true;
+
+      whenAvailable(() => {
+        if (stopped) return;
+        const computation = this.autorun(fn, options);
+        promise.stop = computation.stop.bind(computation);
+      });
+
+      return promise;
+    };
+
+    // Calls a function with the provided args after flush
+    $$Core.$$afterFlush = function(fn, ...args) {
+      fn = this.$bindToContext(fn);
+      fn = _.partial(fn, ...args);
+      return Tracker.afterFlush(fn);
+    };
+
+    // Invokes a deferred digestion
+    $$Core.$$deferredDigest = function() {
+      setTimeout(this.$$throttledDigest.bind(this));
+    };
+
     // Digests scope only if there is no phase at the moment
     $$Core.$$throttledDigest = function() {
       const isDigestable = !this.$$destroyed &&
