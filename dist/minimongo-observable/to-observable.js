@@ -1,10 +1,12 @@
 "use strict";
 var observable_cursor_1 = require('./observable-cursor');
+var _ = require('lodash');
+var COLLECTION_EVENTS_DEBOUNCE_TIMEFRAME = 16;
 function toObservable(cursor) {
+    var currentZone = Zone.current;
     var observable = observable_cursor_1.ObservableCursor.create(function (observer) {
-        var handleChange = function () {
-            observer.next(cursor.fetch());
-        };
+        var rawHandleChange = function () { return currentZone.run(function () { return observer.next(cursor.fetch()); }); };
+        var handleChange = _.debounce(rawHandleChange, COLLECTION_EVENTS_DEBOUNCE_TIMEFRAME);
         var handler;
         var isReactive = observable.isReactive();
         observable._cursorRef = cursor;

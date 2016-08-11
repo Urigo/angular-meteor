@@ -10,31 +10,36 @@ var MeteorObservable = (function () {
         for (var _i = 1; _i < arguments.length; _i++) {
             args[_i - 1] = arguments[_i];
         }
+        var currentZone = Zone.current;
         var argumentsArray = Array.prototype.slice.call(arguments);
         var lastParam = argumentsArray[argumentsArray.length - 1];
         if (lastParam && _.isFunction(lastParam)) {
             throw new Error("Invalid MeteorObservable.call arguments:\n         Your last param can't be a callback function, \n         please remove it and use \".subscribe\" of the Observable!");
         }
-        return rxjs_1.Observable.create(function (observer) {
+        var obs = rxjs_1.Observable.create(function (observer) {
             Meteor.call.apply(Meteor, argumentsArray.concat([
                 function (error, result) {
                     if (error) {
-                        observer.error(error);
-                        observer.complete();
+                        currentZone.run(function () {
+                            observer.error(error);
+                            observer.complete();
+                        });
                     }
                     else {
-                        observer.next(result);
-                        observer.complete();
+                        currentZone.run(function () { return observer.next(result); });
                     }
                 }
             ]));
         });
+        obs.publish();
+        return obs;
     };
     MeteorObservable.subscribe = function (name) {
         var args = [];
         for (var _i = 1; _i < arguments.length; _i++) {
             args[_i - 1] = arguments[_i];
         }
+        var currentZone = Zone.current;
         var argumentsArray = Array.prototype.slice.call(arguments);
         var lastParam = argumentsArray[argumentsArray.length - 1];
         if (lastParam && _.isObject(lastParam) && (lastParam.onReady || lastParam.onError)) {
@@ -44,11 +49,13 @@ var MeteorObservable = (function () {
             var handle = Meteor.subscribe.apply(Meteor, argumentsArray.concat([
                 {
                     onError: function (error) {
-                        observer.error(error);
-                        observer.complete();
+                        currentZone.run(function () {
+                            observer.error(error);
+                            observer.complete();
+                        });
                     },
                     onReady: function () {
-                        observer.next();
+                        currentZone.run(function () { return observer.next(); });
                     }
                 }
             ]));
