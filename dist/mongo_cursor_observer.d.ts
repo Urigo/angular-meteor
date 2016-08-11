@@ -22,7 +22,7 @@ export declare class Subscription {
     private _error;
     private _complete;
     private _isUnsubscribed;
-    constructor(_next: Function, _error: Function, _complete: Function);
+    constructor(_next?: Function, _error?: Function, _complete?: Function);
     onNext(value: any): void;
     unsubscribe(): void;
 }
@@ -49,9 +49,9 @@ export declare class MongoCursorObserver {
      * we emit these changes, but only to the first ever subscriber.
      */
     subscribe({next, error, complete}: {
-        next: any;
-        error: any;
-        complete: any;
+        next?: Function;
+        error?: Function;
+        complete?: Function;
     }): Subscription;
     emit(value: any): void;
     destroy(): void;

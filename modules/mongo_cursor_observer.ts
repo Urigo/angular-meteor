@@ -23,9 +23,9 @@ export class RemoveChange {
 export class Subscription {
   private _isUnsubscribed: boolean = false;
 
-  constructor(private _next: Function,
-              private _error: Function,
-              private _complete: Function) { }
+  constructor(private _next?: Function,
+              private _error?: Function,
+              private _complete?: Function) { }
 
   onNext(value) {
     if (!this._isUnsubscribed && this._next) {
@@ -78,7 +78,8 @@ export class MongoCursorObserver {
    * before the moment someone subscribes to the observer,
    * we emit these changes, but only to the first ever subscriber.
    */
-  subscribe({next, error, complete}) {
+  subscribe({ next, error, complete } :
+      { next?: Function, error?: Function, complete?: Function }) {
     let subscription = new Subscription(next, error, complete);
     this._subs.push(subscription);
 

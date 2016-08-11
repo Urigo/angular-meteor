@@ -11,7 +11,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var core_2 = require('@angular/core');
 var lang_1 = require('@angular/core/src/facade/lang');
-var async_1 = require('@angular/core/src/facade/async');
 var utils_1 = require('./utils');
 var data_observer_1 = require('./data_observer');
 // Makes it possible to take an app instance by DOM element of the main component.
@@ -121,23 +120,25 @@ var AppCycles = (function () {
     };
     AppCycles.prototype.dispose = function () {
         if (this._onUnstable) {
-            async_1.ObservableWrapper.dispose(this._onUnstable);
+            this._onUnstable.dispose();
         }
         if (this._onStable) {
-            async_1.ObservableWrapper.dispose(this._onStable);
+            this._onStable.dispose();
         }
     };
     AppCycles.prototype._watchAngularEvents = function () {
         var _this = this;
-        this._onUnstable = async_1.ObservableWrapper.subscribe(this._ngZone.onUnstable, function () {
-            _this._isZoneStable = false;
+        this._onUnstable = this._ngZone.onUnstable.subscribe({ next: function () {
+                _this._isZoneStable = false;
+            }
         });
         this._ngZone.runOutsideAngular(function () {
-            _this._onStable = async_1.ObservableWrapper.subscribe(_this._ngZone.onStable, function () {
-                lang_1.scheduleMicroTask(function () {
-                    _this._isZoneStable = true;
-                    _this._runIfStable();
-                });
+            _this._onStable = _this._ngZone.onStable.subscribe({ next: function () {
+                    lang_1.scheduleMicroTask(function () {
+                        _this._isZoneStable = true;
+                        _this._runIfStable();
+                    });
+                }
             });
         });
     };

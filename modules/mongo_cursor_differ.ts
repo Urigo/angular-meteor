@@ -8,8 +8,6 @@ import {
   DefaultIterableDiffer
 } from '@angular/core/src/change_detection/differs/default_iterable_differ';
 
-import {ObservableWrapper} from '@angular/core/src/facade/async';
-
 import {
   MongoCursorObserver,
   AddChange,
@@ -108,10 +106,11 @@ export class MongoCursorDiffer extends DefaultIterableDiffer {
       this._destroyObserver();
       this._cursor = cursor;
       this._curObserver = <MongoCursorObserver>this._obsFactory.create(cursor);
-      this._subscription = ObservableWrapper.subscribe(this._curObserver,
+      this._subscription = this._curObserver.subscribe({next:
         changes => {
           this._zone.run(() => { this._updateLatestValue(changes); });
-        });
+        }
+      });
     }
 
     if (this._lastChanges) {

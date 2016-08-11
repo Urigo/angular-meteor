@@ -5,7 +5,6 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var default_iterable_differ_1 = require('@angular/core/src/change_detection/differs/default_iterable_differ');
-var async_1 = require('@angular/core/src/facade/async');
 var mongo_cursor_observer_1 = require('./mongo_cursor_observer');
 function checkIfMongoCursor(cursor) {
     return mongo_cursor_observer_1.MongoCursorObserver.isCursor(cursor);
@@ -86,8 +85,9 @@ var MongoCursorDiffer = (function (_super) {
             this._destroyObserver();
             this._cursor = cursor;
             this._curObserver = this._obsFactory.create(cursor);
-            this._subscription = async_1.ObservableWrapper.subscribe(this._curObserver, function (changes) {
-                _this._zone.run(function () { _this._updateLatestValue(changes); });
+            this._subscription = this._curObserver.subscribe({ next: function (changes) {
+                    _this._zone.run(function () { _this._updateLatestValue(changes); });
+                }
             });
         }
         if (this._lastChanges) {

@@ -16,7 +16,6 @@ import {
   coreLoadAndBootstrap
 } from '@angular/core';
 import {isPresent, isBlank, scheduleMicroTask} from '@angular/core/src/facade/lang';
-import {ObservableWrapper} from '@angular/core/src/facade/async';
 
 import {check} from './utils';
 
@@ -141,28 +140,28 @@ export class AppCycles {
 
   dispose() {
     if (this._onUnstable) {
-      ObservableWrapper.dispose(this._onUnstable);
+      this._onUnstable.dispose();
     }
 
     if (this._onStable) {
-      ObservableWrapper.dispose(this._onStable);
+      this._onStable.dispose();
     }
   }
 
   _watchAngularEvents(): void {
-    this._onUnstable = ObservableWrapper.subscribe(
-      this._ngZone.onUnstable, () => {
+    this._onUnstable = this._ngZone.onUnstable.subscribe({ next: () => {
         this._isZoneStable = false;
-      });
+      }
+    });
 
     this._ngZone.runOutsideAngular(() => {
-      this._onStable = ObservableWrapper.subscribe(
-        this._ngZone.onStable, () => {
+      this._onStable = this._ngZone.onStable.subscribe({ next: () => {
           scheduleMicroTask(() => {
             this._isZoneStable = true;
             this._runIfStable();
           });
-        });
+        }
+      })
     });
   }
 
