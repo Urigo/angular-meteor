@@ -1,7 +1,5 @@
 import {Component, enableProdMode, NgZone} from '@angular/core';
 
-import {ObservableWrapper, TimerWrapper} from '@angular/core/src/facade/async';
-
 import {MeteorComponent, MeteorApp, DataObserver} from 'angular2-meteor';
 import {bootstrap} from 'angular2-meteor-auto-bootstrap';
 
@@ -37,13 +35,13 @@ function onStable(ngZone, cb) {
     return;
   }
 
-  let sub = ObservableWrapper.subscribe(
-    ngZone.onStable, () => {
+  let sub = ngZone.onStable.subscribe({ next: () => {
       if (!ngZone.hasPendingMicrotasks) {
-        ObservableWrapper.dispose(sub);
+        sub.dispose();
         cb();
       }
-    });
+    }
+  });
 };
 
 describe('bootstrap', () => {
