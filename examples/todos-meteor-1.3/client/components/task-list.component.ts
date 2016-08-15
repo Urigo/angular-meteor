@@ -1,3 +1,5 @@
+'use strict';
+
 import {Component, Input, OnChanges} from '@angular/core';
 
 import {TaskView} from '../../imports/components';
@@ -8,7 +10,7 @@ import {Tasks} from '../../tasks';
 
 import {Mongo} from 'meteor/mongo';
 
-import template from './task-list.html';
+import template from './task-list.component.html';
 
 @Component({
   selector: 'task-list',

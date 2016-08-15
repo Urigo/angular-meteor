@@ -9,78 +9,43 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var core_2 = require('@angular/core');
 var lang_1 = require('@angular/core/src/facade/lang');
 var utils_1 = require('./utils');
 var data_observer_1 = require('./data_observer');
-// Makes it possible to take an app instance by DOM element of the main component.
-var MeteorAppRegistry = (function () {
-    function MeteorAppRegistry() {
-        this._apps = new Map();
+var providers_1 = require('./providers');
+var appRegistry = new Map();
+var MeteorModule = (function () {
+    function MeteorModule(appRef) {
+        appRegistry.set(appRef, new MeteorApp(appRef));
     }
-    MeteorAppRegistry.prototype.register = function (token, app) {
-        this._apps.set(token, app);
-    };
-    MeteorAppRegistry.prototype.unregister = function (token) {
-        this._apps.delete(token);
-    };
-    MeteorAppRegistry.prototype.get = function (token) {
-        return this._apps.get(token);
-    };
-    return MeteorAppRegistry;
+    MeteorModule = __decorate([
+        core_1.NgModule({
+            providers: providers_1.METEOR_PROVIDERS.concat([
+                core_1.provide(MeteorApp, {
+                    deps: [core_1.ApplicationRef],
+                    useFactory: function (appRef) {
+                        return appRegistry.get(appRef);
+                    }
+                })
+            ])
+        }), 
+        __metadata('design:paramtypes', [core_1.ApplicationRef])
+    ], MeteorModule);
+    return MeteorModule;
 }());
-exports.MeteorAppRegistry = MeteorAppRegistry;
-exports.appRegistry = new MeteorAppRegistry();
+exports.MeteorModule = MeteorModule;
 // Contains utility methods useful for the integration. 
 var MeteorApp = (function () {
     function MeteorApp(appRef) {
         this.appRef = appRef;
         this._appCycles = new AppCycles(appRef);
     }
-    MeteorApp.bootstrap = function (component, platProviders, appProviders, providers) {
-        var platRef = core_1.getPlatform();
-        if (lang_1.isBlank(platRef)) {
-            platRef = core_2.createPlatform(core_2.ReflectiveInjector.resolveAndCreate(platProviders));
-        }
-        appProviders = lang_1.isPresent(providers) ? appProviders.concat(providers) : appProviders;
-        appProviders.push(core_1.provide(MeteorApp, {
-            deps: [core_1.ApplicationRef],
-            useFactory: function (appRef) {
-                var elem = appRef._rootCompRef.location.nativeElement;
-                return exports.appRegistry.get(elem);
-            },
-        }));
-        var appInjector = core_2.ReflectiveInjector.resolveAndCreate(appProviders, platRef.injector);
-        var appRef = appInjector.get(core_1.ApplicationRef);
-        var newApp = new MeteorApp(appRef);
-        return new Promise(function (resolve, reject) {
-            Meteor.startup(function () {
-                return core_2.coreLoadAndBootstrap(component, appInjector)
-                    .then(function (compRef) {
-                    // It's ok since one app can bootstrap
-                    // one component currently.
-                    appRef._rootCompRef = compRef;
-                    var elem = compRef.location.nativeElement;
-                    exports.appRegistry.register(elem, newApp);
-                    appRef.registerDisposeListener(function () {
-                        exports.appRegistry.unregister(elem);
-                        delete appRef._rootCompRef;
-                    });
-                    return compRef;
-                })
-                    .then(resolve, reject);
-            });
-        });
-    };
     MeteorApp.prototype.onRendered = function (cb) {
         var _this = this;
         utils_1.check(cb, Function);
         this._appCycles.onStable(function () {
             data_observer_1.DataObserver.onReady(function () {
-                // No way to get ngZone's inner zone,
-                // so make one more run to insure
-                // data rendered.
-                _this.ngZone.run(function () { return cb(); });
+                _this._appCycles.onStable(cb);
             });
         });
     };

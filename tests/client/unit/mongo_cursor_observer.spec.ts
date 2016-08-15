@@ -14,6 +14,7 @@ describe('MongoCursorObserver', function() {
   it('start observing cursor', function() {
     let spy = sinon.spy(fakeCursor, 'observe');
     let observer = new MongoCursorObserver(fakeCursor);
+    observer.subscribe();
     expect(spy.calledOnce).to.equal(true);
   });
 });

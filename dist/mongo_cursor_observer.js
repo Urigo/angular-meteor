@@ -1,4 +1,11 @@
 'use strict';
+var __extends = (this && this.__extends) || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
+    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+};
+var core_1 = require('@angular/core');
+var lang_1 = require('@angular/core/src/facade/lang');
 var cursor_handle_1 = require('./cursor_handle');
 var utils_1 = require('./utils');
 var AddChange = (function () {
@@ -32,41 +39,36 @@ var RemoveChange = (function () {
     return RemoveChange;
 }());
 exports.RemoveChange = RemoveChange;
-var Subscription = (function () {
-    function Subscription(_next, _error, _complete) {
-        this._next = _next;
-        this._error = _error;
-        this._complete = _complete;
-        this._isUnsubscribed = false;
-    }
-    Subscription.prototype.onNext = function (value) {
-        if (!this._isUnsubscribed && this._next) {
-            this._next(value);
-        }
-    };
-    Subscription.prototype.unsubscribe = function () {
-        this._isUnsubscribed = true;
-    };
-    return Subscription;
-}());
-exports.Subscription = Subscription;
 /**
  * Class that does a background work of observing
  * Mongo collection changes (through a cursor)
  * and notifying subscribers about them.
  */
-var MongoCursorObserver = (function () {
-    function MongoCursorObserver(cursor) {
+var MongoCursorObserver = (function (_super) {
+    __extends(MongoCursorObserver, _super);
+    function MongoCursorObserver(cursor, _debounceMs) {
+        if (_debounceMs === void 0) { _debounceMs = 50; }
+        _super.call(this);
+        this._debounceMs = _debounceMs;
         this._docs = [];
         this._added = [];
         this._lastChanges = [];
-        this._subs = [];
+        this._ngZone = utils_1.g.Zone.current;
         this._isSubscribed = false;
         utils_1.check(cursor, Match.Where(MongoCursorObserver.isCursor));
-        this._hCursor = this._processCursor(cursor);
+        this._cursor = cursor;
     }
     MongoCursorObserver.isCursor = function (cursor) {
         return cursor && !!cursor.observe;
+    };
+    MongoCursorObserver.prototype.subscribe = function (events) {
+        var sub = _super.prototype.subscribe.call(this, events);
+        // Start processing of the cursor lazily.
+        if (!this._isSubscribed) {
+            this._isSubscribed = true;
+            this._hCursor = this._processCursor(this._cursor);
+        }
+        return sub;
     };
     Object.defineProperty(MongoCursorObserver.prototype, "lastChanges", {
         get: function () {
@@ -75,42 +77,12 @@ var MongoCursorObserver = (function () {
         enumerable: true,
         configurable: true
     });
-    /**
-     * Subcribes to the Mongo cursor changes.
-     *
-     * Since it's possible that some changes that been already collected
-     * before the moment someone subscribes to the observer,
-     * we emit these changes, but only to the first ever subscriber.
-     */
-    MongoCursorObserver.prototype.subscribe = function (_a) {
-        var next = _a.next, error = _a.error, complete = _a.complete;
-        var subscription = new Subscription(next, error, complete);
-        this._subs.push(subscription);
-        // If no subscriber has subscribed ever. 
-        if (!this._isSubscribed) {
-            this._isSubscribed = true;
-            if (this._added.length) {
-                this.emit(this._added.splice(0));
-            }
-        }
-        return subscription;
-    };
-    MongoCursorObserver.prototype.emit = function (value) {
-        if (this._subs) {
-            for (var _i = 0, _a = this._subs; _i < _a.length; _i++) {
-                var sub = _a[_i];
-                sub.onNext(value);
-            }
-        }
-    };
     MongoCursorObserver.prototype.destroy = function () {
         if (this._hCursor) {
             this._hCursor.stop();
         }
         this._hCursor = null;
         this._docs = null;
-        this._added = null;
-        this._subs = null;
     };
     MongoCursorObserver.prototype._processCursor = function (cursor) {
         // On the server side fetch data, don't observe.
@@ -128,33 +100,72 @@ var MongoCursorObserver = (function () {
         return new cursor_handle_1.CursorHandle(hCurObserver);
     };
     MongoCursorObserver.prototype._startCursorObserver = function (cursor) {
-        var self = this;
-        return cursor.observe({
+        var _this = this;
+        var changes = [];
+        var callEmit = function () {
+            _this.emit(changes.slice());
+            changes.length = 0;
+        };
+        // Since cursor changes are now applied in bulk
+        // (due to emit debouncing), scheduling macro task
+        // allows us to use MeteorApp.onStable,
+        // i.e. to know when the app is stable.
+        var scheduleEmit = function () {
+            return _this._ngZone.scheduleMacroTask('emit', callEmit, null, lang_1.noop);
+        };
+        var init = false;
+        var runTask = function (task) {
+            task.invoke();
+            _this._ngZone.run(lang_1.noop);
+            init = true;
+        };
+        var emit = null;
+        if (this._debounceMs) {
+            emit = utils_1.debounce(function (task) { return runTask(task); }, this._debounceMs, scheduleEmit);
+        }
+        else {
+            var initAdd_1 = utils_1.debounce(function (task) { return runTask(task); }, 0, scheduleEmit);
+            emit = function () {
+                // This is for the case when cursor.observe
+                // is called multiple times in a row
+                // when the initial docs are being added.
+                if (!init) {
+                    initAdd_1();
+                    return;
+                }
+                runTask(scheduleEmit());
+            };
+        }
+        return utils_1.gZone.run(function () { return cursor.observe({
             addedAt: function (doc, index) {
-                var change = self._addAt(doc, index);
-                self.emit([change]);
+                var change = _this._addAt(doc, index);
+                changes.push(change);
+                emit();
             },
             changedAt: function (nDoc, oDoc, index) {
-                var doc = self._docs[index];
+                var doc = _this._docs[index];
                 var mDoc = nDoc;
                 if (utils_1.EJSON.equals(doc._id, mDoc._id)) {
-                    Object.assign(self._docs[index], mDoc);
+                    Object.assign(_this._docs[index], mDoc);
                 }
                 else {
-                    self._docs[index] = mDoc;
+                    _this._docs[index] = mDoc;
                 }
-                var change = self._updateAt(self._docs[index], index);
-                self.emit([change]);
+                var change = _this._updateAt(_this._docs[index], index);
+                changes.push(change);
+                emit();
             },
             movedTo: function (doc, fromIndex, toIndex) {
-                var change = self._moveTo(doc, fromIndex, toIndex);
-                self.emit([change]);
+                var change = _this._moveTo(doc, fromIndex, toIndex);
+                changes.push(change);
+                emit();
             },
             removedAt: function (doc, atIndex) {
-                var change = self._removeAt(atIndex);
-                self.emit([change]);
+                var change = _this._removeAt(atIndex);
+                changes.push(change);
+                emit();
             }
-        });
+        }); });
     };
     MongoCursorObserver.prototype._updateAt = function (doc, index) {
         return new UpdateChange(index, doc);
@@ -162,9 +173,6 @@ var MongoCursorObserver = (function () {
     MongoCursorObserver.prototype._addAt = function (doc, index) {
         this._docs.splice(index, 0, doc);
         var change = new AddChange(index, doc);
-        if (!this._isSubscribed) {
-            this._added.push(change);
-        }
         return change;
     };
     MongoCursorObserver.prototype._moveTo = function (doc, fromIndex, toIndex) {
@@ -177,5 +185,5 @@ var MongoCursorObserver = (function () {
         return new RemoveChange(index);
     };
     return MongoCursorObserver;
-}());
+}(core_1.EventEmitter));
 exports.MongoCursorObserver = MongoCursorObserver;

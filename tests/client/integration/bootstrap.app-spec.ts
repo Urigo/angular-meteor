@@ -1,7 +1,10 @@
-import {Component, enableProdMode, NgZone} from '@angular/core';
+import {NgModule, Component, enableProdMode, NgZone} from '@angular/core';
 
-import {MeteorComponent, MeteorApp, DataObserver} from 'angular2-meteor';
-import {bootstrap} from 'angular2-meteor-auto-bootstrap';
+import {MeteorComponent, MeteorModule, DataObserver} from 'angular2-meteor';
+
+import {BrowserModule} from '@angular/platform-browser';
+
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
 import { $ } from 'meteor/jquery';
 
@@ -18,15 +21,24 @@ enableProdMode();
     </li>
   </ul>`
 })
-export class Todos extends MeteorComponent {
+class Todos extends MeteorComponent {
   constructor() {
     super();
 
-    this.subscribe('tasks');
+    this.subscribe('tasks', () => {
+      console.log('subscribe');
+    });
 
     this.tasks = Tasks.find();
   }
 }
+
+@NgModule({
+  imports: [BrowserModule, MeteorModule],
+  declarations: [Todos],
+  bootstrap: [Todos]
+})
+class AppModule {}
 
 function onStable(ngZone, cb) {
   if (!ngZone.hasPendingMacrotasks &&
@@ -36,8 +48,8 @@ function onStable(ngZone, cb) {
   }
 
   let sub = ngZone.onStable.subscribe({ next: () => {
-      if (!ngZone.hasPendingMicrotasks) {
-        sub.dispose();
+      if (!ngZone.hasPendingMacrotasks) {
+        sub.unsubscribe();
         cb();
       }
     }
@@ -57,8 +69,8 @@ describe('bootstrap', () => {
 
   it('MeteorComponent', done => {
     generateData().then(() => {
-      bootstrap(Todos).then(compRef => {
-        let ngZone = compRef.injector.get(NgZone);
+      platformBrowserDynamic().bootstrapModule(AppModule).then(moduleRef => {
+        let ngZone = moduleRef.injector.get(NgZone);
 
         onStable(ngZone, () => {
           DataObserver.onReady(() => {

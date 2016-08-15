@@ -52,28 +52,39 @@ var MongoCursorDiffer = (function (_super) {
         this._removed = [];
         this._moved = [];
         this._updated = [];
-        this._listSize = 0;
+        this._changes = [];
+        this._forSize = 0;
         this._zone = Zone.current;
         this._obsFactory = obsFactory;
     }
     MongoCursorDiffer.prototype.forEachAddedItem = function (fn) {
-        for (var i = 0; i < this._inserted.length; i++) {
-            fn(this._inserted[i]);
+        for (var _i = 0, _a = this._inserted; _i < _a.length; _i++) {
+            var insert = _a[_i];
+            fn(insert);
         }
     };
     MongoCursorDiffer.prototype.forEachMovedItem = function (fn) {
-        for (var i = 0; i < this._moved.length; i++) {
-            fn(this._moved[i]);
+        for (var _i = 0, _a = this._moved; _i < _a.length; _i++) {
+            var move = _a[_i];
+            fn(move);
         }
     };
     MongoCursorDiffer.prototype.forEachRemovedItem = function (fn) {
-        for (var i = 0; i < this._removed.length; i++) {
-            fn(this._removed[i]);
+        for (var _i = 0, _a = this._removed; _i < _a.length; _i++) {
+            var remove = _a[_i];
+            fn(remove);
         }
     };
     MongoCursorDiffer.prototype.forEachIdentityChange = function (fn) {
-        for (var i = 0; i < this._updated.length; i++) {
-            fn(this._updated[i]);
+        for (var _i = 0, _a = this._updated; _i < _a.length; _i++) {
+            var update = _a[_i];
+            fn(update);
+        }
+    };
+    MongoCursorDiffer.prototype.forEachOperation = function (fn) {
+        for (var _i = 0, _a = this._changes; _i < _a.length; _i++) {
+            var change = _a[_i];
+            fn(change, change.previousIndex, change.currentIndex);
         }
     };
     MongoCursorDiffer.prototype.diff = function (cursor) {
@@ -85,9 +96,8 @@ var MongoCursorDiffer = (function (_super) {
             this._destroyObserver();
             this._cursor = cursor;
             this._curObserver = this._obsFactory.create(cursor);
-            this._subscription = this._curObserver.subscribe({ next: function (changes) {
-                    _this._zone.run(function () { _this._updateLatestValue(changes); });
-                }
+            this._sub = this._curObserver.subscribe({
+                next: function (changes) { return _this._updateLatestValue(changes); }
             });
         }
         if (this._lastChanges) {
@@ -123,6 +133,9 @@ var MongoCursorDiffer = (function (_super) {
         if (this._curObserver) {
             this._curObserver.destroy();
         }
+        if (this._sub) {
+            this._sub.unsubscribe();
+        }
         this._applyCleanup();
     };
     MongoCursorDiffer.prototype._updateLatestValue = function (changes) {
@@ -133,29 +146,39 @@ var MongoCursorDiffer = (function (_super) {
         this._moved.length = 0;
         this._removed.length = 0;
         this._updated.length = 0;
+        this._changes.length = 0;
     };
     // Reset previous state of the differ by removing all currently shown documents.
     MongoCursorDiffer.prototype._applyCleanup = function () {
-        for (var index = 0; index < this._listSize; index++) {
-            this._removed.push(this._createChangeRecord(null, index, null));
+        for (var index = 0; index < this._forSize; index++) {
+            var remove = this._createChangeRecord(null, 0, null);
+            this._removed.push(remove);
+            this._changes.push(remove);
         }
-        this._listSize = 0;
+        this._forSize = 0;
     };
     MongoCursorDiffer.prototype._applyChanges = function (changes) {
-        for (var i = 0; i < changes.length; i++) {
-            if (changes[i] instanceof mongo_cursor_observer_1.AddChange) {
-                this._inserted.push(this._createChangeRecord(changes[i].index, null, changes[i].item));
-                this._listSize++;
+        for (var _i = 0, changes_1 = changes; _i < changes_1.length; _i++) {
+            var change = changes_1[_i];
+            if (change instanceof mongo_cursor_observer_1.AddChange) {
+                var add = this._createChangeRecord(change.index, null, change.item);
+                this._inserted.push(add);
+                this._changes.push(add);
+                this._forSize++;
             }
-            if (changes[i] instanceof mongo_cursor_observer_1.MoveChange) {
-                this._moved.push(this._createChangeRecord(changes[i].toIndex, changes[i].fromIndex, changes[i].item));
+            if (change instanceof mongo_cursor_observer_1.MoveChange) {
+                var move = this._createChangeRecord(change.toIndex, change.fromIndex, change.item);
+                this._moved.push(move);
+                this._changes.push(move);
             }
-            if (changes[i] instanceof mongo_cursor_observer_1.RemoveChange) {
-                this._removed.push(this._createChangeRecord(null, changes[i].index, changes[i].item));
-                this._listSize--;
+            if (change instanceof mongo_cursor_observer_1.RemoveChange) {
+                var remove = this._createChangeRecord(null, change.index, change.item);
+                this._removed.push(remove);
+                this._changes.push(remove);
+                this._forSize--;
             }
-            if (changes[i] instanceof mongo_cursor_observer_1.UpdateChange) {
-                this._updated.push(this._createChangeRecord(changes[i].index, null, changes[i].item));
+            if (change instanceof mongo_cursor_observer_1.UpdateChange) {
+                this._updated.push(this._createChangeRecord(change.index, null, change.item));
             }
         }
     };

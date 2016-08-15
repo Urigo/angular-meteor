@@ -1,16 +1,12 @@
-import {Component, provide, enableProdMode} from '@angular/core';
+'use strict';
+
+import {Component} from '@angular/core';
 
 import {Tasks} from '../tasks';
 
 import {TaskList} from '/client/components';
 
-import {bootstrap} from 'angular2-meteor-auto-bootstrap';
-
-import {disableDeprecatedForms, provideForms} from '@angular/forms';
-
-import template from './app.html';
-
-enableProdMode();
+import template from './app.component.html';
 
 @Component({
   selector: 'app',
@@ -28,5 +24,3 @@ export class Todos {
     }).count();
   }
 }
-
-bootstrap(Todos, [disableDeprecatedForms(), provideForms()]);

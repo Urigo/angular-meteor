@@ -1,8 +1,12 @@
 'use strict';
 
+import {EventEmitter} from '@angular/core';
+
+import {noop} from '@angular/core/src/facade/lang';
+
 import {CursorHandle} from './cursor_handle';
 
-import {EJSON, check} from './utils';
+import {EJSON, check, gZone, g, debounce} from './utils';
 
 export class AddChange {
   constructor(public index: number, public item: any) {}
@@ -20,25 +24,8 @@ export class RemoveChange {
   constructor(public index: number) {}
 }
 
-export class Subscription {
-  private _isUnsubscribed: boolean = false;
-
-  constructor(private _next?: Function,
-              private _error?: Function,
-              private _complete?: Function) { }
-
-  onNext(value) {
-    if (!this._isUnsubscribed && this._next) {
-      this._next(value);
-    }
-  }
-
-  unsubscribe() {
-    this._isUnsubscribed = true;
-  }
-}
-
-declare type MongoDocChange = AddChange | MoveChange | UpdateChange | RemoveChange;
+export declare type MongoDocChange =
+  AddChange | MoveChange | UpdateChange | RemoveChange;
 
 declare interface MongoItem {
   _id: EJSONable;
@@ -49,58 +36,41 @@ declare interface MongoItem {
  * Mongo collection changes (through a cursor)
  * and notifying subscribers about them.
  */
-export class MongoCursorObserver {
+export class MongoCursorObserver extends EventEmitter<MongoDocChange[]> {
   private _docs: Array<MongoItem> = [];
   private _added: Array<AddChange> = [];
   private _lastChanges: Array<MongoDocChange> = [];
+  private _cursor: Mongo.Cursor<any>;
   private _hCursor: CursorHandle;
-  private _subs: Array<Subscription> = [];
-  private _isSubscribed: boolean = false;
+  private _ngZone = g.Zone.current;
+  private _isSubscribed = false;
 
   static isCursor(cursor: any): boolean {
     return cursor && !!cursor.observe;
   }
 
-  constructor(cursor: Mongo.Cursor<any>) {
+  constructor(cursor: Mongo.Cursor<any>,
+              private _debounceMs: number = 50) {
+    super();
     check(cursor, Match.Where(MongoCursorObserver.isCursor));
 
-    this._hCursor = this._processCursor(cursor);
+    this._cursor = cursor;
+  }
+
+  subscribe(events) {
+    let sub = super.subscribe(events);
+
+    // Start processing of the cursor lazily.
+    if (!this._isSubscribed) {
+      this._isSubscribed = true;
+      this._hCursor = this._processCursor(this._cursor);
+    }
+
+    return sub;
   }
 
   get lastChanges() {
     return this._lastChanges;
-  }
-
-  /**
-   * Subcribes to the Mongo cursor changes.
-   *
-   * Since it's possible that some changes that been already collected
-   * before the moment someone subscribes to the observer,
-   * we emit these changes, but only to the first ever subscriber.
-   */
-  subscribe({ next, error, complete } :
-      { next?: Function, error?: Function, complete?: Function }) {
-    let subscription = new Subscription(next, error, complete);
-    this._subs.push(subscription);
-
-    // If no subscriber has subscribed ever. 
-    if (!this._isSubscribed) {
-      this._isSubscribed = true;
-
-      if (this._added.length) {
-        this.emit(this._added.splice(0));
-      }
-    }
-
-    return subscription;
-  }
-
-  emit(value) {
-    if (this._subs) {
-      for (let sub of this._subs) {
-        sub.onNext(value);
-      }
-    }
   }
 
   destroy() {
@@ -110,8 +80,6 @@ export class MongoCursorObserver {
 
     this._hCursor = null;
     this._docs = null;
-    this._added = null;
-    this._subs = null;
   }
 
   private _processCursor(cursor: Mongo.Cursor<any>): CursorHandle {
@@ -131,35 +99,78 @@ export class MongoCursorObserver {
   }
 
   private _startCursorObserver(cursor: Mongo.Cursor<any>): Meteor.LiveQueryHandle {
-    let self = this;
-    return cursor.observe({
-      addedAt: function(doc, index) {
-        let change = self._addAt(doc, index);
-        self.emit([change]);
+    let changes = [];
+
+    let callEmit = () => {
+      this.emit(changes.slice());
+      changes.length = 0;
+    };
+
+    // Since cursor changes are now applied in bulk
+    // (due to emit debouncing), scheduling macro task
+    // allows us to use MeteorApp.onStable,
+    // i.e. to know when the app is stable.
+    let scheduleEmit = () => {
+      return this._ngZone.scheduleMacroTask('emit',
+        callEmit, null, noop);
+    };
+
+    let init = false;
+    let runTask = task => {
+      task.invoke();
+      this._ngZone.run(noop);
+      init = true;
+    };
+
+    let emit = null;
+    if (this._debounceMs) {
+      emit = debounce(task => runTask(task), this._debounceMs, scheduleEmit);
+    } else {
+      let initAdd = debounce(task => runTask(task), 0, scheduleEmit);
+      emit = () => {
+        // This is for the case when cursor.observe
+        // is called multiple times in a row
+        // when the initial docs are being added.
+        if (!init) {
+          initAdd();
+          return;
+        }
+        runTask(scheduleEmit());
+      }
+    }
+
+    return gZone.run(() => cursor.observe({
+      addedAt: (doc, index) => {
+        let change = this._addAt(doc, index);
+        changes.push(change);
+        emit();
       },
 
-      changedAt: function(nDoc, oDoc, index) {
-        let doc = self._docs[index];
+      changedAt: (nDoc, oDoc, index) => {
+        let doc = this._docs[index];
         let mDoc = <MongoItem>nDoc;
         if (EJSON.equals(doc._id, mDoc._id)) {
-          Object.assign(self._docs[index], mDoc);
+          Object.assign(this._docs[index], mDoc);
         } else {
-          self._docs[index] = mDoc;
+          this._docs[index] = mDoc;
         }
-        let change = self._updateAt(self._docs[index], index);
-        self.emit([change]);
+        let change = this._updateAt(this._docs[index], index);
+        changes.push(change);
+        emit();
       },
 
-      movedTo: function(doc, fromIndex, toIndex) {
-        let change = self._moveTo(doc, fromIndex, toIndex);
-        self.emit([change]);
+      movedTo: (doc, fromIndex, toIndex) => {
+        let change = this._moveTo(doc, fromIndex, toIndex);
+        changes.push(change);
+        emit();
       },
 
-      removedAt: function(doc, atIndex) {
-        let change = self._removeAt(atIndex);
-        self.emit([change]);
+      removedAt: (doc, atIndex) => {
+        let change = this._removeAt(atIndex);
+        changes.push(change);
+        emit();
       }
-    });
+    }));
   }
 
   private _updateAt(doc, index) {
@@ -169,9 +180,6 @@ export class MongoCursorObserver {
   private _addAt(doc, index) {
     this._docs.splice(index, 0, doc);
     let change = new AddChange(index, doc);
-    if (!this._isSubscribed) {
-      this._added.push(change);
-    }
     return change;
   }
 

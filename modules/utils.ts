@@ -34,3 +34,24 @@ export const EJSON = Package['ejson'].EJSON;
 export const check = Package['check'].check;
 
 export const Match = Package['check'].Match;
+
+export function debounce(func, wait, onInit) {
+  let timeout, result, data;
+
+  let later = function(context, args) {
+    timeout = null;
+    result = func.apply(context, [...args, data]);
+  };
+
+  let debounced = function(...args) {
+    if (!timeout) {
+      data = onInit && onInit();
+    }
+    if (timeout) clearTimeout(timeout);
+    timeout = _.delay(later, wait, this, args);
+
+    return result;
+  };
+
+  return debounced;
+};

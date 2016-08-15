@@ -13,8 +13,12 @@ import {
   AddChange,
   MoveChange,
   RemoveChange,
-  UpdateChange
+  UpdateChange,
 } from './mongo_cursor_observer';
+
+import {Subscription} from 'rxjs/Subscription';
+
+import {gZone} from './utils';
 
 export interface ObserverFactory {
   create(cursor: Object): Object;
@@ -27,7 +31,7 @@ function checkIfMongoCursor(cursor): boolean {
 // Creates an MongoCursorObserver instance for a Mongo.Cursor instance.
 // Add one more level of abstraction, but currently is not really needed.
 class MongoCursorObserverFactory implements ObserverFactory {
-  create(cursor: Object): Object {
+  create(cursor: Object): MongoCursorObserver {
     if (checkIfMongoCursor(cursor)) {
       return new MongoCursorObserver(<Mongo.Cursor<any>>cursor);
     }
@@ -60,12 +64,13 @@ export class MongoCursorDiffer extends DefaultIterableDiffer {
   private _removed: Array<CollectionChangeRecord> = [];
   private _moved: Array<CollectionChangeRecord> = [];
   private _updated: Array<CollectionChangeRecord> = [];
+  private _changes: Array<CollectionChangeRecord> = [];
   private _curObserver: MongoCursorObserver;
   private _lastChanges: Array<AddChange | MoveChange | RemoveChange>;
-  private _listSize: number = 0;
+  private _forSize: number = 0;
   private _cursor: Mongo.Cursor<any>;
   private _obsFactory: ObserverFactory;
-  private _subscription: Object;
+  private _sub: Subscription;
   private _zone = Zone.current;
 
   constructor(cdRef: ChangeDetectorRef, obsFactory: ObserverFactory) {
@@ -74,26 +79,32 @@ export class MongoCursorDiffer extends DefaultIterableDiffer {
   }
 
   forEachAddedItem(fn: Function) {
-    for (let i = 0; i < this._inserted.length; i++) {
-      fn(this._inserted[i]);
+    for (let insert of this._inserted) {
+      fn(insert);
     }
   }
 
   forEachMovedItem(fn: Function) {
-    for (let i = 0; i < this._moved.length; i++) {
-      fn(this._moved[i]);
+    for (let move of this._moved) {
+      fn(move);
     }
   }
 
   forEachRemovedItem(fn: Function) {
-    for (let i = 0; i < this._removed.length; i++) {
-      fn(this._removed[i]);
+    for (let remove of this._removed) {
+      fn(remove);
     }
   }
 
   forEachIdentityChange(fn: Function) {
-    for (let i = 0; i < this._updated.length; i++) {
-      fn(this._updated[i]);
+    for (let update of this._updated) {
+      fn(update);
+    }
+  }
+
+  forEachOperation(fn: Function) {
+    for (let change of this._changes) {
+      fn(change, change.previousIndex, change.currentIndex);
     }
   }
 
@@ -106,10 +117,8 @@ export class MongoCursorDiffer extends DefaultIterableDiffer {
       this._destroyObserver();
       this._cursor = cursor;
       this._curObserver = <MongoCursorObserver>this._obsFactory.create(cursor);
-      this._subscription = this._curObserver.subscribe({next:
-        changes => {
-          this._zone.run(() => { this._updateLatestValue(changes); });
-        }
+      this._sub = this._curObserver.subscribe({
+        next: changes => this._updateLatestValue(changes)
       });
     }
 
@@ -148,6 +157,10 @@ export class MongoCursorDiffer extends DefaultIterableDiffer {
       this._curObserver.destroy();
     }
 
+    if (this._sub) {
+      this._sub.unsubscribe();
+    }
+
     this._applyCleanup();
   }
 
@@ -160,39 +173,47 @@ export class MongoCursorDiffer extends DefaultIterableDiffer {
     this._moved.length = 0;
     this._removed.length = 0;
     this._updated.length = 0;
+    this._changes.length = 0;
   }
 
   // Reset previous state of the differ by removing all currently shown documents.
   _applyCleanup() {
-    for (let index = 0; index < this._listSize; index++) {
-      this._removed.push(this._createChangeRecord(
-        null, index, null));
+    for (let index = 0; index < this._forSize; index++) {
+      let remove = this._createChangeRecord(null, 0, null);
+      this._removed.push(remove);
+      this._changes.push(remove);
     }
-    this._listSize = 0;
+    this._forSize = 0;
   }
 
   _applyChanges(changes) {
-    for (let i = 0; i < changes.length; i++) {
-      if (changes[i] instanceof AddChange) {
-        this._inserted.push(this._createChangeRecord(
-          changes[i].index, null, changes[i].item));
-        this._listSize++;
+    for (let change of changes) {
+      if (change instanceof AddChange) {
+        let add = this._createChangeRecord(
+          change.index, null, change.item);
+        this._inserted.push(add);
+        this._changes.push(add);
+        this._forSize++;
       }
 
-      if (changes[i] instanceof MoveChange) {
-        this._moved.push(this._createChangeRecord(
-          changes[i].toIndex, changes[i].fromIndex, changes[i].item));
+      if (change instanceof MoveChange) {
+        let move = this._createChangeRecord(
+          change.toIndex, change.fromIndex, change.item);
+        this._moved.push(move);
+        this._changes.push(move);
       }
 
-      if (changes[i] instanceof RemoveChange) {
-        this._removed.push(this._createChangeRecord(
-          null, changes[i].index, changes[i].item));
-        this._listSize--;
+      if (change instanceof RemoveChange) {
+        let remove = this._createChangeRecord(
+          null, change.index, change.item);
+        this._removed.push(remove);
+        this._changes.push(remove);
+        this._forSize--;
       }
 
-      if (changes[i] instanceof UpdateChange) {
+      if (change instanceof UpdateChange) {
         this._updated.push(this._createChangeRecord(
-          changes[i].index, null, changes[i].item));
+          change.index, null, change.item));
       }
     }
   }

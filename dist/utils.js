@@ -19,3 +19,26 @@ exports.gZone = exports.g.Zone.current;
 exports.EJSON = Package['ejson'].EJSON;
 exports.check = Package['check'].check;
 exports.Match = Package['check'].Match;
+function debounce(func, wait, onInit) {
+    var timeout, result, data;
+    var later = function (context, args) {
+        timeout = null;
+        result = func.apply(context, args.concat([data]));
+    };
+    var debounced = function () {
+        var args = [];
+        for (var _i = 0; _i < arguments.length; _i++) {
+            args[_i - 0] = arguments[_i];
+        }
+        if (!timeout) {
+            data = onInit && onInit();
+        }
+        if (timeout)
+            clearTimeout(timeout);
+        timeout = _.delay(later, wait, this, args);
+        return result;
+    };
+    return debounced;
+}
+exports.debounce = debounce;
+;

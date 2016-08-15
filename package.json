@@ -31,13 +31,14 @@
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "peerDependencies": {
-    "@angular/core": "^2.0.0-rc.2",
+    "@angular/core": "^2.0.0-rc.5",
     "angular2-meteor-polyfills": "^0.1.1"
   },
   "devDependencies": {
-    "@angular/core": "^2.0.0-rc.2",
-    "@angular/common": "^2.0.0-rc.2",
-    "@angular/compiler": "^2.0.0-rc.2",
+    "@angular/core": "^2.0.0-rc.5",
+    "@angular/common": "^2.0.0-rc.5",
+    "@angular/compiler": "^2.0.0-rc.5",
+    "angular2-meteor-polyfills": "^0.1.1",
     "es6-shim": "^0.35.0",
     "zone.js": "^0.6.12",
     "rxjs": "5.0.0-beta.6",

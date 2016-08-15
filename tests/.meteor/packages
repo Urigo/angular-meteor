@@ -24,4 +24,3 @@ practicalmeteor:chai
 dispatch:mocha-phantomjs
 dburles:factory
 xolvio:cleaner
-practicalmeteor:mocha

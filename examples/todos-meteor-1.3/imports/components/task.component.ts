@@ -1,9 +1,11 @@
+'use strict';
+
 import {Component, Input} from '@angular/core';
 
 import {MeteorComponent} from 'angular2-meteor';
 
-import style from './task.less';
-import template from './task.html';
+import style from './task.component.less';
+import template from './task.component.html';
 
 @Component({
   selector: 'task',

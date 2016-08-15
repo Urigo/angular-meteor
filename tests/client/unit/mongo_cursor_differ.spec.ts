@@ -33,25 +33,28 @@ describe('MongoCursorDiffer', function() {
     fakeObserver.emit(changes);
     differ.diff(null);
 
-    var forEachAddedItem = sinon.spy(function(addChange) {
-      expect(addChange.item).to.equal(changes[0].item);
-      expect(addChange.currentIndex).to.equal(changes[0].index);
-    });
-    differ.forEachAddedItem(forEachAddedItem);
-    expect(forEachAddedItem.calledOnce).to.equal(true);
+    let count = 0;
+    var forEachOperation = sinon.spy(function(record, previousIndex, index) {
+      let change = changes[count];
+      expect(record.item).to.equal(change.item);
 
-    var forEachRemovedItem = sinon.spy(function(removeChange) {
-      expect(removeChange.previousIndex).to.equal(changes[1].index);
-    });
-    differ.forEachRemovedItem(forEachRemovedItem);
-    expect(forEachRemovedItem.calledOnce).to.equal(true);
+      if (count == 0) {
+        expect(index).to.equal(change.index);
+      }
 
-    var forEachMovedItem = sinon.spy(function(moveChange) {
-      expect(moveChange.previousIndex).to.equal(changes[2].fromIndex);
-      expect(moveChange.currentIndex).to.equal(changes[2].toIndex);
+      if (count == 1) {
+        expect(previousIndex).to.equal(change.index);
+      }
+
+      if (count == 2) {
+        expect(previousIndex).to.equal(change.fromIndex);
+        expect(index).to.equal(change.toIndex);
+      }
+
+      count++;
     });
-    differ.forEachMovedItem(forEachMovedItem);
-    expect(forEachMovedItem.calledOnce).to.equal(true);
+    differ.forEachOperation(forEachOperation);
+    expect(forEachOperation.callCount).to.equal(3);
   });
 
   it('new cursor being handled properly', function() {
@@ -72,12 +75,12 @@ describe('MongoCursorDiffer', function() {
     differ.observer.emit(changes2);
     differ.diff(null);
 
-    var forEachAddedItem = sinon.spy(function(addChange) {
+    var forEachOperation = sinon.spy(function(addChange) {
       expect(addChange.item).to.equal(changes2[0].item);
       expect(addChange.currentIndex).to.equal(changes2[0].index);
     });
-    differ.forEachAddedItem(forEachAddedItem);
-    expect(forEachAddedItem.calledOnce).to.equal(true);
+    differ.forEachOperation(forEachOperation);
+    expect(forEachOperation.calledOnce).to.equal(true);
   });
 
   it('factory should recognize Mongo.Cursor', function() {

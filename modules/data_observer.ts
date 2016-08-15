@@ -1,7 +1,5 @@
 'use strict';
 
-import {PromiseWrapper, PromiseCompleter} from '@angular/core/src/facade/async';
-
 import {
   CallbacksObject,
   MeteorCallbacks,
@@ -23,7 +21,6 @@ export class DataObserver {
   static pushCb(callbacks: MeteorCallbacks): MeteorCallbacks {
     check(callbacks, Match.Where(isMeteorCallbacks));
 
-    const completer: PromiseCompleter<any> = PromiseWrapper.completer();
     const dequeue = (promise) => {
       let index = this._promises.indexOf(promise);
       if (index !== -1) {
@@ -34,45 +31,50 @@ export class DataObserver {
       this._promises.push(promise);
     };
 
-    const promise = completer.promise;
     if (isCallbacksObject(callbacks)) {
       let origin = <CallbacksObject>callbacks;
-      let object = <CallbacksObject>{
-        onError: (err) => {
-          if (origin.onError) {
-            origin.onError(err);
-          }
-          completer.resolve({ err });
-          dequeue(promise);
-        },
+      let newCallbacks;
+      let promise = new Promise((resolve) => {
+        newCallbacks = <CallbacksObject>{
+          onError: (err) => {
+            if (origin.onError) {
+              origin.onError(err);
+            }
+            resolve({ err });
+            dequeue(promise);
+          },
 
-        onReady: (result) => {
-          if (origin.onReady) {
-            origin.onReady(result);
-          }
-          completer.resolve({ result });
-          dequeue(promise);
-        },
+          onReady: (result) => {
+            if (origin.onReady) {
+              origin.onReady(result);
+            }
+            resolve({ result });
+            dequeue(promise);
+          },
 
-        onStop: (err) => {
-          if (origin.onStop) {
-            origin.onStop(err);
+          onStop: (err) => {
+            if (origin.onStop) {
+              origin.onStop(err);
+            }
+            resolve({ err });
+            dequeue(promise);
           }
-          completer.resolve({ err });
-          dequeue(promise);
         }
-      };
+      });
 
       queue(promise);
 
-      return object;
+      return newCallbacks;
     }
 
-    let newCallback = (err, result) => {
-      (<Function>callbacks)(err, result);
-      completer.resolve({ err, result });
-      dequeue(promise);
-    };
+    let newCallback;
+    let promise = new Promise((resolve) => {
+      newCallback = (err, result) => {
+        (<Function>callbacks)(err, result);
+        resolve({ err, result });
+        dequeue(promise);
+      };
+    });
 
     queue(promise);
 
