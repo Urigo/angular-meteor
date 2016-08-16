@@ -61,15 +61,14 @@ e.g., `<body><app></app></body>`.
 
 ### Using Angular 2 in a Meteor app:
 
-This package contains `MeteorModule` module that has providers simplifing development of a Meteor app with Angular 2.
+The package contains `MeteorModule` module that has providers simplifing development of a Meteor app with Angular 2.
 
 You can use Meteor collections in the same way as you would do in a regular Meteor app with the Blaze,
 the only thing required is to import and use `MeteorModule` from `angular2-meteor`.
-After, you you can iterate `Mongo.Cursor` objects with Angular 2.0 ngFor!
+After, you you can iterate `Mongo.Cursor` objects with Angular 2.0's `ngFor`!
 
 Below is a valid Angular2-Meteor app:
 
-`client/app.ts`
 ````ts
     import {MeteorModule} from 'angular2-meteor';
 
@@ -82,8 +81,9 @@ Below is a valid Angular2-Meteor app:
         </div>
       `
     })
-    class Socially {
+    class Socially extends MeteorComponent {
         constructor() {
+          this.subscribe('my-subscription');
           this.parties = Parties.find();
         }
     }
@@ -98,34 +98,11 @@ Below is a valid Angular2-Meteor app:
     platformBrowserDynamic().bootstrapModule(AppModule);
 ````
 
-At this moment, you are ready to create awesome apps backed by the power of Angular 2 and Meteor!
-
-Another part of this package's API is a basic component class called `MeteorComponent`.
-
-`MeteorComponent` wraps major Meteor methods to do some work behind the scene (such as cleanup) for a component that extends it:
-
-````ts
-    import {MeteorComponent} from 'angular2-meteor';
-    import {MyCollection} form '../model/my-collection.ts';
-
-    @Component({
-      selector: 'socially'
-      template: "<p>Hello World!</p>"
-    })
-    class Socially extends MeteorComponent {
-      myData : Mongo.Cursor<any>;
-    
-      constructor() {
-         this.myData = MyCollection.find({});
-         this.subscribe('my-subscription'); // Wraps Meteor.subscribe
-      }
-      
-      doSomething() {
-         this.call('server-method'); // Wraps Meteor.call
-      }
-    }
-````
+`MeteorComponent` wraps major Meteor methods to do some work behind the scene (such as cleanup) for a component that extends it.
 You can read more about `MeteorComponent` in the [tutorial section] (http://www.angular-meteor.com/tutorials/socially/angular2/privacy-and-publish-subscribe-functions)!
+
+At this moment, you are almost set to create awesome apps backed by the power of Angular 2 and Meteor!
+We recommend to check out our awesome [tutorial](http://www.angular-meteor.com/tutorials/socially/angular2/bootstrapping) in order to create more complex apps that have security and routing.
 
 ## Demos
 
