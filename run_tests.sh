@@ -9,3 +9,4 @@ cd tests
 linklocal
 meteor add practicalmeteor:mocha
 meteor test --driver-package=practicalmeteor:mocha
+meteor test --full-app --once --driver-package=practicalmeteor:mocha

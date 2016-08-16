@@ -38,7 +38,6 @@ If you've decided that it's likely a real issue, please consider going through t
 To install Angular2-Meteor's NPMs:
 ````
     npm install angular2-meteor --save
-    npm install angular2-meteor-auto-bootstrap --save
 ````
 
 Second step is to add ` angular2-compilers` package — `meteor add angular2-compilers`.
@@ -62,46 +61,50 @@ e.g., `<body><app></app></body>`.
 
 ### Using Angular 2 in a Meteor app:
 
-This package contains modules that simplify development of a Meteor app with Angular 2.
+This package contains `MeteorModule` module that has providers simplifing development of a Meteor app with Angular 2.
 
-You can use Meteor collections in the same way as you would do in a regular Meteor app with Blaze,
-the only thing required is to make use of the `bootstrap` method from `angular2-meteor-auto-bootstrap`:
+You can use Meteor collections in the same way as you would do in a regular Meteor app with the Blaze,
+the only thing required is to import and use `MeteorModule` from `angular2-meteor`.
+After, you you can iterate `Mongo.Cursor` objects with Angular 2.0 ngFor!
 
-````js
-import {bootstrap} from 'angular2-meteor-auto-bootstrap';
-````
-
-And now you can iterate `Mongo.Cursor` objects with Angular 2.0 ngFor!
-
-Below is a valid Angular 2 component used in a Meteor app:
+Below is a valid Angular2-Meteor app:
 
 `client/app.ts`
 ````ts
+    import {MeteorModule} from 'angular2-meteor';
+
     const Parties = new Mongo.Collection('parties');
 
     @Component({
-      templateUrl: 'client/parties.html'
+      template: `
+        <div *ngFor="let party of parties">
+          <p>Name: {{party.name}}</p>
+        </div>
+      `
     })
     class Socially {
         constructor() {
           this.parties = Parties.find();
         }
     }
-````
 
-`client/parties.html`
-````html
-    <div *ngFor="let party of parties">
-      <p>Name: {{party.name}}</p>
-    </div>
+    @NgModule({
+      imports: [BrowserModule, MeteorModule],
+      declarations: [Socially],
+      bootstrap: [Socially]
+    })
+    export class AppModule { }
+
+    platformBrowserDynamic().bootstrapModule(AppModule);
 ````
 
 At this moment, you are ready to create awesome apps backed by the power of Angular 2 and Meteor!
 
-Another part of this package's API is a basic component class called `MeteorComponent`. `MeteorComponent` wraps major Meteor methods, and does some work behind the scene (such as cleanup) for a component that extends it:
+Another part of this package's API is a basic component class called `MeteorComponent`.
+
+`MeteorComponent` wraps major Meteor methods to do some work behind the scene (such as cleanup) for a component that extends it:
 
 ````ts
-    import {bootstrap} from 'angular2-meteor-auto-bootstrap';
     import {MeteorComponent} from 'angular2-meteor';
     import {MyCollection} form '../model/my-collection.ts';
 
@@ -121,8 +124,6 @@ Another part of this package's API is a basic component class called `MeteorComp
          this.call('server-method'); // Wraps Meteor.call
       }
     }
-
-    bootstrap(Socially);
 ````
 You can read more about `MeteorComponent` in the [tutorial section] (http://www.angular-meteor.com/tutorials/socially/angular2/privacy-and-publish-subscribe-functions)!
 
