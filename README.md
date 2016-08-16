@@ -70,10 +70,10 @@ After, you you can iterate `Mongo.Cursor` objects with Angular 2.0's `ngFor`!
 Below is a valid Angular2-Meteor app:
 
 ````ts
-    import {MeteorModule} from 'angular2-meteor';
+    import {MeteorModule, MeteorComponent} from 'angular2-meteor';
 
     const Parties = new Mongo.Collection('parties');
-
+    
     @Component({
       template: `
         <div *ngFor="let party of parties">
