@@ -26,7 +26,6 @@ export declare type MongoDocChange = AddChange | MoveChange | UpdateChange | Rem
  */
 export declare class MongoCursorObserver extends EventEmitter<MongoDocChange[]> {
     private _debounceMs;
-    private _docs;
     private _added;
     private _lastChanges;
     private _cursor;

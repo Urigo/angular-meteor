@@ -37,7 +37,6 @@ declare interface MongoItem {
  * and notifying subscribers about them.
  */
 export class MongoCursorObserver extends EventEmitter<MongoDocChange[]> {
-  private _docs: Array<MongoItem> = [];
   private _added: Array<AddChange> = [];
   private _lastChanges: Array<MongoDocChange> = [];
   private _cursor: Mongo.Cursor<any>;
@@ -79,7 +78,6 @@ export class MongoCursorObserver extends EventEmitter<MongoDocChange[]> {
     }
 
     this._hCursor = null;
-    this._docs = null;
   }
 
   private _processCursor(cursor: Mongo.Cursor<any>): CursorHandle {
@@ -147,14 +145,7 @@ export class MongoCursorObserver extends EventEmitter<MongoDocChange[]> {
       },
 
       changedAt: (nDoc, oDoc, index) => {
-        let doc = this._docs[index];
-        let mDoc = <MongoItem>nDoc;
-        if (EJSON.equals(doc._id, mDoc._id)) {
-          Object.assign(this._docs[index], mDoc);
-        } else {
-          this._docs[index] = mDoc;
-        }
-        let change = this._updateAt(this._docs[index], index);
+        let change = this._updateAt(nDoc, index);
         changes.push(change);
         emit();
       },
@@ -178,19 +169,15 @@ export class MongoCursorObserver extends EventEmitter<MongoDocChange[]> {
   }
 
   private _addAt(doc, index) {
-    this._docs.splice(index, 0, doc);
     let change = new AddChange(index, doc);
     return change;
   }
 
   private _moveTo(doc, fromIndex, toIndex) {
-    this._docs.splice(fromIndex, 1);
-    this._docs.splice(toIndex, 0, doc);
     return new MoveChange(fromIndex, toIndex);
   }
 
   private _removeAt(index) {
-    this._docs.splice(index, 1);
     return new RemoveChange(index);
   }
 }

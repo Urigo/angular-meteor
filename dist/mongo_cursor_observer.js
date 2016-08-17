@@ -50,7 +50,6 @@ var MongoCursorObserver = (function (_super) {
         if (_debounceMs === void 0) { _debounceMs = 50; }
         _super.call(this);
         this._debounceMs = _debounceMs;
-        this._docs = [];
         this._added = [];
         this._lastChanges = [];
         this._ngZone = utils_1.g.Zone.current;
@@ -82,7 +81,6 @@ var MongoCursorObserver = (function (_super) {
             this._hCursor.stop();
         }
         this._hCursor = null;
-        this._docs = null;
     };
     MongoCursorObserver.prototype._processCursor = function (cursor) {
         // On the server side fetch data, don't observe.
@@ -143,15 +141,7 @@ var MongoCursorObserver = (function (_super) {
                 emit();
             },
             changedAt: function (nDoc, oDoc, index) {
-                var doc = _this._docs[index];
-                var mDoc = nDoc;
-                if (utils_1.EJSON.equals(doc._id, mDoc._id)) {
-                    Object.assign(_this._docs[index], mDoc);
-                }
-                else {
-                    _this._docs[index] = mDoc;
-                }
-                var change = _this._updateAt(_this._docs[index], index);
+                var change = _this._updateAt(nDoc, index);
                 changes.push(change);
                 emit();
             },
@@ -171,17 +161,13 @@ var MongoCursorObserver = (function (_super) {
         return new UpdateChange(index, doc);
     };
     MongoCursorObserver.prototype._addAt = function (doc, index) {
-        this._docs.splice(index, 0, doc);
         var change = new AddChange(index, doc);
         return change;
     };
     MongoCursorObserver.prototype._moveTo = function (doc, fromIndex, toIndex) {
-        this._docs.splice(fromIndex, 1);
-        this._docs.splice(toIndex, 0, doc);
         return new MoveChange(fromIndex, toIndex);
     };
     MongoCursorObserver.prototype._removeAt = function (index) {
-        this._docs.splice(index, 1);
         return new RemoveChange(index);
     };
     return MongoCursorObserver;

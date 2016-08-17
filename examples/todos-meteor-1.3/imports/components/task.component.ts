@@ -1,6 +1,6 @@
 'use strict';
 
-import {Component, Input} from '@angular/core';
+import {Component, ChangeDetectionStrategy, Input} from '@angular/core';
 
 import {MeteorComponent} from 'angular2-meteor';
 
@@ -10,10 +10,11 @@ import template from './task.component.html';
 @Component({
   selector: 'task',
   template: template,
-  styles: [style]
+  styles: [style],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TaskView extends MeteorComponent {
-  @Input('data') task: Task;
+  @Input() task: Task;
 
   setChecked(checked) {
     this.call('tasks.setChecked', this.task._id,

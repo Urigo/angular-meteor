@@ -56,6 +56,22 @@ export var MongoCollectionCursorFake = function() {
   };
 
   this.fetch = function() {};
+
+  this.add = function(doc, index) {
+    for (let generator of this._generators) {
+      if (generator.addedAt) {
+        generator.addedAt(doc, index);
+      }
+    }
+  }
+
+  this.remove = function(doc, index) {
+    for (let generator of this._generators) {
+      if (generator.removedAt) {
+        generator.removedAt(doc, index);
+      }
+    }
+  }
 };
 
 MongoCollectionCursorFake.prototype = Object.create(Mongo.Cursor.prototype);

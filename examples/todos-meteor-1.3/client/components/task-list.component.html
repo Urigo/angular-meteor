@@ -1,6 +1,6 @@
 <div *ngIf="!isLoading">
   <ul *ngFor="let task of tasks">
-    <task [data]="task"></task>
+    <task [task]="task"></task>
   </ul>
 </div>
 <div *ngIf="isLoading" class="loader">

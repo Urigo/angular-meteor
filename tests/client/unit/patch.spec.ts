@@ -17,7 +17,6 @@ describe('Meteor patching', function() {
   let gZone = global.Zone.current;
   let zoneSpy, autorunSpy, subscribeSpy, callSpy;
 
-
   beforeEach(function() {
     zoneSpy = sinon.spy(gZone, 'run');
     unpatchMeteor();

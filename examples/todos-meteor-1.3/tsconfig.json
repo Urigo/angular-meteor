@@ -9,9 +9,8 @@
     "emitDecoratorMetadata": true
   },
   "files": [
-    "client/app.ts",
+    "client/app.module.ts",
     "typings/main/index.d.ts",
-    "typings/browser/index.d.ts",
     "typings/task.d.ts"
   ],
   "exclude": [
