@@ -1,3 +1,15 @@
+<a name="0.7.0-beta.1"></a>
+# [0.7.0-beta.1](https://github.com/Urigo/angular2-meteor/compare/0.6.0...v0.7.0-beta.1) (2016-08-21)
+
+
+### Bug Fixes
+
+* **MeteorComponent:** fix #337 ([63f95b6](https://github.com/Urigo/angular2-meteor/commit/63f95b6)), closes [#337](https://github.com/Urigo/angular2-meteor/issues/337) [#323](https://github.com/Urigo/angular2-meteor/issues/323)
+* #331 ([6fe0d45](https://github.com/Urigo/angular2-meteor/commit/6fe0d45))
+* fix #331 ([5a976ac](https://github.com/Urigo/angular2-meteor/commit/5a976ac)), closes [#331](https://github.com/Urigo/angular2-meteor/issues/331)
+
+
+
 <a name="0.6.2"></a>
 ## [0.6.2](https://github.com/Urigo/angular2-meteor/compare/0.6.0...v0.6.2) (2016-07-20)
 
