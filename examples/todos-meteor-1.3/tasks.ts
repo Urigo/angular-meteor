@@ -1,9 +1,11 @@
 'use strict';
 
 import {Meteor} from 'meteor/meteor';
-import {Mongo} from "meteor/mongo";
+import {Mongo} from 'meteor/mongo';
 
-export let Tasks = new Mongo.Collection<Task>('tasks');
+import {MongoObservable} from 'angular2-meteor';
+
+export let Tasks = new MongoObservable.Collection<Task>('tasks');
 
 Meteor.methods({
   'tasks.addTask': function(text: string) {
@@ -12,7 +14,7 @@ Meteor.methods({
       checked: false,
       private: false,
       createdAt: new Date()
-    });
+    })
   },
 
   'tasks.deleteTask': function(taskId) {
@@ -22,14 +24,14 @@ Meteor.methods({
   'tasks.setChecked': function(taskId, setChecked) {
     let task = Tasks.findOne(taskId);
     Tasks.update(taskId, {
-      $set: {checked: setChecked}
+      $set: { checked: setChecked }
     });
   },
 
   'tasks.setPrivate': function(taskId, setToPrivate) {
     let task = Tasks.findOne(taskId);
     Tasks.update(taskId, {
-      $set: {private: setToPrivate}
+      $set: { private: setToPrivate }
     });
   }
 });

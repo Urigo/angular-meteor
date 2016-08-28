@@ -53,7 +53,7 @@ describe('Meteor patching', function() {
       trackerAutorun(callback);
     });
 
-    it('calls to ngZone.run throttled', function(done) {
+    it('calls to ngZone.run debounced', function(done) {
       let ngZone = gZone.fork({ name: 'angular' });
       let ngZoneSpy = sinon.spy(ngZone, 'run');
       let count = 0;
@@ -63,7 +63,7 @@ describe('Meteor patching', function() {
           zoneRunScheduler.onAfterRun(ngZone, () => {
             // Twice because of we run method in ngZone.run
             // and also one run for two calls of trackerAutorun,
-            // which means throttling.
+            // which means debouncing.
             expect(ngZoneSpy.calledTwice).to.equal(true);
             done();
           });
@@ -102,7 +102,7 @@ describe('Meteor patching', function() {
       meteorCall('err', callback);
     });
 
-    it('calls to ngZone.run throttled', function(done) {
+    it('calls to ngZone.run debounced', function(done) {
       let ngZone = gZone.fork({ name: 'angular' });
       let ngZoneSpy = sinon.spy(ngZone, 'run');
       let count = 0;
@@ -146,7 +146,7 @@ describe('Meteor patching', function() {
       meteorSubscribe('sub', callback);
     });
 
-    it('calls to ngZone.run throttled', function(done) {
+    it('calls to ngZone.run debounced', function(done) {
       let ngZone = gZone.fork({ name: 'angular' });
       let ngZoneSpy = sinon.spy(ngZone, 'run');
       let count = 0;

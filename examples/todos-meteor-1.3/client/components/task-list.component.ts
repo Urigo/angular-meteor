@@ -4,7 +4,7 @@ import {Component, Input, OnChanges} from '@angular/core';
 
 import {TaskView} from '../../imports/components';
 
-import {MeteorComponent} from 'angular2-meteor';
+import {MeteorComponent, } from 'angular2-meteor';
 
 import {Tasks} from '../../tasks';
 
@@ -12,13 +12,15 @@ import {Mongo} from 'meteor/mongo';
 
 import template from './task-list.component.html';
 
+import {ObservableCursor} from 'angular2-meteor';
+
 @Component({
   selector: 'task-list',
   template: template,
   directives: [TaskView]
 })
 export class TaskList extends MeteorComponent implements OnChanges {
-  tasks: Mongo.Cursor<Task>;
+  tasks: ObservableCursor<Task>;
   @Input() hideCompleted: boolean = false;
   isLoading: boolean;
 

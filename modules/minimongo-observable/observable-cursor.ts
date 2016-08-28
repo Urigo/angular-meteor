@@ -1,41 +1,91 @@
+'use strict';
+
 import {Observable, Subscriber} from 'rxjs';
 
-export class ObservableCursor<T> extends Observable<T> {
-  public _cursorRef;
-  public _reloadRef;
-  private _isReactive : boolean = true;
+import {CursorHandle} from '../cursor_handle';
 
-  static create(subscribe?: <R>(subscriber: Subscriber<R>) => any) {
-    return new ObservableCursor(subscribe);
+import {gZone} from '../utils';
+
+export class ObservableCursor<T> extends Observable<T[]> {
+  private _cursor: Mongo.Cursor<T>;
+  private _hCursor: CursorHandle;
+  private _observers: Subscriber<T[]>[] = [];
+
+  static create<T>(cursor: Mongo.Cursor<T>): ObservableCursor<T> {
+    return new ObservableCursor<T>(cursor);
   }
 
-  constructor(subscribe?: <R>(subscriber: Subscriber<R>) => any) {
-    super(subscribe);
+  constructor(cursor: Mongo.Cursor<T>) {
+    super((observer: Subscriber<T[]>) => {
+      this._observers.push(observer);
+
+      if (!this._hCursor) {
+        this._hCursor =  new CursorHandle(
+          this._observeCursor(cursor));
+      }
+
+      return () => {
+        let index = this._observers.indexOf(observer);
+        if (index !== -1) {
+          this._observers.splice(index, 1);
+        }
+        if (!this._observers.length) {
+          this.stop();
+        }
+      };
+    });
+    _.extend(this, _.omit(cursor, 'count', 'map'));
+    this._cursor = cursor;
   }
 
-  public nonReactive() : ObservableCursor<T> {
-    this._isReactive = false;
-
-    return this;
+  get cursor(): Mongo.Cursor<T> {
+    return this._cursor;
   }
 
-  public isReactive() : boolean {
-    return this._isReactive;
-  }
-
-  public getMongoCursor() : Mongo.Cursor<T> {
-    return this._cursorRef;
-  }
-
-  public reload() : ObservableCursor<T> {
-    if (!this.isReactive() && this._reloadRef) {
-      this._reloadRef();
-
-      return this;
-    } else {
-      throw new Error(
-        `"reload" method only available when using non-reactive Observable Mongo.Cursor!`
-      );
+  stop() {
+    if (this._hCursor) {
+      this._hCursor.stop();
     }
+    this._runComplete();
+    this._hCursor = null;
+  }
+
+  dispose() {
+    this._observers = null;
+    this._cursor = null;
+  }
+
+  fetch(): Array<T> {
+    return this._cursor.fetch();
+  }
+
+  observe(callbacks: Mongo.ObserveCallbacks): Meteor.LiveQueryHandle {
+    return this._cursor.observe(callbacks);
+  }
+
+  observeChanges(callbacks: Mongo.ObserveChangesCallbacks): Meteor.LiveQueryHandle {
+    return this._cursor.observeChanges(callbacks);
+  }
+
+  _runComplete() {
+    this._observers.forEach(observer => {
+      observer.complete();
+    });
+  }
+
+  _runNext(cursor: Mongo.Cursor<T>) {
+    this._observers.forEach(observer => {
+      observer.next(cursor.fetch());
+    });
+  }
+
+  _observeCursor(cursor: Mongo.Cursor<T>) {
+    const handleChange = () => { this._runNext(cursor); };
+    return gZone.run(
+      () => cursor.observeChanges({
+        added: handleChange,
+        changed: handleChange,
+        removed: handleChange
+      }));
   }
 }

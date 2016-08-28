@@ -8,19 +8,22 @@ import {TaskList} from '/client/components';
 
 import template from './app.component.html';
 
+import {Observable} from 'rxjs';
+
+import 'rxjs/add/operator/debounce';
+
 @Component({
   selector: 'app',
   template: template,
   directives: [TaskList]
 })
 export class Todos {
+
+  todoCount = Tasks.find({ checked: false})
+      .debounce(() => Observable.interval(50))
+      .map(tasks => tasks.length);
+
   addTask(text: string) {
     Meteor.call('tasks.addTask', text);
-  }
-
-  get todoCount() {
-    return Tasks.find({
-      checked: false
-    }).count();
   }
 }

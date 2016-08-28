@@ -1,81 +1,56 @@
+'use strict';
+
 import {Observable, Subscriber} from 'rxjs';
-import {ObservableMeteorSubscription} from './observable-subscription';
-import * as _ from 'lodash';
+
+import {isMeteorCallbacks} from '../utils';
+
+function throwInvalidCallback(method: string) {
+  throw new Error(
+    `Invalid ${method} arguments:
+     your last param can't be a callback function, 
+     please remove it and use ".subscribe" of the Observable!`);
+}
 
 export class MeteorObservable {
   public static call<T>(name: string, ...args: any[]): Observable<T> {
-    const currentZone = Zone.current;
-    const argumentsArray: Array<any> = Array.prototype.slice.call(arguments);
-    const lastParam = argumentsArray[argumentsArray.length - 1];
+    const lastParam = args[args.length - 1];
 
-    if (lastParam && _.isFunction(lastParam)) {
-      throw new Error(
-        `Invalid MeteorObservable.call arguments:
-         Your last param can't be a callback function, 
-         please remove it and use ".subscribe" of the Observable!`);
+    if (isMeteorCallbacks(lastParam)) {
+      throwInvalidCallback('MeteorObservable.call');
     }
 
-    const obs = Observable.create((observer: Subscriber<Meteor.Error | T>) => {
-      Meteor.call.apply(Meteor, argumentsArray.concat([
+    return Observable.create((observer: Subscriber<Meteor.Error | T>) => {
+      Meteor.call(name, ...args.concat([
         (error: Meteor.Error, result: T) => {
-          if (error) {
-            currentZone.run(() => {
-              observer.error(error);
-              observer.complete();
-            });
-          } else {
-            currentZone.run(() => observer.next(result));
-          }
+          error ? observer.error(error) :
+            observer.next(result);
+          observer.complete();
         }
       ]));
     });
-
-    obs.publish();
-
-    return obs;
   }
 
-  public static subscribe<T>(name: string, ...args: any[]): ObservableMeteorSubscription<T> {
-    const currentZone = Zone.current;
-    const argumentsArray: Array<any> = Array.prototype.slice.call(arguments);
-    const lastParam = argumentsArray[argumentsArray.length - 1];
+  public static subscribe<T>(name: string, ...args: any[]): Observable<T> {
+    const lastParam = args[args.length - 1];
 
-    if (lastParam && _.isObject(lastParam) && (lastParam.onReady || lastParam.onError)) {
-      throw new Error(
-        `Invalid MeteorObservable.subscribe arguments: 
-        your last param can't be a callbacks object, 
-        please remove it and use ".subscribe" of the Observable!`);
+    if (isMeteorCallbacks(lastParam)) {
+      throwInvalidCallback('MeteorObservable.subscribe');
     }
 
-    const observable =
-      ObservableMeteorSubscription.create((observer: Subscriber<Meteor.Error | T>) => {
-      let handle = Meteor.subscribe.apply(Meteor, argumentsArray.concat([
-        {
+    return Observable.create((observer: Subscriber<Meteor.Error | T>) => {
+      let handler = Meteor.subscribe(name, ...args.concat([{
           onError: (error: Meteor.Error) => {
-            currentZone.run(() => {
-              observer.error(error);
-              observer.complete();
-            });
+            observer.error(error);
+            observer.complete();
           },
           onReady: () => {
-            currentZone.run(() => observer.next());
+            observer.next();
+            observer.complete();
           }
         }
       ]));
 
-      observable._meteorSubscriptionRef = handle;
-
-      return () => {
-        if (handle && handle.stop) {
-          try {
-            handle.stop();
-          } catch (e) {
-
-          }
-        }
-      };
+      return () => handler.stop();
     });
-
-    return <ObservableMeteorSubscription<T>>observable;
   }
 }

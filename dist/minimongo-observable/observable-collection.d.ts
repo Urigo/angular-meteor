@@ -1,9 +1,11 @@
+import { Observable } from 'rxjs';
+import { ObservableCursor } from './observable-cursor';
 import Selector = Mongo.Selector;
 import ObjectID = Mongo.ObjectID;
 import SortSpecifier = Mongo.SortSpecifier;
 import FieldSpecifier = Mongo.FieldSpecifier;
 import Modifier = Mongo.Modifier;
-import { ObservableCursor } from './observable-cursor';
+import 'rxjs/add/operator/debounce';
 export declare module MongoObservable {
     interface ConstructorOptions {
         connection?: Object;
@@ -18,25 +20,22 @@ export declare module MongoObservable {
         transform?: Function;
     }
     class Collection<T> {
-        private collection;
+        private _collection;
         constructor(name: string, options?: ConstructorOptions);
+        collection: Mongo.Collection<T>;
         allow(options: AllowDenyOptionsObject<T>): boolean;
         deny(options: AllowDenyOptionsObject<T>): boolean;
-        insert(doc: T, callback?: Function): string;
         rawCollection(): any;
-        getMongoCollection(): Mongo.Collection<T>;
         rawDatabase(): any;
-        remove(selector: Selector | ObjectID | string, callback?: Function): number;
+        insert(doc: T): Observable<string>;
+        remove(selector: Selector | ObjectID | string): Observable<number>;
         update(selector: Selector | ObjectID | string, modifier: Modifier, options?: {
             multi?: boolean;
             upsert?: boolean;
-        }, callback?: Function): number;
+        }): Observable<number>;
         upsert(selector: Selector | ObjectID | string, modifier: Modifier, options?: {
             multi?: boolean;
-        }, callback?: Function): {
-            numberAffected?: number;
-            insertedId?: string;
-        };
+        }): Observable<number>;
         find(selector?: Selector | ObjectID | string, options?: {
             sort?: SortSpecifier;
             skip?: number;
@@ -44,7 +43,7 @@ export declare module MongoObservable {
             fields?: FieldSpecifier;
             reactive?: boolean;
             transform?: Function;
-        }): ObservableCursor<Array<T>>;
+        }): ObservableCursor<T>;
         findOne(selector?: Selector | ObjectID | string, options?: {
             sort?: SortSpecifier;
             skip?: number;
@@ -52,5 +51,6 @@ export declare module MongoObservable {
             reactive?: boolean;
             transform?: Function;
         }): T;
+        private _createObservable<T>(observers);
     }
 }

@@ -1,6 +1,6 @@
 <div class="container">
   <header>
-    <h1>Todo List ({{todoCount}})</h1>
+    <h1>Todo List ({{todoCount | async}})</h1>
 
     <label class="hide-completed">
       <input type="checkbox" [(ngModel)]="hideCompleted" name="hide"/>
