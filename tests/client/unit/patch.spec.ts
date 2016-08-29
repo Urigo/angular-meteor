@@ -90,7 +90,7 @@ describe('Meteor patching', function() {
       let args = ['test'];
       Meteor.subscribe.apply(null, args);
       expect(subscribeSpy.calledOnce).to.equal(true);
-      expect(subscribeSpy.args[0]).to.deep.equal(args);
+      expect(_.initial(subscribeSpy.args[0])).to.deep.equal(args);
     });
 
     it('callback executed in global zone', function(done) {
@@ -135,7 +135,7 @@ describe('Meteor patching', function() {
       let args = ['test'];
       Meteor.call.apply(null, args);
       expect(callSpy.calledOnce).to.equal(true);
-      expect(callSpy.args[0]).to.deep.equal(args);
+      expect(_.initial(callSpy.args[0])).to.deep.equal(args);
     });
 
     it('callback executed in global zone', function(done) {

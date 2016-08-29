@@ -5,3 +5,4 @@ function __export(m) {
 __export(require('./observable-collection'));
 __export(require('./meteor-observable'));
 __export(require('./observable-cursor'));
+__export(require('./zone-operator'));

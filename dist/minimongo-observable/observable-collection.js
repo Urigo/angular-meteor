@@ -1,7 +1,6 @@
 "use strict";
 var rxjs_1 = require('rxjs');
 var observable_cursor_1 = require('./observable-cursor');
-require('rxjs/add/operator/debounce');
 var MongoObservable;
 (function (MongoObservable) {
     'use strict';

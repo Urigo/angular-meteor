@@ -9,6 +9,7 @@
  * since multiple callbacks can be run near the same time.
  */
 var lang_1 = require('@angular/core/src/facade/lang');
+var data_observer_1 = require('./data_observer');
 var utils_1 = require('./utils');
 var ZoneRunScheduler = (function () {
     function ZoneRunScheduler() {
@@ -116,7 +117,10 @@ function patchMeteorSubscribe(subscribe) {
         }
         var callback = args[args.length - 1];
         if (utils_1.isMeteorCallbacks(callback)) {
-            args[args.length - 1] = wrapCallback(callback, this);
+            args[args.length - 1] = data_observer_1.DataObserver.pushCb(wrapCallback(callback, this));
+        }
+        else {
+            args.push(data_observer_1.DataObserver.pushCb(lang_1.noop));
         }
         return subscribe.apply(this, args);
     };
@@ -131,9 +135,12 @@ function patchMeteorCall(call) {
         }
         var callback = args[args.length - 1];
         if (utils_1.isMeteorCallbacks(callback)) {
-            args[args.length - 1] = wrapCallback(callback, this);
+            args[args.length - 1] = data_observer_1.DataObserver.pushCb(wrapCallback(callback, this));
         }
-        call.apply(this, args);
+        else {
+            args.push(data_observer_1.DataObserver.pushCb(lang_1.noop));
+        }
+        return call.apply(this, args);
     };
 }
 exports.patchMeteorCall = patchMeteorCall;

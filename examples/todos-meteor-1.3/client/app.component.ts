@@ -20,8 +20,8 @@ import 'rxjs/add/operator/debounce';
 export class Todos {
 
   todoCount = Tasks.find({ checked: false})
-      .debounce(() => Observable.interval(50))
-      .map(tasks => tasks.length);
+    .debounce(() => Observable.interval(50))
+    .map(tasks => tasks.length);
 
   addTask(text: string) {
     Meteor.call('tasks.addTask', text);

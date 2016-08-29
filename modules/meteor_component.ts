@@ -117,16 +117,6 @@ export class MeteorComponent implements OnDestroy {
       autoBind = lastParam !== false;
     }
 
-    lastParam = args[args.length - 1];
-    if (isMeteorCallbacks(lastParam)) {
-      // Push callback to the observer, so
-      // that we can use onReady to know when
-      // data is loaded. 
-      args[args.length - 1] = DataObserver.pushCb(lastParam);
-    } else {
-      args.push(DataObserver.pushCb(noop));
-    }
-
     return { pargs: args, autoBind };
   }
 }

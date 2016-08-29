@@ -3,6 +3,9 @@ import {chai} from 'meteor/practicalmeteor:chai';
 import {sinon} from 'meteor/practicalmeteor:sinon';
 import {Observable} from 'rxjs';
 
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/count';
+
 const expect = chai.expect;
 
 describe('ObservableCursor', function () {
@@ -118,7 +121,7 @@ describe('ObservableCursor', function () {
     expect(spy.calledTwice).to.be.true;
   });
 
-  it('Should stop the observation of the Mongo.Collection when disposing the Observable', () => {
+  it('Should stop Mongo cursor when the last subscription unsubscribes', () => {
     let stopSpy = sinon.spy();
     let spy = sinon.stub(cursor, 'observeChanges', () => {
       return {
@@ -131,5 +134,10 @@ describe('ObservableCursor', function () {
 
     expect(stopSpy.callCount).to.equal(1);
     spy.restore();
+  });
+
+  it('RxJS operators should persist', () => {
+    expect(observable.count).to.equal(Observable.prototype.count);
+    expect(observable.map).to.equal(Observable.prototype.map);
   });
 });

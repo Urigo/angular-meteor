@@ -5,7 +5,6 @@ import ObjectID = Mongo.ObjectID;
 import SortSpecifier = Mongo.SortSpecifier;
 import FieldSpecifier = Mongo.FieldSpecifier;
 import Modifier = Mongo.Modifier;
-import 'rxjs/add/operator/debounce';
 export declare module MongoObservable {
     interface ConstructorOptions {
         connection?: Object;

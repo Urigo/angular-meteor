@@ -1,11 +1,11 @@
-let collection = new Mongo.Collection("testCollectionServer");
+let collection = new Mongo.Collection('testCollectionServer');
 
 Meteor.methods({
-  "testMethod": function() {
-    return "TEST_VALUE";
+  'testMethod': function() {
+    return 'TEST_VALUE';
   }
 });
 
-Meteor.publish("test", () => {
+Meteor.publish('test', () => {
   return collection.find({});
 });

@@ -12,6 +12,8 @@
 
 import {noop, isPresent} from '@angular/core/src/facade/lang';
 
+import {DataObserver} from './data_observer';
+
 import {isMeteorCallbacks, g, gZone, check} from './utils';
 
 export class ZoneRunScheduler {
@@ -126,7 +128,10 @@ export function patchMeteorSubscribe(subscribe) {
   return function(...args): Meteor.SubscriptionHandle {
     let callback = args[args.length - 1];
     if (isMeteorCallbacks(callback)) {
-      args[args.length - 1] = wrapCallback(callback, this);
+      args[args.length - 1] = DataObserver.pushCb(
+        wrapCallback(callback, this));
+    } else {
+      args.push(DataObserver.pushCb(noop));
     }
     return subscribe.apply(this, args);
   };
@@ -136,9 +141,12 @@ export function patchMeteorCall(call) {
   return function(...args): void {
     let callback = args[args.length - 1];
     if (isMeteorCallbacks(callback)) {
-      args[args.length - 1] = wrapCallback(callback, this);
+      args[args.length - 1] = DataObserver.pushCb(
+        wrapCallback(callback, this));
+    } else {
+      args.push(DataObserver.pushCb(noop));
     }
-    call.apply(this, args);
+    return call.apply(this, args);
   };
 }
 

@@ -8,8 +8,6 @@ import SortSpecifier = Mongo.SortSpecifier;
 import FieldSpecifier = Mongo.FieldSpecifier;
 import Modifier = Mongo.Modifier;
 
-import 'rxjs/add/operator/debounce';
-
 export module MongoObservable {
   'use strict';
 
