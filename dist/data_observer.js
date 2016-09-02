@@ -78,9 +78,13 @@ var DataObserver = (function () {
         utils_1.check(cb, Function);
         Promise.all(this._promises).then(function () { return cb(); });
     };
-    DataObserver.cbLen = function () {
-        return this._promises.length;
-    };
+    Object.defineProperty(DataObserver, "cbLen", {
+        get: function () {
+            return this._promises.length;
+        },
+        enumerable: true,
+        configurable: true
+    });
     DataObserver._promises = [];
     return DataObserver;
 }());

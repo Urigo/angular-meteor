@@ -5,7 +5,8 @@ import {
   patchTrackerAutorun,
   unpatchMeteor,
   patchMeteor,
-  zoneRunScheduler
+  zoneRunScheduler,
+  DataObserver
 } from 'angular2-meteor';
 import {chai} from 'meteor/practicalmeteor:chai';
 import {sinon} from 'meteor/practicalmeteor:sinon';
@@ -13,157 +14,48 @@ import {sinon} from 'meteor/practicalmeteor:sinon';
 const should = chai.should();
 const expect = chai.expect;
 
-describe('Meteor patching', function() {
-  let gZone = global.Zone.current;
-  let zoneSpy, autorunSpy, subscribeSpy, callSpy;
+describe('Meteor patching', () => {
+  let subscribeSpy, callSpy, pushCb;
 
-  beforeEach(function() {
-    zoneSpy = sinon.spy(gZone, 'run');
+  beforeEach(() => {
     unpatchMeteor();
-    autorunSpy = sinon.stub(Tracker, 'autorun');
     subscribeSpy = sinon.stub(Meteor, 'subscribe');
+    pushCb = sinon.spy(DataObserver, 'pushCb');
     callSpy = sinon.stub(Meteor, 'call');
     patchMeteor();
   });
 
-  afterEach(function() {
-    zoneSpy.restore();
+  afterEach(() => {
+    pushCb.restore();
+    callSpy.restore();
+    subscribeSpy.restore();
   });
 
-  describe('Tracker.autorun', function() {
-    let trackerAutorun;
-    beforeEach(function() {
-      trackerAutorun = patchTrackerAutorun(function(...args) {
-        args[args.length - 1]();
-      });
-    });
-
-    it('original called', function() {
+  describe('Meteor.call', () => {
+    it('original called', () => {
       let args = ['test'];
-      Tracker.autorun.apply(null, args);
-      expect(autorunSpy.calledOnce).to.equal(true);
-      expect(autorunSpy.args[0]).to.deep.equal(args);
-    });
-
-    it('callback executed in global zone', function(done) {
-      let callback = () => {
-        expect(zoneSpy.calledOnce).to.equal(true);
-        done();
-      };
-      trackerAutorun(callback);
-    });
-
-    it('calls to ngZone.run debounced', function(done) {
-      let ngZone = gZone.fork({ name: 'angular' });
-      let ngZoneSpy = sinon.spy(ngZone, 'run');
-      let count = 0;
-      function callback() {
-        count++;
-        if (count == 2) {
-          zoneRunScheduler.onAfterRun(ngZone, () => {
-            // Twice because of we run method in ngZone.run
-            // and also one run for two calls of trackerAutorun,
-            // which means debouncing.
-            expect(ngZoneSpy.calledTwice).to.equal(true);
-            done();
-          });
-        }
-      }
-
-      ngZone.run(() => {
-        trackerAutorun(callback);
-        trackerAutorun(callback);
-      });
-    });
-  });
-
-  describe('Meteor.call', function() {
-    let meteorCall;
-    beforeEach(function() {
-      meteorCall = patchMeteorCall(function(...args) {
-        let param = args[args.length - 2];
-        args[args.length - 1](param);
-      });
-    });
-
-    it('original called', function() {
-      let args = ['test'];
-      Meteor.subscribe.apply(null, args);
-      expect(subscribeSpy.calledOnce).to.equal(true);
-      expect(_.initial(subscribeSpy.args[0])).to.deep.equal(args);
-    });
-
-    it('callback executed in global zone', function(done) {
-      let callback = (err) => {
-        expect(zoneSpy.calledOnce).to.equal(true);
-        expect(err).to.equal('err');
-        done();
-      };
-      meteorCall('err', callback);
-    });
-
-    it('calls to ngZone.run debounced', function(done) {
-      let ngZone = gZone.fork({ name: 'angular' });
-      let ngZoneSpy = sinon.spy(ngZone, 'run');
-      let count = 0;
-      function callback() {
-        count++;
-        if (count == 2) {
-          zoneRunScheduler.onAfterRun(ngZone, () => {
-            expect(ngZoneSpy.calledTwice).to.equal(true);
-            done();
-          });
-        }
-      }
-
-      ngZone.run(() => {
-        meteorCall(callback);
-        meteorCall(callback);
-      });
-    });
-  });
-
-  describe('Meteor.subscribe', function() {
-    let meteorSubscribe;
-    beforeEach(function() {
-      meteorSubscribe = patchMeteorSubscribe(function(...args) {
-        args[args.length - 1]();
-      });
-    });
-
-    it('original called', function() {
-      let args = ['test'];
-      Meteor.call.apply(null, args);
-      expect(callSpy.calledOnce).to.equal(true);
+      Meteor.call(...args);
+      expect(callSpy.calledOnce).to.be.true;
       expect(_.initial(callSpy.args[0])).to.deep.equal(args);
+      callSpy.args[0][1]();
+    });
+  });
+
+  describe('Meteor.subscribe', () => {
+    it('should call the original', () => {
+      let args = ['test'];
+      Meteor.subscribe(...args);
+      expect(subscribeSpy.calledOnce).to.be.true;
+      expect(_.initial(subscribeSpy.args[0])).to.deep.equal(args);
+      subscribeSpy.args[0][1]();
     });
 
-    it('callback executed in global zone', function(done) {
-      let callback = () => {
-        expect(zoneSpy.calledOnce).to.equal(true);
-        done();
-      };
-      meteorSubscribe('sub', callback);
-    });
-
-    it('calls to ngZone.run debounced', function(done) {
-      let ngZone = gZone.fork({ name: 'angular' });
-      let ngZoneSpy = sinon.spy(ngZone, 'run');
-      let count = 0;
-      function callback() {
-        count++;
-        if (count == 2) {
-          zoneRunScheduler.onAfterRun(ngZone, () => {
-            expect(ngZoneSpy.calledTwice).to.equal(true);
-            done();
-          });
-        }
-      }
-
-      ngZone.run(() => {
-        meteorSubscribe('sub1', callback);
-        meteorSubscribe('sub2', callback);
-      });
+    it('DataObserver should watch callback', () => {
+      let args = ['test'];
+      Meteor.subscribe(...args);
+      expect(DataObserver.cbLen).to.equal(1);
+      subscribeSpy.args[0][1]();
+      expect(DataObserver.cbLen).to.equal(0);
     });
   });
 });

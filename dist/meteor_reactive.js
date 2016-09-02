@@ -1,16 +1,18 @@
 'use strict';
 var lang_1 = require('@angular/core/src/facade/lang');
 var utils_1 = require('./utils');
-var patch_1 = require('./patch');
+var zone_utils_1 = require('./zone_utils');
 /**
- * A class to extend in Angular 2 components.
- * Contains wrappers over main Meteor methods,
- * that does some maintenance work behind the scene.
- * For example, it destroys subscription handles
- * when the component is being destroyed itself.
+ * A basic class to extend @Component and @Pipe.
+ * Contains wrappers over main Meteor methods
+ * that does some maintenance work behind the scene:
+ * - Destroys subscription handles
+ *   when the component or pipe is destroyed by Angular 2.
+ * - Debounces ngZone runs reducing number of
+ *   change detection runs.
  */
-var MeteorComponent = (function () {
-    function MeteorComponent() {
+var MeteorReactive = (function () {
+    function MeteorReactive() {
         this._hAutoruns = [];
         this._hSubscribes = [];
         this._ngZone = utils_1.g.Zone.current;
@@ -23,7 +25,7 @@ var MeteorComponent = (function () {
      * @param autoBind Determine whether Angular 2 zone will run
      *   after the func call to initiate change detection.
      */
-    MeteorComponent.prototype.autorun = function (func, autoBind) {
+    MeteorReactive.prototype.autorun = function (func, autoBind) {
         if (autoBind === void 0) { autoBind = true; }
         var hAutorun = Tracker.autorun(func);
         this._hAutoruns.push(hAutorun);
@@ -34,7 +36,7 @@ var MeteorComponent = (function () {
      *    subscribe(name, [args1, args2], [callbacks], [autoBind])
      *  except the last autoBind param (see autorun above).
      */
-    MeteorComponent.prototype.subscribe = function (name) {
+    MeteorReactive.prototype.subscribe = function (name) {
         var args = [];
         for (var _i = 1; _i < arguments.length; _i++) {
             args[_i - 1] = arguments[_i];
@@ -60,7 +62,7 @@ var MeteorComponent = (function () {
         }
         return hSubscribe;
     };
-    MeteorComponent.prototype.call = function (name) {
+    MeteorReactive.prototype.call = function (name) {
         var args = [];
         for (var _i = 1; _i < arguments.length; _i++) {
             args[_i - 1] = arguments[_i];
@@ -68,7 +70,7 @@ var MeteorComponent = (function () {
         var _a = this._prepArgs(args), pargs = _a.pargs, autoBind = _a.autoBind;
         return Meteor.call.apply(Meteor, [name].concat(pargs));
     };
-    MeteorComponent.prototype.ngOnDestroy = function () {
+    MeteorReactive.prototype.ngOnDestroy = function () {
         for (var _i = 0, _a = this._hAutoruns; _i < _a.length; _i++) {
             var hAutorun = _a[_i];
             hAutorun.stop();
@@ -80,7 +82,7 @@ var MeteorComponent = (function () {
         this._hAutoruns = null;
         this._hSubscribes = null;
     };
-    MeteorComponent.prototype._prepArgs = function (args) {
+    MeteorReactive.prototype._prepArgs = function (args) {
         var lastParam = args[args.length - 1];
         var penultParam = args[args.length - 2];
         var autoBind = true;
@@ -100,10 +102,12 @@ var MeteorComponent = (function () {
         // we run user's callback in the global zone
         // instead of the current Angular 2 zone.
         var zone = autoBind ? this._ngZone : utils_1.gZone;
-        lastParam = patch_1.wrapCallbackInZone(zone, lastParam, this);
+        lastParam = zone_utils_1.wrapCallbackInZone(zone, lastParam, this);
         args.push(lastParam);
         return { pargs: args, autoBind: autoBind };
     };
-    return MeteorComponent;
+    return MeteorReactive;
 }());
-exports.MeteorComponent = MeteorComponent;
+exports.MeteorReactive = MeteorReactive;
+// For the versions compatibility.
+exports.MeteorComponent = MeteorReactive;

@@ -10,5 +10,5 @@ export declare class DataObserver {
     static pushCb(callbacks: MeteorCallbacks): MeteorCallbacks;
     static onSubsReady(cb: Function): void;
     static onReady(cb: Function): void;
-    static cbLen(): number;
+    static cbLen: number;
 }

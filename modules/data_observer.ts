@@ -100,7 +100,7 @@ export class DataObserver {
     Promise.all(this._promises).then(() => cb());
   }
 
-  static cbLen(): number {
+  static get cbLen(): number {
     return this._promises.length;
   }
 }
