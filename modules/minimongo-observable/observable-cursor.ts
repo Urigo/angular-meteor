@@ -7,6 +7,7 @@ import {CursorHandle} from '../cursor_handle';
 import {gZone} from '../utils';
 
 export class ObservableCursor<T> extends Observable<T[]> {
+  private data: Array <T> = [];
   private _cursor: Mongo.Cursor<T>;
   private _hCursor: CursorHandle;
   private _observers: Subscriber<T[]>[] = [];
@@ -20,7 +21,7 @@ export class ObservableCursor<T> extends Observable<T[]> {
       this._observers.push(observer);
 
       if (!this._hCursor) {
-        this._hCursor =  new CursorHandle(
+        this._hCursor = new CursorHandle(
           this._observeCursor(cursor));
       }
 
@@ -79,13 +80,31 @@ export class ObservableCursor<T> extends Observable<T[]> {
     });
   }
 
+  addedAt(doc, at, before) {
+    this.data.splice(at, 0, doc);
+    this.handleChange();
+  }
+
+  changedAt(doc, old, at) {
+    this.data[at] = doc;
+    this.handleChange();
+  };
+
+  removedAt(doc, at) {
+    this.data.splice(at, 1);
+    this.handleChange();
+  };
+
+  handleChange() {
+    this._runNext(this._cursor);
+  };
+
   _observeCursor(cursor: Mongo.Cursor<T>) {
-    const handleChange = () => { this._runNext(cursor); };
     return gZone.run(
-      () => cursor.observeChanges({
-        added: handleChange,
-        changed: handleChange,
-        removed: handleChange
+      () => cursor.observe({
+        addedAt: this.addedAt.bind(this),
+        changedAt: this.changedAt.bind(this),
+        removedAt: this.removedAt.bind(this)
       }));
   }
 }
