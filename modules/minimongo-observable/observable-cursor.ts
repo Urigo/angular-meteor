@@ -74,9 +74,9 @@ export class ObservableCursor<T> extends Observable<T[]> {
     });
   }
 
-  _runNext(cursor: Mongo.Cursor<T>) {
+  _runNext(data: Array<T>) {
     this._observers.forEach(observer => {
-      observer.next(cursor.fetch());
+      observer.next(data);
     });
   }
 
@@ -96,7 +96,7 @@ export class ObservableCursor<T> extends Observable<T[]> {
   };
 
   handleChange() {
-    this._runNext(this._cursor);
+    this._runNext(this.data);
   };
 
   _observeCursor(cursor: Mongo.Cursor<T>) {

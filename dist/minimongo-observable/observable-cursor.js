@@ -66,9 +66,9 @@ var ObservableCursor = (function (_super) {
             observer.complete();
         });
     };
-    ObservableCursor.prototype._runNext = function (cursor) {
+    ObservableCursor.prototype._runNext = function (data) {
         this._observers.forEach(function (observer) {
-            observer.next(cursor.fetch());
+            observer.next(data);
         });
     };
     ObservableCursor.prototype.addedAt = function (doc, at, before) {
@@ -86,7 +86,7 @@ var ObservableCursor = (function (_super) {
     };
     ;
     ObservableCursor.prototype.handleChange = function () {
-        this._runNext(this._cursor);
+        this._runNext(this.data);
     };
     ;
     ObservableCursor.prototype._observeCursor = function (cursor) {

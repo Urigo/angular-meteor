@@ -13,7 +13,7 @@ export declare class ObservableCursor<T> extends Observable<T[]> {
     observe(callbacks: Mongo.ObserveCallbacks): Meteor.LiveQueryHandle;
     observeChanges(callbacks: Mongo.ObserveChangesCallbacks): Meteor.LiveQueryHandle;
     _runComplete(): void;
-    _runNext(cursor: Mongo.Cursor<T>): void;
+    _runNext(data: Array<T>): void;
     addedAt(doc: any, at: any, before: any): void;
     changedAt(doc: any, old: any, at: any): void;
     removedAt(doc: any, at: any): void;
