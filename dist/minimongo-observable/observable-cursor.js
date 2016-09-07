@@ -26,7 +26,7 @@ var ObservableCursor = (function (_super) {
                 }
             };
         });
-        this.data = [];
+        this._data = [];
         this._observers = [];
         _.extend(this, _.omit(cursor, 'count', 'map'));
         this._cursor = cursor;
@@ -71,30 +71,30 @@ var ObservableCursor = (function (_super) {
             observer.next(data);
         });
     };
-    ObservableCursor.prototype.addedAt = function (doc, at, before) {
-        this.data.splice(at, 0, doc);
-        this.handleChange();
+    ObservableCursor.prototype._addedAt = function (doc, at, before) {
+        this._data.splice(at, 0, doc);
+        this._handleChange();
     };
-    ObservableCursor.prototype.changedAt = function (doc, old, at) {
-        this.data[at] = doc;
-        this.handleChange();
-    };
-    ;
-    ObservableCursor.prototype.removedAt = function (doc, at) {
-        this.data.splice(at, 1);
-        this.handleChange();
+    ObservableCursor.prototype._changedAt = function (doc, old, at) {
+        this._data[at] = doc;
+        this._handleChange();
     };
     ;
-    ObservableCursor.prototype.handleChange = function () {
-        this._runNext(this.data);
+    ObservableCursor.prototype._removedAt = function (doc, at) {
+        this._data.splice(at, 1);
+        this._handleChange();
+    };
+    ;
+    ObservableCursor.prototype._handleChange = function () {
+        this._runNext(this._data);
     };
     ;
     ObservableCursor.prototype._observeCursor = function (cursor) {
         var _this = this;
         return utils_1.gZone.run(function () { return cursor.observe({
-            addedAt: _this.addedAt.bind(_this),
-            changedAt: _this.changedAt.bind(_this),
-            removedAt: _this.removedAt.bind(_this)
+            addedAt: _this._addedAt.bind(_this),
+            changedAt: _this._changedAt.bind(_this),
+            removedAt: _this._removedAt.bind(_this)
         }); });
     };
     return ObservableCursor;
