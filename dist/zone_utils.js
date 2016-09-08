@@ -10,7 +10,6 @@
  * UI updates caused by the callbacks near the same time,
  * zone runs are debounced.
  */
-var lang_1 = require('@angular/core/src/facade/lang');
 var utils_1 = require('./utils');
 var ZoneRunScheduler = (function () {
     function ZoneRunScheduler() {
@@ -20,7 +19,7 @@ var ZoneRunScheduler = (function () {
     ZoneRunScheduler.prototype.zoneRun = function (zone) {
         var _this = this;
         return function () {
-            zone.run(lang_1.noop);
+            zone.run(utils_1.noop);
             _this._runAfterRunCbs(zone);
             _this._zoneTasks.delete(zone);
         };
@@ -95,3 +94,7 @@ function wrapCallbackInZone(zone, callback, context) {
     return callback;
 }
 exports.wrapCallbackInZone = wrapCallbackInZone;
+function scheduleMicroTask(fn) {
+    Zone.current.scheduleMicroTask('scheduleMicrotask', fn);
+}
+exports.scheduleMicroTask = scheduleMicroTask;

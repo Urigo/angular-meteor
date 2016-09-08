@@ -14,7 +14,7 @@
     "es6-shim": "^0.35.0",
     "zone.js": "^0.6.12",
     "reflect-metadata": "0.1.2",
-    "rxjs": "5.0.0-beta.6",
+    "rxjs": "5.0.0-beta.11",
     "angular2-meteor": "file:..",
     "meteor-node-stubs": "0.2.3"
   },

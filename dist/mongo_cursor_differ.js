@@ -4,7 +4,7 @@ var __extends = (this && this.__extends) || function (d, b) {
     function __() { this.constructor = d; }
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
-var default_iterable_differ_1 = require('@angular/core/src/change_detection/differs/default_iterable_differ');
+var core_1 = require('@angular/core');
 var mongo_cursor_observer_1 = require('./mongo_cursor_observer');
 function checkIfMongoCursor(cursor) {
     return mongo_cursor_observer_1.MongoCursorObserver.isCursor(cursor);
@@ -26,17 +26,15 @@ var MongoCursorObserverFactory = (function () {
 // as one of the providers of collection differs.
 // These providers are being checked by an ngFor instance to find out which
 // differ it needs to create and use for the current collection.
-var MongoCursorDifferFactory = (function (_super) {
-    __extends(MongoCursorDifferFactory, _super);
+var MongoCursorDifferFactory = (function () {
     function MongoCursorDifferFactory() {
-        _super.apply(this, arguments);
     }
     MongoCursorDifferFactory.prototype.supports = function (obj) { return checkIfMongoCursor(obj); };
     MongoCursorDifferFactory.prototype.create = function (cdRef) {
         return new MongoCursorDiffer(cdRef, new MongoCursorObserverFactory());
     };
     return MongoCursorDifferFactory;
-}(default_iterable_differ_1.DefaultIterableDifferFactory));
+}());
 exports.MongoCursorDifferFactory = MongoCursorDifferFactory;
 var trackById = function (index, item) { return item._id; };
 /**
@@ -183,11 +181,11 @@ var MongoCursorDiffer = (function (_super) {
         }
     };
     MongoCursorDiffer.prototype._createChangeRecord = function (currentIndex, prevIndex, item) {
-        var record = new default_iterable_differ_1.CollectionChangeRecord(item, trackById);
+        var record = new core_1.CollectionChangeRecord(item, trackById);
         record.currentIndex = currentIndex;
         record.previousIndex = prevIndex;
         return record;
     };
     return MongoCursorDiffer;
-}(default_iterable_differ_1.DefaultIterableDiffer));
+}(core_1.DefaultIterableDiffer));
 exports.MongoCursorDiffer = MongoCursorDiffer;

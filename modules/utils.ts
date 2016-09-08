@@ -55,3 +55,5 @@ export function debounce(func, wait, onInit) {
 
   return debounced;
 };
+
+export function noop() {}

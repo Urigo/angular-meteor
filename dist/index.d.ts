@@ -5,5 +5,5 @@ export * from './mongo_cursor_differ';
 export * from './meteor_reactive';
 export * from './providers';
 export * from './data_observer';
-export * from './meteor_module';
+export * from './meteor_app';
 export * from './minimongo-observable/index';

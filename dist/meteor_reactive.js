@@ -1,5 +1,4 @@
 'use strict';
-var lang_1 = require('@angular/core/src/facade/lang');
 var utils_1 = require('./utils');
 var zone_utils_1 = require('./zone_utils');
 /**
@@ -96,7 +95,7 @@ var MeteorReactive = (function () {
             args.pop();
         }
         else {
-            lastParam = lang_1.noop;
+            lastParam = utils_1.noop;
         }
         // If autoBind is set to false then
         // we run user's callback in the global zone

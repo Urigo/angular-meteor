@@ -1,23 +1,19 @@
-import { ApplicationRef, NgZone } from '@angular/core';
-export declare class MeteorModule {
-    constructor(appRef: ApplicationRef);
-}
+import { NgZone } from '@angular/core';
 export declare class MeteorApp {
-    appRef: ApplicationRef;
+    private _ngZone;
     private _appCycles;
-    constructor(appRef: ApplicationRef);
+    constructor(_ngZone: NgZone);
     onRendered(cb: Function): void;
     onStable(cb: Function): void;
     ngZone: NgZone;
 }
 export declare class AppCycles {
-    private _appRef;
     private _ngZone;
     private _isZoneStable;
     private _onStableCb;
     private _onUnstable;
     private _onStable;
-    constructor(_appRef: ApplicationRef);
+    constructor(_ngZone: NgZone);
     isStable(): boolean;
     onStable(cb: Function): void;
     dispose(): void;

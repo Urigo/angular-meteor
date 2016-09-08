@@ -9,5 +9,5 @@ __export(require('./mongo_cursor_differ'));
 __export(require('./meteor_reactive'));
 __export(require('./providers'));
 __export(require('./data_observer'));
-__export(require('./meteor_module'));
+__export(require('./meteor_app'));
 __export(require('./minimongo-observable/index'));

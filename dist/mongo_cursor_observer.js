@@ -5,9 +5,8 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var core_1 = require('@angular/core');
-var lang_1 = require('@angular/core/src/facade/lang');
-var cursor_handle_1 = require('./cursor_handle');
 var utils_1 = require('./utils');
+var cursor_handle_1 = require('./cursor_handle');
 var AddChange = (function () {
     function AddChange(index, item) {
         this.index = index;
@@ -109,12 +108,12 @@ var MongoCursorObserver = (function (_super) {
         // allows us to use MeteorApp.onStable,
         // i.e. to know when the app is stable.
         var scheduleEmit = function () {
-            return _this._ngZone.scheduleMacroTask('emit', callEmit, null, lang_1.noop);
+            return _this._ngZone.scheduleMacroTask('emit', callEmit, null, utils_1.noop);
         };
         var init = false;
         var runTask = function (task) {
             task.invoke();
-            _this._ngZone.run(lang_1.noop);
+            _this._ngZone.run(utils_1.noop);
             init = true;
         };
         var emit = null;

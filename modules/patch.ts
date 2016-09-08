@@ -8,11 +8,8 @@
  * on the client to start bootstraping.
  */
 
-import {noop} from '@angular/core/src/facade/lang';
-
+import {isMeteorCallbacks, noop} from './utils';
 import {DataObserver} from './data_observer';
-
-import {isMeteorCallbacks} from './utils';
 
 // Save original methods.
 const meteorSubscribe = Meteor.subscribe;

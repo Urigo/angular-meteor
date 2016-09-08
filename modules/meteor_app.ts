@@ -1,52 +1,23 @@
 'use strict';
 
 import {
-  ApplicationRef,
   NgZone,
-  Type,
   Provider,
-  provide,
   Injectable,
   NgModule
 } from '@angular/core';
-import {
-  isPresent,
-  isBlank,
-  scheduleMicroTask
-} from '@angular/core/src/facade/lang';
 
 import {check} from './utils';
-
-import {DataObserver} from './data_observer';
-
-import {METEOR_PROVIDERS} from './providers';
-
-const appRegistry = new Map<ApplicationRef, MeteorApp>();
-
-@NgModule({
-  providers: [
-    ...METEOR_PROVIDERS,
-    provide(MeteorApp, {
-      deps: [ApplicationRef],
-      useFactory: appRef => {
-        return appRegistry.get(appRef);
-      }
-    })
-  ]
-})
-export class MeteorModule {
-  constructor(appRef: ApplicationRef) {
-    appRegistry.set(appRef, new MeteorApp(appRef));
-  }
-}
+import {scheduleMicroTask} from './zone_utils';
+import {DataObserver} from './data_observer'
 
 // Contains utility methods useful for the integration. 
 @Injectable()
 export class MeteorApp {
   private _appCycles: AppCycles;
 
-  constructor(public appRef: ApplicationRef) {
-    this._appCycles = new AppCycles(appRef);
+  constructor(private _ngZone: NgZone) {
+    this._appCycles = new AppCycles(_ngZone);
   }
 
   onRendered(cb: Function): void {
@@ -64,20 +35,18 @@ export class MeteorApp {
   }
 
   get ngZone(): NgZone {
-    return this.appRef.zone;
+    return this._ngZone;
   }
 }
 
 // To be used to detect an Angular 2 app's change detection cycles.
 export class AppCycles {
-  private _ngZone: NgZone;
   private _isZoneStable: boolean = true;
   private _onStableCb: Function[] = [];
   private _onUnstable;
   private _onStable;
 
-  constructor(private _appRef: ApplicationRef) {
-    this._ngZone = this._appRef.zone;
+  constructor(private _ngZone: NgZone) {
     this._watchAngularEvents();
   }
 
@@ -110,12 +79,10 @@ export class AppCycles {
 
     this._ngZone.runOutsideAngular(() => {
       this._onStable = this._ngZone.onStable.subscribe({ next: () => {
-          scheduleMicroTask(() => {
-            this._isZoneStable = true;
-            this._runIfStable();
-          });
+          this._isZoneStable = true;
+          this._runIfStable();
         }
-      })
+      });
     });
   }
 

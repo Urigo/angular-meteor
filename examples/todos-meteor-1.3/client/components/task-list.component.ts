@@ -2,8 +2,6 @@
 
 import {Component, Input, OnChanges} from '@angular/core';
 
-import {TaskView} from '../../imports/components';
-
 import {MeteorComponent, } from 'angular2-meteor';
 
 import {Tasks} from '../../tasks';
@@ -16,8 +14,7 @@ import {ObservableCursor} from 'angular2-meteor';
 
 @Component({
   selector: 'task-list',
-  template: template,
-  directives: [TaskView]
+  template: template
 })
 export class TaskList extends MeteorComponent implements OnChanges {
   tasks: ObservableCursor<Task>;

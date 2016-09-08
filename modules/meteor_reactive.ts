@@ -2,11 +2,8 @@
 
 import {OnDestroy} from '@angular/core';
 
-import {noop} from '@angular/core/src/facade/lang';
-
-import {isMeteorCallbacks, isCallbacksObject, gZone, g} from './utils';
+import {isMeteorCallbacks, isCallbacksObject, gZone, g, noop} from './utils';
 import {DataObserver} from './data_observer';
-
 import {wrapCallbackInZone} from './zone_utils';
 
 /**

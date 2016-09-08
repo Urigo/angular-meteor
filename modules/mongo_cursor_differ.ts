@@ -1,12 +1,13 @@
 'use strict';
 
-import {ChangeDetectorRef} from '@angular/core';
-
 import {
-  DefaultIterableDifferFactory,
   CollectionChangeRecord,
-  DefaultIterableDiffer
-} from '@angular/core/src/change_detection/differs/default_iterable_differ';
+  IterableDifferFactory,
+  DefaultIterableDiffer,
+  ChangeDetectorRef
+} from '@angular/core';
+
+import {Subscription} from 'rxjs/Subscription';
 
 import {
   MongoCursorObserver,
@@ -15,8 +16,6 @@ import {
   RemoveChange,
   UpdateChange,
 } from './mongo_cursor_observer';
-
-import {Subscription} from 'rxjs/Subscription';
 
 import {gZone} from './utils';
 
@@ -43,7 +42,7 @@ class MongoCursorObserverFactory implements ObserverFactory {
 // as one of the providers of collection differs.
 // These providers are being checked by an ngFor instance to find out which
 // differ it needs to create and use for the current collection.
-export class MongoCursorDifferFactory extends DefaultIterableDifferFactory {
+export class MongoCursorDifferFactory implements IterableDifferFactory {
   supports(obj: Object): boolean { return checkIfMongoCursor(obj); }
 
   create(cdRef: ChangeDetectorRef): MongoCursorDiffer {

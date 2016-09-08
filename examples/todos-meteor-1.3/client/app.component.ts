@@ -4,8 +4,6 @@ import {Component} from '@angular/core';
 
 import {Tasks} from '../tasks';
 
-import {TaskList} from '/client/components';
-
 import template from './app.component.html';
 
 import {Observable} from 'rxjs';
@@ -14,8 +12,7 @@ import 'rxjs/add/operator/debounce';
 
 @Component({
   selector: 'app',
-  template: template,
-  directives: [TaskList]
+  template: template
 })
 export class Todos {
 

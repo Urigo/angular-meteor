@@ -42,3 +42,5 @@ function debounce(func, wait, onInit) {
 }
 exports.debounce = debounce;
 ;
+function noop() { }
+exports.noop = noop;

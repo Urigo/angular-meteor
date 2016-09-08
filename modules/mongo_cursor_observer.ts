@@ -2,11 +2,8 @@
 
 import {EventEmitter} from '@angular/core';
 
-import {noop} from '@angular/core/src/facade/lang';
-
+import {check, gZone, g, debounce, noop} from './utils';
 import {CursorHandle} from './cursor_handle';
-
-import {EJSON, check, gZone, g, debounce} from './utils';
 
 export class AddChange {
   constructor(public index: number, public item: any) {}

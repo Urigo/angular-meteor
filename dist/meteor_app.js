@@ -9,36 +9,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var lang_1 = require('@angular/core/src/facade/lang');
 var utils_1 = require('./utils');
+var zone_utils_1 = require('./zone_utils');
 var data_observer_1 = require('./data_observer');
-var providers_1 = require('./providers');
-var appRegistry = new Map();
-var MeteorModule = (function () {
-    function MeteorModule(appRef) {
-        appRegistry.set(appRef, new MeteorApp(appRef));
-    }
-    MeteorModule = __decorate([
-        core_1.NgModule({
-            providers: providers_1.METEOR_PROVIDERS.concat([
-                core_1.provide(MeteorApp, {
-                    deps: [core_1.ApplicationRef],
-                    useFactory: function (appRef) {
-                        return appRegistry.get(appRef);
-                    }
-                })
-            ])
-        }), 
-        __metadata('design:paramtypes', [core_1.ApplicationRef])
-    ], MeteorModule);
-    return MeteorModule;
-}());
-exports.MeteorModule = MeteorModule;
 // Contains utility methods useful for the integration. 
 var MeteorApp = (function () {
-    function MeteorApp(appRef) {
-        this.appRef = appRef;
-        this._appCycles = new AppCycles(appRef);
+    function MeteorApp(_ngZone) {
+        this._ngZone = _ngZone;
+        this._appCycles = new AppCycles(_ngZone);
     }
     MeteorApp.prototype.onRendered = function (cb) {
         var _this = this;
@@ -54,25 +32,24 @@ var MeteorApp = (function () {
     };
     Object.defineProperty(MeteorApp.prototype, "ngZone", {
         get: function () {
-            return this.appRef.zone;
+            return this._ngZone;
         },
         enumerable: true,
         configurable: true
     });
     MeteorApp = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [core_1.ApplicationRef])
+        __metadata('design:paramtypes', [core_1.NgZone])
     ], MeteorApp);
     return MeteorApp;
 }());
 exports.MeteorApp = MeteorApp;
 // To be used to detect an Angular 2 app's change detection cycles.
 var AppCycles = (function () {
-    function AppCycles(_appRef) {
-        this._appRef = _appRef;
+    function AppCycles(_ngZone) {
+        this._ngZone = _ngZone;
         this._isZoneStable = true;
         this._onStableCb = [];
-        this._ngZone = this._appRef.zone;
         this._watchAngularEvents();
     }
     AppCycles.prototype.isStable = function () {
@@ -99,10 +76,8 @@ var AppCycles = (function () {
         });
         this._ngZone.runOutsideAngular(function () {
             _this._onStable = _this._ngZone.onStable.subscribe({ next: function () {
-                    lang_1.scheduleMicroTask(function () {
-                        _this._isZoneStable = true;
-                        _this._runIfStable();
-                    });
+                    _this._isZoneStable = true;
+                    _this._runIfStable();
                 }
             });
         });
@@ -110,7 +85,7 @@ var AppCycles = (function () {
     AppCycles.prototype._runIfStable = function () {
         var _this = this;
         if (this.isStable()) {
-            lang_1.scheduleMicroTask(function () {
+            zone_utils_1.scheduleMicroTask(function () {
                 while (_this._onStableCb.length !== 0) {
                     (_this._onStableCb.pop())();
                 }

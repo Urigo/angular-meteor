@@ -12,9 +12,7 @@
  * zone runs are debounced.
  */
 
-import {noop} from '@angular/core/src/facade/lang';
-
-import {MeteorCallbacks, g, gZone, check} from './utils';
+import {MeteorCallbacks, g, gZone, check, noop} from './utils';
 
 export class ZoneRunScheduler {
   private _zoneTasks = new Map<Zone, Task>();
@@ -107,4 +105,8 @@ export function wrapCallbackInZone(
   }
 
   return callback;
+}
+
+export function scheduleMicroTask(fn: Function) {
+  Zone.current.scheduleMicroTask('scheduleMicrotask', fn);
 }

@@ -13,3 +13,4 @@ export declare const EJSON: any;
 export declare const check: any;
 export declare const Match: any;
 export declare function debounce(func: any, wait: any, onInit: any): (...args: any[]) => any;
+export declare function noop(): void;

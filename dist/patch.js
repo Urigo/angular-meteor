@@ -6,9 +6,8 @@
  * which needs to know when requested data is available
  * on the client to start bootstraping.
  */
-var lang_1 = require('@angular/core/src/facade/lang');
-var data_observer_1 = require('./data_observer');
 var utils_1 = require('./utils');
+var data_observer_1 = require('./data_observer');
 // Save original methods.
 var meteorSubscribe = Meteor.subscribe;
 var meteorCall = Meteor.call;
@@ -23,7 +22,7 @@ function patchMeteorSubscribe(subscribe) {
             args[args.length - 1] = data_observer_1.DataObserver.pushCb(callback);
         }
         else {
-            args.push(data_observer_1.DataObserver.pushCb(lang_1.noop));
+            args.push(data_observer_1.DataObserver.pushCb(utils_1.noop));
         }
         return subscribe.apply(this, args);
     };
@@ -41,7 +40,7 @@ function patchMeteorCall(call) {
             args[args.length - 1] = data_observer_1.DataObserver.pushCb(callback);
         }
         else {
-            args.push(data_observer_1.DataObserver.pushCb(lang_1.noop));
+            args.push(data_observer_1.DataObserver.pushCb(utils_1.noop));
         }
         return call.apply(this, args);
     };

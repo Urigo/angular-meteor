@@ -1,22 +1,27 @@
 'use strict';
 
-import {provide, IterableDiffers} from '@angular/core';
+import {NgModule, NgZone, Provider, IterableDiffers} from '@angular/core';
+
+import {MeteorApp} from './meteor_app';
+
 import {MongoCursorDifferFactory} from './mongo_cursor_differ';
 
-import {defaultIterableDiffers} from '@angular/core/src/change_detection/change_detection';
-
 function meteorProviders() {
-  let providers = [];
-
-  let factories = defaultIterableDiffers.factories;
-  if (factories) {
-    factories.push(new MongoCursorDifferFactory());
-  }
-  providers.push(provide(IterableDiffers, {
-    useValue: new IterableDiffers(factories)
-  }));
-
-  return providers;
+  return [
+    IterableDiffers.extend([new MongoCursorDifferFactory()]),
+    {
+      provide: MeteorApp,
+      deps: [NgZone],
+      useValue: ngZone => {
+        return new MeteorApp(ngZone);
+      }
+    }
+  ];
 }
 
-export const METEOR_PROVIDERS: Array<any> = meteorProviders();
+export const METEOR_PROVIDERS: Array<Provider> = meteorProviders();
+
+@NgModule({
+  providers: METEOR_PROVIDERS
+})
+export class MeteorModule {}
