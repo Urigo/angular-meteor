@@ -5,7 +5,7 @@ mv -f .node_modules node_modules
 npm run build
 mv -f node_modules .node_modules
 cd tests
-#meteor npm install
+meteor npm install
 linklocal
 meteor add practicalmeteor:mocha
 meteor test --driver-package=practicalmeteor:mocha
