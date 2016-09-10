@@ -33,6 +33,7 @@ export const EJSON = Package['ejson'].EJSON;
 
 export const check = Package['check'].check;
 
+/* tslint:disable */
 export const Match = Package['check'].Match;
 
 export function debounce(func, wait, onInit) {
@@ -47,7 +48,9 @@ export function debounce(func, wait, onInit) {
     if (!timeout) {
       data = onInit && onInit();
     }
-    if (timeout) clearTimeout(timeout);
+    if (timeout) {
+      clearTimeout(timeout);
+    }
     timeout = _.delay(later, wait, this, args);
 
     return result;

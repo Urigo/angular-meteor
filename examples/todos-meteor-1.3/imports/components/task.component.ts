@@ -2,7 +2,7 @@
 
 import {Component, ChangeDetectionStrategy, Input} from '@angular/core';
 
-import {MeteorComponent} from 'angular2-meteor';
+import {MeteorReactive} from 'angular2-meteor';
 
 import style from './task.component.less';
 import template from './task.component.html';
@@ -13,7 +13,7 @@ import template from './task.component.html';
   styles: [style],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TaskView extends MeteorComponent {
+export class TaskView extends MeteorReactive {
   @Input() task: Task;
 
   setChecked(checked) {

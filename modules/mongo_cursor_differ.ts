@@ -17,8 +17,6 @@ import {
   UpdateChange,
 } from './mongo_cursor_observer';
 
-import {gZone} from './utils';
-
 export interface ObserverFactory {
   create(cursor: Object): Object;
 }
@@ -70,7 +68,6 @@ export class MongoCursorDiffer extends DefaultIterableDiffer {
   private _cursor: Mongo.Cursor<any>;
   private _obsFactory: ObserverFactory;
   private _sub: Subscription;
-  private _zone = Zone.current;
 
   constructor(cdRef: ChangeDetectorRef, obsFactory: ObserverFactory) {
     super(trackById);

@@ -14,7 +14,8 @@
     "meteor-node-stubs": "^0.2.3",
     "reflect-metadata": "0.1.2",
     "rxjs": "5.0.0-beta.11",
-    "zone.js": "^0.6.10"
+    "zone.js": "^0.6.10",
+    "meteor-rxjs": "https://github.com/Urigo/meteor-rxjs"
   },
   "devDependencies": {
     "linklocal": "^2.6.0",

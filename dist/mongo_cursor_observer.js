@@ -1,9 +1,4 @@
 'use strict';
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
 var core_1 = require('@angular/core');
 var utils_1 = require('./utils');
 var cursor_handle_1 = require('./cursor_handle');
@@ -49,7 +44,6 @@ var MongoCursorObserver = (function (_super) {
         if (_debounceMs === void 0) { _debounceMs = 50; }
         _super.call(this);
         this._debounceMs = _debounceMs;
-        this._added = [];
         this._lastChanges = [];
         this._ngZone = utils_1.g.Zone.current;
         this._isSubscribed = false;

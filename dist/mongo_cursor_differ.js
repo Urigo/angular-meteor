@@ -1,9 +1,4 @@
 'use strict';
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
 var core_1 = require('@angular/core');
 var mongo_cursor_observer_1 = require('./mongo_cursor_observer');
 function checkIfMongoCursor(cursor) {
@@ -52,7 +47,6 @@ var MongoCursorDiffer = (function (_super) {
         this._updated = [];
         this._changes = [];
         this._forSize = 0;
-        this._zone = Zone.current;
         this._obsFactory = obsFactory;
     }
     MongoCursorDiffer.prototype.forEachAddedItem = function (fn) {

@@ -18,6 +18,7 @@ exports.g = typeof global === 'object' ? global :
 exports.gZone = exports.g.Zone.current;
 exports.EJSON = Package['ejson'].EJSON;
 exports.check = Package['check'].check;
+/* tslint:disable */
 exports.Match = Package['check'].Match;
 function debounce(func, wait, onInit) {
     var timeout, result, data;
@@ -33,8 +34,9 @@ function debounce(func, wait, onInit) {
         if (!timeout) {
             data = onInit && onInit();
         }
-        if (timeout)
+        if (timeout) {
             clearTimeout(timeout);
+        }
         timeout = _.delay(later, wait, this, args);
         return result;
     };

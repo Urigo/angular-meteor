@@ -40,7 +40,7 @@ var MeteorReactive = (function () {
         for (var _i = 1; _i < arguments.length; _i++) {
             args[_i - 1] = arguments[_i];
         }
-        var _a = this._prepArgs(args), pargs = _a.pargs, autoBind = _a.autoBind;
+        var pargs = this._prepArgs(args).pargs;
         if (!Meteor.subscribe) {
             throw new Error('Meteor.subscribe is not defined on the server side');
         }
@@ -66,7 +66,7 @@ var MeteorReactive = (function () {
         for (var _i = 1; _i < arguments.length; _i++) {
             args[_i - 1] = arguments[_i];
         }
-        var _a = this._prepArgs(args), pargs = _a.pargs, autoBind = _a.autoBind;
+        var pargs = this._prepArgs(args).pargs;
         return Meteor.call.apply(Meteor, [name].concat(pargs));
     };
     MeteorReactive.prototype.ngOnDestroy = function () {
@@ -109,4 +109,5 @@ var MeteorReactive = (function () {
 }());
 exports.MeteorReactive = MeteorReactive;
 // For the versions compatibility.
+/* tslint:disable */
 exports.MeteorComponent = MeteorReactive;

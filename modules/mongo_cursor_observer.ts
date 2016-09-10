@@ -34,7 +34,6 @@ declare interface MongoItem {
  * and notifying subscribers about them.
  */
 export class MongoCursorObserver extends EventEmitter<MongoDocChange[]> {
-  private _added: Array<AddChange> = [];
   private _lastChanges: Array<MongoDocChange> = [];
   private _cursor: Mongo.Cursor<any>;
   private _hCursor: CursorHandle;
@@ -46,7 +45,7 @@ export class MongoCursorObserver extends EventEmitter<MongoDocChange[]> {
   }
 
   constructor(cursor: Mongo.Cursor<any>,
-              private _debounceMs: number = 50) {
+              private _debounceMs = 50) {
     super();
     check(cursor, Match.Where(MongoCursorObserver.isCursor));
 
@@ -131,7 +130,7 @@ export class MongoCursorObserver extends EventEmitter<MongoDocChange[]> {
           return;
         }
         runTask(scheduleEmit());
-      }
+      };
     }
 
     return gZone.run(() => cursor.observe({

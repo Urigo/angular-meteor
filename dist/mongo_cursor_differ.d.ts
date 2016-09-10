@@ -24,7 +24,6 @@ export declare class MongoCursorDiffer extends DefaultIterableDiffer {
     private _cursor;
     private _obsFactory;
     private _sub;
-    private _zone;
     constructor(cdRef: ChangeDetectorRef, obsFactory: ObserverFactory);
     forEachAddedItem(fn: Function): void;
     forEachMovedItem(fn: Function): void;

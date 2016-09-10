@@ -1,21 +1,12 @@
 'use strict';
 
-import {NgModule, NgZone, Provider, IterableDiffers} from '@angular/core';
-
-import {MeteorApp} from './meteor_app';
+import {NgModule, Provider, IterableDiffers} from '@angular/core';
 
 import {MongoCursorDifferFactory} from './mongo_cursor_differ';
 
 function meteorProviders() {
   return [
-    IterableDiffers.extend([new MongoCursorDifferFactory()]),
-    {
-      provide: MeteorApp,
-      deps: [NgZone],
-      useValue: ngZone => {
-        return new MeteorApp(ngZone);
-      }
-    }
+    IterableDiffers.extend([new MongoCursorDifferFactory()])
   ];
 }
 

@@ -3,7 +3,6 @@
 import {OnDestroy} from '@angular/core';
 
 import {isMeteorCallbacks, isCallbacksObject, gZone, g, noop} from './utils';
-import {DataObserver} from './data_observer';
 import {wrapCallbackInZone} from './zone_utils';
 
 /**
@@ -43,7 +42,7 @@ export class MeteorReactive implements OnDestroy {
    *  except the last autoBind param (see autorun above).
    */
   subscribe(name: string, ...args: any[]): Meteor.SubscriptionHandle {
-    let { pargs, autoBind } = this._prepArgs(args);
+    let { pargs } = this._prepArgs(args);
 
     if (!Meteor.subscribe) {
       throw new Error(
@@ -71,7 +70,7 @@ export class MeteorReactive implements OnDestroy {
   }
 
   call(name: string, ...args: any[]) {
-    let { pargs, autoBind } = this._prepArgs(args);
+    let { pargs } = this._prepArgs(args);
 
     return Meteor.call(name, ...pargs);
   }
@@ -118,4 +117,5 @@ export class MeteorReactive implements OnDestroy {
 }
 
 // For the versions compatibility.
+/* tslint:disable */
 export const MeteorComponent = MeteorReactive;

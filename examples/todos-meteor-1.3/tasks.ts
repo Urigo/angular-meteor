@@ -3,7 +3,7 @@
 import {Meteor} from 'meteor/meteor';
 import {Mongo} from 'meteor/mongo';
 
-import {MongoObservable} from 'angular2-meteor';
+import {MongoObservable} from 'meteor-rxjs';
 
 export let Tasks = new MongoObservable.Collection<Task>('tasks');
 

@@ -9,13 +9,13 @@
     "emitDecoratorMetadata": true,
     "sourceMap": false,
     "declaration": true,
+    "noEmitHelpers": true,
     "outDir": "./dist",
     "rootDir": "./modules"
   },
   "files": [
     "modules/index.ts",
-    "modules/main.ts",
-    "typings/index.d.ts"
+    "modules/main.ts"
   ],
   "exclude": [
     "examples",

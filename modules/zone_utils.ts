@@ -12,7 +12,7 @@
  * zone runs are debounced.
  */
 
-import {MeteorCallbacks, g, gZone, check, noop} from './utils';
+import {MeteorCallbacks, gZone, check, noop} from './utils';
 
 export class ZoneRunScheduler {
   private _zoneTasks = new Map<Zone, Task>();
