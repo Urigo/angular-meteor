@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "experimentalDecorators": true,
-    "module": "commonjs",
+    "module": "es2015",
     "target": "es5",
     "noImplicitAny": false,
     "suppressImplicitAnyIndexErrors": true,
@@ -11,7 +11,9 @@
     "declaration": true,
     "noEmitHelpers": true,
     "outDir": "./dist",
-    "rootDir": "./modules"
+    "rootDir": "./modules",
+    "lib": ["es2015", "dom"],
+    "skipLibCheck": true
   },
   "files": [
     "modules/index.ts",

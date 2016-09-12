@@ -5,3 +5,4 @@ typings
 atmosphere-packages/examples
 .npm
 npm-debug.log
+dist
