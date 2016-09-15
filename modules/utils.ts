@@ -29,8 +29,6 @@ export const g =
 
 export const gZone = g.Zone.current;
 
-export const EJSON = Package['ejson'].EJSON;
-
 export const check = Package['check'].check;
 
 /* tslint:disable */
@@ -60,3 +58,47 @@ export function debounce(func, wait, onInit) {
 };
 
 export function noop() {}
+
+export function isListLikeIterable(obj: any): boolean {
+  if (!isJsObject(obj)) return false;
+  return isArray(obj) ||
+      (!(obj instanceof Map) &&      // JS Map are iterables but return entries as [k, v]
+       getSymbolIterator() in obj);  // JS Iterable have a Symbol.iterator prop
+}
+
+export function isArray(obj: any): boolean {
+  return Array.isArray(obj);
+}
+
+export function isPresent(obj: any): boolean {
+  return obj !== undefined && obj !== null;
+}
+
+export function isBlank(obj: any): boolean {
+  return obj === undefined || obj === null;
+}
+
+export function isJsObject(o: any): boolean {
+  return o !== null && (typeof o === 'function' || typeof o === 'object');
+}
+
+declare var Symbol: any;
+var _symbolIterator: any = null;
+export function getSymbolIterator(): string|symbol {
+  if (isBlank(_symbolIterator)) {
+    if (isPresent((<any>g).Symbol) && isPresent(Symbol.iterator)) {
+      _symbolIterator = Symbol.iterator;
+    } else {
+      // es6-shim specific logic
+      var keys = Object.getOwnPropertyNames(Map.prototype);
+      for (var i = 0; i < keys.length; ++i) {
+        var key = keys[i];
+        if (key !== 'entries' && key !== 'size' &&
+            (Map as any).prototype[key] === Map.prototype['entries']) {
+          _symbolIterator = key;
+        }
+      }
+    }
+  }
+  return _symbolIterator;
+}

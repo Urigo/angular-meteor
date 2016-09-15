@@ -8,7 +8,7 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 
-import {MeteorModule} from 'angular2-meteor';
+import {METEOR_PROVIDERS} from 'angular2-meteor';
 
 import {Todos} from './app.component';
 import {TaskList} from '/client/components';
@@ -17,8 +17,9 @@ import {TaskView} from '../imports/components';
 enableProdMode();
 
 @NgModule({
-  imports: [BrowserModule, FormsModule, MeteorModule],
+  imports: [BrowserModule, FormsModule],
   declarations: [Todos, TaskList, TaskView],
+  providers: METEOR_PROVIDERS,
   bootstrap: [Todos]
 })
 export class AppModule { }

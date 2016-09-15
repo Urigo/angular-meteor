@@ -1,4 +1,5 @@
 #!/bin/sh
+npm install
 cd tests
 npm install
 meteor remove practicalmeteor:mocha
