@@ -61,16 +61,14 @@ e.g., `<body><app></app></body>`.
 
 ### Using Angular 2 in a Meteor app:
 
-The package contains `MeteorModule` module that has providers simplifing development of a Meteor app with Angular 2.
+The package contains `METEOR_PROVIDERS` providers that simplify development of a Meteor app with Angular 2.
 
-You can use Meteor collections in the same way as you would do in a regular Meteor app with the Blaze,
-the only thing required is to import and use `MeteorModule` from `angular2-meteor`.
-After, you you can iterate `Mongo.Cursor` objects with Angular 2.0's `ngFor`!
-
-Below is a valid Angular2-Meteor app:
+You can use Mongo collections in the same way as you would do in a regular Meteor app with the Blaze,
+the only thing required is to import and use `METEOR_PROVIDERS` from `angular2-meteor`.
+After, you can iterate `Mongo.Cursor`s with Angular 2.0's `ngFor` as follows:
 
 ````ts
-    import {MeteorModule, MeteorComponent} from 'angular2-meteor';
+    import {METEOR_PROVIDERS, MeteorReactive} from 'angular2-meteor';
 
     const Parties = new Mongo.Collection('parties');
     
@@ -81,7 +79,7 @@ Below is a valid Angular2-Meteor app:
         </div>
       `
     })
-    class Socially extends MeteorComponent {
+    class Socially extends MeteorReactive {
         constructor() {
           this.subscribe('my-subscription');
           this.parties = Parties.find();
@@ -89,7 +87,8 @@ Below is a valid Angular2-Meteor app:
     }
 
     @NgModule({
-      imports: [BrowserModule, MeteorModule],
+      imports: [BrowserModule],
+      providers: METEOR_PROVIDERS,
       declarations: [Socially],
       bootstrap: [Socially]
     })
@@ -97,9 +96,12 @@ Below is a valid Angular2-Meteor app:
 
     platformBrowserDynamic().bootstrapModule(AppModule);
 ````
+`MeteorReactive` is a special utility class that does two things behind the scene for you:
+ - releases Meteor and Mongo handlers on the destroy event;
+ - runs Angular 2 zone on Meteor methods' callbacks with
+   debouncing, i.e., reducing number of zone runs to minimun.
 
-`MeteorComponent` wraps major Meteor methods to do some work behind the scene (such as cleanup) for a component that extends it.
-You can read more about `MeteorComponent` in the [tutorial section] (http://www.angular-meteor.com/tutorials/socially/angular2/privacy-and-publish-subscribe-functions)!
+You can read more about `MeteorReactive` in the [tutorial section] (http://www.angular-meteor.com/tutorials/socially/angular2/privacy-and-publish-subscribe-functions)!
 
 At this moment, you are almost set to create awesome apps backed by the power of Angular 2 and Meteor!
 We recommend to check out our awesome [tutorial](http://www.angular-meteor.com/tutorials/socially/angular2/bootstrapping) in order to create more complex apps that have security and routing.
