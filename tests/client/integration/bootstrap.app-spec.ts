@@ -1,6 +1,6 @@
 import {NgModule, Component, enableProdMode, NgZone} from '@angular/core';
 
-import {MeteorComponent, MeteorModule, DataObserver} from 'angular2-meteor';
+import {MeteorReactive, METEOR_PROVIDERS} from 'angular2-meteor';
 
 import {BrowserModule} from '@angular/platform-browser';
 
@@ -21,7 +21,7 @@ enableProdMode();
     </li>
   </ul>`
 })
-class Todos extends MeteorComponent {
+class Todos extends MeteorReactive {
   constructor() {
     super();
 
@@ -34,8 +34,9 @@ class Todos extends MeteorComponent {
 }
 
 @NgModule({
-  imports: [BrowserModule, MeteorModule],
+  imports: [BrowserModule],
   declarations: [Todos],
+  providers: METEOR_PROVIDERS,
   bootstrap: [Todos]
 })
 class AppModule {}
@@ -56,6 +57,17 @@ function onStable(ngZone, cb) {
   });
 };
 
+function onSubsReady(cb: Function): void {
+  new Promise((resolve, reject) => {
+    const poll = Meteor.setInterval(() => {
+      if (DDP._allSubscriptionsReady()) {
+        Meteor.clearInterval(poll);
+        resolve();
+      }
+    }, 100);
+  }).then(() => cb());
+}
+
 describe('bootstrap', () => {
   let el;
   beforeEach(function() {
@@ -72,15 +84,13 @@ describe('bootstrap', () => {
       platformBrowserDynamic().bootstrapModule(AppModule).then(moduleRef => {
         let ngZone = moduleRef.injector.get(NgZone);
 
-        onStable(ngZone, () => {
-          DataObserver.onReady(() => {
-            onStable(ngZone, () => {
-              expect($('.task', el).size()).to.equal(10);
-              done();
-            });
-          })
+        onSubsReady(() => {
+          onStable(ngZone, () => {
+            expect($('.task', el).size()).to.equal(10);
+            done();
+          });
         });
       });
-    })
+    });
   });
 });

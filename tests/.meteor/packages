@@ -24,3 +24,4 @@ dispatch:mocha-phantomjs
 dburles:factory
 xolvio:cleaner
 shell-server
+practicalmeteor:mocha
