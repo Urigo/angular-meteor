@@ -1,6 +1,5 @@
 #!/bin/sh
 
-# Before running this script
 # run 'meteor npm install' in the tests.
 
 cd tests
