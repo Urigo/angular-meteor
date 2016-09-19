@@ -51,7 +51,12 @@ class AngularTemplatesCompiler extends TemplateHtmlCompiler {
 
   addCompileResult(file, result) {
     const path = file.getPathInPackage();
+
     const isPackage = !!file.getPackageName();
+    const isImport = !!file.getPathInPackage().startsWith('imports') || file.getPathInPackage().indexOf('/imports/') !== -1;
+    const isNodeModule = file.isNodeModule();
+
+    const isLazy = isImport || isNodeModule;
 
     // import template from './path.html';
     file.addJavaScript({
@@ -66,7 +71,7 @@ class AngularTemplatesCompiler extends TemplateHtmlCompiler {
       path,
       sourcePath: path,
       data: this.urlContent(file, result),
-      lazy: isPackage ? false : true,
+      lazy: isPackage ? false : isLazy
     });
   }
 }
