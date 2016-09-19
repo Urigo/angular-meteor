@@ -1,6 +1,8 @@
 {
   "scripts": {
-    "commit": "git-cz"
+    "commit": "git-cz",
+    "bootstrap": "lerna bootstrap",
+    "test": "lerna run test"
   },
   "devDependencies": {
     "commitizen": "^2.8.6",

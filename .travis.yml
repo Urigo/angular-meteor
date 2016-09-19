@@ -1,0 +1,14 @@
+language: node_js
+
+node_js:
+  - "5"
+
+services:
+  - mongodb
+
+install:
+  - curl https://install.meteor.com | /bin/sh
+  - npm install
+  - npm run bootstrap
+
+sudo: required
