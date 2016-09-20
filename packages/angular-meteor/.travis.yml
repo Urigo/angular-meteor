@@ -1,0 +1,15 @@
+sudo: required
+language: node_js
+cache:
+  directories:
+    # cache node modules
+    - node_modules
+node_js:
+  # use same node version as meteor does
+  - "0.12"
+services:
+  - mongodb
+before_install: curl https://install.meteor.com | /bin/sh
+before_script:
+  # remove unused node modules from cache
+  - "npm prune"

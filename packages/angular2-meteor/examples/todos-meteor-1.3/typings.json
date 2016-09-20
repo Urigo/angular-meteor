@@ -1,0 +1,11 @@
+{
+  "globalDependencies": {
+    "es6-shim": "registry:dt/es6-shim#0.31.2+20160602141504",
+    "meteor": "github:meteor-typings/meteor/1.3#051ea1ecbbc8910132a78dcf0527f09664448295",
+    "angular2-compilers": "github:meteor-typings/angular2-compilers#c2ca3d3036b08f04a22b98ed16ff17377499e1e7"
+  },
+  "resolution": {
+    "main": "typings/main",
+    "browser": "typings/browser"
+  }
+}
