@@ -12,8 +12,6 @@
   "license": "MIT",
   "scripts": {
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "commit": "git-cz",
-    "commitmsg": "validate-commit-msg",
     "lint": "eslint .",
     "pretest": "npm run build:dist",
     "test": "velocity test-packages ./tests --ci",
@@ -30,11 +28,6 @@
     "build": "npm run build:dist && npm run build:prod",
     "prepublish": "npm run build"
   },
-  "config": {
-    "commitizen": {
-      "path": "node_modules/cz-conventional-changelog"
-    }
-  },
   "dependencies": {
     "jsondiffpatch": "^0.1.38",
     "underscore": "^1.0.4"
@@ -49,18 +42,14 @@
     "babel-loader": "^6.2.1",
     "babel-plugin-add-module-exports": "^0.1.2",
     "babel-preset-es2015": "^6.3.13",
-    "commitizen": "^2.5.0",
     "conventional-changelog-cli": "^1.1.1",
-    "cz-conventional-changelog": "^1.1.5",
     "eslint": "^1.10.3",
     "eslint-config-airbnb": "^4.0.0",
     "eslint-loader": "^1.2.1",
     "eslint-plugin-import": "^0.13.0",
-    "husky": "^0.11.1",
     "lodash": "^3.10.1",
     "parallelshell": "^2.0.0",
     "replace-in-file": "^1.0.2",
-    "validate-commit-msg": "^2.0.0",
     "velocity-cli": "^0.4.3",
     "webpack": "^1.12.9"
   }
