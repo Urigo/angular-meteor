@@ -1,5 +1,5 @@
 import * as ngCore from '@angular/core';
-import {MeteorReactive, DataObserver, zoneRunScheduler} from 'angular2-meteor';
+import {MeteorReactive, zoneRunScheduler} from 'angular2-meteor';
 import {chai} from 'meteor/practicalmeteor:chai';
 import {sinon} from 'meteor/practicalmeteor:sinon';
 
@@ -14,11 +14,9 @@ describe('MeteorReactive', function() {
   beforeEach(function() {
     component = new MeteorReactive();
     zoneSpy = sinon.spy(Zone.current, 'run');
-    sinon.stub(DataObserver, 'pushCb').returnsArg(0);
   });
 
   afterEach(() => {
-    DataObserver.pushCb.restore();
     zoneSpy.restore();
   });
 

@@ -31,8 +31,7 @@ Package.onUse(function(api) {
     'barbatus:typescript@0.4.1',
     'check@1.1.0',
     'tracker@1.0.13',
-    'underscore@1.0.4',
-    'ejson'
+    'underscore@1.0.4'
   ]);
 });
 

@@ -1,11 +1,12 @@
 
-import {noop} from '@angular/core/src/facade/lang';
 import {MongoCursorObserver} from 'angular2-meteor';
 import * as fakes from './lib/fakes';
 import {chai} from 'meteor/practicalmeteor:chai';
 import {sinon} from 'meteor/practicalmeteor:sinon';
 
 const expect = chai.expect;
+
+const noop = () => {};
 
 describe('MongoCursorObserver', function() {
   let gZone = global.Zone.current;
