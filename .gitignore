@@ -1,19 +1,4 @@
-# OS generated files #
-######################
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-.build*
-.npm
 node_modules
-npm-debug.log
-
-# IDE's #
-#########
 .idea
-
-.coverage
+.npm
+npm-debug.log

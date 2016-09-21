@@ -1,0 +1,26 @@
+{
+  "private": true,
+  "dependencies": {
+    "@angular/common": "^2.0.0",
+    "@angular/compiler": "^2.0.0",
+    "@angular/core": "^2.0.0",
+    "@angular/forms": "^0.3.0",
+    "@angular/platform-browser": "^2.0.0",
+    "@angular/platform-browser-dynamic": "^2.0.0",
+    "angular2-meteor": "file:../..",
+    "angular2-meteor-polyfills": "^0.1.1",
+    "core-js": "^2.4.0",
+    "es6-shim": "^0.35.0",
+    "meteor-node-stubs": "^0.2.3",
+    "meteor-rxjs": "https://github.com/Urigo/meteor-rxjs",
+    "npm-git-install": "^0.2.0",
+    "reflect-metadata": "0.1.2",
+    "rxjs": "5.0.0-beta.12",
+    "zone.js": "^0.6.10"
+  },
+  "devDependencies": {
+    "linklocal": "^2.6.0",
+    "typescript": "^2.0.2"
+  },
+  "license": "MIT"
+}
