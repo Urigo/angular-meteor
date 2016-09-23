@@ -164,7 +164,7 @@ describe('$meteorUtils service', function () {
 
   describe('promissor', function() {
     it('should create a function which invokes method with the given arguments and returns a promise', function(done) {
-      var next = _.after(2, done);
+      var next = _.once(done);
       var obj = { method: function() {} };
       var promissor = $meteorUtils.promissor(obj, 'method');
 
