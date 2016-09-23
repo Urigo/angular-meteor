@@ -31,7 +31,7 @@
     "pretest": "cd tests && npm install",
     "test:unit": "cd tests && meteor test --once --driver-package=dispatch:mocha-phantomjs",
     "test:app": "cd tests && meteor test --full-app --once --driver-package=dispatch:mocha-phantomjs",
-    "test": "npm run test:unit",
+    "test": "npm run test:unit && npm run test:app",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "rollup:browser": "rollup -i ./dist/index.js -o ./dist/bundles/index.umd.js -n ng.meteor -c rollup.config.js",
     "rollup:main": "rollup -i ./dist/main.js -o ./dist/bundles/main.umd.js -n ng.meteor -c rollup.config.js",
