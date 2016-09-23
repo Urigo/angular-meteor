@@ -1,9 +1,12 @@
+import 'angular-meteor';
+
+import {chai} from 'meteor/practicalmeteor:chai';
+import {sinon} from 'meteor/practicalmeteor:sinon';
+
+const expect = chai.expect;
+
 describe('getUpdates module', function() {
   var getUpdates;
-
-  beforeEach(function() {
-    jasmine.addMatchers(customMatchers);
-  });
 
   beforeEach(angular.mock.module('getUpdates'));
 
@@ -14,12 +17,12 @@ describe('getUpdates module', function() {
   describe('validations', function() {
     it('should throw an error if first argument is not an object', function() {
       var boundGetUpdates = _.partial(getUpdates);
-      expect(boundGetUpdates).toThrowError(/first argument.*object/);
+      expect(boundGetUpdates).to.throw(/first argument.*object/);
     });
 
     it('should throw an error if second argument is not an object', function() {
       var boundGetUpdates = _.partial(getUpdates, {});
-      expect(boundGetUpdates).toThrowError(/second argument.*object/);
+      expect(boundGetUpdates).to.throw(/second argument.*object/);
     });
   });
 
@@ -51,7 +54,7 @@ describe('getUpdates module', function() {
       };
 
       var actualUpdates = getUpdates(src, dst);
-      expect(actualUpdates).toDeepEqual(expectedUpdates);
+      expect(actualUpdates).to.deep.equal(expectedUpdates);
     });
 
     it('should define an "$unset" property when the destination object has missing properties', function() {
@@ -77,7 +80,7 @@ describe('getUpdates module', function() {
       };
 
       var actualUpdates = getUpdates(src, dst);
-      expect(actualUpdates).toDeepEqual(expectedUpdates);
+      expect(actualUpdates).to.deep.equal(expectedUpdates);
     });
 
     it('should define a "$pull" property when the destination object has an array value with missing elements', function() {
@@ -101,7 +104,7 @@ describe('getUpdates module', function() {
       };
 
       var actualUpdates = getUpdates(src, dst);
-      expect(actualUpdates).toDeepEqual(expectedUpdates);
+      expect(actualUpdates).to.deep.equal(expectedUpdates);
     });
 
     it('should get updates when object-field is assigned a deep-object', function() {
@@ -109,7 +112,7 @@ describe('getUpdates module', function() {
       var dst = {a: {L1: {L2: {L3: 'v'}}}};
       var updates = getUpdates(src, dst);
 
-      expect(updates).toDeepEqual({
+      expect(updates).to.deep.equal({
         $set: {
           'a.L1.L2.L3': 'v'
         }
@@ -121,7 +124,7 @@ describe('getUpdates module', function() {
       var dst = {a: {L1: {L2: {L3: 'v'}}}};
       var updates = getUpdates(src, dst);
 
-      expect(updates).toDeepEqual({
+      expect(updates).to.deep.equal({
         $set: {
           'a.L1.L2.L3': 'v'
         }
@@ -133,7 +136,7 @@ describe('getUpdates module', function() {
       var dst = {a: {L1: {L2: {L3: 'v'}}}};
       var updates = getUpdates(src, dst);
 
-      expect(updates).toDeepEqual({
+      expect(updates).to.deep.equal({
         $set: {
           'a.L1.L2.L3': 'v'
         }
@@ -145,7 +148,7 @@ describe('getUpdates module', function() {
       var dst = {a: {L1: {L2: {L3: 'v'}}}};
       var updates = getUpdates(src, dst);
 
-      expect(updates).toDeepEqual({
+      expect(updates).to.deep.equal({
         $set: {
           'a.L1.L2.L3': 'v'
         }
@@ -157,7 +160,7 @@ describe('getUpdates module', function() {
       var dst = {a: {L1: {L2: {L3: 'v'}}}};
       var updates = getUpdates(src, dst);
 
-      expect(updates).toDeepEqual({
+      expect(updates).to.deep.equal({
         $set: {
           'a.L1.L2.L3': 'v'
         }
@@ -169,7 +172,7 @@ describe('getUpdates module', function() {
       var dst = {a: {subfield: 'v'}};
       var updates = getUpdates(src, dst);
 
-      expect(updates).toDeepEqual({
+      expect(updates).to.deep.equal({
         $set: {
           'a.subfield': 'v'
         }
@@ -181,7 +184,7 @@ describe('getUpdates module', function() {
       var dst = {a: [1, 2, 3]};
       var updates = getUpdates(src, dst);
 
-      expect(updates).toDeepEqual({
+      expect(updates).to.deep.equal({
         $set: {
           'a': [1, 2, 3]
         }
@@ -193,7 +196,7 @@ describe('getUpdates module', function() {
       var dst = {a: null};
       var updates = getUpdates(src, dst);
 
-      expect(updates).toDeepEqual({
+      expect(updates).to.deep.equal({
         $set: {
           'a': null
         }
@@ -205,7 +208,7 @@ describe('getUpdates module', function() {
       var dst = {a: {subfield: null}};
       var updates = getUpdates(src, dst);
 
-      expect(updates).toDeepEqual({
+      expect(updates).to.deep.equal({
         $set: {
           'a.subfield': null
         }
@@ -217,7 +220,7 @@ describe('getUpdates module', function() {
       var dst = {a: {subfield: 'v'}};
       var updates = getUpdates(src, dst);
 
-      expect(updates).toDeepEqual({
+      expect(updates).to.deep.equal({
         $set: {
           'a.subfield': 'v'
         }
@@ -229,7 +232,7 @@ describe('getUpdates module', function() {
       var dst = {a: {subfield: [1, 2, 3]}};
       var updates = getUpdates(src, dst);
 
-      expect(updates).toDeepEqual({
+      expect(updates).to.deep.equal({
         $set: {
           'a.subfield': [1, 2, 3]
         }
@@ -241,7 +244,7 @@ describe('getUpdates module', function() {
       var dst = {a: {L1: {L2: {L3: 1}}}};
       var updates = getUpdates(src, dst);
 
-      expect(updates).toDeepEqual({
+      expect(updates).to.deep.equal({
         $set: {
           'a.L1.L2.L3': 1
         }
@@ -253,7 +256,7 @@ describe('getUpdates module', function() {
       var dst = {a: {L1: {L2: {L3: 1}}}};
       var updates = getUpdates(src, dst);
 
-      expect(updates).toDeepEqual({
+      expect(updates).to.deep.equal({
         $set: {
           'a.L1.L2.L3': 1
         }
@@ -265,7 +268,7 @@ describe('getUpdates module', function() {
       var dst = {a: new Date("October 13, 2014 11:13:00")};
       var updates = getUpdates(src, dst);
 
-      expect(updates).toDeepEqual({});
+      expect(updates).to.deep.equal({});
     });
 
     it('should get updates when a date field is assigned a new date', function() {
@@ -273,7 +276,7 @@ describe('getUpdates module', function() {
       var dst = {a: new Date("January 15, 2015 10:14:00")};
       var updates = getUpdates(src, dst);
 
-      expect(updates).toDeepEqual({
+      expect(updates).to.deep.equal({
         $set: {
           a: new Date("January 15, 2015 10:14:00")
         }
@@ -304,7 +307,7 @@ describe('getUpdates module', function() {
       };
 
       var actualUpdates = getUpdates(src, dst, true);
-      expect(actualUpdates).toDeepEqual(expectedUpdates);
+      expect(actualUpdates).to.deep.equal(expectedUpdates);
     });
 
     it('should return limited updates as specified if option is a number bigger than 1', function() {
@@ -336,7 +339,7 @@ describe('getUpdates module', function() {
       };
 
       var actualUpdates = getUpdates(src, dst, 2);
-      expect(actualUpdates).toDeepEqual(expectedUpdates);
+      expect(actualUpdates).to.deep.equal(expectedUpdates);
     });
   });
 });

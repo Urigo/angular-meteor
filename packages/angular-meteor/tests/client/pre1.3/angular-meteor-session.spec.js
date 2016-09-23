@@ -1,3 +1,10 @@
+import 'angular-meteor';
+
+import {chai} from 'meteor/practicalmeteor:chai';
+import {sinon} from 'meteor/practicalmeteor:sinon';
+
+const expect = chai.expect;
+
 describe('$meteorSession service', function () {
   var $meteorSession,
       $rootScope,
@@ -18,7 +25,7 @@ describe('$meteorSession service', function () {
     Session.set('myVar', 4);
     Tracker.flush(); // get the computations to run
 
-    expect($scope.myVar).toEqual(4);
+    expect($scope.myVar).to.equal(4);
   });
 
   it('should update the session variable when the scope variable changes', function() {
@@ -28,7 +35,7 @@ describe('$meteorSession service', function () {
     $scope.myVar = 4;
     $rootScope.$apply();
 
-    expect(Session.get('myVar')).toEqual(4);
+    expect(Session.get('myVar')).to.equal(4);
   });
 
 
@@ -45,7 +52,7 @@ describe('$meteorSession service', function () {
     Session.set('myVar', 4);
     Tracker.flush(); // get the computations to run
 
-    expect($scope.a.b.myVar).toEqual(4);
+    expect($scope.a.b.myVar).to.equal(4);
   });
 
   it('should update the session variable when the scope variable nested property changes', function() {
@@ -59,6 +66,6 @@ describe('$meteorSession service', function () {
     $scope.a.b.myVar = 4;
     $rootScope.$apply();
 
-    expect(Session.get('myVar')).toEqual(4);
+    expect(Session.get('myVar')).to.equal(4);
   });
 });
