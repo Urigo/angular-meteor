@@ -8,7 +8,6 @@ services:
 
 install:
   - curl https://install.meteor.com | /bin/sh
-  - npm install lerna
   - npm run bootstrap
 
 sudo: required
