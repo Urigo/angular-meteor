@@ -60,8 +60,8 @@ describe('$meteorSubscribe service', function () {
       var promise = $scope.$meteorSubscribe('subscription', 1, 2, 3);
 
       promise.catch(function (err) {
-        if (err instanceof Meteor.Error) done();
-        else done.fail();
+        expect(err).to.be.an.instanceof(Meteor.Error);
+        done();
       });
 
       stop();
@@ -87,8 +87,8 @@ describe('$meteorSubscribe service', function () {
       $scope.$meteorSubscribe('subscription', 1, 2, 3,
         {
           onStop: function (err) {
-            if (err === error) done();
-            else done.fail();
+            expect(err).to.equal(error);
+            done();
           }
         });
 
@@ -100,8 +100,8 @@ describe('$meteorSubscribe service', function () {
       $scope.$meteorSubscribe('subscription', 1, 2, 3,
         {
           onStop: function (err) {
-            if (!err) done();
-            else done.fail();
+            expect(err).not.to.exist;
+            done();
           }
         });
 
