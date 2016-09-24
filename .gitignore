@@ -2,3 +2,4 @@ node_modules
 .idea
 .npm
 npm-debug.log
+lerna-debug.log

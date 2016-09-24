@@ -1,3 +1,10 @@
+import 'angular-meteor';
+
+import {chai} from 'meteor/practicalmeteor:chai';
+import {sinon} from 'meteor/practicalmeteor:sinon';
+
+const expect = chai.expect;
+
 describe('angular-meteor.mixer', function() {
   beforeEach(angular.mock.module('angular-meteor'));
 
@@ -28,21 +35,21 @@ describe('angular-meteor.mixer', function() {
     });
 
     it('should extend root scope', function() {
-      expect($rootScope.prop).toEqual('prop');
-      expect($rootScope.$method).toEqual(jasmine.any(Function));
+      expect($rootScope.prop).to.equal('prop');
+      expect($rootScope.$method).to.be.a('function');
     });
 
     it('should extend child scope', function() {
       var scope = $rootScope.$new();
-      expect(scope.prop).toEqual('prop');
-      expect(scope.$method).toEqual(jasmine.any(Function));
+      expect(scope.prop).to.equal('prop');
+      expect(scope.$method).to.be.a('function');
       scope.$destroy();
     });
 
     it('should extend isolated scope', function() {
       var scope = $rootScope.$new(true);
-      expect(scope.prop).toEqual('prop');
-      expect(scope.$method).toEqual(jasmine.any(Function));
+      expect(scope.prop).to.equal('prop');
+      expect(scope.$method).to.be.a('function');
       scope.$destroy();
     });
   });

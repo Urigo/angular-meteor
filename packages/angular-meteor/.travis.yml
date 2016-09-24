@@ -6,7 +6,7 @@ cache:
     - node_modules
 node_js:
   # use same node version as meteor does
-  - "0.12"
+  - "5"
 services:
   - mongodb
 before_install: curl https://install.meteor.com | /bin/sh
