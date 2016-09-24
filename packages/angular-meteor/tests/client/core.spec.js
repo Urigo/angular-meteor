@@ -146,7 +146,7 @@ describe('angular-meteor.core', function() {
       });
 
       it('should recompute subscription if parameters have been changed', function(done) {
-        var next = _.once(done);
+        var next = _.after(2, done);
         var dependency = new Tracker.Dependency();
 
         scope.subscribe('test', function() {
@@ -193,7 +193,7 @@ describe('angular-meteor.core', function() {
       it('should call subscription callbacks object using view model as context', function(done) {
         var vm = scope.viewModel({});
 
-        var next = _.once(done);
+        var next = _.after(3, done);
 
         sinon.stub(Meteor, 'subscribe', function(name, cbs) {
           cbs.onReady();
@@ -235,7 +235,7 @@ describe('angular-meteor.core', function() {
       });
 
       it('should digest once subscription function is invoked', function(done) {
-        var next = _.once(done);
+        var next = _.after(2, done);
         var digest = scope.$digest.bind(scope);
 
         scope.subscribe('test', function() {
@@ -249,7 +249,7 @@ describe('angular-meteor.core', function() {
       });
 
       it('should digest once subscription callback is invoked', function(done) {
-        var next = _.once(done);
+        var next = _.after(2, done);
         var digest = scope.$digest.bind(scope);
 
         sinon.stub(Meteor, 'subscribe', function(name, cb) {
@@ -266,7 +266,7 @@ describe('angular-meteor.core', function() {
       });
 
       it('should digest once subscription callbacks are invoked', function(done) {
-        var next = _.once(done);
+        var next = _.after(3, done);
         var digest = scope.$digest.bind(scope);
 
         sinon.stub(Meteor, 'subscribe', function(name, cbs) {

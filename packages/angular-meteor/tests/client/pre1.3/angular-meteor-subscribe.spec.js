@@ -84,14 +84,12 @@ describe('$meteorSubscribe service', function () {
     it('should call onStop with Meteor.Error when onStop event called for subscription that was resolved', function (done) {
       var error = new Meteor.Error('Error', 'reason');
 
-      var onStop = _.once(function (err) {
-        expect(err).to.equal(error);
-        done();
-      });
-
       $scope.$meteorSubscribe('subscription', 1, 2, 3,
         {
-          onStop
+          onStop: function (err) {
+            expect(err).to.equal(error);
+            done();
+          }
         });
 
       ready();
@@ -99,14 +97,12 @@ describe('$meteorSubscribe service', function () {
     });
 
     it('should call onStop when subscription is stopped', function (done) {
-      var onStop = _.once(function (err) {
-        expect(err).not.to.exist;
-        done();
-      });
-
       $scope.$meteorSubscribe('subscription', 1, 2, 3,
         {
-          onStop
+          onStop: function (err) {
+            expect(err).not.to.exist;
+            done();
+          }
         });
 
       ready();
