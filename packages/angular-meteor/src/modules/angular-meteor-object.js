@@ -197,7 +197,7 @@ angularMeteorObject.factory('$meteorObject', [
       }, true);
 
       this.unregisterAutoDestroy = $rootScope.$on('$destroy', function() {
-        if (self && self.stop) self.stop();
+        if (self && self.stop) self.pop();
       });
     };
 
