@@ -23,5 +23,5 @@ practicalmeteor:chai
 dispatch:mocha-phantomjs
 dburles:factory
 xolvio:cleaner
-shell-server
+shell-server@0.2.1
 practicalmeteor:mocha

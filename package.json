@@ -2,7 +2,7 @@
   "scripts": {
     "commit": "git-cz",
     "bootstrap": "lerna bootstrap",
-    "test": "lerna run test"
+    "test": "lerna run test --concurrency 1"
   },
   "devDependencies": {
     "commitizen": "^2.8.6",
