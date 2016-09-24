@@ -1,10 +1,3 @@
-import 'angular-meteor';
-
-import {chai} from 'meteor/practicalmeteor:chai';
-import {sinon} from 'meteor/practicalmeteor:sinon';
-
-const expect = chai.expect;
-
 describe('$meteorStopper service', function() {
   var $meteorStopper;
   var $rootScope;
@@ -29,31 +22,23 @@ describe('$meteorStopper service', function() {
 
   describe('#subscribe()', function() {
     beforeEach(function() {
-      sinon.spy(Meteor, 'subscribe');
-    });
-
-    afterEach(function() {
-      Meteor.subscribe.restore();
+      spyOn(Meteor, 'subscribe').and.callThrough();
     });
 
     it('should call meteor subscription with scope as the context', function() {
       $mock.subscribe();
-      expect(Meteor.subscribe.thisValues[0]).to.equal($scope);
+      expect(Meteor.subscribe.calls.mostRecent().object).toEqual($scope);
     });
   });
 
   describe('scope destruction', function() {
     beforeEach(function() {
-      sinon.spy($mock, 'stop');
-    });
-
-    afterEach(function() {
-      $mock.stop.restore();
+      spyOn($mock, 'stop');
     });
 
     it('should stop meteor entity listeners on scope destruction', function() {
       $scope.$destroy();
-      expect($mock.stop.calledOnce).to.be.true;
+      expect($mock.stop.calls.count()).toEqual(1);
     });
   });
 });

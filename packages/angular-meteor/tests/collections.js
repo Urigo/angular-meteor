@@ -1,4 +1,4 @@
-export const DummyCollection = new Meteor.Collection(null);
+DummyCollection = new Meteor.Collection(null);
 
 DummyCollection.allow({
   remove: function() {

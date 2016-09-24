@@ -1,10 +1,3 @@
-import 'angular-meteor';
-
-import {chai} from 'meteor/practicalmeteor:chai';
-import {sinon} from 'meteor/practicalmeteor:sinon';
-
-const expect = chai.expect;
-
 describe('angular-meteor.view-model', function() {
   beforeEach(angular.mock.module('angular-meteor'));
 
@@ -28,11 +21,11 @@ describe('angular-meteor.view-model', function() {
         this.scopeProp = 'scopeProp';
       };
 
-      Mixin.$method = function(fn) {
-        if (_.isFunction(fn)) return fn.apply(this);
-      };
+      Mixin.$method = jasmine.createSpy(function(fn) {
+        if (_.isFunction(fn)) return fn();
+      });
 
-      Mixin.$$hidden = sinon.spy();
+      Mixin.$$hidden = jasmine.createSpy();
 
       $Mixer.mixin(Mixin);
       scope = $rootScope.$new();
@@ -45,23 +38,23 @@ describe('angular-meteor.view-model', function() {
     });
 
     it('should extend child scope', function() {
-      expect(scope.viewModel).to.be.a('function');
+      expect(scope.viewModel).toEqual(jasmine.any(Function));
     });
 
     it('should extend view model', function() {
       var vm = scope.viewModel({});
-      expect(vm.vmProp).to.equal('vmProp');
-      expect(vm.scopeProp).to.be.undefined;
-      expect(vm.$method).to.be.a('function');
-      expect(vm.$$hidden).to.be.undefined;
+      expect(vm.vmProp).toEqual('vmProp');
+      expect(vm.scopeProp).toBeUndefined();
+      expect(vm.$method).toEqual(jasmine.any(Function));
+      expect(vm.$$hidden).toBeUndefined();
     });
 
     it('should bind methods to scope', function() {
       var vm = scope.viewModel({});
 
       vm.$method(function() {
-        expect(this).to.equal(scope);
-        expect($Mixer.caller).to.equal(vm);
+        expect(this).toEqual(scope);
+        expect($Mixer.caller).toEqual(vm);
       });
     });
   });
@@ -80,11 +73,10 @@ describe('angular-meteor.view-model', function() {
     it('should call scope.viewModel()', function() {
       var vm = {};
 
-      sinon.spy(scope, 'viewModel');
+      spyOn(scope, 'viewModel').and.callThrough();
       $reactive(vm).attach(scope);
 
-      expect(scope.viewModel.calledWith(vm)).to.be.true;
-      scope.viewModel.restore();
+      expect(scope.viewModel).toHaveBeenCalledWith(vm);
     });
   });
 });

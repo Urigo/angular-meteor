@@ -1,10 +1,3 @@
-import 'angular-meteor';
-
-import {chai} from 'meteor/practicalmeteor:chai';
-import {sinon} from 'meteor/practicalmeteor:sinon';
-
-const expect = chai.expect;
-
 describe('$meteorObject service', function () {
   var $meteorObject,
       $rootScope,
@@ -12,6 +5,11 @@ describe('$meteorObject service', function () {
       TestCollection,
       id,
       meteorObject;
+
+  // Setup jasmine.
+  beforeEach(function() {
+    jasmine.addMatchers(customMatchers);
+  });
 
   beforeEach(angular.mock.module('angular-meteor'));
 
@@ -37,10 +35,9 @@ describe('$meteorObject service', function () {
     Tracker.flush();
 
     var doc = TestCollection.findOne(id);
-    // make sure it was unset in mongo
-    chai.assert.isUndefined(doc.a, 'document have unset property');
+    expect(doc.a).not.toBeDefined('document have unset property'); // make sure it was unset in mongo
 
-    chai.assert.isUndefined(meteorObject.a, 'angular meteor object have unset property');
+    expect(meteorObject.a).not.toBeDefined('angular meteor object have unset property');
   });
 
   it('should keep the client only property after autorun updates', function () {
@@ -51,13 +48,10 @@ describe('$meteorObject service', function () {
     Tracker.flush();
 
     var doc = TestCollection.findOne(id);
-    // make sure it didn't set to mongo
-    chai.assert.isUndefined(doc.clientProp, 'document have client property');
+    expect(doc.clientProp).not.toBeDefined('document have client property');  // make sure it didn't set to mongo
 
-    chai.assert.isUndefined(meteorObject.a,
-      'angular meteor object have unset property');
-    chai.assert.isDefined(meteorObject.clientProp,
-      'angular meteor object doesnt have client property');
+    expect(meteorObject.a).not.toBeDefined('angular meteor object have unset property');
+    expect(meteorObject.clientProp).toBeDefined('angular meteor object doesnt have client property');
   });
 
   it('should delete server and client side properties when object removed from the collection', function () {
@@ -66,20 +60,20 @@ describe('$meteorObject service', function () {
 
     Tracker.flush();
 
-    expect(meteorObject.a).to.be.undefined;
-    expect(meteorObject.b).to.be.undefined;
-    expect(meteorObject._id).to.be.undefined;
-    expect(meteorObject.clientProp).to.be.undefined;
+    expect(meteorObject.a).not.toBeDefined();
+    expect(meteorObject.b).not.toBeDefined();
+    expect(meteorObject._id).not.toBeDefined();
+    expect(meteorObject.clientProp).not.toBeDefined();
   });
 
   describe('#save()', function() {
     it('should not call save upon init', function() {
-      sinon.spy(TestCollection, 'update');
+      spyOn(TestCollection, 'update').and.callThrough();
       // Watching changes (auto modifier not set to false)
       $meteorObject(TestCollection, id);
       $rootScope.$apply();
 
-      expect(TestCollection.update.called).to.be.false;
+      expect(TestCollection.update).not.toHaveBeenCalled();
     });
     
     it('should save updates specified', function() {
@@ -89,7 +83,7 @@ describe('$meteorObject service', function () {
 
       var doc = TestCollection.findOne(id);
 
-      expect(doc).to.deep.equal({
+      expect(doc).toDeepEqual({
         _id: id,
         a: 1,
         b: 2,
@@ -98,7 +92,7 @@ describe('$meteorObject service', function () {
       });
 
       Tracker.flush();
-      expect(meteorObject.getRawObject()).to.deep.equal(doc);
+      expect(meteorObject.getRawObject()).toDeepEqual(doc);
     });
 
     it('should save object changes if no updates were specified', function() {
@@ -107,7 +101,7 @@ describe('$meteorObject service', function () {
 
       var doc = TestCollection.findOne(id);
 
-      expect(doc).to.deep.equal({
+      expect(doc).toDeepEqual({
         _id: id,
         a: 1,
         b: 2,
@@ -118,12 +112,12 @@ describe('$meteorObject service', function () {
 
     it('should wrap the document if an explicit selector is used', function() {
       var meteorObject = $meteorObject(TestCollection, { _id: id }, false);
-      expect(meteorObject.$$id).to.equal(id);
+      expect(meteorObject.$$id).toEqual(id);
     });
 
     it('should ignore skip and limit selection options', function() {
       var meteorObject = $meteorObject(TestCollection, { _id: id }, false, { skip: 1, limit: 1000 });
-      expect(meteorObject.$$id).to.equal(id);
+      expect(meteorObject.$$id).toEqual(id);
     });
 
     it('should create a new document if object does not exist', function() {
@@ -132,7 +126,7 @@ describe('$meteorObject service', function () {
       meteorObject.save();
 
       var doc = TestCollection.findOne(id);
-      expect(doc._id).to.equal(id);
+      expect(doc._id).toEqual(id);
     });
 
     it('should create a new document if object does not exist and no id is defined', function() {
@@ -143,7 +137,7 @@ describe('$meteorObject service', function () {
       var id = meteorObject._id;
 
       var doc = TestCollection.findOne(id);
-      expect(doc._id).to.equal(id);
+      expect(doc._id).toEqual(id);
     });
 
     it('should save an object with a spliced array', function() {
@@ -152,7 +146,7 @@ describe('$meteorObject service', function () {
 
       var doc = TestCollection.findOne(id);
 
-      expect(doc).to.deep.equal({
+      expect(doc).toDeepEqual({
         _id: id,
         a: 1,
         b: 2,
@@ -166,16 +160,14 @@ describe('$meteorObject service', function () {
       meteorObject.clientProp = 'delete';
       meteorObject.reset();
 
-      chai.assert.isUndefined(meteorObject.clientProp,
-        'angular meteor object doesnt have client property');
+      expect(meteorObject.clientProp).not.toBeDefined('angular meteor object doesnt have client property');
     });
 
     it('should keep client property when first argument is truthy', function() {
       meteorObject.clientProp = 'delete';
       meteorObject.reset(true);
 
-      chai.assert.isDefined(meteorObject.clientProp,
-        'angular meteor object has client property');
+      expect(meteorObject.clientProp).toBeDefined('angular meteor object has client property');
     });
 
     it('should delete properties for an object that doesnt exist in the collection', function() {
@@ -186,8 +178,8 @@ describe('$meteorObject service', function () {
       meteorObject.b = 'b';
       meteorObject.reset();
 
-      expect(meteorObject.a).to.be.undefined;
-      expect(meteorObject.b).to.be.undefined;
+      expect(meteorObject.a).not.toBeDefined();
+      expect(meteorObject.b).not.toBeDefined();
     });
   });
 
@@ -200,19 +192,15 @@ describe('$meteorObject service', function () {
       id = 'id-01';
       Collection = new Meteor.Collection(null);
       ngObject = $meteorObject(Collection, id);
-      sinon.stub(AngularMeteorCollection, '_updateDiff');
-    });
-
-    afterEach(function() {
-      AngularMeteorCollection._updateDiff.restore();
+      spyOn(AngularMeteorCollection, '_updateDiff');
     });
 
     it('should call collection\'s updateDiff() method with object\'s id', function() {
       var update = {};
       var callback = function() {};
       ngObject._updateDiff(update, callback);
-      expect(AngularMeteorCollection._updateDiff.called).to.be.true;
-      expect(AngularMeteorCollection._updateDiff.args[0]).to.deep.equal([id, update, callback]);
+      expect(AngularMeteorCollection._updateDiff).toHaveBeenCalled();
+      expect(AngularMeteorCollection._updateDiff.calls.argsFor(0)).toEqual([id, update, callback]);
     });
   });
 
@@ -220,20 +208,16 @@ describe('$meteorObject service', function () {
     it('should return an object equal to doc', function() {
       var raw = meteorObject.getRawObject();
       var doc = TestCollection.findOne(id);
-      expect(raw).to.deep.equal(doc);
+      expect(raw).toDeepEqual(doc);
     });
   });
 
   describe('update and data binding', function() {
     beforeEach(function() {
-      sinon.spy(TestCollection, 'update');
+      spyOn(TestCollection, 'update').and.callThrough();
       // Watching changes (auto modifier not set to false)
       meteorObject = $meteorObject(TestCollection, id);
       $rootScope.$apply();
-    });
-
-    afterEach(function() {
-      TestCollection.update.restore();
     });
 
     it('should update nested doc fields on digestion', function() {
@@ -242,16 +226,16 @@ describe('$meteorObject service', function () {
       meteorObject.c = { d: 'd' };
       $rootScope.$apply();
       doc = TestCollection.findOne(id);
-      expect(meteorObject.getRawObject()).to.deep.equal(doc);
-      expect(TestCollection.update.args[0][0]).to.equal(id);
-      expect(TestCollection.update.args[0][1]).to.deep.equal({ $set: { 'c.d': 'd' } });
+      expect(meteorObject.getRawObject()).toDeepEqual(doc);
+      expect(TestCollection.update.calls.mostRecent().args[0]).toEqual(id);
+      expect(TestCollection.update.calls.mostRecent().args[1]).toEqual({ $set: { 'c.d': 'd' } });
 
       delete meteorObject.c.d;
       $rootScope.$apply();
       doc = TestCollection.findOne(id);
-      expect(meteorObject.getRawObject()).to.deep.equal(doc);
-      expect(TestCollection.update.args[1][0]).to.equal(id);
-      expect(TestCollection.update.args[1][1]).to.deep.equal({ $unset: { 'c.d': true } });
+      expect(meteorObject.getRawObject()).toDeepEqual(doc);
+      expect(TestCollection.update.calls.mostRecent().args[0]).toEqual(id);
+      expect(TestCollection.update.calls.mostRecent().args[1]).toEqual({ $unset: { 'c.d': true } });
     });
 
     it('should save changes in a nested array', function() {
@@ -261,7 +245,7 @@ describe('$meteorObject service', function () {
 
       var doc = TestCollection.findOne(id);
 
-      expect(doc).to.deep.equal({
+      expect(doc).toDeepEqual({
         _id : id,
         a : 1,
         b : 2,

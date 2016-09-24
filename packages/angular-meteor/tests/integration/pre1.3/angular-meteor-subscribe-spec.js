@@ -1,10 +1,3 @@
-import 'angular-meteor';
-
-import {chai} from 'meteor/practicalmeteor:chai';
-import {sinon} from 'meteor/practicalmeteor:sinon';
-
-const expect = chai.expect;
-
 describe('$meteorSubscribe service', function () {
   var $meteorSubscribe,
     $rootScope,
@@ -22,7 +15,7 @@ describe('$meteorSubscribe service', function () {
   }));
 
   beforeEach(function () {
-    sinon.stub(Meteor, 'subscribe', function () {
+    spyOn(Meteor, 'subscribe').and.callFake(function () {
       stop = arguments[arguments.length - 1].onStop;
       ready = arguments[arguments.length - 1].onReady;
 
@@ -30,25 +23,22 @@ describe('$meteorSubscribe service', function () {
     });
   });
 
-  afterEach(function() {
-    Meteor.subscribe.restore();
-  });
-
   describe('$scope.$meteorSubscribe', function () {
 
     it('should call Meteor.subscribe with publication arguments and event callbacks ', function () {
       $scope.$meteorSubscribe('subscription', 1, 2, 3);
 
-      expect(Meteor.subscribe.calledWith('subscription', 1, 2, 3, {
-          onReady: sinon.match.func,
-          onStop: sinon.match.func
-        })).to.be.true;
+      expect(Meteor.subscribe)
+        .toHaveBeenCalledWith('subscription', 1, 2, 3, {
+          onReady: jasmine.any(Function),
+          onStop: jasmine.any(Function)
+        });
     });
 
     it('should return promise that is resolved when subscription is ready', function (done) {
       $scope.$meteorSubscribe('subscription', 1, 2, 3)
         .then(function (handle) {
-          expect(handle).to.equal($subscriptionHandleMock);
+          expect(handle).toEqual($subscriptionHandleMock);
         })
         .finally(done);
 
@@ -75,10 +65,11 @@ describe('$meteorSubscribe service', function () {
     it('should call Meteor.subscribe with only subscription arguments and event callback options', function () {
       $scope.$meteorSubscribe('subscription', 1, 2, 3, {onStop: function () {}});
 
-      expect(Meteor.subscribe.calledWith('subscription', 1, 2, 3, {
-          onReady: sinon.match.func,
-          onStop: sinon.match.func
-        })).to.be.true;
+      expect(Meteor.subscribe)
+        .toHaveBeenCalledWith('subscription', 1, 2, 3, {
+          onReady: jasmine.any(Function),
+          onStop: jasmine.any(Function)
+        });
     });
 
     it('should call onStop with Meteor.Error when onStop event called for subscription that was resolved', function (done) {
@@ -114,19 +105,15 @@ describe('$meteorSubscribe service', function () {
     var onStopSpy;
 
     beforeEach(function () {
-      sinon.spy($subscriptionHandleMock, 'stop');
-      onStopSpy = sinon.spy();
-    });
-
-    afterEach(function() {
-      $subscriptionHandleMock.stop.restore();
+      spyOn($subscriptionHandleMock, 'stop').and.callThrough();
+      onStopSpy = jasmine.createSpy('onStopSpy');
     });
 
     it('should call Meteor.subscribe stop method on $destroy of scope', function () {
       $scope.$meteorSubscribe('subscription', 1, 2, 3);
 
       $scope.$destroy();
-      expect($subscriptionHandleMock.stop.calledOnce).to.be.true;
+      expect($subscriptionHandleMock.stop.calls.count()).toEqual(1);
     });
 
     it('should call onStop callback after subscription is resolved', function () {
@@ -134,8 +121,8 @@ describe('$meteorSubscribe service', function () {
 
       ready();
       $scope.$destroy();
-      expect($subscriptionHandleMock.stop.calledOnce).to.be.true;
-      expect(onStopSpy.calledOnce).to.be.true;
+      expect($subscriptionHandleMock.stop.calls.count()).toEqual(1);
+      expect(onStopSpy.calls.count()).toEqual(1);
     });
 
     it('should call onStop callback after subscription is rejected', function () {
@@ -143,16 +130,16 @@ describe('$meteorSubscribe service', function () {
 
       stop();
       $scope.$destroy();
-      expect($subscriptionHandleMock.stop.calledOnce).to.be.true;
-      expect(onStopSpy.calledOnce).to.be.true;
+      expect($subscriptionHandleMock.stop.calls.count()).toEqual(1);
+      expect(onStopSpy.calls.count()).toEqual(1);
     });
 
     it('should not call onStop callback if subscription was not resolved', function () {
       $scope.$meteorSubscribe('subscription', 1, 2, 3, {onStop: onStopSpy});
 
       $scope.$destroy();
-      expect($subscriptionHandleMock.stop.calledOnce).to.be.true;
-      expect(onStopSpy.calledOnce).to.be.false;
+      expect($subscriptionHandleMock.stop.calls.count()).toEqual(1);
+      expect(onStopSpy.calls.count()).toEqual(0);
     });
   });
 });

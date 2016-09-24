@@ -1,4 +1,4 @@
-export const itemWithNestedHashkeyArrays = {
+itemWithNestedHashkeyArrays = {
   myId : 555,
   nestedArray : [
     {
@@ -86,7 +86,7 @@ export const itemWithNestedHashkeyArrays = {
   ]
 };
 
-export const itemWithNestedHashkeysRemoved = {
+itemWithNestedHashkeysRemoved = {
   myId : 555,
   nestedArray : [
     {
@@ -160,7 +160,7 @@ export const itemWithNestedHashkeysRemoved = {
   ]
 };
 
-export const itemWithNestedDateFields = {
+itemWithNestedDateFields = {
   myId : 555,
   nestedArray : [
     {

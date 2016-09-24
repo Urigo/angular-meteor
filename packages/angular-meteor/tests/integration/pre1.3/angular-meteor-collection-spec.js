@@ -1,19 +1,3 @@
-import 'angular-meteor';
-
-import {chai} from 'meteor/practicalmeteor:chai';
-import {sinon} from 'meteor/practicalmeteor:sinon';
-
-const expect = chai.expect;
-
-import '../auxiliary/matchers';
-
-import {
-  itemWithNestedDateFields,
-  itemWithNestedHashkeyArrays,
-  itemWithNestedHashkeysRemoved} from '../auxiliary/test_data';
-
-import {DummyCollection} from '../../collections';
-
 describe('$meteorCollection service', function() {
   var $meteorCollection,
       MyCollection,
@@ -21,6 +5,11 @@ describe('$meteorCollection service', function() {
       $timeout,
       meteorArray,
       testObjects;
+
+  // Setup jasmine.
+  beforeEach(function() {
+    jasmine.addMatchers(customMatchers);
+  });
 
   // Inject angular stuff.
   beforeEach(angular.mock.module('angular-meteor'));
@@ -32,11 +21,7 @@ describe('$meteorCollection service', function() {
 
   // Initialize spies.
   beforeEach(function(){
-    sinon.spy($rootScope, '$apply');
-  });
-
-  afterEach(function() {
-    $rootScope.$apply.restore();
+    spyOn($rootScope, '$apply').and.callThrough();
   });
 
   // Initialize data.
@@ -54,7 +39,7 @@ describe('$meteorCollection service', function() {
 
   describe('initialisation', function() {
     it('should return an array with all items in the Mongo Collection', function() {
-      expect(meteorArray).to.be.equalCollection(MyCollection);
+      expect(meteorArray).toEqualCollection(MyCollection);
     });
   });
 
@@ -66,134 +51,134 @@ describe('$meteorCollection service', function() {
 
     it('should update the array when a new item is inserted into the collection', function() {
       MyCollection.insert({ a : '7', b: '8'});
-      expect(meteorArray).to.be.equalCollection(MyCollection);
-      expect($rootScope.$apply.called).to.be.true;
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
     });
 
     it('should update the array when an item is updated in the collection', function() {
       var anyItem = MyCollection.findOne({});
       MyCollection.update({ _id : anyItem._id }, { a : '7', b : '8'});
-      expect(meteorArray).to.be.equalCollection(MyCollection);
-      expect($rootScope.$apply.called).to.be.true;
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
     });
 
     it('should update the array when a collection item unset-field is assigned a deep-object', function() {
       var item = MyCollection.findOne();
       MyCollection.update(item._id, {$unset: {a: 1}});
       MyCollection.update(item._id, {a: {L1: {L2: {L3: 'v'}}}});
-      expect(meteorArray).to.be.equalCollection(MyCollection);
-      expect($rootScope.$apply.called).to.be.true;
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
     });
 
     it('should update the array when a collection item object-field is assigned a deep-object', function() {
       var item = MyCollection.findOne();
       MyCollection.update(item._id, {a: {}});
       MyCollection.update(item._id, {a: {L1: {L2: {L3: 'v'}}}});
-      expect(meteorArray).to.be.equalCollection(MyCollection);
-      expect($rootScope.$apply.called).to.be.true;
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
     });
 
     it('should update the array when a collection item array-field is assigned a deep-object', function() {
       var item = MyCollection.findOne();
       MyCollection.update(item._id, {a: []});
       MyCollection.update(item._id, {a: {L1: {L2: {L3: 'v'}}}});
-      expect(meteorArray).to.be.equalCollection(MyCollection);
-      expect($rootScope.$apply.called).to.be.true;
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
     });
 
     it('should update the array when a collection item primitive-field is assigned a deep-object', function() {
       var item = MyCollection.findOne();
       MyCollection.update(item._id, {a: 1});
       MyCollection.update(item._id, {a: {L1: {L2: {L3: 'v'}}}});
-      expect(meteorArray).to.be.equalCollection(MyCollection);
-      expect($rootScope.$apply.called).to.be.true;
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
     });
 
     it('should update the array when a collection item falsy primitive-field is assigned a deep-object', function() {
       var item = MyCollection.findOne();
       MyCollection.update(item._id, {a: 0});
       MyCollection.update(item._id, {a: {L1: {L2: {L3: 'v'}}}});
-      expect(meteorArray).to.be.equalCollection(MyCollection);
-      expect($rootScope.$apply.called).to.be.true;
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
     });
 
     it('should update the array when a collection item null-field is assigned a deep-object', function() {
       var item = MyCollection.findOne();
       MyCollection.update(item._id, {a: null});
       MyCollection.update(item._id, {a: {L1: {L2: {L3: 'v'}}}});
-      expect(meteorArray).to.be.equalCollection(MyCollection);
-      expect($rootScope.$apply.called).to.be.true;
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
     });
 
     it('should update the array when a collection item null-field is assigned a shallow-object', function() {
       var item = MyCollection.findOne();
       MyCollection.update(item._id, {a: null});
       MyCollection.update(item._id, {a: {subfield: 'v'}});
-      expect(meteorArray).to.be.equalCollection(MyCollection);
-      expect($rootScope.$apply.called).to.be.true;
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
     });
 
     it('should update the array when a collection item null-field is assigned a array-object', function() {
       var item = MyCollection.findOne();
       MyCollection.update(item._id, {a: null});
       MyCollection.update(item._id, {a: [1, 2, 3]});
-      expect(meteorArray).to.be.equalCollection(MyCollection);
-      expect($rootScope.$apply.called).to.be.true;
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
     });
 
     it('should update the array when a collection item nested-object is nulled', function() {
       var item = MyCollection.findOne();
       MyCollection.update(item._id, {a: {subfield: 'v'}});
       MyCollection.update(item._id, {a: null});
-      expect(meteorArray).to.be.equalCollection(MyCollection);
-      expect($rootScope.$apply.called).to.be.true;
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
     });
 
     it('should update the array when a collection item non-null-subfield is nulled', function() {
       var item = MyCollection.findOne();
       MyCollection.update(item._id, {a: {subfield: 'v'}});
       MyCollection.update(item._id, {a: {subfield: null}});
-      expect(meteorArray).to.be.equalCollection(MyCollection);
-      expect($rootScope.$apply.called).to.be.true;
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
     });
 
     it('should update the array when a collection item null-subfield is assigned a primitive', function() {
       var item = MyCollection.findOne();
       MyCollection.update(item._id, {a: {subfield: null}});
       MyCollection.update(item._id, {a: {subfield: 'v'}});
-      expect(meteorArray).to.be.equalCollection(MyCollection);
-      expect($rootScope.$apply.called).to.be.true;
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
     });
 
     it('should update the array when a collection item null-subfield is assigned a array-object', function() {
       var item = MyCollection.findOne();
       MyCollection.update(item._id, {a: {subfield: null}});
       MyCollection.update(item._id, {a: {subfield: [1, 2, 3]}});
-      expect(meteorArray).to.be.equalCollection(MyCollection);
-      expect($rootScope.$apply.called).to.be.true;
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
     });
 
     it('should update the array when a collection item deep-field is assigned a primitive', function() {
       var item = MyCollection.findOne();
       MyCollection.update(item._id, {a: {L1: {L2: {L3: 0}}}});
       MyCollection.update(item._id, {a: {L1: {L2: {L3: 1}}}});
-      expect(meteorArray).to.be.equalCollection(MyCollection);
-      expect($rootScope.$apply.called).to.be.true;
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
     });
 
     it('should update the array when a collection item deep-field is assigned a deep-object', function() {
       var item = MyCollection.findOne();
       MyCollection.update(item._id, {a: {L1: null}});
       MyCollection.update(item._id, {a: {L1: {L2: {L3: 1}}}});
-      expect(meteorArray).to.be.equalCollection(MyCollection);
-      expect($rootScope.$apply.called).to.be.true;
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
     });
 
     it('should update the array when an item is removed from the collection', function() {
       var anyItem = MyCollection.findOne({});
       MyCollection.remove({ _id : anyItem._id });
-      expect(meteorArray).to.be.equalCollection(MyCollection);
-      expect($rootScope.$apply.called).to.be.true;
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
     });
 
     it('should update the array when multiple changes occur on the collection', function() {
@@ -202,8 +187,8 @@ describe('$meteorCollection service', function() {
       MyCollection.remove({ _id : anyItem._id });
       MyCollection.update({ _id : anotherItem }, { $set : { b : '100 '}});
       MyCollection.insert({ a : '7', b : '8'});
-      expect(meteorArray).to.be.equalCollection(MyCollection);
-      expect($rootScope.$apply.called).to.be.true;
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
     });
   });
 
@@ -211,7 +196,7 @@ describe('$meteorCollection service', function() {
   describe('reactive cursor', function() {
     it('should update the array when the reactive cursor function recomputes', function() {
       var dependency = new Tracker.Dependency();
-      var reactiveFunc = sinon.spy(function() {
+      var reactiveFunc = jasmine.createSpy().and.callFake(function() {
         dependency.depend();
         return MyCollection.find({});
       });
@@ -221,10 +206,11 @@ describe('$meteorCollection service', function() {
       dependency.changed();
       Tracker.flush();
 
-      expect(reactiveFunc.called).to.be.true;
-      expect(meteorReactiveArray).to.be.equalCollection(MyCollection);
+      expect(reactiveFunc).toHaveBeenCalled();
+      expect(meteorReactiveArray).toEqualCollection(MyCollection);
     });
   });
+
 
   describe('autobind off', function() {
     var notAutoArray;
@@ -242,11 +228,11 @@ describe('$meteorCollection service', function() {
 
       $rootScope.$apply();
 
-      expect(newItem).not.to.be.inCollection(MyCollection);
+      expect(newItem).not.toBeFoundExactlyInCollection(MyCollection);
     });
 
     it('should not save an item from the server when an item is received from the server', function() {
-      var saveSpy = sinon.spy(notAutoArray, 'save');
+      var saveSpy = spyOn(notAutoArray, 'save').and.callThrough();
 
       MyCollection.insert({
         a : 10,
@@ -255,10 +241,11 @@ describe('$meteorCollection service', function() {
 
       $timeout.flush();
 
-      expect(saveSpy.called).to.be.false;
-      expect(notAutoArray).to.be.equalCollection(MyCollection);
+      expect(saveSpy).not.toHaveBeenCalled();
+      expect(notAutoArray).toEqualCollection(MyCollection);
     });
   });
+
 
   describe('autobind on', function() {
     beforeEach(function() {
@@ -269,19 +256,19 @@ describe('$meteorCollection service', function() {
     it('should update the collection when a new item is pushed into the array', function() {
       meteorArray.push({a: '7', b: '8'});
       $rootScope.$apply();
-      expect(meteorArray).to.be.equalCollection(MyCollection);
+      expect(meteorArray).toEqualCollection(MyCollection);
     });
 
     it('should update the collection when an item is changed in the array', function() {
       meteorArray[0].a = 888;
       $rootScope.$apply();
-      expect(meteorArray).to.be.equalCollection(MyCollection);
+      expect(meteorArray).toEqualCollection(MyCollection);
     });
 
     it('should update the collection when an item is removed from the array', function() {
       meteorArray.splice(0, 1);
       $rootScope.$apply();
-      expect(meteorArray).to.be.equalCollection(MyCollection);
+      expect(meteorArray).toEqualCollection(MyCollection);
     });
 
     it('should update the collection when a subarray is spliced', function() {
@@ -294,7 +281,7 @@ describe('$meteorCollection service', function() {
       obj.arr.splice(1, 1);
       $rootScope.$apply();
 
-      expect(obj).to.deep.equal(expectedObj);
+      expect(obj).toDeepEqual(expectedObj);
     });
   });
 
@@ -312,21 +299,21 @@ describe('$meteorCollection service', function() {
       meteorArray.remove(items[0]._id);
 
       $rootScope.$apply();
-      expect(meteorArray).to.be.equalCollection(MyCollection);
-      expect(meteorArray.length).to.equal(length - 2);
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect(meteorArray.length).toEqual(length - 2);
     });
 
     it('removing all', function() {
       meteorArray.remove();
       $rootScope.$apply();
-      expect(meteorArray).to.be.equalCollection(MyCollection);
-      expect(meteorArray.length).to.equal(0);
+      expect(meteorArray).toEqualCollection(MyCollection);
+      expect(meteorArray.length).toEqual(0);
     });
 
     it('throws if not string or ObjectId', function() {
-      expect(function() {
-        meteorArray.remove(1231231);
-      }).to.throw();
+        expect(function() {
+          meteorArray.remove(1231231);
+        }).toThrow();
     });
 
     it('removing with ObjectId', function() {
@@ -348,7 +335,7 @@ describe('$meteorCollection service', function() {
       var doc = { _id: 'unexist-doc' };
 
       $scope.collection.save(doc);
-      expect(Collection.findOne(doc)).to.deep.equal(doc);
+      expect(Collection.findOne(doc)).toDeepEqual(doc);
     });
 
     it('should update an existing document and digest', function() {
@@ -357,7 +344,7 @@ describe('$meteorCollection service', function() {
 
       doc.a = 1;
       $scope.collection.save(doc);
-      expect(Collection.findOne(doc)).to.deep.equal(doc);
+      expect(Collection.findOne(doc)).toDeepEqual(doc);
       $rootScope.$apply();
     });
 
@@ -368,12 +355,8 @@ describe('$meteorCollection service', function() {
       beforeEach(function() {
         Collection = new Meteor.Collection(null);
         ngCollection = $meteorCollection(Collection);
-        sinon.spy(Collection, 'update');
+        spyOn(Collection, 'update').and.callThrough();
         $timeout.flush();
-      });
-
-      afterEach(function() {
-        Collection.update.restore();
       });
 
       it('should perform each operation individually in parallel', function(done) {
@@ -388,12 +371,13 @@ describe('$meteorCollection service', function() {
 
         ngCollection._updateParallel(id, updates, function(err, affectedDocsNum) {
           if (err) return done(err);
-          expect(affectedDocsNum).to.equal(1);
+          expect(affectedDocsNum).toEqual(1);
 
           var doc = Collection.findOne(id);
-          expect(doc).to.deep.equal({_id: id, data: [1, 3]});
-          expect(Collection.update.callCount).to.equal(2);
-          expect(Collection.update.calledWith(id, update1, sinon.match.func)).to.be.true;
+          expect(doc).toDeepEqual({_id: id, data: [1, 3]});
+          expect(Collection.update.calls.count()).toEqual(2);
+          expect(Collection.update.calls.argsFor(0)).toEqual([id, update1, jasmine.any(Function)]);
+          expect(Collection.update.calls.argsFor(1)).toEqual([id, update2, jasmine.any(Function)]);
           done();
         });
       });
@@ -406,12 +390,8 @@ describe('$meteorCollection service', function() {
       beforeEach(function() {
         Collection = new Meteor.Collection(null);
         ngCollection = $meteorCollection(Collection);
-        sinon.spy(ngCollection, '_updateParallel');
+        spyOn(ngCollection, '_updateParallel');
         $timeout.flush();
-      });
-
-      afterEach(function() {
-        ngCollection._updateParallel.restore();
       });
 
       it('should seperate pull operations into different updates', function() {
@@ -423,8 +403,8 @@ describe('$meteorCollection service', function() {
         var callback = function() {};
 
         ngCollection._updateDiff(id, update, callback);
-        expect(ngCollection._updateParallel.called).to.be.true;
-        expect(ngCollection._updateParallel.calledWith(id, updates, callback)).to.be.true;
+        expect(ngCollection._updateParallel).toHaveBeenCalled();
+        expect(ngCollection._updateParallel.calls.argsFor(0)).toEqual([id, updates, callback]);
       });
     });
 
@@ -433,7 +413,7 @@ describe('$meteorCollection service', function() {
       var doc2 = { _id: 'second-doc' };
       var docs = [doc1, doc2];
       $scope.collection.save(docs);
-      expect(Collection.find().fetch()).to.deep.equal(docs);
+      expect(Collection.find().fetch()).toDeepEqual(docs);
     });
 
     describe('objects with $$hashkey', function() {
@@ -448,46 +428,47 @@ describe('$meteorCollection service', function() {
 
         meteorArray.save();
 
-        expect({a: 444, b: 2}).to.be.inCollection(MyCollection);
+        expect({a: 444, b: 2}).toBeFoundExactlyInCollection(MyCollection);
       });
 
       it('should save objects with nested $$haskey fields when save is called', function() {
         meteorArray.save(itemWithNestedHashkeyArrays);
 
-        expect(itemWithNestedHashkeysRemoved).to.be.inCollection(MyCollection);
+        expect(itemWithNestedHashkeysRemoved).toBeFoundExactlyInCollection(MyCollection);
       });
     });
 
     describe('objects with date', function() {
       it('should be saved to the collection when save is called', function() {
-          var itemChanged = meteorArray[0];
-          itemChanged.a = new Date("October 13, 2014 11:13:00");
+        var itemChanged = meteorArray[0];
+        itemChanged.a = new Date("October 13, 2014 11:13:00");
 
-          meteorArray.save();
-          expect({a: new Date("October 13, 2014 11:13:00"), b: 2}).to.be.inCollection(MyCollection);
+        meteorArray.save();
+        expect({a: new Date("October 13, 2014 11:13:00"), b: 2})
+          .toBeFoundExactlyInCollection(MyCollection);
+      });
 
-        it('should save objects with nested date fields when save is called', function() {
-          meteorArray.save(itemWithNestedDateFields);
+      it('should save objects with nested date fields when save is called', function() {
+        meteorArray.save(itemWithNestedDateFields);
 
-          expect(itemWithNestedDateFields).to.be.inCollection(MyCollection);
-        });
+        expect(itemWithNestedDateFields).toBeFoundExactlyInCollection(MyCollection);
+      });
 
-        it('should be inserted to the collection if not exist', function() {
-          var id = 'date-doc';
-          var doc = { _id: id, date: new Date() };
-          $scope.collection.save(doc);
-          expect(Collection.findOne(id)).to.deep.equal(doc);
-        });
+      it('should be inserted to the collection if not exist', function() {
+        var id = 'date-doc';
+        var doc = { _id: id, date: new Date() };
+        $scope.collection.save(doc);
+        expect(Collection.findOne(id)).toDeepEqual(doc);
+      });
 
-        it('should update an auto binded collection', function() {
-          var id = 'date-doc';
-          var doc = { _id: id, date: new Date() };
-          $scope.collection = $scope.$meteorCollection(Collection, true);
-          Collection.insert(doc);
+      it('should update an auto binded collection', function() {
+        var id = 'date-doc';
+        var doc = { _id: id, date: new Date() };
+        $scope.collection = $scope.$meteorCollection(Collection, true);
+        Collection.insert(doc);
 
-          Tracker.flush();
-          expect(_.findWhere($scope.collection, { _id: id })).to.deep.equal(doc);
-        });
+        Tracker.flush();
+        expect(_.findWhere($scope.collection, { _id: id })).toDeepEqual(doc);
       });
     });
   });
@@ -508,11 +489,11 @@ describe('$meteorCollection service', function() {
       var $ngCol = $meteorCollection(DummyCollection);
       $timeout.flush();
 
-      expect($rootScope.$apply.called).to.be.true;
-      expect($ngCol).to.be.equalCollection(DummyCollection);
+      expect($rootScope.$apply).toHaveBeenCalled();
+      expect($ngCol).toEqualCollection(DummyCollection);
       // No matter how much elements MyCollection contains
       // $rootScope.$apply should be called twice.
-      expect($rootScope.$apply.callCount).to.equal(2);
+      expect($rootScope.$apply.calls.count()).toEqual(2);
     });
 
     it('push updates from client handled correctly', function() {
@@ -524,7 +505,7 @@ describe('$meteorCollection service', function() {
         });
       // A collection with no name can't be found so we'll need to pass it
       }, false, DummyCollection);
-      sinon.spy($ngCol, 'save');
+      spyOn($ngCol, 'save');
 
       // Adds docs on the client.
       for (var i = 100; i < 106; i++) {
@@ -532,8 +513,9 @@ describe('$meteorCollection service', function() {
       }
 
       $timeout.flush();
-      expect($ngCol.length).to.equal(10);
-      expect($ngCol.save.calledOnce).to.be.true;
+      expect($ngCol.length).toEqual(10);
+      expect($ngCol.save).toHaveBeenCalled();
+      expect($ngCol.save.calls.count()).toEqual(1);
     });
 
     it('remove updates from client handled correctly', function() {
@@ -545,7 +527,7 @@ describe('$meteorCollection service', function() {
         });
       // A collection with no name can't be found so we'll need to pass it
       }, false, DummyCollection);
-      sinon.spy($ngCol, 'remove');
+      spyOn($ngCol, 'remove').and.callThrough();
 
       // Removes last two docs on the client.
       $ngCol.pop();
@@ -555,8 +537,9 @@ describe('$meteorCollection service', function() {
 
       // Size should stay at 10 after removing because
       // limit is set.
-      expect($ngCol.length).to.equal(10);
-      expect($ngCol.remove.calledOnce).to.be.true;
+      expect($ngCol.length).toEqual(10);
+      expect($ngCol.remove).toHaveBeenCalled();
+      expect($ngCol.remove.calls.count()).toEqual(1);
     });
   });
 });

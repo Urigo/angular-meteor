@@ -1,13 +1,3 @@
-import 'angular-meteor';
-
-import jsondiffpatch from 'jsondiffpatch';
-import {chai} from 'meteor/practicalmeteor:chai';
-import {sinon} from 'meteor/practicalmeteor:sinon';
-
-const expect = chai.expect;
-
-import {DummyCollection} from '../collections';
-
 describe('angular-meteor.reactive', function() {
   beforeEach(angular.mock.module('angular-meteor'));
 
@@ -38,7 +28,7 @@ describe('angular-meteor.reactive', function() {
 
     Tracker.flush();
 
-    expect(vm.$$dependencies.parties._dependentsById[c._id]).to.be.undefined;
+    expect(vm.$$dependencies.parties._dependentsById[c._id]).toBe(undefined);
   });
 
   describe('$$Reactive', function() {
@@ -48,9 +38,9 @@ describe('angular-meteor.reactive', function() {
 
     it('should extend child scope', function() {
       var scope = $rootScope.$new();
-      expect(scope.helpers).to.be.a('function');
-      expect(scope.getReactively).to.be.a('function');
-      expect(scope.getCollectionReactively).to.be.a('function');
+      expect(scope.helpers).toEqual(jasmine.any(Function));
+      expect(scope.getReactively).toEqual(jasmine.any(Function));
+      expect(scope.getCollectionReactively).toEqual(jasmine.any(Function));
     });
 
     describe('helpers()', function() {
@@ -73,7 +63,7 @@ describe('angular-meteor.reactive', function() {
           }
         });
 
-        expect(vm.helper).to.equal(10);
+        expect(vm.helper).toEqual(10);
       });
 
       it('should register a string helper', function () {
@@ -83,7 +73,7 @@ describe('angular-meteor.reactive', function() {
           }
         });
 
-        expect(vm.helper).to.equal('str');
+        expect(vm.helper).toEqual('str');
       });
 
       it('should register an object helper', function () {
@@ -98,7 +88,7 @@ describe('angular-meteor.reactive', function() {
           }
         });
 
-        expect(vm.helper).to.equal(obj);
+        expect(vm.helper).toEqual(obj);
       });
 
       it('should register an array helper', function () {
@@ -110,7 +100,7 @@ describe('angular-meteor.reactive', function() {
           }
         });
 
-        expect(vm.helper).to.equal(arr);
+        expect(vm.helper).toEqual(arr);
       });
 
       it('should override a pre-defined helper', function () {
@@ -122,7 +112,7 @@ describe('angular-meteor.reactive', function() {
           }
         });
 
-        expect(vm.helper).to.equal('bar');
+        expect(vm.helper).toEqual('bar');
       });
 
       it('should register cursor helper as an array', function () {
@@ -132,7 +122,7 @@ describe('angular-meteor.reactive', function() {
           }
         });
 
-        expect(vm.helper).to.be.an('array');
+        expect(vm.helper).toEqual(jasmine.any(Array));
       });
 
       it('should update cursor helper as collection gets updated', function () {
@@ -148,12 +138,12 @@ describe('angular-meteor.reactive', function() {
           _id: 'my-doc'
         });
 
-        expect(vm.helper).to.be.an('array');
-        expect(vm.helper.length).to.equal(1);
+        expect(vm.helper).toEqual(jasmine.any(Array));
+        expect(vm.helper.length).toEqual(1);
 
         DummyCollection.remove({_id: 'my-doc'});
-        expect(vm.helper).to.be.an('array');
-        expect(vm.helper.length).to.equal(0);
+        expect(vm.helper).toEqual(jasmine.any(Array));
+        expect(vm.helper.length).toEqual(0);
       });
 
       it('should register fetch result helper as an array', function () {
@@ -163,7 +153,7 @@ describe('angular-meteor.reactive', function() {
           }
         });
 
-        expect(vm.helper).to.be.an('array');
+        expect(vm.helper).toEqual(jasmine.any(Array));
       });
 
       it('should update cursor helper once a new document is added', function () {
@@ -175,8 +165,8 @@ describe('angular-meteor.reactive', function() {
 
         var doc = { _id: 'my-doc' };
         DummyCollection.insert(doc);
-        expect(vm.helper.length).to.equal(1);
-        expect(vm.helper[0]).to.deep.equal(doc);
+        expect(vm.helper.length).toEqual(1);
+        expect(vm.helper[0]).toEqual(doc);
       });
 
       it('should update cursor helper once a document is removed', function () {
@@ -190,7 +180,7 @@ describe('angular-meteor.reactive', function() {
         });
 
         DummyCollection.remove(doc);
-        expect(vm.helper.length).to.equal(0);
+        expect(vm.helper.length).toEqual(0);
       });
 
       it('should update cursor helper once a document is updated', function () {
@@ -208,9 +198,9 @@ describe('angular-meteor.reactive', function() {
         DummyCollection.insert(doc);
         DummyCollection.update({ _id: 'my-doc' }, { $set: { prop: 'bar' } });
 
-        expect(vm.helper.length).to.equal(1);
-        expect(vm.helper[0]).to.be.ok;
-        expect(vm.helper[0].prop).to.equal('bar');
+        expect(vm.helper.length).toEqual(1);
+        expect(vm.helper[0]).toBeDefined();
+        expect(vm.helper[0].prop).toEqual('bar');
       });
 
       it('should update cursor helper in the right order', function () {
@@ -225,24 +215,24 @@ describe('angular-meteor.reactive', function() {
           prop: 'B'
         });
 
-        expect(vm.helper.length).to.equal(1);
-        expect(vm.helper[0]).to.be.ok;
-        expect(vm.helper[0].prop).to.equal('B');
+        expect(vm.helper.length).toEqual(1);
+        expect(vm.helper[0]).toBeDefined();
+        expect(vm.helper[0].prop).toEqual('B');
 
         DummyCollection.insert({
           _id: 'my-doc#2',
           prop: 'A'
         });
 
-        expect(vm.helper.length).to.equal(2);
-        expect(vm.helper[0]).to.be.ok;
-        expect(vm.helper[1]).to.be.ok;
-        expect(vm.helper[0].prop).to.equal('A');
-        expect(vm.helper[1].prop).to.equal('B');
+        expect(vm.helper.length).toEqual(2);
+        expect(vm.helper[0]).toBeDefined();
+        expect(vm.helper[1]).toBeDefined();
+        expect(vm.helper[0].prop).toEqual('A');
+        expect(vm.helper[1].prop).toEqual('B');
       });
 
       it('should digest once collection is updated', function () {
-        var digest = sinon.spy(scope, '$digest');
+        var digest = spyOn(scope, '$digest').and.callThrough();
 
         vm.helpers({
           helper: function () {
@@ -251,8 +241,7 @@ describe('angular-meteor.reactive', function() {
         });
 
         DummyCollection.insert({});
-        expect(digest.called).to.be.true;
-        digest.restore();
+        expect(digest).toHaveBeenCalled();
       });
 
       it('should use view model as context for helpers', function() {
@@ -262,7 +251,7 @@ describe('angular-meteor.reactive', function() {
           }
         });
 
-        expect(vm.helper).to.equal(vm);
+        expect(vm.helper).toEqual(vm);
       });
 
       it('should NOT trigger autorun dependencies when using object and adding a sub property', function () {
@@ -282,13 +271,13 @@ describe('angular-meteor.reactive', function() {
         scope.$$throttledDigest();
         Tracker.flush();
 
-        expect(calls).to.equal(1);
+        expect(calls).toEqual(1);
         vm.prop.newSubProp = 20;
 
         scope.$$throttledDigest();
         Tracker.flush();
 
-        expect(calls).to.equal(1);
+        expect(calls).toEqual(1);
       });
 
       it('should trigger autorun dependencies when using object and adding a sub property while watching deep', function () {
@@ -308,17 +297,17 @@ describe('angular-meteor.reactive', function() {
         scope.$$throttledDigest();
         Tracker.flush();
 
-        expect(calls).to.equal(1);
+        expect(calls).toEqual(1);
         vm.prop.newSubProp = 20;
 
         scope.$$throttledDigest();
         Tracker.flush();
 
-        expect(calls).to.equal(2);
+        expect(calls).toEqual(2);
       });
 
       it('should NOT reactivate cursors', function() {
-        expect(scope.$$watchersCount).to.equal(0);
+        expect(scope.$$watchersCount).toEqual(0);
 
         vm.helpers({
           helper: function() {
@@ -326,7 +315,7 @@ describe('angular-meteor.reactive', function() {
           }
         });
 
-        expect(scope.$$watchersCount).to.equal(0);
+        expect(scope.$$watchersCount).toEqual(0);
       });
 
       it('should NOT trigger autorun dependencies when using array and adding an element sub property while watching as a collection', function () {
@@ -345,13 +334,13 @@ describe('angular-meteor.reactive', function() {
 
         scope.$apply();
         Tracker.flush();
-        expect(callCount).to.equal(1);
+        expect(callCount).toBe(1);
 
         vm.prop[0].newProp = 20;
         scope.$apply();
         Tracker.flush();
 
-        expect(callCount).to.equal(1);
+        expect(callCount).toBe(1);
       });
 
       it('should trigger autorun dependencies when using array and replacing an element while watching as a collection', function () {
@@ -368,13 +357,13 @@ describe('angular-meteor.reactive', function() {
 
         scope.$apply();
         Tracker.flush();
-        expect(callCount).to.equal(1);
+        expect(callCount).toBe(1);
 
         vm.prop[0] = 20;
         scope.$apply();
         Tracker.flush();
 
-        expect(callCount).to.equal(2);
+        expect(callCount).toBe(2);
       });
 
       it('should trigger autorun dependencies when using array and adding an element while watching as a collection', function () {
@@ -391,13 +380,13 @@ describe('angular-meteor.reactive', function() {
 
         scope.$apply();
         Tracker.flush();
-        expect(callCount).to.equal(1);
+        expect(callCount).toBe(1);
 
         vm.prop.push(20);
         scope.$apply();
         Tracker.flush();
 
-        expect(callCount).to.equal(2);
+        expect(callCount).toBe(2);
       });
 
       it('should NOT invoke the reactive function when internal observation updates', function () {
@@ -419,8 +408,8 @@ describe('angular-meteor.reactive', function() {
         scope.$apply();
         Tracker.flush();
 
-        expect(callCount).to.equal(1);
-        expect(vm.parties.length).to.equal(1);
+        expect(callCount).toEqual(1);
+        expect(vm.parties.length).toEqual(1);
       });
 
       it('should be able to register view model and scope helpers at the same time', function() {
@@ -432,10 +421,10 @@ describe('angular-meteor.reactive', function() {
           meetings() { return DummyCollection.find({}); }
         });
 
-        expect(scope.parties).to.be.ok;
-        expect(vm.parties).to.be.undefined;
-        expect(vm.meetings).to.be.ok;
-        expect(scope.meetings).to.be.undefined;
+        expect(scope.parties).toBeDefined();
+        expect(vm.parties).not.toBeDefined();
+        expect(vm.meetings).toBeDefined();
+        expect(scope.meetings).not.toBeDefined();
       });
 
       it('should register helpers on the specified context', function() {
@@ -443,8 +432,8 @@ describe('angular-meteor.reactive', function() {
           parties() { return DummyCollection.find({}); }
         });
 
-        expect(vm.parties).to.be.ok;
-        expect(scope.parties).to.be.undefined;
+        expect(vm.parties).toBeDefined();
+        expect(scope.parties).not.toBeDefined();
       });
 
       describe('should compare data between cursors', function() {
@@ -476,7 +465,7 @@ describe('angular-meteor.reactive', function() {
             patch: []
           };
 
-          sinon.stub(jsondiffpatch, 'diff', (lastModelData, modelData) => {
+          spyOn(jsondiffpatch, 'diff').and.callFake((lastModelData, modelData) => {
             // save lengths of arguments
             calls.diff.push([
               lastModelData.length,
@@ -484,7 +473,7 @@ describe('angular-meteor.reactive', function() {
             ]);
             return jsondiffpatchCopy.diff(lastModelData, modelData);
           });
-          sinon.stub(jsondiffpatch, 'patch', (lastModelData, diff) => {
+          spyOn(jsondiffpatch, 'patch').and.callFake((lastModelData, diff) => {
             // save length of only first argument
             calls.patch.push(lastModelData.length);
             return jsondiffpatchCopy.patch(lastModelData, diff);
@@ -503,17 +492,12 @@ describe('angular-meteor.reactive', function() {
           Tracker.flush();
         });
 
-        afterEach(() => {
-          jsondiffpatch.patch.restore();
-          jsondiffpatch.diff.restore();
-        });
-
         it('should not compare on initial data', function() {
-          expect(jsondiffpatch.patch.calledOnce).to.be.false;
-          expect(jsondiffpatch.diff.calledOnce).to.be.false;
+          expect(jsondiffpatch.patch).not.toHaveBeenCalled();
+          expect(jsondiffpatch.diff).not.toHaveBeenCalled();
           // also check actual result:
           // 2 docs with type:1
-          expect(vm.parties.length).to.equal(2);
+          expect(vm.parties.length).toEqual(2);
         });
 
         it('should compare old data with new data on cursor change', function() {
@@ -521,12 +505,12 @@ describe('angular-meteor.reactive', function() {
           scope.$apply();
           Tracker.flush();
 
-          expect(calls.diff[0][0]).to.equal(2);
-          expect(calls.diff[0][1]).to.equal(1);
-          expect(calls.patch[0]).to.equal(2);
+          expect(calls.diff[0][0]).toEqual(2);
+          expect(calls.diff[0][1]).toEqual(1);
+          expect(calls.patch[0]).toEqual(2);
           // also check actual result:
           // 1 doc with type:2
-          expect(vm.parties.length).to.equal(1);
+          expect(vm.parties.length).toEqual(1);
         });
       });
     });
@@ -542,59 +526,58 @@ describe('angular-meteor.reactive', function() {
 
       afterEach(function() {
         scope.$destroy();
-        if (Tracker.Dependency.restore)
-          Tracker.Dependency.restore();
       });
 
       it('should return model', function() {
         vm.myProp = 10;
-        expect(vm.getReactively('myProp')).to.equal(10);
+        expect(vm.getReactively('myProp')).toEqual(10);
       });
 
       it('should register a scope watcher', function() {
         vm.myProp = 'myProp';
-        var watch = sinon.spy(scope, '$watch');
+        var watch = spyOn(scope, '$watch');
 
         vm.getReactively('myProp');
-        expect(watch.calledWith(sinon.match.func, sinon.match.func, false)).to.be.true;
+        expect(watch).toHaveBeenCalledWith(jasmine.any(Function), jasmine.any(Function), false);
 
-        expect(watch.args[0][0]()).to.equal('myProp');
-        watch.restore();
+        var args = watch.calls.argsFor(0);
+        expect(args[0]()).toEqual('myProp');
       });
 
       it('should register a scope watcher with deep equality', function() {
         vm.myProp = 'myProp';
-        var watch = sinon.spy(scope, '$watch');
+        var watch = spyOn(scope, '$watch');
 
         vm.getReactively('myProp', true);
-        expect(watch.calledWith(sinon.match.func, sinon.match.func, true)).to.be.true;
+        expect(watch).toHaveBeenCalledWith(jasmine.any(Function), jasmine.any(Function), true);
 
-        expect(watch.args[0][0]()).to.equal('myProp');
-        watch.restore();
+        var args = watch.calls.argsFor(0);
+        expect(args[0]()).toEqual('myProp');
       });
 
       it('should register a scope watcher with shallow equality', function() {
         vm.myProp = 'myProp';
-        var watch = sinon.spy(scope, '$watch');
+        var watch = spyOn(scope, '$watch');
 
         vm.getReactively('myProp', false);
-        expect(watch.calledWith(sinon.match.func, sinon.match.func, false)).to.be.true;
+        expect(watch).toHaveBeenCalledWith(jasmine.any(Function), jasmine.any(Function), false);
 
-        expect(watch.args[0][0]()).to.equal('myProp');
+        var args = watch.calls.argsFor(0);
+        expect(args[0]()).toEqual('myProp');
       });
 
       it('should register a tracker dependency', function() {
         vm.myProp = 10;
 
         vm.getReactively('myProp');
-        expect(vm.$$dependencies).to.be.ok;
-        expect(vm.$$dependencies.myProp).to.be.ok;
+        expect(vm.$$dependencies).toBeDefined();
+        expect(vm.$$dependencies.myProp).toBeDefined();
       });
 
       it('should create a dependency object for the reactive property', function() {
         vm.myProp = 10;
 
-        var depCtorSpy = sinon.stub(Tracker, 'Dependency', function() {
+        var depCtorSpy = spyOn(Tracker, 'Dependency').and.callFake(function() {
           return {
             depend: angular.noop,
             changed: angular.noop
@@ -602,14 +585,15 @@ describe('angular-meteor.reactive', function() {
         });
 
         vm.getReactively('myProp');
-        expect(depCtorSpy.calledOnce).to.be.true;
+        expect(depCtorSpy).toHaveBeenCalled();
+        expect(depCtorSpy.calls.count()).toEqual(1);
       });
 
       it('should trigger the dependency logic when the watch callback is called', function() {
         vm.myProp = 10;
-        var changedSpy = sinon.spy();
+        var changedSpy = jasmine.createSpy('changed');
 
-        sinon.stub(Tracker, 'Dependency', function() {
+        spyOn(Tracker, 'Dependency').and.callFake(function() {
           return {
             depend: angular.noop,
             changed: changedSpy
@@ -622,7 +606,7 @@ describe('angular-meteor.reactive', function() {
         vm.myProp = 20;
         scope.$$throttledDigest();
 
-        expect(changedSpy.called).to.be.true;
+        expect(changedSpy).toHaveBeenCalled();
       });
 
       it('should be able to get properties reactively of both view model and scope at the same time', function() {
@@ -633,13 +617,13 @@ describe('angular-meteor.reactive', function() {
           actualValue = scope.getReactively('myProp');
         });
 
-        expect(actualValue).to.equal('initial');
+        expect(actualValue).toEqual('initial');
 
         scope.myProp = 'changed';
         scope.$$throttledDigest();
         Tracker.flush();
 
-        expect(actualValue).to.equal('changed');
+        expect(actualValue).toEqual('changed');
       });
 
       it('should get properties reactively from a specified context', function() {
@@ -650,13 +634,13 @@ describe('angular-meteor.reactive', function() {
           actualValue = scope.getReactively(vm, 'myProp');
         });
 
-        expect(actualValue).to.equal('initial');
+        expect(actualValue).toEqual('initial');
 
         vm.myProp = 'changed';
         scope.$$throttledDigest();
         Tracker.flush();
 
-        expect(actualValue).to.equal('changed');
+        expect(actualValue).toEqual('changed');
       });
     });
 
@@ -675,17 +659,18 @@ describe('angular-meteor.reactive', function() {
 
       it('should return model', function() {
         vm.myProp = 10;
-        expect(vm.getCollectionReactively('myProp')).to.equal(10);
+        expect(vm.getCollectionReactively('myProp')).toEqual(10);
       });
 
       it ('should register a scope collection watcher', function() {
         vm.myProp = 'myProp';
-        var watchSpy = sinon.spy(scope, '$watchCollection');
+        var watchSpy = spyOn(scope, '$watchCollection');
 
         vm.getCollectionReactively('myProp', false);
-        expect(watchSpy.calledWith(sinon.match.func, sinon.match.func)).to.be.true;
+        expect(watchSpy).toHaveBeenCalledWith(jasmine.any(Function), jasmine.any(Function));
 
-        expect(watchSpy.args[0][0]()).to.equal('myProp');
+        var args = watchSpy.calls.argsFor(0);
+        expect(args[0]()).toEqual('myProp');
       });
     });
   });

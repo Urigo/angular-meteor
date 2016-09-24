@@ -1,10 +1,3 @@
-import 'angular-meteor';
-
-import {chai} from 'meteor/practicalmeteor:chai';
-import {sinon} from 'meteor/practicalmeteor:sinon';
-
-const expect = chai.expect;
-
 describe('$meteorMethods service', function() {
   var $meteorMethods;
   var $rootScope;
@@ -18,19 +11,15 @@ describe('$meteorMethods service', function() {
 
   describe('call()', function() {
     beforeEach(function() {
-      sinon.stub(Meteor, 'call', function() {
+      spyOn(Meteor, 'call').and.callFake(function() {
         var callback = _.last(arguments);
         callback();
       });
     });
 
-    afterEach(function() {
-      Meteor.call.restore();
-    });
-
     it('should call method and return a promise', function(done) {
       var promise = $meteorMethods.call(1, 2, 3);
-      expect(Meteor.call.calledWith(1, 2, 3, sinon.match.func)).to.be.true;
+      expect(Meteor.call).toHaveBeenCalledWith(1, 2, 3, jasmine.any(Function));
       promise.then(done);
       $rootScope.$apply();
     });
