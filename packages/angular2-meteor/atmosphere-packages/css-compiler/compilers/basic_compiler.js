@@ -12,7 +12,7 @@ BasicCompiler = class BasicCompiler {
     const sourcePath = inputFile.getPathInPackage();
     const targetPath = ex !== 'css' ? sourcePath + '.css' : sourcePath;
  
-  // Combine all styles from other than imports folders.
+    // Combine all styles from other than imports folders.
     if (sourcePath.indexOf('imports') === -1) {
       inputFile.addStylesheet({
         data: result.css,
@@ -46,16 +46,21 @@ BasicCompiler = class BasicCompiler {
       path: urlPath
     });
 
-    // Export current template as a JS-module, which
-    // means imports as follows now make sense:
-    //   import style from 'path/to/style.css'
-    //
-    // JS-module is being added as 'lazy', i.e.
-    // it'll appear on the client only if it's
-    // explicitly imported somewhere in the code base.
-    let css = Babel.compile('const css = "' + jsStringEscape(resultCss) + '"; module.exports.default = css;');
+    /*
+     * Export current template as a JS-module, which
+     * means imports as follows now make sense:
+     *   import style from 'path/to/style.css'
+     *
+     * JS-module is being added as 'lazy', i.e.
+     * it'll appear on the client only if it's
+     * explicitly imported somewhere in the code base.
+     **/
+    let cssCode = `
+      var css = '${jsStringEscape(resultCss)}';
+      module.exports.default = css;
+    `;
     inputFile.addJavaScript({
-      data: css.code,
+      data: cssCode,
       path: sourcePath,
       lazy: true
     });
