@@ -1,3 +1,4 @@
+const jsStringEscape = Npm.require('js-string-escape');
 
 /**
  * Contains addCompileResult that decides 
@@ -52,10 +53,7 @@ BasicCompiler = class BasicCompiler {
     // JS-module is being added as 'lazy', i.e.
     // it'll appear on the client only if it's
     // explicitly imported somewhere in the code base.
-    let css = Babel.compile(`
-      const css = \`${resultCss}\`;
-      module.exports.default = css;`
-    );
+    let css = Babel.compile('const css = "' + jsStringEscape(resultCss) + '"; module.exports.default = css;');
     inputFile.addJavaScript({
       data: css.code,
       path: sourcePath,
