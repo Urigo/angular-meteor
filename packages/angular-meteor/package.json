@@ -13,9 +13,9 @@
   "scripts": {
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "lint": "eslint .",
-    "pretest": "npm run build:dist",
-    "test": "velocity test-packages ./tests --ci",
-    "test:watch": "parallelshell \"npm run watch\" \"velocity test-packages ./tests\"",
+    "pretest": "cd tests && npm install",
+    "test": "cd tests && meteor test --once --driver-package=dispatch:mocha-phantomjs",
+    "test:watch": "cd tests && meteor test --driver-package=practicalmeteor:mocha",
     "dev:start": "node scripts/dev.js",
     "dev:stop": "node scripts/dev.js --stop",
     "watch": "webpack --watch --progress --config webpack/dist.js",

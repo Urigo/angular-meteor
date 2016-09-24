@@ -1,3 +1,10 @@
+import 'angular-meteor';
+
+import {chai} from 'meteor/practicalmeteor:chai';
+import {sinon} from 'meteor/practicalmeteor:sinon';
+
+const expect = chai.expect;
+
 describe('$meteorUtils service', function () {
 
   var $meteorUtils, $scope, $rootScope;
@@ -23,13 +30,13 @@ describe('$meteorUtils service', function () {
 
       var coll = $meteorUtils.getCollectionByName('aCollection');
 
-      expect(coll).toEqual(jasmine.any(Mongo.Collection));
-      expect(coll._name).toEqual(collectionName);
+      expect(coll).to.be.an.instanceof(Mongo.Collection);
+      expect(coll._name).to.equal(collectionName);
     });
 
     it('should return "undefined" when called with a non-existing collection', function () {
       var output = $meteorUtils.getCollectionByName('myCollectionFake');
-      expect(output).toBeUndefined();
+      expect(output).to.be.undefined;
     });
   });
 
@@ -37,7 +44,7 @@ describe('$meteorUtils service', function () {
 
     it('should return a stoppable computation handle', function () {
       var dependency = new Tracker.Dependency();
-      var computationSpy = jasmine.createSpy('computationSpy').and.callFake(function() {
+      var computationSpy = sinon.spy(function() {
         dependency.depend();
       });
 
@@ -46,7 +53,7 @@ describe('$meteorUtils service', function () {
       dependency.changed();
       Tracker.flush();
 
-      expect(computationSpy.calls.count()).toBe(1);
+      expect(computationSpy.calledOnce).to.be.true;
     });
 
     it('should call $scope.$apply() when dependency changes', angular.mock.inject(function($timeout) {
@@ -54,20 +61,20 @@ describe('$meteorUtils service', function () {
       $meteorUtils.autorun($scope, function fn() {
         dependency.depend();
       });
-      spyOn($rootScope, '$apply');
+      sinon.stub($rootScope, '$apply');
 
       dependency.changed();
       Tracker.flush();
       $timeout.flush();
 
-      expect($scope.$apply).toHaveBeenCalled();
+      expect($scope.$apply.calledOnce).to.be.true;
     }));
 
     it('should stop the computation when the collection is destroyed', function() {
       var handle = $meteorUtils.autorun($scope, function fn() {});
-      spyOn(handle, 'stop');
+      sinon.stub(handle, 'stop');
       $scope.$destroy();
-      expect(handle.stop).toHaveBeenCalled();
+      expect(handle.stop.calledOnce).to.be.true;
     });
   });
   describe('stripDollarPrefixedKeys', function () {
@@ -75,9 +82,9 @@ describe('$meteorUtils service', function () {
     it('should remove keys with $ prefix', function(){
 
       var result = $meteorUtils.stripDollarPrefixedKeys({'$foo': 1, '$$baz': 3, bar : 2});
-      expect(result.hasOwnProperty('$foo')).toBe(false);
-      expect(result.hasOwnProperty('$$baz')).toBe(false);
-      expect(result.bar).toEqual(2);
+      expect(result.hasOwnProperty('$foo')).to.be.false;
+      expect(result.hasOwnProperty('$$baz')).to.be.false;
+      expect(result.bar).to.equal(2);
 
     });
 
@@ -87,7 +94,7 @@ describe('$meteorUtils service', function () {
       var input = new Date();
       var result = $meteorUtils.stripDollarPrefixedKeys(input);
 
-      expect(result).toBe(input);
+      expect(result).to.equal(input);
 
     });
   });
@@ -99,8 +106,13 @@ describe('$meteorUtils service', function () {
     };
 
     beforeEach(function() {
-      spyOn(deferred, 'resolve');
-      spyOn(deferred, 'reject');
+      sinon.stub(deferred, 'resolve');
+      sinon.stub(deferred, 'reject');
+    });
+
+    afterEach(function() {
+      deferred.resolve.restore();
+      deferred.reject.restore();
     });
 
     it('should return a function which fulfills a promise', function() {
@@ -108,13 +120,13 @@ describe('$meteorUtils service', function () {
 
       var err = Error();
       fulfill(err);
-      expect(deferred.reject.calls.count()).toEqual(1);
-      expect(deferred.reject.calls.mostRecent().args[0]).toEqual(err);
+      expect(deferred.reject.calledOnce).to.be.true;
+      expect(deferred.reject.args[0][0]).to.deep.equal(err);
 
       var result = {};
       fulfill(null, result);
-      expect(deferred.resolve.calls.count()).toEqual(1);
-      expect(deferred.resolve.calls.mostRecent().args[0]).toEqual(result);
+      expect(deferred.resolve.calledOnce).to.be.true;
+      expect(deferred.resolve.args[0][0]).to.deep.equal(result);
     });
 
     it('should fulfill promise with the bound results', function() {
@@ -123,12 +135,12 @@ describe('$meteorUtils service', function () {
       var fulfill = $meteorUtils.fulfill(deferred, err, result);
 
       fulfill();
-      expect(deferred.resolve.calls.count()).toEqual(1);
-      expect(deferred.resolve.calls.mostRecent().args[0]).toEqual(result);
+      expect(deferred.resolve.calledOnce).to.be.true;
+      expect(deferred.resolve.args[0][0]).to.deep.equal(result);
 
       fulfill(Error());
-      expect(deferred.reject.calls.count()).toEqual(1);
-      expect(deferred.reject.calls.mostRecent().args[0]).toEqual(err);
+      expect(deferred.reject.calledOnce).to.be.true;
+      expect(deferred.reject.args[0][0]).to.deep.equal(err);
     });
 
     it('should return bound result of an async callback from an arbitrary function', function() {
@@ -141,12 +153,12 @@ describe('$meteorUtils service', function () {
       var result = '_id';
 
       fulfill(null, createFulfill(result));
-      expect(deferred.resolve.calls.count()).toEqual(1);
-      expect(deferred.resolve.calls.mostRecent().args[0]).toEqual({ _id: result, action: 'inserted' });
+      expect(deferred.resolve.calledOnce).to.be.true;
+      expect(deferred.resolve.args[0][0]).to.deep.equal({ _id: result, action: 'inserted' });
 
       fulfill(Error());
-      expect(deferred.reject.calls.count()).toEqual(1);
-      expect(deferred.reject.calls.mostRecent().args[0]).toEqual(err);
+      expect(deferred.reject.calledOnce).to.be.true;
+      expect(deferred.reject.args[0][0]).to.deep.equal(err);
     });
   });
 
@@ -156,25 +168,25 @@ describe('$meteorUtils service', function () {
       var obj = { method: function() {} };
       var promissor = $meteorUtils.promissor(obj, 'method');
 
-      spyOn(obj, 'method');
+      sinon.spy(obj, 'method');
       promissor(1, 2, 3);
-      expect(obj.method).toHaveBeenCalledWith(1, 2, 3, jasmine.any(Function));
+      expect(obj.method.calledWith(1, 2, 3, sinon.match.func)).to.be.true;
 
-      obj.method.and.callFake(function(callback) {
+      obj.method = sinon.spy(function(callback) {
         callback(null, 'result');
       });
 
       promissor().then(function(result) {
-        expect(result).toEqual('result');
+        expect(result).to.equal('result');
         next();
       });
 
-      obj.method.and.callFake(function(callback) {
+      obj.method = sinon.spy(function(callback) {
         callback('error');
       });
 
       promissor().catch(function(err) {
-        expect(err).toEqual('error');
+        expect(err).to.equal('error');
         next();
       });
 
@@ -182,4 +194,3 @@ describe('$meteorUtils service', function () {
     });
   });
 });
-
