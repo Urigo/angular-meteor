@@ -115,8 +115,8 @@ Check out two demos for the quick how-to:
 
 ## Static Resources
 
-Angular 2 allows to define a component's template and styles in two ways: using template content inline
-or using template URL. We recommend to use inline templates.
+Angular 2 allows to define a component's template and styles in two ways: using template content directly
+or using template URL. We recommend to use template content directly.
 
 For that purpose, `angular2-compilers`'s HTML, LESS, and SASS compilers process associated files and
 add Node JS-modules that export string file contents outside.
@@ -177,7 +177,7 @@ TypeScript finds and checkes them in NPMs automatically.
 
 ## Babel
 
-It's possibly to use Angular2 with Babel as the primary language.
+It's possibly to use Angular2 with Babel as a primary language.
 
 To make development as convenient as it would be if you chose TypeScript,
 there exist special Babel plugins. So you'll need to install them:
