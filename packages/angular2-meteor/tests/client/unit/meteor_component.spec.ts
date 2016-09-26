@@ -26,6 +26,48 @@ describe('MeteorReactive', function() {
     });
   });
 
+  describe('MeteorReactive.autorun', () => {
+    let autorunStub;
+    beforeEach(function() {
+      autorunStub = sinon.stub(Meteor, 'autorun');
+    });
+
+    afterEach(function() {
+      autorunStub.restore();
+    });
+
+    describe('testing zone', () => {
+      let ngZone, ngZoneSpy;
+
+      beforeEach(function() {
+        ngZone = Zone.current.fork({ name: 'angular' });
+        ngZoneSpy = sinon.spy(ngZone, 'run');
+      });
+
+      afterEach(function() {
+        ngZoneSpy.restore();
+      });
+
+      it('should run Angular 2 zone after the Meteor.autorun callback', (done) => {
+        autorunStub = autorunStub.yields();
+
+        let callback = sinon.spy();
+        let args = [callback];
+
+        ngZone.run(() => {
+          component = new MeteorReactive();
+          component.autorun(...args);
+        });
+
+        zoneRunScheduler.onAfterRun(ngZone, () => {
+          expect(ngZoneSpy.calledTwice).to.be.true;
+          expect(callback.calledOnce).to.be.true;
+          done();
+        });
+      });
+    });
+  });
+
   describe('MeteorReactive.subscribe', () => {
     let meteorSub;
     beforeEach(function() {

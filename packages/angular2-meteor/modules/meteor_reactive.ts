@@ -29,8 +29,9 @@ export class MeteorReactive implements OnDestroy {
    */
   autorun(func: (c: Tracker.Computation) => any,
           autoBind: Boolean = true): Tracker.Computation {
+    let { pargs } = this._prepArgs([func, autoBind]);
 
-    let hAutorun = Tracker.autorun(func);
+    let hAutorun = Tracker.autorun(...pargs);
     this._hAutoruns.push(hAutorun);
 
     return hAutorun;
