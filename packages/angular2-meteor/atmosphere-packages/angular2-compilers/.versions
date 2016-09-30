@@ -2,8 +2,8 @@ allow-deny@1.0.5
 angular2-compilers@0.6.1
 babel-compiler@6.8.4
 babel-runtime@0.1.9_1
-barbatus:css-compiler@0.3.0
-barbatus:scss-compiler@3.8.1_1
+barbatus:css-compiler@0.3.1_1
+barbatus:scss-compiler@3.8.1_3
 barbatus:typescript@0.4.1
 barbatus:typescript-compiler@0.7.1_1
 barbatus:typescript-runtime@0.1.2
@@ -29,9 +29,9 @@ html-tools@1.0.10
 htmljs@1.0.10
 id-map@1.0.8
 jquery@1.11.9
-local-test:angular2-compilers@0.6.1
 logging@1.0.14
 meteor@1.1.16
+minifier-css@1.1.13
 minimongo@1.0.17
 modules@0.6.5
 modules-runtime@0.6.5
