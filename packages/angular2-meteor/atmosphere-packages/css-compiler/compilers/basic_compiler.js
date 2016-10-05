@@ -38,7 +38,7 @@ BasicCompiler = class BasicCompiler {
     // means imports as follows now make sense:
     //   import styleUrl from 'path/to/style.css!url'
     let urlCode = `
-      var url = '/${sourcePath}?hash=${inputFile.getSourceHash()}';
+      var url = '${sourcePath}?hash=${inputFile.getSourceHash()}';
       exports.default = url;`;
     const urlPath = sourcePath + '!url';      
     inputFile.addJavaScript({
