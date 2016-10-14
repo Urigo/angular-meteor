@@ -53,7 +53,7 @@ The reason is that Meteor doesn't allow more than two processor for one extensio
 
 Angular 2 heavily relies on some polyfills (`zone.js`, `reflect-metadata` etc).
 There are two ways to add them:
-- Add `import 'angular2-meteor-polyfills'` at the top of every file that imports Angular 2;
+- Add `import 'angular2-meteor-polyfills'` at the top of ts-file that is loaded first;
 - Add `barbatus:angular2-polyfills` package. Since it's a package, it's loaded by Meteor before any user code.
 
 Please, don't forget to add a main HTML file (can be `index.html` or with any other name) even if your app template consists of one single tag,
@@ -172,13 +172,13 @@ run `npm install @types/jquery`, and then add a reference
 at the top of your main ts-file: `/// <reference types="@types/jquery" />`.
 
 As for Meteor typings, there is a special NPM that contains only its typings as well:
-`meteor-typings`. So install `meteor-typings` package and add typings reference 
-as described above.
+`meteor-typings`.
+Install `meteor-typings` package and add the reference as described above.
 
-Another one way to add declaration files of any global 3-party JavaScript library including Meteor itself, is
+Another one way to add typings of 3-party JavaScript libraries is
 to use the [`typings`](https://github.com/typings/typings) utility.
-This tool is designed to search across and install typings not only from `DefinitelyTyped` but
-also own typings registries, which may be helpful in may cases.
+This utility is designed to search across and install typings not only from `DefinitelyTyped` but
+also own typings registries, which may be helpful in many cases.
 
 For example, to install Meteor declaration file run:
 ````
