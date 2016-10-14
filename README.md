@@ -1,7 +1,7 @@
 <a href="https://angular-meteor.com/"><img src="https://www.angular-meteor.com/images/logo-large.png" width="60" height="60" /></a>  [![Join the chat at https://gitter.im/Urigo/angular-meteor](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Urigo/angular-meteor)
 
-# Angular1-Meteor [![Build Status](https://travis-ci.org/Urigo/angular-meteor.svg?branch=master)](https://travis-ci.org/Urigo/angular-meteor)   [![npm version](https://badge.fury.io/js/angular-meteor.svg)](https://badge.fury.io/js/angular-meteor)   [![bitHound Overall Score](https://www.bithound.io/github/Urigo/angular-meteor/badges/score.svg)](https://www.bithound.io/github/Urigo/angular-meteor)
-# Angular2-Meteor [![Build Status](https://travis-ci.org/Urigo/angular2-meteor.svg?branch=master)](https://travis-ci.org/Urigo/angular2-meteor) [![npm version](https://badge.fury.io/js/angular2-meteor.svg)](https://badge.fury.io/js/angular2-meteor) [![bitHound Overall Score](https://www.bithound.io/github/Urigo/angular2-meteor/badges/score.svg)](https://www.bithound.io/github/Urigo/angular2-meteor) 
+### Angular1-Meteor [![Build Status](https://travis-ci.org/Urigo/angular-meteor.svg?branch=master)](https://travis-ci.org/Urigo/angular-meteor)   [![npm version](https://badge.fury.io/js/angular-meteor.svg)](https://badge.fury.io/js/angular-meteor)
+### Angular2-Meteor [![Build Status](https://travis-ci.org/Urigo/angular-meteor.svg?branch=master)](https://travis-ci.org/Urigo/angular-meteor) [![npm version](https://badge.fury.io/js/angular2-meteor.svg)](https://badge.fury.io/js/angular2-meteor) 
 
 #### The power of Meteor and the simplicity and eco-system of Angular
 
