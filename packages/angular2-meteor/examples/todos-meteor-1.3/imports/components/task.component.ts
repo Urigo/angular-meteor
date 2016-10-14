@@ -7,6 +7,8 @@ import {MeteorReactive} from 'angular2-meteor';
 import style from './task.component.less';
 import template from './task.component.html';
 
+import {TodoTask} from '../../tasks';
+
 @Component({
   selector: 'task',
   template: template,
@@ -14,7 +16,7 @@ import template from './task.component.html';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TaskView extends MeteorReactive {
-  @Input() task: Task;
+  @Input() task: TodoTask;
 
   setChecked(checked) {
     this.call('tasks.setChecked', this.task._id,

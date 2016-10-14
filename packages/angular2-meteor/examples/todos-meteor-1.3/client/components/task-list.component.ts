@@ -12,12 +12,14 @@ import template from './task-list.component.html';
 
 import {ObservableCursor} from 'meteor-rxjs';
 
+import {TodoTask} from '../../tasks';
+
 @Component({
   selector: 'task-list',
   template: template
 })
 export class TaskList extends MeteorReactive implements OnChanges {
-  tasks: ObservableCursor<Task>;
+  tasks: ObservableCursor<TodoTask>;
   @Input() hideCompleted: boolean = false;
   isLoading: boolean;
 

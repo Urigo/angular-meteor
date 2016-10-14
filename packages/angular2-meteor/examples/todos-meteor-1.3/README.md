@@ -1,10 +1,11 @@
-## Typings
+## Todo demo app
 
-Before running, save `typings.json` and install Meteor typings as follows:
+A demo app for `angular2-meteor` NPM.
+
+In order to run:
 
 ```
-npm install typings -g
-
-typings install
+npm install
+meteor
 
 ```
