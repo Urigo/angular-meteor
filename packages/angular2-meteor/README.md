@@ -1,4 +1,4 @@
-# Angular2-Meteor [![NPM version][npm-version-image]][npm-url] [![NPM downloads][npm-downloads-image]][npm-url] [![Build Status](https://travis-ci.org/Urigo/angular2-meteor.svg?branch=master)](https://travis-ci.org/Urigo/angular2-meteor)  [![Join the chat at https://gitter.im/Reactive-Extensions/RxJS](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Urigo/angular-meteor)
+# Angular2-Meteor [![NPM version][npm-version-image]][npm-url] [![NPM downloads][npm-downloads-image]][npm-url] [![Build Status](https://travis-ci.org/Urigo/angular-meteor.svg?branch=master)](https://travis-ci.org/Urigo/angular-meteor)  [![Join the chat at https://gitter.im/Reactive-Extensions/RxJS](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Urigo/angular-meteor)
 Angular2 + Meteor integration.
 
 ## Table of Contents
@@ -53,7 +53,7 @@ The reason is that Meteor doesn't allow more than two processor for one extensio
 
 Angular 2 heavily relies on some polyfills (`zone.js`, `reflect-metadata` etc).
 There are two ways to add them:
-- Add `import 'angular2-meteor-polyfills'` at the top of every file that imports Angular 2;
+- Add `import 'angular2-meteor-polyfills'` at the top of ts-file that is loaded first;
 - Add `barbatus:angular2-polyfills` package. Since it's a package, it's loaded by Meteor before any user code.
 
 Please, don't forget to add a main HTML file (can be `index.html` or with any other name) even if your app template consists of one single tag,
@@ -133,7 +133,7 @@ and [static-templates](https://github.com/Urigo/meteor-static-templates).
 > To get rid of the `module './foo.html' not found` warnigns,
 > run 
 ```
-typings install github:meteor-typings/angular2-compilers#c2ca3d3036b08f04a22b98ed16ff17377499e1e7 --global
+typings install github:meteor-typings/angular2-compilers --global
 ```
 
 ## TypeScript
@@ -161,19 +161,33 @@ Default TypeScript options for Meteor 1.3 are as follows:
 
 ### Typings
 
-To add declaration files of any global 3-party JavaScript library including Meteor itself (so called ambient typings), we recommend to use the [`typings`](https://github.com/typings/typings) utility, which is designed to search across and install typings from `DefinitelyTyped` and own typings registries.
+There are to two major ways to install declaration files:
+- by installing NPM packages;
+- by using `typings` utility.
+
+A lot of NPM packages already contain typings internally, if not,
+you can find almost all typings in the DefinitelyTyped repository. 
+For example, to install `jquery` typings from there,
+run `npm install @types/jquery`, and then add a reference
+at the top of your main ts-file: `/// <reference types="@types/jquery" />`.
+
+As for Meteor typings, there is a special NPM that contains only its typings as well:
+`meteor-typings`.
+Install `meteor-typings` package and add the reference as described above.
+
+Another one way to add typings of 3-party JavaScript libraries is
+to use the [`typings`](https://github.com/typings/typings) utility.
+This utility is designed to search across and install typings not only from `DefinitelyTyped` but
+also own typings registries, which may be helpful in many cases.
 
 For example, to install Meteor declaration file run:
 ````
 npm install typings -g
 
-typings install registry:env/meteor --global
+typings install env~meteor --global
 ````
 
 For more information on Meteor typings, please read [here](https://github.com/meteor-typings/meteor).
-
-Please note that you don't need to worry about Angular 2's typings and typings of the related NPMs!
-TypeScript finds and checkes them in NPMs automatically.
 
 ## Babel
 

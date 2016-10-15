@@ -1,5 +1,7 @@
 'use strict';
 
+import * as _ from 'underscore';
+
 /**
  * Contains a set of methods to schedule Zone runs.
  * Supposed to be used mostly in @MeteorReactive to patch

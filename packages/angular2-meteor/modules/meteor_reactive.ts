@@ -2,6 +2,8 @@
 
 import {OnDestroy} from '@angular/core';
 
+import * as _ from 'underscore';
+
 import {isMeteorCallbacks, isCallbacksObject, gZone, g, noop} from './utils';
 import {wrapCallbackInZone} from './zone_utils';
 
@@ -31,7 +33,7 @@ export class MeteorReactive implements OnDestroy {
           autoBind: Boolean = true): Tracker.Computation {
     let { pargs } = this._prepArgs([func, autoBind]);
 
-    let hAutorun = Tracker.autorun(...pargs);
+    let hAutorun = Tracker.autorun(pargs[0]);
     this._hAutoruns.push(hAutorun);
 
     return hAutorun;

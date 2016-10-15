@@ -10,12 +10,15 @@
   },
   "files": [
     "client/app.module.ts",
-    "typings/main/index.d.ts",
-    "typings/task.d.ts"
+    "typings/main/index.d.ts"
   ],
   "exclude": [
     "node_modules"
   ],
   "compileOnSave": false,
-  "buildOnSave": false
+  "buildOnSave": false,
+  "angularCompilerOptions": {
+    "genDir": "aot",
+    "skipMetadataEmit": true
+  }
 }

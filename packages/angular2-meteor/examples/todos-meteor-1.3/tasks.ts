@@ -1,3 +1,6 @@
+/// <reference types="meteor-typings" />
+/// <reference types="angular2-compilers-typings" />
+
 'use strict';
 
 import {Meteor} from 'meteor/meteor';
@@ -5,7 +8,17 @@ import {Mongo} from 'meteor/mongo';
 
 import {MongoObservable} from 'meteor-rxjs';
 
-export let Tasks = new MongoObservable.Collection<Task>('tasks');
+export type TodoTask = {
+  _id?: string,
+  text: string,
+  checked: boolean,
+  private: boolean,
+  username?: string,
+  owner?: string,
+  createdAt?: Date
+};
+
+export let Tasks = new MongoObservable.Collection<TodoTask>('tasks');
 
 Meteor.methods({
   'tasks.addTask': function(text: string) {

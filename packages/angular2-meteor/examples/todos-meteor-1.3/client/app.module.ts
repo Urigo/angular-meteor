@@ -1,3 +1,6 @@
+/// <reference types="meteor-typings" />
+/// <reference types="angular2-compilers-typings" />
+
 'use strict';
 
 import {NgModule, enableProdMode} from '@angular/core';

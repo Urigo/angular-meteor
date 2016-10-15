@@ -1,5 +1,7 @@
 'use strict';
 
+import * as _ from 'underscore';
+
 export declare type CallbacksObject = {
   onReady?: Function;
   onError?: Function;
@@ -30,6 +32,7 @@ export const g =
 export const gZone = g.Zone.current;
 
 export const check = Package['check'].check;
+
 
 /* tslint:disable */
 export const Match = Package['check'].Match;
