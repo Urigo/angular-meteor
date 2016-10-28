@@ -23,8 +23,8 @@ BasicCompiler = class BasicCompiler {
     }
 
     let resultCss = result.css;
-    if (!Meteor.isDevelopment) {
-      resultCss = CssTools.minifyCss(result.css)[0];
+    if (!Meteor.isDevelopment && resultCss) {
+      resultCss = CssTools.minifyCss(resultCss)[0];
     }
 
     // CSS files that comes from `imports` folder
