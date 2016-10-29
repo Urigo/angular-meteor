@@ -15,7 +15,7 @@ Package.registerBuildPlugin({
     // Uses an external packages to get the actual compilers
     'ecmascript@0.4.3',
     'urigo:static-html-compiler@0.1.8',
-    'barbatus:css-compiler@0.3.3'
+    'barbatus:css-compiler@0.3.4'
   ]
 });
 
