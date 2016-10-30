@@ -16,7 +16,7 @@ import 'rxjs/add/operator/debounce';
 })
 export class Todos {
 
-  todoCount = Tasks.find({ checked: false})
+  todoCount = Tasks.find({ checked: false })
     .debounce(() => Observable.interval(50))
     .map(tasks => tasks.length).zone();
 
