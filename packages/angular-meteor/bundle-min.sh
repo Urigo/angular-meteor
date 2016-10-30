@@ -20,10 +20,10 @@ cd $BUNDLER_PATH
 
 # Add packages
 echo > .meteor/packages # Delete all default packages
-PACKAGE_DIRS="$PROJECT_ROOT/packages" meteor add $PACKAGE
+METEOR_PACKAGE_DIRS="$PROJECT_ROOT/packages" meteor add $PACKAGE
 
 # Build the packages
-PACKAGE_DIRS=$PROJECT_ROOT/packages meteor build --debug .
+METEOR_PACKAGE_DIRS=$PROJECT_ROOT/packages meteor build --debug .
 tar -zxf $BUNDLER_TEMP.tar.gz
 
 OUTPUT_PATH="$DIST_PATH/$NAME-bundler-output"
