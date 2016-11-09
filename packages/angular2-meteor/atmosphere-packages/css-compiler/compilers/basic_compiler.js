@@ -22,7 +22,7 @@ BasicCompiler = class BasicCompiler {
       return;
     }
 
-    let resultCss = result.css;
+    let resultCss = result.css || '';
     if (!Meteor.isDevelopment && resultCss) {
       resultCss = CssTools.minifyCss(resultCss)[0];
     }
