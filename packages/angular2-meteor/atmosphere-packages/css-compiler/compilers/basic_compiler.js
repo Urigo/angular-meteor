@@ -22,7 +22,7 @@ BasicCompiler = class BasicCompiler {
       return;
     }
 
-    let resultCss = result.css || '';
+    let resultCss = result.css;
     if (!Meteor.isDevelopment && resultCss) {
       resultCss = CssTools.minifyCss(resultCss)[0];
     }
@@ -30,7 +30,7 @@ BasicCompiler = class BasicCompiler {
     // CSS files that comes from `imports` folder
     // can be downloaded as server assets.
     inputFile.addAsset({
-      data: resultCss,
+      data: resultCss || '',
       path: sourcePath
     });
 
