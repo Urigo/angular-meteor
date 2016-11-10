@@ -4,7 +4,7 @@ This package combines three compilers required to develop with Angular 2.0 in Me
 
 The compilers are: 
 * [HTML processor](https://github.com/Urigo/meteor-static-html-compiler)
-* [LESS compiler](https://github.com/Urigo/angular2-meteor/tree/master/atmosphere-packages/css-compiler)
+* [LESS compiler](https://github.com/Urigo/angular-meteor/tree/master/packages/angular2-meteor/atmosphere-packages/css-compiler)
 * [TypeScript compiler](https://github.com/barbatus/typescript)
 
 ### Installing the compilers
