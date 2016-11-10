@@ -7,6 +7,7 @@
   "dependencies": {
     "angular": "^1.5.8",
     "angular-meteor": "../",
-    "meteor-node-stubs": "^0.2.3"
+    "meteor-node-stubs": "^0.2.3",
+    "babel-runtime": "^6.18.0"
   }
 }
