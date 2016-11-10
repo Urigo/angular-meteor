@@ -30,7 +30,7 @@ BasicCompiler = class BasicCompiler {
     // CSS files that comes from `imports` folder
     // can be downloaded as server assets.
     inputFile.addAsset({
-      data: resultCss,
+      data: resultCss || '',
       path: sourcePath
     });
 

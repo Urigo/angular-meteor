@@ -1,6 +1,6 @@
 Package.describe({
   name: 'barbatus:css-compiler',
-  version: '0.3.4',
+  version: '0.3.5_1',
   summary: 'Angular 2 CSS compiler for Meteor',
   git: 'https://github.com/Urigo/angular2-meteor/tree/master/atmosphere-packages/angular2-static-css',
   documentation: 'README.md'
