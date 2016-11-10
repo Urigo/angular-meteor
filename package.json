@@ -30,7 +30,8 @@
   },
   "dependencies": {
     "jsondiffpatch": "^0.1.38",
-    "underscore": "^1.0.4"
+    "underscore": "^1.0.4",
+    "babel-runtime": "^6.18.0"
   },
   "peerDependencies": {
     "angular": "^1.4.0"
