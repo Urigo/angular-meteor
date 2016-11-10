@@ -52,7 +52,7 @@ Start by creating an application from our boilerplate:
 
 > Alternatively, use your web browser to access the link:
 > https://github.com/Urigo/angular2-meteor-base
-> Download the template application, and unzip the files inside. Rename the folder to "socially" and place it into the default directory.
+> Download the template application, and unzip the files inside.
 
 Then run the application:
 
