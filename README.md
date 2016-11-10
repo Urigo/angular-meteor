@@ -4,6 +4,8 @@
 
 Angular 2 + Meteor integration.
 
+> If you are looking for Angular 1 with Meteor, please refer to [angular1](https://github.com/Urigo/angular-meteor/tree/angular1) branch in this repository.
+
 ## Table of Contents
 * [Tutorial](../../#tutorial)
 * [Quick Start](../../#quick-start)
