@@ -6,7 +6,7 @@
   },
   "dependencies": {
     "angular": "^1.5.8",
-    "angular-meteor": "file:../",
-    "meteor-node-stubs": "~0.2.0"
+    "angular-meteor": "../",
+    "meteor-node-stubs": "^0.2.3"
   }
 }

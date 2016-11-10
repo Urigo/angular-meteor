@@ -6,10 +6,13 @@ cache:
     - node_modules
 node_js:
   # use same node version as meteor does
-  - "5"
+  - "6"
 services:
   - mongodb
 before_install: curl https://install.meteor.com | /bin/sh
 before_script:
   # remove unused node modules from cache
-  - "npm prune"
+  - npm prune
+  - npm install -g webpack@^1.12.9 eslint@^1.10.3
+  - npm install
+  - npm run test

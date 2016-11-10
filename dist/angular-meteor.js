@@ -103,12 +103,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	// legacy
 	// lib
-
-
 	var name = 'angular-meteor';
 
 	// new
-
 	exports.default = name;
 
 
@@ -611,9 +608,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	'use strict';
 
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; }; /*global
-	                                                                                                                                                                                                                                                   angular, _, Tracker, EJSON, FS, Mongo
-	                                                                                                                                                                                                                                                   */
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; /*global
+	                                                                                                                                                                                                                                                                               angular, _, Tracker, EJSON, FS, Mongo
+	                                                                                                                                                                                                                                                                               */
 
 	var _underscore = __webpack_require__(2);
 
@@ -1358,7 +1355,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }, true);
 
 	    this.unregisterAutoDestroy = $rootScope.$on('$destroy', function () {
-	      if (self && self.stop) self.pop();
+	      if (self && self.stop) self.stop();
 	    });
 	  };
 
@@ -1716,7 +1713,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var _this = this;
 
 	  // Used to store method's caller
-	  var caller = undefined;
+	  var caller = void 0;
 
 	  this._mixins = [];
 	  // Apply mixins automatically on specified contexts
@@ -1762,12 +1759,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // Extend prototype with the defined mixins
 	  this._extend = function (obj, options) {
 	    var _$defaults = _underscore2.default.defaults({}, options, {
-	      pattern: /.*/ });
-
-	    var pattern = _$defaults.pattern;
-	    var context = _$defaults.context;
-	    // The patterns of the keys which will be filtered
-
+	      pattern: /.*/ }),
+	        pattern = _$defaults.pattern,
+	        context = _$defaults.context;
 
 	    var mixins = _this._mixins.map(function (mixin) {
 	      // Filtering the keys by the specified pattern
@@ -1886,7 +1880,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  // Calls Meteor.autorun() which will be digested after each run and automatically destroyed
 	  $$Core.autorun = function (fn) {
-	    var options = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+	    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
 	    fn = this.$bindToContext($Mixer.caller, fn);
 
@@ -1989,7 +1983,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  // Stops a process once the scope has been destroyed
 	  $$Core.$$autoStop = function (stoppable) {
-	    var removeListener = undefined;
+	    var removeListener = void 0;
 	    var baseStop = stoppable.stop.bind(stoppable);
 
 	    // Once the process has been stopped the destroy event listener will be removed
@@ -2184,7 +2178,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 */
 	.factory(Reactive, ['$parse', _utils.utils, _mixer.Mixer, function ($parse, $$utils, $Mixer) {
 	  function $$Reactive() {
-	    var vm = arguments.length <= 0 || arguments[0] === undefined ? this : arguments[0];
+	    var vm = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this;
 
 	    // Helps us track changes made in the view model
 	    vm.$$dependencies = {};
@@ -2323,7 +2317,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      Tracker.nonreactive(function () {
 	        // If a cursor, observe its changes and update acoordingly
 	        if ($$utils.isCursor(model)) {
-	          var modelData = undefined;
+	          var modelData = void 0;
 
 	          if (angular.isUndefined(vm[k])) {
 	            _this3.$$setValHelper(vm, k, [], false);
@@ -2354,8 +2348,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            activeObservation.stop();
 	          });*/
 	        } else {
-	            _this3.$$handleNonCursor(vm, k, model);
-	          }
+	          _this3.$$handleNonCursor(vm, k, model);
+	        }
 
 	        // Notify change and update the view model
 	        _this3.$$changed(vm, k);
@@ -2367,7 +2361,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  $$Reactive.$$setValHelper = function (vm, k, v) {
 	    var _this4 = this;
 
-	    var watch = arguments.length <= 3 || arguments[3] === undefined ? true : arguments[3];
+	    var watch = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
 
 	    // If set, reactives property
 	    if (watch) {
