@@ -2,7 +2,7 @@
 
 [angular-meteor](http://angular-meteor.com/tutorial) 
 
-[![Build Status](https://travis-ci.org/Urigo/angular-meteor.svg?branch=master)](https://travis-ci.org/Urigo/angular-meteor) [![npm version](https://badge.fury.io/js/angular-meteor.svg)](https://badge.fury.io/js/angular-meteor) [![Bower version](https://badge.fury.io/bo/angular-meteor.svg)](http://badge.fury.io/bo/angular-meteor) [![bitHound Overall Score](https://www.bithound.io/github/Urigo/angular-meteor/badges/score.svg)](https://www.bithound.io/github/Urigo/angular-meteor) [![Join the chat at https://gitter.im/Reactive-Extensions/RxJS](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Urigo/angular-meteor)
+[![Build Status](https://travis-ci.org/Urigo/angular-meteor.svg?branch=angular1)](https://travis-ci.org/Urigo/angular-meteor) [![npm version](https://badge.fury.io/js/angular-meteor.svg)](https://badge.fury.io/js/angular-meteor) [![Bower version](https://badge.fury.io/bo/angular-meteor.svg)](http://badge.fury.io/bo/angular-meteor) [![bitHound Overall Score](https://www.bithound.io/github/Urigo/angular-meteor/badges/score.svg)](https://www.bithound.io/github/Urigo/angular-meteor) [![Join the chat at https://gitter.im/Reactive-Extensions/RxJS](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Urigo/angular-meteor)
 
 ======================================================
 
