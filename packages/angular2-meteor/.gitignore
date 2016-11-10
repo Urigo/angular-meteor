@@ -1,8 +1,0 @@
-node_modules
-.node_modules
-.idea
-typings
-atmosphere-packages/examples
-.npm
-npm-debug.log
-dist

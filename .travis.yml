@@ -1,14 +1,18 @@
+sudo: required
 language: node_js
-
+cache:
+  directories:
+    # cache node modules
+    - node_modules
 node_js:
-  - "5"
-
+  # use same node version as meteor does
+  - "6"
 services:
   - mongodb
-
-install:
-  - curl https://install.meteor.com | /bin/sh
-  - npm install lerna
-  - npm run bootstrap
-
-sudo: required
+before_install: curl https://install.meteor.com | /bin/sh
+before_script:
+  # remove unused node modules from cache
+  - npm prune
+  - npm install -g rollup@^0.35.9 tslint@3.6.0 typescript@2.0.7
+  - npm install
+  - npm run test
