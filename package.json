@@ -11,15 +11,15 @@
     "html-templates"
   ],
   "bugs": {
-    "url": "https://github.com/Urigo/angular2-meteor/issues"
+    "url": "https://github.com/Urigo/angular-meteor/issues"
   },
   "main": "dist/bundles/main.umd.js",
   "browser": "dist/bundles/index.umd.js",
   "typings": "dist/index.d.ts",
   "homepage": "http://www.angular-meteor.com",
-  "repository": "https://github.com/Urigo/angular2-meteor/",
+  "repository": "https://github.com/Urigo/angular-meteor/",
   "description": "Angular 2.0 and Meteor - the perfect stack http://www.angular-meteor.com/",
-  "author": "Angular2-Meteor (https://github.com/Urigo/angular2-meteor)",
+  "author": "Angular2-Meteor (https://github.com/Urigo/angular-meteor)",
   "license": "MIT",
   "scripts": {
     "typings": "typings i",
