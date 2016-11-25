@@ -1,7 +1,5 @@
 #!/bin/sh
 
-# run 'meteor npm install' in the tests.
-
 cd tests
 linklocal
 meteor test --driver-package=practicalmeteor:mocha

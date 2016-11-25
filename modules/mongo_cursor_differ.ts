@@ -194,14 +194,14 @@ export class MongoCursorDiffer extends DefaultIterableDiffer {
 
       if (change instanceof MoveChange) {
         let move = this._createChangeRecord(
-          change.toIndex, change.fromIndex, null);
+          change.toIndex, change.fromIndex);
         this._moved.push(move);
         this._changes.push(move);
       }
 
       if (change instanceof RemoveChange) {
         let remove = this._createChangeRecord(
-          null, change.index, null);
+          null, change.index);
         this._removed.push(remove);
         this._changes.push(remove);
         this._forSize--;
@@ -214,7 +214,7 @@ export class MongoCursorDiffer extends DefaultIterableDiffer {
     }
   }
 
-  _createChangeRecord(currentIndex, prevIndex, item) {
+  _createChangeRecord(currentIndex, prevIndex, item?) {
     let record = new CollectionChangeRecord(item, trackById);
     record.currentIndex = currentIndex;
     record.previousIndex = prevIndex;
