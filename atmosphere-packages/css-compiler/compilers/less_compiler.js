@@ -12,11 +12,12 @@ const Future = Npm.require('fibers/future');
 
 // CompileResult is {css, sourceMap}.
 LessCompiler = class LessCompiler extends MultiFileCachingCompiler {
-  constructor() {
+  constructor(addCompileResult) {
     super({
       compilerName: 'less',
       defaultCacheSize: 1024 * 1024 * 10,
     });
+    this.customAddCompileResult = addCompileResult;
   }
 
   getCacheKey(inputFile) {

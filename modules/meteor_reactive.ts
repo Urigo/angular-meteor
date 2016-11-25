@@ -2,7 +2,8 @@
 
 import {OnDestroy} from '@angular/core';
 
-import * as _ from 'underscore';
+import isFunction from 'lodash/isFunction';
+import isBoolean from 'lodash/isBoolean';
 
 import {isMeteorCallbacks, isCallbacksObject, gZone, g, noop} from './utils';
 import {wrapCallbackInZone} from './zone_utils';
@@ -24,9 +25,9 @@ export class MeteorReactive implements OnDestroy {
   /**
    * Method has the same notation as Meteor.autorun
    * except the last parameter.
-   * @param {MeteorReactive~autorunCallback} func - Callback to be executed when current computation is
-   * invalidated. The Tracker.Computation object will be passed as argument to
-   * this callback.
+   * @param {MeteorReactive~autorunCallback} func - Callback to be executed when
+   * current computation is invalidated. The Tracker.Computation object will be passed
+   * as argument to this callback.
    * @param {Boolean} autoBind - Determine whether Angular2 Zone will run
    *   after the func call to initiate change detection.
    * @returns {Tracker.Computation} - Object representing the Meteor computation
@@ -44,8 +45,10 @@ export class MeteorReactive implements OnDestroy {
    *    }
    * }
    *
-   * @see {@link https://docs.meteor.com/api/tracker.html#tracker_computation|Tracker.Computation in Meteor documentation}
-   * @see {@link https://docs.meteor.com/api/tracker.html#Tracker-autorun|autorun in Meteor documentation}
+   * @see {@link https://docs.meteor.com/api/tracker.html#tracker_computation|Tracker.Computation
+           in Meteor documentation}
+   * @see {@link https://docs.meteor.com/api/tracker.html#Tracker-autorun|autorun
+           in Meteor documentation}
    */
   autorun(func: (c: Tracker.Computation) => any,
           autoBind: Boolean = true): Tracker.Computation {
@@ -75,7 +78,8 @@ export class MeteorReactive implements OnDestroy {
    *     }
    *  }
    *
-   *  @see {@link http://docs.meteor.com/api/pubsub.html|Publication/Subscription in Meteor documentation}
+   *  @see {@link http://docs.meteor.com/api/pubsub.html|Publication/Subscription
+            in Meteor documentation}
    */
   subscribe(name: string, ...args: any[]): Meteor.SubscriptionHandle {
     let { pargs } = this._prepArgs(args);
@@ -93,7 +97,7 @@ export class MeteorReactive implements OnDestroy {
 
     if (Meteor.isServer) {
       let callback = pargs[pargs.length - 1];
-      if (_.isFunction(callback)) {
+      if (isFunction(callback)) {
         callback();
       }
 
@@ -150,7 +154,7 @@ export class MeteorReactive implements OnDestroy {
     let penultParam = args[args.length - 2];
     let autoBind = true;
 
-    if (_.isBoolean(lastParam) &&
+    if (isBoolean(lastParam) &&
         isMeteorCallbacks(penultParam)) {
       args.pop();
       autoBind = lastParam !== false;

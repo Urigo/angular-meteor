@@ -16,8 +16,7 @@
     "skipLibCheck": true
   },
   "files": [
-    "modules/index.ts",
-    "modules/main.ts"
+    "modules/index.ts"
   ],
   "exclude": [
     "examples",

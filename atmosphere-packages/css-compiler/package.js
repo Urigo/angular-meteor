@@ -1,6 +1,6 @@
 Package.describe({
   name: 'barbatus:css-compiler',
-  version: '0.3.5_1',
+  version: '0.4.0',
   summary: 'Angular 2 CSS compiler for Meteor',
   git: 'https://github.com/Urigo/angular2-meteor/tree/master/atmosphere-packages/angular2-static-css',
   documentation: 'README.md'
@@ -8,7 +8,6 @@ Package.describe({
 
 Npm.depends({
   'less': 'https://github.com/meteor/less.js/tarball/8130849eb3d7f0ecf0ca8d0af7c4207b0442e3f6',
-  'js-string-escape': '1.0.1'
 });
 
 Package.onUse(function(api) {
@@ -21,7 +20,7 @@ Package.onUse(function(api) {
     'check@1.2.1',
     'babel-compiler@6.6.4',
     'barbatus:scss-compiler@3.8.2',
-    'minifier-css'
+    'minifier-css',
   ]);
 
   api.addFiles([
@@ -29,12 +28,8 @@ Package.onUse(function(api) {
     'compilers/css_compiler.js',
     'compilers/less_compiler.js',
     'compilers/style_compiler.js',
-    'compilers/sass_compiler.js'
+    'compilers/sass_compiler.js',
   ], 'server');
 
   api.export(['StyleCompiler'], 'server');
-});
-
-Package.onTest(function(api) {
-  api.use('tinytest');
 });

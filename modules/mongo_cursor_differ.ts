@@ -194,14 +194,14 @@ export class MongoCursorDiffer extends DefaultIterableDiffer {
 
       if (change instanceof MoveChange) {
         let move = this._createChangeRecord(
-          change.toIndex, change.fromIndex, change.item);
+          change.toIndex, change.fromIndex, null);
         this._moved.push(move);
         this._changes.push(move);
       }
 
       if (change instanceof RemoveChange) {
         let remove = this._createChangeRecord(
-          null, change.index, change.item);
+          null, change.index, null);
         this._removed.push(remove);
         this._changes.push(remove);
         this._forSize--;
