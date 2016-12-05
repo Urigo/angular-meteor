@@ -6,7 +6,11 @@
     "noImplicitAny": false,
     "suppressImplicitAnyIndexErrors": true,
     "moduleResolution": "node",
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
+    "baseUrl": ".",
+    "paths": {
+      "*": ["*"]
+    }
   },
   "files": [
     "client/app.module.ts",
@@ -15,6 +19,7 @@
   "exclude": [
     "node_modules"
   ],
+  "useCache": true,
   "compileOnSave": false,
   "buildOnSave": false,
   "angularCompilerOptions": {

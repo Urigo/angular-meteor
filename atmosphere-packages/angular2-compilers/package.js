@@ -35,6 +35,19 @@ Package.onUse(function(api) {
 });
 
 Package.onTest(function(api) {
+  api.use('test-helpers');
   api.use('tinytest');
   api.use('angular2-compilers');
+
+  api.addFiles('tests/scss/dir/subdir/_in-subdir.scss', 'client');
+  api.addFiles('tests/scss/dir/_in-dir.scss', 'client');
+  api.addFiles('tests/scss/dir/_in-dir2.scss', 'client');
+  api.addFiles('tests/scss/dir/root.scss', 'client');
+  api.addFiles('tests/scss/_emptyimport.scss', 'client');
+  api.addFiles('tests/scss/_not-included.scss', 'client');
+  api.addFiles('tests/scss/_top.scss', 'client');
+  api.addFiles('tests/scss/_top3.scss', 'client');
+  api.addFiles('tests/scss/empty.scss', 'client');
+  api.addFiles('tests/scss/top2.scss', 'client');
+  api.addFiles('tests.js', 'client');
 });

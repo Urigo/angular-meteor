@@ -14,8 +14,8 @@ import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {METEOR_PROVIDERS} from 'angular2-meteor';
 
 import {Todos} from './app.component';
-import {TaskList} from '/client/components';
-import {TaskView} from '../imports/components';
+import {TaskList} from 'client/components';
+import {TaskView} from 'imports/components';
 
 enableProdMode();
 

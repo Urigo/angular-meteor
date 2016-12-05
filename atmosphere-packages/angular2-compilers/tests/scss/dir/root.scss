@@ -1,0 +1,13 @@
+@import "../_top.scss";
+@import "{local-test:angular2-compilers}/test/scss/top2";
+@import "_in-dir";
+@import "./in-dir2";
+@import "subdir/in-subdir.scss";
+
+
+.scss-el1 { border-style: $scss-el1-style; }
+.scss-el2 { border-style: $scss-el2-style; }
+.scss-el3 { border-style: $scss-el3-style; }
+.scss-el4 { border-style: $scss-el4-style; }
+.scss-el5 { border-style: $scss-el5-style; }
+.scss-el6 { border-style: $scss-el6-style; }

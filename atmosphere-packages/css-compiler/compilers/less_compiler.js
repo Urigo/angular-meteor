@@ -1,4 +1,4 @@
-const path = Plugin.path;
+const path = Npm.require('path');
 const less = Npm.require('less');
 const Future = Npm.require('fibers/future');
 
