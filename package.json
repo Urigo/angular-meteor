@@ -61,5 +61,10 @@
   },
   "dependencies": {
     "underscore": "^1.8.3"
+  },
+  "greenkeeper": {
+    "ignore": [
+      "rxjs"
+    ]
   }
 }
