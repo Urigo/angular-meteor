@@ -1,18 +1,15 @@
 sudo: required
 language: node_js
-cache:
-  directories:
-    # cache node modules
-    - node_modules
 node_js:
   # use same node version as meteor does
   - "6"
 services:
   - mongodb
-before_install: curl https://install.meteor.com | /bin/sh
-before_script:
-  # remove unused node modules from cache
-  - npm prune
+before_install: 
+  - curl https://install.meteor.com | /bin/sh
+  - rm -rf node_modules
+install:
   - npm install -g rollup@^0.35.9 tslint@3.6.0 typescript@2.0.7
   - npm install
+script:
   - npm run test
