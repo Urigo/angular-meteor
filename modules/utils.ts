@@ -6,7 +6,7 @@ export declare type CallbacksObject = {
   onReady?: Function;
   onError?: Function;
   onStop?: Function;
-}
+};
 
 export declare type MeteorCallbacks = ((...args) => any) | CallbacksObject;
 
