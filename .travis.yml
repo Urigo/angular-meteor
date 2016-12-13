@@ -1,15 +1,14 @@
 sudo: required
 language: node_js
 node_js:
-  # use same node version as meteor does
   - "6"
 services:
   - mongodb
-before_install: 
+before_install:
   - curl https://install.meteor.com | /bin/sh
   - rm -rf node_modules
 install:
-  - npm install -g rollup@^0.35.9 tslint@3.6.0 typescript@2.0.7
+  - npm install -g rollup@^0.37.0 tslint@^4.0.0 typescript@^2.0.10
   - npm install
 script:
   - npm run test
