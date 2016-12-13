@@ -8,7 +8,7 @@
     "indent": [true, "spaces"],
     "label-position": true,
     "label-undefined": true,
-    "max-line-length": [true, 100],
+    "max-line-length": [true, 200],
     "member-access": false,
     "member-ordering": [true,
       "public-before-private",
