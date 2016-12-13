@@ -1,5 +1,4 @@
 sudo: required
-os: osx
 language: node_js
 node_js:
   - "6"
@@ -12,5 +11,6 @@ install:
   - git clean -fXd
   - npm install -g phantomjs-prebuilt rollup@^0.37.0 tslint@^4.0.0 typescript@^2.0.10
   - npm install
+  - meteor npm rebuild
 script:
   - npm run test
