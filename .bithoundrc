@@ -9,10 +9,18 @@
     "**/examples/**",
     "**/atmosphere-packages/**"
   ],
+  "critics": {
+    "lint": {"engine": "tslint"}
+  },
   "test": [
     "**/test/**",
     "**/tests/**",
     "**/spec/**",
     "**/specs/**"
-  ]
+  ],
+   "dependencies": {
+      "unused-ignores": [
+        "@types/*"
+      ]
+    }
 }
