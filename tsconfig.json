@@ -13,7 +13,12 @@
     "outDir": "./dist",
     "rootDir": "./modules",
     "lib": ["es2015", "dom"],
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "types": [
+      "zone.js",
+      "@types/meteor",
+      "@types/underscore"
+    ]
   },
   "files": [
     "modules/index.ts",
