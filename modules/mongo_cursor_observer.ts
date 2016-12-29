@@ -14,10 +14,14 @@ export class UpdateChange {
 }
 
 export class MoveChange {
+  public item: any;
+
   constructor(public fromIndex: number, public toIndex: number) {}
 }
 
 export class RemoveChange {
+  public item: any;
+
   constructor(public index: number) {}
 }
 

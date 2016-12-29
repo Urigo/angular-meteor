@@ -4,12 +4,23 @@
     "**/dist/**",
     "**/typings/**",
     "**/node_modules/**",
-    "**/bower_components/**"
+    "**/bower_components/**",
+    "**/tests/**",
+    "**/examples/**",
+    "**/atmosphere-packages/**"
   ],
+  "critics": {
+    "lint": {"engine": "tslint"}
+  },
   "test": [
     "**/test/**",
     "**/tests/**",
     "**/spec/**",
     "**/specs/**"
-  ]
+  ],
+   "dependencies": {
+      "unused-ignores": [
+        "@types/*"
+      ]
+    }
 }

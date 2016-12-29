@@ -2,7 +2,7 @@
 
 ### Angular1-Meteor [![Build Status](https://travis-ci.org/Urigo/angular-meteor.svg?branch=angular1)](https://travis-ci.org/Urigo/angular-meteor)   [![npm version](https://badge.fury.io/js/angular-meteor.svg)](https://badge.fury.io/js/angular-meteor)
 
-### Angular2-Meteor [![Build Status](https://travis-ci.org/Urigo/angular-meteor.svg?branch=master)](https://travis-ci.org/Urigo/angular-meteor) [![npm version](https://badge.fury.io/js/angular2-meteor.svg)](https://badge.fury.io/js/angular2-meteor) 
+### Angular2-Meteor [![Build Status](https://travis-ci.org/Urigo/angular-meteor.svg?branch=master)](https://travis-ci.org/Urigo/angular-meteor) [![npm version](https://badge.fury.io/js/angular2-meteor.svg)](https://badge.fury.io/js/angular2-meteor)  [![bitHound Overall Score](https://www.bithound.io/github/Urigo/angular-meteor/badges/score.svg)](https://www.bithound.io/github/Urigo/angular-meteor) [![bitHound Dependencies](https://www.bithound.io/github/Urigo/angular-meteor/badges/dependencies.svg)](https://www.bithound.io/github/Urigo/angular-meteor/master/dependencies/npm)
 
 #### The power of Meteor and the simplicity and eco-system of Angular
 
