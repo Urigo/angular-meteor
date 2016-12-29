@@ -15,7 +15,7 @@ Package.registerBuildPlugin({
     // Uses an external packages to get the actual compilers
     'ecmascript@0.4.3',
     'urigo:static-html-compiler@0.1.8',
-    'barbatus:css-compiler@0.3.6'
+    'barbatus:css-compiler@0.4.1'
   ]
 });
 
@@ -28,7 +28,7 @@ Package.onUse(function(api) {
   // These packages are required by Angular2-Meteor NPM.
   // Make sure we have them in this package.
   api.imply([
-    'barbatus:typescript@0.5.2',
+    'barbatus:typescript@0.6.2_2',
     'check@1.1.0',
     'tracker@1.0.13'
   ]);
