@@ -15,7 +15,7 @@ Package.onUse(function(api) {
 
   api.use([
     'barbatus:caching-compiler@1.1.9',
-    'ecmascript@0.4.3',
+    'ecmascript@0.6.1',
     'underscore@1.0.8',
     'check@1.2.1',
     'babel-compiler@6.6.4',
