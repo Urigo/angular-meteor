@@ -48,7 +48,7 @@
     "angular2-meteor-polyfills": "^0.1.1",
     "conventional-changelog-cli": "^1.2.0",
     "reflect-metadata": "0.1.9",
-    "rollup": "^0.41.0",
+    "rollup": "^0.41.4",
     "rollup-plugin-babel": "^2.6.1",
     "rxjs": "5.0.1",
     "tslint": "^4.0.0",
