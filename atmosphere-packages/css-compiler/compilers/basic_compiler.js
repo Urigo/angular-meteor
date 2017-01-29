@@ -1,3 +1,6 @@
+const IMPORTS_REGEXP = /imports(\\|\/)/;
+const NPM_REGEXP = /node_modules(\\|\/)/;
+
 /**
  * Contains addCompileResult that decides 
  * how current compiled styles should be exposed outside:
@@ -9,9 +12,12 @@ BasicCompiler = class BasicCompiler {
     const ext = inputFile.getExtension();
     const sourcePath = inputFile.getPathInPackage();
     const targetPath = ext !== 'css' ? sourcePath + '.css' : sourcePath;
+
+    // Skip files from node_modules.
+    if (NPM_REGEXP.test(sourcePath)) return;
  
     // Combine all styles from other than imports folders.
-    if (sourcePath.indexOf('imports') === -1) {
+    if (! IMPORTS_REGEXP.test(sourcePath)) {
       inputFile.addStylesheet({
         data: result.css,
         path: targetPath,
