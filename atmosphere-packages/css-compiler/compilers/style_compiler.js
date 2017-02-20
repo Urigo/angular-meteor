@@ -4,11 +4,11 @@
  * compilers for diff style types.
  */
 StyleCompiler = class StyleCompiler {
-  constructor() {
-    let scss = new SassCompilerExtended();
+  constructor(addCompileResult) {
+    let scss = new SassCompilerExtended(addCompileResult);
     this.compilers = {
-      css: new CssCompiler(),
-      less: new LessCompiler(),
+      css: new CssCompiler(addCompileResult),
+      less: new LessCompiler(addCompileResult),
       scss: scss,
       sass: scss
     };

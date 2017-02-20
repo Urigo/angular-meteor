@@ -16,13 +16,11 @@
     "skipLibCheck": true,
     "types": [
       "zone.js",
-      "@types/meteor",
       "@types/underscore"
     ]
   },
   "files": [
-    "modules/index.ts",
-    "modules/main.ts"
+    "modules/index.ts"
   ],
   "exclude": [
     "examples",

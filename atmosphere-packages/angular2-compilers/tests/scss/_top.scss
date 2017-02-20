@@ -1,0 +1,7 @@
+$scss-el1-style: dotted;
+
+@import "top3";
+@import "emptyimport.scss";
+
+// Make sure regular CSS import doesn't make the compiler explode
+@import url("http://hello.myfonts.net/count/2c4b9d");

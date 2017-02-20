@@ -2,7 +2,7 @@ allow-deny@1.0.5
 angular2-compilers@0.6.6
 babel-compiler@6.8.4
 babel-runtime@0.1.9_1
-barbatus:css-compiler@0.3.5_1
+barbatus:css-compiler@0.3.6
 barbatus:scss-compiler@3.8.2
 barbatus:typescript@0.5.2
 barbatus:typescript-compiler@0.8.4

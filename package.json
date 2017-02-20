@@ -13,9 +13,9 @@
   "bugs": {
     "url": "https://github.com/Urigo/angular-meteor/issues"
   },
-  "main": "dist/bundles/main.umd.js",
-  "browser": "dist/bundles/index.umd.js",
+  "main": "dist/bundles/index.umd.js",
   "typings": "dist/index.d.ts",
+  "module": "dist/index.js",
   "homepage": "http://www.angular-meteor.com",
   "repository": "https://github.com/Urigo/angular-meteor/",
   "description": "Angular 2.0 and Meteor - the perfect stack http://www.angular-meteor.com/",
@@ -32,13 +32,11 @@
     "test:app": "cd tests && meteor test --port 3005 --full-app --once --driver-package=dispatch:mocha-phantomjs",
     "test": "npm run test:unit && npm run test:app",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "rollup:browser": "rollup -i ./dist/index.js -o ./dist/bundles/index.umd.js -n ng.meteor -c rollup.config.js",
-    "rollup:main": "rollup -i ./dist/main.js -o ./dist/bundles/main.umd.js -n ng.meteor -c rollup.config.js",
-    "bundle": "npm run rollup:browser && npm run rollup:main"
+    "rollup": "rollup -i ./dist/index.js -o ./dist/bundles/index.umd.js -n ng.meteor -c rollup.config.js",
+    "bundle": "npm run rollup"
   },
   "peerDependencies": {
-    "@angular/core": "^2.0.0",
-    "angular2-meteor-polyfills": "^0.1.1"
+    "@angular/core": "^2.0.0"
   },
   "devDependencies": {
     "@angular/common": "^2.4.0",
@@ -56,8 +54,10 @@
     "zone.js": "^0.7.4"
   },
   "dependencies": {
-    "@types/meteor": "^1.3.31",
-    "underscore": "^1.8.3"
+    "@types/lodash": "^4.14.40",
+    "angular2-meteor-polyfills": "^0.1.1",
+    "lodash": "^4.17.2",
+    "meteor-typings": "1.3.1"
   },
   "greenkeeper": {
     "ignore": [

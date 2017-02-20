@@ -11,6 +11,7 @@
     "@angular/platform-server": "^2.1.0",
     "angular2-meteor": "file:../..",
     "angular2-meteor-polyfills": "^0.1.1",
+    "babel-runtime": "^6.20.0",
     "core-js": "^2.4.0",
     "es6-shim": "^0.35.0",
     "meteor-node-stubs": "^0.2.3",

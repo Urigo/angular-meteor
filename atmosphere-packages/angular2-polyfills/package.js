@@ -1,6 +1,6 @@
 Package.describe({
   name: 'barbatus:angular2-polyfills',
-  version: '0.5.0',
+  version: '0.5.1',
   summary: 'Polyfills for Angular2',
   git: 'https://github.com/Urigo/angular2-meteor/tree/master/atmosphere-packages',
   documentation: null
@@ -15,7 +15,7 @@ Package.onUse(function(api) {
   ]);
 
   api.imply([
-    'babel-runtime'
+    'babel-runtime@1.0.1'
   ]);
 
   api.addFiles(['client_deps.js'], 'client', {

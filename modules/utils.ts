@@ -1,6 +1,7 @@
 'use strict';
 
-import * as _ from 'underscore';
+import isFunction from 'lodash/isFunction';
+import delay from 'lodash/delay';
 
 export declare type CallbacksObject = {
   onReady?: Function;
@@ -13,13 +14,13 @@ export declare type MeteorCallbacks = ((...args) => any) | CallbacksObject;
 export const subscribeEvents = ['onReady', 'onError', 'onStop'];
 
 export function isMeteorCallbacks(callbacks: any): boolean {
-  return _.isFunction(callbacks) || isCallbacksObject(callbacks);
+  return isFunction(callbacks) || isCallbacksObject(callbacks);
 }
 
 // Checks if callbacks of {@link CallbacksObject} type.
 export function isCallbacksObject(callbacks: any): boolean {
   return callbacks && subscribeEvents.some((event) => {
-    return _.isFunction(callbacks[event]);
+    return isFunction(callbacks[event]);
   });
 };
 
@@ -52,7 +53,7 @@ export function debounce(func, wait, onInit) {
     if (timeout) {
       clearTimeout(timeout);
     }
-    timeout = _.delay(later, wait, this, args);
+    timeout = delay(later, wait, this, args);
 
     return result;
   };

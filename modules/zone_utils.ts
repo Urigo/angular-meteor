@@ -1,6 +1,7 @@
 'use strict';
 
-import * as _ from 'underscore';
+import isFunction from 'lodash/isFunction';
+import functions from 'lodash/functions';
 
 /**
  * Contains a set of methods to schedule Zone runs.
@@ -98,11 +99,11 @@ function wrapFuncInZone(zone: Zone, method: Function, context: any) {
 export function wrapCallbackInZone(
     zone: Zone, callback: MeteorCallbacks, context: any): MeteorCallbacks {
 
-  if (_.isFunction(callback)) {
+  if (isFunction(callback)) {
     return wrapFuncInZone(zone, <Function>callback, context);
   }
 
-  for (let fn of _.functions(callback)) {
+  for (let fn of functions(callback)) {
     callback[fn] = wrapFuncInZone(zone, callback[fn], context);
   }
 
