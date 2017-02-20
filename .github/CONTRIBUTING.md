@@ -42,6 +42,17 @@ chapter we would be happy to help you writing and adding it.
 
 Also if you want to record a video for a chapter we would love to help you.
 
+#### Guidelines for video
+
+* Make videos as short as possible - easier to update and nicer to watch - be short as a sub-step (2.5, 3.11, etc...)
+* Upload your video to Youtube and send us the link - add tags and miningful content descriptions on Youtube
+* Upload your video sources to our [open Github repo](https://github.com/Urigo/angular-meteor-videos) - That way they are editable in any way we want (translated, dubbed, improve audio, update inner parts, etc...)
+* Feel free to contact [me](https://github.com/urigo) for any questions
+
+#### Guidelines for screenshots and gifs to the tutorial
+
+* Just do it!  we need many of those and it's really helping the tutorial. and you are doing it already anyway....
+
 ## <a name="submit"></a> Submission Guidelines
 
 ### Submitting an Issue
