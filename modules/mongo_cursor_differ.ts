@@ -64,7 +64,7 @@ export class MongoCursorDiffer extends DefaultIterableDiffer {
   private _changes: Array<CollectionChangeRecord> = [];
   private _curObserver: MongoCursorObserver;
   private _lastChanges: Array<AddChange | MoveChange | RemoveChange>;
-  private _forSize: number = 0;
+  private _forSize = 0;
   private _cursor: Mongo.Cursor<any>;
   private _obsFactory: ObserverFactory;
   private _sub: Subscription;
