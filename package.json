@@ -38,7 +38,7 @@
   },
   "peerDependencies": {
     "@angular/core": "^2.0.0",
-    "angular2-meteor-polyfills": "^0.1.1"
+    "angular2-meteor-polyfills": "^0.2.0"
   },
   "devDependencies": {
     "@angular/common": "^2.4.0",
