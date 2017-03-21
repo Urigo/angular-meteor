@@ -33,7 +33,7 @@ Go to the [official docs](https://www.angular-meteor.com/)
 ## Tutorial
 
 If you are new to Angular2 and/or Meteor but want to learn them quickly, 
-please check out our 23-steps Angular2-Meteor [tutorial](http://www.angular-meteor.com/tutorials/socially/angular2/bootstrapping).
+please check out our 14-steps Angular2-Meteor [tutorial](https://angular-meteor.com/tutorials/whatsapp2-tutorial).
 
 ## Quick Start Using Angular2-Meteor
 ```
