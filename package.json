@@ -37,7 +37,7 @@
     "bundle": "npm run rollup:browser && npm run rollup:main"
   },
   "peerDependencies": {
-    "@angular/core": "^2.0.0",
+    "@angular/core": "^4.0.1",
     "angular2-meteor-polyfills": "^0.1.1"
   },
   "devDependencies": {
