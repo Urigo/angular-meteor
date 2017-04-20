@@ -102,7 +102,6 @@ describe('angular-meteor.core', function() {
         scope.autorun(function() {
           scope.foo = 'baz';
         });
-       
       });
     });
 
