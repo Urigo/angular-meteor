@@ -1,4 +1,4 @@
-/*! angular-meteor v1.3.11 */
+/*! angular-meteor v1.3.12 */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory(require("underscore"), require("jsondiffpatch"));
@@ -53,7 +53,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -141,9 +141,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	}]);
 	module.exports = exports['default'];
 
-/***/ },
+/***/ }),
 /* 1 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -336,9 +336,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  module.value('getUpdates', getUpdates);
 	})();
 
-/***/ },
+/***/ }),
 /* 2 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -361,15 +361,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.default = _underscore2.default || Package.underscore._;
 	module.exports = exports['default'];
 
-/***/ },
+/***/ }),
 /* 3 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports = __WEBPACK_EXTERNAL_MODULE_3__;
 
-/***/ },
+/***/ }),
 /* 4 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -569,9 +569,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return diffArray;
 	}]);
 
-/***/ },
+/***/ }),
 /* 5 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	'use strict';
 
@@ -579,9 +579,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  suppressWarnings: true
 	});
 
-/***/ },
+/***/ }),
 /* 6 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	'use strict';
 
@@ -602,9 +602,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  });
 	}]);
 
-/***/ },
+/***/ }),
 /* 7 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -710,9 +710,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 	}]);
 
-/***/ },
+/***/ }),
 /* 8 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	/*global
 	 angular, Meteor
@@ -786,9 +786,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 	}]);
 
-/***/ },
+/***/ }),
 /* 9 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -1169,9 +1169,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  scopeProto.$meteorCollectionFS = $meteorStopper($meteorCollectionFS);
 	}]);
 
-/***/ },
+/***/ }),
 /* 10 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -1367,9 +1367,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  scopeProto.$meteorObject = $meteorStopper($meteorObject);
 	}]);
 
-/***/ },
+/***/ }),
 /* 11 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -1461,9 +1461,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  });
 	}]);
 
-/***/ },
+/***/ }),
 /* 12 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -1491,9 +1491,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 	}]);
 
-/***/ },
+/***/ }),
 /* 13 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	/*global
 	 angular, Session
@@ -1525,9 +1525,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 	}]);
 
-/***/ },
+/***/ }),
 /* 14 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	/*global
 	 angular, Package
@@ -1555,9 +1555,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 	}]);
 
-/***/ },
+/***/ }),
 /* 15 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	/*global
 	 angular
@@ -1594,9 +1594,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return $meteorStopper;
 	}]);
 
-/***/ },
+/***/ }),
 /* 16 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -1675,9 +1675,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 	}]);
 
-/***/ },
+/***/ }),
 /* 17 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -1812,9 +1812,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  });
 	});
 
-/***/ },
+/***/ }),
 /* 18 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -1844,9 +1844,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 	}]);
 
-/***/ },
+/***/ }),
 /* 19 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -1999,9 +1999,18 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  // Digests scope only if there is no phase at the moment
 	  $$Core.$$throttledDigest = function () {
+	    var _this = this;
+
 	    var isDigestable = !this.$$destroyed && !this.$$phase && !this.$root.$$phase;
 
-	    if (isDigestable) this.$digest();
+	    if (isDigestable) {
+	      // If a digest cycle in one autorun triggers another autorun,
+	      // we want to run this second autorun in a non-reactive manner.
+	      // thus preventing inner autoruns from being dependent on their parents.
+	      Tracker.nonreactive(function () {
+	        return _this.$digest();
+	      });
+	    }
 	  };
 
 	  // Creates a promise only that the digestion cycle will be called at its fulfillment
@@ -2025,9 +2034,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return $$Core;
 	}]);
 
-/***/ },
+/***/ }),
 /* 20 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -2138,9 +2147,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 	}]);
 
-/***/ },
+/***/ }),
 /* 21 */
-/***/ function(module, exports, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	'use strict';
 
@@ -2455,15 +2464,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return $$Reactive;
 	}]);
 
-/***/ },
+/***/ }),
 /* 22 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	module.exports = __WEBPACK_EXTERNAL_MODULE_22__;
 
-/***/ },
+/***/ }),
 /* 23 */
-/***/ function(module, exports) {
+/***/ (function(module, exports) {
 
 	'use strict';
 
@@ -2478,7 +2487,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  angular.module(name, []);
 	}
 
-/***/ }
+/***/ })
 /******/ ])
 });
 ;
