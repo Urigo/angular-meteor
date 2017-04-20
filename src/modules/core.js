@@ -131,7 +131,12 @@ angular.module(name, [
         !this.$$phase &&
         !this.$root.$$phase;
 
-      if (isDigestable) this.$digest();
+      if (isDigestable) {
+        // If a digest cycle in one autorun triggers another autorun,
+        // we want to run this second autorun in a non-reactive manner.
+        // thus preventing inner autoruns from being dependent on their parents.
+        Tracker.nonreactive(() => this.$digest());
+      }
     };
 
     // Creates a promise only that the digestion cycle will be called at its fulfillment
