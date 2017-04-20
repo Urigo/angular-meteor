@@ -90,6 +90,20 @@ describe('angular-meteor.core', function() {
 
         expect(stop.calledOnce).to.be.true;
       });
+
+      it('should run digest in a non-reactive manner, so autoruns triggered by the digest are not dependent on other autoruns', function() {
+        scope.$watch('foo',function(val) {
+          if (val) {
+            var computation = scope.autorun(angular.noop);
+            expect(computation._parent).to.be.null;
+          }
+        });
+
+        scope.autorun(function() {
+          scope.foo = 'baz';
+        });
+       
+      });
     });
 
     describe('subscribe()', function() {
