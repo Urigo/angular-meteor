@@ -1,10 +1,11 @@
 'use strict';
 
 import {
-  CollectionChangeRecord,
   IterableDifferFactory,
   DefaultIterableDiffer,
-  ChangeDetectorRef
+  ChangeDetectorRef,
+  IterableDiffer,
+  TrackByFunction
 } from '@angular/core';
 
 import {Subscription} from 'rxjs/Subscription';
@@ -16,6 +17,57 @@ import {
   RemoveChange,
   UpdateChange,
 } from './mongo_cursor_observer';
+
+export function stringify(token: any): string {
+    if (typeof token === 'string') {
+        return token;
+    }
+
+    if (token == null) {
+        return '' + token;
+    }
+
+    if (token.overriddenName) {
+        return `${token.overriddenName}`;
+    }
+
+    if (token.name) {
+        return `${token.name}`;
+    }
+
+    const res = token.toString();
+
+    if (res == null) {
+        return '' + res;
+    }
+
+    const newLineIndex = res.indexOf('\n');
+    return newLineIndex === -1 ? res : res.substring(0, newLineIndex);
+}
+
+export class IterableChangeRecord<V> {
+    currentIndex: number|null = null;
+    previousIndex: number|null = null;
+
+    _nextPrevious: IterableChangeRecord<V>|null = null;
+    _prev: IterableChangeRecord<V>|null = null;
+    _next: IterableChangeRecord<V>|null = null;
+    _prevDup: IterableChangeRecord<V>|null = null;
+    _nextDup: IterableChangeRecord<V>|null = null;
+    _prevRemoved: IterableChangeRecord<V>|null = null;
+    _nextRemoved: IterableChangeRecord<V>|null = null;
+    _nextAdded: IterableChangeRecord<V>|null = null;
+    _nextMoved: IterableChangeRecord<V>|null = null;
+    _nextIdentityChange: IterableChangeRecord<V>|null = null;
+
+    constructor(public item: V, public trackById: any) {}
+
+    toString(): string {
+        return this.previousIndex === this.currentIndex ? stringify(this.item) :
+            stringify(this.item) + '[' +
+            stringify(this.previousIndex) + '->' + stringify(this.currentIndex) + ']';
+    }
+}
 
 export interface ObserverFactory {
   create(cursor: Object): Object;
@@ -43,12 +95,13 @@ class MongoCursorObserverFactory implements ObserverFactory {
 export class MongoCursorDifferFactory implements IterableDifferFactory {
   supports(obj: Object): boolean { return checkIfMongoCursor(obj); }
 
-  create(cdRef: ChangeDetectorRef): MongoCursorDiffer {
-    return new MongoCursorDiffer(cdRef, new MongoCursorObserverFactory());
+  create<V>(trackByFn?: TrackByFunction<V>): IterableDiffer<V>;
+  create<V>(_cdrOrTrackBy?: ChangeDetectorRef|TrackByFunction<V>): IterableDiffer<V> {
+    return new MongoCursorDiffer<any>(_cdrOrTrackBy as ChangeDetectorRef, new MongoCursorObserverFactory());
   }
 }
 
-const trackById = (index, item) => item._id;
+const trackByIdentity = (index, item) => item._id;
 
 
 /**
@@ -56,21 +109,21 @@ const trackById = (index, item) => item._id;
  * API consists mainly of diff method and methods like forEachAddedItem
  * that is being run on each change detection cycle to apply new changes if any.
  */
-export class MongoCursorDiffer extends DefaultIterableDiffer {
-  private _inserted: Array<CollectionChangeRecord> = [];
-  private _removed: Array<CollectionChangeRecord> = [];
-  private _moved: Array<CollectionChangeRecord> = [];
-  private _updated: Array<CollectionChangeRecord> = [];
-  private _changes: Array<CollectionChangeRecord> = [];
+export class MongoCursorDiffer<V> extends DefaultIterableDiffer<V> {
+  private _inserted: Array<IterableChangeRecord<V>> = [];
+  private _removed: Array<IterableChangeRecord<V>> = [];
+  private _moved: Array<IterableChangeRecord<V>> = [];
+  private _updated: Array<IterableChangeRecord<V>> = [];
+  private _changes: Array<IterableChangeRecord<V>> = [];
   private _curObserver: MongoCursorObserver;
   private _lastChanges: Array<AddChange | MoveChange | RemoveChange>;
-  private _forSize: number = 0;
+  private _forSize = 0;
   private _cursor: Mongo.Cursor<any>;
   private _obsFactory: ObserverFactory;
   private _sub: Subscription;
 
-  constructor(cdRef: ChangeDetectorRef, obsFactory: ObserverFactory) {
-    super(trackById);
+  constructor(_cdr: ChangeDetectorRef, obsFactory: ObserverFactory) {
+    super(trackByIdentity);
     this._obsFactory = obsFactory;
   }
 
@@ -104,7 +157,7 @@ export class MongoCursorDiffer extends DefaultIterableDiffer {
     }
   }
 
-  diff(cursor: Mongo.Cursor<any>) {
+  diff(cursor: any) {
     this._reset();
 
     let newCursor = false;
@@ -215,7 +268,7 @@ export class MongoCursorDiffer extends DefaultIterableDiffer {
   }
 
   _createChangeRecord(currentIndex, prevIndex, item) {
-    let record = new CollectionChangeRecord(item, trackById);
+    let record = new IterableChangeRecord<V>(item, trackByIdentity);
     record.currentIndex = currentIndex;
     record.previousIndex = prevIndex;
     return record;

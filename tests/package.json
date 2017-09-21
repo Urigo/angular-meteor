@@ -5,19 +5,19 @@
     "start": "meteor run"
   },
   "dependencies": {
-    "@angular/core": "2.0.0",
-    "@angular/common": "2.0.0",
-    "@angular/compiler": "2.0.0",
-    "@angular/platform-browser": "2.0.0",
-    "@angular/platform-browser-dynamic": "2.0.0",
-    "angular2-meteor-polyfills": "^0.1.1",
-    "es6-shim": "^0.35.0",
-    "zone.js": "^0.6.21",
-    "reflect-metadata": "0.1.2",
-    "rxjs": "5.0.0-beta.12",
+    "@angular/common": "4.4.3",
+    "@angular/compiler": "4.4.3",
+    "@angular/core": "4.4.3",
+    "@angular/platform-browser": "4.4.3",
+    "@angular/platform-browser-dynamic": "4.4.3",
     "angular2-meteor": "file:..",
-    "meteor-node-stubs": "0.2.3",
-    "babel-runtime": "^6.18.0"
+    "angular2-meteor-polyfills": "^0.2.0",
+    "babel-runtime": "^6.26.0",
+    "es6-shim": "^0.35.3",
+    "meteor-node-stubs": "0.2.11",
+    "reflect-metadata": "0.1.10",
+    "rxjs": "5.4.3",
+    "zone.js": "^0.8.17"
   },
   "devDependencies": {
     "linklocal": "^2.6.0",
