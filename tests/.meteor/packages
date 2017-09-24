@@ -20,8 +20,7 @@ angular2-compilers
 barbatus:angular2-polyfills
 practicalmeteor:sinon
 practicalmeteor:chai
-dispatch:mocha-phantomjs
 dburles:factory
 xolvio:cleaner
 shell-server@0.2.1
-practicalmeteor:mocha
+meteortesting:mocha
