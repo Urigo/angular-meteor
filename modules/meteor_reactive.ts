@@ -83,13 +83,13 @@ export class MeteorReactive implements OnDestroy {
     if (!Meteor.subscribe) {
       throw new Error(
         'Meteor.subscribe is not defined on the server side');
-    };
+    }
 
     let hSubscribe = Meteor.subscribe(name, ...pargs);
 
     if (Meteor.isClient) {
       this._hSubscribes.push(hSubscribe);
-    };
+    }
 
     if (Meteor.isServer) {
       let callback = pargs[pargs.length - 1];

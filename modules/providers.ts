@@ -6,7 +6,7 @@ import {
   IterableDiffers,
   DefaultIterableDiffer,
   IterableDifferFactory,
-  TrackByFn
+  TrackByFunction
 } from '@angular/core';
 
 import {MongoCursorDifferFactory} from './mongo_cursor_differ';
@@ -16,7 +16,7 @@ import {isListLikeIterable} from './utils';
 export class DefaultIterableDifferFactory implements IterableDifferFactory {
   constructor() {}
   supports(obj: Object): boolean { return isListLikeIterable(obj); }
-  create(cdRef: ChangeDetectorRef, trackByFn?: TrackByFn): DefaultIterableDiffer {
+  create<V>(_cdr?: ChangeDetectorRef | TrackByFunction<V>, trackByFn?: TrackByFunction<V>): DefaultIterableDiffer<V> {
     return new DefaultIterableDiffer(trackByFn);
   }
 }

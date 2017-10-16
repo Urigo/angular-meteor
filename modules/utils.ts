@@ -21,7 +21,7 @@ export function isCallbacksObject(callbacks: any): boolean {
   return callbacks && subscribeEvents.some((event) => {
     return _.isFunction(callbacks[event]);
   });
-};
+}
 
 declare const global;
 export const g =
