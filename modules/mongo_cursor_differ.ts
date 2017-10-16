@@ -18,6 +18,7 @@ import {
   UpdateChange,
 } from './mongo_cursor_observer';
 
+// Not exported anymore by Angular: https://github.com/angular/angular/blob/4.4.5/packages/core/src/util.ts#L58
 export function stringify(token: any): string {
     if (typeof token === 'string') {
         return token;
@@ -45,6 +46,7 @@ export function stringify(token: any): string {
     return newLineIndex === -1 ? res : res.substring(0, newLineIndex);
 }
 
+// Not exported anymore by Angular: https://github.com/angular/angular/blob/4.4.5/packages/core/src/change_detection/differs/default_iterable_differ.ts#L603
 export class IterableChangeRecord<V> {
     currentIndex: number|null = null;
     previousIndex: number|null = null;
