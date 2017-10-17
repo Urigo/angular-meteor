@@ -1,0 +1,35 @@
+--- a/tsconfig.json	2017-09-11 10:26:15.387081984 +0200
++++ b/tsconfig.json	2017-09-10 15:23:21.589934878 +0200
+@@ -3,11 +3,16 @@
+   "compilerOptions": {
+     "outDir": "./dist/out-tsc",
+     "sourceMap": true,
++    "baseUrl": ".",
+     "declaration": false,
++    "module": "commonjs",
+     "moduleResolution": "node",
+     "emitDecoratorMetadata": true,
+     "experimentalDecorators": true,
+     "target": "es5",
++    "skipLibCheck": true,
++    "stripInternal": true,
++    "noImplicitAny": false,
+     "typeRoots": [
+       "node_modules/@types"
+     ],
+@@ -15,5 +26,14 @@
+       "es2017",
+       "dom"
+     ]
+-  }
++  },
++  "include": [
++    "src/**/*.ts",
++    "api/**/*.ts"
++  ],
++  "exclude": [
++    "node_modules",
++    "api/node_modules",
++    "api"
++  ]
+ }
