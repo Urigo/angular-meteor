@@ -1,0 +1,13 @@
+diff --git a/src/tsconfig.app.json b/src/tsconfig.app.json
+index 39ba8db..b4e3ee8 100644
+--- a/src/tsconfig.app.json
++++ b/src/tsconfig.app.json
+@@ -8,6 +8,7 @@
+   },
+   "exclude": [
+     "test.ts",
+-    "**/*.spec.ts"
++    "**/*.spec.ts",
++    "../api/node_modules"
+   ]
+ }
