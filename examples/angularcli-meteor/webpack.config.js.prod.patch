@@ -1,0 +1,58 @@
+--- a/webpack.config.js	2017-09-12 11:30:00.230412742 +0200
++++ b/webpack.config.js	2017-09-12 11:11:55.352404236 +0200
+@@ -1,5 +1,6 @@
+ const fs = require('fs');
+ const path = require('path');
++const webpack = require('webpack');
+ const CopyWebpackPlugin = require('copy-webpack-plugin');
+ const ProgressPlugin = require('webpack/lib/ProgressPlugin');
+ const CircularDependencyPlugin = require('circular-dependency-plugin');
+@@ -71,8 +72,11 @@
+       "./node_modules",
+       "./node_modules"
+     ],
+     "symlinks": true
+   },
++  "externals": [
++    resolveExternals
++  ],
+   "resolveLoader": {
+     "modules": [
+       "./node_modules",
+@@ -508,6 +515,9 @@
+       },
+       "exclude": [],
+       "tsConfigPath": "src/tsconfig.app.json"
++    }),
++    new webpack.ProvidePlugin({
++      __extends: 'typescript-extends'
+     })
+   ],
+   "node": {
+@@ -519,9 +529,25 @@
+     "process": true,
+     "module": false,
+     "clearImmediate": false,
+-    "setImmediate": false
++    "setImmediate": false,
++    "__dirname": true
+   },
+   "devServer": {
+     "historyApiFallback": true
+   }
+ };
++
++function resolveExternals(context, request, callback) {
++  return resolveMeteor(request, callback) ||
++    callback();
++}
++
++function resolveMeteor(request, callback) {
++  var match = request.match(/^meteor\/(.+)$/);
++  var pack = match && match[1];
++
++  if (pack) {
++    callback(null, 'Package["' + pack + '"]');
++    return true;
++  }
++}
