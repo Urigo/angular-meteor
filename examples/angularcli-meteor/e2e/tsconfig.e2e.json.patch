@@ -1,0 +1,14 @@
+diff --git a/e2e/tsconfig.e2e.json b/e2e/tsconfig.e2e.json
+index 1d9e5ed..73b1885 100644
+--- a/e2e/tsconfig.e2e.json
++++ b/e2e/tsconfig.e2e.json
+@@ -10,5 +10,8 @@
+       "jasminewd2",
+       "node"
+     ]
+-  }
++  },
++  "exclude": [
++    "../api/node_modules"
++  ]
+ }
