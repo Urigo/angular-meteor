@@ -2,7 +2,6 @@
 
 # run 'meteor npm install' in the tests.
 
-cd tests
-linklocal
-meteor test --driver-package=practicalmeteor:mocha
-meteor test --full-app --once --driver-package=practicalmeteor:mocha
+cd tests/angular2-compiler-tests
+meteor npm install
+meteor test --driver-package=sonja:jasmine
