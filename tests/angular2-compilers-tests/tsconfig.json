@@ -1,0 +1,14 @@
+{
+  "baseUrl": ".",
+  "experimentalDecorators": true,
+  "compilerOptions": {
+    "lib": ["es2015", "dom"],
+    "diagnostics": false
+  },
+  "include": [
+    "client/**/*.ts"
+  ],
+  "types": [
+    "@types/jasmine"
+  ]
+}
