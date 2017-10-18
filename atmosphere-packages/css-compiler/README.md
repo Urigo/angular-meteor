@@ -47,6 +47,16 @@ two other ways to access styles for a Angular 2 component.
 
    ```
 
+### 3rd party styles
+
+It's also possible to inlude styles from node modules.
+
+```sass
+@import '{}/node_modules/@angular/material/core/theming/all-theme';
+```
+
+- `{}` points to the root directory of an applicastion
+
 ### Examples
  
 Check out [TODO demo](https://github.com/Urigo/angular-meteor/tree/master/packages/angular2-meteor/examples/todos-meteor-1.3) and its `imports` folder particularly for more info.
