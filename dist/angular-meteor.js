@@ -1759,7 +1759,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // Extend prototype with the defined mixins
 	  this._extend = function (obj, options) {
 	    var _$defaults = _underscore2.default.defaults({}, options, {
-	      pattern: /.*/ }),
+	      pattern: /.*/ // The patterns of the keys which will be filtered
+	    }),
 	        pattern = _$defaults.pattern,
 	        context = _$defaults.context;
 
@@ -1900,6 +1901,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // Calls Meteor.subscribe() which will be digested after each invokation
 	  // and automatically destroyed
 	  $$Core.subscribe = function (subName, fn, cb) {
+	    var _this = this;
+
 	    fn = this.$bindToContext($Mixer.caller, fn || angular.noop);
 	    cb = cb ? this.$bindToContext($Mixer.caller, cb) : angular.noop;
 
@@ -1942,6 +1945,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 
 	      var subscription = (_Meteor = Meteor).subscribe.apply(_Meteor, [subName].concat(_toConsumableArray(args), [cb]));
+
+	      Tracker.autorun(function () {
+	        // Is the subscription still active?
+	        // Should never happen because the computation should stop the tracker when unsubscribing.
+	        if (!_underscore2.default.has(Meteor._subscriptions, subscription.subscriptionId)) {
+	          return false;
+	        }
+
+	        // Subscribe to changes on the ready-property.
+	        Meteor._subscriptions[subscription.subscriptionId].readyDeps.depend();
+
+	        // Re-run the digest cycle if we are not in one already.
+	        _this.$$throttledDigest();
+	      });
 
 	      hooks.onStart();
 
@@ -1999,7 +2016,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  // Digests scope only if there is no phase at the moment
 	  $$Core.$$throttledDigest = function () {
-	    var _this = this;
+	    var _this2 = this;
 
 	    var isDigestable = !this.$$destroyed && !this.$$phase && !this.$root.$$phase;
 
@@ -2008,7 +2025,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      // we want to run this second autorun in a non-reactive manner.
 	      // thus preventing inner autoruns from being dependent on their parents.
 	      Tracker.nonreactive(function () {
-	        return _this.$digest();
+	        return _this2.$digest();
 	      });
 	    }
 	  };

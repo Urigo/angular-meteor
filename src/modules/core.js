@@ -83,6 +83,20 @@ angular.module(name, [
 
         const subscription = Meteor.subscribe(subName, ...args, cb);
 
+        Tracker.autorun(() => {
+          // Is the subscription still active?
+          // Should never happen because the computation should stop the tracker when unsubscribing.
+          if (!_.has(Meteor._subscriptions, subscription.subscriptionId)) {
+            return false;
+          }
+
+          // Subscribe to changes on the ready-property.
+          Meteor._subscriptions[subscription.subscriptionId].readyDeps.depend();
+
+          // Re-run the digest cycle if we are not in one already.
+          this.$$throttledDigest();
+        });
+
         hooks.onStart();
 
         result.ready = subscription.ready.bind(subscription);
