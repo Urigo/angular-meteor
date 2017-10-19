@@ -16,7 +16,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     Chats.find({}).subscribe((chats: Chat[]) => {
-      console.log(chats);
       this.chats = chats;
     });
   }
