@@ -11,7 +11,10 @@
     "start": "webpack-dev-server --port=4200",
     "start-prod": "webpack-dev-server --port=4200 --config webpack.config.js.prod",
     "test": "karma start ./karma.conf.js",
-    "e2e": "protractor ./protractor.conf.js"
+    "e2e": "protractor ./protractor.conf.js",
+    "api": "cd api && meteor",
+    "api:reset": "cd api && meteor reset",
+    "meteor-client:bundle": "meteor-client bundle -s api"
   },
   "private": true,
   "dependencies": {
