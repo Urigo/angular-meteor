@@ -1,3 +1,16 @@
+<a name="0.8.0"></a>
+
+### Compatibility for Angular 4 and beyond
+
+This version fixed a compatibility issue for the old Reactive Component with Angular 4.
+
+It is still recommended to use the newer []Meteor-RxJS API](https://github.com/Urigo/meteor-rxjs) and all the tutorials have migrated to that.  
+
+* Add compatibility for Angular 4 for the old Reactive Component API, [#1644](https://github.com/Urigo/angular-meteor/pull/1644)
+* Add Angular CLI Example, [#1651](https://github.com/Urigo/angular-meteor/pull/1651)
+
+This version was done completely by @darkbasic, thank you so much!
+
 <a name="0.7.0-beta.1"></a>
 # [0.7.0-beta.1](https://github.com/Urigo/angular2-meteor/compare/0.6.0...v0.7.0-beta.1) (2016-08-21)
 

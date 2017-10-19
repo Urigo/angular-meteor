@@ -31,7 +31,7 @@
 
 ## Usage
 
-Go to the [official docs](https://www.angular-meteor.com/)
+Go to the [official docs about Meteor-RxJS](https://angular-meteor.com/meteor-rxjs)
 
 ## Tutorial
 
