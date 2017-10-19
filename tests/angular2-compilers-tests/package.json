@@ -1,0 +1,26 @@
+{
+  "name": "angular2-compilers-tests",
+  "private": true,
+  "scripts": {
+    "test": "TEST_SERVER=0 METEOR_PACKAGE_DIRS=../../atmosphere-packages TEST_BROWSER_DRIVER=phantomjs meteor test --once --port 3005 --driver-package=ardatan:mocha"
+  },
+  "dependencies": {
+    "@angular/common": "^4.4.5",
+    "@angular/compiler": "^4.4.5",
+    "@angular/core": "^4.4.5",
+    "@angular/platform-browser": "^4.4.5",
+    "@angular/platform-browser-dynamic": "^4.4.5",
+    "babel-runtime": "^6.26.0",
+    "meteor-node-stubs": "^0.2.11",
+    "rxjs": "5.4.3",
+    "zone.js": "^0.8.17"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.0.4",
+    "@types/mocha": "^2.2.43",
+    "@types/sinon": "^2.3.6",
+    "chai": "^4.1.2",
+    "phantomjs-prebuilt": "^2.1.15",
+    "sinon": "^4.0.1"
+  }
+}

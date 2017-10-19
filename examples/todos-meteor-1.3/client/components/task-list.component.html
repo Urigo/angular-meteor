@@ -1,8 +1,0 @@
-<div *ngIf="!isLoading">
-  <ul *ngFor="let task of tasks">
-    <task [task]="task"></task>
-  </ul>
-</div>
-<div *ngIf="isLoading" class="loader">
-  <span>loading...</span>
-</div>
