@@ -10,6 +10,7 @@ before_install:
 install:
   - git clean -fXd
   - npm install -g phantomjs-prebuilt rollup@^0.37.0 tslint@^4.0.0 typescript@^2.0.10
+  - cd tests/angular2-compilers-tests/
   - npm install
   - meteor npm rebuild
 script:
