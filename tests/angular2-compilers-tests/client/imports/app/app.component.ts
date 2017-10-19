@@ -6,5 +6,13 @@ import { Component } from '@angular/core';
   styleUrls: ['app.scss']
 })
 export class AppComponent {
-  greetingText: string = 'Hello World!';
+  value = 0;
+
+  onIncrementClick() {
+    this.value = Math.min(100, ++this.value);
+  }
+
+  onDecrementClick() {
+    this.value = Math.max(-100, --this.value);
+  }
 }

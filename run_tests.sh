@@ -2,6 +2,7 @@
 
 # run 'meteor npm install' in the tests.
 
-cd tests/angular2-compiler-tests
+cd tests
+cd angular2-compilers-tests
 meteor npm install
-meteor test --driver-package=sonja:jasmine
+npm test

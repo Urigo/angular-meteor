@@ -9,6 +9,8 @@
     "client/**/*.ts"
   ],
   "types": [
-    "@types/jasmine"
+    "@types/mocha",
+    "@types/chai",
+    "@types/sinon"
   ]
 }
