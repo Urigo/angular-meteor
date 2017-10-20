@@ -1,4 +1,3 @@
 {
-  "extends": ["config:js-lib", ":meteor"],
-  "ignorePaths": ["examples/angularcli-meteor/api"]
+  "extends": ["config:js-lib", ":meteor"]
 }
