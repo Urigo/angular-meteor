@@ -1,4 +1,3 @@
 {
-  "extends": [":library"],
-  "meteor": true
+  "extends": ["config:js-lib", ":meteor"]
 }
