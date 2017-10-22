@@ -7,7 +7,7 @@ Package.describe({
 });
 
 Npm.depends({
-  'cheerio': '0.20.0',
+  'cheerio': '0.22.0',
   'node-sass': '4.5.3'
 });
 
