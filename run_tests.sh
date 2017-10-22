@@ -5,4 +5,4 @@
 cd tests
 cd angular-compilers-tests
 meteor npm install
-npm test
+meteor npm test

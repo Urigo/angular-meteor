@@ -12,8 +12,6 @@ import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@ang
 import { AppComponent } from './app.component';
 import { By } from '@angular/platform-browser';
 
-require('zone.js/dist/mocha-patch');
-
 import { expect } from 'chai';
 import { spy } from 'sinon';
 
