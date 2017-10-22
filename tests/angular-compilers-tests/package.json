@@ -1,5 +1,5 @@
 {
-  "name": "angular2-compilers-tests",
+  "name": "angular-compilers-tests",
   "private": true,
   "scripts": {
     "test": "TEST_SERVER=0 METEOR_PACKAGE_DIRS=../../atmosphere-packages TEST_BROWSER_DRIVER=phantomjs meteor test --once --port 3005 --driver-package=ardatan:mocha"

@@ -1,13 +1,13 @@
 Package.describe({
-  name: 'angular2-compilers',
+  name: 'angular-compilers',
   version: '1.0.0',
-  summary: 'Angular 2 Templates, HTML and TypeScript compilers for Meteor',
+  summary: 'Angular Templates, HTML and TypeScript compilers for Meteor',
   git: 'https://github.com/Urigo/angular2-meteor/',
   documentation: 'README.md'
 });
 
 Package.registerBuildPlugin({
-  name: 'Angular2 Compilers',
+  name: 'Angular Compilers',
   sources: [
     'plugin/register.js'
   ],
