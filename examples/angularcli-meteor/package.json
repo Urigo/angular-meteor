@@ -30,7 +30,7 @@
     "angular2-moment": "^1.7.0",
     "babel-runtime": "^6.26.0",
     "core-js": "^2.4.1",
-    "meteor-node-stubs": "^0.2.11",
+    "meteor-node-stubs": "^0.3.0",
     "meteor-rxjs": "^0.4.8",
     "moment": "^2.19.1",
     "rxjs": "^5.4.2",

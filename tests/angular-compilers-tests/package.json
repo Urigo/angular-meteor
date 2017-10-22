@@ -11,7 +11,7 @@
     "@angular/platform-browser": "^4.4.5",
     "@angular/platform-browser-dynamic": "^4.4.5",
     "babel-runtime": "^6.26.0",
-    "meteor-node-stubs": "^0.2.11",
+    "meteor-node-stubs": "^0.3.0",
     "rxjs": "5.4.3",
     "zone.js": "^0.8.17"
   },
