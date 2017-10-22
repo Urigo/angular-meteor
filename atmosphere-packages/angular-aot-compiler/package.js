@@ -17,7 +17,7 @@ Npm.depends({
   'rollup': '0.50.0',
   'rollup-plugin-node-resolve': '3.0.0',
   'rollup-plugin-hypothetical': '2.0.0',
-  'rollup-plugin-commonjs': '8.2.0',
+  'rollup-plugin-commonjs': '8.2.4',
   'cheerio': '0.22.0',
   'node-sass': '4.5.3',
   'reflect-metadata': '0.1.10'
