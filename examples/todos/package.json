@@ -20,6 +20,6 @@
     "zone.js": "^0.8.16"
   },
   "devDependencies": {
-    "@types/meteor": "^1.4.11"
+    "@types/meteor": "1.4.11"
   }
 }
