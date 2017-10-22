@@ -6,5 +6,6 @@ before_install:
   - curl https://install.meteor.com | /bin/sh
 install:
   - git clean -fXd
+  - npm install -g concurrently
 script:
   - ./run_tests.sh
