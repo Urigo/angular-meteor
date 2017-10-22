@@ -13,7 +13,7 @@ Npm.depends({
   '@angular/compiler': '4.4.6',
   '@angular/core': '4.4.6',
   '@angular/common': '4.4.6',
-  'rxjs': '5.4.3',
+  'rxjs': '5.5.0',
   'rollup': '0.50.0',
   'rollup-plugin-node-resolve': '3.0.0',
   'rollup-plugin-hypothetical': '2.0.0',
