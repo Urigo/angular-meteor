@@ -1,6 +1,6 @@
 <a href="https://angular-meteor.com/"><img src="https://s22.postimg.org/vpn3d97ch/logo_large.png" width="60" height="60" /></a>  [![Join the chat at https://gitter.im/Urigo/angular-meteor](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Urigo/angular-meteor)
 
-### [Angular-Meteor-Compilers](https://github.com/Urigo/angular-meteor/tree/master/atmosphere-packages) [![Build Status](https://travis-ci.org/Urigo/angular-meteor.svg?branch=master)](https://travis-ci.org/Urigo/angular-meteor)
+### [Angular-Meteor Compilers](https://github.com/Urigo/angular-meteor/tree/master/atmosphere-packages) [![Build Status](https://travis-ci.org/Urigo/angular-meteor.svg?branch=master)](https://travis-ci.org/Urigo/angular-meteor)
 
 ### [meteor-rxjs - The Angular Meteor Data solution](https://github.com/Urigo/meteor-rxjs) [![npm version](https://badge.fury.io/js/meteor-rxjs.svg)](https://badge.fury.io/js/meteor-rxjs) [![Build Status](https://travis-ci.org/Urigo/meteor-rxjs.svg?branch=master)](https://travis-ci.org/Urigo/meteor-rxjs)
 
