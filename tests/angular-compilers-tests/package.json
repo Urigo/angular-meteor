@@ -16,12 +16,12 @@
     "zone.js": "^0.8.17"
   },
   "devDependencies": {
-    "@types/chai": "^4.0.4",
-    "@types/mocha": "^2.2.43",
-    "@types/sinon": "^2.3.6",
-    "chai": "^4.1.2",
-    "just-extend": "^1.1.22",
-    "phantomjs-prebuilt": "^2.1.15",
-    "sinon": "^4.0.1"
+    "@types/chai": "4.0.4",
+    "@types/mocha": "2.2.43",
+    "@types/sinon": "2.3.6",
+    "chai": "4.1.2",
+    "just-extend": "1.1.26",
+    "phantomjs-prebuilt": "2.1.15",
+    "sinon": "4.0.1"
   }
 }
