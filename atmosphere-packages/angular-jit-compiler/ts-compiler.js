@@ -21,9 +21,7 @@ export class AngularJitTsCompiler extends TypeScriptCompiler {
             path: jsFilePath,
             data: result.code
           })
-        }catch(e){
-          console.log(e);
-        }
+        }catch(e){}
       }
       this.fixTemplateAndStyleUrls(tsFile);
     }

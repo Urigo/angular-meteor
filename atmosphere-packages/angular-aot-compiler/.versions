@@ -1,4 +1,4 @@
-ardatan:angular-aot-compiler@0.1.0
+ardatan:angular-aot-compiler@0.1.1
 babel-compiler@6.20.0
 babel-runtime@1.0.1
 barbatus:typescript-compiler@0.9.12
