@@ -6,8 +6,8 @@ const basePath = process.cwd();
 
 export class AngularJitScssCompiler{
   processFilesForTarget(scssFiles){
-    try{
-      for(const scssFile of scssFiles){
+    for(const scssFile of scssFiles){
+      try{
         const fileName = scssFile.getBasename();
         const filePath = scssFile.getPathInPackage();
         if(!fileName.startsWith('_' ) &&
@@ -25,9 +25,9 @@ export class AngularJitScssCompiler{
             sourceMap: outputData.map
           });
         }
+      }catch(e){
+        scssFile.error(e);
       }
-    }catch(e){
-      scssFile.error(e);
     }
   }
 }

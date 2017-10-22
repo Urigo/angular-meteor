@@ -15,7 +15,8 @@ Package.onUse(function(api) {
   api.versionsFrom('1.5.2.2');
   api.use([
     'ecmascript',
-    'barbatus:typescript-compiler@0.9.12'
+    'barbatus:typescript-compiler@0.9.12',
+    'babel-compiler'
   ], 'server');
   api.mainModule('index.js', 'server');
   api.export([
