@@ -14,7 +14,7 @@
     "@angular/platform-browser-dynamic": "^4.4.5",
     "@angular/router": "^4.4.5",
     "babel-runtime": "^6.20.0",
-    "meteor-node-stubs": "~0.2.4",
+    "meteor-node-stubs": "~0.3.0",
     "meteor-rxjs": "^0.4.8",
     "rxjs": "^5.4.2",
     "zone.js": "^0.8.16"
