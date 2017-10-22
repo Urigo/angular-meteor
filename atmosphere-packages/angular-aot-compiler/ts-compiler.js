@@ -2,6 +2,8 @@ import { AngularAotScssCompiler } from './scss-compiler';
 
 import path from 'path';
 
+import fs from 'fs';
+
 import ts from'typescript';
 
 import 'reflect-metadata';
@@ -43,7 +45,7 @@ const ngCompilerOptions = {
 const tcOptions = {
   baseUrl: basePath,
   experimentalDecorators: true,
-  module: 'commonjs',
+  module: 'es2015',
   target: 'es2015',
   noImplicitAny: false,
   moduleResolution: 'node',
@@ -132,7 +134,7 @@ function AppResolve(appNgModules, exclude, forWeb){
 export class AngularAotTsCompiler extends TypeScriptCompiler {
   constructor(extraTsOptions){
     super(extraTsOptions);
-    this.scssCompiler = new AngularAotScssCompiler();
+    this.scssCompiler = new AngularJitScssCompiler();
   }
   replaceStringsWithCompiledContents(urls, baseUrl) {
     return urls
@@ -160,8 +162,33 @@ export class AngularAotTsCompiler extends TypeScriptCompiler {
         const forWeb = WEB_ARCH_REGEX.test(inputFiles[0].getArch());
         // Get app ts-files.
         const tsFiles = super.getFilesToProcess(inputFiles);
+        const inputTsFiles = inputFiles.filter(inputFile => inputFile.getPathInPackage().endsWith('.d.ts'));
+        for(const inputFile of inputTsFiles){
+          const tsFilePath = inputFile.getPathInPackage().replace('.d', '');
+          if(!tsFiles.includes(tsFilePath)){
+            try{
+              const source = fs.readFileSync(path.join(basePath, tsFilePath), 'utf8')
+              tsFiles.push(inputFile)
+              //console.log('Added as TS file before compiled:' + tsFilePath)
+            }catch(e){
+              const jsFilePath = tsFilePath.replace('.ts', '.js');
+              try{
+                const source = fs.readFileSync(path.join(basePath, jsFilePath), 'utf8');
+                const result = Babel.compile(source);
+                //console.log('Added as JS file before compiled:' + jsFilePath)
+                inputFile.addJavaScript({
+                  path: jsFilePath,
+                  data: result.code
+                })
+              }catch(e){
+                  //console.log('JS version is not found!');
+              }
+            }
+          }
+        }
         const tsFilePaths = tsFiles.map(file => file.getPathInPackage());
-        const defaultGet = this._getContentGetter(tsFiles);
+        //console.log(tsFilePaths);
+        const defaultGet = this._getContentGetter(inputFiles);
 
         const { options } = ts.convertCompilerOptionsFromJson(tcOptions, '');
         const genOptions = Object.assign({}, options, ngcOptions);
@@ -178,6 +205,8 @@ export class AngularAotTsCompiler extends TypeScriptCompiler {
           return null;
         }
 
+
+        const prefix = forWeb ? 'client' : 'server';
         const ngcFilePaths = Array.from(ngcFilesMap.keys());
 
         const getContent = filePath => {
@@ -194,11 +223,11 @@ export class AngularAotTsCompiler extends TypeScriptCompiler {
         const codeMap = new Map();
         const tsFilePath = allPaths.filter(
           filePath => ! TypeScript.isDeclarationFile(filePath));
-        let mainCode;
+        let mainCode = 'main.js';
         let mainCodePath;
         for (const filePath of tsFilePath) {
+          //console.log('Building: ' + filePath);
           const result = tsBuild.emit(filePath, filePath);
-          this._processTsDiagnostics(result.diagnostics);
           let code = result.code;
           if(process.env.ROLLUP){
             if (this.hasDynamicBootstrap(code)) {
@@ -206,17 +235,36 @@ export class AngularAotTsCompiler extends TypeScriptCompiler {
               mainCodePath = this.removeTsExtension(filePath) + '.js';
               continue;
             }
+            if(!mainCode && filePath.endsWith('main.ts')){
+              mainCode = result.code;
+              continue;
+            }
             codeMap.set(this.removeTsExtension(filePath), code);
           }else{
-            const inputFile = tsFiles.find(file => filePath.includes(this.removeTsExtension(file.getPathInPackage())));
+            let inputFile = tsFiles.find(file => {
+              const origSourceFilePath =
+                  this.removeTsExtension(
+                    getNoRooted(
+                      file.getPathInPackage()
+                    )
+                  )
+                  .replace('.d', '');
+              const origTargetFilePath =
+                this.removeTsExtension(
+                  getNoRooted(filePath)
+                )
+                .replace('.ngfactory');
+              return origSourceFilePath == origTargetFilePath;
+            });
             if(inputFile){
+              this._processTsDiagnostics(result.diagnostics,inputFile);
               if (this.hasDynamicBootstrap(code)) {
                 code = this.removeDynamicBootstrap(code);
               }
               const inputPath = inputFile.getPathInPackage();
               const outputPath = this.removeTsExtension(filePath);
               const toBeAdded = {
-                sourcePath: inputPath,
+                //sourcePath: inputPath,
                 path: outputPath + '.js',
                 data: code,
                 hash: result.hash,
@@ -227,7 +275,6 @@ export class AngularAotTsCompiler extends TypeScriptCompiler {
           }
         }
         if(process.env.ROLLUP){
-          const prefix = forWeb ? 'client' : 'server';
           const tsconfig = this.tsconfig;
           const exclude = !!tsconfig.angularCompilerOptions &&
             tsconfig.angularCompilerOptions.exclude;
@@ -282,11 +329,8 @@ export class AngularAotTsCompiler extends TypeScriptCompiler {
         inputFiles[index].getContentsAsString() : null;
     };
   }
-  _processTsDiagnostics(diagnostics) {
-    diagnostics.semanticErrors.forEach(({ fileName, line, column, message }) => {
-      const msg = `${fileName} (${line}, ${column}): ${message}`;
-      console.log(msg);
-    });
+  _processTsDiagnostics(diagnostics, inputFile) {
+    diagnostics.semanticErrors.forEach(error => inputFile.error);
   }
   async generateCode(filePaths, ngcOptions, getMeteorFileContent) {
     const tsHost = this.createNgcTsHost(ngcOptions, getMeteorFileContent);
