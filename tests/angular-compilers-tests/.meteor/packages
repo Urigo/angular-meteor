@@ -6,6 +6,6 @@
 
 meteor-base@1.1.0            # Packages every Meteor app needs to have
 
-angular2-compilers
+angular-compilers
 ecmascript
 ardatan:mocha

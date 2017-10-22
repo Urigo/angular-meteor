@@ -3,6 +3,6 @@
 # run 'meteor npm install' in the tests.
 
 cd tests
-cd angular2-compilers-tests
+cd angular-compilers-tests
 meteor npm install
-npm test
+meteor npm test
