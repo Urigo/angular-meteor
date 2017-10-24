@@ -17,6 +17,9 @@ export class AngularAotCompiler {
     this.babelCompiler = new BabelCompiler();
   }
   processFilesForTarget(inputFiles){
+    const inputFilePaths = inputFiles
+    .map(inputFile => inputFile.getPathInPackage());
+    const extraTsFiles = [];
     for(const inputFile of inputFiles){
       const filePath = inputFile.getPathInPackage();
       inputFile._addJavaScript = inputFile.addJavaScript;
@@ -30,10 +33,10 @@ export class AngularAotCompiler {
       if(HTML_REGEX.test(filePath)){
         this.htmlCompiler.processOneFileForTarget(inputFile);
       }else if(D_TS_REGEX.test(filePath)){
-        const jsFilePath = filePath.replace('.d.ts', '.js');
+        const tsFilePath = filePath.replace('.d', '');
+        const jsFilePath = filePath.replace('.ts', '.js');
         if(fs.existsSync(jsFilePath)){
           const source = fs.readFileSync(jsFilePath, 'utf8');
-          const toBeAdded = this.babelCompiler.processOneFileForTarget(inputFile, source);
           inputFile.addJavaScript({
             path: jsFilePath,
             data: source
@@ -41,6 +44,6 @@ export class AngularAotCompiler {
         }
       }
     }
-    this.tsCompiler.processFilesForTarget(inputFiles);
+    this.tsCompiler.processFilesForTarget(inputFiles, extraTsFiles);
   }
 }

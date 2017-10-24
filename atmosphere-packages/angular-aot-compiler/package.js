@@ -1,6 +1,6 @@
 Package.describe({
   name: 'ardatan:angular-aot-compiler',
-  version: '0.1.5',
+  version: '0.1.6',
   summary: 'Angular Compiler Package for AOT',
   git: 'https://github.com/ardatan/angular-meteor',
   documentation: 'README.md'

@@ -1,3 +1,4 @@
+import fs from 'fs';
 import path from 'path';
 
 import ts from'typescript';
@@ -45,7 +46,7 @@ const ngCompilerOptions = {
 const tcOptions = {
   baseUrl: basePath,
   experimentalDecorators: true,
-  module: 'es2015',
+  module: 'commonjs',
   target: 'es2015',
   noImplicitAny: false,
   moduleResolution: 'node',
@@ -164,6 +165,30 @@ export class AngularAotTsCompiler extends TypeScriptCompiler {
         const forWeb = WEB_ARCH_REGEX.test(inputFiles[0].getArch());
         // Get app ts-files.
         const tsFiles = super.getFilesToProcess(inputFiles);
+        const inputTsFiles = inputFiles.filter(inputFile => inputFile.getPathInPackage().endsWith('.d.ts'));
+        for(const inputFile of inputTsFiles){
+          const tsFilePath = inputFile.getPathInPackage().replace('.d', '');
+          if(!tsFiles.includes(tsFilePath)){
+            try{
+              const source = fs.readFileSync(path.join(basePath, tsFilePath), 'utf8')
+              tsFiles.push(inputFile)
+              //console.log('Added as TS file before compiled:' + tsFilePath)
+            }catch(e){
+              const jsFilePath = tsFilePath.replace('.ts', '.js');
+              try{
+                const source = fs.readFileSync(path.join(basePath, jsFilePath), 'utf8');
+                const result = Babel.compile(source);
+                //console.log('Added as JS file before compiled:' + jsFilePath)
+                inputFile.addJavaScript({
+                  path: jsFilePath,
+                  data: result.code
+                })
+              }catch(e){
+                  //console.log('JS version is not found!' + jsFilePath);
+              }
+            }
+          }
+        }
         const tsFilePaths = tsFiles.map(file => file.getPathInPackage());
         //console.log(tsFilePaths);
         const defaultGet = this._getContentGetter(inputFiles);
@@ -230,7 +255,11 @@ export class AngularAotTsCompiler extends TypeScriptCompiler {
                   )
                   .replace('.d', '');
               return origTargetFilePath == origSourceFilePath;
-            });
+            }) || inputFiles.find(file => {
+                const filePath = file.getPathInPackage();
+                return filePath.startsWith(prefix) &&
+                       filePath.includes('imports');
+              });
             this._processTsDiagnostics(result.diagnostics,inputFile);
             if (this.hasDynamicBootstrap(code)) {
               code = this.removeDynamicBootstrap(code);
@@ -400,9 +429,9 @@ export class AngularAotTsCompiler extends TypeScriptCompiler {
         }
         let resourceContent = ngcHost.readFile(filePath);
         if(SCSS_REGEX.test(filePath)){
-          const fullPath = path.join(basePath, filePath);
           const result  = sass.renderSync({
-            file: fullPath,
+            file: isRooted(filePath) ?
+             filePath : path.join(basePath, filePath),
             data: resourceContent,
             includePaths: [basePath + '/node_modules']
           });
