@@ -1,8 +1,4 @@
-import { AngularAotScssCompiler } from './scss-compiler';
-
 import path from 'path';
-
-import fs from 'fs';
 
 import ts from'typescript';
 
@@ -20,6 +16,8 @@ import {
   toTypeScript
 } from '@angular/compiler';
 
+import sass from 'node-sass';
+
 import { TSBuild } from 'meteor-typescript';
 
 const { rollup : baseRollup } = Npm.require('rollup');
@@ -33,7 +31,9 @@ const basePath = process.cwd();
 
 const ROOTED = /^(\/|\\)/;
 
-const STYLES_URLS_REGEX = /styleUrls *:(\s*\[[^\]]*?\])/g;
+const SCSS_REGEX = /\.scss$/;
+
+const LOAD_CHILDREN_REGEX = /loadChildren\s*:(\s*['"`](.*?)['"`]\s*([,}]))/gm;
 const STRING_REGEX = /(['`"])((?:[^\\]\\\1|.)*?)\1/g;
 
 const WEB_ARCH_REGEX = /^web/;
@@ -132,60 +132,38 @@ function AppResolve(appNgModules, exclude, forWeb){
   };
 
 export class AngularAotTsCompiler extends TypeScriptCompiler {
-  constructor(extraTsOptions){
-    super(extraTsOptions);
-    this.scssCompiler = new AngularJitScssCompiler();
+  replaceStringsWithFullUrls(basePath, urls){
+      return urls
+      .replace(STRING_REGEX,
+        (match, quote, url) => `'/${path.join(basePath, url)}'`);
   }
-  replaceStringsWithCompiledContents(urls, baseUrl) {
-    return urls
-    .replace(
-      STRING_REGEX,
-       (match, quote, url) => {
-           const content = this.scssCompiler
-           .compileFileByUrl(
-             path.join(baseUrl, url)
-           );
-           return JSON.stringify(content);
-         }
-      );
-  }
-  fixTemplateAndStyleUrls(tsFile){
+  addFakeDynamicLoader(tsFile, source){
 
-      const baseUrl = tsFile.getPathInPackage().replace(tsFile.getBasename(), '');
-      const source = tsFile.getContentsAsString();
+    source = source || tsFile.getContentsAsString();
+    const basePath = tsFile.getPathInPackage().replace(tsFile.getBasename(), '');
 
-      const newSource  = source
-        .replace(STYLES_URLS_REGEX, (match, urls) => `styles:${this.replaceStringsWithCompiledContents(urls, baseUrl)}` );
-      tsFile.getContentsAsString = () => newSource;
+    let fakeLoaderCode = '';
+
+    let newSource = source.replace(LOAD_CHILDREN_REGEX,
+        (match, url) => {
+          const replaced = this.replaceStringsWithFullUrls(basePath, url).trim();
+          const fixedUrl = (replaced
+                              .split('#')[0]) + '.ngfactory' + replaced[0];
+
+          fakeLoaderCode += `function fakeLoader(){module.dynamicImport(${fixedUrl})}`;
+          return `loadChildren: ${replaced}`;
+        })
+
+    if(fakeLoaderCode)
+          newSource = fakeLoaderCode + '\n' + newSource;
+
+    return newSource;
+
   }
   processFilesForTarget(inputFiles){
         const forWeb = WEB_ARCH_REGEX.test(inputFiles[0].getArch());
         // Get app ts-files.
         const tsFiles = super.getFilesToProcess(inputFiles);
-        const inputTsFiles = inputFiles.filter(inputFile => inputFile.getPathInPackage().endsWith('.d.ts'));
-        for(const inputFile of inputTsFiles){
-          const tsFilePath = inputFile.getPathInPackage().replace('.d', '');
-          if(!tsFiles.includes(tsFilePath)){
-            try{
-              const source = fs.readFileSync(path.join(basePath, tsFilePath), 'utf8')
-              tsFiles.push(inputFile)
-              //console.log('Added as TS file before compiled:' + tsFilePath)
-            }catch(e){
-              const jsFilePath = tsFilePath.replace('.ts', '.js');
-              try{
-                const source = fs.readFileSync(path.join(basePath, jsFilePath), 'utf8');
-                const result = Babel.compile(source);
-                //console.log('Added as JS file before compiled:' + jsFilePath)
-                inputFile.addJavaScript({
-                  path: jsFilePath,
-                  data: result.code
-                })
-              }catch(e){
-                  //console.log('JS version is not found!');
-              }
-            }
-          }
-        }
         const tsFilePaths = tsFiles.map(file => file.getPathInPackage());
         //console.log(tsFilePaths);
         const defaultGet = this._getContentGetter(inputFiles);
@@ -214,9 +192,6 @@ export class AngularAotTsCompiler extends TypeScriptCompiler {
             defaultGet(filePath);
         }
         const buildOptions = super.getBuildOptions(inputFiles);
-        if(process.env.ROLLUP){
-          buildOptions.compilerOptions.module = 'es2015';
-        }
 
         const allPaths = tsFilePaths.concat(ngcFilePaths);
         const tsBuild = new TSBuild(allPaths, getContent, buildOptions);
@@ -226,7 +201,6 @@ export class AngularAotTsCompiler extends TypeScriptCompiler {
         let mainCode = 'main.js';
         let mainCodePath;
         for (const filePath of tsFilePath) {
-          //console.log('Building: ' + filePath);
           const result = tsBuild.emit(filePath, filePath);
           let code = result.code;
           if(process.env.ROLLUP){
@@ -241,7 +215,13 @@ export class AngularAotTsCompiler extends TypeScriptCompiler {
             }
             codeMap.set(this.removeTsExtension(filePath), code);
           }else{
-            let inputFile = tsFiles.find(file => {
+          const origTargetFilePath =
+            this.removeTsExtension(
+              getNoRooted(filePath)
+            )
+            .replace('.ngfactory', '')
+            .replace('.shim.ngstyle', '');
+            const inputFile = inputFiles.find(file => {
               const origSourceFilePath =
                   this.removeTsExtension(
                     getNoRooted(
@@ -249,29 +229,23 @@ export class AngularAotTsCompiler extends TypeScriptCompiler {
                     )
                   )
                   .replace('.d', '');
-              const origTargetFilePath =
-                this.removeTsExtension(
-                  getNoRooted(filePath)
-                )
-                .replace('.ngfactory');
-              return origSourceFilePath == origTargetFilePath;
+              return origTargetFilePath == origSourceFilePath;
             });
-            if(inputFile){
-              this._processTsDiagnostics(result.diagnostics,inputFile);
-              if (this.hasDynamicBootstrap(code)) {
-                code = this.removeDynamicBootstrap(code);
-              }
-              const inputPath = inputFile.getPathInPackage();
-              const outputPath = this.removeTsExtension(filePath);
-              const toBeAdded = {
-                //sourcePath: inputPath,
-                path: outputPath + '.js',
-                data: code,
-                hash: result.hash,
-                sourceMap: result.sourceMap
-              };
-              inputFile.addJavaScript(toBeAdded);
+            this._processTsDiagnostics(result.diagnostics,inputFile);
+            if (this.hasDynamicBootstrap(code)) {
+              code = this.removeDynamicBootstrap(code);
             }
+            code = this.addFakeDynamicLoader(inputFile, code);
+            const inputPath = inputFile.getPathInPackage();
+            const outputPath = this.removeTsExtension(filePath);
+            const toBeAdded = {
+              sourcePath: inputPath,
+              path: outputPath + '.js',
+              data: code,
+              hash: result.hash,
+              sourceMap: result.sourceMap
+            };
+            inputFile.addJavaScript(toBeAdded);
           }
         }
         if(process.env.ROLLUP){
@@ -358,13 +332,13 @@ export class AngularAotTsCompiler extends TypeScriptCompiler {
           filePath,
           generatedModule.source ||
           toTypeScript(
-            generatedModule,
-             `/**
-               * @fileoverview This file is generated by the Angular template compiler.
-               * Do not edit.
-               * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride}
-               */
-               /* tslint:disable */
+            generatedModule,`
+             /**
+              * @fileoverview This file is generated by the Angular template compiler.
+              * Do not edit.
+              * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride}
+              */
+             /* tslint:disable */
               `)
         );
       }
@@ -424,7 +398,17 @@ export class AngularAotTsCompiler extends TypeScriptCompiler {
         if (! ngcHost.fileExists(filePath)) {
           throw new Error(`Compilation failed. Resource file not found: ${filePath}`);
         }
-        return ngcHost.readFile(filePath);
+        let resourceContent = ngcHost.readFile(filePath);
+        if(SCSS_REGEX.test(filePath)){
+          const fullPath = path.join(basePath, filePath);
+          const result  = sass.renderSync({
+            file: fullPath,
+            data: resourceContent,
+            includePaths: [basePath + '/node_modules']
+          });
+          resourceContent = result.css.toString('utf8');
+        }
+        return resourceContent;
       }
     }
     return Object.assign({}, ngcHost, reflectorContext);
@@ -441,7 +425,9 @@ export class AngularAotTsCompiler extends TypeScriptCompiler {
     return filePath;
   }
   hasDynamicBootstrap(code) {
-    return code.indexOf('platformBrowserDynamic') !== -1 || code.indexOf('renderModule(') !== -1;
+    return code.indexOf('platform-browser-dynamic') !== -1 ||
+           code.indexOf('DynamicServer') !== -1 ||
+           code.indexOf('renderModule(') !== -1;
   }
   removeDynamicBootstrap(code) {
     function replaceAll(str, find, replace) {
