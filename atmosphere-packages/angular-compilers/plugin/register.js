@@ -14,11 +14,13 @@ let scriptExtension = 'ts';
 let templateExtension = 'html';
 let styleExtension = 'scss';
 
+const IS_AOT = (process.env.NODE_ENV == 'production') || process.env.AOT;
+
 if(process.env.BLAZE){
   templateExtension = 'ng.html';
 }
 
-if(process.env.AOT){
+if(IS_AOT){
   Plugin.registerCompiler({
     extensions: [scriptExtension, templateExtension, styleExtension],
     filenames: ['tsconfig.json']

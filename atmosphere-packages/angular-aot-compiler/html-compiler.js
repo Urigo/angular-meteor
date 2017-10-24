@@ -1,7 +1,7 @@
 import $ from 'cheerio';
 
 export class AngularAotHtmlCompiler {
-  processFileForTarget(htmlFile){
+  processOneFileForTarget(htmlFile){
     if(!htmlFile.getPathInPackage().includes('node_modules')){
         const data = htmlFile.getContentsAsString();
         const $contents = $(data);

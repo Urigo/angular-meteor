@@ -1,19 +1,19 @@
 Package.describe({
   name: 'ardatan:angular-aot-compiler',
-  version: '0.1.1',
+  version: '0.1.3',
   summary: 'Angular Compiler Package for AOT',
-  git: 'https://github.com/ardatan/angular2-meteor/atmosphere-packages/angular-aot-compiler',
+  git: 'https://github.com/ardatan/angular-meteor/atmosphere-packages/angular-aot-compiler',
   documentation: 'README.md'
 });
 
 Npm.depends({
   'meteor-typescript': '0.8.10',
   'typescript': '2.5.3',
-  '@angular/compiler-cli': '4.4.5',
-  '@angular/compiler': '4.4.5',
-  '@angular/core': '4.4.5',
-  '@angular/common': '4.4.5',
-  'rxjs': '5.4.3',
+  '@angular/compiler-cli': '5.0.0-rc.3',
+  '@angular/compiler': '5.0.0-rc.3',
+  '@angular/core': '5.0.0-rc.3',
+  '@angular/common': '5.0.0-rc.3',
+  'rxjs': '5.5.0',
   'rollup': '0.49.2',
   'rollup-plugin-node-resolve': '3.0.0',
   'rollup-plugin-hypothetical': '1.2.1',

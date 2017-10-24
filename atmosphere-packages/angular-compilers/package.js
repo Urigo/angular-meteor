@@ -24,5 +24,4 @@ Package.onUse(function(api) {
 
   // Required in order to register plugins
   api.use('isobuild:compiler-plugin');
-  api.use('barbatus:typescript-runtime');
 });
