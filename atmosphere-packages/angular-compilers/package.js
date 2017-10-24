@@ -1,8 +1,8 @@
 Package.describe({
-  name: 'angular-compilers',
-  version: '1.0.0',
+  name: 'ardatan:angular-compilers',
+  version: '0.1.5',
   summary: 'Angular Templates, HTML and TypeScript compilers for Meteor',
-  git: 'https://github.com/Urigo/angular2-meteor/',
+  git: 'https://github.com/ardatan/angular-meteor',
   documentation: 'README.md'
 });
 
@@ -13,9 +13,9 @@ Package.registerBuildPlugin({
   ],
   use: [
     // Uses an external packages to get the actual compilers
-    'ecmascript',
-    'ardatan:angular-aot-compiler',
-    'ardatan:angular-jit-compiler'
+    'ecmascript@0.8.3',
+    'ardatan:angular-aot-compiler@0.1.5',
+    'ardatan:angular-jit-compiler@0.1.5'
   ]
 });
 
@@ -23,5 +23,5 @@ Package.onUse(function(api) {
   api.versionsFrom('1.5.2.2');
 
   // Required in order to register plugins
-  api.use('isobuild:compiler-plugin');
+  api.use('isobuild:compiler-plugin@1.0.0');
 });

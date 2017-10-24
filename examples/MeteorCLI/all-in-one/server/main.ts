@@ -66,10 +66,10 @@ Meteor.startup(() => {
       const document: Document = platformState.getDocument();
 
       // Extract head
-      sink.head = getDOM().getInnerHTML(document.head);
+      sink.head = document.head.innerHTML;
 
       // Extract body
-      sink.body = getDOM().getInnerHTML(document.body);
+      sink.body = document.body.innerHTML;
 
     } catch (e) {
 

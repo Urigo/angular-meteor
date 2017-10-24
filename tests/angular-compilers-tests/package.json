@@ -11,17 +11,17 @@
     "@angular/platform-browser": "^4.4.5",
     "@angular/platform-browser-dynamic": "^4.4.5",
     "babel-runtime": "^6.26.0",
-    "meteor-node-stubs": "^0.2.11",
-    "rxjs": "5.4.3",
+    "meteor-node-stubs": "^0.3.0",
+    "rxjs": "5.5.0",
     "zone.js": "^0.8.17"
   },
   "devDependencies": {
-    "@types/chai": "^4.0.4",
-    "@types/mocha": "^2.2.43",
-    "@types/sinon": "^2.3.6",
-    "chai": "^4.1.2",
-    "just-extend": "^1.1.22",
-    "phantomjs-prebuilt": "^2.1.15",
-    "sinon": "^4.0.1"
+    "@types/chai": "4.0.4",
+    "@types/mocha": "2.2.43",
+    "@types/sinon": "2.3.6",
+    "chai": "4.1.2",
+    "just-extend": "1.1.26",
+    "phantomjs-prebuilt": "2.1.15",
+    "sinon": "4.0.1"
   }
 }

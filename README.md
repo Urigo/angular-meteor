@@ -1,8 +1,10 @@
 <a href="https://angular-meteor.com/"><img src="https://s22.postimg.org/vpn3d97ch/logo_large.png" width="60" height="60" /></a>  [![Join the chat at https://gitter.im/Urigo/angular-meteor](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Urigo/angular-meteor)
 
-### Angular-Meteor [![Build Status](https://travis-ci.org/Urigo/angular-meteor.svg?branch=master)](https://travis-ci.org/Urigo/angular-meteor) [![npm version](https://badge.fury.io/js/angular2-meteor.svg)](https://badge.fury.io/js/angular2-meteor)  [![bitHound Overall Score](https://www.bithound.io/github/Urigo/angular-meteor/badges/score.svg)](https://www.bithound.io/github/Urigo/angular-meteor) [![bitHound Dependencies](https://www.bithound.io/github/Urigo/angular-meteor/badges/dependencies.svg)](https://www.bithound.io/github/Urigo/angular-meteor/master/dependencies/npm)
+### [Angular-Meteor Compilers](https://github.com/Urigo/angular-meteor/tree/master/atmosphere-packages) [![Build Status](https://travis-ci.org/Urigo/angular-meteor.svg?branch=master)](https://travis-ci.org/Urigo/angular-meteor)
 
-### AngularJS-Meteor [![Build Status](https://travis-ci.org/Urigo/angular-meteor.svg?branch=angular1)](https://travis-ci.org/Urigo/angular-meteor)   [![npm version](https://badge.fury.io/js/angular-meteor.svg)](https://badge.fury.io/js/angular-meteor)
+### [meteor-rxjs - The Angular Meteor Data solution](https://github.com/Urigo/meteor-rxjs) [![npm version](https://badge.fury.io/js/meteor-rxjs.svg)](https://badge.fury.io/js/meteor-rxjs) [![Build Status](https://travis-ci.org/Urigo/meteor-rxjs.svg?branch=master)](https://travis-ci.org/Urigo/meteor-rxjs)
+
+### [AngularJS-Meteor](https://github.com/Urigo/angular-meteor/tree/angular1) [![Build Status](https://travis-ci.org/Urigo/angular-meteor.svg?branch=angular1)](https://travis-ci.org/Urigo/angular-meteor)   [![npm version](https://badge.fury.io/js/angular-meteor.svg)](https://badge.fury.io/js/angular-meteor)
 
 #### The power of Meteor and the simplicity and eco-system of Angular
 
@@ -36,7 +38,7 @@ Go to the [official docs about Meteor-RxJS](https://angular-meteor.com/meteor-rx
 ## Tutorial
 
 If you are new to Angular and/or Meteor but want to learn them quickly, 
-please check out our 14-steps Angular2-Meteor [tutorial](https://angular-meteor.com/tutorials/whatsapp2-tutorial).
+please check out our 14-steps Angular-Meteor [tutorial](https://angular-meteor.com/tutorials/whatsapp2-tutorial).
 
 ## Quick Start Using Angular-Meteor
 ```
@@ -62,4 +64,4 @@ Please read the contributing instructions at [the contributing page](https://git
 
 This project started as [ngMeteor](https://github.com/loneleeandroo/ngMeteor), a pre-0.9 meteorite package. Since then a lot has changed but that was the main base.
 
-Also, a lot of features were inspired by @superchris's [angular-meteor fork of ngMeteor](https://github.com/superchris/angular-meteor)
+Also, a lot of features were inspired by @superchris's [angular-meteor fork of ngMeteor](https://github.com/superchris/angular-meteor).

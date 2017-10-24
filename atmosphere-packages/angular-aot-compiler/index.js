@@ -1,3 +1,4 @@
+import './dependencies';
 import { AngularAotTsCompiler } from './ts-compiler';
 import { AngularAotHtmlCompiler } from './html-compiler';
 
@@ -30,12 +31,13 @@ export class AngularAotCompiler {
         this.htmlCompiler.processOneFileForTarget(inputFile);
       }else if(D_TS_REGEX.test(filePath)){
         const jsFilePath = filePath.replace('.d.ts', '.js');
-        const fullJsFilePath = path.join(basePath, jsFilePath);
-        if(fs.existsSync(fullJsFilePath)){
-          const source = fs.readFileSync(fullJsFilePath, 'utf8');
+        if(fs.existsSync(jsFilePath)){
+          const source = fs.readFileSync(jsFilePath, 'utf8');
           const toBeAdded = this.babelCompiler.processOneFileForTarget(inputFile, source);
-          toBeAdded.path = jsFilePath;
-          inputFile.addJavaScript(toBeAdded);
+          inputFile.addJavaScript({
+            path: jsFilePath,
+            data: source
+          });
         }
       }
     }

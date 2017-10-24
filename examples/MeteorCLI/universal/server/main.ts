@@ -8,7 +8,6 @@ import { onPageLoad, Sink } from 'meteor/server-render';
 
 import { enableProdMode, ApplicationRef } from '@angular/core';
 import { ResourceLoader } from '@angular/compiler';
-import { ɵgetDOM as getDOM } from '@angular/platform-browser';
 import { platformDynamicServer, INITIAL_CONFIG, PlatformState } from '@angular/platform-server';
 
 import { ServerAppModule } from '../imports/app/server-app.module';
@@ -66,10 +65,10 @@ Meteor.startup(() => {
       const document: Document = platformState.getDocument();
 
       // Extract head
-      sink.head = getDOM().getInnerHTML(document.head);
+      sink.head = document.head.innerHTML;
 
       // Extract body
-      sink.body = getDOM().getInnerHTML(document.body);
+      sink.body = document.body.innerHTML;
 
     } catch (e) {
 

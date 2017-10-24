@@ -18,23 +18,32 @@ export class AngularJitTsCompiler extends TypeScriptCompiler {
     for(const tsFile of tsFiles){
       const prefix = tsFile.getArch().includes('web') ? 'client' : 'server';
       const tsFilePath = tsFile.getPathInPackage();
+      tsFile._addJavaScript = tsFile.addJavaScript;
+      tsFile.addJavaScript = toBeAdded => {
+        const path = toBeAdded.path;
+        toBeAdded =
+          this.babelCompiler.processOneFileForTarget(tsFile, toBeAdded.data);
+        toBeAdded.path = path;
+        return tsFile._addJavaScript(toBeAdded);
+      }
       if(tsFilePath.endsWith('.d.ts')){
         const jsFilePath = tsFilePath.replace('.d.ts', '.js');
         if(fs.existsSync(jsFilePath)){
           const source = fs.readFileSync(path.join(basePath, jsFilePath), 'utf8');
-          const toBeAdded = this.babelCompiler.processOneFileForTarget(inputFile, source);
-          toBeAdded.path = jsFilePath;
-          tsFile.addJavaScript(toBeAdded);
+          tsFile.addJavaScript({
+            path: jsFilePath,
+            data: source
+          });
         }
       }
       this.fixResourceUrls(tsFile);
     }
     super.processFilesForTarget(tsFiles);
   }
-  replaceStringsWithFullUrls(basePath, urls){
+  replaceStringsWithFullUrls(basePath, urls, firstSlash){
       return urls
       .replace(STRING_REGEX,
-        (match, quote, url) => `'/${path.join(basePath, url)}'`);
+        (match, quote, url) => `'${(firstSlash ? '/' : '') + path.join(basePath, url)}'`);
   }
     fixResourceUrls(tsFile){
 
@@ -45,12 +54,12 @@ export class AngularJitTsCompiler extends TypeScriptCompiler {
 
       const newSource = source
       .replace(TEMPLATE_URL_REGEX,
-        (match, url) => `templateUrl:${this.replaceStringsWithFullUrls(basePath, url)}`)
+        (match, url) => `templateUrl:${this.replaceStringsWithFullUrls(basePath, url, false)}`)
       .replace(STYLES_URLS_REGEX,
-         (match, urls) => `styleUrls:${this.replaceStringsWithFullUrls(basePath, urls)}`)
+         (match, urls) => `styleUrls:${this.replaceStringsWithFullUrls(basePath, urls, false)}`)
       .replace(LOAD_CHILDREN_REGEX,
         (match, url) => {
-          const replaced = this.replaceStringsWithFullUrls(basePath, url).trim();
+          const replaced = this.replaceStringsWithFullUrls(basePath, url, true).trim();
           const fixedUrl = (replaced
                               .split('#')[0]) + replaced[0];
 

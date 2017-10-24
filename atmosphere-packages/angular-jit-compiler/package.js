@@ -1,13 +1,13 @@
 Package.describe({
   name: 'ardatan:angular-jit-compiler',
-  version: '0.1.3',
+  version: '0.1.5',
   summary: 'Angular Compiler Package for JIT',
-  git: 'https://github.com/ardatan/angular2-meteor/atmosphere-packages/angular-jit-compiler',
+  git: 'https://github.com/ardatan/angular-meteor',
   documentation: 'README.md'
 });
 
 Npm.depends({
-  'cheerio': '0.20.0',
+  'cheerio': '0.22.0',
   'node-sass': '4.5.3'
 });
 
