@@ -1,6 +1,6 @@
 Package.describe({
   name: 'ardatan:angular-aot-compiler',
-  version: '0.1.7',
+  version: '0.1.9',
   summary: 'Angular Compiler Package for AOT',
   git: 'https://github.com/ardatan/angular-meteor',
   documentation: 'README.md'
@@ -14,14 +14,17 @@ Npm.depends({
   'rollup-plugin-commonjs': '8.2.4',
   'cheerio': '0.22.0',
   'node-sass': '4.5.3',
-  'reflect-metadata': '0.1.10'
+  '@angular/core': '5.0.0-rc.5',
+  '@angular/common': '5.0.0-rc.5',
+  '@angular/compiler': '5.0.0-rc.5',
+  '@angular/compiler-cli': '5.0.0-rc.5',
+  'typescript': '2.4.2'
 });
 
 Package.onUse(function(api) {
   api.versionsFrom('1.5.2.2');
   api.use([
     'underscore',
-    'tmeasday:check-npm-versions@0.3.1',
     'ecmascript',
     'barbatus:typescript-compiler@0.9.12',
     'babel-compiler'

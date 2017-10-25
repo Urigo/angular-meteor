@@ -14,26 +14,24 @@ let scriptExtension = 'ts';
 let templateExtension = 'html';
 let styleExtension = 'scss';
 
-const IS_AOT = (process.env.NODE_ENV == 'production') || process.env.AOT;
-
 if(process.env.BLAZE){
   templateExtension = 'ng.html';
 }
 
-if(IS_AOT){
+if(((process.env.NODE_ENV == 'production') || process.env.AOT) && AngularAotCompiler){
   Plugin.registerCompiler({
     extensions: [scriptExtension, templateExtension, styleExtension],
     filenames: ['tsconfig.json']
   }, () => new AngularAotCompiler());
 }else{
-    Plugin.registerCompiler({
-      extensions: [scriptExtension],
-      filenames: ['tsconfig.json']
-    }, () => new AngularJitTsCompiler());
-    Plugin.registerCompiler({
-      extensions: [templateExtension]
-    }, () => new AngularJitHtmlCompiler());
-    Plugin.registerCompiler({
-      extensions: [styleExtension]
-    }, () => new AngularJitScssCompiler());
+  Plugin.registerCompiler({
+    extensions: [scriptExtension],
+    filenames: ['tsconfig.json']
+  }, () => new AngularJitTsCompiler());
+  Plugin.registerCompiler({
+    extensions: [templateExtension]
+  }, () => new AngularJitHtmlCompiler());
+  Plugin.registerCompiler({
+    extensions: [styleExtension]
+  }, () => new AngularJitScssCompiler());
 }

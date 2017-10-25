@@ -1,6 +1,6 @@
 Package.describe({
   name: 'ardatan:angular-jit-compiler',
-  version: '0.1.7',
+  version: '0.1.9',
   summary: 'Angular Compiler Package for JIT',
   git: 'https://github.com/ardatan/angular-meteor',
   documentation: 'README.md'

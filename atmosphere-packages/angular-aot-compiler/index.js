@@ -1,4 +1,3 @@
-import './dependencies';
 import { AngularAotTsCompiler } from './ts-compiler';
 import { AngularAotHtmlCompiler } from './html-compiler';
 
@@ -8,7 +7,6 @@ import path from 'path';
 const basePath = process.cwd();
 
 const HTML_REGEX = /\.html$/;
-const D_TS_REGEX = /\.d\.ts$/;
 
 export class AngularAotCompiler {
   constructor(extraTsOptions){
@@ -19,7 +17,6 @@ export class AngularAotCompiler {
   processFilesForTarget(inputFiles){
     const inputFilePaths = inputFiles
     .map(inputFile => inputFile.getPathInPackage());
-    const extraTsFiles = [];
     for(const inputFile of inputFiles){
       const filePath = inputFile.getPathInPackage();
       inputFile._addJavaScript = inputFile.addJavaScript;
@@ -32,18 +29,8 @@ export class AngularAotCompiler {
       }
       if(HTML_REGEX.test(filePath)){
         this.htmlCompiler.processOneFileForTarget(inputFile);
-      }else if(D_TS_REGEX.test(filePath)){
-        const tsFilePath = filePath.replace('.d', '');
-        const jsFilePath = filePath.replace('.ts', '.js');
-        if(fs.existsSync(jsFilePath)){
-          const source = fs.readFileSync(jsFilePath, 'utf8');
-          inputFile.addJavaScript({
-            path: jsFilePath,
-            data: source
-          });
-        }
       }
     }
-    this.tsCompiler.processFilesForTarget(inputFiles, extraTsFiles);
+    this.tsCompiler.processFilesForTarget(inputFiles);
   }
 }

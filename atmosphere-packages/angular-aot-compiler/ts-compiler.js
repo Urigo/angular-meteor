@@ -3,14 +3,7 @@ import path from 'path';
 
 import ts from'typescript';
 
-import 'reflect-metadata';
-
 import {
-  ReflectorHost,
-  StaticReflector,
-  CodeGenerator,
-  PathMappedCompilerHost,
-  CompilerHost,
   createCompilerHost,
   createProgram,
   TsCompilerAotCompilerTypeCheckHostAdapter
@@ -268,6 +261,9 @@ export class AngularAotTsCompiler extends TypeScriptCompiler {
               code = this.removeDynamicBootstrap(code);
             }
             code = this.addFakeDynamicLoader(inputFile, code);
+            code = code
+              .split('require("node_modules')
+              .join('require("/node_modules')
             const inputPath = inputFile.getPathInPackage();
             const outputPath = this.removeTsExtension(filePath);
             const toBeAdded = {
@@ -327,12 +323,20 @@ export class AngularAotTsCompiler extends TypeScriptCompiler {
       filePath = getMeteorPath(filePath);
 
       let index = filesMap.get(filePath);
+      let content = null;
       if (index === undefined) {
         const filePathNoRootSlash = filePath.replace(/^\//, '');
         index = filesMap.get(filePathNoRootSlash);
       }
-      return index !== undefined ?
-        inputFiles[index].getContentsAsString() : null;
+      if(index === undefined){
+        try{
+          content = fs.readFileSync(filePath, 'utf8');
+        }catch(e){
+        }
+      }else{
+        content = inputFiles[index].getContentsAsString();
+      }
+      return content;
     };
   }
   _processTsDiagnostics(diagnostics, inputFile) {
@@ -346,15 +350,33 @@ export class AngularAotTsCompiler extends TypeScriptCompiler {
     const compilerHost = this.createCompilerHost(
       tsProgram, ngcOptions, compilerHostContext, usePathMapping);
 
-    const { compiler } = CodeGenerator ?
-    CodeGenerator.create(
-      ngcOptions, {}, tsProgram, tsHost, compilerHostContext, compilerHost) :
+    const { compiler } =
       createProgram({
         rootNames:filePaths,
         options: ngcOptions,
         host: compilerHost
       });
-
+    compiler._host._loadResource = compiler._host.loadResource;
+    compiler._host.loadResource = function(filePath){
+      let data = getMeteorFileContent(filePath);
+      if(data && SCSS_REGEX.test(filePath)){
+        try{
+          const result  = sass.renderSync({
+            file: isRooted(filePath) ?
+            filePath : path.join(basePath, filePath),
+            data,
+            includePaths: [basePath + '/node_modules']
+          });
+          data = result.css.toString('utf8');
+        }catch(e){
+          inputFile.error(e);
+        }
+      }
+      if(!data){
+        data = compiler._host._loadResource(filePath);
+      }
+      return data;
+    }
     const ngcFilePaths = tsProgram.getSourceFiles().map(sf => sf.fileName);
 
     const analyzeResult = await compiler.analyzeModulesAsync(ngcFilePaths);
@@ -435,32 +457,16 @@ export class AngularAotTsCompiler extends TypeScriptCompiler {
         if (! ngcHost.fileExists(filePath)) {
           throw new Error(`Compilation failed. Resource file not found: ${filePath}`);
         }
-        let resourceContent = ngcHost.readFile(filePath);
-        if(SCSS_REGEX.test(filePath)){
-          const result  = sass.renderSync({
-            file: isRooted(filePath) ?
-             filePath : path.join(basePath, filePath),
-            data: resourceContent,
-            includePaths: [basePath + '/node_modules']
-          });
-          resourceContent = result.css.toString('utf8');
-        }
-        return resourceContent;
+        return ngcHost.readFile(filePath);
       }
     }
     return Object.assign({}, ngcHost, reflectorContext);
   }
   createCompilerHost(tsProgram, ngcOptions, compilerHostContext, usePathMapping) {
-    if(CompilerHost){
-      return usePathMapping ?
-        new PathMappedCompilerHost(tsProgram, ngcOptions, compilerHostContext) :
-        new CompilerHost(tsProgram, ngcOptions, compilerHostContext);
-    }else{
       return createCompilerHost({
         options: ngcOptions,
         host: compilerHostContext
       })
-    }
   }
   removeTsExtension(filePath) {
     if (filePath.endsWith('.ts')) {
