@@ -11,6 +11,9 @@ import {
   CodeGenerator,
   PathMappedCompilerHost,
   CompilerHost,
+  createCompilerHost,
+  createProgram,
+  TsCompilerAotCompilerTypeCheckHostAdapter
 } from '@angular/compiler-cli';
 
 import {
@@ -200,7 +203,7 @@ export class AngularAotTsCompiler extends TypeScriptCompiler {
         let ngcError = null;
         const ngcFilesMap = this
             .generateCode(fullPaths, genOptions, defaultGet)
-            .catch(error => ngcError = error)
+            //.catch(error => ngcError = error)
             .await();
 
         if (ngcError) {
@@ -343,14 +346,19 @@ export class AngularAotTsCompiler extends TypeScriptCompiler {
     const compilerHost = this.createCompilerHost(
       tsProgram, ngcOptions, compilerHostContext, usePathMapping);
 
-    const { compiler } = CodeGenerator.create(
-      ngcOptions, {}, tsProgram, tsHost, compilerHostContext, compilerHost);
+    const { compiler } = CodeGenerator ?
+    CodeGenerator.create(
+      ngcOptions, {}, tsProgram, tsHost, compilerHostContext, compilerHost) :
+      createProgram({
+        rootNames:filePaths,
+        options: ngcOptions,
+        host: compilerHost
+      });
 
     const ngcFilePaths = tsProgram.getSourceFiles().map(sf => sf.fileName);
 
     const analyzeResult = await compiler.analyzeModulesAsync(ngcFilePaths);
     const generatedModules = await compiler.emitAllImpls(analyzeResult);
-
 
     const ngcFilesMap = new Map();
     for(const generatedModule of generatedModules){
@@ -443,9 +451,16 @@ export class AngularAotTsCompiler extends TypeScriptCompiler {
     return Object.assign({}, ngcHost, reflectorContext);
   }
   createCompilerHost(tsProgram, ngcOptions, compilerHostContext, usePathMapping) {
-    return usePathMapping ?
-      new PathMappedCompilerHost(tsProgram, ngcOptions, compilerHostContext) :
-      new CompilerHost(tsProgram, ngcOptions, compilerHostContext);
+    if(CompilerHost){
+      return usePathMapping ?
+        new PathMappedCompilerHost(tsProgram, ngcOptions, compilerHostContext) :
+        new CompilerHost(tsProgram, ngcOptions, compilerHostContext);
+    }else{
+      return createCompilerHost({
+        options: ngcOptions,
+        host: compilerHostContext
+      })
+    }
   }
   removeTsExtension(filePath) {
     if (filePath.endsWith('.ts')) {

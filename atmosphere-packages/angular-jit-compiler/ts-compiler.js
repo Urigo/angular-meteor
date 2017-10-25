@@ -30,9 +30,10 @@ export class AngularJitTsCompiler extends TypeScriptCompiler {
         const jsFilePath = tsFilePath.replace('.d.ts', '.js');
         if(fs.existsSync(jsFilePath)){
           const source = fs.readFileSync(path.join(basePath, jsFilePath), 'utf8');
+          const result = Babel.compile(source);
           tsFile.addJavaScript({
             path: jsFilePath,
-            data: source
+            data: result.code
           });
         }
       }
