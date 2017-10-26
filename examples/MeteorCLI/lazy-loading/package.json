@@ -18,8 +18,8 @@
     "zone.js": "^0.8.16"
   },
   "devDependencies": {
-    "@angular/compiler-cli": "^4.4.6",
-    "@types/meteor": "^1.4.11",
-    "typescript": "^2.5.3"
+    "@angular/compiler-cli": "4.4.6",
+    "@types/meteor": "1.4.11",
+    "typescript": "2.5.3"
   }
 }
