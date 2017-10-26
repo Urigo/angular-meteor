@@ -54,7 +54,7 @@
     "file-loader": "1.1.5",
     "html-webpack-plugin": "2.30.1",
     "istanbul-instrumenter-loader": "3.0.0",
-    "jasmine-core": "2.6.4",
+    "jasmine-core": "2.8.0",
     "jasmine-spec-reporter": "4.2.1",
     "karma": "1.7.1",
     "karma-chrome-launcher": "2.2.0",
