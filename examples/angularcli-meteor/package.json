@@ -66,7 +66,7 @@
     "meteor-client-bundler": "0.3.0",
     "postcss-loader": "2.0.8",
     "postcss-url": "5.1.2",
-    "protractor": "5.1.2",
+    "protractor": "5.2.0",
     "raw-loader": "0.5.1",
     "sass-loader": "6.0.6",
     "source-map-loader": "0.2.2",
