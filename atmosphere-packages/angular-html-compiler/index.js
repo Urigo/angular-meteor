@@ -1,9 +1,18 @@
-import $ from 'cheerio';
+const $ = Npm.require('cheerio');
 
-export class AngularAotHtmlCompiler {
-  processOneFileForTarget(htmlFile){
-    if(!htmlFile.getPathInPackage().includes('node_modules')){
+const IS_AOT = ((process.env.NODE_ENV == 'production') || process.env.AOT);
+
+const CACHE = new Map();
+
+export class AngularHtmlCompiler {
+  compileFile(filePath){
+    return CACHE.get(filePath);
+  }
+  processFilesForTarget(htmlFiles){
+    for(const htmlFile of htmlFiles){
+      if(!htmlFile.getPathInPackage().includes('node_modules')){
         const data = htmlFile.getContentsAsString();
+        CACHE.set(htmlFile.getPathInPackage(), data);
         const $contents = $(data);
         const isMain = $contents.closest('head,body').length;
         if(isMain){
@@ -13,6 +22,7 @@ export class AngularAotHtmlCompiler {
             data: $head.html() || '',
             section: 'head',
           });
+
           htmlFile.addHtml({
             data:  $body.html() || '',
             section: 'body',
@@ -31,6 +41,12 @@ export class AngularAotHtmlCompiler {
               `,
             });
           }
+        }else if(!IS_AOT){
+          htmlFile.addAsset({
+            data,
+            path: htmlFile.getPathInPackage()
+          });
+        }
       }
     }
   }

@@ -5,6 +5,7 @@
 export METEOR_PACKAGE_DIRS=../../atmosphere-packages
 cd tests
 cd angular-compilers-tests
+rm -rf node_modules
 meteor npm install
 meteor npm test
 cd ../../examples/angularcli-meteor
