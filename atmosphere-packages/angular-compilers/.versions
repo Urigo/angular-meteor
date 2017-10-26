@@ -1,7 +1,7 @@
-ardatan:angular-compilers@0.1.9
-ardatan:angular-html-compiler@0.1.9
-ardatan:angular-scss-compiler@0.1.9
-ardatan:angular-ts-compiler@0.1.9
+ardatan:angular-compilers@0.2.5
+ardatan:angular-html-compiler@0.2.5
+ardatan:angular-scss-compiler@0.2.5
+ardatan:angular-ts-compiler@0.2.5
 babel-compiler@6.20.0
 babel-runtime@1.0.1
 ecmascript@0.8.3

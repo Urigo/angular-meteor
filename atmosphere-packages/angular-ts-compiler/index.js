@@ -111,7 +111,7 @@ export class AngularTsCompiler {
   replaceStringsWithFullUrls(basePath, urls, firstSlash){
       return urls
       .replace(STRING_REGEX,
-        (match, quote, url) => `'${(firstSlash ? '/' : '') + path.join(basePath, url)}'`);
+        (match, quote, url) => `'${(firstSlash ? '/' : '~/../') + path.join(basePath, url)}'`);
   }
   fixResourceUrls(source, basePath){
     const newSource = source
@@ -276,13 +276,12 @@ export class AngularTsCompiler {
     compiler._host._loadResource = compiler._host.loadResource;
     compiler._host.loadResource = filePath => {
       if(SCSS_REGEX.test(filePath)){
-        return new Promise((resolve, reject) => {
-          try{
-            resolve(this.scssCompiler.compileFile(getMeteorPath(filePath)).css.toString('utf-8'));
-          }catch(e){
-            reject(e);
-          }
-        })
+        try{
+          const content = this.scssCompiler.compileFile(getMeteorPath(filePath)).css.toString('utf-8');
+          return content;
+        }catch(e){
+          console.error(e);
+        }
       }else if(HTML_REGEX.test(filePath)){
         const content = this.htmlCompiler.compileFile(getMeteorPath(filePath));
         if(content){

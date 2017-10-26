@@ -1,3 +1,4 @@
+import 'tslib';
 import 'zone.js/dist/zone';
 import 'zone.js/dist/long-stack-trace-zone';
 import 'zone.js/dist/async-test';
@@ -81,5 +82,6 @@ describe(`AppComponent`, () => {
       expect(color).to.equal('rgb(0, 255, 0)');
 
     });
+
 
 });

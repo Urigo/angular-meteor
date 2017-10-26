@@ -1,7 +1,7 @@
 Package.describe({
   name: 'ardatan:angular-html-compiler',
-  version: '0.1.9',
-  summary: 'Angular Scss Compiler Package',
+  version: '0.2.5',
+  summary: 'Angular Html Compiler Package',
   git: 'https://github.com/ardatan/angular-meteor',
   documentation: null
 });

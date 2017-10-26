@@ -9,9 +9,9 @@ const IS_AOT = ((process.env.NODE_ENV == 'production') || process.env.AOT);
 const CACHE = new Map();
 
 export class AngularScssCompiler{
-  compileFile(filePath, inputData){
+  compileFile(filePath, inputData, clearCache){
     const fullPath = path.join(basePath, filePath);
-    if(CACHE.has(fullPath)){
+    if(CACHE.has(fullPath) && !clearCache){
       return CACHE.get(fullPath);
     }
     const toBeRendered = {
@@ -22,6 +22,7 @@ export class AngularScssCompiler{
       toBeRendered.data = inputData;
     }
     const result = sass.renderSync(toBeRendered);
+    CACHE.set(fullPath, result);
     return result;
   }
   processFilesForTarget(scssFiles){
@@ -32,11 +33,10 @@ export class AngularScssCompiler{
         if(!fileName.startsWith('_' ) &&
            !filePath.includes('node_modules')){
           const inputData = scssFile.getContentsAsString();
-          const outputData  = this.compileFile(filePath, inputData);
-          CACHE.set(fullPath, outputData);
+          const outputData  = this.compileFile(filePath, inputData, true);
           if(!IS_AOT){
             scssFile.addAsset({
-              path: scssFile.getPathInPackage(),
+              path: filePath,
               data: outputData.css.toString('utf-8'),
               sourceMap: outputData.map
             });
