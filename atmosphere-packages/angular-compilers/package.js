@@ -14,8 +14,9 @@ Package.registerBuildPlugin({
   use: [
     // Uses an external packages to get the actual compilers
     'ecmascript@0.8.3',
-    'ardatan:angular-aot-compiler@0.1.9',
-    'ardatan:angular-jit-compiler@0.1.9'
+    'ardatan:angular-ts-compiler@0.1.9',
+    'ardatan:angular-html-compiler@0.1.9',
+    'ardatan:angular-scss-compiler@0.1.9'
   ]
 });
 

@@ -1,14 +1,16 @@
 'use strict';
 
 import {
-  AngularAotCompiler
-} from 'meteor/ardatan:angular-aot-compiler';
+  AngularTsCompiler
+} from 'meteor/ardatan:angular-ts-compiler';
 
 import {
-  AngularJitTsCompiler,
-  AngularJitHtmlCompiler,
-  AngularJitScssCompiler
-} from 'meteor/ardatan:angular-jit-compiler';
+  AngularHtmlCompiler
+} from 'meteor/ardatan:angular-html-compiler';
+
+import {
+  AngularScssCompiler
+} from 'meteor/ardatan:angular-scss-compiler';
 
 let scriptExtension = 'ts';
 let templateExtension = 'html';
@@ -18,20 +20,15 @@ if(process.env.BLAZE){
   templateExtension = 'ng.html';
 }
 
-if(((process.env.NODE_ENV == 'production') || process.env.AOT) && AngularAotCompiler){
-  Plugin.registerCompiler({
-    extensions: [scriptExtension, templateExtension, styleExtension],
-    filenames: ['tsconfig.json']
-  }, () => new AngularAotCompiler());
-}else{
-  Plugin.registerCompiler({
-    extensions: [scriptExtension],
-    filenames: ['tsconfig.json']
-  }, () => new AngularJitTsCompiler());
-  Plugin.registerCompiler({
-    extensions: [templateExtension]
-  }, () => new AngularJitHtmlCompiler());
-  Plugin.registerCompiler({
-    extensions: [styleExtension]
-  }, () => new AngularJitScssCompiler());
-}
+const IS_AOT = ((process.env.NODE_ENV == 'production') || process.env.AOT);
+
+Plugin.registerCompiler({
+  extensions: [scriptExtension],
+  filenames: ['tsconfig.json']
+}, () => new AngularTsCompiler());
+Plugin.registerCompiler({
+  extensions: [templateExtension]
+}, () => new AngularHtmlCompiler());
+Plugin.registerCompiler({
+  extensions: [styleExtension]
+}, () => new AngularScssCompiler());

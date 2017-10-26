@@ -1,8 +1,10 @@
 #!/bin/sh
 
-cd angular-aot-compiler
+cd angular-html-compiler
 meteor publish
-cd ../angular-jit-compiler
+cd ../angular-scss-compiler
+meteor publish
+cd ../angular-ts-compiler
 meteor publish
 cd ../angular-compilers
 meteor publish
