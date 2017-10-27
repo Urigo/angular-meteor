@@ -46,7 +46,7 @@
     "@types/node": "7.0.46",
     "autoprefixer": "7.1.6",
     "circular-dependency-plugin": "4.2.1",
-    "codelyzer": "3.2.1",
+    "codelyzer": "3.2.2",
     "copy-webpack-plugin": "4.2.0",
     "css-loader": "0.28.7",
     "cssnano": "3.10.0",
