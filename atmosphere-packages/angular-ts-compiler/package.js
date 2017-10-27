@@ -12,7 +12,7 @@ Npm.depends({
   '@angular/common': '5.0.0-rc.7',
   '@angular/compiler': '5.0.0-rc.7',
   '@angular/compiler-cli': '5.0.0-rc.7',
-  'typescript': '2.4.2'
+  'typescript': '2.5.3'
 });
 
 Package.onUse(function(api) {
