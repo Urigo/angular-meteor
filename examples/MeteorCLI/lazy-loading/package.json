@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@angular/compiler-cli": "4.4.6",
-    "@types/meteor": "1.4.11",
+    "@types/meteor": "1.4.12",
     "typescript": "2.5.3"
   }
 }
