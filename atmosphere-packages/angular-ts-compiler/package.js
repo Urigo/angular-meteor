@@ -8,10 +8,10 @@ Package.describe({
 
 Npm.depends({
   'meteor-typescript': '0.8.10',
-  '@angular/core': '5.0.0-rc.7',
-  '@angular/common': '5.0.0-rc.7',
-  '@angular/compiler': '5.0.0-rc.7',
-  '@angular/compiler-cli': '5.0.0-rc.7',
+  '@angular/core': '5.0.0-rc.8',
+  '@angular/common': '5.0.0-rc.8',
+  '@angular/compiler': '5.0.0-rc.8',
+  '@angular/compiler-cli': '5.0.0-rc.8',
   'typescript': '2.5.3'
 });
 
