@@ -10,7 +10,6 @@ meteor npm install
 meteor npm test
 exit_code=$?; if [ ${exit_code} -gt 0 ]; then exit ${exit_code}; fi
 cd ../../examples/angularcli-meteor
-npm cache clean --force
 npm install
 npm run meteor-client:bundle
 npm run api:reset
