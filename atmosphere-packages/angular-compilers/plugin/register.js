@@ -2,15 +2,15 @@
 
 import {
   AngularTsCompiler
-} from 'meteor/ardatan:angular-ts-compiler';
+} from 'meteor/angular-typescript-compiler';
 
 import {
   AngularHtmlCompiler
-} from 'meteor/ardatan:angular-html-compiler';
+} from 'meteor/angular-html-compiler';
 
 import {
   AngularScssCompiler
-} from 'meteor/ardatan:angular-scss-compiler';
+} from 'meteor/angular-scss-compiler';
 
 let scriptExtension = 'ts';
 let templateExtension = 'html';

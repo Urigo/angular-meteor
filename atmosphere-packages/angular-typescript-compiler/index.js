@@ -16,11 +16,11 @@ import { TSBuild } from 'meteor-typescript';
 
 import {
   AngularHtmlCompiler
-} from 'meteor/ardatan:angular-html-compiler';
+} from 'meteor/angular-html-compiler';
 
 import {
   AngularScssCompiler
-} from 'meteor/ardatan:angular-scss-compiler';
+} from 'meteor/angular-scss-compiler';
 
 const basePath = process.cwd();
 

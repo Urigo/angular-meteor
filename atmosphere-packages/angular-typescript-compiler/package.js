@@ -1,8 +1,8 @@
 Package.describe({
-  name: 'ardatan:angular-ts-compiler',
-  version: '0.2.5',
+  name: 'angular-typescript-compiler',
+  version: '0.2.7_1',
   summary: 'Angular TypeScript Compiler Package',
-  git: 'https://github.com/ardatan/angular-meteor',
+  git: 'https://github.com/Urigo/angular-meteor/tree/master/atmosphere-packages/angular-typescript-compiler',
   documentation: null
 });
 
@@ -20,8 +20,8 @@ Package.onUse(function(api) {
   api.use([
     'ecmascript',
     'babel-compiler',
-    'ardatan:angular-html-compiler@0.2.5',
-    'ardatan:angular-scss-compiler@0.2.5'
+    'angular-html-compiler@0.2.5',
+    'angular-scss-compiler@0.2.5'
   ], 'server');
   api.mainModule('index.js', 'server');
 });

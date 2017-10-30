@@ -15,7 +15,7 @@ Package contains one combined Angular compiler for Meteor that provides:
 
  And then add the compilers for Angular by running:
  ```
- $ meteor add ardatan:angular-compilers
+ $ meteor add angular-compilers
  ```
 
 ## Compiler modes

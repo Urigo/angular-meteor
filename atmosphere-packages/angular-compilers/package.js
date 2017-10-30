@@ -1,8 +1,8 @@
 Package.describe({
-  name: 'ardatan:angular-compilers',
+  name: 'angular-compilers',
   version: '0.2.5',
   summary: 'Angular Templates, HTML and TypeScript compilers for Meteor',
-  git: 'https://github.com/ardatan/angular-meteor',
+  git: 'https://github.com/Urigo/angular-meteor/tree/master/atmosphere-packages/angular-compilers',
   documentation: 'README.md'
 });
 
@@ -14,9 +14,9 @@ Package.registerBuildPlugin({
   use: [
     // Uses an external packages to get the actual compilers
     'ecmascript@0.8.3',
-    'ardatan:angular-ts-compiler@0.2.5',
-    'ardatan:angular-html-compiler@0.2.5',
-    'ardatan:angular-scss-compiler@0.2.5'
+    'angular-typescript-compiler@0.2.7_1',
+    'angular-html-compiler@0.2.5',
+    'angular-scss-compiler@0.2.5'
   ]
 });
 
