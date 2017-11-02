@@ -163,7 +163,7 @@ export class AngularTsCompiler {
               tsFilePaths.push(filePath);
               fullPaths.push(path.join(basePath, filePath));
             }
-          }else if(inputFile.getBasename() == 'tsconfig.json'){
+          }else if(inputFile.getBasename() == 'tsconfig.json' && !filePath.startsWith('node_modules')){
             tsConfig = JSON.parse(inputFile.getContentsAsString());
           }
           filesMap.set(filePath, index);
@@ -223,7 +223,7 @@ export class AngularTsCompiler {
             const origTargetFilePath =
               getMeteorPath(filePath)
               .replace('.ngfactory', '')
-              .replace('.shim.ngstyle.ts', '');
+              .replace('.shim.ngstyle', '');
               const inputFile = inputFiles[filesMap.get(origTargetFilePath)]
               || inputFiles[filesMap.get(origTargetFilePath.replace('.ts', '.d.ts'))]
               || inputFiles.find(file => {
