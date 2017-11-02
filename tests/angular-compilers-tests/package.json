@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "@types/chai": "4.0.4",
-    "@types/meteor": "^1.4.12",
+    "@types/meteor": "1.4.12",
     "@types/mocha": "2.2.44",
     "@types/sinon": "2.3.7",
     "chai": "4.1.2",
