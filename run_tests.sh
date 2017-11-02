@@ -7,7 +7,7 @@ cd tests
 cd angular-compilers-tests
 rm -rf node_modules
 meteor npm install
-meteor npm test
+meteor npm run test:ci
 exit_code=$?; if [ ${exit_code} -gt 0 ]; then exit ${exit_code}; fi
 cd ../../examples/angularcli-meteor
 npm install

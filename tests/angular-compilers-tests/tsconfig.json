@@ -10,6 +10,7 @@
     "client/**/*.ts"
   ],
   "types": [
+    "@types/meteor",
     "@types/mocha",
     "@types/chai",
     "@types/sinon"
