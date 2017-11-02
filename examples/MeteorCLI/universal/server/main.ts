@@ -4,11 +4,18 @@ import '../imports/methods/todos';
 import '../imports/publications/todos';
 
 import { Meteor } from 'meteor/meteor';
-import { onPageLoad, Sink } from 'meteor/server-render';
+import { WebApp, WebAppInternals } from 'meteor/webapp';
 
-import { enableProdMode, ApplicationRef } from '@angular/core';
+import {
+  enableProdMode,
+  PlatformRef,
+  ApplicationModule,
+  ApplicationRef
+} from '@angular/core';
+
 import { ResourceLoader } from '@angular/compiler';
-import { platformDynamicServer, INITIAL_CONFIG, PlatformState } from '@angular/platform-server';
+import { ɵgetDOM as getDOM } from '@angular/platform-browser';
+import { platformDynamicServer, BEFORE_APP_SERIALIZED ,INITIAL_CONFIG, PlatformState } from '@angular/platform-server';
 
 import { ServerAppModule } from '../imports/app/server-app.module';
 
@@ -20,31 +27,31 @@ Meteor.startup(() => {
   }
 
   // When page requested
-  onPageLoad(async (sink: Sink) => {
+  WebApp.connectHandlers.use(async (request, response, next) => {
 
-    sink.appendToHead('<base href="/">');
-    sink.appendToBody('<app></app>');
-
-
+    let document,
+        platformRef : PlatformRef;
     // Handle Angular's error, but do not prevent client bootstrap
     try {
 
+      document = await WebAppInternals.getBoilerplate(request, WebApp.defaultArch);
+
       // Integrate Angular's router with Meteor
-      const url = sink.request.url;
+      const url = request.url;
 
       // Get rendered document
-      const platform = platformDynamicServer([
+      platformRef = platformDynamicServer([
         {
           provide: INITIAL_CONFIG,
           useValue: {
             // Initial document
-            document: sink.head + sink.body,
+            document,
             url
           }
         }
       ]);
 
-      const appModuleRef = await platform.bootstrapModule(ServerAppModule, {
+      const appModuleRef = await platformRef.bootstrapModule(ServerAppModule, {
         providers: [
           {
             provide: ResourceLoader,
@@ -56,28 +63,46 @@ Meteor.startup(() => {
         ]
       });
 
-      const applicationRef: ApplicationRef = appModuleRef.injector.get(ApplicationRef);
+      const applicationRef : ApplicationRef = appModuleRef.injector.get(ApplicationRef);
 
-      await applicationRef.isStable.first(isStable => isStable == true).toPromise();
+      await applicationRef.isStable
+      .first(isStable => isStable == true)
+      .toPromise();
+
+      // Run any BEFORE_APP_SERIALIZED callbacks just before rendering to string.
+      const callbacks = appModuleRef.injector.get(BEFORE_APP_SERIALIZED, null);
+      if (callbacks) {
+        for (const callback of callbacks) {
+          try {
+            callback();
+          } catch (e) {
+            // Ignore exceptions.
+            console.warn('Ignoring BEFORE_APP_SERIALIZED Exception: ', e);
+          }
+        }
+      }
 
       const platformState: PlatformState = appModuleRef.injector.get(PlatformState);
 
-      const document: Document = platformState.getDocument();
-
-      // Extract head
-      sink.head = document.head.innerHTML;
-
-      // Extract body
-      sink.body = document.body.innerHTML;
+      document = platformState.renderToString();
 
     } catch (e) {
 
       // Write errors to console
       console.error('Angular SSR Error: ' + e.stack || e);
 
+    }finally{
+
+      //Make sure platform is destroyed before rendering
+
+      if(platformRef){
+        platformRef.destroy();
+      }
+      
+      response.end(document);
+
     }
+  })
 
-
-  });
 
 });

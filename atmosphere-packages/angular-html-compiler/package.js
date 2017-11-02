@@ -1,6 +1,6 @@
 Package.describe({
   name: 'angular-html-compiler',
-  version: '0.2.5',
+  version: '0.2.8',
   summary: 'Angular Html Compiler Package',
   git: 'https://github.com/Urigo/angular-meteor/tree/master/atmosphere-packages/angular-html-compiler',
   documentation: null
@@ -11,7 +11,7 @@ Npm.depends({
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.5.2.2');
+  api.versionsFrom('1.6');
   api.use([
     'ecmascript'
   ], 'server');
