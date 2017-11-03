@@ -80,6 +80,6 @@
     "url-loader": "0.6.2",
     "webpack": "3.8.1",
     "webpack-concat-plugin": "1.4.2",
-    "webpack-dev-server": "2.9.3"
+    "webpack-dev-server": "2.9.4"
   }
 }
