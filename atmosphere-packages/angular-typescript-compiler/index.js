@@ -130,7 +130,7 @@ export class AngularTsCompiler {
         const tsFilePaths = [];
         const fullPaths = [];
         let tsConfig = {};
-        console.time('Compiling ES2015 modules!')
+        console.time(`[${prefix}]: ES2015 modules Compilation`)
         inputFiles.forEach((inputFile, index) => {
           const filePath = inputFile.getPathInPackage();
           if(filePath.endsWith('.ts')
@@ -168,7 +168,7 @@ export class AngularTsCompiler {
           }
           filesMap.set(filePath, index);
         })
-        console.timeEnd('Compiling ES2015 modules!')
+        console.timeEnd(`[${prefix}]: ES2015 modules Compilation`)
         const defaultGet = filePath => {
           filePath = getMeteorPath(filePath);
           let content = null;
@@ -215,7 +215,7 @@ export class AngularTsCompiler {
         const tsBuild = new TSBuild(allPaths, getContent, buildOptions);
         let mainCode = 'main.js';
         let mainCodePath;
-        console.time('Compiling TS Files...');
+        console.time(`[${prefix}]: TypeScript Files Compilation`);
         for (const filePath of allPaths) {
           if(!filePath.endsWith('.d.ts')){
             const result = tsBuild.emit(filePath, filePath);
@@ -252,7 +252,7 @@ export class AngularTsCompiler {
               inputFile.addJavaScript(toBeAdded);
             }
           }
-          console.timeEnd('Compiling TS Files...');
+          console.timeEnd(`[${prefix}]: TypeScript Files Compilation`);
   }
   _processTsDiagnostics(diagnostics, inputFile) {
     diagnostics.semanticErrors.forEach(error => inputFile.error);
