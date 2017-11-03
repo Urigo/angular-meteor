@@ -228,8 +228,7 @@ export class AngularTsCompiler {
               || inputFiles[filesMap.get(origTargetFilePath.replace('.ts', '.d.ts'))]
               || inputFiles.find(file => {
                   const filePath = file.getPathInPackage();
-                  return filePath.startsWith(prefix) &&
-                         filePath.includes('imports');
+                  return filePath.includes('imports');
                 });
               this._processTsDiagnostics(result.diagnostics,inputFile);
               if (IS_AOT && this.hasDynamicBootstrap(code)) {
