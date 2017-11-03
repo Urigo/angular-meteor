@@ -4,6 +4,8 @@ const path = Npm.require('path');
 
 const basePath = process.cwd();
 
+const WEB_ARCH_REGEX = /^web/;
+
 const IS_AOT = ((process.env.NODE_ENV == 'production') || process.env.AOT);
 
 const CACHE = new Map();
@@ -26,6 +28,10 @@ export class AngularScssCompiler{
     return result;
   }
   processFilesForTarget(scssFiles){
+    const arch = scssFiles[0].getArch();
+    const forWeb = WEB_ARCH_REGEX.test(arch);
+    const prefix = forWeb ? 'client' : 'server';
+    console.time(`[${prefix}]: SCSS Files Compilation`);
     for(const scssFile of scssFiles){
       try{
         const fileName = scssFile.getBasename();
@@ -46,5 +52,6 @@ export class AngularScssCompiler{
         scssFile.error(e);
       }
     }
+    console.timeEnd(`[${prefix}]: SCSS Files Compilation`);
   }
 }

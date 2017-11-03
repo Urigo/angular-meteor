@@ -1,5 +1,7 @@
 const $ = Npm.require('cheerio');
 
+const WEB_ARCH_REGEX = /^web/;
+
 const IS_AOT = ((process.env.NODE_ENV == 'production') || process.env.AOT);
 
 const CACHE = new Map();
@@ -9,6 +11,10 @@ export class AngularHtmlCompiler {
     return CACHE.get(filePath);
   }
   processFilesForTarget(htmlFiles){
+    const arch = htmlFiles[0].getArch();
+    const forWeb = WEB_ARCH_REGEX.test(arch);
+    const prefix = forWeb ? 'client' : 'server';
+    console.time(`[${prefix}]: HTML Files Compilation`);
     for(const htmlFile of htmlFiles){
       if(!htmlFile.getPathInPackage().includes('node_modules')){
         const data = htmlFile.getContentsAsString();
@@ -49,5 +55,6 @@ export class AngularHtmlCompiler {
         }
       }
     }
+    console.timeEnd(`[${prefix}]: HTML Files Compilation`);
   }
 }
