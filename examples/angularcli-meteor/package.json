@@ -17,6 +17,9 @@
     "meteor-client:bundle": "meteor-client bundle -s api"
   },
   "private": true,
+  "renovate": {
+    "branchPrefix": "renovate/angularcli-"
+  },
   "dependencies": {
     "@angular/animations": "^4.2.4",
     "@angular/common": "^4.2.4",
