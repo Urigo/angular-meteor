@@ -46,7 +46,7 @@
     "@types/jasmine": "2.6.3",
     "@types/jasminewd2": "2.0.3",
     "@types/meteor": "1.4.12",
-    "@types/node": "8.0.50",
+    "@types/node": "8.0.51",
     "autoprefixer": "7.1.6",
     "circular-dependency-plugin": "4.2.1",
     "codelyzer": "4.0.1",
