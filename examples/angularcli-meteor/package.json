@@ -43,7 +43,7 @@
     "@angular/cli": "1.4.9",
     "@angular/compiler-cli": "4.4.6",
     "@angular/language-service": "4.4.6",
-    "@types/jasmine": "2.8.0",
+    "@types/jasmine": "2.8.2",
     "@types/jasminewd2": "2.0.3",
     "@types/meteor": "1.4.12",
     "@types/node": "8.0.51",
