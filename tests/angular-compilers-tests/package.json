@@ -20,7 +20,7 @@
     "zone.js": "^0.8.17"
   },
   "devDependencies": {
-    "@types/chai": "4.0.4",
+    "@types/chai": "4.0.5",
     "@types/meteor": "1.4.12",
     "@types/mocha": "2.2.44",
     "@types/sinon": "4.0.0",
