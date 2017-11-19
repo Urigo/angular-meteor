@@ -68,7 +68,7 @@
     "less-loader": "4.0.5",
     "meteor-client-bundler": "0.3.0",
     "postcss-loader": "2.0.8",
-    "postcss-url": "7.2.0",
+    "postcss-url": "7.2.1",
     "protractor": "5.2.0",
     "raw-loader": "0.5.1",
     "sass-loader": "6.0.6",
