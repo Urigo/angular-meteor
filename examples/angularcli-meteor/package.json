@@ -50,7 +50,7 @@
     "autoprefixer": "7.1.6",
     "circular-dependency-plugin": "4.2.1",
     "codelyzer": "4.0.1",
-    "copy-webpack-plugin": "4.2.1",
+    "copy-webpack-plugin": "4.2.3",
     "css-loader": "0.28.7",
     "cssnano": "3.10.0",
     "exports-loader": "0.6.4",
