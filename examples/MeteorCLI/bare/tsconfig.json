@@ -16,7 +16,10 @@
     "target": "es2015",
     "skipLibCheck": true,
     "stripInternal": true,
-    "noImplicitAny": false
+    "noImplicitAny": false,
+    "types": [
+      "@types/meteor"
+    ]
   },
   "include": [
     "imports/**/*.ts",
@@ -25,6 +28,9 @@
   ],
   "exclude": [
     "node_modules"
+  ],
+  "types": [
+    "@types/meteor"
   ],
   "compileOnSave": false,
   "atom": {

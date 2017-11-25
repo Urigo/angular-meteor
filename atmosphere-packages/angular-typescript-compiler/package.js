@@ -8,11 +8,15 @@ Package.describe({
 
 Npm.depends({
   'meteor-typescript': '0.8.10',
-  '@angular/core': '5.0.0',
-  '@angular/common': '5.0.0',
-  '@angular/compiler': '5.0.0',
-  '@angular/compiler-cli': '5.0.0',
-  'typescript': '2.6.1'
+  '@angular/core': '5.0.1',
+  '@angular/common': '5.0.1',
+  '@angular/compiler': '5.0.1',
+  '@angular/compiler-cli': '5.0.1',
+  'typescript': '2.6.1',
+  'rollup': '0.41.4',
+   'rollup-plugin-node-resolve': '3.0.0',
+   'rollup-plugin-hypothetical': '1.2.1',
+   'rollup-plugin-commonjs': '8.2.0',
 });
 
 Package.onUse(function(api) {

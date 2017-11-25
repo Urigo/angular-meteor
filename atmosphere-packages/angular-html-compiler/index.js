@@ -7,7 +7,7 @@ const IS_AOT = ((process.env.NODE_ENV == 'production') || process.env.AOT);
 const CACHE = new Map();
 
 export class AngularHtmlCompiler {
-  compileFile(filePath){
+  static getContent(filePath){
     return CACHE.get(filePath);
   }
   processFilesForTarget(htmlFiles){
@@ -27,11 +27,13 @@ export class AngularHtmlCompiler {
           htmlFile.addHtml({
             data: $head.html() || '',
             section: 'head',
+            hash: htmlFile.getSourceHash()
           });
 
           htmlFile.addHtml({
             data:  $body.html() || '',
             section: 'body',
+            hash: htmlFile.getSourceHash()
           });
           const attrs = $body[0] ? $body[0].attribs : undefined;
           if (attrs) {
@@ -50,7 +52,8 @@ export class AngularHtmlCompiler {
         }else if(!IS_AOT){
           htmlFile.addAsset({
             data,
-            path: htmlFile.getPathInPackage()
+            path: htmlFile.getPathInPackage(),
+            hash: htmlFile.getSourceHash()
           });
         }
       }

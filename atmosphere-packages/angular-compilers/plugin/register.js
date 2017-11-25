@@ -12,23 +12,19 @@ import {
   AngularScssCompiler
 } from 'meteor/angular-scss-compiler';
 
-let scriptExtension = 'ts';
 let templateExtension = 'html';
-let styleExtension = 'scss';
 
 if(process.env.BLAZE){
   templateExtension = 'ng.html';
 }
 
-const IS_AOT = ((process.env.NODE_ENV == 'production') || process.env.AOT);
-
 Plugin.registerCompiler({
-  extensions: [scriptExtension],
+  extensions: ['ts', 'tsx'],
   filenames: ['tsconfig.json']
 }, () => new AngularTsCompiler());
 Plugin.registerCompiler({
   extensions: [templateExtension]
 }, () => new AngularHtmlCompiler());
 Plugin.registerCompiler({
-  extensions: [styleExtension]
+  extensions: ['scss']
 }, () => new AngularScssCompiler());
