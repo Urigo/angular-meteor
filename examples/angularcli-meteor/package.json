@@ -17,6 +17,9 @@
     "meteor-client:bundle": "meteor-client bundle -s api"
   },
   "private": true,
+  "renovate": {
+    "branchPrefix": "renovate/angularcli-"
+  },
   "dependencies": {
     "@angular/animations": "^4.2.4",
     "@angular/common": "^4.2.4",
@@ -40,14 +43,14 @@
     "@angular/cli": "1.4.9",
     "@angular/compiler-cli": "4.4.6",
     "@angular/language-service": "4.4.6",
-    "@types/jasmine": "2.6.2",
+    "@types/jasmine": "2.8.2",
     "@types/jasminewd2": "2.0.3",
     "@types/meteor": "1.4.12",
-    "@types/node": "8.0.47",
+    "@types/node": "8.0.53",
     "autoprefixer": "7.1.6",
     "circular-dependency-plugin": "4.2.1",
-    "codelyzer": "4.0.0",
-    "copy-webpack-plugin": "4.2.0",
+    "codelyzer": "4.0.1",
+    "copy-webpack-plugin": "4.2.3",
     "css-loader": "0.28.7",
     "cssnano": "3.10.0",
     "exports-loader": "0.6.4",
@@ -65,7 +68,7 @@
     "less-loader": "4.0.5",
     "meteor-client-bundler": "0.3.0",
     "postcss-loader": "2.0.8",
-    "postcss-url": "7.1.2",
+    "postcss-url": "7.2.1",
     "protractor": "5.2.0",
     "raw-loader": "0.5.1",
     "sass-loader": "6.0.6",
