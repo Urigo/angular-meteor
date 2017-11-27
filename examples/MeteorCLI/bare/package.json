@@ -23,14 +23,14 @@
     "zone.js": "^0.8.16"
   },
   "devDependencies": {
-    "@angular/compiler-cli": "^5.0.3",
-    "@types/chai": "^4.0.5",
+    "@angular/compiler-cli": "5.0.3",
+    "@types/chai": "4.0.5",
     "@types/meteor": "1.4.12",
-    "@types/mocha": "^2.2.44",
-    "@types/sinon": "^4.0.0",
-    "chai": "^4.1.2",
-    "phantomjs-prebuilt": "^2.1.16",
-    "sinon": "^4.1.2",
+    "@types/mocha": "2.2.44",
+    "@types/sinon": "4.0.0",
+    "chai": "4.1.2",
+    "phantomjs-prebuilt": "2.1.16",
+    "sinon": "4.1.2",
     "typescript": "2.4.2"
   }
 }
