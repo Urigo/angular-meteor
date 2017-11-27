@@ -31,6 +31,6 @@
     "chai": "4.1.2",
     "phantomjs-prebuilt": "2.1.16",
     "sinon": "4.1.2",
-    "typescript": "2.4.2"
+    "typescript": "2.6.2"
   }
 }
