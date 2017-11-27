@@ -2,14 +2,13 @@
 
 # run 'meteor npm install' in the tests.
 
-export METEOR_PACKAGE_DIRS=../../atmosphere-packages
-cd tests
-cd angular-compilers-tests
+export METEOR_PACKAGE_DIRS=../../../atmosphere-packages
+cd examples/MeteorCLI/bare
 rm -rf node_modules
 meteor npm install
 meteor npm run test:ci
 exit_code=$?; if [ ${exit_code} -gt 0 ]; then exit ${exit_code}; fi
-cd ../../examples/angularcli-meteor
+cd ../../angularcli-meteor
 npm install
 npm run meteor-client:bundle
 npm run api:reset

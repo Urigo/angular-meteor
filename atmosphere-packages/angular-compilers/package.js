@@ -14,7 +14,7 @@ Package.registerBuildPlugin({
   use: [
     // Uses an external packages to get the actual compilers
     'ecmascript@0.8.3',
-    'angular-typescript-compiler@0.2.8_1',
+    'angular-typescript-compiler@0.2.9',
     'angular-html-compiler@0.2.8',
     'angular-scss-compiler@0.2.8'
   ]

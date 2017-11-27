@@ -1,3 +1,4 @@
+import './checkNpmVersions';
 import fs from 'fs';
 import path from 'path';
 
@@ -130,7 +131,9 @@ export class AngularTsCompiler {
         !filePath.startsWith('node_modules/rxjs') &&
         !filePath.startsWith('node_modules/zone.js') &&
         !filePath.startsWith('node_modules/@angular') &&
-        !filePath.startsWith('node_modules/@types')) {
+        !filePath.startsWith('node_modules/@types') &&
+        !filePath.startsWith('node_modules/reflect-metadata') &&
+        !filePath.startsWith('node_modules/tsickle')) {
         if (filePath.endsWith('.d.ts')) {
           const tsFilePath = inputFile.getPathInPackage().replace('.d', '');
           if (!tsFilePaths.includes(tsFilePath)) {

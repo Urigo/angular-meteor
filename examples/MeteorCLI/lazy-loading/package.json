@@ -20,6 +20,8 @@
     "zone.js": "^0.8.16"
   },
   "devDependencies": {
-    "@types/meteor": "1.4.12"
+    "@angular/compiler-cli": "^5.0.3",
+    "@types/meteor": "1.4.12",
+    "typescript": "^2.6.1"
   }
 }

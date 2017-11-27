@@ -18,6 +18,11 @@ Package contains one combined Angular compiler for Meteor that provides:
  $ meteor add angular-compilers
  ```
 
+ Angular's compiler-cli and other libraries are peer dependencies of this package, so you need to add them to you project.
+ ```
+ $ meteor npm install @angular/core @angular/common @angular/compiler @angular/compiler-cli typescript --save-dev
+ ```
+
 ## Compiler modes
 
 ### Default mode (development)

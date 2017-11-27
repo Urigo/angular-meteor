@@ -13,12 +13,15 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "sourceMap": true,
-    "target": "es2015",
+    "target": "es5",
     "skipLibCheck": true,
     "stripInternal": true,
     "noImplicitAny": false,
     "types": [
-      "@types/meteor"
+      "@types/meteor",
+      "@types/mocha",
+      "@types/chai",
+      "@types/sinon"
     ]
   },
   "include": [
@@ -28,9 +31,6 @@
   ],
   "exclude": [
     "node_modules"
-  ],
-  "types": [
-    "@types/meteor"
   ],
   "compileOnSave": false,
   "atom": {
