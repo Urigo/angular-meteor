@@ -1947,14 +1947,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      var subscription = (_Meteor = Meteor).subscribe.apply(_Meteor, [subName].concat(_toConsumableArray(args), [cb]));
 
 	      Tracker.autorun(function () {
-	        // Is the subscription still active?
-	        // Should never happen because the computation should stop the tracker when unsubscribing.
-	        if (!_underscore2.default.has(Meteor._subscriptions, subscription.subscriptionId)) {
-	          return false;
-	        }
-
-	        // Subscribe to changes on the ready-property.
-	        Meteor._subscriptions[subscription.subscriptionId].readyDeps.depend();
+	        // Subscribe to changes on the ready-property by calling the ready-method.
+	        subscription.ready();
 
 	        // Re-run the digest cycle if we are not in one already.
 	        _this.$$throttledDigest();
