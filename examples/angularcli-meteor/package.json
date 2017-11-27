@@ -67,7 +67,7 @@
     "karma-jasmine-html-reporter": "0.2.2",
     "less-loader": "4.0.5",
     "meteor-client-bundler": "0.3.0",
-    "postcss-loader": "2.0.8",
+    "postcss-loader": "2.0.9",
     "postcss-url": "7.3.0",
     "protractor": "5.2.0",
     "raw-loader": "0.5.1",
