@@ -19,8 +19,8 @@ Package.onUse(function(api) {
   api.use([
     'ecmascript',
     'babel-compiler',
-    'angular-html-compiler@0.2.8',
-    'angular-scss-compiler@0.2.8',
+    'angular-html-compiler@0.2.9',
+    'angular-scss-compiler@0.2.9',
     'underscore@1.0.10',
     'tmeasday:check-npm-versions@0.3.1'
   ], 'server');
