@@ -1,18 +1,21 @@
 {
   "private": true,
   "scripts": {
-    "start": "meteor run"
+    "start": "meteor run",
+    "test": "TEST_BROWSER_DRIVER=phantomjs meteor test --driver-package=ardatan:mocha",
+    "test:ci": "TEST_BROWSER_DRIVER=phantomjs meteor test --driver-package=ardatan:mocha --once"
   },
   "dependencies": {
-    "@angular/animations": "^5.0.0",
-    "@angular/common": "^5.0.0",
-    "@angular/compiler": "^5.0.0",
-    "@angular/core": "^5.0.0",
-    "@angular/forms": "^5.0.0",
-    "@angular/http": "^5.0.0",
-    "@angular/platform-browser": "^5.0.0",
-    "@angular/platform-browser-dynamic": "^5.0.0",
-    "@angular/router": "^5.0.0",
+    "@angular/animations": "^5.0.3",
+    "@angular/cdk": "^5.0.0-rc0",
+    "@angular/common": "^5.0.3",
+    "@angular/compiler": "^5.0.3",
+    "@angular/core": "^5.0.3",
+    "@angular/forms": "^5.0.3",
+    "@angular/http": "^5.0.3",
+    "@angular/platform-browser": "^5.0.3",
+    "@angular/platform-browser-dynamic": "^5.0.3",
+    "@angular/router": "^5.0.3",
     "babel-runtime": "^6.20.0",
     "meteor-node-stubs": "~0.3.0",
     "meteor-rxjs": "^0.4.8",
@@ -20,6 +23,14 @@
     "zone.js": "^0.8.16"
   },
   "devDependencies": {
-    "@types/meteor": "1.4.12"
+    "@angular/compiler-cli": "^5.0.3",
+    "@types/chai": "^4.0.5",
+    "@types/meteor": "1.4.12",
+    "@types/mocha": "^2.2.44",
+    "@types/sinon": "^4.0.0",
+    "chai": "^4.1.2",
+    "phantomjs-prebuilt": "^2.1.16",
+    "sinon": "^4.1.2",
+    "typescript": "2.4.2"
   }
 }

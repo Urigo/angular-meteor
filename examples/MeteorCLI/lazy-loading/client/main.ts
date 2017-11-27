@@ -1,4 +1,4 @@
-import './polyfills';
+import './imports/polyfills';
 
 import { Meteor } from 'meteor/meteor';
 

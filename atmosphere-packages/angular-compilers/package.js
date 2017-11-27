@@ -1,7 +1,7 @@
 Package.describe({
   name: 'angular-compilers',
   version: '0.2.8_1',
-  summary: 'Angular Templates, HTML and TypeScript compilers for Meteor',
+  summary: 'Rollup, AOT, SCSS, HTML and TypeScript compilers for Angular Meteor',
   git: 'https://github.com/Urigo/angular-meteor/tree/master/atmosphere-packages/angular-compilers',
   documentation: 'README.md'
 });
@@ -14,7 +14,7 @@ Package.registerBuildPlugin({
   use: [
     // Uses an external packages to get the actual compilers
     'ecmascript@0.8.3',
-    'angular-typescript-compiler@0.2.8_1',
+    'angular-typescript-compiler@0.2.9',
     'angular-html-compiler@0.2.8',
     'angular-scss-compiler@0.2.8'
   ]
