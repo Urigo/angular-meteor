@@ -10,6 +10,7 @@
     "@angular/cdk": "^5.0.0-rc0",
     "@angular/common": "^5.0.3",
     "@angular/compiler": "^5.0.3",
+    "@angular/compiler-cli": "^5.0.3",
     "@angular/core": "^5.0.3",
     "@angular/forms": "^5.0.3",
     "@angular/http": "^5.0.3",
@@ -23,7 +24,6 @@
     "zone.js": "^0.8.16"
   },
   "devDependencies": {
-    "@angular/compiler-cli": "^5.0.3",
     "@types/chai": "^4.0.5",
     "@types/meteor": "1.4.12",
     "@types/mocha": "^2.2.44",
