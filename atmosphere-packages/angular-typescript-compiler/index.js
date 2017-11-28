@@ -201,6 +201,8 @@ export class AngularTsCompiler {
     }
     const allPaths = tsFilePaths.concat(Array.from(ngcFilesMap.keys()));
     if(IS_ROLLUP){
+      tsConfig = tsConfig || {};
+      tsConfig.compilerOptions = tsConfig.compilerOptions || {};
       tsConfig.compilerOptions.module = 'es2015';
     }
     const buildOptions = {
