@@ -129,12 +129,12 @@ export class AngularTsCompiler {
     inputFiles.forEach((inputFile, index) => {
       const filePath = inputFile.getPathInPackage();
       if (filePath.endsWith('.ts') &&
-        !filePath.startsWith('node_modules/rxjs') &&
-        !filePath.startsWith('node_modules/zone.js') &&
-        !filePath.startsWith('node_modules/@angular') &&
-        !filePath.startsWith('node_modules/@types') &&
-        !filePath.startsWith('node_modules/reflect-metadata') &&
-        !filePath.startsWith('node_modules/tsickle')) {
+        !filePath.includes('node_modules/rxjs') &&
+        !filePath.includes('node_modules/zone.js') &&
+        !filePath.includes('node_modules/@angular') &&
+        !filePath.includes('node_modules/@types') &&
+        !filePath.includes('node_modules/reflect-metadata') &&
+        !filePath.includes('node_modules/tsickle')) {
         if (filePath.endsWith('.d.ts')) {
           const tsFilePath = inputFile.getPathInPackage().replace('.d', '');
           if (!tsFilePaths.includes(tsFilePath)) {
