@@ -10,7 +10,7 @@ Npm.depends({
   'meteor-typescript': '0.8.10',
   'rollup': '0.41.4',
   'rollup-plugin-node-resolve': '3.0.0',
-  'rollup-plugin-hypothetical': '1.2.1',
+  'rollup-plugin-hypothetical': '2.0.0',
   'rollup-plugin-commonjs': '8.2.0'
 });
 
