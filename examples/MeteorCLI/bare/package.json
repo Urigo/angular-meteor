@@ -27,7 +27,7 @@
     "@types/chai": "4.0.6",
     "@types/meteor": "1.4.12",
     "@types/mocha": "2.2.44",
-    "@types/sinon": "4.0.0",
+    "@types/sinon": "4.1.0",
     "chai": "4.1.2",
     "phantomjs-prebuilt": "2.1.16",
     "sinon": "4.1.3",
