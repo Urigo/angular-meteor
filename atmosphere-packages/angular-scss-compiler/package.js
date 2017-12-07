@@ -1,6 +1,6 @@
 Package.describe({
   name: 'angular-scss-compiler',
-  version: '0.2.5',
+  version: '0.2.6',
   summary: 'Angular Scss Compiler Package',
   git: 'https://github.com/Urigo/angular-meteor/tree/master/atmosphere-packages/angular-scss-compiler',
   documentation: null
