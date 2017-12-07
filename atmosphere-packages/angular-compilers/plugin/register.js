@@ -20,8 +20,6 @@ if(process.env.BLAZE){
   templateExtension = 'ng.html';
 }
 
-const IS_AOT = ((process.env.NODE_ENV == 'production') || process.env.AOT);
-
 Plugin.registerCompiler({
   extensions: [scriptExtension],
   filenames: ['tsconfig.json']
