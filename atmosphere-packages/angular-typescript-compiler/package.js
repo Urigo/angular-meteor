@@ -20,8 +20,8 @@ Package.onUse(function(api) {
   api.use([
     'ecmascript',
     'babel-compiler',
-    'angular-html-compiler@0.2.5',
-    'angular-scss-compiler@0.2.5'
+    'angular-html-compiler@0.2.6',
+    'angular-scss-compiler@0.2.6'
   ], 'server');
   api.mainModule('index.js', 'server');
 });
