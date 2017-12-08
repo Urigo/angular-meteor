@@ -1,4 +1,4 @@
-'use strict';
+'use strict'; 
 
 import {
   AngularTsCompiler
@@ -12,21 +12,19 @@ import {
   AngularScssCompiler
 } from 'meteor/angular-scss-compiler';
 
-let scriptExtension = 'ts';
 let templateExtension = 'html';
-let styleExtension = 'scss';
 
 if(process.env.BLAZE){
   templateExtension = 'ng.html';
 }
 
 Plugin.registerCompiler({
-  extensions: [scriptExtension],
+  extensions: ['ts', 'tsx'],
   filenames: ['tsconfig.json']
 }, () => new AngularTsCompiler());
 Plugin.registerCompiler({
   extensions: [templateExtension]
 }, () => new AngularHtmlCompiler());
 Plugin.registerCompiler({
-  extensions: [styleExtension]
+  extensions: ['scss']
 }, () => new AngularScssCompiler());

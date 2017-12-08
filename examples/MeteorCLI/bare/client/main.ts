@@ -1,5 +1,4 @@
-import './polyfills';
-
+import './imports/polyfills';
 import { Meteor } from 'meteor/meteor';
 
 import { enableProdMode } from '@angular/core';

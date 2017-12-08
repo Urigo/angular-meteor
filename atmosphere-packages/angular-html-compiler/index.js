@@ -1,14 +1,20 @@
 const $ = Npm.require('cheerio');
 
+const WEB_ARCH_REGEX = /^web/;
+
 const IS_AOT = ((process.env.NODE_ENV == 'production') && process.env.AOT != '0');
 
 const CACHE = new Map();
 
 export class AngularHtmlCompiler {
-  compileFile(filePath){
+  static getContent(filePath){
     return CACHE.get(filePath);
   }
   processFilesForTarget(htmlFiles){
+    const arch = htmlFiles[0].getArch();
+    const forWeb = WEB_ARCH_REGEX.test(arch);
+    const prefix = forWeb ? 'client' : 'server';
+    console.time(`[${prefix}]: HTML Files Compilation`);
     for(const htmlFile of htmlFiles){
       if(!htmlFile.getPathInPackage().includes('node_modules')){
         const data = htmlFile.getContentsAsString();
@@ -21,11 +27,13 @@ export class AngularHtmlCompiler {
           htmlFile.addHtml({
             data: $head.html() || '',
             section: 'head',
+            hash: htmlFile.getSourceHash()
           });
 
           htmlFile.addHtml({
             data:  $body.html() || '',
             section: 'body',
+            hash: htmlFile.getSourceHash()
           });
           const attrs = $body[0] ? $body[0].attribs : undefined;
           if (attrs) {
@@ -44,10 +52,12 @@ export class AngularHtmlCompiler {
         }else if(!IS_AOT){
           htmlFile.addAsset({
             data,
-            path: htmlFile.getPathInPackage()
+            path: htmlFile.getPathInPackage(),
+            hash: htmlFile.getSourceHash()
           });
         }
       }
     }
+    console.timeEnd(`[${prefix}]: HTML Files Compilation`);
   }
 }
