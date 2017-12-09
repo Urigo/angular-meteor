@@ -14,5 +14,7 @@ npm run meteor-client:bundle
 npm run api:reset
 export CHROME_BIN=chromium-browser
 npm run test
-concurrently "npm run start" "npm run api" "sleep 90; npm run e2e" --kill-others --success first
+exit_code=$?; if [ ${exit_code} -gt 0 ]; then exit ${exit_code}; fi
+#concurrently "npm run start" "npm run api" "sleep 180; npm run e2e" --kill-others --success first
+concurrently "npm run start" "sleep 30; npm run e2e" --kill-others --success first
 exit_code=$?; if [ ${exit_code} -gt 0 ]; then exit ${exit_code}; fi
