@@ -1,5 +1,5 @@
---- a/webpack.config.js	2017-09-11 10:27:09.820718850 +0200
-+++ b/webpack.config.js	2017-09-10 15:15:20.818540139 +0200
+--- a/webpack.config.js	2017-11-03 19:41:59.847729765 +0100
++++ b/webpack.config.js	2017-11-03 19:41:00.897727305 +0100
 @@ -1,5 +1,6 @@
  const fs = require('fs');
  const path = require('path');
@@ -7,11 +7,9 @@
  const CopyWebpackPlugin = require('copy-webpack-plugin');
  const ProgressPlugin = require('webpack/lib/ProgressPlugin');
  const CircularDependencyPlugin = require('circular-dependency-plugin');
-@@ -69,8 +70,11 @@
-       "./node_modules",
-       "./node_modules"
-     ],
-     "symlinks": true
+@@ -536,6 +537,9 @@
+       "main"
+     ]
    },
 +  "externals": [
 +    resolveExternals
@@ -19,17 +17,17 @@
    "resolveLoader": {
      "modules": [
        "./node_modules",
-@@ -452,6 +457,9 @@
-       "exclude": [],
+@@ -917,6 +921,9 @@
        "tsConfigPath": "src/tsconfig.app.json",
-       "skipCodeGeneration": true
+       "skipCodeGeneration": true,
+       "compilerOptions": {}
 +    }),
 +    new webpack.ProvidePlugin({
 +      __extends: 'typescript-extends'
      })
    ],
    "node": {
-@@ -463,9 +473,25 @@
+@@ -928,9 +935,25 @@
      "process": true,
      "module": false,
      "clearImmediate": false,
