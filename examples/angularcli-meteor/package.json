@@ -82,7 +82,7 @@
     "typescript-extends": "1.0.1",
     "url-loader": "0.6.2",
     "webpack": "3.10.0",
-    "webpack-concat-plugin": "1.4.2",
+    "webpack-concat-plugin": "2.0.0",
     "webpack-dev-server": "2.9.7"
   }
 }
