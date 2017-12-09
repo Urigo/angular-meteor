@@ -11,7 +11,7 @@ Npm.depends({
   'rollup': '0.41.4',
   'rollup-plugin-node-resolve': '3.0.0',
   'rollup-plugin-hypothetical': '2.0.0',
-  'rollup-plugin-commonjs': '8.2.0'
+  'rollup-plugin-commonjs': '8.2.6'
 });
 
 Package.onUse(function(api) {
