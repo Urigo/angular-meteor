@@ -73,7 +73,7 @@
     "style-loader": "0.13.2",
     "stylus-loader": "3.0.1",
     "tmp": "0.0.33",
-    "ts-node": "3.2.2",
+    "ts-node": "3.3.0",
     "tslint": "5.7.0",
     "typescript": "2.6.2",
     "typescript-extends": "1.0.1",
