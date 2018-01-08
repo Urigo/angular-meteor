@@ -25,7 +25,7 @@
   "devDependencies": {
     "@angular/compiler-cli": "5.1.0",
     "@types/chai": "4.0.8",
-    "@types/meteor": "1.4.12",
+    "@types/meteor": "1.4.13",
     "@types/mocha": "2.2.44",
     "@types/sinon": "4.1.0",
     "chai": "4.1.2",
