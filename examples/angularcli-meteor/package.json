@@ -45,7 +45,7 @@
     "@types/meteor": "1.4.12",
     "@types/node": "6.0.92",
     "autoprefixer": "6.7.7",
-    "circular-dependency-plugin": "4.3.0",
+    "circular-dependency-plugin": "4.4.0",
     "codelyzer": "4.0.1",
     "copy-webpack-plugin": "4.2.3",
     "css-loader": "0.28.7",
