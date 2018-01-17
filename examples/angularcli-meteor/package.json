@@ -48,7 +48,7 @@
     "circular-dependency-plugin": "4.3.0",
     "codelyzer": "4.0.1",
     "copy-webpack-plugin": "4.2.3",
-    "css-loader": "0.28.7",
+    "css-loader": "0.28.9",
     "cssnano": "3.10.0",
     "exports-loader": "0.6.4",
     "file-loader": "1.1.5",
