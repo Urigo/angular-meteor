@@ -34,7 +34,7 @@
     "meteor-rxjs": "^0.4.8",
     "moment": "^2.19.3",
     "rxjs": "^5.5.2",
-    "zone.js": "^0.8.14"
+    "zone.js": "^0.8.0"
   },
   "devDependencies": {
     "@angular/cli": "1.6.0",
