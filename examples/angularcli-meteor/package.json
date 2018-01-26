@@ -37,9 +37,9 @@
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
-    "@angular/cli": "1.6.0",
-    "@angular/compiler-cli": "5.1.0",
-    "@angular/language-service": "5.1.0",
+    "@angular/cli": "1.6.6",
+    "@angular/compiler-cli": "5.2.2",
+    "@angular/language-service": "5.2.2",
     "@types/jasmine": "2.8.2",
     "@types/jasminewd2": "2.0.3",
     "@types/meteor": "1.4.12",
