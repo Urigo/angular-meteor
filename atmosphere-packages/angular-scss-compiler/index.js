@@ -15,7 +15,7 @@ export class AngularScssCompiler{
     return CACHE.get(filePath);
   }
   static compileFile(filePath, data){
-    const fullPath = path.join(basePath, filePath);
+    const fullPath = filePath.includes(basePath) ? filePath : path.join(basePath, filePath);
     return sass.renderSync({
       file: fullPath,
       includePaths: [basePath + '/node_modules'],

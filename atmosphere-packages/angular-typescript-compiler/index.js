@@ -286,7 +286,7 @@ export class AngularTsCompiler {
   _processTsDiagnostics(diagnostics, inputFile) {
     diagnostics.semanticErrors.forEach(error => {
       const msg = `${error.fileName} (${error.line}, ${error.column}): ${error.message}`;
-      console.warn(msg);
+      console.log(msg);
       //inputFile.error(error);
     });
   }
