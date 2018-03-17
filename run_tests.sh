@@ -6,7 +6,7 @@ export METEOR_PACKAGE_DIRS=../../../atmosphere-packages
 cd examples/MeteorCLI/bare
 rm -rf node_modules
 meteor npm install
-meteor npm run test:ci
+NODE_OPTIONS="--max-old-space-size=4096" meteor npm run test:ci
 exit_code=$?; if [ ${exit_code} -gt 0 ]; then exit ${exit_code}; fi
 cd ../../angularcli-meteor
 npm install
