@@ -1,4 +1,11 @@
 {
   "extends": ["config:js-lib", ":meteor"],
-  "rebaseStalePrs": true
+  "rebaseStalePrs": true,
+  "ignoreDeps": ["rollup"],
+  "packageRules": [
+    {
+      "packagePatterns": ["rollup$"],
+      "groupName": "rollup"
+    }
+  ]
 }
