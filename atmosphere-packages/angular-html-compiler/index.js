@@ -2,7 +2,7 @@ const $ = Npm.require('cheerio');
 
 const WEB_ARCH_REGEX = /^web/;
 
-const IS_AOT = ((process.env.NODE_ENV == 'production') || process.env.AOT);
+const IS_AOT = ((process.env.NODE_ENV == 'production') && process.env.AOT != '0');
 
 const CACHE = new Map();
 
