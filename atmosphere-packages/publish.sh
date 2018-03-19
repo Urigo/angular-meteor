@@ -4,7 +4,7 @@ cd angular-html-compiler
 meteor publish
 cd ../angular-scss-compiler
 meteor publish
-cd ../angular-ts-compiler
+cd ../angular-typescript-compiler
 meteor publish
 cd ../angular-compilers
 meteor publish

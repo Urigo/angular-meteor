@@ -9,6 +9,7 @@ addons:
 node_js:
   - "8"
 before_install:
+  - npm install -g npm@latest
   - curl https://install.meteor.com | /bin/sh
 install:
   - git clean -fXd

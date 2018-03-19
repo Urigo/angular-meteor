@@ -1,6 +1,6 @@
 Package.describe({
   name: 'angular-typescript-compiler',
-  version: '0.2.9_6',
+  version: '0.3.0',
   summary: 'Angular TypeScript Compiler Package',
   git: 'https://github.com/Urigo/angular-meteor/tree/master/atmosphere-packages/angular-typescript-compiler',
   documentation: null
@@ -15,14 +15,12 @@ Npm.depends({
 });
 
 Package.onUse(function(api) {
-  api.versionsFrom('1.6');
+  api.versionsFrom('1.6.1');
   api.use([
     'ecmascript',
     'babel-compiler@7.0.0',
-    'angular-html-compiler@0.2.9',
-    'angular-scss-compiler@0.2.9',
-    'underscore@1.0.10',
-    'tmeasday:check-npm-versions@0.3.1'
+    'angular-html-compiler@0.3.0',
+    'angular-scss-compiler@0.3.0'
   ], 'server');
   api.mainModule('index.js', 'server');
 });

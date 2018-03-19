@@ -18,13 +18,37 @@ if(process.env.BLAZE){
   templateExtension = 'ng.html';
 }
 
+let aot = ((process.env.NODE_ENV == 'production') && process.env.AOT != '0');
+let rollup = (process.env.ROLLUP == '1');
+
+try{
+  if(aot){
+    require('@angular/compiler');
+    require('@angular/compiler-cli');
+  }
+}catch(e){
+  console.log('@angular/compiler and @angular/compiler-cli must be installed for AOT compilation!');
+  console.log('AOT compilation disabled!');
+  console.log('Ignore this if you are using AngularJS 1.X');
+  aot = false;
+  rollup = false;
+}
+
+
 Plugin.registerCompiler({
   extensions: ['ts', 'tsx'],
   filenames: ['tsconfig.json']
-}, () => new AngularTsCompiler());
+}, () => new AngularTsCompiler({
+  aot,
+  rollup
+}));
 Plugin.registerCompiler({
   extensions: [templateExtension]
-}, () => new AngularHtmlCompiler());
+}, () => new AngularHtmlCompiler({
+  aot
+}));
 Plugin.registerCompiler({
   extensions: ['scss']
-}, () => new AngularScssCompiler());
+}, () => new AngularScssCompiler({
+  aot
+}));
