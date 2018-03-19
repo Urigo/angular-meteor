@@ -2,11 +2,12 @@ const $ = Npm.require('cheerio');
 
 const WEB_ARCH_REGEX = /^web/;
 
-const IS_AOT = ((process.env.NODE_ENV == 'production') || process.env.AOT);
-
 const CACHE = new Map();
 
 export class AngularHtmlCompiler {
+  constructor({aot}){
+    this.isAot = aot;
+  }
   static getContent(filePath){
     return CACHE.get(filePath);
   }
@@ -49,7 +50,7 @@ export class AngularHtmlCompiler {
               `,
             });
           }
-        }else if(!IS_AOT){
+        }else if(!this.isAot){
           htmlFile.addAsset({
             data,
             path: htmlFile.getPathInPackage(),

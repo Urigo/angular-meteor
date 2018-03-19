@@ -6,11 +6,14 @@ const basePath = process.cwd();
 
 const WEB_ARCH_REGEX = /^web/;
 
-const IS_AOT = ((process.env.NODE_ENV == 'production') || process.env.AOT);
-
 const CACHE = new Map();
 
 export class AngularScssCompiler{
+  constructor({
+    aot
+  }){
+    this.isAot = aot;
+  }
   static getContent(filePath){
     return CACHE.get(filePath);
   }
@@ -43,7 +46,7 @@ export class AngularScssCompiler{
           };
           if(!filePath.includes('imports/')){
             scssFile.addStylesheet(toBeAdded)
-          }else if(!IS_AOT){
+          }else if(!this.isAot){
             scssFile.addAsset(toBeAdded);
           }
         }
