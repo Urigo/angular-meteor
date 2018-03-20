@@ -18,7 +18,7 @@ if(process.env.BLAZE){
   templateExtension = 'ng.html';
 }
 
-let aot = ((process.env.NODE_ENV == 'production') && process.env.AOT != '0');
+let aot = ((process.env.NODE_ENV == 'production') && (process.env.AOT != '0')) || process.env.AOT == '1';
 let rollup = (process.env.ROLLUP == '1');
 
 try{

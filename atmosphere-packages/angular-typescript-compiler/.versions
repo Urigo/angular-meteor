@@ -1,6 +1,6 @@
-angular-html-compiler@0.3.0
-angular-scss-compiler@0.3.0
-angular-typescript-compiler@0.3.0_3
+angular-html-compiler@0.3.1
+angular-scss-compiler@0.3.1
+angular-typescript-compiler@0.3.1
 babel-compiler@7.0.5
 babel-runtime@1.2.0
 dynamic-import@0.3.0
