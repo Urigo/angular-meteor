@@ -15,4 +15,5 @@ standard-minifier-js@2.3.1    # JS minifier run for production mode
 ecmascript@0.10.0              # Enable ECMAScript2015+ syntax in app code
 shell-server@0.3.1            # Server-side component of the `meteor shell` command
 
+dynamic-import
 angular-compilers

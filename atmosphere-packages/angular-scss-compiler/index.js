@@ -2,7 +2,13 @@ const sass = Npm.require('node-sass');
 
 const path = Npm.require('path');
 
-const basePath = process.cwd();
+import {
+  basePath,
+  ROOTED,
+  getMeteorPath,
+  isRooted,
+  getNoRooted
+} from './file-utils';
 
 const WEB_ARCH_REGEX = /^web/;
 
@@ -18,7 +24,7 @@ export class AngularScssCompiler{
     return CACHE.get(filePath);
   }
   static compileFile(filePath, data){
-    const fullPath = filePath.includes(basePath) ? filePath : path.join(basePath, filePath);
+    const fullPath = isRooted(filePath) ? filePath : path.join(basePath, filePath);
     return sass.renderSync({
       file: fullPath,
       includePaths: [basePath + '/node_modules'],

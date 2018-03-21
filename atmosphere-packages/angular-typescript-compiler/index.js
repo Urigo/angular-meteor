@@ -65,7 +65,6 @@ const ngcOptions = {
   traceResolution: false,
 };
 
-
 export class AngularTsCompiler {
   constructor({aot, rollup}){
     this.isAot = aot;
@@ -76,7 +75,7 @@ export class AngularTsCompiler {
     }
 
   }
-  addFakeDynamicLoader(source, basePath) {
+  generateFakeDynamicLoader(source, basePath) {
 
     let fakeLoaderCode = '';
 
@@ -88,14 +87,13 @@ export class AngularTsCompiler {
           (this.isAot ? '.ngfactory' : '') +
           replaced[0];
 
-        fakeLoaderCode += `function fakeLoader(){module.dynamicImport(${fixedUrl})}`;
+        additionFakeLoaderCode += `
+          if(false){module.dynamicImport(${fixedUrl})}
+        `;
         return `loadChildren: ${replaced}`;
-      })
+      });
 
-    if (fakeLoaderCode)
-      newSource = fakeLoaderCode + '\n' + newSource;
-
-    return newSource;
+    return {additionFakeLoaderCode, newSource};
 
   }
   replaceStringsWithFullUrls(basePath, urls, firstSlash) {
@@ -209,6 +207,7 @@ export class AngularTsCompiler {
     let mainCodePath;
     let mainCode;
     const codeMap = new Map();
+    let fakeLoaderCode = '';
     console.time(`[${prefix}]: TypeScript Files Compilation`);
     for (const filePath of allPaths) {
       if (!filePath.endsWith('.d.ts')) {
@@ -237,24 +236,34 @@ export class AngularTsCompiler {
         if (!this.isAot) {
           code = this.fixResourceUrls(code, basePath)
         }
-        code = this.addFakeDynamicLoader(code, basePath);
+        let {newSource, additionFakeLoaderCode} = this.generateFakeDynamicLoader(code, basePath);
+        code = newSource;
+        fakeLoaderCode += additionFakeLoaderCode;
         code = code.split('require("node_modules/').join('require("');
         const inputPath = inputFile.getPathInPackage();
         const outputPath = this.removeTsExtension(filePath);
         if (this.isRollup) {
           codeMap.set(outputPath, code);
-        } else {
-          const toBeAdded = {
-            sourcePath: inputPath,
-            path: outputPath + '.js',
-            data: code,
-            hash: result.hash,
-            sourceMap: result.sourceMap
-          };
-          inputFile.addJavaScript(toBeAdded);
         }
+        const toBeAdded = {
+          sourcePath: inputPath,
+          path: outputPath + '.js',
+          data: code,
+          hash: result.hash,
+          sourceMap: result.sourceMap
+        };
+        inputFile.addJavaScript(toBeAdded);
       }
     }
+    const inputFile = inputFiles.find(file => {
+      const filePath = file.getPathInPackage();
+      return filePath.startsWith(prefix) &&
+        filePath.indexOf('imports') === -1;
+    });
+    inputFile.addJavaScript({
+      path: 'fakeLoader.js',
+      data: fakeLoaderCode
+    });
     console.timeEnd(`[${prefix}]: TypeScript Files Compilation`);
     if (this.isRollup && !mainCodePath.includes('node_modules')) {
       console.time(`[${prefix}]: Rollup`);

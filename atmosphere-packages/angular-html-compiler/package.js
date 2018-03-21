@@ -1,6 +1,6 @@
 Package.describe({
   name: 'angular-html-compiler',
-  version: '0.3.1',
+  version: '0.3.1_1',
   summary: 'Angular Html Compiler Package',
   git: 'https://github.com/Urigo/angular-meteor/tree/master/atmosphere-packages/angular-html-compiler',
   documentation: null
