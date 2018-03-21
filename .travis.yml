@@ -16,4 +16,4 @@ install:
   - npm cache verify
   - npm install -g concurrently
 script:
-  - ./run_tests.sh
+  - sh run_tests.sh
