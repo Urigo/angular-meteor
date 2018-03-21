@@ -255,15 +255,17 @@ export class AngularTsCompiler {
         inputFile.addJavaScript(toBeAdded);
       }
     }
-    const inputFile = inputFiles.find(file => {
-      const filePath = file.getPathInPackage();
-      return filePath.startsWith(prefix) &&
-        filePath.indexOf('imports') === -1;
-    });
-    inputFile.addJavaScript({
-      path: 'fakeLoader.js',
-      data: fakeLoaderCode
-    });
+    if(fakeLoaderCode){
+      const inputFile = inputFiles.find(file => {
+        const filePath = file.getPathInPackage();
+        return filePath.startsWith(prefix) &&
+          filePath.indexOf('imports') === -1;
+      });
+      inputFile.addJavaScript({
+        path: 'fakeLoader.js',
+        data: fakeLoaderCode
+      });
+    }
     console.timeEnd(`[${prefix}]: TypeScript Files Compilation`);
     if (this.isRollup && !mainCodePath.includes('node_modules')) {
       console.time(`[${prefix}]: Rollup`);
