@@ -65,7 +65,6 @@ const ngcOptions = {
   traceResolution: false,
 };
 
-
 export class AngularTsCompiler {
   constructor({aot, rollup}){
     this.isAot = aot;
@@ -74,7 +73,7 @@ export class AngularTsCompiler {
       this.compiler = require('@angular/compiler');
       this.compilerCli = require ('@angular/compiler-cli');
     }
-
+    
   }
   addFakeDynamicLoader(source, basePath) {
 
@@ -87,15 +86,33 @@ export class AngularTsCompiler {
             .split('#')[0]) +
           (this.isAot ? '.ngfactory' : '') +
           replaced[0];
-
-        fakeLoaderCode += `function fakeLoader(){module.dynamicImport(${fixedUrl})}`;
+        fakeLoaderCode += ` if(!Meteor){module.dynamicImport(${fixedUrl})} `;
         return `loadChildren: ${replaced}`;
       })
 
-    if (fakeLoaderCode)
+    if (fakeLoaderCode){
       newSource = fakeLoaderCode + '\n' + newSource;
+      console.log(newSource);
+    }
 
     return newSource;
+
+  }
+
+  replaceDynamicLoadingCode(code) {
+
+    return code.replace(LOAD_CHILDREN_REGEX,
+      (match, url) => {
+        url = url.split('\'').join('').split('"').join('').split(',').join('');
+        const urlArr = url.split('#');
+        let modulePath = urlArr[0].trim();
+        let moduleName = urlArr[1].trim();
+        if(this.isAot){
+          modulePath += '.ngfactory';
+          moduleName += 'NgFactory';
+        }
+        return `loadChildren: () => module.dynamicImport('${modulePath}').then(allModule => allModule['${moduleName}']),`;
+      });
 
   }
   replaceStringsWithFullUrls(basePath, urls, firstSlash) {
@@ -209,6 +226,7 @@ export class AngularTsCompiler {
     let mainCodePath;
     let mainCode;
     const codeMap = new Map();
+    let fakeLoaderCode = '';
     console.time(`[${prefix}]: TypeScript Files Compilation`);
     for (const filePath of allPaths) {
       if (!filePath.endsWith('.d.ts')) {
@@ -237,22 +255,41 @@ export class AngularTsCompiler {
         if (!this.isAot) {
           code = this.fixResourceUrls(code, basePath)
         }
-        code = this.addFakeDynamicLoader(code, basePath);
         code = code.split('require("node_modules/').join('require("');
+        if(this.isRollup){
+          code = this.addFakeDynamicLoader(code, basePath);
+        }else{
+          code = this.replaceDynamicLoadingCode(code);
+        }
         const inputPath = inputFile.getPathInPackage();
         const outputPath = this.removeTsExtension(filePath);
         if (this.isRollup) {
           codeMap.set(outputPath, code);
-        } else {
-          const toBeAdded = {
-            sourcePath: inputPath,
-            path: outputPath + '.js',
-            data: code,
-            hash: result.hash,
-            sourceMap: result.sourceMap
-          };
-          inputFile.addJavaScript(toBeAdded);
         }
+        if(tsConfig.compilerOptions.module == 'es2015'){
+          code = Babel.compile(code).code;
+        }
+        const toBeAdded = {
+          sourcePath: inputPath,
+          path: outputPath + '.js',
+          data: code,
+          hash: result.hash,
+          sourceMap: result.sourceMap
+        };
+        inputFile.addJavaScript(toBeAdded);
+      }
+    }
+    if(this.isRollup){
+      const inputFile = inputFiles.find(file => {
+        const filePath = file.getPathInPackage();
+        return filePath.startsWith(prefix) &&
+          filePath.indexOf('imports') === -1;
+      });
+      if(inputFile){
+        inputFile.addJavaScript({
+          path: 'system.js',
+          data: `System = { import(path) { return module.dynamicImport(path) } }`
+        });
       }
     }
     console.timeEnd(`[${prefix}]: TypeScript Files Compilation`);
@@ -268,12 +305,15 @@ export class AngularTsCompiler {
           return filePath.startsWith(prefix) &&
             filePath.indexOf('imports') === -1;
         });
-        const toBeAdded = {
-          sourcePath: inputFile.getPathInPackage(),
-          path: 'bundle.js',
-          data: bundle
-        };
-        inputFile.addJavaScript(toBeAdded);
+        if(inputFile){
+          const toBeAdded = {
+            sourcePath: inputFile.getPathInPackage(),
+            path: 'bundle.js',
+            data: bundle
+          };
+
+          inputFile.addJavaScript(toBeAdded);
+        }
       }
       console.timeEnd(`[${prefix}]: Rollup`);
     }

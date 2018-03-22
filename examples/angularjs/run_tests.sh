@@ -10,6 +10,6 @@ exit_code=$?; if [ ${exit_code} -gt 0 ]; then exit ${exit_code}; fi
 echo "[MeteorCLI - angularjs] Testing Dev"
 npm run test:ci
 exit_code=$?; if [ ${exit_code} -gt 0 ]; then exit ${exit_code}; fi
-echo "[MeteorCLI - angularjs] Testing Production w/ Rollup"
-ROLLUP=1 meteor build ./.meteor/build-rollup
+echo "[MeteorCLI - angularjs] Testing Production"
+meteor build ./.meteor/build
 exit_code=$?; if [ ${exit_code} -gt 0 ]; then exit ${exit_code}; fi
