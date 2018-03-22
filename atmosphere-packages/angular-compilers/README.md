@@ -12,11 +12,6 @@ Package contains one combined Angular compiler for Meteor that provides:
  $ meteor remove blaze-html-templates
  $ meteor remove less
  ```
-
- Then uninstall standard-minifiers, because Rollup already does.
- ```
- $ meteor remove standard-minifier-js
- ```
  
  And then add the compilers for Angular by running:
  ```

@@ -73,9 +73,9 @@ export class AngularTsCompiler {
       this.compiler = require('@angular/compiler');
       this.compilerCli = require ('@angular/compiler-cli');
     }
-
+    
   }
-  generateFakeDynamicLoader(source, basePath) {
+  addFakeDynamicLoader(source, basePath) {
 
     let fakeLoaderCode = '';
 
@@ -86,14 +86,33 @@ export class AngularTsCompiler {
             .split('#')[0]) +
           (this.isAot ? '.ngfactory' : '') +
           replaced[0];
-
-        additionFakeLoaderCode += `
-          if(false){module.dynamicImport(${fixedUrl})}
-        `;
+        fakeLoaderCode += ` if(!Meteor){module.dynamicImport(${fixedUrl})} `;
         return `loadChildren: ${replaced}`;
-      });
+      })
 
-    return {additionFakeLoaderCode, newSource};
+    if (fakeLoaderCode){
+      newSource = fakeLoaderCode + '\n' + newSource;
+      console.log(newSource);
+    }
+
+    return newSource;
+
+  }
+
+  replaceDynamicLoadingCode(code) {
+
+    return code.replace(LOAD_CHILDREN_REGEX,
+      (match, url) => {
+        url = url.split('\'').join('').split('"').join('').split(',').join('');
+        const urlArr = url.split('#');
+        let modulePath = urlArr[0].trim();
+        let moduleName = urlArr[1].trim();
+        if(this.isAot){
+          modulePath += '.ngfactory';
+          moduleName += 'NgFactory';
+        }
+        return `loadChildren: () => module.dynamicImport('${modulePath}').then(allModule => allModule['${moduleName}']),`;
+      });
 
   }
   replaceStringsWithFullUrls(basePath, urls, firstSlash) {
@@ -236,14 +255,19 @@ export class AngularTsCompiler {
         if (!this.isAot) {
           code = this.fixResourceUrls(code, basePath)
         }
-        let {newSource, additionFakeLoaderCode} = this.generateFakeDynamicLoader(code, basePath);
-        code = newSource;
-        fakeLoaderCode += additionFakeLoaderCode;
         code = code.split('require("node_modules/').join('require("');
+        if(this.isRollup){
+          code = this.addFakeDynamicLoader(code, basePath);
+        }else{
+          code = this.replaceDynamicLoadingCode(code);
+        }
         const inputPath = inputFile.getPathInPackage();
         const outputPath = this.removeTsExtension(filePath);
         if (this.isRollup) {
           codeMap.set(outputPath, code);
+        }
+        if(tsConfig.compilerOptions.module == 'es2015'){
+          code = Babel.compile(code).code;
         }
         const toBeAdded = {
           sourcePath: inputPath,
@@ -255,16 +279,18 @@ export class AngularTsCompiler {
         inputFile.addJavaScript(toBeAdded);
       }
     }
-    if(fakeLoaderCode){
+    if(this.isRollup){
       const inputFile = inputFiles.find(file => {
         const filePath = file.getPathInPackage();
         return filePath.startsWith(prefix) &&
           filePath.indexOf('imports') === -1;
       });
-      inputFile.addJavaScript({
-        path: 'fakeLoader.js',
-        data: fakeLoaderCode
-      });
+      if(inputFile){
+        inputFile.addJavaScript({
+          path: 'system.js',
+          data: `System = { import(path) { return module.dynamicImport(path) } }`
+        });
+      }
     }
     console.timeEnd(`[${prefix}]: TypeScript Files Compilation`);
     if (this.isRollup && !mainCodePath.includes('node_modules')) {
@@ -279,12 +305,15 @@ export class AngularTsCompiler {
           return filePath.startsWith(prefix) &&
             filePath.indexOf('imports') === -1;
         });
-        const toBeAdded = {
-          sourcePath: inputFile.getPathInPackage(),
-          path: 'bundle.js',
-          data: bundle
-        };
-        inputFile.addJavaScript(toBeAdded);
+        if(inputFile){
+          const toBeAdded = {
+            sourcePath: inputFile.getPathInPackage(),
+            path: 'bundle.js',
+            data: bundle
+          };
+
+          inputFile.addJavaScript(toBeAdded);
+        }
       }
       console.timeEnd(`[${prefix}]: Rollup`);
     }
