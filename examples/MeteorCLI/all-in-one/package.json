@@ -17,11 +17,11 @@
     "@angular/platform-server": "^5.2.9",
     "@angular/router": "^5.2.9",
     "@babel/runtime": "^7.0.0-beta.42",
-    "core-js": "^2.5.3",
+    "core-js": "^2.5.4",
     "meteor-node-stubs": "~0.3.3",
     "meteor-rxjs": "^0.4.10",
-    "rxjs": "^5.5.7",
-    "zone.js": "^0.8.20"
+    "rxjs": "^5.5.8",
+    "zone.js": "^0.8.21"
   },
   "devDependencies": {
     "@angular/compiler-cli": "^5.2.9",
@@ -31,7 +31,7 @@
     "@types/sinon": "^4.1.0",
     "chai": "^4.1.2",
     "phantomjs-prebuilt": "^2.1.16",
-    "sinon": "^4.1.3",
-    "typescript": "^2.7.2"
+    "sinon": "^4.5.0",
+    "typescript": "^2.8.1"
   }
 }

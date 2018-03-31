@@ -20,17 +20,11 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     RouterModule.forRoot([
       {
         path: 'todoList',
-        component: TodoListComponent,
-        data: {
-          title: 'Todo List'
-        }
+        component: TodoListComponent
       },
       {
         path: 'todoAdd',
-        loadChildren: './todo-add/todo-add.module#TodoAddModule',
-        data: {
-          title: 'Add Todo'
-        }
+        loadChildren: './todo-add/todo-add.module#TodoAddModule'
       },
       // Home Page
       {
@@ -41,10 +35,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
       // 404 Page
       {
         path: '**',
-        component: PageNotFoundComponent,
-        data: {
-          title: '404 Page Not Found'
-        }
+        component: PageNotFoundComponent
       }
     ])
   ],

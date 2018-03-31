@@ -20,12 +20,14 @@ export class TodoListComponent implements OnInit, OnDestroy {
     this.todos = Todos.find();
     // Subscribe and connect it to Angular's change detection system
     // while running on client
-    if (Meteor.isClient)
+    if (Meteor.isClient){
       this.todoListSubscription = MeteorObservable.subscribe('todoList').subscribe();
+    }
   }
   ngOnDestroy() {
-    if (this.todoListSubscription)
+    if (this.todoListSubscription){
       this.todoListSubscription.unsubscribe();
+    }
   }
   removeTodo(_id: string) {
     Meteor.call('removeTodo', _id);
