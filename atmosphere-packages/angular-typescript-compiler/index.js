@@ -28,9 +28,6 @@ import {
 
 // using: regex, capture groups, and capture group variables.
 
-
-const TEMPLATE_URL_REGEX = /templateUrl\s*:(\s*['"`](.*?)['"`]\s*([,}]))/gm;
-const STYLES_URLS_REGEX = /styleUrls *:(\s*\[[^\]]*?\])/g;
 const LOAD_CHILDREN_REGEX = /loadChildren\s*:(\s*['"`](.*?)['"`]\s*([,}]))/gm;
 const STRING_REGEX = /(['`"])((?:[^\\]\\\1|.)*?)\1/g;
 
@@ -66,12 +63,12 @@ const ngcOptions = {
 };
 
 export class AngularTsCompiler {
-  constructor({aot, rollup}){
+  constructor({aot, rollup, compiler, compilerCli}){
     this.isAot = aot;
     this.isRollup = rollup;
     if(this.isAot){
-      this.compiler = require('@angular/compiler');
-      this.compilerCli = require ('@angular/compiler-cli');
+      this.compiler = compiler;
+      this.compilerCli = compilerCli;
     }
     
   }
@@ -92,7 +89,6 @@ export class AngularTsCompiler {
 
     if (fakeLoaderCode){
       newSource = fakeLoaderCode + '\n' + newSource;
-      console.log(newSource);
     }
 
     return newSource;
@@ -103,7 +99,8 @@ export class AngularTsCompiler {
 
     return code.replace(LOAD_CHILDREN_REGEX,
       (match, url) => {
-        url = url.split('\'').join('').split('"').join('').split(',').join('');
+        const curlyBracesAtTheEnd = url.includes('}');
+        url = url.split('\'').join('').split('"').join('').split(',').join('').split('}').join('');
         const urlArr = url.split('#');
         let modulePath = urlArr[0].trim();
         let moduleName = urlArr[1].trim();
@@ -111,7 +108,11 @@ export class AngularTsCompiler {
           modulePath += '.ngfactory';
           moduleName += 'NgFactory';
         }
-        return `loadChildren: () => module.dynamicImport('${modulePath}').then(allModule => allModule['${moduleName}']),`;
+        let finalReplacement = `loadChildren: () => module.dynamicImport('${modulePath}').then(allModule => allModule['${moduleName}']),`;
+        if(curlyBracesAtTheEnd){
+          finalReplacement += '}'
+        }
+        return finalReplacement;
       });
 
   }
@@ -121,13 +122,8 @@ export class AngularTsCompiler {
         (match, quote, url) => `'${(firstSlash ? '/' : '~/../') + path.join(basePath, url)}'`)
       .replace(/\\/g, '/');
   }
-  fixResourceUrls(source, basePath) {
-    const newSource = source
-      .replace(TEMPLATE_URL_REGEX,
-        (match, url) => `templateUrl:${this.replaceStringsWithFullUrls(basePath, url, false)}`)
-      .replace(STYLES_URLS_REGEX,
-        (match, urls) => `styleUrls:${this.replaceStringsWithFullUrls(basePath, urls, false)}`);
-    return newSource;
+  addModuleIdForComponent(code){
+    return code.replace('Component({', 'Component({ moduleId: module.id,');
   }
   processFilesForTarget(inputFiles) {
     const filesMap = new Map();
@@ -253,7 +249,7 @@ export class AngularTsCompiler {
         }
         const basePath = inputFile.getPathInPackage().replace(inputFile.getBasename(), '');
         if (!this.isAot) {
-          code = this.fixResourceUrls(code, basePath)
+          code = this.addModuleIdForComponent(code, basePath)
         }
         code = code.split('require("node_modules/').join('require("');
         if(this.isRollup){
