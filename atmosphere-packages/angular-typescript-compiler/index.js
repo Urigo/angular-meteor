@@ -99,6 +99,7 @@ export class AngularTsCompiler {
 
     return code.replace(LOAD_CHILDREN_REGEX,
       (match, url) => {
+        const curlyBracesAtTheEnd = url.includes('}');
         url = url.split('\'').join('').split('"').join('').split(',').join('').split('}').join('');
         const urlArr = url.split('#');
         let modulePath = urlArr[0].trim();
