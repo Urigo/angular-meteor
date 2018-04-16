@@ -28,7 +28,7 @@
 - [Meteor Blog](https://info.meteor.com/blog)
 - [Official Meteor guide for best practices](http://guide.meteor.com/)
 - [Awesome Meteor](https://github.com/Urigo/awesome-meteor) - Curated, community driven list of Meteor resources
-- Starters - [Angular2-Meteor Base](https://github.com/bsliran/angular2-meteor-base), [angular1-meteor Yeoman generator](https://github.com/ndxbxrme/generator-angular-meteor)
+- Starters - [Angular-Meteor Base](https://github.com/Urigo/angular-meteor-base), [angular1-meteor Yeoman generator](https://github.com/ndxbxrme/generator-angular-meteor)
 - Track Roadmap here: [angular-meteor milestones](https://github.com/Urigo/angular-meteor/milestones), [Meteor issues related to Angular](https://github.com/meteor/meteor/labels/Project%3AAngular)
 
 ## Usage
@@ -41,17 +41,15 @@ If you are new to Angular and/or Meteor but want to learn them quickly,
 please check out our 14-steps Angular-Meteor [tutorial](https://angular-meteor.com/tutorials/whatsapp2-tutorial).
 
 ## Quick Start Using Angular-Meteor
-```
-   $ meteor create --example angular2-boilerplate myApp
+
+```bash
+   $ git clone https://github.com/Urigo/angular-meteor-base myApp
    $ cd myApp
    $ meteor npm install
 ```
 
-> Alternatively, use your web browser to access the link:
-> https://github.com/Urigo/angular2-meteor-base
-> Download the template application, and unzip the files inside.
-
 Then run:
+
 ```
    $ meteor
 ```

@@ -3,6 +3,9 @@ import '../imports/polyfills';
 import '../imports/methods/todos';
 import '../imports/publications/todos';
 
+import * as fs from 'fs';
+import * as path from 'path';
+
 import { Meteor } from 'meteor/meteor';
 import { WebApp, WebAppInternals } from 'meteor/webapp';
 
@@ -17,7 +20,10 @@ import { ResourceLoader } from '@angular/compiler';
 import { ɵgetDOM as getDOM } from '@angular/platform-browser';
 import { platformDynamicServer, BEFORE_APP_SERIALIZED ,INITIAL_CONFIG, PlatformState } from '@angular/platform-server';
 
-import { ServerAppModule } from '../imports/app/server-app.module';       
+import { ServerAppModule } from '../imports/app/server-app.module';     
+
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/first';
 
 const HEAD_REGEX = /<head[^>]*>((.|[\n\r])*)<\/head>/im
 const BODY_REGEX = /<body[^>]*>((.|[\n\r])*)<\/body>/im;
@@ -63,14 +69,23 @@ Meteor.startup(() => {
           }
         }
       ]);
-
+      
       const appModuleRef = await platformRef.bootstrapModule(ServerAppModule, {
         ngZone: 'noop',
         providers: [
           {
             provide: ResourceLoader,
             useValue: {
-              get: Assets.getText
+              get(url: string){
+                return new Promise(function (resolve, reject){
+                  Assets.getText(url.slice(1), function(err, result){
+                    if(err){
+                      return reject(err);
+                    }
+                    return resolve(result);
+                  });
+                });
+              }
             },
             deps: []
           }
@@ -80,10 +95,12 @@ Meteor.startup(() => {
       const applicationRef : ApplicationRef = appModuleRef.injector.get(ApplicationRef);
 
       await applicationRef.isStable
-      .first(isStable => isStable == true)
+      .filter(isStable => {
+        applicationRef.tick();
+        return isStable;
+      })
+      .first()
       .toPromise();
-
-      applicationRef.tick();
 
       // Run any BEFORE_APP_SERIALIZED callbacks just before rendering to string.
       const callbacks = appModuleRef.injector.get(BEFORE_APP_SERIALIZED, null);
