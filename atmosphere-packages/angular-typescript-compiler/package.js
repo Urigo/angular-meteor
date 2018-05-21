@@ -7,7 +7,7 @@ Package.describe({
 });
 
 Npm.depends({
-  'meteor-typescript': '0.8.10',
+  'meteor-typescript': '0.9.0',
   'rollup': '0.41.4',
   'rollup-plugin-node-resolve': '3.0.0',
   'rollup-plugin-hypothetical': '1.2.1',
