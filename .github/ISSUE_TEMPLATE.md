@@ -9,7 +9,7 @@ Before you open an issue, please check if a similar issue already exists or has 
 - [ ] What packages or other dependencies you're using
 - [ ] The behavior you expect to see, and the actual behavior
 
-See [here](https://github.com/meteor/meteor/blob/devel/Contributing.md#reporting-a-bug-in-meteor) for more detail on what is expected of a bug report.
+See [here](https://github.com/meteor/meteor/blob/devel/CONTRIBUTING.md#reporting-a-bug-in-meteor) for more detail on what is expected of a bug report.
 
 ### When you open an issue for a feature request, please add as much detail as possible:
 - [ ] A descriptive title
@@ -17,5 +17,5 @@ See [here](https://github.com/meteor/meteor/blob/devel/Contributing.md#reporting
 - [ ] An overview of the suggested solution
 - [ ] If the feature changes current behavior, reasons why your solution is better
 
-See [here](https://github.com/meteor/meteor/blob/devel/Contributing.md#feature-requests) for more detail on what is expected of a feature request.
+See [here](https://github.com/meteor/meteor/blob/devel/CONTRIBUTING.md#feature-requests) for more detail on what is expected of a feature request.
 
