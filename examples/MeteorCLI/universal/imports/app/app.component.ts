@@ -4,6 +4,10 @@ import { Title } from '@angular/platform-browser';
 
 import { Subscription } from 'rxjs/Subscription';
 
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/mergeMap';
+
 @Component({
   selector: 'app',
   templateUrl: 'app.html'
