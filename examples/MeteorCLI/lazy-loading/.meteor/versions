@@ -4,7 +4,7 @@ angular-html-compiler@0.3.1_2
 angular-scss-compiler@0.3.1_2
 angular-typescript-compiler@0.3.1_2
 autoupdate@1.4.0
-babel-compiler@7.0.5
+babel-compiler@7.0.6
 babel-runtime@1.2.2
 base64@1.0.11
 binary-heap@1.0.10
@@ -17,7 +17,7 @@ ddp-common@1.4.0
 ddp-server@2.1.2
 diff-sequence@1.1.0
 dynamic-import@0.3.0
-ecmascript@0.10.5
+ecmascript@0.10.6
 ecmascript-runtime@0.5.0
 ecmascript-runtime-client@0.6.2
 ecmascript-runtime-server@0.5.0
