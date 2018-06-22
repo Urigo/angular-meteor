@@ -1,0 +1,17 @@
+{
+  "name": "angularjs-meteor",
+  "private": true,
+  "scripts": {
+    "start": "meteor run",
+    "test": "TEST_BROWSER_DRIVER=phantomjs meteor test --driver-package=ardatan:mocha",
+    "test:ci": "TEST_BROWSER_DRIVER=phantomjs meteor test --driver-package=ardatan:mocha --once"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.0.0-beta.36",
+    "angular": "^1.6.9",
+    "meteor-node-stubs": "^0.3.2"
+  },
+  "devDependencies": {
+    "phantomjs-prebuilt": "^2.1.16"
+  }
+}

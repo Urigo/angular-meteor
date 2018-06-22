@@ -2,12 +2,13 @@ const $ = Npm.require('cheerio');
 
 const WEB_ARCH_REGEX = /^web/;
 
-const IS_AOT = ((process.env.NODE_ENV == 'production') || process.env.AOT);
-
 const CACHE = new Map();
 
 export class AngularHtmlCompiler {
-  compileFile(filePath){
+  constructor({aot}){
+    this.isAot = aot;
+  }
+  static getContent(filePath){
     return CACHE.get(filePath);
   }
   processFilesForTarget(htmlFiles){
@@ -27,11 +28,13 @@ export class AngularHtmlCompiler {
           htmlFile.addHtml({
             data: $head.html() || '',
             section: 'head',
+            hash: htmlFile.getSourceHash()
           });
 
           htmlFile.addHtml({
             data:  $body.html() || '',
             section: 'body',
+            hash: htmlFile.getSourceHash()
           });
           const attrs = $body[0] ? $body[0].attribs : undefined;
           if (attrs) {
@@ -47,10 +50,11 @@ export class AngularHtmlCompiler {
               `,
             });
           }
-        }else if(!IS_AOT){
+        }else if(!this.isAot){
           htmlFile.addAsset({
             data,
-            path: htmlFile.getPathInPackage()
+            path: htmlFile.getPathInPackage(),
+            hash: htmlFile.getSourceHash()
           });
         }
       }

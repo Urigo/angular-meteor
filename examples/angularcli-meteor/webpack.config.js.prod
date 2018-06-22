@@ -6,15 +6,19 @@ const ProgressPlugin = require('webpack/lib/ProgressPlugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const rxPaths = require('rxjs/_esm5/path-mapping');
 const autoprefixer = require('autoprefixer');
 const postcssUrl = require('postcss-url');
 const cssnano = require('cssnano');
+const customProperties = require('postcss-custom-properties');
 
 const { NoEmitOnErrorsPlugin, EnvironmentPlugin, HashedModuleIdsPlugin } = require('webpack');
 const { BaseHrefWebpackPlugin, SuppressExtractedTextChunksWebpackPlugin } = require('@angular/cli/plugins/webpack');
-const { CommonsChunkPlugin, ModuleConcatenationPlugin, UglifyJsPlugin } = require('webpack').optimize;
+const { CommonsChunkPlugin, ModuleConcatenationPlugin } = require('webpack').optimize;
 const { LicenseWebpackPlugin } = require('license-webpack-plugin');
-const { AotPlugin } = require('@ngtools/webpack');
+const { PurifyPlugin } = require('@angular-devkit/build-optimizer');
+const { AngularCompilerPlugin } = require('@ngtools/webpack');
 
 const nodeModules = path.join(process.cwd(), 'node_modules');
 const realNodeModules = fs.realpathSync(nodeModules);
@@ -25,7 +29,7 @@ const baseHref = "";
 const deployUrl = "";
 const postcssPlugins = function () {
         // safe settings based on: https://github.com/ben-eb/cssnano/issues/358#issuecomment-283696193
-        const importantCommentRe = /@preserve|@license|[@#]\s*source(?:Mapping)?URL|^!/i;
+        const importantCommentRe = /@preserve|@licen[cs]e|[@#]\s*source(?:Mapping)?URL|^!/i;
         const minimizeOptions = {
             autoprefixer: false,
             safe: true,
@@ -33,29 +37,37 @@ const postcssPlugins = function () {
             discardComments: { remove: (comment) => !importantCommentRe.test(comment) }
         };
         return [
-            postcssUrl({
-                url: (URL) => {
+            postcssUrl([
+                {
                     // Only convert root relative URLs, which CSS-Loader won't process into require().
-                    if (!URL.startsWith('/') || URL.startsWith('//')) {
-                        return URL;
+                    filter: ({ url }) => url.startsWith('/') && !url.startsWith('//'),
+                    url: ({ url }) => {
+                        if (deployUrl.match(/:\/\//)) {
+                            // If deployUrl contains a scheme, ignore baseHref use deployUrl as is.
+                            return `${deployUrl.replace(/\/$/, '')}${url}`;
+                        }
+                        else if (baseHref.match(/:\/\//)) {
+                            // If baseHref contains a scheme, include it as is.
+                            return baseHref.replace(/\/$/, '') +
+                                `/${deployUrl}/${url}`.replace(/\/\/+/g, '/');
+                        }
+                        else {
+                            // Join together base-href, deploy-url and the original URL.
+                            // Also dedupe multiple slashes into single ones.
+                            return `/${baseHref}/${deployUrl}/${url}`.replace(/\/\/+/g, '/');
+                        }
                     }
-                    if (deployUrl.match(/:\/\//)) {
-                        // If deployUrl contains a scheme, ignore baseHref use deployUrl as is.
-                        return `${deployUrl.replace(/\/$/, '')}${URL}`;
-                    }
-                    else if (baseHref.match(/:\/\//)) {
-                        // If baseHref contains a scheme, include it as is.
-                        return baseHref.replace(/\/$/, '') +
-                            `/${deployUrl}/${URL}`.replace(/\/\/+/g, '/');
-                    }
-                    else {
-                        // Join together base-href, deploy-url and the original URL.
-                        // Also dedupe multiple slashes into single ones.
-                        return `/${baseHref}/${deployUrl}/${URL}`.replace(/\/\/+/g, '/');
-                    }
+                },
+                {
+                    // TODO: inline .cur if not supporting IE (use browserslist to check)
+                    filter: (asset) => !asset.hash && !asset.absolutePath.endsWith('.cur'),
+                    url: 'inline',
+                    // NOTE: maxSize is in KB
+                    maxSize: 10
                 }
-            }),
+            ]),
             autoprefixer(),
+            customProperties({ preserve: true })
         ].concat(minimizeCss ? [cssnano(minimizeOptions)] : []);
     };
 
@@ -72,7 +84,13 @@ module.exports = {
       "./node_modules",
       "./node_modules"
     ],
-    "symlinks": true
+    "symlinks": true,
+    "alias": rxPaths(),
+    "mainFields": [
+      "browser",
+      "module",
+      "main"
+    ]
   },
   "externals": [
     resolveExternals
@@ -81,7 +99,8 @@ module.exports = {
     "modules": [
       "./node_modules",
       "./node_modules"
-    ]
+    ],
+    "alias": rxPaths()
   },
   "entry": {
     "main": [
@@ -97,29 +116,41 @@ module.exports = {
   "output": {
     "path": path.join(process.cwd(), "dist"),
     "filename": "[name].[chunkhash:20].bundle.js",
-    "chunkFilename": "[id].[chunkhash:20].chunk.js"
+    "chunkFilename": "[id].[chunkhash:20].chunk.js",
+    "crossOriginLoading": false
   },
   "module": {
     "rules": [
-      {
-        "enforce": "pre",
-        "test": /\.js$/,
-        "loader": "source-map-loader",
-        "exclude": [
-          /(\\|\/)node_modules(\\|\/)/
-        ]
-      },
       {
         "test": /\.html$/,
         "loader": "raw-loader"
       },
       {
         "test": /\.(eot|svg|cur)$/,
-        "loader": "file-loader?name=[name].[hash:20].[ext]"
+        "loader": "file-loader",
+        "options": {
+          "name": "[name].[hash:20].[ext]",
+          "limit": 10000
+        }
       },
       {
         "test": /\.(jpg|png|webp|gif|otf|ttf|woff|woff2|ani)$/,
-        "loader": "url-loader?name=[name].[hash:20].[ext]&limit=10000"
+        "loader": "url-loader",
+        "options": {
+          "name": "[name].[hash:20].[ext]",
+          "limit": 10000
+        }
+      },
+      {
+        "test": /\.js$/,
+        "use": [
+          {
+            "loader": "@angular-devkit/build-optimizer/webpack-loader",
+            "options": {
+              "sourceMap": false
+            }
+          }
+        ]
       },
       {
         "exclude": [
@@ -139,7 +170,8 @@ module.exports = {
             "loader": "postcss-loader",
             "options": {
               "ident": "postcss",
-              "plugins": postcssPlugins
+              "plugins": postcssPlugins,
+              "sourceMap": false
             }
           }
         ]
@@ -162,7 +194,8 @@ module.exports = {
             "loader": "postcss-loader",
             "options": {
               "ident": "postcss",
-              "plugins": postcssPlugins
+              "plugins": postcssPlugins,
+              "sourceMap": false
             }
           },
           {
@@ -193,7 +226,8 @@ module.exports = {
             "loader": "postcss-loader",
             "options": {
               "ident": "postcss",
-              "plugins": postcssPlugins
+              "plugins": postcssPlugins,
+              "sourceMap": false
             }
           },
           {
@@ -222,7 +256,8 @@ module.exports = {
             "loader": "postcss-loader",
             "options": {
               "ident": "postcss",
-              "plugins": postcssPlugins
+              "plugins": postcssPlugins,
+              "sourceMap": false
             }
           },
           {
@@ -252,7 +287,8 @@ module.exports = {
       "loader": "postcss-loader",
       "options": {
         "ident": "postcss",
-        "plugins": postcssPlugins
+        "plugins": postcssPlugins,
+        "sourceMap": false
       }
     }
   ],
@@ -277,7 +313,8 @@ module.exports = {
       "loader": "postcss-loader",
       "options": {
         "ident": "postcss",
-        "plugins": postcssPlugins
+        "plugins": postcssPlugins,
+        "sourceMap": false
       }
     },
     {
@@ -310,7 +347,8 @@ module.exports = {
       "loader": "postcss-loader",
       "options": {
         "ident": "postcss",
-        "plugins": postcssPlugins
+        "plugins": postcssPlugins,
+        "sourceMap": false
       }
     },
     {
@@ -341,7 +379,8 @@ module.exports = {
       "loader": "postcss-loader",
       "options": {
         "ident": "postcss",
-        "plugins": postcssPlugins
+        "plugins": postcssPlugins,
+        "sourceMap": false
       }
     },
     {
@@ -356,8 +395,14 @@ module.exports = {
 })
       },
       {
-        "test": /\.ts$/,
+        "test": /(?:\.ngfactory\.js|\.ngstyle\.js|\.ts)$/,
         "use": [
+          {
+            "loader": "@angular-devkit/build-optimizer/webpack-loader",
+            "options": {
+              "sourceMap": false
+            }
+          },
           "@ngtools/webpack"
         ]
       }
@@ -384,14 +429,18 @@ module.exports = {
       }
     ], {
       "ignore": [
-        ".gitkeep"
+        ".gitkeep",
+        "**/.DS_Store",
+        "**/Thumbs.db"
       ],
       "debug": "warning"
     }),
     new ProgressPlugin(),
     new CircularDependencyPlugin({
       "exclude": /(\\|\/)node_modules(\\|\/)/,
-      "failOnError": false
+      "failOnError": false,
+      "onDetected": false,
+      "cwd": "/home/niko/WebstormProjects/angularcli-meteor"
     }),
     new HtmlWebpackPlugin({
       "template": "./src/index.html",
@@ -434,20 +483,6 @@ module.exports = {
     }),
     new CommonsChunkPlugin({
       "name": [
-        "vendor"
-      ],
-      "minChunks": (module) => {
-                return module.resource
-                    && (module.resource.startsWith(nodeModules)
-                        || module.resource.startsWith(genDirNodeModules)
-                        || module.resource.startsWith(realNodeModules));
-            },
-      "chunks": [
-        "main"
-      ]
-    }),
-    new CommonsChunkPlugin({
-      "name": [
         "main"
       ],
       "minChunks": 2,
@@ -457,6 +492,15 @@ module.exports = {
       "filename": "[name].[contenthash:20].bundle.css"
     }),
     new SuppressExtractedTextChunksWebpackPlugin(),
+    new EnvironmentPlugin({
+      "NODE_ENV": "production"
+    }),
+    new HashedModuleIdsPlugin({
+      "hashFunction": "md5",
+      "hashDigest": "base64",
+      "hashDigestLength": 4
+    }),
+    new ModuleConcatenationPlugin({}),
     new LicenseWebpackPlugin({
       "licenseFilenames": [
         "LICENSE",
@@ -467,7 +511,7 @@ module.exports = {
         "license.txt"
       ],
       "perChunkOutput": false,
-      "outputTemplate": "node_modules/license-webpack-plugin/output.template.ejs",
+      "outputTemplate": "/home/niko/WebstormProjects/angularcli-meteor/node_modules/license-webpack-plugin/output.template.ejs",
       "outputFilename": "3rdpartylicenses.txt",
       "suppressErrors": true,
       "includePackagesWithoutLicense": false,
@@ -479,37 +523,41 @@ module.exports = {
       "additionalPackages": [],
       "pattern": /^(MIT|ISC|BSD.*)$/
     }),
-    new EnvironmentPlugin({
-      "NODE_ENV": "production"
-    }),
-    new HashedModuleIdsPlugin({
-      "hashFunction": "md5",
-      "hashDigest": "base64",
-      "hashDigestLength": 4
-    }),
-    new ModuleConcatenationPlugin({}),
+    new PurifyPlugin(),
     new UglifyJsPlugin({
-      "mangle": {
-        "screw_ie8": true
-      },
-      "compress": {
-        "screw_ie8": true,
-        "warnings": false
-      },
-      "output": {
-        "ascii_only": true
-      },
+      "test": /\.js$/i,
+      "extractComments": false,
       "sourceMap": false,
-      "comments": false
+      "cache": false,
+      "parallel": false,
+      "uglifyOptions": {
+        "output": {
+          "ascii_only": true,
+          "comments": false,
+          "webkit": true
+        },
+        "ecma": 5,
+        "warnings": false,
+        "ie8": false,
+        "mangle": {
+          "safari10": true
+        },
+        "compress": {
+          "typeofs": false,
+          "pure_getters": true,
+          "passes": 3
+        }
+      }
     }),
-    new AotPlugin({
+    new AngularCompilerPlugin({
       "mainPath": "main.ts",
-      "replaceExport": false,
+      "platform": 0,
       "hostReplacementPaths": {
         "environments/environment.ts": "environments/environment.prod.ts"
       },
-      "exclude": [],
-      "tsConfigPath": "src/tsconfig.app.json"
+      "sourceMap": false,
+      "tsConfigPath": "src/tsconfig.app.json",
+      "compilerOptions": {}
     }),
     new webpack.ProvidePlugin({
       __extends: 'typescript-extends'

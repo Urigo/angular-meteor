@@ -1,4 +1,4 @@
-'use strict';
+'use strict'; 
 
 import {
   AngularTsCompiler
@@ -12,23 +12,45 @@ import {
   AngularScssCompiler
 } from 'meteor/angular-scss-compiler';
 
-let scriptExtension = 'ts';
 let templateExtension = 'html';
-let styleExtension = 'scss';
 
 if(process.env.BLAZE){
   templateExtension = 'ng.html';
 }
 
-const IS_AOT = ((process.env.NODE_ENV == 'production') || process.env.AOT);
+let aot = ((process.env.NODE_ENV == 'production') && (process.env.AOT != '0')) || process.env.AOT == '1';
+let rollup = (process.env.ROLLUP == '1');
+let compiler, compilerCli;
+try{
+  if(aot){
+    compiler = require('@angular/compiler');
+    compilerCli = require('@angular/compiler-cli');
+  }
+}catch(e){
+  console.log('@angular/compiler and @angular/compiler-cli must be installed for AOT compilation!');
+  console.log('AOT compilation disabled!');
+  console.log('Ignore this if you are using AngularJS 1.X');
+  aot = false;
+  rollup = false;
+}
+
 
 Plugin.registerCompiler({
-  extensions: [scriptExtension],
+  extensions: ['ts', 'tsx'],
   filenames: ['tsconfig.json']
-}, () => new AngularTsCompiler());
+}, () => new AngularTsCompiler({
+  aot,
+  rollup,
+  compiler,
+  compilerCli
+}));
 Plugin.registerCompiler({
   extensions: [templateExtension]
-}, () => new AngularHtmlCompiler());
+}, () => new AngularHtmlCompiler({
+  aot
+}));
 Plugin.registerCompiler({
-  extensions: [styleExtension]
-}, () => new AngularScssCompiler());
+  extensions: ['scss']
+}, () => new AngularScssCompiler({
+  aot
+}));

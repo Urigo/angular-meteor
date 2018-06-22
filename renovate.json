@@ -1,4 +1,5 @@
 {
   "extends": ["config:js-lib", ":meteor"],
-  "rebaseStalePrs": true
+  "rebaseStalePrs": true,
+  "ignoreDeps": ["rollup", "rollup-plugin-commonjs", "rollup-plugin-hypothetical", "rollup-plugin-node-resolve"]
 }

@@ -9,7 +9,7 @@ export class AppPage {
     return element(by.css('app-root h1')).getText();
   }
 
-  /*getLastDiv() {
+  getLastDiv() {
     return element(by.css('app-root div:last-child')).getText();
-  }*/
+  }
 }

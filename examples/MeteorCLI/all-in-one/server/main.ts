@@ -15,9 +15,12 @@ import {
 
 import { ResourceLoader } from '@angular/compiler';
 import { ɵgetDOM as getDOM } from '@angular/platform-browser';
-import { platformDynamicServer, BEFORE_APP_SERIALIZED ,INITIAL_CONFIG, PlatformState } from '@angular/platform-server';
+import { platformDynamicServer, BEFORE_APP_SERIALIZED, INITIAL_CONFIG, PlatformState } from '@angular/platform-server';
 
 import { ServerAppModule } from '../imports/app/server-app.module';
+
+const HEAD_REGEX = /<head[^>]*>((.|[\n\r])*)<\/head>/im
+const BODY_REGEX = /<body[^>]*>((.|[\n\r])*)<\/body>/im;
 
 Meteor.startup(() => {
 
@@ -27,14 +30,24 @@ Meteor.startup(() => {
   }
 
   // When page requested
-  WebApp.connectHandlers.use(async (request, response, next) => {
+  WebAppInternals.registerBoilerplateDataCallback('angular', async (request, data) => {
 
     let document,
-        platformRef : PlatformRef;
+      platformRef: PlatformRef;
     // Handle Angular's error, but do not prevent client bootstrap
     try {
 
-      document = await WebAppInternals.getBoilerplate(request, WebApp.defaultArch);
+
+      document = `
+        <html>
+          <head>
+              <base href="/">
+          </head>
+          <body>
+              <app></app>
+          </body>
+        </html>
+      `;
 
       // Integrate Angular's router with Meteor
       const url = request.url;
@@ -52,6 +65,7 @@ Meteor.startup(() => {
       ]);
 
       const appModuleRef = await platformRef.bootstrapModule(ServerAppModule, {
+        ngZone: 'noop',
         providers: [
           {
             provide: ResourceLoader,
@@ -63,11 +77,13 @@ Meteor.startup(() => {
         ]
       });
 
-      const applicationRef : ApplicationRef = appModuleRef.injector.get(ApplicationRef);
+      const applicationRef: ApplicationRef = appModuleRef.injector.get(ApplicationRef);
 
       await applicationRef.isStable
-      .first(isStable => isStable == true)
-      .toPromise();
+        .first(isStable => isStable == true)
+        .toPromise();
+
+      applicationRef.tick();
 
       // Run any BEFORE_APP_SERIALIZED callbacks just before rendering to string.
       const callbacks = appModuleRef.injector.get(BEFORE_APP_SERIALIZED, null);
@@ -91,15 +107,17 @@ Meteor.startup(() => {
       // Write errors to console
       console.error('Angular SSR Error: ' + e.stack || e);
 
-    }finally{
+    } finally {
 
       //Make sure platform is destroyed before rendering
 
-      if(platformRef){
+      if (platformRef) {
         platformRef.destroy();
       }
-
-      response.end(document);
+      const head = HEAD_REGEX.exec(document)[1];
+      data.dynamicHead = head;
+      const body = BODY_REGEX.exec(document)[1];
+      data.dynamicBody = body;
 
     }
   })

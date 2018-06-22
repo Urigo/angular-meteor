@@ -1,12 +1,19 @@
 sudo: required
 language: node_js
+addons:
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
 node_js:
   - "8"
 before_install:
+  - npm install -g npm@latest
   - curl https://install.meteor.com | /bin/sh
 install:
   - git clean -fXd
   - npm cache verify
   - npm install -g concurrently
 script:
-  - ./run_tests.sh
+  - sh run_tests.sh

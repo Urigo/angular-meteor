@@ -6,3 +6,4 @@ atmosphere-packages/examples
 .npm
 npm-debug.log
 dist
+.DS_Store
