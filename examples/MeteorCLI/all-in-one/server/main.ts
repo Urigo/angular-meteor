@@ -5,13 +5,15 @@ import '../imports/publications/todos';
 
 import { Meteor } from 'meteor/meteor';
 import { WebApp, WebAppInternals } from 'meteor/webapp';
-
+import { first } from "rxjs/operators";
 import {
   enableProdMode,
   PlatformRef,
   ApplicationModule,
   ApplicationRef
 } from '@angular/core';
+
+declare const Assets: any;
 
 import { ResourceLoader } from '@angular/compiler';
 import { ɵgetDOM as getDOM } from '@angular/platform-browser';
@@ -79,9 +81,9 @@ Meteor.startup(() => {
 
       const applicationRef: ApplicationRef = appModuleRef.injector.get(ApplicationRef);
 
-      await applicationRef.isStable
-        .first(isStable => isStable == true)
-        .toPromise();
+      await applicationRef.isStable.pipe(
+          first(isStable => isStable == true)
+        ).toPromise();
 
       applicationRef.tick();
 
