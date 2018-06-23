@@ -19,6 +19,7 @@
     "noImplicitAny": false,
     "types": [
       "@types/meteor",
+      "@types/node",
       "@types/mocha",
       "@types/chai",
       "@types/sinon"
