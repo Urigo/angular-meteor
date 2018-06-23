@@ -29,6 +29,7 @@
     "@types/mocha": "^2.2.48",
     "@types/sinon": "^4.3.0",
     "chai": "^4.1.2",
+    "mocha": "^5.2.0",
     "phantomjs-prebuilt": "^2.1.16",
     "sinon": "^4.4.9",
     "typescript": "^2.8.4"
