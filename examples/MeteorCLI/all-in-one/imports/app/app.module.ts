@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
+import { TodoAddModule } from './todo-add/todo-add.module';
 import { TodoListComponent } from './todo-list/todo-list.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
@@ -27,7 +28,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
       },
       {
         path: 'todoAdd',
-        loadChildren: './todo-add/todo-add.module#TodoAddModule',
+        loadChildren: () => TodoAddModule,
         data: {
           title: 'Add Todo'
         }
