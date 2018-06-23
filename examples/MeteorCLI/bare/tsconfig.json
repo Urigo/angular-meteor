@@ -13,7 +13,7 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "sourceMap": true,
-    "target": "es5",
+    "target": "es2015",
     "skipLibCheck": true,
     "stripInternal": true,
     "noImplicitAny": false,
