@@ -6,6 +6,7 @@ addons:
       - google-chrome
     packages:
       - google-chrome-stable
+      - phantomjs
 node_js:
   - "8"
 before_install:
