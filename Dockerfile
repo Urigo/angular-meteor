@@ -29,8 +29,9 @@ RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.s
 
 ENV NVM_DIR=/home/docker/.nvm
 
-RUN . $NVM_DIR/nvm.sh && nvm install --lts && nvm use --lts \
-    npm install -g npm@latest \
+RUN . $NVM_DIR/nvm.sh && nvm install --lts && \
+    nvm use --lts && \
+    npm install -g npm@latest && \
     npm --version
 
 RUN curl https://install.meteor.com | /bin/sh
