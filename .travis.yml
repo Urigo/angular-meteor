@@ -18,8 +18,8 @@ before_install:
   - 'sudo docker pull ${distribution}:${version}'
   - 'sudo docker build --no-cache --rm --file=Dockerfile --tag=angular-meteor:latest .'
 install:
-  - 'sudo docker run -v ${TRAVIS_BUILD_DIR}:/angular-meteor/ ${distribution}:${version} git clean -fXd'
-  - 'sudo docker run -v ${TRAVIS_BUILD_DIR}:/angular-meteor/ ${distribution}:${version} npm cache verify'
-  - 'sudo docker run -v ${TRAVIS_BUILD_DIR}:/angular-meteor/ ${distribution}:${version} npm install -g concurrently'
+  - 'sudo docker run -v ${TRAVIS_BUILD_DIR}:/angular-meteor/ angular-meteor:latest git clean -fXd'
+  - 'sudo docker run -v ${TRAVIS_BUILD_DIR}:/angular-meteor/ angular-meteor:latest npm cache verify'
+  - 'sudo docker run -v ${TRAVIS_BUILD_DIR}:/angular-meteor/ angular-meteor:latest npm install -g concurrently'
 script:
-  - 'sudo docker run -v ${TRAVIS_BUILD_DIR}:/angular-meteor/ ${distribution}:${version} /angular-meteor/run_tests.sh'
+  - 'sudo docker run -v ${TRAVIS_BUILD_DIR}:/angular-meteor/ angular-meteor:latest /angular-meteor/run_tests.sh'
