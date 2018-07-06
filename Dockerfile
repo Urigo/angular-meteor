@@ -6,7 +6,7 @@
 FROM ubuntu:bionic
 
 RUN apt-get update && apt-get dist-upgrade -y && \
-    apt-get install -y software-properties-common --no-install-recommends && \
+    apt-get install -y software-properties-common && \
     rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update && apt-get install -y \
