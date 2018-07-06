@@ -21,11 +21,11 @@ RUN apt-get update && apt-get -y install google-chrome-stable --no-install-recom
 
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
 
-RUN . $HOME/.nvm/nvm.sh && nvm install --lts && nvm use --lts
+ENV NVM_DIR=$HOME/.nvm
 
-RUN bash -i -c 'npm install -g npm@latest';
-
-RUN bash -i -c 'npm --version';
+RUN . $HOME/.nvm/nvm.sh && nvm install --lts && nvm use --lts \
+    npm install -g npm@latest \
+    npm --version
 
 RUN curl https://install.meteor.com | /bin/sh
 
