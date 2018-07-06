@@ -22,4 +22,4 @@ install:
 before_script:
   - "sudo docker exec --user root --workdir /angular-meteor angular-meteor-container bash -c 'chown -R docker /angular-meteor'"
 script:
-  - "sudo docker exec --user docker --workdir /angular-meteor angular-meteor-container bash -c 'source $HOME/.nvm/nvm.sh; /angular-meteor/run_tests.sh'"
+  - "sudo docker exec --tty --user docker --workdir /angular-meteor angular-meteor-container bash -c 'source $HOME/.nvm/nvm.sh; /angular-meteor/run_tests.sh'"
