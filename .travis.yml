@@ -16,6 +16,6 @@ before_install:
   - sudo apt-get -y install docker-ce
   - docker --version
   - 'sudo docker pull ${distribution}:${version}'
-  - 'sudo docker build --no-cache --rm --file=Dockerfile'
+  - 'sudo docker build --no-cache --rm --file=Dockerfile --tag=angular-meteor:latest .'
 script:
   - 'sudo docker run -v ${TRAVIS_BUILD_DIR}:/angular-meteor/ ${distribution}:${version} /angular-meteor/run_tests.sh'
