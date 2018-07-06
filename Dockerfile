@@ -34,3 +34,7 @@ RUN . $NVM_DIR/nvm.sh && nvm install --lts && nvm use --lts \
     npm --version
 
 RUN curl https://install.meteor.com | /bin/sh
+
+ENV PATH="/home/docker/.meteor:${PATH}"
+
+RUN meteor --version
