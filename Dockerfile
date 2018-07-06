@@ -21,15 +21,10 @@ RUN apt-get update && apt-get -y install google-chrome-stable --no-install-recom
 
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
 
-RUN nvm install --lts
-
-RUN nvm use --lts
-
-RUN nvm --version
-
-RUN node --version
-
-RUN npm --version
+RUN . $HOME/.nvm/nvm.sh && nvm install --lts && nvm use --lts \
+    nvm --version \
+    node --version \
+    npm --version
 
 RUN npm install -g npm@latest
 
