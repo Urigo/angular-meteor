@@ -20,4 +20,4 @@ before_install:
 install:
   - "sudo docker run -v ${TRAVIS_BUILD_DIR}:/angular-meteor/ --detach --name=angular-meteor-container --user docker --workdir /angular-meteor angular-meteor:latest bash -c 'source $HOME/.nvm/nvm.sh; git clean -fXd; npm cache verify; npm install -g concurrently'"
 script:
-  - 'sudo docker exec --user docker --workdir /angular-meteor angular-meteor-container /angular-meteor/run_tests.sh'
+  - "sudo docker exec --user docker --workdir /angular-meteor angular-meteor-container bash -c 'source $HOME/.nvm/nvm.sh; /angular-meteor/run_tests.sh'"
