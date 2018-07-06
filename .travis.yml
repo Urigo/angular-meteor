@@ -1,4 +1,9 @@
 sudo: required
+services:
+  - docker
+env:
+  - distribution: ubuntu
+    version: bionic
 language: node_js
 addons:
   apt:
@@ -9,6 +14,13 @@ addons:
 node_js:
   - "8"
 before_install:
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  - sudo apt-get update
+  - sudo apt-get -y install docker-ce
+  - docker --version
+  - 'sudo docker pull ${distribution}:${version}'
+  - 'sudo docker build --no-cache --rm --file=Dockerfile --tag=angular-meteor'
   - npm install -g npm@latest
   - curl https://install.meteor.com | /bin/sh
 install:
