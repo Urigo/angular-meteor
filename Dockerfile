@@ -14,10 +14,10 @@ RUN apt-get update && apt-get install -y \
     apt-transport-https \
     curl
 
-RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+RUN curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - \
     && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list
 
-RUN apt-get update && apt-get -y install google-chrome-stable
+RUN apt-get update && apt-get -y install google-chrome-stable --no-install-recommends
 
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
 
