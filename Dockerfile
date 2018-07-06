@@ -1,6 +1,13 @@
+# Angular and Meteor - The perfect stack https://www.angular-meteor.com/
+#
+# Author: Georgy Berdyshev
+#
+
 FROM ubuntu:bionic
 
-RUN apt-get update && apt-get dist-upgrade -y && apt-get install -y software-properties-common && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get dist-upgrade -y && \
+    apt-get install -y software-properties-common && \
+    rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update && apt-get install -y \
     git \
@@ -23,5 +30,17 @@ RUN nvm --version
 RUN node --version
 
 RUN npm --version
+
+RUN npm install -g npm@latest
+
+RUN npm --version
+
+RUN curl https://install.meteor.com | /bin/sh
+
+RUN git clean -fXd
+
+RUN npm cache verify
+
+RUN npm install -g concurrently
 
 ENTRYPOINT ["/sbin/init"]
