@@ -1,18 +1,14 @@
+# Angular and Meteor - The perfect stack https://www.angular-meteor.com/
+#
+# Author: Georgy Berdyshev
+#
+
 sudo: required
 services:
   - docker
 env:
   - distribution: ubuntu
     version: bionic
-language: node_js
-addons:
-  apt:
-    sources:
-      - google-chrome
-    packages:
-      - google-chrome-stable
-node_js:
-  - "8"
 before_install:
   - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
   - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
@@ -20,12 +16,10 @@ before_install:
   - sudo apt-get -y install docker-ce
   - docker --version
   - 'sudo docker pull ${distribution}:${version}'
-  - 'sudo docker build --no-cache --rm --file=Dockerfile --tag=angular-meteor'
-  - npm install -g npm@latest
-  - curl https://install.meteor.com | /bin/sh
+  - 'sudo docker build --no-cache --rm --file=Dockerfile --tag=angular-meteor:latest'
 install:
   - git clean -fXd
   - npm cache verify
   - npm install -g concurrently
 script:
-  - sh run_tests.sh
+  - docker run -v ${TRAVIS_BUILD_DIR}:/angular-meteor/ ${distribution}:${version} /angular-meteor/run_tests.sh
