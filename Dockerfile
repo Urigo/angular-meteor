@@ -29,7 +29,7 @@ RUN . $HOME/.nvm/nvm.sh && nvm install --lts && nvm use --lts \
 
 RUN curl https://install.meteor.com | /bin/sh
 
-RUN git clean -fXd
+RUN cd /angular-meteor && git clean -fXd
 
 RUN npm cache verify
 
