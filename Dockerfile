@@ -19,11 +19,17 @@ RUN curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - 
 
 RUN apt-get update && apt-get -y install google-chrome-stable --no-install-recommends
 
+RUN useradd -ms /bin/bash docker
+
+USER docker
+
+WORKDIR /home/docker
+
 RUN curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
 
-ENV NVM_DIR=$HOME/.nvm
+ENV NVM_DIR=/home/docker/.nvm
 
-RUN . $HOME/.nvm/nvm.sh && nvm install --lts && nvm use --lts \
+RUN . $NVM_DIR/nvm.sh && nvm install --lts && nvm use --lts \
     npm install -g npm@latest \
     npm --version
 
