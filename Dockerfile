@@ -6,7 +6,7 @@
 FROM ubuntu:bionic
 
 RUN apt-get update && apt-get dist-upgrade -y && \
-    apt-get install -y software-properties-common && \
+    apt-get install -y software-properties-common --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
 
 RUN apt-get update && apt-get install -y \
@@ -18,6 +18,8 @@ RUN curl -sSL https://dl.google.com/linux/linux_signing_key.pub | apt-key add - 
     && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list
 
 RUN apt-get update && apt-get -y install google-chrome-stable --no-install-recommends
+
+RUN apt-get -y install phantomjs --no-install-recommends
 
 RUN useradd -ms /bin/bash docker
 
