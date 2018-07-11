@@ -1,5 +1,5 @@
 #!/bin/sh
-export NODE_OPTIONS=--max-old-space-size=1024
+export NODE_OPTIONS=--max-old-space-size=2048
 export METEOR_PACKAGE_DIRS=../../../atmosphere-packages
 cd ./bare
 sh run_tests.sh
