@@ -6,13 +6,13 @@
     "test:ci": "TEST_BROWSER_DRIVER=phantomjs meteor test --driver-package=ardatan:mocha --once"
   },
   "dependencies": {
-    "@angular/common": "^6.0.7",
-    "@angular/compiler": "^6.0.7",
-    "@angular/core": "^6.0.7",
-    "@angular/forms": "^6.0.7",
-    "@angular/platform-browser": "^6.0.7",
-    "@angular/platform-browser-dynamic": "^6.0.7",
-    "@angular/router": "^6.0.7",
+    "@angular/common": "^6.0.8",
+    "@angular/compiler": "^6.0.8",
+    "@angular/core": "^6.0.8",
+    "@angular/forms": "^6.0.8",
+    "@angular/platform-browser": "^6.0.8",
+    "@angular/platform-browser-dynamic": "^6.0.8",
+    "@angular/router": "^6.0.8",
     "@babel/runtime": "^7.0.0-beta.53",
     "core-js": "^2.5.7",
     "meteor-node-stubs": "^0.4.1",
@@ -21,7 +21,7 @@
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
-    "@angular/compiler-cli": "^6.0.7",
+    "@angular/compiler-cli": "^6.0.8",
     "@types/chai": "^4.1.4",
     "@types/meteor": "^1.4.16",
     "@types/mocha": "^2.2.48",
