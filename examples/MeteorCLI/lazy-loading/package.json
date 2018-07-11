@@ -18,7 +18,6 @@
     "meteor-node-stubs": "^0.4.1",
     "meteor-rxjs": "^0.4.14",
     "rxjs": "^6.2.1",
-    "rxjs-compat": "^6.2.1",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
