@@ -16,4 +16,3 @@ shell-server@0.3.1            # Server-side component of the `meteor shell` comm
 
 server-render@0.3.1
 angular-compilers
-underscore

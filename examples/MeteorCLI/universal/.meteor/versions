@@ -52,7 +52,6 @@ routepolicy@1.0.13
 server-render@0.3.1
 shell-server@0.3.1
 socket-stream-client@0.2.1
-tmeasday:check-npm-versions@0.3.2
 tracker@1.2.0
 underscore@1.0.10
 url@1.2.0
