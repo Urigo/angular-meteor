@@ -120,15 +120,6 @@ In this case you should disable encapsulation by using `ViewEncapsulation.None` 
 ### Lazy Loading
 Meteor is able to work like `SystemJS` which is used with Angular to load components, routes and assets dynamically thanks to (`dynamic-import`)[https://blog.meteor.com/dynamic-imports-in-meteor-1-5-c6130419c3cd] package.
 You can use (Lazy Loading)[https://angular.io/guide/ngmodule#lazy-loading-modules-with-the-router] with `angular-compilers`.
-You need a little monkey-patch for this feature:
-```ts
-  declare var module : any;
-  global['System'] = {
-    import(path: string){
-      return module.dynamicImport(path);
-    }
-  }
-```
 Add a route like `angular.io` example:
 ```ts
   {
