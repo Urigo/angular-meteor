@@ -1,0 +1,41 @@
+{
+    "compilerOptions": {
+      "allowSyntheticDefaultImports": true,
+      "baseUrl": ".",
+      "declaration": false,
+      "emitDecoratorMetadata": true,
+      "importHelpers": true,
+      "experimentalDecorators": true,
+      "lib": [
+        "dom",
+        "es2015",
+        "esnext.asynciterable"
+      ],
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "sourceMap": true,
+      "target": "es2015",
+      "skipLibCheck": true,
+      "stripInternal": true,
+      "noImplicitAny": false,
+      "paths": {
+          "*": ["*"]
+      }
+    },
+    "include": [
+      "imports/**/*.ts",
+      "client/**/*.ts",
+      "server/**/*.ts"
+    ],
+    "types": [
+      "@types/meteor",
+      "@types/node"
+    ],
+    "exclude": [
+      "node_modules"
+    ],
+    "compileOnSave": false,
+    "atom": {
+      "rewriteTsconfig": false
+    }
+}
