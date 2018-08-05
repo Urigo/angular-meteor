@@ -2,7 +2,7 @@
 echo "[MeteorCLI - lazy-loading] Resetting project"
 meteor reset
 echo "[MeteorCLI - lazy-loading] Installing npm dependencies"
-npm ci
+npm i
 exit_code=$?; if [ ${exit_code} -gt 0 ]; then exit ${exit_code}; fi
 echo "[MeteorCLI - lazy-loading] Installing meteor dependencies"
 meteor update --all-packages --allow-incompatible-update
