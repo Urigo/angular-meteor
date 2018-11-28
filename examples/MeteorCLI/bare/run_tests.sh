@@ -2,7 +2,7 @@
 echo "[MeteorCLI - bare] Resetting project"
 meteor reset
 echo "[MeteorCLI - bare] Installing npm dependencies"
-npm i
+npm ci
 exit_code=$?; if [ ${exit_code} -gt 0 ]; then exit ${exit_code}; fi
 echo "[MeteorCLI - bare] Installing meteor dependencies"
 meteor update --all-packages --allow-incompatible-update
