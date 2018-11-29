@@ -3,16 +3,16 @@
   "private": true,
   "scripts": {
     "start": "meteor run",
-    "test": "TEST_BROWSER_DRIVER=phantomjs meteor test --driver-package=ardatan:mocha",
-    "test:ci": "TEST_BROWSER_DRIVER=phantomjs meteor test --driver-package=ardatan:mocha --once"
+    "test": "TEST_BROWSER_DRIVER=puppeteer meteor test --driver-package=ardatan:mocha --raw-logs",
+    "test:ci": "TEST_BROWSER_DRIVER=puppeteer meteor test --driver-package=ardatan:mocha --once --raw-logs"
   },
   "dependencies": {
     "@babel/runtime": "^7.1.5",
     "angular": "^1.6.9",
-    "meteor-node-stubs": "^0.3.2"
+    "meteor-node-stubs": "^0.4.1"
   },
   "devDependencies": {
     "mocha": "^5.2.0",
-    "phantomjs-prebuilt": "^2.1.16"
+    "puppeteer": "^1.10.0"
   }
 }
