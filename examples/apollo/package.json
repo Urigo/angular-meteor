@@ -11,7 +11,7 @@
     "@angular/core": "^6.1.1",
     "@angular/platform-browser": "^6.1.1",
     "@angular/platform-browser-dynamic": "^6.1.1",
-    "@babel/runtime": "7.0.0-beta.42",
+    "@babel/runtime": "^7.1.5",
     "apollo-angular": "^1.1.2",
     "apollo-angular-link-http": "^1.1.1",
     "apollo-cache-inmemory": "^1.2.6",
