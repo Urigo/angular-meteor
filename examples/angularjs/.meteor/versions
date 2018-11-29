@@ -1,8 +1,8 @@
 allow-deny@1.1.0
-angular-compilers@0.3.0
-angular-html-compiler@0.3.0
-angular-scss-compiler@0.3.0
-angular-typescript-compiler@0.3.0
+angular-compilers@0.3.2
+angular-html-compiler@0.3.2
+angular-scss-compiler@0.3.2
+angular-typescript-compiler@0.3.2
 autopublish@1.0.7
 autoupdate@1.5.0
 babel-compiler@7.2.3
