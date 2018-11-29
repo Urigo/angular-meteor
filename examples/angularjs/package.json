@@ -12,6 +12,7 @@
     "meteor-node-stubs": "^0.3.2"
   },
   "devDependencies": {
+    "mocha": "^5.2.0",
     "phantomjs-prebuilt": "^2.1.16"
   }
 }
