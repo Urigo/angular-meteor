@@ -31,7 +31,7 @@ import {
 
 const TEMPLATE_URL_REGEX = /templateUrl\s*:(\s*['"`](.*?)['"`]\s*([,}]))/gm;
 const STYLES_URLS_REGEX = /styleUrls *:(\s*\[[^\]]*?\])/g;
-const LOAD_CHILDREN_REGEX = /loadChildren\s*:(\s*['"`](.*?)['"`]\s*([,}]))/gm;
+const LOAD_CHILDREN_REGEX = /loadChildren\s*:(\s*['"`](.*?)['"`]\s*)/gm;
 const STRING_REGEX = /(['`"])((?:[^\\]\\\1|.)*?)\1/g;
 
 const JS_REGEX = /\.html$/;
