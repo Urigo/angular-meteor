@@ -273,7 +273,7 @@ export class AngularTsCompiler {
       if (inputFile) {
         inputFile.addJavaScript({
           path: 'system.js',
-          data: `System = { import(path) { return module.dynamicImport(path) } }`
+          data: `System = { import: function(path) { return module.dynamicImport(path) } }`
         });
       }
     }
