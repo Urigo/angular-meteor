@@ -280,8 +280,22 @@ export class AngularTsCompiler {
     console.timeEnd(`[${prefix}]: TypeScript Files Compilation`);
     if (this.isRollup && !mainCodePath.includes('node_modules')) {
       console.time(`[${prefix}]: Rollup`);
+
+      let namedExports = null;
+      const namedExportsPath = path.join(basePath, 'named-exports.json');
+      if (fs.existsSync(namedExportsPath)) {
+        try {
+          namedExports = JSON.parse(fs.readFileSync(namedExportsPath));
+        } catch (e) {
+          console.error(
+            'Error: named-exports.json does not contain valid JSON'
+          );
+          console.error(e);
+        }
+      }
+      
       const bundle = rollup(codeMap, mainCode, mainCodePath,
-        null, null, forWeb);
+        null, namedExports, forWeb);
       if (bundle) {
         // Look for a ts-file in the client or server
         // folder to add generated bundle.
