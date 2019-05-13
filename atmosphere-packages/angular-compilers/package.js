@@ -1,6 +1,6 @@
 Package.describe({
   name: 'angular-compilers',
-  version: '0.3.3',
+  version: '0.3.4',
   summary: 'Rollup, AOT, SCSS, HTML and TypeScript compilers for Angular Meteor',
   git: 'https://github.com/Urigo/angular-meteor/tree/master/atmosphere-packages/angular-compilers',
   documentation: 'README.md'

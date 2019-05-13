@@ -1,6 +1,6 @@
 Package.describe({
   name: 'angular-typescript-compiler',
-  version: '0.3.3',
+  version: '0.3.4',
   summary: 'Angular TypeScript Compiler Package',
   git: 'https://github.com/Urigo/angular-meteor/tree/master/atmosphere-packages/angular-typescript-compiler',
   documentation: null
