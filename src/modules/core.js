@@ -61,17 +61,42 @@ angular.module(name, [
         throw Error('argument 3 must be a function or an object');
       }
 
-      if (_.isObject(cb)) {
-        for (const hook in hooks) {
-          if (hooks.hasOwnProperty(hook) && cb[hook]) {
-            // Don't use any of additional callbacks in Meteor.subscribe
-            hooks[hook] = cb[hook];
-            delete cb[hook];
-          }
+      if (_.isFunction(cb)) {
+        cb = {
+          onReady: cb,
+        };
+      }
+
+      for (const hook in hooks) {
+        if (hooks.hasOwnProperty(hook) && cb[hook]) {
+          // Don't use any of additional callbacks in Meteor.subscribe
+          hooks[hook] = cb[hook];
+          delete cb[hook];
         }
       }
 
       const result = {};
+
+      let onStartIterator = 0;
+      let onStopIterator = 0;
+
+      const onReadyHook = cb.onReady || angular.noop;
+      cb.onReady = function () {
+        result.isLoading = false;
+        result.error = null;
+        onReadyHook();
+      };
+
+      const onStopHook = cb.onStop || angular.noop;
+      cb.onStop = function (error) {
+        onStopIterator += 1;
+
+        if (onStopIterator === onStartIterator) {
+          result.isLoading = false;
+          result.error = error;
+        }
+        onStopHook(error);
+      };
 
       const computation = this.autorun(() => {
         let args = fn();
@@ -83,6 +108,9 @@ angular.module(name, [
 
         const subscription = Meteor.subscribe(subName, ...args, cb);
 
+        result.isLoading = true;
+        result.error = null;
+
         Tracker.autorun(() => {
           // Subscribe to changes on the ready-property by calling the ready-method.
           subscription.ready();
@@ -91,6 +119,7 @@ angular.module(name, [
           this.$$throttledDigest();
         });
 
+        onStartIterator += 1;
         hooks.onStart();
 
         result.ready = subscription.ready.bind(subscription);

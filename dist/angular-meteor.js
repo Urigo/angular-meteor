@@ -1922,17 +1922,42 @@ return /******/ (function(modules) { // webpackBootstrap
 	      throw Error('argument 3 must be a function or an object');
 	    }
 
-	    if (_underscore2.default.isObject(cb)) {
-	      for (var hook in hooks) {
-	        if (hooks.hasOwnProperty(hook) && cb[hook]) {
-	          // Don't use any of additional callbacks in Meteor.subscribe
-	          hooks[hook] = cb[hook];
-	          delete cb[hook];
-	        }
+	    if (_underscore2.default.isFunction(cb)) {
+	      cb = {
+	        onReady: cb
+	      };
+	    }
+
+	    for (var hook in hooks) {
+	      if (hooks.hasOwnProperty(hook) && cb[hook]) {
+	        // Don't use any of additional callbacks in Meteor.subscribe
+	        hooks[hook] = cb[hook];
+	        delete cb[hook];
 	      }
 	    }
 
 	    var result = {};
+
+	    var onStartIterator = 0;
+	    var onStopIterator = 0;
+
+	    var onReadyHook = cb.onReady || angular.noop;
+	    cb.onReady = function () {
+	      result.isLoading = false;
+	      result.error = null;
+	      onReadyHook();
+	    };
+
+	    var onStopHook = cb.onStop || angular.noop;
+	    cb.onStop = function (error) {
+	      onStopIterator += 1;
+
+	      if (onStopIterator === onStartIterator) {
+	        result.isLoading = false;
+	        result.error = error;
+	      }
+	      onStopHook(error);
+	    };
 
 	    var computation = this.autorun(function () {
 	      var _Meteor;
@@ -1946,6 +1971,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	      var subscription = (_Meteor = Meteor).subscribe.apply(_Meteor, [subName].concat(_toConsumableArray(args), [cb]));
 
+	      result.isLoading = true;
+	      result.error = null;
+
 	      Tracker.autorun(function () {
 	        // Subscribe to changes on the ready-property by calling the ready-method.
 	        subscription.ready();
@@ -1954,6 +1982,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        _this.$$throttledDigest();
 	      });
 
+	      onStartIterator += 1;
 	      hooks.onStart();
 
 	      result.ready = subscription.ready.bind(subscription);
