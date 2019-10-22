@@ -106,10 +106,12 @@ angular.module(name, [
           throw Error(`reactive function's return value must be an array`);
         }
 
-        const subscription = Meteor.subscribe(subName, ...args, cb);
-
         result.isLoading = true;
         result.error = null;
+        onStartIterator += 1;
+        hooks.onStart();
+
+        const subscription = Meteor.subscribe(subName, ...args, cb);
 
         Tracker.autorun(() => {
           // Subscribe to changes on the ready-property by calling the ready-method.
@@ -118,9 +120,6 @@ angular.module(name, [
           // Re-run the digest cycle if we are not in one already.
           this.$$throttledDigest();
         });
-
-        onStartIterator += 1;
-        hooks.onStart();
 
         result.ready = subscription.ready.bind(subscription);
         result.subscriptionId = subscription.subscriptionId;

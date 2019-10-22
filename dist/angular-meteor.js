@@ -1969,10 +1969,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	        throw Error('reactive function\'s return value must be an array');
 	      }
 
-	      var subscription = (_Meteor = Meteor).subscribe.apply(_Meteor, [subName].concat(_toConsumableArray(args), [cb]));
-
 	      result.isLoading = true;
 	      result.error = null;
+	      onStartIterator += 1;
+	      hooks.onStart();
+
+	      var subscription = (_Meteor = Meteor).subscribe.apply(_Meteor, [subName].concat(_toConsumableArray(args), [cb]));
 
 	      Tracker.autorun(function () {
 	        // Subscribe to changes on the ready-property by calling the ready-method.
@@ -1981,9 +1983,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        // Re-run the digest cycle if we are not in one already.
 	        _this.$$throttledDigest();
 	      });
-
-	      onStartIterator += 1;
-	      hooks.onStart();
 
 	      result.ready = subscription.ready.bind(subscription);
 	      result.subscriptionId = subscription.subscriptionId;
