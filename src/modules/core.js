@@ -77,8 +77,7 @@ angular.module(name, [
 
       const result = {};
 
-      let onStartIterator = 0;
-      let onStopIterator = 0;
+      let startStopBalance = 0;
 
       const onReadyHook = cb.onReady || angular.noop;
       cb.onReady = function () {
@@ -89,9 +88,9 @@ angular.module(name, [
 
       const onStopHook = cb.onStop || angular.noop;
       cb.onStop = function (error) {
-        onStopIterator += 1;
+        startStopBalance -= 1;
 
-        if (onStopIterator === onStartIterator) {
+        if (startStopBalance === 0) {
           result.isLoading = false;
           result.error = error;
         }
@@ -106,12 +105,24 @@ angular.module(name, [
           throw Error(`reactive function's return value must be an array`);
         }
 
+        const oldError = result.error;
         result.isLoading = true;
         result.error = null;
-        onStartIterator += 1;
+        startStopBalance += 1;
         hooks.onStart();
 
         const subscription = Meteor.subscribe(subName, ...args, cb);
+
+        // In case no new subscription is established in Meteor.
+        // Happens if the autorun was triggered, but the params of the subscription didn't change.
+        if (result.subscriptionId === subscription.subscriptionId) {
+          startStopBalance -= 1;
+
+          if (startStopBalance === 0) {
+            result.isLoading = false;
+            result.error = oldError;
+          }
+        }
 
         Tracker.autorun(() => {
           // Subscribe to changes on the ready-property by calling the ready-method.

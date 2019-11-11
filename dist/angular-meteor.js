@@ -1938,8 +1938,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var result = {};
 
-	    var onStartIterator = 0;
-	    var onStopIterator = 0;
+	    var startStopBalance = 0;
 
 	    var onReadyHook = cb.onReady || angular.noop;
 	    cb.onReady = function () {
@@ -1950,9 +1949,9 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    var onStopHook = cb.onStop || angular.noop;
 	    cb.onStop = function (error) {
-	      onStopIterator += 1;
+	      startStopBalance -= 1;
 
-	      if (onStopIterator === onStartIterator) {
+	      if (startStopBalance === 0) {
 	        result.isLoading = false;
 	        result.error = error;
 	      }
@@ -1969,12 +1968,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	        throw Error('reactive function\'s return value must be an array');
 	      }
 
+	      var oldError = result.error;
 	      result.isLoading = true;
 	      result.error = null;
-	      onStartIterator += 1;
+	      startStopBalance += 1;
 	      hooks.onStart();
 
 	      var subscription = (_Meteor = Meteor).subscribe.apply(_Meteor, [subName].concat(_toConsumableArray(args), [cb]));
+
+	      // In case no new subscription is established in Meteor.
+	      // Happens if the autorun was triggered, but the params of the subscription didn't change.
+	      if (result.subscriptionId === subscription.subscriptionId) {
+	        startStopBalance -= 1;
+
+	        if (startStopBalance === 0) {
+	          result.isLoading = false;
+	          result.error = oldError;
+	        }
+	      }
 
 	      Tracker.autorun(function () {
 	        // Subscribe to changes on the ready-property by calling the ready-method.
