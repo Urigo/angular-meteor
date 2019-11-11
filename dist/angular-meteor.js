@@ -1759,7 +1759,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // Extend prototype with the defined mixins
 	  this._extend = function (obj, options) {
 	    var _$defaults = _underscore2.default.defaults({}, options, {
-	      pattern: /.*/ }),
+	      pattern: /.*/ // The patterns of the keys which will be filtered
+	    }),
 	        pattern = _$defaults.pattern,
 	        context = _$defaults.context;
 
@@ -1900,6 +1901,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  // Calls Meteor.subscribe() which will be digested after each invokation
 	  // and automatically destroyed
 	  $$Core.subscribe = function (subName, fn, cb) {
+	    var _this = this;
+
 	    fn = this.$bindToContext($Mixer.caller, fn || angular.noop);
 	    cb = cb ? this.$bindToContext($Mixer.caller, cb) : angular.noop;
 
@@ -1919,17 +1922,41 @@ return /******/ (function(modules) { // webpackBootstrap
 	      throw Error('argument 3 must be a function or an object');
 	    }
 
-	    if (_underscore2.default.isObject(cb)) {
-	      for (var hook in hooks) {
-	        if (hooks.hasOwnProperty(hook) && cb[hook]) {
-	          // Don't use any of additional callbacks in Meteor.subscribe
-	          hooks[hook] = cb[hook];
-	          delete cb[hook];
-	        }
+	    if (_underscore2.default.isFunction(cb)) {
+	      cb = {
+	        onReady: cb
+	      };
+	    }
+
+	    for (var hook in hooks) {
+	      if (hooks.hasOwnProperty(hook) && cb[hook]) {
+	        // Don't use any of additional callbacks in Meteor.subscribe
+	        hooks[hook] = cb[hook];
+	        delete cb[hook];
 	      }
 	    }
 
 	    var result = {};
+
+	    var startStopBalance = 0;
+
+	    var onReadyHook = cb.onReady || angular.noop;
+	    cb.onReady = function () {
+	      result.isLoading = false;
+	      result.error = null;
+	      onReadyHook();
+	    };
+
+	    var onStopHook = cb.onStop || angular.noop;
+	    cb.onStop = function (error) {
+	      startStopBalance -= 1;
+
+	      if (startStopBalance === 0) {
+	        result.isLoading = false;
+	        result.error = error;
+	      }
+	      onStopHook(error);
+	    };
 
 	    var computation = this.autorun(function () {
 	      var _Meteor;
@@ -1941,9 +1968,32 @@ return /******/ (function(modules) { // webpackBootstrap
 	        throw Error('reactive function\'s return value must be an array');
 	      }
 
+	      var oldError = result.error;
+	      result.isLoading = true;
+	      result.error = null;
+	      startStopBalance += 1;
+	      hooks.onStart();
+
 	      var subscription = (_Meteor = Meteor).subscribe.apply(_Meteor, [subName].concat(_toConsumableArray(args), [cb]));
 
-	      hooks.onStart();
+	      // In case no new subscription is established in Meteor.
+	      // Happens if the autorun was triggered, but the params of the subscription didn't change.
+	      if (result.subscriptionId === subscription.subscriptionId) {
+	        startStopBalance -= 1;
+
+	        if (startStopBalance === 0) {
+	          result.isLoading = false;
+	          result.error = oldError;
+	        }
+	      }
+
+	      Tracker.autorun(function () {
+	        // Subscribe to changes on the ready-property by calling the ready-method.
+	        subscription.ready();
+
+	        // Re-run the digest cycle if we are not in one already.
+	        _this.$$throttledDigest();
+	      });
 
 	      result.ready = subscription.ready.bind(subscription);
 	      result.subscriptionId = subscription.subscriptionId;
@@ -1999,7 +2049,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  // Digests scope only if there is no phase at the moment
 	  $$Core.$$throttledDigest = function () {
-	    var _this = this;
+	    var _this2 = this;
 
 	    var isDigestable = !this.$$destroyed && !this.$$phase && !this.$root.$$phase;
 
@@ -2008,7 +2058,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      // we want to run this second autorun in a non-reactive manner.
 	      // thus preventing inner autoruns from being dependent on their parents.
 	      Tracker.nonreactive(function () {
-	        return _this.$digest();
+	        return _this2.$digest();
 	      });
 	    }
 	  };

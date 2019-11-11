@@ -61,17 +61,41 @@ angular.module(name, [
         throw Error('argument 3 must be a function or an object');
       }
 
-      if (_.isObject(cb)) {
-        for (const hook in hooks) {
-          if (hooks.hasOwnProperty(hook) && cb[hook]) {
-            // Don't use any of additional callbacks in Meteor.subscribe
-            hooks[hook] = cb[hook];
-            delete cb[hook];
-          }
+      if (_.isFunction(cb)) {
+        cb = {
+          onReady: cb,
+        };
+      }
+
+      for (const hook in hooks) {
+        if (hooks.hasOwnProperty(hook) && cb[hook]) {
+          // Don't use any of additional callbacks in Meteor.subscribe
+          hooks[hook] = cb[hook];
+          delete cb[hook];
         }
       }
 
       const result = {};
+
+      let startStopBalance = 0;
+
+      const onReadyHook = cb.onReady || angular.noop;
+      cb.onReady = function () {
+        result.isLoading = false;
+        result.error = null;
+        onReadyHook();
+      };
+
+      const onStopHook = cb.onStop || angular.noop;
+      cb.onStop = function (error) {
+        startStopBalance -= 1;
+
+        if (startStopBalance === 0) {
+          result.isLoading = false;
+          result.error = error;
+        }
+        onStopHook(error);
+      };
 
       const computation = this.autorun(() => {
         let args = fn();
@@ -81,9 +105,32 @@ angular.module(name, [
           throw Error(`reactive function's return value must be an array`);
         }
 
+        const oldError = result.error;
+        result.isLoading = true;
+        result.error = null;
+        startStopBalance += 1;
+        hooks.onStart();
+
         const subscription = Meteor.subscribe(subName, ...args, cb);
 
-        hooks.onStart();
+        // In case no new subscription is established in Meteor.
+        // Happens if the autorun was triggered, but the params of the subscription didn't change.
+        if (result.subscriptionId === subscription.subscriptionId) {
+          startStopBalance -= 1;
+
+          if (startStopBalance === 0) {
+            result.isLoading = false;
+            result.error = oldError;
+          }
+        }
+
+        Tracker.autorun(() => {
+          // Subscribe to changes on the ready-property by calling the ready-method.
+          subscription.ready();
+
+          // Re-run the digest cycle if we are not in one already.
+          this.$$throttledDigest();
+        });
 
         result.ready = subscription.ready.bind(subscription);
         result.subscriptionId = subscription.subscriptionId;
