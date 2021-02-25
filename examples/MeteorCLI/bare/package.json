@@ -33,6 +33,6 @@
     "mocha": "8.3.0",
     "puppeteer": "^7.1.0",
     "sinon": "^9.2.4",
-    "typescript": "4"
+    "typescript": "4.2.2"
   }
 }
