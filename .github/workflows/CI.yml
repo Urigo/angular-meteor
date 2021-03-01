@@ -20,7 +20,16 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '15.x'
+      - name: Cache Meteor
+        id: cache-meteor
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.meteor
+            **/.meteor
+          key: ${{ runner.os }}-meteor
       - name: Use Meteor
+        if: steps.cache-meteor.outputs.cache-hit != 'true'
         run: curl https://install.meteor.com/ | sh
       - name: Run Tests
         run: ./run_tests.sh
