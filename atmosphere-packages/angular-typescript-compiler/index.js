@@ -65,7 +65,8 @@ const ngcOptions = {
   traceResolution: false,
   skipTemplateCodegen: false,
   fullTemplateTypeCheck: true,
-  disableTypeScriptVersionCheck: true
+  disableTypeScriptVersionCheck: true,
+  enableIvy: false,
 };
 
 export class AngularTsCompiler {
