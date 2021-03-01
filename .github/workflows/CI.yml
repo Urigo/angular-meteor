@@ -31,5 +31,7 @@ jobs:
       - name: Use Meteor
         if: steps.cache-meteor.outputs.cache-hit != 'true'
         run: curl https://install.meteor.com/ | sh
+      - name: Setup Meteor
+        run: export PATH="$PATH:~/.meteor"
       - name: Run Tests
         run: ./run_tests.sh
