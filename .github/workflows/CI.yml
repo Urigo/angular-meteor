@@ -27,7 +27,9 @@ jobs:
           path: |
             ~/.meteor
             **/.meteor
-          key: ${{ runner.os }}-meteor
+          key: ${{ runner.os }}-meteor-${{ hashFiles('**/release') }}
+          restore-keys:
+            - ${{ runner.os }}-meteor-
       - name: Use Meteor
         if: steps.cache-meteor.outputs.cache-hit != 'true'
         run: curl https://install.meteor.com/ | sh
