@@ -1,10 +1,11 @@
-<a href="https://angular-meteor.com/"><img src="https://angular-meteor.com/assets/images/logo-large.png" width="60" height="60" /></a>  [![Join the chat at https://gitter.im/Urigo/angular-meteor](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Urigo/angular-meteor)
+<a href="https://angular-meteor.com/"><img src="https://angular-meteor.com/assets/images/logo-large.png" width="60" height="60" /></a> 
+[![Discord Chat](https://img.shields.io/discord/625400653321076807)](https://discord.gg/xud7bH9)
 
-### [Angular-Meteor Compilers](https://github.com/Urigo/angular-meteor/tree/master/atmosphere-packages/angular-compilers) [![Build Status](https://travis-ci.org/Urigo/angular-meteor.svg?branch=master)](https://travis-ci.org/Urigo/angular-meteor)
+### [Angular-Meteor Compilers](https://github.com/Urigo/angular-meteor/tree/master/atmosphere-packages/angular-compilers)
 
-### [meteor-rxjs - The Angular Meteor Data solution](https://github.com/Urigo/meteor-rxjs) [![npm version](https://badge.fury.io/js/meteor-rxjs.svg)](https://badge.fury.io/js/meteor-rxjs) [![Build Status](https://travis-ci.org/Urigo/meteor-rxjs.svg?branch=master)](https://travis-ci.org/Urigo/meteor-rxjs)
+### [meteor-rxjs - The Angular Meteor Data solution](https://github.com/Urigo/meteor-rxjs) [![npm version](https://badge.fury.io/js/meteor-rxjs.svg)](https://badge.fury.io/js/meteor-rxjs)
 
-### [AngularJS-Meteor](https://github.com/Urigo/angular-meteor/tree/angular1) [![Build Status](https://travis-ci.org/Urigo/angular-meteor.svg?branch=angular1)](https://travis-ci.org/Urigo/angular-meteor)   [![npm version](https://badge.fury.io/js/angular-meteor.svg)](https://badge.fury.io/js/angular-meteor)
+### [AngularJS-Meteor](https://github.com/Urigo/angular-meteor/tree/angular1)   [![npm version](https://badge.fury.io/js/angular-meteor.svg)](https://badge.fury.io/js/angular-meteor)
 
 #### The power of Meteor and the simplicity and eco-system of Angular
 
