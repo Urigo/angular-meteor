@@ -14,6 +14,6 @@ es5-shim@4.8.0                # ECMAScript 5 compatibility for older browsers
 ecmascript@0.15.0              # Enable ECMAScript2015+ syntax in app code
 shell-server@0.5.0            # Server-side component of the `meteor shell` command
 
-digicore:angular-compilers@0.4.2
+angular-compilers@0.4.0
 standard-minifier-css@1.7.2
 standard-minifier-js@2.6.0

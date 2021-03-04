@@ -1,5 +1,4 @@
 allow-deny@1.1.0
-ardatan:mocha@1.1.0
 autoupdate@1.7.0
 babel-compiler@7.6.0
 babel-runtime@1.5.0
@@ -13,10 +12,10 @@ ddp-client@2.4.0
 ddp-common@1.4.0
 ddp-server@2.3.2
 diff-sequence@1.1.1
-digicore:angular-compilers@0.4.2
-digicore:angular-html-compiler@0.4.2
-digicore:angular-scss-compiler@0.4.2
-digicore:angular-typescript-compiler@0.4.2
+angular-compilers@0.4.0
+angular-html-compiler@0.4.0
+angular-scss-compiler@0.4.0
+angular-typescript-compiler@0.4.0
 dynamic-import@0.6.0
 ecmascript@0.15.0
 ecmascript-runtime@0.7.0

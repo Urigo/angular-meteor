@@ -10,7 +10,10 @@ on:
 
 jobs:
   CI:
-    name: CI
+    strategy:
+      matrix:
+        example: ["angularjs", "MeteorCLI/all-in-one", "MeteorCLI/bare","MeteorCLI/lazy-loading", "MeteorCLI/universal"]
+    name: CI for ${{ matrix.example }}
     runs-on: ubuntu-latest
     env:
       TRAVIS_BUILD_DIR: ${{ github.workspace }}
@@ -29,9 +32,10 @@ jobs:
         with:
           path: |
             ~/.meteor
-            **/.meteor
-          key: ${{ runner.os }}-meteor-${{ hashFiles('**/release') }}
+            **/.meteor/local
+          key: ${{ runner.os }}-meteor-${{ matrix.example }}-${{ hashFiles('**/release') }}
           restore-keys: |
+            ${{ runner.os }}-meteor-${{ matrix.example }}
             ${{ runner.os }}-meteor-
       - name: Use Meteor
         if: steps.cache-meteor.outputs.cache-hit != 'true'
@@ -39,4 +43,7 @@ jobs:
       - name: Setup Meteor
         run: export PATH="$PATH:~/.meteor"
       - name: Run Tests
-        run: ./run_tests.sh
+        run: cd examples/${{ matrix.example }} && ./run_tests.sh
+        env:
+          NODE_OPTIONS: --max-old-space-size=2048
+          METEOR_PACKAGE_DIRS: $GITHUB_WORKSPACE/atmosphere-packages
