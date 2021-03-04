@@ -1,4 +1,4 @@
-import 'core-js/es7/reflect';
+import 'core-js/proposals/reflect-metadata';
 
 if(Meteor.isClient){
   require('zone.js');

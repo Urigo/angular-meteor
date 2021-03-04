@@ -1,4 +1,4 @@
-import 'core-js/es7/reflect';
+import 'core-js/proposals/reflect-metadata';
 import 'zone.js';
 import { Meteor } from "meteor/meteor";
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic'

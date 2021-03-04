@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "start": "meteor run",
-    "start:prod": "AOT=1 ROLLUP=1 meteor --production",
+    "start:prod": "AOT=1 meteor --production",
     "test": "TEST_BROWSER_DRIVER=puppeteer meteor test --driver-package=ardatan:mocha --raw-logs",
     "test:ci": "TEST_BROWSER_DRIVER=puppeteer meteor test --driver-package=ardatan:mocha --once --raw-logs"
   },
@@ -14,8 +14,8 @@
     "@angular/platform-browser": "^7.1.0",
     "@angular/platform-browser-dynamic": "^7.1.0",
     "@angular/router": "^7.1.0",
-    "@babel/runtime": "^7.1.5",
-    "core-js": "^2.5.7",
+    "@babel/runtime": "^7.13.7",
+    "core-js": "^3.9.0",
     "meteor-node-stubs": "^0.4.1",
     "meteor-rxjs": "^0.4.14",
     "rxjs": "^6.3.0",

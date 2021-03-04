@@ -23,7 +23,7 @@
     "@angular/platform-browser": "^7.1.1",
     "@angular/platform-browser-dynamic": "^7.1.1",
     "@angular/router": "^7.1.1",
-    "@babel/runtime": "^7.1.5",
+    "@babel/runtime": "^7.13.7",
     "core-js": "^2.5.4",
     "meteor-client-bundler": "^0.6.0",
     "meteor-node-stubs": "^0.4.1",

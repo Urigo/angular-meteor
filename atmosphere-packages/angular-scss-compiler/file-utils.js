@@ -1,6 +1,6 @@
 const path = Npm.require('path');
 
-export const basePath = process.cwd();
+export const basePath = process.cwd().replace(/\\/g, '\/');
 
 export function getMeteorPath(filePath) {
   if (filePath.startsWith(basePath)) {

@@ -31,7 +31,7 @@ import {
 
 const TEMPLATE_URL_REGEX = /templateUrl\s*:(\s*['"`](.*?)['"`]\s*([,}]))/gm;
 const STYLES_URLS_REGEX = /styleUrls *:(\s*\[[^\]]*?\])/g;
-const LOAD_CHILDREN_REGEX = /loadChildren\s*:(\s*['"`](.*?)['"`]\s*)/gm;
+const LOAD_CHILDREN_REGEX = /loadChildren[\s]*:[\s]*['|"].*#{1}.*['|"]/;
 const STRING_REGEX = /(['`"])((?:[^\\]\\\1|.)*?)\1/g;
 
 const JS_REGEX = /\.html$/;
@@ -65,7 +65,8 @@ const ngcOptions = {
   traceResolution: false,
   skipTemplateCodegen: false,
   fullTemplateTypeCheck: true,
-  disableTypeScriptVersionCheck: true
+  disableTypeScriptVersionCheck: true,
+  enableIvy: false,
 };
 
 export class AngularTsCompiler {
@@ -117,7 +118,7 @@ export class AngularTsCompiler {
           modulePath += '.ngfactory';
           moduleName += 'NgFactory';
         }
-        return `loadChildren: () => module.dynamicImport('${modulePath}').then(allModule => allModule['${moduleName}']),`;
+        return `loadChildren: () => module.dynamicImport('${modulePath}').then(allModule => allModule['${moduleName}'])`;
       });
 
   }
@@ -273,15 +274,29 @@ export class AngularTsCompiler {
       if (inputFile) {
         inputFile.addJavaScript({
           path: 'system.js',
-          data: `System = { import(path) { return module.dynamicImport(path) } }`
+          data: `System = { import: function(path) { return module.dynamicImport(path) } }`
         });
       }
     }
     console.timeEnd(`[${prefix}]: TypeScript Files Compilation`);
     if (this.isRollup && !mainCodePath.includes('node_modules')) {
       console.time(`[${prefix}]: Rollup`);
+
+      let namedExports = null;
+      const namedExportsPath = path.join(basePath, 'named-exports.json');
+      if (fs.existsSync(namedExportsPath)) {
+        try {
+          namedExports = JSON.parse(fs.readFileSync(namedExportsPath));
+        } catch (e) {
+          console.error(
+            'Error: named-exports.json does not contain valid JSON'
+          );
+          console.error(e);
+        }
+      }
+      
       const bundle = rollup(codeMap, mainCode, mainCodePath,
-        null, null, forWeb);
+        null, namedExports, forWeb);
       if (bundle) {
         // Look for a ts-file in the client or server
         // folder to add generated bundle.

@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  CI:
+    name: CI
+    runs-on: ubuntu-latest
+    env:
+      TRAVIS_BUILD_DIR: ${{ github.workspace }}
+    steps:
+      - name: Checkout Master
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Use Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '15.x'
+      - name: Cache Meteor
+        id: cache-meteor
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.meteor
+            **/.meteor
+          key: ${{ runner.os }}-meteor-${{ hashFiles('**/release') }}
+          restore-keys: |
+            ${{ runner.os }}-meteor-
+      - name: Use Meteor
+        if: steps.cache-meteor.outputs.cache-hit != 'true'
+        run: curl https://install.meteor.com/ | sh
+      - name: Setup Meteor
+        run: export PATH="$PATH:~/.meteor"
+      - name: Run Tests
+        run: ./run_tests.sh
