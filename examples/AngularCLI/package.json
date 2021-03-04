@@ -16,7 +16,7 @@
   "dependencies": {
     "@angular/animations": "^6.0.3",
     "@angular/common": "^6.0.3",
-    "@angular/compiler": "^6.0.3",
+    "@angular/compiler": "^6.1.1",
     "@angular/core": "^6.0.3",
     "@angular/forms": "^6.0.7",
     "@angular/http": "^6.0.3",
@@ -24,7 +24,7 @@
     "@angular/platform-browser-dynamic": "^6.0.3",
     "@angular/router": "^6.0.3",
     "@babel/runtime": "^7.13.7",
-    "core-js": "^2.5.4",
+    "core-js": "^2.5.7",
     "meteor-client-bundler": "^0.5.1",
     "meteor-node-stubs": "^0.4.1",
     "meteor-rxjs": "^0.4.14",
@@ -33,8 +33,8 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.6.8",
-    "@angular/cli": "~6.0.8",
-    "@angular/compiler-cli": "^6.0.3",
+    "@angular/cli": "~6.1.2",
+    "@angular/compiler-cli": "^6.1.1",
     "@angular/language-service": "^6.0.3",
     "@types/jasmine": "~2.8.6",
     "@types/jasminewd2": "~2.0.3",
@@ -51,6 +51,6 @@
     "protractor": "~5.3.0",
     "ts-node": "~5.0.1",
     "tslint": "~5.9.1",
-    "typescript": "~2.7.2"
+    "typescript": "^2.7.2"
   }
 }

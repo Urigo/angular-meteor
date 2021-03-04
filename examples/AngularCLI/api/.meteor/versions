@@ -1,10 +1,11 @@
 allow-deny@1.1.0
+angular-compilers@0.3.2
+angular-html-compiler@0.3.2
+angular-scss-compiler@0.3.2
+angular-typescript-compiler@0.3.2
 autoupdate@1.4.1
 babel-compiler@7.1.1
-babel-runtime@1.2.2
-barbatus:typescript@0.7.0
-barbatus:typescript-compiler@0.10.0
-barbatus:typescript-runtime@1.1.0
+babel-runtime@1.2.4
 base64@1.0.11
 binary-heap@1.0.10
 boilerplate-generator@1.5.0
@@ -37,7 +38,7 @@ minimongo@1.4.4
 mobile-experience@1.0.5
 mobile-status-bar@1.0.14
 modern-browsers@0.1.1
-modules@0.12.1
+modules@0.12.2
 modules-runtime@0.10.2
 mongo@1.5.1
 mongo-dev-server@1.1.0
