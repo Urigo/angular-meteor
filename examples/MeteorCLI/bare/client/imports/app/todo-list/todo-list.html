@@ -1,7 +1,19 @@
-<a routerLink="/todoAdd" class="addBtn">Add</a>
+<a routerLink="/todoAdd"
+   class="addBtn">Add</a>
 <ul>
-  <li *ngFor="let todo of todos | async">
-    {{todo.content}}
-    <button (click)="removeTodo(todo._id)" class="deleteBtn">Delete</button>
-  </li>
+    <li *ngFor="let todo of todos | async">
+        {{todo.content}}
+        <button (click)="removeTodo(todo._id)"
+                class="deleteBtn">Delete
+        </button>
+    </li>
+    <li *ngFor="let todo2 of todos2 | async">
+        {{todo2.content}}
+    </li>
+    <li *ngFor="let todo3 of todos3 | async">
+        {{todo3.content}}
+    </li>
+    <li *ngFor="let todo4 of todos4">
+        {{todo4.content}}
+    </li>
 </ul>
