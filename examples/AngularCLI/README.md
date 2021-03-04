@@ -44,11 +44,13 @@ rm -rf api/node_modules
 rm -rf api/client
 mv api/server/main.js api/server/main.ts
 rm api/package.json api/yarn.lock
-ln -s ../package.json api/package.json
-ln -s ../yarn.lock api/yarn.lock
-ln -s ../tsconfig.jsonapi/tsconfig.json
-ln -s ../node_modules api/
-cd api; meteor add barbatus:typescript; cd ..
+cd api;
+ln -s ../package.json 
+ln -s ../yarn.lock 
+ln -s ../tsconfig.json
+ln -s ../node_modules
+meteor add barbatus:typescript; 
+cd ..;
 ```
 
 Create `meteor-client.config.json`.

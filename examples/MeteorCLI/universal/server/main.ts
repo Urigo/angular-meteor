@@ -17,6 +17,8 @@ import { ResourceLoader } from '@angular/compiler';
 import { ɵgetDOM as getDOM } from '@angular/platform-browser';
 import { platformDynamicServer, BEFORE_APP_SERIALIZED ,INITIAL_CONFIG, PlatformState } from '@angular/platform-server';
 
+import { first } from 'rxjs/operators';
+
 import { ServerAppModule } from '../imports/app/server-app.module';       
 
 const HEAD_REGEX = /<head[^>]*>((.|[\n\r])*)<\/head>/im
@@ -79,9 +81,9 @@ Meteor.startup(() => {
 
       const applicationRef : ApplicationRef = appModuleRef.injector.get(ApplicationRef);
 
-      await applicationRef.isStable
-      .first(isStable => isStable == true)
-      .toPromise();
+      await applicationRef.isStable.pipe(
+        first(isStable => isStable == true)
+      ).toPromise();
 
       applicationRef.tick();
 
