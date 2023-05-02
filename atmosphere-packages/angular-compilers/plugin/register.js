@@ -27,6 +27,7 @@ try{
     compilerCli = require('@angular/compiler-cli');
   }
 }catch(e){
+  console.error(e);
   console.log('@angular/compiler and @angular/compiler-cli must be installed for AOT compilation!');
   console.log('AOT compilation disabled!');
   console.log('Ignore this if you are using AngularJS 1.X');
